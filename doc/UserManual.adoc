@@ -571,8 +571,6 @@ Program statements
 Program statements are stored as part of the program.
 Every program statement must have a line number.
 Every statement begins with a keyword except for the LET-less assignment.
-For most statements, the keyword be abbreviated to three letters.
-When a statement begins with multiple keywords (such as MAT PRINT), only the first keyword may be abbreviated.
 
 A line may contain a comment denoted by a single quote.
 Everything to the right of the comment lead character is a comment.
@@ -646,7 +644,6 @@ CLOSE
 Closes a file.
 
 Syntax: CLOSE #1
-Syntax: CLO #4
 
 The CLOSE command should not be used with files opened with a FILES command.
 
@@ -656,7 +653,6 @@ DATA
 Specifies values for READ or MAT READ statements
 
 Syntax:	DATA value list
-Syntax:	DAT value list
 
 Values must be numeric separated by commas.
 Expressions may be numeric or string, but must match the variable that will be used in the READ statement.
@@ -816,15 +812,13 @@ Changes the flow of the program.
 Syntax:	GO TO line number
 Syntax:	GOTO line number
 Syntax: GOTO expression OF line number, line number, line number, ...
-Syntax:	GOT line number
-Syntax: GOT expression OF line number, line number, line number, ...
 
 Examples:
 
-	300 GO TO 100
+	300 GOTO 100
 	310 GOTO 25
 	330 GOTO A OF 100, 130, 180
-	340 GO TO A*2+C OF 500, 550, 620, 750
+	340 GOTO A*2+C OF 500, 550, 620, 750
 
 The GOTO OF form is identical to the ON GOTO statement.
 The expression is evaluated and the integral value is used as an index for the list of line numbers.
@@ -840,7 +834,6 @@ GOSUB
 Changes the flow of the program by calling a subroutine.
 
 Syntax:	GOSUB line number
-Syntax:	GOS line number
 
 Examples:
 
@@ -1010,15 +1003,12 @@ Prompts the user and allows the user to enter a text value.
 
 Syntax:	LINE INPUT [prompt,] variable list
 Syntax:	LINPUT [prompt,] variable list
-Syntax:	LIN [prompt,] variable list
-Syntax:	INPUT LINE [prompt,] variable list
 
 Examples:
 
 	60 LINE INPUT U$
 	65 LINPUT V$
 	70 LINPUT "Enter address: ", A$
-	80 INPUT LINE U$
 
 The default prompt is a single question mark (?) character.
 This prompt can be changed to any text value by specifying a text value as the first parameter.
@@ -1043,7 +1033,6 @@ NEXT
 Denotes the end of a FOR loop.
 
 Syntax:	NEXT control variable
-Syntax:	NEX control variable
 
 You can GOTO out of FOR/NEXT loops, and BASIC-1978 follows the examples set by Kemeny and Kurtz.
 
@@ -1105,11 +1094,10 @@ OPEN
 Opens a file
 
 Syntax: OPEN "FILE.TXT" FOR INPUT AS #1
-Syntax: OPE "OUTPUT.TXT" FOR OUTPUT AS #2
+Syntax: OPEN "OUTPUT.TXT" FOR OUTPUT AS #2
 
 Opens the file and prepares it for access.
 When opening a file for output, it does not need to exist.
-(This is different from the FILES command.)
 
 The file name may be any file name suitable for your environment.
 It may contain lower case letters.
@@ -1236,8 +1224,6 @@ RANDOMIZE
 Set a new seed for the random number generator. May be abbreviated as RANDOM.
 
 Syntax:	RANDOMIZE
-Syntax:	RANDOM
-Syntax:	RAN
 
 Examples:
 
@@ -1258,7 +1244,6 @@ Reading from DATA statements
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Syntax:	READ variable list
-Syntax:	REA variable list
 
 Examples:
 
@@ -1317,7 +1302,6 @@ Resets the internal pointer for the READ statement.
 After a RESTORE statement, a READ statement will read the first data item.
 
 Syntax:	RESTORE
-Syntax:	RES
 
 Examples:
 
@@ -1387,33 +1371,12 @@ RETURN
 Changes the flow of the program by returning from a subroutine.
 
 Syntax:	RETURN
-Syntax:	RET
 
 Examples:
 
 	450 RETURN
 
 A RETURN statement makes sense only after the execution of a matching GOSUB statement. A RETURN without a GOSUB will cause an error.
-
-RUN
-~~~
-
-Re-starts execution of the program.
-
-Syntax: RUN
-
-Examples:
-
-	410 RUN
-	550 IF A = 1 THEN RUN
-
-The RUN statement is similar to the RUN command which is entered at the READY prompt.
-The RUN statement re-starts the program.
-All variables are cleared.
-Dimension specifications are cleared.
-All open files are closed.
-The pointer for DATA is reset (as if a RESTORE statement were executed).
-Execution is transferred to the first line.
 
 SLEEP
 ~~~~~
@@ -1435,7 +1398,6 @@ STOP
 Stops the execution of the program.
 
 Syntax:	STOP
-Syntax:	STO
 
 Examples:
 
@@ -1450,7 +1412,6 @@ Writing to console
 ^^^^^^^^^^^^^^^^^^
 
 Syntax:	WRITE expression list
-Syntax:	WRI expression list
 
 Items in the list are separated by either commas or semicolons.
 
@@ -1481,7 +1442,6 @@ Writing to files
 ^^^^^^^^^^^^^^^^
 
 Syntax:	WRITE #filenum; expression list
-Syntax:	WRI #filenum; expression list
 
 Items in the list are separated by either commas or semicolons.
 A comma or semicolon writes a SPACE character to the file.

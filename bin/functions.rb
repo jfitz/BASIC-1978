@@ -360,38 +360,6 @@ class FunctionExp < AbstractScalarFunction
   end
 end
 
-# function EXT$
-class FunctionExt < AbstractScalarFunction
-  def initialize(text)
-    super
-
-    @signature = [
-      { 'type' => 'text', 'shape' => 'scalar' },
-      { 'type' => 'numeric', 'shape' => 'scalar' },
-      { 'type' => 'numeric', 'shape' => 'scalar' }
-    ]
-  end
-
-  def evaluate(_, stack)
-    args = stack.pop
-    if match_args_to_signature(args, @signature)
-      value = args[0].to_v
-      start = args[1].to_i
-      stop = args[2].to_i
-
-      raise(BASICRuntimeError, 'Invalid index for EXT$()') if
-        start < 1 || start > value.size || stop < start || stop > value.size
-
-      text = value[(start - 1)..(stop - 1)]
-      quoted = '"' + text + '"'
-      token = TextConstantToken.new(quoted)
-      TextConstant.new(token)
-    else
-      raise(BASICRuntimeError, 'Wrong arguments for function')
-    end
-  end
-end
-
 # function IDN
 class FunctionIdn < AbstractScalarFunction
   def initialize(text)
@@ -438,7 +406,7 @@ class FunctionIdn < AbstractScalarFunction
   end
 end
 
-# function INSTR
+# function INSTR$
 class FunctionInstr < AbstractScalarFunction
   def initialize(text)
     super
@@ -511,7 +479,7 @@ class FunctionInv < AbstractMatrixFunction
   end
 end
 
-# function LEFT
+# function LEFT$
 class FunctionLeft < AbstractScalarFunction
   def initialize(text)
     super
@@ -579,7 +547,7 @@ class FunctionLog < AbstractScalarFunction
   end
 end
 
-# function MID
+# function MID$
 class FunctionMid < AbstractScalarFunction
   def initialize(text)
     super
@@ -640,7 +608,7 @@ class FunctionMod < AbstractScalarFunction
   end
 end
 
-# function STR$ and NUM$
+# function STR$
 class FunctionStr < AbstractScalarFunction
   def initialize(text)
     super
@@ -683,7 +651,7 @@ class FunctionPack < AbstractArrayFunction
   end
 end
 
-# function RIGHT
+# function RIGHT$
 class FunctionRight < AbstractScalarFunction
   def initialize(text)
     super
@@ -973,19 +941,18 @@ class FunctionFactory
     'COS' => FunctionCos,
     'DET' => FunctionDet,
     'EXP' => FunctionExp,
-    'EXT$' => FunctionExt,
     'IDN' => FunctionIdn,
-    'INSTR' => FunctionInstr,
+    'INSTR$' => FunctionInstr,
     'INT' => FunctionInt,
     'INV' => FunctionInv,
-    'LEFT' => FunctionLeft,
+    'LEFT$' => FunctionLeft,
     'LEN' => FunctionLen,
     'LOG' => FunctionLog,
-    'MID' => FunctionMid,
+    'MID$' => FunctionMid,
     'MOD' => FunctionMod,
     'NUM$' => FunctionStr,
     'PACK$' => FunctionPack,
-    'RIGHT' => FunctionRight,
+    'RIGHT$' => FunctionRight,
     'RND' => FunctionRnd,
     'SGN' => FunctionSgn,
     'SIN' => FunctionSin,

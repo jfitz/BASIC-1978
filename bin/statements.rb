@@ -110,14 +110,12 @@ class StatementFactory
       DefineFunctionStatement,
       DimStatement,
       EndStatement,
-      FilesStatement,
       FnendStatement,
       ForStatement,
       GosubStatement,
       GotoStatement,
       IfStatement,
       InputStatement,
-      InputCharStatement,
       LetStatement,
       LetLessStatement,
       LineInputStatement,
@@ -138,7 +136,6 @@ class StatementFactory
       RestoreStatement,
       ResumeStatement,
       ReturnStatement,
-      RunStatement,
       SleepStatement,
       StopStatement,
       WriteStatement
@@ -810,16 +807,7 @@ class ChainStatement < AbstractStatement
     raise(BASICExpressionError, "Target must be text item.") unless
       target_value.text_constant?
 
-    text = target_value.value
-
-    # 'DEMON' is a special case
-    if text.rstrip == 'DEMON'
-      io = interpreter.console_io
-      io.newline_when_needed
-      interpreter.stop
-    else
-      interpreter.chain(target_values)
-    end
+    interpreter.chain(target_values)
   end
 end
 
@@ -827,8 +815,7 @@ end
 class ChangeStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('CHANGE')],
-      [KeywordToken.new('CHA')]
+      [KeywordToken.new('CHANGE')]
     ]
   end
 
@@ -934,8 +921,7 @@ end
 class CloseStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('CLOSE')],
-      [KeywordToken.new('CLO')]
+      [KeywordToken.new('CLOSE')]
     ]
   end
 
@@ -987,8 +973,7 @@ end
 class DataStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('DATA')],
-      [KeywordToken.new('DAT')]
+      [KeywordToken.new('DATA')]
     ]
   end
 
@@ -1154,42 +1139,6 @@ class EndStatement < AbstractStatement
     io = interpreter.console_io
     io.newline_when_needed
     interpreter.stop
-  end
-end
-
-# FILES
-class FilesStatement < AbstractStatement
-  def self.lead_keywords
-    [
-      [KeywordToken.new('FILES')]
-    ]
-  end
-
-  def initialize(keywords, tokens_lists)
-    super
-
-    template = [[1, '>=']]
-
-    if check_template(tokens_lists, template)
-      @expressions = ValueScalarExpression.new(tokens_lists[0])
-    else
-      @errors << 'Syntax error'
-    end
-  end
-
-  def dump
-    @expressions.dump
-  end
-
-  def pre_execute(interpreter)
-    file_names = @expressions.evaluate(interpreter)
-    interpreter.add_file_names(file_names)
-  end
-
-  def execute_core(_) end
-
-  def variables
-    @expressions.variables
   end
 end
 
@@ -1378,8 +1327,7 @@ end
 class GosubStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('GOSUB')],
-      [KeywordToken.new('GOS')]
+      [KeywordToken.new('GOSUB')]
     ]
   end
 
@@ -1432,8 +1380,7 @@ end
 class GotoStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('GOTO')],
-      [KeywordToken.new('GOT')]
+      [KeywordToken.new('GOTO')]
     ]
   end
 
@@ -1862,8 +1809,7 @@ end
 class InputStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('INPUT')],
-      [KeywordToken.new('INP')]
+      [KeywordToken.new('INPUT')]
     ]
   end
 
@@ -1935,76 +1881,6 @@ class InputStatement < AbstractStatement
       prompt = nil
     end
 
-    values
-  end
-end
-
-# INPUT$
-class InputCharStatement < AbstractStatement
-  def self.lead_keywords
-    [
-      [KeywordToken.new('INPUT$')]
-    ]
-  end
-
-  def initialize(keywords, tokens_lists)
-    super
-
-    extract_modifiers(tokens_lists)
-
-    template = [[1, '>=']]
-
-    if check_template(tokens_lists, template)
-      input_items = split_tokens(tokens_lists[0], false)
-      input_items = tokens_to_expressions(input_items)
-      @file_tokens, input_items = extract_file_handle(input_items)
-      @prompt, @input_items = extract_prompt(input_items)
-
-      if !@input_items.empty? && @input_items[0].text_constant?
-        @prompt = input_items[0]
-        @input_items = @input_items[1..-1]
-      end
-    else
-      @errors << 'Syntax error'
-    end
-  end
-
-  include FileFunctions
-  include InputFunctions
-
-  def execute_core(interpreter)
-    fh = get_file_handle(interpreter, @file_tokens)
-    fhr = interpreter.get_file_handler(fh, :read)
-
-    prompt = nil
-    unless @prompt.nil?
-      prompts = @prompt.evaluate(interpreter)
-      prompt = prompts[0]
-    end
-
-    if fh.nil?
-      values = input_values(fhr, interpreter, @input_items.size)
-      fhr.implied_newline
-    else
-      values = fhr.input(interpreter)
-    end
-
-    name_value_pairs =
-      zip(@input_items, values[0..@input_items.length])
-
-    name_value_pairs.each do |hash|
-      l_values = hash['name'].evaluate(interpreter)
-      l_value = l_values[0]
-      value = NumericConstant.new(hash['value'].ord)
-      interpreter.set_value(l_value, value)
-    end
-  end
-
-  private
-
-  def input_values(fhr, _, count)
-    values = []
-    values << fhr.read_char while values.size < count
     values
   end
 end
@@ -2088,9 +1964,7 @@ class LineInputStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('LINE'), KeywordToken.new('INPUT')],
-      [KeywordToken.new('INPUT'), KeywordToken.new('LINE')],
-      [KeywordToken.new('LINPUT')],
-      [KeywordToken.new('LIN')]
+      [KeywordToken.new('LINPUT')]
     ]
   end
 
@@ -2166,8 +2040,7 @@ end
 class NextStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('NEXT')],
-      [KeywordToken.new('NEX')]
+      [KeywordToken.new('NEXT')]
     ]
   end
 
@@ -2389,8 +2262,7 @@ end
 class OpenStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('OPEN')],
-      [KeywordToken.new('OPE')]
+      [KeywordToken.new('OPEN')]
     ]
   end
 
@@ -2538,9 +2410,7 @@ end
 class PrintStatement < AbstractPrintStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('PRINT')],
-      [KeywordToken.new('PRI')],
-      [KeywordToken.new('&')]
+      [KeywordToken.new('PRINT')]
     ]
   end
 
@@ -2742,9 +2612,7 @@ end
 class RandomizeStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('RANDOMIZE')],
-      [KeywordToken.new('RANDOM')],
-      [KeywordToken.new('RAN')]
+      [KeywordToken.new('RANDOMIZE')]
     ]
   end
 
@@ -2794,8 +2662,7 @@ end
 class ReadStatement < AbstractReadStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('READ')],
-      [KeywordToken.new('REA')]
+      [KeywordToken.new('READ')]
     ]
   end
 
@@ -2859,8 +2726,7 @@ end
 class RestoreStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('RESTORE')],
-      [KeywordToken.new('RES')]
+      [KeywordToken.new('RESTORE')]
     ]
   end
 
@@ -2933,8 +2799,7 @@ end
 class ReturnStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('RETURN')],
-      [KeywordToken.new('RET')]
+      [KeywordToken.new('RETURN')]
     ]
   end
 
@@ -2958,40 +2823,11 @@ class ReturnStatement < AbstractStatement
   end
 end
 
-# RUN
-class RunStatement < AbstractStatement
-  def self.lead_keywords
-    [
-      [KeywordToken.new('RUN')]
-    ]
-  end
-
-  def initialize(keywords, tokens_lists)
-    super
-
-    extract_modifiers(tokens_lists)
-
-    template = []
-
-    @errors << 'Syntax error' unless
-      check_template(tokens_lists, template)
-  end
-
-  def dump
-    ['']
-  end
-
-  def execute_core(interpreter)
-    interpreter.rerun
-  end
-end
-
 # SLEEP
 class SleepStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('SLEEP')],
-      [KeywordToken.new('SLE')]
+      [KeywordToken.new('SLEEP')]
     ]
   end
 
@@ -3031,8 +2867,7 @@ end
 class StopStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('STOP')],
-      [KeywordToken.new('STO')]
+      [KeywordToken.new('STOP')]
     ]
   end
 
@@ -3086,8 +2921,7 @@ end
 class WriteStatement < AbstractWriteStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('WRITE')],
-      [KeywordToken.new('WRI')]
+      [KeywordToken.new('WRITE')]
     ]
   end
 
