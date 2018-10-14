@@ -1,0 +1,499 @@
+10 PRINT TAB(33);"LUNAR"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"LUNAR"
+ CarriageControl:NL
+20 PRINT TAB(l5);"CREATIVE COMPUTING MORRISTOWN, NEW JERSEY" 
+ Syntax error: "TAB(l5)" is not a value or operator
+ ITEMS
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+25 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+30 PRINT "THIS IS A COMPUTER SIMULATION OF AN APOLLO LUNAR" 
+ ITEMS
+ TextConstant:"THIS IS A COMPUTER SIMULATION OF AN APOLLO LUNAR"
+ CarriageControl:NL
+40 PRINT "LANDING CAPSULE.": PRINT: PRINT
+ ITEMS
+ TextConstant:"LANDING CAPSULE."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+50 PRINT "THE ON-BOARD COMPUTER HAS FAILED (IT WAS MADE BY" 
+ ITEMS
+ TextConstant:"THE ON-BOARD COMPUTER HAS FAILED (IT WAS MADE BY"
+ CarriageControl:NL
+60 PRINT "XEROX) SO YOU HAVE TO LAND THE CAPSULE MANUALLY."
+ ITEMS
+ TextConstant:"XEROX) SO YOU HAVE TO LAND THE CAPSULE MANUALLY."
+ CarriageControl:NL
+70 PRINT: PRINT "SET BURN RATE OF RETRO ROCKETS TO ANY VALUE BETWEEN" 
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"SET BURN RATE OF RETRO ROCKETS TO ANY VALUE BETWEEN"
+ CarriageControl:NL
+80 PRINT "0 (FREE FALL) AND 200 (MAXIMUM BURN) POUNDS PER SECOND." 
+ ITEMS
+ TextConstant:"0 (FREE FALL) AND 200 (MAXIMUM BURN) POUNDS PER SECOND."
+ CarriageControl:NL
+90 PRINT "SET NEW BURN RATE EVERY 10 SECONDS.": PRINT 
+ ITEMS
+ TextConstant:"SET NEW BURN RATE EVERY 10 SECONDS."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+100 PRINT "CAPSULE WEIGHT 32,500 LBS; FUEL WEIGHT 16,500 LBS."
+ ITEMS
+ TextConstant:"CAPSULE WEIGHT 32,500 LBS; FUEL WEIGHT 16,500 LBS."
+ CarriageControl:NL
+110 PRINT: PRINT: PRINT: PRINT "GOOD LUCK"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"GOOD LUCK"
+ CarriageControl:NL
+120 L=0
+ ScalarReference:L
+ NumericConstant:0
+ AssignmentOperator:=
+130 PRINT: PRINT "SEC","MI + FT","MPH","LB FUEL","BURN RATE":PRINT 
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"SEC"
+ CarriageControl:,
+ TextConstant:"MI + FT"
+ CarriageControl:,
+ TextConstant:"MPH"
+ CarriageControl:,
+ TextConstant:"LB FUEL"
+ CarriageControl:,
+ TextConstant:"BURN RATE"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+140 A=120:V=1:M=33000:N=16500:G=1E-03:Z=1.8
+ ScalarReference:A
+ NumericConstant:120
+ AssignmentOperator:=
+ ScalarReference:V
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarReference:M
+ NumericConstant:33000
+ AssignmentOperator:=
+ ScalarReference:N
+ NumericConstant:16500
+ AssignmentOperator:=
+ ScalarReference:G
+ NumericConstant:1E-03
+ AssignmentOperator:=
+ ScalarReference:Z
+ NumericConstant:1.8
+ AssignmentOperator:=
+150 PRINT L,INT(A);INT(5280*(A-INT(A))),3600*V,M-N,:INPUT K:T=10 
+ ITEMS
+ ScalarValue:L
+ CarriageControl:,
+ ScalarValue:A
+ FunctionInt
+ CarriageControl:;
+ NumericConstant:5280
+ ScalarValue:A
+ ScalarValue:A
+ FunctionInt
+ BinaryOperator:-
+ BinaryOperator:*
+ FunctionInt
+ CarriageControl:,
+ NumericConstant:3600
+ ScalarValue:V
+ BinaryOperator:*
+ CarriageControl:,
+ ScalarValue:M
+ ScalarValue:N
+ BinaryOperator:-
+ CarriageControl:,
+ ScalarReference:K
+ ScalarReference:T
+ NumericConstant:10
+ AssignmentOperator:=
+160 IF M-N<1E-03 THEN 240
+ ScalarValue:M
+ ScalarValue:N
+ BinaryOperator:-
+ NumericConstant:1E-03
+ BinaryOperator:<
+170 IF T<1E-03 THEN 150
+ ScalarValue:T
+ NumericConstant:1E-03
+ BinaryOperator:<
+180 S=T: IF M>=N+S*K THEN 200
+ ScalarReference:S
+ ScalarValue:T
+ AssignmentOperator:=
+ ScalarValue:M
+ ScalarValue:N
+ ScalarValue:S
+ ScalarValue:K
+ BinaryOperator:*
+ BinaryOperator:+
+ BinaryOperator:>=
+190 S=(M-N)/K
+ ScalarReference:S
+ ScalarValue:M
+ ScalarValue:N
+ BinaryOperator:-
+ ScalarValue:K
+ BinaryOperator:/
+ AssignmentOperator:=
+200 GOSUB 420: IF I<=O THEN 340
+ LineNumber:420
+ ScalarValue:I
+ ScalarValue:O
+ BinaryOperator:<=
+210 IF V<=0 THEN 230
+ ScalarValue:V
+ NumericConstant:0
+ BinaryOperator:<=
+220 IF J<0 THEN 370
+ ScalarValue:J
+ NumericConstant:0
+ BinaryOperator:<
+230 GOSUB 330: GOTO 160
+ LineNumber:330
+ LineNumber:160
+240 PRINT "FUEL OUT AT";L;"SECONDS":S=(-V+SQR(V*V+2*A*G))/G
+ ITEMS
+ TextConstant:"FUEL OUT AT"
+ CarriageControl:;
+ ScalarValue:L
+ CarriageControl:;
+ TextConstant:"SECONDS"
+ CarriageControl:NL
+ ScalarReference:S
+ ScalarValue:V
+ UnaryOperator:-
+ ScalarValue:V
+ ScalarValue:V
+ BinaryOperator:*
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:*
+ ScalarValue:G
+ BinaryOperator:*
+ BinaryOperator:+
+ FunctionSqr
+ BinaryOperator:+
+ ScalarValue:G
+ BinaryOperator:/
+ AssignmentOperator:=
+250 V=V+G*S: L=L+S
+ ScalarReference:V
+ ScalarValue:V
+ ScalarValue:G
+ ScalarValue:S
+ BinaryOperator:*
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:L
+ ScalarValue:L
+ ScalarValue:S
+ BinaryOperator:+
+ AssignmentOperator:=
+260 W=3600*V: PRINT "ON MOON AT";L;"SECONDS - IMPACT VELOCITY";W;"MPH" 
+ ScalarReference:W
+ NumericConstant:3600
+ ScalarValue:V
+ BinaryOperator:*
+ AssignmentOperator:=
+ ITEMS
+ TextConstant:"ON MOON AT"
+ CarriageControl:;
+ ScalarValue:L
+ CarriageControl:;
+ TextConstant:"SECONDS - IMPACT VELOCITY"
+ CarriageControl:;
+ ScalarValue:W
+ CarriageControl:;
+ TextConstant:"MPH"
+ CarriageControl:NL
+274 IF W<=1.2 THEN PRINT "PERFECT LANDING!": GOTO 440 
+ ScalarValue:W
+ NumericConstant:1.2
+ BinaryOperator:<=
+ ITEMS
+ TextConstant:"PERFECT LANDING!"
+ CarriageControl:NL
+ LineNumber:440
+280 IF W<=10 THEN PRINT "GOOD LANDING (COULD RE BETTER)":GOTO 440 
+ ScalarValue:W
+ NumericConstant:10
+ BinaryOperator:<=
+ ITEMS
+ TextConstant:"GOOD LANDING (COULD RE BETTER)"
+ CarriageControl:NL
+ LineNumber:440
+282 IF W>60 THEN 300
+ ScalarValue:W
+ NumericConstant:60
+ BinaryOperator:>
+284 PRINT "CRAFT DAMAGE... YOU'RE STRANDED HERE UNTIL A RESCUE" 
+ ITEMS
+ TextConstant:"CRAFT DAMAGE... YOU'RE STRANDED HERE UNTIL A RESCUE"
+ CarriageControl:NL
+286 PRINT "PARTY ARRIVES. HOPE YOU HAVE ENOUGH OXYGEN!" 
+ ITEMS
+ TextConstant:"PARTY ARRIVES. HOPE YOU HAVE ENOUGH OXYGEN!"
+ CarriageControl:NL
+288 GOTO 440
+ LineNumber:440
+300 PRINT "SORRY THERE NERE NO SURVIVORS. YOU BLOW IT!"
+ ITEMS
+ TextConstant:"SORRY THERE NERE NO SURVIVORS. YOU BLOW IT!"
+ CarriageControl:NL
+310 PRINT "IN FACT, YOU BLASTED A NEW LUNAR CRATER";W*.227;"FEET DEEP!"
+ ITEMS
+ TextConstant:"IN FACT, YOU BLASTED A NEW LUNAR CRATER"
+ CarriageControl:;
+ ScalarValue:W
+ NumericConstant:.227
+ BinaryOperator:*
+ CarriageControl:;
+ TextConstant:"FEET DEEP!"
+ CarriageControl:NL
+320 GOTO 440
+ LineNumber:440
+330 L=L+S: T=T-S: M=M-S*K: A=I: V=J: RETURN
+ ScalarReference:L
+ ScalarValue:L
+ ScalarValue:S
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:T
+ ScalarValue:T
+ ScalarValue:S
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:M
+ ScalarValue:M
+ ScalarValue:S
+ ScalarValue:K
+ BinaryOperator:*
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:A
+ ScalarValue:I
+ AssignmentOperator:=
+ ScalarReference:V
+ ScalarValue:J
+ AssignmentOperator:=
+ 
+340 IF S<5E-03 THEN 260
+ ScalarValue:S
+ NumericConstant:5E-03
+ BinaryOperator:<
+350 D=V+SQR(V*V+2*A*(G-Z*K/M)):S=2*A/D
+ ScalarReference:D
+ ScalarValue:V
+ ScalarValue:V
+ ScalarValue:V
+ BinaryOperator:*
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:*
+ ScalarValue:G
+ ScalarValue:Z
+ ScalarValue:K
+ BinaryOperator:*
+ ScalarValue:M
+ BinaryOperator:/
+ BinaryOperator:-
+ BinaryOperator:*
+ BinaryOperator:+
+ FunctionSqr
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:S
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:*
+ ScalarValue:D
+ BinaryOperator:/
+ AssignmentOperator:=
+360 GOSUB 420: GOSUB 330: GOTO 340
+ LineNumber:420
+ LineNumber:330
+ LineNumber:340
+370 W=(1-M*G/(Z*K))/2: S=M*V/(Z*K*(W+SQR(W*W+V/Z)))+.05:GOSUB 420
+ ScalarReference:W
+ NumericConstant:1
+ ScalarValue:M
+ ScalarValue:G
+ BinaryOperator:*
+ ScalarValue:Z
+ ScalarValue:K
+ BinaryOperator:*
+ BinaryOperator:/
+ BinaryOperator:-
+ NumericConstant:2
+ BinaryOperator:/
+ AssignmentOperator:=
+ ScalarReference:S
+ ScalarValue:M
+ ScalarValue:V
+ BinaryOperator:*
+ ScalarValue:Z
+ ScalarValue:K
+ BinaryOperator:*
+ ScalarValue:W
+ ScalarValue:W
+ ScalarValue:W
+ BinaryOperator:*
+ ScalarValue:V
+ ScalarValue:Z
+ BinaryOperator:/
+ BinaryOperator:+
+ FunctionSqr
+ BinaryOperator:+
+ BinaryOperator:*
+ BinaryOperator:/
+ NumericConstant:.05
+ BinaryOperator:+
+ AssignmentOperator:=
+ LineNumber:420
+380 IF I<=0 THEN 340
+ ScalarValue:I
+ NumericConstant:0
+ BinaryOperator:<=
+390 GOSUB 330: IF J>0 THEN 160
+ LineNumber:330
+ ScalarValue:J
+ NumericConstant:0
+ BinaryOperator:>
+400 IF V>0 THEN 370
+ ScalarValue:V
+ NumericConstant:0
+ BinaryOperator:>
+410 GOTO 160
+ LineNumber:160
+420 Q=S*K/M: J=V+G*S+Z*(-Q-Q*Q/2-Q^3/3-Q^4/4-Q^5/5)
+ ScalarReference:Q
+ ScalarValue:S
+ ScalarValue:K
+ BinaryOperator:*
+ ScalarValue:M
+ BinaryOperator:/
+ AssignmentOperator:=
+ ScalarReference:J
+ ScalarValue:V
+ ScalarValue:G
+ ScalarValue:S
+ BinaryOperator:*
+ BinaryOperator:+
+ ScalarValue:Z
+ ScalarValue:Q
+ UnaryOperator:-
+ ScalarValue:Q
+ ScalarValue:Q
+ BinaryOperator:*
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:-
+ ScalarValue:Q
+ NumericConstant:3
+ BinaryOperator:^
+ NumericConstant:3
+ BinaryOperator:/
+ BinaryOperator:-
+ ScalarValue:Q
+ NumericConstant:4
+ BinaryOperator:^
+ NumericConstant:4
+ BinaryOperator:/
+ BinaryOperator:-
+ ScalarValue:Q
+ NumericConstant:5
+ BinaryOperator:^
+ NumericConstant:5
+ BinaryOperator:/
+ BinaryOperator:-
+ BinaryOperator:*
+ BinaryOperator:+
+ AssignmentOperator:=
+430 I=A-G*S*S/2-V*S+Z*S*(Q/2+Q^2/6+Q^3/12+Q^4/20+Q^5/30):RETURN
+ ScalarReference:I
+ ScalarValue:A
+ ScalarValue:G
+ ScalarValue:S
+ BinaryOperator:*
+ ScalarValue:S
+ BinaryOperator:*
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:-
+ ScalarValue:V
+ ScalarValue:S
+ BinaryOperator:*
+ BinaryOperator:-
+ ScalarValue:Z
+ ScalarValue:S
+ BinaryOperator:*
+ ScalarValue:Q
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:Q
+ NumericConstant:2
+ BinaryOperator:^
+ NumericConstant:6
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:Q
+ NumericConstant:3
+ BinaryOperator:^
+ NumericConstant:12
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:Q
+ NumericConstant:4
+ BinaryOperator:^
+ NumericConstant:20
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:Q
+ NumericConstant:5
+ BinaryOperator:^
+ NumericConstant:30
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ BinaryOperator:+
+ AssignmentOperator:=
+ 
+440 PRINT:PRINT:PRINT:PRINT "TRY AGAIN??": GOTO 70
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"TRY AGAIN??"
+ CarriageControl:NL
+ LineNumber:70

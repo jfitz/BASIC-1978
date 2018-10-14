@@ -1,0 +1,154 @@
+10 PRINT TAB(34);"HI LO"
+ ITEMS
+ NumericConstant:34
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"HI LO"
+ CarriageControl:NL
+20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+30 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+100 PRINT "THIS IS THE GAME OF HI LO.":PRINT
+ ITEMS
+ TextConstant:"THIS IS THE GAME OF HI LO."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+110 PRINT "YOU WILL HAVE 6 TRIES TO GUESS THE AMOUNT OF MONEY IN THE"
+ ITEMS
+ TextConstant:"YOU WILL HAVE 6 TRIES TO GUESS THE AMOUNT OF MONEY IN THE"
+ CarriageControl:NL
+120 PRINT "HI LO JACKPOT, WHICH IS BETWEEN 1 AND 100 DOLLARS.  IF YOU"
+ ITEMS
+ TextConstant:"HI LO JACKPOT, WHICH IS BETWEEN 1 AND 100 DOLLARS.  IF YOU"
+ CarriageControl:NL
+130 PRINT "GUESS THE AMOUNT, YOU WIN ALL THE MONEY IN THE JACKPOT!"
+ ITEMS
+ TextConstant:"GUESS THE AMOUNT, YOU WIN ALL THE MONEY IN THE JACKPOT!"
+ CarriageControl:NL
+140 PRINT "THEN YOU GET ANOTHER CHANCE TO WIN MORE MONEY.  HOWEVER,"
+ ITEMS
+ TextConstant:"THEN YOU GET ANOTHER CHANCE TO WIN MORE MONEY.  HOWEVER,"
+ CarriageControl:NL
+150 PRINT "IF YOU DO NOT GUESS THE AMOUNT, THE GAME ENDS.":PRINT
+ ITEMS
+ TextConstant:"IF YOU DO NOT GUESS THE AMOUNT, THE GAME ENDS."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+160 R=0
+ ScalarReference:R
+ NumericConstant:0
+ AssignmentOperator:=
+170 B=0:PRINT
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+ ITEMS
+ CarriageControl:NL
+180 Y=INT(100*RND(1))
+ ScalarReference:Y
+ NumericConstant:100
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+200 PRINT "YOUR GUESS";
+ ITEMS
+ TextConstant:"YOUR GUESS"
+ CarriageControl:;
+210 INPUT A
+ ScalarReference:A
+220 B=B+1
+ ScalarReference:B
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+230 IF A=Y THEN 300
+ ScalarValue:A
+ ScalarValue:Y
+ BinaryOperator:=
+240 IF A>Y THEN 270
+ ScalarValue:A
+ ScalarValue:Y
+ BinaryOperator:>
+250 PRINT "YOUR GUESS IS TOO LOW.":GOTO 280
+ ITEMS
+ TextConstant:"YOUR GUESS IS TOO LOW."
+ CarriageControl:NL
+ LineNumber:280
+270 PRINT "YOUR GUESS IS TOO HIGH."
+ ITEMS
+ TextConstant:"YOUR GUESS IS TOO HIGH."
+ CarriageControl:NL
+280 PRINT:IF B<6 THEN 200
+ ITEMS
+ CarriageControl:NL
+ ScalarValue:B
+ NumericConstant:6
+ BinaryOperator:<
+290 PRINT "YOU BLEW IT...TOO BAD...THE NUMBER WAS";Y
+ ITEMS
+ TextConstant:"YOU BLEW IT...TOO BAD...THE NUMBER WAS"
+ CarriageControl:;
+ ScalarValue:Y
+ CarriageControl:NL
+295 R=0:GOTO 350
+ ScalarReference:R
+ NumericConstant:0
+ AssignmentOperator:=
+ LineNumber:350
+300 PRINT "GOT IT!!!!!!!!!!   YOU WIN";Y;"DOLLARS."
+ ITEMS
+ TextConstant:"GOT IT!!!!!!!!!!   YOU WIN"
+ CarriageControl:;
+ ScalarValue:Y
+ CarriageControl:;
+ TextConstant:"DOLLARS."
+ CarriageControl:NL
+310 R=R+Y
+ ScalarReference:R
+ ScalarValue:R
+ ScalarValue:Y
+ BinaryOperator:+
+ AssignmentOperator:=
+320 PRINT "YOUR TOTAL WINNINGS ARE NOW";R;"DOLLARS."
+ ITEMS
+ TextConstant:"YOUR TOTAL WINNINGS ARE NOW"
+ CarriageControl:;
+ ScalarValue:R
+ CarriageControl:;
+ TextConstant:"DOLLARS."
+ CarriageControl:NL
+350 PRINT:PRINT "PLAY AGAIN (YES OR NO)";
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"PLAY AGAIN (YES OR NO)"
+ CarriageControl:;
+360 INPUT A$:IF A$="YES" THEN 170
+ ScalarReference:A$
+ ScalarValue:A$
+ TextConstant:"YES"
+ BinaryOperator:=
+380 PRINT:PRINT "SO LONG.  HOPE YOU ENJOYED YOURSELF!!!"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"SO LONG.  HOPE YOU ENJOYED YOURSELF!!!"
+ CarriageControl:NL
+390 END
+ 

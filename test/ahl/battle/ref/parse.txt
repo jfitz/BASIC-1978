@@ -1,0 +1,1416 @@
+5 PRINT TAB(33);"BATTLE"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"BATTLE"
+ CarriageControl:NL
+7 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+10 REM -- BATTLE WRITTEN BY RAY WESTERGARD  10/70
+ Remark:-- BATTLE WRITTEN BY RAY WESTERGARD  10/70
+20 REM COPYRIGHT 1971 BY THE REGENTS OF THE UNIV. OF CALIF.
+ Remark:COPYRIGHT 1971 BY THE REGENTS OF THE UNIV. OF CALIF.
+30 REM PRODUCED AT THE LAWRENCE HALL OF SCIENCE, BERKELEY
+ Remark:PRODUCED AT THE LAWRENCE HALL OF SCIENCE, BERKELEY
+40 DIM F(6,6),H(6,6),A(4),B(4),C(6),L(3)
+ NumericConstant:6
+ NumericConstant:6
+ CompoundDeclaration:F
+ NumericConstant:6
+ NumericConstant:6
+ CompoundDeclaration:H
+ NumericConstant:4
+ CompoundDeclaration:A
+ NumericConstant:4
+ CompoundDeclaration:B
+ NumericConstant:6
+ CompoundDeclaration:C
+ NumericConstant:3
+ CompoundDeclaration:L
+50 FOR X=1 TO 6
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+51 FOR Y=1 TO 6
+ control: VariableName:Y
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+52 F(X,Y)=0
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarReference:F
+ NumericConstant:0
+ AssignmentOperator:=
+53 NEXT Y
+ VariableName:Y
+54 NEXT X
+ VariableName:X
+60 FOR I=1 TO 3
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+70 N=4-I
+ ScalarReference:N
+ NumericConstant:4
+ ScalarValue:I
+ BinaryOperator:-
+ AssignmentOperator:=
+80 FOR J=1 TO 2
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:1"]
+90 A=INT(6*RND(1)+1)
+ ScalarReference:A
+ NumericConstant:6
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+100 B=INT(6*RND(1)+1)
+ ScalarReference:B
+ NumericConstant:6
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+110 D=INT(4*RND(1)+1)
+ ScalarReference:D
+ NumericConstant:4
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+120 IF F(A,B)>0 THEN 90
+ ScalarValue:A
+ ScalarValue:B
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+130 M=0
+ ScalarReference:M
+ NumericConstant:0
+ AssignmentOperator:=
+140 ON D GOTO 150,340,550,740
+ ScalarValue:D
+ LineNumber:150
+ LineNumber:340
+ LineNumber:550
+ LineNumber:740
+150 B(1)=B
+ NumericConstant:1
+ ScalarReference:B
+ ScalarValue:B
+ AssignmentOperator:=
+160 B(2)=7:B(3)=7
+ NumericConstant:2
+ ScalarReference:B
+ NumericConstant:7
+ AssignmentOperator:=
+ NumericConstant:3
+ ScalarReference:B
+ NumericConstant:7
+ AssignmentOperator:=
+170 FOR K=1 TO N
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+180 IF M>1 THEN 240
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:>
+190 IF B(K)=6 THEN 230
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:6
+ BinaryOperator:=
+200 IF F(A,B(K)+1)>0 THEN 230
+ ScalarValue:A
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+210 B(K+1)=B(K)+1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:B
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+220 GOTO 280
+ LineNumber:280
+230 M=2
+ ScalarReference:M
+ NumericConstant:2
+ AssignmentOperator:=
+240 IF B(1)<B(2) AND B(1)<B(3) THEN Z=B(1)
+ NumericConstant:1
+ ScalarValue:B
+ NumericConstant:2
+ ScalarValue:B
+ BinaryOperator:<
+ NumericConstant:1
+ ScalarValue:B
+ NumericConstant:3
+ ScalarValue:B
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarReference:Z
+ NumericConstant:1
+ ScalarValue:B
+ AssignmentOperator:=
+242 IF B(2)<B(1) AND B(2)<B(3) THEN Z=B(2)
+ NumericConstant:2
+ ScalarValue:B
+ NumericConstant:1
+ ScalarValue:B
+ BinaryOperator:<
+ NumericConstant:2
+ ScalarValue:B
+ NumericConstant:3
+ ScalarValue:B
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarReference:Z
+ NumericConstant:2
+ ScalarValue:B
+ AssignmentOperator:=
+244 IF B(3)<B(1) AND B(3)<B(2) THEN Z=B(3)
+ NumericConstant:3
+ ScalarValue:B
+ NumericConstant:1
+ ScalarValue:B
+ BinaryOperator:<
+ NumericConstant:3
+ ScalarValue:B
+ NumericConstant:2
+ ScalarValue:B
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarReference:Z
+ NumericConstant:3
+ ScalarValue:B
+ AssignmentOperator:=
+250 IF Z=1 THEN 90
+ ScalarValue:Z
+ NumericConstant:1
+ BinaryOperator:=
+260 IF F(A,Z-1)>0 THEN 90
+ ScalarValue:A
+ ScalarValue:Z
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+270 B(K+1)=Z-1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:B
+ ScalarValue:Z
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+280 NEXT K
+ VariableName:K
+290 F(A,B)=9-2*I-J
+ ScalarValue:A
+ ScalarValue:B
+ ScalarReference:F
+ NumericConstant:9
+ NumericConstant:2
+ ScalarValue:I
+ BinaryOperator:*
+ BinaryOperator:-
+ ScalarValue:J
+ BinaryOperator:-
+ AssignmentOperator:=
+300 FOR K=1 TO N
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+310 F(A,B(K+1))=F(A,B)
+ ScalarValue:A
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:B
+ ScalarReference:F
+ ScalarValue:A
+ ScalarValue:B
+ ScalarValue:F
+ AssignmentOperator:=
+320 NEXT K
+ VariableName:K
+330 GOTO 990
+ LineNumber:990
+340 A(1)=A
+ NumericConstant:1
+ ScalarReference:A
+ ScalarValue:A
+ AssignmentOperator:=
+350 B(1)=B
+ NumericConstant:1
+ ScalarReference:B
+ ScalarValue:B
+ AssignmentOperator:=
+360 A(2)=0:A(3)=0:B(2)=0:B(3)=0
+ NumericConstant:2
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:3
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:2
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:3
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+370 FOR K=1 TO N
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+380 IF M>1 THEN 460
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:>
+390 IF A(K)=1 OR B(K)=1 THEN 450
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:=
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:=
+ BinaryOperator:OR
+400 IF F(A(K)-1,B(K)-1)>0 THEN 450
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+410 IF F(A(K)-1,B(K))>0 AND F(A(K)-1,B(K))=F(A(K),B(K)-1) THEN 450
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:K
+ ScalarValue:B
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:K
+ ScalarValue:B
+ ScalarValue:F
+ ScalarValue:K
+ ScalarValue:A
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:F
+ BinaryOperator:=
+ BinaryOperator:AND
+420 A(K+1)=A(K)-1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:A
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+430 B(K+1)=B(K)-1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:B
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+440 GOTO 530
+ LineNumber:530
+450 M=2
+ ScalarReference:M
+ NumericConstant:2
+ AssignmentOperator:=
+460 IF A(1)>A(2) AND A(1)>A(3) THEN Z1=A(1)
+ NumericConstant:1
+ ScalarValue:A
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:>
+ NumericConstant:1
+ ScalarValue:A
+ NumericConstant:3
+ ScalarValue:A
+ BinaryOperator:>
+ BinaryOperator:AND
+ ScalarReference:Z1
+ NumericConstant:1
+ ScalarValue:A
+ AssignmentOperator:=
+462 IF A(2)>A(1) AND A(2)>A(3) THEN Z1=A(2)
+ NumericConstant:2
+ ScalarValue:A
+ NumericConstant:1
+ ScalarValue:A
+ BinaryOperator:>
+ NumericConstant:2
+ ScalarValue:A
+ NumericConstant:3
+ ScalarValue:A
+ BinaryOperator:>
+ BinaryOperator:AND
+ ScalarReference:Z1
+ NumericConstant:2
+ ScalarValue:A
+ AssignmentOperator:=
+464 IF A(3)>A(1) AND A(3)>A(2) THEN Z1=A(3)
+ NumericConstant:3
+ ScalarValue:A
+ NumericConstant:1
+ ScalarValue:A
+ BinaryOperator:>
+ NumericConstant:3
+ ScalarValue:A
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:>
+ BinaryOperator:AND
+ ScalarReference:Z1
+ NumericConstant:3
+ ScalarValue:A
+ AssignmentOperator:=
+470 IF B(1)>B(2) AND B(1)>B(3) THEN Z2=B(1)
+ NumericConstant:1
+ ScalarValue:B
+ NumericConstant:2
+ ScalarValue:B
+ BinaryOperator:>
+ NumericConstant:1
+ ScalarValue:B
+ NumericConstant:3
+ ScalarValue:B
+ BinaryOperator:>
+ BinaryOperator:AND
+ ScalarReference:Z2
+ NumericConstant:1
+ ScalarValue:B
+ AssignmentOperator:=
+474 IF B(2)>B(1) AND B(2)>B(3) THEN Z2=B(2)
+ NumericConstant:2
+ ScalarValue:B
+ NumericConstant:1
+ ScalarValue:B
+ BinaryOperator:>
+ NumericConstant:2
+ ScalarValue:B
+ NumericConstant:3
+ ScalarValue:B
+ BinaryOperator:>
+ BinaryOperator:AND
+ ScalarReference:Z2
+ NumericConstant:2
+ ScalarValue:B
+ AssignmentOperator:=
+476 IF B(3)>B(1) AND B(3)>B(2) THEN Z2=B(3)
+ NumericConstant:3
+ ScalarValue:B
+ NumericConstant:1
+ ScalarValue:B
+ BinaryOperator:>
+ NumericConstant:3
+ ScalarValue:B
+ NumericConstant:2
+ ScalarValue:B
+ BinaryOperator:>
+ BinaryOperator:AND
+ ScalarReference:Z2
+ NumericConstant:3
+ ScalarValue:B
+ AssignmentOperator:=
+480 IF Z1=6 OR Z2=6 THEN 90
+ ScalarValue:Z1
+ NumericConstant:6
+ BinaryOperator:=
+ ScalarValue:Z2
+ NumericConstant:6
+ BinaryOperator:=
+ BinaryOperator:OR
+490 IF F(Z1+1,Z2+1)>0 THEN 90
+ ScalarValue:Z1
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:Z2
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+500 IF F(Z1,Z2+1)>0 AND F(Z1,Z2+1)=F(Z1+1,Z2) THEN 90
+ ScalarValue:Z1
+ ScalarValue:Z2
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:Z1
+ ScalarValue:Z2
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:F
+ ScalarValue:Z1
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:Z2
+ ScalarValue:F
+ BinaryOperator:=
+ BinaryOperator:AND
+510 A(K+1)=Z1+1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:A
+ ScalarValue:Z1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+520 B(K+1)=Z2+1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:B
+ ScalarValue:Z2
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+530 NEXT K
+ VariableName:K
+540 GOTO 950
+ LineNumber:950
+550 A(1)=A
+ NumericConstant:1
+ ScalarReference:A
+ ScalarValue:A
+ AssignmentOperator:=
+560 A(2)=7:A(3)=7
+ NumericConstant:2
+ ScalarReference:A
+ NumericConstant:7
+ AssignmentOperator:=
+ NumericConstant:3
+ ScalarReference:A
+ NumericConstant:7
+ AssignmentOperator:=
+570 FOR K=1 TO N
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+580 IF M>1 THEN 640
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:>
+590 IF A(K)=6 THEN 630
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:6
+ BinaryOperator:=
+600 IF F(A(K)+1,B)>0 THEN 630
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:B
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+610 A(K+1)=A(K)+1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:A
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+620 GOTO 680
+ LineNumber:680
+630 M=2
+ ScalarReference:M
+ NumericConstant:2
+ AssignmentOperator:=
+640 IF A(1)<A(2) AND A(1)<A(3) THEN Z=A(1)
+ NumericConstant:1
+ ScalarValue:A
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:<
+ NumericConstant:1
+ ScalarValue:A
+ NumericConstant:3
+ ScalarValue:A
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarReference:Z
+ NumericConstant:1
+ ScalarValue:A
+ AssignmentOperator:=
+642 IF A(2)<A(1) AND A(2)<A(3) THEN Z=A(2)
+ NumericConstant:2
+ ScalarValue:A
+ NumericConstant:1
+ ScalarValue:A
+ BinaryOperator:<
+ NumericConstant:2
+ ScalarValue:A
+ NumericConstant:3
+ ScalarValue:A
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarReference:Z
+ NumericConstant:2
+ ScalarValue:A
+ AssignmentOperator:=
+644 IF A(3)<A(1) AND A(3)<A(2) THEN Z=A(3)
+ NumericConstant:3
+ ScalarValue:A
+ NumericConstant:1
+ ScalarValue:A
+ BinaryOperator:<
+ NumericConstant:3
+ ScalarValue:A
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarReference:Z
+ NumericConstant:3
+ ScalarValue:A
+ AssignmentOperator:=
+650 IF Z=1 THEN 90
+ ScalarValue:Z
+ NumericConstant:1
+ BinaryOperator:=
+660 IF F(Z-1,B)>0 THEN 90
+ ScalarValue:Z
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:B
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+670 A(K+1)=Z-1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:A
+ ScalarValue:Z
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+680 NEXT K
+ VariableName:K
+690 F(A,B)=9-2*I-J
+ ScalarValue:A
+ ScalarValue:B
+ ScalarReference:F
+ NumericConstant:9
+ NumericConstant:2
+ ScalarValue:I
+ BinaryOperator:*
+ BinaryOperator:-
+ ScalarValue:J
+ BinaryOperator:-
+ AssignmentOperator:=
+700 FOR K=1 TO N
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+710 F(A(K+1),B)=F(A,B)
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:A
+ ScalarValue:B
+ ScalarReference:F
+ ScalarValue:A
+ ScalarValue:B
+ ScalarValue:F
+ AssignmentOperator:=
+720 NEXT K
+ VariableName:K
+730 GOTO 990
+ LineNumber:990
+740 A(1)=A
+ NumericConstant:1
+ ScalarReference:A
+ ScalarValue:A
+ AssignmentOperator:=
+750 B(1)=B
+ NumericConstant:1
+ ScalarReference:B
+ ScalarValue:B
+ AssignmentOperator:=
+760 A(2)=7:A(3)=7
+ NumericConstant:2
+ ScalarReference:A
+ NumericConstant:7
+ AssignmentOperator:=
+ NumericConstant:3
+ ScalarReference:A
+ NumericConstant:7
+ AssignmentOperator:=
+770 B(2)=0:B(3)=0
+ NumericConstant:2
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:3
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+780 FOR K=1 TO N
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+790 IF M>1 THEN 870
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:>
+800 IF A(K)=6 OR B(K)=1 THEN 860
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:6
+ BinaryOperator:=
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:=
+ BinaryOperator:OR
+810 IF F(A(K)+1,B(K)-1)>0 THEN 860
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+820 IF F(A(K)+1,B(K))>0 AND F(A(K)+1,B(K))=F(A(K),B(K)-1) THEN 860
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:K
+ ScalarValue:B
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:K
+ ScalarValue:B
+ ScalarValue:F
+ ScalarValue:K
+ ScalarValue:A
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:F
+ BinaryOperator:=
+ BinaryOperator:AND
+830 A(K+1)=A(K)+1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:A
+ ScalarValue:K
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+840 B(K+1)=B(K)-1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:B
+ ScalarValue:K
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+850 GOTO 940
+ LineNumber:940
+860 M=2
+ ScalarReference:M
+ NumericConstant:2
+ AssignmentOperator:=
+870 IF A(1)<A(2) AND A(1)<A(3) THEN Z1=A(1)
+ NumericConstant:1
+ ScalarValue:A
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:<
+ NumericConstant:1
+ ScalarValue:A
+ NumericConstant:3
+ ScalarValue:A
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarReference:Z1
+ NumericConstant:1
+ ScalarValue:A
+ AssignmentOperator:=
+872 IF A(2)<A(1) AND A(2)<A(3) THEN Z1=A(2)
+ NumericConstant:2
+ ScalarValue:A
+ NumericConstant:1
+ ScalarValue:A
+ BinaryOperator:<
+ NumericConstant:2
+ ScalarValue:A
+ NumericConstant:3
+ ScalarValue:A
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarReference:Z1
+ NumericConstant:2
+ ScalarValue:A
+ AssignmentOperator:=
+874 IF A(3)<A(1) AND A(3)<A(2) THEN Z1=A(3)
+ NumericConstant:3
+ ScalarValue:A
+ NumericConstant:1
+ ScalarValue:A
+ BinaryOperator:<
+ NumericConstant:3
+ ScalarValue:A
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarReference:Z1
+ NumericConstant:3
+ ScalarValue:A
+ AssignmentOperator:=
+880 IF B(1)>B(2) AND B(1)>B(3) THEN Z2=B(1)
+ NumericConstant:1
+ ScalarValue:B
+ NumericConstant:2
+ ScalarValue:B
+ BinaryOperator:>
+ NumericConstant:1
+ ScalarValue:B
+ NumericConstant:3
+ ScalarValue:B
+ BinaryOperator:>
+ BinaryOperator:AND
+ ScalarReference:Z2
+ NumericConstant:1
+ ScalarValue:B
+ AssignmentOperator:=
+882 IF B(2)>B(1) AND B(2)>B(3) THEN Z2=B(2)
+ NumericConstant:2
+ ScalarValue:B
+ NumericConstant:1
+ ScalarValue:B
+ BinaryOperator:>
+ NumericConstant:2
+ ScalarValue:B
+ NumericConstant:3
+ ScalarValue:B
+ BinaryOperator:>
+ BinaryOperator:AND
+ ScalarReference:Z2
+ NumericConstant:2
+ ScalarValue:B
+ AssignmentOperator:=
+884 IF B(3)>B(1) AND B(3)>B(2) THEN Z2=B(3)
+ NumericConstant:3
+ ScalarValue:B
+ NumericConstant:1
+ ScalarValue:B
+ BinaryOperator:>
+ NumericConstant:3
+ ScalarValue:B
+ NumericConstant:2
+ ScalarValue:B
+ BinaryOperator:>
+ BinaryOperator:AND
+ ScalarReference:Z2
+ NumericConstant:3
+ ScalarValue:B
+ AssignmentOperator:=
+890 IF Z1=1 OR Z2=6 THEN 90
+ ScalarValue:Z1
+ NumericConstant:1
+ BinaryOperator:=
+ ScalarValue:Z2
+ NumericConstant:6
+ BinaryOperator:=
+ BinaryOperator:OR
+900 IF F(Z1-1,Z2+1)>0 THEN 90
+ ScalarValue:Z1
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:Z2
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+910 IF F(Z1,Z2+1)>0 AND F(Z1,Z2+1)=F(Z1-1,Z2) THEN 90
+ ScalarValue:Z1
+ ScalarValue:Z2
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:Z1
+ ScalarValue:Z2
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:F
+ ScalarValue:Z1
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:Z2
+ ScalarValue:F
+ BinaryOperator:=
+ BinaryOperator:AND
+920 A(K+1)=Z1-1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:A
+ ScalarValue:Z1
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+930 B(K+1)=Z2+1
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:B
+ ScalarValue:Z2
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+940 NEXT K
+ VariableName:K
+950 F(A,B)=9-2*I-J
+ ScalarValue:A
+ ScalarValue:B
+ ScalarReference:F
+ NumericConstant:9
+ NumericConstant:2
+ ScalarValue:I
+ BinaryOperator:*
+ BinaryOperator:-
+ ScalarValue:J
+ BinaryOperator:-
+ AssignmentOperator:=
+960 FOR K=1 TO N
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+970 F(A(K+1),B(K+1))=F(A,B)
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:A
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:B
+ ScalarReference:F
+ ScalarValue:A
+ ScalarValue:B
+ ScalarValue:F
+ AssignmentOperator:=
+980 NEXT K
+ VariableName:K
+990 NEXT J
+ VariableName:J
+1000 NEXT I
+ VariableName:I
+1010 PRINT
+ ITEMS
+ CarriageControl:NL
+1020 PRINT "THE FOLLOWING CODE OF THE BAD GUYS' FLEET DISPOSITION"
+ ITEMS
+ TextConstant:"THE FOLLOWING CODE OF THE BAD GUYS' FLEET DISPOSITION"
+ CarriageControl:NL
+1030 PRINT "HAS BEEN CAPTURED BUT NOT DECODED:"
+ ITEMS
+ TextConstant:"HAS BEEN CAPTURED BUT NOT DECODED:"
+ CarriageControl:NL
+1040 PRINT
+ ITEMS
+ CarriageControl:NL
+1050 FOR I=1 TO 6
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+1051 FOR J=1 TO 6
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+1052 H(I,J)=F(J,I)
+ ScalarValue:I
+ ScalarValue:J
+ ScalarReference:H
+ ScalarValue:J
+ ScalarValue:I
+ ScalarValue:F
+ AssignmentOperator:=
+1053 NEXT J
+ VariableName:J
+1054 NEXT I
+ VariableName:I
+1060 FOR I=1 TO 6
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+1061 FOR J=1 TO 6
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+1062 PRINT H(I,J);
+ ITEMS
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:H
+ CarriageControl:;
+1063 NEXT J
+ VariableName:J
+1064 PRINT
+ ITEMS
+ CarriageControl:NL
+1065 NEXT I
+ VariableName:I
+1070 PRINT
+ ITEMS
+ CarriageControl:NL
+1080 PRINT "DE-CODE IT AND USE IT IF YOU CAN"
+ ITEMS
+ TextConstant:"DE-CODE IT AND USE IT IF YOU CAN"
+ CarriageControl:NL
+1090 PRINT "BUT KEEP THE DE-CODING METHOD A SECRET."
+ ITEMS
+ TextConstant:"BUT KEEP THE DE-CODING METHOD A SECRET."
+ CarriageControl:NL
+1100 PRINT
+ ITEMS
+ CarriageControl:NL
+1110 FOR I=1 TO 6
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+1111 FOR J=1 TO 6
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+1112 H(I,J)=0
+ ScalarValue:I
+ ScalarValue:J
+ ScalarReference:H
+ NumericConstant:0
+ AssignmentOperator:=
+1113 NEXT J
+ VariableName:J
+1114 NEXT I
+ VariableName:I
+1120 FOR I=1 TO 3
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+1121 L(I)=0
+ ScalarValue:I
+ ScalarReference:L
+ NumericConstant:0
+ AssignmentOperator:=
+1122 NEXT I
+ VariableName:I
+1130 C(1)=2:C(2)=2
+ NumericConstant:1
+ ScalarReference:C
+ NumericConstant:2
+ AssignmentOperator:=
+ NumericConstant:2
+ ScalarReference:C
+ NumericConstant:2
+ AssignmentOperator:=
+1140 C(3)=1:C(4)=1
+ NumericConstant:3
+ ScalarReference:C
+ NumericConstant:1
+ AssignmentOperator:=
+ NumericConstant:4
+ ScalarReference:C
+ NumericConstant:1
+ AssignmentOperator:=
+1150 C(5)=0:C(6)=0
+ NumericConstant:5
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:6
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+1160 S=0:H=0
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:H
+ NumericConstant:0
+ AssignmentOperator:=
+1170 PRINT "START GAME"
+ ITEMS
+ TextConstant:"START GAME"
+ CarriageControl:NL
+1180 INPUT X,Y
+ ScalarReference:X
+ ScalarReference:Y
+1190 IF X<1 OR X>6 OR INT(X)<>ABS(X) THEN 1210
+ ScalarValue:X
+ NumericConstant:1
+ BinaryOperator:<
+ ScalarValue:X
+ NumericConstant:6
+ BinaryOperator:>
+ BinaryOperator:OR
+ ScalarValue:X
+ FunctionInt
+ ScalarValue:X
+ FunctionAbs
+ BinaryOperator:<>
+ BinaryOperator:OR
+1200 IF Y>0 AND Y<7 AND INT(Y)=ABS(Y) THEN 1230
+ ScalarValue:Y
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:Y
+ NumericConstant:7
+ BinaryOperator:<
+ BinaryOperator:AND
+ ScalarValue:Y
+ FunctionInt
+ ScalarValue:Y
+ FunctionAbs
+ BinaryOperator:=
+ BinaryOperator:AND
+1210 PRINT "INVALID INPUT.  TRY AGAIN."
+ ITEMS
+ TextConstant:"INVALID INPUT.  TRY AGAIN."
+ CarriageControl:NL
+1220 GOTO 1180
+ LineNumber:1180
+1230 R=7-Y
+ ScalarReference:R
+ NumericConstant:7
+ ScalarValue:Y
+ BinaryOperator:-
+ AssignmentOperator:=
+1240 C=X
+ ScalarReference:C
+ ScalarValue:X
+ AssignmentOperator:=
+1250 IF F(R,C)>0 THEN 1290
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>
+1260 S=S+1
+ ScalarReference:S
+ ScalarValue:S
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1270 PRINT "SPLASH!  TRY AGAIN."
+ ITEMS
+ TextConstant:"SPLASH!  TRY AGAIN."
+ CarriageControl:NL
+1280 GOTO 1180
+ LineNumber:1180
+1290 IF C(F(R,C))<4 THEN 1340
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ ScalarValue:C
+ NumericConstant:4
+ BinaryOperator:<
+1300 PRINT "THERE USED TO BE A SHIP AT THAT POINT, BUT YOU SUNK IT."
+ ITEMS
+ TextConstant:"THERE USED TO BE A SHIP AT THAT POINT, BUT YOU SUNK IT."
+ CarriageControl:NL
+1310 PRINT "SPLASH!  TRY AGAIN."
+ ITEMS
+ TextConstant:"SPLASH!  TRY AGAIN."
+ CarriageControl:NL
+1320 S=S+1
+ ScalarReference:S
+ ScalarValue:S
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1330 GOTO 1180
+ LineNumber:1180
+1340 IF H(R,C)>0 THEN 1420
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:H
+ NumericConstant:0
+ BinaryOperator:>
+1350 H=H+1
+ ScalarReference:H
+ ScalarValue:H
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1360 H(R,C)=F(R,C)
+ ScalarValue:R
+ ScalarValue:C
+ ScalarReference:H
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ AssignmentOperator:=
+1370 PRINT "A DIRECT HIT ON SHIP NUMBER";F(R,C)
+ ITEMS
+ TextConstant:"A DIRECT HIT ON SHIP NUMBER"
+ CarriageControl:;
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ CarriageControl:NL
+1380 C(F(R,C))=C(F(R,C))+1
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ ScalarReference:C
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1390 IF C(F(R,C))>=4 THEN 1470
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ ScalarValue:C
+ NumericConstant:4
+ BinaryOperator:>=
+1400 PRINT "TRY AGAIN."
+ ITEMS
+ TextConstant:"TRY AGAIN."
+ CarriageControl:NL
+1410 GOTO 1180
+ LineNumber:1180
+1420 PRINT "YOU ALREADY PUT A HOLE IN SHIP NUMBER";F(R,C);
+ ITEMS
+ TextConstant:"YOU ALREADY PUT A HOLE IN SHIP NUMBER"
+ CarriageControl:;
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ CarriageControl:;
+1430 PRINT "AT THAT POINT."
+ ITEMS
+ TextConstant:"AT THAT POINT."
+ CarriageControl:NL
+1440 PRINT "SPLASH!  TRY AGAIN."
+ ITEMS
+ TextConstant:"SPLASH!  TRY AGAIN."
+ CarriageControl:NL
+1450 S=S+1
+ ScalarReference:S
+ ScalarValue:S
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1460 GOTO 1180
+ LineNumber:1180
+1470 L((INT(F(R,C)-1)/2)+1)=L((INT(F(R,C)-1)/2)+1)+1
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ NumericConstant:1
+ BinaryOperator:-
+ FunctionInt
+ NumericConstant:2
+ BinaryOperator:/
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:L
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:F
+ NumericConstant:1
+ BinaryOperator:-
+ FunctionInt
+ NumericConstant:2
+ BinaryOperator:/
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:L
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1480 PRINT "AND YOU SUNK IT.  HURRAH FOR THE GOOD GUYS."
+ ITEMS
+ TextConstant:"AND YOU SUNK IT.  HURRAH FOR THE GOOD GUYS."
+ CarriageControl:NL
+1490 PRINT "SO FAR, THE BAD GUYS HAVE LOST"
+ ITEMS
+ TextConstant:"SO FAR, THE BAD GUYS HAVE LOST"
+ CarriageControl:NL
+1500 PRINT L(1);"DESTROYER(S),";L(2);"CRUISER(S), AND";
+ ITEMS
+ NumericConstant:1
+ ScalarValue:L
+ CarriageControl:;
+ TextConstant:"DESTROYER(S),"
+ CarriageControl:;
+ NumericConstant:2
+ ScalarValue:L
+ CarriageControl:;
+ TextConstant:"CRUISER(S), AND"
+ CarriageControl:;
+1510 PRINT L(3);"AIRCRAFT CARRIER(S)."
+ ITEMS
+ NumericConstant:3
+ ScalarValue:L
+ CarriageControl:;
+ TextConstant:"AIRCRAFT CARRIER(S)."
+ CarriageControl:NL
+1520 PRINT "YOUR CURRENT SPLASH/HIT RATIO IS";S/H
+ ITEMS
+ TextConstant:"YOUR CURRENT SPLASH/HIT RATIO IS"
+ CarriageControl:;
+ ScalarValue:S
+ ScalarValue:H
+ BinaryOperator:/
+ CarriageControl:NL
+1530 IF (L(1)+L(2)+L(3))<6 THEN 1180
+ NumericConstant:1
+ ScalarValue:L
+ NumericConstant:2
+ ScalarValue:L
+ BinaryOperator:+
+ NumericConstant:3
+ ScalarValue:L
+ BinaryOperator:+
+ NumericConstant:6
+ BinaryOperator:<
+1540 PRINT
+ ITEMS
+ CarriageControl:NL
+1550 PRINT "YOU HAVE TOTALLY WIPED OUT THE BAD GUYS' FLEET"
+ ITEMS
+ TextConstant:"YOU HAVE TOTALLY WIPED OUT THE BAD GUYS' FLEET"
+ CarriageControl:NL
+1560 PRINT "WITH A FINAL SPLASH/HIT RATIO OF";S/H
+ ITEMS
+ TextConstant:"WITH A FINAL SPLASH/HIT RATIO OF"
+ CarriageControl:;
+ ScalarValue:S
+ ScalarValue:H
+ BinaryOperator:/
+ CarriageControl:NL
+1570 IF S/H>0 THEN 1590
+ ScalarValue:S
+ ScalarValue:H
+ BinaryOperator:/
+ NumericConstant:0
+ BinaryOperator:>
+1580 PRINT "CONGRATULATIONS -- A DIRECT HIT EVERY TIME."
+ ITEMS
+ TextConstant:"CONGRATULATIONS -- A DIRECT HIT EVERY TIME."
+ CarriageControl:NL
+1590 PRINT
+ ITEMS
+ CarriageControl:NL
+1600 PRINT "****************************"
+ ITEMS
+ TextConstant:"****************************"
+ CarriageControl:NL
+1610 PRINT
+ ITEMS
+ CarriageControl:NL
+1620 GOTO 50
+ LineNumber:50
+1630 END
+ 

@@ -1,0 +1,196 @@
+10 PRINT TAB(21);"GAME OF ROCK, SCISSORS, PAPER"
+ ITEMS
+ NumericConstant:21
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"GAME OF ROCK, SCISSORS, PAPER"
+ CarriageControl:NL
+20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+25 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+30 INPUT "HOW MANY GAMES";Q
+ ScalarReference:Q
+40 IF Q<11 THEN 60
+ ScalarValue:Q
+ NumericConstant:11
+ BinaryOperator:<
+50 PRINT "SORRY, BUT WE AREN'T ALLOWED TO PLAY THAT MANY.": GOTO 30
+ ITEMS
+ TextConstant:"SORRY, BUT WE AREN'T ALLOWED TO PLAY THAT MANY."
+ CarriageControl:NL
+ LineNumber:30
+60 FOR G=1 TO Q
+ control: VariableName:G
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:Q"]
+ step:    ["NumericConstant:1"]
+70 PRINT: PRINT "GAME NUMBER";G
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"GAME NUMBER"
+ CarriageControl:;
+ ScalarValue:G
+ CarriageControl:NL
+80 X=INT(RND(1)*3+1)
+ ScalarReference:X
+ NumericConstant:1
+ FunctionRnd
+ NumericConstant:3
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+90 PRINT "3=ROCK...2=SCISSORS...1=PAPER"
+ ITEMS
+ TextConstant:"3=ROCK...2=SCISSORS...1=PAPER"
+ CarriageControl:NL
+100 INPUT "1...2...3...WHAT'S YOUR CHOICE";K
+ ScalarReference:K
+110 IF (K-1)*(K-2)*(K-3)<>0 THEN PRINT "INVALID.": GOTO 90
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:K
+ NumericConstant:2
+ BinaryOperator:-
+ BinaryOperator:*
+ ScalarValue:K
+ NumericConstant:3
+ BinaryOperator:-
+ BinaryOperator:*
+ NumericConstant:0
+ BinaryOperator:<>
+ ITEMS
+ TextConstant:"INVALID."
+ CarriageControl:NL
+ LineNumber:90
+120 PRINT "THIS IS MY CHOICE..."
+ ITEMS
+ TextConstant:"THIS IS MY CHOICE..."
+ CarriageControl:NL
+130 ON X GOTO 140,150,160
+ ScalarValue:X
+ LineNumber:140
+ LineNumber:150
+ LineNumber:160
+140 PRINT "...PAPER": GOTO 170
+ ITEMS
+ TextConstant:"...PAPER"
+ CarriageControl:NL
+ LineNumber:170
+150 PRINT "...SCISSORS": GOTO 170
+ ITEMS
+ TextConstant:"...SCISSORS"
+ CarriageControl:NL
+ LineNumber:170
+160 PRINT "...ROCK"
+ ITEMS
+ TextConstant:"...ROCK"
+ CarriageControl:NL
+170 IF X=K THEN 250
+ ScalarValue:X
+ ScalarValue:K
+ BinaryOperator:=
+180 IF X>K THEN 230
+ ScalarValue:X
+ ScalarValue:K
+ BinaryOperator:>
+190 IF X=1 THEN 210
+ ScalarValue:X
+ NumericConstant:1
+ BinaryOperator:=
+200 PRINT "YOU WIN!!!":H=H+1: GOTO 260
+ ITEMS
+ TextConstant:"YOU WIN!!!"
+ CarriageControl:NL
+ ScalarReference:H
+ ScalarValue:H
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ LineNumber:260
+210 IF K<>3 THEN 200
+ ScalarValue:K
+ NumericConstant:3
+ BinaryOperator:<>
+220 PRINT "WOW!  I WIN!!!":C=C+1:GOTO 260
+ ITEMS
+ TextConstant:"WOW!  I WIN!!!"
+ CarriageControl:NL
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ LineNumber:260
+230 IF K<>1 OR X<>3 THEN 220
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:<>
+ ScalarValue:X
+ NumericConstant:3
+ BinaryOperator:<>
+ BinaryOperator:OR
+240 GOTO 200
+ LineNumber:200
+250 PRINT "TIE GAME.  NO WINNER."
+ ITEMS
+ TextConstant:"TIE GAME.  NO WINNER."
+ CarriageControl:NL
+260 NEXT G
+ VariableName:G
+270 PRINT: PRINT "HERE IS THE FINAL GAME SCORE:"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"HERE IS THE FINAL GAME SCORE:"
+ CarriageControl:NL
+280 PRINT "I HAVE WON";C;"GAME(S)."
+ ITEMS
+ TextConstant:"I HAVE WON"
+ CarriageControl:;
+ ScalarValue:C
+ CarriageControl:;
+ TextConstant:"GAME(S)."
+ CarriageControl:NL
+290 PRINT "YOU HAVE WON";H;"GAME(S)."
+ ITEMS
+ TextConstant:"YOU HAVE WON"
+ CarriageControl:;
+ ScalarValue:H
+ CarriageControl:;
+ TextConstant:"GAME(S)."
+ CarriageControl:NL
+300 PRINT "AND";Q-(C+H);"GAME(S) ENDED IN A TIE."
+ ITEMS
+ TextConstant:"AND"
+ CarriageControl:;
+ ScalarValue:Q
+ ScalarValue:C
+ ScalarValue:H
+ BinaryOperator:+
+ BinaryOperator:-
+ CarriageControl:;
+ TextConstant:"GAME(S) ENDED IN A TIE."
+ CarriageControl:NL
+310 PRINT: PRINT "THANKS FOR PLAYING!!"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"THANKS FOR PLAYING!!"
+ CarriageControl:NL
+320 END
+ 

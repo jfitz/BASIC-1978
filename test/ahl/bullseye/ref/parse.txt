@@ -1,0 +1,353 @@
+5 PRINT TAB(32);"BULLSEYE"
+ ITEMS
+ NumericConstant:32
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"BULLSEYE"
+ CarriageControl:NL
+10 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+20 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+30 PRINT "IN THIS GAME, UP TO 20 PLAYERS THROW DARTS AT A TARGET"
+ ITEMS
+ TextConstant:"IN THIS GAME, UP TO 20 PLAYERS THROW DARTS AT A TARGET"
+ CarriageControl:NL
+40 PRINT "WITH 10, 20, 30, AND 40 POINT ZONES.  THE OBJECTIVE IS"
+ ITEMS
+ TextConstant:"WITH 10, 20, 30, AND 40 POINT ZONES.  THE OBJECTIVE IS"
+ CarriageControl:NL
+50 PRINT "TO GET 200 POINTS.": PRINT
+ ITEMS
+ TextConstant:"TO GET 200 POINTS."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+60 PRINT "THROW",TAB(20);"DESCRIPTION";TAB(45);"PROBABLE SCORE"
+ ITEMS
+ TextConstant:"THROW"
+ CarriageControl:,
+ NumericConstant:20
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"DESCRIPTION"
+ CarriageControl:;
+ NumericConstant:45
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"PROBABLE SCORE"
+ CarriageControl:NL
+70 PRINT" 1";TAB(20);"FAST OVERARM";TAB(45);"BULLSEYE OR COMPLETE MISS"
+ ITEMS
+ TextConstant:" 1"
+ CarriageControl:;
+ NumericConstant:20
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"FAST OVERARM"
+ CarriageControl:;
+ NumericConstant:45
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"BULLSEYE OR COMPLETE MISS"
+ CarriageControl:NL
+80 PRINT" 2";TAB(20);"CONTROLLED OVERARM";TAB(45);"10, 20 OR 30 POINTS"
+ ITEMS
+ TextConstant:" 2"
+ CarriageControl:;
+ NumericConstant:20
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CONTROLLED OVERARM"
+ CarriageControl:;
+ NumericConstant:45
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"10, 20 OR 30 POINTS"
+ CarriageControl:NL
+90 PRINT" 3";TAB(20);"UNDERARM";TAB(45);"ANYTHING":PRINT
+ ITEMS
+ TextConstant:" 3"
+ CarriageControl:;
+ NumericConstant:20
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"UNDERARM"
+ CarriageControl:;
+ NumericConstant:45
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"ANYTHING"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+100 DIM A$(20),S(20),W(10): M=0: R=0: FOR I=1 TO 20: S(I)=0: NEXT I
+ NumericConstant:20
+ CompoundDeclaration:A$
+ NumericConstant:20
+ CompoundDeclaration:S
+ NumericConstant:10
+ CompoundDeclaration:W
+ ScalarReference:M
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:R
+ NumericConstant:0
+ AssignmentOperator:=
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:20"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+ VariableName:I
+110 INPUT "HOW MANY PLAYERS";N: PRINT
+ ScalarReference:N
+ ITEMS
+ CarriageControl:NL
+120 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+130 PRINT "NAME OF PLAYER #";I;:INPUT A$(I)
+ ITEMS
+ TextConstant:"NAME OF PLAYER #"
+ CarriageControl:;
+ ScalarValue:I
+ CarriageControl:;
+ ScalarValue:I
+ ScalarReference:A$
+140 NEXT I
+ VariableName:I
+150 R=R+1: PRINT: PRINT "ROUND";R:PRINT "---------"
+ ScalarReference:R
+ ScalarValue:R
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"ROUND"
+ CarriageControl:;
+ ScalarValue:R
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"---------"
+ CarriageControl:NL
+160 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+170 PRINT: PRINT A$(I)"'S THROW";: INPUT T
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ ScalarValue:I
+ ScalarValue:A$
+ CarriageControl:
+ TextConstant:"'S THROW"
+ CarriageControl:;
+ ScalarReference:T
+180 IF T<0 OR T>3 THEN PRINT "INPUT 1, 2, OR 3!": GOTO 170
+ ScalarValue:T
+ NumericConstant:0
+ BinaryOperator:<
+ ScalarValue:T
+ NumericConstant:3
+ BinaryOperator:>
+ BinaryOperator:OR
+ ITEMS
+ TextConstant:"INPUT 1, 2, OR 3!"
+ CarriageControl:NL
+ LineNumber:170
+190 ON T GOTO 200, 210, 200
+ ScalarValue:T
+ LineNumber:200
+ LineNumber:210
+ LineNumber:200
+200 P1=.65: P2=.55: P3=.5: P4=.5: GOTO 230
+ ScalarReference:P1
+ NumericConstant:.65
+ AssignmentOperator:=
+ ScalarReference:P2
+ NumericConstant:.55
+ AssignmentOperator:=
+ ScalarReference:P3
+ NumericConstant:.5
+ AssignmentOperator:=
+ ScalarReference:P4
+ NumericConstant:.5
+ AssignmentOperator:=
+ LineNumber:230
+210 P1=.99: P2=.77: P3=.43: P4=.01: GOTO 230
+ ScalarReference:P1
+ NumericConstant:.99
+ AssignmentOperator:=
+ ScalarReference:P2
+ NumericConstant:.77
+ AssignmentOperator:=
+ ScalarReference:P3
+ NumericConstant:.43
+ AssignmentOperator:=
+ ScalarReference:P4
+ NumericConstant:.01
+ AssignmentOperator:=
+ LineNumber:230
+220 P1=.95: P2=.75: P3=.45: P4=.05
+ ScalarReference:P1
+ NumericConstant:.95
+ AssignmentOperator:=
+ ScalarReference:P2
+ NumericConstant:.75
+ AssignmentOperator:=
+ ScalarReference:P3
+ NumericConstant:.45
+ AssignmentOperator:=
+ ScalarReference:P4
+ NumericConstant:.05
+ AssignmentOperator:=
+230 U=RND(1)
+ ScalarReference:U
+ NumericConstant:1
+ FunctionRnd
+ AssignmentOperator:=
+240 IF U>=P1 THEN PRINT "BULLSEYE!!  40 POINTS!":B=40: GOTO 290
+ ScalarValue:U
+ ScalarValue:P1
+ BinaryOperator:>=
+ ITEMS
+ TextConstant:"BULLSEYE!!  40 POINTS!"
+ CarriageControl:NL
+ ScalarReference:B
+ NumericConstant:40
+ AssignmentOperator:=
+ LineNumber:290
+250 IF U>=P2 THEN PRINT "30-POINT ZONE!":B=30: GOTO 290
+ ScalarValue:U
+ ScalarValue:P2
+ BinaryOperator:>=
+ ITEMS
+ TextConstant:"30-POINT ZONE!"
+ CarriageControl:NL
+ ScalarReference:B
+ NumericConstant:30
+ AssignmentOperator:=
+ LineNumber:290
+260 IF U>=P3 THEN PRINT "20-POINT ZONE":B=20: GOTO 290
+ ScalarValue:U
+ ScalarValue:P3
+ BinaryOperator:>=
+ ITEMS
+ TextConstant:"20-POINT ZONE"
+ CarriageControl:NL
+ ScalarReference:B
+ NumericConstant:20
+ AssignmentOperator:=
+ LineNumber:290
+270 IF U>=P4 THEN PRINT "WHEW!  10 POINTS.":B=10: GOTO 290
+ ScalarValue:U
+ ScalarValue:P4
+ BinaryOperator:>=
+ ITEMS
+ TextConstant:"WHEW!  10 POINTS."
+ CarriageControl:NL
+ ScalarReference:B
+ NumericConstant:10
+ AssignmentOperator:=
+ LineNumber:290
+280 PRINT "MISSED THE TARGET!  TOO BAD.": B=0
+ ITEMS
+ TextConstant:"MISSED THE TARGET!  TOO BAD."
+ CarriageControl:NL
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+290 S(I)=S(I)+B: PRINT "TOTAL SCORE =";S(I): NEXT I
+ ScalarValue:I
+ ScalarReference:S
+ ScalarValue:I
+ ScalarValue:S
+ ScalarValue:B
+ BinaryOperator:+
+ AssignmentOperator:=
+ ITEMS
+ TextConstant:"TOTAL SCORE ="
+ CarriageControl:;
+ ScalarValue:I
+ ScalarValue:S
+ CarriageControl:NL
+ VariableName:I
+300 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+310 IF S(I)>=200 THEN M=M+1: W(M)=I
+ ScalarValue:I
+ ScalarValue:S
+ NumericConstant:200
+ BinaryOperator:>=
+ ScalarReference:M
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:M
+ ScalarReference:W
+ ScalarValue:I
+ AssignmentOperator:=
+320 NEXT I
+ VariableName:I
+330 IF M=0 THEN 150
+ ScalarValue:M
+ NumericConstant:0
+ BinaryOperator:=
+340 PRINT: PRINT "WE HAVE A WINNER!!": PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"WE HAVE A WINNER!!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+350 FOR I=1 TO M: PRINT A$(W(I));" SCORED";S(W(I));"POINTS.": NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:M"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ ScalarValue:I
+ ScalarValue:W
+ ScalarValue:A$
+ CarriageControl:;
+ TextConstant:" SCORED"
+ CarriageControl:;
+ ScalarValue:I
+ ScalarValue:W
+ ScalarValue:S
+ CarriageControl:;
+ TextConstant:"POINTS."
+ CarriageControl:NL
+ VariableName:I
+360 PRINT: PRINT "THANKS FOR THE GAME.": END
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"THANKS FOR THE GAME."
+ CarriageControl:NL
+ 

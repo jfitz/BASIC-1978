@@ -1,0 +1,348 @@
+2 PRINT TAB(33);"SYNONYM"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"SYNONYM"
+ CarriageControl:NL
+4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+6 PRINT: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+10 DIM R$(5),W$(10),L(30),R(30)
+ NumericConstant:5
+ CompoundDeclaration:R$
+ NumericConstant:10
+ CompoundDeclaration:W$
+ NumericConstant:30
+ CompoundDeclaration:L
+ NumericConstant:30
+ CompoundDeclaration:R
+20 R$(1)="RIGHT": R$(2)="CORRECT": R$(3)="FINE": R$(4)="GOOD!"
+ NumericConstant:1
+ ScalarReference:R$
+ TextConstant:"RIGHT"
+ AssignmentOperator:=
+ NumericConstant:2
+ ScalarReference:R$
+ TextConstant:"CORRECT"
+ AssignmentOperator:=
+ NumericConstant:3
+ ScalarReference:R$
+ TextConstant:"FINE"
+ AssignmentOperator:=
+ NumericConstant:4
+ ScalarReference:R$
+ TextConstant:"GOOD!"
+ AssignmentOperator:=
+30 R$(5)="CHECK"
+ NumericConstant:5
+ ScalarReference:R$
+ TextConstant:"CHECK"
+ AssignmentOperator:=
+70 C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+90 PRINT "A SYNONYM OF A WORD MEANS ANOTHER WORD IN THE ENGLISH"
+ ITEMS
+ TextConstant:"A SYNONYM OF A WORD MEANS ANOTHER WORD IN THE ENGLISH"
+ CarriageControl:NL
+100 PRINT "LANGUAGE WHICH HAS THE SAME OR VERY NEARLY THE SAME";
+ ITEMS
+ TextConstant:"LANGUAGE WHICH HAS THE SAME OR VERY NEARLY THE SAME"
+ CarriageControl:;
+110 PRINT " MEANING."
+ ITEMS
+ TextConstant:" MEANING."
+ CarriageControl:NL
+130 PRINT "I CHOOSE A WORD -- YOU TYPE A SYNONYM."
+ ITEMS
+ TextConstant:"I CHOOSE A WORD -- YOU TYPE A SYNONYM."
+ CarriageControl:NL
+140 PRINT "IF YOU CAN'T THINK OF A SYNONYM, TYPE THE WORD 'HELP'"
+ ITEMS
+ TextConstant:"IF YOU CAN'T THINK OF A SYNONYM, TYPE THE WORD 'HELP'"
+ CarriageControl:NL
+145 PRINT "AND I WILL TELL YOU A SYNONYM.": PRINT
+ ITEMS
+ TextConstant:"AND I WILL TELL YOU A SYNONYM."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+150 RESTORE: C=C+1: READ N
+ 
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:N
+160 IF C>N THEN 420
+ ScalarValue:C
+ ScalarValue:N
+ BinaryOperator:>
+170 N1=INT(RND(1)*N+1)
+ ScalarReference:N1
+ NumericConstant:1
+ FunctionRnd
+ ScalarValue:N
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+174 IF R(N1)=1 THEN 170
+ ScalarValue:N1
+ ScalarValue:R
+ NumericConstant:1
+ BinaryOperator:=
+176 R(N1)=1
+ ScalarValue:N1
+ ScalarReference:R
+ NumericConstant:1
+ AssignmentOperator:=
+180 FOR I=1 TO N1
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N1"]
+ step:    ["NumericConstant:1"]
+190 READ N2
+ ScalarReference:N2
+200 FOR J=1 TO N2
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N2"]
+ step:    ["NumericConstant:1"]
+210 READ W$(J)
+ ScalarValue:J
+ ScalarReference:W$
+220 NEXT J
+ VariableName:J
+230 NEXT I
+ VariableName:I
+232 FOR J=1 TO N2: L(J)=J: NEXT J
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N2"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:J
+ ScalarReference:L
+ ScalarValue:J
+ AssignmentOperator:=
+ VariableName:J
+235 L(0)=N2: G=1: PRINT
+ NumericConstant:0
+ ScalarReference:L
+ ScalarValue:N2
+ AssignmentOperator:=
+ ScalarReference:G
+ NumericConstant:1
+ AssignmentOperator:=
+ ITEMS
+ CarriageControl:NL
+237 L(G)=L(L(0)): L(0)=N2-1: PRINT
+ ScalarValue:G
+ ScalarReference:L
+ NumericConstant:0
+ ScalarValue:L
+ ScalarValue:L
+ AssignmentOperator:=
+ NumericConstant:0
+ ScalarReference:L
+ ScalarValue:N2
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+ ITEMS
+ CarriageControl:NL
+240 PRINT "     WHAT IS A SYNONYM OF ";W$(G);: INPUT A$
+ ITEMS
+ TextConstant:"     WHAT IS A SYNONYM OF "
+ CarriageControl:;
+ ScalarValue:G
+ ScalarValue:W$
+ CarriageControl:;
+ ScalarReference:A$
+250 IF A$="HELP" THEN 340
+ ScalarValue:A$
+ TextConstant:"HELP"
+ BinaryOperator:=
+260 FOR K=1 TO N2
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N2"]
+ step:    ["NumericConstant:1"]
+270 IF G=K THEN 290
+ ScalarValue:G
+ ScalarValue:K
+ BinaryOperator:=
+280 IF A$=W$(K) THEN 320
+ ScalarValue:A$
+ ScalarValue:K
+ ScalarValue:W$
+ BinaryOperator:=
+290 NEXT K
+ VariableName:K
+300 PRINT "     TRY AGAIN.": GOTO 240
+ ITEMS
+ TextConstant:"     TRY AGAIN."
+ CarriageControl:NL
+ LineNumber:240
+320 PRINT R$(INT(RND(1)*5+1)): GOTO 150
+ ITEMS
+ NumericConstant:1
+ FunctionRnd
+ NumericConstant:5
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ ScalarValue:R$
+ CarriageControl:NL
+ LineNumber:150
+340 G1=INT(RND(1)*L(0)+1)
+ ScalarReference:G1
+ NumericConstant:1
+ FunctionRnd
+ NumericConstant:0
+ ScalarValue:L
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+360 PRINT "**** A SYNONYM OF ";W$(G);" IS ";W$(L(G1));".": PRINT
+ ITEMS
+ TextConstant:"**** A SYNONYM OF "
+ CarriageControl:;
+ ScalarValue:G
+ ScalarValue:W$
+ CarriageControl:;
+ TextConstant:" IS "
+ CarriageControl:;
+ ScalarValue:G1
+ ScalarValue:L
+ ScalarValue:W$
+ CarriageControl:;
+ TextConstant:"."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+370 L(G1)=L(L(0)): L(0)=L(0)-1: GOTO 240
+ ScalarValue:G1
+ ScalarReference:L
+ NumericConstant:0
+ ScalarValue:L
+ ScalarValue:L
+ AssignmentOperator:=
+ NumericConstant:0
+ ScalarReference:L
+ NumericConstant:0
+ ScalarValue:L
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+ LineNumber:240
+420 PRINT: PRINT "SYNONYM DRILL COMPLETED.": GOTO 999
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"SYNONYM DRILL COMPLETED."
+ CarriageControl:NL
+ LineNumber:999
+500 DATA 10
+ NumericConstant:10
+510 DATA 5,"FIRST","START","BEGINNING","ONSET","INITIAL"
+ NumericConstant:5
+ TextConstant:"FIRST"
+ TextConstant:"START"
+ TextConstant:"BEGINNING"
+ TextConstant:"ONSET"
+ TextConstant:"INITIAL"
+520 DATA 5,"SIMILAR","ALIKE","SAME","LIKE","RESEMBLING"
+ NumericConstant:5
+ TextConstant:"SIMILAR"
+ TextConstant:"ALIKE"
+ TextConstant:"SAME"
+ TextConstant:"LIKE"
+ TextConstant:"RESEMBLING"
+530 DATA 5,"MODEL","PATTERN","PROTOTYPE","STANDARD","CRITERION"
+ NumericConstant:5
+ TextConstant:"MODEL"
+ TextConstant:"PATTERN"
+ TextConstant:"PROTOTYPE"
+ TextConstant:"STANDARD"
+ TextConstant:"CRITERION"
+540 DATA 5,"SMALL","INSIGNIFICANT","LITTLE","TINY","MINUTE"
+ NumericConstant:5
+ TextConstant:"SMALL"
+ TextConstant:"INSIGNIFICANT"
+ TextConstant:"LITTLE"
+ TextConstant:"TINY"
+ TextConstant:"MINUTE"
+550 DATA 6,"STOP","HALT","STAY","ARREST","CHECK","STANDSTILL"
+ NumericConstant:6
+ TextConstant:"STOP"
+ TextConstant:"HALT"
+ TextConstant:"STAY"
+ TextConstant:"ARREST"
+ TextConstant:"CHECK"
+ TextConstant:"STANDSTILL"
+560 DATA 6,"HOUSE","DWELLING","RESIDENCE","DOMICILE","LODGING"
+ NumericConstant:6
+ TextConstant:"HOUSE"
+ TextConstant:"DWELLING"
+ TextConstant:"RESIDENCE"
+ TextConstant:"DOMICILE"
+ TextConstant:"LODGING"
+565 DATA "HABITATION"
+ TextConstant:"HABITATION"
+570 DATA 7,"PIT","HOLE","HOLLOW","WELL","GULF","CHASM","ABYSS"
+ NumericConstant:7
+ TextConstant:"PIT"
+ TextConstant:"HOLE"
+ TextConstant:"HOLLOW"
+ TextConstant:"WELL"
+ TextConstant:"GULF"
+ TextConstant:"CHASM"
+ TextConstant:"ABYSS"
+580 DATA 7,"PUSH","SHOVE","THRUST","PROD","POKE","BUTT","PRESS"
+ NumericConstant:7
+ TextConstant:"PUSH"
+ TextConstant:"SHOVE"
+ TextConstant:"THRUST"
+ TextConstant:"PROD"
+ TextConstant:"POKE"
+ TextConstant:"BUTT"
+ TextConstant:"PRESS"
+590 DATA 6,"RED","ROUGE","SCARLET","CRIMSON","FLAME","RUBY"
+ NumericConstant:6
+ TextConstant:"RED"
+ TextConstant:"ROUGE"
+ TextConstant:"SCARLET"
+ TextConstant:"CRIMSON"
+ TextConstant:"FLAME"
+ TextConstant:"RUBY"
+600 DATA 7,"PAIN","SUFFERING","HURT","MISERY","DISTRESS","ACHE"
+ NumericConstant:7
+ TextConstant:"PAIN"
+ TextConstant:"SUFFERING"
+ TextConstant:"HURT"
+ TextConstant:"MISERY"
+ TextConstant:"DISTRESS"
+ TextConstant:"ACHE"
+605 DATA "DISCOMFORT"
+ TextConstant:"DISCOMFORT"
+999 END
+ 

@@ -1,0 +1,245 @@
+2 PRINT TAB(30);"DEPTH CHARGE"
+ ITEMS
+ NumericConstant:30
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"DEPTH CHARGE"
+ CarriageControl:NL
+4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+6 PRINT: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+20 INPUT "DIMENSION OF SEARCH AREA";G: PRINT
+ ScalarReference:G
+ ITEMS
+ CarriageControl:NL
+30 N=INT(LOG(G)/LOG(2))+1
+ ScalarReference:N
+ ScalarValue:G
+ FunctionLog
+ NumericConstant:2
+ FunctionLog
+ BinaryOperator:/
+ FunctionInt
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+40 PRINT "YOU ARE THE CAPTAIN OF THE DESTROYER USS COMPUTER"
+ ITEMS
+ TextConstant:"YOU ARE THE CAPTAIN OF THE DESTROYER USS COMPUTER"
+ CarriageControl:NL
+50 PRINT "AN ENEMY SUB HAS BEEN CAUSING YOU TROUBLE.  YOUR"
+ ITEMS
+ TextConstant:"AN ENEMY SUB HAS BEEN CAUSING YOU TROUBLE.  YOUR"
+ CarriageControl:NL
+60 PRINT "MISSION IS TO DESTROY IT.  YOU HAVE";N;"SHOTS."
+ ITEMS
+ TextConstant:"MISSION IS TO DESTROY IT.  YOU HAVE"
+ CarriageControl:;
+ ScalarValue:N
+ CarriageControl:;
+ TextConstant:"SHOTS."
+ CarriageControl:NL
+70 PRINT "SPECIFY DEPTH CHARGE EXPLOSION POINT WITH A"
+ ITEMS
+ TextConstant:"SPECIFY DEPTH CHARGE EXPLOSION POINT WITH A"
+ CarriageControl:NL
+80 PRINT "TRIO OF NUMBERS -- THE FIRST TWO ARE THE"
+ ITEMS
+ TextConstant:"TRIO OF NUMBERS -- THE FIRST TWO ARE THE"
+ CarriageControl:NL
+90 PRINT "SURFACE COORDINATES; THE THIRD IS THE DEPTH."
+ ITEMS
+ TextConstant:"SURFACE COORDINATES; THE THIRD IS THE DEPTH."
+ CarriageControl:NL
+100 PRINT : PRINT "GOOD LUCK !": PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"GOOD LUCK !"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+110 A=INT(G*RND(1)) : B=INT(G*RND(1)) : C=INT(G*RND(1))
+ ScalarReference:A
+ ScalarValue:G
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+ ScalarReference:B
+ ScalarValue:G
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+ ScalarReference:C
+ ScalarValue:G
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+120 FOR D=1 TO N : PRINT : PRINT "TRIAL #";D; : INPUT X,Y,Z
+ control: VariableName:D
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"TRIAL #"
+ CarriageControl:;
+ ScalarValue:D
+ CarriageControl:;
+ ScalarReference:X
+ ScalarReference:Y
+ ScalarReference:Z
+130 IF ABS(X-A)+ABS(Y-B)+ABS(Z-C)=0 THEN 300
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:-
+ FunctionAbs
+ ScalarValue:Y
+ ScalarValue:B
+ BinaryOperator:-
+ FunctionAbs
+ BinaryOperator:+
+ ScalarValue:Z
+ ScalarValue:C
+ BinaryOperator:-
+ FunctionAbs
+ BinaryOperator:+
+ NumericConstant:0
+ BinaryOperator:=
+140 GOSUB 500 : PRINT : NEXT D
+ LineNumber:500
+ ITEMS
+ CarriageControl:NL
+ VariableName:D
+200 PRINT : PRINT "YOU HAVE BEEN TORPEDOED!  ABANDON SHIP!"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"YOU HAVE BEEN TORPEDOED!  ABANDON SHIP!"
+ CarriageControl:NL
+210 PRINT "THE SUBMARINE WAS AT";A;",";B;",";C : GOTO 400
+ ITEMS
+ TextConstant:"THE SUBMARINE WAS AT"
+ CarriageControl:;
+ ScalarValue:A
+ CarriageControl:;
+ TextConstant:","
+ CarriageControl:;
+ ScalarValue:B
+ CarriageControl:;
+ TextConstant:","
+ CarriageControl:;
+ ScalarValue:C
+ CarriageControl:NL
+ LineNumber:400
+300 PRINT : PRINT "B O O M ! ! YOU FOUND IT IN";D;"TRIES!"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"B O O M ! ! YOU FOUND IT IN"
+ CarriageControl:;
+ ScalarValue:D
+ CarriageControl:;
+ TextConstant:"TRIES!"
+ CarriageControl:NL
+400 PRINT : PRINT: INPUT "ANOTHER GAME (Y OR N)";A$
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ScalarReference:A$
+410 IF A$="Y" THEN 100
+ ScalarValue:A$
+ TextConstant:"Y"
+ BinaryOperator:=
+420 PRINT "OK.  HOPE YOU ENJOYED YOURSELF." : GOTO 600
+ ITEMS
+ TextConstant:"OK.  HOPE YOU ENJOYED YOURSELF."
+ CarriageControl:NL
+ LineNumber:600
+500 PRINT "SONAR REPORTS SHOT WAS ";
+ ITEMS
+ TextConstant:"SONAR REPORTS SHOT WAS "
+ CarriageControl:;
+510 IF Y>B THEN PRINT "NORTH";
+ ScalarValue:Y
+ ScalarValue:B
+ BinaryOperator:>
+ ITEMS
+ TextConstant:"NORTH"
+ CarriageControl:;
+520 IF Y<B THEN PRINT "SOUTH";
+ ScalarValue:Y
+ ScalarValue:B
+ BinaryOperator:<
+ ITEMS
+ TextConstant:"SOUTH"
+ CarriageControl:;
+530 IF X>A THEN PRINT "EAST";
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:>
+ ITEMS
+ TextConstant:"EAST"
+ CarriageControl:;
+540 IF X<A THEN PRINT "WEST";
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:<
+ ITEMS
+ TextConstant:"WEST"
+ CarriageControl:;
+550 IF Y<>B OR X<>A THEN PRINT " AND";
+ ScalarValue:Y
+ ScalarValue:B
+ BinaryOperator:<>
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:<>
+ BinaryOperator:OR
+ ITEMS
+ TextConstant:" AND"
+ CarriageControl:;
+560 IF Z>C THEN PRINT " TOO LOW."
+ ScalarValue:Z
+ ScalarValue:C
+ BinaryOperator:>
+ ITEMS
+ TextConstant:" TOO LOW."
+ CarriageControl:NL
+570 IF Z<C THEN PRINT " TOO HIGH."
+ ScalarValue:Z
+ ScalarValue:C
+ BinaryOperator:<
+ ITEMS
+ TextConstant:" TOO HIGH."
+ CarriageControl:NL
+580 IF Z=C THEN PRINT " DEPTH OK."
+ ScalarValue:Z
+ ScalarValue:C
+ BinaryOperator:=
+ ITEMS
+ TextConstant:" DEPTH OK."
+ CarriageControl:NL
+590 RETURN
+ 
+600 END
+ 

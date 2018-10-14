@@ -1,0 +1,790 @@
+10 PRINT TAB(32);"WEEKDAY"
+ ITEMS
+ NumericConstant:32
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"WEEKDAY"
+ CarriageControl:NL
+20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+30 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+100 PRINT "WEEKDAY IS A COMPUTER DEMONSTRATION THAT"
+ ITEMS
+ TextConstant:"WEEKDAY IS A COMPUTER DEMONSTRATION THAT"
+ CarriageControl:NL
+110 PRINT"GIVES FACTS ABOUT A DATE OF INTEREST TO YOU."
+ ITEMS
+ TextConstant:"GIVES FACTS ABOUT A DATE OF INTEREST TO YOU."
+ CarriageControl:NL
+120 PRINT
+ ITEMS
+ CarriageControl:NL
+130 PRINT "ENTER TODAY'S DATE IN THE FORM: 3,24,1979  ";
+ ITEMS
+ TextConstant:"ENTER TODAY'S DATE IN THE FORM: 3,24,1979  "
+ CarriageControl:;
+140 INPUT M1,D1,Y1
+ ScalarReference:M1
+ ScalarReference:D1
+ ScalarReference:Y1
+150 REM THIS PROGRAM DETERMINES THE DAY OF THE WEEK
+ Remark:THIS PROGRAM DETERMINES THE DAY OF THE WEEK
+160 REM  FOR A DATE AFTER 1582
+ Remark: FOR A DATE AFTER 1582
+170 DEF FNA(A)=INT(A/4)
+ ScalarValue:A
+ NumericConstant:4
+ BinaryOperator:/
+ FunctionInt
+180 DIM T(12)
+ NumericConstant:12
+ CompoundDeclaration:T
+190 DEF FNB(A)=INT(A/7)
+ ScalarValue:A
+ NumericConstant:7
+ BinaryOperator:/
+ FunctionInt
+200 REM SPACE OUTPUT AND READ IN INITIAL VALUES FOR MONTHS.
+ Remark:SPACE OUTPUT AND READ IN INITIAL VALUES FOR MONTHS.
+210 FOR I= 1 TO 12
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:12"]
+ step:    ["NumericConstant:1"]
+220 READ T(I)
+ ScalarValue:I
+ ScalarReference:T
+230 NEXT I
+ VariableName:I
+240 PRINT"ENTER DAY OF BIRTH (OR OTHER DAY OF INTEREST)";
+ ITEMS
+ TextConstant:"ENTER DAY OF BIRTH (OR OTHER DAY OF INTEREST)"
+ CarriageControl:;
+250 INPUT M,D,Y
+ ScalarReference:M
+ ScalarReference:D
+ ScalarReference:Y
+260 PRINT
+ ITEMS
+ CarriageControl:NL
+270 LET I1 = INT((Y-1500)/100)
+ ScalarReference:I1
+ ScalarValue:Y
+ NumericConstant:1500
+ BinaryOperator:-
+ NumericConstant:100
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+280 REM TEST FOR DATE BEFORE CURRENT CALENDAR.
+ Remark:TEST FOR DATE BEFORE CURRENT CALENDAR.
+290 IF Y-1582 <0 THEN 1300
+ ScalarValue:Y
+ NumericConstant:1582
+ BinaryOperator:-
+ NumericConstant:0
+ BinaryOperator:<
+300 LET A = I1*5+(I1+3)/4
+ ScalarReference:A
+ ScalarValue:I1
+ NumericConstant:5
+ BinaryOperator:*
+ ScalarValue:I1
+ NumericConstant:3
+ BinaryOperator:+
+ NumericConstant:4
+ BinaryOperator:/
+ BinaryOperator:+
+ AssignmentOperator:=
+310 LET I2=INT(A-FNB(A)*7)
+ ScalarReference:I2
+ ScalarValue:A
+ ScalarValue:A
+ UserFunction
+ NumericConstant:7
+ BinaryOperator:*
+ BinaryOperator:-
+ FunctionInt
+ AssignmentOperator:=
+320 LET Y2=INT(Y/100)
+ ScalarReference:Y2
+ ScalarValue:Y
+ NumericConstant:100
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+330 LET Y3 =INT(Y-Y2*100)
+ ScalarReference:Y3
+ ScalarValue:Y
+ ScalarValue:Y2
+ NumericConstant:100
+ BinaryOperator:*
+ BinaryOperator:-
+ FunctionInt
+ AssignmentOperator:=
+340 LET A =Y3/4+Y3+D+T(M)+I2
+ ScalarReference:A
+ ScalarValue:Y3
+ NumericConstant:4
+ BinaryOperator:/
+ ScalarValue:Y3
+ BinaryOperator:+
+ ScalarValue:D
+ BinaryOperator:+
+ ScalarValue:M
+ ScalarValue:T
+ BinaryOperator:+
+ ScalarValue:I2
+ BinaryOperator:+
+ AssignmentOperator:=
+350 LET B=INT(A-FNB(A)*7)+1
+ ScalarReference:B
+ ScalarValue:A
+ ScalarValue:A
+ UserFunction
+ NumericConstant:7
+ BinaryOperator:*
+ BinaryOperator:-
+ FunctionInt
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+360 IF M > 2 THEN 470
+ ScalarValue:M
+ NumericConstant:2
+ BinaryOperator:>
+370 IF Y3 = 0 THEN 440
+ ScalarValue:Y3
+ NumericConstant:0
+ BinaryOperator:=
+380 LET T1=INT(Y-FNA(Y)*4)
+ ScalarReference:T1
+ ScalarValue:Y
+ ScalarValue:Y
+ UserFunction
+ NumericConstant:4
+ BinaryOperator:*
+ BinaryOperator:-
+ FunctionInt
+ AssignmentOperator:=
+390 IF T1 <> 0 THEN 470
+ ScalarValue:T1
+ NumericConstant:0
+ BinaryOperator:<>
+400 IF B<>0 THEN 420
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:<>
+410 LET B=6
+ ScalarReference:B
+ NumericConstant:6
+ AssignmentOperator:=
+420 LET B = B-1
+ ScalarReference:B
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+430 GOTO 470
+ LineNumber:470
+440 LET A = I1-1
+ ScalarReference:A
+ ScalarValue:I1
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+450 LET T1=INT(A-FNA(A)*4)
+ ScalarReference:T1
+ ScalarValue:A
+ ScalarValue:A
+ UserFunction
+ NumericConstant:4
+ BinaryOperator:*
+ BinaryOperator:-
+ FunctionInt
+ AssignmentOperator:=
+460 IF T1 = 0 THEN 400
+ ScalarValue:T1
+ NumericConstant:0
+ BinaryOperator:=
+470 IF B <>0 THEN 490
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:<>
+480 LET B = 7
+ ScalarReference:B
+ NumericConstant:7
+ AssignmentOperator:=
+490 IF (Y1*12+M1)*31+D1<(Y*12+M)*31+D THEN 550
+ ScalarValue:Y1
+ NumericConstant:12
+ BinaryOperator:*
+ ScalarValue:M1
+ BinaryOperator:+
+ NumericConstant:31
+ BinaryOperator:*
+ ScalarValue:D1
+ BinaryOperator:+
+ ScalarValue:Y
+ NumericConstant:12
+ BinaryOperator:*
+ ScalarValue:M
+ BinaryOperator:+
+ NumericConstant:31
+ BinaryOperator:*
+ ScalarValue:D
+ BinaryOperator:+
+ BinaryOperator:<
+500 IF (Y1*12+M1)*31+D1=(Y*12+M)*31+D THEN 530
+ ScalarValue:Y1
+ NumericConstant:12
+ BinaryOperator:*
+ ScalarValue:M1
+ BinaryOperator:+
+ NumericConstant:31
+ BinaryOperator:*
+ ScalarValue:D1
+ BinaryOperator:+
+ ScalarValue:Y
+ NumericConstant:12
+ BinaryOperator:*
+ ScalarValue:M
+ BinaryOperator:+
+ NumericConstant:31
+ BinaryOperator:*
+ ScalarValue:D
+ BinaryOperator:+
+ BinaryOperator:=
+510 PRINT M;"/";D;"/";Y;" WAS A ";
+ ITEMS
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:"/"
+ CarriageControl:;
+ ScalarValue:D
+ CarriageControl:;
+ TextConstant:"/"
+ CarriageControl:;
+ ScalarValue:Y
+ CarriageControl:;
+ TextConstant:" WAS A "
+ CarriageControl:;
+520 GOTO 570
+ LineNumber:570
+530 PRINT M;"/";D;"/";Y;" IS A ";
+ ITEMS
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:"/"
+ CarriageControl:;
+ ScalarValue:D
+ CarriageControl:;
+ TextConstant:"/"
+ CarriageControl:;
+ ScalarValue:Y
+ CarriageControl:;
+ TextConstant:" IS A "
+ CarriageControl:;
+540 GOTO 570
+ LineNumber:570
+550 PRINT M;"/";D;"/";Y;" WILL BE A ";
+ ITEMS
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:"/"
+ CarriageControl:;
+ ScalarValue:D
+ CarriageControl:;
+ TextConstant:"/"
+ CarriageControl:;
+ ScalarValue:Y
+ CarriageControl:;
+ TextConstant:" WILL BE A "
+ CarriageControl:;
+560 REM PRINT THE DAY OF THE WEEK THE DATE FALLS ON.
+ Remark:PRINT THE DAY OF THE WEEK THE DATE FALLS ON.
+570 IF B <>1 THEN 590
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:<>
+580 PRINT "SUNDAY."
+ ITEMS
+ TextConstant:"SUNDAY."
+ CarriageControl:NL
+590 IF B<>2 THEN 610
+ ScalarValue:B
+ NumericConstant:2
+ BinaryOperator:<>
+600 PRINT "MONDAY."
+ ITEMS
+ TextConstant:"MONDAY."
+ CarriageControl:NL
+610 IF B<>3 THEN 630
+ ScalarValue:B
+ NumericConstant:3
+ BinaryOperator:<>
+620 PRINT "TUESDAY."
+ ITEMS
+ TextConstant:"TUESDAY."
+ CarriageControl:NL
+630 IF B<>4 THEN 650
+ ScalarValue:B
+ NumericConstant:4
+ BinaryOperator:<>
+640 PRINT "WEDNESDAY."
+ ITEMS
+ TextConstant:"WEDNESDAY."
+ CarriageControl:NL
+650 IF B<>5 THEN 670
+ ScalarValue:B
+ NumericConstant:5
+ BinaryOperator:<>
+660 PRINT "THURSDAY."
+ ITEMS
+ TextConstant:"THURSDAY."
+ CarriageControl:NL
+670 IF B<>6 THEN 690
+ ScalarValue:B
+ NumericConstant:6
+ BinaryOperator:<>
+680 GOTO 1250
+ LineNumber:1250
+690 IF B<>7 THEN 710
+ ScalarValue:B
+ NumericConstant:7
+ BinaryOperator:<>
+700 PRINT "SATURDAY."
+ ITEMS
+ TextConstant:"SATURDAY."
+ CarriageControl:NL
+710 IF (Y1*12+M1)*31+D1=(Y*12+M)*31+D THEN 1120
+ ScalarValue:Y1
+ NumericConstant:12
+ BinaryOperator:*
+ ScalarValue:M1
+ BinaryOperator:+
+ NumericConstant:31
+ BinaryOperator:*
+ ScalarValue:D1
+ BinaryOperator:+
+ ScalarValue:Y
+ NumericConstant:12
+ BinaryOperator:*
+ ScalarValue:M
+ BinaryOperator:+
+ NumericConstant:31
+ BinaryOperator:*
+ ScalarValue:D
+ BinaryOperator:+
+ BinaryOperator:=
+720 LET I5=Y1-Y
+ ScalarReference:I5
+ ScalarValue:Y1
+ ScalarValue:Y
+ BinaryOperator:-
+ AssignmentOperator:=
+730 PRINT
+ ITEMS
+ CarriageControl:NL
+740 LET I6=M1-M
+ ScalarReference:I6
+ ScalarValue:M1
+ ScalarValue:M
+ BinaryOperator:-
+ AssignmentOperator:=
+750 LET I7=D1-D
+ ScalarReference:I7
+ ScalarValue:D1
+ ScalarValue:D
+ BinaryOperator:-
+ AssignmentOperator:=
+760 IF I7>=0 THEN 790
+ ScalarValue:I7
+ NumericConstant:0
+ BinaryOperator:>=
+770 LET I6= I6-1
+ ScalarReference:I6
+ ScalarValue:I6
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+780 LET I7=I7+30
+ ScalarReference:I7
+ ScalarValue:I7
+ NumericConstant:30
+ BinaryOperator:+
+ AssignmentOperator:=
+790 IF I6>=0 THEN 820
+ ScalarValue:I6
+ NumericConstant:0
+ BinaryOperator:>=
+800 LET I5=I5-1
+ ScalarReference:I5
+ ScalarValue:I5
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+810 LET I6=I6+12
+ ScalarReference:I6
+ ScalarValue:I6
+ NumericConstant:12
+ BinaryOperator:+
+ AssignmentOperator:=
+820 IF I5<0 THEN 1310
+ ScalarValue:I5
+ NumericConstant:0
+ BinaryOperator:<
+830 IF I7 <> 0 THEN 850
+ ScalarValue:I7
+ NumericConstant:0
+ BinaryOperator:<>
+835 IF I6 <> 0 THEN 850
+ ScalarValue:I6
+ NumericConstant:0
+ BinaryOperator:<>
+840 PRINT"***HAPPY BIRTHDAY***"
+ ITEMS
+ TextConstant:"***HAPPY BIRTHDAY***"
+ CarriageControl:NL
+850 PRINT " "," ","YEARS","MONTHS","DAYS"
+ ITEMS
+ TextConstant:" "
+ CarriageControl:,
+ TextConstant:" "
+ CarriageControl:,
+ TextConstant:"YEARS"
+ CarriageControl:,
+ TextConstant:"MONTHS"
+ CarriageControl:,
+ TextConstant:"DAYS"
+ CarriageControl:NL
+855 PRINT " "," ","-----","------","----"
+ ITEMS
+ TextConstant:" "
+ CarriageControl:,
+ TextConstant:" "
+ CarriageControl:,
+ TextConstant:"-----"
+ CarriageControl:,
+ TextConstant:"------"
+ CarriageControl:,
+ TextConstant:"----"
+ CarriageControl:NL
+860 PRINT "YOUR AGE (IF BIRTHDATE) ",I5,I6,I7
+ ITEMS
+ TextConstant:"YOUR AGE (IF BIRTHDATE) "
+ CarriageControl:,
+ ScalarValue:I5
+ CarriageControl:,
+ ScalarValue:I6
+ CarriageControl:,
+ ScalarValue:I7
+ CarriageControl:NL
+870 LET A8 = (I5*365)+(I6*30)+I7+INT(I6/2)
+ ScalarReference:A8
+ ScalarValue:I5
+ NumericConstant:365
+ BinaryOperator:*
+ ScalarValue:I6
+ NumericConstant:30
+ BinaryOperator:*
+ BinaryOperator:+
+ ScalarValue:I7
+ BinaryOperator:+
+ ScalarValue:I6
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:+
+ AssignmentOperator:=
+880 LET K5 = I5
+ ScalarReference:K5
+ ScalarValue:I5
+ AssignmentOperator:=
+890 LET K6 = I6
+ ScalarReference:K6
+ ScalarValue:I6
+ AssignmentOperator:=
+900 LET K7 = I7
+ ScalarReference:K7
+ ScalarValue:I7
+ AssignmentOperator:=
+910 REM CALCULATE RETIREMENT DATE.
+ Remark:CALCULATE RETIREMENT DATE.
+920 LET E = Y+65
+ ScalarReference:E
+ ScalarValue:Y
+ NumericConstant:65
+ BinaryOperator:+
+ AssignmentOperator:=
+930 REM CALCULATE TIME SPENT IN THE FOLLOWING FUNCTIONS.
+ Remark:CALCULATE TIME SPENT IN THE FOLLOWING FUNCTIONS.
+940 LET F = .35
+ ScalarReference:F
+ NumericConstant:.35
+ AssignmentOperator:=
+950 PRINT "YOU HAVE SLEPT ",
+ ITEMS
+ TextConstant:"YOU HAVE SLEPT "
+ CarriageControl:,
+960 GOSUB 1370
+ LineNumber:1370
+970 LET F = .17
+ ScalarReference:F
+ NumericConstant:.17
+ AssignmentOperator:=
+980 PRINT "YOU HAVE EATEN ",
+ ITEMS
+ TextConstant:"YOU HAVE EATEN "
+ CarriageControl:,
+990 GOSUB 1370
+ LineNumber:1370
+1000 LET F = .23
+ ScalarReference:F
+ NumericConstant:.23
+ AssignmentOperator:=
+1010 IF K5 > 3 THEN 1040
+ ScalarValue:K5
+ NumericConstant:3
+ BinaryOperator:>
+1020 PRINT "YOU HAVE PLAYED",
+ ITEMS
+ TextConstant:"YOU HAVE PLAYED"
+ CarriageControl:,
+1030 GOTO 1080
+ LineNumber:1080
+1040 IF K5 > 9 THEN 1070
+ ScalarValue:K5
+ NumericConstant:9
+ BinaryOperator:>
+1050 PRINT "YOU HAVE PLAYED/STUDIED",
+ ITEMS
+ TextConstant:"YOU HAVE PLAYED/STUDIED"
+ CarriageControl:,
+1060 GOTO  1080
+ LineNumber:1080
+1070 PRINT "YOU HAVE WORKED/PLAYED",
+ ITEMS
+ TextConstant:"YOU HAVE WORKED/PLAYED"
+ CarriageControl:,
+1080 GOSUB 1370
+ LineNumber:1370
+1085 GOTO 1530
+ LineNumber:1530
+1090 PRINT "YOU HAVE RELAXED ",K5,K6,K7
+ ITEMS
+ TextConstant:"YOU HAVE RELAXED "
+ CarriageControl:,
+ ScalarValue:K5
+ CarriageControl:,
+ ScalarValue:K6
+ CarriageControl:,
+ ScalarValue:K7
+ CarriageControl:NL
+1100 PRINT 
+ ITEMS
+ CarriageControl:NL
+1110 PRINT TAB(16);"***  YOU MAY RETIRE IN";E;" ***"
+ ITEMS
+ NumericConstant:16
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"***  YOU MAY RETIRE IN"
+ CarriageControl:;
+ ScalarValue:E
+ CarriageControl:;
+ TextConstant:" ***"
+ CarriageControl:NL
+1120 PRINT
+ ITEMS
+ CarriageControl:NL
+1140 PRINT
+ ITEMS
+ CarriageControl:NL
+1200 PRINT
+ ITEMS
+ CarriageControl:NL
+1210 PRINT
+ ITEMS
+ CarriageControl:NL
+1220 PRINT
+ ITEMS
+ CarriageControl:NL
+1230 PRINT
+ ITEMS
+ CarriageControl:NL
+1240 END
+ 
+1250 IF D=13 THEN 1280
+ ScalarValue:D
+ NumericConstant:13
+ BinaryOperator:=
+1260 PRINT "FRIDAY."
+ ITEMS
+ TextConstant:"FRIDAY."
+ CarriageControl:NL
+1270 GOTO 710
+ LineNumber:710
+1280 PRINT "FRIDAY THE THIRTEENTH---BEWARE!"
+ ITEMS
+ TextConstant:"FRIDAY THE THIRTEENTH---BEWARE!"
+ CarriageControl:NL
+1290 GOTO 710
+ LineNumber:710
+1300 PRINT "NOT PREPARED TO GIVE DAY OF WEEK PRIOR TO MDLXXXII. "
+ ITEMS
+ TextConstant:"NOT PREPARED TO GIVE DAY OF WEEK PRIOR TO MDLXXXII. "
+ CarriageControl:NL
+1310 GOTO 1140
+ LineNumber:1140
+1320 REM TABLE OF VALUES FOR THE MONTHS TO BE USED IN CALCULATIONS.
+ Remark:TABLE OF VALUES FOR THE MONTHS TO BE USED IN CALCULATIONS.
+1330 DATA 0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5
+ NumericConstant:0
+ NumericConstant:3
+ NumericConstant:3
+ NumericConstant:6
+ NumericConstant:1
+ NumericConstant:4
+ NumericConstant:6
+ NumericConstant:2
+ NumericConstant:5
+ NumericConstant:0
+ NumericConstant:3
+ NumericConstant:5
+1340 REM THIS IS THE CURRENT DATE USED IN THE CALCULATIONS.
+ Remark:THIS IS THE CURRENT DATE USED IN THE CALCULATIONS.
+1350 REM THIS IS THE DATE TO BE CALCULATED ON.
+ Remark:THIS IS THE DATE TO BE CALCULATED ON.
+1360 REM CALCULATE TIME IN YEARS, MONTHS, AND DAYS
+ Remark:CALCULATE TIME IN YEARS, MONTHS, AND DAYS
+1370 LET K1=INT(F*A8)
+ ScalarReference:K1
+ ScalarValue:F
+ ScalarValue:A8
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+1380 LET I5 = INT(K1/365)
+ ScalarReference:I5
+ ScalarValue:K1
+ NumericConstant:365
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+1390 LET K1 = K1- (I5*365)
+ ScalarReference:K1
+ ScalarValue:K1
+ ScalarValue:I5
+ NumericConstant:365
+ BinaryOperator:*
+ BinaryOperator:-
+ AssignmentOperator:=
+1400 LET I6 = INT(K1/30)
+ ScalarReference:I6
+ ScalarValue:K1
+ NumericConstant:30
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+1410 LET I7 = K1 -(I6*30)
+ ScalarReference:I7
+ ScalarValue:K1
+ ScalarValue:I6
+ NumericConstant:30
+ BinaryOperator:*
+ BinaryOperator:-
+ AssignmentOperator:=
+1420 LET K5 = K5-I5
+ ScalarReference:K5
+ ScalarValue:K5
+ ScalarValue:I5
+ BinaryOperator:-
+ AssignmentOperator:=
+1430 LET K6 =K6-I6
+ ScalarReference:K6
+ ScalarValue:K6
+ ScalarValue:I6
+ BinaryOperator:-
+ AssignmentOperator:=
+1440 LET K7 = K7-I7
+ ScalarReference:K7
+ ScalarValue:K7
+ ScalarValue:I7
+ BinaryOperator:-
+ AssignmentOperator:=
+1450 IF K7>=0 THEN 1480
+ ScalarValue:K7
+ NumericConstant:0
+ BinaryOperator:>=
+1460 LET K7=K7+30
+ ScalarReference:K7
+ ScalarValue:K7
+ NumericConstant:30
+ BinaryOperator:+
+ AssignmentOperator:=
+1470 LET K6=K6-1
+ ScalarReference:K6
+ ScalarValue:K6
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+1480 IF K6>0 THEN 1510
+ ScalarValue:K6
+ NumericConstant:0
+ BinaryOperator:>
+1490 LET K6=K6+12
+ ScalarReference:K6
+ ScalarValue:K6
+ NumericConstant:12
+ BinaryOperator:+
+ AssignmentOperator:=
+1500 LET K5=K5-1
+ ScalarReference:K5
+ ScalarValue:K5
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+1510 PRINT I5,I6,I7
+ ITEMS
+ ScalarValue:I5
+ CarriageControl:,
+ ScalarValue:I6
+ CarriageControl:,
+ ScalarValue:I7
+ CarriageControl:NL
+1520 RETURN
+ 
+1530 IF K6=12 THEN 1550
+ ScalarValue:K6
+ NumericConstant:12
+ BinaryOperator:=
+1540 GOTO 1090
+ LineNumber:1090
+1550 LET K5=K5+1
+ ScalarReference:K5
+ ScalarValue:K5
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1560 LET K6=0
+ ScalarReference:K6
+ NumericConstant:0
+ AssignmentOperator:=
+1570 GOTO 1090
+ LineNumber:1090
+1580 REM
+ Remark:
+1590 END
+ 

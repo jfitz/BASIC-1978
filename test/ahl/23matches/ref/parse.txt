@@ -1,0 +1,256 @@
+20 PRINT TAB(31);"23 MATCHES"
+ ITEMS
+ NumericConstant:31
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"23 MATCHES"
+ CarriageControl:NL
+30 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+40 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+80 PRINT " THIS IS A GAME CALLED '23 MATCHES'."
+ ITEMS
+ TextConstant:" THIS IS A GAME CALLED '23 MATCHES'."
+ CarriageControl:NL
+90 PRINT
+ ITEMS
+ CarriageControl:NL
+100 PRINT "WHEN IT IS YOUR TURN, YOU MAY TAKE ONE, TWO, OR THREE"
+ ITEMS
+ TextConstant:"WHEN IT IS YOUR TURN, YOU MAY TAKE ONE, TWO, OR THREE"
+ CarriageControl:NL
+110 PRINT "MATCHES. THE OBJECT OF THE GAME IS NOT TO HAVE TO TAKE"
+ ITEMS
+ TextConstant:"MATCHES. THE OBJECT OF THE GAME IS NOT TO HAVE TO TAKE"
+ CarriageControl:NL
+120 PRINT "THE LAST MATCH."
+ ITEMS
+ TextConstant:"THE LAST MATCH."
+ CarriageControl:NL
+130 PRINT
+ ITEMS
+ CarriageControl:NL
+140 PRINT "LET'S FLIP A COIN TO SEE WHO GOES FIRST."
+ ITEMS
+ TextConstant:"LET'S FLIP A COIN TO SEE WHO GOES FIRST."
+ CarriageControl:NL
+150 PRINT "IF IT COMES UP HEADS, I WILL WIN THE TOSS."
+ ITEMS
+ TextConstant:"IF IT COMES UP HEADS, I WILL WIN THE TOSS."
+ CarriageControl:NL
+155 PRINT
+ ITEMS
+ CarriageControl:NL
+160 REM
+ Remark:
+165 N = 23
+ ScalarReference:N
+ NumericConstant:23
+ AssignmentOperator:=
+170 Q = INT(2*RND(5))
+ ScalarReference:Q
+ NumericConstant:2
+ NumericConstant:5
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+180 IF Q = 1 THEN 210
+ ScalarValue:Q
+ NumericConstant:1
+ BinaryOperator:=
+190 PRINT "TAILS! YOU GO FIRST. "
+ ITEMS
+ TextConstant:"TAILS! YOU GO FIRST. "
+ CarriageControl:NL
+195 PRINT
+ ITEMS
+ CarriageControl:NL
+200 GOTO 300
+ LineNumber:300
+210 PRINT "HEADS! I WIN! HA! HA!"
+ ITEMS
+ TextConstant:"HEADS! I WIN! HA! HA!"
+ CarriageControl:NL
+220 PRINT "PREPARE TO LOSE, MEATBALL-NOSE!!"
+ ITEMS
+ TextConstant:"PREPARE TO LOSE, MEATBALL-NOSE!!"
+ CarriageControl:NL
+230 PRINT
+ ITEMS
+ CarriageControl:NL
+250 PRINT "I TAKE 2 MATCHES"
+ ITEMS
+ TextConstant:"I TAKE 2 MATCHES"
+ CarriageControl:NL
+260 N = N -2
+ ScalarReference:N
+ ScalarValue:N
+ NumericConstant:2
+ BinaryOperator:-
+ AssignmentOperator:=
+270 PRINT "THE NUMBER OF MATCHES IS NOW" N
+ ITEMS
+ TextConstant:"THE NUMBER OF MATCHES IS NOW"
+ CarriageControl:
+ ScalarValue:N
+ CarriageControl:NL
+280 PRINT
+ ITEMS
+ CarriageControl:NL
+290 PRINT "YOUR TURN -- YOU MAY TAKE 1, 2 OR 3 MATCHES."
+ ITEMS
+ TextConstant:"YOUR TURN -- YOU MAY TAKE 1, 2 OR 3 MATCHES."
+ CarriageControl:NL
+300 PRINT "HOW MANY DO YOU WISH TO REMOVE",
+ ITEMS
+ TextConstant:"HOW MANY DO YOU WISH TO REMOVE"
+ CarriageControl:,
+310 INPUT K
+ ScalarReference:K
+320 IF K > 3 THEN 430
+ ScalarValue:K
+ NumericConstant:3
+ BinaryOperator:>
+330 IF K <= 0 THEN 430
+ ScalarValue:K
+ NumericConstant:0
+ BinaryOperator:<=
+340 N = N - K
+ ScalarReference:N
+ ScalarValue:N
+ ScalarValue:K
+ BinaryOperator:-
+ AssignmentOperator:=
+350 PRINT "THERE ARE NOW";N;"MATCHES REMAINING."
+ ITEMS
+ TextConstant:"THERE ARE NOW"
+ CarriageControl:;
+ ScalarValue:N
+ CarriageControl:;
+ TextConstant:"MATCHES REMAINING."
+ CarriageControl:NL
+351 IF N = 4 THEN 381
+ ScalarValue:N
+ NumericConstant:4
+ BinaryOperator:=
+352 IF N = 3 THEN 383
+ ScalarValue:N
+ NumericConstant:3
+ BinaryOperator:=
+353 IF N = 2 THEN 385
+ ScalarValue:N
+ NumericConstant:2
+ BinaryOperator:=
+360 IF N <= 1 THEN  530
+ ScalarValue:N
+ NumericConstant:1
+ BinaryOperator:<=
+370 Z = 4 - K
+ ScalarReference:Z
+ NumericConstant:4
+ ScalarValue:K
+ BinaryOperator:-
+ AssignmentOperator:=
+372 GOTO 390
+ LineNumber:390
+380 PRINT
+ ITEMS
+ CarriageControl:NL
+381 Z = 3
+ ScalarReference:Z
+ NumericConstant:3
+ AssignmentOperator:=
+382 GOTO 390
+ LineNumber:390
+383 Z = 2
+ ScalarReference:Z
+ NumericConstant:2
+ AssignmentOperator:=
+384 GOTO 390
+ LineNumber:390
+385 Z = 1
+ ScalarReference:Z
+ NumericConstant:1
+ AssignmentOperator:=
+390 PRINT "MY TURN ! I REMOVE" Z "MATCHES"
+ ITEMS
+ TextConstant:"MY TURN ! I REMOVE"
+ CarriageControl:
+ ScalarValue:Z
+ CarriageControl:
+ TextConstant:"MATCHES"
+ CarriageControl:NL
+400 N = N - Z
+ ScalarReference:N
+ ScalarValue:N
+ ScalarValue:Z
+ BinaryOperator:-
+ AssignmentOperator:=
+410 IF N <= 1 THEN 470
+ ScalarValue:N
+ NumericConstant:1
+ BinaryOperator:<=
+420 GOTO 270
+ LineNumber:270
+430 PRINT "VERY FUNNY! DUMMY!"
+ ITEMS
+ TextConstant:"VERY FUNNY! DUMMY!"
+ CarriageControl:NL
+440 PRINT "DO YOU WANT TO PLAY OR GOOF AROUND?"
+ ITEMS
+ TextConstant:"DO YOU WANT TO PLAY OR GOOF AROUND?"
+ CarriageControl:NL
+450 PRINT "NOW, HOW MANY MATCHES DO YOU WANT",
+ ITEMS
+ TextConstant:"NOW, HOW MANY MATCHES DO YOU WANT"
+ CarriageControl:,
+460 GOTO 310
+ LineNumber:310
+470 PRINT
+ ITEMS
+ CarriageControl:NL
+480 PRINT"YOU POOR BOOB! YOU TOOK THE LAST MATCH! I GOTCHA!!"
+ ITEMS
+ TextConstant:"YOU POOR BOOB! YOU TOOK THE LAST MATCH! I GOTCHA!!"
+ CarriageControl:NL
+490 PRINT "HA ! HA ! I BEAT YOU !!!"
+ ITEMS
+ TextConstant:"HA ! HA ! I BEAT YOU !!!"
+ CarriageControl:NL
+500 PRINT
+ ITEMS
+ CarriageControl:NL
+510 PRINT "GOOD BYE LOSER!"
+ ITEMS
+ TextConstant:"GOOD BYE LOSER!"
+ CarriageControl:NL
+520 GOTO 560
+ LineNumber:560
+530 PRINT "YOU WON, FLOPPY EARS !"
+ ITEMS
+ TextConstant:"YOU WON, FLOPPY EARS !"
+ CarriageControl:NL
+540 PRINT "THINK YOU'RE PRETTY SMART !"
+ ITEMS
+ TextConstant:"THINK YOU'RE PRETTY SMART !"
+ CarriageControl:NL
+550 PRINT "LETS PLAY AGAIN AND I'LL BLOW YOUR SHOES OFF !!"
+ ITEMS
+ TextConstant:"LETS PLAY AGAIN AND I'LL BLOW YOUR SHOES OFF !!"
+ CarriageControl:NL
+560 STOP
+ 
+570 END
+ 

@@ -1,0 +1,306 @@
+10 PRINT TAB(32);"REVERSE"
+ ITEMS
+ NumericConstant:32
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"REVERSE"
+ CarriageControl:NL
+20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+30 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+100 PRINT "REVERSE -- A GAME OF SKILL": PRINT
+ ITEMS
+ TextConstant:"REVERSE -- A GAME OF SKILL"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+130 DIM A(20)
+ NumericConstant:20
+ CompoundDeclaration:A
+140 REM *** N=NUMBER OF NUMBERS
+ Remark:*** N=NUMBER OF NUMBERS
+150 N=9
+ ScalarReference:N
+ NumericConstant:9
+ AssignmentOperator:=
+160 PRINT "DO YOU WANT THE RULES";
+ ITEMS
+ TextConstant:"DO YOU WANT THE RULES"
+ CarriageControl:;
+170 INPUT A$
+ ScalarReference:A$
+180 IF A$="NO" THEN 210
+ ScalarValue:A$
+ TextConstant:"NO"
+ BinaryOperator:=
+190 GOSUB 710
+ LineNumber:710
+200 REM *** MAKE A RANDOM LIST A(1) TO A(N)
+ Remark:*** MAKE A RANDOM LIST A(1) TO A(N)
+210 A(1)=INT((N-1)*RND(1)+2)
+ NumericConstant:1
+ ScalarReference:A
+ ScalarValue:N
+ NumericConstant:1
+ BinaryOperator:-
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:2
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+220 FOR K=2 TO N
+ control: VariableName:K
+ start:   ["NumericConstant:2"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+230 A(K)=INT(N*RND(1)+1)
+ ScalarValue:K
+ ScalarReference:A
+ ScalarValue:N
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+240 FOR J=1 TO K-1
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:K", "NumericConstant:1", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+250 IF A(K)=A(J) THEN 230
+ ScalarValue:K
+ ScalarValue:A
+ ScalarValue:J
+ ScalarValue:A
+ BinaryOperator:=
+260 NEXT J:NEXT K
+ VariableName:J
+ VariableName:K
+280 REM *** PRINT ORIGINAL LIST AND START GAME
+ Remark:*** PRINT ORIGINAL LIST AND START GAME
+290 PRINT: PRINT "HERE WE GO ... THE LIST IS:"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"HERE WE GO ... THE LIST IS:"
+ CarriageControl:NL
+310 T=0
+ ScalarReference:T
+ NumericConstant:0
+ AssignmentOperator:=
+320 GOSUB 610
+ LineNumber:610
+330 PRINT "HOW MANY SHALL I REVERSE";
+ ITEMS
+ TextConstant:"HOW MANY SHALL I REVERSE"
+ CarriageControl:;
+340 INPUT R
+ ScalarReference:R
+350 IF R=0 THEN 520
+ ScalarValue:R
+ NumericConstant:0
+ BinaryOperator:=
+360 IF R<=N THEN 390
+ ScalarValue:R
+ ScalarValue:N
+ BinaryOperator:<=
+370 PRINT "OOPS! TOO MANY! I CAN REVERSE AT MOST";N:GOTO 330
+ ITEMS
+ TextConstant:"OOPS! TOO MANY! I CAN REVERSE AT MOST"
+ CarriageControl:;
+ ScalarValue:N
+ CarriageControl:NL
+ LineNumber:330
+390 T=T+1
+ ScalarReference:T
+ ScalarValue:T
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+400 REM *** REVERSE R NUMBERS AND PRINT NEW LIST
+ Remark:*** REVERSE R NUMBERS AND PRINT NEW LIST
+410 FOR K=1 TO INT(R/2)
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:R", "NumericConstant:2", "BinaryOperator:/", "FunctionInt"]
+ step:    ["NumericConstant:1"]
+420 Z=A(K)
+ ScalarReference:Z
+ ScalarValue:K
+ ScalarValue:A
+ AssignmentOperator:=
+430 A(K)=A(R-K+1)
+ ScalarValue:K
+ ScalarReference:A
+ ScalarValue:R
+ ScalarValue:K
+ BinaryOperator:-
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:A
+ AssignmentOperator:=
+440 A(R-K+1)=Z
+ ScalarValue:R
+ ScalarValue:K
+ BinaryOperator:-
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:A
+ ScalarValue:Z
+ AssignmentOperator:=
+450 NEXT K
+ VariableName:K
+460 GOSUB 610
+ LineNumber:610
+470 REM *** CHECK FOR A WIN
+ Remark:*** CHECK FOR A WIN
+480 FOR K=1 TO N
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+490 IF A(K)<>K THEN 330
+ ScalarValue:K
+ ScalarValue:A
+ ScalarValue:K
+ BinaryOperator:<>
+500 NEXT K
+ VariableName:K
+510 PRINT "YOU WON IT IN";T;"MOVES!!!":PRINT
+ ITEMS
+ TextConstant:"YOU WON IT IN"
+ CarriageControl:;
+ ScalarValue:T
+ CarriageControl:;
+ TextConstant:"MOVES!!!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+520 PRINT
+ ITEMS
+ CarriageControl:NL
+530 PRINT "TRY AGAIN (YES OR NO)";
+ ITEMS
+ TextConstant:"TRY AGAIN (YES OR NO)"
+ CarriageControl:;
+540 INPUT A$
+ ScalarReference:A$
+550 IF A$="YES" THEN 210
+ ScalarValue:A$
+ TextConstant:"YES"
+ BinaryOperator:=
+560 PRINT: PRINT "O.K. HOPE YOU HAD FUN!!":GOTO 999
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"O.K. HOPE YOU HAD FUN!!"
+ CarriageControl:NL
+ LineNumber:999
+600 REM *** SUBROUTINE TO PRINT LIST
+ Remark:*** SUBROUTINE TO PRINT LIST
+610 PRINT:FOR K=1 TO N:PRINT A(K);:NEXT K
+ ITEMS
+ CarriageControl:NL
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ ScalarValue:K
+ ScalarValue:A
+ CarriageControl:;
+ VariableName:K
+650 PRINT:PRINT:RETURN
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ 
+700 REM *** SUBROUTINE TO PRINT THE RULES
+ Remark:*** SUBROUTINE TO PRINT THE RULES
+710 PRINT:PRINT "THIS IS THE GAME OF 'REVERSE'.  TO WIN, ALL YOU HAVE"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"THIS IS THE GAME OF 'REVERSE'.  TO WIN, ALL YOU HAVE"
+ CarriageControl:NL
+720 PRINT "TO DO IS ARRANGE A LIST OF NUMBERS (1 THROUGH";N;")"
+ ITEMS
+ TextConstant:"TO DO IS ARRANGE A LIST OF NUMBERS (1 THROUGH"
+ CarriageControl:;
+ ScalarValue:N
+ CarriageControl:;
+ TextConstant:")"
+ CarriageControl:NL
+730 PRINT "IN NUMERICAL ORDER FROM LEFT TO RIGHT.  TO MOVE, YOU"
+ ITEMS
+ TextConstant:"IN NUMERICAL ORDER FROM LEFT TO RIGHT.  TO MOVE, YOU"
+ CarriageControl:NL
+740 PRINT "TELL ME HOW MANY NUMBERS (COUNTING FROM THE LEFT) TO"
+ ITEMS
+ TextConstant:"TELL ME HOW MANY NUMBERS (COUNTING FROM THE LEFT) TO"
+ CarriageControl:NL
+750 PRINT "REVERSE.  FOR EXAMPLE, IF THE CURRENT LIST IS:"
+ ITEMS
+ TextConstant:"REVERSE.  FOR EXAMPLE, IF THE CURRENT LIST IS:"
+ CarriageControl:NL
+760 PRINT:PRINT "2 3 4 5 1 6 7 8 9"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"2 3 4 5 1 6 7 8 9"
+ CarriageControl:NL
+770 PRINT:PRINT "AND YOU REVERSE 4, THE RESULT WILL BE:"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"AND YOU REVERSE 4, THE RESULT WILL BE:"
+ CarriageControl:NL
+780 PRINT:PRINT "5 4 3 2 1 6 7 8 9"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"5 4 3 2 1 6 7 8 9"
+ CarriageControl:NL
+790 PRINT:PRINT "NOW IF YOU REVERSE 5, YOU WIN!"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"NOW IF YOU REVERSE 5, YOU WIN!"
+ CarriageControl:NL
+800 PRINT:PRINT "1 2 3 4 5 6 7 8 9":PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"1 2 3 4 5 6 7 8 9"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+810 PRINT "NO DOUBT YOU WILL LIKE THIS GAME, BUT"
+ ITEMS
+ TextConstant:"NO DOUBT YOU WILL LIKE THIS GAME, BUT"
+ CarriageControl:NL
+820 PRINT "IF YOU WANT TO QUIT, REVERSE 0 (ZERO).":PRINT: RETURN
+ ITEMS
+ TextConstant:"IF YOU WANT TO QUIT, REVERSE 0 (ZERO)."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ 
+999 END
+ 

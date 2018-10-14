@@ -1,0 +1,412 @@
+2 PRINT TAB(30);"ONE CHECK"
+ ITEMS
+ NumericConstant:30
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"ONE CHECK"
+ CarriageControl:NL
+4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+6 PRINT: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+8 DIM A(64)
+ NumericConstant:64
+ CompoundDeclaration:A
+10 PRINT "SOLITAIRE CHECKER PUZZLE BY DAVID AHL"
+ ITEMS
+ TextConstant:"SOLITAIRE CHECKER PUZZLE BY DAVID AHL"
+ CarriageControl:NL
+15 PRINT
+ ITEMS
+ CarriageControl:NL
+20 PRINT "48 CHECKERS ARE PLACED ON THE 2 OUTSIDE SPACES OF A"
+ ITEMS
+ TextConstant:"48 CHECKERS ARE PLACED ON THE 2 OUTSIDE SPACES OF A"
+ CarriageControl:NL
+25 PRINT "STANDARD 64-SQUARE CHECKERBOARD.  THE OBJECT IS TO"
+ ITEMS
+ TextConstant:"STANDARD 64-SQUARE CHECKERBOARD.  THE OBJECT IS TO"
+ CarriageControl:NL
+30 PRINT "REMOVE AS MANY CHECKERS AS POSSIBLE BY DIAGONAL JUMPS"
+ ITEMS
+ TextConstant:"REMOVE AS MANY CHECKERS AS POSSIBLE BY DIAGONAL JUMPS"
+ CarriageControl:NL
+35 PRINT "(AS IN STANDARD CHECKERS).  USE THE NUMBERED BOARD TO"
+ ITEMS
+ TextConstant:"(AS IN STANDARD CHECKERS).  USE THE NUMBERED BOARD TO"
+ CarriageControl:NL
+40 PRINT "INDICATE THE SQUARE YOU WISH TO JUMP FROM AND TO.  ON"
+ ITEMS
+ TextConstant:"INDICATE THE SQUARE YOU WISH TO JUMP FROM AND TO.  ON"
+ CarriageControl:NL
+45 PRINT "THE BOARD PRINTED OUT ON EACH TURN '1' INDICATES A"
+ ITEMS
+ TextConstant:"THE BOARD PRINTED OUT ON EACH TURN '1' INDICATES A"
+ CarriageControl:NL
+50 PRINT "CHECKER AND '0' AN EMPTY SQUARE.  WHEN YOU HAVE NO"
+ ITEMS
+ TextConstant:"CHECKER AND '0' AN EMPTY SQUARE.  WHEN YOU HAVE NO"
+ CarriageControl:NL
+55 PRINT "POSSIBLE JUMPS REMAINING, INPUT A '0' IN RESPONSE TO"
+ ITEMS
+ TextConstant:"POSSIBLE JUMPS REMAINING, INPUT A '0' IN RESPONSE TO"
+ CarriageControl:NL
+60 PRINT "QUESTION 'JUMP FROM ?'"
+ ITEMS
+ TextConstant:"QUESTION 'JUMP FROM ?'"
+ CarriageControl:NL
+62 PRINT
+ ITEMS
+ CarriageControl:NL
+63 PRINT "HERE IS THE NUMERICAL BOARD:"
+ ITEMS
+ TextConstant:"HERE IS THE NUMERICAL BOARD:"
+ CarriageControl:NL
+66 PRINT
+ ITEMS
+ CarriageControl:NL
+70 FOR J=1 TO 57 STEP 8
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:57"]
+ step:    ["NumericConstant:8"]
+74 PRINT J;TAB(4);J+1;TAB(8);J+2;TAB(12);J+3;TAB(16);J+4;TAB(20);J+5;
+ ITEMS
+ ScalarValue:J
+ CarriageControl:;
+ NumericConstant:4
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:J
+ NumericConstant:1
+ BinaryOperator:+
+ CarriageControl:;
+ NumericConstant:8
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:J
+ NumericConstant:2
+ BinaryOperator:+
+ CarriageControl:;
+ NumericConstant:12
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:J
+ NumericConstant:3
+ BinaryOperator:+
+ CarriageControl:;
+ NumericConstant:16
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:J
+ NumericConstant:4
+ BinaryOperator:+
+ CarriageControl:;
+ NumericConstant:20
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:J
+ NumericConstant:5
+ BinaryOperator:+
+ CarriageControl:;
+75 PRINT TAB(24);J+6;TAB(28);J+7
+ ITEMS
+ NumericConstant:24
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:J
+ NumericConstant:6
+ BinaryOperator:+
+ CarriageControl:;
+ NumericConstant:28
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:J
+ NumericConstant:7
+ BinaryOperator:+
+ CarriageControl:NL
+76 NEXT J
+ VariableName:J
+77 PRINT
+ ITEMS
+ CarriageControl:NL
+78 PRINT "AND HERE IS THE OPENING POSITION OF THE CHECKERS."
+ ITEMS
+ TextConstant:"AND HERE IS THE OPENING POSITION OF THE CHECKERS."
+ CarriageControl:NL
+79 PRINT
+ ITEMS
+ CarriageControl:NL
+80 FOR J=1 TO 64
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:64"]
+ step:    ["NumericConstant:1"]
+82 A(J)=1
+ ScalarValue:J
+ ScalarReference:A
+ NumericConstant:1
+ AssignmentOperator:=
+84 NEXT J
+ VariableName:J
+86 FOR J=19 TO 43 STEP 8
+ control: VariableName:J
+ start:   ["NumericConstant:19"]
+ end:     ["NumericConstant:43"]
+ step:    ["NumericConstant:8"]
+88 FOR I=J TO J+3
+ control: VariableName:I
+ start:   ["ScalarValue:J"]
+ end:     ["ScalarValue:J", "NumericConstant:3", "BinaryOperator:+"]
+ step:    ["NumericConstant:1"]
+90 A(I)=0
+ ScalarValue:I
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+92 NEXT I
+ VariableName:I
+94 NEXT J
+ VariableName:J
+96 M=0
+ ScalarReference:M
+ NumericConstant:0
+ AssignmentOperator:=
+98 GOTO 340
+ LineNumber:340
+100 INPUT "JUMP FROM";F
+ ScalarReference:F
+105 IF F=0 THEN 500
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:=
+110 INPUT "TO";T
+ ScalarReference:T
+112 PRINT
+ ITEMS
+ CarriageControl:NL
+118 REM *** CHECK LEGALITY OF MOVE
+ Remark:*** CHECK LEGALITY OF MOVE
+120 F1=INT((F-1)/8)
+ ScalarReference:F1
+ ScalarValue:F
+ NumericConstant:1
+ BinaryOperator:-
+ NumericConstant:8
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+130 F2=F-8*F1
+ ScalarReference:F2
+ ScalarValue:F
+ NumericConstant:8
+ ScalarValue:F1
+ BinaryOperator:*
+ BinaryOperator:-
+ AssignmentOperator:=
+140 T1=INT((T-1)/8)
+ ScalarReference:T1
+ ScalarValue:T
+ NumericConstant:1
+ BinaryOperator:-
+ NumericConstant:8
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+150 T2=T-8*T1
+ ScalarReference:T2
+ ScalarValue:T
+ NumericConstant:8
+ ScalarValue:T1
+ BinaryOperator:*
+ BinaryOperator:-
+ AssignmentOperator:=
+160 IF F1>7 THEN 230
+ ScalarValue:F1
+ NumericConstant:7
+ BinaryOperator:>
+170 IF T1>7 THEN 230
+ ScalarValue:T1
+ NumericConstant:7
+ BinaryOperator:>
+180 IF F2>8 THEN 230
+ ScalarValue:F2
+ NumericConstant:8
+ BinaryOperator:>
+190 IF T2>8 THEN 230
+ ScalarValue:T2
+ NumericConstant:8
+ BinaryOperator:>
+200 IF ABS(F1-T1)<>2 THEN 230
+ ScalarValue:F1
+ ScalarValue:T1
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:2
+ BinaryOperator:<>
+210 IF ABS(F2-T2)<>2 THEN 230
+ ScalarValue:F2
+ ScalarValue:T2
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:2
+ BinaryOperator:<>
+212 IF A((T+F)/2)=0 THEN 230
+ ScalarValue:T
+ ScalarValue:F
+ BinaryOperator:+
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+215 IF A(F)=0 THEN 230
+ ScalarValue:F
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+220 IF A(T)=1 THEN 230
+ ScalarValue:T
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:=
+225 GOTO 250
+ LineNumber:250
+230 PRINT "ILLEGAL MOVE.  TRY AGAIN..."
+ ITEMS
+ TextConstant:"ILLEGAL MOVE.  TRY AGAIN..."
+ CarriageControl:NL
+240 GOTO 100
+ LineNumber:100
+245 REM *** UPDATE BOARD
+ Remark:*** UPDATE BOARD
+250 A(T)=1
+ ScalarValue:T
+ ScalarReference:A
+ NumericConstant:1
+ AssignmentOperator:=
+260 A(F)=0
+ ScalarValue:F
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+270 A((T+F)/2)=0
+ ScalarValue:T
+ ScalarValue:F
+ BinaryOperator:+
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+290 M=M+1
+ ScalarReference:M
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+310 REM *** PRINT BOARD
+ Remark:*** PRINT BOARD
+340 FOR J=1 TO 57 STEP 8
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:57"]
+ step:    ["NumericConstant:8"]
+350 FOR I=J TO J+7
+ control: VariableName:I
+ start:   ["ScalarValue:J"]
+ end:     ["ScalarValue:J", "NumericConstant:7", "BinaryOperator:+"]
+ step:    ["NumericConstant:1"]
+360 PRINT A(I);
+ ITEMS
+ ScalarValue:I
+ ScalarValue:A
+ CarriageControl:;
+370 NEXT I
+ VariableName:I
+380 PRINT
+ ITEMS
+ CarriageControl:NL
+390 NEXT J
+ VariableName:J
+400 PRINT
+ ITEMS
+ CarriageControl:NL
+410 GOTO 100
+ LineNumber:100
+490 REM *** END GAME SUMMARY
+ Remark:*** END GAME SUMMARY
+500 S=0
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+510 FOR I=1 TO 64
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:64"]
+ step:    ["NumericConstant:1"]
+520 S=S+A(I)
+ ScalarReference:S
+ ScalarValue:S
+ ScalarValue:I
+ ScalarValue:A
+ BinaryOperator:+
+ AssignmentOperator:=
+530 NEXT I
+ VariableName:I
+540 PRINT:PRINT "YOU MADE";M;"JUMPS AND HAD";S;"PIECES"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"YOU MADE"
+ CarriageControl:;
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:"JUMPS AND HAD"
+ CarriageControl:;
+ ScalarValue:S
+ CarriageControl:;
+ TextConstant:"PIECES"
+ CarriageControl:NL
+550 PRINT "REMAINING ON THE BOARD."
+ ITEMS
+ TextConstant:"REMAINING ON THE BOARD."
+ CarriageControl:NL
+560 PRINT
+ ITEMS
+ CarriageControl:NL
+562 INPUT "TRY AGAIN";A$
+ ScalarReference:A$
+570 IF A$="YES" THEN 70
+ ScalarValue:A$
+ TextConstant:"YES"
+ BinaryOperator:=
+575 IF A$="NO" THEN 600
+ ScalarValue:A$
+ TextConstant:"NO"
+ BinaryOperator:=
+580 PRINT "PLEASE ANSWER 'YES' OR 'NO'."
+ ITEMS
+ TextConstant:"PLEASE ANSWER 'YES' OR 'NO'."
+ CarriageControl:NL
+590 GOTO 562
+ LineNumber:562
+600 PRINT
+ ITEMS
+ CarriageControl:NL
+610 PRINT "O.K.  HOPE YOU HAD FUN!!"
+ ITEMS
+ TextConstant:"O.K.  HOPE YOU HAD FUN!!"
+ CarriageControl:NL
+999 END
+ 

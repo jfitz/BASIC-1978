@@ -1,0 +1,395 @@
+5 PRINT TAB(33);"BAGELS"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"BAGELS"
+ CarriageControl:NL
+10 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY":PRINT:PRINT
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+15 REM *** BAGLES NUMBER GUESSING GAME
+ Remark:*** BAGLES NUMBER GUESSING GAME
+20 REM *** ORIGINAL SOURCE UNKNOWN BUT SUSPECTED TO BE
+ Remark:*** ORIGINAL SOURCE UNKNOWN BUT SUSPECTED TO BE
+25 REM *** LAWRENCE HALL OF SCIENCE, U.C. BERKELY
+ Remark:*** LAWRENCE HALL OF SCIENCE, U.C. BERKELY
+30 DIM A1(6),A(3),B(3)
+ NumericConstant:6
+ CompoundDeclaration:A1
+ NumericConstant:3
+ CompoundDeclaration:A
+ NumericConstant:3
+ CompoundDeclaration:B
+40 Y=0:T=255
+ ScalarReference:Y
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:T
+ NumericConstant:255
+ AssignmentOperator:=
+50 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+70 INPUT "WOULD YOU LIKE THE RULES (YES OR NO)";A$
+ ScalarReference:A$
+90 IF LEFT$(A$,1)="N" THEN 150
+ Token 'InvalidToken:$' is not a value or operator
+100 PRINT:PRINT "I AM THINKING OF A THREE-DIGIT NUMBER.  TRY TO GUESS"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"I AM THINKING OF A THREE-DIGIT NUMBER.  TRY TO GUESS"
+ CarriageControl:NL
+110 PRINT "MY NUMBER AND I WILL GIVE YOU CLUES AS FOLLOWS:"
+ ITEMS
+ TextConstant:"MY NUMBER AND I WILL GIVE YOU CLUES AS FOLLOWS:"
+ CarriageControl:NL
+120 PRINT "   PICO   - ONE DIGIT CORRECT BUT IN THE WRONG POSITION"
+ ITEMS
+ TextConstant:"   PICO   - ONE DIGIT CORRECT BUT IN THE WRONG POSITION"
+ CarriageControl:NL
+130 PRINT "   FERMI  - ONE DIGIT CORRECT AND IN THE RIGHT POSITION"
+ ITEMS
+ TextConstant:"   FERMI  - ONE DIGIT CORRECT AND IN THE RIGHT POSITION"
+ CarriageControl:NL
+140 PRINT "   BAGELS - NO DIGITS CORRECT"
+ ITEMS
+ TextConstant:"   BAGELS - NO DIGITS CORRECT"
+ CarriageControl:NL
+150 FOR I=1 TO 3
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+160 A(I)=INT(10*RND(1))
+ ScalarValue:I
+ ScalarReference:A
+ NumericConstant:10
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+165 IF I-1=0 THEN 200
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:-
+ NumericConstant:0
+ BinaryOperator:=
+170 FOR J=1 TO I-1
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:I", "NumericConstant:1", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+180 IF A(I)=A(J) THEN 160
+ ScalarValue:I
+ ScalarValue:A
+ ScalarValue:J
+ ScalarValue:A
+ BinaryOperator:=
+190 NEXT J
+ VariableName:J
+200 NEXT I
+ VariableName:I
+210 PRINT:PRINT "O.K.  I HAVE A NUMBER IN MIND."
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"O.K.  I HAVE A NUMBER IN MIND."
+ CarriageControl:NL
+220 FOR I=1 TO 20
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:20"]
+ step:    ["NumericConstant:1"]
+230 PRINT "GUESS #";I,
+ ITEMS
+ TextConstant:"GUESS #"
+ CarriageControl:;
+ ScalarValue:I
+ CarriageControl:,
+240 INPUT A$
+ ScalarReference:A$
+245 IF LEN(A$)<>3 THEN 630
+ ScalarValue:A$
+ FunctionLen
+ NumericConstant:3
+ BinaryOperator:<>
+250 FOR Z=1 TO 3:A1(Z)=ASC(MID$(A$,Z,1)):NEXT Z
+ Token 'InvalidToken:$' is not a value or operator
+ control: VariableName:Z
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+ VariableName:Z
+260 FOR J=1 TO 3
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+270 IF A1(J)<48 THEN 300
+ ScalarValue:J
+ ScalarValue:A1
+ NumericConstant:48
+ BinaryOperator:<
+280 IF A1(J)>57 THEN 300
+ ScalarValue:J
+ ScalarValue:A1
+ NumericConstant:57
+ BinaryOperator:>
+285 B(J)=A1(J)-48
+ ScalarValue:J
+ ScalarReference:B
+ ScalarValue:J
+ ScalarValue:A1
+ NumericConstant:48
+ BinaryOperator:-
+ AssignmentOperator:=
+290 NEXT J
+ VariableName:J
+295 GOTO 320
+ LineNumber:320
+300 PRINT "WHAT?"
+ ITEMS
+ TextConstant:"WHAT?"
+ CarriageControl:NL
+310 GOTO 230
+ LineNumber:230
+320 IF B(1)=B(2) THEN 650
+ NumericConstant:1
+ ScalarValue:B
+ NumericConstant:2
+ ScalarValue:B
+ BinaryOperator:=
+330 IF B(2)=B(3) THEN 650
+ NumericConstant:2
+ ScalarValue:B
+ NumericConstant:3
+ ScalarValue:B
+ BinaryOperator:=
+340 IF B(3)=B(1) THEN 650
+ NumericConstant:3
+ ScalarValue:B
+ NumericConstant:1
+ ScalarValue:B
+ BinaryOperator:=
+350 C=0:D=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:D
+ NumericConstant:0
+ AssignmentOperator:=
+360 FOR J=1 TO 2
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:1"]
+370 IF A(J)<>B(J+1) THEN 390
+ ScalarValue:J
+ ScalarValue:A
+ ScalarValue:J
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:B
+ BinaryOperator:<>
+380 C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+390 IF A(J+1)<>B(J) THEN 410
+ ScalarValue:J
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:A
+ ScalarValue:J
+ ScalarValue:B
+ BinaryOperator:<>
+400 C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+410 NEXT J
+ VariableName:J
+420 IF A(1)<>B(3) THEN 440
+ NumericConstant:1
+ ScalarValue:A
+ NumericConstant:3
+ ScalarValue:B
+ BinaryOperator:<>
+430 C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+440 IF A(3)<>B(1) THEN 460
+ NumericConstant:3
+ ScalarValue:A
+ NumericConstant:1
+ ScalarValue:B
+ BinaryOperator:<>
+450 C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+460 FOR J=1 TO 3
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+470 IF A(J)<>B(J) THEN 490
+ ScalarValue:J
+ ScalarValue:A
+ ScalarValue:J
+ ScalarValue:B
+ BinaryOperator:<>
+480 D=D+1
+ ScalarReference:D
+ ScalarValue:D
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+490 NEXT J
+ VariableName:J
+500 IF D=3 THEN 680
+ ScalarValue:D
+ NumericConstant:3
+ BinaryOperator:=
+505 IF C=0 THEN 545
+ ScalarValue:C
+ NumericConstant:0
+ BinaryOperator:=
+520 FOR J=1 TO C
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C"]
+ step:    ["NumericConstant:1"]
+530 PRINT "PICO ";
+ ITEMS
+ TextConstant:"PICO "
+ CarriageControl:;
+540 NEXT J
+ VariableName:J
+545 IF D=0 THEN 580
+ ScalarValue:D
+ NumericConstant:0
+ BinaryOperator:=
+550 FOR J=1 TO D
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:D"]
+ step:    ["NumericConstant:1"]
+560 PRINT "FERMI ";
+ ITEMS
+ TextConstant:"FERMI "
+ CarriageControl:;
+570 NEXT J
+ VariableName:J
+580 IF C+D<>0 THEN 600
+ ScalarValue:C
+ ScalarValue:D
+ BinaryOperator:+
+ NumericConstant:0
+ BinaryOperator:<>
+590 PRINT "BAGELS";
+ ITEMS
+ TextConstant:"BAGELS"
+ CarriageControl:;
+600 PRINT
+ ITEMS
+ CarriageControl:NL
+605 NEXT I
+ VariableName:I
+610 PRINT "OH WELL."
+ ITEMS
+ TextConstant:"OH WELL."
+ CarriageControl:NL
+615 PRINT "THAT'S TWNETY GUESSES.  MY NUMBER WAS";100*A(1)+10*A(2)+A(3)
+ ITEMS
+ TextConstant:"THAT'S TWNETY GUESSES.  MY NUMBER WAS"
+ CarriageControl:;
+ NumericConstant:100
+ NumericConstant:1
+ ScalarValue:A
+ BinaryOperator:*
+ NumericConstant:10
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:*
+ BinaryOperator:+
+ NumericConstant:3
+ ScalarValue:A
+ BinaryOperator:+
+ CarriageControl:NL
+620 GOTO 700
+ LineNumber:700
+630 PRINT "TRY GUESSING A THREE-DIGIT NUMBER.":GOTO 230
+ ITEMS
+ TextConstant:"TRY GUESSING A THREE-DIGIT NUMBER."
+ CarriageControl:NL
+ LineNumber:230
+650 PRINT "OH, I FORGOT TO TELL YOU THAT THE NUMBER I HAVE IN MIND"
+ ITEMS
+ TextConstant:"OH, I FORGOT TO TELL YOU THAT THE NUMBER I HAVE IN MIND"
+ CarriageControl:NL
+660 PRINT "HAS NO TWO DIGITS THE SAME.":GOTO 230
+ ITEMS
+ TextConstant:"HAS NO TWO DIGITS THE SAME."
+ CarriageControl:NL
+ LineNumber:230
+680 PRINT "YOU GOT IT!!!":PRINT
+ ITEMS
+ TextConstant:"YOU GOT IT!!!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+690 Y=Y+1
+ ScalarReference:Y
+ ScalarValue:Y
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+700 INPUT "PLAY AGAIN (YES OR NO)";A$
+ ScalarReference:A$
+720 IF LEFT$(A$,1)="YES" THEN 150
+ Token 'InvalidToken:$' is not a value or operator
+730 IF Y=0 THEN 750
+ ScalarValue:Y
+ NumericConstant:0
+ BinaryOperator:=
+740 PRINT:PRINT "A";Y;"POINT BAGELS BUFF!!"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"A"
+ CarriageControl:;
+ ScalarValue:Y
+ CarriageControl:;
+ TextConstant:"POINT BAGELS BUFF!!"
+ CarriageControl:NL
+750 PRINT "HOPE YOU HAD FUN.  BYE."
+ ITEMS
+ TextConstant:"HOPE YOU HAD FUN.  BYE."
+ CarriageControl:NL
+999 END
+ 

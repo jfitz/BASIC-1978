@@ -1,0 +1,365 @@
+2 PRINT TAB(32);"FLIPFLOP"
+ ITEMS
+ NumericConstant:32
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"FLIPFLOP"
+ CarriageControl:NL
+4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+6 PRINT
+ ITEMS
+ CarriageControl:NL
+10 REM *** CREATED BY MICHAEL CASS
+ Remark:*** CREATED BY MICHAEL CASS
+15 DIM A$(20)
+ NumericConstant:20
+ CompoundDeclaration:A$
+20 PRINT "THE OBJECT OF THIS PUZZLE IS TO CHANGE THIS:"
+ ITEMS
+ TextConstant:"THE OBJECT OF THIS PUZZLE IS TO CHANGE THIS:"
+ CarriageControl:NL
+30 PRINT
+ ITEMS
+ CarriageControl:NL
+40 PRINT "X X X X X X X X X X"
+ ITEMS
+ TextConstant:"X X X X X X X X X X"
+ CarriageControl:NL
+50 PRINT
+ ITEMS
+ CarriageControl:NL
+60 PRINT "TO THIS:"
+ ITEMS
+ TextConstant:"TO THIS:"
+ CarriageControl:NL
+70 PRINT
+ ITEMS
+ CarriageControl:NL
+80 PRINT "O O O O O O O O O O"
+ ITEMS
+ TextConstant:"O O O O O O O O O O"
+ CarriageControl:NL
+90 PRINT
+ ITEMS
+ CarriageControl:NL
+100 PRINT "BY TYPING THE NUMBER CORRESPONDING TO THE POSITION OF THE"
+ ITEMS
+ TextConstant:"BY TYPING THE NUMBER CORRESPONDING TO THE POSITION OF THE"
+ CarriageControl:NL
+110 PRINT "LETTER ON SOME NUMBERS, ONE POSITION WILL CHANGE, ON"
+ ITEMS
+ TextConstant:"LETTER ON SOME NUMBERS, ONE POSITION WILL CHANGE, ON"
+ CarriageControl:NL
+120 PRINT "OTHERS, TWO WILL CHANGE.  TO RESET LINE TO ALL X'S, TYPE 0"
+ ITEMS
+ TextConstant:"OTHERS, TWO WILL CHANGE.  TO RESET LINE TO ALL X'S, TYPE 0"
+ CarriageControl:NL
+130 PRINT "(ZERO) AND TO START OVER IN THE MIDDLE OF A GAME, TYPE "
+ ITEMS
+ TextConstant:"(ZERO) AND TO START OVER IN THE MIDDLE OF A GAME, TYPE "
+ CarriageControl:NL
+140 PRINT "11 (ELEVEN)."
+ ITEMS
+ TextConstant:"11 (ELEVEN)."
+ CarriageControl:NL
+170 PRINT
+ ITEMS
+ CarriageControl:NL
+180 REM
+ Remark:
+190 Q=RND(1)
+ ScalarReference:Q
+ NumericConstant:1
+ FunctionRnd
+ AssignmentOperator:=
+200 PRINT "HERE IS THE STARTING LINE OF X'S."
+ ITEMS
+ TextConstant:"HERE IS THE STARTING LINE OF X'S."
+ CarriageControl:NL
+210 PRINT
+ ITEMS
+ CarriageControl:NL
+220 C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+230 PRINT "1 2 3 4 5 6 7 8 9 10"
+ ITEMS
+ TextConstant:"1 2 3 4 5 6 7 8 9 10"
+ CarriageControl:NL
+240 PRINT "X X X X X X X X X X"
+ ITEMS
+ TextConstant:"X X X X X X X X X X"
+ CarriageControl:NL
+250 PRINT
+ ITEMS
+ CarriageControl:NL
+260 REM
+ Remark:
+270 FOR X=1 TO 10
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:10"]
+ step:    ["NumericConstant:1"]
+280 A$(X)="X"
+ ScalarValue:X
+ ScalarReference:A$
+ TextConstant:"X"
+ AssignmentOperator:=
+290 NEXT X
+ VariableName:X
+300 GOTO 320
+ LineNumber:320
+310 PRINT "ILLEGAL ENTRY--TRY AGAIN."
+ ITEMS
+ TextConstant:"ILLEGAL ENTRY--TRY AGAIN."
+ CarriageControl:NL
+320 PRINT "INPUT THE NUMBER";
+ ITEMS
+ TextConstant:"INPUT THE NUMBER"
+ CarriageControl:;
+330 INPUT N
+ ScalarReference:N
+340 IF N<>INT(N) THEN 310
+ ScalarValue:N
+ ScalarValue:N
+ FunctionInt
+ BinaryOperator:<>
+350 IF N=11 THEN 180
+ ScalarValue:N
+ NumericConstant:11
+ BinaryOperator:=
+360 IF N>11 THEN 310
+ ScalarValue:N
+ NumericConstant:11
+ BinaryOperator:>
+370 IF N=0 THEN 230
+ ScalarValue:N
+ NumericConstant:0
+ BinaryOperator:=
+380 IF M=N THEN 510
+ ScalarValue:M
+ ScalarValue:N
+ BinaryOperator:=
+390 M=N
+ ScalarReference:M
+ ScalarValue:N
+ AssignmentOperator:=
+400 IF A$(N)="O" THEN 480
+ ScalarValue:N
+ ScalarValue:A$
+ TextConstant:"O"
+ BinaryOperator:=
+410 A$(N)="O"
+ ScalarValue:N
+ ScalarReference:A$
+ TextConstant:"O"
+ AssignmentOperator:=
+420 R=TAN(Q+N/Q-N)-SIN(Q/N)+336*SIN(8*N)
+ ScalarReference:R
+ ScalarValue:Q
+ ScalarValue:N
+ ScalarValue:Q
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:N
+ BinaryOperator:-
+ FunctionTan
+ ScalarValue:Q
+ ScalarValue:N
+ BinaryOperator:/
+ FunctionSin
+ BinaryOperator:-
+ NumericConstant:336
+ NumericConstant:8
+ ScalarValue:N
+ BinaryOperator:*
+ FunctionSin
+ BinaryOperator:*
+ BinaryOperator:+
+ AssignmentOperator:=
+430 N=R-INT(R)
+ ScalarReference:N
+ ScalarValue:R
+ ScalarValue:R
+ FunctionInt
+ BinaryOperator:-
+ AssignmentOperator:=
+440 N=INT(10*N)
+ ScalarReference:N
+ NumericConstant:10
+ ScalarValue:N
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+450 IF A$(N)="O" THEN 480
+ ScalarValue:N
+ ScalarValue:A$
+ TextConstant:"O"
+ BinaryOperator:=
+460 A$(N)="O"
+ ScalarValue:N
+ ScalarReference:A$
+ TextConstant:"O"
+ AssignmentOperator:=
+470 GOTO 610
+ LineNumber:610
+480 A$(N)="X"
+ ScalarValue:N
+ ScalarReference:A$
+ TextConstant:"X"
+ AssignmentOperator:=
+490 IF M=N THEN 420
+ ScalarValue:M
+ ScalarValue:N
+ BinaryOperator:=
+500 GOTO 610
+ LineNumber:610
+510 IF A$(N)="O" THEN 590
+ ScalarValue:N
+ ScalarValue:A$
+ TextConstant:"O"
+ BinaryOperator:=
+520 A$(N)="O"
+ ScalarValue:N
+ ScalarReference:A$
+ TextConstant:"O"
+ AssignmentOperator:=
+530 R=.592*(1/TAN(Q/N+Q))/SIN(N*2+Q)-COS(N)
+ ScalarReference:R
+ NumericConstant:.592
+ NumericConstant:1
+ ScalarValue:Q
+ ScalarValue:N
+ BinaryOperator:/
+ ScalarValue:Q
+ BinaryOperator:+
+ FunctionTan
+ BinaryOperator:/
+ BinaryOperator:*
+ ScalarValue:N
+ NumericConstant:2
+ BinaryOperator:*
+ ScalarValue:Q
+ BinaryOperator:+
+ FunctionSin
+ BinaryOperator:/
+ ScalarValue:N
+ FunctionCos
+ BinaryOperator:-
+ AssignmentOperator:=
+540 N=R-INT(R)
+ ScalarReference:N
+ ScalarValue:R
+ ScalarValue:R
+ FunctionInt
+ BinaryOperator:-
+ AssignmentOperator:=
+550 N=INT(10*N)
+ ScalarReference:N
+ NumericConstant:10
+ ScalarValue:N
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+560 IF A$(N)="O" THEN 590
+ ScalarValue:N
+ ScalarValue:A$
+ TextConstant:"O"
+ BinaryOperator:=
+570 A$(N)="O"
+ ScalarValue:N
+ ScalarReference:A$
+ TextConstant:"O"
+ AssignmentOperator:=
+580 GOTO 610
+ LineNumber:610
+590 A$(N)="X"
+ ScalarValue:N
+ ScalarReference:A$
+ TextConstant:"X"
+ AssignmentOperator:=
+600 IF M=N THEN 530
+ ScalarValue:M
+ ScalarValue:N
+ BinaryOperator:=
+610 PRINT "1 2 3 4 5 6 7 8 9 10"
+ ITEMS
+ TextConstant:"1 2 3 4 5 6 7 8 9 10"
+ CarriageControl:NL
+620 FOR Z=1 TO 10: PRINT A$(Z);" ";: NEXT Z
+ control: VariableName:Z
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:10"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ ScalarValue:Z
+ ScalarValue:A$
+ CarriageControl:;
+ TextConstant:" "
+ CarriageControl:;
+ VariableName:Z
+630 C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+640 PRINT
+ ITEMS
+ CarriageControl:NL
+650 FOR Z=1 TO 10
+ control: VariableName:Z
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:10"]
+ step:    ["NumericConstant:1"]
+660 IF A$(Z)<>"O" THEN 320
+ ScalarValue:Z
+ ScalarValue:A$
+ TextConstant:"O"
+ BinaryOperator:<>
+670 NEXT Z
+ VariableName:Z
+680 IF C>12 THEN 710
+ ScalarValue:C
+ NumericConstant:12
+ BinaryOperator:>
+690 PRINT "VERY GOOD.  YOU GUESSED IT IN ONLY";C;"GUESSES."
+ ITEMS
+ TextConstant:"VERY GOOD.  YOU GUESSED IT IN ONLY"
+ CarriageControl:;
+ ScalarValue:C
+ CarriageControl:;
+ TextConstant:"GUESSES."
+ CarriageControl:NL
+700 GOTO 720
+ LineNumber:720
+710 PRINT "TRY HARDER NEXT TIME.  IT TOOK YOU";C;"GUESSES."
+ ITEMS
+ TextConstant:"TRY HARDER NEXT TIME.  IT TOOK YOU"
+ CarriageControl:;
+ ScalarValue:C
+ CarriageControl:;
+ TextConstant:"GUESSES."
+ CarriageControl:NL
+720 PRINT "DO YOU WANT TO TRY ANOTHER PUZZLE";
+ ITEMS
+ TextConstant:"DO YOU WANT TO TRY ANOTHER PUZZLE"
+ CarriageControl:;
+730 INPUT X$
+ ScalarReference:X$
+740 IF LEFT$(X$,1)="N" THEN 780
+ Token 'InvalidToken:$' is not a value or operator
+760 PRINT
+ ITEMS
+ CarriageControl:NL
+770 GOTO 180
+ LineNumber:180
+780 END
+ 

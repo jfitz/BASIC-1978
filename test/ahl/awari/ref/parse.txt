@@ -1,0 +1,581 @@
+5 PRINT TAB(34);"AWARI"
+ ITEMS
+ NumericConstant:34
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"AWARI"
+ CarriageControl:NL
+7 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+10 DATA 0
+ NumericConstant:0
+15 DIM B(13),G(13),F(50):READ N
+ NumericConstant:13
+ CompoundDeclaration:B
+ NumericConstant:13
+ CompoundDeclaration:G
+ NumericConstant:50
+ CompoundDeclaration:F
+ ScalarReference:N
+20 PRINT:PRINT:E=0
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ScalarReference:E
+ NumericConstant:0
+ AssignmentOperator:=
+25 FOR I=0 TO 12:B(I)=3:NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:12"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarReference:B
+ NumericConstant:3
+ AssignmentOperator:=
+ VariableName:I
+30 C=0:F(N)=0:B(13)=0:B(6)=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarValue:N
+ ScalarReference:F
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:13
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:6
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+35 GOSUB 500
+ LineNumber:500
+40 PRINT "YOUR MOVE";:GOSUB 110
+ ITEMS
+ TextConstant:"YOUR MOVE"
+ CarriageControl:;
+ LineNumber:110
+45 IF E=0 THEN 80
+ ScalarValue:E
+ NumericConstant:0
+ BinaryOperator:=
+50 IF M=H THEN GOSUB 100
+ ScalarValue:M
+ ScalarValue:H
+ BinaryOperator:=
+ LineNumber:100
+55 IF E=0 THEN 80
+ ScalarValue:E
+ NumericConstant:0
+ BinaryOperator:=
+60 PRINT "MY MOVE IS ";:GOSUB 800
+ ITEMS
+ TextConstant:"MY MOVE IS "
+ CarriageControl:;
+ LineNumber:800
+65 IF E=0 THEN 80
+ ScalarValue:E
+ NumericConstant:0
+ BinaryOperator:=
+70 IF M=H THEN PRINT ",";:GOSUB 800
+ ScalarValue:M
+ ScalarValue:H
+ BinaryOperator:=
+ ITEMS
+ TextConstant:","
+ CarriageControl:;
+ LineNumber:800
+75 IF E>0 THEN 35
+ ScalarValue:E
+ NumericConstant:0
+ BinaryOperator:>
+80 PRINT:PRINT"GAME OVER"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"GAME OVER"
+ CarriageControl:NL
+85 D=B(6)-B(13):IF D<0 THEN PRINT "I WIN BY";-D;"POINTS":GOTO 20
+ ScalarReference:D
+ NumericConstant:6
+ ScalarValue:B
+ NumericConstant:13
+ ScalarValue:B
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarValue:D
+ NumericConstant:0
+ BinaryOperator:<
+ ITEMS
+ TextConstant:"I WIN BY"
+ CarriageControl:;
+ ScalarValue:D
+ UnaryOperator:-
+ CarriageControl:;
+ TextConstant:"POINTS"
+ CarriageControl:NL
+ LineNumber:20
+90 N=N+1:IF D=0 THEN PRINT "DRAWN GAME":GOTO 20
+ ScalarReference:N
+ ScalarValue:N
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:D
+ NumericConstant:0
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"DRAWN GAME"
+ CarriageControl:NL
+ LineNumber:20
+95 PRINT "YOU WIN BY";D;"POINTS":GOTO 20
+ ITEMS
+ TextConstant:"YOU WIN BY"
+ CarriageControl:;
+ ScalarValue:D
+ CarriageControl:;
+ TextConstant:"POINTS"
+ CarriageControl:NL
+ LineNumber:20
+100 PRINT "AGAIN";
+ ITEMS
+ TextConstant:"AGAIN"
+ CarriageControl:;
+110 INPUT M:IF M<7 THEN IF M>0 THEN M=M-1:GOTO 130
+ ScalarReference:M
+ ScalarValue:M
+ NumericConstant:7
+ BinaryOperator:<
+ ScalarValue:M
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarReference:M
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+ LineNumber:130
+120 PRINT "ILLEGAL MOVE":GOTO 100
+ ITEMS
+ TextConstant:"ILLEGAL MOVE"
+ CarriageControl:NL
+ LineNumber:100
+130 IF B(M)=0 THEN 120
+ ScalarValue:M
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:=
+140 H=6:GOSUB 200
+ ScalarReference:H
+ NumericConstant:6
+ AssignmentOperator:=
+ LineNumber:200
+150 GOTO 500
+ LineNumber:500
+200 K=M:GOSUB 600
+ ScalarReference:K
+ ScalarValue:M
+ AssignmentOperator:=
+ LineNumber:600
+205 E=0:IF K>6 THEN K=K-7
+ ScalarReference:E
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarValue:K
+ NumericConstant:6
+ BinaryOperator:>
+ ScalarReference:K
+ ScalarValue:K
+ NumericConstant:7
+ BinaryOperator:-
+ AssignmentOperator:=
+210 C=C+1:IF C<9 THEN F(N)=F(N)*6+K
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:C
+ NumericConstant:9
+ BinaryOperator:<
+ ScalarValue:N
+ ScalarReference:F
+ ScalarValue:N
+ ScalarValue:F
+ NumericConstant:6
+ BinaryOperator:*
+ ScalarValue:K
+ BinaryOperator:+
+ AssignmentOperator:=
+215 FOR I=0 TO 5:IF B(I)<>0 THEN 230
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:5"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:<>
+220 NEXT I
+ VariableName:I
+225 RETURN
+ 
+230 FOR I=7 TO 12:IF B(I)<>0 THEN E=1:RETURN
+ control: VariableName:I
+ start:   ["NumericConstant:7"]
+ end:     ["NumericConstant:12"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:<>
+ ScalarReference:E
+ NumericConstant:1
+ AssignmentOperator:=
+ 
+235 GOTO 220
+ LineNumber:220
+500 PRINT:PRINT"   ";
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"   "
+ CarriageControl:;
+505 FOR I=12 TO 7 STEP -1:GOSUB 580
+ control: VariableName:I
+ start:   ["NumericConstant:12"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1", "UnaryOperator:-"]
+ LineNumber:580
+510 NEXT I
+ VariableName:I
+515 PRINT:I=13:GOSUB 580
+ ITEMS
+ CarriageControl:NL
+ ScalarReference:I
+ NumericConstant:13
+ AssignmentOperator:=
+ LineNumber:580
+520 PRINT "                       ";:PRINT B(6):PRINT "   ";
+ ITEMS
+ TextConstant:"                       "
+ CarriageControl:;
+ ITEMS
+ NumericConstant:6
+ ScalarValue:B
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"   "
+ CarriageControl:;
+525 FOR I=0 TO 5:GOSUB 580
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:5"]
+ step:    ["NumericConstant:1"]
+ LineNumber:580
+530 NEXT I
+ VariableName:I
+535 PRINT:PRINT:RETURN
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ 
+580 IF B(I)<10 THEN PRINT " ";
+ ScalarValue:I
+ ScalarValue:B
+ NumericConstant:10
+ BinaryOperator:<
+ ITEMS
+ TextConstant:" "
+ CarriageControl:;
+585 PRINT B(I);:RETURN
+ ITEMS
+ ScalarValue:I
+ ScalarValue:B
+ CarriageControl:;
+ 
+600 P=B(M):B(M)=0
+ ScalarReference:P
+ ScalarValue:M
+ ScalarValue:B
+ AssignmentOperator:=
+ ScalarValue:M
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+605 FOR P=P TO 1 STEP -1:M=M+1:IF M>13 THEN M=M-14
+ control: VariableName:P
+ start:   ["ScalarValue:P"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:1", "UnaryOperator:-"]
+ ScalarReference:M
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:M
+ NumericConstant:13
+ BinaryOperator:>
+ ScalarReference:M
+ ScalarValue:M
+ NumericConstant:14
+ BinaryOperator:-
+ AssignmentOperator:=
+610 B(M)=B(M)+1:NEXT P
+ ScalarValue:M
+ ScalarReference:B
+ ScalarValue:M
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ VariableName:P
+615 IF B(M)=1 THEN IF M<>6 THEN IF M<>13 THEN IF B(12-M)<>0 THEN 625
+ ScalarValue:M
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:=
+ ScalarValue:M
+ NumericConstant:6
+ BinaryOperator:<>
+ ScalarValue:M
+ NumericConstant:13
+ BinaryOperator:<>
+ NumericConstant:12
+ ScalarValue:M
+ BinaryOperator:-
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:<>
+620 RETURN
+ 
+625 B(H)=B(H)+B(12-M)+1:B(M)=0:B(12-M)=0:RETURN
+ ScalarValue:H
+ ScalarReference:B
+ ScalarValue:H
+ ScalarValue:B
+ NumericConstant:12
+ ScalarValue:M
+ BinaryOperator:-
+ ScalarValue:B
+ BinaryOperator:+
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:M
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:12
+ ScalarValue:M
+ BinaryOperator:-
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+ 
+800 D=-99:H=13
+ ScalarReference:D
+ NumericConstant:99
+ UnaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:H
+ NumericConstant:13
+ AssignmentOperator:=
+805 FOR I=0 TO 13:G(I)=B(I):NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:13"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarReference:G
+ ScalarValue:I
+ ScalarValue:B
+ AssignmentOperator:=
+ VariableName:I
+810 FOR J=7 TO 12:IF B(J)=0 THEN 885
+ control: VariableName:J
+ start:   ["NumericConstant:7"]
+ end:     ["NumericConstant:12"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:J
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:=
+815 G=0:M=J:GOSUB 600
+ ScalarReference:G
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:M
+ ScalarValue:J
+ AssignmentOperator:=
+ LineNumber:600
+820 FOR I=0 TO 5:IF B(I)=0 THEN 845
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:5"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:=
+825 L=B(I)+I:R=0
+ ScalarReference:L
+ ScalarValue:I
+ ScalarValue:B
+ ScalarValue:I
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:R
+ NumericConstant:0
+ AssignmentOperator:=
+830 IF L>13 THEN L=L-14:R=1:GOTO 830
+ ScalarValue:L
+ NumericConstant:13
+ BinaryOperator:>
+ ScalarReference:L
+ ScalarValue:L
+ NumericConstant:14
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:R
+ NumericConstant:1
+ AssignmentOperator:=
+ LineNumber:830
+835 IF B(L)=0 THEN IF L<>6 THEN IF L<>13 THEN R=B(12-L)+R
+ ScalarValue:L
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:=
+ ScalarValue:L
+ NumericConstant:6
+ BinaryOperator:<>
+ ScalarValue:L
+ NumericConstant:13
+ BinaryOperator:<>
+ ScalarReference:R
+ NumericConstant:12
+ ScalarValue:L
+ BinaryOperator:-
+ ScalarValue:B
+ ScalarValue:R
+ BinaryOperator:+
+ AssignmentOperator:=
+840 IF R>Q THEN Q=R
+ ScalarValue:R
+ ScalarValue:Q
+ BinaryOperator:>
+ ScalarReference:Q
+ ScalarValue:R
+ AssignmentOperator:=
+845 NEXT I
+ VariableName:I
+850 Q=B(13)-B(6)-Q:IF C>8 THEN 875
+ ScalarReference:Q
+ NumericConstant:13
+ ScalarValue:B
+ NumericConstant:6
+ ScalarValue:B
+ BinaryOperator:-
+ ScalarValue:Q
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarValue:C
+ NumericConstant:8
+ BinaryOperator:>
+855 K=J:IF K>6 THEN K=K-7
+ ScalarReference:K
+ ScalarValue:J
+ AssignmentOperator:=
+ ScalarValue:K
+ NumericConstant:6
+ BinaryOperator:>
+ ScalarReference:K
+ ScalarValue:K
+ NumericConstant:7
+ BinaryOperator:-
+ AssignmentOperator:=
+860 FOR I=0 TO N-1:IF F(N)*6+K=INT(F(I)/6^(7-C)+.1) THEN Q=Q-2
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["ScalarValue:N", "NumericConstant:1", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:N
+ ScalarValue:F
+ NumericConstant:6
+ BinaryOperator:*
+ ScalarValue:K
+ BinaryOperator:+
+ ScalarValue:I
+ ScalarValue:F
+ NumericConstant:6
+ NumericConstant:7
+ ScalarValue:C
+ BinaryOperator:-
+ BinaryOperator:^
+ BinaryOperator:/
+ NumericConstant:.1
+ BinaryOperator:+
+ FunctionInt
+ BinaryOperator:=
+ ScalarReference:Q
+ ScalarValue:Q
+ NumericConstant:2
+ BinaryOperator:-
+ AssignmentOperator:=
+870 NEXT I
+ VariableName:I
+875 FOR I=0 TO 13:B(I)=G(I):NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:13"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarReference:B
+ ScalarValue:I
+ ScalarValue:G
+ AssignmentOperator:=
+ VariableName:I
+880 IF Q>=D THEN A=J:D=Q
+ ScalarValue:Q
+ ScalarValue:D
+ BinaryOperator:>=
+ ScalarReference:A
+ ScalarValue:J
+ AssignmentOperator:=
+ ScalarReference:D
+ ScalarValue:Q
+ AssignmentOperator:=
+885 NEXT J
+ VariableName:J
+890 M=A:PRINT CHR$(42+M);:GOTO 200
+ ScalarReference:M
+ ScalarValue:A
+ AssignmentOperator:=
+ ITEMS
+ NumericConstant:42
+ ScalarValue:M
+ BinaryOperator:+
+ FunctionChr
+ CarriageControl:;
+ LineNumber:200
+900 FOR I=0 TO N-1:PRINT B(I):NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["ScalarValue:N", "NumericConstant:1", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ ScalarValue:I
+ ScalarValue:B
+ CarriageControl:NL
+ VariableName:I
+999 END
+ 

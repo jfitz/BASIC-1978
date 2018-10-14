@@ -1,0 +1,697 @@
+100 PRINT TAB(33);"NIM"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"NIM"
+ CarriageControl:NL
+110 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+120 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+210 DIM A(100),B(100,10),D(2)
+ NumericConstant:100
+ CompoundDeclaration:A
+ NumericConstant:100
+ NumericConstant:10
+ CompoundDeclaration:B
+ NumericConstant:2
+ CompoundDeclaration:D
+220 PRINT "THIS IS THE GAME OF NIM."
+ ITEMS
+ TextConstant:"THIS IS THE GAME OF NIM."
+ CarriageControl:NL
+230 PRINT "DO YOU WANT INSTRUCTIONS";
+ ITEMS
+ TextConstant:"DO YOU WANT INSTRUCTIONS"
+ CarriageControl:;
+240 INPUT Z$
+ ScalarReference:Z$
+250 IF Z$="NO" THEN 440
+ ScalarValue:Z$
+ TextConstant:"NO"
+ BinaryOperator:=
+260 IF Z$="no" THEN 440
+ ScalarValue:Z$
+ TextConstant:"no"
+ BinaryOperator:=
+270 IF Z$="YES" THEN 310
+ ScalarValue:Z$
+ TextConstant:"YES"
+ BinaryOperator:=
+280 IF Z$="yes" THEN 310
+ ScalarValue:Z$
+ TextConstant:"yes"
+ BinaryOperator:=
+290 PRINT "PLEASE ANSWER YES OR NO"
+ ITEMS
+ TextConstant:"PLEASE ANSWER YES OR NO"
+ CarriageControl:NL
+300 GOTO 240
+ LineNumber:240
+310 PRINT "THE GAME IS PLAYED WITH A NUMBER OF PILES OF OBJECTS."
+ ITEMS
+ TextConstant:"THE GAME IS PLAYED WITH A NUMBER OF PILES OF OBJECTS."
+ CarriageControl:NL
+320 PRINT "ANY NUMBER OF OBJECTS ARE REMOVED FROM ONE PILE BY YOU AND"
+ ITEMS
+ TextConstant:"ANY NUMBER OF OBJECTS ARE REMOVED FROM ONE PILE BY YOU AND"
+ CarriageControl:NL
+330 PRINT "THE MACHINE ALTERNATELY.  ON YOUR TURN, YOU MAY TAKE"
+ ITEMS
+ TextConstant:"THE MACHINE ALTERNATELY.  ON YOUR TURN, YOU MAY TAKE"
+ CarriageControl:NL
+340 PRINT "ALL THE OBJECTS THAT REMAIN IN ANY PILE, BUT YOU MUST"
+ ITEMS
+ TextConstant:"ALL THE OBJECTS THAT REMAIN IN ANY PILE, BUT YOU MUST"
+ CarriageControl:NL
+350 PRINT "TAKE AT LEAST ONE OBJECT, AND YOU MAY TAKE OBJECTS FROM"
+ ITEMS
+ TextConstant:"TAKE AT LEAST ONE OBJECT, AND YOU MAY TAKE OBJECTS FROM"
+ CarriageControl:NL
+360 PRINT "ONLY ONE PILE ON A SINGLE TURN.  YOU MUST SPECIFY WHETHER"
+ ITEMS
+ TextConstant:"ONLY ONE PILE ON A SINGLE TURN.  YOU MUST SPECIFY WHETHER"
+ CarriageControl:NL
+370 PRINT "WINNING IS DEFINED AS TAKING OR NOT TAKING THE LAST OBJECT,"
+ ITEMS
+ TextConstant:"WINNING IS DEFINED AS TAKING OR NOT TAKING THE LAST OBJECT,"
+ CarriageControl:NL
+380 PRINT "THE NUMBER OF PILES IN THE GAME, AND HOW MANY OBJECTS ARE"
+ ITEMS
+ TextConstant:"THE NUMBER OF PILES IN THE GAME, AND HOW MANY OBJECTS ARE"
+ CarriageControl:NL
+390 PRINT "ORIGINALLY IN EACH PILE.  EACH PILE MAY CONTAIN A"
+ ITEMS
+ TextConstant:"ORIGINALLY IN EACH PILE.  EACH PILE MAY CONTAIN A"
+ CarriageControl:NL
+400 PRINT "DIFFERENT NUMBER OF OBJECTS."
+ ITEMS
+ TextConstant:"DIFFERENT NUMBER OF OBJECTS."
+ CarriageControl:NL
+410 PRINT "THE MACHINE WILL SHOW ITS MOVE BY LISTING EACH PILE AND THE"
+ ITEMS
+ TextConstant:"THE MACHINE WILL SHOW ITS MOVE BY LISTING EACH PILE AND THE"
+ CarriageControl:NL
+420 PRINT "NUMBER OF OBJECTS REMAINING IN THE PILES AFTER  EACH OF ITS"
+ ITEMS
+ TextConstant:"NUMBER OF OBJECTS REMAINING IN THE PILES AFTER  EACH OF ITS"
+ CarriageControl:NL
+430 PRINT "MOVES."
+ ITEMS
+ TextConstant:"MOVES."
+ CarriageControl:NL
+440 PRINT
+ ITEMS
+ CarriageControl:NL
+450 PRINT "ENTER WIN OPTION - 1 TO TAKE LAST, 2 TO AVOID LAST";
+ ITEMS
+ TextConstant:"ENTER WIN OPTION - 1 TO TAKE LAST, 2 TO AVOID LAST"
+ CarriageControl:;
+460 INPUT W
+ ScalarReference:W
+470 IF W=1 THEN 490
+ ScalarValue:W
+ NumericConstant:1
+ BinaryOperator:=
+480 IF W<>2 THEN 450
+ ScalarValue:W
+ NumericConstant:2
+ BinaryOperator:<>
+490 PRINT "ENTER NUMBER OF PILES";
+ ITEMS
+ TextConstant:"ENTER NUMBER OF PILES"
+ CarriageControl:;
+500 INPUT N
+ ScalarReference:N
+510 IF N>100 THEN 490
+ ScalarValue:N
+ NumericConstant:100
+ BinaryOperator:>
+520 IF N<1 THEN 490
+ ScalarValue:N
+ NumericConstant:1
+ BinaryOperator:<
+530 IF N<>INT(N) THEN 490
+ ScalarValue:N
+ ScalarValue:N
+ FunctionInt
+ BinaryOperator:<>
+540 PRINT "ENTER PILE SIZES"
+ ITEMS
+ TextConstant:"ENTER PILE SIZES"
+ CarriageControl:NL
+550 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+560 PRINT I;
+ ITEMS
+ ScalarValue:I
+ CarriageControl:;
+570 INPUT A(I)
+ ScalarValue:I
+ ScalarReference:A
+580 IF A(I)>2000 THEN 560
+ ScalarValue:I
+ ScalarValue:A
+ NumericConstant:2000
+ BinaryOperator:>
+590 IF A(I)<1 THEN 560
+ ScalarValue:I
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:<
+600 IF A(I)<>INT(A(I)) THEN 560
+ ScalarValue:I
+ ScalarValue:A
+ ScalarValue:I
+ ScalarValue:A
+ FunctionInt
+ BinaryOperator:<>
+610 NEXT I
+ VariableName:I
+620 PRINT "DO YOU WANT TO MOVE FIRST";
+ ITEMS
+ TextConstant:"DO YOU WANT TO MOVE FIRST"
+ CarriageControl:;
+630 INPUT Q9$
+ ScalarReference:Q9$
+640 IF Q9$="YES" THEN 1450
+ ScalarValue:Q9$
+ TextConstant:"YES"
+ BinaryOperator:=
+650 IF Q9$="yes" THEN 1450
+ ScalarValue:Q9$
+ TextConstant:"yes"
+ BinaryOperator:=
+660 IF Q9$="NO" THEN 700
+ ScalarValue:Q9$
+ TextConstant:"NO"
+ BinaryOperator:=
+670 IF Q9$="no" THEN 700
+ ScalarValue:Q9$
+ TextConstant:"no"
+ BinaryOperator:=
+680 PRINT "PLEASE ANSWER YES OR NO."
+ ITEMS
+ TextConstant:"PLEASE ANSWER YES OR NO."
+ CarriageControl:NL
+690 GOTO 630
+ LineNumber:630
+700 IF W=1 THEN 940
+ ScalarValue:W
+ NumericConstant:1
+ BinaryOperator:=
+710 LET C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+720 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+730 IF A(I)=0 THEN 770
+ ScalarValue:I
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+740 LET C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+750 IF C=3 THEN 840
+ ScalarValue:C
+ NumericConstant:3
+ BinaryOperator:=
+760 LET D(C)=I
+ ScalarValue:C
+ ScalarReference:D
+ ScalarValue:I
+ AssignmentOperator:=
+770 NEXT I
+ VariableName:I
+780 IF C=2 THEN 920
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:=
+790 IF A(D(1))>1 THEN 820
+ NumericConstant:1
+ ScalarValue:D
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:>
+800 PRINT "MACHINE LOSES"
+ ITEMS
+ TextConstant:"MACHINE LOSES"
+ CarriageControl:NL
+810 GOTO 1640
+ LineNumber:1640
+820 PRINT "MACHINE WINS"
+ ITEMS
+ TextConstant:"MACHINE WINS"
+ CarriageControl:NL
+830 GOTO 1640
+ LineNumber:1640
+840 LET C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+850 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+860 IF A(I)>1 THEN 940
+ ScalarValue:I
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:>
+870 IF A(I)=0 THEN 890
+ ScalarValue:I
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+880 LET C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+890 NEXT I
+ VariableName:I
+900 IF C/2<>INT(C/2) THEN 800
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:<>
+910 GOTO 940
+ LineNumber:940
+920 IF A(D(1))=1 THEN 820
+ NumericConstant:1
+ ScalarValue:D
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:=
+930 IF A(D(2))=1 THEN 820
+ NumericConstant:2
+ ScalarValue:D
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:=
+940 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+950 LET E=A(I)
+ ScalarReference:E
+ ScalarValue:I
+ ScalarValue:A
+ AssignmentOperator:=
+960 FOR J=0 TO 10
+ control: VariableName:J
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:10"]
+ step:    ["NumericConstant:1"]
+970 LET F=E/2
+ ScalarReference:F
+ ScalarValue:E
+ NumericConstant:2
+ BinaryOperator:/
+ AssignmentOperator:=
+980 LET B(I,J)=2*(F-INT(F))
+ ScalarValue:I
+ ScalarValue:J
+ ScalarReference:B
+ NumericConstant:2
+ ScalarValue:F
+ ScalarValue:F
+ FunctionInt
+ BinaryOperator:-
+ BinaryOperator:*
+ AssignmentOperator:=
+990 LET E=INT(F)
+ ScalarReference:E
+ ScalarValue:F
+ FunctionInt
+ AssignmentOperator:=
+1000 NEXT J
+ VariableName:J
+1010 NEXT I
+ VariableName:I
+1020 FOR J=10 TO 0 STEP -1
+ control: VariableName:J
+ start:   ["NumericConstant:10"]
+ end:     ["NumericConstant:0"]
+ step:    ["NumericConstant:1", "UnaryOperator:-"]
+1030 LET C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+1040 LET H=0
+ ScalarReference:H
+ NumericConstant:0
+ AssignmentOperator:=
+1050 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+1060 IF B(I,J)=0 THEN 1110
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:=
+1070 LET C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1080 IF A(I)<=H THEN 1110
+ ScalarValue:I
+ ScalarValue:A
+ ScalarValue:H
+ BinaryOperator:<=
+1090 LET H=A(I)
+ ScalarReference:H
+ ScalarValue:I
+ ScalarValue:A
+ AssignmentOperator:=
+1100 LET G=I
+ ScalarReference:G
+ ScalarValue:I
+ AssignmentOperator:=
+1110 NEXT I
+ VariableName:I
+1120 IF C/2<>INT(C/2) THEN 1190
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:<>
+1130 NEXT J
+ VariableName:J
+1140 LET E=INT(N*RND(1)+1)
+ ScalarReference:E
+ ScalarValue:N
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+1150 IF A(E)=0 THEN 1140
+ ScalarValue:E
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+1160 LET F=INT(A(E)*RND(1)+1)
+ ScalarReference:F
+ ScalarValue:E
+ ScalarValue:A
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+1170 LET A(E)=A(E)-F
+ ScalarValue:E
+ ScalarReference:A
+ ScalarValue:E
+ ScalarValue:A
+ ScalarValue:F
+ BinaryOperator:-
+ AssignmentOperator:=
+1180 GOTO 1380
+ LineNumber:1380
+1190 LET A(G)=0
+ ScalarValue:G
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+1200 FOR J=0 TO 10
+ control: VariableName:J
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:10"]
+ step:    ["NumericConstant:1"]
+1210 LET B(G,J)=0
+ ScalarValue:G
+ ScalarValue:J
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+1220 LET C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+1230 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+1240 IF B(I,J)=0 THEN 1260
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:=
+1250 LET C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1260 NEXT I
+ VariableName:I
+1270 LET A(G)=A(G)+2*(C/2-INT(C/2))*2^J
+ ScalarValue:G
+ ScalarReference:A
+ ScalarValue:G
+ ScalarValue:A
+ NumericConstant:2
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:-
+ BinaryOperator:*
+ NumericConstant:2
+ ScalarValue:J
+ BinaryOperator:^
+ BinaryOperator:*
+ BinaryOperator:+
+ AssignmentOperator:=
+1280 NEXT J
+ VariableName:J
+1290 IF W=1 THEN 1380
+ ScalarValue:W
+ NumericConstant:1
+ BinaryOperator:=
+1300 LET C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+1310 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+1320 IF A(I)>1 THEN 1380
+ ScalarValue:I
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:>
+1330 IF A(I)=0 THEN 1350
+ ScalarValue:I
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+1340 LET C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1350 NEXT I
+ VariableName:I
+1360 IF C/2<>INT(C/2) THEN 1380
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:<>
+1370 LET A(G)=1-A(G)
+ ScalarValue:G
+ ScalarReference:A
+ NumericConstant:1
+ ScalarValue:G
+ ScalarValue:A
+ BinaryOperator:-
+ AssignmentOperator:=
+1380 PRINT "PILE  SIZE"
+ ITEMS
+ TextConstant:"PILE  SIZE"
+ CarriageControl:NL
+1390 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+1400 PRINT I;A(I)
+ ITEMS
+ ScalarValue:I
+ CarriageControl:;
+ ScalarValue:I
+ ScalarValue:A
+ CarriageControl:NL
+1410 NEXT I
+ VariableName:I
+1420 IF W=2 THEN 1450
+ ScalarValue:W
+ NumericConstant:2
+ BinaryOperator:=
+1430 GOSUB 1570
+ LineNumber:1570
+1440 IF Z=1 THEN 820
+ ScalarValue:Z
+ NumericConstant:1
+ BinaryOperator:=
+1450 PRINT "YOUR MOVE - PILE, NUMBER TO BE REMOVED";
+ ITEMS
+ TextConstant:"YOUR MOVE - PILE, NUMBER TO BE REMOVED"
+ CarriageControl:;
+1460 INPUT X,Y
+ ScalarReference:X
+ ScalarReference:Y
+1470 IF X>N THEN 1450
+ ScalarValue:X
+ ScalarValue:N
+ BinaryOperator:>
+1480 IF X<1 THEN 1450
+ ScalarValue:X
+ NumericConstant:1
+ BinaryOperator:<
+1490 IF X<>INT(X) THEN 1450
+ ScalarValue:X
+ ScalarValue:X
+ FunctionInt
+ BinaryOperator:<>
+1500 IF Y>A(X) THEN 1450
+ ScalarValue:Y
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:>
+1510 IF Y<1 THEN 1450
+ ScalarValue:Y
+ NumericConstant:1
+ BinaryOperator:<
+1520 IF Y<>INT(Y) THEN 1450
+ ScalarValue:Y
+ ScalarValue:Y
+ FunctionInt
+ BinaryOperator:<>
+1530 LET A(X)=A(X)-Y
+ ScalarValue:X
+ ScalarReference:A
+ ScalarValue:X
+ ScalarValue:A
+ ScalarValue:Y
+ BinaryOperator:-
+ AssignmentOperator:=
+1540 GOSUB 1570
+ LineNumber:1570
+1550 IF Z=1 THEN 800
+ ScalarValue:Z
+ NumericConstant:1
+ BinaryOperator:=
+1560 GOTO 700
+ LineNumber:700
+1570 LET Z=0
+ ScalarReference:Z
+ NumericConstant:0
+ AssignmentOperator:=
+1580 FOR I=1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+1590 IF A(I)=0 THEN 1610
+ ScalarValue:I
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+1600 RETURN
+ 
+1610 NEXT I
+ VariableName:I
+1620 LET Z=1
+ ScalarReference:Z
+ NumericConstant:1
+ AssignmentOperator:=
+1630 RETURN
+ 
+1640 PRINT "do you want to play another game";
+ ITEMS
+ TextConstant:"do you want to play another game"
+ CarriageControl:;
+1650 INPUT Q9$
+ ScalarReference:Q9$
+1660 IF Q9$="YES" THEN 1720
+ ScalarValue:Q9$
+ TextConstant:"YES"
+ BinaryOperator:=
+1670 IF Q9$="yes" THEN 1720
+ ScalarValue:Q9$
+ TextConstant:"yes"
+ BinaryOperator:=
+1680 IF Q9$="NO" THEN 1730
+ ScalarValue:Q9$
+ TextConstant:"NO"
+ BinaryOperator:=
+1690 IF Q9$="no" THEN 1730
+ ScalarValue:Q9$
+ TextConstant:"no"
+ BinaryOperator:=
+1700 PRINT "PLEASE.  YES OR NO."
+ ITEMS
+ TextConstant:"PLEASE.  YES OR NO."
+ CarriageControl:NL
+1710 GOTO 1650 
+ LineNumber:1650
+1720 GOTO 440
+ LineNumber:440
+1730 END
+ 

@@ -1,0 +1,150 @@
+1 PRINT TAB(33);"DIAMOND"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"DIAMOND"
+ CarriageControl:NL
+2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+3 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+4 PRINT "FOR A PRETTY DIAMOND PATTERN,"
+ ITEMS
+ TextConstant:"FOR A PRETTY DIAMOND PATTERN,"
+ CarriageControl:NL
+5 INPUT "TYPE IN AN ODD NUMBER BETWEEN 5 AND 21";R:PRINT
+ ScalarReference:R
+ ITEMS
+ CarriageControl:NL
+6 Q=INT(60/R):A$="CC"
+ ScalarReference:Q
+ NumericConstant:60
+ ScalarValue:R
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+ ScalarReference:A$
+ TextConstant:"CC"
+ AssignmentOperator:=
+8 FOR L=1 TO Q
+ control: VariableName:L
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:Q"]
+ step:    ["NumericConstant:1"]
+10 X=1:Y=R:Z=2
+ ScalarReference:X
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarReference:Y
+ ScalarValue:R
+ AssignmentOperator:=
+ ScalarReference:Z
+ NumericConstant:2
+ AssignmentOperator:=
+20 FOR N=X TO Y STEP Z
+ control: VariableName:N
+ start:   ["ScalarValue:X"]
+ end:     ["ScalarValue:Y"]
+ step:    ["ScalarValue:Z"]
+25 PRINT TAB((R-N)/2);
+ ITEMS
+ ScalarValue:R
+ ScalarValue:N
+ BinaryOperator:-
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionTab
+ CarriageControl:;
+28 FOR M=1 TO Q
+ control: VariableName:M
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:Q"]
+ step:    ["NumericConstant:1"]
+29 C=1
+ ScalarReference:C
+ NumericConstant:1
+ AssignmentOperator:=
+30 FOR A=1 TO N
+ control: VariableName:A
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+32 IF C>LEN(A$) THEN PRINT "!";:GOTO 50
+ ScalarValue:C
+ ScalarValue:A$
+ FunctionLen
+ BinaryOperator:>
+ ITEMS
+ TextConstant:"!"
+ CarriageControl:;
+ LineNumber:50
+34 PRINT MID$(A$,C,1);
+ Syntax error: "MID$(A$,C,1)" is not a value or operator
+ ITEMS
+ CarriageControl:;
+36 C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+50 NEXT A
+ VariableName:A
+53 IF M=Q THEN 60
+ ScalarValue:M
+ ScalarValue:Q
+ BinaryOperator:=
+55 PRINT TAB(R*M+(R-N)/2);
+ ITEMS
+ ScalarValue:R
+ ScalarValue:M
+ BinaryOperator:*
+ ScalarValue:R
+ ScalarValue:N
+ BinaryOperator:-
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:+
+ FunctionTab
+ CarriageControl:;
+56 NEXT M
+ VariableName:M
+60 PRINT
+ ITEMS
+ CarriageControl:NL
+70 NEXT N
+ VariableName:N
+83 IF X<>1 THEN 95
+ ScalarValue:X
+ NumericConstant:1
+ BinaryOperator:<>
+85 X=R-2:Y=1:Z=-2
+ ScalarReference:X
+ ScalarValue:R
+ NumericConstant:2
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:Y
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarReference:Z
+ NumericConstant:2
+ UnaryOperator:-
+ AssignmentOperator:=
+90 GOTO 20
+ LineNumber:20
+95 NEXT L
+ VariableName:L
+99 END
+ 

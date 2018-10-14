@@ -1,0 +1,350 @@
+8 PRINT "YOU ARE A PILOT IN A WORLD WAR II BOMBER."
+ ITEMS
+ TextConstant:"YOU ARE A PILOT IN A WORLD WAR II BOMBER."
+ CarriageControl:NL
+10 INPUT "WHAT SIDE -- ITALY(1), ALLIES(2), JAPAN(3), GERMANY(4)";A
+ ScalarReference:A
+20 IF A>0 AND A<5 THEN 25
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:A
+ NumericConstant:5
+ BinaryOperator:<
+ BinaryOperator:AND
+22 PRINT "TRY AGAIN..." : GOTO 10
+ ITEMS
+ TextConstant:"TRY AGAIN..."
+ CarriageControl:NL
+ LineNumber:10
+25 ON A GOTO 30, 110, 200, 220
+ ScalarValue:A
+ LineNumber:30
+ LineNumber:110
+ LineNumber:200
+ LineNumber:220
+30 INPUT "YOUR TARGET -- ALBANIA(1), GREECE(2), NORTH AFRICA(3)";B
+ ScalarReference:B
+40 IF B>0 AND B<4 THEN 45
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:B
+ NumericConstant:4
+ BinaryOperator:<
+ BinaryOperator:AND
+42 PRINT "TRY AGAIN..." : GOTO 30
+ ITEMS
+ TextConstant:"TRY AGAIN..."
+ CarriageControl:NL
+ LineNumber:30
+45 PRINT : ON B GOTO 50, 80,90
+ ITEMS
+ CarriageControl:NL
+ ScalarValue:B
+ LineNumber:50
+ LineNumber:80
+ LineNumber:90
+50 PRINT "SHOULD BE EASY -- YOU'RE FLYING A NAZI-MADE PLANE."
+ ITEMS
+ TextConstant:"SHOULD BE EASY -- YOU'RE FLYING A NAZI-MADE PLANE."
+ CarriageControl:NL
+60 GOTO 280
+ LineNumber:280
+80 PRINT "BE CAREFUL!!!" : GOTO 280
+ ITEMS
+ TextConstant:"BE CAREFUL!!!"
+ CarriageControl:NL
+ LineNumber:280
+90 PRINT "YOU'RE GOING FOR THE OIL, EH?" : GOTO 280
+ ITEMS
+ TextConstant:"YOU'RE GOING FOR THE OIL, EH?"
+ CarriageControl:NL
+ LineNumber:280
+110 INPUT "AIRCRAFT -- LIBERATOR(1), B-29(2), B-17(3), LANCASTER(4)";G
+ ScalarReference:G
+120 IF G>0 AND G<5 THEN 125
+ ScalarValue:G
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:G
+ NumericConstant:5
+ BinaryOperator:<
+ BinaryOperator:AND
+122 PRINT "TRY AGAIN..." : GOTO 110
+ ITEMS
+ TextConstant:"TRY AGAIN..."
+ CarriageControl:NL
+ LineNumber:110
+125 PRINT : ON G GOTO 130, 150, 170, 190
+ ITEMS
+ CarriageControl:NL
+ ScalarValue:G
+ LineNumber:130
+ LineNumber:150
+ LineNumber:170
+ LineNumber:190
+130 PRINT "YOU'VE GOT 2 TONS OF BOMBS FLYING FOR PLOESTI." : GOTO 280
+ ITEMS
+ TextConstant:"YOU'VE GOT 2 TONS OF BOMBS FLYING FOR PLOESTI."
+ CarriageControl:NL
+ LineNumber:280
+150 PRINT "YOU'RE DUMPING THE A-BOMB ON HIROSHIMA." : GOTO 280
+ ITEMS
+ TextConstant:"YOU'RE DUMPING THE A-BOMB ON HIROSHIMA."
+ CarriageControl:NL
+ LineNumber:280
+170 PRINT "YOU'RE CHASING THE BISMARK IN THE NORTH SEA." : GOTO 280
+ ITEMS
+ TextConstant:"YOU'RE CHASING THE BISMARK IN THE NORTH SEA."
+ CarriageControl:NL
+ LineNumber:280
+190 PRINT "YOU'RE BUSTING A GERMAN HEAVY WATER PLANT IN THE RUHR."
+ ITEMS
+ TextConstant:"YOU'RE BUSTING A GERMAN HEAVY WATER PLANT IN THE RUHR."
+ CarriageControl:NL
+195 GOTO 280
+ LineNumber:280
+200 PRINT "YOU'RE FLYING A KAMIKAZE MISSION OVER THE USS LEXINGTON."
+ ITEMS
+ TextConstant:"YOU'RE FLYING A KAMIKAZE MISSION OVER THE USS LEXINGTON."
+ CarriageControl:NL
+205 INPUT "YOUR FIRST KAMIKAZE MISSION(Y OR N)";F$
+ ScalarReference:F$
+207 IF F$="N" THEN S=0 : GOTO 358
+ ScalarValue:F$
+ TextConstant:"N"
+ BinaryOperator:=
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+ LineNumber:358
+210 PRINT : IF RND(1)>.65 THEN 325
+ ITEMS
+ CarriageControl:NL
+ NumericConstant:1
+ FunctionRnd
+ NumericConstant:.65
+ BinaryOperator:>
+215 GOTO 380
+ LineNumber:380
+220 PRINT "A NAZI, EH?  OH WELL.  ARE YOU GOING FOR RUSSIA(1),"
+ ITEMS
+ TextConstant:"A NAZI, EH?  OH WELL.  ARE YOU GOING FOR RUSSIA(1),"
+ CarriageControl:NL
+230 INPUT "ENGLAND(2), OR FRANCE(3)";M : IF M>0 AND M<4 THEN 235
+ ScalarReference:M
+ ScalarValue:M
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:M
+ NumericConstant:4
+ BinaryOperator:<
+ BinaryOperator:AND
+232 PRINT "TRY AGAIN..." : GOTO 220
+ ITEMS
+ TextConstant:"TRY AGAIN..."
+ CarriageControl:NL
+ LineNumber:220
+235 PRINT : ON M GOTO 250, 260, 270
+ ITEMS
+ CarriageControl:NL
+ ScalarValue:M
+ LineNumber:250
+ LineNumber:260
+ LineNumber:270
+250 PRINT "YOU'RE NEARING STALINGRAD." : GOTO 280
+ ITEMS
+ TextConstant:"YOU'RE NEARING STALINGRAD."
+ CarriageControl:NL
+ LineNumber:280
+260 PRINT "NEARING LONDON.  BE CAREFUL, THEY'VE GOT RADAR." : GOTO 280
+ ITEMS
+ TextConstant:"NEARING LONDON.  BE CAREFUL, THEY'VE GOT RADAR."
+ CarriageControl:NL
+ LineNumber:280
+270 PRINT "NEARING VERSAILLES.  DUCK SOUP.  THEY'RE NEARLY DEFENSELESS."
+ ITEMS
+ TextConstant:"NEARING VERSAILLES.  DUCK SOUP.  THEY'RE NEARLY DEFENSELESS."
+ CarriageControl:NL
+280 PRINT
+ ITEMS
+ CarriageControl:NL
+285 INPUT "HOW MANY MISSIONS HAVE YOU FLOWN";D
+ ScalarReference:D
+290 IF D<160 THEN 300
+ ScalarValue:D
+ NumericConstant:160
+ BinaryOperator:<
+292 PRINT "MISSIONS, NOT MILES..." 
+ ITEMS
+ TextConstant:"MISSIONS, NOT MILES..."
+ CarriageControl:NL
+295 PRINT "150 MISSIONS IS HIGH EVEN FOR OLD-TIMERS."
+ ITEMS
+ TextConstant:"150 MISSIONS IS HIGH EVEN FOR OLD-TIMERS."
+ CarriageControl:NL
+297 PRINT "NOW THEN, "; : GOTO 285
+ ITEMS
+ TextConstant:"NOW THEN, "
+ CarriageControl:;
+ LineNumber:285
+300 PRINT:IF D<100 THEN 310
+ ITEMS
+ CarriageControl:NL
+ ScalarValue:D
+ NumericConstant:100
+ BinaryOperator:<
+305 PRINT "THAT'S PUSHING THE ODDS!" : GOTO 320
+ ITEMS
+ TextConstant:"THAT'S PUSHING THE ODDS!"
+ CarriageControl:NL
+ LineNumber:320
+310 IF D<25 THEN PRINT "FRESH OUT OF TRAINING, EH?"
+ ScalarValue:D
+ NumericConstant:25
+ BinaryOperator:<
+ ITEMS
+ TextConstant:"FRESH OUT OF TRAINING, EH?"
+ CarriageControl:NL
+320 PRINT : IF D<160*RND(1) THEN 330
+ ITEMS
+ CarriageControl:NL
+ ScalarValue:D
+ NumericConstant:160
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ BinaryOperator:<
+325 PRINT "DIRECT HIT!!!! "INT(100*RND(1))"KILLED."
+ ITEMS
+ TextConstant:"DIRECT HIT!!!! "
+ CarriageControl:
+ NumericConstant:100
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ CarriageControl:
+ TextConstant:"KILLED."
+ CarriageControl:NL
+327 PRINT "MISSION SUCCESSFUL." : GOTO 390
+ ITEMS
+ TextConstant:"MISSION SUCCESSFUL."
+ CarriageControl:NL
+ LineNumber:390
+330 PRINT "MISSED TARGET BY"INT(2+30*RND(1))"MILES!"
+ ITEMS
+ TextConstant:"MISSED TARGET BY"
+ CarriageControl:
+ NumericConstant:2
+ NumericConstant:30
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:
+ TextConstant:"MILES!"
+ CarriageControl:NL
+335 PRINT "NOW YOU'RE REALLY IN FOR IT !!" : PRINT
+ ITEMS
+ TextConstant:"NOW YOU'RE REALLY IN FOR IT !!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+340 INPUT "DOES THE ENEMY HAVE GUNS(1), MISSILES(2), OR BOTH(3)";R
+ ScalarReference:R
+345 IF R>0 AND R<4 THEN 350
+ ScalarValue:R
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:R
+ NumericConstant:4
+ BinaryOperator:<
+ BinaryOperator:AND
+347 PRINT "TRY AGAIN..." : GOTO 340
+ ITEMS
+ TextConstant:"TRY AGAIN..."
+ CarriageControl:NL
+ LineNumber:340
+350 PRINT : T=0 : IF R=2 THEN 360
+ ITEMS
+ CarriageControl:NL
+ ScalarReference:T
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarValue:R
+ NumericConstant:2
+ BinaryOperator:=
+355 INPUT "WHAT'S THE PERCENT HIT RATE OF ENEMY GUNNERS (10 TO 50)";S
+ ScalarReference:S
+357 IF S<10 THEN PRINT "YOU LIE, BUT YOU'LL PAY...": GOTO 380
+ ScalarValue:S
+ NumericConstant:10
+ BinaryOperator:<
+ ITEMS
+ TextConstant:"YOU LIE, BUT YOU'LL PAY..."
+ CarriageControl:NL
+ LineNumber:380
+358 PRINT
+ ITEMS
+ CarriageControl:NL
+360 PRINT : IF R>1 THEN T=35
+ ITEMS
+ CarriageControl:NL
+ ScalarValue:R
+ NumericConstant:1
+ BinaryOperator:>
+ ScalarReference:T
+ NumericConstant:35
+ AssignmentOperator:=
+365 IF S+T>100*RND(1) THEN 380
+ ScalarValue:S
+ ScalarValue:T
+ BinaryOperator:+
+ NumericConstant:100
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ BinaryOperator:>
+370 PRINT "YOU MADE IT THROUGH TREMENDOUS FLAK!!" : GOTO 390
+ ITEMS
+ TextConstant:"YOU MADE IT THROUGH TREMENDOUS FLAK!!"
+ CarriageControl:NL
+ LineNumber:390
+380 PRINT "* * * * BOOM * * * *"
+ ITEMS
+ TextConstant:"* * * * BOOM * * * *"
+ CarriageControl:NL
+384 PRINT "YOU HAVE BEEN SHOT DOWN....."
+ ITEMS
+ TextConstant:"YOU HAVE BEEN SHOT DOWN....."
+ CarriageControl:NL
+386 PRINT "DEARLY BELOVED, WE ARE GATHERED HERE TODAY TO PAY OUR"
+ ITEMS
+ TextConstant:"DEARLY BELOVED, WE ARE GATHERED HERE TODAY TO PAY OUR"
+ CarriageControl:NL
+387 PRINT "LAST TRIBUTE..."
+ ITEMS
+ TextConstant:"LAST TRIBUTE..."
+ CarriageControl:NL
+390 PRINT:PRINT:PRINT:INPUT "ANOTHER MISSION (Y OR N)";U$
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ScalarReference:U$
+395 IF U$="Y" THEN 8
+ ScalarValue:U$
+ TextConstant:"Y"
+ BinaryOperator:=
+400 PRINT "CHICKEN !!!" : PRINT : END
+ ITEMS
+ TextConstant:"CHICKEN !!!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ 

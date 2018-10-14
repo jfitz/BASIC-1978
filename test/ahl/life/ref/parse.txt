@@ -1,0 +1,463 @@
+2 PRINT TAB(34);"LIFE"
+ ITEMS
+ NumericConstant:34
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"LIFE"
+ CarriageControl:NL
+4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+6 PRINT: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+8 PRINT "ENTER YOUR PATTERN:"
+ ITEMS
+ TextConstant:"ENTER YOUR PATTERN:"
+ CarriageControl:NL
+9 X1=1: Y1=1: X2=24: Y2=70
+ ScalarReference:X1
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarReference:Y1
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarReference:X2
+ NumericConstant:24
+ AssignmentOperator:=
+ ScalarReference:Y2
+ NumericConstant:70
+ AssignmentOperator:=
+10 DIM A(24,70),B$(24)
+ NumericConstant:24
+ NumericConstant:70
+ CompoundDeclaration:A
+ NumericConstant:24
+ CompoundDeclaration:B$
+20 C=1
+ ScalarReference:C
+ NumericConstant:1
+ AssignmentOperator:=
+30 INPUT B$(C)
+ ScalarValue:C
+ ScalarReference:B$
+40 IF B$(C)="DONE" THEN B$(C)="": GOTO 80
+ ScalarValue:C
+ ScalarValue:B$
+ TextConstant:"DONE"
+ BinaryOperator:=
+ ScalarValue:C
+ ScalarReference:B$
+ TextConstant:""
+ AssignmentOperator:=
+ LineNumber:80
+50 IF LEFT$(B$(C),1)="." THEN B$(C)=" "+RIGHT$(B$(C),LEN(B$(C))-1)
+ Token 'InvalidToken:$' is not a value or operator
+ Token 'InvalidToken:$' is not a value or operator
+60 C=C+1
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+70 GOTO 30
+ LineNumber:30
+80 C=C-1: L=0
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:L
+ NumericConstant:0
+ AssignmentOperator:=
+90 FOR X=1 TO C-1
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C", "NumericConstant:1", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+100 IF LEN(B$(X))>L THEN L=LEN(B$(X))
+ ScalarValue:X
+ ScalarValue:B$
+ FunctionLen
+ ScalarValue:L
+ BinaryOperator:>
+ ScalarReference:L
+ ScalarValue:X
+ ScalarValue:B$
+ FunctionLen
+ AssignmentOperator:=
+110 NEXT X
+ VariableName:X
+120 X1=11-C/2
+ ScalarReference:X1
+ NumericConstant:11
+ ScalarValue:C
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:-
+ AssignmentOperator:=
+130 Y1=33-L/2
+ ScalarReference:Y1
+ NumericConstant:33
+ ScalarValue:L
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:-
+ AssignmentOperator:=
+140 FOR X=1 TO C
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C"]
+ step:    ["NumericConstant:1"]
+150 FOR Y=1 TO LEN(B$(X))
+ control: VariableName:Y
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:X", "ScalarValue:B$", "FunctionLen"]
+ step:    ["NumericConstant:1"]
+160 IF MID$(B$(X),Y,1)<>" " THEN A(X1+X,Y1+Y)=1:P=P+1
+ Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:X1
+ ScalarValue:X
+ BinaryOperator:+
+ ScalarValue:Y1
+ ScalarValue:Y
+ BinaryOperator:+
+ ScalarReference:A
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarReference:P
+ ScalarValue:P
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+170 NEXT Y
+ VariableName:Y
+180 NEXT X
+ VariableName:X
+200 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+210 PRINT "GENERATION:";G,"POPULATION:";P;: IF I9 THEN PRINT "INVALID!";
+ ITEMS
+ TextConstant:"GENERATION:"
+ CarriageControl:;
+ ScalarValue:G
+ CarriageControl:,
+ TextConstant:"POPULATION:"
+ CarriageControl:;
+ ScalarValue:P
+ CarriageControl:;
+ ScalarValue:I9
+ ITEMS
+ TextConstant:"INVALID!"
+ CarriageControl:;
+215 X3=24:Y3=70:X4=1: Y4=1: P=0
+ ScalarReference:X3
+ NumericConstant:24
+ AssignmentOperator:=
+ ScalarReference:Y3
+ NumericConstant:70
+ AssignmentOperator:=
+ ScalarReference:X4
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarReference:Y4
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarReference:P
+ NumericConstant:0
+ AssignmentOperator:=
+220 G=G+1
+ ScalarReference:G
+ ScalarValue:G
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+225 FOR X=1 TO X1-1: PRINT: NEXT X
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:X1", "NumericConstant:1", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ CarriageControl:NL
+ VariableName:X
+230 FOR X=X1 TO X2
+ control: VariableName:X
+ start:   ["ScalarValue:X1"]
+ end:     ["ScalarValue:X2"]
+ step:    ["NumericConstant:1"]
+240 PRINT
+ ITEMS
+ CarriageControl:NL
+250 FOR Y=Y1 TO Y2
+ control: VariableName:Y
+ start:   ["ScalarValue:Y1"]
+ end:     ["ScalarValue:Y2"]
+ step:    ["NumericConstant:1"]
+253 IF A(X,Y)=2 THEN A(X,Y)=0:GOTO 270
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:A
+ NumericConstant:2
+ BinaryOperator:=
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+ LineNumber:270
+256 IF A(X,Y)=3 THEN A(X,Y)=1:GOTO 261
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:A
+ NumericConstant:3
+ BinaryOperator:=
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarReference:A
+ NumericConstant:1
+ AssignmentOperator:=
+ LineNumber:261
+260 IF A(X,Y)<>1 THEN 270
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:<>
+261 PRINT TAB(Y);"*";
+ ITEMS
+ ScalarValue:Y
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"*"
+ CarriageControl:;
+262 IF X<X3 THEN X3=X
+ ScalarValue:X
+ ScalarValue:X3
+ BinaryOperator:<
+ ScalarReference:X3
+ ScalarValue:X
+ AssignmentOperator:=
+264 IF X>X4 THEN X4=X
+ ScalarValue:X
+ ScalarValue:X4
+ BinaryOperator:>
+ ScalarReference:X4
+ ScalarValue:X
+ AssignmentOperator:=
+266 IF Y<Y3 THEN Y3=Y
+ ScalarValue:Y
+ ScalarValue:Y3
+ BinaryOperator:<
+ ScalarReference:Y3
+ ScalarValue:Y
+ AssignmentOperator:=
+268 IF Y>Y4 THEN Y4=Y
+ ScalarValue:Y
+ ScalarValue:Y4
+ BinaryOperator:>
+ ScalarReference:Y4
+ ScalarValue:Y
+ AssignmentOperator:=
+270 NEXT Y
+ VariableName:Y
+290 NEXT X
+ VariableName:X
+295 FOR X=X2+1 TO 24: PRINT: NEXT X
+ control: VariableName:X
+ start:   ["ScalarValue:X2", "NumericConstant:1", "BinaryOperator:+"]
+ end:     ["NumericConstant:24"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ CarriageControl:NL
+ VariableName:X
+299 X1=X3: X2=X4: Y1=Y3: Y2=Y4
+ ScalarReference:X1
+ ScalarValue:X3
+ AssignmentOperator:=
+ ScalarReference:X2
+ ScalarValue:X4
+ AssignmentOperator:=
+ ScalarReference:Y1
+ ScalarValue:Y3
+ AssignmentOperator:=
+ ScalarReference:Y2
+ ScalarValue:Y4
+ AssignmentOperator:=
+301 IF X1<3 THEN X1=3:I9=-1
+ ScalarValue:X1
+ NumericConstant:3
+ BinaryOperator:<
+ ScalarReference:X1
+ NumericConstant:3
+ AssignmentOperator:=
+ ScalarReference:I9
+ NumericConstant:1
+ UnaryOperator:-
+ AssignmentOperator:=
+303 IF X2>22 THEN X2=22:I9=-1
+ ScalarValue:X2
+ NumericConstant:22
+ BinaryOperator:>
+ ScalarReference:X2
+ NumericConstant:22
+ AssignmentOperator:=
+ ScalarReference:I9
+ NumericConstant:1
+ UnaryOperator:-
+ AssignmentOperator:=
+305 IF Y1<3 THEN Y1=3:I9=-1
+ ScalarValue:Y1
+ NumericConstant:3
+ BinaryOperator:<
+ ScalarReference:Y1
+ NumericConstant:3
+ AssignmentOperator:=
+ ScalarReference:I9
+ NumericConstant:1
+ UnaryOperator:-
+ AssignmentOperator:=
+307 IF Y2>68 THEN Y2=68:I9=-1
+ ScalarValue:Y2
+ NumericConstant:68
+ BinaryOperator:>
+ ScalarReference:Y2
+ NumericConstant:68
+ AssignmentOperator:=
+ ScalarReference:I9
+ NumericConstant:1
+ UnaryOperator:-
+ AssignmentOperator:=
+309 P=0
+ ScalarReference:P
+ NumericConstant:0
+ AssignmentOperator:=
+500 FOR X=X1-1 TO X2+1
+ control: VariableName:X
+ start:   ["ScalarValue:X1", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["ScalarValue:X2", "NumericConstant:1", "BinaryOperator:+"]
+ step:    ["NumericConstant:1"]
+510 FOR Y=Y1-1 TO Y2+1
+ control: VariableName:Y
+ start:   ["ScalarValue:Y1", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["ScalarValue:Y2", "NumericConstant:1", "BinaryOperator:+"]
+ step:    ["NumericConstant:1"]
+520 C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+530 FOR I=X-1 TO X+1
+ control: VariableName:I
+ start:   ["ScalarValue:X", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["ScalarValue:X", "NumericConstant:1", "BinaryOperator:+"]
+ step:    ["NumericConstant:1"]
+540 FOR J=Y-1 TO Y+1
+ control: VariableName:J
+ start:   ["ScalarValue:Y", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["ScalarValue:Y", "NumericConstant:1", "BinaryOperator:+"]
+ step:    ["NumericConstant:1"]
+550 IF A(I,J)=1 OR A(I,J)=2 THEN C=C+1
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:=
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:A
+ NumericConstant:2
+ BinaryOperator:=
+ BinaryOperator:OR
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+560 NEXT J
+ VariableName:J
+570 NEXT I
+ VariableName:I
+580 IF A(X,Y)=0 THEN 610
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+590 IF C<3 OR C>4 THEN A(X,Y)=2: GOTO 600
+ ScalarValue:C
+ NumericConstant:3
+ BinaryOperator:<
+ ScalarValue:C
+ NumericConstant:4
+ BinaryOperator:>
+ BinaryOperator:OR
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarReference:A
+ NumericConstant:2
+ AssignmentOperator:=
+ LineNumber:600
+595 P=P+1
+ ScalarReference:P
+ ScalarValue:P
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+600 GOTO 620
+ LineNumber:620
+610 IF C=3 THEN A(X,Y)=3:P=P+1
+ ScalarValue:C
+ NumericConstant:3
+ BinaryOperator:=
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarReference:A
+ NumericConstant:3
+ AssignmentOperator:=
+ ScalarReference:P
+ ScalarValue:P
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+620 NEXT Y
+ VariableName:Y
+630 NEXT X
+ VariableName:X
+635 X1=X1-1:Y1=Y1-1:X2=X2+1:Y2=Y2+1
+ ScalarReference:X1
+ ScalarValue:X1
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:Y1
+ ScalarValue:Y1
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:X2
+ ScalarValue:X2
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:Y2
+ ScalarValue:Y2
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+640 GOTO 210
+ LineNumber:210
+650 END
+ 

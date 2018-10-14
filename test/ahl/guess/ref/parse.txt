@@ -1,0 +1,166 @@
+1 PRINT TAB(33);"GUESS"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"GUESS"
+ CarriageControl:NL
+2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+3 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+4 PRINT "THIS IS A NUMBER GUESSING GAME. I'LL THINK"
+ ITEMS
+ TextConstant:"THIS IS A NUMBER GUESSING GAME. I'LL THINK"
+ CarriageControl:NL
+5 PRINT "OF A NUMBER BETWEEN 1 AND ANY LIMIT YOU WANT."
+ ITEMS
+ TextConstant:"OF A NUMBER BETWEEN 1 AND ANY LIMIT YOU WANT."
+ CarriageControl:NL
+6 PRINT "THEN YOU HAVE TO GUESS WHAT IT IS."
+ ITEMS
+ TextConstant:"THEN YOU HAVE TO GUESS WHAT IT IS."
+ CarriageControl:NL
+7 PRINT
+ ITEMS
+ CarriageControl:NL
+8 PRINT "WHAT LIMIT DO YOU WANT";
+ ITEMS
+ TextConstant:"WHAT LIMIT DO YOU WANT"
+ CarriageControl:;
+9 INPUT L
+ ScalarReference:L
+10 PRINT
+ ITEMS
+ CarriageControl:NL
+11 L1=INT(LOG(L)/LOG(2))+1
+ ScalarReference:L1
+ ScalarValue:L
+ FunctionLog
+ NumericConstant:2
+ FunctionLog
+ BinaryOperator:/
+ FunctionInt
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+12 PRINT "I'M THINKING OF A NUMBER BETWEEN 1 AND";L
+ ITEMS
+ TextConstant:"I'M THINKING OF A NUMBER BETWEEN 1 AND"
+ CarriageControl:;
+ ScalarValue:L
+ CarriageControl:NL
+13 G=1
+ ScalarReference:G
+ NumericConstant:1
+ AssignmentOperator:=
+14 PRINT "NOW YOU TRY TO GUESS WHAT IT IS."
+ ITEMS
+ TextConstant:"NOW YOU TRY TO GUESS WHAT IT IS."
+ CarriageControl:NL
+15 M=INT(L*RND(1)+1)
+ ScalarReference:M
+ ScalarValue:L
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+20 INPUT N
+ ScalarReference:N
+21 IF N>0 THEN 25
+ ScalarValue:N
+ NumericConstant:0
+ BinaryOperator:>
+22 GOSUB 70
+ LineNumber:70
+23 GOTO 1
+ LineNumber:1
+25 IF N=M THEN 50
+ ScalarValue:N
+ ScalarValue:M
+ BinaryOperator:=
+30 G=G+1
+ ScalarReference:G
+ ScalarValue:G
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+31 IF N>M THEN 40
+ ScalarValue:N
+ ScalarValue:M
+ BinaryOperator:>
+32 PRINT "TOO LOW. TRY A BIGGER ANSWER."
+ ITEMS
+ TextConstant:"TOO LOW. TRY A BIGGER ANSWER."
+ CarriageControl:NL
+33 GOTO 20
+ LineNumber:20
+40 PRINT "TOO HIGH. TRY A SMALLER ANSWER."
+ ITEMS
+ TextConstant:"TOO HIGH. TRY A SMALLER ANSWER."
+ CarriageControl:NL
+42 GOTO 20
+ LineNumber:20
+50 PRINT "THAT'S IT! YOU GOT IT IN";G;"TRIES."
+ ITEMS
+ TextConstant:"THAT'S IT! YOU GOT IT IN"
+ CarriageControl:;
+ ScalarValue:G
+ CarriageControl:;
+ TextConstant:"TRIES."
+ CarriageControl:NL
+52 IF G<L1 THEN 58
+ ScalarValue:G
+ ScalarValue:L1
+ BinaryOperator:<
+54 IF G=L1 THEN 60
+ ScalarValue:G
+ ScalarValue:L1
+ BinaryOperator:=
+56 PRINT "YOU SHOULD HAVE BEEN ABLE TO GET IT IN ONLY";L1
+ ITEMS
+ TextConstant:"YOU SHOULD HAVE BEEN ABLE TO GET IT IN ONLY"
+ CarriageControl:;
+ ScalarValue:L1
+ CarriageControl:NL
+57 GOTO 65
+ LineNumber:65
+58 PRINT "VERY ";
+ ITEMS
+ TextConstant:"VERY "
+ CarriageControl:;
+60 PRINT "GOOD."
+ ITEMS
+ TextConstant:"GOOD."
+ CarriageControl:NL
+65 GOSUB 70
+ LineNumber:70
+66 GOTO 12
+ LineNumber:12
+70 FOR H=1 TO 5
+ control: VariableName:H
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:5"]
+ step:    ["NumericConstant:1"]
+71 PRINT
+ ITEMS
+ CarriageControl:NL
+72 NEXT H
+ VariableName:H
+73 RETURN
+ 
+99 END
+ 

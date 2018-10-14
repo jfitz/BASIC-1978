@@ -1,0 +1,406 @@
+10 PRINT TAB(33);"CHOMP"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CHOMP"
+ CarriageControl:NL
+20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+30 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+40 DIM A(10,10)
+ NumericConstant:10
+ NumericConstant:10
+ CompoundDeclaration:A
+100 REM *** THE GAME OF CHOMP *** COPYRIGHT PCC 1973 ***
+ Remark:*** THE GAME OF CHOMP *** COPYRIGHT PCC 1973 ***
+110 PRINT 
+ ITEMS
+ CarriageControl:NL
+120 PRINT "THIS IS THE GAME OF CHOMP (SCIENTIFIC AMERICAN, JAN 1973)"
+ ITEMS
+ TextConstant:"THIS IS THE GAME OF CHOMP (SCIENTIFIC AMERICAN, JAN 1973)"
+ CarriageControl:NL
+130 PRINT "DO YOU WANT THE RULES (1=YES, 0=NO!)";
+ ITEMS
+ TextConstant:"DO YOU WANT THE RULES (1=YES, 0=NO!)"
+ CarriageControl:;
+140 INPUT R
+ ScalarReference:R
+150 IF R=0 THEN 340
+ ScalarValue:R
+ NumericConstant:0
+ BinaryOperator:=
+160 F=1
+ ScalarReference:F
+ NumericConstant:1
+ AssignmentOperator:=
+170 R=5
+ ScalarReference:R
+ NumericConstant:5
+ AssignmentOperator:=
+180 C=7
+ ScalarReference:C
+ NumericConstant:7
+ AssignmentOperator:=
+190 PRINT "CHOMP IS FOR 1 OR MORE PLAYERS (HUMANS ONLY)."
+ ITEMS
+ TextConstant:"CHOMP IS FOR 1 OR MORE PLAYERS (HUMANS ONLY)."
+ CarriageControl:NL
+200 PRINT
+ ITEMS
+ CarriageControl:NL
+210 PRINT "HERE'S HOW A BOARD LOOKS (THIS ONE IS 5 BY 7):"
+ ITEMS
+ TextConstant:"HERE'S HOW A BOARD LOOKS (THIS ONE IS 5 BY 7):"
+ CarriageControl:NL
+220 GOSUB 540
+ LineNumber:540
+230 PRINT
+ ITEMS
+ CarriageControl:NL
+240 PRINT "THE BOARD IS A BIG COOKIE - R ROWS HIGH AND C COLUMNS"
+ ITEMS
+ TextConstant:"THE BOARD IS A BIG COOKIE - R ROWS HIGH AND C COLUMNS"
+ CarriageControl:NL
+250 PRINT "WIDE. YOU INPUT R AND C AT THE START. IN THE UPPER LEFT"
+ ITEMS
+ TextConstant:"WIDE. YOU INPUT R AND C AT THE START. IN THE UPPER LEFT"
+ CarriageControl:NL
+260 PRINT "CORNER OF THE COOKIE IS A POISON SQUARE (P). THE ONE WHO"
+ ITEMS
+ TextConstant:"CORNER OF THE COOKIE IS A POISON SQUARE (P). THE ONE WHO"
+ CarriageControl:NL
+270 PRINT "CHOMPS THE POISON SQUARE LOSES. TO TAKE A CHOMP, TYPE THE"
+ ITEMS
+ TextConstant:"CHOMPS THE POISON SQUARE LOSES. TO TAKE A CHOMP, TYPE THE"
+ CarriageControl:NL
+280 PRINT "ROW AND COLUMN OF ONE OF THE SQUARES ON THE COOKIE."
+ ITEMS
+ TextConstant:"ROW AND COLUMN OF ONE OF THE SQUARES ON THE COOKIE."
+ CarriageControl:NL
+290 PRINT "ALL OF THE SQUARES BELOW AND TO THE RIGHT OF THAT SQUARE"
+ ITEMS
+ TextConstant:"ALL OF THE SQUARES BELOW AND TO THE RIGHT OF THAT SQUARE"
+ CarriageControl:NL
+300 PRINT "(INCLUDING THAT SQUARE, TOO) DISAPPEAR -- CHOMP!!"
+ ITEMS
+ TextConstant:"(INCLUDING THAT SQUARE, TOO) DISAPPEAR -- CHOMP!!"
+ CarriageControl:NL
+310 PRINT "NO FAIR CHOMPING SQUARES THAT HAVE ALREADY BEEN CHOMPED,"
+ ITEMS
+ TextConstant:"NO FAIR CHOMPING SQUARES THAT HAVE ALREADY BEEN CHOMPED,"
+ CarriageControl:NL
+320 PRINT "OR THAT ARE OUTSIDE THE ORIGINAL DIMENSIONS OF THE COOKIE."
+ ITEMS
+ TextConstant:"OR THAT ARE OUTSIDE THE ORIGINAL DIMENSIONS OF THE COOKIE."
+ CarriageControl:NL
+330 PRINT 
+ ITEMS
+ CarriageControl:NL
+340 PRINT "HERE WE GO..."
+ ITEMS
+ TextConstant:"HERE WE GO..."
+ CarriageControl:NL
+350 REM 
+ Remark:
+360 F=0
+ ScalarReference:F
+ NumericConstant:0
+ AssignmentOperator:=
+370 FOR I=1 TO 10
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:10"]
+ step:    ["NumericConstant:1"]
+372 FOR J=1 TO 10
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:10"]
+ step:    ["NumericConstant:1"]
+375 A(I,J)=0
+ ScalarValue:I
+ ScalarValue:J
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+377 NEXT J
+ VariableName:J
+379 NEXT I
+ VariableName:I
+380 PRINT 
+ ITEMS
+ CarriageControl:NL
+390 PRINT "HOW MANY PLAYERS";
+ ITEMS
+ TextConstant:"HOW MANY PLAYERS"
+ CarriageControl:;
+400 INPUT P
+ ScalarReference:P
+410 I1=0
+ ScalarReference:I1
+ NumericConstant:0
+ AssignmentOperator:=
+420 PRINT "HOW MANY ROWS";
+ ITEMS
+ TextConstant:"HOW MANY ROWS"
+ CarriageControl:;
+430 INPUT R
+ ScalarReference:R
+440 IF R <= 9 THEN 470
+ ScalarValue:R
+ NumericConstant:9
+ BinaryOperator:<=
+450 PRINT "TOO MANY ROWS (9 IS MAXIMUM). NOW, ";
+ ITEMS
+ TextConstant:"TOO MANY ROWS (9 IS MAXIMUM). NOW, "
+ CarriageControl:;
+460 GOTO 420
+ LineNumber:420
+470 PRINT "HOW MANY COLUMNS";
+ ITEMS
+ TextConstant:"HOW MANY COLUMNS"
+ CarriageControl:;
+480 INPUT C
+ ScalarReference:C
+490 IF C <= 9 THEN 530
+ ScalarValue:C
+ NumericConstant:9
+ BinaryOperator:<=
+500 PRINT "TOO MANY COLUMNS (9 IS MAXIMUM). NOW, ";
+ ITEMS
+ TextConstant:"TOO MANY COLUMNS (9 IS MAXIMUM). NOW, "
+ CarriageControl:;
+510 GOTO 470
+ LineNumber:470
+530 PRINT 
+ ITEMS
+ CarriageControl:NL
+540 FOR I=1 TO R
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:R"]
+ step:    ["NumericConstant:1"]
+550 FOR J=1 TO C
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C"]
+ step:    ["NumericConstant:1"]
+560 A(I,J)=1
+ ScalarValue:I
+ ScalarValue:J
+ ScalarReference:A
+ NumericConstant:1
+ AssignmentOperator:=
+570 NEXT J
+ VariableName:J
+580 NEXT I
+ VariableName:I
+590 A(1,1)=-1
+ NumericConstant:1
+ NumericConstant:1
+ ScalarReference:A
+ NumericConstant:1
+ UnaryOperator:-
+ AssignmentOperator:=
+600 REM PRINT THE BOARD
+ Remark:PRINT THE BOARD
+610 PRINT 
+ ITEMS
+ CarriageControl:NL
+620 PRINT TAB(7);"1 2 3 4 5 6 7 8 9"
+ ITEMS
+ NumericConstant:7
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"1 2 3 4 5 6 7 8 9"
+ CarriageControl:NL
+630 FOR I=1 TO R
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:R"]
+ step:    ["NumericConstant:1"]
+640 PRINT I;TAB(7);
+ ITEMS
+ ScalarValue:I
+ CarriageControl:;
+ NumericConstant:7
+ FunctionTab
+ CarriageControl:;
+650 FOR J=1 TO C
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C"]
+ step:    ["NumericConstant:1"]
+660 IF A(I,J)=-1 THEN 700
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:A
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+670 IF A(I,J)=0 THEN 720
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+680 PRINT "* ";
+ ITEMS
+ TextConstant:"* "
+ CarriageControl:;
+690 GOTO 710
+ LineNumber:710
+700 PRINT "P ";
+ ITEMS
+ TextConstant:"P "
+ CarriageControl:;
+710 NEXT J
+ VariableName:J
+720 PRINT 
+ ITEMS
+ CarriageControl:NL
+730 NEXT I
+ VariableName:I
+740 PRINT 
+ ITEMS
+ CarriageControl:NL
+750 IF F=0 THEN 770
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:=
+760 RETURN 
+ 
+770 REM GET CHOMPS FOR EACH PLAYER IN TURN
+ Remark:GET CHOMPS FOR EACH PLAYER IN TURN
+780 LET I1=I1+1
+ ScalarReference:I1
+ ScalarValue:I1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+790 LET P1=I1-INT(I1/P)*P
+ ScalarReference:P1
+ ScalarValue:I1
+ ScalarValue:I1
+ ScalarValue:P
+ BinaryOperator:/
+ FunctionInt
+ ScalarValue:P
+ BinaryOperator:*
+ BinaryOperator:-
+ AssignmentOperator:=
+800 IF P1 <> 0 THEN 820
+ ScalarValue:P1
+ NumericConstant:0
+ BinaryOperator:<>
+810 P1=P
+ ScalarReference:P1
+ ScalarValue:P
+ AssignmentOperator:=
+820 PRINT "PLAYER";P1
+ ITEMS
+ TextConstant:"PLAYER"
+ CarriageControl:;
+ ScalarValue:P1
+ CarriageControl:NL
+830 PRINT "COORDINATES OF CHOMP (ROW,COLUMN)";
+ ITEMS
+ TextConstant:"COORDINATES OF CHOMP (ROW,COLUMN)"
+ CarriageControl:;
+840 INPUT R1,C1
+ ScalarReference:R1
+ ScalarReference:C1
+850 IF R1<1 THEN 920
+ ScalarValue:R1
+ NumericConstant:1
+ BinaryOperator:<
+860 IF R1>R THEN 920
+ ScalarValue:R1
+ ScalarValue:R
+ BinaryOperator:>
+870 IF C1<1 THEN 920
+ ScalarValue:C1
+ NumericConstant:1
+ BinaryOperator:<
+880 IF C1>C THEN 920
+ ScalarValue:C1
+ ScalarValue:C
+ BinaryOperator:>
+890 IF A(R1,C1)=0 THEN 920
+ ScalarValue:R1
+ ScalarValue:C1
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+900 IF A(R1,C1)=-1 THEN 1010
+ ScalarValue:R1
+ ScalarValue:C1
+ ScalarValue:A
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+910 GOTO 940
+ LineNumber:940
+920 PRINT "NO FAIR. YOU'RE TRYING TO CHOMP ON EMPTY SPACE!"
+ ITEMS
+ TextConstant:"NO FAIR. YOU'RE TRYING TO CHOMP ON EMPTY SPACE!"
+ CarriageControl:NL
+930 GOTO 820
+ LineNumber:820
+940 FOR I=R1 TO R
+ control: VariableName:I
+ start:   ["ScalarValue:R1"]
+ end:     ["ScalarValue:R"]
+ step:    ["NumericConstant:1"]
+950 FOR J=C1 TO C
+ control: VariableName:J
+ start:   ["ScalarValue:C1"]
+ end:     ["ScalarValue:C"]
+ step:    ["NumericConstant:1"]
+960 A(I,J)=0
+ ScalarValue:I
+ ScalarValue:J
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+970 NEXT J
+ VariableName:J
+980 NEXT I
+ VariableName:I
+990 GOTO 610
+ LineNumber:610
+1000 REM END OF GAME DETECTED IN LINE 900
+ Remark:END OF GAME DETECTED IN LINE 900
+1010 PRINT "YOU LOSE, PLAYER";P1
+ ITEMS
+ TextConstant:"YOU LOSE, PLAYER"
+ CarriageControl:;
+ ScalarValue:P1
+ CarriageControl:NL
+1020 PRINT 
+ ITEMS
+ CarriageControl:NL
+1030 PRINT "AGAIN (1=YES, 0=NO!)";
+ ITEMS
+ TextConstant:"AGAIN (1=YES, 0=NO!)"
+ CarriageControl:;
+1040 INPUT R$
+ ScalarReference:R$
+1050 IF R=1 THEN 340
+ ScalarValue:R
+ NumericConstant:1
+ BinaryOperator:=
+1060 END
+ 

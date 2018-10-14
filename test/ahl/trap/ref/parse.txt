@@ -1,0 +1,205 @@
+1 PRINT TAB(34);"TRAP"
+ ITEMS
+ NumericConstant:34
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"TRAP"
+ CarriageControl:NL
+2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+3 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+10 G=6
+ ScalarReference:G
+ NumericConstant:6
+ AssignmentOperator:=
+20 N=100
+ ScalarReference:N
+ NumericConstant:100
+ AssignmentOperator:=
+30 REM-TRAP
+ Remark:-TRAP
+40 REM-STEVE ULLMAN, 8-1-72
+ Remark:-STEVE ULLMAN, 8-1-72
+50 PRINT "INSTRUCTIONS";
+ ITEMS
+ TextConstant:"INSTRUCTIONS"
+ CarriageControl:;
+60 INPUT Z$
+ ScalarReference:Z$
+70 IF LEFT$(Z$,1)<>"Y" THEN 180
+ Token 'InvalidToken:$' is not a value or operator
+80 PRINT "I AM THINKING OF A NUMBER BETWEEN 1 AND";N
+ ITEMS
+ TextConstant:"I AM THINKING OF A NUMBER BETWEEN 1 AND"
+ CarriageControl:;
+ ScalarValue:N
+ CarriageControl:NL
+90 PRINT "TRY TO GUESS MY NUMBER. ON EACH GUESS,"
+ ITEMS
+ TextConstant:"TRY TO GUESS MY NUMBER. ON EACH GUESS,"
+ CarriageControl:NL
+100 PRINT "YOU ARE TO ENTER 2 NUMBERS, TRYING TO TRAP"
+ ITEMS
+ TextConstant:"YOU ARE TO ENTER 2 NUMBERS, TRYING TO TRAP"
+ CarriageControl:NL
+110 PRINT "MY NUMBER BETWEEN THE TWO NUMBERS. I WILL"
+ ITEMS
+ TextConstant:"MY NUMBER BETWEEN THE TWO NUMBERS. I WILL"
+ CarriageControl:NL
+120 PRINT "TELL YOU IF YOU HAVE TRAPPED MY NUMBER, IF MY"
+ ITEMS
+ TextConstant:"TELL YOU IF YOU HAVE TRAPPED MY NUMBER, IF MY"
+ CarriageControl:NL
+130 PRINT "NUMBER IS LARGER THAN YOUR TWO NUMBERS, OR IF"
+ ITEMS
+ TextConstant:"NUMBER IS LARGER THAN YOUR TWO NUMBERS, OR IF"
+ CarriageControl:NL
+140 PRINT "MY NUMBER IS SMALLER THAN YOUR TWO NUMBERS."
+ ITEMS
+ TextConstant:"MY NUMBER IS SMALLER THAN YOUR TWO NUMBERS."
+ CarriageControl:NL
+150 PRINT "IF YOU WANT TO GUESS ONE SINGLE NUMBER, TYPE"
+ ITEMS
+ TextConstant:"IF YOU WANT TO GUESS ONE SINGLE NUMBER, TYPE"
+ CarriageControl:NL
+160 PRINT "YOUR GUESS FOR BOTH YOUR TRAP NUMBERS."
+ ITEMS
+ TextConstant:"YOUR GUESS FOR BOTH YOUR TRAP NUMBERS."
+ CarriageControl:NL
+170 PRINT "YOU GET";G;"GUESSES TO GET MY NUMBER."
+ ITEMS
+ TextConstant:"YOU GET"
+ CarriageControl:;
+ ScalarValue:G
+ CarriageControl:;
+ TextConstant:"GUESSES TO GET MY NUMBER."
+ CarriageControl:NL
+180 X=INT(N*RND(1))+1
+ ScalarReference:X
+ ScalarValue:N
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+190 FOR Q=1 TO G
+ control: VariableName:Q
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:G"]
+ step:    ["NumericConstant:1"]
+200 PRINT 
+ ITEMS
+ CarriageControl:NL
+210 PRINT "GUESS #";Q;
+ ITEMS
+ TextConstant:"GUESS #"
+ CarriageControl:;
+ ScalarValue:Q
+ CarriageControl:;
+220 INPUT A,B
+ ScalarReference:A
+ ScalarReference:B
+230 IF A=B AND X=A THEN 400
+ ScalarValue:A
+ ScalarValue:B
+ BinaryOperator:=
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:=
+ BinaryOperator:AND
+240 IF A <= B THEN 260
+ ScalarValue:A
+ ScalarValue:B
+ BinaryOperator:<=
+250 GOSUB 360
+ LineNumber:360
+260 IF A <= X AND X <= B THEN 320
+ ScalarValue:A
+ ScalarValue:X
+ BinaryOperator:<=
+ ScalarValue:X
+ ScalarValue:B
+ BinaryOperator:<=
+ BinaryOperator:AND
+270 IF X<A THEN 300
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:<
+280 PRINT "MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
+ ITEMS
+ TextConstant:"MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
+ CarriageControl:NL
+290 GOTO 330
+ LineNumber:330
+300 PRINT "MY NUMBER IS SMALLER THAN YOUR TRAP NUMBERS."
+ ITEMS
+ TextConstant:"MY NUMBER IS SMALLER THAN YOUR TRAP NUMBERS."
+ CarriageControl:NL
+310 GOTO 330
+ LineNumber:330
+320 PRINT "YOU HAVE TRAPPED MY NUMBER."
+ ITEMS
+ TextConstant:"YOU HAVE TRAPPED MY NUMBER."
+ CarriageControl:NL
+330 NEXT Q
+ VariableName:Q
+340 PRINT "SORRY, THAT'S";G;"GUESSES. THE NUMBER WAS";X
+ ITEMS
+ TextConstant:"SORRY, THAT'S"
+ CarriageControl:;
+ ScalarValue:G
+ CarriageControl:;
+ TextConstant:"GUESSES. THE NUMBER WAS"
+ CarriageControl:;
+ ScalarValue:X
+ CarriageControl:NL
+345 PRINT
+ ITEMS
+ CarriageControl:NL
+350 GOTO 410
+ LineNumber:410
+360 R=A
+ ScalarReference:R
+ ScalarValue:A
+ AssignmentOperator:=
+370 A=B
+ ScalarReference:A
+ ScalarValue:B
+ AssignmentOperator:=
+380 B=R
+ ScalarReference:B
+ ScalarValue:R
+ AssignmentOperator:=
+390 RETURN 
+ 
+400 PRINT "YOU GOT IT!!!"
+ ITEMS
+ TextConstant:"YOU GOT IT!!!"
+ CarriageControl:NL
+410 PRINT 
+ ITEMS
+ CarriageControl:NL
+420 PRINT "TRY AGAIN."
+ ITEMS
+ TextConstant:"TRY AGAIN."
+ CarriageControl:NL
+430 PRINT
+ ITEMS
+ CarriageControl:NL
+440 GOTO 180
+ LineNumber:180
+450 END
+ 

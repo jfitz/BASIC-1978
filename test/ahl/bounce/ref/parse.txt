@@ -1,0 +1,277 @@
+10 PRINT TAB(33);"BOUNCE"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"BOUNCE"
+ CarriageControl:NL
+20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+30 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+90 DIM T(20)
+ NumericConstant:20
+ CompoundDeclaration:T
+100 PRINT "THIS SIMULATION LETS YOU SPECIFY THE INITIAL VELOCITY"
+ ITEMS
+ TextConstant:"THIS SIMULATION LETS YOU SPECIFY THE INITIAL VELOCITY"
+ CarriageControl:NL
+110 PRINT "OF A BALL THROWN STRAIGHT UP, AND THE COEFFICIENT OF"
+ ITEMS
+ TextConstant:"OF A BALL THROWN STRAIGHT UP, AND THE COEFFICIENT OF"
+ CarriageControl:NL
+120 PRINT "ELASTICITY OF THE BALL.  PLEASE USE A DECIMAL FRACTION"
+ ITEMS
+ TextConstant:"ELASTICITY OF THE BALL.  PLEASE USE A DECIMAL FRACTION"
+ CarriageControl:NL
+130 PRINT "COEFFICIENCY (LESS THAN 1)."
+ ITEMS
+ TextConstant:"COEFFICIENCY (LESS THAN 1)."
+ CarriageControl:NL
+131 PRINT
+ ITEMS
+ CarriageControl:NL
+132 PRINT "YOU ALSO SPECIFY THE TIME INCREMENT TO BE USED IN"
+ ITEMS
+ TextConstant:"YOU ALSO SPECIFY THE TIME INCREMENT TO BE USED IN"
+ CarriageControl:NL
+133 PRINT "'STROBING' THE BALL'S FLIGHT (TRY .1 INITIALLY)."
+ ITEMS
+ TextConstant:"'STROBING' THE BALL'S FLIGHT (TRY .1 INITIALLY)."
+ CarriageControl:NL
+134 PRINT
+ ITEMS
+ CarriageControl:NL
+135 INPUT "TIME INCREMENT (SEC)";S2
+ ScalarReference:S2
+140 PRINT
+ ITEMS
+ CarriageControl:NL
+150 INPUT "VELOCITY (FPS)";V
+ ScalarReference:V
+160 PRINT
+ ITEMS
+ CarriageControl:NL
+170 INPUT "COEFFICIENT";C
+ ScalarReference:C
+180 PRINT
+ ITEMS
+ CarriageControl:NL
+182 PRINT "FEET"
+ ITEMS
+ TextConstant:"FEET"
+ CarriageControl:NL
+184 PRINT
+ ITEMS
+ CarriageControl:NL
+186 S1=INT(70/(V/(16*S2)))
+ ScalarReference:S1
+ NumericConstant:70
+ ScalarValue:V
+ NumericConstant:16
+ ScalarValue:S2
+ BinaryOperator:*
+ BinaryOperator:/
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+190 FOR I=1 TO S1
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:S1"]
+ step:    ["NumericConstant:1"]
+200 T(I)=V*C^(I-1)/16
+ ScalarValue:I
+ ScalarReference:T
+ ScalarValue:V
+ ScalarValue:C
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:-
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:16
+ BinaryOperator:/
+ AssignmentOperator:=
+210 NEXT I
+ VariableName:I
+220 FOR H=INT(-16*(V/32)^2+V^2/32+.5) TO 0 STEP -.5
+ control: VariableName:H
+ start:   ["NumericConstant:16", "UnaryOperator:-", "ScalarValue:V", "NumericConstant:32", "BinaryOperator:/", "NumericConstant:2", "BinaryOperator:^", "BinaryOperator:*", "ScalarValue:V", "NumericConstant:2", "BinaryOperator:^", "NumericConstant:32", "BinaryOperator:/", "BinaryOperator:+", "NumericConstant:.5", "BinaryOperator:+", "FunctionInt"]
+ end:     ["NumericConstant:0"]
+ step:    ["NumericConstant:.5", "UnaryOperator:-"]
+221 IF INT(H)<>H THEN 225
+ ScalarValue:H
+ FunctionInt
+ ScalarValue:H
+ BinaryOperator:<>
+222 PRINT H;
+ ITEMS
+ ScalarValue:H
+ CarriageControl:;
+225 L=0
+ ScalarReference:L
+ NumericConstant:0
+ AssignmentOperator:=
+230 FOR I=1 TO S1
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:S1"]
+ step:    ["NumericConstant:1"]
+240 FOR T=0 TO T(I) STEP S2
+ control: VariableName:T
+ start:   ["NumericConstant:0"]
+ end:     ["ScalarValue:I", "ScalarValue:T"]
+ step:    ["ScalarValue:S2"]
+245 L=L+S2
+ ScalarReference:L
+ ScalarValue:L
+ ScalarValue:S2
+ BinaryOperator:+
+ AssignmentOperator:=
+250 IF ABS(H-(.5*(-32)*T^2+V*C^(I-1)*T))>.25 THEN 270
+ ScalarValue:H
+ NumericConstant:.5
+ NumericConstant:32
+ UnaryOperator:-
+ BinaryOperator:*
+ ScalarValue:T
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ ScalarValue:V
+ ScalarValue:C
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:-
+ BinaryOperator:^
+ BinaryOperator:*
+ ScalarValue:T
+ BinaryOperator:*
+ BinaryOperator:+
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:.25
+ BinaryOperator:>
+260 PRINT TAB(L/S2);"0";
+ ITEMS
+ ScalarValue:L
+ ScalarValue:S2
+ BinaryOperator:/
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"0"
+ CarriageControl:;
+270 NEXT T
+ VariableName:T
+275 T=T(I+1)/2
+ ScalarReference:T
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:T
+ NumericConstant:2
+ BinaryOperator:/
+ AssignmentOperator:=
+276 IF -16*T^2+V*C^(I-1)*T<H THEN 290
+ NumericConstant:16
+ UnaryOperator:-
+ ScalarValue:T
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ ScalarValue:V
+ ScalarValue:C
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:-
+ BinaryOperator:^
+ BinaryOperator:*
+ ScalarValue:T
+ BinaryOperator:*
+ BinaryOperator:+
+ ScalarValue:H
+ BinaryOperator:<
+280 NEXT I
+ VariableName:I
+290 PRINT
+ ITEMS
+ CarriageControl:NL
+300 NEXT H
+ VariableName:H
+310 PRINT TAB(1);
+ ITEMS
+ NumericConstant:1
+ FunctionTab
+ CarriageControl:;
+320 FOR I=1 TO INT(L+1)/S2+1
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:L", "NumericConstant:1", "BinaryOperator:+", "FunctionInt", "ScalarValue:S2", "BinaryOperator:/", "NumericConstant:1", "BinaryOperator:+"]
+ step:    ["NumericConstant:1"]
+330 PRINT ".";
+ ITEMS
+ TextConstant:"."
+ CarriageControl:;
+340 NEXT I
+ VariableName:I
+350 PRINT
+ ITEMS
+ CarriageControl:NL
+355 PRINT " 0";
+ ITEMS
+ TextConstant:" 0"
+ CarriageControl:;
+360 FOR I=1 TO INT(L+.9995)
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:L", "NumericConstant:.9995", "BinaryOperator:+", "FunctionInt"]
+ step:    ["NumericConstant:1"]
+380 PRINT TAB(INT(I/S2));I;
+ ITEMS
+ ScalarValue:I
+ ScalarValue:S2
+ BinaryOperator:/
+ FunctionInt
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:I
+ CarriageControl:;
+390 NEXT I
+ VariableName:I
+400 PRINT
+ ITEMS
+ CarriageControl:NL
+410 PRINT TAB(INT(L+1)/(2*S2)-2);"SECONDS"
+ ITEMS
+ ScalarValue:L
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:2
+ ScalarValue:S2
+ BinaryOperator:*
+ BinaryOperator:/
+ NumericConstant:2
+ BinaryOperator:-
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"SECONDS"
+ CarriageControl:NL
+420 PRINT
+ ITEMS
+ CarriageControl:NL
+430 GOTO 135
+ LineNumber:135
+440 END
+ 

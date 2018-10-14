@@ -1,0 +1,105 @@
+1 PRINT TAB(32);"3D PLOT"
+ ITEMS
+ NumericConstant:32
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"3D PLOT"
+ CarriageControl:NL
+2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+3 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+5 DEF FNA(Z)=30*EXP(-Z*Z/100)
+ NumericConstant:30
+ ScalarValue:Z
+ UnaryOperator:-
+ ScalarValue:Z
+ BinaryOperator:*
+ NumericConstant:100
+ BinaryOperator:/
+ FunctionExp
+ BinaryOperator:*
+100 PRINT
+ ITEMS
+ CarriageControl:NL
+110 FOR X=-30 TO 30 STEP 1.5
+ control: VariableName:X
+ start:   ["NumericConstant:30", "UnaryOperator:-"]
+ end:     ["NumericConstant:30"]
+ step:    ["NumericConstant:1.5"]
+120 L=0
+ ScalarReference:L
+ NumericConstant:0
+ AssignmentOperator:=
+130 Y1=5*INT(SQR(900-X*X)/5)
+ ScalarReference:Y1
+ NumericConstant:5
+ NumericConstant:900
+ ScalarValue:X
+ ScalarValue:X
+ BinaryOperator:*
+ BinaryOperator:-
+ FunctionSqr
+ NumericConstant:5
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:*
+ AssignmentOperator:=
+140 FOR Y=Y1 TO -Y1 STEP -5
+ control: VariableName:Y
+ start:   ["ScalarValue:Y1"]
+ end:     ["ScalarValue:Y1", "UnaryOperator:-"]
+ step:    ["NumericConstant:5", "UnaryOperator:-"]
+150 Z=INT(25+FNA(SQR(X*X+Y*Y))-.7*Y)
+ ScalarReference:Z
+ NumericConstant:25
+ ScalarValue:X
+ ScalarValue:X
+ BinaryOperator:*
+ ScalarValue:Y
+ ScalarValue:Y
+ BinaryOperator:*
+ BinaryOperator:+
+ FunctionSqr
+ UserFunction
+ BinaryOperator:+
+ NumericConstant:.7
+ ScalarValue:Y
+ BinaryOperator:*
+ BinaryOperator:-
+ FunctionInt
+ AssignmentOperator:=
+160 IF Z<=L THEN 190
+ ScalarValue:Z
+ ScalarValue:L
+ BinaryOperator:<=
+170 L=Z
+ ScalarReference:L
+ ScalarValue:Z
+ AssignmentOperator:=
+180 PRINT TAB(Z);"*";
+ ITEMS
+ ScalarValue:Z
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"*"
+ CarriageControl:;
+190 NEXT Y
+ VariableName:Y
+200 PRINT
+ ITEMS
+ CarriageControl:NL
+210 NEXT X
+ VariableName:X
+300 END
+ 

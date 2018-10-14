@@ -1,0 +1,327 @@
+2 PRINT TAB(33);"GOMOKO"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"GOMOKO"
+ CarriageControl:NL
+4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+6 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+8 DIM A(19,19)
+ NumericConstant:19
+ NumericConstant:19
+ CompoundDeclaration:A
+10 PRINT "WELCOME TO THE ORIENTAL GAME OF GOMOKO."
+ ITEMS
+ TextConstant:"WELCOME TO THE ORIENTAL GAME OF GOMOKO."
+ CarriageControl:NL
+20 PRINT: PRINT "THE GAME IS PLAYED ON AN N BY N GRID OF A SIZE"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"THE GAME IS PLAYED ON AN N BY N GRID OF A SIZE"
+ CarriageControl:NL
+30 PRINT "THAT YOU SPECIFY.  DURING YOUR PLAY, YOU MAY COVER ONE GRID"
+ ITEMS
+ TextConstant:"THAT YOU SPECIFY.  DURING YOUR PLAY, YOU MAY COVER ONE GRID"
+ CarriageControl:NL
+40 PRINT "INTERSECTION WITH A MARKER. THE OBJECT OF THE GAME IS TO GET"
+ ITEMS
+ TextConstant:"INTERSECTION WITH A MARKER. THE OBJECT OF THE GAME IS TO GET"
+ CarriageControl:NL
+50 PRINT "5 ADJACENT MARKERS IN A ROW -- HORIZONTALLY, VERTICALLY, OR"
+ ITEMS
+ TextConstant:"5 ADJACENT MARKERS IN A ROW -- HORIZONTALLY, VERTICALLY, OR"
+ CarriageControl:NL
+60 PRINT "DIAGONALLY.  ON THE BOARD DIAGRAM, YOUR MOVES ARE MARKED"
+ ITEMS
+ TextConstant:"DIAGONALLY.  ON THE BOARD DIAGRAM, YOUR MOVES ARE MARKED"
+ CarriageControl:NL
+70 PRINT "WITH A '1' AND THE COMPUTER MOVES WITH A '2'."
+ ITEMS
+ TextConstant:"WITH A '1' AND THE COMPUTER MOVES WITH A '2'."
+ CarriageControl:NL
+80 PRINT: PRINT "THE COMPUTER DOES NOT KEEP TRACK OF WHO HAS WON."
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"THE COMPUTER DOES NOT KEEP TRACK OF WHO HAS WON."
+ CarriageControl:NL
+90 PRINT "TO END THE GAME, TYPE -1,-1 FOR YOUR MOVE.": PRINT
+ ITEMS
+ TextConstant:"TO END THE GAME, TYPE -1,-1 FOR YOUR MOVE."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+110 PRINT "WHAT IS YOUR BOARD SIZE (MIN 7/ MAX 19)";: INPUT N
+ ITEMS
+ TextConstant:"WHAT IS YOUR BOARD SIZE (MIN 7/ MAX 19)"
+ CarriageControl:;
+ ScalarReference:N
+115 IF N>6 THEN 117
+ ScalarValue:N
+ NumericConstant:6
+ BinaryOperator:>
+116 GOTO 120
+ LineNumber:120
+117 IF N<20 THEN 210
+ ScalarValue:N
+ NumericConstant:20
+ BinaryOperator:<
+120 PRINT "I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19.": GOTO 110
+ ITEMS
+ TextConstant:"I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19."
+ CarriageControl:NL
+ LineNumber:110
+210 FOR I=1 TO N:FOR J=1 TO N: A(I,J)=0: NEXT J: NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:J
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+ VariableName:J
+ VariableName:I
+300 PRINT: PRINT "WE ALTERNATE MOVES.  YOU GO FIRST...": PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"WE ALTERNATE MOVES.  YOU GO FIRST..."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+310 PRINT "YOUR PLAY (I,J)";: INPUT I,J
+ ITEMS
+ TextConstant:"YOUR PLAY (I,J)"
+ CarriageControl:;
+ ScalarReference:I
+ ScalarReference:J
+315 PRINT
+ ITEMS
+ CarriageControl:NL
+320 IF I=-1 THEN 980
+ ScalarValue:I
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+330 X=I: Y=J: GOSUB 910: IF L=1 THEN 410
+ ScalarReference:X
+ ScalarValue:I
+ AssignmentOperator:=
+ ScalarReference:Y
+ ScalarValue:J
+ AssignmentOperator:=
+ LineNumber:910
+ ScalarValue:L
+ NumericConstant:1
+ BinaryOperator:=
+340 PRINT "ILLEGAL MOVE.  TRY AGAIN...": GOTO 310
+ ITEMS
+ TextConstant:"ILLEGAL MOVE.  TRY AGAIN..."
+ CarriageControl:NL
+ LineNumber:310
+410 IF A(I,J)=0 THEN 440
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+420 PRINT "SQUARE OCCUPIED.  TRY AGAIN...": GOTO 310
+ ITEMS
+ TextConstant:"SQUARE OCCUPIED.  TRY AGAIN..."
+ CarriageControl:NL
+ LineNumber:310
+440 A(I,J)=1
+ ScalarValue:I
+ ScalarValue:J
+ ScalarReference:A
+ NumericConstant:1
+ AssignmentOperator:=
+500 REM *** COMPUTER TRIES AN INTELLIGENT MOVE ***
+ Remark:*** COMPUTER TRIES AN INTELLIGENT MOVE ***
+510 FOR E=-1 TO 1: FOR F=-1 TO 1: IF E+F-E*F=0 THEN 590
+ control: VariableName:E
+ start:   ["NumericConstant:1", "UnaryOperator:-"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:1"]
+ control: VariableName:F
+ start:   ["NumericConstant:1", "UnaryOperator:-"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:E
+ ScalarValue:F
+ BinaryOperator:+
+ ScalarValue:E
+ ScalarValue:F
+ BinaryOperator:*
+ BinaryOperator:-
+ NumericConstant:0
+ BinaryOperator:=
+540 X=I+F: Y=J+F: GOSUB 910
+ ScalarReference:X
+ ScalarValue:I
+ ScalarValue:F
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:Y
+ ScalarValue:J
+ ScalarValue:F
+ BinaryOperator:+
+ AssignmentOperator:=
+ LineNumber:910
+570 IF L=0 THEN 590
+ ScalarValue:L
+ NumericConstant:0
+ BinaryOperator:=
+580 IF A(X,Y)=1 THEN 710
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:A
+ NumericConstant:1
+ BinaryOperator:=
+590 NEXT F: NEXT E
+ VariableName:F
+ VariableName:E
+600 REM *** COMPUTER TRIES A RANDOM MOVE ***
+ Remark:*** COMPUTER TRIES A RANDOM MOVE ***
+610 X=INT(N*RND(1)+1): Y=INT(N*RND(1)+1): GOSUB 910: IF L=0 THEN 610
+ ScalarReference:X
+ ScalarValue:N
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+ ScalarReference:Y
+ ScalarValue:N
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+ LineNumber:910
+ ScalarValue:L
+ NumericConstant:0
+ BinaryOperator:=
+650 IF A(X,Y)<>0 THEN 610
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:<>
+660 A(X,Y)=2: GOSUB 810: GOTO 310
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarReference:A
+ NumericConstant:2
+ AssignmentOperator:=
+ LineNumber:810
+ LineNumber:310
+710 X=I-E: Y=J-F: GOSUB 910
+ ScalarReference:X
+ ScalarValue:I
+ ScalarValue:E
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:Y
+ ScalarValue:J
+ ScalarValue:F
+ BinaryOperator:-
+ AssignmentOperator:=
+ LineNumber:910
+750 IF L=0 THEN 610
+ ScalarValue:L
+ NumericConstant:0
+ BinaryOperator:=
+760 GOTO 650
+ LineNumber:650
+800 REM *** PRINT THE BOARD ***
+ Remark:*** PRINT THE BOARD ***
+810 FOR I=1 TO N: FOR J=1 TO N: PRINT A(I,J);
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:A
+ CarriageControl:;
+840 NEXT J: PRINT: NEXT I: PRINT: RETURN
+ VariableName:J
+ ITEMS
+ CarriageControl:NL
+ VariableName:I
+ ITEMS
+ CarriageControl:NL
+ 
+910 L=1: IF X<1 THEN 970
+ ScalarReference:L
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarValue:X
+ NumericConstant:1
+ BinaryOperator:<
+920 IF X>N THEN 970
+ ScalarValue:X
+ ScalarValue:N
+ BinaryOperator:>
+930 IF Y<1 THEN 970
+ ScalarValue:Y
+ NumericConstant:1
+ BinaryOperator:<
+940 IF Y>N THEN 970
+ ScalarValue:Y
+ ScalarValue:N
+ BinaryOperator:>
+950 RETURN
+ 
+970 L=0: RETURN
+ ScalarReference:L
+ NumericConstant:0
+ AssignmentOperator:=
+ 
+980 PRINT: PRINT "THANKS FOR THE GAME!!"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"THANKS FOR THE GAME!!"
+ CarriageControl:NL
+985 PRINT "PLAY AGAIN (1 FOR YES, 0 FOR NO)";: INPUT Q
+ ITEMS
+ TextConstant:"PLAY AGAIN (1 FOR YES, 0 FOR NO)"
+ CarriageControl:;
+ ScalarReference:Q
+990 IF Q=1 THEN 110
+ ScalarValue:Q
+ NumericConstant:1
+ BinaryOperator:=
+999 END
+ 

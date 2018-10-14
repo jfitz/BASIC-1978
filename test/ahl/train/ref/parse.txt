@@ -1,0 +1,153 @@
+1 PRINT TAB(33);"TRAIN"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"TRAIN"
+ CarriageControl:NL
+2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+3 PRINT: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+4 PRINT "TIME - SPEED DISTANCE EXERCISE": PRINT
+ ITEMS
+ TextConstant:"TIME - SPEED DISTANCE EXERCISE"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+10 C=INT(25*RND(1))+40
+ ScalarReference:C
+ NumericConstant:25
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ NumericConstant:40
+ BinaryOperator:+
+ AssignmentOperator:=
+15 D=INT(15*RND(1))+5
+ ScalarReference:D
+ NumericConstant:15
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ NumericConstant:5
+ BinaryOperator:+
+ AssignmentOperator:=
+20 T=INT(19*RND(1))+20
+ ScalarReference:T
+ NumericConstant:19
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ NumericConstant:20
+ BinaryOperator:+
+ AssignmentOperator:=
+25 PRINT " A CAR TRAVELING";C;"MPH CAN MAKE A CERTAIN TRIP IN"
+ ITEMS
+ TextConstant:" A CAR TRAVELING"
+ CarriageControl:;
+ ScalarValue:C
+ CarriageControl:;
+ TextConstant:"MPH CAN MAKE A CERTAIN TRIP IN"
+ CarriageControl:NL
+30 PRINT D;"HOURS LESS THAN A TRAIN TRAVELING AT";T;"MPH."
+ ITEMS
+ ScalarValue:D
+ CarriageControl:;
+ TextConstant:"HOURS LESS THAN A TRAIN TRAVELING AT"
+ CarriageControl:;
+ ScalarValue:T
+ CarriageControl:;
+ TextConstant:"MPH."
+ CarriageControl:NL
+35 PRINT "HOW LONG DOES THE TRIP TAKE BY CAR";
+ ITEMS
+ TextConstant:"HOW LONG DOES THE TRIP TAKE BY CAR"
+ CarriageControl:;
+40 INPUT A
+ ScalarReference:A
+45 V=D*T/(C-T)
+ ScalarReference:V
+ ScalarValue:D
+ ScalarValue:T
+ BinaryOperator:*
+ ScalarValue:C
+ ScalarValue:T
+ BinaryOperator:-
+ BinaryOperator:/
+ AssignmentOperator:=
+50 E=INT(ABS((V-A)*100/A)+.5)
+ ScalarReference:E
+ ScalarValue:V
+ ScalarValue:A
+ BinaryOperator:-
+ NumericConstant:100
+ BinaryOperator:*
+ ScalarValue:A
+ BinaryOperator:/
+ FunctionAbs
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+55 IF E>5 THEN 70
+ ScalarValue:E
+ NumericConstant:5
+ BinaryOperator:>
+60 PRINT "GOOD! ANSWER WITHIN";E;"PERCENT."
+ ITEMS
+ TextConstant:"GOOD! ANSWER WITHIN"
+ CarriageControl:;
+ ScalarValue:E
+ CarriageControl:;
+ TextConstant:"PERCENT."
+ CarriageControl:NL
+65 GOTO 80
+ LineNumber:80
+70 PRINT "SORRY.  YOU WERE OFF BY";E;"PERCENT."
+ ITEMS
+ TextConstant:"SORRY.  YOU WERE OFF BY"
+ CarriageControl:;
+ ScalarValue:E
+ CarriageControl:;
+ TextConstant:"PERCENT."
+ CarriageControl:NL
+80 PRINT "CORRECT ANSWER IS";V;"HOURS."
+ ITEMS
+ TextConstant:"CORRECT ANSWER IS"
+ CarriageControl:;
+ ScalarValue:V
+ CarriageControl:;
+ TextConstant:"HOURS."
+ CarriageControl:NL
+90 PRINT
+ ITEMS
+ CarriageControl:NL
+95 PRINT "ANOTHER PROBLEM (YES OR NO)";
+ ITEMS
+ TextConstant:"ANOTHER PROBLEM (YES OR NO)"
+ CarriageControl:;
+100 INPUT A$
+ ScalarReference:A$
+105 PRINT
+ ITEMS
+ CarriageControl:NL
+110 IF A$="YES" THEN 10
+ ScalarValue:A$
+ TextConstant:"YES"
+ BinaryOperator:=
+999 END
+ 

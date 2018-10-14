@@ -1,0 +1,379 @@
+1 PRINT TAB(28);"GAME OF EVEN WINS"
+ ITEMS
+ NumericConstant:28
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"GAME OF EVEN WINS"
+ CarriageControl:NL
+2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+3 PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+4 INPUT "DO YOU WANT INSTRUCTIONS (YES OR NO)";A$:PRINT
+ ScalarReference:A$
+ ITEMS
+ CarriageControl:NL
+5 IF A$="NO" THEN 20
+ ScalarValue:A$
+ TextConstant:"NO"
+ BinaryOperator:=
+6 PRINT "THE GAME IS PLAYED AS FOLLOWS:":PRINT
+ ITEMS
+ TextConstant:"THE GAME IS PLAYED AS FOLLOWS:"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+7 PRINT "AT THE BEGINNING OF THE GAME, A RANDOM NUMBER OF CHIPS ARE"
+ ITEMS
+ TextConstant:"AT THE BEGINNING OF THE GAME, A RANDOM NUMBER OF CHIPS ARE"
+ CarriageControl:NL
+8 PRINT "PLACED ON THE BOARD.  THE NUMBER OF CHIPS ALWAYS STARTS"
+ ITEMS
+ TextConstant:"PLACED ON THE BOARD.  THE NUMBER OF CHIPS ALWAYS STARTS"
+ CarriageControl:NL
+9 PRINT "AS AN ODD NUMBER.  ON EACH TURN, A PLAYER MUST TAKE ONE,"
+ ITEMS
+ TextConstant:"AS AN ODD NUMBER.  ON EACH TURN, A PLAYER MUST TAKE ONE,"
+ CarriageControl:NL
+10 PRINT "TWO, THREE, OR FOUR CHIPS.  THE WINNER IS THE PLAYER WHO"
+ ITEMS
+ TextConstant:"TWO, THREE, OR FOUR CHIPS.  THE WINNER IS THE PLAYER WHO"
+ CarriageControl:NL
+11 PRINT "FINISHES WITH A TOTAL NUMBER OF CHIPS THAT IS EVEN."
+ ITEMS
+ TextConstant:"FINISHES WITH A TOTAL NUMBER OF CHIPS THAT IS EVEN."
+ CarriageControl:NL
+12 PRINT "THE COMPUTER STARTS OUT KNOWING ONLY THE RULES OF THE"
+ ITEMS
+ TextConstant:"THE COMPUTER STARTS OUT KNOWING ONLY THE RULES OF THE"
+ CarriageControl:NL
+13 PRINT "GAME.  IT GRADUALLY LEARNS TO PLAY WELL.  IT SHOULD BE"
+ ITEMS
+ TextConstant:"GAME.  IT GRADUALLY LEARNS TO PLAY WELL.  IT SHOULD BE"
+ CarriageControl:NL
+14 PRINT "DIFFICULT TO BEAT THE COMPUTER AFTER TWENTY GAMES IN A ROW."
+ ITEMS
+ TextConstant:"DIFFICULT TO BEAT THE COMPUTER AFTER TWENTY GAMES IN A ROW."
+ CarriageControl:NL
+15 PRINT "TRY IT!!!!": PRINT
+ ITEMS
+ TextConstant:"TRY IT!!!!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+16 PRINT "TO QUIT AT ANY TIME, TYPE A '0' AS YOUR MOVE.": PRINT
+ ITEMS
+ TextConstant:"TO QUIT AT ANY TIME, TYPE A '0' AS YOUR MOVE."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+20 DIM R(1,5)
+ NumericConstant:1
+ NumericConstant:5
+ CompoundDeclaration:R
+25 L=0: B=0
+ ScalarReference:L
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+30 FOR I=0 TO 5
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:5"]
+ step:    ["NumericConstant:1"]
+40 R(1,I)=4
+ NumericConstant:1
+ ScalarValue:I
+ ScalarReference:R
+ NumericConstant:4
+ AssignmentOperator:=
+50 R(0,I)=4
+ NumericConstant:0
+ ScalarValue:I
+ ScalarReference:R
+ NumericConstant:4
+ AssignmentOperator:=
+60 NEXT I
+ VariableName:I
+70 A=0: B=0
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+90 P=INT((13*RND(1)+9)/2)*2+1
+ ScalarReference:P
+ NumericConstant:13
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:9
+ BinaryOperator:+
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionInt
+ NumericConstant:2
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+100 IF P=1 THEN 530
+ ScalarValue:P
+ NumericConstant:1
+ BinaryOperator:=
+110 PRINT "THERE ARE";P;"CHIPS ON THE BOARD."
+ ITEMS
+ TextConstant:"THERE ARE"
+ CarriageControl:;
+ ScalarValue:P
+ CarriageControl:;
+ TextConstant:"CHIPS ON THE BOARD."
+ CarriageControl:NL
+120 E1=E
+ ScalarReference:E1
+ ScalarValue:E
+ AssignmentOperator:=
+130 L1=L
+ ScalarReference:L1
+ ScalarValue:L
+ AssignmentOperator:=
+140 E=(A/2-INT(A/2))*2
+ ScalarReference:E
+ ScalarValue:A
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:A
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:-
+ NumericConstant:2
+ BinaryOperator:*
+ AssignmentOperator:=
+150 L=INT((P/6-INT(P/6))*6+.5)
+ ScalarReference:L
+ ScalarValue:P
+ NumericConstant:6
+ BinaryOperator:/
+ ScalarValue:P
+ NumericConstant:6
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:-
+ NumericConstant:6
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+160 IF R(E,L)>=P THEN 320
+ ScalarValue:E
+ ScalarValue:L
+ ScalarValue:R
+ ScalarValue:P
+ BinaryOperator:>=
+170 M=R(E,L)
+ ScalarReference:M
+ ScalarValue:E
+ ScalarValue:L
+ ScalarValue:R
+ AssignmentOperator:=
+180 IF M<=0 THEN 370
+ ScalarValue:M
+ NumericConstant:0
+ BinaryOperator:<=
+190 P=P-M
+ ScalarReference:P
+ ScalarValue:P
+ ScalarValue:M
+ BinaryOperator:-
+ AssignmentOperator:=
+200 IF M=1 THEN 510
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:=
+210 PRINT "COMPUTER TAKES";M;"CHIPS LEAVING";P;"... YOUR MOVE";
+ ITEMS
+ TextConstant:"COMPUTER TAKES"
+ CarriageControl:;
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:"CHIPS LEAVING"
+ CarriageControl:;
+ ScalarValue:P
+ CarriageControl:;
+ TextConstant:"... YOUR MOVE"
+ CarriageControl:;
+220 B=B+M
+ ScalarReference:B
+ ScalarValue:B
+ ScalarValue:M
+ BinaryOperator:+
+ AssignmentOperator:=
+230 INPUT M
+ ScalarReference:M
+240 M=INT(M)
+ ScalarReference:M
+ ScalarValue:M
+ FunctionInt
+ AssignmentOperator:=
+250 IF M<1 THEN 450
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:<
+260 IF M>4 THEN 460
+ ScalarValue:M
+ NumericConstant:4
+ BinaryOperator:>
+270 IF M>P THEN 460
+ ScalarValue:M
+ ScalarValue:P
+ BinaryOperator:>
+280 IF M=P THEN 360
+ ScalarValue:M
+ ScalarValue:P
+ BinaryOperator:=
+290 P=P-M
+ ScalarReference:P
+ ScalarValue:P
+ ScalarValue:M
+ BinaryOperator:-
+ AssignmentOperator:=
+300 A=A+M
+ ScalarReference:A
+ ScalarValue:A
+ ScalarValue:M
+ BinaryOperator:+
+ AssignmentOperator:=
+310 GOTO 100
+ LineNumber:100
+320 IF P=1 THEN 550
+ ScalarValue:P
+ NumericConstant:1
+ BinaryOperator:=
+330 PRINT "COMPUTER TAKES";P;"CHIPS."
+ ITEMS
+ TextConstant:"COMPUTER TAKES"
+ CarriageControl:;
+ ScalarValue:P
+ CarriageControl:;
+ TextConstant:"CHIPS."
+ CarriageControl:NL
+340 R(E,L)=P
+ ScalarValue:E
+ ScalarValue:L
+ ScalarReference:R
+ ScalarValue:P
+ AssignmentOperator:=
+350 B=B+P
+ ScalarReference:B
+ ScalarValue:B
+ ScalarValue:P
+ BinaryOperator:+
+ AssignmentOperator:=
+360 IF B/2=INT(B/2) THEN 420
+ ScalarValue:B
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:B
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:=
+370 PRINT "GAME OVER ... YOU WIN!!!": PRINT
+ ITEMS
+ TextConstant:"GAME OVER ... YOU WIN!!!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+390 IF R(E,L)=1 THEN 480
+ ScalarValue:E
+ ScalarValue:L
+ ScalarValue:R
+ NumericConstant:1
+ BinaryOperator:=
+400 R(E,L)=R(E,L)-1
+ ScalarValue:E
+ ScalarValue:L
+ ScalarReference:R
+ ScalarValue:E
+ ScalarValue:L
+ ScalarValue:R
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+410 GOTO 70
+ LineNumber:70
+420 PRINT "GAME OVER ... I WIN!!!": PRINT
+ ITEMS
+ TextConstant:"GAME OVER ... I WIN!!!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+430 GOTO 70
+ LineNumber:70
+450 IF M=0 THEN 570
+ ScalarValue:M
+ NumericConstant:0
+ BinaryOperator:=
+460 PRINT M;"IS AN ILLEGAL MOVE ... YOUR MOVE";
+ ITEMS
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:"IS AN ILLEGAL MOVE ... YOUR MOVE"
+ CarriageControl:;
+470 GOTO 230
+ LineNumber:230
+480 IF R(E1,L1)=1 THEN 70
+ ScalarValue:E1
+ ScalarValue:L1
+ ScalarValue:R
+ NumericConstant:1
+ BinaryOperator:=
+490 R(E1,L1)=R(E1,L1)-1
+ ScalarValue:E1
+ ScalarValue:L1
+ ScalarReference:R
+ ScalarValue:E1
+ ScalarValue:L1
+ ScalarValue:R
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+500 GOTO 70
+ LineNumber:70
+510 PRINT "COMPUTER TAKES 1 CHIP LEAVING";P;"... YOUR MOVE";
+ ITEMS
+ TextConstant:"COMPUTER TAKES 1 CHIP LEAVING"
+ CarriageControl:;
+ ScalarValue:P
+ CarriageControl:;
+ TextConstant:"... YOUR MOVE"
+ CarriageControl:;
+520 GOTO 220
+ LineNumber:220
+530 PRINT "THERE IS 1 CHIP ON THE BOARD."
+ ITEMS
+ TextConstant:"THERE IS 1 CHIP ON THE BOARD."
+ CarriageControl:NL
+540 GOTO 120
+ LineNumber:120
+550 PRINT "COMPUTER TAKES 1 CHIP."
+ ITEMS
+ TextConstant:"COMPUTER TAKES 1 CHIP."
+ CarriageControl:NL
+560 GOTO 340
+ LineNumber:340
+570 END
+ 

@@ -1,0 +1,2048 @@
+BASIC-1978
+==========
+
+Overview
+--------
+
+BASIC-1978 is an implementation of the BASIC language.
+
+My references are Kemeny and Kurtz's "BASIC Programming" (John Wiley and Sons, 1967), James S. Coan's "Basic BASIC" (Hayden, 1978), and David Ahl's "101 BASIC Computer Games" (DEC, 1973).
+
+The code for the interpreter is a fork of my BASIC-1973 project, with changes to bring the language closer to Microsoft's BASIC interpreters of the late 1970s.
+
+Initial impressions
+-------------------
+
+BASIC-1978 is really primitive!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+BASIC-1978 is an interpreter with no optimization.
+Each line is interpreted each time it is executed.
+If a line is executed ten times, it is interpreted ten times.
+There is some up-front parsing that occurs, but not much.
+
+BASIC-1978 is really fussy!
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+BASIC-1978 keeps the spirit of the original BASIC language, as much as possible.
+Everything must be in upper case, except for text constants in PRINT statements.
+Commands ("RUN", "LIST"), statements ("PRINT", "LET"), function names, and variable names must be in upper case.
+Lower case causes an error.
+
+
+Running BASIC-1978
+------------------
+
+Interactive mode
+~~~~~~~~~~~~~~~~
+
+This is the classic mode, in which the user may edit programs and run them in the BASIC environment.
+You may use any of the immediate commands (see below).
+
+Run mode
+~~~~~~~~
+
+This option runs BASIC-1978 and also loads a specified BASIC program and then either lists or runs it.
+When the BASIC program ends, BASIC-1978 ends.
+
+|==========
+|Option |Effect
+|--run filename |Specifies the file to load and run. May be abbreviated as -r
+|--no-timing |Suppress the CPU time usage at the end of the output. Useful for comparing output when running tests.
+|--profile |Display profile information after a program is run.
+|--list filename |Specifies the file to load and list. May be abbreviated as -l
+|--pretty filename |Specifies the file to load and pretty-print. May be abbreviated as -p
+|--pretty-multiline |For pretty output, prints multistatement lines on multiplw lines, one statement per line.
+|--parse filename |specifies the file to load and parse.
+|--no-heading |Suppress the heading and trailing messages
+|--trace |Print each statement prior to executing it (useful for debugging). Does the same thing as the 'TRACE' command in interactive mode, but from the command line.
+|--provenence |When displaying a variable in a trace, also display the line number where it was set.
+|--tty |Print output slowly, emulating the speed of an ASR-33 Teletype. Provides a better experience with some programs (often games) in which slow output lets your anticipation build. The fast output of modern computers displays information quickly, and TTY mode lets you read each line as it is "printed".
+|--tty-lf |Similar to --tty but delays only the newline characters, not each individual character. Useful with --trace when debugging.
+|--print-width width |Specifies a print width. Lines will wrap at the specified column. Default value is 72.
+|--zone-width width |Specifies a zone width. PRINT statements will position output separated by commas in zones. Default is 16.
+|--randomize |Forces new sequences of numbers from the RND() function on successive runs.
+|--ignore-randomize |Forces the interpreter to ignore the RANDMIZE and RANDOM statements. Successive runs of the interpreter will use the same sequence of numbers from the RND() function. (Useful for testing.)
+|--echo-input |Echoes console input to output. Useful in run mode when redirecting input from a text file.
+|--int-floor |The INT function truncates towards negative infinity. (Normally towards zero.)
+|--ignore-rnd-arg |The RND function ignores its argument and provides a number between zero and one. This matches the behavior of certain BASICs, including K&K.
+|--implied-semicolon |When printing items not delimited by a comma or semicolon, provide spacing as if a semicolon was provided. (Normally the items have no spaces between them.)
+|--back-tab |Allows the TAB() function to move to the left. Normally, it moves only to the right or not at all.
+|--qmark-after-prompt |On an INPUT statement, print the question mark after the prompt.
+|--lock-fornext |Lock control variables to FOR/NEXT loops. Variables can be read but not changed.
+|--require-initialized |Require that variables are initialized before they are used.
+|--asc-allow-all |The ASC() function allows any characters. The default behavior is to limit characters to printable ASCII (32d to 126d).
+|--chr-allow-all |The CHR$() function allows any output characters. The default behavior is to limit characters to printable ASCII (32d to 126d).
+|==========
+
+Immediate commands
+------------------
+
+Immediate commands are executed on the command line.
+They are not stored as part of the program.
+They have no line number.
+They are available only in "run" mode.
+
+LOAD
+~~~~
+
+Loads a stored program into memory.
+Sorts statements by line number.
+Clears the current program prior to loading the new one.
+
+Syntax:	LOAD filename
+
+The 'filename' argument must be enclosed in quotes.
+
+Clears all breakpoints.
+
+SAVE
+~~~~
+
+Saves the current program to disk.
+Will overwrite an existing file without prompting.
+
+Syntax:	SAVE filename
+
+The 'filename' argument must be enclosed in quotes.
+
+NEW
+~~~
+
+Clears the current program.
+Does not ask to save a loaded program.
+
+Syntax:	NEW
+
+Clears all breakpoints.
+
+LIST
+~~~~
+
+Lists the current program on the screen.
+
+Syntax:	LIST [line specification]
+
+The line specification may be in the form of a single line number, a range (two numbers separated by a hyphen), or a starting line and a count separated by a plus sign.
+
+Examples:
+
+|==========
+|Command |Result
+|LIST |Lists the entire program.
+|LIST 100 |Lists line 100, if it exists. If the line does not exist, nothing is printed.
+|LIST 100-199 |Lists all lines from line 100 to (and including) line 199.
+|LIST 100+10 |Lists line 100 and the next 10 lines, regardless of their line nunbers.
+|LIST 100+ |Lists line 100 and the next 20 lines.
+|==========
+
+RUN
+~~~
+
+Runs the current program.
+
+Syntax:	RUN
+
+Program execution occurs in two phases.
+The first phase checks each statement for errors and executes some statements.
+Any error detected at this stage will halt execution.
+An error may be a syntax error or another error.
+GOTO and GOSUB statements with undefined targets are examples of errors.
+
+Statements executed in this first phase are the DATA, FILES, and DEF statements.
+They are executed only once in a program, even if the path of execution travels to them multiple times.
+
+The second phase executes statements, starting with the lowest-numbered statement and following the path of execution.
+
+BREAK
+~~~~~
+
+Sets, clears, or displays breakpoints.
+
+Syntax: BREAK line-number
+Syntax: BREAK -line-number
+Syntax: BREAK
+
+To set a breakpoint, type 'BREAK' followed by a line number.
+To clear a breakpoint, type 'BREAK' followed by a negative line number.
+To display breakpoints, type 'BREAK' with no arguments.
+
+CROSSREF
+~~~~~~~~
+
+Lists the numeric constants, text constants, functions, and variables used in the program, along with the line numbers on which they appear.
+
+DELETE
+~~~~~~
+
+Removes lines from the program.
+
+My experience with other BASIC interpreters is that lines can be deleted by simply typing a line number and pressing RETURN.
+(That is, entering an "empty" line with line number and nothing else.)
+That technique does not work with BASIC-1978, as BASIC-1978 allows empty lines to be part of a program.
+
+So how to remove a line from a program?
+Replacing a line with an empty line is possible, and certainly makes the offending line "go away" from execution, but what if we want to really remove a line?
+
+That's what the DELETE command does.
+
+DELETE uses the same specification as the LIST command.
+
+Syntax:	DELETE [line specification]
+
+If the list specification is a single line, it is deleted immediately.
+If the list specification is a range, the lines are displayed and the user must confirm the operation.
+
+The DELETE command with no specification (implying the entire program) does not delete the program but does nothing.
+(To delete the entire program, use the NEW command.)
+
+PRETTY
+~~~~~~
+
+Lists the current program on the screen, adjusting the spacing between keywords, variable names, and constants.
+
+Syntax:	PRETTY [line specification]
+
+The line specification is the same as the line specification for the LIST command.
+
+PROFILE
+~~~~~~~
+
+Lists the current program on the screen in "pretty" mode, with additional information about the most recent run.
+The profile information is enclosed in parentheses immediately after line numbers.
+Each statement is printed on its own line.
+Lines with multiple statements are split into individual statements.
+Each line of the profile output starts with the statement line number and the index of the statement on the line.
+For single-statement lines, the index is zero.
+For multi-statement lines, each statement has a unique index starting with zero.
+
+The line
+
+    10 A=10 : B=20
+
+will appear in the profile as
+
+    10.0 (0.0005/1) A = 10
+    10.1 (0.0005/1) B = 20
+
+
+Syntax:	PROFILE [line specification]
+
+The line specification is the same as the line specification for the LIST and PRETTY commands.
+
+The profile information lists the total execution time for the statement, and the number of times the statement was executed.
+Counts are reset at the start of each execution.
+
+Profiling excludes the first phase of processing of certain lines (DATA, FILES, and DEF FN).
+These lines are processed before the program begins, and they do nothing when executed in the main execution.
+For example, placing a DATA statement inside of a FOR/NEXT loop does not cause the lines data values to be stored multiple times.
+
+RENUMBER
+~~~~~~~~
+
+Renumbers lines in the current program.
+
+Syntax: RENUMBER
+
+Modifies the current program, changing each line number.
+The first line is assigned line number 10.
+Each successive line is assgned a number 10 higher than the previous line.
+
+Each statement which contains a line number (GOTO, GOSUB, IF, ON/GOTO) is modified to use the corresponding new line number.
+
+RENUMBER also adjusts breakpoints, if any are set.
+
+TRACE
+~~~~~
+
+Runs the current program, displaying each line prior to execution.
+
+Syntax:	TRACE
+
+After the line is displayed and executed, certain statements (READ, LET, and IF) display additional information.
+READ displays the values read.
+LET displays the new value assigned.
+IF displays the two values, the operator, and the result ('true' or 'false').
+
+DIMS
+~~~~
+
+Displays the dimensioned variables that have been defined in DIM statements.
+
+VARS
+~~~~
+
+Displays the variables that have been assigned values.
+
+UDFS
+~~~~
+
+Displays the defined user-defined functions.
+
+
+TOKENS
+~~~~~~
+
+Similar to LIST, the TOKENS command displays a line or group of lines, showing the tokens identified by the tokenizer.
+
+Syntax:	TOKENS [line specification]
+
+The line specification is the same as the line specification for the LIST command.
+
+PARSE
+~~~~~
+
+Similar to LIST and TOKENS, the PARSE command displays a line or group of lines, showing the tokens identified by the parser. 
+
+Syntax:	PARSE [line specification]
+
+The line specification is the same as the line specification for the LIST command.
+
+
+Debug shell
+-----------
+
+The debug shell lets you pause execution, examine or change the program, and examine or change variables.
+The shell is invoked by a breakpoint during a RUN or TRACE.
+Breakpoints are set by the BREAK command.
+
+The debug shell is available only in interactive mode.
+It is not available in programs run from the command line.
+
+Commands in the debug shell are:
+
+GO
+~~
+
+Continues execution of the program.
+
+STOP
+~~~~
+
+Stops the debug shell and the program.
+
+STEP
+~~~~
+
+Executes the current line and then re-invokes the debug shell.
+
+BREAK
+~~~~~
+
+Display, set, or clear breakpoints.
+
+LIST
+~~~~
+
+Lists program lines.
+
+PRETTY
+~~~~~~
+
+Pretty-lists program lines.
+
+DELETE
+~~~~~~
+
+Deletes program lines.
+Actually replaces the lines with blank lines, to avoid confusing the interpreter by deleting the current line.
+
+DIM
+~~~
+
+Assigns dimensions to a variable.
+
+GOTO
+~~~~
+
+Assigns control to the specified statement.
+
+LET
+~~~
+
+Assigns a value to a variable.
+The assigned value may be a constant or an expression.
+
+PRINT
+~~~~~
+
+Prints one or more variables.
+
+PROFILE
+~~~~~~~
+
+Prints profile information.
+
+Variables
+---------
+
+Variables store numeric, integer, and text values.
+Numeric variables handle integer and floating point values automatically; integer variables are limited to integer values.
+
+Variable names consist of a single letter and an optional digit and an optional subscript.
+Subscripts are enclosed in parentheses or square brackets.
+Values for subscripts are truncated to integers.
+The values 2.3 and 2.8 will both be converted to the value 2 when storing or retrieving values.
+
+Names for text variables include a trailing '$' character.
+Names for integer variables include a trailing '%' character.
+
+|==========
+|Name |Valid or reason it is not valid
+|A |
+|B |
+|C |
+|D1 |
+|E0 |
+|F |
+|F1 |
+|F2 |
+|G(3) |
+|H(17) |
+|L(1,0) |
+|A$ |
+|B$ |
+|D1$ |
+|E0$ |
+|F1$ |
+|G$(3) |
+|H$(17) |
+|L$(1,0) |
+|B[2] |
+|I% |
+|N2%(4%) |
+|M%(5) |
+|AA |Names may have at most one letter
+|A10 |Names may have at most one digit after one letter
+|9Z |Names must start with a letter
+|A_2 |Names may not contain underscore
+|K() |Subscripted names must have subscript values
+
+Variables do not need to be declared.
+They are assumed to exist with value zero.
+
+Constant values
+---------------
+
+BASIC-1978 supports one constant value:
+
+|==========
+|Name |Value
+|PI |3.1415926
+|==========
+
+Constant values may be used in place of numeric or string values.
+They may not be on the left-hand side of an assignment.
+
+Expressions and operators
+-------------------------
+
+BASIC-1978 supports the following arithmetic operations for numeric expressions:
+
+|==========
+|Operation |Symbol |Precedence
+|Posation (unary) |+ |1
+|Negation (unary) |- |1
+|Addition |+ |4
+|Subtraction |- |4
+|Multiplication |* |3
+|Division |/ |3
+|Exponent |^ |1
+|Exponent |** |1
+|Minimum |MIN |2
+|Maximum |MAX |2
+|==========
+
+BASIC-1978 supports the following operations for string expressions:
+
+|==========
+|Operation |Symbol |Precedence
+|Concatenation |+ |3
+|==========
+
+BASIC-1978 supports the following operations for boolean expressions:
+
+|==========
+|Operation |Symbol |Precedence
+|Logical Inversion (unary) |NOT |1
+|Logical And |AND |2
+|Logical Or |OR |2
+|==========
+
+Parentheses may be used to force computations is a specific order.
+The expression A+B*C performs the multiplication first; the expression (A+B)*C performs the addition first.
+
+Errors in computation (overflow, underflow, and divide by zero) cause execution to stop.
+
+BASIC-1978 supports the following boolean comparisions for numeric variables:
+
+|==========
+|Operation |Symbol
+|Equal |=
+|Not equal |<> or #
+|Greater than |>
+|Greater than or equal |>=
+|Less than |<
+|Less than or equal |<=
+|==========
+
+BASIC-1978 supports the following boolean comparisions for string variables:
+
+|==========
+|Operation |Symbol
+|Equal |=
+|Not equal |<>
+|Greater than |>
+|Greater than or equal |>=
+|Less than |<
+|Less than or equal |<=
+|==========
+
+BASIC-1978 supports the following boolean operations
+
+|==========
+|Operation |Symbol
+|Logical 'and' |AND
+|Logical 'or' |OR
+|==========
+
+Boolean comparisons and operations are sensible only within IF statements.
+They cannot be used in assignment statements as the target variable must be either numeric or string type.
+
+Numeric values
+--------------
+
+Numeric values are either integers or floating point.
+Integer values may contain a trailing '%' character.
+Integers are stored internally with Ruby's Fixnum class.
+Floating point numbers are stored as Ruby's Float with full precision and printed with six significant digits.
+
+Numeric constants may be integer or real, and may use E-notation with unsigned exponents.
+The 'E' must be uppercase; a lowercase 'e' will be rejected.
+Exponents may be signed or unsigned.
+
+|==========
+|Numeric constant |Valid or reason not valid
+|0 |
+|1 |
+|2 |
+|-5 |
+|17 |
+|123456789 |
+|1.03 |
+|-2.17 |
+|1E4 |
+|-2E3 |
+|1E-2 |
+|2.37E+4 |
+|2% |
+|0A |Only digits 0 through 9 and decimal points (and the 'E' for exponent) are permitted.
+|3.03+E3 |The sign for the exponent must be after the 'E'. (This expression will be parsed as the value 3.03 plus the contents of variable E3.)
+|1e4 |The 'E' for exponent must be uppercase.
+|==========
+
+BASIC-1978 converts integer and numeric values readily.
+Many original variants of BASIC required an exact type match (integer to integer, numeric to numeric).
+BASIC-1978 does not require an exact match.
+It will convert the original value to the expected type.
+The conversion may result in a change of value, as integers cannot hold fractional values.
+
+String values
+-------------
+
+String values are text.
+Constants in the program are enclosed in double quotes.
+
+|==========
+|Text constant |Valid or reason not valid
+|"A" |
+|"Hello" |
+|"Anytown, USA" |
+|"A "quoted" string" |Text constants may not contain the double quote character
+|'A "quoted" string' |Valid if --single-quote-strings is specified
+
+BASIC-1978 converts numeric values (floating point or integer) to strings readily.
+
+Strings at the end of the line do not need a terminating quote.
+
+Program statements
+------------------
+
+Program statements are stored as part of the program.
+Every program statement must have a line number.
+Every statement begins with a keyword except for the LET-less assignment.
+For most statements, the keyword be abbreviated to three letters.
+When a statement begins with multiple keywords (such as MAT PRINT), only the first keyword may be abbreviated.
+
+A line may contain a comment denoted by a single quote.
+Everything to the right of the comment lead character is a comment.
+
+Line numbers
+~~~~~~~~~~~~
+
+Line numbers are positive integers less than 10000.
+
+Empty lines
+~~~~~~~~~~~
+
+A line number with no following text is an empty line.
+It is retained as part of the program, but performs no action during execution.
+
+Examples:
+
+	10
+	120
+	6731
+
+Multistatement lines
+~~~~~~~~~~~~~~~~~~~~
+
+Multiple statements may be placed on a single line, separated by colon characters.
+
+Examples:
+
+	20 PRINT "HELLO" : GOSUB 220 : PRINT "GOODBYE"
+	300 FOR I = 1 TO 10 : A(I) = I * 2 : NEXT I
+
+CHAIN
+~~~~~
+
+Transfers control to a second BASIC program.
+Execution begins at the first line of the second program.
+
+Syntax: CHAIN "filename"
+
+The file name may contain a path.
+Trailing whitespace characters are removed from the file name.
+
+The CHAIN operation preserves variables, dimension specifications, and open files.
+It destroys definitions for user-defined functions, the call stack for GOSUB statements, and the internal blocks for active FOR/NEXT statements.
+(You cannot RETURN from the second program to the first program, but you can CHAIN back.)
+
+CHANGE
+~~~~~~
+
+Changes string variables to an array of numbers, or an array of numbers to a string variable
+
+Syntax:	CHANGE variable TO variable
+Syntax:	CHA variable TO variable
+
+The two variables must refer to a numeric array and a string variable (one of each).
+
+When converting an array to a string the CHANGE statement is equivalent to an assignment with the PACK$() function.
+When converting a string to an array, the statement is equivalent to an assignment with the UNPACK() function.
+
+Examples:
+
+	90 CHANGE A TO A$
+	100 CHANGE B$ TO C
+	110 CHANGE A1 TO Z4$
+
+The array of numeric values contains the length in the zero position and one value for each character in the corresponding string.
+
+CLOSE
+~~~~~
+
+Closes a file.
+
+Syntax: CLOSE #1
+Syntax: CLO #4
+
+The CLOSE command should not be used with files opened with a FILES command.
+
+DATA
+~~~~
+
+Specifies values for READ or MAT READ statements
+
+Syntax:	DATA value list
+Syntax:	DAT value list
+
+Values must be numeric separated by commas.
+Expressions may be numeric or string, but must match the variable that will be used in the READ statement.
+Text constants must be enclosed in quotes.
+
+Examples:
+
+	390 DATA 3, 150, 175, 180
+	400 DATA 2
+	410 DATA "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"
+
+The DATA statement is processed before the program runs, and processed only once.
+Thus, it may appear at the end of the program, and does not have to appear before a READ statement.
+
+But the side effect from processing the statement only once is ... the statement is processed only once (per run).
+A DATA statement inside a FOR/NEXT loop is processed only once, not once for each loop execution.
+
+The common behavior for all BASICs is to parse the values as constants.
+BASIC-1978 parses the values as numeric expressions, due to its parsing of unary operators as separate from numeric values.
+The value '-1' is parsed as a unary minus and the value 1, which must be evaluated as an expression.
+This behavior of BASIC-1978 allows for any expression in DATA statements, including the use of variables and functions, but since DATA statements are interpreted before the program is run (and interpreted only once even if contained by a loop) variables will evaluate to zero.
+
+You can use expressions with only numeric constants, such as 3/4 or SIN(0.25).
+
+DEF
+~~~
+
+Specifies a user-defined function.
+User-defined functions may be expression-based or statement-based.
+
+Syntax:	DEF name(parameters) = expression
+Syntax: DEF name(parameters)
+
+User-defined functions have names in the form 'FNx' where 'x' is a single letter.
+
+The parameters in the definition must be single letters.
+They are not variable names.
+The invokation of the function may provide a variable name.
+(See examples below.)
+
+The parameters specified in the definition are substituted into the expression at run-time; other variables specified in the expression are evaluated as usual, using the existing values at the time of execution.
+
+The definition for an expression-based user-defined function is an expression, similar to the right-hand side of the assignment in a LET statement.
+
+Examples:
+
+	10 DEF FNA(A) = INT(A)
+	20 DEF FNB(C) = COS(C)/SIN(C)
+	30 DEF FNC(C) = COS(C)/SIN(A)
+	100 LET P1 = 3.1415
+	105 LET R4 = 20.1
+	110 LET A1 = FNA(R4)
+	120 LET B1 = FNB(30/P1)
+	130 LET A = 30/3.1416
+	131 LET A1 = FNC(45/P1)
+
+The definition for a statement-based user-defined function is a set of lines ending with an FNEND statement.
+
+Examples:
+
+	10 DEF FNA(H)
+	20 FNA = H - 7
+	30 FNEND
+
+	100 DEF FNB(Q) : R1 = RND(0)*Q : FNB = INT(R1) : FNEND
+
+You can GOTO or GOSUB within a function.
+You cannot GOTO or GOSUB into the body of a user-defined function, or out of the body of a user-defined function, or from one user-defined function to another user-defined function.
+
+The DEF statement is processed before the program runs, and processed only once.
+Thus, it does not have to appear before it is used in a LET statement.
+(Although tradition is that the DEF is specified before the function is used.)
+
+DIM
+~~~
+
+Specifies the number of dimensions and maximum subscripts for each dimension.
+(Without a DIM statement, variables may have a single dimension of at most 10.)
+
+Examples:
+
+	10 DIM A(20)
+	20 DIM B(15), C(20,30)
+
+Arrays are zero-based, so the DIM A(20) statement allows for values A(0) through A(20).
+
+END
+~~~
+
+Marks the end of the program.
+An END statement, when executed, will force the execution of the program to stop.
+
+Syntax:	END
+
+Examples:
+
+	999 END
+
+The END statement must be the last statement in the program, and there should be only one of them.
+
+FOR
+~~~
+
+Performs a sequence of statements for a specific number of times.
+
+Syntax:	PRINT control variable = starting value TO ending value
+Syntax:	PRINT control variable = starting value TO ending value STEP iteration value
+
+The statements after the FOR statement (up to the accompanying NEXT statement) are repeated.
+The control variable may not have subscripts.
+The starting value, ending value, and iteration value may be integers or real.
+If the starting value is greater than the ending value (or less than the ending value, when the STEP value is negative) then the statements between the FOR statement and the next NEXT statement with a matching control value are not executed.
+
+A STEP value of zero will cause a loop that does not end.
+
+The variable after termination of the loop is usually the end value specified in the FOR statement.
+The value after termination may vary, depending on the initial value, the end value, and the step value.
+The --fornext-one-beyond option sets the variable to the next value, not the end value.
+
+Examples:
+
+	10 FOR I = 1 TO 10
+	20 PRINT I
+	30 NEXT I
+
+	10 FOR I = 1 TO 10 STEP 2
+	20 PRINT I
+	30 NEXT I
+
+	10 FOR I = 1 TO 10.5 STEP 0.5
+	20 PRINT I
+	30 NEXT I
+
+	10 FOR I = 10 TO 1 STEP -1
+	20 PRINT I
+	30 NEXT I
+
+It is possible to change the value of the control value within the loop. You can write:
+
+	10 FOR I = 1 TO 10
+	20 PRINT A
+	30 LET I = 2
+	40 NEXT I
+
+This will lock the program into a permanent loop, as the value of I will never reach 10.
+
+The --lock-fornext option prevents such changes.
+When --lock-fornext is specified, an attempt to change a control variable causes an error.
+The variable may be changed after the FOR/NEXT loop terminates.
+Note that a GOTO to outside of the FOR/NEXT loop does not terminate the loop or unlock the variable.
+
+GOTO
+~~~~
+
+Changes the flow of the program.
+
+Syntax:	GO TO line number
+Syntax:	GOTO line number
+Syntax: GOTO expression OF line number, line number, line number, ...
+Syntax:	GOT line number
+Syntax: GOT expression OF line number, line number, line number, ...
+
+Examples:
+
+	300 GO TO 100
+	310 GOTO 25
+	330 GOTO A OF 100, 130, 180
+	340 GO TO A*2+C OF 500, 550, 620, 750
+
+The GOTO OF form is identical to the ON GOTO statement.
+The expression is evaluated and the integral value is used as an index for the list of line numbers.
+The selected line number is the next line number executed.
+
+Notice that the command "350 GO TO 350" is legal but not sensible.
+The interpreter will execute line 350 repeatedly with no output.
+(This is called a "locked loop" or more humorously a "dynamic halt".)
+
+GOSUB
+~~~~~
+
+Changes the flow of the program by calling a subroutine.
+
+Syntax:	GOSUB line number
+Syntax:	GOS line number
+
+Examples:
+
+	300 GOSUB 400
+
+Notice that the command "350 GOSUB 350" is legal but not sensible.
+The interpreter will execute line 350 repeatedly with no output.
+Unlike the '350 GOTO 350' example, this command will evantually stop, as each iteration adds a return address to an internal stack.
+Eventually, the underlying Ruby process will exhaust available memory and halt.
+
+IF/THEN, IF/THEN/ELSE
+~~~~~~~~~~~~~~~~~~~~~
+
+Conditionally changes the flow of the program, based on an expression.
+
+Syntax:	IF expression THEN line number
+	IF expression THEN statement
+	IF expression THEN line number ELSE line number
+	IF expression THEN statement ELSE line number
+	IF expression THEN line number ELSE statement
+	IF expression THEN statement ELSE statement
+
+The "target" after the THEN keyword must be a line number or a statement.
+
+The expression may evaluate to a true or false value, or may evaluate to a numeric or text value.
+Numeric values of zero are treated as false; other values are considered true.
+String values of "" are treated as false; other values (including "false", "no", "F") are considered true.
+
+Examples:
+
+	100 IF A = 1 THEN 200
+	110 IF A > B THEN 250
+	120 IF G1 <= G2 THEN 301
+	130 IF A$ = "HELLO" THEN 202
+	150 IF A = 10 THEN PRINT "SUCCESS"
+	200 IF B > 5 THEN 120 ELSE 300
+	210 IF B > 5 THEN PRINT "B > 5" ELSE PRINT "B <= 5"
+	300 IF C = 0 THEN IF D = 4 THEN PRINT "DONE"
+
+When the expression evaluates as true, the THEN clause is executed.
+When the clause is a line number, that line is executed next.
+When the clause is a statement, that statement is executed.
+After a statement execution, control moves to the next statement, which may be the next line or may be the next statement in a multistatement line.
+
+in the code:
+
+     	100 IF A = 10 THEN PRINT "A=10":PRINT "ALL DONE"
+	110 LET C = 20
+
+When A is equal to 10, the text "A=10" is printed, and then the text "ALL DONE" is printed. (And then C is set to 20.)
+
+When the expression evaluates as false, the THEN clause is not executed. Whether the clause is a line number or a statement, it is skipped and the next statement is executed.
+
+In our example code, when A is not equal to 10, the text "ALL DONE" is printed and then C is set to 20.
+
+The --if-false-next-line option changes this behavior. When specified, control after a false IF with no ELSE and with a statement clause is changed to the next numbered line.
+
+In our example code, when A is not equal to 10 and --if-false-next-line is specified, no text is printed and C is set to 20.
+
+The --if-false-next-line option has no effect on IF statements with destination line numbers. Why? Because it makes no sense. Consider the code:
+
+    	100 IF A = 10 THEN 200 : PRINT "A NOT EQUAL TO 10"
+	110 C = 20
+
+If A is equal to 10, control is passed to line 200 and no text is printed. If A is not equal to 10, then the text "A NOT EQUAL TO 10" is printed. The --if-fail-next-line option, for this line, would force control to the next line for the false condition. That would mean that the PRINT statement would never execute. It would not execute when the condition is true, and it would not execute when the condition is false. Any statement after an IF with a destination would be dead code. Thus, the option is not considered when the THEN clause holds a line number.
+
+
+INPUT
+~~~~~
+
+Prompts the user and allows the user to enter one or more values.
+
+Syntax:	INPUT [prompt,] variable list
+Syntax:	INP [prompt,] variable list
+
+Examples:
+
+	60 INPUT U
+	65 INPUT V1, V2, V3
+	70 INPUT "Enter values: ", A, B
+	80 INPUT A$
+
+The default prompt is a single question mark (?) character.
+This prompt can be changed to any text value by specifying a text value as the first parameter.
+(This value must be a text constant. You cannot create a variable prompt such as INPUT P$, A$ because the variable for the prompt will be considered a normal variable for input.)
+When multiple values are specified, they may be entered on one line with commas as separators.
+If an insufficient number of values is entered, BASIC will prompt for more data.
+These prompts are always the question mark, not the specified prompt.
+
+When parsing input data, BASIC splits the input on commas. Each item is read as either a number or a text item.
+If a value can be read as a number, it must be stored as a numeric variable.
+
+Input values may be enclosed in quotes. These values will be treated as string variables, even when the contents are numeric.
+Commas enclosed in quotes are part of the data, not used to split the data items.
+
+Text values containing space characters must be enclosed in quotes. The quotes will not be part of the variable contents.
+
+BASIC removes leading and trailing spaces from unquoted items.
+
+INPUT statements are not affected by the --input-high-bit option.
+(Only the INPUT$ statement is affected.)
+
+Examples:
+
+	40 INPUT A$
+	50 INPUT B$,C$
+
+Can read:
+? GEORGE WASHINGTON
+? "1600 PENN", WASHINGTON DC
+
+Can read as the same:
+?   GEORGE WASHINGTON
+? "1600 PENN"   ,      WASHINGTON DC
+
+Or:
+? "GEORGE WASHINGTON"
+? "1600 PENN", "WASHINGTON, DC"
+
+Not the same (because of trailing spaces inside quotes):
+? "  GEORGE WASHINGTON"
+? "1600 PENN  ", "WASHINGTON, DC"
+
+The LINE INPUT statement is similar to this statement, but reads an entire line at one time.
+
+LET
+~~~
+
+Assigns a value to a variable or a group of variables.
+
+Syntax:	LET target variable [, target variable...] = expression
+
+Examples:
+
+	40 LET A = 0
+	50 LET B = A + 10
+	55 LET C = C + 1
+	60 LET C$ = "HELLO, WORLD!"
+	70 LET D, E = A + B
+
+Expressions may use a combination of operators, functions, and variables.
+
+Targets must have the same type, as the same value is assigned to each target.
+
+LET-less assignment
+~~~~~~~~~~~~~~~~~~~
+
+Assigns a value to a variable or a group of variables.
+
+Syntax:	target variable [, target variable...] = expression
+
+Examples:
+
+	40 A = 0
+	50 B = A + 10
+	55 C = C + 1
+	70 D, E = A + B
+
+Expressions may use a combination of operators, functions, and variables.
+
+Targets must have the same type, as the same value is assigned to each target.
+
+LINE INPUT
+~~~~~~~~~~
+
+Prompts the user and allows the user to enter a text value.
+
+Syntax:	LINE INPUT [prompt,] variable list
+Syntax:	LINPUT [prompt,] variable list
+Syntax:	LIN [prompt,] variable list
+Syntax:	INPUT LINE [prompt,] variable list
+
+Examples:
+
+	60 LINE INPUT U$
+	65 LINPUT V$
+	70 LINPUT "Enter address: ", A$
+	80 INPUT LINE U$
+
+The default prompt is a single question mark (?) character.
+This prompt can be changed to any text value by specifying a text value as the first parameter.
+(This value must be a text constant. You cannot create a variable prompt such as LINPUT P$, A$ because the variable for the prompt will be considered a normal variable for input.)
+
+When parsing input data, reads all text on a line and stores it in the variable.
+Quotes are not necessary.
+BASIC keeps leading and trailing spaces.
+
+Examples:
+
+	40 LINPUT A$
+	50 LINPUT B$
+
+Can read:
+? GEORGE WASHINGTON
+? 1600 PENN, WASHINGTON DC
+
+NEXT
+~~~~
+
+Denotes the end of a FOR loop.
+
+Syntax:	NEXT control variable
+Syntax:	NEX control variable
+
+You can GOTO out of FOR/NEXT loops, and BASIC-1978 follows the examples set by Kemeny and Kurtz.
+
+For example:
+
+	10 REM Sample
+	20 FOR I = 1 TO 10
+	30 PRINT I
+	40 IF I = 7 GOTO 60
+	50 NEXT I
+	60 STOP
+	90 END
+
+The above code will print the values 1 through 7 and then stop.
+
+You can GOTO out of a loop and later GOTO back into it.
+BASIC-1978 will remember the state of the loop.
+If you GOTO into a FOR/NEXT loop (without activating it by the FOR statement), the eventual NEXT statement will cause an error.
+
+ON ERROR GOTO
+~~~~~~~~~~~~~
+
+Specifies a line to transfer control in the event of an error.
+
+Syntax: ON ERROR GOTO line number
+
+Normally, when BASIC detects an error in a program, it stops the program.
+After executing ON ERROR GOTO, BASIC will transfer control to the specified line when an error occurs.
+
+Control is restored to the original statement that had the error when a RESUME statement is executed.
+
+If an error occurs in the "error handler" specified by ON ERROR GOTO, the program stops, unless another ON ERROR GOTO statement is executed as part of the error handler.
+
+ON GOTO
+~~~~~~~
+
+Changes the flow of the program to one of a number of possible destinations.
+
+Syntax: ON expression GOTO line number, line number, line number...
+Syntax: ON expression THEN line number, line number, line number...
+
+The expression is evaluated and its result is used as an index into the list of line numbers.
+The result is rounded to an integer prior to selecting the line number.
+The value 1 selects the first line number.
+A value of zero, a negative value, or a value greater than the length of the list causes an error.
+
+Examples:
+
+	90 ON A/B GOTO 100, 120, 140, 180
+	190 ON C GOTO 250, 200
+	220 ON INT(RND()*5)+1 THEN 450, 650, 320, 100, 144
+
+Traditionally, target line numbers are listed in increasing order.
+Line numbers may appear in any order.
+
+OPEN
+~~~~
+
+Opens a file
+
+Syntax: OPEN "FILE.TXT" FOR INPUT AS #1
+Syntax: OPE "OUTPUT.TXT" FOR OUTPUT AS #2
+
+Opens the file and prepares it for access.
+When opening a file for output, it does not need to exist.
+(This is different from the FILES command.)
+
+The file name may be any file name suitable for your environment.
+It may contain lower case letters.
+The file name may contain device and directory names.
+
+PRINT
+~~~~~
+
+Displays a set of variables and constants to the console, with a newline character.
+
+Printing to console
+^^^^^^^^^^^^^^^^^^^
+
+Syntax:	PRINT expression list
+Syntax:	PRI expression list
+Syntax:	& expression list
+
+Items in the list are separated by either commas or semicolons.
+A comma forces the next item to the next tab stop (tab stops are every 14 positions).
+A semicolon makes the next item adjacent to the previous item.
+
+Examples:
+
+	10 PRINT
+	20 PRINT A
+	30 PRINT A, B
+	40 PRINT "Output"
+	50 PRINT "Results:", R1
+	60 PRINT "Results:"; R2
+
+The list may include terminating separators.
+A terminating semicolon will suppress the newline.
+A terminating comma will advance to the next tab position and suppress the newline.
+.
+	10 PRINT "Processing...";
+	... other statements that generate no output
+	20 PRINT "done"
+
+results in the text "Processing...done" on the console.
+
+The semicolon separator will force a small space between items.
+Between strings, there is no space.
+Between two numbers or a string and a number, BASIC will print spaces to the next column that is a multiple of 3.
+
+Numbers are printed with automatic formatting.
+BASIC-1978 will print a number with the necessary number of decimal places.
+It is not possible to force a number of decimal places.
+
+Printing to files
+^^^^^^^^^^^^^^^^^
+
+Syntax:	PRINT #filenum; expression list
+Syntax:	PRI #filenum; expression list
+Syntax:	& #filenum; expression list
+
+Items in the list are separated by either commas or semicolons.
+A comma or semicolon writes a SPACE character to the file.
+
+Examples:
+
+	10 PRINT #1
+	20 PRINT #2, A
+	30 PRINT #3; A, B
+	40 PRINT #4; "Output"
+	50 PRINT #5, "Results:", R1
+	60 PRINT #6, "Results:"; R2
+
+The list may include terminating separators.
+A terminating comma or semicolon will write a SPACE and suppress the newline.
+
+	10 PRINT #2; "Processing...";
+	... other statements that generate no output
+	20 PRINT #2; "done"
+
+results in the text "Processing... done" to the file.
+
+Numbers are printed with automatic formatting.
+BASIC-1965 will print a number with the necessary number of decimal places.
+It is not possible to force a number of decimal places.
+
+PRINT USING
+~~~~~~~~~~~
+
+Displays a series of expressions to the console, formatting each item.
+
+Syntax: PRINT USING formatstring, expression [,expressions]
+
+The format string may be a constant or variable or an expression.
+
+There are four specifications for formatting in the format string: numeric, character, total string, and padded string.
+
+The numeric format is indicated with '#' characters (one or more) and formats a numeric value as right-justified and padded with spaces.
+A decimal point may be included, such as '###.##'.
+The decimal point must be embedded in the string, and not the leading character.
+The leading characters may be asterisks ('*') which will pad the field with asterisks and not spaces.
+The leading character may be a dollar sign ('$') which will print a dollar sign before the padded value.
+If a numeric value is too large to fit in the defined field, the entire numeric value is printed.
+
+The character format is indicated with a '!' character (just one) and prints the first character of a string value.
+
+The total string format is indicated with a '&' character (just one) and prints the entire string.
+
+The padded string format is indicated with a pair of backslash characters ('\') enclosing zero or more space characters and prints the string left-justified and padded with space characters.
+
+All other characters in the format string are treated as constant text which is printed as is.
+
+Examples:
+
+	240 PRINT USING "###", N
+	250 PRINT USING "!", A$		' PRINT FIRST CHARACTER
+	260 PRINT USING "NAME: &", A$	' PRINT ENTIRE STRING
+	270 PRINT USING "TOKENS: \  \, \  \", T1$, T2$
+
+	300 PRINT USING "NAME: &, AMOUNT: #######", N$, A
+
+Format strings may contain multiple specifications.
+The number of specifications must match the number of values given after the format string.
+Separators between values (commas and semicolons) do not have their usual effect of spacing values.
+A comma or semicolon at the end of the list of values does have its usual effect on the carriage (space to next zone or suppress carriage return).
+
+RANDOMIZE
+~~~~~~~~~
+
+Set a new seed for the random number generator. May be abbreviated as RANDOM.
+
+Syntax:	RANDOMIZE
+Syntax:	RANDOM
+Syntax:	RAN
+
+Examples:
+
+	4 RANDOMIZE
+	5 RANDOM
+
+Without RANDOMIZE, successive runs of a program will use the same sequence of numbers from the RND() function.
+The RANDOMIZE statement randomizes the sequence, and successive runs will have different numbers.
+
+The –ignore-randomize option disables RANDOMIZE statements (the interpreter allows then but ignores them).
+
+READ
+~~~~
+
+Loads variables with values from DATA statements or files.
+
+Reading from DATA statements
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Syntax:	READ variable list
+Syntax:	REA variable list
+
+Examples:
+
+	400 READ N
+	410 READ A, B, C
+	420 READ A$, B, C$
+
+The number of values in a READ statement do not have to match the number of values in DATA statements.
+The values defined in DATA statements are stored in a single list of use by all READ statements.
+You may READ in pairs and define ten values per DATA statement.
+You may READ ten items from DATA statements that contain one value each.
+
+READing more values than are specified by DATA statements, in total, will cause an error.
+
+BASIC keeps an internal pointer to the next data item.
+This pointer can be reset with the RESTORE statement.
+
+Reading from files
+^^^^^^^^^^^^^^^^^^
+
+Syntax:	READ #filenum; variable list
+
+Examples:
+
+	400 READ #1; N
+	410 READ #2; A, B, C
+	420 READ #3; A$, B, C$
+
+Files are text files.
+Values in the file must be separated by space or separator (comma or semicolon) characters.
+The number of values in a READ statement does not have to match the number of values on a line in the input file.
+The READ statement will read additional lines and collect values to fill are specified variables.
+Values remaining on the text line are saved until the next READ statement.
+
+READing more values than are specified by the file, in total, will cause an error.
+
+BASIC keeps an internal pointer to the next data item.
+
+REM
+~~~
+
+Allows for a comment in the program.
+
+Syntax:	REM any text
+
+Examples:
+
+	10 REM
+	20 REM Beginning of my first program
+	30 REMARK *----*
+
+RESTORE
+~~~~~~~
+
+Resets the internal pointer for the READ statement.
+After a RESTORE statement, a READ statement will read the first data item.
+
+Syntax:	RESTORE
+Syntax:	RES
+
+Examples:
+
+	210 RESTORE
+
+RESUME
+~~~~~~
+
+Returns control after an error occurs (and is presumably handled).
+
+Syntax: RESUME
+Syntax: RESUME line number
+
+When no line number is specified, control returns to the statement which experienced the error.
+When a line number is specified, execution resumes on that line.
+
+Example:
+
+	10 ON ERROR GOTO 4000
+	100 OPEN "FILE.TXT" FOR INPUT AS #1
+	110 READ #1, A$, B, C
+	120 CLOSE #1
+	130 PRINT A$, B, C
+	999 STOP
+	4000 REM ERROR HANDLING ROUTINE
+	4010 OPEN "FILE.TXT" FOR OUTPUT AS #3
+	4020 WRITE #3, "JOHN DOE",45,27
+	4030 CLOSE #3
+	4040 RESUME
+	9999 END
+
+
+In the this example program, if the file exists and BASIC can open it, lines 10 through 999 are executed and lines 4000 through 4040 are not used.
+If the file does not exist, BASIC transfers control from line 100 to line 4000.
+Lines 4000 through 4030 create a file with data.
+Line 4040 returns control to line 100, which is re-executed.
+
+Note that an infinite loop can occur.
+If BASIC cannot open the file, but the error is not that the file does not exist, then execution will alternate between line 100 and lines 4000-4040.
+The error will transfer control to line 4000.
+Lines 4000-4030 will create a file.
+Line 4040 will return control to line 100.
+Line 100 will incur the same error.
+This could happen if an earlier line (not shown) opened a file on handle #1.
+
+
+Example:
+
+	10 ON ERROR GOTO 100
+	20 LET B = 10 / 0
+	30 PRINT "ANSWER IS"; B
+	99 STOP
+	100 PRINT "ERROR IN CODE"
+	110 LET B = 0
+	120 RESUME 30
+	999 END
+
+In this program, the division in line 20 causes an error.
+Control is transferred to line 100.
+The error is corrected on line 110.
+The RESUME statement on line 120 restores execution on line 30, not line 20.
+
+
+RETURN
+~~~~~~
+
+Changes the flow of the program by returning from a subroutine.
+
+Syntax:	RETURN
+Syntax:	RET
+
+Examples:
+
+	450 RETURN
+
+A RETURN statement makes sense only after the execution of a matching GOSUB statement. A RETURN without a GOSUB will cause an error.
+
+RUN
+~~~
+
+Re-starts execution of the program.
+
+Syntax: RUN
+
+Examples:
+
+	410 RUN
+	550 IF A = 1 THEN RUN
+
+The RUN statement is similar to the RUN command which is entered at the READY prompt.
+The RUN statement re-starts the program.
+All variables are cleared.
+Dimension specifications are cleared.
+All open files are closed.
+The pointer for DATA is reset (as if a RESTORE statement were executed).
+Execution is transferred to the first line.
+
+SLEEP
+~~~~~
+
+Pauses the execution of the program.
+
+Syntax: SLEEP time
+Syntax: SLE time
+
+Examples:
+
+	270 SLEEP 1 : REM SLEEP FOR ONE SECOND
+	354 SLEEP S : REM PAUSE FOR THE COMPUTED TIME (IN SECONDS)
+
+
+STOP
+~~~~
+
+Stops the execution of the program.
+
+Syntax:	STOP
+Syntax:	STO
+
+Examples:
+
+	900 STOP
+
+WRITE
+~~~~~
+
+Displays a set of variables and constants to the console, with a newline character. The same as the PRINT command, except that WRITE also provides delimiters between values.
+
+Writing to console
+^^^^^^^^^^^^^^^^^^
+
+Syntax:	WRITE expression list
+Syntax:	WRI expression list
+
+Items in the list are separated by either commas or semicolons.
+
+Examples:
+
+	10 WRITE
+	20 WRITE A
+	30 WRITE A, B
+	40 WRITE "Output"
+	50 WRITE "Results:", R1
+	60 WRITE "Results:"; R2
+
+The list may include terminating separators.
+A terminating semicolon will suppress the newline.
+A terminating comma will advance to the next tab position and suppress the newline.
+
+	10 WRITE "Processing...";
+	... other statements that generate no output
+	20 WRITE "done"
+
+results in the text "Processing...", "done" on the console.
+
+Numbers are printed with automatic formatting.
+BASIC-1965 will print a number with the necessary number of decimal places.
+It is not possible to force a number of decimal places.
+
+Writing to files
+^^^^^^^^^^^^^^^^
+
+Syntax:	WRITE #filenum; expression list
+Syntax:	WRI #filenum; expression list
+
+Items in the list are separated by either commas or semicolons.
+A comma or semicolon writes a SPACE character to the file.
+
+Examples:
+
+	10 WRITE #1
+	20 WRITE #2, A
+	30 WRITE #3, A, B
+	40 WRITE #4; "Output"
+	50 WRITE #5, "Results:", R1
+	60 WRITE #6; "Results:"; R2
+
+The list may include terminating separators.
+A terminating comma or semicolon will write a SPACE and suppress the newline.
+
+	10 WRITE #2; "Processing...";
+	... other statements that generate no output
+	20 WRITE #2; "done"
+
+results in the text "Processing..."; "done" to the file.
+
+Numbers are printed with automatic formatting.
+BASIC-1965 will print a number with the necessary number of decimal places.
+It is not possible to force a number of decimal places.
+
+ARR statements
+--------------
+
+The ARR statements operate on one-dimensional arrays.
+Operations begin with index zero.
+
+ARR PRINT
+~~~~~~~~~
+
+Printing to console
+^^^^^^^^^^^^^^^^^^^
+
+Prints an array of values.
+
+Syntax:	ARR PRINT variable list
+
+Examples:
+
+	100 ARR PRINT A
+	110 ARR PRINT B;
+	120 ARR PRINT A; B;
+	130 ARR PRINT C, D
+
+The values must be defined with DIM statements prior to printing.
+Values are printed sequentially with as many values as will fit on a line.
+The carriage control character that follows a variable name will be used for each element in a printed row.
+The semicolon results in narrow columns, the comma (or no character) results in wide columns.
+
+Printing to files
+^^^^^^^^^^^^^^^^^
+ 
+Syntax:	ARR PRINT #filenum; variable list
+
+Examples:
+
+	100 ARR PRINT #1; A
+	110 ARR PRINT #2, B;
+	120 ARR PRINT #3; A; B;
+	130 ARR PRINT #4; C, D
+
+The values must be defined with DIM statements prior to printing.
+Values are printed sequentially with each set of values on one line.
+The carriage control character that follows a variable name is ignored.
+
+ARR READ
+~~~~~~~~
+
+Reads data into an array of values.
+
+Reading from DATA statements
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Syntax:	ARR READ variable list
+
+Examples:
+
+	100 ARR READ A
+	110 ARR READ B, C
+	120 ARR READ D(15)
+
+Dimensions may be supplied or omitted in ARR READ statements.
+When supplied, they override any previous DIM or ARR READ or MAT READ statement.
+When omitted, the variable must have dimensions specified in earlier DIM or ARR READ or MAT READ statements.
+
+The values for dimensions may be numeric constants or expressions.
+The expression is evaluated at run-time, like any other expression.
+
+Data is read from DATA statements, as with the READ statement.
+
+Reading from files
+^^^^^^^^^^^^^^^^^^
+
+Syntax:	ARR READ #filenum; variable list
+
+Examples:
+
+	400 ARR READ #1; N
+	410 ARR READ #2; A, B, C
+	420 ARR READ #3; A$, B, C$
+
+Files are text files.
+Values in the file must be separated by space or separator (comma or semicolon) characters.
+The number of values in a READ statement does not have to match the number of values on a line in the input file.
+The READ statement will read additional lines and collect values to fill are specified variables.
+Values remaining on the text line are saved until the next READ statement.
+
+READing more values than are specified by the file, in total, will cause an error.
+
+BASIC keeps an internal pointer to the next data item.
+
+ARR WRITE
+~~~~~~~~~
+
+Writes an array of values with separators.
+
+Writing to console
+^^^^^^^^^^^^^^^^^^
+
+Syntax:	ARR WRITE variable list
+
+Examples:
+
+	100 ARR WRITE A
+	110 ARR WRITE B;
+	120 ARR WRITE A; B;
+	130 ARR WRITE C, D
+
+The values must be defined with DIM statements prior to printing.
+Values are printed sequentially with as many values as will fit on a line.
+The carriage control character that follows a variable name will be used for each element in a printed row.
+The semicolon results in narrow columns, the comma (or no character) results in wide columns.
+
+Writing to files
+^^^^^^^^^^^^^^^^
+ 
+Syntax:	ARR WRITE #filenum; variable list
+
+Examples:
+
+	100 ARR WRITE #1; A
+	110 ARR WRITE #2, B;
+	120 ARR WRITE #3; A; B;
+	130 ARR WRITE #4; C, D
+
+The values must be defined with DIM statements prior to printing.
+Values are printed sequentially with each set of values on one line.
+The carriage control character that follows a variable name is ignored.
+
+ARR
+~~~
+
+Assigns a value to a array variable.
+
+Syntax:	ARR target variable [, target variable...] = expression
+
+Examples:
+
+	100 ARR A = B
+	110 ARR A = B * C
+	120 ARR A = B + D
+	130 ARR A = B - E
+	140 ARR A = 2 * B
+	150 ARR A = 2 * B – E
+	160 ARR G,H = A + B
+
+Variables are assumed to represent array values.
+If you want to use a scalar variable, enclose it in parentheses:
+
+	130 LET S = 2
+	140 ARR A = (S) * B
+	150 ARR A = (S) * B - E
+
+The expression is limited to arithmetic operations (addition, subtraction, multiplication, division, and exponentiation).
+Certain operations are available for certain combinations of operands:
+
+|==========
+|First operand |Operation |Second operand |Restrictions |Actions
+|Array |Addition |Array |Arrays must have identical dimensions |Corresponding elements are added
+|Array |Subtraction |Array |Arrays must have identical dimensions |Elements from second array are subtracted from corresponding element in first array
+|Array |Multiplication |Array |Arrays must have identical dimensions |Corresponding elements are multiplied
+|Array |Division |Array |Arrays must have identical dimensions |Elements from the first array are numerators, elements from the second array are denominators
+|Array |Power |Array |Arrays must have identical dimensions |Elements from the first array are raised to the corresponding element in the second array
+|Scalar |Addition |Array ||Elements from the array are added to the scalar value
+|Scalar |Subtraction |Array ||Elements from the array are subtracted from the scalar value
+|Scalar |Multiplication |Array ||Elements from the array are multiplied by the scalar value
+|Scalar |Division |Array ||Elements from the array are divided into the scalar value
+|Scalar |Power |Array ||Elements from the array are the exponent of the scalar value
+|Array |Addition |Scalar ||Elements from the array are added to the scalar value
+|Array |Subtraction |Scalar ||The scalar value is subtracted from elements in the  array
+|Array |Multiplication |Scalar ||Elements from the array are multiplied by the scalar value
+|Array |Division |Scalar ||Elements from the array are divided by the scalar value
+|Array |Power |Scalar ||Elements from the array are raised to the scalar value
+|==========
+
+Text operations are available for certain combinations of operands:
+
+|==========
+|First operand |Operation |Second operand |Restrictions |Actions
+|Array |Concatenation |Array |Arrays must have identical dimensions |Corresponding elements are concatenated
+|Scalar |Concatenation |Array ||Elements from the array are concatenated to the scalar value
+|Array |Concatenation |Scalar ||The scalar value is concatenated to each element
+|==========
+
+Ahl makes no mention of the 'ARR' statement or any derived statements ('ARR PRINT', 'ARR READ').
+But it makes sense to include them.
+
+MAT statements
+--------------
+
+The MAT statements operate on matricies, which are either one- or two-dimensional arrays.
+
+Operations begin with indices of one, not zero.
+The values in the zero row and the zero column are ignored in MAT operations.
+
+MAT PRINT
+~~~~~~~~~
+
+Printing to console
+^^^^^^^^^^^^^^^^^^^
+
+Prints an array or matrix of values.
+
+Syntax:	MAT PRINT variable list
+
+Examples:
+
+	100 MAT PRINT A
+	110 MAT PRINT B;
+	120 MAT PRINT A; B;
+	130 MAT PRINT C, D
+
+The values must be defined with DIM statements prior to printing.
+
+For one-dimensional arrays, the values are printed sequentially with as many values as will fit on a line.
+
+For two-dimensional matrices, values for each row in the matrix are printed on a line and a new line is used for each row.
+
+For arrays and matrixes, the zero-index items are not printed.
+An array DIM(4) will print elements 1 through 4; a matrix DIM(3,5) will print three rows of elements 1 through 5.
+
+The carriage control character that follows a variable name will be used for each element in a printed row.
+The semicolon results in narrow columns, the comma (or no character) results in wide columns.
+
+Printing to a file
+^^^^^^^^^^^^^^^^^^
+
+Syntax:	MAT PRINT #filenum; variable list
+
+Examples:
+
+	100 MAT PRINT #1; A
+	110 MAT PRINT #2, B;
+	120 MAT PRINT #3; A; B;
+	130 MAT PRINT #4; C, D
+
+The values must be defined with DIM statements prior to printing.
+
+For one-dimensional arrays, the values are printed on one line.
+
+For two-dimensional matrices, values for each row in the matrix are printed on a line and a new line is used for each row.
+
+For arrays and matrixes, the zero-index items are not printed.
+An array DIM(4) will print elements 1 through 4; a matrix DIM(3,5) will print three rows of elements 1 through 5.
+
+The carriage control character that follows a variable name is ignored.
+
+MAT READ
+~~~~~~~~
+
+Reads data into an array or matrix of values.
+
+Reading from DATA statements
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Syntax:	MAT READ variable list
+
+Examples:
+
+	100 MAT READ A
+	110 MAT READ B, C
+	120 MAT READ D(15)
+	130 MAT READ E(6,11)
+
+Dimensions may be supplied or omitted in MAT READ statements.
+When supplied, they override any previous DIM or ARR READ or MAT READ statement.
+When omitted, the variable must have dimensions specified in earlier DIM or ARR READ or MAT READ statements.
+
+The values for dimensions may be numeric constants ot expressions.
+The expression is evaluated at run-time, like any other expression.
+
+Data is read from DATA statements, as with the READ statement.
+
+Reading from files
+^^^^^^^^^^^^^^^^^^
+
+Syntax:	MAT READ #filenum; variable list
+
+Examples:
+
+	400 MAT READ #1; N
+	410 MAT READ #2; A, B, C
+	420 MAT READ #3; A$, B, C$
+
+Files are text files.
+Values in the file must be separated by space or separator (comma or semicolon) characters.
+The number of values in a READ statement does not have to match the number of values on a line in the input file.
+The READ statement will read additional lines and collect values to fill are specified variables.
+Values remaining on the text line are saved until the next READ statement.
+
+READing more values than are specified by the file, in total, will cause an error.
+
+BASIC keeps an internal pointer to the next data item.
+
+MAT WRITE
+~~~~~~~~~
+
+Writes an array or matrix of values.
+
+Writing to console
+^^^^^^^^^^^^^^^^^^
+
+Syntax:	MAT WRITE variable list
+
+Examples:
+
+	100 MAT WRITE A
+	110 MAT WRITE B;
+	120 MAT WRITE A; B;
+	130 MAT WRITE C, D
+
+The values must be defined with DIM statements prior to printing.
+
+For one-dimensional arrays, the values are printed sequentially with as many values as will fit on a line.
+
+For two-dimensional matrices, values for each row in the matrix are printed on a line and a new line is used for each row.
+
+For arrays and matrixes, the zero-index items are not printed.
+An array DIM(4) will print elements 1 through 4; a matrix DIM(3,5) will print three rows of elements 1 through 5.
+
+The carriage control character that follows a variable name will be used for each element in a printed row.
+The semicolon results in narrow columns, the comma (or no character) results in wide columns.
+
+Writing to a file
+^^^^^^^^^^^^^^^^^
+
+Syntax:	MAT WRITE #filenum; variable list
+
+Examples:
+
+	100 MAT WRITE #1; A
+	110 MAT WRITE #2, B;
+	120 MAT WRITE #3; A; B;
+	130 MAT WRITE #4; C, D
+
+The values must be defined with DIM statements prior to printing.
+
+For one-dimensional arrays, the values are printed on one line.
+
+For two-dimensional matrices, values for each row in the matrix are printed on a line and a new line is used for each row.
+
+For arrays and matrixes, the zero-index items are not printed.
+An array DIM(4) will print elements 1 through 4; a matrix DIM(3,5) will print three rows of elements 1 through 5.
+
+The carriage control character that follows a variable name is ignored.
+
+MAT
+~~~
+
+Assigns a value to a matrix variable or group of matrix variables.
+
+Syntax:	MAT target variable [, target variable...] = expression
+
+Examples:
+
+	100 MAT A = B
+	110 MAT A = B * C
+	120 MAT A = B + D
+	130 MAT A = B - E
+	140 MAT A = 2 * B
+	150 MAT A = 2 * B – E
+	160 MAT G,H = A + B
+
+Variables are assumed to represent matrix values.
+They may refer to variables dimensioned with one or two variables.
+
+If you want to use a scalar variable, enclose it in parentheses:
+
+	130 LET S = 2
+	140 MAT A = (S) * B
+	150 MAT A = (S) * B - E
+
+The expression is limited to arithmetic operations (addition, subtraction, multiplication, division, and exponentiation).
+Certain operations are available for certain combinations of operands:
+
+|==========
+|First operand |Operation |Second operand |Restrictions |Actions
+|Matrix |Addition |Matrix |Matrices must have identical dimensions |Corresponding elements are added
+|Matrix |Subtraction |Matrix |Matrices must have identical dimensions |Elements from second matrix are subtracted from corresponding element in first matrix
+|Matrix |Multiplication |Matrix |Number of columns in second matrix must equal number of rows in first matrix |Computes dot product, which contains the number of columns of the first matrix and the number of rows in the second matrix
+|Matrix |Division |Matrix |Not allowed |
+|Matrix |Power |Matrix |Not allowed |
+|Scalar |Addition |Matrix ||Elements from the matrix are added to the scalar value
+|Scalar |Subtraction |Matrix ||Elements from the matrix are subtracted from the scalar value
+|Scalar |Multiplication |Matrix ||Elements from the matrix are multiplied by the scalar value
+|Scalar |Division |Matrix ||Elements from the matrix are divided into the scalar value
+|Scalar |Power |Matrix ||Elements from the matrix are the exponent of the scalar value
+|Matrix |Addition |Scalar ||Elements from the matrix are added to the scalar value
+|Matrix |Subtraction |Scalar ||The scalar value is subtracted from elements in the matrix
+|Matrix |Multiplication |Scalar ||Elements from the matrix are multiplied by the scalar value
+|Matrix |Division |Scalar ||Elements from the matrix are divided by the scalar value
+|Matrix |Power |Scalar | |Elements from the matrix are raised to the scalar value
+|==========
+
+Text operations are available for certain combinations of operands:
+
+|==========
+|First operand |Operation |Second operand |Restrictions |Actions
+|Matrix |Concatenation |Matrix |Matrices must have identical dimensions |Corresponding elements are concatenated
+|Scalar |Concatenation |Matrix ||Elements from the matrix are concatenated to the scalar value
+|Matrix |Concatenation |Scalar ||The scalar is concatenated to each element
+|==========
+
+K&K BASIC restricts the assignment of a variable used in a matrix multiplication operation.
+BASIC-1978 does not impose this restriction. You may write:
+
+	110 MAT A = A * C
+
+Functions
+---------
+
+Functions may be used in expressions.
+|==========
+|Function |Return type |Result
+|ABS(x) |numeric |Computes the absolute value of x.
+|ASC(t) |numeric |Returns the ASCII value of the first character of the string t. The character must be in the printable range of 32 to 126.
+|ATN(x) |numeric |Computes the arctangent of x, providing the answer in radians.
+|CHR$(n) |string |Returns a string of one character, defined by n. N must be within the ASCII printable range of 32 to 126.
+|CON(n) |numeric array |Creates an array containing all ones, with n columns
+|CON(x,y) |numeric matrix |Creates a matrix containing all ones, with x rows and y columns.
+|CON or CON() |numeric array or matrix |Creates an array or matrix containins all ones, with dimensions based on the assignment target.
+|COS(x) |numeric |Computes the cosine of x, where x is in radians.
+|DET(m)	|numeric |Computes the determinant of the matrix. The matrix must be square.
+|EXP(x) |numeric |Computes e to the x power.
+|IDN(n) |numeric matrix |Creates an identity matrix (all zeros except for ones on the diagonal) fo dimension n.
+|IDN(n,n) |numeric matrix |Same as IDN(x). The two values must be identical, as identity matrices are always square.
+|IDN or IDN() |numeric matrix |Creates an identity matrix with dimensions based on the assignment target.
+|INSTR$(i,t,s) |integer |Find string s in string t and report position. Start search as position i (first position is 1, not 0).
+|INT(x) |numeric |Return the integer part of a numeric value.
+|LEFT$(t,n) |string |Leftmost n characters of string t.
+|LEN(t) |numeric |Returns the length of the string value.
+|LOG(x) |numeric |Computes the natural log of x. A value of zero or a negative value will cause an error.
+|MID$(t,p,l) |string |Extract substring of t from position p for length l. The first character is position 1. If p is greater than the length of the string, the result is empty (""). If l extends beyond the end of the string, the result is ths string from p to the end.
+|PACK$(a) |string |Converts a numeric array to a string variable. The first element (index 0) must contain the number of numeric values to convert. (It may be zero.) Each numeric element is converted to the corresponding ASCII character.
+|RIGHT$(t,n) |string |Rightmost n characters of string t.
+|RND(x) |numeric |Return a random number from zero to x. The value is a floating-point value; RND(1) can return any value from zero to 1. A value of zero or less than zero is considered to be 1.
+|RND() |numeric |Equivalent to RND(1).
+|RND | numeric |Special form of RND, equivalent to RND(1).
+|SGN(x) |numeric |Returns 1, 0, or -1, for positive, zero, or negative values of x.
+|SIN(x) |numeric |Computes the sine of x, where x is in radians.
+|SQR(x) |numeric |Computes the square root of x. A negative value will cause an error.
+|STR$(n) |string |Converts numeric value to string.
+|TAB(n) |string |Advances the print position to column 'n'. Returns a string value with the proper number of spaces. Useful in PRINT statements. In other statements, it returns the string value but does not advance the print position.
+|TAN(x) |numeric |Computes the tangent of x, where x is in radians.
+|TIME(n) |numeric |Returns the time since the start of the program, in seconds.
+|TRN(m) |matrix |Transposes values in matrix m, exchanging values by rows and columns.
+|UNPACK(t)|numeric array |Converts a string variable (or expression) to an array of numeric values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
+|VAL(t) |string |Converts a string to a numeric value. Ignores leading spaces. Converts digits and stops on first non-numeric character.
+|ZER(n) |numeric array|Creates an array containing all zeros, with n columns
+|ZER(x,y) |numeric matrix|Creates a matrix containing all zeros, with x rows and y columns.
+|ZER or ZER() |numeric array or matrix |Creates an array or matrix containins all zeros, with dimensions based on the assignment target.
+|==========
+
+Matrix function special forms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The functions ZER, CON, and IDN have normal forms and special forms.
+You can use the normal form in simple assignments without specifying dimensions of targets:
+
+	200 REM NO DIM STATEMENT FOR A OR B
+	240 MAT A = CON(3,4)
+	250 MAT B = IDN(4,4)
+
+The special form allows for parameters to be omitted.
+
+	200 REM DIM STATEMENTS FOR A AND B ARE NECESSARY
+	230 DIM A(3,4), B(4,4)
+	240 MAT A = CON
+	250 MAT B = IDN
+
+In this special form, the target variable must already exist and have dimensions specified.
+
+Statement modifiers
+-------------------
+
+Statements may be controlled with modifiers, clauses at the end that branch around the statement or perform it multiple times.
+Statements may have zero, one, or multiple modifiers.
+Modifiers are processed from right to left, with the last one on the line being processed first.
+
+Modified statements
+~~~~~~~~~~~~~~~~~~~
+
+Some statements may have modifiers; others may not.
+Statements that may have modifiers are:
+
+CHANGE, CLOSE, GOSUB, GOTO, INPUT, LET, (LET-less assignment), LINE INPUT, OPEN, PRINT, PRINT USING, RANDOMIZE, READ, RESTORE, RETURN, SLEEP, STOP, WRITE, ARR, ARR PRINT, ARR READ, ARR WRITE, MAT, MAT PRINT, MAT READ, MAT WRITE
+
+IF modifier
+~~~~~~~~~~~
+
+Conditional execution of the statement.
+
+Examples:
+
+	10 PRINT A IF B>0
+	200 GOTO 10 IF A$="YES"
+	240 GOSUB 800 IF C2=4
+
+Notice that there is no 'THEN' clause for the IF modifier.
+The modifier controls the action for just the one line.
+
+FOR modifier
+~~~~~~~~~~~~
+
+Repeated execution of the statement.
+
+Examples:
+
+	10 DIM A(10)
+	20 A(I) = I _ FOR I = 1 TO 10
+	100 PRINT A(I); FOR I = 1 TO 10
+	100 PRINT A(I); FOR I = 1 TO 10 STEP 2
+
+The underscore is required in line 20 to prevent BASIC from parsing "= I FOR" as "= IF OR".
+The tokenizer reports the longest possible token; 'IF' is longer than 'I' so it is the token.
+
+Combining modifiers
+~~~~~~~~~~~~~~~~~~~
+
+BASIC-1978 accepts multiple modifiers on a statement.
+
+Example:
+
+	100 PRINT A(I) IF I/2 = INT(I/2) FOR I = 1 TO 10
+
+Modifiers are processed right-to-left, with the last modifier specified being executed first.
+In the example, the FOR loop is processed first. Each iteration of the FOR loop processes the IF modifier.
+If the expression for the IF modifier is true, the main statement is executed.
+
+Editing programs
+----------------
+
+Programs may be edited externally and loaded with the LOAD command, and they may be entered and edited within BASIC-1978.
+
+An entered line is parsed and either executed or stored as part of the program.
+Lines that begin with numbers are considered part of the program; lines without numbers are executed immediately.
+
+To replace a line, enter a line with the number of the old line.
+You must enter the entire line; there are no 'line editing' capabilities.

@@ -1,0 +1,282 @@
+1 PRINT TAB(33);"MUGWUMP"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"MUGWUMP"
+ CarriageControl:NL
+2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+3 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+4 REM     COURTESY PEOPLE'S COMPUTER COMPANY
+ Remark:    COURTESY PEOPLE'S COMPUTER COMPANY
+10 DIM P(4,2)
+ NumericConstant:4
+ NumericConstant:2
+ CompoundDeclaration:P
+20 PRINT "THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
+ ITEMS
+ TextConstant:"THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
+ CarriageControl:NL
+30 PRINT "HIDDEN ON A 10 BY 10 GRID.  HOMEBASE IS POSITION 0,0."
+ ITEMS
+ TextConstant:"HIDDEN ON A 10 BY 10 GRID.  HOMEBASE IS POSITION 0,0."
+ CarriageControl:NL
+40 PRINT "ANY GUESS YOU MAKE MUST BE TWO NUMBERS WITH EACH"
+ ITEMS
+ TextConstant:"ANY GUESS YOU MAKE MUST BE TWO NUMBERS WITH EACH"
+ CarriageControl:NL
+50 PRINT "NUMBER BETWEEN 0 AND 9, INCLUSIVE.  FIRST NUMBER"
+ ITEMS
+ TextConstant:"NUMBER BETWEEN 0 AND 9, INCLUSIVE.  FIRST NUMBER"
+ CarriageControl:NL
+60 PRINT "IS DISTANCE TO RIGHT OF HOMEBASE AND SECOND NUMBER"
+ ITEMS
+ TextConstant:"IS DISTANCE TO RIGHT OF HOMEBASE AND SECOND NUMBER"
+ CarriageControl:NL
+70 PRINT "IS DISTANCE ABOVE HOMEBASE."
+ ITEMS
+ TextConstant:"IS DISTANCE ABOVE HOMEBASE."
+ CarriageControl:NL
+80 PRINT
+ ITEMS
+ CarriageControl:NL
+90 PRINT "YOU GET 10 TRIES.  AFTER EACH TRY, I WILL TELL"
+ ITEMS
+ TextConstant:"YOU GET 10 TRIES.  AFTER EACH TRY, I WILL TELL"
+ CarriageControl:NL
+100 PRINT "YOU HOW FAR YOU ARE FROM EACH MUGWUMP."
+ ITEMS
+ TextConstant:"YOU HOW FAR YOU ARE FROM EACH MUGWUMP."
+ CarriageControl:NL
+110 PRINT
+ ITEMS
+ CarriageControl:NL
+240 GOSUB 1000
+ LineNumber:1000
+250 T=0
+ ScalarReference:T
+ NumericConstant:0
+ AssignmentOperator:=
+260 T=T+1
+ ScalarReference:T
+ ScalarValue:T
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+270 PRINT
+ ITEMS
+ CarriageControl:NL
+275 PRINT
+ ITEMS
+ CarriageControl:NL
+290 PRINT "TURN NO.";T;"-- WHAT IS YOUR GUESS";
+ ITEMS
+ TextConstant:"TURN NO."
+ CarriageControl:;
+ ScalarValue:T
+ CarriageControl:;
+ TextConstant:"-- WHAT IS YOUR GUESS"
+ CarriageControl:;
+300 INPUT M,N
+ ScalarReference:M
+ ScalarReference:N
+310 FOR I=1 TO 4
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+320 IF P(I,1)=-1 THEN 400
+ ScalarValue:I
+ NumericConstant:1
+ ScalarValue:P
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+330 IF P(I,1)<>M THEN 380
+ ScalarValue:I
+ NumericConstant:1
+ ScalarValue:P
+ ScalarValue:M
+ BinaryOperator:<>
+340 IF P(I,2)<>N THEN 380
+ ScalarValue:I
+ NumericConstant:2
+ ScalarValue:P
+ ScalarValue:N
+ BinaryOperator:<>
+350 P(I,1)=-1
+ ScalarValue:I
+ NumericConstant:1
+ ScalarReference:P
+ NumericConstant:1
+ UnaryOperator:-
+ AssignmentOperator:=
+360 PRINT "YOU HAVE FOUND MUGWUMP";I
+ ITEMS
+ TextConstant:"YOU HAVE FOUND MUGWUMP"
+ CarriageControl:;
+ ScalarValue:I
+ CarriageControl:NL
+370 GOTO 400
+ LineNumber:400
+380 D=SQR((P(I,1)-M)^2+(P(I,2)-N)^2)
+ ScalarReference:D
+ ScalarValue:I
+ NumericConstant:1
+ ScalarValue:P
+ ScalarValue:M
+ BinaryOperator:-
+ NumericConstant:2
+ BinaryOperator:^
+ ScalarValue:I
+ NumericConstant:2
+ ScalarValue:P
+ ScalarValue:N
+ BinaryOperator:-
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:+
+ FunctionSqr
+ AssignmentOperator:=
+390 PRINT "YOU ARE";(INT(D*10))/10;"UNITS FROM MUGWUMP";I
+ ITEMS
+ TextConstant:"YOU ARE"
+ CarriageControl:;
+ ScalarValue:D
+ NumericConstant:10
+ BinaryOperator:*
+ FunctionInt
+ NumericConstant:10
+ BinaryOperator:/
+ CarriageControl:;
+ TextConstant:"UNITS FROM MUGWUMP"
+ CarriageControl:;
+ ScalarValue:I
+ CarriageControl:NL
+400 NEXT I
+ VariableName:I
+410 FOR J=1 TO 4
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+420 IF P(J,1)<>-1 THEN 470
+ ScalarValue:J
+ NumericConstant:1
+ ScalarValue:P
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:<>
+430 NEXT J
+ VariableName:J
+440 PRINT
+ ITEMS
+ CarriageControl:NL
+450 PRINT "YOU GOT THEM ALL IN";T;"TURNS!"
+ ITEMS
+ TextConstant:"YOU GOT THEM ALL IN"
+ CarriageControl:;
+ ScalarValue:T
+ CarriageControl:;
+ TextConstant:"TURNS!"
+ CarriageControl:NL
+460 GOTO 580
+ LineNumber:580
+470 IF T<10 THEN 260
+ ScalarValue:T
+ NumericConstant:10
+ BinaryOperator:<
+480 PRINT
+ ITEMS
+ CarriageControl:NL
+490 PRINT "SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
+ ITEMS
+ TextConstant:"SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
+ CarriageControl:NL
+540 FOR I=1 TO 4
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+550 IF P(I,1)=-1 THEN 570
+ ScalarValue:I
+ NumericConstant:1
+ ScalarValue:P
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+560 PRINT "MUGWUMP";I;"IS AT (";P(I,1);",";P(I,2);")"
+ ITEMS
+ TextConstant:"MUGWUMP"
+ CarriageControl:;
+ ScalarValue:I
+ CarriageControl:;
+ TextConstant:"IS AT ("
+ CarriageControl:;
+ ScalarValue:I
+ NumericConstant:1
+ ScalarValue:P
+ CarriageControl:;
+ TextConstant:","
+ CarriageControl:;
+ ScalarValue:I
+ NumericConstant:2
+ ScalarValue:P
+ CarriageControl:;
+ TextConstant:")"
+ CarriageControl:NL
+570 NEXT I
+ VariableName:I
+580 PRINT
+ ITEMS
+ CarriageControl:NL
+600 PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
+ ITEMS
+ TextConstant:"THAT WAS FUN! LET'S PLAY AGAIN......."
+ CarriageControl:NL
+610 PRINT "FOUR MORE MUGWUMPS ARE NOW IN HIDING."
+ ITEMS
+ TextConstant:"FOUR MORE MUGWUMPS ARE NOW IN HIDING."
+ CarriageControl:NL
+630 GOTO 240
+ LineNumber:240
+1000 FOR J=1 TO 2
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:1"]
+1010 FOR I=1 TO 4
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+1020 P(I,J)=INT(10*RND(1))
+ ScalarValue:I
+ ScalarValue:J
+ ScalarReference:P
+ NumericConstant:10
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+1030 NEXT I
+ VariableName:I
+1040 NEXT J
+ VariableName:J
+1050 RETURN
+ 
+1099 END
+ 

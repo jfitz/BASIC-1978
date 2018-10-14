@@ -1,0 +1,678 @@
+1 PRINT TAB(33);"QUEEN"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"QUEEN"
+ CarriageControl:NL
+2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+3 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+10 DIM S(64)
+ NumericConstant:64
+ CompoundDeclaration:S
+11 FOR I=1 TO 64
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:64"]
+ step:    ["NumericConstant:1"]
+12 READ S(I)
+ ScalarValue:I
+ ScalarReference:S
+13 NEXT I
+ VariableName:I
+14 DATA  81,  71,  61,  51,  41,  31,  21,  11
+ NumericConstant:81
+ NumericConstant:71
+ NumericConstant:61
+ NumericConstant:51
+ NumericConstant:41
+ NumericConstant:31
+ NumericConstant:21
+ NumericConstant:11
+15 DATA  92,  82,  72,  62,  52,  42,  32,  22
+ NumericConstant:92
+ NumericConstant:82
+ NumericConstant:72
+ NumericConstant:62
+ NumericConstant:52
+ NumericConstant:42
+ NumericConstant:32
+ NumericConstant:22
+16 DATA 103,  93,  83,  73,  63,  53,  43,  33
+ NumericConstant:103
+ NumericConstant:93
+ NumericConstant:83
+ NumericConstant:73
+ NumericConstant:63
+ NumericConstant:53
+ NumericConstant:43
+ NumericConstant:33
+17 DATA 114, 104,  94,  84,  74,  64,  54,  44
+ NumericConstant:114
+ NumericConstant:104
+ NumericConstant:94
+ NumericConstant:84
+ NumericConstant:74
+ NumericConstant:64
+ NumericConstant:54
+ NumericConstant:44
+18 DATA 125, 115, 105,  95,  85,  75,  65,  55
+ NumericConstant:125
+ NumericConstant:115
+ NumericConstant:105
+ NumericConstant:95
+ NumericConstant:85
+ NumericConstant:75
+ NumericConstant:65
+ NumericConstant:55
+19 DATA 136, 126, 116, 106,  96,  86,  76,  66
+ NumericConstant:136
+ NumericConstant:126
+ NumericConstant:116
+ NumericConstant:106
+ NumericConstant:96
+ NumericConstant:86
+ NumericConstant:76
+ NumericConstant:66
+20 DATA 147, 137, 127, 117, 107,  97,  87,  77
+ NumericConstant:147
+ NumericConstant:137
+ NumericConstant:127
+ NumericConstant:117
+ NumericConstant:107
+ NumericConstant:97
+ NumericConstant:87
+ NumericConstant:77
+21 DATA 158, 148, 138, 128, 118, 108,  98,  88
+ NumericConstant:158
+ NumericConstant:148
+ NumericConstant:138
+ NumericConstant:128
+ NumericConstant:118
+ NumericConstant:108
+ NumericConstant:98
+ NumericConstant:88
+22 INPUT "DO YOU WANT INSTRUCTIONS";W$
+ ScalarReference:W$
+23 IF W$="NO" THEN 30
+ ScalarValue:W$
+ TextConstant:"NO"
+ BinaryOperator:=
+24 IF W$="YES" THEN 28
+ ScalarValue:W$
+ TextConstant:"YES"
+ BinaryOperator:=
+25 PRINT "PLEASE ANSWER 'YES' OR 'NO'."
+ ITEMS
+ TextConstant:"PLEASE ANSWER 'YES' OR 'NO'."
+ CarriageControl:NL
+26 GOTO 22
+ LineNumber:22
+28 GOSUB 5000
+ LineNumber:5000
+29 GOTO 100
+ LineNumber:100
+30 GOSUB 5160
+ LineNumber:5160
+90 REM     ERROR CHECKS
+ Remark:    ERROR CHECKS
+100 PRINT "WHERE WOULD YOU LIKE TO START";
+ ITEMS
+ TextConstant:"WHERE WOULD YOU LIKE TO START"
+ CarriageControl:;
+110 INPUT M1
+ ScalarReference:M1
+115 IF M1=0 THEN 232
+ ScalarValue:M1
+ NumericConstant:0
+ BinaryOperator:=
+120 T1=INT(M1/10)
+ ScalarReference:T1
+ ScalarValue:M1
+ NumericConstant:10
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+130 U1=M1-10*T1
+ ScalarReference:U1
+ ScalarValue:M1
+ NumericConstant:10
+ ScalarValue:T1
+ BinaryOperator:*
+ BinaryOperator:-
+ AssignmentOperator:=
+140 IF U1=1 THEN 200
+ ScalarValue:U1
+ NumericConstant:1
+ BinaryOperator:=
+150 IF U1=T1 THEN 200
+ ScalarValue:U1
+ ScalarValue:T1
+ BinaryOperator:=
+160 PRINT "PLEASE READ THE DIRECTIONS AGAIN."
+ ITEMS
+ TextConstant:"PLEASE READ THE DIRECTIONS AGAIN."
+ CarriageControl:NL
+170 PRINT "YOU HAVE BEGUN ILLEGALLY."
+ ITEMS
+ TextConstant:"YOU HAVE BEGUN ILLEGALLY."
+ CarriageControl:NL
+175 PRINT
+ ITEMS
+ CarriageControl:NL
+180 GOTO 100
+ LineNumber:100
+200 GOSUB 2000
+ LineNumber:2000
+210 PRINT "COMPUTER MOVES TO SQUARE";M
+ ITEMS
+ TextConstant:"COMPUTER MOVES TO SQUARE"
+ CarriageControl:;
+ ScalarValue:M
+ CarriageControl:NL
+215 IF M=158 THEN 3400
+ ScalarValue:M
+ NumericConstant:158
+ BinaryOperator:=
+220 PRINT "WHAT IS YOUR MOVE";
+ ITEMS
+ TextConstant:"WHAT IS YOUR MOVE"
+ CarriageControl:;
+230 INPUT M1
+ ScalarReference:M1
+231 IF M1<>0 THEN 239
+ ScalarValue:M1
+ NumericConstant:0
+ BinaryOperator:<>
+232 PRINT
+ ITEMS
+ CarriageControl:NL
+233 PRINT "IT LOOKS LIKE I HAVE WON BY FORFEIT."
+ ITEMS
+ TextConstant:"IT LOOKS LIKE I HAVE WON BY FORFEIT."
+ CarriageControl:NL
+234 PRINT
+ ITEMS
+ CarriageControl:NL
+235 GOTO 4000
+ LineNumber:4000
+239 IF M1<=M THEN 3200
+ ScalarValue:M1
+ ScalarValue:M
+ BinaryOperator:<=
+240 T1=INT(M1/10)
+ ScalarReference:T1
+ ScalarValue:M1
+ NumericConstant:10
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+250 U1=M1-10*T1
+ ScalarReference:U1
+ ScalarValue:M1
+ NumericConstant:10
+ ScalarValue:T1
+ BinaryOperator:*
+ BinaryOperator:-
+ AssignmentOperator:=
+260 P=U1-U
+ ScalarReference:P
+ ScalarValue:U1
+ ScalarValue:U
+ BinaryOperator:-
+ AssignmentOperator:=
+270 IF P<>0 THEN 300
+ ScalarValue:P
+ NumericConstant:0
+ BinaryOperator:<>
+280 L=T1-T
+ ScalarReference:L
+ ScalarValue:T1
+ ScalarValue:T
+ BinaryOperator:-
+ AssignmentOperator:=
+290 IF L<=0 THEN 3200
+ ScalarValue:L
+ NumericConstant:0
+ BinaryOperator:<=
+295 GOTO 200
+ LineNumber:200
+300 IF T1-T <>P THEN 320
+ ScalarValue:T1
+ ScalarValue:T
+ BinaryOperator:-
+ ScalarValue:P
+ BinaryOperator:<>
+310 GOTO 200
+ LineNumber:200
+320 IF T1-T <>2*P THEN 3200
+ ScalarValue:T1
+ ScalarValue:T
+ BinaryOperator:-
+ NumericConstant:2
+ ScalarValue:P
+ BinaryOperator:*
+ BinaryOperator:<>
+330 GOTO 200
+ LineNumber:200
+1990 REM     LOCATE MOVE FOR COMPUTER
+ Remark:    LOCATE MOVE FOR COMPUTER
+2000 IF M1=41 THEN 2180
+ ScalarValue:M1
+ NumericConstant:41
+ BinaryOperator:=
+2010 IF M1=44 THEN 2180
+ ScalarValue:M1
+ NumericConstant:44
+ BinaryOperator:=
+2020 IF M1=73 THEN 2180
+ ScalarValue:M1
+ NumericConstant:73
+ BinaryOperator:=
+2030 IF M1=75 THEN 2180
+ ScalarValue:M1
+ NumericConstant:75
+ BinaryOperator:=
+2040 IF M1=126 THEN 2180
+ ScalarValue:M1
+ NumericConstant:126
+ BinaryOperator:=
+2050 IF M1=127 THEN 2180
+ ScalarValue:M1
+ NumericConstant:127
+ BinaryOperator:=
+2060 IF M1=158 THEN 3300
+ ScalarValue:M1
+ NumericConstant:158
+ BinaryOperator:=
+2065 C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+2070 FOR K=7 TO 1 STEP -1
+ control: VariableName:K
+ start:   ["NumericConstant:7"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:1", "UnaryOperator:-"]
+2080 U=U1
+ ScalarReference:U
+ ScalarValue:U1
+ AssignmentOperator:=
+2090 T=T1+K
+ ScalarReference:T
+ ScalarValue:T1
+ ScalarValue:K
+ BinaryOperator:+
+ AssignmentOperator:=
+2100 GOSUB 3500
+ LineNumber:3500
+2105 IF C=1 THEN 2160
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:=
+2110 U=U+K
+ ScalarReference:U
+ ScalarValue:U
+ ScalarValue:K
+ BinaryOperator:+
+ AssignmentOperator:=
+2120 GOSUB 3500
+ LineNumber:3500
+2125 IF C=1 THEN 2160
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:=
+2130 T=T+K
+ ScalarReference:T
+ ScalarValue:T
+ ScalarValue:K
+ BinaryOperator:+
+ AssignmentOperator:=
+2140 GOSUB 3500
+ LineNumber:3500
+2145 IF C=1 THEN 2160
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:=
+2150 NEXT K
+ VariableName:K
+2155 GOTO 2180
+ LineNumber:2180
+2160 C=0
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+2170 RETURN
+ 
+2180 GOSUB 3000
+ LineNumber:3000
+2190 RETURN
+ 
+2990 REM     RANDOM MOVE
+ Remark:    RANDOM MOVE
+3000 Z=RND(1)
+ ScalarReference:Z
+ NumericConstant:1
+ FunctionRnd
+ AssignmentOperator:=
+3010 IF Z>.6 THEN 3110
+ ScalarValue:Z
+ NumericConstant:.6
+ BinaryOperator:>
+3020 IF Z>.3 THEN 3070
+ ScalarValue:Z
+ NumericConstant:.3
+ BinaryOperator:>
+3030 U=U1
+ ScalarReference:U
+ ScalarValue:U1
+ AssignmentOperator:=
+3040 T=T1+1
+ ScalarReference:T
+ ScalarValue:T1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+3050 M=10*T+U
+ ScalarReference:M
+ NumericConstant:10
+ ScalarValue:T
+ BinaryOperator:*
+ ScalarValue:U
+ BinaryOperator:+
+ AssignmentOperator:=
+3060 RETURN
+ 
+3070 U=U1+1
+ ScalarReference:U
+ ScalarValue:U1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+3080 T=T1+2
+ ScalarReference:T
+ ScalarValue:T1
+ NumericConstant:2
+ BinaryOperator:+
+ AssignmentOperator:=
+3090 M=10*T+U
+ ScalarReference:M
+ NumericConstant:10
+ ScalarValue:T
+ BinaryOperator:*
+ ScalarValue:U
+ BinaryOperator:+
+ AssignmentOperator:=
+3100 RETURN
+ 
+3110 U=U1+1
+ ScalarReference:U
+ ScalarValue:U1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+3120 T=T1+1
+ ScalarReference:T
+ ScalarValue:T1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+3130 M=10*T+U
+ ScalarReference:M
+ NumericConstant:10
+ ScalarValue:T
+ BinaryOperator:*
+ ScalarValue:U
+ BinaryOperator:+
+ AssignmentOperator:=
+3140 RETURN
+ 
+3190 REM     ILLEGAL MOVE MESSAGE
+ Remark:    ILLEGAL MOVE MESSAGE
+3200 PRINT
+ ITEMS
+ CarriageControl:NL
+3210 PRINT "Y O U   C H E A T . . .  TRY AGAIN";
+ ITEMS
+ TextConstant:"Y O U   C H E A T . . .  TRY AGAIN"
+ CarriageControl:;
+3220 GOTO 230
+ LineNumber:230
+3290 REM     PLAYER WINS
+ Remark:    PLAYER WINS
+3300 PRINT
+ ITEMS
+ CarriageControl:NL
+3310 PRINT "C O N G R A T U L A T I O N S . . ."
+ ITEMS
+ TextConstant:"C O N G R A T U L A T I O N S . . ."
+ CarriageControl:NL
+3320 PRINT 
+ ITEMS
+ CarriageControl:NL
+3330 PRINT "YOU HAVE WON--VERY WELL PLAYED."
+ ITEMS
+ TextConstant:"YOU HAVE WON--VERY WELL PLAYED."
+ CarriageControl:NL
+3340 PRINT "IT LOOKS LIKE I HAVE MET MY MATCH."
+ ITEMS
+ TextConstant:"IT LOOKS LIKE I HAVE MET MY MATCH."
+ CarriageControl:NL
+3350 PRINT "THANKS FOR PLAYING---I CAN'T WIN ALL THE TIME."
+ ITEMS
+ TextConstant:"THANKS FOR PLAYING---I CAN'T WIN ALL THE TIME."
+ CarriageControl:NL
+3360 PRINT
+ ITEMS
+ CarriageControl:NL
+3370 GOTO 4000
+ LineNumber:4000
+3390 REM     COMPUTER WINS
+ Remark:    COMPUTER WINS
+3400 PRINT
+ ITEMS
+ CarriageControl:NL
+3410 PRINT "NICE TRY, BUT IT LOOKS LIKE I HAVE WON."
+ ITEMS
+ TextConstant:"NICE TRY, BUT IT LOOKS LIKE I HAVE WON."
+ CarriageControl:NL
+3420 PRINT "THANKS FOR PLAYING."
+ ITEMS
+ TextConstant:"THANKS FOR PLAYING."
+ CarriageControl:NL
+3430 PRINT
+ ITEMS
+ CarriageControl:NL
+3440 GOTO 4000
+ LineNumber:4000
+3490 REM     TEST FOR COMPUTER MOVE
+ Remark:    TEST FOR COMPUTER MOVE
+3500 M=10*T+U
+ ScalarReference:M
+ NumericConstant:10
+ ScalarValue:T
+ BinaryOperator:*
+ ScalarValue:U
+ BinaryOperator:+
+ AssignmentOperator:=
+3510 IF M=158 THEN 3570
+ ScalarValue:M
+ NumericConstant:158
+ BinaryOperator:=
+3520 IF M=127 THEN 3570
+ ScalarValue:M
+ NumericConstant:127
+ BinaryOperator:=
+3530 IF M=126 THEN 3570
+ ScalarValue:M
+ NumericConstant:126
+ BinaryOperator:=
+3540 IF M=75 THEN 3570
+ ScalarValue:M
+ NumericConstant:75
+ BinaryOperator:=
+3550 IF M=73 THEN 3570
+ ScalarValue:M
+ NumericConstant:73
+ BinaryOperator:=
+3560 RETURN
+ 
+3570 C=1
+ ScalarReference:C
+ NumericConstant:1
+ AssignmentOperator:=
+3580 GOTO 3560
+ LineNumber:3560
+3990 REM     ANOTHER GAME???
+ Remark:    ANOTHER GAME???
+4000 PRINT "ANYONE ELSE CARE TO TRY";
+ ITEMS
+ TextConstant:"ANYONE ELSE CARE TO TRY"
+ CarriageControl:;
+4010 INPUT Q$
+ ScalarReference:Q$
+4020 PRINT
+ ITEMS
+ CarriageControl:NL
+4030 IF Q$="YES" THEN 30 
+ ScalarValue:Q$
+ TextConstant:"YES"
+ BinaryOperator:=
+4040 IF Q$="NO" THEN 4050
+ ScalarValue:Q$
+ TextConstant:"NO"
+ BinaryOperator:=
+4042 PRINT "PLEASE ANSWER 'YES' OR 'NO'."
+ ITEMS
+ TextConstant:"PLEASE ANSWER 'YES' OR 'NO'."
+ CarriageControl:NL
+4045 GOTO 4000
+ LineNumber:4000
+4050 PRINT:PRINT "OK --- THANKS AGAIN."
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"OK --- THANKS AGAIN."
+ CarriageControl:NL
+4060 STOP
+ 
+4990 REM     DIRECTIONS
+ Remark:    DIRECTIONS
+5000 PRINT "WE ARE GOING TO PLAY A GAME BASED ON ONE OF THE CHESS"
+ ITEMS
+ TextConstant:"WE ARE GOING TO PLAY A GAME BASED ON ONE OF THE CHESS"
+ CarriageControl:NL
+5010 PRINT "MOVES.  OUR QUEEN WILL BE ABLE TO MOVE ONLY TO THE LEFT,"
+ ITEMS
+ TextConstant:"MOVES.  OUR QUEEN WILL BE ABLE TO MOVE ONLY TO THE LEFT,"
+ CarriageControl:NL
+5020 PRINT "DOWN, OR DIAGONALLY DOWN AND TO THE LEFT."
+ ITEMS
+ TextConstant:"DOWN, OR DIAGONALLY DOWN AND TO THE LEFT."
+ CarriageControl:NL
+5030 PRINT
+ ITEMS
+ CarriageControl:NL
+5040 PRINT "THE OBJECT OF THE GAME IS TO PLACE THE QUEEN IN THE LOWER"
+ ITEMS
+ TextConstant:"THE OBJECT OF THE GAME IS TO PLACE THE QUEEN IN THE LOWER"
+ CarriageControl:NL
+5050 PRINT "LEFT HAND SQUARE BY ALTERNATING MOVES BETWEEN YOU AND THE"
+ ITEMS
+ TextConstant:"LEFT HAND SQUARE BY ALTERNATING MOVES BETWEEN YOU AND THE"
+ CarriageControl:NL
+5060 PRINT "COMPUTER.  THE FIRST ONE TO PLACE THE QUEEN THERE WINS."
+ ITEMS
+ TextConstant:"COMPUTER.  THE FIRST ONE TO PLACE THE QUEEN THERE WINS."
+ CarriageControl:NL
+5070 PRINT
+ ITEMS
+ CarriageControl:NL
+5080 PRINT "YOU GO FIRST AND PLACE THE QUEEN IN ANY ONE OF THE SQUARES"
+ ITEMS
+ TextConstant:"YOU GO FIRST AND PLACE THE QUEEN IN ANY ONE OF THE SQUARES"
+ CarriageControl:NL
+5090 PRINT "ON THE TOP ROW OR RIGHT HAND COLUMN."
+ ITEMS
+ TextConstant:"ON THE TOP ROW OR RIGHT HAND COLUMN."
+ CarriageControl:NL
+5100 PRINT "THAT WILL BE YOUR FIRST MOVE."
+ ITEMS
+ TextConstant:"THAT WILL BE YOUR FIRST MOVE."
+ CarriageControl:NL
+5110 PRINT "WE ALTERNATE MOVES."
+ ITEMS
+ TextConstant:"WE ALTERNATE MOVES."
+ CarriageControl:NL
+5120 PRINT "YOU MAY FORFEIT BY TYPING '0' AS YOUR MOVE."
+ ITEMS
+ TextConstant:"YOU MAY FORFEIT BY TYPING '0' AS YOUR MOVE."
+ CarriageControl:NL
+5130 PRINT "BE SURE TO PRESS THE RETURN KEY AFTER EACH RESPONSE."
+ ITEMS
+ TextConstant:"BE SURE TO PRESS THE RETURN KEY AFTER EACH RESPONSE."
+ CarriageControl:NL
+5140 PRINT
+ ITEMS
+ CarriageControl:NL
+5150 PRINT
+ ITEMS
+ CarriageControl:NL
+5160 PRINT
+ ITEMS
+ CarriageControl:NL
+5170 FOR A=0 TO 7
+ control: VariableName:A
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+5180 FOR B=1 TO 8
+ control: VariableName:B
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8"]
+ step:    ["NumericConstant:1"]
+5185 I=8*A+B
+ ScalarReference:I
+ NumericConstant:8
+ ScalarValue:A
+ BinaryOperator:*
+ ScalarValue:B
+ BinaryOperator:+
+ AssignmentOperator:=
+5190 PRINT S(I);
+ ITEMS
+ ScalarValue:I
+ ScalarValue:S
+ CarriageControl:;
+5200 NEXT B
+ VariableName:B
+5210 PRINT
+ ITEMS
+ CarriageControl:NL
+5220 PRINT
+ ITEMS
+ CarriageControl:NL
+5230 PRINT
+ ITEMS
+ CarriageControl:NL
+5240 NEXT A
+ VariableName:A
+5250 PRINT
+ ITEMS
+ CarriageControl:NL
+5260 RETURN
+ 
+9999 END
+ 

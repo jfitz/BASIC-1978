@@ -1,0 +1,341 @@
+10 PRINT TAB(33);"WAR"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"WAR"
+ CarriageControl:NL
+20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+30 PRINT: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+100 PRINT "THIS IS THE CARD GAME OF WAR.  EACH CARD IS GIVEN BY SUIT-#"
+ ITEMS
+ TextConstant:"THIS IS THE CARD GAME OF WAR.  EACH CARD IS GIVEN BY SUIT-#"
+ CarriageControl:NL
+110 PRINT "AS S-7 FOR SPADE 7.  ";
+ ITEMS
+ TextConstant:"AS S-7 FOR SPADE 7.  "
+ CarriageControl:;
+120 PRINT "DO YOU WANT DIRECTIONS";
+ ITEMS
+ TextConstant:"DO YOU WANT DIRECTIONS"
+ CarriageControl:;
+130 INPUT B$
+ ScalarReference:B$
+140 IF B$="NO" THEN 210
+ ScalarValue:B$
+ TextConstant:"NO"
+ BinaryOperator:=
+150 IF B$="YES" THEN 180
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:=
+160 PRINT "YES OR NO, PLEASE.  ";
+ ITEMS
+ TextConstant:"YES OR NO, PLEASE.  "
+ CarriageControl:;
+170 GOTO 120
+ LineNumber:120
+180 PRINT "THE COMPUTER GIVES YOU AND IT A 'CARD'.  THE HIGHER CARD"
+ ITEMS
+ TextConstant:"THE COMPUTER GIVES YOU AND IT A 'CARD'.  THE HIGHER CARD"
+ CarriageControl:NL
+190 PRINT "(NUMERICALLY) WINS.  THE GAME ENDS WHEN YOU CHOOSE NOT TO"
+ ITEMS
+ TextConstant:"(NUMERICALLY) WINS.  THE GAME ENDS WHEN YOU CHOOSE NOT TO"
+ CarriageControl:NL
+200 PRINT "CONTINUE OR WHEN YOU HAVE FINISHED THE PACK."
+ ITEMS
+ TextConstant:"CONTINUE OR WHEN YOU HAVE FINISHED THE PACK."
+ CarriageControl:NL
+210 PRINT
+ ITEMS
+ CarriageControl:NL
+220 PRINT
+ ITEMS
+ CarriageControl:NL
+230 DIM A$(52),L(54)
+ NumericConstant:52
+ CompoundDeclaration:A$
+ NumericConstant:54
+ CompoundDeclaration:L
+240 FOR I=1 TO 52
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:52"]
+ step:    ["NumericConstant:1"]
+250 READ A$(I)
+ ScalarValue:I
+ ScalarReference:A$
+260 NEXT I
+ VariableName:I
+270 REM
+ Remark:
+280 FOR J=1 TO 52
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:52"]
+ step:    ["NumericConstant:1"]
+290 LET L(J)=INT(52*RND(1))+1
+ ScalarValue:J
+ ScalarReference:L
+ NumericConstant:52
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+295 IF J=1 THEN 350
+ ScalarValue:J
+ NumericConstant:1
+ BinaryOperator:=
+300 FOR K=1 TO J-1
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:J", "NumericConstant:1", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+310 IF L(K)<>L(J) THEN 340
+ ScalarValue:K
+ ScalarValue:L
+ ScalarValue:J
+ ScalarValue:L
+ BinaryOperator:<>
+320 REM
+ Remark:
+330 GOTO 290
+ LineNumber:290
+340 NEXT K
+ VariableName:K
+350 NEXT J
+ VariableName:J
+360 P=P+1
+ ScalarReference:P
+ ScalarValue:P
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+370 M1=L(P)
+ ScalarReference:M1
+ ScalarValue:P
+ ScalarValue:L
+ AssignmentOperator:=
+380 P=P+1
+ ScalarReference:P
+ ScalarValue:P
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+390 M2=L(P)
+ ScalarReference:M2
+ ScalarValue:P
+ ScalarValue:L
+ AssignmentOperator:=
+400 PRINT
+ ITEMS
+ CarriageControl:NL
+420 PRINT "YOU: ";A$(M1),"COMPUTER: ";A$(M2)
+ ITEMS
+ TextConstant:"YOU: "
+ CarriageControl:;
+ ScalarValue:M1
+ ScalarValue:A$
+ CarriageControl:,
+ TextConstant:"COMPUTER: "
+ CarriageControl:;
+ ScalarValue:M2
+ ScalarValue:A$
+ CarriageControl:NL
+430 N1=INT((M1-.5)/4)
+ ScalarReference:N1
+ ScalarValue:M1
+ NumericConstant:.5
+ BinaryOperator:-
+ NumericConstant:4
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+440 N2=INT((M2-.5)/4)
+ ScalarReference:N2
+ ScalarValue:M2
+ NumericConstant:.5
+ BinaryOperator:-
+ NumericConstant:4
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+450 IF N1>=N2 THEN 490
+ ScalarValue:N1
+ ScalarValue:N2
+ BinaryOperator:>=
+460 A1=A1+1
+ ScalarReference:A1
+ ScalarValue:A1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+470 PRINT "THE COMPUTER WINS!!! YOU HAVE";B1;"AND THE COMPUTER HAS";A1
+ ITEMS
+ TextConstant:"THE COMPUTER WINS!!! YOU HAVE"
+ CarriageControl:;
+ ScalarValue:B1
+ CarriageControl:;
+ TextConstant:"AND THE COMPUTER HAS"
+ CarriageControl:;
+ ScalarValue:A1
+ CarriageControl:NL
+480 GOTO 540
+ LineNumber:540
+490 IF N1=N2 THEN 530
+ ScalarValue:N1
+ ScalarValue:N2
+ BinaryOperator:=
+500 B1=B1+1
+ ScalarReference:B1
+ ScalarValue:B1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+510 PRINT "YOU WIN. YOU HAVE";B1;"AND THE COMPUTER HAS";A1
+ ITEMS
+ TextConstant:"YOU WIN. YOU HAVE"
+ CarriageControl:;
+ ScalarValue:B1
+ CarriageControl:;
+ TextConstant:"AND THE COMPUTER HAS"
+ CarriageControl:;
+ ScalarValue:A1
+ CarriageControl:NL
+520 GOTO 540
+ LineNumber:540
+530 PRINT "TIE.  NO SCORE CHANGE."
+ ITEMS
+ TextConstant:"TIE.  NO SCORE CHANGE."
+ CarriageControl:NL
+540 IF L(P+1)=0 THEN 610
+ ScalarValue:P
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:L
+ NumericConstant:0
+ BinaryOperator:=
+550 PRINT "DO YOU WANT TO CONTINUE";
+ ITEMS
+ TextConstant:"DO YOU WANT TO CONTINUE"
+ CarriageControl:;
+560 INPUT V$
+ ScalarReference:V$
+570 IF V$="YES" THEN 360
+ ScalarValue:V$
+ TextConstant:"YES"
+ BinaryOperator:=
+580 IF V$="NO" THEN 650
+ ScalarValue:V$
+ TextConstant:"NO"
+ BinaryOperator:=
+590 PRINT "YES OR NO, PLEASE.  ";
+ ITEMS
+ TextConstant:"YES OR NO, PLEASE.  "
+ CarriageControl:;
+600 GOTO 540
+ LineNumber:540
+610 PRINT
+ ITEMS
+ CarriageControl:NL
+620 PRINT
+ ITEMS
+ CarriageControl:NL
+630 PRINT "WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: ";B1;
+ ITEMS
+ TextConstant:"WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: "
+ CarriageControl:;
+ ScalarValue:B1
+ CarriageControl:;
+640 PRINT "  THE COMPUTER: ";A1:PRINT
+ ITEMS
+ TextConstant:"  THE COMPUTER: "
+ CarriageControl:;
+ ScalarValue:A1
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+650 PRINT "THANKS FOR PLAYING.  IT WAS FUN."
+ ITEMS
+ TextConstant:"THANKS FOR PLAYING.  IT WAS FUN."
+ CarriageControl:NL
+655 PRINT
+ ITEMS
+ CarriageControl:NL
+660 DATA "S-2","H-2","C-2","D-2","S-3","H-3","C-3","D-3"
+ TextConstant:"S-2"
+ TextConstant:"H-2"
+ TextConstant:"C-2"
+ TextConstant:"D-2"
+ TextConstant:"S-3"
+ TextConstant:"H-3"
+ TextConstant:"C-3"
+ TextConstant:"D-3"
+670 DATA "S-4","H-4","C-4","D-4","S-5","H-5","C-5","D-5"
+ TextConstant:"S-4"
+ TextConstant:"H-4"
+ TextConstant:"C-4"
+ TextConstant:"D-4"
+ TextConstant:"S-5"
+ TextConstant:"H-5"
+ TextConstant:"C-5"
+ TextConstant:"D-5"
+680 DATA "S-6","H-6","C-6","D-6","S-7","H-7","C-7","D-7"
+ TextConstant:"S-6"
+ TextConstant:"H-6"
+ TextConstant:"C-6"
+ TextConstant:"D-6"
+ TextConstant:"S-7"
+ TextConstant:"H-7"
+ TextConstant:"C-7"
+ TextConstant:"D-7"
+690 DATA "S-8","H-8","C-8","D-8","S-9","H-9","C-9","D-9"
+ TextConstant:"S-8"
+ TextConstant:"H-8"
+ TextConstant:"C-8"
+ TextConstant:"D-8"
+ TextConstant:"S-9"
+ TextConstant:"H-9"
+ TextConstant:"C-9"
+ TextConstant:"D-9"
+700 DATA "S-10","H-10","C-10","D-10","S-J","H-J","C-J","D-J"
+ TextConstant:"S-10"
+ TextConstant:"H-10"
+ TextConstant:"C-10"
+ TextConstant:"D-10"
+ TextConstant:"S-J"
+ TextConstant:"H-J"
+ TextConstant:"C-J"
+ TextConstant:"D-J"
+710 DATA "S-Q","H-Q","C-Q","D-Q","S-K","H-K","C-K","D-K"
+ TextConstant:"S-Q"
+ TextConstant:"H-Q"
+ TextConstant:"C-Q"
+ TextConstant:"D-Q"
+ TextConstant:"S-K"
+ TextConstant:"H-K"
+ TextConstant:"C-K"
+ TextConstant:"D-K"
+720 DATA "S-A","H-A","C-A","D-A"
+ TextConstant:"S-A"
+ TextConstant:"H-A"
+ TextConstant:"C-A"
+ TextConstant:"D-A"
+999 END
+ 

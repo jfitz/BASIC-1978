@@ -1,0 +1,317 @@
+10 PRINT TAB(32);"CALENDAR"
+ ITEMS
+ NumericConstant:32
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CALENDAR"
+ CarriageControl:NL
+20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+30 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+100 REM     VALUES FOR 1979 - SEE NOTES
+ Remark:    VALUES FOR 1979 - SEE NOTES
+110 DIM M(12)
+ NumericConstant:12
+ CompoundDeclaration:M
+120 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ NumericConstant:10
+ FunctionChr
+ CarriageControl:;
+ VariableName:I
+130 D=1: REM 1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
+ ScalarReference:D
+ NumericConstant:1
+ AssignmentOperator:=
+ Remark:1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
+140 S=0
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+150 REM     READ DAYS OF EACH MONTH
+ Remark:    READ DAYS OF EACH MONTH
+160 FOR N=0 TO 12: READ M(N): NEXT N
+ control: VariableName:N
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:12"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:N
+ ScalarReference:M
+ VariableName:N
+170 REM
+ Remark:
+180 FOR N=1 TO 12
+ control: VariableName:N
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:12"]
+ step:    ["NumericConstant:1"]
+190 PRINT: PRINT: S=S+M(N-1)
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ScalarReference:S
+ ScalarValue:S
+ ScalarValue:N
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:M
+ BinaryOperator:+
+ AssignmentOperator:=
+200 PRINT "**";S;TAB(7);
+ ITEMS
+ TextConstant:"**"
+ CarriageControl:;
+ ScalarValue:S
+ CarriageControl:;
+ NumericConstant:7
+ FunctionTab
+ CarriageControl:;
+210 FOR I=1 TO 18: PRINT "*";: NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:18"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ TextConstant:"*"
+ CarriageControl:;
+ VariableName:I
+220 ON N GOTO 230,240,250,260,270,280,290,300,310,320,330,340
+ ScalarValue:N
+ LineNumber:230
+ LineNumber:240
+ LineNumber:250
+ LineNumber:260
+ LineNumber:270
+ LineNumber:280
+ LineNumber:290
+ LineNumber:300
+ LineNumber:310
+ LineNumber:320
+ LineNumber:330
+ LineNumber:340
+230 PRINT " JANUARY ";: GOTO 350
+ ITEMS
+ TextConstant:" JANUARY "
+ CarriageControl:;
+ LineNumber:350
+240 PRINT " FEBRUARY";: GOTO 350
+ ITEMS
+ TextConstant:" FEBRUARY"
+ CarriageControl:;
+ LineNumber:350
+250 PRINT "  MARCH  ";: GOTO 350
+ ITEMS
+ TextConstant:"  MARCH  "
+ CarriageControl:;
+ LineNumber:350
+260 PRINT "  APRIL  ";: GOTO 350
+ ITEMS
+ TextConstant:"  APRIL  "
+ CarriageControl:;
+ LineNumber:350
+270 PRINT "   MAY   ";: GOTO 350
+ ITEMS
+ TextConstant:"   MAY   "
+ CarriageControl:;
+ LineNumber:350
+280 PRINT "   JUNE  ";: GOTO 350
+ ITEMS
+ TextConstant:"   JUNE  "
+ CarriageControl:;
+ LineNumber:350
+290 PRINT "   JULY  ";: GOTO 350
+ ITEMS
+ TextConstant:"   JULY  "
+ CarriageControl:;
+ LineNumber:350
+300 PRINT "  AUGUST ";: GOTO 350
+ ITEMS
+ TextConstant:"  AUGUST "
+ CarriageControl:;
+ LineNumber:350
+310 PRINT "SEPTEMBER";: GOTO 350
+ ITEMS
+ TextConstant:"SEPTEMBER"
+ CarriageControl:;
+ LineNumber:350
+320 PRINT " OCTOBER ";: GOTO 350
+ ITEMS
+ TextConstant:" OCTOBER "
+ CarriageControl:;
+ LineNumber:350
+330 PRINT " NOVEMBER";: GOTO 350
+ ITEMS
+ TextConstant:" NOVEMBER"
+ CarriageControl:;
+ LineNumber:350
+340 PRINT " DECEMBER";
+ ITEMS
+ TextConstant:" DECEMBER"
+ CarriageControl:;
+350 FOR I=1 TO 18: PRINT "*";: NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:18"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ TextConstant:"*"
+ CarriageControl:;
+ VariableName:I
+360 PRINT 365-S;"**";
+ ITEMS
+ NumericConstant:365
+ ScalarValue:S
+ BinaryOperator:-
+ CarriageControl:;
+ TextConstant:"**"
+ CarriageControl:;
+370 REM   366-S;     ON LEAP YEARS
+ Remark:  366-S;     ON LEAP YEARS
+380 PRINT CHR$(10): PRINT "     S       M       T       W";
+ ITEMS
+ NumericConstant:10
+ FunctionChr
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"     S       M       T       W"
+ CarriageControl:;
+390 PRINT "       T       F       S"
+ ITEMS
+ TextConstant:"       T       F       S"
+ CarriageControl:NL
+400 PRINT
+ ITEMS
+ CarriageControl:NL
+410 FOR I=1 TO 59: PRINT "*";: NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:59"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ TextConstant:"*"
+ CarriageControl:;
+ VariableName:I
+420 REM
+ Remark:
+430 FOR W=1 TO 6
+ control: VariableName:W
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+440 PRINT CHR$(10)
+ ITEMS
+ NumericConstant:10
+ FunctionChr
+ CarriageControl:NL
+450 PRINT TAB(4)
+ ITEMS
+ NumericConstant:4
+ FunctionTab
+ CarriageControl:NL
+460 REM
+ Remark:
+470 FOR G=1 TO 7
+ control: VariableName:G
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+480 D=D+1
+ ScalarReference:D
+ ScalarValue:D
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+490 D2=D-S
+ ScalarReference:D2
+ ScalarValue:D
+ ScalarValue:S
+ BinaryOperator:-
+ AssignmentOperator:=
+500 IF D2>M(N) THEN 580
+ ScalarValue:D2
+ ScalarValue:N
+ ScalarValue:M
+ BinaryOperator:>
+510 IF D2>0 THEN PRINT D2;
+ ScalarValue:D2
+ NumericConstant:0
+ BinaryOperator:>
+ ITEMS
+ ScalarValue:D2
+ CarriageControl:;
+520 PRINT TAB(4+8*G);
+ ITEMS
+ NumericConstant:4
+ NumericConstant:8
+ ScalarValue:G
+ BinaryOperator:*
+ BinaryOperator:+
+ FunctionTab
+ CarriageControl:;
+530 NEXT G
+ VariableName:G
+540 REM
+ Remark:
+550 IF D2=M(N) THEN 590
+ ScalarValue:D2
+ ScalarValue:N
+ ScalarValue:M
+ BinaryOperator:=
+560 NEXT W
+ VariableName:W
+570 REM
+ Remark:
+580 D=D-G
+ ScalarReference:D
+ ScalarValue:D
+ ScalarValue:G
+ BinaryOperator:-
+ AssignmentOperator:=
+590 NEXT N
+ VariableName:N
+600 REM
+ Remark:
+610 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:6"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ NumericConstant:10
+ FunctionChr
+ CarriageControl:;
+ VariableName:I
+620 DATA 0,31,28,31,30,31,30,31,31,30,31,30,31
+ NumericConstant:0
+ NumericConstant:31
+ NumericConstant:28
+ NumericConstant:31
+ NumericConstant:30
+ NumericConstant:31
+ NumericConstant:30
+ NumericConstant:31
+ NumericConstant:31
+ NumericConstant:30
+ NumericConstant:31
+ NumericConstant:30
+ NumericConstant:31
+630 REM  0,31,29,  ..., ON LEAP YEARS
+ Remark: 0,31,29,  ..., ON LEAP YEARS
+640 END
+ 

@@ -1,0 +1,847 @@
+10 PRINT TAB(33);"SPLAT"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"SPLAT"
+ CarriageControl:NL
+20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+40 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+50 DIM A(42)
+ NumericConstant:42
+ CompoundDeclaration:A
+95 PRINT "WELCOME TO 'SPLAT' -- THE GAME THAT SIMULATES A PARACHUTE"
+ ITEMS
+ TextConstant:"WELCOME TO 'SPLAT' -- THE GAME THAT SIMULATES A PARACHUTE"
+ CarriageControl:NL
+96 PRINT "JUMP.  TRY TO OPEN YOUR CHUTE AT THE LAST POSSIBLE" 
+ ITEMS
+ TextConstant:"JUMP.  TRY TO OPEN YOUR CHUTE AT THE LAST POSSIBLE"
+ CarriageControl:NL
+97 PRINT "MOMENT WITHOUT GOING SPLAT."
+ ITEMS
+ TextConstant:"MOMENT WITHOUT GOING SPLAT."
+ CarriageControl:NL
+118 PRINT:PRINT:D1=0:V=0:A=0:N=0:M=0:D1=INT(9001*RND(1)+1000)
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ScalarReference:D1
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:V
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:A
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:N
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:M
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:D1
+ NumericConstant:9001
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1000
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+119 PRINT "SELECT YOUR OWN TERMINAL VELOCITY (YES OR NO)";:INPUT A1$    
+ ITEMS
+ TextConstant:"SELECT YOUR OWN TERMINAL VELOCITY (YES OR NO)"
+ CarriageControl:;
+ ScalarReference:A1$
+120 IF A1$="NO" THEN 128
+ ScalarValue:A1$
+ TextConstant:"NO"
+ BinaryOperator:=
+121 IF A1$<>"YES" THEN PRINT "YES OR NO";:INPUT A1$:GOTO 120
+ ScalarValue:A1$
+ TextConstant:"YES"
+ BinaryOperator:<>
+ ITEMS
+ TextConstant:"YES OR NO"
+ CarriageControl:;
+ ScalarReference:A1$
+ LineNumber:120
+123 PRINT "WHAT TERMINAL VELOCITY (MI/HR)";:INPUT V1 
+ ITEMS
+ TextConstant:"WHAT TERMINAL VELOCITY (MI/HR)"
+ CarriageControl:;
+ ScalarReference:V1
+125 V1=V1*(5280/3600):V=V1+((V1*RND(1))/20)-((V1*RND(1))/20):GOTO 135
+ ScalarReference:V1
+ ScalarValue:V1
+ NumericConstant:5280
+ NumericConstant:3600
+ BinaryOperator:/
+ BinaryOperator:*
+ AssignmentOperator:=
+ ScalarReference:V
+ ScalarValue:V1
+ ScalarValue:V1
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:V1
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ BinaryOperator:-
+ AssignmentOperator:=
+ LineNumber:135
+128 V1=INT(1000*RND(1))
+ ScalarReference:V1
+ NumericConstant:1000
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+130 PRINT "OK.  TERMINAL VELOCITY ="V1"MI/HR"
+ ITEMS
+ TextConstant:"OK.  TERMINAL VELOCITY ="
+ CarriageControl:
+ ScalarValue:V1
+ CarriageControl:
+ TextConstant:"MI/HR"
+ CarriageControl:NL
+131 V1=V1*(5280/3600):V=V1+((V1*RND(1))/20)-((V1*RND(1))/20) 
+ ScalarReference:V1
+ ScalarValue:V1
+ NumericConstant:5280
+ NumericConstant:3600
+ BinaryOperator:/
+ BinaryOperator:*
+ AssignmentOperator:=
+ ScalarReference:V
+ ScalarValue:V1
+ ScalarValue:V1
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:V1
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ BinaryOperator:-
+ AssignmentOperator:=
+135  PRINT "WANT TO SELECT ACCELERATION DUE TO GRAVITY (YES OR NO)"; 
+ ITEMS
+ TextConstant:"WANT TO SELECT ACCELERATION DUE TO GRAVITY (YES OR NO)"
+ CarriageControl:;
+136 INPUT B1$
+ ScalarReference:B1$
+140 IF B1$="NO" THEN 150
+ ScalarValue:B1$
+ TextConstant:"NO"
+ BinaryOperator:=
+141 IF B1$<>"YES" THEN PRINT "YES OR NO";:INPUT B1$:GOTO 140
+ ScalarValue:B1$
+ TextConstant:"YES"
+ BinaryOperator:<>
+ ITEMS
+ TextConstant:"YES OR NO"
+ CarriageControl:;
+ ScalarReference:B1$
+ LineNumber:140
+143 PRINT "WHAT ACCELERATION (FT/SEC/SEC)";:INPUT A2 
+ ITEMS
+ TextConstant:"WHAT ACCELERATION (FT/SEC/SEC)"
+ CarriageControl:;
+ ScalarReference:A2
+145 A=A2+((A2*RND(1))/20)-((A2*RND(1))/20):GOTO 205
+ ScalarReference:A
+ ScalarValue:A2
+ ScalarValue:A2
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:A2
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ BinaryOperator:-
+ AssignmentOperator:=
+ LineNumber:205
+150 ON INT(1+(10*RND(1)))GOTO 151,152,153,154,155,156,157,158,159,160 
+ NumericConstant:1
+ NumericConstant:10
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ BinaryOperator:+
+ FunctionInt
+ LineNumber:151
+ LineNumber:152
+ LineNumber:153
+ LineNumber:154
+ LineNumber:155
+ LineNumber:156
+ LineNumber:157
+ LineNumber:158
+ LineNumber:159
+ LineNumber:160
+151 PRINT"FINE. YOU'RE ON MERCURY. ACCELERATION=12.2 FT/SEC/SEC.":GOTO 161
+ ITEMS
+ TextConstant:"FINE. YOU'RE ON MERCURY. ACCELERATION=12.2 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:161
+152 PRINT"ALL RIGHT. YOU'RE ON VENUS. ACCELERATION=28.3 FT/SEC/SEC.":GOTO 162
+ ITEMS
+ TextConstant:"ALL RIGHT. YOU'RE ON VENUS. ACCELERATION=28.3 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:162
+153 PRINT "THEN YOU'RE ON EARTH. ACCELERATION=32.16 FT/SEC/SEC.":GOTO 163 
+ ITEMS
+ TextConstant:"THEN YOU'RE ON EARTH. ACCELERATION=32.16 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:163
+154 PRINT"FINE. YOU'RE ON THE MOON. ACCELERATION=5.15 FT/SEC/SEC.":GOTO 164
+ ITEMS
+ TextConstant:"FINE. YOU'RE ON THE MOON. ACCELERATION=5.15 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:164
+155 PRINT"ALL RIGHT. YOU'RE ON MARS. ACCELERATION=12.5 FT/SEC/SEC.":GOTO 165 
+ ITEMS
+ TextConstant:"ALL RIGHT. YOU'RE ON MARS. ACCELERATION=12.5 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:165
+156 PRINT"THEN YOU'RE ON JUPITER. ACCELERATION=85.2 FT/SEC/SEC.":GOTO 166
+ ITEMS
+ TextConstant:"THEN YOU'RE ON JUPITER. ACCELERATION=85.2 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:166
+157 PRINT"FINE. YOU'RE ON SATURN. ACCELERATION=37.6 FT/SEC/SEC.":GOTO 167
+ ITEMS
+ TextConstant:"FINE. YOU'RE ON SATURN. ACCELERATION=37.6 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:167
+158 PRINT"ALL RIGHT. YOU'RE ON URANUS. ACCELERATION=33.8 FT/SEC/SEC.":GOTO 168 
+ ITEMS
+ TextConstant:"ALL RIGHT. YOU'RE ON URANUS. ACCELERATION=33.8 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:168
+159 PRINT"THEN YOU'RE ON NEPTUNE. ACCELERATION=39.6 FT/SEC/SEC.":GOTO 169
+ ITEMS
+ TextConstant:"THEN YOU'RE ON NEPTUNE. ACCELERATION=39.6 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:169
+160 PRINT"FINE. YOU'RE ON THE SUN. ACCELERATION=896 FT/SEC/SEC.":GOTO 170
+ ITEMS
+ TextConstant:"FINE. YOU'RE ON THE SUN. ACCELERATION=896 FT/SEC/SEC."
+ CarriageControl:NL
+ LineNumber:170
+161 A2=12.2:GOTO 145 
+ ScalarReference:A2
+ NumericConstant:12.2
+ AssignmentOperator:=
+ LineNumber:145
+162 A2=28.3:GOTO 145 
+ ScalarReference:A2
+ NumericConstant:28.3
+ AssignmentOperator:=
+ LineNumber:145
+163 A2=32.16:GOTO 145
+ ScalarReference:A2
+ NumericConstant:32.16
+ AssignmentOperator:=
+ LineNumber:145
+164 A2=5.15:GOTO 145 
+ ScalarReference:A2
+ NumericConstant:5.15
+ AssignmentOperator:=
+ LineNumber:145
+165 A2=12.5:GOTO 145 
+ ScalarReference:A2
+ NumericConstant:12.5
+ AssignmentOperator:=
+ LineNumber:145
+166 A2=85.2:GOTO 145 
+ ScalarReference:A2
+ NumericConstant:85.2
+ AssignmentOperator:=
+ LineNumber:145
+167 A2=37.6:GOTO 145 
+ ScalarReference:A2
+ NumericConstant:37.6
+ AssignmentOperator:=
+ LineNumber:145
+168 A2=33.8 :GOTO 145
+ ScalarReference:A2
+ NumericConstant:33.8
+ AssignmentOperator:=
+ LineNumber:145
+169 A2=39.6:GOTO 145 
+ ScalarReference:A2
+ NumericConstant:39.6
+ AssignmentOperator:=
+ LineNumber:145
+170 A2=896:GOTO 145
+ ScalarReference:A2
+ NumericConstant:896
+ AssignmentOperator:=
+ LineNumber:145
+205 PRINT
+ ITEMS
+ CarriageControl:NL
+206 PRINT "    ALTITUDE         ="D1"FT" 
+ ITEMS
+ TextConstant:"    ALTITUDE         ="
+ CarriageControl:
+ ScalarValue:D1
+ CarriageControl:
+ TextConstant:"FT"
+ CarriageControl:NL
+207 PRINT "    TERM. VELOCITY   ="V1"FT/SEC +/-5%"
+ ITEMS
+ TextConstant:"    TERM. VELOCITY   ="
+ CarriageControl:
+ ScalarValue:V1
+ CarriageControl:
+ TextConstant:"FT/SEC +/-5%"
+ CarriageControl:NL
+208 PRINT "    ACCELERATION     ="A2"FT/SEC/SEC +/-5%"
+ ITEMS
+ TextConstant:"    ACCELERATION     ="
+ CarriageControl:
+ ScalarValue:A2
+ CarriageControl:
+ TextConstant:"FT/SEC/SEC +/-5%"
+ CarriageControl:NL
+210 PRINT "SET THE TIMER FOR YOUR FREEFALL."
+ ITEMS
+ TextConstant:"SET THE TIMER FOR YOUR FREEFALL."
+ CarriageControl:NL
+211 PRINT "HOW MANY SECONDS";:INPUT T
+ ITEMS
+ TextConstant:"HOW MANY SECONDS"
+ CarriageControl:;
+ ScalarReference:T
+215 PRINT "HERE WE GO."
+ ITEMS
+ TextConstant:"HERE WE GO."
+ CarriageControl:NL
+217 PRINT
+ ITEMS
+ CarriageControl:NL
+218 PRINT "TIME (SEC)","DIST TO FALL (FT)" 
+ ITEMS
+ TextConstant:"TIME (SEC)"
+ CarriageControl:,
+ TextConstant:"DIST TO FALL (FT)"
+ CarriageControl:NL
+219 PRINT "==========","=================" 
+ ITEMS
+ TextConstant:"=========="
+ CarriageControl:,
+ TextConstant:"================="
+ CarriageControl:NL
+300 FOR I=0 TO T STEP (T/8)
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["ScalarValue:T"]
+ step:    ["ScalarValue:T", "NumericConstant:8", "BinaryOperator:/"]
+310 IF I>V/A THEN 400
+ ScalarValue:I
+ ScalarValue:V
+ ScalarValue:A
+ BinaryOperator:/
+ BinaryOperator:>
+320 D=D1-((A/2)*I^2) 
+ ScalarReference:D
+ ScalarValue:D1
+ ScalarValue:A
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:I
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ BinaryOperator:-
+ AssignmentOperator:=
+330 IF D<=0 THEN 1000
+ ScalarValue:D
+ NumericConstant:0
+ BinaryOperator:<=
+340 PRINT I,D
+ ITEMS
+ ScalarValue:I
+ CarriageControl:,
+ ScalarValue:D
+ CarriageControl:NL
+350 NEXT I 
+ VariableName:I
+360 GOTO 500 
+ LineNumber:500
+400 PRINT "TERMINAL VELOCITY REACHED AT T PLUS"V/A"SECONDS."
+ ITEMS
+ TextConstant:"TERMINAL VELOCITY REACHED AT T PLUS"
+ CarriageControl:
+ ScalarValue:V
+ ScalarValue:A
+ BinaryOperator:/
+ CarriageControl:
+ TextConstant:"SECONDS."
+ CarriageControl:NL
+405 FOR I=I TO T STEP (T/8)
+ control: VariableName:I
+ start:   ["ScalarValue:I"]
+ end:     ["ScalarValue:T"]
+ step:    ["ScalarValue:T", "NumericConstant:8", "BinaryOperator:/"]
+410 D=D1-((V^2/(2*A))+(V*(I-(V/A)))) 
+ ScalarReference:D
+ ScalarValue:D1
+ ScalarValue:V
+ NumericConstant:2
+ BinaryOperator:^
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:*
+ BinaryOperator:/
+ ScalarValue:V
+ ScalarValue:I
+ ScalarValue:V
+ ScalarValue:A
+ BinaryOperator:/
+ BinaryOperator:-
+ BinaryOperator:*
+ BinaryOperator:+
+ BinaryOperator:-
+ AssignmentOperator:=
+420 IF D<=0 THEN 1010
+ ScalarValue:D
+ NumericConstant:0
+ BinaryOperator:<=
+430 PRINT I,D
+ ITEMS
+ ScalarValue:I
+ CarriageControl:,
+ ScalarValue:D
+ CarriageControl:NL
+440 NEXT I 
+ VariableName:I
+500 PRINT "CHUTE OPEN"
+ ITEMS
+ TextConstant:"CHUTE OPEN"
+ CarriageControl:NL
+510 K=0:K1=0 
+ ScalarReference:K
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:K1
+ NumericConstant:0
+ AssignmentOperator:=
+550 FOR J=0 TO 42
+ control: VariableName:J
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:42"]
+ step:    ["NumericConstant:1"]
+555 IF A(J)=0 THEN 620 
+ ScalarValue:J
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+560 K=K+1
+ ScalarReference:K
+ ScalarValue:K
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+570 IF D>=A(J) THEN 600
+ ScalarValue:D
+ ScalarValue:J
+ ScalarValue:A
+ BinaryOperator:>=
+580 K1=K1+1
+ ScalarReference:K1
+ ScalarValue:K1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+600 NEXT J 
+ VariableName:J
+610 GOTO 540 
+ LineNumber:540
+620 A(J)=D 
+ ScalarValue:J
+ ScalarReference:A
+ ScalarValue:D
+ AssignmentOperator:=
+630 IF J>2 THEN 650
+ ScalarValue:J
+ NumericConstant:2
+ BinaryOperator:>
+635 PRINT "AMAZING!!! NOT BAD FOR YOUR ";
+ ITEMS
+ TextConstant:"AMAZING!!! NOT BAD FOR YOUR "
+ CarriageControl:;
+636 IF J=0 THEN PRINT "1ST ";
+ ScalarValue:J
+ NumericConstant:0
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"1ST "
+ CarriageControl:;
+637 IF J=1 THEN PRINT "2ND ";
+ ScalarValue:J
+ NumericConstant:1
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"2ND "
+ CarriageControl:;
+638 IF J=2 THEN PRINT "3RD ";
+ ScalarValue:J
+ NumericConstant:2
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"3RD "
+ CarriageControl:;
+639 PRINT "SUCCESSFUL JUMP!!!":GOTO 2000
+ ITEMS
+ TextConstant:"SUCCESSFUL JUMP!!!"
+ CarriageControl:NL
+ LineNumber:2000
+650 IF K-K1<=.1*K THEN 700 
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ NumericConstant:.1
+ ScalarValue:K
+ BinaryOperator:*
+ BinaryOperator:<=
+660 IF K-K1<=.25*K THEN 710
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ NumericConstant:.25
+ ScalarValue:K
+ BinaryOperator:*
+ BinaryOperator:<=
+670 IF K-K1<=.5*K THEN 720 
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ NumericConstant:.5
+ ScalarValue:K
+ BinaryOperator:*
+ BinaryOperator:<=
+680 IF K-K1<=.75*K THEN 730
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ NumericConstant:.75
+ ScalarValue:K
+ BinaryOperator:*
+ BinaryOperator:<=
+690 IF K-K1<=.9*K THEN 740 
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ NumericConstant:.9
+ ScalarValue:K
+ BinaryOperator:*
+ BinaryOperator:<=
+695 GOTO 750 
+ LineNumber:750
+700 PRINT "WOW!  THAT'S SOME JUMPING.  OF THE"K"SUCCESSFUL JUMPS"
+ ITEMS
+ TextConstant:"WOW!  THAT'S SOME JUMPING.  OF THE"
+ CarriageControl:
+ ScalarValue:K
+ CarriageControl:
+ TextConstant:"SUCCESSFUL JUMPS"
+ CarriageControl:NL
+701 PRINT "BEFORE YOURS, ONLY"K-K1"OPENED THEIR CHUTES LOWER THAN" 
+ ITEMS
+ TextConstant:"BEFORE YOURS, ONLY"
+ CarriageControl:
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ CarriageControl:
+ TextConstant:"OPENED THEIR CHUTES LOWER THAN"
+ CarriageControl:NL
+702 PRINT "YOU DID." 
+ ITEMS
+ TextConstant:"YOU DID."
+ CarriageControl:NL
+703 GOTO 2000
+ LineNumber:2000
+710 PRINT "PRETTY GOOD! " K"SUCCESSFUL JUMPS PRECEDED YOURS AND ONLY"
+ ITEMS
+ TextConstant:"PRETTY GOOD! "
+ CarriageControl:
+ ScalarValue:K
+ CarriageControl:
+ TextConstant:"SUCCESSFUL JUMPS PRECEDED YOURS AND ONLY"
+ CarriageControl:NL
+711 PRINT K-K1" OF THEM GOT LOWER THAN YOU DID BEFORE THEIR CHUTES"
+ ITEMS
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ CarriageControl:
+ TextConstant:" OF THEM GOT LOWER THAN YOU DID BEFORE THEIR CHUTES"
+ CarriageControl:NL
+712 PRINT "OPENED." :GOTO 2000 
+ ITEMS
+ TextConstant:"OPENED."
+ CarriageControl:NL
+ LineNumber:2000
+720 PRINT "NOT BAD.  THERE HAVE BEEN"K"SUCCESSFUL JUMPS BEFORE YOURS." 
+ ITEMS
+ TextConstant:"NOT BAD.  THERE HAVE BEEN"
+ CarriageControl:
+ ScalarValue:K
+ CarriageControl:
+ TextConstant:"SUCCESSFUL JUMPS BEFORE YOURS."
+ CarriageControl:NL
+721 PRINT"YOU WERE BEATEN OUT BY"K-K1"OF THEM.":GOTO 2000  
+ ITEMS
+ TextConstant:"YOU WERE BEATEN OUT BY"
+ CarriageControl:
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ CarriageControl:
+ TextConstant:"OF THEM."
+ CarriageControl:NL
+ LineNumber:2000
+730 PRINT "CONSERVATIVE, AREN'T YOU?  YOU RANKED ONLY"K-K1"IN THE"
+ ITEMS
+ TextConstant:"CONSERVATIVE, AREN'T YOU?  YOU RANKED ONLY"
+ CarriageControl:
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ CarriageControl:
+ TextConstant:"IN THE"
+ CarriageControl:NL
+731 PRINT K"SUCCESSFUL JUMPS BEFORE YOURS.":GOTO 2000
+ ITEMS
+ ScalarValue:K
+ CarriageControl:
+ TextConstant:"SUCCESSFUL JUMPS BEFORE YOURS."
+ CarriageControl:NL
+ LineNumber:2000
+740 PRINT "HUMPH!  DON'T YOU HAVE ANY SPORTING BLOOD?  THERE WERE" 
+ ITEMS
+ TextConstant:"HUMPH!  DON'T YOU HAVE ANY SPORTING BLOOD?  THERE WERE"
+ CarriageControl:NL
+741 PRINT K"SUCCESSFUL JUMPS BEFORE YOURS AND YOU CAME IN"K1"JUMPS"
+ ITEMS
+ ScalarValue:K
+ CarriageControl:
+ TextConstant:"SUCCESSFUL JUMPS BEFORE YOURS AND YOU CAME IN"
+ CarriageControl:
+ ScalarValue:K1
+ CarriageControl:
+ TextConstant:"JUMPS"
+ CarriageControl:NL
+742 PRINT "BETTER THAN THE WORST.  SHAPE UP!!!":GOTO 2000
+ ITEMS
+ TextConstant:"BETTER THAN THE WORST.  SHAPE UP!!!"
+ CarriageControl:NL
+ LineNumber:2000
+750 PRINT "HEY!  YOU PULLED THE RIP CORD MUCH TOO SOON.  "K"SUCCESSFUL"
+ ITEMS
+ TextConstant:"HEY!  YOU PULLED THE RIP CORD MUCH TOO SOON.  "
+ CarriageControl:
+ ScalarValue:K
+ CarriageControl:
+ TextConstant:"SUCCESSFUL"
+ CarriageControl:NL
+751 PRINT "JUMPS BEFORE YOURS AND YOU CAME IN NUMBER"K-K1"!  GET WITH IT!" 
+ ITEMS
+ TextConstant:"JUMPS BEFORE YOURS AND YOU CAME IN NUMBER"
+ CarriageControl:
+ ScalarValue:K
+ ScalarValue:K1
+ BinaryOperator:-
+ CarriageControl:
+ TextConstant:"!  GET WITH IT!"
+ CarriageControl:NL
+752 GOTO 2000
+ LineNumber:2000
+800 PRINT "REQUIESCAT IN PACE.":GOTO 1950
+ ITEMS
+ TextConstant:"REQUIESCAT IN PACE."
+ CarriageControl:NL
+ LineNumber:1950
+801 PRINT "MAY THE ANGEL OF HEAVEN LEAD YOU INTO PARADISE.":GOTO 1950 
+ ITEMS
+ TextConstant:"MAY THE ANGEL OF HEAVEN LEAD YOU INTO PARADISE."
+ CarriageControl:NL
+ LineNumber:1950
+802 PRINT "REST IN PEACE.":GOTO 1950
+ ITEMS
+ TextConstant:"REST IN PEACE."
+ CarriageControl:NL
+ LineNumber:1950
+803 PRINT "SON-OF-A-GUN.":GOTO 1950 
+ ITEMS
+ TextConstant:"SON-OF-A-GUN."
+ CarriageControl:NL
+ LineNumber:1950
+804 PRINT "#$%&&%!$":GOTO 1950 
+ ITEMS
+ TextConstant:"#$%&&%!$"
+ CarriageControl:NL
+ LineNumber:1950
+805 PRINT "A KICK IN THE PANTS IS A BOOST IF YOU'RE HEADED RIGHT.":GOTO 1950
+ ITEMS
+ TextConstant:"A KICK IN THE PANTS IS A BOOST IF YOU'RE HEADED RIGHT."
+ CarriageControl:NL
+ LineNumber:1950
+806 PRINT "HMMM. SHOULD HAVE PICKED A SHORTER TIME.":GOTO 1950 
+ ITEMS
+ TextConstant:"HMMM. SHOULD HAVE PICKED A SHORTER TIME."
+ CarriageControl:NL
+ LineNumber:1950
+807 PRINT "MUTTER. MUTTER. MUTTER.":GOTO 1950
+ ITEMS
+ TextConstant:"MUTTER. MUTTER. MUTTER."
+ CarriageControl:NL
+ LineNumber:1950
+808 PRINT "PUSHING UP DAISIES.":GOTO 1950 
+ ITEMS
+ TextConstant:"PUSHING UP DAISIES."
+ CarriageControl:NL
+ LineNumber:1950
+809 PRINT "EASY COME, EASY GO.":GOTO 1950  
+ ITEMS
+ TextConstant:"EASY COME, EASY GO."
+ CarriageControl:NL
+ LineNumber:1950
+1000 PRINT SQR(2*D1/A),"SPLAT"
+ ITEMS
+ NumericConstant:2
+ ScalarValue:D1
+ BinaryOperator:*
+ ScalarValue:A
+ BinaryOperator:/
+ FunctionSqr
+ CarriageControl:,
+ TextConstant:"SPLAT"
+ CarriageControl:NL
+1005 ON INT(1+(10*RND(1)))GOTO 800,801,802,803,804,805,806,807,808,809
+ NumericConstant:1
+ NumericConstant:10
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ BinaryOperator:+
+ FunctionInt
+ LineNumber:800
+ LineNumber:801
+ LineNumber:802
+ LineNumber:803
+ LineNumber:804
+ LineNumber:805
+ LineNumber:806
+ LineNumber:807
+ LineNumber:808
+ LineNumber:809
+1010 PRINT (V/A)+((D1-(V^2/(2*A)))/V),"SPLAT"
+ ITEMS
+ ScalarValue:V
+ ScalarValue:A
+ BinaryOperator:/
+ ScalarValue:D1
+ ScalarValue:V
+ NumericConstant:2
+ BinaryOperator:^
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:*
+ BinaryOperator:/
+ BinaryOperator:-
+ ScalarValue:V
+ BinaryOperator:/
+ BinaryOperator:+
+ CarriageControl:,
+ TextConstant:"SPLAT"
+ CarriageControl:NL
+1020 GOTO 1005
+ LineNumber:1005
+1950 PRINT "I'LL GIVE YOU ANOTHER CHANCE.":GOTO 2000
+ ITEMS
+ TextConstant:"I'LL GIVE YOU ANOTHER CHANCE."
+ CarriageControl:NL
+ LineNumber:2000
+2000 PRINT "DO YOU WANT TO PLAY AGAIN";:INPUT Z$  
+ ITEMS
+ TextConstant:"DO YOU WANT TO PLAY AGAIN"
+ CarriageControl:;
+ ScalarReference:Z$
+2001 IF Z$="YES" THEN 118
+ ScalarValue:Z$
+ TextConstant:"YES"
+ BinaryOperator:=
+2002 IF Z$="NO" THEN 2005
+ ScalarValue:Z$
+ TextConstant:"NO"
+ BinaryOperator:=
+2003 PRINT "YES OR NO":GOTO 2000
+ ITEMS
+ TextConstant:"YES OR NO"
+ CarriageControl:NL
+ LineNumber:2000
+2005 PRINT "PLEASE";:INPUT Z$:IF Z$="YES" THEN 118
+ ITEMS
+ TextConstant:"PLEASE"
+ CarriageControl:;
+ ScalarReference:Z$
+ ScalarValue:Z$
+ TextConstant:"YES"
+ BinaryOperator:=
+2006 IF Z$<>"NO" THEN PRINT "YES OR NO ";:GOTO 2005
+ ScalarValue:Z$
+ TextConstant:"NO"
+ BinaryOperator:<>
+ ITEMS
+ TextConstant:"YES OR NO "
+ CarriageControl:;
+ LineNumber:2005
+2007 PRINT "SSSSSSSSSS.":PRINT:GOTO 2046
+ ITEMS
+ TextConstant:"SSSSSSSSSS."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ LineNumber:2046
+2046 END
+ 

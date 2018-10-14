@@ -1,0 +1,640 @@
+100 PRINT TAB(31);"HORSERACE"
+ ITEMS
+ NumericConstant:31
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"HORSERACE"
+ CarriageControl:NL
+110 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+120 PRINT:PRINT:PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+210 DIM S(8)
+ NumericConstant:8
+ CompoundDeclaration:S
+220 PRINT "WELCOME TO SOUTH PORTLAND HIGH RACETRACK"
+ ITEMS
+ TextConstant:"WELCOME TO SOUTH PORTLAND HIGH RACETRACK"
+ CarriageControl:NL
+230 PRINT "                      ...OWNED BY LAURIE CHEVALIER"
+ ITEMS
+ TextConstant:"                      ...OWNED BY LAURIE CHEVALIER"
+ CarriageControl:NL
+240 PRINT "DO YOU WANT DIRECTIONS";
+ ITEMS
+ TextConstant:"DO YOU WANT DIRECTIONS"
+ CarriageControl:;
+250 INPUT X$
+ ScalarReference:X$
+260 IF X$="NO" THEN 320
+ ScalarValue:X$
+ TextConstant:"NO"
+ BinaryOperator:=
+270 PRINT"UP TO 10 MAY PLAY.  A TABLE OF ODDS WILL BE PRINTED.  YOU"
+ ITEMS
+ TextConstant:"UP TO 10 MAY PLAY.  A TABLE OF ODDS WILL BE PRINTED.  YOU"
+ CarriageControl:NL
+280 PRINT"MAY BET ANY + AMOUNT UNDER 100000 ON ONE HORSE."
+ ITEMS
+ TextConstant:"MAY BET ANY + AMOUNT UNDER 100000 ON ONE HORSE."
+ CarriageControl:NL
+290 PRINT "DURING THE RACE, A HORSE WILL BE SHOWN BY ITS"
+ ITEMS
+ TextConstant:"DURING THE RACE, A HORSE WILL BE SHOWN BY ITS"
+ CarriageControl:NL
+300 PRINT"NUMBER.  THE HORSES RACE DOWN THE PAPER!"
+ ITEMS
+ TextConstant:"NUMBER.  THE HORSES RACE DOWN THE PAPER!"
+ CarriageControl:NL
+310 PRINT
+ ITEMS
+ CarriageControl:NL
+320 PRINT "HOW MANY WANT TO BET";
+ ITEMS
+ TextConstant:"HOW MANY WANT TO BET"
+ CarriageControl:;
+330 INPUT C
+ ScalarReference:C
+340 PRINT "WHEN ? APPEARS,TYPE NAME"
+ ITEMS
+ TextConstant:"WHEN ? APPEARS,TYPE NAME"
+ CarriageControl:NL
+350 FOR A=1 TO C
+ control: VariableName:A
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C"]
+ step:    ["NumericConstant:1"]
+360 INPUT W$(A)
+ ScalarValue:A
+ ScalarReference:W$
+370 NEXT A
+ VariableName:A
+380 PRINT
+ ITEMS
+ CarriageControl:NL
+390 PRINT"HORSE",,"NUMBER","ODDS"
+ ITEMS
+ TextConstant:"HORSE"
+ CarriageControl:,
+ CarriageControl:,
+ TextConstant:"NUMBER"
+ CarriageControl:,
+ TextConstant:"ODDS"
+ CarriageControl:NL
+400 PRINT
+ ITEMS
+ CarriageControl:NL
+410 FOR I=1 TO 8: S(I)=0: NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+ VariableName:I
+420 LET R=0
+ ScalarReference:R
+ NumericConstant:0
+ AssignmentOperator:=
+430 FOR A=1 TO 8
+ control: VariableName:A
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8"]
+ step:    ["NumericConstant:1"]
+440 LET D(A)=INT(10*RND(1)+1)
+ ScalarValue:A
+ ScalarReference:D
+ NumericConstant:10
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+450 NEXT A
+ VariableName:A
+460 FOR A=1 TO 8
+ control: VariableName:A
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8"]
+ step:    ["NumericConstant:1"]
+470 LET R=R+D(A)
+ ScalarReference:R
+ ScalarValue:R
+ ScalarValue:A
+ ScalarValue:D
+ BinaryOperator:+
+ AssignmentOperator:=
+480 NEXT A
+ VariableName:A
+490 LET V$(1)="JOE MAW"
+ NumericConstant:1
+ ScalarReference:V$
+ TextConstant:"JOE MAW"
+ AssignmentOperator:=
+500 LET V$(2)="L.B.J."
+ NumericConstant:2
+ ScalarReference:V$
+ TextConstant:"L.B.J."
+ AssignmentOperator:=
+510 LET V$(3)="MR.WASHBURN"
+ NumericConstant:3
+ ScalarReference:V$
+ TextConstant:"MR.WASHBURN"
+ AssignmentOperator:=
+520 LET V$(4)="MISS KAREN"
+ NumericConstant:4
+ ScalarReference:V$
+ TextConstant:"MISS KAREN"
+ AssignmentOperator:=
+530 LET V$(5)="JOLLY"
+ NumericConstant:5
+ ScalarReference:V$
+ TextConstant:"JOLLY"
+ AssignmentOperator:=
+540 LET V$(6)="HORSE"
+ NumericConstant:6
+ ScalarReference:V$
+ TextConstant:"HORSE"
+ AssignmentOperator:=
+550 LET V$(7)="JELLY DO NOT"
+ NumericConstant:7
+ ScalarReference:V$
+ TextConstant:"JELLY DO NOT"
+ AssignmentOperator:=
+560 LET V$(8)="MIDNIGHT"
+ NumericConstant:8
+ ScalarReference:V$
+ TextConstant:"MIDNIGHT"
+ AssignmentOperator:=
+570 FOR N=1 TO 8
+ control: VariableName:N
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8"]
+ step:    ["NumericConstant:1"]
+580 PRINT V$(N),,N,R/D(N);":1"
+ ITEMS
+ ScalarValue:N
+ ScalarValue:V$
+ CarriageControl:,
+ CarriageControl:,
+ ScalarValue:N
+ CarriageControl:,
+ ScalarValue:R
+ ScalarValue:N
+ ScalarValue:D
+ BinaryOperator:/
+ CarriageControl:;
+ TextConstant:":1"
+ CarriageControl:NL
+590 NEXT N
+ VariableName:N
+600 PRINT"--------------------------------------------------"
+ ITEMS
+ TextConstant:"--------------------------------------------------"
+ CarriageControl:NL
+610 PRINT "PLACE YOUR BETS...HORSE # THEN AMOUNT"
+ ITEMS
+ TextConstant:"PLACE YOUR BETS...HORSE # THEN AMOUNT"
+ CarriageControl:NL
+620 FOR J=1 TO C
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C"]
+ step:    ["NumericConstant:1"]
+630 PRINT W$(J);
+ ITEMS
+ ScalarValue:J
+ ScalarValue:W$
+ CarriageControl:;
+640 INPUT Q(J),P(J)
+ ScalarValue:J
+ ScalarReference:Q
+ ScalarValue:J
+ ScalarReference:P
+650 IF P(J)<1 THEN 670
+ ScalarValue:J
+ ScalarValue:P
+ NumericConstant:1
+ BinaryOperator:<
+660 IF P(J)<100000 THEN 690
+ ScalarValue:J
+ ScalarValue:P
+ NumericConstant:100000
+ BinaryOperator:<
+670 PRINT"  YOU CAN'T DO THAT!"
+ ITEMS
+ TextConstant:"  YOU CAN'T DO THAT!"
+ CarriageControl:NL
+680 GOTO 630
+ LineNumber:630
+690 NEXT J
+ VariableName:J
+700 PRINT
+ ITEMS
+ CarriageControl:NL
+710 PRINT"1 2 3 4 5 6 7 8"
+ ITEMS
+ TextConstant:"1 2 3 4 5 6 7 8"
+ CarriageControl:NL
+720 PRINT"XXXXSTARTXXXX"
+ ITEMS
+ TextConstant:"XXXXSTARTXXXX"
+ CarriageControl:NL
+730 FOR I=1 TO 8
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8"]
+ step:    ["NumericConstant:1"]
+740 LET M=I
+ ScalarReference:M
+ ScalarValue:I
+ AssignmentOperator:=
+750 LET M(I)=M
+ ScalarValue:I
+ ScalarReference:M
+ ScalarValue:M
+ AssignmentOperator:=
+760 LET Y(M(I))=INT(100*RND(1)+1)
+ ScalarValue:I
+ ScalarValue:M
+ ScalarReference:Y
+ NumericConstant:100
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+770 IF Y(M(I))<10 THEN 860
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:Y
+ NumericConstant:10
+ BinaryOperator:<
+780 LET S=INT(R/D(I)+.5)
+ ScalarReference:S
+ ScalarValue:R
+ ScalarValue:I
+ ScalarValue:D
+ BinaryOperator:/
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+790 IF Y(M(I))<S+17 THEN 880
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:17
+ BinaryOperator:+
+ BinaryOperator:<
+800 IF Y(M(I))<S+37 THEN 900
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:37
+ BinaryOperator:+
+ BinaryOperator:<
+810 IF Y(M(I))<S+57 THEN 920
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:57
+ BinaryOperator:+
+ BinaryOperator:<
+820 IF Y(M(I))<77+S THEN 940
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:Y
+ NumericConstant:77
+ ScalarValue:S
+ BinaryOperator:+
+ BinaryOperator:<
+830 IF Y(M(I))<S+92 THEN 960
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:92
+ BinaryOperator:+
+ BinaryOperator:<
+840 LET Y(M(I))=7
+ ScalarValue:I
+ ScalarValue:M
+ ScalarReference:Y
+ NumericConstant:7
+ AssignmentOperator:=
+850 GOTO 970
+ LineNumber:970
+860 LET Y(M(I))=1
+ ScalarValue:I
+ ScalarValue:M
+ ScalarReference:Y
+ NumericConstant:1
+ AssignmentOperator:=
+870 GOTO 970
+ LineNumber:970
+880 LET Y(M(I))=2
+ ScalarValue:I
+ ScalarValue:M
+ ScalarReference:Y
+ NumericConstant:2
+ AssignmentOperator:=
+890 GOTO 970
+ LineNumber:970
+900 LET Y(M(I))=3
+ ScalarValue:I
+ ScalarValue:M
+ ScalarReference:Y
+ NumericConstant:3
+ AssignmentOperator:=
+910 GOTO 970
+ LineNumber:970
+920 LET Y(M(I))=4
+ ScalarValue:I
+ ScalarValue:M
+ ScalarReference:Y
+ NumericConstant:4
+ AssignmentOperator:=
+930 GOTO 970
+ LineNumber:970
+940 LET Y(M(I))=5
+ ScalarValue:I
+ ScalarValue:M
+ ScalarReference:Y
+ NumericConstant:5
+ AssignmentOperator:=
+950 GOTO 970
+ LineNumber:970
+960 LET Y(M(I))=6
+ ScalarValue:I
+ ScalarValue:M
+ ScalarReference:Y
+ NumericConstant:6
+ AssignmentOperator:=
+970 NEXT I
+ VariableName:I
+980 LET M=I
+ ScalarReference:M
+ ScalarValue:I
+ AssignmentOperator:=
+990 FOR I=1 TO 8
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8"]
+ step:    ["NumericConstant:1"]
+1000 LET S(M(I))=S(M(I))+Y(M(I))
+ ScalarValue:I
+ ScalarValue:M
+ ScalarReference:S
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:S
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:Y
+ BinaryOperator:+
+ AssignmentOperator:=
+1010 NEXT I
+ VariableName:I
+1020 LET I=1
+ ScalarReference:I
+ NumericConstant:1
+ AssignmentOperator:=
+1030 FOR L=1 TO 8
+ control: VariableName:L
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8"]
+ step:    ["NumericConstant:1"]
+1040 FOR I=1 TO 8-L
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8", "ScalarValue:L", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+1050 IF S(M(I))<S(M(I+1))THEN 1090
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:S
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:M
+ ScalarValue:S
+ BinaryOperator:<
+1060 LET H=M(I)
+ ScalarReference:H
+ ScalarValue:I
+ ScalarValue:M
+ AssignmentOperator:=
+1070 LET M(I)=M(I+1)
+ ScalarValue:I
+ ScalarReference:M
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:M
+ AssignmentOperator:=
+1080 LET M(I+1)=H
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarReference:M
+ ScalarValue:H
+ AssignmentOperator:=
+1090 NEXT I
+ VariableName:I
+1100 NEXT L
+ VariableName:L
+1110 LET T=S(M(8))
+ ScalarReference:T
+ NumericConstant:8
+ ScalarValue:M
+ ScalarValue:S
+ AssignmentOperator:=
+1120 FOR I=1 TO 8
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:8"]
+ step:    ["NumericConstant:1"]
+1130 LET B=S(M(I))-S(M(I-1))
+ ScalarReference:B
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:S
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:M
+ ScalarValue:S
+ BinaryOperator:-
+ AssignmentOperator:=
+1140 IF B=0 THEN 1190
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:=
+1150 FOR A=1 TO B
+ control: VariableName:A
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:B"]
+ step:    ["NumericConstant:1"]
+1160 PRINT
+ ITEMS
+ CarriageControl:NL
+1170 IF S(M(I))>27 THEN 1240
+ ScalarValue:I
+ ScalarValue:M
+ ScalarValue:S
+ NumericConstant:27
+ BinaryOperator:>
+1180 NEXT A
+ VariableName:A
+1190 PRINT M(I);
+ ITEMS
+ ScalarValue:I
+ ScalarValue:M
+ CarriageControl:;
+1200 NEXT I
+ VariableName:I
+1210 FOR A=1 TO 28-T
+ control: VariableName:A
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:28", "ScalarValue:T", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+1220 PRINT
+ ITEMS
+ CarriageControl:NL
+1230 NEXT A
+ VariableName:A
+1240 PRINT "XXXXFINISHXXXX";
+ ITEMS
+ TextConstant:"XXXXFINISHXXXX"
+ CarriageControl:;
+1242 PRINT
+ ITEMS
+ CarriageControl:NL
+1243 PRINT
+ ITEMS
+ CarriageControl:NL
+1244 PRINT "---------------------------------------------"
+ ITEMS
+ TextConstant:"---------------------------------------------"
+ CarriageControl:NL
+1245 PRINT
+ ITEMS
+ CarriageControl:NL
+1250 IF T<28 THEN 720
+ ScalarValue:T
+ NumericConstant:28
+ BinaryOperator:<
+1270 PRINT "THE RACE RESULTS ARE:"
+ ITEMS
+ TextConstant:"THE RACE RESULTS ARE:"
+ CarriageControl:NL
+1272 LET Z9=1
+ ScalarReference:Z9
+ NumericConstant:1
+ AssignmentOperator:=
+1280 FOR I=8 TO 1 STEP-1
+ control: VariableName:I
+ start:   ["NumericConstant:8"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:1", "UnaryOperator:-"]
+1290 LET F=M(I)
+ ScalarReference:F
+ ScalarValue:I
+ ScalarValue:M
+ AssignmentOperator:=
+1300 PRINT
+ ITEMS
+ CarriageControl:NL
+1310 PRINT Z9;"PLACE HORSE NO.";F,"AT ";R/D(F);":1"
+ ITEMS
+ ScalarValue:Z9
+ CarriageControl:;
+ TextConstant:"PLACE HORSE NO."
+ CarriageControl:;
+ ScalarValue:F
+ CarriageControl:,
+ TextConstant:"AT "
+ CarriageControl:;
+ ScalarValue:R
+ ScalarValue:F
+ ScalarValue:D
+ BinaryOperator:/
+ CarriageControl:;
+ TextConstant:":1"
+ CarriageControl:NL
+1312 LET Z9=Z9+1
+ ScalarReference:Z9
+ ScalarValue:Z9
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1320  NEXT I
+ VariableName:I
+1330 FOR J=1 TO C
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C"]
+ step:    ["NumericConstant:1"]
+1340 IF Q(J)<>M(8) THEN 1370
+ ScalarValue:J
+ ScalarValue:Q
+ NumericConstant:8
+ ScalarValue:M
+ BinaryOperator:<>
+1350 LET N=Q(J)
+ ScalarReference:N
+ ScalarValue:J
+ ScalarValue:Q
+ AssignmentOperator:=
+1355 PRINT
+ ITEMS
+ CarriageControl:NL
+1360 PRINT W$(J);" WINS $";(R/D(N))*P(J)
+ ITEMS
+ ScalarValue:J
+ ScalarValue:W$
+ CarriageControl:;
+ TextConstant:" WINS $"
+ CarriageControl:;
+ ScalarValue:R
+ ScalarValue:N
+ ScalarValue:D
+ BinaryOperator:/
+ ScalarValue:J
+ ScalarValue:P
+ BinaryOperator:*
+ CarriageControl:NL
+1370 NEXT J
+ VariableName:J
+1372 PRINT "DO YOU WANT TO BET ON THE NEXT RACE ?"
+ ITEMS
+ TextConstant:"DO YOU WANT TO BET ON THE NEXT RACE ?"
+ CarriageControl:NL
+1374 INPUT "YES OR NO"; O$
+ ScalarReference:O$
+1376 IF O$="YES" THEN 380
+ ScalarValue:O$
+ TextConstant:"YES"
+ BinaryOperator:=
+1380 END
+ 

@@ -1,0 +1,893 @@
+2 PRINT TAB(30);"MASTERMIND"
+ ITEMS
+ NumericConstant:30
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"MASTERMIND"
+ CarriageControl:NL
+4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+6 PRINT: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+10 REM
+ Remark:
+20 REM     MASTERMIND II
+ Remark:    MASTERMIND II
+30 REM     STEVE NORTH
+ Remark:    STEVE NORTH
+40 REM     CREATIVE COMPUTING
+ Remark:    CREATIVE COMPUTING
+50 REM     PO BOX 789-M MORRISTOWN NEW JERSEY 07960
+ Remark:    PO BOX 789-M MORRISTOWN NEW JERSEY 07960
+60 REM
+ Remark:
+70 REM
+ Remark:
+80 INPUT "NUMBER OF COLORS";C9
+ ScalarReference:C9
+90 IF C9>8 THEN PRINT "NO MORE THAN 8, PLEASE!":GOTO 80
+ ScalarValue:C9
+ NumericConstant:8
+ BinaryOperator:>
+ ITEMS
+ TextConstant:"NO MORE THAN 8, PLEASE!"
+ CarriageControl:NL
+ LineNumber:80
+100 INPUT "NUMBER OF POSITIONS";P9
+ ScalarReference:P9
+110 INPUT "NUMBER OF ROUNDS";R9
+ ScalarReference:R9
+120 P=C9^P9
+ ScalarReference:P
+ ScalarValue:C9
+ ScalarValue:P9
+ BinaryOperator:^
+ AssignmentOperator:=
+130 PRINT "TOTAL POSSIBILITIES =";P
+ ITEMS
+ TextConstant:"TOTAL POSSIBILITIES ="
+ CarriageControl:;
+ ScalarValue:P
+ CarriageControl:NL
+140 H=0:C=0
+ ScalarReference:H
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:C
+ NumericConstant:0
+ AssignmentOperator:=
+150 DIM Q(P9),S(10,2),S$(10),A$(P9),G$(P9),I(P),H$(P9)
+ ScalarValue:P9
+ CompoundDeclaration:Q
+ NumericConstant:10
+ NumericConstant:2
+ CompoundDeclaration:S
+ NumericConstant:10
+ CompoundDeclaration:S$
+ ScalarValue:P9
+ CompoundDeclaration:A$
+ ScalarValue:P9
+ CompoundDeclaration:G$
+ ScalarValue:P
+ CompoundDeclaration:I
+ ScalarValue:P9
+ CompoundDeclaration:H$
+160 L$="BWRGOYPT"
+ ScalarReference:L$
+ TextConstant:"BWRGOYPT"
+ AssignmentOperator:=
+170 PRINT
+ ITEMS
+ CarriageControl:NL
+180 PRINT
+ ITEMS
+ CarriageControl:NL
+190 PRINT "COLOR     LETTER"
+ ITEMS
+ TextConstant:"COLOR     LETTER"
+ CarriageControl:NL
+200 PRINT "=====     ======"
+ ITEMS
+ TextConstant:"=====     ======"
+ CarriageControl:NL
+210 FOR X=1 TO C9
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C9"]
+ step:    ["NumericConstant:1"]
+220 READ X$
+ ScalarReference:X$
+230 PRINT X$;TAB(13);MID$(L$,X,1)
+ Syntax error: "MID$(L$,X,1)" is not a value or operator
+ ITEMS
+ ScalarValue:X$
+ CarriageControl:;
+ NumericConstant:13
+ FunctionTab
+ CarriageControl:;
+240 NEXT X
+ VariableName:X
+250 PRINT
+ ITEMS
+ CarriageControl:NL
+260 FOR R=1 TO R9
+ control: VariableName:R
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:R9"]
+ step:    ["NumericConstant:1"]
+270 PRINT 
+ ITEMS
+ CarriageControl:NL
+280 PRINT "ROUND NUMBER";R;"----"
+ ITEMS
+ TextConstant:"ROUND NUMBER"
+ CarriageControl:;
+ ScalarValue:R
+ CarriageControl:;
+ TextConstant:"----"
+ CarriageControl:NL
+290 PRINT
+ ITEMS
+ CarriageControl:NL
+300 PRINT "GUESS MY COMBINATION.":PRINT
+ ITEMS
+ TextConstant:"GUESS MY COMBINATION."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+310 REM     GET A COMBINATION
+ Remark:    GET A COMBINATION
+320 A=INT(P*RND(1)+1)
+ ScalarReference:A
+ ScalarValue:P
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+330 GOSUB 3000
+ LineNumber:3000
+340 FOR X=1 TO A
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:A"]
+ step:    ["NumericConstant:1"]
+350 GOSUB 3500
+ LineNumber:3500
+360 NEXT X
+ VariableName:X
+370 FOR M=1 TO 10
+ control: VariableName:M
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:10"]
+ step:    ["NumericConstant:1"]
+380 PRINT "MOVE # ";M;" GUESS ";:INPUT X$
+ ITEMS
+ TextConstant:"MOVE # "
+ CarriageControl:;
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:" GUESS "
+ CarriageControl:;
+ ScalarReference:X$
+390 IF X$="BOARD" THEN 2000
+ ScalarValue:X$
+ TextConstant:"BOARD"
+ BinaryOperator:=
+400 IF X$="QUIT" THEN 2500
+ ScalarValue:X$
+ TextConstant:"QUIT"
+ BinaryOperator:=
+410 IF LEN(X$)<>P9 THEN PRINT "BAD NUMBER OF POSITIONS.":GOTO 380
+ ScalarValue:X$
+ FunctionLen
+ ScalarValue:P9
+ BinaryOperator:<>
+ ITEMS
+ TextConstant:"BAD NUMBER OF POSITIONS."
+ CarriageControl:NL
+ LineNumber:380
+420 REM     UNPACK X$ INTO G$(1-P9)
+ Remark:    UNPACK X$ INTO G$(1-P9)
+430 FOR X=1 TO P9
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+440 FOR Y=1 TO C9
+ control: VariableName:Y
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:C9"]
+ step:    ["NumericConstant:1"]
+450 IF MID$(X$,X,1)=MID$(L$,Y,1) THEN 480
+ Token 'InvalidToken:$' is not a value or operator
+460 NEXT Y
+ VariableName:Y
+470 PRINT "'"; MID$(X$,X,1); "' IS UNRECOGNIZED.":GOTO 380
+ Syntax error: "MID$(X$,X,1)" is not a value or operator
+ ITEMS
+ TextConstant:"'"
+ CarriageControl:;
+ CarriageControl:;
+ TextConstant:"' IS UNRECOGNIZED."
+ CarriageControl:NL
+ LineNumber:380
+480 G$(X)=MID$(X$,X,1)
+ Token 'InvalidToken:$' is not a value or operator
+490 NEXT X
+ VariableName:X
+500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
+ Remark:    NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
+510 GOSUB 4000
+ LineNumber:4000
+520 REM     AND GET NUMBER OF BLACKS AND WHITES
+ Remark:    AND GET NUMBER OF BLACKS AND WHITES
+530 GOSUB 4500
+ LineNumber:4500
+540 IF B=P9 THEN 630
+ ScalarValue:B
+ ScalarValue:P9
+ BinaryOperator:=
+550 REM     TELL HUMAN RESULTS
+ Remark:    TELL HUMAN RESULTS
+560 PRINT "YOU HAVE ";B;" BLACKS AND ";W;" WHITES."
+ ITEMS
+ TextConstant:"YOU HAVE "
+ CarriageControl:;
+ ScalarValue:B
+ CarriageControl:;
+ TextConstant:" BLACKS AND "
+ CarriageControl:;
+ ScalarValue:W
+ CarriageControl:;
+ TextConstant:" WHITES."
+ CarriageControl:NL
+570 REM     SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
+ Remark:    SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
+580 S$(M)=X$
+ ScalarValue:M
+ ScalarReference:S$
+ ScalarValue:X$
+ AssignmentOperator:=
+590 S(M,1)=B
+ ScalarValue:M
+ NumericConstant:1
+ ScalarReference:S
+ ScalarValue:B
+ AssignmentOperator:=
+600 S(M,2)=W
+ ScalarValue:M
+ NumericConstant:2
+ ScalarReference:S
+ ScalarValue:W
+ AssignmentOperator:=
+610 NEXT M
+ VariableName:M
+620 PRINT "YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!":GOTO 640
+ ITEMS
+ TextConstant:"YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!"
+ CarriageControl:NL
+ LineNumber:640
+622 GOSUB 4000
+ LineNumber:4000
+623 PRINT "THE ACTUAL COMBINATION WAS: ";
+ ITEMS
+ TextConstant:"THE ACTUAL COMBINATION WAS: "
+ CarriageControl:;
+624 FOR X=1 TO P9
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+625 PRINT A$(X);
+ ITEMS
+ ScalarValue:X
+ ScalarValue:A$
+ CarriageControl:;
+626 NEXT X
+ VariableName:X
+627 PRINT
+ ITEMS
+ CarriageControl:NL
+630 PRINT "YOU GUESSED IT IN ";M;" MOVES!"
+ ITEMS
+ TextConstant:"YOU GUESSED IT IN "
+ CarriageControl:;
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:" MOVES!"
+ CarriageControl:NL
+640 H=H+M
+ ScalarReference:H
+ ScalarValue:H
+ ScalarValue:M
+ BinaryOperator:+
+ AssignmentOperator:=
+650 GOSUB 5000
+ LineNumber:5000
+660 REM
+ Remark:
+670 REM     NOW COMPUTER GUESSES
+ Remark:    NOW COMPUTER GUESSES
+680 REM
+ Remark:
+690 FOR X=1 TO P
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P"]
+ step:    ["NumericConstant:1"]
+700 I(X)=1
+ ScalarValue:X
+ ScalarReference:I
+ NumericConstant:1
+ AssignmentOperator:=
+710 NEXT X
+ VariableName:X
+720 PRINT "NOW I GUESS.  THINK OF A COMBINATION."
+ ITEMS
+ TextConstant:"NOW I GUESS.  THINK OF A COMBINATION."
+ CarriageControl:NL
+730 INPUT "HIT RETURN WHEN READY:";X$
+ ScalarReference:X$
+740 FOR M=1 TO 10
+ control: VariableName:M
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:10"]
+ step:    ["NumericConstant:1"]
+750 GOSUB 3000
+ LineNumber:3000
+760 REM     FIND A GUESS
+ Remark:    FIND A GUESS
+770 G=INT(P*RND(1)+1)
+ ScalarReference:G
+ ScalarValue:P
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+780 IF I(G)=1 THEN 890
+ ScalarValue:G
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:=
+790 FOR X=G TO P
+ control: VariableName:X
+ start:   ["ScalarValue:G"]
+ end:     ["ScalarValue:P"]
+ step:    ["NumericConstant:1"]
+800 IF I(X)=1 THEN 880
+ ScalarValue:X
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:=
+810 NEXT X
+ VariableName:X
+820 FOR X=1 TO G
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:G"]
+ step:    ["NumericConstant:1"]
+830 IF I(X)=1 THEN 880
+ ScalarValue:X
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:=
+840 NEXT X
+ VariableName:X
+850 PRINT "YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
+ ITEMS
+ TextConstant:"YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
+ CarriageControl:NL
+860 PRINT "TRY AGAIN, AND THIS TIME PLEASE BE MORE CAREFUL."
+ ITEMS
+ TextConstant:"TRY AGAIN, AND THIS TIME PLEASE BE MORE CAREFUL."
+ CarriageControl:NL
+870 GOTO 660
+ LineNumber:660
+880 G=X
+ ScalarReference:G
+ ScalarValue:X
+ AssignmentOperator:=
+890 REM     NOW WE CONVERT GUESS #G INTO G$
+ Remark:    NOW WE CONVERT GUESS #G INTO G$
+900 FOR X=1 TO G
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:G"]
+ step:    ["NumericConstant:1"]
+910 GOSUB 3500
+ LineNumber:3500
+920 NEXT X
+ VariableName:X
+930 GOSUB 6000
+ LineNumber:6000
+940 PRINT "MY GUESS IS: ";
+ ITEMS
+ TextConstant:"MY GUESS IS: "
+ CarriageControl:;
+950 FOR X=1 TO P9
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+960 PRINT H$(X);
+ ITEMS
+ ScalarValue:X
+ ScalarValue:H$
+ CarriageControl:;
+970 NEXT X
+ VariableName:X
+980 INPUT "  BLACKS, WHITES ";B1,W1
+ ScalarReference:B1
+ ScalarReference:W1
+990 IF B1=P9 THEN 1120
+ ScalarValue:B1
+ ScalarValue:P9
+ BinaryOperator:=
+1000 GOSUB 3000
+ LineNumber:3000
+1010 FOR X=1 TO P
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P"]
+ step:    ["NumericConstant:1"]
+1020 GOSUB 3500
+ LineNumber:3500
+1030 IF I(X)=0 THEN 1070
+ ScalarValue:X
+ ScalarValue:I
+ NumericConstant:0
+ BinaryOperator:=
+1035 GOSUB 6500
+ LineNumber:6500
+1040 GOSUB 4000
+ LineNumber:4000
+1050 GOSUB 4500
+ LineNumber:4500
+1060 IF B1<>B OR W1<>W THEN I(X)=0
+ ScalarValue:B1
+ ScalarValue:B
+ BinaryOperator:<>
+ ScalarValue:W1
+ ScalarValue:W
+ BinaryOperator:<>
+ BinaryOperator:OR
+ ScalarValue:X
+ ScalarReference:I
+ NumericConstant:0
+ AssignmentOperator:=
+1070 NEXT X
+ VariableName:X
+1080 NEXT M
+ VariableName:M
+1090 PRINT "I USED UP ALL MY MOVES!"
+ ITEMS
+ TextConstant:"I USED UP ALL MY MOVES!"
+ CarriageControl:NL
+1100 PRINT "I GUESS MY CPU IS JUST HAVING AN OFF DAY."
+ ITEMS
+ TextConstant:"I GUESS MY CPU IS JUST HAVING AN OFF DAY."
+ CarriageControl:NL
+1110 GOTO 1130
+ LineNumber:1130
+1120 PRINT "I GOT IT IN ";M;" MOVES!"
+ ITEMS
+ TextConstant:"I GOT IT IN "
+ CarriageControl:;
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:" MOVES!"
+ CarriageControl:NL
+1130 C=C+M
+ ScalarReference:C
+ ScalarValue:C
+ ScalarValue:M
+ BinaryOperator:+
+ AssignmentOperator:=
+1140 GOSUB 5000
+ LineNumber:5000
+1150 NEXT R
+ VariableName:R
+1160 PRINT "GAME OVER"
+ ITEMS
+ TextConstant:"GAME OVER"
+ CarriageControl:NL
+1170 PRINT "FINAL SCORE:"
+ ITEMS
+ TextConstant:"FINAL SCORE:"
+ CarriageControl:NL
+1180 GOSUB 5040
+ LineNumber:5040
+1190 STOP
+ 
+2000 REM
+ Remark:
+2010 REM     BOARD PRINTOUT ROUTINE
+ Remark:    BOARD PRINTOUT ROUTINE
+2020 REM
+ Remark:
+2025 PRINT
+ ITEMS
+ CarriageControl:NL
+2030 PRINT "BOARD"
+ ITEMS
+ TextConstant:"BOARD"
+ CarriageControl:NL
+2040 PRINT "MOVE     GUESS          BLACK     WHITE"
+ ITEMS
+ TextConstant:"MOVE     GUESS          BLACK     WHITE"
+ CarriageControl:NL
+2050 FOR Z=1 TO M-1
+ control: VariableName:Z
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:M", "NumericConstant:1", "BinaryOperator:-"]
+ step:    ["NumericConstant:1"]
+2060 PRINT Z;TAB(9);S$(Z);TAB(25);S(Z,1);TAB(35);S(Z,2)
+ ITEMS
+ ScalarValue:Z
+ CarriageControl:;
+ NumericConstant:9
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:Z
+ ScalarValue:S$
+ CarriageControl:;
+ NumericConstant:25
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:Z
+ NumericConstant:1
+ ScalarValue:S
+ CarriageControl:;
+ NumericConstant:35
+ FunctionTab
+ CarriageControl:;
+ ScalarValue:Z
+ NumericConstant:2
+ ScalarValue:S
+ CarriageControl:NL
+2070 NEXT Z
+ VariableName:Z
+2075 PRINT
+ ITEMS
+ CarriageControl:NL
+2080 GOTO 380
+ LineNumber:380
+2500 REM
+ Remark:
+2510 REM     QUIT ROUTINE
+ Remark:    QUIT ROUTINE
+2520 REM
+ Remark:
+2530 PRINT "QUITTER!  MY COMBINATION WAS: ";
+ ITEMS
+ TextConstant:"QUITTER!  MY COMBINATION WAS: "
+ CarriageControl:;
+2535 GOSUB 4000
+ LineNumber:4000
+2540 FOR X=1 TO P9
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+2550 PRINT A$(X);
+ ITEMS
+ ScalarValue:X
+ ScalarValue:A$
+ CarriageControl:;
+2560 NEXT X
+ VariableName:X
+2565 PRINT
+ ITEMS
+ CarriageControl:NL
+2570 PRINT "GOOD BYE"
+ ITEMS
+ TextConstant:"GOOD BYE"
+ CarriageControl:NL
+2580 STOP
+ 
+3000 REM
+ Remark:
+3010 REM     INITIALIZE Q(1-P9) TO ZEROS
+ Remark:    INITIALIZE Q(1-P9) TO ZEROS
+3020 REM
+ Remark:
+3030 FOR S=1 TO P9
+ control: VariableName:S
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+3040 Q(S)=0
+ ScalarValue:S
+ ScalarReference:Q
+ NumericConstant:0
+ AssignmentOperator:=
+3050 NEXT S
+ VariableName:S
+3060 RETURN
+ 
+3500 REM
+ Remark:
+3510 REM     INCREMENT Q(1-P9)
+ Remark:    INCREMENT Q(1-P9)
+3520 REM
+ Remark:
+3522 IF Q(1)>0 THEN 3530
+ NumericConstant:1
+ ScalarValue:Q
+ NumericConstant:0
+ BinaryOperator:>
+3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
+ Remark: IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
+3526 FOR S=1 TO P9
+ control: VariableName:S
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+3527 Q(S)=1
+ ScalarValue:S
+ ScalarReference:Q
+ NumericConstant:1
+ AssignmentOperator:=
+3528 NEXT S
+ VariableName:S
+3529 RETURN
+ 
+3530 Q=1
+ ScalarReference:Q
+ NumericConstant:1
+ AssignmentOperator:=
+3540 Q(Q)=Q(Q)+1
+ ScalarValue:Q
+ ScalarReference:Q
+ ScalarValue:Q
+ ScalarValue:Q
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+3550 IF Q(Q)<=C9 THEN RETURN
+ ScalarValue:Q
+ ScalarValue:Q
+ ScalarValue:C9
+ BinaryOperator:<=
+ 
+3560 Q(Q)=1
+ ScalarValue:Q
+ ScalarReference:Q
+ NumericConstant:1
+ AssignmentOperator:=
+3570 Q=Q+1
+ ScalarReference:Q
+ ScalarValue:Q
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+3580 GOTO 3540
+ LineNumber:3540
+4000 REM
+ Remark:
+4010 REM     CONVERT Q(1-P9) TO A$(1-P9)
+ Remark:    CONVERT Q(1-P9) TO A$(1-P9)
+4020 REM
+ Remark:
+4030 FOR S=1 TO P9
+ control: VariableName:S
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+4040 A$(S)=MID$(L$,Q(S),1)
+ Token 'InvalidToken:$' is not a value or operator
+4050 NEXT S
+ VariableName:S
+4060 RETURN
+ 
+4500 REM
+ Remark:
+4510 REM     GET NUMBER OF BLACKS (B) AND WHITES (W)
+ Remark:    GET NUMBER OF BLACKS (B) AND WHITES (W)
+4520 REM     MASHES G$ AND A$ IN THE PROCESS
+ Remark:    MASHES G$ AND A$ IN THE PROCESS
+4530 REM
+ Remark:
+4540 B=0:W=0:F=0
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:W
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:F
+ NumericConstant:0
+ AssignmentOperator:=
+4550 FOR S=1 TO P9
+ control: VariableName:S
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+4560 IF G$(S)<>A$(S) THEN 4620
+ ScalarValue:S
+ ScalarValue:G$
+ ScalarValue:S
+ ScalarValue:A$
+ BinaryOperator:<>
+4570 B=B+1
+ ScalarReference:B
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+4580 G$(S)=CHR$(F)
+ ScalarValue:S
+ ScalarReference:G$
+ ScalarValue:F
+ FunctionChr
+ AssignmentOperator:=
+4590 A$(S)=CHR$(F+1)
+ ScalarValue:S
+ ScalarReference:A$
+ ScalarValue:F
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionChr
+ AssignmentOperator:=
+4600 F=F+2
+ ScalarReference:F
+ ScalarValue:F
+ NumericConstant:2
+ BinaryOperator:+
+ AssignmentOperator:=
+4610 GOTO 4660
+ LineNumber:4660
+4620 FOR T=1 TO P9
+ control: VariableName:T
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+4630 IF G$(S)<>A$(T) THEN 4650
+ ScalarValue:S
+ ScalarValue:G$
+ ScalarValue:T
+ ScalarValue:A$
+ BinaryOperator:<>
+4640 IF G$(T)=A$(T) THEN 4650
+ ScalarValue:T
+ ScalarValue:G$
+ ScalarValue:T
+ ScalarValue:A$
+ BinaryOperator:=
+4645 W=W+1:A$(T)=CHR$(F):G$(S)=CHR$(F+1):F=F+2:GOTO 4660
+ ScalarReference:W
+ ScalarValue:W
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:T
+ ScalarReference:A$
+ ScalarValue:F
+ FunctionChr
+ AssignmentOperator:=
+ ScalarValue:S
+ ScalarReference:G$
+ ScalarValue:F
+ NumericConstant:1
+ BinaryOperator:+
+ FunctionChr
+ AssignmentOperator:=
+ ScalarReference:F
+ ScalarValue:F
+ NumericConstant:2
+ BinaryOperator:+
+ AssignmentOperator:=
+ LineNumber:4660
+4650 NEXT T
+ VariableName:T
+4660 NEXT S
+ VariableName:S
+4670 RETURN
+ 
+5000 REM
+ Remark:
+5010 REM     PRINT SCORE
+ Remark:    PRINT SCORE
+5020 REM
+ Remark:
+5030 PRINT "SCORE:"
+ ITEMS
+ TextConstant:"SCORE:"
+ CarriageControl:NL
+5040 PRINT "     COMPUTER ";C
+ ITEMS
+ TextConstant:"     COMPUTER "
+ CarriageControl:;
+ ScalarValue:C
+ CarriageControl:NL
+5050 PRINT "     HUMAN    ";H
+ ITEMS
+ TextConstant:"     HUMAN    "
+ CarriageControl:;
+ ScalarValue:H
+ CarriageControl:NL
+5060 PRINT
+ ITEMS
+ CarriageControl:NL
+5070 RETURN
+ 
+5500 REM
+ Remark:
+5510 REM     CONVERT Q(1-P9) INTO G$(1-P9)
+ Remark:    CONVERT Q(1-P9) INTO G$(1-P9)
+5520 REM
+ Remark:
+5530 FOR S=1 TO P9
+ control: VariableName:S
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+5540 G$(S)=MID$(L$,Q(S),1)
+ Token 'InvalidToken:$' is not a value or operator
+5550 NEXT S
+ VariableName:S
+5560 RETURN
+ 
+6000 REM
+ Remark:
+6010 REM     CONVERT Q(1-P9) TO H$(1-P9)
+ Remark:    CONVERT Q(1-P9) TO H$(1-P9)
+6020 REM
+ Remark:
+6030 FOR S=1 TO P9
+ control: VariableName:S
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+6040 H$(S)=MID$(L$,Q(S),1)
+ Token 'InvalidToken:$' is not a value or operator
+6050 NEXT S
+ VariableName:S
+6060 RETURN
+ 
+6500 REM
+ Remark:
+6510 REM     COPY H$ INTO G$
+ Remark:    COPY H$ INTO G$
+6520 REM
+ Remark:
+6530 FOR S=1 TO P9
+ control: VariableName:S
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:P9"]
+ step:    ["NumericConstant:1"]
+6540 G$(S)=H$(S)
+ ScalarValue:S
+ ScalarReference:G$
+ ScalarValue:S
+ ScalarValue:H$
+ AssignmentOperator:=
+6550 NEXT S
+ VariableName:S
+6560 RETURN
+ 
+8000 REM     PROGRAM DATA FOR COLOR NAMES
+ Remark:    PROGRAM DATA FOR COLOR NAMES
+8010 DATA BLACK,WHITE,RED,GREEN,ORANGE,YELLOW,PURPLE,TAN
+ Invalid statement: 'OR' is not an operator
+ Unimplemented
+9998 REM   ...WE'RE SORRY BUT IT'S TIME TO GO...
+ Remark:  ...WE'RE SORRY BUT IT'S TIME TO GO...
+9999 END
+ 

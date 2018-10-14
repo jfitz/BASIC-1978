@@ -1,0 +1,2133 @@
+2 PRINT TAB(26) "CIVIL WAR"
+ ITEMS
+ NumericConstant:26
+ FunctionTab
+ CarriageControl:
+ TextConstant:"CIVIL WAR"
+ CarriageControl:NL
+4 PRINT TAB(15) "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+6 PRINT : PRINT : PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+20 REM ORIGINAL GAME DESIGN: CRAM, GOODIE, HIBBARD LEXINGTON H.S.
+ Remark:ORIGINAL GAME DESIGN: CRAM, GOODIE, HIBBARD LEXINGTON H.S.
+30 REM MODIFICATIONS: G. PAUL, R. HESS (TIES), 1973
+ Remark:MODIFICATIONS: G. PAUL, R. HESS (TIES), 1973
+50  DIM S(4),C$(14),M1(14),M2(14),C1(14),C2(14),M(14)
+ NumericConstant:4
+ CompoundDeclaration:S
+ NumericConstant:14
+ CompoundDeclaration:C$
+ NumericConstant:14
+ CompoundDeclaration:M1
+ NumericConstant:14
+ CompoundDeclaration:M2
+ NumericConstant:14
+ CompoundDeclaration:C1
+ NumericConstant:14
+ CompoundDeclaration:C2
+ NumericConstant:14
+ CompoundDeclaration:M
+60  REM UNION INFO ON LIKELY CONFEDERATE STRATEGY
+ Remark:UNION INFO ON LIKELY CONFEDERATE STRATEGY
+70  S(1)=25 : S(2)=25 : S(3)=25 : S(4)=25
+ NumericConstant:1
+ ScalarReference:S
+ NumericConstant:25
+ AssignmentOperator:=
+ NumericConstant:2
+ ScalarReference:S
+ NumericConstant:25
+ AssignmentOperator:=
+ NumericConstant:3
+ ScalarReference:S
+ NumericConstant:25
+ AssignmentOperator:=
+ NumericConstant:4
+ ScalarReference:S
+ NumericConstant:25
+ AssignmentOperator:=
+82  REM READ HISTORICAL DATA.
+ Remark:READ HISTORICAL DATA.
+84  FOR D=1 TO 14
+ control: VariableName:D
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:14"]
+ step:    ["NumericConstant:1"]
+86  READ C$(D),M1(D),M2(D),C1(D),C2(D),M(D)
+ ScalarValue:D
+ ScalarReference:C$
+ ScalarValue:D
+ ScalarReference:M1
+ ScalarValue:D
+ ScalarReference:M2
+ ScalarValue:D
+ ScalarReference:C1
+ ScalarValue:D
+ ScalarReference:C2
+ ScalarValue:D
+ ScalarReference:M
+88  NEXT D
+ VariableName:D
+89  LET D=RND(-1)
+ ScalarReference:D
+ NumericConstant:1
+ UnaryOperator:-
+ FunctionRnd
+ AssignmentOperator:=
+90  PRINT
+ ITEMS
+ CarriageControl:NL
+100  PRINT "DO YOU WANT INSTRUCTIONS";
+ ITEMS
+ TextConstant:"DO YOU WANT INSTRUCTIONS"
+ CarriageControl:;
+110  INPUT X$
+ ScalarReference:X$
+120  IF X$="YES" THEN 160
+ ScalarValue:X$
+ TextConstant:"YES"
+ BinaryOperator:=
+130  IF X$="NO" THEN 370
+ ScalarValue:X$
+ TextConstant:"NO"
+ BinaryOperator:=
+140  PRINT "YES OR NO -- ";
+ ITEMS
+ TextConstant:"YES OR NO -- "
+ CarriageControl:;
+150  GOTO 110
+ LineNumber:110
+160  PRINT : PRINT : PRINT : PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+170  PRINT "THIS IS A CIVIL WAR SIMULATION."
+ ITEMS
+ TextConstant:"THIS IS A CIVIL WAR SIMULATION."
+ CarriageControl:NL
+180  PRINT "TO PLAY TYPE A RESPONSE WHEN THE COMPUTER ASKS."
+ ITEMS
+ TextConstant:"TO PLAY TYPE A RESPONSE WHEN THE COMPUTER ASKS."
+ CarriageControl:NL
+190  PRINT "REMEMBER THAT ALL FACTORS ARE INTERRELATED AND THAT YOUR"
+ ITEMS
+ TextConstant:"REMEMBER THAT ALL FACTORS ARE INTERRELATED AND THAT YOUR"
+ CarriageControl:NL
+200  PRINT "RESPONSES COULD CHANGE HISTORY. FACTS AND FIGURES USED ARE"
+ ITEMS
+ TextConstant:"RESPONSES COULD CHANGE HISTORY. FACTS AND FIGURES USED ARE"
+ CarriageControl:NL
+210  PRINT "BASED ON THE ACTUAL OCCURRENCE. MOST BATTLES TEND TO RESULT"
+ ITEMS
+ TextConstant:"BASED ON THE ACTUAL OCCURRENCE. MOST BATTLES TEND TO RESULT"
+ CarriageControl:NL
+220  PRINT "AS THEY DID IN THE CIVIL WAR, BUT IT ALL DEPENDS ON YOU!!"
+ ITEMS
+ TextConstant:"AS THEY DID IN THE CIVIL WAR, BUT IT ALL DEPENDS ON YOU!!"
+ CarriageControl:NL
+230  PRINT
+ ITEMS
+ CarriageControl:NL
+240  PRINT "THE OBJECT OF THE GAME IS TO WIN AS MANY BATTLES AS ";
+ ITEMS
+ TextConstant:"THE OBJECT OF THE GAME IS TO WIN AS MANY BATTLES AS "
+ CarriageControl:;
+245  PRINT "POSSIBLE."
+ ITEMS
+ TextConstant:"POSSIBLE."
+ CarriageControl:NL
+250  PRINT
+ ITEMS
+ CarriageControl:NL
+260  PRINT "YOUR CHOICES FOR DEFENSIVE STRATEGY ARE:"
+ ITEMS
+ TextConstant:"YOUR CHOICES FOR DEFENSIVE STRATEGY ARE:"
+ CarriageControl:NL
+270  PRINT "        (1) ARTILLERY ATTACK"
+ ITEMS
+ TextConstant:"        (1) ARTILLERY ATTACK"
+ CarriageControl:NL
+280  PRINT "        (2) FORTIFICATION AGAINST FRONTAL ATTACK"
+ ITEMS
+ TextConstant:"        (2) FORTIFICATION AGAINST FRONTAL ATTACK"
+ CarriageControl:NL
+290  PRINT "        (3) FORTIFICATION AGAINST FLANKING MANEUVERS"
+ ITEMS
+ TextConstant:"        (3) FORTIFICATION AGAINST FLANKING MANEUVERS"
+ CarriageControl:NL
+300  PRINT "        (4) FALLING BACK"
+ ITEMS
+ TextConstant:"        (4) FALLING BACK"
+ CarriageControl:NL
+310  PRINT " YOUR CHOICES FOR OFFENSIVE STRATEGY ARE:"
+ ITEMS
+ TextConstant:" YOUR CHOICES FOR OFFENSIVE STRATEGY ARE:"
+ CarriageControl:NL
+320  PRINT "        (1) ARTILLERY ATTACK"
+ ITEMS
+ TextConstant:"        (1) ARTILLERY ATTACK"
+ CarriageControl:NL
+330  PRINT "        (2) FRONTAL ATTACK"
+ ITEMS
+ TextConstant:"        (2) FRONTAL ATTACK"
+ CarriageControl:NL
+340  PRINT "        (3) FLANKING MANEUVERS"
+ ITEMS
+ TextConstant:"        (3) FLANKING MANEUVERS"
+ CarriageControl:NL
+350  PRINT "        (4) ENCIRCLEMENT"
+ ITEMS
+ TextConstant:"        (4) ENCIRCLEMENT"
+ CarriageControl:NL
+360  PRINT "YOU MAY SURRENDER BY TYPING A '5' FOR YOUR STRATEGY."
+ ITEMS
+ TextConstant:"YOU MAY SURRENDER BY TYPING A '5' FOR YOUR STRATEGY."
+ CarriageControl:NL
+370  PRINT : PRINT : PRINT : PRINT "ARE THERE TWO GENERALS PRESENT ";
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"ARE THERE TWO GENERALS PRESENT "
+ CarriageControl:;
+380  PRINT "(ANSWER YES OR NO)";
+ ITEMS
+ TextConstant:"(ANSWER YES OR NO)"
+ CarriageControl:;
+390  INPUT B$
+ ScalarReference:B$
+400  IF B$="YES" THEN 430
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:=
+410  IF B$ <> "NO" THEN 380
+ ScalarValue:B$
+ TextConstant:"NO"
+ BinaryOperator:<>
+420  PRINT : PRINT "YOU ARE THE CONFEDERACY.   GOOD LUCK!"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"YOU ARE THE CONFEDERACY.   GOOD LUCK!"
+ CarriageControl:NL
+425  PRINT
+ ITEMS
+ CarriageControl:NL
+430  LET D=1
+ ScalarReference:D
+ NumericConstant:1
+ AssignmentOperator:=
+440  IF B$ <> "YES" THEN 460
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:<>
+450  LET D=2
+ ScalarReference:D
+ NumericConstant:2
+ AssignmentOperator:=
+460  PRINT "SELECT A BATTLE BY TYPING A NUMBER FROM 1 TO 14 ON"
+ ITEMS
+ TextConstant:"SELECT A BATTLE BY TYPING A NUMBER FROM 1 TO 14 ON"
+ CarriageControl:NL
+470  PRINT "REQUEST.  TYPE ANY OTHER NUMBER TO END THE SIMULATION."
+ ITEMS
+ TextConstant:"REQUEST.  TYPE ANY OTHER NUMBER TO END THE SIMULATION."
+ CarriageControl:NL
+480  PRINT "BUT '0' BRINGS BACK EXACT PREVIOUS BATTLE SITUATION"
+ ITEMS
+ TextConstant:"BUT '0' BRINGS BACK EXACT PREVIOUS BATTLE SITUATION"
+ CarriageControl:NL
+490  PRINT "ALLOWING YOU TO REPLAY IT"
+ ITEMS
+ TextConstant:"ALLOWING YOU TO REPLAY IT"
+ CarriageControl:NL
+500  PRINT
+ ITEMS
+ CarriageControl:NL
+510  PRINT "NOTE: A NEGATIVE FOOD$ ENTRY CAUSES THE PROGRAM TO "
+ ITEMS
+ TextConstant:"NOTE: A NEGATIVE FOOD$ ENTRY CAUSES THE PROGRAM TO "
+ CarriageControl:NL
+520  PRINT "USE THE ENTRIES FROM THE PREVIOUS BATTLE"
+ ITEMS
+ TextConstant:"USE THE ENTRIES FROM THE PREVIOUS BATTLE"
+ CarriageControl:NL
+530  PRINT
+ ITEMS
+ CarriageControl:NL
+540  PRINT "AFTER REQUESTING A BATTLE, DO YOU WISH ";
+ ITEMS
+ TextConstant:"AFTER REQUESTING A BATTLE, DO YOU WISH "
+ CarriageControl:;
+550  PRINT "BATTLE DESCRIPTIONS ";
+ ITEMS
+ TextConstant:"BATTLE DESCRIPTIONS "
+ CarriageControl:;
+560  PRINT "(ANSWER YES OR NO)";
+ ITEMS
+ TextConstant:"(ANSWER YES OR NO)"
+ CarriageControl:;
+570  INPUT X$
+ ScalarReference:X$
+580  IF X$="YES" THEN 600
+ ScalarValue:X$
+ TextConstant:"YES"
+ BinaryOperator:=
+590  IF X$ <> "NO" THEN 560
+ ScalarValue:X$
+ TextConstant:"NO"
+ BinaryOperator:<>
+600  L=0:W=0:R1=0:Q1=0:M3=0:M4=0:P1=0:P2=0:T1=0:T2=0
+ ScalarReference:L
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:W
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:R1
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:Q1
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:M3
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:M4
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:P1
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:P2
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:T1
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:T2
+ NumericConstant:0
+ AssignmentOperator:=
+610  F(2)=0:H(2)=0:B(2)=0:R2=0:Q2=0:C6=0:F=0:W0=0:Y=0:Y2=0:U=0:U2=0
+ NumericConstant:2
+ ScalarReference:F
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:2
+ ScalarReference:H
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:2
+ ScalarReference:B
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:R2
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:Q2
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:C6
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:F
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:W0
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:Y
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:Y2
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:U
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:U2
+ NumericConstant:0
+ AssignmentOperator:=
+620  PRINT : PRINT : PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+630  PRINT "WHICH BATTLE DO YOU WISH TO SIMULATE";
+ ITEMS
+ TextConstant:"WHICH BATTLE DO YOU WISH TO SIMULATE"
+ CarriageControl:;
+640  INPUT A
+ ScalarReference:A
+650  IF A <> 0 THEN 660
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:<>
+655  IF R <> 0 THEN 1140
+ ScalarValue:R
+ NumericConstant:0
+ BinaryOperator:<>
+660  IF A <=0 THEN 2860
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:<=
+665  IF A >= 15 THEN 2860
+ ScalarValue:A
+ NumericConstant:15
+ BinaryOperator:>=
+670  LET C$=C$(A)
+ ScalarReference:C$
+ ScalarValue:A
+ ScalarValue:C$
+ AssignmentOperator:=
+680  LET M1=M1(A)
+ ScalarReference:M1
+ ScalarValue:A
+ ScalarValue:M1
+ AssignmentOperator:=
+690  LET M2=M2(A)
+ ScalarReference:M2
+ ScalarValue:A
+ ScalarValue:M2
+ AssignmentOperator:=
+700  LET C1=C1(A)
+ ScalarReference:C1
+ ScalarValue:A
+ ScalarValue:C1
+ AssignmentOperator:=
+710  LET C2=C2(A)
+ ScalarReference:C2
+ ScalarValue:A
+ ScalarValue:C2
+ AssignmentOperator:=
+720  LET M=M(A)
+ ScalarReference:M
+ ScalarValue:A
+ ScalarValue:M
+ AssignmentOperator:=
+960  LET U=0
+ ScalarReference:U
+ NumericConstant:0
+ AssignmentOperator:=
+970  REM  INFLATION CALC
+ Remark: INFLATION CALC
+980  LET I1=10+(L-W)*2
+ ScalarReference:I1
+ NumericConstant:10
+ ScalarValue:L
+ ScalarValue:W
+ BinaryOperator:-
+ NumericConstant:2
+ BinaryOperator:*
+ BinaryOperator:+
+ AssignmentOperator:=
+990  LET I2=10+(W-L)*2
+ ScalarReference:I2
+ NumericConstant:10
+ ScalarValue:W
+ ScalarValue:L
+ BinaryOperator:-
+ NumericConstant:2
+ BinaryOperator:*
+ BinaryOperator:+
+ AssignmentOperator:=
+1000  REM - MONEY AVAILABLE
+ Remark:- MONEY AVAILABLE
+1010  LET D(1)=100*INT((M1*(100-I1)/2000)*(1+(R1-Q1)/(R1+1))+.5)
+ NumericConstant:1
+ ScalarReference:D
+ NumericConstant:100
+ ScalarValue:M1
+ NumericConstant:100
+ ScalarValue:I1
+ BinaryOperator:-
+ BinaryOperator:*
+ NumericConstant:2000
+ BinaryOperator:/
+ NumericConstant:1
+ ScalarValue:R1
+ ScalarValue:Q1
+ BinaryOperator:-
+ ScalarValue:R1
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ BinaryOperator:*
+ AssignmentOperator:=
+1020  LET D(2)=100*INT(M2*(100-I2)/2000+.5)
+ NumericConstant:2
+ ScalarReference:D
+ NumericConstant:100
+ ScalarValue:M2
+ NumericConstant:100
+ ScalarValue:I2
+ BinaryOperator:-
+ BinaryOperator:*
+ NumericConstant:2000
+ BinaryOperator:/
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ BinaryOperator:*
+ AssignmentOperator:=
+1030  IF B$ <> "YES" THEN 1050
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:<>
+1040  LET D(2)=100*INT((M2*(100-I2)/2000)*(1+(R2-Q2)/(R2+1))+.5)
+ NumericConstant:2
+ ScalarReference:D
+ NumericConstant:100
+ ScalarValue:M2
+ NumericConstant:100
+ ScalarValue:I2
+ BinaryOperator:-
+ BinaryOperator:*
+ NumericConstant:2000
+ BinaryOperator:/
+ NumericConstant:1
+ ScalarValue:R2
+ ScalarValue:Q2
+ BinaryOperator:-
+ ScalarValue:R2
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ BinaryOperator:*
+ AssignmentOperator:=
+1050  REM - MEN   AVAILABLE
+ Remark:- MEN   AVAILABLE
+1060  LET M5=INT(M1*(1+(P1-T1)/(M3+1)))
+ ScalarReference:M5
+ ScalarValue:M1
+ NumericConstant:1
+ ScalarValue:P1
+ ScalarValue:T1
+ BinaryOperator:-
+ ScalarValue:M3
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+1070  LET M6=INT(M2*(1+(P2-T2)/(M4+1)))
+ ScalarReference:M6
+ ScalarValue:M2
+ NumericConstant:1
+ ScalarValue:P2
+ ScalarValue:T2
+ BinaryOperator:-
+ ScalarValue:M4
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+1080  LET F1=5*M1/6
+ ScalarReference:F1
+ NumericConstant:5
+ ScalarValue:M1
+ BinaryOperator:*
+ NumericConstant:6
+ BinaryOperator:/
+ AssignmentOperator:=
+1090  PRINT : PRINT : PRINT : PRINT : PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+1100  PRINT "THIS IS THE BATTLE OF ";C$
+ ITEMS
+ TextConstant:"THIS IS THE BATTLE OF "
+ CarriageControl:;
+ ScalarValue:C$
+ CarriageControl:NL
+1110  IF X$="NO" THEN 1150
+ ScalarValue:X$
+ TextConstant:"NO"
+ BinaryOperator:=
+1120  IF A>11 THEN 1130
+ ScalarValue:A
+ NumericConstant:11
+ BinaryOperator:>
+1125  ON A GOTO 3580,3620,3650,3690,3720,3750,3780,3800,3830,3860,3890
+ ScalarValue:A
+ LineNumber:3580
+ LineNumber:3620
+ LineNumber:3650
+ LineNumber:3690
+ LineNumber:3720
+ LineNumber:3750
+ LineNumber:3780
+ LineNumber:3800
+ LineNumber:3830
+ LineNumber:3860
+ LineNumber:3890
+1130  ON A-11 GOTO 3920,3950,3980
+ ScalarValue:A
+ NumericConstant:11
+ BinaryOperator:-
+ LineNumber:3920
+ LineNumber:3950
+ LineNumber:3980
+1140  PRINT C$" INSTANT REPLAY"
+ ITEMS
+ ScalarValue:C$
+ CarriageControl:
+ TextConstant:" INSTANT REPLAY"
+ CarriageControl:NL
+1150  PRINT
+ ITEMS
+ CarriageControl:NL
+1160  PRINT " ","CONFEDERACY"," UNION"
+ ITEMS
+ TextConstant:" "
+ CarriageControl:,
+ TextConstant:"CONFEDERACY"
+ CarriageControl:,
+ TextConstant:" UNION"
+ CarriageControl:NL
+1170  PRINT "MEN"," "M5," "M6
+ ITEMS
+ TextConstant:"MEN"
+ CarriageControl:,
+ TextConstant:" "
+ CarriageControl:
+ ScalarValue:M5
+ CarriageControl:,
+ TextConstant:" "
+ CarriageControl:
+ ScalarValue:M6
+ CarriageControl:NL
+1180  PRINT "MONEY","$";D(1),"$";D(2)
+ ITEMS
+ TextConstant:"MONEY"
+ CarriageControl:,
+ TextConstant:"$"
+ CarriageControl:;
+ NumericConstant:1
+ ScalarValue:D
+ CarriageControl:,
+ TextConstant:"$"
+ CarriageControl:;
+ NumericConstant:2
+ ScalarValue:D
+ CarriageControl:NL
+1190  PRINT "INFLATION"," ";I1+15;"%"," ";I2;"%"
+ ITEMS
+ TextConstant:"INFLATION"
+ CarriageControl:,
+ TextConstant:" "
+ CarriageControl:;
+ ScalarValue:I1
+ NumericConstant:15
+ BinaryOperator:+
+ CarriageControl:;
+ TextConstant:"%"
+ CarriageControl:,
+ TextConstant:" "
+ CarriageControl:;
+ ScalarValue:I2
+ CarriageControl:;
+ TextConstant:"%"
+ CarriageControl:NL
+1195  PRINT
+ ITEMS
+ CarriageControl:NL
+1200  REM - ONLY IN PRINTOUT IS CONFED INFLATION = I1+15%
+ Remark:- ONLY IN PRINTOUT IS CONFED INFLATION = I1+15%
+1210  REM - IF TWO GENERALS, INPUT CONFED. FIRST
+ Remark:- IF TWO GENERALS, INPUT CONFED. FIRST
+1220  FOR I=1 TO D
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:D"]
+ step:    ["NumericConstant:1"]
+1230  IF B$ <> "YES" THEN 1260
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:<>
+1240  IF I=2 THEN 1260
+ ScalarValue:I
+ NumericConstant:2
+ BinaryOperator:=
+1250  PRINT "CONFEDERATE GENERAL---";
+ ITEMS
+ TextConstant:"CONFEDERATE GENERAL---"
+ CarriageControl:;
+1260  PRINT "HOW MUCH DO YOU WISH TO SPEND FOR"
+ ITEMS
+ TextConstant:"HOW MUCH DO YOU WISH TO SPEND FOR"
+ CarriageControl:NL
+1270  PRINT " - FOOD......";
+ ITEMS
+ TextConstant:" - FOOD......"
+ CarriageControl:;
+1280  INPUT F
+ ScalarReference:F
+1290  IF F >= 0 THEN 1360
+ ScalarValue:F
+ NumericConstant:0
+ BinaryOperator:>=
+1300  IF R1 <> 0 THEN 1330
+ ScalarValue:R1
+ NumericConstant:0
+ BinaryOperator:<>
+1310  PRINT "NO PREVIOUS ENTRIES"
+ ITEMS
+ TextConstant:"NO PREVIOUS ENTRIES"
+ CarriageControl:NL
+1320  GOTO 1270
+ LineNumber:1270
+1330  PRINT "ASSUME YOU WANT TO KEEP SAME ALLOCATIONS"
+ ITEMS
+ TextConstant:"ASSUME YOU WANT TO KEEP SAME ALLOCATIONS"
+ CarriageControl:NL
+1340  PRINT
+ ITEMS
+ CarriageControl:NL
+1350  GOTO 1510
+ LineNumber:1510
+1360  LET F(I)=F
+ ScalarValue:I
+ ScalarReference:F
+ ScalarValue:F
+ AssignmentOperator:=
+1370  PRINT " - SALARIES..";
+ ITEMS
+ TextConstant:" - SALARIES.."
+ CarriageControl:;
+1380  INPUT H(I)
+ ScalarValue:I
+ ScalarReference:H
+1390  LET N=1
+ ScalarReference:N
+ NumericConstant:1
+ AssignmentOperator:=
+1400  IF H(I)<0 THEN 1490
+ ScalarValue:I
+ ScalarValue:H
+ NumericConstant:0
+ BinaryOperator:<
+1410  PRINT " - AMMUNITION";
+ ITEMS
+ TextConstant:" - AMMUNITION"
+ CarriageControl:;
+1420  INPUT B(I)
+ ScalarValue:I
+ ScalarReference:B
+1430  LET N=2
+ ScalarReference:N
+ NumericConstant:2
+ AssignmentOperator:=
+1440  IF B(I)<0 THEN 1490
+ ScalarValue:I
+ ScalarValue:B
+ NumericConstant:0
+ BinaryOperator:<
+1450  PRINT
+ ITEMS
+ CarriageControl:NL
+1460  IF F(I)+H(I)+B(I) <= D(I) THEN 1510
+ ScalarValue:I
+ ScalarValue:F
+ ScalarValue:I
+ ScalarValue:H
+ BinaryOperator:+
+ ScalarValue:I
+ ScalarValue:B
+ BinaryOperator:+
+ ScalarValue:I
+ ScalarValue:D
+ BinaryOperator:<=
+1470  PRINT "THINK AGAIN! YOU HAVE ONLY $"D(I)
+ ITEMS
+ TextConstant:"THINK AGAIN! YOU HAVE ONLY $"
+ CarriageControl:
+ ScalarValue:I
+ ScalarValue:D
+ CarriageControl:NL
+1480  GOTO 1270
+ LineNumber:1270
+1490  PRINT "NEGATIVE VALUES NOT ALLOWED."
+ ITEMS
+ TextConstant:"NEGATIVE VALUES NOT ALLOWED."
+ CarriageControl:NL
+1500  ON N GOTO 1370,1410
+ ScalarValue:N
+ LineNumber:1370
+ LineNumber:1410
+1510  IF B$ <> "YES" THEN 1550
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:<>
+1520  IF I=2 THEN 1550
+ ScalarValue:I
+ NumericConstant:2
+ BinaryOperator:=
+1530  PRINT "UNION GENERAL---";
+ ITEMS
+ TextConstant:"UNION GENERAL---"
+ CarriageControl:;
+1540  NEXT I
+ VariableName:I
+1550  FOR Z=1 TO D
+ control: VariableName:Z
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:D"]
+ step:    ["NumericConstant:1"]
+1560  IF B$ <> "YES" THEN 1620
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:<>
+1570  ON Z GOTO 1580,1600
+ ScalarValue:Z
+ LineNumber:1580
+ LineNumber:1600
+1580  PRINT "CONFEDERATE ";
+ ITEMS
+ TextConstant:"CONFEDERATE "
+ CarriageControl:;
+1590  GOTO 1620
+ LineNumber:1620
+1600  PRINT "      UNION ";
+ ITEMS
+ TextConstant:"      UNION "
+ CarriageControl:;
+1610  REM - FIND MORALE
+ Remark:- FIND MORALE
+1620  LET O=((2*F(Z)^2+H(Z)^2)/F1^2+1)
+ ScalarReference:O
+ NumericConstant:2
+ ScalarValue:Z
+ ScalarValue:F
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ ScalarValue:Z
+ ScalarValue:H
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:+
+ ScalarValue:F1
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1630  IF O<10 THEN 1660
+ ScalarValue:O
+ NumericConstant:10
+ BinaryOperator:<
+1640  PRINT "MORALE IS HIGH"
+ ITEMS
+ TextConstant:"MORALE IS HIGH"
+ CarriageControl:NL
+1650  GOTO 1700
+ LineNumber:1700
+1660  IF O<5 THEN 1690
+ ScalarValue:O
+ NumericConstant:5
+ BinaryOperator:<
+1670  PRINT "MORALE IS FAIR"
+ ITEMS
+ TextConstant:"MORALE IS FAIR"
+ CarriageControl:NL
+1680  GOTO 1700
+ LineNumber:1700
+1690  PRINT "MORALE IS POOR"
+ ITEMS
+ TextConstant:"MORALE IS POOR"
+ CarriageControl:NL
+1700  IF B$ <> "YES" THEN 1760
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:<>
+1710  LET O(Z)=O
+ ScalarValue:Z
+ ScalarReference:O
+ ScalarValue:O
+ AssignmentOperator:=
+1720  NEXT Z
+ VariableName:Z
+1730  LET O2=O(2)
+ ScalarReference:O2
+ NumericConstant:2
+ ScalarValue:O
+ AssignmentOperator:=
+1740  LET O=O(1)
+ ScalarReference:O
+ NumericConstant:1
+ ScalarValue:O
+ AssignmentOperator:=
+1750  PRINT "CONFEDERATE GENERAL---";
+ ITEMS
+ TextConstant:"CONFEDERATE GENERAL---"
+ CarriageControl:;
+1760  REM - ACTUAL OFF/DEF BATTLE SITUATION
+ Remark:- ACTUAL OFF/DEF BATTLE SITUATION
+1770  IF M <> 3 THEN 1800
+ ScalarValue:M
+ NumericConstant:3
+ BinaryOperator:<>
+1780  PRINT "YOU ARE ON THE OFFENSIVE"
+ ITEMS
+ TextConstant:"YOU ARE ON THE OFFENSIVE"
+ CarriageControl:NL
+1790  GOTO 1840
+ LineNumber:1840
+1800  IF M <> 1 THEN 1830
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:<>
+1810  PRINT "YOU ARE ON THE DEFENSIVE"
+ ITEMS
+ TextConstant:"YOU ARE ON THE DEFENSIVE"
+ CarriageControl:NL
+1820  GOTO 1840
+ LineNumber:1840
+1830  PRINT "BOTH SIDES ARE ON THE OFFENSIVE "
+ ITEMS
+ TextConstant:"BOTH SIDES ARE ON THE OFFENSIVE "
+ CarriageControl:NL
+1840  PRINT
+ ITEMS
+ CarriageControl:NL
+1850  REM - CHOOSE STRATEGIES
+ Remark:- CHOOSE STRATEGIES
+1860  IF B$ <> "YES" THEN 1910
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:<>
+1870  FOR I=1 TO 2
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:1"]
+1880  ON I GOTO 1890,1920
+ ScalarValue:I
+ LineNumber:1890
+ LineNumber:1920
+1890  PRINT "CONFEDERATE STRATEGY ";
+ ITEMS
+ TextConstant:"CONFEDERATE STRATEGY "
+ CarriageControl:;
+1900  GOTO 1920
+ LineNumber:1920
+1910  PRINT "YOUR STRATEGY ";
+ ITEMS
+ TextConstant:"YOUR STRATEGY "
+ CarriageControl:;
+1920  INPUT Y
+ ScalarReference:Y
+1930  IF ABS(Y-3)<3 THEN 1960
+ ScalarValue:Y
+ NumericConstant:3
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:3
+ BinaryOperator:<
+1940  PRINT "STRATEGY";Y;"NOT ALLOWED."
+ ITEMS
+ TextConstant:"STRATEGY"
+ CarriageControl:;
+ ScalarValue:Y
+ CarriageControl:;
+ TextConstant:"NOT ALLOWED."
+ CarriageControl:NL
+1950  GOTO 1910
+ LineNumber:1910
+1960  IF B$="YES" THEN 2000
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:=
+1970  IF Y=5 THEN 2830
+ ScalarValue:Y
+ NumericConstant:5
+ BinaryOperator:=
+1980  GOSUB 3110
+ LineNumber:3110
+1990  GOTO 2170
+ LineNumber:2170
+2000  IF I=2 THEN 2040
+ ScalarValue:I
+ NumericConstant:2
+ BinaryOperator:=
+2010  LET Y1=Y
+ ScalarReference:Y1
+ ScalarValue:Y
+ AssignmentOperator:=
+2020  PRINT "UNION STRATEGY ";
+ ITEMS
+ TextConstant:"UNION STRATEGY "
+ CarriageControl:;
+2030  NEXT I
+ VariableName:I
+2040  LET Y2=Y
+ ScalarReference:Y2
+ ScalarValue:Y
+ AssignmentOperator:=
+2050  LET Y=Y1
+ ScalarReference:Y
+ ScalarValue:Y1
+ AssignmentOperator:=
+2060  IF Y2=5 THEN 2020
+ ScalarValue:Y2
+ NumericConstant:5
+ BinaryOperator:=
+2070  REM : SIMULATED LOSSES-NORTH
+ Remark:: SIMULATED LOSSES-NORTH
+2080  LET C6=(2*C2/5)*(1+1/(2*(ABS(Y2-Y)+1)))
+ ScalarReference:C6
+ NumericConstant:2
+ ScalarValue:C2
+ BinaryOperator:*
+ NumericConstant:5
+ BinaryOperator:/
+ NumericConstant:1
+ NumericConstant:1
+ NumericConstant:2
+ ScalarValue:Y2
+ ScalarValue:Y
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:*
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ AssignmentOperator:=
+2090  LET C6=C6*(1.28+(5*M2/6)/(B(2)+1))
+ ScalarReference:C6
+ ScalarValue:C6
+ NumericConstant:1.28
+ NumericConstant:5
+ ScalarValue:M2
+ BinaryOperator:*
+ NumericConstant:6
+ BinaryOperator:/
+ NumericConstant:2
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ AssignmentOperator:=
+2100  LET C6=INT(C6*(1+1/O2)+.5)
+ ScalarReference:C6
+ ScalarValue:C6
+ NumericConstant:1
+ NumericConstant:1
+ ScalarValue:O2
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+2110  REM - IF LOSS > MEN PRESENT, RESCALE LOSSES
+ Remark:- IF LOSS > MEN PRESENT, RESCALE LOSSES
+2120  LET E2=100/O2
+ ScalarReference:E2
+ NumericConstant:100
+ ScalarValue:O2
+ BinaryOperator:/
+ AssignmentOperator:=
+2130  IF INT(C6+E2)<M6 THEN 2190
+ ScalarValue:C6
+ ScalarValue:E2
+ BinaryOperator:+
+ FunctionInt
+ ScalarValue:M6
+ BinaryOperator:<
+2140  LET C6=INT(13*M6/20)
+ ScalarReference:C6
+ NumericConstant:13
+ ScalarValue:M6
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+2150  LET E2=7*C6/13
+ ScalarReference:E2
+ NumericConstant:7
+ ScalarValue:C6
+ BinaryOperator:*
+ NumericConstant:13
+ BinaryOperator:/
+ AssignmentOperator:=
+2160  LET U2=1
+ ScalarReference:U2
+ NumericConstant:1
+ AssignmentOperator:=
+2170  REM - CALCULATE SIMULATED LOSSES
+ Remark:- CALCULATE SIMULATED LOSSES
+2180  PRINT
+ ITEMS
+ CarriageControl:NL
+2190  PRINT : PRINT : PRINT ,"CONFEDERACY","UNION"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:,
+ TextConstant:"CONFEDERACY"
+ CarriageControl:,
+ TextConstant:"UNION"
+ CarriageControl:NL
+2200  LET C5=(2*C1/5)*(1+1/(2*(ABS(Y2-Y)+1)))
+ ScalarReference:C5
+ NumericConstant:2
+ ScalarValue:C1
+ BinaryOperator:*
+ NumericConstant:5
+ BinaryOperator:/
+ NumericConstant:1
+ NumericConstant:1
+ NumericConstant:2
+ ScalarValue:Y2
+ ScalarValue:Y
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:*
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ AssignmentOperator:=
+2210  LET C5=INT(C5*(1+1/O)*(1.28+F1/(B(1)+1))+.5)
+ ScalarReference:C5
+ ScalarValue:C5
+ NumericConstant:1
+ NumericConstant:1
+ ScalarValue:O
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ NumericConstant:1.28
+ ScalarValue:F1
+ NumericConstant:1
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ AssignmentOperator:=
+2220  LET E=100/O
+ ScalarReference:E
+ NumericConstant:100
+ ScalarValue:O
+ BinaryOperator:/
+ AssignmentOperator:=
+2230  IF C5+100/O<M1*(1+(P1-T1)/(M3+1)) THEN 2270
+ ScalarValue:C5
+ NumericConstant:100
+ ScalarValue:O
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:M1
+ NumericConstant:1
+ ScalarValue:P1
+ ScalarValue:T1
+ BinaryOperator:-
+ ScalarValue:M3
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ BinaryOperator:<
+2240  LET C5=INT(13*M1/20*(1+(P1-T1)/(M3+1)))
+ ScalarReference:C5
+ NumericConstant:13
+ ScalarValue:M1
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ NumericConstant:1
+ ScalarValue:P1
+ ScalarValue:T1
+ BinaryOperator:-
+ ScalarValue:M3
+ NumericConstant:1
+ BinaryOperator:+
+ BinaryOperator:/
+ BinaryOperator:+
+ BinaryOperator:*
+ FunctionInt
+ AssignmentOperator:=
+2250  LET E=7*C5/13
+ ScalarReference:E
+ NumericConstant:7
+ ScalarValue:C5
+ BinaryOperator:*
+ NumericConstant:13
+ BinaryOperator:/
+ AssignmentOperator:=
+2260  LET U=1
+ ScalarReference:U
+ NumericConstant:1
+ AssignmentOperator:=
+2270  IF D=1 THEN 2500
+ ScalarValue:D
+ NumericConstant:1
+ BinaryOperator:=
+2280  PRINT "CASUALTIES",C5,C6
+ ITEMS
+ TextConstant:"CASUALTIES"
+ CarriageControl:,
+ ScalarValue:C5
+ CarriageControl:,
+ ScalarValue:C6
+ CarriageControl:NL
+2290  PRINT "DESERTIONS",INT(E),INT(E2)
+ ITEMS
+ TextConstant:"DESERTIONS"
+ CarriageControl:,
+ ScalarValue:E
+ FunctionInt
+ CarriageControl:,
+ ScalarValue:E2
+ FunctionInt
+ CarriageControl:NL
+2300  PRINT
+ ITEMS
+ CarriageControl:NL
+2310  IF B$ <> "YES" THEN 2350
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:<>
+2320  PRINT "COMPARED TO THE ACTUAL CASUALTIES AT "C$
+ ITEMS
+ TextConstant:"COMPARED TO THE ACTUAL CASUALTIES AT "
+ CarriageControl:
+ ScalarValue:C$
+ CarriageControl:NL
+2330  PRINT "CONFEDERATE:"INT(100*(C5/C1)+.5)"% OF THE ORIGINAL"
+ ITEMS
+ TextConstant:"CONFEDERATE:"
+ CarriageControl:
+ NumericConstant:100
+ ScalarValue:C5
+ ScalarValue:C1
+ BinaryOperator:/
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:
+ TextConstant:"% OF THE ORIGINAL"
+ CarriageControl:NL
+2340  PRINT "UNION:      "INT(100*(C6/C2)+.5)"% OF THE ORIGINAL"
+ ITEMS
+ TextConstant:"UNION:      "
+ CarriageControl:
+ NumericConstant:100
+ ScalarValue:C6
+ ScalarValue:C2
+ BinaryOperator:/
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:
+ TextConstant:"% OF THE ORIGINAL"
+ CarriageControl:NL
+2350  PRINT
+ ITEMS
+ CarriageControl:NL
+2360  REM - 1 WHO ONE
+ Remark:- 1 WHO ONE
+2370  IF U <> 1 THEN 2380
+ ScalarValue:U
+ NumericConstant:1
+ BinaryOperator:<>
+2375  IF U2=1 THEN 2460
+ ScalarValue:U2
+ NumericConstant:1
+ BinaryOperator:=
+2380  IF U=1 THEN 2420
+ ScalarValue:U
+ NumericConstant:1
+ BinaryOperator:=
+2390  IF U2=1 THEN 2440
+ ScalarValue:U2
+ NumericConstant:1
+ BinaryOperator:=
+2400  IF C5+E=C6+E2 THEN 2460
+ ScalarValue:C5
+ ScalarValue:E
+ BinaryOperator:+
+ ScalarValue:C6
+ ScalarValue:E2
+ BinaryOperator:+
+ BinaryOperator:=
+2410  IF C5+E<C6+E2 THEN 2440
+ ScalarValue:C5
+ ScalarValue:E
+ BinaryOperator:+
+ ScalarValue:C6
+ ScalarValue:E2
+ BinaryOperator:+
+ BinaryOperator:<
+2420  PRINT "THE UNION WINS "C$
+ ITEMS
+ TextConstant:"THE UNION WINS "
+ CarriageControl:
+ ScalarValue:C$
+ CarriageControl:NL
+2430  GOTO 2600
+ LineNumber:2600
+2440  PRINT "THE CONFEDERACY WINS "C$
+ ITEMS
+ TextConstant:"THE CONFEDERACY WINS "
+ CarriageControl:
+ ScalarValue:C$
+ CarriageControl:NL
+2450  GOTO 2660
+ LineNumber:2660
+2460  PRINT "BATTLE OUTCOME UNRESOLVED"
+ ITEMS
+ TextConstant:"BATTLE OUTCOME UNRESOLVED"
+ CarriageControl:NL
+2470  LET W0=W0+1
+ ScalarReference:W0
+ ScalarValue:W0
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+2480  IF A=0 THEN 2790
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+2490  GOTO 2680
+ LineNumber:2680
+2500  LET C6=INT(17*C2*C1/(C5*20))
+ ScalarReference:C6
+ NumericConstant:17
+ ScalarValue:C2
+ BinaryOperator:*
+ ScalarValue:C1
+ BinaryOperator:*
+ ScalarValue:C5
+ NumericConstant:20
+ BinaryOperator:*
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+2510  LET E2=5*O
+ ScalarReference:E2
+ NumericConstant:5
+ ScalarValue:O
+ BinaryOperator:*
+ AssignmentOperator:=
+2520  GOTO 2280
+ LineNumber:2280
+2530  PRINT "YOUR CASUALTIES WERE "INT(100*(C5/C1)+.5)"% OF "
+ ITEMS
+ TextConstant:"YOUR CASUALTIES WERE "
+ CarriageControl:
+ NumericConstant:100
+ ScalarValue:C5
+ ScalarValue:C1
+ BinaryOperator:/
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:
+ TextConstant:"% OF "
+ CarriageControl:NL
+2540  PRINT "THE ACTUAL CASUALTIES AT ";C$
+ ITEMS
+ TextConstant:"THE ACTUAL CASUALTIES AT "
+ CarriageControl:;
+ ScalarValue:C$
+ CarriageControl:NL
+2550  PRINT
+ ITEMS
+ CarriageControl:NL
+2560  REM - FIND WHO WON
+ Remark:- FIND WHO WON
+2570  IF U=1 THEN 2590
+ ScalarValue:U
+ NumericConstant:1
+ BinaryOperator:=
+2580  IF C5+E<17*C2*C1/(C5*20)+5*O THEN 2630
+ ScalarValue:C5
+ ScalarValue:E
+ BinaryOperator:+
+ NumericConstant:17
+ ScalarValue:C2
+ BinaryOperator:*
+ ScalarValue:C1
+ BinaryOperator:*
+ ScalarValue:C5
+ NumericConstant:20
+ BinaryOperator:*
+ BinaryOperator:/
+ NumericConstant:5
+ ScalarValue:O
+ BinaryOperator:*
+ BinaryOperator:+
+ BinaryOperator:<
+2590  PRINT "YOU LOSE ";C$
+ ITEMS
+ TextConstant:"YOU LOSE "
+ CarriageControl:;
+ ScalarValue:C$
+ CarriageControl:NL
+2600  IF A=0 THEN 2790
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+2610  LET L=L+1
+ ScalarReference:L
+ ScalarValue:L
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+2620  GOTO 2680
+ LineNumber:2680
+2630  PRINT "YOU WIN ";C$
+ ITEMS
+ TextConstant:"YOU WIN "
+ CarriageControl:;
+ ScalarValue:C$
+ CarriageControl:NL
+2640  REM - CUMULATIVE BATTLE FACTORS WHICH ALTER HISTORICAL
+ Remark:- CUMULATIVE BATTLE FACTORS WHICH ALTER HISTORICAL
+2650  REM  RESOURCES AVAILABLE.IF A REPLAY DON'T UPDATE.
+ Remark: RESOURCES AVAILABLE.IF A REPLAY DON'T UPDATE.
+2660  IF A=0 THEN 2790
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:=
+2670  LET W=W+1
+ ScalarReference:W
+ ScalarValue:W
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+2680  LET T1=T1+C5+E
+ ScalarReference:T1
+ ScalarValue:T1
+ ScalarValue:C5
+ BinaryOperator:+
+ ScalarValue:E
+ BinaryOperator:+
+ AssignmentOperator:=
+2690  LET T2=T2+C6+E2
+ ScalarReference:T2
+ ScalarValue:T2
+ ScalarValue:C6
+ BinaryOperator:+
+ ScalarValue:E2
+ BinaryOperator:+
+ AssignmentOperator:=
+2700  LET P1=P1+C1
+ ScalarReference:P1
+ ScalarValue:P1
+ ScalarValue:C1
+ BinaryOperator:+
+ AssignmentOperator:=
+2710  LET P2=P2+C2
+ ScalarReference:P2
+ ScalarValue:P2
+ ScalarValue:C2
+ BinaryOperator:+
+ AssignmentOperator:=
+2720  LET Q1=Q1+(F(1)+H(1)+B(1))
+ ScalarReference:Q1
+ ScalarValue:Q1
+ NumericConstant:1
+ ScalarValue:F
+ NumericConstant:1
+ ScalarValue:H
+ BinaryOperator:+
+ NumericConstant:1
+ ScalarValue:B
+ BinaryOperator:+
+ BinaryOperator:+
+ AssignmentOperator:=
+2730  LET Q2=Q2+(F(2)+H(2)+B(2))
+ ScalarReference:Q2
+ ScalarValue:Q2
+ NumericConstant:2
+ ScalarValue:F
+ NumericConstant:2
+ ScalarValue:H
+ BinaryOperator:+
+ NumericConstant:2
+ ScalarValue:B
+ BinaryOperator:+
+ BinaryOperator:+
+ AssignmentOperator:=
+2740  LET R1=R1+M1*(100-I1)/20
+ ScalarReference:R1
+ ScalarValue:R1
+ ScalarValue:M1
+ NumericConstant:100
+ ScalarValue:I1
+ BinaryOperator:-
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ BinaryOperator:+
+ AssignmentOperator:=
+2750  LET R2=R2+M2*(100-I2)/20
+ ScalarReference:R2
+ ScalarValue:R2
+ ScalarValue:M2
+ NumericConstant:100
+ ScalarValue:I2
+ BinaryOperator:-
+ BinaryOperator:*
+ NumericConstant:20
+ BinaryOperator:/
+ BinaryOperator:+
+ AssignmentOperator:=
+2760  LET M3=M3+M1
+ ScalarReference:M3
+ ScalarValue:M3
+ ScalarValue:M1
+ BinaryOperator:+
+ AssignmentOperator:=
+2770  LET M4=M4+M2
+ ScalarReference:M4
+ ScalarValue:M4
+ ScalarValue:M2
+ BinaryOperator:+
+ AssignmentOperator:=
+2780  GOSUB 3300
+ LineNumber:3300
+2790  U=0:U2=0
+ ScalarReference:U
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:U2
+ NumericConstant:0
+ AssignmentOperator:=
+2800  PRINT "---------------"
+ ITEMS
+ TextConstant:"---------------"
+ CarriageControl:NL
+2810  GOTO 620
+ LineNumber:620
+2820  REM------FINISH OFF
+ Remark:------FINISH OFF
+2830  PRINT "THE CONFEDERACY HAS SURRENDERED"
+ ITEMS
+ TextConstant:"THE CONFEDERACY HAS SURRENDERED"
+ CarriageControl:NL
+2840  GOTO 2860
+ LineNumber:2860
+2850  PRINT "THE UNION HAS SURRENDERED."
+ ITEMS
+ TextConstant:"THE UNION HAS SURRENDERED."
+ CarriageControl:NL
+2860  PRINT : PRINT : PRINT : PRINT : PRINT : PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+2870  PRINT "THE CONFEDERACY ";
+ ITEMS
+ TextConstant:"THE CONFEDERACY "
+ CarriageControl:;
+2880  PRINT "HAS WON "W" BATTLES AND LOST "L
+ ITEMS
+ TextConstant:"HAS WON "
+ CarriageControl:
+ ScalarValue:W
+ CarriageControl:
+ TextConstant:" BATTLES AND LOST "
+ CarriageControl:
+ ScalarValue:L
+ CarriageControl:NL
+2890  IF Y=5 THEN 2940
+ ScalarValue:Y
+ NumericConstant:5
+ BinaryOperator:=
+2900  IF Y2=5 THEN 2920
+ ScalarValue:Y2
+ NumericConstant:5
+ BinaryOperator:=
+2910  IF W <= L THEN 2940
+ ScalarValue:W
+ ScalarValue:L
+ BinaryOperator:<=
+2915  IF Y=5 THEN 2940
+ ScalarValue:Y
+ NumericConstant:5
+ BinaryOperator:=
+2920  PRINT "THE CONFEDERACY HAS WON THE WAR"
+ ITEMS
+ TextConstant:"THE CONFEDERACY HAS WON THE WAR"
+ CarriageControl:NL
+2930  GOTO 2950
+ LineNumber:2950
+2940  PRINT "THE UNION HAS WON THE WAR"
+ ITEMS
+ TextConstant:"THE UNION HAS WON THE WAR"
+ CarriageControl:NL
+2950  PRINT
+ ITEMS
+ CarriageControl:NL
+2960  IF R1=0 THEN 3100
+ ScalarValue:R1
+ NumericConstant:0
+ BinaryOperator:=
+2970  PRINT "FOR THE "W+L+W0" BATTLES FOUGHT (EXCUDING RERUNS)"
+ ITEMS
+ TextConstant:"FOR THE "
+ CarriageControl:
+ ScalarValue:W
+ ScalarValue:L
+ BinaryOperator:+
+ ScalarValue:W0
+ BinaryOperator:+
+ CarriageControl:
+ TextConstant:" BATTLES FOUGHT (EXCUDING RERUNS)"
+ CarriageControl:NL
+2980  PRINT " "," "," ";
+ ITEMS
+ TextConstant:" "
+ CarriageControl:,
+ TextConstant:" "
+ CarriageControl:,
+ TextConstant:" "
+ CarriageControl:;
+2990  PRINT "CONFEDERACY"," UNION"
+ ITEMS
+ TextConstant:"CONFEDERACY"
+ CarriageControl:,
+ TextConstant:" UNION"
+ CarriageControl:NL
+3000  PRINT "HISTORICAL LOSSES",INT(P1+.5),INT(P2+.5)
+ ITEMS
+ TextConstant:"HISTORICAL LOSSES"
+ CarriageControl:,
+ ScalarValue:P1
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:,
+ ScalarValue:P2
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:NL
+3010  PRINT "SIMULATED LOSSES",INT(T1+.5),INT(T2+.5)
+ ITEMS
+ TextConstant:"SIMULATED LOSSES"
+ CarriageControl:,
+ ScalarValue:T1
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:,
+ ScalarValue:T2
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:NL
+3020  PRINT
+ ITEMS
+ CarriageControl:NL
+3030  PRINT "    % OF ORIGINAL",INT(100*(T1/P1)+.5),INT(100*(T2/P2)+.5)
+ ITEMS
+ TextConstant:"    % OF ORIGINAL"
+ CarriageControl:,
+ NumericConstant:100
+ ScalarValue:T1
+ ScalarValue:P1
+ BinaryOperator:/
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:,
+ NumericConstant:100
+ ScalarValue:T2
+ ScalarValue:P2
+ BinaryOperator:/
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ CarriageControl:NL
+3040  IF B$="YES" THEN 3100
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:=
+3050  PRINT
+ ITEMS
+ CarriageControl:NL
+3060  PRINT "UNION INTELLIGENCE SUGGESTS THAT THE SOUTH USED "
+ ITEMS
+ TextConstant:"UNION INTELLIGENCE SUGGESTS THAT THE SOUTH USED "
+ CarriageControl:NL
+3070  PRINT "STRATEGIES 1, 2, 3, 4 IN THE FOLLOWING PERCENTAGES"
+ ITEMS
+ TextConstant:"STRATEGIES 1, 2, 3, 4 IN THE FOLLOWING PERCENTAGES"
+ CarriageControl:NL
+3080  PRINT S(1);S2(2);S(3);S(4)
+ ITEMS
+ NumericConstant:1
+ ScalarValue:S
+ CarriageControl:;
+ NumericConstant:2
+ ScalarValue:S2
+ CarriageControl:;
+ NumericConstant:3
+ ScalarValue:S
+ CarriageControl:;
+ NumericConstant:4
+ ScalarValue:S
+ CarriageControl:NL
+3090  REM---------------------------------
+ Remark:---------------------------------
+3100  STOP
+ 
+3110  REM - UNION STRATEGY IS COMPUTER CHOSEN
+ Remark:- UNION STRATEGY IS COMPUTER CHOSEN
+3120  PRINT "UNION STRATEGY IS ";
+ ITEMS
+ TextConstant:"UNION STRATEGY IS "
+ CarriageControl:;
+3130  IF A <> 0 THEN 3180
+ ScalarValue:A
+ NumericConstant:0
+ BinaryOperator:<>
+3140  INPUT Y2
+ ScalarReference:Y2
+3150  IF Y2 <=0 THEN 3160
+ ScalarValue:Y2
+ NumericConstant:0
+ BinaryOperator:<=
+3155  IF Y2<5 THEN 3290
+ ScalarValue:Y2
+ NumericConstant:5
+ BinaryOperator:<
+3160  PRINT "ENTER 1 , 2 ,3 , OR 4 (USUALLY PREVIOUS UNION STRATEGY)"
+ ITEMS
+ TextConstant:"ENTER 1 , 2 ,3 , OR 4 (USUALLY PREVIOUS UNION STRATEGY)"
+ CarriageControl:NL
+3170  GOTO 3140
+ LineNumber:3140
+3180  LET S0=0
+ ScalarReference:S0
+ NumericConstant:0
+ AssignmentOperator:=
+3190  LET R=100*RND(0)
+ ScalarReference:R
+ NumericConstant:100
+ NumericConstant:0
+ FunctionRnd
+ BinaryOperator:*
+ AssignmentOperator:=
+3200  FOR I=1 TO 4
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+3210  LET S0=S0+S(I)
+ ScalarReference:S0
+ ScalarValue:S0
+ ScalarValue:I
+ ScalarValue:S
+ BinaryOperator:+
+ AssignmentOperator:=
+3220  REM - IF ACTUAL STRATEGY INFO IS IN PROGRAM DATA STATEMENTS
+ Remark:- IF ACTUAL STRATEGY INFO IS IN PROGRAM DATA STATEMENTS
+3230  REM   THEN R-100 IS EXTRA WEIGHT GIVEN TO THAT STATEGY.
+ Remark:  THEN R-100 IS EXTRA WEIGHT GIVEN TO THAT STATEGY.
+3240  IF R<S0 THEN 3270
+ ScalarValue:R
+ ScalarValue:S0
+ BinaryOperator:<
+3250  NEXT I
+ VariableName:I
+3260  REM - IF ACTUAL STRAT. IN,THEN HERE IS Y2= HIST. STRAT.
+ Remark:- IF ACTUAL STRAT. IN,THEN HERE IS Y2= HIST. STRAT.
+3270  LET Y2=I
+ ScalarReference:Y2
+ ScalarValue:I
+ AssignmentOperator:=
+3280  PRINT Y2
+ ITEMS
+ ScalarValue:Y2
+ CarriageControl:NL
+3290  RETURN
+ 
+3300  REM LEARN  PRESENT STRATEGY, START FORGETTING OLD ONES
+ Remark:LEARN  PRESENT STRATEGY, START FORGETTING OLD ONES
+3310  REM - PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
+ Remark:- PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
+3320  REM   PROBABILITY POINTS, UNLESS A STRATEGY FALLS BELOW 5%.
+ Remark:  PROBABILITY POINTS, UNLESS A STRATEGY FALLS BELOW 5%.
+3330  LET S=3
+ ScalarReference:S
+ NumericConstant:3
+ AssignmentOperator:=
+3340  LET S0=0
+ ScalarReference:S0
+ NumericConstant:0
+ AssignmentOperator:=
+3350  FOR I=1 TO 4
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+3360  IF S(I) <= 5 THEN 3390
+ ScalarValue:I
+ ScalarValue:S
+ NumericConstant:5
+ BinaryOperator:<=
+3370  LET S(I)=S(I)-S
+ ScalarValue:I
+ ScalarReference:S
+ ScalarValue:I
+ ScalarValue:S
+ ScalarValue:S
+ BinaryOperator:-
+ AssignmentOperator:=
+3380  LET S0=S0+S
+ ScalarReference:S0
+ ScalarValue:S0
+ ScalarValue:S
+ BinaryOperator:+
+ AssignmentOperator:=
+3390  NEXT I
+ VariableName:I
+3400  LET S(Y)=S(Y)+S0
+ ScalarValue:Y
+ ScalarReference:S
+ ScalarValue:Y
+ ScalarValue:S
+ ScalarValue:S0
+ BinaryOperator:+
+ AssignmentOperator:=
+3410  RETURN
+ 
+3420  REM - HISTORICAL DATA...CAN ADD MORE (STRAT.,ETC) BY INSERTING
+ Remark:- HISTORICAL DATA...CAN ADD MORE (STRAT.,ETC) BY INSERTING
+3430  REM   DATA STATEMENTS AFTER APPRO. INFO, AND ADJUSTING READ
+ Remark:  DATA STATEMENTS AFTER APPRO. INFO, AND ADJUSTING READ
+3440  DATA "BULL RUN",18000,18500,1967,2708,1
+ TextConstant:"BULL RUN"
+ NumericConstant:18000
+ NumericConstant:18500
+ NumericConstant:1967
+ NumericConstant:2708
+ NumericConstant:1
+3450  DATA "SHILOH",40000.,44894.,10699,13047,3
+ TextConstant:"SHILOH"
+ NumericConstant:40000.
+ NumericConstant:44894.
+ NumericConstant:10699
+ NumericConstant:13047
+ NumericConstant:3
+3460  DATA "SEVEN DAYS",95000.,115000.,20614,15849,3
+ TextConstant:"SEVEN DAYS"
+ NumericConstant:95000.
+ NumericConstant:115000.
+ NumericConstant:20614
+ NumericConstant:15849
+ NumericConstant:3
+3470  DATA "SECOND BULL RUN",54000.,63000.,10000,14000,2
+ TextConstant:"SECOND BULL RUN"
+ NumericConstant:54000.
+ NumericConstant:63000.
+ NumericConstant:10000
+ NumericConstant:14000
+ NumericConstant:2
+3480  DATA "ANTIETAM",40000.,50000.,10000,12000,3
+ TextConstant:"ANTIETAM"
+ NumericConstant:40000.
+ NumericConstant:50000.
+ NumericConstant:10000
+ NumericConstant:12000
+ NumericConstant:3
+3490  DATA "FREDERICKSBURG",75000.,120000.,5377,12653,1
+ TextConstant:"FREDERICKSBURG"
+ NumericConstant:75000.
+ NumericConstant:120000.
+ NumericConstant:5377
+ NumericConstant:12653
+ NumericConstant:1
+3500  DATA "MURFREESBORO",38000.,45000.,11000,12000,1
+ TextConstant:"MURFREESBORO"
+ NumericConstant:38000.
+ NumericConstant:45000.
+ NumericConstant:11000
+ NumericConstant:12000
+ NumericConstant:1
+3510  DATA "CHANCELLORSVILLE",32000,90000.,13000,17197,2
+ TextConstant:"CHANCELLORSVILLE"
+ NumericConstant:32000
+ NumericConstant:90000.
+ NumericConstant:13000
+ NumericConstant:17197
+ NumericConstant:2
+3520  DATA "VICKSBURG",50000.,70000.,12000,19000,1
+ TextConstant:"VICKSBURG"
+ NumericConstant:50000.
+ NumericConstant:70000.
+ NumericConstant:12000
+ NumericConstant:19000
+ NumericConstant:1
+3530  DATA "GETTYSBURG",72500.,85000.,20000,23000,3
+ TextConstant:"GETTYSBURG"
+ NumericConstant:72500.
+ NumericConstant:85000.
+ NumericConstant:20000
+ NumericConstant:23000
+ NumericConstant:3
+3540  DATA "CHICKAMAUGA",66000.,60000.,18000,16000,2
+ TextConstant:"CHICKAMAUGA"
+ NumericConstant:66000.
+ NumericConstant:60000.
+ NumericConstant:18000
+ NumericConstant:16000
+ NumericConstant:2
+3550  DATA "CHATTANOOGA",37000.,60000.,36700.,5800,2
+ TextConstant:"CHATTANOOGA"
+ NumericConstant:37000.
+ NumericConstant:60000.
+ NumericConstant:36700.
+ NumericConstant:5800
+ NumericConstant:2
+3560  DATA "SPOTSYLVANIA",62000.,110000.,17723,18000,2
+ TextConstant:"SPOTSYLVANIA"
+ NumericConstant:62000.
+ NumericConstant:110000.
+ NumericConstant:17723
+ NumericConstant:18000
+ NumericConstant:2
+3570  DATA "ATLANTA",65000.,100000.,8500,3700,1
+ TextConstant:"ATLANTA"
+ NumericConstant:65000.
+ NumericConstant:100000.
+ NumericConstant:8500
+ NumericConstant:3700
+ NumericConstant:1
+3580  PRINT "JULY 21, 1861.  GEN. BEAUREGARD, COMMANDING THE SOUTH, MET"
+ ITEMS
+ TextConstant:"JULY 21, 1861.  GEN. BEAUREGARD, COMMANDING THE SOUTH, MET"
+ CarriageControl:NL
+3590  PRINT "UNION FORCES WITH GEN. MCDOWELL IN A PREMATURE BATTLE AT"
+ ITEMS
+ TextConstant:"UNION FORCES WITH GEN. MCDOWELL IN A PREMATURE BATTLE AT"
+ CarriageControl:NL
+3600  PRINT "BULL RUN. GEN. JACKSON HELPED PUSH BACK THE UNION ATTACK."
+ ITEMS
+ TextConstant:"BULL RUN. GEN. JACKSON HELPED PUSH BACK THE UNION ATTACK."
+ CarriageControl:NL
+3610  GOTO 1150
+ LineNumber:1150
+3620  PRINT "APRIL 6-7, 1862.  THE CONFEDERATE SURPRISE ATTACK AT"
+ ITEMS
+ TextConstant:"APRIL 6-7, 1862.  THE CONFEDERATE SURPRISE ATTACK AT"
+ CarriageControl:NL
+3630  PRINT "SHILOH FAILED DUE TO POOR ORGANIZATION."
+ ITEMS
+ TextConstant:"SHILOH FAILED DUE TO POOR ORGANIZATION."
+ CarriageControl:NL
+3640  GOTO 1150
+ LineNumber:1150
+3650  PRINT "JUNE 25-JULY 1, 1862.  GENERAL LEE (CSA) UPHELD THE"
+ ITEMS
+ TextConstant:"JUNE 25-JULY 1, 1862.  GENERAL LEE (CSA) UPHELD THE"
+ CarriageControl:NL
+3660  PRINT "OFFENSIVE THROUGHOUT THE BATTLE AND FORCED GEN. MCCLELLAN"
+ ITEMS
+ TextConstant:"OFFENSIVE THROUGHOUT THE BATTLE AND FORCED GEN. MCCLELLAN"
+ CarriageControl:NL
+3670  PRINT "AND THE UNION FORCES AWAY FROM RICHMOND."
+ ITEMS
+ TextConstant:"AND THE UNION FORCES AWAY FROM RICHMOND."
+ CarriageControl:NL
+3680  GOTO 1150
+ LineNumber:1150
+3690  PRINT "AUG 29-30, 1862.  THE COMBINED CONFEDERATE FORCES UNDER";
+ ITEMS
+ TextConstant:"AUG 29-30, 1862.  THE COMBINED CONFEDERATE FORCES UNDER"
+ CarriageControl:;
+3695  PRINT " LEE"
+ ITEMS
+ TextConstant:" LEE"
+ CarriageControl:NL
+3700  PRINT "AND JACKSON DROVE THE UNION FORCES BACK INTO WASHINGTON."
+ ITEMS
+ TextConstant:"AND JACKSON DROVE THE UNION FORCES BACK INTO WASHINGTON."
+ CarriageControl:NL
+3710  GOTO 1150
+ LineNumber:1150
+3720  PRINT "SEPT 17, 1862.  THE SOUTH FAILED TO INCORPORATE MARYLAND"
+ ITEMS
+ TextConstant:"SEPT 17, 1862.  THE SOUTH FAILED TO INCORPORATE MARYLAND"
+ CarriageControl:NL
+3730  PRINT "INTO THE CONFEDERACY."
+ ITEMS
+ TextConstant:"INTO THE CONFEDERACY."
+ CarriageControl:NL
+3740  GOTO 1150
+ LineNumber:1150
+3750  PRINT "DEC 13, 1862.  THE CONFEDERACY UNDER LEE SUCCESSFULLY"
+ ITEMS
+ TextConstant:"DEC 13, 1862.  THE CONFEDERACY UNDER LEE SUCCESSFULLY"
+ CarriageControl:NL
+3760  PRINT "REPULSED AN ATTACK BY THE UNION UNDER GEN. BURNSIDE."
+ ITEMS
+ TextConstant:"REPULSED AN ATTACK BY THE UNION UNDER GEN. BURNSIDE."
+ CarriageControl:NL
+3770  GOTO 1150
+ LineNumber:1150
+3780  PRINT "DEC 31, 1862.  THE SOUTH UNDER GEN. BRAGG WON A CLOSE ";
+ ITEMS
+ TextConstant:"DEC 31, 1862.  THE SOUTH UNDER GEN. BRAGG WON A CLOSE "
+ CarriageControl:;
+3785  PRINT "BATTLE."
+ ITEMS
+ TextConstant:"BATTLE."
+ CarriageControl:NL
+3790  GOTO 1150
+ LineNumber:1150
+3800  PRINT "MAY 1-6, 1863.  THE SOUTH HAD A COSTLY VICTORY AND LOST"
+ ITEMS
+ TextConstant:"MAY 1-6, 1863.  THE SOUTH HAD A COSTLY VICTORY AND LOST"
+ CarriageControl:NL
+3810  PRINT "ONE OF THEIR OUTSTANDING GENERALS, 'STONEWALL' JACKSON."
+ ITEMS
+ TextConstant:"ONE OF THEIR OUTSTANDING GENERALS, 'STONEWALL' JACKSON."
+ CarriageControl:NL
+3820  GOTO 1150
+ LineNumber:1150
+3830  PRINT "JULY 4, 1863.  VICKSBURG WAS A COSTLY DEFEAT FOR THE SOUTH"
+ ITEMS
+ TextConstant:"JULY 4, 1863.  VICKSBURG WAS A COSTLY DEFEAT FOR THE SOUTH"
+ CarriageControl:NL
+3840  PRINT "BECAUSE IT GAVE THE UNION ACCESS TO THE MISSISSIPPI."
+ ITEMS
+ TextConstant:"BECAUSE IT GAVE THE UNION ACCESS TO THE MISSISSIPPI."
+ CarriageControl:NL
+3850  GOTO 1150
+ LineNumber:1150
+3860  PRINT "JULY 1-3, 1863.  A SOUTHERN MISTAKE BY GEN. LEE AT ";
+ ITEMS
+ TextConstant:"JULY 1-3, 1863.  A SOUTHERN MISTAKE BY GEN. LEE AT "
+ CarriageControl:;
+3865  PRINT "GETTYSBURG"
+ ITEMS
+ TextConstant:"GETTYSBURG"
+ CarriageControl:NL
+3870  PRINT "COST THEM ONE OF THE MOST CRUCIAL BATTLES OF THE WAR."
+ ITEMS
+ TextConstant:"COST THEM ONE OF THE MOST CRUCIAL BATTLES OF THE WAR."
+ CarriageControl:NL
+3880  GOTO 1150
+ LineNumber:1150
+3890  PRINT "SEPT. 15, 1863. CONFUSION IN A FOREST NEAR CHICKAMAUGA LED"
+ ITEMS
+ TextConstant:"SEPT. 15, 1863. CONFUSION IN A FOREST NEAR CHICKAMAUGA LED"
+ CarriageControl:NL
+3900  PRINT "TO A COSTLY SOUTHERN VICTORY."
+ ITEMS
+ TextConstant:"TO A COSTLY SOUTHERN VICTORY."
+ CarriageControl:NL
+3910  GOTO 1150
+ LineNumber:1150
+3920  PRINT "NOV. 25, 1863. AFTER THE SOUTH HAD SIEGED GEN. ROSENCRANS'"
+ ITEMS
+ TextConstant:"NOV. 25, 1863. AFTER THE SOUTH HAD SIEGED GEN. ROSENCRANS'"
+ CarriageControl:NL
+3930  PRINT "ARMY FOR THREE MONTHS, GEN. GRANT BROKE THE SIEGE."
+ ITEMS
+ TextConstant:"ARMY FOR THREE MONTHS, GEN. GRANT BROKE THE SIEGE."
+ CarriageControl:NL
+3940  GOTO 1150
+ LineNumber:1150
+3950  PRINT "MAY 5, 1864.  GRANT'S PLAN TO KEEP LEE ISOLATED BEGAN TO"
+ ITEMS
+ TextConstant:"MAY 5, 1864.  GRANT'S PLAN TO KEEP LEE ISOLATED BEGAN TO"
+ CarriageControl:NL
+3960  PRINT "FAIL HERE, AND CONTINUED AT COLD HARBOR AND PETERSBURG."
+ ITEMS
+ TextConstant:"FAIL HERE, AND CONTINUED AT COLD HARBOR AND PETERSBURG."
+ CarriageControl:NL
+3970  GOTO 1150
+ LineNumber:1150
+3980  PRINT "AUGUST, 1864.  SHERMAN AND THREE VETERAN ARMIES CONVERGED"
+ ITEMS
+ TextConstant:"AUGUST, 1864.  SHERMAN AND THREE VETERAN ARMIES CONVERGED"
+ CarriageControl:NL
+3990  PRINT "ON ATLANTA AND DEALT THE DEATH BLOW TO THE CONFEDERACY."
+ ITEMS
+ TextConstant:"ON ATLANTA AND DEALT THE DEATH BLOW TO THE CONFEDERACY."
+ CarriageControl:NL
+4000  GOTO 1150
+ LineNumber:1150
+4010  END
+ 

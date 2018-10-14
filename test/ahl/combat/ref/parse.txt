@@ -1,0 +1,625 @@
+1 PRINT TAB(33);"COMBAT"
+ ITEMS
+ NumericConstant:33
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"COMBAT"
+ CarriageControl:NL
+2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+3 PRINT: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+4 PRINT "I AM AT WAR WITH YOU.": PRINT "WE HAVE 72000 SOLDIERS APIECE."
+ ITEMS
+ TextConstant:"I AM AT WAR WITH YOU."
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"WE HAVE 72000 SOLDIERS APIECE."
+ CarriageControl:NL
+5 PRINT:PRINT "DISTRIBUTE YOUR FORCES."
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"DISTRIBUTE YOUR FORCES."
+ CarriageControl:NL
+6 PRINT ,"ME","  YOU"
+ ITEMS
+ CarriageControl:,
+ TextConstant:"ME"
+ CarriageControl:,
+ TextConstant:"  YOU"
+ CarriageControl:NL
+7 PRINT "ARMY",30000,
+ ITEMS
+ TextConstant:"ARMY"
+ CarriageControl:,
+ NumericConstant:30000
+ CarriageControl:,
+8 INPUT A
+ ScalarReference:A
+9 PRINT "NAVY",20000,
+ ITEMS
+ TextConstant:"NAVY"
+ CarriageControl:,
+ NumericConstant:20000
+ CarriageControl:,
+10 INPUT B
+ ScalarReference:B
+11 PRINT "A. F.",22000,
+ ITEMS
+ TextConstant:"A. F."
+ CarriageControl:,
+ NumericConstant:22000
+ CarriageControl:,
+12 INPUT C
+ ScalarReference:C
+13 IF A+B+C>72000 THEN 5
+ ScalarValue:A
+ ScalarValue:B
+ BinaryOperator:+
+ ScalarValue:C
+ BinaryOperator:+
+ NumericConstant:72000
+ BinaryOperator:>
+14 D=30000
+ ScalarReference:D
+ NumericConstant:30000
+ AssignmentOperator:=
+15 E=20000
+ ScalarReference:E
+ NumericConstant:20000
+ AssignmentOperator:=
+16 F=22000
+ ScalarReference:F
+ NumericConstant:22000
+ AssignmentOperator:=
+17 PRINT "YOU ATTACK FIRST. TYPE (1) FOR ARMY; (2) FOR NAVY;"
+ ITEMS
+ TextConstant:"YOU ATTACK FIRST. TYPE (1) FOR ARMY; (2) FOR NAVY;"
+ CarriageControl:NL
+18 PRINT "AND (3) FOR AIR FORCE."
+ ITEMS
+ TextConstant:"AND (3) FOR AIR FORCE."
+ CarriageControl:NL
+19 INPUT Y
+ ScalarReference:Y
+20 PRINT "HOW MANY MEN"
+ ITEMS
+ TextConstant:"HOW MANY MEN"
+ CarriageControl:NL
+21 INPUT X
+ ScalarReference:X
+22 IF X<0 THEN 20
+ ScalarValue:X
+ NumericConstant:0
+ BinaryOperator:<
+23 ON Y GOTO 100,200,300
+ ScalarValue:Y
+ LineNumber:100
+ LineNumber:200
+ LineNumber:300
+100 IF X>A THEN 20
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:>
+105 IF X<A/3 THEN 120
+ ScalarValue:X
+ ScalarValue:A
+ NumericConstant:3
+ BinaryOperator:/
+ BinaryOperator:<
+110 IF X<2*A/3 THEN 150
+ ScalarValue:X
+ NumericConstant:2
+ ScalarValue:A
+ BinaryOperator:*
+ NumericConstant:3
+ BinaryOperator:/
+ BinaryOperator:<
+115 GOTO 270
+ LineNumber:270
+120 PRINT "YOU LOST";X;"MEN FROM YOUR ARMY."
+ ITEMS
+ TextConstant:"YOU LOST"
+ CarriageControl:;
+ ScalarValue:X
+ CarriageControl:;
+ TextConstant:"MEN FROM YOUR ARMY."
+ CarriageControl:NL
+125 A=INT(A-X)
+ ScalarReference:A
+ ScalarValue:A
+ ScalarValue:X
+ BinaryOperator:-
+ FunctionInt
+ AssignmentOperator:=
+130 GOTO 500
+ LineNumber:500
+150 PRINT "YOU LOST";INT(X/3);"MEN, BUT I LOST ";INT(2*D/3)
+ ITEMS
+ TextConstant:"YOU LOST"
+ CarriageControl:;
+ ScalarValue:X
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ CarriageControl:;
+ TextConstant:"MEN, BUT I LOST "
+ CarriageControl:;
+ NumericConstant:2
+ ScalarValue:D
+ BinaryOperator:*
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ CarriageControl:NL
+155 A=INT(A-X/3)
+ ScalarReference:A
+ ScalarValue:A
+ ScalarValue:X
+ NumericConstant:3
+ BinaryOperator:/
+ BinaryOperator:-
+ FunctionInt
+ AssignmentOperator:=
+160 D=0
+ ScalarReference:D
+ NumericConstant:0
+ AssignmentOperator:=
+165 GOTO 500 
+ LineNumber:500
+200 IF X>B THEN 20
+ ScalarValue:X
+ ScalarValue:B
+ BinaryOperator:>
+210 IF X<E/3 THEN 230
+ ScalarValue:X
+ ScalarValue:E
+ NumericConstant:3
+ BinaryOperator:/
+ BinaryOperator:<
+215 IF X<2*E/3 THEN 250
+ ScalarValue:X
+ NumericConstant:2
+ ScalarValue:E
+ BinaryOperator:*
+ NumericConstant:3
+ BinaryOperator:/
+ BinaryOperator:<
+220 GOTO 270
+ LineNumber:270
+230 PRINT "YOUR ATTACK WAS STOPPED!"
+ ITEMS
+ TextConstant:"YOUR ATTACK WAS STOPPED!"
+ CarriageControl:NL
+232 B=INT(B-X)
+ ScalarReference:B
+ ScalarValue:B
+ ScalarValue:X
+ BinaryOperator:-
+ FunctionInt
+ AssignmentOperator:=
+235 GOTO 500
+ LineNumber:500
+250 PRINT "YOU DESTROYED";INT(2*E/3);"OF MY ARMY."
+ ITEMS
+ TextConstant:"YOU DESTROYED"
+ CarriageControl:;
+ NumericConstant:2
+ ScalarValue:E
+ BinaryOperator:*
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ CarriageControl:;
+ TextConstant:"OF MY ARMY."
+ CarriageControl:NL
+255 E=INT(E/3)
+ ScalarReference:E
+ ScalarValue:E
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+260 GOTO 500
+ LineNumber:500
+270 PRINT "YOU SUNK ONE OF MY PATROL BOATS, BUT I WIPED OUT TWO"
+ ITEMS
+ TextConstant:"YOU SUNK ONE OF MY PATROL BOATS, BUT I WIPED OUT TWO"
+ CarriageControl:NL
+275 PRINT "OF YOUR AIR FORCE BASES AND 3 ARMY BASES."
+ ITEMS
+ TextConstant:"OF YOUR AIR FORCE BASES AND 3 ARMY BASES."
+ CarriageControl:NL
+280 A=INT(A/3)
+ ScalarReference:A
+ ScalarValue:A
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+285 C=INT(C/3)
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+290 E=INT(2*E/3)
+ ScalarReference:E
+ NumericConstant:2
+ ScalarValue:E
+ BinaryOperator:*
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+293 GOTO 500
+ LineNumber:500
+300 IF X>C THEN 20
+ ScalarValue:X
+ ScalarValue:C
+ BinaryOperator:>
+310 IF X<C/3 THEN 350
+ ScalarValue:X
+ ScalarValue:C
+ NumericConstant:3
+ BinaryOperator:/
+ BinaryOperator:<
+320 IF X<2*C/3 THEN 370
+ ScalarValue:X
+ NumericConstant:2
+ ScalarValue:C
+ BinaryOperator:*
+ NumericConstant:3
+ BinaryOperator:/
+ BinaryOperator:<
+330 GOTO 380
+ LineNumber:380
+350 PRINT "YOUR ATTACK WAS WIPED OUT."
+ ITEMS
+ TextConstant:"YOUR ATTACK WAS WIPED OUT."
+ CarriageControl:NL
+355 C=INT(C-X)
+ ScalarReference:C
+ ScalarValue:C
+ ScalarValue:X
+ BinaryOperator:-
+ FunctionInt
+ AssignmentOperator:=
+360 GOTO 500
+ LineNumber:500
+370 PRINT "WE HAD A DOGFIGHT. YOU WON - AND FINISHED YOUR MISSION."
+ ITEMS
+ TextConstant:"WE HAD A DOGFIGHT. YOU WON - AND FINISHED YOUR MISSION."
+ CarriageControl:NL
+375 D=INT(2*D/3)
+ ScalarReference:D
+ NumericConstant:2
+ ScalarValue:D
+ BinaryOperator:*
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+377 E=INT(E/3)
+ ScalarReference:E
+ ScalarValue:E
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+378 F=INT(F/3)
+ ScalarReference:F
+ ScalarValue:F
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+379 GOTO 500
+ LineNumber:500
+380 PRINT "YOU WIPED OUT ONE OF MY ARMY PATROLS, BUT I DESTROYED"
+ ITEMS
+ TextConstant:"YOU WIPED OUT ONE OF MY ARMY PATROLS, BUT I DESTROYED"
+ CarriageControl:NL
+381 PRINT "TWO NAVY BASES AND BOMBED THREE ARMY BASES."
+ ITEMS
+ TextConstant:"TWO NAVY BASES AND BOMBED THREE ARMY BASES."
+ CarriageControl:NL
+385 A=INT(A/4)
+ ScalarReference:A
+ ScalarValue:A
+ NumericConstant:4
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+387 B=INT(B/3)
+ ScalarReference:B
+ ScalarValue:B
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+390 D=INT(2*D/3)
+ ScalarReference:D
+ NumericConstant:2
+ ScalarValue:D
+ BinaryOperator:*
+ NumericConstant:3
+ BinaryOperator:/
+ FunctionInt
+ AssignmentOperator:=
+500 PRINT
+ ITEMS
+ CarriageControl:NL
+501 PRINT,"YOU","ME"
+ ITEMS
+ CarriageControl:,
+ TextConstant:"YOU"
+ CarriageControl:,
+ TextConstant:"ME"
+ CarriageControl:NL
+510 PRINT "ARMY",A,D
+ ITEMS
+ TextConstant:"ARMY"
+ CarriageControl:,
+ ScalarValue:A
+ CarriageControl:,
+ ScalarValue:D
+ CarriageControl:NL
+520 PRINT "NAVY",B,E
+ ITEMS
+ TextConstant:"NAVY"
+ CarriageControl:,
+ ScalarValue:B
+ CarriageControl:,
+ ScalarValue:E
+ CarriageControl:NL
+530 PRINT "A. F.",C,F
+ ITEMS
+ TextConstant:"A. F."
+ CarriageControl:,
+ ScalarValue:C
+ CarriageControl:,
+ ScalarValue:F
+ CarriageControl:NL
+1000 PRINT "WHAT IS YOUR NEXT MOVE?"
+ ITEMS
+ TextConstant:"WHAT IS YOUR NEXT MOVE?"
+ CarriageControl:NL
+1010 PRINT "ARMY=1  NAVY=2  AIR FORCE=3"
+ ITEMS
+ TextConstant:"ARMY=1  NAVY=2  AIR FORCE=3"
+ CarriageControl:NL
+1020 INPUT G
+ ScalarReference:G
+1030 PRINT "HOW MANY MEN"
+ ITEMS
+ TextConstant:"HOW MANY MEN"
+ CarriageControl:NL
+1040 INPUT T
+ ScalarReference:T
+1045 IF T<0 THEN 1030
+ ScalarValue:T
+ NumericConstant:0
+ BinaryOperator:<
+1050 ON G GOTO 1600,1700,1800
+ ScalarValue:G
+ LineNumber:1600
+ LineNumber:1700
+ LineNumber:1800
+1600 IF T>A THEN 1030
+ ScalarValue:T
+ ScalarValue:A
+ BinaryOperator:>
+1610 IF T<D/2 THEN 1630
+ ScalarValue:T
+ ScalarValue:D
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:<
+1615 PRINT "YOU DESTROYED MY ARMY!"
+ ITEMS
+ TextConstant:"YOU DESTROYED MY ARMY!"
+ CarriageControl:NL
+1616 D=0
+ ScalarReference:D
+ NumericConstant:0
+ AssignmentOperator:=
+1617 GOTO 2000
+ LineNumber:2000
+1630 PRINT "I WIPED OUT YOUR ATTACK!"
+ ITEMS
+ TextConstant:"I WIPED OUT YOUR ATTACK!"
+ CarriageControl:NL
+1635 A=A-T
+ ScalarReference:A
+ ScalarValue:A
+ ScalarValue:T
+ BinaryOperator:-
+ AssignmentOperator:=
+1640 GOTO 2000
+ LineNumber:2000
+1700 IF T>B THEN 1030 
+ ScalarValue:T
+ ScalarValue:B
+ BinaryOperator:>
+1710 IF T<E/2 THEN 1750
+ ScalarValue:T
+ ScalarValue:E
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:<
+1720 GOTO 1770
+ LineNumber:1770
+1750 PRINT "I SUNK TWO OF YOUR BATTLESHIPS, AND MY AIR FORCE"
+ ITEMS
+ TextConstant:"I SUNK TWO OF YOUR BATTLESHIPS, AND MY AIR FORCE"
+ CarriageControl:NL
+1751 PRINT "WIPED OUT YOUR UNGAURDED CAPITOL."
+ ITEMS
+ TextConstant:"WIPED OUT YOUR UNGAURDED CAPITOL."
+ CarriageControl:NL
+1755 A=A/4
+ ScalarReference:A
+ ScalarValue:A
+ NumericConstant:4
+ BinaryOperator:/
+ AssignmentOperator:=
+1760 B=B/2
+ ScalarReference:B
+ ScalarValue:B
+ NumericConstant:2
+ BinaryOperator:/
+ AssignmentOperator:=
+1765 GOTO 2000
+ LineNumber:2000
+1770 PRINT "YOUR NAVY SHOT DOWN THREE OF MY XIII PLANES,"
+ ITEMS
+ TextConstant:"YOUR NAVY SHOT DOWN THREE OF MY XIII PLANES,"
+ CarriageControl:NL
+1771 PRINT "AND SUNK THREE BATTLESHIPS."
+ ITEMS
+ TextConstant:"AND SUNK THREE BATTLESHIPS."
+ CarriageControl:NL
+1775 F=2*F/3
+ ScalarReference:F
+ NumericConstant:2
+ ScalarValue:F
+ BinaryOperator:*
+ NumericConstant:3
+ BinaryOperator:/
+ AssignmentOperator:=
+1780 E=(E/2)
+ ScalarReference:E
+ ScalarValue:E
+ NumericConstant:2
+ BinaryOperator:/
+ AssignmentOperator:=
+1790 GOTO 2000
+ LineNumber:2000
+1800 IF T>C THEN 1030 
+ ScalarValue:T
+ ScalarValue:C
+ BinaryOperator:>
+1810 IF T>F/2 THEN 1830 
+ ScalarValue:T
+ ScalarValue:F
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:>
+1820 GOTO 1850
+ LineNumber:1850
+1830 PRINT "MY NAVY AND AIR FORCE IN A COMBINED ATTACK LEFT"
+ ITEMS
+ TextConstant:"MY NAVY AND AIR FORCE IN A COMBINED ATTACK LEFT"
+ CarriageControl:NL
+1831 PRINT "YOUR COUNTRY IN SHAMBLES."
+ ITEMS
+ TextConstant:"YOUR COUNTRY IN SHAMBLES."
+ CarriageControl:NL
+1835 A=A/3
+ ScalarReference:A
+ ScalarValue:A
+ NumericConstant:3
+ BinaryOperator:/
+ AssignmentOperator:=
+1837 B=B/3
+ ScalarReference:B
+ ScalarValue:B
+ NumericConstant:3
+ BinaryOperator:/
+ AssignmentOperator:=
+1840 C=C/3
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:3
+ BinaryOperator:/
+ AssignmentOperator:=
+1845 GOTO 2000
+ LineNumber:2000
+1850 PRINT "ONE OF YOUR PLANES CRASHED INTO MY HOUSE. I AM DEAD."
+ ITEMS
+ TextConstant:"ONE OF YOUR PLANES CRASHED INTO MY HOUSE. I AM DEAD."
+ CarriageControl:NL
+1851 PRINT "MY COUNTRY FELL APART."
+ ITEMS
+ TextConstant:"MY COUNTRY FELL APART."
+ CarriageControl:NL
+1860 GOTO 2010
+ LineNumber:2010
+2000 PRINT
+ ITEMS
+ CarriageControl:NL
+2001 PRINT "FROM THE RESULTS OF BOTH OF YOUR ATTACKS,"
+ ITEMS
+ TextConstant:"FROM THE RESULTS OF BOTH OF YOUR ATTACKS,"
+ CarriageControl:NL
+2002 IF A+B+C>3/2*(D+E+F) THEN 2010
+ ScalarValue:A
+ ScalarValue:B
+ BinaryOperator:+
+ ScalarValue:C
+ BinaryOperator:+
+ NumericConstant:3
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:D
+ ScalarValue:E
+ BinaryOperator:+
+ ScalarValue:F
+ BinaryOperator:+
+ BinaryOperator:*
+ BinaryOperator:>
+2005 IF A+B+C<2/3*(D+E+F) THEN 2015
+ ScalarValue:A
+ ScalarValue:B
+ BinaryOperator:+
+ ScalarValue:C
+ BinaryOperator:+
+ NumericConstant:2
+ NumericConstant:3
+ BinaryOperator:/
+ ScalarValue:D
+ ScalarValue:E
+ BinaryOperator:+
+ ScalarValue:F
+ BinaryOperator:+
+ BinaryOperator:*
+ BinaryOperator:<
+2006 PRINT "THE TREATY OF PARIS CONCLUDED THAT WE TAKE OUR"
+ ITEMS
+ TextConstant:"THE TREATY OF PARIS CONCLUDED THAT WE TAKE OUR"
+ CarriageControl:NL
+2007 PRINT "RESPECTIVE COUNTRIES AND LIVE IN PEACE."
+ ITEMS
+ TextConstant:"RESPECTIVE COUNTRIES AND LIVE IN PEACE."
+ CarriageControl:NL
+2008 GOTO 2020
+ LineNumber:2020
+2010 PRINT "YOU WON, OH! SHUCKS!!!!"
+ ITEMS
+ TextConstant:"YOU WON, OH! SHUCKS!!!!"
+ CarriageControl:NL
+2012 GOTO 2020
+ LineNumber:2020
+2015 PRINT "YOU LOST-I CONQUERED YOUR COUNTRY.  IT SERVES YOU"
+ ITEMS
+ TextConstant:"YOU LOST-I CONQUERED YOUR COUNTRY.  IT SERVES YOU"
+ CarriageControl:NL
+2016 PRINT "RIGHT FOR PLAYING THIS STUPID GAME!!!"
+ ITEMS
+ TextConstant:"RIGHT FOR PLAYING THIS STUPID GAME!!!"
+ CarriageControl:NL
+2020 END
+ 

@@ -1,0 +1,860 @@
+1 DIM F(4) 
+ NumericConstant:4
+ CompoundDeclaration:F
+2 PRINT TAB(31);"FUR TRADER"
+ ITEMS
+ NumericConstant:31
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"FUR TRADER"
+ CarriageControl:NL
+4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ ITEMS
+ NumericConstant:15
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ CarriageControl:NL
+6 PRINT: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+15 GOSUB 1091 
+ LineNumber:1091
+16 LET I=600
+ ScalarReference:I
+ NumericConstant:600
+ AssignmentOperator:=
+17 PRINT "DO YOU WISH TO TRADE FURS?"
+ ITEMS
+ TextConstant:"DO YOU WISH TO TRADE FURS?"
+ CarriageControl:NL
+18 GOSUB 1402 
+ LineNumber:1402
+19 IF B$="YES" THEN 100
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:=
+20 IF B$="YES " THEN 100
+ ScalarValue:B$
+ TextConstant:"YES "
+ BinaryOperator:=
+21 STOP
+ 
+100 PRINT
+ ITEMS
+ CarriageControl:NL
+101 PRINT "YOU HAVE $";I " SAVINGS."
+ ITEMS
+ TextConstant:"YOU HAVE $"
+ CarriageControl:;
+ ScalarValue:I
+ CarriageControl:
+ TextConstant:" SAVINGS."
+ CarriageControl:NL
+102 PRINT "AND 190 FURS TO BEGIN THE EXPEDITION."
+ ITEMS
+ TextConstant:"AND 190 FURS TO BEGIN THE EXPEDITION."
+ CarriageControl:NL
+261 LET E1=INT((.15*RND(1)+.95)*10^2+.5)/10^2
+ ScalarReference:E1
+ NumericConstant:.15
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:.95
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+262 LET B1=INT((.25*RND(1)+1.00)*10^2+.5)/10^2
+ ScalarReference:B1
+ NumericConstant:.25
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1.00
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+300 PRINT
+ ITEMS
+ CarriageControl:NL
+301 PRINT "YOUR 190 FURS ARE DISTRIBUTED AMONG THE FOLLOWING"
+ ITEMS
+ TextConstant:"YOUR 190 FURS ARE DISTRIBUTED AMONG THE FOLLOWING"
+ CarriageControl:NL
+302 PRINT "KINDS OF PELTS: MINK, BEAVER, ERMINE AND FOX."
+ ITEMS
+ TextConstant:"KINDS OF PELTS: MINK, BEAVER, ERMINE AND FOX."
+ CarriageControl:NL
+310 GOSUB 1430 
+ LineNumber:1430
+315 RESTORE
+ 
+330 FOR J=1 TO 4 
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+332 READ B$
+ ScalarReference:B$
+333 PRINT  
+ ITEMS
+ CarriageControl:NL
+335 PRINT "HOW MANY ";B$;" PELTS DO YOU HAVE"; 
+ ITEMS
+ TextConstant:"HOW MANY "
+ CarriageControl:;
+ ScalarValue:B$
+ CarriageControl:;
+ TextConstant:" PELTS DO YOU HAVE"
+ CarriageControl:;
+338 INPUT F(J) 
+ ScalarValue:J
+ ScalarReference:F
+340 LET F(0)=F(1)+F(2)+F(3)+F(4) 
+ NumericConstant:0
+ ScalarReference:F
+ NumericConstant:1
+ ScalarValue:F
+ NumericConstant:2
+ ScalarValue:F
+ BinaryOperator:+
+ NumericConstant:3
+ ScalarValue:F
+ BinaryOperator:+
+ NumericConstant:4
+ ScalarValue:F
+ BinaryOperator:+
+ AssignmentOperator:=
+342 IF F(0)=190 THEN 1100
+ NumericConstant:0
+ ScalarValue:F
+ NumericConstant:190
+ BinaryOperator:=
+344 IF F(0)>190 THEN 500 
+ NumericConstant:0
+ ScalarValue:F
+ NumericConstant:190
+ BinaryOperator:>
+348 NEXT J 
+ VariableName:J
+350 GOTO 1100 
+ LineNumber:1100
+500 PRINT
+ ITEMS
+ CarriageControl:NL
+501 PRINT "YOU MAY NOT HAVE THAT MANY FURS."   
+ ITEMS
+ TextConstant:"YOU MAY NOT HAVE THAT MANY FURS."
+ CarriageControl:NL
+502 PRINT "DO NOT TRY TO CHEAT.  I CAN ADD." 
+ ITEMS
+ TextConstant:"DO NOT TRY TO CHEAT.  I CAN ADD."
+ CarriageControl:NL
+503 PRINT "YOU MUST START AGAIN."
+ ITEMS
+ TextConstant:"YOU MUST START AGAIN."
+ CarriageControl:NL
+504 GOTO 15 
+ LineNumber:15
+508 PRINT
+ ITEMS
+ CarriageControl:NL
+511 PRINT "DO YOU WANT TO TRADE FURS NEXT YEAR?"
+ ITEMS
+ TextConstant:"DO YOU WANT TO TRADE FURS NEXT YEAR?"
+ CarriageControl:NL
+513 GOTO 18 
+ LineNumber:18
+1091 PRINT "YOU ARE THE LEADER OF A FRENCH FUR TRADING EXPEDITION IN "
+ ITEMS
+ TextConstant:"YOU ARE THE LEADER OF A FRENCH FUR TRADING EXPEDITION IN "
+ CarriageControl:NL
+1092 PRINT "1776 LEAVING THE LAKE ONTARIO AREA TO SELL FURS AND GET"  
+ ITEMS
+ TextConstant:"1776 LEAVING THE LAKE ONTARIO AREA TO SELL FURS AND GET"
+ CarriageControl:NL
+1093 PRINT "SUPPLIES FOR THE NEXT YEAR.  YOU HAVE A CHOICE OF THREE"
+ ITEMS
+ TextConstant:"SUPPLIES FOR THE NEXT YEAR.  YOU HAVE A CHOICE OF THREE"
+ CarriageControl:NL
+1094 PRINT "FORTS AT WHICH YOU MAY TRADE.  THE COST OF SUPPLIES"
+ ITEMS
+ TextConstant:"FORTS AT WHICH YOU MAY TRADE.  THE COST OF SUPPLIES"
+ CarriageControl:NL
+1095 PRINT "AND THE AMOUNT YOU RECEIVE FOR YOUR FURS WILL DEPEND" 
+ ITEMS
+ TextConstant:"AND THE AMOUNT YOU RECEIVE FOR YOUR FURS WILL DEPEND"
+ CarriageControl:NL
+1096 PRINT "ON THE FORT THAT YOU CHOOSE." 
+ ITEMS
+ TextConstant:"ON THE FORT THAT YOU CHOOSE."
+ CarriageControl:NL
+1099 RETURN 
+ 
+1100 PRINT "YOU MAY TRADE YOUR FURS AT FORT 1, FORT 2,"
+ ITEMS
+ TextConstant:"YOU MAY TRADE YOUR FURS AT FORT 1, FORT 2,"
+ CarriageControl:NL
+1102 PRINT "OR FORT 3.  FORT 1 IS FORT HOCHELAGA (MONTREAL)"
+ ITEMS
+ TextConstant:"OR FORT 3.  FORT 1 IS FORT HOCHELAGA (MONTREAL)"
+ CarriageControl:NL
+1103 PRINT "AND IS UNDER THE PROTECTION OF THE FRENCH ARMY."  
+ ITEMS
+ TextConstant:"AND IS UNDER THE PROTECTION OF THE FRENCH ARMY."
+ CarriageControl:NL
+1104 PRINT "FORT 2 IS FORT STADACONA (QUEBEC) AND IS UNDER THE" 
+ ITEMS
+ TextConstant:"FORT 2 IS FORT STADACONA (QUEBEC) AND IS UNDER THE"
+ CarriageControl:NL
+1105 PRINT "PROTECTION OF THE FRENCH ARMY.  HOWEVER, YOU MUST"
+ ITEMS
+ TextConstant:"PROTECTION OF THE FRENCH ARMY.  HOWEVER, YOU MUST"
+ CarriageControl:NL
+1106 PRINT "MAKE A PORTAGE AND CROSS THE LACHINE RAPIDS." 
+ ITEMS
+ TextConstant:"MAKE A PORTAGE AND CROSS THE LACHINE RAPIDS."
+ CarriageControl:NL
+1108 PRINT "FORT 3 IS FORT NEW YORK AND IS UNDER DUTCH CONTROL."  
+ ITEMS
+ TextConstant:"FORT 3 IS FORT NEW YORK AND IS UNDER DUTCH CONTROL."
+ CarriageControl:NL
+1109 PRINT "YOU MUST CROSS THROUGH IROQUOIS LAND."
+ ITEMS
+ TextConstant:"YOU MUST CROSS THROUGH IROQUOIS LAND."
+ CarriageControl:NL
+1110 PRINT "ANSWER 1, 2, OR 3."
+ ITEMS
+ TextConstant:"ANSWER 1, 2, OR 3."
+ CarriageControl:NL
+1111 INPUT B
+ ScalarReference:B
+1112 IF B=1 THEN 1120 
+ ScalarValue:B
+ NumericConstant:1
+ BinaryOperator:=
+1113 IF B=2 THEN 1135 
+ ScalarValue:B
+ NumericConstant:2
+ BinaryOperator:=
+1115 IF B=3 THEN 1147 
+ ScalarValue:B
+ NumericConstant:3
+ BinaryOperator:=
+1116 GOTO 1110 
+ LineNumber:1110
+1120 PRINT "YOU HAVE CHOSEN THE EASIEST ROUTE.  HOWEVER, THE FORT"  
+ ITEMS
+ TextConstant:"YOU HAVE CHOSEN THE EASIEST ROUTE.  HOWEVER, THE FORT"
+ CarriageControl:NL
+1121 PRINT "IS FAR FROM ANY SEAPORT.  THE VALUE"  
+ ITEMS
+ TextConstant:"IS FAR FROM ANY SEAPORT.  THE VALUE"
+ CarriageControl:NL
+1122 PRINT "YOU RECEIVE FOR YOUR FURS WILL BE LOW AND THE COST"   
+ ITEMS
+ TextConstant:"YOU RECEIVE FOR YOUR FURS WILL BE LOW AND THE COST"
+ CarriageControl:NL
+1123 PRINT "OF SUPPLIES HIGHER THAN AT FORTS STADACONA OR NEW YORK."
+ ITEMS
+ TextConstant:"OF SUPPLIES HIGHER THAN AT FORTS STADACONA OR NEW YORK."
+ CarriageControl:NL
+1125 GOSUB 1400 
+ LineNumber:1400
+1129 IF B$="YES" THEN 1110
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:=
+1130 GOTO 1160
+ LineNumber:1160
+1135 PRINT "YOU HAVE CHOSEN A HARD ROUTE.  IT IS, IN COMPARSION," 
+ ITEMS
+ TextConstant:"YOU HAVE CHOSEN A HARD ROUTE.  IT IS, IN COMPARSION,"
+ CarriageControl:NL
+1136 PRINT "HARDER THAN THE ROUTE TO HOCHELAGA BUT EASIER THAN"   
+ ITEMS
+ TextConstant:"HARDER THAN THE ROUTE TO HOCHELAGA BUT EASIER THAN"
+ CarriageControl:NL
+1137 PRINT "THE ROUTE TO NEW YORK.  YOU WILL RECEIVE AN AVERAGE VALUE"
+ ITEMS
+ TextConstant:"THE ROUTE TO NEW YORK.  YOU WILL RECEIVE AN AVERAGE VALUE"
+ CarriageControl:NL
+1138 PRINT "FOR YOUR FURS AND THE COST OF YOUR SUPPLIES WILL BE AVERAGE."
+ ITEMS
+ TextConstant:"FOR YOUR FURS AND THE COST OF YOUR SUPPLIES WILL BE AVERAGE."
+ CarriageControl:NL
+1141 GOSUB 1400 
+ LineNumber:1400
+1144 IF B$="YES" THEN 1110
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:=
+1145 GOTO 1198
+ LineNumber:1198
+1147 PRINT "YOU HAVE CHOSEN THE MOST DIFFICULT ROUTE.  AT"
+ ITEMS
+ TextConstant:"YOU HAVE CHOSEN THE MOST DIFFICULT ROUTE.  AT"
+ CarriageControl:NL
+1148 PRINT "FORT NEW YORK YOU WILL RECEIVE THE HIGHEST VALUE" 
+ ITEMS
+ TextConstant:"FORT NEW YORK YOU WILL RECEIVE THE HIGHEST VALUE"
+ CarriageControl:NL
+1149 PRINT "FOR YOUR FURS.  THE COST OF YOUR SUPPLIES"
+ ITEMS
+ TextConstant:"FOR YOUR FURS.  THE COST OF YOUR SUPPLIES"
+ CarriageControl:NL
+1150 PRINT "WILL BE LOWER THAN AT ALL THE OTHER FORTS."   
+ ITEMS
+ TextConstant:"WILL BE LOWER THAN AT ALL THE OTHER FORTS."
+ CarriageControl:NL
+1152 GOSUB 1400 
+ LineNumber:1400
+1155 IF B$="YES" THEN 1110
+ ScalarValue:B$
+ TextConstant:"YES"
+ BinaryOperator:=
+1156 GOTO 1250
+ LineNumber:1250
+1160 LET I=I-160
+ ScalarReference:I
+ ScalarValue:I
+ NumericConstant:160
+ BinaryOperator:-
+ AssignmentOperator:=
+1169 PRINT
+ ITEMS
+ CarriageControl:NL
+1174 LET M1=INT((.2*RND(1)+.7)*10^2+.5)/10^2
+ ScalarReference:M1
+ NumericConstant:.2
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:.7
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+1175 LET E1=INT((.2*RND(1)+.65)*10^2+.5)/10^2
+ ScalarReference:E1
+ NumericConstant:.2
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:.65
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+1176 LET B1=INT((.2*RND(1)+.75)*10^2+.5)/10^2
+ ScalarReference:B1
+ NumericConstant:.2
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:.75
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+1177 LET D1=INT((.2*RND(1)+.8)*10^2+.5)/10^2
+ ScalarReference:D1
+ NumericConstant:.2
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:.8
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+1180 PRINT "SUPPLIES AT FORT HOCHELAGA COST $150.00."
+ ITEMS
+ TextConstant:"SUPPLIES AT FORT HOCHELAGA COST $150.00."
+ CarriageControl:NL
+1181 PRINT "YOUR TRAVEL EXPENSES TO HOCHELAGA WERE $10.00."
+ ITEMS
+ TextConstant:"YOUR TRAVEL EXPENSES TO HOCHELAGA WERE $10.00."
+ CarriageControl:NL
+1190 GOTO 1410 
+ LineNumber:1410
+1198 LET I=I-140
+ ScalarReference:I
+ ScalarValue:I
+ NumericConstant:140
+ BinaryOperator:-
+ AssignmentOperator:=
+1201 PRINT
+ ITEMS
+ CarriageControl:NL
+1205 LET M1=INT((.3*RND(1)+.85)*10^2+.5)/10^2
+ ScalarReference:M1
+ NumericConstant:.3
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:.85
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+1206 LET E1=INT((.15*RND(1)+.8)*10^2+.5)/10^2
+ ScalarReference:E1
+ NumericConstant:.15
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:.8
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+1207 LET B1=INT((.2*RND(1)+.9)*10^2+.5)/10^2
+ ScalarReference:B1
+ NumericConstant:.2
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:.9
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+1209 LET P=INT(10*RND(1))+1
+ ScalarReference:P
+ NumericConstant:10
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1210 IF P<=2 THEN 1216
+ ScalarValue:P
+ NumericConstant:2
+ BinaryOperator:<=
+1212 IF P<=6 THEN 1224
+ ScalarValue:P
+ NumericConstant:6
+ BinaryOperator:<=
+1213 IF P<=8 THEN 1226
+ ScalarValue:P
+ NumericConstant:8
+ BinaryOperator:<=
+1215 IF P<=10 THEN 1235
+ ScalarValue:P
+ NumericConstant:10
+ BinaryOperator:<=
+1216 LET F(2)=0
+ NumericConstant:2
+ ScalarReference:F
+ NumericConstant:0
+ AssignmentOperator:=
+1218 PRINT "YOUR BEAVER WERE TOO HEAVY TO CARRY ACROSS" 
+ ITEMS
+ TextConstant:"YOUR BEAVER WERE TOO HEAVY TO CARRY ACROSS"
+ CarriageControl:NL
+1219 PRINT "THE PORTAGE.  YOU HAD TO LEAVE THE PELTS, BUT FOUND" 
+ ITEMS
+ TextConstant:"THE PORTAGE.  YOU HAD TO LEAVE THE PELTS, BUT FOUND"
+ CarriageControl:NL
+1220 PRINT "THEM STOLEN WHEN YOU RETURNED."
+ ITEMS
+ TextConstant:"THEM STOLEN WHEN YOU RETURNED."
+ CarriageControl:NL
+1221 GOSUB 1244 
+ LineNumber:1244
+1222 GOTO 1414 
+ LineNumber:1414
+1224 PRINT "YOU ARRIVED SAFELY AT FORT STADACONA." 
+ ITEMS
+ TextConstant:"YOU ARRIVED SAFELY AT FORT STADACONA."
+ CarriageControl:NL
+1225 GOTO 1239 
+ LineNumber:1239
+1226 GOSUB 1430 
+ LineNumber:1430
+1230 PRINT "YOUR CANOE UPSET IN THE LACHINE RAPIDS.  YOU"   
+ ITEMS
+ TextConstant:"YOUR CANOE UPSET IN THE LACHINE RAPIDS.  YOU"
+ CarriageControl:NL
+1231 PRINT "LOST ALL YOUR FURS." 
+ ITEMS
+ TextConstant:"LOST ALL YOUR FURS."
+ CarriageControl:NL
+1232 GOSUB 1244 
+ LineNumber:1244
+1233 GOTO 1418 
+ LineNumber:1418
+1235 LET F(4)=0 
+ NumericConstant:4
+ ScalarReference:F
+ NumericConstant:0
+ AssignmentOperator:=
+1237 PRINT "YOUR FOX PELTS WERE NOT CURED PROPERLY."
+ ITEMS
+ TextConstant:"YOUR FOX PELTS WERE NOT CURED PROPERLY."
+ CarriageControl:NL
+1238 PRINT "NO ONE WILL BUY THEM."
+ ITEMS
+ TextConstant:"NO ONE WILL BUY THEM."
+ CarriageControl:NL
+1239 GOSUB 1244 
+ LineNumber:1244
+1240 GOTO 1410 
+ LineNumber:1410
+1244 PRINT "SUPPLIES AT FORT STADACONA COST $125.00."
+ ITEMS
+ TextConstant:"SUPPLIES AT FORT STADACONA COST $125.00."
+ CarriageControl:NL
+1246 PRINT "YOUR TRAVEL EXPENSES TO STADACONA WERE $15.00."
+ ITEMS
+ TextConstant:"YOUR TRAVEL EXPENSES TO STADACONA WERE $15.00."
+ CarriageControl:NL
+1248 RETURN 
+ 
+1250 LET I=I-105
+ ScalarReference:I
+ ScalarValue:I
+ NumericConstant:105
+ BinaryOperator:-
+ AssignmentOperator:=
+1254 PRINT
+ ITEMS
+ CarriageControl:NL
+1260 LET M1=INT((.15*RND(1)+1.05)*10^2+.5)/10^2
+ ScalarReference:M1
+ NumericConstant:.15
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1.05
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+1263 LET D1=INT((.25*RND(1)+1.1)*10^2+.5)/10^2
+ ScalarReference:D1
+ NumericConstant:.25
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ NumericConstant:1.1
+ BinaryOperator:+
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:*
+ NumericConstant:.5
+ BinaryOperator:+
+ FunctionInt
+ NumericConstant:10
+ NumericConstant:2
+ BinaryOperator:^
+ BinaryOperator:/
+ AssignmentOperator:=
+1270 LET P=INT(10*RND(1))+1
+ ScalarReference:P
+ NumericConstant:10
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1271 IF P<=2 THEN 1281
+ ScalarValue:P
+ NumericConstant:2
+ BinaryOperator:<=
+1272 IF P<=6 THEN 1291
+ ScalarValue:P
+ NumericConstant:6
+ BinaryOperator:<=
+1273 IF P<=8 THEN 1295
+ ScalarValue:P
+ NumericConstant:8
+ BinaryOperator:<=
+1274 IF P<=10 THEN 1306
+ ScalarValue:P
+ NumericConstant:10
+ BinaryOperator:<=
+1281 PRINT "YOU WERE ATTACKED BY A PARTY OF IROQUOIS."
+ ITEMS
+ TextConstant:"YOU WERE ATTACKED BY A PARTY OF IROQUOIS."
+ CarriageControl:NL
+1282 PRINT "ALL PEOPLE IN YOUR TRADING GROUP WERE"    
+ ITEMS
+ TextConstant:"ALL PEOPLE IN YOUR TRADING GROUP WERE"
+ CarriageControl:NL
+1283 PRINT "KILLED.  THIS ENDS THE GAME." 
+ ITEMS
+ TextConstant:"KILLED.  THIS ENDS THE GAME."
+ CarriageControl:NL
+1284 STOP 
+ 
+1291 PRINT "YOU WERE LUCKY.  YOU ARRIVED SAFELY"
+ ITEMS
+ TextConstant:"YOU WERE LUCKY.  YOU ARRIVED SAFELY"
+ CarriageControl:NL
+1292 PRINT "AT FORT NEW YORK."
+ ITEMS
+ TextConstant:"AT FORT NEW YORK."
+ CarriageControl:NL
+1293 GOTO 1311 
+ LineNumber:1311
+1295 GOSUB 1430 
+ LineNumber:1430
+1300 PRINT "YOU NARROWLY ESCAPED AN IROQUOIS RAIDING PARTY."
+ ITEMS
+ TextConstant:"YOU NARROWLY ESCAPED AN IROQUOIS RAIDING PARTY."
+ CarriageControl:NL
+1301 PRINT "HOWEVER, YOU HAD TO LEAVE ALL YOUR FURS BEHIND."
+ ITEMS
+ TextConstant:"HOWEVER, YOU HAD TO LEAVE ALL YOUR FURS BEHIND."
+ CarriageControl:NL
+1303 GOSUB 1320 
+ LineNumber:1320
+1304 GOTO 1418 
+ LineNumber:1418
+1306 LET B1=B1/2
+ ScalarReference:B1
+ ScalarValue:B1
+ NumericConstant:2
+ BinaryOperator:/
+ AssignmentOperator:=
+1307 LET M1=M1/2
+ ScalarReference:M1
+ ScalarValue:M1
+ NumericConstant:2
+ BinaryOperator:/
+ AssignmentOperator:=
+1308 PRINT "YOUR MINK AND BEAVER WERE DAMAGED ON YOUR TRIP."
+ ITEMS
+ TextConstant:"YOUR MINK AND BEAVER WERE DAMAGED ON YOUR TRIP."
+ CarriageControl:NL
+1309 PRINT "YOU RECEIVE ONLY HALF THE CURRENT PRICE FOR THESE FURS."
+ ITEMS
+ TextConstant:"YOU RECEIVE ONLY HALF THE CURRENT PRICE FOR THESE FURS."
+ CarriageControl:NL
+1311 GOSUB 1320
+ LineNumber:1320
+1312 GOTO 1410 
+ LineNumber:1410
+1320 PRINT "SUPPLIES AT NEW YORK COST $80.00." 
+ ITEMS
+ TextConstant:"SUPPLIES AT NEW YORK COST $80.00."
+ CarriageControl:NL
+1321 PRINT "YOUR TRAVEL EXPENSES TO NEW YORK WERE $25.00."
+ ITEMS
+ TextConstant:"YOUR TRAVEL EXPENSES TO NEW YORK WERE $25.00."
+ CarriageControl:NL
+1322 RETURN 
+ 
+1400 PRINT "DO YOU WANT TO TRADE AT ANOTHER FORT?"
+ ITEMS
+ TextConstant:"DO YOU WANT TO TRADE AT ANOTHER FORT?"
+ CarriageControl:NL
+1402 PRINT "ANSWER YES OR NO",
+ ITEMS
+ TextConstant:"ANSWER YES OR NO"
+ CarriageControl:,
+1403 INPUT B$
+ ScalarReference:B$
+1404 RETURN 
+ 
+1410 PRINT
+ ITEMS
+ CarriageControl:NL
+1412 PRINT "YOUR BEAVER SOLD FOR $";B1*F(2);
+ ITEMS
+ TextConstant:"YOUR BEAVER SOLD FOR $"
+ CarriageControl:;
+ ScalarValue:B1
+ NumericConstant:2
+ ScalarValue:F
+ BinaryOperator:*
+ CarriageControl:;
+1414 PRINT "YOUR FOX SOLD FOR $";D1*F(4)
+ ITEMS
+ TextConstant:"YOUR FOX SOLD FOR $"
+ CarriageControl:;
+ ScalarValue:D1
+ NumericConstant:4
+ ScalarValue:F
+ BinaryOperator:*
+ CarriageControl:NL
+1416 PRINT "YOUR ERMINE SOLD FOR $";E1*F(3);
+ ITEMS
+ TextConstant:"YOUR ERMINE SOLD FOR $"
+ CarriageControl:;
+ ScalarValue:E1
+ NumericConstant:3
+ ScalarValue:F
+ BinaryOperator:*
+ CarriageControl:;
+1417 PRINT "YOUR MINK SOLD FOR $";M1*F(1)
+ ITEMS
+ TextConstant:"YOUR MINK SOLD FOR $"
+ CarriageControl:;
+ ScalarValue:M1
+ NumericConstant:1
+ ScalarValue:F
+ BinaryOperator:*
+ CarriageControl:NL
+1418 LET I=M1*F(1)+B1*F(2)+E1*F(3)+D1*F(4)+I
+ ScalarReference:I
+ ScalarValue:M1
+ NumericConstant:1
+ ScalarValue:F
+ BinaryOperator:*
+ ScalarValue:B1
+ NumericConstant:2
+ ScalarValue:F
+ BinaryOperator:*
+ BinaryOperator:+
+ ScalarValue:E1
+ NumericConstant:3
+ ScalarValue:F
+ BinaryOperator:*
+ BinaryOperator:+
+ ScalarValue:D1
+ NumericConstant:4
+ ScalarValue:F
+ BinaryOperator:*
+ BinaryOperator:+
+ ScalarValue:I
+ BinaryOperator:+
+ AssignmentOperator:=
+1420 PRINT
+ ITEMS
+ CarriageControl:NL
+1422 PRINT "YOU NOW HAVE $";I;" INCLUDING YOUR PREVIOUS SAVINGS"
+ ITEMS
+ TextConstant:"YOU NOW HAVE $"
+ CarriageControl:;
+ ScalarValue:I
+ CarriageControl:;
+ TextConstant:" INCLUDING YOUR PREVIOUS SAVINGS"
+ CarriageControl:NL
+1425 GOTO 508
+ LineNumber:508
+1430 FOR J=1 TO 4 
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+1432 LET F(J)=0 
+ ScalarValue:J
+ ScalarReference:F
+ NumericConstant:0
+ AssignmentOperator:=
+1434 NEXT J 
+ VariableName:J
+1436 RETURN 
+ 
+2000 DATA "MINK","BEAVER","ERMINE","FOX"
+ TextConstant:"MINK"
+ TextConstant:"BEAVER"
+ TextConstant:"ERMINE"
+ TextConstant:"FOX"
+2046 END
+ 
