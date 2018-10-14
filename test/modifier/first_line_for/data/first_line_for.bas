@@ -1,0 +1,2 @@
+10 PRINT I _ FOR I = 1 TO 5
+99 END

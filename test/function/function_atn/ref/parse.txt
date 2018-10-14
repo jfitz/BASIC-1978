@@ -1,0 +1,26 @@
+20 PRINT "ANGLE","ARCTAN"
+ ITEMS
+ TextConstant:"ANGLE"
+ CarriageControl:,
+ TextConstant:"ARCTAN"
+ CarriageControl:NL
+30 FOR I = 0 TO 2 STEP 0.1
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:0.1"]
+50 LET S = ATN(I)
+ ScalarReference:S
+ ScalarValue:I
+ FunctionAtn
+ AssignmentOperator:=
+60 PRINT I, S
+ ITEMS
+ ScalarValue:I
+ CarriageControl:,
+ ScalarValue:S
+ CarriageControl:NL
+70 NEXT I
+ VariableName:I
+99 END
+ 

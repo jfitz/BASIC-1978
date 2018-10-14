@@ -1,0 +1,44 @@
+10 REM TEST TAB() FUNCTION
+ Remark:TEST TAB() FUNCTION
+20 PRINT "START TEST"
+ ITEMS
+ TextConstant:"START TEST"
+ CarriageControl:NL
+30 FOR I% = 10% TO 15%
+ control: VariableName:I%
+ start:   ["IntegerConstant:10"]
+ end:     ["IntegerConstant:15"]
+ step:    ["NumericConstant:1"]
+32 PRINT TAB(I%);"X";"Y"
+ ITEMS
+ ScalarValue:I%
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"X"
+ CarriageControl:;
+ TextConstant:"Y"
+ CarriageControl:NL
+34 NEXT I%
+ VariableName:I%
+40 FOR I% = 10% TO 15%
+ control: VariableName:I%
+ start:   ["IntegerConstant:10"]
+ end:     ["IntegerConstant:15"]
+ step:    ["NumericConstant:1"]
+42 PRINT TAB(I%)"X";"Y"
+ ITEMS
+ ScalarValue:I%
+ FunctionTab
+ CarriageControl:
+ TextConstant:"X"
+ CarriageControl:;
+ TextConstant:"Y"
+ CarriageControl:NL
+44 NEXT I%
+ VariableName:I%
+90 PRINT "END TEST"
+ ITEMS
+ TextConstant:"END TEST"
+ CarriageControl:NL
+99 END
+ 

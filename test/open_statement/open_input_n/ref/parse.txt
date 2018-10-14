@@ -1,0 +1,25 @@
+10 REM TEST OPEN READ COMMANDS
+ Remark:TEST OPEN READ COMMANDS
+20 OPEN "data.txt" FOR INPUT AS 1
+ TextConstant:"data.txt"
+ NumericConstant:1
+30 INPUT #1, A,B,C
+ ScalarReference:A
+ ScalarReference:B
+ ScalarReference:C
+40 INPUT #1, N$
+ ScalarReference:N$
+50 CLOSE 1
+ NumericConstant:1
+60 PRINT N$,A,B,C
+ ITEMS
+ ScalarValue:N$
+ CarriageControl:,
+ ScalarValue:A
+ CarriageControl:,
+ ScalarValue:B
+ CarriageControl:,
+ ScalarValue:C
+ CarriageControl:NL
+99 END
+ 

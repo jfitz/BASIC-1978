@@ -1,0 +1,26 @@
+10 PRINT "VALUE","EXP"
+ ITEMS
+ TextConstant:"VALUE"
+ CarriageControl:,
+ TextConstant:"EXP"
+ CarriageControl:NL
+20 FOR I = 0 TO 2 STEP 0.1
+ control: VariableName:I
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:0.1"]
+30 LET E = EXP(I)
+ ScalarReference:E
+ ScalarValue:I
+ FunctionExp
+ AssignmentOperator:=
+40 PRINT I, E
+ ITEMS
+ ScalarValue:I
+ CarriageControl:,
+ ScalarValue:E
+ CarriageControl:NL
+50 NEXT I
+ VariableName:I
+99 END
+ 

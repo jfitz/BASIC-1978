@@ -1,0 +1,52 @@
+10 REM TEST PROGRAM FOR PACK$() FUNCTION
+ Remark:TEST PROGRAM FOR PACK$() FUNCTION
+20 READ N
+ ScalarReference:N
+30 DIM A(N)
+ ScalarValue:N
+ CompoundDeclaration:A
+40 A(0) = N
+ NumericConstant:0
+ ScalarReference:A
+ ScalarValue:N
+ AssignmentOperator:=
+50 FOR I = 1 TO N
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:N"]
+ step:    ["NumericConstant:1"]
+60 READ A(I)
+ ScalarValue:I
+ ScalarReference:A
+70 NEXT I
+ VariableName:I
+80 A$ = PACK$(A)
+ ScalarReference:A$
+ ArrayValue:A
+ FunctionPack
+ AssignmentOperator:=
+90 PRINT "A$ IS '"; A$; "'"
+ ITEMS
+ TextConstant:"A$ IS '"
+ CarriageControl:;
+ ScalarValue:A$
+ CarriageControl:;
+ TextConstant:"'"
+ CarriageControl:NL
+190 DATA 13,72,69,76,76,79,44,32,87,79,82,76,68,33
+ NumericConstant:13
+ NumericConstant:72
+ NumericConstant:69
+ NumericConstant:76
+ NumericConstant:76
+ NumericConstant:79
+ NumericConstant:44
+ NumericConstant:32
+ NumericConstant:87
+ NumericConstant:79
+ NumericConstant:82
+ NumericConstant:76
+ NumericConstant:68
+ NumericConstant:33
+199 END
+ 
