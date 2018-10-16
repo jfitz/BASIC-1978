@@ -1393,39 +1393,14 @@ class GotoStatement < AbstractStatement
 
     extract_modifiers(tokens_lists)
 
-    template1 = [[1]]
-    template2 = [[1, '>='], 'OF', [1, '>=']]
+    template = [[1]]
     @destination = nil
-    @destinations = nil
-    @expression = nil
 
-    if check_template(tokens_lists, template1)
+    if check_template(tokens_lists, template)
       if tokens_lists[0][0].numeric_constant?
         @destination = LineNumber.new(tokens_lists[0][0])
       else
         @errors << "Invalid line number #{tokens_lists[0][0]}"
-      end
-    elsif check_template(tokens_lists, template2)
-      expression = tokens_lists[0]
-      begin
-        @expression = ValueScalarExpression.new(expression)
-      rescue BASICExpressionError => e
-        @errors << e.message
-      end
-      destinations = tokens_lists[2]
-      line_nums = split_tokens(destinations, false)
-      @destinations = []
-      line_nums.each do |line_num|
-        if line_num.size == 1
-          destination = line_num[0]
-          if destination.numeric_constant?
-            @destinations << LineNumber.new(destination)
-          else
-            @errors << "Invalid line number #{destination}"
-          end
-        else
-          @errors << "Invalid line specification #{line_num}"
-        end
       end
     else
       @errors << 'Syntax error'
@@ -1435,10 +1410,6 @@ class GotoStatement < AbstractStatement
   def dump
     lines = []
     lines << @destination.dump unless @destination.nil?
-    lines += @expression.dump unless @expression.nil?
-    unless @destinations.nil?
-      @destinations.each { |destination| lines << destination.dump }
-    end
     lines
   end
 
@@ -1452,42 +1423,12 @@ class GotoStatement < AbstractStatement
       retval = false
     end
 
-    unless @destinations.nil?
-      @destinations.each do |destination|
-        unless program.line_number?(destination)
-          console_io.print_line(
-            "Line number #{destination} not found in line #{line_number_index}"
-          )
-          retval = false
-        end
-      end
-    end
-
     retval
   end
 
   def execute_core(interpreter)
     unless @destination.nil?
       line_number = @destination
-      index = interpreter.statement_start_index(line_number, 0)
-      raise(BASICRuntimeError, 'Line number not found') if index.nil?
-      destination = LineNumberIndex.new(line_number, 0, index)
-      interpreter.next_line_index = destination
-    end
-
-    unless @destinations.nil?
-      values = @expression.evaluate(interpreter)
-      raise(BASICExpressionError, 'Expecting one value') unless values.size == 1
-      value = values[0]
-      raise(BASICRuntimeError, 'Invalid value') unless
-        value.numeric_constant?
-      io = interpreter.trace_out
-      io.trace_output(' ' + @expression.to_s + ' = ' + value.to_s)
-      index = value.to_i
-      raise(BASICRuntimeError, 'Index out of range') if
-        index < 1 || index > @destinations.size
-      # get destination in list
-      line_number = @destinations[index - 1]
       index = interpreter.statement_start_index(line_number, 0)
       raise(BASICRuntimeError, 'Line number not found') if index.nil?
       destination = LineNumberIndex.new(line_number, 0, index)
@@ -1500,19 +1441,6 @@ class GotoStatement < AbstractStatement
       @destination = renumber_map[@destination]
       @tokens[-1] = NumericConstantToken.new(@destination.line_number)
     end
-
-    unless @destinations.nil?
-      new_destinations = []
-      @destinations.each do |destination|
-        new_destinations << renumber_map[destination]
-      end
-    end
-  end
-
-  def variables
-    vars = []
-    vars += @expression.variables unless @expression.nil?
-    vars
   end
 end
 
@@ -1566,11 +1494,7 @@ class IfStatement < AbstractStatement
         if tokens_list == 'THEN'
           state = 2
         elsif tokens_list.class.to_s == 'KeywordToken'
-          if tokens_list.to_s == 'GOTO'
-            state = 4
-          else
-            dict['expr'] << tokens_list
-          end
+          dict['expr'] << tokens_list
         else
           dict['expr'] += tokens_list
         end
