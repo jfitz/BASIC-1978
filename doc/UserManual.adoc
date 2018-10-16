@@ -9,6 +9,8 @@ BASIC-1978 is an implementation of the BASIC language.
 My references are Kemeny and Kurtz's "BASIC Programming" (John Wiley and Sons, 1967), James S. Coan's "Basic BASIC" (Hayden, 1978), and David Ahl's "101 BASIC Computer Games" (DEC, 1973).
 
 The code for the interpreter is a fork of my BASIC-1973 project, with changes to bring the language closer to Microsoft's BASIC interpreters of the late 1970s.
+BASIC-1978 includes features from BASIC-1965 (ARR and MAT statements) and BASIC-1973 (modifiers at the end of statements).
+These features were not part of Microsoft BASIC, but were available in other BASIC interpreters.
 
 Initial impressions
 -------------------
@@ -479,7 +481,7 @@ BASIC-1978 supports the following boolean comparisions for numeric variables:
 |==========
 |Operation |Symbol
 |Equal |=
-|Not equal |<> or #
+|Not equal |<>
 |Greater than |>
 |Greater than or equal |>=
 |Less than |<
@@ -1150,8 +1152,6 @@ Printing to files
 ^^^^^^^^^^^^^^^^^
 
 Syntax:	PRINT #filenum; expression list
-Syntax:	PRI #filenum; expression list
-Syntax:	& #filenum; expression list
 
 Items in the list are separated by either commas or semicolons.
 A comma or semicolon writes a SPACE character to the file.
@@ -1976,12 +1976,9 @@ Repeated execution of the statement.
 Examples:
 
 	10 DIM A(10)
-	20 A(I) = I _ FOR I = 1 TO 10
+	20 A(I) = I FOR I = 1 TO 10
 	100 PRINT A(I); FOR I = 1 TO 10
 	100 PRINT A(I); FOR I = 1 TO 10 STEP 2
-
-The underscore is required in line 20 to prevent BASIC from parsing "= I FOR" as "= IF OR".
-The tokenizer reports the longest possible token; 'IF' is longer than 'I' so it is the token.
 
 Combining modifiers
 ~~~~~~~~~~~~~~~~~~~

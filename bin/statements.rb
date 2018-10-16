@@ -18,7 +18,6 @@ class StatementFactory
       line_number = LineNumber.new(number)
       line_text = m.post_match
       all_tokens = tokenize(line_text)
-      all_tokens.delete_if(&:break?)
       all_tokens.delete_if(&:whitespace?)
       comment = nil
       comment = all_tokens.pop if

@@ -75,7 +75,6 @@ class AbstractToken
 
   def initialize(text)
     @text = text.to_s
-    @is_break = false
     @is_whitespace = false
     @is_comment = false
     @is_keyword = false
@@ -108,10 +107,6 @@ class AbstractToken
 
   def to_s
     @text
-  end
-
-  def break?
-    @is_break
   end
 
   def whitespace?
@@ -190,15 +185,6 @@ class InvalidToken < AbstractToken
     super
 
     @is_invalid = true
-  end
-end
-
-# break token
-class BreakToken < AbstractToken
-  def initialize(text)
-    super
-
-    @is_break = true
   end
 end
 

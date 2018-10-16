@@ -33,18 +33,13 @@ class ListTokenBuilder
       accepted = true
       while i < text.size && accepted
         c = text[i]
-        # ignore space char
-        if c == ' '
+        accepted = accept?(candidate, c)
+        if accepted
+          candidate += c
           i += 1
-        else
-          accepted = accept?(candidate, c)
-          if accepted
-            candidate += c
-            i += 1
-            if @legals.include?(candidate)
-              best_candidate = candidate
-              best_count = i
-            end
+          if @legals.include?(candidate)
+            best_candidate = candidate
+            best_count = i
           end
         end
       end
@@ -96,18 +91,13 @@ class RemarkTokenBuilder
       accepted = true
       while i < text.size && accepted
         c = text[i]
-        # ignore space char
-        if c == ' '
+        accepted = accept?(candidate, c)
+        if accepted
+          candidate += c
           i += 1
-        else
-          accepted = accept?(candidate, c)
-          if accepted
-            candidate += c
-            i += 1
-            if @legals.include?(candidate)
-              best_candidate = candidate
-              best_count = i
-            end
+          if @legals.include?(candidate)
+            best_candidate = candidate
+            best_count = i
           end
         end
       end
@@ -264,15 +254,10 @@ class NumberTokenBuilder
         accepted = true
         while i < text.size && accepted
           c = text[i]
-          # ignore space char
-          if c == ' '
+          accepted = accept?(candidate, c)
+          if accepted
+            candidate += c
             i += 1
-          else
-            accepted = accept?(candidate, c)
-            if accepted
-              candidate += c
-              i += 1
-            end
           end
         end
       end
@@ -285,7 +270,6 @@ class NumberTokenBuilder
         i -= 1
 
         # back up to the 'E' in the input text
-        # (there may be spaces)
         i -= 1 while text[i] != 'E'
       end
     end
@@ -317,21 +301,17 @@ class NumberTokenBuilder
   def accept?(candidate, c)
     result = false
 
-    if candidate.size .zero? || candidate[0] != '#'
-      # can always append a digit
-      result = true if c =~ /[0-9]/
-      # can append a decimal point if no decimal point and no E
-      result = true if c == '.' && candidate.count('.', 'E').zero?
-      # can append E if no E and at least one digit (not just decimal point)
-      result = true if c == 'E' &&
-                       candidate.count('E').zero? &&
-                       !candidate.count('0-9').zero?
-      # can append sign if no chars or last char was E
-      result = true if c == '+' && (candidate.empty? || candidate[-1] == 'E')
-      result = true if c == '-' && (candidate.empty? || candidate[-1] == 'E')
-    else
-      result = candidate.size == 1
-    end
+    # can always append a digit
+    result = true if c =~ /[0-9]/
+    # can append a decimal point if no decimal point and no E
+    result = true if c == '.' && candidate.count('.', 'E').zero?
+    # can append E if no E and at least one digit (not just decimal point)
+    result = true if c == 'E' &&
+                     candidate.count('E').zero? &&
+                     !candidate.count('0-9').zero?
+    # can append sign if no chars or last char was E
+    result = true if c == '+' && (candidate.empty? || candidate[-1] == 'E')
+    result = true if c == '-' && (candidate.empty? || candidate[-1] == 'E')
 
     result
   end
@@ -348,15 +328,10 @@ class IntegerTokenBuilder
       accepted = true
       while i < text.size && accepted
         c = text[i]
-        # ignore space char
-        if c == ' '
+        accepted = accept?(candidate, c)
+        if accepted
+          candidate += c
           i += 1
-        else
-          accepted = accept?(candidate, c)
-          if accepted
-            candidate += c
-            i += 1
-          end
         end
       end
     end
@@ -461,15 +436,10 @@ class VariableTokenBuilder
       accepted = true
       while i < text.size && accepted
         c = text[i]
-        # ignore space char
-        if c == ' '
+        accepted = accept?(candidate, c)
+        if accepted
+          candidate += c
           i += 1
-        else
-          accepted = accept?(candidate, c)
-          if accepted
-            candidate += c
-            i += 1
-          end
         end
       end
     end
@@ -553,22 +523,6 @@ class InputBareTextTokenBuilder
   def token
     quoted = '"' + @token + '"'
     TextConstantToken.new(quoted)
-  end
-end
-
-# token reader for token separator
-class BreakTokenBuilder
-  def try(text)
-    @token = ''
-    @token = text[0] if text[0] == '_'
-  end
-
-  def count
-    @token.size
-  end
-
-  def token
-    BreakToken.new(@token)
   end
 end
 
