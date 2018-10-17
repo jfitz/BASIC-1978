@@ -49,8 +49,8 @@ class Interpreter
 
     tokenbuilders << ListTokenBuilder.new(keywords, KeywordToken)
 
-    un_ops = UnaryOperator.operators(false)
-    bi_ops = BinaryOperator.operators(false)
+    un_ops = UnaryOperator.operators
+    bi_ops = BinaryOperator.operators
     operators = (un_ops + bi_ops).uniq
     tokenbuilders << ListTokenBuilder.new(operators, OperatorToken)
 
@@ -65,7 +65,7 @@ class Interpreter
       ListTokenBuilder.new(FunctionFactory.user_function_names, UserFunctionToken)
 
     tokenbuilders << TextTokenBuilder.new(@quotes)
-    tokenbuilders << NumberTokenBuilder.new(false)
+    tokenbuilders << NumberTokenBuilder.new
     tokenbuilders << IntegerTokenBuilder.new
     tokenbuilders << VariableTokenBuilder.new
     tokenbuilders << ListTokenBuilder.new(%w(TRUE FALSE), BooleanConstantToken)

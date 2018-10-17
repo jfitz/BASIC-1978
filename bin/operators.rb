@@ -5,7 +5,7 @@ class UnaryOperator < AbstractElement
     classes.include?(token.class.to_s)
   end
 
-  @operators = { '+' => 5, '-' => 5, '#' => 4, ':' => 4, 'NOT' => 1 }
+  @operators = { '+' => 5, '-' => 5, '#' => 4, 'NOT' => 1 }
 
   def self.operator?(op)
     @operators.key?(op)
@@ -15,10 +15,8 @@ class UnaryOperator < AbstractElement
     @operators[op]
   end
 
-  def self.operators(colon_file)
-    op = @operators.keys
-    op -= [':'] unless colon_file
-    op
+  def self.operators
+    @operators.keys
   end
 
   def initialize(text)
@@ -224,10 +222,8 @@ class BinaryOperator < AbstractElement
     @operators[op]
   end
 
-  def self.operators(min_max_op)
-    op = @operators.keys
-    op -= %w(MIN MAX) unless min_max_op
-    op
+  def self.operators
+    @operators.keys
   end
 
   def initialize(text)

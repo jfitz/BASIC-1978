@@ -248,10 +248,8 @@ def make_interpreter_tokenbuilders(token_options, quotes, statement_separators,
   keywords = statement_factory.keywords_definitions
   tokenbuilders << ListTokenBuilder.new(keywords, KeywordToken)
 
-  colon_file = token_options['colon_file'].value
-  un_ops = UnaryOperator.operators(colon_file)
-  min_max_op = token_options['min_max_op'].value
-  bi_ops = BinaryOperator.operators(min_max_op)
+  un_ops = UnaryOperator.operators
+  bi_ops = BinaryOperator.operators
   operators = (un_ops + bi_ops).uniq
   tokenbuilders << ListTokenBuilder.new(operators, OperatorToken)
 
@@ -290,10 +288,8 @@ def make_command_tokenbuilders(token_options, quotes)
   )
   tokenbuilders << ListTokenBuilder.new(keywords, KeywordToken)
 
-  colon_file = token_options['colon_file'].value
-  un_ops = UnaryOperator.operators(colon_file)
-  min_max_op = token_options['min_max_op'].value
-  bi_ops = BinaryOperator.operators(min_max_op)
+  un_ops = UnaryOperator.operators
+  bi_ops = BinaryOperator.operators
   operators = (un_ops + bi_ops).uniq
   tokenbuilders << ListTokenBuilder.new(operators, OperatorToken)
 
@@ -334,8 +330,6 @@ OptionParser.new do |opt|
   opt.on('--no-timing') { |o| options[:no_timing] = o }
   opt.on('--tty') { |o| options[:tty] = o }
   opt.on('--tty-lf') { |o| options[:tty_lf] = o }
-  opt.on('--no-colon-separator') { |o| options[:no_colon_sep] = o }
-  opt.on('--colon-file') { |o| options[:colon_file] = o }
   opt.on('--bang-comment') { |o| options[:bang_comment] = o }
   opt.on('--print-width WIDTH') { |o| options[:print_width] = o }
   opt.on('--zone-width WIDTH') { |o| options[:zone_width] = o }
@@ -352,7 +346,6 @@ OptionParser.new do |opt|
   opt.on('--require-initialized') { |o| options[:require_initialized] = o }
   opt.on('--define-pi') { |o| options[:allow_pi] = o }
   opt.on('--define-ascii') { |o| options[:allow_ascii] = o }
-  opt.on('--min-max-op') { |o| options[:min_max_op] = o }
   opt.on('--asc-allow-all') { |o| options[:asc_allow_all] = o }
   opt.on('--chr-allow-all') { |o| options[:chr_allow_all] = o }
   opt.on('--single-quote-strings') { |o| options[:single_quote_strings] = o }
@@ -452,22 +445,16 @@ token_options['allow_pi'] = Option.new(boolean, options.key?(:allow_pi))
 token_options['apostrophe_comment'] = Option.new(boolean, true)
 token_options['backslash_separator'] = Option.new(boolean, true)
 token_options['bang_comment'] = Option.new(boolean, options.key?(:bang_comment))
-token_options['colon_file'] = Option.new(boolean, options.key?(:colon_file))
-
-colon_separator = !options.key?(:no_colon_sep) && !options.key?(:colon_file)
-token_options['colon_separator'] = Option.new(boolean, colon_separator)
-
-token_options['min_max_op'] = Option.new(boolean, options.key?(:min_max_op))
 
 token_options['single_quote_strings'] =
   Option.new(boolean, options.key?(:single_quote_strings))
 
-statement_seps = []
-statement_seps << '\\' if token_options['backslash_separator'].value
-statement_seps << ':' if token_options['colon_separator'].value
+statement_seps = [':']
+
 quotes = []
 quotes << '"'
 quotes << "'" if token_options['single_quote_strings'].value
+
 comment_leads = []
 comment_leads << '!' if token_options['bang_comment'].value
 
