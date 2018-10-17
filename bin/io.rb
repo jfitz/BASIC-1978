@@ -100,9 +100,6 @@ class ConsoleIo
 
     print(ascii_text)
     
-    ascii_text = high_bits(input_text) if
-      @output_options['input_high_bit'].value
-
     ascii_text
   end
 
@@ -195,10 +192,6 @@ class ConsoleIo
       print_item(' ')
       count -= 1
     end
-  end
-
-  def high_bits(text)
-    text.bytes.collect { |c| (c | 0x80).chr }.join
   end
 
   public

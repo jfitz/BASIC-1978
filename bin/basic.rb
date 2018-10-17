@@ -334,7 +334,6 @@ OptionParser.new do |opt|
   opt.on('--no-timing') { |o| options[:no_timing] = o }
   opt.on('--tty') { |o| options[:tty] = o }
   opt.on('--tty-lf') { |o| options[:tty_lf] = o }
-  opt.on('--input-high-bit') { |o| options[:input_high_bit] = o }
   opt.on('--no-colon-separator') { |o| options[:no_colon_sep] = o }
   opt.on('--colon-file') { |o| options[:colon_file] = o }
   opt.on('--bang-comment') { |o| options[:bang_comment] = o }
@@ -399,9 +398,6 @@ output_options['echo'] = Option.new(boolean, options.key?(:echo_input))
 
 output_options['implied_semicolon'] =
   Option.new(boolean, options.key?(:implied_semicolon))
-
-output_options['input_high_bit'] =
-  Option.new(boolean, options.key?(:input_high_bit))
 
 newline_speed = 0
 newline_speed = 10 if options.key?(:tty_lf)
