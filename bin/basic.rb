@@ -348,7 +348,6 @@ OptionParser.new do |opt|
   opt.on('--define-ascii') { |o| options[:allow_ascii] = o }
   opt.on('--asc-allow-all') { |o| options[:asc_allow_all] = o }
   opt.on('--chr-allow-all') { |o| options[:chr_allow_all] = o }
-  opt.on('--single-quote-strings') { |o| options[:single_quote_strings] = o }
 end.parse!
 
 list_filename = options[:list_name]
@@ -446,21 +445,14 @@ token_options['apostrophe_comment'] = Option.new(boolean, true)
 token_options['backslash_separator'] = Option.new(boolean, true)
 token_options['bang_comment'] = Option.new(boolean, options.key?(:bang_comment))
 
-token_options['single_quote_strings'] =
-  Option.new(boolean, options.key?(:single_quote_strings))
-
 statement_seps = [':']
 
-quotes = []
-quotes << '"'
-quotes << "'" if token_options['single_quote_strings'].value
+quotes = ['"']
 
 comment_leads = []
 comment_leads << '!' if token_options['bang_comment'].value
 
-comment_leads << "'" if
-  token_options['apostrophe_comment'].value &&
-  !token_options['single_quote_strings'].value
+comment_leads << "'" if token_options['apostrophe_comment'].value
 
 console_io = ConsoleIo.new(output_options)
 
