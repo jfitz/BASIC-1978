@@ -239,26 +239,17 @@ end
 class NumberTokenBuilder
   attr_reader :count
 
-  def initialize(allow_hash_constant)
-    @allow_hash_constant = allow_hash_constant
-  end
-
   def try(text)
-    if @allow_hash_constant && text.size >= 2 && text[0] == '#'
-      candidate = text[0..1]
-      i = 2
-    else
-      candidate = ''
-      if !text.empty? && text[0] != ' '
-        i = 0
-        accepted = true
-        while i < text.size && accepted
-          c = text[i]
-          accepted = accept?(candidate, c)
-          if accepted
-            candidate += c
-            i += 1
-          end
+    candidate = ''
+    if !text.empty? && text[0] != ' '
+      i = 0
+      accepted = true
+      while i < text.size && accepted
+        c = text[i]
+        accepted = accept?(candidate, c)
+        if accepted
+          candidate += c
+          i += 1
         end
       end
 

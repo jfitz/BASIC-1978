@@ -266,8 +266,7 @@ def make_interpreter_tokenbuilders(token_options, quotes, statement_separators,
     ListTokenBuilder.new(FunctionFactory.user_function_names, UserFunctionToken)
 
   tokenbuilders << TextTokenBuilder.new(quotes)
-  allow_hash_constant = token_options['allow_hash_constant'].value
-  tokenbuilders << NumberTokenBuilder.new(allow_hash_constant)
+  tokenbuilders << NumberTokenBuilder.new
   tokenbuilders << IntegerTokenBuilder.new
   allow_pi = token_options['allow_pi'].value
   tokenbuilders << NumericSymbolTokenBuilder.new if allow_pi
@@ -302,8 +301,7 @@ def make_command_tokenbuilders(token_options, quotes)
 
   tokenbuilders << TextTokenBuilder.new(quotes)
 
-  allow_hash_constant = token_options['allow_hash_constant'].value
-  tokenbuilders << NumberTokenBuilder.new(allow_hash_constant)
+  tokenbuilders << NumberTokenBuilder.new
 
   tokenbuilders << ListTokenBuilder.new(%w(TRUE FALSE), BooleanConstantToken)
   tokenbuilders << WhitespaceTokenBuilder.new
@@ -354,7 +352,6 @@ OptionParser.new do |opt|
   opt.on('--lock-fornext') { |o| options[:lock_fornext] = o }
   opt.on('--base BASE') { |o| options[:base] = o }
   opt.on('--require-initialized') { |o| options[:require_initialized] = o }
-  opt.on('--hash-constant') { |o| options[:hash_constant] = o }
   opt.on('--define-pi') { |o| options[:allow_pi] = o }
   opt.on('--define-ascii') { |o| options[:allow_ascii] = o }
   opt.on('--min-max-op') { |o| options[:min_max_op] = o }
@@ -458,9 +455,6 @@ interpreter_options['respect_randomize'] =
 
 token_options = {}
 token_options['allow_ascii'] = Option.new(boolean, options.key?(:allow_ascii))
-
-token_options['allow_hash_constant'] =
-  Option.new(boolean, options.key?(:hash_constant))
 
 token_options['allow_pi'] = Option.new(boolean, options.key?(:allow_pi))
 token_options['apostrophe_comment'] = Option.new(boolean, true)
