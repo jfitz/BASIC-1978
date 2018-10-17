@@ -101,7 +101,11 @@
 60 INPUT A$
  ScalarReference:A$
 70 A$=LEFT$(A$,1)
- Token 'InvalidToken:$' is not a value or operator
+ ScalarReference:A$
+ ScalarValue:A$
+ NumericConstant:1
+ FunctionLeft
+ AssignmentOperator:=
 80 IF A$="Y" THEN 2000
  ScalarValue:A$
  TextConstant:"Y"
@@ -1051,11 +1055,23 @@
  end:     ["NumericConstant:3"]
  step:    ["NumericConstant:1"]
 1030 PRINT TAB(10);MID$(P$,S((I-1)*3+J)+2,1);
- Syntax error: "MID$(P$,S((I-1)*3+J)+2,1)" is not a value or operator
  ITEMS
  NumericConstant:10
  FunctionTab
  CarriageControl:;
+ ScalarValue:P$
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:-
+ NumericConstant:3
+ BinaryOperator:*
+ ScalarValue:J
+ BinaryOperator:+
+ ScalarValue:S
+ NumericConstant:2
+ BinaryOperator:+
+ NumericConstant:1
+ FunctionMid
  CarriageControl:;
 1040 NEXT J
  VariableName:J

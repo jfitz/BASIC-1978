@@ -61,7 +61,11 @@
  TextConstant:"LIST"
  BinaryOperator:=
 150 IF LEFT$(A$,1)<>"Y" THEN 120
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:A$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"Y"
+ BinaryOperator:<>
 160 K=1
  ScalarReference:K
  NumericConstant:1
@@ -75,19 +79,39 @@
  NumericConstant:0
  BinaryOperator:=
 190 IF LEFT$(A$(K),2)="\Q" THEN 170
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:K
+ ScalarValue:A$
+ NumericConstant:2
+ FunctionLeft
+ TextConstant:"\Q"
+ BinaryOperator:=
 200 PRINT "IS IT A ";RIGHT$(A$(K),LEN(A$(K))-2);
- Syntax error: "RIGHT$(A$(K),LEN(A$(K))-2)" is not a value or operator
  ITEMS
  TextConstant:"IS IT A "
  CarriageControl:;
+ ScalarValue:K
+ ScalarValue:A$
+ ScalarValue:K
+ ScalarValue:A$
+ FunctionLen
+ NumericConstant:2
+ BinaryOperator:-
+ FunctionRight
  CarriageControl:;
 210 INPUT A$
  ScalarReference:A$
 220 A$=LEFT$(A$,1)
- Token 'InvalidToken:$' is not a value or operator
+ ScalarReference:A$
+ ScalarValue:A$
+ NumericConstant:1
+ FunctionLeft
+ AssignmentOperator:=
 230 IF LEFT$(A$,1)="Y" THEN PRINT "WHY NOT TRY ANOTHER ANIMAL?": GOTO 120
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:A$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"Y"
+ BinaryOperator:=
  ITEMS
  TextConstant:"WHY NOT TRY ANOTHER ANIMAL?"
  CarriageControl:NL
@@ -99,12 +123,20 @@
  TextConstant:"PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
  CarriageControl:NL
 260 PRINT V$;" FROM A ";RIGHT$(A$(K),LEN(A$(K))-2)
- Syntax error: "RIGHT$(A$(K),LEN(A$(K))-2)" is not a value or operator
  ITEMS
  ScalarValue:V$
  CarriageControl:;
  TextConstant:" FROM A "
  CarriageControl:;
+ ScalarValue:K
+ ScalarValue:A$
+ ScalarValue:K
+ ScalarValue:A$
+ FunctionLen
+ NumericConstant:2
+ BinaryOperator:-
+ FunctionRight
+ CarriageControl:NL
 270 INPUT X$
  ScalarReference:X$
 280 PRINT "FOR A ";V$;" THE ANSWER WOULD BE ";
@@ -118,7 +150,11 @@
 290 INPUT A$
  ScalarReference:A$
 300 A$=LEFT$(A$,1): IF A$<>"Y" AND A$<>"N" THEN 280
- Token 'InvalidToken:$' is not a value or operator
+ ScalarReference:A$
+ ScalarValue:A$
+ NumericConstant:1
+ FunctionLeft
+ AssignmentOperator:=
  ScalarValue:A$
  TextConstant:"Y"
  BinaryOperator:<>
@@ -209,15 +245,27 @@
  end:     ["ScalarValue:Q$", "FunctionLen"]
  step:    ["NumericConstant:1"]
 415 IF MID$(Q$,Z,1)<>"\" THEN PRINT MID$(Q$,Z,1);: NEXT Z
- Token 'InvalidToken:$' is not a value or operator
- Syntax error: "MID$(Q$,Z,1)" is not a value or operator
+ ScalarValue:Q$
+ ScalarValue:Z
+ NumericConstant:1
+ FunctionMid
+ TextConstant:"\"
+ BinaryOperator:<>
  ITEMS
+ ScalarValue:Q$
+ ScalarValue:Z
+ NumericConstant:1
+ FunctionMid
  CarriageControl:;
  VariableName:Z
 420 INPUT C$
  ScalarReference:C$
 430 C$=LEFT$(C$,1)
- Token 'InvalidToken:$' is not a value or operator
+ ScalarReference:C$
+ ScalarValue:C$
+ NumericConstant:1
+ FunctionLeft
+ AssignmentOperator:=
 440 IF C$<>"Y" AND C$<>"N" THEN 410
  ScalarValue:C$
  TextConstant:"Y"
@@ -238,7 +286,12 @@
  end:     ["ScalarValue:Q$", "FunctionLen", "NumericConstant:1", "BinaryOperator:-"]
  step:    ["NumericConstant:1"]
 460 IF MID$(Q$,X,2)=T$ THEN 480
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:Q$
+ ScalarValue:X
+ NumericConstant:2
+ FunctionMid
+ ScalarValue:T$
+ BinaryOperator:=
 470 NEXT X
  VariableName:X
 475 STOP
@@ -249,13 +302,30 @@
  end:     ["ScalarValue:Q$", "FunctionLen"]
  step:    ["NumericConstant:1"]
 490 IF MID$(Q$,Y,1)="\" THEN 510
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:Q$
+ ScalarValue:Y
+ NumericConstant:1
+ FunctionMid
+ TextConstant:"\"
+ BinaryOperator:=
 500 NEXT Y
  VariableName:Y
 505 STOP
  
 510 K=VAL(MID$(Q$,X+2,Y-X-2))
- Token 'InvalidToken:$' is not a value or operator
+ ScalarReference:K
+ ScalarValue:Q$
+ ScalarValue:X
+ NumericConstant:2
+ BinaryOperator:+
+ ScalarValue:Y
+ ScalarValue:X
+ BinaryOperator:-
+ NumericConstant:2
+ BinaryOperator:-
+ FunctionMid
+ FunctionVal
+ AssignmentOperator:=
 520 RETURN
  
 530 DATA "4","\QDOES IT SWIM\Y2\N3\","\AFISH","\ABIRD"
@@ -279,7 +349,12 @@
  end:     ["NumericConstant:200"]
  step:    ["NumericConstant:1"]
 620 IF LEFT$(A$(I),2)<>"\A" THEN 650
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:I
+ ScalarValue:A$
+ NumericConstant:2
+ FunctionLeft
+ TextConstant:"\A"
+ BinaryOperator:<>
 624 PRINT TAB(15*X);
  ITEMS
  NumericConstant:15
@@ -293,9 +368,19 @@
  end:     ["ScalarValue:I", "ScalarValue:A$", "FunctionLen"]
  step:    ["NumericConstant:1"]
 640 IF MID$(A$(I),Z,1)<>"\" THEN PRINT MID$(A$(I),Z,1);: NEXT Z
- Token 'InvalidToken:$' is not a value or operator
- Syntax error: "MID$(A$(I),Z,1)" is not a value or operator
+ ScalarValue:I
+ ScalarValue:A$
+ ScalarValue:Z
+ NumericConstant:1
+ FunctionMid
+ TextConstant:"\"
+ BinaryOperator:<>
  ITEMS
+ ScalarValue:I
+ ScalarValue:A$
+ ScalarValue:Z
+ NumericConstant:1
+ FunctionMid
  CarriageControl:;
  VariableName:Z
 645 X=X+1: IF X=4 THEN X=0: PRINT

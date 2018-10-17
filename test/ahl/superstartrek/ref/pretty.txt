@@ -73,8 +73,7 @@
 1560 PRINT "COMBAT AREA      CONDITION RED" : IF S > 200 THEN 1590
 1580 PRINT "   SHIELDS DANGEROUSLY LOW"
 1590 FOR I = 1 TO 3 : K(I, 1) = 0 : K(I, 2) = 0 : NEXT I
-1600 FOR I = 1 TO 3 : K(I, 3) = 0 : NEXT I : Q$ = Z$ + Z$ + Z$ + Z$ + Z$ + Z$ + Z$ + LEFT $ (Z$, 17)
- Token 'InvalidToken:$' is not a value or operator
+1600 FOR I = 1 TO 3 : K(I, 3) = 0 : NEXT I : Q$ = Z$ + Z$ + Z$ + Z$ + Z$ + Z$ + Z$ + LEFT$(Z$, 17)
 1660 REM POSITION ENTERPRISE IN QUADRANT, THEN PLACE "K3" KLINGONS, &
 1670 REM "B3" STARBASES, & "S3" STARS ELSEWHERE.
 1680 A$ = "<*>" : Z1 = S1 : Z2 = S2 : GOSUB 8670 : IF K3 < 1 THEN 1820
@@ -90,8 +89,7 @@
 2040 PRINT " AND SHIELD CONTROL" : PRINT "IS PRESENTLY INCAPABLE OF CROSS";
 2050 PRINT "-CIRCUITING TO ENGINE ROOM!!" : GOTO 6220
 2060 INPUT "COMMAND"; A$
-2080 FOR I = 1 TO 9 : IF LEFT $ (A$, 3) <> MID $ (A1$, 3 * I - 2, 3) THEN 2160
- Token 'InvalidToken:$' is not a value or operator
+2080 FOR I = 1 TO 9 : IF LEFT$(A$, 3) <> MID$(A1$, 3 * I - 2, 3) THEN 2160
 2140 ON I GOTO 2300, 1980, 4000, 4260, 4700, 5530, 5690, 7290, 6270
 2160 NEXT I : PRINT "ENTER ONE OF THE FOLLOWING:"
 2180 PRINT "  NAV  (TO SET COURSE)"
@@ -142,8 +140,7 @@
 3110 X1 = C(C1, 1) + (C(C1 + 1, 1) - C(C1, 1)) * (C1 - INT(C1)) : X = S1 : Y = S2
 3140 X2 = C(C1, 2) + (C(C1 + 1, 2) - C(C1, 2)) * (C1 - INT(C1)) : Q4 = Q1 : Q5 = Q2
 3170 FOR I = 1 TO N : S1 = S1 + X1 : S2 = S2 + X2 : IF S1 < 1 OR S1 >= 9 OR S2 < 1 OR S2 >= 9 THEN 3500
-3240 S8 = INT(S1) * 24 + INT(S2) * 3 - 26 : IF MID $ (Q$, S8, 2) = "  " THEN 3360
- Token 'InvalidToken:$' is not a value or operator
+3240 S8 = INT(S1) * 24 + INT(S2) * 3 - 26 : IF MID$(Q$, S8, 2) = "  " THEN 3360
 3320 S1 = INT(S1 - X1) : S2 = INT(S2 - X2) : PRINT "WARP ENGINES SHUT DOWN AT ";
 3350 PRINT "SECTOR"; S1; ","; S2; "DUE TO BAD NAVAGATION" : GOTO 3370
 3360 NEXT I : S1 = INT(S1) : S2 = INT(S2)
@@ -181,8 +178,7 @@
 4060 FOR I = Q1 - 1 TO Q1 + 1 : N(1) = -1 : N(2) = -2 : N(3) = -3 : FOR J = Q2 - 1 TO Q2 + 1
 4120 IF I > 0 AND I < 9 AND J > 0 AND J < 9 THEN N(J - Q2 + 2) = G(I, J) : Z(I, J) = G(I, J)
 4180 NEXT J : FOR L = 1 TO 3 : PRINT ": "; : IF N(L) < 0 THEN PRINT "*** "; : GOTO 4230
-4210 PRINT RIGHT $ (STR$(N(L) + 1000), 3); " ";
- Syntax error: "RIGHT$(STR$(N(L)+1000),3)" is not a value or operator
+4210 PRINT RIGHT$(STR$(N(L) + 1000), 3); " ";
 4230 NEXT L : PRINT ":" : PRINT O1$ : NEXT I : GOTO 1990
 4250 REM PHASER CONTROL CODE BEGINS HERE
 4260 IF D(4) < 0 THEN PRINT "PHASERS INOPERATIVE" : GOTO 1990
@@ -258,8 +254,7 @@
 5870 FOR I = 1 TO 8 : IF D(I) < 0 THEN D(I) = 0
 5890 NEXT I : T = T + D3 + .1
 5910 PRINT : PRINT "DEVICE             STATE OF REPAIR" : FOR R1 = 1 TO 8
-5920 GOSUB 8790 : PRINT G2$; LEFT $ (Z$, 25 - LEN(G2$)); INT(D(R1) * 100) * .01
- Syntax error: "LEFT$(Z$,25-LEN(G2$))" is not a value or operator
+5920 GOSUB 8790 : PRINT G2$; LEFT$(Z$, 25 - LEN(G2$)); INT(D(R1) * 100) * .01
 5950 NEXT R1 : PRINT : IF D0 <> 0 THEN 5720
 5980 GOTO 1990
 5990 REM KLINGONS SHOOTING
@@ -300,8 +295,7 @@
 6720 IF D(2) >= 0 THEN 6770
 6730 PRINT : PRINT "*** SHORT RANGE SENSORS ARE OUT ***" : PRINT : RETURN
 6770 O1$ = "---------------------------------" : PRINT O1$ : FOR I = 1 TO 8
-6820 FOR J = (I - 1) * 24 + 1 TO (I - 1) * 24 + 22 STEP 3 : PRINT " "; MID $ (Q$, J, 3); : NEXT J
- Syntax error: "MID$(Q$,J,3)" is not a value or operator
+6820 FOR J = (I - 1) * 24 + 1 TO (I - 1) * 24 + 22 STEP 3 : PRINT " "; MID$(Q$, J, 3); : NEXT J
 6830 ON I GOTO 6850, 6900, 6960, 7020, 7070, 7120, 7180, 7240
 6850 PRINT "        STARDATE          "; INT(T * 10) * .1 : GOTO 7260
 6900 PRINT "        CONDITION          "; C$ : GOTO 7260
@@ -335,8 +329,7 @@
 7560 O1$ = "     ----- ----- ----- ----- ----- ----- ----- -----"
 7570 PRINT O1$ : FOR I = 1 TO 8 : PRINT I; : IF H8 = 0 THEN 7740
 7630 FOR J = 1 TO 8 : PRINT "   "; : IF Z(I, J) = 0 THEN PRINT "***"; : GOTO 7720
-7700 PRINT RIGHT $ (STR$(Z(I, J) + 1000), 3);
- Syntax error: "RIGHT$(STR$(Z(I,J)+1000),3)" is not a value or operator
+7700 PRINT RIGHT$(STR$(Z(I, J) + 1000), 3);
 7720 NEXT J : GOTO 7850
 7740 Z4 = I : Z5 = 1 : GOSUB 9030 : J0 = INT(15 - .5 * LEN(G2$)) : PRINT TAB(J0); G2$;
 7800 Z5 = 5 : GOSUB 9030 : J0 = INT(39 - .5 * LEN(G2$)) : PRINT TAB(J0); G2$;
@@ -386,12 +379,9 @@
 8660 REM INSERT IN STRING ARRAY FOR QUADRANT
 8670 S8 = INT(Z2 - .5) * 3 + INT(Z1 - .5) * 24 + 1
 8675 IF LEN(A$) <> 3 THEN PRINT "ERROR" : STOP
-8680 IF S8 = 1 THEN Q$ = A$ + RIGHT $ (Q$, 189) : RETURN
- Token 'InvalidToken:$' is not a value or operator
-8690 IF S8 = 190 THEN Q$ = LEFT $ (Q$, 189) + A$ : RETURN
- Token 'InvalidToken:$' is not a value or operator
-8700 Q$ = LEFT $ (Q$, S8 - 1) + A$ + RIGHT $ (Q$, 190 - S8) : RETURN
- Token 'InvalidToken:$' is not a value or operator
+8680 IF S8 = 1 THEN Q$ = A$ + RIGHT$(Q$, 189) : RETURN
+8690 IF S8 = 190 THEN Q$ = LEFT$(Q$, 189) + A$ : RETURN
+8700 Q$ = LEFT$(Q$, S8 - 1) + A$ + RIGHT$(Q$, 190 - S8) : RETURN
 8780 REM PRINTS DEVICE NAME
 8790 ON R1 GOTO 8792, 8794, 8796, 8798, 8800, 8802, 8804, 8806
 8792 G2$ = "WARP ENGINES" : RETURN
@@ -404,8 +394,7 @@
 8806 G2$ = "LIBRARY-COMPUTER" : RETURN
 8820 REM STRING COMPARISON IN QUADRANT ARRAY
 8830 Z1 = INT(Z1 + .5) : Z2 = INT(Z2 + .5) : S8 = (Z2 - 1) * 3 + (Z1 - 1) * 24 + 1 : Z3 = 0
-8890 IF MID $ (Q$, S8, 3) <> A$ THEN RETURN
- Token 'InvalidToken:$' is not a value or operator
+8890 IF MID$(Q$, S8, 3) <> A$ THEN RETURN
 8900 Z3 = 1 : RETURN
 9010 REM QUADRANT NAME IN G2$ FROM Z4,Z5 (=Q1,Q2)
 9020 REM CALL WITH G5=1 TO GET REGION NAME ONLY

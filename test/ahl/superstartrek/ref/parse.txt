@@ -692,7 +692,6 @@
  AssignmentOperator:=
  VariableName:I
 1600 FORI=1TO3:K(I,3)=0:NEXTI:Q$=Z$+Z$+Z$+Z$+Z$+Z$+Z$+LEFT$(Z$,17)
- Token 'InvalidToken:$' is not a value or operator
  control: VariableName:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
@@ -703,6 +702,25 @@
  NumericConstant:0
  AssignmentOperator:=
  VariableName:I
+ ScalarReference:Q$
+ ScalarValue:Z$
+ ScalarValue:Z$
+ BinaryOperator:+
+ ScalarValue:Z$
+ BinaryOperator:+
+ ScalarValue:Z$
+ BinaryOperator:+
+ ScalarValue:Z$
+ BinaryOperator:+
+ ScalarValue:Z$
+ BinaryOperator:+
+ ScalarValue:Z$
+ BinaryOperator:+
+ ScalarValue:Z$
+ NumericConstant:17
+ FunctionLeft
+ BinaryOperator:+
+ AssignmentOperator:=
 1660 REM POSITION ENTERPRISE IN QUADRANT, THEN PLACE "K3" KLINGONS, &
  Remark:POSITION ENTERPRISE IN QUADRANT, THEN PLACE "K3" KLINGONS, &
 1670 REM "B3" STARBASES, & "S3" STARS ELSEWHERE.
@@ -842,11 +860,22 @@
 2060 INPUT"COMMAND";A$
  ScalarReference:A$
 2080 FORI=1TO9:IFLEFT$(A$,3)<>MID$(A1$,3*I-2,3)THEN2160
- Token 'InvalidToken:$' is not a value or operator
  control: VariableName:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:9"]
  step:    ["NumericConstant:1"]
+ ScalarValue:A$
+ NumericConstant:3
+ FunctionLeft
+ ScalarValue:A1$
+ NumericConstant:3
+ ScalarValue:I
+ BinaryOperator:*
+ NumericConstant:2
+ BinaryOperator:-
+ NumericConstant:3
+ FunctionMid
+ BinaryOperator:<>
 2140 ONIGOTO2300,1980,4000,4260,4700,5530,5690,7290,6270
  ScalarValue:I
  LineNumber:2300
@@ -1320,7 +1349,6 @@
  BinaryOperator:>=
  BinaryOperator:OR
 3240 S8=INT(S1)*24+INT(S2)*3-26:IFMID$(Q$,S8,2)="  "THEN3360
- Token 'InvalidToken:$' is not a value or operator
  ScalarReference:S8
  ScalarValue:S1
  FunctionInt
@@ -1334,6 +1362,12 @@
  NumericConstant:26
  BinaryOperator:-
  AssignmentOperator:=
+ ScalarValue:Q$
+ ScalarValue:S8
+ NumericConstant:2
+ FunctionMid
+ TextConstant:"  "
+ BinaryOperator:=
 3320 S1=INT(S1-X1):S2=INT(S2-X2):PRINT"WARP ENGINES SHUT DOWN AT ";
  ScalarReference:S1
  ScalarValue:S1
@@ -1753,8 +1787,14 @@
  CarriageControl:;
  LineNumber:4230
 4210 PRINTRIGHT$(STR$(N(L)+1000),3);" ";
- Syntax error: "RIGHT$(STR$(N(L)+1000),3)" is not a value or operator
  ITEMS
+ ScalarValue:L
+ ScalarValue:N
+ NumericConstant:1000
+ BinaryOperator:+
+ FunctionStr
+ NumericConstant:3
+ FunctionRight
  CarriageControl:;
  TextConstant:" "
  CarriageControl:;
@@ -2522,11 +2562,16 @@
  end:     ["NumericConstant:8"]
  step:    ["NumericConstant:1"]
 5920 GOSUB8790:PRINTG2$;LEFT$(Z$,25-LEN(G2$));INT(D(R1)*100)*.01
- Syntax error: "LEFT$(Z$,25-LEN(G2$))" is not a value or operator
  LineNumber:8790
  ITEMS
  ScalarValue:G2$
  CarriageControl:;
+ ScalarValue:Z$
+ NumericConstant:25
+ ScalarValue:G2$
+ FunctionLen
+ BinaryOperator:-
+ FunctionLeft
  CarriageControl:;
  ScalarValue:R1
  ScalarValue:D
@@ -2882,7 +2927,6 @@
  end:     ["NumericConstant:8"]
  step:    ["NumericConstant:1"]
 6820 FORJ=(I-1)*24+1TO(I-1)*24+22STEP3:PRINT" ";MID$(Q$,J,3);:NEXTJ
- Syntax error: "MID$(Q$,J,3)" is not a value or operator
  control: VariableName:J
  start:   ["ScalarValue:I", "NumericConstant:1", "BinaryOperator:-", "NumericConstant:24", "BinaryOperator:*", "NumericConstant:1", "BinaryOperator:+"]
  end:     ["ScalarValue:I", "NumericConstant:1", "BinaryOperator:-", "NumericConstant:24", "BinaryOperator:*", "NumericConstant:22", "BinaryOperator:+"]
@@ -2890,6 +2934,10 @@
  ITEMS
  TextConstant:" "
  CarriageControl:;
+ ScalarValue:Q$
+ ScalarValue:J
+ NumericConstant:3
+ FunctionMid
  CarriageControl:;
  VariableName:J
 6830 ONIGOTO6850,6900,6960,7020,7070,7120,7180,7240
@@ -3122,8 +3170,15 @@
  CarriageControl:;
  LineNumber:7720
 7700 PRINTRIGHT$(STR$(Z(I,J)+1000),3);
- Syntax error: "RIGHT$(STR$(Z(I,J)+1000),3)" is not a value or operator
  ITEMS
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:Z
+ NumericConstant:1000
+ BinaryOperator:+
+ FunctionStr
+ NumericConstant:3
+ FunctionRight
  CarriageControl:;
 7720 NEXTJ:GOTO7850
  VariableName:J
@@ -3571,19 +3626,45 @@
  CarriageControl:NL
  
 8680 IFS8=1THENQ$=A$+RIGHT$(Q$,189):RETURN
- Token 'InvalidToken:$' is not a value or operator
  ScalarValue:S8
  NumericConstant:1
  BinaryOperator:=
+ ScalarReference:Q$
+ ScalarValue:A$
+ ScalarValue:Q$
+ NumericConstant:189
+ FunctionRight
+ BinaryOperator:+
+ AssignmentOperator:=
  
 8690 IFS8=190THENQ$=LEFT$(Q$,189)+A$:RETURN
- Token 'InvalidToken:$' is not a value or operator
  ScalarValue:S8
  NumericConstant:190
  BinaryOperator:=
+ ScalarReference:Q$
+ ScalarValue:Q$
+ NumericConstant:189
+ FunctionLeft
+ ScalarValue:A$
+ BinaryOperator:+
+ AssignmentOperator:=
  
 8700 Q$=LEFT$(Q$,S8-1)+A$+RIGHT$(Q$,190-S8):RETURN
- Token 'InvalidToken:$' is not a value or operator
+ ScalarReference:Q$
+ ScalarValue:Q$
+ ScalarValue:S8
+ NumericConstant:1
+ BinaryOperator:-
+ FunctionLeft
+ ScalarValue:A$
+ BinaryOperator:+
+ ScalarValue:Q$
+ NumericConstant:190
+ ScalarValue:S8
+ BinaryOperator:-
+ FunctionRight
+ BinaryOperator:+
+ AssignmentOperator:=
  
 8780 REM PRINTS DEVICE NAME
  Remark:PRINTS DEVICE NAME
@@ -3671,7 +3752,12 @@
  NumericConstant:0
  AssignmentOperator:=
 8890 IFMID$(Q$,S8,3)<>A$THENRETURN
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:Q$
+ ScalarValue:S8
+ NumericConstant:3
+ FunctionMid
+ ScalarValue:A$
+ BinaryOperator:<>
  
 8900 Z3=1:RETURN
  ScalarReference:Z3

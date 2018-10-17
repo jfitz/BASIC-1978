@@ -166,4 +166,448 @@
  NumericConstant:15
  AssignmentOperator:=
 420 FOR X=S TO 1 STEP -1
- Syntax error
+ control: VariableName:X
+ start:   ["ScalarValue:S"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:1", "UnaryOperator:-"]
+430 T(Y,1)=D: D=D-2: Y=Y-1
+ ScalarValue:Y
+ NumericConstant:1
+ ScalarReference:T
+ ScalarValue:D
+ AssignmentOperator:=
+ ScalarReference:D
+ ScalarValue:D
+ NumericConstant:2
+ BinaryOperator:-
+ AssignmentOperator:=
+ ScalarReference:Y
+ ScalarValue:Y
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+460 NEXT X
+ VariableName:X
+470 GOSUB 1230
+ LineNumber:1230
+480 PRINT "WHICH DISK WOULD YOU LIKE TO MOVE";:E=0
+ ITEMS
+ TextConstant:"WHICH DISK WOULD YOU LIKE TO MOVE"
+ CarriageControl:;
+ ScalarReference:E
+ NumericConstant:0
+ AssignmentOperator:=
+500 INPUT D
+ ScalarReference:D
+510 IF (D-3)*(D-5)*(D-7)*(D-9)*(D-11)*(D-13)*(D-15)=0 THEN 580
+ ScalarValue:D
+ NumericConstant:3
+ BinaryOperator:-
+ ScalarValue:D
+ NumericConstant:5
+ BinaryOperator:-
+ BinaryOperator:*
+ ScalarValue:D
+ NumericConstant:7
+ BinaryOperator:-
+ BinaryOperator:*
+ ScalarValue:D
+ NumericConstant:9
+ BinaryOperator:-
+ BinaryOperator:*
+ ScalarValue:D
+ NumericConstant:11
+ BinaryOperator:-
+ BinaryOperator:*
+ ScalarValue:D
+ NumericConstant:13
+ BinaryOperator:-
+ BinaryOperator:*
+ ScalarValue:D
+ NumericConstant:15
+ BinaryOperator:-
+ BinaryOperator:*
+ NumericConstant:0
+ BinaryOperator:=
+520 PRINT "ILLEGAL ENTRY... YOU MAY ONLY TYPE 3,5,7,9,11,13, OR 15."
+ ITEMS
+ TextConstant:"ILLEGAL ENTRY... YOU MAY ONLY TYPE 3,5,7,9,11,13, OR 15."
+ CarriageControl:NL
+530 E=E+1: IF E>1 THEN 560
+ ScalarReference:E
+ ScalarValue:E
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:E
+ NumericConstant:1
+ BinaryOperator:>
+550 GOTO 500
+ LineNumber:500
+560 PRINT "STOP WASTING MY TIME.  GO BOTHER SOMEONE ELSE.": STOP
+ ITEMS
+ TextConstant:"STOP WASTING MY TIME.  GO BOTHER SOMEONE ELSE."
+ CarriageControl:NL
+ 
+580 REM *** CHECK IF REQUESTED DISK IS BELOW ANOTHER
+ Remark:*** CHECK IF REQUESTED DISK IS BELOW ANOTHER
+590 FOR R=1 TO 7
+ control: VariableName:R
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+600 FOR C=1 TO 3
+ control: VariableName:C
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+610 IF T(R,C)=D THEN 640
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:T
+ ScalarValue:D
+ BinaryOperator:=
+620 NEXT C: NEXT R
+ VariableName:C
+ VariableName:R
+640 FOR Q=R TO 1 STEP -1
+ control: VariableName:Q
+ start:   ["ScalarValue:R"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:1", "UnaryOperator:-"]
+645 IF T(Q,C)=0 THEN 660
+ ScalarValue:Q
+ ScalarValue:C
+ ScalarValue:T
+ NumericConstant:0
+ BinaryOperator:=
+650 IF T(Q,C)<D THEN 680
+ ScalarValue:Q
+ ScalarValue:C
+ ScalarValue:T
+ ScalarValue:D
+ BinaryOperator:<
+660 NEXT Q
+ VariableName:Q
+670 GOTO 700
+ LineNumber:700
+680 PRINT "THAT DISK IS BELOW ANOTHER ONE.  MAKE ANOTHER CHOICE."
+ ITEMS
+ TextConstant:"THAT DISK IS BELOW ANOTHER ONE.  MAKE ANOTHER CHOICE."
+ CarriageControl:NL
+690 GOTO 480
+ LineNumber:480
+700 E=0
+ ScalarReference:E
+ NumericConstant:0
+ AssignmentOperator:=
+705 INPUT "PLACE DISK ON WHICH NEEDLE";N
+ ScalarReference:N
+730 IF (N-1)*(N-2)*(N-3)=0 THEN 800
+ ScalarValue:N
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarValue:N
+ NumericConstant:2
+ BinaryOperator:-
+ BinaryOperator:*
+ ScalarValue:N
+ NumericConstant:3
+ BinaryOperator:-
+ BinaryOperator:*
+ NumericConstant:0
+ BinaryOperator:=
+735 E=E+1
+ ScalarReference:E
+ ScalarValue:E
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+740 IF E>1 THEN 780
+ ScalarValue:E
+ NumericConstant:1
+ BinaryOperator:>
+750 PRINT "I'LL ASSUME YOU HIT THE WRONG KEY THIS TIME.  BUT WATCH IT,"
+ ITEMS
+ TextConstant:"I'LL ASSUME YOU HIT THE WRONG KEY THIS TIME.  BUT WATCH IT,"
+ CarriageControl:NL
+760 PRINT "I ONLY ALLOW ONE MISTAKE.": GOTO 705
+ ITEMS
+ TextConstant:"I ONLY ALLOW ONE MISTAKE."
+ CarriageControl:NL
+ LineNumber:705
+780 PRINT "I TRIED TO WARN YOU, BUT YOU WOULDN'T LISTEN."
+ ITEMS
+ TextConstant:"I TRIED TO WARN YOU, BUT YOU WOULDN'T LISTEN."
+ CarriageControl:NL
+790 PRINT "BYE BYE, BIG SHOT.":STOP
+ ITEMS
+ TextConstant:"BYE BYE, BIG SHOT."
+ CarriageControl:NL
+ 
+800 FOR R=1 TO 7
+ control: VariableName:R
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+810 IF T(R,N)<>0 THEN 840
+ ScalarValue:R
+ ScalarValue:N
+ ScalarValue:T
+ NumericConstant:0
+ BinaryOperator:<>
+820 NEXT R
+ VariableName:R
+830 GOTO 880
+ LineNumber:880
+835 REM *** CHECK IF DISK TO BE PLACED ON A LARGER ONE
+ Remark:*** CHECK IF DISK TO BE PLACED ON A LARGER ONE
+840 IF D<T(R,N) THEN 880
+ ScalarValue:D
+ ScalarValue:R
+ ScalarValue:N
+ ScalarValue:T
+ BinaryOperator:<
+850 PRINT "YOU CAN'T PLACE A LARGER DISK ON TOP OF A SMALLER ONE,"
+ ITEMS
+ TextConstant:"YOU CAN'T PLACE A LARGER DISK ON TOP OF A SMALLER ONE,"
+ CarriageControl:NL
+860 PRINT "IT MIGHT CRUSH IT!": PRINT "NOW THEN, ";:GOTO 480
+ ITEMS
+ TextConstant:"IT MIGHT CRUSH IT!"
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"NOW THEN, "
+ CarriageControl:;
+ LineNumber:480
+875 REM *** MOVE RELOCATED DISK
+ Remark:*** MOVE RELOCATED DISK
+880 FOR V=1 TO 7: FOR W=1 TO 3
+ control: VariableName:V
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+ control: VariableName:W
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+900 IF T(V,W)=D THEN 930
+ ScalarValue:V
+ ScalarValue:W
+ ScalarValue:T
+ ScalarValue:D
+ BinaryOperator:=
+910 NEXT W: NEXT V
+ VariableName:W
+ VariableName:V
+925 REM *** LOCATE EMPTY SPACE ON NEEDLE N
+ Remark:*** LOCATE EMPTY SPACE ON NEEDLE N
+930 FOR U=1 TO 7
+ control: VariableName:U
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+940 IF T(U,N)<>0 THEN 970
+ ScalarValue:U
+ ScalarValue:N
+ ScalarValue:T
+ NumericConstant:0
+ BinaryOperator:<>
+950 NEXT U
+ VariableName:U
+960 U=7: GOTO 980
+ ScalarReference:U
+ NumericConstant:7
+ AssignmentOperator:=
+ LineNumber:980
+965 REM *** MOVE DISK AND SET OLD LOCATION TO 0
+ Remark:*** MOVE DISK AND SET OLD LOCATION TO 0
+970 U=U-1
+ ScalarReference:U
+ ScalarValue:U
+ NumericConstant:1
+ BinaryOperator:-
+ AssignmentOperator:=
+980 T(U,N)=T(V,W): T(V,W)=0
+ ScalarValue:U
+ ScalarValue:N
+ ScalarReference:T
+ ScalarValue:V
+ ScalarValue:W
+ ScalarValue:T
+ AssignmentOperator:=
+ ScalarValue:V
+ ScalarValue:W
+ ScalarReference:T
+ NumericConstant:0
+ AssignmentOperator:=
+995 REM *** PRINT OUT CURRENT STATUS
+ Remark:*** PRINT OUT CURRENT STATUS
+1000 GOSUB 1230
+ LineNumber:1230
+1018 REM *** CHECK IF DONE
+ Remark:*** CHECK IF DONE
+1020 M=M+1
+ ScalarReference:M
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1030 FOR R=1 TO 7: FOR C=1 TO 2
+ control: VariableName:R
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+ control: VariableName:C
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:1"]
+1050 IF T(R,C)<>0 THEN 1090
+ ScalarValue:R
+ ScalarValue:C
+ ScalarValue:T
+ NumericConstant:0
+ BinaryOperator:<>
+1060 NEXT C: NEXT R
+ VariableName:C
+ VariableName:R
+1080 GOTO 1120
+ LineNumber:1120
+1090 IF M<=128 THEN 480
+ ScalarValue:M
+ NumericConstant:128
+ BinaryOperator:<=
+1100 PRINT "SORRY, BUT I HAVE ORDERS TO STOP IF YOU MAKE MORE THAN"
+ ITEMS
+ TextConstant:"SORRY, BUT I HAVE ORDERS TO STOP IF YOU MAKE MORE THAN"
+ CarriageControl:NL
+1110 PRINT "128 MOVES.": STOP
+ ITEMS
+ TextConstant:"128 MOVES."
+ CarriageControl:NL
+ 
+1120 IF M<>2^S-1 THEN 1140
+ ScalarValue:M
+ NumericConstant:2
+ ScalarValue:S
+ BinaryOperator:^
+ NumericConstant:1
+ BinaryOperator:-
+ BinaryOperator:<>
+1130 PRINT:PRINT "CONGRATULATIONS!!":PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"CONGRATULATIONS!!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+1140 PRINT "YOU HAVE PERFORMED THE TASK IN";M;"MOVES."
+ ITEMS
+ TextConstant:"YOU HAVE PERFORMED THE TASK IN"
+ CarriageControl:;
+ ScalarValue:M
+ CarriageControl:;
+ TextConstant:"MOVES."
+ CarriageControl:NL
+1150 PRINT: PRINT "TRY AGAIN (YES OR NO)";: INPUT A$
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"TRY AGAIN (YES OR NO)"
+ CarriageControl:;
+ ScalarReference:A$
+1160 IF A$="NO" THEN 1390
+ ScalarValue:A$
+ TextConstant:"NO"
+ BinaryOperator:=
+1170 IF A$="YES" THEN 90
+ ScalarValue:A$
+ TextConstant:"YES"
+ BinaryOperator:=
+1180 PRINT: PRINT "'YES' OR 'NO' PLEASE";: INPUT A$: GOTO 1160
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"'YES' OR 'NO' PLEASE"
+ CarriageControl:;
+ ScalarReference:A$
+ LineNumber:1160
+1230 REM *** PRINT SUBROUTINE
+ Remark:*** PRINT SUBROUTINE
+1240 FOR K=1 TO 7
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+1250 Z=10
+ ScalarReference:Z
+ NumericConstant:10
+ AssignmentOperator:=
+1260 FOR J=1 TO 3
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+1270 IF T(K,J)=0 THEN 1330
+ ScalarValue:K
+ ScalarValue:J
+ ScalarValue:T
+ NumericConstant:0
+ BinaryOperator:=
+1280 PRINT TAB(Z-INT(T(K,J)/2));
+ ITEMS
+ ScalarValue:Z
+ ScalarValue:K
+ ScalarValue:J
+ ScalarValue:T
+ NumericConstant:2
+ BinaryOperator:/
+ FunctionInt
+ BinaryOperator:-
+ FunctionTab
+ CarriageControl:;
+1290 FOR V=1 TO T(K,J)
+ control: VariableName:V
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:K", "ScalarValue:J", "ScalarValue:T"]
+ step:    ["NumericConstant:1"]
+1300 PRINT "*";
+ ITEMS
+ TextConstant:"*"
+ CarriageControl:;
+1310 NEXT V
+ VariableName:V
+1320 GOTO 1340
+ LineNumber:1340
+1330 PRINT TAB(Z);"*";
+ ITEMS
+ ScalarValue:Z
+ FunctionTab
+ CarriageControl:;
+ TextConstant:"*"
+ CarriageControl:;
+1340 Z=Z+21
+ ScalarReference:Z
+ ScalarValue:Z
+ NumericConstant:21
+ BinaryOperator:+
+ AssignmentOperator:=
+1350 NEXT J
+ VariableName:J
+1360 PRINT
+ ITEMS
+ CarriageControl:NL
+1370 NEXT K
+ VariableName:K
+1380 RETURN
+ 
+1390 PRINT: PRINT "THANKS FOR THE GAME!": PRINT: END
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"THANKS FOR THE GAME!"
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ 

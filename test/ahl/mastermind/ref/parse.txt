@@ -108,13 +108,17 @@
 220 READ X$
  ScalarReference:X$
 230 PRINT X$;TAB(13);MID$(L$,X,1)
- Syntax error: "MID$(L$,X,1)" is not a value or operator
  ITEMS
  ScalarValue:X$
  CarriageControl:;
  NumericConstant:13
  FunctionTab
  CarriageControl:;
+ ScalarValue:L$
+ ScalarValue:X
+ NumericConstant:1
+ FunctionMid
+ CarriageControl:NL
 240 NEXT X
  VariableName:X
 250 PRINT
@@ -212,20 +216,37 @@
  end:     ["ScalarValue:C9"]
  step:    ["NumericConstant:1"]
 450 IF MID$(X$,X,1)=MID$(L$,Y,1) THEN 480
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:X$
+ ScalarValue:X
+ NumericConstant:1
+ FunctionMid
+ ScalarValue:L$
+ ScalarValue:Y
+ NumericConstant:1
+ FunctionMid
+ BinaryOperator:=
 460 NEXT Y
  VariableName:Y
 470 PRINT "'"; MID$(X$,X,1); "' IS UNRECOGNIZED.":GOTO 380
- Syntax error: "MID$(X$,X,1)" is not a value or operator
  ITEMS
  TextConstant:"'"
  CarriageControl:;
+ ScalarValue:X$
+ ScalarValue:X
+ NumericConstant:1
+ FunctionMid
  CarriageControl:;
  TextConstant:"' IS UNRECOGNIZED."
  CarriageControl:NL
  LineNumber:380
 480 G$(X)=MID$(X$,X,1)
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:X
+ ScalarReference:G$
+ ScalarValue:X$
+ ScalarValue:X
+ NumericConstant:1
+ FunctionMid
+ AssignmentOperator:=
 490 NEXT X
  VariableName:X
 500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
@@ -691,7 +712,14 @@
  end:     ["ScalarValue:P9"]
  step:    ["NumericConstant:1"]
 4040 A$(S)=MID$(L$,Q(S),1)
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:S
+ ScalarReference:A$
+ ScalarValue:L$
+ ScalarValue:S
+ ScalarValue:Q
+ NumericConstant:1
+ FunctionMid
+ AssignmentOperator:=
 4050 NEXT S
  VariableName:S
 4060 RETURN
@@ -839,7 +867,14 @@
  end:     ["ScalarValue:P9"]
  step:    ["NumericConstant:1"]
 5540 G$(S)=MID$(L$,Q(S),1)
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:S
+ ScalarReference:G$
+ ScalarValue:L$
+ ScalarValue:S
+ ScalarValue:Q
+ NumericConstant:1
+ FunctionMid
+ AssignmentOperator:=
 5550 NEXT S
  VariableName:S
 5560 RETURN
@@ -856,7 +891,14 @@
  end:     ["ScalarValue:P9"]
  step:    ["NumericConstant:1"]
 6040 H$(S)=MID$(L$,Q(S),1)
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:S
+ ScalarReference:H$
+ ScalarValue:L$
+ ScalarValue:S
+ ScalarValue:Q
+ NumericConstant:1
+ FunctionMid
+ AssignmentOperator:=
 6050 NEXT S
  VariableName:S
 6060 RETURN

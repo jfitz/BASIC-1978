@@ -250,8 +250,15 @@
 710 REM  D$ DEFINED ELSEWHERE
  Remark: D$ DEFINED ELSEWHERE
 720 PRINT MID$(D$,3*X-2,3);
- Syntax error: "MID$(D$,3*X-2,3)" is not a value or operator
  ITEMS
+ ScalarValue:D$
+ NumericConstant:3
+ ScalarValue:X
+ BinaryOperator:*
+ NumericConstant:2
+ BinaryOperator:-
+ NumericConstant:3
+ FunctionMid
  CarriageControl:;
 730 PRINT "  ";
  ITEMS
@@ -262,10 +269,17 @@
 750 REM--ALTERNATIVE PRINTING ROUTINE
  Remark:--ALTERNATIVE PRINTING ROUTINE
 760 PRINT " ";MID$(D$,3*X-1,2);
- Syntax error: "MID$(D$,3*X-1,2)" is not a value or operator
  ITEMS
  TextConstant:" "
  CarriageControl:;
+ ScalarValue:D$
+ NumericConstant:3
+ ScalarValue:X
+ BinaryOperator:*
+ NumericConstant:1
+ BinaryOperator:-
+ NumericConstant:2
+ FunctionMid
  CarriageControl:;
 770 PRINT "   ";
  ITEMS
@@ -441,26 +455,43 @@
 1410 REM  I$ DEFINED ELSEWHERE
  Remark: I$ DEFINED ELSEWHERE
 1420 INPUT H$: H$=LEFT$(H$,1)
- Token 'InvalidToken:$' is not a value or operator
  ScalarReference:H$
+ ScalarReference:H$
+ ScalarValue:H$
+ NumericConstant:1
+ FunctionLeft
+ AssignmentOperator:=
 1430 FOR H=1 TO H1 STEP 2
  control: VariableName:H
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:H1"]
  step:    ["NumericConstant:2"]
 1440 IF H$=MID$(I$,H,1) THEN 1480
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:H$
+ ScalarValue:I$
+ ScalarValue:H
+ NumericConstant:1
+ FunctionMid
+ BinaryOperator:=
 1450 NEXT H
  VariableName:H
 1460 PRINT "TYPE ";MID$(I$,1,H1-1);" OR ";MID$(I$,H1,2);" PLEASE";
- Syntax error: "MID$(I$,1,H1-1)" is not a value or operator
- Syntax error: "MID$(I$,H1,2)" is not a value or operator
  ITEMS
  TextConstant:"TYPE "
  CarriageControl:;
+ ScalarValue:I$
+ NumericConstant:1
+ ScalarValue:H1
+ NumericConstant:1
+ BinaryOperator:-
+ FunctionMid
  CarriageControl:;
  TextConstant:" OR "
  CarriageControl:;
+ ScalarValue:I$
+ ScalarValue:H1
+ NumericConstant:2
+ FunctionMid
  CarriageControl:;
  TextConstant:" PLEASE"
  CarriageControl:;
@@ -522,7 +553,17 @@
 1620 INPUT H$
  ScalarReference:H$
 1630 IF LEFT$(H$,1)="N" OR LEFT$(H$,1)="n" THEN 1760
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:H$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"N"
+ BinaryOperator:=
+ ScalarValue:H$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"n"
+ BinaryOperator:=
+ BinaryOperator:OR
 1640 PRINT "THIS IS THE GAME OF 21. AS MANY AS 7 PLAYERS MAY PLAY THE"
  ITEMS
  TextConstant:"THIS IS THE GAME OF 21. AS MANY AS 7 PLAYERS MAY PLAY THE"
@@ -804,7 +845,11 @@
 2140 INPUT H$
  ScalarReference:H$
 2150 IF LEFT$(H$,1)<>"Y" THEN 2240
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:H$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"Y"
+ BinaryOperator:<>
 2160 PRINT "INSURANCE BETS"
  ITEMS
  TextConstant:"INSURANCE BETS"
@@ -920,12 +965,21 @@
  BinaryOperator:<>
  BinaryOperator:OR
 2260 PRINT:PRINT "DEALER HAS A";MID$(D$,3*P(D1,2)-2,3);" IN THE HOLE ";
- Syntax error: "MID$(D$,3*P(D1,2)-2,3)" is not a value or operator
  ITEMS
  CarriageControl:NL
  ITEMS
  TextConstant:"DEALER HAS A"
  CarriageControl:;
+ ScalarValue:D$
+ NumericConstant:3
+ ScalarValue:D1
+ NumericConstant:2
+ ScalarValue:P
+ BinaryOperator:*
+ NumericConstant:2
+ BinaryOperator:-
+ NumericConstant:3
+ FunctionMid
  CarriageControl:;
  TextConstant:" IN THE HOLE "
  CarriageControl:;
@@ -1243,10 +1297,19 @@
 3000 GOTO 3140
  LineNumber:3140
 3010 PRINT "DEALER HAS A";MID$(D$,3*P(D1,2)-2,3);" CONCEALED ";
- Syntax error: "MID$(D$,3*P(D1,2)-2,3)" is not a value or operator
  ITEMS
  TextConstant:"DEALER HAS A"
  CarriageControl:;
+ ScalarValue:D$
+ NumericConstant:3
+ ScalarValue:D1
+ NumericConstant:2
+ ScalarValue:P
+ BinaryOperator:*
+ NumericConstant:2
+ BinaryOperator:-
+ NumericConstant:3
+ FunctionMid
  CarriageControl:;
  TextConstant:" CONCEALED "
  CarriageControl:;
@@ -1412,8 +1475,17 @@
  ScalarValue:I
  CarriageControl:;
 3210 PRINT MID$(Z$,SGN(S(I))*6+7,6);" ";
- Syntax error: "MID$(Z$,SGN(S(I))*6+7,6)" is not a value or operator
  ITEMS
+ ScalarValue:Z$
+ ScalarValue:I
+ ScalarValue:S
+ FunctionSgn
+ NumericConstant:6
+ BinaryOperator:*
+ NumericConstant:7
+ BinaryOperator:+
+ NumericConstant:6
+ FunctionMid
  CarriageControl:;
  TextConstant:" "
  CarriageControl:;

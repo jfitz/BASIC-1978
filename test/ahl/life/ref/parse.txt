@@ -60,8 +60,25 @@
  AssignmentOperator:=
  LineNumber:80
 50 IF LEFT$(B$(C),1)="." THEN B$(C)=" "+RIGHT$(B$(C),LEN(B$(C))-1)
- Token 'InvalidToken:$' is not a value or operator
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:C
+ ScalarValue:B$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"."
+ BinaryOperator:=
+ ScalarValue:C
+ ScalarReference:B$
+ TextConstant:" "
+ ScalarValue:C
+ ScalarValue:B$
+ ScalarValue:C
+ ScalarValue:B$
+ FunctionLen
+ NumericConstant:1
+ BinaryOperator:-
+ FunctionRight
+ BinaryOperator:+
+ AssignmentOperator:=
 60 C=C+1
  ScalarReference:C
  ScalarValue:C
@@ -124,7 +141,13 @@
  end:     ["ScalarValue:X", "ScalarValue:B$", "FunctionLen"]
  step:    ["NumericConstant:1"]
 160 IF MID$(B$(X),Y,1)<>" " THEN A(X1+X,Y1+Y)=1:P=P+1
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:X
+ ScalarValue:B$
+ ScalarValue:Y
+ NumericConstant:1
+ FunctionMid
+ TextConstant:" "
+ BinaryOperator:<>
  ScalarValue:X1
  ScalarValue:X
  BinaryOperator:+

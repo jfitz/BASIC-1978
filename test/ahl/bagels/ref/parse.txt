@@ -46,7 +46,11 @@
 70 INPUT "WOULD YOU LIKE THE RULES (YES OR NO)";A$
  ScalarReference:A$
 90 IF LEFT$(A$,1)="N" THEN 150
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:A$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"N"
+ BinaryOperator:=
 100 PRINT:PRINT "I AM THINKING OF A THREE-DIGIT NUMBER.  TRY TO GUESS"
  ITEMS
  CarriageControl:NL
@@ -129,11 +133,18 @@
  NumericConstant:3
  BinaryOperator:<>
 250 FOR Z=1 TO 3:A1(Z)=ASC(MID$(A$,Z,1)):NEXT Z
- Token 'InvalidToken:$' is not a value or operator
  control: VariableName:Z
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
  step:    ["NumericConstant:1"]
+ ScalarValue:Z
+ ScalarReference:A1
+ ScalarValue:A$
+ ScalarValue:Z
+ NumericConstant:1
+ FunctionMid
+ FunctionAsc
+ AssignmentOperator:=
  VariableName:Z
 260 FOR J=1 TO 3
  control: VariableName:J
@@ -372,7 +383,11 @@
 700 INPUT "PLAY AGAIN (YES OR NO)";A$
  ScalarReference:A$
 720 IF LEFT$(A$,1)="YES" THEN 150
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:A$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"YES"
+ BinaryOperator:=
 730 IF Y=0 THEN 750
  ScalarValue:Y
  NumericConstant:0

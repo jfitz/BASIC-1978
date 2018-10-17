@@ -7,9 +7,7 @@
 20 C = 1
 30 INPUT B$(C)
 40 IF B$(C) = "DONE" THEN B$(C) = "" : GOTO 80
-50 IF LEFT $ (B$(C), 1) = "." THEN B$(C) = " " + RIGHT $ (B$(C), LEN(B$(C)) - 1)
- Token 'InvalidToken:$' is not a value or operator
- Token 'InvalidToken:$' is not a value or operator
+50 IF LEFT$(B$(C), 1) = "." THEN B$(C) = " " + RIGHT$(B$(C), LEN(B$(C)) - 1)
 60 C = C + 1
 70 GOTO 30
 80 C = C - 1 : L = 0
@@ -20,8 +18,7 @@
 130 Y1 = 33 - L / 2
 140 FOR X = 1 TO C
 150 FOR Y = 1 TO LEN(B$(X))
-160 IF MID $ (B$(X), Y, 1) <> " " THEN A(X1 + X, Y1 + Y) = 1 : P = P + 1
- Token 'InvalidToken:$' is not a value or operator
+160 IF MID$(B$(X), Y, 1) <> " " THEN A(X1 + X, Y1 + Y) = 1 : P = P + 1
 170 NEXT Y
 180 NEXT X
 200 PRINT : PRINT : PRINT

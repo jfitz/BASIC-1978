@@ -34,9 +34,17 @@
 220 INPUT C$
  ScalarReference:C$
 230 IF LEFT$(C$,1)="N" THEN 315
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:C$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"N"
+ BinaryOperator:=
 240 IF LEFT$(C$,1)="Y" THEN 265
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:C$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"Y"
+ BinaryOperator:=
 250 PRINT "INCORRECT ANSWER.  PLEASE TYPE 'YES' OR 'NO'";
  ITEMS
  TextConstant:"INCORRECT ANSWER.  PLEASE TYPE 'YES' OR 'NO'"
@@ -158,9 +166,17 @@
 450 INPUT S$
  ScalarReference:S$
 460 IF LEFT$(S$,1)="N" THEN 630
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:S$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"N"
+ BinaryOperator:=
 470 IF LEFT$(S$,1)="Y" THEN 500
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:S$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"Y"
+ BinaryOperator:=
 480 PRINT "INCORRECT ANSWER.  PLEASE TYPE 'YES' OR 'NO'.";
  ITEMS
  TextConstant:"INCORRECT ANSWER.  PLEASE TYPE 'YES' OR 'NO'."
@@ -697,9 +713,17 @@
 1510 INPUT X$
  ScalarReference:X$
 1520 IF LEFT$(X$,1)="Y" THEN 400
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:X$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"Y"
+ BinaryOperator:=
 1530 IF LEFT$(X$,1)="N" THEN 1560
- Token 'InvalidToken:$' is not a value or operator
+ ScalarValue:X$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"N"
+ BinaryOperator:=
 1540 PRINT "INCORRECT ANSWER. PLEASE TYPE 'YES' OR 'NO'";
  ITEMS
  TextConstant:"INCORRECT ANSWER. PLEASE TYPE 'YES' OR 'NO'"
@@ -1358,4 +1382,68 @@
  NumericConstant:2
  AssignmentOperator:=
 2410 FOR J=A TO 5-A STEP 5-2*A
+ control: VariableName:J
+ start:   ["ScalarValue:A"]
+ end:     ["NumericConstant:5", "ScalarValue:A", "BinaryOperator:-"]
+ step:    ["NumericConstant:5", "NumericConstant:2", "ScalarValue:A", "BinaryOperator:*", "BinaryOperator:-"]
+2420 IF X(M(I,J))=S THEN 2450
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:M
+ ScalarValue:X
+ ScalarValue:S
+ BinaryOperator:=
+2430 NEXT J
+ VariableName:J
+2440 GOTO 2000
+ LineNumber:2000
+2450 LET X(M(I,J))=5
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:M
+ ScalarReference:X
+ NumericConstant:5
+ AssignmentOperator:=
+2460 LET M=M(I,J)
+ ScalarReference:M
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:M
+ AssignmentOperator:=
+2470 PRINT "MACHINE TAKES";
+ ITEMS
+ TextConstant:"MACHINE TAKES"
+ CarriageControl:;
+2480 GOSUB 1570
+ LineNumber:1570
+2490 GOTO 500
+ LineNumber:500
+2500 FOR I=1 TO 64
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:64"]
+ step:    ["NumericConstant:1"]
+2510 IF X(I)<>1/8 THEN 2530
+ ScalarValue:I
+ ScalarValue:X
+ NumericConstant:1
+ NumericConstant:8
+ BinaryOperator:/
+ BinaryOperator:<>
+2520 LET X(I)=0
+ ScalarValue:I
+ ScalarReference:X
+ NumericConstant:0
+ AssignmentOperator:=
+2530 NEXT I
+ VariableName:I
+2540 RETURN
+ 
+2550 FOR XX=1 TO 9:PRINT:NEXT:FOR I=1 TO 4
  Syntax error
+ control: VariableName:X
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:9"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ CarriageControl:NL
