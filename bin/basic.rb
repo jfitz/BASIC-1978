@@ -323,11 +323,11 @@ OptionParser.new do |opt|
   opt.on('--profile') { |o| options[:profile] = o }
   opt.on('-c', '--crossref SOURCE') { |o| options[:cref_name] = o }
   opt.on('--parse SOURCE') { |o| options[:parse_name] = o }
-  opt.on('--no-heading') { |o| options[:no_heading] = o }
+  opt.on('--heading') { |o| options[:heading] = o }
   opt.on('--echo-input') { |o| options[:echo_input] = o }
   opt.on('--trace') { |o| options[:trace] = o }
   opt.on('--provenence') { |o| options[:provenence] = o }
-  opt.on('--no-timing') { |o| options[:no_timing] = o }
+  opt.on('--timing') { |o| options[:timing] = o }
   opt.on('--tty') { |o| options[:tty] = o }
   opt.on('--tty-lf') { |o| options[:tty_lf] = o }
   opt.on('--bang-comment') { |o| options[:bang_comment] = o }
@@ -371,13 +371,13 @@ base = 0
 base = options[:base].to_i if options.key?(:base)
 action_options['base'] = Option.new(int_1, base)
 
-action_options['heading'] = Option.new(boolean, !options.key?(:no_heading))
+action_options['heading'] = Option.new(boolean, options.key?(:heading))
 
 action_options['pretty_multiline'] =
   Option.new(boolean, options.key?(:pretty_multiline))
 
 action_options['provenence'] = Option.new(boolean, options.key?(:provenence))
-action_options['timing'] = Option.new(boolean, !options.key?(:no_timing))
+action_options['timing'] = Option.new(boolean, options.key?(:timing))
 action_options['trace'] = Option.new(boolean, options.key?(:trace))
 
 output_options = {}
@@ -445,7 +445,7 @@ token_options['apostrophe_comment'] = Option.new(boolean, true)
 token_options['backslash_separator'] = Option.new(boolean, true)
 token_options['bang_comment'] = Option.new(boolean, options.key?(:bang_comment))
 
-statement_seps = [':']
+statement_seps = [':', '\\']
 
 quotes = ['"']
 
@@ -461,7 +461,7 @@ tokenbuilders =
                                  comment_leads)
 
 if action_options['heading'].value
-  console_io.print_line('BASIC-1973 interpreter version -1')
+  console_io.print_line('BASIC-1978 interpreter version -1')
   console_io.newline
 end
 
@@ -521,5 +521,5 @@ end
 
 if action_options['heading'].value
   console_io.newline
-  console_io.print_line('BASIC-1973 ended')
+  console_io.print_line('BASIC-1978 ended')
 end
