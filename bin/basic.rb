@@ -361,7 +361,6 @@ OptionParser.new do |opt|
   opt.on('--asc-allow-all') { |o| options[:asc_allow_all] = o }
   opt.on('--chr-allow-all') { |o| options[:chr_allow_all] = o }
   opt.on('--single-quote-strings') { |o| options[:single_quote_strings] = o }
-  opt.on('--crlf-on-line-input') { |o| options[:crlf_on_line_input] = o }
 end.parse!
 
 list_filename = options[:list_name]
@@ -397,9 +396,6 @@ action_options['trace'] = Option.new(boolean, options.key?(:trace))
 output_options = {}
 
 output_options['back_tab'] = Option.new(boolean, options.key?(:back_tab))
-
-output_options['crlf_on_line_input'] =
-  Option.new(boolean, options.key?(:crlf_on_line_input))
 
 output_options['default_prompt'] = Option.new(string, '? ')
 

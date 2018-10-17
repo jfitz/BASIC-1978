@@ -58,7 +58,6 @@ module Inputter
 
   def line_input(interpreter)
     input_text = read_line
-    input_text += "\r\n" if @output_options['crlf_on_line_input'].value
     quoted = '"' + input_text + '"'
     token = TextConstantToken.new(quoted)
     tokens = [token]
