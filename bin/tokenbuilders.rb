@@ -420,6 +420,10 @@ end
 class VariableTokenBuilder
   attr_reader :count
 
+  def initialize(long_names)
+    @long_names = long_names
+  end
+  
   def try(text)
     candidate = ''
     if !text.empty? && text[0] != ' '
@@ -438,12 +442,12 @@ class VariableTokenBuilder
     @token = ''
     # check that string conforms to one of these
     regexes = [
-      /\A[A-Z]\z/,
-      /\A[A-Z]\d\z/,
-      /\A[A-Z]\$\z/,
-      /\A[A-Z]\d\$\z/,
-      /\A[A-Z]\%\z/,
-      /\A[A-Z]\d\%\z/
+      /\A[A-Z]+\z/,
+      /\A[A-Z]+\d+\z/,
+      /\A[A-Z]+\$\z/,
+      /\A[A-Z]+\d+\$\z/,
+      /\A[A-Z]+\%\z/,
+      /\A[A-Z]+\d+\%\z/
     ]
 
     @token = ''
@@ -461,17 +465,37 @@ class VariableTokenBuilder
   private
 
   def accept?(candidate, c)
+    @long_names ? accept_long?(candidate, c) : accept_short?(candidate, c)
+  end
+
+  def accept_short?(candidate, c)
     result = false
     # can always start with an alpha
     result = true if c =~ /[A-Z]/ && candidate.empty?
     # can append a digit to a single character
-    result = true if c =~ /[0-9]/ && candidate.size == 1
+    result = true if c =~ /[0-9]/ && (candidate =~ /\A[A-Z]\z/)
     # can append a dollar sign if one is not there
     result = true if
-      c == '$' && [1, 2].include?(candidate.size) && candidate[-1] != '$'
+      c == '$' && !candidate.empty? && !['$', '%'].include?(candidate[-1])
     # can append a percent sign if one is not there
     result = true if
-      c == '%' && [1, 2].include?(candidate.size) && candidate[-1] != '%'
+      c == '%' && !candidate.empty? && !['$', '%'].include?(candidate[-1])
+
+    result
+  end
+
+  def accept_long?(candidate, c)
+    result = false
+    # can always start with an alpha
+    result = true if c =~ /[A-Z]/ && (candidate.empty? || candidate =~ /\A[A-Z]+\z/)
+    # can append a digit to alphas and digits
+    result = true if c =~ /[0-9]/ && (candidate =~ /\A[A-Z]+[0-9]*\z/)
+    # can append a dollar sign if one is not there
+    result = true if
+      c == '$' && !candidate.empty? && !['$', '%'].include?(candidate[-1])
+    # can append a percent sign if one is not there
+    result = true if
+      c == '%' && !candidate.empty? && !['$', '%'].include?(candidate[-1])
 
     result
   end

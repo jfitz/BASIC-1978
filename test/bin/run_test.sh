@@ -30,7 +30,7 @@ if [ -e "$TESTROOT/$TESTGROUP/$TESTNAME/ref/list.txt" ]
 then
     echo List program with options $GROUP_OPTIONS $TEST_OPTIONS
     cd "$TESTBED/$TESTNAME"
-    ruby basic.rb --list $TESTNAME.bas --no-heading --print-width 0 >list.txt $GROUP_OPTIONS $TEST_OPTIONS
+    ruby basic.rb --list $TESTNAME.bas --print-width 0 >list.txt $GROUP_OPTIONS $TEST_OPTIONS
     cd ../..
 
     echo Compare list...
@@ -53,7 +53,7 @@ then
 
     echo Parse program with options $GROUP_OPTIONS $TEST_OPTIONS $PARSE_OPTIONS
     cd "$TESTBED/$TESTNAME"
-    ruby basic.rb --parse $TESTNAME.bas --no-heading --print-width 0 >parse.txt $GROUP_OPTIONS $TEST_OPTIONS $PARSE_OPTIONS
+    ruby basic.rb --parse $TESTNAME.bas --print-width 0 >parse.txt $GROUP_OPTIONS $TEST_OPTIONS $PARSE_OPTIONS
     cd ../..
 
     echo Compare parse...
@@ -76,7 +76,7 @@ then
 
     echo Pretty program with options $GROUP_OPTIONS $TEST_OPTIONS $PRETTY_OPTIONS
     cd "$TESTBED/$TESTNAME"
-    ruby basic.rb --pretty $TESTNAME.bas --no-heading --print-width 0 >pretty.txt $GROUP_OPTIONS $TEST_OPTIONS $PRETTY_OPTIONS
+    ruby basic.rb --pretty $TESTNAME.bas --print-width 0 >pretty.txt $GROUP_OPTIONS $TEST_OPTIONS $PRETTY_OPTIONS
     cd ../..
 
     echo Compare pretty...
@@ -94,7 +94,7 @@ if [ -e "$TESTROOT/$TESTGROUP/$TESTNAME/ref/crossref.txt" ]
 then
     echo Crossref program with options $GROUP_OPTIONS $TEST_OPTIONS
     cd "$TESTBED/$TESTNAME"
-    ruby basic.rb --crossref $TESTNAME.bas --no-heading --print-width 0 >crossref.txt $GROUP_OPTIONS $TEST_OPTIONS
+    ruby basic.rb --crossref $TESTNAME.bas --print-width 0 >crossref.txt $GROUP_OPTIONS $TEST_OPTIONS
     cd ../..
 
     echo Compare crossref...
@@ -124,11 +124,11 @@ then
     if [ -e "$TESTBED/$TESTNAME/stdin.txt" ]
     then
 	cd "$TESTBED/$TESTNAME"
-	ruby basic.rb --no-timing $OPTIONS --run $TESTNAME.bas --print-width 0 --no-heading --echo-input <stdin.txt >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
+	ruby basic.rb $OPTIONS --run $TESTNAME.bas --print-width 0 --echo-input <stdin.txt >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
 	cd ../..
     else
 	cd "$TESTBED/$TESTNAME"
-	ruby basic.rb --no-timing $OPTIONS --run $TESTNAME.bas --print-width 0 --no-heading >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
+	ruby basic.rb $OPTIONS --run $TESTNAME.bas --print-width 0 >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
 	cd ../..
     fi
 
@@ -175,11 +175,11 @@ then
     if [ -e "$TESTBED/$TESTNAME/stdin.txt" ]
     then
 	cd "$TESTBED/$TESTNAME"
-	ruby basic.rb --no-timing $OPTIONS --run $TESTNAME.bas --print-width 0 --no-heading --trace --echo-input <stdin.txt >trace.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
+	ruby basic.rb $OPTIONS --run $TESTNAME.bas --print-width 0 --trace --echo-input <stdin.txt >trace.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
 	cd ../..
     else
 	cd "$TESTBED/$TESTNAME"
-	ruby basic.rb --no-timing $OPTIONS --run $TESTNAME.bas --print-width 0 --no-heading --trace >trace.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
+	ruby basic.rb $OPTIONS --run $TESTNAME.bas --print-width 0 --trace >trace.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
 	cd ../..
     fi
 

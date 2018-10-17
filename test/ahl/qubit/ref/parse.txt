@@ -1441,9 +1441,116 @@
  
 2550 FOR XX=1 TO 9:PRINT:NEXT:FOR I=1 TO 4
  Syntax error
- control: VariableName:X
+ control: VariableName:XX
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:9"]
  step:    ["NumericConstant:1"]
  ITEMS
  CarriageControl:NL
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+2560 FOR J=1 TO 4
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+2562 FOR I1=1 TO J
+ control: VariableName:I1
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:J"]
+ step:    ["NumericConstant:1"]
+2564 PRINT"   ";
+ ITEMS
+ TextConstant:"   "
+ CarriageControl:;
+2566 NEXT I1
+ VariableName:I1
+2570 FOR K=1 TO 4
+ control: VariableName:K
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:4"]
+ step:    ["NumericConstant:1"]
+2600 LET Q=16*I+4*J+K-20
+ ScalarReference:Q
+ NumericConstant:16
+ ScalarValue:I
+ BinaryOperator:*
+ NumericConstant:4
+ ScalarValue:J
+ BinaryOperator:*
+ BinaryOperator:+
+ ScalarValue:K
+ BinaryOperator:+
+ NumericConstant:20
+ BinaryOperator:-
+ AssignmentOperator:=
+2610 IF X(Q)<>O THEN 2630
+ ScalarValue:Q
+ ScalarValue:X
+ ScalarValue:O
+ BinaryOperator:<>
+2620 PRINT"( )      ";
+ ITEMS
+ TextConstant:"( )      "
+ CarriageControl:;
+2630 IF X(Q)<>5 THEN 2650
+ ScalarValue:Q
+ ScalarValue:X
+ NumericConstant:5
+ BinaryOperator:<>
+2640 PRINT"(M)      ";
+ ITEMS
+ TextConstant:"(M)      "
+ CarriageControl:;
+2650 IF X(Q)<>1 THEN 2660
+ ScalarValue:Q
+ ScalarValue:X
+ NumericConstant:1
+ BinaryOperator:<>
+2655 PRINT"(Y)      ";
+ ITEMS
+ TextConstant:"(Y)      "
+ CarriageControl:;
+2660 IF X(Q)<>1/8 THEN 2670
+ ScalarValue:Q
+ ScalarValue:X
+ NumericConstant:1
+ NumericConstant:8
+ BinaryOperator:/
+ BinaryOperator:<>
+2665 PRINT"( )      ";
+ ITEMS
+ TextConstant:"( )      "
+ CarriageControl:;
+2670 NEXT K
+ VariableName:K
+2680 PRINT
+ ITEMS
+ CarriageControl:NL
+2690 PRINT
+ ITEMS
+ CarriageControl:NL
+2700 NEXT J
+ VariableName:J
+2710 PRINT
+ ITEMS
+ CarriageControl:NL
+2720 PRINT
+ ITEMS
+ CarriageControl:NL
+2730 NEXT I
+ VariableName:I
+2735 REM PRINT CHR$(12)
+ Remark:PRINT CHR$(12)
+2740 RETURN
+ 
+2750 PRINT"INCORRECT MOVE, RETYPE IT--";
+ ITEMS
+ TextConstant:"INCORRECT MOVE, RETYPE IT--"
+ CarriageControl:;
+2760 GOTO 520
+ LineNumber:520
+2770 END
+ 

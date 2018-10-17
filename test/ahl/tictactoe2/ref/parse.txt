@@ -505,3 +505,254 @@
  BinaryOperator:AND
 460 NEXT K,J
  Syntax error
+465 IF S(5)=G THEN 171
+ NumericConstant:5
+ ScalarValue:S
+ ScalarValue:G
+ BinaryOperator:=
+467 GOTO 175
+ LineNumber:175
+475 P$="X":Q$="O"
+ ScalarReference:P$
+ TextConstant:"X"
+ AssignmentOperator:=
+ ScalarReference:Q$
+ TextConstant:"O"
+ AssignmentOperator:=
+500 PRINT:INPUT"WHERE DO YOU MOVE";M
+ ITEMS
+ CarriageControl:NL
+ ScalarReference:M
+502 IF M=0 THEN PRINT"THANKS FOR THE GAME.":GOTO 2000
+ ScalarValue:M
+ NumericConstant:0
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"THANKS FOR THE GAME."
+ CarriageControl:NL
+ LineNumber:2000
+503 IF M>9 THEN 506
+ ScalarValue:M
+ NumericConstant:9
+ BinaryOperator:>
+505 IF S(M)=0 THEN 510
+ ScalarValue:M
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:=
+506 PRINT"THAT SQUARE IS OCCUPIED.":PRINT:PRINT:GOTO 500
+ ITEMS
+ TextConstant:"THAT SQUARE IS OCCUPIED."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ LineNumber:500
+510 G=1:S(M)=1
+ ScalarReference:G
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarValue:M
+ ScalarReference:S
+ NumericConstant:1
+ AssignmentOperator:=
+520 GOSUB 1000
+ LineNumber:1000
+530 GOTO 100
+ LineNumber:100
+1000 PRINT:FOR I=1 TO 9:PRINT" ";:IF S(I)<>-1 THEN 1014
+ ITEMS
+ CarriageControl:NL
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:9"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ TextConstant:" "
+ CarriageControl:;
+ ScalarValue:I
+ ScalarValue:S
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:<>
+1012 PRINT Q$" ";:GOTO 1020
+ ITEMS
+ ScalarValue:Q$
+ CarriageControl:
+ TextConstant:" "
+ CarriageControl:;
+ LineNumber:1020
+1014 IF S(I)<>0 THEN 1018
+ ScalarValue:I
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:<>
+1016 PRINT"  ";:GOTO 1020
+ ITEMS
+ TextConstant:"  "
+ CarriageControl:;
+ LineNumber:1020
+1018 PRINT P$" ";
+ ITEMS
+ ScalarValue:P$
+ CarriageControl:
+ TextConstant:" "
+ CarriageControl:;
+1020 IF I<>3 AND I<>6 THEN 1050
+ ScalarValue:I
+ NumericConstant:3
+ BinaryOperator:<>
+ ScalarValue:I
+ NumericConstant:6
+ BinaryOperator:<>
+ BinaryOperator:AND
+1030 PRINT:PRINT"---+---+---"
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"---+---+---"
+ CarriageControl:NL
+1040 GOTO 1080
+ LineNumber:1080
+1050 IF I=9 THEN 1080
+ ScalarValue:I
+ NumericConstant:9
+ BinaryOperator:=
+1060 PRINT"!";
+ ITEMS
+ TextConstant:"!"
+ CarriageControl:;
+1080 NEXT I:PRINT:PRINT:PRINT
+ VariableName:I
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+1095 FOR I=1 TO 7 STEP 3
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:3"]
+1100 IF S(I)<>S(I+1)THEN 1115
+ ScalarValue:I
+ ScalarValue:S
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:S
+ BinaryOperator:<>
+1105 IF S(I)<>S(I+2)THEN 1115
+ ScalarValue:I
+ ScalarValue:S
+ ScalarValue:I
+ NumericConstant:2
+ BinaryOperator:+
+ ScalarValue:S
+ BinaryOperator:<>
+1110 IF S(I)=-1 THEN 1350
+ ScalarValue:I
+ ScalarValue:S
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+1112 IF S(I)=1 THEN 1200
+ ScalarValue:I
+ ScalarValue:S
+ NumericConstant:1
+ BinaryOperator:=
+1115 NEXT I:FOR I=1 TO 3:IF S(I)<>S(I+3)THEN 1150
+ VariableName:I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:3"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:S
+ ScalarValue:I
+ NumericConstant:3
+ BinaryOperator:+
+ ScalarValue:S
+ BinaryOperator:<>
+1130 IF S(I)<>S(I+6)THEN 1150
+ ScalarValue:I
+ ScalarValue:S
+ ScalarValue:I
+ NumericConstant:6
+ BinaryOperator:+
+ ScalarValue:S
+ BinaryOperator:<>
+1135 IF S(I)=-1 THEN 1350
+ ScalarValue:I
+ ScalarValue:S
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+1137 IF S(I)=1 THEN 1200
+ ScalarValue:I
+ ScalarValue:S
+ NumericConstant:1
+ BinaryOperator:=
+1150 NEXT I:FOR I=1 TO 9:IF S(I)=0 THEN 1155
+ VariableName:I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:9"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:=
+1152 NEXT I:GOTO 1400
+ VariableName:I
+ LineNumber:1400
+1155 IF S(5)<>G THEN 1170
+ NumericConstant:5
+ ScalarValue:S
+ ScalarValue:G
+ BinaryOperator:<>
+1160 IF S(1)=G AND S(9)=G THEN 1180
+ NumericConstant:1
+ ScalarValue:S
+ ScalarValue:G
+ BinaryOperator:=
+ NumericConstant:9
+ ScalarValue:S
+ ScalarValue:G
+ BinaryOperator:=
+ BinaryOperator:AND
+1165 IF S(3)=G AND S(7)=G THEN 1180
+ NumericConstant:3
+ ScalarValue:S
+ ScalarValue:G
+ BinaryOperator:=
+ NumericConstant:7
+ ScalarValue:S
+ ScalarValue:G
+ BinaryOperator:=
+ BinaryOperator:AND
+1170 RETURN
+ 
+1180 IF G=-1 THEN 1350
+ ScalarValue:G
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+1200 PRINT"YOU BEAT ME!! GOOD GAME.":GOTO 2000
+ ITEMS
+ TextConstant:"YOU BEAT ME!! GOOD GAME."
+ CarriageControl:NL
+ LineNumber:2000
+1350 PRINT"I WIN, TURKEY!!!":GOTO 2000
+ ITEMS
+ TextConstant:"I WIN, TURKEY!!!"
+ CarriageControl:NL
+ LineNumber:2000
+1400 PRINT"IT'S A DRAW. THANK YOU."
+ ITEMS
+ TextConstant:"IT'S A DRAW. THANK YOU."
+ CarriageControl:NL
+2000 END
+ 

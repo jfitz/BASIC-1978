@@ -125,3 +125,813 @@
  ScalarReference:S
 200 NEXT Y,X
  Syntax error
+230 FOR X=0 TO 7:FOR Y=0 TO 7:IF S(X,Y)>-1 THEN 350
+ control: VariableName:X
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+ control: VariableName:Y
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:>
+310 IF S(X,Y)=-1 THEN FOR A=-1 TO 1 STEP 2:B=G:GOSUB 650:NEXT A
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+ control: VariableName:A
+ start:   ["NumericConstant:1", "UnaryOperator:-"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:2"]
+ ScalarReference:B
+ ScalarValue:G
+ AssignmentOperator:=
+ LineNumber:650
+ VariableName:A
+330 IF S(X,Y)=-2 THEN FOR A=-1 TO 1 STEP 2:FOR B=-1 TO 1 STEP 2:GOSUB 650:NEXT B,A
+ Syntax error
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:2
+ UnaryOperator:-
+ BinaryOperator:=
+ control: VariableName:A
+ start:   ["NumericConstant:1", "UnaryOperator:-"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:2"]
+ control: VariableName:B
+ start:   ["NumericConstant:1", "UnaryOperator:-"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:2"]
+ LineNumber:650
+350 NEXT Y,X:GOTO 1140
+ Syntax error
+ LineNumber:1140
+650 U=X+A:V=Y+B:IF U<0 OR U>7 OR V<0 OR V>7 THEN 870
+ ScalarReference:U
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:V
+ ScalarValue:Y
+ ScalarValue:B
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:U
+ NumericConstant:0
+ BinaryOperator:<
+ ScalarValue:U
+ NumericConstant:7
+ BinaryOperator:>
+ BinaryOperator:OR
+ ScalarValue:V
+ NumericConstant:0
+ BinaryOperator:<
+ BinaryOperator:OR
+ ScalarValue:V
+ NumericConstant:7
+ BinaryOperator:>
+ BinaryOperator:OR
+740 IF S(U,V)=0 THEN GOSUB 910:GOTO 870
+ ScalarValue:U
+ ScalarValue:V
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:=
+ LineNumber:910
+ LineNumber:870
+770 IF S(U,V)<0 THEN 870
+ ScalarValue:U
+ ScalarValue:V
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:<
+790 U=U+A:V=V+B:IF U<0 OR V<0 OR U>7 OR V>7 THEN 870
+ ScalarReference:U
+ ScalarValue:U
+ ScalarValue:A
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:V
+ ScalarValue:V
+ ScalarValue:B
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:U
+ NumericConstant:0
+ BinaryOperator:<
+ ScalarValue:V
+ NumericConstant:0
+ BinaryOperator:<
+ BinaryOperator:OR
+ ScalarValue:U
+ NumericConstant:7
+ BinaryOperator:>
+ BinaryOperator:OR
+ ScalarValue:V
+ NumericConstant:7
+ BinaryOperator:>
+ BinaryOperator:OR
+850 IF S(U,V)=0 THEN GOSUB 910
+ ScalarValue:U
+ ScalarValue:V
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:=
+ LineNumber:910
+870 RETURN
+ 
+910 IF V=0 AND S(X,Y)=-1 THEN Q=Q+2
+ ScalarValue:V
+ NumericConstant:0
+ BinaryOperator:=
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+ BinaryOperator:AND
+ ScalarReference:Q
+ ScalarValue:Q
+ NumericConstant:2
+ BinaryOperator:+
+ AssignmentOperator:=
+920 IF ABS(Y-V)=2 THEN Q=Q+5
+ ScalarValue:Y
+ ScalarValue:V
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:2
+ BinaryOperator:=
+ ScalarReference:Q
+ ScalarValue:Q
+ NumericConstant:5
+ BinaryOperator:+
+ AssignmentOperator:=
+960 IF Y=7 THEN Q=Q-2
+ ScalarValue:Y
+ NumericConstant:7
+ BinaryOperator:=
+ ScalarReference:Q
+ ScalarValue:Q
+ NumericConstant:2
+ BinaryOperator:-
+ AssignmentOperator:=
+980 IF U=0 OR U=7 THEN Q=Q+1
+ ScalarValue:U
+ NumericConstant:0
+ BinaryOperator:=
+ ScalarValue:U
+ NumericConstant:7
+ BinaryOperator:=
+ BinaryOperator:OR
+ ScalarReference:Q
+ ScalarValue:Q
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+1030 FOR C=-1 TO 1 STEP 2:IF U+C<0 OR U+C>7 OR V+G<0 THEN 1080
+ control: VariableName:C
+ start:   ["NumericConstant:1", "UnaryOperator:-"]
+ end:     ["NumericConstant:1"]
+ step:    ["NumericConstant:2"]
+ ScalarValue:U
+ ScalarValue:C
+ BinaryOperator:+
+ NumericConstant:0
+ BinaryOperator:<
+ ScalarValue:U
+ ScalarValue:C
+ BinaryOperator:+
+ NumericConstant:7
+ BinaryOperator:>
+ BinaryOperator:OR
+ ScalarValue:V
+ ScalarValue:G
+ BinaryOperator:+
+ NumericConstant:0
+ BinaryOperator:<
+ BinaryOperator:OR
+1035 IF S(U+C,V+G)<0 THEN Q=Q+1:GOTO 1080
+ ScalarValue:U
+ ScalarValue:C
+ BinaryOperator:+
+ ScalarValue:V
+ ScalarValue:G
+ BinaryOperator:+
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:<
+ ScalarReference:Q
+ ScalarValue:Q
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ LineNumber:1080
+1040 IF U-C<0 OR U-C>7 OR V-G>7 THEN 1080
+ ScalarValue:U
+ ScalarValue:C
+ BinaryOperator:-
+ NumericConstant:0
+ BinaryOperator:<
+ ScalarValue:U
+ ScalarValue:C
+ BinaryOperator:-
+ NumericConstant:7
+ BinaryOperator:>
+ BinaryOperator:OR
+ ScalarValue:V
+ ScalarValue:G
+ BinaryOperator:-
+ NumericConstant:7
+ BinaryOperator:>
+ BinaryOperator:OR
+1045 IF S(U+C,V+G)>0 AND(S(U-C,V-G)=0 OR(U-C=X AND V-G=Y))THEN Q=Q-2
+ ScalarValue:U
+ ScalarValue:C
+ BinaryOperator:+
+ ScalarValue:V
+ ScalarValue:G
+ BinaryOperator:+
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:>
+ ScalarValue:U
+ ScalarValue:C
+ BinaryOperator:-
+ ScalarValue:V
+ ScalarValue:G
+ BinaryOperator:-
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:=
+ ScalarValue:U
+ ScalarValue:C
+ BinaryOperator:-
+ ScalarValue:X
+ BinaryOperator:=
+ ScalarValue:V
+ ScalarValue:G
+ BinaryOperator:-
+ ScalarValue:Y
+ BinaryOperator:=
+ BinaryOperator:AND
+ BinaryOperator:OR
+ BinaryOperator:AND
+ ScalarReference:Q
+ ScalarValue:Q
+ NumericConstant:2
+ BinaryOperator:-
+ AssignmentOperator:=
+1080 NEXT C:IF Q>R(0)THEN R(0)=Q:R(1)=X:R(2)=Y:R(3)=U:R(4)=V
+ VariableName:C
+ ScalarValue:Q
+ NumericConstant:0
+ ScalarValue:R
+ BinaryOperator:>
+ NumericConstant:0
+ ScalarReference:R
+ ScalarValue:Q
+ AssignmentOperator:=
+ NumericConstant:1
+ ScalarReference:R
+ ScalarValue:X
+ AssignmentOperator:=
+ NumericConstant:2
+ ScalarReference:R
+ ScalarValue:Y
+ AssignmentOperator:=
+ NumericConstant:3
+ ScalarReference:R
+ ScalarValue:U
+ AssignmentOperator:=
+ NumericConstant:4
+ ScalarReference:R
+ ScalarValue:V
+ AssignmentOperator:=
+1100 Q=0:RETURN
+ ScalarReference:Q
+ NumericConstant:0
+ AssignmentOperator:=
+ 
+1140 IF R(0)=-99 THEN 1880
+ NumericConstant:0
+ ScalarValue:R
+ NumericConstant:99
+ UnaryOperator:-
+ BinaryOperator:=
+1230 PRINT CHR$(30)"FROM"R(1);R(2)"TO"R(3);R(4);:R(0)=-99
+ ITEMS
+ NumericConstant:30
+ FunctionChr
+ CarriageControl:
+ TextConstant:"FROM"
+ CarriageControl:
+ NumericConstant:1
+ ScalarValue:R
+ CarriageControl:;
+ NumericConstant:2
+ ScalarValue:R
+ CarriageControl:
+ TextConstant:"TO"
+ CarriageControl:
+ NumericConstant:3
+ ScalarValue:R
+ CarriageControl:;
+ NumericConstant:4
+ ScalarValue:R
+ CarriageControl:;
+ NumericConstant:0
+ ScalarReference:R
+ NumericConstant:99
+ UnaryOperator:-
+ AssignmentOperator:=
+1240 IF R(4)=0 THEN S(R(3),R(4))=-2:GOTO 1420
+ NumericConstant:4
+ ScalarValue:R
+ NumericConstant:0
+ BinaryOperator:=
+ NumericConstant:3
+ ScalarValue:R
+ NumericConstant:4
+ ScalarValue:R
+ ScalarReference:S
+ NumericConstant:2
+ UnaryOperator:-
+ AssignmentOperator:=
+ LineNumber:1420
+1250 S(R(3),R(4))=S(R(1),R(2))
+ NumericConstant:3
+ ScalarValue:R
+ NumericConstant:4
+ ScalarValue:R
+ ScalarReference:S
+ NumericConstant:1
+ ScalarValue:R
+ NumericConstant:2
+ ScalarValue:R
+ ScalarValue:S
+ AssignmentOperator:=
+1310 S(R(1),R(2))=0:IF ABS(R(1)-R(3))<>2 THEN 1420
+ NumericConstant:1
+ ScalarValue:R
+ NumericConstant:2
+ ScalarValue:R
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+ NumericConstant:1
+ ScalarValue:R
+ NumericConstant:3
+ ScalarValue:R
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:2
+ BinaryOperator:<>
+1330 S((R(1)+R(3))/2,(R(2)+R(4))/2)=0
+ NumericConstant:1
+ ScalarValue:R
+ NumericConstant:3
+ ScalarValue:R
+ BinaryOperator:+
+ NumericConstant:2
+ BinaryOperator:/
+ NumericConstant:2
+ ScalarValue:R
+ NumericConstant:4
+ ScalarValue:R
+ BinaryOperator:+
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+1340 X=R(3):Y=R(4):IF S(X,Y)=-1 THEN B=-2:FOR A=-2 TO 2 STEP 4:GOSUB 1370
+ ScalarReference:X
+ NumericConstant:3
+ ScalarValue:R
+ AssignmentOperator:=
+ ScalarReference:Y
+ NumericConstant:4
+ ScalarValue:R
+ AssignmentOperator:=
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+ ScalarReference:B
+ NumericConstant:2
+ UnaryOperator:-
+ AssignmentOperator:=
+ control: VariableName:A
+ start:   ["NumericConstant:2", "UnaryOperator:-"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:4"]
+ LineNumber:1370
+1350 IF S(X,Y)=-2 THEN FOR A=-2 TO 2 STEP 4:FOR B=-2 TO 2 STEP 4:GOSUB 1370:NEXT B
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:2
+ UnaryOperator:-
+ BinaryOperator:=
+ control: VariableName:A
+ start:   ["NumericConstant:2", "UnaryOperator:-"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:4"]
+ control: VariableName:B
+ start:   ["NumericConstant:2", "UnaryOperator:-"]
+ end:     ["NumericConstant:2"]
+ step:    ["NumericConstant:4"]
+ LineNumber:1370
+ VariableName:B
+1360 NEXT A:IF R(0)<>-99 THEN PRINT"TO"R(3);R(4);:R(0)=-99:GOTO 1240
+ VariableName:A
+ NumericConstant:0
+ ScalarValue:R
+ NumericConstant:99
+ UnaryOperator:-
+ BinaryOperator:<>
+ ITEMS
+ TextConstant:"TO"
+ CarriageControl:
+ NumericConstant:3
+ ScalarValue:R
+ CarriageControl:;
+ NumericConstant:4
+ ScalarValue:R
+ CarriageControl:;
+ NumericConstant:0
+ ScalarReference:R
+ NumericConstant:99
+ UnaryOperator:-
+ AssignmentOperator:=
+ LineNumber:1240
+1365 GOTO 1420
+ LineNumber:1420
+1370 U=X+A:V=Y+B:IF U<0 OR U>7 OR V<0 OR V>7 THEN 1400
+ ScalarReference:U
+ ScalarValue:X
+ ScalarValue:A
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarReference:V
+ ScalarValue:Y
+ ScalarValue:B
+ BinaryOperator:+
+ AssignmentOperator:=
+ ScalarValue:U
+ NumericConstant:0
+ BinaryOperator:<
+ ScalarValue:U
+ NumericConstant:7
+ BinaryOperator:>
+ BinaryOperator:OR
+ ScalarValue:V
+ NumericConstant:0
+ BinaryOperator:<
+ BinaryOperator:OR
+ ScalarValue:V
+ NumericConstant:7
+ BinaryOperator:>
+ BinaryOperator:OR
+1380 IF S(U,V)=0 AND S(X+A/2,Y+B/2)>0 THEN GOSUB 910
+ ScalarValue:U
+ ScalarValue:V
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:=
+ ScalarValue:X
+ ScalarValue:A
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:Y
+ ScalarValue:B
+ NumericConstant:2
+ BinaryOperator:/
+ BinaryOperator:+
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:>
+ BinaryOperator:AND
+ LineNumber:910
+1400 RETURN
+ 
+1420 PRINT:PRINT:PRINT:FOR Y=7 TO 0 STEP-1:FOR X=0 TO 7:I=5*X:PRINT TAB(I);
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ control: VariableName:Y
+ start:   ["NumericConstant:7"]
+ end:     ["NumericConstant:0"]
+ step:    ["NumericConstant:1", "UnaryOperator:-"]
+ control: VariableName:X
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+ ScalarReference:I
+ NumericConstant:5
+ ScalarValue:X
+ BinaryOperator:*
+ AssignmentOperator:=
+ ITEMS
+ ScalarValue:I
+ FunctionTab
+ CarriageControl:;
+1430 IF S(X,Y)=0 THEN PRINT".";
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"."
+ CarriageControl:;
+1470 IF S(X,Y)=1 THEN PRINT"O";
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:1
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"O"
+ CarriageControl:;
+1490 IF S(X,Y)=-1 THEN PRINT"X";
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"X"
+ CarriageControl:;
+1510 IF S(X,Y)=-2 THEN PRINT"X*";
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:2
+ UnaryOperator:-
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"X*"
+ CarriageControl:;
+1530 IF S(X,Y)=2 THEN PRINT"O*";
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:2
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"O*"
+ CarriageControl:;
+1550 NEXT X:PRINT" ":PRINT:NEXT Y:PRINT
+ VariableName:X
+ ITEMS
+ TextConstant:" "
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ VariableName:Y
+ ITEMS
+ CarriageControl:NL
+1552 FOR L=0 TO 7
+ control: VariableName:L
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+1554 FOR M=0 TO 7
+ control: VariableName:M
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+1556 IF S(L,M)=1 OR S(L,M)=2 THEN Z=1
+ ScalarValue:L
+ ScalarValue:M
+ ScalarValue:S
+ NumericConstant:1
+ BinaryOperator:=
+ ScalarValue:L
+ ScalarValue:M
+ ScalarValue:S
+ NumericConstant:2
+ BinaryOperator:=
+ BinaryOperator:OR
+ ScalarReference:Z
+ NumericConstant:1
+ AssignmentOperator:=
+1558 IF S(L,M)=-1 OR S(L,M)=-2 THEN T=1
+ ScalarValue:L
+ ScalarValue:M
+ ScalarValue:S
+ NumericConstant:1
+ UnaryOperator:-
+ BinaryOperator:=
+ ScalarValue:L
+ ScalarValue:M
+ ScalarValue:S
+ NumericConstant:2
+ UnaryOperator:-
+ BinaryOperator:=
+ BinaryOperator:OR
+ ScalarReference:T
+ NumericConstant:1
+ AssignmentOperator:=
+1560 NEXT M
+ VariableName:M
+1562 NEXT L
+ VariableName:L
+1564 IF Z<>1 THEN 1885
+ ScalarValue:Z
+ NumericConstant:1
+ BinaryOperator:<>
+1566 IF T<>1 THEN 1880
+ ScalarValue:T
+ NumericConstant:1
+ BinaryOperator:<>
+1570 Z=0: T=0
+ ScalarReference:Z
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarReference:T
+ NumericConstant:0
+ AssignmentOperator:=
+1590 INPUT "FROM";E,H:X=E:Y=H:IF S(X,Y)<=0 THEN 1590
+ ScalarReference:E
+ ScalarReference:H
+ ScalarReference:X
+ ScalarValue:E
+ AssignmentOperator:=
+ ScalarReference:Y
+ ScalarValue:H
+ AssignmentOperator:=
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:<=
+1670 INPUT "TO";A,B:X=A:Y=B
+ ScalarReference:A
+ ScalarReference:B
+ ScalarReference:X
+ ScalarValue:A
+ AssignmentOperator:=
+ ScalarReference:Y
+ ScalarValue:B
+ AssignmentOperator:=
+1680 IF S(X,Y)=0 AND ABS(A-E)<=2 AND ABS(A-E)=ABS(B-H)THEN 1700
+ ScalarValue:X
+ ScalarValue:Y
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:=
+ ScalarValue:A
+ ScalarValue:E
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:2
+ BinaryOperator:<=
+ BinaryOperator:AND
+ ScalarValue:A
+ ScalarValue:E
+ BinaryOperator:-
+ FunctionAbs
+ ScalarValue:B
+ ScalarValue:H
+ BinaryOperator:-
+ FunctionAbs
+ BinaryOperator:=
+ BinaryOperator:AND
+1690 PRINT CHR$(7)CHR$(11);:GOTO 1670
+ ITEMS
+ NumericConstant:7
+ FunctionChr
+ CarriageControl:
+ NumericConstant:11
+ FunctionChr
+ CarriageControl:;
+ LineNumber:1670
+1700 I=46
+ ScalarReference:I
+ NumericConstant:46
+ AssignmentOperator:=
+1750 S(A,B)=S(E,H):S(E,H)=0:IF ABS(E-A)<>2 THEN 1810
+ ScalarValue:A
+ ScalarValue:B
+ ScalarReference:S
+ ScalarValue:E
+ ScalarValue:H
+ ScalarValue:S
+ AssignmentOperator:=
+ ScalarValue:E
+ ScalarValue:H
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+ ScalarValue:E
+ ScalarValue:A
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:2
+ BinaryOperator:<>
+1800 S((E+A)/2,(H+B)/2)=0
+ ScalarValue:E
+ ScalarValue:A
+ BinaryOperator:+
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarValue:H
+ ScalarValue:B
+ BinaryOperator:+
+ NumericConstant:2
+ BinaryOperator:/
+ ScalarReference:S
+ NumericConstant:0
+ AssignmentOperator:=
+1802 INPUT "+TO";A1,B1:IF A1<0 THEN 1810
+ ScalarReference:A1
+ ScalarReference:B1
+ ScalarValue:A1
+ NumericConstant:0
+ BinaryOperator:<
+1804 IF S(A1,B1)<>0 OR ABS(A1-A)<>2 OR ABS(B1-B)<>2 THEN 1802
+ ScalarValue:A1
+ ScalarValue:B1
+ ScalarValue:S
+ NumericConstant:0
+ BinaryOperator:<>
+ ScalarValue:A1
+ ScalarValue:A
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:2
+ BinaryOperator:<>
+ BinaryOperator:OR
+ ScalarValue:B1
+ ScalarValue:B
+ BinaryOperator:-
+ FunctionAbs
+ NumericConstant:2
+ BinaryOperator:<>
+ BinaryOperator:OR
+1806 E=A:H=B:A=A1:B=B1:I=I+15:GOTO 1750
+ ScalarReference:E
+ ScalarValue:A
+ AssignmentOperator:=
+ ScalarReference:H
+ ScalarValue:B
+ AssignmentOperator:=
+ ScalarReference:A
+ ScalarValue:A1
+ AssignmentOperator:=
+ ScalarReference:B
+ ScalarValue:B1
+ AssignmentOperator:=
+ ScalarReference:I
+ ScalarValue:I
+ NumericConstant:15
+ BinaryOperator:+
+ AssignmentOperator:=
+ LineNumber:1750
+1810 IF B=7 THEN S(A,B)=2
+ ScalarValue:B
+ NumericConstant:7
+ BinaryOperator:=
+ ScalarValue:A
+ ScalarValue:B
+ ScalarReference:S
+ NumericConstant:2
+ AssignmentOperator:=
+1830 GOTO 230
+ LineNumber:230
+1880 PRINT: PRINT "YOU WIN.": END
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"YOU WIN."
+ CarriageControl:NL
+ 
+1885 PRINT: PRINT "I WIN.": END
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"I WIN."
+ CarriageControl:NL
+ 

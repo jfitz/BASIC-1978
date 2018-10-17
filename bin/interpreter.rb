@@ -6,7 +6,7 @@ class Interpreter
   attr_reader :trace_out
   attr_reader :start_time
 
-  def initialize(console_io, interpreter_options)
+  def initialize(console_io, interpreter_options, token_options)
     @randomizer = Random.new(1)
 
     @randomizer = Random.new if
@@ -14,6 +14,7 @@ class Interpreter
       interpreter_options['respect_randomize'].value
 
     @interpreter_options = interpreter_options
+    @token_options = token_options
 
     @quotes = ['"']
     @console_io = console_io
@@ -67,7 +68,9 @@ class Interpreter
     tokenbuilders << TextTokenBuilder.new(@quotes)
     tokenbuilders << NumberTokenBuilder.new
     tokenbuilders << IntegerTokenBuilder.new
-    tokenbuilders << VariableTokenBuilder.new
+
+    long_names = @token_options['long_names'].value
+    tokenbuilders << VariableTokenBuilder.new(long_names)
     tokenbuilders << ListTokenBuilder.new(%w(TRUE FALSE), BooleanConstantToken)
 
     tokenbuilders << WhitespaceTokenBuilder.new

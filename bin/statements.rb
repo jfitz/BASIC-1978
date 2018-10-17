@@ -1263,10 +1263,10 @@ class ForStatement < AbstractStatement
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump
-    lines << 'start:   ' + @start.dump.to_s
-    lines << 'end:     ' + @end.dump.to_s
-    lines << 'step:    ' + @step_value.dump.to_s
+    lines << 'control: ' + @control.dump unless @control.nil?
+    lines << 'start:   ' + @start.dump.to_s unless @start.nil?
+    lines << 'end:     ' + @end.dump.to_s unless @end.nil?
+    lines << 'step:    ' + @step_value.dump.to_s unless @step_value.nil?
     lines
   end
 
@@ -1988,7 +1988,9 @@ class NextStatement < AbstractStatement
   end
 
   def dump
-    [@control.dump]
+    vars = []
+    vars << @control.dump unless @control.nil?
+    vars
   end
 
   def execute_core(interpreter)

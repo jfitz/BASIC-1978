@@ -266,14 +266,17 @@ def make_interpreter_tokenbuilders(token_options, quotes, statement_separators,
   tokenbuilders << TextTokenBuilder.new(quotes)
   tokenbuilders << NumberTokenBuilder.new
   tokenbuilders << IntegerTokenBuilder.new
+
   allow_pi = token_options['allow_pi'].value
   tokenbuilders << NumericSymbolTokenBuilder.new if allow_pi
+
   allow_ascii = token_options['allow_ascii'].value
   tokenbuilders << TextSymbolTokenBuilder.new if allow_ascii
-  tokenbuilders << VariableTokenBuilder.new
 
-  tokenbuilders <<
-    ListTokenBuilder.new(%w(TRUE FALSE), BooleanConstantToken)
+  long_names = token_options['long_names'].value
+  tokenbuilders << VariableTokenBuilder.new(long_names)
+
+  tokenbuilders << ListTokenBuilder.new(%w(TRUE FALSE), BooleanConstantToken)
 
   tokenbuilders << WhitespaceTokenBuilder.new
 end
@@ -331,6 +334,7 @@ OptionParser.new do |opt|
   opt.on('--tty') { |o| options[:tty] = o }
   opt.on('--tty-lf') { |o| options[:tty_lf] = o }
   opt.on('--bang-comment') { |o| options[:bang_comment] = o }
+  opt.on('--long-names') { |o| options[:long_names] = o }
   opt.on('--print-width WIDTH') { |o| options[:print_width] = o }
   opt.on('--zone-width WIDTH') { |o| options[:zone_width] = o }
   opt.on('--back-tab') { |o| options[:back_tab] = o }
@@ -444,6 +448,7 @@ token_options['allow_pi'] = Option.new(boolean, options.key?(:allow_pi))
 token_options['apostrophe_comment'] = Option.new(boolean, true)
 token_options['backslash_separator'] = Option.new(boolean, true)
 token_options['bang_comment'] = Option.new(boolean, options.key?(:bang_comment))
+token_options['long_names'] = Option.new(boolean, options.key?(:long_names))
 
 statement_seps = [':', '\\']
 
@@ -471,7 +476,9 @@ if !run_filename.nil?
   token = TextConstantToken.new('"' + run_filename + '"')
   nametokens = [TextConstant.new(token)]
   if program.load(nametokens) && program.check
-    interpreter = Interpreter.new(console_io, interpreter_options)
+    interpreter =
+      Interpreter.new(console_io, interpreter_options, token_options)
+
     interpreter.set_default_args('RND', NumericConstant.new(1))
 
     timing = Benchmark.measure {
@@ -507,7 +514,8 @@ elsif !cref_filename.nil?
     program.crossref
   end
 else
-  interpreter = Interpreter.new(console_io, interpreter_options)
+  interpreter = Interpreter.new(console_io, interpreter_options, token_options)
+
   interpreter.set_default_args('RND', NumericConstant.new(1))
 
   tokenbuilders = make_command_tokenbuilders(token_options, quotes)

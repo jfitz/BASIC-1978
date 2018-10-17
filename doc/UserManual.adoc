@@ -75,6 +75,7 @@ When the BASIC program ends, BASIC-1978 ends.
 |--require-initialized |Require that variables are initialized before they are used.
 |--asc-allow-all |The ASC() function allows any characters. The default behavior is to limit characters to printable ASCII (32d to 126d).
 |--chr-allow-all |The CHR$() function allows any output characters. The default behavior is to limit characters to printable ASCII (32d to 126d).
+|--long-names |Allow long variable names. The default is variable names of one letter and one optional digit.
 |==========
 
 Immediate commands
@@ -420,21 +421,25 @@ Names for integer variables include a trailing '%' character.
 |A_2 |Names may not contain underscore
 |K() |Subscripted names must have subscript values
 
+With the --long-names option, variable names may be longer that the usual one alphabetic and one optional digit.
+Long variable names may have any number of alphabetic characters followed by any number of digits.
+
+When using long names, variables must be separated from statement keywords and function names.
+With short names, variables do not need space characters to separate them.
+
+|==========
+|Name |Valid or reason it is not valid
+|AAA |
+|B123 |
+|ACCOUNT123 |
+|NAME12$ |
+|INDEX% |
+|F1R |Alphabetics must precede digits
+|FIRST$NAME |Sigils for type ('$', '%') must be at the end
+
+
 Variables do not need to be declared.
 They are assumed to exist with value zero.
-
-Constant values
----------------
-
-BASIC-1978 supports one constant value:
-
-|==========
-|Name |Value
-|PI |3.1415926
-|==========
-
-Constant values may be used in place of numeric or string values.
-They may not be on the left-hand side of an assignment.
 
 Expressions and operators
 -------------------------

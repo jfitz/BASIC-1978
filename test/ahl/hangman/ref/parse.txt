@@ -99,3 +99,603 @@
  ScalarReference:P$
  TextConstant:"X"
  AssignmentOperator:=
+ NumericConstant:2
+ NumericConstant:7
+ ScalarReference:P$
+ TextConstant:"X"
+ AssignmentOperator:=
+95 IF C<N THEN 100
+ ScalarValue:C
+ ScalarValue:N
+ BinaryOperator:<
+97 PRINT "YOU DID ALL THE WORDS!!": STOP
+ ITEMS
+ TextConstant:"YOU DID ALL THE WORDS!!"
+ CarriageControl:NL
+ 
+100 Q=INT(N*RND(1))+1
+ ScalarReference:Q
+ ScalarValue:N
+ NumericConstant:1
+ FunctionRnd
+ BinaryOperator:*
+ FunctionInt
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+110 IF U(Q)=1 THEN 100
+ ScalarValue:Q
+ ScalarValue:U
+ NumericConstant:1
+ BinaryOperator:=
+115 U(Q)=1: C=C+1: RESTORE: T1=0
+ ScalarValue:Q
+ ScalarReference:U
+ NumericConstant:1
+ AssignmentOperator:=
+ ScalarReference:C
+ ScalarValue:C
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ 
+ ScalarReference:T1
+ NumericConstant:0
+ AssignmentOperator:=
+150 FOR I=1 TO Q: READ A$: NEXT I
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:Q"]
+ step:    ["NumericConstant:1"]
+ ScalarReference:A$
+ VariableName:I
+160 L=LEN(A$): FOR I=1 TO LEN(A$): L$(I)=MID$(A$,I,1): NEXT I
+ ScalarReference:L
+ ScalarValue:A$
+ FunctionLen
+ AssignmentOperator:=
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:A$", "FunctionLen"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarReference:L$
+ ScalarValue:A$
+ ScalarValue:I
+ NumericConstant:1
+ FunctionMid
+ AssignmentOperator:=
+ VariableName:I
+170 PRINT "HERE ARE THE LETTERS YOU USED:"
+ ITEMS
+ TextConstant:"HERE ARE THE LETTERS YOU USED:"
+ CarriageControl:NL
+180 FOR I=1 TO 26: PRINT N$(I);: IF N$(I+1)="" THEN 200
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:26"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ ScalarValue:I
+ ScalarValue:N$
+ CarriageControl:;
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:+
+ ScalarValue:N$
+ TextConstant:""
+ BinaryOperator:=
+190 PRINT ",";: NEXT I
+ ITEMS
+ TextConstant:","
+ CarriageControl:;
+ VariableName:I
+200 PRINT: PRINT: FOR I=1 TO L: PRINT D$(I);: NEXT I: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:L"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ ScalarValue:I
+ ScalarValue:D$
+ CarriageControl:;
+ VariableName:I
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+210 INPUT "WHAT IS YOUR GUESS";G$: R=0
+ ScalarReference:G$
+ ScalarReference:R
+ NumericConstant:0
+ AssignmentOperator:=
+220 FOR I=1 TO 26: IF N$(I)="" THEN 250
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:26"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:N$
+ TextConstant:""
+ BinaryOperator:=
+230 IF G$=N$(I) THEN PRINT "YOU GUESSED THAT LETTER BEFORE!": GOTO 170
+ ScalarValue:G$
+ ScalarValue:I
+ ScalarValue:N$
+ BinaryOperator:=
+ ITEMS
+ TextConstant:"YOU GUESSED THAT LETTER BEFORE!"
+ CarriageControl:NL
+ LineNumber:170
+240 NEXT I: PRINT "PROGRAM ERROR.  RUN AGAIN.": STOP
+ VariableName:I
+ ITEMS
+ TextConstant:"PROGRAM ERROR.  RUN AGAIN."
+ CarriageControl:NL
+ 
+250 N$(I)=G$: T1=T1+1
+ ScalarValue:I
+ ScalarReference:N$
+ ScalarValue:G$
+ AssignmentOperator:=
+ ScalarReference:T1
+ ScalarValue:T1
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+260 FOR I=1 TO L: IF L$(I)=G$ THEN 280
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:L"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:L$
+ ScalarValue:G$
+ BinaryOperator:=
+270 NEXT I: IF R=0 THEN 290
+ VariableName:I
+ ScalarValue:R
+ NumericConstant:0
+ BinaryOperator:=
+275 GOTO 300
+ LineNumber:300
+280 D$(I)=G$: R=R+1: GOTO 270
+ ScalarValue:I
+ ScalarReference:D$
+ ScalarValue:G$
+ AssignmentOperator:=
+ ScalarReference:R
+ ScalarValue:R
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ LineNumber:270
+290 M=M+1: GOTO 400
+ ScalarReference:M
+ ScalarValue:M
+ NumericConstant:1
+ BinaryOperator:+
+ AssignmentOperator:=
+ LineNumber:400
+300 FOR I=1 TO L: IF D$(I)="-" THEN 320
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:L"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:D$
+ TextConstant:"-"
+ BinaryOperator:=
+310 NEXT I: GOTO 390
+ VariableName:I
+ LineNumber:390
+320 PRINT: FOR I=1 TO L: PRINT D$(I);: NEXT I: PRINT: PRINT
+ ITEMS
+ CarriageControl:NL
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["ScalarValue:L"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ ScalarValue:I
+ ScalarValue:D$
+ CarriageControl:;
+ VariableName:I
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+330 INPUT "WHAT IS YOUR GUESS FOR THE WORD";B$
+ ScalarReference:B$
+340 IF A$=B$ THEN 360
+ ScalarValue:A$
+ ScalarValue:B$
+ BinaryOperator:=
+350 PRINT "WRONG.  TRY ANOTHER LETTER.": PRINT: GOTO 170
+ ITEMS
+ TextConstant:"WRONG.  TRY ANOTHER LETTER."
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ LineNumber:170
+360 PRINT "RIGHT!!  IT TOOK YOU";T1;"GUESSES!"
+ ITEMS
+ TextConstant:"RIGHT!!  IT TOOK YOU"
+ CarriageControl:;
+ ScalarValue:T1
+ CarriageControl:;
+ TextConstant:"GUESSES!"
+ CarriageControl:NL
+370 INPUT "WANT ANOTHER WORD";W$: IF W$="YES" THEN 50
+ ScalarReference:W$
+ ScalarValue:W$
+ TextConstant:"YES"
+ BinaryOperator:=
+380 PRINT: PRINT "IT'S BEEN FUN!  BYE FOR NOW.": GOTO 999
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"IT'S BEEN FUN!  BYE FOR NOW."
+ CarriageControl:NL
+ LineNumber:999
+390 PRINT "YOU FOUND THE WORD!": GOTO 370
+ ITEMS
+ TextConstant:"YOU FOUND THE WORD!"
+ CarriageControl:NL
+ LineNumber:370
+400 PRINT: PRINT: PRINT"SORRY, THAT LETTER ISN'T IN THE WORD."
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ TextConstant:"SORRY, THAT LETTER ISN'T IN THE WORD."
+ CarriageControl:NL
+410 ON M GOTO 415,420,425,430,435,440,445,450,455,460
+ ScalarValue:M
+ LineNumber:415
+ LineNumber:420
+ LineNumber:425
+ LineNumber:430
+ LineNumber:435
+ LineNumber:440
+ LineNumber:445
+ LineNumber:450
+ LineNumber:455
+ LineNumber:460
+415 PRINT "FIRST, WE DRAW A HEAD": GOTO 470
+ ITEMS
+ TextConstant:"FIRST, WE DRAW A HEAD"
+ CarriageControl:NL
+ LineNumber:470
+420 PRINT "NOW WE DRAW A BODY.": GOTO 470
+ ITEMS
+ TextConstant:"NOW WE DRAW A BODY."
+ CarriageControl:NL
+ LineNumber:470
+425 PRINT "NEXT WE DRAW AN ARM.": GOTO 470
+ ITEMS
+ TextConstant:"NEXT WE DRAW AN ARM."
+ CarriageControl:NL
+ LineNumber:470
+430 PRINT "THIS TIME IT'S THE OTHER ARM.": GOTO 470
+ ITEMS
+ TextConstant:"THIS TIME IT'S THE OTHER ARM."
+ CarriageControl:NL
+ LineNumber:470
+435 PRINT "NOW, LET'S DRAW THE RIGHT LEG.": GOTO 470
+ ITEMS
+ TextConstant:"NOW, LET'S DRAW THE RIGHT LEG."
+ CarriageControl:NL
+ LineNumber:470
+440 PRINT "THIS TIME WE DRAW THE LEFT LEG.": GOTO 470
+ ITEMS
+ TextConstant:"THIS TIME WE DRAW THE LEFT LEG."
+ CarriageControl:NL
+ LineNumber:470
+445 PRINT "NOW WE PUT UP A HAND.": GOTO 470
+ ITEMS
+ TextConstant:"NOW WE PUT UP A HAND."
+ CarriageControl:NL
+ LineNumber:470
+450 PRINT "NEXT THE OTHER HAND.": GOTO 470
+ ITEMS
+ TextConstant:"NEXT THE OTHER HAND."
+ CarriageControl:NL
+ LineNumber:470
+455 PRINT "NOW WE DRAW ONE FOOT": GOTO 470
+ ITEMS
+ TextConstant:"NOW WE DRAW ONE FOOT"
+ CarriageControl:NL
+ LineNumber:470
+460 PRINT "HERE'S THE OTHER FOOT -- YOU'RE HUNG!!"
+ ITEMS
+ TextConstant:"HERE'S THE OTHER FOOT -- YOU'RE HUNG!!"
+ CarriageControl:NL
+470 ON M GOTO 480,490,500,510,520,530,540,550,560,570
+ ScalarValue:M
+ LineNumber:480
+ LineNumber:490
+ LineNumber:500
+ LineNumber:510
+ LineNumber:520
+ LineNumber:530
+ LineNumber:540
+ LineNumber:550
+ LineNumber:560
+ LineNumber:570
+480 P$(3,6)="-": P$(3,7)="-": P$(3,8)="-": P$(4,5)="(": P$(4,6)="."
+ NumericConstant:3
+ NumericConstant:6
+ ScalarReference:P$
+ TextConstant:"-"
+ AssignmentOperator:=
+ NumericConstant:3
+ NumericConstant:7
+ ScalarReference:P$
+ TextConstant:"-"
+ AssignmentOperator:=
+ NumericConstant:3
+ NumericConstant:8
+ ScalarReference:P$
+ TextConstant:"-"
+ AssignmentOperator:=
+ NumericConstant:4
+ NumericConstant:5
+ ScalarReference:P$
+ TextConstant:"("
+ AssignmentOperator:=
+ NumericConstant:4
+ NumericConstant:6
+ ScalarReference:P$
+ TextConstant:"."
+ AssignmentOperator:=
+481 P$(4,8)=".":P$(4,9)=")":P$(5,6)="-":P$(5,7)="-":P$(5,8)="-":GOTO 580
+ NumericConstant:4
+ NumericConstant:8
+ ScalarReference:P$
+ TextConstant:"."
+ AssignmentOperator:=
+ NumericConstant:4
+ NumericConstant:9
+ ScalarReference:P$
+ TextConstant:")"
+ AssignmentOperator:=
+ NumericConstant:5
+ NumericConstant:6
+ ScalarReference:P$
+ TextConstant:"-"
+ AssignmentOperator:=
+ NumericConstant:5
+ NumericConstant:7
+ ScalarReference:P$
+ TextConstant:"-"
+ AssignmentOperator:=
+ NumericConstant:5
+ NumericConstant:8
+ ScalarReference:P$
+ TextConstant:"-"
+ AssignmentOperator:=
+ LineNumber:580
+490 FOR I=6 TO 9: P$(I,7)="X": NEXT I: GOTO 580
+ control: VariableName:I
+ start:   ["NumericConstant:6"]
+ end:     ["NumericConstant:9"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ NumericConstant:7
+ ScalarReference:P$
+ TextConstant:"X"
+ AssignmentOperator:=
+ VariableName:I
+ LineNumber:580
+500 FOR I=4 TO 7: P$(I,I-1)="\": NEXT I: GOTO 580
+ control: VariableName:I
+ start:   ["NumericConstant:4"]
+ end:     ["NumericConstant:7"]
+ step:    ["NumericConstant:1"]
+ ScalarValue:I
+ ScalarValue:I
+ NumericConstant:1
+ BinaryOperator:-
+ ScalarReference:P$
+ TextConstant:"\"
+ AssignmentOperator:=
+ VariableName:I
+ LineNumber:580
+510 P$(4,11)="/": P$(5,10)="/": P$(6,9)="/": P$(7,8)="/": GOTO 580
+ NumericConstant:4
+ NumericConstant:11
+ ScalarReference:P$
+ TextConstant:"/"
+ AssignmentOperator:=
+ NumericConstant:5
+ NumericConstant:10
+ ScalarReference:P$
+ TextConstant:"/"
+ AssignmentOperator:=
+ NumericConstant:6
+ NumericConstant:9
+ ScalarReference:P$
+ TextConstant:"/"
+ AssignmentOperator:=
+ NumericConstant:7
+ NumericConstant:8
+ ScalarReference:P$
+ TextConstant:"/"
+ AssignmentOperator:=
+ LineNumber:580
+520 P$(10,6)="/": P$(11,5)="/": GOTO 580
+ NumericConstant:10
+ NumericConstant:6
+ ScalarReference:P$
+ TextConstant:"/"
+ AssignmentOperator:=
+ NumericConstant:11
+ NumericConstant:5
+ ScalarReference:P$
+ TextConstant:"/"
+ AssignmentOperator:=
+ LineNumber:580
+530 P$(10,8)="\": P$(11,9)="\": GOTO 580
+ NumericConstant:10
+ NumericConstant:8
+ ScalarReference:P$
+ TextConstant:"\"
+ AssignmentOperator:=
+ NumericConstant:11
+ NumericConstant:9
+ ScalarReference:P$
+ TextConstant:"\"
+ AssignmentOperator:=
+ LineNumber:580
+540 P$(3,11)="\": GOTO 580
+ NumericConstant:3
+ NumericConstant:11
+ ScalarReference:P$
+ TextConstant:"\"
+ AssignmentOperator:=
+ LineNumber:580
+550 P$(3,3)="/": GOTO 580
+ NumericConstant:3
+ NumericConstant:3
+ ScalarReference:P$
+ TextConstant:"/"
+ AssignmentOperator:=
+ LineNumber:580
+560 P$(12,10)="\": P$(12,11)="-": GOTO 580
+ NumericConstant:12
+ NumericConstant:10
+ ScalarReference:P$
+ TextConstant:"\"
+ AssignmentOperator:=
+ NumericConstant:12
+ NumericConstant:11
+ ScalarReference:P$
+ TextConstant:"-"
+ AssignmentOperator:=
+ LineNumber:580
+570 P$(12,3)="-": P$(12,4)="/"
+ NumericConstant:12
+ NumericConstant:3
+ ScalarReference:P$
+ TextConstant:"-"
+ AssignmentOperator:=
+ NumericConstant:12
+ NumericConstant:4
+ ScalarReference:P$
+ TextConstant:"/"
+ AssignmentOperator:=
+580 FOR I=1 TO 12: FOR J=1 TO 12: PRINT P$(I,J);: NEXT J
+ control: VariableName:I
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:12"]
+ step:    ["NumericConstant:1"]
+ control: VariableName:J
+ start:   ["NumericConstant:1"]
+ end:     ["NumericConstant:12"]
+ step:    ["NumericConstant:1"]
+ ITEMS
+ ScalarValue:I
+ ScalarValue:J
+ ScalarValue:P$
+ CarriageControl:;
+ VariableName:J
+590 PRINT: NEXT I: PRINT: PRINT: IF M<>10 THEN 170
+ ITEMS
+ CarriageControl:NL
+ VariableName:I
+ ITEMS
+ CarriageControl:NL
+ ITEMS
+ CarriageControl:NL
+ ScalarValue:M
+ NumericConstant:10
+ BinaryOperator:<>
+600 PRINT "SORRY, YOU LOSE.  THE WORD WAS ";A$
+ ITEMS
+ TextConstant:"SORRY, YOU LOSE.  THE WORD WAS "
+ CarriageControl:;
+ ScalarValue:A$
+ CarriageControl:NL
+610 PRINT "YOU MISSED THAT ONE.  DO YOU ";: GOTO 370
+ ITEMS
+ TextConstant:"YOU MISSED THAT ONE.  DO YOU "
+ CarriageControl:;
+ LineNumber:370
+620 INPUT "TYPE YES OR NO";Y$: IF LEFT$(Y$,1)="Y" THEN 50
+ ScalarReference:Y$
+ ScalarValue:Y$
+ NumericConstant:1
+ FunctionLeft
+ TextConstant:"Y"
+ BinaryOperator:=
+700 DATA "GUM","SIN","FOR","CRY","LUG","BYE","FLY"
+ TextConstant:"GUM"
+ TextConstant:"SIN"
+ TextConstant:"FOR"
+ TextConstant:"CRY"
+ TextConstant:"LUG"
+ TextConstant:"BYE"
+ TextConstant:"FLY"
+710 DATA "UGLY","EACH","FROM","WORK","TALK","WITH","SELF"
+ TextConstant:"UGLY"
+ TextConstant:"EACH"
+ TextConstant:"FROM"
+ TextConstant:"WORK"
+ TextConstant:"TALK"
+ TextConstant:"WITH"
+ TextConstant:"SELF"
+720 DATA "PIZZA","THING","FEIGN","FIEND","ELBOW","FAULT","DIRTY"
+ TextConstant:"PIZZA"
+ TextConstant:"THING"
+ TextConstant:"FEIGN"
+ TextConstant:"FIEND"
+ TextConstant:"ELBOW"
+ TextConstant:"FAULT"
+ TextConstant:"DIRTY"
+730 DATA "BUDGET","SPIRIT","QUAINT","MAIDEN","ESCORT","PICKAX"
+ TextConstant:"BUDGET"
+ TextConstant:"SPIRIT"
+ TextConstant:"QUAINT"
+ TextConstant:"MAIDEN"
+ TextConstant:"ESCORT"
+ TextConstant:"PICKAX"
+740 DATA "EXAMPLE","TENSION","QUININE","KIDNEY","REPLICA","SLEEPER"
+ TextConstant:"EXAMPLE"
+ TextConstant:"TENSION"
+ TextConstant:"QUININE"
+ TextConstant:"KIDNEY"
+ TextConstant:"REPLICA"
+ TextConstant:"SLEEPER"
+750 DATA "TRIANGLE","KANGAROO","MAHOGANY","SERGEANT","SEQUENCE"
+ TextConstant:"TRIANGLE"
+ TextConstant:"KANGAROO"
+ TextConstant:"MAHOGANY"
+ TextConstant:"SERGEANT"
+ TextConstant:"SEQUENCE"
+760 DATA "MOUSTACHE","DANGEROUS","SCIENTIST","DIFFERENT","QUIESCENT"
+ TextConstant:"MOUSTACHE"
+ TextConstant:"DANGEROUS"
+ TextConstant:"SCIENTIST"
+ TextConstant:"DIFFERENT"
+ TextConstant:"QUIESCENT"
+770 DATA "MAGISTRATE","ERRONEOUSLY","LOUDSPEAKER","PHYTOTOXIC"
+ TextConstant:"MAGISTRATE"
+ TextConstant:"ERRONEOUSLY"
+ TextConstant:"LOUDSPEAKER"
+ TextConstant:"PHYTOTOXIC"
+780 DATA "MATRIMONIAL","PARASYMPATHOMIMETIC","THIGMOTROPISM"
+ TextConstant:"MATRIMONIAL"
+ TextConstant:"PARASYMPATHOMIMETIC"
+ TextConstant:"THIGMOTROPISM"
+990 PRINT "BYE NOW"
+ ITEMS
+ TextConstant:"BYE NOW"
+ CarriageControl:NL
+999 END
+ 
