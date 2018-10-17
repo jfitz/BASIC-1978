@@ -881,10 +881,6 @@ class Interpreter
     @interpreter_options['if_false_next_line'].value
   end
 
-  def fornext_one_beyond
-    @interpreter_options['fornext_one_beyond'].value
-  end
-
   def asc_allow_all
     @interpreter_options['asc_allow_all'].value
   end

@@ -2001,9 +2001,6 @@ class NextStatement < AbstractStatement
     io.trace_output(s)
 
     if terminated
-      fornext_control.bump_control(interpreter) if
-        interpreter.fornext_one_beyond
-
       interpreter.unlock_variable(@control)
     else
       # set next line from top item

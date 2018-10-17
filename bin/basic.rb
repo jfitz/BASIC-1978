@@ -348,7 +348,6 @@ OptionParser.new do |opt|
   opt.on('--randomize') { |o| options[:randomize] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
   opt.on('--if-false-next-line') { |o| options[:if_false_next_line] = o }
-  opt.on('--fornext-one-beyond') { |o| options[:fornext_one_beyond] = o }
   opt.on('--lock-fornext') { |o| options[:lock_fornext] = o }
   opt.on('--base BASE') { |o| options[:base] = o }
   opt.on('--require-initialized') { |o| options[:require_initialized] = o }
@@ -430,9 +429,6 @@ interpreter_options['asc_allow_all'] =
 
 interpreter_options['chr_allow_all'] =
   Option.new(boolean, options.key?(:chr_allow_all))
-
-interpreter_options['fornext_one_beyond'] =
-  Option.new(boolean, options.key?(:fornext_one_beyond))
 
 interpreter_options['if_false_next_line'] =
   Option.new(boolean, options.key?(:if_false_next_line))
