@@ -13,6 +13,7 @@ class StatementFactory
     line_number = nil
     line = nil
     m = /\A\d+/.match(text)
+
     unless m.nil?
       number = NumericConstantToken.new(m[0])
       line_number = LineNumber.new(number)
@@ -25,6 +26,7 @@ class StatementFactory
 
       line = create(line_text, all_tokens, comment, line_number)
     end
+
     [line_number, line]
   end
 
@@ -52,6 +54,7 @@ class StatementFactory
         end
       end
     end
+
     statement
   end
 
@@ -173,17 +176,20 @@ class StatementFactory
     keywords = []
     tokens = []
     saw_non_keyword = false
+
     all_tokens.each do |token|
       saw_non_keyword = true unless token.keyword?
       keywords << token unless saw_non_keyword
       tokens << token if saw_non_keyword
     end
+
     [keywords, tokens]
   end
 
   def split_keywords(tokens)
     results = []
     nonkeywords = []
+
     tokens.each do |token|
       if token.keyword?
         results << nonkeywords unless nonkeywords.empty?
@@ -193,7 +199,9 @@ class StatementFactory
         nonkeywords << token
       end
     end
+
     results << nonkeywords unless nonkeywords.empty?
+
     results
   end
 
@@ -238,6 +246,7 @@ class AbstractStatement
   def pretty
     list = [AbstractToken.pretty_tokens(@keywords, @tokens)]
     @modifiers.each { |modifier| list << modifier.pretty }
+
     list.join(' ')
   end
 
@@ -261,6 +270,7 @@ class AbstractStatement
       console_io.print_line("Errors in line #{line_number}:")
       print_errors(console_io)
     end
+
     errors.empty?
   end
 
@@ -292,6 +302,7 @@ class AbstractStatement
     negate = false
     prev_unary_minus = false
     prev_operand = false
+
     @tokens.each do |token|
       negate = !negate if prev_unary_minus
 
@@ -523,6 +534,7 @@ class AbstractStatement
     lists = []
     list = []
     parens_level = 0
+
     tokens.each do |token|
       if token.operand? &&
          (!list.empty? && (list[-1].operand? || list[-1].groupend?))
@@ -538,13 +550,16 @@ class AbstractStatement
       parens_level += 1 if token.groupstart?
       parens_level -= 1 if token.groupend? && !parens_level.zero?
     end
+
     lists << list unless list.empty?
+
     lists
   end
 
   def split_on_token(tokens, token_to_split)
     results = []
     list = []
+
     tokens.each do |token|
       if token.to_s != token_to_split
         list << token
@@ -554,13 +569,16 @@ class AbstractStatement
         results << token
       end
     end
+
     results << list unless list.empty?
+
     results
   end
 
   def split_keywords(tokens)
     results = []
     nonkeywords = []
+
     tokens.each do |token|
       if token.keyword?
         results << nonkeywords unless nonkeywords.empty?
@@ -570,7 +588,9 @@ class AbstractStatement
         nonkeywords << token
       end
     end
+
     results << nonkeywords unless nonkeywords.empty?
+
     results
   end
 
@@ -854,6 +874,7 @@ class ChangeStatement < AbstractStatement
     lines = []
     lines += @source.dump unless @source.nil?
     lines += @target.dump unless @target.nil?
+
     lines
   end
 
@@ -912,6 +933,7 @@ class ChangeStatement < AbstractStatement
     vars = []
     vars += @source.variables unless @source.nil?
     vars += @target.variables unless @target.nil?
+
     vars
   end
 end
@@ -948,6 +970,7 @@ class CloseStatement < AbstractStatement
   def execute_core(interpreter)
     fns = @filenum_expression.evaluate(interpreter)
     fh = fns[0]
+
     case fh.class.to_s
     when 'Fixnum'
       fh = FileHandle.new(fh)
@@ -960,6 +983,7 @@ class CloseStatement < AbstractStatement
     else
       raise(BASICRuntimeError, "Invalid file number #{fh.class}:#{fh}")
     end
+
     interpreter.close_file(fh)
   end
 
@@ -1039,6 +1063,7 @@ class DefineFunctionStatement < AbstractStatement
   def dump
     lines = []
     lines += @definition.dump unless @definition.nil?
+
     lines
   end
 
@@ -1082,6 +1107,7 @@ class DimStatement < AbstractStatement
   def dump
     lines = []
     @expression_list.each { |expression| lines += expression.dump }
+
     lines
   end
 
@@ -1099,9 +1125,11 @@ class DimStatement < AbstractStatement
 
   def variables
     vars = []
+
     @expression_list.each do |expression|
       vars += expression.variables
     end
+
     vars
   end
 end
@@ -1129,8 +1157,11 @@ class EndStatement < AbstractStatement
 
   def program_check(program, console_io, line_number_index)
     next_line = program.find_next_line_index(line_number_index)
+
     return true if next_line.nil?
+
     console_io.print_line("Statements after END in line #{line_number_index}")
+
     false
   end
 
@@ -1168,53 +1199,6 @@ class FnendStatement < AbstractStatement
 
   def execute_core(interpreter)
     interpreter.exit_user_function
-  end
-end
-
-# Helper class for FOR/NEXT
-class ForNextControl
-  attr_reader :control
-  attr_reader :start_line_index
-  attr_reader :end
-
-  def initialize(control, interpreter, start, endv, step_value)
-    @control = control
-    @start = start
-    @end = endv
-    @step_value = step_value
-    interpreter.set_value(@control, start)
-    @start_line_index = interpreter.next_line_index
-  end
-
-  def bump_control(interpreter)
-    current_value = interpreter.get_value(@control)
-    current_value += @step_value
-    interpreter.unlock_variable(@control)
-    interpreter.set_value(@control, current_value)
-    interpreter.lock_variable(@control)
-  end
-
-  def front_terminated?
-    zero = NumericConstant.new(0)
-    if @step_value > zero
-      @start > @end
-    elsif @step_value < zero
-      @start < @end
-    else
-      false
-    end
-  end
-
-  def terminated?(interpreter)
-    zero = NumericConstant.new(0)
-    current_value = interpreter.get_value(@control)
-    if @step_value > zero
-      current_value + @step_value > @end
-    elsif @step_value < zero
-      current_value + @step_value < @end
-    else
-      false
-    end
   end
 end
 
@@ -1267,6 +1251,7 @@ class ForStatement < AbstractStatement
     lines << 'start:   ' + @start.dump.to_s unless @start.nil?
     lines << 'end:     ' + @end.dump.to_s unless @end.nil?
     lines << 'step:    ' + @step_value.dump.to_s unless @step_value.nil?
+
     lines
   end
 
@@ -1275,15 +1260,12 @@ class ForStatement < AbstractStatement
     to = @end.evaluate(interpreter)[0]
     step = @step_value.evaluate(interpreter)[0]
 
-    fornext_control =
-      ForNextControl.new(@control, interpreter, from, to, step)
-
-    interpreter.assign_fornext(fornext_control)
+    fornext_control = interpreter.assign_fornext(@control, from, to, step)
     interpreter.lock_variable(@control)
     terminated = fornext_control.front_terminated?
+
     if terminated
-      interpreter.next_line_index =
-        interpreter.find_closing_next(@control)
+      interpreter.next_line_index = interpreter.find_closing_next(@control)
       interpreter.unlock_variable(@control)
     end
 
@@ -1354,9 +1336,11 @@ class GosubStatement < AbstractStatement
 
   def program_check(program, console_io, line_number_index)
     return true if program.line_number?(@destination)
+
     console_io.print_line(
       "Line number #{@destination} not found in line #{line_number_index}"
     )
+
     false
   end
 
@@ -1409,6 +1393,7 @@ class GotoStatement < AbstractStatement
   def dump
     lines = []
     lines << @destination.dump unless @destination.nil?
+
     lines
   end
 
@@ -1486,8 +1471,10 @@ class IfStatement < AbstractStatement
     stack << new_dict
     dict = stack[-1]
     state = 1
+
     tokens_lists.each do |tokens_list|
       handled = false
+
       case state
       when 1
         if tokens_list == 'THEN'
@@ -1554,6 +1541,7 @@ class IfStatement < AbstractStatement
   def print_dict(dict)
     expr_s = '['
     x0 = dict['expr']
+
     x0.each do |x|
       if x.class.to_s == 'Array'
         expr_s += '[' + x.map(&:to_s).join(', ') + ']'
@@ -1562,10 +1550,13 @@ class IfStatement < AbstractStatement
       end
       expr_s += ', '
     end
+
     expr_s += ']'
     x1 = dict['then']
+
     if x1.class.to_s == 'Array'
       ax1 = []
+
       x1.each do |x|
         if x.class.to_s == 'Array'
           ax1 << '[' + x.map(&:to_s).join(', ') + ']'
@@ -1573,15 +1564,19 @@ class IfStatement < AbstractStatement
           ax1 << x.to_s
         end
       end
+
       then_s = '[' + ax1.join(', ') + ']'
     else
       then_s = 'DICT'
     end
+
     else_s = ''
+
     if dict.key?('else')
       x2 = dict['else']
       if x2.class.to_s == 'Array'
         ax2 = []
+
         x2.each do |x|
           if x.class.to_s == 'Array'
             ax2 << '[' + x.map(&:to_s).join(', ') + ']'
@@ -1589,6 +1584,7 @@ class IfStatement < AbstractStatement
             ax2 << x.to_s
           end
         end
+
         else_s = '[' + ax2.join(', ') + ']'
       else
         else_s = 'DICT'
@@ -1645,7 +1641,9 @@ class IfStatement < AbstractStatement
       unless @destination.nil?
         line_number = @destination
         index = interpreter.statement_start_index(line_number, 0)
+
         raise(BASICRuntimeError, 'Line number not found') if index.nil?
+
         destination = LineNumberIndex.new(line_number, 0, index)
         interpreter.next_line_index = destination
       end
@@ -1655,7 +1653,9 @@ class IfStatement < AbstractStatement
       unless @else_dest.nil?
         line_number = @else_dest
         index = interpreter.statement_start_index(line_number, 0)
+
         raise(BASICRuntimeError, 'Line number not found') if index.nil?
+
         destination = LineNumberIndex.new(line_number, 0, index)
         interpreter.next_line_index = destination
       end
@@ -1679,10 +1679,12 @@ class IfStatement < AbstractStatement
       @destination = renumber_map[@destination]
       index = 0
       i = 0
+
       @tokens.each do |token|
         index = i if token.to_s == 'THEN'
         i += 1
       end
+
       @tokens[index + 1] = NumericConstantToken.new(@destination.line_number)
     end
 
@@ -1715,6 +1717,7 @@ class IfStatement < AbstractStatement
   def parse_target(tokens)
     destination = nil
     statement = nil
+
     if tokens.class.to_s == 'Hash'
       statement = IfStatement.new(nil, tokens)
     elsif tokens.size == 1 && tokens[0].numeric_constant?
@@ -1724,6 +1727,7 @@ class IfStatement < AbstractStatement
       statement = statement_factory.create_statement(tokens.flatten)
       @errors += statement.errors
     end
+
     [destination, statement]
   end
 end
@@ -1837,6 +1841,7 @@ class AbstractLetStatement < AbstractStatement
   def dump
     lines = []
     lines += @assignment.dump unless @assignment.nil?
+
     lines
   end
 
@@ -1844,6 +1849,7 @@ class AbstractLetStatement < AbstractStatement
     l_values = @assignment.eval_target(interpreter)
     r_values = @assignment.eval_value(interpreter)
     r_value = r_values[0]
+
     l_values.each do |l_value|
       interpreter.set_value(l_value, r_value)
     end
@@ -1852,6 +1858,7 @@ class AbstractLetStatement < AbstractStatement
   def variables
     vars = []
     vars = @assignment.variables unless @assignment.nil?
+
     vars
   end
 end
@@ -1921,6 +1928,7 @@ class LineInputStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :read)
 
     prompt = nil
+
     unless @prompt.nil?
       prompts = @prompt.evaluate(interpreter)
       prompt = prompts[0]
@@ -1955,6 +1963,7 @@ class LineInputStatement < AbstractStatement
 
       prompt = nil
     end
+
     values
   end
 end
@@ -2006,7 +2015,7 @@ class NextStatement < AbstractStatement
       interpreter.unlock_variable(@control)
     else
       # set next line from top item
-      interpreter.next_line_index = fornext_control.start_line_index
+      interpreter.next_line_index = fornext_control.loop_start_index
       # change control variable value
       fornext_control.bump_control(interpreter)
     end
@@ -2033,6 +2042,7 @@ class OnErrorStatement < AbstractStatement
       line_nums = split_tokens(destinations, false)
       destinations = line_nums[0]
       destination = destinations[0]
+
       if destination.numeric_constant?
         @destination = LineNumber.new(destination)
       else
@@ -2095,14 +2105,17 @@ class OnStatement < AbstractStatement
     if check_template(tokens_lists, template1) ||
        check_template(tokens_lists, template2)
       expression = tokens_lists[0]
+
       begin
         @expression = ValueScalarExpression.new(expression)
       rescue BASICExpressionError => e
         @errors << e.message
       end
+
       destinations = tokens_lists[2]
       line_nums = split_tokens(destinations, false)
       @destinations = []
+
       line_nums.each do |line_num|
         if line_num.size == 1
           destination = line_num[0]
@@ -2147,9 +2160,13 @@ class OnStatement < AbstractStatement
 
   def execute_core(interpreter)
     values = @expression.evaluate(interpreter)
+
     raise(BASICExpressionError, 'Expecting one value') unless values.size == 1
+
     value = values[0]
+
     raise(BASICExpressionError, 'Invalid value') unless value.numeric_constant?
+
     io = interpreter.trace_out
     io.trace_output(' ' + @expression.to_s + ' = ' + value.to_s)
     index = value.to_i
@@ -2160,22 +2177,27 @@ class OnStatement < AbstractStatement
     # get destination in list
     line_number = @destinations[index - 1]
     index = interpreter.statement_start_index(line_number, 0)
+
     raise(BASICRuntimeError, 'Line number not found') if index.nil?
+
     destination = LineNumberIndex.new(line_number, 0, index)
     interpreter.next_line_index = destination
   end
 
   def renumber(renumber_map)
     new_destinations = []
+
     @destinations.each do |destination|
       new_destinations << renumber_map[destination]
     end
+
     @destinations = new_destinations
   end
 
   def variables
     vars = []
     vars += @expression.variables unless @expression.nil?
+
     vars
   end
 end
@@ -2223,6 +2245,7 @@ class OpenStatement < AbstractStatement
     lines = []
     lines += @filename_expression.dump unless @filename_expression.nil?
     lines += @filenum_expression.dump unless @filenum_expression.nil?
+
     lines
   end
 
@@ -2231,6 +2254,7 @@ class OpenStatement < AbstractStatement
     filename = filenames[0]
     fhs = @filenum_expression.evaluate(interpreter)
     fh = fhs[0]
+
     case fh.class.to_s
     when 'Fixnum'
       fh = FileHandle.new(fh)
@@ -2243,6 +2267,7 @@ class OpenStatement < AbstractStatement
     else
       raise(BASICRuntimeError, "Invalid file number #{fh.class}:#{fh}")
     end
+
     interpreter.open_file(filename, fh, @mode)
   end
 end
@@ -2278,6 +2303,7 @@ class OptionStatement < AbstractStatement
   def dump
     lines = []
     lines += @expression.dump unless @expression.nil?
+
     lines
   end
 
@@ -2293,6 +2319,7 @@ class OptionStatement < AbstractStatement
   def variables
     vars = []
     vars += @expression.variables unless @expression.nil?
+
     vars
   end
 end
@@ -2322,6 +2349,7 @@ class AbstractPrintStatement < AbstractStatement
     vars = []
     vars += @file_tokens.variables unless @file_tokens.nil?
     @print_items.each { |item| vars += item.variables } unless @print_items.nil?
+
     vars
   end
 
@@ -2378,6 +2406,7 @@ class PrintStatement < AbstractPrintStatement
     end
 
     add_implied_items(print_items, @final)
+
     print_items
   end
 
@@ -2485,6 +2514,7 @@ class PrintUsingStatement < AbstractPrintStatement
   def first_item(print_items, interpreter)
     first_list = print_items[0]
     values = first_list.evaluate(interpreter)
+
     values[0]
   end
 
@@ -2513,6 +2543,7 @@ class PrintUsingStatement < AbstractPrintStatement
     end
 
     add_implied_items(print_items, @final)
+
     print_items
   end
 
@@ -2567,6 +2598,7 @@ class AbstractReadStatement < AbstractStatement
   def dump
     lines = []
     @read_items.each { |item| lines += item.dump } unless @read_items.nil?
+
     lines
   end
 
@@ -2574,6 +2606,7 @@ class AbstractReadStatement < AbstractStatement
     vars = []
     vars += @file_tokens.variables unless @file_tokens.nil?
     @read_items.each { |item| vars += item.variables } unless @read_items.nil?
+
     vars
   end
 
@@ -2833,6 +2866,7 @@ class AbstractWriteStatement < AbstractStatement
     vars = []
     vars += @file_tokens.variables unless @file_tokens.nil?
     @print_items.each { |item| vars += item.variables } unless @print_items.nil?
+
     vars
   end
 
@@ -2886,6 +2920,7 @@ class WriteStatement < AbstractWriteStatement
     end
 
     add_implied_items(print_items, @final)
+
     print_items
   end
 
@@ -2958,6 +2993,7 @@ class ArrPrintStatement < AbstractPrintStatement
     end
 
     add_implied_items(print_items, @final)
+
     print_items
   end
 end
@@ -3028,6 +3064,7 @@ class ArrReadStatement < AbstractReadStatement
 
   def read_values(name, interpreter, ds)
     dims = interpreter.get_dimensions(name)
+
     case dims.size
     when 1
       read_array(name, dims, interpreter, ds)
@@ -3078,6 +3115,7 @@ class ArrWriteStatement < AbstractWriteStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+
     @print_items.each do |item|
       if item.printable?
         carriage = CarriageControl.new('')
@@ -3105,6 +3143,7 @@ class ArrWriteStatement < AbstractWriteStatement
     end
 
     add_implied_items(print_items, @final)
+
     print_items
   end
 end
@@ -3127,9 +3166,11 @@ class ArrLetStatement < AbstractStatement
     if check_template(tokens_lists, template)
       begin
         @assignment = ArrayAssignment.new(tokens_lists[0])
+
         if @assignment.count_target.zero?
           @errors << 'Assignment must have left-hand value(s)'
         end
+
         if @assignment.count_value != 1
           @errors << 'Assignment must have only one right-hand value'
         end
@@ -3148,6 +3189,7 @@ class ArrLetStatement < AbstractStatement
     values = r_value.values(interpreter)
 
     l_values = @assignment.eval_target(interpreter)
+
     l_values.each do |l_value|
       interpreter.set_dimensions(l_value, dims)
       interpreter.set_values(l_value.name, values)
@@ -3157,6 +3199,7 @@ class ArrLetStatement < AbstractStatement
   def variables
     vars = []
     vars = @assignment.variables unless @assignment.nil?
+
     vars
   end
 
@@ -3164,6 +3207,7 @@ class ArrLetStatement < AbstractStatement
 
   def first_target(interpreter)
     l_values = @assignment.eval_target(interpreter)
+
     l_values[0]
   end
 
@@ -3173,6 +3217,7 @@ class ArrLetStatement < AbstractStatement
 
     raise(BASICRuntimeError, 'Expected Array') if
       r_value.class.to_s != 'BASICArray'
+
     r_value
   end
 end
@@ -3206,6 +3251,7 @@ class MatPrintStatement < AbstractPrintStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+
     @print_items.each do |item|
       if item.printable?
         carriage = CarriageControl.new('')
@@ -3233,6 +3279,7 @@ class MatPrintStatement < AbstractPrintStatement
     end
 
     add_implied_items(print_items, @final)
+
     print_items
   end
 end
@@ -3395,6 +3442,7 @@ class MatWriteStatement < AbstractWriteStatement
     end
 
     add_implied_items(print_items, @final)
+
     print_items
   end
 end
@@ -3468,6 +3516,7 @@ class MatLetStatement < AbstractStatement
   def variables
     vars = []
     vars = @assignment.variables unless @assignment.nil?
+
     vars
   end
 end
