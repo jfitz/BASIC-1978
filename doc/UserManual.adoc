@@ -57,14 +57,14 @@ When the BASIC program ends, BASIC-1978 ends.
 |--pretty-multiline |For pretty output, prints multistatement lines on multiplw lines, one statement per line.
 |--parse filename |specifies the file to load and parse.
 |--heading |Suppress the heading and trailing messages
-|--trace |Print each statement prior to executing it (useful for debugging). Does the same thing as the 'TRACE' command in interactive mode, but from the command line.
-|--provenence |When displaying a variable in a trace, also display the line number where it was set.
+|--trace |Print each statement prior to executing it (useful for debugging). Does the same thing as the 'OPTION TRACE TRUE' command in interactive mode, but from the command line.
+|--provenance |When displaying a variable in a trace, also display the line number where it was set.
 |--tty |Print output slowly, emulating the speed of an ASR-33 Teletype. Provides a better experience with some programs (often games) in which slow output lets your anticipation build. The fast output of modern computers displays information quickly, and TTY mode lets you read each line as it is "printed".
 |--tty-lf |Similar to --tty but delays only the newline characters, not each individual character. Useful with --trace when debugging.
 |--print-width width |Specifies a print width. Lines will wrap at the specified column. Default value is 72.
 |--zone-width width |Specifies a zone width. PRINT statements will position output separated by commas in zones. Default is 16.
 |--randomize |Forces new sequences of numbers from the RND() function on successive runs.
-|--ignore-randomize |Forces the interpreter to ignore the RANDMIZE and RANDOM statements. Successive runs of the interpreter will use the same sequence of numbers from the RND() function. (Useful for testing.)
+|--ignore-randomize |Forces the interpreter to ignore the RANDMIZE statements. Successive runs of the interpreter will use the same sequence of numbers from the RND() function. (Useful for testing.)
 |--echo-input |Echoes console input to output. Useful in run mode when redirecting input from a text file.
 |--int-floor |The INT function truncates towards negative infinity. (Normally towards zero.)
 |--ignore-rnd-arg |The RND function ignores its argument and provides a number between zero and one. This matches the behavior of certain BASICs, including K&K.
@@ -255,18 +255,6 @@ Each statement which contains a line number (GOTO, GOSUB, IF, ON/GOTO) is modifi
 
 RENUMBER also adjusts breakpoints, if any are set.
 
-TRACE
-~~~~~
-
-Runs the current program, displaying each line prior to execution.
-
-Syntax:	TRACE
-
-After the line is displayed and executed, certain statements (READ, LET, and IF) display additional information.
-READ displays the values read.
-LET displays the new value assigned.
-IF displays the two values, the operator, and the result ('true' or 'false').
-
 DIMS
 ~~~~
 
@@ -301,12 +289,65 @@ Syntax:	PARSE [line specification]
 
 The line specification is the same as the line specification for the LIST command.
 
+OPTION
+~~~~~~
+
+Display or set various options for the BASIC interpreter.
+
+Syntax: OPTION
+Syntax: OPTION option
+Syntax: OPTION option value
+
+The first form ('OPTION' by itself) lists the options and their current values.
+The second form lists a specific option and its current value.
+The final form sets the value for an option.
+
+The options that can be set are:
+
+    BASE (0 or 1)
+    HEADING (TRUE or FALSE)
+    PRETTY_MULTILINE (TRUE or FALSE)
+    PROVENANCE (TRUE or FALSE)
+    TIMING (TRUE or FALSE)
+    TRACE (TRUE or FALSE)
+
+These options can be initialized on the command line.
+The OPTION command overrides the command-line setting.
+
+OPTION BASE 1
+
+Sets the minimum subscript index to 1. The default is zero. The default can be restored with OPTION BASE 0.
+
+OPTION HEADING TRUE
+
+Displays the opening and closing lines that identify BASIC.
+
+OPTION TIMING TRUE
+
+After running a program, display time to execute (user time and system time).
+
+OPTION TRACE TRUE
+
+Runs the current program, displaying each line prior to execution.
+After the line is displayed and executed, certain statements (READ, LET, and IF) display additional information.
+READ displays the values read.
+LET displays the new value assigned.
+IF displays the two values, the operator, and the result ('true' or 'false').
+
+OPTION PRETTY_MULTILINE TRUE
+
+When listing programs, list each statement on a separate line.
+
+OPTION PROVENANCE TRUE
+
+When TRACE is TRUE, expand display of a variable to include the line in which it was assigned its value.
+
 
 Debug shell
 -----------
 
 The debug shell lets you pause execution, examine or change the program, and examine or change variables.
-The shell is invoked by a breakpoint during a RUN or TRACE.
+The shell is invoked by a breakpoint during a RUN.
 Breakpoints are set by the BREAK command.
 
 The debug shell is available only in interactive mode.
@@ -645,6 +686,8 @@ Examples:
 
 The array of numeric values contains the length in the zero position and one value for each character in the corresponding string.
 
+OPTION BASE 1 breaks the CHANGE command, because CHANGE relies on PACK$() and UNPACK().
+
 CLOSE
 ~~~~~
 
@@ -745,6 +788,9 @@ Examples:
 	20 DIM B(15), C(20,30)
 
 Arrays are zero-based, so the DIM A(20) statement allows for values A(0) through A(20).
+
+OPTION BASE 1 changes arrays to one-based, but does not change the upper bound.
+With OPTION BASE 1, the statement DIM A(20) allows for values A(1) through A(20).
 
 END
 ~~~
@@ -1110,6 +1156,31 @@ The file name may be any file name suitable for your environment.
 It may contain lower case letters.
 The file name may contain device and directory names.
 
+OPTION
+~~~~~~
+
+Sets an option for the interpreter.
+
+Syntax: OPTION option expression
+
+Option is either 'BASE', 'TRACE' or 'PROVENANCE'.
+The options for HEADING and TIMING are not available as a run-time option.
+
+Expression must evaluate to a boolean value.
+It may be 'TRUE' or 'FALSE' or a more complex expression.
+
+Examples:
+
+	10 OPTION TRACE TRUE
+	40 OPTION PROVENANCE A > 0
+	100 OPTION BASE 1
+
+Unlike other interpreters, the OPTION statement is executed in-line.
+It is not a setting prior to the execution of the program.
+
+A program may contain multiple OPTION statements.
+Each will be executed as a normal statement.
+
 PRINT
 ~~~~~
 
@@ -1226,14 +1297,14 @@ A comma or semicolon at the end of the list of values does have its usual effect
 RANDOMIZE
 ~~~~~~~~~
 
-Set a new seed for the random number generator. May be abbreviated as RANDOM.
+Set a new seed for the random number generator.
 
 Syntax:	RANDOMIZE
 
-Examples:
+Example:
 
 	4 RANDOMIZE
-	5 RANDOM
+
 
 Without RANDOMIZE, successive runs of a program will use the same sequence of numbers from the RND() function.
 The RANDOMIZE statement randomizes the sequence, and successive runs will have different numbers.
@@ -1477,7 +1548,8 @@ ARR statements
 --------------
 
 The ARR statements operate on one-dimensional arrays.
-Operations begin with index zero.
+Operations begin with the index specified in OPTION BASE.
+This is unlike the MAT statements, which always begin with index 1.
 
 ARR PRINT
 ~~~~~~~~~
@@ -1666,6 +1738,7 @@ The MAT statements operate on matricies, which are either one- or two-dimensiona
 
 Operations begin with indices of one, not zero.
 The values in the zero row and the zero column are ignored in MAT operations.
+This behavior is not changed with the OPTION BASE statement.
 
 MAT PRINT
 ~~~~~~~~~
@@ -1924,6 +1997,9 @@ Functions may be used in expressions.
 |ZER(x,y) |numeric matrix|Creates a matrix containing all zeros, with x rows and y columns.
 |ZER or ZER() |numeric array or matrix |Creates an array or matrix containins all zeros, with dimensions based on the assignment target.
 |==========
+
+OPTION BASE 1 breaks the PACK$() and UNPACK() functions, as they both access index position zero.
+
 
 Matrix function special forms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

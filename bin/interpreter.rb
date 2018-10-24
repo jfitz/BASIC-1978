@@ -734,14 +734,14 @@ class Interpreter
         end
         @variables[v] =
           {
-            'line' => @current_line_index,
+            'provenance' => @current_line_index,
             'value' => default_value
           }
       end
 
       dict = @variables[v]
       value = dict['value']
-      line = dict['line']
+      provenance = dict['provenance']
     end
 
     seen = @get_value_seen.include?(variable)
@@ -749,9 +749,9 @@ class Interpreter
     trace = @action_options['trace'].value
 
     if trace && !seen
-      provenence = @action_options['provenence'].value
-      if provenence && !line.nil?
-        text = ' ' + variable.to_s + ': (' + line.to_s + ') ' + value.to_s
+      provenance_option = @action_options['provenance'].value
+      if provenance_option && !provenance.nil?
+        text = ' ' + variable.to_s + ': (' + provenance.to_s + ') ' + value.to_s
       else
         text = ' ' + variable.to_s + ': ' + value.to_s
       end
@@ -812,7 +812,7 @@ class Interpreter
     end
 
     var = variable.to_s
-    dict = { 'line' => @current_line_index, 'value' => value }
+    dict = { 'provenance' => @current_line_index, 'value' => value }
     @variables[var] = dict
 
     @trace_out.newline_when_needed
