@@ -745,6 +745,35 @@ class FunctionSin < AbstractScalarFunction
   end
 end
 
+# function SPC$
+class FunctionSpc < AbstractScalarFunction
+  def initialize(text)
+    super
+
+    @signature = [{ 'type' => 'numeric', 'shape' => 'scalar' }]
+  end
+
+  def evaluate(interpreter, stack)
+    args = stack.pop
+    if match_args_to_signature(args, @signature)
+      width = args[0].to_v
+
+      if width > 0
+        spaces = ' ' * width
+      else
+        # zero or negative value yields empty string
+        spaces = ''
+      end
+
+      quoted = '"' + spaces + '"'
+      v = TextConstantToken.new(quoted)
+      TextConstant.new(v)
+    else
+      raise(BASICRuntimeError, 'Wrong arguments for function')
+    end
+  end
+end
+
 # function SQR
 class FunctionSqr < AbstractScalarFunction
   def initialize(text)
@@ -956,6 +985,7 @@ class FunctionFactory
     'RND' => FunctionRnd,
     'SGN' => FunctionSgn,
     'SIN' => FunctionSin,
+    'SPC$' => FunctionSpc,
     'SQR' => FunctionSqr,
     'STR$' => FunctionStr,
     'TAB' => FunctionTab,
