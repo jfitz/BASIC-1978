@@ -58,9 +58,28 @@ class StatementFactory
     statement
   end
 
+  private
+
+  def split_on_statement_separators(tokens)
+    tokens_lists = []
+    statement_tokens = []
+    tokens.each do |token|
+      if token.statement_separator?
+        tokens_lists << statement_tokens
+        statement_tokens = []
+      else
+        statement_tokens << token
+      end
+    end
+    tokens_lists << statement_tokens unless statement_tokens.empty?
+    tokens_lists
+  end
+
+  public
+
   def create(text, all_tokens, comment, _)
     statements = []
-    statements_tokens = split_on_separators(all_tokens)
+    statements_tokens = split_on_statement_separators(all_tokens)
 
     if statements_tokens.empty?
       statement = EmptyStatement.new
@@ -155,21 +174,6 @@ class StatementFactory
     end
 
     lead_keywords
-  end
-
-  def split_on_separators(tokens)
-    tokens_lists = []
-    statement_tokens = []
-    tokens.each do |token|
-      if token.statement_separator?
-        tokens_lists << statement_tokens
-        statement_tokens = []
-      else
-        statement_tokens << token
-      end
-    end
-    tokens_lists << statement_tokens unless statement_tokens.empty?
-    tokens_lists
   end
 
   def extract_keywords(all_tokens)
@@ -592,6 +596,21 @@ class AbstractStatement
     results << nonkeywords unless nonkeywords.empty?
 
     results
+  end
+
+  def split_on_group_separators(tokens)
+    tokens_lists = []
+    statement_tokens = []
+    tokens.each do |token|
+      if token.separator?
+        tokens_lists << statement_tokens
+        statement_tokens = []
+      else
+        statement_tokens << token
+      end
+    end
+    tokens_lists << statement_tokens unless statement_tokens.empty?
+    tokens_lists
   end
 
   def make_coord(c)
@@ -1990,15 +2009,13 @@ class NextStatement < AbstractStatement
       # parse control variables
       @controls = []
 
-      tokens = tokens_lists[0]
-      tokens.each do |token|
-        if token.variable?
-          control = VariableName.new(token)
+      tokens_list = split_on_group_separators(tokens_lists[0])
+      tokens_list.each do |tokens|
+        if tokens.size == 1 && tokens[0].variable?
+          control = VariableName.new(tokens[0])
           @controls << control
-        elsif token.separator?
-          next
         else
-          @errors << "Invalid control variable #{token}"
+          @errors << "Invalid control variable #{tokens[0]}"
         end
       end
     elsif check_template(tokens_lists, template2)
