@@ -3,6 +3,7 @@ class AbstractElement
   attr_reader :precedence
 
   def initialize
+    @empty = false
     @operator = false
     @function = false
     @variable = false
@@ -23,6 +24,10 @@ class AbstractElement
 
   def dump
     self.class.to_s + ':' + 'Unimplemented'
+  end
+
+  def empty?
+    @empty
   end
 
   def operator?
@@ -109,6 +114,16 @@ class AbstractElement
 
   def make_coords(r, c)
     [NumericConstant.new(r), NumericConstant.new(c)]
+  end
+end
+
+# empty token
+class EmptyToken < AbstractElement
+  def initialize
+    super
+
+    @text = ''
+    @empty = true
   end
 end
 

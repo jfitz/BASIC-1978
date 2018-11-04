@@ -601,15 +601,23 @@ class AbstractStatement
   def split_on_group_separators(tokens)
     tokens_lists = []
     statement_tokens = []
+
+    # set to TRUE, so an empty list creates one empty token
+    last_was_separator = true
+
     tokens.each do |token|
       if token.separator?
         tokens_lists << statement_tokens
         statement_tokens = []
+        last_was_separator = true
       else
         statement_tokens << token
+        last_was_separator = false
       end
     end
-    tokens_lists << statement_tokens unless statement_tokens.empty?
+
+    tokens_lists << statement_tokens if
+      !statement_tokens.empty? || last_was_separator
     tokens_lists
   end
 
@@ -2011,7 +2019,9 @@ class NextStatement < AbstractStatement
 
       tokens_list = split_on_group_separators(tokens_lists[0])
       tokens_list.each do |tokens|
-        if tokens.size == 1 && tokens[0].variable?
+        if tokens.empty?
+          @controls << EmptyToken.new
+        elsif tokens.size == 1 && tokens[0].variable?
           control = VariableName.new(tokens[0])
           @controls << control
         else
@@ -2019,7 +2029,7 @@ class NextStatement < AbstractStatement
         end
       end
     elsif check_template(tokens_lists, template2)
-      @controls = []
+      @controls = [EmptyToken.new]
     else
       @errors << 'Syntax error'
     end
@@ -2034,7 +2044,7 @@ class NextStatement < AbstractStatement
 
     if !@controls.nil?
       @controls.each do |control|
-        vars << control.dump
+        vars << control.dump unless control.empty?
       end
     end
 
@@ -2044,9 +2054,17 @@ class NextStatement < AbstractStatement
   def execute_core(interpreter)
     max = @controls.size
 
-    if max.zero?
-      control = interpreter.top_fornext
-      fornext_control = interpreter.retrieve_fornext(control)
+    # for each control, until we find one that is not terminated
+    found_unterminated = false
+    index = 0
+
+    while !found_unterminated && index < max
+      if @controls[index].empty?
+        control = interpreter.top_fornext
+        fornext_control = interpreter.retrieve_fornext(control)
+      else
+        fornext_control = interpreter.retrieve_fornext(@controls[index])
+      end
       # check control variable value
       # if matches end value, stop here
       terminated = fornext_control.terminated?(interpreter)
@@ -2055,42 +2073,18 @@ class NextStatement < AbstractStatement
       io.trace_output(s)
 
       if terminated
-        interpreter.unlock_variable(control)
+        interpreter.unlock_variable(@controls[index])
         interpreter.exit_fornext
       else
         # set next line from top item
         interpreter.next_line_index = fornext_control.loop_start_index
         # change control variable value
         fornext_control.bump_control(interpreter)
+
+        found_unterminated = true
       end
-    else
-      # for each control, until we find one that is not terminated
-      found_unterminated = false
-      index = 0
 
-      while !found_unterminated && index < max
-        fornext_control = interpreter.retrieve_fornext(@controls[index])
-        # check control variable value
-        # if matches end value, stop here
-        terminated = fornext_control.terminated?(interpreter)
-        io = interpreter.trace_out
-        s = ' terminated:' + terminated.to_s
-        io.trace_output(s)
-
-        if terminated
-          interpreter.unlock_variable(@controls[index])
-          interpreter.exit_fornext
-        else
-          # set next line from top item
-          interpreter.next_line_index = fornext_control.loop_start_index
-          # change control variable value
-          fornext_control.bump_control(interpreter)
-
-          found_unterminated = true
-        end
-
-        index += 1
-      end
+      index += 1
     end
   end
 end
