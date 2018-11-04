@@ -463,7 +463,7 @@ class Program
         # consider only core statements, not modifiers
         return LineNumberIndex.new(line_number, statement_index, 0) if
           statement.class.to_s == 'NextStatement' &&
-          statement.control == control_variable
+          statement.has_control(control_variable)
         statement_index += 1
       end
 

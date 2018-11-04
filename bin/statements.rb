@@ -1978,48 +1978,74 @@ class NextStatement < AbstractStatement
     ]
   end
 
-  attr_reader :control
-
   def initialize(keywords, tokens_lists)
     super
 
-    template = [[1]]
+    template = [[1, '>=']]
 
     if check_template(tokens_lists, template)
-      # parse control variable
-      @control = nil
-      if tokens_lists[0][0].variable?
-        @control = VariableName.new(tokens_lists[0][0])
-      else
-        @errors << "Invalid control variable #{tokens_lists[0][0]}"
+      # parse control variables
+      @controls = []
+
+      tokens = tokens_lists[0]
+      tokens.each do |token|
+        if token.variable?
+          control = VariableName.new(token)
+          @controls << control
+        elsif token.separator?
+          next
+        else
+          @errors << "Invalid control variable #{token}"
+        end
       end
     else
       @errors << 'Syntax error'
     end
   end
 
+  def has_control(control)
+    @controls.include?(control)
+  end
+
   def dump
     vars = []
-    vars << @control.dump unless @control.nil?
+
+    if !@controls.nil?
+      @controls.each do |control|
+        vars << control.dump
+      end
+    end
+
     vars
   end
 
   def execute_core(interpreter)
-    fornext_control = interpreter.retrieve_fornext(@control)
-    # check control variable value
-    # if matches end value, stop here
-    terminated = fornext_control.terminated?(interpreter)
-    io = interpreter.trace_out
-    s = ' terminated:' + terminated.to_s
-    io.trace_output(s)
+    # for each control, until we find one that is not terminated
+    index = 0
+    max = @controls.size
+    found_unterminated = false
 
-    if terminated
-      interpreter.unlock_variable(@control)
-    else
-      # set next line from top item
-      interpreter.next_line_index = fornext_control.loop_start_index
-      # change control variable value
-      fornext_control.bump_control(interpreter)
+    while !found_unterminated && index < max
+      fornext_control = interpreter.retrieve_fornext(@controls[index])
+      # check control variable value
+      # if matches end value, stop here
+      terminated = fornext_control.terminated?(interpreter)
+      io = interpreter.trace_out
+      s = ' terminated:' + terminated.to_s
+      io.trace_output(s)
+
+      if terminated
+        interpreter.unlock_variable(@controls[index])
+      else
+        # set next line from top item
+        interpreter.next_line_index = fornext_control.loop_start_index
+        # change control variable value
+        fornext_control.bump_control(interpreter)
+
+        found_unterminated = true
+      end
+
+      index += 1
     end
   end
 end
