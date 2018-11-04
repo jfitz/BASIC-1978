@@ -1119,13 +1119,13 @@ Control is restored to the original statement that had the error when a RESUME s
 
 If an error occurs in the "error handler" specified by ON ERROR GOTO, the program stops, unless another ON ERROR GOTO statement is executed as part of the error handler.
 
-ON GOTO
-~~~~~~~
+ON GOTO/GOSUB
+~~~~~~~~~~~~~
 
 Changes the flow of the program to one of a number of possible destinations.
 
 Syntax: ON expression GOTO line number, line number, line number...
-Syntax: ON expression THEN line number, line number, line number...
+Syntax: ON expression GOSUB line number, line number, line number...
 
 The expression is evaluated and its result is used as an index into the list of line numbers.
 The result is rounded to an integer prior to selecting the line number.
@@ -1136,7 +1136,7 @@ Examples:
 
 	90 ON A/B GOTO 100, 120, 140, 180
 	190 ON C GOTO 250, 200
-	220 ON INT(RND()*5)+1 THEN 450, 650, 320, 100, 144
+	220 ON INT(RND()*5)+1 GOSUB 450, 650, 320, 100, 144
 
 Traditionally, target line numbers are listed in increasing order.
 Line numbers may appear in any order.

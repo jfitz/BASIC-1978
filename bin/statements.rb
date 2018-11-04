@@ -1347,7 +1347,9 @@ class GosubStatement < AbstractStatement
   def execute_core(interpreter)
     line_number = @destination
     index = interpreter.statement_start_index(line_number, 0)
+
     raise(BASICRuntimeError, 'Line number not found') if index.nil?
+
     destination = LineNumberIndex.new(line_number, 0, index)
     interpreter.push_return(interpreter.next_line_index)
     interpreter.next_line_index = destination
@@ -2081,7 +2083,7 @@ class OnErrorStatement < AbstractStatement
   end
 end
 
-# ON GOTO
+# ON GOTO/ON GOSUB
 class OnStatement < AbstractStatement
   def self.lead_keywords
     [
@@ -2090,7 +2092,7 @@ class OnStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w(GOTO THEN)
+    %w(GOTO THEN GOSUB)
   end
 
   def initialize(keywords, tokens_lists)
@@ -2101,9 +2103,11 @@ class OnStatement < AbstractStatement
 
     template1 = [[1, '>='], 'GOTO', [1, '>=']]
     template2 = [[1, '>='], 'THEN', [1, '>=']]
+    template3 = [[1, '>='], 'GOSUB', [1, '>=']]
 
     if check_template(tokens_lists, template1) ||
-       check_template(tokens_lists, template2)
+       check_template(tokens_lists, template2) ||
+       check_template(tokens_lists, template3)
       expression = tokens_lists[0]
 
       begin
@@ -2111,6 +2115,8 @@ class OnStatement < AbstractStatement
       rescue BASICExpressionError => e
         @errors << e.message
       end
+
+      @gosub = tokens_lists[1] == 'GOSUB'
 
       destinations = tokens_lists[2]
       line_nums = split_tokens(destinations, false)
@@ -2180,6 +2186,8 @@ class OnStatement < AbstractStatement
 
     raise(BASICRuntimeError, 'Line number not found') if index.nil?
 
+    interpreter.push_return(interpreter.next_line_index) if @gosub
+    
     destination = LineNumberIndex.new(line_number, 0, index)
     interpreter.next_line_index = destination
   end
@@ -2281,7 +2289,7 @@ class OptionStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w(BASE PROVENENCE TRACE)
+    %w(BASE PROVENANCE TRACE)
   end
 
   def initialize(keywords, tokens_lists)
@@ -2289,7 +2297,7 @@ class OptionStatement < AbstractStatement
 
     # omit HEADING and TIMING as they are not used in the interpreter
     # omit PRETTY_MULTILINE too
-    template = [['BASE', 'PROVENENCE', 'TRACE'], [1, '>=']]
+    template = [['BASE', 'PROVENANCE', 'TRACE'], [1, '>=']]
 
     if check_template(tokens_lists, template)
       @key = tokens_lists[0].to_s.downcase
