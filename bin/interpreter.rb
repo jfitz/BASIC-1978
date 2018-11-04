@@ -85,6 +85,7 @@ class Interpreter
     @function_stack = []
     @errorgoto_stack = []
     @resume_stack = []
+    @fornext_stack = []
     @running = false
   end
 
@@ -874,6 +875,20 @@ class Interpreter
     raise(BASICRuntimeError, 'NEXT without FOR') if fornext.nil?
 
     fornext
+  end
+
+  def enter_fornext(control)
+    @fornext_stack << control
+  end
+
+  def exit_fornext
+    @fornext_stack.pop
+  end
+
+  def top_fornext
+    raise(BASICRuntimeError, 'Implied NEXT without FOR') if @fornext_stack.empty?
+
+    @fornext_stack[-1]
   end
 
   def add_file_names(file_names)

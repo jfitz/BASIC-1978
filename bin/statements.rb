@@ -1262,11 +1262,13 @@ class ForStatement < AbstractStatement
 
     fornext_control = interpreter.assign_fornext(@control, from, to, step)
     interpreter.lock_variable(@control)
+    interpreter.enter_fornext(@control)
     terminated = fornext_control.front_terminated?
 
     if terminated
       interpreter.next_line_index = interpreter.find_closing_next(@control)
       interpreter.unlock_variable(@control)
+      interpreter.exit_fornext
     end
 
     io = interpreter.trace_out
@@ -1981,9 +1983,10 @@ class NextStatement < AbstractStatement
   def initialize(keywords, tokens_lists)
     super
 
-    template = [[1, '>=']]
+    template1 = [[1, '>=']]
+    template2 = []
 
-    if check_template(tokens_lists, template)
+    if check_template(tokens_lists, template1)
       # parse control variables
       @controls = []
 
@@ -1998,6 +2001,8 @@ class NextStatement < AbstractStatement
           @errors << "Invalid control variable #{token}"
         end
       end
+    elsif check_template(tokens_lists, template2)
+      @controls = []
     else
       @errors << 'Syntax error'
     end
@@ -2020,13 +2025,11 @@ class NextStatement < AbstractStatement
   end
 
   def execute_core(interpreter)
-    # for each control, until we find one that is not terminated
-    index = 0
     max = @controls.size
-    found_unterminated = false
 
-    while !found_unterminated && index < max
-      fornext_control = interpreter.retrieve_fornext(@controls[index])
+    if max.zero?
+      control = interpreter.top_fornext
+      fornext_control = interpreter.retrieve_fornext(control)
       # check control variable value
       # if matches end value, stop here
       terminated = fornext_control.terminated?(interpreter)
@@ -2035,17 +2038,42 @@ class NextStatement < AbstractStatement
       io.trace_output(s)
 
       if terminated
-        interpreter.unlock_variable(@controls[index])
+        interpreter.unlock_variable(control)
+        interpreter.exit_fornext
       else
         # set next line from top item
         interpreter.next_line_index = fornext_control.loop_start_index
         # change control variable value
         fornext_control.bump_control(interpreter)
-
-        found_unterminated = true
       end
+    else
+      # for each control, until we find one that is not terminated
+      found_unterminated = false
+      index = 0
 
-      index += 1
+      while !found_unterminated && index < max
+        fornext_control = interpreter.retrieve_fornext(@controls[index])
+        # check control variable value
+        # if matches end value, stop here
+        terminated = fornext_control.terminated?(interpreter)
+        io = interpreter.trace_out
+        s = ' terminated:' + terminated.to_s
+        io.trace_output(s)
+
+        if terminated
+          interpreter.unlock_variable(@controls[index])
+          interpreter.exit_fornext
+        else
+          # set next line from top item
+          interpreter.next_line_index = fornext_control.loop_start_index
+          # change control variable value
+          fornext_control.bump_control(interpreter)
+
+          found_unterminated = true
+        end
+
+        index += 1
+      end
     end
   end
 end
