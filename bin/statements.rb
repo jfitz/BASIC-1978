@@ -2284,7 +2284,7 @@ class OpenStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w(FOR INPUT OUTPUT AS FILE)
+    %w(FOR INPUT OUTPUT APPEND AS FILE)
   end
 
   def initialize(keywords, tokens_lists)
@@ -2295,9 +2295,14 @@ class OpenStatement < AbstractStatement
     template_input_as = [[1, '>='], 'FOR', 'INPUT', 'AS', [1, '>=']]
     template_input_as_file =
       [[1, '>='], 'FOR', 'INPUT', 'AS', 'FILE', [1, '>=']]
+
     template_output_as = [[1, '>='], 'FOR', 'OUTPUT', 'AS', [1, '>=']]
     template_output_as_file =
       [[1, '>='], 'FOR', 'OUTPUT', 'AS', 'FILE', [1, '>=']]
+
+    template_append_as = [[1, '>='], 'FOR', 'APPEND', 'AS', [1, '>=']]
+    template_append_as_file =
+      [[1, '>='], 'FOR', 'APPEND', 'AS', 'FILE', [1, '>=']]
 
     if check_template(tokens_lists, template_input_as) ||
        check_template(tokens_lists, template_input_as_file)
@@ -2309,6 +2314,11 @@ class OpenStatement < AbstractStatement
       @filename_expression = ValueScalarExpression.new(tokens_lists[0])
       @filenum_expression = ValueScalarExpression.new(tokens_lists[-1])
       @mode = :print
+    elsif check_template(tokens_lists, template_append_as) ||
+          check_template(tokens_lists, template_append_as_file)
+      @filename_expression = ValueScalarExpression.new(tokens_lists[0])
+      @filenum_expression = ValueScalarExpression.new(tokens_lists[-1])
+      @mode = :append
     else
       @errors << 'Syntax error'
     end

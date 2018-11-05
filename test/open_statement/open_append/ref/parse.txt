@@ -1,0 +1,36 @@
+10 REM TEST OPEN OUTPUT
+ Remark:TEST OPEN OUTPUT
+20 OPEN "output.txt" FOR APPEND AS #1
+ TextConstant:"output.txt"
+ NumericConstant:1
+ UnaryOperator:#
+30 PRINT #1,"OUTPUT FILE"
+ FILE
+ NumericConstant:1
+ UnaryOperator:#
+ ITEMS
+ TextConstant:"OUTPUT FILE"
+ CarriageControl:NL
+40 PRINT #1,10;20;30
+ FILE
+ NumericConstant:1
+ UnaryOperator:#
+ ITEMS
+ NumericConstant:10
+ CarriageControl:;
+ NumericConstant:20
+ CarriageControl:;
+ NumericConstant:30
+ CarriageControl:NL
+50 PRINT #1 "END"
+ FILE
+ NumericConstant:1
+ UnaryOperator:#
+ ITEMS
+ TextConstant:"END"
+ CarriageControl:NL
+60 CLOSE #1
+ NumericConstant:1
+ UnaryOperator:#
+99 END
+ 

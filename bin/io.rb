@@ -305,10 +305,13 @@ class FileHandler
   def set_mode(mode)
     if @mode.nil?
       case mode
-      when :print
-        @file = File.new(@file_name, 'wt')
       when :read
-        @file = File.new(@file_name, 'rt')
+        @file = File.new(@file_name, 'r')
+      when :print
+        @file = File.new(@file_name, 'w')
+      when :append
+        @file = File.new(@file_name, 'a')
+        mode = :print
       else
         raise(BASICRuntimeError, 'Invalid file mode')
       end

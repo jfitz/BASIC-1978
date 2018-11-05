@@ -1192,9 +1192,12 @@ Opens a file
 
 Syntax: OPEN "FILE.TXT" FOR INPUT AS #1
 Syntax: OPEN "OUTPUT.TXT" FOR OUTPUT AS #2
+Syntax: OPEN "OUTPUT.TXT" FOR APPEND AS #3
 
 Opens the file and prepares it for access.
 When opening a file for output, it does not need to exist.
+A file opened for output is erased before data is written.
+When opening a file for append, new data is written at the end of the file.
 
 The file name may be any file name suitable for your environment.
 It may contain lower case letters.
@@ -1234,8 +1237,6 @@ Printing to console
 ^^^^^^^^^^^^^^^^^^^
 
 Syntax:	PRINT expression list
-Syntax:	PRI expression list
-Syntax:	& expression list
 
 Items in the list are separated by either commas or semicolons.
 A comma forces the next item to the next tab stop (tab stops are every 14 positions).
@@ -1353,7 +1354,7 @@ Example:
 Without RANDOMIZE, successive runs of a program will use the same sequence of numbers from the RND() function.
 The RANDOMIZE statement randomizes the sequence, and successive runs will have different numbers.
 
-The –ignore-randomize option disables RANDOMIZE statements (the interpreter allows then but ignores them).
+The -–ignore-randomize option disables RANDOMIZE statements (the interpreter allows then but ignores them).
 
 READ
 ~~~~
@@ -1402,8 +1403,8 @@ READing more values than are specified by the file, in total, will cause an erro
 
 BASIC keeps an internal pointer to the next data item.
 
-REM
-~~~
+REMARK
+~~~~~~
 
 Allows for a comment in the program.
 
