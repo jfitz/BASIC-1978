@@ -3266,6 +3266,13 @@ class ArrLetStatement < AbstractStatement
     end
   end
 
+  def dump
+    lines = []
+    lines += @assignment.dump unless @assignment.nil?
+
+    lines
+  end
+
   def execute_core(interpreter)
     r_value = first_value(interpreter)
     dims = r_value.dimensions
@@ -3564,6 +3571,13 @@ class MatLetStatement < AbstractStatement
     else
       @errors << 'Syntax error'
     end
+  end
+
+  def dump
+    lines = []
+    lines += @assignment.dump unless @assignment.nil?
+
+    lines
   end
 
   def execute_core(interpreter)

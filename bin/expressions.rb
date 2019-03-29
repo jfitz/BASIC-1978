@@ -1344,6 +1344,13 @@ class AbstractAssignment
     @target.evaluate(interpreter)
   end
 
+  def dump
+    lines = []
+    lines += @target.dump
+    lines += @expression.dump
+    lines << 'AssignmentOperator:='
+  end
+
   def to_s
     @target.to_s + ' = ' + @expression.to_s
   end
@@ -1356,13 +1363,6 @@ class ScalarAssignment < AbstractAssignment
 
     @target = TargetExpression.new(@token_lists[0], ScalarReference)
     @expression = ValueScalarExpression.new(@token_lists[2])
-  end
-
-  def dump
-    lines = []
-    lines += @target.dump
-    lines += @expression.dump
-    lines << 'AssignmentOperator:='
   end
 
   def count_value

@@ -243,9 +243,13 @@
 310 REM COMPUTE Z - C
  Remark:COMPUTE Z - C
 311 ARR Y = Z - C
- Unimplemented
-320 REM CHECK FOR OPTIMUM
- Remark:CHECK FOR OPTIMUM
+ ArrayReference:Y
+ ArrayValue:Z
+ ArrayValue:C
+ BinaryOperator:-
+ AssignmentOperator:=
+320 REM CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
+ Remark:CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
 321 J0 = 0
  ScalarReference:J0
  NumericConstant:0
@@ -303,8 +307,8 @@
  ScalarValue:X
  BinaryOperator:/
  AssignmentOperator:=
-340 REM PRINT TABLEAU WITH ROW EVALUATIONS
- Remark:PRINT TABLEAU WITH ROW EVALUATIONS
+340 REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
+ Remark:PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
 341 PRINT
  ITEMS
  CarriageControl:NL
@@ -364,7 +368,7 @@
  ScalarValue:J
  ScalarValue:X
  CarriageControl:,
-370   PRINT B(I),W(I)
+363   PRINT B(I),W(I)
  ITEMS
  ScalarValue:I
  ScalarValue:B
@@ -372,29 +376,29 @@
  ScalarValue:I
  ScalarValue:W
  CarriageControl:NL
-371 NEXT I
+364 NEXT I
  VariableName:I
-372 PRINT " ", "Z",
+370 PRINT " ", "Z",
  ITEMS
  TextConstant:" "
  CarriageControl:,
  TextConstant:"Z"
  CarriageControl:,
-373 ARR PRINT Z
+371 ARR PRINT Z
  ITEMS
  ArrayValue:Z
  CarriageControl:,
-374 PRINT " ", "Z-C",
+372 PRINT " ", "Z-C",
  ITEMS
  TextConstant:" "
  CarriageControl:,
  TextConstant:"Z-C"
  CarriageControl:,
-375 ARR PRINT Y
+373 ARR PRINT Y
  ITEMS
  ArrayValue:Y
  CarriageControl:,
-376 PRINT "KEY COLUMN";J0;"VARIABLE ";C$(J0);" ENTERS"
+374 PRINT "KEY COLUMN";J0;"VARIABLE ";C$(J0);" ENTERS"
  ITEMS
  TextConstant:"KEY COLUMN"
  CarriageControl:;
@@ -407,8 +411,8 @@
  CarriageControl:;
  TextConstant:" ENTERS"
  CarriageControl:NL
-380 REM IDENTIFY KEY ROW
- Remark:IDENTIFY KEY ROW
+380 REM IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
+ Remark:IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
 381 I0 = 0
  ScalarReference:I0
  NumericConstant:0
@@ -472,10 +476,16 @@
  ScalarValue:J0
  ScalarValue:C
  AssignmentOperator:=
-410 REM BUILD NEW MATRIX X2
- Remark:BUILD NEW MATRIX X2
+410 REM BUILD NEW MATRIX X2 AND ARRAY B2
+ Remark:BUILD NEW MATRIX X2 AND ARRAY B2
 411 MAT X2 = X
- Unimplemented
+ MatrixReference:X2
+ MatrixValue:X
+ AssignmentOperator:=
+412 ARR B2 = B
+ ArrayReference:B2
+ ArrayValue:B
+ AssignmentOperator:=
 420 REM ADJUST VALUES IN KEY ROW
  Remark:ADJUST VALUES IN KEY ROW
 421 FOR J = 1 TO N1+N2
@@ -504,7 +514,7 @@
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
  step:    ["NumericConstant:1"]
-432   IF I = I0 THEN 438
+432   IF I = I0 THEN 436
  ScalarValue:I
  ScalarValue:I0
  BinaryOperator:=
@@ -535,22 +545,32 @@
  AssignmentOperator:=
 435   NEXT J
  VariableName:J
-438 NEXT I
+436 NEXT I
  VariableName:I
 440 REM ADJUST VALUES IN RIGHT-HAND-SIDE
  Remark:ADJUST VALUES IN RIGHT-HAND-SIDE
-441 FOR I = 1 TO N2
+441 B2(I0) = B(I0) / X(I0,J0)
+ ScalarValue:I0
+ ScalarReference:B2
+ ScalarValue:I0
+ ScalarValue:B
+ ScalarValue:I0
+ ScalarValue:J0
+ ScalarValue:X
+ BinaryOperator:/
+ AssignmentOperator:=
+442 FOR I = 1 TO N2
  control: VariableName:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
  step:    ["NumericConstant:1"]
-442   IF I = I0 THEN 444
+443   IF I = I0 THEN 445
  ScalarValue:I
  ScalarValue:I0
  BinaryOperator:=
-443   B(I) = B(I) - X(I,J0)*B(I0)/X(I0,J0)
+444   B2(I) = B(I) - X(I,J0)*B(I0)/X(I0,J0)
  ScalarValue:I
- ScalarReference:B
+ ScalarReference:B2
  ScalarValue:I
  ScalarValue:B
  ScalarValue:I
@@ -565,23 +585,19 @@
  BinaryOperator:/
  BinaryOperator:-
  AssignmentOperator:=
-444 NEXT I
+445 NEXT I
  VariableName:I
-445 B(I0) = B(I0) / X(I0,J0)
- ScalarValue:I0
- ScalarReference:B
- ScalarValue:I0
- ScalarValue:B
- ScalarValue:I0
- ScalarValue:J0
- ScalarValue:X
- BinaryOperator:/
- AssignmentOperator:=
-450 REM SWAP IN THE NEW MATRIX
- Remark:SWAP IN THE NEW MATRIX
+450 REM SWAP IN THE NEW MATRIX AND CONSTANTS
+ Remark:SWAP IN THE NEW MATRIX AND CONSTANTS
 451 MAT X = X2
- Unimplemented
-452 GOTO 200
+ MatrixReference:X
+ MatrixValue:X2
+ AssignmentOperator:=
+452 ARR B = B2
+ ArrayReference:B
+ ArrayValue:B2
+ AssignmentOperator:=
+453 GOTO 200
  LineNumber:200
 500 REM NO MORE CHANGES
  Remark:NO MORE CHANGES

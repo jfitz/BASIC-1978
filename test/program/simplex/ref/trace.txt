@@ -1580,7 +1580,7 @@ S4
  Y(4) = 0
  Y(5) = 0
  Y(6) = 0
-320: REM CHECK FOR OPTIMUM
+320: REM CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
 321: J0 = 0
  J0 = 0
 322: M = 0
@@ -1783,7 +1783,7 @@ NON-OPTIMUM.
  N2: (101) 4
  I = 5
  terminated:true
-340: REM PRINT TABLEAU WITH ROW EVALUATIONS
+340: REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
 341: PRINT
 
 342: PRINT "EXPANDED TABLEAU"
@@ -1992,18 +1992,18 @@ S1
  N2: (101) 4
  J = 7
  terminated:true
-370: PRINT B(I), W(I)
+363: PRINT B(I), W(I)
  I: (360) 1
  B(1): (162) 2000
  2000           
  W(1): (333) 333.3333333333333
  333.333
-371: NEXT I
+364: NEXT I
  I: (360) 1
  terminated:false
  I = 2
 361: PRINT R(I), C1$(I),
- I: (371) 2
+ I: (364) 2
  R(2): (172) 0
  0              
  C1$(2): (129) "S2"
@@ -2014,7 +2014,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 1
  X(2,1): (142) 8
  8              
@@ -2029,7 +2029,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 2
  X(2,2): (142) 6
  6              
@@ -2044,7 +2044,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 3
  X(2,3): (144) 0
  0              
@@ -2059,7 +2059,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 4
  X(2,4): (145) 1
  1              
@@ -2074,7 +2074,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 5
  X(2,5): (144) 0
  0              
@@ -2089,7 +2089,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 6
  X(2,6): (144) 0
  0              
@@ -2098,18 +2098,18 @@ S2
  N2: (101) 4
  J = 7
  terminated:true
-370: PRINT B(I), W(I)
- I: (371) 2
+363: PRINT B(I), W(I)
+ I: (364) 2
  B(2): (162) 2000
  2000           
  W(2): (333) 250
  250
-371: NEXT I
- I: (371) 2
+364: NEXT I
+ I: (364) 2
  terminated:false
  I = 3
 361: PRINT R(I), C1$(I),
- I: (371) 3
+ I: (364) 3
  R(3): (172) 0
  0              
  C1$(3): (129) "S3"
@@ -2120,7 +2120,7 @@ S3
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 1
  X(3,1): (142) 6
  6              
@@ -2135,7 +2135,7 @@ S3
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 2
  X(3,2): (142) 4
  4              
@@ -2150,7 +2150,7 @@ S3
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 3
  X(3,3): (144) 0
  0              
@@ -2165,7 +2165,7 @@ S3
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 4
  X(3,4): (144) 0
  0              
@@ -2180,7 +2180,7 @@ S3
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 5
  X(3,5): (145) 1
  1              
@@ -2195,7 +2195,7 @@ S3
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 6
  X(3,6): (144) 0
  0              
@@ -2204,18 +2204,18 @@ S3
  N2: (101) 4
  J = 7
  terminated:true
-370: PRINT B(I), W(I)
- I: (371) 3
+363: PRINT B(I), W(I)
+ I: (364) 3
  B(3): (162) 1440
  1440           
  W(3): (333) 240
  240
-371: NEXT I
- I: (371) 3
+364: NEXT I
+ I: (364) 3
  terminated:false
  I = 4
 361: PRINT R(I), C1$(I),
- I: (371) 4
+ I: (364) 4
  R(4): (172) 0
  0              
  C1$(4): (129) "S4"
@@ -2226,7 +2226,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 1
  X(4,1): (142) 40
  40             
@@ -2241,7 +2241,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 2
  X(4,2): (142) 25
  25             
@@ -2256,7 +2256,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 3
  X(4,3): (144) 0
  0              
@@ -2271,7 +2271,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 4
  X(4,4): (144) 0
  0              
@@ -2286,7 +2286,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 5
  X(4,5): (144) 0
  0              
@@ -2301,7 +2301,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 6
  X(4,6): (145) 1
  1              
@@ -2310,18 +2310,18 @@ S4
  N2: (101) 4
  J = 7
  terminated:true
-370: PRINT B(I), W(I)
- I: (371) 4
+363: PRINT B(I), W(I)
+ I: (364) 4
  B(4): (162) 9600
  9600           
  W(4): (333) 240
  240
-371: NEXT I
- I: (371) 4
+364: NEXT I
+ I: (364) 4
  terminated:true
-372: PRINT " ", "Z",
+370: PRINT " ", "Z",
                 Z               
-373: ARR PRINT Z
+371: ARR PRINT Z
  Z(1): (306) 0
  Z(2): (306) 0
  Z(3): (306) 0
@@ -2329,9 +2329,9 @@ S4
  Z(5): (306) 0
  Z(6): (306) 0
  0               0               0               0               0               0              
-374: PRINT " ", "Z-C",
+372: PRINT " ", "Z-C",
                 Z-C             
-375: ARR PRINT Y
+373: ARR PRINT Y
  Y(1): (311) -20
  Y(2): (311) -14
  Y(3): (311) 0
@@ -2339,13 +2339,13 @@ S4
  Y(5): (311) 0
  Y(6): (311) 0
 -20             -14              0               0               0               0              
-376: PRINT "KEY COLUMN"; J0; "VARIABLE "; C$(J0); " ENTERS"
+374: PRINT "KEY COLUMN"; J0; "VARIABLE "; C$(J0); " ENTERS"
 KEY COLUMN
  J0: (325) 1
  1    VARIABLE 
  C$(1): (123) "X1"
 X1 ENTERS
-380: REM IDENTIFY KEY ROW
+380: REM IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
 381: I0 = 0
  I0 = 0
 382: M = 1E6
@@ -2433,7 +2433,7 @@ S3 EXITS
  J0: (325) 1
  C(1): (112) 20
  R(3) = 20
-410: REM BUILD NEW MATRIX X2
+410: REM BUILD NEW MATRIX X2 AND ARRAY B2
 411: MAT X2 = X
  X(1,1): (142) 6
  X(1,2): (142) 2
@@ -2483,6 +2483,15 @@ S3 EXITS
  X2(4,4) = 0
  X2(4,5) = 0
  X2(4,6) = 1
+412: ARR B2 = B
+ B(1): (162) 2000
+ B(2): (162) 2000
+ B(3): (162) 1440
+ B(4): (162) 9600
+ B2(1) = 2000
+ B2(2) = 2000
+ B2(3) = 1440
+ B2(4) = 9600
 420: REM ADJUST VALUES IN KEY ROW
 421: FOR J = 1 TO N1 + N2
  N1: (101) 2
@@ -2561,7 +2570,7 @@ S3 EXITS
  I = 1
  N2 = 4
  terminated:false
-432: IF I = I0 THEN 438
+432: IF I = I0 THEN 436
  I: (431) 1
  I0: (385) 3
  I=I0: false
@@ -2654,12 +2663,12 @@ S3 EXITS
 435: NEXT J
  J: (435) 6
  terminated:true
-438: NEXT I
+436: NEXT I
  I: (431) 1
  terminated:false
  I = 2
-432: IF I = I0 THEN 438
- I: (438) 2
+432: IF I = I0 THEN 436
+ I: (436) 2
  I0: (385) 3
  I=I0: false
 433: FOR J = 1 TO N1 + N2
@@ -2669,7 +2678,7 @@ S3 EXITS
  N1+N2 = 6
  terminated:false
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 2
+ I: (436) 2
  J: (433) 1
  X(2,1): (142) 8
  J0: (325) 1
@@ -2683,7 +2692,7 @@ S3 EXITS
  terminated:false
  J = 2
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 2
+ I: (436) 2
  J: (435) 2
  X(2,2): (142) 6
  J0: (325) 1
@@ -2697,7 +2706,7 @@ S3 EXITS
  terminated:false
  J = 3
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 2
+ I: (436) 2
  J: (435) 3
  X(2,3): (144) 0
  J0: (325) 1
@@ -2711,7 +2720,7 @@ S3 EXITS
  terminated:false
  J = 4
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 2
+ I: (436) 2
  J: (435) 4
  X(2,4): (145) 1
  J0: (325) 1
@@ -2725,7 +2734,7 @@ S3 EXITS
  terminated:false
  J = 5
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 2
+ I: (436) 2
  J: (435) 5
  X(2,5): (144) 0
  J0: (325) 1
@@ -2739,7 +2748,7 @@ S3 EXITS
  terminated:false
  J = 6
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 2
+ I: (436) 2
  J: (435) 6
  X(2,6): (144) 0
  J0: (325) 1
@@ -2751,20 +2760,20 @@ S3 EXITS
 435: NEXT J
  J: (435) 6
  terminated:true
-438: NEXT I
- I: (438) 2
+436: NEXT I
+ I: (436) 2
  terminated:false
  I = 3
-432: IF I = I0 THEN 438
- I: (438) 3
+432: IF I = I0 THEN 436
+ I: (436) 3
  I0: (385) 3
  I=I0: true
-438: NEXT I
- I: (438) 3
+436: NEXT I
+ I: (436) 3
  terminated:false
  I = 4
-432: IF I = I0 THEN 438
- I: (438) 4
+432: IF I = I0 THEN 436
+ I: (436) 4
  I0: (385) 3
  I=I0: false
 433: FOR J = 1 TO N1 + N2
@@ -2774,7 +2783,7 @@ S3 EXITS
  N1+N2 = 6
  terminated:false
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (433) 1
  X(4,1): (142) 40
  J0: (325) 1
@@ -2788,7 +2797,7 @@ S3 EXITS
  terminated:false
  J = 2
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 2
  X(4,2): (142) 25
  J0: (325) 1
@@ -2802,7 +2811,7 @@ S3 EXITS
  terminated:false
  J = 3
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 3
  X(4,3): (144) 0
  J0: (325) 1
@@ -2816,7 +2825,7 @@ S3 EXITS
  terminated:false
  J = 4
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 4
  X(4,4): (144) 0
  J0: (325) 1
@@ -2830,7 +2839,7 @@ S3 EXITS
  terminated:false
  J = 5
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 5
  X(4,5): (144) 0
  J0: (325) 1
@@ -2844,7 +2853,7 @@ S3 EXITS
  terminated:false
  J = 6
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 6
  X(4,6): (145) 1
  J0: (325) 1
@@ -2856,80 +2865,80 @@ S3 EXITS
 435: NEXT J
  J: (435) 6
  terminated:true
-438: NEXT I
- I: (438) 4
+436: NEXT I
+ I: (436) 4
  terminated:true
 440: REM ADJUST VALUES IN RIGHT-HAND-SIDE
-441: FOR I = 1 TO N2
+441: B2(I0) = B(I0) / X(I0, J0)
+ I0: (385) 3
+ B(3): (162) 1440
+ J0: (325) 1
+ X(3,1): (142) 6
+ B2(3) = 240
+442: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-442: IF I = I0 THEN 444
- I: (441) 1
+443: IF I = I0 THEN 445
+ I: (442) 1
  I0: (385) 3
  I=I0: false
-443: B(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
- I: (441) 1
+444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+ I: (442) 1
  B(1): (162) 2000
  J0: (325) 1
  X(1,1): (142) 6
  I0: (385) 3
  B(3): (162) 1440
  X(3,1): (142) 6
- B(1) = 560
-444: NEXT I
- I: (441) 1
+ B2(1) = 560
+445: NEXT I
+ I: (442) 1
  terminated:false
  I = 2
-442: IF I = I0 THEN 444
- I: (444) 2
+443: IF I = I0 THEN 445
+ I: (445) 2
  I0: (385) 3
  I=I0: false
-443: B(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
- I: (444) 2
+444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+ I: (445) 2
  B(2): (162) 2000
  J0: (325) 1
  X(2,1): (142) 8
  I0: (385) 3
  B(3): (162) 1440
  X(3,1): (142) 6
- B(2) = 80
-444: NEXT I
- I: (444) 2
+ B2(2) = 80
+445: NEXT I
+ I: (445) 2
  terminated:false
  I = 3
-442: IF I = I0 THEN 444
- I: (444) 3
+443: IF I = I0 THEN 445
+ I: (445) 3
  I0: (385) 3
  I=I0: true
-444: NEXT I
- I: (444) 3
+445: NEXT I
+ I: (445) 3
  terminated:false
  I = 4
-442: IF I = I0 THEN 444
- I: (444) 4
+443: IF I = I0 THEN 445
+ I: (445) 4
  I0: (385) 3
  I=I0: false
-443: B(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
- I: (444) 4
+444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+ I: (445) 4
  B(4): (162) 9600
  J0: (325) 1
  X(4,1): (142) 40
  I0: (385) 3
  B(3): (162) 1440
  X(3,1): (142) 6
- B(4) = 0
-444: NEXT I
- I: (444) 4
+ B2(4) = 0
+445: NEXT I
+ I: (445) 4
  terminated:true
-445: B(I0) = B(I0) / X(I0, J0)
- I0: (385) 3
- B(3): (162) 1440
- J0: (325) 1
- X(3,1): (142) 6
- B(3) = 240
-450: REM SWAP IN THE NEW MATRIX
+450: REM SWAP IN THE NEW MATRIX AND CONSTANTS
 451: MAT X = X2
  X2(1,1): (434) 0
  X2(1,2): (434) -2
@@ -2979,7 +2988,16 @@ S3 EXITS
  X(4,4) = 0
  X(4,5) = -6.666666666666667
  X(4,6) = 1
-452: GOTO 200
+452: ARR B = B2
+ B2(1): (444) 560
+ B2(2): (444) 80
+ B2(3): (441) 240
+ B2(4): (444) 0
+ B(1) = 560
+ B(2) = 80
+ B(3) = 240
+ B(4) = 0
+453: GOTO 200
 200: REM PRINT THE TABLEAU
 201: PRINT
 
@@ -3188,7 +3206,7 @@ S1
  terminated:true
 230: PRINT B(I)
  I: (220) 1
- B(1): (443) 560
+ B(1): (452) 560
  560
 239: NEXT I
  I: (220) 1
@@ -3292,7 +3310,7 @@ S2
  terminated:true
 230: PRINT B(I)
  I: (239) 2
- B(2): (443) 80
+ B(2): (452) 80
  80
 239: NEXT I
  I: (239) 2
@@ -3396,7 +3414,7 @@ X1
  terminated:true
 230: PRINT B(I)
  I: (239) 3
- B(3): (445) 240
+ B(3): (452) 240
  240
 239: NEXT I
  I: (239) 3
@@ -3500,7 +3518,7 @@ S4
  terminated:true
 230: PRINT B(I)
  I: (239) 4
- B(4): (443) 0
+ B(4): (452) 0
  0
 239: NEXT I
  I: (239) 4
@@ -4035,7 +4053,7 @@ S4
  Y(4) = 0
  Y(5) = 3.333333333333333
  Y(6) = 0
-320: REM CHECK FOR OPTIMUM
+320: REM CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
 321: J0 = 0
  J0 = 0
 322: M = 0
@@ -4169,7 +4187,7 @@ NON-OPTIMUM.
  true
 333: W(I) = B(I) / X(I, J0) IF X(I, J0) <> 0 FOR I = 1 TO N2 IF X(I,J0)<>0 FOR I = 1 TO N2
  I: (333.0.-2) 1
- B(1): (443) 560
+ B(1): (452) 560
  J0: (325) 2
  X(1,2): (451) -2
  W(1) = -280
@@ -4189,7 +4207,7 @@ NON-OPTIMUM.
  true
 333: W(I) = B(I) / X(I, J0) IF X(I, J0) <> 0 FOR I = 1 TO N2 IF X(I,J0)<>0 FOR I = 1 TO N2
  I: (333.0.-2) 2
- B(2): (443) 80
+ B(2): (452) 80
  J0: (325) 2
  X(2,2): (451) 0.666666666666667
  W(2) = 119.99999999999994
@@ -4209,7 +4227,7 @@ NON-OPTIMUM.
  true
 333: W(I) = B(I) / X(I, J0) IF X(I, J0) <> 0 FOR I = 1 TO N2 IF X(I,J0)<>0 FOR I = 1 TO N2
  I: (333.0.-2) 3
- B(3): (445) 240
+ B(3): (452) 240
  J0: (325) 2
  X(3,2): (451) 0.6666666666666666
  W(3) = 360
@@ -4229,7 +4247,7 @@ NON-OPTIMUM.
  true
 333: W(I) = B(I) / X(I, J0) IF X(I, J0) <> 0 FOR I = 1 TO N2 IF X(I,J0)<>0 FOR I = 1 TO N2
  I: (333.0.-2) 4
- B(4): (443) 0
+ B(4): (452) 0
  J0: (325) 2
  X(4,2): (451) -1.6666666666666679
  W(4) = 0
@@ -4238,7 +4256,7 @@ NON-OPTIMUM.
  N2: (101) 4
  I = 5
  terminated:true
-340: REM PRINT TABLEAU WITH ROW EVALUATIONS
+340: REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
 341: PRINT
 
 342: PRINT "EXPANDED TABLEAU"
@@ -4447,18 +4465,18 @@ S1
  N2: (101) 4
  J = 7
  terminated:true
-370: PRINT B(I), W(I)
+363: PRINT B(I), W(I)
  I: (360) 1
- B(1): (443) 560
+ B(1): (452) 560
  560            
  W(1): (333) -280
 -280
-371: NEXT I
+364: NEXT I
  I: (360) 1
  terminated:false
  I = 2
 361: PRINT R(I), C1$(I),
- I: (371) 2
+ I: (364) 2
  R(2): (172) 0
  0              
  C1$(2): (129) "S2"
@@ -4469,7 +4487,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 1
  X(2,1): (451) 0
  0              
@@ -4484,7 +4502,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 2
  X(2,2): (451) 0.666666666666667
  0.66667        
@@ -4499,7 +4517,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 3
  X(2,3): (451) 0
  0              
@@ -4514,7 +4532,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 4
  X(2,4): (451) 1
  1              
@@ -4529,7 +4547,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 5
  X(2,5): (451) -1.3333333333333333
 -1.33333        
@@ -4544,7 +4562,7 @@ S2
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 2
+ I: (364) 2
  J: (362.0.-1) 6
  X(2,6): (451) 0
  0              
@@ -4553,18 +4571,18 @@ S2
  N2: (101) 4
  J = 7
  terminated:true
-370: PRINT B(I), W(I)
- I: (371) 2
- B(2): (443) 80
+363: PRINT B(I), W(I)
+ I: (364) 2
+ B(2): (452) 80
  80             
  W(2): (333) 119.99999999999994
  120
-371: NEXT I
- I: (371) 2
+364: NEXT I
+ I: (364) 2
  terminated:false
  I = 3
 361: PRINT R(I), C1$(I),
- I: (371) 3
+ I: (364) 3
  R(3): (403) 20
  20             
  C1$(3): (402) "X1"
@@ -4575,7 +4593,7 @@ X1
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 1
  X(3,1): (451) 1
  1              
@@ -4590,7 +4608,7 @@ X1
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 2
  X(3,2): (451) 0.6666666666666666
  0.66667        
@@ -4605,7 +4623,7 @@ X1
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 3
  X(3,3): (451) 0
  0              
@@ -4620,7 +4638,7 @@ X1
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 4
  X(3,4): (451) 0
  0              
@@ -4635,7 +4653,7 @@ X1
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 5
  X(3,5): (451) 0.16666666666666666
  0.16667        
@@ -4650,7 +4668,7 @@ X1
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 3
+ I: (364) 3
  J: (362.0.-1) 6
  X(3,6): (451) 0
  0              
@@ -4659,18 +4677,18 @@ X1
  N2: (101) 4
  J = 7
  terminated:true
-370: PRINT B(I), W(I)
- I: (371) 3
- B(3): (445) 240
+363: PRINT B(I), W(I)
+ I: (364) 3
+ B(3): (452) 240
  240            
  W(3): (333) 360
  360
-371: NEXT I
- I: (371) 3
+364: NEXT I
+ I: (364) 3
  terminated:false
  I = 4
 361: PRINT R(I), C1$(I),
- I: (371) 4
+ I: (364) 4
  R(4): (172) 0
  0              
  C1$(4): (129) "S4"
@@ -4681,7 +4699,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 1
  X(4,1): (451) 0
  0              
@@ -4696,7 +4714,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 2
  X(4,2): (451) -1.6666666666666679
 -1.66667        
@@ -4711,7 +4729,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 3
  X(4,3): (451) 0
  0              
@@ -4726,7 +4744,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 4
  X(4,4): (451) 0
  0              
@@ -4741,7 +4759,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 5
  X(4,5): (451) -6.666666666666667
 -6.66667        
@@ -4756,7 +4774,7 @@ S4
  N2: (101) 4
  terminated:false
 362: PRINT X(I, J), FOR J = 1 TO N1 + N2 FOR J = 1 TO N1+N2
- I: (371) 4
+ I: (364) 4
  J: (362.0.-1) 6
  X(4,6): (451) 1
  1              
@@ -4765,18 +4783,18 @@ S4
  N2: (101) 4
  J = 7
  terminated:true
-370: PRINT B(I), W(I)
- I: (371) 4
- B(4): (443) 0
+363: PRINT B(I), W(I)
+ I: (364) 4
+ B(4): (452) 0
  0              
  W(4): (333) 0
  0
-371: NEXT I
- I: (371) 4
+364: NEXT I
+ I: (364) 4
  terminated:true
-372: PRINT " ", "Z",
+370: PRINT " ", "Z",
                 Z               
-373: ARR PRINT Z
+371: ARR PRINT Z
  Z(1): (306) 20
  Z(2): (306) 13.333333333333332
  Z(3): (306) 0
@@ -4784,9 +4802,9 @@ S4
  Z(5): (306) 3.333333333333333
  Z(6): (306) 0
  20              13.3333         0               0               3.33333         0              
-374: PRINT " ", "Z-C",
+372: PRINT " ", "Z-C",
                 Z-C             
-375: ARR PRINT Y
+373: ARR PRINT Y
  Y(1): (311) 0
  Y(2): (311) -0.6666666666666679
  Y(3): (311) 0
@@ -4794,13 +4812,13 @@ S4
  Y(5): (311) 3.333333333333333
  Y(6): (311) 0
  0              -0.66667         0               0               3.33333         0              
-376: PRINT "KEY COLUMN"; J0; "VARIABLE "; C$(J0); " ENTERS"
+374: PRINT "KEY COLUMN"; J0; "VARIABLE "; C$(J0); " ENTERS"
 KEY COLUMN
  J0: (325) 2
  2    VARIABLE 
  C$(2): (123) "X2"
 X2 ENTERS
-380: REM IDENTIFY KEY ROW
+380: REM IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
 381: I0 = 0
  I0 = 0
 382: M = 1E6
@@ -4874,7 +4892,7 @@ S2 EXITS
  J0: (325) 2
  C(2): (112) 14
  R(2) = 14
-410: REM BUILD NEW MATRIX X2
+410: REM BUILD NEW MATRIX X2 AND ARRAY B2
 411: MAT X2 = X
  X(1,1): (451) 0
  X(1,2): (451) -2
@@ -4924,6 +4942,15 @@ S2 EXITS
  X2(4,4) = 0
  X2(4,5) = -6.666666666666667
  X2(4,6) = 1
+412: ARR B2 = B
+ B(1): (452) 560
+ B(2): (452) 80
+ B(3): (452) 240
+ B(4): (452) 0
+ B2(1) = 560
+ B2(2) = 80
+ B2(3) = 240
+ B2(4) = 0
 420: REM ADJUST VALUES IN KEY ROW
 421: FOR J = 1 TO N1 + N2
  N1: (101) 2
@@ -5002,7 +5029,7 @@ S2 EXITS
  I = 1
  N2 = 4
  terminated:false
-432: IF I = I0 THEN 438
+432: IF I = I0 THEN 436
  I: (431) 1
  I0: (385) 2
  I=I0: false
@@ -5095,20 +5122,20 @@ S2 EXITS
 435: NEXT J
  J: (435) 6
  terminated:true
-438: NEXT I
+436: NEXT I
  I: (431) 1
  terminated:false
  I = 2
-432: IF I = I0 THEN 438
- I: (438) 2
+432: IF I = I0 THEN 436
+ I: (436) 2
  I0: (385) 2
  I=I0: true
-438: NEXT I
- I: (438) 2
+436: NEXT I
+ I: (436) 2
  terminated:false
  I = 3
-432: IF I = I0 THEN 438
- I: (438) 3
+432: IF I = I0 THEN 436
+ I: (436) 3
  I0: (385) 2
  I=I0: false
 433: FOR J = 1 TO N1 + N2
@@ -5118,7 +5145,7 @@ S2 EXITS
  N1+N2 = 6
  terminated:false
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 3
+ I: (436) 3
  J: (433) 1
  X(3,1): (451) 1
  J0: (325) 2
@@ -5132,7 +5159,7 @@ S2 EXITS
  terminated:false
  J = 2
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 3
+ I: (436) 3
  J: (435) 2
  X(3,2): (451) 0.6666666666666666
  J0: (325) 2
@@ -5146,7 +5173,7 @@ S2 EXITS
  terminated:false
  J = 3
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 3
+ I: (436) 3
  J: (435) 3
  X(3,3): (451) 0
  J0: (325) 2
@@ -5160,7 +5187,7 @@ S2 EXITS
  terminated:false
  J = 4
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 3
+ I: (436) 3
  J: (435) 4
  X(3,4): (451) 0
  J0: (325) 2
@@ -5174,7 +5201,7 @@ S2 EXITS
  terminated:false
  J = 5
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 3
+ I: (436) 3
  J: (435) 5
  X(3,5): (451) 0.16666666666666666
  J0: (325) 2
@@ -5188,7 +5215,7 @@ S2 EXITS
  terminated:false
  J = 6
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 3
+ I: (436) 3
  J: (435) 6
  X(3,6): (451) 0
  J0: (325) 2
@@ -5200,12 +5227,12 @@ S2 EXITS
 435: NEXT J
  J: (435) 6
  terminated:true
-438: NEXT I
- I: (438) 3
+436: NEXT I
+ I: (436) 3
  terminated:false
  I = 4
-432: IF I = I0 THEN 438
- I: (438) 4
+432: IF I = I0 THEN 436
+ I: (436) 4
  I0: (385) 2
  I=I0: false
 433: FOR J = 1 TO N1 + N2
@@ -5215,7 +5242,7 @@ S2 EXITS
  N1+N2 = 6
  terminated:false
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (433) 1
  X(4,1): (451) 0
  J0: (325) 2
@@ -5229,7 +5256,7 @@ S2 EXITS
  terminated:false
  J = 2
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 2
  X(4,2): (451) -1.6666666666666679
  J0: (325) 2
@@ -5243,7 +5270,7 @@ S2 EXITS
  terminated:false
  J = 3
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 3
  X(4,3): (451) 0
  J0: (325) 2
@@ -5257,7 +5284,7 @@ S2 EXITS
  terminated:false
  J = 4
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 4
  X(4,4): (451) 0
  J0: (325) 2
@@ -5271,7 +5298,7 @@ S2 EXITS
  terminated:false
  J = 5
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 5
  X(4,5): (451) -6.666666666666667
  J0: (325) 2
@@ -5285,7 +5312,7 @@ S2 EXITS
  terminated:false
  J = 6
 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
- I: (438) 4
+ I: (436) 4
  J: (435) 6
  X(4,6): (451) 1
  J0: (325) 2
@@ -5297,80 +5324,80 @@ S2 EXITS
 435: NEXT J
  J: (435) 6
  terminated:true
-438: NEXT I
- I: (438) 4
+436: NEXT I
+ I: (436) 4
  terminated:true
 440: REM ADJUST VALUES IN RIGHT-HAND-SIDE
-441: FOR I = 1 TO N2
+441: B2(I0) = B(I0) / X(I0, J0)
+ I0: (385) 2
+ B(2): (452) 80
+ J0: (325) 2
+ X(2,2): (451) 0.666666666666667
+ B2(2) = 119.99999999999994
+442: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-442: IF I = I0 THEN 444
- I: (441) 1
+443: IF I = I0 THEN 445
+ I: (442) 1
  I0: (385) 2
  I=I0: false
-443: B(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
- I: (441) 1
- B(1): (443) 560
+444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+ I: (442) 1
+ B(1): (452) 560
  J0: (325) 2
  X(1,2): (451) -2
  I0: (385) 2
- B(2): (443) 80
+ B(2): (452) 80
  X(2,2): (451) 0.666666666666667
- B(1) = 799.9999999999999
-444: NEXT I
- I: (441) 1
+ B2(1) = 799.9999999999999
+445: NEXT I
+ I: (442) 1
  terminated:false
  I = 2
-442: IF I = I0 THEN 444
- I: (444) 2
+443: IF I = I0 THEN 445
+ I: (445) 2
  I0: (385) 2
  I=I0: true
-444: NEXT I
- I: (444) 2
+445: NEXT I
+ I: (445) 2
  terminated:false
  I = 3
-442: IF I = I0 THEN 444
- I: (444) 3
+443: IF I = I0 THEN 445
+ I: (445) 3
  I0: (385) 2
  I=I0: false
-443: B(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
- I: (444) 3
- B(3): (445) 240
+444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+ I: (445) 3
+ B(3): (452) 240
  J0: (325) 2
  X(3,2): (451) 0.6666666666666666
  I0: (385) 2
- B(2): (443) 80
+ B(2): (452) 80
  X(2,2): (451) 0.666666666666667
- B(3) = 160
-444: NEXT I
- I: (444) 3
+ B2(3) = 160
+445: NEXT I
+ I: (445) 3
  terminated:false
  I = 4
-442: IF I = I0 THEN 444
- I: (444) 4
+443: IF I = I0 THEN 445
+ I: (445) 4
  I0: (385) 2
  I=I0: false
-443: B(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
- I: (444) 4
- B(4): (443) 0
+444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+ I: (445) 4
+ B(4): (452) 0
  J0: (325) 2
  X(4,2): (451) -1.6666666666666679
  I0: (385) 2
- B(2): (443) 80
+ B(2): (452) 80
  X(2,2): (451) 0.666666666666667
- B(4) = 200
-444: NEXT I
- I: (444) 4
+ B2(4) = 200
+445: NEXT I
+ I: (445) 4
  terminated:true
-445: B(I0) = B(I0) / X(I0, J0)
- I0: (385) 2
- B(2): (443) 80
- J0: (325) 2
- X(2,2): (451) 0.666666666666667
- B(2) = 119.99999999999994
-450: REM SWAP IN THE NEW MATRIX
+450: REM SWAP IN THE NEW MATRIX AND CONSTANTS
 451: MAT X = X2
  X2(1,1): (434) 0
  X2(1,2): (434) 0
@@ -5420,7 +5447,16 @@ S2 EXITS
  X(4,4) = 2.5000000000000004
  X(4,5) = -10
  X(4,6) = 1
-452: GOTO 200
+452: ARR B = B2
+ B2(1): (444) 799.9999999999999
+ B2(2): (441) 119.99999999999994
+ B2(3): (444) 160
+ B2(4): (444) 200
+ B(1) = 799.9999999999999
+ B(2) = 119.99999999999994
+ B(3) = 160
+ B(4) = 200
+453: GOTO 200
 200: REM PRINT THE TABLEAU
 201: PRINT
 
@@ -5629,7 +5665,7 @@ S1
  terminated:true
 230: PRINT B(I)
  I: (220) 1
- B(1): (443) 799.9999999999999
+ B(1): (452) 799.9999999999999
  800
 239: NEXT I
  I: (220) 1
@@ -5733,7 +5769,7 @@ X2
  terminated:true
 230: PRINT B(I)
  I: (239) 2
- B(2): (445) 119.99999999999994
+ B(2): (452) 119.99999999999994
  120
 239: NEXT I
  I: (239) 2
@@ -5837,7 +5873,7 @@ X1
  terminated:true
 230: PRINT B(I)
  I: (239) 3
- B(3): (443) 160
+ B(3): (452) 160
  160
 239: NEXT I
  I: (239) 3
@@ -5941,7 +5977,7 @@ S4
  terminated:true
 230: PRINT B(I)
  I: (239) 4
- B(4): (443) 200
+ B(4): (452) 200
  200
 239: NEXT I
  I: (239) 4
@@ -6476,7 +6512,7 @@ S4
  Y(4) = 0.9999999999999964
  Y(5) = 2
  Y(6) = 0
-320: REM CHECK FOR OPTIMUM
+320: REM CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
 321: J0 = 0
  J0 = 0
 322: M = 0
@@ -6579,14 +6615,14 @@ OBJECTIVE VALUE
  I: (522) 1
  C1$(1): (129) "S1"
 S1 = 
- B(1): (443) 799.9999999999999
+ B(1): (452) 799.9999999999999
  800      * 
  R(1): (172) 0
  0
 524: Z = Z + B(I) * R(I)
  Z: (521) 0
  I: (522) 1
- B(1): (443) 799.9999999999999
+ B(1): (452) 799.9999999999999
  R(1): (172) 0
  Z = 0
 525: NEXT I
@@ -6597,14 +6633,14 @@ S1 =
  I: (525) 2
  C1$(2): (402) "X2"
 X2 = 
- B(2): (445) 119.99999999999994
+ B(2): (452) 119.99999999999994
  120      * 
  R(2): (403) 14
  14
 524: Z = Z + B(I) * R(I)
  Z: (524) 0
  I: (525) 2
- B(2): (445) 119.99999999999994
+ B(2): (452) 119.99999999999994
  R(2): (403) 14
  Z = 1679.999999999999
 525: NEXT I
@@ -6615,14 +6651,14 @@ X2 =
  I: (525) 3
  C1$(3): (402) "X1"
 X1 = 
- B(3): (443) 160
+ B(3): (452) 160
  160      * 
  R(3): (403) 20
  20
 524: Z = Z + B(I) * R(I)
  Z: (524) 1679.999999999999
  I: (525) 3
- B(3): (443) 160
+ B(3): (452) 160
  R(3): (403) 20
  Z = 4879.999999999999
 525: NEXT I
@@ -6633,14 +6669,14 @@ X1 =
  I: (525) 4
  C1$(4): (129) "S4"
 S4 = 
- B(4): (443) 200
+ B(4): (452) 200
  200      * 
  R(4): (172) 0
  0
 524: Z = Z + B(I) * R(I)
  Z: (524) 4879.999999999999
  I: (525) 4
- B(4): (443) 200
+ B(4): (452) 200
  R(4): (172) 0
  Z = 4879.999999999999
 525: NEXT I
