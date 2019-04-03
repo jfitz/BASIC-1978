@@ -34,6 +34,17 @@ class Option
     @value = value
   end
 
+  def to_s
+    case @defs[:type]
+    when :bool
+      @value.to_s
+    when :int
+      @value.to_s
+    when :string
+      '"' + @value.to_s + '"'
+    end
+  end
+
   private
 
   def check_value(value)
@@ -72,13 +83,12 @@ end
 
 # interactive shell
 class Shell
-  def initialize(console_io, interpreter, program, action_options,
-                 tokenbuilders)
+  def initialize(console_io, interpreter, program, options, tokenbuilders)
 
     @console_io = console_io
     @interpreter = interpreter
     @program = program
-    @action_options = action_options
+    @options = options
     @tokenbuilders = tokenbuilders
     @invalid_tokenbuilder = InvalidTokenBuilder.new
   end
@@ -124,7 +134,7 @@ class Shell
 
   def option_command(args)
     if args.empty?
-      @action_options.each do |option|
+      @options.each do |option|
         name = option[0].upcase
         value = option[1].value.to_s.upcase
         @console_io.print_line(name + ' ' + value)
@@ -133,8 +143,8 @@ class Shell
       kwd = args[0].to_s
       kwd_d = kwd.downcase
 
-      if @action_options.key?(kwd_d)
-        value = @action_options[kwd_d].value.to_s.upcase
+      if @options.key?(kwd_d)
+        value = @options[kwd_d].value.to_s.upcase
         @console_io.print_line("#{kwd} #{value}")
       else
         @console_io.print_line("Unknown option #{kwd}")
@@ -144,18 +154,18 @@ class Shell
       kwd = args[0].to_s
       kwd_d = kwd.downcase
 
-      if @action_options.key?(kwd_d)
+      if @options.key?(kwd_d)
         begin
           if args[1].boolean_constant?
             boolean = BooleanConstant.new(args[1])
-            @action_options[kwd_d].set(boolean.to_v)
+            @options[kwd_d].set(boolean.to_v)
           else
             @console_io.print_line('Incorrect value type')
           end
         rescue BASICRuntimeError => e
           @console_io.print_line(e)
         end
-        value = @action_options[kwd_d].value.to_s.upcase
+        value = @options[kwd_d].value.to_s.upcase
         @console_io.print_line("#{kwd} #{value}")
       else
         @console_io.print_line("Unknown option #{kwd}")
@@ -165,6 +175,10 @@ class Shell
       @console_io.print_line('Syntax error')
       @console_io.newline
     end
+  end
+
+  def duplicate(o)
+    Marshal.load(Marshal.dump(o))
   end
 
   def execute_command(keyword, args)
@@ -179,10 +193,18 @@ class Shell
       @interpreter.clear_breakpoints
     when 'RUN'
       if @program.check
+        # duplicate the options
+        options_2 = {}
+        @options.each { |name, option| options_2[name] = duplicate(option) }
+
         timing = Benchmark.measure {
-          @program.run(@interpreter, @action_options)
+          @program.run(@interpreter, @options)
         }
-        print_timing(timing, @console_io) if @action_options['timing'].value
+        # restore options to undo any changes during the run
+        options_2.each { |name, option| @options[name] = option }
+
+        # print timing info
+        print_timing(timing, @console_io) if @options['timing'].value
       end
     when 'BREAK'
       @interpreter.set_breakpoints(args)
@@ -194,7 +216,7 @@ class Shell
     when 'LIST'
       @program.list(args, false)
     when 'PRETTY'
-      pretty_multiline = @action_options['pretty_multiline'].value
+      pretty_multiline = @options['pretty_multiline'].value
       @program.pretty(args, pretty_multiline)
     when 'DELETE'
       @program.delete(args)
@@ -232,7 +254,7 @@ class Shell
   end
 end
 
-def make_interpreter_tokenbuilders(token_options, quotes, statement_separators,
+def make_interpreter_tokenbuilders(options, quotes, statement_separators,
                                    comment_leads)
   tokenbuilders = []
 
@@ -267,13 +289,13 @@ def make_interpreter_tokenbuilders(token_options, quotes, statement_separators,
   tokenbuilders << NumberTokenBuilder.new
   tokenbuilders << IntegerTokenBuilder.new
 
-  allow_pi = token_options['allow_pi'].value
+  allow_pi = options['allow_pi'].value
   tokenbuilders << NumericSymbolTokenBuilder.new if allow_pi
 
-  allow_ascii = token_options['allow_ascii'].value
+  allow_ascii = options['allow_ascii'].value
   tokenbuilders << TextSymbolTokenBuilder.new if allow_ascii
 
-  long_names = token_options['long_names'].value
+  long_names = options['long_names'].value
   tokenbuilders << VariableTokenBuilder.new(long_names)
 
   tokenbuilders << ListTokenBuilder.new(%w(TRUE FALSE), BooleanConstantToken)
@@ -281,13 +303,21 @@ def make_interpreter_tokenbuilders(token_options, quotes, statement_separators,
   tokenbuilders << WhitespaceTokenBuilder.new
 end
 
-def make_command_tokenbuilders(token_options, quotes)
+def make_command_tokenbuilders(options, quotes)
   tokenbuilders = []
 
   keywords = %w(
-    BASE BREAK CROSSREF DELETE DIMS EXIT HEADING LIST LOAD NEW OPTION PARSE
-    PRETTY PRETTY_MULTILINE PROFILE PROVENANCE RENUMBER RUN SAVE TIMING
-    TOKENS TRACE UDFS VARS
+    BREAK CROSSREF DELETE DIMS EXIT LIST LOAD NEW OPTION PARSE PRETTY
+    PROFILE RENUMBER RUN SAVE TOKENS UDFS VARS
+    ALLOW_ASCII ALLOW_HASH_CONSTANT ALLOW_PI APOSTROPHE_COMMENT ASC_ALLOW_ALL
+    BACK_TAB BACKSLASH_SEPARATOR BANG_COMMENT BASE
+    CHR_ALLOW_ALL COLON_FILE COLON_SEPARATOR CRLF_ON_LINE_INPUT
+    DEFAULT_PROMPT ECHO FORNEXT_ONE_BEYOND HEADING
+    IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON INPUT_HIGH_BIT
+    INT_FLOOR LOCK_FORNEXT LONG_NAMES MIN_MAX_OP NEWLINE_SPEED
+    PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROVENANCE
+    QMARK_AFTER_PROMPT RANDOMIZE REQUIRE_INITIALIZED RESPECT_RANDOMIZE
+    SINGLE_QUOTE_STRING TIMING TRACE ZONE_WIDTH
   )
   tokenbuilders << ListTokenBuilder.new(keywords, KeywordToken)
 
@@ -369,103 +399,97 @@ int_132 = { :type => :int, :max => 132, :min => 0 }
 int_40 = { :type => :int, :max => 40, :min => 0 }
 int_1 = { :type => :int, :max => 1, :min => 0 }
 
-action_options = {}
+basic_options = {}
+
+basic_options['apostrophe_comment'] = Option.new(boolean, true)
+basic_options['allow_ascii'] = Option.new(boolean, options.key?(:allow_ascii))
+basic_options['allow_pi'] = Option.new(boolean, options.key?(:allow_pi))
+
+basic_options['asc_allow_all'] =
+  Option.new(boolean, options.key?(:asc_allow_all))
+
+basic_options['back_tab'] = Option.new(boolean, options.key?(:back_tab))
+basic_options['backslash_separator'] = Option.new(boolean, true)
+basic_options['bang_comment'] = Option.new(boolean, options.key?(:bang_comment))
 
 base = 0
 base = options[:base].to_i if options.key?(:base)
-action_options['base'] = Option.new(int_1, base)
+basic_options['base'] = Option.new(int_1, base)
 
-action_options['heading'] = Option.new(boolean, options.key?(:heading))
+basic_options['chr_allow_all'] =
+  Option.new(boolean, options.key?(:chr_allow_all))
 
-action_options['pretty_multiline'] =
-  Option.new(boolean, options.key?(:pretty_multiline))
+basic_options['default_prompt'] = Option.new(string, '? ')
+basic_options['echo'] = Option.new(boolean, options.key?(:echo_input))
+basic_options['heading'] = Option.new(boolean, options.key?(:heading))
 
-action_options['provenance'] = Option.new(boolean, options.key?(:provenance))
-action_options['timing'] = Option.new(boolean, options.key?(:timing))
-action_options['trace'] = Option.new(boolean, options.key?(:trace))
+basic_options['if_false_next_line'] =
+  Option.new(boolean, options.key?(:if_false_next_line))
 
-output_options = {}
+basic_options['ignore_rnd_arg'] =
+  Option.new(boolean, options.key?(:ignore_rnd_arg))
 
-output_options['back_tab'] = Option.new(boolean, options.key?(:back_tab))
-
-output_options['default_prompt'] = Option.new(string, '? ')
-
-output_options['echo'] = Option.new(boolean, options.key?(:echo_input))
-
-output_options['implied_semicolon'] =
+basic_options['implied_semicolon'] =
   Option.new(boolean, options.key?(:implied_semicolon))
+
+basic_options['int_floor'] = Option.new(boolean, options.key?(:int_floor))
+
+basic_options['lock_fornext'] =
+  Option.new(boolean, options.key?(:lock_fornext))
+
+basic_options['long_names'] = Option.new(boolean, options.key?(:long_names))
 
 newline_speed = 0
 newline_speed = 10 if options.key?(:tty_lf)
-output_options['newline_speed'] = Option.new(int, newline_speed)
+basic_options['newline_speed'] = Option.new(int, newline_speed)
 
-print_width = 72
-print_width = options[:print_width].to_i if options.key?(:print_width)
-output_options['print_width'] = Option.new(int_132, print_width)
-
-output_options['qmark_after_prompt'] =
-  Option.new(boolean, options.key?(:qmark_after_prompt))
+basic_options['pretty_multiline'] =
+  Option.new(boolean, options.key?(:pretty_multiline))
 
 print_speed = 0
 print_speed = 10 if options.key?(:tty)
-output_options['print_speed'] = Option.new(int, print_speed)
+basic_options['print_speed'] = Option.new(int, print_speed)
+
+print_width = 72
+print_width = options[:print_width].to_i if options.key?(:print_width)
+basic_options['print_width'] = Option.new(int_132, print_width)
+
+basic_options['provenance'] = Option.new(boolean, options.key?(:provenance))
+
+basic_options['qmark_after_prompt'] =
+  Option.new(boolean, options.key?(:qmark_after_prompt))
+
+basic_options['randomize'] = Option.new(boolean, options.key?(:randomize))
+
+basic_options['require_initialized'] =
+  Option.new(boolean, options.key?(:require_initialized))
+
+basic_options['respect_randomize'] =
+  Option.new(boolean, !options.key?(:ignore_randomize))
+
+basic_options['timing'] = Option.new(boolean, options.key?(:timing))
+basic_options['trace'] = Option.new(boolean, options.key?(:trace))
 
 zone_width = 16
 zone_width = options[:zone_width].to_i if options.key?(:zone_width)
-output_options['zone_width'] = Option.new(int_40, zone_width)
-
-interpreter_options = {}
-
-interpreter_options['asc_allow_all'] =
-  Option.new(boolean, options.key?(:asc_allow_all))
-
-interpreter_options['chr_allow_all'] =
-  Option.new(boolean, options.key?(:chr_allow_all))
-
-interpreter_options['if_false_next_line'] =
-  Option.new(boolean, options.key?(:if_false_next_line))
-
-interpreter_options['ignore_rnd_arg'] =
-  Option.new(boolean, options.key?(:ignore_rnd_arg))
-
-interpreter_options['int_floor'] = Option.new(boolean, options.key?(:int_floor))
-
-interpreter_options['lock_fornext'] =
-  Option.new(boolean, options.key?(:lock_fornext))
-
-interpreter_options['randomize'] = Option.new(boolean, options.key?(:randomize))
-
-interpreter_options['require_initialized'] =
-  Option.new(boolean, options.key?(:require_initialized))
-
-interpreter_options['respect_randomize'] =
-  Option.new(boolean, !options.key?(:ignore_randomize))
-
-token_options = {}
-token_options['allow_ascii'] = Option.new(boolean, options.key?(:allow_ascii))
-
-token_options['allow_pi'] = Option.new(boolean, options.key?(:allow_pi))
-token_options['apostrophe_comment'] = Option.new(boolean, true)
-token_options['backslash_separator'] = Option.new(boolean, true)
-token_options['bang_comment'] = Option.new(boolean, options.key?(:bang_comment))
-token_options['long_names'] = Option.new(boolean, options.key?(:long_names))
+basic_options['zone_width'] = Option.new(int_40, zone_width)
 
 statement_seps = [':', '\\']
 
 quotes = ['"']
 
 comment_leads = []
-comment_leads << '!' if token_options['bang_comment'].value
+comment_leads << '!' if basic_options['bang_comment'].value
 
-comment_leads << "'" if token_options['apostrophe_comment'].value
+comment_leads << "'" if basic_options['apostrophe_comment'].value
 
-console_io = ConsoleIo.new(output_options)
+console_io = ConsoleIo.new(basic_options)
 
 tokenbuilders =
-  make_interpreter_tokenbuilders(token_options, quotes, statement_seps,
+  make_interpreter_tokenbuilders(basic_options, quotes, statement_seps,
                                  comment_leads)
 
-if action_options['heading'].value
+if basic_options['heading'].value
   console_io.print_line('BASIC-1978 interpreter version -1')
   console_io.newline
 end
@@ -476,16 +500,20 @@ if !run_filename.nil?
   token = TextConstantToken.new('"' + run_filename + '"')
   nametokens = [TextConstant.new(token)]
   if program.load(nametokens) && program.check
+    randomize_option = basic_options['randomize']
+    respect_option = basic_options['respect_randomize']
+    longnames_option = basic_options['long_names']
     interpreter =
-      Interpreter.new(console_io, interpreter_options, token_options)
+      Interpreter.new(console_io, randomize_option, respect_option,
+                      longnames_option)
 
     interpreter.set_default_args('RND', NumericConstant.new(1))
 
     timing = Benchmark.measure {
-      program.run(interpreter, action_options)
+      program.run(interpreter, basic_options)
     }
 
-    print_timing(timing, console_io) if action_options['timing'].value
+    print_timing(timing, console_io) if basic_options['timing'].value
     program.profile('') if show_profile
   end
 elsif !list_filename.nil?
@@ -504,7 +532,7 @@ elsif !pretty_filename.nil?
   token = TextConstantToken.new('"' + pretty_filename + '"')
   nametokens = [TextConstant.new(token)]
   if program.load(nametokens)
-    pretty_multiline = action_options['pretty_multiline'].value
+    pretty_multiline = basic_options['pretty_multiline'].value
     program.pretty('', pretty_multiline)
   end
 elsif !cref_filename.nil?
@@ -514,20 +542,25 @@ elsif !cref_filename.nil?
     program.crossref
   end
 else
-  interpreter = Interpreter.new(console_io, interpreter_options, token_options)
+  randomize_option = basic_options['randomize']
+  respect_option = basic_options['respect_randomize']
+  longnames_option = basic_options['long_names']
+  interpreter =
+    Interpreter.new(console_io, randomize_option, respect_option,
+                      longnames_option)
 
   interpreter.set_default_args('RND', NumericConstant.new(1))
 
-  tokenbuilders = make_command_tokenbuilders(token_options, quotes)
+  tokenbuilders = make_command_tokenbuilders(basic_options, quotes)
 
   shell =
-    Shell.new(console_io, interpreter, program, action_options,
+    Shell.new(console_io, interpreter, program, basic_options,
               tokenbuilders)
 
   shell.run
 end
 
-if action_options['heading'].value
+if basic_options['heading'].value
   console_io.newline
   console_io.print_line('BASIC-1978 ended')
 end

@@ -4,27 +4,30 @@ This is an interpreter for a BASIC interpreter. Created in 1964 by Kemeny and Ku
 
 This version is a form of BASIC that was popular in the 1970s.
 
+Features of the language:
 - Numeric variables, integer variables, and string variables
 - Functions ABS, ATN, COS, EXP, INT, LOG, SGN, SIN, SQR, TAN, RND
 - Matrix functions CON, DET, IDN, INV, TRN, ZER
 - String functions ASC, CHR$, INSTR, LEFT$, LEN, MID$, PACK$, RIGHT$, SPC$(), TAB, UNPACK, VAL$
 - User-defined functions in form FNx(X)
-- Statements CHAIN, CHANGE, CLOSE, DATA, DEF FN, DIM, END, FNEND, FOR, GOSUB, GOTO, IF, INPUT, LET, LINE INPUT, ON-GOSUB, ON-GOTO, OPEN, NEXT, PRINT, PRINT USING, RANDOMIZE, READ, REMARK, RESTORE, RETURN, STOP, WRITE
-- The LET keyword is optional
+- Statements CHAIN, CHANGE, CLOSE, DATA, DEF FN, DIM, END, FNEND, FOR, GOSUB, GOTO, IF, INPUT, LET, LINE INPUT, NEXT, ON-GOSUB, ON-GOTO, OPEN, OPTION PRINT, PRINT USING, RANDOMIZE, READ, REMARK, RESTORE, RETURN, STOP, WRITE
+- Assignment statements may omit the LET keyword
 - Statement keywords may be abbreviated to the first three characters.
 - Statement modifiers IF and FOR at the end of statements
-- Matrix operations MAT, MAT READ, MAT PRINT, MAT WRITE
-- Array operations ARR, ARR READ, ARR PRINT, ARR WRITE
+- Matrix operations MAT (assignment), MAT READ, MAT PRINT, MAT WRITE
+- Array operations ARR (assignment), ARR READ, ARR PRINT, ARR WRITE
 - Multiple statements on one line, separated by ':'
 - Comments with single quote (') character
 - File operations
 - IF/THEN, with either a target line number or a target statement
 - IF/THEN/ELSE, with target line numbers or target statements after the THEN and the ELSE
+- Error handling with ON ERROR GOTO and RESUME
+
+Features of the interpreter:
 - Interactive mode and command-line mode
-- Trace ability to print lines as they are executed
 - Option for slow output to simulate Teletype speed
+- Trace ability to print lines as they are executed
+- Provenance for trace to indicate the lines in which variables were assigned
 - Profile information with execution time and counts for each line
 - Cross-reference listing
-- Debugger commands in the interpreter
-- Provenance to indicate the lines in which variables were assigned
-- Error handling with ON ERROR GOTO and RESUME
+- Rudimentary debugger

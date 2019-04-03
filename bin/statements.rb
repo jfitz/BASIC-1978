@@ -2364,7 +2364,17 @@ class OptionStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w(BASE PROVENANCE TRACE)
+    %w(
+    ASC_ALLOW_ALL
+    BACK_TAB BASE
+    CHR_ALLOW_ALL CRLF_ON_LINE_INPUT
+    DEFAULT_PROMPT ECHO FORNEXT_ONE_BEYOND
+    IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON INPUT_HIGH_BIT
+    INT_FLOOR LOCK_FORNEXT NEWLINE_SPEED
+    PRINT_SPEED PRINT_WIDTH PROVENANCE
+    QMARK_AFTER_PROMPT REQUIRE_INITIALIZED
+    TRACE ZONE_WIDTH
+    )
   end
 
   def initialize(keywords, tokens_lists)
@@ -2372,7 +2382,7 @@ class OptionStatement < AbstractStatement
 
     # omit HEADING and TIMING as they are not used in the interpreter
     # omit PRETTY_MULTILINE too
-    template = [['BASE', 'PROVENANCE', 'TRACE'], [1, '>=']]
+    template = [OptionStatement.extra_keywords, [1, '>=']]
 
     if check_template(tokens_lists, template)
       @key = tokens_lists[0].to_s.downcase

@@ -69,8 +69,8 @@ end
 
 # Handle tab stops and carriage control
 class ConsoleIo
-  def initialize(output_options)
-    @output_options = output_options
+  def initialize(options)
+    @options = options
 
     @quotes = ['"']
 
@@ -107,18 +107,18 @@ class ConsoleIo
     input_text = gets
     raise(BASICRuntimeError, 'End of file') if input_text.nil?
     ascii_text = ascii_printables(input_text)
-    puts(ascii_text) if @output_options['echo'].value
+    puts(ascii_text) if @options['echo'].value
     ascii_text
   end
 
   def prompt(text)
     if text.nil?
-      print @output_options['default_prompt'].value
+      print @options['default_prompt'].value
     else
       print text.value
 
-      print @output_options['default_prompt'].value if
-        @output_options['qmark_after_prompt'].value
+      print @options['default_prompt'].value if
+        @options['qmark_after_prompt'].value
     end
   end
 
@@ -128,8 +128,8 @@ class ConsoleIo
       incr = c == "\b" ? -1 : 1
       @column += incr
       @column = 0 if @column < 0
-      newline if @output_options['print_width'].value > 0 &&
-                 @column >= @output_options['print_width'].value
+      newline if @options['print_width'].value > 0 &&
+                 @column >= @options['print_width'].value
     end
 
     @last_was_numeric = false
@@ -147,9 +147,9 @@ class ConsoleIo
   def tab
     space_after_numeric if @last_was_numeric
 
-    if @output_options['zone_width'].value > 0
+    if @options['zone_width'].value > 0
       print_item(' ') while
-        @column > 0 && @column % @output_options['zone_width'].value != 0
+        @column > 0 && @column % @options['zone_width'].value != 0
     end
 
     @last_was_numeric = false
@@ -165,12 +165,12 @@ class ConsoleIo
   end
 
   def implied
-    semicolon if @output_options['implied_semicolon'].value
+    semicolon if @options['implied_semicolon'].value
     # nothing else otherwise
   end
 
   def columns_to_advance(new_column)
-    if @output_options['back_tab'].value
+    if @options['back_tab'].value
       new_column - @column
     else
       [new_column - @column, 0].max
@@ -221,17 +221,17 @@ class ConsoleIo
   end
 
   def delay
-    sleep(1.0 / @output_options['print_speed'].value) if
-      @output_options['print_speed'].value > 0
+    sleep(1.0 / @options['print_speed'].value) if
+      @options['print_speed'].value > 0
   end
 
   def newline_delay
-    sleep(1.0 / @output_options['print_speed'].value) if
-      @output_options['print_speed'].value > 0 &&
-      @output_options['newline_speed'].value.zero?
+    sleep(1.0 / @options['print_speed'].value) if
+      @options['print_speed'].value > 0 &&
+      @options['newline_speed'].value.zero?
 
-    sleep(1.0 / @output_options['newline_speed'].value) if
-      @output_options['newline_speed'].value > 0
+    sleep(1.0 / @options['newline_speed'].value) if
+      @options['newline_speed'].value > 0
   end
 end
 
