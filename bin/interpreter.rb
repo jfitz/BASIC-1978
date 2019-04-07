@@ -871,8 +871,8 @@ class Interpreter
     fornext
   end
 
-  def enter_fornext(control)
-    @fornext_stack << control
+  def enter_fornext(variable)
+    @fornext_stack.push(variable)
   end
 
   def exit_fornext
