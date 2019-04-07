@@ -167,8 +167,6 @@ class BASICArray
       value.print(printer)
       carriage.print(printer, interpreter)
     end
-
-    printer.newline
   end
 
   def write_1(printer, interpreter, carriage)
@@ -180,7 +178,6 @@ class BASICArray
       value.write(printer)
       carriage.write(printer, interpreter)
     end
-    printer.newline
   end
 end
 
@@ -410,6 +407,7 @@ class Matrix
       value.print(printer)
       carriage.print(printer, interpreter)
     end
+
     printer.newline
     printer.newline
   end
@@ -424,6 +422,7 @@ class Matrix
         value.print(printer)
         carriage.print(printer, interpreter)
       end
+
       printer.newline
     end
 
@@ -438,6 +437,7 @@ class Matrix
       value.write(printer)
       carriage.write(printer, interpreter)
     end
+
     printer.newline
     printer.newline
   end
@@ -452,6 +452,7 @@ class Matrix
         value.write(printer)
         carriage.write(printer, interpreter)
       end
+
       printer.newline
     end
 
