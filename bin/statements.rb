@@ -2447,6 +2447,20 @@ class AbstractPrintStatement < AbstractStatement
   end
 
   include FileFunctions
+
+  def any_implied_carriage(print_items)
+    any_implied = false
+
+    unless print_items.nil?
+      # check all tokens except the last one, which may be an implied carriage control
+      print_items.each do |item|
+        any_implied = true if
+          item.class.to_s == 'CarriageControl' && item.to_s == ' '
+      end
+    end
+
+    any_implied
+  end
 end
 
 # PRINT
@@ -2474,6 +2488,8 @@ class PrintStatement < AbstractPrintStatement
     else
       @errors << 'Syntax error'
     end
+
+    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -2508,6 +2524,7 @@ class PrintStatement < AbstractPrintStatement
        print_items[-1].class.to_s == 'ValueScalarExpression'
       print_items << CarriageControl.new('')
     end
+
     begin
       print_items << ValueScalarExpression.new(tokens)
     rescue BASICExpressionError
@@ -2539,6 +2556,8 @@ class PrintUsingStatement < AbstractPrintStatement
     else
       @errors << 'Syntax error'
     end
+
+    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -2964,6 +2983,20 @@ class AbstractWriteStatement < AbstractStatement
   end
 
   include FileFunctions
+
+  def any_implied_carriage(print_items)
+    any_implied = false
+
+    unless print_items.nil?
+      # check all tokens except the last one, which may be an implied carriage control
+      print_items.each do |item|
+        any_implied = true if
+          item.class.to_s == 'CarriageControl' && item.to_s == ' '
+      end
+    end
+
+    any_implied
+  end
 end
 
 # WRITE
@@ -2988,6 +3021,8 @@ class WriteStatement < AbstractWriteStatement
     else
       @errors << 'Syntax error'
     end
+
+    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3040,7 +3075,7 @@ class ArrPrintStatement < AbstractPrintStatement
   end
 
   def initialize(keywords, tokens_lists)
-    super(keywords, tokens_lists, CarriageControl.new(','))
+    super(keywords, tokens_lists, CarriageControl.new('NL'))
 
     extract_modifiers(tokens_lists)
 
@@ -3053,6 +3088,8 @@ class ArrPrintStatement < AbstractPrintStatement
     else
       @errors << 'Syntax error'
     end
+
+    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3060,6 +3097,7 @@ class ArrPrintStatement < AbstractPrintStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+
     @print_items.each do |item|
       if item.printable?
         carriage = CarriageControl.new('')
@@ -3068,6 +3106,7 @@ class ArrPrintStatement < AbstractPrintStatement
           !@print_items[i + 1].printable?
         item.print(fhr, interpreter, carriage)
       end
+
       i += 1
     end
   end
@@ -3188,7 +3227,7 @@ class ArrWriteStatement < AbstractWriteStatement
   end
 
   def initialize(keywords, tokens_lists)
-    super(keywords, tokens_lists, CarriageControl.new(','))
+    super(keywords, tokens_lists, CarriageControl.new('NL'))
 
     extract_modifiers(tokens_lists)
 
@@ -3201,6 +3240,8 @@ class ArrWriteStatement < AbstractWriteStatement
     else
       @errors << 'Syntax error'
     end
+
+    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3345,6 +3386,8 @@ class MatPrintStatement < AbstractPrintStatement
     else
       @errors << 'Syntax error'
     end
+
+    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3509,6 +3552,8 @@ class MatWriteStatement < AbstractWriteStatement
     else
       @errors << 'Syntax error'
     end
+
+    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3516,6 +3561,7 @@ class MatWriteStatement < AbstractWriteStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+
     @print_items.each do |item|
       if item.printable?
         carriage = CarriageControl.new('')
