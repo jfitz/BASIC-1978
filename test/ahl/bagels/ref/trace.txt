@@ -1,0 +1,2997 @@
+5: PRINT TAB(33); "BAGELS"
+                                 BAGELS
+10: PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+               CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY
+10.1: PRINT
+
+10.2: PRINT
+
+15: REM *** BAGLES NUMBER GUESSING GAME
+20: REM *** ORIGINAL SOURCE UNKNOWN BUT SUSPECTED TO BE
+25: REM *** LAWRENCE HALL OF SCIENCE, U.C. BERKELY
+30: DIM A1(6), A(3), B(3)
+40: Y = 0
+ Y = 0
+40.1: T = 255
+ T = 255
+50: PRINT
+
+50.1: PRINT
+
+50.2: PRINT
+
+70: INPUT "WOULD YOU LIKE THE RULES (YES OR NO)"; A$
+WOULD YOU LIKE THE RULES (YES OR NO)NO
+ A$ = "NO"
+90: IF LEFT$(A$, 1) = "N" THEN 150
+ A$: "NO"
+ LEFT$(A$,1)="N": true
+150: FOR I = 1 TO 3
+ I = 1
+ terminated:false
+160: A(I) = INT(10 * RND(1))
+ I: 1
+ A(1) = 4
+165: IF I - 1 = 0 THEN 200
+ I: 1
+ I-1=0: true
+200: NEXT I
+ I: 1
+ terminated:false
+ I = 2
+160: A(I) = INT(10 * RND(1))
+ I: 2
+ A(2) = 7
+165: IF I - 1 = 0 THEN 200
+ I: 2
+ I-1=0: false
+170: FOR J = 1 TO I - 1
+ I: 2
+ J = 1
+ I-1 = 1
+ terminated:false
+180: IF A(I) = A(J) THEN 160
+ I: 2
+ A(2): 7
+ J: 1
+ A(1): 4
+ A(I)=A(J): false
+190: NEXT J
+ J: 1
+ terminated:true
+200: NEXT I
+ I: 2
+ terminated:false
+ I = 3
+160: A(I) = INT(10 * RND(1))
+ I: 3
+ A(3) = 0
+165: IF I - 1 = 0 THEN 200
+ I: 3
+ I-1=0: false
+170: FOR J = 1 TO I - 1
+ I: 3
+ J = 1
+ I-1 = 2
+ terminated:false
+180: IF A(I) = A(J) THEN 160
+ I: 3
+ A(3): 0
+ J: 1
+ A(1): 4
+ A(I)=A(J): false
+190: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+180: IF A(I) = A(J) THEN 160
+ I: 3
+ A(3): 0
+ J: 2
+ A(2): 7
+ A(I)=A(J): false
+190: NEXT J
+ J: 2
+ terminated:true
+200: NEXT I
+ I: 3
+ terminated:true
+210: PRINT
+
+210.1: PRINT "O.K.  I HAVE A NUMBER IN MIND."
+O.K.  I HAVE A NUMBER IN MIND.
+220: FOR I = 1 TO 20
+ I = 1
+ terminated:false
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 1
+ 1              
+240: INPUT A$
+? 123
+ A$ = "123"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "123"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "123"
+ A1(1) = 49
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "123"
+ A1(2) = 50
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "123"
+ A1(3) = 51
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 49
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 49
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 49
+ B(1) = 1
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 50
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 50
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 50
+ B(2) = 2
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 51
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 51
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 51
+ B(3) = 3
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 1
+ B(2): 2
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 2
+ B(3): 3
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 3
+ B(1): 1
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 2
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 1
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 3
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 2
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 3
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 1
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 1
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 2
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 3
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 0
+ C=0: true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 0
+ D: 0
+ C+D<>0: false
+590: PRINT "BAGELS";
+BAGELS
+600: PRINT
+
+605: NEXT I
+ I: 1
+ terminated:false
+ I = 2
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 2
+ 2              
+240: INPUT A$
+? 456
+ A$ = "456"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "456"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "456"
+ A1(1) = 52
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "456"
+ A1(2) = 53
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "456"
+ A1(3) = 54
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 52
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 52
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 52
+ B(1) = 4
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 53
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 53
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 53
+ B(2) = 5
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 54
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 54
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 54
+ B(3) = 6
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 4
+ B(2): 5
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 5
+ B(3): 6
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 6
+ B(1): 4
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 5
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 4
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 6
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 5
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 6
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 4
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 4
+ A(J)<>B(J): false
+480: D = D + 1
+ D: 0
+ D = 1
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 5
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 6
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 1
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 0
+ C=0: true
+545: IF D = 0 THEN 580
+ D: 1
+ D=0: false
+550: FOR J = 1 TO D
+ D: 1
+ J = 1
+ D = 1
+ terminated:false
+560: PRINT "FERMI ";
+FERMI 
+570: NEXT J
+ J: 1
+ terminated:true
+580: IF C + D <> 0 THEN 600
+ C: 0
+ D: 1
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 2
+ terminated:false
+ I = 3
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 3
+ 3              
+240: INPUT A$
+? 789
+ A$ = "789"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "789"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "789"
+ A1(1) = 55
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "789"
+ A1(2) = 56
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "789"
+ A1(3) = 57
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 55
+ B(1) = 7
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 56
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 56
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 56
+ B(2) = 8
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 57
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 57
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 57
+ B(3) = 9
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 7
+ B(2): 8
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 8
+ B(3): 9
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 9
+ B(1): 7
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 8
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 7
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 0
+ C = 1
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 9
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 8
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 9
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 7
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 8
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 9
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 1
+ C=0: false
+520: FOR J = 1 TO C
+ C: 1
+ J = 1
+ C = 1
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 1
+ D: 0
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 3
+ terminated:false
+ I = 4
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 4
+ 4              
+240: INPUT A$
+? 567
+ A$ = "567"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "567"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "567"
+ A1(1) = 53
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "567"
+ A1(2) = 54
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "567"
+ A1(3) = 55
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 53
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 53
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 53
+ B(1) = 5
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 54
+ B(2) = 6
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 55
+ B(3) = 7
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 5
+ B(2): 6
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 6
+ B(3): 7
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 7
+ B(1): 5
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 6
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 5
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 7
+ A(J)<>B(J+1): false
+380: C = C + 1
+ C: 0
+ C = 1
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 6
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 7
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 5
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 5
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 6
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 1
+ C=0: false
+520: FOR J = 1 TO C
+ C: 1
+ J = 1
+ C = 1
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 1
+ D: 0
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 4
+ terminated:false
+ I = 5
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 5
+ 5              
+240: INPUT A$
+? 589
+ A$ = "589"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "589"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "589"
+ A1(1) = 53
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "589"
+ A1(2) = 56
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "589"
+ A1(3) = 57
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 53
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 53
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 53
+ B(1) = 5
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 56
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 56
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 56
+ B(2) = 8
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 57
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 57
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 57
+ B(3) = 9
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 5
+ B(2): 8
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 8
+ B(3): 9
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 9
+ B(1): 5
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 8
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 5
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 9
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 8
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 9
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 5
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 5
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 8
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 9
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 0
+ C=0: true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 0
+ D: 0
+ C+D<>0: false
+590: PRINT "BAGELS";
+BAGELS
+600: PRINT
+
+605: NEXT I
+ I: 5
+ terminated:false
+ I = 6
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 6
+ 6              
+240: INPUT A$
+? 467
+ A$ = "467"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "467"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "467"
+ A1(1) = 52
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "467"
+ A1(2) = 54
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "467"
+ A1(3) = 55
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 52
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 52
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 52
+ B(1) = 4
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 54
+ B(2) = 6
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 55
+ B(3) = 7
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 4
+ B(2): 6
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 6
+ B(3): 7
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 7
+ B(1): 4
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 6
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 4
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 7
+ A(J)<>B(J+1): false
+380: C = C + 1
+ C: 0
+ C = 1
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 6
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 7
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 4
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 4
+ A(J)<>B(J): false
+480: D = D + 1
+ D: 0
+ D = 1
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 6
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 1
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 1
+ C=0: false
+520: FOR J = 1 TO C
+ C: 1
+ J = 1
+ C = 1
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 1
+ D=0: false
+550: FOR J = 1 TO D
+ D: 1
+ J = 1
+ D = 1
+ terminated:false
+560: PRINT "FERMI ";
+FERMI 
+570: NEXT J
+ J: 1
+ terminated:true
+580: IF C + D <> 0 THEN 600
+ C: 1
+ D: 1
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 6
+ terminated:false
+ I = 7
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 7
+ 7              
+240: INPUT A$
+? 764
+ A$ = "764"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "764"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "764"
+ A1(1) = 55
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "764"
+ A1(2) = 54
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "764"
+ A1(3) = 52
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 55
+ B(1) = 7
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 54
+ B(2) = 6
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 52
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 52
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 52
+ B(3) = 4
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 7
+ B(2): 6
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 6
+ B(3): 4
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 4
+ B(1): 7
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 6
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 7
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 0
+ C = 1
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 4
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 6
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 4
+ A(1)<>B(3): false
+430: C = C + 1
+ C: 1
+ C = 2
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 7
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 6
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 4
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 2
+ C=0: false
+520: FOR J = 1 TO C
+ C: 2
+ J = 1
+ C = 2
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 2
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 2
+ D: 0
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 7
+ terminated:false
+ I = 8
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 8
+ 8              
+240: INPUT A$
+? 763
+ A$ = "763"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "763"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "763"
+ A1(1) = 55
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "763"
+ A1(2) = 54
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "763"
+ A1(3) = 51
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 55
+ B(1) = 7
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 54
+ B(2) = 6
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 51
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 51
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 51
+ B(3) = 3
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 7
+ B(2): 6
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 6
+ B(3): 3
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 3
+ B(1): 7
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 6
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 7
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 0
+ C = 1
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 3
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 6
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 3
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 7
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 6
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 3
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 1
+ C=0: false
+520: FOR J = 1 TO C
+ C: 1
+ J = 1
+ C = 1
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 1
+ D: 0
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 8
+ terminated:false
+ I = 9
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 9
+ 9              
+240: INPUT A$
+? 768
+ A$ = "768"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "768"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "768"
+ A1(1) = 55
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "768"
+ A1(2) = 54
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "768"
+ A1(3) = 56
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 55
+ B(1) = 7
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 54
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 54
+ B(2) = 6
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 56
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 56
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 56
+ B(3) = 8
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 7
+ B(2): 6
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 6
+ B(3): 8
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 8
+ B(1): 7
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 6
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 7
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 0
+ C = 1
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 8
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 6
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 8
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 7
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 6
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 8
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 1
+ C=0: false
+520: FOR J = 1 TO C
+ C: 1
+ J = 1
+ C = 1
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 1
+ D: 0
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 9
+ terminated:false
+ I = 10
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 10
+ 10             
+240: INPUT A$
+? 702
+ A$ = "702"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "702"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "702"
+ A1(1) = 55
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "702"
+ A1(2) = 48
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "702"
+ A1(3) = 50
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 55
+ B(1) = 7
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 48
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 48
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 48
+ B(2) = 0
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 50
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 50
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 50
+ B(3) = 2
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 7
+ B(2): 0
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 0
+ B(3): 2
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 2
+ B(1): 7
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 0
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 7
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 0
+ C = 1
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 2
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 0
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 1
+ C = 2
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 2
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 7
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 0
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 2
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 2
+ C=0: false
+520: FOR J = 1 TO C
+ C: 2
+ J = 1
+ C = 2
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 2
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 2
+ D: 0
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 10
+ terminated:false
+ I = 11
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 11
+ 11             
+240: INPUT A$
+? 703
+ A$ = "703"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "703"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "703"
+ A1(1) = 55
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "703"
+ A1(2) = 48
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "703"
+ A1(3) = 51
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 55
+ B(1) = 7
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 48
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 48
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 48
+ B(2) = 0
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 51
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 51
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 51
+ B(3) = 3
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 7
+ B(2): 0
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 0
+ B(3): 3
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 3
+ B(1): 7
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 0
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 7
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 0
+ C = 1
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 3
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 0
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 1
+ C = 2
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 3
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 7
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 0
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 3
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 2
+ C=0: false
+520: FOR J = 1 TO C
+ C: 2
+ J = 1
+ C = 2
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 2
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 2
+ D: 0
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 11
+ terminated:false
+ I = 12
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 12
+ 12             
+240: INPUT A$
+? 704
+ A$ = "704"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "704"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "704"
+ A1(1) = 55
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "704"
+ A1(2) = 48
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "704"
+ A1(3) = 52
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 55
+ B(1) = 7
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 48
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 48
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 48
+ B(2) = 0
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 52
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 52
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 52
+ B(3) = 4
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 7
+ B(2): 0
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 0
+ B(3): 4
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 4
+ B(1): 7
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 0
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 7
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 0
+ C = 1
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 4
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 0
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 1
+ C = 2
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 4
+ A(1)<>B(3): false
+430: C = C + 1
+ C: 2
+ C = 3
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 7
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 0
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 4
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 0
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 3
+ C=0: false
+520: FOR J = 1 TO C
+ C: 3
+ J = 1
+ C = 3
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 3
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 0
+ D=0: true
+580: IF C + D <> 0 THEN 600
+ C: 3
+ D: 0
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 12
+ terminated:false
+ I = 13
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 13
+ 13             
+240: INPUT A$
+? 407
+ A$ = "407"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "407"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "407"
+ A1(1) = 52
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "407"
+ A1(2) = 48
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "407"
+ A1(3) = 55
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 52
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 52
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 52
+ B(1) = 4
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 48
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 48
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 48
+ B(2) = 0
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 55
+ B(3) = 7
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 4
+ B(2): 0
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 0
+ B(3): 7
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 7
+ B(1): 4
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 0
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 4
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 7
+ A(J)<>B(J+1): false
+380: C = C + 1
+ C: 0
+ C = 1
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 0
+ A(J+1)<>B(J): false
+400: C = C + 1
+ C: 1
+ C = 2
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 7
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 4
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 4
+ A(J)<>B(J): false
+480: D = D + 1
+ D: 0
+ D = 1
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 0
+ A(J)<>B(J): true
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 7
+ A(J)<>B(J): true
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 1
+ D=3: false
+505: IF C = 0 THEN 545
+ C: 2
+ C=0: false
+520: FOR J = 1 TO C
+ C: 2
+ J = 1
+ C = 2
+ terminated:false
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+530: PRINT "PICO ";
+PICO 
+540: NEXT J
+ J: 2
+ terminated:true
+545: IF D = 0 THEN 580
+ D: 1
+ D=0: false
+550: FOR J = 1 TO D
+ D: 1
+ J = 1
+ D = 1
+ terminated:false
+560: PRINT "FERMI ";
+FERMI 
+570: NEXT J
+ J: 1
+ terminated:true
+580: IF C + D <> 0 THEN 600
+ C: 2
+ D: 1
+ C+D<>0: true
+600: PRINT
+
+605: NEXT I
+ I: 13
+ terminated:false
+ I = 14
+230: PRINT "GUESS #"; I,
+GUESS #
+ I: 14
+ 14             
+240: INPUT A$
+? 470
+ A$ = "470"
+245: IF LEN(A$) <> 3 THEN 630
+ A$: "470"
+ LEN(A$)<>3: false
+250: FOR Z = 1 TO 3
+ Z = 1
+ terminated:false
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 1
+ A$: "470"
+ A1(1) = 52
+250.2: NEXT Z
+ Z: 1
+ terminated:false
+ Z = 2
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 2
+ A$: "470"
+ A1(2) = 55
+250.2: NEXT Z
+ Z: 2
+ terminated:false
+ Z = 3
+250.1: A1(Z) = ASC(MID$(A$, Z, 1))
+ Z: 3
+ A$: "470"
+ A1(3) = 48
+250.2: NEXT Z
+ Z: 3
+ terminated:true
+260: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+270: IF A1(J) < 48 THEN 300
+ J: 1
+ A1(1): 52
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 1
+ A1(1): 52
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 1
+ A1(1): 52
+ B(1) = 4
+290: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+270: IF A1(J) < 48 THEN 300
+ J: 2
+ A1(2): 55
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 2
+ A1(2): 55
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 2
+ A1(2): 55
+ B(2) = 7
+290: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+270: IF A1(J) < 48 THEN 300
+ J: 3
+ A1(3): 48
+ A1(J)<48: false
+280: IF A1(J) > 57 THEN 300
+ J: 3
+ A1(3): 48
+ A1(J)>57: false
+285: B(J) = A1(J) - 48
+ J: 3
+ A1(3): 48
+ B(3) = 0
+290: NEXT J
+ J: 3
+ terminated:true
+295: GOTO 320
+320: IF B(1) = B(2) THEN 650
+ B(1): 4
+ B(2): 7
+ B(1)=B(2): false
+330: IF B(2) = B(3) THEN 650
+ B(2): 7
+ B(3): 0
+ B(2)=B(3): false
+340: IF B(3) = B(1) THEN 650
+ B(3): 0
+ B(1): 4
+ B(3)=B(1): false
+350: C = 0
+ C = 0
+350.1: D = 0
+ D = 0
+360: FOR J = 1 TO 2
+ J = 1
+ terminated:false
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 1
+ A(1): 4
+ B(2): 7
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 1
+ A(2): 7
+ B(1): 4
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+370: IF A(J) <> B(J + 1) THEN 390
+ J: 2
+ A(2): 7
+ B(3): 0
+ A(J)<>B(J+1): true
+390: IF A(J + 1) <> B(J) THEN 410
+ J: 2
+ A(3): 0
+ B(2): 7
+ A(J+1)<>B(J): true
+410: NEXT J
+ J: 2
+ terminated:true
+420: IF A(1) <> B(3) THEN 440
+ A(1): 4
+ B(3): 0
+ A(1)<>B(3): true
+440: IF A(3) <> B(1) THEN 460
+ A(3): 0
+ B(1): 4
+ A(3)<>B(1): true
+460: FOR J = 1 TO 3
+ J = 1
+ terminated:false
+470: IF A(J) <> B(J) THEN 490
+ J: 1
+ A(1): 4
+ B(1): 4
+ A(J)<>B(J): false
+480: D = D + 1
+ D: 0
+ D = 1
+490: NEXT J
+ J: 1
+ terminated:false
+ J = 2
+470: IF A(J) <> B(J) THEN 490
+ J: 2
+ A(2): 7
+ B(2): 7
+ A(J)<>B(J): false
+480: D = D + 1
+ D: 1
+ D = 2
+490: NEXT J
+ J: 2
+ terminated:false
+ J = 3
+470: IF A(J) <> B(J) THEN 490
+ J: 3
+ A(3): 0
+ B(3): 0
+ A(J)<>B(J): false
+480: D = D + 1
+ D: 2
+ D = 3
+490: NEXT J
+ J: 3
+ terminated:true
+500: IF D = 3 THEN 680
+ D: 3
+ D=3: true
+680: PRINT "YOU GOT IT!!!"
+YOU GOT IT!!!
+680.1: PRINT
+
+690: Y = Y + 1
+ Y: 0
+ Y = 1
+700: INPUT "PLAY AGAIN (YES OR NO)"; A$
+PLAY AGAIN (YES OR NO)NO
+ A$ = "NO"
+720: IF LEFT$(A$, 1) = "YES" THEN 150
+ A$: "NO"
+ LEFT$(A$,1)="YES": false
+730: IF Y = 0 THEN 750
+ Y: 1
+ Y=0: false
+740: PRINT
+
+740.1: PRINT "A"; Y; "POINT BAGELS BUFF!!"
+A
+ Y: 1
+ 1    POINT BAGELS BUFF!!
+750: PRINT "HOPE YOU HAD FUN.  BYE."
+HOPE YOU HAD FUN.  BYE.
+999: END
+STOP in line 999

@@ -498,7 +498,13 @@ class FunctionLeft < AbstractScalarFunction
 
       raise(BASICRuntimeError, "Invalid count for #{@name}()") if count < 0
 
-      text = value[0..count].chop
+      if count > 0
+        count2 = count - 1
+        text = value[0..count2]
+      else
+        text = ''
+      end
+
       quoted = '"' + text + '"'
       token = TextConstantToken.new(quoted)
       TextConstant.new(token)
@@ -569,14 +575,18 @@ class FunctionMid < AbstractScalarFunction
       raise(BASICRuntimeError, "Invalid start index for #{@name}()") if
         start < 1
 
-      start_index = start - 1
-      end_index = start_index + length - 1
+      raise(BASICRuntimeError, "Invalid length for #{@name}()") if
+        length < 0
 
-      raise(BASICRuntimeError, "Invalid end index for #{@name}()") if
-        end_index < start_index
+      if length > 0
+        start_index = start - 1
+        end_index = start_index + length - 1
+        text = value[start_index..end_index]
+        text = '' if text.nil?
+      else
+        text = ''
+      end
 
-      text = value[start_index..end_index]
-      text = '' if text.nil?
       quoted = '"' + text + '"'
       token = TextConstantToken.new(quoted)
       TextConstant.new(token)
@@ -643,7 +653,9 @@ class FunctionPack < AbstractArrayFunction
     if match_args_to_signature(args, @signature)
       array = args[0]
       dims = array.dimensions
+
       raise(BASICRuntimeError, @name + ' requires array') unless dims.size == 1
+
       array.pack
     else
       raise(BASICRuntimeError, 'Wrong arguments for function')

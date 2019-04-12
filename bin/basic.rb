@@ -368,6 +368,7 @@ OptionParser.new do |opt|
   opt.on('--if-false-next-line') { |o| options[:if_false_next_line] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
   opt.on('--ignore-rnd-arg') { |o| options[:ignore_rnd_arg] = o }
+  opt.on('--implied-delimiter') { |o| options[:implied_delimiter] = o }
   opt.on('--implied-semicolon') { |o| options[:implied_semicolon] = o }
   opt.on('--int-floor') { |o| options[:int_floor] = o }
   opt.on('--lock-fornext') { |o| options[:lock_fornext] = o }
@@ -428,6 +429,9 @@ basic_options['if_false_next_line'] =
 
 basic_options['ignore_rnd_arg'] =
   Option.new(boolean, options.key?(:ignore_rnd_arg))
+
+basic_options['implied_delimiter'] =
+  Option.new(boolean, options.key?(:implied_delimiter))
 
 basic_options['implied_semicolon'] =
   Option.new(boolean, options.key?(:implied_semicolon))

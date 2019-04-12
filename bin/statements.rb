@@ -2489,7 +2489,7 @@ class PrintStatement < AbstractPrintStatement
       @errors << 'Syntax error'
     end
 
-    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
+    ## @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -2557,7 +2557,7 @@ class PrintUsingStatement < AbstractPrintStatement
       @errors << 'Syntax error'
     end
 
-    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
+    ## @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3022,7 +3022,7 @@ class WriteStatement < AbstractWriteStatement
       @errors << 'Syntax error'
     end
 
-    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
+    ## @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3089,7 +3089,7 @@ class ArrPrintStatement < AbstractPrintStatement
       @errors << 'Syntax error'
     end
 
-    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
+    ## @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3241,7 +3241,7 @@ class ArrWriteStatement < AbstractWriteStatement
       @errors << 'Syntax error'
     end
 
-    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
+    ## @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3387,7 +3387,7 @@ class MatPrintStatement < AbstractPrintStatement
       @errors << 'Syntax error'
     end
 
-    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
+    ## @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3553,7 +3553,7 @@ class MatWriteStatement < AbstractWriteStatement
       @errors << 'Syntax error'
     end
 
-    @errors << 'Delimiter required' if any_implied_carriage(@print_items)
+    ## @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
