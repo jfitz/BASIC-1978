@@ -368,7 +368,9 @@ class AbstractValueElement < AbstractElement
     @value
   end
 
-  private
+  def to_numeric
+    @value
+  end
 
   def compatible?(other)
     other.content_type == content_type
@@ -453,118 +455,141 @@ class NumericConstant < AbstractValueElement
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    NumericConstant.new(@value + other.to_v)
+    value = @value + other.to_numeric.to_v
+    NumericConstant.new(value)
   end
 
   def -(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in -()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    NumericConstant.new(@value - other.to_v)
+    value = @value - other.to_numeric.to_v
+    NumericConstant.new(value)
   end
 
   def *(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in *()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    NumericConstant.new(@value * other.to_v)
+    value = @value * other.to_numeric.to_v
+    NumericConstant.new(value)
   end
 
   def add(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    NumericConstant.new(@value + other.to_v)
+    value = @value + other.to_numeric.to_v
+    NumericConstant.new(value)
   end
 
   def subtract(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in subtract()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    NumericConstant.new(@value - other.to_v)
+    value = @value - other.to_numeric.to_v
+    NumericConstant.new(value)
   end
 
   def multiply(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in multiply()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    NumericConstant.new(@value * other.to_v)
+    value = @value * other.to_numeric.to_v
+    NumericConstant.new(value)
   end
 
   def divide(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in divide()"
     raise(BASICRuntimeError, message) unless compatible?(other)
     raise(BASICRuntimeError, 'Divide by zero') if other.zero?
-    NumericConstant.new(@value.to_f / other.to_v.to_f)
+    value = @value.to_f / other.to_numeric.to_f
+    NumericConstant.new(value)
   end
 
   def power(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in power()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    NumericConstant.new(@value**other.to_v)
+    value = @value**other.to_numeric.to_v
+    NumericConstant.new(value)
   end
 
   def maximum(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in maximum()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    NumericConstant.new([@value, other.to_v].max)
+    value = [@value, other.to_numeric.to_v].max
+    NumericConstant.new(value)
   end
 
   def minimum(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in minimum()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    NumericConstant.new([@value, other.to_v].min)
+    value = [@value, other.to_numeric.to_v].min
+    NumericConstant.new(value)
   end
 
   def truncate
-    NumericConstant.new(@value.to_i)
+    value = @value.to_i
+    NumericConstant.new(value)
   end
 
   def floor
-    NumericConstant.new(@value.floor)
+    value = @value.floor
+    NumericConstant.new(value)
   end
 
   def exp
-    NumericConstant.new(Math.exp(@value))
+    value = Math.exp(@value)
+    NumericConstant.new(value)
   end
 
   def log
-    NumericConstant.new(@value > 0 ? Math.log(@value) : 0)
+    value = @value > 0 ? Math.log(@value) : 0
+    NumericConstant.new(value)
   end
 
   def mod(other)
-    NumericConstant.new(other.to_v != 0 ? @value % other.to_v : 0)
+    value = other.to_numeric.to_v != 0 ? @value % other.to_numeric.to_v : 0
+    NumericConstant.new(value)
   end
 
   def abs
-    NumericConstant.new(@value >= 0 ? @value : -@value)
+    value = @value >= 0 ? @value : -@value
+    NumericConstant.new(value)
   end
 
   def sqrt
-    NumericConstant.new(@value > 0 ? Math.sqrt(@value) : 0)
+    value = @value > 0 ? Math.sqrt(@value) : 0
+    NumericConstant.new(value)
   end
 
   def sin
-    NumericConstant.new(Math.sin(@value))
+    value = Math.sin(@value)
+    NumericConstant.new(value)
   end
 
   def cos
-    NumericConstant.new(Math.cos(@value))
+    value = Math.cos(@value)
+    NumericConstant.new(value)
   end
 
   def tan
-    NumericConstant.new(@value >= 0 ? Math.tan(@value) : 0)
+    value = @value >= 0 ? Math.tan(@value) : 0
+    NumericConstant.new(value)
   end
 
   def atn
-    NumericConstant.new(Math.atan(@value))
+    value = Math.atan(@value)
+    NumericConstant.new(value)
   end
 
   def max(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in max()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    @value = [to_v, other.to_v].max
+    value = [to_v, other.to_v.to_v].max
+    @value = value
   end
 
   def min(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in min()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    @value = [to_v, other.to_v].min
+    value = [to_v, other.to_v.to_v].min
+    @value = value
   end
 
   def sign
@@ -590,6 +615,10 @@ class NumericConstant < AbstractValueElement
     !@value.to_f.zero?
   end
 
+  def to_numeric
+    NumericConstant.new(@value)
+  end
+
   def six_digits(value)
     # ensure only 6 digits of precision
     decimals = 5 - (value != 0 ? Math.log(value.abs, 10).to_i : 0)
@@ -610,6 +639,10 @@ class NumericConstant < AbstractValueElement
     printer.print_item s
   end
 
+  def compatible?(other)
+    other.numeric_constant? || other.boolean_constant?
+  end
+
   private
 
   def to_formatted_s
@@ -621,10 +654,6 @@ class NumericConstant < AbstractValueElement
       digits.include?('.') && !digits.include?('e')
 
     lead_space + digits
-  end
-
-  def compatible?(other)
-    other.numeric_constant?
   end
 end
 
@@ -672,114 +701,141 @@ class IntegerConstant < AbstractValueElement
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    IntegerConstant.new(@value + other.to_v)
+    value = @value + other.to_numeric.to_v
+    IntegerConstant.new(value)
   end
 
   def -(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in -()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    IntegerConstant.new(@value - other.to_v)
+    value = @value - other.to_numeric.to_v
+    IntegerConstant.new(value)
   end
 
   def *(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in *()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    IntegerConstant.new(@value * other.to_v)
+    value = @value * other.to_numeric.to_v
+    IntegerConstant.new(value)
   end
 
   def add(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    IntegerConstant.new(@value + other.to_v)
+    value = @value + other.to_numeric.to_v
+    IntegerConstant.new(value)
   end
 
   def subtract(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in subtract()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    IntegerConstant.new(@value - other.to_v)
+    value = @value - other.to_numeric.to_v
+    IntegerConstant.new(value)
   end
 
   def multiply(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in multiply()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    IntegerConstant.new(@value * other.to_v)
+    value = @value * other.to_numeric.to_v
+    IntegerConstant.new(value)
   end
 
   def divide(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in divide()"
     raise(BASICRuntimeError, message) unless compatible?(other)
     raise(BASICRuntimeError, 'Divide by zero') if other.zero?
-    IntegerConstant.new(@value.to_f / other.to_v.to_f)
+    value = @value.to_f / other.to_numeric.to_f
+    IntegerConstant.new(value)
   end
 
   def power(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in power()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    IntegerConstant.new(@value**other.to_v)
+    value = @value**other.to_numeric.to_v
+    IntegerConstant.new(value)
   end
 
   def maximum(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in maximum()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    IntegerConstant.new([@value, other.to_v].max)
+    value = [@value, other.to_numeric.to_v].max
+    IntegerConstant.new(value)
   end
 
   def minimum(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in minimum()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    IntegerConstant.new([@value, other.to_v].min)
+    value = [@value, other.to_numeric.to_v].min
+    IntegerConstant.new(value)
   end
 
   def truncate
-    IntegerConstant.new(@value.to_i)
+    value = @value.to_i
+    IntegerConstant.new(value)
   end
 
   def floor
-    IntegerConstant.new(@value.floor)
+    value = @value.floor
+    IntegerConstant.new(value)
   end
 
   def exp
-    IntegerConstant.new(Math.exp(@value))
+    value = Math.exp(@value)
+    IntegerConstant.new(value)
   end
 
   def log
-    IntegerConstant.new(@value > 0 ? Math.log(@value) : 0)
+    value = @value > 0 ? Math.log(@value) : 0
+    IntegerConstant.new(value)
+  end
+
+  def mod(other)
+    value = other.to_numeric != 0 ? @value % other.to_numeric.to_v : 0
+    IntegerConstant.new(value)
   end
 
   def abs
-    IntegerConstant.new(@value >= 0 ? @value : -@value)
+    value = @value >= 0 ? @value : -@value
+    IntegerConstant.new(value)
   end
 
   def sqrt
-    IntegerConstant.new(@value > 0 ? Math.sqrt(@value) : 0)
+    value = @value > 0 ? Math.sqrt(@value) : 0
+    IntegerConstant.new(value)
   end
 
   def sin
-    IntegerConstant.new(Math.sin(@value))
+    value = Math.sin(@value)
+    IntegerConstant.new(value)
   end
 
   def cos
-    IntegerConstant.new(Math.cos(@value))
+    value = Math.cos(@value)
+    IntegerConstant.new(value)
   end
 
   def tan
-    IntegerConstant.new(@value >= 0 ? Math.tan(@value) : 0)
+    value = @value >= 0 ? Math.tan(@value) : 0
+    IntegerConstant.new(value)
   end
 
   def atn
-    IntegerConstant.new(Math.atan(@value))
+    value = Math.atan(@value)
+    IntegerConstant.new(value)
   end
 
   def max(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in max()"
     raise(BASICRuntimeError, message) unless compatible?(other)
-    @value = [to_v, other.to_v].max
+    value = [to_v, other.to_numeric.to_v].max
+    @value = value
   end
 
   def min(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in =="
     raise(BASICRuntimeError, message) unless compatible?(other)
-    @value = [to_v, other.to_v].min
+    value = [to_v, other.to_numeric.to_v].min
+    @value = value
   end
 
   def sign
@@ -805,6 +861,10 @@ class IntegerConstant < AbstractValueElement
     !@value.to_i.zero?
   end
 
+  def to_numeric
+    IntegerConstant.new(@value)
+  end
+
   def print(printer)
     s = to_formatted_s
     s = s.upcase
@@ -818,16 +878,16 @@ class IntegerConstant < AbstractValueElement
     printer.print_item s
   end
 
+  def compatible?(other)
+    other.numeric_constant? || other.boolean_constant?
+  end
+
   private
 
   def to_formatted_s
     lead_space = @value >= 0 ? ' ' : ''
     digits = @value.to_s
     lead_space + digits
-  end
-
-  def compatible?(other)
-    other.numeric_constant?
   end
 end
 
@@ -957,12 +1017,76 @@ class BooleanConstant < AbstractValueElement
     BooleanConstant.new(@value || other.to_v)
   end
 
+  def +(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
+    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    value = numeric_value + other.to_v
+    NumericConstant.new(value)
+  end
+
+  def -(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in -()"
+    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    value = numeric_value - otherto_v
+    NumericConstant.new(value)
+  end
+
+  def *(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in *()"
+    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    value = numeric_value * other.to_v
+    NumericConstant.new(value)
+  end
+
+  def add(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
+    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    value = numeric_value + other.to_v
+    NumericConstant.new(value)
+  end
+
+  def subtract(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in subtract()"
+    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    value = numeric_value - other.to_v
+    NumericConstant.new(value)
+  end
+
+  def multiply(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in multiply()"
+    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    value = numeric_value * other.to_v
+    NumericConstant.new(value)
+  end
+
+  def divide(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in divide()"
+    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    raise(BASICRuntimeError, 'Divide by zero') if other.zero?
+    value = numeric_value.to_f / other.to_f
+    NumericConstant.new(value)
+  end
+
   def to_s
     @value ? 'true' : 'false'
   end
 
   def to_b
     @value
+  end
+
+  def to_numeric
+    @value ? NumericConstant.new(-1) : NumericConstant.new(0)
+  end
+
+  def compatible?(other)
+    other.numeric_constant? || other.boolean_constant?
+  end
+
+  private
+
+  def numeric_value
+    @value ? -1 : 0
   end
 end
 

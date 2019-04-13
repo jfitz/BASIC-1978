@@ -260,7 +260,7 @@ class BinaryOperator < AbstractElement
       array_scalar(x, y, base)
     elsif x.scalar? && y.array?
       scalar_array(x, y, base)
-    elsif x.content_type == y.content_type
+    elsif x.compatible?(y)
       op_scalar_scalar(x, y)
     else
       message = "Type mismatch (#{x.content_type}/#{y.content_type}) in operator #{@op}"

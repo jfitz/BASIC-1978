@@ -336,7 +336,7 @@ class Interpreter
     when 'PRINT'
       statement = PrintStatement.new([keyword], [args])
       if statement.errors.empty?
-        statement.execute(self)
+        statement.execute_core(self)
       else
         statement.errors.each { |error| @console_io.print_line(error) }
       end

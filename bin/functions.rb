@@ -445,14 +445,17 @@ class FunctionInt < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => 'scalar' }]
+    @signature_1 = [{ 'type' => 'numeric', 'shape' => 'scalar' }]
+    @signature_2 = [{ 'type' => 'boolean', 'shape' => 'scalar' }]
   end
 
   # return a single value
   def evaluate(interpreter, stack)
     args = stack.pop
-    if match_args_to_signature(args, @signature)
+    if match_args_to_signature(args, @signature_1)
       interpreter.int_floor? ? args[0].floor : args[0].truncate
+    elsif match_args_to_signature(args, @signature_2)
+      interpreter.int_floor? ? args[0].to_numeric.floor : args[0].to_numeric.truncate
     else
       raise(BASICRuntimeError, 'Wrong arguments for function')
     end
