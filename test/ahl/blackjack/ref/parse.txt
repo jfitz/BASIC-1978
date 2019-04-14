@@ -281,9 +281,9 @@
  NumericConstant:2
  FunctionMid
  CarriageControl:;
-770 PRINT "    ";
+770 PRINT "   ";
  ITEMS
- TextConstant:"    "
+ TextConstant:"   "
  CarriageControl:;
 780 RETURN
  
@@ -764,14 +764,26 @@
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
  step:    ["NumericConstant:1"]
-1960 PRINT I;
+1960 PRINT TAB(I*7);I;
  ITEMS
+ ScalarValue:I
+ NumericConstant:7
+ BinaryOperator:*
+ FunctionTab
+ CarriageControl:;
  ScalarValue:I
  CarriageControl:;
 1970 NEXT I
  VariableName:I
-1980 PRINT "DEALER"
+1980 PRINT TAB((N+1)*7)"DEALER"
  ITEMS
+ ScalarValue:N
+ NumericConstant:1
+ BinaryOperator:+
+ NumericConstant:7
+ BinaryOperator:*
+ FunctionTab
+ CarriageControl:
  TextConstant:"DEALER"
  CarriageControl:NL
 1990 FOR J=1 TO 2
