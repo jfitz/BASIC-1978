@@ -11,6 +11,14 @@ class IfModifier
     'IF ' + @expression.to_s
   end
 
+  def pre_trace
+    ' IF ' + @expression.to_s
+  end
+
+  def post_trace
+    ' ENDIF'
+  end
+  
   def execute_pre(interpreter)
     io = interpreter.trace_out
 
@@ -96,6 +104,18 @@ class ForModifier
     end
   end
 
+  def pre_trace
+    if @step.nil?
+      " FOR #{@control} = #{@start} TO #{@end}"
+    else
+      " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+    end
+  end
+
+  def post_trace
+    " NEXT #{@control}"
+  end
+  
   def execute_pre(interpreter)
     start_values = @start.evaluate(interpreter)
     start_value = start_values[0]
