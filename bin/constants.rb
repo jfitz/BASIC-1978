@@ -379,6 +379,10 @@ end
 
 # Numeric constants
 class NumericConstant < AbstractValueElement
+  def self.set_options(options)
+    @@options = options
+  end
+
   def self.accept?(token)
     classes = %w(Fixnum Integer Bignum Float NumericConstantToken NumericSymbolToken)
     classes.include?(token.class.to_s)
@@ -619,10 +623,10 @@ class NumericConstant < AbstractValueElement
     NumericConstant.new(@value)
   end
 
-  def six_digits(value)
-    # ensure only 6 digits of precision
-    decimals = 5 - (value != 0 ? Math.log(value.abs, 10).to_i : 0)
-    rounded = value.round(decimals)
+  def decimal_digits(value)
+    decimals = @@options['decimals'].value
+    num_decimals = decimals - (value != 0 ? Math.log(value.abs, 10).to_i : 0)
+    rounded = value.round(num_decimals)
     rounded.to_f
   end
 
@@ -647,9 +651,10 @@ class NumericConstant < AbstractValueElement
 
   def to_formatted_s
     lead_space = @value >= 0 ? ' ' : ''
-    digits = six_digits(@value).to_s
-    # remove trailing zeros and decimal point
+    digits = decimal_digits(@value).to_s
 
+    # remove trailing zeros and decimal point
+    ### make this optional
     digits = digits.sub(/0+\z/, '').sub(/\.\z/, '') if
       digits.include?('.') && !digits.include?('e')
 

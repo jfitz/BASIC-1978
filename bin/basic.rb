@@ -163,7 +163,7 @@ class Shell
             @console_io.print_line('Incorrect value type')
           end
         rescue BASICRuntimeError => e
-          @console_io.print_line(e)
+          @console_io.print_line(e.to_s)
         end
         value = @options[kwd_d].value.to_s.upcase
         @console_io.print_line("#{kwd} #{value}")
@@ -312,7 +312,7 @@ def make_command_tokenbuilders(options, quotes)
     ALLOW_ASCII ALLOW_HASH_CONSTANT ALLOW_PI APOSTROPHE_COMMENT ASC_ALLOW_ALL
     BACK_TAB BACKSLASH_SEPARATOR BANG_COMMENT BASE
     CHR_ALLOW_ALL COLON_FILE COLON_SEPARATOR CRLF_ON_LINE_INPUT
-    DEFAULT_PROMPT ECHO FORNEXT_ONE_BEYOND HEADING
+    DEFAULT_PROMPT DECIMALS ECHO FORNEXT_ONE_BEYOND HEADING
     IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON INPUT_HIGH_BIT
     INT_FLOOR LOCK_FORNEXT LONG_NAMES MIN_MAX_OP NEWLINE_SPEED
     PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROVENANCE
@@ -361,6 +361,7 @@ OptionParser.new do |opt|
   opt.on('--bang-comment') { |o| options[:bang_comment] = o }
   opt.on('--base BASE') { |o| options[:base] = o }
   opt.on('--chr-allow-all') { |o| options[:chr_allow_all] = o }
+  opt.on('--decimals DIGITS') { |o| options[:decimals] = o }
   opt.on('--define-ascii') { |o| options[:allow_ascii] = o }
   opt.on('--define-pi') { |o| options[:allow_pi] = o }
   opt.on('--echo-input') { |o| options[:echo_input] = o }
@@ -397,6 +398,7 @@ show_profile = options.key?(:profile)
 boolean = { :type => :bool }
 string = { :type => :string }
 int = { :type => :int, :min => 0 }
+int_1_15 = { :type => :int, :max => 15, :min => 1 }
 int_132 = { :type => :int, :max => 132, :min => 0 }
 int_40 = { :type => :int, :max => 40, :min => 0 }
 int_1 = { :type => :int, :max => 1, :min => 0 }
@@ -420,6 +422,10 @@ basic_options['base'] = Option.new(int_1, base)
 
 basic_options['chr_allow_all'] =
   Option.new(boolean, options.key?(:chr_allow_all))
+
+decimals = 5
+decimals = options[:decimals] if options.key?(:decimals)
+basic_options['decimals'] = Option.new(int_1_15, decimals)
 
 basic_options['default_prompt'] = Option.new(string, '? ')
 basic_options['echo'] = Option.new(boolean, options.key?(:echo_input))
@@ -494,6 +500,8 @@ comment_leads = []
 comment_leads << '!' if basic_options['bang_comment'].value
 
 comment_leads << "'" if basic_options['apostrophe_comment'].value
+
+NumericConstant.set_options(basic_options)
 
 console_io = ConsoleIo.new(basic_options)
 
