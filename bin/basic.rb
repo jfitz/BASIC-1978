@@ -40,6 +40,8 @@ class Option
       @value.to_s
     when :int
       @value.to_s
+    when :float
+      @value.to_s
     when :string
       '"' + @value.to_s + '"'
     end
@@ -59,6 +61,21 @@ class Option
       legals = %w(Fixnum Integer)
 
       raise(BASICRuntimeError, "Invalid type #{value.class} for integer") unless
+        legals.include?(value.class.to_s)
+
+      min = @defs[:min]
+      if !min.nil? && value < min
+        raise(BASICRuntimeError, "Value #{value} below minimum #{min}")
+      end
+
+      max = @defs[:max]
+      if !max.nil? && value > max
+        raise(BASICRuntimeError, "Value #{value} above maximum #{max}")
+      end
+    when :float
+      legals = %w(Fixnum Integer Float Rational)
+
+      raise(BASICRuntimeError, "Invalid type #{value.class} for float") unless
         legals.include?(value.class.to_s)
 
       min = @defs[:min]
@@ -312,7 +329,7 @@ def make_command_tokenbuilders(options, quotes)
     ALLOW_ASCII ALLOW_HASH_CONSTANT ALLOW_PI APOSTROPHE_COMMENT ASC_ALLOW_ALL
     BACK_TAB BACKSLASH_SEPARATOR BANG_COMMENT BASE
     CHR_ALLOW_ALL COLON_FILE COLON_SEPARATOR CRLF_ON_LINE_INPUT
-    DEFAULT_PROMPT DECIMALS ECHO FORNEXT_ONE_BEYOND HEADING
+    DEFAULT_PROMPT DECIMALS ECHO EPSILON FORNEXT_ONE_BEYOND HEADING
     IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON INPUT_HIGH_BIT
     INT_FLOOR LOCK_FORNEXT LONG_NAMES MIN_MAX_OP NEWLINE_SPEED
     PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROVENANCE
@@ -365,6 +382,7 @@ OptionParser.new do |opt|
   opt.on('--define-ascii') { |o| options[:allow_ascii] = o }
   opt.on('--define-pi') { |o| options[:allow_pi] = o }
   opt.on('--echo-input') { |o| options[:echo_input] = o }
+  opt.on('--epsilon LIMIT') { |o| options[:epsilon] = o }
   opt.on('--heading') { |o| options[:heading] = o }
   opt.on('--if-false-next-line') { |o| options[:if_false_next_line] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
@@ -402,6 +420,7 @@ int_1_15 = { :type => :int, :max => 15, :min => 1 }
 int_132 = { :type => :int, :max => 132, :min => 0 }
 int_40 = { :type => :int, :max => 40, :min => 0 }
 int_1 = { :type => :int, :max => 1, :min => 0 }
+float = { :type => :float, :min => 0 }
 
 basic_options = {}
 
@@ -429,6 +448,11 @@ basic_options['decimals'] = Option.new(int_1_15, decimals)
 
 basic_options['default_prompt'] = Option.new(string, '? ')
 basic_options['echo'] = Option.new(boolean, options.key?(:echo_input))
+
+epsilon = 1e-7
+epsilon = options[:epsilon].to_f if options.key?(:epsilon)
+basic_options['epsilon'] = Option.new(float, epsilon)
+
 basic_options['heading'] = Option.new(boolean, options.key?(:heading))
 
 basic_options['if_false_next_line'] =

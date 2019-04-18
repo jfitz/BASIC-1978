@@ -62,6 +62,7 @@ When the BASIC program ends, BASIC-1978 ends.
 |--chr-allow-all |The CHR$() function allows any output characters. The default behavior is to limit characters to printable ASCII (32d to 126d).
 |--decimals digits |Sets the number of decimals printed. Default is 5, maximum is 15.
 |--echo-input |Echoes console input to output. Useful in run mode when redirecting input from a text file.
+|--epsilon |Sets the minimum value for numeric variables. Values below epsilon are converted to zero. Default is 1E-7.
 |--heading |Suppress the heading and trailing messages
 |--implied-semicolon |When printing items not delimited by a comma or semicolon, provide spacing as if a semicolon was provided. (Normally the items have no spaces between them.)
 |--int-floor |The INT function truncates towards negative infinity. (Normally towards zero.)
@@ -322,6 +323,7 @@ The options that can be set are:
     DECIMALS
     DEFAULT_PROMPT
     ECHO
+    EPSILON
     FORNEXT_ONE_BEYOND
     HEADING
     IF_FALSE_NEXT_LINE
@@ -367,6 +369,7 @@ The OPTION command overrides the command-line setting.
 |DECIMALS |numeric 1 to 15 |5 |Sets the number of decimals printed
 |DEFAULT_PROMPT |String |"? " |Changes the prompt for INPUT statements
 |ECHO |TRUE or FALSE |FALSE |Echoes input (useful for testing)
+|EPSILON |numeric positive |1E-7 |Values below epsilon are converted to zero.
 |FORNEXT_ONE_BEYOND |TRUE or FALSE |FALSE |FOR/NEXT ends with index value one higher than limit
 |HEADING |TRUE or FALSE |TRUE |Displays the opening and closing lines that identify BASIC
 |IF_FALSE_NEXT_LINE |TRUE or FALSE |FALSE |IF condition false jumps to next line (default is next statement)
@@ -1269,6 +1272,7 @@ Possible options are a subset of the options in the shell.
     DECIMALS
     DEFAULT_PROMPT
     ECHO
+    EPSILON
     FORNEXT_ONE_BEYOND
     IF_FALSE_NEXT_LINE
     IGNORE_RND_ARG
