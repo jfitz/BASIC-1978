@@ -389,6 +389,8 @@ class AbstractStatement
     execute_postmodifier(interpreter) if index > 0
   end
 
+  public
+
   def print_trace_info(trace_out, current_line_index)
     trace_out.newline_when_needed
 
@@ -403,8 +405,6 @@ class AbstractStatement
     trace_out.newline
   end
 
-  public
-
   def execute_a_statement(interpreter, trace_out, current_line_index,
                           function_running)
     print_trace_info(trace_out, current_line_index)
@@ -415,9 +415,11 @@ class AbstractStatement
       end
 
       timing = Benchmark.measure { execute(interpreter) }
+
       user_time = timing.utime + timing.cutime
       sys_time = timing.stime + timing.cstime
       time = user_time + sys_time
+
       @profile_time += time
       @profile_count += 1
     else
@@ -1846,6 +1848,8 @@ class InputStatement < AbstractStatement
       value = hash['value']
       interpreter.set_value(l_value, value)
     end
+
+    interpreter.clear_previous_lines
   end
 
   private
@@ -2002,6 +2006,8 @@ class LineInputStatement < AbstractStatement
       value = hash['value']
       interpreter.set_value(l_value, value)
     end
+
+    interpreter.clear_previous_lines
   end
 
   private
@@ -2781,6 +2787,8 @@ class ReadStatement < AbstractReadStatement
         interpreter.set_value(target, value)
       end
     end
+
+    interpreter.clear_previous_lines
   end
 
   private
@@ -3187,6 +3195,8 @@ class ArrReadStatement < AbstractReadStatement
         read_values(target.name, interpreter, ds)
       end
     end
+
+    interpreter.clear_previous_lines
   end
 
   private
@@ -3485,6 +3495,8 @@ class MatReadStatement < AbstractReadStatement
         read_values(target.name, interpreter, ds)
       end
     end
+
+    interpreter.clear_previous_lines
   end
 
   private

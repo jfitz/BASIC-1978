@@ -141,6 +141,7 @@ class Interpreter
     @variables = {}
     @user_function_lines = @program.assign_function_markers
 
+    clear_previous_lines
     run_program
   end
 
@@ -250,6 +251,11 @@ class Interpreter
   end
 
   def execute_a_statement
+    raise(BASICRuntimeError, 'Infinite loop detected') if
+      @previous_line_indexes.include?(@current_line_index)
+
+    @previous_line_indexes << @current_line_index
+
     line_number = @current_line_index.number
     line = @program.lines[line_number]
     statements = line.statements
@@ -603,6 +609,8 @@ class Interpreter
     upper_bound = 1 if @options['ignore_rnd_arg'].value
     upper_bound = upper_bound.to_f
 
+    clear_previous_lines
+
     NumericConstant.new(@randomizer.rand(upper_bound))
   end
 
@@ -807,6 +815,20 @@ class Interpreter
     end
 
     var = variable.to_s
+
+    if @variables.key?(var)
+      dict = @variables[var]
+      old_value = dict['value']
+      old_provenance = dict['provenance']
+      # a different value resets 'infinite loop' check
+      if value != old_value || @current_line_index != old_provenance
+        clear_previous_lines
+      end
+    else
+      # no prior value is a new value
+      clear_previous_lines
+    end
+
     dict = { 'provenance' => @current_line_index, 'value' => value }
     @variables[var] = dict
 
@@ -819,6 +841,10 @@ class Interpreter
       variable = Variable.new(name, coords)
       set_value(variable, value)
     end
+  end
+
+  def clear_previous_lines
+    @previous_line_indexes = []
   end
 
   def lock_variable(variable)
@@ -849,6 +875,11 @@ class Interpreter
 
   def pop_return
     raise(BASICRuntimeError, 'RETURN without GOSUB') if @return_stack.empty?
+
+    # remove all lines from the subroutine in the 'visited' list
+    while !@previous_line_indexes.empty? && @previous_line_indexes[-1] != @return_stack[-1]
+      @previous_line_indexes.pop
+    end
 
     @return_stack.pop
   end
