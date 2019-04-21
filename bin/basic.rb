@@ -329,7 +329,8 @@ def make_command_tokenbuilders(options, quotes)
     ALLOW_ASCII ALLOW_HASH_CONSTANT ALLOW_PI APOSTROPHE_COMMENT ASC_ALLOW_ALL
     BACK_TAB BACKSLASH_SEPARATOR BANG_COMMENT BASE
     CHR_ALLOW_ALL COLON_FILE COLON_SEPARATOR CRLF_ON_LINE_INPUT
-    DEFAULT_PROMPT DECIMALS ECHO EPSILON FORNEXT_ONE_BEYOND HEADING
+    DEFAULT_PROMPT DECIMALS DETECT_INFINITE_LOOP
+    ECHO EPSILON FORNEXT_ONE_BEYOND HEADING
     IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON INPUT_HIGH_BIT
     INT_FLOOR LOCK_FORNEXT LONG_NAMES MIN_MAX_OP NEWLINE_SPEED
     PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROVENANCE
@@ -381,13 +382,13 @@ OptionParser.new do |opt|
   opt.on('--decimals DIGITS') { |o| options[:decimals] = o }
   opt.on('--define-ascii') { |o| options[:allow_ascii] = o }
   opt.on('--define-pi') { |o| options[:allow_pi] = o }
+  opt.on('--no-detect-infinite-loop') { |o| options[:no_detect_infinite_loop] = o }
   opt.on('--echo-input') { |o| options[:echo_input] = o }
   opt.on('--epsilon LIMIT') { |o| options[:epsilon] = o }
   opt.on('--heading') { |o| options[:heading] = o }
   opt.on('--if-false-next-line') { |o| options[:if_false_next_line] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
   opt.on('--ignore-rnd-arg') { |o| options[:ignore_rnd_arg] = o }
-  opt.on('--implied-delimiter') { |o| options[:implied_delimiter] = o }
   opt.on('--implied-semicolon') { |o| options[:implied_semicolon] = o }
   opt.on('--int-floor') { |o| options[:int_floor] = o }
   opt.on('--lock-fornext') { |o| options[:lock_fornext] = o }
@@ -447,6 +448,10 @@ decimals = options[:decimals] if options.key?(:decimals)
 basic_options['decimals'] = Option.new(int_1_15, decimals)
 
 basic_options['default_prompt'] = Option.new(string, '? ')
+
+basic_options['detect_infinite_loop'] =
+  Option.new(boolean, !options.key?(:no_detect_infinite_loop))
+
 basic_options['echo'] = Option.new(boolean, options.key?(:echo_input))
 
 epsilon = 1e-7
@@ -460,9 +465,6 @@ basic_options['if_false_next_line'] =
 
 basic_options['ignore_rnd_arg'] =
   Option.new(boolean, options.key?(:ignore_rnd_arg))
-
-basic_options['implied_delimiter'] =
-  Option.new(boolean, options.key?(:implied_delimiter))
 
 basic_options['implied_semicolon'] =
   Option.new(boolean, options.key?(:implied_semicolon))
