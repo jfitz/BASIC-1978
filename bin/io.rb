@@ -105,7 +105,9 @@ class ConsoleIo
 
   def read_line
     input_text = gets
+
     raise(BASICRuntimeError, 'End of file') if input_text.nil?
+
     ascii_text = ascii_printables(input_text)
     puts(ascii_text) if @options['echo'].value
     ascii_text
@@ -128,6 +130,7 @@ class ConsoleIo
       incr = c == "\b" ? -1 : 1
       @column += incr
       @column = 0 if @column < 0
+
       newline if @options['print_width'].value > 0 &&
                  @column >= @options['print_width'].value
     end
@@ -337,7 +340,9 @@ class FileHandler
 
   def read_line
     input_text = @file.gets
+
     raise(BASICRuntimeError, 'End of file') if input_text.nil?
+
     input_text = input_text.chomp
     ascii_printables(input_text)
   end
@@ -391,7 +396,9 @@ class FileHandler
   def refill(data_store, file, tokenizer)
     while data_store.empty?
       line = file.gets
+
       raise(BASICRuntimeError, 'End of file') if line.nil?
+
       line = line.chomp
 
       tokens = tokenizer.tokenize(line)

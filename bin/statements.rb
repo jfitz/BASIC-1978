@@ -771,7 +771,9 @@ end
 module InputFunctions
   def dump
     lines = []
+
     @input_items.each { |item| lines += item.dump } unless @input_items.nil?
+
     lines
   end
 
@@ -922,6 +924,7 @@ class ChangeStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @source.dump unless @source.nil?
     lines += @target.dump unless @target.nil?
 
@@ -1112,6 +1115,7 @@ class DefineFunctionStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @definition.dump unless @definition.nil?
 
     lines
@@ -1156,6 +1160,7 @@ class DimStatement < AbstractStatement
 
   def dump
     lines = []
+
     @expression_list.each { |expression| lines += expression.dump }
 
     lines
@@ -1301,7 +1306,6 @@ class ForStatement < AbstractStatement
     lines << 'start:   ' + @start.dump.to_s unless @start.nil?
     lines << 'end:     ' + @end.dump.to_s unless @end.nil?
     lines << 'step:    ' + @step_value.dump.to_s unless @step_value.nil?
-
     lines
   end
 
@@ -1446,6 +1450,7 @@ class GotoStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines << @destination.dump unless @destination.nil?
 
     lines
@@ -1650,9 +1655,11 @@ class IfStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @expression.dump unless @expression.nil?
     lines += @statement.dump unless @statement.nil?
     lines += @else_stmt.dump unless @else_stmt.nil?
+
     lines
   end
 
@@ -1896,6 +1903,7 @@ class AbstractLetStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @assignment.dump unless @assignment.nil?
 
     lines
@@ -2234,8 +2242,11 @@ class OnStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @expression.dump
+
     @destinations.each { |destination| lines << destination.dump }
+
     lines
   end
 
@@ -2353,6 +2364,7 @@ class OpenStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @filename_expression.dump unless @filename_expression.nil?
     lines += @filenum_expression.dump unless @filenum_expression.nil?
 
@@ -2423,6 +2435,7 @@ class OptionStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @expression.dump unless @expression.nil?
 
     lines
@@ -2462,7 +2475,9 @@ class AbstractPrintStatement < AbstractStatement
     end
 
     lines << 'ITEMS'
+
     @print_items.each { |item| lines += item.dump } unless @print_items.nil?
+
     lines
   end
 
@@ -2737,6 +2752,7 @@ class AbstractReadStatement < AbstractStatement
 
   def dump
     lines = []
+
     @read_items.each { |item| lines += item.dump } unless @read_items.nil?
 
     lines
@@ -3000,7 +3016,9 @@ class AbstractWriteStatement < AbstractStatement
 
   def dump
     lines = []
+
     @print_items.each { |item| lines += item.dump } unless @print_items.nil?
+
     lines
   end
 
@@ -3352,6 +3370,7 @@ class ArrLetStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @assignment.dump unless @assignment.nil?
 
     lines
@@ -3667,6 +3686,7 @@ class MatLetStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @assignment.dump unless @assignment.nil?
 
     lines
