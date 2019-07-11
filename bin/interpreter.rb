@@ -425,18 +425,22 @@ class Interpreter
         @current_line_index = @errorgoto_stack[-1]
       else
         if @current_line_index.nil?
+          @console_io.newline_when_needed
           @console_io.print_line(e.message)
         else
           line_number = @current_line_index.number
+          @console_io.newline_when_needed
           @console_io.print_line("#{e.message} in line #{line_number}")
         end
         stop_running
       end
     rescue BASICExpressionError => e
       if @current_line_index.nil?
+        @console_io.newline_when_needed
         @console_io.print_line(e.message)
       else
         line_number = @current_line_index.number
+        @console_io.newline_when_needed
         @console_io.print_line("#{e.message} in line #{line_number}")
       end
       stop_running
