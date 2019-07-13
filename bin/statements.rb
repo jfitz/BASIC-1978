@@ -325,7 +325,7 @@ class AbstractStatement
     @tokens.each do |token|
       negate = !negate if prev_unary_minus
 
-      if token.numeric_constant? && !token.symbol_constant?
+      if token.numeric_constant?
         if negate
           nums << token.clone.negate
         else
@@ -334,6 +334,7 @@ class AbstractStatement
       end
 
       prev_unary_minus = token.operator? && token.to_s == '-' && !prev_operand
+
       prev_operand =
         token.groupend? ||
         token.numeric_constant? ||
@@ -343,21 +344,18 @@ class AbstractStatement
     nums
   end
 
-  def numeric_symbol_constants
+  def numeric_constants
     syms = @tokens.clone
-    syms.keep_if(&:symbol_constant?)
     syms.keep_if(&:numeric_constant?)
   end
 
   def strings
     strs = @tokens.clone
     strs.keep_if(&:text_constant?)
-    strs.delete_if(&:symbol_constant?)
   end
 
-  def text_symbol_constants
+  def text_constants
     syms = @tokens.clone
-    syms.keep_if(&:symbol_constant?)
     syms.keep_if(&:text_constant?)
   end
 
@@ -2408,14 +2406,14 @@ class OptionStatement < AbstractStatement
     %w(
     ASC_ALLOW_ALL
     BACK_TAB BASE
-    CHR_ALLOW_ALL CRLF_ON_LINE_INPUT
+    CHR_ALLOW_ALL
     DECIMALS DEFAULT_PROMPT DETECT_INFINITE_LOOP
-    ECHO EPSILON FORNEXT_ONE_BEYOND
-    IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON INPUT_HIGH_BIT
+    ECHO EPSILON
+    IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
     INT_FLOOR LOCK_FORNEXT NEWLINE_SPEED
     PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
-    QMARK_AFTER_PROMPT REQUIRE_INITIALIZED SEMICOLON_ZONE_WIDTH
-    TRACE ZONE_WIDTH
+    QMARK_AFTER_PROMPT REQUIRE_INITIALIZED
+    SEMICOLON_ZONE_WIDTH TRACE ZONE_WIDTH
     )
   end
 

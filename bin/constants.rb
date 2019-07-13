@@ -384,16 +384,13 @@ class NumericConstant < AbstractValueElement
   end
 
   def self.accept?(token)
-    classes = %w(Fixnum Integer Bignum Float NumericConstantToken NumericSymbolToken)
+    classes = %w(Fixnum Integer Bignum Float NumericConstantToken)
     classes.include?(token.class.to_s)
   end
 
   def self.numeric(text)
-    # #c constant
-    if text.size == 2 && text[0] == '#'
-      text[1].ord
     # nnn(E+nn)
-    elsif /\A\s*[+-]?\d+(E+?\d+)?\z/ =~ text
+    if /\A\s*[+-]?\d+(E+?\d+)?\z/ =~ text
       text.to_f.to_i
     # nnn(E-nn)
     elsif /\A\s*[+-]?\d+(E-\d+)?\z/ =~ text
@@ -432,8 +429,6 @@ class NumericConstant < AbstractValueElement
       t = text.to_s
       f = t[1].ord if !t.empty? && t[0] == '#'
     end
-
-    f = text.value if text.class.to_s == 'NumericSymbolToken'
 
     raise BASICRuntimeError, "'#{text}' is not a number" if f.nil?
 
@@ -902,7 +897,7 @@ end
 # Text constants
 class TextConstant < AbstractValueElement
   def self.accept?(token)
-    classes = %w(TextConstantToken TextSymbolToken)
+    classes = %w(TextConstantToken)
     classes.include?(token.class.to_s)
   end
 
@@ -913,7 +908,6 @@ class TextConstant < AbstractValueElement
 
     @value = nil
     @value = text.value if text.class.to_s == 'TextConstantToken'
-    @value = text.value if text.class.to_s == 'TextSymbolToken'
 
     raise(BASICSyntaxError, "'#{text}' is not a text constant") if @value.nil?
 

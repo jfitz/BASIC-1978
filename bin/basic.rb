@@ -306,12 +306,6 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
   tokenbuilders << NumberTokenBuilder.new
   tokenbuilders << IntegerTokenBuilder.new
 
-  allow_pi = options['allow_pi'].value
-  tokenbuilders << NumericSymbolTokenBuilder.new if allow_pi
-
-  allow_ascii = options['allow_ascii'].value
-  tokenbuilders << TextSymbolTokenBuilder.new if allow_ascii
-
   long_names = options['long_names'].value
   tokenbuilders << VariableTokenBuilder.new(long_names)
 
@@ -326,13 +320,13 @@ def make_command_tokenbuilders(options, quotes)
   keywords = %w(
     BREAK CROSSREF DELETE DIMS EXIT LIST LOAD NEW OPTION PARSE PRETTY
     PROFILE RENUMBER RUN SAVE TOKENS UDFS VARS
-    ALLOW_ASCII ALLOW_HASH_CONSTANT ALLOW_PI APOSTROPHE_COMMENT ASC_ALLOW_ALL
-    BACK_TAB BACKSLASH_SEPARATOR BANG_COMMENT BASE
-    CHR_ALLOW_ALL COLON_FILE COLON_SEPARATOR CRLF_ON_LINE_INPUT
-    DEFAULT_PROMPT DECIMALS DETECT_INFINITE_LOOP
-    ECHO EPSILON FORNEXT_ONE_BEYOND HEADING
-    IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON INPUT_HIGH_BIT
-    INT_FLOOR LOCK_FORNEXT LONG_NAMES MIN_MAX_OP NEWLINE_SPEED
+    APOSTROPHE_COMMENT ASC_ALLOW_ALL
+    BACK_TAB BASE
+    CHR_ALLOW_ALL
+    DECIMALS DEFAULT_PROMPT DETECT_INFINITE_LOOP
+    ECHO EPSILON HEADING
+    IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
+    INT_FLOOR LOCK_FORNEXT LONG_NAMES NEWLINE_SPEED
     PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
     QMARK_AFTER_PROMPT RANDOMIZE REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH TIMING TRACE ZONE_WIDTH
@@ -376,12 +370,9 @@ OptionParser.new do |opt|
   opt.on('--parse SOURCE') { |o| options[:parse_name] = o }
   opt.on('--asc-allow-all') { |o| options[:asc_allow_all] = o }
   opt.on('--back-tab') { |o| options[:back_tab] = o }
-  opt.on('--bang-comment') { |o| options[:bang_comment] = o }
   opt.on('--base BASE') { |o| options[:base] = o }
   opt.on('--chr-allow-all') { |o| options[:chr_allow_all] = o }
   opt.on('--decimals DIGITS') { |o| options[:decimals] = o }
-  opt.on('--define-ascii') { |o| options[:allow_ascii] = o }
-  opt.on('--define-pi') { |o| options[:allow_pi] = o }
   opt.on('--no-detect-infinite-loop') { |o| options[:no_detect_infinite_loop] = o }
   opt.on('--echo-input') { |o| options[:echo_input] = o }
   opt.on('--epsilon LIMIT') { |o| options[:epsilon] = o }
@@ -427,15 +418,11 @@ float = { :type => :float, :min => 0 }
 basic_options = {}
 
 basic_options['apostrophe_comment'] = Option.new(boolean, true)
-basic_options['allow_ascii'] = Option.new(boolean, options.key?(:allow_ascii))
-basic_options['allow_pi'] = Option.new(boolean, options.key?(:allow_pi))
 
 basic_options['asc_allow_all'] =
   Option.new(boolean, options.key?(:asc_allow_all))
 
 basic_options['back_tab'] = Option.new(boolean, options.key?(:back_tab))
-basic_options['backslash_separator'] = Option.new(boolean, true)
-basic_options['bang_comment'] = Option.new(boolean, options.key?(:bang_comment))
 
 base = 0
 base = options[:base].to_i if options.key?(:base)
@@ -526,8 +513,6 @@ statement_seps = [':', '\\']
 quotes = ['"']
 
 comment_leads = []
-comment_leads << '!' if basic_options['bang_comment'].value
-
 comment_leads << "'" if basic_options['apostrophe_comment'].value
 
 NumericConstant.set_options(basic_options)

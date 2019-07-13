@@ -681,23 +681,6 @@ class Program
     refs
   end
 
-  def numeric_symbol_refs
-    refs = {}
-
-    @lines.keys.sort.each do |line_number|
-      line = @lines[line_number]
-      statements = line.statements
-
-      rs = []
-      statements.each do |statement|
-        rs += statement.numeric_symbol_constants
-      end
-      refs[line_number] = rs
-    end
-
-    refs
-  end
-
   def text_refs
     refs = {}
 
@@ -708,23 +691,6 @@ class Program
       rs = []
       statements.each do |statement|
         rs += statement.strings
-      end
-      refs[line_number] = rs
-    end
-
-    refs
-  end
-
-  def text_symbol_refs
-    refs = {}
-
-    @lines.keys.sort.each do |line_number|
-      line = @lines[line_number]
-      statements = line.statements
-
-      rs = []
-      statements.each do |statement|
-        rs += statement.text_symbol_constants
       end
       refs[line_number] = rs
     end
@@ -833,21 +799,9 @@ class Program
     numerics = make_summary(nums_list)
     print_num_refs('Numeric constants', numerics)
 
-    num_syms_list = numeric_symbol_refs
-    num_symbols = make_summary(num_syms_list)
-    unless num_symbols.empty?
-      print_num_refs('Numeric symbol constants', num_symbols)
-    end
-
     strs_list = text_refs
     strings = make_summary(strs_list)
     print_num_refs('String constants', strings)
-
-    text_syms_list = text_symbol_refs
-    text_symbols = make_summary(text_syms_list)
-    unless text_symbols.empty?
-      print_num_refs('Text symbol constants', text_symbols)
-    end
 
     funcs_list = function_refs
     functions = make_summary(funcs_list)
