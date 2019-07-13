@@ -1865,7 +1865,8 @@ class InputStatement < AbstractStatement
     values = []
 
     while values.size < count
-      fhr.prompt(prompt)
+      remaining = count - values.size
+      fhr.prompt(prompt, remaining)
       values += fhr.input(interpreter)
 
       prompt = nil
@@ -2024,7 +2025,8 @@ class LineInputStatement < AbstractStatement
     values = []
 
     while values.size < count
-      fhr.prompt(prompt)
+      remaining = count - values.size
+      fhr.prompt(prompt, remaining)
       values += fhr.line_input(interpreter)
 
       prompt = nil
@@ -2411,7 +2413,7 @@ class OptionStatement < AbstractStatement
     ECHO EPSILON FORNEXT_ONE_BEYOND
     IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON INPUT_HIGH_BIT
     INT_FLOOR LOCK_FORNEXT NEWLINE_SPEED
-    PRINT_SPEED PRINT_WIDTH PROVENANCE
+    PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
     QMARK_AFTER_PROMPT REQUIRE_INITIALIZED SEMICOLON_ZONE_WIDTH
     TRACE ZONE_WIDTH
     )
