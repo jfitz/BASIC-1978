@@ -2135,7 +2135,7 @@ class OnErrorStatement < AbstractStatement
   def initialize(keywords, tokens_lists)
     super
 
-    @destinations = nil
+    @destination = nil
 
     template = [[1]]
 
@@ -2162,7 +2162,7 @@ class OnErrorStatement < AbstractStatement
   def program_check(program, console_io, line_number_index)
     retval = true
 
-    unless @destinations.nil?
+    unless @destination.nil?
       unless program.line_number?(@destination)
         console_io.print_line(
           "Line number #{@destination} not found in line #{line_number_index}"

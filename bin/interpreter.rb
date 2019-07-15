@@ -625,7 +625,11 @@ class Interpreter
   end
 
   def error_line(item)
-    line_number = @current_line_index.number
+    raise(BASICRuntimeError, 'ERL() invoked without error') if
+      @resume_stack.empty?
+
+    line_index = @resume_stack[-1]
+    line_number = line_index.number
     return NumericConstant.new(line_number.to_i)
   end
 
