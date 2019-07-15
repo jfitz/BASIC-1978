@@ -624,6 +624,11 @@ class Interpreter
     @randomizer = Random.new if @options['respect_randomize'].value
   end
 
+  def error_line(item)
+    line_number = @current_line_index.number
+    return NumericConstant.new(line_number.to_i)
+  end
+
   def set_dimensions(variable, subscripts)
     name = variable.name
     int_subscripts = normalize_subscripts(subscripts)

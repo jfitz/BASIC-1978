@@ -348,14 +348,6 @@ class AbstractValueElement < AbstractElement
     raise(BASICRuntimeError, 'Invalid operator power')
   end
 
-  def max(_)
-    raise(BASICRuntimeError, 'Invalid operator MAX')
-  end
-
-  def min(_)
-    raise(BASICRuntimeError, 'Invalid operator MIN')
-  end
-
   def printable?
     true
   end
@@ -511,20 +503,6 @@ class NumericConstant < AbstractValueElement
     NumericConstant.new(value)
   end
 
-  def maximum(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in maximum()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    value = [@value, other.to_numeric.to_v].max
-    NumericConstant.new(value)
-  end
-
-  def minimum(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in minimum()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    value = [@value, other.to_numeric.to_v].min
-    NumericConstant.new(value)
-  end
-
   def truncate
     value = @value.to_i
     NumericConstant.new(value)
@@ -578,20 +556,6 @@ class NumericConstant < AbstractValueElement
   def atn
     value = Math.atan(@value)
     NumericConstant.new(value)
-  end
-
-  def max(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in max()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    value = [to_v, other.to_v.to_v].max
-    @value = value
-  end
-
-  def min(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in min()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    value = [to_v, other.to_v.to_v].min
-    @value = value
   end
 
   def sign
@@ -758,20 +722,6 @@ class IntegerConstant < AbstractValueElement
     IntegerConstant.new(value)
   end
 
-  def maximum(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in maximum()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    value = [@value, other.to_numeric.to_v].max
-    IntegerConstant.new(value)
-  end
-
-  def minimum(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in minimum()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    value = [@value, other.to_numeric.to_v].min
-    IntegerConstant.new(value)
-  end
-
   def truncate
     value = @value.to_i
     IntegerConstant.new(value)
@@ -825,20 +775,6 @@ class IntegerConstant < AbstractValueElement
   def atn
     value = Math.atan(@value)
     IntegerConstant.new(value)
-  end
-
-  def max(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in max()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    value = [to_v, other.to_numeric.to_v].max
-    @value = value
-  end
-
-  def min(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in =="
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    value = [to_v, other.to_numeric.to_v].min
-    @value = value
   end
 
   def sign
@@ -936,18 +872,6 @@ class TextConstant < AbstractValueElement
     quoted = '"' + unquoted + '"'
     token = TextConstantToken.new(quoted)
     TextConstant.new(token)
-  end
-
-  def maximum(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in maximum()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    TextConstant.new([@value, other.to_v].max)
-  end
-
-  def minimum(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in minimum()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    TextConstant.new([@value, other.to_v].min)
   end
 
   def to_s

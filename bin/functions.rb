@@ -342,6 +342,35 @@ class FunctionDet < AbstractMatrixFunction
   end
 end
 
+# function ERL
+class FunctionErl < AbstractScalarFunction
+  def initialize(text)
+    super
+
+    @signature_0 = []
+    @signature_1 = [{ 'type' => 'numeric', 'shape' => 'scalar' }]
+  end
+
+  # return a single value
+  def evaluate(interpreter, stack)
+    if previous_is_array(stack)
+      args = stack.pop
+
+      if match_args_to_signature(args, @signature_0)
+        arg = NumericConstant.new(0)
+        interpreter.error_line(arg)
+      elsif match_args_to_signature(args, @signature_1)
+        interpreter.error_line(args[0])
+      else
+        raise(BASICRuntimeError, 'Wrong arguments for function')
+      end
+    else
+      arg = NumericConstant.new(0)
+      interpreter.error_line(arg)
+    end
+  end
+end
+
 # function EXP
 class FunctionExp < AbstractScalarFunction
   def initialize(text)
@@ -984,6 +1013,7 @@ class FunctionFactory
     'CON' => FunctionCon,
     'COS' => FunctionCos,
     'DET' => FunctionDet,
+    'ERL' => FunctionErl,
     'EXP' => FunctionExp,
     'IDN' => FunctionIdn,
     'INSTR$' => FunctionInstr,

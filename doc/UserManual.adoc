@@ -31,6 +31,28 @@ Everything must be in upper case, except for text constants in PRINT statements.
 Commands ("RUN", "LIST"), statements ("PRINT", "LET"), function names, and variable names must be in upper case.
 Lower case causes an error.
 
+Cautions
+~~~~~~~~
+
+BASIC-1978 will not run every program that can run in BASIC-1973.
+BASIC-1973 is an interpreter designed to run programs for a collection of interpreters from the early 1970s.
+BASIC-1978 is designed to run programs for an early version of Microsoft BASIC.
+(Something prior to Microsoft's BASIC-80.)
+
+Absent from BASIC-1978 are:
+
+       The INPUT$ statement
+       The INPUT LINE statement
+       The constant PI
+       Hash constants (#J)
+       ASCII character constants SOH, ETX, ACK, etc.
+       The power operator ** (BASIC-1978 provides the caret ^ operator)
+       The MIN and MAX operators
+       The EXT$() function (BASIC-1978 provides the MID$() function)
+       Comments that begin with '!' (BASIC-1978 allows for comments with the single quote)
+       Three-letter abbreviations of statements
+       The use of '&' as a synonym for PRINT
+
 
 Running BASIC-1978
 ------------------
@@ -533,9 +555,6 @@ BASIC-1978 supports the following arithmetic operations for numeric expressions:
 |Multiplication |* |3
 |Division |/ |3
 |Exponent |^ |1
-|Exponent |** |1
-|Minimum |MIN |2
-|Maximum |MAX |2
 |==========
 
 BASIC-1978 supports the following operations for string expressions:
@@ -2236,3 +2255,92 @@ The detection algorithm is not perfect, and it is easy to write a program with a
 
 The algorithm may detect false positives - infinite loops when none exist.
 The DETECT_INFINITE_LOOP option, when set to FALSE, disables checks for infinite loops.
+
+Error codes
+-----------
+
+1	BREAK
+
+10	Invalid statement
+11	Invalid statement in function
+12	Program terminated without END
+13	Line number not found
+14	Line index out of range
+15	Cannot CHAIN due to error in target program
+
+20	DIM statement requires subscripts
+21	GOSUB without RETURN
+22	RETURN without GOSUB
+23	FOR without NEXT
+24	NEXT without FOR
+25	Implied NEXT without FOR
+
+31	RESUME without error
+32	Infinite loop detected
+33	Bad expression
+
+40	No print format
+41	Too few items for print format
+
+50	Uninitialized variable
+51	Cannot change locked variable
+
+60	Invalid type for boolean
+61	Invalid type for integer
+62	Invalid type for float
+63	Invalid type for string
+69	Unknown value type
+
+70	Types not compatible
+
+80	Invalid operator
+81	Text is not a number
+
+90	Divide by zero
+91	Value below minimum
+92	Value above maximum
+
+100	Variable has no dimensions
+101	Incorrect number of subscripts
+102	Subscript out of range
+
+110	Source is not an array
+111	Array must have 1 dimension
+112	Need dimension for array
+113	Too many dimensions for array
+
+120	Source is not a matrix
+121	Matrix must have 1 or 2 dimensions
+122	Need dimensions for matrix
+123	Too many dimensions for matrix
+
+130	Value list is empty
+131	Too few items
+132	Not enough values
+
+140	Function not defined
+141	Function requires arguments
+142	Function requires string with content
+143	Invalid value for argument
+144	Wrong count
+145	Wrong arguments for function
+146	Function requires array argument
+147	Function requires matrix argument
+148	Function requires square matrix argument
+
+150	Invalid transfer in/out of user function
+
+102	Value is not assignable
+
+160	Out of data
+
+170	Invalid file reference
+171	Invalid file number
+172	Invalid file name
+173	File not found
+174	Invalid file handle
+175	Unknown file handle
+176	Invalid input
+177	End of file
+178	Invalid file mode
+179	Inconsistent file operation

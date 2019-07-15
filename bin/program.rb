@@ -60,6 +60,10 @@ class LineNumber
   def to_s
     @line_number.to_s
   end
+
+  def to_i
+    @line_number
+  end
 end
 
 # line number range, in form start-end
