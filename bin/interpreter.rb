@@ -54,12 +54,15 @@ class Interpreter
   attr_reader :trace_out
   attr_reader :start_time
 
-  def initialize(console_io, randomize_option, respect_option, longnames_option)
+  def initialize(console_io)
     @randomizer = Random.new(1)
+    randomize_option = $options['randomize']
+    respect_option = $options['respect_randomize']
     @randomizer = Random.new if randomize_option.value && respect_option.value
 
     @quotes = ['"']
     @console_io = console_io
+    longnames_option = $options['long_names']
     @tokenbuilders = make_debug_tokenbuilders(longnames_option)
 
     @default_args = {}
@@ -130,12 +133,11 @@ class Interpreter
 
   public
 
-  def run(program, options)
+  def run(program)
     @program = program
 
-    @options = options
     @step_mode = false
-    trace = @options['trace'].value
+    trace = $options['trace'].value
     @trace_out = trace ? @console_io : @null_out
 
     @variables = {}
@@ -251,7 +253,7 @@ class Interpreter
   end
 
   def execute_a_statement
-    detect = @options['detect_infinite_loop'].value
+    detect = $options['detect_infinite_loop'].value
 
     raise(BASICRuntimeError, 'Infinite loop detected') if
       detect && @previous_line_indexes.include?(@current_line_index)
@@ -526,7 +528,7 @@ class Interpreter
   end
 
   def set_action(name, value)
-    @options[name].set(value)
+    $options[name].set(value)
 
     if name == 'trace'
       @trace_out = value ? @console_io : @null_out
@@ -548,7 +550,7 @@ class Interpreter
 
   # returns an Array of values
   def evaluate(parsed_expressions)
-    trace = @options['trace'].value
+    trace = $options['trace'].value
 
     result_values = []
     parsed_expressions.each do |parsed_expression|
@@ -612,7 +614,7 @@ class Interpreter
     upper_bound = upper_bound.to_v
     upper_bound = upper_bound.truncate
     upper_bound = 1 if upper_bound <= 0
-    upper_bound = 1 if @options['ignore_rnd_arg'].value
+    upper_bound = 1 if $options['ignore_rnd_arg'].value
     upper_bound = upper_bound.to_f
 
     clear_previous_lines
@@ -621,7 +623,7 @@ class Interpreter
   end
 
   def new_random
-    @randomizer = Random.new if @options['respect_randomize'].value
+    @randomizer = Random.new if $options['respect_randomize'].value
   end
 
   def error_line(item)
@@ -698,7 +700,7 @@ class Interpreter
       int_subscripts.size != dimensions.size
 
     # lower bound
-    lower_value = @options['base'].value
+    lower_value = $options['base'].value
     lower = NumericConstant.new(lower_value)
 
     # check subscript value against lower and upper bounds
@@ -747,7 +749,7 @@ class Interpreter
         default_type == 'string'
 
       unless @variables.key?(v)
-        if @options['require_initialized'].value
+        if $options['require_initialized'].value
           raise(BASICRuntimeError, "Uninitialized variable #{v}")
         end
         @variables[v] =
@@ -764,10 +766,10 @@ class Interpreter
 
     seen = @get_value_seen.include?(variable)
 
-    trace = @options['trace'].value
+    trace = $options['trace'].value
 
     if trace && !seen
-      provenance_option = @options['provenance'].value
+      provenance_option = $options['provenance'].value
       if provenance_option && !provenance.nil?
         text = ' ' + variable.to_s + ': (' + provenance.to_s + ') ' + value.to_s
       else
@@ -795,7 +797,7 @@ class Interpreter
           "#{variable.class}:#{variable} is not a variable name") unless
       legals.include?(variable.class.to_s)
 
-    if @options['lock_fornext'].value &&
+    if $options['lock_fornext'].value &&
        @locked_variables.include?(variable)
       raise(BASICRuntimeError, "Cannot change locked variable #{variable}")
     end
@@ -863,7 +865,7 @@ class Interpreter
   end
 
   def lock_variable(variable)
-    return unless @options['lock_fornext'].value
+    return unless $options['lock_fornext'].value
 
     if @locked_variables.include?(variable)
       raise(BASICRuntimeError,
@@ -874,7 +876,7 @@ class Interpreter
   end
 
   def unlock_variable(variable)
-    return unless @options['lock_fornext'].value
+    return unless $options['lock_fornext'].value
 
     unless @locked_variables.include?(variable)
       raise(BASICRuntimeError,
@@ -988,22 +990,22 @@ class Interpreter
   end
 
   def int_floor?
-    @options['int_floor'].value
+    $options['int_floor'].value
   end
 
   def base
-    @options['base'].value
+    $options['base'].value
   end
 
   def if_false_next_line
-    @options['if_false_next_line'].value
+    $options['if_false_next_line'].value
   end
 
   def asc_allow_all
-    @options['asc_allow_all'].value
+    $options['asc_allow_all'].value
   end
 
   def chr_allow_all
-    @options['chr_allow_all'].value
+    $options['chr_allow_all'].value
   end
 end
