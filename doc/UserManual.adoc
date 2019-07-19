@@ -756,7 +756,7 @@ The CLOSE command should not be used with files opened with a FILES command.
 DATA
 ~~~~
 
-Specifies values for READ or MAT READ statements
+Specifies values for READ, ARR READ, and MAT READ statements
 
 Syntax:	DATA value list
 
@@ -1673,7 +1673,6 @@ ARR statements
 
 The ARR statements operate on one-dimensional arrays.
 Operations begin with the index specified in OPTION BASE.
-This is unlike the MAT statements, which always begin with index 1.
 
 ARR PRINT
 ~~~~~~~~~
@@ -1854,16 +1853,13 @@ Text operations are available for certain combinations of operands:
 |==========
 
 Ahl makes no mention of the 'ARR' statement or any derived statements ('ARR PRINT', 'ARR READ').
-But it makes sense to include them.
+I think that it makes sense to include them.
 
 MAT statements
 --------------
 
 The MAT statements operate on matricies, which are either one- or two-dimensional arrays.
-
-Operations begin with indices of one, not zero.
-The values in the zero row and the zero column are ignored in MAT operations.
-This behavior is not changed with the OPTION BASE statement.
+Operations begin with the index specified in OPTION BASE.
 
 MAT PRINT
 ~~~~~~~~~
