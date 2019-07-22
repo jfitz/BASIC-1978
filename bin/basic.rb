@@ -3,7 +3,6 @@
 require 'benchmark'
 require 'optparse'
 require 'singleton'
-require 'io/console'
 
 require_relative 'exceptions'
 require_relative 'tokens'
@@ -307,9 +306,7 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
 
   long_names = options['long_names'].value
   tokenbuilders << VariableTokenBuilder.new(long_names)
-
   tokenbuilders << ListTokenBuilder.new(%w(TRUE FALSE), BooleanConstantToken)
-
   tokenbuilders << WhitespaceTokenBuilder.new
 end
 
@@ -320,7 +317,8 @@ def make_command_tokenbuilders(options, quotes)
     BREAK CROSSREF DELETE DIMS EXIT LIST LOAD NEW OPTION PARSE PRETTY
     PROFILE RENUMBER RUN SAVE TOKENS UDFS VARS
     APOSTROPHE_COMMENT ASC_ALLOW_ALL
-    BACK_TAB BASE
+    BACK_TAB
+    BASE
     CHR_ALLOW_ALL
     DECIMALS DEFAULT_PROMPT DETECT_INFINITE_LOOP
     ECHO EPSILON HEADING

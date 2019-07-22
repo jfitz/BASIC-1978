@@ -418,7 +418,7 @@ class NumericConstant < AbstractValueElement
       f = t[1].ord if !t.empty? && t[0] == '#'
     end
 
-    raise BASICRuntimeError, "'#{text}' is not a number" if f.nil?
+    raise(BASICRuntimeError, "'#{text}' is not a number") if f.nil?
 
     epsilon = $options['epsilon'].value
     f = 0 if f.abs < epsilon

@@ -1331,7 +1331,7 @@ class UserFunctionPrototype
 
   # verify tokens are UserFunction, open, close
   def check_tokens(tokens)
-    raise(BASICExpressionError, 'Invalid function specification') unless
+    raise(BASICSyntaxError, 'Invalid function specification') unless
       tokens.size >= 3 && tokens[0].user_function? &&
       tokens[1].groupstart? && tokens[-1].groupend?
   end
@@ -1347,7 +1347,7 @@ class UserFunctionPrototype
     separators = params.values_at(* params.each_index.select(&:odd?))
 
     separators.each do |separator|
-      raise(BASICExpressionError, 'Invalid list separator') unless
+      raise(BASICSyntaxError, 'Invalid list separator') unless
         separator.separator?
     end
 
