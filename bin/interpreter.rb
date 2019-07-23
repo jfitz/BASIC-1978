@@ -745,6 +745,7 @@ class Interpreter
       v = variable.to_s
       default_type = variable.content_type
       default_value = NumericConstant.new(0)
+
       default_value = TextConstant.new(TextConstantToken.new('""')) if
         default_type == 'string'
 
@@ -752,6 +753,8 @@ class Interpreter
         if $options['require_initialized'].value
           raise(BASICRuntimeError, "Uninitialized variable #{v}")
         end
+
+        # define a value for this variable
         @variables[v] =
           {
             'provenance' => @current_line_index,
