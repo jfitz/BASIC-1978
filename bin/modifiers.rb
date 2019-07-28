@@ -19,6 +19,24 @@ class IfModifier
     ' ENDIF'
   end
   
+  def numerics
+    nums = []
+    nums += @expression.numerics unless @expression.nil?
+    nums
+  end
+
+  def strings
+    strs = []
+    strs += @expression.strings unless @expression.nil?
+    strs
+  end
+
+  def variables
+    vars = []
+    vars += @expression.variables unless @expression.nil?
+    vars
+  end
+
   def execute_pre(interpreter)
     io = interpreter.trace_out
 
@@ -89,11 +107,8 @@ class ForModifier
     @start = ValueScalarExpression.new(start_tokens)
     @end = ValueScalarExpression.new(end_tokens)
 
-    if step_tokens.nil?
-      @step = nil
-    else
-      @step = ValueScalarExpression.new(step_tokens)
-    end
+    @step = nil
+    @step = ValueScalarExpression.new(step_tokens) unless step_tokens.nil?
   end
 
   def pretty
@@ -116,6 +131,27 @@ class ForModifier
     " NEXT #{@control}"
   end
   
+  def numerics
+    nums = @start.numerics + @end.numerics
+    nums += @step.numerics unless @step.nil?
+    nums
+  end
+  
+  def strings
+    strs = @start.strings + @end.strings
+    strs += @step.strings unless @step.nil?
+    strs
+  end
+  
+  def variables
+    vars = []
+    vars << @control.to_s
+    vars += @start.variables
+    vars += @end.variables
+    vars += @step.variables unless @step.nil?
+    vars
+  end
+
   def execute_pre(interpreter)
     start_values = @start.evaluate(interpreter)
     start_value = start_values[0]

@@ -100,7 +100,6 @@
  control: VariableName:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C", "NumericConstant:1", "BinaryOperator:-"]
- step:    ["NumericConstant:1"]
 100 IF LEN(B$(X))>L THEN L=LEN(B$(X))
  ScalarValue:X
  ScalarValue:B$
@@ -134,12 +133,10 @@
  control: VariableName:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C"]
- step:    ["NumericConstant:1"]
 150 FOR Y=1 TO LEN(B$(X))
  control: VariableName:Y
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:X", "ScalarValue:B$", "FunctionLen"]
- step:    ["NumericConstant:1"]
 160 IF MID$(B$(X),Y,1)<>" " THEN A(X1+X,Y1+Y)=1:P=P+1
  ScalarValue:X
  ScalarValue:B$
@@ -213,7 +210,6 @@
  control: VariableName:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:X1", "NumericConstant:1", "BinaryOperator:-"]
- step:    ["NumericConstant:1"]
  ITEMS
  CarriageControl:NL
  VariableName:X
@@ -221,7 +217,6 @@
  control: VariableName:X
  start:   ["ScalarValue:X1"]
  end:     ["ScalarValue:X2"]
- step:    ["NumericConstant:1"]
 240 PRINT
  ITEMS
  CarriageControl:NL
@@ -229,7 +224,6 @@
  control: VariableName:Y
  start:   ["ScalarValue:Y1"]
  end:     ["ScalarValue:Y2"]
- step:    ["NumericConstant:1"]
 253 IF A(X,Y)=2 THEN A(X,Y)=0:GOTO 270
  ScalarValue:X
  ScalarValue:Y
@@ -303,7 +297,6 @@
  control: VariableName:X
  start:   ["ScalarValue:X2", "NumericConstant:1", "BinaryOperator:+"]
  end:     ["NumericConstant:24"]
- step:    ["NumericConstant:1"]
  ITEMS
  CarriageControl:NL
  VariableName:X
@@ -372,12 +365,10 @@
  control: VariableName:X
  start:   ["ScalarValue:X1", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:X2", "NumericConstant:1", "BinaryOperator:+"]
- step:    ["NumericConstant:1"]
 510 FOR Y=Y1-1 TO Y2+1
  control: VariableName:Y
  start:   ["ScalarValue:Y1", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:Y2", "NumericConstant:1", "BinaryOperator:+"]
- step:    ["NumericConstant:1"]
 520 C=0
  ScalarReference:C
  NumericConstant:0
@@ -386,12 +377,10 @@
  control: VariableName:I
  start:   ["ScalarValue:X", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:X", "NumericConstant:1", "BinaryOperator:+"]
- step:    ["NumericConstant:1"]
 540 FOR J=Y-1 TO Y+1
  control: VariableName:J
  start:   ["ScalarValue:Y", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:Y", "NumericConstant:1", "BinaryOperator:+"]
- step:    ["NumericConstant:1"]
 550 IF A(I,J)=1 OR A(I,J)=2 THEN C=C+1
  ScalarValue:I
  ScalarValue:J
