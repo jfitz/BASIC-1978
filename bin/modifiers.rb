@@ -1,10 +1,14 @@
 # IF
 class IfModifier
   attr_reader :errors
+  attr_reader :numerics
+  attr_reader :strings
 
   def initialize(expression_tokens)
     @errors = []
     @expression = parse_expression(expression_tokens)
+    @numerics = @expression.numerics
+    @strings = @expression.strings
   end
 
   def pretty
@@ -19,18 +23,6 @@ class IfModifier
     ' ENDIF'
   end
   
-  def numerics
-    nums = []
-    nums += @expression.numerics unless @expression.nil?
-    nums
-  end
-
-  def strings
-    strs = []
-    strs += @expression.strings unless @expression.nil?
-    strs
-  end
-
   def variables
     vars = []
     vars += @expression.variables unless @expression.nil?
@@ -84,6 +76,8 @@ end
 # FOR
 class ForModifier
   attr_reader :errors
+  attr_reader :numerics
+  attr_reader :strings
 
   def initialize(control_and_start_tokens, end_tokens, step_tokens)
     @errors = []
@@ -109,6 +103,14 @@ class ForModifier
 
     @step = nil
     @step = ValueScalarExpression.new(step_tokens) unless step_tokens.nil?
+
+    if @step.nil?
+      @numerics = @start.numerics + @end.numerics
+      @strings = @start.strings + @end.strings
+    else
+      @numerics = @start.numerics + @end.numerics + @step.numerics
+      @strings = @start.strings + @end.strings + @step.strings
+    end
   end
 
   def pretty
@@ -129,18 +131,6 @@ class ForModifier
 
   def post_trace
     " NEXT #{@control}"
-  end
-  
-  def numerics
-    nums = @start.numerics + @end.numerics
-    nums += @step.numerics unless @step.nil?
-    nums
-  end
-  
-  def strings
-    strs = @start.strings + @end.strings
-    strs += @step.strings unless @step.nil?
-    strs
   end
   
   def variables
