@@ -3,12 +3,14 @@ class IfModifier
   attr_reader :errors
   attr_reader :numerics
   attr_reader :strings
+  attr_reader :variables
 
   def initialize(expression_tokens)
     @errors = []
     @expression = parse_expression(expression_tokens)
     @numerics = @expression.numerics
     @strings = @expression.strings
+    @variables = @expression.variables
   end
 
   def pretty
@@ -23,12 +25,6 @@ class IfModifier
     ' ENDIF'
   end
   
-  def variables
-    vars = []
-    vars += @expression.variables unless @expression.nil?
-    vars
-  end
-
   def execute_pre(interpreter)
     io = interpreter.trace_out
 
@@ -78,6 +74,7 @@ class ForModifier
   attr_reader :errors
   attr_reader :numerics
   attr_reader :strings
+  attr_reader :variables
 
   def initialize(control_and_start_tokens, end_tokens, step_tokens)
     @errors = []
@@ -107,9 +104,11 @@ class ForModifier
     if @step.nil?
       @numerics = @start.numerics + @end.numerics
       @strings = @start.strings + @end.strings
+      @variables = [@control.to_s] + @start.variables + @end.variables
     else
       @numerics = @start.numerics + @end.numerics + @step.numerics
       @strings = @start.strings + @end.strings + @step.strings
+      @variables = [@control.to_s] + @start.variables + @end.variables + @step.variables
     end
   end
 
@@ -133,15 +132,6 @@ class ForModifier
     " NEXT #{@control}"
   end
   
-  def variables
-    vars = []
-    vars << @control.to_s
-    vars += @start.variables
-    vars += @end.variables
-    vars += @step.variables unless @step.nil?
-    vars
-  end
-
   def execute_pre(interpreter)
     start_values = @start.evaluate(interpreter)
     start_value = start_values[0]

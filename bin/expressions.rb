@@ -1246,7 +1246,10 @@ end
 # Target expression
 class TargetExpression < AbstractExpression
   def initialize(tokens, type)
-    super(tokens, ScalarValue)
+    valuetype = ScalarValue
+    valuetype = ArrayValue if type == ArrayReference
+    valuetype = MatrixValue if type == MatrixReference
+    super(tokens, valuetype)
 
     check_length
     check_all_lengths
@@ -1280,6 +1283,8 @@ class TargetExpression < AbstractExpression
   def check_resolve_types
     @parsed_expressions.each do |parsed_expression|
       if parsed_expression[-1].class.to_s != 'ScalarValue' &&
+         parsed_expression[-1].class.to_s != 'ArrayValue' &&
+         parsed_expression[-1].class.to_s != 'MatrixValue' &&
          parsed_expression[-1].class.to_s != 'UserFunction'
         raise(BASICRuntimeError,
               "Value is not assignable (type #{parsed_expression[-1].class})")
@@ -1294,6 +1299,9 @@ class UserFunctionDefinition
   attr_reader :name
   attr_reader :arguments
   attr_reader :expression
+  attr_reader :numerics
+  attr_reader :strings
+  attr_reader :variables
 
   def initialize(tokens)
     # parse into name '=' expression
@@ -1308,16 +1316,15 @@ class UserFunctionDefinition
     @arguments = user_function_prototype.arguments
     @expression = nil
     @expression = ValueScalarExpression.new(parts[2]) if parts.size == 3
+    if !@expression.nil?
+      @numerics = @expression.numerics
+      @strings = @expression.strings
+      @variables = @expression.variables
+    end
   end
 
   def multidef?
     @expression.nil?
-  end
-
-  def dump
-    lines = []
-    lines += @expression.dump unless @expression.nil?
-    lines
   end
 
   def signature
@@ -1335,16 +1342,10 @@ class UserFunctionDefinition
     sig
   end
 
-  def numerics
-    @expression.numerics
-  end
-
-  def strings
-    @expression.strings
-  end
-
-  def variables
-    @expression.variables
+  def dump
+    lines = []
+    lines += @expression.dump unless @expression.nil?
+    lines
   end
 
   private
