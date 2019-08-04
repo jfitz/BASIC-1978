@@ -747,97 +747,6 @@ module FileFunctions
   end
 end
 
-# common functions for INPUT statements
-module InputFunctions
-  def dump
-    lines = []
-    @input_items.each { |item| lines += item.dump } unless @input_items.nil?
-    lines
-  end
-
-  def numerics
-    nums = []
-    nums += @file_tokens.numerics unless @file_tokens.nil?
-    @input_items.each { |item| nums += item.numerics } unless @input_items.nil?
-    nums
-  end
-  
-  def strings
-    strs = []
-    strs += @prompt.strings unless @prompt.nil?
-    strs += @file_tokens.strings unless @file_tokens.nil?
-    @input_items.each { |item| strs += item.strings } unless @input_items.nil?
-    strs
-  end
-  
-  def variables
-    vars = []
-    vars += @file_tokens.variables unless @file_tokens.nil?
-    @input_items.each { |item| vars += item.variables } unless @input_items.nil?
-    vars
-  end
-
-  private
-
-  def extract_prompt(print_items)
-    print_items = print_items.clone
-    prompt = nil
-
-    unless print_items.empty? ||
-           print_items[0].carriage_control?
-
-      candidate_prompt_tokens = print_items[0]
-
-      if candidate_prompt_tokens.text_constant?
-        prompt = print_items.shift
-
-        print_items.shift if
-          !print_items.empty? &&
-          print_items[0].carriage_control?
-      end
-    end
-
-    [prompt, print_items]
-  end
-
-  def tokens_to_expressions(tokens_lists)
-    print_items = []
-
-    tokens_lists.each do |tokens_list|
-      if tokens_list.class.to_s == 'Array'
-        add_expression(print_items, tokens_list)
-      end
-    end
-
-    print_items
-  end
-
-  def add_expression(print_items, tokens)
-    if tokens[0].operator? && tokens[0].to_s == '#'
-      print_items << ValueScalarExpression.new(tokens)
-    elsif tokens[0].text_constant?
-      print_items << ValueScalarExpression.new(tokens)
-    else
-      print_items << TargetExpression.new(tokens, ScalarReference)
-    end
-
-  rescue BASICExpressionError
-    line_text = tokens.map(&:to_s).join
-    @errors << 'Syntax error: "' + line_text + '" is not a value or operator'
-  end
-
-  def zip(names, values)
-    raise(BASICRuntimeError, 'Too few items') if values.size < names.size
-
-    results = []
-    (0...names.size).each do |i|
-      results << { 'name' => names[i], 'value' => values[i] }
-    end
-
-    results
-  end
-end
-
 # CHAIN
 class ChainStatement < AbstractStatement
   def self.lead_keywords
@@ -1816,15 +1725,100 @@ class IfStatement < AbstractStatement
   end
 end
 
+# common functions for INPUT statements
+class AbstractInputStatement < AbstractStatement
+  def initialize(_, _)
+    super
+  end
+
+  def dump
+    lines = []
+    @input_items.each { |item| lines += item.dump } unless @input_items.nil?
+    lines
+  end
+
+  def make_references
+    @numerics = @file_tokens.numerics unless @file_tokens.nil?
+    @input_items.each { |item| @numerics += item.numerics }
+
+    @strings = @prompt.strings unless @prompt.nil?
+    @strings += @file_tokens.strings unless @file_tokens.nil?
+    @input_items.each { |item| @strings += item.strings }
+
+    @variables = @file_tokens.variables unless @file_tokens.nil?
+    @input_items.each { |item| @variables += item.variables }
+  end
+
+  private
+
+  def extract_prompt(print_items)
+    print_items = print_items.clone
+    prompt = nil
+
+    unless print_items.empty? ||
+           print_items[0].carriage_control?
+
+      candidate_prompt_tokens = print_items[0]
+
+      if candidate_prompt_tokens.text_constant?
+        prompt = print_items.shift
+
+        print_items.shift if
+          !print_items.empty? &&
+          print_items[0].carriage_control?
+      end
+    end
+
+    [prompt, print_items]
+  end
+
+  def tokens_to_expressions(tokens_lists)
+    print_items = []
+
+    tokens_lists.each do |tokens_list|
+      if tokens_list.class.to_s == 'Array'
+        add_expression(print_items, tokens_list)
+      end
+    end
+
+    print_items
+  end
+
+  def add_expression(print_items, tokens)
+    if tokens[0].operator? && tokens[0].to_s == '#'
+      print_items << ValueScalarExpression.new(tokens)
+    elsif tokens[0].text_constant?
+      print_items << ValueScalarExpression.new(tokens)
+    else
+      print_items << TargetExpression.new(tokens, ScalarReference)
+    end
+
+  rescue BASICExpressionError
+    line_text = tokens.map(&:to_s).join
+    @errors << 'Syntax error: "' + line_text + '" is not a value or operator'
+  end
+
+  def zip(names, values)
+    raise(BASICRuntimeError, 'Too few items') if values.size < names.size
+
+    results = []
+    (0...names.size).each do |i|
+      results << { 'name' => names[i], 'value' => values[i] }
+    end
+
+    results
+  end
+end
+
 # INPUT
-class InputStatement < AbstractStatement
+class InputStatement < AbstractInputStatement
   def self.lead_keywords
     [
       [KeywordToken.new('INPUT')]
     ]
   end
 
-  def initialize(keywords, tokens_lists)
+  def initialize(_, tokens_lists)
     super
 
     extract_modifiers(tokens_lists)
@@ -1842,18 +1836,13 @@ class InputStatement < AbstractStatement
         @input_items = @input_items[1..-1]
       end
 
-      @numerics = @file_tokens.numerics unless @file_tokens.nil?
-      @input_items.each { |item| @numerics += item.numerics }
-      @strings = @prompt.strings unless @prompt.nil?
-      @strings += @file_tokens.strings unless @file_tokens.nil?
-      @input_items.each { |item| @strings += item.strings }
+      make_references
     else
       @errors << 'Syntax error'
     end
   end
 
   include FileFunctions
-  include InputFunctions
 
   def execute_core(interpreter)
     fh = get_file_handle(interpreter, @file_tokens)
@@ -1988,7 +1977,7 @@ class LetLessStatement < AbstractScalarLetStatement
 end
 
 # LINE INPUT
-class LineInputStatement < AbstractStatement
+class LineInputStatement < AbstractInputStatement
   def self.lead_keywords
     [
       [KeywordToken.new('LINE'), KeywordToken.new('INPUT')],
@@ -1996,7 +1985,7 @@ class LineInputStatement < AbstractStatement
     ]
   end
 
-  def initialize(keywords, tokens_lists)
+  def initialize(_, tokens_lists)
     super
 
     extract_modifiers(tokens_lists)
@@ -2014,18 +2003,13 @@ class LineInputStatement < AbstractStatement
         @input_items = @input_items[1..-1]
       end
 
-      @numerics = @file_tokens.numerics unless @file_tokens.nil?
-      @input_items.each { |item| @numerics += item.numerics }
-      @strings = @prompt.strings unless @prompt.nil?
-      @strings += @file_tokens.strings unless @file_tokens.nil?
-      @input_items.each { |item| @strings += item.strings }
+      make_references
     else
       @errors << 'Syntax error'
     end
   end
 
   include FileFunctions
-  include InputFunctions
 
   def execute_core(interpreter)
     fh = get_file_handle(interpreter, @file_tokens)
