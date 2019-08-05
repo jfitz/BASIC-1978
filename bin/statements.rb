@@ -1183,7 +1183,8 @@ class ForStatement < AbstractStatement
         @step_value = nil
         @numerics = @start.numerics + @end.numerics
         @strings = @start.strings + @end.strings
-        @variables = [@control.to_s] + @start.variables + @end.variables
+        control = XrefEntry.new(@control.to_s, 0, true)
+        @variables = [control] + @start.variables + @end.variables
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -1196,8 +1197,9 @@ class ForStatement < AbstractStatement
         @step_value = ValueScalarExpression.new(tokens_lists[4])
         @numerics = @start.numerics + @end.numerics + @step_value.numerics
         @strings = @start.strings + @end.strings + @step_value.strings
-        @variables = [@control.to_s] + @start.variables + @end.variables + @step_value.variables
-      rescue BASICExpressionError => e
+        control = XrefEntry.new(@control.to_s, 0, true)
+        @variables = [control] + @start.variables + @end.variables + @step_value.variables
+     rescue BASICExpressionError => e
         @errors << e.message
       end
     else
@@ -2084,7 +2086,8 @@ class NextStatement < AbstractStatement
         elsif tokens.size == 1 && tokens[0].variable?
           control = VariableName.new(tokens[0])
           @controls << control
-          @variables += [control.to_s]
+          controlx = XrefEntry.new(control.to_s, 0, false)
+          @variables += [controlx]
         else
           @errors << "Invalid control variable #{tokens[0]}"
         end
