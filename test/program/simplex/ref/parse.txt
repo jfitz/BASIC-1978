@@ -33,14 +33,14 @@
  Remark:BUILD COEFFICIENTS FOR EXPANDED OBJECTIVE FUNCTION
 111 DIM C(N1)
  ScalarValue:N1
- CompoundDeclaration:C
+ Declaration:C
 112 ARR READ C
  ArrayReference:C
 113 DIM C(N1+N2)' EXPAND TO INCLUDE SLACK VARIABLES
  ScalarValue:N1
  ScalarValue:N2
  BinaryOperator:+
- CompoundDeclaration:C
+ Declaration:C
 114 C(J) = 0 FOR J = N1 + 1 TO N1+N2
  ScalarValue:J
  ScalarReference:C
@@ -52,7 +52,7 @@
  ScalarValue:N1
  ScalarValue:N2
  BinaryOperator:+
- CompoundDeclaration:C$
+ Declaration:C$
 122 FOR I = 1 TO N1
  control: VariableName:I
  start:   ["NumericConstant:1"]
@@ -102,7 +102,7 @@
 141 DIM X(N2, N1)
  ScalarValue:N2
  ScalarValue:N1
- CompoundDeclaration:X
+ Declaration:X
 142 MAT READ X
  MatrixReference:X
 143 DIM X(N2, N1+N2)' EXPAND TO INCLUDE SLACK VARIABLES
@@ -110,7 +110,7 @@
  ScalarValue:N1
  ScalarValue:N2
  BinaryOperator:+
- CompoundDeclaration:X
+ Declaration:X
 144 X(I,J) = 0 FOR J = N1+1 TO N1+N2 FOR I = 1 TO N2
  ScalarValue:I
  ScalarValue:J
@@ -129,14 +129,14 @@
  Remark:BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
 161 DIM B(N2)
  ScalarValue:N2
- CompoundDeclaration:B
+ Declaration:B
 162 ARR READ B
  ArrayReference:B
 170 REM COPY COEFFICIENTS FOR BASIC VARIABLES
  Remark:COPY COEFFICIENTS FOR BASIC VARIABLES
 171 DIM R(N2)
  ScalarValue:N2
- CompoundDeclaration:R
+ Declaration:R
 172 R(I) = 0 FOR I = 1 TO N2
  ScalarValue:I
  ScalarReference:R
@@ -210,7 +210,7 @@
  ScalarValue:N1
  ScalarValue:N2
  BinaryOperator:+
- CompoundDeclaration:Z
+ Declaration:Z
 302 Z(J) = 0 FOR J = 1 TO N1+N2
  ScalarValue:J
  ScalarReference:Z
@@ -285,7 +285,7 @@
  Remark:EVALUATE BASIC VARIABLES
 331 DIM W(N2)
  ScalarValue:N2
- CompoundDeclaration:W
+ Declaration:W
 332 W(I) = 0 FOR I = 1 TO N2
  ScalarValue:I
  ScalarReference:W

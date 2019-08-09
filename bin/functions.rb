@@ -1,5 +1,5 @@
 # function (provides a result)
-class Function < AbstractElement
+class AbstractFunction < AbstractElement
   attr_reader :name
 
   def initialize(text)
@@ -92,13 +92,41 @@ class Function < AbstractElement
 end
 
 # Function that expects scalar parameters
-class AbstractScalarFunction < Function
+class AbstractScalarFunction < AbstractFunction
   def initialize(text)
     super
   end
 
   def default_type
     ScalarValue
+  end
+end
+
+# Function that expects array parameters
+class AbstractArrayFunction < AbstractFunction
+  def initialize(text)
+    super
+  end
+
+  def default_type
+    ArrayValue
+  end
+end
+
+# Function that expects matrix parameters
+class AbstractMatrixFunction < AbstractFunction
+  def initialize(text)
+    super
+  end
+
+  def default_type
+    MatrixValue
+  end
+
+  def check_square(dims)
+    raise(BASICRuntimeError, @name + ' requires matrix') unless dims.size == 2
+    raise(BASICRuntimeError, @name + ' requires square matrix') unless
+      dims[1] == dims[0]
   end
 end
 
@@ -146,34 +174,6 @@ class UserFunction < AbstractScalarFunction
     else
       raise(BASICRuntimeError, 'Wrong arguments for function')
     end
-  end
-end
-
-# Function that expects array parameters
-class AbstractArrayFunction < Function
-  def initialize(text)
-    super
-  end
-
-  def default_type
-    ArrayValue
-  end
-end
-
-# Function that expects matrix parameters
-class AbstractMatrixFunction < Function
-  def initialize(text)
-    super
-  end
-
-  def default_type
-    MatrixValue
-  end
-
-  def check_square(dims)
-    raise(BASICRuntimeError, @name + ' requires matrix') unless dims.size == 2
-    raise(BASICRuntimeError, @name + ' requires square matrix') unless
-      dims[1] == dims[0]
   end
 end
 
@@ -903,7 +903,7 @@ class FunctionTan < AbstractScalarFunction
 end
 
 # function TIME
-class FunctionTime < AbstractMatrixFunction
+class FunctionTime < AbstractScalarFunction
   def initialize(text)
     super
 

@@ -1055,7 +1055,7 @@ class DimStatement < AbstractStatement
       tokens_lists.each do |tokens_list|
         begin
           @expression_list <<
-            TargetExpression.new(tokens_list, CompoundDeclaration)
+            TargetExpression.new(tokens_list, Declaration)
         rescue BASICExpressionError
           @errors << 'Invalid variable ' + tokens_list.map(&:to_s).join
         end
