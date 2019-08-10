@@ -1,10 +1,7 @@
 # Scalar value (not a matrix)
 class ScalarValue < Value
   def initialize(variable_name)
-    super
-
-    @scalar = true
-    @value = true
+    super(variable_name, :scalar)
   end
 
   # return a single value
@@ -36,10 +33,7 @@ end
 # Scalar reference (not a matrix)
 class ScalarReference < Reference
   def initialize(variable_value)
-    super(variable_value.name)
-
-    @scalar = true
-    @reference = true
+    super(variable_value.name, :scalar)
   end
 
   # return a single value, a reference to this object
@@ -629,10 +623,7 @@ end
 # Array value
 class ArrayValue < Value
   def initialize(variable_name)
-    super
-
-    @array = true
-    @value = true
+    super(variable_name, :array)
   end
 
   def evaluate(interpreter, _)
@@ -651,7 +642,7 @@ class ArrayValue < Value
     base = interpreter.base
     (base..n_cols).each do |col|
       coords = make_coord(col)
-      variable = Value.new(@variable_name, coords)
+      variable = Value.new(@variable_name, :array, coords)
       values[coords] = interpreter.get_value(variable)
     end
 
@@ -661,7 +652,7 @@ end
 
 # Compound variable (array or matrix) reference
 class CompoundReference < Reference
-  def initialize(name)
+  def initialize(name, type)
     super
   end
 
@@ -695,20 +686,14 @@ end
 # Array reference
 class ArrayReference < CompoundReference
   def initialize(variable_value)
-    super(variable_value.name)
-
-    @array = true
-    @reference = true
+    super(variable_value.name, :array)
   end
 end
 
 # Matrix value
 class MatrixValue < Value
   def initialize(variable_name)
-    super
-
-    @matrix = true
-    @value = true
+    super(variable_name, :matrix)
   end
 
   def evaluate(interpreter, _)
@@ -737,7 +722,7 @@ class MatrixValue < Value
 
     (base..n_cols).each do |col|
       coords = make_coord(col)
-      variable = Value.new(@variable_name, coords)
+      variable = Value.new(@variable_name, :matrix, coords)
       values[coords] = interpreter.get_value(variable)
     end
 
@@ -752,7 +737,7 @@ class MatrixValue < Value
     (base..n_rows).each do |row|
       (base..n_cols).each do |col|
         coords = make_coords(row, col)
-        variable = Value.new(@variable_name, coords)
+        variable = Value.new(@variable_name, :matrix, coords)
         values[coords] = interpreter.get_value(variable)
       end
     end
@@ -764,10 +749,7 @@ end
 # Matrix reference
 class MatrixReference < CompoundReference
   def initialize(variable_value)
-    super(variable_value.name)
-
-    @matrix = true
-    @reference = true
+    super(variable_value.name, :matrix)
   end
 end
 

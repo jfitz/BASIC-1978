@@ -850,7 +850,7 @@ class ChangeStatement < AbstractStatement
 
       target_variable_token = VariableToken.new(@target.to_s)
       target_variable_name = VariableName.new(target_variable_token)
-      target_variable = Reference.new(target_variable_name)
+      target_variable = Reference.new(target_variable_name, :array)
       interpreter.set_dimensions(target_variable, dims)
 
       values = array.values(interpreter)
@@ -875,7 +875,7 @@ class ChangeStatement < AbstractStatement
       values = {}
       (0..cols).each do |col|
         column = IntegerConstant.new(col)
-        variable = Value.new(source_variable_name, [column])
+        variable = Value.new(source_variable_name, :scalar, [column])
         coord = make_coord(col)
         values[coord] = interpreter.get_value(variable)
       end
