@@ -25,7 +25,7 @@ echo run finished
 
 # compare results
 echo Comparing stdout...
-diff "$TESTBED/$TESTNAME/stdout.txt" "$TESTROOT/$TESTGROUP/$TESTNAME/ref/stdout.txt"
+diff "$TESTROOT/$TESTGROUP/$TESTNAME/ref/stdout.txt" "$TESTBED/$TESTNAME/stdout.txt"
 ((ECODE+=$?))
 
 if [ $ECODE -ne 0 ]
