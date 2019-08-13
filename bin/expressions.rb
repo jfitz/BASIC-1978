@@ -1076,7 +1076,7 @@ class ValueScalarExpression < AbstractExpression
   def initialize(tokens)
     super(tokens, ScalarValue)
 
-    @scalar = true
+    @shape = :scalar
   end
 
   def printable?
@@ -1141,7 +1141,7 @@ class ValueArrayExpression < ValueCompoundExpression
   def initialize(tokens)
     super(tokens, ArrayValue)
 
-    @array = true
+    @shape = :array
   end
 end
 
@@ -1150,7 +1150,7 @@ class ValueMatrixExpression < ValueCompoundExpression
   def initialize(tokens)
     super(tokens, MatrixValue)
 
-    @matrix = true
+    @shape = :matrix
   end
 end
 
@@ -1239,9 +1239,9 @@ class UserFunctionDefinition
   end
 
   def signature
-    numeric_spec = { 'type' => 'numeric', 'shape' => 'scalar' }
-    text_spec = { 'type' => 'text', 'shape' => 'scalar' }
-    integer_spec = { 'type' => 'integer', 'shape' => 'scalar' }
+    numeric_spec = { 'type' => 'numeric', 'shape' => :scalar }
+    text_spec = { 'type' => 'text', 'shape' => :scalar }
+    integer_spec = { 'type' => 'integer', 'shape' => :scalar }
     sig = []
 
     @arguments.each do |arg|
@@ -1449,7 +1449,6 @@ class MatrixAssignment < AbstractAssignment
 
   def variables
     vars = @target.variables
-    vars += @expression.variables unless @special_form
-    vars
+    vars += @expression.variables
   end
 end

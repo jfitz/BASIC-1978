@@ -15,9 +15,7 @@ class AbstractElement
     @separator = false
     @file_handle = false
     @precedence = 10
-    @scalar = false
-    @array = false
-    @matrix = false
+    @shape = nil
     @list = false
     @carriage = false
     @value = false
@@ -92,15 +90,15 @@ class AbstractElement
   end
 
   def scalar?
-    @scalar
+    @shape == :scalar
   end
 
   def array?
-    @array
+    @shape == :array
   end
 
   def matrix?
-    @matrix
+    @shape == :matrix
   end
 
   def list?
@@ -240,7 +238,7 @@ class AbstractValueElement < AbstractElement
   def initialize
     super
 
-    @scalar = true
+    @shape = :scalar
     @value = nil
   end
 
@@ -1423,15 +1421,14 @@ class Value < Variable
     super(name, subscripts)
 
     @value = true
-    @scalar = true if shape == :scalar
-    @array = true if shape == :array
-    @matrix = true if shape == :matrix
+    @shape = shape
   end
 
   def evaluate(interpreter, stack)
-    x = evaluate_scalar(interpreter, stack) if @scalar
-    x = evaluate_array(interpreter, stack) if @array
-    x = evaluate_matrix(interpreter, stack) if @matrix
+    x = nil
+    x = evaluate_scalar(interpreter, stack) if @shape == :scalar
+    x = evaluate_array(interpreter, stack) if @shape == :array
+    x = evaluate_matrix(interpreter, stack) if @shape == :matrix
     x
   end
 
@@ -1534,14 +1531,14 @@ class Reference < Variable
     super(name, subscripts)
 
     @reference = true
-    @scalar = true if shape == :scalar
-    @array = true if shape == :array
-    @matrix = true if shape == :matrix
+    @shape = shape
   end
 
   def evaluate(interpreter, stack)
-    x = evaluate_scalar(interpreter, stack) if @scalar
-    x = evaluate_compound(interpreter, stack) if @array || @matrix
+    x = nil
+    x = evaluate_scalar(interpreter, stack) if @shape == :scalar
+    x = evaluate_compound(interpreter, stack) if
+      @shape == :array || @shape == :matrix
     x
   end
 
