@@ -815,10 +815,10 @@ class ChangeStatement < AbstractStatement
       case @source.content_type
       when :string
         # string to array
-        @target = TargetExpression.new(target_tokens, ArrayReference)
+        @target = TargetExpression.new(target_tokens, :array)
       when :numeric
         # array to string
-        @target = TargetExpression.new(target_tokens, ScalarReference)
+        @target = TargetExpression.new(target_tokens, :scalar)
       else
         raise BASICExpressionError, 'Type mismatch'
       end
@@ -1055,7 +1055,7 @@ class DimStatement < AbstractStatement
       tokens_lists.each do |tokens_list|
         begin
           @expression_list <<
-            TargetExpression.new(tokens_list, Declaration)
+            TargetExpression.new(tokens_list, :declaration)
         rescue BASICExpressionError
           @errors << 'Invalid variable ' + tokens_list.map(&:to_s).join
         end
@@ -1792,7 +1792,7 @@ class AbstractInputStatement < AbstractStatement
     elsif tokens[0].text_constant?
       print_items << ValueScalarExpression.new(tokens)
     else
-      print_items << TargetExpression.new(tokens, ScalarReference)
+      print_items << TargetExpression.new(tokens, :scalar)
     end
 
   rescue BASICExpressionError
@@ -2883,7 +2883,7 @@ class ReadStatement < AbstractReadStatement
     if tokens[0].operator? && tokens[0].to_s == '#'
       print_items << ValueScalarExpression.new(tokens)
     else
-      print_items << TargetExpression.new(tokens, ScalarReference)
+      print_items << TargetExpression.new(tokens, :scalar)
     end
 
   rescue BASICExpressionError
@@ -3299,7 +3299,7 @@ class ArrReadStatement < AbstractReadStatement
     if tokens[0].operator? && tokens[0].to_s == '#'
       print_items << ValueScalarExpression.new(tokens)
     else
-      print_items << TargetExpression.new(tokens, ArrayReference)
+      print_items << TargetExpression.new(tokens, :array)
     end
 
   rescue BASICExpressionError
@@ -3592,7 +3592,7 @@ class MatReadStatement < AbstractReadStatement
     if tokens[0].operator? && tokens[0].to_s == '#'
       print_items << ValueScalarExpression.new(tokens)
     else
-      print_items << TargetExpression.new(tokens, MatrixReference)
+      print_items << TargetExpression.new(tokens, :matrix)
     end
 
   rescue BASICExpressionError
