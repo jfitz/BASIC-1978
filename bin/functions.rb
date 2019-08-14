@@ -34,13 +34,13 @@ class AbstractFunction < AbstractElement
 
   def match_arg_type(value, type)
     case type
-    when 'numeric'
+    when :numeric
       compatible = value.numeric_constant?
-    when 'text'
+    when :string
       compatible = value.text_constant?
-    when 'integer'
+    when :integer
       compatible = value.numeric_constant?
-    when 'boolean'
+    when :boolean
       compatible = value.boolean_constant?
     else
       compatible = false
@@ -182,7 +182,7 @@ class FunctionAbs < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -200,7 +200,7 @@ class FunctionAsc < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'text', 'shape' => :scalar }]
+    @signature = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(interpreter, stack)
@@ -228,7 +228,7 @@ class FunctionAtn < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -246,7 +246,7 @@ class FunctionChr < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(interpreter, stack)
@@ -273,11 +273,11 @@ class FunctionCon < AbstractScalarFunction
     super
 
     @signature_0 = []
-    @signature_1 = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
     @signature_2 =
       [
-        { 'type' => 'numeric', 'shape' => :scalar },
-        { 'type' => 'numeric', 'shape' => :scalar }
+        { 'type' => :numeric, 'shape' => :scalar },
+        { 'type' => :numeric, 'shape' => :scalar }
       ]
   end
 
@@ -311,7 +311,7 @@ class FunctionCos < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -329,7 +329,7 @@ class FunctionDet < AbstractMatrixFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :matrix }]
+    @signature = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
   def evaluate(_, stack)
@@ -348,7 +348,7 @@ class FunctionErl < AbstractScalarFunction
     super
 
     @signature_0 = []
-    @signature_1 = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   # return a single value
@@ -376,7 +376,7 @@ class FunctionExp < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -394,7 +394,7 @@ class FunctionFrac < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   # return a single value
@@ -414,11 +414,11 @@ class FunctionIdn < AbstractScalarFunction
     super
 
     @signature_0 = []
-    @signature_1 = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
     @signature_2 =
       [
-        { 'type' => 'numeric', 'shape' => :scalar },
-        { 'type' => 'numeric', 'shape' => :scalar }
+        { 'type' => :numeric, 'shape' => :scalar },
+        { 'type' => :numeric, 'shape' => :scalar }
       ]
   end
 
@@ -460,9 +460,9 @@ class FunctionInstr < AbstractScalarFunction
     super
 
     @signature = [
-      { 'type' => 'numeric', 'shape' => :scalar },
-      { 'type' => 'text', 'shape' => :scalar },
-      { 'type' => 'text', 'shape' => :scalar }
+      { 'type' => :numeric, 'shape' => :scalar },
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :string, 'shape' => :scalar }
     ]
   end
 
@@ -493,8 +493,8 @@ class FunctionInt < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => 'numeric', 'shape' => :scalar }]
-    @signature_2 = [{ 'type' => 'boolean', 'shape' => :scalar }]
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature_2 = [{ 'type' => :boolean, 'shape' => :scalar }]
   end
 
   # return a single value
@@ -515,7 +515,7 @@ class FunctionInv < AbstractMatrixFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :matrix }]
+    @signature = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
   def evaluate(_, stack)
@@ -536,8 +536,8 @@ class FunctionLeft < AbstractScalarFunction
     super
 
     @signature = [
-      { 'type' => 'text', 'shape' => :scalar },
-      { 'type' => 'numeric', 'shape' => :scalar }
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
@@ -570,7 +570,7 @@ class FunctionLen < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'text', 'shape' => :scalar }]
+    @signature = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -591,7 +591,7 @@ class FunctionLog < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -610,9 +610,9 @@ class FunctionMid < AbstractScalarFunction
     super
 
     @signature = [
-      { 'type' => 'text', 'shape' => :scalar },
-      { 'type' => 'numeric', 'shape' => :scalar },
-      { 'type' => 'numeric', 'shape' => :scalar }
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :numeric, 'shape' => :scalar },
+      { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
@@ -653,8 +653,8 @@ class FunctionMod < AbstractScalarFunction
     super
 
     @signature = [
-      { 'type' => 'numeric', 'shape' => :scalar },
-      { 'type' => 'numeric', 'shape' => :scalar }
+      { 'type' => :numeric, 'shape' => :scalar },
+      { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
@@ -674,7 +674,7 @@ class FunctionStr < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   # return a single value
@@ -696,7 +696,7 @@ class FunctionPack < AbstractArrayFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :array }]
+    @signature = [{ 'type' => :numeric, 'shape' => :array }]
   end
 
   def evaluate(_, stack)
@@ -720,8 +720,8 @@ class FunctionRight < AbstractScalarFunction
     super
 
     @signature = [
-      { 'type' => 'text', 'shape' => :scalar },
-      { 'type' => 'numeric', 'shape' => :scalar }
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
@@ -749,7 +749,7 @@ class FunctionRnd < AbstractScalarFunction
     super
 
     @signature_0 = []
-    @signature_1 = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   # return a single value
@@ -777,7 +777,7 @@ class FunctionSgn < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -795,7 +795,7 @@ class FunctionSin < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -813,7 +813,7 @@ class FunctionSpc < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(interpreter, stack)
@@ -842,7 +842,7 @@ class FunctionSqr < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -860,7 +860,7 @@ class FunctionTab < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(interpreter, stack)
@@ -889,7 +889,7 @@ class FunctionTan < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -907,7 +907,7 @@ class FunctionTime < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(interpreter, stack)
@@ -929,7 +929,7 @@ class FunctionUnpack < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'text', 'shape' => :scalar }]
+    @signature = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -948,7 +948,7 @@ class FunctionTrn < AbstractMatrixFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'numeric', 'shape' => :matrix }]
+    @signature = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
   def evaluate(_, stack)
@@ -968,7 +968,7 @@ class FunctionVal < AbstractScalarFunction
   def initialize(text)
     super
 
-    @signature = [{ 'type' => 'text', 'shape' => :scalar }]
+    @signature = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(_, stack)
@@ -989,11 +989,11 @@ class FunctionZer < AbstractScalarFunction
     super
 
     @signature_0 = []
-    @signature_1 = [{ 'type' => 'numeric', 'shape' => :scalar }]
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
     @signature_2 =
       [
-        { 'type' => 'numeric', 'shape' => :scalar },
-        { 'type' => 'numeric', 'shape' => :scalar }
+        { 'type' => :numeric, 'shape' => :scalar },
+        { 'type' => :numeric, 'shape' => :scalar }
       ]
   end
 

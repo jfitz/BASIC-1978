@@ -749,7 +749,7 @@ class Interpreter
       default_value = NumericConstant.new(0)
 
       default_value = TextConstant.new(TextConstantToken.new('""')) if
-        default_type == 'string'
+        default_type == :string
 
       unless @variables.key?(v)
         if $options['require_initialized'].value
@@ -809,7 +809,7 @@ class Interpreter
 
     # convert a numeric to a string when a string is expected
     if value.numeric_constant? &&
-       variable.content_type == 'string'
+       variable.content_type == :string
       val = value.token_chars
       quoted_val = '"' + val + '"'
       token = TextConstantToken.new(quoted_val)
@@ -817,15 +817,15 @@ class Interpreter
     end
 
     # convert an integer to a numeric
-    if value.content_type == 'numeric' &&
-       variable.content_type == 'integer'
+    if value.content_type == :numeric &&
+       variable.content_type == :integer
       token = IntegerConstantToken.new(value.to_s)
       value = IntegerConstant.new(token)
     end
 
     # convert a numeric to an integer
-    if value.content_type == 'integer' &&
-       variable.content_type == 'numeric'
+    if value.content_type == :integer &&
+       variable.content_type == :numeric
       token = NumericConstantToken.new(value.to_s)
       value = NumericConstant.new(token)
     end
@@ -941,7 +941,7 @@ class Interpreter
   def add_file_names(file_names)
     file_names.each do |name|
       raise(BASICRuntimeError, 'Invalid file name') unless
-        name.content_type == 'string'
+        name.content_type == :string
 
       raise(BASICRuntimeError, "File '#{name.to_v}' not found") unless
         File.file?(name.to_v)

@@ -813,10 +813,10 @@ class ChangeStatement < AbstractStatement
       @source = ValueScalarExpression.new(source_tokens)
 
       case @source.content_type
-      when 'string'
+      when :string
         # string to array
         @target = TargetExpression.new(target_tokens, ArrayReference)
-      when 'numeric'
+      when :numeric
         # array to string
         @target = TargetExpression.new(target_tokens, ScalarReference)
       else

@@ -1239,15 +1239,15 @@ class UserFunctionDefinition
   end
 
   def signature
-    numeric_spec = { 'type' => 'numeric', 'shape' => :scalar }
-    text_spec = { 'type' => 'text', 'shape' => :scalar }
-    integer_spec = { 'type' => 'integer', 'shape' => :scalar }
+    numeric_spec = { 'type' => :numeric, 'shape' => :scalar }
+    text_spec = { 'type' => :string, 'shape' => :scalar }
+    integer_spec = { 'type' => :integer, 'shape' => :scalar }
     sig = []
 
     @arguments.each do |arg|
-      sig << numeric_spec if arg.content_type == 'numeric'
-      sig << text_spec if arg.content_type == 'string'
-      sig << integer_spec if arg.content_type == 'integer'
+      sig << numeric_spec if arg.content_type == :numeric
+      sig << text_spec if arg.content_type == :string
+      sig << integer_spec if arg.content_type == :integer
     end
 
     sig
