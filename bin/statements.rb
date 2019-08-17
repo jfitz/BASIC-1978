@@ -1052,21 +1052,21 @@ class DimStatement < AbstractStatement
     @expression_list = []
     if check_template(tokens_lists, template)
       tokens_lists = split_tokens(tokens_lists[0], false)
+
       tokens_lists.each do |tokens_list|
         begin
-          @expression_list <<
-            TargetExpression.new(tokens_list, :declaration)
+          @expression_list << DeclarationExpression.new(tokens_list)
         rescue BASICExpressionError
           @errors << 'Invalid variable ' + tokens_list.map(&:to_s).join
         end
-
-        @expression_list.each { |expression| @numerics += expression.numerics }
-        @expression_list.each { |expression| @strings += expression.strings }
-        @expression_list.each { |expression| @variables += expression.variables }
       end
     else
       @errors << 'Syntax error'
     end
+
+    @expression_list.each { |expression| @numerics += expression.numerics }
+    @expression_list.each { |expression| @strings += expression.strings }
+    @expression_list.each { |expression| @variables += expression.variables }
   end
 
   def dump
