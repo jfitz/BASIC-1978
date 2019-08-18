@@ -42,11 +42,11 @@
  end:     ["NumericConstant:3"]
 90 READ A$(I)
  ScalarValue:I
- ScalarReference:A$
+ Reference:A$
 100 NEXT I
  VariableName:I
 110 N=VAL(A$(0))
- ScalarReference:N
+ Reference:N
  NumericConstant:0
  ScalarValue:A$
  FunctionVal
@@ -54,7 +54,7 @@
 120 REM          MAIN CONTROL SECTION
  Remark:         MAIN CONTROL SECTION
 130 INPUT "ARE YOU THINKING OF AN ANIMAL";A$
- ScalarReference:A$
+ Reference:A$
 140 IF A$="LIST" THEN 600
  ScalarValue:A$
  TextConstant:"LIST"
@@ -66,7 +66,7 @@
  TextConstant:"Y"
  BinaryOperator:<>
 160 K=1
- ScalarReference:K
+ Reference:K
  NumericConstant:1
  AssignmentOperator:=
 170 GOSUB 390
@@ -98,9 +98,9 @@
  FunctionRight
  CarriageControl:;
 210 INPUT A$
- ScalarReference:A$
+ Reference:A$
 220 A$=LEFT$(A$,1)
- ScalarReference:A$
+ Reference:A$
  ScalarValue:A$
  NumericConstant:1
  FunctionLeft
@@ -116,7 +116,7 @@
  CarriageControl:NL
  LineNumber:120
 240 INPUT "THE ANIMAL YOU WERE THINKING OF WAS A ";V$
- ScalarReference:V$
+ Reference:V$
 250 PRINT "PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
  ITEMS
  TextConstant:"PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
@@ -137,7 +137,7 @@
  FunctionRight
  CarriageControl:NL
 270 INPUT X$
- ScalarReference:X$
+ Reference:X$
 280 PRINT "FOR A ";V$;" THE ANSWER WOULD BE ";
  ITEMS
  TextConstant:"FOR A "
@@ -147,9 +147,9 @@
  TextConstant:" THE ANSWER WOULD BE "
  CarriageControl:;
 290 INPUT A$
- ScalarReference:A$
+ Reference:A$
 300 A$=LEFT$(A$,1): IF A$<>"Y" AND A$<>"N" THEN 280
- ScalarReference:A$
+ Reference:A$
  ScalarValue:A$
  NumericConstant:1
  FunctionLeft
@@ -165,25 +165,25 @@
  ScalarValue:A$
  TextConstant:"Y"
  BinaryOperator:=
- ScalarReference:B$
+ Reference:B$
  TextConstant:"N"
  AssignmentOperator:=
 320 IF A$="N" THEN B$="Y"
  ScalarValue:A$
  TextConstant:"N"
  BinaryOperator:=
- ScalarReference:B$
+ Reference:B$
  TextConstant:"Y"
  AssignmentOperator:=
 330 Z1=VAL(A$(0))
- ScalarReference:Z1
+ Reference:Z1
  NumericConstant:0
  ScalarValue:A$
  FunctionVal
  AssignmentOperator:=
 340 A$(0)=STR$(Z1+2)
  NumericConstant:0
- ScalarReference:A$
+ Reference:A$
  ScalarValue:Z1
  NumericConstant:2
  BinaryOperator:+
@@ -191,7 +191,7 @@
  AssignmentOperator:=
 350 A$(Z1)=A$(K)
  ScalarValue:Z1
- ScalarReference:A$
+ Reference:A$
  ScalarValue:K
  ScalarValue:A$
  AssignmentOperator:=
@@ -199,14 +199,14 @@
  ScalarValue:Z1
  NumericConstant:1
  BinaryOperator:+
- ScalarReference:A$
+ Reference:A$
  TextConstant:"\A"
  ScalarValue:V$
  BinaryOperator:+
  AssignmentOperator:=
 370 A$(K)="\Q"+X$+"\"+A$+STR$(Z1+1)+"\"+B$+STR$(Z1)+"\"
  ScalarValue:K
- ScalarReference:A$
+ Reference:A$
  TextConstant:"\Q"
  ScalarValue:X$
  BinaryOperator:+
@@ -234,7 +234,7 @@
 390 REM     SUBROUTINE TO PRINT QUESTIONS
  Remark:    SUBROUTINE TO PRINT QUESTIONS
 400 Q$=A$(K)
- ScalarReference:Q$
+ Reference:Q$
  ScalarValue:K
  ScalarValue:A$
  AssignmentOperator:=
@@ -257,9 +257,9 @@
  CarriageControl:;
  VariableName:Z
 420 INPUT C$
- ScalarReference:C$
+ Reference:C$
 430 C$=LEFT$(C$,1)
- ScalarReference:C$
+ Reference:C$
  ScalarValue:C$
  NumericConstant:1
  FunctionLeft
@@ -273,7 +273,7 @@
  BinaryOperator:<>
  BinaryOperator:AND
 450 T$="\"+C$
- ScalarReference:T$
+ Reference:T$
  TextConstant:"\"
  ScalarValue:C$
  BinaryOperator:+
@@ -309,7 +309,7 @@
 505 STOP
  
 510 K=VAL(MID$(Q$,X+2,Y-X-2))
- ScalarReference:K
+ Reference:K
  ScalarValue:Q$
  ScalarValue:X
  NumericConstant:2
@@ -336,7 +336,7 @@
  TextConstant:"ANIMALS I ALREADY KNOW ARE:"
  CarriageControl:NL
 605 X=0
- ScalarReference:X
+ Reference:X
  NumericConstant:0
  AssignmentOperator:=
 610 FOR I=1 TO 200
@@ -378,7 +378,7 @@
  CarriageControl:;
  VariableName:Z
 645 X=X+1: IF X=4 THEN X=0: PRINT
- ScalarReference:X
+ Reference:X
  ScalarValue:X
  NumericConstant:1
  BinaryOperator:+
@@ -386,7 +386,7 @@
  ScalarValue:X
  NumericConstant:4
  BinaryOperator:=
- ScalarReference:X
+ Reference:X
  NumericConstant:0
  AssignmentOperator:=
  ITEMS

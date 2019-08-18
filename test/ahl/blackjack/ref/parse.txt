@@ -74,14 +74,14 @@
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
 140 C=C-1
- ScalarReference:C
+ Reference:C
  ScalarValue:C
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 150 C(C)=D(D)
  ScalarValue:C
- ScalarReference:C
+ Reference:C
  ScalarValue:D
  ScalarValue:D
  AssignmentOperator:=
@@ -93,7 +93,7 @@
  end:     ["ScalarValue:C"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
 180 C2=INT(RND(1)*(C1-C+1))+C
- ScalarReference:C2
+ Reference:C2
  NumericConstant:1
  FunctionRnd
  ScalarValue:C1
@@ -107,30 +107,30 @@
  BinaryOperator:+
  AssignmentOperator:=
 190 C3=C(C2)
- ScalarReference:C3
+ Reference:C3
  ScalarValue:C2
  ScalarValue:C
  AssignmentOperator:=
 200 C(C2)=C(C1)
  ScalarValue:C2
- ScalarReference:C
+ Reference:C
  ScalarValue:C1
  ScalarValue:C
  AssignmentOperator:=
 210 C(C1)=C3
  ScalarValue:C1
- ScalarReference:C
+ Reference:C
  ScalarValue:C3
  AssignmentOperator:=
 220 NEXT C1
  VariableName:C1
 230 X=C(C)
- ScalarReference:X
+ Reference:X
  ScalarValue:C
  ScalarValue:C
  AssignmentOperator:=
 240 C=C+1
- ScalarReference:C
+ Reference:C
  ScalarValue:C
  NumericConstant:1
  BinaryOperator:+
@@ -150,7 +150,7 @@
 350 REM--  33+....BUSTED
  Remark:--  33+....BUSTED
 360 Q=0
- ScalarReference:Q
+ Reference:Q
  NumericConstant:0
  AssignmentOperator:=
 370 FOR Q2=1 TO R(I)
@@ -158,7 +158,7 @@
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:I", "ScalarValue:R"]
 380 X=P(I,Q2)
- ScalarReference:X
+ Reference:X
  ScalarValue:I
  ScalarValue:Q2
  ScalarValue:P
@@ -169,7 +169,7 @@
  VariableName:Q2
 410 Q(I)=Q
  ScalarValue:I
- ScalarReference:Q
+ Reference:Q
  ScalarValue:Q
  AssignmentOperator:=
 420 RETURN
@@ -177,18 +177,18 @@
 500 REM--SUBROUTINE TO ADD CARD X TO TOTAL Q.
  Remark:--SUBROUTINE TO ADD CARD X TO TOTAL Q.
 510 X1=X: IF X1>10 THEN X1=10:  REM  SAME AS X1=10 MIN X
- ScalarReference:X1
+ Reference:X1
  ScalarValue:X
  AssignmentOperator:=
  ScalarValue:X1
  NumericConstant:10
  BinaryOperator:>
- ScalarReference:X1
+ Reference:X1
  NumericConstant:10
  AssignmentOperator:=
  Remark: SAME AS X1=10 MIN X
 520 Q1=Q+X1
- ScalarReference:Q1
+ Reference:Q1
  ScalarValue:Q
  ScalarValue:X1
  BinaryOperator:+
@@ -202,7 +202,7 @@
  NumericConstant:1
  BinaryOperator:>
 550 Q=Q+11
- ScalarReference:Q
+ Reference:Q
  ScalarValue:Q
  NumericConstant:11
  BinaryOperator:+
@@ -210,7 +210,7 @@
 560 RETURN
  
 570 Q=Q1-11*(Q1>=11)
- ScalarReference:Q
+ Reference:Q
  ScalarValue:Q1
  NumericConstant:11
  ScalarValue:Q1
@@ -222,7 +222,7 @@
 580 RETURN
  
 590 Q=Q1-(Q<=21 AND Q1>21)
- ScalarReference:Q
+ Reference:Q
  ScalarValue:Q1
  ScalarValue:Q
  NumericConstant:21
@@ -238,7 +238,7 @@
  NumericConstant:33
  BinaryOperator:<
 610 Q=-1
- ScalarReference:Q
+ Reference:Q
  NumericConstant:1
  UnaryOperator:-
  AssignmentOperator:=
@@ -291,13 +291,13 @@
 810 REM--NO SPLITTING OR BLACKJACKS ALLOWED
  Remark:--NO SPLITTING OR BLACKJACKS ALLOWED
 820 H1=5
- ScalarReference:H1
+ Reference:H1
  NumericConstant:5
  AssignmentOperator:=
 830 GOSUB 1410
  LineNumber:1410
 840 H1=3
- ScalarReference:H1
+ Reference:H1
  NumericConstant:3
  AssignmentOperator:=
 850 ON H GOTO 950,930
@@ -308,7 +308,7 @@
  LineNumber:100
 870 B(I)=B(I)*2
  ScalarValue:I
- ScalarReference:B
+ Reference:B
  ScalarValue:I
  ScalarValue:B
  NumericConstant:2
@@ -357,7 +357,7 @@
  Remark:--SUBROUTINE TO ADD A CARD TO ROW I
 1110 R(I)=R(I)+1
  ScalarValue:I
- ScalarReference:R
+ Reference:R
  ScalarValue:I
  ScalarValue:R
  NumericConstant:1
@@ -367,11 +367,11 @@
  ScalarValue:I
  ScalarValue:I
  ScalarValue:R
- ScalarReference:P
+ Reference:P
  ScalarValue:X
  AssignmentOperator:=
 1130 Q=Q(I)
- ScalarReference:Q
+ Reference:Q
  ScalarValue:I
  ScalarValue:Q
  AssignmentOperator:=
@@ -379,7 +379,7 @@
  LineNumber:500
 1150 Q(I)=Q
  ScalarValue:I
- ScalarReference:Q
+ Reference:Q
  ScalarValue:Q
  AssignmentOperator:=
 1160 IF Q>=0 THEN 1190
@@ -404,14 +404,14 @@
 1220 RETURN
  
 1230 D=D+1
- ScalarReference:D
+ Reference:D
  ScalarValue:D
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1240 D(D)=P(I,R(I))
  ScalarValue:D
- ScalarReference:D
+ Reference:D
  ScalarValue:I
  ScalarValue:I
  ScalarValue:R
@@ -419,7 +419,7 @@
  AssignmentOperator:=
 1250 R(I)=R(I)-1
  ScalarValue:I
- ScalarReference:R
+ Reference:R
  ScalarValue:I
  ScalarValue:R
  NumericConstant:1
@@ -433,7 +433,7 @@
  ITEMS
  CarriageControl:NL
 1320 AA=Q(I): GOSUB 3400
- ScalarReference:AA
+ Reference:AA
  ScalarValue:I
  ScalarValue:Q
  AssignmentOperator:=
@@ -451,8 +451,8 @@
 1410 REM  I$ DEFINED ELSEWHERE
  Remark: I$ DEFINED ELSEWHERE
 1420 INPUT H$: H$=LEFT$(H$,1)
- ScalarReference:H$
- ScalarReference:H$
+ Reference:H$
+ Reference:H$
  ScalarValue:H$
  NumericConstant:1
  FunctionLeft
@@ -494,7 +494,7 @@
 1470 GOTO 1420
  LineNumber:1420
 1480 H=(H+1)/2
- ScalarReference:H
+ Reference:H
  ScalarValue:H
  NumericConstant:1
  BinaryOperator:+
@@ -508,11 +508,11 @@
 1510 REM--INITIALIZE
  Remark:--INITIALIZE
 1520 D$="  A  2  3  4  5  6  7  8  9 10  J  Q  K"
- ScalarReference:D$
+ Reference:D$
  TextConstant:"  A  2  3  4  5  6  7  8  9 10  J  Q  K"
  AssignmentOperator:=
 1530 I$="H,S,D,C"
- ScalarReference:I$
+ Reference:I$
  TextConstant:"H,S,D,C"
  AssignmentOperator:=
 1540 FOR I=1 TO 13
@@ -525,7 +525,7 @@
  end:     ["NumericConstant:4", "ScalarValue:I", "BinaryOperator:*"]
 1560 D(J)=I
  ScalarValue:J
- ScalarReference:D
+ Reference:D
  ScalarValue:I
  AssignmentOperator:=
 1570 NEXT J
@@ -533,11 +533,11 @@
 1580 NEXT I
  VariableName:I
 1590 D=52
- ScalarReference:D
+ Reference:D
  NumericConstant:52
  AssignmentOperator:=
 1600 C=53
- ScalarReference:C
+ Reference:C
  NumericConstant:53
  AssignmentOperator:=
 1610 PRINT "DO YOU WANT INSTRUCTIONS";
@@ -545,7 +545,7 @@
  TextConstant:"DO YOU WANT INSTRUCTIONS"
  CarriageControl:;
 1620 INPUT H$
- ScalarReference:H$
+ Reference:H$
 1630 IF LEFT$(H$,1)="N" OR LEFT$(H$,1)="n" THEN 1760
  ScalarValue:H$
  NumericConstant:1
@@ -611,7 +611,7 @@
  TextConstant:"NUMBER OF PLAYERS"
  CarriageControl:;
 1770 INPUT N
- ScalarReference:N
+ Reference:N
 1775 PRINT
  ITEMS
  CarriageControl:NL
@@ -633,12 +633,12 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
  ScalarValue:I
- ScalarReference:T
+ Reference:T
  NumericConstant:0
  AssignmentOperator:=
  VariableName:I
 1800 D1=N+1
- ScalarReference:D1
+ Reference:D1
  ScalarValue:N
  NumericConstant:1
  BinaryOperator:+
@@ -656,7 +656,7 @@
  ScalarValue:C
  NumericConstant:2
  BinaryOperator:=
- ScalarReference:C
+ Reference:C
  ScalarValue:C
  NumericConstant:1
  BinaryOperator:-
@@ -666,7 +666,7 @@
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
  ScalarValue:I
- ScalarReference:Z
+ Reference:Z
  NumericConstant:0
  AssignmentOperator:=
  VariableName:I
@@ -675,7 +675,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:15"]
  ScalarValue:I
- ScalarReference:B
+ Reference:B
  NumericConstant:0
  AssignmentOperator:=
  VariableName:I
@@ -684,7 +684,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:15"]
  ScalarValue:I
- ScalarReference:Q
+ Reference:Q
  NumericConstant:0
  AssignmentOperator:=
  VariableName:I
@@ -693,7 +693,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
  ScalarValue:I
- ScalarReference:S
+ Reference:S
  NumericConstant:0
  AssignmentOperator:=
  VariableName:I
@@ -702,7 +702,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:15"]
  ScalarValue:I
- ScalarReference:R
+ Reference:R
  NumericConstant:0
  AssignmentOperator:=
  VariableName:I
@@ -720,7 +720,7 @@
  ScalarValue:I
  CarriageControl:;
  ScalarValue:I
- ScalarReference:Z
+ Reference:Z
  VariableName:I
 1900 FOR I=1 TO N
  control: VariableName:I
@@ -738,7 +738,7 @@
  BinaryOperator:OR
 1920 B(I)=Z(I)
  ScalarValue:I
- ScalarReference:B
+ Reference:B
  ScalarValue:I
  ScalarValue:Z
  AssignmentOperator:=
@@ -792,7 +792,7 @@
 2030 P(I,J)=X
  ScalarValue:I
  ScalarValue:J
- ScalarReference:P
+ Reference:P
  ScalarValue:X
  AssignmentOperator:=
 2040 IF J=1 OR I<=N THEN GOSUB 750
@@ -817,7 +817,7 @@
  end:     ["ScalarValue:D1"]
 2090 R(I)=2
  ScalarValue:I
- ScalarReference:R
+ Reference:R
  NumericConstant:2
  AssignmentOperator:=
 2100 NEXT I
@@ -835,7 +835,7 @@
  TextConstant:"ANY INSURANCE"
  CarriageControl:;
 2140 INPUT H$
- ScalarReference:H$
+ Reference:H$
 2150 IF LEFT$(H$,1)<>"Y" THEN 2240
  ScalarValue:H$
  NumericConstant:1
@@ -856,7 +856,7 @@
  ScalarValue:I
  CarriageControl:;
  ScalarValue:I
- ScalarReference:Z
+ Reference:Z
  VariableName:I
 2180 FOR I=1 TO N
  control: VariableName:I
@@ -883,7 +883,7 @@
  end:     ["ScalarValue:N"]
 2220 S(I)=Z(I)*(3*(-(P(D1,2)>=10))-1)
  ScalarValue:I
- ScalarReference:S
+ Reference:S
  ScalarValue:I
  ScalarValue:Z
  NumericConstant:3
@@ -903,10 +903,10 @@
 2240 REM--TEST FOR DEALER BLACKJACK
  Remark:--TEST FOR DEALER BLACKJACK
 2250 L1=1: L2=1
- ScalarReference:L1
+ Reference:L1
  NumericConstant:1
  AssignmentOperator:=
- ScalarReference:L2
+ Reference:L2
  NumericConstant:1
  AssignmentOperator:=
 2252 IF P(D1,1)=1 AND P(D1,2)>9 THEN L1=0: L2=0
@@ -921,10 +921,10 @@
  NumericConstant:9
  BinaryOperator:>
  BinaryOperator:AND
- ScalarReference:L1
+ Reference:L1
  NumericConstant:0
  AssignmentOperator:=
- ScalarReference:L2
+ Reference:L2
  NumericConstant:0
  AssignmentOperator:=
 2253 IF P(D1,2)=1 AND P(D1,1)>9 THEN L1=0: L2=0
@@ -939,10 +939,10 @@
  NumericConstant:9
  BinaryOperator:>
  BinaryOperator:AND
- ScalarReference:L1
+ Reference:L1
  NumericConstant:0
  AssignmentOperator:=
- ScalarReference:L2
+ Reference:L2
  NumericConstant:0
  AssignmentOperator:=
 2254 IF L1<>0 OR L2<>0 THEN 2320
@@ -1019,7 +1019,7 @@
  ScalarValue:I
  CarriageControl:;
 2380 H1=7
- ScalarReference:H1
+ Reference:H1
  NumericConstant:7
  AssignmentOperator:=
 2390 GOSUB 1410
@@ -1045,7 +1045,7 @@
  CarriageControl:NL
 2450 S(I)=S(I)+1.5*B(I)
  ScalarValue:I
- ScalarReference:S
+ Reference:S
  ScalarValue:I
  ScalarValue:S
  NumericConstant:1.5
@@ -1056,7 +1056,7 @@
  AssignmentOperator:=
 2460 B(I)=0
  ScalarValue:I
- ScalarReference:B
+ Reference:B
  NumericConstant:0
  AssignmentOperator:=
 2470 GOSUB 1200
@@ -1080,7 +1080,7 @@
 2560 GOSUB 300
  LineNumber:300
 2570 H1=3
- ScalarReference:H1
+ Reference:H1
  NumericConstant:3
  AssignmentOperator:=
 2580 GOSUB 950
@@ -1090,7 +1090,7 @@
 2600 REM--PLAYER WANTS TO SPLIT
  Remark:--PLAYER WANTS TO SPLIT
 2610 L1=P(I,1): IF P(I,1)>10 THEN L1=10
- ScalarReference:L1
+ Reference:L1
  ScalarValue:I
  NumericConstant:1
  ScalarValue:P
@@ -1100,11 +1100,11 @@
  ScalarValue:P
  NumericConstant:10
  BinaryOperator:>
- ScalarReference:L1
+ Reference:L1
  NumericConstant:10
  AssignmentOperator:=
 2612 L2=P(I,2): IF P(I,2)>10 THEN L2=10
- ScalarReference:L2
+ Reference:L2
  ScalarValue:I
  NumericConstant:2
  ScalarValue:P
@@ -1114,7 +1114,7 @@
  ScalarValue:P
  NumericConstant:10
  BinaryOperator:>
- ScalarReference:L2
+ Reference:L2
  NumericConstant:10
  AssignmentOperator:=
 2614 IF L1=L2 THEN 2640
@@ -1130,20 +1130,20 @@
 2640 REM--PLAY OUT SPLIT
  Remark:--PLAY OUT SPLIT
 2650 I1=I+D1
- ScalarReference:I1
+ Reference:I1
  ScalarValue:I
  ScalarValue:D1
  BinaryOperator:+
  AssignmentOperator:=
 2660 R(I1)=2
  ScalarValue:I1
- ScalarReference:R
+ Reference:R
  NumericConstant:2
  AssignmentOperator:=
 2670 P(I1,1)=P(I,2)
  ScalarValue:I1
  NumericConstant:1
- ScalarReference:P
+ Reference:P
  ScalarValue:I
  NumericConstant:2
  ScalarValue:P
@@ -1152,7 +1152,7 @@
  ScalarValue:I
  ScalarValue:D1
  BinaryOperator:+
- ScalarReference:B
+ Reference:B
  ScalarValue:I
  ScalarValue:B
  AssignmentOperator:=
@@ -1167,7 +1167,7 @@
 2720 P(I,2)=X
  ScalarValue:I
  NumericConstant:2
- ScalarReference:P
+ Reference:P
  ScalarValue:X
  AssignmentOperator:=
 2730 GOSUB 300
@@ -1182,7 +1182,7 @@
  TextConstant:"SECOND HAND RECEIVES A"
  CarriageControl:;
 2770 I=I1
- ScalarReference:I
+ Reference:I
  ScalarValue:I1
  AssignmentOperator:=
 2780 GOSUB 700
@@ -1190,7 +1190,7 @@
 2790 P(I,2)=X
  ScalarValue:I
  NumericConstant:2
- ScalarReference:P
+ Reference:P
  ScalarValue:X
  AssignmentOperator:=
 2800 GOSUB 300
@@ -1199,7 +1199,7 @@
  ITEMS
  CarriageControl:NL
 2820 I=I1-D1
- ScalarReference:I
+ Reference:I
  ScalarValue:I1
  ScalarValue:D1
  BinaryOperator:-
@@ -1225,7 +1225,7 @@
 2860 GOSUB 800
  LineNumber:800
 2870 I=I+D1
- ScalarReference:I
+ Reference:I
  ScalarValue:I
  ScalarValue:D1
  BinaryOperator:+
@@ -1235,7 +1235,7 @@
  ScalarValue:I1
  BinaryOperator:=
 2890 I=I1-D1
- ScalarReference:I
+ Reference:I
  ScalarValue:I1
  ScalarValue:D1
  BinaryOperator:-
@@ -1269,7 +1269,7 @@
  TextConstant:"DEALER HAD A"
  CarriageControl:;
 2970 X=P(D1,2)
- ScalarReference:X
+ Reference:X
  ScalarValue:D1
  NumericConstant:2
  ScalarValue:P
@@ -1300,11 +1300,11 @@
  TextConstant:" CONCEALED "
  CarriageControl:;
 3020 I=D1
- ScalarReference:I
+ Reference:I
  ScalarValue:D1
  AssignmentOperator:=
 3030 AA=Q(I): GOSUB 3400
- ScalarReference:AA
+ Reference:AA
  ScalarValue:I
  ScalarValue:Q
  AssignmentOperator:=
@@ -1330,7 +1330,7 @@
 3080 GOSUB 1100
  LineNumber:1100
 3090 AA=Q: GOSUB 3400
- ScalarReference:AA
+ Reference:AA
  ScalarValue:Q
  AssignmentOperator:=
  LineNumber:3400
@@ -1344,7 +1344,7 @@
  BinaryOperator:AND
 3100 Q(I)=Q-(Q<0)/2
  ScalarValue:I
- ScalarReference:Q
+ Reference:Q
  ScalarValue:Q
  ScalarValue:Q
  NumericConstant:0
@@ -1358,7 +1358,7 @@
  NumericConstant:0
  BinaryOperator:<
 3120 AA=Q: GOSUB 3400
- ScalarReference:AA
+ Reference:AA
  ScalarValue:Q
  AssignmentOperator:=
  LineNumber:3400
@@ -1376,7 +1376,7 @@
 3150 REM 
  Remark:
 3160 Z$="LOSES PUSHES WINS "
- ScalarReference:Z$
+ Reference:Z$
  TextConstant:"LOSES PUSHES WINS "
  AssignmentOperator:=
 3165 PRINT
@@ -1387,13 +1387,13 @@
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
 3180 AA=Q(I): GOSUB 3400
- ScalarReference:AA
+ Reference:AA
  ScalarValue:I
  ScalarValue:Q
  AssignmentOperator:=
  LineNumber:3400
 3182 AB=Q(I+D1): GOSUB 3410
- ScalarReference:AB
+ Reference:AB
  ScalarValue:I
  ScalarValue:D1
  BinaryOperator:+
@@ -1401,14 +1401,14 @@
  AssignmentOperator:=
  LineNumber:3410
 3184 AC=Q(D1): GOSUB 3420
- ScalarReference:AC
+ Reference:AC
  ScalarValue:D1
  ScalarValue:Q
  AssignmentOperator:=
  LineNumber:3420
 3186 S(I)=S(I)+B(I)*SGN(AA-AC)+B(I+D1)*SGN(AB-AC)
  ScalarValue:I
- ScalarReference:S
+ Reference:S
  ScalarValue:I
  ScalarValue:S
  ScalarValue:I
@@ -1434,7 +1434,7 @@
  ScalarValue:I
  ScalarValue:D1
  BinaryOperator:+
- ScalarReference:B
+ Reference:B
  NumericConstant:0
  AssignmentOperator:=
 3200 PRINT "PLAYER";I;
@@ -1477,7 +1477,7 @@
  CarriageControl:;
 3260 T(I)=T(I)+S(I)
  ScalarValue:I
- ScalarReference:T
+ Reference:T
  ScalarValue:I
  ScalarValue:T
  ScalarValue:I
@@ -1495,7 +1495,7 @@
  LineNumber:1200
 3290 T(D1)=T(D1)-S(I)
  ScalarValue:D1
- ScalarReference:T
+ Reference:T
  ScalarValue:D1
  ScalarValue:T
  ScalarValue:I
@@ -1503,7 +1503,7 @@
  BinaryOperator:-
  AssignmentOperator:=
 3300 I=I+D1
- ScalarReference:I
+ Reference:I
  ScalarValue:I
  ScalarValue:D1
  BinaryOperator:+
@@ -1511,7 +1511,7 @@
 3310 GOSUB 1200
  LineNumber:1200
 3320 I=I-D1
- ScalarReference:I
+ Reference:I
  ScalarValue:I
  ScalarValue:D1
  BinaryOperator:-
@@ -1533,7 +1533,7 @@
 3360 GOTO 1810
  LineNumber:1810
 3400 AA=AA+11*(AA>=22): RETURN
- ScalarReference:AA
+ Reference:AA
  ScalarValue:AA
  NumericConstant:11
  ScalarValue:AA
@@ -1544,7 +1544,7 @@
  AssignmentOperator:=
  
 3410 AB=AB+11*(AB>=22): RETURN
- ScalarReference:AB
+ Reference:AB
  ScalarValue:AB
  NumericConstant:11
  ScalarValue:AB
@@ -1555,7 +1555,7 @@
  AssignmentOperator:=
  
 3420 AC=AC+11*(AC>=22): RETURN
- ScalarReference:AC
+ Reference:AC
  ScalarValue:AC
  NumericConstant:11
  ScalarValue:AC

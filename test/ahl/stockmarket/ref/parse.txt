@@ -49,11 +49,11 @@
 112 REM SLOPE OF MARKET TREND:A  (SAME FOR ALL STOCKS) 
  Remark:SLOPE OF MARKET TREND:A  (SAME FOR ALL STOCKS) 
 113 LET X=1
- ScalarReference:X
+ Reference:X
  NumericConstant:1
  AssignmentOperator:=
 114 LET A=INT((RND(X)/10)*100+.5)/100 
- ScalarReference:A
+ Reference:A
  ScalarValue:X
  FunctionRnd
  NumericConstant:10
@@ -67,27 +67,27 @@
  BinaryOperator:/
  AssignmentOperator:=
 115 LET T5=0
- ScalarReference:T5
+ Reference:T5
  NumericConstant:0
  AssignmentOperator:=
 116 LET X9=0
- ScalarReference:X9
+ Reference:X9
  NumericConstant:0
  AssignmentOperator:=
 117 LET N1=0
- ScalarReference:N1
+ Reference:N1
  NumericConstant:0
  AssignmentOperator:=
 118 LET N2=0
- ScalarReference:N2
+ Reference:N2
  NumericConstant:0
  AssignmentOperator:=
 119 LET E1=0
- ScalarReference:E1
+ Reference:E1
  NumericConstant:0
  AssignmentOperator:=
 120 LET E2=0
- ScalarReference:E2
+ Reference:E2
  NumericConstant:0
  AssignmentOperator:=
 121 REM INTRODUCTION 
@@ -97,7 +97,7 @@
  TextConstant:"DO YOU WANT THE INSTRUCTIONS (YES-TYPE 1, NO-TYPE 0)"
  CarriageControl:;
 123 INPUT Z9
- ScalarReference:Z9
+ Reference:Z9
 124 PRINT 
  ITEMS
  CarriageControl:NL
@@ -178,33 +178,33 @@
  Remark:INITIAL STOCK VALUES 
 220 LET S(1)=100
  NumericConstant:1
- ScalarReference:S
+ Reference:S
  NumericConstant:100
  AssignmentOperator:=
 230 LET S(2)=85 
  NumericConstant:2
- ScalarReference:S
+ Reference:S
  NumericConstant:85
  AssignmentOperator:=
 240 LET S(3)=150
  NumericConstant:3
- ScalarReference:S
+ Reference:S
  NumericConstant:150
  AssignmentOperator:=
 250 LET S(4)=140
  NumericConstant:4
- ScalarReference:S
+ Reference:S
  NumericConstant:140
  AssignmentOperator:=
 260 LET S(5)=110
  NumericConstant:5
- ScalarReference:S
+ Reference:S
  NumericConstant:110
  AssignmentOperator:=
 265 REM INITIAL T8 - # DAYS FOR FIRST TREND SLOPE (A)
  Remark:INITIAL T8 - # DAYS FOR FIRST TREND SLOPE (A)
 266 LET T8=INT(4.99*RND(X)+1) 
- ScalarReference:T8
+ Reference:T8
  NumericConstant:4.99
  ScalarValue:X
  FunctionRnd
@@ -221,7 +221,7 @@
  NumericConstant:.5
  BinaryOperator:>
 269 LET A=-A
- ScalarReference:A
+ Reference:A
  ScalarValue:A
  UnaryOperator:-
  AssignmentOperator:=
@@ -237,12 +237,12 @@
  end:     ["NumericConstant:5"]
 300 LET P(I)=0
  ScalarValue:I
- ScalarReference:P
+ Reference:P
  NumericConstant:0
  AssignmentOperator:=
 305 LET Z(I)=0
  ScalarValue:I
- ScalarReference:Z
+ Reference:Z
  NumericConstant:0
  AssignmentOperator:=
 310 NEXT I
@@ -256,7 +256,7 @@
 333 REM INITIALIZE CASH ASSETS:C 
  Remark:INITIALIZE CASH ASSETS:C 
 335 LET C=10000 
- ScalarReference:C
+ Reference:C
  NumericConstant:10000
  AssignmentOperator:=
 338 REM PRINT INITIAL PORTFOLIO
@@ -322,15 +322,15 @@
 361 REM NYSE AVERAGE:Z5; TEMP. VALUE:Z4; NET CHANGE:Z6 
  Remark:NYSE AVERAGE:Z5; TEMP. VALUE:Z4; NET CHANGE:Z6 
 363 LET Z4=Z5 
- ScalarReference:Z4
+ Reference:Z4
  ScalarValue:Z5
  AssignmentOperator:=
 364 LET Z5=0
- ScalarReference:Z5
+ Reference:Z5
  NumericConstant:0
  AssignmentOperator:=
 365 LET T=0 
- ScalarReference:T
+ Reference:T
  NumericConstant:0
  AssignmentOperator:=
 370 FOR I=1 TO 5
@@ -338,14 +338,14 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 375 LET Z5=Z5+S(I)
- ScalarReference:Z5
+ Reference:Z5
  ScalarValue:Z5
  ScalarValue:I
  ScalarValue:S
  BinaryOperator:+
  AssignmentOperator:=
 380 LET T=T+S(I)*P(I) 
- ScalarReference:T
+ Reference:T
  ScalarValue:T
  ScalarValue:I
  ScalarValue:S
@@ -357,7 +357,7 @@
 390 NEXT I
  VariableName:I
 391 LET Z5=INT(100*(Z5/5)+.5)/100 
- ScalarReference:Z5
+ Reference:Z5
  NumericConstant:100
  ScalarValue:Z5
  NumericConstant:5
@@ -370,7 +370,7 @@
  BinaryOperator:/
  AssignmentOperator:=
 392 LET Z6=INT((Z5-Z4)*100+.5)/100
- ScalarReference:Z6
+ Reference:Z6
  ScalarValue:Z5
  ScalarValue:Z4
  BinaryOperator:-
@@ -385,7 +385,7 @@
 393 REM TOTAL ASSETS:D 
  Remark:TOTAL ASSETS:D 
 394 LET D=T+C 
- ScalarReference:D
+ Reference:D
  ScalarValue:T
  ScalarValue:C
  BinaryOperator:+
@@ -416,7 +416,7 @@
  ITEMS
  CarriageControl:NL
 400 LET T=INT(100*T+.5)/100 
- ScalarReference:T
+ Reference:T
  NumericConstant:100
  ScalarValue:T
  BinaryOperator:*
@@ -433,7 +433,7 @@
  ScalarValue:T
  CarriageControl:NL
 403 LET C=INT(100*C+.5)/100 
- ScalarReference:C
+ Reference:C
  NumericConstant:100
  ScalarValue:C
  BinaryOperator:*
@@ -450,7 +450,7 @@
  ScalarValue:C
  CarriageControl:NL
 407 LET D=INT(100*D+.5)/100 
- ScalarReference:D
+ Reference:D
  NumericConstant:100
  ScalarValue:D
  BinaryOperator:*
@@ -478,7 +478,7 @@
  TextConstant:"DO YOU WISH TO CONTINUE (YES-TYPE 1, NO-TYPE 0)"
  CarriageControl:;
 413 INPUT Q9
- ScalarReference:Q9
+ Reference:Q9
 414 IF Q9<1 THEN 998
  ScalarValue:Q9
  NumericConstant:1
@@ -495,48 +495,48 @@
  CarriageControl:;
 440 INPUT Z(1)
  NumericConstant:1
- ScalarReference:Z
+ Reference:Z
 450 PRINT "RCA";
  ITEMS
  TextConstant:"RCA"
  CarriageControl:;
 460 INPUT Z(2)
  NumericConstant:2
- ScalarReference:Z
+ Reference:Z
 470 PRINT "LBJ";
  ITEMS
  TextConstant:"LBJ"
  CarriageControl:;
 480 INPUT Z(3)
  NumericConstant:3
- ScalarReference:Z
+ Reference:Z
 490 PRINT "ABC";
  ITEMS
  TextConstant:"ABC"
  CarriageControl:;
 500 INPUT Z(4)
  NumericConstant:4
- ScalarReference:Z
+ Reference:Z
 510 PRINT "CBS";
  ITEMS
  TextConstant:"CBS"
  CarriageControl:;
 520 INPUT Z(5)
  NumericConstant:5
- ScalarReference:Z
+ Reference:Z
 525 PRINT 
  ITEMS
  CarriageControl:NL
 530 REM TOTAL DAY'S PURCHASES IN $:P5
  Remark:TOTAL DAY'S PURCHASES IN $:P5
 540 LET P5=0
- ScalarReference:P5
+ Reference:P5
  NumericConstant:0
  AssignmentOperator:=
 550 REM TOTAL DAY'S SALES IN $:S5
  Remark:TOTAL DAY'S SALES IN $:S5
 560 LET S5=0
- ScalarReference:S5
+ Reference:S5
  NumericConstant:0
  AssignmentOperator:=
 570 FOR I=1 TO 5
@@ -545,7 +545,7 @@
  end:     ["NumericConstant:5"]
 575 LET Z(I)=INT(Z(I)+.5) 
  ScalarValue:I
- ScalarReference:Z
+ Reference:Z
  ScalarValue:I
  ScalarValue:Z
  NumericConstant:.5
@@ -558,7 +558,7 @@
  NumericConstant:0
  BinaryOperator:<=
 590 LET P5=P5+Z(I)*S(I) 
- ScalarReference:P5
+ Reference:P5
  ScalarValue:P5
  ScalarValue:I
  ScalarValue:Z
@@ -570,7 +570,7 @@
 600 GOTO 620 
  LineNumber:620
 610 LET S5=S5-Z(I)*S(I) 
- ScalarReference:S5
+ Reference:S5
  ScalarValue:S5
  ScalarValue:I
  ScalarValue:Z
@@ -597,7 +597,7 @@
 622 REM TOTAL VALUE OF TRANSACTIONS:T5 
  Remark:TOTAL VALUE OF TRANSACTIONS:T5 
 625 LET T5=P5+S5
- ScalarReference:T5
+ Reference:T5
  ScalarValue:P5
  ScalarValue:S5
  BinaryOperator:+
@@ -605,7 +605,7 @@
 630 REM BROKERAGE FEE:B5 
  Remark:BROKERAGE FEE:B5 
 640 LET B5=INT(.01*T5*100+.5)/100 
- ScalarReference:B5
+ Reference:B5
  NumericConstant:.01
  ScalarValue:T5
  BinaryOperator:*
@@ -622,7 +622,7 @@
 652 REM -BROKERAGE FEES+TOTAL SALES:C5 
  Remark:-BROKERAGE FEES+TOTAL SALES:C5 
 654 LET C5=C-P5-B5+S5 
- ScalarReference:C5
+ Reference:C5
  ScalarValue:C
  ScalarValue:P5
  BinaryOperator:-
@@ -646,7 +646,7 @@
 660 GOTO 420
  LineNumber:420
 674 LET C=C5
- ScalarReference:C
+ Reference:C
  ScalarValue:C5
  AssignmentOperator:=
 675 REM CALCULATE NEW PORTFOLIO  
@@ -657,7 +657,7 @@
  end:     ["NumericConstant:5"]
 690 LET P(I)=P(I)+Z(I)
  ScalarValue:I
- ScalarReference:P
+ Reference:P
  ScalarValue:I
  ScalarValue:P
  ScalarValue:I
@@ -799,7 +799,7 @@
  ScalarValue:C
  CarriageControl:NL
 775 LET X9=1
- ScalarReference:X9
+ Reference:X9
  NumericConstant:1
  AssignmentOperator:=
 780 PRINT 
@@ -829,7 +829,7 @@
  NumericConstant:0
  BinaryOperator:>
 845 LET I1=INT(4.99*RND(X)+1) 
- ScalarReference:I1
+ Reference:I1
  NumericConstant:4.99
  ScalarValue:X
  FunctionRnd
@@ -839,7 +839,7 @@
  FunctionInt
  AssignmentOperator:=
 846 LET N1=INT(4.99*RND(X)+1) 
- ScalarReference:N1
+ Reference:N1
  NumericConstant:4.99
  ScalarValue:X
  FunctionRnd
@@ -849,7 +849,7 @@
  FunctionInt
  AssignmentOperator:=
 847 LET E1=1
- ScalarReference:E1
+ Reference:E1
  NumericConstant:1
  AssignmentOperator:=
 850 REM IF N2 DAYS HAVE PASSED, PICK AN I2, SET E2, DETERMINE NEW N2 
@@ -859,7 +859,7 @@
  NumericConstant:0
  BinaryOperator:>
 855 LET I2=INT(4.99*RND(X)+1) 
- ScalarReference:I2
+ Reference:I2
  NumericConstant:4.99
  ScalarValue:X
  FunctionRnd
@@ -869,7 +869,7 @@
  FunctionInt
  AssignmentOperator:=
 856 LET N2=INT(4.99*RND(X)+1) 
- ScalarReference:N2
+ Reference:N2
  NumericConstant:4.99
  ScalarValue:X
  FunctionRnd
@@ -879,19 +879,19 @@
  FunctionInt
  AssignmentOperator:=
 857 LET E2=1
- ScalarReference:E2
+ Reference:E2
  NumericConstant:1
  AssignmentOperator:=
 860 REM DEDUCT ONE DAY FROM N1 AND N2
  Remark:DEDUCT ONE DAY FROM N1 AND N2
 861 LET N1=N1-1 
- ScalarReference:N1
+ Reference:N1
  ScalarValue:N1
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 862 LET N2=N2-1 
- ScalarReference:N2
+ Reference:N2
  ScalarValue:N2
  NumericConstant:1
  BinaryOperator:-
@@ -903,7 +903,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 910 LET X1=RND(X) 
- ScalarReference:X1
+ Reference:X1
  ScalarValue:X
  FunctionRnd
  AssignmentOperator:=
@@ -912,7 +912,7 @@
  NumericConstant:.25
  BinaryOperator:>
 916 LET X1=.25
- ScalarReference:X1
+ Reference:X1
  NumericConstant:.25
  AssignmentOperator:=
 917 GOTO 935 
@@ -922,7 +922,7 @@
  NumericConstant:.5
  BinaryOperator:>
 921 LET X1=.5
- ScalarReference:X1
+ Reference:X1
  NumericConstant:.5
  AssignmentOperator:=
 922 GOTO 935 
@@ -932,19 +932,19 @@
  NumericConstant:.75
  BinaryOperator:>
 926 LET X1=.75  
- ScalarReference:X1
+ Reference:X1
  NumericConstant:.75
  AssignmentOperator:=
 927 GOTO 935 
  LineNumber:935
 930 LET X1=0.0
- ScalarReference:X1
+ Reference:X1
  NumericConstant:0.0
  AssignmentOperator:=
 931 REM BIG CHANGE CONSTANT:W3  (SET TO ZERO INITIALLY)
  Remark:BIG CHANGE CONSTANT:W3  (SET TO ZERO INITIALLY)
 935 LET W3=0
- ScalarReference:W3
+ Reference:W3
  NumericConstant:0
  AssignmentOperator:=
 936 IF E1<1 THEN 945
@@ -964,11 +964,11 @@
 938 REM ADD 10 PTS. TO THIS STOCK;  RESET E1 
  Remark:ADD 10 PTS. TO THIS STOCK;  RESET E1 
 939 LET W3=10 
- ScalarReference:W3
+ Reference:W3
  NumericConstant:10
  AssignmentOperator:=
 943 LET E1=0
- ScalarReference:E1
+ Reference:E1
  NumericConstant:0
  AssignmentOperator:=
 945 IF E2<1 THEN 955
@@ -988,20 +988,20 @@
 948 REM SUBTRACT 10 PTS. FROM THIS STOCK;  RESET E2
  Remark:SUBTRACT 10 PTS. FROM THIS STOCK;  RESET E2
 949 LET W3=W3-10
- ScalarReference:W3
+ Reference:W3
  ScalarValue:W3
  NumericConstant:10
  BinaryOperator:-
  AssignmentOperator:=
 953 LET E2=0
- ScalarReference:E2
+ Reference:E2
  NumericConstant:0
  AssignmentOperator:=
 954 REM C(I) IS CHANGE IN STOCK VALUE
  Remark:C(I) IS CHANGE IN STOCK VALUE
 955 LET C(I)=INT(A*S(I))+X1+INT(3-6*RND(X)+.5)+W3 
  ScalarValue:I
- ScalarReference:C
+ Reference:C
  ScalarValue:A
  ScalarValue:I
  ScalarValue:S
@@ -1024,7 +1024,7 @@
  AssignmentOperator:=
 956 LET C(I)=INT(100*C(I)+.5)/100 
  ScalarValue:I
- ScalarReference:C
+ Reference:C
  NumericConstant:100
  ScalarValue:I
  ScalarValue:C
@@ -1037,7 +1037,7 @@
  AssignmentOperator:=
 957 LET S(I)=S(I)+C(I)
  ScalarValue:I
- ScalarReference:S
+ Reference:S
  ScalarValue:I
  ScalarValue:S
  ScalarValue:I
@@ -1051,19 +1051,19 @@
  BinaryOperator:>
 964 LET C(I)=0
  ScalarValue:I
- ScalarReference:C
+ Reference:C
  NumericConstant:0
  AssignmentOperator:=
 965 LET S(I)=0
  ScalarValue:I
- ScalarReference:S
+ Reference:S
  NumericConstant:0
  AssignmentOperator:=
 966 GOTO 970 
  LineNumber:970
 967 LET S(I)=INT(100*S(I)+.5)/100 
  ScalarValue:I
- ScalarReference:S
+ Reference:S
  NumericConstant:100
  ScalarValue:I
  ScalarValue:S
@@ -1079,7 +1079,7 @@
 972 REM AFTER T8 DAYS RANDOMLY CHANGE TREND SIGN AND SLOPE 
  Remark:AFTER T8 DAYS RANDOMLY CHANGE TREND SIGN AND SLOPE 
 973 LET T8=T8-1 
- ScalarReference:T8
+ Reference:T8
  ScalarValue:T8
  NumericConstant:1
  BinaryOperator:-
@@ -1095,7 +1095,7 @@
 986 REM OF TREND (T8)
  Remark:OF TREND (T8)
 990 LET T8=INT(4.99*RND(X)+1) 
- ScalarReference:T8
+ Reference:T8
  NumericConstant:4.99
  ScalarValue:X
  FunctionRnd
@@ -1105,7 +1105,7 @@
  FunctionInt
  AssignmentOperator:=
 992 LET A=INT((RND(X)/10)*100+.5)/100 
- ScalarReference:A
+ Reference:A
  ScalarValue:X
  FunctionRnd
  NumericConstant:10
@@ -1119,7 +1119,7 @@
  BinaryOperator:/
  AssignmentOperator:=
 993 LET S4=RND(X) 
- ScalarReference:S4
+ Reference:S4
  ScalarValue:X
  FunctionRnd
  AssignmentOperator:=
@@ -1128,7 +1128,7 @@
  NumericConstant:.5
  BinaryOperator:<=
 995 LET A=-A
- ScalarReference:A
+ Reference:A
  ScalarValue:A
  UnaryOperator:-
  AssignmentOperator:=

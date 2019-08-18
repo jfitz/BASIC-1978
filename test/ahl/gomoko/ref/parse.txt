@@ -69,7 +69,7 @@
  ITEMS
  TextConstant:"WHAT IS YOUR BOARD SIZE (MIN 7/ MAX 19)"
  CarriageControl:;
- ScalarReference:N
+ Reference:N
 115 IF N>6 THEN 117
  ScalarValue:N
  NumericConstant:6
@@ -94,7 +94,7 @@
  end:     ["ScalarValue:N"]
  ScalarValue:I
  ScalarValue:J
- ScalarReference:A
+ Reference:A
  NumericConstant:0
  AssignmentOperator:=
  VariableName:J
@@ -111,8 +111,8 @@
  ITEMS
  TextConstant:"YOUR PLAY (I,J)"
  CarriageControl:;
- ScalarReference:I
- ScalarReference:J
+ Reference:I
+ Reference:J
 315 PRINT
  ITEMS
  CarriageControl:NL
@@ -122,10 +122,10 @@
  UnaryOperator:-
  BinaryOperator:=
 330 X=I: Y=J: GOSUB 910: IF L=1 THEN 410
- ScalarReference:X
+ Reference:X
  ScalarValue:I
  AssignmentOperator:=
- ScalarReference:Y
+ Reference:Y
  ScalarValue:J
  AssignmentOperator:=
  LineNumber:910
@@ -151,7 +151,7 @@
 440 A(I,J)=1
  ScalarValue:I
  ScalarValue:J
- ScalarReference:A
+ Reference:A
  NumericConstant:1
  AssignmentOperator:=
 500 REM *** COMPUTER TRIES AN INTELLIGENT MOVE ***
@@ -173,12 +173,12 @@
  NumericConstant:0
  BinaryOperator:=
 540 X=I+F: Y=J+F: GOSUB 910
- ScalarReference:X
+ Reference:X
  ScalarValue:I
  ScalarValue:F
  BinaryOperator:+
  AssignmentOperator:=
- ScalarReference:Y
+ Reference:Y
  ScalarValue:J
  ScalarValue:F
  BinaryOperator:+
@@ -200,7 +200,7 @@
 600 REM *** COMPUTER TRIES A RANDOM MOVE ***
  Remark:*** COMPUTER TRIES A RANDOM MOVE ***
 610 X=INT(N*RND(1)+1): Y=INT(N*RND(1)+1): GOSUB 910: IF L=0 THEN 610
- ScalarReference:X
+ Reference:X
  ScalarValue:N
  NumericConstant:1
  FunctionRnd
@@ -209,7 +209,7 @@
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
- ScalarReference:Y
+ Reference:Y
  ScalarValue:N
  NumericConstant:1
  FunctionRnd
@@ -231,18 +231,18 @@
 660 A(X,Y)=2: GOSUB 810: GOTO 310
  ScalarValue:X
  ScalarValue:Y
- ScalarReference:A
+ Reference:A
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:810
  LineNumber:310
 710 X=I-E: Y=J-F: GOSUB 910
- ScalarReference:X
+ Reference:X
  ScalarValue:I
  ScalarValue:E
  BinaryOperator:-
  AssignmentOperator:=
- ScalarReference:Y
+ Reference:Y
  ScalarValue:J
  ScalarValue:F
  BinaryOperator:-
@@ -277,7 +277,7 @@
  CarriageControl:NL
  
 910 L=1: IF X<1 THEN 970
- ScalarReference:L
+ Reference:L
  NumericConstant:1
  AssignmentOperator:=
  ScalarValue:X
@@ -298,7 +298,7 @@
 950 RETURN
  
 970 L=0: RETURN
- ScalarReference:L
+ Reference:L
  NumericConstant:0
  AssignmentOperator:=
  
@@ -312,7 +312,7 @@
  ITEMS
  TextConstant:"PLAY AGAIN (1 FOR YES, 0 FOR NO)"
  CarriageControl:;
- ScalarReference:Q
+ Reference:Q
 990 IF Q=1 THEN 110
  ScalarValue:Q
  NumericConstant:1

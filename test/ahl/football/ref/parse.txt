@@ -57,7 +57,7 @@
  ITEMS
  CarriageControl:NL
 150 INPUT "DO YOU WANT INSTRUCTIONS";A$
- ScalarReference:A$
+ Reference:A$
 160 IF A$="NO" THEN 290
  ScalarValue:A$
  TextConstant:"NO"
@@ -137,31 +137,31 @@
  ITEMS
  TextConstant:"PLEASE INPUT SCORE LIMIT ON GAME"
  CarriageControl:;
- ScalarReference:E
+ Reference:E
 300 FOR I=1 TO 40: READ N: IF I>20 THEN 350
  control: VariableName:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:40"]
- ScalarReference:N
+ Reference:N
  ScalarValue:I
  NumericConstant:20
  BinaryOperator:>
 330 A(N)=I: GOTO 360
  ScalarValue:N
- ScalarReference:A
+ Reference:A
  ScalarValue:I
  AssignmentOperator:=
  LineNumber:360
 350 B(N)=I-20
  ScalarValue:N
- ScalarReference:B
+ Reference:B
  ScalarValue:I
  NumericConstant:20
  BinaryOperator:-
  AssignmentOperator:=
 360 C(I)=N: NEXT I
  ScalarValue:I
- ScalarReference:C
+ Reference:C
  ScalarValue:N
  AssignmentOperator:=
  VariableName:I
@@ -170,13 +170,13 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
  ScalarValue:I
- ScalarReference:P$
+ Reference:P$
  VariableName:I
 380 L=0: T=1
- ScalarReference:L
+ Reference:L
  NumericConstant:0
  AssignmentOperator:=
- ScalarReference:T
+ Reference:T
  NumericConstant:1
  AssignmentOperator:=
 410 PRINT "TEAM";T;"PLAY CHART"
@@ -213,12 +213,12 @@
 460 NEXT I
  VariableName:I
 630 L=L+20:T=2
- ScalarReference:L
+ Reference:L
  ScalarValue:L
  NumericConstant:20
  BinaryOperator:+
  AssignmentOperator:=
- ScalarReference:T
+ Reference:T
  NumericConstant:2
  AssignmentOperator:=
 640 PRINT
@@ -246,72 +246,72 @@
  BinaryOperator:=
 690 D(1)=0: D(2)=3: M$(1)="--->": M$(2)="<---"
  NumericConstant:1
- ScalarReference:D
+ Reference:D
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:2
- ScalarReference:D
+ Reference:D
  NumericConstant:3
  AssignmentOperator:=
  NumericConstant:1
- ScalarReference:M$
+ Reference:M$
  TextConstant:"--->"
  AssignmentOperator:=
  NumericConstant:2
- ScalarReference:M$
+ Reference:M$
  TextConstant:"<---"
  AssignmentOperator:=
 700 H(1)=0: H(2)=0: T(1)=2: T(2)=1
  NumericConstant:1
- ScalarReference:H
+ Reference:H
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:2
- ScalarReference:H
+ Reference:H
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:1
- ScalarReference:T
+ Reference:T
  NumericConstant:2
  AssignmentOperator:=
  NumericConstant:2
- ScalarReference:T
+ Reference:T
  NumericConstant:1
  AssignmentOperator:=
 710 W(1)=-1: W(2)=1: X(1)=100: X(2)=0
  NumericConstant:1
- ScalarReference:W
+ Reference:W
  NumericConstant:1
  UnaryOperator:-
  AssignmentOperator:=
  NumericConstant:2
- ScalarReference:W
+ Reference:W
  NumericConstant:1
  AssignmentOperator:=
  NumericConstant:1
- ScalarReference:X
+ Reference:X
  NumericConstant:100
  AssignmentOperator:=
  NumericConstant:2
- ScalarReference:X
+ Reference:X
  NumericConstant:0
  AssignmentOperator:=
 720 Y(1)=1: Y(2)=-1: Z(1)=0: Z(2)=100
  NumericConstant:1
- ScalarReference:Y
+ Reference:Y
  NumericConstant:1
  AssignmentOperator:=
  NumericConstant:2
- ScalarReference:Y
+ Reference:Y
  NumericConstant:1
  UnaryOperator:-
  AssignmentOperator:=
  NumericConstant:1
- ScalarReference:Z
+ Reference:Z
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:2
- ScalarReference:Z
+ Reference:Z
  NumericConstant:100
  AssignmentOperator:=
 725 GOSUB 1910
@@ -321,7 +321,7 @@
  TextConstant:"TEAM 1 DEFENDS 0 YD GOAL -- TEAM 2 DEFENDS 100 YD GOAL."
  CarriageControl:NL
 740 T=INT(2*RND(1)+1)
- ScalarReference:T
+ Reference:T
  NumericConstant:2
  NumericConstant:1
  FunctionRnd
@@ -337,7 +337,7 @@
  TextConstant:"THE COIN IS FLIPPED"
  CarriageControl:NL
 765 P=X(T)-Y(T)*40
- ScalarReference:P
+ Reference:P
  ScalarValue:T
  ScalarValue:X
  ScalarValue:T
@@ -358,7 +358,7 @@
  TextConstant:"RECEIVES KICK-OFF"
  CarriageControl:NL
 780 K=INT(26*RND(1)+40)
- ScalarReference:K
+ Reference:K
  NumericConstant:26
  NumericConstant:1
  FunctionRnd
@@ -368,7 +368,7 @@
  FunctionInt
  AssignmentOperator:=
 790 P=P-Y(T)*K
- ScalarReference:P
+ Reference:P
  ScalarValue:P
  ScalarValue:T
  ScalarValue:Y
@@ -413,7 +413,7 @@
  CarriageControl:;
  TextConstant:"DO YOU WANT TO RUNBACK"
  CarriageControl:;
- ScalarReference:A$
+ Reference:A$
 840 IF A$="YES" THEN 1430
  ScalarValue:A$
  TextConstant:"YES"
@@ -431,7 +431,7 @@
  ScalarValue:Z
  BinaryOperator:<
 870 P=Z(T)-W(T)*20
- ScalarReference:P
+ Reference:P
  ScalarValue:T
  ScalarValue:Z
  ScalarValue:T
@@ -441,10 +441,10 @@
  BinaryOperator:-
  AssignmentOperator:=
 880 D=1: S=P
- ScalarReference:D
+ Reference:D
  NumericConstant:1
  AssignmentOperator:=
- ScalarReference:S
+ Reference:S
  ScalarValue:P
  AssignmentOperator:=
 885 FOR I=1 TO 72: PRINT "=";: NEXT I
@@ -489,12 +489,12 @@
  ScalarValue:X
  BinaryOperator:>=
 897 C=4: GOTO 900
- ScalarReference:C
+ Reference:C
  NumericConstant:4
  AssignmentOperator:=
  LineNumber:900
 898 C=8
- ScalarReference:C
+ Reference:C
  NumericConstant:8
  AssignmentOperator:=
 900 IF C=8 THEN 904
@@ -545,7 +545,7 @@
 920 REM
  Remark:
 930 U=INT(3*RND(0)-1): GOTO 940
- ScalarReference:U
+ Reference:U
  NumericConstant:3
  NumericConstant:0
  FunctionRnd
@@ -568,12 +568,12 @@
  NumericConstant:2
  BinaryOperator:=
 960 INPUT P1,P2: GOTO 975
- ScalarReference:P1
- ScalarReference:P2
+ Reference:P1
+ Reference:P2
  LineNumber:975
 970 INPUT P2,P1
- ScalarReference:P2
- ScalarReference:P1
+ Reference:P2
+ Reference:P1
 975 IF P1=77 THEN 1180
  ScalarValue:P1
  NumericConstant:77
@@ -595,16 +595,16 @@
  NumericConstant:1
  BinaryOperator:<
 995 P1=INT(P1): P2=INT(P2)
- ScalarReference:P1
+ Reference:P1
  ScalarValue:P1
  FunctionInt
  AssignmentOperator:=
- ScalarReference:P2
+ Reference:P2
  ScalarValue:P2
  FunctionInt
  AssignmentOperator:=
 1000 Y=INT(ABS(A(P1)-B(P2))/19*((X(T)-Y(T)*P+25)*RND(1)-15))
- ScalarReference:Y
+ Reference:Y
  ScalarValue:P1
  ScalarValue:A
  ScalarValue:P2
@@ -659,12 +659,12 @@
  ScalarValue:T
  CarriageControl:NL
 1030 Y=0: GOTO 1050
- ScalarReference:Y
+ Reference:Y
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:1050
 1035 G=RND(1): IF G>.025 THEN 1040
- ScalarReference:G
+ Reference:G
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
@@ -690,7 +690,7 @@
  TextConstant:"THE BALL WAS RUN"
  CarriageControl:NL
 1050 P=P-W(T)*Y
- ScalarReference:P
+ Reference:P
  ScalarValue:P
  ScalarValue:T
  ScalarValue:W
@@ -711,7 +711,7 @@
  ScalarValue:Y
  CarriageControl:NL
 1070 G=RND(1): IF G>.025 THEN 1110
- ScalarReference:G
+ Reference:G
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
@@ -735,7 +735,7 @@
  LineNumber:1850
  ITEMS
  CarriageControl:NL
- ScalarReference:T
+ Reference:T
  ScalarValue:T
  ScalarValue:T
  AssignmentOperator:=
@@ -769,7 +769,7 @@
  NumericConstant:10
  BinaryOperator:>=
 1140 D=D+1: IF D<>5 THEN 885
- ScalarReference:D
+ Reference:D
  ScalarValue:D
  NumericConstant:1
  BinaryOperator:+
@@ -785,7 +785,7 @@
  CarriageControl:;
  ScalarValue:T
  CarriageControl:NL
- ScalarReference:T
+ Reference:T
  ScalarValue:T
  ScalarValue:T
  AssignmentOperator:=
@@ -800,7 +800,7 @@
  CarriageControl:;
  TextConstant:"WANT TO PUNT"
  CarriageControl:;
- ScalarReference:A$
+ Reference:A$
 1185 IF A$="NO" THEN 1200
  ScalarValue:A$
  TextConstant:"NO"
@@ -819,7 +819,7 @@
  CarriageControl:;
  TextConstant:"WILL PUNT"
  CarriageControl:NL
- ScalarReference:G
+ Reference:G
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
@@ -828,7 +828,7 @@
  BinaryOperator:<
 1195 GOSUB 1850: K=INT(25*RND(1)+35): T=T(T): GOTO 790
  LineNumber:1850
- ScalarReference:K
+ Reference:K
  NumericConstant:25
  NumericConstant:1
  FunctionRnd
@@ -837,7 +837,7 @@
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
- ScalarReference:T
+ Reference:T
  ScalarValue:T
  ScalarValue:T
  AssignmentOperator:=
@@ -850,7 +850,7 @@
  CarriageControl:;
  TextConstant:"WANT TO ATTEMPT A FIELD GOAL"
  CarriageControl:;
- ScalarReference:A$
+ Reference:A$
 1210 IF A$="YES" THEN 1640
  ScalarValue:A$
  TextConstant:"YES"
@@ -874,7 +874,7 @@
 1240 H(T(T))=H(T(T))+2: GOSUB 1810
  ScalarValue:T
  ScalarValue:T
- ScalarReference:H
+ Reference:H
  ScalarValue:T
  ScalarValue:T
  ScalarValue:H
@@ -890,9 +890,9 @@
  CarriageControl:;
  TextConstant:"DO YOU WANT TO PUNT INSTEAD OF A KICKOFF"
  CarriageControl:;
- ScalarReference:A$
+ Reference:A$
 1290 P=Z(T)-W(T)*20: IF A$="YES" THEN 1190
- ScalarReference:P
+ Reference:P
  ScalarValue:T
  ScalarValue:Z
  ScalarValue:T
@@ -915,10 +915,10 @@
  TextConstant:"*********************YEA TEAM"
  CarriageControl:NL
 1340 Q=7: G=RND(1): IF G>.1 THEN 1380
- ScalarReference:Q
+ Reference:Q
  NumericConstant:7
  AssignmentOperator:=
- ScalarReference:G
+ Reference:G
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
@@ -926,7 +926,7 @@
  NumericConstant:.1
  BinaryOperator:>
 1360 Q=6: PRINT "EXTRA POINT NO GOOD": GOTO 1390
- ScalarReference:Q
+ Reference:Q
  NumericConstant:6
  AssignmentOperator:=
  ITEMS
@@ -939,7 +939,7 @@
  CarriageControl:NL
 1390 H(T)=H(T)+Q: GOSUB 1810
  ScalarValue:T
- ScalarReference:H
+ Reference:H
  ScalarValue:T
  ScalarValue:H
  ScalarValue:Q
@@ -947,13 +947,13 @@
  AssignmentOperator:=
  LineNumber:1810
 1420 T=T(T): GOTO 765
- ScalarReference:T
+ Reference:T
  ScalarValue:T
  ScalarValue:T
  AssignmentOperator:=
  LineNumber:765
 1430 K=INT(9*RND(0)+1)
- ScalarReference:K
+ Reference:K
  NumericConstant:9
  NumericConstant:0
  FunctionRnd
@@ -963,7 +963,7 @@
  FunctionInt
  AssignmentOperator:=
 1440 R=INT(((X(T)-Y(T)*P+25)*RND(1)-15)/K)
- ScalarReference:R
+ Reference:R
  ScalarValue:T
  ScalarValue:X
  ScalarValue:T
@@ -983,7 +983,7 @@
  FunctionInt
  AssignmentOperator:=
 1460 P=P-W(T)*R
- ScalarReference:P
+ Reference:P
  ScalarValue:P
  ScalarValue:T
  ScalarValue:W
@@ -1004,7 +1004,7 @@
  TextConstant:"YARDS"
  CarriageControl:NL
 1485 G=RND(1): IF G<.025 THEN 1080
- ScalarReference:G
+ Reference:G
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
@@ -1040,7 +1040,7 @@
  TextConstant:"WILL ATTEMPT A FIELD GOAL"
  CarriageControl:NL
 1645 G=RND(1): IF G<.025 THEN 1080
- ScalarReference:G
+ Reference:G
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
@@ -1048,7 +1048,7 @@
  NumericConstant:.025
  BinaryOperator:<
 1650 F=INT(35*RND(1)+20)
- ScalarReference:F
+ Reference:F
  NumericConstant:35
  NumericConstant:1
  FunctionRnd
@@ -1068,7 +1068,7 @@
  TextConstant:"YARDS LONG"
  CarriageControl:NL
 1680 P=P-W(T)*F: G=RND(1)
- ScalarReference:P
+ Reference:P
  ScalarValue:P
  ScalarValue:T
  ScalarValue:W
@@ -1076,7 +1076,7 @@
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
- ScalarReference:G
+ Reference:G
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
@@ -1101,7 +1101,7 @@
  TextConstant:"*********************YEA"
  CarriageControl:NL
 1720 Q=3: GOTO 1390
- ScalarReference:Q
+ Reference:Q
  NumericConstant:3
  AssignmentOperator:=
  LineNumber:1390
@@ -1129,7 +1129,7 @@
  BinaryOperator:+
  BinaryOperator:<
 1744 T=T(T): GOTO 794
- ScalarReference:T
+ Reference:T
  ScalarValue:T
  ScalarValue:T
  AssignmentOperator:=
@@ -1143,7 +1143,7 @@
  ScalarValue:P
  CarriageControl:NL
 1750 T=T(T): GOSUB 1900: GOTO 830
- ScalarReference:T
+ Reference:T
  ScalarValue:T
  ScalarValue:T
  AssignmentOperator:=

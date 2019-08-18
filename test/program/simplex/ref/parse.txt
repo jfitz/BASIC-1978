@@ -27,15 +27,15 @@
 100 REM READ DIMENSIONS
  Remark:READ DIMENSIONS
 101 READ N1, N2
- ScalarReference:N1
- ScalarReference:N2
+ Reference:N1
+ Reference:N2
 110 REM BUILD COEFFICIENTS FOR EXPANDED OBJECTIVE FUNCTION
  Remark:BUILD COEFFICIENTS FOR EXPANDED OBJECTIVE FUNCTION
 111 DIM C(N1)
  ScalarValue:N1
  Declaration:C
 112 ARR READ C
- ArrayReference:C
+ Reference:C
 113 DIM C(N1+N2)' EXPAND TO INCLUDE SLACK VARIABLES
  ScalarValue:N1
  ScalarValue:N2
@@ -43,7 +43,7 @@
  Declaration:C
 114 C(J) = 0 FOR J = N1 + 1 TO N1+N2
  ScalarValue:J
- ScalarReference:C
+ Reference:C
  NumericConstant:0
  AssignmentOperator:=
 120 REM BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
@@ -59,7 +59,7 @@
  end:     ["ScalarValue:N1"]
 123   C$(I) = "X" + STR$(I)
  ScalarValue:I
- ScalarReference:C$
+ Reference:C$
  TextConstant:"X"
  ScalarValue:I
  FunctionStr
@@ -75,7 +75,7 @@
  ScalarValue:I
  ScalarValue:N1
  BinaryOperator:+
- ScalarReference:C$
+ Reference:C$
  TextConstant:"S"
  ScalarValue:I
  FunctionStr
@@ -89,7 +89,7 @@
  end:     ["ScalarValue:N2"]
 129   C1$(I) = C$(I+N1)
  ScalarValue:I
- ScalarReference:C1$
+ Reference:C1$
  ScalarValue:I
  ScalarValue:N1
  BinaryOperator:+
@@ -104,7 +104,7 @@
  ScalarValue:N1
  Declaration:X
 142 MAT READ X
- MatrixReference:X
+ Reference:X
 143 DIM X(N2, N1+N2)' EXPAND TO INCLUDE SLACK VARIABLES
  ScalarValue:N2
  ScalarValue:N1
@@ -114,7 +114,7 @@
 144 X(I,J) = 0 FOR J = N1+1 TO N1+N2 FOR I = 1 TO N2
  ScalarValue:I
  ScalarValue:J
- ScalarReference:X
+ Reference:X
  NumericConstant:0
  AssignmentOperator:=
 145 X(I,I+N1) = 1 FOR I = 1 TO N2 ' SET EXPANSION TO IDEN MATRIX
@@ -122,7 +122,7 @@
  ScalarValue:I
  ScalarValue:N1
  BinaryOperator:+
- ScalarReference:X
+ Reference:X
  NumericConstant:1
  AssignmentOperator:=
 160 REM BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
@@ -131,7 +131,7 @@
  ScalarValue:N2
  Declaration:B
 162 ARR READ B
- ArrayReference:B
+ Reference:B
 170 REM COPY COEFFICIENTS FOR BASIC VARIABLES
  Remark:COPY COEFFICIENTS FOR BASIC VARIABLES
 171 DIM R(N2)
@@ -139,7 +139,7 @@
  Declaration:R
 172 R(I) = 0 FOR I = 1 TO N2
  ScalarValue:I
- ScalarReference:R
+ Reference:R
  NumericConstant:0
  AssignmentOperator:=
 200 REM PRINT THE TABLEAU
@@ -213,7 +213,7 @@
  Declaration:Z
 302 Z(J) = 0 FOR J = 1 TO N1+N2
  ScalarValue:J
- ScalarReference:Z
+ Reference:Z
  NumericConstant:0
  AssignmentOperator:=
 305 FOR I = 1 TO N2
@@ -222,7 +222,7 @@
  end:     ["ScalarValue:N2"]
 306   Z(J) = Z(J) + R(I)*X(I,J) FOR J = 1 TO N1+N2
  ScalarValue:J
- ScalarReference:Z
+ Reference:Z
  ScalarValue:J
  ScalarValue:Z
  ScalarValue:I
@@ -238,7 +238,7 @@
 310 REM COMPUTE Z - C
  Remark:COMPUTE Z - C
 311 ARR Y = Z - C
- ArrayReference:Y
+ Reference:Y
  ArrayValue:Z
  ArrayValue:C
  BinaryOperator:-
@@ -246,11 +246,11 @@
 320 REM CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
  Remark:CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
 321 J0 = 0
- ScalarReference:J0
+ Reference:J0
  NumericConstant:0
  AssignmentOperator:=
 322 M = 0
- ScalarReference:M
+ Reference:M
  NumericConstant:0
  AssignmentOperator:=
 323 FOR J = 1 TO N1+N2
@@ -263,11 +263,11 @@
  ScalarValue:M
  BinaryOperator:>=
 325   J0 = J
- ScalarReference:J0
+ Reference:J0
  ScalarValue:J
  AssignmentOperator:=
 326   M = Y(J)
- ScalarReference:M
+ Reference:M
  ScalarValue:J
  ScalarValue:Y
  AssignmentOperator:=
@@ -288,12 +288,12 @@
  Declaration:W
 332 W(I) = 0 FOR I = 1 TO N2
  ScalarValue:I
- ScalarReference:W
+ Reference:W
  NumericConstant:0
  AssignmentOperator:=
 333 W(I) = B(I) / X(I,J0) IF X(I,J0) <> 0 FOR I = 1 TO N2
  ScalarValue:I
- ScalarReference:W
+ Reference:W
  ScalarValue:I
  ScalarValue:B
  ScalarValue:I
@@ -407,11 +407,11 @@
 380 REM IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
  Remark:IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
 381 I0 = 0
- ScalarReference:I0
+ Reference:I0
  NumericConstant:0
  AssignmentOperator:=
 382 M = 1E6
- ScalarReference:M
+ Reference:M
  NumericConstant:1E6
  AssignmentOperator:=
 383 FOR I = 1 TO N2
@@ -429,11 +429,11 @@
  BinaryOperator:>=
  BinaryOperator:OR
 385   I0 = I
- ScalarReference:I0
+ Reference:I0
  ScalarValue:I
  AssignmentOperator:=
 386   M = W(I)
- ScalarReference:M
+ Reference:M
  ScalarValue:I
  ScalarValue:W
  AssignmentOperator:=
@@ -458,24 +458,24 @@
  Remark:CHANGE BASIC VARIABLE NAME AND COEFFICIENT
 402 C1$(I0) = C$(J0)
  ScalarValue:I0
- ScalarReference:C1$
+ Reference:C1$
  ScalarValue:J0
  ScalarValue:C$
  AssignmentOperator:=
 403 R(I0) = C(J0)
  ScalarValue:I0
- ScalarReference:R
+ Reference:R
  ScalarValue:J0
  ScalarValue:C
  AssignmentOperator:=
 410 REM BUILD NEW MATRIX X2 AND ARRAY B2
  Remark:BUILD NEW MATRIX X2 AND ARRAY B2
 411 MAT X2 = X
- MatrixReference:X2
+ Reference:X2
  MatrixValue:X
  AssignmentOperator:=
 412 ARR B2 = B
- ArrayReference:B2
+ Reference:B2
  ArrayValue:B
  AssignmentOperator:=
 420 REM ADJUST VALUES IN KEY ROW
@@ -487,7 +487,7 @@
 422   X2(I0,J) = X(I0,J) / X(I0,J0)
  ScalarValue:I0
  ScalarValue:J
- ScalarReference:X2
+ Reference:X2
  ScalarValue:I0
  ScalarValue:J
  ScalarValue:X
@@ -515,7 +515,7 @@
 434     X2(I,J) = X(I,J) - X(I,J0)*X(I0,J)/X(I0,J0)
  ScalarValue:I
  ScalarValue:J
- ScalarReference:X2
+ Reference:X2
  ScalarValue:I
  ScalarValue:J
  ScalarValue:X
@@ -540,7 +540,7 @@
  Remark:ADJUST VALUES IN RIGHT-HAND-SIDE
 441 B2(I0) = B(I0) / X(I0,J0)
  ScalarValue:I0
- ScalarReference:B2
+ Reference:B2
  ScalarValue:I0
  ScalarValue:B
  ScalarValue:I0
@@ -558,7 +558,7 @@
  BinaryOperator:=
 444   B2(I) = B(I) - X(I,J0)*B(I0)/X(I0,J0)
  ScalarValue:I
- ScalarReference:B2
+ Reference:B2
  ScalarValue:I
  ScalarValue:B
  ScalarValue:I
@@ -578,11 +578,11 @@
 450 REM SWAP IN THE NEW MATRIX AND CONSTANTS
  Remark:SWAP IN THE NEW MATRIX AND CONSTANTS
 451 MAT X = X2
- MatrixReference:X
+ Reference:X
  MatrixValue:X2
  AssignmentOperator:=
 452 ARR B = B2
- ArrayReference:B
+ Reference:B
  ArrayValue:B2
  AssignmentOperator:=
 453 GOTO 200
@@ -618,7 +618,7 @@
  TextConstant:"OBJECTIVE VALUE"
  CarriageControl:NL
 521 Z = 0
- ScalarReference:Z
+ Reference:Z
  NumericConstant:0
  AssignmentOperator:=
 522 FOR I = 1 TO N2
@@ -641,7 +641,7 @@
  ScalarValue:R
  CarriageControl:NL
 524 Z = Z + B(I)*R(I)
- ScalarReference:Z
+ Reference:Z
  ScalarValue:Z
  ScalarValue:I
  ScalarValue:B

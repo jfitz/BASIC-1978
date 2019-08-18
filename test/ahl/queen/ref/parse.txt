@@ -28,7 +28,7 @@
  end:     ["NumericConstant:64"]
 12 READ S(I)
  ScalarValue:I
- ScalarReference:S
+ Reference:S
 13 NEXT I
  VariableName:I
 14 DATA  81,  71,  61,  51,  41,  31,  21,  11
@@ -104,7 +104,7 @@
  NumericConstant:98
  NumericConstant:88
 22 INPUT "DO YOU WANT INSTRUCTIONS";W$
- ScalarReference:W$
+ Reference:W$
 23 IF W$="NO" THEN 30
  ScalarValue:W$
  TextConstant:"NO"
@@ -132,20 +132,20 @@
  TextConstant:"WHERE WOULD YOU LIKE TO START"
  CarriageControl:;
 110 INPUT M1
- ScalarReference:M1
+ Reference:M1
 115 IF M1=0 THEN 232
  ScalarValue:M1
  NumericConstant:0
  BinaryOperator:=
 120 T1=INT(M1/10)
- ScalarReference:T1
+ Reference:T1
  ScalarValue:M1
  NumericConstant:10
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 130 U1=M1-10*T1
- ScalarReference:U1
+ Reference:U1
  ScalarValue:M1
  NumericConstant:10
  ScalarValue:T1
@@ -190,7 +190,7 @@
  TextConstant:"WHAT IS YOUR MOVE"
  CarriageControl:;
 230 INPUT M1
- ScalarReference:M1
+ Reference:M1
 231 IF M1<>0 THEN 239
  ScalarValue:M1
  NumericConstant:0
@@ -212,14 +212,14 @@
  ScalarValue:M
  BinaryOperator:<=
 240 T1=INT(M1/10)
- ScalarReference:T1
+ Reference:T1
  ScalarValue:M1
  NumericConstant:10
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 250 U1=M1-10*T1
- ScalarReference:U1
+ Reference:U1
  ScalarValue:M1
  NumericConstant:10
  ScalarValue:T1
@@ -227,7 +227,7 @@
  BinaryOperator:-
  AssignmentOperator:=
 260 P=U1-U
- ScalarReference:P
+ Reference:P
  ScalarValue:U1
  ScalarValue:U
  BinaryOperator:-
@@ -237,7 +237,7 @@
  NumericConstant:0
  BinaryOperator:<>
 280 L=T1-T
- ScalarReference:L
+ Reference:L
  ScalarValue:T1
  ScalarValue:T
  BinaryOperator:-
@@ -297,7 +297,7 @@
  NumericConstant:158
  BinaryOperator:=
 2065 C=0
- ScalarReference:C
+ Reference:C
  NumericConstant:0
  AssignmentOperator:=
 2070 FOR K=7 TO 1 STEP -1
@@ -306,11 +306,11 @@
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
 2080 U=U1
- ScalarReference:U
+ Reference:U
  ScalarValue:U1
  AssignmentOperator:=
 2090 T=T1+K
- ScalarReference:T
+ Reference:T
  ScalarValue:T1
  ScalarValue:K
  BinaryOperator:+
@@ -322,7 +322,7 @@
  NumericConstant:1
  BinaryOperator:=
 2110 U=U+K
- ScalarReference:U
+ Reference:U
  ScalarValue:U
  ScalarValue:K
  BinaryOperator:+
@@ -334,7 +334,7 @@
  NumericConstant:1
  BinaryOperator:=
 2130 T=T+K
- ScalarReference:T
+ Reference:T
  ScalarValue:T
  ScalarValue:K
  BinaryOperator:+
@@ -350,7 +350,7 @@
 2155 GOTO 2180
  LineNumber:2180
 2160 C=0
- ScalarReference:C
+ Reference:C
  NumericConstant:0
  AssignmentOperator:=
 2170 RETURN
@@ -362,7 +362,7 @@
 2990 REM     RANDOM MOVE
  Remark:    RANDOM MOVE
 3000 Z=RND(1)
- ScalarReference:Z
+ Reference:Z
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
@@ -375,17 +375,17 @@
  NumericConstant:.3
  BinaryOperator:>
 3030 U=U1
- ScalarReference:U
+ Reference:U
  ScalarValue:U1
  AssignmentOperator:=
 3040 T=T1+1
- ScalarReference:T
+ Reference:T
  ScalarValue:T1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3050 M=10*T+U
- ScalarReference:M
+ Reference:M
  NumericConstant:10
  ScalarValue:T
  BinaryOperator:*
@@ -395,19 +395,19 @@
 3060 RETURN
  
 3070 U=U1+1
- ScalarReference:U
+ Reference:U
  ScalarValue:U1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3080 T=T1+2
- ScalarReference:T
+ Reference:T
  ScalarValue:T1
  NumericConstant:2
  BinaryOperator:+
  AssignmentOperator:=
 3090 M=10*T+U
- ScalarReference:M
+ Reference:M
  NumericConstant:10
  ScalarValue:T
  BinaryOperator:*
@@ -417,19 +417,19 @@
 3100 RETURN
  
 3110 U=U1+1
- ScalarReference:U
+ Reference:U
  ScalarValue:U1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3120 T=T1+1
- ScalarReference:T
+ Reference:T
  ScalarValue:T1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3130 M=10*T+U
- ScalarReference:M
+ Reference:M
  NumericConstant:10
  ScalarValue:T
  BinaryOperator:*
@@ -499,7 +499,7 @@
 3490 REM     TEST FOR COMPUTER MOVE
  Remark:    TEST FOR COMPUTER MOVE
 3500 M=10*T+U
- ScalarReference:M
+ Reference:M
  NumericConstant:10
  ScalarValue:T
  BinaryOperator:*
@@ -529,7 +529,7 @@
 3560 RETURN
  
 3570 C=1
- ScalarReference:C
+ Reference:C
  NumericConstant:1
  AssignmentOperator:=
 3580 GOTO 3560
@@ -541,7 +541,7 @@
  TextConstant:"ANYONE ELSE CARE TO TRY"
  CarriageControl:;
 4010 INPUT Q$
- ScalarReference:Q$
+ Reference:Q$
 4020 PRINT
  ITEMS
  CarriageControl:NL
@@ -641,7 +641,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 5185 I=8*A+B
- ScalarReference:I
+ Reference:I
  NumericConstant:8
  ScalarValue:A
  BinaryOperator:*

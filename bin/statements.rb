@@ -850,8 +850,9 @@ class ChangeStatement < AbstractStatement
 
       target_variable_token = VariableToken.new(@target.to_s)
       target_variable_name = VariableName.new(target_variable_token)
-      target_variable = Reference.new(target_variable_name, :array)
-      interpreter.set_dimensions(target_variable, dims)
+      target_variable = Variable.new(target_variable_name)
+      target = Reference.new(target_variable, :array)
+      interpreter.set_dimensions(target, dims)
 
       values = array.values(interpreter)
       interpreter.set_values(target_variable_name, values)

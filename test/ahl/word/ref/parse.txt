@@ -55,9 +55,9 @@
 35 RESTORE
  
 40 READ N
- ScalarReference:N
+ Reference:N
 50 C=INT(RND(1)*N+1)
- ScalarReference:C
+ Reference:C
  NumericConstant:1
  FunctionRnd
  ScalarValue:N
@@ -71,16 +71,16 @@
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C"]
 70 READ S$
- ScalarReference:S$
+ Reference:S$
 80 NEXT I
  VariableName:I
 90 G=0
- ScalarReference:G
+ Reference:G
  NumericConstant:0
  AssignmentOperator:=
 95 S(0)=LEN(S$)
  NumericConstant:0
- ScalarReference:S
+ Reference:S
  ScalarValue:S$
  FunctionLen
  AssignmentOperator:=
@@ -89,7 +89,7 @@
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:S$", "FunctionLen"]
  ScalarValue:I
- ScalarReference:S
+ Reference:S
  ScalarValue:S$
  ScalarValue:I
  NumericConstant:1
@@ -103,7 +103,7 @@
  end:     ["NumericConstant:5"]
 120 A(I)=45
  ScalarValue:I
- ScalarReference:A
+ Reference:A
  NumericConstant:45
  AssignmentOperator:=
 130 NEXT I
@@ -114,7 +114,7 @@
  end:     ["NumericConstant:5"]
 144 P(J)=0
  ScalarValue:J
- ScalarReference:P
+ Reference:P
  NumericConstant:0
  AssignmentOperator:=
 146 NEXT J
@@ -124,9 +124,9 @@
  TextConstant:"GUESS A FIVE LETTER WORD"
  CarriageControl:;
 160 INPUT L$
- ScalarReference:L$
+ Reference:L$
 170 G=G+1
- ScalarReference:G
+ Reference:G
  ScalarValue:G
  NumericConstant:1
  BinaryOperator:+
@@ -140,13 +140,13 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
  ScalarValue:I
- ScalarReference:P
+ Reference:P
  NumericConstant:0
  AssignmentOperator:=
  VariableName:I
 175 L(0)=LEN(L$)
  NumericConstant:0
- ScalarReference:L
+ Reference:L
  ScalarValue:L$
  FunctionLen
  AssignmentOperator:=
@@ -155,7 +155,7 @@
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:L$", "FunctionLen"]
  ScalarValue:I
- ScalarReference:L
+ Reference:L
  ScalarValue:L$
  ScalarValue:I
  NumericConstant:1
@@ -174,10 +174,10 @@
  NumericConstant:5
  BinaryOperator:<>
 205 M=0: Q=1
- ScalarReference:M
+ Reference:M
  NumericConstant:0
  AssignmentOperator:=
- ScalarReference:Q
+ Reference:Q
  NumericConstant:1
  AssignmentOperator:=
 210 FOR I=1 TO 5
@@ -196,12 +196,12 @@
  BinaryOperator:<>
 231 P(Q)=L(J)
  ScalarValue:Q
- ScalarReference:P
+ Reference:P
  ScalarValue:J
  ScalarValue:L
  AssignmentOperator:=
 232 Q=Q+1
- ScalarReference:Q
+ Reference:Q
  ScalarValue:Q
  NumericConstant:1
  BinaryOperator:+
@@ -212,12 +212,12 @@
  BinaryOperator:<>
 240 A(J)=L(J)
  ScalarValue:J
- ScalarReference:A
+ Reference:A
  ScalarValue:J
  ScalarValue:L
  AssignmentOperator:=
 250 M=M+1
- ScalarReference:M
+ Reference:M
  ScalarValue:M
  NumericConstant:1
  BinaryOperator:+
@@ -228,22 +228,22 @@
  VariableName:I
 270 A(0)=5
  NumericConstant:0
- ScalarReference:A
+ Reference:A
  NumericConstant:5
  AssignmentOperator:=
 272 P(0)=M
  NumericConstant:0
- ScalarReference:P
+ Reference:P
  ScalarValue:M
  AssignmentOperator:=
 275 A$="": FOR I=1 TO A(0): A$=A$+CHR$(A(I)): NEXT I
- ScalarReference:A$
+ Reference:A$
  TextConstant:""
  AssignmentOperator:=
  control: VariableName:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:0", "ScalarValue:A"]
- ScalarReference:A$
+ Reference:A$
  ScalarValue:A$
  ScalarValue:I
  ScalarValue:A
@@ -252,13 +252,13 @@
  AssignmentOperator:=
  VariableName:I
 277 P$="": FOR I=1 TO P(0): P$=P$+CHR$(P(I)): NEXT I
- ScalarReference:P$
+ Reference:P$
  TextConstant:""
  AssignmentOperator:=
  control: VariableName:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:0", "ScalarValue:P"]
- ScalarReference:P$
+ Reference:P$
  ScalarValue:P$
  ScalarValue:I
  ScalarValue:P
@@ -302,13 +302,13 @@
 290 GOTO 150
  LineNumber:150
 300 S$="": FOR I=1 TO 7: S$=S$+CHR$(S(I)): NEXT I
- ScalarReference:S$
+ Reference:S$
  TextConstant:""
  AssignmentOperator:=
  control: VariableName:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
- ScalarReference:S$
+ Reference:S$
  ScalarValue:S$
  ScalarValue:I
  ScalarValue:S
@@ -333,7 +333,7 @@
 410 PRINT: G=G-1: GOTO 150
  ITEMS
  CarriageControl:NL
- ScalarReference:G
+ Reference:G
  ScalarValue:G
  NumericConstant:1
  BinaryOperator:-
@@ -350,7 +350,7 @@
  ITEMS
  CarriageControl:NL
 510 INPUT "WANT TO PLAY AGAIN";Q$
- ScalarReference:Q$
+ Reference:Q$
 520 IF Q$="YES" THEN 30
  ScalarValue:Q$
  TextConstant:"YES"

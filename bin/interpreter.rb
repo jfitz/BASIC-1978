@@ -794,13 +794,17 @@ class Interpreter
       'Value',
       'Variable',
       'VariableName',
-      'ScalarReference',
+      'Reference',
       'UserFunctionToken'
     ]
 
-    raise(BASICSyntaxError,
+    raise(BASICRuntimeError,
           "#{variable.class}:#{variable} is not a variable name") unless
       legals.include?(variable.class.to_s)
+
+    raise(BASICRuntimeError,
+          "#{variable.class}:#{variable} is not a scalar variable name") if
+      variable.class.to_s == 'VariableName' && !variable.scalar?
 
     if $options['lock_fornext'].value &&
        @locked_variables.include?(variable)

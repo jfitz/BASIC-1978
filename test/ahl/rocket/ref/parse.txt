@@ -30,7 +30,7 @@
  ITEMS
  CarriageControl:NL
 100 INPUT "DO YOU WANT INSTRUCTIONS (YES OR NO)";A$
- ScalarReference:A$
+ Reference:A$
 110 IF A$="NO" THEN 390
  ScalarValue:A$
  TextConstant:"NO"
@@ -140,16 +140,16 @@
  ITEMS
  CarriageControl:NL
 455 T=0:H=1000:V=50:F=150
- ScalarReference:T
+ Reference:T
  NumericConstant:0
  AssignmentOperator:=
- ScalarReference:H
+ Reference:H
  NumericConstant:1000
  AssignmentOperator:=
- ScalarReference:V
+ Reference:V
  NumericConstant:50
  AssignmentOperator:=
- ScalarReference:F
+ Reference:F
  NumericConstant:150
  AssignmentOperator:=
 490 PRINT T;TAB(6);H;TAB(16);V;TAB(26);F;TAB(35);"I";TAB(H/15);"*"
@@ -184,7 +184,7 @@
  TextConstant:"*"
  CarriageControl:NL
 500 INPUT B
- ScalarReference:B
+ Reference:B
 510 IF B<0 THEN 650
  ScalarValue:B
  NumericConstant:0
@@ -193,18 +193,18 @@
  ScalarValue:B
  NumericConstant:30
  BinaryOperator:>
- ScalarReference:B
+ Reference:B
  NumericConstant:30
  AssignmentOperator:=
 530 IF B>F THEN B=F
  ScalarValue:B
  ScalarValue:F
  BinaryOperator:>
- ScalarReference:B
+ Reference:B
  ScalarValue:F
  AssignmentOperator:=
 540 V1=V-B+5
- ScalarReference:V1
+ Reference:V1
  ScalarValue:V
  ScalarValue:B
  BinaryOperator:-
@@ -212,13 +212,13 @@
  BinaryOperator:+
  AssignmentOperator:=
 560 F=F-B
- ScalarReference:F
+ Reference:F
  ScalarValue:F
  ScalarValue:B
  BinaryOperator:-
  AssignmentOperator:=
 570 H=H- .5*(V+V1)
- ScalarReference:H
+ Reference:H
  ScalarValue:H
  NumericConstant:.5
  ScalarValue:V
@@ -232,13 +232,13 @@
  NumericConstant:0
  BinaryOperator:<=
 590 T=T+1
- ScalarReference:T
+ Reference:T
  ScalarValue:T
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 600 V=V1
- ScalarReference:V
+ Reference:V
  ScalarValue:V1
  AssignmentOperator:=
 610 IF F>0 THEN 490
@@ -287,7 +287,7 @@
  TextConstant:"*"
  CarriageControl:NL
 650 B=0
- ScalarReference:B
+ Reference:B
  NumericConstant:0
  AssignmentOperator:=
 660 GOTO 540
@@ -297,7 +297,7 @@
  TextConstant:"***** CONTACT *****"
  CarriageControl:NL
 680 H=H+ .5*(V1+V)
- ScalarReference:H
+ Reference:H
  ScalarValue:H
  NumericConstant:.5
  ScalarValue:V1
@@ -311,7 +311,7 @@
  NumericConstant:5
  BinaryOperator:=
 700 D=(-V+SQR(V*V+H*(10-2*B)))/(5-B)
- ScalarReference:D
+ Reference:D
  ScalarValue:V
  UnaryOperator:-
  ScalarValue:V
@@ -335,13 +335,13 @@
 710 GOTO 730
  LineNumber:730
 720 D=H/V
- ScalarReference:D
+ Reference:D
  ScalarValue:H
  ScalarValue:V
  BinaryOperator:/
  AssignmentOperator:=
 730 V1=V+(5-B)*D
- ScalarReference:V1
+ Reference:V1
  ScalarValue:V
  NumericConstant:5
  ScalarValue:B
@@ -407,7 +407,7 @@
  ITEMS
  CarriageControl:NL
 850 INPUT "ANOTHER MISSION";A$
- ScalarReference:A$
+ Reference:A$
 860 IF A$="YES" THEN 390
  ScalarValue:A$
  TextConstant:"YES"

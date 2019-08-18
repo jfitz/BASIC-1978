@@ -35,9 +35,9 @@
  TextConstant:"ENTER TODAY'S DATE IN THE FORM: 3,24,1979  "
  CarriageControl:;
 140 INPUT M1,D1,Y1
- ScalarReference:M1
- ScalarReference:D1
- ScalarReference:Y1
+ Reference:M1
+ Reference:D1
+ Reference:Y1
 150 REM THIS PROGRAM DETERMINES THE DAY OF THE WEEK
  Remark:THIS PROGRAM DETERMINES THE DAY OF THE WEEK
 160 REM  FOR A DATE AFTER 1582
@@ -63,7 +63,7 @@
  end:     ["NumericConstant:12"]
 220 READ T(I)
  ScalarValue:I
- ScalarReference:T
+ Reference:T
 230 NEXT I
  VariableName:I
 240 PRINT"ENTER DAY OF BIRTH (OR OTHER DAY OF INTEREST)";
@@ -71,14 +71,14 @@
  TextConstant:"ENTER DAY OF BIRTH (OR OTHER DAY OF INTEREST)"
  CarriageControl:;
 250 INPUT M,D,Y
- ScalarReference:M
- ScalarReference:D
- ScalarReference:Y
+ Reference:M
+ Reference:D
+ Reference:Y
 260 PRINT
  ITEMS
  CarriageControl:NL
 270 LET I1 = INT((Y-1500)/100)
- ScalarReference:I1
+ Reference:I1
  ScalarValue:Y
  NumericConstant:1500
  BinaryOperator:-
@@ -95,7 +95,7 @@
  NumericConstant:0
  BinaryOperator:<
 300 LET A = I1*5+(I1+3)/4
- ScalarReference:A
+ Reference:A
  ScalarValue:I1
  NumericConstant:5
  BinaryOperator:*
@@ -107,7 +107,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 310 LET I2=INT(A-FNB(A)*7)
- ScalarReference:I2
+ Reference:I2
  ScalarValue:A
  ScalarValue:A
  UserFunction
@@ -117,14 +117,14 @@
  FunctionInt
  AssignmentOperator:=
 320 LET Y2=INT(Y/100)
- ScalarReference:Y2
+ Reference:Y2
  ScalarValue:Y
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 330 LET Y3 =INT(Y-Y2*100)
- ScalarReference:Y3
+ Reference:Y3
  ScalarValue:Y
  ScalarValue:Y2
  NumericConstant:100
@@ -133,7 +133,7 @@
  FunctionInt
  AssignmentOperator:=
 340 LET A =Y3/4+Y3+D+T(M)+I2
- ScalarReference:A
+ Reference:A
  ScalarValue:Y3
  NumericConstant:4
  BinaryOperator:/
@@ -148,7 +148,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 350 LET B=INT(A-FNB(A)*7)+1
- ScalarReference:B
+ Reference:B
  ScalarValue:A
  ScalarValue:A
  UserFunction
@@ -168,7 +168,7 @@
  NumericConstant:0
  BinaryOperator:=
 380 LET T1=INT(Y-FNA(Y)*4)
- ScalarReference:T1
+ Reference:T1
  ScalarValue:Y
  ScalarValue:Y
  UserFunction
@@ -186,11 +186,11 @@
  NumericConstant:0
  BinaryOperator:<>
 410 LET B=6
- ScalarReference:B
+ Reference:B
  NumericConstant:6
  AssignmentOperator:=
 420 LET B = B-1
- ScalarReference:B
+ Reference:B
  ScalarValue:B
  NumericConstant:1
  BinaryOperator:-
@@ -198,13 +198,13 @@
 430 GOTO 470
  LineNumber:470
 440 LET A = I1-1
- ScalarReference:A
+ Reference:A
  ScalarValue:I1
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 450 LET T1=INT(A-FNA(A)*4)
- ScalarReference:T1
+ Reference:T1
  ScalarValue:A
  ScalarValue:A
  UserFunction
@@ -222,7 +222,7 @@
  NumericConstant:0
  BinaryOperator:<>
 480 LET B = 7
- ScalarReference:B
+ Reference:B
  NumericConstant:7
  AssignmentOperator:=
 490 IF (Y1*12+M1)*31+D1<(Y*12+M)*31+D THEN 550
@@ -388,7 +388,7 @@
  BinaryOperator:+
  BinaryOperator:=
 720 LET I5=Y1-Y
- ScalarReference:I5
+ Reference:I5
  ScalarValue:Y1
  ScalarValue:Y
  BinaryOperator:-
@@ -397,13 +397,13 @@
  ITEMS
  CarriageControl:NL
 740 LET I6=M1-M
- ScalarReference:I6
+ Reference:I6
  ScalarValue:M1
  ScalarValue:M
  BinaryOperator:-
  AssignmentOperator:=
 750 LET I7=D1-D
- ScalarReference:I7
+ Reference:I7
  ScalarValue:D1
  ScalarValue:D
  BinaryOperator:-
@@ -413,13 +413,13 @@
  NumericConstant:0
  BinaryOperator:>=
 770 LET I6= I6-1
- ScalarReference:I6
+ Reference:I6
  ScalarValue:I6
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 780 LET I7=I7+30
- ScalarReference:I7
+ Reference:I7
  ScalarValue:I7
  NumericConstant:30
  BinaryOperator:+
@@ -429,13 +429,13 @@
  NumericConstant:0
  BinaryOperator:>=
 800 LET I5=I5-1
- ScalarReference:I5
+ Reference:I5
  ScalarValue:I5
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 810 LET I6=I6+12
- ScalarReference:I6
+ Reference:I6
  ScalarValue:I6
  NumericConstant:12
  BinaryOperator:+
@@ -491,7 +491,7 @@
  ScalarValue:I7
  CarriageControl:NL
 870 LET A8 = (I5*365)+(I6*30)+I7+INT(I6/2)
- ScalarReference:A8
+ Reference:A8
  ScalarValue:I5
  NumericConstant:365
  BinaryOperator:*
@@ -508,21 +508,21 @@
  BinaryOperator:+
  AssignmentOperator:=
 880 LET K5 = I5
- ScalarReference:K5
+ Reference:K5
  ScalarValue:I5
  AssignmentOperator:=
 890 LET K6 = I6
- ScalarReference:K6
+ Reference:K6
  ScalarValue:I6
  AssignmentOperator:=
 900 LET K7 = I7
- ScalarReference:K7
+ Reference:K7
  ScalarValue:I7
  AssignmentOperator:=
 910 REM CALCULATE RETIREMENT DATE.
  Remark:CALCULATE RETIREMENT DATE.
 920 LET E = Y+65
- ScalarReference:E
+ Reference:E
  ScalarValue:Y
  NumericConstant:65
  BinaryOperator:+
@@ -530,7 +530,7 @@
 930 REM CALCULATE TIME SPENT IN THE FOLLOWING FUNCTIONS.
  Remark:CALCULATE TIME SPENT IN THE FOLLOWING FUNCTIONS.
 940 LET F = .35
- ScalarReference:F
+ Reference:F
  NumericConstant:.35
  AssignmentOperator:=
 950 PRINT "YOU HAVE SLEPT ",
@@ -540,7 +540,7 @@
 960 GOSUB 1370
  LineNumber:1370
 970 LET F = .17
- ScalarReference:F
+ Reference:F
  NumericConstant:.17
  AssignmentOperator:=
 980 PRINT "YOU HAVE EATEN ",
@@ -550,7 +550,7 @@
 990 GOSUB 1370
  LineNumber:1370
 1000 LET F = .23
- ScalarReference:F
+ Reference:F
  NumericConstant:.23
  AssignmentOperator:=
 1010 IF K5 > 3 THEN 1040
@@ -669,21 +669,21 @@
 1360 REM CALCULATE TIME IN YEARS, MONTHS, AND DAYS
  Remark:CALCULATE TIME IN YEARS, MONTHS, AND DAYS
 1370 LET K1=INT(F*A8)
- ScalarReference:K1
+ Reference:K1
  ScalarValue:F
  ScalarValue:A8
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
 1380 LET I5 = INT(K1/365)
- ScalarReference:I5
+ Reference:I5
  ScalarValue:K1
  NumericConstant:365
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 1390 LET K1 = K1- (I5*365)
- ScalarReference:K1
+ Reference:K1
  ScalarValue:K1
  ScalarValue:I5
  NumericConstant:365
@@ -691,14 +691,14 @@
  BinaryOperator:-
  AssignmentOperator:=
 1400 LET I6 = INT(K1/30)
- ScalarReference:I6
+ Reference:I6
  ScalarValue:K1
  NumericConstant:30
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 1410 LET I7 = K1 -(I6*30)
- ScalarReference:I7
+ Reference:I7
  ScalarValue:K1
  ScalarValue:I6
  NumericConstant:30
@@ -706,19 +706,19 @@
  BinaryOperator:-
  AssignmentOperator:=
 1420 LET K5 = K5-I5
- ScalarReference:K5
+ Reference:K5
  ScalarValue:K5
  ScalarValue:I5
  BinaryOperator:-
  AssignmentOperator:=
 1430 LET K6 =K6-I6
- ScalarReference:K6
+ Reference:K6
  ScalarValue:K6
  ScalarValue:I6
  BinaryOperator:-
  AssignmentOperator:=
 1440 LET K7 = K7-I7
- ScalarReference:K7
+ Reference:K7
  ScalarValue:K7
  ScalarValue:I7
  BinaryOperator:-
@@ -728,13 +728,13 @@
  NumericConstant:0
  BinaryOperator:>=
 1460 LET K7=K7+30
- ScalarReference:K7
+ Reference:K7
  ScalarValue:K7
  NumericConstant:30
  BinaryOperator:+
  AssignmentOperator:=
 1470 LET K6=K6-1
- ScalarReference:K6
+ Reference:K6
  ScalarValue:K6
  NumericConstant:1
  BinaryOperator:-
@@ -744,13 +744,13 @@
  NumericConstant:0
  BinaryOperator:>
 1490 LET K6=K6+12
- ScalarReference:K6
+ Reference:K6
  ScalarValue:K6
  NumericConstant:12
  BinaryOperator:+
  AssignmentOperator:=
 1500 LET K5=K5-1
- ScalarReference:K5
+ Reference:K5
  ScalarValue:K5
  NumericConstant:1
  BinaryOperator:-
@@ -772,13 +772,13 @@
 1540 GOTO 1090
  LineNumber:1090
 1550 LET K5=K5+1
- ScalarReference:K5
+ Reference:K5
  ScalarValue:K5
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1560 LET K6=0
- ScalarReference:K6
+ Reference:K6
  NumericConstant:0
  AssignmentOperator:=
 1570 GOTO 1090
