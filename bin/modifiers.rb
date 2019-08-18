@@ -139,19 +139,19 @@ class ForModifier
     start_value = start_values[0]
     @current_value = start_value if @current_value.nil?
     interpreter.set_value(@control, @current_value)
-    end_values = @end.evaluate(interpreter)
-    end_value = end_values[0]
+    endvs = @end.evaluate(interpreter)
+    endv = endvs[0]
 
     if @step.nil?
-      step_value = NumericConstant.new(1)
+      step = NumericConstant.new(1)
     else
-      step_values = @step.evaluate(interpreter)
-      step_value = step_values[0]
+      steps = @step.evaluate(interpreter)
+      step = steps[0]
     end
 
     interpreter.lock_variable(@control)
     interpreter.enter_fornext(@control)
-    terminated = terminated?(@current_value, step_value, end_value)
+    terminated = terminated?(@current_value, step, endv)
 
     io = interpreter.trace_out
     print_trace_info(io, terminated)
@@ -173,21 +173,21 @@ class ForModifier
   end
 
   def execute_post(interpreter)
-    end_values = @end.evaluate(interpreter)
-    end_value = end_values[0]
+    endvs = @end.evaluate(interpreter)
+    endv = endvs[0]
 
     if @step.nil?
-      step_value = NumericConstant.new(1)
+      step = NumericConstant.new(1)
     else
-      step_values = @step.evaluate(interpreter)
-      step_value = step_values[0]
+      steps = @step.evaluate(interpreter)
+      step = steps[0]
     end
 
     @current_value = interpreter.get_value(@control)
-    @current_value += step_value
+    @current_value += step
     interpreter.set_value(@control, @current_value)
 
-    terminated = terminated?(@current_value, step_value, end_value)
+    terminated = terminated?(@current_value, step, endv)
 
     io = interpreter.trace_out
     print_trace_info(io, terminated)
@@ -227,13 +227,13 @@ class ForModifier
     results
   end
 
-  def terminated?(current_value, step_value, end_value)
+  def terminated?(current_value, step, endv)
     zero = NumericConstant.new(0)
 
-    if step_value > zero
-      current_value > end_value
-    elsif step_value < zero
-      current_value < end_value
+    if step > zero
+      current_value > endv
+    elsif step < zero
+      current_value < endv
     else
       false
     end
