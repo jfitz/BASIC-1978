@@ -1372,12 +1372,12 @@ class VariableName < AbstractElement
     to_s == other.to_s
   end
 
-  def scalar?
-    true
-  end
-
   def hash
     @name.hash
+  end
+
+  def scalar?
+    true
   end
 
   def dump
@@ -1427,6 +1427,18 @@ class Variable < AbstractElement
     @variable = true
     @operand = true
     @precedence = 7
+  end
+
+  def eql?(other)
+    @variable_name == other.name && @subscripts == other.subscripts
+  end
+
+  def ==(other)
+    @variable_name == other.name && @subscripts == other.subscripts
+  end
+
+  def hash
+    @variable_name.hash && @subscripts.hash
   end
 
   def dump
