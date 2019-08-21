@@ -54,7 +54,7 @@
  BinaryOperator:+
  Declaration:C$
 122 FOR I = 1 TO N1
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N1"]
 123   C$(I) = "X" + STR$(I)
@@ -66,9 +66,9 @@
  BinaryOperator:+
  AssignmentOperator:=
 124 NEXT I
- VariableName:I
+ Variable:I
 125 FOR I = 1 TO N2
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
 126   C$(I+N1) = "S" + STR$(I)
@@ -82,9 +82,9 @@
  BinaryOperator:+
  AssignmentOperator:=
 127 NEXT I
- VariableName:I
+ Variable:I
 128 FOR I = 1 TO N2
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
 129   C1$(I) = C$(I+N1)
@@ -96,7 +96,7 @@
  ScalarValue:C$
  AssignmentOperator:=
 130 NEXT I
- VariableName:I
+ Variable:I
 140 REM BUILD CENTRAL MATRIX (CONSTRAINTS)
  Remark:BUILD CENTRAL MATRIX (CONSTRAINTS)
 141 DIM X(N2, N1)
@@ -180,7 +180,7 @@
  TextConstant:"B"
  CarriageControl:NL
 220 FOR I = 1 TO N2
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
 221   PRINT R(I),C1$(I),
@@ -203,7 +203,7 @@
  ScalarValue:B
  CarriageControl:NL
 239 NEXT I
- VariableName:I
+ Variable:I
 300 REM EVALUATE TABLEAU FOR OPTIMUM SOLUTION
  Remark:EVALUATE TABLEAU FOR OPTIMUM SOLUTION
 301 DIM Z(N1+N2)
@@ -217,7 +217,7 @@
  NumericConstant:0
  AssignmentOperator:=
 305 FOR I = 1 TO N2
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
 306   Z(J) = Z(J) + R(I)*X(I,J) FOR J = 1 TO N1+N2
@@ -234,7 +234,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 307 NEXT I
- VariableName:I
+ Variable:I
 310 REM COMPUTE Z - C
  Remark:COMPUTE Z - C
 311 ARR Y = Z - C
@@ -254,7 +254,7 @@
  NumericConstant:0
  AssignmentOperator:=
 323 FOR J = 1 TO N1+N2
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N1", "ScalarValue:N2", "BinaryOperator:+"]
 324   IF Y(J) >= M THEN 327
@@ -272,7 +272,7 @@
  ScalarValue:Y
  AssignmentOperator:=
 327 NEXT J
- VariableName:J
+ Variable:J
 328 IF M >= 0 THEN 500
  ScalarValue:M
  NumericConstant:0
@@ -344,7 +344,7 @@
  ScalarValue:C$
  CarriageControl:NL
 360 FOR I = 1 TO N2
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
 361   PRINT R(I),C1$(I),
@@ -370,7 +370,7 @@
  ScalarValue:W
  CarriageControl:NL
 364 NEXT I
- VariableName:I
+ Variable:I
 370 PRINT " ", "Z",
  ITEMS
  TextConstant:" "
@@ -415,7 +415,7 @@
  NumericConstant:1E6
  AssignmentOperator:=
 383 FOR I = 1 TO N2
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
 384   IF W(I) <= 0 OR W(I) >= M THEN 387
@@ -438,7 +438,7 @@
  ScalarValue:W
  AssignmentOperator:=
 387 NEXT I
- VariableName:I
+ Variable:I
 389 PRINT "KEY ROW";I0;"VARIABLE ";C1$(I0);" EXITS"
  ITEMS
  TextConstant:"KEY ROW"
@@ -481,7 +481,7 @@
 420 REM ADJUST VALUES IN KEY ROW
  Remark:ADJUST VALUES IN KEY ROW
 421 FOR J = 1 TO N1+N2
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N1", "ScalarValue:N2", "BinaryOperator:+"]
 422   X2(I0,J) = X(I0,J) / X(I0,J0)
@@ -497,11 +497,11 @@
  BinaryOperator:/
  AssignmentOperator:=
 423 NEXT J
- VariableName:J
+ Variable:J
 430 REM ADJUST VALUES IN OTHER ROWS
  Remark:ADJUST VALUES IN OTHER ROWS
 431 FOR I = 1 TO N2
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
 432   IF I = I0 THEN 436
@@ -509,7 +509,7 @@
  ScalarValue:I0
  BinaryOperator:=
 433   FOR J = 1 TO N1+N2
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N1", "ScalarValue:N2", "BinaryOperator:+"]
 434     X2(I,J) = X(I,J) - X(I,J0)*X(I0,J)/X(I0,J0)
@@ -533,9 +533,9 @@
  BinaryOperator:-
  AssignmentOperator:=
 435   NEXT J
- VariableName:J
+ Variable:J
 436 NEXT I
- VariableName:I
+ Variable:I
 440 REM ADJUST VALUES IN RIGHT-HAND-SIDE
  Remark:ADJUST VALUES IN RIGHT-HAND-SIDE
 441 B2(I0) = B(I0) / X(I0,J0)
@@ -549,7 +549,7 @@
  BinaryOperator:/
  AssignmentOperator:=
 442 FOR I = 1 TO N2
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
 443   IF I = I0 THEN 445
@@ -574,7 +574,7 @@
  BinaryOperator:-
  AssignmentOperator:=
 445 NEXT I
- VariableName:I
+ Variable:I
 450 REM SWAP IN THE NEW MATRIX AND CONSTANTS
  Remark:SWAP IN THE NEW MATRIX AND CONSTANTS
 451 MAT X = X2
@@ -622,7 +622,7 @@
  NumericConstant:0
  AssignmentOperator:=
 522 FOR I = 1 TO N2
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N2"]
 523 PRINT C1$(I);" = ";B(I);" * ";R(I)
@@ -651,7 +651,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 525 NEXT I
- VariableName:I
+ Variable:I
 527 PRINT "Z = ";Z
  ITEMS
  TextConstant:"Z = "

@@ -1405,6 +1405,10 @@ class VariableName < AbstractElement
     compatible
   end
 
+  def subscripts
+    []
+  end
+
   def to_s
     @name.to_s
   end
