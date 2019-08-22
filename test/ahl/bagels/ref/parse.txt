@@ -74,7 +74,7 @@
  TextConstant:"   BAGELS - NO DIGITS CORRECT"
  CarriageControl:NL
 150 FOR I=1 TO 3
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 160 A(I)=INT(10*RND(1))
@@ -93,7 +93,7 @@
  NumericConstant:0
  BinaryOperator:=
 170 FOR J=1 TO I-1
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:I", "NumericConstant:1", "BinaryOperator:-"]
 180 IF A(I)=A(J) THEN 160
@@ -103,9 +103,9 @@
  ScalarValue:A
  BinaryOperator:=
 190 NEXT J
- VariableName:J
+ Variable:J
 200 NEXT I
- VariableName:I
+ Variable:I
 210 PRINT:PRINT "O.K.  I HAVE A NUMBER IN MIND."
  ITEMS
  CarriageControl:NL
@@ -113,7 +113,7 @@
  TextConstant:"O.K.  I HAVE A NUMBER IN MIND."
  CarriageControl:NL
 220 FOR I=1 TO 20
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
 230 PRINT "GUESS #";I,
@@ -130,7 +130,7 @@
  NumericConstant:3
  BinaryOperator:<>
 250 FOR Z=1 TO 3:A1(Z)=ASC(MID$(A$,Z,1)):NEXT Z
- control: VariableName:Z
+ control: Variable:Z
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
  ScalarValue:Z
@@ -141,9 +141,9 @@
  FunctionMid
  FunctionAsc
  AssignmentOperator:=
- VariableName:Z
+ Variable:Z
 260 FOR J=1 TO 3
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 270 IF A1(J)<48 THEN 300
@@ -165,7 +165,7 @@
  BinaryOperator:-
  AssignmentOperator:=
 290 NEXT J
- VariableName:J
+ Variable:J
 295 GOTO 320
  LineNumber:320
 300 PRINT "WHAT?"
@@ -200,7 +200,7 @@
  NumericConstant:0
  AssignmentOperator:=
 360 FOR J=1 TO 2
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:2"]
 370 IF A(J)<>B(J+1) THEN 390
@@ -232,7 +232,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 410 NEXT J
- VariableName:J
+ Variable:J
 420 IF A(1)<>B(3) THEN 440
  NumericConstant:1
  ScalarValue:A
@@ -258,7 +258,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 460 FOR J=1 TO 3
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 470 IF A(J)<>B(J) THEN 490
@@ -274,7 +274,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 490 NEXT J
- VariableName:J
+ Variable:J
 500 IF D=3 THEN 680
  ScalarValue:D
  NumericConstant:3
@@ -284,7 +284,7 @@
  NumericConstant:0
  BinaryOperator:=
 520 FOR J=1 TO C
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C"]
 530 PRINT "PICO ";
@@ -292,13 +292,13 @@
  TextConstant:"PICO "
  CarriageControl:;
 540 NEXT J
- VariableName:J
+ Variable:J
 545 IF D=0 THEN 580
  ScalarValue:D
  NumericConstant:0
  BinaryOperator:=
 550 FOR J=1 TO D
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:D"]
 560 PRINT "FERMI ";
@@ -306,7 +306,7 @@
  TextConstant:"FERMI "
  CarriageControl:;
 570 NEXT J
- VariableName:J
+ Variable:J
 580 IF C+D<>0 THEN 600
  ScalarValue:C
  ScalarValue:D
@@ -321,7 +321,7 @@
  ITEMS
  CarriageControl:NL
 605 NEXT I
- VariableName:I
+ Variable:I
 610 PRINT "OH WELL."
  ITEMS
  TextConstant:"OH WELL."

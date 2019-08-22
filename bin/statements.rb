@@ -1178,7 +1178,8 @@ class ForStatement < AbstractStatement
     if check_template(tokens_lists, template1)
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
-        @control = VariableName.new(tokens1[0])
+        variable_name = VariableName.new(tokens1[0])
+        @control = Variable.new(variable_name)
         @start = ValueScalarExpression.new(tokens2)
         @end = ValueScalarExpression.new(tokens_lists[2])
         @step = nil
@@ -1192,7 +1193,8 @@ class ForStatement < AbstractStatement
     elsif check_template(tokens_lists, template2)
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
-        @control = VariableName.new(tokens1[0])
+        variable_name = VariableName.new(tokens1[0])
+        @control = Variable.new(variable_name)
         @start = ValueScalarExpression.new(tokens2)
         @end = ValueScalarExpression.new(tokens_lists[2])
         @step = ValueScalarExpression.new(tokens_lists[4])
@@ -1223,14 +1225,14 @@ class ForStatement < AbstractStatement
     step = NumericConstant.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    fornext_control = interpreter.assign_fornext(@control, from, to, step)
-    interpreter.lock_variable(@control)
-    interpreter.enter_fornext(@control)
+    fornext_control = interpreter.assign_fornext(@control.name, from, to, step)
+    interpreter.lock_variable(@control.name)
+    interpreter.enter_fornext(@control.name)
     terminated = fornext_control.front_terminated?
 
     if terminated
-      interpreter.next_line_index = interpreter.find_closing_next(@control)
-      interpreter.unlock_variable(@control)
+      interpreter.next_line_index = interpreter.find_closing_next(@control.name)
+      interpreter.unlock_variable(@control.name)
       interpreter.exit_fornext
     end
 
@@ -2083,9 +2085,10 @@ class NextStatement < AbstractStatement
       tokens_list = split_on_group_separators(tokens_lists[0])
       tokens_list.each do |tokens|
         if tokens.empty?
-          @controls << EmptyToken.new
+          @controls << EmptyVariable.new
         elsif tokens.size == 1 && tokens[0].variable?
-          control = VariableName.new(tokens[0])
+          variable_name = VariableName.new(tokens[0])
+          control = Variable.new(variable_name)
           @controls << control
           controlx = XrefEntry.new(control.to_s, 0, false)
           @variables += [controlx]
@@ -2094,13 +2097,14 @@ class NextStatement < AbstractStatement
         end
       end
     elsif check_template(tokens_lists, template2)
-      @controls = [EmptyToken.new]
+      @controls = [EmptyVariable.new]
     else
       @errors << 'Syntax error'
     end
   end
 
-  def has_control(control)
+  def has_control(control_name)
+    control = Variable.new(control_name)
     @controls.include?(control)
   end
 
@@ -2125,10 +2129,10 @@ class NextStatement < AbstractStatement
 
     while !found_unterminated && index < max
       if @controls[index].empty?
-        control = interpreter.top_fornext
-        fornext_control = interpreter.retrieve_fornext(control)
+        control_name = interpreter.top_fornext
+        fornext_control = interpreter.retrieve_fornext(control_name)
       else
-        fornext_control = interpreter.retrieve_fornext(@controls[index])
+        fornext_control = interpreter.retrieve_fornext(@controls[index].name)
       end
       # check control variable value
       # if matches end value, stop here

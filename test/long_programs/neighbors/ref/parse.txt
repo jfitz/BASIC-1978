@@ -143,7 +143,7 @@
  NumericConstant:0
  AssignmentOperator:=
 552 FOR I = 1 TO N0
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N0"]
 554 LET M = M + M(I)
@@ -154,7 +154,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 556 NEXT I
- VariableName:I
+ Variable:I
 558 LET T = (R0+1) * (C0+1) - Z0
  Reference:T
  ScalarValue:R0
@@ -233,7 +233,7 @@
 1120 REM SET HORIZONTAL BORDERS TO 0
  Remark:SET HORIZONTAL BORDERS TO 0
 1122 FOR C = 0 TO C0
- control: VariableName:C
+ control: Variable:C
  start:   ["NumericConstant:0"]
  end:     ["ScalarValue:C0"]
 1124 LET B(0,C) = 0
@@ -249,11 +249,11 @@
  NumericConstant:0
  AssignmentOperator:=
 1128 NEXT C
- VariableName:C
+ Variable:C
 1130 REM SET VERTICAL BORDERS TO 0
  Remark:SET VERTICAL BORDERS TO 0
 1132 FOR R = 0 TO R0
- control: VariableName:R
+ control: Variable:R
  start:   ["NumericConstant:0"]
  end:     ["ScalarValue:R0"]
 1134 LET B(R,0) = 0
@@ -269,11 +269,11 @@
  NumericConstant:0
  AssignmentOperator:=
 1138 NEXT R
- VariableName:R
+ Variable:R
 1140 REM SET INSIDE EMPTY AREAS TO 0
  Remark:SET INSIDE EMPTY AREAS TO 0
 1142 FOR I = 1 TO Z8
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:Z8"]
 1144 READ R,C
@@ -286,15 +286,15 @@
  NumericConstant:0
  AssignmentOperator:=
 1148 NEXT I
- VariableName:I
+ Variable:I
 1150 REM SET REMAINING CELLS TO POPULATION GROUP
  Remark:SET REMAINING CELLS TO POPULATION GROUP
 1152 FOR R = 1 TO R0-1
- control: VariableName:R
+ control: Variable:R
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:R0", "NumericConstant:1", "BinaryOperator:-"]
 1153 FOR C = 1 TO C0-1
- control: VariableName:C
+ control: Variable:C
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C0", "NumericConstant:1", "BinaryOperator:-"]
 1154 IF B(R,C) <> -1 THEN 1157
@@ -315,9 +315,9 @@
  FunctionInt
  AssignmentOperator:=
 1157 NEXT C
- VariableName:C
+ Variable:C
 1158 NEXT R
- VariableName:R
+ Variable:R
 1190 RETURN
  
 1200 REM display board
@@ -339,11 +339,11 @@
  FunctionZer
  AssignmentOperator:=
 1310 FOR R = 1 TO R0-1
- control: VariableName:R
+ control: Variable:R
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:R0", "NumericConstant:1", "BinaryOperator:-"]
 1312 FOR C = 1 TO C0-1
- control: VariableName:C
+ control: Variable:C
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C0", "NumericConstant:1", "BinaryOperator:-"]
 1314 IF B(R,C) = 0 THEN 1380
@@ -361,11 +361,11 @@
  NumericConstant:0
  AssignmentOperator:=
 1320 FOR R9 = R-1 TO R+1
- control: VariableName:R9
+ control: Variable:R9
  start:   ["ScalarValue:R", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:R", "NumericConstant:1", "BinaryOperator:+"]
 1322 FOR C9 = C-1 TO C+1
- control: VariableName:C9
+ control: Variable:C9
  start:   ["ScalarValue:C", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:C", "NumericConstant:1", "BinaryOperator:+"]
 1330 IF B(R9,C9) = 0 THEN 1340
@@ -397,9 +397,9 @@
  BinaryOperator:+
  AssignmentOperator:=
 1350 NEXT C9
- VariableName:C9
+ Variable:C9
 1352 NEXT R9
- VariableName:R9
+ Variable:R9
 1360 LET X = X8 / X7
  Reference:X
  ScalarValue:X8
@@ -430,19 +430,19 @@
  UnaryOperator:-
  AssignmentOperator:=
 1380 NEXT C
- VariableName:C
+ Variable:C
 1382 NEXT R
- VariableName:R
+ Variable:R
 1390 RETURN
  
 1400 REM fill in new board
  Remark:fill in new board
 1410 FOR R = 1 TO R0-1
- control: VariableName:R
+ control: Variable:R
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:R0", "NumericConstant:1", "BinaryOperator:-"]
 1412 FOR C = 1 TO C0-1
- control: VariableName:C
+ control: Variable:C
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C0", "NumericConstant:1", "BinaryOperator:-"]
 1420 IF B1(R,C) <> -1 THEN 1450
@@ -480,9 +480,9 @@
  BinaryOperator:-
  AssignmentOperator:=
 1450 NEXT C
- VariableName:C
+ Variable:C
 1452 NEXT R
- VariableName:R
+ Variable:R
 1490 RETURN
  
 3000 REM NUMBER OF ROWS AND COLUMNS

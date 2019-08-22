@@ -108,7 +108,7 @@
  ITEMS
  CarriageControl:NL
 140 FOR I=1 TO 6:PRINT "PLAYER"I;:INPUT A$(I):NEXT I:PRINT 
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  ITEMS
@@ -118,7 +118,7 @@
  CarriageControl:;
  ScalarValue:I
  Reference:A$
- VariableName:I
+ Variable:I
  ITEMS
  CarriageControl:NL
 150 PRINT "WOULD THE " B$(7) " COACH DO THE SAME"
@@ -134,7 +134,7 @@
  ITEMS
  CarriageControl:NL
 160 FOR T=1 TO 6:PRINT "PLAYER"T;:INPUT B$(T):NEXT T:PRINT 
- control: VariableName:T
+ control: Variable:T
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  ITEMS
@@ -144,7 +144,7 @@
  CarriageControl:;
  ScalarValue:T
  Reference:B$
- VariableName:T
+ Variable:T
  ITEMS
  CarriageControl:NL
 170 PRINT "INPUT THE REFEREE FOR THIS GAME";:INPUT R$  
@@ -165,14 +165,14 @@
  TextConstant:" STARTING LINEUP"
  CarriageControl:NL
 190 FOR T=1 TO 6:PRINT A$(T):NEXT T  
- control: VariableName:T
+ control: Variable:T
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  ITEMS
  ScalarValue:T
  ScalarValue:A$
  CarriageControl:NL
- VariableName:T
+ Variable:T
 200 PRINT:PRINT TAB(10);B$(7)" STARTING LINEUP"
  ITEMS
  CarriageControl:NL
@@ -186,14 +186,14 @@
  TextConstant:" STARTING LINEUP"
  CarriageControl:NL
 210 FOR T=1 TO 6:PRINT B$(T):NEXT T:PRINT
- control: VariableName:T
+ control: Variable:T
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  ITEMS
  ScalarValue:T
  ScalarValue:B$
  CarriageControl:NL
- VariableName:T
+ Variable:T
  ITEMS
  CarriageControl:NL
 220 PRINT "WE'RE READY FOR TONIGHTS OPENING FACE-OFF."
@@ -215,7 +215,7 @@
  ScalarValue:B$
  CarriageControl:NL
 240 FOR L=1 TO T6:IF L=1 THEN 260
- control: VariableName:L
+ control: Variable:L
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:T6"]
  ScalarValue:L
@@ -258,14 +258,14 @@
  TextConstant:"PASS"
  CarriageControl:;
  Reference:P
- control: VariableName:N
+ control: Variable:N
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
  ScalarValue:N
  Reference:H
  NumericConstant:0
  AssignmentOperator:=
- VariableName:N
+ Variable:N
 300 IF P<0 THEN 290
  ScalarValue:P
  NumericConstant:0
@@ -275,7 +275,7 @@
  NumericConstant:3
  BinaryOperator:>
 310 FOR J=1 TO (P+2) 
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P", "NumericConstant:2", "BinaryOperator:+"]
 320 H(J)=INT(5*RND(X))+1 
@@ -290,7 +290,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 330 NEXT J:IF H(J-1)=H(J-2) THEN 310
- VariableName:J
+ Variable:J
  ScalarValue:J
  NumericConstant:1
  BinaryOperator:-
@@ -996,14 +996,14 @@
  BinaryOperator:+
  AssignmentOperator:=
 990 FOR B1=1 TO 25:PRINT CHR$(7);:NEXT B1:PRINT
- control: VariableName:B1
+ control: Variable:B1
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:25"]
  ITEMS
  NumericConstant:7
  FunctionChr
  CarriageControl:;
- VariableName:B1
+ Variable:B1
  ITEMS
  CarriageControl:NL
 1000 PRINT "SCORE: ";:IF H(8)>H(9) THEN 1020
@@ -1445,15 +1445,15 @@
 1530 GOTO 1540
  LineNumber:1540
 1540 NEXT L:FOR N=1 TO 30:PRINT CHR$(7);:NEXT N:PRINT "THAT'S THE SIREN"
- VariableName:L
- control: VariableName:N
+ Variable:L
+ control: Variable:N
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:30"]
  ITEMS
  NumericConstant:7
  FunctionChr
  CarriageControl:;
- VariableName:N
+ Variable:N
  ITEMS
  TextConstant:"THAT'S THE SIREN"
  CarriageControl:NL
@@ -1563,7 +1563,7 @@
  TextConstant:"-------"
  CarriageControl:NL
 1630 FOR I=1 TO 5:PRINT TAB(5);A$(I);TAB(21);T(I);TAB(36);T1(I) 
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
  ITEMS
@@ -1586,7 +1586,7 @@
  ScalarValue:T1
  CarriageControl:NL
 1640 NEXT I:PRINT 
- VariableName:I
+ Variable:I
  ITEMS
  CarriageControl:NL
 1650 PRINT TAB(25);B$(7)
@@ -1632,7 +1632,7 @@
  TextConstant:"-------"
  CarriageControl:NL
 1680 FOR T=1 TO 5:PRINT TAB(5);B$(T);TAB(21);T2(T);TAB(36);T3(T)
- control: VariableName:T
+ control: Variable:T
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
  ITEMS
@@ -1655,7 +1655,7 @@
  ScalarValue:T3
  CarriageControl:NL
 1690 NEXT T:PRINT 
- VariableName:T
+ Variable:T
  ITEMS
  CarriageControl:NL
 1700 PRINT "SHOTS ON NET":PRINT A$(7)":";S2:PRINT B$(7)":";S3 

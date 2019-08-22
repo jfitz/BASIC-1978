@@ -101,7 +101,7 @@
  TextConstant:"=====     ======"
  CarriageControl:NL
 210 FOR X=1 TO C9
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C9"]
 220 READ X$
@@ -119,12 +119,12 @@
  FunctionMid
  CarriageControl:NL
 240 NEXT X
- VariableName:X
+ Variable:X
 250 PRINT
  ITEMS
  CarriageControl:NL
 260 FOR R=1 TO R9
- control: VariableName:R
+ control: Variable:R
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:R9"]
 270 PRINT 
@@ -162,15 +162,15 @@
 330 GOSUB 3000
  LineNumber:3000
 340 FOR X=1 TO A
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:A"]
 350 GOSUB 3500
  LineNumber:3500
 360 NEXT X
- VariableName:X
+ Variable:X
 370 FOR M=1 TO 10
- control: VariableName:M
+ control: Variable:M
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 380 PRINT "MOVE # ";M;" GUESS ";:INPUT X$
@@ -202,11 +202,11 @@
 420 REM     UNPACK X$ INTO G$(1-P9)
  Remark:    UNPACK X$ INTO G$(1-P9)
 430 FOR X=1 TO P9
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 440 FOR Y=1 TO C9
- control: VariableName:Y
+ control: Variable:Y
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C9"]
 450 IF MID$(X$,X,1)=MID$(L$,Y,1) THEN 480
@@ -220,7 +220,7 @@
  FunctionMid
  BinaryOperator:=
 460 NEXT Y
- VariableName:Y
+ Variable:Y
 470 PRINT "'"; MID$(X$,X,1); "' IS UNRECOGNIZED.":GOTO 380
  ITEMS
  TextConstant:"'"
@@ -242,7 +242,7 @@
  FunctionMid
  AssignmentOperator:=
 490 NEXT X
- VariableName:X
+ Variable:X
 500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
  Remark:    NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
 510 GOSUB 4000
@@ -289,7 +289,7 @@
  ScalarValue:W
  AssignmentOperator:=
 610 NEXT M
- VariableName:M
+ Variable:M
 620 PRINT "YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!":GOTO 640
  ITEMS
  TextConstant:"YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!"
@@ -302,7 +302,7 @@
  TextConstant:"THE ACTUAL COMBINATION WAS: "
  CarriageControl:;
 624 FOR X=1 TO P9
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 625 PRINT A$(X);
@@ -311,7 +311,7 @@
  ScalarValue:A$
  CarriageControl:;
 626 NEXT X
- VariableName:X
+ Variable:X
 627 PRINT
  ITEMS
  CarriageControl:NL
@@ -338,7 +338,7 @@
 680 REM
  Remark:
 690 FOR X=1 TO P
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P"]
 700 I(X)=1
@@ -347,7 +347,7 @@
  NumericConstant:1
  AssignmentOperator:=
 710 NEXT X
- VariableName:X
+ Variable:X
 720 PRINT "NOW I GUESS.  THINK OF A COMBINATION."
  ITEMS
  TextConstant:"NOW I GUESS.  THINK OF A COMBINATION."
@@ -355,7 +355,7 @@
 730 INPUT "HIT RETURN WHEN READY:";X$
  Reference:X$
 740 FOR M=1 TO 10
- control: VariableName:M
+ control: Variable:M
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 750 GOSUB 3000
@@ -378,7 +378,7 @@
  NumericConstant:1
  BinaryOperator:=
 790 FOR X=G TO P
- control: VariableName:X
+ control: Variable:X
  start:   ["ScalarValue:G"]
  end:     ["ScalarValue:P"]
 800 IF I(X)=1 THEN 880
@@ -387,9 +387,9 @@
  NumericConstant:1
  BinaryOperator:=
 810 NEXT X
- VariableName:X
+ Variable:X
 820 FOR X=1 TO G
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:G"]
 830 IF I(X)=1 THEN 880
@@ -398,7 +398,7 @@
  NumericConstant:1
  BinaryOperator:=
 840 NEXT X
- VariableName:X
+ Variable:X
 850 PRINT "YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
  ITEMS
  TextConstant:"YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
@@ -416,13 +416,13 @@
 890 REM     NOW WE CONVERT GUESS #G INTO G$
  Remark:    NOW WE CONVERT GUESS #G INTO G$
 900 FOR X=1 TO G
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:G"]
 910 GOSUB 3500
  LineNumber:3500
 920 NEXT X
- VariableName:X
+ Variable:X
 930 GOSUB 6000
  LineNumber:6000
 940 PRINT "MY GUESS IS: ";
@@ -430,7 +430,7 @@
  TextConstant:"MY GUESS IS: "
  CarriageControl:;
 950 FOR X=1 TO P9
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 960 PRINT H$(X);
@@ -439,7 +439,7 @@
  ScalarValue:H$
  CarriageControl:;
 970 NEXT X
- VariableName:X
+ Variable:X
 980 INPUT "  BLACKS, WHITES ";B1,W1
  Reference:B1
  Reference:W1
@@ -450,7 +450,7 @@
 1000 GOSUB 3000
  LineNumber:3000
 1010 FOR X=1 TO P
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P"]
 1020 GOSUB 3500
@@ -479,9 +479,9 @@
  NumericConstant:0
  AssignmentOperator:=
 1070 NEXT X
- VariableName:X
+ Variable:X
 1080 NEXT M
- VariableName:M
+ Variable:M
 1090 PRINT "I USED UP ALL MY MOVES!"
  ITEMS
  TextConstant:"I USED UP ALL MY MOVES!"
@@ -509,7 +509,7 @@
 1140 GOSUB 5000
  LineNumber:5000
 1150 NEXT R
- VariableName:R
+ Variable:R
 1160 PRINT "GAME OVER"
  ITEMS
  TextConstant:"GAME OVER"
@@ -540,7 +540,7 @@
  TextConstant:"MOVE     GUESS          BLACK     WHITE"
  CarriageControl:NL
 2050 FOR Z=1 TO M-1
- control: VariableName:Z
+ control: Variable:Z
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:M", "NumericConstant:1", "BinaryOperator:-"]
 2060 PRINT Z;TAB(9);S$(Z);TAB(25);S(Z,1);TAB(35);S(Z,2)
@@ -568,7 +568,7 @@
  ScalarValue:S
  CarriageControl:NL
 2070 NEXT Z
- VariableName:Z
+ Variable:Z
 2075 PRINT
  ITEMS
  CarriageControl:NL
@@ -587,7 +587,7 @@
 2535 GOSUB 4000
  LineNumber:4000
 2540 FOR X=1 TO P9
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 2550 PRINT A$(X);
@@ -596,7 +596,7 @@
  ScalarValue:A$
  CarriageControl:;
 2560 NEXT X
- VariableName:X
+ Variable:X
 2565 PRINT
  ITEMS
  CarriageControl:NL
@@ -613,7 +613,7 @@
 3020 REM
  Remark:
 3030 FOR S=1 TO P9
- control: VariableName:S
+ control: Variable:S
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 3040 Q(S)=0
@@ -622,7 +622,7 @@
  NumericConstant:0
  AssignmentOperator:=
 3050 NEXT S
- VariableName:S
+ Variable:S
 3060 RETURN
  
 3500 REM
@@ -639,7 +639,7 @@
 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
  Remark: IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
 3526 FOR S=1 TO P9
- control: VariableName:S
+ control: Variable:S
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 3527 Q(S)=1
@@ -648,7 +648,7 @@
  NumericConstant:1
  AssignmentOperator:=
 3528 NEXT S
- VariableName:S
+ Variable:S
 3529 RETURN
  
 3530 Q=1
@@ -689,7 +689,7 @@
 4020 REM
  Remark:
 4030 FOR S=1 TO P9
- control: VariableName:S
+ control: Variable:S
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 4040 A$(S)=MID$(L$,Q(S),1)
@@ -702,7 +702,7 @@
  FunctionMid
  AssignmentOperator:=
 4050 NEXT S
- VariableName:S
+ Variable:S
 4060 RETURN
  
 4500 REM
@@ -724,7 +724,7 @@
  NumericConstant:0
  AssignmentOperator:=
 4550 FOR S=1 TO P9
- control: VariableName:S
+ control: Variable:S
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 4560 IF G$(S)<>A$(S) THEN 4620
@@ -762,7 +762,7 @@
 4610 GOTO 4660
  LineNumber:4660
 4620 FOR T=1 TO P9
- control: VariableName:T
+ control: Variable:T
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 4630 IF G$(S)<>A$(T) THEN 4650
@@ -802,9 +802,9 @@
  AssignmentOperator:=
  LineNumber:4660
 4650 NEXT T
- VariableName:T
+ Variable:T
 4660 NEXT S
- VariableName:S
+ Variable:S
 4670 RETURN
  
 5000 REM
@@ -841,7 +841,7 @@
 5520 REM
  Remark:
 5530 FOR S=1 TO P9
- control: VariableName:S
+ control: Variable:S
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 5540 G$(S)=MID$(L$,Q(S),1)
@@ -854,7 +854,7 @@
  FunctionMid
  AssignmentOperator:=
 5550 NEXT S
- VariableName:S
+ Variable:S
 5560 RETURN
  
 6000 REM
@@ -864,7 +864,7 @@
 6020 REM
  Remark:
 6030 FOR S=1 TO P9
- control: VariableName:S
+ control: Variable:S
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 6040 H$(S)=MID$(L$,Q(S),1)
@@ -877,7 +877,7 @@
  FunctionMid
  AssignmentOperator:=
 6050 NEXT S
- VariableName:S
+ Variable:S
 6060 RETURN
  
 6500 REM
@@ -887,7 +887,7 @@
 6520 REM
  Remark:
 6530 FOR S=1 TO P9
- control: VariableName:S
+ control: Variable:S
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:P9"]
 6540 G$(S)=H$(S)
@@ -897,7 +897,7 @@
  ScalarValue:H$
  AssignmentOperator:=
 6550 NEXT S
- VariableName:S
+ Variable:S
 6560 RETURN
  
 8000 REM     PROGRAM DATA FOR COLOR NAMES

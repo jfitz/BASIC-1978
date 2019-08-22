@@ -97,7 +97,7 @@
  NumericConstant:0
  AssignmentOperator:=
 90 FOR X=1 TO C-1
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C", "NumericConstant:1", "BinaryOperator:-"]
 100 IF LEN(B$(X))>L THEN L=LEN(B$(X))
@@ -112,7 +112,7 @@
  FunctionLen
  AssignmentOperator:=
 110 NEXT X
- VariableName:X
+ Variable:X
 120 X1=11-C/2
  Reference:X1
  NumericConstant:11
@@ -130,11 +130,11 @@
  BinaryOperator:-
  AssignmentOperator:=
 140 FOR X=1 TO C
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C"]
 150 FOR Y=1 TO LEN(B$(X))
- control: VariableName:Y
+ control: Variable:Y
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:X", "ScalarValue:B$", "FunctionLen"]
 160 IF MID$(B$(X),Y,1)<>" " THEN A(X1+X,Y1+Y)=1:P=P+1
@@ -160,9 +160,9 @@
  BinaryOperator:+
  AssignmentOperator:=
 170 NEXT Y
- VariableName:Y
+ Variable:Y
 180 NEXT X
- VariableName:X
+ Variable:X
 200 PRINT:PRINT:PRINT
  ITEMS
  CarriageControl:NL
@@ -207,21 +207,21 @@
  BinaryOperator:+
  AssignmentOperator:=
 225 FOR X=1 TO X1-1: PRINT: NEXT X
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:X1", "NumericConstant:1", "BinaryOperator:-"]
  ITEMS
  CarriageControl:NL
- VariableName:X
+ Variable:X
 230 FOR X=X1 TO X2
- control: VariableName:X
+ control: Variable:X
  start:   ["ScalarValue:X1"]
  end:     ["ScalarValue:X2"]
 240 PRINT
  ITEMS
  CarriageControl:NL
 250 FOR Y=Y1 TO Y2
- control: VariableName:Y
+ control: Variable:Y
  start:   ["ScalarValue:Y1"]
  end:     ["ScalarValue:Y2"]
 253 IF A(X,Y)=2 THEN A(X,Y)=0:GOTO 270
@@ -290,16 +290,16 @@
  ScalarValue:Y
  AssignmentOperator:=
 270 NEXT Y
- VariableName:Y
+ Variable:Y
 290 NEXT X
- VariableName:X
+ Variable:X
 295 FOR X=X2+1 TO 24: PRINT: NEXT X
- control: VariableName:X
+ control: Variable:X
  start:   ["ScalarValue:X2", "NumericConstant:1", "BinaryOperator:+"]
  end:     ["NumericConstant:24"]
  ITEMS
  CarriageControl:NL
- VariableName:X
+ Variable:X
 299 X1=X3: X2=X4: Y1=Y3: Y2=Y4
  Reference:X1
  ScalarValue:X3
@@ -362,11 +362,11 @@
  NumericConstant:0
  AssignmentOperator:=
 500 FOR X=X1-1 TO X2+1
- control: VariableName:X
+ control: Variable:X
  start:   ["ScalarValue:X1", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:X2", "NumericConstant:1", "BinaryOperator:+"]
 510 FOR Y=Y1-1 TO Y2+1
- control: VariableName:Y
+ control: Variable:Y
  start:   ["ScalarValue:Y1", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:Y2", "NumericConstant:1", "BinaryOperator:+"]
 520 C=0
@@ -374,11 +374,11 @@
  NumericConstant:0
  AssignmentOperator:=
 530 FOR I=X-1 TO X+1
- control: VariableName:I
+ control: Variable:I
  start:   ["ScalarValue:X", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:X", "NumericConstant:1", "BinaryOperator:+"]
 540 FOR J=Y-1 TO Y+1
- control: VariableName:J
+ control: Variable:J
  start:   ["ScalarValue:Y", "NumericConstant:1", "BinaryOperator:-"]
  end:     ["ScalarValue:Y", "NumericConstant:1", "BinaryOperator:+"]
 550 IF A(I,J)=1 OR A(I,J)=2 THEN C=C+1
@@ -399,9 +399,9 @@
  BinaryOperator:+
  AssignmentOperator:=
 560 NEXT J
- VariableName:J
+ Variable:J
 570 NEXT I
- VariableName:I
+ Variable:I
 580 IF A(X,Y)=0 THEN 610
  ScalarValue:X
  ScalarValue:Y
@@ -445,9 +445,9 @@
  BinaryOperator:+
  AssignmentOperator:=
 620 NEXT Y
- VariableName:Y
+ Variable:Y
 630 NEXT X
- VariableName:X
+ Variable:X
 635 X1=X1-1:Y1=Y1-1:X2=X2+1:Y2=Y2+1
  Reference:X1
  ScalarValue:X1

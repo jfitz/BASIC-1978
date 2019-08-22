@@ -62,7 +62,7 @@
  FunctionInt
  AssignmentOperator:=
 220 FOR K=2 TO N
- control: VariableName:K
+ control: Variable:K
  start:   ["NumericConstant:2"]
  end:     ["ScalarValue:N"]
 230 A(K)=INT(N*RND(1)+1)
@@ -77,7 +77,7 @@
  FunctionInt
  AssignmentOperator:=
 240 FOR J=1 TO K-1
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:K", "NumericConstant:1", "BinaryOperator:-"]
 250 IF A(K)=A(J) THEN 230
@@ -87,8 +87,8 @@
  ScalarValue:A
  BinaryOperator:=
 260 NEXT J:NEXT K
- VariableName:J
- VariableName:K
+ Variable:J
+ Variable:K
 280 REM *** PRINT ORIGINAL LIST AND START GAME
  Remark:*** PRINT ORIGINAL LIST AND START GAME
 290 PRINT: PRINT "HERE WE GO ... THE LIST IS:"
@@ -133,7 +133,7 @@
 400 REM *** REVERSE R NUMBERS AND PRINT NEW LIST
  Remark:*** REVERSE R NUMBERS AND PRINT NEW LIST
 410 FOR K=1 TO INT(R/2)
- control: VariableName:K
+ control: Variable:K
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:R", "NumericConstant:2", "BinaryOperator:/", "FunctionInt"]
 420 Z=A(K)
@@ -161,13 +161,13 @@
  ScalarValue:Z
  AssignmentOperator:=
 450 NEXT K
- VariableName:K
+ Variable:K
 460 GOSUB 610
  LineNumber:610
 470 REM *** CHECK FOR A WIN
  Remark:*** CHECK FOR A WIN
 480 FOR K=1 TO N
- control: VariableName:K
+ control: Variable:K
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
 490 IF A(K)<>K THEN 330
@@ -176,7 +176,7 @@
  ScalarValue:K
  BinaryOperator:<>
 500 NEXT K
- VariableName:K
+ Variable:K
 510 PRINT "YOU WON IT IN";T;"MOVES!!!":PRINT
  ITEMS
  TextConstant:"YOU WON IT IN"
@@ -212,14 +212,14 @@
 610 PRINT:FOR K=1 TO N:PRINT A(K);:NEXT K
  ITEMS
  CarriageControl:NL
- control: VariableName:K
+ control: Variable:K
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
  ITEMS
  ScalarValue:K
  ScalarValue:A
  CarriageControl:;
- VariableName:K
+ Variable:K
 650 PRINT:PRINT:RETURN
  ITEMS
  CarriageControl:NL

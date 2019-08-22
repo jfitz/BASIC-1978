@@ -70,14 +70,14 @@
  TextConstant:"WHEN ? APPEARS,TYPE NAME"
  CarriageControl:NL
 350 FOR A=1 TO C
- control: VariableName:A
+ control: Variable:A
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C"]
 360 INPUT W$(A)
  ScalarValue:A
  Reference:W$
 370 NEXT A
- VariableName:A
+ Variable:A
 380 PRINT
  ITEMS
  CarriageControl:NL
@@ -94,20 +94,20 @@
  ITEMS
  CarriageControl:NL
 410 FOR I=1 TO 8: S(I)=0: NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
  ScalarValue:I
  Reference:S
  NumericConstant:0
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 420 LET R=0
  Reference:R
  NumericConstant:0
  AssignmentOperator:=
 430 FOR A=1 TO 8
- control: VariableName:A
+ control: Variable:A
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 440 LET D(A)=INT(10*RND(1)+1)
@@ -122,9 +122,9 @@
  FunctionInt
  AssignmentOperator:=
 450 NEXT A
- VariableName:A
+ Variable:A
 460 FOR A=1 TO 8
- control: VariableName:A
+ control: Variable:A
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 470 LET R=R+D(A)
@@ -135,7 +135,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 480 NEXT A
- VariableName:A
+ Variable:A
 490 LET V$(1)="JOE MAW"
  NumericConstant:1
  Reference:V$
@@ -177,7 +177,7 @@
  TextConstant:"MIDNIGHT"
  AssignmentOperator:=
 570 FOR N=1 TO 8
- control: VariableName:N
+ control: Variable:N
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 580 PRINT V$(N),,N,R/D(N);":1"
@@ -196,7 +196,7 @@
  TextConstant:":1"
  CarriageControl:NL
 590 NEXT N
- VariableName:N
+ Variable:N
 600 PRINT"--------------------------------------------------"
  ITEMS
  TextConstant:"--------------------------------------------------"
@@ -206,7 +206,7 @@
  TextConstant:"PLACE YOUR BETS...HORSE # THEN AMOUNT"
  CarriageControl:NL
 620 FOR J=1 TO C
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C"]
 630 PRINT W$(J);
@@ -236,7 +236,7 @@
 680 GOTO 630
  LineNumber:630
 690 NEXT J
- VariableName:J
+ Variable:J
 700 PRINT
  ITEMS
  CarriageControl:NL
@@ -249,7 +249,7 @@
  TextConstant:"XXXXSTARTXXXX"
  CarriageControl:NL
 730 FOR I=1 TO 8
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 740 LET M=I
@@ -384,13 +384,13 @@
  NumericConstant:6
  AssignmentOperator:=
 970 NEXT I
- VariableName:I
+ Variable:I
 980 LET M=I
  Reference:M
  ScalarValue:I
  AssignmentOperator:=
 990 FOR I=1 TO 8
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 1000 LET S(M(I))=S(M(I))+Y(M(I))
@@ -406,17 +406,17 @@
  BinaryOperator:+
  AssignmentOperator:=
 1010 NEXT I
- VariableName:I
+ Variable:I
 1020 LET I=1
  Reference:I
  NumericConstant:1
  AssignmentOperator:=
 1030 FOR L=1 TO 8
- control: VariableName:L
+ control: Variable:L
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 1040 FOR I=1 TO 8-L
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8", "ScalarValue:L", "BinaryOperator:-"]
 1050 IF S(M(I))<S(M(I+1))THEN 1090
@@ -450,9 +450,9 @@
  ScalarValue:H
  AssignmentOperator:=
 1090 NEXT I
- VariableName:I
+ Variable:I
 1100 NEXT L
- VariableName:L
+ Variable:L
 1110 LET T=S(M(8))
  Reference:T
  NumericConstant:8
@@ -460,7 +460,7 @@
  ScalarValue:S
  AssignmentOperator:=
 1120 FOR I=1 TO 8
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 1130 LET B=S(M(I))-S(M(I-1))
@@ -480,7 +480,7 @@
  NumericConstant:0
  BinaryOperator:=
 1150 FOR A=1 TO B
- control: VariableName:A
+ control: Variable:A
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:B"]
 1160 PRINT
@@ -493,23 +493,23 @@
  NumericConstant:27
  BinaryOperator:>
 1180 NEXT A
- VariableName:A
+ Variable:A
 1190 PRINT M(I);
  ITEMS
  ScalarValue:I
  ScalarValue:M
  CarriageControl:;
 1200 NEXT I
- VariableName:I
+ Variable:I
 1210 FOR A=1 TO 28-T
- control: VariableName:A
+ control: Variable:A
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:28", "ScalarValue:T", "BinaryOperator:-"]
 1220 PRINT
  ITEMS
  CarriageControl:NL
 1230 NEXT A
- VariableName:A
+ Variable:A
 1240 PRINT "XXXXFINISHXXXX";
  ITEMS
  TextConstant:"XXXXFINISHXXXX"
@@ -540,7 +540,7 @@
  NumericConstant:1
  AssignmentOperator:=
 1280 FOR I=8 TO 1 STEP-1
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:8"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
@@ -576,9 +576,9 @@
  BinaryOperator:+
  AssignmentOperator:=
 1320  NEXT I
- VariableName:I
+ Variable:I
 1330 FOR J=1 TO C
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C"]
 1340 IF Q(J)<>M(8) THEN 1370
@@ -611,7 +611,7 @@
  BinaryOperator:*
  CarriageControl:NL
 1370 NEXT J
- VariableName:J
+ Variable:J
 1372 PRINT "DO YOU WANT TO BET ON THE NEXT RACE ?"
  ITEMS
  TextConstant:"DO YOU WANT TO BET ON THE NEXT RACE ?"

@@ -67,13 +67,13 @@
  FunctionInt
  AssignmentOperator:=
 60 FOR I=1 TO C
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:C"]
 70 READ S$
  Reference:S$
 80 NEXT I
- VariableName:I
+ Variable:I
 90 G=0
  Reference:G
  NumericConstant:0
@@ -85,7 +85,7 @@
  FunctionLen
  AssignmentOperator:=
 100 FOR I=1 TO LEN(S$): S(I)=ASC(MID$(S$,I,1)): NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:S$", "FunctionLen"]
  ScalarValue:I
@@ -96,9 +96,9 @@
  FunctionMid
  FunctionAsc
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 110 FOR I=1 TO 5
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 120 A(I)=45
@@ -107,9 +107,9 @@
  NumericConstant:45
  AssignmentOperator:=
 130 NEXT I
- VariableName:I
+ Variable:I
 140 FOR J=1 TO 5
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 144 P(J)=0
@@ -118,7 +118,7 @@
  NumericConstant:0
  AssignmentOperator:=
 146 NEXT J
- VariableName:J
+ Variable:J
 150 PRINT "GUESS A FIVE LETTER WORD";
  ITEMS
  TextConstant:"GUESS A FIVE LETTER WORD"
@@ -136,14 +136,14 @@
  ScalarValue:G$
  BinaryOperator:=
 173 FOR I=1 TO 7: P(I)=0: NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
  ScalarValue:I
  Reference:P
  NumericConstant:0
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 175 L(0)=LEN(L$)
  NumericConstant:0
  Reference:L
@@ -151,7 +151,7 @@
  FunctionLen
  AssignmentOperator:=
 180 FOR I=1 TO LEN(L$): L(I)=ASC(MID$(L$,I,1)): NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:L$", "FunctionLen"]
  ScalarValue:I
@@ -162,7 +162,7 @@
  FunctionMid
  FunctionAsc
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 190 IF L(1)=63 THEN 300
  NumericConstant:1
  ScalarValue:L
@@ -181,11 +181,11 @@
  NumericConstant:1
  AssignmentOperator:=
 210 FOR I=1 TO 5
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 220 FOR J=1 TO 5
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 230 IF S(I)<>L(J) THEN 260
@@ -223,9 +223,9 @@
  BinaryOperator:+
  AssignmentOperator:=
 260 NEXT J
- VariableName:J
+ Variable:J
 265 NEXT I
- VariableName:I
+ Variable:I
 270 A(0)=5
  NumericConstant:0
  Reference:A
@@ -240,7 +240,7 @@
  Reference:A$
  TextConstant:""
  AssignmentOperator:=
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:0", "ScalarValue:A"]
  Reference:A$
@@ -250,12 +250,12 @@
  FunctionChr
  BinaryOperator:+
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 277 P$="": FOR I=1 TO P(0): P$=P$+CHR$(P(I)): NEXT I
  Reference:P$
  TextConstant:""
  AssignmentOperator:=
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:0", "ScalarValue:P"]
  Reference:P$
@@ -265,7 +265,7 @@
  FunctionChr
  BinaryOperator:+
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 280 PRINT "THERE WERE";M;"MATCHES AND THE COMMON LETTERS WERE...";P$
  ITEMS
  TextConstant:"THERE WERE"
@@ -305,7 +305,7 @@
  Reference:S$
  TextConstant:""
  AssignmentOperator:=
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
  Reference:S$
@@ -315,7 +315,7 @@
  FunctionChr
  BinaryOperator:+
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 310 PRINT "THE SECRET WORD IS ";S$: PRINT
  ITEMS
  TextConstant:"THE SECRET WORD IS "

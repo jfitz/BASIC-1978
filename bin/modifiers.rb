@@ -94,7 +94,8 @@ class ForModifier
       !control_tokens.empty? &&
       control_tokens[0].variable?
 
-    @control = VariableName.new(control_tokens[0])
+    control_name = VariableName.new(control_tokens[0])
+    @control = Variable.new(control_name)
     @start = ValueScalarExpression.new(start_tokens)
     @end = ValueScalarExpression.new(end_tokens)
 
@@ -138,7 +139,7 @@ class ForModifier
     start_values = @start.evaluate(interpreter)
     start_value = start_values[0]
     @current_value = start_value if @current_value.nil?
-    interpreter.set_value(@control, @current_value)
+    interpreter.set_value(@control.name, @current_value)
     endvs = @end.evaluate(interpreter)
     endv = endvs[0]
 
@@ -149,8 +150,8 @@ class ForModifier
       step = steps[0]
     end
 
-    interpreter.lock_variable(@control)
-    interpreter.enter_fornext(@control)
+    interpreter.lock_variable(@control.name)
+    interpreter.enter_fornext(@control.name)
     terminated = terminated?(@current_value, step, endv)
 
     io = interpreter.trace_out
@@ -159,7 +160,7 @@ class ForModifier
     return unless terminated
 
     # front-terminated; go to next statement or modifier
-    interpreter.unlock_variable(@control)
+    interpreter.unlock_variable(@control.name)
     interpreter.exit_fornext
     @current_value = nil
 
@@ -183,9 +184,9 @@ class ForModifier
       step = steps[0]
     end
 
-    @current_value = interpreter.get_value(@control)
+    @current_value = interpreter.get_value(@control.name)
     @current_value += step
-    interpreter.set_value(@control, @current_value)
+    interpreter.set_value(@control.name, @current_value)
 
     terminated = terminated?(@current_value, step, endv)
 
@@ -194,7 +195,7 @@ class ForModifier
 
     if terminated
       @current_value = nil
-      interpreter.unlock_variable(@control)
+      interpreter.unlock_variable(@control.name)
       interpreter.exit_fornext
     else
       current_line_index = interpreter.current_line_index

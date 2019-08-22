@@ -36,7 +36,7 @@
 60 REM
  Remark:
 70 FOR T=1 TO LEN(A$)
- control: VariableName:T
+ control: Variable:T
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:A$", "FunctionLen"]
 80 P$=MID$(A$,T,1)
@@ -47,7 +47,7 @@
  FunctionMid
  AssignmentOperator:=
 90 FOR O=1 TO 50
- control: VariableName:O
+ control: Variable:O
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:50"]
 95 READ S$,S(1),S(2),S(3),S(4),S(5),S(6),S(7)
@@ -75,7 +75,7 @@
  ScalarValue:S$
  BinaryOperator:=
 120 NEXT O
- VariableName:O
+ Variable:O
 200 RESTORE
  
 201 X$=M$
@@ -90,11 +90,11 @@
  ScalarValue:S$
  AssignmentOperator:=
 205 FOR U=1 TO 7
- control: VariableName:U
+ control: Variable:U
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
 210 FOR K=8 TO 0 STEP -1
- control: VariableName:K
+ control: Variable:K
  start:   ["NumericConstant:8"]
  end:     ["NumericConstant:0"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
@@ -136,9 +136,9 @@
  NumericConstant:1
  BinaryOperator:=
 280 NEXT K
- VariableName:K
+ Variable:K
 445 FOR T1=1 TO X
- control: VariableName:T1
+ control: Variable:T1
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:X"]
 447 PRINT TAB((63-4.5*Y)*G1/(LEN(X$))+1);
@@ -158,7 +158,7 @@
  FunctionTab
  CarriageControl:;
 450 FOR B=1 TO F(U)
- control: VariableName:B
+ control: Variable:B
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:U", "ScalarValue:F"]
 460 IF J(B)=0 THEN 500
@@ -167,64 +167,64 @@
  NumericConstant:0
  BinaryOperator:=
 465 FOR I=1 TO Y: PRINT X$;: NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:Y"]
  ITEMS
  ScalarValue:X$
  CarriageControl:;
- VariableName:I
+ Variable:I
 470 GOTO 600
  LineNumber:600
 500 FOR I=1 TO Y
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:Y"]
 510 FOR I1=1 TO LEN(X$)
- control: VariableName:I1
+ control: Variable:I1
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:X$", "FunctionLen"]
 520 PRINT " ";: NEXT I1
  ITEMS
  TextConstant:" "
  CarriageControl:;
- VariableName:I1
+ Variable:I1
 530 NEXT I
- VariableName:I
+ Variable:I
 600 NEXT B
- VariableName:B
+ Variable:B
 620 PRINT
  ITEMS
  CarriageControl:NL
 630 NEXT T1
- VariableName:T1
+ Variable:T1
 700 NEXT U
- VariableName:U
+ Variable:U
 750 FOR H=1 TO 2*X: PRINT: NEXT H
- control: VariableName:H
+ control: Variable:H
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:2", "ScalarValue:X", "BinaryOperator:*"]
  ITEMS
  CarriageControl:NL
- VariableName:H
+ Variable:H
 800 NEXT T
- VariableName:T
+ Variable:T
 806 FOR H=1 TO 75: PRINT: NEXT H
- control: VariableName:H
+ control: Variable:H
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:75"]
  ITEMS
  CarriageControl:NL
- VariableName:H
+ Variable:H
 810 STOP
  
 812 FOR H=1 TO 7*X: PRINT: NEXT H
- control: VariableName:H
+ control: Variable:H
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7", "ScalarValue:X", "BinaryOperator:*"]
  ITEMS
  CarriageControl:NL
- VariableName:H
+ Variable:H
 813 GOTO 800
  LineNumber:800
 815 F(U)=9-K: GOTO 445

@@ -1414,6 +1414,17 @@ class VariableName < AbstractElement
   end
 end
 
+# empty variable, used only for NEXT without control variable
+class EmptyVariable
+  def name
+    EmptyToken.new
+  end
+
+  def empty?
+    true
+  end
+end
+
 # Hold a variable (name with possible subscripts and value)
 class Variable < AbstractElement
   attr_reader :subscripts

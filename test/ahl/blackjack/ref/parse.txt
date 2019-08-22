@@ -69,7 +69,7 @@
  TextConstant:"RESHUFFLING"
  CarriageControl:NL
 130 FOR D=D TO 1 STEP -1
- control: VariableName:D
+ control: Variable:D
  start:   ["ScalarValue:D"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
@@ -86,9 +86,9 @@
  ScalarValue:D
  AssignmentOperator:=
 160 NEXT D
- VariableName:D
+ Variable:D
 170 FOR C1=52 TO C STEP -1
- control: VariableName:C1
+ control: Variable:C1
  start:   ["NumericConstant:52"]
  end:     ["ScalarValue:C"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
@@ -123,7 +123,7 @@
  ScalarValue:C3
  AssignmentOperator:=
 220 NEXT C1
- VariableName:C1
+ Variable:C1
 230 X=C(C)
  Reference:X
  ScalarValue:C
@@ -154,7 +154,7 @@
  NumericConstant:0
  AssignmentOperator:=
 370 FOR Q2=1 TO R(I)
- control: VariableName:Q2
+ control: Variable:Q2
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:I", "ScalarValue:R"]
 380 X=P(I,Q2)
@@ -166,7 +166,7 @@
 390 GOSUB 500
  LineNumber:500
 400 NEXT Q2
- VariableName:Q2
+ Variable:Q2
 410 Q(I)=Q
  ScalarValue:I
  Reference:Q
@@ -458,7 +458,7 @@
  FunctionLeft
  AssignmentOperator:=
 1430 FOR H=1 TO H1 STEP 2
- control: VariableName:H
+ control: Variable:H
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:H1"]
  step:    ["NumericConstant:2"]
@@ -470,7 +470,7 @@
  FunctionMid
  BinaryOperator:=
 1450 NEXT H
- VariableName:H
+ Variable:H
 1460 PRINT "TYPE ";MID$(I$,1,H1-1);" OR ";MID$(I$,H1,2);" PLEASE";
  ITEMS
  TextConstant:"TYPE "
@@ -516,11 +516,11 @@
  TextConstant:"H,S,D,C"
  AssignmentOperator:=
 1540 FOR I=1 TO 13
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:13"]
 1550 FOR J=4*I-3 TO 4*I
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:4", "ScalarValue:I", "BinaryOperator:*", "NumericConstant:3", "BinaryOperator:-"]
  end:     ["NumericConstant:4", "ScalarValue:I", "BinaryOperator:*"]
 1560 D(J)=I
@@ -529,9 +529,9 @@
  ScalarValue:I
  AssignmentOperator:=
 1570 NEXT J
- VariableName:J
+ Variable:J
 1580 NEXT I
- VariableName:I
+ Variable:I
 1590 D=52
  Reference:D
  NumericConstant:52
@@ -629,14 +629,14 @@
  BinaryOperator:>
  BinaryOperator:OR
 1790 FOR I=1 TO 8: T(I)=0: NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
  ScalarValue:I
  Reference:T
  NumericConstant:0
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 1800 D1=N+1
  Reference:D1
  ScalarValue:N
@@ -662,56 +662,56 @@
  BinaryOperator:-
  AssignmentOperator:=
 1830 FOR I=1 TO N: Z(I)=0: NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
  ScalarValue:I
  Reference:Z
  NumericConstant:0
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 1840 FOR I=1 TO 15: B(I)=0: NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:15"]
  ScalarValue:I
  Reference:B
  NumericConstant:0
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 1850 FOR I=1 TO 15: Q(I)=0: NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:15"]
  ScalarValue:I
  Reference:Q
  NumericConstant:0
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 1860 FOR I=1 TO 7: S(I)=0: NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
  ScalarValue:I
  Reference:S
  NumericConstant:0
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 1870 FOR I=1 TO 15: R(I)=0: NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:15"]
  ScalarValue:I
  Reference:R
  NumericConstant:0
  AssignmentOperator:=
- VariableName:I
+ Variable:I
 1880 PRINT "BETS:"
  ITEMS
  TextConstant:"BETS:"
  CarriageControl:NL
 1890 FOR I=1 TO N: PRINT "#";I;: INPUT Z(I): NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
  ITEMS
@@ -721,9 +721,9 @@
  CarriageControl:;
  ScalarValue:I
  Reference:Z
- VariableName:I
+ Variable:I
 1900 FOR I=1 TO N
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
 1910 IF Z(I)<=0 OR Z(I)>500 THEN 1880
@@ -743,13 +743,13 @@
  ScalarValue:Z
  AssignmentOperator:=
 1930 NEXT I
- VariableName:I
+ Variable:I
 1940 PRINT "PLAYER  ";
  ITEMS
  TextConstant:"PLAYER  "
  CarriageControl:;
 1950 FOR I=1 TO N
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
 1960 PRINT TAB(I*7);I;
@@ -762,7 +762,7 @@
  ScalarValue:I
  CarriageControl:;
 1970 NEXT I
- VariableName:I
+ Variable:I
 1980 PRINT TAB((N+1)*7)"DEALER"
  ITEMS
  ScalarValue:N
@@ -775,7 +775,7 @@
  TextConstant:"DEALER"
  CarriageControl:NL
 1990 FOR J=1 TO 2
- control: VariableName:J
+ control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:2"]
 2000 PRINT TAB(7);
@@ -784,7 +784,7 @@
  FunctionTab
  CarriageControl:;
 2010 FOR I=1 TO D1
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:D1"]
 2020 GOSUB 100
@@ -805,14 +805,14 @@
  BinaryOperator:OR
  LineNumber:750
 2050 NEXT I
- VariableName:I
+ Variable:I
 2060 PRINT
  ITEMS
  CarriageControl:NL
 2070 NEXT J
- VariableName:J
+ Variable:J
 2080 FOR I=1 TO D1
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:D1"]
 2090 R(I)=2
@@ -821,7 +821,7 @@
  NumericConstant:2
  AssignmentOperator:=
 2100 NEXT I
- VariableName:I
+ Variable:I
 2110 REM--TEST FOR INSURANCE
  Remark:--TEST FOR INSURANCE
 2120 IF P(D1,1)>1 THEN 2240
@@ -847,7 +847,7 @@
  TextConstant:"INSURANCE BETS"
  CarriageControl:NL
 2170 FOR I=1 TO N: PRINT "#";I;: INPUT Z(I): NEXT I
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
  ITEMS
@@ -857,9 +857,9 @@
  CarriageControl:;
  ScalarValue:I
  Reference:Z
- VariableName:I
+ Variable:I
 2180 FOR I=1 TO N
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
 2190 IF Z(I)<0 OR Z(I)>B(I)/2 THEN 2160
@@ -876,9 +876,9 @@
  BinaryOperator:>
  BinaryOperator:OR
 2200 NEXT I
- VariableName:I
+ Variable:I
 2210 FOR I=1 TO N
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
 2220 S(I)=Z(I)*(3*(-(P(D1,2)>=10))-1)
@@ -899,7 +899,7 @@
  BinaryOperator:*
  AssignmentOperator:=
 2230 NEXT I
- VariableName:I
+ Variable:I
 2240 REM--TEST FOR DEALER BLACKJACK
  Remark:--TEST FOR DEALER BLACKJACK
 2250 L1=1: L2=1
@@ -977,13 +977,13 @@
  TextConstant:"FOR BLACKJACK"
  CarriageControl:NL
 2280 FOR I=1 TO D1
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:D1"]
 2290 GOSUB 300
  LineNumber:300
 2300 NEXT I
- VariableName:I
+ Variable:I
 2310 GOTO 3140
  LineNumber:3140
 2320 REM--NO DEALER BLACKJACK
@@ -1009,7 +1009,7 @@
 2350 REM--NOW PLAY THE HANDS
  Remark:--NOW PLAY THE HANDS
 2360 FOR I=1 TO N
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
 2370 PRINT "PLAYER";I;
@@ -1241,13 +1241,13 @@
  BinaryOperator:-
  AssignmentOperator:=
 2900 NEXT I
- VariableName:I
+ Variable:I
 2910 GOSUB 300
  LineNumber:300
 2920 REM--TEST FOR PLAYING DEALER'S HAND
  Remark:--TEST FOR PLAYING DEALER'S HAND
 2930 FOR I=1 TO N
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
 2940 IF R(I)>0 OR R(I+D1)>0 THEN 3010
@@ -1263,7 +1263,7 @@
  BinaryOperator:>
  BinaryOperator:OR
 2950 NEXT I
- VariableName:I
+ Variable:I
 2960 PRINT "DEALER HAD A";
  ITEMS
  TextConstant:"DEALER HAD A"
@@ -1383,7 +1383,7 @@
  ITEMS
  CarriageControl:NL
 3170 FOR I=1 TO N
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["ScalarValue:N"]
 3180 AA=Q(I): GOSUB 3400
@@ -1517,7 +1517,7 @@
  BinaryOperator:-
  AssignmentOperator:=
 3330 NEXT I
- VariableName:I
+ Variable:I
 3340 PRINT "DEALER'S TOTAL=";T(D1)
  ITEMS
  TextConstant:"DEALER'S TOTAL="

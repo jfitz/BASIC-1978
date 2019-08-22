@@ -37,14 +37,14 @@
  NumericConstant:200
  Declaration:A$
 80 FOR I=0 TO 3
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:3"]
 90 READ A$(I)
  ScalarValue:I
  Reference:A$
 100 NEXT I
- VariableName:I
+ Variable:I
 110 N=VAL(A$(0))
  Reference:N
  NumericConstant:0
@@ -239,7 +239,7 @@
  ScalarValue:A$
  AssignmentOperator:=
 410 FOR Z=3 TO LEN(Q$)
- control: VariableName:Z
+ control: Variable:Z
  start:   ["NumericConstant:3"]
  end:     ["ScalarValue:Q$", "FunctionLen"]
 415 IF MID$(Q$,Z,1)<>"\" THEN PRINT MID$(Q$,Z,1);: NEXT Z
@@ -255,7 +255,7 @@
  NumericConstant:1
  FunctionMid
  CarriageControl:;
- VariableName:Z
+ Variable:Z
 420 INPUT C$
  Reference:C$
 430 C$=LEFT$(C$,1)
@@ -279,7 +279,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 455 FOR X=3 TO LEN(Q$)-1
- control: VariableName:X
+ control: Variable:X
  start:   ["NumericConstant:3"]
  end:     ["ScalarValue:Q$", "FunctionLen", "NumericConstant:1", "BinaryOperator:-"]
 460 IF MID$(Q$,X,2)=T$ THEN 480
@@ -290,11 +290,11 @@
  ScalarValue:T$
  BinaryOperator:=
 470 NEXT X
- VariableName:X
+ Variable:X
 475 STOP
  
 480 FOR Y=X+1 TO LEN(Q$)
- control: VariableName:Y
+ control: Variable:Y
  start:   ["ScalarValue:X", "NumericConstant:1", "BinaryOperator:+"]
  end:     ["ScalarValue:Q$", "FunctionLen"]
 490 IF MID$(Q$,Y,1)="\" THEN 510
@@ -305,7 +305,7 @@
  TextConstant:"\"
  BinaryOperator:=
 500 NEXT Y
- VariableName:Y
+ Variable:Y
 505 STOP
  
 510 K=VAL(MID$(Q$,X+2,Y-X-2))
@@ -340,7 +340,7 @@
  NumericConstant:0
  AssignmentOperator:=
 610 FOR I=1 TO 200
- control: VariableName:I
+ control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:200"]
 620 IF LEFT$(A$(I),2)<>"\A" THEN 650
@@ -358,7 +358,7 @@
  FunctionTab
  CarriageControl:;
 630 FOR Z=3 TO LEN(A$(I))
- control: VariableName:Z
+ control: Variable:Z
  start:   ["NumericConstant:3"]
  end:     ["ScalarValue:I", "ScalarValue:A$", "FunctionLen"]
 640 IF MID$(A$(I),Z,1)<>"\" THEN PRINT MID$(A$(I),Z,1);: NEXT Z
@@ -376,7 +376,7 @@
  NumericConstant:1
  FunctionMid
  CarriageControl:;
- VariableName:Z
+ Variable:Z
 645 X=X+1: IF X=4 THEN X=0: PRINT
  Reference:X
  ScalarValue:X
@@ -392,7 +392,7 @@
  ITEMS
  CarriageControl:NL
 650 NEXT I
- VariableName:I
+ Variable:I
 660 PRINT
  ITEMS
  CarriageControl:NL
