@@ -30,7 +30,7 @@
 6 Q=INT(60/R):A$="CC"
  Reference:Q
  NumericConstant:60
- ScalarValue:R
+ Value:R
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
@@ -40,26 +40,26 @@
 8 FOR L=1 TO Q
  control: Variable:L
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:Q"]
+ end:     ["Value:Q"]
 10 X=1:Y=R:Z=2
  Reference:X
  NumericConstant:1
  AssignmentOperator:=
  Reference:Y
- ScalarValue:R
+ Value:R
  AssignmentOperator:=
  Reference:Z
  NumericConstant:2
  AssignmentOperator:=
 20 FOR N=X TO Y STEP Z
  control: Variable:N
- start:   ["ScalarValue:X"]
- end:     ["ScalarValue:Y"]
- step:    ["ScalarValue:Z"]
+ start:   ["Value:X"]
+ end:     ["Value:Y"]
+ step:    ["Value:Z"]
 25 PRINT TAB((R-N)/2);
  ITEMS
- ScalarValue:R
- ScalarValue:N
+ Value:R
+ Value:N
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:/
@@ -68,7 +68,7 @@
 28 FOR M=1 TO Q
  control: Variable:M
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:Q"]
+ end:     ["Value:Q"]
 29 C=1
  Reference:C
  NumericConstant:1
@@ -76,10 +76,10 @@
 30 FOR A=1 TO N
  control: Variable:A
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
 32 IF C>LEN(A$) THEN PRINT "!";:GOTO 50
- ScalarValue:C
- ScalarValue:A$
+ Value:C
+ Value:A$
  FunctionLen
  BinaryOperator:>
  ITEMS
@@ -88,30 +88,30 @@
  LineNumber:50
 34 PRINT MID$(A$,C,1);
  ITEMS
- ScalarValue:A$
- ScalarValue:C
+ Value:A$
+ Value:C
  NumericConstant:1
  FunctionMid
  CarriageControl:;
 36 C=C+1
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 50 NEXT A
  Variable:A
 53 IF M=Q THEN 60
- ScalarValue:M
- ScalarValue:Q
+ Value:M
+ Value:Q
  BinaryOperator:=
 55 PRINT TAB(R*M+(R-N)/2);
  ITEMS
- ScalarValue:R
- ScalarValue:M
+ Value:R
+ Value:M
  BinaryOperator:*
- ScalarValue:R
- ScalarValue:N
+ Value:R
+ Value:N
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:/
@@ -126,12 +126,12 @@
 70 NEXT N
  Variable:N
 83 IF X<>1 THEN 95
- ScalarValue:X
+ Value:X
  NumericConstant:1
  BinaryOperator:<>
 85 X=R-2:Y=1:Z=-2
  Reference:X
- ScalarValue:R
+ Value:R
  NumericConstant:2
  BinaryOperator:-
  AssignmentOperator:=

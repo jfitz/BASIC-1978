@@ -110,25 +110,25 @@
  AssignmentOperator:=
 150 PRINT L,INT(A);INT(5280*(A-INT(A))),3600*V,M-N,:INPUT K:T=10 
  ITEMS
- ScalarValue:L
+ Value:L
  CarriageControl:,
- ScalarValue:A
+ Value:A
  FunctionInt
  CarriageControl:;
  NumericConstant:5280
- ScalarValue:A
- ScalarValue:A
+ Value:A
+ Value:A
  FunctionInt
  BinaryOperator:-
  BinaryOperator:*
  FunctionInt
  CarriageControl:,
  NumericConstant:3600
- ScalarValue:V
+ Value:V
  BinaryOperator:*
  CarriageControl:,
- ScalarValue:M
- ScalarValue:N
+ Value:M
+ Value:N
  BinaryOperator:-
  CarriageControl:,
  Reference:K
@@ -136,45 +136,45 @@
  NumericConstant:10
  AssignmentOperator:=
 160 IF M-N<1E-03 THEN 240
- ScalarValue:M
- ScalarValue:N
+ Value:M
+ Value:N
  BinaryOperator:-
  NumericConstant:1E-03
  BinaryOperator:<
 170 IF T<1E-03 THEN 150
- ScalarValue:T
+ Value:T
  NumericConstant:1E-03
  BinaryOperator:<
 180 S=T: IF M>=N+S*K THEN 200
  Reference:S
- ScalarValue:T
+ Value:T
  AssignmentOperator:=
- ScalarValue:M
- ScalarValue:N
- ScalarValue:S
- ScalarValue:K
+ Value:M
+ Value:N
+ Value:S
+ Value:K
  BinaryOperator:*
  BinaryOperator:+
  BinaryOperator:>=
 190 S=(M-N)/K
  Reference:S
- ScalarValue:M
- ScalarValue:N
+ Value:M
+ Value:N
  BinaryOperator:-
- ScalarValue:K
+ Value:K
  BinaryOperator:/
  AssignmentOperator:=
 200 GOSUB 420: IF I<=O THEN 340
  LineNumber:420
- ScalarValue:I
- ScalarValue:O
+ Value:I
+ Value:O
  BinaryOperator:<=
 210 IF V<=0 THEN 230
- ScalarValue:V
+ Value:V
  NumericConstant:0
  BinaryOperator:<=
 220 IF J<0 THEN 370
- ScalarValue:J
+ Value:J
  NumericConstant:0
  BinaryOperator:<
 230 GOSUB 330: GOTO 160
@@ -184,59 +184,59 @@
  ITEMS
  TextConstant:"FUEL OUT AT"
  CarriageControl:;
- ScalarValue:L
+ Value:L
  CarriageControl:;
  TextConstant:"SECONDS"
  CarriageControl:NL
  Reference:S
- ScalarValue:V
+ Value:V
  UnaryOperator:-
- ScalarValue:V
- ScalarValue:V
+ Value:V
+ Value:V
  BinaryOperator:*
  NumericConstant:2
- ScalarValue:A
+ Value:A
  BinaryOperator:*
- ScalarValue:G
+ Value:G
  BinaryOperator:*
  BinaryOperator:+
  FunctionSqr
  BinaryOperator:+
- ScalarValue:G
+ Value:G
  BinaryOperator:/
  AssignmentOperator:=
 250 V=V+G*S: L=L+S
  Reference:V
- ScalarValue:V
- ScalarValue:G
- ScalarValue:S
+ Value:V
+ Value:G
+ Value:S
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
  Reference:L
- ScalarValue:L
- ScalarValue:S
+ Value:L
+ Value:S
  BinaryOperator:+
  AssignmentOperator:=
 260 W=3600*V: PRINT "ON MOON AT";L;"SECONDS - IMPACT VELOCITY";W;"MPH" 
  Reference:W
  NumericConstant:3600
- ScalarValue:V
+ Value:V
  BinaryOperator:*
  AssignmentOperator:=
  ITEMS
  TextConstant:"ON MOON AT"
  CarriageControl:;
- ScalarValue:L
+ Value:L
  CarriageControl:;
  TextConstant:"SECONDS - IMPACT VELOCITY"
  CarriageControl:;
- ScalarValue:W
+ Value:W
  CarriageControl:;
  TextConstant:"MPH"
  CarriageControl:NL
 274 IF W<=1.2 THEN PRINT "PERFECT LANDING!": GOTO 440 
- ScalarValue:W
+ Value:W
  NumericConstant:1.2
  BinaryOperator:<=
  ITEMS
@@ -244,7 +244,7 @@
  CarriageControl:NL
  LineNumber:440
 280 IF W<=10 THEN PRINT "GOOD LANDING (COULD RE BETTER)":GOTO 440 
- ScalarValue:W
+ Value:W
  NumericConstant:10
  BinaryOperator:<=
  ITEMS
@@ -252,7 +252,7 @@
  CarriageControl:NL
  LineNumber:440
 282 IF W>60 THEN 300
- ScalarValue:W
+ Value:W
  NumericConstant:60
  BinaryOperator:>
 284 PRINT "CRAFT DAMAGE... YOU'RE STRANDED HERE UNTIL A RESCUE" 
@@ -273,7 +273,7 @@
  ITEMS
  TextConstant:"IN FACT, YOU BLASTED A NEW LUNAR CRATER"
  CarriageControl:;
- ScalarValue:W
+ Value:W
  NumericConstant:.227
  BinaryOperator:*
  CarriageControl:;
@@ -283,47 +283,47 @@
  LineNumber:440
 330 L=L+S: T=T-S: M=M-S*K: A=I: V=J: RETURN
  Reference:L
- ScalarValue:L
- ScalarValue:S
+ Value:L
+ Value:S
  BinaryOperator:+
  AssignmentOperator:=
  Reference:T
- ScalarValue:T
- ScalarValue:S
+ Value:T
+ Value:S
  BinaryOperator:-
  AssignmentOperator:=
  Reference:M
- ScalarValue:M
- ScalarValue:S
- ScalarValue:K
+ Value:M
+ Value:S
+ Value:K
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
  Reference:A
- ScalarValue:I
+ Value:I
  AssignmentOperator:=
  Reference:V
- ScalarValue:J
+ Value:J
  AssignmentOperator:=
  
 340 IF S<5E-03 THEN 260
- ScalarValue:S
+ Value:S
  NumericConstant:5E-03
  BinaryOperator:<
 350 D=V+SQR(V*V+2*A*(G-Z*K/M)):S=2*A/D
  Reference:D
- ScalarValue:V
- ScalarValue:V
- ScalarValue:V
+ Value:V
+ Value:V
+ Value:V
  BinaryOperator:*
  NumericConstant:2
- ScalarValue:A
+ Value:A
  BinaryOperator:*
- ScalarValue:G
- ScalarValue:Z
- ScalarValue:K
+ Value:G
+ Value:Z
+ Value:K
  BinaryOperator:*
- ScalarValue:M
+ Value:M
  BinaryOperator:/
  BinaryOperator:-
  BinaryOperator:*
@@ -333,9 +333,9 @@
  AssignmentOperator:=
  Reference:S
  NumericConstant:2
- ScalarValue:A
+ Value:A
  BinaryOperator:*
- ScalarValue:D
+ Value:D
  BinaryOperator:/
  AssignmentOperator:=
 360 GOSUB 420: GOSUB 330: GOTO 340
@@ -345,11 +345,11 @@
 370 W=(1-M*G/(Z*K))/2: S=M*V/(Z*K*(W+SQR(W*W+V/Z)))+.05:GOSUB 420
  Reference:W
  NumericConstant:1
- ScalarValue:M
- ScalarValue:G
+ Value:M
+ Value:G
  BinaryOperator:*
- ScalarValue:Z
- ScalarValue:K
+ Value:Z
+ Value:K
  BinaryOperator:*
  BinaryOperator:/
  BinaryOperator:-
@@ -357,18 +357,18 @@
  BinaryOperator:/
  AssignmentOperator:=
  Reference:S
- ScalarValue:M
- ScalarValue:V
+ Value:M
+ Value:V
  BinaryOperator:*
- ScalarValue:Z
- ScalarValue:K
+ Value:Z
+ Value:K
  BinaryOperator:*
- ScalarValue:W
- ScalarValue:W
- ScalarValue:W
+ Value:W
+ Value:W
+ Value:W
  BinaryOperator:*
- ScalarValue:V
- ScalarValue:Z
+ Value:V
+ Value:Z
  BinaryOperator:/
  BinaryOperator:+
  FunctionSqr
@@ -380,56 +380,56 @@
  AssignmentOperator:=
  LineNumber:420
 380 IF I<=0 THEN 340
- ScalarValue:I
+ Value:I
  NumericConstant:0
  BinaryOperator:<=
 390 GOSUB 330: IF J>0 THEN 160
  LineNumber:330
- ScalarValue:J
+ Value:J
  NumericConstant:0
  BinaryOperator:>
 400 IF V>0 THEN 370
- ScalarValue:V
+ Value:V
  NumericConstant:0
  BinaryOperator:>
 410 GOTO 160
  LineNumber:160
 420 Q=S*K/M: J=V+G*S+Z*(-Q-Q*Q/2-Q^3/3-Q^4/4-Q^5/5)
  Reference:Q
- ScalarValue:S
- ScalarValue:K
+ Value:S
+ Value:K
  BinaryOperator:*
- ScalarValue:M
+ Value:M
  BinaryOperator:/
  AssignmentOperator:=
  Reference:J
- ScalarValue:V
- ScalarValue:G
- ScalarValue:S
+ Value:V
+ Value:G
+ Value:S
  BinaryOperator:*
  BinaryOperator:+
- ScalarValue:Z
- ScalarValue:Q
+ Value:Z
+ Value:Q
  UnaryOperator:-
- ScalarValue:Q
- ScalarValue:Q
+ Value:Q
+ Value:Q
  BinaryOperator:*
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:-
- ScalarValue:Q
+ Value:Q
  NumericConstant:3
  BinaryOperator:^
  NumericConstant:3
  BinaryOperator:/
  BinaryOperator:-
- ScalarValue:Q
+ Value:Q
  NumericConstant:4
  BinaryOperator:^
  NumericConstant:4
  BinaryOperator:/
  BinaryOperator:-
- ScalarValue:Q
+ Value:Q
  NumericConstant:5
  BinaryOperator:^
  NumericConstant:5
@@ -440,44 +440,44 @@
  AssignmentOperator:=
 430 I=A-G*S*S/2-V*S+Z*S*(Q/2+Q^2/6+Q^3/12+Q^4/20+Q^5/30):RETURN
  Reference:I
- ScalarValue:A
- ScalarValue:G
- ScalarValue:S
+ Value:A
+ Value:G
+ Value:S
  BinaryOperator:*
- ScalarValue:S
+ Value:S
  BinaryOperator:*
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:-
- ScalarValue:V
- ScalarValue:S
+ Value:V
+ Value:S
  BinaryOperator:*
  BinaryOperator:-
- ScalarValue:Z
- ScalarValue:S
+ Value:Z
+ Value:S
  BinaryOperator:*
- ScalarValue:Q
+ Value:Q
  NumericConstant:2
  BinaryOperator:/
- ScalarValue:Q
+ Value:Q
  NumericConstant:2
  BinaryOperator:^
  NumericConstant:6
  BinaryOperator:/
  BinaryOperator:+
- ScalarValue:Q
+ Value:Q
  NumericConstant:3
  BinaryOperator:^
  NumericConstant:12
  BinaryOperator:/
  BinaryOperator:+
- ScalarValue:Q
+ Value:Q
  NumericConstant:4
  BinaryOperator:^
  NumericConstant:20
  BinaryOperator:/
  BinaryOperator:+
- ScalarValue:Q
+ Value:Q
  NumericConstant:5
  BinaryOperator:^
  NumericConstant:30

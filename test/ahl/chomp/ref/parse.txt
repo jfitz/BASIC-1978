@@ -39,7 +39,7 @@
 140 INPUT R
  Reference:R
 150 IF R=0 THEN 340
- ScalarValue:R
+ Value:R
  NumericConstant:0
  BinaryOperator:=
 160 F=1
@@ -128,8 +128,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 375 A(I,J)=0
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:A
  NumericConstant:0
  AssignmentOperator:=
@@ -157,7 +157,7 @@
 430 INPUT R
  Reference:R
 440 IF R <= 9 THEN 470
- ScalarValue:R
+ Value:R
  NumericConstant:9
  BinaryOperator:<=
 450 PRINT "TOO MANY ROWS (9 IS MAXIMUM). NOW, ";
@@ -173,7 +173,7 @@
 480 INPUT C
  Reference:C
 490 IF C <= 9 THEN 530
- ScalarValue:C
+ Value:C
  NumericConstant:9
  BinaryOperator:<=
 500 PRINT "TOO MANY COLUMNS (9 IS MAXIMUM). NOW, ";
@@ -188,14 +188,14 @@
 540 FOR I=1 TO R
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:R"]
+ end:     ["Value:R"]
 550 FOR J=1 TO C
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:C"]
+ end:     ["Value:C"]
 560 A(I,J)=1
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:A
  NumericConstant:1
  AssignmentOperator:=
@@ -225,10 +225,10 @@
 630 FOR I=1 TO R
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:R"]
+ end:     ["Value:R"]
 640 PRINT I;TAB(7);
  ITEMS
- ScalarValue:I
+ Value:I
  CarriageControl:;
  NumericConstant:7
  FunctionTab
@@ -236,18 +236,18 @@
 650 FOR J=1 TO C
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:C"]
+ end:     ["Value:C"]
 660 IF A(I,J)=-1 THEN 700
- ScalarValue:I
- ScalarValue:J
- ScalarValue:A
+ Value:I
+ Value:J
+ Value:A
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
 670 IF A(I,J)=0 THEN 720
- ScalarValue:I
- ScalarValue:J
- ScalarValue:A
+ Value:I
+ Value:J
+ Value:A
  NumericConstant:0
  BinaryOperator:=
 680 PRINT "* ";
@@ -271,7 +271,7 @@
  ITEMS
  CarriageControl:NL
 750 IF F=0 THEN 770
- ScalarValue:F
+ Value:F
  NumericConstant:0
  BinaryOperator:=
 760 RETURN 
@@ -280,34 +280,34 @@
  Remark:GET CHOMPS FOR EACH PLAYER IN TURN
 780 LET I1=I1+1
  Reference:I1
- ScalarValue:I1
+ Value:I1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 790 LET P1=I1-INT(I1/P)*P
  Reference:P1
- ScalarValue:I1
- ScalarValue:I1
- ScalarValue:P
+ Value:I1
+ Value:I1
+ Value:P
  BinaryOperator:/
  FunctionInt
- ScalarValue:P
+ Value:P
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 800 IF P1 <> 0 THEN 820
- ScalarValue:P1
+ Value:P1
  NumericConstant:0
  BinaryOperator:<>
 810 P1=P
  Reference:P1
- ScalarValue:P
+ Value:P
  AssignmentOperator:=
 820 PRINT "PLAYER";P1
  ITEMS
  TextConstant:"PLAYER"
  CarriageControl:;
- ScalarValue:P1
+ Value:P1
  CarriageControl:NL
 830 PRINT "COORDINATES OF CHOMP (ROW,COLUMN)";
  ITEMS
@@ -317,31 +317,31 @@
  Reference:R1
  Reference:C1
 850 IF R1<1 THEN 920
- ScalarValue:R1
+ Value:R1
  NumericConstant:1
  BinaryOperator:<
 860 IF R1>R THEN 920
- ScalarValue:R1
- ScalarValue:R
+ Value:R1
+ Value:R
  BinaryOperator:>
 870 IF C1<1 THEN 920
- ScalarValue:C1
+ Value:C1
  NumericConstant:1
  BinaryOperator:<
 880 IF C1>C THEN 920
- ScalarValue:C1
- ScalarValue:C
+ Value:C1
+ Value:C
  BinaryOperator:>
 890 IF A(R1,C1)=0 THEN 920
- ScalarValue:R1
- ScalarValue:C1
- ScalarValue:A
+ Value:R1
+ Value:C1
+ Value:A
  NumericConstant:0
  BinaryOperator:=
 900 IF A(R1,C1)=-1 THEN 1010
- ScalarValue:R1
- ScalarValue:C1
- ScalarValue:A
+ Value:R1
+ Value:C1
+ Value:A
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
@@ -355,15 +355,15 @@
  LineNumber:820
 940 FOR I=R1 TO R
  control: Variable:I
- start:   ["ScalarValue:R1"]
- end:     ["ScalarValue:R"]
+ start:   ["Value:R1"]
+ end:     ["Value:R"]
 950 FOR J=C1 TO C
  control: Variable:J
- start:   ["ScalarValue:C1"]
- end:     ["ScalarValue:C"]
+ start:   ["Value:C1"]
+ end:     ["Value:C"]
 960 A(I,J)=0
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:A
  NumericConstant:0
  AssignmentOperator:=
@@ -379,7 +379,7 @@
  ITEMS
  TextConstant:"YOU LOSE, PLAYER"
  CarriageControl:;
- ScalarValue:P1
+ Value:P1
  CarriageControl:NL
 1020 PRINT 
  ITEMS
@@ -391,7 +391,7 @@
 1040 INPUT R$
  Reference:R$
 1050 IF R=1 THEN 340
- ScalarValue:R
+ Value:R
  NumericConstant:1
  BinaryOperator:=
 1060 END

@@ -52,13 +52,13 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 1070 E(W)=-1
- ScalarValue:W
+ Value:W
  Reference:E
  NumericConstant:1
  UnaryOperator:-
  AssignmentOperator:=
 1080 H(W)=-1
- ScalarValue:W
+ Value:W
  Reference:H
  NumericConstant:1
  UnaryOperator:-
@@ -74,8 +74,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 1120 B(X,Y)=0
- ScalarValue:X
- ScalarValue:Y
+ Value:X
+ Value:Y
  Reference:B
  NumericConstant:0
  AssignmentOperator:=
@@ -88,12 +88,12 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 1160 F(X)=0
- ScalarValue:X
+ Value:X
  Reference:F
  NumericConstant:0
  AssignmentOperator:=
 1170 G(X)=0
- ScalarValue:X
+ Value:X
  Reference:G
  NumericConstant:0
  AssignmentOperator:=
@@ -108,8 +108,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 1210 A(X,Y)=0
- ScalarValue:X
- ScalarValue:Y
+ Value:X
+ Value:Y
  Reference:A
  NumericConstant:0
  AssignmentOperator:=
@@ -130,18 +130,18 @@
  LineNumber:2910
 1270 DEF FNA(K)=(5-K)*3-2*INT(K/4)+SGN(K-1)-1
  NumericConstant:5
- ScalarValue:K
+ Value:K
  BinaryOperator:-
  NumericConstant:3
  BinaryOperator:*
  NumericConstant:2
- ScalarValue:K
+ Value:K
  NumericConstant:4
  BinaryOperator:/
  FunctionInt
  BinaryOperator:*
  BinaryOperator:-
- ScalarValue:K
+ Value:K
  NumericConstant:1
  BinaryOperator:-
  FunctionSgn
@@ -149,58 +149,58 @@
  NumericConstant:1
  BinaryOperator:-
 1280 DEF FNB(K)=K+INT(K/4)-SGN(K-1)
- ScalarValue:K
- ScalarValue:K
+ Value:K
+ Value:K
  NumericConstant:4
  BinaryOperator:/
  FunctionInt
  BinaryOperator:+
- ScalarValue:K
+ Value:K
  NumericConstant:1
  BinaryOperator:-
  FunctionSgn
  BinaryOperator:-
 1290 IF V+V2+V*V2=0 THEN 1260
- ScalarValue:V
- ScalarValue:V2
+ Value:V
+ Value:V2
  BinaryOperator:+
- ScalarValue:V
- ScalarValue:V2
+ Value:V
+ Value:V2
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:0
  BinaryOperator:=
 1300 IF Y+V*FNB(K)>10 THEN 1260
- ScalarValue:Y
- ScalarValue:V
- ScalarValue:K
+ Value:Y
+ Value:V
+ Value:K
  UserFunction
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:10
  BinaryOperator:>
 1310 IF Y+V*FNB(K)<1 THEN 1260
- ScalarValue:Y
- ScalarValue:V
- ScalarValue:K
+ Value:Y
+ Value:V
+ Value:K
  UserFunction
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:1
  BinaryOperator:<
 1320 IF X+V2*FNB(K)>10 THEN 1260
- ScalarValue:X
- ScalarValue:V2
- ScalarValue:K
+ Value:X
+ Value:V2
+ Value:K
  UserFunction
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:10
  BinaryOperator:>
 1330 IF X+V2*FNB(K)<1 THEN 1260
- ScalarValue:X
- ScalarValue:V2
- ScalarValue:K
+ Value:X
+ Value:V2
+ Value:K
  UserFunction
  BinaryOperator:*
  BinaryOperator:+
@@ -208,39 +208,39 @@
  BinaryOperator:<
 1340 U6=U6+1
  Reference:U6
- ScalarValue:U6
+ Value:U6
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1350 IF U6>25 THEN 1190
- ScalarValue:U6
+ Value:U6
  NumericConstant:25
  BinaryOperator:>
 1360 FOR Z=0 TO FNB(K)
  control: Variable:Z
  start:   ["NumericConstant:0"]
- end:     ["ScalarValue:K", "UserFunction"]
+ end:     ["Value:K", "UserFunction"]
 1370 F(Z+FNA(K))=X+V2*Z
- ScalarValue:Z
- ScalarValue:K
+ Value:Z
+ Value:K
  UserFunction
  BinaryOperator:+
  Reference:F
- ScalarValue:X
- ScalarValue:V2
- ScalarValue:Z
+ Value:X
+ Value:V2
+ Value:Z
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 1380 G(Z+FNA(K))=Y+V*Z
- ScalarValue:Z
- ScalarValue:K
+ Value:Z
+ Value:K
  UserFunction
  BinaryOperator:+
  Reference:G
- ScalarValue:Y
- ScalarValue:V
- ScalarValue:Z
+ Value:Y
+ Value:V
+ Value:Z
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
@@ -248,40 +248,40 @@
  Variable:Z
 1400 U8=FNA(K)
  Reference:U8
- ScalarValue:K
+ Value:K
  UserFunction
  AssignmentOperator:=
 1405 IF U8>U8+FNB(K) THEN 1460
- ScalarValue:U8
- ScalarValue:U8
- ScalarValue:K
+ Value:U8
+ Value:U8
+ Value:K
  UserFunction
  BinaryOperator:+
  BinaryOperator:>
 1410 FOR Z2= U8 TO U8+FNB(K)
  control: Variable:Z2
- start:   ["ScalarValue:U8"]
- end:     ["ScalarValue:U8", "ScalarValue:K", "UserFunction", "BinaryOperator:+"]
+ start:   ["Value:U8"]
+ end:     ["Value:U8", "Value:K", "UserFunction", "BinaryOperator:+"]
 1415 IF U8<2 THEN 1450
- ScalarValue:U8
+ Value:U8
  NumericConstant:2
  BinaryOperator:<
 1420 FOR Z3=1 TO U8-1
  control: Variable:Z3
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:U8", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:U8", "NumericConstant:1", "BinaryOperator:-"]
 1430 IF SQR((F(Z3)-F(Z2))^2 + (G(Z3)-G(Z2))^2) < 3.59 THEN 1260
- ScalarValue:Z3
- ScalarValue:F
- ScalarValue:Z2
- ScalarValue:F
+ Value:Z3
+ Value:F
+ Value:Z2
+ Value:F
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:^
- ScalarValue:Z3
- ScalarValue:G
- ScalarValue:Z2
- ScalarValue:G
+ Value:Z3
+ Value:G
+ Value:Z2
+ Value:G
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:^
@@ -296,23 +296,23 @@
 1460 FOR Z=0 TO FNB(K)
  control: Variable:Z
  start:   ["NumericConstant:0"]
- end:     ["ScalarValue:K", "UserFunction"]
+ end:     ["Value:K", "UserFunction"]
 1470 A(F(Z+U8),G(Z+U8))=.5+SGN(K-1)*(K-1.5)
- ScalarValue:Z
- ScalarValue:U8
+ Value:Z
+ Value:U8
  BinaryOperator:+
- ScalarValue:F
- ScalarValue:Z
- ScalarValue:U8
+ Value:F
+ Value:Z
+ Value:U8
  BinaryOperator:+
- ScalarValue:G
+ Value:G
  Reference:A
  NumericConstant:.5
- ScalarValue:K
+ Value:K
  NumericConstant:1
  BinaryOperator:-
  FunctionSgn
- ScalarValue:K
+ Value:K
  NumericConstant:1.5
  BinaryOperator:-
  BinaryOperator:*
@@ -338,8 +338,8 @@
  Reference:Y
  Reference:Z
 1540 B(Y,Z)=3
- ScalarValue:Y
- ScalarValue:Z
+ Value:Y
+ Value:Z
  Reference:B
  NumericConstant:3
  AssignmentOperator:=
@@ -357,8 +357,8 @@
  Reference:Y
  Reference:Z
 1590 B(Y,Z)=2
- ScalarValue:Y
- ScalarValue:Z
+ Value:Y
+ Value:Z
  Reference:B
  NumericConstant:2
  AssignmentOperator:=
@@ -376,8 +376,8 @@
  Reference:Y
  Reference:Z
 1640 B(Y,Z)=1
- ScalarValue:Y
- ScalarValue:Z
+ Value:Y
+ Value:Z
  Reference:B
  NumericConstant:1
  AssignmentOperator:=
@@ -395,8 +395,8 @@
  Reference:Y
  Reference:Z
 1690 B(Y,Z)=.5
- ScalarValue:Y
- ScalarValue:Z
+ Value:Y
+ Value:Z
  Reference:B
  NumericConstant:.5
  AssignmentOperator:=
@@ -409,7 +409,7 @@
 1720 INPUT J$
  Reference:J$
 1730 IF J$<>"WHERE ARE YOUR SHIPS?" THEN 1890
- ScalarValue:J$
+ Value:J$
  TextConstant:"WHERE ARE YOUR SHIPS?"
  BinaryOperator:<>
 1740 PRINT "BATTLESHIP"
@@ -422,11 +422,11 @@
  end:     ["NumericConstant:5"]
 1760 PRINT F(Z);G(Z)
  ITEMS
- ScalarValue:Z
- ScalarValue:F
+ Value:Z
+ Value:F
  CarriageControl:;
- ScalarValue:Z
- ScalarValue:G
+ Value:Z
+ Value:G
  CarriageControl:NL
 1770 NEXT Z
  Variable:Z
@@ -437,26 +437,26 @@
 1790 PRINT F(6);G(6)
  ITEMS
  NumericConstant:6
- ScalarValue:F
+ Value:F
  CarriageControl:;
  NumericConstant:6
- ScalarValue:G
+ Value:G
  CarriageControl:NL
 1800 PRINT F(7);G(7)
  ITEMS
  NumericConstant:7
- ScalarValue:F
+ Value:F
  CarriageControl:;
  NumericConstant:7
- ScalarValue:G
+ Value:G
  CarriageControl:NL
 1810 PRINT F(8);G(8)
  ITEMS
  NumericConstant:8
- ScalarValue:F
+ Value:F
  CarriageControl:;
  NumericConstant:8
- ScalarValue:G
+ Value:G
  CarriageControl:NL
 1820 PRINT "DESTROYER<A>"
  ITEMS
@@ -465,18 +465,18 @@
 1830 PRINT F(9);G(9)
  ITEMS
  NumericConstant:9
- ScalarValue:F
+ Value:F
  CarriageControl:;
  NumericConstant:9
- ScalarValue:G
+ Value:G
  CarriageControl:NL
 1840 PRINT F(10);G(10)
  ITEMS
  NumericConstant:10
- ScalarValue:F
+ Value:F
  CarriageControl:;
  NumericConstant:10
- ScalarValue:G
+ Value:G
  CarriageControl:NL
 1850 PRINT "DESTROYER<B>"
  ITEMS
@@ -485,18 +485,18 @@
 1860 PRINT F(11);G(11)
  ITEMS
  NumericConstant:11
- ScalarValue:F
+ Value:F
  CarriageControl:;
  NumericConstant:11
- ScalarValue:G
+ Value:G
  CarriageControl:NL
 1870 PRINT F(12);G(12)
  ITEMS
  NumericConstant:12
- ScalarValue:F
+ Value:F
  CarriageControl:;
  NumericConstant:12
- ScalarValue:G
+ Value:G
  CarriageControl:NL
 1880 GOTO 1710
  LineNumber:1710
@@ -514,18 +514,18 @@
  ITEMS
  CarriageControl:NL
 1930 IF J$<>"YES" THEN 2620
- ScalarValue:J$
+ Value:J$
  TextConstant:"YES"
  BinaryOperator:<>
 1940 REM*******************START
  Remark:*******************START
 1950 IF J$<>"YES" THEN 1990
- ScalarValue:J$
+ Value:J$
  TextConstant:"YES"
  BinaryOperator:<>
 1960 C=C+1
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -536,7 +536,7 @@
  ITEMS
  TextConstant:"TURN"
  CarriageControl:;
- ScalarValue:C
+ Value:C
  CarriageControl:NL
 1990 A=0
  Reference:A
@@ -556,10 +556,10 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 2030 IF B(X,Y)=W THEN 2070
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:B
- ScalarValue:W
+ Value:X
+ Value:Y
+ Value:B
+ Value:W
  BinaryOperator:=
 2040 NEXT Y
  Variable:Y
@@ -569,8 +569,8 @@
  LineNumber:2080
 2070 A=A+INT(W+.5)
  Reference:A
- ScalarValue:A
- ScalarValue:W
+ Value:A
+ Value:W
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
@@ -583,22 +583,22 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
 2100 C(W)=0
- ScalarValue:W
+ Value:W
  Reference:C
  NumericConstant:0
  AssignmentOperator:=
 2110 D(W)=0
- ScalarValue:W
+ Value:W
  Reference:D
  NumericConstant:0
  AssignmentOperator:=
 2120 F(W)=0
- ScalarValue:W
+ Value:W
  Reference:F
  NumericConstant:0
  AssignmentOperator:=
 2130 G(W)=0
- ScalarValue:W
+ Value:W
  Reference:G
  NumericConstant:0
  AssignmentOperator:=
@@ -617,14 +617,14 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 2180 IF A(X,Y)>10 THEN 2200
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:10
  BinaryOperator:>
 2190 P3=P3+1
  Reference:P3
- ScalarValue:P3
+ Value:P3
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -636,13 +636,13 @@
  ITEMS
  TextConstant:"YOU HAVE"
  CarriageControl:;
- ScalarValue:A
+ Value:A
  CarriageControl:;
  TextConstant:"SHOTS."
  CarriageControl:NL
 2230 IF P3>=A THEN 2260
- ScalarValue:P3
- ScalarValue:A
+ Value:P3
+ Value:A
  BinaryOperator:>=
 2240 PRINT "YOU HAVE MORE SHOTS THAN THERE ARE BLANK SQUARES."
  ITEMS
@@ -651,7 +651,7 @@
 2250 GOTO 2890
  LineNumber:2890
 2260 IF A<>0 THEN 2290
- ScalarValue:A
+ Value:A
  NumericConstant:0
  BinaryOperator:<>
 2270 PRINT "I HAVE WON."
@@ -663,34 +663,34 @@
 2290 FOR W=1 TO A
  control: Variable:W
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:A"]
+ end:     ["Value:A"]
 2300 INPUT X,Y
  Reference:X
  Reference:Y
 2310 IF X<>INT(X) THEN 2370
- ScalarValue:X
- ScalarValue:X
+ Value:X
+ Value:X
  FunctionInt
  BinaryOperator:<>
 2320 IF X>10 THEN 2370
- ScalarValue:X
+ Value:X
  NumericConstant:10
  BinaryOperator:>
 2330 IF X<1 THEN 2370
- ScalarValue:X
+ Value:X
  NumericConstant:1
  BinaryOperator:<
 2340 IF Y<>INT(Y) THEN 2370
- ScalarValue:Y
- ScalarValue:Y
+ Value:Y
+ Value:Y
  FunctionInt
  BinaryOperator:<>
 2350 IF Y>10 THEN 2370
- ScalarValue:Y
+ Value:Y
  NumericConstant:10
  BinaryOperator:>
 2360 IF Y>=1 THEN 2390
- ScalarValue:Y
+ Value:Y
  NumericConstant:1
  BinaryOperator:>=
 2370 PRINT "ILLEGAL, ENTER AGAIN."
@@ -700,20 +700,20 @@
 2380 GOTO 2300
  LineNumber:2300
 2390 IF A(X,Y)>10 THEN 2440
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:10
  BinaryOperator:>
 2400 C(W)=X
- ScalarValue:W
+ Value:W
  Reference:C
- ScalarValue:X
+ Value:X
  AssignmentOperator:=
 2410 D(W)=Y
- ScalarValue:W
+ Value:W
  Reference:D
- ScalarValue:Y
+ Value:Y
  AssignmentOperator:=
 2420 NEXT W
  Variable:W
@@ -723,9 +723,9 @@
  ITEMS
  TextConstant:"YOU SHOT THERE BEFORE ON TURN"
  CarriageControl:;
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:10
  BinaryOperator:-
  CarriageControl:NL
@@ -734,47 +734,47 @@
 2460 FOR W=1 TO A
  control: Variable:W
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:A"]
+ end:     ["Value:A"]
 2470 IF A(C(W),D(W))=3 THEN 2540
- ScalarValue:W
- ScalarValue:C
- ScalarValue:W
- ScalarValue:D
- ScalarValue:A
+ Value:W
+ Value:C
+ Value:W
+ Value:D
+ Value:A
  NumericConstant:3
  BinaryOperator:=
 2480 IF A(C(W),D(W))=2 THEN 2560
- ScalarValue:W
- ScalarValue:C
- ScalarValue:W
- ScalarValue:D
- ScalarValue:A
+ Value:W
+ Value:C
+ Value:W
+ Value:D
+ Value:A
  NumericConstant:2
  BinaryOperator:=
 2490 IF A(C(W),D(W))=1 THEN 2580
- ScalarValue:W
- ScalarValue:C
- ScalarValue:W
- ScalarValue:D
- ScalarValue:A
+ Value:W
+ Value:C
+ Value:W
+ Value:D
+ Value:A
  NumericConstant:1
  BinaryOperator:=
 2500 IF A(C(W),D(W))=.5 THEN 2600
- ScalarValue:W
- ScalarValue:C
- ScalarValue:W
- ScalarValue:D
- ScalarValue:A
+ Value:W
+ Value:C
+ Value:W
+ Value:D
+ Value:A
  NumericConstant:.5
  BinaryOperator:=
 2510 A(C(W),D(W))=10+C
- ScalarValue:W
- ScalarValue:C
- ScalarValue:W
- ScalarValue:D
+ Value:W
+ Value:C
+ Value:W
+ Value:D
  Reference:A
  NumericConstant:10
- ScalarValue:C
+ Value:C
  BinaryOperator:+
  AssignmentOperator:=
 2520 NEXT W
@@ -810,12 +810,12 @@
  NumericConstant:0
  AssignmentOperator:=
 2630 IF J$="YES" THEN 2670
- ScalarValue:J$
+ Value:J$
  TextConstant:"YES"
  BinaryOperator:=
 2640 C=C+1
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -826,7 +826,7 @@
  ITEMS
  TextConstant:"TURN"
  CarriageControl:;
- ScalarValue:C
+ Value:C
  CarriageControl:NL
 2670 A=0
  Reference:A
@@ -846,10 +846,10 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 2710 IF A(X,Y)=W THEN 2750
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
- ScalarValue:W
+ Value:X
+ Value:Y
+ Value:A
+ Value:W
  BinaryOperator:=
 2720 NEXT Y
  Variable:Y
@@ -859,8 +859,8 @@
  LineNumber:2760
 2750 A=A+INT(W+.5)
  Reference:A
- ScalarValue:A
- ScalarValue:W
+ Value:A
+ Value:W
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
@@ -881,14 +881,14 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 2800 IF A(X,Y)>10 THEN 2820
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:10
  BinaryOperator:>
 2810 P3=P3+1
  Reference:P3
- ScalarValue:P3
+ Value:P3
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -900,13 +900,13 @@
  ITEMS
  TextConstant:"I HAVE"
  CarriageControl:;
- ScalarValue:A
+ Value:A
  CarriageControl:;
  TextConstant:"SHOTS."
  CarriageControl:NL
 2850 IF P3>A THEN 2880
- ScalarValue:P3
- ScalarValue:A
+ Value:P3
+ Value:A
  BinaryOperator:>
 2860 PRINT "I HAVE MORE SHOTS THAN BLANK SQUARES."
  ITEMS
@@ -915,7 +915,7 @@
 2870 GOTO 2270
  LineNumber:2270
 2880 IF A<>0 THEN 2960
- ScalarValue:A
+ Value:A
  NumericConstant:0
  BinaryOperator:<>
 2890 PRINT "YOU HAVE WON."
@@ -971,8 +971,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 2970 IF H(W)>0 THEN 3800
- ScalarValue:W
- ScalarValue:H
+ Value:W
+ Value:H
  NumericConstant:0
  BinaryOperator:>
 2980 NEXT W
@@ -997,20 +997,20 @@
  AssignmentOperator:=
 3050 R3=R3+1
  Reference:R3
- ScalarValue:R3
+ Value:R3
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3060 IF R3>100 THEN 3010
- ScalarValue:R3
+ Value:R3
  NumericConstant:100
  BinaryOperator:>
 3070 IF X>10 THEN 3110
- ScalarValue:X
+ Value:X
  NumericConstant:10
  BinaryOperator:>
 3080 IF X>0 THEN 3120
- ScalarValue:X
+ Value:X
  NumericConstant:0
  BinaryOperator:>
 3090 X=1+INT(RND(1)*2.5)
@@ -1036,11 +1036,11 @@
  BinaryOperator:-
  AssignmentOperator:=
 3120 IF Y>10 THEN 3160
- ScalarValue:Y
+ Value:Y
  NumericConstant:10
  BinaryOperator:>
 3130 IF Y>0 THEN 3270
- ScalarValue:Y
+ Value:Y
  NumericConstant:0
  BinaryOperator:>
 3140 Y=1+INT(RND(1)*2.5)
@@ -1068,21 +1068,21 @@
 3170 GOTO 3270
  LineNumber:3270
 3180 F(W)=X
- ScalarValue:W
+ Value:W
  Reference:F
- ScalarValue:X
+ Value:X
  AssignmentOperator:=
 3190 G(W)=Y
- ScalarValue:W
+ Value:W
  Reference:G
- ScalarValue:Y
+ Value:Y
  AssignmentOperator:=
 3200 IF W=A THEN 3380
- ScalarValue:W
- ScalarValue:A
+ Value:W
+ Value:A
  BinaryOperator:=
 3210 IF R2=6 THEN 3030
- ScalarValue:R2
+ Value:R2
  NumericConstant:6
  BinaryOperator:=
 3220 READ X1,Y1
@@ -1090,7 +1090,7 @@
  Reference:Y1
 3230 R2=R2+1
  Reference:R2
- ScalarValue:R2
+ Value:R2
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -1112,124 +1112,124 @@
  NumericConstant:1
 3250 X=X+X1
  Reference:X
- ScalarValue:X
- ScalarValue:X1
+ Value:X
+ Value:X1
  BinaryOperator:+
  AssignmentOperator:=
 3260 Y=Y+Y1
  Reference:Y
- ScalarValue:Y
- ScalarValue:Y1
+ Value:Y
+ Value:Y1
  BinaryOperator:+
  AssignmentOperator:=
 3270 IF X>10 THEN 3210
- ScalarValue:X
+ Value:X
  NumericConstant:10
  BinaryOperator:>
 3280 IF X<1 THEN 3210
- ScalarValue:X
+ Value:X
  NumericConstant:1
  BinaryOperator:<
 3290 IF Y>10 THEN 3210
- ScalarValue:Y
+ Value:Y
  NumericConstant:10
  BinaryOperator:>
 3300 IF Y<1 THEN 3210
- ScalarValue:Y
+ Value:Y
  NumericConstant:1
  BinaryOperator:<
 3310 IF B(X,Y)>10 THEN 3210
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:B
+ Value:X
+ Value:Y
+ Value:B
  NumericConstant:10
  BinaryOperator:>
 3320 FOR Q9=1 TO W
  control: Variable:Q9
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:W"]
+ end:     ["Value:W"]
 3330 IF F(Q9)<>X THEN 3350
- ScalarValue:Q9
- ScalarValue:F
- ScalarValue:X
+ Value:Q9
+ Value:F
+ Value:X
  BinaryOperator:<>
 3340 IF G(Q9)=Y THEN 3210
- ScalarValue:Q9
- ScalarValue:G
- ScalarValue:Y
+ Value:Q9
+ Value:G
+ Value:Y
  BinaryOperator:=
 3350 NEXT Q9
  Variable:Q9
 3360 W=W+1
  Reference:W
- ScalarValue:W
+ Value:W
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3370 GOTO 3180
  LineNumber:3180
 3380 IF K$<>"YES" THEN 3420
- ScalarValue:K$
+ Value:K$
  TextConstant:"YES"
  BinaryOperator:<>
 3390 FOR Z5=1 TO A
  control: Variable:Z5
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:A"]
+ end:     ["Value:A"]
 3400 PRINT F(Z5);G(Z5)
  ITEMS
- ScalarValue:Z5
- ScalarValue:F
+ Value:Z5
+ Value:F
  CarriageControl:;
- ScalarValue:Z5
- ScalarValue:G
+ Value:Z5
+ Value:G
  CarriageControl:NL
 3410 NEXT Z5
  Variable:Z5
 3420 FOR W=1 TO A
  control: Variable:W
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:A"]
+ end:     ["Value:A"]
 3430 IF B(F(W),G(W))=3 THEN 3500
- ScalarValue:W
- ScalarValue:F
- ScalarValue:W
- ScalarValue:G
- ScalarValue:B
+ Value:W
+ Value:F
+ Value:W
+ Value:G
+ Value:B
  NumericConstant:3
  BinaryOperator:=
 3440 IF B(F(W),G(W))=2 THEN 3520
- ScalarValue:W
- ScalarValue:F
- ScalarValue:W
- ScalarValue:G
- ScalarValue:B
+ Value:W
+ Value:F
+ Value:W
+ Value:G
+ Value:B
  NumericConstant:2
  BinaryOperator:=
 3450 IF B(F(W),G(W))=1 THEN 3560
- ScalarValue:W
- ScalarValue:F
- ScalarValue:W
- ScalarValue:G
- ScalarValue:B
+ Value:W
+ Value:F
+ Value:W
+ Value:G
+ Value:B
  NumericConstant:1
  BinaryOperator:=
 3460 IF B(F(W),G(W))=.5 THEN 3540
- ScalarValue:W
- ScalarValue:F
- ScalarValue:W
- ScalarValue:G
- ScalarValue:B
+ Value:W
+ Value:F
+ Value:W
+ Value:G
+ Value:B
  NumericConstant:.5
  BinaryOperator:=
 3470 B(F(W),G(W))=10+C
- ScalarValue:W
- ScalarValue:F
- ScalarValue:W
- ScalarValue:G
+ Value:W
+ Value:F
+ Value:W
+ Value:G
  Reference:B
  NumericConstant:10
- ScalarValue:C
+ Value:C
  BinaryOperator:+
  AssignmentOperator:=
 3480 NEXT W
@@ -1263,26 +1263,26 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 3580 IF E(Q)<>-1 THEN 3730
- ScalarValue:Q
- ScalarValue:E
+ Value:Q
+ Value:E
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:<>
 3590 E(Q)=10+C
- ScalarValue:Q
+ Value:Q
  Reference:E
  NumericConstant:10
- ScalarValue:C
+ Value:C
  BinaryOperator:+
  AssignmentOperator:=
 3600 H(Q)=B(F(W),G(W))
- ScalarValue:Q
+ Value:Q
  Reference:H
- ScalarValue:W
- ScalarValue:F
- ScalarValue:W
- ScalarValue:G
- ScalarValue:B
+ Value:W
+ Value:F
+ Value:W
+ Value:G
+ Value:B
  AssignmentOperator:=
 3610 M3=0
  Reference:M3
@@ -1293,30 +1293,30 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 3630 IF H(M2)<>H(Q) THEN 3650
- ScalarValue:M2
- ScalarValue:H
- ScalarValue:Q
- ScalarValue:H
+ Value:M2
+ Value:H
+ Value:Q
+ Value:H
  BinaryOperator:<>
 3640 M3=M3+1
  Reference:M3
- ScalarValue:M3
+ Value:M3
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3650 NEXT M2
  Variable:M2
 3660 IF M3<>INT(H(Q)+.5)+1+INT(INT(H(Q)+.5)/3) THEN 3470
- ScalarValue:M3
- ScalarValue:Q
- ScalarValue:H
+ Value:M3
+ Value:Q
+ Value:H
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
  NumericConstant:1
  BinaryOperator:+
- ScalarValue:Q
- ScalarValue:H
+ Value:Q
+ Value:H
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
@@ -1330,19 +1330,19 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 3680 IF H(M2)<>H(Q) THEN 3710
- ScalarValue:M2
- ScalarValue:H
- ScalarValue:Q
- ScalarValue:H
+ Value:M2
+ Value:H
+ Value:Q
+ Value:H
  BinaryOperator:<>
 3690 E(M2)=-1
- ScalarValue:M2
+ Value:M2
  Reference:E
  NumericConstant:1
  UnaryOperator:-
  AssignmentOperator:=
 3700 H(M2)=-1
- ScalarValue:M2
+ Value:M2
  Reference:H
  NumericConstant:1
  UnaryOperator:-
@@ -1365,23 +1365,23 @@
  ITEMS
  TextConstant:"E("
  CarriageControl:;
- ScalarValue:Q
+ Value:Q
  CarriageControl:;
  TextConstant:") ="
  CarriageControl:;
- ScalarValue:Q
- ScalarValue:E
+ Value:Q
+ Value:E
  CarriageControl:NL
 3770 PRINT "H(";Q;") =";H(Q)
  ITEMS
  TextConstant:"H("
  CarriageControl:;
- ScalarValue:Q
+ Value:Q
  CarriageControl:;
  TextConstant:") ="
  CarriageControl:;
- ScalarValue:Q
- ScalarValue:H
+ Value:Q
+ Value:H
  CarriageControl:NL
 3780 NEXT Q
  Variable:Q
@@ -1398,8 +1398,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 3830 K(R,S)=0
- ScalarValue:R
- ScalarValue:S
+ Value:R
+ Value:S
  Reference:K
  NumericConstant:0
  AssignmentOperator:=
@@ -1412,8 +1412,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 3870 IF E(U)<10 THEN 4020
- ScalarValue:U
- ScalarValue:E
+ Value:U
+ Value:E
  NumericConstant:10
  BinaryOperator:<
 3880 FOR R=1 TO 10
@@ -1425,14 +1425,14 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 3900 IF B(R,S)<10 THEN 3930
- ScalarValue:R
- ScalarValue:S
- ScalarValue:B
+ Value:R
+ Value:S
+ Value:B
  NumericConstant:10
  BinaryOperator:<
 3910 K(R,S)=-10000000
- ScalarValue:R
- ScalarValue:S
+ Value:R
+ Value:S
  Reference:K
  NumericConstant:10000000
  UnaryOperator:-
@@ -1441,46 +1441,46 @@
  LineNumber:4000
 3930 FOR M=SGN(1-R) TO SGN(10-R)
  control: Variable:M
- start:   ["NumericConstant:1", "ScalarValue:R", "BinaryOperator:-", "FunctionSgn"]
- end:     ["NumericConstant:10", "ScalarValue:R", "BinaryOperator:-", "FunctionSgn"]
+ start:   ["NumericConstant:1", "Value:R", "BinaryOperator:-", "FunctionSgn"]
+ end:     ["NumericConstant:10", "Value:R", "BinaryOperator:-", "FunctionSgn"]
 3940 FOR N=SGN(1-S) TO SGN(10-S)
  control: Variable:N
- start:   ["NumericConstant:1", "ScalarValue:S", "BinaryOperator:-", "FunctionSgn"]
- end:     ["NumericConstant:10", "ScalarValue:S", "BinaryOperator:-", "FunctionSgn"]
+ start:   ["NumericConstant:1", "Value:S", "BinaryOperator:-", "FunctionSgn"]
+ end:     ["NumericConstant:10", "Value:S", "BinaryOperator:-", "FunctionSgn"]
 3950 IF N+M+N*M=0 THEN 3980
- ScalarValue:N
- ScalarValue:M
+ Value:N
+ Value:M
  BinaryOperator:+
- ScalarValue:N
- ScalarValue:M
+ Value:N
+ Value:M
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:0
  BinaryOperator:=
 3960 IF B(R+M,S+N)<>E(U) THEN 3980
- ScalarValue:R
- ScalarValue:M
+ Value:R
+ Value:M
  BinaryOperator:+
- ScalarValue:S
- ScalarValue:N
+ Value:S
+ Value:N
  BinaryOperator:+
- ScalarValue:B
- ScalarValue:U
- ScalarValue:E
+ Value:B
+ Value:U
+ Value:E
  BinaryOperator:<>
 3970 K(R,S)=K(R,S)+E(U)-S*INT(H(U)+.5)
- ScalarValue:R
- ScalarValue:S
+ Value:R
+ Value:S
  Reference:K
- ScalarValue:R
- ScalarValue:S
- ScalarValue:K
- ScalarValue:U
- ScalarValue:E
+ Value:R
+ Value:S
+ Value:K
+ Value:U
+ Value:E
  BinaryOperator:+
- ScalarValue:S
- ScalarValue:U
- ScalarValue:H
+ Value:S
+ Value:U
+ Value:H
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
@@ -1500,16 +1500,16 @@
 4030 FOR R=1 TO A
  control: Variable:R
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:A"]
+ end:     ["Value:A"]
 4040 F(R)=R
- ScalarValue:R
+ Value:R
  Reference:F
- ScalarValue:R
+ Value:R
  AssignmentOperator:=
 4050 G(R)=R
- ScalarValue:R
+ Value:R
  Reference:G
- ScalarValue:R
+ Value:R
  AssignmentOperator:=
 4060 NEXT R
  Variable:R
@@ -1528,68 +1528,68 @@
 4100 FOR M=1 TO A
  control: Variable:M
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:A"]
+ end:     ["Value:A"]
 4110 IF K(F(M),G(M))>=K(F(Q9),G(Q9)) THEN 4130
- ScalarValue:M
- ScalarValue:F
- ScalarValue:M
- ScalarValue:G
- ScalarValue:K
- ScalarValue:Q9
- ScalarValue:F
- ScalarValue:Q9
- ScalarValue:G
- ScalarValue:K
+ Value:M
+ Value:F
+ Value:M
+ Value:G
+ Value:K
+ Value:Q9
+ Value:F
+ Value:Q9
+ Value:G
+ Value:K
  BinaryOperator:>=
 4120 Q9=M
  Reference:Q9
- ScalarValue:M
+ Value:M
  AssignmentOperator:=
 4130 NEXT M
  Variable:M
 4131 IF R>A THEN 4140
- ScalarValue:R
- ScalarValue:A
+ Value:R
+ Value:A
  BinaryOperator:>
 4132 IF R=S THEN 4210
- ScalarValue:R
- ScalarValue:S
+ Value:R
+ Value:S
  BinaryOperator:=
 4140 IF K(R,S)<K(F(Q9),G(Q9)) THEN 4210
- ScalarValue:R
- ScalarValue:S
- ScalarValue:K
- ScalarValue:Q9
- ScalarValue:F
- ScalarValue:Q9
- ScalarValue:G
- ScalarValue:K
+ Value:R
+ Value:S
+ Value:K
+ Value:Q9
+ Value:F
+ Value:Q9
+ Value:G
+ Value:K
  BinaryOperator:<
 4150 FOR M=1 TO A
  control: Variable:M
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:A"]
+ end:     ["Value:A"]
 4160 IF F(M)<>R THEN 4190
- ScalarValue:M
- ScalarValue:F
- ScalarValue:R
+ Value:M
+ Value:F
+ Value:R
  BinaryOperator:<>
 4170 IF G(M)=S THEN 4210
- ScalarValue:M
- ScalarValue:G
- ScalarValue:S
+ Value:M
+ Value:G
+ Value:S
  BinaryOperator:=
 4180 NEXT M
  Variable:M
 4190 F(Q9)=R
- ScalarValue:Q9
+ Value:Q9
  Reference:F
- ScalarValue:R
+ Value:R
  AssignmentOperator:=
 4200 G(Q9)=S
- ScalarValue:Q9
+ Value:Q9
  Reference:G
- ScalarValue:S
+ Value:S
  AssignmentOperator:=
 4210 NEXT S
  Variable:S

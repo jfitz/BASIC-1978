@@ -107,7 +107,7 @@
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
- ScalarValue:I
+ Value:I
  Reference:S
  NumericConstant:0
  AssignmentOperator:=
@@ -119,20 +119,20 @@
 120 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
 130 PRINT "NAME OF PLAYER #";I;:INPUT A$(I)
  ITEMS
  TextConstant:"NAME OF PLAYER #"
  CarriageControl:;
- ScalarValue:I
+ Value:I
  CarriageControl:;
- ScalarValue:I
+ Value:I
  Reference:A$
 140 NEXT I
  Variable:I
 150 R=R+1: PRINT: PRINT "ROUND";R:PRINT "---------"
  Reference:R
- ScalarValue:R
+ Value:R
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -141,7 +141,7 @@
  ITEMS
  TextConstant:"ROUND"
  CarriageControl:;
- ScalarValue:R
+ Value:R
  CarriageControl:NL
  ITEMS
  TextConstant:"---------"
@@ -149,22 +149,22 @@
 160 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
 170 PRINT: PRINT A$(I)"'S THROW";: INPUT T
  ITEMS
  CarriageControl:NL
  ITEMS
- ScalarValue:I
- ScalarValue:A$
+ Value:I
+ Value:A$
  CarriageControl:
  TextConstant:"'S THROW"
  CarriageControl:;
  Reference:T
 180 IF T<0 OR T>3 THEN PRINT "INPUT 1, 2, OR 3!": GOTO 170
- ScalarValue:T
+ Value:T
  NumericConstant:0
  BinaryOperator:<
- ScalarValue:T
+ Value:T
  NumericConstant:3
  BinaryOperator:>
  BinaryOperator:OR
@@ -173,7 +173,7 @@
  CarriageControl:NL
  LineNumber:170
 190 ON T GOTO 200, 210, 200
- ScalarValue:T
+ Value:T
  LineNumber:200
  LineNumber:210
  LineNumber:200
@@ -224,8 +224,8 @@
  FunctionRnd
  AssignmentOperator:=
 240 IF U>=P1 THEN PRINT "BULLSEYE!!  40 POINTS!":B=40: GOTO 290
- ScalarValue:U
- ScalarValue:P1
+ Value:U
+ Value:P1
  BinaryOperator:>=
  ITEMS
  TextConstant:"BULLSEYE!!  40 POINTS!"
@@ -235,8 +235,8 @@
  AssignmentOperator:=
  LineNumber:290
 250 IF U>=P2 THEN PRINT "30-POINT ZONE!":B=30: GOTO 290
- ScalarValue:U
- ScalarValue:P2
+ Value:U
+ Value:P2
  BinaryOperator:>=
  ITEMS
  TextConstant:"30-POINT ZONE!"
@@ -246,8 +246,8 @@
  AssignmentOperator:=
  LineNumber:290
 260 IF U>=P3 THEN PRINT "20-POINT ZONE":B=20: GOTO 290
- ScalarValue:U
- ScalarValue:P3
+ Value:U
+ Value:P3
  BinaryOperator:>=
  ITEMS
  TextConstant:"20-POINT ZONE"
@@ -257,8 +257,8 @@
  AssignmentOperator:=
  LineNumber:290
 270 IF U>=P4 THEN PRINT "WHEW!  10 POINTS.":B=10: GOTO 290
- ScalarValue:U
- ScalarValue:P4
+ Value:U
+ Value:P4
  BinaryOperator:>=
  ITEMS
  TextConstant:"WHEW!  10 POINTS."
@@ -275,42 +275,42 @@
  NumericConstant:0
  AssignmentOperator:=
 290 S(I)=S(I)+B: PRINT "TOTAL SCORE =";S(I): NEXT I
- ScalarValue:I
+ Value:I
  Reference:S
- ScalarValue:I
- ScalarValue:S
- ScalarValue:B
+ Value:I
+ Value:S
+ Value:B
  BinaryOperator:+
  AssignmentOperator:=
  ITEMS
  TextConstant:"TOTAL SCORE ="
  CarriageControl:;
- ScalarValue:I
- ScalarValue:S
+ Value:I
+ Value:S
  CarriageControl:NL
  Variable:I
 300 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
 310 IF S(I)>=200 THEN M=M+1: W(M)=I
- ScalarValue:I
- ScalarValue:S
+ Value:I
+ Value:S
  NumericConstant:200
  BinaryOperator:>=
  Reference:M
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:M
+ Value:M
  Reference:W
- ScalarValue:I
+ Value:I
  AssignmentOperator:=
 320 NEXT I
  Variable:I
 330 IF M=0 THEN 150
- ScalarValue:M
+ Value:M
  NumericConstant:0
  BinaryOperator:=
 340 PRINT: PRINT "WE HAVE A WINNER!!": PRINT
@@ -324,17 +324,17 @@
 350 FOR I=1 TO M: PRINT A$(W(I));" SCORED";S(W(I));"POINTS.": NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:M"]
+ end:     ["Value:M"]
  ITEMS
- ScalarValue:I
- ScalarValue:W
- ScalarValue:A$
+ Value:I
+ Value:W
+ Value:A$
  CarriageControl:;
  TextConstant:" SCORED"
  CarriageControl:;
- ScalarValue:I
- ScalarValue:W
- ScalarValue:S
+ Value:I
+ Value:W
+ Value:S
  CarriageControl:;
  TextConstant:"POINTS."
  CarriageControl:NL

@@ -59,11 +59,11 @@
 150 INPUT "DO YOU WANT INSTRUCTIONS";A$
  Reference:A$
 160 IF A$="NO" THEN 290
- ScalarValue:A$
+ Value:A$
  TextConstant:"NO"
  BinaryOperator:=
 165 IF A$<>"YES" THEN 150
- ScalarValue:A$
+ Value:A$
  TextConstant:"YES"
  BinaryOperator:<>
 170 PRINT "THIS IS A FOOTBALL GAME FOR TWO TEAMS IN WHICH PLAYERS MUST"
@@ -143,33 +143,33 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:40"]
  Reference:N
- ScalarValue:I
+ Value:I
  NumericConstant:20
  BinaryOperator:>
 330 A(N)=I: GOTO 360
- ScalarValue:N
+ Value:N
  Reference:A
- ScalarValue:I
+ Value:I
  AssignmentOperator:=
  LineNumber:360
 350 B(N)=I-20
- ScalarValue:N
+ Value:N
  Reference:B
- ScalarValue:I
+ Value:I
  NumericConstant:20
  BinaryOperator:-
  AssignmentOperator:=
 360 C(I)=N: NEXT I
- ScalarValue:I
+ Value:I
  Reference:C
- ScalarValue:N
+ Value:N
  AssignmentOperator:=
  Variable:I
 370 FOR I=1 TO 20: READ P$(I): NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
- ScalarValue:I
+ Value:I
  Reference:P$
  Variable:I
 380 L=0: T=1
@@ -183,7 +183,7 @@
  ITEMS
  TextConstant:"TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"PLAY CHART"
  CarriageControl:NL
@@ -199,22 +199,22 @@
  Remark:
 450 PRINT C(I+L);TAB(6);P$(I)
  ITEMS
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  BinaryOperator:+
- ScalarValue:C
+ Value:C
  CarriageControl:;
  NumericConstant:6
  FunctionTab
  CarriageControl:;
- ScalarValue:I
- ScalarValue:P$
+ Value:I
+ Value:P$
  CarriageControl:NL
 460 NEXT I
  Variable:I
 630 L=L+20:T=2
  Reference:L
- ScalarValue:L
+ Value:L
  NumericConstant:20
  BinaryOperator:+
  AssignmentOperator:=
@@ -241,7 +241,7 @@
  end:     ["NumericConstant:3000"]
  Variable:Z
 680 IF L=20 THEN 410
- ScalarValue:L
+ Value:L
  NumericConstant:20
  BinaryOperator:=
 690 D(1)=0: D(2)=3: M$(1)="--->": M$(2)="<---"
@@ -338,10 +338,10 @@
  CarriageControl:NL
 765 P=X(T)-Y(T)*40
  Reference:P
- ScalarValue:T
- ScalarValue:X
- ScalarValue:T
- ScalarValue:Y
+ Value:T
+ Value:X
+ Value:T
+ Value:Y
  NumericConstant:40
  BinaryOperator:*
  BinaryOperator:-
@@ -353,7 +353,7 @@
  ITEMS
  TextConstant:"TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"RECEIVES KICK-OFF"
  CarriageControl:NL
@@ -369,20 +369,20 @@
  AssignmentOperator:=
 790 P=P-Y(T)*K
  Reference:P
- ScalarValue:P
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:K
+ Value:P
+ Value:T
+ Value:Y
+ Value:K
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 794 IF W(T)*P<Z(T)+10 THEN 810
- ScalarValue:T
- ScalarValue:W
- ScalarValue:P
+ Value:T
+ Value:W
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:Z
+ Value:T
+ Value:Z
  NumericConstant:10
  BinaryOperator:+
  BinaryOperator:<
@@ -398,44 +398,44 @@
  ITEMS
  TextConstant:"BALL WENT"
  CarriageControl:;
- ScalarValue:K
+ Value:K
  CarriageControl:;
  TextConstant:"YARDS.  NOW ON"
  CarriageControl:;
- ScalarValue:P
+ Value:P
  CarriageControl:NL
  LineNumber:1900
 830 PRINT "TEAM";T;"DO YOU WANT TO RUNBACK";:INPUT A$
  ITEMS
  TextConstant:"TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"DO YOU WANT TO RUNBACK"
  CarriageControl:;
  Reference:A$
 840 IF A$="YES" THEN 1430
- ScalarValue:A$
+ Value:A$
  TextConstant:"YES"
  BinaryOperator:=
 845 IF A$<>"NO" THEN 830
- ScalarValue:A$
+ Value:A$
  TextConstant:"NO"
  BinaryOperator:<>
 850 IF W(T)*P<Z(T) THEN 880
- ScalarValue:T
- ScalarValue:W
- ScalarValue:P
+ Value:T
+ Value:W
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:Z
+ Value:T
+ Value:Z
  BinaryOperator:<
 870 P=Z(T)-W(T)*20
  Reference:P
- ScalarValue:T
- ScalarValue:Z
- ScalarValue:T
- ScalarValue:W
+ Value:T
+ Value:Z
+ Value:T
+ Value:W
  NumericConstant:20
  BinaryOperator:*
  BinaryOperator:-
@@ -445,7 +445,7 @@
  NumericConstant:1
  AssignmentOperator:=
  Reference:S
- ScalarValue:P
+ Value:P
  AssignmentOperator:=
 885 FOR I=1 TO 72: PRINT "=";: NEXT I
  control: Variable:I
@@ -461,32 +461,32 @@
  ITEMS
  TextConstant:"TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"DOWN"
  CarriageControl:;
- ScalarValue:D
+ Value:D
  CarriageControl:;
  TextConstant:"ON"
  CarriageControl:;
- ScalarValue:P
+ Value:P
  CarriageControl:NL
 893 IF D<>1 THEN 900
- ScalarValue:D
+ Value:D
  NumericConstant:1
  BinaryOperator:<>
 895 IF Y(T)*(P+Y(T)*10)>=X(T) THEN 898
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
- ScalarValue:T
- ScalarValue:Y
+ Value:T
+ Value:Y
+ Value:P
+ Value:T
+ Value:Y
  NumericConstant:10
  BinaryOperator:*
  BinaryOperator:+
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:X
+ Value:T
+ Value:X
  BinaryOperator:>=
 897 C=4: GOTO 900
  Reference:C
@@ -498,7 +498,7 @@
  NumericConstant:8
  AssignmentOperator:=
 900 IF C=8 THEN 904
- ScalarValue:C
+ Value:C
  NumericConstant:8
  BinaryOperator:=
 901 PRINT TAB(27);10-(Y(T)*P-Y(T)*S);"YARDS TO 1ST DOWN"
@@ -507,13 +507,13 @@
  FunctionTab
  CarriageControl:;
  NumericConstant:10
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
+ Value:T
+ Value:Y
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:S
+ Value:T
+ Value:Y
+ Value:S
  BinaryOperator:*
  BinaryOperator:-
  BinaryOperator:-
@@ -527,11 +527,11 @@
  NumericConstant:27
  FunctionTab
  CarriageControl:;
- ScalarValue:T
- ScalarValue:X
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
+ Value:T
+ Value:X
+ Value:T
+ Value:Y
+ Value:P
  BinaryOperator:*
  BinaryOperator:-
  CarriageControl:;
@@ -539,7 +539,7 @@
  CarriageControl:NL
 910 GOSUB 1900: IF D=4 THEN 1180
  LineNumber:1900
- ScalarValue:D
+ Value:D
  NumericConstant:4
  BinaryOperator:=
 920 REM
@@ -564,7 +564,7 @@
  TextConstant:"INPUT OFFENSIVE PLAY, DEFENSIVE PLAY"
  CarriageControl:;
 950 IF T=2 THEN 970
- ScalarValue:T
+ Value:T
  NumericConstant:2
  BinaryOperator:=
 960 INPUT P1,P2: GOTO 975
@@ -575,49 +575,49 @@
  Reference:P2
  Reference:P1
 975 IF P1=77 THEN 1180
- ScalarValue:P1
+ Value:P1
  NumericConstant:77
  BinaryOperator:=
 980 IF P1>20 THEN 1800
- ScalarValue:P1
+ Value:P1
  NumericConstant:20
  BinaryOperator:>
 985 IF P1<1 THEN 1800
- ScalarValue:P1
+ Value:P1
  NumericConstant:1
  BinaryOperator:<
 990 IF P2>20 THEN 1800
- ScalarValue:P2
+ Value:P2
  NumericConstant:20
  BinaryOperator:>
 992 IF P2<1 THEN 1800
- ScalarValue:P2
+ Value:P2
  NumericConstant:1
  BinaryOperator:<
 995 P1=INT(P1): P2=INT(P2)
  Reference:P1
- ScalarValue:P1
+ Value:P1
  FunctionInt
  AssignmentOperator:=
  Reference:P2
- ScalarValue:P2
+ Value:P2
  FunctionInt
  AssignmentOperator:=
 1000 Y=INT(ABS(A(P1)-B(P2))/19*((X(T)-Y(T)*P+25)*RND(1)-15))
  Reference:Y
- ScalarValue:P1
- ScalarValue:A
- ScalarValue:P2
- ScalarValue:B
+ Value:P1
+ Value:A
+ Value:P2
+ Value:B
  BinaryOperator:-
  FunctionAbs
  NumericConstant:19
  BinaryOperator:/
- ScalarValue:T
- ScalarValue:X
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
+ Value:T
+ Value:X
+ Value:T
+ Value:Y
+ Value:P
  BinaryOperator:*
  BinaryOperator:-
  NumericConstant:25
@@ -633,30 +633,30 @@
 1005 PRINT: IF T=2 THEN 1015
  ITEMS
  CarriageControl:NL
- ScalarValue:T
+ Value:T
  NumericConstant:2
  BinaryOperator:=
 1010 IF A(P1)<11 THEN 1048
- ScalarValue:P1
- ScalarValue:A
+ Value:P1
+ Value:A
  NumericConstant:11
  BinaryOperator:<
 1012 GOTO 1020
  LineNumber:1020
 1015 IF B(P2)<11 THEN 1048
- ScalarValue:P2
- ScalarValue:B
+ Value:P2
+ Value:B
  NumericConstant:11
  BinaryOperator:<
 1020 IF U<>0 THEN 1035
- ScalarValue:U
+ Value:U
  NumericConstant:0
  BinaryOperator:<>
 1025 PRINT "PASS INCOMPLETE TEAM";T
  ITEMS
  TextConstant:"PASS INCOMPLETE TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:NL
 1030 Y=0: GOTO 1050
  Reference:Y
@@ -668,11 +668,11 @@
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
- ScalarValue:G
+ Value:G
  NumericConstant:.025
  BinaryOperator:>
 1037 IF Y>2 THEN 1045
- ScalarValue:Y
+ Value:Y
  NumericConstant:2
  BinaryOperator:>
 1040 PRINT "QUARTERBACK SCRAMBLED": GOTO 1050
@@ -691,10 +691,10 @@
  CarriageControl:NL
 1050 P=P-W(T)*Y
  Reference:P
- ScalarValue:P
- ScalarValue:T
- ScalarValue:W
- ScalarValue:Y
+ Value:P
+ Value:T
+ Value:W
+ Value:Y
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
@@ -704,18 +704,18 @@
  ITEMS
  TextConstant:"NET YARDS GAINED ON DOWN"
  CarriageControl:;
- ScalarValue:D
+ Value:D
  CarriageControl:;
  TextConstant:"ARE "
  CarriageControl:;
- ScalarValue:Y
+ Value:Y
  CarriageControl:NL
 1070 G=RND(1): IF G>.025 THEN 1110
  Reference:G
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
- ScalarValue:G
+ Value:G
  NumericConstant:.025
  BinaryOperator:>
 1080 PRINT: PRINT "** LOSS OF POSSESSION FROM TEAM";T;"TO TEAM";T(T)
@@ -724,57 +724,57 @@
  ITEMS
  TextConstant:"** LOSS OF POSSESSION FROM TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"TO TEAM"
  CarriageControl:;
- ScalarValue:T
- ScalarValue:T
+ Value:T
+ Value:T
  CarriageControl:NL
 1100 GOSUB 1850: PRINT: T=T(T): GOTO 830
  LineNumber:1850
  ITEMS
  CarriageControl:NL
  Reference:T
- ScalarValue:T
- ScalarValue:T
+ Value:T
+ Value:T
  AssignmentOperator:=
  LineNumber:830
 1110 IF Y(T)*P>=X(T) THEN 1320
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
+ Value:T
+ Value:Y
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:X
+ Value:T
+ Value:X
  BinaryOperator:>=
 1120 IF W(T)*P>=Z(T) THEN 1230
- ScalarValue:T
- ScalarValue:W
- ScalarValue:P
+ Value:T
+ Value:W
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:Z
+ Value:T
+ Value:Z
  BinaryOperator:>=
 1130 IF Y(T)*P-Y(T)*S>=10 THEN 880
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
+ Value:T
+ Value:Y
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:S
+ Value:T
+ Value:Y
+ Value:S
  BinaryOperator:*
  BinaryOperator:-
  NumericConstant:10
  BinaryOperator:>=
 1140 D=D+1: IF D<>5 THEN 885
  Reference:D
- ScalarValue:D
+ Value:D
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:D
+ Value:D
  NumericConstant:5
  BinaryOperator:<>
 1160 PRINT: PRINT "CONVERSION UNSUCCESSFUL TEAM";T:T=T(T)
@@ -783,11 +783,11 @@
  ITEMS
  TextConstant:"CONVERSION UNSUCCESSFUL TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:NL
  Reference:T
- ScalarValue:T
- ScalarValue:T
+ Value:T
+ Value:T
  AssignmentOperator:=
 1170 GOSUB 1850: GOTO 880
  LineNumber:1850
@@ -796,17 +796,17 @@
  ITEMS
  TextConstant:"DOES TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"WANT TO PUNT"
  CarriageControl:;
  Reference:A$
 1185 IF A$="NO" THEN 1200
- ScalarValue:A$
+ Value:A$
  TextConstant:"NO"
  BinaryOperator:=
 1187 IF A$<>"YES" THEN 1180
- ScalarValue:A$
+ Value:A$
  TextConstant:"YES"
  BinaryOperator:<>
 1190 PRINT:PRINT "TEAM";T;"WILL PUNT": G=RND(1): IF G<.025 THEN 1080
@@ -815,7 +815,7 @@
  ITEMS
  TextConstant:"TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"WILL PUNT"
  CarriageControl:NL
@@ -823,7 +823,7 @@
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
- ScalarValue:G
+ Value:G
  NumericConstant:.025
  BinaryOperator:<
 1195 GOSUB 1850: K=INT(25*RND(1)+35): T=T(T): GOTO 790
@@ -838,25 +838,25 @@
  FunctionInt
  AssignmentOperator:=
  Reference:T
- ScalarValue:T
- ScalarValue:T
+ Value:T
+ Value:T
  AssignmentOperator:=
  LineNumber:790
 1200 PRINT "DOES TEAM";T;"WANT TO ATTEMPT A FIELD GOAL";: INPUT A$
  ITEMS
  TextConstant:"DOES TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"WANT TO ATTEMPT A FIELD GOAL"
  CarriageControl:;
  Reference:A$
 1210 IF A$="YES" THEN 1640
- ScalarValue:A$
+ Value:A$
  TextConstant:"YES"
  BinaryOperator:=
 1215 IF A$<>"NO" THEN 1200
- ScalarValue:A$
+ Value:A$
  TextConstant:"NO"
  BinaryOperator:<>
 1217 GOTO 920
@@ -867,17 +867,17 @@
  ITEMS
  TextConstant:"SAFETY AGAINST TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"**********************OH-OH"
  CarriageControl:NL
 1240 H(T(T))=H(T(T))+2: GOSUB 1810
- ScalarValue:T
- ScalarValue:T
+ Value:T
+ Value:T
  Reference:H
- ScalarValue:T
- ScalarValue:T
- ScalarValue:H
+ Value:T
+ Value:T
+ Value:H
  NumericConstant:2
  BinaryOperator:+
  AssignmentOperator:=
@@ -886,22 +886,22 @@
  ITEMS
  TextConstant:"TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"DO YOU WANT TO PUNT INSTEAD OF A KICKOFF"
  CarriageControl:;
  Reference:A$
 1290 P=Z(T)-W(T)*20: IF A$="YES" THEN 1190
  Reference:P
- ScalarValue:T
- ScalarValue:Z
- ScalarValue:T
- ScalarValue:W
+ Value:T
+ Value:Z
+ Value:T
+ Value:W
  NumericConstant:20
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
- ScalarValue:A$
+ Value:A$
  TextConstant:"YES"
  BinaryOperator:=
 1320 PRINT: PRINT "TOUCHDOWN BY TEAM";T;"*********************YEA TEAM"
@@ -910,7 +910,7 @@
  ITEMS
  TextConstant:"TOUCHDOWN BY TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"*********************YEA TEAM"
  CarriageControl:NL
@@ -922,7 +922,7 @@
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
- ScalarValue:G
+ Value:G
  NumericConstant:.1
  BinaryOperator:>
 1360 Q=6: PRINT "EXTRA POINT NO GOOD": GOTO 1390
@@ -938,18 +938,18 @@
  TextConstant:"EXTRA POINT GOOD"
  CarriageControl:NL
 1390 H(T)=H(T)+Q: GOSUB 1810
- ScalarValue:T
+ Value:T
  Reference:H
- ScalarValue:T
- ScalarValue:H
- ScalarValue:Q
+ Value:T
+ Value:H
+ Value:Q
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:1810
 1420 T=T(T): GOTO 765
  Reference:T
- ScalarValue:T
- ScalarValue:T
+ Value:T
+ Value:T
  AssignmentOperator:=
  LineNumber:765
 1430 K=INT(9*RND(0)+1)
@@ -964,11 +964,11 @@
  AssignmentOperator:=
 1440 R=INT(((X(T)-Y(T)*P+25)*RND(1)-15)/K)
  Reference:R
- ScalarValue:T
- ScalarValue:X
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
+ Value:T
+ Value:X
+ Value:T
+ Value:Y
+ Value:P
  BinaryOperator:*
  BinaryOperator:-
  NumericConstant:25
@@ -978,16 +978,16 @@
  BinaryOperator:*
  NumericConstant:15
  BinaryOperator:-
- ScalarValue:K
+ Value:K
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 1460 P=P-W(T)*R
  Reference:P
- ScalarValue:P
- ScalarValue:T
- ScalarValue:W
- ScalarValue:R
+ Value:P
+ Value:T
+ Value:W
+ Value:R
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
@@ -997,9 +997,9 @@
  ITEMS
  TextConstant:"RUNBACK TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
- ScalarValue:R
+ Value:R
  CarriageControl:;
  TextConstant:"YARDS"
  CarriageControl:NL
@@ -1008,24 +1008,24 @@
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
- ScalarValue:G
+ Value:G
  NumericConstant:.025
  BinaryOperator:<
 1490 IF Y(T)*P>=X(T) THEN 1320
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
+ Value:T
+ Value:Y
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:X
+ Value:T
+ Value:X
  BinaryOperator:>=
 1500 IF W(T)*P>=Z(T) THEN 1230
- ScalarValue:T
- ScalarValue:W
- ScalarValue:P
+ Value:T
+ Value:W
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:Z
+ Value:T
+ Value:Z
  BinaryOperator:>=
 1510 GOTO 880
  LineNumber:880
@@ -1035,7 +1035,7 @@
  ITEMS
  TextConstant:"TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"WILL ATTEMPT A FIELD GOAL"
  CarriageControl:NL
@@ -1044,7 +1044,7 @@
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
- ScalarValue:G
+ Value:G
  NumericConstant:.025
  BinaryOperator:<
 1650 F=INT(35*RND(1)+20)
@@ -1063,16 +1063,16 @@
  ITEMS
  TextConstant:"KICK IS"
  CarriageControl:;
- ScalarValue:F
+ Value:F
  CarriageControl:;
  TextConstant:"YARDS LONG"
  CarriageControl:NL
 1680 P=P-W(T)*F: G=RND(1)
  Reference:P
- ScalarValue:P
- ScalarValue:T
- ScalarValue:W
- ScalarValue:F
+ Value:P
+ Value:T
+ Value:W
+ Value:F
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
@@ -1081,22 +1081,22 @@
  FunctionRnd
  AssignmentOperator:=
 1690 IF G<.35 THEN 1735
- ScalarValue:G
+ Value:G
  NumericConstant:.35
  BinaryOperator:<
 1700 IF Y(T)*P<X(T) THEN 1740
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
+ Value:T
+ Value:Y
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:X
+ Value:T
+ Value:X
  BinaryOperator:<
 1710 PRINT "FIELD GOAL GOOD FOR TEAM";T;"*********************YEA"
  ITEMS
  TextConstant:"FIELD GOAL GOOD FOR TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"*********************YEA"
  CarriageControl:NL
@@ -1113,25 +1113,25 @@
  ITEMS
  TextConstant:"FIELD GOAL UNSUCCESFUL TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"-----------------TOO BAD"
  CarriageControl:NL
 1742 GOSUB 1850: IF Y(T)*P<X(T)+10 THEN 1745
  LineNumber:1850
- ScalarValue:T
- ScalarValue:Y
- ScalarValue:P
+ Value:T
+ Value:Y
+ Value:P
  BinaryOperator:*
- ScalarValue:T
- ScalarValue:X
+ Value:T
+ Value:X
  NumericConstant:10
  BinaryOperator:+
  BinaryOperator:<
 1744 T=T(T): GOTO 794
  Reference:T
- ScalarValue:T
- ScalarValue:T
+ Value:T
+ Value:T
  AssignmentOperator:=
  LineNumber:794
 1745 PRINT: PRINT "BALL NOW ON";P
@@ -1140,12 +1140,12 @@
  ITEMS
  TextConstant:"BALL NOW ON"
  CarriageControl:;
- ScalarValue:P
+ Value:P
  CarriageControl:NL
 1750 T=T(T): GOSUB 1900: GOTO 830
  Reference:T
- ScalarValue:T
- ScalarValue:T
+ Value:T
+ Value:T
  AssignmentOperator:=
  LineNumber:1900
  LineNumber:830
@@ -1217,7 +1217,7 @@
  TextConstant:"RAZZLE-DAZZLE"
  TextConstant:"BOMB!!!!"
 1800 IF P1<>99 THEN 936
- ScalarValue:P1
+ Value:P1
  NumericConstant:99
  BinaryOperator:<>
 1810 PRINT: PRINT "TEAM 1 SCORE IS";H(1)
@@ -1227,33 +1227,33 @@
  TextConstant:"TEAM 1 SCORE IS"
  CarriageControl:;
  NumericConstant:1
- ScalarValue:H
+ Value:H
  CarriageControl:NL
 1820 PRINT "TEAM 2 SCORE IS";H(2): PRINT
  ITEMS
  TextConstant:"TEAM 2 SCORE IS"
  CarriageControl:;
  NumericConstant:2
- ScalarValue:H
+ Value:H
  CarriageControl:NL
  ITEMS
  CarriageControl:NL
 1825 IF H(T)<E THEN 1830
- ScalarValue:T
- ScalarValue:H
- ScalarValue:E
+ Value:T
+ Value:H
+ Value:E
  BinaryOperator:<
 1827 PRINT "TEAM";T;"WINS*******************": GOTO 2000
  ITEMS
  TextConstant:"TEAM"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"WINS*******************"
  CarriageControl:NL
  LineNumber:2000
 1830 IF P1=99 THEN 940
- ScalarValue:P1
+ Value:P1
  NumericConstant:99
  BinaryOperator:=
 1835 RETURN
@@ -1275,18 +1275,18 @@
  
 1900 PRINT TAB(D(T)+5+P/2);M$(T)
  ITEMS
- ScalarValue:T
- ScalarValue:D
+ Value:T
+ Value:D
  NumericConstant:5
  BinaryOperator:+
- ScalarValue:P
+ Value:P
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:+
  FunctionTab
  CarriageControl:;
- ScalarValue:T
- ScalarValue:M$
+ Value:T
+ Value:M$
  CarriageControl:NL
 1910 PRINT "TEAM 1 [0   10   20   30   40   50   60   70   80   90";
  ITEMS

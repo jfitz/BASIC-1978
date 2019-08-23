@@ -25,10 +25,10 @@
  control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:B$
- ScalarValue:D$
+ Value:D$
  AssignmentOperator:=
  Variable:J
  Variable:I
@@ -38,19 +38,19 @@
  NumericConstant:4
  NumericConstant:4
  Reference:B$
- ScalarValue:L$
+ Value:L$
  AssignmentOperator:=
 241 B$(4,5)=L$
  NumericConstant:4
  NumericConstant:5
  Reference:B$
- ScalarValue:L$
+ Value:L$
  AssignmentOperator:=
 242 B$(4,6)=L$
  NumericConstant:4
  NumericConstant:6
  Reference:B$
- ScalarValue:L$
+ Value:L$
  AssignmentOperator:=
 300 REM *** DISPLAY BOARD
  Remark:*** DISPLAY BOARD
@@ -60,7 +60,7 @@
  CarriageControl:NL
 320 MAT PRINT B$;
  ITEMS
- MatrixValue:B$
+ Value:B$
  CarriageControl:;
 330 PRINT "********************"
  ITEMS
@@ -72,7 +72,7 @@
 350 INPUT "CONTINUE", A$
  Reference:A$
 360 IF A$ <> "Y" THEN STOP
- ScalarValue:A$
+ Value:A$
  TextConstant:"Y"
  BinaryOperator:<>
  
@@ -111,26 +111,26 @@
  start:   ["NumericConstant:1", "UnaryOperator:-"]
  end:     ["NumericConstant:1"]
 470 IF I0 = 0 AND J0 = 0 THEN 500
- ScalarValue:I0
+ Value:I0
  NumericConstant:0
  BinaryOperator:=
- ScalarValue:J0
+ Value:J0
  NumericConstant:0
  BinaryOperator:=
  BinaryOperator:AND
 480 IF B$(I+I0,J+J0) <> L$ THEN 500
- ScalarValue:I
- ScalarValue:I0
+ Value:I
+ Value:I0
  BinaryOperator:+
- ScalarValue:J
- ScalarValue:J0
+ Value:J
+ Value:J0
  BinaryOperator:+
- ScalarValue:B$
- ScalarValue:L$
+ Value:B$
+ Value:L$
  BinaryOperator:<>
 490 C = C + 1
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -139,10 +139,10 @@
 510 NEXT I0
  Variable:I0
 512 N(I,J)=C
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:N
- ScalarValue:C
+ Value:C
  AssignmentOperator:=
 520 NEXT J
  Variable:J
@@ -165,40 +165,40 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 630 IF N(I,J)<2 THEN 660
- ScalarValue:I
- ScalarValue:J
- ScalarValue:N
+ Value:I
+ Value:J
+ Value:N
  NumericConstant:2
  BinaryOperator:<
 640 IF N(I,J)=2 THEN 720
- ScalarValue:I
- ScalarValue:J
- ScalarValue:N
+ Value:I
+ Value:J
+ Value:N
  NumericConstant:2
  BinaryOperator:=
 650 IF N(I,J)=3 THEN 690
- ScalarValue:I
- ScalarValue:J
- ScalarValue:N
+ Value:I
+ Value:J
+ Value:N
  NumericConstant:3
  BinaryOperator:=
 660 REM * CELL DIES
  Remark:* CELL DIES
 670 B$(I,J)=D$
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:B$
- ScalarValue:D$
+ Value:D$
  AssignmentOperator:=
 680 GOTO 730
  LineNumber:730
 690 REM * CELL IS BORN
  Remark:* CELL IS BORN
 700 B$(I,J)=L$
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:B$
- ScalarValue:L$
+ Value:L$
  AssignmentOperator:=
 710 GOTO 730
  LineNumber:730

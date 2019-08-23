@@ -32,7 +32,7 @@
 100 INPUT "DO YOU WANT INSTRUCTIONS (YES OR NO)";A$
  Reference:A$
 110 IF A$="NO" THEN 390
- ScalarValue:A$
+ Value:A$
  TextConstant:"NO"
  BinaryOperator:=
 160 PRINT
@@ -154,29 +154,29 @@
  AssignmentOperator:=
 490 PRINT T;TAB(6);H;TAB(16);V;TAB(26);F;TAB(35);"I";TAB(H/15);"*"
  ITEMS
- ScalarValue:T
+ Value:T
  CarriageControl:;
  NumericConstant:6
  FunctionTab
  CarriageControl:;
- ScalarValue:H
+ Value:H
  CarriageControl:;
  NumericConstant:16
  FunctionTab
  CarriageControl:;
- ScalarValue:V
+ Value:V
  CarriageControl:;
  NumericConstant:26
  FunctionTab
  CarriageControl:;
- ScalarValue:F
+ Value:F
  CarriageControl:;
  NumericConstant:35
  FunctionTab
  CarriageControl:;
  TextConstant:"I"
  CarriageControl:;
- ScalarValue:H
+ Value:H
  NumericConstant:15
  BinaryOperator:/
  FunctionTab
@@ -186,67 +186,67 @@
 500 INPUT B
  Reference:B
 510 IF B<0 THEN 650
- ScalarValue:B
+ Value:B
  NumericConstant:0
  BinaryOperator:<
 520 IF B>30 THEN B=30
- ScalarValue:B
+ Value:B
  NumericConstant:30
  BinaryOperator:>
  Reference:B
  NumericConstant:30
  AssignmentOperator:=
 530 IF B>F THEN B=F
- ScalarValue:B
- ScalarValue:F
+ Value:B
+ Value:F
  BinaryOperator:>
  Reference:B
- ScalarValue:F
+ Value:F
  AssignmentOperator:=
 540 V1=V-B+5
  Reference:V1
- ScalarValue:V
- ScalarValue:B
+ Value:V
+ Value:B
  BinaryOperator:-
  NumericConstant:5
  BinaryOperator:+
  AssignmentOperator:=
 560 F=F-B
  Reference:F
- ScalarValue:F
- ScalarValue:B
+ Value:F
+ Value:B
  BinaryOperator:-
  AssignmentOperator:=
 570 H=H- .5*(V+V1)
  Reference:H
- ScalarValue:H
+ Value:H
  NumericConstant:.5
- ScalarValue:V
- ScalarValue:V1
+ Value:V
+ Value:V1
  BinaryOperator:+
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 580 IF H<=0 THEN 670
- ScalarValue:H
+ Value:H
  NumericConstant:0
  BinaryOperator:<=
 590 T=T+1
  Reference:T
- ScalarValue:T
+ Value:T
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 600 V=V1
  Reference:V
- ScalarValue:V1
+ Value:V1
  AssignmentOperator:=
 610 IF F>0 THEN 490
- ScalarValue:F
+ Value:F
  NumericConstant:0
  BinaryOperator:>
 615 IF B=0 THEN 640
- ScalarValue:B
+ Value:B
  NumericConstant:0
  BinaryOperator:=
 620 PRINT"**** OUT OF FUEL ****"
@@ -255,29 +255,29 @@
  CarriageControl:NL
 640 PRINT T;TAB(4);H;TAB(12);V;TAB(20);F;TAB(29);"I";TAB(H/12+29);"*"
  ITEMS
- ScalarValue:T
+ Value:T
  CarriageControl:;
  NumericConstant:4
  FunctionTab
  CarriageControl:;
- ScalarValue:H
+ Value:H
  CarriageControl:;
  NumericConstant:12
  FunctionTab
  CarriageControl:;
- ScalarValue:V
+ Value:V
  CarriageControl:;
  NumericConstant:20
  FunctionTab
  CarriageControl:;
- ScalarValue:F
+ Value:F
  CarriageControl:;
  NumericConstant:29
  FunctionTab
  CarriageControl:;
  TextConstant:"I"
  CarriageControl:;
- ScalarValue:H
+ Value:H
  NumericConstant:12
  BinaryOperator:/
  NumericConstant:29
@@ -298,29 +298,29 @@
  CarriageControl:NL
 680 H=H+ .5*(V1+V)
  Reference:H
- ScalarValue:H
+ Value:H
  NumericConstant:.5
- ScalarValue:V1
- ScalarValue:V
+ Value:V1
+ Value:V
  BinaryOperator:+
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 690 IF B=5 THEN 720
- ScalarValue:B
+ Value:B
  NumericConstant:5
  BinaryOperator:=
 700 D=(-V+SQR(V*V+H*(10-2*B)))/(5-B)
  Reference:D
- ScalarValue:V
+ Value:V
  UnaryOperator:-
- ScalarValue:V
- ScalarValue:V
+ Value:V
+ Value:V
  BinaryOperator:*
- ScalarValue:H
+ Value:H
  NumericConstant:10
  NumericConstant:2
- ScalarValue:B
+ Value:B
  BinaryOperator:*
  BinaryOperator:-
  BinaryOperator:*
@@ -328,7 +328,7 @@
  FunctionSqr
  BinaryOperator:+
  NumericConstant:5
- ScalarValue:B
+ Value:B
  BinaryOperator:-
  BinaryOperator:/
  AssignmentOperator:=
@@ -336,17 +336,17 @@
  LineNumber:730
 720 D=H/V
  Reference:D
- ScalarValue:H
- ScalarValue:V
+ Value:H
+ Value:V
  BinaryOperator:/
  AssignmentOperator:=
 730 V1=V+(5-B)*D
  Reference:V1
- ScalarValue:V
+ Value:V
  NumericConstant:5
- ScalarValue:B
+ Value:B
  BinaryOperator:-
- ScalarValue:D
+ Value:D
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
@@ -354,8 +354,8 @@
  ITEMS
  TextConstant:"TOUCHDOWN AT"
  CarriageControl:;
- ScalarValue:T
- ScalarValue:D
+ Value:T
+ Value:D
  BinaryOperator:+
  CarriageControl:;
  TextConstant:"SECONDS."
@@ -364,18 +364,18 @@
  ITEMS
  TextConstant:"LANDING VELOCITY="
  CarriageControl:;
- ScalarValue:V1
+ Value:V1
  CarriageControl:;
  TextConstant:"FEET/SEC."
  CarriageControl:NL
 780 PRINT F;"UNITS OF FUEL REMAINING."
  ITEMS
- ScalarValue:F
+ Value:F
  CarriageControl:;
  TextConstant:"UNITS OF FUEL REMAINING."
  CarriageControl:NL
 790 IF V1<>0 THEN 810
- ScalarValue:V1
+ Value:V1
  NumericConstant:0
  BinaryOperator:<>
 800 PRINT"CONGRATULATIONS! A PERFECT LANDING!!"
@@ -387,7 +387,7 @@
  TextConstant:"YOUR LICENSE WILL BE RENEWED.......LATER."
  CarriageControl:NL
 810 IF ABS(V1)<2 THEN 840
- ScalarValue:V1
+ Value:V1
  FunctionAbs
  NumericConstant:2
  BinaryOperator:<
@@ -409,7 +409,7 @@
 850 INPUT "ANOTHER MISSION";A$
  Reference:A$
 860 IF A$="YES" THEN 390
- ScalarValue:A$
+ Value:A$
  TextConstant:"YES"
  BinaryOperator:=
 870 PRINT: PRINT "CONTROL OUT.": PRINT

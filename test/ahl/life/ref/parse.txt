@@ -47,32 +47,32 @@
  NumericConstant:1
  AssignmentOperator:=
 30 INPUT B$(C)
- ScalarValue:C
+ Value:C
  Reference:B$
 40 IF B$(C)="DONE" THEN B$(C)="": GOTO 80
- ScalarValue:C
- ScalarValue:B$
+ Value:C
+ Value:B$
  TextConstant:"DONE"
  BinaryOperator:=
- ScalarValue:C
+ Value:C
  Reference:B$
  TextConstant:""
  AssignmentOperator:=
  LineNumber:80
 50 IF LEFT$(B$(C),1)="." THEN B$(C)=" "+RIGHT$(B$(C),LEN(B$(C))-1)
- ScalarValue:C
- ScalarValue:B$
+ Value:C
+ Value:B$
  NumericConstant:1
  FunctionLeft
  TextConstant:"."
  BinaryOperator:=
- ScalarValue:C
+ Value:C
  Reference:B$
  TextConstant:" "
- ScalarValue:C
- ScalarValue:B$
- ScalarValue:C
- ScalarValue:B$
+ Value:C
+ Value:B$
+ Value:C
+ Value:B$
  FunctionLen
  NumericConstant:1
  BinaryOperator:-
@@ -81,7 +81,7 @@
  AssignmentOperator:=
 60 C=C+1
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -89,7 +89,7 @@
  LineNumber:30
 80 C=C-1: L=0
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -99,16 +99,16 @@
 90 FOR X=1 TO C-1
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:C", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:C", "NumericConstant:1", "BinaryOperator:-"]
 100 IF LEN(B$(X))>L THEN L=LEN(B$(X))
- ScalarValue:X
- ScalarValue:B$
+ Value:X
+ Value:B$
  FunctionLen
- ScalarValue:L
+ Value:L
  BinaryOperator:>
  Reference:L
- ScalarValue:X
- ScalarValue:B$
+ Value:X
+ Value:B$
  FunctionLen
  AssignmentOperator:=
 110 NEXT X
@@ -116,7 +116,7 @@
 120 X1=11-C/2
  Reference:X1
  NumericConstant:11
- ScalarValue:C
+ Value:C
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:-
@@ -124,7 +124,7 @@
 130 Y1=33-L/2
  Reference:Y1
  NumericConstant:33
- ScalarValue:L
+ Value:L
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:-
@@ -132,30 +132,30 @@
 140 FOR X=1 TO C
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:C"]
+ end:     ["Value:C"]
 150 FOR Y=1 TO LEN(B$(X))
  control: Variable:Y
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:X", "ScalarValue:B$", "FunctionLen"]
+ end:     ["Value:X", "Value:B$", "FunctionLen"]
 160 IF MID$(B$(X),Y,1)<>" " THEN A(X1+X,Y1+Y)=1:P=P+1
- ScalarValue:X
- ScalarValue:B$
- ScalarValue:Y
+ Value:X
+ Value:B$
+ Value:Y
  NumericConstant:1
  FunctionMid
  TextConstant:" "
  BinaryOperator:<>
- ScalarValue:X1
- ScalarValue:X
+ Value:X1
+ Value:X
  BinaryOperator:+
- ScalarValue:Y1
- ScalarValue:Y
+ Value:Y1
+ Value:Y
  BinaryOperator:+
  Reference:A
  NumericConstant:1
  AssignmentOperator:=
  Reference:P
- ScalarValue:P
+ Value:P
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -174,13 +174,13 @@
  ITEMS
  TextConstant:"GENERATION:"
  CarriageControl:;
- ScalarValue:G
+ Value:G
  CarriageControl:,
  TextConstant:"POPULATION:"
  CarriageControl:;
- ScalarValue:P
+ Value:P
  CarriageControl:;
- ScalarValue:I9
+ Value:I9
  ITEMS
  TextConstant:"INVALID!"
  CarriageControl:;
@@ -202,92 +202,92 @@
  AssignmentOperator:=
 220 G=G+1
  Reference:G
- ScalarValue:G
+ Value:G
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 225 FOR X=1 TO X1-1: PRINT: NEXT X
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:X1", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:X1", "NumericConstant:1", "BinaryOperator:-"]
  ITEMS
  CarriageControl:NL
  Variable:X
 230 FOR X=X1 TO X2
  control: Variable:X
- start:   ["ScalarValue:X1"]
- end:     ["ScalarValue:X2"]
+ start:   ["Value:X1"]
+ end:     ["Value:X2"]
 240 PRINT
  ITEMS
  CarriageControl:NL
 250 FOR Y=Y1 TO Y2
  control: Variable:Y
- start:   ["ScalarValue:Y1"]
- end:     ["ScalarValue:Y2"]
+ start:   ["Value:Y1"]
+ end:     ["Value:Y2"]
 253 IF A(X,Y)=2 THEN A(X,Y)=0:GOTO 270
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:2
  BinaryOperator:=
- ScalarValue:X
- ScalarValue:Y
+ Value:X
+ Value:Y
  Reference:A
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:270
 256 IF A(X,Y)=3 THEN A(X,Y)=1:GOTO 261
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:3
  BinaryOperator:=
- ScalarValue:X
- ScalarValue:Y
+ Value:X
+ Value:Y
  Reference:A
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:261
 260 IF A(X,Y)<>1 THEN 270
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:1
  BinaryOperator:<>
 261 PRINT TAB(Y);"*";
  ITEMS
- ScalarValue:Y
+ Value:Y
  FunctionTab
  CarriageControl:;
  TextConstant:"*"
  CarriageControl:;
 262 IF X<X3 THEN X3=X
- ScalarValue:X
- ScalarValue:X3
+ Value:X
+ Value:X3
  BinaryOperator:<
  Reference:X3
- ScalarValue:X
+ Value:X
  AssignmentOperator:=
 264 IF X>X4 THEN X4=X
- ScalarValue:X
- ScalarValue:X4
+ Value:X
+ Value:X4
  BinaryOperator:>
  Reference:X4
- ScalarValue:X
+ Value:X
  AssignmentOperator:=
 266 IF Y<Y3 THEN Y3=Y
- ScalarValue:Y
- ScalarValue:Y3
+ Value:Y
+ Value:Y3
  BinaryOperator:<
  Reference:Y3
- ScalarValue:Y
+ Value:Y
  AssignmentOperator:=
 268 IF Y>Y4 THEN Y4=Y
- ScalarValue:Y
- ScalarValue:Y4
+ Value:Y
+ Value:Y4
  BinaryOperator:>
  Reference:Y4
- ScalarValue:Y
+ Value:Y
  AssignmentOperator:=
 270 NEXT Y
  Variable:Y
@@ -295,26 +295,26 @@
  Variable:X
 295 FOR X=X2+1 TO 24: PRINT: NEXT X
  control: Variable:X
- start:   ["ScalarValue:X2", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Value:X2", "NumericConstant:1", "BinaryOperator:+"]
  end:     ["NumericConstant:24"]
  ITEMS
  CarriageControl:NL
  Variable:X
 299 X1=X3: X2=X4: Y1=Y3: Y2=Y4
  Reference:X1
- ScalarValue:X3
+ Value:X3
  AssignmentOperator:=
  Reference:X2
- ScalarValue:X4
+ Value:X4
  AssignmentOperator:=
  Reference:Y1
- ScalarValue:Y3
+ Value:Y3
  AssignmentOperator:=
  Reference:Y2
- ScalarValue:Y4
+ Value:Y4
  AssignmentOperator:=
 301 IF X1<3 THEN X1=3:I9=-1
- ScalarValue:X1
+ Value:X1
  NumericConstant:3
  BinaryOperator:<
  Reference:X1
@@ -325,7 +325,7 @@
  UnaryOperator:-
  AssignmentOperator:=
 303 IF X2>22 THEN X2=22:I9=-1
- ScalarValue:X2
+ Value:X2
  NumericConstant:22
  BinaryOperator:>
  Reference:X2
@@ -336,7 +336,7 @@
  UnaryOperator:-
  AssignmentOperator:=
 305 IF Y1<3 THEN Y1=3:I9=-1
- ScalarValue:Y1
+ Value:Y1
  NumericConstant:3
  BinaryOperator:<
  Reference:Y1
@@ -347,7 +347,7 @@
  UnaryOperator:-
  AssignmentOperator:=
 307 IF Y2>68 THEN Y2=68:I9=-1
- ScalarValue:Y2
+ Value:Y2
  NumericConstant:68
  BinaryOperator:>
  Reference:Y2
@@ -363,38 +363,38 @@
  AssignmentOperator:=
 500 FOR X=X1-1 TO X2+1
  control: Variable:X
- start:   ["ScalarValue:X1", "NumericConstant:1", "BinaryOperator:-"]
- end:     ["ScalarValue:X2", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Value:X1", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:X2", "NumericConstant:1", "BinaryOperator:+"]
 510 FOR Y=Y1-1 TO Y2+1
  control: Variable:Y
- start:   ["ScalarValue:Y1", "NumericConstant:1", "BinaryOperator:-"]
- end:     ["ScalarValue:Y2", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Value:Y1", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:Y2", "NumericConstant:1", "BinaryOperator:+"]
 520 C=0
  Reference:C
  NumericConstant:0
  AssignmentOperator:=
 530 FOR I=X-1 TO X+1
  control: Variable:I
- start:   ["ScalarValue:X", "NumericConstant:1", "BinaryOperator:-"]
- end:     ["ScalarValue:X", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Value:X", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:X", "NumericConstant:1", "BinaryOperator:+"]
 540 FOR J=Y-1 TO Y+1
  control: Variable:J
- start:   ["ScalarValue:Y", "NumericConstant:1", "BinaryOperator:-"]
- end:     ["ScalarValue:Y", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Value:Y", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:Y", "NumericConstant:1", "BinaryOperator:+"]
 550 IF A(I,J)=1 OR A(I,J)=2 THEN C=C+1
- ScalarValue:I
- ScalarValue:J
- ScalarValue:A
+ Value:I
+ Value:J
+ Value:A
  NumericConstant:1
  BinaryOperator:=
- ScalarValue:I
- ScalarValue:J
- ScalarValue:A
+ Value:I
+ Value:J
+ Value:A
  NumericConstant:2
  BinaryOperator:=
  BinaryOperator:OR
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -403,44 +403,44 @@
 570 NEXT I
  Variable:I
 580 IF A(X,Y)=0 THEN 610
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:0
  BinaryOperator:=
 590 IF C<3 OR C>4 THEN A(X,Y)=2: GOTO 600
- ScalarValue:C
+ Value:C
  NumericConstant:3
  BinaryOperator:<
- ScalarValue:C
+ Value:C
  NumericConstant:4
  BinaryOperator:>
  BinaryOperator:OR
- ScalarValue:X
- ScalarValue:Y
+ Value:X
+ Value:Y
  Reference:A
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:600
 595 P=P+1
  Reference:P
- ScalarValue:P
+ Value:P
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 600 GOTO 620
  LineNumber:620
 610 IF C=3 THEN A(X,Y)=3:P=P+1
- ScalarValue:C
+ Value:C
  NumericConstant:3
  BinaryOperator:=
- ScalarValue:X
- ScalarValue:Y
+ Value:X
+ Value:Y
  Reference:A
  NumericConstant:3
  AssignmentOperator:=
  Reference:P
- ScalarValue:P
+ Value:P
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -450,22 +450,22 @@
  Variable:X
 635 X1=X1-1:Y1=Y1-1:X2=X2+1:Y2=Y2+1
  Reference:X1
- ScalarValue:X1
+ Value:X1
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
  Reference:Y1
- ScalarValue:Y1
+ Value:Y1
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
  Reference:X2
- ScalarValue:X2
+ Value:X2
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
  Reference:Y2
- ScalarValue:Y2
+ Value:Y2
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=

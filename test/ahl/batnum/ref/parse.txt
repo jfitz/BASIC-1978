@@ -71,49 +71,49 @@
 330 INPUT "ENTER PILE SIZE";N
  Reference:N
 350 IF N>=1 THEN 370
- ScalarValue:N
+ Value:N
  NumericConstant:1
  BinaryOperator:>=
 360 GOTO 330
  LineNumber:330
 370 IF N<>INT(N) THEN 220
- ScalarValue:N
- ScalarValue:N
+ Value:N
+ Value:N
  FunctionInt
  BinaryOperator:<>
 380 IF N<1 THEN 220
- ScalarValue:N
+ Value:N
  NumericConstant:1
  BinaryOperator:<
 390 INPUT "ENTER WIN OPTION - 1 TO TAKE LAST, 2 TO AVOID LAST: ";M
  Reference:M
 410 IF M=1 THEN 430
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:=
 420 IF M<>2 THEN 390
- ScalarValue:M
+ Value:M
  NumericConstant:2
  BinaryOperator:<>
 430 INPUT "ENTER MIN AND MAX ";A,B
  Reference:A
  Reference:B
 450 IF A>B THEN 430
- ScalarValue:A
- ScalarValue:B
+ Value:A
+ Value:B
  BinaryOperator:>
 460 IF A<1 THEN 430
- ScalarValue:A
+ Value:A
  NumericConstant:1
  BinaryOperator:<
 470 IF A<>INT(A) THEN 430
- ScalarValue:A
- ScalarValue:A
+ Value:A
+ Value:A
  FunctionInt
  BinaryOperator:<>
 480 IF B<>INT(B) THEN 430
- ScalarValue:B
- ScalarValue:B
+ Value:B
+ Value:B
  FunctionInt
  BinaryOperator:<>
 490 INPUT "ENTER START OPTION - 1 COMPUTER FIRST, 2 YOU FIRST ";S
@@ -124,58 +124,58 @@
  ITEMS
  CarriageControl:NL
 510 IF S=1 THEN 530
- ScalarValue:S
+ Value:S
  NumericConstant:1
  BinaryOperator:=
 520 IF S<>2 THEN 490
- ScalarValue:S
+ Value:S
  NumericConstant:2
  BinaryOperator:<>
 530 C=A+B
  Reference:C
- ScalarValue:A
- ScalarValue:B
+ Value:A
+ Value:B
  BinaryOperator:+
  AssignmentOperator:=
 540 IF S=2 THEN 570
- ScalarValue:S
+ Value:S
  NumericConstant:2
  BinaryOperator:=
 550 GOSUB 600
  LineNumber:600
 560 IF W=1 THEN 220
- ScalarValue:W
+ Value:W
  NumericConstant:1
  BinaryOperator:=
 570 GOSUB 810
  LineNumber:810
 580 IF W=1 THEN 220
- ScalarValue:W
+ Value:W
  NumericConstant:1
  BinaryOperator:=
 590 GOTO 550
  LineNumber:550
 600 Q=N
  Reference:Q
- ScalarValue:N
+ Value:N
  AssignmentOperator:=
 610 IF M=1 THEN 630
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:=
 620 Q=Q-1
  Reference:Q
- ScalarValue:Q
+ Value:Q
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 630 IF M=1 THEN 680
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:=
 640 IF N>A THEN 720
- ScalarValue:N
- ScalarValue:A
+ Value:N
+ Value:A
  BinaryOperator:>
 650 W=1
  Reference:W
@@ -185,15 +185,15 @@
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- ScalarValue:N
+ Value:N
  CarriageControl:;
  TextConstant:"AND LOSES."
  CarriageControl:NL
 670 RETURN
  
 680 IF N>B THEN 720
- ScalarValue:N
- ScalarValue:B
+ Value:N
+ Value:B
  BinaryOperator:>
 690 W=1
  Reference:W
@@ -203,7 +203,7 @@
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- ScalarValue:N
+ Value:N
  CarriageControl:;
  TextConstant:"AND WINS."
  CarriageControl:NL
@@ -211,46 +211,46 @@
  
 720 P=Q-C*INT(Q/C)
  Reference:P
- ScalarValue:Q
- ScalarValue:C
- ScalarValue:Q
- ScalarValue:C
+ Value:Q
+ Value:C
+ Value:Q
+ Value:C
  BinaryOperator:/
  FunctionInt
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 730 IF P>=A THEN 750
- ScalarValue:P
- ScalarValue:A
+ Value:P
+ Value:A
  BinaryOperator:>=
 740 P=A
  Reference:P
- ScalarValue:A
+ Value:A
  AssignmentOperator:=
 750 IF P<=B THEN 770
- ScalarValue:P
- ScalarValue:B
+ Value:P
+ Value:B
  BinaryOperator:<=
 760 P=B
  Reference:P
- ScalarValue:B
+ Value:B
  AssignmentOperator:=
 770 N=N-P
  Reference:N
- ScalarValue:N
- ScalarValue:P
+ Value:N
+ Value:P
  BinaryOperator:-
  AssignmentOperator:=
 780 PRINT "COMPUTER TAKES";P;"AND LEAVES";N
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- ScalarValue:P
+ Value:P
  CarriageControl:;
  TextConstant:"AND LEAVES"
  CarriageControl:;
- ScalarValue:N
+ Value:N
  CarriageControl:NL
 790 W=0
  Reference:W
@@ -267,7 +267,7 @@
 820 INPUT P
  Reference:P
 830 IF P<>0 THEN 870
- ScalarValue:P
+ Value:P
  NumericConstant:0
  BinaryOperator:<>
 840 PRINT "I TOLD YOU NOT TO USE ZERO! COMPUTER WINS BY FORFEIT."
@@ -281,23 +281,23 @@
 860 RETURN
  
 870 IF P<>INT(P) THEN 920
- ScalarValue:P
- ScalarValue:P
+ Value:P
+ Value:P
  FunctionInt
  BinaryOperator:<>
 880 IF P>=A THEN 910
- ScalarValue:P
- ScalarValue:A
+ Value:P
+ Value:A
  BinaryOperator:>=
 890 IF P=N THEN 960
- ScalarValue:P
- ScalarValue:N
+ Value:P
+ Value:N
  BinaryOperator:=
 900 GOTO 920
  LineNumber:920
 910 IF P<=B THEN 940
- ScalarValue:P
- ScalarValue:B
+ Value:P
+ Value:B
  BinaryOperator:<=
 920 PRINT "ILLEGAL MOVE, REENTER IT ";
  ITEMS
@@ -307,16 +307,16 @@
  LineNumber:820
 940 N=N-P
  Reference:N
- ScalarValue:N
- ScalarValue:P
+ Value:N
+ Value:P
  BinaryOperator:-
  AssignmentOperator:=
 950 IF N<>0 THEN 1030
- ScalarValue:N
+ Value:N
  NumericConstant:0
  BinaryOperator:<>
 960 IF M=1 THEN 1000
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:=
 970 PRINT "TOUGH LUCK, YOU LOSE."
@@ -340,13 +340,13 @@
 1020 RETURN
  
 1030 IF N>=0 THEN 1060
- ScalarValue:N
+ Value:N
  NumericConstant:0
  BinaryOperator:>=
 1040 N=N+P
  Reference:N
- ScalarValue:N
- ScalarValue:P
+ Value:N
+ Value:P
  BinaryOperator:+
  AssignmentOperator:=
 1050 GOTO 920

@@ -27,7 +27,7 @@
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:4"]
- ScalarValue:I
+ Value:I
  Reference:B
  Variable:I
 130 GOSUB 260
@@ -44,27 +44,27 @@
  CarriageControl:NL
 170 READ X: IF X<0 THEN 160
  Reference:X
- ScalarValue:X
+ Value:X
  NumericConstant:0
  BinaryOperator:<
 175 IF X>128 THEN 240
- ScalarValue:X
+ Value:X
  NumericConstant:128
  BinaryOperator:>
 180 PRINT TAB(X);: READ Y
  ITEMS
- ScalarValue:X
+ Value:X
  FunctionTab
  CarriageControl:;
  Reference:Y
 190 FOR I=X TO Y: J=I-5*INT(I/5)
  control: Variable:I
- start:   ["ScalarValue:X"]
- end:     ["ScalarValue:Y"]
+ start:   ["Value:X"]
+ end:     ["Value:Y"]
  Reference:J
- ScalarValue:I
+ Value:I
  NumericConstant:5
- ScalarValue:I
+ Value:I
  NumericConstant:5
  BinaryOperator:/
  FunctionInt
@@ -73,9 +73,9 @@
  AssignmentOperator:=
 200 PRINT CHR$(L+B(J));
  ITEMS
- ScalarValue:L
- ScalarValue:J
- ScalarValue:B
+ Value:L
+ Value:J
+ Value:B
  BinaryOperator:+
  FunctionChr
  CarriageControl:;

@@ -46,7 +46,7 @@
 70 INPUT "WOULD YOU LIKE THE RULES (YES OR NO)";A$
  Reference:A$
 90 IF LEFT$(A$,1)="N" THEN 150
- ScalarValue:A$
+ Value:A$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
@@ -78,7 +78,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 160 A(I)=INT(10*RND(1))
- ScalarValue:I
+ Value:I
  Reference:A
  NumericConstant:10
  NumericConstant:1
@@ -87,7 +87,7 @@
  FunctionInt
  AssignmentOperator:=
 165 IF I-1=0 THEN 200
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:0
@@ -95,12 +95,12 @@
 170 FOR J=1 TO I-1
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:I", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:I", "NumericConstant:1", "BinaryOperator:-"]
 180 IF A(I)=A(J) THEN 160
- ScalarValue:I
- ScalarValue:A
- ScalarValue:J
- ScalarValue:A
+ Value:I
+ Value:A
+ Value:J
+ Value:A
  BinaryOperator:=
 190 NEXT J
  Variable:J
@@ -120,12 +120,12 @@
  ITEMS
  TextConstant:"GUESS #"
  CarriageControl:;
- ScalarValue:I
+ Value:I
  CarriageControl:,
 240 INPUT A$
  Reference:A$
 245 IF LEN(A$)<>3 THEN 630
- ScalarValue:A$
+ Value:A$
  FunctionLen
  NumericConstant:3
  BinaryOperator:<>
@@ -133,10 +133,10 @@
  control: Variable:Z
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
- ScalarValue:Z
+ Value:Z
  Reference:A1
- ScalarValue:A$
- ScalarValue:Z
+ Value:A$
+ Value:Z
  NumericConstant:1
  FunctionMid
  FunctionAsc
@@ -147,20 +147,20 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 270 IF A1(J)<48 THEN 300
- ScalarValue:J
- ScalarValue:A1
+ Value:J
+ Value:A1
  NumericConstant:48
  BinaryOperator:<
 280 IF A1(J)>57 THEN 300
- ScalarValue:J
- ScalarValue:A1
+ Value:J
+ Value:A1
  NumericConstant:57
  BinaryOperator:>
 285 B(J)=A1(J)-48
- ScalarValue:J
+ Value:J
  Reference:B
- ScalarValue:J
- ScalarValue:A1
+ Value:J
+ Value:A1
  NumericConstant:48
  BinaryOperator:-
  AssignmentOperator:=
@@ -176,21 +176,21 @@
  LineNumber:230
 320 IF B(1)=B(2) THEN 650
  NumericConstant:1
- ScalarValue:B
+ Value:B
  NumericConstant:2
- ScalarValue:B
+ Value:B
  BinaryOperator:=
 330 IF B(2)=B(3) THEN 650
  NumericConstant:2
- ScalarValue:B
+ Value:B
  NumericConstant:3
- ScalarValue:B
+ Value:B
  BinaryOperator:=
 340 IF B(3)=B(1) THEN 650
  NumericConstant:3
- ScalarValue:B
+ Value:B
  NumericConstant:1
- ScalarValue:B
+ Value:B
  BinaryOperator:=
 350 C=0:D=0
  Reference:C
@@ -204,30 +204,30 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:2"]
 370 IF A(J)<>B(J+1) THEN 390
- ScalarValue:J
- ScalarValue:A
- ScalarValue:J
+ Value:J
+ Value:A
+ Value:J
  NumericConstant:1
  BinaryOperator:+
- ScalarValue:B
+ Value:B
  BinaryOperator:<>
 380 C=C+1
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 390 IF A(J+1)<>B(J) THEN 410
- ScalarValue:J
+ Value:J
  NumericConstant:1
  BinaryOperator:+
- ScalarValue:A
- ScalarValue:J
- ScalarValue:B
+ Value:A
+ Value:J
+ Value:B
  BinaryOperator:<>
 400 C=C+1
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -235,25 +235,25 @@
  Variable:J
 420 IF A(1)<>B(3) THEN 440
  NumericConstant:1
- ScalarValue:A
+ Value:A
  NumericConstant:3
- ScalarValue:B
+ Value:B
  BinaryOperator:<>
 430 C=C+1
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 440 IF A(3)<>B(1) THEN 460
  NumericConstant:3
- ScalarValue:A
+ Value:A
  NumericConstant:1
- ScalarValue:B
+ Value:B
  BinaryOperator:<>
 450 C=C+1
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -262,31 +262,31 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 470 IF A(J)<>B(J) THEN 490
- ScalarValue:J
- ScalarValue:A
- ScalarValue:J
- ScalarValue:B
+ Value:J
+ Value:A
+ Value:J
+ Value:B
  BinaryOperator:<>
 480 D=D+1
  Reference:D
- ScalarValue:D
+ Value:D
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 490 NEXT J
  Variable:J
 500 IF D=3 THEN 680
- ScalarValue:D
+ Value:D
  NumericConstant:3
  BinaryOperator:=
 505 IF C=0 THEN 545
- ScalarValue:C
+ Value:C
  NumericConstant:0
  BinaryOperator:=
 520 FOR J=1 TO C
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:C"]
+ end:     ["Value:C"]
 530 PRINT "PICO ";
  ITEMS
  TextConstant:"PICO "
@@ -294,13 +294,13 @@
 540 NEXT J
  Variable:J
 545 IF D=0 THEN 580
- ScalarValue:D
+ Value:D
  NumericConstant:0
  BinaryOperator:=
 550 FOR J=1 TO D
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:D"]
+ end:     ["Value:D"]
 560 PRINT "FERMI ";
  ITEMS
  TextConstant:"FERMI "
@@ -308,8 +308,8 @@
 570 NEXT J
  Variable:J
 580 IF C+D<>0 THEN 600
- ScalarValue:C
- ScalarValue:D
+ Value:C
+ Value:D
  BinaryOperator:+
  NumericConstant:0
  BinaryOperator:<>
@@ -332,15 +332,15 @@
  CarriageControl:;
  NumericConstant:100
  NumericConstant:1
- ScalarValue:A
+ Value:A
  BinaryOperator:*
  NumericConstant:10
  NumericConstant:2
- ScalarValue:A
+ Value:A
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:3
- ScalarValue:A
+ Value:A
  BinaryOperator:+
  CarriageControl:NL
 620 GOTO 700
@@ -367,20 +367,20 @@
  CarriageControl:NL
 690 Y=Y+1
  Reference:Y
- ScalarValue:Y
+ Value:Y
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 700 INPUT "PLAY AGAIN (YES OR NO)";A$
  Reference:A$
 720 IF LEFT$(A$,1)="YES" THEN 150
- ScalarValue:A$
+ Value:A$
  NumericConstant:1
  FunctionLeft
  TextConstant:"YES"
  BinaryOperator:=
 730 IF Y=0 THEN 750
- ScalarValue:Y
+ Value:Y
  NumericConstant:0
  BinaryOperator:=
 740 PRINT:PRINT "A";Y;"POINT BAGELS BUFF!!"
@@ -389,7 +389,7 @@
  ITEMS
  TextConstant:"A"
  CarriageControl:;
- ScalarValue:Y
+ Value:Y
  CarriageControl:;
  TextConstant:"POINT BAGELS BUFF!!"
  CarriageControl:NL

@@ -34,7 +34,7 @@
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:12"]
- ScalarValue:I
+ Value:I
  Reference:B
  NumericConstant:3
  AssignmentOperator:=
@@ -43,7 +43,7 @@
  Reference:C
  NumericConstant:0
  AssignmentOperator:=
- ScalarValue:N
+ Value:N
  Reference:F
  NumericConstant:0
  AssignmentOperator:=
@@ -63,16 +63,16 @@
  CarriageControl:;
  LineNumber:110
 45 IF E=0 THEN 80
- ScalarValue:E
+ Value:E
  NumericConstant:0
  BinaryOperator:=
 50 IF M=H THEN GOSUB 100
- ScalarValue:M
- ScalarValue:H
+ Value:M
+ Value:H
  BinaryOperator:=
  LineNumber:100
 55 IF E=0 THEN 80
- ScalarValue:E
+ Value:E
  NumericConstant:0
  BinaryOperator:=
 60 PRINT "MY MOVE IS ";:GOSUB 800
@@ -81,19 +81,19 @@
  CarriageControl:;
  LineNumber:800
 65 IF E=0 THEN 80
- ScalarValue:E
+ Value:E
  NumericConstant:0
  BinaryOperator:=
 70 IF M=H THEN PRINT ",";:GOSUB 800
- ScalarValue:M
- ScalarValue:H
+ Value:M
+ Value:H
  BinaryOperator:=
  ITEMS
  TextConstant:","
  CarriageControl:;
  LineNumber:800
 75 IF E>0 THEN 35
- ScalarValue:E
+ Value:E
  NumericConstant:0
  BinaryOperator:>
 80 PRINT:PRINT"GAME OVER"
@@ -105,18 +105,18 @@
 85 D=B(6)-B(13):IF D<0 THEN PRINT "I WIN BY";-D;"POINTS":GOTO 20
  Reference:D
  NumericConstant:6
- ScalarValue:B
+ Value:B
  NumericConstant:13
- ScalarValue:B
+ Value:B
  BinaryOperator:-
  AssignmentOperator:=
- ScalarValue:D
+ Value:D
  NumericConstant:0
  BinaryOperator:<
  ITEMS
  TextConstant:"I WIN BY"
  CarriageControl:;
- ScalarValue:D
+ Value:D
  UnaryOperator:-
  CarriageControl:;
  TextConstant:"POINTS"
@@ -124,11 +124,11 @@
  LineNumber:20
 90 N=N+1:IF D=0 THEN PRINT "DRAWN GAME":GOTO 20
  Reference:N
- ScalarValue:N
+ Value:N
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:D
+ Value:D
  NumericConstant:0
  BinaryOperator:=
  ITEMS
@@ -139,7 +139,7 @@
  ITEMS
  TextConstant:"YOU WIN BY"
  CarriageControl:;
- ScalarValue:D
+ Value:D
  CarriageControl:;
  TextConstant:"POINTS"
  CarriageControl:NL
@@ -150,14 +150,14 @@
  CarriageControl:;
 110 INPUT M:IF M<7 THEN IF M>0 THEN M=M-1:GOTO 130
  Reference:M
- ScalarValue:M
+ Value:M
  NumericConstant:7
  BinaryOperator:<
- ScalarValue:M
+ Value:M
  NumericConstant:0
  BinaryOperator:>
  Reference:M
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -168,8 +168,8 @@
  CarriageControl:NL
  LineNumber:100
 130 IF B(M)=0 THEN 120
- ScalarValue:M
- ScalarValue:B
+ Value:M
+ Value:B
  NumericConstant:0
  BinaryOperator:=
 140 H=6:GOSUB 200
@@ -181,45 +181,45 @@
  LineNumber:500
 200 K=M:GOSUB 600
  Reference:K
- ScalarValue:M
+ Value:M
  AssignmentOperator:=
  LineNumber:600
 205 E=0:IF K>6 THEN K=K-7
  Reference:E
  NumericConstant:0
  AssignmentOperator:=
- ScalarValue:K
+ Value:K
  NumericConstant:6
  BinaryOperator:>
  Reference:K
- ScalarValue:K
+ Value:K
  NumericConstant:7
  BinaryOperator:-
  AssignmentOperator:=
 210 C=C+1:IF C<9 THEN F(N)=F(N)*6+K
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:C
+ Value:C
  NumericConstant:9
  BinaryOperator:<
- ScalarValue:N
+ Value:N
  Reference:F
- ScalarValue:N
- ScalarValue:F
+ Value:N
+ Value:F
  NumericConstant:6
  BinaryOperator:*
- ScalarValue:K
+ Value:K
  BinaryOperator:+
  AssignmentOperator:=
 215 FOR I=0 TO 5:IF B(I)<>0 THEN 230
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:5"]
- ScalarValue:I
- ScalarValue:B
+ Value:I
+ Value:B
  NumericConstant:0
  BinaryOperator:<>
 220 NEXT I
@@ -230,8 +230,8 @@
  control: Variable:I
  start:   ["NumericConstant:7"]
  end:     ["NumericConstant:12"]
- ScalarValue:I
- ScalarValue:B
+ Value:I
+ Value:B
  NumericConstant:0
  BinaryOperator:<>
  Reference:E
@@ -267,7 +267,7 @@
  CarriageControl:;
  ITEMS
  NumericConstant:6
- ScalarValue:B
+ Value:B
  CarriageControl:NL
  ITEMS
  TextConstant:"   "
@@ -286,8 +286,8 @@
  CarriageControl:NL
  
 580 IF B(I)<10 THEN PRINT " ";
- ScalarValue:I
- ScalarValue:B
+ Value:I
+ Value:B
  NumericConstant:10
  BinaryOperator:<
  ITEMS
@@ -295,84 +295,84 @@
  CarriageControl:;
 585 PRINT B(I);:RETURN
  ITEMS
- ScalarValue:I
- ScalarValue:B
+ Value:I
+ Value:B
  CarriageControl:;
  
 600 P=B(M):B(M)=0
  Reference:P
- ScalarValue:M
- ScalarValue:B
+ Value:M
+ Value:B
  AssignmentOperator:=
- ScalarValue:M
+ Value:M
  Reference:B
  NumericConstant:0
  AssignmentOperator:=
 605 FOR P=P TO 1 STEP -1:M=M+1:IF M>13 THEN M=M-14
  control: Variable:P
- start:   ["ScalarValue:P"]
+ start:   ["Value:P"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
  Reference:M
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:M
+ Value:M
  NumericConstant:13
  BinaryOperator:>
  Reference:M
- ScalarValue:M
+ Value:M
  NumericConstant:14
  BinaryOperator:-
  AssignmentOperator:=
 610 B(M)=B(M)+1:NEXT P
- ScalarValue:M
+ Value:M
  Reference:B
- ScalarValue:M
- ScalarValue:B
+ Value:M
+ Value:B
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
  Variable:P
 615 IF B(M)=1 THEN IF M<>6 THEN IF M<>13 THEN IF B(12-M)<>0 THEN 625
- ScalarValue:M
- ScalarValue:B
+ Value:M
+ Value:B
  NumericConstant:1
  BinaryOperator:=
- ScalarValue:M
+ Value:M
  NumericConstant:6
  BinaryOperator:<>
- ScalarValue:M
+ Value:M
  NumericConstant:13
  BinaryOperator:<>
  NumericConstant:12
- ScalarValue:M
+ Value:M
  BinaryOperator:-
- ScalarValue:B
+ Value:B
  NumericConstant:0
  BinaryOperator:<>
 620 RETURN
  
 625 B(H)=B(H)+B(12-M)+1:B(M)=0:B(12-M)=0:RETURN
- ScalarValue:H
+ Value:H
  Reference:B
- ScalarValue:H
- ScalarValue:B
+ Value:H
+ Value:B
  NumericConstant:12
- ScalarValue:M
+ Value:M
  BinaryOperator:-
- ScalarValue:B
+ Value:B
  BinaryOperator:+
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:M
+ Value:M
  Reference:B
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:12
- ScalarValue:M
+ Value:M
  BinaryOperator:-
  Reference:B
  NumericConstant:0
@@ -390,18 +390,18 @@
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:13"]
- ScalarValue:I
+ Value:I
  Reference:G
- ScalarValue:I
- ScalarValue:B
+ Value:I
+ Value:B
  AssignmentOperator:=
  Variable:I
 810 FOR J=7 TO 12:IF B(J)=0 THEN 885
  control: Variable:J
  start:   ["NumericConstant:7"]
  end:     ["NumericConstant:12"]
- ScalarValue:J
- ScalarValue:B
+ Value:J
+ Value:B
  NumericConstant:0
  BinaryOperator:=
 815 G=0:M=J:GOSUB 600
@@ -409,33 +409,33 @@
  NumericConstant:0
  AssignmentOperator:=
  Reference:M
- ScalarValue:J
+ Value:J
  AssignmentOperator:=
  LineNumber:600
 820 FOR I=0 TO 5:IF B(I)=0 THEN 845
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:5"]
- ScalarValue:I
- ScalarValue:B
+ Value:I
+ Value:B
  NumericConstant:0
  BinaryOperator:=
 825 L=B(I)+I:R=0
  Reference:L
- ScalarValue:I
- ScalarValue:B
- ScalarValue:I
+ Value:I
+ Value:B
+ Value:I
  BinaryOperator:+
  AssignmentOperator:=
  Reference:R
  NumericConstant:0
  AssignmentOperator:=
 830 IF L>13 THEN L=L-14:R=1:GOTO 830
- ScalarValue:L
+ Value:L
  NumericConstant:13
  BinaryOperator:>
  Reference:L
- ScalarValue:L
+ Value:L
  NumericConstant:14
  BinaryOperator:-
  AssignmentOperator:=
@@ -444,73 +444,73 @@
  AssignmentOperator:=
  LineNumber:830
 835 IF B(L)=0 THEN IF L<>6 THEN IF L<>13 THEN R=B(12-L)+R
- ScalarValue:L
- ScalarValue:B
+ Value:L
+ Value:B
  NumericConstant:0
  BinaryOperator:=
- ScalarValue:L
+ Value:L
  NumericConstant:6
  BinaryOperator:<>
- ScalarValue:L
+ Value:L
  NumericConstant:13
  BinaryOperator:<>
  Reference:R
  NumericConstant:12
- ScalarValue:L
+ Value:L
  BinaryOperator:-
- ScalarValue:B
- ScalarValue:R
+ Value:B
+ Value:R
  BinaryOperator:+
  AssignmentOperator:=
 840 IF R>Q THEN Q=R
- ScalarValue:R
- ScalarValue:Q
+ Value:R
+ Value:Q
  BinaryOperator:>
  Reference:Q
- ScalarValue:R
+ Value:R
  AssignmentOperator:=
 845 NEXT I
  Variable:I
 850 Q=B(13)-B(6)-Q:IF C>8 THEN 875
  Reference:Q
  NumericConstant:13
- ScalarValue:B
+ Value:B
  NumericConstant:6
- ScalarValue:B
+ Value:B
  BinaryOperator:-
- ScalarValue:Q
+ Value:Q
  BinaryOperator:-
  AssignmentOperator:=
- ScalarValue:C
+ Value:C
  NumericConstant:8
  BinaryOperator:>
 855 K=J:IF K>6 THEN K=K-7
  Reference:K
- ScalarValue:J
+ Value:J
  AssignmentOperator:=
- ScalarValue:K
+ Value:K
  NumericConstant:6
  BinaryOperator:>
  Reference:K
- ScalarValue:K
+ Value:K
  NumericConstant:7
  BinaryOperator:-
  AssignmentOperator:=
 860 FOR I=0 TO N-1:IF F(N)*6+K=INT(F(I)/6^(7-C)+.1) THEN Q=Q-2
  control: Variable:I
  start:   ["NumericConstant:0"]
- end:     ["ScalarValue:N", "NumericConstant:1", "BinaryOperator:-"]
- ScalarValue:N
- ScalarValue:F
+ end:     ["Value:N", "NumericConstant:1", "BinaryOperator:-"]
+ Value:N
+ Value:F
  NumericConstant:6
  BinaryOperator:*
- ScalarValue:K
+ Value:K
  BinaryOperator:+
- ScalarValue:I
- ScalarValue:F
+ Value:I
+ Value:F
  NumericConstant:6
  NumericConstant:7
- ScalarValue:C
+ Value:C
  BinaryOperator:-
  BinaryOperator:^
  BinaryOperator:/
@@ -519,7 +519,7 @@
  FunctionInt
  BinaryOperator:=
  Reference:Q
- ScalarValue:Q
+ Value:Q
  NumericConstant:2
  BinaryOperator:-
  AssignmentOperator:=
@@ -529,31 +529,31 @@
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:13"]
- ScalarValue:I
+ Value:I
  Reference:B
- ScalarValue:I
- ScalarValue:G
+ Value:I
+ Value:G
  AssignmentOperator:=
  Variable:I
 880 IF Q>=D THEN A=J:D=Q
- ScalarValue:Q
- ScalarValue:D
+ Value:Q
+ Value:D
  BinaryOperator:>=
  Reference:A
- ScalarValue:J
+ Value:J
  AssignmentOperator:=
  Reference:D
- ScalarValue:Q
+ Value:Q
  AssignmentOperator:=
 885 NEXT J
  Variable:J
 890 M=A:PRINT CHR$(42+M);:GOTO 200
  Reference:M
- ScalarValue:A
+ Value:A
  AssignmentOperator:=
  ITEMS
  NumericConstant:42
- ScalarValue:M
+ Value:M
  BinaryOperator:+
  FunctionChr
  CarriageControl:;
@@ -561,10 +561,10 @@
 900 FOR I=0 TO N-1:PRINT B(I):NEXT I
  control: Variable:I
  start:   ["NumericConstant:0"]
- end:     ["ScalarValue:N", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:N", "NumericConstant:1", "BinaryOperator:-"]
  ITEMS
- ScalarValue:I
- ScalarValue:B
+ Value:I
+ Value:B
  CarriageControl:NL
  Variable:I
 999 END

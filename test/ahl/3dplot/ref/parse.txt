@@ -21,9 +21,9 @@
  CarriageControl:NL
 5 DEF FNA(Z)=30*EXP(-Z*Z/100)
  NumericConstant:30
- ScalarValue:Z
+ Value:Z
  UnaryOperator:-
- ScalarValue:Z
+ Value:Z
  BinaryOperator:*
  NumericConstant:100
  BinaryOperator:/
@@ -45,8 +45,8 @@
  Reference:Y1
  NumericConstant:5
  NumericConstant:900
- ScalarValue:X
- ScalarValue:X
+ Value:X
+ Value:X
  BinaryOperator:*
  BinaryOperator:-
  FunctionSqr
@@ -57,39 +57,39 @@
  AssignmentOperator:=
 140 FOR Y=Y1 TO -Y1 STEP -5
  control: Variable:Y
- start:   ["ScalarValue:Y1"]
- end:     ["ScalarValue:Y1", "UnaryOperator:-"]
+ start:   ["Value:Y1"]
+ end:     ["Value:Y1", "UnaryOperator:-"]
  step:    ["NumericConstant:5", "UnaryOperator:-"]
 150 Z=INT(25+FNA(SQR(X*X+Y*Y))-.7*Y)
  Reference:Z
  NumericConstant:25
- ScalarValue:X
- ScalarValue:X
+ Value:X
+ Value:X
  BinaryOperator:*
- ScalarValue:Y
- ScalarValue:Y
+ Value:Y
+ Value:Y
  BinaryOperator:*
  BinaryOperator:+
  FunctionSqr
  UserFunction
  BinaryOperator:+
  NumericConstant:.7
- ScalarValue:Y
+ Value:Y
  BinaryOperator:*
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
 160 IF Z<=L THEN 190
- ScalarValue:Z
- ScalarValue:L
+ Value:Z
+ Value:L
  BinaryOperator:<=
 170 L=Z
  Reference:L
- ScalarValue:Z
+ Value:Z
  AssignmentOperator:=
 180 PRINT TAB(Z);"*";
  ITEMS
- ScalarValue:Z
+ Value:Z
  FunctionTab
  CarriageControl:;
  TextConstant:"*"

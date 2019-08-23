@@ -41,7 +41,7 @@
 170 INPUT A$
  Reference:A$
 180 IF A$="NO" THEN 210
- ScalarValue:A$
+ Value:A$
  TextConstant:"NO"
  BinaryOperator:=
 190 GOSUB 710
@@ -51,7 +51,7 @@
 210 A(1)=INT((N-1)*RND(1)+2)
  NumericConstant:1
  Reference:A
- ScalarValue:N
+ Value:N
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:1
@@ -64,11 +64,11 @@
 220 FOR K=2 TO N
  control: Variable:K
  start:   ["NumericConstant:2"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
 230 A(K)=INT(N*RND(1)+1)
- ScalarValue:K
+ Value:K
  Reference:A
- ScalarValue:N
+ Value:N
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -79,12 +79,12 @@
 240 FOR J=1 TO K-1
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:K", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Value:K", "NumericConstant:1", "BinaryOperator:-"]
 250 IF A(K)=A(J) THEN 230
- ScalarValue:K
- ScalarValue:A
- ScalarValue:J
- ScalarValue:A
+ Value:K
+ Value:A
+ Value:J
+ Value:A
  BinaryOperator:=
 260 NEXT J:NEXT K
  Variable:J
@@ -110,23 +110,23 @@
 340 INPUT R
  Reference:R
 350 IF R=0 THEN 520
- ScalarValue:R
+ Value:R
  NumericConstant:0
  BinaryOperator:=
 360 IF R<=N THEN 390
- ScalarValue:R
- ScalarValue:N
+ Value:R
+ Value:N
  BinaryOperator:<=
 370 PRINT "OOPS! TOO MANY! I CAN REVERSE AT MOST";N:GOTO 330
  ITEMS
  TextConstant:"OOPS! TOO MANY! I CAN REVERSE AT MOST"
  CarriageControl:;
- ScalarValue:N
+ Value:N
  CarriageControl:NL
  LineNumber:330
 390 T=T+1
  Reference:T
- ScalarValue:T
+ Value:T
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -135,30 +135,30 @@
 410 FOR K=1 TO INT(R/2)
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:R", "NumericConstant:2", "BinaryOperator:/", "FunctionInt"]
+ end:     ["Value:R", "NumericConstant:2", "BinaryOperator:/", "FunctionInt"]
 420 Z=A(K)
  Reference:Z
- ScalarValue:K
- ScalarValue:A
+ Value:K
+ Value:A
  AssignmentOperator:=
 430 A(K)=A(R-K+1)
- ScalarValue:K
+ Value:K
  Reference:A
- ScalarValue:R
- ScalarValue:K
+ Value:R
+ Value:K
  BinaryOperator:-
  NumericConstant:1
  BinaryOperator:+
- ScalarValue:A
+ Value:A
  AssignmentOperator:=
 440 A(R-K+1)=Z
- ScalarValue:R
- ScalarValue:K
+ Value:R
+ Value:K
  BinaryOperator:-
  NumericConstant:1
  BinaryOperator:+
  Reference:A
- ScalarValue:Z
+ Value:Z
  AssignmentOperator:=
 450 NEXT K
  Variable:K
@@ -169,11 +169,11 @@
 480 FOR K=1 TO N
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
 490 IF A(K)<>K THEN 330
- ScalarValue:K
- ScalarValue:A
- ScalarValue:K
+ Value:K
+ Value:A
+ Value:K
  BinaryOperator:<>
 500 NEXT K
  Variable:K
@@ -181,7 +181,7 @@
  ITEMS
  TextConstant:"YOU WON IT IN"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:"MOVES!!!"
  CarriageControl:NL
@@ -197,7 +197,7 @@
 540 INPUT A$
  Reference:A$
 550 IF A$="YES" THEN 210
- ScalarValue:A$
+ Value:A$
  TextConstant:"YES"
  BinaryOperator:=
 560 PRINT: PRINT "O.K. HOPE YOU HAD FUN!!":GOTO 999
@@ -214,10 +214,10 @@
  CarriageControl:NL
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
  ITEMS
- ScalarValue:K
- ScalarValue:A
+ Value:K
+ Value:A
  CarriageControl:;
  Variable:K
 650 PRINT:PRINT:RETURN
@@ -238,7 +238,7 @@
  ITEMS
  TextConstant:"TO DO IS ARRANGE A LIST OF NUMBERS (1 THROUGH"
  CarriageControl:;
- ScalarValue:N
+ Value:N
  CarriageControl:;
  TextConstant:")"
  CarriageControl:NL

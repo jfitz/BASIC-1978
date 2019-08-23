@@ -44,7 +44,7 @@
 1050 INPUT Y$
  Reference:Y$
 1060 IF LEFT$(Y$,1)="N" THEN 1550
- ScalarValue:Y$
+ Value:Y$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
@@ -253,7 +253,7 @@
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:38"]
- ScalarValue:I
+ Value:I
  Reference:X
  NumericConstant:0
  AssignmentOperator:=
@@ -274,11 +274,11 @@
 1640 INPUT Y
  Reference:Y
 1650 IF Y<1 OR Y<>INT(Y) THEN 1630
- ScalarValue:Y
+ Value:Y
  NumericConstant:1
  BinaryOperator:<
- ScalarValue:Y
- ScalarValue:Y
+ Value:Y
+ Value:Y
  FunctionInt
  BinaryOperator:<>
  BinaryOperator:OR
@@ -286,7 +286,7 @@
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:50"]
- ScalarValue:I
+ Value:I
  Reference:A
  NumericConstant:0
  AssignmentOperator:=
@@ -295,59 +295,59 @@
 1670 FOR C=1 TO Y
  control: Variable:C
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:Y"]
+ end:     ["Value:Y"]
 1680 PRINT "NUMBER";C;
  ITEMS
  TextConstant:"NUMBER"
  CarriageControl:;
- ScalarValue:C
+ Value:C
  CarriageControl:;
 1690 INPUT X,Z
  Reference:X
  Reference:Z
 1700 B(C)=Z
- ScalarValue:C
+ Value:C
  Reference:B
- ScalarValue:Z
+ Value:Z
  AssignmentOperator:=
 1710 T(C)=X
- ScalarValue:C
+ Value:C
  Reference:T
- ScalarValue:X
+ Value:X
  AssignmentOperator:=
 1720 IF X<1 OR X>50 OR X<>INT(X) THEN 1680
- ScalarValue:X
+ Value:X
  NumericConstant:1
  BinaryOperator:<
- ScalarValue:X
+ Value:X
  NumericConstant:50
  BinaryOperator:>
  BinaryOperator:OR
- ScalarValue:X
- ScalarValue:X
+ Value:X
+ Value:X
  FunctionInt
  BinaryOperator:<>
  BinaryOperator:OR
 1730 IF Z<1 OR Z<>INT(Z) THEN 1680
- ScalarValue:Z
+ Value:Z
  NumericConstant:1
  BinaryOperator:<
- ScalarValue:Z
- ScalarValue:Z
+ Value:Z
+ Value:Z
  FunctionInt
  BinaryOperator:<>
  BinaryOperator:OR
 1740 IF Z<5 OR Z>500 THEN 1680
- ScalarValue:Z
+ Value:Z
  NumericConstant:5
  BinaryOperator:<
- ScalarValue:Z
+ Value:Z
  NumericConstant:500
  BinaryOperator:>
  BinaryOperator:OR
 1750 IF A(X)=0 THEN 1780
- ScalarValue:X
- ScalarValue:A
+ Value:X
+ Value:A
  NumericConstant:0
  BinaryOperator:=
 1760 PRINT "YOU MADE THAT BET ONCE ALREADY,DUM-DUM"
@@ -357,7 +357,7 @@
 1770 GOTO 1680
  LineNumber:1680
 1780 A(X)=1
- ScalarValue:X
+ Value:X
  Reference:A
  NumericConstant:1
  AssignmentOperator:=
@@ -382,27 +382,27 @@
  FunctionInt
  AssignmentOperator:=
 1840 IF S=0 OR S>38 THEN 1830
- ScalarValue:S
+ Value:S
  NumericConstant:0
  BinaryOperator:=
- ScalarValue:S
+ Value:S
  NumericConstant:38
  BinaryOperator:>
  BinaryOperator:OR
 1850 X(S)=X(S)+1
- ScalarValue:S
+ Value:S
  Reference:X
- ScalarValue:S
- ScalarValue:X
+ Value:S
+ Value:X
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1860 IF S<37 THEN 1920
- ScalarValue:S
+ Value:S
  NumericConstant:37
  BinaryOperator:<
 1870 IF S=37 THEN 1900
- ScalarValue:S
+ Value:S
  NumericConstant:37
  BinaryOperator:=
 1880 PRINT "00"
@@ -426,8 +426,8 @@
 1940 READ R
  Reference:R
 1950 IF R=S THEN 2000
- ScalarValue:R
- ScalarValue:S
+ Value:R
+ Value:S
  BinaryOperator:=
 1960 NEXT I1
  Variable:I1
@@ -437,9 +437,9 @@
  AssignmentOperator:=
 1980 PRINT S;A$
  ITEMS
- ScalarValue:S
+ Value:S
  CarriageControl:;
- ScalarValue:A$
+ Value:A$
  CarriageControl:NL
 1990 GOTO 2020
  LineNumber:2020
@@ -455,15 +455,15 @@
 2030 FOR C=1 TO Y
  control: Variable:C
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:Y"]
+ end:     ["Value:Y"]
 2040 IF T(C)<37 THEN 2710
- ScalarValue:C
- ScalarValue:T
+ Value:C
+ Value:T
  NumericConstant:37
  BinaryOperator:<
 2050 ON T(C)-36 GOTO 2090,2190,2220,2250,2300,2350,2400,2470,2500
- ScalarValue:C
- ScalarValue:T
+ Value:C
+ Value:T
  NumericConstant:36
  BinaryOperator:-
  LineNumber:2090
@@ -476,8 +476,8 @@
  LineNumber:2470
  LineNumber:2500
 2060 ON T(C)-45 GOTO 2530,2560,2630
- ScalarValue:C
- ScalarValue:T
+ Value:C
+ Value:T
  NumericConstant:45
  BinaryOperator:-
  LineNumber:2530
@@ -490,32 +490,32 @@
 2090 REM  1-12(37) 2:1
  Remark: 1-12(37) 2:1
 2100 IF S <= 12 THEN 2150
- ScalarValue:S
+ Value:S
  NumericConstant:12
  BinaryOperator:<=
 2110 PRINT "YOU LOSE";B(C);"DOLLARS ON BET";C
  ITEMS
  TextConstant:"YOU LOSE"
  CarriageControl:;
- ScalarValue:C
- ScalarValue:B
+ Value:C
+ Value:B
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:;
- ScalarValue:C
+ Value:C
  CarriageControl:NL
 2120 D=D+B(C)
  Reference:D
- ScalarValue:D
- ScalarValue:C
- ScalarValue:B
+ Value:D
+ Value:C
+ Value:B
  BinaryOperator:+
  AssignmentOperator:=
 2130 P=P-B(C)
  Reference:P
- ScalarValue:P
- ScalarValue:C
- ScalarValue:B
+ Value:P
+ Value:C
+ Value:B
  BinaryOperator:-
  AssignmentOperator:=
 2140 GOTO 2180
@@ -524,29 +524,29 @@
  ITEMS
  TextConstant:"YOU WIN"
  CarriageControl:;
- ScalarValue:C
- ScalarValue:B
+ Value:C
+ Value:B
  NumericConstant:2
  BinaryOperator:*
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:
- ScalarValue:C
+ Value:C
  CarriageControl:NL
 2160 D=D-B(C)*2
  Reference:D
- ScalarValue:D
- ScalarValue:C
- ScalarValue:B
+ Value:D
+ Value:C
+ Value:B
  NumericConstant:2
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 2170 P=P+B(C)*2
  Reference:P
- ScalarValue:P
- ScalarValue:C
- ScalarValue:B
+ Value:P
+ Value:C
+ Value:B
  NumericConstant:2
  BinaryOperator:*
  BinaryOperator:+
@@ -556,10 +556,10 @@
 2190 REM  13-24(38) 2:1
  Remark: 13-24(38) 2:1
 2200 IF S>12 AND S<25 THEN 2150
- ScalarValue:S
+ Value:S
  NumericConstant:12
  BinaryOperator:>
- ScalarValue:S
+ Value:S
  NumericConstant:25
  BinaryOperator:<
  BinaryOperator:AND
@@ -568,10 +568,10 @@
 2220 REM  25-36(39) 2:1
  Remark: 25-36(39) 2:1
 2230 IF S>24 AND S<37 THEN 2150
- ScalarValue:S
+ Value:S
  NumericConstant:24
  BinaryOperator:>
- ScalarValue:S
+ Value:S
  NumericConstant:37
  BinaryOperator:<
  BinaryOperator:AND
@@ -585,8 +585,8 @@
  end:     ["NumericConstant:34"]
  step:    ["NumericConstant:3"]
 2270 IF S=I THEN 2150
- ScalarValue:S
- ScalarValue:I
+ Value:S
+ Value:I
  BinaryOperator:=
 2280 NEXT I
  Variable:I
@@ -600,8 +600,8 @@
  end:     ["NumericConstant:35"]
  step:    ["NumericConstant:3"]
 2320 IF S=I THEN 2150
- ScalarValue:S
- ScalarValue:I
+ Value:S
+ Value:I
  BinaryOperator:=
 2330 NEXT I
  Variable:I
@@ -615,8 +615,8 @@
  end:     ["NumericConstant:36"]
  step:    ["NumericConstant:3"]
 2370 IF S=I THEN 2150
- ScalarValue:S
- ScalarValue:I
+ Value:S
+ Value:I
  BinaryOperator:=
 2380 NEXT I
  Variable:I
@@ -625,7 +625,7 @@
 2400 REM  1-18(43) 1:1
  Remark: 1-18(43) 1:1
 2410 IF S<19 THEN 2430
- ScalarValue:S
+ Value:S
  NumericConstant:19
  BinaryOperator:<
 2420 GOTO 2110
@@ -634,25 +634,25 @@
  ITEMS
  TextConstant:"YOU WIN"
  CarriageControl:;
- ScalarValue:C
- ScalarValue:B
+ Value:C
+ Value:B
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:;
- ScalarValue:C
+ Value:C
  CarriageControl:NL
 2440 D=D-B(C)
  Reference:D
- ScalarValue:D
- ScalarValue:C
- ScalarValue:B
+ Value:D
+ Value:C
+ Value:B
  BinaryOperator:-
  AssignmentOperator:=
 2450 P=P+B(C)
  Reference:P
- ScalarValue:P
- ScalarValue:C
- ScalarValue:B
+ Value:P
+ Value:C
+ Value:B
  BinaryOperator:+
  AssignmentOperator:=
 2460 GOTO 2810
@@ -660,10 +660,10 @@
 2470 REM  19-36(44) 1:1
  Remark: 19-36(44) 1:1
 2480 IF S<37 AND S>18 THEN 2430
- ScalarValue:S
+ Value:S
  NumericConstant:37
  BinaryOperator:<
- ScalarValue:S
+ Value:S
  NumericConstant:18
  BinaryOperator:>
  BinaryOperator:AND
@@ -672,15 +672,15 @@
 2500 REM  EVEN(45) 1:1
  Remark: EVEN(45) 1:1
 2510 IF S/2=INT(S/2) AND S<37 THEN 2430
- ScalarValue:S
+ Value:S
  NumericConstant:2
  BinaryOperator:/
- ScalarValue:S
+ Value:S
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
  BinaryOperator:=
- ScalarValue:S
+ Value:S
  NumericConstant:37
  BinaryOperator:<
  BinaryOperator:AND
@@ -689,15 +689,15 @@
 2530 REM  ODD(46) 1:1
  Remark: ODD(46) 1:1
 2540 IF S/2<>INT(S/2) AND S<37 THEN 2430
- ScalarValue:S
+ Value:S
  NumericConstant:2
  BinaryOperator:/
- ScalarValue:S
+ Value:S
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
  BinaryOperator:<>
- ScalarValue:S
+ Value:S
  NumericConstant:37
  BinaryOperator:<
  BinaryOperator:AND
@@ -714,8 +714,8 @@
 2590 READ R
  Reference:R
 2600 IF S=R THEN 2430
- ScalarValue:S
- ScalarValue:R
+ Value:S
+ Value:R
  BinaryOperator:=
 2610 NEXT I
  Variable:I
@@ -732,13 +732,13 @@
 2660 READ R
  Reference:R
 2670 IF S=R THEN 2110
- ScalarValue:S
- ScalarValue:R
+ Value:S
+ Value:R
  BinaryOperator:=
 2680 NEXT I
  Variable:I
 2690 IF S>36 THEN 2110
- ScalarValue:S
+ Value:S
  NumericConstant:36
  BinaryOperator:>
 2700 GOTO 2430
@@ -746,34 +746,34 @@
 2710 REM--1TO36,0,00(1-36,49,50)35:1
  Remark:--1TO36,0,00(1-36,49,50)35:1
 2720 IF T(C)<49 THEN 2760
- ScalarValue:C
- ScalarValue:T
+ Value:C
+ Value:T
  NumericConstant:49
  BinaryOperator:<
 2730 IF T(C)=49 AND S=37 THEN 2780
- ScalarValue:C
- ScalarValue:T
+ Value:C
+ Value:T
  NumericConstant:49
  BinaryOperator:=
- ScalarValue:S
+ Value:S
  NumericConstant:37
  BinaryOperator:=
  BinaryOperator:AND
 2740 IF T(C)=50 AND S=38 THEN 2780
- ScalarValue:C
- ScalarValue:T
+ Value:C
+ Value:T
  NumericConstant:50
  BinaryOperator:=
- ScalarValue:S
+ Value:S
  NumericConstant:38
  BinaryOperator:=
  BinaryOperator:AND
 2750 GOTO 2110
  LineNumber:2110
 2760 IF T(C)=S THEN 2780
- ScalarValue:C
- ScalarValue:T
- ScalarValue:S
+ Value:C
+ Value:T
+ Value:S
  BinaryOperator:=
 2770 GOTO 2110
  LineNumber:2110
@@ -781,29 +781,29 @@
  ITEMS
  TextConstant:"YOU WIN"
  CarriageControl:;
- ScalarValue:C
- ScalarValue:B
+ Value:C
+ Value:B
  NumericConstant:35
  BinaryOperator:*
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:;
- ScalarValue:C
+ Value:C
  CarriageControl:NL
 2790 D=D-B(C)*35
  Reference:D
- ScalarValue:D
- ScalarValue:C
- ScalarValue:B
+ Value:D
+ Value:C
+ Value:B
  NumericConstant:35
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 2800 P=P+B(C)*35
  Reference:P
- ScalarValue:P
- ScalarValue:C
- ScalarValue:B
+ Value:P
+ Value:C
+ Value:B
  NumericConstant:35
  BinaryOperator:*
  BinaryOperator:+
@@ -825,12 +825,12 @@
  ITEMS
  TextConstant:" "
  CarriageControl:,
- ScalarValue:D
+ Value:D
  CarriageControl:,
- ScalarValue:P
+ Value:P
  CarriageControl:NL
 2850 IF P>0 THEN 2880
- ScalarValue:P
+ Value:P
  NumericConstant:0
  BinaryOperator:>
 2860 PRINT "OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
@@ -840,7 +840,7 @@
 2870 GOTO 3190
  LineNumber:3190
 2880 IF D>0 THEN 2920
- ScalarValue:D
+ Value:D
  NumericConstant:0
  BinaryOperator:>
 2890 PRINT "YOU BROKE THE HOUSE!"
@@ -860,7 +860,7 @@
 2930 INPUT Y$
  Reference:Y$
 2940 IF LEFT$(Y$,1)="Y" THEN 1630
- ScalarValue:Y$
+ Value:Y$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
@@ -885,7 +885,7 @@
  NumericConstant:34
  NumericConstant:36
 2960 IF P<1 THEN 3190
- ScalarValue:P
+ Value:P
  NumericConstant:1
  BinaryOperator:<
 2970 PRINT "TO WHOM SHALL I MAKE THE CHECK";
@@ -929,7 +929,7 @@
  NumericConstant:40
  FunctionTab
  CarriageControl:;
- ScalarValue:M$
+ Value:M$
  CarriageControl:NL
 3050 PRINT 
  ITEMS
@@ -941,13 +941,13 @@
  ITEMS
  TextConstant:"PAY TO THE ORDER OF-----"
  CarriageControl:;
- ScalarValue:B$
+ Value:B$
  CarriageControl:;
  TextConstant:"-----$ "
  CarriageControl:;
 3080 PRINT P
  ITEMS
- ScalarValue:P
+ Value:P
  CarriageControl:NL
 3090 PRINT 
  ITEMS
@@ -1027,10 +1027,10 @@
  Remark:    THE DATE IS RETURNED IN VARIABLE M$
 3310 M$=D$+", "+E$
  Reference:M$
- ScalarValue:D$
+ Value:D$
  TextConstant:", "
  BinaryOperator:+
- ScalarValue:E$
+ Value:E$
  BinaryOperator:+
  AssignmentOperator:=
 3320 RETURN

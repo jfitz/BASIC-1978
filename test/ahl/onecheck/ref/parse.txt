@@ -82,40 +82,40 @@
  step:    ["NumericConstant:8"]
 74 PRINT J;TAB(4);J+1;TAB(8);J+2;TAB(12);J+3;TAB(16);J+4;TAB(20);J+5;
  ITEMS
- ScalarValue:J
+ Value:J
  CarriageControl:;
  NumericConstant:4
  FunctionTab
  CarriageControl:;
- ScalarValue:J
+ Value:J
  NumericConstant:1
  BinaryOperator:+
  CarriageControl:;
  NumericConstant:8
  FunctionTab
  CarriageControl:;
- ScalarValue:J
+ Value:J
  NumericConstant:2
  BinaryOperator:+
  CarriageControl:;
  NumericConstant:12
  FunctionTab
  CarriageControl:;
- ScalarValue:J
+ Value:J
  NumericConstant:3
  BinaryOperator:+
  CarriageControl:;
  NumericConstant:16
  FunctionTab
  CarriageControl:;
- ScalarValue:J
+ Value:J
  NumericConstant:4
  BinaryOperator:+
  CarriageControl:;
  NumericConstant:20
  FunctionTab
  CarriageControl:;
- ScalarValue:J
+ Value:J
  NumericConstant:5
  BinaryOperator:+
  CarriageControl:;
@@ -124,14 +124,14 @@
  NumericConstant:24
  FunctionTab
  CarriageControl:;
- ScalarValue:J
+ Value:J
  NumericConstant:6
  BinaryOperator:+
  CarriageControl:;
  NumericConstant:28
  FunctionTab
  CarriageControl:;
- ScalarValue:J
+ Value:J
  NumericConstant:7
  BinaryOperator:+
  CarriageControl:NL
@@ -152,7 +152,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:64"]
 82 A(J)=1
- ScalarValue:J
+ Value:J
  Reference:A
  NumericConstant:1
  AssignmentOperator:=
@@ -165,10 +165,10 @@
  step:    ["NumericConstant:8"]
 88 FOR I=J TO J+3
  control: Variable:I
- start:   ["ScalarValue:J"]
- end:     ["ScalarValue:J", "NumericConstant:3", "BinaryOperator:+"]
+ start:   ["Value:J"]
+ end:     ["Value:J", "NumericConstant:3", "BinaryOperator:+"]
 90 A(I)=0
- ScalarValue:I
+ Value:I
  Reference:A
  NumericConstant:0
  AssignmentOperator:=
@@ -185,7 +185,7 @@
 100 INPUT "JUMP FROM";F
  Reference:F
 105 IF F=0 THEN 500
- ScalarValue:F
+ Value:F
  NumericConstant:0
  BinaryOperator:=
 110 INPUT "TO";T
@@ -197,7 +197,7 @@
  Remark:*** CHECK LEGALITY OF MOVE
 120 F1=INT((F-1)/8)
  Reference:F1
- ScalarValue:F
+ Value:F
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:8
@@ -206,15 +206,15 @@
  AssignmentOperator:=
 130 F2=F-8*F1
  Reference:F2
- ScalarValue:F
+ Value:F
  NumericConstant:8
- ScalarValue:F1
+ Value:F1
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 140 T1=INT((T-1)/8)
  Reference:T1
- ScalarValue:T
+ Value:T
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:8
@@ -223,59 +223,59 @@
  AssignmentOperator:=
 150 T2=T-8*T1
  Reference:T2
- ScalarValue:T
+ Value:T
  NumericConstant:8
- ScalarValue:T1
+ Value:T1
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 160 IF F1>7 THEN 230
- ScalarValue:F1
+ Value:F1
  NumericConstant:7
  BinaryOperator:>
 170 IF T1>7 THEN 230
- ScalarValue:T1
+ Value:T1
  NumericConstant:7
  BinaryOperator:>
 180 IF F2>8 THEN 230
- ScalarValue:F2
+ Value:F2
  NumericConstant:8
  BinaryOperator:>
 190 IF T2>8 THEN 230
- ScalarValue:T2
+ Value:T2
  NumericConstant:8
  BinaryOperator:>
 200 IF ABS(F1-T1)<>2 THEN 230
- ScalarValue:F1
- ScalarValue:T1
+ Value:F1
+ Value:T1
  BinaryOperator:-
  FunctionAbs
  NumericConstant:2
  BinaryOperator:<>
 210 IF ABS(F2-T2)<>2 THEN 230
- ScalarValue:F2
- ScalarValue:T2
+ Value:F2
+ Value:T2
  BinaryOperator:-
  FunctionAbs
  NumericConstant:2
  BinaryOperator:<>
 212 IF A((T+F)/2)=0 THEN 230
- ScalarValue:T
- ScalarValue:F
+ Value:T
+ Value:F
  BinaryOperator:+
  NumericConstant:2
  BinaryOperator:/
- ScalarValue:A
+ Value:A
  NumericConstant:0
  BinaryOperator:=
 215 IF A(F)=0 THEN 230
- ScalarValue:F
- ScalarValue:A
+ Value:F
+ Value:A
  NumericConstant:0
  BinaryOperator:=
 220 IF A(T)=1 THEN 230
- ScalarValue:T
- ScalarValue:A
+ Value:T
+ Value:A
  NumericConstant:1
  BinaryOperator:=
 225 GOTO 250
@@ -289,18 +289,18 @@
 245 REM *** UPDATE BOARD
  Remark:*** UPDATE BOARD
 250 A(T)=1
- ScalarValue:T
+ Value:T
  Reference:A
  NumericConstant:1
  AssignmentOperator:=
 260 A(F)=0
- ScalarValue:F
+ Value:F
  Reference:A
  NumericConstant:0
  AssignmentOperator:=
 270 A((T+F)/2)=0
- ScalarValue:T
- ScalarValue:F
+ Value:T
+ Value:F
  BinaryOperator:+
  NumericConstant:2
  BinaryOperator:/
@@ -309,7 +309,7 @@
  AssignmentOperator:=
 290 M=M+1
  Reference:M
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -322,12 +322,12 @@
  step:    ["NumericConstant:8"]
 350 FOR I=J TO J+7
  control: Variable:I
- start:   ["ScalarValue:J"]
- end:     ["ScalarValue:J", "NumericConstant:7", "BinaryOperator:+"]
+ start:   ["Value:J"]
+ end:     ["Value:J", "NumericConstant:7", "BinaryOperator:+"]
 360 PRINT A(I);
  ITEMS
- ScalarValue:I
- ScalarValue:A
+ Value:I
+ Value:A
  CarriageControl:;
 370 NEXT I
  Variable:I
@@ -353,9 +353,9 @@
  end:     ["NumericConstant:64"]
 520 S=S+A(I)
  Reference:S
- ScalarValue:S
- ScalarValue:I
- ScalarValue:A
+ Value:S
+ Value:I
+ Value:A
  BinaryOperator:+
  AssignmentOperator:=
 530 NEXT I
@@ -366,11 +366,11 @@
  ITEMS
  TextConstant:"YOU MADE"
  CarriageControl:;
- ScalarValue:M
+ Value:M
  CarriageControl:;
  TextConstant:"JUMPS AND HAD"
  CarriageControl:;
- ScalarValue:S
+ Value:S
  CarriageControl:;
  TextConstant:"PIECES"
  CarriageControl:NL
@@ -384,11 +384,11 @@
 562 INPUT "TRY AGAIN";A$
  Reference:A$
 570 IF A$="YES" THEN 70
- ScalarValue:A$
+ Value:A$
  TextConstant:"YES"
  BinaryOperator:=
 575 IF A$="NO" THEN 600
- ScalarValue:A$
+ Value:A$
  TextConstant:"NO"
  BinaryOperator:=
 580 PRINT "PLEASE ANSWER 'YES' OR 'NO'."

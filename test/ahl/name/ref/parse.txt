@@ -35,7 +35,7 @@
  CarriageControl:;
  Reference:A$
  Reference:L
- ScalarValue:A$
+ Value:A$
  FunctionLen
  AssignmentOperator:=
 30 PRINT: PRINT "THANK YOU, ";
@@ -47,23 +47,23 @@
 40 FOR I=1 TO L: B$(I)=MID$(A$,I,1): NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:L"]
- ScalarValue:I
+ end:     ["Value:L"]
+ Value:I
  Reference:B$
- ScalarValue:A$
- ScalarValue:I
+ Value:A$
+ Value:I
  NumericConstant:1
  FunctionMid
  AssignmentOperator:=
  Variable:I
 50 FOR I=L TO 1 STEP -1: PRINT B$(I);: NEXT I
  control: Variable:I
- start:   ["ScalarValue:L"]
+ start:   ["Value:L"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
  ITEMS
- ScalarValue:I
- ScalarValue:B$
+ Value:I
+ Value:B$
  CarriageControl:;
  Variable:I
 60 PRINT ".": PRINT "OOPS!  I GUESS I GOT IT BACKWARDS.  A SMART"
@@ -90,52 +90,52 @@
 100 FOR J=2 TO L: I=J-1: T$=B$(J)
  control: Variable:J
  start:   ["NumericConstant:2"]
- end:     ["ScalarValue:L"]
+ end:     ["Value:L"]
  Reference:I
- ScalarValue:J
+ Value:J
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
  Reference:T$
- ScalarValue:J
- ScalarValue:B$
+ Value:J
+ Value:B$
  AssignmentOperator:=
 110 IF T$>B$(I) THEN 130
- ScalarValue:T$
- ScalarValue:I
- ScalarValue:B$
+ Value:T$
+ Value:I
+ Value:B$
  BinaryOperator:>
 120 B$(I+1)=B$(I): I=I-1: IF I>0 THEN 110
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:+
  Reference:B$
- ScalarValue:I
- ScalarValue:B$
+ Value:I
+ Value:B$
  AssignmentOperator:=
  Reference:I
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
- ScalarValue:I
+ Value:I
  NumericConstant:0
  BinaryOperator:>
 130 B$(I+1)=T$: NEXT J
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:+
  Reference:B$
- ScalarValue:T$
+ Value:T$
  AssignmentOperator:=
  Variable:J
 140 FOR I=1 TO L: PRINT B$(I);: NEXT I: PRINT: PRINT
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:L"]
+ end:     ["Value:L"]
  ITEMS
- ScalarValue:I
- ScalarValue:B$
+ Value:I
+ Value:B$
  CarriageControl:;
  Variable:I
  ITEMS
@@ -148,7 +148,7 @@
  CarriageControl:;
  Reference:D$
 160 IF D$="YES" THEN 180
- ScalarValue:D$
+ Value:D$
  TextConstant:"YES"
  BinaryOperator:=
 170 PRINT: PRINT "I'M SORRY YOU DON'T LIKE IT THAT WAY.": GOTO 200
@@ -170,7 +170,7 @@
  ITEMS
  TextConstant:"I REALLY ENJOYED MEETING YOU "
  CarriageControl:;
- ScalarValue:A$
+ Value:A$
  CarriageControl:;
  TextConstant:"."
  CarriageControl:NL

@@ -26,11 +26,11 @@
 320 INPUT V
  Reference:V
 330 IF V>25 THEN 360
- ScalarValue:V
+ Value:V
  NumericConstant:25
  BinaryOperator:>
 340 IF V<1 THEN 390
- ScalarValue:V
+ Value:V
  NumericConstant:1
  BinaryOperator:<
 350 GOTO 1440
@@ -58,11 +58,11 @@
 420 INPUT A
  Reference:A
 430 IF A<1 THEN 460
- ScalarValue:A
+ Value:A
  NumericConstant:1
  BinaryOperator:<
 440 IF A>3 THEN 460
- ScalarValue:A
+ Value:A
  NumericConstant:3
  BinaryOperator:>
 450 GOTO 480
@@ -105,7 +105,7 @@
 530 FOR O=1 TO V
  control: Variable:O
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:V"]
+ end:     ["Value:V"]
 540    READ Q
  Reference:Q
 550    PRINT
@@ -115,20 +115,20 @@
  ITEMS
  TextConstant:"HERE COMES GATE #"
  CarriageControl:;
- ScalarValue:O
+ Value:O
  FunctionStr
  CarriageControl:;
  TextConstant:":"
  CarriageControl:NL
 560    PRINT S;"M.P.H."
  ITEMS
- ScalarValue:S
+ Value:S
  CarriageControl:;
  TextConstant:"M.P.H."
  CarriageControl:NL
 570    LET S1=S
  Reference:S1
- ScalarValue:S
+ Value:S
  AssignmentOperator:=
 580    PRINT "OPTION";
  ITEMS
@@ -137,36 +137,36 @@
 590    INPUT O1
  Reference:O1
 600    IF O1=0 THEN 970
- ScalarValue:O1
+ Value:O1
  NumericConstant:0
  BinaryOperator:=
 610   IF O1>8 THEN 1420
- ScalarValue:O1
+ Value:O1
  NumericConstant:8
  BinaryOperator:>
 620    IF O1<1 THEN 1420
- ScalarValue:O1
+ Value:O1
  NumericConstant:1
  BinaryOperator:<
 630    GOSUB 990
  LineNumber:990
 640    IF S<7 THEN 1390
- ScalarValue:S
+ Value:S
  NumericConstant:7
  BinaryOperator:<
 650    LET T=T+(Q-S+1)
  Reference:T
- ScalarValue:T
- ScalarValue:Q
- ScalarValue:S
+ Value:T
+ Value:Q
+ Value:S
  BinaryOperator:-
  NumericConstant:1
  BinaryOperator:+
  BinaryOperator:+
  AssignmentOperator:=
 660    IF S>Q THEN 1630
- ScalarValue:S
- ScalarValue:Q
+ Value:S
+ Value:Q
  BinaryOperator:>
 670 NEXT O
  Variable:O
@@ -176,7 +176,7 @@
  ITEMS
  TextConstant:"YOU TOOK"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  NumericConstant:1
  FunctionRnd
  BinaryOperator:+
@@ -185,34 +185,34 @@
  CarriageControl:NL
 690 LET M=T
  Reference:M
- ScalarValue:T
+ Value:T
  AssignmentOperator:=
 700 LET M=M/V
  Reference:M
- ScalarValue:M
- ScalarValue:V
+ Value:M
+ Value:V
  BinaryOperator:/
  AssignmentOperator:=
 710 IF M<1.5-(A*.1) THEN 1650
- ScalarValue:M
+ Value:M
  NumericConstant:1.5
- ScalarValue:A
+ Value:A
  NumericConstant:.1
  BinaryOperator:*
  BinaryOperator:-
  BinaryOperator:<
 720 IF M<2.9-(A*.1) THEN 1680
- ScalarValue:M
+ Value:M
  NumericConstant:2.9
- ScalarValue:A
+ Value:A
  NumericConstant:.1
  BinaryOperator:*
  BinaryOperator:-
  BinaryOperator:<
 730 IF M<4.4-(A*.01) THEN 1710
- ScalarValue:M
+ Value:M
  NumericConstant:4.4
- ScalarValue:A
+ Value:A
  NumericConstant:.01
  BinaryOperator:*
  BinaryOperator:-
@@ -228,11 +228,11 @@
 760 REM
  Remark:
 770 IF B$="NO" THEN 1740
- ScalarValue:B$
+ Value:B$
  TextConstant:"NO"
  BinaryOperator:=
 780 IF B$="YES" THEN 480
- ScalarValue:B$
+ Value:B$
  TextConstant:"YES"
  BinaryOperator:=
 790 PRINT "PLEASE TYPE 'YES' OR 'NO'"
@@ -323,7 +323,7 @@
  ITEMS
  TextConstant:"YOU'VE TAKEN"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  NumericConstant:1
  FunctionRnd
  BinaryOperator:+
@@ -333,7 +333,7 @@
 980 GOTO 580
  LineNumber:580
 990 ON O1 GOTO 1130,1010,1170,1080,1190,1100,1150,1210
- ScalarValue:O1
+ Value:O1
  LineNumber:1130
  LineNumber:1010
  LineNumber:1170
@@ -346,7 +346,7 @@
  
 1010 LET S=S+INT(RND(1)*(5-3)+3)
  Reference:S
- ScalarValue:S
+ Value:S
  NumericConstant:1
  FunctionRnd
  NumericConstant:5
@@ -360,17 +360,17 @@
  AssignmentOperator:=
 1020 PRINT S;"M.P.H."
  ITEMS
- ScalarValue:S
+ Value:S
  CarriageControl:;
  TextConstant:"M.P.H."
  CarriageControl:NL
 1030 IF S>Q THEN 1290
- ScalarValue:S
- ScalarValue:Q
+ Value:S
+ Value:Q
  BinaryOperator:>
 1040 IF S>Q-1 THEN 1060
- ScalarValue:S
- ScalarValue:Q
+ Value:S
+ Value:Q
  NumericConstant:1
  BinaryOperator:-
  BinaryOperator:>
@@ -384,7 +384,7 @@
  
 1080 PRINT S;"M.P.H."
  ITEMS
- ScalarValue:S
+ Value:S
  CarriageControl:;
  TextConstant:"M.P.H."
  CarriageControl:NL
@@ -392,7 +392,7 @@
  LineNumber:1030
 1100 LET S=S-INT(RND(1)*(5-3)+3)
  Reference:S
- ScalarValue:S
+ Value:S
  NumericConstant:1
  FunctionRnd
  NumericConstant:5
@@ -406,7 +406,7 @@
  AssignmentOperator:=
 1110 PRINT S;"M.P.H."
  ITEMS
- ScalarValue:S
+ Value:S
  CarriageControl:;
  TextConstant:"M.P.H."
  CarriageControl:NL
@@ -414,7 +414,7 @@
  LineNumber:1030
 1130 LET S=S+INT(RND(1)*(10-5)+5)
  Reference:S
- ScalarValue:S
+ Value:S
  NumericConstant:1
  FunctionRnd
  NumericConstant:10
@@ -430,7 +430,7 @@
  LineNumber:1080
 1150 LET S=S-INT(RND(1)*(10-5)+5)
  Reference:S
- ScalarValue:S
+ Value:S
  NumericConstant:1
  FunctionRnd
  NumericConstant:10
@@ -446,7 +446,7 @@
  LineNumber:1110
 1170 LET S=S+INT(RND(1)*(4-1)+1)
  Reference:S
- ScalarValue:S
+ Value:S
  NumericConstant:1
  FunctionRnd
  NumericConstant:4
@@ -462,7 +462,7 @@
  LineNumber:1110
 1190 LET S=S-INT(RND(1)*(4-1)+1)
  Reference:S
- ScalarValue:S
+ Value:S
  NumericConstant:1
  FunctionRnd
  NumericConstant:4
@@ -491,7 +491,7 @@
  CarriageControl:NL
 1240 LET T=T+1.5
  Reference:T
- ScalarValue:T
+ Value:T
  NumericConstant:1.5
  BinaryOperator:+
  AssignmentOperator:=
@@ -505,7 +505,7 @@
  ITEMS
  TextConstant:"YOU TOOK"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  NumericConstant:1
  FunctionRnd
  BinaryOperator:+
@@ -517,8 +517,8 @@
 1290 IF RND(1)<((S-Q)*.1)+.2 THEN 1320
  NumericConstant:1
  FunctionRnd
- ScalarValue:S
- ScalarValue:Q
+ Value:S
+ Value:Q
  BinaryOperator:-
  NumericConstant:.1
  BinaryOperator:*
@@ -548,7 +548,7 @@
  ITEMS
  TextConstant:"YOU TOOK"
  CarriageControl:;
- ScalarValue:T
+ Value:T
  NumericConstant:1
  FunctionRnd
  BinaryOperator:+
@@ -569,7 +569,7 @@
  CarriageControl:NL
 1400 LET S=S1
  Reference:S
- ScalarValue:S1
+ Value:S1
  AssignmentOperator:=
 1410 GOTO 550
  LineNumber:550
@@ -633,15 +633,15 @@
 1490 REM
  Remark:
 1500 IF A$="INS" THEN 820
- ScalarValue:A$
+ Value:A$
  TextConstant:"INS"
  BinaryOperator:=
 1510 IF A$="MAX" THEN 1550
- ScalarValue:A$
+ Value:A$
  TextConstant:"MAX"
  BinaryOperator:=
 1520 IF A$="RUN" THEN 410
- ScalarValue:A$
+ Value:A$
  TextConstant:"RUN"
  BinaryOperator:=
 1530 PRINT CHR$(34);A$;CHR$(34);" IS AN ILLEGAL COMMAND--RETRY";
@@ -649,7 +649,7 @@
  NumericConstant:34
  FunctionChr
  CarriageControl:;
- ScalarValue:A$
+ Value:A$
  CarriageControl:;
  NumericConstant:34
  FunctionChr
@@ -673,16 +673,16 @@
 1580 FOR B=1 TO V
  control: Variable:B
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:V"]
+ end:     ["Value:V"]
 1590    READ Q
  Reference:Q
 1600    PRINT B;"  ";Q
  ITEMS
- ScalarValue:B
+ Value:B
  CarriageControl:;
  TextConstant:"  "
  CarriageControl:;
- ScalarValue:Q
+ Value:Q
  CarriageControl:NL
 1610 NEXT B
  Variable:B
@@ -690,7 +690,7 @@
  LineNumber:1470
 1630 LET T=T+.5
  Reference:T
- ScalarValue:T
+ Value:T
  NumericConstant:.5
  BinaryOperator:+
  AssignmentOperator:=
@@ -704,7 +704,7 @@
  NumericConstant:1
  Reference:G
  NumericConstant:1
- ScalarValue:G
+ Value:G
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -718,7 +718,7 @@
  NumericConstant:1
  Reference:S
  NumericConstant:1
- ScalarValue:S
+ Value:S
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -732,7 +732,7 @@
  NumericConstant:1
  Reference:B
  NumericConstant:1
- ScalarValue:B
+ Value:B
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -744,7 +744,7 @@
  CarriageControl:NL
 1750 IF G(1)<1 THEN 1770
  NumericConstant:1
- ScalarValue:G
+ Value:G
  NumericConstant:1
  BinaryOperator:<
 1760 PRINT "GOLD MEDALS:";G(1)
@@ -752,11 +752,11 @@
  TextConstant:"GOLD MEDALS:"
  CarriageControl:;
  NumericConstant:1
- ScalarValue:G
+ Value:G
  CarriageControl:NL
 1770 IF S(1)<1 THEN 1790
  NumericConstant:1
- ScalarValue:S
+ Value:S
  NumericConstant:1
  BinaryOperator:<
 1780 PRINT "SILVER MEDALS:";S(1)
@@ -764,11 +764,11 @@
  TextConstant:"SILVER MEDALS:"
  CarriageControl:;
  NumericConstant:1
- ScalarValue:S
+ Value:S
  CarriageControl:NL
 1790 IF B(1)<1 THEN 1830
  NumericConstant:1
- ScalarValue:B
+ Value:B
  NumericConstant:1
  BinaryOperator:<
 1800 PRINT "BRONZE MEDALS:";B(1)
@@ -776,7 +776,7 @@
  TextConstant:"BRONZE MEDALS:"
  CarriageControl:;
  NumericConstant:1
- ScalarValue:B
+ Value:B
  CarriageControl:NL
 1810 DATA 14,18,26,29,18,25,28,32,29,20,29,29,25,21,26,29,20,21,20
  NumericConstant:14

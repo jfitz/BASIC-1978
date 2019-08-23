@@ -40,7 +40,7 @@
 60 INPUT "YOUR MESSAGE, PLEASE";A$: L=LEN(A$)
  Reference:A$
  Reference:L
- ScalarValue:A$
+ Value:A$
  FunctionLen
  AssignmentOperator:=
 70 DIM T$(120): FOR I=1 TO 10: PRINT: NEXT I
@@ -55,20 +55,20 @@
 100 FOR J=0 TO INT(60/L)
  control: Variable:J
  start:   ["NumericConstant:0"]
- end:     ["NumericConstant:60", "ScalarValue:L", "BinaryOperator:/", "FunctionInt"]
+ end:     ["NumericConstant:60", "Value:L", "BinaryOperator:/", "FunctionInt"]
 110 FOR I=1 TO L
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:L"]
+ end:     ["Value:L"]
 120 T$(J*L+I)=MID$(A$,I,1)
- ScalarValue:J
- ScalarValue:L
+ Value:J
+ Value:L
  BinaryOperator:*
- ScalarValue:I
+ Value:I
  BinaryOperator:+
  Reference:T$
- ScalarValue:A$
- ScalarValue:I
+ Value:A$
+ Value:I
  NumericConstant:1
  FunctionMid
  AssignmentOperator:=
@@ -87,11 +87,11 @@
  NumericConstant:1
  AssignmentOperator:=
  Reference:C
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:C
+ Value:C
  NumericConstant:37
  BinaryOperator:=
 205 PRINT
@@ -100,17 +100,17 @@
 210 READ A: A1=A1+A: IF P=1 THEN 300
  Reference:A
  Reference:A1
- ScalarValue:A1
- ScalarValue:A
+ Value:A1
+ Value:A
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:P
+ Value:P
  NumericConstant:1
  BinaryOperator:=
 240 FOR I=1 TO A: PRINT " ";: NEXT I: P=1: GOTO 400
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:A"]
+ end:     ["Value:A"]
  ITEMS
  TextConstant:" "
  CarriageControl:;
@@ -121,18 +121,18 @@
  LineNumber:400
 300 FOR I=A1-A TO A1-1: PRINT T$(I);: NEXT I: P=0
  control: Variable:I
- start:   ["ScalarValue:A1", "ScalarValue:A", "BinaryOperator:-"]
- end:     ["ScalarValue:A1", "NumericConstant:1", "BinaryOperator:-"]
+ start:   ["Value:A1", "Value:A", "BinaryOperator:-"]
+ end:     ["Value:A1", "NumericConstant:1", "BinaryOperator:-"]
  ITEMS
- ScalarValue:I
- ScalarValue:T$
+ Value:I
+ Value:T$
  CarriageControl:;
  Variable:I
  Reference:P
  NumericConstant:0
  AssignmentOperator:=
 400 IF A1>60 THEN 200
- ScalarValue:A1
+ Value:A1
  NumericConstant:60
  BinaryOperator:>
 410 GOTO 210

@@ -34,13 +34,13 @@
 220 INPUT C$
  Reference:C$
 230 IF LEFT$(C$,1)="N" THEN 315
- ScalarValue:C$
+ Value:C$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
  BinaryOperator:=
 240 IF LEFT$(C$,1)="Y" THEN 265
- ScalarValue:C$
+ Value:C$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
@@ -120,7 +120,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:16"]
 330 READ Y(I)
- ScalarValue:I
+ Value:I
  Reference:Y
 340 NEXT I
  Variable:I
@@ -133,8 +133,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 370 READ M(I,J)
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:M
 380 NEXT J
  Variable:J
@@ -145,7 +145,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:64"]
 410 LET X (I) =0
- ScalarValue:I
+ Value:I
  Reference:X
  NumericConstant:0
  AssignmentOperator:=
@@ -162,13 +162,13 @@
 450 INPUT S$
  Reference:S$
 460 IF LEFT$(S$,1)="N" THEN 630
- ScalarValue:S$
+ Value:S$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
  BinaryOperator:=
 470 IF LEFT$(S$,1)="Y" THEN 500
- ScalarValue:S$
+ Value:S$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
@@ -190,11 +190,11 @@
 520 INPUT J1
  Reference:J1
 521 IF J1=1 THEN 2770
- ScalarValue:J1
+ Value:J1
  NumericConstant:1
  BinaryOperator:=
 522 IF J1<>0 THEN 525
- ScalarValue:J1
+ Value:J1
  NumericConstant:0
  BinaryOperator:<>
 523 GOSUB 2550
@@ -202,45 +202,45 @@
 524 GOTO 500
  LineNumber:500
 525 IF J1<111 THEN 2750
- ScalarValue:J1
+ Value:J1
  NumericConstant:111
  BinaryOperator:<
 526 IF J1>444 THEN 2750
- ScalarValue:J1
+ Value:J1
  NumericConstant:444
  BinaryOperator:>
 530 GOSUB 2500
  LineNumber:2500
 540 LET K1=INT(J1/100)
  Reference:K1
- ScalarValue:J1
+ Value:J1
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 550 LET J2=(J1-K1*100)
  Reference:J2
- ScalarValue:J1
- ScalarValue:K1
+ Value:J1
+ Value:K1
  NumericConstant:100
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 560 LET K2=INT(J2/10)
  Reference:K2
- ScalarValue:J2
+ Value:J2
  NumericConstant:10
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 570 LET K3= J1 - K1*100 -K2*10
  Reference:K3
- ScalarValue:J1
- ScalarValue:K1
+ Value:J1
+ Value:K1
  NumericConstant:100
  BinaryOperator:*
  BinaryOperator:-
- ScalarValue:K2
+ Value:K2
  NumericConstant:10
  BinaryOperator:*
  BinaryOperator:-
@@ -248,20 +248,20 @@
 580 LET M=16*K1+4*K2+K3-20
  Reference:M
  NumericConstant:16
- ScalarValue:K1
+ Value:K1
  BinaryOperator:*
  NumericConstant:4
- ScalarValue:K2
+ Value:K2
  BinaryOperator:*
  BinaryOperator:+
- ScalarValue:K3
+ Value:K3
  BinaryOperator:+
  NumericConstant:20
  BinaryOperator:-
  AssignmentOperator:=
 590 IF X(M)=0 THEN 620
- ScalarValue:M
- ScalarValue:X
+ Value:M
+ Value:X
  NumericConstant:0
  BinaryOperator:=
 600 PRINT "THAT SQUARE IS USED, TRY AGAIN."
@@ -271,7 +271,7 @@
 610 GOTO 500
  LineNumber:500
 620 LET X(M)=1
- ScalarValue:M
+ Value:M
  Reference:X
  NumericConstant:1
  AssignmentOperator:=
@@ -286,40 +286,40 @@
  NumericConstant:1
  AssignmentOperator:=
 660 IF J=1 THEN 720
- ScalarValue:J
+ Value:J
  NumericConstant:1
  BinaryOperator:=
 670 IF J=2 THEN 790
- ScalarValue:J
+ Value:J
  NumericConstant:2
  BinaryOperator:=
 680 IF J=3 THEN 930
- ScalarValue:J
+ Value:J
  NumericConstant:3
  BinaryOperator:=
 690 I=I+1: IF I<=76 THEN 660
  Reference:I
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:I
+ Value:I
  NumericConstant:76
  BinaryOperator:<=
 700 J=J+1: IF J<=3 THEN 650
  Reference:J
- ScalarValue:J
+ Value:J
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:J
+ Value:J
  NumericConstant:3
  BinaryOperator:<=
 710 GOTO 1300
  LineNumber:1300
 720 IF L(I)<>4 THEN 690
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  NumericConstant:4
  BinaryOperator:<>
 730 PRINT "YOU WIN AS FOLLOWS";
@@ -332,9 +332,9 @@
  end:     ["NumericConstant:4"]
 750 LET M=M(I,J)
  Reference:M
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  AssignmentOperator:=
 760 GOSUB 1570
  LineNumber:1570
@@ -343,8 +343,8 @@
 780 GOTO 1490
  LineNumber:1490
 790 IF L(I)<>15 THEN 690
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  NumericConstant:15
  BinaryOperator:<>
 800 FOR J=1 TO 4
@@ -353,17 +353,17 @@
  end:     ["NumericConstant:4"]
 810 LET M=M(I,J)
  Reference:M
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  AssignmentOperator:=
 820 IF X(M)<>0 THEN 860
- ScalarValue:M
- ScalarValue:X
+ Value:M
+ Value:X
  NumericConstant:0
  BinaryOperator:<>
 830 LET X(M)=5
- ScalarValue:M
+ Value:M
  Reference:X
  NumericConstant:5
  AssignmentOperator:=
@@ -385,9 +385,9 @@
  end:     ["NumericConstant:4"]
 890 LET M=M(I,J)
  Reference:M
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  AssignmentOperator:=
 900 GOSUB 1570
  LineNumber:1570
@@ -396,8 +396,8 @@
 920 GOTO 1490
  LineNumber:1490
 930 IF L(I)<>3 THEN 690
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  NumericConstant:3
  BinaryOperator:<>
 940 PRINT "NICE TRY. MACHINE MOVES TO";
@@ -410,17 +410,17 @@
  end:     ["NumericConstant:4"]
 960 LET M=M(I,J)
  Reference:M
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  AssignmentOperator:=
 970 IF X(M)<>0 THEN 1010
- ScalarValue:M
- ScalarValue:X
+ Value:M
+ Value:X
  NumericConstant:0
  BinaryOperator:<>
 980 LET X(M)=5
- ScalarValue:M
+ Value:M
  Reference:X
  NumericConstant:5
  AssignmentOperator:=
@@ -437,43 +437,43 @@
  NumericConstant:1
  AssignmentOperator:=
 1040 LET L(I)=X(M(I,1))+X(M(I,2))+X(M(I,3))+X(M(I,4))
- ScalarValue:I
+ Value:I
  Reference:L
- ScalarValue:I
+ Value:I
  NumericConstant:1
- ScalarValue:M
- ScalarValue:X
- ScalarValue:I
+ Value:M
+ Value:X
+ Value:I
  NumericConstant:2
- ScalarValue:M
- ScalarValue:X
+ Value:M
+ Value:X
  BinaryOperator:+
- ScalarValue:I
+ Value:I
  NumericConstant:3
- ScalarValue:M
- ScalarValue:X
+ Value:M
+ Value:X
  BinaryOperator:+
- ScalarValue:I
+ Value:I
  NumericConstant:4
- ScalarValue:M
- ScalarValue:X
+ Value:M
+ Value:X
  BinaryOperator:+
  AssignmentOperator:=
 1050 LET L = L(I)
  Reference:L
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  AssignmentOperator:=
 1060 IF L <2 THEN 1130
- ScalarValue:L
+ Value:L
  NumericConstant:2
  BinaryOperator:<
 1070 IF L>=3 THEN 1130
- ScalarValue:L
+ Value:L
  NumericConstant:3
  BinaryOperator:>=
 1080 IF L>2 THEN 2230
- ScalarValue:L
+ Value:L
  NumericConstant:2
  BinaryOperator:>
 1090 FOR J = 1 TO 4
@@ -481,16 +481,16 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 1100 IF X(M(I,J))<>0 THEN 1120
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
- ScalarValue:X
+ Value:I
+ Value:J
+ Value:M
+ Value:X
  NumericConstant:0
  BinaryOperator:<>
 1110 LET X(M(I,J))=1/8
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  Reference:X
  NumericConstant:1
  NumericConstant:8
@@ -500,11 +500,11 @@
  Variable:J
 1130 I=I+1: IF I<=76 THEN 1040
  Reference:I
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:I
+ Value:I
  NumericConstant:76
  BinaryOperator:<=
 1140 GOSUB 1640
@@ -514,15 +514,15 @@
  NumericConstant:1
  AssignmentOperator:=
 1160 IF L(I)=1/2 THEN 2360
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  NumericConstant:1
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:=
 1170 IF L(I)=1+3/8 THEN 2360
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  NumericConstant:1
  NumericConstant:3
  NumericConstant:8
@@ -531,11 +531,11 @@
  BinaryOperator:=
 1180 I=I+1: IF I<=76 THEN 1160
  Reference:I
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:I
+ Value:I
  NumericConstant:76
  BinaryOperator:<=
 1190 GOTO 1830
@@ -545,30 +545,30 @@
  NumericConstant:1
  AssignmentOperator:=
 1210 IF X(Y(Z))=0 THEN 1250
- ScalarValue:Z
- ScalarValue:Y
- ScalarValue:X
+ Value:Z
+ Value:Y
+ Value:X
  NumericConstant:0
  BinaryOperator:=
 1220 LET Z=Z+1
  Reference:Z
- ScalarValue:Z
+ Value:Z
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1230 IF Z<>17 THEN 1210
- ScalarValue:Z
+ Value:Z
  NumericConstant:17
  BinaryOperator:<>
 1240 GOTO 1720
  LineNumber:1720
 1250 LET M=Y(Z)
  Reference:M
- ScalarValue:Z
- ScalarValue:Y
+ Value:Z
+ Value:Y
  AssignmentOperator:=
 1260 LET X(M)=5
- ScalarValue:M
+ Value:M
  Reference:X
  NumericConstant:5
  AssignmentOperator:=
@@ -582,50 +582,50 @@
  LineNumber:500
 1300 LET X=X
  Reference:X
- ScalarValue:X
+ Value:X
  AssignmentOperator:=
 1310 I=1
  Reference:I
  NumericConstant:1
  AssignmentOperator:=
 1320 LET L(I)=X(M(I,1))+X(M(I,2))+X(M(I,3))+X(M(I,4))
- ScalarValue:I
+ Value:I
  Reference:L
- ScalarValue:I
+ Value:I
  NumericConstant:1
- ScalarValue:M
- ScalarValue:X
- ScalarValue:I
+ Value:M
+ Value:X
+ Value:I
  NumericConstant:2
- ScalarValue:M
- ScalarValue:X
+ Value:M
+ Value:X
  BinaryOperator:+
- ScalarValue:I
+ Value:I
  NumericConstant:3
- ScalarValue:M
- ScalarValue:X
+ Value:M
+ Value:X
  BinaryOperator:+
- ScalarValue:I
+ Value:I
  NumericConstant:4
- ScalarValue:M
- ScalarValue:X
+ Value:M
+ Value:X
  BinaryOperator:+
  AssignmentOperator:=
 1330 LET L=L(I)
  Reference:L
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  AssignmentOperator:=
 1340 IF L<10 THEN 1410
- ScalarValue:L
+ Value:L
  NumericConstant:10
  BinaryOperator:<
 1350 IF L>=11 THEN 1410
- ScalarValue:L
+ Value:L
  NumericConstant:11
  BinaryOperator:>=
 1360 IF L>10 THEN 2230
- ScalarValue:L
+ Value:L
  NumericConstant:10
  BinaryOperator:>
 1370 FOR J=1 TO 4
@@ -633,16 +633,16 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 1380 IF X(M(I,J))<>0 THEN 1400
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
- ScalarValue:X
+ Value:I
+ Value:J
+ Value:M
+ Value:X
  NumericConstant:0
  BinaryOperator:<>
 1390 LET X(M(I,J))=1/8
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  Reference:X
  NumericConstant:1
  NumericConstant:8
@@ -652,11 +652,11 @@
  Variable:J
 1410 I=I+1: IF I<=76 THEN 1320
  Reference:I
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:I
+ Value:I
  NumericConstant:76
  BinaryOperator:<=
 1420 GOSUB 1640
@@ -666,13 +666,13 @@
  NumericConstant:1
  AssignmentOperator:=
 1440 IF L(I)=.5 THEN 2360
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  NumericConstant:.5
  BinaryOperator:=
 1450 IF L(I)=5+3/8 THEN 2360
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  NumericConstant:5
  NumericConstant:3
  NumericConstant:8
@@ -681,11 +681,11 @@
  BinaryOperator:=
 1460 I=I+1: IF I<=76 THEN 1440
  Reference:I
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- ScalarValue:I
+ Value:I
  NumericConstant:76
  BinaryOperator:<=
 1470 GOSUB 2500
@@ -703,13 +703,13 @@
 1510 INPUT X$
  Reference:X$
 1520 IF LEFT$(X$,1)="Y" THEN 400
- ScalarValue:X$
+ Value:X$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
  BinaryOperator:=
 1530 IF LEFT$(X$,1)="N" THEN 1560
- ScalarValue:X$
+ Value:X$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
@@ -724,7 +724,7 @@
  
 1570 LET K1=INT((M-1)/16)+1
  Reference:K1
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:16
@@ -735,9 +735,9 @@
  AssignmentOperator:=
 1580 LET J2=M-16*(K1-1)
  Reference:J2
- ScalarValue:M
+ Value:M
  NumericConstant:16
- ScalarValue:K1
+ Value:K1
  NumericConstant:1
  BinaryOperator:-
  BinaryOperator:*
@@ -745,7 +745,7 @@
  AssignmentOperator:=
 1590 LET K2=INT((J2-1)/4)+1
  Reference:K2
- ScalarValue:J2
+ Value:J2
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:4
@@ -756,14 +756,14 @@
  AssignmentOperator:=
 1600 LET K3=M-(K1-1)*16-(K2-1)*4
  Reference:K3
- ScalarValue:M
- ScalarValue:K1
+ Value:M
+ Value:K1
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:16
  BinaryOperator:*
  BinaryOperator:-
- ScalarValue:K2
+ Value:K2
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:4
@@ -772,19 +772,19 @@
  AssignmentOperator:=
 1610 LET M=K1*100+K2*10+K3
  Reference:M
- ScalarValue:K1
+ Value:K1
  NumericConstant:100
  BinaryOperator:*
- ScalarValue:K2
+ Value:K2
  NumericConstant:10
  BinaryOperator:*
  BinaryOperator:+
- ScalarValue:K3
+ Value:K3
  BinaryOperator:+
  AssignmentOperator:=
 1620 PRINT M;
  ITEMS
- ScalarValue:M
+ Value:M
  CarriageControl:;
 1630 RETURN
  
@@ -794,41 +794,41 @@
  end:     ["NumericConstant:76"]
 1650 LET J1 = M(S,1)
  Reference:J1
- ScalarValue:S
+ Value:S
  NumericConstant:1
- ScalarValue:M
+ Value:M
  AssignmentOperator:=
 1660 LET J2=M(S,2)
  Reference:J2
- ScalarValue:S
+ Value:S
  NumericConstant:2
- ScalarValue:M
+ Value:M
  AssignmentOperator:=
 1670 LET J3=M(S,3)
  Reference:J3
- ScalarValue:S
+ Value:S
  NumericConstant:3
- ScalarValue:M
+ Value:M
  AssignmentOperator:=
 1680 LET J4=M(S,4)
  Reference:J4
- ScalarValue:S
+ Value:S
  NumericConstant:4
- ScalarValue:M
+ Value:M
  AssignmentOperator:=
 1690 LET L(S)=X(J1)+X(J2)+X(J3)+X(J4)
- ScalarValue:S
+ Value:S
  Reference:L
- ScalarValue:J1
- ScalarValue:X
- ScalarValue:J2
- ScalarValue:X
+ Value:J1
+ Value:X
+ Value:J2
+ Value:X
  BinaryOperator:+
- ScalarValue:J3
- ScalarValue:X
+ Value:J3
+ Value:X
  BinaryOperator:+
- ScalarValue:J4
- ScalarValue:X
+ Value:J4
+ Value:X
  BinaryOperator:+
  AssignmentOperator:=
 1700 NEXT S
@@ -840,18 +840,18 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:64"]
 1730 IF X(I)<>0 THEN 1800
- ScalarValue:I
- ScalarValue:X
+ Value:I
+ Value:X
  NumericConstant:0
  BinaryOperator:<>
 1740 LET X(I)=5
- ScalarValue:I
+ Value:I
  Reference:X
  NumericConstant:5
  AssignmentOperator:=
 1750 LET M=I
  Reference:M
- ScalarValue:I
+ Value:I
  AssignmentOperator:=
 1760 PRINT "MACHINE LIKES";
  ITEMS
@@ -883,19 +883,19 @@
  AssignmentOperator:=
 1850 FOR I=4*K-3 TO 4*K
  control: Variable:I
- start:   ["NumericConstant:4", "ScalarValue:K", "BinaryOperator:*", "NumericConstant:3", "BinaryOperator:-"]
- end:     ["NumericConstant:4", "ScalarValue:K", "BinaryOperator:*"]
+ start:   ["NumericConstant:4", "Value:K", "BinaryOperator:*", "NumericConstant:3", "BinaryOperator:-"]
+ end:     ["NumericConstant:4", "Value:K", "BinaryOperator:*"]
 1860 FOR J=1 TO 4
  control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 1870 LET P=P+X(M(I,J))
  Reference:P
- ScalarValue:P
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
- ScalarValue:X
+ Value:P
+ Value:I
+ Value:J
+ Value:M
+ Value:X
  BinaryOperator:+
  AssignmentOperator:=
 1880 NEXT J
@@ -903,19 +903,19 @@
 1890 NEXT I
  Variable:I
 1900 IF P<4 THEN 1940
- ScalarValue:P
+ Value:P
  NumericConstant:4
  BinaryOperator:<
 1910 IF P<5 THEN 1970
- ScalarValue:P
+ Value:P
  NumericConstant:5
  BinaryOperator:<
 1920 IF P<9 THEN 1940
- ScalarValue:P
+ Value:P
  NumericConstant:9
  BinaryOperator:<
 1930 IF P<10 THEN 1970
- ScalarValue:P
+ Value:P
  NumericConstant:10
  BinaryOperator:<
 1940 NEXT K
@@ -932,8 +932,8 @@
  AssignmentOperator:=
 1980 FOR I=4*K-3 TO 4*K
  control: Variable:I
- start:   ["NumericConstant:4", "ScalarValue:K", "BinaryOperator:*", "NumericConstant:3", "BinaryOperator:-"]
- end:     ["NumericConstant:4", "ScalarValue:K", "BinaryOperator:*"]
+ start:   ["NumericConstant:4", "Value:K", "BinaryOperator:*", "NumericConstant:3", "BinaryOperator:-"]
+ end:     ["NumericConstant:4", "Value:K", "BinaryOperator:*"]
 1990 GOTO 2370
  LineNumber:2370
 2000 NEXT I
@@ -1289,24 +1289,24 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 2240 IF X(M(I,J))<>1/8 THEN 2330
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
- ScalarValue:X
+ Value:I
+ Value:J
+ Value:M
+ Value:X
  NumericConstant:1
  NumericConstant:8
  BinaryOperator:/
  BinaryOperator:<>
 2250 LET X(M(I,J))=5
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  Reference:X
  NumericConstant:5
  AssignmentOperator:=
 2260 IF L(I)<5 THEN 2290
- ScalarValue:I
- ScalarValue:L
+ Value:I
+ Value:L
  NumericConstant:5
  BinaryOperator:<
 2270 PRINT "LET'S SEE YOU GET OUT OF THIS:  MACHINE MOVES TO";
@@ -1321,9 +1321,9 @@
  CarriageControl:;
 2300 LET M=M(I,J)
  Reference:M
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  AssignmentOperator:=
 2310 GOSUB 1570
  LineNumber:1570
@@ -1344,8 +1344,8 @@
  BinaryOperator:/
  AssignmentOperator:=
 2370 IF I-INT(I/4)*4>1 THEN 2400
- ScalarValue:I
- ScalarValue:I
+ Value:I
+ Value:I
  NumericConstant:4
  BinaryOperator:/
  FunctionInt
@@ -1366,32 +1366,32 @@
  AssignmentOperator:=
 2410 FOR J=A TO 5-A STEP 5-2*A
  control: Variable:J
- start:   ["ScalarValue:A"]
- end:     ["NumericConstant:5", "ScalarValue:A", "BinaryOperator:-"]
- step:    ["NumericConstant:5", "NumericConstant:2", "ScalarValue:A", "BinaryOperator:*", "BinaryOperator:-"]
+ start:   ["Value:A"]
+ end:     ["NumericConstant:5", "Value:A", "BinaryOperator:-"]
+ step:    ["NumericConstant:5", "NumericConstant:2", "Value:A", "BinaryOperator:*", "BinaryOperator:-"]
 2420 IF X(M(I,J))=S THEN 2450
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
- ScalarValue:X
- ScalarValue:S
+ Value:I
+ Value:J
+ Value:M
+ Value:X
+ Value:S
  BinaryOperator:=
 2430 NEXT J
  Variable:J
 2440 GOTO 2000
  LineNumber:2000
 2450 LET X(M(I,J))=5
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  Reference:X
  NumericConstant:5
  AssignmentOperator:=
 2460 LET M=M(I,J)
  Reference:M
- ScalarValue:I
- ScalarValue:J
- ScalarValue:M
+ Value:I
+ Value:J
+ Value:M
  AssignmentOperator:=
 2470 PRINT "MACHINE TAKES";
  ITEMS
@@ -1406,14 +1406,14 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:64"]
 2510 IF X(I)<>1/8 THEN 2530
- ScalarValue:I
- ScalarValue:X
+ Value:I
+ Value:X
  NumericConstant:1
  NumericConstant:8
  BinaryOperator:/
  BinaryOperator:<>
 2520 LET X(I)=0
- ScalarValue:I
+ Value:I
  Reference:X
  NumericConstant:0
  AssignmentOperator:=
@@ -1437,7 +1437,7 @@
 2562 FOR I1=1 TO J
  control: Variable:I1
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:J"]
+ end:     ["Value:J"]
 2564 PRINT"   ";
  ITEMS
  TextConstant:"   "
@@ -1451,29 +1451,29 @@
 2600 LET Q=16*I+4*J+K-20
  Reference:Q
  NumericConstant:16
- ScalarValue:I
+ Value:I
  BinaryOperator:*
  NumericConstant:4
- ScalarValue:J
+ Value:J
  BinaryOperator:*
  BinaryOperator:+
- ScalarValue:K
+ Value:K
  BinaryOperator:+
  NumericConstant:20
  BinaryOperator:-
  AssignmentOperator:=
 2610 IF X(Q)<>O THEN 2630
- ScalarValue:Q
- ScalarValue:X
- ScalarValue:O
+ Value:Q
+ Value:X
+ Value:O
  BinaryOperator:<>
 2620 PRINT"( )      ";
  ITEMS
  TextConstant:"( )      "
  CarriageControl:;
 2630 IF X(Q)<>5 THEN 2650
- ScalarValue:Q
- ScalarValue:X
+ Value:Q
+ Value:X
  NumericConstant:5
  BinaryOperator:<>
 2640 PRINT"(M)      ";
@@ -1481,8 +1481,8 @@
  TextConstant:"(M)      "
  CarriageControl:;
 2650 IF X(Q)<>1 THEN 2660
- ScalarValue:Q
- ScalarValue:X
+ Value:Q
+ Value:X
  NumericConstant:1
  BinaryOperator:<>
 2655 PRINT"(Y)      ";
@@ -1490,8 +1490,8 @@
  TextConstant:"(Y)      "
  CarriageControl:;
 2660 IF X(Q)<>1/8 THEN 2670
- ScalarValue:Q
- ScalarValue:X
+ Value:Q
+ Value:X
  NumericConstant:1
  NumericConstant:8
  BinaryOperator:/

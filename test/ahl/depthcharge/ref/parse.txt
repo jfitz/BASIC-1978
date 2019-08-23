@@ -25,7 +25,7 @@
  CarriageControl:NL
 30 N=INT(LOG(G)/LOG(2))+1
  Reference:N
- ScalarValue:G
+ Value:G
  FunctionLog
  NumericConstant:2
  FunctionLog
@@ -46,7 +46,7 @@
  ITEMS
  TextConstant:"MISSION IS TO DESTROY IT.  YOU HAVE"
  CarriageControl:;
- ScalarValue:N
+ Value:N
  CarriageControl:;
  TextConstant:"SHOTS."
  CarriageControl:NL
@@ -72,21 +72,21 @@
  CarriageControl:NL
 110 A=INT(G*RND(1)) : B=INT(G*RND(1)) : C=INT(G*RND(1))
  Reference:A
- ScalarValue:G
+ Value:G
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
  Reference:B
- ScalarValue:G
+ Value:G
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
  Reference:C
- ScalarValue:G
+ Value:G
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -95,29 +95,29 @@
 120 FOR D=1 TO N : PRINT : PRINT "TRIAL #";D; : INPUT X,Y,Z
  control: Variable:D
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
  ITEMS
  CarriageControl:NL
  ITEMS
  TextConstant:"TRIAL #"
  CarriageControl:;
- ScalarValue:D
+ Value:D
  CarriageControl:;
  Reference:X
  Reference:Y
  Reference:Z
 130 IF ABS(X-A)+ABS(Y-B)+ABS(Z-C)=0 THEN 300
- ScalarValue:X
- ScalarValue:A
+ Value:X
+ Value:A
  BinaryOperator:-
  FunctionAbs
- ScalarValue:Y
- ScalarValue:B
+ Value:Y
+ Value:B
  BinaryOperator:-
  FunctionAbs
  BinaryOperator:+
- ScalarValue:Z
- ScalarValue:C
+ Value:Z
+ Value:C
  BinaryOperator:-
  FunctionAbs
  BinaryOperator:+
@@ -138,15 +138,15 @@
  ITEMS
  TextConstant:"THE SUBMARINE WAS AT"
  CarriageControl:;
- ScalarValue:A
+ Value:A
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
- ScalarValue:B
+ Value:B
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
- ScalarValue:C
+ Value:C
  CarriageControl:NL
  LineNumber:400
 300 PRINT : PRINT "B O O M ! ! YOU FOUND IT IN";D;"TRIES!"
@@ -155,7 +155,7 @@
  ITEMS
  TextConstant:"B O O M ! ! YOU FOUND IT IN"
  CarriageControl:;
- ScalarValue:D
+ Value:D
  CarriageControl:;
  TextConstant:"TRIES!"
  CarriageControl:NL
@@ -166,7 +166,7 @@
  CarriageControl:NL
  Reference:A$
 410 IF A$="Y" THEN 100
- ScalarValue:A$
+ Value:A$
  TextConstant:"Y"
  BinaryOperator:=
 420 PRINT "OK.  HOPE YOU ENJOYED YOURSELF." : GOTO 600
@@ -179,61 +179,61 @@
  TextConstant:"SONAR REPORTS SHOT WAS "
  CarriageControl:;
 510 IF Y>B THEN PRINT "NORTH";
- ScalarValue:Y
- ScalarValue:B
+ Value:Y
+ Value:B
  BinaryOperator:>
  ITEMS
  TextConstant:"NORTH"
  CarriageControl:;
 520 IF Y<B THEN PRINT "SOUTH";
- ScalarValue:Y
- ScalarValue:B
+ Value:Y
+ Value:B
  BinaryOperator:<
  ITEMS
  TextConstant:"SOUTH"
  CarriageControl:;
 530 IF X>A THEN PRINT "EAST";
- ScalarValue:X
- ScalarValue:A
+ Value:X
+ Value:A
  BinaryOperator:>
  ITEMS
  TextConstant:"EAST"
  CarriageControl:;
 540 IF X<A THEN PRINT "WEST";
- ScalarValue:X
- ScalarValue:A
+ Value:X
+ Value:A
  BinaryOperator:<
  ITEMS
  TextConstant:"WEST"
  CarriageControl:;
 550 IF Y<>B OR X<>A THEN PRINT " AND";
- ScalarValue:Y
- ScalarValue:B
+ Value:Y
+ Value:B
  BinaryOperator:<>
- ScalarValue:X
- ScalarValue:A
+ Value:X
+ Value:A
  BinaryOperator:<>
  BinaryOperator:OR
  ITEMS
  TextConstant:" AND"
  CarriageControl:;
 560 IF Z>C THEN PRINT " TOO LOW."
- ScalarValue:Z
- ScalarValue:C
+ Value:Z
+ Value:C
  BinaryOperator:>
  ITEMS
  TextConstant:" TOO LOW."
  CarriageControl:NL
 570 IF Z<C THEN PRINT " TOO HIGH."
- ScalarValue:Z
- ScalarValue:C
+ Value:Z
+ Value:C
  BinaryOperator:<
  ITEMS
  TextConstant:" TOO HIGH."
  CarriageControl:NL
 580 IF Z=C THEN PRINT " DEPTH OK."
- ScalarValue:Z
- ScalarValue:C
+ Value:Z
+ Value:C
  BinaryOperator:=
  ITEMS
  TextConstant:" DEPTH OK."

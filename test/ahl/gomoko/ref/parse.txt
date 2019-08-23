@@ -71,13 +71,13 @@
  CarriageControl:;
  Reference:N
 115 IF N>6 THEN 117
- ScalarValue:N
+ Value:N
  NumericConstant:6
  BinaryOperator:>
 116 GOTO 120
  LineNumber:120
 117 IF N<20 THEN 210
- ScalarValue:N
+ Value:N
  NumericConstant:20
  BinaryOperator:<
 120 PRINT "I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19.": GOTO 110
@@ -88,12 +88,12 @@
 210 FOR I=1 TO N:FOR J=1 TO N: A(I,J)=0: NEXT J: NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
- ScalarValue:I
- ScalarValue:J
+ end:     ["Value:N"]
+ Value:I
+ Value:J
  Reference:A
  NumericConstant:0
  AssignmentOperator:=
@@ -117,19 +117,19 @@
  ITEMS
  CarriageControl:NL
 320 IF I=-1 THEN 980
- ScalarValue:I
+ Value:I
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
 330 X=I: Y=J: GOSUB 910: IF L=1 THEN 410
  Reference:X
- ScalarValue:I
+ Value:I
  AssignmentOperator:=
  Reference:Y
- ScalarValue:J
+ Value:J
  AssignmentOperator:=
  LineNumber:910
- ScalarValue:L
+ Value:L
  NumericConstant:1
  BinaryOperator:=
 340 PRINT "ILLEGAL MOVE.  TRY AGAIN...": GOTO 310
@@ -138,9 +138,9 @@
  CarriageControl:NL
  LineNumber:310
 410 IF A(I,J)=0 THEN 440
- ScalarValue:I
- ScalarValue:J
- ScalarValue:A
+ Value:I
+ Value:J
+ Value:A
  NumericConstant:0
  BinaryOperator:=
 420 PRINT "SQUARE OCCUPIED.  TRY AGAIN...": GOTO 310
@@ -149,8 +149,8 @@
  CarriageControl:NL
  LineNumber:310
 440 A(I,J)=1
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:A
  NumericConstant:1
  AssignmentOperator:=
@@ -163,35 +163,35 @@
  control: Variable:F
  start:   ["NumericConstant:1", "UnaryOperator:-"]
  end:     ["NumericConstant:1"]
- ScalarValue:E
- ScalarValue:F
+ Value:E
+ Value:F
  BinaryOperator:+
- ScalarValue:E
- ScalarValue:F
+ Value:E
+ Value:F
  BinaryOperator:*
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:=
 540 X=I+F: Y=J+F: GOSUB 910
  Reference:X
- ScalarValue:I
- ScalarValue:F
+ Value:I
+ Value:F
  BinaryOperator:+
  AssignmentOperator:=
  Reference:Y
- ScalarValue:J
- ScalarValue:F
+ Value:J
+ Value:F
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:910
 570 IF L=0 THEN 590
- ScalarValue:L
+ Value:L
  NumericConstant:0
  BinaryOperator:=
 580 IF A(X,Y)=1 THEN 710
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:1
  BinaryOperator:=
 590 NEXT F: NEXT E
@@ -201,7 +201,7 @@
  Remark:*** COMPUTER TRIES A RANDOM MOVE ***
 610 X=INT(N*RND(1)+1): Y=INT(N*RND(1)+1): GOSUB 910: IF L=0 THEN 610
  Reference:X
- ScalarValue:N
+ Value:N
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -210,7 +210,7 @@
  FunctionInt
  AssignmentOperator:=
  Reference:Y
- ScalarValue:N
+ Value:N
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -219,18 +219,18 @@
  FunctionInt
  AssignmentOperator:=
  LineNumber:910
- ScalarValue:L
+ Value:L
  NumericConstant:0
  BinaryOperator:=
 650 IF A(X,Y)<>0 THEN 610
- ScalarValue:X
- ScalarValue:Y
- ScalarValue:A
+ Value:X
+ Value:Y
+ Value:A
  NumericConstant:0
  BinaryOperator:<>
 660 A(X,Y)=2: GOSUB 810: GOTO 310
- ScalarValue:X
- ScalarValue:Y
+ Value:X
+ Value:Y
  Reference:A
  NumericConstant:2
  AssignmentOperator:=
@@ -238,18 +238,18 @@
  LineNumber:310
 710 X=I-E: Y=J-F: GOSUB 910
  Reference:X
- ScalarValue:I
- ScalarValue:E
+ Value:I
+ Value:E
  BinaryOperator:-
  AssignmentOperator:=
  Reference:Y
- ScalarValue:J
- ScalarValue:F
+ Value:J
+ Value:F
  BinaryOperator:-
  AssignmentOperator:=
  LineNumber:910
 750 IF L=0 THEN 610
- ScalarValue:L
+ Value:L
  NumericConstant:0
  BinaryOperator:=
 760 GOTO 650
@@ -259,14 +259,14 @@
 810 FOR I=1 TO N: FOR J=1 TO N: PRINT A(I,J);
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
  ITEMS
- ScalarValue:I
- ScalarValue:J
- ScalarValue:A
+ Value:I
+ Value:J
+ Value:A
  CarriageControl:;
 840 NEXT J: PRINT: NEXT I: PRINT: RETURN
  Variable:J
@@ -280,20 +280,20 @@
  Reference:L
  NumericConstant:1
  AssignmentOperator:=
- ScalarValue:X
+ Value:X
  NumericConstant:1
  BinaryOperator:<
 920 IF X>N THEN 970
- ScalarValue:X
- ScalarValue:N
+ Value:X
+ Value:N
  BinaryOperator:>
 930 IF Y<1 THEN 970
- ScalarValue:Y
+ Value:Y
  NumericConstant:1
  BinaryOperator:<
 940 IF Y>N THEN 970
- ScalarValue:Y
- ScalarValue:N
+ Value:Y
+ Value:N
  BinaryOperator:>
 950 RETURN
  
@@ -314,7 +314,7 @@
  CarriageControl:;
  Reference:Q
 990 IF Q=1 THEN 110
- ScalarValue:Q
+ Value:Q
  NumericConstant:1
  BinaryOperator:=
 999 END

@@ -51,7 +51,7 @@
  ITEMS
  TextConstant:"MAXIMUM RANGE OF YOUR GUN IS"
  CarriageControl:;
- ScalarValue:R
+ Value:R
  CarriageControl:;
  TextConstant:" YARDS."
  CarriageControl:NL
@@ -68,7 +68,7 @@
  AssignmentOperator:=
 200 T=INT(R*(.1+.8*RND(1)))
  Reference:T
- ScalarValue:R
+ Value:R
  NumericConstant:.1
  NumericConstant:.8
  NumericConstant:1
@@ -100,7 +100,7 @@
  ITEMS
  TextConstant:"OVER TARGET BY "
  CarriageControl:;
- ScalarValue:E
+ Value:E
  FunctionAbs
  CarriageControl:;
  TextConstant:"YARDS."
@@ -111,7 +111,7 @@
  ITEMS
  TextConstant:"SHORT OF TARGET BY "
  CarriageControl:
- ScalarValue:E
+ Value:E
  FunctionAbs
  CarriageControl:;
  TextConstant:"YARDS."
@@ -122,23 +122,23 @@
  ITEMS
  TextConstant:"*** TARGET DESTROYED ***  "
  CarriageControl:;
- ScalarValue:S
+ Value:S
  CarriageControl:;
  TextConstant:"ROUNDS OF AMMUNITION EXPENDED."
  CarriageControl:NL
 325 S1=S1+S
  Reference:S1
- ScalarValue:S1
- ScalarValue:S
+ Value:S1
+ Value:S
  BinaryOperator:+
  AssignmentOperator:=
 330 IF Z=4 THEN 490
- ScalarValue:Z
+ Value:Z
  NumericConstant:4
  BinaryOperator:=
 340 Z=Z+1
  Reference:Z
- ScalarValue:Z
+ Value:Z
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -155,7 +155,7 @@
  ITEMS
  TextConstant:"DISTANCE TO THE TARGET IS "
  CarriageControl:
- ScalarValue:T
+ Value:T
  CarriageControl:;
  TextConstant:" YARDS."
  CarriageControl:NL
@@ -168,21 +168,21 @@
 400 INPUT "ELEVATION";B
  Reference:B
 420 IF B>89 THEN 250
- ScalarValue:B
+ Value:B
  NumericConstant:89
  BinaryOperator:>
 430 IF B<1 THEN 230
- ScalarValue:B
+ Value:B
  NumericConstant:1
  BinaryOperator:<
 440 S=S+1
  Reference:S
- ScalarValue:S
+ Value:S
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 442 IF S<6 THEN 450
- ScalarValue:S
+ Value:S
  NumericConstant:6
  BinaryOperator:<
 444 PRINT:PRINT "BOOM !!!!   YOU HAVE JUST BEEN DESTROYED ";
@@ -205,33 +205,33 @@
 450 B2=2*B/57.3 : I=R*SIN(B2) : X=T-I : E=INT(X)
  Reference:B2
  NumericConstant:2
- ScalarValue:B
+ Value:B
  BinaryOperator:*
  NumericConstant:57.3
  BinaryOperator:/
  AssignmentOperator:=
  Reference:I
- ScalarValue:R
- ScalarValue:B2
+ Value:R
+ Value:B2
  FunctionSin
  BinaryOperator:*
  AssignmentOperator:=
  Reference:X
- ScalarValue:T
- ScalarValue:I
+ Value:T
+ Value:I
  BinaryOperator:-
  AssignmentOperator:=
  Reference:E
- ScalarValue:X
+ Value:X
  FunctionInt
  AssignmentOperator:=
 460 IF ABS(E)<100 THEN 320
- ScalarValue:E
+ Value:E
  FunctionAbs
  NumericConstant:100
  BinaryOperator:<
 470 IF E>100 THEN 290
- ScalarValue:E
+ Value:E
  NumericConstant:100
  BinaryOperator:>
 480 GOTO 270
@@ -244,10 +244,10 @@
  ITEMS
  TextConstant:"TOTAL ROUNDS EXPENDED WERE:"
  CarriageControl:;
- ScalarValue:S1
+ Value:S1
  CarriageControl:NL
 492 IF S1>18 THEN 495
- ScalarValue:S1
+ Value:S1
  NumericConstant:18
  BinaryOperator:>
 493 PRINT "NICE SHOOTING !!" : GOTO 500
@@ -264,7 +264,7 @@
  CarriageControl:NL
  Reference:Z$
 510 IF Z$="Y" THEN 170
- ScalarValue:Z$
+ Value:Z$
  TextConstant:"Y"
  BinaryOperator:=
 520 PRINT:PRINT "OK.  RETURN TO BASE CAMP."

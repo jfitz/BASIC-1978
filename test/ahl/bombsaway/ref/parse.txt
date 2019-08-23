@@ -5,10 +5,10 @@
 10 INPUT "WHAT SIDE -- ITALY(1), ALLIES(2), JAPAN(3), GERMANY(4)";A
  Reference:A
 20 IF A>0 AND A<5 THEN 25
- ScalarValue:A
+ Value:A
  NumericConstant:0
  BinaryOperator:>
- ScalarValue:A
+ Value:A
  NumericConstant:5
  BinaryOperator:<
  BinaryOperator:AND
@@ -18,7 +18,7 @@
  CarriageControl:NL
  LineNumber:10
 25 ON A GOTO 30, 110, 200, 220
- ScalarValue:A
+ Value:A
  LineNumber:30
  LineNumber:110
  LineNumber:200
@@ -26,10 +26,10 @@
 30 INPUT "YOUR TARGET -- ALBANIA(1), GREECE(2), NORTH AFRICA(3)";B
  Reference:B
 40 IF B>0 AND B<4 THEN 45
- ScalarValue:B
+ Value:B
  NumericConstant:0
  BinaryOperator:>
- ScalarValue:B
+ Value:B
  NumericConstant:4
  BinaryOperator:<
  BinaryOperator:AND
@@ -41,7 +41,7 @@
 45 PRINT : ON B GOTO 50, 80,90
  ITEMS
  CarriageControl:NL
- ScalarValue:B
+ Value:B
  LineNumber:50
  LineNumber:80
  LineNumber:90
@@ -64,10 +64,10 @@
 110 INPUT "AIRCRAFT -- LIBERATOR(1), B-29(2), B-17(3), LANCASTER(4)";G
  Reference:G
 120 IF G>0 AND G<5 THEN 125
- ScalarValue:G
+ Value:G
  NumericConstant:0
  BinaryOperator:>
- ScalarValue:G
+ Value:G
  NumericConstant:5
  BinaryOperator:<
  BinaryOperator:AND
@@ -79,7 +79,7 @@
 125 PRINT : ON G GOTO 130, 150, 170, 190
  ITEMS
  CarriageControl:NL
- ScalarValue:G
+ Value:G
  LineNumber:130
  LineNumber:150
  LineNumber:170
@@ -112,7 +112,7 @@
 205 INPUT "YOUR FIRST KAMIKAZE MISSION(Y OR N)";F$
  Reference:F$
 207 IF F$="N" THEN S=0 : GOTO 358
- ScalarValue:F$
+ Value:F$
  TextConstant:"N"
  BinaryOperator:=
  Reference:S
@@ -134,10 +134,10 @@
  CarriageControl:NL
 230 INPUT "ENGLAND(2), OR FRANCE(3)";M : IF M>0 AND M<4 THEN 235
  Reference:M
- ScalarValue:M
+ Value:M
  NumericConstant:0
  BinaryOperator:>
- ScalarValue:M
+ Value:M
  NumericConstant:4
  BinaryOperator:<
  BinaryOperator:AND
@@ -149,7 +149,7 @@
 235 PRINT : ON M GOTO 250, 260, 270
  ITEMS
  CarriageControl:NL
- ScalarValue:M
+ Value:M
  LineNumber:250
  LineNumber:260
  LineNumber:270
@@ -173,7 +173,7 @@
 285 INPUT "HOW MANY MISSIONS HAVE YOU FLOWN";D
  Reference:D
 290 IF D<160 THEN 300
- ScalarValue:D
+ Value:D
  NumericConstant:160
  BinaryOperator:<
 292 PRINT "MISSIONS, NOT MILES..." 
@@ -192,7 +192,7 @@
 300 PRINT:IF D<100 THEN 310
  ITEMS
  CarriageControl:NL
- ScalarValue:D
+ Value:D
  NumericConstant:100
  BinaryOperator:<
 305 PRINT "THAT'S PUSHING THE ODDS!" : GOTO 320
@@ -201,7 +201,7 @@
  CarriageControl:NL
  LineNumber:320
 310 IF D<25 THEN PRINT "FRESH OUT OF TRAINING, EH?"
- ScalarValue:D
+ Value:D
  NumericConstant:25
  BinaryOperator:<
  ITEMS
@@ -210,7 +210,7 @@
 320 PRINT : IF D<160*RND(1) THEN 330
  ITEMS
  CarriageControl:NL
- ScalarValue:D
+ Value:D
  NumericConstant:160
  NumericConstant:1
  FunctionRnd
@@ -256,10 +256,10 @@
 340 INPUT "DOES THE ENEMY HAVE GUNS(1), MISSILES(2), OR BOTH(3)";R
  Reference:R
 345 IF R>0 AND R<4 THEN 350
- ScalarValue:R
+ Value:R
  NumericConstant:0
  BinaryOperator:>
- ScalarValue:R
+ Value:R
  NumericConstant:4
  BinaryOperator:<
  BinaryOperator:AND
@@ -274,13 +274,13 @@
  Reference:T
  NumericConstant:0
  AssignmentOperator:=
- ScalarValue:R
+ Value:R
  NumericConstant:2
  BinaryOperator:=
 355 INPUT "WHAT'S THE PERCENT HIT RATE OF ENEMY GUNNERS (10 TO 50)";S
  Reference:S
 357 IF S<10 THEN PRINT "YOU LIE, BUT YOU'LL PAY...": GOTO 380
- ScalarValue:S
+ Value:S
  NumericConstant:10
  BinaryOperator:<
  ITEMS
@@ -293,15 +293,15 @@
 360 PRINT : IF R>1 THEN T=35
  ITEMS
  CarriageControl:NL
- ScalarValue:R
+ Value:R
  NumericConstant:1
  BinaryOperator:>
  Reference:T
  NumericConstant:35
  AssignmentOperator:=
 365 IF S+T>100*RND(1) THEN 380
- ScalarValue:S
- ScalarValue:T
+ Value:S
+ Value:T
  BinaryOperator:+
  NumericConstant:100
  NumericConstant:1
@@ -338,7 +338,7 @@
  CarriageControl:NL
  Reference:U$
 395 IF U$="Y" THEN 8
- ScalarValue:U$
+ Value:U$
  TextConstant:"Y"
  BinaryOperator:=
 400 PRINT "CHICKEN !!!" : PRINT : END

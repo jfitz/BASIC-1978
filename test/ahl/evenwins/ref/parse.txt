@@ -105,7 +105,7 @@
  ITEMS
  CarriageControl:NL
 230 IF C=0 THEN 250
- ScalarValue:C
+ Value:C
  NumericConstant:0
  BinaryOperator:=
 240 GOTO 1060
@@ -124,32 +124,32 @@
  ITEMS
  TextConstant:"TOTAL="
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:NL
  ITEMS
  CarriageControl:NL
 280 M1=M1+M
  Reference:M1
- ScalarValue:M1
- ScalarValue:M
+ Value:M1
+ Value:M
  BinaryOperator:+
  AssignmentOperator:=
 290 T=T-M
  Reference:T
- ScalarValue:T
- ScalarValue:M
+ Value:T
+ Value:M
  BinaryOperator:-
  AssignmentOperator:=
 300 PRINT "I PICK UP";M;"MARBLES."
  ITEMS
  TextConstant:"I PICK UP"
  CarriageControl:;
- ScalarValue:M
+ Value:M
  CarriageControl:;
  TextConstant:"MARBLES."
  CarriageControl:NL
 310 IF T=0 THEN 880
- ScalarValue:T
+ Value:T
  NumericConstant:0
  BinaryOperator:=
 320 PRINT:PRINT "TOTAL=";T
@@ -158,7 +158,7 @@
  ITEMS
  TextConstant:"TOTAL="
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:NL
 330 PRINT
  ITEMS
@@ -167,7 +167,7 @@
  ITEMS
  TextConstant:"     AND WHAT IS YOUR NEXT MOVE, MY TOTAL IS"
  CarriageControl:;
- ScalarValue:M1
+ Value:M1
  CarriageControl:NL
 350 INPUT Y
  Reference:Y
@@ -175,16 +175,16 @@
  ITEMS
  CarriageControl:NL
 370 IF Y<1 THEN 1160
- ScalarValue:Y
+ Value:Y
  NumericConstant:1
  BinaryOperator:<
 380 IF Y>4 THEN 1160
- ScalarValue:Y
+ Value:Y
  NumericConstant:4
  BinaryOperator:>
 390 IF Y<=T THEN 430
- ScalarValue:Y
- ScalarValue:T
+ Value:Y
+ Value:T
  BinaryOperator:<=
 400 PRINT "     YOU HAVE TRIED TO TAKE MORE MARBLES THAN THERE ARE"
  ITEMS
@@ -198,25 +198,25 @@
  LineNumber:350
 430 Y1=Y1+Y
  Reference:Y1
- ScalarValue:Y1
- ScalarValue:Y
+ Value:Y1
+ Value:Y
  BinaryOperator:+
  AssignmentOperator:=
 440 T=T-Y
  Reference:T
- ScalarValue:T
- ScalarValue:Y
+ Value:T
+ Value:Y
  BinaryOperator:-
  AssignmentOperator:=
 450 IF T=0 THEN 880
- ScalarValue:T
+ Value:T
  NumericConstant:0
  BinaryOperator:=
 460 PRINT "TOTAL=";T
  ITEMS
  TextConstant:"TOTAL="
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:NL
 470 PRINT
  ITEMS
@@ -225,17 +225,17 @@
  ITEMS
  TextConstant:"YOUR TOTAL IS"
  CarriageControl:;
- ScalarValue:Y1
+ Value:Y1
  CarriageControl:NL
 490 IF T<.5 THEN 880
- ScalarValue:T
+ Value:T
  NumericConstant:.5
  BinaryOperator:<
 500 R=T-6*INT(T/6)
  Reference:R
- ScalarValue:T
+ Value:T
  NumericConstant:6
- ScalarValue:T
+ Value:T
  NumericConstant:6
  BinaryOperator:/
  FunctionInt
@@ -243,50 +243,50 @@
  BinaryOperator:-
  AssignmentOperator:=
 510 IF INT(Y1/2)=Y1/2 THEN 700
- ScalarValue:Y1
+ Value:Y1
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
- ScalarValue:Y1
+ Value:Y1
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:=
 520 IF T<4.2 THEN 580
- ScalarValue:T
+ Value:T
  NumericConstant:4.2
  BinaryOperator:<
 530 IF R>3.4 THEN 620
- ScalarValue:R
+ Value:R
  NumericConstant:3.4
  BinaryOperator:>
 540 M=R+1
  Reference:M
- ScalarValue:R
+ Value:R
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 550 M1=M1+M
  Reference:M1
- ScalarValue:M1
- ScalarValue:M
+ Value:M1
+ Value:M
  BinaryOperator:+
  AssignmentOperator:=
 560 T=T-M
  Reference:T
- ScalarValue:T
- ScalarValue:M
+ Value:T
+ Value:M
  BinaryOperator:-
  AssignmentOperator:=
 570 GOTO 300
  LineNumber:300
 580 M=T
  Reference:M
- ScalarValue:T
+ Value:T
  AssignmentOperator:=
 590 T=T-M
  Reference:T
- ScalarValue:T
- ScalarValue:M
+ Value:T
+ Value:M
  BinaryOperator:-
  AssignmentOperator:=
 600 GOTO 830
@@ -294,11 +294,11 @@
 610 REM     250 IS WHERE I WIN.
  Remark:    250 IS WHERE I WIN.
 620 IF R<4.7 THEN 660
- ScalarValue:R
+ Value:R
  NumericConstant:4.7
  BinaryOperator:<
 630 IF R>3.5 THEN 660
- ScalarValue:R
+ Value:R
  NumericConstant:3.5
  BinaryOperator:>
 640 M=1
@@ -313,14 +313,14 @@
  AssignmentOperator:=
 670 T=T-M
  Reference:T
- ScalarValue:T
- ScalarValue:M
+ Value:T
+ Value:M
  BinaryOperator:-
  AssignmentOperator:=
 680 M1=M1+M
  Reference:M1
- ScalarValue:M1
- ScalarValue:M
+ Value:M1
+ Value:M
  BinaryOperator:+
  AssignmentOperator:=
 690 GOTO 300
@@ -328,33 +328,33 @@
 700 REM     I AM READY TO ENCODE THE STRAT FOR WHEN OPP TOT IS EVEN
  Remark:    I AM READY TO ENCODE THE STRAT FOR WHEN OPP TOT IS EVEN
 710 IF R<1.5 THEN 1020
- ScalarValue:R
+ Value:R
  NumericConstant:1.5
  BinaryOperator:<
 720 IF R>5.3 THEN 1020
- ScalarValue:R
+ Value:R
  NumericConstant:5.3
  BinaryOperator:>
 730 M=R-1
  Reference:M
- ScalarValue:R
+ Value:R
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 740 M1=M1+M
  Reference:M1
- ScalarValue:M1
- ScalarValue:M
+ Value:M1
+ Value:M
  BinaryOperator:+
  AssignmentOperator:=
 750 T=T-M
  Reference:T
- ScalarValue:T
- ScalarValue:M
+ Value:T
+ Value:M
  BinaryOperator:-
  AssignmentOperator:=
 760 IF T<.2 THEN 790
- ScalarValue:T
+ Value:T
  NumericConstant:.2
  BinaryOperator:<
 770 REM     IS # ZERO HERE
@@ -367,7 +367,7 @@
  ITEMS
  TextConstant:"I PICK UP"
  CarriageControl:;
- ScalarValue:M
+ Value:M
  CarriageControl:;
  TextConstant:"MARBLES."
  CarriageControl:NL
@@ -382,7 +382,7 @@
  ITEMS
  TextConstant:"I PICK UP"
  CarriageControl:;
- ScalarValue:M
+ Value:M
  CarriageControl:;
  TextConstant:"MARBLES."
  CarriageControl:NL
@@ -395,8 +395,8 @@
  CarriageControl:NL
 870 M1=M1+M
  Reference:M1
- ScalarValue:M1
- ScalarValue:M
+ Value:M1
+ Value:M
  BinaryOperator:+
  AssignmentOperator:=
 880 PRINT "THAT IS ALL OF THE MARBLES."
@@ -410,21 +410,21 @@
  ITEMS
  TextConstant:" MY TOTAL IS"
  CarriageControl:;
- ScalarValue:M1
+ Value:M1
  CarriageControl:;
  TextConstant:", YOUR TOTAL IS"
  CarriageControl:;
- ScalarValue:Y1
+ Value:Y1
  CarriageControl:NL
 910 PRINT
  ITEMS
  CarriageControl:NL
 920 IF INT(M1/2)=M1/2 THEN 950
- ScalarValue:M1
+ Value:M1
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
- ScalarValue:M1
+ Value:M1
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:=
@@ -445,7 +445,7 @@
 970 INPUT A1
  Reference:A1
 980 IF A1=0 THEN 1030
- ScalarValue:A1
+ Value:A1
  NumericConstant:0
  BinaryOperator:=
 990 M1=0
@@ -486,7 +486,7 @@
  ITEMS
  TextConstant:"TOTAL="
  CarriageControl:;
- ScalarValue:T
+ Value:T
  CarriageControl:NL
 1110 PRINT
  ITEMS

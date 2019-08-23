@@ -38,7 +38,7 @@
 206 INPUT Z$
  Reference:Z$
 207 IF Z$="NO" THEN 400
- ScalarValue:Z$
+ Value:Z$
  TextConstant:"NO"
  BinaryOperator:=
 210 PRINT "HELLO, ALL YOU BLOODLOVERS AND AFICIONADOS."
@@ -147,7 +147,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 463 READ L$(I)
- ScalarValue:I
+ Value:I
  Reference:L$
 467 NEXT I
  Variable:I
@@ -161,17 +161,17 @@
  ITEMS
  TextConstant:"YOU HAVE DRAWN A "
  CarriageControl:;
- ScalarValue:A
- ScalarValue:L$
+ Value:A
+ Value:L$
  CarriageControl:;
  TextConstant:" BULL."
  CarriageControl:NL
 500 IF A>4 THEN 530
- ScalarValue:A
+ Value:A
  NumericConstant:4
  BinaryOperator:>
 510 IF A<2 THEN 550
- ScalarValue:A
+ Value:A
  NumericConstant:2
  BinaryOperator:<
 520 GOTO 570
@@ -205,7 +205,7 @@
 610 D(1)=C
  NumericConstant:1
  Reference:D
- ScalarValue:C
+ Value:C
  AssignmentOperator:=
 630 A$="TOREAD"
  Reference:A$
@@ -220,7 +220,7 @@
 650 D(2)=C
  NumericConstant:2
  Reference:D
- ScalarValue:C
+ Value:C
  AssignmentOperator:=
 660 PRINT
  ITEMS
@@ -229,14 +229,14 @@
  ITEMS
  CarriageControl:NL
 680 IF Z=1 THEN 1310
- ScalarValue:Z
+ Value:Z
  NumericConstant:1
  BinaryOperator:=
 690 D(3)=D(3)+1
  NumericConstant:3
  Reference:D
  NumericConstant:3
- ScalarValue:D
+ Value:D
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -245,11 +245,11 @@
  TextConstant:"PASS NUMBER"
  CarriageControl:;
  NumericConstant:3
- ScalarValue:D
+ Value:D
  CarriageControl:NL
 710 IF D(3)<3 THEN 760
  NumericConstant:3
- ScalarValue:D
+ Value:D
  NumericConstant:3
  BinaryOperator:<
 720 PRINT "HERE COMES THE BULL.  TRY FOR A KILL";
@@ -259,7 +259,7 @@
 730 GOSUB 1930
  LineNumber:1930
 735 IF Z1=1 THEN 1130
- ScalarValue:Z1
+ Value:Z1
  NumericConstant:1
  BinaryOperator:=
 740 PRINT "CAPE MOVE";
@@ -279,7 +279,7 @@
 780 GOSUB 1930
  LineNumber:1930
 785 IF Z1=1 THEN 1130
- ScalarValue:Z1
+ Value:Z1
  NumericConstant:1
  BinaryOperator:=
 790 PRINT "WHAT MOVE DO YOU MAKE WITH THE CAPE";
@@ -289,13 +289,13 @@
 800 INPUT E
  Reference:E
 810 IF E<>INT(ABS(E)) THEN 830
- ScalarValue:E
- ScalarValue:E
+ Value:E
+ Value:E
  FunctionAbs
  FunctionInt
  BinaryOperator:<>
 820 IF E<3 THEN 850
- ScalarValue:E
+ Value:E
  NumericConstant:3
  BinaryOperator:<
 830 PRINT "DON'T PANIC, YOU IDIOT!  PUT DOWN A CORRECT NUMBER"
@@ -307,11 +307,11 @@
 850 REM
  Remark:
 860 IF E=0 THEN 920
- ScalarValue:E
+ Value:E
  NumericConstant:0
  BinaryOperator:=
 870 IF E=1 THEN 900
- ScalarValue:E
+ Value:E
  NumericConstant:1
  BinaryOperator:=
 880 M=.5
@@ -332,16 +332,16 @@
  AssignmentOperator:=
 930 L=L+M
  Reference:L
- ScalarValue:L
- ScalarValue:M
+ Value:L
+ Value:M
  BinaryOperator:+
  AssignmentOperator:=
 940 F=(6-A+M/10)*RND(1)/((D(1)+D(2)+D(3)/10)*5)
  Reference:F
  NumericConstant:6
- ScalarValue:A
+ Value:A
  BinaryOperator:-
- ScalarValue:M
+ Value:M
  NumericConstant:10
  BinaryOperator:/
  BinaryOperator:+
@@ -349,12 +349,12 @@
  FunctionRnd
  BinaryOperator:*
  NumericConstant:1
- ScalarValue:D
+ Value:D
  NumericConstant:2
- ScalarValue:D
+ Value:D
  BinaryOperator:+
  NumericConstant:3
- ScalarValue:D
+ Value:D
  NumericConstant:10
  BinaryOperator:/
  BinaryOperator:+
@@ -363,7 +363,7 @@
  BinaryOperator:/
  AssignmentOperator:=
 950 IF F<.51 THEN 660
- ScalarValue:F
+ Value:F
  NumericConstant:.51
  BinaryOperator:<
 960 PRINT "THE BULL HAS GORED YOU!"
@@ -399,7 +399,7 @@
 1030 GOSUB 1930
  LineNumber:1930
 1035 IF Z1=2 THEN 1070
- ScalarValue:Z1
+ Value:Z1
  NumericConstant:2
  BinaryOperator:=
 1040 PRINT "COWARD"
@@ -456,11 +456,11 @@
 1160 INPUT H
  Reference:H
 1170 IF H=4 THEN 1230
- ScalarValue:H
+ Value:H
  NumericConstant:4
  BinaryOperator:=
 1180 IF H=5 THEN 1230
- ScalarValue:H
+ Value:H
  NumericConstant:5
  BinaryOperator:=
 1190 PRINT "YOU PANICKED.  THE BULL GORED YOU."
@@ -472,7 +472,7 @@
 1230 K=(6-A)*10*RND(1)/((D(1)+D(2))*5*D(3))
  Reference:K
  NumericConstant:6
- ScalarValue:A
+ Value:A
  BinaryOperator:-
  NumericConstant:10
  BinaryOperator:*
@@ -480,23 +480,23 @@
  FunctionRnd
  BinaryOperator:*
  NumericConstant:1
- ScalarValue:D
+ Value:D
  NumericConstant:2
- ScalarValue:D
+ Value:D
  BinaryOperator:+
  NumericConstant:5
  BinaryOperator:*
  NumericConstant:3
- ScalarValue:D
+ Value:D
  BinaryOperator:*
  BinaryOperator:/
  AssignmentOperator:=
 1240 IF J=4 THEN 1290
- ScalarValue:J
+ Value:J
  NumericConstant:4
  BinaryOperator:=
 1250 IF K>.2 THEN 960
- ScalarValue:K
+ Value:K
  NumericConstant:.2
  BinaryOperator:>
 1260 PRINT "YOU KILLED THE BULL!"
@@ -511,7 +511,7 @@
 1280 GOTO 1320
  LineNumber:1320
 1290 IF K>.8 THEN 960
- ScalarValue:K
+ Value:K
  NumericConstant:.8
  BinaryOperator:>
 1300 GOTO 1260
@@ -527,7 +527,7 @@
  CarriageControl:NL
 1340 IF D(4)<>0 THEN 1390
  NumericConstant:4
- ScalarValue:D
+ Value:D
  NumericConstant:0
  BinaryOperator:<>
 1350 PRINT "THE CROWD BOOS FOR TEN MINUTES.  IF YOU EVER DARE TO SHOW"
@@ -545,47 +545,47 @@
 1380 GOTO 1580
  LineNumber:1580
 1390 DEF FNC(Q)=FND(Q)*RND(1)
- ScalarValue:Q
+ Value:Q
  UserFunction
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
 1395 DEF FND(Q)=(4.5+L/6-(D(1)+D(2))*2.5+4*D(4)+2*D(5)-D(3)^2/120-A)
  NumericConstant:4.5
- ScalarValue:L
+ Value:L
  NumericConstant:6
  BinaryOperator:/
  BinaryOperator:+
  NumericConstant:1
- ScalarValue:D
+ Value:D
  NumericConstant:2
- ScalarValue:D
+ Value:D
  BinaryOperator:+
  NumericConstant:2.5
  BinaryOperator:*
  BinaryOperator:-
  NumericConstant:4
  NumericConstant:4
- ScalarValue:D
+ Value:D
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:2
  NumericConstant:5
- ScalarValue:D
+ Value:D
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:3
- ScalarValue:D
+ Value:D
  NumericConstant:2
  BinaryOperator:^
  NumericConstant:120
  BinaryOperator:/
  BinaryOperator:-
- ScalarValue:A
+ Value:A
  BinaryOperator:-
 1400 IF D(4)<>2 THEN 1430
  NumericConstant:4
- ScalarValue:D
+ Value:D
  NumericConstant:2
  BinaryOperator:<>
 1410 PRINT "THE CROWD CHEERS WILDLY!"
@@ -596,7 +596,7 @@
  LineNumber:1450
 1430 IF D(5)<>2 THEN 1450
  NumericConstant:5
- ScalarValue:D
+ Value:D
  NumericConstant:2
  BinaryOperator:<>
 1440 PRINT "THE CROWD CHEERS!":PRINT
@@ -610,17 +610,17 @@
  TextConstant:"THE CROWD AWARDS YOU"
  CarriageControl:NL
 1460 IF FNC(Q)<2.4 THEN 1570
- ScalarValue:Q
+ Value:Q
  UserFunction
  NumericConstant:2.4
  BinaryOperator:<
 1470 IF FNC(Q)<4.9 THEN 1550
- ScalarValue:Q
+ Value:Q
  UserFunction
  NumericConstant:4.9
  BinaryOperator:<
 1480 IF FNC(Q)<7.4 THEN 1520
- ScalarValue:Q
+ Value:Q
  UserFunction
  NumericConstant:7.4
  BinaryOperator:<
@@ -668,26 +668,26 @@
 1610 B=3/A*RND(1)
  Reference:B
  NumericConstant:3
- ScalarValue:A
+ Value:A
  BinaryOperator:/
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
  AssignmentOperator:=
 1620 IF B<.37 THEN 1740
- ScalarValue:B
+ Value:B
  NumericConstant:.37
  BinaryOperator:<
 1630 IF B<.5 THEN 1720
- ScalarValue:B
+ Value:B
  NumericConstant:.5
  BinaryOperator:<
 1640 IF B<.63 THEN 1700
- ScalarValue:B
+ Value:B
  NumericConstant:.63
  BinaryOperator:<
 1650 IF B<.87 THEN 1680
- ScalarValue:B
+ Value:B
  NumericConstant:.87
  BinaryOperator:<
 1660 C=.1
@@ -721,7 +721,7 @@
 1750 T=INT(10*C+.2)
  Reference:T
  NumericConstant:10
- ScalarValue:C
+ Value:C
  BinaryOperator:*
  NumericConstant:.2
  BinaryOperator:+
@@ -731,46 +731,46 @@
  ITEMS
  TextConstant:"THE "
  CarriageControl:;
- ScalarValue:A$
+ Value:A$
  CarriageControl:;
- ScalarValue:B$
+ Value:B$
  CarriageControl:;
  TextConstant:" DID A "
  CarriageControl:;
- ScalarValue:T
- ScalarValue:L$
+ Value:T
+ Value:L$
  CarriageControl:;
  TextConstant:" JOB."
  CarriageControl:NL
 1770 IF 4>T THEN 1900
  NumericConstant:4
- ScalarValue:T
+ Value:T
  BinaryOperator:>
 1780 IF 5=T THEN 1870
  NumericConstant:5
- ScalarValue:T
+ Value:T
  BinaryOperator:=
 1790 ON FNA(K) GOTO 1830,1850
- ScalarValue:K
+ Value:K
  UserFunction
  LineNumber:1830
  LineNumber:1850
 1800 IF A$="TOREAD" THEN 1820
- ScalarValue:A$
+ Value:A$
  TextConstant:"TOREAD"
  BinaryOperator:=
 1810 PRINT "ONE OF THE HORSES OF THE ";A$;B$;" WAS KILLED."
  ITEMS
  TextConstant:"ONE OF THE HORSES OF THE "
  CarriageControl:;
- ScalarValue:A$
+ Value:A$
  CarriageControl:;
- ScalarValue:B$
+ Value:B$
  CarriageControl:;
  TextConstant:" WAS KILLED."
  CarriageControl:NL
 1820 ON FNA(K) GOTO 1830,1850
- ScalarValue:K
+ Value:K
  UserFunction
  LineNumber:1830
  LineNumber:1850
@@ -778,9 +778,9 @@
  ITEMS
  TextConstant:"ONE OF THE "
  CarriageControl:;
- ScalarValue:A$
+ Value:A$
  CarriageControl:;
- ScalarValue:B$
+ Value:B$
  CarriageControl:;
  TextConstant:" WAS KILLED."
  CarriageControl:NL
@@ -790,41 +790,41 @@
  ITEMS
  TextConstant:"NO "
  CarriageControl:;
- ScalarValue:A$
+ Value:A$
  CarriageControl:;
- ScalarValue:B$
+ Value:B$
  CarriageControl:;
  TextConstant:" WERE KILLED."
  CarriageControl:NL
 1860 GOTO 1900
  LineNumber:1900
 1870 IF A$="TOREAD" THEN 1890
- ScalarValue:A$
+ Value:A$
  TextConstant:"TOREAD"
  BinaryOperator:=
 1880 PRINT FNA(K);"OF THE HORSES OF THE ";A$;B$;" KILLED."
  ITEMS
- ScalarValue:K
+ Value:K
  UserFunction
  CarriageControl:;
  TextConstant:"OF THE HORSES OF THE "
  CarriageControl:;
- ScalarValue:A$
+ Value:A$
  CarriageControl:;
- ScalarValue:B$
+ Value:B$
  CarriageControl:;
  TextConstant:" KILLED."
  CarriageControl:NL
 1890 PRINT FNA(K);"OF THE ";A$;B$;" KILLED."
  ITEMS
- ScalarValue:K
+ Value:K
  UserFunction
  CarriageControl:;
  TextConstant:"OF THE "
  CarriageControl:;
- ScalarValue:A$
+ Value:A$
  CarriageControl:;
- ScalarValue:B$
+ Value:B$
  CarriageControl:;
  TextConstant:" KILLED."
  CarriageControl:NL
@@ -838,11 +838,11 @@
 1930 INPUT A$
  Reference:A$
 1940 IF A$="YES" THEN 1990
- ScalarValue:A$
+ Value:A$
  TextConstant:"YES"
  BinaryOperator:=
 1950 IF A$="NO" THEN 2010
- ScalarValue:A$
+ Value:A$
  TextConstant:"NO"
  BinaryOperator:=
 1970 PRINT "INCORRECT ANSWER - - PLEASE TYPE 'YES' OR 'NO'."

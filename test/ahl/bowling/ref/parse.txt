@@ -48,11 +48,11 @@
 810 INPUT Z$
  Reference:Z$
 900 IF Z$="Y" THEN 990
- ScalarValue:Z$
+ Value:Z$
  TextConstant:"Y"
  BinaryOperator:=
 960 IF Z$="N" THEN 1530
- ScalarValue:Z$
+ Value:Z$
  TextConstant:"N"
  BinaryOperator:=
 990 PRINT "THE GAME OF BOWLING TAKES MIND AND SKILL.DURING THE GAME"
@@ -99,8 +99,8 @@
  control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
- ScalarValue:I
- ScalarValue:J
+ Value:I
+ Value:J
  Reference:A
  NumericConstant:0
  AssignmentOperator:=
@@ -113,7 +113,7 @@
 2070 FOR P=1 TO R
  control: Variable:P
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:R"]
+ end:     ["Value:R"]
 2160 M=0
  Reference:M
  NumericConstant:0
@@ -133,7 +133,7 @@
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:15"]
- ScalarValue:I
+ Value:I
  Reference:C
  NumericConstant:0
  AssignmentOperator:=
@@ -170,18 +170,18 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 3150 IF X<15*J THEN 3330
- ScalarValue:X
+ Value:X
  NumericConstant:15
- ScalarValue:J
+ Value:J
  BinaryOperator:*
  BinaryOperator:<
 3240 NEXT J
  Variable:J
 3330 C(15*J-X)=1
  NumericConstant:15
- ScalarValue:J
+ Value:J
  BinaryOperator:*
- ScalarValue:X
+ Value:X
  BinaryOperator:-
  Reference:C
  NumericConstant:1
@@ -194,15 +194,15 @@
  ITEMS
  TextConstant:"PLAYER:"
  CarriageControl:
- ScalarValue:P
+ Value:P
  CarriageControl:;
  TextConstant:"FRAME:"
  CarriageControl:;
- ScalarValue:F
+ Value:F
  CarriageControl:
  TextConstant:"BALL:"
  CarriageControl:
- ScalarValue:B
+ Value:B
  CarriageControl:NL
 3690 FOR I=0 TO 3
  control: Variable:I
@@ -214,21 +214,21 @@
 3870 FOR J=1 TO 4-I
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:4", "ScalarValue:I", "BinaryOperator:-"]
+ end:     ["NumericConstant:4", "Value:I", "BinaryOperator:-"]
 3960 K=K+1
  Reference:K
- ScalarValue:K
+ Value:K
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 4050 IF C(K)=1 THEN 4320
- ScalarValue:K
- ScalarValue:C
+ Value:K
+ Value:C
  NumericConstant:1
  BinaryOperator:=
 4140 PRINT TAB(I);"+ ";
  ITEMS
- ScalarValue:I
+ Value:I
  FunctionTab
  CarriageControl:;
  TextConstant:"+ "
@@ -237,7 +237,7 @@
  LineNumber:4410
 4320 PRINT TAB(I);"O ";
  ITEMS
- ScalarValue:I
+ Value:I
  FunctionTab
  CarriageControl:;
  TextConstant:"O "
@@ -258,16 +258,16 @@
  end:     ["NumericConstant:10"]
 4860 D=D+C(I)
  Reference:D
- ScalarValue:D
- ScalarValue:I
- ScalarValue:C
+ Value:D
+ Value:I
+ Value:C
  BinaryOperator:+
  AssignmentOperator:=
 4950 NEXT I
  Variable:I
 5040 IF D-M <> 0 THEN 5220
- ScalarValue:D
- ScalarValue:M
+ Value:D
+ Value:M
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:<>
@@ -276,10 +276,10 @@
  TextConstant:"GUTTER!!"
  CarriageControl:NL
 5220 IF B<>1 OR D<>10 THEN 5490
- ScalarValue:B
+ Value:B
  NumericConstant:1
  BinaryOperator:<>
- ScalarValue:D
+ Value:D
  NumericConstant:10
  BinaryOperator:<>
  BinaryOperator:OR
@@ -292,10 +292,10 @@
  NumericConstant:3
  AssignmentOperator:=
 5490 IF B<>2 OR D<>10 THEN 5760
- ScalarValue:B
+ Value:B
  NumericConstant:2
  BinaryOperator:<>
- ScalarValue:D
+ Value:D
  NumericConstant:10
  BinaryOperator:<>
  BinaryOperator:OR
@@ -308,10 +308,10 @@
  NumericConstant:2
  AssignmentOperator:=
 5760 IF B<>2 OR D>=10 THEN 6030
- ScalarValue:B
+ Value:B
  NumericConstant:2
  BinaryOperator:<>
- ScalarValue:D
+ Value:D
  NumericConstant:10
  BinaryOperator:>=
  BinaryOperator:OR
@@ -324,10 +324,10 @@
  NumericConstant:1
  AssignmentOperator:=
 6030 IF B<>1 OR D>=10 THEN 6210
- ScalarValue:B
+ Value:B
  NumericConstant:1
  BinaryOperator:<>
- ScalarValue:D
+ Value:D
  NumericConstant:10
  BinaryOperator:>=
  BinaryOperator:OR
@@ -341,15 +341,15 @@
  ITEMS
  CarriageControl:NL
 6390 A(F*P,B)=D
- ScalarValue:F
- ScalarValue:P
+ Value:F
+ Value:P
  BinaryOperator:*
- ScalarValue:B
+ Value:B
  Reference:A
- ScalarValue:D
+ Value:D
  AssignmentOperator:=
 6480 IF B=2 THEN 7020
- ScalarValue:B
+ Value:B
  NumericConstant:2
  BinaryOperator:=
 6570 B=2
@@ -358,44 +358,44 @@
  AssignmentOperator:=
 6660 M=D
  Reference:M
- ScalarValue:D
+ Value:D
  AssignmentOperator:=
 6750 IF Q=3 THEN 6210
- ScalarValue:Q
+ Value:Q
  NumericConstant:3
  BinaryOperator:=
 6840 A(F*P,B)=D-M
- ScalarValue:F
- ScalarValue:P
+ Value:F
+ Value:P
  BinaryOperator:*
- ScalarValue:B
+ Value:B
  Reference:A
- ScalarValue:D
- ScalarValue:M
+ Value:D
+ Value:M
  BinaryOperator:-
  AssignmentOperator:=
 6930 IF Q=0 THEN 2520
- ScalarValue:Q
+ Value:Q
  NumericConstant:0
  BinaryOperator:=
 7020 A(F*P,3)=Q
- ScalarValue:F
- ScalarValue:P
+ Value:F
+ Value:P
  BinaryOperator:*
  NumericConstant:3
  Reference:A
- ScalarValue:Q
+ Value:Q
  AssignmentOperator:=
 7110 NEXT P
  Variable:P
 7200 F=F+1
  Reference:F
- ScalarValue:F
+ Value:F
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 7290 IF F<11 THEN 2070
- ScalarValue:F
+ Value:F
  NumericConstant:11
  BinaryOperator:<
 7295 PRINT "FRAMES"
@@ -410,7 +410,7 @@
  end:     ["NumericConstant:10"]
 7470 PRINT I;
  ITEMS
- ScalarValue:I
+ Value:I
  CarriageControl:;
 7560 NEXT I
  Variable:I
@@ -420,7 +420,7 @@
 7740 FOR P=1 TO R
  control: Variable:P
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:R"]
+ end:     ["Value:R"]
 7830 FOR I=1 TO 3
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -431,11 +431,11 @@
  end:     ["NumericConstant:10"]
 8010 PRINT A(J*P,I);
  ITEMS
- ScalarValue:J
- ScalarValue:P
+ Value:J
+ Value:P
  BinaryOperator:*
- ScalarValue:I
- ScalarValue:A
+ Value:I
+ Value:A
  CarriageControl:;
 8100 NEXT J
  Variable:J
@@ -458,7 +458,7 @@
 8550 INPUT A$
  Reference:A$
 8640 IF LEFT$(A$,1)="Y" THEN 2610
- ScalarValue:A$
+ Value:A$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"

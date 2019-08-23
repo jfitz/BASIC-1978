@@ -22,7 +22,7 @@
  ITEMS
  CarriageControl:NL
 5 IF A$="NO" THEN 20
- ScalarValue:A$
+ Value:A$
  TextConstant:"NO"
  BinaryOperator:=
 6 PRINT "THE GAME IS PLAYED AS FOLLOWS:":PRINT
@@ -92,13 +92,13 @@
  end:     ["NumericConstant:5"]
 40 R(1,I)=4
  NumericConstant:1
- ScalarValue:I
+ Value:I
  Reference:R
  NumericConstant:4
  AssignmentOperator:=
 50 R(0,I)=4
  NumericConstant:0
- ScalarValue:I
+ Value:I
  Reference:R
  NumericConstant:4
  AssignmentOperator:=
@@ -128,31 +128,31 @@
  BinaryOperator:+
  AssignmentOperator:=
 100 IF P=1 THEN 530
- ScalarValue:P
+ Value:P
  NumericConstant:1
  BinaryOperator:=
 110 PRINT "THERE ARE";P;"CHIPS ON THE BOARD."
  ITEMS
  TextConstant:"THERE ARE"
  CarriageControl:;
- ScalarValue:P
+ Value:P
  CarriageControl:;
  TextConstant:"CHIPS ON THE BOARD."
  CarriageControl:NL
 120 E1=E
  Reference:E1
- ScalarValue:E
+ Value:E
  AssignmentOperator:=
 130 L1=L
  Reference:L1
- ScalarValue:L
+ Value:L
  AssignmentOperator:=
 140 E=(A/2-INT(A/2))*2
  Reference:E
- ScalarValue:A
+ Value:A
  NumericConstant:2
  BinaryOperator:/
- ScalarValue:A
+ Value:A
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
@@ -162,10 +162,10 @@
  AssignmentOperator:=
 150 L=INT((P/6-INT(P/6))*6+.5)
  Reference:L
- ScalarValue:P
+ Value:P
  NumericConstant:6
  BinaryOperator:/
- ScalarValue:P
+ Value:P
  NumericConstant:6
  BinaryOperator:/
  FunctionInt
@@ -177,115 +177,115 @@
  FunctionInt
  AssignmentOperator:=
 160 IF R(E,L)>=P THEN 320
- ScalarValue:E
- ScalarValue:L
- ScalarValue:R
- ScalarValue:P
+ Value:E
+ Value:L
+ Value:R
+ Value:P
  BinaryOperator:>=
 170 M=R(E,L)
  Reference:M
- ScalarValue:E
- ScalarValue:L
- ScalarValue:R
+ Value:E
+ Value:L
+ Value:R
  AssignmentOperator:=
 180 IF M<=0 THEN 370
- ScalarValue:M
+ Value:M
  NumericConstant:0
  BinaryOperator:<=
 190 P=P-M
  Reference:P
- ScalarValue:P
- ScalarValue:M
+ Value:P
+ Value:M
  BinaryOperator:-
  AssignmentOperator:=
 200 IF M=1 THEN 510
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:=
 210 PRINT "COMPUTER TAKES";M;"CHIPS LEAVING";P;"... YOUR MOVE";
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- ScalarValue:M
+ Value:M
  CarriageControl:;
  TextConstant:"CHIPS LEAVING"
  CarriageControl:;
- ScalarValue:P
+ Value:P
  CarriageControl:;
  TextConstant:"... YOUR MOVE"
  CarriageControl:;
 220 B=B+M
  Reference:B
- ScalarValue:B
- ScalarValue:M
+ Value:B
+ Value:M
  BinaryOperator:+
  AssignmentOperator:=
 230 INPUT M
  Reference:M
 240 M=INT(M)
  Reference:M
- ScalarValue:M
+ Value:M
  FunctionInt
  AssignmentOperator:=
 250 IF M<1 THEN 450
- ScalarValue:M
+ Value:M
  NumericConstant:1
  BinaryOperator:<
 260 IF M>4 THEN 460
- ScalarValue:M
+ Value:M
  NumericConstant:4
  BinaryOperator:>
 270 IF M>P THEN 460
- ScalarValue:M
- ScalarValue:P
+ Value:M
+ Value:P
  BinaryOperator:>
 280 IF M=P THEN 360
- ScalarValue:M
- ScalarValue:P
+ Value:M
+ Value:P
  BinaryOperator:=
 290 P=P-M
  Reference:P
- ScalarValue:P
- ScalarValue:M
+ Value:P
+ Value:M
  BinaryOperator:-
  AssignmentOperator:=
 300 A=A+M
  Reference:A
- ScalarValue:A
- ScalarValue:M
+ Value:A
+ Value:M
  BinaryOperator:+
  AssignmentOperator:=
 310 GOTO 100
  LineNumber:100
 320 IF P=1 THEN 550
- ScalarValue:P
+ Value:P
  NumericConstant:1
  BinaryOperator:=
 330 PRINT "COMPUTER TAKES";P;"CHIPS."
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- ScalarValue:P
+ Value:P
  CarriageControl:;
  TextConstant:"CHIPS."
  CarriageControl:NL
 340 R(E,L)=P
- ScalarValue:E
- ScalarValue:L
+ Value:E
+ Value:L
  Reference:R
- ScalarValue:P
+ Value:P
  AssignmentOperator:=
 350 B=B+P
  Reference:B
- ScalarValue:B
- ScalarValue:P
+ Value:B
+ Value:P
  BinaryOperator:+
  AssignmentOperator:=
 360 IF B/2=INT(B/2) THEN 420
- ScalarValue:B
+ Value:B
  NumericConstant:2
  BinaryOperator:/
- ScalarValue:B
+ Value:B
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
@@ -297,18 +297,18 @@
  ITEMS
  CarriageControl:NL
 390 IF R(E,L)=1 THEN 480
- ScalarValue:E
- ScalarValue:L
- ScalarValue:R
+ Value:E
+ Value:L
+ Value:R
  NumericConstant:1
  BinaryOperator:=
 400 R(E,L)=R(E,L)-1
- ScalarValue:E
- ScalarValue:L
+ Value:E
+ Value:L
  Reference:R
- ScalarValue:E
- ScalarValue:L
- ScalarValue:R
+ Value:E
+ Value:L
+ Value:R
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -323,30 +323,30 @@
 430 GOTO 70
  LineNumber:70
 450 IF M=0 THEN 570
- ScalarValue:M
+ Value:M
  NumericConstant:0
  BinaryOperator:=
 460 PRINT M;"IS AN ILLEGAL MOVE ... YOUR MOVE";
  ITEMS
- ScalarValue:M
+ Value:M
  CarriageControl:;
  TextConstant:"IS AN ILLEGAL MOVE ... YOUR MOVE"
  CarriageControl:;
 470 GOTO 230
  LineNumber:230
 480 IF R(E1,L1)=1 THEN 70
- ScalarValue:E1
- ScalarValue:L1
- ScalarValue:R
+ Value:E1
+ Value:L1
+ Value:R
  NumericConstant:1
  BinaryOperator:=
 490 R(E1,L1)=R(E1,L1)-1
- ScalarValue:E1
- ScalarValue:L1
+ Value:E1
+ Value:L1
  Reference:R
- ScalarValue:E1
- ScalarValue:L1
- ScalarValue:R
+ Value:E1
+ Value:L1
+ Value:R
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -356,7 +356,7 @@
  ITEMS
  TextConstant:"COMPUTER TAKES 1 CHIP LEAVING"
  CarriageControl:;
- ScalarValue:P
+ Value:P
  CarriageControl:;
  TextConstant:"... YOUR MOVE"
  CarriageControl:;

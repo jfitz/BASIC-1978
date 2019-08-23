@@ -45,7 +45,7 @@
  CarriageControl:NL
 11 L1=INT(LOG(L)/LOG(2))+1
  Reference:L1
- ScalarValue:L
+ Value:L
  FunctionLog
  NumericConstant:2
  FunctionLog
@@ -58,7 +58,7 @@
  ITEMS
  TextConstant:"I'M THINKING OF A NUMBER BETWEEN 1 AND"
  CarriageControl:;
- ScalarValue:L
+ Value:L
  CarriageControl:NL
 13 G=1
  Reference:G
@@ -70,7 +70,7 @@
  CarriageControl:NL
 15 M=INT(L*RND(1)+1)
  Reference:M
- ScalarValue:L
+ Value:L
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -81,7 +81,7 @@
 20 INPUT N
  Reference:N
 21 IF N>0 THEN 25
- ScalarValue:N
+ Value:N
  NumericConstant:0
  BinaryOperator:>
 22 GOSUB 70
@@ -89,18 +89,18 @@
 23 GOTO 1
  LineNumber:1
 25 IF N=M THEN 50
- ScalarValue:N
- ScalarValue:M
+ Value:N
+ Value:M
  BinaryOperator:=
 30 G=G+1
  Reference:G
- ScalarValue:G
+ Value:G
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 31 IF N>M THEN 40
- ScalarValue:N
- ScalarValue:M
+ Value:N
+ Value:M
  BinaryOperator:>
 32 PRINT "TOO LOW. TRY A BIGGER ANSWER."
  ITEMS
@@ -118,23 +118,23 @@
  ITEMS
  TextConstant:"THAT'S IT! YOU GOT IT IN"
  CarriageControl:;
- ScalarValue:G
+ Value:G
  CarriageControl:;
  TextConstant:"TRIES."
  CarriageControl:NL
 52 IF G<L1 THEN 58
- ScalarValue:G
- ScalarValue:L1
+ Value:G
+ Value:L1
  BinaryOperator:<
 54 IF G=L1 THEN 60
- ScalarValue:G
- ScalarValue:L1
+ Value:G
+ Value:L1
  BinaryOperator:=
 56 PRINT "YOU SHOULD HAVE BEEN ABLE TO GET IT IN ONLY";L1
  ITEMS
  TextConstant:"YOU SHOULD HAVE BEEN ABLE TO GET IT IN ONLY"
  CarriageControl:;
- ScalarValue:L1
+ Value:L1
  CarriageControl:NL
 57 GOTO 65
  LineNumber:65

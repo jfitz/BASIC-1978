@@ -27,7 +27,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:64"]
 12 READ S(I)
- ScalarValue:I
+ Value:I
  Reference:S
 13 NEXT I
  Variable:I
@@ -106,11 +106,11 @@
 22 INPUT "DO YOU WANT INSTRUCTIONS";W$
  Reference:W$
 23 IF W$="NO" THEN 30
- ScalarValue:W$
+ Value:W$
  TextConstant:"NO"
  BinaryOperator:=
 24 IF W$="YES" THEN 28
- ScalarValue:W$
+ Value:W$
  TextConstant:"YES"
  BinaryOperator:=
 25 PRINT "PLEASE ANSWER 'YES' OR 'NO'."
@@ -134,31 +134,31 @@
 110 INPUT M1
  Reference:M1
 115 IF M1=0 THEN 232
- ScalarValue:M1
+ Value:M1
  NumericConstant:0
  BinaryOperator:=
 120 T1=INT(M1/10)
  Reference:T1
- ScalarValue:M1
+ Value:M1
  NumericConstant:10
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 130 U1=M1-10*T1
  Reference:U1
- ScalarValue:M1
+ Value:M1
  NumericConstant:10
- ScalarValue:T1
+ Value:T1
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 140 IF U1=1 THEN 200
- ScalarValue:U1
+ Value:U1
  NumericConstant:1
  BinaryOperator:=
 150 IF U1=T1 THEN 200
- ScalarValue:U1
- ScalarValue:T1
+ Value:U1
+ Value:T1
  BinaryOperator:=
 160 PRINT "PLEASE READ THE DIRECTIONS AGAIN."
  ITEMS
@@ -179,10 +179,10 @@
  ITEMS
  TextConstant:"COMPUTER MOVES TO SQUARE"
  CarriageControl:;
- ScalarValue:M
+ Value:M
  CarriageControl:NL
 215 IF M=158 THEN 3400
- ScalarValue:M
+ Value:M
  NumericConstant:158
  BinaryOperator:=
 220 PRINT "WHAT IS YOUR MOVE";
@@ -192,7 +192,7 @@
 230 INPUT M1
  Reference:M1
 231 IF M1<>0 THEN 239
- ScalarValue:M1
+ Value:M1
  NumericConstant:0
  BinaryOperator:<>
 232 PRINT
@@ -208,60 +208,60 @@
 235 GOTO 4000
  LineNumber:4000
 239 IF M1<=M THEN 3200
- ScalarValue:M1
- ScalarValue:M
+ Value:M1
+ Value:M
  BinaryOperator:<=
 240 T1=INT(M1/10)
  Reference:T1
- ScalarValue:M1
+ Value:M1
  NumericConstant:10
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 250 U1=M1-10*T1
  Reference:U1
- ScalarValue:M1
+ Value:M1
  NumericConstant:10
- ScalarValue:T1
+ Value:T1
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 260 P=U1-U
  Reference:P
- ScalarValue:U1
- ScalarValue:U
+ Value:U1
+ Value:U
  BinaryOperator:-
  AssignmentOperator:=
 270 IF P<>0 THEN 300
- ScalarValue:P
+ Value:P
  NumericConstant:0
  BinaryOperator:<>
 280 L=T1-T
  Reference:L
- ScalarValue:T1
- ScalarValue:T
+ Value:T1
+ Value:T
  BinaryOperator:-
  AssignmentOperator:=
 290 IF L<=0 THEN 3200
- ScalarValue:L
+ Value:L
  NumericConstant:0
  BinaryOperator:<=
 295 GOTO 200
  LineNumber:200
 300 IF T1-T <>P THEN 320
- ScalarValue:T1
- ScalarValue:T
+ Value:T1
+ Value:T
  BinaryOperator:-
- ScalarValue:P
+ Value:P
  BinaryOperator:<>
 310 GOTO 200
  LineNumber:200
 320 IF T1-T <>2*P THEN 3200
- ScalarValue:T1
- ScalarValue:T
+ Value:T1
+ Value:T
  BinaryOperator:-
  NumericConstant:2
- ScalarValue:P
+ Value:P
  BinaryOperator:*
  BinaryOperator:<>
 330 GOTO 200
@@ -269,31 +269,31 @@
 1990 REM     LOCATE MOVE FOR COMPUTER
  Remark:    LOCATE MOVE FOR COMPUTER
 2000 IF M1=41 THEN 2180
- ScalarValue:M1
+ Value:M1
  NumericConstant:41
  BinaryOperator:=
 2010 IF M1=44 THEN 2180
- ScalarValue:M1
+ Value:M1
  NumericConstant:44
  BinaryOperator:=
 2020 IF M1=73 THEN 2180
- ScalarValue:M1
+ Value:M1
  NumericConstant:73
  BinaryOperator:=
 2030 IF M1=75 THEN 2180
- ScalarValue:M1
+ Value:M1
  NumericConstant:75
  BinaryOperator:=
 2040 IF M1=126 THEN 2180
- ScalarValue:M1
+ Value:M1
  NumericConstant:126
  BinaryOperator:=
 2050 IF M1=127 THEN 2180
- ScalarValue:M1
+ Value:M1
  NumericConstant:127
  BinaryOperator:=
 2060 IF M1=158 THEN 3300
- ScalarValue:M1
+ Value:M1
  NumericConstant:158
  BinaryOperator:=
 2065 C=0
@@ -307,42 +307,42 @@
  step:    ["NumericConstant:1", "UnaryOperator:-"]
 2080 U=U1
  Reference:U
- ScalarValue:U1
+ Value:U1
  AssignmentOperator:=
 2090 T=T1+K
  Reference:T
- ScalarValue:T1
- ScalarValue:K
+ Value:T1
+ Value:K
  BinaryOperator:+
  AssignmentOperator:=
 2100 GOSUB 3500
  LineNumber:3500
 2105 IF C=1 THEN 2160
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:=
 2110 U=U+K
  Reference:U
- ScalarValue:U
- ScalarValue:K
+ Value:U
+ Value:K
  BinaryOperator:+
  AssignmentOperator:=
 2120 GOSUB 3500
  LineNumber:3500
 2125 IF C=1 THEN 2160
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:=
 2130 T=T+K
  Reference:T
- ScalarValue:T
- ScalarValue:K
+ Value:T
+ Value:K
  BinaryOperator:+
  AssignmentOperator:=
 2140 GOSUB 3500
  LineNumber:3500
 2145 IF C=1 THEN 2160
- ScalarValue:C
+ Value:C
  NumericConstant:1
  BinaryOperator:=
 2150 NEXT K
@@ -367,73 +367,73 @@
  FunctionRnd
  AssignmentOperator:=
 3010 IF Z>.6 THEN 3110
- ScalarValue:Z
+ Value:Z
  NumericConstant:.6
  BinaryOperator:>
 3020 IF Z>.3 THEN 3070
- ScalarValue:Z
+ Value:Z
  NumericConstant:.3
  BinaryOperator:>
 3030 U=U1
  Reference:U
- ScalarValue:U1
+ Value:U1
  AssignmentOperator:=
 3040 T=T1+1
  Reference:T
- ScalarValue:T1
+ Value:T1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3050 M=10*T+U
  Reference:M
  NumericConstant:10
- ScalarValue:T
+ Value:T
  BinaryOperator:*
- ScalarValue:U
+ Value:U
  BinaryOperator:+
  AssignmentOperator:=
 3060 RETURN
  
 3070 U=U1+1
  Reference:U
- ScalarValue:U1
+ Value:U1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3080 T=T1+2
  Reference:T
- ScalarValue:T1
+ Value:T1
  NumericConstant:2
  BinaryOperator:+
  AssignmentOperator:=
 3090 M=10*T+U
  Reference:M
  NumericConstant:10
- ScalarValue:T
+ Value:T
  BinaryOperator:*
- ScalarValue:U
+ Value:U
  BinaryOperator:+
  AssignmentOperator:=
 3100 RETURN
  
 3110 U=U1+1
  Reference:U
- ScalarValue:U1
+ Value:U1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3120 T=T1+1
  Reference:T
- ScalarValue:T1
+ Value:T1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3130 M=10*T+U
  Reference:M
  NumericConstant:10
- ScalarValue:T
+ Value:T
  BinaryOperator:*
- ScalarValue:U
+ Value:U
  BinaryOperator:+
  AssignmentOperator:=
 3140 RETURN
@@ -501,29 +501,29 @@
 3500 M=10*T+U
  Reference:M
  NumericConstant:10
- ScalarValue:T
+ Value:T
  BinaryOperator:*
- ScalarValue:U
+ Value:U
  BinaryOperator:+
  AssignmentOperator:=
 3510 IF M=158 THEN 3570
- ScalarValue:M
+ Value:M
  NumericConstant:158
  BinaryOperator:=
 3520 IF M=127 THEN 3570
- ScalarValue:M
+ Value:M
  NumericConstant:127
  BinaryOperator:=
 3530 IF M=126 THEN 3570
- ScalarValue:M
+ Value:M
  NumericConstant:126
  BinaryOperator:=
 3540 IF M=75 THEN 3570
- ScalarValue:M
+ Value:M
  NumericConstant:75
  BinaryOperator:=
 3550 IF M=73 THEN 3570
- ScalarValue:M
+ Value:M
  NumericConstant:73
  BinaryOperator:=
 3560 RETURN
@@ -546,11 +546,11 @@
  ITEMS
  CarriageControl:NL
 4030 IF Q$="YES" THEN 30 
- ScalarValue:Q$
+ Value:Q$
  TextConstant:"YES"
  BinaryOperator:=
 4040 IF Q$="NO" THEN 4050
- ScalarValue:Q$
+ Value:Q$
  TextConstant:"NO"
  BinaryOperator:=
 4042 PRINT "PLEASE ANSWER 'YES' OR 'NO'."
@@ -643,15 +643,15 @@
 5185 I=8*A+B
  Reference:I
  NumericConstant:8
- ScalarValue:A
+ Value:A
  BinaryOperator:*
- ScalarValue:B
+ Value:B
  BinaryOperator:+
  AssignmentOperator:=
 5190 PRINT S(I);
  ITEMS
- ScalarValue:I
- ScalarValue:S
+ Value:I
+ Value:S
  CarriageControl:;
 5200 NEXT B
  Variable:B

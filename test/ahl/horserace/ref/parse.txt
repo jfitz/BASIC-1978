@@ -37,7 +37,7 @@
 250 INPUT X$
  Reference:X$
 260 IF X$="NO" THEN 320
- ScalarValue:X$
+ Value:X$
  TextConstant:"NO"
  BinaryOperator:=
 270 PRINT"UP TO 10 MAY PLAY.  A TABLE OF ODDS WILL BE PRINTED.  YOU"
@@ -72,9 +72,9 @@
 350 FOR A=1 TO C
  control: Variable:A
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:C"]
+ end:     ["Value:C"]
 360 INPUT W$(A)
- ScalarValue:A
+ Value:A
  Reference:W$
 370 NEXT A
  Variable:A
@@ -97,7 +97,7 @@
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
- ScalarValue:I
+ Value:I
  Reference:S
  NumericConstant:0
  AssignmentOperator:=
@@ -111,7 +111,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 440 LET D(A)=INT(10*RND(1)+1)
- ScalarValue:A
+ Value:A
  Reference:D
  NumericConstant:10
  NumericConstant:1
@@ -129,9 +129,9 @@
  end:     ["NumericConstant:8"]
 470 LET R=R+D(A)
  Reference:R
- ScalarValue:R
- ScalarValue:A
- ScalarValue:D
+ Value:R
+ Value:A
+ Value:D
  BinaryOperator:+
  AssignmentOperator:=
 480 NEXT A
@@ -182,15 +182,15 @@
  end:     ["NumericConstant:8"]
 580 PRINT V$(N),,N,R/D(N);":1"
  ITEMS
- ScalarValue:N
- ScalarValue:V$
+ Value:N
+ Value:V$
  CarriageControl:,
  CarriageControl:,
- ScalarValue:N
+ Value:N
  CarriageControl:,
- ScalarValue:R
- ScalarValue:N
- ScalarValue:D
+ Value:R
+ Value:N
+ Value:D
  BinaryOperator:/
  CarriageControl:;
  TextConstant:":1"
@@ -208,25 +208,25 @@
 620 FOR J=1 TO C
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:C"]
+ end:     ["Value:C"]
 630 PRINT W$(J);
  ITEMS
- ScalarValue:J
- ScalarValue:W$
+ Value:J
+ Value:W$
  CarriageControl:;
 640 INPUT Q(J),P(J)
- ScalarValue:J
+ Value:J
  Reference:Q
- ScalarValue:J
+ Value:J
  Reference:P
 650 IF P(J)<1 THEN 670
- ScalarValue:J
- ScalarValue:P
+ Value:J
+ Value:P
  NumericConstant:1
  BinaryOperator:<
 660 IF P(J)<100000 THEN 690
- ScalarValue:J
- ScalarValue:P
+ Value:J
+ Value:P
  NumericConstant:100000
  BinaryOperator:<
 670 PRINT"  YOU CAN'T DO THAT!"
@@ -254,16 +254,16 @@
  end:     ["NumericConstant:8"]
 740 LET M=I
  Reference:M
- ScalarValue:I
+ Value:I
  AssignmentOperator:=
 750 LET M(I)=M
- ScalarValue:I
+ Value:I
  Reference:M
- ScalarValue:M
+ Value:M
  AssignmentOperator:=
 760 LET Y(M(I))=INT(100*RND(1)+1)
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  Reference:Y
  NumericConstant:100
  NumericConstant:1
@@ -274,112 +274,112 @@
  FunctionInt
  AssignmentOperator:=
 770 IF Y(M(I))<10 THEN 860
- ScalarValue:I
- ScalarValue:M
- ScalarValue:Y
+ Value:I
+ Value:M
+ Value:Y
  NumericConstant:10
  BinaryOperator:<
 780 LET S=INT(R/D(I)+.5)
  Reference:S
- ScalarValue:R
- ScalarValue:I
- ScalarValue:D
+ Value:R
+ Value:I
+ Value:D
  BinaryOperator:/
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
 790 IF Y(M(I))<S+17 THEN 880
- ScalarValue:I
- ScalarValue:M
- ScalarValue:Y
- ScalarValue:S
+ Value:I
+ Value:M
+ Value:Y
+ Value:S
  NumericConstant:17
  BinaryOperator:+
  BinaryOperator:<
 800 IF Y(M(I))<S+37 THEN 900
- ScalarValue:I
- ScalarValue:M
- ScalarValue:Y
- ScalarValue:S
+ Value:I
+ Value:M
+ Value:Y
+ Value:S
  NumericConstant:37
  BinaryOperator:+
  BinaryOperator:<
 810 IF Y(M(I))<S+57 THEN 920
- ScalarValue:I
- ScalarValue:M
- ScalarValue:Y
- ScalarValue:S
+ Value:I
+ Value:M
+ Value:Y
+ Value:S
  NumericConstant:57
  BinaryOperator:+
  BinaryOperator:<
 820 IF Y(M(I))<77+S THEN 940
- ScalarValue:I
- ScalarValue:M
- ScalarValue:Y
+ Value:I
+ Value:M
+ Value:Y
  NumericConstant:77
- ScalarValue:S
+ Value:S
  BinaryOperator:+
  BinaryOperator:<
 830 IF Y(M(I))<S+92 THEN 960
- ScalarValue:I
- ScalarValue:M
- ScalarValue:Y
- ScalarValue:S
+ Value:I
+ Value:M
+ Value:Y
+ Value:S
  NumericConstant:92
  BinaryOperator:+
  BinaryOperator:<
 840 LET Y(M(I))=7
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  Reference:Y
  NumericConstant:7
  AssignmentOperator:=
 850 GOTO 970
  LineNumber:970
 860 LET Y(M(I))=1
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  Reference:Y
  NumericConstant:1
  AssignmentOperator:=
 870 GOTO 970
  LineNumber:970
 880 LET Y(M(I))=2
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  Reference:Y
  NumericConstant:2
  AssignmentOperator:=
 890 GOTO 970
  LineNumber:970
 900 LET Y(M(I))=3
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  Reference:Y
  NumericConstant:3
  AssignmentOperator:=
 910 GOTO 970
  LineNumber:970
 920 LET Y(M(I))=4
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  Reference:Y
  NumericConstant:4
  AssignmentOperator:=
 930 GOTO 970
  LineNumber:970
 940 LET Y(M(I))=5
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  Reference:Y
  NumericConstant:5
  AssignmentOperator:=
 950 GOTO 970
  LineNumber:970
 960 LET Y(M(I))=6
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  Reference:Y
  NumericConstant:6
  AssignmentOperator:=
@@ -387,22 +387,22 @@
  Variable:I
 980 LET M=I
  Reference:M
- ScalarValue:I
+ Value:I
  AssignmentOperator:=
 990 FOR I=1 TO 8
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 1000 LET S(M(I))=S(M(I))+Y(M(I))
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  Reference:S
- ScalarValue:I
- ScalarValue:M
- ScalarValue:S
- ScalarValue:I
- ScalarValue:M
- ScalarValue:Y
+ Value:I
+ Value:M
+ Value:S
+ Value:I
+ Value:M
+ Value:Y
  BinaryOperator:+
  AssignmentOperator:=
 1010 NEXT I
@@ -418,36 +418,36 @@
 1040 FOR I=1 TO 8-L
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:8", "ScalarValue:L", "BinaryOperator:-"]
+ end:     ["NumericConstant:8", "Value:L", "BinaryOperator:-"]
 1050 IF S(M(I))<S(M(I+1))THEN 1090
- ScalarValue:I
- ScalarValue:M
- ScalarValue:S
- ScalarValue:I
+ Value:I
+ Value:M
+ Value:S
+ Value:I
  NumericConstant:1
  BinaryOperator:+
- ScalarValue:M
- ScalarValue:S
+ Value:M
+ Value:S
  BinaryOperator:<
 1060 LET H=M(I)
  Reference:H
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  AssignmentOperator:=
 1070 LET M(I)=M(I+1)
- ScalarValue:I
+ Value:I
  Reference:M
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:+
- ScalarValue:M
+ Value:M
  AssignmentOperator:=
 1080 LET M(I+1)=H
- ScalarValue:I
+ Value:I
  NumericConstant:1
  BinaryOperator:+
  Reference:M
- ScalarValue:H
+ Value:H
  AssignmentOperator:=
 1090 NEXT I
  Variable:I
@@ -456,8 +456,8 @@
 1110 LET T=S(M(8))
  Reference:T
  NumericConstant:8
- ScalarValue:M
- ScalarValue:S
+ Value:M
+ Value:S
  AssignmentOperator:=
 1120 FOR I=1 TO 8
  control: Variable:I
@@ -465,46 +465,46 @@
  end:     ["NumericConstant:8"]
 1130 LET B=S(M(I))-S(M(I-1))
  Reference:B
- ScalarValue:I
- ScalarValue:M
- ScalarValue:S
- ScalarValue:I
+ Value:I
+ Value:M
+ Value:S
+ Value:I
  NumericConstant:1
  BinaryOperator:-
- ScalarValue:M
- ScalarValue:S
+ Value:M
+ Value:S
  BinaryOperator:-
  AssignmentOperator:=
 1140 IF B=0 THEN 1190
- ScalarValue:B
+ Value:B
  NumericConstant:0
  BinaryOperator:=
 1150 FOR A=1 TO B
  control: Variable:A
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:B"]
+ end:     ["Value:B"]
 1160 PRINT
  ITEMS
  CarriageControl:NL
 1170 IF S(M(I))>27 THEN 1240
- ScalarValue:I
- ScalarValue:M
- ScalarValue:S
+ Value:I
+ Value:M
+ Value:S
  NumericConstant:27
  BinaryOperator:>
 1180 NEXT A
  Variable:A
 1190 PRINT M(I);
  ITEMS
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  CarriageControl:;
 1200 NEXT I
  Variable:I
 1210 FOR A=1 TO 28-T
  control: Variable:A
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:28", "ScalarValue:T", "BinaryOperator:-"]
+ end:     ["NumericConstant:28", "Value:T", "BinaryOperator:-"]
 1220 PRINT
  ITEMS
  CarriageControl:NL
@@ -528,7 +528,7 @@
  ITEMS
  CarriageControl:NL
 1250 IF T<28 THEN 720
- ScalarValue:T
+ Value:T
  NumericConstant:28
  BinaryOperator:<
 1270 PRINT "THE RACE RESULTS ARE:"
@@ -546,32 +546,32 @@
  step:    ["NumericConstant:1", "UnaryOperator:-"]
 1290 LET F=M(I)
  Reference:F
- ScalarValue:I
- ScalarValue:M
+ Value:I
+ Value:M
  AssignmentOperator:=
 1300 PRINT
  ITEMS
  CarriageControl:NL
 1310 PRINT Z9;"PLACE HORSE NO.";F,"AT ";R/D(F);":1"
  ITEMS
- ScalarValue:Z9
+ Value:Z9
  CarriageControl:;
  TextConstant:"PLACE HORSE NO."
  CarriageControl:;
- ScalarValue:F
+ Value:F
  CarriageControl:,
  TextConstant:"AT "
  CarriageControl:;
- ScalarValue:R
- ScalarValue:F
- ScalarValue:D
+ Value:R
+ Value:F
+ Value:D
  BinaryOperator:/
  CarriageControl:;
  TextConstant:":1"
  CarriageControl:NL
 1312 LET Z9=Z9+1
  Reference:Z9
- ScalarValue:Z9
+ Value:Z9
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -580,34 +580,34 @@
 1330 FOR J=1 TO C
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:C"]
+ end:     ["Value:C"]
 1340 IF Q(J)<>M(8) THEN 1370
- ScalarValue:J
- ScalarValue:Q
+ Value:J
+ Value:Q
  NumericConstant:8
- ScalarValue:M
+ Value:M
  BinaryOperator:<>
 1350 LET N=Q(J)
  Reference:N
- ScalarValue:J
- ScalarValue:Q
+ Value:J
+ Value:Q
  AssignmentOperator:=
 1355 PRINT
  ITEMS
  CarriageControl:NL
 1360 PRINT W$(J);" WINS $";(R/D(N))*P(J)
  ITEMS
- ScalarValue:J
- ScalarValue:W$
+ Value:J
+ Value:W$
  CarriageControl:;
  TextConstant:" WINS $"
  CarriageControl:;
- ScalarValue:R
- ScalarValue:N
- ScalarValue:D
+ Value:R
+ Value:N
+ Value:D
  BinaryOperator:/
- ScalarValue:J
- ScalarValue:P
+ Value:J
+ Value:P
  BinaryOperator:*
  CarriageControl:NL
 1370 NEXT J
@@ -619,7 +619,7 @@
 1374 INPUT "YES OR NO"; O$
  Reference:O$
 1376 IF O$="YES" THEN 380
- ScalarValue:O$
+ Value:O$
  TextConstant:"YES"
  BinaryOperator:=
 1380 END

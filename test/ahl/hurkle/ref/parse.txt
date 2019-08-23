@@ -34,11 +34,11 @@
  ITEMS
  TextConstant:"A HURKLE IS HIDING ON A"
  CarriageControl:;
- ScalarValue:G
+ Value:G
  CarriageControl:;
  TextConstant:"BY"
  CarriageControl:;
- ScalarValue:G
+ Value:G
  CarriageControl:;
  TextConstant:"GRID. HOMEBASE"
  CarriageControl:NL
@@ -66,7 +66,7 @@
  ITEMS
  TextConstant:"GUESS THE HURKLE'S GRIDPOINT. YOU GET"
  CarriageControl:;
- ScalarValue:N
+ Value:N
  CarriageControl:;
  TextConstant:"TRIES."
  CarriageControl:NL
@@ -83,7 +83,7 @@
  CarriageControl:NL
 285 A=INT(G*RND(1))
  Reference:A
- ScalarValue:G
+ Value:G
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -91,7 +91,7 @@
  AssignmentOperator:=
 286 B=INT(G*RND(1))
  Reference:B
- ScalarValue:G
+ Value:G
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -100,23 +100,23 @@
 310 FOR K=1 TO N
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["ScalarValue:N"]
+ end:     ["Value:N"]
 320 PRINT "GUESS #";K;
  ITEMS
  TextConstant:"GUESS #"
  CarriageControl:;
- ScalarValue:K
+ Value:K
  CarriageControl:;
 330 INPUT X,Y
  Reference:X
  Reference:Y
 340 IF ABS(X-A)+ABS(Y-B)=0 THEN 500
- ScalarValue:X
- ScalarValue:A
+ Value:X
+ Value:A
  BinaryOperator:-
  FunctionAbs
- ScalarValue:Y
- ScalarValue:B
+ Value:Y
+ Value:B
  BinaryOperator:-
  FunctionAbs
  BinaryOperator:+
@@ -138,7 +138,7 @@
  ITEMS
  TextConstant:"SORRY, THAT'S"
  CarriageControl:;
- ScalarValue:N
+ Value:N
  CarriageControl:;
  TextConstant:"GUESSES."
  CarriageControl:NL
@@ -146,11 +146,11 @@
  ITEMS
  TextConstant:"THE HURKLE IS AT "
  CarriageControl:;
- ScalarValue:A
+ Value:A
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
- ScalarValue:B
+ Value:B
  CarriageControl:NL
 440 PRINT
  ITEMS
@@ -173,7 +173,7 @@
  ITEMS
  TextConstant:"YOU FOUND HIM IN"
  CarriageControl:;
- ScalarValue:K
+ Value:K
  CarriageControl:;
  TextConstant:"GUESSES!"
  CarriageControl:NL
@@ -184,12 +184,12 @@
  TextConstant:"GO "
  CarriageControl:;
 620 IF Y=B THEN 670
- ScalarValue:Y
- ScalarValue:B
+ Value:Y
+ Value:B
  BinaryOperator:=
 630 IF Y<B THEN 660
- ScalarValue:Y
- ScalarValue:B
+ Value:Y
+ Value:B
  BinaryOperator:<
 640 PRINT "SOUTH";
  ITEMS
@@ -202,12 +202,12 @@
  TextConstant:"NORTH"
  CarriageControl:;
 670 IF X=A THEN 720
- ScalarValue:X
- ScalarValue:A
+ Value:X
+ Value:A
  BinaryOperator:=
 680 IF X<A THEN 710
- ScalarValue:X
- ScalarValue:A
+ Value:X
+ Value:A
  BinaryOperator:<
 690 PRINT "WEST";
  ITEMS
