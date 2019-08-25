@@ -18,8 +18,7 @@ class AbstractElement
     @shape = nil
     @list = false
     @carriage = false
-    @value = false
-    @reference = false
+    @valref = nil
     @numeric_constant = false
     @text_constant = false
     @boolean_constant = false
@@ -110,11 +109,11 @@ class AbstractElement
   end
 
   def value?
-    @value
+    @valref == :value
   end
 
   def reference?
-    @reference
+    @valref == :reference
   end
   
   def numeric_constant?
@@ -1275,7 +1274,7 @@ end
 class Declaration < AbstractElement
   attr_reader :subscripts
 
-  def initialize(variable_name, subscripts = [])
+  def initialize(variable_name)
     super()
 
     raise(Exception, #BASICSyntaxError,
@@ -1283,7 +1282,7 @@ class Declaration < AbstractElement
       variable_name.class.to_s != 'VariableName'
 
     @variable_name = variable_name
-    @subscripts = normalize_subscripts(subscripts)
+    @subscripts = []
     @variable = true
   end
 
@@ -1429,7 +1428,7 @@ end
 class Variable < AbstractElement
   attr_reader :subscripts
 
-  def initialize(variable_name, subscripts = [])
+  def initialize(variable_name, subscripts)
     super()
 
     raise(BASICSyntaxError,
@@ -1462,6 +1461,14 @@ class Variable < AbstractElement
 
   def name
     @variable_name
+  end
+
+  def dimensions?
+    !@subscripts.empty?
+  end
+
+  def dimensions
+    @subscripts
   end
 
   def content_type
@@ -1513,28 +1520,9 @@ class Variable < AbstractElement
 
     int_subscripts
   end
-end
 
-class Value < Variable
-  def initialize(name, shape, subscripts = [])
-    super(name, subscripts)
-
-    @value = true
-    @shape = shape
-  end
-
-  def evaluate(interpreter, stack)
-    x = nil
-    x = evaluate_scalar(interpreter, stack) if @shape == :scalar
-    x = evaluate_array(interpreter, stack) if @shape == :array
-    x = evaluate_matrix(interpreter, stack) if @shape == :matrix
-    x
-  end
-
-  private
-  
   # return a single value
-  def evaluate_scalar(interpreter, stack)
+  def evaluate_value_scalar(interpreter, stack)
     if previous_is_array(stack)
       subscripts = get_subscripts(stack)
       @subscripts = interpreter.normalize_subscripts(subscripts)
@@ -1556,15 +1544,15 @@ class Value < Variable
     subscripts
   end
 
-  def evaluate_array(interpreter, _)
+  def evaluate_value_array(interpreter, _)
     dims = interpreter.get_dimensions(@variable_name)
     raise(BASICRuntimeError, 'Variable has no dimensions') if dims.nil?
     raise(BASICRuntimeError, 'Array requires one dimension') if dims.size != 1
-    values = evaluate_array_1(interpreter, dims[0].to_i)
+    values = evaluate_value_array_1(interpreter, dims[0].to_i)
     BASICArray.new(dims, values)
   end
 
-  def evaluate_array_1(interpreter, n_cols)
+  def evaluate_value_array_1(interpreter, n_cols)
     values = {}
 
     base = interpreter.base
@@ -1577,24 +1565,24 @@ class Value < Variable
     values
   end
 
-  def evaluate_matrix(interpreter, _)
+  def evaluate_value_matrix(interpreter, _)
     dims = interpreter.get_dimensions(@variable_name)
     raise(BASICRuntimeError, 'Variable has no dimensions') if dims.nil?
-    values = evaluate_matrix_n(interpreter, dims)
+    values = evaluate_value_matrix_n(interpreter, dims)
     Matrix.new(dims, values)
   end
 
-  def evaluate_matrix_n(interpreter, dims)
+  def evaluate_value_matrix_n(interpreter, dims)
     values = {}
-    values = evaluate_matrix_1(interpreter, dims[0].to_i) if dims.size == 1
+    values = evaluate_value_matrix_1(interpreter, dims[0].to_i) if dims.size == 1
 
-    values = evaluate_matrix_2(interpreter, dims[0].to_i, dims[1].to_i) if
+    values = evaluate_value_matrix_2(interpreter, dims[0].to_i, dims[1].to_i) if
       dims.size == 2
 
     values
   end
 
-  def evaluate_matrix_1(interpreter, n_cols)
+  def evaluate_value_matrix_1(interpreter, n_cols)
     values = {}
 
     base = $options['base'].value
@@ -1608,7 +1596,7 @@ class Value < Variable
     values
   end
 
-  def evaluate_matrix_2(interpreter, n_rows, n_cols)
+  def evaluate_value_matrix_2(interpreter, n_rows, n_cols)
     values = {}
 
     base = $options['base'].value
@@ -1623,67 +1611,74 @@ class Value < Variable
 
     values
   end
+  
+  # return a single value, a reference to this object
+  def evaluate_ref_scalar(interpreter, stack)
+    if previous_is_array(stack)
+      subscripts = stack.pop
+      @subscripts = interpreter.normalize_subscripts(subscripts)
+      num_args = @subscripts.length
+
+      if num_args.zero?
+        raise(BASICRuntimeError,
+              'Variable expects subscripts, found empty parentheses')
+      end
+
+      interpreter.check_subscripts(@variable_name, @subscripts)
+    end
+    self
+  end
+
+  # return a single value, a reference to this object
+  def evaluate_ref_compound(interpreter, stack)
+    if previous_is_array(stack)
+      subscripts = stack.pop
+      @subscripts = interpreter.normalize_subscripts(subscripts)
+      num_args = @subscripts.length
+
+      if num_args.zero?
+        raise(BASICRuntimeError,
+              'Variable expects subscripts, found empty parentheses')
+      end
+
+      interpreter.check_subscripts(@variable_name, @subscripts)
+    end
+
+    self
+  end
 end
 
-class Reference < Variable
-  def initialize(variable, shape, subscripts = [])
-    super(variable.name, subscripts)
+class Value < Variable
+  def initialize(name, shape, subscripts)
+    super(name, subscripts)
 
-    @reference = true
+    @valref = :value
     @shape = shape
   end
 
   def evaluate(interpreter, stack)
     x = nil
-    x = evaluate_scalar(interpreter, stack) if @shape == :scalar
-    x = evaluate_compound(interpreter, stack) if
-      @shape == :array || @shape == :matrix
+    x = evaluate_value_scalar(interpreter, stack) if @shape == :scalar
+    x = evaluate_value_array(interpreter, stack) if @shape == :array
+    x = evaluate_value_matrix(interpreter, stack) if @shape == :matrix
     x
   end
+end
 
-  def dimensions?
-    !@subscripts.empty?
+class Reference < Variable
+  def initialize(variable, shape, subscripts)
+    super(variable.name, subscripts)
+
+    @valref = :reference
+    @shape = shape
   end
 
-  def dimensions
-    @subscripts
-  end
-
-  private
-  
-  # return a single value, a reference to this object
-  def evaluate_scalar(interpreter, stack)
-    if previous_is_array(stack)
-      subscripts = stack.pop
-      @subscripts = interpreter.normalize_subscripts(subscripts)
-      num_args = @subscripts.length
-
-      if num_args.zero?
-        raise(BASICRuntimeError,
-              'Variable expects subscripts, found empty parentheses')
-      end
-
-      interpreter.check_subscripts(@variable_name, @subscripts)
-    end
-    self
-  end
-
-  # return a single value, a reference to this object
-  def evaluate_compound(interpreter, stack)
-    if previous_is_array(stack)
-      subscripts = stack.pop
-      @subscripts = interpreter.normalize_subscripts(subscripts)
-      num_args = @subscripts.length
-
-      if num_args.zero?
-        raise(BASICRuntimeError,
-              'Variable expects subscripts, found empty parentheses')
-      end
-
-      interpreter.check_subscripts(@variable_name, @subscripts)
-    end
-
-    self
+  def evaluate(interpreter, stack)
+    x = nil
+    x = evaluate_ref_scalar(interpreter, stack) if @shape == :scalar
+    x = evaluate_ref_compound(interpreter, stack) if
+      @shape == :array || @shape == :matrix
+    x
   end
 end
 
