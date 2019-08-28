@@ -38,9 +38,9 @@
  ITEMS
  CarriageControl:NL
 60 INPUT "YOUR MESSAGE, PLEASE";A$: L=LEN(A$)
- Reference:A$
- Reference:L
- Value:A$
+ Variable:A$
+ Variable:L
+ Variable:A$
  FunctionLen
  AssignmentOperator:=
 70 DIM T$(120): FOR I=1 TO 10: PRINT: NEXT I
@@ -55,20 +55,20 @@
 100 FOR J=0 TO INT(60/L)
  control: Variable:J
  start:   ["NumericConstant:0"]
- end:     ["NumericConstant:60", "Value:L", "BinaryOperator:/", "FunctionInt"]
+ end:     ["NumericConstant:60", "Variable:L", "BinaryOperator:/", "FunctionInt"]
 110 FOR I=1 TO L
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:L"]
+ end:     ["Variable:L"]
 120 T$(J*L+I)=MID$(A$,I,1)
- Value:J
- Value:L
+ Variable:J
+ Variable:L
  BinaryOperator:*
- Value:I
+ Variable:I
  BinaryOperator:+
- Reference:T$
- Value:A$
- Value:I
+ Variable:T$
+ Variable:A$
+ Variable:I
  NumericConstant:1
  FunctionMid
  AssignmentOperator:=
@@ -76,63 +76,63 @@
  Variable:I
  Variable:J
 140 C=0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 200 A1=1: P=1: C=C+1: IF C=37 THEN 999
- Reference:A1
+ Variable:A1
  NumericConstant:1
  AssignmentOperator:=
- Reference:P
+ Variable:P
  NumericConstant:1
  AssignmentOperator:=
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:C
+ Variable:C
  NumericConstant:37
  BinaryOperator:=
 205 PRINT
  ITEMS
  CarriageControl:NL
 210 READ A: A1=A1+A: IF P=1 THEN 300
- Reference:A
- Reference:A1
- Value:A1
- Value:A
+ Variable:A
+ Variable:A1
+ Variable:A1
+ Variable:A
  BinaryOperator:+
  AssignmentOperator:=
- Value:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:=
 240 FOR I=1 TO A: PRINT " ";: NEXT I: P=1: GOTO 400
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:A"]
+ end:     ["Variable:A"]
  ITEMS
  TextConstant:" "
  CarriageControl:;
  Variable:I
- Reference:P
+ Variable:P
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:400
 300 FOR I=A1-A TO A1-1: PRINT T$(I);: NEXT I: P=0
  control: Variable:I
- start:   ["Value:A1", "Value:A", "BinaryOperator:-"]
- end:     ["Value:A1", "NumericConstant:1", "BinaryOperator:-"]
+ start:   ["Variable:A1", "Variable:A", "BinaryOperator:-"]
+ end:     ["Variable:A1", "NumericConstant:1", "BinaryOperator:-"]
  ITEMS
- Value:I
- Value:T$
+ Variable:I
+ Variable:T$
  CarriageControl:;
  Variable:I
- Reference:P
+ Variable:P
  NumericConstant:0
  AssignmentOperator:=
 400 IF A1>60 THEN 200
- Value:A1
+ Variable:A1
  NumericConstant:60
  BinaryOperator:>
 410 GOTO 210

@@ -18,11 +18,11 @@
  ITEMS
  CarriageControl:NL
 4 Y1=0
- Reference:Y1
+ Variable:Y1
  NumericConstant:0
  AssignmentOperator:=
 10 M1=0
- Reference:M1
+ Variable:M1
  NumericConstant:0
  AssignmentOperator:=
 20 DIM M(20),Y(20)
@@ -100,22 +100,22 @@
  TextConstant:"A '0' IF YOU WANT ME TO GO FIRST."
  CarriageControl:NL
 220 INPUT C
- Reference:C
+ Variable:C
 225 PRINT
  ITEMS
  CarriageControl:NL
 230 IF C=0 THEN 250
- Value:C
+ Variable:C
  NumericConstant:0
  BinaryOperator:=
 240 GOTO 1060
  LineNumber:1060
 250 T=27
- Reference:T
+ Variable:T
  NumericConstant:27
  AssignmentOperator:=
 260 M=2
- Reference:M
+ Variable:M
  NumericConstant:2
  AssignmentOperator:=
 270 PRINT:PRINT "TOTAL=";T:PRINT
@@ -124,32 +124,32 @@
  ITEMS
  TextConstant:"TOTAL="
  CarriageControl:;
- Value:T
+ Variable:T
  CarriageControl:NL
  ITEMS
  CarriageControl:NL
 280 M1=M1+M
- Reference:M1
- Value:M1
- Value:M
+ Variable:M1
+ Variable:M1
+ Variable:M
  BinaryOperator:+
  AssignmentOperator:=
 290 T=T-M
- Reference:T
- Value:T
- Value:M
+ Variable:T
+ Variable:T
+ Variable:M
  BinaryOperator:-
  AssignmentOperator:=
 300 PRINT "I PICK UP";M;"MARBLES."
  ITEMS
  TextConstant:"I PICK UP"
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:"MARBLES."
  CarriageControl:NL
 310 IF T=0 THEN 880
- Value:T
+ Variable:T
  NumericConstant:0
  BinaryOperator:=
 320 PRINT:PRINT "TOTAL=";T
@@ -158,7 +158,7 @@
  ITEMS
  TextConstant:"TOTAL="
  CarriageControl:;
- Value:T
+ Variable:T
  CarriageControl:NL
 330 PRINT
  ITEMS
@@ -167,24 +167,24 @@
  ITEMS
  TextConstant:"     AND WHAT IS YOUR NEXT MOVE, MY TOTAL IS"
  CarriageControl:;
- Value:M1
+ Variable:M1
  CarriageControl:NL
 350 INPUT Y
- Reference:Y
+ Variable:Y
 360 PRINT
  ITEMS
  CarriageControl:NL
 370 IF Y<1 THEN 1160
- Value:Y
+ Variable:Y
  NumericConstant:1
  BinaryOperator:<
 380 IF Y>4 THEN 1160
- Value:Y
+ Variable:Y
  NumericConstant:4
  BinaryOperator:>
 390 IF Y<=T THEN 430
- Value:Y
- Value:T
+ Variable:Y
+ Variable:T
  BinaryOperator:<=
 400 PRINT "     YOU HAVE TRIED TO TAKE MORE MARBLES THAN THERE ARE"
  ITEMS
@@ -197,26 +197,26 @@
 420 GOTO 350
  LineNumber:350
 430 Y1=Y1+Y
- Reference:Y1
- Value:Y1
- Value:Y
+ Variable:Y1
+ Variable:Y1
+ Variable:Y
  BinaryOperator:+
  AssignmentOperator:=
 440 T=T-Y
- Reference:T
- Value:T
- Value:Y
+ Variable:T
+ Variable:T
+ Variable:Y
  BinaryOperator:-
  AssignmentOperator:=
 450 IF T=0 THEN 880
- Value:T
+ Variable:T
  NumericConstant:0
  BinaryOperator:=
 460 PRINT "TOTAL=";T
  ITEMS
  TextConstant:"TOTAL="
  CarriageControl:;
- Value:T
+ Variable:T
  CarriageControl:NL
 470 PRINT
  ITEMS
@@ -225,17 +225,17 @@
  ITEMS
  TextConstant:"YOUR TOTAL IS"
  CarriageControl:;
- Value:Y1
+ Variable:Y1
  CarriageControl:NL
 490 IF T<.5 THEN 880
- Value:T
+ Variable:T
  NumericConstant:.5
  BinaryOperator:<
 500 R=T-6*INT(T/6)
- Reference:R
- Value:T
+ Variable:R
+ Variable:T
  NumericConstant:6
- Value:T
+ Variable:T
  NumericConstant:6
  BinaryOperator:/
  FunctionInt
@@ -243,50 +243,50 @@
  BinaryOperator:-
  AssignmentOperator:=
 510 IF INT(Y1/2)=Y1/2 THEN 700
- Value:Y1
+ Variable:Y1
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
- Value:Y1
+ Variable:Y1
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:=
 520 IF T<4.2 THEN 580
- Value:T
+ Variable:T
  NumericConstant:4.2
  BinaryOperator:<
 530 IF R>3.4 THEN 620
- Value:R
+ Variable:R
  NumericConstant:3.4
  BinaryOperator:>
 540 M=R+1
- Reference:M
- Value:R
+ Variable:M
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 550 M1=M1+M
- Reference:M1
- Value:M1
- Value:M
+ Variable:M1
+ Variable:M1
+ Variable:M
  BinaryOperator:+
  AssignmentOperator:=
 560 T=T-M
- Reference:T
- Value:T
- Value:M
+ Variable:T
+ Variable:T
+ Variable:M
  BinaryOperator:-
  AssignmentOperator:=
 570 GOTO 300
  LineNumber:300
 580 M=T
- Reference:M
- Value:T
+ Variable:M
+ Variable:T
  AssignmentOperator:=
 590 T=T-M
- Reference:T
- Value:T
- Value:M
+ Variable:T
+ Variable:T
+ Variable:M
  BinaryOperator:-
  AssignmentOperator:=
 600 GOTO 830
@@ -294,33 +294,33 @@
 610 REM     250 IS WHERE I WIN.
  Remark:    250 IS WHERE I WIN.
 620 IF R<4.7 THEN 660
- Value:R
+ Variable:R
  NumericConstant:4.7
  BinaryOperator:<
 630 IF R>3.5 THEN 660
- Value:R
+ Variable:R
  NumericConstant:3.5
  BinaryOperator:>
 640 M=1
- Reference:M
+ Variable:M
  NumericConstant:1
  AssignmentOperator:=
 650 GOTO 670
  LineNumber:670
 660 M=4
- Reference:M
+ Variable:M
  NumericConstant:4
  AssignmentOperator:=
 670 T=T-M
- Reference:T
- Value:T
- Value:M
+ Variable:T
+ Variable:T
+ Variable:M
  BinaryOperator:-
  AssignmentOperator:=
 680 M1=M1+M
- Reference:M1
- Value:M1
- Value:M
+ Variable:M1
+ Variable:M1
+ Variable:M
  BinaryOperator:+
  AssignmentOperator:=
 690 GOTO 300
@@ -328,33 +328,33 @@
 700 REM     I AM READY TO ENCODE THE STRAT FOR WHEN OPP TOT IS EVEN
  Remark:    I AM READY TO ENCODE THE STRAT FOR WHEN OPP TOT IS EVEN
 710 IF R<1.5 THEN 1020
- Value:R
+ Variable:R
  NumericConstant:1.5
  BinaryOperator:<
 720 IF R>5.3 THEN 1020
- Value:R
+ Variable:R
  NumericConstant:5.3
  BinaryOperator:>
 730 M=R-1
- Reference:M
- Value:R
+ Variable:M
+ Variable:R
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 740 M1=M1+M
- Reference:M1
- Value:M1
- Value:M
+ Variable:M1
+ Variable:M1
+ Variable:M
  BinaryOperator:+
  AssignmentOperator:=
 750 T=T-M
- Reference:T
- Value:T
- Value:M
+ Variable:T
+ Variable:T
+ Variable:M
  BinaryOperator:-
  AssignmentOperator:=
 760 IF T<.2 THEN 790
- Value:T
+ Variable:T
  NumericConstant:.2
  BinaryOperator:<
 770 REM     IS # ZERO HERE
@@ -367,7 +367,7 @@
  ITEMS
  TextConstant:"I PICK UP"
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:"MARBLES."
  CarriageControl:NL
@@ -382,7 +382,7 @@
  ITEMS
  TextConstant:"I PICK UP"
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:"MARBLES."
  CarriageControl:NL
@@ -394,9 +394,9 @@
  TextConstant:"TOTAL = 0"
  CarriageControl:NL
 870 M1=M1+M
- Reference:M1
- Value:M1
- Value:M
+ Variable:M1
+ Variable:M1
+ Variable:M
  BinaryOperator:+
  AssignmentOperator:=
 880 PRINT "THAT IS ALL OF THE MARBLES."
@@ -410,21 +410,21 @@
  ITEMS
  TextConstant:" MY TOTAL IS"
  CarriageControl:;
- Value:M1
+ Variable:M1
  CarriageControl:;
  TextConstant:", YOUR TOTAL IS"
  CarriageControl:;
- Value:Y1
+ Variable:Y1
  CarriageControl:NL
 910 PRINT
  ITEMS
  CarriageControl:NL
 920 IF INT(M1/2)=M1/2 THEN 950
- Value:M1
+ Variable:M1
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
- Value:M1
+ Variable:M1
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:=
@@ -443,17 +443,17 @@
  TextConstant:"AGAIN?  TYPE 1 FOR YES AND 0 FOR NO."
  CarriageControl:NL
 970 INPUT A1
- Reference:A1
+ Variable:A1
 980 IF A1=0 THEN 1030
- Value:A1
+ Variable:A1
  NumericConstant:0
  BinaryOperator:=
 990 M1=0
- Reference:M1
+ Variable:M1
  NumericConstant:0
  AssignmentOperator:=
 1000 Y1=0
- Reference:Y1
+ Variable:Y1
  NumericConstant:0
  AssignmentOperator:=
 1010 GOTO 200
@@ -470,7 +470,7 @@
 1050 GOTO 1230
  LineNumber:1230
 1060 T=27
- Reference:T
+ Variable:T
  NumericConstant:27
  AssignmentOperator:=
 1070 PRINT
@@ -486,7 +486,7 @@
  ITEMS
  TextConstant:"TOTAL="
  CarriageControl:;
- Value:T
+ Variable:T
  CarriageControl:NL
 1110 PRINT
  ITEMS
@@ -499,7 +499,7 @@
  TextConstant:"WHAT IS YOUR FIRST MOVE"
  CarriageControl:;
 1140 INPUT Y
- Reference:Y
+ Variable:Y
 1150 GOTO 360
  LineNumber:360
 1160 PRINT

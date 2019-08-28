@@ -847,15 +847,15 @@ class ChangeStatement < AbstractStatement
 
       array = source_value.unpack
       dims = array.dimensions
-
-      target_variable_token = VariableToken.new(@target.to_s)
-      target_variable_name = VariableName.new(target_variable_token)
-      target_variable = Variable.new(target_variable_name, [])
-      target = Reference.new(target_variable, :array, [])
-      interpreter.set_dimensions(target, dims)
-
       values = array.values(interpreter)
-      interpreter.set_values(target_variable_name, values)
+
+      target_token = VariableToken.new(@target.to_s)
+      target_name = VariableName.new(target_token)
+      target = Variable.new(target_name, :scalar, [])
+      target.valref = :reference
+
+      interpreter.set_dimensions(target, dims)
+      interpreter.set_values(target_name, values)
 
     elsif source_value.numeric_constant?
       # array to string
@@ -876,7 +876,7 @@ class ChangeStatement < AbstractStatement
       values = {}
       (0..cols).each do |col|
         column = IntegerConstant.new(col)
-        variable = Value.new(source_variable_name, :scalar, [column])
+        variable = Variable.new(source_variable_name, :scalar, [column])
         coord = make_coord(col)
         values[coord] = interpreter.get_value(variable)
       end
@@ -1179,7 +1179,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, [])
+        @control = Variable.new(variable_name, :scalar, [])
         @start = ValueScalarExpression.new(tokens2)
         @end = ValueScalarExpression.new(tokens_lists[2])
         @step = nil
@@ -1194,7 +1194,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, [])
+        @control = Variable.new(variable_name, :scalar, [])
         @start = ValueScalarExpression.new(tokens2)
         @end = ValueScalarExpression.new(tokens_lists[2])
         @step = ValueScalarExpression.new(tokens_lists[4])
@@ -2088,7 +2088,7 @@ class NextStatement < AbstractStatement
           @controls << EmptyVariable.new
         elsif tokens.size == 1 && tokens[0].variable?
           variable_name = VariableName.new(tokens[0])
-          control = Variable.new(variable_name, [])
+          control = Variable.new(variable_name, :scalar, [])
           @controls << control
           controlx = XrefEntry.new(control.to_s, 0, false)
           @variables += [controlx]
@@ -2104,7 +2104,7 @@ class NextStatement < AbstractStatement
   end
 
   def has_control(control_name)
-    control = Variable.new(control_name, [])
+    control = Variable.new(control_name, :scalar, [])
     @controls.include?(control)
   end
 

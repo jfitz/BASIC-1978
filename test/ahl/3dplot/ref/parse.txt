@@ -21,9 +21,9 @@
  CarriageControl:NL
 5 DEF FNA(Z)=30*EXP(-Z*Z/100)
  NumericConstant:30
- Value:Z
+ Variable:Z
  UnaryOperator:-
- Value:Z
+ Variable:Z
  BinaryOperator:*
  NumericConstant:100
  BinaryOperator:/
@@ -38,15 +38,15 @@
  end:     ["NumericConstant:30"]
  step:    ["NumericConstant:1.5"]
 120 L=0
- Reference:L
+ Variable:L
  NumericConstant:0
  AssignmentOperator:=
 130 Y1=5*INT(SQR(900-X*X)/5)
- Reference:Y1
+ Variable:Y1
  NumericConstant:5
  NumericConstant:900
- Value:X
- Value:X
+ Variable:X
+ Variable:X
  BinaryOperator:*
  BinaryOperator:-
  FunctionSqr
@@ -57,39 +57,39 @@
  AssignmentOperator:=
 140 FOR Y=Y1 TO -Y1 STEP -5
  control: Variable:Y
- start:   ["Value:Y1"]
- end:     ["Value:Y1", "UnaryOperator:-"]
+ start:   ["Variable:Y1"]
+ end:     ["Variable:Y1", "UnaryOperator:-"]
  step:    ["NumericConstant:5", "UnaryOperator:-"]
 150 Z=INT(25+FNA(SQR(X*X+Y*Y))-.7*Y)
- Reference:Z
+ Variable:Z
  NumericConstant:25
- Value:X
- Value:X
+ Variable:X
+ Variable:X
  BinaryOperator:*
- Value:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  BinaryOperator:*
  BinaryOperator:+
  FunctionSqr
  UserFunction
  BinaryOperator:+
  NumericConstant:.7
- Value:Y
+ Variable:Y
  BinaryOperator:*
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
 160 IF Z<=L THEN 190
- Value:Z
- Value:L
+ Variable:Z
+ Variable:L
  BinaryOperator:<=
 170 L=Z
- Reference:L
- Value:Z
+ Variable:L
+ Variable:Z
  AssignmentOperator:=
 180 PRINT TAB(Z);"*";
  ITEMS
- Value:Z
+ Variable:Z
  FunctionTab
  CarriageControl:;
  TextConstant:"*"

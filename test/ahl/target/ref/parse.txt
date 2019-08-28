@@ -20,13 +20,13 @@
  ITEMS
  CarriageControl:NL
 100 R=1: R1=57.296: P=3.14159
- Reference:R
+ Variable:R
  NumericConstant:1
  AssignmentOperator:=
- Reference:R1
+ Variable:R1
  NumericConstant:57.296
  AssignmentOperator:=
- Reference:P
+ Variable:P
  NumericConstant:3.14159
  AssignmentOperator:=
 110 PRINT "YOU ARE THE WEAPONS OFFICER ON THE STARSHIP ENTERPRISE"
@@ -75,31 +75,31 @@
  ITEMS
  CarriageControl:NL
 220 A=RND(1)*2*P: B=RND(1)*2*P: Q=INT(A*R1): W=INT(B*R1)
- Reference:A
+ Variable:A
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
  BinaryOperator:*
- Value:P
+ Variable:P
  BinaryOperator:*
  AssignmentOperator:=
- Reference:B
+ Variable:B
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
  BinaryOperator:*
- Value:P
+ Variable:P
  BinaryOperator:*
  AssignmentOperator:=
- Reference:Q
- Value:A
- Value:R1
+ Variable:Q
+ Variable:A
+ Variable:R1
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
- Reference:W
- Value:B
- Value:R1
+ Variable:W
+ Variable:B
+ Variable:R1
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
@@ -107,14 +107,14 @@
  ITEMS
  TextConstant:"RADIANS FROM X AXIS ="
  CarriageControl:;
- Value:A
+ Variable:A
  CarriageControl:;
  TextConstant:"   FROM Z AXIS ="
  CarriageControl:;
- Value:B
+ Variable:B
  CarriageControl:NL
 280 P1=100000*RND(1)+RND(1): X=SIN(B)*COS(A)*P1: Y=SIN(B)*SIN(A)*P1
- Reference:P1
+ Variable:P1
  NumericConstant:100000
  NumericConstant:1
  FunctionRnd
@@ -123,64 +123,64 @@
  FunctionRnd
  BinaryOperator:+
  AssignmentOperator:=
- Reference:X
- Value:B
+ Variable:X
+ Variable:B
  FunctionSin
- Value:A
+ Variable:A
  FunctionCos
  BinaryOperator:*
- Value:P1
+ Variable:P1
  BinaryOperator:*
  AssignmentOperator:=
- Reference:Y
- Value:B
+ Variable:Y
+ Variable:B
  FunctionSin
- Value:A
+ Variable:A
  FunctionSin
  BinaryOperator:*
- Value:P1
+ Variable:P1
  BinaryOperator:*
  AssignmentOperator:=
 290 Z=COS(B)*P1
- Reference:Z
- Value:B
+ Variable:Z
+ Variable:B
  FunctionCos
- Value:P1
+ Variable:P1
  BinaryOperator:*
  AssignmentOperator:=
 340 PRINT "TARGET SIGHTED: APPROXIMATE COORDINATES:  X=";X;"  Y=";Y;"  Z=";Z
  ITEMS
  TextConstant:"TARGET SIGHTED: APPROXIMATE COORDINATES:  X="
  CarriageControl:;
- Value:X
+ Variable:X
  CarriageControl:;
  TextConstant:"  Y="
  CarriageControl:;
- Value:Y
+ Variable:Y
  CarriageControl:;
  TextConstant:"  Z="
  CarriageControl:;
- Value:Z
+ Variable:Z
  CarriageControl:NL
 345 R=R+1: IF R>5 THEN 390
- Reference:R
- Value:R
+ Variable:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:R
+ Variable:R
  NumericConstant:5
  BinaryOperator:>
 350 ON R GOTO 355,360,365,370,375
- Value:R
+ Variable:R
  LineNumber:355
  LineNumber:360
  LineNumber:365
  LineNumber:370
  LineNumber:375
 355 P3=INT(P1*.05)*20: GOTO 390
- Reference:P3
- Value:P1
+ Variable:P3
+ Variable:P1
  NumericConstant:.05
  BinaryOperator:*
  FunctionInt
@@ -189,8 +189,8 @@
  AssignmentOperator:=
  LineNumber:390
 360 P3=INT(P1*.1)*10: GOTO 390
- Reference:P3
- Value:P1
+ Variable:P3
+ Variable:P1
  NumericConstant:.1
  BinaryOperator:*
  FunctionInt
@@ -199,8 +199,8 @@
  AssignmentOperator:=
  LineNumber:390
 365 P3=INT(P1*.5)*2: GOTO 390
- Reference:P3
- Value:P1
+ Variable:P3
+ Variable:P1
  NumericConstant:.5
  BinaryOperator:*
  FunctionInt
@@ -209,20 +209,20 @@
  AssignmentOperator:=
  LineNumber:390
 370 P3=INT(P1): GOTO 390
- Reference:P3
- Value:P1
+ Variable:P3
+ Variable:P1
  FunctionInt
  AssignmentOperator:=
  LineNumber:390
 375 P3=P1
- Reference:P3
- Value:P1
+ Variable:P3
+ Variable:P1
  AssignmentOperator:=
 390 PRINT "     ESTIMATED DISTANCE:";P3
  ITEMS
  TextConstant:"     ESTIMATED DISTANCE:"
  CarriageControl:;
- Value:P3
+ Variable:P3
  CarriageControl:NL
 400 PRINT:PRINT "INPUT ANGLE DEVIATION FROM X, DEVIATION FROM Z, DISTANCE";
  ITEMS
@@ -231,13 +231,13 @@
  TextConstant:"INPUT ANGLE DEVIATION FROM X, DEVIATION FROM Z, DISTANCE"
  CarriageControl:;
 405 INPUT A1,B1,P2
- Reference:A1
- Reference:B1
- Reference:P2
+ Variable:A1
+ Variable:B1
+ Variable:P2
 410 PRINT: IF P2<20 THEN PRINT "YOU BLEW YOURSELF UP!!": GOTO 580
  ITEMS
  CarriageControl:NL
- Value:P2
+ Variable:P2
  NumericConstant:20
  BinaryOperator:<
  ITEMS
@@ -245,20 +245,20 @@
  CarriageControl:NL
  LineNumber:580
 420 A1=A1/R1: B1=B1/R1: PRINT "RADIANS FROM X AXIS =";A1;"  ";
- Reference:A1
- Value:A1
- Value:R1
+ Variable:A1
+ Variable:A1
+ Variable:R1
  BinaryOperator:/
  AssignmentOperator:=
- Reference:B1
- Value:B1
- Value:R1
+ Variable:B1
+ Variable:B1
+ Variable:R1
  BinaryOperator:/
  AssignmentOperator:=
  ITEMS
  TextConstant:"RADIANS FROM X AXIS ="
  CarriageControl:;
- Value:A1
+ Variable:A1
  CarriageControl:;
  TextConstant:"  "
  CarriageControl:;
@@ -266,48 +266,48 @@
  ITEMS
  TextConstant:"FROM Z AXIS ="
  CarriageControl:;
- Value:B1
+ Variable:B1
  CarriageControl:NL
 480 X1=P2*SIN(B1)*COS(A1): Y1=P2*SIN(B1)*SIN(A1): Z1=P2*COS(B1)
- Reference:X1
- Value:P2
- Value:B1
+ Variable:X1
+ Variable:P2
+ Variable:B1
  FunctionSin
  BinaryOperator:*
- Value:A1
+ Variable:A1
  FunctionCos
  BinaryOperator:*
  AssignmentOperator:=
- Reference:Y1
- Value:P2
- Value:B1
+ Variable:Y1
+ Variable:P2
+ Variable:B1
  FunctionSin
  BinaryOperator:*
- Value:A1
+ Variable:A1
  FunctionSin
  BinaryOperator:*
  AssignmentOperator:=
- Reference:Z1
- Value:P2
- Value:B1
+ Variable:Z1
+ Variable:P2
+ Variable:B1
  FunctionCos
  BinaryOperator:*
  AssignmentOperator:=
 510 D=((X1-X)^2+(Y1-Y)^2+(Z1-Z)^2)^(1/2)
- Reference:D
- Value:X1
- Value:X
+ Variable:D
+ Variable:X1
+ Variable:X
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:^
- Value:Y1
- Value:Y
+ Variable:Y1
+ Variable:Y
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:^
  BinaryOperator:+
- Value:Z1
- Value:Z
+ Variable:Z1
+ Variable:Z
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:^
@@ -318,7 +318,7 @@
  BinaryOperator:^
  AssignmentOperator:=
 520 IF D>20 THEN 670
- Value:D
+ Variable:D
  NumericConstant:20
  BinaryOperator:>
 530 PRINT: PRINT " * * * HIT * * *   TARGET IS NON-FUNCTIONAL": PRINT
@@ -333,7 +333,7 @@
  ITEMS
  TextConstant:"DISTANCE OF EXPLOSION FROM TARGET WAS"
  CarriageControl:;
- Value:D
+ Variable:D
  CarriageControl:;
  TextConstant:"KILOMETERS."
  CarriageControl:NL
@@ -343,12 +343,12 @@
  ITEMS
  TextConstant:"MISSION ACCOMPLISHED IN "
  CarriageControl:;
- Value:R
+ Variable:R
  CarriageControl:;
  TextConstant:" SHOTS."
  CarriageControl:NL
 580 R=0: FOR I=1 TO 5: PRINT: NEXT I: PRINT "NEXT TARGET...": PRINT
- Reference:R
+ Variable:R
  NumericConstant:0
  AssignmentOperator:=
  control: Variable:I
@@ -365,29 +365,29 @@
 590 GOTO 220
  LineNumber:220
 670 X2=X1-X: Y2=Y1-Y: Z2=Z1-Z: IF X2<0 THEN 730
- Reference:X2
- Value:X1
- Value:X
+ Variable:X2
+ Variable:X1
+ Variable:X
  BinaryOperator:-
  AssignmentOperator:=
- Reference:Y2
- Value:Y1
- Value:Y
+ Variable:Y2
+ Variable:Y1
+ Variable:Y
  BinaryOperator:-
  AssignmentOperator:=
- Reference:Z2
- Value:Z1
- Value:Z
+ Variable:Z2
+ Variable:Z1
+ Variable:Z
  BinaryOperator:-
  AssignmentOperator:=
- Value:X2
+ Variable:X2
  NumericConstant:0
  BinaryOperator:<
 710 PRINT "SHOT IN FRONT OF TARGET";X2;"KILOMETERS.": GOTO 740
  ITEMS
  TextConstant:"SHOT IN FRONT OF TARGET"
  CarriageControl:;
- Value:X2
+ Variable:X2
  CarriageControl:;
  TextConstant:"KILOMETERS."
  CarriageControl:NL
@@ -396,20 +396,20 @@
  ITEMS
  TextConstant:"SHOT BEHIND TARGET"
  CarriageControl:;
- Value:X2
+ Variable:X2
  UnaryOperator:-
  CarriageControl:;
  TextConstant:"KILOMETERS."
  CarriageControl:NL
 740 IF Y2<0 THEN 770
- Value:Y2
+ Variable:Y2
  NumericConstant:0
  BinaryOperator:<
 750 PRINT "SHOT TO LEFT OF TARGET";Y2;"KILOMETERS.": GOTO 780
  ITEMS
  TextConstant:"SHOT TO LEFT OF TARGET"
  CarriageControl:;
- Value:Y2
+ Variable:Y2
  CarriageControl:;
  TextConstant:"KILOMETERS."
  CarriageControl:NL
@@ -418,20 +418,20 @@
  ITEMS
  TextConstant:"SHOT TO RIGHT OF TARGET"
  CarriageControl:;
- Value:Y2
+ Variable:Y2
  UnaryOperator:-
  CarriageControl:;
  TextConstant:"KILOMETERS."
  CarriageControl:NL
 780 IF Z2<0 THEN 810
- Value:Z2
+ Variable:Z2
  NumericConstant:0
  BinaryOperator:<
 790 PRINT "SHOT ABOVE TARGET";Z2;"KILOMETERS.": GOTO 820
  ITEMS
  TextConstant:"SHOT ABOVE TARGET"
  CarriageControl:;
- Value:Z2
+ Variable:Z2
  CarriageControl:;
  TextConstant:"KILOMETERS."
  CarriageControl:NL
@@ -440,7 +440,7 @@
  ITEMS
  TextConstant:"SHOT BELOW TARGET"
  CarriageControl:;
- Value:Z2
+ Variable:Z2
  UnaryOperator:-
  CarriageControl:;
  TextConstant:"KILOMETERS."
@@ -449,21 +449,21 @@
  ITEMS
  TextConstant:"APPROX POSITION OF EXPLOSION:  X="
  CarriageControl:;
- Value:X1
+ Variable:X1
  CarriageControl:;
  TextConstant:"   Y="
  CarriageControl:;
- Value:Y1
+ Variable:Y1
  CarriageControl:;
  TextConstant:"   Z="
  CarriageControl:;
- Value:Z1
+ Variable:Z1
  CarriageControl:NL
 830 PRINT "     DISTANCE FROM TARGET =";D: PRINT: PRINT: PRINT: GOTO 345
  ITEMS
  TextConstant:"     DISTANCE FROM TARGET ="
  CarriageControl:;
- Value:D
+ Variable:D
  CarriageControl:NL
  ITEMS
  CarriageControl:NL

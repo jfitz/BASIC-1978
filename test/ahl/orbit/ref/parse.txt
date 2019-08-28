@@ -241,7 +241,7 @@
  TextConstant:"GOOD LUCK.  THE FEDERATION IS COUNTING ON YOU."
  CarriageControl:NL
 270 A=INT(360*RND(1))
- Reference:A
+ Variable:A
  NumericConstant:360
  NumericConstant:1
  FunctionRnd
@@ -249,7 +249,7 @@
  FunctionInt
  AssignmentOperator:=
 280 D=INT(200*RND(1)+200)
- Reference:D
+ Variable:D
  NumericConstant:200
  NumericConstant:1
  FunctionRnd
@@ -259,7 +259,7 @@
  FunctionInt
  AssignmentOperator:=
 290 R=INT(20*RND(1)+10)
- Reference:R
+ Variable:R
  NumericConstant:20
  NumericConstant:1
  FunctionRnd
@@ -269,16 +269,16 @@
  FunctionInt
  AssignmentOperator:=
 300 H=0
- Reference:H
+ Variable:H
  NumericConstant:0
  AssignmentOperator:=
 310 IF H=7 THEN 490
- Value:H
+ Variable:H
  NumericConstant:7
  BinaryOperator:=
 320 H=H+1
- Reference:H
- Value:H
+ Variable:H
+ Variable:H
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -292,7 +292,7 @@
  ITEMS
  TextConstant:"THIS IS HOUR"
  CarriageControl:;
- Value:H
+ Variable:H
  CarriageControl:;
  TextConstant:", AT WHAT ANGLE DO YOU WISH TO SEND"
  CarriageControl:NL
@@ -301,13 +301,13 @@
  TextConstant:"YOUR PHOTON BOMB"
  CarriageControl:;
 340 INPUT A1
- Reference:A1
+ Variable:A1
 350 PRINT "HOW FAR OUT DO YOU WISH TO DETONATE IT";
  ITEMS
  TextConstant:"HOW FAR OUT DO YOU WISH TO DETONATE IT"
  CarriageControl:;
 360 INPUT D1
- Reference:D1
+ Variable:D1
 365 PRINT
  ITEMS
  CarriageControl:NL
@@ -315,53 +315,53 @@
  ITEMS
  CarriageControl:NL
 370 A=A+R
- Reference:A
- Value:A
- Value:R
+ Variable:A
+ Variable:A
+ Variable:R
  BinaryOperator:+
  AssignmentOperator:=
 380 IF A<360 THEN 400
- Value:A
+ Variable:A
  NumericConstant:360
  BinaryOperator:<
 390 A=A-360
- Reference:A
- Value:A
+ Variable:A
+ Variable:A
  NumericConstant:360
  BinaryOperator:-
  AssignmentOperator:=
 400 T=ABS(A-A1)
- Reference:T
- Value:A
- Value:A1
+ Variable:T
+ Variable:A
+ Variable:A1
  BinaryOperator:-
  FunctionAbs
  AssignmentOperator:=
 410 IF T<180 THEN 430
- Value:T
+ Variable:T
  NumericConstant:180
  BinaryOperator:<
 420 T=360-T
- Reference:T
+ Variable:T
  NumericConstant:360
- Value:T
+ Variable:T
  BinaryOperator:-
  AssignmentOperator:=
 430 C=SQR(D*D+D1*D1-2*D*D1*COS(T*3.14159/180))
- Reference:C
- Value:D
- Value:D
+ Variable:C
+ Variable:D
+ Variable:D
  BinaryOperator:*
- Value:D1
- Value:D1
+ Variable:D1
+ Variable:D1
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:2
- Value:D
+ Variable:D
  BinaryOperator:*
- Value:D1
+ Variable:D1
  BinaryOperator:*
- Value:T
+ Variable:T
  NumericConstant:3.14159
  BinaryOperator:*
  NumericConstant:180
@@ -375,7 +375,7 @@
  ITEMS
  TextConstant:"YOUR PHOTON BOMB EXPLODED"
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:;
  TextConstant:"*10^2 MILES FROM THE"
  CarriageControl:NL
@@ -384,7 +384,7 @@
  TextConstant:"ROMULAN SHIP."
  CarriageControl:NL
 450 IF C<=50 THEN 470
- Value:C
+ Variable:C
  NumericConstant:50
  BinaryOperator:<=
 460 GOTO 310
@@ -408,9 +408,9 @@
  TextConstant:"DO YOU WISH TO TRY TO DESTROY IT"
  CarriageControl:;
 520 INPUT C$
- Reference:C$
+ Variable:C$
 530 IF C$="YES" THEN 270
- Value:C$
+ Variable:C$
  TextConstant:"YES"
  BinaryOperator:=
 540 PRINT "GOOD BYE."

@@ -37,21 +37,21 @@
  TextConstant:"DO YOU WANT THE RULES (1=YES, 0=NO!)"
  CarriageControl:;
 140 INPUT R
- Reference:R
+ Variable:R
 150 IF R=0 THEN 340
- Value:R
+ Variable:R
  NumericConstant:0
  BinaryOperator:=
 160 F=1
- Reference:F
+ Variable:F
  NumericConstant:1
  AssignmentOperator:=
 170 R=5
- Reference:R
+ Variable:R
  NumericConstant:5
  AssignmentOperator:=
 180 C=7
- Reference:C
+ Variable:C
  NumericConstant:7
  AssignmentOperator:=
 190 PRINT "CHOMP IS FOR 1 OR MORE PLAYERS (HUMANS ONLY)."
@@ -116,7 +116,7 @@
 350 REM 
  Remark:
 360 F=0
- Reference:F
+ Variable:F
  NumericConstant:0
  AssignmentOperator:=
 370 FOR I=1 TO 10
@@ -128,9 +128,9 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 375 A(I,J)=0
- Value:I
- Value:J
- Reference:A
+ Variable:I
+ Variable:J
+ Variable:A
  NumericConstant:0
  AssignmentOperator:=
 377 NEXT J
@@ -145,9 +145,9 @@
  TextConstant:"HOW MANY PLAYERS"
  CarriageControl:;
 400 INPUT P
- Reference:P
+ Variable:P
 410 I1=0
- Reference:I1
+ Variable:I1
  NumericConstant:0
  AssignmentOperator:=
 420 PRINT "HOW MANY ROWS";
@@ -155,9 +155,9 @@
  TextConstant:"HOW MANY ROWS"
  CarriageControl:;
 430 INPUT R
- Reference:R
+ Variable:R
 440 IF R <= 9 THEN 470
- Value:R
+ Variable:R
  NumericConstant:9
  BinaryOperator:<=
 450 PRINT "TOO MANY ROWS (9 IS MAXIMUM). NOW, ";
@@ -171,9 +171,9 @@
  TextConstant:"HOW MANY COLUMNS"
  CarriageControl:;
 480 INPUT C
- Reference:C
+ Variable:C
 490 IF C <= 9 THEN 530
- Value:C
+ Variable:C
  NumericConstant:9
  BinaryOperator:<=
 500 PRINT "TOO MANY COLUMNS (9 IS MAXIMUM). NOW, ";
@@ -188,15 +188,15 @@
 540 FOR I=1 TO R
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:R"]
+ end:     ["Variable:R"]
 550 FOR J=1 TO C
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:C"]
+ end:     ["Variable:C"]
 560 A(I,J)=1
- Value:I
- Value:J
- Reference:A
+ Variable:I
+ Variable:J
+ Variable:A
  NumericConstant:1
  AssignmentOperator:=
 570 NEXT J
@@ -206,7 +206,7 @@
 590 A(1,1)=-1
  NumericConstant:1
  NumericConstant:1
- Reference:A
+ Variable:A
  NumericConstant:1
  UnaryOperator:-
  AssignmentOperator:=
@@ -225,10 +225,10 @@
 630 FOR I=1 TO R
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:R"]
+ end:     ["Variable:R"]
 640 PRINT I;TAB(7);
  ITEMS
- Value:I
+ Variable:I
  CarriageControl:;
  NumericConstant:7
  FunctionTab
@@ -236,18 +236,18 @@
 650 FOR J=1 TO C
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:C"]
+ end:     ["Variable:C"]
 660 IF A(I,J)=-1 THEN 700
- Value:I
- Value:J
- Value:A
+ Variable:I
+ Variable:J
+ Variable:A
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
 670 IF A(I,J)=0 THEN 720
- Value:I
- Value:J
- Value:A
+ Variable:I
+ Variable:J
+ Variable:A
  NumericConstant:0
  BinaryOperator:=
 680 PRINT "* ";
@@ -271,7 +271,7 @@
  ITEMS
  CarriageControl:NL
 750 IF F=0 THEN 770
- Value:F
+ Variable:F
  NumericConstant:0
  BinaryOperator:=
 760 RETURN 
@@ -279,69 +279,69 @@
 770 REM GET CHOMPS FOR EACH PLAYER IN TURN
  Remark:GET CHOMPS FOR EACH PLAYER IN TURN
 780 LET I1=I1+1
- Reference:I1
- Value:I1
+ Variable:I1
+ Variable:I1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 790 LET P1=I1-INT(I1/P)*P
- Reference:P1
- Value:I1
- Value:I1
- Value:P
+ Variable:P1
+ Variable:I1
+ Variable:I1
+ Variable:P
  BinaryOperator:/
  FunctionInt
- Value:P
+ Variable:P
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 800 IF P1 <> 0 THEN 820
- Value:P1
+ Variable:P1
  NumericConstant:0
  BinaryOperator:<>
 810 P1=P
- Reference:P1
- Value:P
+ Variable:P1
+ Variable:P
  AssignmentOperator:=
 820 PRINT "PLAYER";P1
  ITEMS
  TextConstant:"PLAYER"
  CarriageControl:;
- Value:P1
+ Variable:P1
  CarriageControl:NL
 830 PRINT "COORDINATES OF CHOMP (ROW,COLUMN)";
  ITEMS
  TextConstant:"COORDINATES OF CHOMP (ROW,COLUMN)"
  CarriageControl:;
 840 INPUT R1,C1
- Reference:R1
- Reference:C1
+ Variable:R1
+ Variable:C1
 850 IF R1<1 THEN 920
- Value:R1
+ Variable:R1
  NumericConstant:1
  BinaryOperator:<
 860 IF R1>R THEN 920
- Value:R1
- Value:R
+ Variable:R1
+ Variable:R
  BinaryOperator:>
 870 IF C1<1 THEN 920
- Value:C1
+ Variable:C1
  NumericConstant:1
  BinaryOperator:<
 880 IF C1>C THEN 920
- Value:C1
- Value:C
+ Variable:C1
+ Variable:C
  BinaryOperator:>
 890 IF A(R1,C1)=0 THEN 920
- Value:R1
- Value:C1
- Value:A
+ Variable:R1
+ Variable:C1
+ Variable:A
  NumericConstant:0
  BinaryOperator:=
 900 IF A(R1,C1)=-1 THEN 1010
- Value:R1
- Value:C1
- Value:A
+ Variable:R1
+ Variable:C1
+ Variable:A
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
@@ -355,16 +355,16 @@
  LineNumber:820
 940 FOR I=R1 TO R
  control: Variable:I
- start:   ["Value:R1"]
- end:     ["Value:R"]
+ start:   ["Variable:R1"]
+ end:     ["Variable:R"]
 950 FOR J=C1 TO C
  control: Variable:J
- start:   ["Value:C1"]
- end:     ["Value:C"]
+ start:   ["Variable:C1"]
+ end:     ["Variable:C"]
 960 A(I,J)=0
- Value:I
- Value:J
- Reference:A
+ Variable:I
+ Variable:J
+ Variable:A
  NumericConstant:0
  AssignmentOperator:=
 970 NEXT J
@@ -379,7 +379,7 @@
  ITEMS
  TextConstant:"YOU LOSE, PLAYER"
  CarriageControl:;
- Value:P1
+ Variable:P1
  CarriageControl:NL
 1020 PRINT 
  ITEMS
@@ -389,9 +389,9 @@
  TextConstant:"AGAIN (1=YES, 0=NO!)"
  CarriageControl:;
 1040 INPUT R$
- Reference:R$
+ Variable:R$
 1050 IF R=1 THEN 340
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:=
 1060 END

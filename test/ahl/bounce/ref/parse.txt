@@ -53,17 +53,17 @@
  ITEMS
  CarriageControl:NL
 135 INPUT "TIME INCREMENT (SEC)";S2
- Reference:S2
+ Variable:S2
 140 PRINT
  ITEMS
  CarriageControl:NL
 150 INPUT "VELOCITY (FPS)";V
- Reference:V
+ Variable:V
 160 PRINT
  ITEMS
  CarriageControl:NL
 170 INPUT "COEFFICIENT";C
- Reference:C
+ Variable:C
 180 PRINT
  ITEMS
  CarriageControl:NL
@@ -75,11 +75,11 @@
  ITEMS
  CarriageControl:NL
 186 S1=INT(70/(V/(16*S2)))
- Reference:S1
+ Variable:S1
  NumericConstant:70
- Value:V
+ Variable:V
  NumericConstant:16
- Value:S2
+ Variable:S2
  BinaryOperator:*
  BinaryOperator:/
  BinaryOperator:/
@@ -88,13 +88,13 @@
 190 FOR I=1 TO S1
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:S1"]
+ end:     ["Variable:S1"]
 200 T(I)=V*C^(I-1)/16
- Value:I
- Reference:T
- Value:V
- Value:C
- Value:I
+ Variable:I
+ Variable:T
+ Variable:V
+ Variable:C
+ Variable:I
  NumericConstant:1
  BinaryOperator:-
  BinaryOperator:^
@@ -106,55 +106,55 @@
  Variable:I
 220 FOR H=INT(-16*(V/32)^2+V^2/32+.5) TO 0 STEP -.5
  control: Variable:H
- start:   ["NumericConstant:16", "UnaryOperator:-", "Value:V", "NumericConstant:32", "BinaryOperator:/", "NumericConstant:2", "BinaryOperator:^", "BinaryOperator:*", "Value:V", "NumericConstant:2", "BinaryOperator:^", "NumericConstant:32", "BinaryOperator:/", "BinaryOperator:+", "NumericConstant:.5", "BinaryOperator:+", "FunctionInt"]
+ start:   ["NumericConstant:16", "UnaryOperator:-", "Variable:V", "NumericConstant:32", "BinaryOperator:/", "NumericConstant:2", "BinaryOperator:^", "BinaryOperator:*", "Variable:V", "NumericConstant:2", "BinaryOperator:^", "NumericConstant:32", "BinaryOperator:/", "BinaryOperator:+", "NumericConstant:.5", "BinaryOperator:+", "FunctionInt"]
  end:     ["NumericConstant:0"]
  step:    ["NumericConstant:.5", "UnaryOperator:-"]
 221 IF INT(H)<>H THEN 225
- Value:H
+ Variable:H
  FunctionInt
- Value:H
+ Variable:H
  BinaryOperator:<>
 222 PRINT H;
  ITEMS
- Value:H
+ Variable:H
  CarriageControl:;
 225 L=0
- Reference:L
+ Variable:L
  NumericConstant:0
  AssignmentOperator:=
 230 FOR I=1 TO S1
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:S1"]
+ end:     ["Variable:S1"]
 240 FOR T=0 TO T(I) STEP S2
  control: Variable:T
  start:   ["NumericConstant:0"]
- end:     ["Value:I", "Value:T"]
- step:    ["Value:S2"]
+ end:     ["Variable:I", "Variable:T"]
+ step:    ["Variable:S2"]
 245 L=L+S2
- Reference:L
- Value:L
- Value:S2
+ Variable:L
+ Variable:L
+ Variable:S2
  BinaryOperator:+
  AssignmentOperator:=
 250 IF ABS(H-(.5*(-32)*T^2+V*C^(I-1)*T))>.25 THEN 270
- Value:H
+ Variable:H
  NumericConstant:.5
  NumericConstant:32
  UnaryOperator:-
  BinaryOperator:*
- Value:T
+ Variable:T
  NumericConstant:2
  BinaryOperator:^
  BinaryOperator:*
- Value:V
- Value:C
- Value:I
+ Variable:V
+ Variable:C
+ Variable:I
  NumericConstant:1
  BinaryOperator:-
  BinaryOperator:^
  BinaryOperator:*
- Value:T
+ Variable:T
  BinaryOperator:*
  BinaryOperator:+
  BinaryOperator:-
@@ -163,8 +163,8 @@
  BinaryOperator:>
 260 PRINT TAB(L/S2);"0";
  ITEMS
- Value:L
- Value:S2
+ Variable:L
+ Variable:S2
  BinaryOperator:/
  FunctionTab
  CarriageControl:;
@@ -173,32 +173,32 @@
 270 NEXT T
  Variable:T
 275 T=T(I+1)/2
- Reference:T
- Value:I
+ Variable:T
+ Variable:I
  NumericConstant:1
  BinaryOperator:+
- Value:T
+ Variable:T
  NumericConstant:2
  BinaryOperator:/
  AssignmentOperator:=
 276 IF -16*T^2+V*C^(I-1)*T<H THEN 290
  NumericConstant:16
  UnaryOperator:-
- Value:T
+ Variable:T
  NumericConstant:2
  BinaryOperator:^
  BinaryOperator:*
- Value:V
- Value:C
- Value:I
+ Variable:V
+ Variable:C
+ Variable:I
  NumericConstant:1
  BinaryOperator:-
  BinaryOperator:^
  BinaryOperator:*
- Value:T
+ Variable:T
  BinaryOperator:*
  BinaryOperator:+
- Value:H
+ Variable:H
  BinaryOperator:<
 280 NEXT I
  Variable:I
@@ -215,7 +215,7 @@
 320 FOR I=1 TO INT(L+1)/S2+1
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:L", "NumericConstant:1", "BinaryOperator:+", "FunctionInt", "Value:S2", "BinaryOperator:/", "NumericConstant:1", "BinaryOperator:+"]
+ end:     ["Variable:L", "NumericConstant:1", "BinaryOperator:+", "FunctionInt", "Variable:S2", "BinaryOperator:/", "NumericConstant:1", "BinaryOperator:+"]
 330 PRINT ".";
  ITEMS
  TextConstant:"."
@@ -232,16 +232,16 @@
 360 FOR I=1 TO INT(L+.9995)
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:L", "NumericConstant:.9995", "BinaryOperator:+", "FunctionInt"]
+ end:     ["Variable:L", "NumericConstant:.9995", "BinaryOperator:+", "FunctionInt"]
 380 PRINT TAB(INT(I/S2));I;
  ITEMS
- Value:I
- Value:S2
+ Variable:I
+ Variable:S2
  BinaryOperator:/
  FunctionInt
  FunctionTab
  CarriageControl:;
- Value:I
+ Variable:I
  CarriageControl:;
 390 NEXT I
  Variable:I
@@ -250,12 +250,12 @@
  CarriageControl:NL
 410 PRINT TAB(INT(L+1)/(2*S2)-2);"SECONDS"
  ITEMS
- Value:L
+ Variable:L
  NumericConstant:1
  BinaryOperator:+
  FunctionInt
  NumericConstant:2
- Value:S2
+ Variable:S2
  BinaryOperator:*
  BinaryOperator:/
  NumericConstant:2

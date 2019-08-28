@@ -98,41 +98,41 @@
  Declaration:S
  NumericConstant:10
  Declaration:W
- Reference:M
+ Variable:M
  NumericConstant:0
  AssignmentOperator:=
- Reference:R
+ Variable:R
  NumericConstant:0
  AssignmentOperator:=
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
- Value:I
- Reference:S
+ Variable:I
+ Variable:S
  NumericConstant:0
  AssignmentOperator:=
  Variable:I
 110 INPUT "HOW MANY PLAYERS";N: PRINT
- Reference:N
+ Variable:N
  ITEMS
  CarriageControl:NL
 120 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 130 PRINT "NAME OF PLAYER #";I;:INPUT A$(I)
  ITEMS
  TextConstant:"NAME OF PLAYER #"
  CarriageControl:;
- Value:I
+ Variable:I
  CarriageControl:;
- Value:I
- Reference:A$
+ Variable:I
+ Variable:A$
 140 NEXT I
  Variable:I
 150 R=R+1: PRINT: PRINT "ROUND";R:PRINT "---------"
- Reference:R
- Value:R
+ Variable:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -141,7 +141,7 @@
  ITEMS
  TextConstant:"ROUND"
  CarriageControl:;
- Value:R
+ Variable:R
  CarriageControl:NL
  ITEMS
  TextConstant:"---------"
@@ -149,22 +149,22 @@
 160 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 170 PRINT: PRINT A$(I)"'S THROW";: INPUT T
  ITEMS
  CarriageControl:NL
  ITEMS
- Value:I
- Value:A$
+ Variable:I
+ Variable:A$
  CarriageControl:
  TextConstant:"'S THROW"
  CarriageControl:;
- Reference:T
+ Variable:T
 180 IF T<0 OR T>3 THEN PRINT "INPUT 1, 2, OR 3!": GOTO 170
- Value:T
+ Variable:T
  NumericConstant:0
  BinaryOperator:<
- Value:T
+ Variable:T
  NumericConstant:3
  BinaryOperator:>
  BinaryOperator:OR
@@ -173,97 +173,97 @@
  CarriageControl:NL
  LineNumber:170
 190 ON T GOTO 200, 210, 200
- Value:T
+ Variable:T
  LineNumber:200
  LineNumber:210
  LineNumber:200
 200 P1=.65: P2=.55: P3=.5: P4=.5: GOTO 230
- Reference:P1
+ Variable:P1
  NumericConstant:.65
  AssignmentOperator:=
- Reference:P2
+ Variable:P2
  NumericConstant:.55
  AssignmentOperator:=
- Reference:P3
+ Variable:P3
  NumericConstant:.5
  AssignmentOperator:=
- Reference:P4
+ Variable:P4
  NumericConstant:.5
  AssignmentOperator:=
  LineNumber:230
 210 P1=.99: P2=.77: P3=.43: P4=.01: GOTO 230
- Reference:P1
+ Variable:P1
  NumericConstant:.99
  AssignmentOperator:=
- Reference:P2
+ Variable:P2
  NumericConstant:.77
  AssignmentOperator:=
- Reference:P3
+ Variable:P3
  NumericConstant:.43
  AssignmentOperator:=
- Reference:P4
+ Variable:P4
  NumericConstant:.01
  AssignmentOperator:=
  LineNumber:230
 220 P1=.95: P2=.75: P3=.45: P4=.05
- Reference:P1
+ Variable:P1
  NumericConstant:.95
  AssignmentOperator:=
- Reference:P2
+ Variable:P2
  NumericConstant:.75
  AssignmentOperator:=
- Reference:P3
+ Variable:P3
  NumericConstant:.45
  AssignmentOperator:=
- Reference:P4
+ Variable:P4
  NumericConstant:.05
  AssignmentOperator:=
 230 U=RND(1)
- Reference:U
+ Variable:U
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
 240 IF U>=P1 THEN PRINT "BULLSEYE!!  40 POINTS!":B=40: GOTO 290
- Value:U
- Value:P1
+ Variable:U
+ Variable:P1
  BinaryOperator:>=
  ITEMS
  TextConstant:"BULLSEYE!!  40 POINTS!"
  CarriageControl:NL
- Reference:B
+ Variable:B
  NumericConstant:40
  AssignmentOperator:=
  LineNumber:290
 250 IF U>=P2 THEN PRINT "30-POINT ZONE!":B=30: GOTO 290
- Value:U
- Value:P2
+ Variable:U
+ Variable:P2
  BinaryOperator:>=
  ITEMS
  TextConstant:"30-POINT ZONE!"
  CarriageControl:NL
- Reference:B
+ Variable:B
  NumericConstant:30
  AssignmentOperator:=
  LineNumber:290
 260 IF U>=P3 THEN PRINT "20-POINT ZONE":B=20: GOTO 290
- Value:U
- Value:P3
+ Variable:U
+ Variable:P3
  BinaryOperator:>=
  ITEMS
  TextConstant:"20-POINT ZONE"
  CarriageControl:NL
- Reference:B
+ Variable:B
  NumericConstant:20
  AssignmentOperator:=
  LineNumber:290
 270 IF U>=P4 THEN PRINT "WHEW!  10 POINTS.":B=10: GOTO 290
- Value:U
- Value:P4
+ Variable:U
+ Variable:P4
  BinaryOperator:>=
  ITEMS
  TextConstant:"WHEW!  10 POINTS."
  CarriageControl:NL
- Reference:B
+ Variable:B
  NumericConstant:10
  AssignmentOperator:=
  LineNumber:290
@@ -271,46 +271,46 @@
  ITEMS
  TextConstant:"MISSED THE TARGET!  TOO BAD."
  CarriageControl:NL
- Reference:B
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
 290 S(I)=S(I)+B: PRINT "TOTAL SCORE =";S(I): NEXT I
- Value:I
- Reference:S
- Value:I
- Value:S
- Value:B
+ Variable:I
+ Variable:S
+ Variable:I
+ Variable:S
+ Variable:B
  BinaryOperator:+
  AssignmentOperator:=
  ITEMS
  TextConstant:"TOTAL SCORE ="
  CarriageControl:;
- Value:I
- Value:S
+ Variable:I
+ Variable:S
  CarriageControl:NL
  Variable:I
 300 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 310 IF S(I)>=200 THEN M=M+1: W(M)=I
- Value:I
- Value:S
+ Variable:I
+ Variable:S
  NumericConstant:200
  BinaryOperator:>=
- Reference:M
- Value:M
+ Variable:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:M
- Reference:W
- Value:I
+ Variable:M
+ Variable:W
+ Variable:I
  AssignmentOperator:=
 320 NEXT I
  Variable:I
 330 IF M=0 THEN 150
- Value:M
+ Variable:M
  NumericConstant:0
  BinaryOperator:=
 340 PRINT: PRINT "WE HAVE A WINNER!!": PRINT
@@ -324,17 +324,17 @@
 350 FOR I=1 TO M: PRINT A$(W(I));" SCORED";S(W(I));"POINTS.": NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:M"]
+ end:     ["Variable:M"]
  ITEMS
- Value:I
- Value:W
- Value:A$
+ Variable:I
+ Variable:W
+ Variable:A$
  CarriageControl:;
  TextConstant:" SCORED"
  CarriageControl:;
- Value:I
- Value:W
- Value:S
+ Variable:I
+ Variable:W
+ Variable:S
  CarriageControl:;
  TextConstant:"POINTS."
  CarriageControl:NL

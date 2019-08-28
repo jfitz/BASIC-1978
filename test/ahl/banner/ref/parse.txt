@@ -1,32 +1,32 @@
 10 INPUT "HORIZONTAL";X
- Reference:X
+ Variable:X
 20 INPUT "VERTICAL";Y
- Reference:Y
+ Variable:Y
 21 INPUT "CENTERED";L$
- Reference:L$
+ Variable:L$
 22 G1=0:IF L$>"P" THEN G1=1
- Reference:G1
+ Variable:G1
  NumericConstant:0
  AssignmentOperator:=
- Value:L$
+ Variable:L$
  TextConstant:"P"
  BinaryOperator:>
- Reference:G1
+ Variable:G1
  NumericConstant:1
  AssignmentOperator:=
 23 INPUT "CHARACTER (TYPE 'ALL' IF YOU WANT CHARACTER BEING PRINTED)";M$
- Reference:M$
+ Variable:M$
 29 PRINT "STATEMENT";
  ITEMS
  TextConstant:"STATEMENT"
  CarriageControl:;
 30 INPUT A$
- Reference:A$
+ Variable:A$
 35 INPUT "SET PAGE";O$
- Reference:O$
+ Variable:O$
 40 A=ASC(LEFT$(A$,1))
- Reference:A
- Value:A$
+ Variable:A
+ Variable:A$
  NumericConstant:1
  FunctionLeft
  FunctionAsc
@@ -38,11 +38,11 @@
 70 FOR T=1 TO LEN(A$)
  control: Variable:T
  start:   ["NumericConstant:1"]
- end:     ["Value:A$", "FunctionLen"]
+ end:     ["Variable:A$", "FunctionLen"]
 80 P$=MID$(A$,T,1)
- Reference:P$
- Value:A$
- Value:T
+ Variable:P$
+ Variable:A$
+ Variable:T
  NumericConstant:1
  FunctionMid
  AssignmentOperator:=
@@ -51,43 +51,43 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:50"]
 95 READ S$,S(1),S(2),S(3),S(4),S(5),S(6),S(7)
- Reference:S$
+ Variable:S$
  NumericConstant:1
- Reference:S
+ Variable:S
  NumericConstant:2
- Reference:S
+ Variable:S
  NumericConstant:3
- Reference:S
+ Variable:S
  NumericConstant:4
- Reference:S
+ Variable:S
  NumericConstant:5
- Reference:S
+ Variable:S
  NumericConstant:6
- Reference:S
+ Variable:S
  NumericConstant:7
- Reference:S
+ Variable:S
 96 IF P$=" " THEN 812
- Value:P$
+ Variable:P$
  TextConstant:" "
  BinaryOperator:=
 100 IF P$=S$ THEN 200
- Value:P$
- Value:S$
+ Variable:P$
+ Variable:S$
  BinaryOperator:=
 120 NEXT O
  Variable:O
 200 RESTORE
  
 201 X$=M$
- Reference:X$
- Value:M$
+ Variable:X$
+ Variable:M$
  AssignmentOperator:=
 202 IF M$="ALL" THEN X$=S$
- Value:M$
+ Variable:M$
  TextConstant:"ALL"
  BinaryOperator:=
- Reference:X$
- Value:S$
+ Variable:X$
+ Variable:S$
  AssignmentOperator:=
 205 FOR U=1 TO 7
  control: Variable:U
@@ -100,39 +100,39 @@
  step:    ["NumericConstant:1", "UnaryOperator:-"]
 230 IF 2^K<S(U) THEN 270
  NumericConstant:2
- Value:K
+ Variable:K
  BinaryOperator:^
- Value:U
- Value:S
+ Variable:U
+ Variable:S
  BinaryOperator:<
 240 J(9-K)=0
  NumericConstant:9
- Value:K
+ Variable:K
  BinaryOperator:-
- Reference:J
+ Variable:J
  NumericConstant:0
  AssignmentOperator:=
 250 GOTO 280
  LineNumber:280
 270 J(9-K)=1: S(U)=S(U)-2^K
  NumericConstant:9
- Value:K
+ Variable:K
  BinaryOperator:-
- Reference:J
+ Variable:J
  NumericConstant:1
  AssignmentOperator:=
- Value:U
- Reference:S
- Value:U
- Value:S
+ Variable:U
+ Variable:S
+ Variable:U
+ Variable:S
  NumericConstant:2
- Value:K
+ Variable:K
  BinaryOperator:^
  BinaryOperator:-
  AssignmentOperator:=
 272 IF S(U)=1 THEN 815
- Value:U
- Value:S
+ Variable:U
+ Variable:S
  NumericConstant:1
  BinaryOperator:=
 280 NEXT K
@@ -140,17 +140,17 @@
 445 FOR T1=1 TO X
  control: Variable:T1
  start:   ["NumericConstant:1"]
- end:     ["Value:X"]
+ end:     ["Variable:X"]
 447 PRINT TAB((63-4.5*Y)*G1/(LEN(X$))+1);
  ITEMS
  NumericConstant:63
  NumericConstant:4.5
- Value:Y
+ Variable:Y
  BinaryOperator:*
  BinaryOperator:-
- Value:G1
+ Variable:G1
  BinaryOperator:*
- Value:X$
+ Variable:X$
  FunctionLen
  BinaryOperator:/
  NumericConstant:1
@@ -160,18 +160,18 @@
 450 FOR B=1 TO F(U)
  control: Variable:B
  start:   ["NumericConstant:1"]
- end:     ["Value:U", "Value:F"]
+ end:     ["Variable:U", "Variable:F"]
 460 IF J(B)=0 THEN 500
- Value:B
- Value:J
+ Variable:B
+ Variable:J
  NumericConstant:0
  BinaryOperator:=
 465 FOR I=1 TO Y: PRINT X$;: NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:Y"]
+ end:     ["Variable:Y"]
  ITEMS
- Value:X$
+ Variable:X$
  CarriageControl:;
  Variable:I
 470 GOTO 600
@@ -179,11 +179,11 @@
 500 FOR I=1 TO Y
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:Y"]
+ end:     ["Variable:Y"]
 510 FOR I1=1 TO LEN(X$)
  control: Variable:I1
  start:   ["NumericConstant:1"]
- end:     ["Value:X$", "FunctionLen"]
+ end:     ["Variable:X$", "FunctionLen"]
 520 PRINT " ";: NEXT I1
  ITEMS
  TextConstant:" "
@@ -203,7 +203,7 @@
 750 FOR H=1 TO 2*X: PRINT: NEXT H
  control: Variable:H
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:2", "Value:X", "BinaryOperator:*"]
+ end:     ["NumericConstant:2", "Variable:X", "BinaryOperator:*"]
  ITEMS
  CarriageControl:NL
  Variable:H
@@ -221,17 +221,17 @@
 812 FOR H=1 TO 7*X: PRINT: NEXT H
  control: Variable:H
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:7", "Value:X", "BinaryOperator:*"]
+ end:     ["NumericConstant:7", "Variable:X", "BinaryOperator:*"]
  ITEMS
  CarriageControl:NL
  Variable:H
 813 GOTO 800
  LineNumber:800
 815 F(U)=9-K: GOTO 445
- Value:U
- Reference:F
+ Variable:U
+ Variable:F
  NumericConstant:9
- Value:K
+ Variable:K
  BinaryOperator:-
  AssignmentOperator:=
  LineNumber:445

@@ -38,7 +38,7 @@
  ITEMS
  CarriageControl:NL
 170 R=INT(40000*RND(1)+20000)
- Reference:R
+ Variable:R
  NumericConstant:40000
  NumericConstant:1
  FunctionRnd
@@ -51,24 +51,24 @@
  ITEMS
  TextConstant:"MAXIMUM RANGE OF YOUR GUN IS"
  CarriageControl:;
- Value:R
+ Variable:R
  CarriageControl:;
  TextConstant:" YARDS."
  CarriageControl:NL
 185 Z=0
- Reference:Z
+ Variable:Z
  NumericConstant:0
  AssignmentOperator:=
 190 PRINT
  ITEMS
  CarriageControl:NL
 195 S1=0
- Reference:S1
+ Variable:S1
  NumericConstant:0
  AssignmentOperator:=
 200 T=INT(R*(.1+.8*RND(1)))
- Reference:T
- Value:R
+ Variable:T
+ Variable:R
  NumericConstant:.1
  NumericConstant:.8
  NumericConstant:1
@@ -79,7 +79,7 @@
  FunctionInt
  AssignmentOperator:=
 210 S=0
- Reference:S
+ Variable:S
  NumericConstant:0
  AssignmentOperator:=
 220 GOTO 370
@@ -100,7 +100,7 @@
  ITEMS
  TextConstant:"OVER TARGET BY "
  CarriageControl:;
- Value:E
+ Variable:E
  FunctionAbs
  CarriageControl:;
  TextConstant:"YARDS."
@@ -111,7 +111,7 @@
  ITEMS
  TextConstant:"SHORT OF TARGET BY "
  CarriageControl:
- Value:E
+ Variable:E
  FunctionAbs
  CarriageControl:;
  TextConstant:"YARDS."
@@ -122,23 +122,23 @@
  ITEMS
  TextConstant:"*** TARGET DESTROYED ***  "
  CarriageControl:;
- Value:S
+ Variable:S
  CarriageControl:;
  TextConstant:"ROUNDS OF AMMUNITION EXPENDED."
  CarriageControl:NL
 325 S1=S1+S
- Reference:S1
- Value:S1
- Value:S
+ Variable:S1
+ Variable:S1
+ Variable:S
  BinaryOperator:+
  AssignmentOperator:=
 330 IF Z=4 THEN 490
- Value:Z
+ Variable:Z
  NumericConstant:4
  BinaryOperator:=
 340 Z=Z+1
- Reference:Z
- Value:Z
+ Variable:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -155,7 +155,7 @@
  ITEMS
  TextConstant:"DISTANCE TO THE TARGET IS "
  CarriageControl:
- Value:T
+ Variable:T
  CarriageControl:;
  TextConstant:" YARDS."
  CarriageControl:NL
@@ -166,23 +166,23 @@
  ITEMS
  CarriageControl:NL
 400 INPUT "ELEVATION";B
- Reference:B
+ Variable:B
 420 IF B>89 THEN 250
- Value:B
+ Variable:B
  NumericConstant:89
  BinaryOperator:>
 430 IF B<1 THEN 230
- Value:B
+ Variable:B
  NumericConstant:1
  BinaryOperator:<
 440 S=S+1
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 442 IF S<6 THEN 450
- Value:S
+ Variable:S
  NumericConstant:6
  BinaryOperator:<
 444 PRINT:PRINT "BOOM !!!!   YOU HAVE JUST BEEN DESTROYED ";
@@ -203,35 +203,35 @@
  CarriageControl:NL
  LineNumber:495
 450 B2=2*B/57.3 : I=R*SIN(B2) : X=T-I : E=INT(X)
- Reference:B2
+ Variable:B2
  NumericConstant:2
- Value:B
+ Variable:B
  BinaryOperator:*
  NumericConstant:57.3
  BinaryOperator:/
  AssignmentOperator:=
- Reference:I
- Value:R
- Value:B2
+ Variable:I
+ Variable:R
+ Variable:B2
  FunctionSin
  BinaryOperator:*
  AssignmentOperator:=
- Reference:X
- Value:T
- Value:I
+ Variable:X
+ Variable:T
+ Variable:I
  BinaryOperator:-
  AssignmentOperator:=
- Reference:E
- Value:X
+ Variable:E
+ Variable:X
  FunctionInt
  AssignmentOperator:=
 460 IF ABS(E)<100 THEN 320
- Value:E
+ Variable:E
  FunctionAbs
  NumericConstant:100
  BinaryOperator:<
 470 IF E>100 THEN 290
- Value:E
+ Variable:E
  NumericConstant:100
  BinaryOperator:>
 480 GOTO 270
@@ -244,10 +244,10 @@
  ITEMS
  TextConstant:"TOTAL ROUNDS EXPENDED WERE:"
  CarriageControl:;
- Value:S1
+ Variable:S1
  CarriageControl:NL
 492 IF S1>18 THEN 495
- Value:S1
+ Variable:S1
  NumericConstant:18
  BinaryOperator:>
 493 PRINT "NICE SHOOTING !!" : GOTO 500
@@ -262,9 +262,9 @@
 500 PRINT : INPUT "TRY AGAIN (Y OR N)";Z$
  ITEMS
  CarriageControl:NL
- Reference:Z$
+ Variable:Z$
 510 IF Z$="Y" THEN 170
- Value:Z$
+ Variable:Z$
  TextConstant:"Y"
  BinaryOperator:=
 520 PRINT:PRINT "OK.  RETURN TO BASE CAMP."

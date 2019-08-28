@@ -3,11 +3,11 @@
 110 OPTION BASE 1
  NumericConstant:1
 120 L$="[]"       ' LIVE CELL
- Reference:L$
+ Variable:L$
  TextConstant:"[]"
  AssignmentOperator:=
 130 D$="  "       ' DEAD CELL
- Reference:D$
+ Variable:D$
  TextConstant:"  "
  AssignmentOperator:=
 200 REM *** SET UP BOARD
@@ -25,10 +25,10 @@
  control: Variable:J
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
- Value:I
- Value:J
- Reference:B$
- Value:D$
+ Variable:I
+ Variable:J
+ Variable:B$
+ Variable:D$
  AssignmentOperator:=
  Variable:J
  Variable:I
@@ -37,20 +37,20 @@
 240 B$(4,4)=L$
  NumericConstant:4
  NumericConstant:4
- Reference:B$
- Value:L$
+ Variable:B$
+ Variable:L$
  AssignmentOperator:=
 241 B$(4,5)=L$
  NumericConstant:4
  NumericConstant:5
- Reference:B$
- Value:L$
+ Variable:B$
+ Variable:L$
  AssignmentOperator:=
 242 B$(4,6)=L$
  NumericConstant:4
  NumericConstant:6
- Reference:B$
- Value:L$
+ Variable:B$
+ Variable:L$
  AssignmentOperator:=
 300 REM *** DISPLAY BOARD
  Remark:*** DISPLAY BOARD
@@ -60,7 +60,7 @@
  CarriageControl:NL
 320 MAT PRINT B$;
  ITEMS
- Value:B$
+ Variable:B$
  CarriageControl:;
 330 PRINT "********************"
  ITEMS
@@ -70,16 +70,16 @@
  ITEMS
  CarriageControl:NL
 350 INPUT "CONTINUE", A$
- Reference:A$
+ Variable:A$
 360 IF A$ <> "Y" THEN STOP
- Value:A$
+ Variable:A$
  TextConstant:"Y"
  BinaryOperator:<>
  
 400 REM *** CALCULATE NEIGHBORS
  Remark:*** CALCULATE NEIGHBORS
 410 MAT N=ZER(10,10)
- Reference:N
+ Variable:N
  NumericConstant:10
  NumericConstant:10
  FunctionZer
@@ -99,7 +99,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 442 C = 0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 450 FOR I0=-1 TO 1
@@ -111,26 +111,26 @@
  start:   ["NumericConstant:1", "UnaryOperator:-"]
  end:     ["NumericConstant:1"]
 470 IF I0 = 0 AND J0 = 0 THEN 500
- Value:I0
+ Variable:I0
  NumericConstant:0
  BinaryOperator:=
- Value:J0
+ Variable:J0
  NumericConstant:0
  BinaryOperator:=
  BinaryOperator:AND
 480 IF B$(I+I0,J+J0) <> L$ THEN 500
- Value:I
- Value:I0
+ Variable:I
+ Variable:I0
  BinaryOperator:+
- Value:J
- Value:J0
+ Variable:J
+ Variable:J0
  BinaryOperator:+
- Value:B$
- Value:L$
+ Variable:B$
+ Variable:L$
  BinaryOperator:<>
 490 C = C + 1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -139,10 +139,10 @@
 510 NEXT I0
  Variable:I0
 512 N(I,J)=C
- Value:I
- Value:J
- Reference:N
- Value:C
+ Variable:I
+ Variable:J
+ Variable:N
+ Variable:C
  AssignmentOperator:=
 520 NEXT J
  Variable:J
@@ -165,40 +165,40 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 630 IF N(I,J)<2 THEN 660
- Value:I
- Value:J
- Value:N
+ Variable:I
+ Variable:J
+ Variable:N
  NumericConstant:2
  BinaryOperator:<
 640 IF N(I,J)=2 THEN 720
- Value:I
- Value:J
- Value:N
+ Variable:I
+ Variable:J
+ Variable:N
  NumericConstant:2
  BinaryOperator:=
 650 IF N(I,J)=3 THEN 690
- Value:I
- Value:J
- Value:N
+ Variable:I
+ Variable:J
+ Variable:N
  NumericConstant:3
  BinaryOperator:=
 660 REM * CELL DIES
  Remark:* CELL DIES
 670 B$(I,J)=D$
- Value:I
- Value:J
- Reference:B$
- Value:D$
+ Variable:I
+ Variable:J
+ Variable:B$
+ Variable:D$
  AssignmentOperator:=
 680 GOTO 730
  LineNumber:730
 690 REM * CELL IS BORN
  Remark:* CELL IS BORN
 700 B$(I,J)=L$
- Value:I
- Value:J
- Reference:B$
- Value:L$
+ Variable:I
+ Variable:J
+ Variable:B$
+ Variable:L$
  AssignmentOperator:=
 710 GOTO 730
  LineNumber:730

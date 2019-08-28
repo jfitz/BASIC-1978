@@ -24,42 +24,42 @@
  TextConstant:"FOR A PRETTY DIAMOND PATTERN,"
  CarriageControl:NL
 5 INPUT "TYPE IN AN ODD NUMBER BETWEEN 5 AND 21";R:PRINT
- Reference:R
+ Variable:R
  ITEMS
  CarriageControl:NL
 6 Q=INT(60/R):A$="CC"
- Reference:Q
+ Variable:Q
  NumericConstant:60
- Value:R
+ Variable:R
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
- Reference:A$
+ Variable:A$
  TextConstant:"CC"
  AssignmentOperator:=
 8 FOR L=1 TO Q
  control: Variable:L
  start:   ["NumericConstant:1"]
- end:     ["Value:Q"]
+ end:     ["Variable:Q"]
 10 X=1:Y=R:Z=2
- Reference:X
+ Variable:X
  NumericConstant:1
  AssignmentOperator:=
- Reference:Y
- Value:R
+ Variable:Y
+ Variable:R
  AssignmentOperator:=
- Reference:Z
+ Variable:Z
  NumericConstant:2
  AssignmentOperator:=
 20 FOR N=X TO Y STEP Z
  control: Variable:N
- start:   ["Value:X"]
- end:     ["Value:Y"]
- step:    ["Value:Z"]
+ start:   ["Variable:X"]
+ end:     ["Variable:Y"]
+ step:    ["Variable:Z"]
 25 PRINT TAB((R-N)/2);
  ITEMS
- Value:R
- Value:N
+ Variable:R
+ Variable:N
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:/
@@ -68,18 +68,18 @@
 28 FOR M=1 TO Q
  control: Variable:M
  start:   ["NumericConstant:1"]
- end:     ["Value:Q"]
+ end:     ["Variable:Q"]
 29 C=1
- Reference:C
+ Variable:C
  NumericConstant:1
  AssignmentOperator:=
 30 FOR A=1 TO N
  control: Variable:A
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 32 IF C>LEN(A$) THEN PRINT "!";:GOTO 50
- Value:C
- Value:A$
+ Variable:C
+ Variable:A$
  FunctionLen
  BinaryOperator:>
  ITEMS
@@ -88,30 +88,30 @@
  LineNumber:50
 34 PRINT MID$(A$,C,1);
  ITEMS
- Value:A$
- Value:C
+ Variable:A$
+ Variable:C
  NumericConstant:1
  FunctionMid
  CarriageControl:;
 36 C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 50 NEXT A
  Variable:A
 53 IF M=Q THEN 60
- Value:M
- Value:Q
+ Variable:M
+ Variable:Q
  BinaryOperator:=
 55 PRINT TAB(R*M+(R-N)/2);
  ITEMS
- Value:R
- Value:M
+ Variable:R
+ Variable:M
  BinaryOperator:*
- Value:R
- Value:N
+ Variable:R
+ Variable:N
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:/
@@ -126,19 +126,19 @@
 70 NEXT N
  Variable:N
 83 IF X<>1 THEN 95
- Value:X
+ Variable:X
  NumericConstant:1
  BinaryOperator:<>
 85 X=R-2:Y=1:Z=-2
- Reference:X
- Value:R
+ Variable:X
+ Variable:R
  NumericConstant:2
  BinaryOperator:-
  AssignmentOperator:=
- Reference:Y
+ Variable:Y
  NumericConstant:1
  AssignmentOperator:=
- Reference:Z
+ Variable:Z
  NumericConstant:2
  UnaryOperator:-
  AssignmentOperator:=

@@ -24,19 +24,19 @@
  TextConstant:"DO YOU WANT INSTRUCTIONS"
  CarriageControl:;
 5 INPUT Z$
- Reference:Z$
+ Variable:Z$
 6 N5=8
- Reference:N5
+ Variable:N5
  NumericConstant:8
  AssignmentOperator:=
 10 IF LEFT$(Z$,1)="N" THEN 47
- Value:Z$
+ Variable:Z$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
  BinaryOperator:=
 11 IF Z$="AGAIN" THEN 1960
- Value:Z$
+ Variable:Z$
  TextConstant:"AGAIN"
  BinaryOperator:=
 12 PRINT:PRINT:PRINT
@@ -98,7 +98,7 @@
  ITEMS
  TextConstant:"YOUR GOAL IS TO COMPLETE YOUR"
  CarriageControl:;
- Value:N5
+ Variable:N5
  CarriageControl:;
  TextConstant:"YEAR TERM OF OFFICE."
  CarriageControl:NL
@@ -110,7 +110,7 @@
  ITEMS
  CarriageControl:NL
 50 A=INT(60000+(1000*RND(1))-(1000*RND(1)))
- Reference:A
+ Variable:A
  NumericConstant:60000
  NumericConstant:1000
  NumericConstant:1
@@ -125,7 +125,7 @@
  FunctionInt
  AssignmentOperator:=
 55 B=INT(500+(10*RND(1))-(10*RND(1)))
- Reference:B
+ Variable:B
  NumericConstant:500
  NumericConstant:10
  NumericConstant:1
@@ -140,11 +140,11 @@
  FunctionInt
  AssignmentOperator:=
 65 D=2000
- Reference:D
+ Variable:D
  NumericConstant:2000
  AssignmentOperator:=
 100 W=INT(10*RND(1)+95)
- Reference:W
+ Variable:W
  NumericConstant:10
  NumericConstant:1
  FunctionRnd
@@ -160,20 +160,20 @@
  ITEMS
  TextConstant:"YOU NOW HAVE "
  CarriageControl:;
- Value:A
+ Variable:A
  CarriageControl:;
  TextConstant:" RALLODS IN THE TREASURY."
  CarriageControl:NL
 110 PRINT INT(B);:PRINT "COUNTRYMEN, ";
  ITEMS
- Value:B
+ Variable:B
  FunctionInt
  CarriageControl:;
  ITEMS
  TextConstant:"COUNTRYMEN, "
  CarriageControl:;
 115 V9=INT(((RND(1)/2)*10+10))
- Reference:V9
+ Variable:V9
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
@@ -185,12 +185,12 @@
  FunctionInt
  AssignmentOperator:=
 120 IF C=0 THEN 140
- Value:C
+ Variable:C
  NumericConstant:0
  BinaryOperator:=
 130 PRINT INT(C);"FOREIGN WORKERS, ";
  ITEMS
- Value:C
+ Variable:C
  FunctionInt
  CarriageControl:;
  TextConstant:"FOREIGN WORKERS, "
@@ -199,7 +199,7 @@
  ITEMS
  TextConstant:"AND"
  CarriageControl:;
- Value:D
+ Variable:D
  FunctionInt
  CarriageControl:;
  TextConstant:"SQ. MILES OF LAND."
@@ -208,7 +208,7 @@
  ITEMS
  TextConstant:"THIS YEAR INDUSTRY WILL BUY LAND FOR"
  CarriageControl:;
- Value:W
+ Variable:W
  CarriageControl:;
 152 PRINT "RALLODS PER SQUARE MILE."
  ITEMS
@@ -218,7 +218,7 @@
  ITEMS
  TextConstant:"LAND CURRENTLY COSTS"
  CarriageControl:;
- Value:V9
+ Variable:V9
  CarriageControl:;
  TextConstant:"RALLODS PER SQUARE MILE TO PLANT."
  CarriageControl:NL
@@ -230,14 +230,14 @@
  TextConstant:"HOW MANY SQUARE MILES DO YOU WISH TO SELL TO INDUSTRY"
  CarriageControl:;
 210 INPUT H
- Reference:H
+ Variable:H
 215 IF H<0 THEN 200
- Value:H
+ Variable:H
  NumericConstant:0
  BinaryOperator:<
 220 IF H<=D-1000 THEN 300
- Value:H
- Value:D
+ Variable:H
+ Variable:D
  NumericConstant:1000
  BinaryOperator:-
  BinaryOperator:<=
@@ -245,14 +245,14 @@
  ITEMS
  TextConstant:"***  THINK AGAIN. YOU ONLY HAVE"
  CarriageControl:;
- Value:D
+ Variable:D
  NumericConstant:1000
  BinaryOperator:-
  CarriageControl:;
  TextConstant:"SQUARE MILES OF FARM LAND."
  CarriageControl:NL
 240 IF X<>0 THEN 200
- Value:X
+ Variable:X
  NumericConstant:0
  BinaryOperator:<>
 250 PRINT:PRINT "(FOREIGN INDUSTRY WILL ONLY BUY FARM LAND BECAUSE"
@@ -270,23 +270,23 @@
  TextConstant:"THICKER TOP SOIL, ETC.)"
  CarriageControl:NL
 280 X=1
- Reference:X
+ Variable:X
  NumericConstant:1
  AssignmentOperator:=
 299 GOTO 200
  LineNumber:200
 300 D=INT(D-H)
- Reference:D
- Value:D
- Value:H
+ Variable:D
+ Variable:D
+ Variable:H
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
 310 A=INT(A+(H*W))
- Reference:A
- Value:A
- Value:H
- Value:W
+ Variable:A
+ Variable:A
+ Variable:H
+ Variable:W
  BinaryOperator:*
  BinaryOperator:+
  FunctionInt
@@ -296,47 +296,47 @@
  TextConstant:"HOW MANY RALLODS WILL YOU DISTRIBUTE AMONG YOUR COUNTRYMEN"
  CarriageControl:;
 340 INPUT I
- Reference:I
+ Variable:I
 342 IF I<0 THEN 320
- Value:I
+ Variable:I
  NumericConstant:0
  BinaryOperator:<
 350 IF I<A THEN 400
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  BinaryOperator:<
 360 IF I=A THEN 380
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  BinaryOperator:=
 370 PRINT "   THINK AGAIN. YOU'VE ONLY";A;" RALLODS IN THE TREASURY"
  ITEMS
  TextConstant:"   THINK AGAIN. YOU'VE ONLY"
  CarriageControl:;
- Value:A
+ Variable:A
  CarriageControl:;
  TextConstant:" RALLODS IN THE TREASURY"
  CarriageControl:NL
 375 GOTO 320
  LineNumber:320
 380 J=0
- Reference:J
+ Variable:J
  NumericConstant:0
  AssignmentOperator:=
 390 K=0
- Reference:K
+ Variable:K
  NumericConstant:0
  AssignmentOperator:=
 395 A=0
- Reference:A
+ Variable:A
  NumericConstant:0
  AssignmentOperator:=
 399 GOTO 1000
  LineNumber:1000
 400 A=INT(A-I)
- Reference:A
- Value:A
- Value:I
+ Variable:A
+ Variable:A
+ Variable:I
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
@@ -345,14 +345,14 @@
  TextConstant:"HOW MANY SQUARE MILES DO YOU WISH TO PLANT"
  CarriageControl:;
 420 INPUT J
- Reference:J
+ Variable:J
 421 IF J<0 THEN 410
- Value:J
+ Variable:J
  NumericConstant:0
  BinaryOperator:<
 422 IF J<=B*2 THEN 426
- Value:J
- Value:B
+ Variable:J
+ Variable:B
  NumericConstant:2
  BinaryOperator:*
  BinaryOperator:<=
@@ -363,8 +363,8 @@
 424 GOTO 410
  LineNumber:410
 426 IF J<=D-1000 THEN 430
- Value:J
- Value:D
+ Variable:J
+ Variable:D
  NumericConstant:1000
  BinaryOperator:-
  BinaryOperator:<=
@@ -372,7 +372,7 @@
  ITEMS
  TextConstant:"   SORRY, BUT YOU'VE ONLY"
  CarriageControl:;
- Value:D
+ Variable:D
  NumericConstant:1000
  BinaryOperator:-
  CarriageControl:;
@@ -381,44 +381,44 @@
 428 GOTO 410
  LineNumber:410
 430 U1=INT(J*V9)
- Reference:U1
- Value:J
- Value:V9
+ Variable:U1
+ Variable:J
+ Variable:V9
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
 435 IF U1<A THEN 500
- Value:U1
- Value:A
+ Variable:U1
+ Variable:A
  BinaryOperator:<
 440 IF U1=A THEN 490
- Value:U1
- Value:A
+ Variable:U1
+ Variable:A
  BinaryOperator:=
 450 PRINT "   THINK AGAIN. YOU'VE ONLY";A;" RALLODS LEFT IN THE TREASURY."
  ITEMS
  TextConstant:"   THINK AGAIN. YOU'VE ONLY"
  CarriageControl:;
- Value:A
+ Variable:A
  CarriageControl:;
  TextConstant:" RALLODS LEFT IN THE TREASURY."
  CarriageControl:NL
 460 GOTO 410
  LineNumber:410
 490 K=0
- Reference:K
+ Variable:K
  NumericConstant:0
  AssignmentOperator:=
 495 A=0
- Reference:A
+ Variable:A
  NumericConstant:0
  AssignmentOperator:=
 499 GOTO 1000
  LineNumber:1000
 500 A=A-U1
- Reference:A
- Value:A
- Value:U1
+ Variable:A
+ Variable:A
+ Variable:U1
  BinaryOperator:-
  AssignmentOperator:=
 510 PRINT "HOW MANY RALLODS DO YOU WISH TO SPEND ON POLLUTION CONTROL";
@@ -426,39 +426,39 @@
  TextConstant:"HOW MANY RALLODS DO YOU WISH TO SPEND ON POLLUTION CONTROL"
  CarriageControl:;
 520 INPUT K
- Reference:K
+ Variable:K
 522 IF K<0 THEN 510
- Value:K
+ Variable:K
  NumericConstant:0
  BinaryOperator:<
 530 IF K<=A THEN 1000
- Value:K
- Value:A
+ Variable:K
+ Variable:A
  BinaryOperator:<=
 540 PRINT "   THINK AGAIN. YOU ONLY HAVE ";A;" RALLODS REMAINING."
  ITEMS
  TextConstant:"   THINK AGAIN. YOU ONLY HAVE "
  CarriageControl:;
- Value:A
+ Variable:A
  CarriageControl:;
  TextConstant:" RALLODS REMAINING."
  CarriageControl:NL
 550 GOTO 510
  LineNumber:510
 600 IF H<>0 THEN 1002
- Value:H
+ Variable:H
  NumericConstant:0
  BinaryOperator:<>
 602 IF I<>0 THEN 1002
- Value:I
+ Variable:I
  NumericConstant:0
  BinaryOperator:<>
 604 IF J<>0 THEN 1002
- Value:J
+ Variable:J
  NumericConstant:0
  BinaryOperator:<>
 606 IF K<>0 THEN 1002
- Value:K
+ Variable:K
  NumericConstant:0
  BinaryOperator:<>
 609 PRINT
@@ -491,35 +491,35 @@
  ITEMS
  CarriageControl:NL
 1010 A=INT(A-K)
- Reference:A
- Value:A
- Value:K
+ Variable:A
+ Variable:A
+ Variable:K
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
 1020 A4=A
- Reference:A4
- Value:A
+ Variable:A4
+ Variable:A
  AssignmentOperator:=
 1100 IF INT(I/100-B)>=0 THEN 1120
- Value:I
+ Variable:I
  NumericConstant:100
  BinaryOperator:/
- Value:B
+ Variable:B
  BinaryOperator:-
  FunctionInt
  NumericConstant:0
  BinaryOperator:>=
 1105 IF I/100<50 THEN 1700
- Value:I
+ Variable:I
  NumericConstant:100
  BinaryOperator:/
  NumericConstant:50
  BinaryOperator:<
 1110 PRINT INT(B-(I/100));"COUNTRYMEN DIED OF STARVATION"
  ITEMS
- Value:B
- Value:I
+ Variable:B
+ Variable:I
  NumericConstant:100
  BinaryOperator:/
  BinaryOperator:-
@@ -528,49 +528,49 @@
  TextConstant:"COUNTRYMEN DIED OF STARVATION"
  CarriageControl:NL
 1120 F1=INT(RND(1)*(2000-D))
- Reference:F1
+ Variable:F1
  NumericConstant:1
  FunctionRnd
  NumericConstant:2000
- Value:D
+ Variable:D
  BinaryOperator:-
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
 1122 IF K<25 THEN 1130
- Value:K
+ Variable:K
  NumericConstant:25
  BinaryOperator:<
 1125 F1=INT(F1/(K/25))
- Reference:F1
- Value:F1
- Value:K
+ Variable:F1
+ Variable:F1
+ Variable:K
  NumericConstant:25
  BinaryOperator:/
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 1130 IF F1<=0 THEN 1150
- Value:F1
+ Variable:F1
  NumericConstant:0
  BinaryOperator:<=
 1140 PRINT F1;"COUNTRYMEN DIED OF CARBON-MONOXIDE AND DUST INHALATION"
  ITEMS
- Value:F1
+ Variable:F1
  CarriageControl:;
  TextConstant:"COUNTRYMEN DIED OF CARBON-MONOXIDE AND DUST INHALATION"
  CarriageControl:NL
 1150 IF INT((I/100)-B)<0 THEN 1170
- Value:I
+ Variable:I
  NumericConstant:100
  BinaryOperator:/
- Value:B
+ Variable:B
  BinaryOperator:-
  FunctionInt
  NumericConstant:0
  BinaryOperator:<
 1160 IF F1>0 THEN 1180
- Value:F1
+ Variable:F1
  NumericConstant:0
  BinaryOperator:>
 1165 GOTO 1200
@@ -579,9 +579,9 @@
  ITEMS
  TextConstant:"   YOU WERE FORCED TO SPEND"
  CarriageControl:;
- Value:F1
- Value:B
- Value:I
+ Variable:F1
+ Variable:B
+ Variable:I
  NumericConstant:100
  BinaryOperator:/
  BinaryOperator:-
@@ -595,10 +595,10 @@
  TextConstant:"RALLODS ON FUNERAL EXPENSES"
  CarriageControl:NL
 1174 B5=INT(F1+(B-(I/100)))
- Reference:B5
- Value:F1
- Value:B
- Value:I
+ Variable:B5
+ Variable:F1
+ Variable:B
+ Variable:I
  NumericConstant:100
  BinaryOperator:/
  BinaryOperator:-
@@ -606,11 +606,11 @@
  FunctionInt
  AssignmentOperator:=
 1175 A=INT(A-((F1+(B-(I/100)))*9))
- Reference:A
- Value:A
- Value:F1
- Value:B
- Value:I
+ Variable:A
+ Variable:A
+ Variable:F1
+ Variable:B
+ Variable:I
  NumericConstant:100
  BinaryOperator:/
  BinaryOperator:-
@@ -626,7 +626,7 @@
  ITEMS
  TextConstant:"   YOU WERE FORCED TO SPEND "
  CarriageControl:;
- Value:F1
+ Variable:F1
  NumericConstant:9
  BinaryOperator:*
  FunctionInt
@@ -638,20 +638,20 @@
  TextConstant:"FUNERAL EXPENSES."
  CarriageControl:NL
 1182 B5=F1
- Reference:B5
- Value:F1
+ Variable:B5
+ Variable:F1
  AssignmentOperator:=
 1183 A=INT(A-(F1*9))
- Reference:A
- Value:A
- Value:F1
+ Variable:A
+ Variable:A
+ Variable:F1
  NumericConstant:9
  BinaryOperator:*
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
 1185 IF A>=0 THEN 1194
- Value:A
+ Variable:A
  NumericConstant:0
  BinaryOperator:>=
 1187 PRINT "   INSUFFICIENT RESERVES TO COVER COST - LAND WAS SOLD"
@@ -659,32 +659,32 @@
  TextConstant:"   INSUFFICIENT RESERVES TO COVER COST - LAND WAS SOLD"
  CarriageControl:NL
 1189 D=INT(D+(A/W))
- Reference:D
- Value:D
- Value:A
- Value:W
+ Variable:D
+ Variable:D
+ Variable:A
+ Variable:W
  BinaryOperator:/
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
 1190 A=0
- Reference:A
+ Variable:A
  NumericConstant:0
  AssignmentOperator:=
 1194 B=INT(B-B5)
- Reference:B
- Value:B
- Value:B5
+ Variable:B
+ Variable:B
+ Variable:B5
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
 1200 IF H=0 THEN 1250
- Value:H
+ Variable:H
  NumericConstant:0
  BinaryOperator:=
 1220 C1=INT(H+(RND(1)*10)-(RND(1)*20))
- Reference:C1
- Value:H
+ Variable:C1
+ Variable:H
  NumericConstant:1
  FunctionRnd
  NumericConstant:10
@@ -698,41 +698,41 @@
  FunctionInt
  AssignmentOperator:=
 1224 IF C>0 THEN 1230
- Value:C
+ Variable:C
  NumericConstant:0
  BinaryOperator:>
 1226 C1=C1+20
- Reference:C1
- Value:C1
+ Variable:C1
+ Variable:C1
  NumericConstant:20
  BinaryOperator:+
  AssignmentOperator:=
 1230 PRINT C1;"WORKERS CAME TO THE COUNTRY AND";
  ITEMS
- Value:C1
+ Variable:C1
  CarriageControl:;
  TextConstant:"WORKERS CAME TO THE COUNTRY AND"
  CarriageControl:;
 1250 P1=INT(((I/100-B)/10)+(K/25)-((2000-D)/50)-(F1/2))
- Reference:P1
- Value:I
+ Variable:P1
+ Variable:I
  NumericConstant:100
  BinaryOperator:/
- Value:B
+ Variable:B
  BinaryOperator:-
  NumericConstant:10
  BinaryOperator:/
- Value:K
+ Variable:K
  NumericConstant:25
  BinaryOperator:/
  BinaryOperator:+
  NumericConstant:2000
- Value:D
+ Variable:D
  BinaryOperator:-
  NumericConstant:50
  BinaryOperator:/
  BinaryOperator:-
- Value:F1
+ Variable:F1
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:-
@@ -740,13 +740,13 @@
  AssignmentOperator:=
 1255 PRINT ABS(P1);"COUNTRYMEN ";
  ITEMS
- Value:P1
+ Variable:P1
  FunctionAbs
  CarriageControl:;
  TextConstant:"COUNTRYMEN "
  CarriageControl:;
 1260 IF P1<0 THEN 1275
- Value:P1
+ Variable:P1
  NumericConstant:0
  BinaryOperator:<
 1265 PRINT "CAME TO";
@@ -764,23 +764,23 @@
  TextConstant:" THE ISLAND."
  CarriageControl:NL
 1290 B=INT(B+P1)
- Reference:B
- Value:B
- Value:P1
+ Variable:B
+ Variable:B
+ Variable:P1
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
 1292 C=INT(C+C1)
- Reference:C
- Value:C
- Value:C1
+ Variable:C
+ Variable:C
+ Variable:C1
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
 1305 U2=INT(((2000-D)*((RND(1)+1.5)/2)))
- Reference:U2
+ Variable:U2
  NumericConstant:2000
- Value:D
+ Variable:D
  BinaryOperator:-
  NumericConstant:1
  FunctionRnd
@@ -792,43 +792,43 @@
  FunctionInt
  AssignmentOperator:=
 1310 IF C=0 THEN 1324
- Value:C
+ Variable:C
  NumericConstant:0
  BinaryOperator:=
 1320 PRINT "OF ";INT(J);"SQ. MILES PLANTED,";
  ITEMS
  TextConstant:"OF "
  CarriageControl:;
- Value:J
+ Variable:J
  FunctionInt
  CarriageControl:;
  TextConstant:"SQ. MILES PLANTED,"
  CarriageControl:;
 1324 IF J>U2 THEN 1330
- Value:J
- Value:U2
+ Variable:J
+ Variable:U2
  BinaryOperator:>
 1326 U2=J
- Reference:U2
- Value:J
+ Variable:U2
+ Variable:J
  AssignmentOperator:=
 1330 PRINT " YOU HARVESTED ";INT(J-U2);"SQ. MILES OF CROPS."
  ITEMS
  TextConstant:" YOU HARVESTED "
  CarriageControl:;
- Value:J
- Value:U2
+ Variable:J
+ Variable:U2
  BinaryOperator:-
  FunctionInt
  CarriageControl:;
  TextConstant:"SQ. MILES OF CROPS."
  CarriageControl:NL
 1340 IF U2=0 THEN 1370
- Value:U2
+ Variable:U2
  NumericConstant:0
  BinaryOperator:=
 1344 IF T1>=2 THEN 1370
- Value:T1
+ Variable:T1
  NumericConstant:2
  BinaryOperator:>=
 1350 PRINT "   (DUE TO ";
@@ -836,7 +836,7 @@
  TextConstant:"   (DUE TO "
  CarriageControl:;
 1355 IF T1=0 THEN 1365
- Value:T1
+ Variable:T1
  NumericConstant:0
  BinaryOperator:=
 1360 PRINT "INCREASED ";
@@ -848,11 +848,11 @@
  TextConstant:"AIR AND WATER POLLUTION FROM FOREIGN INDUSTRY.)"
  CarriageControl:NL
 1370 Q=INT((J-U2)*(W/2))
- Reference:Q
- Value:J
- Value:U2
+ Variable:Q
+ Variable:J
+ Variable:U2
  BinaryOperator:-
- Value:W
+ Variable:W
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:*
@@ -862,22 +862,22 @@
  ITEMS
  TextConstant:"MAKING"
  CarriageControl:;
- Value:Q
+ Variable:Q
  FunctionInt
  CarriageControl:;
  TextConstant:"RALLODS."
  CarriageControl:NL
 1390 A=INT(A+Q)
- Reference:A
- Value:A
- Value:Q
+ Variable:A
+ Variable:A
+ Variable:Q
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
 1400 V1=INT(((B-P1)*22)+(RND(1)*500))
- Reference:V1
- Value:B
- Value:P1
+ Variable:V1
+ Variable:B
+ Variable:P1
  BinaryOperator:-
  NumericConstant:22
  BinaryOperator:*
@@ -889,9 +889,9 @@
  FunctionInt
  AssignmentOperator:=
 1405 V2=INT((2000-D)*15)
- Reference:V2
+ Variable:V2
  NumericConstant:2000
- Value:D
+ Variable:D
  BinaryOperator:-
  NumericConstant:15
  BinaryOperator:*
@@ -901,8 +901,8 @@
  ITEMS
  TextConstant:" YOU MADE"
  CarriageControl:;
- Value:V1
- Value:V2
+ Variable:V1
+ Variable:V2
  BinaryOperator:-
  FunctionInt
  FunctionAbs
@@ -910,57 +910,57 @@
  TextConstant:"RALLODS FROM TOURIST TRADE."
  CarriageControl:NL
 1420 IF V2=0 THEN 1450
- Value:V2
+ Variable:V2
  NumericConstant:0
  BinaryOperator:=
 1425 IF V1-V2>=V3 THEN 1450
- Value:V1
- Value:V2
+ Variable:V1
+ Variable:V2
  BinaryOperator:-
- Value:V3
+ Variable:V3
  BinaryOperator:>=
 1430 PRINT "   DECREASE BECAUSE ";
  ITEMS
  TextConstant:"   DECREASE BECAUSE "
  CarriageControl:;
 1435 G1=10*RND(1)
- Reference:G1
+ Variable:G1
  NumericConstant:10
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
  AssignmentOperator:=
 1440 IF G1<=2 THEN 1460
- Value:G1
+ Variable:G1
  NumericConstant:2
  BinaryOperator:<=
 1442 IF G1<=4 THEN 1465
- Value:G1
+ Variable:G1
  NumericConstant:4
  BinaryOperator:<=
 1444 IF G1<=6 THEN 1470
- Value:G1
+ Variable:G1
  NumericConstant:6
  BinaryOperator:<=
 1446 IF G1<=8 THEN 1475
- Value:G1
+ Variable:G1
  NumericConstant:8
  BinaryOperator:<=
 1448 IF G1<=10 THEN 1480
- Value:G1
+ Variable:G1
  NumericConstant:10
  BinaryOperator:<=
 1450 V3=INT(A+V3)
- Reference:V3
- Value:A
- Value:V3
+ Variable:V3
+ Variable:A
+ Variable:V3
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
 1451 A=INT(A+V3)
- Reference:A
- Value:A
- Value:V3
+ Variable:A
+ Variable:A
+ Variable:V3
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
@@ -997,28 +997,28 @@
 1482 GOTO 1450
  LineNumber:1450
 1500 IF B5>200 THEN 1600
- Value:B5
+ Variable:B5
  NumericConstant:200
  BinaryOperator:>
 1505 IF B<343 THEN 1700
- Value:B
+ Variable:B
  NumericConstant:343
  BinaryOperator:<
 1510 IF (A4/100)>5 THEN 1800
- Value:A4
+ Variable:A4
  NumericConstant:100
  BinaryOperator:/
  NumericConstant:5
  BinaryOperator:>
 1515 IF C>B THEN 1550
- Value:C
- Value:B
+ Variable:C
+ Variable:B
  BinaryOperator:>
 1520 IF N5-1=X5 THEN 1900
- Value:N5
+ Variable:N5
  NumericConstant:1
  BinaryOperator:-
- Value:X5
+ Variable:X5
  BinaryOperator:=
 1545 GOTO 2000
  LineNumber:2000
@@ -1075,7 +1075,7 @@
  CarriageControl:NL
 1610 PRINT B5;"COUNTRYMEN DIED IN ONE YEAR!!!!!"
  ITEMS
- Value:B5
+ Variable:B5
  CarriageControl:;
  TextConstant:"COUNTRYMEN DIED IN ONE YEAR!!!!!"
  CarriageControl:NL
@@ -1088,7 +1088,7 @@
  TextConstant:"BEEN IMPEACHED AND THROWN OUT OF OFFICE, BUT YOU"
  CarriageControl:NL
 1622 M6=INT(RND(1)*10)
- Reference:M6
+ Variable:M6
  NumericConstant:1
  FunctionRnd
  NumericConstant:10
@@ -1096,15 +1096,15 @@
  FunctionInt
  AssignmentOperator:=
 1625 IF M6<=3 THEN 1670
- Value:M6
+ Variable:M6
  NumericConstant:3
  BinaryOperator:<=
 1630 IF M6<=6 THEN 1680
- Value:M6
+ Variable:M6
  NumericConstant:6
  BinaryOperator:<=
 1635 IF M6<=10 THEN 1690
- Value:M6
+ Variable:M6
  NumericConstant:10
  BinaryOperator:<=
 1670 PRINT "ALSO HAD YOUR LEFT EYE GOUGED OUT!"
@@ -1146,8 +1146,8 @@
 1730 GOTO 1570
  LineNumber:1570
 1800 IF B5-F1<2 THEN 1515
- Value:B5
- Value:F1
+ Variable:B5
+ Variable:F1
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:<
@@ -1198,7 +1198,7 @@
  ITEMS
  TextConstant:"YOU HAVE SUCCESFULLY COMPLETED YOUR"
  CarriageControl:;
- Value:N5
+ Variable:N5
  CarriageControl:;
  TextConstant:"YEAR TERM"
  CarriageControl:NL
@@ -1225,20 +1225,20 @@
  TextConstant:"HOW MANY YEARS HAD YOU BEEN IN OFFICE WHEN INTERRUPTED"
  CarriageControl:;
 1961 INPUT X5
- Reference:X5
+ Variable:X5
 1962 IF X5<0 THEN 1590
- Value:X5
+ Variable:X5
  NumericConstant:0
  BinaryOperator:<
 1963 IF X5<8 THEN 1969
- Value:X5
+ Variable:X5
  NumericConstant:8
  BinaryOperator:<
 1965 PRINT "   COME ON, YOUR TERM IN OFFICE IS ONLY";N5;"YEARS."
  ITEMS
  TextConstant:"   COME ON, YOUR TERM IN OFFICE IS ONLY"
  CarriageControl:;
- Value:N5
+ Variable:N5
  CarriageControl:;
  TextConstant:"YEARS."
  CarriageControl:NL
@@ -1249,9 +1249,9 @@
  TextConstant:"HOW MUCH DID YOU HAVE IN THE TREASURY"
  CarriageControl:;
 1970 INPUT A
- Reference:A
+ Variable:A
 1971 IF A<0 THEN 1590
- Value:A
+ Variable:A
  NumericConstant:0
  BinaryOperator:<
 1975 PRINT "HOW MANY COUNTRYMEN";    
@@ -1259,9 +1259,9 @@
  TextConstant:"HOW MANY COUNTRYMEN"
  CarriageControl:;
 1976 INPUT B
- Reference:B
+ Variable:B
 1977 IF B<0 THEN 1590
- Value:B
+ Variable:B
  NumericConstant:0
  BinaryOperator:<
 1980 PRINT "HOW MANY WORKERS";
@@ -1269,9 +1269,9 @@
  TextConstant:"HOW MANY WORKERS"
  CarriageControl:;
 1981 INPUT C
- Reference:C
+ Variable:C
 1982 IF C<0 THEN 1590
- Value:C
+ Variable:C
  NumericConstant:0
  BinaryOperator:<
 1990 PRINT "HOW MANY SQUARE MILES OF LAND";
@@ -1279,17 +1279,17 @@
  TextConstant:"HOW MANY SQUARE MILES OF LAND"
  CarriageControl:;
 1991 INPUT D
- Reference:D
+ Variable:D
 1992 IF D<0 THEN 1590
- Value:D
+ Variable:D
  NumericConstant:0
  BinaryOperator:<
 1993 IF D>2000 THEN 1996
- Value:D
+ Variable:D
  NumericConstant:2000
  BinaryOperator:>
 1994 IF D>1000 THEN 100
- Value:D
+ Variable:D
  NumericConstant:1000
  BinaryOperator:>
 1996 PRINT "   COME ON, YOU STARTED WITH 1000 SQ. MILES OF FARM LAND"
@@ -1303,13 +1303,13 @@
 1998 GOTO 1990
  LineNumber:1990
 2000 X5=X5+1
- Reference:X5
- Value:X5
+ Variable:X5
+ Variable:X5
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 2020 B5=0
- Reference:B5
+ Variable:B5
  NumericConstant:0
  AssignmentOperator:=
 2040 GOTO 100

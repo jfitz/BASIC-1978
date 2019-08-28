@@ -44,10 +44,10 @@
  CarriageControl:;
 280 INPUT O$(1)
  NumericConstant:1
- Reference:O$
+ Variable:O$
 290 O$(0)="DARTMOUTH"
  NumericConstant:0
- Reference:O$
+ Variable:O$
  TextConstant:"DARTMOUTH"
  AssignmentOperator:=
 300 PRINT
@@ -55,11 +55,11 @@
  CarriageControl:NL
 310 LET S(0)=0: LET S(1)=0
  NumericConstant:0
- Reference:S
+ Variable:S
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:1
- Reference:S
+ Variable:S
  NumericConstant:0
  AssignmentOperator:=
 320 REM
@@ -71,8 +71,8 @@
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
- Value:I
- Reference:L$
+ Variable:I
+ Variable:L$
  Variable:I
 350 DATA "KICK","RECEIVE"," YARD ","RUN BACK FOR ","BALL ON "
  TextConstant:"KICK"
@@ -100,7 +100,7 @@
 385 DATA "JUNK"
  TextConstant:"JUNK"
 390 LET P=INT(RND(1)*2)
- Reference:P
+ Variable:P
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
@@ -109,39 +109,39 @@
  AssignmentOperator:=
 400 PRINT O$(P);" WON THE TOSS"
  ITEMS
- Value:P
- Value:O$
+ Variable:P
+ Variable:O$
  CarriageControl:;
  TextConstant:" WON THE TOSS"
  CarriageControl:NL
 410 DEF FNF(X)=1-2*P
  NumericConstant:1
  NumericConstant:2
- Value:P
+ Variable:P
  BinaryOperator:*
  BinaryOperator:-
 420 DEF FNG(Z)=P*(X1-X)+(1-P)*(X-X1)
- Value:P
- Value:X1
- Value:X
+ Variable:P
+ Variable:X1
+ Variable:X
  BinaryOperator:-
  BinaryOperator:*
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
- Value:X
- Value:X1
+ Variable:X
+ Variable:X1
  BinaryOperator:-
  BinaryOperator:*
  BinaryOperator:+
 430 IF P=0 THEN 470
- Value:P
+ Variable:P
  NumericConstant:0
  BinaryOperator:=
 440 PRINT O$(1);" ELECTS TO RECEIVE."
  ITEMS
  NumericConstant:1
- Value:O$
+ Variable:O$
  CarriageControl:;
  TextConstant:" ELECTS TO RECEIVE."
  CarriageControl:NL
@@ -155,7 +155,7 @@
  TextConstant:"DO YOU ELECT TO KICK OR RECEIVE"
  CarriageControl:;
 480 INPUT A$
- Reference:A$
+ Variable:A$
 490 PRINT
  ITEMS
  CarriageControl:NL
@@ -164,9 +164,9 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:2"]
 510 IF A$=L$(E) THEN 550
- Value:A$
- Value:E
- Value:L$
+ Variable:A$
+ Variable:E
+ Variable:L$
  BinaryOperator:=
 520 NEXT E
  Variable:E
@@ -177,25 +177,25 @@
 540 GOTO 480
  LineNumber:480
 550 IF E=2 THEN 580
- Value:E
+ Variable:E
  NumericConstant:2
  BinaryOperator:=
 560 LET P=1
- Reference:P
+ Variable:P
  NumericConstant:1
  AssignmentOperator:=
 580 LET X=40+(1-P)*20
- Reference:X
+ Variable:X
  NumericConstant:40
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
  NumericConstant:20
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 590 LET Y=INT(200*(RND(1)-.5)^3+55)
- Reference:Y
+ Variable:Y
  NumericConstant:200
  NumericConstant:1
  FunctionRnd
@@ -210,31 +210,31 @@
  AssignmentOperator:=
 600 PRINT Y;L$(3);" KICKOFF"
  ITEMS
- Value:Y
+ Variable:Y
  CarriageControl:;
  NumericConstant:3
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:" KICKOFF"
  CarriageControl:NL
 610 LET X=X-FNF(1)*Y
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:1
  UserFunction
- Value:Y
+ Variable:Y
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 620 IF ABS(X-50)>=50 THEN 700
- Value:X
+ Variable:X
  NumericConstant:50
  BinaryOperator:-
  FunctionAbs
  NumericConstant:50
  BinaryOperator:>=
 630 LET Y=INT(50*RND(1)^2)+(1-P)*INT(50*RND(1)^4)
- Reference:Y
+ Variable:Y
  NumericConstant:50
  NumericConstant:1
  FunctionRnd
@@ -243,7 +243,7 @@
  BinaryOperator:*
  FunctionInt
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
  NumericConstant:50
  NumericConstant:1
@@ -256,16 +256,16 @@
  BinaryOperator:+
  AssignmentOperator:=
 640 LET X=X+FNF(1)*Y
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:1
  UserFunction
- Value:Y
+ Variable:Y
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 650 IF ABS(X-50)>=50 THEN 655
- Value:X
+ Variable:X
  NumericConstant:50
  BinaryOperator:-
  FunctionAbs
@@ -273,10 +273,10 @@
  BinaryOperator:>=
 651 PRINT Y;L$(3);" RUNBACK"
  ITEMS
- Value:Y
+ Variable:Y
  CarriageControl:;
  NumericConstant:3
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:" RUNBACK"
  CarriageControl:NL
@@ -285,7 +285,7 @@
 655 PRINT L$(4);
  ITEMS
  NumericConstant:4
- Value:L$
+ Variable:L$
  CarriageControl:;
 660 GOTO 2600
  LineNumber:2600
@@ -293,15 +293,15 @@
  ITEMS
  TextConstant:"TOUCHBACK FOR "
  CarriageControl:;
- Value:P
- Value:O$
+ Variable:P
+ Variable:O$
  CarriageControl:;
  TextConstant:"."
  CarriageControl:NL
 710 LET X=20+P*60
- Reference:X
+ Variable:X
  NumericConstant:20
- Value:P
+ Variable:P
  NumericConstant:60
  BinaryOperator:*
  BinaryOperator:+
@@ -311,11 +311,11 @@
 730 GOSUB 800
  LineNumber:800
 740 LET X1=X
- Reference:X1
- Value:X
+ Variable:X1
+ Variable:X
  AssignmentOperator:=
 750 LET D=1
- Reference:D
+ Variable:D
  NumericConstant:1
  AssignmentOperator:=
 760 PRINT:PRINT "FIRST DOWN ";O$(P);"***"
@@ -324,8 +324,8 @@
  ITEMS
  TextConstant:"FIRST DOWN "
  CarriageControl:;
- Value:P
- Value:O$
+ Variable:P
+ Variable:O$
  CarriageControl:;
  TextConstant:"***"
  CarriageControl:NL
@@ -340,55 +340,55 @@
 800 REM PRINT POSITION
  Remark:PRINT POSITION
 810 IF X>50 THEN 840
- Value:X
+ Variable:X
  NumericConstant:50
  BinaryOperator:>
 820 PRINT L$(5);O$(0);X;L$(6)
  ITEMS
  NumericConstant:5
- Value:L$
+ Variable:L$
  CarriageControl:;
  NumericConstant:0
- Value:O$
+ Variable:O$
  CarriageControl:;
- Value:X
+ Variable:X
  CarriageControl:;
  NumericConstant:6
- Value:L$
+ Variable:L$
  CarriageControl:NL
 830 GOTO 850
  LineNumber:850
 840 PRINT L$(5);O$(1);100-X;L$(6)
  ITEMS
  NumericConstant:5
- Value:L$
+ Variable:L$
  CarriageControl:;
  NumericConstant:1
- Value:O$
+ Variable:O$
  CarriageControl:;
  NumericConstant:100
- Value:X
+ Variable:X
  BinaryOperator:-
  CarriageControl:;
  NumericConstant:6
- Value:L$
+ Variable:L$
  CarriageControl:NL
 850 RETURN
  
 860 REM NEW PLAY
  Remark:NEW PLAY
 870 LET T=T+1
- Reference:T
- Value:T
+ Variable:T
+ Variable:T
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 880 IF T=30 THEN 1060
- Value:T
+ Variable:T
  NumericConstant:30
  BinaryOperator:=
 890 IF T<50 THEN 940
- Value:T
+ Variable:T
  NumericConstant:50
  BinaryOperator:<
 900 IF RND(1)>.2 THEN 940
@@ -405,27 +405,27 @@
  TextConstant:"FINAL SCORE:  "
  CarriageControl:;
  NumericConstant:0
- Value:O$
+ Variable:O$
  CarriageControl:;
  TextConstant:": "
  CarriageControl:;
  NumericConstant:0
- Value:S
+ Variable:S
  CarriageControl:;
  TextConstant:"  "
  CarriageControl:;
  NumericConstant:1
- Value:O$
+ Variable:O$
  CarriageControl:;
  TextConstant:": "
  CarriageControl:;
  NumericConstant:1
- Value:S
+ Variable:S
  CarriageControl:NL
 930 STOP
  
 940 IF P=1 THEN 1870
- Value:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:=
 950 PRINT "NEXT PLAY";
@@ -433,14 +433,14 @@
  TextConstant:"NEXT PLAY"
  CarriageControl:;
 960 INPUT Z
- Reference:Z
+ Variable:Z
 970 IF Z<>INT(Z) THEN 990
- Value:Z
- Value:Z
+ Variable:Z
+ Variable:Z
  FunctionInt
  BinaryOperator:<>
 980 IF ABS(Z-4)<=3 THEN 1010
- Value:Z
+ Variable:Z
  NumericConstant:4
  BinaryOperator:-
  FunctionAbs
@@ -453,20 +453,20 @@
 1000 GOTO 960
  LineNumber:960
 1010 LET F=0
- Reference:F
+ Variable:F
  NumericConstant:0
  AssignmentOperator:=
 1020 PRINT L$(Z+6);".  ";
  ITEMS
- Value:Z
+ Variable:Z
  NumericConstant:6
  BinaryOperator:+
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:".  "
  CarriageControl:;
 1030 LET R=RND(1)*(.98+FNF(1)*.02)
- Reference:R
+ Variable:R
  NumericConstant:1
  FunctionRnd
  NumericConstant:.98
@@ -478,12 +478,12 @@
  BinaryOperator:*
  AssignmentOperator:=
 1040 LET R1=RND(1)
- Reference:R1
+ Variable:R1
  NumericConstant:1
  FunctionRnd
  AssignmentOperator:=
 1050 ON Z GOTO 1110,1150,1260,1480,1570,1570,1680
- Value:Z
+ Variable:Z
  LineNumber:1110
  LineNumber:1150
  LineNumber:1260
@@ -512,9 +512,9 @@
 1110 REM  SIMPLE RUN
  Remark: SIMPLE RUN
 1120 LET Y=INT(24*(R-.5)^3+3)
- Reference:Y
+ Variable:Y
  NumericConstant:24
- Value:R
+ Variable:R
  NumericConstant:.5
  BinaryOperator:-
  NumericConstant:3
@@ -534,9 +534,9 @@
 1150 REM  TRICKY RUN
  Remark: TRICKY RUN
 1160 LET Y=INT(20*R-5)
- Reference:Y
+ Variable:Y
  NumericConstant:20
- Value:R
+ Variable:R
  BinaryOperator:*
  NumericConstant:5
  BinaryOperator:-
@@ -548,25 +548,25 @@
  NumericConstant:.1
  BinaryOperator:>
 1180 LET F=-1
- Reference:F
+ Variable:F
  NumericConstant:1
  UnaryOperator:-
  AssignmentOperator:=
 1190 LET X3=X
- Reference:X3
- Value:X
+ Variable:X3
+ Variable:X
  AssignmentOperator:=
 1200 LET X=X+FNF(1)*Y
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:1
  UserFunction
- Value:Y
+ Variable:Y
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 1210 IF ABS(X-50)>=50 THEN 1240
- Value:X
+ Variable:X
  NumericConstant:50
  BinaryOperator:-
  FunctionAbs
@@ -587,9 +587,9 @@
 1260 REM  SHORT PASS
  Remark: SHORT PASS
 1270 LET Y=INT(60*(R1-.5)^3+10)
- Reference:Y
+ Variable:Y
  NumericConstant:60
- Value:R1
+ Variable:R1
  NumericConstant:.5
  BinaryOperator:-
  NumericConstant:3
@@ -600,15 +600,15 @@
  FunctionInt
  AssignmentOperator:=
 1280 IF R<.05 THEN 1330
- Value:R
+ Variable:R
  NumericConstant:.05
  BinaryOperator:<
 1290 IF R<.15 THEN 1390
- Value:R
+ Variable:R
  NumericConstant:.15
  BinaryOperator:<
 1300 IF R<.55 THEN 1420
- Value:R
+ Variable:R
  NumericConstant:.55
  BinaryOperator:<
 1310 PRINT "COMPLETE.  ";
@@ -618,7 +618,7 @@
 1320 GOTO 2190
  LineNumber:2190
 1330 IF D=4 THEN 1420
- Value:D
+ Variable:D
  NumericConstant:4
  BinaryOperator:=
 1340 PRINT "INTERCEPTED."
@@ -626,21 +626,21 @@
  TextConstant:"INTERCEPTED."
  CarriageControl:NL
 1350 LET F=-1
- Reference:F
+ Variable:F
  NumericConstant:1
  UnaryOperator:-
  AssignmentOperator:=
 1360 LET X=X+FNF(1)*Y
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:1
  UserFunction
- Value:Y
+ Variable:Y
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 1370 IF ABS(X-50)>=50 THEN 2450
- Value:X
+ Variable:X
  NumericConstant:50
  BinaryOperator:-
  FunctionAbs
@@ -653,9 +653,9 @@
  TextConstant:"PASSER TACKLED.  "
  CarriageControl:;
 1400 LET Y=-INT(10*R1)
- Reference:Y
+ Variable:Y
  NumericConstant:10
- Value:R1
+ Variable:R1
  BinaryOperator:*
  FunctionInt
  UnaryOperator:-
@@ -663,7 +663,7 @@
 1410 GOTO 2190
  LineNumber:2190
 1420 LET Y=0
- Reference:Y
+ Variable:Y
  NumericConstant:0
  AssignmentOperator:=
 1430 IF RND(1)<.3 THEN 1460
@@ -686,9 +686,9 @@
 1480 REM  LONG PASS
  Remark: LONG PASS
 1490 LET Y=INT(160*(R1-.5)^3+30)
- Reference:Y
+ Variable:Y
  NumericConstant:160
- Value:R1
+ Variable:R1
  NumericConstant:.5
  BinaryOperator:-
  NumericConstant:3
@@ -699,15 +699,15 @@
  FunctionInt
  AssignmentOperator:=
 1500 IF R<.1 THEN 1330
- Value:R
+ Variable:R
  NumericConstant:.1
  BinaryOperator:<
 1510 IF R<.3 THEN 1540
- Value:R
+ Variable:R
  NumericConstant:.3
  BinaryOperator:<
 1520 IF R<.75 THEN 1420
- Value:R
+ Variable:R
  NumericConstant:.75
  BinaryOperator:<
 1530 GOTO 1310
@@ -717,9 +717,9 @@
  TextConstant:"PASSER TACKLED.  "
  CarriageControl:;
 1550 LET Y=-INT(15*R1+3)
- Reference:Y
+ Variable:Y
  NumericConstant:15
- Value:R1
+ Variable:R1
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:+
@@ -731,9 +731,9 @@
 1570 REM  PUNT OR KICK
  Remark: PUNT OR KICK
 1580 LET Y=INT(100*(R-.5)^3+35)
- Reference:Y
+ Variable:Y
  NumericConstant:100
- Value:R
+ Variable:R
  NumericConstant:.5
  BinaryOperator:-
  NumericConstant:3
@@ -744,28 +744,28 @@
  FunctionInt
  AssignmentOperator:=
 1590 IF D=4 THEN 1610
- Value:D
+ Variable:D
  NumericConstant:4
  BinaryOperator:=
 1600 LET Y=INT(Y*1.3)
- Reference:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  NumericConstant:1.3
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
 1610 PRINT Y;L$(3);" PUNT"
  ITEMS
- Value:Y
+ Variable:Y
  CarriageControl:;
  NumericConstant:3
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:" PUNT"
  CarriageControl:NL
 1620 IF ABS(X+Y*FNF(1)-50)>=50 THEN 1670
- Value:X
- Value:Y
+ Variable:X
+ Variable:Y
  NumericConstant:1
  UserFunction
  BinaryOperator:*
@@ -776,12 +776,12 @@
  NumericConstant:50
  BinaryOperator:>=
 1630 IF D<4 THEN 1670
- Value:D
+ Variable:D
  NumericConstant:4
  BinaryOperator:<
 1640 LET Y1=INT(R1^2*20)
- Reference:Y1
- Value:R1
+ Variable:Y1
+ Variable:R1
  NumericConstant:2
  BinaryOperator:^
  NumericConstant:20
@@ -790,17 +790,17 @@
  AssignmentOperator:=
 1650 PRINT Y1;L$(3);" RUN BACK"
  ITEMS
- Value:Y1
+ Variable:Y1
  CarriageControl:;
  NumericConstant:3
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:" RUN BACK"
  CarriageControl:NL
 1660 LET Y=Y-Y1
- Reference:Y
- Value:Y
- Value:Y1
+ Variable:Y
+ Variable:Y
+ Variable:Y1
  BinaryOperator:-
  AssignmentOperator:=
 1670 GOTO 1350
@@ -808,9 +808,9 @@
 1680 REM  PLACE KICK
  Remark: PLACE KICK
 1690 LET Y=INT(100*(R-.5)^3+35)
- Reference:Y
+ Variable:Y
  NumericConstant:100
- Value:R
+ Variable:R
  NumericConstant:.5
  BinaryOperator:-
  NumericConstant:3
@@ -821,7 +821,7 @@
  FunctionInt
  AssignmentOperator:=
 1700 IF R1>.15 THEN 1740
- Value:R1
+ Variable:R1
  NumericConstant:.15
  BinaryOperator:>
 1710 PRINT "KICK IS BLOCKED  ***"
@@ -829,8 +829,8 @@
  TextConstant:"KICK IS BLOCKED  ***"
  CarriageControl:NL
 1720 LET X=X-5*FNF(1)
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:5
  NumericConstant:1
  UserFunction
@@ -838,24 +838,24 @@
  BinaryOperator:-
  AssignmentOperator:=
 1730 LET P=1-P
- Reference:P
+ Variable:P
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
  AssignmentOperator:=
 1740 GOTO 720
  LineNumber:720
 1750 LET X=X+FNF(1)*Y
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:1
  UserFunction
- Value:Y
+ Variable:Y
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 1760 IF ABS(X-50)>=60 THEN 1810
- Value:X
+ Variable:X
  NumericConstant:50
  BinaryOperator:-
  FunctionAbs
@@ -866,22 +866,22 @@
  TextConstant:"KICK IS SHORT."
  CarriageControl:NL
 1780 IF ABS(X-50)>=50 THEN 2710
- Value:X
+ Variable:X
  NumericConstant:50
  BinaryOperator:-
  FunctionAbs
  NumericConstant:50
  BinaryOperator:>=
 1790 P=1-P
- Reference:P
+ Variable:P
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
  AssignmentOperator:=
 1800 GOTO 630
  LineNumber:630
 1810 IF R1>.5 THEN 1840
- Value:R1
+ Variable:R1
  NumericConstant:.5
  BinaryOperator:>
 1820 PRINT "KICK IS OFF TO THE SIDE."
@@ -895,10 +895,10 @@
  TextConstant:"FIELD GOAL ***"
  CarriageControl:NL
 1850 LET S(P)=S(P)+3
- Value:P
- Reference:S
- Value:P
- Value:S
+ Variable:P
+ Variable:S
+ Variable:P
+ Variable:S
  NumericConstant:3
  BinaryOperator:+
  AssignmentOperator:=
@@ -907,7 +907,7 @@
 1870 REM  OPPONENT'S PLAY
  Remark: OPPONENT'S PLAY
 1880 IF D>1 THEN 1940
- Value:D
+ Variable:D
  NumericConstant:1
  BinaryOperator:>
 1890 IF RND(1)>1/3 THEN 1920
@@ -918,43 +918,43 @@
  BinaryOperator:/
  BinaryOperator:>
 1900 LET Z=3
- Reference:Z
+ Variable:Z
  NumericConstant:3
  AssignmentOperator:=
 1910 GOTO 1010
  LineNumber:1010
 1920 LET Z=1
- Reference:Z
+ Variable:Z
  NumericConstant:1
  AssignmentOperator:=
 1930 GOTO 1010
  LineNumber:1010
 1940 IF D=4 THEN 2090
- Value:D
+ Variable:D
  NumericConstant:4
  BinaryOperator:=
 1950 IF 10+X-X1<5 THEN 1890
  NumericConstant:10
- Value:X
+ Variable:X
  BinaryOperator:+
- Value:X1
+ Variable:X1
  BinaryOperator:-
  NumericConstant:5
  BinaryOperator:<
 1960 IF X<5 THEN 1890
- Value:X
+ Variable:X
  NumericConstant:5
  BinaryOperator:<
 1970 IF X<=10 THEN 2160
- Value:X
+ Variable:X
  NumericConstant:10
  BinaryOperator:<=
 1980 IF X>X1 THEN 2020
- Value:X
- Value:X1
+ Variable:X
+ Variable:X1
  BinaryOperator:>
 1990 LET A=INT(2*RND(1))
- Reference:A
+ Variable:A
  NumericConstant:2
  NumericConstant:1
  FunctionRnd
@@ -962,9 +962,9 @@
  FunctionInt
  AssignmentOperator:=
 2000 LET Z=2+A*2
- Reference:Z
+ Variable:Z
  NumericConstant:2
- Value:A
+ Variable:A
  NumericConstant:2
  BinaryOperator:*
  BinaryOperator:+
@@ -972,11 +972,11 @@
 2010 GOTO 1010
  LineNumber:1010
 2020 IF D<3 THEN 1990
- Value:D
+ Variable:D
  NumericConstant:3
  BinaryOperator:<
 2030 IF X<45 THEN 1990
- Value:X
+ Variable:X
  NumericConstant:45
  BinaryOperator:<
 2040 IF RND(1)>1/4 THEN 2070
@@ -987,47 +987,47 @@
  BinaryOperator:/
  BinaryOperator:>
 2050 LET Z=6
- Reference:Z
+ Variable:Z
  NumericConstant:6
  AssignmentOperator:=
 2060 GOTO 1010
  LineNumber:1010
 2070 LET Z=4
- Reference:Z
+ Variable:Z
  NumericConstant:4
  AssignmentOperator:=
 2080 GOTO 1010
  LineNumber:1010
 2090 IF X>30 THEN 2140
- Value:X
+ Variable:X
  NumericConstant:30
  BinaryOperator:>
 2100 IF 10+X-X1<3 THEN 1890
  NumericConstant:10
- Value:X
+ Variable:X
  BinaryOperator:+
- Value:X1
+ Variable:X1
  BinaryOperator:-
  NumericConstant:3
  BinaryOperator:<
 2110 IF X<3 THEN 1890
- Value:X
+ Variable:X
  NumericConstant:3
  BinaryOperator:<
 2120 LET Z=7
- Reference:Z
+ Variable:Z
  NumericConstant:7
  AssignmentOperator:=
 2130 GOTO 1010
  LineNumber:1010
 2140 LET Z=5
- Reference:Z
+ Variable:Z
  NumericConstant:5
  AssignmentOperator:=
 2150 GOTO 1010
  LineNumber:1010
 2160 LET A=INT(2*RND(1))
- Reference:A
+ Variable:A
  NumericConstant:2
  NumericConstant:1
  FunctionRnd
@@ -1035,9 +1035,9 @@
  FunctionInt
  AssignmentOperator:=
 2170 LET Z=2+A
- Reference:Z
+ Variable:Z
  NumericConstant:2
- Value:A
+ Variable:A
  BinaryOperator:+
  AssignmentOperator:=
 2180 GOTO 1010
@@ -1045,47 +1045,47 @@
 2190 REM GAIN OR LOSS
  Remark:GAIN OR LOSS
 2200 LET X3=X
- Reference:X3
- Value:X
+ Variable:X3
+ Variable:X
  AssignmentOperator:=
 2210 LET X=X+FNF(1)*Y
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:1
  UserFunction
- Value:Y
+ Variable:Y
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 2220 IF ABS(X-50)>=50 THEN 2450
- Value:X
+ Variable:X
  NumericConstant:50
  BinaryOperator:-
  FunctionAbs
  NumericConstant:50
  BinaryOperator:>=
 2230 IF Y=0 THEN 2250
- Value:Y
+ Variable:Y
  NumericConstant:0
  BinaryOperator:=
 2240 PRINT ABS(Y);L$(3);
  ITEMS
- Value:Y
+ Variable:Y
  FunctionAbs
  CarriageControl:;
  NumericConstant:3
- Value:L$
+ Variable:L$
  CarriageControl:;
 2250 PRINT L$(15+SGN(Y))
  ITEMS
  NumericConstant:15
- Value:Y
+ Variable:Y
  FunctionSgn
  BinaryOperator:+
- Value:L$
+ Variable:L$
  CarriageControl:NL
 2280 IF ABS(X3-50)>40 THEN 2300
- Value:X3
+ Variable:X3
  NumericConstant:50
  BinaryOperator:-
  FunctionAbs
@@ -1099,13 +1099,13 @@
 2300 GOSUB 800
  LineNumber:800
 2310 IF F=0 THEN 2340
- Value:F
+ Variable:F
  NumericConstant:0
  BinaryOperator:=
 2320 LET P=1-P
- Reference:P
+ Variable:P
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
  AssignmentOperator:=
 2330 GOTO 740
@@ -1116,12 +1116,12 @@
  NumericConstant:10
  BinaryOperator:>=
 2350 IF D=4 THEN 2320
- Value:D
+ Variable:D
  NumericConstant:4
  BinaryOperator:=
 2360 LET D=D+1
- Reference:D
- Value:D
+ Variable:D
+ Variable:D
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -1129,12 +1129,12 @@
  ITEMS
  TextConstant:"DOWN: "
  CarriageControl:;
- Value:D
+ Variable:D
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
 2380 IF (X1-50)*FNF(1)<40 THEN 2410
- Value:X1
+ Variable:X1
  NumericConstant:50
  BinaryOperator:-
  NumericConstant:1
@@ -1168,28 +1168,28 @@
 2450 REM BALL IN END-ZONE
  Remark:BALL IN END-ZONE
 2460 IF X>=100 THEN 2490
- Value:X
+ Variable:X
  NumericConstant:100
  BinaryOperator:>=
 2470 LET E=0
- Reference:E
+ Variable:E
  NumericConstant:0
  AssignmentOperator:=
 2480 GOTO 2500
  LineNumber:2500
 2490 LET E=1
- Reference:E
+ Variable:E
  NumericConstant:1
  AssignmentOperator:=
 2500 ON 1+E-F*2+P*4 GOTO 2510,2590,2760,2710,2590,2510,2710,2760
  NumericConstant:1
- Value:E
+ Variable:E
  BinaryOperator:+
- Value:F
+ Variable:F
  NumericConstant:2
  BinaryOperator:*
  BinaryOperator:-
- Value:P
+ Variable:P
  NumericConstant:4
  BinaryOperator:*
  BinaryOperator:+
@@ -1205,42 +1205,42 @@
  Remark:SAFETY
 2520 LET S(1-P)=S(1-P)+2
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
- Reference:S
+ Variable:S
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
- Value:S
+ Variable:S
  NumericConstant:2
  BinaryOperator:+
  AssignmentOperator:=
 2530 PRINT L$(19)
  ITEMS
  NumericConstant:19
- Value:L$
+ Variable:L$
  CarriageControl:NL
 2540 GOSUB 2800
  LineNumber:2800
 2550 PRINT O$(P);" KICKS OFF FROM ITS 20 YARD LINE."
  ITEMS
- Value:P
- Value:O$
+ Variable:P
+ Variable:O$
  CarriageControl:;
  TextConstant:" KICKS OFF FROM ITS 20 YARD LINE."
  CarriageControl:NL
 2560 LET X=20+P*60
- Reference:X
+ Variable:X
  NumericConstant:20
- Value:P
+ Variable:P
  NumericConstant:60
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 2570 LET P=1-P
- Reference:P
+ Variable:P
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
  AssignmentOperator:=
 2580 GOTO 590
@@ -1250,7 +1250,7 @@
 2600 PRINT L$(17);"***"
  ITEMS
  NumericConstant:17
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:"***"
  CarriageControl:NL
@@ -1260,10 +1260,10 @@
  NumericConstant:.8
  BinaryOperator:>
 2620 LET S(P)=S(P)+7
- Value:P
- Reference:S
- Value:P
- Value:S
+ Variable:P
+ Variable:S
+ Variable:P
+ Variable:S
  NumericConstant:7
  BinaryOperator:+
  AssignmentOperator:=
@@ -1275,15 +1275,15 @@
  LineNumber:2800
 2650 PRINT O$(P);" KICKS OFF"
  ITEMS
- Value:P
- Value:O$
+ Variable:P
+ Variable:O$
  CarriageControl:;
  TextConstant:" KICKS OFF"
  CarriageControl:NL
 2660 LET P=1-P
- Reference:P
+ Variable:P
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
  AssignmentOperator:=
 2670 GOTO 580
@@ -1293,10 +1293,10 @@
  TextConstant:"KICK IS OFF TO THE SIDE"
  CarriageControl:NL
 2690 LET S(P)=S(P)+6
- Value:P
- Reference:S
- Value:P
- Value:S
+ Variable:P
+ Variable:S
+ Variable:P
+ Variable:S
  NumericConstant:6
  BinaryOperator:+
  AssignmentOperator:=
@@ -1307,18 +1307,18 @@
 2720 PRINT L$(18)
  ITEMS
  NumericConstant:18
- Value:L$
+ Variable:L$
  CarriageControl:NL
 2730 LET P=1-P
- Reference:P
+ Variable:P
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
  AssignmentOperator:=
 2740 LET X=20+P*60
- Reference:X
+ Variable:X
  NumericConstant:20
- Value:P
+ Variable:P
  NumericConstant:60
  BinaryOperator:*
  BinaryOperator:+
@@ -1330,21 +1330,21 @@
 2770 PRINT L$(17);"FOR ";O$(1-P);"***"
  ITEMS
  NumericConstant:17
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:"FOR "
  CarriageControl:;
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
- Value:O$
+ Variable:O$
  CarriageControl:;
  TextConstant:"***"
  CarriageControl:NL
 2780 LET P=1-P
- Reference:P
+ Variable:P
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:-
  AssignmentOperator:=
 2790 GOTO 2600
@@ -1359,12 +1359,12 @@
  TextConstant:"SCORE:  "
  CarriageControl:;
  NumericConstant:0
- Value:S
+ Variable:S
  CarriageControl:;
  TextConstant:" TO "
  CarriageControl:;
  NumericConstant:1
- Value:S
+ Variable:S
  CarriageControl:NL
 2830 PRINT
  ITEMS
@@ -1377,7 +1377,7 @@
 2860 REM PENALTY
  Remark:PENALTY
 2870 LET P3=INT(2*RND(1))
- Reference:P3
+ Variable:P3
  NumericConstant:2
  NumericConstant:1
  FunctionRnd
@@ -1386,8 +1386,8 @@
  AssignmentOperator:=
 2880 PRINT O$(P3);" OFFSIDES -- PENALTY OF 5 YARDS."
  ITEMS
- Value:P3
- Value:O$
+ Variable:P3
+ Variable:O$
  CarriageControl:;
  TextConstant:" OFFSIDES -- PENALTY OF 5 YARDS."
  CarriageControl:NL
@@ -1398,7 +1398,7 @@
  ITEMS
  CarriageControl:NL
 2910 IF P3=0 THEN 2980
- Value:P3
+ Variable:P3
  NumericConstant:0
  BinaryOperator:=
 2920 PRINT "DO YOU ACCEPT THE PENALTY";
@@ -1406,13 +1406,13 @@
  TextConstant:"DO YOU ACCEPT THE PENALTY"
  CarriageControl:;
 2930 INPUT A$
- Reference:A$
+ Variable:A$
 2940 IF A$="NO" THEN 2300
- Value:A$
+ Variable:A$
  TextConstant:"NO"
  BinaryOperator:=
 2950 IF A$="YES" THEN 3110
- Value:A$
+ Variable:A$
  TextConstant:"YES"
  BinaryOperator:=
 2960 PRINT "TYPE 'YES' OR 'NO'";
@@ -1424,22 +1424,22 @@
 2980 REM OPPONENT'S STRATEGY ON PENALTY
  Remark:OPPONENT'S STRATEGY ON PENALTY
 2990 IF P=1 THEN 3040
- Value:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:=
 3000 IF Y<=0 THEN 3080
- Value:Y
+ Variable:Y
  NumericConstant:0
  BinaryOperator:<=
 3010 IF F<0 THEN 3080
- Value:F
+ Variable:F
  NumericConstant:0
  BinaryOperator:<
 3020 IF FNG(1)<3*D-2 THEN 3080
  NumericConstant:1
  UserFunction
  NumericConstant:3
- Value:D
+ Variable:D
  BinaryOperator:*
  NumericConstant:2
  BinaryOperator:-
@@ -1447,15 +1447,15 @@
 3030 GOTO 3100
  LineNumber:3100
 3040 IF Y<=5 THEN 3100
- Value:Y
+ Variable:Y
  NumericConstant:5
  BinaryOperator:<=
 3050 IF F<0 THEN 3100
- Value:F
+ Variable:F
  NumericConstant:0
  BinaryOperator:<
 3060 IF D<4 THEN 3080
- Value:D
+ Variable:D
  NumericConstant:4
  BinaryOperator:<
 3070 IF FNG(1)<10 THEN 3100
@@ -1474,22 +1474,22 @@
  TextConstant:"PENALTY ACCEPTED."
  CarriageControl:NL
 3110 LET F=0
- Reference:F
+ Variable:F
  NumericConstant:0
  AssignmentOperator:=
 3120 LET D=D-1
- Reference:D
- Value:D
+ Variable:D
+ Variable:D
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 3130 IF P<>P3 THEN 3160
- Value:P
- Value:P3
+ Variable:P
+ Variable:P3
  BinaryOperator:<>
 3140 LET X=X3-FNF(1)*5
- Reference:X
- Value:X3
+ Variable:X
+ Variable:X3
  NumericConstant:1
  UserFunction
  NumericConstant:5
@@ -1499,8 +1499,8 @@
 3150 GOTO 2300
  LineNumber:2300
 3160 LET X=X3+FNF(1)*5
- Reference:X
- Value:X3
+ Variable:X
+ Variable:X3
  NumericConstant:1
  UserFunction
  NumericConstant:5

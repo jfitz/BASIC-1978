@@ -31,14 +31,14 @@
  ITEMS
  CarriageControl:NL
 50 INPUT "WHAT IS YOUR FIRST NAME";N$: PRINT
- Reference:N$
+ Variable:N$
  ITEMS
  CarriageControl:NL
 80 PRINT "HI, ";N$;".  IN THIS GAME YOU ARE TO TAKE ORDERS"
  ITEMS
  TextConstant:"HI, "
  CarriageControl:;
- Value:N$
+ Variable:N$
  CarriageControl:;
  TextConstant:".  IN THIS GAME YOU ARE TO TAKE ORDERS"
  CarriageControl:NL
@@ -59,8 +59,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:16"]
 150 READ S$(I)
- Value:I
- Reference:S$
+ Variable:I
+ Variable:S$
 160 NEXT I
  Variable:I
 170 FOR I=1 TO 4
@@ -68,8 +68,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 180 READ M$(I)
- Value:I
- Reference:M$
+ Variable:I
+ Variable:M$
 190 NEXT I
  Variable:I
 200 DATA "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"
@@ -105,7 +105,7 @@
  TextConstant:" -----1-----2-----3-----4-----"
  CarriageControl:NL
 260 K=4
- Reference:K
+ Variable:K
  NumericConstant:4
  AssignmentOperator:=
 270 FOR I=1 TO 4
@@ -127,14 +127,14 @@
  CarriageControl:NL
 320 PRINT M$(K);
  ITEMS
- Value:K
- Value:M$
+ Variable:K
+ Variable:M$
  CarriageControl:;
 330 S1=16-4*I+1
- Reference:S1
+ Variable:S1
  NumericConstant:16
  NumericConstant:4
- Value:I
+ Variable:I
  BinaryOperator:*
  BinaryOperator:-
  NumericConstant:1
@@ -144,40 +144,40 @@
  ITEMS
  TextConstant:"     "
  CarriageControl:;
- Value:S1
- Value:S$
+ Variable:S1
+ Variable:S$
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
- Value:S1
+ Variable:S1
  NumericConstant:1
  BinaryOperator:+
- Value:S$
+ Variable:S$
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
- Value:S1
+ Variable:S1
  NumericConstant:2
  BinaryOperator:+
- Value:S$
+ Variable:S$
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
 350 PRINT S$(S1+3);"     ";M$(K)
  ITEMS
- Value:S1
+ Variable:S1
  NumericConstant:3
  BinaryOperator:+
- Value:S$
+ Variable:S$
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
- Value:K
- Value:M$
+ Variable:K
+ Variable:M$
  CarriageControl:NL
 380 K=K-1
- Reference:K
- Value:K
+ Variable:K
+ Variable:K
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -227,13 +227,13 @@
  ITEMS
  CarriageControl:NL
 520 INPUT "DO YOU NEED MORE DIRECTIONS";A$
- Reference:A$
+ Variable:A$
 530 IF A$="YES" THEN 590
- Value:A$
+ Variable:A$
  TextConstant:"YES"
  BinaryOperator:=
 540 IF A$="NO" THEN 750
- Value:A$
+ Variable:A$
  TextConstant:"NO"
  BinaryOperator:=
 550 PRINT "'YES' OR 'NO' PLEASE, NOW THEN,": GOTO 520
@@ -266,7 +266,7 @@
  ITEMS
  TextConstant:"DRIVER TO "
  CarriageControl:;
- Value:N$
+ Variable:N$
  CarriageControl:;
  TextConstant:".  WHERE DOES J LIVE?"
  CarriageControl:NL
@@ -277,9 +277,9 @@
  ITEMS
  CarriageControl:NL
 660 INPUT "UNDERSTAND";A$
- Reference:A$
+ Variable:A$
 670 IF A$="YES" THEN 690
- Value:A$
+ Variable:A$
  TextConstant:"YES"
  BinaryOperator:=
 680 PRINT "THIS JOB IS DEFINITELY TOO DIFFICULT FOR YOU. THANKS ANYWAY"
@@ -305,7 +305,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 760 S=INT(RND(1)*16+1): PRINT
- Reference:S
+ Variable:S
  NumericConstant:1
  FunctionRnd
  NumericConstant:16
@@ -320,12 +320,12 @@
  ITEMS
  TextConstant:"HELLO "
  CarriageControl:;
- Value:N$
+ Variable:N$
  CarriageControl:;
  TextConstant:"'S PIZZA.  THIS IS "
  CarriageControl:;
- Value:S
- Value:S$
+ Variable:S
+ Variable:S$
  CarriageControl:;
  TextConstant:"."
  CarriageControl:;
@@ -337,26 +337,26 @@
  ITEMS
  TextConstant:"  DRIVER TO "
  CarriageControl:;
- Value:N$
+ Variable:N$
  CarriageControl:;
  TextConstant:":  WHERE DOES "
  CarriageControl:;
- Value:S
- Value:S$
+ Variable:S
+ Variable:S$
  CarriageControl:;
  TextConstant:" LIVE"
  CarriageControl:;
 790 INPUT A(1),A(2)
  NumericConstant:1
- Reference:A
+ Variable:A
  NumericConstant:2
- Reference:A
+ Variable:A
 870 T=A(1)+(A(2)-1)*4
- Reference:T
+ Variable:T
  NumericConstant:1
- Value:A
+ Variable:A
  NumericConstant:2
- Value:A
+ Variable:A
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:4
@@ -364,15 +364,15 @@
  BinaryOperator:+
  AssignmentOperator:=
 880 IF T=S THEN 920
- Value:T
- Value:S
+ Variable:T
+ Variable:S
  BinaryOperator:=
 890 PRINT "THIS IS ";S$(T);".  I DID NOT ORDER A PIZZA."
  ITEMS
  TextConstant:"THIS IS "
  CarriageControl:;
- Value:T
- Value:S$
+ Variable:T
+ Variable:S$
  CarriageControl:;
  TextConstant:".  I DID NOT ORDER A PIZZA."
  CarriageControl:NL
@@ -381,12 +381,12 @@
  TextConstant:"I LIVE AT "
  CarriageControl:;
  NumericConstant:1
- Value:A
+ Variable:A
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
  NumericConstant:2
- Value:A
+ Variable:A
  CarriageControl:NL
 910 GOTO 780
  LineNumber:780
@@ -394,12 +394,12 @@
  ITEMS
  TextConstant:"HELLO "
  CarriageControl:
- Value:N$
+ Variable:N$
  CarriageControl:;
  TextConstant:".  THIS IS "
  CarriageControl:;
- Value:S
- Value:S$
+ Variable:S
+ Variable:S$
  CarriageControl:;
  TextConstant:", THANKS FOR THE PIZZA."
  CarriageControl:NL
@@ -408,9 +408,9 @@
 940 PRINT: INPUT "DO YOU WANT TO DELIVER MORE PIZZAS";A$
  ITEMS
  CarriageControl:NL
- Reference:A$
+ Variable:A$
 960 IF A$="YES" THEN 750
- Value:A$
+ Variable:A$
  TextConstant:"YES"
  BinaryOperator:=
 970 PRINT: PRINT "O.K. ";N$;", SEE YOU LATER!":PRINT
@@ -419,7 +419,7 @@
  ITEMS
  TextConstant:"O.K. "
  CarriageControl:;
- Value:N$
+ Variable:N$
  CarriageControl:;
  TextConstant:", SEE YOU LATER!"
  CarriageControl:NL

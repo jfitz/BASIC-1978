@@ -20,11 +20,11 @@
  ITEMS
  CarriageControl:NL
 10 G=6
- Reference:G
+ Variable:G
  NumericConstant:6
  AssignmentOperator:=
 20 N=100
- Reference:N
+ Variable:N
  NumericConstant:100
  AssignmentOperator:=
 30 REM-TRAP
@@ -36,9 +36,9 @@
  TextConstant:"INSTRUCTIONS"
  CarriageControl:;
 60 INPUT Z$
- Reference:Z$
+ Variable:Z$
 70 IF LEFT$(Z$,1)<>"Y" THEN 180
- Value:Z$
+ Variable:Z$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
@@ -47,7 +47,7 @@
  ITEMS
  TextConstant:"I AM THINKING OF A NUMBER BETWEEN 1 AND"
  CarriageControl:;
- Value:N
+ Variable:N
  CarriageControl:NL
 90 PRINT "TRY TO GUESS MY NUMBER. ON EACH GUESS,"
  ITEMS
@@ -85,13 +85,13 @@
  ITEMS
  TextConstant:"YOU GET"
  CarriageControl:;
- Value:G
+ Variable:G
  CarriageControl:;
  TextConstant:"GUESSES TO GET MY NUMBER."
  CarriageControl:NL
 180 X=INT(N*RND(1))+1
- Reference:X
- Value:N
+ Variable:X
+ Variable:N
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -102,7 +102,7 @@
 190 FOR Q=1 TO G
  control: Variable:Q
  start:   ["NumericConstant:1"]
- end:     ["Value:G"]
+ end:     ["Variable:G"]
 200 PRINT 
  ITEMS
  CarriageControl:NL
@@ -110,36 +110,36 @@
  ITEMS
  TextConstant:"GUESS #"
  CarriageControl:;
- Value:Q
+ Variable:Q
  CarriageControl:;
 220 INPUT A,B
- Reference:A
- Reference:B
+ Variable:A
+ Variable:B
 230 IF A=B AND X=A THEN 400
- Value:A
- Value:B
+ Variable:A
+ Variable:B
  BinaryOperator:=
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  BinaryOperator:=
  BinaryOperator:AND
 240 IF A <= B THEN 260
- Value:A
- Value:B
+ Variable:A
+ Variable:B
  BinaryOperator:<=
 250 GOSUB 360
  LineNumber:360
 260 IF A <= X AND X <= B THEN 320
- Value:A
- Value:X
+ Variable:A
+ Variable:X
  BinaryOperator:<=
- Value:X
- Value:B
+ Variable:X
+ Variable:B
  BinaryOperator:<=
  BinaryOperator:AND
 270 IF X<A THEN 300
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  BinaryOperator:<
 280 PRINT "MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
  ITEMS
@@ -163,11 +163,11 @@
  ITEMS
  TextConstant:"SORRY, THAT'S"
  CarriageControl:;
- Value:G
+ Variable:G
  CarriageControl:;
  TextConstant:"GUESSES. THE NUMBER WAS"
  CarriageControl:;
- Value:X
+ Variable:X
  CarriageControl:NL
 345 PRINT
  ITEMS
@@ -175,16 +175,16 @@
 350 GOTO 410
  LineNumber:410
 360 R=A
- Reference:R
- Value:A
+ Variable:R
+ Variable:A
  AssignmentOperator:=
 370 A=B
- Reference:A
- Value:B
+ Variable:A
+ Variable:B
  AssignmentOperator:=
 380 B=R
- Reference:B
- Value:R
+ Variable:B
+ Variable:R
  AssignmentOperator:=
 390 RETURN 
  

@@ -38,7 +38,7 @@
  TextConstant:"AS TO HOW CLOSE YOU'RE GETTING TO MY LETTER."
  CarriageControl:NL
 310 L=65+INT(RND(1)*26)
- Reference:L
+ Variable:L
  NumericConstant:65
  NumericConstant:1
  FunctionRnd
@@ -48,7 +48,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 320 G=0
- Reference:G
+ Variable:G
  NumericConstant:0
  AssignmentOperator:=
 340 PRINT: PRINT "O.K., I HAVE A LETTER.  START GUESSING."
@@ -64,26 +64,26 @@
  TextConstant:"WHAT IS YOUR GUESS"
  CarriageControl:;
 420 G=G+1
- Reference:G
- Value:G
+ Variable:G
+ Variable:G
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 430 INPUT A$: A=ASC(A$): PRINT
- Reference:A$
- Reference:A
- Value:A$
+ Variable:A$
+ Variable:A
+ Variable:A$
  FunctionAsc
  AssignmentOperator:=
  ITEMS
  CarriageControl:NL
 440 IF A=L THEN 500
- Value:A
- Value:L
+ Variable:A
+ Variable:L
  BinaryOperator:=
 450 IF A>L THEN 480
- Value:A
- Value:L
+ Variable:A
+ Variable:L
  BinaryOperator:>
 460 PRINT "TOO LOW.  TRY A HIGHER LETTER.": GOTO 410
  ITEMS
@@ -101,12 +101,12 @@
  ITEMS
  TextConstant:"YOU GOT IT IN"
  CarriageControl:;
- Value:G
+ Variable:G
  CarriageControl:;
  TextConstant:"GUESSES!!"
  CarriageControl:NL
 504 IF G<=5 THEN 508
- Value:G
+ Variable:G
  NumericConstant:5
  BinaryOperator:<=
 506 PRINT "BUT IT SHOULDN'T TAKE MORE THAN 5 GUESSES!": GOTO 515

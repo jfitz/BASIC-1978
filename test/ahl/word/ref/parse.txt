@@ -55,12 +55,12 @@
 35 RESTORE
  
 40 READ N
- Reference:N
+ Variable:N
 50 C=INT(RND(1)*N+1)
- Reference:C
+ Variable:C
  NumericConstant:1
  FunctionRnd
- Value:N
+ Variable:N
  BinaryOperator:*
  NumericConstant:1
  BinaryOperator:+
@@ -69,29 +69,29 @@
 60 FOR I=1 TO C
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:C"]
+ end:     ["Variable:C"]
 70 READ S$
- Reference:S$
+ Variable:S$
 80 NEXT I
  Variable:I
 90 G=0
- Reference:G
+ Variable:G
  NumericConstant:0
  AssignmentOperator:=
 95 S(0)=LEN(S$)
  NumericConstant:0
- Reference:S
- Value:S$
+ Variable:S
+ Variable:S$
  FunctionLen
  AssignmentOperator:=
 100 FOR I=1 TO LEN(S$): S(I)=ASC(MID$(S$,I,1)): NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:S$", "FunctionLen"]
- Value:I
- Reference:S
- Value:S$
- Value:I
+ end:     ["Variable:S$", "FunctionLen"]
+ Variable:I
+ Variable:S
+ Variable:S$
+ Variable:I
  NumericConstant:1
  FunctionMid
  FunctionAsc
@@ -102,8 +102,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 120 A(I)=45
- Value:I
- Reference:A
+ Variable:I
+ Variable:A
  NumericConstant:45
  AssignmentOperator:=
 130 NEXT I
@@ -113,8 +113,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 144 P(J)=0
- Value:J
- Reference:P
+ Variable:J
+ Variable:P
  NumericConstant:0
  AssignmentOperator:=
 146 NEXT J
@@ -124,40 +124,40 @@
  TextConstant:"GUESS A FIVE LETTER WORD"
  CarriageControl:;
 160 INPUT L$
- Reference:L$
+ Variable:L$
 170 G=G+1
- Reference:G
- Value:G
+ Variable:G
+ Variable:G
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 172 IF S$=G$ THEN 500
- Value:S$
- Value:G$
+ Variable:S$
+ Variable:G$
  BinaryOperator:=
 173 FOR I=1 TO 7: P(I)=0: NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
- Value:I
- Reference:P
+ Variable:I
+ Variable:P
  NumericConstant:0
  AssignmentOperator:=
  Variable:I
 175 L(0)=LEN(L$)
  NumericConstant:0
- Reference:L
- Value:L$
+ Variable:L
+ Variable:L$
  FunctionLen
  AssignmentOperator:=
 180 FOR I=1 TO LEN(L$): L(I)=ASC(MID$(L$,I,1)): NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:L$", "FunctionLen"]
- Value:I
- Reference:L
- Value:L$
- Value:I
+ end:     ["Variable:L$", "FunctionLen"]
+ Variable:I
+ Variable:L
+ Variable:L$
+ Variable:I
  NumericConstant:1
  FunctionMid
  FunctionAsc
@@ -165,19 +165,19 @@
  Variable:I
 190 IF L(1)=63 THEN 300
  NumericConstant:1
- Value:L
+ Variable:L
  NumericConstant:63
  BinaryOperator:=
 200 IF L(0)<>5 THEN 400
  NumericConstant:0
- Value:L
+ Variable:L
  NumericConstant:5
  BinaryOperator:<>
 205 M=0: Q=1
- Reference:M
+ Variable:M
  NumericConstant:0
  AssignmentOperator:=
- Reference:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
 210 FOR I=1 TO 5
@@ -189,36 +189,36 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 230 IF S(I)<>L(J) THEN 260
- Value:I
- Value:S
- Value:J
- Value:L
+ Variable:I
+ Variable:S
+ Variable:J
+ Variable:L
  BinaryOperator:<>
 231 P(Q)=L(J)
- Value:Q
- Reference:P
- Value:J
- Value:L
+ Variable:Q
+ Variable:P
+ Variable:J
+ Variable:L
  AssignmentOperator:=
 232 Q=Q+1
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 233 IF I<>J THEN 250
- Value:I
- Value:J
+ Variable:I
+ Variable:J
  BinaryOperator:<>
 240 A(J)=L(J)
- Value:J
- Reference:A
- Value:J
- Value:L
+ Variable:J
+ Variable:A
+ Variable:J
+ Variable:L
  AssignmentOperator:=
 250 M=M+1
- Reference:M
- Value:M
+ Variable:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -228,40 +228,40 @@
  Variable:I
 270 A(0)=5
  NumericConstant:0
- Reference:A
+ Variable:A
  NumericConstant:5
  AssignmentOperator:=
 272 P(0)=M
  NumericConstant:0
- Reference:P
- Value:M
+ Variable:P
+ Variable:M
  AssignmentOperator:=
 275 A$="": FOR I=1 TO A(0): A$=A$+CHR$(A(I)): NEXT I
- Reference:A$
+ Variable:A$
  TextConstant:""
  AssignmentOperator:=
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:0", "Value:A"]
- Reference:A$
- Value:A$
- Value:I
- Value:A
+ end:     ["NumericConstant:0", "Variable:A"]
+ Variable:A$
+ Variable:A$
+ Variable:I
+ Variable:A
  FunctionChr
  BinaryOperator:+
  AssignmentOperator:=
  Variable:I
 277 P$="": FOR I=1 TO P(0): P$=P$+CHR$(P(I)): NEXT I
- Reference:P$
+ Variable:P$
  TextConstant:""
  AssignmentOperator:=
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:0", "Value:P"]
- Reference:P$
- Value:P$
- Value:I
- Value:P
+ end:     ["NumericConstant:0", "Variable:P"]
+ Variable:P$
+ Variable:P$
+ Variable:I
+ Variable:P
  FunctionChr
  BinaryOperator:+
  AssignmentOperator:=
@@ -270,24 +270,24 @@
  ITEMS
  TextConstant:"THERE WERE"
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:"MATCHES AND THE COMMON LETTERS WERE..."
  CarriageControl:;
- Value:P$
+ Variable:P$
  CarriageControl:NL
 285 PRINT "FROM THE EXACT LETTER MATCHES, YOU KNOW................";A$
  ITEMS
  TextConstant:"FROM THE EXACT LETTER MATCHES, YOU KNOW................"
  CarriageControl:;
- Value:A$
+ Variable:A$
  CarriageControl:NL
 286 IF A$=S$ THEN 500
- Value:A$
- Value:S$
+ Variable:A$
+ Variable:S$
  BinaryOperator:=
 287 IF M>1 THEN 289
- Value:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:>
 288 PRINT: PRINT "IF YOU GIVE UP, TYPE '?' FOR YOUR NEXT GUESS."
@@ -302,16 +302,16 @@
 290 GOTO 150
  LineNumber:150
 300 S$="": FOR I=1 TO 7: S$=S$+CHR$(S(I)): NEXT I
- Reference:S$
+ Variable:S$
  TextConstant:""
  AssignmentOperator:=
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
- Reference:S$
- Value:S$
- Value:I
- Value:S
+ Variable:S$
+ Variable:S$
+ Variable:I
+ Variable:S
  FunctionChr
  BinaryOperator:+
  AssignmentOperator:=
@@ -320,7 +320,7 @@
  ITEMS
  TextConstant:"THE SECRET WORD IS "
  CarriageControl:;
- Value:S$
+ Variable:S$
  CarriageControl:NL
  ITEMS
  CarriageControl:NL
@@ -333,8 +333,8 @@
 410 PRINT: G=G-1: GOTO 150
  ITEMS
  CarriageControl:NL
- Reference:G
- Value:G
+ Variable:G
+ Variable:G
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -343,16 +343,16 @@
  ITEMS
  TextConstant:"YOU HAVE GUESSED THE WORD.  IT TOOK"
  CarriageControl:;
- Value:G
+ Variable:G
  CarriageControl:;
  TextConstant:"GUESSES!"
  CarriageControl:NL
  ITEMS
  CarriageControl:NL
 510 INPUT "WANT TO PLAY AGAIN";Q$
- Reference:Q$
+ Variable:Q$
 520 IF Q$="YES" THEN 30
- Value:Q$
+ Variable:Q$
  TextConstant:"YES"
  BinaryOperator:=
 530 DATA 12,"DINKY","SMOKE","WATER","GRASS","TRAIN","MIGHT","FIRST"

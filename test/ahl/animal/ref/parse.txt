@@ -41,45 +41,45 @@
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:3"]
 90 READ A$(I)
- Value:I
- Reference:A$
+ Variable:I
+ Variable:A$
 100 NEXT I
  Variable:I
 110 N=VAL(A$(0))
- Reference:N
+ Variable:N
  NumericConstant:0
- Value:A$
+ Variable:A$
  FunctionVal
  AssignmentOperator:=
 120 REM          MAIN CONTROL SECTION
  Remark:         MAIN CONTROL SECTION
 130 INPUT "ARE YOU THINKING OF AN ANIMAL";A$
- Reference:A$
+ Variable:A$
 140 IF A$="LIST" THEN 600
- Value:A$
+ Variable:A$
  TextConstant:"LIST"
  BinaryOperator:=
 150 IF LEFT$(A$,1)<>"Y" THEN 120
- Value:A$
+ Variable:A$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
  BinaryOperator:<>
 160 K=1
- Reference:K
+ Variable:K
  NumericConstant:1
  AssignmentOperator:=
 170 GOSUB 390
  LineNumber:390
 180 IF LEN(A$(K))=0 THEN 999
- Value:K
- Value:A$
+ Variable:K
+ Variable:A$
  FunctionLen
  NumericConstant:0
  BinaryOperator:=
 190 IF LEFT$(A$(K),2)="\Q" THEN 170
- Value:K
- Value:A$
+ Variable:K
+ Variable:A$
  NumericConstant:2
  FunctionLeft
  TextConstant:"\Q"
@@ -88,25 +88,25 @@
  ITEMS
  TextConstant:"IS IT A "
  CarriageControl:;
- Value:K
- Value:A$
- Value:K
- Value:A$
+ Variable:K
+ Variable:A$
+ Variable:K
+ Variable:A$
  FunctionLen
  NumericConstant:2
  BinaryOperator:-
  FunctionRight
  CarriageControl:;
 210 INPUT A$
- Reference:A$
+ Variable:A$
 220 A$=LEFT$(A$,1)
- Reference:A$
- Value:A$
+ Variable:A$
+ Variable:A$
  NumericConstant:1
  FunctionLeft
  AssignmentOperator:=
 230 IF LEFT$(A$,1)="Y" THEN PRINT "WHY NOT TRY ANOTHER ANIMAL?": GOTO 120
- Value:A$
+ Variable:A$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
@@ -116,114 +116,114 @@
  CarriageControl:NL
  LineNumber:120
 240 INPUT "THE ANIMAL YOU WERE THINKING OF WAS A ";V$
- Reference:V$
+ Variable:V$
 250 PRINT "PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
  ITEMS
  TextConstant:"PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
  CarriageControl:NL
 260 PRINT V$;" FROM A ";RIGHT$(A$(K),LEN(A$(K))-2)
  ITEMS
- Value:V$
+ Variable:V$
  CarriageControl:;
  TextConstant:" FROM A "
  CarriageControl:;
- Value:K
- Value:A$
- Value:K
- Value:A$
+ Variable:K
+ Variable:A$
+ Variable:K
+ Variable:A$
  FunctionLen
  NumericConstant:2
  BinaryOperator:-
  FunctionRight
  CarriageControl:NL
 270 INPUT X$
- Reference:X$
+ Variable:X$
 280 PRINT "FOR A ";V$;" THE ANSWER WOULD BE ";
  ITEMS
  TextConstant:"FOR A "
  CarriageControl:;
- Value:V$
+ Variable:V$
  CarriageControl:;
  TextConstant:" THE ANSWER WOULD BE "
  CarriageControl:;
 290 INPUT A$
- Reference:A$
+ Variable:A$
 300 A$=LEFT$(A$,1): IF A$<>"Y" AND A$<>"N" THEN 280
- Reference:A$
- Value:A$
+ Variable:A$
+ Variable:A$
  NumericConstant:1
  FunctionLeft
  AssignmentOperator:=
- Value:A$
+ Variable:A$
  TextConstant:"Y"
  BinaryOperator:<>
- Value:A$
+ Variable:A$
  TextConstant:"N"
  BinaryOperator:<>
  BinaryOperator:AND
 310 IF A$="Y" THEN B$="N"
- Value:A$
+ Variable:A$
  TextConstant:"Y"
  BinaryOperator:=
- Reference:B$
+ Variable:B$
  TextConstant:"N"
  AssignmentOperator:=
 320 IF A$="N" THEN B$="Y"
- Value:A$
+ Variable:A$
  TextConstant:"N"
  BinaryOperator:=
- Reference:B$
+ Variable:B$
  TextConstant:"Y"
  AssignmentOperator:=
 330 Z1=VAL(A$(0))
- Reference:Z1
+ Variable:Z1
  NumericConstant:0
- Value:A$
+ Variable:A$
  FunctionVal
  AssignmentOperator:=
 340 A$(0)=STR$(Z1+2)
  NumericConstant:0
- Reference:A$
- Value:Z1
+ Variable:A$
+ Variable:Z1
  NumericConstant:2
  BinaryOperator:+
  FunctionStr
  AssignmentOperator:=
 350 A$(Z1)=A$(K)
- Value:Z1
- Reference:A$
- Value:K
- Value:A$
+ Variable:Z1
+ Variable:A$
+ Variable:K
+ Variable:A$
  AssignmentOperator:=
 360 A$(Z1+1)="\A"+V$
- Value:Z1
+ Variable:Z1
  NumericConstant:1
  BinaryOperator:+
- Reference:A$
+ Variable:A$
  TextConstant:"\A"
- Value:V$
+ Variable:V$
  BinaryOperator:+
  AssignmentOperator:=
 370 A$(K)="\Q"+X$+"\"+A$+STR$(Z1+1)+"\"+B$+STR$(Z1)+"\"
- Value:K
- Reference:A$
+ Variable:K
+ Variable:A$
  TextConstant:"\Q"
- Value:X$
+ Variable:X$
  BinaryOperator:+
  TextConstant:"\"
  BinaryOperator:+
- Value:A$
+ Variable:A$
  BinaryOperator:+
- Value:Z1
+ Variable:Z1
  NumericConstant:1
  BinaryOperator:+
  FunctionStr
  BinaryOperator:+
  TextConstant:"\"
  BinaryOperator:+
- Value:B$
+ Variable:B$
  BinaryOperator:+
- Value:Z1
+ Variable:Z1
  FunctionStr
  BinaryOperator:+
  TextConstant:"\"
@@ -234,60 +234,60 @@
 390 REM     SUBROUTINE TO PRINT QUESTIONS
  Remark:    SUBROUTINE TO PRINT QUESTIONS
 400 Q$=A$(K)
- Reference:Q$
- Value:K
- Value:A$
+ Variable:Q$
+ Variable:K
+ Variable:A$
  AssignmentOperator:=
 410 FOR Z=3 TO LEN(Q$)
  control: Variable:Z
  start:   ["NumericConstant:3"]
- end:     ["Value:Q$", "FunctionLen"]
+ end:     ["Variable:Q$", "FunctionLen"]
 415 IF MID$(Q$,Z,1)<>"\" THEN PRINT MID$(Q$,Z,1);: NEXT Z
- Value:Q$
- Value:Z
+ Variable:Q$
+ Variable:Z
  NumericConstant:1
  FunctionMid
  TextConstant:"\"
  BinaryOperator:<>
  ITEMS
- Value:Q$
- Value:Z
+ Variable:Q$
+ Variable:Z
  NumericConstant:1
  FunctionMid
  CarriageControl:;
  Variable:Z
 420 INPUT C$
- Reference:C$
+ Variable:C$
 430 C$=LEFT$(C$,1)
- Reference:C$
- Value:C$
+ Variable:C$
+ Variable:C$
  NumericConstant:1
  FunctionLeft
  AssignmentOperator:=
 440 IF C$<>"Y" AND C$<>"N" THEN 410
- Value:C$
+ Variable:C$
  TextConstant:"Y"
  BinaryOperator:<>
- Value:C$
+ Variable:C$
  TextConstant:"N"
  BinaryOperator:<>
  BinaryOperator:AND
 450 T$="\"+C$
- Reference:T$
+ Variable:T$
  TextConstant:"\"
- Value:C$
+ Variable:C$
  BinaryOperator:+
  AssignmentOperator:=
 455 FOR X=3 TO LEN(Q$)-1
  control: Variable:X
  start:   ["NumericConstant:3"]
- end:     ["Value:Q$", "FunctionLen", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:Q$", "FunctionLen", "NumericConstant:1", "BinaryOperator:-"]
 460 IF MID$(Q$,X,2)=T$ THEN 480
- Value:Q$
- Value:X
+ Variable:Q$
+ Variable:X
  NumericConstant:2
  FunctionMid
- Value:T$
+ Variable:T$
  BinaryOperator:=
 470 NEXT X
  Variable:X
@@ -295,11 +295,11 @@
  
 480 FOR Y=X+1 TO LEN(Q$)
  control: Variable:Y
- start:   ["Value:X", "NumericConstant:1", "BinaryOperator:+"]
- end:     ["Value:Q$", "FunctionLen"]
+ start:   ["Variable:X", "NumericConstant:1", "BinaryOperator:+"]
+ end:     ["Variable:Q$", "FunctionLen"]
 490 IF MID$(Q$,Y,1)="\" THEN 510
- Value:Q$
- Value:Y
+ Variable:Q$
+ Variable:Y
  NumericConstant:1
  FunctionMid
  TextConstant:"\"
@@ -309,13 +309,13 @@
 505 STOP
  
 510 K=VAL(MID$(Q$,X+2,Y-X-2))
- Reference:K
- Value:Q$
- Value:X
+ Variable:K
+ Variable:Q$
+ Variable:X
  NumericConstant:2
  BinaryOperator:+
- Value:Y
- Value:X
+ Variable:Y
+ Variable:X
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:-
@@ -336,7 +336,7 @@
  TextConstant:"ANIMALS I ALREADY KNOW ARE:"
  CarriageControl:NL
 605 X=0
- Reference:X
+ Variable:X
  NumericConstant:0
  AssignmentOperator:=
 610 FOR I=1 TO 200
@@ -344,8 +344,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:200"]
 620 IF LEFT$(A$(I),2)<>"\A" THEN 650
- Value:I
- Value:A$
+ Variable:I
+ Variable:A$
  NumericConstant:2
  FunctionLeft
  TextConstant:"\A"
@@ -353,40 +353,40 @@
 624 PRINT TAB(15*X);
  ITEMS
  NumericConstant:15
- Value:X
+ Variable:X
  BinaryOperator:*
  FunctionTab
  CarriageControl:;
 630 FOR Z=3 TO LEN(A$(I))
  control: Variable:Z
  start:   ["NumericConstant:3"]
- end:     ["Value:I", "Value:A$", "FunctionLen"]
+ end:     ["Variable:I", "Variable:A$", "FunctionLen"]
 640 IF MID$(A$(I),Z,1)<>"\" THEN PRINT MID$(A$(I),Z,1);: NEXT Z
- Value:I
- Value:A$
- Value:Z
+ Variable:I
+ Variable:A$
+ Variable:Z
  NumericConstant:1
  FunctionMid
  TextConstant:"\"
  BinaryOperator:<>
  ITEMS
- Value:I
- Value:A$
- Value:Z
+ Variable:I
+ Variable:A$
+ Variable:Z
  NumericConstant:1
  FunctionMid
  CarriageControl:;
  Variable:Z
 645 X=X+1: IF X=4 THEN X=0: PRINT
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:X
+ Variable:X
  NumericConstant:4
  BinaryOperator:=
- Reference:X
+ Variable:X
  NumericConstant:0
  AssignmentOperator:=
  ITEMS

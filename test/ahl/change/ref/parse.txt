@@ -36,21 +36,21 @@
  ITEMS
  TextConstant:"COST OF ITEM"
  CarriageControl:;
- Reference:A
+ Variable:A
  ITEMS
  TextConstant:"AMOUNT OF PAYMENT"
  CarriageControl:;
- Reference:P
+ Variable:P
 20 C=P-A:M=C:IF C<>0 THEN 90
- Reference:C
- Value:P
- Value:A
+ Variable:C
+ Variable:P
+ Variable:A
  BinaryOperator:-
  AssignmentOperator:=
- Reference:M
- Value:C
+ Variable:M
+ Variable:C
  AssignmentOperator:=
- Value:C
+ Variable:C
  NumericConstant:0
  BinaryOperator:<>
 25 PRINT "CORRECT AMOUNT, THANK YOU."
@@ -60,15 +60,15 @@
 30 GOTO 400
  LineNumber:400
 90 IF C>0 THEN 120
- Value:C
+ Variable:C
  NumericConstant:0
  BinaryOperator:>
 95 PRINT "SORRY, YOU HAVE SHORT-CHANGED ME $";A-P
  ITEMS
  TextConstant:"SORRY, YOU HAVE SHORT-CHANGED ME $"
  CarriageControl:;
- Value:A
- Value:P
+ Variable:A
+ Variable:P
  BinaryOperator:-
  CarriageControl:NL
 100 GOTO 10
@@ -77,239 +77,239 @@
  ITEMS
  TextConstant:"YOUR CHANGE, $"
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:NL
 130 D=INT(C/10)
- Reference:D
- Value:C
+ Variable:D
+ Variable:C
  NumericConstant:10
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 140 IF D=0 THEN 155
- Value:D
+ Variable:D
  NumericConstant:0
  BinaryOperator:=
 150 PRINT D;"TEN DOLLAR BILL(S)"
  ITEMS
- Value:D
+ Variable:D
  CarriageControl:;
  TextConstant:"TEN DOLLAR BILL(S)"
  CarriageControl:NL
 155 C=M-(D*10)
- Reference:C
- Value:M
- Value:D
+ Variable:C
+ Variable:M
+ Variable:D
  NumericConstant:10
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 160 E=INT(C/5)
- Reference:E
- Value:C
+ Variable:E
+ Variable:C
  NumericConstant:5
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 170 IF E=0 THEN 185
- Value:E
+ Variable:E
  NumericConstant:0
  BinaryOperator:=
 180 PRINT E;"FIVE DOLLARS BILL(S)"
  ITEMS
- Value:E
+ Variable:E
  CarriageControl:;
  TextConstant:"FIVE DOLLARS BILL(S)"
  CarriageControl:NL
 185 C=M-(D*10+E*5)
- Reference:C
- Value:M
- Value:D
+ Variable:C
+ Variable:M
+ Variable:D
  NumericConstant:10
  BinaryOperator:*
- Value:E
+ Variable:E
  NumericConstant:5
  BinaryOperator:*
  BinaryOperator:+
  BinaryOperator:-
  AssignmentOperator:=
 190 F=INT(C)
- Reference:F
- Value:C
+ Variable:F
+ Variable:C
  FunctionInt
  AssignmentOperator:=
 200 IF F=0 THEN 215
- Value:F
+ Variable:F
  NumericConstant:0
  BinaryOperator:=
 210 PRINT F;"ONE DOLLAR BILL(S)"
  ITEMS
- Value:F
+ Variable:F
  CarriageControl:;
  TextConstant:"ONE DOLLAR BILL(S)"
  CarriageControl:NL
 215 C=M-(D*10+E*5+F)
- Reference:C
- Value:M
- Value:D
+ Variable:C
+ Variable:M
+ Variable:D
  NumericConstant:10
  BinaryOperator:*
- Value:E
+ Variable:E
  NumericConstant:5
  BinaryOperator:*
  BinaryOperator:+
- Value:F
+ Variable:F
  BinaryOperator:+
  BinaryOperator:-
  AssignmentOperator:=
 220 C=C*100
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:100
  BinaryOperator:*
  AssignmentOperator:=
 225 N=C
- Reference:N
- Value:C
+ Variable:N
+ Variable:C
  AssignmentOperator:=
 230 G=INT(C/50)
- Reference:G
- Value:C
+ Variable:G
+ Variable:C
  NumericConstant:50
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 240 IF G=0 THEN 255
- Value:G
+ Variable:G
  NumericConstant:0
  BinaryOperator:=
 250 PRINT G;"ONE HALF DOLLAR(S)"
  ITEMS
- Value:G
+ Variable:G
  CarriageControl:;
  TextConstant:"ONE HALF DOLLAR(S)"
  CarriageControl:NL
 255 C=N-(G*50)
- Reference:C
- Value:N
- Value:G
+ Variable:C
+ Variable:N
+ Variable:G
  NumericConstant:50
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 260 H=INT(C/25)
- Reference:H
- Value:C
+ Variable:H
+ Variable:C
  NumericConstant:25
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 270 IF H=0 THEN 285
- Value:H
+ Variable:H
  NumericConstant:0
  BinaryOperator:=
 280 PRINT H;"QUARTER(S)"
  ITEMS
- Value:H
+ Variable:H
  CarriageControl:;
  TextConstant:"QUARTER(S)"
  CarriageControl:NL
 285 C=N-(G*50+H*25)
- Reference:C
- Value:N
- Value:G
+ Variable:C
+ Variable:N
+ Variable:G
  NumericConstant:50
  BinaryOperator:*
- Value:H
+ Variable:H
  NumericConstant:25
  BinaryOperator:*
  BinaryOperator:+
  BinaryOperator:-
  AssignmentOperator:=
 290 I=INT(C/10)
- Reference:I
- Value:C
+ Variable:I
+ Variable:C
  NumericConstant:10
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 300 IF I=0 THEN 315
- Value:I
+ Variable:I
  NumericConstant:0
  BinaryOperator:=
 310 PRINT I;"DIME(S)"
  ITEMS
- Value:I
+ Variable:I
  CarriageControl:;
  TextConstant:"DIME(S)"
  CarriageControl:NL
 315 C=N-(G*50+H*25+I*10)
- Reference:C
- Value:N
- Value:G
+ Variable:C
+ Variable:N
+ Variable:G
  NumericConstant:50
  BinaryOperator:*
- Value:H
+ Variable:H
  NumericConstant:25
  BinaryOperator:*
  BinaryOperator:+
- Value:I
+ Variable:I
  NumericConstant:10
  BinaryOperator:*
  BinaryOperator:+
  BinaryOperator:-
  AssignmentOperator:=
 320 J=INT(C/5)
- Reference:J
- Value:C
+ Variable:J
+ Variable:C
  NumericConstant:5
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 330 IF J=0 THEN 345
- Value:J
+ Variable:J
  NumericConstant:0
  BinaryOperator:=
 340 PRINT J;"NICKEL(S)"
  ITEMS
- Value:J
+ Variable:J
  CarriageControl:;
  TextConstant:"NICKEL(S)"
  CarriageControl:NL
 345 C=N-(G*50+H*25+I*10+J*5)
- Reference:C
- Value:N
- Value:G
+ Variable:C
+ Variable:N
+ Variable:G
  NumericConstant:50
  BinaryOperator:*
- Value:H
+ Variable:H
  NumericConstant:25
  BinaryOperator:*
  BinaryOperator:+
- Value:I
+ Variable:I
  NumericConstant:10
  BinaryOperator:*
  BinaryOperator:+
- Value:J
+ Variable:J
  NumericConstant:5
  BinaryOperator:*
  BinaryOperator:+
  BinaryOperator:-
  AssignmentOperator:=
 350 K=INT(C+.5)
- Reference:K
- Value:C
+ Variable:K
+ Variable:C
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
 360 IF K=0 THEN 380
- Value:K
+ Variable:K
  NumericConstant:0
  BinaryOperator:=
 370 PRINT K;"PENNY(S)"
  ITEMS
- Value:K
+ Variable:K
  CarriageControl:;
  TextConstant:"PENNY(S)"
  CarriageControl:NL

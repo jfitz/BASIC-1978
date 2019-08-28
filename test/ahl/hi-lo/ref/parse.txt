@@ -48,17 +48,17 @@
  ITEMS
  CarriageControl:NL
 160 R=0
- Reference:R
+ Variable:R
  NumericConstant:0
  AssignmentOperator:=
 170 B=0:PRINT
- Reference:B
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
  ITEMS
  CarriageControl:NL
 180 Y=INT(100*RND(1))
- Reference:Y
+ Variable:Y
  NumericConstant:100
  NumericConstant:1
  FunctionRnd
@@ -70,20 +70,20 @@
  TextConstant:"YOUR GUESS"
  CarriageControl:;
 210 INPUT A
- Reference:A
+ Variable:A
 220 B=B+1
- Reference:B
- Value:B
+ Variable:B
+ Variable:B
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 230 IF A=Y THEN 300
- Value:A
- Value:Y
+ Variable:A
+ Variable:Y
  BinaryOperator:=
 240 IF A>Y THEN 270
- Value:A
- Value:Y
+ Variable:A
+ Variable:Y
  BinaryOperator:>
 250 PRINT "YOUR GUESS IS TOO LOW.":GOTO 280
  ITEMS
@@ -97,17 +97,17 @@
 280 PRINT:IF B<6 THEN 200
  ITEMS
  CarriageControl:NL
- Value:B
+ Variable:B
  NumericConstant:6
  BinaryOperator:<
 290 PRINT "YOU BLEW IT...TOO BAD...THE NUMBER WAS";Y
  ITEMS
  TextConstant:"YOU BLEW IT...TOO BAD...THE NUMBER WAS"
  CarriageControl:;
- Value:Y
+ Variable:Y
  CarriageControl:NL
 295 R=0:GOTO 350
- Reference:R
+ Variable:R
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:350
@@ -115,21 +115,21 @@
  ITEMS
  TextConstant:"GOT IT!!!!!!!!!!   YOU WIN"
  CarriageControl:;
- Value:Y
+ Variable:Y
  CarriageControl:;
  TextConstant:"DOLLARS."
  CarriageControl:NL
 310 R=R+Y
- Reference:R
- Value:R
- Value:Y
+ Variable:R
+ Variable:R
+ Variable:Y
  BinaryOperator:+
  AssignmentOperator:=
 320 PRINT "YOUR TOTAL WINNINGS ARE NOW";R;"DOLLARS."
  ITEMS
  TextConstant:"YOUR TOTAL WINNINGS ARE NOW"
  CarriageControl:;
- Value:R
+ Variable:R
  CarriageControl:;
  TextConstant:"DOLLARS."
  CarriageControl:NL
@@ -140,8 +140,8 @@
  TextConstant:"PLAY AGAIN (YES OR NO)"
  CarriageControl:;
 360 INPUT A$:IF A$="YES" THEN 170
- Reference:A$
- Value:A$
+ Variable:A$
+ Variable:A$
  TextConstant:"YES"
  BinaryOperator:=
 380 PRINT:PRINT "SO LONG.  HOPE YOU ENJOYED YOURSELF!!!"

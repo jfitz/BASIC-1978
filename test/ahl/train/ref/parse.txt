@@ -26,7 +26,7 @@
  ITEMS
  CarriageControl:NL
 10 C=INT(25*RND(1))+40
- Reference:C
+ Variable:C
  NumericConstant:25
  NumericConstant:1
  FunctionRnd
@@ -36,7 +36,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 15 D=INT(15*RND(1))+5
- Reference:D
+ Variable:D
  NumericConstant:15
  NumericConstant:1
  FunctionRnd
@@ -46,7 +46,7 @@
  BinaryOperator:+
  AssignmentOperator:=
 20 T=INT(19*RND(1))+20
- Reference:T
+ Variable:T
  NumericConstant:19
  NumericConstant:1
  FunctionRnd
@@ -59,17 +59,17 @@
  ITEMS
  TextConstant:" A CAR TRAVELING"
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:;
  TextConstant:"MPH CAN MAKE A CERTAIN TRIP IN"
  CarriageControl:NL
 30 PRINT D;"HOURS LESS THAN A TRAIN TRAVELING AT";T;"MPH."
  ITEMS
- Value:D
+ Variable:D
  CarriageControl:;
  TextConstant:"HOURS LESS THAN A TRAIN TRAVELING AT"
  CarriageControl:;
- Value:T
+ Variable:T
  CarriageControl:;
  TextConstant:"MPH."
  CarriageControl:NL
@@ -78,25 +78,25 @@
  TextConstant:"HOW LONG DOES THE TRIP TAKE BY CAR"
  CarriageControl:;
 40 INPUT A
- Reference:A
+ Variable:A
 45 V=D*T/(C-T)
- Reference:V
- Value:D
- Value:T
+ Variable:V
+ Variable:D
+ Variable:T
  BinaryOperator:*
- Value:C
- Value:T
+ Variable:C
+ Variable:T
  BinaryOperator:-
  BinaryOperator:/
  AssignmentOperator:=
 50 E=INT(ABS((V-A)*100/A)+.5)
- Reference:E
- Value:V
- Value:A
+ Variable:E
+ Variable:V
+ Variable:A
  BinaryOperator:-
  NumericConstant:100
  BinaryOperator:*
- Value:A
+ Variable:A
  BinaryOperator:/
  FunctionAbs
  NumericConstant:.5
@@ -104,14 +104,14 @@
  FunctionInt
  AssignmentOperator:=
 55 IF E>5 THEN 70
- Value:E
+ Variable:E
  NumericConstant:5
  BinaryOperator:>
 60 PRINT "GOOD! ANSWER WITHIN";E;"PERCENT."
  ITEMS
  TextConstant:"GOOD! ANSWER WITHIN"
  CarriageControl:;
- Value:E
+ Variable:E
  CarriageControl:;
  TextConstant:"PERCENT."
  CarriageControl:NL
@@ -121,7 +121,7 @@
  ITEMS
  TextConstant:"SORRY.  YOU WERE OFF BY"
  CarriageControl:;
- Value:E
+ Variable:E
  CarriageControl:;
  TextConstant:"PERCENT."
  CarriageControl:NL
@@ -129,7 +129,7 @@
  ITEMS
  TextConstant:"CORRECT ANSWER IS"
  CarriageControl:;
- Value:V
+ Variable:V
  CarriageControl:;
  TextConstant:"HOURS."
  CarriageControl:NL
@@ -141,12 +141,12 @@
  TextConstant:"ANOTHER PROBLEM (YES OR NO)"
  CarriageControl:;
 100 INPUT A$
- Reference:A$
+ Variable:A$
 105 PRINT
  ITEMS
  CarriageControl:NL
 110 IF A$="YES" THEN 10
- Value:A$
+ Variable:A$
  TextConstant:"YES"
  BinaryOperator:=
 999 END

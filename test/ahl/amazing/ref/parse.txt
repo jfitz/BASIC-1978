@@ -22,13 +22,13 @@
  ITEMS
  CarriageControl:NL
 100 INPUT "WHAT ARE YOUR WIDTH AND LENGTH";H,V
- Reference:H
- Reference:V
+ Variable:H
+ Variable:V
 102 IF H<>1 AND V<>1 THEN 110
- Value:H
+ Variable:H
  NumericConstant:1
  BinaryOperator:<>
- Value:V
+ Variable:V
  NumericConstant:1
  BinaryOperator:<>
  BinaryOperator:AND
@@ -38,11 +38,11 @@
  CarriageControl:NL
  LineNumber:100
 110 DIM W(H,V),V(H,V)
- Value:H
- Value:V
+ Variable:H
+ Variable:V
  Declaration:W
- Value:H
- Value:V
+ Variable:H
+ Variable:V
  Declaration:V
 120 PRINT
  ITEMS
@@ -57,16 +57,16 @@
  ITEMS
  CarriageControl:NL
 160 Q=0:Z=0:X=INT(RND(1)*H+1)
- Reference:Q
+ Variable:Q
  NumericConstant:0
  AssignmentOperator:=
- Reference:Z
+ Variable:Z
  NumericConstant:0
  AssignmentOperator:=
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
- Value:H
+ Variable:H
  BinaryOperator:*
  NumericConstant:1
  BinaryOperator:+
@@ -75,10 +75,10 @@
 165 FOR I=1 TO H
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:H"]
+ end:     ["Variable:H"]
 170 IF I=X THEN 173
- Value:I
- Value:X
+ Variable:I
+ Variable:X
  BinaryOperator:=
 171 PRINT ".--";:GOTO 180
  ITEMS
@@ -96,107 +96,107 @@
  TextConstant:"."
  CarriageControl:NL
 195 C=1:W(X,1)=C:C=C+1
- Reference:C
+ Variable:C
  NumericConstant:1
  AssignmentOperator:=
- Value:X
+ Variable:X
  NumericConstant:1
- Reference:W
- Value:C
+ Variable:W
+ Variable:C
  AssignmentOperator:=
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 200 R=X:S=1:GOTO 260
- Reference:R
- Value:X
+ Variable:R
+ Variable:X
  AssignmentOperator:=
- Reference:S
+ Variable:S
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:260
 210 IF R<>H THEN 240
- Value:R
- Value:H
+ Variable:R
+ Variable:H
  BinaryOperator:<>
 215 IF S<>V THEN 230
- Value:S
- Value:V
+ Variable:S
+ Variable:V
  BinaryOperator:<>
 220 R=1:S=1:GOTO 250
- Reference:R
+ Variable:R
  NumericConstant:1
  AssignmentOperator:=
- Reference:S
+ Variable:S
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:250
 230 R=1:S=S+1:GOTO 250
- Reference:R
+ Variable:R
  NumericConstant:1
  AssignmentOperator:=
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:250
 240 R=R+1
- Reference:R
- Value:R
+ Variable:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 250 IF W(R,S)=0 THEN 210
- Value:R
- Value:S
- Value:W
+ Variable:R
+ Variable:S
+ Variable:W
  NumericConstant:0
  BinaryOperator:=
 260 IF R-1=0 THEN 530
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:=
 265 IF W(R-1,S)<>0 THEN 530
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:-
- Value:S
- Value:W
+ Variable:S
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 270 IF S-1=0 THEN 390
- Value:S
+ Variable:S
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:=
 280 IF W(R,S-1)<>0 THEN 390
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:-
- Value:W
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 290 IF R=H THEN 330
- Value:R
- Value:H
+ Variable:R
+ Variable:H
  BinaryOperator:=
 300 IF W(R+1,S)<>0 THEN 330
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
- Value:S
- Value:W
+ Variable:S
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 310 X=INT(RND(1)*3+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:3
@@ -206,33 +206,33 @@
  FunctionInt
  AssignmentOperator:=
 320 ON X GOTO 790,820,860
- Value:X
+ Variable:X
  LineNumber:790
  LineNumber:820
  LineNumber:860
 330 IF S<>V THEN 340
- Value:S
- Value:V
+ Variable:S
+ Variable:V
  BinaryOperator:<>
 334 IF Z=1 THEN 370
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 338 Q=1:GOTO 350
- Reference:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:350
 340 IF W(R,S+1)<>0 THEN 370
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
- Value:W
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 350 X=INT(RND(1)*3+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:3
@@ -242,12 +242,12 @@
  FunctionInt
  AssignmentOperator:=
 360 ON X GOTO 790,820,910
- Value:X
+ Variable:X
  LineNumber:790
  LineNumber:820
  LineNumber:910
 370 X=INT(RND(1)*2+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
@@ -257,44 +257,44 @@
  FunctionInt
  AssignmentOperator:=
 380 ON X GOTO 790,820
- Value:X
+ Variable:X
  LineNumber:790
  LineNumber:820
 390 IF R=H THEN 470
- Value:R
- Value:H
+ Variable:R
+ Variable:H
  BinaryOperator:=
 400 IF W(R+1,S)<>0 THEN 470
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
- Value:S
- Value:W
+ Variable:S
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 405 IF S<>V THEN 420
- Value:S
- Value:V
+ Variable:S
+ Variable:V
  BinaryOperator:<>
 410 IF Z=1 THEN 450
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 415 Q=1:GOTO 430
- Reference:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:430
 420 IF W(R,S+1)<>0 THEN 450
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
- Value:W
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 430 X=INT(RND(1)*3+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:3
@@ -304,12 +304,12 @@
  FunctionInt
  AssignmentOperator:=
 440 ON X GOTO 790,860,910
- Value:X
+ Variable:X
  LineNumber:790
  LineNumber:860
  LineNumber:910
 450 X=INT(RND(1)*2+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
@@ -319,32 +319,32 @@
  FunctionInt
  AssignmentOperator:=
 460 ON X GOTO 790,860
- Value:X
+ Variable:X
  LineNumber:790
  LineNumber:860
 470 IF S<>V THEN 490
- Value:S
- Value:V
+ Variable:S
+ Variable:V
  BinaryOperator:<>
 480 IF Z=1 THEN 520
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 485 Q=1:GOTO 500
- Reference:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:500
 490 IF W(R,S+1)<>0 THEN 520
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
- Value:W
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 500 X=INT(RND(1)*2+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
@@ -354,60 +354,60 @@
  FunctionInt
  AssignmentOperator:=
 510 ON X GOTO 790,910
- Value:X
+ Variable:X
  LineNumber:790
  LineNumber:910
 520 GOTO 790
  LineNumber:790
 530 IF S-1=0 THEN 670
- Value:S
+ Variable:S
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:=
 540 IF W(R,S-1)<>0 THEN 670
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:-
- Value:W
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 545 IF R=H THEN 610
- Value:R
- Value:H
+ Variable:R
+ Variable:H
  BinaryOperator:=
 547 IF W(R+1,S)<>0 THEN 610
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
- Value:S
- Value:W
+ Variable:S
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 550 IF S<>V THEN 560
- Value:S
- Value:V
+ Variable:S
+ Variable:V
  BinaryOperator:<>
 552 IF Z=1 THEN 590
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 554 Q=1:GOTO 570
- Reference:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:570
 560 IF W(R,S+1)<>0 THEN 590
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
- Value:W
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 570 X=INT(RND(1)*3+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:3
@@ -417,12 +417,12 @@
  FunctionInt
  AssignmentOperator:=
 580 ON X GOTO 820,860,910
- Value:X
+ Variable:X
  LineNumber:820
  LineNumber:860
  LineNumber:910
 590 X=INT(RND(1)*2+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
@@ -432,32 +432,32 @@
  FunctionInt
  AssignmentOperator:=
 600 ON X GOTO 820,860
- Value:X
+ Variable:X
  LineNumber:820
  LineNumber:860
 610 IF S<>V THEN 630
- Value:S
- Value:V
+ Variable:S
+ Variable:V
  BinaryOperator:<>
 620 IF Z=1 THEN 660
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 625 Q=1:GOTO 640
- Reference:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:640
 630 IF W(R,S+1)<>0 THEN 660
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
- Value:W
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 640 X=INT(RND(1)*2+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
@@ -467,46 +467,46 @@
  FunctionInt
  AssignmentOperator:=
 650 ON X GOTO 820,910
- Value:X
+ Variable:X
  LineNumber:820
  LineNumber:910
 660 GOTO 820
  LineNumber:820
 670 IF R=H THEN 740
- Value:R
- Value:H
+ Variable:R
+ Variable:H
  BinaryOperator:=
 680 IF W(R+1,S)<>0 THEN 740
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
- Value:S
- Value:W
+ Variable:S
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 685 IF S<>V THEN 700
- Value:S
- Value:V
+ Variable:S
+ Variable:V
  BinaryOperator:<>
 690 IF Z=1 THEN 730
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 695 Q=1:GOTO 830
- Reference:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:830
 700 IF W(R,S+1)<>0 THEN 730
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
- Value:W
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 710 X=INT(RND(1)*2+1)
- Reference:X
+ Variable:X
  NumericConstant:1
  FunctionRnd
  NumericConstant:2
@@ -516,30 +516,30 @@
  FunctionInt
  AssignmentOperator:=
 720 ON X GOTO 860,910
- Value:X
+ Variable:X
  LineNumber:860
  LineNumber:910
 730 GOTO 860
  LineNumber:860
 740 IF S<>V THEN 760
- Value:S
- Value:V
+ Variable:S
+ Variable:V
  BinaryOperator:<>
 750 IF Z=1 THEN 780
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 755 Q=1:GOTO 770
- Reference:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:770
 760 IF W(R,S+1)<>0 THEN 780
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
- Value:W
+ Variable:W
  NumericConstant:0
  BinaryOperator:<>
 770 GOTO 910
@@ -547,125 +547,125 @@
 780 GOTO 1000
  LineNumber:1000
 790 W(R-1,S)=C
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:-
- Value:S
- Reference:W
- Value:C
+ Variable:S
+ Variable:W
+ Variable:C
  AssignmentOperator:=
 800 C=C+1:V(R-1,S)=2:R=R-1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:-
- Value:S
- Reference:V
+ Variable:S
+ Variable:V
  NumericConstant:2
  AssignmentOperator:=
- Reference:R
- Value:R
+ Variable:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 810 IF C=H*V+1 THEN 1010
- Value:C
- Value:H
- Value:V
+ Variable:C
+ Variable:H
+ Variable:V
  BinaryOperator:*
  NumericConstant:1
  BinaryOperator:+
  BinaryOperator:=
 815 Q=0:GOTO 260
- Reference:Q
+ Variable:Q
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:260
 820 W(R,S-1)=C
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:-
- Reference:W
- Value:C
+ Variable:W
+ Variable:C
  AssignmentOperator:=
 830 C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 840 V(R,S-1)=1:S=S-1:IF C=H*V+1 THEN 1010
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:-
- Reference:V
+ Variable:V
  NumericConstant:1
  AssignmentOperator:=
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
- Value:C
- Value:H
- Value:V
+ Variable:C
+ Variable:H
+ Variable:V
  BinaryOperator:*
  NumericConstant:1
  BinaryOperator:+
  BinaryOperator:=
 850 Q=0:GOTO 260
- Reference:Q
+ Variable:Q
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:260
 860 W(R+1,S)=C
- Value:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
- Value:S
- Reference:W
- Value:C
+ Variable:S
+ Variable:W
+ Variable:C
  AssignmentOperator:=
 870 C=C+1:IF V(R,S)=0 THEN 880
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:R
- Value:S
- Value:V
+ Variable:R
+ Variable:S
+ Variable:V
  NumericConstant:0
  BinaryOperator:=
 875 V(R,S)=3:GOTO 890
- Value:R
- Value:S
- Reference:V
+ Variable:R
+ Variable:S
+ Variable:V
  NumericConstant:3
  AssignmentOperator:=
  LineNumber:890
 880 V(R,S)=2
- Value:R
- Value:S
- Reference:V
+ Variable:R
+ Variable:S
+ Variable:V
  NumericConstant:2
  AssignmentOperator:=
 890 R=R+1
- Reference:R
- Value:R
+ Variable:R
+ Variable:R
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 900 IF C=H*V+1 THEN 1010
- Value:C
- Value:H
- Value:V
+ Variable:C
+ Variable:H
+ Variable:V
  BinaryOperator:*
  NumericConstant:1
  BinaryOperator:+
@@ -673,49 +673,49 @@
 905 GOTO 530
  LineNumber:530
 910 IF Q=1 THEN 960
- Value:Q
+ Variable:Q
  NumericConstant:1
  BinaryOperator:=
 920 W(R,S+1)=C:C=C+1:IF V(R,S)=0 THEN 940
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
- Reference:W
- Value:C
+ Variable:W
+ Variable:C
  AssignmentOperator:=
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:R
- Value:S
- Value:V
+ Variable:R
+ Variable:S
+ Variable:V
  NumericConstant:0
  BinaryOperator:=
 930 V(R,S)=3:GOTO 950
- Value:R
- Value:S
- Reference:V
+ Variable:R
+ Variable:S
+ Variable:V
  NumericConstant:3
  AssignmentOperator:=
  LineNumber:950
 940 V(R,S)=1
- Value:R
- Value:S
- Reference:V
+ Variable:R
+ Variable:S
+ Variable:V
  NumericConstant:1
  AssignmentOperator:=
 950 S=S+1:IF C=H*V+1 THEN 1010
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:C
- Value:H
- Value:V
+ Variable:C
+ Variable:H
+ Variable:V
  BinaryOperator:*
  NumericConstant:1
  BinaryOperator:+
@@ -723,38 +723,38 @@
 955 GOTO 260
  LineNumber:260
 960 Z=1
- Reference:Z
+ Variable:Z
  NumericConstant:1
  AssignmentOperator:=
 970 IF V(R,S)=0 THEN 980
- Value:R
- Value:S
- Value:V
+ Variable:R
+ Variable:S
+ Variable:V
  NumericConstant:0
  BinaryOperator:=
 975 V(R,S)=3:Q=0:GOTO 1000
- Value:R
- Value:S
- Reference:V
+ Variable:R
+ Variable:S
+ Variable:V
  NumericConstant:3
  AssignmentOperator:=
- Reference:Q
+ Variable:Q
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:1000
 980 V(R,S)=1:Q=0:R=1:S=1:GOTO 250
- Value:R
- Value:S
- Reference:V
+ Variable:R
+ Variable:S
+ Variable:V
  NumericConstant:1
  AssignmentOperator:=
- Reference:Q
+ Variable:Q
  NumericConstant:0
  AssignmentOperator:=
- Reference:R
+ Variable:R
  NumericConstant:1
  AssignmentOperator:=
- Reference:S
+ Variable:S
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:250
@@ -763,7 +763,7 @@
 1010 FOR J=1 TO V
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:V"]
+ end:     ["Variable:V"]
 1011 PRINT "I";
  ITEMS
  TextConstant:"I"
@@ -771,11 +771,11 @@
 1012 FOR I=1 TO H
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:H"]
+ end:     ["Variable:H"]
 1013 IF V(I,J)<2 THEN 1030
- Value:I
- Value:J
- Value:V
+ Variable:I
+ Variable:J
+ Variable:V
  NumericConstant:2
  BinaryOperator:<
 1020 PRINT "   ";
@@ -796,17 +796,17 @@
 1043 FOR I=1 TO H
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:H"]
+ end:     ["Variable:H"]
 1045 IF V(I,J)=0 THEN 1060
- Value:I
- Value:J
- Value:V
+ Variable:I
+ Variable:J
+ Variable:V
  NumericConstant:0
  BinaryOperator:=
 1050 IF V(I,J)=2 THEN 1060
- Value:I
- Value:J
- Value:V
+ Variable:I
+ Variable:J
+ Variable:V
  NumericConstant:2
  BinaryOperator:=
 1051 PRINT ":  ";

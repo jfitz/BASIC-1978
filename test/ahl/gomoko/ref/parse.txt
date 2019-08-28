@@ -69,15 +69,15 @@
  ITEMS
  TextConstant:"WHAT IS YOUR BOARD SIZE (MIN 7/ MAX 19)"
  CarriageControl:;
- Reference:N
+ Variable:N
 115 IF N>6 THEN 117
- Value:N
+ Variable:N
  NumericConstant:6
  BinaryOperator:>
 116 GOTO 120
  LineNumber:120
 117 IF N<20 THEN 210
- Value:N
+ Variable:N
  NumericConstant:20
  BinaryOperator:<
 120 PRINT "I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19.": GOTO 110
@@ -88,13 +88,13 @@
 210 FOR I=1 TO N:FOR J=1 TO N: A(I,J)=0: NEXT J: NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
- Value:I
- Value:J
- Reference:A
+ end:     ["Variable:N"]
+ Variable:I
+ Variable:J
+ Variable:A
  NumericConstant:0
  AssignmentOperator:=
  Variable:J
@@ -111,25 +111,25 @@
  ITEMS
  TextConstant:"YOUR PLAY (I,J)"
  CarriageControl:;
- Reference:I
- Reference:J
+ Variable:I
+ Variable:J
 315 PRINT
  ITEMS
  CarriageControl:NL
 320 IF I=-1 THEN 980
- Value:I
+ Variable:I
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
 330 X=I: Y=J: GOSUB 910: IF L=1 THEN 410
- Reference:X
- Value:I
+ Variable:X
+ Variable:I
  AssignmentOperator:=
- Reference:Y
- Value:J
+ Variable:Y
+ Variable:J
  AssignmentOperator:=
  LineNumber:910
- Value:L
+ Variable:L
  NumericConstant:1
  BinaryOperator:=
 340 PRINT "ILLEGAL MOVE.  TRY AGAIN...": GOTO 310
@@ -138,9 +138,9 @@
  CarriageControl:NL
  LineNumber:310
 410 IF A(I,J)=0 THEN 440
- Value:I
- Value:J
- Value:A
+ Variable:I
+ Variable:J
+ Variable:A
  NumericConstant:0
  BinaryOperator:=
 420 PRINT "SQUARE OCCUPIED.  TRY AGAIN...": GOTO 310
@@ -149,9 +149,9 @@
  CarriageControl:NL
  LineNumber:310
 440 A(I,J)=1
- Value:I
- Value:J
- Reference:A
+ Variable:I
+ Variable:J
+ Variable:A
  NumericConstant:1
  AssignmentOperator:=
 500 REM *** COMPUTER TRIES AN INTELLIGENT MOVE ***
@@ -163,35 +163,35 @@
  control: Variable:F
  start:   ["NumericConstant:1", "UnaryOperator:-"]
  end:     ["NumericConstant:1"]
- Value:E
- Value:F
+ Variable:E
+ Variable:F
  BinaryOperator:+
- Value:E
- Value:F
+ Variable:E
+ Variable:F
  BinaryOperator:*
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:=
 540 X=I+F: Y=J+F: GOSUB 910
- Reference:X
- Value:I
- Value:F
+ Variable:X
+ Variable:I
+ Variable:F
  BinaryOperator:+
  AssignmentOperator:=
- Reference:Y
- Value:J
- Value:F
+ Variable:Y
+ Variable:J
+ Variable:F
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:910
 570 IF L=0 THEN 590
- Value:L
+ Variable:L
  NumericConstant:0
  BinaryOperator:=
 580 IF A(X,Y)=1 THEN 710
- Value:X
- Value:Y
- Value:A
+ Variable:X
+ Variable:Y
+ Variable:A
  NumericConstant:1
  BinaryOperator:=
 590 NEXT F: NEXT E
@@ -200,8 +200,8 @@
 600 REM *** COMPUTER TRIES A RANDOM MOVE ***
  Remark:*** COMPUTER TRIES A RANDOM MOVE ***
 610 X=INT(N*RND(1)+1): Y=INT(N*RND(1)+1): GOSUB 910: IF L=0 THEN 610
- Reference:X
- Value:N
+ Variable:X
+ Variable:N
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -209,8 +209,8 @@
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
- Reference:Y
- Value:N
+ Variable:Y
+ Variable:N
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -219,37 +219,37 @@
  FunctionInt
  AssignmentOperator:=
  LineNumber:910
- Value:L
+ Variable:L
  NumericConstant:0
  BinaryOperator:=
 650 IF A(X,Y)<>0 THEN 610
- Value:X
- Value:Y
- Value:A
+ Variable:X
+ Variable:Y
+ Variable:A
  NumericConstant:0
  BinaryOperator:<>
 660 A(X,Y)=2: GOSUB 810: GOTO 310
- Value:X
- Value:Y
- Reference:A
+ Variable:X
+ Variable:Y
+ Variable:A
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:810
  LineNumber:310
 710 X=I-E: Y=J-F: GOSUB 910
- Reference:X
- Value:I
- Value:E
+ Variable:X
+ Variable:I
+ Variable:E
  BinaryOperator:-
  AssignmentOperator:=
- Reference:Y
- Value:J
- Value:F
+ Variable:Y
+ Variable:J
+ Variable:F
  BinaryOperator:-
  AssignmentOperator:=
  LineNumber:910
 750 IF L=0 THEN 610
- Value:L
+ Variable:L
  NumericConstant:0
  BinaryOperator:=
 760 GOTO 650
@@ -259,14 +259,14 @@
 810 FOR I=1 TO N: FOR J=1 TO N: PRINT A(I,J);
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
  ITEMS
- Value:I
- Value:J
- Value:A
+ Variable:I
+ Variable:J
+ Variable:A
  CarriageControl:;
 840 NEXT J: PRINT: NEXT I: PRINT: RETURN
  Variable:J
@@ -277,28 +277,28 @@
  CarriageControl:NL
  
 910 L=1: IF X<1 THEN 970
- Reference:L
+ Variable:L
  NumericConstant:1
  AssignmentOperator:=
- Value:X
+ Variable:X
  NumericConstant:1
  BinaryOperator:<
 920 IF X>N THEN 970
- Value:X
- Value:N
+ Variable:X
+ Variable:N
  BinaryOperator:>
 930 IF Y<1 THEN 970
- Value:Y
+ Variable:Y
  NumericConstant:1
  BinaryOperator:<
 940 IF Y>N THEN 970
- Value:Y
- Value:N
+ Variable:Y
+ Variable:N
  BinaryOperator:>
 950 RETURN
  
 970 L=0: RETURN
- Reference:L
+ Variable:L
  NumericConstant:0
  AssignmentOperator:=
  
@@ -312,9 +312,9 @@
  ITEMS
  TextConstant:"PLAY AGAIN (1 FOR YES, 0 FOR NO)"
  CarriageControl:;
- Reference:Q
+ Variable:Q
 990 IF Q=1 THEN 110
- Value:Q
+ Variable:Q
  NumericConstant:1
  BinaryOperator:=
 999 END

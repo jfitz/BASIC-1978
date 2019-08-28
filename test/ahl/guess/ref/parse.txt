@@ -39,13 +39,13 @@
  TextConstant:"WHAT LIMIT DO YOU WANT"
  CarriageControl:;
 9 INPUT L
- Reference:L
+ Variable:L
 10 PRINT
  ITEMS
  CarriageControl:NL
 11 L1=INT(LOG(L)/LOG(2))+1
- Reference:L1
- Value:L
+ Variable:L1
+ Variable:L
  FunctionLog
  NumericConstant:2
  FunctionLog
@@ -58,10 +58,10 @@
  ITEMS
  TextConstant:"I'M THINKING OF A NUMBER BETWEEN 1 AND"
  CarriageControl:;
- Value:L
+ Variable:L
  CarriageControl:NL
 13 G=1
- Reference:G
+ Variable:G
  NumericConstant:1
  AssignmentOperator:=
 14 PRINT "NOW YOU TRY TO GUESS WHAT IT IS."
@@ -69,8 +69,8 @@
  TextConstant:"NOW YOU TRY TO GUESS WHAT IT IS."
  CarriageControl:NL
 15 M=INT(L*RND(1)+1)
- Reference:M
- Value:L
+ Variable:M
+ Variable:L
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -79,9 +79,9 @@
  FunctionInt
  AssignmentOperator:=
 20 INPUT N
- Reference:N
+ Variable:N
 21 IF N>0 THEN 25
- Value:N
+ Variable:N
  NumericConstant:0
  BinaryOperator:>
 22 GOSUB 70
@@ -89,18 +89,18 @@
 23 GOTO 1
  LineNumber:1
 25 IF N=M THEN 50
- Value:N
- Value:M
+ Variable:N
+ Variable:M
  BinaryOperator:=
 30 G=G+1
- Reference:G
- Value:G
+ Variable:G
+ Variable:G
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 31 IF N>M THEN 40
- Value:N
- Value:M
+ Variable:N
+ Variable:M
  BinaryOperator:>
 32 PRINT "TOO LOW. TRY A BIGGER ANSWER."
  ITEMS
@@ -118,23 +118,23 @@
  ITEMS
  TextConstant:"THAT'S IT! YOU GOT IT IN"
  CarriageControl:;
- Value:G
+ Variable:G
  CarriageControl:;
  TextConstant:"TRIES."
  CarriageControl:NL
 52 IF G<L1 THEN 58
- Value:G
- Value:L1
+ Variable:G
+ Variable:L1
  BinaryOperator:<
 54 IF G=L1 THEN 60
- Value:G
- Value:L1
+ Variable:G
+ Variable:L1
  BinaryOperator:=
 56 PRINT "YOU SHOULD HAVE BEEN ABLE TO GET IT IN ONLY";L1
  ITEMS
  TextConstant:"YOU SHOULD HAVE BEEN ABLE TO GET IT IN ONLY"
  CarriageControl:;
- Value:L1
+ Variable:L1
  CarriageControl:NL
 57 GOTO 65
  LineNumber:65

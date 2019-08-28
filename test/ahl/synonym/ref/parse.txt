@@ -30,28 +30,28 @@
  Declaration:R
 20 R$(1)="RIGHT": R$(2)="CORRECT": R$(3)="FINE": R$(4)="GOOD!"
  NumericConstant:1
- Reference:R$
+ Variable:R$
  TextConstant:"RIGHT"
  AssignmentOperator:=
  NumericConstant:2
- Reference:R$
+ Variable:R$
  TextConstant:"CORRECT"
  AssignmentOperator:=
  NumericConstant:3
- Reference:R$
+ Variable:R$
  TextConstant:"FINE"
  AssignmentOperator:=
  NumericConstant:4
- Reference:R$
+ Variable:R$
  TextConstant:"GOOD!"
  AssignmentOperator:=
 30 R$(5)="CHECK"
  NumericConstant:5
- Reference:R$
+ Variable:R$
  TextConstant:"CHECK"
  AssignmentOperator:=
 70 C=0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 90 PRINT "A SYNONYM OF A WORD MEANS ANOTHER WORD IN THE ENGLISH"
@@ -82,49 +82,49 @@
  CarriageControl:NL
 150 RESTORE: C=C+1: READ N
  
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Reference:N
+ Variable:N
 160 IF C>N THEN 420
- Value:C
- Value:N
+ Variable:C
+ Variable:N
  BinaryOperator:>
 170 N1=INT(RND(1)*N+1)
- Reference:N1
+ Variable:N1
  NumericConstant:1
  FunctionRnd
- Value:N
+ Variable:N
  BinaryOperator:*
  NumericConstant:1
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
 174 IF R(N1)=1 THEN 170
- Value:N1
- Value:R
+ Variable:N1
+ Variable:R
  NumericConstant:1
  BinaryOperator:=
 176 R(N1)=1
- Value:N1
- Reference:R
+ Variable:N1
+ Variable:R
  NumericConstant:1
  AssignmentOperator:=
 180 FOR I=1 TO N1
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N1"]
+ end:     ["Variable:N1"]
 190 READ N2
- Reference:N2
+ Variable:N2
 200 FOR J=1 TO N2
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:N2"]
+ end:     ["Variable:N2"]
 210 READ W$(J)
- Value:J
- Reference:W$
+ Variable:J
+ Variable:W$
 220 NEXT J
  Variable:J
 230 NEXT I
@@ -132,32 +132,32 @@
 232 FOR J=1 TO N2: L(J)=J: NEXT J
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:N2"]
- Value:J
- Reference:L
- Value:J
+ end:     ["Variable:N2"]
+ Variable:J
+ Variable:L
+ Variable:J
  AssignmentOperator:=
  Variable:J
 235 L(0)=N2: G=1: PRINT
  NumericConstant:0
- Reference:L
- Value:N2
+ Variable:L
+ Variable:N2
  AssignmentOperator:=
- Reference:G
+ Variable:G
  NumericConstant:1
  AssignmentOperator:=
  ITEMS
  CarriageControl:NL
 237 L(G)=L(L(0)): L(0)=N2-1: PRINT
- Value:G
- Reference:L
+ Variable:G
+ Variable:L
  NumericConstant:0
- Value:L
- Value:L
+ Variable:L
+ Variable:L
  AssignmentOperator:=
  NumericConstant:0
- Reference:L
- Value:N2
+ Variable:L
+ Variable:N2
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -167,26 +167,26 @@
  ITEMS
  TextConstant:"     WHAT IS A SYNONYM OF "
  CarriageControl:;
- Value:G
- Value:W$
+ Variable:G
+ Variable:W$
  CarriageControl:;
- Reference:A$
+ Variable:A$
 250 IF A$="HELP" THEN 340
- Value:A$
+ Variable:A$
  TextConstant:"HELP"
  BinaryOperator:=
 260 FOR K=1 TO N2
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["Value:N2"]
+ end:     ["Variable:N2"]
 270 IF G=K THEN 290
- Value:G
- Value:K
+ Variable:G
+ Variable:K
  BinaryOperator:=
 280 IF A$=W$(K) THEN 320
- Value:A$
- Value:K
- Value:W$
+ Variable:A$
+ Variable:K
+ Variable:W$
  BinaryOperator:=
 290 NEXT K
  Variable:K
@@ -204,15 +204,15 @@
  NumericConstant:1
  BinaryOperator:+
  FunctionInt
- Value:R$
+ Variable:R$
  CarriageControl:NL
  LineNumber:150
 340 G1=INT(RND(1)*L(0)+1)
- Reference:G1
+ Variable:G1
  NumericConstant:1
  FunctionRnd
  NumericConstant:0
- Value:L
+ Variable:L
  BinaryOperator:*
  NumericConstant:1
  BinaryOperator:+
@@ -222,30 +222,30 @@
  ITEMS
  TextConstant:"**** A SYNONYM OF "
  CarriageControl:;
- Value:G
- Value:W$
+ Variable:G
+ Variable:W$
  CarriageControl:;
  TextConstant:" IS "
  CarriageControl:;
- Value:G1
- Value:L
- Value:W$
+ Variable:G1
+ Variable:L
+ Variable:W$
  CarriageControl:;
  TextConstant:"."
  CarriageControl:NL
  ITEMS
  CarriageControl:NL
 370 L(G1)=L(L(0)): L(0)=L(0)-1: GOTO 240
- Value:G1
- Reference:L
+ Variable:G1
+ Variable:L
  NumericConstant:0
- Value:L
- Value:L
+ Variable:L
+ Variable:L
  AssignmentOperator:=
  NumericConstant:0
- Reference:L
+ Variable:L
  NumericConstant:0
- Value:L
+ Variable:L
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=

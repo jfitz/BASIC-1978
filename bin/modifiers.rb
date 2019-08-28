@@ -95,7 +95,7 @@ class ForModifier
       control_tokens[0].variable?
 
     control_name = VariableName.new(control_tokens[0])
-    @control = Variable.new(control_name, [])
+    @control = Variable.new(control_name, :scalar, [])
     @start = ValueScalarExpression.new(start_tokens)
     @end = ValueScalarExpression.new(end_tokens)
 

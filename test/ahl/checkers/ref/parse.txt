@@ -68,12 +68,12 @@
  NumericConstant:7
  NumericConstant:7
  Declaration:S
- Reference:G
+ Variable:G
  NumericConstant:1
  UnaryOperator:-
  AssignmentOperator:=
  NumericConstant:0
- Reference:R
+ Variable:R
  NumericConstant:99
  UnaryOperator:-
  AssignmentOperator:=
@@ -105,22 +105,22 @@
  control: Variable:Y
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
- Reference:J
- Value:J
+ Variable:J
+ Variable:J
  NumericConstant:15
  BinaryOperator:=
 160 S(X,Y)=J:GOTO 200
- Value:X
- Value:Y
- Reference:S
- Value:J
+ Variable:X
+ Variable:Y
+ Variable:S
+ Variable:J
  AssignmentOperator:=
  LineNumber:200
 180 RESTORE:READ S(X,Y)
  
- Value:X
- Value:Y
- Reference:S
+ Variable:X
+ Variable:Y
+ Variable:S
 200 NEXT Y,X
  Variable:Y
  Variable:X
@@ -131,16 +131,16 @@
  control: Variable:Y
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:>
 310 IF S(X,Y)=-1 THEN FOR A=-1 TO 1 STEP 2:B=G:GOSUB 650:NEXT A
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
@@ -148,15 +148,15 @@
  start:   ["NumericConstant:1", "UnaryOperator:-"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:2"]
- Reference:B
- Value:G
+ Variable:B
+ Variable:G
  AssignmentOperator:=
  LineNumber:650
  Variable:A
 330 IF S(X,Y)=-2 THEN FOR A=-1 TO 1 STEP 2:FOR B=-1 TO 1 STEP 2:GOSUB 650:NEXT B,A
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:2
  UnaryOperator:-
  BinaryOperator:=
@@ -176,127 +176,127 @@
  Variable:X
  LineNumber:1140
 650 U=X+A:V=Y+B:IF U<0 OR U>7 OR V<0 OR V>7 THEN 870
- Reference:U
- Value:X
- Value:A
+ Variable:U
+ Variable:X
+ Variable:A
  BinaryOperator:+
  AssignmentOperator:=
- Reference:V
- Value:Y
- Value:B
+ Variable:V
+ Variable:Y
+ Variable:B
  BinaryOperator:+
  AssignmentOperator:=
- Value:U
+ Variable:U
  NumericConstant:0
  BinaryOperator:<
- Value:U
+ Variable:U
  NumericConstant:7
  BinaryOperator:>
  BinaryOperator:OR
- Value:V
+ Variable:V
  NumericConstant:0
  BinaryOperator:<
  BinaryOperator:OR
- Value:V
+ Variable:V
  NumericConstant:7
  BinaryOperator:>
  BinaryOperator:OR
 740 IF S(U,V)=0 THEN GOSUB 910:GOTO 870
- Value:U
- Value:V
- Value:S
+ Variable:U
+ Variable:V
+ Variable:S
  NumericConstant:0
  BinaryOperator:=
  LineNumber:910
  LineNumber:870
 770 IF S(U,V)<0 THEN 870
- Value:U
- Value:V
- Value:S
+ Variable:U
+ Variable:V
+ Variable:S
  NumericConstant:0
  BinaryOperator:<
 790 U=U+A:V=V+B:IF U<0 OR V<0 OR U>7 OR V>7 THEN 870
- Reference:U
- Value:U
- Value:A
+ Variable:U
+ Variable:U
+ Variable:A
  BinaryOperator:+
  AssignmentOperator:=
- Reference:V
- Value:V
- Value:B
+ Variable:V
+ Variable:V
+ Variable:B
  BinaryOperator:+
  AssignmentOperator:=
- Value:U
+ Variable:U
  NumericConstant:0
  BinaryOperator:<
- Value:V
+ Variable:V
  NumericConstant:0
  BinaryOperator:<
  BinaryOperator:OR
- Value:U
+ Variable:U
  NumericConstant:7
  BinaryOperator:>
  BinaryOperator:OR
- Value:V
+ Variable:V
  NumericConstant:7
  BinaryOperator:>
  BinaryOperator:OR
 850 IF S(U,V)=0 THEN GOSUB 910
- Value:U
- Value:V
- Value:S
+ Variable:U
+ Variable:V
+ Variable:S
  NumericConstant:0
  BinaryOperator:=
  LineNumber:910
 870 RETURN
  
 910 IF V=0 AND S(X,Y)=-1 THEN Q=Q+2
- Value:V
+ Variable:V
  NumericConstant:0
  BinaryOperator:=
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
  BinaryOperator:AND
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:2
  BinaryOperator:+
  AssignmentOperator:=
 920 IF ABS(Y-V)=2 THEN Q=Q+5
- Value:Y
- Value:V
+ Variable:Y
+ Variable:V
  BinaryOperator:-
  FunctionAbs
  NumericConstant:2
  BinaryOperator:=
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:5
  BinaryOperator:+
  AssignmentOperator:=
 960 IF Y=7 THEN Q=Q-2
- Value:Y
+ Variable:Y
  NumericConstant:7
  BinaryOperator:=
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:2
  BinaryOperator:-
  AssignmentOperator:=
 980 IF U=0 OR U=7 THEN Q=Q+1
- Value:U
+ Variable:U
  NumericConstant:0
  BinaryOperator:=
- Value:U
+ Variable:U
  NumericConstant:7
  BinaryOperator:=
  BinaryOperator:OR
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -305,128 +305,128 @@
  start:   ["NumericConstant:1", "UnaryOperator:-"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:2"]
- Value:U
- Value:C
+ Variable:U
+ Variable:C
  BinaryOperator:+
  NumericConstant:0
  BinaryOperator:<
- Value:U
- Value:C
+ Variable:U
+ Variable:C
  BinaryOperator:+
  NumericConstant:7
  BinaryOperator:>
  BinaryOperator:OR
- Value:V
- Value:G
+ Variable:V
+ Variable:G
  BinaryOperator:+
  NumericConstant:0
  BinaryOperator:<
  BinaryOperator:OR
 1035 IF S(U+C,V+G)<0 THEN Q=Q+1:GOTO 1080
- Value:U
- Value:C
+ Variable:U
+ Variable:C
  BinaryOperator:+
- Value:V
- Value:G
+ Variable:V
+ Variable:G
  BinaryOperator:+
- Value:S
+ Variable:S
  NumericConstant:0
  BinaryOperator:<
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:1080
 1040 IF U-C<0 OR U-C>7 OR V-G>7 THEN 1080
- Value:U
- Value:C
+ Variable:U
+ Variable:C
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:<
- Value:U
- Value:C
+ Variable:U
+ Variable:C
  BinaryOperator:-
  NumericConstant:7
  BinaryOperator:>
  BinaryOperator:OR
- Value:V
- Value:G
+ Variable:V
+ Variable:G
  BinaryOperator:-
  NumericConstant:7
  BinaryOperator:>
  BinaryOperator:OR
 1045 IF S(U+C,V+G)>0 AND(S(U-C,V-G)=0 OR(U-C=X AND V-G=Y))THEN Q=Q-2
- Value:U
- Value:C
+ Variable:U
+ Variable:C
  BinaryOperator:+
- Value:V
- Value:G
+ Variable:V
+ Variable:G
  BinaryOperator:+
- Value:S
+ Variable:S
  NumericConstant:0
  BinaryOperator:>
- Value:U
- Value:C
+ Variable:U
+ Variable:C
  BinaryOperator:-
- Value:V
- Value:G
+ Variable:V
+ Variable:G
  BinaryOperator:-
- Value:S
+ Variable:S
  NumericConstant:0
  BinaryOperator:=
- Value:U
- Value:C
+ Variable:U
+ Variable:C
  BinaryOperator:-
- Value:X
+ Variable:X
  BinaryOperator:=
- Value:V
- Value:G
+ Variable:V
+ Variable:G
  BinaryOperator:-
- Value:Y
+ Variable:Y
  BinaryOperator:=
  BinaryOperator:AND
  BinaryOperator:OR
  BinaryOperator:AND
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:2
  BinaryOperator:-
  AssignmentOperator:=
 1080 NEXT C:IF Q>R(0)THEN R(0)=Q:R(1)=X:R(2)=Y:R(3)=U:R(4)=V
  Variable:C
- Value:Q
+ Variable:Q
  NumericConstant:0
- Value:R
+ Variable:R
  BinaryOperator:>
  NumericConstant:0
- Reference:R
- Value:Q
+ Variable:R
+ Variable:Q
  AssignmentOperator:=
  NumericConstant:1
- Reference:R
- Value:X
+ Variable:R
+ Variable:X
  AssignmentOperator:=
  NumericConstant:2
- Reference:R
- Value:Y
+ Variable:R
+ Variable:Y
  AssignmentOperator:=
  NumericConstant:3
- Reference:R
- Value:U
+ Variable:R
+ Variable:U
  AssignmentOperator:=
  NumericConstant:4
- Reference:R
- Value:V
+ Variable:R
+ Variable:V
  AssignmentOperator:=
 1100 Q=0:RETURN
- Reference:Q
+ Variable:Q
  NumericConstant:0
  AssignmentOperator:=
  
 1140 IF R(0)=-99 THEN 1880
  NumericConstant:0
- Value:R
+ Variable:R
  NumericConstant:99
  UnaryOperator:-
  BinaryOperator:=
@@ -438,100 +438,100 @@
  TextConstant:"FROM"
  CarriageControl:
  NumericConstant:1
- Value:R
+ Variable:R
  CarriageControl:;
  NumericConstant:2
- Value:R
+ Variable:R
  CarriageControl:
  TextConstant:"TO"
  CarriageControl:
  NumericConstant:3
- Value:R
+ Variable:R
  CarriageControl:;
  NumericConstant:4
- Value:R
+ Variable:R
  CarriageControl:;
  NumericConstant:0
- Reference:R
+ Variable:R
  NumericConstant:99
  UnaryOperator:-
  AssignmentOperator:=
 1240 IF R(4)=0 THEN S(R(3),R(4))=-2:GOTO 1420
  NumericConstant:4
- Value:R
+ Variable:R
  NumericConstant:0
  BinaryOperator:=
  NumericConstant:3
- Value:R
+ Variable:R
  NumericConstant:4
- Value:R
- Reference:S
+ Variable:R
+ Variable:S
  NumericConstant:2
  UnaryOperator:-
  AssignmentOperator:=
  LineNumber:1420
 1250 S(R(3),R(4))=S(R(1),R(2))
  NumericConstant:3
- Value:R
+ Variable:R
  NumericConstant:4
- Value:R
- Reference:S
+ Variable:R
+ Variable:S
  NumericConstant:1
- Value:R
+ Variable:R
  NumericConstant:2
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  AssignmentOperator:=
 1310 S(R(1),R(2))=0:IF ABS(R(1)-R(3))<>2 THEN 1420
  NumericConstant:1
- Value:R
+ Variable:R
  NumericConstant:2
- Value:R
- Reference:S
+ Variable:R
+ Variable:S
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:1
- Value:R
+ Variable:R
  NumericConstant:3
- Value:R
+ Variable:R
  BinaryOperator:-
  FunctionAbs
  NumericConstant:2
  BinaryOperator:<>
 1330 S((R(1)+R(3))/2,(R(2)+R(4))/2)=0
  NumericConstant:1
- Value:R
+ Variable:R
  NumericConstant:3
- Value:R
+ Variable:R
  BinaryOperator:+
  NumericConstant:2
  BinaryOperator:/
  NumericConstant:2
- Value:R
+ Variable:R
  NumericConstant:4
- Value:R
+ Variable:R
  BinaryOperator:+
  NumericConstant:2
  BinaryOperator:/
- Reference:S
+ Variable:S
  NumericConstant:0
  AssignmentOperator:=
 1340 X=R(3):Y=R(4):IF S(X,Y)=-1 THEN B=-2:FOR A=-2 TO 2 STEP 4:GOSUB 1370
- Reference:X
+ Variable:X
  NumericConstant:3
- Value:R
+ Variable:R
  AssignmentOperator:=
- Reference:Y
+ Variable:Y
  NumericConstant:4
- Value:R
+ Variable:R
  AssignmentOperator:=
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
- Reference:B
+ Variable:B
  NumericConstant:2
  UnaryOperator:-
  AssignmentOperator:=
@@ -541,9 +541,9 @@
  step:    ["NumericConstant:4"]
  LineNumber:1370
 1350 IF S(X,Y)=-2 THEN FOR A=-2 TO 2 STEP 4:FOR B=-2 TO 2 STEP 4:GOSUB 1370:NEXT B
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:2
  UnaryOperator:-
  BinaryOperator:=
@@ -560,7 +560,7 @@
 1360 NEXT A:IF R(0)<>-99 THEN PRINT"TO"R(3);R(4);:R(0)=-99:GOTO 1240
  Variable:A
  NumericConstant:0
- Value:R
+ Variable:R
  NumericConstant:99
  UnaryOperator:-
  BinaryOperator:<>
@@ -568,13 +568,13 @@
  TextConstant:"TO"
  CarriageControl:
  NumericConstant:3
- Value:R
+ Variable:R
  CarriageControl:;
  NumericConstant:4
- Value:R
+ Variable:R
  CarriageControl:;
  NumericConstant:0
- Reference:R
+ Variable:R
  NumericConstant:99
  UnaryOperator:-
  AssignmentOperator:=
@@ -582,48 +582,48 @@
 1365 GOTO 1420
  LineNumber:1420
 1370 U=X+A:V=Y+B:IF U<0 OR U>7 OR V<0 OR V>7 THEN 1400
- Reference:U
- Value:X
- Value:A
+ Variable:U
+ Variable:X
+ Variable:A
  BinaryOperator:+
  AssignmentOperator:=
- Reference:V
- Value:Y
- Value:B
+ Variable:V
+ Variable:Y
+ Variable:B
  BinaryOperator:+
  AssignmentOperator:=
- Value:U
+ Variable:U
  NumericConstant:0
  BinaryOperator:<
- Value:U
+ Variable:U
  NumericConstant:7
  BinaryOperator:>
  BinaryOperator:OR
- Value:V
+ Variable:V
  NumericConstant:0
  BinaryOperator:<
  BinaryOperator:OR
- Value:V
+ Variable:V
  NumericConstant:7
  BinaryOperator:>
  BinaryOperator:OR
 1380 IF S(U,V)=0 AND S(X+A/2,Y+B/2)>0 THEN GOSUB 910
- Value:U
- Value:V
- Value:S
+ Variable:U
+ Variable:V
+ Variable:S
  NumericConstant:0
  BinaryOperator:=
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:+
- Value:Y
- Value:B
+ Variable:Y
+ Variable:B
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:+
- Value:S
+ Variable:S
  NumericConstant:0
  BinaryOperator:>
  BinaryOperator:AND
@@ -644,37 +644,37 @@
  control: Variable:X
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
- Reference:I
+ Variable:I
  NumericConstant:5
- Value:X
+ Variable:X
  BinaryOperator:*
  AssignmentOperator:=
  ITEMS
- Value:I
+ Variable:I
  FunctionTab
  CarriageControl:;
 1430 IF S(X,Y)=0 THEN PRINT".";
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:0
  BinaryOperator:=
  ITEMS
  TextConstant:"."
  CarriageControl:;
 1470 IF S(X,Y)=1 THEN PRINT"O";
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:1
  BinaryOperator:=
  ITEMS
  TextConstant:"O"
  CarriageControl:;
 1490 IF S(X,Y)=-1 THEN PRINT"X";
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
@@ -682,9 +682,9 @@
  TextConstant:"X"
  CarriageControl:;
 1510 IF S(X,Y)=-2 THEN PRINT"X*";
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:2
  UnaryOperator:-
  BinaryOperator:=
@@ -692,9 +692,9 @@
  TextConstant:"X*"
  CarriageControl:;
 1530 IF S(X,Y)=2 THEN PRINT"O*";
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:2
  BinaryOperator:=
  ITEMS
@@ -719,35 +719,35 @@
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
 1556 IF S(L,M)=1 OR S(L,M)=2 THEN Z=1
- Value:L
- Value:M
- Value:S
+ Variable:L
+ Variable:M
+ Variable:S
  NumericConstant:1
  BinaryOperator:=
- Value:L
- Value:M
- Value:S
+ Variable:L
+ Variable:M
+ Variable:S
  NumericConstant:2
  BinaryOperator:=
  BinaryOperator:OR
- Reference:Z
+ Variable:Z
  NumericConstant:1
  AssignmentOperator:=
 1558 IF S(L,M)=-1 OR S(L,M)=-2 THEN T=1
- Value:L
- Value:M
- Value:S
+ Variable:L
+ Variable:M
+ Variable:S
  NumericConstant:1
  UnaryOperator:-
  BinaryOperator:=
- Value:L
- Value:M
- Value:S
+ Variable:L
+ Variable:M
+ Variable:S
  NumericConstant:2
  UnaryOperator:-
  BinaryOperator:=
  BinaryOperator:OR
- Reference:T
+ Variable:T
  NumericConstant:1
  AssignmentOperator:=
 1560 NEXT M
@@ -755,62 +755,62 @@
 1562 NEXT L
  Variable:L
 1564 IF Z<>1 THEN 1885
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:<>
 1566 IF T<>1 THEN 1880
- Value:T
+ Variable:T
  NumericConstant:1
  BinaryOperator:<>
 1570 Z=0: T=0
- Reference:Z
+ Variable:Z
  NumericConstant:0
  AssignmentOperator:=
- Reference:T
+ Variable:T
  NumericConstant:0
  AssignmentOperator:=
 1590 INPUT "FROM";E,H:X=E:Y=H:IF S(X,Y)<=0 THEN 1590
- Reference:E
- Reference:H
- Reference:X
- Value:E
+ Variable:E
+ Variable:H
+ Variable:X
+ Variable:E
  AssignmentOperator:=
- Reference:Y
- Value:H
+ Variable:Y
+ Variable:H
  AssignmentOperator:=
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:0
  BinaryOperator:<=
 1670 INPUT "TO";A,B:X=A:Y=B
- Reference:A
- Reference:B
- Reference:X
- Value:A
+ Variable:A
+ Variable:B
+ Variable:X
+ Variable:A
  AssignmentOperator:=
- Reference:Y
- Value:B
+ Variable:Y
+ Variable:B
  AssignmentOperator:=
 1680 IF S(X,Y)=0 AND ABS(A-E)<=2 AND ABS(A-E)=ABS(B-H)THEN 1700
- Value:X
- Value:Y
- Value:S
+ Variable:X
+ Variable:Y
+ Variable:S
  NumericConstant:0
  BinaryOperator:=
- Value:A
- Value:E
+ Variable:A
+ Variable:E
  BinaryOperator:-
  FunctionAbs
  NumericConstant:2
  BinaryOperator:<=
  BinaryOperator:AND
- Value:A
- Value:E
+ Variable:A
+ Variable:E
  BinaryOperator:-
  FunctionAbs
- Value:B
- Value:H
+ Variable:B
+ Variable:H
  BinaryOperator:-
  FunctionAbs
  BinaryOperator:=
@@ -825,94 +825,94 @@
  CarriageControl:;
  LineNumber:1670
 1700 I=46
- Reference:I
+ Variable:I
  NumericConstant:46
  AssignmentOperator:=
 1750 S(A,B)=S(E,H):S(E,H)=0:IF ABS(E-A)<>2 THEN 1810
- Value:A
- Value:B
- Reference:S
- Value:E
- Value:H
- Value:S
+ Variable:A
+ Variable:B
+ Variable:S
+ Variable:E
+ Variable:H
+ Variable:S
  AssignmentOperator:=
- Value:E
- Value:H
- Reference:S
+ Variable:E
+ Variable:H
+ Variable:S
  NumericConstant:0
  AssignmentOperator:=
- Value:E
- Value:A
+ Variable:E
+ Variable:A
  BinaryOperator:-
  FunctionAbs
  NumericConstant:2
  BinaryOperator:<>
 1800 S((E+A)/2,(H+B)/2)=0
- Value:E
- Value:A
+ Variable:E
+ Variable:A
  BinaryOperator:+
  NumericConstant:2
  BinaryOperator:/
- Value:H
- Value:B
+ Variable:H
+ Variable:B
  BinaryOperator:+
  NumericConstant:2
  BinaryOperator:/
- Reference:S
+ Variable:S
  NumericConstant:0
  AssignmentOperator:=
 1802 INPUT "+TO";A1,B1:IF A1<0 THEN 1810
- Reference:A1
- Reference:B1
- Value:A1
+ Variable:A1
+ Variable:B1
+ Variable:A1
  NumericConstant:0
  BinaryOperator:<
 1804 IF S(A1,B1)<>0 OR ABS(A1-A)<>2 OR ABS(B1-B)<>2 THEN 1802
- Value:A1
- Value:B1
- Value:S
+ Variable:A1
+ Variable:B1
+ Variable:S
  NumericConstant:0
  BinaryOperator:<>
- Value:A1
- Value:A
+ Variable:A1
+ Variable:A
  BinaryOperator:-
  FunctionAbs
  NumericConstant:2
  BinaryOperator:<>
  BinaryOperator:OR
- Value:B1
- Value:B
+ Variable:B1
+ Variable:B
  BinaryOperator:-
  FunctionAbs
  NumericConstant:2
  BinaryOperator:<>
  BinaryOperator:OR
 1806 E=A:H=B:A=A1:B=B1:I=I+15:GOTO 1750
- Reference:E
- Value:A
+ Variable:E
+ Variable:A
  AssignmentOperator:=
- Reference:H
- Value:B
+ Variable:H
+ Variable:B
  AssignmentOperator:=
- Reference:A
- Value:A1
+ Variable:A
+ Variable:A1
  AssignmentOperator:=
- Reference:B
- Value:B1
+ Variable:B
+ Variable:B1
  AssignmentOperator:=
- Reference:I
- Value:I
+ Variable:I
+ Variable:I
  NumericConstant:15
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:1750
 1810 IF B=7 THEN S(A,B)=2
- Value:B
+ Variable:B
  NumericConstant:7
  BinaryOperator:=
- Value:A
- Value:B
- Reference:S
+ Variable:A
+ Variable:B
+ Variable:S
  NumericConstant:2
  AssignmentOperator:=
 1830 GOTO 230

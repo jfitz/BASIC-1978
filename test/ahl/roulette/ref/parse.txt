@@ -24,8 +24,8 @@
  TextConstant:"ENTER THE CURRENT DATE (AS IN 'JANUARY 23, 1979') -"
  CarriageControl:;
 50 INPUT D$,E$
- Reference:D$
- Reference:E$
+ Variable:D$
+ Variable:E$
 1000 REM-ROULETTE
  Remark:-ROULETTE
 1010 REM-DAVID JOSLIN
@@ -42,9 +42,9 @@
  TextConstant:"DO YOU WANT INSTRUCTIONS"
  CarriageControl:;
 1050 INPUT Y$
- Reference:Y$
+ Variable:Y$
 1060 IF LEFT$(Y$,1)="N" THEN 1550
- Value:Y$
+ Variable:Y$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
@@ -253,18 +253,18 @@
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:38"]
- Value:I
- Reference:X
+ Variable:I
+ Variable:X
  NumericConstant:0
  AssignmentOperator:=
  Variable:I
  Remark: MAT X=ZER
 1610 P=1000
- Reference:P
+ Variable:P
  NumericConstant:1000
  AssignmentOperator:=
 1620 D=100000.
- Reference:D
+ Variable:D
  NumericConstant:100000.
  AssignmentOperator:=
 1630 PRINT "HOW MANY BETS";
@@ -272,13 +272,13 @@
  TextConstant:"HOW MANY BETS"
  CarriageControl:;
 1640 INPUT Y
- Reference:Y
+ Variable:Y
 1650 IF Y<1 OR Y<>INT(Y) THEN 1630
- Value:Y
+ Variable:Y
  NumericConstant:1
  BinaryOperator:<
- Value:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  FunctionInt
  BinaryOperator:<>
  BinaryOperator:OR
@@ -286,8 +286,8 @@
  control: Variable:I
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:50"]
- Value:I
- Reference:A
+ Variable:I
+ Variable:A
  NumericConstant:0
  AssignmentOperator:=
  Variable:I
@@ -295,59 +295,59 @@
 1670 FOR C=1 TO Y
  control: Variable:C
  start:   ["NumericConstant:1"]
- end:     ["Value:Y"]
+ end:     ["Variable:Y"]
 1680 PRINT "NUMBER";C;
  ITEMS
  TextConstant:"NUMBER"
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:;
 1690 INPUT X,Z
- Reference:X
- Reference:Z
+ Variable:X
+ Variable:Z
 1700 B(C)=Z
- Value:C
- Reference:B
- Value:Z
+ Variable:C
+ Variable:B
+ Variable:Z
  AssignmentOperator:=
 1710 T(C)=X
- Value:C
- Reference:T
- Value:X
+ Variable:C
+ Variable:T
+ Variable:X
  AssignmentOperator:=
 1720 IF X<1 OR X>50 OR X<>INT(X) THEN 1680
- Value:X
+ Variable:X
  NumericConstant:1
  BinaryOperator:<
- Value:X
+ Variable:X
  NumericConstant:50
  BinaryOperator:>
  BinaryOperator:OR
- Value:X
- Value:X
+ Variable:X
+ Variable:X
  FunctionInt
  BinaryOperator:<>
  BinaryOperator:OR
 1730 IF Z<1 OR Z<>INT(Z) THEN 1680
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:<
- Value:Z
- Value:Z
+ Variable:Z
+ Variable:Z
  FunctionInt
  BinaryOperator:<>
  BinaryOperator:OR
 1740 IF Z<5 OR Z>500 THEN 1680
- Value:Z
+ Variable:Z
  NumericConstant:5
  BinaryOperator:<
- Value:Z
+ Variable:Z
  NumericConstant:500
  BinaryOperator:>
  BinaryOperator:OR
 1750 IF A(X)=0 THEN 1780
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  NumericConstant:0
  BinaryOperator:=
 1760 PRINT "YOU MADE THAT BET ONCE ALREADY,DUM-DUM"
@@ -357,8 +357,8 @@
 1770 GOTO 1680
  LineNumber:1680
 1780 A(X)=1
- Value:X
- Reference:A
+ Variable:X
+ Variable:A
  NumericConstant:1
  AssignmentOperator:=
 1790 NEXT C
@@ -374,7 +374,7 @@
  ITEMS
  CarriageControl:NL
 1830 S=INT(RND(1)*100)
- Reference:S
+ Variable:S
  NumericConstant:1
  FunctionRnd
  NumericConstant:100
@@ -382,27 +382,27 @@
  FunctionInt
  AssignmentOperator:=
 1840 IF S=0 OR S>38 THEN 1830
- Value:S
+ Variable:S
  NumericConstant:0
  BinaryOperator:=
- Value:S
+ Variable:S
  NumericConstant:38
  BinaryOperator:>
  BinaryOperator:OR
 1850 X(S)=X(S)+1
- Value:S
- Reference:X
- Value:S
- Value:X
+ Variable:S
+ Variable:X
+ Variable:S
+ Variable:X
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1860 IF S<37 THEN 1920
- Value:S
+ Variable:S
  NumericConstant:37
  BinaryOperator:<
 1870 IF S=37 THEN 1900
- Value:S
+ Variable:S
  NumericConstant:37
  BinaryOperator:=
 1880 PRINT "00"
@@ -424,27 +424,27 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:18"]
 1940 READ R
- Reference:R
+ Variable:R
 1950 IF R=S THEN 2000
- Value:R
- Value:S
+ Variable:R
+ Variable:S
  BinaryOperator:=
 1960 NEXT I1
  Variable:I1
 1970 A$="BLACK"
- Reference:A$
+ Variable:A$
  TextConstant:"BLACK"
  AssignmentOperator:=
 1980 PRINT S;A$
  ITEMS
- Value:S
+ Variable:S
  CarriageControl:;
- Value:A$
+ Variable:A$
  CarriageControl:NL
 1990 GOTO 2020
  LineNumber:2020
 2000 A$="RED"
- Reference:A$
+ Variable:A$
  TextConstant:"RED"
  AssignmentOperator:=
 2010 GOTO 1980
@@ -455,15 +455,15 @@
 2030 FOR C=1 TO Y
  control: Variable:C
  start:   ["NumericConstant:1"]
- end:     ["Value:Y"]
+ end:     ["Variable:Y"]
 2040 IF T(C)<37 THEN 2710
- Value:C
- Value:T
+ Variable:C
+ Variable:T
  NumericConstant:37
  BinaryOperator:<
 2050 ON T(C)-36 GOTO 2090,2190,2220,2250,2300,2350,2400,2470,2500
- Value:C
- Value:T
+ Variable:C
+ Variable:T
  NumericConstant:36
  BinaryOperator:-
  LineNumber:2090
@@ -476,8 +476,8 @@
  LineNumber:2470
  LineNumber:2500
 2060 ON T(C)-45 GOTO 2530,2560,2630
- Value:C
- Value:T
+ Variable:C
+ Variable:T
  NumericConstant:45
  BinaryOperator:-
  LineNumber:2530
@@ -490,32 +490,32 @@
 2090 REM  1-12(37) 2:1
  Remark: 1-12(37) 2:1
 2100 IF S <= 12 THEN 2150
- Value:S
+ Variable:S
  NumericConstant:12
  BinaryOperator:<=
 2110 PRINT "YOU LOSE";B(C);"DOLLARS ON BET";C
  ITEMS
  TextConstant:"YOU LOSE"
  CarriageControl:;
- Value:C
- Value:B
+ Variable:C
+ Variable:B
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:NL
 2120 D=D+B(C)
- Reference:D
- Value:D
- Value:C
- Value:B
+ Variable:D
+ Variable:D
+ Variable:C
+ Variable:B
  BinaryOperator:+
  AssignmentOperator:=
 2130 P=P-B(C)
- Reference:P
- Value:P
- Value:C
- Value:B
+ Variable:P
+ Variable:P
+ Variable:C
+ Variable:B
  BinaryOperator:-
  AssignmentOperator:=
 2140 GOTO 2180
@@ -524,29 +524,29 @@
  ITEMS
  TextConstant:"YOU WIN"
  CarriageControl:;
- Value:C
- Value:B
+ Variable:C
+ Variable:B
  NumericConstant:2
  BinaryOperator:*
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:
- Value:C
+ Variable:C
  CarriageControl:NL
 2160 D=D-B(C)*2
- Reference:D
- Value:D
- Value:C
- Value:B
+ Variable:D
+ Variable:D
+ Variable:C
+ Variable:B
  NumericConstant:2
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 2170 P=P+B(C)*2
- Reference:P
- Value:P
- Value:C
- Value:B
+ Variable:P
+ Variable:P
+ Variable:C
+ Variable:B
  NumericConstant:2
  BinaryOperator:*
  BinaryOperator:+
@@ -556,10 +556,10 @@
 2190 REM  13-24(38) 2:1
  Remark: 13-24(38) 2:1
 2200 IF S>12 AND S<25 THEN 2150
- Value:S
+ Variable:S
  NumericConstant:12
  BinaryOperator:>
- Value:S
+ Variable:S
  NumericConstant:25
  BinaryOperator:<
  BinaryOperator:AND
@@ -568,10 +568,10 @@
 2220 REM  25-36(39) 2:1
  Remark: 25-36(39) 2:1
 2230 IF S>24 AND S<37 THEN 2150
- Value:S
+ Variable:S
  NumericConstant:24
  BinaryOperator:>
- Value:S
+ Variable:S
  NumericConstant:37
  BinaryOperator:<
  BinaryOperator:AND
@@ -585,8 +585,8 @@
  end:     ["NumericConstant:34"]
  step:    ["NumericConstant:3"]
 2270 IF S=I THEN 2150
- Value:S
- Value:I
+ Variable:S
+ Variable:I
  BinaryOperator:=
 2280 NEXT I
  Variable:I
@@ -600,8 +600,8 @@
  end:     ["NumericConstant:35"]
  step:    ["NumericConstant:3"]
 2320 IF S=I THEN 2150
- Value:S
- Value:I
+ Variable:S
+ Variable:I
  BinaryOperator:=
 2330 NEXT I
  Variable:I
@@ -615,8 +615,8 @@
  end:     ["NumericConstant:36"]
  step:    ["NumericConstant:3"]
 2370 IF S=I THEN 2150
- Value:S
- Value:I
+ Variable:S
+ Variable:I
  BinaryOperator:=
 2380 NEXT I
  Variable:I
@@ -625,7 +625,7 @@
 2400 REM  1-18(43) 1:1
  Remark: 1-18(43) 1:1
 2410 IF S<19 THEN 2430
- Value:S
+ Variable:S
  NumericConstant:19
  BinaryOperator:<
 2420 GOTO 2110
@@ -634,25 +634,25 @@
  ITEMS
  TextConstant:"YOU WIN"
  CarriageControl:;
- Value:C
- Value:B
+ Variable:C
+ Variable:B
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:NL
 2440 D=D-B(C)
- Reference:D
- Value:D
- Value:C
- Value:B
+ Variable:D
+ Variable:D
+ Variable:C
+ Variable:B
  BinaryOperator:-
  AssignmentOperator:=
 2450 P=P+B(C)
- Reference:P
- Value:P
- Value:C
- Value:B
+ Variable:P
+ Variable:P
+ Variable:C
+ Variable:B
  BinaryOperator:+
  AssignmentOperator:=
 2460 GOTO 2810
@@ -660,10 +660,10 @@
 2470 REM  19-36(44) 1:1
  Remark: 19-36(44) 1:1
 2480 IF S<37 AND S>18 THEN 2430
- Value:S
+ Variable:S
  NumericConstant:37
  BinaryOperator:<
- Value:S
+ Variable:S
  NumericConstant:18
  BinaryOperator:>
  BinaryOperator:AND
@@ -672,15 +672,15 @@
 2500 REM  EVEN(45) 1:1
  Remark: EVEN(45) 1:1
 2510 IF S/2=INT(S/2) AND S<37 THEN 2430
- Value:S
+ Variable:S
  NumericConstant:2
  BinaryOperator:/
- Value:S
+ Variable:S
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
  BinaryOperator:=
- Value:S
+ Variable:S
  NumericConstant:37
  BinaryOperator:<
  BinaryOperator:AND
@@ -689,15 +689,15 @@
 2530 REM  ODD(46) 1:1
  Remark: ODD(46) 1:1
 2540 IF S/2<>INT(S/2) AND S<37 THEN 2430
- Value:S
+ Variable:S
  NumericConstant:2
  BinaryOperator:/
- Value:S
+ Variable:S
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
  BinaryOperator:<>
- Value:S
+ Variable:S
  NumericConstant:37
  BinaryOperator:<
  BinaryOperator:AND
@@ -712,10 +712,10 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:18"]
 2590 READ R
- Reference:R
+ Variable:R
 2600 IF S=R THEN 2430
- Value:S
- Value:R
+ Variable:S
+ Variable:R
  BinaryOperator:=
 2610 NEXT I
  Variable:I
@@ -730,15 +730,15 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:18"]
 2660 READ R
- Reference:R
+ Variable:R
 2670 IF S=R THEN 2110
- Value:S
- Value:R
+ Variable:S
+ Variable:R
  BinaryOperator:=
 2680 NEXT I
  Variable:I
 2690 IF S>36 THEN 2110
- Value:S
+ Variable:S
  NumericConstant:36
  BinaryOperator:>
 2700 GOTO 2430
@@ -746,34 +746,34 @@
 2710 REM--1TO36,0,00(1-36,49,50)35:1
  Remark:--1TO36,0,00(1-36,49,50)35:1
 2720 IF T(C)<49 THEN 2760
- Value:C
- Value:T
+ Variable:C
+ Variable:T
  NumericConstant:49
  BinaryOperator:<
 2730 IF T(C)=49 AND S=37 THEN 2780
- Value:C
- Value:T
+ Variable:C
+ Variable:T
  NumericConstant:49
  BinaryOperator:=
- Value:S
+ Variable:S
  NumericConstant:37
  BinaryOperator:=
  BinaryOperator:AND
 2740 IF T(C)=50 AND S=38 THEN 2780
- Value:C
- Value:T
+ Variable:C
+ Variable:T
  NumericConstant:50
  BinaryOperator:=
- Value:S
+ Variable:S
  NumericConstant:38
  BinaryOperator:=
  BinaryOperator:AND
 2750 GOTO 2110
  LineNumber:2110
 2760 IF T(C)=S THEN 2780
- Value:C
- Value:T
- Value:S
+ Variable:C
+ Variable:T
+ Variable:S
  BinaryOperator:=
 2770 GOTO 2110
  LineNumber:2110
@@ -781,29 +781,29 @@
  ITEMS
  TextConstant:"YOU WIN"
  CarriageControl:;
- Value:C
- Value:B
+ Variable:C
+ Variable:B
  NumericConstant:35
  BinaryOperator:*
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:NL
 2790 D=D-B(C)*35
- Reference:D
- Value:D
- Value:C
- Value:B
+ Variable:D
+ Variable:D
+ Variable:C
+ Variable:B
  NumericConstant:35
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 2800 P=P+B(C)*35
- Reference:P
- Value:P
- Value:C
- Value:B
+ Variable:P
+ Variable:P
+ Variable:C
+ Variable:B
  NumericConstant:35
  BinaryOperator:*
  BinaryOperator:+
@@ -825,12 +825,12 @@
  ITEMS
  TextConstant:" "
  CarriageControl:,
- Value:D
+ Variable:D
  CarriageControl:,
- Value:P
+ Variable:P
  CarriageControl:NL
 2850 IF P>0 THEN 2880
- Value:P
+ Variable:P
  NumericConstant:0
  BinaryOperator:>
 2860 PRINT "OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
@@ -840,7 +840,7 @@
 2870 GOTO 3190
  LineNumber:3190
 2880 IF D>0 THEN 2920
- Value:D
+ Variable:D
  NumericConstant:0
  BinaryOperator:>
 2890 PRINT "YOU BROKE THE HOUSE!"
@@ -848,7 +848,7 @@
  TextConstant:"YOU BROKE THE HOUSE!"
  CarriageControl:NL
 2900 P=101000.
- Reference:P
+ Variable:P
  NumericConstant:101000.
  AssignmentOperator:=
 2910 GOTO 2960
@@ -858,9 +858,9 @@
  TextConstant:"AGAIN"
  CarriageControl:;
 2930 INPUT Y$
- Reference:Y$
+ Variable:Y$
 2940 IF LEFT$(Y$,1)="Y" THEN 1630
- Value:Y$
+ Variable:Y$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
@@ -885,7 +885,7 @@
  NumericConstant:34
  NumericConstant:36
 2960 IF P<1 THEN 3190
- Value:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:<
 2970 PRINT "TO WHOM SHALL I MAKE THE CHECK";
@@ -893,7 +893,7 @@
  TextConstant:"TO WHOM SHALL I MAKE THE CHECK"
  CarriageControl:;
 2980 INPUT B$
- Reference:B$
+ Variable:B$
 2990 PRINT 
  ITEMS
  CarriageControl:NL
@@ -929,7 +929,7 @@
  NumericConstant:40
  FunctionTab
  CarriageControl:;
- Value:M$
+ Variable:M$
  CarriageControl:NL
 3050 PRINT 
  ITEMS
@@ -941,13 +941,13 @@
  ITEMS
  TextConstant:"PAY TO THE ORDER OF-----"
  CarriageControl:;
- Value:B$
+ Variable:B$
  CarriageControl:;
  TextConstant:"-----$ "
  CarriageControl:;
 3080 PRINT P
  ITEMS
- Value:P
+ Variable:P
  CarriageControl:NL
 3090 PRINT 
  ITEMS
@@ -1026,11 +1026,11 @@
 3300 REM     THE DATE IS RETURNED IN VARIABLE M$
  Remark:    THE DATE IS RETURNED IN VARIABLE M$
 3310 M$=D$+", "+E$
- Reference:M$
- Value:D$
+ Variable:M$
+ Variable:D$
  TextConstant:", "
  BinaryOperator:+
- Value:E$
+ Variable:E$
  BinaryOperator:+
  AssignmentOperator:=
 3320 RETURN

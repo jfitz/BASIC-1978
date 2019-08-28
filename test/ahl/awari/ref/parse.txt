@@ -21,38 +21,38 @@
  Declaration:G
  NumericConstant:50
  Declaration:F
- Reference:N
+ Variable:N
 20 PRINT:PRINT:E=0
  ITEMS
  CarriageControl:NL
  ITEMS
  CarriageControl:NL
- Reference:E
+ Variable:E
  NumericConstant:0
  AssignmentOperator:=
 25 FOR I=0 TO 12:B(I)=3:NEXT I
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:12"]
- Value:I
- Reference:B
+ Variable:I
+ Variable:B
  NumericConstant:3
  AssignmentOperator:=
  Variable:I
 30 C=0:F(N)=0:B(13)=0:B(6)=0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
- Value:N
- Reference:F
+ Variable:N
+ Variable:F
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:13
- Reference:B
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:6
- Reference:B
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
 35 GOSUB 500
@@ -63,16 +63,16 @@
  CarriageControl:;
  LineNumber:110
 45 IF E=0 THEN 80
- Value:E
+ Variable:E
  NumericConstant:0
  BinaryOperator:=
 50 IF M=H THEN GOSUB 100
- Value:M
- Value:H
+ Variable:M
+ Variable:H
  BinaryOperator:=
  LineNumber:100
 55 IF E=0 THEN 80
- Value:E
+ Variable:E
  NumericConstant:0
  BinaryOperator:=
 60 PRINT "MY MOVE IS ";:GOSUB 800
@@ -81,19 +81,19 @@
  CarriageControl:;
  LineNumber:800
 65 IF E=0 THEN 80
- Value:E
+ Variable:E
  NumericConstant:0
  BinaryOperator:=
 70 IF M=H THEN PRINT ",";:GOSUB 800
- Value:M
- Value:H
+ Variable:M
+ Variable:H
  BinaryOperator:=
  ITEMS
  TextConstant:","
  CarriageControl:;
  LineNumber:800
 75 IF E>0 THEN 35
- Value:E
+ Variable:E
  NumericConstant:0
  BinaryOperator:>
 80 PRINT:PRINT"GAME OVER"
@@ -103,32 +103,32 @@
  TextConstant:"GAME OVER"
  CarriageControl:NL
 85 D=B(6)-B(13):IF D<0 THEN PRINT "I WIN BY";-D;"POINTS":GOTO 20
- Reference:D
+ Variable:D
  NumericConstant:6
- Value:B
+ Variable:B
  NumericConstant:13
- Value:B
+ Variable:B
  BinaryOperator:-
  AssignmentOperator:=
- Value:D
+ Variable:D
  NumericConstant:0
  BinaryOperator:<
  ITEMS
  TextConstant:"I WIN BY"
  CarriageControl:;
- Value:D
+ Variable:D
  UnaryOperator:-
  CarriageControl:;
  TextConstant:"POINTS"
  CarriageControl:NL
  LineNumber:20
 90 N=N+1:IF D=0 THEN PRINT "DRAWN GAME":GOTO 20
- Reference:N
- Value:N
+ Variable:N
+ Variable:N
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:D
+ Variable:D
  NumericConstant:0
  BinaryOperator:=
  ITEMS
@@ -139,7 +139,7 @@
  ITEMS
  TextConstant:"YOU WIN BY"
  CarriageControl:;
- Value:D
+ Variable:D
  CarriageControl:;
  TextConstant:"POINTS"
  CarriageControl:NL
@@ -149,15 +149,15 @@
  TextConstant:"AGAIN"
  CarriageControl:;
 110 INPUT M:IF M<7 THEN IF M>0 THEN M=M-1:GOTO 130
- Reference:M
- Value:M
+ Variable:M
+ Variable:M
  NumericConstant:7
  BinaryOperator:<
- Value:M
+ Variable:M
  NumericConstant:0
  BinaryOperator:>
- Reference:M
- Value:M
+ Variable:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -168,58 +168,58 @@
  CarriageControl:NL
  LineNumber:100
 130 IF B(M)=0 THEN 120
- Value:M
- Value:B
+ Variable:M
+ Variable:B
  NumericConstant:0
  BinaryOperator:=
 140 H=6:GOSUB 200
- Reference:H
+ Variable:H
  NumericConstant:6
  AssignmentOperator:=
  LineNumber:200
 150 GOTO 500
  LineNumber:500
 200 K=M:GOSUB 600
- Reference:K
- Value:M
+ Variable:K
+ Variable:M
  AssignmentOperator:=
  LineNumber:600
 205 E=0:IF K>6 THEN K=K-7
- Reference:E
+ Variable:E
  NumericConstant:0
  AssignmentOperator:=
- Value:K
+ Variable:K
  NumericConstant:6
  BinaryOperator:>
- Reference:K
- Value:K
+ Variable:K
+ Variable:K
  NumericConstant:7
  BinaryOperator:-
  AssignmentOperator:=
 210 C=C+1:IF C<9 THEN F(N)=F(N)*6+K
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:C
+ Variable:C
  NumericConstant:9
  BinaryOperator:<
- Value:N
- Reference:F
- Value:N
- Value:F
+ Variable:N
+ Variable:F
+ Variable:N
+ Variable:F
  NumericConstant:6
  BinaryOperator:*
- Value:K
+ Variable:K
  BinaryOperator:+
  AssignmentOperator:=
 215 FOR I=0 TO 5:IF B(I)<>0 THEN 230
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:5"]
- Value:I
- Value:B
+ Variable:I
+ Variable:B
  NumericConstant:0
  BinaryOperator:<>
 220 NEXT I
@@ -230,11 +230,11 @@
  control: Variable:I
  start:   ["NumericConstant:7"]
  end:     ["NumericConstant:12"]
- Value:I
- Value:B
+ Variable:I
+ Variable:B
  NumericConstant:0
  BinaryOperator:<>
- Reference:E
+ Variable:E
  NumericConstant:1
  AssignmentOperator:=
  
@@ -257,7 +257,7 @@
 515 PRINT:I=13:GOSUB 580
  ITEMS
  CarriageControl:NL
- Reference:I
+ Variable:I
  NumericConstant:13
  AssignmentOperator:=
  LineNumber:580
@@ -267,7 +267,7 @@
  CarriageControl:;
  ITEMS
  NumericConstant:6
- Value:B
+ Variable:B
  CarriageControl:NL
  ITEMS
  TextConstant:"   "
@@ -286,8 +286,8 @@
  CarriageControl:NL
  
 580 IF B(I)<10 THEN PRINT " ";
- Value:I
- Value:B
+ Variable:I
+ Variable:B
  NumericConstant:10
  BinaryOperator:<
  ITEMS
@@ -295,222 +295,222 @@
  CarriageControl:;
 585 PRINT B(I);:RETURN
  ITEMS
- Value:I
- Value:B
+ Variable:I
+ Variable:B
  CarriageControl:;
  
 600 P=B(M):B(M)=0
- Reference:P
- Value:M
- Value:B
+ Variable:P
+ Variable:M
+ Variable:B
  AssignmentOperator:=
- Value:M
- Reference:B
+ Variable:M
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
 605 FOR P=P TO 1 STEP -1:M=M+1:IF M>13 THEN M=M-14
  control: Variable:P
- start:   ["Value:P"]
+ start:   ["Variable:P"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
- Reference:M
- Value:M
+ Variable:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:M
+ Variable:M
  NumericConstant:13
  BinaryOperator:>
- Reference:M
- Value:M
+ Variable:M
+ Variable:M
  NumericConstant:14
  BinaryOperator:-
  AssignmentOperator:=
 610 B(M)=B(M)+1:NEXT P
- Value:M
- Reference:B
- Value:M
- Value:B
+ Variable:M
+ Variable:B
+ Variable:M
+ Variable:B
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
  Variable:P
 615 IF B(M)=1 THEN IF M<>6 THEN IF M<>13 THEN IF B(12-M)<>0 THEN 625
- Value:M
- Value:B
+ Variable:M
+ Variable:B
  NumericConstant:1
  BinaryOperator:=
- Value:M
+ Variable:M
  NumericConstant:6
  BinaryOperator:<>
- Value:M
+ Variable:M
  NumericConstant:13
  BinaryOperator:<>
  NumericConstant:12
- Value:M
+ Variable:M
  BinaryOperator:-
- Value:B
+ Variable:B
  NumericConstant:0
  BinaryOperator:<>
 620 RETURN
  
 625 B(H)=B(H)+B(12-M)+1:B(M)=0:B(12-M)=0:RETURN
- Value:H
- Reference:B
- Value:H
- Value:B
+ Variable:H
+ Variable:B
+ Variable:H
+ Variable:B
  NumericConstant:12
- Value:M
+ Variable:M
  BinaryOperator:-
- Value:B
+ Variable:B
  BinaryOperator:+
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:M
- Reference:B
+ Variable:M
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:12
- Value:M
+ Variable:M
  BinaryOperator:-
- Reference:B
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
  
 800 D=-99:H=13
- Reference:D
+ Variable:D
  NumericConstant:99
  UnaryOperator:-
  AssignmentOperator:=
- Reference:H
+ Variable:H
  NumericConstant:13
  AssignmentOperator:=
 805 FOR I=0 TO 13:G(I)=B(I):NEXT I
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:13"]
- Value:I
- Reference:G
- Value:I
- Value:B
+ Variable:I
+ Variable:G
+ Variable:I
+ Variable:B
  AssignmentOperator:=
  Variable:I
 810 FOR J=7 TO 12:IF B(J)=0 THEN 885
  control: Variable:J
  start:   ["NumericConstant:7"]
  end:     ["NumericConstant:12"]
- Value:J
- Value:B
+ Variable:J
+ Variable:B
  NumericConstant:0
  BinaryOperator:=
 815 G=0:M=J:GOSUB 600
- Reference:G
+ Variable:G
  NumericConstant:0
  AssignmentOperator:=
- Reference:M
- Value:J
+ Variable:M
+ Variable:J
  AssignmentOperator:=
  LineNumber:600
 820 FOR I=0 TO 5:IF B(I)=0 THEN 845
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:5"]
- Value:I
- Value:B
+ Variable:I
+ Variable:B
  NumericConstant:0
  BinaryOperator:=
 825 L=B(I)+I:R=0
- Reference:L
- Value:I
- Value:B
- Value:I
+ Variable:L
+ Variable:I
+ Variable:B
+ Variable:I
  BinaryOperator:+
  AssignmentOperator:=
- Reference:R
+ Variable:R
  NumericConstant:0
  AssignmentOperator:=
 830 IF L>13 THEN L=L-14:R=1:GOTO 830
- Value:L
+ Variable:L
  NumericConstant:13
  BinaryOperator:>
- Reference:L
- Value:L
+ Variable:L
+ Variable:L
  NumericConstant:14
  BinaryOperator:-
  AssignmentOperator:=
- Reference:R
+ Variable:R
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:830
 835 IF B(L)=0 THEN IF L<>6 THEN IF L<>13 THEN R=B(12-L)+R
- Value:L
- Value:B
+ Variable:L
+ Variable:B
  NumericConstant:0
  BinaryOperator:=
- Value:L
+ Variable:L
  NumericConstant:6
  BinaryOperator:<>
- Value:L
+ Variable:L
  NumericConstant:13
  BinaryOperator:<>
- Reference:R
+ Variable:R
  NumericConstant:12
- Value:L
+ Variable:L
  BinaryOperator:-
- Value:B
- Value:R
+ Variable:B
+ Variable:R
  BinaryOperator:+
  AssignmentOperator:=
 840 IF R>Q THEN Q=R
- Value:R
- Value:Q
+ Variable:R
+ Variable:Q
  BinaryOperator:>
- Reference:Q
- Value:R
+ Variable:Q
+ Variable:R
  AssignmentOperator:=
 845 NEXT I
  Variable:I
 850 Q=B(13)-B(6)-Q:IF C>8 THEN 875
- Reference:Q
+ Variable:Q
  NumericConstant:13
- Value:B
+ Variable:B
  NumericConstant:6
- Value:B
+ Variable:B
  BinaryOperator:-
- Value:Q
+ Variable:Q
  BinaryOperator:-
  AssignmentOperator:=
- Value:C
+ Variable:C
  NumericConstant:8
  BinaryOperator:>
 855 K=J:IF K>6 THEN K=K-7
- Reference:K
- Value:J
+ Variable:K
+ Variable:J
  AssignmentOperator:=
- Value:K
+ Variable:K
  NumericConstant:6
  BinaryOperator:>
- Reference:K
- Value:K
+ Variable:K
+ Variable:K
  NumericConstant:7
  BinaryOperator:-
  AssignmentOperator:=
 860 FOR I=0 TO N-1:IF F(N)*6+K=INT(F(I)/6^(7-C)+.1) THEN Q=Q-2
  control: Variable:I
  start:   ["NumericConstant:0"]
- end:     ["Value:N", "NumericConstant:1", "BinaryOperator:-"]
- Value:N
- Value:F
+ end:     ["Variable:N", "NumericConstant:1", "BinaryOperator:-"]
+ Variable:N
+ Variable:F
  NumericConstant:6
  BinaryOperator:*
- Value:K
+ Variable:K
  BinaryOperator:+
- Value:I
- Value:F
+ Variable:I
+ Variable:F
  NumericConstant:6
  NumericConstant:7
- Value:C
+ Variable:C
  BinaryOperator:-
  BinaryOperator:^
  BinaryOperator:/
@@ -518,8 +518,8 @@
  BinaryOperator:+
  FunctionInt
  BinaryOperator:=
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:2
  BinaryOperator:-
  AssignmentOperator:=
@@ -529,31 +529,31 @@
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:13"]
- Value:I
- Reference:B
- Value:I
- Value:G
+ Variable:I
+ Variable:B
+ Variable:I
+ Variable:G
  AssignmentOperator:=
  Variable:I
 880 IF Q>=D THEN A=J:D=Q
- Value:Q
- Value:D
+ Variable:Q
+ Variable:D
  BinaryOperator:>=
- Reference:A
- Value:J
+ Variable:A
+ Variable:J
  AssignmentOperator:=
- Reference:D
- Value:Q
+ Variable:D
+ Variable:Q
  AssignmentOperator:=
 885 NEXT J
  Variable:J
 890 M=A:PRINT CHR$(42+M);:GOTO 200
- Reference:M
- Value:A
+ Variable:M
+ Variable:A
  AssignmentOperator:=
  ITEMS
  NumericConstant:42
- Value:M
+ Variable:M
  BinaryOperator:+
  FunctionChr
  CarriageControl:;
@@ -561,10 +561,10 @@
 900 FOR I=0 TO N-1:PRINT B(I):NEXT I
  control: Variable:I
  start:   ["NumericConstant:0"]
- end:     ["Value:N", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:N", "NumericConstant:1", "BinaryOperator:-"]
  ITEMS
- Value:I
- Value:B
+ Variable:I
+ Variable:B
  CarriageControl:NL
  Variable:I
 999 END

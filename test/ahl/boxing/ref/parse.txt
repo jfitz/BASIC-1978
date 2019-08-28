@@ -24,11 +24,11 @@
  TextConstant:"BOXING OLYMPIC STYLE (3 ROUNDS -- 2 OUT OF 3 WINS)"
  CarriageControl:NL
 5 J=0
- Reference:J
+ Variable:J
  NumericConstant:0
  AssignmentOperator:=
 6 L=0
- Reference:L
+ Variable:L
  NumericConstant:0
  AssignmentOperator:=
 8 PRINT
@@ -39,13 +39,13 @@
  TextConstant:"WHAT IS YOUR OPPONENT'S NAME"
  CarriageControl:;
 20 INPUT J$
- Reference:J$
+ Variable:J$
 30 PRINT "INPUT YOUR MAN'S NAME";
  ITEMS
  TextConstant:"INPUT YOUR MAN'S NAME"
  CarriageControl:;
 40 INPUT L$
- Reference:L$
+ Variable:L$
 50 PRINT "DIFFERENT PUNCHES ARE: (1) FULL SWING; (2) HOOK; (3) UPPERCUT; (4) JAB."
  ITEMS
  TextConstant:"DIFFERENT PUNCHES ARE: (1) FULL SWING; (2) HOOK; (3) UPPERCUT; (4) JAB."
@@ -55,15 +55,15 @@
  TextConstant:"WHAT IS YOUR MANS BEST"
  CarriageControl:;
 64 INPUT B
- Reference:B
+ Variable:B
 70 PRINT "WHAT IS HIS VULNERABILITY";
  ITEMS
  TextConstant:"WHAT IS HIS VULNERABILITY"
  CarriageControl:;
 80 INPUT D
- Reference:D
+ Variable:D
 90 B1=INT(4*RND(1)+1)
- Reference:B1
+ Variable:B1
  NumericConstant:4
  NumericConstant:1
  FunctionRnd
@@ -73,7 +73,7 @@
  FunctionInt
  AssignmentOperator:=
 100 D1=INT(4*RND(1)+1)
- Reference:D1
+ Variable:D1
  NumericConstant:4
  NumericConstant:1
  FunctionRnd
@@ -83,16 +83,16 @@
  FunctionInt
  AssignmentOperator:=
 110 IF B1=D1 THEN 90
- Value:B1
- Value:D1
+ Variable:B1
+ Variable:D1
  BinaryOperator:=
 120 PRINT J$;"'S ADVANTAGE IS";B1;"AND VULNERABILITY IS SECRET.":PRINT
  ITEMS
- Value:J$
+ Variable:J$
  CarriageControl:;
  TextConstant:"'S ADVANTAGE IS"
  CarriageControl:;
- Value:B1
+ Variable:B1
  CarriageControl:;
  TextConstant:"AND VULNERABILITY IS SECRET."
  CarriageControl:NL
@@ -103,26 +103,26 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 140 IF J>= 2 THEN 1040
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:>=
 150 IF L>=2 THEN 1060
- Value:L
+ Variable:L
  NumericConstant:2
  BinaryOperator:>=
 160 X=0
- Reference:X
+ Variable:X
  NumericConstant:0
  AssignmentOperator:=
 170 Y=0
- Reference:Y
+ Variable:Y
  NumericConstant:0
  AssignmentOperator:=
 180 PRINT "ROUND";R;"BEGINS..."
  ITEMS
  TextConstant:"ROUND"
  CarriageControl:;
- Value:R
+ Variable:R
  CarriageControl:;
  TextConstant:"BEGINS..."
  CarriageControl:NL
@@ -131,7 +131,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
 190 I=INT(10*RND(1)+1)
- Reference:I
+ Variable:I
  NumericConstant:10
  NumericConstant:1
  FunctionRnd
@@ -141,57 +141,57 @@
  FunctionInt
  AssignmentOperator:=
 200 IF I>5 THEN 600
- Value:I
+ Variable:I
  NumericConstant:5
  BinaryOperator:>
 210 PRINT L$;"'S PUNCH";
  ITEMS
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:"'S PUNCH"
  CarriageControl:;
 220 INPUT P
- Reference:P
+ Variable:P
 221 IF P=B THEN 225
- Value:P
- Value:B
+ Variable:P
+ Variable:B
  BinaryOperator:=
 222 GOTO 230
  LineNumber:230
 225 X=X+2
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:2
  BinaryOperator:+
  AssignmentOperator:=
 230 IF P=1 THEN 340
- Value:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:=
 240 IF P=2 THEN 450
- Value:P
+ Variable:P
  NumericConstant:2
  BinaryOperator:=
 250 IF P=3 THEN 520
- Value:P
+ Variable:P
  NumericConstant:3
  BinaryOperator:=
 270 PRINT L$;" JABS AT ";J$"'S HEAD ";
  ITEMS
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:" JABS AT "
  CarriageControl:;
- Value:J$
+ Variable:J$
  CarriageControl:
  TextConstant:"'S HEAD "
  CarriageControl:;
 271 IF D1=4 THEN 290
- Value:D1
+ Variable:D1
  NumericConstant:4
  BinaryOperator:=
 275 C=INT(8*RND(1)+1)
- Reference:C
+ Variable:C
  NumericConstant:8
  NumericConstant:1
  FunctionRnd
@@ -201,12 +201,12 @@
  FunctionInt
  AssignmentOperator:=
 280 IF C<4 THEN 310
- Value:C
+ Variable:C
  NumericConstant:4
  BinaryOperator:<
 290 X=X+3
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:3
  BinaryOperator:+
  AssignmentOperator:=
@@ -220,16 +220,16 @@
  LineNumber:950
 340 PRINT L$ " SWINGS AND ";
  ITEMS
- Value:L$
+ Variable:L$
  CarriageControl:
  TextConstant:" SWINGS AND "
  CarriageControl:;
 341 IF D1=4 THEN 410
- Value:D1
+ Variable:D1
  NumericConstant:4
  BinaryOperator:=
 345 X3=INT(30*RND(1)+1)
- Reference:X3
+ Variable:X3
  NumericConstant:30
  NumericConstant:1
  FunctionRnd
@@ -239,7 +239,7 @@
  FunctionInt
  AssignmentOperator:=
 350 IF X3<10 THEN 410
- Value:X3
+ Variable:X3
  NumericConstant:10
  BinaryOperator:<
 360 PRINT "HE MISSES ";
@@ -250,7 +250,7 @@
  ITEMS
  CarriageControl:NL
 375 IF X=1 THEN 950
- Value:X
+ Variable:X
  NumericConstant:1
  BinaryOperator:=
 380 PRINT
@@ -266,12 +266,12 @@
  TextConstant:"HE CONNECTS!"
  CarriageControl:NL
 420 IF X>35 THEN 980
- Value:X
+ Variable:X
  NumericConstant:35
  BinaryOperator:>
 425 X=X+15
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:15
  BinaryOperator:+
  AssignmentOperator:=
@@ -279,16 +279,16 @@
  LineNumber:300
 450 PRINT L$;" GIVES THE HOOK... ";
  ITEMS
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:" GIVES THE HOOK... "
  CarriageControl:;
 455 IF D1=2 THEN 480
- Value:D1
+ Variable:D1
  NumericConstant:2
  BinaryOperator:=
 460 H1=INT(2*RND(1)+1)
- Reference:H1
+ Variable:H1
  NumericConstant:2
  NumericConstant:1
  FunctionRnd
@@ -298,7 +298,7 @@
  FunctionInt
  AssignmentOperator:=
 470 IF H1=1 THEN 500
- Value:H1
+ Variable:H1
  NumericConstant:1
  BinaryOperator:=
 475 PRINT "CONNECTS..."
@@ -306,8 +306,8 @@
  TextConstant:"CONNECTS..."
  CarriageControl:NL
 480 X=X+7
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:7
  BinaryOperator:+
  AssignmentOperator:=
@@ -321,16 +321,16 @@
  LineNumber:300
 520 PRINT L$ " TRIES AN UPPERCUT ";
  ITEMS
- Value:L$
+ Variable:L$
  CarriageControl:
  TextConstant:" TRIES AN UPPERCUT "
  CarriageControl:;
 530 IF D1=3 THEN 570
- Value:D1
+ Variable:D1
  NumericConstant:3
  BinaryOperator:=
 540 D5=INT(100*RND(1)+1)
- Reference:D5
+ Variable:D5
  NumericConstant:100
  NumericConstant:1
  FunctionRnd
@@ -340,7 +340,7 @@
  FunctionInt
  AssignmentOperator:=
 550 IF D5<51 THEN 570
- Value:D5
+ Variable:D5
  NumericConstant:51
  BinaryOperator:<
 560 PRINT "AND IT'S BLOCKED (LUCKY BLOCK!)"
@@ -354,15 +354,15 @@
  TextConstant:"AND HE CONNECTS!"
  CarriageControl:NL
 580 X=X+4
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:4
  BinaryOperator:+
  AssignmentOperator:=
 590 GOTO 300
  LineNumber:300
 600 J7=INT(4*RND(1)+1)
- Reference:J7
+ Variable:J7
  NumericConstant:4
  NumericConstant:1
  FunctionRnd
@@ -372,41 +372,41 @@
  FunctionInt
  AssignmentOperator:=
 601 IF J7 =B1 THEN 605
- Value:J7
- Value:B1
+ Variable:J7
+ Variable:B1
  BinaryOperator:=
 602 GOTO 610
  LineNumber:610
 605 Y=Y+2
- Reference:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  NumericConstant:2
  BinaryOperator:+
  AssignmentOperator:=
 610 IF J7=1 THEN 720
- Value:J7
+ Variable:J7
  NumericConstant:1
  BinaryOperator:=
 620 IF J7=2 THEN 810
- Value:J7
+ Variable:J7
  NumericConstant:2
  BinaryOperator:=
 630 IF J7 =3 THEN 860
- Value:J7
+ Variable:J7
  NumericConstant:3
  BinaryOperator:=
 640 PRINT J$;" JABS AND ";
  ITEMS
- Value:J$
+ Variable:J$
  CarriageControl:;
  TextConstant:" JABS AND "
  CarriageControl:;
 645 IF D=4 THEN 700
- Value:D
+ Variable:D
  NumericConstant:4
  BinaryOperator:=
 650 Z4=INT(7*RND(1)+1)
- Reference:Z4
+ Variable:Z4
  NumericConstant:7
  NumericConstant:1
  FunctionRnd
@@ -416,7 +416,7 @@
  FunctionInt
  AssignmentOperator:=
 655 IF Z4>4 THEN 690
- Value:Z4
+ Variable:Z4
  NumericConstant:4
  BinaryOperator:>
 660 PRINT "IT'S BLOCKED!"
@@ -430,8 +430,8 @@
  TextConstant:" BLOOD SPILLS !!!"
  CarriageControl:NL
 700 Y=Y+5
- Reference:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  NumericConstant:5
  BinaryOperator:+
  AssignmentOperator:=
@@ -439,16 +439,16 @@
  LineNumber:300
 720 PRINT J$" TAKES A FULL SWING AND";
  ITEMS
- Value:J$
+ Variable:J$
  CarriageControl:
  TextConstant:" TAKES A FULL SWING AND"
  CarriageControl:;
 730 IF D=1 THEN 770
- Value:D
+ Variable:D
  NumericConstant:1
  BinaryOperator:=
 740 R6=INT(60*RND(1)+1)
- Reference:R6
+ Variable:R6
  NumericConstant:60
  NumericConstant:1
  FunctionRnd
@@ -458,7 +458,7 @@
  FunctionInt
  AssignmentOperator:=
 745 IF R6 <30 THEN 770
- Value:R6
+ Variable:R6
  NumericConstant:30
  BinaryOperator:<
 750 PRINT " IT'S BLOCKED!"
@@ -472,12 +472,12 @@
  TextConstant:" POW!!!!! HE HITS HIM RIGHT IN THE FACE!"
  CarriageControl:NL
 780 IF Y>35 THEN 1010
- Value:Y
+ Variable:Y
  NumericConstant:35
  BinaryOperator:>
 790 Y=Y+15
- Reference:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  NumericConstant:15
  BinaryOperator:+
  AssignmentOperator:=
@@ -485,17 +485,17 @@
  LineNumber:300
 810 PRINT J$;" GETS ";L$;" IN THE JAW (OUCH!)"
  ITEMS
- Value:J$
+ Variable:J$
  CarriageControl:;
  TextConstant:" GETS "
  CarriageControl:;
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:" IN THE JAW (OUCH!)"
  CarriageControl:NL
 820 Y=Y+7
- Reference:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  NumericConstant:7
  BinaryOperator:+
  AssignmentOperator:=
@@ -504,13 +504,13 @@
  TextConstant:"....AND AGAIN!"
  CarriageControl:NL
 835 Y=Y+5
- Reference:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  NumericConstant:5
  BinaryOperator:+
  AssignmentOperator:=
 840 IF Y>35 THEN 1010
- Value:Y
+ Variable:Y
  NumericConstant:35
  BinaryOperator:>
 850 PRINT
@@ -518,16 +518,16 @@
  CarriageControl:NL
 860 PRINT L$;" IS ATTACKED BY AN UPPERCUT (OH,OH)..."
  ITEMS
- Value:L$
+ Variable:L$
  CarriageControl:;
  TextConstant:" IS ATTACKED BY AN UPPERCUT (OH,OH)..."
  CarriageControl:NL
 865 IF D=3 THEN 890
- Value:D
+ Variable:D
  NumericConstant:3
  BinaryOperator:=
 870 Q4=INT(200*RND(1)+1)
- Reference:Q4
+ Variable:Q4
  NumericConstant:200
  NumericConstant:1
  FunctionRnd
@@ -537,20 +537,20 @@
  FunctionInt
  AssignmentOperator:=
 880 IF Q4>75 THEN 920
- Value:Q4
+ Variable:Q4
  NumericConstant:75
  BinaryOperator:>
 890 PRINT "AND ";J$;" CONNECTS..."
  ITEMS
  TextConstant:"AND "
  CarriageControl:;
- Value:J$
+ Variable:J$
  CarriageControl:;
  TextConstant:" CONNECTS..."
  CarriageControl:NL
 900 Y=Y+8
- Reference:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  NumericConstant:8
  BinaryOperator:+
  AssignmentOperator:=
@@ -560,13 +560,13 @@
  ITEMS
  TextConstant:" BLOCKS AND HITS "
  CarriageControl:;
- Value:J$
+ Variable:J$
  CarriageControl:;
  TextConstant:" WITH A HOOK."
  CarriageControl:NL
 930 X=X+5
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:5
  BinaryOperator:+
  AssignmentOperator:=
@@ -575,22 +575,22 @@
 950 NEXT R1
  Variable:R1
 951 IF X>Y THEN 955
- Value:X
- Value:Y
+ Variable:X
+ Variable:Y
  BinaryOperator:>
 952 PRINT:PRINT J$" WINS ROUND" R
  ITEMS
  CarriageControl:NL
  ITEMS
- Value:J$
+ Variable:J$
  CarriageControl:
  TextConstant:" WINS ROUND"
  CarriageControl:
- Value:R
+ Variable:R
  CarriageControl:NL
 953 J=J+1
- Reference:J
- Value:J
+ Variable:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -600,35 +600,35 @@
  ITEMS
  CarriageControl:NL
  ITEMS
- Value:L$
+ Variable:L$
  CarriageControl:
  TextConstant:" WINS ROUND"
  CarriageControl:
- Value:R
+ Variable:R
  CarriageControl:NL
 956 L=L+1
- Reference:L
- Value:L
+ Variable:L
+ Variable:L
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 960 NEXT R
  Variable:R
 961 IF J>= 2 THEN 1040
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:>=
 962 IF L>=2 THEN 1060
- Value:L
+ Variable:L
  NumericConstant:2
  BinaryOperator:>=
 980 PRINT J$ " IS KNOCKED COLD AND " L$" IS THE WINNER AND CHAMP!";
  ITEMS
- Value:J$
+ Variable:J$
  CarriageControl:
  TextConstant:" IS KNOCKED COLD AND "
  CarriageControl:
- Value:L$
+ Variable:L$
  CarriageControl:
  TextConstant:" IS THE WINNER AND CHAMP!"
  CarriageControl:;
@@ -636,11 +636,11 @@
  LineNumber:1080
 1010 PRINT L$ " IS KNOCKED COLD AND " J$" IS THE WINNER AND CHAMP!";
  ITEMS
- Value:L$
+ Variable:L$
  CarriageControl:
  TextConstant:" IS KNOCKED COLD AND "
  CarriageControl:
- Value:J$
+ Variable:J$
  CarriageControl:
  TextConstant:" IS THE WINNER AND CHAMP!"
  CarriageControl:;
@@ -648,11 +648,11 @@
  LineNumber:1000
 1040 PRINT J$ " WINS (NICE GOING," J$;")."
  ITEMS
- Value:J$
+ Variable:J$
  CarriageControl:
  TextConstant:" WINS (NICE GOING,"
  CarriageControl:
- Value:J$
+ Variable:J$
  CarriageControl:;
  TextConstant:")."
  CarriageControl:NL
@@ -660,7 +660,7 @@
  LineNumber:1000
 1060 PRINT L$ " AMAZINGLY WINS!!"
  ITEMS
- Value:L$
+ Variable:L$
  CarriageControl:
  TextConstant:" AMAZINGLY WINS!!"
  CarriageControl:NL

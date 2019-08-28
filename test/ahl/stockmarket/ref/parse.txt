@@ -49,12 +49,12 @@
 112 REM SLOPE OF MARKET TREND:A  (SAME FOR ALL STOCKS) 
  Remark:SLOPE OF MARKET TREND:A  (SAME FOR ALL STOCKS) 
 113 LET X=1
- Reference:X
+ Variable:X
  NumericConstant:1
  AssignmentOperator:=
 114 LET A=INT((RND(X)/10)*100+.5)/100 
- Reference:A
- Value:X
+ Variable:A
+ Variable:X
  FunctionRnd
  NumericConstant:10
  BinaryOperator:/
@@ -67,27 +67,27 @@
  BinaryOperator:/
  AssignmentOperator:=
 115 LET T5=0
- Reference:T5
+ Variable:T5
  NumericConstant:0
  AssignmentOperator:=
 116 LET X9=0
- Reference:X9
+ Variable:X9
  NumericConstant:0
  AssignmentOperator:=
 117 LET N1=0
- Reference:N1
+ Variable:N1
  NumericConstant:0
  AssignmentOperator:=
 118 LET N2=0
- Reference:N2
+ Variable:N2
  NumericConstant:0
  AssignmentOperator:=
 119 LET E1=0
- Reference:E1
+ Variable:E1
  NumericConstant:0
  AssignmentOperator:=
 120 LET E2=0
- Reference:E2
+ Variable:E2
  NumericConstant:0
  AssignmentOperator:=
 121 REM INTRODUCTION 
@@ -97,7 +97,7 @@
  TextConstant:"DO YOU WANT THE INSTRUCTIONS (YES-TYPE 1, NO-TYPE 0)"
  CarriageControl:;
 123 INPUT Z9
- Reference:Z9
+ Variable:Z9
 124 PRINT 
  ITEMS
  CarriageControl:NL
@@ -105,7 +105,7 @@
  ITEMS
  CarriageControl:NL
 126 IF Z9<1 THEN 200
- Value:Z9
+ Variable:Z9
  NumericConstant:1
  BinaryOperator:<
 130 PRINT "THIS PROGRAM PLAYS THE STOCK MARKET.  YOU WILL BE GIVEN" 
@@ -178,35 +178,35 @@
  Remark:INITIAL STOCK VALUES 
 220 LET S(1)=100
  NumericConstant:1
- Reference:S
+ Variable:S
  NumericConstant:100
  AssignmentOperator:=
 230 LET S(2)=85 
  NumericConstant:2
- Reference:S
+ Variable:S
  NumericConstant:85
  AssignmentOperator:=
 240 LET S(3)=150
  NumericConstant:3
- Reference:S
+ Variable:S
  NumericConstant:150
  AssignmentOperator:=
 250 LET S(4)=140
  NumericConstant:4
- Reference:S
+ Variable:S
  NumericConstant:140
  AssignmentOperator:=
 260 LET S(5)=110
  NumericConstant:5
- Reference:S
+ Variable:S
  NumericConstant:110
  AssignmentOperator:=
 265 REM INITIAL T8 - # DAYS FOR FIRST TREND SLOPE (A)
  Remark:INITIAL T8 - # DAYS FOR FIRST TREND SLOPE (A)
 266 LET T8=INT(4.99*RND(X)+1) 
- Reference:T8
+ Variable:T8
  NumericConstant:4.99
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  NumericConstant:1
@@ -216,13 +216,13 @@
 267 REM RANDOMIZE SIGN OF FIRST TREND SLOPE (A)
  Remark:RANDOMIZE SIGN OF FIRST TREND SLOPE (A)
 268 IF RND(X)>.5 THEN 270 
- Value:X
+ Variable:X
  FunctionRnd
  NumericConstant:.5
  BinaryOperator:>
 269 LET A=-A
- Reference:A
- Value:A
+ Variable:A
+ Variable:A
  UnaryOperator:-
  AssignmentOperator:=
 270 REM RANDOMIZE INITIAL VALUES 
@@ -236,13 +236,13 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 300 LET P(I)=0
- Value:I
- Reference:P
+ Variable:I
+ Variable:P
  NumericConstant:0
  AssignmentOperator:=
 305 LET Z(I)=0
- Value:I
- Reference:Z
+ Variable:I
+ Variable:Z
  NumericConstant:0
  AssignmentOperator:=
 310 NEXT I
@@ -256,7 +256,7 @@
 333 REM INITIALIZE CASH ASSETS:C 
  Remark:INITIALIZE CASH ASSETS:C 
 335 LET C=10000 
- Reference:C
+ Variable:C
  NumericConstant:10000
  AssignmentOperator:=
 338 REM PRINT INITIAL PORTFOLIO
@@ -278,7 +278,7 @@
  TextConstant:"  IBM"
  CarriageControl:,
  NumericConstant:1
- Value:S
+ Variable:S
  CarriageControl:NL
 352 PRINT "RED CROSS OF AMERICA","  RCA",S(2) 
  ITEMS
@@ -287,7 +287,7 @@
  TextConstant:"  RCA"
  CarriageControl:,
  NumericConstant:2
- Value:S
+ Variable:S
  CarriageControl:NL
 354 PRINT "LICHTENSTEIN, BUMRAP & JOKE","  LBJ",S(3)
  ITEMS
@@ -296,7 +296,7 @@
  TextConstant:"  LBJ"
  CarriageControl:,
  NumericConstant:3
- Value:S
+ Variable:S
  CarriageControl:NL
 356 PRINT "AMERICAN BANKRUPT CO.","  ABC",S(4)
  ITEMS
@@ -305,7 +305,7 @@
  TextConstant:"  ABC"
  CarriageControl:,
  NumericConstant:4
- Value:S
+ Variable:S
  CarriageControl:NL
 358 PRINT "CENSURED BOOKS STORE","  CBS",S(5) 
  ITEMS
@@ -314,7 +314,7 @@
  TextConstant:"  CBS"
  CarriageControl:,
  NumericConstant:5
- Value:S
+ Variable:S
  CarriageControl:NL
 360 PRINT 
  ITEMS
@@ -322,15 +322,15 @@
 361 REM NYSE AVERAGE:Z5; TEMP. VALUE:Z4; NET CHANGE:Z6 
  Remark:NYSE AVERAGE:Z5; TEMP. VALUE:Z4; NET CHANGE:Z6 
 363 LET Z4=Z5 
- Reference:Z4
- Value:Z5
+ Variable:Z4
+ Variable:Z5
  AssignmentOperator:=
 364 LET Z5=0
- Reference:Z5
+ Variable:Z5
  NumericConstant:0
  AssignmentOperator:=
 365 LET T=0 
- Reference:T
+ Variable:T
  NumericConstant:0
  AssignmentOperator:=
 370 FOR I=1 TO 5
@@ -338,28 +338,28 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 375 LET Z5=Z5+S(I)
- Reference:Z5
- Value:Z5
- Value:I
- Value:S
+ Variable:Z5
+ Variable:Z5
+ Variable:I
+ Variable:S
  BinaryOperator:+
  AssignmentOperator:=
 380 LET T=T+S(I)*P(I) 
- Reference:T
- Value:T
- Value:I
- Value:S
- Value:I
- Value:P
+ Variable:T
+ Variable:T
+ Variable:I
+ Variable:S
+ Variable:I
+ Variable:P
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 390 NEXT I
  Variable:I
 391 LET Z5=INT(100*(Z5/5)+.5)/100 
- Reference:Z5
+ Variable:Z5
  NumericConstant:100
- Value:Z5
+ Variable:Z5
  NumericConstant:5
  BinaryOperator:/
  BinaryOperator:*
@@ -370,9 +370,9 @@
  BinaryOperator:/
  AssignmentOperator:=
 392 LET Z6=INT((Z5-Z4)*100+.5)/100
- Reference:Z6
- Value:Z5
- Value:Z4
+ Variable:Z6
+ Variable:Z5
+ Variable:Z4
  BinaryOperator:-
  NumericConstant:100
  BinaryOperator:*
@@ -385,20 +385,20 @@
 393 REM TOTAL ASSETS:D 
  Remark:TOTAL ASSETS:D 
 394 LET D=T+C 
- Reference:D
- Value:T
- Value:C
+ Variable:D
+ Variable:T
+ Variable:C
  BinaryOperator:+
  AssignmentOperator:=
 395 IF X9>0 THEN 398
- Value:X9
+ Variable:X9
  NumericConstant:0
  BinaryOperator:>
 396 PRINT "NEW YORK STOCK EXCHANGE AVERAGE: "Z5 
  ITEMS
  TextConstant:"NEW YORK STOCK EXCHANGE AVERAGE: "
  CarriageControl:
- Value:Z5
+ Variable:Z5
  CarriageControl:NL
 397 GOTO 399 
  LineNumber:399
@@ -406,19 +406,19 @@
  ITEMS
  TextConstant:"NEW YORK STOCK EXCHANGE AVERAGE: "
  CarriageControl:
- Value:Z5
+ Variable:Z5
  CarriageControl:
  TextConstant:"NET CHANGE"
  CarriageControl:
- Value:Z6
+ Variable:Z6
  CarriageControl:NL
 399 PRINT 
  ITEMS
  CarriageControl:NL
 400 LET T=INT(100*T+.5)/100 
- Reference:T
+ Variable:T
  NumericConstant:100
- Value:T
+ Variable:T
  BinaryOperator:*
  NumericConstant:.5
  BinaryOperator:+
@@ -430,12 +430,12 @@
  ITEMS
  TextConstant:"TOTAL STOCK ASSETS ARE   $"
  CarriageControl:;
- Value:T
+ Variable:T
  CarriageControl:NL
 403 LET C=INT(100*C+.5)/100 
- Reference:C
+ Variable:C
  NumericConstant:100
- Value:C
+ Variable:C
  BinaryOperator:*
  NumericConstant:.5
  BinaryOperator:+
@@ -447,12 +447,12 @@
  ITEMS
  TextConstant:"TOTAL CASH ASSETS ARE    $"
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:NL
 407 LET D=INT(100*D+.5)/100 
- Reference:D
+ Variable:D
  NumericConstant:100
- Value:D
+ Variable:D
  BinaryOperator:*
  NumericConstant:.5
  BinaryOperator:+
@@ -464,13 +464,13 @@
  ITEMS
  TextConstant:"TOTAL ASSETS ARE         $"
  CarriageControl:;
- Value:D
+ Variable:D
  CarriageControl:NL
 410 PRINT 
  ITEMS
  CarriageControl:NL
 411 IF X9=0 THEN 416
- Value:X9
+ Variable:X9
  NumericConstant:0
  BinaryOperator:=
 412 PRINT "DO YOU WISH TO CONTINUE (YES-TYPE 1, NO-TYPE 0)";
@@ -478,9 +478,9 @@
  TextConstant:"DO YOU WISH TO CONTINUE (YES-TYPE 1, NO-TYPE 0)"
  CarriageControl:;
 413 INPUT Q9
- Reference:Q9
+ Variable:Q9
 414 IF Q9<1 THEN 998
- Value:Q9
+ Variable:Q9
  NumericConstant:1
  BinaryOperator:<
 416 REM INPUT TRANSACTIONS 
@@ -495,48 +495,48 @@
  CarriageControl:;
 440 INPUT Z(1)
  NumericConstant:1
- Reference:Z
+ Variable:Z
 450 PRINT "RCA";
  ITEMS
  TextConstant:"RCA"
  CarriageControl:;
 460 INPUT Z(2)
  NumericConstant:2
- Reference:Z
+ Variable:Z
 470 PRINT "LBJ";
  ITEMS
  TextConstant:"LBJ"
  CarriageControl:;
 480 INPUT Z(3)
  NumericConstant:3
- Reference:Z
+ Variable:Z
 490 PRINT "ABC";
  ITEMS
  TextConstant:"ABC"
  CarriageControl:;
 500 INPUT Z(4)
  NumericConstant:4
- Reference:Z
+ Variable:Z
 510 PRINT "CBS";
  ITEMS
  TextConstant:"CBS"
  CarriageControl:;
 520 INPUT Z(5)
  NumericConstant:5
- Reference:Z
+ Variable:Z
 525 PRINT 
  ITEMS
  CarriageControl:NL
 530 REM TOTAL DAY'S PURCHASES IN $:P5
  Remark:TOTAL DAY'S PURCHASES IN $:P5
 540 LET P5=0
- Reference:P5
+ Variable:P5
  NumericConstant:0
  AssignmentOperator:=
 550 REM TOTAL DAY'S SALES IN $:S5
  Remark:TOTAL DAY'S SALES IN $:S5
 560 LET S5=0
- Reference:S5
+ Variable:S5
  NumericConstant:0
  AssignmentOperator:=
 570 FOR I=1 TO 5
@@ -544,47 +544,47 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 575 LET Z(I)=INT(Z(I)+.5) 
- Value:I
- Reference:Z
- Value:I
- Value:Z
+ Variable:I
+ Variable:Z
+ Variable:I
+ Variable:Z
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
  AssignmentOperator:=
 580 IF Z(I)<=0 THEN 610 
- Value:I
- Value:Z
+ Variable:I
+ Variable:Z
  NumericConstant:0
  BinaryOperator:<=
 590 LET P5=P5+Z(I)*S(I) 
- Reference:P5
- Value:P5
- Value:I
- Value:Z
- Value:I
- Value:S
+ Variable:P5
+ Variable:P5
+ Variable:I
+ Variable:Z
+ Variable:I
+ Variable:S
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 600 GOTO 620 
  LineNumber:620
 610 LET S5=S5-Z(I)*S(I) 
- Reference:S5
- Value:S5
- Value:I
- Value:Z
- Value:I
- Value:S
+ Variable:S5
+ Variable:S5
+ Variable:I
+ Variable:Z
+ Variable:I
+ Variable:S
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 612 IF -Z(I)<=P(I) THEN 620 
- Value:I
- Value:Z
+ Variable:I
+ Variable:Z
  UnaryOperator:-
- Value:I
- Value:P
+ Variable:I
+ Variable:P
  BinaryOperator:<=
 614 PRINT "YOU HAVE OVERSOLD A STOCK; TRY AGAIN." 
  ITEMS
@@ -597,17 +597,17 @@
 622 REM TOTAL VALUE OF TRANSACTIONS:T5 
  Remark:TOTAL VALUE OF TRANSACTIONS:T5 
 625 LET T5=P5+S5
- Reference:T5
- Value:P5
- Value:S5
+ Variable:T5
+ Variable:P5
+ Variable:S5
  BinaryOperator:+
  AssignmentOperator:=
 630 REM BROKERAGE FEE:B5 
  Remark:BROKERAGE FEE:B5 
 640 LET B5=INT(.01*T5*100+.5)/100 
- Reference:B5
+ Variable:B5
  NumericConstant:.01
- Value:T5
+ Variable:T5
  BinaryOperator:*
  NumericConstant:100
  BinaryOperator:*
@@ -622,23 +622,23 @@
 652 REM -BROKERAGE FEES+TOTAL SALES:C5 
  Remark:-BROKERAGE FEES+TOTAL SALES:C5 
 654 LET C5=C-P5-B5+S5 
- Reference:C5
- Value:C
- Value:P5
+ Variable:C5
+ Variable:C
+ Variable:P5
  BinaryOperator:-
- Value:B5
+ Variable:B5
  BinaryOperator:-
- Value:S5
+ Variable:S5
  BinaryOperator:+
  AssignmentOperator:=
 656 IF C5>=0 THEN 674 
- Value:C5
+ Variable:C5
  NumericConstant:0
  BinaryOperator:>=
 658 PRINT "YOU HAVE USED $"-C5" MORE THAN YOU HAVE." 
  ITEMS
  TextConstant:"YOU HAVE USED $"
- Value:C5
+ Variable:C5
  BinaryOperator:-
  CarriageControl:
  TextConstant:" MORE THAN YOU HAVE."
@@ -646,8 +646,8 @@
 660 GOTO 420
  LineNumber:420
 674 LET C=C5
- Reference:C
- Value:C5
+ Variable:C
+ Variable:C5
  AssignmentOperator:=
 675 REM CALCULATE NEW PORTFOLIO  
  Remark:CALCULATE NEW PORTFOLIO  
@@ -656,12 +656,12 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 690 LET P(I)=P(I)+Z(I)
- Value:I
- Reference:P
- Value:I
- Value:P
- Value:I
- Value:Z
+ Variable:I
+ Variable:P
+ Variable:I
+ Variable:P
+ Variable:I
+ Variable:Z
  BinaryOperator:+
  AssignmentOperator:=
 700 NEXT I
@@ -688,7 +688,7 @@
  ITEMS
  CarriageControl:NL
 759 IF X9<1 THEN 769
- Value:X9
+ Variable:X9
  NumericConstant:1
  BinaryOperator:<
 769 PRINT "STOCK","PRICE/SHARE","HOLDINGS", "VALUE", "NET PRICE CHANGE"
@@ -708,98 +708,98 @@
  TextConstant:"IBM"
  CarriageControl:,
  NumericConstant:1
- Value:S
+ Variable:S
  CarriageControl:,
  NumericConstant:1
- Value:P
+ Variable:P
  CarriageControl:,
  NumericConstant:1
- Value:S
+ Variable:S
  NumericConstant:1
- Value:P
+ Variable:P
  BinaryOperator:*
  CarriageControl:,
  NumericConstant:1
- Value:C
+ Variable:C
  CarriageControl:NL
 771 PRINT "RCA", S(2), P(2), S(2)*P(2), C(2)
  ITEMS
  TextConstant:"RCA"
  CarriageControl:,
  NumericConstant:2
- Value:S
+ Variable:S
  CarriageControl:,
  NumericConstant:2
- Value:P
+ Variable:P
  CarriageControl:,
  NumericConstant:2
- Value:S
+ Variable:S
  NumericConstant:2
- Value:P
+ Variable:P
  BinaryOperator:*
  CarriageControl:,
  NumericConstant:2
- Value:C
+ Variable:C
  CarriageControl:NL
 772 PRINT "LBJ", S(3), P(3), S(3)*P(3), C(3)
  ITEMS
  TextConstant:"LBJ"
  CarriageControl:,
  NumericConstant:3
- Value:S
+ Variable:S
  CarriageControl:,
  NumericConstant:3
- Value:P
+ Variable:P
  CarriageControl:,
  NumericConstant:3
- Value:S
+ Variable:S
  NumericConstant:3
- Value:P
+ Variable:P
  BinaryOperator:*
  CarriageControl:,
  NumericConstant:3
- Value:C
+ Variable:C
  CarriageControl:NL
 773 PRINT "ABC", S(4), P(4), S(4)*P(4), C(4)
  ITEMS
  TextConstant:"ABC"
  CarriageControl:,
  NumericConstant:4
- Value:S
+ Variable:S
  CarriageControl:,
  NumericConstant:4
- Value:P
+ Variable:P
  CarriageControl:,
  NumericConstant:4
- Value:S
+ Variable:S
  NumericConstant:4
- Value:P
+ Variable:P
  BinaryOperator:*
  CarriageControl:,
  NumericConstant:4
- Value:C
+ Variable:C
  CarriageControl:NL
 774 PRINT "CBS", S(5), P(5), S(5)*P(5), C(5)
  ITEMS
  TextConstant:"CBS"
  CarriageControl:,
  NumericConstant:5
- Value:S
+ Variable:S
  CarriageControl:,
  NumericConstant:5
- Value:P
+ Variable:P
  CarriageControl:,
  NumericConstant:5
- Value:S
+ Variable:S
  NumericConstant:5
- Value:P
+ Variable:P
  BinaryOperator:*
  CarriageControl:,
  NumericConstant:5
- Value:C
+ Variable:C
  CarriageControl:NL
 775 LET X9=1
- Reference:X9
+ Variable:X9
  NumericConstant:1
  AssignmentOperator:=
 780 PRINT 
@@ -825,13 +825,13 @@
 840 REM IF N1 DAYS HAVE PASSED, PICK AN I1, SET E1, DETERMINE NEW N1 
  Remark:IF N1 DAYS HAVE PASSED, PICK AN I1, SET E1, DETERMINE NEW N1 
 841 IF N1>0 THEN 850
- Value:N1
+ Variable:N1
  NumericConstant:0
  BinaryOperator:>
 845 LET I1=INT(4.99*RND(X)+1) 
- Reference:I1
+ Variable:I1
  NumericConstant:4.99
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  NumericConstant:1
@@ -839,9 +839,9 @@
  FunctionInt
  AssignmentOperator:=
 846 LET N1=INT(4.99*RND(X)+1) 
- Reference:N1
+ Variable:N1
  NumericConstant:4.99
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  NumericConstant:1
@@ -849,19 +849,19 @@
  FunctionInt
  AssignmentOperator:=
 847 LET E1=1
- Reference:E1
+ Variable:E1
  NumericConstant:1
  AssignmentOperator:=
 850 REM IF N2 DAYS HAVE PASSED, PICK AN I2, SET E2, DETERMINE NEW N2 
  Remark:IF N2 DAYS HAVE PASSED, PICK AN I2, SET E2, DETERMINE NEW N2 
 851 IF N2>0 THEN 860
- Value:N2
+ Variable:N2
  NumericConstant:0
  BinaryOperator:>
 855 LET I2=INT(4.99*RND(X)+1) 
- Reference:I2
+ Variable:I2
  NumericConstant:4.99
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  NumericConstant:1
@@ -869,9 +869,9 @@
  FunctionInt
  AssignmentOperator:=
 856 LET N2=INT(4.99*RND(X)+1) 
- Reference:N2
+ Variable:N2
  NumericConstant:4.99
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  NumericConstant:1
@@ -879,20 +879,20 @@
  FunctionInt
  AssignmentOperator:=
 857 LET E2=1
- Reference:E2
+ Variable:E2
  NumericConstant:1
  AssignmentOperator:=
 860 REM DEDUCT ONE DAY FROM N1 AND N2
  Remark:DEDUCT ONE DAY FROM N1 AND N2
 861 LET N1=N1-1 
- Reference:N1
- Value:N1
+ Variable:N1
+ Variable:N1
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 862 LET N2=N2-1 
- Reference:N2
- Value:N2
+ Variable:N2
+ Variable:N2
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -903,60 +903,60 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 910 LET X1=RND(X) 
- Reference:X1
- Value:X
+ Variable:X1
+ Variable:X
  FunctionRnd
  AssignmentOperator:=
 915 IF X1>.25 THEN 920
- Value:X1
+ Variable:X1
  NumericConstant:.25
  BinaryOperator:>
 916 LET X1=.25
- Reference:X1
+ Variable:X1
  NumericConstant:.25
  AssignmentOperator:=
 917 GOTO 935 
  LineNumber:935
 920 IF X1>.5 THEN 925
- Value:X1
+ Variable:X1
  NumericConstant:.5
  BinaryOperator:>
 921 LET X1=.5
- Reference:X1
+ Variable:X1
  NumericConstant:.5
  AssignmentOperator:=
 922 GOTO 935 
  LineNumber:935
 925 IF X1>.75 THEN 930
- Value:X1
+ Variable:X1
  NumericConstant:.75
  BinaryOperator:>
 926 LET X1=.75  
- Reference:X1
+ Variable:X1
  NumericConstant:.75
  AssignmentOperator:=
 927 GOTO 935 
  LineNumber:935
 930 LET X1=0.0
- Reference:X1
+ Variable:X1
  NumericConstant:0.0
  AssignmentOperator:=
 931 REM BIG CHANGE CONSTANT:W3  (SET TO ZERO INITIALLY)
  Remark:BIG CHANGE CONSTANT:W3  (SET TO ZERO INITIALLY)
 935 LET W3=0
- Reference:W3
+ Variable:W3
  NumericConstant:0
  AssignmentOperator:=
 936 IF E1<1 THEN 945
- Value:E1
+ Variable:E1
  NumericConstant:1
  BinaryOperator:<
 937 IF INT(I1+.5)<>INT(I+.5) THEN 945 
- Value:I1
+ Variable:I1
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
- Value:I
+ Variable:I
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
@@ -964,23 +964,23 @@
 938 REM ADD 10 PTS. TO THIS STOCK;  RESET E1 
  Remark:ADD 10 PTS. TO THIS STOCK;  RESET E1 
 939 LET W3=10 
- Reference:W3
+ Variable:W3
  NumericConstant:10
  AssignmentOperator:=
 943 LET E1=0
- Reference:E1
+ Variable:E1
  NumericConstant:0
  AssignmentOperator:=
 945 IF E2<1 THEN 955
- Value:E2
+ Variable:E2
  NumericConstant:1
  BinaryOperator:<
 947 IF INT(I2+.5)<>INT(I+.5) THEN 955 
- Value:I2
+ Variable:I2
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
- Value:I
+ Variable:I
  NumericConstant:.5
  BinaryOperator:+
  FunctionInt
@@ -988,30 +988,30 @@
 948 REM SUBTRACT 10 PTS. FROM THIS STOCK;  RESET E2
  Remark:SUBTRACT 10 PTS. FROM THIS STOCK;  RESET E2
 949 LET W3=W3-10
- Reference:W3
- Value:W3
+ Variable:W3
+ Variable:W3
  NumericConstant:10
  BinaryOperator:-
  AssignmentOperator:=
 953 LET E2=0
- Reference:E2
+ Variable:E2
  NumericConstant:0
  AssignmentOperator:=
 954 REM C(I) IS CHANGE IN STOCK VALUE
  Remark:C(I) IS CHANGE IN STOCK VALUE
 955 LET C(I)=INT(A*S(I))+X1+INT(3-6*RND(X)+.5)+W3 
- Value:I
- Reference:C
- Value:A
- Value:I
- Value:S
+ Variable:I
+ Variable:C
+ Variable:A
+ Variable:I
+ Variable:S
  BinaryOperator:*
  FunctionInt
- Value:X1
+ Variable:X1
  BinaryOperator:+
  NumericConstant:3
  NumericConstant:6
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  BinaryOperator:-
@@ -1019,15 +1019,15 @@
  BinaryOperator:+
  FunctionInt
  BinaryOperator:+
- Value:W3
+ Variable:W3
  BinaryOperator:+
  AssignmentOperator:=
 956 LET C(I)=INT(100*C(I)+.5)/100 
- Value:I
- Reference:C
+ Variable:I
+ Variable:C
  NumericConstant:100
- Value:I
- Value:C
+ Variable:I
+ Variable:C
  BinaryOperator:*
  NumericConstant:.5
  BinaryOperator:+
@@ -1036,37 +1036,37 @@
  BinaryOperator:/
  AssignmentOperator:=
 957 LET S(I)=S(I)+C(I)
- Value:I
- Reference:S
- Value:I
- Value:S
- Value:I
- Value:C
+ Variable:I
+ Variable:S
+ Variable:I
+ Variable:S
+ Variable:I
+ Variable:C
  BinaryOperator:+
  AssignmentOperator:=
 960 IF S(I)>0 THEN 967
- Value:I
- Value:S
+ Variable:I
+ Variable:S
  NumericConstant:0
  BinaryOperator:>
 964 LET C(I)=0
- Value:I
- Reference:C
+ Variable:I
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 965 LET S(I)=0
- Value:I
- Reference:S
+ Variable:I
+ Variable:S
  NumericConstant:0
  AssignmentOperator:=
 966 GOTO 970 
  LineNumber:970
 967 LET S(I)=INT(100*S(I)+.5)/100 
- Value:I
- Reference:S
+ Variable:I
+ Variable:S
  NumericConstant:100
- Value:I
- Value:S
+ Variable:I
+ Variable:S
  BinaryOperator:*
  NumericConstant:.5
  BinaryOperator:+
@@ -1079,13 +1079,13 @@
 972 REM AFTER T8 DAYS RANDOMLY CHANGE TREND SIGN AND SLOPE 
  Remark:AFTER T8 DAYS RANDOMLY CHANGE TREND SIGN AND SLOPE 
 973 LET T8=T8-1 
- Reference:T8
- Value:T8
+ Variable:T8
+ Variable:T8
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 974 IF T8<1 THEN 985
- Value:T8
+ Variable:T8
  NumericConstant:1
  BinaryOperator:<
 980 RETURN
@@ -1095,9 +1095,9 @@
 986 REM OF TREND (T8)
  Remark:OF TREND (T8)
 990 LET T8=INT(4.99*RND(X)+1) 
- Reference:T8
+ Variable:T8
  NumericConstant:4.99
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  NumericConstant:1
@@ -1105,8 +1105,8 @@
  FunctionInt
  AssignmentOperator:=
 992 LET A=INT((RND(X)/10)*100+.5)/100 
- Reference:A
- Value:X
+ Variable:A
+ Variable:X
  FunctionRnd
  NumericConstant:10
  BinaryOperator:/
@@ -1119,17 +1119,17 @@
  BinaryOperator:/
  AssignmentOperator:=
 993 LET S4=RND(X) 
- Reference:S4
- Value:X
+ Variable:S4
+ Variable:X
  FunctionRnd
  AssignmentOperator:=
 994 IF S4<=.5 THEN 997
- Value:S4
+ Variable:S4
  NumericConstant:.5
  BinaryOperator:<=
 995 LET A=-A
- Reference:A
- Value:A
+ Variable:A
+ Variable:A
  UnaryOperator:-
  AssignmentOperator:=
 997 RETURN

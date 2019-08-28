@@ -36,7 +36,7 @@
  TextConstant:"TO PULL THE ARM, PUNCH THE RETURN KEY AFTER MAKING YOUR BET."
  CarriageControl:NL
 150 LET P=0
- Reference:P
+ Variable:P
  NumericConstant:0
  AssignmentOperator:=
 160 PRINT: PRINT"YOUR BET";
@@ -46,18 +46,18 @@
  TextConstant:"YOUR BET"
  CarriageControl:;
 170 INPUT M
- Reference:M
+ Variable:M
 180 IF M>100 THEN 860
- Value:M
+ Variable:M
  NumericConstant:100
  BinaryOperator:>
 190 IF M<1 THEN 880
- Value:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:<
 200 M=INT(M)
- Reference:M
- Value:M
+ Variable:M
+ Variable:M
  FunctionInt
  AssignmentOperator:=
 210 GOSUB 1270 
@@ -66,7 +66,7 @@
  ITEMS
  CarriageControl:NL
 230 LET X=INT(6*RND(1)+1)
- Reference:X
+ Variable:X
  NumericConstant:6
  NumericConstant:1
  FunctionRnd
@@ -76,7 +76,7 @@
  FunctionInt
  AssignmentOperator:=
 240 LET Y=INT(6*RND(1)+1)
- Reference:Y
+ Variable:Y
  NumericConstant:6
  NumericConstant:1
  FunctionRnd
@@ -86,7 +86,7 @@
  FunctionInt
  AssignmentOperator:=
 250 LET Z=INT(6*RND(1)+1)
- Reference:Z
+ Variable:Z
  NumericConstant:6
  NumericConstant:1
  FunctionRnd
@@ -99,88 +99,88 @@
  ITEMS
  CarriageControl:NL
 270 IF X=1 THEN 910
- Value:X
+ Variable:X
  NumericConstant:1
  BinaryOperator:=
 280 IF X=2 THEN 930
- Value:X
+ Variable:X
  NumericConstant:2
  BinaryOperator:=
 290 IF X=3 THEN 950
- Value:X
+ Variable:X
  NumericConstant:3
  BinaryOperator:=
 300 IF X=4 THEN 970
- Value:X
+ Variable:X
  NumericConstant:4
  BinaryOperator:=
 310 IF X=5 THEN 990
- Value:X
+ Variable:X
  NumericConstant:5
  BinaryOperator:=
 320 IF X=6 THEN 1010
- Value:X
+ Variable:X
  NumericConstant:6
  BinaryOperator:=
 330 IF Y=1 THEN 1030
- Value:Y
+ Variable:Y
  NumericConstant:1
  BinaryOperator:=
 340 IF Y=2 THEN 1050
- Value:Y
+ Variable:Y
  NumericConstant:2
  BinaryOperator:=
 350 IF Y=3 THEN 1070
- Value:Y
+ Variable:Y
  NumericConstant:3
  BinaryOperator:=
 360 IF Y=4 THEN 1090
- Value:Y
+ Variable:Y
  NumericConstant:4
  BinaryOperator:=
 370 IF Y=5 THEN 1110
- Value:Y
+ Variable:Y
  NumericConstant:5
  BinaryOperator:=
 380 IF Y=6 THEN 1130
- Value:Y
+ Variable:Y
  NumericConstant:6
  BinaryOperator:=
 390 IF Z=1 THEN 1150
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 400 IF Z=2 THEN 1170
- Value:Z
+ Variable:Z
  NumericConstant:2
  BinaryOperator:=
 410 IF Z=3 THEN 1190
- Value:Z
+ Variable:Z
  NumericConstant:3
  BinaryOperator:=
 420 IF Z=4 THEN 1210
- Value:Z
+ Variable:Z
  NumericConstant:4
  BinaryOperator:=
 430 IF Z=5 THEN 1230
- Value:Z
+ Variable:Z
  NumericConstant:5
  BinaryOperator:=
 440 IF Z=6 THEN 1250
- Value:Z
+ Variable:Z
  NumericConstant:6
  BinaryOperator:=
 450 IF X=Y THEN 600
- Value:X
- Value:Y
+ Variable:X
+ Variable:Y
  BinaryOperator:=
 460 IF X=Z THEN 630
- Value:X
- Value:Z
+ Variable:X
+ Variable:Z
  BinaryOperator:=
 470 IF Y=Z THEN 650
- Value:Y
- Value:Z
+ Variable:Y
+ Variable:Z
  BinaryOperator:=
 480 PRINT
  ITEMS
@@ -190,62 +190,62 @@
  TextConstant:"YOU LOST."
  CarriageControl:NL
 500 LET P=P-M
- Reference:P
- Value:P
- Value:M
+ Variable:P
+ Variable:P
+ Variable:M
  BinaryOperator:-
  AssignmentOperator:=
 510 PRINT "YOUR STANDINGS ARE $"P
  ITEMS
  TextConstant:"YOUR STANDINGS ARE $"
  CarriageControl:
- Value:P
+ Variable:P
  CarriageControl:NL
 520 PRINT "AGAIN";
  ITEMS
  TextConstant:"AGAIN"
  CarriageControl:;
 530 INPUT A$
- Reference:A$
+ Variable:A$
 540 IF A$="Y" THEN 160
- Value:A$
+ Variable:A$
  TextConstant:"Y"
  BinaryOperator:=
 550 PRINT
  ITEMS
  CarriageControl:NL
 560 IF P<0 THEN 670
- Value:P
+ Variable:P
  NumericConstant:0
  BinaryOperator:<
 570 IF P=0 THEN 690
- Value:P
+ Variable:P
  NumericConstant:0
  BinaryOperator:=
 580 IF P>0 THEN 710
- Value:P
+ Variable:P
  NumericConstant:0
  BinaryOperator:>
 590 GOTO 1350
  LineNumber:1350
 600 IF Y=Z THEN 730
- Value:Y
- Value:Z
+ Variable:Y
+ Variable:Z
  BinaryOperator:=
 610 IF Y=1 THEN 820
- Value:Y
+ Variable:Y
  NumericConstant:1
  BinaryOperator:=
 620 GOTO 1341
  LineNumber:1341
 630 IF Z=1 THEN 820
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 640 GOTO 470
  LineNumber:470
 650 IF Z=1 THEN 820
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 660 GOTO 1341
@@ -269,7 +269,7 @@
 720 GOTO 1350
  LineNumber:1350
 730 IF Z=1 THEN 780
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 740 PRINT: PRINT"**TOP DOLLAR**"
@@ -283,13 +283,13 @@
  TextConstant:"YOU WON!"
  CarriageControl:NL
 760 P=(((10*M)+M)+P)
- Reference:P
+ Variable:P
  NumericConstant:10
- Value:M
+ Variable:M
  BinaryOperator:*
- Value:M
+ Variable:M
  BinaryOperator:+
- Value:P
+ Variable:P
  BinaryOperator:+
  AssignmentOperator:=
 770 GOTO 510
@@ -305,13 +305,13 @@
  TextConstant:"YOU WON!"
  CarriageControl:NL
 800 P=(((100*M)+M)+P)
- Reference:P
+ Variable:P
  NumericConstant:100
- Value:M
+ Variable:M
  BinaryOperator:*
- Value:M
+ Variable:M
  BinaryOperator:+
- Value:P
+ Variable:P
  BinaryOperator:+
  AssignmentOperator:=
 810 GOTO 510
@@ -327,13 +327,13 @@
  TextConstant:"YOU WON!"
  CarriageControl:NL
 840 P=(((5*M)+M)+P)
- Reference:P
+ Variable:P
  NumericConstant:5
- Value:M
+ Variable:M
  BinaryOperator:*
- Value:M
+ Variable:M
  BinaryOperator:+
- Value:P
+ Variable:P
  BinaryOperator:+
  AssignmentOperator:=
 850 GOTO 510
@@ -509,13 +509,13 @@
  TextConstant:"YOU WON!"
  CarriageControl:NL
 1343 P=(((2*M)+M)+P)
- Reference:P
+ Variable:P
  NumericConstant:2
- Value:M
+ Variable:M
  BinaryOperator:*
- Value:M
+ Variable:M
  BinaryOperator:+
- Value:P
+ Variable:P
  BinaryOperator:+
  AssignmentOperator:=
 1344 GOTO 510

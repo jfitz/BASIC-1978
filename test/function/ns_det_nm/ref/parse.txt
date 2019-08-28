@@ -3,7 +3,7 @@
 20 OPTION BASE 0
  NumericConstant:0
 22 LET B = 0
- Reference:B
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
 50 DATA 1, 1
@@ -43,7 +43,7 @@
 120 OPTION BASE 1
  NumericConstant:1
 122 LET B = 1
- Reference:B
+ Variable:B
  NumericConstant:1
  AssignmentOperator:=
 150 DATA 2, 2
@@ -83,24 +83,24 @@
 199 STOP
  
 400 READ R,C
- Reference:R
- Reference:C
+ Variable:R
+ Variable:C
 405 DIM M1(R,C)
- Value:R
- Value:C
+ Variable:R
+ Variable:C
  Declaration:M1
 410 FOR I = B TO R
  control: Variable:I
- start:   ["Value:B"]
- end:     ["Value:R"]
+ start:   ["Variable:B"]
+ end:     ["Variable:R"]
 420 FOR J = B TO C
  control: Variable:J
- start:   ["Value:B"]
- end:     ["Value:C"]
+ start:   ["Variable:B"]
+ end:     ["Variable:C"]
 430 READ M1(I,J)
- Value:I
- Value:J
- Reference:M1
+ Variable:I
+ Variable:J
+ Variable:M1
 440 NEXT J
  Variable:J
 450 NEXT I
@@ -111,18 +111,18 @@
  CarriageControl:NL
 470 MAT PRINT M1;
  ITEMS
- Value:M1
+ Variable:M1
  CarriageControl:;
 480 LET D = DET(M1)
- Reference:D
- Value:M1
+ Variable:D
+ Variable:M1
  FunctionDet
  AssignmentOperator:=
 490 PRINT "DETERMINANT:" D
  ITEMS
  TextConstant:"DETERMINANT:"
  CarriageControl:
- Value:D
+ Variable:D
  CarriageControl:NL
 495 PRINT
  ITEMS

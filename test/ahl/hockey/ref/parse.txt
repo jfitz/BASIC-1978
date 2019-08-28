@@ -22,7 +22,7 @@
 10 REM ROBERT PUOPOLO ALG. 1 140 MCCOWAN 6/7/73 HOCKEY
  Remark:ROBERT PUOPOLO ALG. 1 140 MCCOWAN 6/7/73 HOCKEY
 30 LET X=1
- Reference:X
+ Variable:X
  NumericConstant:1
  AssignmentOperator:=
 40 PRINT:PRINT:PRINT
@@ -36,16 +36,16 @@
  ITEMS
  TextConstant:"WOULD YOU LIKE THE INSTRUCTIONS"
  CarriageControl:;
- Reference:C$
+ Variable:C$
 55 PRINT
  ITEMS
  CarriageControl:NL
 60 IF C$="NO" THEN 90
- Value:C$
+ Variable:C$
  TextConstant:"NO"
  BinaryOperator:=
 65 IF C$="YES" THEN 80
- Value:C$
+ Variable:C$
  TextConstant:"YES"
  BinaryOperator:=
 70 PRINT "ANSWER YES OR NO!!":GOTO 50 
@@ -75,9 +75,9 @@
  TextConstant:"ENTER THE TWO TEAMS"
  CarriageControl:;
  NumericConstant:7
- Reference:A$
+ Variable:A$
  NumericConstant:7
- Reference:B$
+ Variable:B$
 105 PRINT
  ITEMS
  CarriageControl:NL
@@ -85,12 +85,12 @@
  ITEMS
  TextConstant:"ENTER THE NUMBER OF MINUTES IN A GAME"
  CarriageControl:;
- Reference:T6
+ Variable:T6
 115 PRINT
  ITEMS
  CarriageControl:NL
 120 IF T6<1 THEN 110:PRINT 
- Value:T6
+ Variable:T6
  NumericConstant:1
  BinaryOperator:<
  ITEMS
@@ -100,7 +100,7 @@
  TextConstant:"WOULD THE "
  CarriageControl:
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" COACH ENTER HIS TEAM"
  CarriageControl:NL
@@ -114,10 +114,10 @@
  ITEMS
  TextConstant:"PLAYER"
  CarriageControl:
- Value:I
+ Variable:I
  CarriageControl:;
- Value:I
- Reference:A$
+ Variable:I
+ Variable:A$
  Variable:I
  ITEMS
  CarriageControl:NL
@@ -126,7 +126,7 @@
  TextConstant:"WOULD THE "
  CarriageControl:
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" COACH DO THE SAME"
  CarriageControl:NL
@@ -140,10 +140,10 @@
  ITEMS
  TextConstant:"PLAYER"
  CarriageControl:
- Value:T
+ Variable:T
  CarriageControl:;
- Value:T
- Reference:B$
+ Variable:T
+ Variable:B$
  Variable:T
  ITEMS
  CarriageControl:NL
@@ -151,7 +151,7 @@
  ITEMS
  TextConstant:"INPUT THE REFEREE FOR THIS GAME"
  CarriageControl:;
- Reference:R$
+ Variable:R$
 180 PRINT:PRINT TAB(10);A$(7) " STARTING LINEUP" 
  ITEMS
  CarriageControl:NL
@@ -160,7 +160,7 @@
  FunctionTab
  CarriageControl:;
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" STARTING LINEUP"
  CarriageControl:NL
@@ -169,8 +169,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  ITEMS
- Value:T
- Value:A$
+ Variable:T
+ Variable:A$
  CarriageControl:NL
  Variable:T
 200 PRINT:PRINT TAB(10);B$(7)" STARTING LINEUP"
@@ -181,7 +181,7 @@
  FunctionTab
  CarriageControl:;
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" STARTING LINEUP"
  CarriageControl:NL
@@ -190,8 +190,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  ITEMS
- Value:T
- Value:B$
+ Variable:T
+ Variable:B$
  CarriageControl:NL
  Variable:T
  ITEMS
@@ -202,23 +202,23 @@
  CarriageControl:NL
 230 PRINT R$ " WILL DROP THE PUCK BETWEEN " A$(2) " AND " B$(2)
  ITEMS
- Value:R$
+ Variable:R$
  CarriageControl:
  TextConstant:" WILL DROP THE PUCK BETWEEN "
  CarriageControl:
  NumericConstant:2
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" AND "
  CarriageControl:
  NumericConstant:2
- Value:B$
+ Variable:B$
  CarriageControl:NL
 240 FOR L=1 TO T6:IF L=1 THEN 260
  control: Variable:L
  start:   ["NumericConstant:1"]
- end:     ["Value:T6"]
- Value:L
+ end:     ["Variable:T6"]
+ Variable:L
  NumericConstant:1
  BinaryOperator:=
 250 PRINT "AND WE'RE READY FOR THE FACE-OFF" 
@@ -226,22 +226,22 @@
  TextConstant:"AND WE'RE READY FOR THE FACE-OFF"
  CarriageControl:NL
 260 C=INT(2*RND(X))+1:ON C GOTO 270,280
- Reference:C
+ Variable:C
  NumericConstant:2
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  FunctionInt
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:C
+ Variable:C
  LineNumber:270
  LineNumber:280
 270 PRINT A$(7) " HAS CONTROL OF THE PUCK":GOTO 290
  ITEMS
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" HAS CONTROL OF THE PUCK"
  CarriageControl:NL
@@ -249,7 +249,7 @@
 280 PRINT B$(7) " HAS CONTROL." 
  ITEMS
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" HAS CONTROL."
  CarriageControl:NL
@@ -257,32 +257,32 @@
  ITEMS
  TextConstant:"PASS"
  CarriageControl:;
- Reference:P
+ Variable:P
  control: Variable:N
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
- Value:N
- Reference:H
+ Variable:N
+ Variable:H
  NumericConstant:0
  AssignmentOperator:=
  Variable:N
 300 IF P<0 THEN 290
- Value:P
+ Variable:P
  NumericConstant:0
  BinaryOperator:<
 305 IF P>3 THEN 290
- Value:P
+ Variable:P
  NumericConstant:3
  BinaryOperator:>
 310 FOR J=1 TO (P+2) 
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:P", "NumericConstant:2", "BinaryOperator:+"]
+ end:     ["Variable:P", "NumericConstant:2", "BinaryOperator:+"]
 320 H(J)=INT(5*RND(X))+1 
- Value:J
- Reference:H
+ Variable:J
+ Variable:H
  NumericConstant:5
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  FunctionInt
@@ -291,82 +291,82 @@
  AssignmentOperator:=
 330 NEXT J:IF H(J-1)=H(J-2) THEN 310
  Variable:J
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:J
+ Variable:H
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
+ Variable:H
  BinaryOperator:=
 331 IF P+2<3 THEN 350
- Value:P
+ Variable:P
  NumericConstant:2
  BinaryOperator:+
  NumericConstant:3
  BinaryOperator:<
 335 IF H(J-1)=H(J-3) THEN 310
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:J
+ Variable:H
+ Variable:J
  NumericConstant:3
  BinaryOperator:-
- Value:H
+ Variable:H
  BinaryOperator:=
 340 IF H(J-2)=H(J-3) THEN 310
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
- Value:J
+ Variable:H
+ Variable:J
  NumericConstant:3
  BinaryOperator:-
- Value:H
+ Variable:H
  BinaryOperator:=
 350 IF P=0 THEN 360
- Value:P
+ Variable:P
  NumericConstant:0
  BinaryOperator:=
 355 GOTO 490
  LineNumber:490
 360 INPUT "SHOT";S:IF S<1 THEN 360
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:1
  BinaryOperator:<
 365 IF S>4 THEN 360
- Value:S
+ Variable:S
  NumericConstant:4
  BinaryOperator:>
 370 ON C GOTO 380,480
- Value:C
+ Variable:C
  LineNumber:380
  LineNumber:480
 380 PRINT A$(H(J-1));:G=H(J-1):G1=0:G2=0 
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:;
- Reference:G
- Value:J
+ Variable:G
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G1
+ Variable:G1
  NumericConstant:0
  AssignmentOperator:=
- Reference:G2
+ Variable:G2
  NumericConstant:0
  AssignmentOperator:=
 390 ON S GOTO 400,420,440,460
- Value:S
+ Variable:S
  LineNumber:400
  LineNumber:420
  LineNumber:440
@@ -376,7 +376,7 @@
  TextConstant:" LET'S A BOOMER GO FROM THE RED LINE!!"
  CarriageControl:NL
 410 Z=10:GOTO 890
- Reference:Z
+ Variable:Z
  NumericConstant:10
  AssignmentOperator:=
  LineNumber:890
@@ -389,7 +389,7 @@
  TextConstant:" BACKHANDS ONE IN ON THE GOALTENDER"
  CarriageControl:NL
 450 Z=25:GOTO 890
- Reference:Z
+ Variable:Z
  NumericConstant:25
  AssignmentOperator:=
  LineNumber:890
@@ -398,142 +398,142 @@
  TextConstant:" SNAPS A LONG FLIP SHOT"
  CarriageControl:NL
 470 Z=17:GOTO 890
- Reference:Z
+ Variable:Z
  NumericConstant:17
  AssignmentOperator:=
  LineNumber:890
 480 PRINT B$(H(J-1));:G1=0:G2=0:G=H(J-1):GOTO 390
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:;
- Reference:G1
+ Variable:G1
  NumericConstant:0
  AssignmentOperator:=
- Reference:G2
+ Variable:G2
  NumericConstant:0
  AssignmentOperator:=
- Reference:G
- Value:J
+ Variable:G
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
  LineNumber:390
 490 ON C GOTO 500,640
- Value:C
+ Variable:C
  LineNumber:500
  LineNumber:640
 500 ON P GOTO 510,540,570
- Value:P
+ Variable:P
  LineNumber:510
  LineNumber:540
  LineNumber:570
 510 PRINT A$(H(J-2)) " LEADS " A$(H(J-1)) " WITH A PERFECT PASS." 
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:
  TextConstant:" LEADS "
  CarriageControl:
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:
  TextConstant:" WITH A PERFECT PASS."
  CarriageControl:NL
 520 PRINT A$(H(J-1)) " CUTTING IN!!!"
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:
  TextConstant:" CUTTING IN!!!"
  CarriageControl:NL
 530 G=H(J-1):G1=H(J-2):G2=0:Z1=3:GOTO 770
- Reference:G
- Value:J
+ Variable:G
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G1
- Value:J
+ Variable:G1
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G2
+ Variable:G2
  NumericConstant:0
  AssignmentOperator:=
- Reference:Z1
+ Variable:Z1
  NumericConstant:3
  AssignmentOperator:=
  LineNumber:770
 540 PRINT A$(H(J-2)) " GIVES TO A STREAKING " A$(H(J-1))
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:
  TextConstant:" GIVES TO A STREAKING "
  CarriageControl:
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:NL
 550 PRINT A$(H(J-3)) " COMES DOWN ON " B$(5) " AND " B$(4)
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:3
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:
  TextConstant:" COMES DOWN ON "
  CarriageControl:
  NumericConstant:5
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" AND "
  CarriageControl:
  NumericConstant:4
- Value:B$
+ Variable:B$
  CarriageControl:NL
 560 G=H(J-3):G1=H(J-1):G2=H(J-2):Z1=2:GOTO 770
- Reference:G
- Value:J
+ Variable:G
+ Variable:J
  NumericConstant:3
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G1
- Value:J
+ Variable:G1
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G2
- Value:J
+ Variable:G2
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:Z1
+ Variable:Z1
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:770
@@ -543,45 +543,45 @@
  CarriageControl:NL
 580 PRINT A$(H(J-3)) " LEADS " A$(H(J-2))
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:3
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:
  TextConstant:" LEADS "
  CarriageControl:
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:NL
 590 PRINT A$(H(J-2)) " IS WHEEELING THROUGH CENTER."
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:
  TextConstant:" IS WHEEELING THROUGH CENTER."
  CarriageControl:NL
 600 PRINT A$(H(J-2)) " GIVES AND GOES WITH " A$(H(J-1))
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:
  TextConstant:" GIVES AND GOES WITH "
  CarriageControl:
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:NL
 610 PRINT "PRETTY PASSING!"
  ITEMS
@@ -589,83 +589,83 @@
  CarriageControl:NL
 620 PRINT A$(H(J-1)) " DROPS IT TO " A$(H(J-4))
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:
  TextConstant:" DROPS IT TO "
  CarriageControl:
- Value:J
+ Variable:J
  NumericConstant:4
  BinaryOperator:-
- Value:H
- Value:A$
+ Variable:H
+ Variable:A$
  CarriageControl:NL
 630 G=H(J-4):G1=J(J-1):G2=H(J-2):Z1=1:GOTO 770
- Reference:G
- Value:J
+ Variable:G
+ Variable:J
  NumericConstant:4
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G1
- Value:J
+ Variable:G1
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:J
+ Variable:J
  AssignmentOperator:=
- Reference:G2
- Value:J
+ Variable:G2
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:Z1
+ Variable:Z1
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:770
 640 ON P GOTO 650,670,720
- Value:P
+ Variable:P
  LineNumber:650
  LineNumber:670
  LineNumber:720
 650 PRINT B$(H(J-1)) " HITS " B$(H(J-2)) " FLYING DOWN THE LEFT SIDE" 
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:
  TextConstant:" HITS "
  CarriageControl:
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:
  TextConstant:" FLYING DOWN THE LEFT SIDE"
  CarriageControl:NL
 660 G=H(J-2):G1=H(J-1):G2=0:Z1=3:GOTO 770
- Reference:G
- Value:J
+ Variable:G
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G1
- Value:J
+ Variable:G1
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G2
+ Variable:G2
  NumericConstant:0
  AssignmentOperator:=
- Reference:Z1
+ Variable:Z1
  NumericConstant:3
  AssignmentOperator:=
  LineNumber:770
@@ -678,67 +678,67 @@
  TextConstant:"ONLY "
  CarriageControl:
  NumericConstant:4
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" AND "
  CarriageControl:
  NumericConstant:5
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" ARE BACK."
  CarriageControl:NL
 690 PRINT B$(H(J-2)) " GIVES OFF TO " B$(H(J-1))
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:
  TextConstant:" GIVES OFF TO "
  CarriageControl:
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:NL
 700 PRINT B$(H(J-1)) " DROPS TO " B$(H(J-3))
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:
  TextConstant:" DROPS TO "
  CarriageControl:
- Value:J
+ Variable:J
  NumericConstant:3
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:NL
 710 G=H(J-3):G1=H(J-1):G2=H(J-2):Z1=2:GOTO 770 
- Reference:G
- Value:J
+ Variable:G
+ Variable:J
  NumericConstant:3
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G1
- Value:J
+ Variable:G1
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G2
- Value:J
+ Variable:G2
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:Z1
+ Variable:Z1
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:770
@@ -748,62 +748,62 @@
  CarriageControl:NL
 730 PRINT B$(H(J-4)) " GIVES TO " B$(H(J-2)) " WHO SHUFFLES IT OFF TO" 
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:4
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:
  TextConstant:" GIVES TO "
  CarriageControl:
- Value:J
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:
  TextConstant:" WHO SHUFFLES IT OFF TO"
  CarriageControl:NL
 740 PRINT B$(H(J-1)) " WHO FIRES A WING TO WING PASS TO "
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:
  TextConstant:" WHO FIRES A WING TO WING PASS TO "
  CarriageControl:NL
 750 PRINT B$(H(J-3)) " AS HE CUTS IN ALONE!!"    
  ITEMS
- Value:J
+ Variable:J
  NumericConstant:3
  BinaryOperator:-
- Value:H
- Value:B$
+ Variable:H
+ Variable:B$
  CarriageControl:
  TextConstant:" AS HE CUTS IN ALONE!!"
  CarriageControl:NL
 760 G=H(J-3):G1=H(J-1):G2=H(J-2):Z1=1:GOTO 770 
- Reference:G
- Value:J
+ Variable:G
+ Variable:J
  NumericConstant:3
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G1
- Value:J
+ Variable:G1
+ Variable:J
  NumericConstant:1
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:G2
- Value:J
+ Variable:G2
+ Variable:J
  NumericConstant:2
  BinaryOperator:-
- Value:H
+ Variable:H
  AssignmentOperator:=
- Reference:Z1
+ Variable:Z1
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:770
@@ -811,23 +811,23 @@
  ITEMS
  TextConstant:"SHOT"
  CarriageControl:;
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:4
  BinaryOperator:>
- Value:S
+ Variable:S
  NumericConstant:1
  BinaryOperator:<
 780 ON C GOTO 790,880
- Value:C
+ Variable:C
  LineNumber:790
  LineNumber:880
 790 PRINT A$(G);:ON S GOTO 800,820,840,860 
  ITEMS
- Value:G
- Value:A$
+ Variable:G
+ Variable:A$
  CarriageControl:;
- Value:S
+ Variable:S
  LineNumber:800
  LineNumber:820
  LineNumber:840
@@ -837,12 +837,12 @@
  TextConstant:" LET'S A BIG SLAP SHOT GO!!"
  CarriageControl:NL
 810 Z=4:Z=Z+Z1:GOTO 890
- Reference:Z
+ Variable:Z
  NumericConstant:4
  AssignmentOperator:=
- Reference:Z
- Value:Z
- Value:Z1
+ Variable:Z
+ Variable:Z
+ Variable:Z1
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:890
@@ -851,12 +851,12 @@
  TextConstant:" RIPS A WRIST SHOT OFF"
  CarriageControl:NL
 830 Z=2:Z=Z+Z1:GOTO 890
- Reference:Z
+ Variable:Z
  NumericConstant:2
  AssignmentOperator:=
- Reference:Z
- Value:Z
- Value:Z1
+ Variable:Z
+ Variable:Z
+ Variable:Z1
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:890
@@ -865,12 +865,12 @@
  TextConstant:" GETS A BACKHAND OFF"
  CarriageControl:NL
 850 Z=3:Z=Z+Z1:GOTO 890
- Reference:Z
+ Variable:Z
  NumericConstant:3
  AssignmentOperator:=
- Reference:Z
- Value:Z
- Value:Z1
+ Variable:Z
+ Variable:Z
+ Variable:Z1
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:890
@@ -879,21 +879,21 @@
  TextConstant:" SNAPS OFF A SNAP SHOT"
  CarriageControl:NL
 870 Z=2:Z=Z+Z1:GOTO 890
- Reference:Z
+ Variable:Z
  NumericConstant:2
  AssignmentOperator:=
- Reference:Z
- Value:Z
- Value:Z1
+ Variable:Z
+ Variable:Z
+ Variable:Z1
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:890
 880 PRINT B$(G);:ON S GOTO 800,820,840,860 
  ITEMS
- Value:G
- Value:B$
+ Variable:G
+ Variable:B$
  CarriageControl:;
- Value:S
+ Variable:S
  LineNumber:800
  LineNumber:820
  LineNumber:840
@@ -902,49 +902,49 @@
  ITEMS
  TextConstant:"AREA"
  CarriageControl:;
- Reference:A
- Value:A
+ Variable:A
+ Variable:A
  NumericConstant:1
  BinaryOperator:<
 895 IF A>4 THEN 890
- Value:A
+ Variable:A
  NumericConstant:4
  BinaryOperator:>
 900 ON C GOTO 910,920
- Value:C
+ Variable:C
  LineNumber:910
  LineNumber:920
 910 S2=S2+1:GOTO 930 
- Reference:S2
- Value:S2
+ Variable:S2
+ Variable:S2
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:930
 920 S3=S3+1
- Reference:S3
- Value:S3
+ Variable:S3
+ Variable:S3
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 930 A1=INT(4*RND(X))+1:IF A<>A1 THEN 1200
- Reference:A1
+ Variable:A1
  NumericConstant:4
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  FunctionInt
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:A
- Value:A1
+ Variable:A
+ Variable:A1
  BinaryOperator:<>
 940 H(20)=INT(100*RND(X))+1
  NumericConstant:20
- Reference:H
+ Variable:H
  NumericConstant:100
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  FunctionInt
@@ -953,17 +953,17 @@
  AssignmentOperator:=
 950 IF INT(H(20)/Z)=H(20)/Z THEN 1160
  NumericConstant:20
- Value:H
- Value:Z
+ Variable:H
+ Variable:Z
  BinaryOperator:/
  FunctionInt
  NumericConstant:20
- Value:H
- Value:Z
+ Variable:H
+ Variable:Z
  BinaryOperator:/
  BinaryOperator:=
 960 ON C GOTO 970,980
- Value:C
+ Variable:C
  LineNumber:970
  LineNumber:980
 970 PRINT "GOAL " A$(7):H(9)=H(9)+1:GOTO 990 
@@ -971,12 +971,12 @@
  TextConstant:"GOAL "
  CarriageControl:
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:NL
  NumericConstant:9
- Reference:H
+ Variable:H
  NumericConstant:9
- Value:H
+ Variable:H
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -986,12 +986,12 @@
  TextConstant:"SCORE "
  CarriageControl:
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:NL
  NumericConstant:8
- Reference:H
+ Variable:H
  NumericConstant:8
- Value:H
+ Variable:H
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -1011,76 +1011,76 @@
  TextConstant:"SCORE: "
  CarriageControl:;
  NumericConstant:8
- Value:H
+ Variable:H
  NumericConstant:9
- Value:H
+ Variable:H
  BinaryOperator:>
 1010 PRINT A$(7)":";H(9),B$(7)":";H(8):GOTO 1030
  ITEMS
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
  NumericConstant:9
- Value:H
+ Variable:H
  CarriageControl:,
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
  NumericConstant:8
- Value:H
+ Variable:H
  CarriageControl:NL
  LineNumber:1030
 1020 PRINT B$(7)":";H(8),A$(7)":";H(9)  
  ITEMS
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
  NumericConstant:8
- Value:H
+ Variable:H
  CarriageControl:,
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
  NumericConstant:9
- Value:H
+ Variable:H
  CarriageControl:NL
 1030 ON C GOTO 1040,1100
- Value:C
+ Variable:C
  LineNumber:1040
  LineNumber:1100
 1040 PRINT "GOAL SCORED BY: " A$(G):IF G1=0 THEN 1070
  ITEMS
  TextConstant:"GOAL SCORED BY: "
  CarriageControl:
- Value:G
- Value:A$
+ Variable:G
+ Variable:A$
  CarriageControl:NL
- Value:G1
+ Variable:G1
  NumericConstant:0
  BinaryOperator:=
 1050 IF G2=0 THEN 1080
- Value:G2
+ Variable:G2
  NumericConstant:0
  BinaryOperator:=
 1060 PRINT " ASSISTED BY: " A$(G1) " AND " A$(G2):GOTO 1090 
  ITEMS
  TextConstant:" ASSISTED BY: "
  CarriageControl:
- Value:G1
- Value:A$
+ Variable:G1
+ Variable:A$
  CarriageControl:
  TextConstant:" AND "
  CarriageControl:
- Value:G2
- Value:A$
+ Variable:G2
+ Variable:A$
  CarriageControl:NL
  LineNumber:1090
 1070 PRINT " UNASSISTED.":GOTO 1090
@@ -1092,28 +1092,28 @@
  ITEMS
  TextConstant:" ASSISTED BY: "
  CarriageControl:
- Value:G1
- Value:A$
+ Variable:G1
+ Variable:A$
  CarriageControl:NL
 1090 T(G)=T(G)+1:T1(G1)=T1(G1)+1:T1(G2)=T1(G2)+1:GOTO 1540
- Value:G
- Reference:T
- Value:G
- Value:T
+ Variable:G
+ Variable:T
+ Variable:G
+ Variable:T
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:G1
- Reference:T1
- Value:G1
- Value:T1
+ Variable:G1
+ Variable:T1
+ Variable:G1
+ Variable:T1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:G2
- Reference:T1
- Value:G2
- Value:T1
+ Variable:G2
+ Variable:T1
+ Variable:G2
+ Variable:T1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -1122,28 +1122,28 @@
  ITEMS
  TextConstant:"GOAL SCORED BY: "
  CarriageControl:
- Value:G
- Value:B$
+ Variable:G
+ Variable:B$
  CarriageControl:;
 1110 IF G1=0 THEN 1130
- Value:G1
+ Variable:G1
  NumericConstant:0
  BinaryOperator:=
 1115 IF G2=0 THEN 1140
- Value:G2
+ Variable:G2
  NumericConstant:0
  BinaryOperator:=
 1120 PRINT " ASSISTED BY: " B$(G1) " AND " B$(G2):GOTO 1150 
  ITEMS
  TextConstant:" ASSISTED BY: "
  CarriageControl:
- Value:G1
- Value:B$
+ Variable:G1
+ Variable:B$
  CarriageControl:
  TextConstant:" AND "
  CarriageControl:
- Value:G2
- Value:B$
+ Variable:G2
+ Variable:B$
  CarriageControl:NL
  LineNumber:1150
 1130 PRINT " UNASSISTED":GOTO 1150
@@ -1155,55 +1155,55 @@
  ITEMS
  TextConstant:" ASSISTED BY: "
  CarriageControl:
- Value:G1
- Value:B$
+ Variable:G1
+ Variable:B$
  CarriageControl:NL
  LineNumber:1150
 1150 T2(G)=T2(G)+1:T3(G1)=T3(G1)+1:T3(G2)=T3(G2)+1:GOTO 1540
- Value:G
- Reference:T2
- Value:G
- Value:T2
+ Variable:G
+ Variable:T2
+ Variable:G
+ Variable:T2
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:G1
- Reference:T3
- Value:G1
- Value:T3
+ Variable:G1
+ Variable:T3
+ Variable:G1
+ Variable:T3
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:G2
- Reference:T3
- Value:G2
- Value:T3
+ Variable:G2
+ Variable:T3
+ Variable:G2
+ Variable:T3
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
  LineNumber:1540
 1160 A2=INT(100*RND(X))+1:IF INT(A2/4)=A2/4 THEN 1170
- Reference:A2
+ Variable:A2
  NumericConstant:100
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  FunctionInt
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:A2
+ Variable:A2
  NumericConstant:4
  BinaryOperator:/
  FunctionInt
- Value:A2
+ Variable:A2
  NumericConstant:4
  BinaryOperator:/
  BinaryOperator:=
 1165 GOTO 1200
  LineNumber:1200
 1170 ON C GOTO 1180,1190
- Value:C
+ Variable:C
  LineNumber:1180
  LineNumber:1190
 1180 PRINT "SAVE " B$(6) " --  REBOUND":GOTO 940
@@ -1211,7 +1211,7 @@
  TextConstant:"SAVE "
  CarriageControl:
  NumericConstant:6
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" --  REBOUND"
  CarriageControl:NL
@@ -1221,15 +1221,15 @@
  TextConstant:"SAVE "
  CarriageControl:
  NumericConstant:6
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" --  FOLLOW UP"
  CarriageControl:NL
  LineNumber:940
 1200 S1=INT(6*RND(X))+1 
- Reference:S1
+ Variable:S1
  NumericConstant:6
- Value:X
+ Variable:X
  FunctionRnd
  BinaryOperator:*
  FunctionInt
@@ -1237,11 +1237,11 @@
  BinaryOperator:+
  AssignmentOperator:=
 1210 ON C GOTO 1220,1380
- Value:C
+ Variable:C
  LineNumber:1220
  LineNumber:1380
 1220 ON S1 GOTO 1230,1260,1290,1300,1330,1350 
- Value:S1
+ Variable:S1
  LineNumber:1230
  LineNumber:1260
  LineNumber:1290
@@ -1253,14 +1253,14 @@
  TextConstant:"KICK SAVE AND A BEAUTY BY "
  CarriageControl:
  NumericConstant:6
- Value:B$
+ Variable:B$
  CarriageControl:NL
 1240 PRINT "CLEARED OUT BY " B$(3)
  ITEMS
  TextConstant:"CLEARED OUT BY "
  CarriageControl:
  NumericConstant:3
- Value:B$
+ Variable:B$
  CarriageControl:NL
 1250 GOTO 260 
  LineNumber:260
@@ -1269,14 +1269,14 @@
  TextConstant:"WHAT A SPECTACULAR GLOVE SAVE BY "
  CarriageControl:
  NumericConstant:6
- Value:B$
+ Variable:B$
  CarriageControl:NL
 1270 PRINT "AND " B$(6) " GOLFS IT INTO THE CROWD"
  ITEMS
  TextConstant:"AND "
  CarriageControl:
  NumericConstant:6
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" GOLFS IT INTO THE CROWD"
  CarriageControl:NL
@@ -1287,7 +1287,7 @@
  TextConstant:"SKATE SAVE ON A LOW STEAMER BY "
  CarriageControl:
  NumericConstant:6
- Value:B$
+ Variable:B$
  CarriageControl:NL
  LineNumber:260
 1300 PRINT "PAD SAVE BY " B$(6) " OFF THE STICK" 
@@ -1295,7 +1295,7 @@
  TextConstant:"PAD SAVE BY "
  CarriageControl:
  NumericConstant:6
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" OFF THE STICK"
  CarriageControl:NL
@@ -1303,13 +1303,13 @@
  ITEMS
  TextConstant:"OF "
  CarriageControl:
- Value:G
- Value:A$
+ Variable:G
+ Variable:A$
  CarriageControl:
  TextConstant:" AND "
  CarriageControl:
  NumericConstant:6
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" COVERS UP"
  CarriageControl:NL
@@ -1320,14 +1320,14 @@
  TextConstant:"WHISTLES ONE OVER THE HEAD OF "
  CarriageControl:
  NumericConstant:6
- Value:B$
+ Variable:B$
  CarriageControl:NL
 1340 GOTO 260 
  LineNumber:260
 1350 PRINT B$(6) " MAKES A FACE SAVE!! AND HE IS HURT"
  ITEMS
  NumericConstant:6
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" MAKES A FACE SAVE!! AND HE IS HURT"
  CarriageControl:NL
@@ -1336,14 +1336,14 @@
  TextConstant:"THE DEFENSEMAN "
  CarriageControl:
  NumericConstant:5
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:" COVERS UP FOR HIM"
  CarriageControl:NL
 1370 GOTO 1540
  LineNumber:1540
 1380 ON S1 GOTO 1390,1410,1440,1470,1490,1520 
- Value:S1
+ Variable:S1
  LineNumber:1390
  LineNumber:1410
  LineNumber:1440
@@ -1355,22 +1355,22 @@
  TextConstant:"STICK SAVE BY "
  CarriageControl:
  NumericConstant:6
- Value:A$
+ Variable:A$
  CarriageControl:NL
 1400 PRINT "AND CLEARED OUT BY " A$(4):GOTO 260 
  ITEMS
  TextConstant:"AND CLEARED OUT BY "
  CarriageControl:
  NumericConstant:4
- Value:A$
+ Variable:A$
  CarriageControl:NL
  LineNumber:260
 1410 PRINT "OH MY GOD!! " B$(G) " RATTLES ONE OFF THE POST" 
  ITEMS
  TextConstant:"OH MY GOD!! "
  CarriageControl:
- Value:G
- Value:B$
+ Variable:G
+ Variable:B$
  CarriageControl:
  TextConstant:" RATTLES ONE OFF THE POST"
  CarriageControl:NL
@@ -1379,12 +1379,12 @@
  TextConstant:"TO THE RIGHT OF "
  CarriageControl:
  NumericConstant:6
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" AND "
  CarriageControl:
  NumericConstant:6
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" COVERS "
  CarriageControl:;
@@ -1398,12 +1398,12 @@
  TextConstant:"SKATE SAVE BY "
  CarriageControl:
  NumericConstant:6
- Value:A$
+ Variable:A$
  CarriageControl:NL
 1450 PRINT A$(6) " WHACKS THE LOOSE PUCK INTO THE STANDS" 
  ITEMS
  NumericConstant:6
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" WHACKS THE LOOSE PUCK INTO THE STANDS"
  CarriageControl:NL
@@ -1414,7 +1414,7 @@
  TextConstant:"STICK SAVE BY "
  CarriageControl:
  NumericConstant:6
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" AND HE CLEARS IT OUT HIMSELF"
  CarriageControl:NL
@@ -1425,7 +1425,7 @@
  TextConstant:"KICKED OUT BY "
  CarriageControl:
  NumericConstant:6
- Value:A$
+ Variable:A$
  CarriageControl:NL
 1500 PRINT "AND IT REBOUNDS ALL THE WAY TO CENTER ICE"  
  ITEMS
@@ -1438,7 +1438,7 @@
  TextConstant:"GLOVE SAVE "
  CarriageControl:
  NumericConstant:6
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:" AND HE HANGS ON"
  CarriageControl:NL
@@ -1468,46 +1468,46 @@
  CarriageControl:NL
 1560 IF H(8)>H(9) THEN 1580
  NumericConstant:8
- Value:H
+ Variable:H
  NumericConstant:9
- Value:H
+ Variable:H
  BinaryOperator:>
 1570 PRINT A$(7)":";H(9),B$(7)":";H(8):GOTO 1590
  ITEMS
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
  NumericConstant:9
- Value:H
+ Variable:H
  CarriageControl:,
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
  NumericConstant:8
- Value:H
+ Variable:H
  CarriageControl:NL
  LineNumber:1590
 1580 PRINT B$(7)":";H(8),A$(7)":";H(9)
  ITEMS
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
  NumericConstant:8
- Value:H
+ Variable:H
  CarriageControl:,
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
  NumericConstant:9
- Value:H
+ Variable:H
  CarriageControl:NL
 1590 PRINT: PRINT TAB(10);"SCORING SUMMARY":PRINT
  ITEMS
@@ -1526,7 +1526,7 @@
  FunctionTab
  CarriageControl:;
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:NL
 1610 PRINT TAB(5);"NAME";TAB(20);"GOALS";TAB(35);"ASSISTS"
  ITEMS
@@ -1570,20 +1570,20 @@
  NumericConstant:5
  FunctionTab
  CarriageControl:;
- Value:I
- Value:A$
+ Variable:I
+ Variable:A$
  CarriageControl:;
  NumericConstant:21
  FunctionTab
  CarriageControl:;
- Value:I
- Value:T
+ Variable:I
+ Variable:T
  CarriageControl:;
  NumericConstant:36
  FunctionTab
  CarriageControl:;
- Value:I
- Value:T1
+ Variable:I
+ Variable:T1
  CarriageControl:NL
 1640 NEXT I:PRINT 
  Variable:I
@@ -1595,7 +1595,7 @@
  FunctionTab
  CarriageControl:;
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:NL
 1660 PRINT TAB(5);"NAME";TAB(20);"GOALS";TAB(35);"ASSISTS"  
  ITEMS
@@ -1639,20 +1639,20 @@
  NumericConstant:5
  FunctionTab
  CarriageControl:;
- Value:T
- Value:B$
+ Variable:T
+ Variable:B$
  CarriageControl:;
  NumericConstant:21
  FunctionTab
  CarriageControl:;
- Value:T
- Value:T2
+ Variable:T
+ Variable:T2
  CarriageControl:;
  NumericConstant:36
  FunctionTab
  CarriageControl:;
- Value:T
- Value:T3
+ Variable:T
+ Variable:T3
  CarriageControl:NL
 1690 NEXT T:PRINT 
  Variable:T
@@ -1664,19 +1664,19 @@
  CarriageControl:NL
  ITEMS
  NumericConstant:7
- Value:A$
+ Variable:A$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
- Value:S2
+ Variable:S2
  CarriageControl:NL
  ITEMS
  NumericConstant:7
- Value:B$
+ Variable:B$
  CarriageControl:
  TextConstant:":"
  CarriageControl:;
- Value:S3
+ Variable:S3
  CarriageControl:NL
 1710 END
  

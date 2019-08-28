@@ -69,191 +69,191 @@
 240 NEXT I
  Variable:I
 330 INPUT "ENTER PILE SIZE";N
- Reference:N
+ Variable:N
 350 IF N>=1 THEN 370
- Value:N
+ Variable:N
  NumericConstant:1
  BinaryOperator:>=
 360 GOTO 330
  LineNumber:330
 370 IF N<>INT(N) THEN 220
- Value:N
- Value:N
+ Variable:N
+ Variable:N
  FunctionInt
  BinaryOperator:<>
 380 IF N<1 THEN 220
- Value:N
+ Variable:N
  NumericConstant:1
  BinaryOperator:<
 390 INPUT "ENTER WIN OPTION - 1 TO TAKE LAST, 2 TO AVOID LAST: ";M
- Reference:M
+ Variable:M
 410 IF M=1 THEN 430
- Value:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:=
 420 IF M<>2 THEN 390
- Value:M
+ Variable:M
  NumericConstant:2
  BinaryOperator:<>
 430 INPUT "ENTER MIN AND MAX ";A,B
- Reference:A
- Reference:B
+ Variable:A
+ Variable:B
 450 IF A>B THEN 430
- Value:A
- Value:B
+ Variable:A
+ Variable:B
  BinaryOperator:>
 460 IF A<1 THEN 430
- Value:A
+ Variable:A
  NumericConstant:1
  BinaryOperator:<
 470 IF A<>INT(A) THEN 430
- Value:A
- Value:A
+ Variable:A
+ Variable:A
  FunctionInt
  BinaryOperator:<>
 480 IF B<>INT(B) THEN 430
- Value:B
- Value:B
+ Variable:B
+ Variable:B
  FunctionInt
  BinaryOperator:<>
 490 INPUT "ENTER START OPTION - 1 COMPUTER FIRST, 2 YOU FIRST ";S
- Reference:S
+ Variable:S
 500 PRINT:PRINT
  ITEMS
  CarriageControl:NL
  ITEMS
  CarriageControl:NL
 510 IF S=1 THEN 530
- Value:S
+ Variable:S
  NumericConstant:1
  BinaryOperator:=
 520 IF S<>2 THEN 490
- Value:S
+ Variable:S
  NumericConstant:2
  BinaryOperator:<>
 530 C=A+B
- Reference:C
- Value:A
- Value:B
+ Variable:C
+ Variable:A
+ Variable:B
  BinaryOperator:+
  AssignmentOperator:=
 540 IF S=2 THEN 570
- Value:S
+ Variable:S
  NumericConstant:2
  BinaryOperator:=
 550 GOSUB 600
  LineNumber:600
 560 IF W=1 THEN 220
- Value:W
+ Variable:W
  NumericConstant:1
  BinaryOperator:=
 570 GOSUB 810
  LineNumber:810
 580 IF W=1 THEN 220
- Value:W
+ Variable:W
  NumericConstant:1
  BinaryOperator:=
 590 GOTO 550
  LineNumber:550
 600 Q=N
- Reference:Q
- Value:N
+ Variable:Q
+ Variable:N
  AssignmentOperator:=
 610 IF M=1 THEN 630
- Value:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:=
 620 Q=Q-1
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
 630 IF M=1 THEN 680
- Value:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:=
 640 IF N>A THEN 720
- Value:N
- Value:A
+ Variable:N
+ Variable:A
  BinaryOperator:>
 650 W=1
- Reference:W
+ Variable:W
  NumericConstant:1
  AssignmentOperator:=
 660 PRINT "COMPUTER TAKES";N;"AND LOSES."
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Value:N
+ Variable:N
  CarriageControl:;
  TextConstant:"AND LOSES."
  CarriageControl:NL
 670 RETURN
  
 680 IF N>B THEN 720
- Value:N
- Value:B
+ Variable:N
+ Variable:B
  BinaryOperator:>
 690 W=1
- Reference:W
+ Variable:W
  NumericConstant:1
  AssignmentOperator:=
 700 PRINT "COMPUTER TAKES";N;"AND WINS."
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Value:N
+ Variable:N
  CarriageControl:;
  TextConstant:"AND WINS."
  CarriageControl:NL
 710 RETURN
  
 720 P=Q-C*INT(Q/C)
- Reference:P
- Value:Q
- Value:C
- Value:Q
- Value:C
+ Variable:P
+ Variable:Q
+ Variable:C
+ Variable:Q
+ Variable:C
  BinaryOperator:/
  FunctionInt
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 730 IF P>=A THEN 750
- Value:P
- Value:A
+ Variable:P
+ Variable:A
  BinaryOperator:>=
 740 P=A
- Reference:P
- Value:A
+ Variable:P
+ Variable:A
  AssignmentOperator:=
 750 IF P<=B THEN 770
- Value:P
- Value:B
+ Variable:P
+ Variable:B
  BinaryOperator:<=
 760 P=B
- Reference:P
- Value:B
+ Variable:P
+ Variable:B
  AssignmentOperator:=
 770 N=N-P
- Reference:N
- Value:N
- Value:P
+ Variable:N
+ Variable:N
+ Variable:P
  BinaryOperator:-
  AssignmentOperator:=
 780 PRINT "COMPUTER TAKES";P;"AND LEAVES";N
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Value:P
+ Variable:P
  CarriageControl:;
  TextConstant:"AND LEAVES"
  CarriageControl:;
- Value:N
+ Variable:N
  CarriageControl:NL
 790 W=0
- Reference:W
+ Variable:W
  NumericConstant:0
  AssignmentOperator:=
 800 RETURN
@@ -265,9 +265,9 @@
  TextConstant:"YOUR MOVE "
  CarriageControl:;
 820 INPUT P
- Reference:P
+ Variable:P
 830 IF P<>0 THEN 870
- Value:P
+ Variable:P
  NumericConstant:0
  BinaryOperator:<>
 840 PRINT "I TOLD YOU NOT TO USE ZERO! COMPUTER WINS BY FORFEIT."
@@ -275,29 +275,29 @@
  TextConstant:"I TOLD YOU NOT TO USE ZERO! COMPUTER WINS BY FORFEIT."
  CarriageControl:NL
 850 W=1
- Reference:W
+ Variable:W
  NumericConstant:1
  AssignmentOperator:=
 860 RETURN
  
 870 IF P<>INT(P) THEN 920
- Value:P
- Value:P
+ Variable:P
+ Variable:P
  FunctionInt
  BinaryOperator:<>
 880 IF P>=A THEN 910
- Value:P
- Value:A
+ Variable:P
+ Variable:A
  BinaryOperator:>=
 890 IF P=N THEN 960
- Value:P
- Value:N
+ Variable:P
+ Variable:N
  BinaryOperator:=
 900 GOTO 920
  LineNumber:920
 910 IF P<=B THEN 940
- Value:P
- Value:B
+ Variable:P
+ Variable:B
  BinaryOperator:<=
 920 PRINT "ILLEGAL MOVE, REENTER IT ";
  ITEMS
@@ -306,17 +306,17 @@
 930 GOTO 820
  LineNumber:820
 940 N=N-P
- Reference:N
- Value:N
- Value:P
+ Variable:N
+ Variable:N
+ Variable:P
  BinaryOperator:-
  AssignmentOperator:=
 950 IF N<>0 THEN 1030
- Value:N
+ Variable:N
  NumericConstant:0
  BinaryOperator:<>
 960 IF M=1 THEN 1000
- Value:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:=
 970 PRINT "TOUGH LUCK, YOU LOSE."
@@ -324,7 +324,7 @@
  TextConstant:"TOUGH LUCK, YOU LOSE."
  CarriageControl:NL
 980 W=1
- Reference:W
+ Variable:W
  NumericConstant:1
  AssignmentOperator:=
 990 RETURN
@@ -334,25 +334,25 @@
  TextConstant:"CONGRATULATIONS, YOU WIN."
  CarriageControl:NL
 1010 W=1
- Reference:W
+ Variable:W
  NumericConstant:1
  AssignmentOperator:=
 1020 RETURN
  
 1030 IF N>=0 THEN 1060
- Value:N
+ Variable:N
  NumericConstant:0
  BinaryOperator:>=
 1040 N=N+P
- Reference:N
- Value:N
- Value:P
+ Variable:N
+ Variable:N
+ Variable:P
  BinaryOperator:+
  AssignmentOperator:=
 1050 GOTO 920
  LineNumber:920
 1060 W=0
- Reference:W
+ Variable:W
  NumericConstant:0
  AssignmentOperator:=
 1070 RETURN

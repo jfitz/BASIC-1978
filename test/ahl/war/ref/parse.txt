@@ -32,13 +32,13 @@
  TextConstant:"DO YOU WANT DIRECTIONS"
  CarriageControl:;
 130 INPUT B$
- Reference:B$
+ Variable:B$
 140 IF B$="NO" THEN 210
- Value:B$
+ Variable:B$
  TextConstant:"NO"
  BinaryOperator:=
 150 IF B$="YES" THEN 180
- Value:B$
+ Variable:B$
  TextConstant:"YES"
  BinaryOperator:=
 160 PRINT "YES OR NO, PLEASE.  ";
@@ -75,8 +75,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:52"]
 250 READ A$(I)
- Value:I
- Reference:A$
+ Variable:I
+ Variable:A$
 260 NEXT I
  Variable:I
 270 REM
@@ -86,8 +86,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:52"]
 290 LET L(J)=INT(52*RND(1))+1
- Value:J
- Reference:L
+ Variable:J
+ Variable:L
  NumericConstant:52
  NumericConstant:1
  FunctionRnd
@@ -97,18 +97,18 @@
  BinaryOperator:+
  AssignmentOperator:=
 295 IF J=1 THEN 350
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:=
 300 FOR K=1 TO J-1
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["Value:J", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:J", "NumericConstant:1", "BinaryOperator:-"]
 310 IF L(K)<>L(J) THEN 340
- Value:K
- Value:L
- Value:J
- Value:L
+ Variable:K
+ Variable:L
+ Variable:J
+ Variable:L
  BinaryOperator:<>
 320 REM
  Remark:
@@ -119,26 +119,26 @@
 350 NEXT J
  Variable:J
 360 P=P+1
- Reference:P
- Value:P
+ Variable:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 370 M1=L(P)
- Reference:M1
- Value:P
- Value:L
+ Variable:M1
+ Variable:P
+ Variable:L
  AssignmentOperator:=
 380 P=P+1
- Reference:P
- Value:P
+ Variable:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 390 M2=L(P)
- Reference:M2
- Value:P
- Value:L
+ Variable:M2
+ Variable:P
+ Variable:L
  AssignmentOperator:=
 400 PRINT
  ITEMS
@@ -147,17 +147,17 @@
  ITEMS
  TextConstant:"YOU: "
  CarriageControl:;
- Value:M1
- Value:A$
+ Variable:M1
+ Variable:A$
  CarriageControl:,
  TextConstant:"COMPUTER: "
  CarriageControl:;
- Value:M2
- Value:A$
+ Variable:M2
+ Variable:A$
  CarriageControl:NL
 430 N1=INT((M1-.5)/4)
- Reference:N1
- Value:M1
+ Variable:N1
+ Variable:M1
  NumericConstant:.5
  BinaryOperator:-
  NumericConstant:4
@@ -165,8 +165,8 @@
  FunctionInt
  AssignmentOperator:=
 440 N2=INT((M2-.5)/4)
- Reference:N2
- Value:M2
+ Variable:N2
+ Variable:M2
  NumericConstant:.5
  BinaryOperator:-
  NumericConstant:4
@@ -174,12 +174,12 @@
  FunctionInt
  AssignmentOperator:=
 450 IF N1>=N2 THEN 490
- Value:N1
- Value:N2
+ Variable:N1
+ Variable:N2
  BinaryOperator:>=
 460 A1=A1+1
- Reference:A1
- Value:A1
+ Variable:A1
+ Variable:A1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -187,21 +187,21 @@
  ITEMS
  TextConstant:"THE COMPUTER WINS!!! YOU HAVE"
  CarriageControl:;
- Value:B1
+ Variable:B1
  CarriageControl:;
  TextConstant:"AND THE COMPUTER HAS"
  CarriageControl:;
- Value:A1
+ Variable:A1
  CarriageControl:NL
 480 GOTO 540
  LineNumber:540
 490 IF N1=N2 THEN 530
- Value:N1
- Value:N2
+ Variable:N1
+ Variable:N2
  BinaryOperator:=
 500 B1=B1+1
- Reference:B1
- Value:B1
+ Variable:B1
+ Variable:B1
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -209,11 +209,11 @@
  ITEMS
  TextConstant:"YOU WIN. YOU HAVE"
  CarriageControl:;
- Value:B1
+ Variable:B1
  CarriageControl:;
  TextConstant:"AND THE COMPUTER HAS"
  CarriageControl:;
- Value:A1
+ Variable:A1
  CarriageControl:NL
 520 GOTO 540
  LineNumber:540
@@ -222,10 +222,10 @@
  TextConstant:"TIE.  NO SCORE CHANGE."
  CarriageControl:NL
 540 IF L(P+1)=0 THEN 610
- Value:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:+
- Value:L
+ Variable:L
  NumericConstant:0
  BinaryOperator:=
 550 PRINT "DO YOU WANT TO CONTINUE";
@@ -233,13 +233,13 @@
  TextConstant:"DO YOU WANT TO CONTINUE"
  CarriageControl:;
 560 INPUT V$
- Reference:V$
+ Variable:V$
 570 IF V$="YES" THEN 360
- Value:V$
+ Variable:V$
  TextConstant:"YES"
  BinaryOperator:=
 580 IF V$="NO" THEN 650
- Value:V$
+ Variable:V$
  TextConstant:"NO"
  BinaryOperator:=
 590 PRINT "YES OR NO, PLEASE.  ";
@@ -258,13 +258,13 @@
  ITEMS
  TextConstant:"WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: "
  CarriageControl:;
- Value:B1
+ Variable:B1
  CarriageControl:;
 640 PRINT "  THE COMPUTER: ";A1:PRINT
  ITEMS
  TextConstant:"  THE COMPUTER: "
  CarriageControl:;
- Value:A1
+ Variable:A1
  CarriageControl:NL
  ITEMS
  CarriageControl:NL

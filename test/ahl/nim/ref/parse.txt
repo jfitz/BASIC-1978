@@ -36,21 +36,21 @@
  TextConstant:"DO YOU WANT INSTRUCTIONS"
  CarriageControl:;
 240 INPUT Z$
- Reference:Z$
+ Variable:Z$
 250 IF Z$="NO" THEN 440
- Value:Z$
+ Variable:Z$
  TextConstant:"NO"
  BinaryOperator:=
 260 IF Z$="no" THEN 440
- Value:Z$
+ Variable:Z$
  TextConstant:"no"
  BinaryOperator:=
 270 IF Z$="YES" THEN 310
- Value:Z$
+ Variable:Z$
  TextConstant:"YES"
  BinaryOperator:=
 280 IF Z$="yes" THEN 310
- Value:Z$
+ Variable:Z$
  TextConstant:"yes"
  BinaryOperator:=
 290 PRINT "PLEASE ANSWER YES OR NO"
@@ -119,13 +119,13 @@
  TextConstant:"ENTER WIN OPTION - 1 TO TAKE LAST, 2 TO AVOID LAST"
  CarriageControl:;
 460 INPUT W
- Reference:W
+ Variable:W
 470 IF W=1 THEN 490
- Value:W
+ Variable:W
  NumericConstant:1
  BinaryOperator:=
 480 IF W<>2 THEN 450
- Value:W
+ Variable:W
  NumericConstant:2
  BinaryOperator:<>
 490 PRINT "ENTER NUMBER OF PILES";
@@ -133,18 +133,18 @@
  TextConstant:"ENTER NUMBER OF PILES"
  CarriageControl:;
 500 INPUT N
- Reference:N
+ Variable:N
 510 IF N>100 THEN 490
- Value:N
+ Variable:N
  NumericConstant:100
  BinaryOperator:>
 520 IF N<1 THEN 490
- Value:N
+ Variable:N
  NumericConstant:1
  BinaryOperator:<
 530 IF N<>INT(N) THEN 490
- Value:N
- Value:N
+ Variable:N
+ Variable:N
  FunctionInt
  BinaryOperator:<>
 540 PRINT "ENTER PILE SIZES"
@@ -154,29 +154,29 @@
 550 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 560 PRINT I;
  ITEMS
- Value:I
+ Variable:I
  CarriageControl:;
 570 INPUT A(I)
- Value:I
- Reference:A
+ Variable:I
+ Variable:A
 580 IF A(I)>2000 THEN 560
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  NumericConstant:2000
  BinaryOperator:>
 590 IF A(I)<1 THEN 560
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  NumericConstant:1
  BinaryOperator:<
 600 IF A(I)<>INT(A(I)) THEN 560
- Value:I
- Value:A
- Value:I
- Value:A
+ Variable:I
+ Variable:A
+ Variable:I
+ Variable:A
  FunctionInt
  BinaryOperator:<>
 610 NEXT I
@@ -186,21 +186,21 @@
  TextConstant:"DO YOU WANT TO MOVE FIRST"
  CarriageControl:;
 630 INPUT Q9$
- Reference:Q9$
+ Variable:Q9$
 640 IF Q9$="YES" THEN 1450
- Value:Q9$
+ Variable:Q9$
  TextConstant:"YES"
  BinaryOperator:=
 650 IF Q9$="yes" THEN 1450
- Value:Q9$
+ Variable:Q9$
  TextConstant:"yes"
  BinaryOperator:=
 660 IF Q9$="NO" THEN 700
- Value:Q9$
+ Variable:Q9$
  TextConstant:"NO"
  BinaryOperator:=
 670 IF Q9$="no" THEN 700
- Value:Q9$
+ Variable:Q9$
  TextConstant:"no"
  BinaryOperator:=
 680 PRINT "PLEASE ANSWER YES OR NO."
@@ -210,47 +210,47 @@
 690 GOTO 630
  LineNumber:630
 700 IF W=1 THEN 940
- Value:W
+ Variable:W
  NumericConstant:1
  BinaryOperator:=
 710 LET C=0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 720 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 730 IF A(I)=0 THEN 770
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  NumericConstant:0
  BinaryOperator:=
 740 LET C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 750 IF C=3 THEN 840
- Value:C
+ Variable:C
  NumericConstant:3
  BinaryOperator:=
 760 LET D(C)=I
- Value:C
- Reference:D
- Value:I
+ Variable:C
+ Variable:D
+ Variable:I
  AssignmentOperator:=
 770 NEXT I
  Variable:I
 780 IF C=2 THEN 920
- Value:C
+ Variable:C
  NumericConstant:2
  BinaryOperator:=
 790 IF A(D(1))>1 THEN 820
  NumericConstant:1
- Value:D
- Value:A
+ Variable:D
+ Variable:A
  NumericConstant:1
  BinaryOperator:>
 800 PRINT "MACHINE LOSES"
@@ -266,36 +266,36 @@
 830 GOTO 1640
  LineNumber:1640
 840 LET C=0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 850 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 860 IF A(I)>1 THEN 940
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  NumericConstant:1
  BinaryOperator:>
 870 IF A(I)=0 THEN 890
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  NumericConstant:0
  BinaryOperator:=
 880 LET C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 890 NEXT I
  Variable:I
 900 IF C/2<>INT(C/2) THEN 800
- Value:C
+ Variable:C
  NumericConstant:2
  BinaryOperator:/
- Value:C
+ Variable:C
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
@@ -304,49 +304,49 @@
  LineNumber:940
 920 IF A(D(1))=1 THEN 820
  NumericConstant:1
- Value:D
- Value:A
+ Variable:D
+ Variable:A
  NumericConstant:1
  BinaryOperator:=
 930 IF A(D(2))=1 THEN 820
  NumericConstant:2
- Value:D
- Value:A
+ Variable:D
+ Variable:A
  NumericConstant:1
  BinaryOperator:=
 940 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 950 LET E=A(I)
- Reference:E
- Value:I
- Value:A
+ Variable:E
+ Variable:I
+ Variable:A
  AssignmentOperator:=
 960 FOR J=0 TO 10
  control: Variable:J
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:10"]
 970 LET F=E/2
- Reference:F
- Value:E
+ Variable:F
+ Variable:E
  NumericConstant:2
  BinaryOperator:/
  AssignmentOperator:=
 980 LET B(I,J)=2*(F-INT(F))
- Value:I
- Value:J
- Reference:B
+ Variable:I
+ Variable:J
+ Variable:B
  NumericConstant:2
- Value:F
- Value:F
+ Variable:F
+ Variable:F
  FunctionInt
  BinaryOperator:-
  BinaryOperator:*
  AssignmentOperator:=
 990 LET E=INT(F)
- Reference:E
- Value:F
+ Variable:E
+ Variable:F
  FunctionInt
  AssignmentOperator:=
 1000 NEXT J
@@ -359,50 +359,50 @@
  end:     ["NumericConstant:0"]
  step:    ["NumericConstant:1", "UnaryOperator:-"]
 1030 LET C=0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 1040 LET H=0
- Reference:H
+ Variable:H
  NumericConstant:0
  AssignmentOperator:=
 1050 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 1060 IF B(I,J)=0 THEN 1110
- Value:I
- Value:J
- Value:B
+ Variable:I
+ Variable:J
+ Variable:B
  NumericConstant:0
  BinaryOperator:=
 1070 LET C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1080 IF A(I)<=H THEN 1110
- Value:I
- Value:A
- Value:H
+ Variable:I
+ Variable:A
+ Variable:H
  BinaryOperator:<=
 1090 LET H=A(I)
- Reference:H
- Value:I
- Value:A
+ Variable:H
+ Variable:I
+ Variable:A
  AssignmentOperator:=
 1100 LET G=I
- Reference:G
- Value:I
+ Variable:G
+ Variable:I
  AssignmentOperator:=
 1110 NEXT I
  Variable:I
 1120 IF C/2<>INT(C/2) THEN 1190
- Value:C
+ Variable:C
  NumericConstant:2
  BinaryOperator:/
- Value:C
+ Variable:C
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
@@ -410,8 +410,8 @@
 1130 NEXT J
  Variable:J
 1140 LET E=INT(N*RND(1)+1)
- Reference:E
- Value:N
+ Variable:E
+ Variable:N
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -420,14 +420,14 @@
  FunctionInt
  AssignmentOperator:=
 1150 IF A(E)=0 THEN 1140
- Value:E
- Value:A
+ Variable:E
+ Variable:A
  NumericConstant:0
  BinaryOperator:=
 1160 LET F=INT(A(E)*RND(1)+1)
- Reference:F
- Value:E
- Value:A
+ Variable:F
+ Variable:E
+ Variable:A
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -436,18 +436,18 @@
  FunctionInt
  AssignmentOperator:=
 1170 LET A(E)=A(E)-F
- Value:E
- Reference:A
- Value:E
- Value:A
- Value:F
+ Variable:E
+ Variable:A
+ Variable:E
+ Variable:A
+ Variable:F
  BinaryOperator:-
  AssignmentOperator:=
 1180 GOTO 1380
  LineNumber:1380
 1190 LET A(G)=0
- Value:G
- Reference:A
+ Variable:G
+ Variable:A
  NumericConstant:0
  AssignmentOperator:=
 1200 FOR J=0 TO 10
@@ -455,50 +455,50 @@
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:10"]
 1210 LET B(G,J)=0
- Value:G
- Value:J
- Reference:B
+ Variable:G
+ Variable:J
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
 1220 LET C=0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 1230 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 1240 IF B(I,J)=0 THEN 1260
- Value:I
- Value:J
- Value:B
+ Variable:I
+ Variable:J
+ Variable:B
  NumericConstant:0
  BinaryOperator:=
 1250 LET C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1260 NEXT I
  Variable:I
 1270 LET A(G)=A(G)+2*(C/2-INT(C/2))*2^J
- Value:G
- Reference:A
- Value:G
- Value:A
+ Variable:G
+ Variable:A
+ Variable:G
+ Variable:A
  NumericConstant:2
- Value:C
+ Variable:C
  NumericConstant:2
  BinaryOperator:/
- Value:C
+ Variable:C
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
  BinaryOperator:-
  BinaryOperator:*
  NumericConstant:2
- Value:J
+ Variable:J
  BinaryOperator:^
  BinaryOperator:*
  BinaryOperator:+
@@ -506,50 +506,50 @@
 1280 NEXT J
  Variable:J
 1290 IF W=1 THEN 1380
- Value:W
+ Variable:W
  NumericConstant:1
  BinaryOperator:=
 1300 LET C=0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 1310 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 1320 IF A(I)>1 THEN 1380
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  NumericConstant:1
  BinaryOperator:>
 1330 IF A(I)=0 THEN 1350
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  NumericConstant:0
  BinaryOperator:=
 1340 LET C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1350 NEXT I
  Variable:I
 1360 IF C/2<>INT(C/2) THEN 1380
- Value:C
+ Variable:C
  NumericConstant:2
  BinaryOperator:/
- Value:C
+ Variable:C
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
  BinaryOperator:<>
 1370 LET A(G)=1-A(G)
- Value:G
- Reference:A
+ Variable:G
+ Variable:A
  NumericConstant:1
- Value:G
- Value:A
+ Variable:G
+ Variable:A
  BinaryOperator:-
  AssignmentOperator:=
 1380 PRINT "PILE  SIZE"
@@ -559,24 +559,24 @@
 1390 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 1400 PRINT I;A(I)
  ITEMS
- Value:I
+ Variable:I
  CarriageControl:;
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  CarriageControl:NL
 1410 NEXT I
  Variable:I
 1420 IF W=2 THEN 1450
- Value:W
+ Variable:W
  NumericConstant:2
  BinaryOperator:=
 1430 GOSUB 1570
  LineNumber:1570
 1440 IF Z=1 THEN 820
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 1450 PRINT "YOUR MOVE - PILE, NUMBER TO BE REMOVED";
@@ -584,62 +584,62 @@
  TextConstant:"YOUR MOVE - PILE, NUMBER TO BE REMOVED"
  CarriageControl:;
 1460 INPUT X,Y
- Reference:X
- Reference:Y
+ Variable:X
+ Variable:Y
 1470 IF X>N THEN 1450
- Value:X
- Value:N
+ Variable:X
+ Variable:N
  BinaryOperator:>
 1480 IF X<1 THEN 1450
- Value:X
+ Variable:X
  NumericConstant:1
  BinaryOperator:<
 1490 IF X<>INT(X) THEN 1450
- Value:X
- Value:X
+ Variable:X
+ Variable:X
  FunctionInt
  BinaryOperator:<>
 1500 IF Y>A(X) THEN 1450
- Value:Y
- Value:X
- Value:A
+ Variable:Y
+ Variable:X
+ Variable:A
  BinaryOperator:>
 1510 IF Y<1 THEN 1450
- Value:Y
+ Variable:Y
  NumericConstant:1
  BinaryOperator:<
 1520 IF Y<>INT(Y) THEN 1450
- Value:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  FunctionInt
  BinaryOperator:<>
 1530 LET A(X)=A(X)-Y
- Value:X
- Reference:A
- Value:X
- Value:A
- Value:Y
+ Variable:X
+ Variable:A
+ Variable:X
+ Variable:A
+ Variable:Y
  BinaryOperator:-
  AssignmentOperator:=
 1540 GOSUB 1570
  LineNumber:1570
 1550 IF Z=1 THEN 800
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 1560 GOTO 700
  LineNumber:700
 1570 LET Z=0
- Reference:Z
+ Variable:Z
  NumericConstant:0
  AssignmentOperator:=
 1580 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 1590 IF A(I)=0 THEN 1610
- Value:I
- Value:A
+ Variable:I
+ Variable:A
  NumericConstant:0
  BinaryOperator:=
 1600 RETURN
@@ -647,7 +647,7 @@
 1610 NEXT I
  Variable:I
 1620 LET Z=1
- Reference:Z
+ Variable:Z
  NumericConstant:1
  AssignmentOperator:=
 1630 RETURN
@@ -657,21 +657,21 @@
  TextConstant:"do you want to play another game"
  CarriageControl:;
 1650 INPUT Q9$
- Reference:Q9$
+ Variable:Q9$
 1660 IF Q9$="YES" THEN 1720
- Value:Q9$
+ Variable:Q9$
  TextConstant:"YES"
  BinaryOperator:=
 1670 IF Q9$="yes" THEN 1720
- Value:Q9$
+ Variable:Q9$
  TextConstant:"yes"
  BinaryOperator:=
 1680 IF Q9$="NO" THEN 1730
- Value:Q9$
+ Variable:Q9$
  TextConstant:"NO"
  BinaryOperator:=
 1690 IF Q9$="no" THEN 1730
- Value:Q9$
+ Variable:Q9$
  TextConstant:"no"
  BinaryOperator:=
 1700 PRINT "PLEASE.  YES OR NO."

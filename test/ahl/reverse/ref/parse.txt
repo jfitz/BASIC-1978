@@ -31,7 +31,7 @@
 140 REM *** N=NUMBER OF NUMBERS
  Remark:*** N=NUMBER OF NUMBERS
 150 N=9
- Reference:N
+ Variable:N
  NumericConstant:9
  AssignmentOperator:=
 160 PRINT "DO YOU WANT THE RULES";
@@ -39,9 +39,9 @@
  TextConstant:"DO YOU WANT THE RULES"
  CarriageControl:;
 170 INPUT A$
- Reference:A$
+ Variable:A$
 180 IF A$="NO" THEN 210
- Value:A$
+ Variable:A$
  TextConstant:"NO"
  BinaryOperator:=
 190 GOSUB 710
@@ -50,8 +50,8 @@
  Remark:*** MAKE A RANDOM LIST A(1) TO A(N)
 210 A(1)=INT((N-1)*RND(1)+2)
  NumericConstant:1
- Reference:A
- Value:N
+ Variable:A
+ Variable:N
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:1
@@ -64,11 +64,11 @@
 220 FOR K=2 TO N
  control: Variable:K
  start:   ["NumericConstant:2"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 230 A(K)=INT(N*RND(1)+1)
- Value:K
- Reference:A
- Value:N
+ Variable:K
+ Variable:A
+ Variable:N
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -79,12 +79,12 @@
 240 FOR J=1 TO K-1
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:K", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:K", "NumericConstant:1", "BinaryOperator:-"]
 250 IF A(K)=A(J) THEN 230
- Value:K
- Value:A
- Value:J
- Value:A
+ Variable:K
+ Variable:A
+ Variable:J
+ Variable:A
  BinaryOperator:=
 260 NEXT J:NEXT K
  Variable:J
@@ -98,7 +98,7 @@
  TextConstant:"HERE WE GO ... THE LIST IS:"
  CarriageControl:NL
 310 T=0
- Reference:T
+ Variable:T
  NumericConstant:0
  AssignmentOperator:=
 320 GOSUB 610
@@ -108,25 +108,25 @@
  TextConstant:"HOW MANY SHALL I REVERSE"
  CarriageControl:;
 340 INPUT R
- Reference:R
+ Variable:R
 350 IF R=0 THEN 520
- Value:R
+ Variable:R
  NumericConstant:0
  BinaryOperator:=
 360 IF R<=N THEN 390
- Value:R
- Value:N
+ Variable:R
+ Variable:N
  BinaryOperator:<=
 370 PRINT "OOPS! TOO MANY! I CAN REVERSE AT MOST";N:GOTO 330
  ITEMS
  TextConstant:"OOPS! TOO MANY! I CAN REVERSE AT MOST"
  CarriageControl:;
- Value:N
+ Variable:N
  CarriageControl:NL
  LineNumber:330
 390 T=T+1
- Reference:T
- Value:T
+ Variable:T
+ Variable:T
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -135,30 +135,30 @@
 410 FOR K=1 TO INT(R/2)
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["Value:R", "NumericConstant:2", "BinaryOperator:/", "FunctionInt"]
+ end:     ["Variable:R", "NumericConstant:2", "BinaryOperator:/", "FunctionInt"]
 420 Z=A(K)
- Reference:Z
- Value:K
- Value:A
+ Variable:Z
+ Variable:K
+ Variable:A
  AssignmentOperator:=
 430 A(K)=A(R-K+1)
- Value:K
- Reference:A
- Value:R
- Value:K
+ Variable:K
+ Variable:A
+ Variable:R
+ Variable:K
  BinaryOperator:-
  NumericConstant:1
  BinaryOperator:+
- Value:A
+ Variable:A
  AssignmentOperator:=
 440 A(R-K+1)=Z
- Value:R
- Value:K
+ Variable:R
+ Variable:K
  BinaryOperator:-
  NumericConstant:1
  BinaryOperator:+
- Reference:A
- Value:Z
+ Variable:A
+ Variable:Z
  AssignmentOperator:=
 450 NEXT K
  Variable:K
@@ -169,11 +169,11 @@
 480 FOR K=1 TO N
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
 490 IF A(K)<>K THEN 330
- Value:K
- Value:A
- Value:K
+ Variable:K
+ Variable:A
+ Variable:K
  BinaryOperator:<>
 500 NEXT K
  Variable:K
@@ -181,7 +181,7 @@
  ITEMS
  TextConstant:"YOU WON IT IN"
  CarriageControl:;
- Value:T
+ Variable:T
  CarriageControl:;
  TextConstant:"MOVES!!!"
  CarriageControl:NL
@@ -195,9 +195,9 @@
  TextConstant:"TRY AGAIN (YES OR NO)"
  CarriageControl:;
 540 INPUT A$
- Reference:A$
+ Variable:A$
 550 IF A$="YES" THEN 210
- Value:A$
+ Variable:A$
  TextConstant:"YES"
  BinaryOperator:=
 560 PRINT: PRINT "O.K. HOPE YOU HAD FUN!!":GOTO 999
@@ -214,10 +214,10 @@
  CarriageControl:NL
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
  ITEMS
- Value:K
- Value:A
+ Variable:K
+ Variable:A
  CarriageControl:;
  Variable:K
 650 PRINT:PRINT:RETURN
@@ -238,7 +238,7 @@
  ITEMS
  TextConstant:"TO DO IS ARRANGE A LIST OF NUMBERS (1 THROUGH"
  CarriageControl:;
- Value:N
+ Variable:N
  CarriageControl:;
  TextConstant:")"
  CarriageControl:NL

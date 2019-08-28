@@ -55,8 +55,8 @@
  control: Variable:M
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:18"]
- Value:M
- Reference:K
+ Variable:M
+ Variable:K
  Variable:M
 13 DATA -1,0,1,0,0,-1,0,1,-1,-1,1,-1,-1,1,1,1
  NumericConstant:1
@@ -85,8 +85,8 @@
  control: Variable:O1
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:16"]
- Value:O1
- Reference:A
+ Variable:O1
+ Variable:A
  Variable:O1
 20 GOTO 500
  LineNumber:500
@@ -99,9 +99,9 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 55 IF N(J,K)>99 THEN GOSUB 200
- Value:J
- Value:K
- Value:N
+ Variable:J
+ Variable:K
+ Variable:N
  NumericConstant:99
  BinaryOperator:>
  LineNumber:200
@@ -110,13 +110,13 @@
 65 NEXT J
  Variable:J
 90 K=0: M2=0: M3=0
- Reference:K
+ Variable:K
  NumericConstant:0
  AssignmentOperator:=
- Reference:M2
+ Variable:M2
  NumericConstant:0
  AssignmentOperator:=
- Reference:M3
+ Variable:M3
  NumericConstant:0
  AssignmentOperator:=
 99 FOR J=0 TO 6: PRINT
@@ -130,14 +130,14 @@
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:6"]
 101 IF J<>0 THEN IF J<>6 THEN 105
- Value:J
+ Variable:J
  NumericConstant:0
  BinaryOperator:<>
- Value:J
+ Variable:J
  NumericConstant:6
  BinaryOperator:<>
 102 IF K=6 THEN PRINT 0;: GOTO 125
- Value:K
+ Variable:K
  NumericConstant:6
  BinaryOperator:=
  ITEMS
@@ -146,18 +146,18 @@
  LineNumber:125
 103 PRINT K;: GOTO 120
  ITEMS
- Value:K
+ Variable:K
  CarriageControl:;
  LineNumber:120
 105 IF K<>0 THEN IF K<>6 THEN 110
- Value:K
+ Variable:K
  NumericConstant:0
  BinaryOperator:<>
- Value:K
+ Variable:K
  NumericConstant:6
  BinaryOperator:<>
 106 IF J=6 THEN PRINT 0: GOTO 126
- Value:J
+ Variable:J
  NumericConstant:6
  BinaryOperator:=
  ITEMS
@@ -166,7 +166,7 @@
  LineNumber:126
 107 PRINT J;: GOTO 120
  ITEMS
- Value:J
+ Variable:J
  CarriageControl:;
  LineNumber:120
 110 GOSUB 300
@@ -178,15 +178,15 @@
 126 RETURN
  
 200 B=1: IF N(J,K)>999 THEN B=10
- Reference:B
+ Variable:B
  NumericConstant:1
  AssignmentOperator:=
- Value:J
- Value:K
- Value:N
+ Variable:J
+ Variable:K
+ Variable:N
  NumericConstant:999
  BinaryOperator:>
- Reference:B
+ Variable:B
  NumericConstant:10
  AssignmentOperator:=
 220 FOR O1= 1 TO 15 STEP 2
@@ -195,29 +195,29 @@
  end:     ["NumericConstant:15"]
  step:    ["NumericConstant:2"]
 230 N(J+A(O1),K+A(O1+1))=N(J+A(O1),K+A(O1+1))+B
- Value:J
- Value:O1
- Value:A
+ Variable:J
+ Variable:O1
+ Variable:A
  BinaryOperator:+
- Value:K
- Value:O1
+ Variable:K
+ Variable:O1
  NumericConstant:1
  BinaryOperator:+
- Value:A
+ Variable:A
  BinaryOperator:+
- Reference:N
- Value:J
- Value:O1
- Value:A
+ Variable:N
+ Variable:J
+ Variable:O1
+ Variable:A
  BinaryOperator:+
- Value:K
- Value:O1
+ Variable:K
+ Variable:O1
  NumericConstant:1
  BinaryOperator:+
- Value:A
+ Variable:A
  BinaryOperator:+
- Value:N
- Value:B
+ Variable:N
+ Variable:B
  BinaryOperator:+
  AssignmentOperator:=
 231 NEXT O1
@@ -225,9 +225,9 @@
 239 RETURN
  
 300 IF N(J,K)<3 THEN 399
- Value:J
- Value:K
- Value:N
+ Variable:J
+ Variable:K
+ Variable:N
  NumericConstant:3
  BinaryOperator:<
 305 FOR O1=1 TO 18
@@ -235,28 +235,28 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:18"]
 310 IF N(J,K)=K(O1) THEN 350
- Value:J
- Value:K
- Value:N
- Value:O1
- Value:K
+ Variable:J
+ Variable:K
+ Variable:N
+ Variable:O1
+ Variable:K
  BinaryOperator:=
 315 NEXT O1
  Variable:O1
 320 GOTO 399
  LineNumber:399
 350 IF O1>9 THEN 360
- Value:O1
+ Variable:O1
  NumericConstant:9
  BinaryOperator:>
 351 N(J,K)=100: M2=M2+1: PRINT " * ";
- Value:J
- Value:K
- Reference:N
+ Variable:J
+ Variable:K
+ Variable:N
  NumericConstant:100
  AssignmentOperator:=
- Reference:M2
- Value:M2
+ Variable:M2
+ Variable:M2
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -266,13 +266,13 @@
 355 RETURN
  
 360 N(J,K)=1000: M3=M3+1: PRINT " # ";
- Value:J
- Value:K
- Reference:N
+ Variable:J
+ Variable:K
+ Variable:N
  NumericConstant:1000
  AssignmentOperator:=
- Reference:M3
- Value:M3
+ Variable:M3
+ Variable:M3
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -282,9 +282,9 @@
 365 RETURN
  
 399 N(J,K)=0: PRINT "   ";: RETURN
- Value:J
- Value:K
- Reference:N
+ Variable:J
+ Variable:K
+ Variable:N
  NumericConstant:0
  AssignmentOperator:=
  ITEMS
@@ -299,10 +299,10 @@
  TextConstant:"U.B. LIFE GAME"
  CarriageControl:NL
 505 M2=0: M3=0
- Reference:M2
+ Variable:M2
  NumericConstant:0
  AssignmentOperator:=
- Reference:M3
+ Variable:M3
  NumericConstant:0
  AssignmentOperator:=
 510 FOR J=1 TO 5
@@ -314,9 +314,9 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 515 N(J,K)=0
- Value:J
- Value:K
- Reference:N
+ Variable:J
+ Variable:K
+ Variable:N
  NumericConstant:0
  AssignmentOperator:=
 516 NEXT K
@@ -327,13 +327,13 @@
  control: Variable:B
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:2"]
- Reference:P1
+ Variable:P1
  NumericConstant:3
  AssignmentOperator:=
- Value:B
+ Variable:B
  NumericConstant:2
  BinaryOperator:=
- Reference:P1
+ Variable:P1
  NumericConstant:30
  AssignmentOperator:=
 520 PRINT:PRINT "PLAYER";B;" - 3 LIVE PIECES."
@@ -342,7 +342,7 @@
  ITEMS
  TextConstant:"PLAYER"
  CarriageControl:;
- Value:B
+ Variable:B
  CarriageControl:;
  TextConstant:" - 3 LIVE PIECES."
  CarriageControl:NL
@@ -352,12 +352,12 @@
  end:     ["NumericConstant:3"]
  LineNumber:700
 540 N(X(B),Y(B))=P1: NEXT K1
- Value:B
- Value:X
- Value:B
- Value:Y
- Reference:N
- Value:P1
+ Variable:B
+ Variable:X
+ Variable:B
+ Variable:Y
+ Variable:N
+ Variable:P1
  AssignmentOperator:=
  Variable:K1
 542 NEXT B
@@ -369,25 +369,25 @@
  CarriageControl:NL
  LineNumber:50
 570 IF M2=0 THEN IF M3=0 THEN 574
- Value:M2
+ Variable:M2
  NumericConstant:0
  BinaryOperator:=
- Value:M3
+ Variable:M3
  NumericConstant:0
  BinaryOperator:=
 571 IF M3=0 THEN B=1: GOTO 575
- Value:M3
+ Variable:M3
  NumericConstant:0
  BinaryOperator:=
- Reference:B
+ Variable:B
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:575
 572 IF M2=0 THEN B=2: GOTO 575
- Value:M2
+ Variable:M2
  NumericConstant:0
  BinaryOperator:=
- Reference:B
+ Variable:B
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:575
@@ -406,7 +406,7 @@
  ITEMS
  TextConstant:"PLAYER"
  CarriageControl:;
- Value:B
+ Variable:B
  CarriageControl:;
  TextConstant:"IS THE WINNER"
  CarriageControl:NL
@@ -422,28 +422,28 @@
  ITEMS
  TextConstant:"PLAYER"
  CarriageControl:;
- Value:B
+ Variable:B
  CarriageControl:;
  LineNumber:700
 581 IF B=99 THEN 560
- Value:B
+ Variable:B
  NumericConstant:99
  BinaryOperator:=
 582 NEXT B
  Variable:B
 586 N(X(1),Y(1))=100: N(X(2),Y(2))=1000
  NumericConstant:1
- Value:X
+ Variable:X
  NumericConstant:1
- Value:Y
- Reference:N
+ Variable:Y
+ Variable:N
  NumericConstant:100
  AssignmentOperator:=
  NumericConstant:2
- Value:X
+ Variable:X
  NumericConstant:2
- Value:Y
- Reference:N
+ Variable:Y
+ Variable:N
  NumericConstant:1000
  AssignmentOperator:=
 596 GOTO 560
@@ -470,55 +470,55 @@
  NumericConstant:13
  FunctionChr
  CarriageControl:;
- Value:B
- Reference:Y
- Value:B
- Reference:X
+ Variable:B
+ Variable:Y
+ Variable:B
+ Variable:X
 705 IF X(B)<=5 THEN IF X(B)>0 THEN 708
- Value:B
- Value:X
+ Variable:B
+ Variable:X
  NumericConstant:5
  BinaryOperator:<=
- Value:B
- Value:X
+ Variable:B
+ Variable:X
  NumericConstant:0
  BinaryOperator:>
 706 GOTO 750
  LineNumber:750
 708 IF Y(B)<=5 THEN IF Y(B)>0 THEN 715
- Value:B
- Value:Y
+ Variable:B
+ Variable:Y
  NumericConstant:5
  BinaryOperator:<=
- Value:B
- Value:Y
+ Variable:B
+ Variable:Y
  NumericConstant:0
  BinaryOperator:>
 710 GOTO 750
  LineNumber:750
 715 IF N(X(B),Y(B))<>0 THEN 750
- Value:B
- Value:X
- Value:B
- Value:Y
- Value:N
+ Variable:B
+ Variable:X
+ Variable:B
+ Variable:Y
+ Variable:N
  NumericConstant:0
  BinaryOperator:<>
 720 IF B=1 THEN RETURN
- Value:B
+ Variable:B
  NumericConstant:1
  BinaryOperator:=
  
 725 IF X(1)=X(2) THEN IF Y(1)=Y(2) THEN 740
  NumericConstant:1
- Value:X
+ Variable:X
  NumericConstant:2
- Value:X
+ Variable:X
  BinaryOperator:=
  NumericConstant:1
- Value:Y
+ Variable:Y
  NumericConstant:2
- Value:Y
+ Variable:Y
  BinaryOperator:=
 730 RETURN
  
@@ -527,18 +527,18 @@
  TextConstant:"SAME COORD.  SET TO 0"
  CarriageControl:NL
 741 N(X(B)+1,Y(B)+1)=0: B=99: RETURN
- Value:B
- Value:X
+ Variable:B
+ Variable:X
  NumericConstant:1
  BinaryOperator:+
- Value:B
- Value:Y
+ Variable:B
+ Variable:Y
  NumericConstant:1
  BinaryOperator:+
- Reference:N
+ Variable:N
  NumericConstant:0
  AssignmentOperator:=
- Reference:B
+ Variable:B
  NumericConstant:99
  AssignmentOperator:=
  

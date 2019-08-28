@@ -49,8 +49,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 90 F(Q)=0
- Value:Q
- Reference:F
+ Variable:Q
+ Variable:F
  NumericConstant:0
  AssignmentOperator:=
 100 NEXT Q
@@ -62,13 +62,13 @@
  TextConstant:"HOW MANY ROLLS"
  CarriageControl:;
 120 INPUT X
- Reference:X
+ Variable:X
 130 FOR S=1 TO X
  control: Variable:S
  start:   ["NumericConstant:1"]
- end:     ["Value:X"]
+ end:     ["Variable:X"]
 140 A=INT(6*RND(1)+1)
- Reference:A
+ Variable:A
  NumericConstant:6
  NumericConstant:1
  FunctionRnd
@@ -78,7 +78,7 @@
  FunctionInt
  AssignmentOperator:=
 150 B=INT(6*RND(1)+1)
- Reference:B
+ Variable:B
  NumericConstant:6
  NumericConstant:1
  FunctionRnd
@@ -88,16 +88,16 @@
  FunctionInt
  AssignmentOperator:=
 160 R=A+B
- Reference:R
- Value:A
- Value:B
+ Variable:R
+ Variable:A
+ Variable:B
  BinaryOperator:+
  AssignmentOperator:=
 170 F(R)=F(R)+1
- Value:R
- Reference:F
- Value:R
- Value:F
+ Variable:R
+ Variable:F
+ Variable:R
+ Variable:F
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -118,10 +118,10 @@
  end:     ["NumericConstant:12"]
 210 PRINT V,F(V)
  ITEMS
- Value:V
+ Variable:V
  CarriageControl:,
- Value:V
- Value:F
+ Variable:V
+ Variable:F
  CarriageControl:NL
 220 NEXT V
  Variable:V
@@ -135,9 +135,9 @@
  TextConstant:"TRY AGAIN"
  CarriageControl:;
 223 INPUT Z$
- Reference:Z$
+ Variable:Z$
 224 IF Z$="YES" THEN 80
- Value:Z$
+ Variable:Z$
  TextConstant:"YES"
  BinaryOperator:=
 240 END

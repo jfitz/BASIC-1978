@@ -46,7 +46,7 @@
  NumericConstant:30000
  CarriageControl:,
 8 INPUT A
- Reference:A
+ Variable:A
 9 PRINT "NAVY",20000,
  ITEMS
  TextConstant:"NAVY"
@@ -54,7 +54,7 @@
  NumericConstant:20000
  CarriageControl:,
 10 INPUT B
- Reference:B
+ Variable:B
 11 PRINT "A. F.",22000,
  ITEMS
  TextConstant:"A. F."
@@ -62,25 +62,25 @@
  NumericConstant:22000
  CarriageControl:,
 12 INPUT C
- Reference:C
+ Variable:C
 13 IF A+B+C>72000 THEN 5
- Value:A
- Value:B
+ Variable:A
+ Variable:B
  BinaryOperator:+
- Value:C
+ Variable:C
  BinaryOperator:+
  NumericConstant:72000
  BinaryOperator:>
 14 D=30000
- Reference:D
+ Variable:D
  NumericConstant:30000
  AssignmentOperator:=
 15 E=20000
- Reference:E
+ Variable:E
  NumericConstant:20000
  AssignmentOperator:=
 16 F=22000
- Reference:F
+ Variable:F
  NumericConstant:22000
  AssignmentOperator:=
 17 PRINT "YOU ATTACK FIRST. TYPE (1) FOR ARMY; (2) FOR NAVY;"
@@ -92,36 +92,36 @@
  TextConstant:"AND (3) FOR AIR FORCE."
  CarriageControl:NL
 19 INPUT Y
- Reference:Y
+ Variable:Y
 20 PRINT "HOW MANY MEN"
  ITEMS
  TextConstant:"HOW MANY MEN"
  CarriageControl:NL
 21 INPUT X
- Reference:X
+ Variable:X
 22 IF X<0 THEN 20
- Value:X
+ Variable:X
  NumericConstant:0
  BinaryOperator:<
 23 ON Y GOTO 100,200,300
- Value:Y
+ Variable:Y
  LineNumber:100
  LineNumber:200
  LineNumber:300
 100 IF X>A THEN 20
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  BinaryOperator:>
 105 IF X<A/3 THEN 120
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  NumericConstant:3
  BinaryOperator:/
  BinaryOperator:<
 110 IF X<2*A/3 THEN 150
- Value:X
+ Variable:X
  NumericConstant:2
- Value:A
+ Variable:A
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:/
@@ -132,14 +132,14 @@
  ITEMS
  TextConstant:"YOU LOST"
  CarriageControl:;
- Value:X
+ Variable:X
  CarriageControl:;
  TextConstant:"MEN FROM YOUR ARMY."
  CarriageControl:NL
 125 A=INT(A-X)
- Reference:A
- Value:A
- Value:X
+ Variable:A
+ Variable:A
+ Variable:X
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
@@ -149,7 +149,7 @@
  ITEMS
  TextConstant:"YOU LOST"
  CarriageControl:;
- Value:X
+ Variable:X
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
@@ -157,41 +157,41 @@
  TextConstant:"MEN, BUT I LOST "
  CarriageControl:;
  NumericConstant:2
- Value:D
+ Variable:D
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
  CarriageControl:NL
 155 A=INT(A-X/3)
- Reference:A
- Value:A
- Value:X
+ Variable:A
+ Variable:A
+ Variable:X
  NumericConstant:3
  BinaryOperator:/
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
 160 D=0
- Reference:D
+ Variable:D
  NumericConstant:0
  AssignmentOperator:=
 165 GOTO 500 
  LineNumber:500
 200 IF X>B THEN 20
- Value:X
- Value:B
+ Variable:X
+ Variable:B
  BinaryOperator:>
 210 IF X<E/3 THEN 230
- Value:X
- Value:E
+ Variable:X
+ Variable:E
  NumericConstant:3
  BinaryOperator:/
  BinaryOperator:<
 215 IF X<2*E/3 THEN 250
- Value:X
+ Variable:X
  NumericConstant:2
- Value:E
+ Variable:E
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:/
@@ -203,9 +203,9 @@
  TextConstant:"YOUR ATTACK WAS STOPPED!"
  CarriageControl:NL
 232 B=INT(B-X)
- Reference:B
- Value:B
- Value:X
+ Variable:B
+ Variable:B
+ Variable:X
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
@@ -216,7 +216,7 @@
  TextConstant:"YOU DESTROYED"
  CarriageControl:;
  NumericConstant:2
- Value:E
+ Variable:E
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:/
@@ -225,8 +225,8 @@
  TextConstant:"OF MY ARMY."
  CarriageControl:NL
 255 E=INT(E/3)
- Reference:E
- Value:E
+ Variable:E
+ Variable:E
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
@@ -242,23 +242,23 @@
  TextConstant:"OF YOUR AIR FORCE BASES AND 3 ARMY BASES."
  CarriageControl:NL
 280 A=INT(A/3)
- Reference:A
- Value:A
+ Variable:A
+ Variable:A
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 285 C=INT(C/3)
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 290 E=INT(2*E/3)
- Reference:E
+ Variable:E
  NumericConstant:2
- Value:E
+ Variable:E
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:/
@@ -267,19 +267,19 @@
 293 GOTO 500
  LineNumber:500
 300 IF X>C THEN 20
- Value:X
- Value:C
+ Variable:X
+ Variable:C
  BinaryOperator:>
 310 IF X<C/3 THEN 350
- Value:X
- Value:C
+ Variable:X
+ Variable:C
  NumericConstant:3
  BinaryOperator:/
  BinaryOperator:<
 320 IF X<2*C/3 THEN 370
- Value:X
+ Variable:X
  NumericConstant:2
- Value:C
+ Variable:C
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:/
@@ -291,9 +291,9 @@
  TextConstant:"YOUR ATTACK WAS WIPED OUT."
  CarriageControl:NL
 355 C=INT(C-X)
- Reference:C
- Value:C
- Value:X
+ Variable:C
+ Variable:C
+ Variable:X
  BinaryOperator:-
  FunctionInt
  AssignmentOperator:=
@@ -304,24 +304,24 @@
  TextConstant:"WE HAD A DOGFIGHT. YOU WON - AND FINISHED YOUR MISSION."
  CarriageControl:NL
 375 D=INT(2*D/3)
- Reference:D
+ Variable:D
  NumericConstant:2
- Value:D
+ Variable:D
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 377 E=INT(E/3)
- Reference:E
- Value:E
+ Variable:E
+ Variable:E
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 378 F=INT(F/3)
- Reference:F
- Value:F
+ Variable:F
+ Variable:F
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
@@ -337,23 +337,23 @@
  TextConstant:"TWO NAVY BASES AND BOMBED THREE ARMY BASES."
  CarriageControl:NL
 385 A=INT(A/4)
- Reference:A
- Value:A
+ Variable:A
+ Variable:A
  NumericConstant:4
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 387 B=INT(B/3)
- Reference:B
- Value:B
+ Variable:B
+ Variable:B
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 390 D=INT(2*D/3)
- Reference:D
+ Variable:D
  NumericConstant:2
- Value:D
+ Variable:D
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:/
@@ -373,25 +373,25 @@
  ITEMS
  TextConstant:"ARMY"
  CarriageControl:,
- Value:A
+ Variable:A
  CarriageControl:,
- Value:D
+ Variable:D
  CarriageControl:NL
 520 PRINT "NAVY",B,E
  ITEMS
  TextConstant:"NAVY"
  CarriageControl:,
- Value:B
+ Variable:B
  CarriageControl:,
- Value:E
+ Variable:E
  CarriageControl:NL
 530 PRINT "A. F.",C,F
  ITEMS
  TextConstant:"A. F."
  CarriageControl:,
- Value:C
+ Variable:C
  CarriageControl:,
- Value:F
+ Variable:F
  CarriageControl:NL
 1000 PRINT "WHAT IS YOUR NEXT MOVE?"
  ITEMS
@@ -402,29 +402,29 @@
  TextConstant:"ARMY=1  NAVY=2  AIR FORCE=3"
  CarriageControl:NL
 1020 INPUT G
- Reference:G
+ Variable:G
 1030 PRINT "HOW MANY MEN"
  ITEMS
  TextConstant:"HOW MANY MEN"
  CarriageControl:NL
 1040 INPUT T
- Reference:T
+ Variable:T
 1045 IF T<0 THEN 1030
- Value:T
+ Variable:T
  NumericConstant:0
  BinaryOperator:<
 1050 ON G GOTO 1600,1700,1800
- Value:G
+ Variable:G
  LineNumber:1600
  LineNumber:1700
  LineNumber:1800
 1600 IF T>A THEN 1030
- Value:T
- Value:A
+ Variable:T
+ Variable:A
  BinaryOperator:>
 1610 IF T<D/2 THEN 1630
- Value:T
- Value:D
+ Variable:T
+ Variable:D
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:<
@@ -433,7 +433,7 @@
  TextConstant:"YOU DESTROYED MY ARMY!"
  CarriageControl:NL
 1616 D=0
- Reference:D
+ Variable:D
  NumericConstant:0
  AssignmentOperator:=
 1617 GOTO 2000
@@ -443,20 +443,20 @@
  TextConstant:"I WIPED OUT YOUR ATTACK!"
  CarriageControl:NL
 1635 A=A-T
- Reference:A
- Value:A
- Value:T
+ Variable:A
+ Variable:A
+ Variable:T
  BinaryOperator:-
  AssignmentOperator:=
 1640 GOTO 2000
  LineNumber:2000
 1700 IF T>B THEN 1030 
- Value:T
- Value:B
+ Variable:T
+ Variable:B
  BinaryOperator:>
 1710 IF T<E/2 THEN 1750
- Value:T
- Value:E
+ Variable:T
+ Variable:E
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:<
@@ -471,14 +471,14 @@
  TextConstant:"WIPED OUT YOUR UNGAURDED CAPITOL."
  CarriageControl:NL
 1755 A=A/4
- Reference:A
- Value:A
+ Variable:A
+ Variable:A
  NumericConstant:4
  BinaryOperator:/
  AssignmentOperator:=
 1760 B=B/2
- Reference:B
- Value:B
+ Variable:B
+ Variable:B
  NumericConstant:2
  BinaryOperator:/
  AssignmentOperator:=
@@ -493,28 +493,28 @@
  TextConstant:"AND SUNK THREE BATTLESHIPS."
  CarriageControl:NL
 1775 F=2*F/3
- Reference:F
+ Variable:F
  NumericConstant:2
- Value:F
+ Variable:F
  BinaryOperator:*
  NumericConstant:3
  BinaryOperator:/
  AssignmentOperator:=
 1780 E=(E/2)
- Reference:E
- Value:E
+ Variable:E
+ Variable:E
  NumericConstant:2
  BinaryOperator:/
  AssignmentOperator:=
 1790 GOTO 2000
  LineNumber:2000
 1800 IF T>C THEN 1030 
- Value:T
- Value:C
+ Variable:T
+ Variable:C
  BinaryOperator:>
 1810 IF T>F/2 THEN 1830 
- Value:T
- Value:F
+ Variable:T
+ Variable:F
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:>
@@ -529,20 +529,20 @@
  TextConstant:"YOUR COUNTRY IN SHAMBLES."
  CarriageControl:NL
 1835 A=A/3
- Reference:A
- Value:A
+ Variable:A
+ Variable:A
  NumericConstant:3
  BinaryOperator:/
  AssignmentOperator:=
 1837 B=B/3
- Reference:B
- Value:B
+ Variable:B
+ Variable:B
  NumericConstant:3
  BinaryOperator:/
  AssignmentOperator:=
 1840 C=C/3
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:3
  BinaryOperator:/
  AssignmentOperator:=
@@ -566,34 +566,34 @@
  TextConstant:"FROM THE RESULTS OF BOTH OF YOUR ATTACKS,"
  CarriageControl:NL
 2002 IF A+B+C>3/2*(D+E+F) THEN 2010
- Value:A
- Value:B
+ Variable:A
+ Variable:B
  BinaryOperator:+
- Value:C
+ Variable:C
  BinaryOperator:+
  NumericConstant:3
  NumericConstant:2
  BinaryOperator:/
- Value:D
- Value:E
+ Variable:D
+ Variable:E
  BinaryOperator:+
- Value:F
+ Variable:F
  BinaryOperator:+
  BinaryOperator:*
  BinaryOperator:>
 2005 IF A+B+C<2/3*(D+E+F) THEN 2015
- Value:A
- Value:B
+ Variable:A
+ Variable:B
  BinaryOperator:+
- Value:C
+ Variable:C
  BinaryOperator:+
  NumericConstant:2
  NumericConstant:3
  BinaryOperator:/
- Value:D
- Value:E
+ Variable:D
+ Variable:E
  BinaryOperator:+
- Value:F
+ Variable:F
  BinaryOperator:+
  BinaryOperator:*
  BinaryOperator:<

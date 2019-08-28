@@ -31,9 +31,9 @@
  BinaryOperator:*
  FunctionInt
 30 DEF FNB(X)=X-100*INT(X/100)
- Value:X
+ Variable:X
  NumericConstant:100
- Value:X
+ Variable:X
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
@@ -59,19 +59,19 @@
  ITEMS
  CarriageControl:NL
 90 LET O=1
- Reference:O
+ Variable:O
  NumericConstant:1
  AssignmentOperator:=
 100 LET C=200
- Reference:C
+ Variable:C
  NumericConstant:200
  AssignmentOperator:=
 110 LET S=200
- Reference:S
+ Variable:S
  NumericConstant:200
  AssignmentOperator:=
 120 LET P=0
- Reference:P
+ Variable:P
  NumericConstant:0
  AssignmentOperator:=
 130 REM
@@ -80,7 +80,7 @@
  ITEMS
  CarriageControl:NL
 150 IF C<=5 THEN 3670
- Value:C
+ Variable:C
  NumericConstant:5
  BinaryOperator:<=
 160 PRINT "THE ANTE IS $5.  I WILL DEAL:"
@@ -91,26 +91,26 @@
  ITEMS
  CarriageControl:NL
 180 IF S>5 THEN 200
- Value:S
+ Variable:S
  NumericConstant:5
  BinaryOperator:>
 190 GOSUB 3830
  LineNumber:3830
 200 LET P=P+10
- Reference:P
- Value:P
+ Variable:P
+ Variable:P
  NumericConstant:10
  BinaryOperator:+
  AssignmentOperator:=
 210 LET S=S-5
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:5
  BinaryOperator:-
  AssignmentOperator:=
 220 LET C=C-5
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:5
  BinaryOperator:-
  AssignmentOperator:=
@@ -127,17 +127,17 @@
  TextConstant:"YOUR HAND:"
  CarriageControl:NL
 270 N=1
- Reference:N
+ Variable:N
  NumericConstant:1
  AssignmentOperator:=
 280 GOSUB 1850
  LineNumber:1850
 290 N=6
- Reference:N
+ Variable:N
  NumericConstant:6
  AssignmentOperator:=
 300 I=2
- Reference:I
+ Variable:I
  NumericConstant:2
  AssignmentOperator:=
 310 GOSUB 2170
@@ -146,7 +146,7 @@
  ITEMS
  CarriageControl:NL
 330 IF I<>6 THEN 470
- Value:I
+ Variable:I
  NumericConstant:6
  BinaryOperator:<>
 340 IF FNA(0)<=7 THEN 370
@@ -155,7 +155,7 @@
  NumericConstant:7
  BinaryOperator:<=
 350 LET X=11100
- Reference:X
+ Variable:X
  NumericConstant:11100
  AssignmentOperator:=
 360 GOTO 420
@@ -166,7 +166,7 @@
  NumericConstant:7
  BinaryOperator:<=
 380 LET X=11110
- Reference:X
+ Variable:X
  NumericConstant:11110
  AssignmentOperator:=
 390 GOTO 420
@@ -177,27 +177,27 @@
  NumericConstant:1
  BinaryOperator:>=
 410 X=11111
- Reference:X
+ Variable:X
  NumericConstant:11111
  AssignmentOperator:=
 420 I=7
- Reference:I
+ Variable:I
  NumericConstant:7
  AssignmentOperator:=
 430 Z=23
- Reference:Z
+ Variable:Z
  NumericConstant:23
  AssignmentOperator:=
 440 GOTO 580
  LineNumber:580
 450 Z=1
- Reference:Z
+ Variable:Z
  NumericConstant:1
  AssignmentOperator:=
 460 GOTO 510
  LineNumber:510
 470 IF U>=13 THEN 540
- Value:U
+ Variable:U
  NumericConstant:13
  BinaryOperator:>=
 480 IF FNA(0)>=2 THEN 500
@@ -208,11 +208,11 @@
 490 GOTO 420
  LineNumber:420
 500 Z=0
- Reference:Z
+ Variable:Z
  NumericConstant:0
  AssignmentOperator:=
 510 K=0
- Reference:K
+ Variable:K
  NumericConstant:0
  AssignmentOperator:=
 520 PRINT "I CHECK."
@@ -222,11 +222,11 @@
 530 GOTO 620
  LineNumber:620
 540 IF U<=16 THEN 570
- Value:U
+ Variable:U
  NumericConstant:16
  BinaryOperator:<=
 550 Z=2
- Reference:Z
+ Variable:Z
  NumericConstant:2
  AssignmentOperator:=
 560 IF FNA(0)>=1 THEN 580
@@ -235,12 +235,12 @@
  NumericConstant:1
  BinaryOperator:>=
 570 Z=35
- Reference:Z
+ Variable:Z
  NumericConstant:35
  AssignmentOperator:=
 580 V=Z+FNA(0)
- Reference:V
- Value:Z
+ Variable:V
+ Variable:Z
  NumericConstant:0
  UserFunction
  BinaryOperator:+
@@ -251,11 +251,11 @@
  ITEMS
  TextConstant:"I'LL OPEN WITH $"
  CarriageControl:
- Value:V
+ Variable:V
  CarriageControl:NL
 610 K=V
- Reference:K
- Value:V
+ Variable:K
+ Variable:V
  AssignmentOperator:=
 620 GOSUB 3050
  LineNumber:3050
@@ -264,7 +264,7 @@
 640 GOTO 820
  LineNumber:820
 650 IF I<>3 THEN 760
- Value:I
+ Variable:I
  NumericConstant:3
  BinaryOperator:<>
 660 PRINT
@@ -275,33 +275,33 @@
  TextConstant:"I WIN."
  CarriageControl:NL
 680 C=C+P
- Reference:C
- Value:C
- Value:P
+ Variable:C
+ Variable:C
+ Variable:P
  BinaryOperator:+
  AssignmentOperator:=
 690 PRINT "NOW I HAVE $"C"AND YOU HAVE $"S
  ITEMS
  TextConstant:"NOW I HAVE $"
  CarriageControl:
- Value:C
+ Variable:C
  CarriageControl:
  TextConstant:"AND YOU HAVE $"
  CarriageControl:
- Value:S
+ Variable:S
  CarriageControl:NL
 700 PRINT "DO YOU WISH TO CONTINUE";
  ITEMS
  TextConstant:"DO YOU WISH TO CONTINUE"
  CarriageControl:;
 710 INPUT H$
- Reference:H$
+ Variable:H$
 720 IF H$="YES" THEN 120
- Value:H$
+ Variable:H$
  TextConstant:"YES"
  BinaryOperator:=
 730 IF H$="NO" THEN 4100
- Value:H$
+ Variable:H$
  TextConstant:"NO"
  BinaryOperator:=
 740 PRINT "ANSWER YES OR NO, PLEASE."
@@ -311,7 +311,7 @@
 750 GOTO 700
  LineNumber:700
 760 IF I<>4 THEN 810
- Value:I
+ Variable:I
  NumericConstant:4
  BinaryOperator:<>
 770 PRINT
@@ -322,9 +322,9 @@
  TextConstant:"YOU WIN."
  CarriageControl:NL
 790 S=S+P
- Reference:S
- Value:S
- Value:P
+ Variable:S
+ Variable:S
+ Variable:P
  BinaryOperator:+
  AssignmentOperator:=
 800 GOTO 690
@@ -339,17 +339,17 @@
  TextConstant:"NOW WE DRAW -- HOW MANY CARDS DO YOU WANT"
  CarriageControl:;
 840 INPUT T
- Reference:T
+ Variable:T
 850 IF T=0 THEN 980
- Value:T
+ Variable:T
  NumericConstant:0
  BinaryOperator:=
 860 Z=10
- Reference:Z
+ Variable:Z
  NumericConstant:10
  AssignmentOperator:=
 870 IF T<4 THEN 900
- Value:T
+ Variable:T
  NumericConstant:4
  BinaryOperator:<
 880 PRINT "YOU CAN'T DRAW MORE THAN THREE CARDS."
@@ -365,9 +365,9 @@
 910 FOR Q=1 TO T
  control: Variable:Q
  start:   ["NumericConstant:1"]
- end:     ["Value:T"]
+ end:     ["Variable:T"]
 920 INPUT U
- Reference:U
+ Variable:U
 930 GOSUB 1730
  LineNumber:1730
 940 NEXT Q
@@ -377,15 +377,15 @@
  TextConstant:"YOUR NEW HAND:"
  CarriageControl:NL
 960 N=1
- Reference:N
+ Variable:N
  NumericConstant:1
  AssignmentOperator:=
 970 GOSUB 1850
  LineNumber:1850
 980 Z=10+T
- Reference:Z
+ Variable:Z
  NumericConstant:10
- Value:T
+ Variable:T
  BinaryOperator:+
  AssignmentOperator:=
 990 FOR U=6 TO 10
@@ -393,18 +393,18 @@
  start:   ["NumericConstant:6"]
  end:     ["NumericConstant:10"]
 1000 IF INT(X/10^(U-6))<>10*INT(X/10^(U-5)) THEN 1020
- Value:X
+ Variable:X
  NumericConstant:10
- Value:U
+ Variable:U
  NumericConstant:6
  BinaryOperator:-
  BinaryOperator:^
  BinaryOperator:/
  FunctionInt
  NumericConstant:10
- Value:X
+ Variable:X
  NumericConstant:10
- Value:U
+ Variable:U
  NumericConstant:5
  BinaryOperator:-
  BinaryOperator:^
@@ -423,18 +423,18 @@
  ITEMS
  TextConstant:"I AM TAKING"
  CarriageControl:
- Value:Z
+ Variable:Z
  NumericConstant:10
  BinaryOperator:-
- Value:T
+ Variable:T
  BinaryOperator:-
  CarriageControl:
  TextConstant:"CARD"
  CarriageControl:;
 1050 IF Z=11+T THEN 1090
- Value:Z
+ Variable:Z
  NumericConstant:11
- Value:T
+ Variable:T
  BinaryOperator:+
  BinaryOperator:=
 1060 PRINT "S"
@@ -450,53 +450,53 @@
  ITEMS
  CarriageControl:NL
 1100 N=6
- Reference:N
+ Variable:N
  NumericConstant:6
  AssignmentOperator:=
 1110 V=I
- Reference:V
- Value:I
+ Variable:V
+ Variable:I
  AssignmentOperator:=
 1120 I=1
- Reference:I
+ Variable:I
  NumericConstant:1
  AssignmentOperator:=
 1130 GOSUB 2170
  LineNumber:2170
 1140 B=U
- Reference:B
- Value:U
+ Variable:B
+ Variable:U
  AssignmentOperator:=
 1150 M=D
- Reference:M
- Value:D
+ Variable:M
+ Variable:D
  AssignmentOperator:=
 1160 IF V<>7 THEN 1190
- Value:V
+ Variable:V
  NumericConstant:7
  BinaryOperator:<>
 1170 Z=28
- Reference:Z
+ Variable:Z
  NumericConstant:28
  AssignmentOperator:=
 1180 GOTO 1330
  LineNumber:1330
 1190 IF I<>6 THEN 1220
- Value:I
+ Variable:I
  NumericConstant:6
  BinaryOperator:<>
 1200 Z=1
- Reference:Z
+ Variable:Z
  NumericConstant:1
  AssignmentOperator:=
 1210 GOTO 1330
  LineNumber:1330
 1220 IF U>=13 THEN 1270
- Value:U
+ Variable:U
  NumericConstant:13
  BinaryOperator:>=
 1230 Z=2
- Reference:Z
+ Variable:Z
  NumericConstant:2
  AssignmentOperator:=
 1240 IF FNA(0)<>6 THEN 1260
@@ -505,17 +505,17 @@
  NumericConstant:6
  BinaryOperator:<>
 1250 Z=19
- Reference:Z
+ Variable:Z
  NumericConstant:19
  AssignmentOperator:=
 1260 GOTO 1330
  LineNumber:1330
 1270 IF U>=16 THEN 1320
- Value:U
+ Variable:U
  NumericConstant:16
  BinaryOperator:>=
 1280 Z=19
- Reference:Z
+ Variable:Z
  NumericConstant:19
  AssignmentOperator:=
 1290 IF FNA(0)<>8 THEN 1310
@@ -524,31 +524,31 @@
  NumericConstant:8
  BinaryOperator:<>
 1300 Z=11
- Reference:Z
+ Variable:Z
  NumericConstant:11
  AssignmentOperator:=
 1310 GOTO 1330
  LineNumber:1330
 1320 Z=2
- Reference:Z
+ Variable:Z
  NumericConstant:2
  AssignmentOperator:=
 1330 K=0
- Reference:K
+ Variable:K
  NumericConstant:0
  AssignmentOperator:=
 1340 GOSUB 3050
  LineNumber:3050
 1350 IF T<>.5 THEN 1450
- Value:T
+ Variable:T
  NumericConstant:.5
  BinaryOperator:<>
 1360 IF V=7 THEN 1400
- Value:V
+ Variable:V
  NumericConstant:7
  BinaryOperator:=
 1370 IF I<>6 THEN 1400
- Value:I
+ Variable:I
  NumericConstant:6
  BinaryOperator:<>
 1380 PRINT "I'LL CHECK"
@@ -558,8 +558,8 @@
 1390 GOTO 1460
  LineNumber:1460
 1400 V=Z+FNA(0)
- Reference:V
- Value:Z
+ Variable:V
+ Variable:Z
  NumericConstant:0
  UserFunction
  BinaryOperator:+
@@ -570,11 +570,11 @@
  ITEMS
  TextConstant:"I'LL BET $"
  CarriageControl:
- Value:V
+ Variable:V
  CarriageControl:NL
 1430 K=V
- Reference:K
- Value:V
+ Variable:K
+ Variable:V
  AssignmentOperator:=
 1440 GOSUB 3060
  LineNumber:3060
@@ -588,25 +588,25 @@
  TextConstant:"NOW WE COMPARE HANDS:"
  CarriageControl:NL
 1480 J$=H$
- Reference:J$
- Value:H$
+ Variable:J$
+ Variable:H$
  AssignmentOperator:=
 1490 K$=I$
- Reference:K$
- Value:I$
+ Variable:K$
+ Variable:I$
  AssignmentOperator:=
 1500 PRINT "MY HAND:"
  ITEMS
  TextConstant:"MY HAND:"
  CarriageControl:NL
 1510 N=6
- Reference:N
+ Variable:N
  NumericConstant:6
  AssignmentOperator:=
 1520 GOSUB 1850
  LineNumber:1850
 1530 N=1
- Reference:N
+ Variable:N
  NumericConstant:1
  AssignmentOperator:=
 1540 GOSUB 2170
@@ -619,22 +619,22 @@
  TextConstant:"YOU HAVE "
  CarriageControl:;
 1570 K=D
- Reference:K
- Value:D
+ Variable:K
+ Variable:D
  AssignmentOperator:=
 1580 GOSUB 3690
  LineNumber:3690
 1590 H$=J$
- Reference:H$
- Value:J$
+ Variable:H$
+ Variable:J$
  AssignmentOperator:=
 1600 I$=K$
- Reference:I$
- Value:K$
+ Variable:I$
+ Variable:K$
  AssignmentOperator:=
 1610 K=M
- Reference:K
- Value:M
+ Variable:K
+ Variable:M
  AssignmentOperator:=
 1620 PRINT "AND I HAVE ";
  ITEMS
@@ -643,27 +643,27 @@
 1630 GOSUB 3690
  LineNumber:3690
 1640 IF B>U THEN 670
- Value:B
- Value:U
+ Variable:B
+ Variable:U
  BinaryOperator:>
 1650 IF U>B THEN 780
- Value:U
- Value:B
+ Variable:U
+ Variable:B
  BinaryOperator:>
 1660 IF H$="A FLUS" THEN 1700
- Value:H$
+ Variable:H$
  TextConstant:"A FLUS"
  BinaryOperator:=
 1662 IF FNB(M)<FNB(D) THEN 780
- Value:M
+ Variable:M
  UserFunction
- Value:D
+ Variable:D
  UserFunction
  BinaryOperator:<
 1664 IF FNB(M)>FNB(D) THEN 670
- Value:M
+ Variable:M
  UserFunction
- Value:D
+ Variable:D
  UserFunction
  BinaryOperator:>
 1670 PRINT "THE HAND IS DRAWN."
@@ -674,35 +674,35 @@
  ITEMS
  TextConstant:"ALL $"
  CarriageControl:
- Value:P
+ Variable:P
  CarriageControl:
  TextConstant:"REMAINS IN THE POT."
  CarriageControl:NL
 1690 GOTO 140
  LineNumber:140
 1700 IF FNB(M)>FNB(D) THEN 670
- Value:M
+ Variable:M
  UserFunction
- Value:D
+ Variable:D
  UserFunction
  BinaryOperator:>
 1710 IF FNB(D)>FNB(M) THEN 780
- Value:D
+ Variable:D
  UserFunction
- Value:M
+ Variable:M
  UserFunction
  BinaryOperator:>
 1720 GOTO 1670
  LineNumber:1670
 1730 Z=Z+1
- Reference:Z
- Value:Z
+ Variable:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 1740 A(Z)=100*INT(4*RND(1))+INT(100*RND(1))
- Value:Z
- Reference:A
+ Variable:Z
+ Variable:A
  NumericConstant:100
  NumericConstant:4
  NumericConstant:1
@@ -718,19 +718,19 @@
  BinaryOperator:+
  AssignmentOperator:=
 1750 IF INT(A(Z)/100)>3 THEN 1740
- Value:Z
- Value:A
+ Variable:Z
+ Variable:A
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
  NumericConstant:3
  BinaryOperator:>
 1760 IF A(Z)-100*INT(A(Z)/100)>12 THEN 1740
- Value:Z
- Value:A
+ Variable:Z
+ Variable:A
  NumericConstant:100
- Value:Z
- Value:A
+ Variable:Z
+ Variable:A
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
@@ -739,50 +739,50 @@
  NumericConstant:12
  BinaryOperator:>
 1765 IF Z=1 THEN 1840
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 1770 FOR K=1 TO Z-1
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["Value:Z", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:Z", "NumericConstant:1", "BinaryOperator:-"]
 1780 IF A(Z)=A(K) THEN 1740
- Value:Z
- Value:A
- Value:K
- Value:A
+ Variable:Z
+ Variable:A
+ Variable:K
+ Variable:A
  BinaryOperator:=
 1790 NEXT K
  Variable:K
 1800 IF Z<=10 THEN 1840
- Value:Z
+ Variable:Z
  NumericConstant:10
  BinaryOperator:<=
 1810 N=A(U)
- Reference:N
- Value:U
- Value:A
+ Variable:N
+ Variable:U
+ Variable:A
  AssignmentOperator:=
 1820 A(U)=A(Z)
- Value:U
- Reference:A
- Value:Z
- Value:A
+ Variable:U
+ Variable:A
+ Variable:Z
+ Variable:A
  AssignmentOperator:=
 1830 A(Z)=N
- Value:Z
- Reference:A
- Value:N
+ Variable:Z
+ Variable:A
+ Variable:N
  AssignmentOperator:=
 1840 RETURN
  
 1850 FOR Z=N TO N+4
  control: Variable:Z
- start:   ["Value:N"]
- end:     ["Value:N", "NumericConstant:4", "BinaryOperator:+"]
+ start:   ["Variable:N"]
+ end:     ["Variable:N", "NumericConstant:4", "BinaryOperator:+"]
 1860 PRINT Z"--  ";
  ITEMS
- Value:Z
+ Variable:Z
  CarriageControl:
  TextConstant:"--  "
  CarriageControl:;
@@ -795,10 +795,10 @@
 1890 GOSUB 2070
  LineNumber:2070
 1900 IF Z/2<>INT(Z/2) THEN 1920
- Value:Z
+ Variable:Z
  NumericConstant:2
  BinaryOperator:/
- Value:Z
+ Variable:Z
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
@@ -814,13 +814,13 @@
 1940 RETURN
  
 1950 K=FNB(A(Z))
- Reference:K
- Value:Z
- Value:A
+ Variable:K
+ Variable:Z
+ Variable:A
  UserFunction
  AssignmentOperator:=
 1960 IF K<>9 THEN 1980
- Value:K
+ Variable:K
  NumericConstant:9
  BinaryOperator:<>
 1970 PRINT "JACK";
@@ -828,7 +828,7 @@
  TextConstant:"JACK"
  CarriageControl:;
 1980 IF K<>10 THEN 2000
- Value:K
+ Variable:K
  NumericConstant:10
  BinaryOperator:<>
 1990 PRINT "QUEEN";
@@ -836,7 +836,7 @@
  TextConstant:"QUEEN"
  CarriageControl:;
 2000 IF K<>11 THEN 2020
- Value:K
+ Variable:K
  NumericConstant:11
  BinaryOperator:<>
 2010 PRINT "KING";
@@ -844,7 +844,7 @@
  TextConstant:"KING"
  CarriageControl:;
 2020 IF K<>12 THEN 2040
- Value:K
+ Variable:K
  NumericConstant:12
  BinaryOperator:<>
 2030 PRINT "ACE";
@@ -852,27 +852,27 @@
  TextConstant:"ACE"
  CarriageControl:;
 2040 IF K>=9 THEN 2060
- Value:K
+ Variable:K
  NumericConstant:9
  BinaryOperator:>=
 2050 PRINT K+2;
  ITEMS
- Value:K
+ Variable:K
  NumericConstant:2
  BinaryOperator:+
  CarriageControl:;
 2060 RETURN
  
 2070 K=INT(A(Z)/100)
- Reference:K
- Value:Z
- Value:A
+ Variable:K
+ Variable:Z
+ Variable:A
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
  AssignmentOperator:=
 2080 IF K<>0 THEN 2100
- Value:K
+ Variable:K
  NumericConstant:0
  BinaryOperator:<>
 2090 PRINT " CLUBS",
@@ -880,7 +880,7 @@
  TextConstant:" CLUBS"
  CarriageControl:,
 2100 IF K<>1 THEN 2120
- Value:K
+ Variable:K
  NumericConstant:1
  BinaryOperator:<>
 2110 PRINT " DIAMONDS",
@@ -888,7 +888,7 @@
  TextConstant:" DIAMONDS"
  CarriageControl:,
 2120 IF K<>2 THEN 2140
- Value:K
+ Variable:K
  NumericConstant:2
  BinaryOperator:<>
 2130 PRINT " HEARTS",
@@ -896,7 +896,7 @@
  TextConstant:" HEARTS"
  CarriageControl:,
 2140 IF K<>3 THEN 2160
- Value:K
+ Variable:K
  NumericConstant:3
  BinaryOperator:<>
 2150 PRINT " SPADES",
@@ -906,119 +906,119 @@
 2160 RETURN
  
 2170 U=0
- Reference:U
+ Variable:U
  NumericConstant:0
  AssignmentOperator:=
 2180 FOR Z=N TO N+4
  control: Variable:Z
- start:   ["Value:N"]
- end:     ["Value:N", "NumericConstant:4", "BinaryOperator:+"]
+ start:   ["Variable:N"]
+ end:     ["Variable:N", "NumericConstant:4", "BinaryOperator:+"]
 2190 B(Z)=FNB(A(Z))
- Value:Z
- Reference:B
- Value:Z
- Value:A
+ Variable:Z
+ Variable:B
+ Variable:Z
+ Variable:A
  UserFunction
  AssignmentOperator:=
 2200 IF Z=N+4 THEN 2230
- Value:Z
- Value:N
+ Variable:Z
+ Variable:N
  NumericConstant:4
  BinaryOperator:+
  BinaryOperator:=
 2210 IF INT(A(Z)/100)<>INT(A(Z+1)/100) THEN 2230
- Value:Z
- Value:A
+ Variable:Z
+ Variable:A
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:+
- Value:A
+ Variable:A
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
  BinaryOperator:<>
 2220 U=U+1
- Reference:U
- Value:U
+ Variable:U
+ Variable:U
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 2230 NEXT Z
  Variable:Z
 2240 IF U<>4 THEN 2310
- Value:U
+ Variable:U
  NumericConstant:4
  BinaryOperator:<>
 2250 X=11111
- Reference:X
+ Variable:X
  NumericConstant:11111
  AssignmentOperator:=
 2260 D=A(N)
- Reference:D
- Value:N
- Value:A
+ Variable:D
+ Variable:N
+ Variable:A
  AssignmentOperator:=
 2270 H$="A FLUS"
- Reference:H$
+ Variable:H$
  TextConstant:"A FLUS"
  AssignmentOperator:=
 2280 I$="H IN"
- Reference:I$
+ Variable:I$
  TextConstant:"H IN"
  AssignmentOperator:=
 2290 U=15
- Reference:U
+ Variable:U
  NumericConstant:15
  AssignmentOperator:=
 2300 RETURN
  
 2310 FOR Z=N TO N+3
  control: Variable:Z
- start:   ["Value:N"]
- end:     ["Value:N", "NumericConstant:3", "BinaryOperator:+"]
+ start:   ["Variable:N"]
+ end:     ["Variable:N", "NumericConstant:3", "BinaryOperator:+"]
 2320 FOR K=Z+1 TO N+4
  control: Variable:K
- start:   ["Value:Z", "NumericConstant:1", "BinaryOperator:+"]
- end:     ["Value:N", "NumericConstant:4", "BinaryOperator:+"]
+ start:   ["Variable:Z", "NumericConstant:1", "BinaryOperator:+"]
+ end:     ["Variable:N", "NumericConstant:4", "BinaryOperator:+"]
 2330 IF B(Z)<=B(K) THEN 2390
- Value:Z
- Value:B
- Value:K
- Value:B
+ Variable:Z
+ Variable:B
+ Variable:K
+ Variable:B
  BinaryOperator:<=
 2340 X=A(Z)
- Reference:X
- Value:Z
- Value:A
+ Variable:X
+ Variable:Z
+ Variable:A
  AssignmentOperator:=
 2350 A(Z)=A(K)
- Value:Z
- Reference:A
- Value:K
- Value:A
+ Variable:Z
+ Variable:A
+ Variable:K
+ Variable:A
  AssignmentOperator:=
 2360 B(Z)=B(K)
- Value:Z
- Reference:B
- Value:K
- Value:B
+ Variable:Z
+ Variable:B
+ Variable:K
+ Variable:B
  AssignmentOperator:=
 2370 A(K)=X
- Value:K
- Reference:A
- Value:X
+ Variable:K
+ Variable:A
+ Variable:X
  AssignmentOperator:=
 2380 B(K)=A(K)-100*INT(A(K)/100)
- Value:K
- Reference:B
- Value:K
- Value:A
+ Variable:K
+ Variable:B
+ Variable:K
+ Variable:A
  NumericConstant:100
- Value:K
- Value:A
+ Variable:K
+ Variable:A
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
@@ -1030,281 +1030,281 @@
 2400 NEXT Z
  Variable:Z
 2410 X=0
- Reference:X
+ Variable:X
  NumericConstant:0
  AssignmentOperator:=
 2420 FOR Z=N TO N+3
  control: Variable:Z
- start:   ["Value:N"]
- end:     ["Value:N", "NumericConstant:3", "BinaryOperator:+"]
+ start:   ["Variable:N"]
+ end:     ["Variable:N", "NumericConstant:3", "BinaryOperator:+"]
 2430 IF B(Z)<>B(Z+1) THEN 2470
- Value:Z
- Value:B
- Value:Z
+ Variable:Z
+ Variable:B
+ Variable:Z
  NumericConstant:1
  BinaryOperator:+
- Value:B
+ Variable:B
  BinaryOperator:<>
 2440 X=X+11*10^(Z-N)
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:11
  NumericConstant:10
- Value:Z
- Value:N
+ Variable:Z
+ Variable:N
  BinaryOperator:-
  BinaryOperator:^
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
 2450 D=A(Z)
- Reference:D
- Value:Z
- Value:A
+ Variable:D
+ Variable:Z
+ Variable:A
  AssignmentOperator:=
 2460 GOSUB 2760
  LineNumber:2760
 2470 NEXT Z
  Variable:Z
 2480 IF X<>0 THEN 2620
- Value:X
+ Variable:X
  NumericConstant:0
  BinaryOperator:<>
 2490 IF B(N)+3<>B(N+3) THEN 2520
- Value:N
- Value:B
+ Variable:N
+ Variable:B
  NumericConstant:3
  BinaryOperator:+
- Value:N
+ Variable:N
  NumericConstant:3
  BinaryOperator:+
- Value:B
+ Variable:B
  BinaryOperator:<>
 2500 X=1111
- Reference:X
+ Variable:X
  NumericConstant:1111
  AssignmentOperator:=
 2510 U=10
- Reference:U
+ Variable:U
  NumericConstant:10
  AssignmentOperator:=
 2520 IF B(N+1)+3<>B(N+4) THEN 2620
- Value:N
+ Variable:N
  NumericConstant:1
  BinaryOperator:+
- Value:B
+ Variable:B
  NumericConstant:3
  BinaryOperator:+
- Value:N
+ Variable:N
  NumericConstant:4
  BinaryOperator:+
- Value:B
+ Variable:B
  BinaryOperator:<>
 2530 IF U<>10 THEN 2600
- Value:U
+ Variable:U
  NumericConstant:10
  BinaryOperator:<>
 2540 U=14
- Reference:U
+ Variable:U
  NumericConstant:14
  AssignmentOperator:=
 2550 H$="STRAIG"
- Reference:H$
+ Variable:H$
  TextConstant:"STRAIG"
  AssignmentOperator:=
 2560 I$="HT"
- Reference:I$
+ Variable:I$
  TextConstant:"HT"
  AssignmentOperator:=
 2570 X=11111
- Reference:X
+ Variable:X
  NumericConstant:11111
  AssignmentOperator:=
 2580 D=A(N+4)
- Reference:D
- Value:N
+ Variable:D
+ Variable:N
  NumericConstant:4
  BinaryOperator:+
- Value:A
+ Variable:A
  AssignmentOperator:=
 2590 RETURN
  
 2600 U=10
- Reference:U
+ Variable:U
  NumericConstant:10
  AssignmentOperator:=
 2610 X=11110
- Reference:X
+ Variable:X
  NumericConstant:11110
  AssignmentOperator:=
 2620 IF U>=10 THEN 2690
- Value:U
+ Variable:U
  NumericConstant:10
  BinaryOperator:>=
 2630 D=A(N+4)
- Reference:D
- Value:N
+ Variable:D
+ Variable:N
  NumericConstant:4
  BinaryOperator:+
- Value:A
+ Variable:A
  AssignmentOperator:=
 2640 H$="SCHMAL"
- Reference:H$
+ Variable:H$
  TextConstant:"SCHMAL"
  AssignmentOperator:=
 2650 I$="TZ, "
- Reference:I$
+ Variable:I$
  TextConstant:"TZ, "
  AssignmentOperator:=
 2660 U=9
- Reference:U
+ Variable:U
  NumericConstant:9
  AssignmentOperator:=
 2670 X=11000
- Reference:X
+ Variable:X
  NumericConstant:11000
  AssignmentOperator:=
 2680 GOTO 2740
  LineNumber:2740
 2690 IF U<>10 THEN 2720
- Value:U
+ Variable:U
  NumericConstant:10
  BinaryOperator:<>
 2700 IF I=1 THEN 2740
- Value:I
+ Variable:I
  NumericConstant:1
  BinaryOperator:=
 2710 GOTO 2750
  LineNumber:2750
 2720 IF U>12 THEN 2750
- Value:U
+ Variable:U
  NumericConstant:12
  BinaryOperator:>
 2730 IF FNB(D)>6 THEN 2750
- Value:D
+ Variable:D
  UserFunction
  NumericConstant:6
  BinaryOperator:>
 2740 I=6
- Reference:I
+ Variable:I
  NumericConstant:6
  AssignmentOperator:=
 2750 RETURN
  
 2760 IF U>=11 THEN 2810
- Value:U
+ Variable:U
  NumericConstant:11
  BinaryOperator:>=
 2770 U=11
- Reference:U
+ Variable:U
  NumericConstant:11
  AssignmentOperator:=
 2780 H$="A PAIR"
- Reference:H$
+ Variable:H$
  TextConstant:"A PAIR"
  AssignmentOperator:=
 2790 I$=" OF "
- Reference:I$
+ Variable:I$
  TextConstant:" OF "
  AssignmentOperator:=
 2800 RETURN
  
 2810 IF U<>11 THEN 2910
- Value:U
+ Variable:U
  NumericConstant:11
  BinaryOperator:<>
 2820 IF B(Z)<>B(Z-1) THEN 2870
- Value:Z
- Value:B
- Value:Z
+ Variable:Z
+ Variable:B
+ Variable:Z
  NumericConstant:1
  BinaryOperator:-
- Value:B
+ Variable:B
  BinaryOperator:<>
 2830 H$="THREE"
- Reference:H$
+ Variable:H$
  TextConstant:"THREE"
  AssignmentOperator:=
 2840 I$=" "
- Reference:I$
+ Variable:I$
  TextConstant:" "
  AssignmentOperator:=
 2850 U=13
- Reference:U
+ Variable:U
  NumericConstant:13
  AssignmentOperator:=
 2860 RETURN
  
 2870 H$="TWO P"
- Reference:H$
+ Variable:H$
  TextConstant:"TWO P"
  AssignmentOperator:=
 2880 I$="AIR, "
- Reference:I$
+ Variable:I$
  TextConstant:"AIR, "
  AssignmentOperator:=
 2890 U=12
- Reference:U
+ Variable:U
  NumericConstant:12
  AssignmentOperator:=
 2900 RETURN
  
 2910 IF U>12 THEN 2960
- Value:U
+ Variable:U
  NumericConstant:12
  BinaryOperator:>
 2920 U=16
- Reference:U
+ Variable:U
  NumericConstant:16
  AssignmentOperator:=
 2930 H$="FULL H"
- Reference:H$
+ Variable:H$
  TextConstant:"FULL H"
  AssignmentOperator:=
 2940 I$="OUSE, "
- Reference:I$
+ Variable:I$
  TextConstant:"OUSE, "
  AssignmentOperator:=
 2950 RETURN
  
 2960 IF B(Z)<>B(Z-1) THEN 3010
- Value:Z
- Value:B
- Value:Z
+ Variable:Z
+ Variable:B
+ Variable:Z
  NumericConstant:1
  BinaryOperator:-
- Value:B
+ Variable:B
  BinaryOperator:<>
 2970 U=17
- Reference:U
+ Variable:U
  NumericConstant:17
  AssignmentOperator:=
 2980 H$="FOUR"
- Reference:H$
+ Variable:H$
  TextConstant:"FOUR"
  AssignmentOperator:=
 2990 I$=" "
- Reference:I$
+ Variable:I$
  TextConstant:" "
  AssignmentOperator:=
 3000 RETURN
  
 3010 U=16
- Reference:U
+ Variable:U
  NumericConstant:16
  AssignmentOperator:=
 3020 H$="FULL H"
- Reference:H$
+ Variable:H$
  TextConstant:"FULL H"
  AssignmentOperator:=
 3030 I$="OUSE, "
- Reference:I$
+ Variable:I$
  TextConstant:"OUSE, "
  AssignmentOperator:=
 3040 RETURN
  
 3050 G=0
- Reference:G
+ Variable:G
  NumericConstant:0
  AssignmentOperator:=
 3060 PRINT:PRINT "WHAT IS YOUR BET";
@@ -1314,24 +1314,24 @@
  TextConstant:"WHAT IS YOUR BET"
  CarriageControl:;
 3070 INPUT T
- Reference:T
+ Variable:T
 3080 IF T-INT(T)=0 THEN 3140
- Value:T
- Value:T
+ Variable:T
+ Variable:T
  FunctionInt
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:=
 3090 IF K<>0 THEN 3120
- Value:K
+ Variable:K
  NumericConstant:0
  BinaryOperator:<>
 3100 IF G<>0 THEN 3120
- Value:G
+ Variable:G
  NumericConstant:0
  BinaryOperator:<>
 3110 IF T=.5 THEN 3410
- Value:T
+ Variable:T
  NumericConstant:.5
  BinaryOperator:=
 3120 PRINT "NO SMALL CHANGE, PLEASE."
@@ -1341,10 +1341,10 @@
 3130 GOTO 3060
  LineNumber:3060
 3140 IF S-G-T>=0 THEN 3170
- Value:S
- Value:G
+ Variable:S
+ Variable:G
  BinaryOperator:-
- Value:T
+ Variable:T
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:>=
@@ -1353,20 +1353,20 @@
 3160 GOTO 3060
  LineNumber:3060
 3170 IF T<>0 THEN 3200
- Value:T
+ Variable:T
  NumericConstant:0
  BinaryOperator:<>
 3180 I=3
- Reference:I
+ Variable:I
  NumericConstant:3
  AssignmentOperator:=
 3190 GOTO 3380
  LineNumber:3380
 3200 IF G+T>=K THEN 3230
- Value:G
- Value:T
+ Variable:G
+ Variable:T
  BinaryOperator:+
- Value:K
+ Variable:K
  BinaryOperator:>=
 3210 PRINT "IF YOU CAN'T SEE MY BET, THEN FOLD."
  ITEMS
@@ -1375,43 +1375,43 @@
 3220 GOTO 3060
  LineNumber:3060
 3230 G=G+T
- Reference:G
- Value:G
- Value:T
+ Variable:G
+ Variable:G
+ Variable:T
  BinaryOperator:+
  AssignmentOperator:=
 3240 IF G=K THEN 3380
- Value:G
- Value:K
+ Variable:G
+ Variable:K
  BinaryOperator:=
 3250 IF Z<>1 THEN 3420
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:<>
 3260 IF G>5 THEN 3300
- Value:G
+ Variable:G
  NumericConstant:5
  BinaryOperator:>
 3270 IF Z>=2 THEN 3350
- Value:Z
+ Variable:Z
  NumericConstant:2
  BinaryOperator:>=
 3280 V=5
- Reference:V
+ Variable:V
  NumericConstant:5
  AssignmentOperator:=
 3290 GOTO 3420
  LineNumber:3420
 3300 IF Z=1 THEN 3320
- Value:Z
+ Variable:Z
  NumericConstant:1
  BinaryOperator:=
 3310 IF T<=25 THEN 3350
- Value:T
+ Variable:T
  NumericConstant:25
  BinaryOperator:<=
 3320 I=4
- Reference:I
+ Variable:I
  NumericConstant:4
  AssignmentOperator:=
 3330 PRINT "I FOLD."
@@ -1421,7 +1421,7 @@
 3340 RETURN
  
 3350 IF Z=2 THEN 3430
- Value:Z
+ Variable:Z
  NumericConstant:2
  BinaryOperator:=
 3360 PRINT "I'LL SEE YOU."
@@ -1429,41 +1429,41 @@
  TextConstant:"I'LL SEE YOU."
  CarriageControl:NL
 3370 K=G
- Reference:K
- Value:G
+ Variable:K
+ Variable:G
  AssignmentOperator:=
 3380 S=S-G
- Reference:S
- Value:S
- Value:G
+ Variable:S
+ Variable:S
+ Variable:G
  BinaryOperator:-
  AssignmentOperator:=
 3390 C=C-K
- Reference:C
- Value:C
- Value:K
+ Variable:C
+ Variable:C
+ Variable:K
  BinaryOperator:-
  AssignmentOperator:=
 3400 P=P+G+K
- Reference:P
- Value:P
- Value:G
+ Variable:P
+ Variable:P
+ Variable:G
  BinaryOperator:+
- Value:K
+ Variable:K
  BinaryOperator:+
  AssignmentOperator:=
 3410 RETURN
  
 3420 IF G>3*Z THEN 3350
- Value:G
+ Variable:G
  NumericConstant:3
- Value:Z
+ Variable:Z
  BinaryOperator:*
  BinaryOperator:>
 3430 V=G-K+FNA(0)
- Reference:V
- Value:G
- Value:K
+ Variable:V
+ Variable:G
+ Variable:K
  BinaryOperator:-
  NumericConstant:0
  UserFunction
@@ -1475,45 +1475,45 @@
  ITEMS
  TextConstant:"I'LL SEE YOU, AND RAISE YOU"
  CarriageControl:
- Value:V
+ Variable:V
  CarriageControl:NL
 3460 K=G+V
- Reference:K
- Value:G
- Value:V
+ Variable:K
+ Variable:G
+ Variable:V
  BinaryOperator:+
  AssignmentOperator:=
 3470 GOTO 3060
  LineNumber:3060
 3480 IF C-G-V>=0 THEN 3660
- Value:C
- Value:G
+ Variable:C
+ Variable:G
  BinaryOperator:-
- Value:V
+ Variable:V
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:>=
 3490 IF G<>0 THEN 3520
- Value:G
+ Variable:G
  NumericConstant:0
  BinaryOperator:<>
 3500 V=C
- Reference:V
- Value:C
+ Variable:V
+ Variable:C
  AssignmentOperator:=
 3510 RETURN
  
 3520 IF C-G>=0 THEN 3360
- Value:C
- Value:G
+ Variable:C
+ Variable:G
  BinaryOperator:-
  NumericConstant:0
  BinaryOperator:>=
 3530 IF (O/2)<>INT(O/2) THEN 3600
- Value:O
+ Variable:O
  NumericConstant:2
  BinaryOperator:/
- Value:O
+ Variable:O
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
@@ -1523,32 +1523,32 @@
  TextConstant:"WOULD YOU LIKE TO BUY BACK YOUR WATCH FOR $50"
  CarriageControl:;
 3550 INPUT J$
- Reference:J$
+ Variable:J$
 3560 IF LEFT$(J$,1)="N" THEN 3600
- Value:J$
+ Variable:J$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
  BinaryOperator:=
 3570 C=C+50
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:50
  BinaryOperator:+
  AssignmentOperator:=
 3580 O=O/2
- Reference:O
- Value:O
+ Variable:O
+ Variable:O
  NumericConstant:2
  BinaryOperator:/
  AssignmentOperator:=
 3590 RETURN
  
 3600 IF O/3<>INT(O/3) THEN 3670
- Value:O
+ Variable:O
  NumericConstant:3
  BinaryOperator:/
- Value:O
+ Variable:O
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
@@ -1558,22 +1558,22 @@
  TextConstant:"WOULD YOU LIKE TO BUY BACK YOUR TIE TACK FOR $50"
  CarriageControl:;
 3620 INPUT J$
- Reference:J$
+ Variable:J$
 3630 IF LEFT$(J$,1)="N" THEN 3670
- Value:J$
+ Variable:J$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
  BinaryOperator:=
 3640 C=C+50
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:50
  BinaryOperator:+
  AssignmentOperator:=
 3650 O=O/3
- Reference:O
- Value:O
+ Variable:O
+ Variable:O
  NumericConstant:3
  BinaryOperator:/
  AssignmentOperator:=
@@ -1587,17 +1587,17 @@
  
 3690 PRINT H$;I$;
  ITEMS
- Value:H$
+ Variable:H$
  CarriageControl:;
- Value:I$
+ Variable:I$
  CarriageControl:;
 3700 IF H$<>"A FLUS" THEN 3750
- Value:H$
+ Variable:H$
  TextConstant:"A FLUS"
  BinaryOperator:<>
 3710 K=INT(K/100)
- Reference:K
- Value:K
+ Variable:K
+ Variable:K
  NumericConstant:100
  BinaryOperator:/
  FunctionInt
@@ -1610,18 +1610,18 @@
 3740 RETURN
  
 3750 K=FNB(K)
- Reference:K
- Value:K
+ Variable:K
+ Variable:K
  UserFunction
  AssignmentOperator:=
 3760 GOSUB 1960
  LineNumber:1960
 3770 IF H$="SCHMAL" THEN 3790
- Value:H$
+ Variable:H$
  TextConstant:"SCHMAL"
  BinaryOperator:=
 3780 IF H$<>"STRAIG" THEN 3810
- Value:H$
+ Variable:H$
  TextConstant:"STRAIG"
  BinaryOperator:<>
 3790 PRINT " HIGH"
@@ -1644,10 +1644,10 @@
  TextConstant:"YOU CAN'T BET WITH WHAT YOU HAVEN'T GOT."
  CarriageControl:NL
 3850 IF O/2=INT(O/2) THEN 3970
- Value:O
+ Variable:O
  NumericConstant:2
  BinaryOperator:/
- Value:O
+ Variable:O
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
@@ -1657,9 +1657,9 @@
  TextConstant:"WOULD YOU LIKE TO SELL YOUR WATCH"
  CarriageControl:;
 3870 INPUT J$
- Reference:J$
+ Variable:J$
 3880 IF LEFT$(J$,1)="N" THEN 3970
- Value:J$
+ Variable:J$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
@@ -1674,8 +1674,8 @@
  TextConstant:"I'LL GIVE YOU $75 FOR IT."
  CarriageControl:NL
 3910 S=S+75
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:75
  BinaryOperator:+
  AssignmentOperator:=
@@ -1686,24 +1686,24 @@
  TextConstant:"THAT'S A PRETTY CRUMMY WATCH - I'LL GIVE YOU $25."
  CarriageControl:NL
 3940 S=S+25
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:25
  BinaryOperator:+
  AssignmentOperator:=
 3950 O=O*2
- Reference:O
- Value:O
+ Variable:O
+ Variable:O
  NumericConstant:2
  BinaryOperator:*
  AssignmentOperator:=
 3960 RETURN
  
 3970 IF O/3<>INT(O/3) THEN 4090
- Value:O
+ Variable:O
  NumericConstant:3
  BinaryOperator:/
- Value:O
+ Variable:O
  NumericConstant:3
  BinaryOperator:/
  FunctionInt
@@ -1713,9 +1713,9 @@
  TextConstant:"WILL YOU PART WITH THAT DIAMOND TIE TACK"
  CarriageControl:NL
 3990 INPUT J$
- Reference:J$
+ Variable:J$
 4000 IF LEFT$(J$,1)="N" THEN 4080
- Value:J$
+ Variable:J$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
@@ -1730,8 +1730,8 @@
  TextConstant:"YOU ARE NOW $100 RICHER."
  CarriageControl:NL
 4030 S=S+100
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:100
  BinaryOperator:+
  AssignmentOperator:=
@@ -1742,14 +1742,14 @@
  TextConstant:"IT'S PASTE.  $25."
  CarriageControl:NL
 4060 S=S+25
- Reference:S
- Value:S
+ Variable:S
+ Variable:S
  NumericConstant:25
  BinaryOperator:+
  AssignmentOperator:=
 4070 O=O*3
- Reference:O
- Value:O
+ Variable:O
+ Variable:O
  NumericConstant:3
  BinaryOperator:*
  AssignmentOperator:=

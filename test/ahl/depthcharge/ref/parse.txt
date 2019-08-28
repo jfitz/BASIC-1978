@@ -20,12 +20,12 @@
  ITEMS
  CarriageControl:NL
 20 INPUT "DIMENSION OF SEARCH AREA";G: PRINT
- Reference:G
+ Variable:G
  ITEMS
  CarriageControl:NL
 30 N=INT(LOG(G)/LOG(2))+1
- Reference:N
- Value:G
+ Variable:N
+ Variable:G
  FunctionLog
  NumericConstant:2
  FunctionLog
@@ -46,7 +46,7 @@
  ITEMS
  TextConstant:"MISSION IS TO DESTROY IT.  YOU HAVE"
  CarriageControl:;
- Value:N
+ Variable:N
  CarriageControl:;
  TextConstant:"SHOTS."
  CarriageControl:NL
@@ -71,22 +71,22 @@
  ITEMS
  CarriageControl:NL
 110 A=INT(G*RND(1)) : B=INT(G*RND(1)) : C=INT(G*RND(1))
- Reference:A
- Value:G
+ Variable:A
+ Variable:G
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
- Reference:B
- Value:G
+ Variable:B
+ Variable:G
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
  FunctionInt
  AssignmentOperator:=
- Reference:C
- Value:G
+ Variable:C
+ Variable:G
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -95,29 +95,29 @@
 120 FOR D=1 TO N : PRINT : PRINT "TRIAL #";D; : INPUT X,Y,Z
  control: Variable:D
  start:   ["NumericConstant:1"]
- end:     ["Value:N"]
+ end:     ["Variable:N"]
  ITEMS
  CarriageControl:NL
  ITEMS
  TextConstant:"TRIAL #"
  CarriageControl:;
- Value:D
+ Variable:D
  CarriageControl:;
- Reference:X
- Reference:Y
- Reference:Z
+ Variable:X
+ Variable:Y
+ Variable:Z
 130 IF ABS(X-A)+ABS(Y-B)+ABS(Z-C)=0 THEN 300
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  BinaryOperator:-
  FunctionAbs
- Value:Y
- Value:B
+ Variable:Y
+ Variable:B
  BinaryOperator:-
  FunctionAbs
  BinaryOperator:+
- Value:Z
- Value:C
+ Variable:Z
+ Variable:C
  BinaryOperator:-
  FunctionAbs
  BinaryOperator:+
@@ -138,15 +138,15 @@
  ITEMS
  TextConstant:"THE SUBMARINE WAS AT"
  CarriageControl:;
- Value:A
+ Variable:A
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
- Value:B
+ Variable:B
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:NL
  LineNumber:400
 300 PRINT : PRINT "B O O M ! ! YOU FOUND IT IN";D;"TRIES!"
@@ -155,7 +155,7 @@
  ITEMS
  TextConstant:"B O O M ! ! YOU FOUND IT IN"
  CarriageControl:;
- Value:D
+ Variable:D
  CarriageControl:;
  TextConstant:"TRIES!"
  CarriageControl:NL
@@ -164,9 +164,9 @@
  CarriageControl:NL
  ITEMS
  CarriageControl:NL
- Reference:A$
+ Variable:A$
 410 IF A$="Y" THEN 100
- Value:A$
+ Variable:A$
  TextConstant:"Y"
  BinaryOperator:=
 420 PRINT "OK.  HOPE YOU ENJOYED YOURSELF." : GOTO 600
@@ -179,61 +179,61 @@
  TextConstant:"SONAR REPORTS SHOT WAS "
  CarriageControl:;
 510 IF Y>B THEN PRINT "NORTH";
- Value:Y
- Value:B
+ Variable:Y
+ Variable:B
  BinaryOperator:>
  ITEMS
  TextConstant:"NORTH"
  CarriageControl:;
 520 IF Y<B THEN PRINT "SOUTH";
- Value:Y
- Value:B
+ Variable:Y
+ Variable:B
  BinaryOperator:<
  ITEMS
  TextConstant:"SOUTH"
  CarriageControl:;
 530 IF X>A THEN PRINT "EAST";
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  BinaryOperator:>
  ITEMS
  TextConstant:"EAST"
  CarriageControl:;
 540 IF X<A THEN PRINT "WEST";
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  BinaryOperator:<
  ITEMS
  TextConstant:"WEST"
  CarriageControl:;
 550 IF Y<>B OR X<>A THEN PRINT " AND";
- Value:Y
- Value:B
+ Variable:Y
+ Variable:B
  BinaryOperator:<>
- Value:X
- Value:A
+ Variable:X
+ Variable:A
  BinaryOperator:<>
  BinaryOperator:OR
  ITEMS
  TextConstant:" AND"
  CarriageControl:;
 560 IF Z>C THEN PRINT " TOO LOW."
- Value:Z
- Value:C
+ Variable:Z
+ Variable:C
  BinaryOperator:>
  ITEMS
  TextConstant:" TOO LOW."
  CarriageControl:NL
 570 IF Z<C THEN PRINT " TOO HIGH."
- Value:Z
- Value:C
+ Variable:Z
+ Variable:C
  BinaryOperator:<
  ITEMS
  TextConstant:" TOO HIGH."
  CarriageControl:NL
 580 IF Z=C THEN PRINT " DEPTH OK."
- Value:Z
- Value:C
+ Variable:Z
+ Variable:C
  BinaryOperator:=
  ITEMS
  TextConstant:" DEPTH OK."

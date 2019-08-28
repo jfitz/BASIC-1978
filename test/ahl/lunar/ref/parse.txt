@@ -70,7 +70,7 @@
  TextConstant:"GOOD LUCK"
  CarriageControl:NL
 120 L=0
- Reference:L
+ Variable:L
  NumericConstant:0
  AssignmentOperator:=
 130 PRINT: PRINT "SEC","MI + FT","MPH","LB FUEL","BURN RATE":PRINT 
@@ -90,91 +90,91 @@
  ITEMS
  CarriageControl:NL
 140 A=120:V=1:M=33000:N=16500:G=1E-03:Z=1.8
- Reference:A
+ Variable:A
  NumericConstant:120
  AssignmentOperator:=
- Reference:V
+ Variable:V
  NumericConstant:1
  AssignmentOperator:=
- Reference:M
+ Variable:M
  NumericConstant:33000
  AssignmentOperator:=
- Reference:N
+ Variable:N
  NumericConstant:16500
  AssignmentOperator:=
- Reference:G
+ Variable:G
  NumericConstant:1E-03
  AssignmentOperator:=
- Reference:Z
+ Variable:Z
  NumericConstant:1.8
  AssignmentOperator:=
 150 PRINT L,INT(A);INT(5280*(A-INT(A))),3600*V,M-N,:INPUT K:T=10 
  ITEMS
- Value:L
+ Variable:L
  CarriageControl:,
- Value:A
+ Variable:A
  FunctionInt
  CarriageControl:;
  NumericConstant:5280
- Value:A
- Value:A
+ Variable:A
+ Variable:A
  FunctionInt
  BinaryOperator:-
  BinaryOperator:*
  FunctionInt
  CarriageControl:,
  NumericConstant:3600
- Value:V
+ Variable:V
  BinaryOperator:*
  CarriageControl:,
- Value:M
- Value:N
+ Variable:M
+ Variable:N
  BinaryOperator:-
  CarriageControl:,
- Reference:K
- Reference:T
+ Variable:K
+ Variable:T
  NumericConstant:10
  AssignmentOperator:=
 160 IF M-N<1E-03 THEN 240
- Value:M
- Value:N
+ Variable:M
+ Variable:N
  BinaryOperator:-
  NumericConstant:1E-03
  BinaryOperator:<
 170 IF T<1E-03 THEN 150
- Value:T
+ Variable:T
  NumericConstant:1E-03
  BinaryOperator:<
 180 S=T: IF M>=N+S*K THEN 200
- Reference:S
- Value:T
+ Variable:S
+ Variable:T
  AssignmentOperator:=
- Value:M
- Value:N
- Value:S
- Value:K
+ Variable:M
+ Variable:N
+ Variable:S
+ Variable:K
  BinaryOperator:*
  BinaryOperator:+
  BinaryOperator:>=
 190 S=(M-N)/K
- Reference:S
- Value:M
- Value:N
+ Variable:S
+ Variable:M
+ Variable:N
  BinaryOperator:-
- Value:K
+ Variable:K
  BinaryOperator:/
  AssignmentOperator:=
 200 GOSUB 420: IF I<=O THEN 340
  LineNumber:420
- Value:I
- Value:O
+ Variable:I
+ Variable:O
  BinaryOperator:<=
 210 IF V<=0 THEN 230
- Value:V
+ Variable:V
  NumericConstant:0
  BinaryOperator:<=
 220 IF J<0 THEN 370
- Value:J
+ Variable:J
  NumericConstant:0
  BinaryOperator:<
 230 GOSUB 330: GOTO 160
@@ -184,59 +184,59 @@
  ITEMS
  TextConstant:"FUEL OUT AT"
  CarriageControl:;
- Value:L
+ Variable:L
  CarriageControl:;
  TextConstant:"SECONDS"
  CarriageControl:NL
- Reference:S
- Value:V
+ Variable:S
+ Variable:V
  UnaryOperator:-
- Value:V
- Value:V
+ Variable:V
+ Variable:V
  BinaryOperator:*
  NumericConstant:2
- Value:A
+ Variable:A
  BinaryOperator:*
- Value:G
+ Variable:G
  BinaryOperator:*
  BinaryOperator:+
  FunctionSqr
  BinaryOperator:+
- Value:G
+ Variable:G
  BinaryOperator:/
  AssignmentOperator:=
 250 V=V+G*S: L=L+S
- Reference:V
- Value:V
- Value:G
- Value:S
+ Variable:V
+ Variable:V
+ Variable:G
+ Variable:S
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
- Reference:L
- Value:L
- Value:S
+ Variable:L
+ Variable:L
+ Variable:S
  BinaryOperator:+
  AssignmentOperator:=
 260 W=3600*V: PRINT "ON MOON AT";L;"SECONDS - IMPACT VELOCITY";W;"MPH" 
- Reference:W
+ Variable:W
  NumericConstant:3600
- Value:V
+ Variable:V
  BinaryOperator:*
  AssignmentOperator:=
  ITEMS
  TextConstant:"ON MOON AT"
  CarriageControl:;
- Value:L
+ Variable:L
  CarriageControl:;
  TextConstant:"SECONDS - IMPACT VELOCITY"
  CarriageControl:;
- Value:W
+ Variable:W
  CarriageControl:;
  TextConstant:"MPH"
  CarriageControl:NL
 274 IF W<=1.2 THEN PRINT "PERFECT LANDING!": GOTO 440 
- Value:W
+ Variable:W
  NumericConstant:1.2
  BinaryOperator:<=
  ITEMS
@@ -244,7 +244,7 @@
  CarriageControl:NL
  LineNumber:440
 280 IF W<=10 THEN PRINT "GOOD LANDING (COULD RE BETTER)":GOTO 440 
- Value:W
+ Variable:W
  NumericConstant:10
  BinaryOperator:<=
  ITEMS
@@ -252,7 +252,7 @@
  CarriageControl:NL
  LineNumber:440
 282 IF W>60 THEN 300
- Value:W
+ Variable:W
  NumericConstant:60
  BinaryOperator:>
 284 PRINT "CRAFT DAMAGE... YOU'RE STRANDED HERE UNTIL A RESCUE" 
@@ -273,7 +273,7 @@
  ITEMS
  TextConstant:"IN FACT, YOU BLASTED A NEW LUNAR CRATER"
  CarriageControl:;
- Value:W
+ Variable:W
  NumericConstant:.227
  BinaryOperator:*
  CarriageControl:;
@@ -282,48 +282,48 @@
 320 GOTO 440
  LineNumber:440
 330 L=L+S: T=T-S: M=M-S*K: A=I: V=J: RETURN
- Reference:L
- Value:L
- Value:S
+ Variable:L
+ Variable:L
+ Variable:S
  BinaryOperator:+
  AssignmentOperator:=
- Reference:T
- Value:T
- Value:S
+ Variable:T
+ Variable:T
+ Variable:S
  BinaryOperator:-
  AssignmentOperator:=
- Reference:M
- Value:M
- Value:S
- Value:K
+ Variable:M
+ Variable:M
+ Variable:S
+ Variable:K
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
- Reference:A
- Value:I
+ Variable:A
+ Variable:I
  AssignmentOperator:=
- Reference:V
- Value:J
+ Variable:V
+ Variable:J
  AssignmentOperator:=
  
 340 IF S<5E-03 THEN 260
- Value:S
+ Variable:S
  NumericConstant:5E-03
  BinaryOperator:<
 350 D=V+SQR(V*V+2*A*(G-Z*K/M)):S=2*A/D
- Reference:D
- Value:V
- Value:V
- Value:V
+ Variable:D
+ Variable:V
+ Variable:V
+ Variable:V
  BinaryOperator:*
  NumericConstant:2
- Value:A
+ Variable:A
  BinaryOperator:*
- Value:G
- Value:Z
- Value:K
+ Variable:G
+ Variable:Z
+ Variable:K
  BinaryOperator:*
- Value:M
+ Variable:M
  BinaryOperator:/
  BinaryOperator:-
  BinaryOperator:*
@@ -331,11 +331,11 @@
  FunctionSqr
  BinaryOperator:+
  AssignmentOperator:=
- Reference:S
+ Variable:S
  NumericConstant:2
- Value:A
+ Variable:A
  BinaryOperator:*
- Value:D
+ Variable:D
  BinaryOperator:/
  AssignmentOperator:=
 360 GOSUB 420: GOSUB 330: GOTO 340
@@ -343,32 +343,32 @@
  LineNumber:330
  LineNumber:340
 370 W=(1-M*G/(Z*K))/2: S=M*V/(Z*K*(W+SQR(W*W+V/Z)))+.05:GOSUB 420
- Reference:W
+ Variable:W
  NumericConstant:1
- Value:M
- Value:G
+ Variable:M
+ Variable:G
  BinaryOperator:*
- Value:Z
- Value:K
+ Variable:Z
+ Variable:K
  BinaryOperator:*
  BinaryOperator:/
  BinaryOperator:-
  NumericConstant:2
  BinaryOperator:/
  AssignmentOperator:=
- Reference:S
- Value:M
- Value:V
+ Variable:S
+ Variable:M
+ Variable:V
  BinaryOperator:*
- Value:Z
- Value:K
+ Variable:Z
+ Variable:K
  BinaryOperator:*
- Value:W
- Value:W
- Value:W
+ Variable:W
+ Variable:W
+ Variable:W
  BinaryOperator:*
- Value:V
- Value:Z
+ Variable:V
+ Variable:Z
  BinaryOperator:/
  BinaryOperator:+
  FunctionSqr
@@ -380,56 +380,56 @@
  AssignmentOperator:=
  LineNumber:420
 380 IF I<=0 THEN 340
- Value:I
+ Variable:I
  NumericConstant:0
  BinaryOperator:<=
 390 GOSUB 330: IF J>0 THEN 160
  LineNumber:330
- Value:J
+ Variable:J
  NumericConstant:0
  BinaryOperator:>
 400 IF V>0 THEN 370
- Value:V
+ Variable:V
  NumericConstant:0
  BinaryOperator:>
 410 GOTO 160
  LineNumber:160
 420 Q=S*K/M: J=V+G*S+Z*(-Q-Q*Q/2-Q^3/3-Q^4/4-Q^5/5)
- Reference:Q
- Value:S
- Value:K
+ Variable:Q
+ Variable:S
+ Variable:K
  BinaryOperator:*
- Value:M
+ Variable:M
  BinaryOperator:/
  AssignmentOperator:=
- Reference:J
- Value:V
- Value:G
- Value:S
+ Variable:J
+ Variable:V
+ Variable:G
+ Variable:S
  BinaryOperator:*
  BinaryOperator:+
- Value:Z
- Value:Q
+ Variable:Z
+ Variable:Q
  UnaryOperator:-
- Value:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  BinaryOperator:*
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:-
- Value:Q
+ Variable:Q
  NumericConstant:3
  BinaryOperator:^
  NumericConstant:3
  BinaryOperator:/
  BinaryOperator:-
- Value:Q
+ Variable:Q
  NumericConstant:4
  BinaryOperator:^
  NumericConstant:4
  BinaryOperator:/
  BinaryOperator:-
- Value:Q
+ Variable:Q
  NumericConstant:5
  BinaryOperator:^
  NumericConstant:5
@@ -439,45 +439,45 @@
  BinaryOperator:+
  AssignmentOperator:=
 430 I=A-G*S*S/2-V*S+Z*S*(Q/2+Q^2/6+Q^3/12+Q^4/20+Q^5/30):RETURN
- Reference:I
- Value:A
- Value:G
- Value:S
+ Variable:I
+ Variable:A
+ Variable:G
+ Variable:S
  BinaryOperator:*
- Value:S
+ Variable:S
  BinaryOperator:*
  NumericConstant:2
  BinaryOperator:/
  BinaryOperator:-
- Value:V
- Value:S
+ Variable:V
+ Variable:S
  BinaryOperator:*
  BinaryOperator:-
- Value:Z
- Value:S
+ Variable:Z
+ Variable:S
  BinaryOperator:*
- Value:Q
+ Variable:Q
  NumericConstant:2
  BinaryOperator:/
- Value:Q
+ Variable:Q
  NumericConstant:2
  BinaryOperator:^
  NumericConstant:6
  BinaryOperator:/
  BinaryOperator:+
- Value:Q
+ Variable:Q
  NumericConstant:3
  BinaryOperator:^
  NumericConstant:12
  BinaryOperator:/
  BinaryOperator:+
- Value:Q
+ Variable:Q
  NumericConstant:4
  BinaryOperator:^
  NumericConstant:20
  BinaryOperator:/
  BinaryOperator:+
- Value:Q
+ Variable:Q
  NumericConstant:5
  BinaryOperator:^
  NumericConstant:30

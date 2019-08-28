@@ -27,13 +27,13 @@
  control: Variable:I
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:4"]
- Value:I
- Reference:B
+ Variable:I
+ Variable:B
  Variable:I
 130 GOSUB 260
  LineNumber:260
 140 L=64: REM  ASCII LETTER CODE...
- Reference:L
+ Variable:L
  NumericConstant:64
  AssignmentOperator:=
  Remark: ASCII LETTER CODE...
@@ -43,28 +43,28 @@
  ITEMS
  CarriageControl:NL
 170 READ X: IF X<0 THEN 160
- Reference:X
- Value:X
+ Variable:X
+ Variable:X
  NumericConstant:0
  BinaryOperator:<
 175 IF X>128 THEN 240
- Value:X
+ Variable:X
  NumericConstant:128
  BinaryOperator:>
 180 PRINT TAB(X);: READ Y
  ITEMS
- Value:X
+ Variable:X
  FunctionTab
  CarriageControl:;
- Reference:Y
+ Variable:Y
 190 FOR I=X TO Y: J=I-5*INT(I/5)
  control: Variable:I
- start:   ["Value:X"]
- end:     ["Value:Y"]
- Reference:J
- Value:I
+ start:   ["Variable:X"]
+ end:     ["Variable:Y"]
+ Variable:J
+ Variable:I
  NumericConstant:5
- Value:I
+ Variable:I
  NumericConstant:5
  BinaryOperator:/
  FunctionInt
@@ -73,9 +73,9 @@
  AssignmentOperator:=
 200 PRINT CHR$(L+B(J));
  ITEMS
- Value:L
- Value:J
- Value:B
+ Variable:L
+ Variable:J
+ Variable:B
  BinaryOperator:+
  FunctionChr
  CarriageControl:;

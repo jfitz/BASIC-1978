@@ -30,10 +30,10 @@
  NumericConstant:3
  Declaration:B
 40 Y=0:T=255
- Reference:Y
+ Variable:Y
  NumericConstant:0
  AssignmentOperator:=
- Reference:T
+ Variable:T
  NumericConstant:255
  AssignmentOperator:=
 50 PRINT:PRINT:PRINT
@@ -44,9 +44,9 @@
  ITEMS
  CarriageControl:NL
 70 INPUT "WOULD YOU LIKE THE RULES (YES OR NO)";A$
- Reference:A$
+ Variable:A$
 90 IF LEFT$(A$,1)="N" THEN 150
- Value:A$
+ Variable:A$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
@@ -78,8 +78,8 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 160 A(I)=INT(10*RND(1))
- Value:I
- Reference:A
+ Variable:I
+ Variable:A
  NumericConstant:10
  NumericConstant:1
  FunctionRnd
@@ -87,7 +87,7 @@
  FunctionInt
  AssignmentOperator:=
 165 IF I-1=0 THEN 200
- Value:I
+ Variable:I
  NumericConstant:1
  BinaryOperator:-
  NumericConstant:0
@@ -95,12 +95,12 @@
 170 FOR J=1 TO I-1
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:I", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:I", "NumericConstant:1", "BinaryOperator:-"]
 180 IF A(I)=A(J) THEN 160
- Value:I
- Value:A
- Value:J
- Value:A
+ Variable:I
+ Variable:A
+ Variable:J
+ Variable:A
  BinaryOperator:=
 190 NEXT J
  Variable:J
@@ -120,12 +120,12 @@
  ITEMS
  TextConstant:"GUESS #"
  CarriageControl:;
- Value:I
+ Variable:I
  CarriageControl:,
 240 INPUT A$
- Reference:A$
+ Variable:A$
 245 IF LEN(A$)<>3 THEN 630
- Value:A$
+ Variable:A$
  FunctionLen
  NumericConstant:3
  BinaryOperator:<>
@@ -133,10 +133,10 @@
  control: Variable:Z
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
- Value:Z
- Reference:A1
- Value:A$
- Value:Z
+ Variable:Z
+ Variable:A1
+ Variable:A$
+ Variable:Z
  NumericConstant:1
  FunctionMid
  FunctionAsc
@@ -147,20 +147,20 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 270 IF A1(J)<48 THEN 300
- Value:J
- Value:A1
+ Variable:J
+ Variable:A1
  NumericConstant:48
  BinaryOperator:<
 280 IF A1(J)>57 THEN 300
- Value:J
- Value:A1
+ Variable:J
+ Variable:A1
  NumericConstant:57
  BinaryOperator:>
 285 B(J)=A1(J)-48
- Value:J
- Reference:B
- Value:J
- Value:A1
+ Variable:J
+ Variable:B
+ Variable:J
+ Variable:A1
  NumericConstant:48
  BinaryOperator:-
  AssignmentOperator:=
@@ -176,27 +176,27 @@
  LineNumber:230
 320 IF B(1)=B(2) THEN 650
  NumericConstant:1
- Value:B
+ Variable:B
  NumericConstant:2
- Value:B
+ Variable:B
  BinaryOperator:=
 330 IF B(2)=B(3) THEN 650
  NumericConstant:2
- Value:B
+ Variable:B
  NumericConstant:3
- Value:B
+ Variable:B
  BinaryOperator:=
 340 IF B(3)=B(1) THEN 650
  NumericConstant:3
- Value:B
+ Variable:B
  NumericConstant:1
- Value:B
+ Variable:B
  BinaryOperator:=
 350 C=0:D=0
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
- Reference:D
+ Variable:D
  NumericConstant:0
  AssignmentOperator:=
 360 FOR J=1 TO 2
@@ -204,30 +204,30 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:2"]
 370 IF A(J)<>B(J+1) THEN 390
- Value:J
- Value:A
- Value:J
+ Variable:J
+ Variable:A
+ Variable:J
  NumericConstant:1
  BinaryOperator:+
- Value:B
+ Variable:B
  BinaryOperator:<>
 380 C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 390 IF A(J+1)<>B(J) THEN 410
- Value:J
+ Variable:J
  NumericConstant:1
  BinaryOperator:+
- Value:A
- Value:J
- Value:B
+ Variable:A
+ Variable:J
+ Variable:B
  BinaryOperator:<>
 400 C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -235,25 +235,25 @@
  Variable:J
 420 IF A(1)<>B(3) THEN 440
  NumericConstant:1
- Value:A
+ Variable:A
  NumericConstant:3
- Value:B
+ Variable:B
  BinaryOperator:<>
 430 C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 440 IF A(3)<>B(1) THEN 460
  NumericConstant:3
- Value:A
+ Variable:A
  NumericConstant:1
- Value:B
+ Variable:B
  BinaryOperator:<>
 450 C=C+1
- Reference:C
- Value:C
+ Variable:C
+ Variable:C
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -262,31 +262,31 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 470 IF A(J)<>B(J) THEN 490
- Value:J
- Value:A
- Value:J
- Value:B
+ Variable:J
+ Variable:A
+ Variable:J
+ Variable:B
  BinaryOperator:<>
 480 D=D+1
- Reference:D
- Value:D
+ Variable:D
+ Variable:D
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 490 NEXT J
  Variable:J
 500 IF D=3 THEN 680
- Value:D
+ Variable:D
  NumericConstant:3
  BinaryOperator:=
 505 IF C=0 THEN 545
- Value:C
+ Variable:C
  NumericConstant:0
  BinaryOperator:=
 520 FOR J=1 TO C
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:C"]
+ end:     ["Variable:C"]
 530 PRINT "PICO ";
  ITEMS
  TextConstant:"PICO "
@@ -294,13 +294,13 @@
 540 NEXT J
  Variable:J
 545 IF D=0 THEN 580
- Value:D
+ Variable:D
  NumericConstant:0
  BinaryOperator:=
 550 FOR J=1 TO D
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Value:D"]
+ end:     ["Variable:D"]
 560 PRINT "FERMI ";
  ITEMS
  TextConstant:"FERMI "
@@ -308,8 +308,8 @@
 570 NEXT J
  Variable:J
 580 IF C+D<>0 THEN 600
- Value:C
- Value:D
+ Variable:C
+ Variable:D
  BinaryOperator:+
  NumericConstant:0
  BinaryOperator:<>
@@ -332,15 +332,15 @@
  CarriageControl:;
  NumericConstant:100
  NumericConstant:1
- Value:A
+ Variable:A
  BinaryOperator:*
  NumericConstant:10
  NumericConstant:2
- Value:A
+ Variable:A
  BinaryOperator:*
  BinaryOperator:+
  NumericConstant:3
- Value:A
+ Variable:A
  BinaryOperator:+
  CarriageControl:NL
 620 GOTO 700
@@ -366,21 +366,21 @@
  ITEMS
  CarriageControl:NL
 690 Y=Y+1
- Reference:Y
- Value:Y
+ Variable:Y
+ Variable:Y
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 700 INPUT "PLAY AGAIN (YES OR NO)";A$
- Reference:A$
+ Variable:A$
 720 IF LEFT$(A$,1)="YES" THEN 150
- Value:A$
+ Variable:A$
  NumericConstant:1
  FunctionLeft
  TextConstant:"YES"
  BinaryOperator:=
 730 IF Y=0 THEN 750
- Value:Y
+ Variable:Y
  NumericConstant:0
  BinaryOperator:=
 740 PRINT:PRINT "A";Y;"POINT BAGELS BUFF!!"
@@ -389,7 +389,7 @@
  ITEMS
  TextConstant:"A"
  CarriageControl:;
- Value:Y
+ Variable:Y
  CarriageControl:;
  TextConstant:"POINT BAGELS BUFF!!"
  CarriageControl:NL

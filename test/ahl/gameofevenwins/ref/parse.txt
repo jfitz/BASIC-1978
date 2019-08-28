@@ -18,11 +18,11 @@
  ITEMS
  CarriageControl:NL
 4 INPUT "DO YOU WANT INSTRUCTIONS (YES OR NO)";A$:PRINT
- Reference:A$
+ Variable:A$
  ITEMS
  CarriageControl:NL
 5 IF A$="NO" THEN 20
- Value:A$
+ Variable:A$
  TextConstant:"NO"
  BinaryOperator:=
 6 PRINT "THE GAME IS PLAYED AS FOLLOWS:":PRINT
@@ -80,10 +80,10 @@
  NumericConstant:5
  Declaration:R
 25 L=0: B=0
- Reference:L
+ Variable:L
  NumericConstant:0
  AssignmentOperator:=
- Reference:B
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
 30 FOR I=0 TO 5
@@ -92,27 +92,27 @@
  end:     ["NumericConstant:5"]
 40 R(1,I)=4
  NumericConstant:1
- Value:I
- Reference:R
+ Variable:I
+ Variable:R
  NumericConstant:4
  AssignmentOperator:=
 50 R(0,I)=4
  NumericConstant:0
- Value:I
- Reference:R
+ Variable:I
+ Variable:R
  NumericConstant:4
  AssignmentOperator:=
 60 NEXT I
  Variable:I
 70 A=0: B=0
- Reference:A
+ Variable:A
  NumericConstant:0
  AssignmentOperator:=
- Reference:B
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
 90 P=INT((13*RND(1)+9)/2)*2+1
- Reference:P
+ Variable:P
  NumericConstant:13
  NumericConstant:1
  FunctionRnd
@@ -128,31 +128,31 @@
  BinaryOperator:+
  AssignmentOperator:=
 100 IF P=1 THEN 530
- Value:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:=
 110 PRINT "THERE ARE";P;"CHIPS ON THE BOARD."
  ITEMS
  TextConstant:"THERE ARE"
  CarriageControl:;
- Value:P
+ Variable:P
  CarriageControl:;
  TextConstant:"CHIPS ON THE BOARD."
  CarriageControl:NL
 120 E1=E
- Reference:E1
- Value:E
+ Variable:E1
+ Variable:E
  AssignmentOperator:=
 130 L1=L
- Reference:L1
- Value:L
+ Variable:L1
+ Variable:L
  AssignmentOperator:=
 140 E=(A/2-INT(A/2))*2
- Reference:E
- Value:A
+ Variable:E
+ Variable:A
  NumericConstant:2
  BinaryOperator:/
- Value:A
+ Variable:A
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
@@ -161,11 +161,11 @@
  BinaryOperator:*
  AssignmentOperator:=
 150 L=INT((P/6-INT(P/6))*6+.5)
- Reference:L
- Value:P
+ Variable:L
+ Variable:P
  NumericConstant:6
  BinaryOperator:/
- Value:P
+ Variable:P
  NumericConstant:6
  BinaryOperator:/
  FunctionInt
@@ -177,115 +177,115 @@
  FunctionInt
  AssignmentOperator:=
 160 IF R(E,L)>=P THEN 320
- Value:E
- Value:L
- Value:R
- Value:P
+ Variable:E
+ Variable:L
+ Variable:R
+ Variable:P
  BinaryOperator:>=
 170 M=R(E,L)
- Reference:M
- Value:E
- Value:L
- Value:R
+ Variable:M
+ Variable:E
+ Variable:L
+ Variable:R
  AssignmentOperator:=
 180 IF M<=0 THEN 370
- Value:M
+ Variable:M
  NumericConstant:0
  BinaryOperator:<=
 190 P=P-M
- Reference:P
- Value:P
- Value:M
+ Variable:P
+ Variable:P
+ Variable:M
  BinaryOperator:-
  AssignmentOperator:=
 200 IF M=1 THEN 510
- Value:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:=
 210 PRINT "COMPUTER TAKES";M;"CHIPS LEAVING";P;"... YOUR MOVE";
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:"CHIPS LEAVING"
  CarriageControl:;
- Value:P
+ Variable:P
  CarriageControl:;
  TextConstant:"... YOUR MOVE"
  CarriageControl:;
 220 B=B+M
- Reference:B
- Value:B
- Value:M
+ Variable:B
+ Variable:B
+ Variable:M
  BinaryOperator:+
  AssignmentOperator:=
 230 INPUT M
- Reference:M
+ Variable:M
 240 M=INT(M)
- Reference:M
- Value:M
+ Variable:M
+ Variable:M
  FunctionInt
  AssignmentOperator:=
 250 IF M<1 THEN 450
- Value:M
+ Variable:M
  NumericConstant:1
  BinaryOperator:<
 260 IF M>4 THEN 460
- Value:M
+ Variable:M
  NumericConstant:4
  BinaryOperator:>
 270 IF M>P THEN 460
- Value:M
- Value:P
+ Variable:M
+ Variable:P
  BinaryOperator:>
 280 IF M=P THEN 360
- Value:M
- Value:P
+ Variable:M
+ Variable:P
  BinaryOperator:=
 290 P=P-M
- Reference:P
- Value:P
- Value:M
+ Variable:P
+ Variable:P
+ Variable:M
  BinaryOperator:-
  AssignmentOperator:=
 300 A=A+M
- Reference:A
- Value:A
- Value:M
+ Variable:A
+ Variable:A
+ Variable:M
  BinaryOperator:+
  AssignmentOperator:=
 310 GOTO 100
  LineNumber:100
 320 IF P=1 THEN 550
- Value:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:=
 330 PRINT "COMPUTER TAKES";P;"CHIPS."
  ITEMS
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Value:P
+ Variable:P
  CarriageControl:;
  TextConstant:"CHIPS."
  CarriageControl:NL
 340 R(E,L)=P
- Value:E
- Value:L
- Reference:R
- Value:P
+ Variable:E
+ Variable:L
+ Variable:R
+ Variable:P
  AssignmentOperator:=
 350 B=B+P
- Reference:B
- Value:B
- Value:P
+ Variable:B
+ Variable:B
+ Variable:P
  BinaryOperator:+
  AssignmentOperator:=
 360 IF B/2=INT(B/2) THEN 420
- Value:B
+ Variable:B
  NumericConstant:2
  BinaryOperator:/
- Value:B
+ Variable:B
  NumericConstant:2
  BinaryOperator:/
  FunctionInt
@@ -297,18 +297,18 @@
  ITEMS
  CarriageControl:NL
 390 IF R(E,L)=1 THEN 480
- Value:E
- Value:L
- Value:R
+ Variable:E
+ Variable:L
+ Variable:R
  NumericConstant:1
  BinaryOperator:=
 400 R(E,L)=R(E,L)-1
- Value:E
- Value:L
- Reference:R
- Value:E
- Value:L
- Value:R
+ Variable:E
+ Variable:L
+ Variable:R
+ Variable:E
+ Variable:L
+ Variable:R
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -323,30 +323,30 @@
 430 GOTO 70
  LineNumber:70
 450 IF M=0 THEN 570
- Value:M
+ Variable:M
  NumericConstant:0
  BinaryOperator:=
 460 PRINT M;"IS AN ILLEGAL MOVE ... YOUR MOVE";
  ITEMS
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:"IS AN ILLEGAL MOVE ... YOUR MOVE"
  CarriageControl:;
 470 GOTO 230
  LineNumber:230
 480 IF R(E1,L1)=1 THEN 70
- Value:E1
- Value:L1
- Value:R
+ Variable:E1
+ Variable:L1
+ Variable:R
  NumericConstant:1
  BinaryOperator:=
 490 R(E1,L1)=R(E1,L1)-1
- Value:E1
- Value:L1
- Reference:R
- Value:E1
- Value:L1
- Value:R
+ Variable:E1
+ Variable:L1
+ Variable:R
+ Variable:E1
+ Variable:L1
+ Variable:R
  NumericConstant:1
  BinaryOperator:-
  AssignmentOperator:=
@@ -356,7 +356,7 @@
  ITEMS
  TextConstant:"COMPUTER TAKES 1 CHIP LEAVING"
  CarriageControl:;
- Value:P
+ Variable:P
  CarriageControl:;
  TextConstant:"... YOUR MOVE"
  CarriageControl:;

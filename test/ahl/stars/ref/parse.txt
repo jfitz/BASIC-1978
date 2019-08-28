@@ -24,16 +24,16 @@
 140 REM *** A IS LIMIT ON NUMBER, M IS NUMBER OF GUESSES
  Remark:*** A IS LIMIT ON NUMBER, M IS NUMBER OF GUESSES
 150 A=100:M=7
- Reference:A
+ Variable:A
  NumericConstant:100
  AssignmentOperator:=
- Reference:M
+ Variable:M
  NumericConstant:7
  AssignmentOperator:=
 170 INPUT "DO YOU WANT INSTRUCTIONS";A$
- Reference:A$
+ Variable:A$
 190 IF LEFT$(A$,1)="N" THEN 280
- Value:A$
+ Variable:A$
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
@@ -44,7 +44,7 @@
  ITEMS
  TextConstant:"I AM THINKING OF A WHOLE NUMBER FROM 1 TO"
  CarriageControl:;
- Value:A
+ Variable:A
  CarriageControl:NL
 220 PRINT "TRY TO GUESS MY NUMBER.  AFTER YOU GUESS, I"
  ITEMS
@@ -66,7 +66,7 @@
  ITEMS
  TextConstant:"MEANS REALLY CLOSE!  YOU GET"
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:"GUESSES."
  CarriageControl:NL
@@ -79,8 +79,8 @@
  ITEMS
  CarriageControl:NL
 300 X=INT(A*RND(1)+1)
- Reference:X
- Value:A
+ Variable:X
+ Variable:A
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -97,7 +97,7 @@
 330 FOR K=1 TO M
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["Value:M"]
+ end:     ["Variable:M"]
 340 PRINT
  ITEMS
  CarriageControl:NL
@@ -106,40 +106,40 @@
  TextConstant:"YOUR GUESS"
  CarriageControl:;
 360 INPUT G
- Reference:G
+ Variable:G
 370 IF G=X THEN 600
- Value:G
- Value:X
+ Variable:G
+ Variable:X
  BinaryOperator:=
 380 D=ABS(G-X)
- Reference:D
- Value:G
- Value:X
+ Variable:D
+ Variable:G
+ Variable:X
  BinaryOperator:-
  FunctionAbs
  AssignmentOperator:=
 390 IF D>=64 THEN 510
- Value:D
+ Variable:D
  NumericConstant:64
  BinaryOperator:>=
 400 IF D>=32 THEN 500
- Value:D
+ Variable:D
  NumericConstant:32
  BinaryOperator:>=
 410 IF D>=16 THEN 490
- Value:D
+ Variable:D
  NumericConstant:16
  BinaryOperator:>=
 420 IF D>=8 THEN 480
- Value:D
+ Variable:D
  NumericConstant:8
  BinaryOperator:>=
 430 IF D>=4 THEN 470
- Value:D
+ Variable:D
  NumericConstant:4
  BinaryOperator:>=
 440 IF D>=2 THEN 460
- Value:D
+ Variable:D
  NumericConstant:2
  BinaryOperator:>=
 450 PRINT "*";
@@ -184,11 +184,11 @@
  ITEMS
  TextConstant:"SORRY, THAT'S"
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:"GUESSES. THE NUMBER WAS"
  CarriageControl:;
- Value:X
+ Variable:X
  CarriageControl:NL
 580 GOTO 650
  LineNumber:650
@@ -215,7 +215,7 @@
  ITEMS
  TextConstant:"YOU GOT IT IN"
  CarriageControl:;
- Value:K
+ Variable:K
  CarriageControl:;
  TextConstant:"GUESSES!!!  LET'S PLAY AGAIN..."
  CarriageControl:NL

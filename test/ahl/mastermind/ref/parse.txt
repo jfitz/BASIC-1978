@@ -34,9 +34,9 @@
 70 REM
  Remark:
 80 INPUT "NUMBER OF COLORS";C9
- Reference:C9
+ Variable:C9
 90 IF C9>8 THEN PRINT "NO MORE THAN 8, PLEASE!":GOTO 80
- Value:C9
+ Variable:C9
  NumericConstant:8
  BinaryOperator:>
  ITEMS
@@ -44,46 +44,46 @@
  CarriageControl:NL
  LineNumber:80
 100 INPUT "NUMBER OF POSITIONS";P9
- Reference:P9
+ Variable:P9
 110 INPUT "NUMBER OF ROUNDS";R9
- Reference:R9
+ Variable:R9
 120 P=C9^P9
- Reference:P
- Value:C9
- Value:P9
+ Variable:P
+ Variable:C9
+ Variable:P9
  BinaryOperator:^
  AssignmentOperator:=
 130 PRINT "TOTAL POSSIBILITIES =";P
  ITEMS
  TextConstant:"TOTAL POSSIBILITIES ="
  CarriageControl:;
- Value:P
+ Variable:P
  CarriageControl:NL
 140 H=0:C=0
- Reference:H
+ Variable:H
  NumericConstant:0
  AssignmentOperator:=
- Reference:C
+ Variable:C
  NumericConstant:0
  AssignmentOperator:=
 150 DIM Q(P9),S(10,2),S$(10),A$(P9),G$(P9),I(P),H$(P9)
- Value:P9
+ Variable:P9
  Declaration:Q
  NumericConstant:10
  NumericConstant:2
  Declaration:S
  NumericConstant:10
  Declaration:S$
- Value:P9
+ Variable:P9
  Declaration:A$
- Value:P9
+ Variable:P9
  Declaration:G$
- Value:P
+ Variable:P
  Declaration:I
- Value:P9
+ Variable:P9
  Declaration:H$
 160 L$="BWRGOYPT"
- Reference:L$
+ Variable:L$
  TextConstant:"BWRGOYPT"
  AssignmentOperator:=
 170 PRINT
@@ -103,18 +103,18 @@
 210 FOR X=1 TO C9
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:C9"]
+ end:     ["Variable:C9"]
 220 READ X$
- Reference:X$
+ Variable:X$
 230 PRINT X$;TAB(13);MID$(L$,X,1)
  ITEMS
- Value:X$
+ Variable:X$
  CarriageControl:;
  NumericConstant:13
  FunctionTab
  CarriageControl:;
- Value:L$
- Value:X
+ Variable:L$
+ Variable:X
  NumericConstant:1
  FunctionMid
  CarriageControl:NL
@@ -126,7 +126,7 @@
 260 FOR R=1 TO R9
  control: Variable:R
  start:   ["NumericConstant:1"]
- end:     ["Value:R9"]
+ end:     ["Variable:R9"]
 270 PRINT 
  ITEMS
  CarriageControl:NL
@@ -134,7 +134,7 @@
  ITEMS
  TextConstant:"ROUND NUMBER"
  CarriageControl:;
- Value:R
+ Variable:R
  CarriageControl:;
  TextConstant:"----"
  CarriageControl:NL
@@ -150,8 +150,8 @@
 310 REM     GET A COMBINATION
  Remark:    GET A COMBINATION
 320 A=INT(P*RND(1)+1)
- Reference:A
- Value:P
+ Variable:A
+ Variable:P
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -164,7 +164,7 @@
 340 FOR X=1 TO A
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:A"]
+ end:     ["Variable:A"]
 350 GOSUB 3500
  LineNumber:3500
 360 NEXT X
@@ -177,23 +177,23 @@
  ITEMS
  TextConstant:"MOVE # "
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:" GUESS "
  CarriageControl:;
- Reference:X$
+ Variable:X$
 390 IF X$="BOARD" THEN 2000
- Value:X$
+ Variable:X$
  TextConstant:"BOARD"
  BinaryOperator:=
 400 IF X$="QUIT" THEN 2500
- Value:X$
+ Variable:X$
  TextConstant:"QUIT"
  BinaryOperator:=
 410 IF LEN(X$)<>P9 THEN PRINT "BAD NUMBER OF POSITIONS.":GOTO 380
- Value:X$
+ Variable:X$
  FunctionLen
- Value:P9
+ Variable:P9
  BinaryOperator:<>
  ITEMS
  TextConstant:"BAD NUMBER OF POSITIONS."
@@ -204,18 +204,18 @@
 430 FOR X=1 TO P9
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 440 FOR Y=1 TO C9
  control: Variable:Y
  start:   ["NumericConstant:1"]
- end:     ["Value:C9"]
+ end:     ["Variable:C9"]
 450 IF MID$(X$,X,1)=MID$(L$,Y,1) THEN 480
- Value:X$
- Value:X
+ Variable:X$
+ Variable:X
  NumericConstant:1
  FunctionMid
- Value:L$
- Value:Y
+ Variable:L$
+ Variable:Y
  NumericConstant:1
  FunctionMid
  BinaryOperator:=
@@ -225,8 +225,8 @@
  ITEMS
  TextConstant:"'"
  CarriageControl:;
- Value:X$
- Value:X
+ Variable:X$
+ Variable:X
  NumericConstant:1
  FunctionMid
  CarriageControl:;
@@ -234,10 +234,10 @@
  CarriageControl:NL
  LineNumber:380
 480 G$(X)=MID$(X$,X,1)
- Value:X
- Reference:G$
- Value:X$
- Value:X
+ Variable:X
+ Variable:G$
+ Variable:X$
+ Variable:X
  NumericConstant:1
  FunctionMid
  AssignmentOperator:=
@@ -252,8 +252,8 @@
 530 GOSUB 4500
  LineNumber:4500
 540 IF B=P9 THEN 630
- Value:B
- Value:P9
+ Variable:B
+ Variable:P9
  BinaryOperator:=
 550 REM     TELL HUMAN RESULTS
  Remark:    TELL HUMAN RESULTS
@@ -261,32 +261,32 @@
  ITEMS
  TextConstant:"YOU HAVE "
  CarriageControl:;
- Value:B
+ Variable:B
  CarriageControl:;
  TextConstant:" BLACKS AND "
  CarriageControl:;
- Value:W
+ Variable:W
  CarriageControl:;
  TextConstant:" WHITES."
  CarriageControl:NL
 570 REM     SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
  Remark:    SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
 580 S$(M)=X$
- Value:M
- Reference:S$
- Value:X$
+ Variable:M
+ Variable:S$
+ Variable:X$
  AssignmentOperator:=
 590 S(M,1)=B
- Value:M
+ Variable:M
  NumericConstant:1
- Reference:S
- Value:B
+ Variable:S
+ Variable:B
  AssignmentOperator:=
 600 S(M,2)=W
- Value:M
+ Variable:M
  NumericConstant:2
- Reference:S
- Value:W
+ Variable:S
+ Variable:W
  AssignmentOperator:=
 610 NEXT M
  Variable:M
@@ -304,11 +304,11 @@
 624 FOR X=1 TO P9
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 625 PRINT A$(X);
  ITEMS
- Value:X
- Value:A$
+ Variable:X
+ Variable:A$
  CarriageControl:;
 626 NEXT X
  Variable:X
@@ -319,14 +319,14 @@
  ITEMS
  TextConstant:"YOU GUESSED IT IN "
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:" MOVES!"
  CarriageControl:NL
 640 H=H+M
- Reference:H
- Value:H
- Value:M
+ Variable:H
+ Variable:H
+ Variable:M
  BinaryOperator:+
  AssignmentOperator:=
 650 GOSUB 5000
@@ -340,10 +340,10 @@
 690 FOR X=1 TO P
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:P"]
+ end:     ["Variable:P"]
 700 I(X)=1
- Value:X
- Reference:I
+ Variable:X
+ Variable:I
  NumericConstant:1
  AssignmentOperator:=
 710 NEXT X
@@ -353,7 +353,7 @@
  TextConstant:"NOW I GUESS.  THINK OF A COMBINATION."
  CarriageControl:NL
 730 INPUT "HIT RETURN WHEN READY:";X$
- Reference:X$
+ Variable:X$
 740 FOR M=1 TO 10
  control: Variable:M
  start:   ["NumericConstant:1"]
@@ -363,8 +363,8 @@
 760 REM     FIND A GUESS
  Remark:    FIND A GUESS
 770 G=INT(P*RND(1)+1)
- Reference:G
- Value:P
+ Variable:G
+ Variable:P
  NumericConstant:1
  FunctionRnd
  BinaryOperator:*
@@ -373,17 +373,17 @@
  FunctionInt
  AssignmentOperator:=
 780 IF I(G)=1 THEN 890
- Value:G
- Value:I
+ Variable:G
+ Variable:I
  NumericConstant:1
  BinaryOperator:=
 790 FOR X=G TO P
  control: Variable:X
- start:   ["Value:G"]
- end:     ["Value:P"]
+ start:   ["Variable:G"]
+ end:     ["Variable:P"]
 800 IF I(X)=1 THEN 880
- Value:X
- Value:I
+ Variable:X
+ Variable:I
  NumericConstant:1
  BinaryOperator:=
 810 NEXT X
@@ -391,10 +391,10 @@
 820 FOR X=1 TO G
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:G"]
+ end:     ["Variable:G"]
 830 IF I(X)=1 THEN 880
- Value:X
- Value:I
+ Variable:X
+ Variable:I
  NumericConstant:1
  BinaryOperator:=
 840 NEXT X
@@ -410,15 +410,15 @@
 870 GOTO 660
  LineNumber:660
 880 G=X
- Reference:G
- Value:X
+ Variable:G
+ Variable:X
  AssignmentOperator:=
 890 REM     NOW WE CONVERT GUESS #G INTO G$
  Remark:    NOW WE CONVERT GUESS #G INTO G$
 900 FOR X=1 TO G
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:G"]
+ end:     ["Variable:G"]
 910 GOSUB 3500
  LineNumber:3500
 920 NEXT X
@@ -432,32 +432,32 @@
 950 FOR X=1 TO P9
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 960 PRINT H$(X);
  ITEMS
- Value:X
- Value:H$
+ Variable:X
+ Variable:H$
  CarriageControl:;
 970 NEXT X
  Variable:X
 980 INPUT "  BLACKS, WHITES ";B1,W1
- Reference:B1
- Reference:W1
+ Variable:B1
+ Variable:W1
 990 IF B1=P9 THEN 1120
- Value:B1
- Value:P9
+ Variable:B1
+ Variable:P9
  BinaryOperator:=
 1000 GOSUB 3000
  LineNumber:3000
 1010 FOR X=1 TO P
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:P"]
+ end:     ["Variable:P"]
 1020 GOSUB 3500
  LineNumber:3500
 1030 IF I(X)=0 THEN 1070
- Value:X
- Value:I
+ Variable:X
+ Variable:I
  NumericConstant:0
  BinaryOperator:=
 1035 GOSUB 6500
@@ -467,15 +467,15 @@
 1050 GOSUB 4500
  LineNumber:4500
 1060 IF B1<>B OR W1<>W THEN I(X)=0
- Value:B1
- Value:B
+ Variable:B1
+ Variable:B
  BinaryOperator:<>
- Value:W1
- Value:W
+ Variable:W1
+ Variable:W
  BinaryOperator:<>
  BinaryOperator:OR
- Value:X
- Reference:I
+ Variable:X
+ Variable:I
  NumericConstant:0
  AssignmentOperator:=
 1070 NEXT X
@@ -496,14 +496,14 @@
  ITEMS
  TextConstant:"I GOT IT IN "
  CarriageControl:;
- Value:M
+ Variable:M
  CarriageControl:;
  TextConstant:" MOVES!"
  CarriageControl:NL
 1130 C=C+M
- Reference:C
- Value:C
- Value:M
+ Variable:C
+ Variable:C
+ Variable:M
  BinaryOperator:+
  AssignmentOperator:=
 1140 GOSUB 5000
@@ -542,30 +542,30 @@
 2050 FOR Z=1 TO M-1
  control: Variable:Z
  start:   ["NumericConstant:1"]
- end:     ["Value:M", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:M", "NumericConstant:1", "BinaryOperator:-"]
 2060 PRINT Z;TAB(9);S$(Z);TAB(25);S(Z,1);TAB(35);S(Z,2)
  ITEMS
- Value:Z
+ Variable:Z
  CarriageControl:;
  NumericConstant:9
  FunctionTab
  CarriageControl:;
- Value:Z
- Value:S$
+ Variable:Z
+ Variable:S$
  CarriageControl:;
  NumericConstant:25
  FunctionTab
  CarriageControl:;
- Value:Z
+ Variable:Z
  NumericConstant:1
- Value:S
+ Variable:S
  CarriageControl:;
  NumericConstant:35
  FunctionTab
  CarriageControl:;
- Value:Z
+ Variable:Z
  NumericConstant:2
- Value:S
+ Variable:S
  CarriageControl:NL
 2070 NEXT Z
  Variable:Z
@@ -589,11 +589,11 @@
 2540 FOR X=1 TO P9
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 2550 PRINT A$(X);
  ITEMS
- Value:X
- Value:A$
+ Variable:X
+ Variable:A$
  CarriageControl:;
 2560 NEXT X
  Variable:X
@@ -615,10 +615,10 @@
 3030 FOR S=1 TO P9
  control: Variable:S
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 3040 Q(S)=0
- Value:S
- Reference:Q
+ Variable:S
+ Variable:Q
  NumericConstant:0
  AssignmentOperator:=
 3050 NEXT S
@@ -633,7 +633,7 @@
  Remark:
 3522 IF Q(1)>0 THEN 3530
  NumericConstant:1
- Value:Q
+ Variable:Q
  NumericConstant:0
  BinaryOperator:>
 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
@@ -641,10 +641,10 @@
 3526 FOR S=1 TO P9
  control: Variable:S
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 3527 Q(S)=1
- Value:S
- Reference:Q
+ Variable:S
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
 3528 NEXT S
@@ -652,31 +652,31 @@
 3529 RETURN
  
 3530 Q=1
- Reference:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
 3540 Q(Q)=Q(Q)+1
- Value:Q
- Reference:Q
- Value:Q
- Value:Q
+ Variable:Q
+ Variable:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 3550 IF Q(Q)<=C9 THEN RETURN
- Value:Q
- Value:Q
- Value:C9
+ Variable:Q
+ Variable:Q
+ Variable:C9
  BinaryOperator:<=
  
 3560 Q(Q)=1
- Value:Q
- Reference:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:1
  AssignmentOperator:=
 3570 Q=Q+1
- Reference:Q
- Value:Q
+ Variable:Q
+ Variable:Q
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
@@ -691,13 +691,13 @@
 4030 FOR S=1 TO P9
  control: Variable:S
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 4040 A$(S)=MID$(L$,Q(S),1)
- Value:S
- Reference:A$
- Value:L$
- Value:S
- Value:Q
+ Variable:S
+ Variable:A$
+ Variable:L$
+ Variable:S
+ Variable:Q
  NumericConstant:1
  FunctionMid
  AssignmentOperator:=
@@ -714,48 +714,48 @@
 4530 REM
  Remark:
 4540 B=0:W=0:F=0
- Reference:B
+ Variable:B
  NumericConstant:0
  AssignmentOperator:=
- Reference:W
+ Variable:W
  NumericConstant:0
  AssignmentOperator:=
- Reference:F
+ Variable:F
  NumericConstant:0
  AssignmentOperator:=
 4550 FOR S=1 TO P9
  control: Variable:S
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 4560 IF G$(S)<>A$(S) THEN 4620
- Value:S
- Value:G$
- Value:S
- Value:A$
+ Variable:S
+ Variable:G$
+ Variable:S
+ Variable:A$
  BinaryOperator:<>
 4570 B=B+1
- Reference:B
- Value:B
+ Variable:B
+ Variable:B
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 4580 G$(S)=CHR$(F)
- Value:S
- Reference:G$
- Value:F
+ Variable:S
+ Variable:G$
+ Variable:F
  FunctionChr
  AssignmentOperator:=
 4590 A$(S)=CHR$(F+1)
- Value:S
- Reference:A$
- Value:F
+ Variable:S
+ Variable:A$
+ Variable:F
  NumericConstant:1
  BinaryOperator:+
  FunctionChr
  AssignmentOperator:=
 4600 F=F+2
- Reference:F
- Value:F
+ Variable:F
+ Variable:F
  NumericConstant:2
  BinaryOperator:+
  AssignmentOperator:=
@@ -764,39 +764,39 @@
 4620 FOR T=1 TO P9
  control: Variable:T
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 4630 IF G$(S)<>A$(T) THEN 4650
- Value:S
- Value:G$
- Value:T
- Value:A$
+ Variable:S
+ Variable:G$
+ Variable:T
+ Variable:A$
  BinaryOperator:<>
 4640 IF G$(T)=A$(T) THEN 4650
- Value:T
- Value:G$
- Value:T
- Value:A$
+ Variable:T
+ Variable:G$
+ Variable:T
+ Variable:A$
  BinaryOperator:=
 4645 W=W+1:A$(T)=CHR$(F):G$(S)=CHR$(F+1):F=F+2:GOTO 4660
- Reference:W
- Value:W
+ Variable:W
+ Variable:W
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
- Value:T
- Reference:A$
- Value:F
+ Variable:T
+ Variable:A$
+ Variable:F
  FunctionChr
  AssignmentOperator:=
- Value:S
- Reference:G$
- Value:F
+ Variable:S
+ Variable:G$
+ Variable:F
  NumericConstant:1
  BinaryOperator:+
  FunctionChr
  AssignmentOperator:=
- Reference:F
- Value:F
+ Variable:F
+ Variable:F
  NumericConstant:2
  BinaryOperator:+
  AssignmentOperator:=
@@ -821,13 +821,13 @@
  ITEMS
  TextConstant:"     COMPUTER "
  CarriageControl:;
- Value:C
+ Variable:C
  CarriageControl:NL
 5050 PRINT "     HUMAN    ";H
  ITEMS
  TextConstant:"     HUMAN    "
  CarriageControl:;
- Value:H
+ Variable:H
  CarriageControl:NL
 5060 PRINT
  ITEMS
@@ -843,13 +843,13 @@
 5530 FOR S=1 TO P9
  control: Variable:S
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 5540 G$(S)=MID$(L$,Q(S),1)
- Value:S
- Reference:G$
- Value:L$
- Value:S
- Value:Q
+ Variable:S
+ Variable:G$
+ Variable:L$
+ Variable:S
+ Variable:Q
  NumericConstant:1
  FunctionMid
  AssignmentOperator:=
@@ -866,13 +866,13 @@
 6030 FOR S=1 TO P9
  control: Variable:S
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 6040 H$(S)=MID$(L$,Q(S),1)
- Value:S
- Reference:H$
- Value:L$
- Value:S
- Value:Q
+ Variable:S
+ Variable:H$
+ Variable:L$
+ Variable:S
+ Variable:Q
  NumericConstant:1
  FunctionMid
  AssignmentOperator:=
@@ -889,12 +889,12 @@
 6530 FOR S=1 TO P9
  control: Variable:S
  start:   ["NumericConstant:1"]
- end:     ["Value:P9"]
+ end:     ["Variable:P9"]
 6540 G$(S)=H$(S)
- Value:S
- Reference:G$
- Value:S
- Value:H$
+ Variable:S
+ Variable:G$
+ Variable:S
+ Variable:H$
  AssignmentOperator:=
 6550 NEXT S
  Variable:S

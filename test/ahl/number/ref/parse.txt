@@ -44,7 +44,7 @@
 9 PRINT: P=100
  ITEMS
  CarriageControl:NL
- Reference:P
+ Variable:P
  NumericConstant:100
  AssignmentOperator:=
 10 DEF FNR(X)=INT(5*RND(1)+1)
@@ -56,76 +56,76 @@
  BinaryOperator:+
  FunctionInt
 12 INPUT "GUESS A NUMBER FROM 1 TO 5";G
- Reference:G
+ Variable:G
 15 R=FNR(1)
- Reference:R
+ Variable:R
  NumericConstant:1
  UserFunction
  AssignmentOperator:=
 16 S=FNR(1)
- Reference:S
+ Variable:S
  NumericConstant:1
  UserFunction
  AssignmentOperator:=
 17 T=FNR(1)
- Reference:T
+ Variable:T
  NumericConstant:1
  UserFunction
  AssignmentOperator:=
 18 U=FNR(1)
- Reference:U
+ Variable:U
  NumericConstant:1
  UserFunction
  AssignmentOperator:=
 19 V=FNR(1)
- Reference:V
+ Variable:V
  NumericConstant:1
  UserFunction
  AssignmentOperator:=
 20 IF G=R THEN 30
- Value:G
- Value:R
+ Variable:G
+ Variable:R
  BinaryOperator:=
 21 IF G=S THEN 40
- Value:G
- Value:S
+ Variable:G
+ Variable:S
  BinaryOperator:=
 22 IF G=T THEN 50
- Value:G
- Value:T
+ Variable:G
+ Variable:T
  BinaryOperator:=
 23 IF G=U THEN 60
- Value:G
- Value:U
+ Variable:G
+ Variable:U
  BinaryOperator:=
 24 IF G=V THEN 70
- Value:G
- Value:V
+ Variable:G
+ Variable:V
  BinaryOperator:=
 25 IF G>5 THEN 12
- Value:G
+ Variable:G
  NumericConstant:5
  BinaryOperator:>
 30 P=P-5
- Reference:P
- Value:P
+ Variable:P
+ Variable:P
  NumericConstant:5
  BinaryOperator:-
  AssignmentOperator:=
 35 GOTO 80
  LineNumber:80
 40 P=P+5
- Reference:P
- Value:P
+ Variable:P
+ Variable:P
  NumericConstant:5
  BinaryOperator:+
  AssignmentOperator:=
 45 GOTO 80
  LineNumber:80
 50 P=P+P
- Reference:P
- Value:P
- Value:P
+ Variable:P
+ Variable:P
+ Variable:P
  BinaryOperator:+
  AssignmentOperator:=
 53 PRINT "YOU HIT THE JACKPOT!!!"
@@ -135,30 +135,30 @@
 55 GOTO 80
  LineNumber:80
 60 P=P+1
- Reference:P
- Value:P
+ Variable:P
+ Variable:P
  NumericConstant:1
  BinaryOperator:+
  AssignmentOperator:=
 65 GOTO 80
  LineNumber:80
 70 P=P-(P*.5)
- Reference:P
- Value:P
- Value:P
+ Variable:P
+ Variable:P
+ Variable:P
  NumericConstant:.5
  BinaryOperator:*
  BinaryOperator:-
  AssignmentOperator:=
 80 IF P>500 THEN 90
- Value:P
+ Variable:P
  NumericConstant:500
  BinaryOperator:>
 82 PRINT "YOU HAVE";P;"POINTS.":PRINT
  ITEMS
  TextConstant:"YOU HAVE"
  CarriageControl:;
- Value:P
+ Variable:P
  CarriageControl:;
  TextConstant:"POINTS."
  CarriageControl:NL
@@ -170,7 +170,7 @@
  ITEMS
  TextConstant:"!!!!YOU WIN!!!! WITH "
  CarriageControl:;
- Value:P
+ Variable:P
  CarriageControl:;
  TextConstant:"POINTS."
  CarriageControl:NL
