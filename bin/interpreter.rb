@@ -144,6 +144,7 @@ class Interpreter
     @variables = {}
     @user_function_lines = @program.assign_function_markers
 
+    @previous_stack = []
     clear_previous_lines
     @start_time = Time.now()
     run_program
@@ -284,6 +285,8 @@ class Interpreter
     raise(BASICRuntimeError, "Function #{name} not defined") if line_index.nil?
 
     @function_stack.push [name.to_s, @current_line_index, @next_line_index]
+    @previous_stack.push @previous_line_indexes
+    @previous_line_indexes = []
 
     # run program at line_index
     @current_line_index = line_index
@@ -295,6 +298,7 @@ class Interpreter
       stop_running
     end
 
+    @previous_line_indexes = @previous_stack.pop
     _, @current_line_index, @next_line_index = @function_stack.pop
 
     # one user-def function may invoke a second
