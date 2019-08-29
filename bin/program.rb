@@ -716,6 +716,7 @@ class Program
       rs = []
       statements.each do |statement|
         rs = statement.functions
+        rs += statement.modifier_functions
       end
 
       refs[line_number] = rs
@@ -847,7 +848,7 @@ class Program
 
     funcs_list = function_refs
     functions = make_summary(funcs_list)
-    print_refs('Functions', functions)
+    print_object_refs('Functions', functions)
 
     udfs_list = user_function_refs
     userfuncs = make_summary(udfs_list)

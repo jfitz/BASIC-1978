@@ -639,10 +639,11 @@ class XrefEntry
 
   def to_s
     dims = ''
-    dims = '()' if @n_dims == 1
-    dims = '(,)' if @n_dims == 2
+    dims = '(' + ',' * (@n_dims - 1)  + ')' if @n_dims > 0
+
     ref = ''
     ref = '=' if @is_ref
+
     @variable.to_s + dims + ref
   end
 end
@@ -886,38 +887,11 @@ class AbstractExpression
     parsed_expressions_variables(@parsed_expressions)
   end
 
-  private
-
-  def parsed_expressions_variables(parsed_expressions)
-    vars = []
-
-    parsed_expressions.each do |expression|
-      previous = nil
-
-      expression.each do |thing|
-        if thing.list?
-          # recurse into expressions in list
-          sublist = thing.list
-          vars += parsed_expressions_variables(sublist)
-        elsif thing.variable?
-          n_dims = 0
-          n_dims = 1 if thing.array?
-          n_dims = 2 if thing.matrix?
-
-          n_dims = previous.size if
-            n_dims == 0 && !previous.nil? && previous.list?
-
-          is_ref = thing.reference?
-
-          vars << XrefEntry.new(thing.to_s, n_dims, is_ref)
-        end
-
-        previous = thing
-      end
-    end
-
-    vars
+  def functions
+    parsed_expressions_functions(@parsed_expressions)
   end
+
+  private
 
   def parsed_expressions_numerics(parsed_expressions)
     vars = []
@@ -960,6 +934,64 @@ class AbstractExpression
     end
 
     strs
+  end
+
+  def parsed_expressions_variables(parsed_expressions)
+    vars = []
+
+    parsed_expressions.each do |expression|
+      previous = nil
+
+      expression.each do |thing|
+        if thing.list?
+          # recurse into expressions in list
+          sublist = thing.list
+          vars += parsed_expressions_variables(sublist)
+        elsif thing.variable?
+          n_dims = 0
+          n_dims = 1 if thing.array?
+          n_dims = 2 if thing.matrix?
+
+          n_dims = previous.size if
+            n_dims == 0 && !previous.nil? && previous.list?
+
+          is_ref = thing.reference?
+
+          vars << XrefEntry.new(thing.to_s, n_dims, is_ref)
+        end
+
+        previous = thing
+      end
+    end
+
+    vars
+  end
+
+  def parsed_expressions_functions(parsed_expressions)
+    vars = []
+
+    parsed_expressions.each do |expression|
+      previous = nil
+
+      expression.each do |thing|
+        if thing.list?
+          # recurse into expressions in list
+          sublist = thing.list
+          vars += parsed_expressions_functions(sublist)
+        elsif thing.function? && !thing.user_function?
+          n_dims = 0
+          n_dims = previous.size if !previous.nil? && previous.list?
+
+          is_ref = thing.reference?
+
+          vars << XrefEntry.new(thing.to_s, n_dims, is_ref)
+        end
+
+        previous = thing
+      end
+    end
+
+    vars
   end
 
   def tokens_to_elements(tokens)
@@ -1197,6 +1229,7 @@ class UserFunctionDefinition
   attr_reader :numerics
   attr_reader :strings
   attr_reader :variables
+  attr_reader :functions
 
   def initialize(tokens)
     # parse into name '=' expression
@@ -1215,6 +1248,7 @@ class UserFunctionDefinition
       @numerics = @expression.numerics
       @strings = @expression.strings
       @variables = @expression.variables
+      @functions = @expression.functions
     end
   end
 
@@ -1358,8 +1392,20 @@ class AbstractAssignment
     @target.variables + @expression.variables
   end
 
+  def functions
+    @target.functions + @expression.functions
+  end
+
   def count_target
     @target.count
+  end
+
+  def count_value
+    @expression.count
+  end
+
+  def eval_value(interpreter)
+    @expression.evaluate(interpreter)
   end
 
   def eval_target(interpreter)
@@ -1386,14 +1432,6 @@ class ScalarAssignment < AbstractAssignment
     @target = TargetExpression.new(@token_lists[0], :scalar)
     @expression = ValueScalarExpression.new(@token_lists[2])
   end
-
-  def count_value
-    @expression.count
-  end
-
-  def eval_value(interpreter)
-    @expression.evaluate(interpreter)
-  end
 end
 
 # An assignment (part of an ARR LET statement)
@@ -1404,14 +1442,6 @@ class ArrayAssignment < AbstractAssignment
     @target = TargetExpression.new(@token_lists[0], :array)
     @expression = ValueArrayExpression.new(@token_lists[2])
   end
-
-  def count_value
-    @expression.count
-  end
-
-  def eval_value(interpreter)
-    @expression.evaluate(interpreter)
-  end
 end
 
 # An assignment (part of a MAT LET statement)
@@ -1421,18 +1451,5 @@ class MatrixAssignment < AbstractAssignment
 
     @target = TargetExpression.new(@token_lists[0], :matrix)
     @expression = ValueMatrixExpression.new(@token_lists[2])
-  end
-
-  def count_value
-    @expression.count
-  end
-
-  def eval_value(interpreter)
-    @expression.evaluate(interpreter)
-  end
-
-  def variables
-    vars = @target.variables
-    vars += @expression.variables
   end
 end

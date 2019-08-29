@@ -6,6 +6,7 @@ class AbstractElement
     @empty = false
     @operator = false
     @function = false
+    @user_function = false
     @variable = false
     @operand = false
     @terminal = false
@@ -38,6 +39,10 @@ class AbstractElement
 
   def function?
     @function
+  end
+
+  def user_function?
+    @user_function
   end
 
   def variable?
@@ -1241,6 +1246,10 @@ class CarriageControl
   end
 
   def variables
+    []
+  end
+
+  def functions
     []
   end
 
