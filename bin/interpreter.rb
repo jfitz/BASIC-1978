@@ -727,7 +727,7 @@ class Interpreter
     legals = [
       'VariableName',
       'Variable',
-      'UserFunctionToken'
+      'UserFunctionName'
     ]
 
     raise(BASICSyntaxError,
@@ -796,7 +796,6 @@ class Interpreter
     legals = [
       'Variable',
       'VariableName',
-      'UserFunctionToken',
       'UserFunction'
     ]
 

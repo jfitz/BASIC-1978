@@ -783,11 +783,23 @@ class Parser
   end
 
   def function_variable(element)
-    if element.function?
+    if element.user_function?
+      start_user_function(element)
+    elsif element.function?
       start_function(element)
     elsif element.variable?
       start_variable(element)
     end
+  end
+
+  # remove operators already on the stack that have higher
+  # or equal precedence
+  # append them to the output list
+  def start_user_function(element)
+    stack_to_precedence(@operator_stack, @current_expression, element)
+    # push the variable onto the operator stack
+    variable = UserFunction.new(element)
+    @operator_stack.push(variable)
   end
 
   # remove operators already on the stack that have higher
@@ -1034,7 +1046,7 @@ class AbstractExpression
       BooleanConstant,
       IntegerConstant,
       NumericConstant,
-      UserFunction,
+      UserFunctionName,
       VariableName,
       TextConstant
     ]
@@ -1051,7 +1063,7 @@ class AbstractExpression
       BooleanConstant,
       IntegerConstant,
       NumericConstant,
-      UserFunction,
+      UserFunctionName,
       VariableName,
       TextConstant
     ]
@@ -1273,6 +1285,8 @@ class UserFunctionDefinition
 
   def dump
     lines = []
+    lines << @name.dump
+    @arguments.each { |arg| lines << arg.dump }
     lines += @expression.dump unless @expression.nil?
     lines
   end
@@ -1307,11 +1321,11 @@ class UserFunctionPrototype
 
   def initialize(tokens)
     check_tokens(tokens)
-    @name = tokens[0].to_s
+    @name = UserFunctionName.new(tokens[0])
     @arguments = check_params(tokens[2..-2])
-    names = @arguments.map(&:to_s)
 
     # arguments must be unique
+    names = @arguments.map(&:to_s)
     raise(BASICExpressionError, 'Duplicate parameters') unless
       names.uniq.size == names.size
   end
@@ -1331,10 +1345,11 @@ class UserFunctionPrototype
 
   # verify tokens variables and commas
   def check_params(params)
-    variables = params.values_at(* params.each_index.select(&:even?))
+    name_tokens = params.values_at(* params.each_index.select(&:even?))
 
-    variables.each do |variable|
-      raise(BASICExpressionError, 'Invalid parameter') unless variable.variable?
+    variable_names = []
+    name_tokens.each do |name_token|
+      variable_names << VariableName.new(name_token)
     end
 
     separators = params.values_at(* params.each_index.select(&:odd?))
@@ -1344,7 +1359,7 @@ class UserFunctionPrototype
         separator.separator?
     end
 
-    variables
+    variable_names
   end
 end
 
