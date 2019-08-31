@@ -1253,6 +1253,10 @@ class CarriageControl
     []
   end
 
+  def userfuncs
+    []
+  end
+
   def print(printer, _)
     case @operator
     when ','

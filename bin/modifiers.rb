@@ -5,6 +5,7 @@ class IfModifier
   attr_reader :strings
   attr_reader :variables
   attr_reader :functions
+  attr_reader :userfuncs
 
   def initialize(expression_tokens)
     @errors = []
@@ -13,6 +14,7 @@ class IfModifier
     @strings = @expression.strings
     @variables = @expression.variables
     @functions = @expression.functions
+    @userfuncs = @expression.userfuncs
   end
 
   def pretty
@@ -78,6 +80,7 @@ class ForModifier
   attr_reader :strings
   attr_reader :variables
   attr_reader :functions
+  attr_reader :userfuncs
 
   def initialize(control_and_start_tokens, end_tokens, step_tokens)
     @errors = []
@@ -111,12 +114,14 @@ class ForModifier
       control = XrefEntry.new(@control.to_s, 0, true)
       @variables = [control] + @start.variables + @end.variables
       @functions = @start.functions + @end.functions
+      @userfuncs = @start.userfuncs + @end.userfuncs
     else
       @numerics = @start.numerics + @end.numerics + @step.numerics
       @strings = @start.strings + @end.strings + @step.strings
       control = XrefEntry.new(@control.to_s, 0, true)
       @variables = [control] + @start.variables + @end.variables + @step.variables
       @functions = @start.functions + @end.functions + @step.functions
+      @userfuncs = @start.userfuncs + @end.userfuncs + @step.userfuncs
     end
   end
 

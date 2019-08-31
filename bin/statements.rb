@@ -226,6 +226,7 @@ class AbstractStatement
   attr_reader :strings
   attr_reader :variables
   attr_reader :functions
+  attr_reader :userfuncs
   attr_reader :linenums
 
   def self.extra_keywords
@@ -242,6 +243,7 @@ class AbstractStatement
     @strings = []
     @variables = []
     @functions = []
+    @userfuncs = []
     @linenums = []
     @profile_count = 0
     @profile_time = 0
@@ -305,12 +307,6 @@ class AbstractStatement
     syms.keep_if(&:text_constant?)
   end
 
-  def userfuncs
-    udfs = @tokens.clone
-    udfs.keep_if(&:user_function?)
-    udfs.map(&:to_s)
-  end
-
   def modifier_variables
     vars = []
     @modifiers.each { |modifier| vars += modifier.variables }
@@ -320,6 +316,12 @@ class AbstractStatement
   def modifier_functions
     vars = []
     @modifiers.each { |modifier| vars += modifier.functions }
+    vars
+  end
+
+  def modifier_userfuncs
+    vars = []
+    @modifiers.each { |modifier| vars += modifier.userfuncs }
     vars
   end
 
@@ -773,6 +775,7 @@ class ChainStatement < AbstractStatement
     @strings = @target.strings
     @variables = @target.variables
     @functions = @target.functions
+    @userfuncs = @target.userfuncs
   end
 
   def dump
@@ -830,6 +833,7 @@ class ChangeStatement < AbstractStatement
       @strings = @source.strings + @target.strings
       @variables = @source.variables + @target.variables
       @functions = @source.functions + @target.functions
+      @userfuncs = @source.userfuncs + @target.userfuncs
     else
       @errors << 'Syntax error'
     end
@@ -920,6 +924,7 @@ class CloseStatement < AbstractStatement
       @strings = @filenum_expression.strings
       @variables = @filenum_expression.variables
       @functions = @filenum_expression.functions
+      @userfuncs = @filenum_expression.userfuncs
     else
       @errors << 'Syntax error'
     end
@@ -969,6 +974,7 @@ class DataStatement < AbstractStatement
       @strings = @expressions.strings
       @variables = @expressions.variables
       @functions = @expressions.functions
+      @userfuncs = @expressions.userfuncs
     else
       @errors << 'Syntax error'
     end
@@ -1006,12 +1012,11 @@ class DefineFunctionStatement < AbstractStatement
       begin
         @definition = UserFunctionDefinition.new(tokens_lists[0])
 
-        if !@definition.nil? && !@definition.multidef?
-          @numerics = @definition.numerics
-          @strings = @definition.strings
-          @variables = @definition.variables
-          @functions = @definition.functions
-        end
+        @numerics = @definition.numerics
+        @strings = @definition.strings
+        @variables = @definition.variables
+        @functions = @definition.functions
+        @userfuncs = @definition.userfuncs
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -1076,6 +1081,7 @@ class DimStatement < AbstractStatement
     @expression_list.each { |expression| @strings += expression.strings }
     @expression_list.each { |expression| @variables += expression.variables }
     @expression_list.each { |expression| @functions += expression.functions }
+    @expression_list.each { |expression| @userfuncs += expression.userfuncs }
   end
 
   def dump
@@ -1196,6 +1202,7 @@ class ForStatement < AbstractStatement
         control = XrefEntry.new(@control.to_s, 0, true)
         @variables = [control] + @start.variables + @end.variables
         @functions = @start.functions + @end.functions
+        @userfuncs = @start.userfuncs + @end.userfuncs
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -1212,6 +1219,7 @@ class ForStatement < AbstractStatement
         control = XrefEntry.new(@control.to_s, 0, true)
         @variables = [control] + @start.variables + @end.variables + @step.variables
         @functions = @start.functions + @end.functions + @step.functions
+        @userfuncs = @start.userfuncs + @end.userfuncs + @step.userfuncs
      rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -1425,6 +1433,7 @@ class IfStatement < AbstractStatement
       @strings = make_string_references
       @variables = make_variable_references
       @functions = make_function_references
+      @userfuncs = make_userfunc_references
       @linenums = make_linenum_references
     else
       begin
@@ -1440,6 +1449,7 @@ class IfStatement < AbstractStatement
         @variables = make_variable_references
         @linenums = make_linenum_references
         @functions = make_function_references
+        @userfuncs = make_userfunc_references
       rescue BASICExpressionError => e
         @errors << 'Syntax Error: ' + e.message
       end
@@ -1604,6 +1614,14 @@ class IfStatement < AbstractStatement
     vars += @expression.functions unless @expression.nil?
     vars += @statement.functions unless @statement.nil?
     vars += @else_stmt.functions unless @else_stmt.nil?
+    vars
+  end
+
+  def make_userfunc_references
+    vars = []
+    vars += @expression.userfuncs unless @expression.nil?
+    vars += @statement.userfuncs unless @statement.nil?
+    vars += @else_stmt.userfuncs unless @else_stmt.nil?
     vars
   end
 
@@ -1775,6 +1793,9 @@ class AbstractInputStatement < AbstractStatement
 
     @functions = @file_tokens.functions unless @file_tokens.nil?
     @input_items.each { |item| @functions += item.functions }
+
+    @userfuncs = @file_tokens.userfuncs unless @file_tokens.nil?
+    @input_items.each { |item| @userfuncs += item.userfuncs }
   end
 
   private
@@ -1960,6 +1981,7 @@ class AbstractScalarLetStatement < AbstractLetStatement
         @strings = @assignment.strings
         @variables = @assignment.variables
         @functions = @assignment.functions
+        @userfuncs = @assignment.userfuncs
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -2276,6 +2298,7 @@ class OnStatement < AbstractStatement
         @strings = @expression.strings
         @variables = @expression.variables
         @functions = @expression.functions
+        @userfuncs = @expression.userfuncs
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -2422,6 +2445,7 @@ class OpenStatement < AbstractStatement
       @strings = @filename_expression.strings + @filenum_expression.strings
       @variables = @filename_expression.variables + @filenum_expression.variables
       @functions = @filename_expression.functions + @filenum_expression.functions
+      @userfuncs = @filename_expression.userfuncs + @filenum_expression.userfuncs
       @mode = :read
     elsif check_template(tokens_lists, template_output_as) ||
           check_template(tokens_lists, template_output_as_file)
@@ -2431,6 +2455,7 @@ class OpenStatement < AbstractStatement
       @strings = @filename_expression.strings + @filenum_expression.strings
       @variables = @filename_expression.variables + @filenum_expression.variables
       @functions = @filename_expression.functions + @filenum_expression.functions
+      @userfuncs = @filename_expression.userfuncs + @filenum_expression.userfuncs
       @mode = :print
     elsif check_template(tokens_lists, template_append_as) ||
           check_template(tokens_lists, template_append_as_file)
@@ -2440,6 +2465,7 @@ class OpenStatement < AbstractStatement
       @strings = @filename_expression.strings + @filenum_expression.strings
       @variables = @filename_expression.variables + @filenum_expression.variables
       @functions = @filename_expression.functions + @filenum_expression.functions
+      @userfuncs = @filename_expression.userfuncs + @filenum_expression.userfuncs
       @mode = :append
     else
       @errors << 'Syntax error'
@@ -2523,6 +2549,7 @@ class OptionStatement < AbstractStatement
       @strings = @expression.strings
       @variables = @expression.variables
       @functions = @expression.functions
+      @userfuncs = @expression.userfuncs
     else
       @errors << 'Syntax error'
     end
@@ -2579,6 +2606,9 @@ class AbstractPrintStatement < AbstractStatement
 
     @functions = @file_tokens.functions unless @file_fokens.nil?
     @print_items.each { |item| @functions += item.functions }
+
+    @userfuncs = @file_tokens.userfuncs unless @file_fokens.nil?
+    @print_items.each { |item| @userfuncs += item.userfuncs }
   end
  
   include FileFunctions
@@ -2864,6 +2894,9 @@ class AbstractReadStatement < AbstractStatement
 
     @functions = @file_tokens.functions unless @file_tokens.nil?
     @read_items.each { |item| @functions += item.functions }
+
+    @userfuncs = @file_tokens.userfuncs unless @file_tokens.nil?
+    @read_items.each { |item| @userfuncs += item.userfuncs }
   end
 
   include FileFunctions
@@ -3064,6 +3097,7 @@ class SleepStatement < AbstractStatement
       @strings = @expression.strings
       @variables = @expression.variables
       @functions = @expression.functions
+      @userfuncs = @expression.userfuncs
     else
       @errors << 'Syntax error'
     end
@@ -3138,6 +3172,9 @@ class AbstractWriteStatement < AbstractStatement
 
     @functions = @file_tokens.functions unless @file_tokens.nil?
     @print_items.each { |item| @functions += item.functions }
+
+    @userfuncs = @file_tokens.userfuncs unless @file_tokens.nil?
+    @print_items.each { |item| @userfuncs += item.userfuncs }
   end
 
   include FileFunctions
@@ -3478,6 +3515,7 @@ class ArrLetStatement < AbstractLetStatement
         @strings = @assignment.strings
         @variables = @assignment.variables
         @functions = @assignment.functions
+        @userfuncs = @assignment.userfuncs
       rescue BASICExpressionError => e
         @errors << e.message
         @assignment = @rest
@@ -3790,6 +3828,7 @@ class MatLetStatement < AbstractLetStatement
         @strings = @assignment.strings
         @variables = @assignment.variables
         @functions = @assignment.functions
+        @userfuncs = @assignment.userfuncs
       rescue BASICRuntimeError => e
         @errors << e.message
         @assignment = @rest
