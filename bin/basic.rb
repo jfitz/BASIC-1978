@@ -321,10 +321,10 @@ def make_command_tokenbuilders(options, quotes)
     BASE
     CHR_ALLOW_ALL
     DECIMALS DEFAULT_PROMPT DETECT_INFINITE_LOOP
-    ECHO EPSILON HEADING
+    ECHO HEADING
     IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
     INT_FLOOR LOCK_FORNEXT LONG_NAMES NEWLINE_SPEED
-    PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
+    PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
     QMARK_AFTER_PROMPT RANDOMIZE REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH TIMING TRACE ZONE_WIDTH
   )
@@ -372,7 +372,6 @@ OptionParser.new do |opt|
   opt.on('--decimals DIGITS') { |o| options[:decimals] = o }
   opt.on('--no-detect-infinite-loop') { |o| options[:no_detect_infinite_loop] = o }
   opt.on('--echo-input') { |o| options[:echo_input] = o }
-  opt.on('--epsilon LIMIT') { |o| options[:epsilon] = o }
   opt.on('--heading') { |o| options[:heading] = o }
   opt.on('--if-false-next-line') { |o| options[:if_false_next_line] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
@@ -381,6 +380,7 @@ OptionParser.new do |opt|
   opt.on('--int-floor') { |o| options[:int_floor] = o }
   opt.on('--lock-fornext') { |o| options[:lock_fornext] = o }
   opt.on('--long-names') { |o| options[:long_names] = o }
+  opt.on('--precision DIGITS') { |o| options[:precision] = o }
   opt.on('--print-width WIDTH') { |o| options[:print_width] = o }
   opt.on('--prompt-count') { |o| options[:prompt_count] = o }
   opt.on('--provenance') { |o| options[:provenance] = o }
@@ -407,6 +407,7 @@ boolean = { :type => :bool }
 string = { :type => :string }
 int = { :type => :int, :min => 0 }
 int_1_15 = { :type => :int, :max => 15, :min => 1 }
+int_1_17 = { :type => :int, :max => 17, :min => 1 }
 int_132 = { :type => :int, :max => 132, :min => 0 }
 int_40 = { :type => :int, :max => 40, :min => 0 }
 int_1 = { :type => :int, :max => 1, :min => 0 }
@@ -438,11 +439,6 @@ $options['detect_infinite_loop'] =
   Option.new(boolean, !options.key?(:no_detect_infinite_loop))
 
 $options['echo'] = Option.new(boolean, options.key?(:echo_input))
-
-epsilon = 1e-7
-epsilon = options[:epsilon].to_f if options.key?(:epsilon)
-$options['epsilon'] = Option.new(float, epsilon)
-
 $options['heading'] = Option.new(boolean, options.key?(:heading))
 
 $options['if_false_next_line'] =
@@ -464,6 +460,10 @@ $options['long_names'] = Option.new(boolean, options.key?(:long_names))
 newline_speed = 0
 newline_speed = 10 if options.key?(:tty_lf)
 $options['newline_speed'] = Option.new(int, newline_speed)
+
+precision = 9
+precision = options[:precision].to_i if options.key?(:precision)
+$options['precision'] = Option.new(int_1_17, precision)
 
 $options['pretty_multiline'] =
   Option.new(boolean, options.key?(:pretty_multiline))
