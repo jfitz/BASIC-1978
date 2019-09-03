@@ -124,11 +124,11 @@ then
     if [ -e "$TESTBED/$TESTNAME/stdin.txt" ]
     then
 	cd "$TESTBED/$TESTNAME"
-	ruby basic.rb $OPTIONS --run $TESTNAME.bas --print-width 0 --echo-input <stdin.txt >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
+	ruby basic.rb --profile $OPTIONS --run $TESTNAME.bas --print-width 0 --echo-input <stdin.txt >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
 	cd ../..
     else
 	cd "$TESTBED/$TESTNAME"
-	ruby basic.rb $OPTIONS --run $TESTNAME.bas --print-width 0 >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
+	ruby basic.rb --profile $OPTIONS --run $TESTNAME.bas --print-width 0 >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
 	cd ../..
     fi
 

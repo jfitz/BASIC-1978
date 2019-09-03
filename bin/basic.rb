@@ -219,7 +219,10 @@ class Shell
         options_2.each { |name, option| $options[name] = option }
 
         # print timing info
-        print_timing(timing, @console_io) if $options['timing'].value
+        if $options['timing'].value
+          print_timing(timing, @console_io)
+          @console_io.newline
+        end
       end
     when 'BREAK'
       @interpreter.set_breakpoints(args)
@@ -236,7 +239,9 @@ class Shell
     when 'DELETE'
       @program.delete(args)
     when 'PROFILE'
-      @program.profile(args)
+      show_timing = $options['timing'].value
+      @program.profile(args, show_timing)
+      @console_io.newline
     when 'RENUMBER'
       if @program.check
         renumber_map = @program.renumber
@@ -348,11 +353,9 @@ end
 def print_timing(timing, console_io)
   user_time = timing.utime + timing.cutime
   sys_time = timing.stime + timing.cstime
-  console_io.newline
   console_io.print_line('CPU time:')
   console_io.print_line(" user: #{user_time.round(2)}")
   console_io.print_line(" system: #{sys_time.round(2)}")
-  console_io.newline
 end
 
 options = {}
@@ -525,6 +528,44 @@ end
 
 program = Program.new(console_io, tokenbuilders)
 
+# list the source
+if !list_filename.nil?
+  token = TextConstantToken.new('"' + list_filename + '"')
+  nametokens = [TextConstant.new(token)]
+  if program.load(nametokens)
+    program.list('', list_tokens)
+  end
+end
+
+# show parse dump
+if !parse_filename.nil?
+  token = TextConstantToken.new('"' + parse_filename + '"')
+  nametokens = [TextConstant.new(token)]
+  if program.load(nametokens)
+    program.parse('')
+  end
+end
+
+# pretty-print the source
+if !pretty_filename.nil?
+  token = TextConstantToken.new('"' + pretty_filename + '"')
+  nametokens = [TextConstant.new(token)]
+  if program.load(nametokens)
+    pretty_multiline = $options['pretty_multiline'].value
+    program.pretty('', pretty_multiline)
+  end
+end
+
+# cross-reference the source
+if !cref_filename.nil?
+  token = TextConstantToken.new('"' + cref_filename + '"')
+  nametokens = [TextConstant.new(token)]
+  if program.load(nametokens)
+    program.crossref
+  end
+end
+
+# run the source
 if !run_filename.nil?
   token = TextConstantToken.new('"' + run_filename + '"')
   nametokens = [TextConstant.new(token)]
@@ -534,37 +575,25 @@ if !run_filename.nil?
 
     timing = Benchmark.measure {
       program.run(interpreter)
+      console_io.newline
     }
 
-    print_timing(timing, console_io) if $options['timing'].value
-    program.profile('') if show_profile
+    show_timing = $options['timing'].value
+    if show_timing
+      print_timing(timing, console_io)
+      console_io.newline
+    end
+    
+    if show_profile
+      program.profile('', show_timing)
+      console_io.newline
+    end
   end
-elsif !list_filename.nil?
-  token = TextConstantToken.new('"' + list_filename + '"')
-  nametokens = [TextConstant.new(token)]
-  if program.load(nametokens)
-    program.list('', list_tokens)
-  end
-elsif !parse_filename.nil?
-  token = TextConstantToken.new('"' + parse_filename + '"')
-  nametokens = [TextConstant.new(token)]
-  if program.load(nametokens)
-    program.parse('')
-  end
-elsif !pretty_filename.nil?
-  token = TextConstantToken.new('"' + pretty_filename + '"')
-  nametokens = [TextConstant.new(token)]
-  if program.load(nametokens)
-    pretty_multiline = $options['pretty_multiline'].value
-    program.pretty('', pretty_multiline)
-  end
-elsif !cref_filename.nil?
-  token = TextConstantToken.new('"' + cref_filename + '"')
-  nametokens = [TextConstant.new(token)]
-  if program.load(nametokens)
-    program.crossref
-  end
-else
+end
+
+# no command-line directives, so run BASIC shell
+if list_filename.nil? && parse_filename.nil? && pretty_filename.nil? &&
+   cref_filename.nil? && run_filename.nil?
   interpreter = Interpreter.new(console_io)
   interpreter.set_default_args('RND', NumericConstant.new(1))
 

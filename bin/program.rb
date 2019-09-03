@@ -164,9 +164,9 @@ class Line
     @statements.each { |statement| texts << statement.dump }
   end
 
-  def profile
+  def profile(show_timing)
     texts = []
-    @statements.each { |statement| texts << statement.profile }
+    @statements.each { |statement| texts << statement.profile(show_timing) }
   end
 
   def renumber(renumber_map)
@@ -489,7 +489,7 @@ class Program
     interpreter.run(self)
   end
 
-  def profile(args)
+  def profile(args, show_timing)
     line_number_range = line_list_spec(args)
 
     if @lines.empty?
@@ -498,7 +498,7 @@ class Program
     end
 
     line_numbers = line_number_range.line_numbers
-    profile_lines_errors(line_numbers)
+    profile_lines_errors(line_numbers, show_timing)
   end
 
   private
@@ -597,21 +597,6 @@ class Program
     end
 
     save_file(filename)
-  end
-
-  def print_profile
-    @lines.keys.sort.each do |line_number|
-      line = @lines[line_number]
-      number = line_number.to_s
-      statements = line.statements
-      statement_index = 0
-      statements.each do |statement|
-        profile = statement.profile
-        text = number.to_s + '.' + statement_index.to_s + profile
-        @console_io.print_line(text)
-        statement_index += 1
-      end
-    end
   end
 
   def delete(args)
@@ -964,14 +949,14 @@ class Program
     end
   end
 
-  def profile_lines_errors(line_numbers)
+  def profile_lines_errors(line_numbers, show_timing)
     line_numbers.each do |line_number|
       line = @lines[line_number]
       number = line_number.to_s
       statements = line.statements
       statement_index = 0
       statements.each do |statement|
-        profile = statement.profile
+        profile = statement.profile(show_timing)
         @console_io.print_line(number + '.' + statement_index.to_s + profile)
         statement_index += 1
       end

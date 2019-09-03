@@ -46,3 +46,24 @@
                      *   *  *
                          *
 STOP in line 300
+
+1.0 (1) PRINT TAB(32); "3D PLOT"
+2.0 (1) PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+3.0 (1) PRINT
+3.1 (1) PRINT
+3.2 (1) PRINT
+5.0 (1) DEF FNA(Z) = 30 * EXP(-Z * Z / 100)
+100.0 (1) PRINT
+110.0 (1) FOR X = -30 TO 30 STEP 1.5
+120.0 (41) L = 0
+130.0 (41) Y1 = 5 * INT(SQR(900 - X * X) / 5)
+140.0 (41) FOR Y = Y1 TO -Y1 STEP -5
+150.0 (369) Z = INT(25 + FNA(SQR(X * X + Y * Y)) - .7 * Y)
+160.0 (369) IF Z <= L THEN 190
+170.0 (301) L = Z
+180.0 (301) PRINT TAB(Z); "*";
+190.0 (369) NEXT Y
+200.0 (41) PRINT
+210.0 (41) NEXT X
+300.0 (1) END
+

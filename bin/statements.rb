@@ -355,9 +355,14 @@ class AbstractStatement
     @profile_time = 0
   end
 
-  def profile
+  def profile(show_timing)
     text = AbstractToken.pretty_tokens(@keywords, @tokens)
-    ' (' + @profile_time.round(3).to_s + '/' + @profile_count.to_s + ')' + text
+    if show_timing
+      ' (' + @profile_time.round(3).to_s + '/' + @profile_count.to_s + ')' + text
+    else
+      ' (' + @profile_count.to_s + ')' + text
+    end
+
     ### TODO: add profile for modifiers
   end
 
