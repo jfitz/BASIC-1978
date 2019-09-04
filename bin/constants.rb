@@ -643,13 +643,6 @@ class NumericConstant < AbstractValueElement
     NumericConstant.new(@value)
   end
 
-  def decimal_digits(value)
-    decimals = $options['decimals'].value
-    num_decimals = decimals - (value != 0 ? Math.log(value.abs, 10).to_i : 0)
-    rounded = value.round(num_decimals)
-    rounded.to_f
-  end
-
   def print(printer)
     s = to_formatted_s
     s = s.upcase
@@ -671,13 +664,7 @@ class NumericConstant < AbstractValueElement
 
   def to_formatted_s
     lead_space = @value >= 0 ? ' ' : ''
-    digits = decimal_digits(@value).to_s
-
-    # remove trailing zeros and decimal point
-    ### make this optional
-    digits = digits.sub(/0+\z/, '').sub(/\.\z/, '') if
-      digits.include?('.') && !digits.include?('e')
-
+    digits = @value.to_s
     lead_space + digits
   end
 end

@@ -325,7 +325,7 @@ def make_command_tokenbuilders(options, quotes)
     BACK_TAB
     BASE
     CHR_ALLOW_ALL
-    DECIMALS DEFAULT_PROMPT DETECT_INFINITE_LOOP
+    DEFAULT_PROMPT DETECT_INFINITE_LOOP
     ECHO HEADING
     IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
     INT_FLOOR LOCK_FORNEXT LONG_NAMES NEWLINE_SPEED
@@ -372,7 +372,6 @@ OptionParser.new do |opt|
   opt.on('--back-tab') { |o| options[:back_tab] = o }
   opt.on('--base BASE') { |o| options[:base] = o }
   opt.on('--chr-allow-all') { |o| options[:chr_allow_all] = o }
-  opt.on('--decimals DIGITS') { |o| options[:decimals] = o }
   opt.on('--no-detect-infinite-loop') { |o| options[:no_detect_infinite_loop] = o }
   opt.on('--echo-input') { |o| options[:echo_input] = o }
   opt.on('--heading') { |o| options[:heading] = o }
@@ -431,10 +430,6 @@ $options['base'] = Option.new(int_1, base)
 
 $options['chr_allow_all'] =
   Option.new(boolean, options.key?(:chr_allow_all))
-
-decimals = 5
-decimals = options[:decimals] if options.key?(:decimals)
-$options['decimals'] = Option.new(int_1_15, decimals)
 
 $options['default_prompt'] = Option.new(string, '? ')
 

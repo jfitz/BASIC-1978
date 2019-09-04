@@ -82,7 +82,6 @@ When the BASIC program ends, BASIC-1978 ends.
 |--asc-allow-all |The ASC() function allows any characters. The default behavior is to limit characters to printable ASCII (32d to 126d).
 |--back-tab |Allows the TAB() function to move to the left. Normally, it moves only to the right or not at all.
 |--chr-allow-all |The CHR$() function allows any output characters. The default behavior is to limit characters to printable ASCII (32d to 126d).
-|--decimals digits |Sets the number of decimals printed. Default is 5, maximum is 15.
 |--no-detect-infinite-loop |Disables checks for infinite loops.
 |--echo-input |Echoes console input to output. Useful in run mode when redirecting input from a text file.
 |--heading |Suppress the heading and trailing messages
@@ -341,7 +340,6 @@ The options that can be set are:
     BACK_TAB
     BASE
     CHR_ALLOW_ALL
-    DECIMALS
     DEFAULT_PROMPT
     DETECT_INFINITE_LOOP
     ECHO
@@ -378,7 +376,6 @@ The OPTION command overrides the command-line setting.
 |BACK_TAB |TRUE or FALSE |FALSE |The TAB() function can move the printhead to the left
 |BASE |numeric |0 |Sets the base for arrays and matrices to either 0 or 1
 |CHR_ALLOW_ALL |TRUE or FALSE |FALSE |The CHR() function allows all characters
-|DECIMALS |numeric 1 to 15 |5 |Sets the number of decimals printed
 |DEFAULT_PROMPT |String |"? " |Changes the prompt for INPUT statements
 |DETECT_INFINITE_LOOP |TRUE or FALSE |TRUE |Enables the detection of infinite loops
 |ECHO |TRUE or FALSE |FALSE |Echoes input (useful for testing)
@@ -625,7 +622,7 @@ Numeric values
 Numeric values are either integers or floating point.
 Integer values may contain a trailing '%' character.
 Integers are stored internally with Ruby's Fixnum class.
-Floating point numbers are stored as Ruby's Float with precision specified by PRECISION option and printed with decimal places specified by DECIMALS option.
+Floating point numbers are stored as Ruby's Float with precision specified by the PRECISION option.
 
 Numeric constants may be integer or real, and may use E-notation with unsigned exponents.
 The 'E' must be uppercase; a lowercase 'e' will be rejected.
@@ -1277,7 +1274,6 @@ Possible options are a subset of the options in the shell.
     BACK_TAB
     BASE
     CHR_ALLOW_ALL
-    DECIMALS
     DEFAULT_PROMPT
     DETECT_INFINITE_LOOP
     ECHO
@@ -1349,8 +1345,6 @@ results in the text "Processing...done" on the console.
 The semicolon separator will force a small space between items.
 Between strings, there is no space.
 If semicolon zones are enabled (width greater than zero), then BASIC will advance to the next zone.
-
-The DECIMALS option sets the number of decimal places printed; trailing zeros are removed.
 
 Printing to files
 ^^^^^^^^^^^^^^^^^
