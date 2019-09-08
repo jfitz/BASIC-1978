@@ -228,6 +228,7 @@ class AbstractStatement
   attr_reader :functions
   attr_reader :userfuncs
   attr_reader :linenums
+  attr_reader :autonext
 
   def self.extra_keywords
     []
@@ -235,16 +236,19 @@ class AbstractStatement
 
   def initialize(keywords, tokens_lists)
     @keywords = keywords
+    @executable = true
     @tokens = tokens_lists.flatten
     @core_tokens = tokens_lists.flatten
     @errors = []
     @modifiers = []
+    @any_if_modifiers = false
     @numerics = []
     @strings = []
     @variables = []
     @functions = []
     @userfuncs = []
     @linenums = []
+    @autonext = true
     @profile_count = 0
     @profile_time = 0
     @part_of_user_function = nil
@@ -259,6 +263,10 @@ class AbstractStatement
   end
 
   public
+
+  def executable?
+    @executable
+  end
 
   def pretty
     list = [AbstractToken.pretty_tokens(@keywords, @tokens)]
@@ -323,6 +331,10 @@ class AbstractStatement
     vars = []
     @modifiers.each { |modifier| vars += modifier.userfuncs }
     vars
+  end
+
+  def gotos
+    []
   end
 
   def print_errors(console_io)
@@ -448,6 +460,8 @@ class AbstractStatement
       tokens_lists.pop(2)
       @core_tokens = tokens_lists.flatten
 
+      @any_if_modifiers = true
+      
       return true
     end
 
@@ -647,6 +661,7 @@ class InvalidStatement < AbstractStatement
   def initialize(text, all_tokens, error)
     super([], all_tokens)
 
+    @executable = false
     @text = text
     @errors << 'Invalid statement: ' + error.message
   end
@@ -669,6 +684,7 @@ class UnknownStatement < AbstractStatement
   def initialize(text)
     super([], [])
 
+    @executable = false
     @text = text
     @errors << "Unknown statement '#{text.strip}'"
   end
@@ -684,6 +700,8 @@ end
 class EmptyStatement < AbstractStatement
   def initialize
     super([], [])
+
+    @executable = false
   end
 
   def dump
@@ -709,6 +727,7 @@ class RemarkStatement < AbstractStatement
   def initialize(keywords, tokens_lists)
     super
 
+    @executable = false
     @rest = Remark.new(nil)
     @rest = Remark.new(tokens_lists[0]) unless tokens_lists.empty?
   end
@@ -768,6 +787,7 @@ class ChainStatement < AbstractStatement
     super
 
     extract_modifiers(tokens_lists)
+    @autonext = false unless @any_if_modifiers
 
     template = [[1, '>']]
 
@@ -971,6 +991,8 @@ class DataStatement < AbstractStatement
   def initialize(keywords, tokens_lists)
     super
 
+    @executable = false
+
     template = [[1, '>=']]
 
     if check_template(tokens_lists, template)
@@ -1118,6 +1140,9 @@ class EndStatement < AbstractStatement
 
   def initialize(keywords, tokens_lists)
     super
+
+    @autonext = false
+    @executable = false
 
     template = []
 
@@ -1318,6 +1343,10 @@ class GosubStatement < AbstractStatement
     [@destination.dump]
   end
 
+  def gotos
+    [@destination]
+  end
+
   def program_check(program, console_io, line_number_index)
     return true if program.line_number?(@destination)
 
@@ -1358,6 +1387,7 @@ class GotoStatement < AbstractStatement
     super
 
     extract_modifiers(tokens_lists)
+    @autonext = false unless @any_if_modifiers
 
     template = [[1]]
     @destination = nil
@@ -1378,6 +1408,10 @@ class GotoStatement < AbstractStatement
     lines = []
     lines << @destination.dump unless @destination.nil?
     lines
+  end
+
+  def gotos
+    [@destination]
   end
 
   def program_check(program, console_io, line_number_index)
@@ -1647,6 +1681,17 @@ class IfStatement < AbstractStatement
     lines += @else_stmt.dump unless @else_stmt.nil?
 
     lines
+  end
+
+  def gotos
+    destinations = []
+    
+    destinations << @destination unless @destination.nil?
+    destinations += @statement.gotos unless @statement.nil?
+    destinations << @else_dest unless @else_dest.nil?
+    destinations += @else_stmt.gotos unless @else_stmt.nil?
+
+    destinations
   end
 
   def program_check(program, console_io, line_number_index)
@@ -2245,6 +2290,10 @@ class OnErrorStatement < AbstractStatement
     lines = [@destination.dump]
   end
 
+  def gotos
+    [@destination]
+  end
+
   def program_check(program, console_io, line_number_index)
     retval = true
 
@@ -2338,6 +2387,10 @@ class OnStatement < AbstractStatement
     lines += @expression.dump
     @destinations.each { |destination| lines << destination.dump }
     lines
+  end
+
+  def gotos
+    @destinations
   end
 
   def program_check(program, console_io, line_number_index)
@@ -3008,6 +3061,7 @@ class ResumeStatement < AbstractStatement
     super
 
     extract_modifiers(tokens_lists)
+    @autonext = false unless @any_if_modifiers
 
     template_0 = []
     template_1 = [[1, '>=']]
@@ -3053,6 +3107,7 @@ class ReturnStatement < AbstractStatement
     super
 
     extract_modifiers(tokens_lists)
+    @autonext = false unless @any_if_modifiers
 
     template = []
 
@@ -3126,6 +3181,7 @@ class StopStatement < AbstractStatement
     super
 
     extract_modifiers(tokens_lists)
+    @autonext = false unless @any_if_modifiers
 
     template = []
 

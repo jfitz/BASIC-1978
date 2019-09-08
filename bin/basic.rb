@@ -253,6 +253,8 @@ class Shell
       @interpreter.dump_dims
     when 'PARSE'
       @program.parse(args)
+    when 'ANALYZE'
+      @program.analyze if @program.check
     when 'TOKENS'
       @program.list(args, true)
     when 'UDFS'
@@ -319,8 +321,8 @@ def make_command_tokenbuilders(options, quotes)
   tokenbuilders = []
 
   keywords = %w(
-    BREAK CROSSREF DELETE DIMS EXIT LIST LOAD NEW OPTION PARSE PRETTY
-    PROFILE RENUMBER RUN SAVE TOKENS UDFS VARS
+    ANALYZE BREAK CROSSREF DELETE DIMS EXIT LIST LOAD NEW OPTION PARSE
+    PRETTY PROFILE RENUMBER RUN SAVE TOKENS UDFS VARS
     APOSTROPHE_COMMENT ASC_ALLOW_ALL
     BACK_TAB
     BASE
@@ -368,6 +370,7 @@ OptionParser.new do |opt|
   opt.on('--profile') { |o| options[:profile] = o }
   opt.on('-c', '--crossref SOURCE') { |o| options[:cref_name] = o }
   opt.on('--parse SOURCE') { |o| options[:parse_name] = o }
+  opt.on('--analyze SOURCE') { |o| options[:analyze_name] = o }
   opt.on('--asc-allow-all') { |o| options[:asc_allow_all] = o }
   opt.on('--back-tab') { |o| options[:back_tab] = o }
   opt.on('--base BASE') { |o| options[:base] = o }
@@ -401,6 +404,7 @@ list_filename = options[:list_name]
 list_tokens = options.key?(:tokens)
 pretty_filename = options[:pretty_name]
 parse_filename = options[:parse_name]
+analyze_filename = options[:analyze_name]
 run_filename = options[:run_name]
 cref_filename = options[:cref_name]
 show_profile = options.key?(:profile)
@@ -541,6 +545,13 @@ if !parse_filename.nil?
   end
 end
 
+# show analysis
+if !analyze_filename.nil?
+  token = TextConstantToken.new('"' + analyze_filename + '"')
+  nametokens = [TextConstant.new(token)]
+  program.analyze if program.load(nametokens) && program.check
+end
+
 # pretty-print the source
 if !pretty_filename.nil?
   token = TextConstantToken.new('"' + pretty_filename + '"')
@@ -587,8 +598,8 @@ if !run_filename.nil?
 end
 
 # no command-line directives, so run BASIC shell
-if list_filename.nil? && parse_filename.nil? && pretty_filename.nil? &&
-   cref_filename.nil? && run_filename.nil?
+if list_filename.nil? && parse_filename.nil? && analyze_filename.nil? &&
+   pretty_filename.nil? && cref_filename.nil? && run_filename.nil?
   interpreter = Interpreter.new(console_io)
   interpreter.set_default_args('RND', NumericConstant.new(1))
 

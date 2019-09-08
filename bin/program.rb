@@ -93,6 +93,34 @@ class LineNumberCountRange
   end
 end
 
+# LineNumberIdx class to hold line number and index within line
+class LineNumberIdx
+  attr_reader :number
+  attr_reader :statement
+
+  def initialize(number, statement)
+    @number = number
+    @statement = statement
+  end
+
+  def eql?(other)
+    @number == other.number && @statement == other.statement
+  end
+
+  def ==(other)
+    @number == other.number && @statement == other.statement
+  end
+
+  def hash
+    @number.hash + @statement.hash
+  end
+
+  def to_s
+    return @number.to_s if @statement.zero?
+    @number.to_s + '.' + @statement.to_s
+  end
+end
+
 # LineNumberIndex class to hold line number and index within line
 class LineNumberIndex
   attr_reader :number
@@ -389,6 +417,94 @@ class Program
     else
       @console_io.print_line('No program loaded')
     end
+  end
+
+  def analyze
+    # build list of "gotos"
+    gotos = {}
+    @lines.keys.each do |line_number|
+      statements = @lines[line_number].statements
+      index = 0
+
+      statements.each do |statement|
+        line_number_idx = LineNumberIdx.new(line_number, index)
+
+        statement_gotos = statement.gotos
+
+        goto_line_idxs = []
+        statement_gotos.each do |goto|
+          goto_line_idxs << LineNumberIdx.new(goto, 0)
+        end
+
+        if statement.autonext
+          next_line_idx = find_next_line_idx(line_number_idx)
+          goto_line_idxs << next_line_idx unless next_line_idx.nil?
+        end
+
+        gotos[line_number_idx] = goto_line_idxs
+
+        index += 1
+      end
+    end
+
+    # gotos.keys.each { |line_number_idx| puts("#{line_number_idx}: #{gotos[line_number_idx]}") }
+
+    # assume statements are dead until connected to a live statement
+    reachable = {}
+    gotos.keys.each { |line_number_idx| reachable[line_number_idx] = false }
+
+    # first line is live
+    first_line_number = @lines.keys.sort[0]
+    first_line_number_idx = LineNumberIdx.new(first_line_number, 0)
+    reachable[first_line_number_idx] = true
+
+    # walk the entire tree and mark lines as live
+    # repeat until no changes
+    any_changes = true
+    while any_changes
+      any_changes = false
+
+      @lines.keys.each do |line_number|
+        statements = @lines[line_number].statements
+        index = 0
+        statements.each do |statement|
+          line_number_idx = LineNumberIdx.new(line_number, index)
+
+          if reachable[line_number_idx]
+            # a live line updates its gotos to live
+            statement_gotos = gotos[line_number_idx]
+            statement_gotos.each do |goto_number_idx|
+              if !reachable[goto_number_idx]
+                reachable[goto_number_idx] = true
+                any_changes = true
+              end
+            end
+          end
+
+          index += 1
+        end
+      end
+    end
+
+    # report the lines which are dead
+    @console_io.print_line('Unreachable code')
+    @console_io.newline
+
+    printed_any = false
+    reachable.keys.each do |line_number_idx|
+      line_number = line_number_idx.number
+      index = line_number_idx.statement
+      statements = @lines[line_number].statements
+      statement = statements[index]
+      if statement.executable? && !reachable[line_number_idx]
+        @console_io.print_line("#{line_number_idx}:#{statement.pretty}")
+        printed_any = true
+      end
+    end
+
+    puts('All executable lines are reachable.') if !printed_any
+
+    @console_io.newline
   end
 
   def pretty(args, pretty_multiline)
@@ -1001,6 +1117,38 @@ class Program
     end
 
     result
+  end
+
+  def find_next_line_idx(current_line_idx)
+    # find next index with current statement
+    line_number = current_line_idx.number
+    line = @lines[line_number]
+
+    statements = line.statements
+    statement_index = current_line_idx.statement
+    statement = statements[statement_index]
+
+    # find next statement within the current line
+    if statement_index < statements.size - 1
+      statement_index += 1
+      statement = statements[statement_index]
+      index = statement.start_index
+      return LineNumberIdx.new(line_number, statement_index)
+    end
+
+    # find the next line
+    line_numbers = @lines.keys.sort
+    line_number = current_line_idx.number
+    index = line_numbers.index(line_number)
+    line_number = line_numbers[index + 1]
+
+    unless line_number.nil?
+      line = @lines[line_number]
+      return LineNumberIdx.new(line_number, 0)
+    end
+
+    # nothing left to execute
+    nil
   end
 
   def find_next_line_index(current_line_index)

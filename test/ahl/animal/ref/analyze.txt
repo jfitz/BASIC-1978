@@ -1,0 +1,19 @@
+Unreachable code
+
+240: INPUT "THE ANIMAL YOU WERE THINKING OF WAS A "; V$
+250: PRINT "PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
+260: PRINT V$; " FROM A "; RIGHT$(A$(K), LEN(A$(K)) - 2)
+270: INPUT X$
+280: PRINT "FOR A "; V$; " THE ANSWER WOULD BE ";
+290: INPUT A$
+300: A$ = LEFT$(A$, 1)
+300.1: IF A$ <> "Y" AND A$ <> "N" THEN 280
+310: IF A$ = "Y" THEN B$ = "N"
+320: IF A$ = "N" THEN B$ = "Y"
+330: Z1 = VAL(A$(0))
+340: A$(0) = STR$(Z1 + 2)
+350: A$(Z1) = A$(K)
+360: A$(Z1 + 1) = "\A" + V$
+370: A$(K) = "\Q" + X$ + "\" + A$ + STR$(Z1 + 1) + "\" + B$ + STR$(Z1) + "\"
+380: GOTO 120
+
