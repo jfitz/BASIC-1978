@@ -1,0 +1,162 @@
+                                 LUNAR
+               CREATIVE COMPUTING MORRISTOWN, NEW JERSEY
+
+
+
+THIS IS A COMPUTER SIMULATION OF AN APOLLO LUNAR
+LANDING CAPSULE.
+
+
+THE ON-BOARD COMPUTER HAS FAILED (IT WAS MADE BY
+XEROX) SO YOU HAVE TO LAND THE CAPSULE MANUALLY.
+
+SET BURN RATE OF RETRO ROCKETS TO ANY VALUE BETWEEN
+0 (FREE FALL) AND 200 (MAXIMUM BURN) POUNDS PER SECOND.
+SET NEW BURN RATE EVERY 10 SECONDS.
+
+CAPSULE WEIGHT 32,500 LBS; FUEL WEIGHT 16,500 LBS.
+
+
+
+GOOD LUCK
+
+SEC             MI + FT         MPH             LB FUEL         BURN RATE
+
+ 0               120  0          3600            16500          ? 0
+ 10              109  5016       3636            16500          ? 0
+ 20              99  4224        3672            16500          ? 0
+ 30              89  2904        3708            16500          ? 0
+ 40              79  1056        3744            16500          ? 0
+ 50              68  3960        3780            16500          ? 0
+ 60              58  1056        3816            16500          ? 0
+ 70              47  2904        3852            16500          ? 200
+ 80              37  1884        3482.86814      14500          ? 200
+ 90              28  1191        3086.70812      12500          ? 200
+ 100             20  1251        2659.65416      10500          ? 200
+ 110             13  2549        2196.9468       8500           ? 200
+ 120             8  370          1692.63428      6500           ? 200
+ 130             4  658          1139.13766      4500           ? 200
+ 140             1  4204         526.597726      2500           ? 100
+ 150             0  4042         212.242156      1500           ? 45
+ 160             0  1864         84.1827604      1050           ? 20
+ 170             0  909          45.9126072      850            ? 17
+ 180             0  438          18.1067051      680            ? 12
+ 190             0  241          8.68595832      560            ? 11
+ 200             0  157          2.76872904      450            ? 9
+ 210             0  105          4.26997854      360            ? 9.5
+ 220             0  47           3.65426784      265            ? 9.8
+ 230             0  8            1.66420944      167            ? 9.3
+ON MOON AT 233.382586 SECONDS - IMPACT VELOCITY 1.59931696 MPH
+GOOD LANDING (COULD RE BETTER)
+
+
+
+TRY AGAIN??
+
+SET BURN RATE OF RETRO ROCKETS TO ANY VALUE BETWEEN
+0 (FREE FALL) AND 200 (MAXIMUM BURN) POUNDS PER SECOND.
+SET NEW BURN RATE EVERY 10 SECONDS.
+
+CAPSULE WEIGHT 32,500 LBS; FUEL WEIGHT 16,500 LBS.
+
+
+
+GOOD LUCK
+
+SEC             MI + FT         MPH             LB FUEL         BURN RATE
+
+ 0               120  0          3600            16500          ? STOP
+Type mismatch '"STOP"' is not numeric in line 150
+
+10.0 (1) PRINT TAB(33); "LUNAR"
+20.0 (1) PRINT TAB(15); "CREATIVE COMPUTING MORRISTOWN, NEW JERSEY"
+25.0 (1) PRINT
+25.1 (1) PRINT
+25.2 (1) PRINT
+30.0 (1) PRINT "THIS IS A COMPUTER SIMULATION OF AN APOLLO LUNAR"
+40.0 (1) PRINT "LANDING CAPSULE."
+40.1 (1) PRINT
+40.2 (1) PRINT
+50.0 (1) PRINT "THE ON-BOARD COMPUTER HAS FAILED (IT WAS MADE BY"
+60.0 (1) PRINT "XEROX) SO YOU HAVE TO LAND THE CAPSULE MANUALLY."
+70.0 (2) PRINT
+70.1 (2) PRINT "SET BURN RATE OF RETRO ROCKETS TO ANY VALUE BETWEEN"
+80.0 (2) PRINT "0 (FREE FALL) AND 200 (MAXIMUM BURN) POUNDS PER SECOND."
+90.0 (2) PRINT "SET NEW BURN RATE EVERY 10 SECONDS."
+90.1 (2) PRINT
+100.0 (2) PRINT "CAPSULE WEIGHT 32,500 LBS; FUEL WEIGHT 16,500 LBS."
+110.0 (2) PRINT
+110.1 (2) PRINT
+110.2 (2) PRINT
+110.3 (2) PRINT "GOOD LUCK"
+120.0 (2) L = 0
+130.0 (2) PRINT
+130.1 (2) PRINT "SEC", "MI + FT", "MPH", "LB FUEL", "BURN RATE"
+130.2 (2) PRINT
+140.0 (2) A = 120
+140.1 (2) V = 1
+140.2 (2) M = 33000
+140.3 (2) N = 16500
+140.4 (2) G = 1E-03
+140.5 (2) Z = 1.8
+150.0 (25) PRINT L, INT(A); INT(5280 * (A - INT(A))), 3600 * V, M - N,
+150.1 (24) INPUT K
+150.2 (24) T = 10
+160.0 (47) IF M - N < 1E-03 THEN 240
+170.0 (47) IF T < 1E-03 THEN 150
+180.0 (24) S = T
+180.1 (24) IF M >= N + S * K THEN 200
+190.0 (0) S = (M - N) / K
+200.0 (24) GOSUB 420
+200.1 (24) IF I <= O THEN 340
+210.0 (23) IF V <= 0 THEN 230
+220.0 (23) IF J < 0 THEN 370
+230.0 (23) GOSUB 330
+230.1 (23) GOTO 160
+240.0 (0) PRINT "FUEL OUT AT"; L; "SECONDS"
+240.1 (0) S = (-V + SQR(V * V + 2 * A * G)) / G
+250.0 (0) V = V + G * S
+250.1 (0) L = L + S
+260.0 (1) W = 3600 * V
+260.1 (1) PRINT "ON MOON AT"; L; "SECONDS - IMPACT VELOCITY"; W; "MPH"
+274.0 (1) IF W <= 1.2 THEN PRINT "PERFECT LANDING!"
+274.1 (0) GOTO 440
+280.0 (1) IF W <= 10 THEN PRINT "GOOD LANDING (COULD RE BETTER)"
+280.1 (1) GOTO 440
+282.0 (0) IF W > 60 THEN 300
+284.0 (0) PRINT "CRAFT DAMAGE... YOU'RE STRANDED HERE UNTIL A RESCUE"
+286.0 (0) PRINT "PARTY ARRIVES. HOPE YOU HAVE ENOUGH OXYGEN!"
+288.0 (0) GOTO 440
+300.0 (0) PRINT "SORRY THERE NERE NO SURVIVORS. YOU BLOW IT!"
+310.0 (0) PRINT "IN FACT, YOU BLASTED A NEW LUNAR CRATER"; W * .227; "FEET DEEP!"
+320.0 (0) GOTO 440
+330.0 (26) L = L + S
+330.1 (26) T = T - S
+330.2 (26) M = M - S * K
+330.3 (26) A = I
+330.4 (26) V = J
+330.5 (26) RETURN
+340.0 (4) IF S < 5E-03 THEN 260
+350.0 (3) D = V + SQR(V * V + 2 * A * (G - Z * K / M))
+350.1 (3) S = 2 * A / D
+360.0 (3) GOSUB 420
+360.1 (3) GOSUB 330
+360.2 (3) GOTO 340
+370.0 (0) W = (1 - M * G / (Z * K)) / 2
+370.1 (0) S = M * V / (Z * K * (W + SQR(W * W + V / Z))) + .05
+370.2 (0) GOSUB 420
+380.0 (0) IF I <= 0 THEN 340
+390.0 (0) GOSUB 330
+390.1 (0) IF J > 0 THEN 160
+400.0 (0) IF V > 0 THEN 370
+410.0 (0) GOTO 160
+420.0 (27) Q = S * K / M
+420.1 (27) J = V + G * S + Z * (-Q - Q * Q / 2 - Q ^ 3 / 3 - Q ^ 4 / 4 - Q ^ 5 / 5)
+430.0 (27) I = A - G * S * S / 2 - V * S + Z * S * (Q / 2 + Q ^ 2 / 6 + Q ^ 3 / 12 + Q ^ 4 / 20 + Q ^ 5 / 30)
+430.1 (27) RETURN
+440.0 (1) PRINT
+440.1 (1) PRINT
+440.2 (1) PRINT
+440.3 (1) PRINT "TRY AGAIN??"
+440.4 (1) GOTO 70
+

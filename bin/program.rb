@@ -424,10 +424,10 @@ class Program
     gotos = {}
     @lines.keys.each do |line_number|
       statements = @lines[line_number].statements
-      index = 0
+      statement_index = 0
 
       statements.each do |statement|
-        line_number_idx = LineNumberIdx.new(line_number, index)
+        line_number_idx = LineNumberIdx.new(line_number, statement_index)
 
         statement_gotos = statement.gotos
 
@@ -437,17 +437,36 @@ class Program
         end
 
         if statement.autonext
+          # find next statement (possibly in same line)
           next_line_idx = find_next_line_idx(line_number_idx)
+
           goto_line_idxs << next_line_idx unless next_line_idx.nil?
+
+          if statement.is_if_no_else && $options['if_false_next_line'].value
+            # find next line (possibly does not exist)
+            line_numbers = @lines.keys.sort
+            index = line_numbers.index(line_number)
+            next_line_number = line_numbers[index + 1]
+
+            unless next_line_number.nil?
+              line = @lines[next_line_number]
+              next_line_idx = LineNumberIdx.new(next_line_number, 0)
+              goto_line_idxs << next_line_idx unless next_line_idx.nil?
+            end
+          end
+
         end
 
         gotos[line_number_idx] = goto_line_idxs
 
-        index += 1
+        statement_index += 1
       end
     end
 
-    # gotos.keys.each { |line_number_idx| puts("#{line_number_idx}: #{gotos[line_number_idx]}") }
+    # gotos.keys.each do |line_number_idx|
+    #   puts("#{line_number_idx}:")
+    #   gotos[line_number_idx].each { |item| puts(" #{item}") }
+    # end
 
     # assume statements are dead until connected to a live statement
     reachable = {}
