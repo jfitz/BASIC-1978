@@ -2801,8 +2801,7 @@ class PrintUsingStatement < AbstractPrintStatement
         item = print_items.shift
 
         item = print_items.shift while
-          !print_items.empty? &&
-          item.carriage_control?
+          !print_items.empty? && item.carriage_control?
 
         raise(BASICRuntimeError, 'Too few print items for format') if
           item.nil?
