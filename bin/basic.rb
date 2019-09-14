@@ -297,8 +297,8 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
   operators = (un_ops + bi_ops).uniq
   tokenbuilders << ListTokenBuilder.new(operators, OperatorToken)
 
-  tokenbuilders << ListTokenBuilder.new(['(', '['], GroupStartToken)
-  tokenbuilders << ListTokenBuilder.new([')', ']'], GroupEndToken)
+  tokenbuilders << ListTokenBuilder.new(['('], GroupStartToken)
+  tokenbuilders << ListTokenBuilder.new([')'], GroupEndToken)
   tokenbuilders << ListTokenBuilder.new([',', ';'], ParamSeparatorToken)
 
   tokenbuilders <<
