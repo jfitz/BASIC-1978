@@ -768,28 +768,6 @@ class FunctionMod < AbstractScalarFunction
   end
 end
 
-# function STR$
-class FunctionStr < AbstractScalarFunction
-  def initialize(text)
-    super
-
-    @signature = [{ 'type' => :numeric, 'shape' => :scalar }]
-  end
-
-  # return a single value
-  def evaluate(_, stack)
-    args = stack.pop
-    if match_args_to_signature(args, @signature)
-      text = args[0].to_s
-      quoted = '"' + text + '"'
-      token = TextConstantToken.new(quoted)
-      TextConstant.new(token)
-    else
-      raise(BASICRuntimeError, 'Wrong arguments for function')
-    end
-  end
-end
-
 # function PACK
 class FunctionPack < AbstractArrayFunction
   def initialize(text)
@@ -969,6 +947,39 @@ class FunctionSqr < AbstractScalarFunction
     args = stack.pop
     if match_args_to_signature(args, @signature)
       args[0].sqrt
+    else
+      raise(BASICRuntimeError, 'Wrong arguments for function')
+    end
+  end
+end
+
+# function STR$
+class FunctionStr < AbstractScalarFunction
+  def initialize(text)
+    super
+
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature_2 = [
+      { 'type' => :numeric, 'shape' => :scalar },
+      { 'type' => :numeric, 'shape' => :scalar }
+    ]
+  end
+
+  # return a single value
+  def evaluate(_, stack)
+    args = stack.pop
+    if match_args_to_signature(args, @signature_1)
+      text = args[0].to_s
+      quoted = '"' + text + '"'
+      token = TextConstantToken.new(quoted)
+      TextConstant.new(token)
+    elsif match_args_to_signature(args, @signature_2)
+      places = args[1].to_i
+      value = args[0].to_f
+      text = sprintf('%.*f', places, value)
+      quoted = '"' + text + '"'
+      token = TextConstantToken.new(quoted)
+      TextConstant.new(token)
     else
       raise(BASICRuntimeError, 'Wrong arguments for function')
     end
