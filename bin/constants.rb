@@ -591,6 +591,10 @@ class NumericConstant < AbstractValueElement
     NumericConstant.new(value)
   end
 
+  def round(places)
+    NumericConstant.new(@value.round(places.to_i))
+  end
+
   def sqrt
     value = @value > 0 ? Math.sqrt(@value) : 0
     NumericConstant.new(value)
