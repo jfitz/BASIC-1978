@@ -1457,18 +1457,8 @@ class GotoStatement < AbstractStatement
   end
 end
 
-# IF/THEN
-class IfStatement < AbstractStatement
-  def self.lead_keywords
-    [
-      [KeywordToken.new('IF')]
-    ]
-  end
-
-  def self.extra_keywords
-    %w(THEN ELSE)
-  end
-
+# common functions for IF statements
+class AbstractIfStatement < AbstractStatement
   def initialize(keywords, tokens_lists)
     super
 
@@ -1497,9 +1487,9 @@ class IfStatement < AbstractStatement
         @numerics = make_numeric_references
         @strings = make_string_references
         @variables = make_variable_references
-        @linenums = make_linenum_references
         @functions = make_function_references
         @userfuncs = make_userfunc_references
+        @linenums = make_linenum_references
       rescue BASICExpressionError => e
         @errors << 'Syntax Error: ' + e.message
       end
@@ -1519,13 +1509,16 @@ class IfStatement < AbstractStatement
 
     tokens_lists.each do |tokens_list|
       handled = false
-
       case state
       when 1
         if tokens_list == 'THEN'
           state = 2
         elsif tokens_list.class.to_s == 'KeywordToken'
-          dict['expr'] << tokens_list
+          if tokens_list.to_s == 'GOTO'
+            state = 4
+          else
+            dict['expr'] << tokens_list
+          end
         else
           dict['expr'] += tokens_list
         end
@@ -1601,7 +1594,6 @@ class IfStatement < AbstractStatement
 
     if x1.class.to_s == 'Array'
       ax1 = []
-
       x1.each do |x|
         if x.class.to_s == 'Array'
           ax1 << '[' + x.map(&:to_s).join(', ') + ']'
@@ -1609,7 +1601,6 @@ class IfStatement < AbstractStatement
           ax1 << x.to_s
         end
       end
-
       then_s = '[' + ax1.join(', ') + ']'
     else
       then_s = 'DICT'
@@ -1621,7 +1612,6 @@ class IfStatement < AbstractStatement
       x2 = dict['else']
       if x2.class.to_s == 'Array'
         ax2 = []
-
         x2.each do |x|
           if x.class.to_s == 'Array'
             ax2 << '[' + x.map(&:to_s).join(', ') + ']'
@@ -1629,7 +1619,6 @@ class IfStatement < AbstractStatement
             ax2 << x.to_s
           end
         end
-
         else_s = '[' + ax2.join(', ') + ']'
       else
         else_s = 'DICT'
@@ -1731,54 +1720,6 @@ class IfStatement < AbstractStatement
     retval
   end
 
-  def execute_core(interpreter)
-    values = @expression.evaluate(interpreter)
-
-    raise(BASICExpressionError, 'Too many or too few values') unless
-      values.size == 1
-
-    result = values[0]
-
-    result = BooleanConstant.new(result) unless
-      result.class.to_s == 'BooleanConstant'
-
-    if result.value
-      unless @destination.nil?
-        line_number = @destination
-        index = interpreter.statement_start_index(line_number, 0)
-
-        raise(BASICRuntimeError, 'Line number not found') if index.nil?
-
-        destination = LineNumberIndex.new(line_number, 0, index)
-        interpreter.next_line_index = destination
-      end
-
-      @statement.execute_core(interpreter) unless @statement.nil?
-    else
-      unless @else_dest.nil?
-        line_number = @else_dest
-        index = interpreter.statement_start_index(line_number, 0)
-
-        raise(BASICRuntimeError, 'Line number not found') if index.nil?
-
-        destination = LineNumberIndex.new(line_number, 0, index)
-        interpreter.next_line_index = destination
-      end
-
-      if @else_dest.nil? && @else_stmt.nil? && interpreter.if_false_next_line
-        # go to next numbered line, not next statement
-        next_line_index = interpreter.find_next_line
-        interpreter.next_line_index = next_line_index
-      end
-
-      @else_stmt.execute_core(interpreter) unless @else_stmt.nil?
-    end
-
-    s = ' ' + @expression.to_s + ': ' + result.to_s
-    io = interpreter.trace_out
-    io.trace_output(s)
-  end
-
   def renumber(renumber_map)
     unless @destination.nil?
       @destination = renumber_map[@destination]
@@ -1801,18 +1742,52 @@ class IfStatement < AbstractStatement
     @linenums = make_linenum_references
   end
 
-  private
+  def execute_core(interpreter)
+    values = @expression.evaluate(interpreter)
 
-  def parse_expression(tokens)
-    expression = nil
-    begin
-      expression = ValueScalarExpression.new(tokens)
-    rescue BASICExpressionError => e
-      @errors << e.message
+    raise(BASICExpressionError, 'Too many or too few values') unless
+      values.size == 1
+
+    result = values[0]
+
+    result = BooleanConstant.new(result) unless
+      result.class.to_s == 'BooleanConstant'
+
+    if result.value
+      unless @destination.nil?
+        line_number = @destination
+        index = interpreter.statement_start_index(line_number, 0)
+        raise(BASICRuntimeError, 'Line number not found') if index.nil?
+        destination = LineNumberIndex.new(line_number, 0, index)
+        interpreter.next_line_index = destination
+      end
+
+      @statement.execute_core(interpreter) unless @statement.nil?
+    else
+      unless @else_dest.nil?
+        line_number = @else_dest
+        index = interpreter.statement_start_index(line_number, 0)
+        raise(BASICRuntimeError, 'Line number not found') if index.nil?
+        destination = LineNumberIndex.new(line_number, 0, index)
+        interpreter.next_line_index = destination
+      end
+
+      if @else_dest.nil? && @else_stmt.nil? && interpreter.if_false_next_line
+        # go to next numbered line, not next statement
+        next_line_index = interpreter.find_next_line
+        interpreter.next_line_index = next_line_index
+      end
+
+      @else_stmt.execute_core(interpreter) unless @else_stmt.nil?
     end
-    expression
+
+    s = ' ' + @expression.to_s + ': ' + result.to_s
+    io = interpreter.trace_out
+    io.trace_output(s)
   end
 
+  private
+  
   def parse_target(tokens)
     destination = nil
     statement = nil
@@ -1828,6 +1803,37 @@ class IfStatement < AbstractStatement
     end
 
     [destination, statement]
+  end
+end
+
+# IF/THEN
+class IfStatement < AbstractIfStatement
+  def self.lead_keywords
+    [
+      [KeywordToken.new('IF')]
+    ]
+  end
+
+  def self.extra_keywords
+    %w(THEN ELSE)
+  end
+
+  def initialize(_, _)
+    super
+  end
+
+  private
+
+  def parse_expression(tokens)
+    expression = nil
+
+    begin
+      expression = ValueScalarExpression.new(tokens)
+    rescue BASICExpressionError => e
+      @errors << e.message
+    end
+
+    expression
   end
 end
 
@@ -2647,11 +2653,8 @@ class AbstractPrintStatement < AbstractStatement
     lines = []
 
     unless @file_tokens.nil?
-      lines << 'FILE'
       lines += @file_tokens.dump
     end
-
-    lines << 'ITEMS'
 
     @print_items.each { |item| lines += item.dump } unless @print_items.nil?
 
