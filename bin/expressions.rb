@@ -1101,16 +1101,19 @@ class AbstractExpression
   end
 end
 
-# Value scalar expression (an R-value)
-class ValueScalarExpression < AbstractExpression
-  def initialize(tokens)
-    super(tokens, :scalar)
-
-    @shape = :scalar
+# Value expression (an R-value)
+class ValueExpression < AbstractExpression
+  def initialize(_, shape)
+    super
+    @shape = shape
   end
 
   def printable?
     true
+  end
+
+  def scalar?
+    @shape == :scalar
   end
 
   def content_type
@@ -1136,51 +1139,17 @@ class ValueScalarExpression < AbstractExpression
     numeric_constant = numeric_constants[0]
     numeric_constant.write(printer)
   end
-end
 
-# Value array expression (an R-value)
-class ValueCompoundExpression < AbstractExpression
-  def initialize(tokens, classref)
-    super
-  end
-
-  def printable?
-    true
-  end
-
-  def filehandle?
-    last_token = @parsed_expressions[0][-1]
-    last_token.operator? && last_token.to_s == '#'
-  end
-
-  def print(printer, interpreter, carriage)
+  def compound_print(printer, interpreter, carriage)
     compounds = evaluate(interpreter)
     compound = compounds[0]
     compound.print(printer, interpreter, carriage)
   end
 
-  def write(printer, interpreter, carriage)
+  def compound_write(printer, interpreter, carriage)
     compounds = evaluate(interpreter)
     compound = compounds[0]
     compound.write(printer, interpreter, carriage)
-  end
-end
-
-# Value array expression (an R-value)
-class ValueArrayExpression < ValueCompoundExpression
-  def initialize(tokens)
-    super(tokens, :array)
-
-    @shape = :array
-  end
-end
-
-# Value matrix expression (an R-value)
-class ValueMatrixExpression < ValueCompoundExpression
-  def initialize(tokens)
-    super(tokens, :matrix)
-
-    @shape = :matrix
   end
 end
 
@@ -1287,7 +1256,7 @@ class UserFunctionDefinition
     @name = user_function_prototype.name
     @arguments = user_function_prototype.arguments
     @expression = nil
-    @expression = ValueScalarExpression.new(parts[2]) if parts.size == 3
+    @expression = ValueExpression.new(parts[2], :scalar) if parts.size == 3
     if !@expression.nil?
       @numerics = @expression.numerics
       @strings = @expression.strings
@@ -1404,11 +1373,11 @@ class UserFunctionPrototype
   end
 end
 
-# Abstract assignment
-class AbstractAssignment
+# Assignment
+class Assignment
   attr_reader :target
 
-  def initialize(tokens)
+  def initialize(tokens, shape)
     # parse into variable, '=', expression
     @token_lists = split_tokens(tokens)
     line_text = tokens.map(&:to_s).join
@@ -1416,6 +1385,9 @@ class AbstractAssignment
     raise(BASICExpressionError, "'#{line_text}' is not a valid assignment") if
       @token_lists.size != 3 ||
       !(@token_lists[1].operator? && @token_lists[1].equals?)
+
+    @target = TargetExpression.new(@token_lists[0], shape)
+    @expression = ValueExpression.new(@token_lists[2], shape)
   end
 
   def split_tokens(tokens)
@@ -1481,35 +1453,5 @@ class AbstractAssignment
 
   def to_s
     @target.to_s + ' = ' + @expression.to_s
-  end
-end
-
-# An assignment (part of a LET statement)
-class ScalarAssignment < AbstractAssignment
-  def initialize(tokens)
-    super
-
-    @target = TargetExpression.new(@token_lists[0], :scalar)
-    @expression = ValueScalarExpression.new(@token_lists[2])
-  end
-end
-
-# An assignment (part of an ARR LET statement)
-class ArrayAssignment < AbstractAssignment
-  def initialize(tokens)
-    super
-
-    @target = TargetExpression.new(@token_lists[0], :array)
-    @expression = ValueArrayExpression.new(@token_lists[2])
-  end
-end
-
-# An assignment (part of a MAT LET statement)
-class MatrixAssignment < AbstractAssignment
-  def initialize(tokens)
-    super
-
-    @target = TargetExpression.new(@token_lists[0], :matrix)
-    @expression = ValueMatrixExpression.new(@token_lists[2])
   end
 end

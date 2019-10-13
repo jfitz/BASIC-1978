@@ -64,7 +64,7 @@ class IfModifier
     expression = nil
 
     begin
-      expression = ValueScalarExpression.new(expression_tokens)
+      expression = ValueExpression.new(expression_tokens, :scalar)
     rescue BASICExpressionError => e
       @errors << e.message
     end
@@ -102,11 +102,11 @@ class ForModifier
 
     control_name = VariableName.new(control_tokens[0])
     @control = Variable.new(control_name, :scalar, [])
-    @start = ValueScalarExpression.new(start_tokens)
-    @end = ValueScalarExpression.new(end_tokens)
+    @start = ValueExpression.new(start_tokens, :scalar)
+    @end = ValueExpression.new(end_tokens, :scalar)
 
     @step = nil
-    @step = ValueScalarExpression.new(step_tokens) unless step_tokens.nil?
+    @step = ValueExpression.new(step_tokens, :scalar) unless step_tokens.nil?
 
     if @step.nil?
       @numerics = @start.numerics + @end.numerics
