@@ -74,6 +74,7 @@ class ConsoleIo
 
     @column = 0
     @last_was_numeric = false
+    @last_was_carriage = false
   end
 
   include Reader
@@ -140,6 +141,7 @@ class ConsoleIo
     end
 
     @last_was_numeric = false
+    @last_was_carriage = false
   end
 
   def print_line(text)
@@ -153,28 +155,30 @@ class ConsoleIo
 
   def tab
     space_after_numeric if @last_was_numeric
+    print_item(' ') if @last_was_carriage
 
     zone_width = $options['zone_width'].value
 
     if zone_width > 0
-      print_item(' ') while
-        @column > 0 && @column % zone_width != 0
+      print_item(' ') while @column % zone_width != 0
     end
 
     @last_was_numeric = false
+    @last_was_carriage = true
   end
 
   def semicolon
     space_after_numeric if @last_was_numeric
+    print_item(' ') if @last_was_carriage
 
     zone_width = $options['semicolon_zone_width'].value
 
     if zone_width > 0
-      print_item(' ') while
-        @column > 0 && @column % zone_width != 0
+      print_item(' ') while @column % zone_width != 0
     end
 
     @last_was_numeric = false
+    @last_was_carriage = true
   end
 
   def implied
@@ -214,6 +218,7 @@ class ConsoleIo
     newline_delay
     @column = 0
     @last_was_numeric = false
+    @last_was_carriage = true
   end
 
   def newline_when_needed
@@ -258,6 +263,10 @@ class NullOut
     false
   end
 
+  def last_was_carriage
+    false
+  end
+  
   def tab; end
 
   def semicolon; end
@@ -361,6 +370,11 @@ class FileHandler
     set_mode(:print)
   end
 
+  def last_was_carriage
+    # for a file, this function does nothing
+    set_mode(:print)
+  end
+  
   def newline
     set_mode(:print)
     @file.puts

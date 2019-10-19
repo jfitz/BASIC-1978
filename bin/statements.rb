@@ -1911,7 +1911,7 @@ class AbstractInputStatement < AbstractStatement
   end
 
   def add_expression(print_items, tokens)
-    if tokens[0].operator? && tokens[0].to_s == '#'
+    if tokens[0].operator? && tokens[0].pound?
       print_items << ValueExpression.new(tokens, :scalar)
     elsif tokens[0].text_constant?
       print_items << ValueExpression.new(tokens, :scalar)
@@ -3015,7 +3015,7 @@ class ReadStatement < AbstractReadStatement
   end
 
   def add_expression(print_items, tokens)
-    if tokens[0].operator? && tokens[0].to_s == '#'
+    if tokens[0].operator? && tokens[0].pound?
       print_items << ValueExpression.new(tokens, :scalar)
     else
       print_items << TargetExpression.new(tokens, :scalar)
@@ -3435,7 +3435,7 @@ class ArrReadStatement < AbstractReadStatement
   end
 
   def add_expression(print_items, tokens)
-    if tokens[0].operator? && tokens[0].to_s == '#'
+    if tokens[0].operator? && tokens[0].pound?
       print_items << ValueExpression.new(tokens, :scalar)
     else
       print_items << TargetExpression.new(tokens, :array)
@@ -3728,7 +3728,7 @@ class MatReadStatement < AbstractReadStatement
   end
 
   def add_expression(print_items, tokens)
-    if tokens[0].operator? && tokens[0].to_s == '#'
+    if tokens[0].operator? && tokens[0].pound?
       print_items << ValueExpression.new(tokens, :scalar)
     else
       print_items << TargetExpression.new(tokens, :matrix)

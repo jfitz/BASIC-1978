@@ -42,6 +42,10 @@ class UnaryOperator < AbstractElement
     false
   end
   
+  def pound?
+    @op == '#'
+  end
+
   def evaluate(_, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.empty?
     x = stack.pop
@@ -264,6 +268,10 @@ class BinaryOperator < AbstractElement
 
   def binary?
     true
+  end
+
+  def pound?
+    @op == '#'
   end
   
   def evaluate(interpreter, stack)
