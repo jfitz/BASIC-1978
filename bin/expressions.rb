@@ -1130,22 +1130,26 @@ class ValueExpression < AbstractExpression
     last_token.operator? && last_token.pound?
   end
 
-  def print(printer, interpreter)
+  def print(printer, interpreter, carriage)
     numeric_constants = evaluate(interpreter)
 
-    return if numeric_constants.empty?
+    if !numeric_constants.empty?
+      numeric_constant = numeric_constants[0]
+      numeric_constant.print(printer)
+    end
 
-    numeric_constant = numeric_constants[0]
-    numeric_constant.print(printer)
+    carriage.print(printer, interpreter)
   end
 
-  def write(printer, interpreter)
+  def write(printer, interpreter, carriage)
     numeric_constants = evaluate(interpreter)
 
-    return if numeric_constants.empty?
+    if !numeric_constants.empty?
+      numeric_constant = numeric_constants[0]
+      numeric_constant.write(printer)
+    end
 
-    numeric_constant = numeric_constants[0]
-    numeric_constant.write(printer)
+    carriage.print(printer, interpreter)
   end
 
   def compound_print(printer, interpreter, carriage)

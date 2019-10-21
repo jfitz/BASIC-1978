@@ -780,17 +780,29 @@ module FileFunctions
     file_handles[0]
   end
 
+  def add_needed_value(print_items, shape)
+    if print_items.empty? || !print_items[-1].printable?
+      print_items << ValueExpression.new([], shape)
+    end
+  end
+
   def add_needed_carriage(print_items)
-    if !print_items.empty? &&
-       print_items[-1].class.to_s == 'ValueExpression' &&
-       print_items[-1].scalar?
+    if !print_items.empty? && print_items[-1].printable?
       print_items << CarriageControl.new('')
     end
   end
 
   def add_final_carriage(print_items, final)
-    print_items << CarriageControl.new('NL') if print_items.empty?
-    print_items << final if print_items[-1].printable?
+    if !print_items.empty? && print_items[-1].printable?
+      print_items << final
+    end
+  end
+
+  def add_default_value_carriage(print_items, shape)
+    if print_items.empty?
+      add_needed_value(print_items, shape)
+      add_final_carriage(print_items, CarriageControl.new('NL'))
+    end
   end
 end
 
@@ -2737,8 +2749,18 @@ class PrintStatement < AbstractPrintStatement
     fh = get_file_handle(interpreter, @file_tokens)
     fhr = interpreter.get_file_handler(fh, :print)
 
+    i = 0
+
     @print_items.each do |item|
-      item.print(fhr, interpreter)
+      if item.printable?
+        carriage = CarriageControl.new('')
+        carriage = @print_items[i + 1] if
+          i < @print_items.size &&
+          !@print_items[i + 1].printable?
+        item.print(fhr, interpreter, carriage)
+      end
+
+      i += 1
     end
   end
 
@@ -2757,11 +2779,13 @@ class PrintStatement < AbstractPrintStatement
           @errors << 'Syntax error: "' + line_text + '" is not a value or operator'
         end
       elsif tokens_list.separator?
+        add_needed_value(print_items, :scalar)
         print_items << CarriageControl.new(tokens_list.to_s)
       end
     end
 
     add_final_carriage(print_items, @final)
+    add_default_value_carriage(print_items, :scalar)
     print_items
   end
 end
@@ -2809,13 +2833,12 @@ class PrintUsingStatement < AbstractPrintStatement
       constant = nil
 
       if format.wants_item
-        item = print_items.shift
-
+        # skip all of the separators
         item = print_items.shift while
-          !print_items.empty? && item.carriage_control?
+          !print_items.empty? && print_items[0].carriage_control?
 
         raise(BASICRuntimeError, 'Too few print items for format') if
-          item.nil?
+          print_items.empty?
 
         constants = item.evaluate(interpreter)
         constant = constants[0]
@@ -2825,9 +2848,22 @@ class PrintUsingStatement < AbstractPrintStatement
       text.print(fhr)
     end
 
-    until print_items.empty?
-      item = print_items.shift
-      item.print(fhr, interpreter) unless item.nil?
+    if !print_items.empty? && !print_items[0].printable?
+      print_items.unshift(ValueExpression.new([], :scalar))
+    end
+    
+    i = 0
+
+    print_items.each do |item|
+      if item.printable?
+        carriage = CarriageControl.new('')
+        carriage = print_items[i + 1] if
+          i < print_items.size &&
+          !print_items[i + 1].printable?
+        item.print(fhr, interpreter, carriage)
+      end
+
+      i += 1
     end
   end
 
@@ -2889,11 +2925,13 @@ class PrintUsingStatement < AbstractPrintStatement
           @errors << 'Syntax error: "' + line_text + '" is not a value or operator'
         end
       elsif tokens_list.separator?
+        add_needed_value(print_items, :scalar)
         print_items << CarriageControl.new(tokens_list.to_s)
       end
     end
 
     add_final_carriage(print_items, @final)
+    add_default_value_carriage(print_items, :scalar)
     print_items
   end
 end
@@ -3286,8 +3324,18 @@ class WriteStatement < AbstractWriteStatement
     fh = get_file_handle(interpreter, @file_tokens)
     fhr = interpreter.get_file_handler(fh, :print)
 
+    i = 0
+
     @print_items.each do |item|
-      item.write(fhr, interpreter)
+      if item.printable?
+        carriage = CarriageControl.new('')
+        carriage = @print_items[i + 1] if
+          i < @print_items.size &&
+          !@print_items[i + 1].printable?
+        item.write(fhr, interpreter, carriage)
+      end
+
+      i += 1
     end
   end
 
@@ -3375,6 +3423,7 @@ class ArrPrintStatement < AbstractPrintStatement
     end
 
     add_final_carriage(print_items, @final)
+    add_default_value_carriage(print_items, :array)
     print_items
   end
 end
@@ -3530,6 +3579,7 @@ class ArrWriteStatement < AbstractWriteStatement
     end
 
     add_final_carriage(print_items, @final)
+    add_default_value_carriage(print_items, :array)
     print_items
   end
 end
@@ -3668,6 +3718,7 @@ class MatPrintStatement < AbstractPrintStatement
     end
 
     add_final_carriage(print_items, @final)
+    add_default_value_carriage(print_items, :matrix)
     print_items
   end
 end
@@ -3841,6 +3892,7 @@ class MatWriteStatement < AbstractWriteStatement
     end
 
     add_final_carriage(print_items, @final)
+    add_default_value_carriage(print_items, :matrix)
     print_items
   end
 end
