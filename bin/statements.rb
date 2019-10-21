@@ -2840,6 +2840,7 @@ class PrintUsingStatement < AbstractPrintStatement
         raise(BASICRuntimeError, 'Too few print items for format') if
           print_items.empty?
 
+        item = print_items.shift
         constants = item.evaluate(interpreter)
         constant = constants[0]
       end
