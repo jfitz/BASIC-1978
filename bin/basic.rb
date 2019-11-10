@@ -43,6 +43,8 @@ class Option
       @value.to_s
     when :string
       '"' + @value.to_s + '"'
+    when :list
+      '"' + @value.to_s + '"'
     end
   end
 
@@ -91,6 +93,16 @@ class Option
 
       raise(BASICRuntimeError, "Invalid type #{value.class} for string") unless
         legals.include?(value.class.to_s)
+    when :list
+      legal_types = %(String)
+
+      raise(BASICRuntimeError, "Invalid type #{value.class} for list") unless
+        legal_types.include?(value.class.to_s)
+
+      legal_values = @defs[:values]
+
+      raise(BASICRuntimeError, "Invalid value #{value} for list") unless
+        legal_values.include?(value.to_s)
     else
       raise(BASICRuntimeError, 'Unknown value type')
     end
@@ -328,7 +340,7 @@ def make_command_tokenbuilders(options, quotes)
     BASE
     CHR_ALLOW_ALL
     DEFAULT_PROMPT DETECT_INFINITE_LOOP
-    ECHO HEADING
+    ECHO FIELD_SEP HEADING
     IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
     INT_FLOOR LOCK_FORNEXT LONG_NAMES NEWLINE_SPEED
     PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
@@ -377,6 +389,7 @@ OptionParser.new do |opt|
   opt.on('--chr-allow-all') { |o| options[:chr_allow_all] = o }
   opt.on('--no-detect-infinite-loop') { |o| options[:no_detect_infinite_loop] = o }
   opt.on('--echo-input') { |o| options[:echo_input] = o }
+  opt.on('--field-sep-semi') { |o| options[:field_sep_semi] = o }
   opt.on('--heading') { |o| options[:heading] = o }
   opt.on('--if-false-next-line') { |o| options[:if_false_next_line] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
@@ -418,6 +431,7 @@ int_132 = { :type => :int, :max => 132, :min => 0 }
 int_40 = { :type => :int, :max => 40, :min => 0 }
 int_1 = { :type => :int, :max => 1, :min => 0 }
 float = { :type => :float, :min => 0 }
+separator = { :type => :list, :values => ['COMMA', 'SEMI', 'NL', 'NONE'] }
 
 $options = {}
 
@@ -442,6 +456,10 @@ $options['detect_infinite_loop'] =
 
 $options['echo'] = Option.new(boolean, options.key?(:echo_input))
 $options['heading'] = Option.new(boolean, options.key?(:heading))
+
+field_sep = Option.new(separator, 'COMMA')
+field_sep = Option.new(separator, 'SEMI') if options.key?(:field_sep_semi)
+$options['field_sep'] = field_sep
 
 $options['if_false_next_line'] =
   Option.new(boolean, options.key?(:if_false_next_line))

@@ -1,7 +1,8 @@
 100 REM *** INTRO
 110 OPTION BASE 1
-120 L$="[]"       ' LIVE CELL
-130 D$="  "       ' DEAD CELL
+120 OPTION FIELD_SEP "SEMI"
+130 L$="[]"       ' LIVE CELL
+140 D$="  "       ' DEAD CELL
 
 200 REM *** SET UP BOARD
 210 REM *** EMPTY GRID
@@ -14,7 +15,7 @@
 
 300 REM *** DISPLAY BOARD
 310 PRINT "********************"
-320 MAT PRINT B$;
+320 MAT PRINT B$
 330 PRINT "********************"
 340 PRINT
 350 INPUT "CONTINUE", A$
