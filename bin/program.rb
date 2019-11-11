@@ -394,6 +394,7 @@ class Program
   def cmd_new
     @lines = {}
     @errors = check_program
+    @console_io.newline
   end
 
   def list(args, list_tokens)
@@ -403,8 +404,10 @@ class Program
       line_numbers = line_number_range.line_numbers
       list_lines_errors(line_numbers, list_tokens)
       @errors.each { |error| @console_io.print_line(error) }
+      @console_io.newline
     else
       @console_io.print_line('No program loaded')
+      @console_io.newline
     end
   end
 
@@ -414,8 +417,10 @@ class Program
     if !@lines.empty?
       line_numbers = line_number_range.line_numbers
       parse_lines_errors(line_numbers)
+      @console_io.newline
     else
       @console_io.print_line('No program loaded')
+      @console_io.newline
     end
   end
 
@@ -423,24 +428,26 @@ class Program
   def analyze
     if !@lines.empty?
       # report statistics
-      @console_io.print_line('Statistics')
+      @console_io.print_line('Statistics:')
       @console_io.newline
       lines = code_statistics
       lines.each { |line| @console_io.print_line(line) }
-     @console_io.newline
+      @console_io.newline
 
       # report complexity
-      @console_io.print_line('Complexity')
+      @console_io.print_line('Complexity:')
       @console_io.newline
       lines = code_complexity
       lines.each { |line| @console_io.print_line(line) }
       @console_io.newline
 
       # report unreachable lines
-      @console_io.print_line('Unreachable code')
+      @console_io.print_line('Unreachable code:')
       @console_io.newline
       lines = unreachable_code
       lines.each { |line| @console_io.print_line(line) }
+      @console_io.newline
+
       @console_io.newline
     else
       @console_io.print_line('No program loaded')
@@ -454,8 +461,10 @@ class Program
       line_numbers = line_number_range.line_numbers
       pretty_lines_errors(line_numbers, pretty_multiline)
       @errors.each { |error| @console_io.print_line(error) }
+      @console_io.newline
     else
       @console_io.print_line('No program loaded')
+      @console_io.newline
     end
   end
 
@@ -477,6 +486,7 @@ class Program
     lines << 'Number of lines: ' + @lines.size.to_s
     lines << 'Number of valid statements: ' + number_valid_statements.to_s
     lines << 'Number of comments: ' + number_comments.to_s
+    lines << 'Number of executable statements: ' + number_exec_statements.to_s
   end
 
   def number_valid_statements
@@ -484,6 +494,15 @@ class Program
     @lines.each do |line_number, line|
       statements = line.statements
       statements.each { |statement| num += 1 if statement.valid }
+    end
+    num
+  end
+
+  def number_exec_statements
+    num = 0
+    @lines.each do |line_number, line|
+      statements = line.statements
+      statements.each { |statement| num += 1 if statement.executable }
     end
     num
   end
@@ -592,7 +611,7 @@ class Program
       statements = @lines[line_number].statements
       statement = statements[index]
       lines << "#{line_number_idx}:#{statement.pretty}" if
-        statement.executable? && !reachable[line_number_idx]
+        statement.executable && !reachable[line_number_idx]
     end
 
     lines << 'All executable lines are reachable.' if lines.empty?
@@ -1005,27 +1024,27 @@ class Program
 
     nums_list = numeric_refs
     numerics = make_summary(nums_list)
-    print_numeric_refs('Numeric constants', numerics)
+    print_numeric_refs('Numeric constants:', numerics)
 
     strs_list = text_refs
     strings = make_summary(strs_list)
-    print_object_refs('String constants', strings)
+    print_object_refs('String constants:', strings)
 
     funcs_list = function_refs
     functions = make_summary(funcs_list)
-    print_object_refs('Functions', functions)
+    print_object_refs('Functions:', functions)
 
     udfs_list = user_function_refs
     userfuncs = make_summary(udfs_list)
-    print_object_refs('User-defined functions', userfuncs)
+    print_object_refs('User-defined functions:', userfuncs)
 
     vars_list = variables_refs
     variables = make_summary(vars_list)
-    print_object_refs('Variables', variables)
+    print_object_refs('Variables:', variables)
 
     lines_list = linenums_refs
     linenums = make_summary(lines_list)
-    print_object_refs('Line numbers', linenums)
+    print_object_refs('Line numbers:', linenums)
   end
 
   private

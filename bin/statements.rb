@@ -223,6 +223,7 @@ class AbstractStatement
   attr_reader :tokens
   attr_accessor :part_of_user_function
   attr_reader :valid
+  attr_reader :executable
   attr_reader :comment
   attr_reader :numerics
   attr_reader :strings
@@ -269,10 +270,6 @@ class AbstractStatement
   end
 
   public
-
-  def executable?
-    @executable
-  end
 
   def pretty
     list = [AbstractToken.pretty_tokens(@keywords, @tokens)]
