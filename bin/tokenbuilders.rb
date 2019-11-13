@@ -363,7 +363,7 @@ class VariableTokenBuilder
   def initialize(long_names)
     @long_names = long_names
   end
-  
+
   def try(text)
     candidate = ''
     if !text.empty? && text[0] != ' '

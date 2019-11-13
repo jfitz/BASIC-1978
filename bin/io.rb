@@ -98,7 +98,7 @@ class ConsoleIo
     raise(BASICRuntimeError, 'End of file') if ascii_text.empty?
 
     print(ascii_text)
-    
+
     ascii_text
   end
 
@@ -334,7 +334,8 @@ class FileHandler
       end
       @mode = mode
     else
-      raise(BASICRuntimeError, 'Inconsistent file operation') unless @mode == mode
+      raise(BASICRuntimeError, 'Inconsistent file operation') unless
+        @mode == mode
     end
   end
 

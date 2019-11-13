@@ -41,7 +41,7 @@ class UnaryOperator < AbstractElement
   def binary?
     false
   end
-  
+
   def pound?
     @op == '#'
   end
@@ -273,7 +273,7 @@ class BinaryOperator < AbstractElement
   def pound?
     @op == '#'
   end
-  
+
   def evaluate(interpreter, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
 
@@ -281,7 +281,7 @@ class BinaryOperator < AbstractElement
     x = stack.pop
 
     base = interpreter.base
-    
+
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
     elsif x.matrix? && y.scalar?
@@ -297,7 +297,9 @@ class BinaryOperator < AbstractElement
     elsif x.compatible?(y)
       op_scalar_scalar(x, y)
     else
-      message = "Type mismatch (#{x.content_type}/#{y.content_type}) in operator #{@op}"
+      message =
+        "Type mismatch (#{x.content_type}/#{y.content_type}) in operator #{@op}"
+
       raise(BASICExpressionError, message)
     end
   end
@@ -541,7 +543,10 @@ class BinaryOperator < AbstractElement
     # verify dimensions match
     a_dims = a.dimensions
     b_dims = b.dimensions
-    raise(BASICExpressionError, 'Matrix dimensions do not match') if a_dims != b_dims
+
+    raise(BASICExpressionError, 'Matrix dimensions do not match') if
+      a_dims != b_dims
+
     values = add_matrix_matrix_1(a, b) if a_dims.size == 1
     values = add_matrix_matrix_2(a, b) if a_dims.size == 2
     Matrix.new(a_dims, values)
@@ -584,7 +589,10 @@ class BinaryOperator < AbstractElement
     # verify dimensions match
     a_dims = a.dimensions
     b_dims = b.dimensions
-    raise(BASICExpressionError, 'Matrix dimensions do not match') if a_dims != b_dims
+
+    raise(BASICExpressionError, 'Matrix dimensions do not match') if
+      a_dims != b_dims
+
     values = subtract_matrix_matrix_1(a, b) if a_dims.size == 1
     values = subtract_matrix_matrix_2(a, b) if a_dims.size == 2
     Matrix.new(a_dims, values)
@@ -685,9 +693,11 @@ class BinaryOperator < AbstractElement
   def multiply_matrix_matrix_2_2(a, b)
     a_dims = a.dimensions
     b_dims = b.dimensions
+
     # number of columns in a must match number of rows in b
     raise(BASICExpressionError, 'Matrix dimensions do not match') if
       a_dims[1] != b_dims[0]
+
     r_dims = [a_dims[0], b_dims[1]]
     values = multiply_matrix_matrix_work(a, b)
     Matrix.new(r_dims, values)
@@ -697,9 +707,11 @@ class BinaryOperator < AbstractElement
     a_dims = a.dimensions
     new_b = array_to_vertical(b)
     new_b_dims = new_b.dimensions
+
     # number of columns in a must match number of rows in b
     raise(BASICExpressionError, 'Matrix dimensions do not match') if
       a_dims[1] != new_b_dims[0]
+
     r_dims = [a_dims[0], new_b_dims[1]]
     values = multiply_matrix_matrix_work(a, new_b)
     m = Matrix.new(r_dims, values)
@@ -710,9 +722,11 @@ class BinaryOperator < AbstractElement
     new_a = array_to_horizontal(a)
     new_a_dims = new_a.dimensions
     b_dims = b.dimensions
+
     # number of columns in a must match number of rows in b
     raise(BASICExpressionError, 'Matrix dimensions do not match') if
       new_a_dims[1] != b_dims[0]
+
     r_dims = [new_a_dims[0], b_dims[1]]
     values = multiply_matrix_matrix_work(new_a, b)
     m = Matrix.new(r_dims, values)
@@ -728,7 +742,8 @@ class BinaryOperator < AbstractElement
     elsif dim_counts == [2, 2]
       multiply_matrix_matrix_2_2(a, b)
     else
-      raise(BASICExpressionError, 'Matrix multiplication must have two matrices')
+      raise(BASICExpressionError,
+            'Matrix multiplication must have two matrices')
     end
   end
 

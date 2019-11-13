@@ -84,7 +84,7 @@ class Interpreter
     @resume_stack = []
     @fornext_stack = []
     @running = false
-    @start_time = Time.now()
+    @start_time = Time.now
   end
 
   private
@@ -110,7 +110,8 @@ class Interpreter
       ListTokenBuilder.new(FunctionFactory.function_names, FunctionToken)
 
     tokenbuilders <<
-      ListTokenBuilder.new(FunctionFactory.user_function_names, UserFunctionToken)
+      ListTokenBuilder.new(FunctionFactory.user_function_names,
+                           UserFunctionToken)
 
     tokenbuilders << TextTokenBuilder.new(@quotes)
     tokenbuilders << NumberTokenBuilder.new
@@ -146,7 +147,7 @@ class Interpreter
 
     @previous_stack = []
     clear_previous_lines
-    @start_time = Time.now()
+    @start_time = Time.now
     run_program
   end
 
@@ -247,7 +248,7 @@ class Interpreter
       # set next line index from parameter
       @resume_stack.pop
       @next_line_index = LineNumberIndex.new(line_number, 0, 0)
-    end 
+    end
   end
 
   def print_errors(line_number, statement)
@@ -367,7 +368,8 @@ class Interpreter
     current_line_number = @current_line_index.number
     line = @program.lines[current_line_number]
     @console_io.newline_when_needed
-    @console_io.print_line(current_line_number.to_s + ': ' + line.pretty(false).join(''))
+    text = current_line_number.to_s + ': ' + line.pretty(false).join('')
+    @console_io.print_line(text)
     @step_mode = false
     @debug_done = false
 
@@ -405,8 +407,8 @@ class Interpreter
     line_statement = @current_line_index.statement
     line_index = @current_line_index.index
 
-    if line_index == 0 &&
-       line_statement == 0 &&
+    if line_index.zero? &&
+       line_statement.zero? &&
        (@step_mode || @breakpoints.key?(line_number))
       debug_shell
     end
@@ -556,8 +558,6 @@ class Interpreter
 
   # returns an Array of values
   def evaluate(parsed_expressions)
-    trace = $options['trace'].value
-
     result_values = []
     parsed_expressions.each do |parsed_expression|
       stack = []
@@ -632,13 +632,13 @@ class Interpreter
     @randomizer = Random.new if $options['respect_randomize'].value
   end
 
-  def error_line(item)
+  def error_line(_)
     raise(BASICRuntimeError, 'ERL() invoked without error') if
       @resume_stack.empty?
 
     line_index = @resume_stack[-1]
     line_number = line_index.number
-    return NumericConstant.new(line_number.to_i)
+    NumericConstant.new(line_number.to_i)
   end
 
   def set_dimensions(variable, subscripts)
@@ -742,7 +742,6 @@ class Interpreter
     if length > 0
       names_and_values = @user_var_values[-1]
       value = names_and_values[variable]
-      line = nil
     end
 
     # then look in general table
@@ -907,7 +906,8 @@ class Interpreter
     raise(BASICRuntimeError, 'RETURN without GOSUB') if @return_stack.empty?
 
     # remove all lines from the subroutine in the 'visited' list
-    while !@previous_line_indexes.empty? && @previous_line_indexes[-1] != @return_stack[-1]
+    while !@previous_line_indexes.empty? &&
+          @previous_line_indexes[-1] != @return_stack[-1]
       @previous_line_indexes.pop
     end
 
@@ -941,7 +941,8 @@ class Interpreter
   end
 
   def top_fornext
-    raise(BASICRuntimeError, 'Implied NEXT without FOR') if @fornext_stack.empty?
+    raise(BASICRuntimeError, 'Implied NEXT without FOR') if
+      @fornext_stack.empty?
 
     @fornext_stack[-1]
   end

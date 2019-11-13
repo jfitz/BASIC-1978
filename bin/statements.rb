@@ -286,7 +286,7 @@ class AbstractStatement
     list = [AbstractToken.pretty_tokens(@keywords, @core_tokens)]
     list.join(' ')
   end
-  
+
   def post_trace(index)
     index -= 1
     @modifiers[index].post_trace
@@ -373,7 +373,8 @@ class AbstractStatement
   def profile(show_timing)
     text = AbstractToken.pretty_tokens(@keywords, @tokens)
     if show_timing
-      ' (' + @profile_time.round(3).to_s + '/' + @profile_count.to_s + ')' + text
+      timing = @profile_time.round(3).to_s
+      ' (' + timing + '/' + @profile_count.to_s + ')' + text
     else
       ' (' + @profile_count.to_s + ')' + text
     end
@@ -403,9 +404,13 @@ class AbstractStatement
     end
 
     index = current_line_index.index
-    trace_out.print_out current_line_index.to_s + ':' + pre_trace(index) if index < 0
-    trace_out.print_out current_line_index.to_s + ':' + core_trace if index.zero?
-    trace_out.print_out current_line_index.to_s + ':' + post_trace(index) if index > 0
+
+    text = ''
+    text = current_line_index.to_s + ':' + pre_trace(index) if index < 0
+    text = current_line_index.to_s + ':' + core_trace if index.zero?
+    text = current_line_index.to_s + ':' + post_trace(index) if index > 0
+
+    trace_out.print_out(text)
     trace_out.newline
   end
 
@@ -464,7 +469,7 @@ class AbstractStatement
       @core_tokens = tokens_lists.flatten
 
       @any_if_modifiers = true
-      
+
       return true
     end
 
@@ -541,7 +546,7 @@ class AbstractStatement
         result &= value.size == control[0] if control.size == 1
         result &= value.size >= control[0] if
           control.size == 2 && control[1] == '>='
-        
+
       elsif control.class.to_s == 'Array' &&
             value.class.to_s == 'KeywordToken'
 
@@ -1275,10 +1280,13 @@ class ForStatement < AbstractStatement
         @numerics = @start.numerics + @end.numerics + @step.numerics
         @strings = @start.strings + @end.strings + @step.strings
         control = XrefEntry.new(@control.to_s, 0, true)
-        @variables = [control] + @start.variables + @end.variables + @step.variables
+
+        @variables =
+          [control] + @start.variables + @end.variables + @step.variables
+
         @functions = @start.functions + @end.functions + @step.functions
         @userfuncs = @start.userfuncs + @end.userfuncs + @step.userfuncs
-     rescue BASICExpressionError => e
+      rescue BASICExpressionError => e
         @errors << e.message
       end
     else
@@ -1511,7 +1519,7 @@ class AbstractIfStatement < AbstractStatement
         @errors << 'Syntax Error: ' + e.message
       end
     end
-    
+
     @is_if_no_else = @else_dest.nil? && @else_stmt.nil?
   end
 
@@ -1704,7 +1712,7 @@ class AbstractIfStatement < AbstractStatement
 
   def gotos
     destinations = []
-    
+
     destinations << @destination unless @destination.nil?
     destinations += @statement.gotos unless @statement.nil?
     destinations << @else_dest unless @else_dest.nil?
@@ -1717,7 +1725,9 @@ class AbstractIfStatement < AbstractStatement
     retval = true
 
     if @destination.nil? && @statement.nil?
-      console_io.print_line("Invalid or missing line number in line #{line_number}")
+      console_io.print_line(
+        "Invalid or missing line number in line #{line_number}"
+      )
     end
 
     unless @destination.nil? || program.line_number?(@destination)
@@ -1804,7 +1814,7 @@ class AbstractIfStatement < AbstractStatement
   end
 
   private
-  
+
   def parse_target(tokens)
     destination = nil
     statement = nil
@@ -2294,7 +2304,10 @@ end
 class OnErrorStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('ON'), KeywordToken.new('ERROR'), KeywordToken.new('GOTO')]
+      [KeywordToken.new('ON'),
+       KeywordToken.new('ERROR'),
+       KeywordToken.new('GOTO')
+      ]
     ]
   end
 
@@ -2323,7 +2336,7 @@ class OnErrorStatement < AbstractStatement
   end
 
   def dump
-    lines = [@destination.dump]
+    [@destination.dump]
   end
 
   def gotos
@@ -2469,7 +2482,7 @@ class OnStatement < AbstractStatement
     raise(BASICRuntimeError, 'Line number not found') if index.nil?
 
     interpreter.push_return(interpreter.next_line_index) if @gosub
-    
+
     destination = LineNumberIndex.new(line_number, 0, index)
     interpreter.next_line_index = destination
   end
@@ -2490,13 +2503,12 @@ class OnStatement < AbstractStatement
       i += 1
     end
 
-
     new_destinations.each do |destination|
       @tokens[index + 1] = NumericConstantToken.new(destination.line_number)
 
       index += 2
     end
-    
+
     @destinations = new_destinations
     @linenums = @destinations
   end
@@ -2537,9 +2549,16 @@ class OpenStatement < AbstractStatement
       @filenum_expression = ValueExpression.new(tokens_lists[-1], :scalar)
       @numerics = @filename_expression.numerics + @filenum_expression.numerics
       @strings = @filename_expression.strings + @filenum_expression.strings
-      @variables = @filename_expression.variables + @filenum_expression.variables
-      @functions = @filename_expression.functions + @filenum_expression.functions
-      @userfuncs = @filename_expression.userfuncs + @filenum_expression.userfuncs
+
+      @variables =
+        @filename_expression.variables + @filenum_expression.variables
+
+      @functions =
+        @filename_expression.functions + @filenum_expression.functions
+
+      @userfuncs =
+        @filename_expression.userfuncs + @filenum_expression.userfuncs
+
       @mode = :read
     elsif check_template(tokens_lists, template_output_as) ||
           check_template(tokens_lists, template_output_as_file)
@@ -2547,9 +2566,16 @@ class OpenStatement < AbstractStatement
       @filenum_expression = ValueExpression.new(tokens_lists[-1], :scalar)
       @numerics = @filename_expression.numerics + @filenum_expression.numerics
       @strings = @filename_expression.strings + @filenum_expression.strings
-      @variables = @filename_expression.variables + @filenum_expression.variables
-      @functions = @filename_expression.functions + @filenum_expression.functions
-      @userfuncs = @filename_expression.userfuncs + @filenum_expression.userfuncs
+
+      @variables =
+        @filename_expression.variables + @filenum_expression.variables
+
+      @functions =
+        @filename_expression.functions + @filenum_expression.functions
+
+      @userfuncs =
+        @filename_expression.userfuncs + @filenum_expression.userfuncs
+
       @mode = :print
     elsif check_template(tokens_lists, template_append_as) ||
           check_template(tokens_lists, template_append_as_file)
@@ -2557,9 +2583,16 @@ class OpenStatement < AbstractStatement
       @filenum_expression = ValueExpression.new(tokens_lists[-1], :scalar)
       @numerics = @filename_expression.numerics + @filenum_expression.numerics
       @strings = @filename_expression.strings + @filenum_expression.strings
-      @variables = @filename_expression.variables + @filenum_expression.variables
-      @functions = @filename_expression.functions + @filenum_expression.functions
-      @userfuncs = @filename_expression.userfuncs + @filenum_expression.userfuncs
+
+      @variables =
+        @filename_expression.variables + @filenum_expression.variables
+
+      @functions =
+        @filename_expression.functions + @filenum_expression.functions
+
+      @userfuncs =
+        @filename_expression.userfuncs + @filenum_expression.userfuncs
+
       @mode = :append
     else
       @errors << 'Syntax error'
@@ -2606,16 +2639,16 @@ class OptionStatement < AbstractStatement
 
   def self.extra_keywords
     %w(
-    ASC_ALLOW_ALL
-    BACK_TAB BASE
-    CHR_ALLOW_ALL
-    DEFAULT_PROMPT DETECT_INFINITE_LOOP
-    ECHO FIELD_SEP
-    IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
-    INT_FLOOR LOCK_FORNEXT NEWLINE_SPEED
-    PRECISION PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
-    QMARK_AFTER_PROMPT REQUIRE_INITIALIZED
-    SEMICOLON_ZONE_WIDTH TRACE ZONE_WIDTH
+      ASC_ALLOW_ALL
+      BACK_TAB BASE
+      CHR_ALLOW_ALL
+      DEFAULT_PROMPT DETECT_INFINITE_LOOP
+      ECHO FIELD_SEP
+      IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
+      INT_FLOOR LOCK_FORNEXT NEWLINE_SPEED
+      PRECISION PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
+      QMARK_AFTER_PROMPT REQUIRE_INITIALIZED
+      SEMICOLON_ZONE_WIDTH TRACE ZONE_WIDTH
     )
   end
 
@@ -2625,7 +2658,6 @@ class OptionStatement < AbstractStatement
     # omit HEADING and TIMING as they are not used in the interpreter
     # omit PRETTY_MULTILINE too
     template = [OptionStatement.extra_keywords, [1, '>=']]
-    float = { :type => :float, :min => 0 }
 
     if check_template(tokens_lists, template)
       @key = tokens_lists[0].to_s.downcase
@@ -2649,8 +2681,6 @@ class OptionStatement < AbstractStatement
   end
 
   def execute(interpreter)
-    console_io = interpreter.console_io
-
     values = @expression.evaluate(interpreter)
     value0 = values[0]
 
@@ -2694,14 +2724,15 @@ class AbstractPrintStatement < AbstractStatement
     @userfuncs = @file_tokens.userfuncs unless @file_fokens.nil?
     @print_items.each { |item| @userfuncs += item.userfuncs }
   end
- 
+
   include FileFunctions
 
   def any_implied_carriage(print_items)
     any_implied = false
 
     unless print_items.nil?
-      # check all tokens except the last one, which may be an implied carriage control
+      # check all tokens except the last one,
+      # which may be an implied carriage control
       print_items.each do |item|
         any_implied = true if
           item.class.to_s == 'CarriageControl' && item.to_s == ' '
@@ -2774,7 +2805,8 @@ class PrintStatement < AbstractPrintStatement
           print_items << ValueExpression.new(tokens_list, :scalar)
         rescue BASICExpressionError
           line_text = tokens_list.map(&:to_s).join
-          @errors << 'Syntax error: "' + line_text + '" is not a value or operator'
+          @errors <<
+            'Syntax error: "' + line_text + '" is not a value or operator'
         end
       elsif tokens_list.separator?
         add_needed_value(print_items, :scalar)
@@ -2832,7 +2864,7 @@ class PrintUsingStatement < AbstractPrintStatement
 
       if format.wants_item
         # skip all of the separators
-        item = print_items.shift while
+        print_items.shift while
           !print_items.empty? && print_items[0].carriage_control?
 
         raise(BASICRuntimeError, 'Too few print items for format') if
@@ -2850,7 +2882,7 @@ class PrintUsingStatement < AbstractPrintStatement
     if !print_items.empty? && !print_items[0].printable?
       print_items.unshift(ValueExpression.new([], :scalar))
     end
-    
+
     i = 0
 
     print_items.each do |item|
@@ -2922,7 +2954,8 @@ class PrintUsingStatement < AbstractPrintStatement
           print_items << ValueExpression.new(tokens_list, :scalar)
         rescue BASICExpressionError
           line_text = tokens_list.map(&:to_s).join
-          @errors << 'Syntax error: "' + line_text + '" is not a value or operator'
+          @errors <<
+            'Syntax error: "' + line_text + '" is not a value or operator'
         end
       elsif tokens_list.separator?
         add_needed_value(print_items, :scalar)
@@ -3136,7 +3169,7 @@ class ResumeStatement < AbstractStatement
   end
 
   def execute_core(interpreter)
-    ds = interpreter.resume(@target)
+    interpreter.resume(@target)
   end
 end
 
@@ -3282,7 +3315,8 @@ class AbstractWriteStatement < AbstractStatement
     any_implied = false
 
     unless print_items.nil?
-      # check all tokens except the last one, which may be an implied carriage control
+      # check all tokens except the last one,
+      # which may be an implied carriage control
       print_items.each do |item|
         any_implied = true if
           item.class.to_s == 'CarriageControl' && item.to_s == ' '
@@ -3316,8 +3350,6 @@ class WriteStatement < AbstractWriteStatement
     else
       @errors << 'Syntax error'
     end
-
-    ## @errors << 'Delimiter required' if any_implied_carriage(@print_items)
   end
 
   def execute_core(interpreter)
@@ -3352,7 +3384,9 @@ class WriteStatement < AbstractWriteStatement
           print_items << ValueExpression.new(tokens_list, :scalar)
         rescue BASICExpressionError
           line_text = tokens_list.map(&:to_s).join
-          @errors << 'Syntax error: "' + line_text + '" is not a value or operator'
+
+          @errors <<
+            'Syntax error: "' + line_text + '" is not a value or operator'
         end
       elsif tokens_list.separator?
         print_items << CarriageControl.new(tokens_list.to_s)

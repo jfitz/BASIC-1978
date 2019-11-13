@@ -1,3 +1,4 @@
+
 # Contain line numbers
 class LineNumber
   attr_reader :line_number
@@ -71,8 +72,8 @@ class LineNumberRange
   attr_reader :list
 
   def initialize(start, endline, program_line_numbers)
-     @list = []
-     program_line_numbers.each do |line_number|
+    @list = []
+    program_line_numbers.each do |line_number|
       @list << line_number if line_number >= start && line_number <= endline
     end
   end
@@ -134,11 +135,15 @@ class LineNumberIndex
   end
 
   def eql?(other)
-    @number == other.number && @statement == other.statement && @index == other.index
+    @number == other.number &&
+      @statement == other.statement &&
+      @index == other.index
   end
 
   def ==(other)
-    @number == other.number && @statement == other.statement && @index == other.index
+    @number == other.number &&
+      @statement == other.statement &&
+      @index == other.index
   end
 
   def hash
@@ -404,11 +409,11 @@ class Program
       line_numbers = line_number_range.line_numbers
       list_lines_errors(line_numbers, list_tokens)
       @errors.each { |error| @console_io.print_line(error) }
-      @console_io.newline
     else
       @console_io.print_line('No program loaded')
-      @console_io.newline
     end
+
+    @console_io.newline
   end
 
   def parse(args)
@@ -417,11 +422,11 @@ class Program
     if !@lines.empty?
       line_numbers = line_number_range.line_numbers
       parse_lines_errors(line_numbers)
-      @console_io.newline
     else
       @console_io.print_line('No program loaded')
-      @console_io.newline
     end
+
+    @console_io.newline
   end
 
   # report statistics, complexity, and the lines which are unreachable
@@ -447,11 +452,11 @@ class Program
       lines = unreachable_code
       lines.each { |line| @console_io.print_line(line) }
       @console_io.newline
-
-      @console_io.newline
     else
       @console_io.print_line('No program loaded')
     end
+
+    @console_io.newline
   end
 
   def pretty(args, pretty_multiline)
@@ -461,11 +466,11 @@ class Program
       line_numbers = line_number_range.line_numbers
       pretty_lines_errors(line_numbers, pretty_multiline)
       @errors.each { |error| @console_io.print_line(error) }
-      @console_io.newline
     else
       @console_io.print_line('No program loaded')
-      @console_io.newline
     end
+
+    @console_io.newline
   end
 
   private
@@ -491,7 +496,7 @@ class Program
 
   def number_valid_statements
     num = 0
-    @lines.each do |line_number, line|
+    @lines.each do |_, line|
       statements = line.statements
       statements.each { |statement| num += 1 if statement.valid }
     end
@@ -500,7 +505,7 @@ class Program
 
   def number_exec_statements
     num = 0
-    @lines.each do |line_number, line|
+    @lines.each do |_, line|
       statements = line.statements
       statements.each { |statement| num += 1 if statement.executable }
     end
@@ -509,13 +514,13 @@ class Program
 
   def number_comments
     num = 0
-    @lines.each do |line_number, line|
+    @lines.each do |_, line|
       statements = line.statements
       statements.each { |statement| num += 1 if statement.comment }
     end
     num
   end
-  
+
   def unreachable_code
     # build list of "gotos"
     gotos = {}
@@ -546,7 +551,6 @@ class Program
             next_line_number = line_numbers[index + 1]
 
             unless next_line_number.nil?
-              line = @lines[next_line_number]
               next_line_idx = LineNumberIdx.new(next_line_number, 0)
               goto_line_idxs << next_line_idx unless next_line_idx.nil?
             end
@@ -583,7 +587,7 @@ class Program
       @lines.keys.each do |line_number|
         statements = @lines[line_number].statements
         index = 0
-        statements.each do |statement|
+        statements.each do |_|
           line_number_idx = LineNumberIdx.new(line_number, index)
 
           # only reachable lines can reach other lines
@@ -636,7 +640,8 @@ class Program
       statements = line.statements
       statements.each do |statement|
         okay &=
-          statement.preexecute_a_statement(line_number, interpreter, @console_io)
+          statement.preexecute_a_statement(line_number,
+                                           interpreter, @console_io)
       end
     end
 
@@ -1220,13 +1225,10 @@ class Program
 
     statements = line.statements
     statement_index = current_line_idx.statement
-    statement = statements[statement_index]
 
     # find next statement within the current line
     if statement_index < statements.size - 1
       statement_index += 1
-      statement = statements[statement_index]
-      index = statement.start_index
       return LineNumberIdx.new(line_number, statement_index)
     end
 
@@ -1237,7 +1239,6 @@ class Program
     line_number = line_numbers[index + 1]
 
     unless line_number.nil?
-      line = @lines[line_number]
       return LineNumberIdx.new(line_number, 0)
     end
 
