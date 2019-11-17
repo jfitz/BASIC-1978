@@ -19,15 +19,24 @@ class UnaryOperator < AbstractElement
     @operators.keys
   end
 
+  attr_reader :content_type
+
   def initialize(text)
     super()
     @op = text.to_s
+    @content_type = :unknown
 
     raise(BASICExpressionError, "'#{text}' is not an operator") unless
       self.class.operator?(@op)
 
     @precedence = self.class.precedence(@op)
     @operator = true
+  end
+
+  def set_content_type(stack)
+    @content_type = stack[-1]
+
+    raise(BASICSyntaxError, "Bad expression") if @content_type == :unknown
   end
 
   def dump
@@ -248,14 +257,29 @@ class BinaryOperator < AbstractElement
     @operators.keys
   end
 
+  attr_reader :content_type
+
   def initialize(text)
     super()
     @op = text.to_s
+    @content_type = :unknown
 
     raise(BASICExpressionError, "'#{text}' is not an operator") unless
       self.class.operator?(@op)
     @precedence = self.class.precedence(@op)
     @operator = true
+  end
+
+  def set_content_type(stack)
+    @content_type = stack.pop
+    other = stack.pop
+
+    raise(BASICSyntaxError, "Bad expression") if @content_type == :unknown
+
+    raise(BASICSyntaxError, "Bad expression") unless
+      compatible(other, @content_type)
+
+    stack.push(@content_type)
   end
 
   def dump
@@ -310,6 +334,16 @@ class BinaryOperator < AbstractElement
 
   private
 
+  def compatible(type1, type2)
+    return true if type1 == type2
+
+    numerics = [:numeric, :integer]
+
+    return true if numerics.include?(type1) && numerics.include?(type2)
+
+    false
+  end
+  
   def matrix_matrix(x, y)
     op_table = {
       '+' => :add,

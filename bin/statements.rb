@@ -1262,7 +1262,7 @@ class ForStatement < AbstractStatement
         @step = nil
         @numerics = @start.numerics + @end.numerics
         @strings = @start.strings + @end.strings
-        control = XrefEntry.new(@control.to_s, 0, true)
+        control = XrefEntry.new(@control.to_s, nil, true)
         @variables = [control] + @start.variables + @end.variables
         @functions = @start.functions + @end.functions
         @userfuncs = @start.userfuncs + @end.userfuncs
@@ -1279,7 +1279,7 @@ class ForStatement < AbstractStatement
         @step = ValueExpression.new(tokens_lists[4], :scalar)
         @numerics = @start.numerics + @end.numerics + @step.numerics
         @strings = @start.strings + @end.strings + @step.strings
-        control = XrefEntry.new(@control.to_s, 0, true)
+        control = XrefEntry.new(@control.to_s, nil, true)
 
         @variables =
           [control] + @start.variables + @end.variables + @step.variables
@@ -2232,7 +2232,7 @@ class NextStatement < AbstractStatement
           variable_name = VariableName.new(tokens[0])
           control = Variable.new(variable_name, :scalar, [])
           @controls << control
-          controlx = XrefEntry.new(control.to_s, 0, false)
+          controlx = XrefEntry.new(control.to_s, nil, false)
           @variables += [controlx]
         else
           @errors << "Invalid control variable #{tokens[0]}"

@@ -111,14 +111,14 @@ class ForModifier
     if @step.nil?
       @numerics = @start.numerics + @end.numerics
       @strings = @start.strings + @end.strings
-      control = XrefEntry.new(@control.to_s, 0, true)
+      control = XrefEntry.new(@control.to_s, nil, true)
       @variables = [control] + @start.variables + @end.variables
       @functions = @start.functions + @end.functions
       @userfuncs = @start.userfuncs + @end.userfuncs
     else
       @numerics = @start.numerics + @end.numerics + @step.numerics
       @strings = @start.strings + @end.strings + @step.strings
-      control = XrefEntry.new(@control.to_s, 0, true)
+      control = XrefEntry.new(@control.to_s, nil, true)
 
       @variables =
         [control] + @start.variables + @end.variables + @step.variables
