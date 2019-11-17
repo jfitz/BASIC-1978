@@ -36,7 +36,7 @@ class UnaryOperator < AbstractElement
   def set_content_type(stack)
     @content_type = stack[-1]
 
-    raise(BASICSyntaxError, "Bad expression") if @content_type == :unknown
+    raise(BASICExpressionError, "Bad expression") if @content_type == :unknown
   end
 
   def dump
@@ -274,9 +274,9 @@ class BinaryOperator < AbstractElement
     @content_type = stack.pop
     other = stack.pop
 
-    raise(BASICSyntaxError, "Bad expression") if @content_type == :unknown
+    raise(BASICExpressionError, "Bad expression") if @content_type == :unknown
 
-    raise(BASICSyntaxError, "Bad expression") unless
+    raise(BASICExpressionError, "Bad expression") unless
       compatible(other, @content_type)
 
     stack.push(@content_type)
