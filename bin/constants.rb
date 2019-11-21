@@ -133,6 +133,8 @@ class AbstractElement
     @boolean_constant
   end
 
+  def pop_stack(stack) ; end
+
   protected
 
   def make_coord(c)
@@ -1329,6 +1331,10 @@ class CarriageControl
   end
 
   def variables
+    []
+  end
+
+  def operators
     []
   end
 

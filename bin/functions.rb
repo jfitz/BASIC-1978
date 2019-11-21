@@ -9,6 +9,8 @@ class AbstractFunction < AbstractElement
     @name = text
     @function = true
     @content_type = :numeric
+    @content_type = :string if @name.to_s[-1] == '$'
+    @content_type = :integer if @name.to_s[-1] == '%'
     @valref = :value
     @operand = true
     @precedence = 7
@@ -35,8 +37,7 @@ class AbstractFunction < AbstractElement
   def default_args(interpreter)
     arg = interpreter.default_args(@name)
 
-    raise(BASICRuntimeError, "#{@name} requires arguments") if
-      arg.nil?
+    raise(BASICRuntimeError, "#{@name} requires arguments") if arg.nil?
 
     arg
   end
@@ -162,10 +163,6 @@ class UserFunction < AbstractScalarFunction
 
   def to_s
     @name.to_s
-  end
-
-  def content_type
-    :numeric
   end
 
   def compatible?(value)

@@ -4,6 +4,7 @@ class IfModifier
   attr_reader :numerics
   attr_reader :strings
   attr_reader :variables
+  attr_reader :operators
   attr_reader :functions
   attr_reader :userfuncs
 
@@ -13,6 +14,7 @@ class IfModifier
     @numerics = @expression.numerics
     @strings = @expression.strings
     @variables = @expression.variables
+    @operators = @expression.operators
     @functions = @expression.functions
     @userfuncs = @expression.userfuncs
   end
@@ -79,6 +81,7 @@ class ForModifier
   attr_reader :numerics
   attr_reader :strings
   attr_reader :variables
+  attr_reader :operators
   attr_reader :functions
   attr_reader :userfuncs
 
@@ -113,6 +116,7 @@ class ForModifier
       @strings = @start.strings + @end.strings
       control = XrefEntry.new(@control.to_s, nil, true)
       @variables = [control] + @start.variables + @end.variables
+      @operators = @start.operators + @end.operators
       @functions = @start.functions + @end.functions
       @userfuncs = @start.userfuncs + @end.userfuncs
     else
@@ -123,6 +127,7 @@ class ForModifier
       @variables =
         [control] + @start.variables + @end.variables + @step.variables
 
+      @operators = @start.operators + @end.operators + @step.operators
       @functions = @start.functions + @end.functions + @step.functions
       @userfuncs = @start.userfuncs + @end.userfuncs + @step.userfuncs
     end
