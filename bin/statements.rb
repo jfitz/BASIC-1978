@@ -233,6 +233,7 @@ class AbstractStatement
   attr_reader :userfuncs
   attr_reader :linenums
   attr_reader :autonext
+  attr_reader :mccabe
   attr_reader :is_if_no_else
 
   def self.extra_keywords
@@ -257,6 +258,7 @@ class AbstractStatement
     @userfuncs = []
     @linenums = []
     @autonext = true
+    @mccabe = 0
     @is_if_no_else = false
     @profile_count = 0
     @profile_time = 0
@@ -269,6 +271,7 @@ class AbstractStatement
     modifier_added = true
     modifier_added = make_modifier(tokens_lists) while modifier_added
     @modifiers.each { |modifier| @errors += modifier.errors }
+    @mccabe += @modifiers.size
   end
 
   public
@@ -1280,6 +1283,7 @@ class ForStatement < AbstractStatement
         @operators = @start.operators + @end.operators
         @functions = @start.functions + @end.functions
         @userfuncs = @start.userfuncs + @end.userfuncs
+        @mccabe += 1
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -1301,6 +1305,7 @@ class ForStatement < AbstractStatement
         @operators = @start.operators + @end.operators + @step.operators
         @functions = @start.functions + @end.functions + @step.functions
         @userfuncs = @start.userfuncs + @end.userfuncs + @step.userfuncs
+        @mccabe += 1
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -1536,6 +1541,10 @@ class AbstractIfStatement < AbstractStatement
         @errors << 'Syntax Error: ' + e.message
       end
     end
+
+    @mccabe += 1
+    @mccabe += @statement.mccabe unless @statement.nil?
+    @mccabe += @else_stmt.mccabe unless @else_stmt.nil?
 
     @is_if_no_else = @else_dest.nil? && @else_stmt.nil?
   end
@@ -2010,6 +2019,7 @@ class InputStatement < AbstractInputStatement
       end
 
       make_references
+      @mccabe += @input_items.size
     else
       @errors << 'Syntax error'
     end
@@ -2180,6 +2190,7 @@ class LineInputStatement < AbstractInputStatement
       end
 
       make_references
+      @mccabe += @modifiers.size
     else
       @errors << 'Syntax error'
     end
@@ -2359,6 +2370,8 @@ class OnErrorStatement < AbstractStatement
       else
         @errors << "Invalid line number #{destination}"
       end
+
+      @mccabe += 1
     else
       @errors << 'Syntax error'
     end
@@ -2456,6 +2469,7 @@ class OnStatement < AbstractStatement
       end
 
       @linenums = @destinations
+      @mccabe += @destinations.size
     else
       @errors << 'Syntax error'
     end
@@ -3097,6 +3111,7 @@ class ReadStatement < AbstractReadStatement
       read_items = tokens_to_expressions(read_items)
       @file_tokens, @read_items = extract_file_handle(read_items)
       make_references
+      @mccabe += @read_items.size
     else
       @errors << 'Syntax error'
     end
@@ -3534,6 +3549,7 @@ class ArrReadStatement < AbstractReadStatement
       read_items = tokens_to_expressions(read_items)
       @file_tokens, @read_items = extract_file_handle(read_items)
       make_references
+      @mccabe += @read_items.size
     else
       @errors << 'Syntax error'
     end
@@ -3832,6 +3848,7 @@ class MatReadStatement < AbstractReadStatement
       read_items = tokens_to_expressions(read_items)
       @file_tokens, @read_items = extract_file_handle(read_items)
       make_references
+      @mccabe += @read_items.size
     else
       @errors << 'Syntax error'
     end
