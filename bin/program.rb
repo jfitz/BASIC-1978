@@ -762,7 +762,7 @@ class Program
     false
   end
 
-  def find_closing_next(control_variable, current_line_index)
+  def find_closing_next(control, current_line_index)
     # move to the next statement
     line_number = current_line_index.number
     line = @lines[line_number]
@@ -788,7 +788,7 @@ class Program
         # consider only core statements, not modifiers
         return LineNumberIndex.new(line_number, statement_index, 0) if
           statement.class.to_s == 'NextStatement' &&
-          statement.has_control(control_variable)
+          statement.has_control(control)
         statement_index += 1
       end
 

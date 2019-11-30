@@ -2299,8 +2299,7 @@ class NextStatement < AbstractStatement
     end
   end
 
-  def has_control(control_name)
-    control = Variable.new(control_name, :scalar, [])
+  def has_control(control)
     @controls.include?(control)
   end
 

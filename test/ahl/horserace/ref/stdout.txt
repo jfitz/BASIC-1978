@@ -28,3 +28,354 @@ LILY? 4,100
 
 1 2 3 4 5 6 7 8
 XXXXSTARTXXXX
+
+ 7 
+ 5  3 
+ 1 
+ 2 
+ 8  6  4 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+XXXXFINISHXXXX
+
+---------------------------------------------
+
+XXXXSTARTXXXX
+
+
+
+
+ 3  7 
+
+
+ 4  1  5 
+ 2 
+
+ 8  6 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+XXXXFINISHXXXX
+
+---------------------------------------------
+
+XXXXSTARTXXXX
+
+
+
+
+
+ 3 
+ 7 
+
+ 4 
+ 5 
+
+
+
+ 8  1 
+ 2 
+ 6 
+
+
+
+
+
+
+
+
+
+
+
+
+XXXXFINISHXXXX
+
+---------------------------------------------
+
+XXXXSTARTXXXX
+
+
+
+
+
+
+
+ 7 
+
+ 3 
+
+ 4 
+
+ 5 
+
+
+
+
+ 8  2 
+ 1 
+ 6 
+
+
+
+
+
+
+
+XXXXFINISHXXXX
+
+---------------------------------------------
+
+XXXXSTARTXXXX
+
+
+
+
+
+
+
+
+
+
+
+ 3 
+
+ 7 
+
+ 5 
+ 4 
+
+
+
+
+ 8 
+
+ 6  2 
+
+
+ 1 
+
+XXXXFINISHXXXX
+
+---------------------------------------------
+
+XXXXSTARTXXXX
+
+
+
+
+
+
+
+
+
+
+
+
+ 3 
+
+
+
+ 7 
+ 5 
+
+
+
+ 4 
+ 8 
+
+
+ 6  2 
+XXXXFINISHXXXX
+
+---------------------------------------------
+
+THE RACE RESULTS ARE:
+
+ 1 PLACE HORSE NO. 1            AT  5.4 :1
+
+ 2 PLACE HORSE NO. 2            AT  3.375 :1
+
+ 3 PLACE HORSE NO. 6            AT  27 :1
+
+ 4 PLACE HORSE NO. 8            AT  6.75 :1
+
+ 5 PLACE HORSE NO. 4            AT  6.75 :1
+
+ 6 PLACE HORSE NO. 5            AT  13.5 :1
+
+ 7 PLACE HORSE NO. 7            AT  13.5 :1
+
+ 8 PLACE HORSE NO. 3            AT  27 :1
+DO YOU WANT TO BET ON THE NEXT RACE ?
+YES OR NO? NO
+STOP in line 1380
+
+100.0 (1) PRINT TAB(31); "HORSERACE"
+110.0 (1) PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+120.0 (1) PRINT
+120.1 (1) PRINT
+120.2 (1) PRINT
+210.0 (1) DIM S(8)
+220.0 (1) PRINT "WELCOME TO SOUTH PORTLAND HIGH RACETRACK"
+230.0 (1) PRINT "                      ...OWNED BY LAURIE CHEVALIER"
+240.0 (1) PRINT "DO YOU WANT DIRECTIONS";
+250.0 (1) INPUT X$
+260.0 (1) IF X$ = "NO" THEN 320
+270.0 (0) PRINT "UP TO 10 MAY PLAY.  A TABLE OF ODDS WILL BE PRINTED.  YOU"
+280.0 (0) PRINT "MAY BET ANY + AMOUNT UNDER 100000 ON ONE HORSE."
+290.0 (0) PRINT "DURING THE RACE, A HORSE WILL BE SHOWN BY ITS"
+300.0 (0) PRINT "NUMBER.  THE HORSES RACE DOWN THE PAPER!"
+310.0 (0) PRINT
+320.0 (1) PRINT "HOW MANY WANT TO BET";
+330.0 (1) INPUT C
+340.0 (1) PRINT "WHEN ? APPEARS,TYPE NAME"
+350.0 (1) FOR A = 1 TO C
+360.0 (2) INPUT W$(A)
+370.0 (2) NEXT A
+380.0 (1) PRINT
+390.0 (1) PRINT "HORSE",, "NUMBER", "ODDS"
+400.0 (1) PRINT
+410.0 (1) FOR I = 1 TO 8
+410.1 (8) S(I) = 0
+410.2 (8) NEXT I
+420.0 (1) LET R = 0
+430.0 (1) FOR A = 1 TO 8
+440.0 (8) LET D(A) = INT(10 * RND(1) + 1)
+450.0 (8) NEXT A
+460.0 (1) FOR A = 1 TO 8
+470.0 (8) LET R = R + D(A)
+480.0 (8) NEXT A
+490.0 (1) LET V$(1) = "JOE MAW"
+500.0 (1) LET V$(2) = "L.B.J."
+510.0 (1) LET V$(3) = "MR.WASHBURN"
+520.0 (1) LET V$(4) = "MISS KAREN"
+530.0 (1) LET V$(5) = "JOLLY"
+540.0 (1) LET V$(6) = "HORSE"
+550.0 (1) LET V$(7) = "JELLY DO NOT"
+560.0 (1) LET V$(8) = "MIDNIGHT"
+570.0 (1) FOR N = 1 TO 8
+580.0 (8) PRINT V$(N),, N, R / D(N); ":1"
+590.0 (8) NEXT N
+600.0 (1) PRINT "--------------------------------------------------"
+610.0 (1) PRINT "PLACE YOUR BETS...HORSE # THEN AMOUNT"
+620.0 (1) FOR J = 1 TO C
+630.0 (2) PRINT W$(J);
+640.0 (2) INPUT Q(J), P(J)
+650.0 (2) IF P(J) < 1 THEN 670
+660.0 (2) IF P(J) < 100000 THEN 690
+670.0 (0) PRINT "  YOU CAN'T DO THAT!"
+680.0 (0) GOTO 630
+690.0 (2) NEXT J
+700.0 (1) PRINT
+710.0 (1) PRINT "1 2 3 4 5 6 7 8"
+720.0 (6) PRINT "XXXXSTARTXXXX"
+730.0 (6) FOR I = 1 TO 8
+740.0 (48) LET M = I
+750.0 (48) LET M(I) = M
+760.0 (48) LET Y(M(I)) = INT(100 * RND(1) + 1)
+770.0 (48) IF Y(M(I)) < 10 THEN 860
+780.0 (42) LET S = INT(R / D(I) + .5)
+790.0 (42) IF Y(M(I)) < S + 17 THEN 880
+800.0 (31) IF Y(M(I)) < S + 37 THEN 900
+810.0 (23) IF Y(M(I)) < S + 57 THEN 920
+820.0 (17) IF Y(M(I)) < 77 + S THEN 940
+830.0 (5) IF Y(M(I)) < S + 92 THEN 960
+840.0 (1) LET Y(M(I)) = 7
+850.0 (1) GOTO 970
+860.0 (6) LET Y(M(I)) = 1
+870.0 (6) GOTO 970
+880.0 (11) LET Y(M(I)) = 2
+890.0 (11) GOTO 970
+900.0 (8) LET Y(M(I)) = 3
+910.0 (8) GOTO 970
+920.0 (6) LET Y(M(I)) = 4
+930.0 (6) GOTO 970
+940.0 (12) LET Y(M(I)) = 5
+950.0 (12) GOTO 970
+960.0 (4) LET Y(M(I)) = 6
+970.0 (48) NEXT I
+980.0 (6) LET M = I
+990.0 (6) FOR I = 1 TO 8
+1000.0 (48) LET S(M(I)) = S(M(I)) + Y(M(I))
+1010.0 (48) NEXT I
+1020.0 (6) LET I = 1
+1030.0 (6) FOR L = 1 TO 8
+1040.0 (48) FOR I = 1 TO 8 - L
+1050.0 (168) IF S(M(I)) < S(M(I + 1)) THEN 1090
+1060.0 (102) LET H = M(I)
+1070.0 (102) LET M(I) = M(I + 1)
+1080.0 (102) LET M(I + 1) = H
+1090.0 (174) NEXT I
+1100.0 (48) NEXT L
+1110.0 (6) LET T = S(M(8))
+1120.0 (6) FOR I = 1 TO 8
+1130.0 (48) LET B = S(M(I)) - S(M(I - 1))
+1140.0 (48) IF B = 0 THEN 1190
+1150.0 (37) FOR A = 1 TO B
+1160.0 (102) PRINT
+1170.0 (102) IF S(M(I)) > 27 THEN 1240
+1180.0 (101) NEXT A
+1190.0 (47) PRINT M(I);
+1200.0 (47) NEXT I
+1210.0 (5) FOR A = 1 TO 28 - T
+1220.0 (64) PRINT
+1230.0 (64) NEXT A
+1240.0 (6) PRINT "XXXXFINISHXXXX";
+1242.0 (6) PRINT
+1243.0 (6) PRINT
+1244.0 (6) PRINT "---------------------------------------------"
+1245.0 (6) PRINT
+1250.0 (6) IF T < 28 THEN 720
+1270.0 (1) PRINT "THE RACE RESULTS ARE:"
+1272.0 (1) LET Z9 = 1
+1280.0 (1) FOR I = 8 TO 1 STEP -1
+1290.0 (8) LET F = M(I)
+1300.0 (8) PRINT
+1310.0 (8) PRINT Z9; "PLACE HORSE NO."; F, "AT "; R / D(F); ":1"
+1312.0 (8) LET Z9 = Z9 + 1
+1320.0 (8) NEXT I
+1330.0 (1) FOR J = 1 TO C
+1340.0 (2) IF Q(J) <> M(8) THEN 1370
+1350.0 (0) LET N = Q(J)
+1355.0 (0) PRINT
+1360.0 (0) PRINT W$(J); " WINS $"; (R / D(N)) * P(J)
+1370.0 (2) NEXT J
+1372.0 (1) PRINT "DO YOU WANT TO BET ON THE NEXT RACE ?"
+1374.0 (1) INPUT "YES OR NO"; O$
+1376.0 (1) IF O$ = "YES" THEN 380
+1380.0 (1) END
+

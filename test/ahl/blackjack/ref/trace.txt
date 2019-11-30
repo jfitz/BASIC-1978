@@ -5882,3 +5882,946 @@ RECEIVED A
  I: 2
  R(2): 0
  Q2 = 1
+ R(I) = 0
+ terminated:true
+400: NEXT Q2
+ Q2: 1
+ terminated:true
+410: Q(I) = Q
+ I: 2
+ Q: 0
+ Q(2) = 0
+420: RETURN
+2920: REM --TEST FOR PLAYING DEALER'S HAND
+2930: FOR I = 1 TO N
+ N: 2
+ I = 1
+ N = 2
+ terminated:false
+2940: IF R(I) > 0 OR R(I + D1) > 0 THEN 3010
+ I: 1
+ R(1): 4
+ D1: 3
+ R(4): 0
+ R(I)>0ORR(I+D1)>0: true
+3010: PRINT "DEALER HAS A"; MID$(D$, 3 * P(D1, 2) - 2, 3); " CONCEALED ";
+DEALER HAS A
+ D$: "  A  2  3  4  5  6  7  8  9 10  J  Q  K"
+ D1: 3
+ P(3,2): 5
+  5 CONCEALED 
+3020: I = D1
+ D1: 3
+ I = 3
+3030: AA = Q(I)
+ I: 3
+ Q(3): 0
+ AA = 0
+3030.1: GOSUB 3400
+3400: AA = AA + 11 * (AA >= 22)
+ AA: 0
+ AA = 0
+3400.1: RETURN
+3035: PRINT "FOR A TOTAL OF"; AA
+FOR A TOTAL OF
+ AA: 0
+ 0
+3040: IF AA > 16 THEN 3130
+ AA: 0
+ AA>16: false
+3050: PRINT "DRAWS";
+DRAWS
+3060: GOSUB 100
+100: REM --SUBROUTINE TO GET A CARD.  RESULT IS PUT IN X.
+110: IF C < 51 THEN 230
+ C: 21
+ C<51: true
+230: X = C(C)
+ C: 21
+ C(21): 10
+ X = 10
+240: C = C + 1
+ C: 21
+ C = 22
+250: RETURN
+3070: GOSUB 750
+750: REM --ALTERNATIVE PRINTING ROUTINE
+760: PRINT " "; MID$(D$, 3 * X - 1, 2);
+ 
+ D$: "  A  2  3  4  5  6  7  8  9 10  J  Q  K"
+ X: 10
+10
+770: PRINT "   ";
+   
+780: RETURN
+3080: GOSUB 1100
+1100: REM --SUBROUTINE TO ADD A CARD TO ROW I
+1110: R(I) = R(I) + 1
+ I: 3
+ R(3): 2
+ R(3) = 3
+1120: P(I, R(I)) = X
+ I: 3
+ R(3): 3
+ X: 10
+ P(3,3) = 10
+1130: Q = Q(I)
+ I: 3
+ Q(3): 0
+ Q = 0
+1140: GOSUB 500
+500: REM --SUBROUTINE TO ADD CARD X TO TOTAL Q.
+510: X1 = X
+ X: 10
+ X1 = 10
+510.1: IF X1 > 10 THEN X1 = 10
+ X1: 10
+ X1>10: false
+510.2: REM  SAME AS X1=10 MIN X
+520: Q1 = Q + X1
+ Q: 0
+ X1: 10
+ Q1 = 10
+530: IF Q >= 11 THEN 590
+ Q: 0
+ Q>=11: false
+540: IF X > 1 THEN 570
+ X: 10
+ X>1: true
+570: Q = Q1 - 11 * (Q1 >= 11)
+ Q1: 10
+ Q = 10
+580: RETURN
+1150: Q(I) = Q
+ I: 3
+ Q: 10
+ Q(3) = 10
+1160: IF Q >= 0 THEN 1190
+ Q: 10
+ Q>=0: true
+1190: RETURN
+3090: AA = Q
+ Q: 10
+ AA = 10
+3090.1: GOSUB 3400
+3400: AA = AA + 11 * (AA >= 22)
+ AA: 10
+ AA = 10
+3400.1: RETURN
+3095: IF Q > 0 AND AA < 17 THEN 3060
+ Q: 10
+ AA: 10
+ Q>0ANDAA<17: true
+3060: GOSUB 100
+100: REM --SUBROUTINE TO GET A CARD.  RESULT IS PUT IN X.
+110: IF C < 51 THEN 230
+ C: 22
+ C<51: true
+230: X = C(C)
+ C: 22
+ C(22): 8
+ X = 8
+240: C = C + 1
+ C: 22
+ C = 23
+250: RETURN
+3070: GOSUB 750
+750: REM --ALTERNATIVE PRINTING ROUTINE
+760: PRINT " "; MID$(D$, 3 * X - 1, 2);
+ 
+ D$: "  A  2  3  4  5  6  7  8  9 10  J  Q  K"
+ X: 8
+ 8
+770: PRINT "   ";
+   
+780: RETURN
+3080: GOSUB 1100
+1100: REM --SUBROUTINE TO ADD A CARD TO ROW I
+1110: R(I) = R(I) + 1
+ I: 3
+ R(3): 3
+ R(3) = 4
+1120: P(I, R(I)) = X
+ I: 3
+ R(3): 4
+ X: 8
+ P(3,4) = 8
+1130: Q = Q(I)
+ I: 3
+ Q(3): 10
+ Q = 10
+1140: GOSUB 500
+500: REM --SUBROUTINE TO ADD CARD X TO TOTAL Q.
+510: X1 = X
+ X: 8
+ X1 = 8
+510.1: IF X1 > 10 THEN X1 = 10
+ X1: 8
+ X1>10: false
+510.2: REM  SAME AS X1=10 MIN X
+520: Q1 = Q + X1
+ Q: 10
+ X1: 8
+ Q1 = 18
+530: IF Q >= 11 THEN 590
+ Q: 10
+ Q>=11: false
+540: IF X > 1 THEN 570
+ X: 8
+ X>1: true
+570: Q = Q1 - 11 * (Q1 >= 11)
+ Q1: 18
+ Q = 29
+580: RETURN
+1150: Q(I) = Q
+ I: 3
+ Q: 29
+ Q(3) = 29
+1160: IF Q >= 0 THEN 1190
+ Q: 29
+ Q>=0: true
+1190: RETURN
+3090: AA = Q
+ Q: 29
+ AA = 29
+3090.1: GOSUB 3400
+3400: AA = AA + 11 * (AA >= 22)
+ AA: 29
+ AA = 18
+3400.1: RETURN
+3095: IF Q > 0 AND AA < 17 THEN 3060
+ Q: 29
+ AA: 18
+ Q>0ANDAA<17: false
+3100: Q(I) = Q - (Q < 0) / 2
+ I: 3
+ Q: 29
+ Q(3) = 29
+3110: IF Q < 0 THEN 3140
+ Q: 29
+ Q<0: false
+3120: AA = Q
+ Q: 29
+ AA = 29
+3120.1: GOSUB 3400
+3400: AA = AA + 11 * (AA >= 22)
+ AA: 29
+ AA = 18
+3400.1: RETURN
+3125: PRINT "---TOTAL IS"; AA
+---TOTAL IS
+ AA: 18
+ 18
+3130: PRINT
+
+3140: REM --TALLY THE RESULT
+3150: REM
+3160: Z$ = "LOSES PUSHES WINS "
+ Z$ = "LOSES PUSHES WINS "
+3165: PRINT
+
+3170: FOR I = 1 TO N
+ N: 2
+ I = 1
+ N = 2
+ terminated:false
+3180: AA = Q(I)
+ I: 1
+ Q(1): 30
+ AA = 30
+3180.1: GOSUB 3400
+3400: AA = AA + 11 * (AA >= 22)
+ AA: 30
+ AA = 19
+3400.1: RETURN
+3182: AB = Q(I + D1)
+ I: 1
+ D1: 3
+ Q(4): 0
+ AB = 0
+3182.1: GOSUB 3410
+3410: AB = AB + 11 * (AB >= 22)
+ AB: 0
+ AB = 0
+3410.1: RETURN
+3184: AC = Q(D1)
+ D1: 3
+ Q(3): 29
+ AC = 29
+3184.1: GOSUB 3420
+3420: AC = AC + 11 * (AC >= 22)
+ AC: 29
+ AC = 18
+3420.1: RETURN
+3186: S(I) = S(I) + B(I) * SGN(AA - AC) + B(I + D1) * SGN(AB - AC)
+ I: 1
+ S(1): 0
+ B(1): 50
+ AA: 19
+ AC: 18
+ D1: 3
+ B(4): 0
+ AB: 0
+ S(1) = 50
+3188: B(I + D1) = 0
+ I: 1
+ D1: 3
+ B(4) = 0
+3200: PRINT "PLAYER"; I;
+PLAYER
+ I: 1
+ 1 
+3210: PRINT MID$(Z$, SGN(S(I)) * 6 + 7, 6); " ";
+ Z$: "LOSES PUSHES WINS "
+ I: 1
+ S(1): 50
+ WINS  
+3220: IF S(I) <> 0 THEN 3250
+ I: 1
+ S(1): 50
+ S(I)<>0: true
+3250: PRINT ABS(S(I));
+ I: 1
+ S(1): 50
+ 50 
+3260: T(I) = T(I) + S(I)
+ I: 1
+ T(1): 50
+ S(1): 50
+ T(1) = 100
+3270: PRINT "TOTAL="; T(I)
+TOTAL=
+ I: 1
+ T(1): 100
+ 100
+3280: GOSUB 1200
+1200: REM --SUBROUTINE TO DISCARD ROW I
+1210: IF R(I) <> 0 THEN 1230
+ I: 1
+ R(1): 4
+ R(I)<>0: true
+1230: D = D + 1
+ D: 15
+ D = 16
+1240: D(D) = P(I, R(I))
+ D: 16
+ I: 1
+ R(1): 4
+ P(1,4): 4
+ D(16) = 4
+1250: R(I) = R(I) - 1
+ I: 1
+ R(1): 4
+ R(1) = 3
+1260: GOTO 1210
+1210: IF R(I) <> 0 THEN 1230
+ I: 1
+ R(1): 3
+ R(I)<>0: true
+1230: D = D + 1
+ D: 16
+ D = 17
+1240: D(D) = P(I, R(I))
+ D: 17
+ I: 1
+ R(1): 3
+ P(1,3): 2
+ D(17) = 2
+1250: R(I) = R(I) - 1
+ I: 1
+ R(1): 3
+ R(1) = 2
+1260: GOTO 1210
+1210: IF R(I) <> 0 THEN 1230
+ I: 1
+ R(1): 2
+ R(I)<>0: true
+1230: D = D + 1
+ D: 17
+ D = 18
+1240: D(D) = P(I, R(I))
+ D: 18
+ I: 1
+ R(1): 2
+ P(1,2): 7
+ D(18) = 7
+1250: R(I) = R(I) - 1
+ I: 1
+ R(1): 2
+ R(1) = 1
+1260: GOTO 1210
+1210: IF R(I) <> 0 THEN 1230
+ I: 1
+ R(1): 1
+ R(I)<>0: true
+1230: D = D + 1
+ D: 18
+ D = 19
+1240: D(D) = P(I, R(I))
+ D: 19
+ I: 1
+ R(1): 1
+ P(1,1): 6
+ D(19) = 6
+1250: R(I) = R(I) - 1
+ I: 1
+ R(1): 1
+ R(1) = 0
+1260: GOTO 1210
+1210: IF R(I) <> 0 THEN 1230
+ I: 1
+ R(1): 0
+ R(I)<>0: false
+1220: RETURN
+3290: T(D1) = T(D1) - S(I)
+ D1: 3
+ T(3): -95
+ I: 1
+ S(1): 50
+ T(3) = -145
+3300: I = I + D1
+ I: 1
+ D1: 3
+ I = 4
+3310: GOSUB 1200
+1200: REM --SUBROUTINE TO DISCARD ROW I
+1210: IF R(I) <> 0 THEN 1230
+ I: 4
+ R(4): 0
+ R(I)<>0: false
+1220: RETURN
+3320: I = I - D1
+ I: 4
+ D1: 3
+ I = 1
+3330: NEXT I
+ I: 1
+ terminated:false
+ I = 2
+3180: AA = Q(I)
+ I: 2
+ Q(2): 0
+ AA = 0
+3180.1: GOSUB 3400
+3400: AA = AA + 11 * (AA >= 22)
+ AA: 0
+ AA = 0
+3400.1: RETURN
+3182: AB = Q(I + D1)
+ I: 2
+ D1: 3
+ Q(5): 0
+ AB = 0
+3182.1: GOSUB 3410
+3410: AB = AB + 11 * (AB >= 22)
+ AB: 0
+ AB = 0
+3410.1: RETURN
+3184: AC = Q(D1)
+ D1: 3
+ Q(3): 29
+ AC = 29
+3184.1: GOSUB 3420
+3420: AC = AC + 11 * (AC >= 22)
+ AC: 29
+ AC = 18
+3420.1: RETURN
+3186: S(I) = S(I) + B(I) * SGN(AA - AC) + B(I + D1) * SGN(AB - AC)
+ I: 2
+ S(2): 0
+ B(2): 45
+ AA: 0
+ AC: 18
+ D1: 3
+ B(5): 0
+ AB: 0
+ S(2) = -45
+3188: B(I + D1) = 0
+ I: 2
+ D1: 3
+ B(5) = 0
+3200: PRINT "PLAYER"; I;
+PLAYER
+ I: 2
+ 2 
+3210: PRINT MID$(Z$, SGN(S(I)) * 6 + 7, 6); " ";
+ Z$: "LOSES PUSHES WINS "
+ I: 2
+ S(2): -45
+LOSES  
+3220: IF S(I) <> 0 THEN 3250
+ I: 2
+ S(2): -45
+ S(I)<>0: true
+3250: PRINT ABS(S(I));
+ I: 2
+ S(2): -45
+ 45 
+3260: T(I) = T(I) + S(I)
+ I: 2
+ T(2): 45
+ S(2): -45
+ T(2) = 0
+3270: PRINT "TOTAL="; T(I)
+TOTAL=
+ I: 2
+ T(2): 0
+ 0
+3280: GOSUB 1200
+1200: REM --SUBROUTINE TO DISCARD ROW I
+1210: IF R(I) <> 0 THEN 1230
+ I: 2
+ R(2): 0
+ R(I)<>0: false
+1220: RETURN
+3290: T(D1) = T(D1) - S(I)
+ D1: 3
+ T(3): -145
+ I: 2
+ S(2): -45
+ T(3) = -100
+3300: I = I + D1
+ I: 2
+ D1: 3
+ I = 5
+3310: GOSUB 1200
+1200: REM --SUBROUTINE TO DISCARD ROW I
+1210: IF R(I) <> 0 THEN 1230
+ I: 5
+ R(5): 0
+ R(I)<>0: false
+1220: RETURN
+3320: I = I - D1
+ I: 5
+ D1: 3
+ I = 2
+3330: NEXT I
+ I: 2
+ terminated:true
+3340: PRINT "DEALER'S TOTAL="; T(D1)
+DEALER'S TOTAL=
+ D1: 3
+ T(3): -100
+-100
+3345: PRINT
+
+3350: GOSUB 1200
+1200: REM --SUBROUTINE TO DISCARD ROW I
+1210: IF R(I) <> 0 THEN 1230
+ I: 2
+ R(2): 0
+ R(I)<>0: false
+1220: RETURN
+3360: GOTO 1810
+1810: IF 2 * D1 + C >= 52 THEN GOSUB 120
+ D1: 3
+ C: 23
+ 2*D1+C>=52: false
+1820: IF C = 2 THEN C = C - 1
+ C: 23
+ C=2: false
+1830: FOR I = 1 TO N
+ N: 2
+ I = 1
+ N = 2
+ terminated:false
+1830.1: Z(I) = 0
+ I: 1
+ Z(1) = 0
+1830.2: NEXT I
+ I: 1
+ terminated:false
+ I = 2
+1830.1: Z(I) = 0
+ I: 2
+ Z(2) = 0
+1830.2: NEXT I
+ I: 2
+ terminated:true
+1840: FOR I = 1 TO 15
+ I = 1
+ terminated:false
+1840.1: B(I) = 0
+ I: 1
+ B(1) = 0
+1840.2: NEXT I
+ I: 1
+ terminated:false
+ I = 2
+1840.1: B(I) = 0
+ I: 2
+ B(2) = 0
+1840.2: NEXT I
+ I: 2
+ terminated:false
+ I = 3
+1840.1: B(I) = 0
+ I: 3
+ B(3) = 0
+1840.2: NEXT I
+ I: 3
+ terminated:false
+ I = 4
+1840.1: B(I) = 0
+ I: 4
+ B(4) = 0
+1840.2: NEXT I
+ I: 4
+ terminated:false
+ I = 5
+1840.1: B(I) = 0
+ I: 5
+ B(5) = 0
+1840.2: NEXT I
+ I: 5
+ terminated:false
+ I = 6
+1840.1: B(I) = 0
+ I: 6
+ B(6) = 0
+1840.2: NEXT I
+ I: 6
+ terminated:false
+ I = 7
+1840.1: B(I) = 0
+ I: 7
+ B(7) = 0
+1840.2: NEXT I
+ I: 7
+ terminated:false
+ I = 8
+1840.1: B(I) = 0
+ I: 8
+ B(8) = 0
+1840.2: NEXT I
+ I: 8
+ terminated:false
+ I = 9
+1840.1: B(I) = 0
+ I: 9
+ B(9) = 0
+1840.2: NEXT I
+ I: 9
+ terminated:false
+ I = 10
+1840.1: B(I) = 0
+ I: 10
+ B(10) = 0
+1840.2: NEXT I
+ I: 10
+ terminated:false
+ I = 11
+1840.1: B(I) = 0
+ I: 11
+ B(11) = 0
+1840.2: NEXT I
+ I: 11
+ terminated:false
+ I = 12
+1840.1: B(I) = 0
+ I: 12
+ B(12) = 0
+1840.2: NEXT I
+ I: 12
+ terminated:false
+ I = 13
+1840.1: B(I) = 0
+ I: 13
+ B(13) = 0
+1840.2: NEXT I
+ I: 13
+ terminated:false
+ I = 14
+1840.1: B(I) = 0
+ I: 14
+ B(14) = 0
+1840.2: NEXT I
+ I: 14
+ terminated:false
+ I = 15
+1840.1: B(I) = 0
+ I: 15
+ B(15) = 0
+1840.2: NEXT I
+ I: 15
+ terminated:true
+1850: FOR I = 1 TO 15
+ I = 1
+ terminated:false
+1850.1: Q(I) = 0
+ I: 1
+ Q(1) = 0
+1850.2: NEXT I
+ I: 1
+ terminated:false
+ I = 2
+1850.1: Q(I) = 0
+ I: 2
+ Q(2) = 0
+1850.2: NEXT I
+ I: 2
+ terminated:false
+ I = 3
+1850.1: Q(I) = 0
+ I: 3
+ Q(3) = 0
+1850.2: NEXT I
+ I: 3
+ terminated:false
+ I = 4
+1850.1: Q(I) = 0
+ I: 4
+ Q(4) = 0
+1850.2: NEXT I
+ I: 4
+ terminated:false
+ I = 5
+1850.1: Q(I) = 0
+ I: 5
+ Q(5) = 0
+1850.2: NEXT I
+ I: 5
+ terminated:false
+ I = 6
+1850.1: Q(I) = 0
+ I: 6
+ Q(6) = 0
+1850.2: NEXT I
+ I: 6
+ terminated:false
+ I = 7
+1850.1: Q(I) = 0
+ I: 7
+ Q(7) = 0
+1850.2: NEXT I
+ I: 7
+ terminated:false
+ I = 8
+1850.1: Q(I) = 0
+ I: 8
+ Q(8) = 0
+1850.2: NEXT I
+ I: 8
+ terminated:false
+ I = 9
+1850.1: Q(I) = 0
+ I: 9
+ Q(9) = 0
+1850.2: NEXT I
+ I: 9
+ terminated:false
+ I = 10
+1850.1: Q(I) = 0
+ I: 10
+ Q(10) = 0
+1850.2: NEXT I
+ I: 10
+ terminated:false
+ I = 11
+1850.1: Q(I) = 0
+ I: 11
+ Q(11) = 0
+1850.2: NEXT I
+ I: 11
+ terminated:false
+ I = 12
+1850.1: Q(I) = 0
+ I: 12
+ Q(12) = 0
+1850.2: NEXT I
+ I: 12
+ terminated:false
+ I = 13
+1850.1: Q(I) = 0
+ I: 13
+ Q(13) = 0
+1850.2: NEXT I
+ I: 13
+ terminated:false
+ I = 14
+1850.1: Q(I) = 0
+ I: 14
+ Q(14) = 0
+1850.2: NEXT I
+ I: 14
+ terminated:false
+ I = 15
+1850.1: Q(I) = 0
+ I: 15
+ Q(15) = 0
+1850.2: NEXT I
+ I: 15
+ terminated:true
+1860: FOR I = 1 TO 7
+ I = 1
+ terminated:false
+1860.1: S(I) = 0
+ I: 1
+ S(1) = 0
+1860.2: NEXT I
+ I: 1
+ terminated:false
+ I = 2
+1860.1: S(I) = 0
+ I: 2
+ S(2) = 0
+1860.2: NEXT I
+ I: 2
+ terminated:false
+ I = 3
+1860.1: S(I) = 0
+ I: 3
+ S(3) = 0
+1860.2: NEXT I
+ I: 3
+ terminated:false
+ I = 4
+1860.1: S(I) = 0
+ I: 4
+ S(4) = 0
+1860.2: NEXT I
+ I: 4
+ terminated:false
+ I = 5
+1860.1: S(I) = 0
+ I: 5
+ S(5) = 0
+1860.2: NEXT I
+ I: 5
+ terminated:false
+ I = 6
+1860.1: S(I) = 0
+ I: 6
+ S(6) = 0
+1860.2: NEXT I
+ I: 6
+ terminated:false
+ I = 7
+1860.1: S(I) = 0
+ I: 7
+ S(7) = 0
+1860.2: NEXT I
+ I: 7
+ terminated:true
+1870: FOR I = 1 TO 15
+ I = 1
+ terminated:false
+1870.1: R(I) = 0
+ I: 1
+ R(1) = 0
+1870.2: NEXT I
+ I: 1
+ terminated:false
+ I = 2
+1870.1: R(I) = 0
+ I: 2
+ R(2) = 0
+1870.2: NEXT I
+ I: 2
+ terminated:false
+ I = 3
+1870.1: R(I) = 0
+ I: 3
+ R(3) = 0
+1870.2: NEXT I
+ I: 3
+ terminated:false
+ I = 4
+1870.1: R(I) = 0
+ I: 4
+ R(4) = 0
+1870.2: NEXT I
+ I: 4
+ terminated:false
+ I = 5
+1870.1: R(I) = 0
+ I: 5
+ R(5) = 0
+1870.2: NEXT I
+ I: 5
+ terminated:false
+ I = 6
+1870.1: R(I) = 0
+ I: 6
+ R(6) = 0
+1870.2: NEXT I
+ I: 6
+ terminated:false
+ I = 7
+1870.1: R(I) = 0
+ I: 7
+ R(7) = 0
+1870.2: NEXT I
+ I: 7
+ terminated:false
+ I = 8
+1870.1: R(I) = 0
+ I: 8
+ R(8) = 0
+1870.2: NEXT I
+ I: 8
+ terminated:false
+ I = 9
+1870.1: R(I) = 0
+ I: 9
+ R(9) = 0
+1870.2: NEXT I
+ I: 9
+ terminated:false
+ I = 10
+1870.1: R(I) = 0
+ I: 10
+ R(10) = 0
+1870.2: NEXT I
+ I: 10
+ terminated:false
+ I = 11
+1870.1: R(I) = 0
+ I: 11
+ R(11) = 0
+1870.2: NEXT I
+ I: 11
+ terminated:false
+ I = 12
+1870.1: R(I) = 0
+ I: 12
+ R(12) = 0
+1870.2: NEXT I
+ I: 12
+ terminated:false
+ I = 13
+1870.1: R(I) = 0
+ I: 13
+ R(13) = 0
+1870.2: NEXT I
+ I: 13
+ terminated:false
+ I = 14
+1870.1: R(I) = 0
+ I: 14
+ R(14) = 0
+1870.2: NEXT I
+ I: 14
+ terminated:false
+ I = 15
+1870.1: R(I) = 0
+ I: 15
+ R(15) = 0
+1870.2: NEXT I
+ I: 15
+ terminated:true
+1880: PRINT "BETS:"
+BETS:
+1890: FOR I = 1 TO N
+ N: 2
+ I = 1
+ N = 2
+ terminated:false
+1890.1: PRINT "#"; I;
+#
+ I: 1
+ 1 
+1890.2: INPUT Z(I)
+? 
+End of file in line 1890
+
