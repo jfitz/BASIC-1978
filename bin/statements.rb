@@ -1343,14 +1343,14 @@ class ForStatement < AbstractStatement
     step = NumericConstant.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    fornext_control = interpreter.assign_fornext(@control.name, from, to, step)
-    interpreter.lock_variable(@control.name)
-    interpreter.enter_fornext(@control.name)
+    fornext_control = interpreter.assign_fornext(@control, from, to, step)
+    interpreter.lock_variable(@control)
+    interpreter.enter_fornext(@control)
     terminated = fornext_control.front_terminated?
 
     if terminated
-      interpreter.next_line_index = interpreter.find_closing_next(@control.name)
-      interpreter.unlock_variable(@control.name)
+      interpreter.next_line_index = interpreter.find_closing_next(@control)
+      interpreter.unlock_variable(@control)
       interpreter.exit_fornext
     end
 
@@ -2328,7 +2328,7 @@ class NextStatement < AbstractStatement
         control_name = interpreter.top_fornext
         fornext_control = interpreter.retrieve_fornext(control_name)
       else
-        fornext_control = interpreter.retrieve_fornext(@controls[index].name)
+        fornext_control = interpreter.retrieve_fornext(@controls[index])
       end
       # check control variable value
       # if matches end value, stop here
