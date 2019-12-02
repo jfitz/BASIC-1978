@@ -956,7 +956,7 @@ class ChangeStatement < AbstractStatement
       source_variable_name = VariableName.new(source_variable_token)
 
       target_values = @target.evaluate(interpreter)
-      target_value = target_values[0]
+      target = target_values[0]
 
       dims = interpreter.get_dimensions(source_variable_name)
 
@@ -976,7 +976,7 @@ class ChangeStatement < AbstractStatement
       array = BASICArray.new(dims, values)
       text = array.pack
 
-      interpreter.set_value(target_value, text)
+      interpreter.set_value(target, text)
 
     else
       raise BASICExpressionError, 'Type mismatch'
@@ -2065,10 +2065,10 @@ class InputStatement < AbstractInputStatement
       zip(@input_items, values[0..@input_items.length])
 
     name_value_pairs.each do |hash|
-      l_values = hash['name'].evaluate(interpreter)
-      l_value = l_values[0]
+      variables = hash['name'].evaluate(interpreter)
+      variable = variables[0]
       value = hash['value']
-      interpreter.set_value(l_value, value)
+      interpreter.set_value(variable, value)
     end
 
     interpreter.clear_previous_lines
@@ -2144,6 +2144,8 @@ class AbstractScalarLetStatement < AbstractLetStatement
     r_values = @assignment.eval_value(interpreter)
     r_value = r_values[0]
 
+    # allow multiple left-hand side values
+    # but only one right-hand side value
     l_values.each do |l_value|
       interpreter.set_value(l_value, r_value)
     end
@@ -2234,10 +2236,10 @@ class LineInputStatement < AbstractInputStatement
       zip(@input_items, values[0..@input_items.length])
 
     name_value_pairs.each do |hash|
-      l_values = hash['name'].evaluate(interpreter)
-      l_value = l_values[0]
+      variables = hash['name'].evaluate(interpreter)
+      variable = variables[0]
       value = hash['value']
-      interpreter.set_value(l_value, value)
+      interpreter.set_value(variable, value)
     end
 
     interpreter.clear_previous_lines
