@@ -2687,38 +2687,20 @@ class OptionStatement < AbstractStatement
   end
 end
 
-# common for PRINT, ARR PRINT, MAT PRINT
-class AbstractPrintStatement < AbstractStatement
-  def initialize(keywords, tokens_lists)
-    super
-  end
-
-  include FileFunctions
-
-  def any_implied_carriage(items)
-    any_implied = false
-
-    unless items.nil?
-      # check all tokens except the last one,
-      # which may be an implied carriage control
-      items.each do |item|
-        any_implied = true if
-          item.class.to_s == 'CarriageControl' && item.to_s == ' '
-      end
-    end
-
-    any_implied
-  end
-end
-
 # PRINT
-class PrintStatement < AbstractPrintStatement
+class PrintStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('PRINT')]
     ]
   end
 
+  private
+
+  include FileFunctions
+
+  public
+  
   def initialize(keywords, tokens_lists)
     super
 
@@ -2789,12 +2771,18 @@ class PrintStatement < AbstractPrintStatement
 end
 
 # PRINT USING
-class PrintUsingStatement < AbstractPrintStatement
+class PrintUsingStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('PRINT'), KeywordToken.new('USING')]
     ]
   end
+
+  private
+
+  include FileFunctions
+
+  public
 
   def initialize(keywords, tokens_lists)
     super
@@ -2965,22 +2953,19 @@ class RandomizeStatement < AbstractStatement
   end
 end
 
-# common for READ, ARR READ, MAT READ
-class AbstractReadStatement < AbstractStatement
-  def initialize(keywords, tokens_lists)
-    super
-  end
-
-  include FileFunctions
-end
-
 # READ
-class ReadStatement < AbstractReadStatement
+class ReadStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('READ')]
     ]
   end
+
+  private
+
+  include FileFunctions
+
+  public
 
   def initialize(keywords, tokens_lists)
     super
@@ -3218,37 +3203,19 @@ class StopStatement < AbstractStatement
   end
 end
 
-# common for WRITE, ARR WRITE, MAT WRITE
-class AbstractWriteStatement < AbstractStatement
-  def initialize(keywords, tokens_lists)
-    super
-  end
-
-  include FileFunctions
-
-  def any_implied_carriage(items)
-    any_implied = false
-
-    unless items.nil?
-      # check all tokens except the last one,
-      # which may be an implied carriage control
-      items.each do |item|
-        any_implied = true if
-          item.class.to_s == 'CarriageControl' && item.to_s == ' '
-      end
-    end
-
-    any_implied
-  end
-end
-
 # WRITE
-class WriteStatement < AbstractWriteStatement
+class WriteStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('WRITE')]
     ]
   end
+
+  private
+
+  include FileFunctions
+
+  public
 
   def initialize(keywords, tokens_lists)
     super
@@ -3314,12 +3281,18 @@ class WriteStatement < AbstractWriteStatement
 end
 
 # ARR PRINT
-class ArrPrintStatement < AbstractPrintStatement
+class ArrPrintStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('ARR'), KeywordToken.new('PRINT')]
     ]
   end
+
+  private
+
+  include FileFunctions
+
+  public
 
   def initialize(keywords, tokens_lists)
     super
@@ -3336,8 +3309,6 @@ class ArrPrintStatement < AbstractPrintStatement
     else
       @errors << 'Syntax error'
     end
-
-    ## @errors << 'Delimiter required' if any_implied_carriage(@items)
   end
 
   def execute_core(interpreter)
@@ -3380,12 +3351,18 @@ class ArrPrintStatement < AbstractPrintStatement
 end
 
 # ARR READ
-class ArrReadStatement < AbstractReadStatement
+class ArrReadStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('ARR'), KeywordToken.new('READ')]
     ]
   end
+
+  private
+
+  include FileFunctions
+
+  public
 
   def initialize(keywords, tokens_lists)
     super
@@ -3472,12 +3449,18 @@ class ArrReadStatement < AbstractReadStatement
 end
 
 # ARR WRITE
-class ArrWriteStatement < AbstractWriteStatement
+class ArrWriteStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('ARR'), KeywordToken.new('WRITE')]
     ]
   end
+
+  private
+
+  include FileFunctions
+
+  public
 
   def initialize(keywords, tokens_lists)
     super
@@ -3494,8 +3477,6 @@ class ArrWriteStatement < AbstractWriteStatement
     else
       @errors << 'Syntax error'
     end
-
-    ## @errors << 'Delimiter required' if any_implied_carriage(@items)
   end
 
   def execute_core(interpreter)
@@ -3608,12 +3589,18 @@ class ArrLetStatement < AbstractLetStatement
 end
 
 # MAT PRINT
-class MatPrintStatement < AbstractPrintStatement
+class MatPrintStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('MAT'), KeywordToken.new('PRINT')]
     ]
   end
+
+  private
+
+  include FileFunctions
+
+  public
 
   def initialize(keywords, tokens_lists)
     super
@@ -3630,8 +3617,6 @@ class MatPrintStatement < AbstractPrintStatement
     else
       @errors << 'Syntax error'
     end
-
-    ## @errors << 'Delimiter required' if any_implied_carriage(@items)
   end
 
   def execute_core(interpreter)
@@ -3671,12 +3656,18 @@ class MatPrintStatement < AbstractPrintStatement
 end
 
 # MAT READ
-class MatReadStatement < AbstractReadStatement
+class MatReadStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('MAT'), KeywordToken.new('READ')]
     ]
   end
+
+  private
+
+  include FileFunctions
+
+  public
 
   def initialize(keywords, tokens_lists)
     super
@@ -3781,12 +3772,18 @@ class MatReadStatement < AbstractReadStatement
 end
 
 # MAT WRITE
-class MatWriteStatement < AbstractWriteStatement
+class MatWriteStatement < AbstractStatement
   def self.lead_keywords
     [
       [KeywordToken.new('MAT'), KeywordToken.new('WRITE')]
     ]
   end
+
+  private
+
+  include FileFunctions
+
+  public
 
   def initialize(keywords, tokens_lists)
     super
@@ -3803,8 +3800,6 @@ class MatWriteStatement < AbstractWriteStatement
     else
       @errors << 'Syntax error'
     end
-
-    ## @errors << 'Delimiter required' if any_implied_carriage(@items)
   end
 
   def execute_core(interpreter)
