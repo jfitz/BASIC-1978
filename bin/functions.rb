@@ -43,7 +43,7 @@ class AbstractFunction < AbstractElement
   end
 
   def counts_to_text(counts)
-    words = %w(zero one two)
+    words = %w[zero one two]
     texts = counts.map { |v| words[v] }
     texts.join(' or ')
   end
@@ -51,33 +51,29 @@ class AbstractFunction < AbstractElement
   def match_arg_type(value, type)
     case type
     when :numeric
-      compatible = value.numeric_constant?
+      value.numeric_constant?
     when :string
-      compatible = value.text_constant?
+      value.text_constant?
     when :integer
-      compatible = value.numeric_constant?
+      value.numeric_constant?
     when :boolean
-      compatible = value.boolean_constant?
+      value.boolean_constant?
     else
-      compatible = false
+      false
     end
-
-    compatible
   end
 
   def match_arg_shape(value, shape)
     case shape
     when :scalar
-      compatible = value.scalar?
+      value.scalar?
     when :array
-      compatible = value.array?
+      value.array?
     when :matrix
-      compatible = value.matrix?
+      value.matrix?
     else
-      compatible = false
+      false
     end
-
-    compatible
   end
 
   def match_arg_type_shape(value, spec)
@@ -151,7 +147,7 @@ class UserFunction < AbstractScalarFunction
   attr_writer :valref
 
   def self.accept?(token)
-    classes = %w(UserFunctionToken)
+    classes = %w[UserFunctionToken]
     classes.include?(token.class.to_s)
   end
 
@@ -166,8 +162,8 @@ class UserFunction < AbstractScalarFunction
   end
 
   def compatible?(value)
-    numerics = [:numeric, :integer]
-    strings = [:string]
+    numerics = %i[numeric integer]
+    strings = %i[string]
 
     compatible = false
 

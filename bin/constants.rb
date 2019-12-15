@@ -133,7 +133,7 @@ class AbstractElement
     @boolean_constant
   end
 
-  def pop_stack(stack) ; end
+  def pop_stack(stack); end
 
   protected
 
@@ -159,7 +159,7 @@ end
 # beginning of a group
 class GroupStart < AbstractElement
   def self.accept?(token)
-    classes = %w(GroupStartToken)
+    classes = %w[GroupStartToken]
     classes.include?(token.class.to_s)
   end
 
@@ -180,7 +180,7 @@ end
 # end of a group
 class GroupEnd < AbstractElement
   def self.accept?(token)
-    classes = %w(GroupEndToken)
+    classes = %w[GroupEndToken]
     classes.include?(token.class.to_s)
   end
 
@@ -221,7 +221,7 @@ end
 # separator for group or params
 class ParamSeparator < AbstractElement
   def self.accept?(token)
-    classes = %w(ParamSeparatorToken)
+    classes = %w[ParamSeparatorToken]
     classes.include?(token.class.to_s)
   end
 
@@ -392,7 +392,7 @@ end
 # Numeric constants
 class NumericConstant < AbstractValueElement
   def self.accept?(token)
-    classes = %w(Fixnum Integer Bignum Float NumericConstantToken)
+    classes = %w[Fixnum Integer Bignum Float NumericConstantToken]
     classes.include?(token.class.to_s)
   end
 
@@ -429,8 +429,8 @@ class NumericConstant < AbstractValueElement
   def initialize(text)
     super()
 
-    numeric_classes = %w(Fixnum Integer Bignum Float)
-    float_classes = %w(Rational NumericConstantToken)
+    numeric_classes = %w[Fixnum Integer Bignum Float]
+    float_classes = %w[Rational NumericConstantToken]
     f = nil
     f = text.to_f if float_classes.include?(text.class.to_s)
     f = text if numeric_classes.include?(text.class.to_s)
@@ -581,7 +581,7 @@ class NumericConstant < AbstractValueElement
   end
 
   def negate
-    NumericConstant.new(-(@value))
+    NumericConstant.new(-@value)
   end
 
   def truncate
@@ -725,7 +725,7 @@ end
 # Integer constants
 class IntegerConstant < AbstractValueElement
   def self.accept?(token)
-    classes = %w(Fixnum Integer Bignum Float IntegerConstantToken)
+    classes = %w[Fixnum Integer Bignum Float IntegerConstantToken]
     classes.include?(token.class.to_s)
   end
 
@@ -741,7 +741,7 @@ class IntegerConstant < AbstractValueElement
   def initialize(text)
     super()
 
-    numeric_classes = %w(Fixnum Integer Bignum Float NumericConstantToken)
+    numeric_classes = %w[Fixnum Integer Bignum Float NumericConstantToken]
     f = nil
     f = text.to_i if numeric_classes.include?(text.class.to_s)
     f = text.to_f.to_i if text.class.to_s == 'IntegerConstantToken'
@@ -986,7 +986,7 @@ end
 # Text constants
 class TextConstant < AbstractValueElement
   def self.accept?(token)
-    classes = %w(TextConstantToken)
+    classes = %w[TextConstantToken]
     classes.include?(token.class.to_s)
   end
 
@@ -1094,7 +1094,7 @@ end
 # Boolean constants
 class BooleanConstant < AbstractValueElement
   def self.accept?(token)
-    classes = %w(BooleanConstantToken)
+    classes = %w[BooleanConstantToken]
     classes.include?(token.class.to_s)
   end
 
@@ -1280,7 +1280,7 @@ end
 # Carriage control for PRINT and MAT PRINT statements
 class CarriageControl
   def self.accept?(token)
-    classes = %w(ParamSeparatorToken)
+    classes = %w[ParamSeparatorToken]
     classes.include?(token.class.to_s)
   end
 
@@ -1427,7 +1427,7 @@ end
 # Hold a variable name
 class VariableName < AbstractElement
   def self.accept?(token)
-    classes = %w(VariableToken)
+    classes = %w[VariableToken]
     classes.include?(token.class.to_s)
   end
 
@@ -1500,7 +1500,7 @@ end
 # Hold a function name
 class UserFunctionName < AbstractElement
   def self.accept?(token)
-    classes = %w(UserFunctionToken)
+    classes = %w[UserFunctionToken]
     classes.include?(token.class.to_s)
   end
 
@@ -1715,10 +1715,8 @@ class Variable < AbstractElement
       subscripts = get_subscripts(stack)
       @subscripts = interpreter.normalize_subscripts(subscripts)
       interpreter.check_subscripts(@variable_name, @subscripts)
-      interpreter.get_value(self)
-    else
-      interpreter.get_value(self)
     end
+    interpreter.get_value(self)
   end
 
   def get_subscripts(stack)
