@@ -628,9 +628,19 @@ class NumericConstant < AbstractValueElement
     NumericConstant.new(value)
   end
 
+  def arcsin
+    return 0 if @value < -1.0 || @value > 1.0
+    NumericConstant.new(Math.asin(@value))
+  end
+
   def cos
     value = Math.cos(@value)
     NumericConstant.new(value)
+  end
+
+  def arccos
+    return 0 if @value < -1.0 || @value > 1.0
+    NumericConstant.new(Math.acos(@value))
   end
 
   def tan
