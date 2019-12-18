@@ -227,12 +227,6 @@ class AbstractStatement
   attr_reader :valid
   attr_reader :executable
   attr_reader :comment
-  attr_reader :numerics
-  attr_reader :strings
-  attr_reader :variables
-  attr_reader :operators
-  attr_reader :functions
-  attr_reader :userfuncs
   attr_reader :linenums
   attr_reader :autonext
   attr_reader :mccabe
@@ -250,15 +244,10 @@ class AbstractStatement
     @core_tokens = tokens_lists.flatten
     @valid = true
     @comment = false
+    @elements = {numerics: [], strings: [], variables: [], operators: [], functions: [], userfuncs: []}
     @errors = []
     @modifiers = []
     @any_if_modifiers = false
-    @numerics = []
-    @strings = []
-    @variables = []
-    @operators = []
-    @functions = []
-    @userfuncs = []
     @linenums = []
     @autonext = true
     @mccabe = 0
@@ -302,6 +291,30 @@ class AbstractStatement
 
   def dump
     ['Unimplemented']
+  end
+
+  def numerics
+    @elements[:numerics]
+  end
+
+  def strings
+    @elements[:strings]
+  end
+
+  def variables
+    @elements[:variables]
+  end
+
+  def operators
+    @elements[:operators]
+  end
+
+  def functions
+    @elements[:functions]
+  end
+
+  def userfuncs
+    @elements[:userfuncs]
   end
 
   def modifier_numerics
@@ -716,7 +729,7 @@ class AbstractStatement
       items.each { |item| userfuncs += item.userfuncs }
     end
 
-    [numerics, strings, variables, operators, functions, userfuncs]
+    {numerics: numerics, strings: strings, variables: variables, operators: operators, functions: functions, userfuncs: userfuncs}
   end
 
   def make_coord(c)
@@ -964,7 +977,7 @@ class ChainStatement < AbstractStatement
 
     target_tokens = tokens_lists[0]
     @target = ValueExpression.new(target_tokens, :scalar)
-    @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @target)
+    @elements = make_references(nil, @target)
   end
 
   def dump
@@ -1018,7 +1031,7 @@ class ChangeStatement < AbstractStatement
         raise BASICExpressionError, 'Type mismatch'
       end
 
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @source, @target)
+      @elements = make_references(nil, @source, @target)
     else
       @errors << 'Syntax error'
     end
@@ -1105,7 +1118,7 @@ class CloseStatement < AbstractStatement
        check_template(tokens_lists, template_file)
       @filenum_expression = ValueExpression.new(tokens_lists[-1], :scalar)
 
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @filenum_expression)
+      @elements = make_references(nil, @filenum_expression)
     else
       @errors << 'Syntax error'
     end
@@ -1153,7 +1166,7 @@ class DataStatement < AbstractStatement
 
     if check_template(tokens_lists, template)
       @expressions = ValueExpression.new(tokens_lists[0], :scalar)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @expressions)
+      @elements = make_references(nil, @expressions)
     else
       @errors << 'Syntax error'
     end
@@ -1191,7 +1204,7 @@ class DefineFunctionStatement < AbstractStatement
       begin
         @definition = UserFunctionDefinition.new(tokens_lists[0])
 
-        @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @definition)
+        @elements = make_references(nil, @definition)
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -1252,7 +1265,7 @@ class DimStatement < AbstractStatement
       @errors << 'Syntax error'
     end
 
-    @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@expressions)
+    @elements = make_references(@expressions)
   end
 
   def dump
@@ -1371,13 +1384,13 @@ class ForStatement < AbstractStatement
         @start = ValueExpression.new(tokens2, :scalar)
         @end = ValueExpression.new(tokens_lists[2], :scalar)
         @step = nil
-        @numerics = @start.numerics + @end.numerics
-        @strings = @start.strings + @end.strings
+        @elements[:numerics] = @start.numerics + @end.numerics
+        @elements[:strings] = @start.strings + @end.strings
         control = XrefEntry.new(@control.to_s, nil, true)
-        @variables = [control] + @start.variables + @end.variables
-        @operators = @start.operators + @end.operators
-        @functions = @start.functions + @end.functions
-        @userfuncs = @start.userfuncs + @end.userfuncs
+        @elements[:variables] = [control] + @start.variables + @end.variables
+        @elements[:operators] = @start.operators + @end.operators
+        @elements[:functions] = @start.functions + @end.functions
+        @elements[:userfuncs] = @start.userfuncs + @end.userfuncs
         @mccabe += 1
       rescue BASICExpressionError => e
         @errors << e.message
@@ -1390,16 +1403,16 @@ class ForStatement < AbstractStatement
         @start = ValueExpression.new(tokens2, :scalar)
         @end = ValueExpression.new(tokens_lists[2], :scalar)
         @step = ValueExpression.new(tokens_lists[4], :scalar)
-        @numerics = @start.numerics + @end.numerics + @step.numerics
-        @strings = @start.strings + @end.strings + @step.strings
+        @elements[:numerics] = @start.numerics + @end.numerics + @step.numerics
+        @elements[:strings] = @start.strings + @end.strings + @step.strings
         control = XrefEntry.new(@control.to_s, nil, true)
 
-        @variables =
+        @elements[:variables] =
           [control] + @start.variables + @end.variables + @step.variables
 
-        @operators = @start.operators + @end.operators + @step.operators
-        @functions = @start.functions + @end.functions + @step.functions
-        @userfuncs = @start.userfuncs + @end.userfuncs + @step.userfuncs
+        @elements[:operators] = @start.operators + @end.operators + @step.operators
+        @elements[:functions] = @start.functions + @end.functions + @step.functions
+        @elements[:userfuncs] = @start.userfuncs + @end.userfuncs + @step.userfuncs
         @mccabe += 1
       rescue BASICExpressionError => e
         @errors << e.message
@@ -1609,12 +1622,12 @@ class AbstractIfStatement < AbstractStatement
       @else_dest, @else_stmt = parse_target(tokens_lists['else']) if
         tokens_lists.key?('else')
 
-      @numerics = make_numeric_references
-      @strings = make_string_references
-      @variables = make_variable_references
-      @operators = make_operator_references
-      @functions = make_function_references
-      @userfuncs = make_userfunc_references
+      @elements[:numerics] = make_numeric_references
+      @elements[:strings] = make_string_references
+      @elements[:variables] = make_variable_references
+      @elements[:operators] = make_operator_references
+      @elements[:functions] = make_function_references
+      @elements[:userfuncs] = make_userfunc_references
       @linenums = make_linenum_references
     else
       begin
@@ -1625,12 +1638,12 @@ class AbstractIfStatement < AbstractStatement
         @else_dest, @else_stmt = parse_target(stack['else']) if
           stack.key?('else')
 
-        @numerics = make_numeric_references
-        @strings = make_string_references
-        @variables = make_variable_references
-        @operators = make_operator_references
-        @functions = make_function_references
-        @userfuncs = make_userfunc_references
+        @elements[:numerics] = make_numeric_references
+        @elements[:strings] = make_string_references
+        @elements[:variables] = make_variable_references
+        @elements[:operators] = make_operator_references
+        @elements[:functions] = make_function_references
+        @elements[:userfuncs] = make_userfunc_references
         @linenums = make_linenum_references
       rescue BASICExpressionError => e
         @errors << 'Syntax Error: ' + e.message
@@ -2016,7 +2029,7 @@ class InputStatement < AbstractStatement
       items = tokens_to_expressions(items)
       @file_tokens, items = extract_file_handle(items)
       @prompt, @items = extract_prompt(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens, @prompt)
+      @elements = make_references(@items, @file_tokens, @prompt)
       @mccabe += @items.size
     else
       @errors << 'Syntax error'
@@ -2107,7 +2120,7 @@ class AbstractScalarLetStatement < AbstractLetStatement
           @errors << 'Assignment must have only one right-hand value'
         end
 
-        @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @assignment)
+        @elements = make_references(nil, @assignment)
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -2179,7 +2192,7 @@ class LineInputStatement < AbstractStatement
       items = tokens_to_expressions(items)
       @file_tokens, items = extract_file_handle(items)
       @prompt, @items = extract_prompt(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens, @prompt)
+      @elements = make_references(@items, @file_tokens, @prompt)
       @mccabe += @modifiers.size
     else
       @errors << 'Syntax error'
@@ -2259,7 +2272,7 @@ class NextStatement < AbstractStatement
           control = Variable.new(variable_name, :scalar, [])
           @controls << control
           controlx = XrefEntry.new(control.to_s, nil, false)
-          @variables += [controlx]
+          @elements[:variables] += [controlx]
         else
           @errors << "Invalid control variable #{tokens[0]}"
         end
@@ -2424,7 +2437,7 @@ class OnStatement < AbstractStatement
 
       begin
         @expression = ValueExpression.new(expression, :scalar)
-        @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @expression)
+        @elements = make_references(nil, @expression)
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -2571,21 +2584,21 @@ class OpenStatement < AbstractStatement
        check_template(tokens_lists, template_input_as_file)
       @filename_expression = ValueExpression.new(tokens_lists[0], :scalar)
       @filenum_expression = ValueExpression.new(tokens_lists[-1], :scalar)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @filename_expression, @filenum_expression)
+      @elements = make_references(nil, @filename_expression, @filenum_expression)
 
       @mode = :read
     elsif check_template(tokens_lists, template_output_as) ||
           check_template(tokens_lists, template_output_as_file)
       @filename_expression = ValueExpression.new(tokens_lists[0], :scalar)
       @filenum_expression = ValueExpression.new(tokens_lists[-1], :scalar)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @filename_expression, @filenum_expression)
+      @elements = make_references(nil, @filename_expression, @filenum_expression)
 
       @mode = :print
     elsif check_template(tokens_lists, template_append_as) ||
           check_template(tokens_lists, template_append_as_file)
       @filename_expression = ValueExpression.new(tokens_lists[0], :scalar)
       @filenum_expression = ValueExpression.new(tokens_lists[-1], :scalar)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @filename_expression, @filenum_expression)
+      @elements = make_references(nil, @filename_expression, @filenum_expression)
 
       @mode = :append
     else
@@ -2658,7 +2671,7 @@ class OptionStatement < AbstractStatement
 
       expression_tokens = split_tokens(tokens_lists[1], true)
       @expression = ValueExpression.new(expression_tokens[0], :scalar)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @expression)
+      @elements = make_references(nil, @expression)
     else
       @errors << 'Syntax error'
     end
@@ -2702,7 +2715,7 @@ class PrintStatement < AbstractStatement
       tokens_lists = split_tokens(tokens_lists[0], true)
       items = tokens_to_expressions(tokens_lists)
       @file_tokens, @items = extract_file_handle(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
     else
       @errors << 'Syntax error'
     end
@@ -2778,7 +2791,7 @@ class PrintUsingStatement < AbstractStatement
       tokens_lists = split_tokens(tokens_lists[0], true)
       @file_tokens = nil
       @items = tokens_to_expressions(tokens_lists)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
     else
       @errors << 'Syntax error'
     end
@@ -2957,7 +2970,7 @@ class ReadStatement < AbstractStatement
       items = split_tokens(tokens_lists[0], false)
       items = tokens_to_expressions(items)
       @file_tokens, @items = extract_file_handle(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
       @mccabe += @items.size
     else
       @errors << 'Syntax error'
@@ -3131,7 +3144,7 @@ class SleepStatement < AbstractStatement
     elsif check_template(tokens_lists, template_1)
       token_lists = split_tokens(tokens_lists[0], false)
       @expression = ValueExpression.new(token_lists[0], :scalar)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @expression)
+      @elements = make_references(nil, @expression)
     else
       @errors << 'Syntax error'
     end
@@ -3202,7 +3215,7 @@ class WriteStatement < AbstractStatement
       tokens_lists = split_tokens(tokens_lists[0], true)
       items = tokens_to_expressions(tokens_lists)
       @file_tokens, @items = extract_file_handle(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
     else
       @errors << 'Syntax error'
     end
@@ -3275,7 +3288,7 @@ class ArrPrintStatement < AbstractStatement
       tokens_lists = split_tokens(tokens_lists[0], true)
       items = tokens_to_expressions(tokens_lists)
       @file_tokens, @items = extract_file_handle(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
     else
       @errors << 'Syntax error'
     end
@@ -3341,7 +3354,7 @@ class ArrReadStatement < AbstractStatement
       items = split_tokens(tokens_lists[0], false)
       items = tokens_to_expressions(items)
       @file_tokens, @items = extract_file_handle(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
       @mccabe += @items.size
     else
       @errors << 'Syntax error'
@@ -3434,7 +3447,7 @@ class ArrWriteStatement < AbstractStatement
       tokens_lists = split_tokens(tokens_lists[0], true)
       items = tokens_to_expressions(tokens_lists)
       @file_tokens, @items = extract_file_handle(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
     else
       @errors << 'Syntax error'
     end
@@ -3507,7 +3520,7 @@ class ArrLetStatement < AbstractLetStatement
           @errors << 'Assignment must have only one right-hand value'
         end
 
-        @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @assignment)
+        @elements = make_references(nil, @assignment)
       rescue BASICExpressionError => e
         @errors << e.message
         @assignment = @rest
@@ -3570,7 +3583,7 @@ class MatPrintStatement < AbstractStatement
       tokens_lists = split_tokens(tokens_lists[0], true)
       items = tokens_to_expressions(tokens_lists)
       @file_tokens, @items = extract_file_handle(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
     else
       @errors << 'Syntax error'
     end
@@ -3633,7 +3646,7 @@ class MatReadStatement < AbstractStatement
       items = split_tokens(tokens_lists[0], false)
       items = tokens_to_expressions(items)
       @file_tokens, @items = extract_file_handle(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
       @mccabe += @items.size
     else
       @errors << 'Syntax error'
@@ -3744,7 +3757,7 @@ class MatWriteStatement < AbstractStatement
       tokens_lists = split_tokens(tokens_lists[0], true)
       items = tokens_to_expressions(tokens_lists)
       @file_tokens, @items = extract_file_handle(items)
-      @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(@items, @file_tokens)
+      @elements = make_references(@items, @file_tokens)
     else
       @errors << 'Syntax error'
     end
@@ -3817,7 +3830,7 @@ class MatLetStatement < AbstractLetStatement
           @errors << 'Assignment must have only one right-hand value'
         end
 
-        @numerics, @strings, @variables, @operators, @functions, @userfuncs = make_references(nil, @assignment)
+        @elements = make_references(nil, @assignment)
       rescue BASICRuntimeError => e
         @errors << e.message
         @assignment = @rest
