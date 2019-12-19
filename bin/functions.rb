@@ -405,8 +405,8 @@ class FunctionChr < AbstractScalarFunction
   end
 end
 
-# function CON
-class FunctionCon < AbstractScalarFunction
+# function CON, CON2
+class FunctionCon2 < AbstractScalarFunction
   def initialize(text)
     super
 
@@ -1223,8 +1223,8 @@ class FunctionVal < AbstractScalarFunction
   end
 end
 
-# function ZER
-class FunctionZer < AbstractScalarFunction
+# function ZER, ZER2
+class FunctionZer2 < AbstractScalarFunction
   def initialize(text)
     super
 
@@ -1272,7 +1272,8 @@ class FunctionFactory
     'ARCTAN' => FunctionArcTan,
     'ATN' => FunctionArcTan,
     'CHR$' => FunctionChr,
-    'CON' => FunctionCon,
+    'CON' => FunctionCon2,
+    'CON2' => FunctionCon2,
     'COS' => FunctionCos,
     'COT' => FunctionCot,
     'CSC' => FunctionCsc,
@@ -1306,7 +1307,8 @@ class FunctionFactory
     'TRN' => FunctionTrn,
     'UNPACK' => FunctionUnpack,
     'VAL' => FunctionVal,
-    'ZER' => FunctionZer
+    'ZER' => FunctionZer2,
+    'ZER2' => FunctionZer2
   }
 
   def self.valid?(text)
