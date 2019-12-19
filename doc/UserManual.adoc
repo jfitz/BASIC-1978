@@ -2095,6 +2095,7 @@ Functions may be used in expressions.
 |ATN(x) |Synonym for ARCTAN(x)
 |ATN(y,x) |Synonym for ARCTAN(y,x)
 |CHR$(n) |string |Returns a string of one character, defined by n. N must be within the ASCII printable range of 32 to 126.
+|CON1(n) |numeric array |Creates an array containing all ones, with n values
 |CON2(n) |numeric matrix |Creates a matrix containing all ones, with n columns
 |CON(n) |numeric matrix |Synonym for CON2(n)
 |CON2(r,c) |numeric matrix |Creates a matrix containing all ones, with r rows and c columns.
@@ -2137,6 +2138,7 @@ Functions may be used in expressions.
 |TRN(m) |matrix |Transposes values in matrix m, exchanging values by rows and columns.
 |UNPACK(t)|numeric array |Converts a string variable (or expression) to an array of numeric values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
 |VAL(t) |string |Converts a string to a numeric value. Ignores leading spaces. Converts digits and stops on first non-numeric character.
+|ZER1(n) |numeric array |Creates an array containing all zeros, with n values
 |ZER2(n) |numeric matrix|Creates a matrix containing all zeros, with n columns
 |ZER(n) |numeric matrix|Synonym for ZER2(n)
 |ZER2(r,c) |numeric matrix|Creates a matrix containing all zeros, with r rows and c columns.
@@ -2150,19 +2152,21 @@ OPTION BASE 1 breaks the PACK$() and UNPACK() functions, as they both access ind
 Matrix function special forms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The functions ZER, CON, and IDN have normal forms and special forms.
+The functions CON(), CON1(), CON2(), ZER(), ZER1(), ZER2(), and IDN() have normal forms and special forms.
 You can use the normal form in simple assignments without specifying dimensions of targets:
 
 	200 REM NO DIM STATEMENT FOR A OR B
 	240 MAT A = CON(3,4)
 	250 MAT B = IDN(4,4)
+	260 ARR C = ZER1(7)
 
 The special form allows for parameters to be omitted.
 
 	200 REM DIM STATEMENTS FOR A AND B ARE NECESSARY
-	230 DIM A(3,4), B(4,4)
+	230 DIM A(3,4), B(4,4), C(7)
 	240 MAT A = CON
 	250 MAT B = IDN
+	260 ARR C = ZER1
 
 In this special form, the target variable must already exist and have dimensions specified.
 

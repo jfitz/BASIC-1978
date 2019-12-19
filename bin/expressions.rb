@@ -92,6 +92,24 @@ class BASICArray
     TextConstant.new(token)
   end
 
+  def zero_values
+    case @dimensions.size
+    when 1
+      make_array(@dimensions, NumericConstant.new(0))
+    when 2
+      raise BASICRuntimeError, 'Too many dimensions in array'
+    end
+  end
+
+  def one_values
+    case @dimensions.size
+    when 1
+      make_array(@dimensions, NumericConstant.new(1))
+    when 2
+      raise BASICRuntimeError, 'Too many dimensions in array'
+    end
+  end
+
   private
 
   def make_coord(c)
@@ -122,6 +140,19 @@ class BASICArray
       value.write(printer)
       fs_carriage.write(printer, interpreter) if col < n_cols
     end
+  end
+  
+  def make_array(dims, init_value)
+    values = {}
+
+    base = $options['base'].value
+
+    (base..dims[0].to_i).each do |col|
+      coords = make_coord(col)
+      values[coords] = init_value
+    end
+
+    values
   end
 end
 
