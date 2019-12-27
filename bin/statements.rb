@@ -733,14 +733,6 @@ class AbstractStatement
 
     {numerics: numerics, strings: strings, variables: variables, operators: operators, functions: functions, userfuncs: userfuncs}
   end
-
-  def make_coord(c)
-    [NumericConstant.new(c)]
-  end
-
-  def make_coords(r, c)
-    [NumericConstant.new(r), NumericConstant.new(c)]
-  end
 end
 
 # unparsed statement
@@ -1199,7 +1191,7 @@ class ChangeStatement < AbstractStatement
       (0..cols).each do |col|
         column = IntegerConstant.new(col)
         variable = Variable.new(source_variable_name, :scalar, [column])
-        coord = make_coord(col)
+        coord = AbstractElement.make_coord(col)
         values[coord] = interpreter.get_value(variable)
       end
       array = BASICArray.new(dims, values)
@@ -3341,7 +3333,7 @@ class ArrInputStatement < AbstractStatement
         # build names
         base = interpreter.base
         (base..dims[0].to_i).each do |col|
-          coord = make_coord(col)
+          coord = AbstractElement.make_coord(col)
           variable = Variable.new(name, :array, coord)
           item_names << variable
         end
@@ -3487,7 +3479,7 @@ class ArrReadStatement < AbstractStatement
 
     base = interpreter.base
     (base..dims[0].to_i).each do |col|
-      coord = make_coord(col)
+      coord = AbstractElement.make_coord(col)
       values[coord] = ds.read
     end
 
@@ -3683,7 +3675,7 @@ class MatInputStatement < AbstractStatement
         if dims.size == 1
           base = interpreter.base
           (base..dims[0].to_i).each do |col|
-            coord = make_coord(col)
+            coord = AbstractElement.make_coord(col)
             variable = Variable.new(name, :matrix, coord)
             item_names << variable
           end
@@ -3693,7 +3685,7 @@ class MatInputStatement < AbstractStatement
           base = interpreter.base
           (base..dims[0].to_i).each do |row|
             (base..dims[1].to_i).each do |col|
-              coords = make_coords(row, col)
+              coords = AbstractElement.make_coords(row, col)
               variable = Variable.new(name, :matrix, coords)
               item_names << variable
             end
@@ -3841,7 +3833,7 @@ class MatReadStatement < AbstractStatement
     base = $options['base'].value
 
     (base..dims[0].to_i).each do |col|
-      coord = make_coord(col)
+      coord = AbstractElement.make_coord(col)
       values[coord] = ds.read
     end
 
@@ -3855,7 +3847,7 @@ class MatReadStatement < AbstractStatement
 
     (base..dims[0].to_i).each do |row|
       (base..dims[1].to_i).each do |col|
-        coords = make_coords(row, col)
+        coords = AbstractElement.make_coords(row, col)
         values[coords] = ds.read
       end
     end

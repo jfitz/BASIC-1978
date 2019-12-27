@@ -1,5 +1,13 @@
 # token class
 class AbstractElement
+  def self.make_coord(c)
+    [NumericConstant.new(c)]
+  end
+
+  def self.make_coords(r, c)
+    [NumericConstant.new(r), NumericConstant.new(c)]
+  end
+
   attr_reader :precedence
 
   def initialize
@@ -134,16 +142,6 @@ class AbstractElement
   end
 
   def pop_stack(stack); end
-
-  protected
-
-  def make_coord(c)
-    [NumericConstant.new(c)]
-  end
-
-  def make_coords(r, c)
-    [NumericConstant.new(r), NumericConstant.new(c)]
-  end
 end
 
 # empty token
@@ -1753,7 +1751,7 @@ class Variable < AbstractElement
 
     base = interpreter.base
     (base..n_cols).each do |col|
-      coords = make_coord(col)
+      coords = AbstractElement.make_coord(col)
       variable = Variable.new(@variable_name, :array, coords)
       values[coords] = interpreter.get_value(variable)
     end
@@ -1785,7 +1783,7 @@ class Variable < AbstractElement
     base = $options['base'].value
 
     (base..n_cols).each do |col|
-      coords = make_coord(col)
+      coords = AbstractElement.make_coord(col)
       variable = Variable.new(@variable_name, :matrix, coords)
       values[coords] = interpreter.get_value(variable)
     end
@@ -1800,7 +1798,7 @@ class Variable < AbstractElement
 
     (base..n_rows).each do |row|
       (base..n_cols).each do |col|
-        coords = make_coords(row, col)
+        coords = AbstractElement.make_coords(row, col)
         variable = Variable.new(@variable_name, :matrix, coords)
         values[coords] = interpreter.get_value(variable)
       end

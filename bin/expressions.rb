@@ -39,7 +39,7 @@ class BASICArray
     base = interpreter.base
     (base..@dimensions[0].to_i).each do |col|
       value = get_value(col)
-      coords = make_coord(col)
+      coords = AbstractElement.make_coord(col)
       values[coords] = value
     end
 
@@ -47,7 +47,7 @@ class BASICArray
   end
 
   def get_value(col)
-    coords = make_coord(col)
+    coords = AbstractElement.make_coord(col)
     return @values[coords] if @values.key?(coords)
     NumericConstant.new(0)
   end
@@ -92,29 +92,25 @@ class BASICArray
     TextConstant.new(token)
   end
 
-  def zero_values
-    case @dimensions.size
+  def self.zero_values(dimensions)
+    case dimensions.size
     when 1
-      make_array(@dimensions, NumericConstant.new(0))
+      BASICArray.make_array(dimensions, NumericConstant.new(0))
     when 2
       raise BASICRuntimeError, 'Too many dimensions in array'
     end
   end
 
-  def one_values
-    case @dimensions.size
+  def self.one_values(dimensions)
+    case dimensions.size
     when 1
-      make_array(@dimensions, NumericConstant.new(1))
+      BASICArray.make_array(dimensions, NumericConstant.new(1))
     when 2
       raise BASICRuntimeError, 'Too many dimensions in array'
     end
   end
 
   private
-
-  def make_coord(c)
-    [NumericConstant.new(c)]
-  end
 
   def print_1(printer, interpreter)
     n_cols = @dimensions[0].to_i
@@ -142,13 +138,13 @@ class BASICArray
     end
   end
   
-  def make_array(dims, init_value)
+  def self.make_array(dims, init_value)
     values = {}
 
     base = $options['base'].value
 
     (base..dims[0].to_i).each do |col|
-      coords = make_coord(col)
+      coords = AbstractElement.make_coord(col)
       values[coords] = init_value
     end
 
@@ -198,7 +194,7 @@ class Matrix
 
     (base..@dimensions[0].to_i).each do |col|
       value = get_value_1(col)
-      coords = make_coord(col)
+      coords = AbstractElement.make_coord(col)
       values[coords] = value
     end
 
@@ -213,7 +209,7 @@ class Matrix
     (base..@dimensions[0].to_i).each do |row|
       (base..@dimensions[1].to_i).each do |col|
         value = get_value_2(row, col)
-        coords = make_coords(row, col)
+        coords = AbstractElement.make_coords(row, col)
         values[coords] = value
       end
     end
@@ -222,13 +218,13 @@ class Matrix
   end
 
   def get_value_1(col)
-    coords = make_coord(col)
+    coords = AbstractElement.make_coord(col)
     return @values[coords] if @values.key?(coords)
     NumericConstant.new(0)
   end
 
   def get_value_2(row, col)
-    coords = make_coords(row, col)
+    coords = AbstractElement.make_coords(row, col)
     return @values[coords] if @values.key?(coords)
     NumericConstant.new(0)
   end
@@ -272,7 +268,7 @@ class Matrix
     (base..@dimensions[0].to_i).each do |row|
       (base..@dimensions[1].to_i).each do |col|
         value = get_value_2(row, col)
-        coords = make_coords(col, row)
+        coords = AbstractElement.make_coords(col, row)
         new_values[coords] = value
       end
     end
@@ -300,8 +296,7 @@ class Matrix
     values = values_2
 
     # create identity matrix
-    i_matrix = Matrix.new(@dimensions, {})
-    inv_values = i_matrix.identity_values
+    inv_values = Matrix.identity_values(@dimensions)
 
     n_rows = @dimensions[0].to_i
     n_cols = @dimensions[1].to_i
@@ -316,32 +311,32 @@ class Matrix
     inv_values
   end
 
-  def zero_values
-    case @dimensions.size
+  def self.zero_values(dimensions)
+    case dimensions.size
     when 1
-      make_array(@dimensions, NumericConstant.new(0))
+      Matrix.make_array(dimensions, NumericConstant.new(0))
     when 2
-      make_matrix(@dimensions, NumericConstant.new(0))
+      Matrix.make_matrix(dimensions, NumericConstant.new(0))
     end
   end
 
-  def one_values
-    case @dimensions.size
+  def self.one_values(dimensions)
+    case dimensions.size
     when 1
-      make_array(@dimensions, NumericConstant.new(1))
+      Matrix.make_array(dimensions, NumericConstant.new(1))
     when 2
-      make_matrix(@dimensions, NumericConstant.new(1))
+      Matrix.make_matrix(dimensions, NumericConstant.new(1))
     end
   end
 
-  def identity_values
-    new_values = make_matrix(@dimensions, NumericConstant.new(0))
+  def self.identity_values(dimensions)
+    new_values = make_matrix(dimensions, NumericConstant.new(0))
     one = NumericConstant.new(1)
 
     base = $options['base'].value
 
-    (base..@dimensions[0].to_i).each do |row|
-      coords = make_coords(row, row)
+    (base..dimensions[0].to_i).each do |row|
+      coords = AbstractElement.make_coords(row, row)
       new_values[coords] = one
     end
 
@@ -350,35 +345,27 @@ class Matrix
 
   private
 
-  def make_coord(c)
-    [NumericConstant.new(c)]
-  end
-
-  def make_coords(r, c)
-    [NumericConstant.new(r), NumericConstant.new(c)]
-  end
-
-  def make_array(dims, init_value)
+  def self.make_array(dims, init_value)
     values = {}
 
     base = $options['base'].value
 
     (base..dims[0].to_i).each do |col|
-      coords = make_coord(col)
+      coords = AbstractElement.make_coord(col)
       values[coords] = init_value
     end
 
     values
   end
 
-  def make_matrix(dims, init_value)
+  def self.make_matrix(dims, init_value)
     values = {}
 
     base = $options['base'].value
 
     (base..dims[0].to_i).each do |row|
       (base..dims[1].to_i).each do |col|
-        coords = make_coords(row, col)
+        coords = AbstractElement.make_coords(row, col)
         values[coords] = init_value
       end
     end
@@ -511,7 +498,8 @@ class Matrix
 
       (base..@dimensions[1].to_i).each do |col|
         next if col == exclude_col
-        new_values[make_coords(new_row, new_col)] = get_value_2(row, col)
+        coords = AbstractElement.make_coords(new_row, new_col)
+        new_values[coords] = get_value_2(row, col)
         new_col += 1
       end
 
@@ -522,16 +510,16 @@ class Matrix
   end
 
   def calc_factor(values, row, col)
-    denom_coords = make_coords(col, col)
+    denom_coords = AbstractElement.make_coords(col, col)
     denominator = values[denom_coords]
-    numer_coords = make_coords(row, col)
+    numer_coords = AbstractElement.make_coords(row, col)
     numerator = values[numer_coords]
     numerator.divide(denominator)
   end
 
   def adjust_matrix_entry(values, row, col, wcol, factor)
-    value_coords = make_coords(row, wcol)
-    minuend_coords = make_coords(col, wcol)
+    value_coords = AbstractElement.make_coords(row, wcol)
+    minuend_coords = AbstractElement.make_coords(col, wcol)
     subtrahend = values[value_coords]
     minuend = values[minuend_coords]
     new_value = subtrahend - minuend.multiply(factor)
@@ -572,7 +560,7 @@ class Matrix
     base = $options['base'].value
 
     (base..n_rows).each do |row|
-      denom_coords = make_coords(row, row)
+      denom_coords = AbstractElement.make_coords(row, row)
       denominator = values[denom_coords]
       (base..n_cols).each do |col|
         unitize_matrix_entry(values, row, col, denominator)
@@ -582,7 +570,7 @@ class Matrix
   end
 
   def unitize_matrix_entry(values, row, col, denominator)
-    coords = make_coords(row, col)
+    coords = AbstractElement.make_coords(row, col)
     numerator = values[coords]
     new_value = numerator.divide(denominator)
     values[coords] = new_value
