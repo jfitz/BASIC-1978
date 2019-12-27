@@ -1,5 +1,36 @@
 # Array with values
 class BASICArray
+  def self.make_array(dims, init_value)
+    values = {}
+
+    base = $options['base'].value
+
+    (base..dims[0].to_i).each do |col|
+      coords = AbstractElement.make_coord(col)
+      values[coords] = init_value
+    end
+
+    values
+  end
+
+  def self.zero_values(dimensions)
+    case dimensions.size
+    when 1
+      BASICArray.make_array(dimensions, NumericConstant.new(0))
+    when 2
+      raise BASICRuntimeError, 'Too many dimensions in array'
+    end
+  end
+
+  def self.one_values(dimensions)
+    case dimensions.size
+    when 1
+      BASICArray.make_array(dimensions, NumericConstant.new(1))
+    when 2
+      raise BASICRuntimeError, 'Too many dimensions in array'
+    end
+  end
+
   attr_reader :dimensions
 
   def initialize(dimensions, values)
@@ -92,24 +123,6 @@ class BASICArray
     TextConstant.new(token)
   end
 
-  def self.zero_values(dimensions)
-    case dimensions.size
-    when 1
-      BASICArray.make_array(dimensions, NumericConstant.new(0))
-    when 2
-      raise BASICRuntimeError, 'Too many dimensions in array'
-    end
-  end
-
-  def self.one_values(dimensions)
-    case dimensions.size
-    when 1
-      BASICArray.make_array(dimensions, NumericConstant.new(1))
-    when 2
-      raise BASICRuntimeError, 'Too many dimensions in array'
-    end
-  end
-
   private
 
   def print_1(printer, interpreter)
@@ -137,7 +150,10 @@ class BASICArray
       fs_carriage.write(printer, interpreter) if col < n_cols
     end
   end
-  
+end
+
+# Matrix with values
+class Matrix
   def self.make_array(dims, init_value)
     values = {}
 
@@ -150,10 +166,54 @@ class BASICArray
 
     values
   end
-end
 
-# Matrix with values
-class Matrix
+  def self.make_matrix(dims, init_value)
+    values = {}
+
+    base = $options['base'].value
+
+    (base..dims[0].to_i).each do |row|
+      (base..dims[1].to_i).each do |col|
+        coords = AbstractElement.make_coords(row, col)
+        values[coords] = init_value
+      end
+    end
+
+    values
+  end
+
+  def self.zero_values(dimensions)
+    case dimensions.size
+    when 1
+      Matrix.make_array(dimensions, NumericConstant.new(0))
+    when 2
+      Matrix.make_matrix(dimensions, NumericConstant.new(0))
+    end
+  end
+
+  def self.one_values(dimensions)
+    case dimensions.size
+    when 1
+      Matrix.make_array(dimensions, NumericConstant.new(1))
+    when 2
+      Matrix.make_matrix(dimensions, NumericConstant.new(1))
+    end
+  end
+
+  def self.identity_values(dimensions)
+    new_values = make_matrix(dimensions, NumericConstant.new(0))
+    one = NumericConstant.new(1)
+
+    base = $options['base'].value
+
+    (base..dimensions[0].to_i).each do |row|
+      coords = AbstractElement.make_coords(row, row)
+      new_values[coords] = one
+    end
+
+    new_values
+  end
+
   attr_reader :dimensions
 
   def initialize(dimensions, values)
@@ -311,67 +371,7 @@ class Matrix
     inv_values
   end
 
-  def self.zero_values(dimensions)
-    case dimensions.size
-    when 1
-      Matrix.make_array(dimensions, NumericConstant.new(0))
-    when 2
-      Matrix.make_matrix(dimensions, NumericConstant.new(0))
-    end
-  end
-
-  def self.one_values(dimensions)
-    case dimensions.size
-    when 1
-      Matrix.make_array(dimensions, NumericConstant.new(1))
-    when 2
-      Matrix.make_matrix(dimensions, NumericConstant.new(1))
-    end
-  end
-
-  def self.identity_values(dimensions)
-    new_values = make_matrix(dimensions, NumericConstant.new(0))
-    one = NumericConstant.new(1)
-
-    base = $options['base'].value
-
-    (base..dimensions[0].to_i).each do |row|
-      coords = AbstractElement.make_coords(row, row)
-      new_values[coords] = one
-    end
-
-    new_values
-  end
-
   private
-
-  def self.make_array(dims, init_value)
-    values = {}
-
-    base = $options['base'].value
-
-    (base..dims[0].to_i).each do |col|
-      coords = AbstractElement.make_coord(col)
-      values[coords] = init_value
-    end
-
-    values
-  end
-
-  def self.make_matrix(dims, init_value)
-    values = {}
-
-    base = $options['base'].value
-
-    (base..dims[0].to_i).each do |row|
-      (base..dims[1].to_i).each do |col|
-        coords = AbstractElement.make_coords(row, col)
-        values[coords] = init_value
-      end
-    end
-
-    values
-  end
 
   def print_1(printer, interpreter)
     n_cols = @dimensions[0].to_i

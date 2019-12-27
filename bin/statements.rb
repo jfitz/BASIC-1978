@@ -246,7 +246,14 @@ class AbstractStatement
     @core_tokens = tokens_lists.flatten
     @valid = true
     @comment = false
-    @elements = {numerics: [], strings: [], variables: [], operators: [], functions: [], userfuncs: []}
+    @elements = {
+      numerics: [],
+      strings: [],
+      variables: [],
+      operators: [],
+      functions: [],
+      userfuncs: []
+    }
     @errors = []
     @modifiers = []
     @any_if_modifiers = false
@@ -731,7 +738,14 @@ class AbstractStatement
       items.each { |item| userfuncs += item.userfuncs }
     end
 
-    {numerics: numerics, strings: strings, variables: variables, operators: operators, functions: functions, userfuncs: userfuncs}
+    {
+      numerics: numerics,
+      strings: strings,
+      variables: variables,
+      operators: operators,
+      functions: functions,
+      userfuncs: userfuncs
+    }
   end
 end
 
@@ -853,38 +867,31 @@ module FileFunctions
   end
 
   def add_needed_value(items, shape)
-    if items.empty? || !items[-1].printable?
-      items << ValueExpression.new([], shape)
-    end
+    items << ValueExpression.new([], shape) if
+      items.empty? || !items[-1].printable?
   end
 
   def add_needed_carriage(items)
-    if !items.empty? && items[-1].printable?
-      items << CarriageControl.new('')
-    end
+    items << CarriageControl.new('') if !items.empty? && items[-1].printable?
   end
 
   def add_final_carriage(items, final)
-    if !items.empty? && items[-1].printable?
-      items << final
-    end
+    items << final if !items.empty? && items[-1].printable?
   end
 
   def add_default_value_carriage(items, shape)
-    if items.empty?
-      add_needed_value(items, shape)
-      add_final_carriage(items, CarriageControl.new('NL'))
-    end
+    return unless items.empty?
+
+    add_needed_value(items, shape)
+    add_final_carriage(items, CarriageControl.new('NL'))
   end
 
   def dump
     lines = []
 
-    unless @file_tokens.nil?
-      lines += @file_tokens.dump
-    end
-
+    lines += @file_tokens.dump unless @file_tokens.nil?
     @items.each { |item| lines += item.dump } unless @items.nil?
+
     lines
   end
 end
@@ -1475,7 +1482,7 @@ class ForStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w(TO STEP)
+    %w[TO STEP]
   end
 
   def initialize(keywords, tokens_lists)
@@ -2092,7 +2099,7 @@ class IfStatement < AbstractIfStatement
   end
 
   def self.extra_keywords
-    %w(THEN ELSE)
+    %w[THEN ELSE]
   end
 
   def initialize(_, _)
@@ -2522,7 +2529,7 @@ class OnStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w(GOTO THEN GOSUB)
+    %w[GOTO THEN GOSUB]
   end
 
   def initialize(keywords, tokens_lists)
@@ -2665,7 +2672,7 @@ class OpenStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w(FOR INPUT OUTPUT APPEND AS FILE)
+    %w[FOR INPUT OUTPUT APPEND AS FILE]
   end
 
   def initialize(keywords, tokens_lists)
@@ -2750,7 +2757,7 @@ class OptionStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w(
+    %w[
       ASC_ALLOW_ALL
       BACK_TAB BASE
       CHR_ALLOW_ALL
@@ -2761,7 +2768,7 @@ class OptionStatement < AbstractStatement
       PRECISION PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
       QMARK_AFTER_PROMPT REQUIRE_INITIALIZED
       SEMICOLON_ZONE_WIDTH TRACE ZONE_WIDTH
-    )
+    ]
   end
 
   def initialize(keywords, tokens_lists)

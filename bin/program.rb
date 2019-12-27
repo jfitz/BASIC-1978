@@ -611,9 +611,18 @@ class Program
     language_level = volume / difficulty ** 2 if difficulty > 0
     intelligence = 0
     intelligence = volume / difficulty if difficulty > 0
-    time = effort / (60 * 18)  # 18 is the Stoud number for programming
+    time = effort / (60 * 18) # 18 is the Stoud number for programming
 
-    [length, vocabulary, volume, difficulty, effort, language_level, intelligence, time]
+    [
+      length,
+      vocabulary,
+      volume,
+      difficulty,
+      effort,
+      language_level,
+      intelligence,
+      time
+    ]
   end
 
   def unreachable_code
@@ -687,10 +696,10 @@ class Program
 
           # only reachable lines can reach other lines
           if reachable[line_number_idx]
-            # a live line updates its gotos to live
+            # a reachable line updates its targets to 'reachable'
             statement_gotos = gotos[line_number_idx]
             statement_gotos.each do |goto_number_idx|
-              if !reachable[goto_number_idx]
+              unless reachable[goto_number_idx]
                 reachable[goto_number_idx] = true
                 any_changes = true
               end
