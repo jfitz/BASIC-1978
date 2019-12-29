@@ -739,9 +739,7 @@ class IntegerConstant < AbstractValueElement
 
   def self.numeric(text)
     # nnn%
-    if /\A\s*[+-]?\d+%\z/ =~ text
-      text.to_f.to_i
-    end
+    text.to_f.to_i if /\A\s*[+-]?\d+%\z/ =~ text
   end
 
   attr_reader :token_chars
@@ -1264,7 +1262,7 @@ class FileHandle < AbstractElement
     super()
 
     raise(BASICRuntimeError, 'Invalid file reference') unless
-      ['Fixnum', 'Integer'].include?(num.class.to_s)
+      %w[Fixnum Integer].include?(num.class.to_s)
 
     raise(BASICRuntimeError, 'Invalid file number') if num < 0
 
@@ -1476,24 +1474,19 @@ class VariableName < AbstractElement
   end
 
   def compatible?(value)
-    numerics = [:numeric, :integer]
-    strings = [:string]
+    numerics = %i[numeric integer]
+    strings = %i[string]
 
-    compatible = false
-
-    if content_type == :numeric
-      compatible = numerics.include?(value.content_type)
+    case content_type
+    when :numeric
+      numerics.include?(value.content_type)
+    when :string
+      strings.include?(value.content_type)
+    when :integer
+      numerics.include?(value.content_type)
+    else
+      false
     end
-
-    if content_type == :string
-      compatible = strings.include?(value.content_type)
-    end
-
-    if content_type == :integer
-      compatible = numerics.include?(value.content_type)
-    end
-
-    compatible
   end
 
   def subscripts
@@ -1554,24 +1547,19 @@ class UserFunctionName < AbstractElement
   end
 
   def compatible?(value)
-    numerics = [:numeric, :integer]
-    strings = [:string]
+    numerics = %i[numeric integer]
+    strings = %i[string]
 
-    compatible = false
-
-    if content_type == :numeric
-      compatible = numerics.include?(value.content_type)
+    case content_type
+    when :numeric
+      numerics.include?(value.content_type)
+    when :string
+      strings.include?(value.content_type)
+    when :integer
+      numerics.include?(value.content_type)
+    else
+      false
     end
-
-    if content_type == :string
-      compatible = strings.include?(value.content_type)
-    end
-
-    if content_type == :integer
-      compatible = numerics.include?(value.content_type)
-    end
-
-    compatible
   end
 
   def subscripts
@@ -1648,24 +1636,19 @@ class Variable < AbstractElement
   end
 
   def compatible?(value)
-    numerics = [:numeric, :integer]
-    strings = [:string]
+    numerics = %i[numeric integer]
+    strings = %i[string]
 
-    compatible = false
-
-    if content_type == :numeric
-      compatible = numerics.include?(value.content_type)
+    case content_type
+    when :numeric
+      numerics.include?(value.content_type)
+    when :string
+      strings.include?(value.content_type)
+    when :integer
+      numerics.include?(value.content_type)
+    else
+      false
     end
-
-    if content_type == :string
-      compatible = strings.include?(value.content_type)
-    end
-
-    if content_type == :integer
-      compatible = numerics.include?(value.content_type)
-    end
-
-    compatible
   end
 
   def to_s

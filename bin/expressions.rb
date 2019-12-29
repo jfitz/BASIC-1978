@@ -1579,7 +1579,7 @@ class Assignment
     @functions = @target.functions + @expression.functions
     @userfuncs = @target.userfuncs + @expression.userfuncs
   end
- 
+
   public
 
   def count_target

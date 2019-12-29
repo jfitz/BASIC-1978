@@ -1103,7 +1103,7 @@ class ChainStatement < AbstractStatement
     target_values = @target.evaluate(interpreter)
     target_value = target_values[0]
 
-    raise(BASICExpressionError, "Target must be text item.") unless
+    raise(BASICExpressionError, 'Target must be text item.') unless
       target_value.text_constant?
 
     interpreter.chain(target_values)
@@ -1525,9 +1525,15 @@ class ForStatement < AbstractStatement
         @elements[:variables] =
           [control] + @start.variables + @end.variables + @step.variables
 
-        @elements[:operators] = @start.operators + @end.operators + @step.operators
-        @elements[:functions] = @start.functions + @end.functions + @step.functions
-        @elements[:userfuncs] = @start.userfuncs + @end.userfuncs + @step.userfuncs
+        @elements[:operators] =
+          @start.operators + @end.operators + @step.operators
+
+        @elements[:functions] =
+          @start.functions + @end.functions + @step.functions
+
+        @elements[:userfuncs] =
+          @start.userfuncs + @end.userfuncs + @step.userfuncs
+
         @mccabe += 1
       rescue BASICExpressionError => e
         @errors << e.message
@@ -2454,9 +2460,10 @@ end
 class OnErrorStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('ON'),
-       KeywordToken.new('ERROR'),
-       KeywordToken.new('GOTO')
+      [
+        KeywordToken.new('ON'),
+        KeywordToken.new('ERROR'),
+        KeywordToken.new('GOTO')
       ]
     ]
   end
@@ -3114,7 +3121,7 @@ class ResumeStatement < AbstractStatement
     end
 
     @target = nil
-    if !target.nil?
+    unless target.nil?
       begin
         @target = LineNumber.new(target)
         @linenums = [@target]
@@ -3296,7 +3303,7 @@ class ArrInputStatement < AbstractStatement
 
   def initialize(keywords, tokens_lists)
     super
-    
+
     template = [[1, '>=']]
 
     if check_template(tokens_lists, template)
@@ -3332,7 +3339,7 @@ class ArrInputStatement < AbstractStatement
 
         interpreter.set_dimensions(target, target.dimensions) if
           target.dimensions?
-        
+
         # make sure dimension is one
         dims = interpreter.get_dimensions(name)
         raise(BASICExpressionError, 'Not an array') unless dims.size == 1
@@ -3636,7 +3643,7 @@ class MatInputStatement < AbstractStatement
 
   def initialize(keywords, tokens_lists)
     super
-    
+
     template = [[1, '>=']]
 
     if check_template(tokens_lists, template)
@@ -3672,7 +3679,7 @@ class MatInputStatement < AbstractStatement
 
         interpreter.set_dimensions(target, target.dimensions) if
           target.dimensions?
-        
+
         # make sure dimension is one or two
         dims = interpreter.get_dimensions(name)
         raise(BASICExpressionError, 'Not an array') unless
@@ -3687,7 +3694,7 @@ class MatInputStatement < AbstractStatement
             item_names << variable
           end
         end
-        
+
         if dims.size == 2
           base = interpreter.base
           (base..dims[0].to_i).each do |row|

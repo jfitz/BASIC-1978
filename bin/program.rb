@@ -608,7 +608,7 @@ class Program
     difficulty = (n1.to_f / 2) * (nn2.to_f / n2) if n2 > 0
     effort = difficulty * volume
     language_level = 0
-    language_level = volume / difficulty ** 2 if difficulty > 0
+    language_level = volume / difficulty**2 if difficulty > 0
     intelligence = 0
     intelligence = volume / difficulty if difficulty > 0
     time = effort / (60 * 18) # 18 is the Stoud number for programming
@@ -1380,9 +1380,7 @@ class Program
     index = line_numbers.index(line_number)
     line_number = line_numbers[index + 1]
 
-    unless line_number.nil?
-      return LineNumberIdx.new(line_number, 0)
-    end
+    return LineNumberIdx.new(line_number, 0) unless line_number.nil?
 
     # nothing left to execute
     nil
