@@ -1133,14 +1133,16 @@ class ChangeStatement < AbstractStatement
       source_tokens = tokens_lists[0]
       target_tokens = tokens_lists[2]
 
-      @source = ValueExpression.new(source_tokens, :scalar)
+      source = ValueExpression.new(source_tokens, :scalar)
 
-      case @source.content_type
+      case source.content_type
       when :string
         # string to array
+        @source = ValueExpression.new(source_tokens, :scalar)
         @target = TargetExpression.new(target_tokens, :array)
       when :numeric
         # array to string
+        @source = ValueExpression.new(source_tokens, :array)
         @target = TargetExpression.new(target_tokens, :scalar)
       else
         raise BASICExpressionError, 'Type mismatch'
