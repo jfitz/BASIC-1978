@@ -974,7 +974,7 @@ class Interpreter
 
     fhr = @file_handlers[fh]
     fhr.close
-    ### todo: remove file handle
+    @file_handlers.delete(fh)
   end
 
   def get_file_handler(file_handle, mode)

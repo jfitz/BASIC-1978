@@ -1096,7 +1096,7 @@ class ChainStatement < AbstractStatement
   end
 
   def dump
-    ['']
+    @target.dump
   end
 
   def execute_core(interpreter)
@@ -1247,21 +1247,7 @@ class CloseStatement < AbstractStatement
 
   def execute_core(interpreter)
     fns = @filenum_expression.evaluate(interpreter)
-    fh = fns[0]
-
-    case fh.class.to_s
-    when 'Fixnum'
-      fh = FileHandle.new(fh)
-    when 'NumericConstant'
-      fh = FileHandle.new(fh.to_i)
-    when 'IntegerConstant'
-      fh = FileHandle.new(fh.to_i)
-    when 'FileHandle'
-      fh = fns[0]
-    else
-      raise(BASICRuntimeError, "Invalid file number #{fh.class}:#{fh}")
-    end
-
+    fh = FileHandle.new(fns[0])
     interpreter.close_file(fh)
   end
 end
@@ -2738,21 +2724,7 @@ class OpenStatement < AbstractStatement
     filenames = @filename_expression.evaluate(interpreter)
     filename = filenames[0]
     fhs = @filenum_expression.evaluate(interpreter)
-    fh = fhs[0]
-
-    case fh.class.to_s
-    when 'Fixnum'
-      fh = FileHandle.new(fh)
-    when 'NumericConstant'
-      fh = FileHandle.new(fh.to_i)
-    when 'IntegerConstant'
-      fh = FileHandle.new(fh.to_i)
-    when 'FileHandle'
-      fh = fhs[0]
-    else
-      raise(BASICRuntimeError, "Invalid file number #{fh.class}:#{fh}")
-    end
-
+    fh = FileHandle.new(fhs[0])
     interpreter.open_file(filename, fh, @mode)
   end
 end
