@@ -46,6 +46,9 @@
  Variable:C
  NumericConstant:0
  AssignmentOperator:=
+ control: Variable:J
+ start:   ["Variable:N1", "NumericConstant:1", "BinaryOperator:+"]
+ end:     ["Variable:N1", "Variable:N2", "BinaryOperator:+"]
 120 REM BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
  Remark:BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
 121 DIM C$(N1+N2)
@@ -117,6 +120,12 @@
  Variable:X
  NumericConstant:0
  AssignmentOperator:=
+ control: Variable:J
+ start:   ["Variable:N1", "NumericConstant:1", "BinaryOperator:+"]
+ end:     ["Variable:N1", "Variable:N2", "BinaryOperator:+"]
+ control: Variable:I
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N2"]
 145 X(I,I+N1) = 1 FOR I = 1 TO N2 ' SET EXPANSION TO IDEN MATRIX
  Variable:I
  Variable:I
@@ -125,6 +134,9 @@
  Variable:X
  NumericConstant:1
  AssignmentOperator:=
+ control: Variable:I
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N2"]
 160 REM BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
  Remark:BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
 161 DIM B(N2)
@@ -142,6 +154,9 @@
  Variable:R
  NumericConstant:0
  AssignmentOperator:=
+ control: Variable:I
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N2"]
 200 REM PRINT THE TABLEAU
  Remark:PRINT THE TABLEAU
 201 PRINT
@@ -168,6 +183,9 @@
  Variable:I
  Variable:C$
  CarriageControl:,
+ control: Variable:I
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N1", "Variable:N2", "BinaryOperator:+"]
 212 PRINT "B"
  TextConstant:"B"
  CarriageControl:NL
@@ -187,6 +205,9 @@
  Variable:J
  Variable:X
  CarriageControl:,
+ control: Variable:J
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N1", "Variable:N2", "BinaryOperator:+"]
 230   PRINT B(I)
  Variable:I
  Variable:B
@@ -205,6 +226,9 @@
  Variable:Z
  NumericConstant:0
  AssignmentOperator:=
+ control: Variable:J
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N1", "Variable:N2", "BinaryOperator:+"]
 305 FOR I = 1 TO N2
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -222,6 +246,9 @@
  BinaryOperator:*
  BinaryOperator:+
  AssignmentOperator:=
+ control: Variable:J
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N1", "Variable:N2", "BinaryOperator:+"]
 307 NEXT I
  Variable:I
 310 REM COMPUTE Z - C
@@ -279,6 +306,9 @@
  Variable:W
  NumericConstant:0
  AssignmentOperator:=
+ control: Variable:I
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N2"]
 333 W(I) = B(I) / X(I,J0) IF X(I,J0) <> 0 FOR I = 1 TO N2
  Variable:I
  Variable:W
@@ -289,6 +319,14 @@
  Variable:X
  BinaryOperator:/
  AssignmentOperator:=
+ Variable:I
+ Variable:J0
+ Variable:X
+ NumericConstant:0
+ BinaryOperator:<>
+ control: Variable:I
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N2"]
 340 REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
  Remark:PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
 341 PRINT
@@ -315,6 +353,9 @@
  Variable:I
  Variable:C$
  CarriageControl:,
+ control: Variable:I
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N1", "Variable:N2", "BinaryOperator:+"]
 352 PRINT "B","B / ";C$(J0)
  TextConstant:"B"
  CarriageControl:,
@@ -339,6 +380,9 @@
  Variable:J
  Variable:X
  CarriageControl:,
+ control: Variable:J
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:N1", "Variable:N2", "BinaryOperator:+"]
 363   PRINT B(I),W(I)
  Variable:I
  Variable:B
