@@ -23,6 +23,16 @@ class IfModifier
     'IF ' + @expression.to_s
   end
 
+  def dump
+    lines = []
+
+    lines += @expression.dump unless @expression.nil?
+    lines += @statement.dump unless @statement.nil?
+    lines += @else_stmt.dump unless @else_stmt.nil?
+
+    lines
+  end
+
   def pre_trace
     ' IF ' + @expression.to_s
   end
@@ -139,6 +149,15 @@ class ForModifier
     else
       "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
     end
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump unless @control.nil?
+    lines << 'start:   ' + @start.dump.to_s unless @start.nil?
+    lines << 'end:     ' + @end.dump.to_s unless @end.nil?
+    lines << 'step:    ' + @step.dump.to_s unless @step.nil?
+    lines
   end
 
   def pre_trace

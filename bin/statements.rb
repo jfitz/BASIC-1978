@@ -831,7 +831,11 @@ class RemarkStatement < AbstractStatement
   end
 
   def dump
-    [@rest.dump]
+    lines = [@rest.dump]
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(_) end
@@ -891,6 +895,8 @@ module FileFunctions
 
     lines += @file_tokens.dump unless @file_tokens.nil?
     @items.each { |item| lines += item.dump } unless @items.nil?
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
     lines
   end
@@ -1096,7 +1102,11 @@ class ChainStatement < AbstractStatement
   end
 
   def dump
-    ['']
+    lines = ['']
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
@@ -1156,8 +1166,13 @@ class ChangeStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @source.dump unless @source.nil?
+
     lines += @target.dump unless @target.nil?
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 
@@ -1242,7 +1257,11 @@ class CloseStatement < AbstractStatement
   end
 
   def dump
-    @filenum_expression.dump
+    lines = @filenum_expression.dump
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
@@ -1290,7 +1309,11 @@ class DataStatement < AbstractStatement
   end
 
   def dump
-    @expressions.dump
+    lines = @expressions.dump
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def pre_execute(interpreter)
@@ -1342,7 +1365,11 @@ class DefineFunctionStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @definition.dump unless @definition.nil?
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 
@@ -1387,7 +1414,11 @@ class DimStatement < AbstractStatement
 
   def dump
     lines = []
+
     @expressions.each { |expression| lines += expression.dump }
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 
@@ -1425,7 +1456,11 @@ class EndStatement < AbstractStatement
   end
 
   def dump
-    ['']
+    lines = ['']
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def program_check(program, console_io, line_number_index)
@@ -1467,7 +1502,11 @@ class FnendStatement < AbstractStatement
   end
 
   def dump
-    ['']
+    lines = ['']
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
@@ -1547,10 +1586,14 @@ class ForStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines << 'control: ' + @control.dump unless @control.nil?
     lines << 'start:   ' + @start.dump.to_s unless @start.nil?
     lines << 'end:     ' + @end.dump.to_s unless @end.nil?
     lines << 'step:    ' + @step.dump.to_s unless @step.nil?
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 
@@ -1627,7 +1670,11 @@ class GosubStatement < AbstractStatement
   end
 
   def dump
-    [@destination.dump]
+    lines = [@destination.dump]
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def gotos
@@ -1693,7 +1740,11 @@ class GotoStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines << @destination.dump unless @destination.nil?
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 
@@ -1972,6 +2023,8 @@ class AbstractIfStatement < AbstractStatement
     lines += @statement.dump unless @statement.nil?
     lines += @else_stmt.dump unless @else_stmt.nil?
 
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 
@@ -2214,7 +2267,11 @@ class AbstractLetStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @assignment.dump unless @assignment.nil?
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 end
@@ -2409,15 +2466,17 @@ class NextStatement < AbstractStatement
   end
 
   def dump
-    vars = []
+    lines = []
 
     if !@controls.nil?
       @controls.each do |control|
-        vars << control.dump unless control.empty?
+        lines << control.dump unless control.empty?
       end
     end
 
-    vars
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
@@ -2497,7 +2556,11 @@ class OnErrorStatement < AbstractStatement
   end
 
   def dump
-    [@destination.dump]
+    lines = [@destination.dump]
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def gotos
@@ -2591,8 +2654,13 @@ class OnStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @expression.dump
+
     @destinations.each { |destination| lines << destination.dump }
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 
@@ -2729,8 +2797,12 @@ class OpenStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @filename_expression.dump unless @filename_expression.nil?
     lines += @filenum_expression.dump unless @filenum_expression.nil?
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 
@@ -2800,7 +2872,11 @@ class OptionStatement < AbstractStatement
 
   def dump
     lines = []
+
     lines += @expression.dump unless @expression.nil?
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
     lines
   end
 
@@ -3014,7 +3090,11 @@ class RandomizeStatement < AbstractStatement
   end
 
   def dump
-    ['']
+    lines = ['']
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
@@ -3087,7 +3167,11 @@ class RestoreStatement < AbstractStatement
   end
 
   def dump
-    ['']
+    lines = ['']
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
@@ -3134,7 +3218,11 @@ class ResumeStatement < AbstractStatement
   end
 
   def dump
-    ['']
+    lines = ['']
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
@@ -3163,7 +3251,11 @@ class ReturnStatement < AbstractStatement
   end
 
   def dump
-    ['']
+    lines = ['']
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
@@ -3202,7 +3294,11 @@ class SleepStatement < AbstractStatement
   end
 
   def dump
-    @expression.dump
+    lines = @expression.dump
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
@@ -3233,7 +3329,11 @@ class StopStatement < AbstractStatement
   end
 
   def dump
-    ['']
+    lines = ['']
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
   end
 
   def execute_core(interpreter)
