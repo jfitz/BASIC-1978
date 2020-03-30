@@ -847,6 +847,13 @@ class Program
       return
     end
 
+    bpes = interpreter.check_breakpoints(@lines)
+
+    unless bpes.empty?
+      bpes.each { |error| @console_io.print_line(error) }
+      return
+    end
+
     reset_profile_metrics
     interpreter.run(self)
   end

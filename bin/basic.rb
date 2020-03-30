@@ -335,7 +335,7 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
   tokenbuilders << WhitespaceTokenBuilder.new
 end
 
-def make_command_tokenbuilders(quotes)
+def make_command_tokenbuilders(quotes, long_names)
   tokenbuilders = []
 
   keywords = %w[
@@ -347,7 +347,7 @@ def make_command_tokenbuilders(quotes)
     CHR_ALLOW_ALL
     DEFAULT_PROMPT DETECT_INFINITE_LOOP
     ECHO FIELD_SEP HEADING
-    IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
+    IF IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
     INT_FLOOR LOCK_FORNEXT LONG_NAMES NEWLINE_SPEED
     PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
     QMARK_AFTER_PROMPT RANDOMIZE REQUIRE_INITIALIZED RESPECT_RANDOMIZE
@@ -360,12 +360,20 @@ def make_command_tokenbuilders(quotes)
   operators = (un_ops + bi_ops).uniq
   tokenbuilders << ListTokenBuilder.new(operators, OperatorToken)
 
+  tokenbuilders << ListTokenBuilder.new(['('], GroupStartToken)
+  tokenbuilders << ListTokenBuilder.new([')'], GroupEndToken)
   tokenbuilders << ListTokenBuilder.new([',', ';'], ParamSeparatorToken)
+
+  tokenbuilders <<
+    ListTokenBuilder.new(FunctionFactory.function_names, FunctionToken)
+
+  tokenbuilders <<
+    ListTokenBuilder.new(FunctionFactory.user_function_names, UserFunctionToken)
 
   tokenbuilders << TextTokenBuilder.new(quotes)
 
   tokenbuilders << NumberTokenBuilder.new
-
+  tokenbuilders << VariableTokenBuilder.new(long_names)
   tokenbuilders << ListTokenBuilder.new(%w[TRUE FALSE], BooleanConstantToken)
   tokenbuilders << WhitespaceTokenBuilder.new
 end
@@ -487,7 +495,8 @@ $options['int_floor'] = Option.new(boolean, options.key?(:int_floor))
 $options['lock_fornext'] =
   Option.new(boolean, options.key?(:lock_fornext))
 
-$options['long_names'] = Option.new(boolean, options.key?(:long_names))
+long_names = options.key?(:long_names)
+$options['long_names'] = Option.new(boolean, long_names)
 
 $options['max_line_num'] = 32767
 $options['min_line_num'] = 1
@@ -630,7 +639,7 @@ if list_filename.nil? && parse_filename.nil? && analyze_filename.nil? &&
   interpreter = Interpreter.new(console_io)
   interpreter.set_default_args('RND', NumericConstant.new(1))
 
-  tokenbuilders = make_command_tokenbuilders(quotes)
+  tokenbuilders = make_command_tokenbuilders(quotes, long_names)
 
   shell = Shell.new(console_io, interpreter, program, tokenbuilders)
 
