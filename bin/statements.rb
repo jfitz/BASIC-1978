@@ -468,7 +468,7 @@ class AbstractStatement
 
     if part_of_user_function.nil? || function_running
       if @part_of_user_function != interpreter.current_user_function
-        raise(BASICRuntimeError, 'Invalid transfer in/out of function')
+        raise(BASICSyntaxError, 'Invalid transfer in/out of function')
       end
 
       timing = Benchmark.measure { execute(interpreter) }
@@ -765,11 +765,11 @@ class InvalidStatement < AbstractStatement
   end
 
   def pre_execute(_)
-    raise(BASICRuntimeError, @errors[0])
+    raise(BASICSyntaxError, @errors[0])
   end
 
   def execute_core(_)
-    raise(BASICRuntimeError, @errors[0])
+    raise(BASICSyntaxError, @errors[0])
   end
 end
 
@@ -950,7 +950,8 @@ module InputFunctions
   end
 
   def zip(names, values)
-    raise(BASICRuntimeError, 'Too few items') if values.size < names.size
+    raise BASICRuntimeError.new('Too few items', 112) if
+      values.size < names.size
 
     results = []
     (0...names.size).each do |i|
@@ -1207,9 +1208,9 @@ class ChangeStatement < AbstractStatement
 
       dims = interpreter.get_dimensions(source_variable_name)
 
-      raise(BASICRuntimeError, 'Source not an array') if dims.nil?
+      raise(BASICSyntaxError, 'Source not an array') if dims.nil?
 
-      raise(BASICRuntimeError, 'Source must have 1 dimension') unless
+      raise(BASICSyntaxError, 'Source must have 1 dimension') unless
         dims.size == 1
 
       cols = dims[0].to_i
@@ -1416,7 +1417,7 @@ class DimStatement < AbstractStatement
       variable = variables[0]
       subscripts = variable.subscripts
       if subscripts.empty?
-        raise BASICRuntimeError, 'DIM statement requires subscript range'
+        raise BASICSyntaxError, 'DIM statement requires subscript range'
       end
       interpreter.set_dimensions(variable, subscripts)
     end
@@ -1683,7 +1684,7 @@ class GosubStatement < AbstractStatement
     line_number = @destination
     index = interpreter.statement_start_index(line_number, 0)
 
-    raise(BASICRuntimeError, 'Line number not found') if index.nil?
+    raise(BASICSyntaxError, 'Line number not found') if index.nil?
 
     destination = LineNumberIndex.new(line_number, 0, index)
     interpreter.push_return(interpreter.next_line_index)
@@ -1757,7 +1758,7 @@ class GotoStatement < AbstractStatement
     unless @destination.nil?
       line_number = @destination
       index = interpreter.statement_start_index(line_number, 0)
-      raise(BASICRuntimeError, 'Line number not found') if index.nil?
+      raise(BASICSyntaxError, 'Line number not found') if index.nil?
       destination = LineNumberIndex.new(line_number, 0, index)
       interpreter.next_line_index = destination
     end
@@ -2090,7 +2091,7 @@ class AbstractIfStatement < AbstractStatement
       unless @destination.nil?
         line_number = @destination
         index = interpreter.statement_start_index(line_number, 0)
-        raise(BASICRuntimeError, 'Line number not found') if index.nil?
+        raise(BASICSyntaxError, 'Line number not found') if index.nil?
         destination = LineNumberIndex.new(line_number, 0, index)
         interpreter.next_line_index = destination
       end
@@ -2100,7 +2101,7 @@ class AbstractIfStatement < AbstractStatement
       unless @else_dest.nil?
         line_number = @else_dest
         index = interpreter.statement_start_index(line_number, 0)
-        raise(BASICRuntimeError, 'Line number not found') if index.nil?
+        raise(BASICSyntaxError, 'Line number not found') if index.nil?
         destination = LineNumberIndex.new(line_number, 0, index)
         interpreter.next_line_index = destination
       end
@@ -2231,7 +2232,7 @@ class InputStatement < AbstractStatement
       values = fhr.input(interpreter)
     end
 
-    raise(BASICRuntimeError, 'Not enough values') if
+    raise BASICRuntimeError.new('Not enough values', 112) if
       values.size < item_names.size
 
     name_value_pairs =
@@ -2686,14 +2687,14 @@ class OnStatement < AbstractStatement
     io.trace_output(' ' + @expression.to_s + ' = ' + value.to_s)
     index = value.to_i
 
-    raise(BASICRuntimeError, 'Index out of range') if
+    raise BASICRuntimeError.new('Index out of range', 129) if
       index < 1 || index > @destinations.size
 
     # get destination in list
     line_number = @destinations[index - 1]
     index = interpreter.statement_start_index(line_number, 0)
 
-    raise(BASICRuntimeError, 'Line number not found') if index.nil?
+    raise(BASICSyntaxError, 'Line number not found') if index.nil?
 
     interpreter.push_return(interpreter.next_line_index) if @gosub
 
@@ -2952,7 +2953,7 @@ class PrintUsingStatement < AbstractStatement
 
     format_spec, items = extract_format(@items, interpreter)
 
-    raise(BASICRuntimeError, 'No print format') if format_spec.nil?
+    raise BASICRuntimeError.new('No print format', 144) if format_spec.nil?
 
     # split format
     formats = split_format(format_spec)
@@ -2966,7 +2967,7 @@ class PrintUsingStatement < AbstractStatement
         items.shift while
           !items.empty? && items[0].carriage_control?
 
-        raise(BASICRuntimeError, 'Too few print items for format') if
+        raise BASICRuntimeError.new('Too few print items for format', 145) if
           items.empty?
 
         item = items.shift
@@ -3440,7 +3441,7 @@ class ArrInputStatement < AbstractStatement
       values = file_values(fhr, interpreter)
     end
 
-    raise(BASICRuntimeError, 'Not enough values') if
+    raise BASICRuntimeError.new('Not enough values', 112) if
       values.size < item_names.size
 
     # use names based on variable dimensions
@@ -3560,7 +3561,7 @@ class ArrReadStatement < AbstractStatement
     when 1
       read_array(name, dims, interpreter, ds)
     else
-      raise(BASICRuntimeError, 'Dimensions for ARR READ must be 1')
+      raise(BASICSyntaxError, 'Dimensions for ARR READ must be 1')
     end
   end
 
@@ -3699,7 +3700,7 @@ class ArrLetStatement < AbstractLetStatement
     r_values = @assignment.eval_value(interpreter)
     r_value = r_values[0]
 
-    raise(BASICRuntimeError, 'Expected Array') if
+    raise(BASICSyntaxError, 'Expected Array') if
       r_value.class.to_s != 'BASICArray'
 
     r_value
@@ -3794,7 +3795,7 @@ class MatInputStatement < AbstractStatement
       values = file_values(fhr, interpreter)
     end
 
-    raise(BASICRuntimeError, 'Not enough values') if
+    raise BASICRuntimeError.new('Not enough values', 112) if
       values.size < item_names.size
 
     # use names based on variable dimensions
@@ -3913,7 +3914,7 @@ class MatReadStatement < AbstractStatement
     when 2
       read_matrix(name, dims, interpreter, ds)
     else
-      raise(BASICRuntimeError, 'Dimensions for MAT READ must be 1 or 2')
+      raise(BASICSyntaxError, 'Dimensions for MAT READ must be 1 or 2')
     end
   end
 
@@ -4048,7 +4049,7 @@ class MatLetStatement < AbstractLetStatement
     r_values = @assignment.eval_value(interpreter)
     r_value = r_values[0]
 
-    raise(BASICRuntimeError, 'Expected Matrix') if
+    raise(BASICSyntaxError, 'Expected Matrix') if
       r_value.class.to_s != 'Matrix'
 
     interpreter.set_default_args('CON2', nil)

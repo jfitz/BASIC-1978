@@ -30,11 +30,26 @@ A) IS
  65
 60: GOTO 20
 20: READ A$
+ A$ = "LONG STRING WITH LOTS OF TEXT"
+30: IF A$ = "STOP" THEN 99
+ A$: "LONG STRING WITH LOTS OF TEXT"
+ A$="STOP": false
+40: LET A = ASC(A$)
+ A$: "LONG STRING WITH LOTS OF TEXT"
+ A = 76
+50: PRINT "ASC("; A$; ") IS "; A
+ASC(
+ A$: "LONG STRING WITH LOTS OF TEXT"
+LONG STRING WITH LOTS OF TEXT) IS 
+ A: 76
+ 76
+60: GOTO 20
+20: READ A$
  A$ = ""
 30: IF A$ = "STOP" THEN 99
  A$: ""
  A$="STOP": false
 40: LET A = ASC(A$)
  A$: ""
-Empty string in ASC() in line 40
+Error 128 Empty string in ASC() in line 40
 

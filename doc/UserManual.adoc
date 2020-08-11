@@ -23,6 +23,13 @@ Each line is interpreted each time it is executed.
 If a line is executed ten times, it is interpreted ten times.
 There is some up-front parsing that occurs, but not much.
 
+The BASIC-1973 language has limited exception handling.
+An exception handler can be specified with the ON ERROR statement.
+The exception handler can correct the problem and continue execution with the RESUME statement.
+ 
+Space characters are insignificant in most places.
+When loading a program (or accepting new statements from the user), BASIC-1973 removes all spaces and then parses the line.
+
 BASIC-1978 is really fussy!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -625,7 +632,7 @@ BASIC-1978 supports the following operations for boolean expressions:
 Parentheses may be used to force computations is a specific order.
 The expression A+B*C performs the multiplication first; the expression (A+B)*C performs the addition first.
 
-Errors in computation (overflow, underflow, and divide by zero) cause execution to stop.
+Errors in computation (overflow, underflow, and divide by zero) cause execution to stop, unless a handler has been specified with ON ERROR.
 
 BASIC-1978 supports the following boolean comparisions for numeric variables:
 
@@ -1266,6 +1273,9 @@ After executing ON ERROR GOTO, BASIC will transfer control to the specified line
 Control is restored to the original statement that had the error when a RESUME statement is executed.
 
 If an error occurs in the "error handler" specified by ON ERROR GOTO, the program stops, unless another ON ERROR GOTO statement is executed as part of the error handler.
+
+Consult the file ErrorCodes.txt for a list of error codes and their meanings.
+All of the errors in ErrorCodes.txt are trappable with ON ERROR GOTO.
 
 ON GOTO/GOSUB
 ~~~~~~~~~~~~~

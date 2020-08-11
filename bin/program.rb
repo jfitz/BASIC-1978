@@ -833,7 +833,7 @@ class Program
     end
 
     # if none found, error
-    raise(BASICRuntimeError, 'FOR without NEXT')
+    raise(BASICSyntaxError, 'FOR without NEXT')
   end
 
   def run(interpreter)

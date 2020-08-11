@@ -266,104 +266,104 @@ class AbstractValueElement < AbstractElement
 
   def ==(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in =="
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     @value == other.to_v
   end
 
   def >(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in >"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     @value > other.to_v
   end
 
   def >=(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in >="
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     @value >= other.to_v
   end
 
   def <(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in <"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     @value < other.to_v
   end
 
   def <=(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in <="
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     @value <= other.to_v
   end
 
   def b_eq(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_eq()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     BooleanConstant.new(@value == other.to_v)
   end
 
   def b_ne(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ne()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     BooleanConstant.new(@value != other.to_v)
   end
 
   def b_gt(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_gt()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     BooleanConstant.new(@value > other.to_v)
   end
 
   def b_ge(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ge()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     BooleanConstant.new(@value >= other.to_v)
   end
 
   def b_lt(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_lt()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     BooleanConstant.new(@value < other.to_v)
   end
 
   def b_le(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_le()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     BooleanConstant.new(@value <= other.to_v)
   end
 
   def b_and(_)
-    raise(BASICRuntimeError, 'Invalid operator AND')
+    raise(BASICExpressionError, 'Invalid operator AND')
   end
 
   def b_or(_)
-    raise(BASICRuntimeError, 'Invalid operator OR')
+    raise(BASICExpressionError, 'Invalid operator OR')
   end
 
   def +(_)
-    raise(BASICRuntimeError, 'Invalid operator +')
+    raise(BASICExpressionError, 'Invalid operator +')
   end
 
   def -(_)
-    raise(BASICRuntimeError, 'Invalid operator -')
+    raise(BASICExpressionError, 'Invalid operator -')
   end
 
   def add(_)
-    raise(BASICRuntimeError, 'Invalid operator add')
+    raise(BASICExpressionError, 'Invalid operator add')
   end
 
   def subtract(_)
-    raise(BASICRuntimeError, 'Invalid operator subtract')
+    raise(BASICExpressionError, 'Invalid operator subtract')
   end
 
   def multiply(_)
-    raise(BASICRuntimeError, 'Invalid operator multiply')
+    raise(BASICExpressionError, 'Invalid operator multiply')
   end
 
   def divide(_)
-    raise(BASICRuntimeError, 'Invalid operator divide')
+    raise(BASICExpressionError, 'Invalid operator divide')
   end
 
   def power(_)
-    raise(BASICRuntimeError, 'Invalid operator power')
+    raise(BASICExpressionError, 'Invalid operator power')
   end
 
   def printable?
@@ -438,7 +438,7 @@ class NumericConstant < AbstractValueElement
       f = t[1].ord if !t.empty? && t[0] == '#'
     end
 
-    raise(BASICRuntimeError, "'#{text}' is not a number") if f.nil?
+    raise(BASICSyntaxError, "'#{text}' is not a number") if f.nil?
 
     precision = $options['precision'].value
     if precision != 0 && f != Float::INFINITY
@@ -505,7 +505,7 @@ class NumericConstant < AbstractValueElement
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value + other.to_numeric.to_v
     NumericConstant.new(value)
@@ -514,7 +514,7 @@ class NumericConstant < AbstractValueElement
   def -(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in -()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value - other.to_numeric.to_v
     NumericConstant.new(value)
@@ -523,7 +523,7 @@ class NumericConstant < AbstractValueElement
   def *(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in *()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value * other.to_numeric.to_v
     NumericConstant.new(value)
@@ -532,7 +532,7 @@ class NumericConstant < AbstractValueElement
   def add(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value + other.to_numeric.to_v
     NumericConstant.new(value)
@@ -542,7 +542,7 @@ class NumericConstant < AbstractValueElement
     message =
       "Type mismatch (#{content_type}/#{other.content_type}) in subtract()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value - other.to_numeric.to_v
     NumericConstant.new(value)
@@ -552,7 +552,7 @@ class NumericConstant < AbstractValueElement
     message =
       "Type mismatch (#{content_type}/#{other.content_type}) in multiply()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value * other.to_numeric.to_v
     NumericConstant.new(value)
@@ -562,8 +562,8 @@ class NumericConstant < AbstractValueElement
     message =
       "Type mismatch (#{content_type}/#{other.content_type}) in divide()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    raise(BASICRuntimeError, 'Divide by zero') if other.zero?
+    raise(BASICExpressionError, message) unless compatible?(other)
+    raise BASICRuntimeError.new('Divide by zero', 111) if other.zero?
 
     value = @value.to_f / other.to_numeric.to_f
     NumericConstant.new(value)
@@ -572,7 +572,7 @@ class NumericConstant < AbstractValueElement
   def power(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in power()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value**other.to_numeric.to_v
     NumericConstant.new(value)
@@ -804,7 +804,7 @@ class IntegerConstant < AbstractValueElement
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value + other.to_numeric.to_v
     IntegerConstant.new(value)
@@ -813,7 +813,7 @@ class IntegerConstant < AbstractValueElement
   def -(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in -()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value - other.to_numeric.to_v
     IntegerConstant.new(value)
@@ -822,7 +822,7 @@ class IntegerConstant < AbstractValueElement
   def *(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in *()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value * other.to_numeric.to_v
     IntegerConstant.new(value)
@@ -831,7 +831,7 @@ class IntegerConstant < AbstractValueElement
   def add(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value + other.to_numeric.to_v
     IntegerConstant.new(value)
@@ -841,7 +841,7 @@ class IntegerConstant < AbstractValueElement
     message =
       "Type mismatch (#{content_type}/#{other.content_type}) in subtract()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value - other.to_numeric.to_v
     IntegerConstant.new(value)
@@ -851,7 +851,7 @@ class IntegerConstant < AbstractValueElement
     message =
       "Type mismatch (#{content_type}/#{other.content_type}) in multiply()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value * other.to_numeric.to_v
     IntegerConstant.new(value)
@@ -861,8 +861,8 @@ class IntegerConstant < AbstractValueElement
     message =
       "Type mismatch (#{content_type}/#{other.content_type}) in divide()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
-    raise(BASICRuntimeError, 'Divide by zero') if other.zero?
+    raise(BASICExpressionError, message) unless compatible?(other)
+    raise BASICRuntimeError.new('Divide by zero', 111) if other.zero?
 
     value = @value.to_f / other.to_numeric.to_f
     IntegerConstant.new(value)
@@ -871,7 +871,7 @@ class IntegerConstant < AbstractValueElement
   def power(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in power()"
 
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value**other.to_numeric.to_v
     IntegerConstant.new(value)
@@ -1049,7 +1049,7 @@ class TextConstant < AbstractValueElement
 
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     unquoted = @value + other.to_v
     quoted = '"' + unquoted + '"'
     token = TextConstantToken.new(quoted)
@@ -1058,7 +1058,7 @@ class TextConstant < AbstractValueElement
 
   def add(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
-    raise(BASICRuntimeError, message) unless compatible?(other)
+    raise(BASICExpressionError, message) unless compatible?(other)
     unquoted = @value + other.to_v
     quoted = '"' + unquoted + '"'
     token = TextConstantToken.new(quoted)
@@ -1168,7 +1168,7 @@ class BooleanConstant < AbstractValueElement
 
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
-    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    raise(BASICExpressionError, message) unless other.numeric_constant?
     value = numeric_value + other.to_v
     NumericConstant.new(value)
   end
@@ -1176,7 +1176,7 @@ class BooleanConstant < AbstractValueElement
   def -(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in -()"
 
-    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    raise(BASICExpressionError, message) unless other.numeric_constant?
 
     value = numeric_value - otherto_v
     NumericConstant.new(value)
@@ -1185,7 +1185,7 @@ class BooleanConstant < AbstractValueElement
   def *(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in *()"
 
-    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    raise(BASICExpressionError, message) unless other.numeric_constant?
 
     value = numeric_value * other.to_v
     NumericConstant.new(value)
@@ -1194,7 +1194,7 @@ class BooleanConstant < AbstractValueElement
   def add(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
 
-    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    raise(BASICExpressionError, message) unless other.numeric_constant?
 
     value = numeric_value + other.to_v
     NumericConstant.new(value)
@@ -1204,7 +1204,7 @@ class BooleanConstant < AbstractValueElement
     message =
       "Type mismatch (#{content_type}/#{other.content_type}) in subtract()"
 
-    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    raise(BASICExpressionError, message) unless other.numeric_constant?
 
     value = numeric_value - other.to_v
     NumericConstant.new(value)
@@ -1214,7 +1214,7 @@ class BooleanConstant < AbstractValueElement
     message =
       "Type mismatch (#{content_type}/#{other.content_type}) in multiply()"
 
-    raise(BASICRuntimeError, message) unless other.numeric_constant?
+    raise(BASICExpressionError, message) unless other.numeric_constant?
 
     value = numeric_value * other.to_v
     NumericConstant.new(value)
@@ -1224,8 +1224,8 @@ class BooleanConstant < AbstractValueElement
     message =
       "Type mismatch (#{content_type}/#{other.content_type}) in divide()"
 
-    raise(BASICRuntimeError, message) unless other.numeric_constant?
-    raise(BASICRuntimeError, 'Divide by zero') if other.zero?
+    raise(BASICExpressionError, message) unless other.numeric_constant?
+    raise BASICRuntimeError.new('Divide by zero', 111) if other.zero?
 
     value = numeric_value.to_f / other.to_f
     NumericConstant.new(value)
@@ -1263,10 +1263,10 @@ class FileHandle < AbstractElement
 
     legals = %w[Fixnum Integer NumericConstant IntegerConstant FileHandle]
 
-    raise(BASICRuntimeError, 'Invalid file reference') unless
+    raise BASICRuntimeError.new('Invalid file reference', 108) unless
       legals.include?(num.class.to_s)
 
-    raise(BASICRuntimeError, 'Invalid file number') if num.to_i < 0
+    raise BASICRuntimeError.new('Invalid file number', 109) if num.to_i < 0
 
     @number = num.to_i
     @file_handle = true
@@ -1427,7 +1427,7 @@ class Declaration < AbstractElement
       num_args = @subscripts.length
 
       if num_args.zero?
-        raise(BASICRuntimeError,
+        raise(BASICSyntaxError,
               'Variable expects subscripts, found empty parentheses')
       end
     end
@@ -1729,8 +1729,8 @@ class Variable < AbstractElement
 
   def evaluate_value_array(interpreter, _)
     dims = interpreter.get_dimensions(@variable_name)
-    raise(BASICRuntimeError, 'Variable has no dimensions') if dims.nil?
-    raise(BASICRuntimeError, 'Array requires one dimension') if dims.size != 1
+    raise(BASICExpressionError, 'Variable has no dimensions') if dims.nil?
+    raise(BASICExpressionError, 'Array requires one dimension') if dims.size != 1
     values = evaluate_value_array_1(interpreter, dims[0].to_i)
     BASICArray.new(dims, values)
   end
@@ -1750,7 +1750,7 @@ class Variable < AbstractElement
 
   def evaluate_value_matrix(interpreter, _)
     dims = interpreter.get_dimensions(@variable_name)
-    raise(BASICRuntimeError, 'Variable has no dimensions') if dims.nil?
+    raise(BASICExpressionError, 'Variable has no dimensions') if dims.nil?
     values = evaluate_value_matrix_n(interpreter, dims)
     Matrix.new(dims, values)
   end
@@ -1804,7 +1804,7 @@ class Variable < AbstractElement
       num_args = @subscripts.length
 
       if num_args.zero?
-        raise(BASICRuntimeError,
+        raise(BASICSyntaxError,
               'Variable expects subscripts, found empty parentheses')
       end
 
@@ -1821,7 +1821,7 @@ class Variable < AbstractElement
       num_args = @subscripts.length
 
       if num_args.zero?
-        raise(BASICRuntimeError,
+        raise(BASICSyntaxError,
               'Variable expects subscripts, found empty parentheses')
       end
 
