@@ -1384,6 +1384,7 @@ end
 class UserFunctionDefinition
   attr_reader :name
   attr_reader :arguments
+  attr_reader :sig
   attr_reader :expression
   attr_reader :numerics
   attr_reader :strings
@@ -1403,6 +1404,7 @@ class UserFunctionDefinition
     user_function_prototype = UserFunctionPrototype.new(parts[0])
     @name = user_function_prototype.name
     @arguments = user_function_prototype.arguments
+    @sig = XrefEntry.make_signature(@arguments)
     @expression = nil
     @expression = ValueExpression.new(parts[2], :scalar) if parts.size == 3
     if @expression.nil?
@@ -1411,9 +1413,7 @@ class UserFunctionDefinition
       @variables = []
       @operators = []
       @functions = []
-      # TODO: detect type of argument
-      signature = XrefEntry.make_signature(@arguments)
-      xr = XrefEntry.new(@name.to_s, signature, true)
+      xr = XrefEntry.new(@name.to_s, @sig, true)
       @userfuncs = [xr]
     else
       @numerics = @expression.numerics
@@ -1421,9 +1421,7 @@ class UserFunctionDefinition
       @variables = @expression.variables
       @operators = @expression.operators
       @functions = @expression.functions
-      # TODO: detect type of argument
-      signature = XrefEntry.make_signature(@arguments)
-      xr = XrefEntry.new(@name.to_s, signature, true)
+      xr = XrefEntry.new(@name.to_s, @sig, true)
       @userfuncs = [xr] + @expression.userfuncs
     end
 

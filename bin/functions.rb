@@ -188,38 +188,31 @@ class UserFunction < AbstractScalarFunction
 
   # return a single value
   def evaluate_value(interpreter, stack)
-    definition = interpreter.get_user_function(@name)
+    arguments = stack.pop
+    signature = XrefEntry.make_signature(arguments)
+    definition = interpreter.get_user_function(@name, signature)
 
     # verify function is defined
     raise BASICRuntimeError.new("Function #{@name} not defined", 115) if
           definition.nil?
 
-    signature = definition.signature
+    # dummy variable names and their (now known) values
+    params = definition.arguments
+    param_names_values = params.zip(arguments)
+    names_and_values = Hash[param_names_values]
+    interpreter.define_user_var_values(names_and_values)
 
-    # verify arguments
-    arguments = stack.pop
-
-    if match_args_to_signature(arguments, signature)
-      # dummy variable names and their (now known) values
-      params = definition.arguments
-      param_names_values = params.zip(arguments)
-      names_and_values = Hash[param_names_values]
-      interpreter.define_user_var_values(names_and_values)
-
-      expression = definition.expression
-      if !expression.nil?
-        results = expression.evaluate(interpreter)
-      else
-        interpreter.run_user_function(@name)
-
-        results = [interpreter.get_value(@name)]
-      end
-
-      interpreter.clear_user_var_values
-      results[0]
+    expression = definition.expression
+    if !expression.nil?
+      results = expression.evaluate(interpreter)
     else
-      raise BASICRuntimeError.new('Wrong arguments for function', 116)
+      interpreter.run_user_function(@name)
+
+      results = [interpreter.get_value(@name)]
     end
+
+    interpreter.clear_user_var_values
+    results[0]
   end
 
   def evaluate_ref(interpreter, stack)

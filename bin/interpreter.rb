@@ -775,12 +775,16 @@ class Interpreter
     @program.find_closing_next(control, @current_line_index)
   end
 
-  def set_user_function(name, definition)
-    @user_function_defs[name] = definition
+  def set_user_function(name, signature, definition)
+    sig = signature.join(',')
+    tag = name.to_s + '(' + sig + ')'
+    @user_function_defs[tag] = definition
   end
 
-  def get_user_function(name)
-    @user_function_defs[name]
+  def get_user_function(name, signature)
+    sig = signature.join(',')
+    tag = name.to_s + '(' + sig + ')'
+    @user_function_defs[tag]
   end
 
   def define_user_var_values(names_and_values)
