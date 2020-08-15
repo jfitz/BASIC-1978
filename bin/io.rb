@@ -109,6 +109,7 @@ class ConsoleIo
     raise BASICRuntimeError.new('End of file', 102) if input_text.nil?
 
     ascii_text = ascii_printables(input_text)
+
     puts(ascii_text) if $options['echo'].value
     ascii_text
   end

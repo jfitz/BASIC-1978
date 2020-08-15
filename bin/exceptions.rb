@@ -16,5 +16,6 @@ class BASICTrappableError < BASICError
   end
 end
 
-class BASICRuntimeError < BASICTrappableError
-end
+class BASICRuntimeError < BASICTrappableError; end
+
+class BASICPreexecuteError < BASICTrappableError; end
