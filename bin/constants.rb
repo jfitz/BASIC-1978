@@ -1296,6 +1296,8 @@ class CarriageControl
     classes.include?(token.class.to_s)
   end
 
+  attr_reader :comprehension_effort
+
   def initialize(token)
     token = ',' if token == 'COMMA'
     token = ';' if token == 'SEMI'
@@ -1303,6 +1305,7 @@ class CarriageControl
     @operator = token.to_s
     @carriage = true
     @file_handle = false
+    @comprehension_effort = 0
   end
 
   def printable?

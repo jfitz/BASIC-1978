@@ -554,6 +554,17 @@ class Program
     num
   end
 
+  def comprehension_effort
+    num = 0
+
+    @lines.each do |_, line|
+      statements = line.statements
+      statements.each { |statement| num += statement.comprehension_effort }
+    end
+
+    num
+  end
+
   def mccabe_complexity
     num = 1
 
@@ -763,6 +774,8 @@ class Program
     density = num_comm.to_f / num_valid.to_f if num_valid > 0
     lines << 'Comment density: ' + ('%.3f' % density)
 
+    lines << 'Comprehension effort: ' + comprehension_effort.to_s
+
     lines << 'McCabe complexity: ' + mccabe_complexity.to_s
 
     lines << 'Halstead complexity:'
@@ -793,8 +806,8 @@ class Program
     end
 
     okay
-  rescue BASICRuntimeError => e
-    message = "#{e.message} in line #{@line_number}"
+  rescue BASICPreexecuteError => e
+    message = "Error #{e.code} #{e.message} in line #{@line_number}"
     @console_io.print_line(message)
     false
   end

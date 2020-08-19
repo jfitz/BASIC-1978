@@ -7,6 +7,7 @@ class IfModifier
   attr_reader :operators
   attr_reader :functions
   attr_reader :userfuncs
+  attr_reader :comprehension_effort
 
   def initialize(expression_tokens)
     @errors = []
@@ -17,6 +18,7 @@ class IfModifier
     @operators = @expression.operators
     @functions = @expression.functions
     @userfuncs = @expression.userfuncs
+    @comprehension_effort = @expression.comprehension_effort
   end
 
   def pretty
@@ -94,6 +96,7 @@ class ForModifier
   attr_reader :operators
   attr_reader :functions
   attr_reader :userfuncs
+  attr_reader :comprehension_effort
 
   def initialize(control_and_start_tokens, end_tokens, step_tokens)
     @errors = []
@@ -141,6 +144,10 @@ class ForModifier
       @functions = @start.functions + @end.functions + @step.functions
       @userfuncs = @start.userfuncs + @end.userfuncs + @step.userfuncs
     end
+
+    @comprehension_effort = @start.comprehension_effort
+    @comprehension_effort = @end.comprehension_effort
+    @comprehension_effort = @step.comprehension_effort unless @step.nil?
   end
 
   def pretty
