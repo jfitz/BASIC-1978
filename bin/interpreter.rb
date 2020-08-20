@@ -1119,8 +1119,8 @@ class Interpreter
     $options['base'].value
   end
 
-  def extend_if
-    $options['extend_if'].value
+  def no_extend_if
+    $options['no_extend_if'].value
   end
 
   def asc_allow_all

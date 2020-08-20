@@ -407,7 +407,7 @@ OptionParser.new do |opt|
   end
 
   opt.on('--echo-input') { |o| options[:echo_input] = o }
-  opt.on('--extend-if') { |o| options[:extend_if] = o }
+  opt.on('--no-extend-if') { |o| options[:no_extend_if] = o }
   opt.on('--field-sep-semi') { |o| options[:field_sep_semi] = o }
   opt.on('--heading') { |o| options[:heading] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
@@ -475,7 +475,7 @@ $options['detect_infinite_loop'] =
   Option.new(boolean, !options.key?(:no_detect_infinite_loop))
 
 $options['echo'] = Option.new(boolean, options.key?(:echo_input))
-$options['extend_if'] = Option.new(boolean, options.key?(:extend_if))
+$options['no_extend_if'] = Option.new(boolean, options.key?(:no_extend_if))
 $options['heading'] = Option.new(boolean, options.key?(:heading))
 
 field_sep = Option.new(separator, 'COMMA')

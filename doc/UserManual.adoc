@@ -92,7 +92,7 @@ When the BASIC program ends, BASIC-1978 ends.
 |--chr-allow-all |The CHR$() function allows any output characters. The default behavior is to limit characters to printable ASCII (32d to 126d).
 |--no-detect-infinite-loop |Disables checks for infinite loops.
 |--echo-input |Echoes console input to output. Useful in run mode when redirecting input from a text file.
-|--extend-if |Statements following an IF statement on the same line are associated with the last clause of the IF statement.
+|--no-extend-if |Statements following an IF statement on the same line are not associated with the last clause of the IF statement.
 |--field-sep-semi |Sets field separator for ARR PRINT and MAT PRINT statements to semicolon, which provides narrow spacing.
 |--heading |Suppress the heading and trailing messages
 |--implied-semicolon |When printing items not delimited by a comma or semicolon, provide spacing as if a semicolon was provided. (Normally the items have no spaces between them.)
@@ -1056,7 +1056,7 @@ Examples:
 When the expression evaluates as true, the THEN clause is executed.
 When the clause is a line number, that line is executed next.
 When the clause is a statement, that statement is executed.
-After a statement execution, control moves to the next statement, which may be the next line or may be the next statement in a multistatement line.
+Statements following an IF statement on the same line are associated with the THEN or ELSE statement of the IF statement, if the THEN or ELSE clauses are statements.
 
 in the code:
 
@@ -1067,26 +1067,13 @@ When A is equal to 10, the text "A=10" is printed, and then the text "ALL DONE" 
 
 When the expression evaluates as false, the THEN clause is not executed. Whether the clause is a line number or a statement, it is skipped and the next statement is executed.
 
-In our example code, when A is not equal to 10, the text "ALL DONE" is printed and then C is set to 20.
+In our example code, when A is not equal to 10, the text "ALL DONE" is not printed.
+The statements which follow an IF statement on the same line are associated with the THEN or ELSE clause and executed with that statement.
 
-The --extend-if option changes this behavior. When specified, the statements following the IF statement are associated with the last clause (the THEN or the ELSE) of that statement.
+The --no-extend-if option changes this behavior. When specified, the statements following the IF statement are distinct from the IF statement.
 
-In our example code, when --extend-if is specified and A is equal to 10, "A=10" and "ALL DONE" are printed, and C is set to 20.
-When A is not equal to 10, no text is printed and C is set to 20.
-
-The --extend-if option has no effect on IF statements with destination line numbers. Why? Because it makes no sense. Consider the code:
-
-    	100 IF A = 10 THEN 200 : PRINT "A NOT EQUAL TO 10"
-	110 C = 20
-
-If A is equal to 10, control is passed to line 200 and no text is printed.
-If A is not equal to 10, then the text "A NOT EQUAL TO 10" is printed.
-The --extend-if option, for this line, would force control to the next line for the false condition.
-That would mean that the PRINT statement would never execute.
-It would not execute when the condition is true, and it would not execute when the condition is false.
-Any statement after an IF with a destination would be dead code.
-Thus, the option is not considered when the THEN clause holds a line number.
-
+In our example code, when --no-extend-if is specified and A is equal to 10, "A=10" and "ALL DONE" are printed, and C is set to 20.
+When A is not equal to 10, "ALL DONE" is printed and C is set to 20.
 
 INPUT
 ~~~~~

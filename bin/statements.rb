@@ -2121,7 +2121,7 @@ class AbstractIfStatement < AbstractStatement
         interpreter.next_line_index = destination
       end
 
-      if !@statement.nil? && !@else_stmt.nil? && interpreter.extend_if
+      if !@statement.nil? && !@else_stmt.nil? && !interpreter.no_extend_if
         # go to next numbered line, not next statement
         next_line_index = interpreter.find_next_line
         interpreter.next_line_index = next_line_index
@@ -2137,7 +2137,7 @@ class AbstractIfStatement < AbstractStatement
         interpreter.next_line_index = destination
       end
 
-      if @else_dest.nil? && @else_stmt.nil? && interpreter.extend_if
+      if @else_dest.nil? && @else_stmt.nil? && !interpreter.no_extend_if
         # go to next numbered line, not next statement
         next_line_index = interpreter.find_next_line
         interpreter.next_line_index = next_line_index
@@ -2873,7 +2873,7 @@ class OptionStatement < AbstractStatement
       BACK_TAB BASE
       CHR_ALLOW_ALL
       DEFAULT_PROMPT DETECT_INFINITE_LOOP
-      ECHO EXTEND_IF FIELD_SEP
+      ECHO NO_EXTEND_IF FIELD_SEP
       IGNORE_RND_ARG IMPLIED_SEMICOLON
       INT_FLOOR LOCK_FORNEXT NEWLINE_SPEED
       PRECISION PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
