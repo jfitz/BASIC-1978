@@ -407,9 +407,9 @@ OptionParser.new do |opt|
   end
 
   opt.on('--echo-input') { |o| options[:echo_input] = o }
+  opt.on('--extend-if') { |o| options[:extend_if] = o }
   opt.on('--field-sep-semi') { |o| options[:field_sep_semi] = o }
   opt.on('--heading') { |o| options[:heading] = o }
-  opt.on('--if-false-next-line') { |o| options[:if_false_next_line] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
   opt.on('--ignore-rnd-arg') { |o| options[:ignore_rnd_arg] = o }
   opt.on('--implied-semicolon') { |o| options[:implied_semicolon] = o }
@@ -475,14 +475,12 @@ $options['detect_infinite_loop'] =
   Option.new(boolean, !options.key?(:no_detect_infinite_loop))
 
 $options['echo'] = Option.new(boolean, options.key?(:echo_input))
+$options['extend_if'] = Option.new(boolean, options.key?(:extend_if))
 $options['heading'] = Option.new(boolean, options.key?(:heading))
 
 field_sep = Option.new(separator, 'COMMA')
 field_sep = Option.new(separator, 'SEMI') if options.key?(:field_sep_semi)
 $options['field_sep'] = field_sep
-
-$options['if_false_next_line'] =
-  Option.new(boolean, options.key?(:if_false_next_line))
 
 $options['ignore_rnd_arg'] =
   Option.new(boolean, options.key?(:ignore_rnd_arg))

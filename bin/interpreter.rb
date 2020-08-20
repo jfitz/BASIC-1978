@@ -1119,8 +1119,8 @@ class Interpreter
     $options['base'].value
   end
 
-  def if_false_next_line
-    $options['if_false_next_line'].value
+  def extend_if
+    $options['extend_if'].value
   end
 
   def asc_allow_all

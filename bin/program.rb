@@ -687,7 +687,7 @@ class Program
 
           goto_line_idxs << next_line_idx unless next_line_idx.nil?
 
-          if statement.is_if_no_else && $options['if_false_next_line'].value
+          if statement.is_if_no_else && $options['extend_if'].value
             # find next line (possibly does not exist)
             line_numbers = @lines.keys.sort
             index = line_numbers.index(line_number)
