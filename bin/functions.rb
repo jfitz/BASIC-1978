@@ -192,23 +192,24 @@ class UserFunction < AbstractScalarFunction
     signature = XrefEntry.make_signature(arguments)
     definition = interpreter.get_user_function(@name, signature)
 
-    # verify function is defined
-    raise BASICRuntimeError.new("Function #{@name} not defined", 115) if
-          definition.nil?
-
     # dummy variable names and their (now known) values
     params = definition.arguments
     param_names_values = params.zip(arguments)
     names_and_values = Hash[param_names_values]
     interpreter.define_user_var_values(names_and_values)
 
-    expression = definition.expression
-    if !expression.nil?
-      results = expression.evaluate(interpreter)
-    else
-      interpreter.run_user_function(@name)
+    begin
+      expression = definition.expression
+      if !expression.nil?
+        results = expression.evaluate(interpreter)
+      else
+        interpreter.run_user_function(@name)
 
-      results = [interpreter.get_value(@name)]
+        results = [interpreter.get_value(@name)]
+      end
+    rescue BASICRuntimeException => e
+      interpreter.clear_user_var_values
+      raise e
     end
 
     interpreter.clear_user_var_values
