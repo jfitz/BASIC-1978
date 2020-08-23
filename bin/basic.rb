@@ -51,60 +51,66 @@ class Option
   private
 
   def check_value(value)
+    check_value_and_type(value)
+  rescue BASICSyntaxError => e
+    raise e unless @defs.key?(:off) && value == @defs[:off]
+  end
+
+  def check_value_and_type(value)
     type = @defs[:type]
     case type
     when :bool
       legals = %w[TrueClass FalseClass]
 
-      raise(BASICRuntimeError, "Invalid type #{value.class} for boolean") unless
+      raise(BASICSyntaxError, "Invalid type #{value.class} for boolean") unless
         legals.include?(value.class.to_s)
     when :int
       legals = %w[Fixnum Integer]
 
-      raise(BASICRuntimeError, "Invalid type #{value.class} for integer") unless
+      raise(BASICSyntaxError, "Invalid type #{value.class} for integer") unless
         legals.include?(value.class.to_s)
 
       min = @defs[:min]
       if !min.nil? && value < min
-        raise(BASICRuntimeError, "Value #{value} below minimum #{min}")
+        raise(BASICSyntaxError, "Value #{value} below minimum #{min}")
       end
 
       max = @defs[:max]
       if !max.nil? && value > max
-        raise(BASICRuntimeError, "Value #{value} above maximum #{max}")
+        raise(BASICSyntaxError, "Value #{value} above maximum #{max}")
       end
     when :float
       legals = %w[Fixnum Integer Float Rational]
 
-      raise(BASICRuntimeError, "Invalid type #{value.class} for float") unless
+      raise(BASICSyntaxError, "Invalid type #{value.class} for float") unless
         legals.include?(value.class.to_s)
 
       min = @defs[:min]
       if !min.nil? && value < min
-        raise(BASICRuntimeError, "Value #{value} below minimum #{min}")
+        raise(BASICSyntaxError, "Value #{value} below minimum #{min}")
       end
 
       max = @defs[:max]
       if !max.nil? && value > max
-        raise(BASICRuntimeError, "Value #{value} above maximum #{max}")
+        raise(BASICSyntaxError, "Value #{value} above maximum #{max}")
       end
     when :string
       legals = %(String)
 
-      raise(BASICRuntimeError, "Invalid type #{value.class} for string") unless
+      raise(BASICSyntaxError, "Invalid type #{value.class} for string") unless
         legals.include?(value.class.to_s)
     when :list
       legal_types = %(String)
 
-      raise(BASICRuntimeError, "Invalid type #{value.class} for list") unless
+      raise(BASICSyntaxError, "Invalid type #{value.class} for list") unless
         legal_types.include?(value.class.to_s)
 
       legal_values = @defs[:values]
 
-      raise(BASICRuntimeError, "Invalid value #{value} for list") unless
+      raise(BASICSyntaxError, "Invalid value #{value} for list") unless
         legal_values.include?(value.to_s)
     else
-      raise(BASICRuntimeError, 'Unknown value type')
+      raise(BASICSyntaxError, 'Unknown value type')
     end
   end
 end
@@ -447,7 +453,7 @@ show_profile = options.key?(:profile)
 boolean = { type: :bool }
 string = { type: :string }
 int = { type: :int, min: 0 }
-int_1_17 = { type: :int, max: 17, min: 1 }
+int_1_17 = { type: :int, max: 17, min: 1, off: 'INFINITE' }
 int_132 = { type: :int, max: 132, min: 0 }
 int_40 = { type: :int, max: 40, min: 0 }
 int_1 = { type: :int, max: 1, min: 0 }
@@ -504,7 +510,12 @@ newline_speed = 10 if options.key?(:tty_lf)
 $options['newline_speed'] = Option.new(int, newline_speed)
 
 precision = 9
-precision = options[:precision].to_i if options.key?(:precision)
+if options.key?(:precision)
+  precision = options[:precision]
+  if precision.match(/\A\d+\z/)
+    precision = precision.to_i
+  end
+end
 $options['precision'] = Option.new(int_1_17, precision)
 
 $options['pretty_multiline'] =
