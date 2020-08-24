@@ -422,7 +422,7 @@ class NumericConstant < AbstractValueElement
 
   public
 
-  attr_reader :token_chars
+  attr_reader :symbol_text
 
   def initialize(text)
     super()
@@ -449,7 +449,7 @@ class NumericConstant < AbstractValueElement
       f = f.round(num_digits)
     end
 
-    @token_chars = text.to_s
+    @symbol_text = text.to_s
     @value = float_to_possible_int(f)
     @operand = true
     @precedence = 0
@@ -457,7 +457,7 @@ class NumericConstant < AbstractValueElement
   end
 
   def dump
-    self.class.to_s + ':' + @token_chars
+    self.class.to_s + ':' + @symbol_text
   end
 
   def zero?
@@ -477,7 +477,7 @@ class NumericConstant < AbstractValueElement
   end
 
   def hash
-    @value.hash + @token_chars.hash
+    @value.hash + @symbol_text.hash
   end
 
   def <=>(other)
@@ -740,7 +740,7 @@ class IntegerConstant < AbstractValueElement
     text.to_f.to_i if /\A\s*[+-]?\d+%\z/ =~ text
   end
 
-  attr_reader :token_chars
+  attr_reader :symbol_text
 
   def initialize(text)
     super()
@@ -752,7 +752,7 @@ class IntegerConstant < AbstractValueElement
 
     raise BASICSyntaxError, "'#{text}' is not a number" if f.nil?
 
-    @token_chars = text.to_s
+    @symbol_text = text.to_s
     @value = f
     @operand = true
     @precedence = 0
@@ -776,7 +776,7 @@ class IntegerConstant < AbstractValueElement
   end
 
   def hash
-    @value.hash + @token_chars.hash
+    @value.hash + @symbol_text.hash
   end
 
   def <=>(other)

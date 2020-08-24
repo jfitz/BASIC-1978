@@ -929,7 +929,7 @@ class Interpreter
     # convert a numeric to a string when a string is expected
     if value.numeric_constant? &&
        variable.content_type == :string
-      val = value.token_chars
+      val = value.symbol_text
       quoted_val = '"' + val + '"'
       token = TextConstantToken.new(quoted_val)
       value = TextConstant.new(token)
