@@ -758,8 +758,8 @@ end
 
 # unparsed statement
 class InvalidStatement < AbstractStatement
-  def initialize(_, text, all_tokens, error)
-    super([], all_tokens)
+  def initialize(line_number, text, all_tokens, error)
+    super(line_number, [], all_tokens)
 
     @valid = false
     @executable = false
@@ -1667,7 +1667,7 @@ class GosubStatement < AbstractStatement
     ]
   end
 
-  def initialize(_, keywords, tokens_lists)
+  def initialize(line_number, keywords, tokens_lists)
     super
 
     extract_modifiers(tokens_lists)
@@ -1678,6 +1678,12 @@ class GosubStatement < AbstractStatement
       if tokens_lists[0][0].numeric_constant?
         @destination = LineNumber.new(tokens_lists[0][0])
         @linenums = [@destination]
+
+        if @destination > line_number
+          @comprehension_effort += 1
+        else
+          @comprehension_effort += 2
+        end
       else
         @errors << "Invalid line number #{tokens_lists[0][0]}"
       end
@@ -1734,7 +1740,7 @@ class GotoStatement < AbstractStatement
     ]
   end
 
-  def initialize(_, keywords, tokens_lists)
+  def initialize(line_number, keywords, tokens_lists)
     super
 
     extract_modifiers(tokens_lists)
@@ -1747,6 +1753,12 @@ class GotoStatement < AbstractStatement
       if tokens_lists[0][0].numeric_constant?
         @destination = LineNumber.new(tokens_lists[0][0])
         @linenums = [@destination]
+
+        if @destination > line_number
+          @comprehension_effort += 1
+        else
+          @comprehension_effort += 2
+        end
       else
         @errors << "Invalid line number #{tokens_lists[0][0]}"
       end
@@ -1813,6 +1825,22 @@ class AbstractIfStatement < AbstractStatement
       @else_dest, @else_stmt = parse_target(line_number, tokens_lists['else']) if
         tokens_lists.key?('else')
 
+      unless @destination.nil?
+        if @destination > line_number
+          @comprehension_effort += 1
+        else
+          @comprehension_effort += 2
+        end
+      end
+
+      unless @else_dest.nil?
+        if @else_dest > line_number
+          @comprehension_effort += 1
+        else
+          @comprehension_effort += 2
+        end
+      end
+
       @elements[:numerics] = make_numeric_references
       @elements[:strings] = make_string_references
       @elements[:variables] = make_variable_references
@@ -1828,6 +1856,22 @@ class AbstractIfStatement < AbstractStatement
         @else_dest = nil
         @else_dest, @else_stmt = parse_target(line_number, stack['else']) if
           stack.key?('else')
+
+        unless @destination.nil?
+          if @destination > line_number
+            @comprehension_effort += 1
+          else
+            @comprehension_effort += 2
+          end
+        end
+
+        unless @else_dest.nil?
+          if @else_dest > line_number
+            @comprehension_effort += 1
+          else
+            @comprehension_effort += 2
+          end
+        end
 
         @elements[:numerics] = make_numeric_references
         @elements[:strings] = make_string_references
@@ -2561,7 +2605,7 @@ class OnErrorStatement < AbstractStatement
     ]
   end
 
-  def initialize(_, keywords, tokens_lists)
+  def initialize(line_number, keywords, tokens_lists)
     super
 
     @destination = nil
@@ -2581,6 +2625,12 @@ class OnErrorStatement < AbstractStatement
         else
           @destination = LineNumber.new(destination)
           @linenums = [@destination]
+
+          if @destination > line_number
+            @comprehension_effort += 1
+          else
+            @comprehension_effort += 2
+          end
         end
       else
         @errors << "Invalid line number #{destination}"
@@ -2650,7 +2700,7 @@ class OnStatement < AbstractStatement
     %w[GOTO THEN GOSUB]
   end
 
-  def initialize(_, keywords, tokens_lists)
+  def initialize(line_number, keywords, tokens_lists)
     super
 
     @destinations = nil
@@ -2693,6 +2743,15 @@ class OnStatement < AbstractStatement
 
       @linenums = @destinations
       @comprehension_effort += @expression.comprehension_effort
+
+      @destinations.each do |destination|
+        if destination > line_number
+          @comprehension_effort += 1
+        else
+          @comprehension_effort += 2
+        end
+      end
+
       @mccabe += @destinations.size
     else
       @errors << 'Syntax error'
