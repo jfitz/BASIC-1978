@@ -311,6 +311,7 @@ end
 # program container
 class Program
   attr_reader :lines
+  attr_reader :errors
 
   def initialize(console_io, tokenbuilders)
     @console_io = console_io
@@ -500,8 +501,6 @@ class Program
     @console_io.newline
   end
 
-  private
-
   def reset_profile_metrics
     @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
@@ -511,6 +510,8 @@ class Program
       end
     end
   end
+
+  private
 
   def code_statistics
     lines = []
@@ -847,28 +848,6 @@ class Program
 
     # if none found, error
     raise(BASICSyntaxError, 'FOR without NEXT')
-  end
-
-  def run(interpreter)
-    if @lines.empty?
-      @console_io.print_line('No program loaded')
-      return
-    end
-
-    unless @errors.empty?
-      @errors.each { |error| @console_io.print_line(error) }
-      return
-    end
-
-    bpes = interpreter.check_breakpoints(@lines)
-
-    unless bpes.empty?
-      bpes.each { |error| @console_io.print_line(error) }
-      return
-    end
-
-    reset_profile_metrics
-    interpreter.run(self)
   end
 
   def profile(args, show_timing)
