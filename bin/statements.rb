@@ -387,7 +387,7 @@ class AbstractStatement
     @errors.each { |error| console_io.print_line(' ' + error) }
   end
 
-  def program_check(_, _, _)
+  def okay(_, _, _)
     true
   end
 
@@ -1475,7 +1475,7 @@ class EndStatement < AbstractStatement
     lines
   end
 
-  def program_check(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_index)
     next_line = program.find_next_line_index(line_number_index)
 
     return true if next_line.nil?
@@ -1704,7 +1704,7 @@ class GosubStatement < AbstractStatement
     [@destination]
   end
 
-  def program_check(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_index)
     return true if program.line_number?(@destination)
 
     console_io.print_line(
@@ -1781,7 +1781,7 @@ class GotoStatement < AbstractStatement
     [@destination]
   end
 
-  def program_check(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_index)
     retval = true
 
     unless @destination.nil? || program.line_number?(@destination)
@@ -2103,7 +2103,7 @@ class AbstractIfStatement < AbstractStatement
     destinations
   end
 
-  def program_check(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_index)
     retval = true
 
     if @destination.nil? && @statement.nil?
@@ -2660,7 +2660,7 @@ class OnErrorStatement < AbstractStatement
     destinations
   end
 
-  def program_check(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_index)
     retval = true
 
     unless @destination.nil?
@@ -2774,7 +2774,7 @@ class OnStatement < AbstractStatement
     @destinations
   end
 
-  def program_check(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_index)
     retval = true
 
     unless @destinations.nil?
