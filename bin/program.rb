@@ -329,6 +329,10 @@ class Program
     @lines.empty?
   end
 
+  def check
+    @errors = check_program
+  end
+
   def okay
     result = true
 
@@ -967,53 +971,6 @@ class Program
 
   private
 
-  def load_file(filename)
-    File.open(filename, 'r') do |file|
-      @lines = {}
-      file.each_line do |line|
-        line = @console_io.ascii_printables(line)
-        store_program_line(line, false)
-      end
-    end
-    true
-  rescue Errno::ENOENT
-    @console_io.print_line("File '#{filename}' not found")
-    false
-  end
-
-  public
-
-  def load(tokens)
-    if tokens.empty?
-      @console_io.print_line('Filename not specified')
-      return false
-    end
-
-    if tokens.size > 1
-      @console_io.print_line('Too many items specified')
-      return false
-    end
-
-    token = tokens[0]
-
-    unless token.text_constant?
-      @console_io.print_line('File name must be quoted literal')
-      return false
-    end
-
-    filename = token.value.strip
-    if filename.empty?
-      @console_io.print_line('Filename not specified')
-      return false
-    end
-
-    r = load_file(filename)
-    @errors = check_program
-    r
-  end
-
-  private
-
   def save_file(filename)
     line_numbers = @lines.keys.sort
     begin
@@ -1427,7 +1384,7 @@ class Program
 
   public
 
-  def store_program_line(cmd, print_errors)
+  def store_line(cmd, print_errors)
     line_num, line = parse_line(cmd)
 
     if !line_num.nil? && !line.nil?
@@ -1442,7 +1399,7 @@ class Program
 
         any_errors |= !statement.errors.empty?
       end
-      @errors = check_program
+
       any_errors
     else
       true
