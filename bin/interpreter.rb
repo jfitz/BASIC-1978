@@ -141,12 +141,40 @@ class Interpreter
 
   public
 
-  def program_load(tokens)
-    if tokens.empty?
-      @console_io.print_line('Filename not specified')
-      return false
-    end
+  def program_okay?
+    @program.okay?
+  end
 
+  def program_parse(args)
+    @program.parse(args)
+  end
+  
+  def program_list(args, list_tokens)
+    @program.list(args, list_tokens)
+  end
+  
+  def program_pretty(args, pretty_multiline)
+    @program.pretty(args, pretty_multiline)
+  end
+  
+  def program_delete(args)
+    @program.delete(args)
+  end
+  
+  def program_profile(args, show_timing)
+    @program.profile(args, show_timing)
+  end
+  
+  def program_crossref
+    @program.crossref
+  end
+  
+  def program_analyze
+    @program.analyze
+  end
+  
+  def parse_filename(tokens)
+    raise(BASICCommandError, 'Filename not specified') if tokens.empty?
     if tokens.size > 1
       @console_io.print_line('Too many items specified')
       return false
@@ -154,28 +182,34 @@ class Interpreter
 
     token = tokens[0]
 
-    unless token.text_constant?
-      @console_io.print_line('File name must be quoted literal')
-      return false
-    end
+    raise(BASICCommandError, 'Too many items specified') if
+      tokens.size > 1
+
+    raise(BASICCommandError, 'File name must be quoted literal') unless
+      token.text_constant?
 
     filename = token.value.strip
-    if filename.empty?
-      @console_io.print_line('Filename not specified')
-      return false
-    end
+
+    raise(BASICCommandError, 'Filename not specified') if filename.empty?
+
+    filename
+  end
+
+  def program_load(filename)
+    @program.clear
 
     begin
       File.open(filename, 'r') do |file|
-        @program.clear
         file.each_line do |line|
           line = @console_io.ascii_printables(line)
           @program.store_line(line, false)
         end
       end
-    rescue Errno::ENOENT
-      @console_io.print_line("File '#{filename}' not found")
+    rescue Errno::ENOENT, Errno::EISDIR
+      raise BASICRuntimeError.new("File '#{filename}' not found", 126)
     end
+
+    @program.check
   end
 
   def run
@@ -213,7 +247,7 @@ class Interpreter
     run_statements if @program.preexecute_loop(self)
   end
 
-  def chain(filename)
+  def chain(tokens)
     raise(BASICSyntaxError, "Cannot CHAIN in a user function.") unless
       @function_stack.empty?
 
@@ -223,11 +257,15 @@ class Interpreter
     @user_function_lines = {}
     @user_var_values = []
 
-    raise(BASICSyntaxError, "Cannot CHAIN") unless @program.load(filename)
+    filename = parse_filename(tokens)
+    
+    raise(BASICSyntaxError, "Cannot CHAIN") unless
+      program_load(filename)
 
-    raise(BASICSyntaxError, "Cannot CHAIN") unless @program.check
+    raise(BASICSyntaxError, "Cannot start CHAIN program") unless
+      program_okay?
 
-    @next_line_index = find_first_statement(@program.lines)
+    @next_line_index = find_first_statement
   end
 
   private
@@ -236,7 +274,7 @@ class Interpreter
     @file_handlers.each { |_, fh| fh.close }
   end
 
-  def find_first_statement(program_lines)
+  def find_first_statement
     # set next line to first statement
     line_number = @program.first_line_number
     line = @program.lines[line_number]
@@ -264,12 +302,12 @@ class Interpreter
 
     close_all_files
 
-    @next_line_index = find_first_statement(@program.lines)
+    @next_line_index = find_first_statement
   end
 
   def run_statements
     # run each statement
-    @current_line_index = find_first_statement(@program.lines)
+    @current_line_index = find_first_statement
 
     @running = true
 
