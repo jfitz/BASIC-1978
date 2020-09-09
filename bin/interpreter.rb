@@ -141,6 +141,10 @@ class Interpreter
 
   public
 
+  def program_new
+    @program.clear
+  end
+
   def program_okay?
     @program.okay?
   end
