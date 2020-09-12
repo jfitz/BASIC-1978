@@ -1015,7 +1015,7 @@ class Program
   def numeric_refs
     refs = {}
 
-    @lines.keys.each do |line_number|
+    @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
@@ -1034,7 +1034,7 @@ class Program
   def text_refs
     refs = {}
 
-    @lines.keys.each do |line_number|
+    @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
@@ -1053,7 +1053,7 @@ class Program
   def function_refs
     refs = {}
 
-    @lines.keys.each do |line_number|
+    @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
@@ -1072,7 +1072,7 @@ class Program
   def user_function_refs
     refs = {}
 
-    @lines.keys.each do |line_number|
+    @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
@@ -1091,7 +1091,7 @@ class Program
   def variables_refs
     refs = {}
 
-    @lines.keys.each do |line_number|
+    @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
@@ -1110,7 +1110,7 @@ class Program
   def operators_refs
     refs = {}
 
-    @lines.keys.each do |line_number|
+    @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
@@ -1129,7 +1129,7 @@ class Program
   def linenums_refs
     refs = {}
 
-    @lines.keys.each do |line_number|
+    @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 

@@ -866,7 +866,7 @@ class BinaryOperator < AbstractElement
   def op_array_array(op, a, b, base)
     dims = b.dimensions
 
-    raise BASICRuntimeError.new('Arrays of different size', 113) if
+    raise BASICRuntimeError.new('Arrays of different size', :te_arr_dif_siz) if
       a.dimensions != dims
 
     n_cols = dims[0].to_i

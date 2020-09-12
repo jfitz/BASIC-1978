@@ -338,7 +338,7 @@ class Matrix
 
   def determinant
     raise(BASICExpressionError, 'DET requires matrix') unless @dimensions.size == 2
-    raise BASICRuntimeError.new('DET requires square matrix', 114) if
+    raise BASICRuntimeError.new('DET requires square matrix', :te_mat_no_sq) if
       @dimensions[1] != @dimensions[0]
 
     case @dimensions[0].to_i
