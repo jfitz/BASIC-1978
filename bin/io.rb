@@ -30,8 +30,7 @@ module Reader
     odds = tokens.values_at(* tokens.each_index.select(&:odd?))
 
     odds.each do |token|
-      raise BASICRuntimeError.new(:te_exp_sep) unless
-        token.separator?
+      raise BASICRuntimeError.new(:te_exp_sep) unless token.separator?
     end
   end
 end
@@ -339,8 +338,7 @@ class FileHandler
       end
       @mode = mode
     else
-      raise BASICRuntimeError.new(:te_op_inc) unless
-        @mode == mode
+      raise BASICRuntimeError.new(:te_op_inc) unless @mode == mode
     end
   end
 
