@@ -84,6 +84,7 @@ class Interpreter
     @function_stack = []
     @errorgoto_stack = []
     @resume_stack = []
+    @error_stack = []
     @fornext_stack = []
     @running = false
     @start_time = Time.now
@@ -364,9 +365,11 @@ class Interpreter
     if line_number.nil?
       # set next line index from @resume_stack[-1]
       @next_line_index = @resume_stack.pop
+      @error_stack.pop
     else
       # set next line index from parameter
       @resume_stack.pop
+      @error_stack.pop
       @next_line_index = LineNumberIndex.new(line_number, 0, 0)
     end
   end
@@ -579,11 +582,12 @@ class Interpreter
     rescue BASICTrappableError => e
       if @errorgoto_stack.size > @resume_stack.size
         @resume_stack << @current_line_index
+        @error_stack << e.code
         @current_line_index = @errorgoto_stack[-1]
       else
         if @current_line_index.nil?
           @console_io.newline_when_needed
-          @console_io.print_line(e.message)
+          @console_io.print_line("Error #{e.code} #{e.message}")
         else
           line_number = @current_line_index.number
           @console_io.newline_when_needed
@@ -849,17 +853,38 @@ class Interpreter
     NumericConstant.new(@randomizer.rand(upper_bound))
   end
 
+  # set a new randomizer (unless option says to ignore)
   def new_random
     @randomizer = Random.new if $options['respect_randomize'].value
   end
 
-  def error_line(_)
+  # get the current value for ERL()
+  def error_line(part)
     raise BASICRuntimeError.new(:te_erl_no_err) if
       @resume_stack.empty?
 
     line_index = @resume_stack[-1]
-    line_number = line_index.number
-    NumericConstant.new(line_number.to_i)
+
+    case part.to_i
+    when 0
+      value = line_index.number
+    when 1
+      value = line_index.statement
+    when 2
+      value = line_index.index
+    else
+      raise BASICRuntimeError.new(:te_val_out, 'ERL')
+    end
+
+    NumericConstant.new(value.to_i)
+  end
+
+  # get the current value for ERR()
+  def error_code
+    raise BASICRuntimeError.new(:te_err_no_err) if @error_stack.empty?
+
+    code = @error_stack[-1]
+    NumericConstant.new(code)
   end
 
   def set_dimensions(variable, subscripts)
