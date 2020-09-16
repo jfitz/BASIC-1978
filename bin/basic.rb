@@ -107,7 +107,7 @@ class Option
 
       legal_values = @defs[:values]
 
-      raise(BASICSyntaxError, "Invalid value #{value} for list") unless
+      raise(BASICSyntaxError, "Invalid value #{value} for list #{legal_values}") unless
         legal_values.include?(value.to_s)
     else
       raise(BASICSyntaxError, 'Unknown value type')
@@ -164,11 +164,13 @@ class Shell
   end
 
   def option_command(args)
+    lines = []
+
     if args.empty?
       $options.each do |option|
         name = option[0].upcase
         value = option[1].to_s.upcase
-        @console_io.print_line(name + ' ' + value)
+        lines << name + ' ' + value
       end
     elsif args.size == 1 && args[0].keyword?
       kwd = args[0].to_s
@@ -176,36 +178,38 @@ class Shell
 
       if $options.key?(kwd_d)
         value = $options[kwd_d].value.to_s.upcase
-        @console_io.print_line("#{kwd} #{value}")
+        lines << kwd + ' ' + value
       else
-        @console_io.print_line("Unknown option #{kwd}")
-        @console_io.newline
+        raise BASICCommandError.new("Unknown option #{kwd}")
       end
     elsif args.size == 2 && args[0].keyword?
       kwd = args[0].to_s
       kwd_d = kwd.downcase
 
       if $options.key?(kwd_d)
-        begin
-          if args[1].boolean_constant?
-            boolean = BooleanConstant.new(args[1])
-            $options[kwd_d].set(boolean.to_v)
-          else
-            @console_io.print_line('Incorrect value type')
-          end
-        rescue BASICRuntimeError => e
-          @console_io.print_line(e.to_s)
+        if args[1].boolean_constant?
+          boolean = BooleanConstant.new(args[1])
+          $options[kwd_d].set(boolean.to_v)
+        elsif args[1].numeric_constant?
+          numeric = NumericConstant.new(args[1])
+          $options[kwd_d].set(numeric.to_v)
+        elsif args[1].text_constant?
+          text = TextConstant.new(args[1])
+          $options[kwd_d].set(text.to_v)
+        else
+          raise BASICCommandError.new('Incorrect value type')
         end
+
         value = $options[kwd_d].value.to_s.upcase
-        @console_io.print_line("#{kwd} #{value}")
+        lines << kwd + ' ' + value
       else
-        @console_io.print_line("Unknown option #{kwd}")
-        @console_io.newline
+        raise BASICCommandError.new("Unknown option #{kwd}")
       end
     else
-      @console_io.print_line('Syntax error')
-      @console_io.newline
+      raise BASICCommandError.new("Too many arguments")
     end
+
+    lines
   end
 
   def duplicate(o)
@@ -248,12 +252,12 @@ class Shell
       @interpreter.clear_breakpoints(args)
     when 'LOAD'
       @interpreter.clear_all_breakpoints
-      filename = @interpreter.parse_filename(args)
+      filename = parse_args(args)
       load_file(filename)
       @interpreter.print_program_errors
       @console_io.newline
     when 'SAVE'
-      filename = @interpreter.parse_filename(args)
+      filename = parse_args(args)
       lines = @interpreter.program_save(filename)
       save_file(filename, lines)
     when 'LIST'
@@ -311,7 +315,9 @@ class Shell
     when 'VARS'
       @interpreter.dump_vars
     when 'OPTION'
-      option_command(args)
+      texts = option_command(args)
+      texts.each { |text| @console_io.print_line(text) }
+      @console_io.newline
     else
       @console_io.print_line("Unknown command #{keyword}")
       @console_io.newline
@@ -332,7 +338,7 @@ class Shell
         @interpreter.program_store_line(line, false)
       end
     end
-  rescue Errno::ENOENT
+  rescue Errno::ENOENT, Errno::EISDIR
     @console_io.print_line("File '#{filename}' not found")
   end
     
@@ -343,7 +349,7 @@ class Shell
       end
       file.close
     end
-  rescue Errno::ENOENT
+  rescue Errno::ENOENT, Errno::EISDIR
     @console_io.print_line("File '#{filename}' not saved")
   end
 end
@@ -440,6 +446,24 @@ def print_timing(timing, console_io)
   console_io.print_line(" system: #{sys_time.round(2)}")
 end
 
+def parse_args(tokens)
+  raise(BASICCommandError, 'Filename not specified') if tokens.empty?
+
+  token = tokens[0]
+
+  raise(BASICCommandError, 'Too many items specified') if
+    tokens.size > 1
+
+  raise(BASICCommandError, 'File name must be quoted literal') unless
+    token.text_constant?
+
+  filename = token.value.strip
+
+  raise(BASICCommandError, 'Filename not specified') if filename.empty?
+
+  filename
+end
+
 def load_file(filename, interpreter, console_io)
   File.open(filename, 'r') do |file|
     interpreter.program_clear
@@ -449,7 +473,7 @@ def load_file(filename, interpreter, console_io)
     end
   end
   interpreter.program_check
-rescue Errno::ENOENT
+rescue Errno::ENOENT, Errno::EISDIR
   console_io.print_line("File '#{filename}' not found")
   false
 end
@@ -648,7 +672,8 @@ unless list_filename.nil?
   token = TextConstantToken.new('"' + list_filename + '"')
   nametokens = [TextConstant.new(token)]
 
-  filename = interpreter.parse_filename(nametokens)
+  filename = parse_args(nametokens)
+
   if load_file(filename, interpreter, console_io)
     texts = interpreter.program_list('', list_tokens)
     texts.each { |text| console_io.print_line(text) }
@@ -664,7 +689,8 @@ unless parse_filename.nil?
   token = TextConstantToken.new('"' + parse_filename + '"')
   nametokens = [TextConstant.new(token)]
 
-  filename = interpreter.parse_filename(nametokens)
+  filename = parse_args(nametokens)
+
   if load_file(filename, interpreter, console_io)
     texts = interpreter.program_parse('')
     texts.each { |text| console_io.print_line(text) }
@@ -680,7 +706,8 @@ unless analyze_filename.nil?
   token = TextConstantToken.new('"' + analyze_filename + '"')
   nametokens = [TextConstant.new(token)]
 
-  filename = interpreter.parse_filename(nametokens)
+  filename = parse_args(nametokens)
+
   if load_file(filename, interpreter, console_io) &&
      interpreter.program_okay?
     texts = interpreter.program_analyze
@@ -695,7 +722,8 @@ unless pretty_filename.nil?
   token = TextConstantToken.new('"' + pretty_filename + '"')
   nametokens = [TextConstant.new(token)]
 
-  filename = interpreter.parse_filename(nametokens)
+  filename = parse_args(nametokens)
+
   if load_file(filename, interpreter, console_io)
     pretty_multiline = $options['pretty_multiline'].value
     texts = interpreter.program_pretty('', pretty_multiline)
@@ -712,7 +740,8 @@ unless cref_filename.nil?
   token = TextConstantToken.new('"' + cref_filename + '"')
   nametokens = [TextConstant.new(token)]
 
-  filename = interpreter.parse_filename(nametokens)
+  filename = parse_args(nametokens)
+
   if load_file(filename, interpreter, console_io)
     texts = interpreter.program_crossref
     texts.each { |text| console_io.print_line(text) }
@@ -725,7 +754,9 @@ end
 unless run_filename.nil?
   token = TextConstantToken.new('"' + run_filename + '"')
   nametokens = [TextConstant.new(token)]
-  filename = interpreter.parse_filename(nametokens)
+
+  filename = parse_args(nametokens)
+
   if load_file(filename, interpreter, console_io) &&
      interpreter.program_okay?
     begin
