@@ -41,6 +41,10 @@ class AbstractElement
     @empty
   end
 
+  def keyword?
+    false
+  end
+
   def operator?
     @operator
   end
