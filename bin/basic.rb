@@ -131,25 +131,25 @@ class Shell
     until @done
       @console_io.print_line('READY') if need_prompt
       cmd = @console_io.read_line
-      need_prompt = process_line(cmd)
+      need_prompt = process_line_keyboard(cmd)
     end
   end
 
   private
 
-  def process_line(line)
+  def process_line_keyboard(line)
     # starts with a number, so maybe it is a program line
-    return @interpreter.program_store_line(line, true) if /\A\d/ =~ line
+    return @interpreter.program_store_line(line, false) if /\A[ \t]*\d/ =~ line
 
     # immediate command -- tokenize and execute
     tokenizer = Tokenizer.new(@tokenbuilders, @invalid_tokenbuilder)
     tokens = tokenizer.tokenize(line)
     tokens.delete_if(&:whitespace?)
 
-    process_command(tokens, line)
+    process_command_keyboard(tokens, line)
   end
 
-  def process_command(tokens, line)
+  def process_command_keyboard(tokens, line)
     return false if tokens.empty?
 
     keyword = tokens[0]
@@ -163,7 +163,33 @@ class Shell
     end
   end
 
-  def option_command(args)
+  def process_line_load_command(line)
+    # starts with a number, so maybe it is a program line
+    return @interpreter.program_store_line(line, true) if /\A[ \t]*\d/ =~ line
+
+    # immediate command -- tokenize and execute
+    tokenizer = Tokenizer.new(@tokenbuilders, @invalid_tokenbuilder)
+    tokens = tokenizer.tokenize(line)
+    tokens.delete_if(&:whitespace?)
+
+    process_command_load_command(tokens, line)
+  end
+
+  def process_command_load_command(tokens, line)
+    return false if tokens.empty?
+
+    keyword = tokens[0]
+    args = tokens[1..-1]
+
+    if keyword.keyword?
+      execute_command_load_command(keyword, args)
+    else
+      @console_io.print_line("Unknown command '#{line}'")
+      @console_io.newline
+    end
+  end
+
+  def option_command(args, echo_set)
     lines = []
 
     if args.empty?
@@ -178,7 +204,7 @@ class Shell
 
       if $options.key?(kwd_d)
         value = $options[kwd_d].value.to_s.upcase
-        lines << 'OPTION ' + kwd + ' ' + value
+        lines << 'OPTION ' + kwd + ' ' + value.to_s if echo_set
       else
         raise BASICCommandError.new("Unknown option #{kwd}")
       end
@@ -258,7 +284,7 @@ class Shell
 
       raise BASICCommandError.new('Filename not specified') if filename.nil?
 
-      load_file(filename)
+      load_file_keyboard(filename)
 
       @interpreter.print_program_errors
       @console_io.newline
@@ -268,7 +294,7 @@ class Shell
       raise BASICCommandError.new('Filename not specified') if filename.nil?
 
       lines = []
-      lines += option_command([]) if keywords.include?('OPTION')
+      lines += option_command([], false) if keywords.include?('OPTION')
       lines += @interpreter.program_save
       lines += @interpreter.set_breakpoints([]) if keywords.include?('BREAK')
 
@@ -298,6 +324,8 @@ class Shell
       rescue BASICCommandError, BASICSyntaxError => e
         @console_io.print_line("Cannot renumber the program: #{e}")
       end
+      @interpreter.print_program_errors
+      @console_io.newline
     when 'CROSSREF'
       if @interpreter.program_okay?
         texts = @interpreter.program_crossref
@@ -328,7 +356,7 @@ class Shell
     when 'VARS'
       @interpreter.dump_vars
     when 'OPTION'
-      texts = option_command(args)
+      texts = option_command(args, true)
       texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
     else
@@ -343,12 +371,35 @@ class Shell
     true
   end
 
-  def load_file(filename)
+  def execute_command_load_command(keyword, args)
+    need_prompt = true
+
+    case keyword.to_s
+    when 'BREAK'
+      texts = @interpreter.set_breakpoints(args)
+      texts.each { |text| @console_io.print_line(text) }
+    when 'OPTION'
+      texts = option_command(args, false)
+      texts.each { |text| @console_io.print_line(text) }
+    else
+      @console_io.print_line("Unknown command #{keyword}")
+    end
+
+    need_prompt
+  rescue BASICCommandError, BASICRuntimeError, BASICSyntaxError => e
+    line = keyword.to_s + ' ' + args.map(&:to_s).join(' ')
+    @console_io.print_line(line)
+    @console_io.print_line(e.to_s)
+    @console_io.newline
+    true
+  end
+
+  def load_file_keyboard(filename)
     File.open(filename, 'r') do |file|
       @interpreter.program_clear
       file.each_line do |line|
         line = @console_io.ascii_printables(line)
-        @interpreter.program_store_line(line, false)
+        process_line_load_command(line)
       end
     end
   rescue Errno::ENOENT, Errno::EISDIR
@@ -421,7 +472,8 @@ def make_command_tokenbuilders(quotes, long_names)
     DEFAULT_PROMPT DETECT_INFINITE_LOOP
     ECHO FIELD_SEP HEADING
     IF IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
-    INT_FLOOR LOCK_FORNEXT LONG_NAMES NEWLINE_SPEED
+    INT_FLOOR LOCK_FORNEXT LONG_NAMES MAX_LINE_NUM MIN_LINE_NUM
+    NEWLINE_SPEED
     PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
     QMARK_AFTER_PROMPT RANDOMIZE REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH TIMING TRACE ZONE_WIDTH
@@ -471,7 +523,7 @@ def parse_args(tokens)
   return filename, keywords
 end
 
-def load_file(filename, interpreter, console_io)
+def load_file_command_line(filename, interpreter, console_io)
   File.open(filename, 'r') do |file|
     interpreter.program_clear
     file.each_line do |line|
@@ -550,6 +602,7 @@ int_1_17 = { type: :int, max: 17, min: 1, off: 'INFINITE' }
 int_132 = { type: :int, max: 132, min: 0 }
 int_40 = { type: :int, max: 40, min: 0 }
 int_1 = { type: :int, max: 1, min: 0 }
+int_32767 = { type: :int, max: 32767, min: 999 }
 separator = { type: :list, values: %w[COMMA SEMI NL NONE] }
 
 $options = {}
@@ -595,8 +648,8 @@ $options['lock_fornext'] =
 long_names = options.key?(:long_names)
 $options['long_names'] = Option.new(boolean, long_names)
 
-$options['max_line_num'] = 32767
-$options['min_line_num'] = 1
+$options['max_line_num'] = Option.new(int_32767, 32767)
+$options['min_line_num'] = Option.new(int_1, 1)
 
 newline_speed = 0
 newline_speed = 10 if options.key?(:tty_lf)
@@ -681,7 +734,7 @@ unless list_filename.nil?
 
   filename, keywords = parse_args(args)
 
-  if load_file(filename, interpreter, console_io)
+  if load_file_command_line(filename, interpreter, console_io)
     texts = interpreter.program_list('', list_tokens)
     texts.each { |text| console_io.print_line(text) }
   else
@@ -698,7 +751,7 @@ unless parse_filename.nil?
 
   filename, keywords = parse_args(args)
 
-  if load_file(filename, interpreter, console_io)
+  if load_file_command_line(filename, interpreter, console_io)
     texts = interpreter.program_parse('')
     texts.each { |text| console_io.print_line(text) }
   else
@@ -715,7 +768,7 @@ unless analyze_filename.nil?
 
   filename, keywords = parse_args(args)
 
-  if load_file(filename, interpreter, console_io) &&
+  if load_file_command_line(filename, interpreter, console_io) &&
      interpreter.program_okay?
     texts = interpreter.program_analyze
     texts.each { |text| console_io.print_line(text) }
@@ -731,7 +784,7 @@ unless pretty_filename.nil?
 
   filename, keywords = parse_args(args)
 
-  if load_file(filename, interpreter, console_io)
+  if load_file_command_line(filename, interpreter, console_io)
     pretty_multiline = $options['pretty_multiline'].value
     texts = interpreter.program_pretty('', pretty_multiline)
     texts.each { |text| console_io.print_line(text) }
@@ -749,7 +802,7 @@ unless cref_filename.nil?
 
   filename, keywords = parse_args(args)
 
-  if load_file(filename, interpreter, console_io)
+  if load_file_command_line(filename, interpreter, console_io)
     texts = interpreter.program_crossref
     texts.each { |text| console_io.print_line(text) }
   else
@@ -764,7 +817,7 @@ unless run_filename.nil?
 
   filename, keywords = parse_args(args)
 
-  if load_file(filename, interpreter, console_io) &&
+  if load_file_command_line(filename, interpreter, console_io) &&
      interpreter.program_okay?
     begin
       timing = Benchmark.measure do
