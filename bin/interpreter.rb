@@ -241,6 +241,19 @@ class Interpreter
     run_statements if @program.preexecute_loop(self)
   end
 
+  def chain_to(filename)
+    File.open(filename, 'r') do |file|
+      program_clear
+      file.each_line do |line|
+        line = console_io.ascii_printables(line)
+        program_store_line(line, false)
+      end
+    end
+    program_check
+  rescue Errno::ENOENT, Errno::EISDIR
+    raise BASICRuntimeError.new(:te_no_chain, filename)
+  end
+
   def chain(tokens)
     raise(BASICSyntaxError, "Cannot CHAIN in a user function.") unless
       @function_stack.empty?
@@ -251,10 +264,9 @@ class Interpreter
     @user_function_lines = {}
     @user_var_values = []
 
-    filename = parse_filename(tokens)
+    filename, keywords = parse_args(tokens)
     
-    raise(BASICSyntaxError, "Cannot CHAIN") unless
-      program_load(filename)
+    chain_to(filename)
 
     raise(BASICSyntaxError, "Cannot start CHAIN program") unless
       program_okay?
@@ -1069,6 +1081,13 @@ class Interpreter
     if value.content_type == :integer &&
        variable.content_type == :numeric
       token = NumericConstantToken.new(value.to_s)
+      value = NumericConstant.new(token)
+    end
+
+    # convert a boolean to an integer
+    if value.content_type == :boolean &&
+       variable.content_type == :numeric
+      token = NumericConstantToken.new(value.to_i)
       value = NumericConstant.new(token)
     end
 

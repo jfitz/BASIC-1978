@@ -1490,12 +1490,14 @@ class UserFunctionDefinition
   def split_tokens(tokens)
     results = []
     nonkeywords = []
+    eq_count = 0
 
     tokens.each do |token|
-      if token.operator? && token.equals?
+      if token.operator? && token.equals? && eq_count < 1
         results << nonkeywords unless nonkeywords.empty?
         nonkeywords = []
         results << token
+        eq_count += 1
       else
         nonkeywords << token
       end
