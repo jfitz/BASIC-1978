@@ -977,6 +977,10 @@ class AbstractExpression
     parsed_expressions_strings(@parsed_expressions)
   end
 
+  def booleans
+    parsed_expressions_booleans(@parsed_expressions)
+  end
+
   def variables
     parsed_expressions_variables(@parsed_expressions)
   end
@@ -1063,6 +1067,24 @@ class AbstractExpression
     end
 
     strs
+  end
+
+  def parsed_expressions_booleans(parsed_expressions)
+    bools = []
+
+    parsed_expressions.each do |expression|
+      expression.each do |thing|
+        if thing.list?
+          # recurse into expressions in list
+          sublist = thing.list
+          bools += parsed_expressions_booleans(sublist)
+        elsif thing.boolean_constant?
+          bools << thing
+        end
+      end
+    end
+
+    bools
   end
 
   def parsed_expressions_variables(parsed_expressions)
@@ -1403,6 +1425,7 @@ class UserFunctionDefinition
   attr_reader :expression
   attr_reader :numerics
   attr_reader :strings
+  attr_reader :booleans
   attr_reader :variables
   attr_reader :operators
   attr_reader :functions
@@ -1426,6 +1449,7 @@ class UserFunctionDefinition
     if @expression.nil?
       @numerics = []
       @strings = []
+      @booleans = []
       @variables = []
       @operators = []
       @functions = []
@@ -1436,6 +1460,7 @@ class UserFunctionDefinition
     else
       @numerics = @expression.numerics
       @strings = @expression.strings
+      @booleans = @expression.booleans
       @variables = @expression.variables
       @operators = @expression.operators
       @functions = @expression.functions
@@ -1564,6 +1589,7 @@ class Assignment
   attr_reader :target
   attr_reader :numerics
   attr_reader :strings
+  attr_reader :booleans
   attr_reader :variables
   attr_reader :operators
   attr_reader :functions
@@ -1582,6 +1608,7 @@ class Assignment
 
     @numerics = []
     @strings = []
+    @booleans = []
     @variables = []
     @operators = []
     @functions = []
@@ -1623,6 +1650,7 @@ class Assignment
   def make_references
     @numerics = @target.numerics + @expression.numerics
     @strings = @target.strings + @expression.strings
+    @booleans = @target.booleans + @expression.booleans
     @variables = @target.variables + @expression.variables
     @operators = @target.operators + @expression.operators
     @functions = @target.functions + @expression.functions

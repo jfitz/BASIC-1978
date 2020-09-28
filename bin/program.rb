@@ -1048,6 +1048,25 @@ class Program
     refs
   end
 
+  def bool_refs
+    refs = {}
+
+    @lines.keys.sort.each do |line_number|
+      line = @lines[line_number]
+      statements = line.statements
+
+      rs = []
+      statements.each do |statement|
+        rs += statement.booleans
+        rs += statement.modifier_booleans
+      end
+
+      refs[line_number] = rs
+    end
+
+    refs
+  end
+
   def function_refs
     refs = {}
 
@@ -1265,32 +1284,47 @@ class Program
 
     nums_list = numeric_refs
     numerics = make_summary(nums_list)
-    texts += print_numeric_refs('Numeric constants:', numerics)
+    texts += print_numeric_refs('Numeric constants:', numerics) unless
+      numerics.empty?
 
     strs_list = text_refs
     strings = make_summary(strs_list)
-    texts += print_object_refs('String constants:', strings)
+    texts += print_object_refs('String constants:', strings) unless
+      strings.empty?
+
+    bool_list = bool_refs
+    booleans = make_summary(bool_list)
+    texts += print_numeric_refs('Boolean constants:', booleans) unless
+      booleans.empty?
 
     funcs_list = function_refs
     functions = make_summary(funcs_list)
-    texts += print_object_refs('Functions:', functions)
+    texts += print_object_refs('Functions:', functions) unless
+      functions.empty?
 
     udfs_list = user_function_refs
     userfuncs = make_summary(udfs_list)
-    texts += print_object_refs('User-defined functions:', userfuncs)
+    texts += print_object_refs('User-defined functions:', userfuncs) unless
+      userfuncs.empty?
 
     vars_list = variables_refs
     variables = make_summary(vars_list)
-    texts += print_object_refs('Variables:', variables)
-    texts += print_unused(variables)
+    unless variables.empty?
+      texts += print_object_refs('Variables:', variables)
+      texts += print_unused(variables)
+    end
 
     opers_list = operators_refs
     operators = make_summary(opers_list)
-    texts += print_object_refs('Operators:', operators)
+    texts += print_object_refs('Operators:', operators) unless
+      operators.empty?
 
     lines_list = linenums_refs
     linenums = make_summary(lines_list)
-    texts += print_object_refs('Line numbers:', linenums)
+    texts += print_object_refs('Line numbers:', linenums) unless
+      linenums.empty?
+
+    texts
   end
 
   private

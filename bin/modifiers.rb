@@ -3,6 +3,7 @@ class IfModifier
   attr_reader :errors
   attr_reader :numerics
   attr_reader :strings
+  attr_reader :booleans
   attr_reader :variables
   attr_reader :operators
   attr_reader :functions
@@ -14,6 +15,7 @@ class IfModifier
     @expression = parse_expression(expression_tokens)
     @numerics = @expression.numerics
     @strings = @expression.strings
+    @booleans = @expression.booleans
     @variables = @expression.variables
     @operators = @expression.operators
     @functions = @expression.functions
@@ -92,6 +94,7 @@ class ForModifier
   attr_reader :errors
   attr_reader :numerics
   attr_reader :strings
+  attr_reader :booleans
   attr_reader :variables
   attr_reader :operators
   attr_reader :functions
@@ -127,6 +130,7 @@ class ForModifier
     if @step.nil?
       @numerics = @start.numerics + @end.numerics
       @strings = @start.strings + @end.strings
+      @booleans = @start.booleans + @end.booleans
       control = XrefEntry.new(@control.to_s, nil, true)
       @variables = [control] + @start.variables + @end.variables
       @operators = @start.operators + @end.operators
@@ -135,6 +139,7 @@ class ForModifier
     else
       @numerics = @start.numerics + @end.numerics + @step.numerics
       @strings = @start.strings + @end.strings + @step.strings
+      @booleans = @start.booleans + @end.booleans + @step.booleans
       control = XrefEntry.new(@control.to_s, nil, true)
 
       @variables =

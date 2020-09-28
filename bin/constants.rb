@@ -1145,7 +1145,7 @@ class BooleanConstant < AbstractValueElement
   end
 
   def <=>(other)
-    @value <=> other.to_v
+    to_i <=> other.to_i
   end
 
   def >(other)
@@ -1367,6 +1367,10 @@ class CarriageControl
   end
 
   def strings
+    []
+  end
+
+  def booleans
     []
   end
 
