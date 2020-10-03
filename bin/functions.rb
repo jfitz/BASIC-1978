@@ -206,7 +206,7 @@ class UserFunction < AbstractScalarFunction
 
         results = [interpreter.get_value(@name)]
       end
-    rescue BASICRuntimeException => e
+    rescue BASICRuntimeError => e
       interpreter.clear_user_var_values
       raise e
     end
