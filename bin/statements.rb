@@ -3052,16 +3052,21 @@ class PrintStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+    last_was_printable = false
 
-    @items.each do |item|
+    while i < @items.size
+      item = @items[i]
+
       if item.printable?
-        carriage = CarriageControl.new('')
-        carriage = @items[i + 1] if
-          i < @items.size &&
-          !@items[i + 1].printable?
-        item.print(fhr, interpreter)
-        carriage.print(fhr, interpreter)
+        if last_was_printable
+          # insert an implicit carriage control
+          carriage = CarriageControl.new('')
+          carriable.print(fhr, interpreter)
+        end
       end
+
+      item.print(fhr, interpreter)
+      last_was_printable = item.printable?
 
       i += 1
     end
@@ -3506,16 +3511,21 @@ class WriteStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+    last_was_printable = false
 
-    @items.each do |item|
+    while i < @items.size
+      item = @items[i]
+ 
       if item.printable?
-        carriage = CarriageControl.new('')
-        carriage = @items[i + 1] if
-          i < @items.size &&
-          !@items[i + 1].printable?
-        item.write(fhr, interpreter)
-        carriage.write(fhr, interpreter)
+        if last_was_printable
+          # insert an implicit carriage control
+          carriage = CarriageControl.new('')
+          carriable.write(fhr, interpreter)
+        end
       end
+
+      item.write(fhr, interpreter)
+      last_was_printable = item.printable?
 
       i += 1
     end
@@ -3647,16 +3657,24 @@ class ArrPrintStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+    last_was_printable = false
 
-    @items.each do |item|
+    while i < @items.size
+      item = @items[i]
+
       if item.printable?
-        carriage = CarriageControl.new('')
-        carriage = @items[i + 1] if
-          i < @items.size &&
-          !@items[i + 1].printable?
+        if last_was_printable
+          # insert an implicit carriage control
+          carriage = CarriageControl.new('')
+          carriage.print(fhr, interpreter)
+        end
+
         item.compound_print(fhr, interpreter)
-        carriage.print(fhr, interpreter)
+      else
+        item.print(fhr, interpreter)
       end
+
+      last_was_printable = item.printable?
 
       i += 1
     end
@@ -3769,16 +3787,24 @@ class ArrWriteStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+    last_was_printable = false
 
-    @items.each do |item|
+    while i < @items.size
+      item = @items[i]
+
       if item.printable?
-        carriage = CarriageControl.new('')
-        carriage = @items[i + 1] if
-          i < @items.size &&
-          !@items[i + 1].printable?
+        if last_was_printable
+          # insert an implicit carriage control
+          carriage = CarriageControl.new('')
+          carriage.write(fhr, interpreter)
+        end
+
         item.compound_write(fhr, interpreter)
-        carriage.write(fhr, interpreter)
+      else
+        item.write(fhr, interpreter)
       end
+
+      last_was_printable = item.printable?
 
       i += 1
     end
@@ -4005,12 +4031,21 @@ class MatPrintStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+    last_was_printable = false
 
-    @items.each do |item|
+    while i < @items.size
+      item = @items[i]
+
       if item.printable?
+        if last_was_printable
+          # insert an implicit carriage control
+          carriage = CarriageControl.new('')
+          carriage.print(fhr, interpreter)
+        end
+
         item.compound_print(fhr, interpreter)
-        carriage = CarriageControl.new('')
-        carriage.print(fhr, interpreter)
+      else
+        item.print(fhr, interpreter)
       end
 
       i += 1
@@ -4142,16 +4177,24 @@ class MatWriteStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     i = 0
+    last_was_printable = false
 
-    @items.each do |item|
+    while i < @items.size
+      item = @items[i]
+
       if item.printable?
-        carriage = CarriageControl.new('')
-        carriage = @items[i + 1] if
-          i < @items.size &&
-          !@items[i + 1].printable?
+        if last_was_printable
+          # insert an implicit carriage control
+          carriage = CarriageControl.new('')
+          carriage.write(fhr, interpreter)
+        end
+
         item.compound_write(fhr, interpreter)
-        carriage.write(fhr, interpreter)
+      else
+        item.write(fhr, interpreter)
       end
+
+      last_was_printable = item.printable?
 
       i += 1
     end
