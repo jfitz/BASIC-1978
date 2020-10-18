@@ -1237,25 +1237,15 @@ class BooleanConstant < AbstractValueElement
     NumericConstant.new(value)
   end
 
-#  def negate
-#    NumericConstant.new(-to_i)
-#  end
-
-#  def truncate
-#    value = to_i
-#    NumericConstant.new(value)
-#  end
-
-#  def floor
-#    value = to_i
-#    NumericConstant.new(value)
-#  end
-
   def to_i
     @value ? 1 : 0
   end
 
   def to_s
+    @value ? 'true' : 'false'
+  end
+
+  def to_formatted_s
     @value ? 'true' : 'false'
   end
 
@@ -1265,6 +1255,19 @@ class BooleanConstant < AbstractValueElement
 
   def to_numeric
     @value ? NumericConstant.new(-1) : NumericConstant.new(0)
+  end
+
+  def print(printer)
+    s = to_formatted_s
+    s = s.upcase
+    printer.print_item s
+    printer.last_was_numeric
+  end
+
+  def write(printer)
+    s = to_formatted_s
+    s = s.upcase
+    printer.print_item s
   end
 
   def compatible?(other)
