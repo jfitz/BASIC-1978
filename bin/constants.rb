@@ -1484,7 +1484,7 @@ class VariableName < AbstractElement
   def initialize(token)
     super()
 
-    raise(BASICSyntaxError, "'#{token}' is not a variable name") unless
+    raise(BASICSyntaxError, "'#{token}' is not a variable token") unless
       token.class.to_s == 'VariableToken'
 
     @name = token
