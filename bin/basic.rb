@@ -470,7 +470,7 @@ def make_command_tokenbuilders(quotes, long_names)
     BASE
     CHR_ALLOW_ALL
     DEFAULT_PROMPT DETECT_INFINITE_LOOP
-    ECHO FIELD_SEP HEADING
+    ECHO FIELD_SEP FORGET_FORNEXT HEADING
     IF IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
     INT_FLOOR LOCK_FORNEXT LONG_NAMES MAX_LINE_NUM MIN_LINE_NUM
     NEWLINE_SPEED
@@ -560,6 +560,7 @@ OptionParser.new do |opt|
   opt.on('--echo-input') { |o| options[:echo_input] = o }
   opt.on('--no-extend-if') { |o| options[:no_extend_if] = o }
   opt.on('--field-sep-semi') { |o| options[:field_sep_semi] = o }
+  opt.on('--forget-fornext') { |o| options[:forget_fornext] = o }
   opt.on('--heading') { |o| options[:heading] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
   opt.on('--ignore-rnd-arg') { |o| options[:ignore_rnd_arg] = o }
@@ -628,6 +629,7 @@ $options['detect_infinite_loop'] =
 
 $options['echo'] = Option.new(boolean, options.key?(:echo_input))
 $options['no_extend_if'] = Option.new(boolean, options.key?(:no_extend_if))
+$options['forget_fornext'] = Option.new(boolean, options.key?(:forget_fornext))
 $options['heading'] = Option.new(boolean, options.key?(:heading))
 
 field_sep = Option.new(separator, 'COMMA')

@@ -151,8 +151,8 @@ class ForModifier
     end
 
     @comprehension_effort = @start.comprehension_effort
-    @comprehension_effort = @end.comprehension_effort
-    @comprehension_effort = @step.comprehension_effort unless @step.nil?
+    @comprehension_effort += @end.comprehension_effort
+    @comprehension_effort += @step.comprehension_effort unless @step.nil?
   end
 
   def pretty
@@ -185,33 +185,25 @@ class ForModifier
   end
 
   def execute_pre(interpreter)
-    start_values = @start.evaluate(interpreter)
-    start_value = start_values[0]
-    @current_value = start_value if @current_value.nil?
-    interpreter.set_value(@control, @current_value)
-    endvs = @end.evaluate(interpreter)
-    endv = endvs[0]
+    from = @start.evaluate(interpreter)[0]
+    to = @end.evaluate(interpreter)[0]
+    step = NumericConstant.new(1)
+    step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    if @step.nil?
-      step = NumericConstant.new(1)
-    else
-      steps = @step.evaluate(interpreter)
-      step = steps[0]
-    end
+    fornext_control =
+      interpreter.assign_fornext(@control, from, to, step)
 
     interpreter.lock_variable(@control)
     interpreter.enter_fornext(@control)
-    terminated = terminated?(@current_value, step, endv)
+    terminated = fornext_control.front_terminated?
 
     io = interpreter.trace_out
     print_trace_info(io, terminated)
 
     return unless terminated
 
-    # front-terminated; go to next statement or modifier
+    # front-terminated; go to post-exec of this modifier
     interpreter.unlock_variable(@control)
-    interpreter.exit_fornext
-    @current_value = nil
 
     current_line_index = interpreter.current_line_index
     number = current_line_index.number
@@ -223,37 +215,24 @@ class ForModifier
   end
 
   def execute_post(interpreter)
-    endvs = @end.evaluate(interpreter)
-    endv = endvs[0]
+    fornext_control = interpreter.retrieve_fornext(@control)
 
-    if @step.nil?
-      step = NumericConstant.new(1)
-    else
-      steps = @step.evaluate(interpreter)
-      step = steps[0]
-    end
+    to = @end.evaluate(interpreter)[0]
+    step = NumericConstant.new(1)
+    step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    @current_value = interpreter.get_value(@control)
-    @current_value += step
-    interpreter.set_value(@control, @current_value)
-
-    terminated = terminated?(@current_value, step, endv)
-
+    terminated = fornext_control.terminated?(interpreter)
     io = interpreter.trace_out
     print_trace_info(io, terminated)
 
     if terminated
-      @current_value = nil
       interpreter.unlock_variable(@control)
-      interpreter.exit_fornext
+      interpreter.exit_fornext(fornext_control.forget, fornext_control.control)
     else
-      current_line_index = interpreter.current_line_index
-      number = current_line_index.number
-      statement_index = current_line_index.statement
-      index = current_line_index.index
-      for_index = -index
-      destination = LineNumberIndex.new(number, statement_index, for_index)
-      interpreter.next_line_index = destination
+      # set next line from top item
+      interpreter.next_line_index = fornext_control.loop_start_index
+      # change control variable value
+      fornext_control.bump_control(interpreter)
     end
   end
 
@@ -275,18 +254,6 @@ class ForModifier
 
     results << list unless list.empty?
     results
-  end
-
-  def terminated?(current_value, step, endv)
-    zero = NumericConstant.new(0)
-
-    if step > zero
-      current_value > endv
-    elsif step < zero
-      current_value < endv
-    else
-      false
-    end
   end
 
   def print_trace_info(io, terminated)
