@@ -1029,7 +1029,7 @@ class Program
     refs
   end
 
-  def text_refs
+  def strings_refs
     refs = {}
 
     @lines.keys.sort.each do |line_number|
@@ -1048,7 +1048,7 @@ class Program
     refs
   end
 
-  def bool_refs
+  def boolean_refs
     refs = {}
 
     @lines.keys.sort.each do |line_number|
@@ -1287,12 +1287,12 @@ class Program
     texts += print_numeric_refs('Numeric constants:', numerics) unless
       numerics.empty?
 
-    strs_list = text_refs
+    strs_list = strings_refs
     strings = make_summary(strs_list)
     texts += print_object_refs('String constants:', strings) unless
       strings.empty?
 
-    bool_list = bool_refs
+    bool_list = boolean_refs
     booleans = make_summary(bool_list)
     texts += print_numeric_refs('Boolean constants:', booleans) unless
       booleans.empty?
