@@ -1465,7 +1465,10 @@ PRINT USING
 
 Displays a series of expressions to the console, formatting each item.
 
-Syntax: PRINT USING formatstring, expression [,expressions]
+Syntax: PRINT USING formatstring, expression [,expression...]
+Syntax: PRINT #filenum; USING formatstring, expression [,expression...]
+
+The USING keyword may occur multiple times within the PRINT statement.
 
 The format string may be a constant or variable or an expression.
 
@@ -1493,7 +1496,7 @@ Examples:
 	260 PRINT USING "NAME: &", A$	' PRINT ENTIRE STRING
 	270 PRINT USING "TOKENS: \  \, \  \", T1$, T2$
 
-	300 PRINT USING "NAME: &, AMOUNT: #######", N$, A
+	300 PRINT USING "NAME: &", N$; USING "AMOUNT: #######", A
 
 Format strings may contain multiple specifications.
 The number of specifications must match the number of values given after the format string.

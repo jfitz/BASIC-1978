@@ -158,7 +158,6 @@ class StatementFactory
       OpenStatement,
       OptionStatement,
       PrintStatement,
-      PrintUsingStatement,
       RandomizeStatement,
       ReadStatement,
       RemarkStatement,
@@ -3082,24 +3081,72 @@ class PrintStatement < AbstractStatement
   include FileFunctions
   include PrintFunctions
 
+  def self.extra_keywords
+    ['USING']
+  end
+
   def initialize(_, keywords, tokens_lists)
     super
 
     extract_modifiers(tokens_lists)
 
-    template1 = []
-    template2 = [[1, '>=']]
+    # build list: exp, cc, exp, cc, 'USING' exp, cc, exp, cc
+    tokens = tokens_lists.flatten
+    list = split_keywords(tokens)
 
-    if check_template(tokens_lists, template1)
-      @items = tokens_to_expressions([], :scalar)
-    elsif check_template(tokens_lists, template2)
-      tokens_lists = split_tokens(tokens_lists[0], true)
-      @items = tokens_to_expressions(tokens_lists, :scalar)
-      @file_tokens = extract_file_handle(@items)
-      @elements = make_references(@items, @file_tokens)
-      @items.each { |item| @comprehension_effort += item.comprehension_effort }
+    @items_lists = []
+    # walk list
+    if list.empty?
+      expressions = tokens_to_expressions([], :scalar)
+      @items_lists << expressions
     else
-      @errors << 'Syntax error'
+      list.each do |item|
+        if item.class.to_s == 'Array'
+          tokens_lists = split_tokens(item, true)
+          expressions = tokens_to_expressions(tokens_lists, :scalar)
+          @items_lists << expressions
+        else
+          @items_lists << item
+        end
+      end
+    end
+
+    # if list first item is expression
+    #   extract possible file handle
+    @file_tokens = nil
+    unless @items_lists.empty?
+      if @items_lists[0].class.to_s == 'Array'
+        @file_tokens = extract_file_handle(@items_lists[0]) unless
+          @items_lists[0].empty?
+      end
+    end
+
+    # @items_lists.each { |il| puts "IL: #{il}" }
+    
+    # end with
+    #   @file_tokens : exp or nil
+    #   #items_lists : list either expression, cc, or keyword
+
+    # if item is keyword then it must be 'USING'
+    @items_lists.each do |items_list|
+      unless items_list.class.to_s == 'Array'
+        @errors << 'Syntax error' unless
+          items_list.keyword? && items_list.to_s == 'USING'
+      end
+    end
+
+    @elements = make_references(nil, @file_tokens)
+
+    @items_lists.each do |items_list|
+      if items_list.class.to_s == 'Array'
+        elements = make_references(items_list)
+        elements.each do |k, v|
+          @elements[k] += v
+        end
+        items_list.each { |item| @comprehension_effort += item.comprehension_effort }
+      elsif items_list.keyword?
+        @comprehension_effort += 1
+      end
     end
 
     ## @errors << 'Delimiter required' if any_implied_carriage(@items)
@@ -3109,108 +3156,108 @@ class PrintStatement < AbstractStatement
     fh = get_file_handle(interpreter, @file_tokens)
     fhr = interpreter.get_file_handler(fh, :print)
 
-    i = 0
-    last_was_printable = false
+    j = 0
+    while j < @items_lists.size
+      items_list = @items_lists[j]
+      
+      if items_list.class.to_s == 'Array'
+        i = 0
+        last_was_printable = false
 
-    while i < @items.size
-      item = @items[i]
+        while i < items_list.size
+          item = items_list[i]
 
-      if item.printable?
-        if last_was_printable
-          # insert an implicit carriage control
-          carriage = CarriageControl.new('')
-          carriable.print(fhr, interpreter)
+          if item.keyword?
+          else
+            if item.printable?
+              if last_was_printable
+                # insert an implicit carriage control
+                carriage = CarriageControl.new('')
+                carriable.print(fhr, interpreter)
+              end
+            end
+
+            item.print(fhr, interpreter)
+            last_was_printable = item.printable?
+          end
+
+          i += 1
+        end
+      else
+        # item must be 'USING'
+        j += 1
+
+        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items_lists.size
+
+        items_list = @items_lists[j]
+
+        format_spec, items = extract_format(items_list, interpreter)
+
+        raise BASICRuntimeError.new(:te_no_fmt) if format_spec.nil?
+
+        # split format
+        formats = split_format(format_spec)
+        fhr = interpreter.console_io
+
+        formats.each do |format|
+          constant = nil
+
+          if format.wants_item
+            # skip all of the separators
+            items.shift while
+              !items.empty? && items[0].carriage_control?
+
+            raise BASICRuntimeError.new(:te_few_fmt) if items.empty?
+
+            item = items.shift
+            constants = item.evaluate(interpreter)
+            constant = constants[0]
+          end
+
+          text = format.format(constant)
+          text.print(fhr)
+        end
+
+        if !items.empty? && !items[0].printable?
+          items.unshift(ValueExpression.new([], :scalar))
+        end
+
+        i = 0
+
+        items.each do |item|
+          if item.printable?
+            carriage = CarriageControl.new('')
+            carriage = items[i + 1] if
+              i < items.size &&
+              !items[i + 1].printable?
+            item.print(fhr, interpreter)
+            carriage.print(fhr, interpreter)
+          end
+
+          i += 1
         end
       end
 
-      item.print(fhr, interpreter)
-      last_was_printable = item.printable?
-
-      i += 1
+      j += 1
     end
   end
-end
 
-# PRINT USING
-class PrintUsingStatement < AbstractStatement
-  def self.lead_keywords
-    [
-      [KeywordToken.new('PRINT'), KeywordToken.new('USING')]
-    ]
-  end
+  def dump
+    lines = []
 
-  include FileFunctions
-  include PrintFunctions
+    lines += @file_tokens.dump unless @file_tokens.nil?
 
-  def initialize(_, keywords, tokens_lists)
-    super
-
-    extract_modifiers(tokens_lists)
-
-    template = [[1, '>=']]
-
-    if check_template(tokens_lists, template)
-      tokens_lists = split_tokens(tokens_lists[0], true)
-      @file_tokens = nil
-      @items = tokens_to_expressions(tokens_lists, :scalar)
-      @elements = make_references(@items, @file_tokens)
-      @items.each { |item| @comprehension_effort += item.comprehension_effort }
-    else
-      @errors << 'Syntax error'
-    end
-
-    ## @errors << 'Delimiter required' if any_implied_carriage(@items)
-  end
-
-  def execute_core(interpreter)
-    fh = get_file_handle(interpreter, @file_tokens)
-    fhr = interpreter.get_file_handler(fh, :print)
-
-    format_spec, items = extract_format(@items, interpreter)
-
-    raise BASICRuntimeError.new(:te_no_fmt) if format_spec.nil?
-
-    # split format
-    formats = split_format(format_spec)
-    fhr = interpreter.console_io
-
-    formats.each do |format|
-      constant = nil
-
-      if format.wants_item
-        # skip all of the separators
-        items.shift while
-          !items.empty? && items[0].carriage_control?
-
-        raise BASICRuntimeError.new(:te_few_fmt) if items.empty?
-
-        item = items.shift
-        constants = item.evaluate(interpreter)
-        constant = constants[0]
+    @items_lists.each do |items_list|
+      if items_list.class.to_s == 'Array'
+        items_list.each { |item| lines += item.dump }
+      elsif items_list.keyword?
+        lines << 'Keyword:' + items_list.to_s
       end
-
-      text = format.format(constant)
-      text.print(fhr)
     end
 
-    if !items.empty? && !items[0].printable?
-      items.unshift(ValueExpression.new([], :scalar))
-    end
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
-    i = 0
-
-    items.each do |item|
-      if item.printable?
-        carriage = CarriageControl.new('')
-        carriage = items[i + 1] if
-          i < items.size &&
-          !items[i + 1].printable?
-        item.print(fhr, interpreter)
-        carriage.print(fhr, interpreter)
-      end
-
-      i += 1
-    end
+    lines
   end
 
   private

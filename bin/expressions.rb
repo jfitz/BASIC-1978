@@ -1282,6 +1282,10 @@ class ValueExpression < AbstractExpression
     true
   end
 
+  def keyword?
+    false
+  end
+
   def scalar?
     @shape == :scalar
   end
