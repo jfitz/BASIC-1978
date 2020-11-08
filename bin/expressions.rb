@@ -87,12 +87,12 @@ class BASICArray
     'ARRAY: ' + @values.to_s
   end
 
-  def print(printer, interpreter)
+  def print(printer, interpreter, formats)
     case @dimensions.size
     when 0
       raise BASICSyntaxError, 'Need dimension in array'
     when 1
-      print_1(printer, interpreter)
+      print_1(printer, interpreter, formats)
     else
       raise BASICSyntaxError, 'Too many dimensions in array'
     end
@@ -125,15 +125,26 @@ class BASICArray
 
   private
 
-  def print_1(printer, interpreter)
+  def print_1(printer, interpreter, formats)
     n_cols = @dimensions[0].to_i
 
     fs_carriage = CarriageControl.new($options['field_sep'].value)
 
     base = interpreter.base
     (base..n_cols).each do |col|
-      value = get_value(col)
-      value.print(printer)
+      if formats.nil?
+        value = get_value(col)
+        value.print(printer)
+      else
+        # apply using formats
+        formats.each do |format|
+          value = nil
+          value = get_value(col) if format.wants_item
+          text = format.format(value)
+          text.print(printer)
+        end
+      end
+
       fs_carriage.print(printer, interpreter) if col < n_cols
     end
   end
@@ -293,14 +304,14 @@ class Matrix
     'MATRIX: ' + @values.to_s
   end
 
-  def print(printer, interpreter)
+  def print(printer, interpreter, formats)
     case @dimensions.size
     when 0
       raise BASICSyntaxError, 'Need dimensions in matrix'
     when 1
-      print_1(printer, interpreter)
+      print_1(printer, interpreter, formats)
     when 2
-      print_2(printer, interpreter)
+      print_2(printer, interpreter, formats)
     else
       raise BASICSyntaxError, 'Too many dimensions in matrix'
     end
@@ -373,7 +384,7 @@ class Matrix
 
   private
 
-  def print_1(printer, interpreter)
+  def print_1(printer, interpreter, formats)
     n_cols = @dimensions[0].to_i
 
     base = $options['base'].value
@@ -382,15 +393,27 @@ class Matrix
     rs_carriage = CarriageControl.new('NL')
 
     (base..n_cols).each do |col|
-      value = get_value_1(col)
-      value.print(printer)
+      if formats.nil?
+        value = get_value_1(col)
+        value.print(printer)
+      else
+        # apply using formats
+        format.each do |format|
+          value.print(printer)
+          value = nil
+          value = get_value_1(col) if format.wants_item
+          text = format.format(value)
+          text.print(printer)
+        end
+      end
+
       fs_carriage.print(printer, interpreter) if col < n_cols
     end
 
     rs_carriage.print(printer, interpreter)
   end
 
-  def print_2(printer, interpreter)
+  def print_2(printer, interpreter, formats)
     n_rows = @dimensions[0].to_i
     n_cols = @dimensions[1].to_i
 
@@ -401,8 +424,19 @@ class Matrix
 
     (base..n_rows).each do |row|
       (base..n_cols).each do |col|
-        value = get_value_2(row, col)
-        value.print(printer)
+        if formats.nil?
+          value = get_value_2(row, col)
+          value.print(printer)
+        else
+          # apply using formats
+          formats.each do |format|
+            value = nil
+            value = get_value_2(row, col) if format.wants_item
+            text = format.format(value)
+            text.print(printer)
+          end
+        end
+
         fs_carriage.print(printer, interpreter) if col < n_cols
       end
 
@@ -1322,13 +1356,13 @@ class ValueExpression < AbstractExpression
     numeric_constant.write(printer)
   end
 
-  def compound_print(printer, interpreter)
+  def compound_print(printer, interpreter, formats)
     compounds = evaluate(interpreter)
 
     return if compounds.empty?
 
     compound = compounds[0]
-    compound.print(printer, interpreter)
+    compound.print(printer, interpreter, formats)
   end
 
   def compound_write(printer, interpreter)
