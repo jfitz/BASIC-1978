@@ -1,0 +1,39 @@
+MAT PRINT WITH COMMA
+ 1.00            0.50            0.33            0.25
+ 2.00            1.00            0.67            0.50
+ 3.00            1.50            1.00            0.75
+                  3.14            1.57            1.05
+  6.28            3.14            2.09
+  9.42            4.71            3.14
+ 12.57            6.28            4.19
+
+MAT PRINT WITH SEMICOLON
+ 1.00            0.50            0.33            0.25
+ 2.00            1.00            0.67            0.50
+ 3.00            1.50            1.00            0.75
+  3.14            1.57            1.05
+  6.28            3.14            2.09
+  9.42            4.71            3.14
+ 12.57            6.28            4.19
+
+STOP in line 99
+
+10.0 (1) REM TEST MAT PRINT USING
+12.0 (1) OPTION BASE 1
+20.0 (1) DIM A(3, 4), B(4, 3)
+30.0 (1) FOR I = 1 TO 3
+31.0 (3) FOR J = 1 TO 4
+32.0 (12) LET A(I, J) = I / J
+33.0 (12) NEXT J
+34.0 (3) NEXT I
+40.0 (1) FOR I = 1 TO 4
+41.0 (4) FOR J = 1 TO 3
+42.0 (12) LET B(I, J) = 3.14159 * I / J
+43.0 (12) NEXT J
+44.0 (4) NEXT I
+50.0 (1) PRINT "MAT PRINT WITH COMMA"
+52.0 (1) MAT PRINT USING "##.##", A, USING "###.##", B
+60.0 (1) PRINT "MAT PRINT WITH SEMICOLON"
+62.0 (1) MAT PRINT USING "##.##"; A; USING "###.##"; B
+99.0 (1) END
+
