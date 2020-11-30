@@ -1088,11 +1088,11 @@ module PrintFunctions
 
     lines += @file_tokens.dump unless @file_tokens.nil?
 
-    @items_lists.each do |items_list|
-      if items_list.class.to_s == 'Array'
-        items_list.each { |item| lines += item.dump }
-      elsif items_list.keyword?
-        lines << 'Keyword:' + items_list.to_s
+    @items.each do |item|
+      if item.class.to_s == 'Array'
+        item.each { |it| lines += it.dump }
+      elsif item.keyword?
+        lines << 'Keyword:' + item.to_s
       end
     end
 
@@ -3151,19 +3151,19 @@ class PrintStatement < AbstractStatement
     tokens = tokens_lists.flatten
     list = split_keywords(tokens)
 
-    @items_lists = []
-    # walk list
+    @items = []
+
     if list.empty?
       expressions = tokens_to_expressions([], :scalar)
-      @items_lists << expressions
+      @items << expressions
     else
       list.each do |item|
         if item.class.to_s == 'Array'
           tokens_lists = split_tokens(item, true)
           expressions = tokens_to_expressions(tokens_lists, :scalar)
-          @items_lists << expressions
+          @items << expressions
         else
-          @items_lists << item
+          @items << item
         end
       end
     end
@@ -3171,37 +3171,35 @@ class PrintStatement < AbstractStatement
     # if list first item is expression
     #   extract possible file handle
     @file_tokens = nil
-    unless @items_lists.empty?
-      if @items_lists[0].class.to_s == 'Array'
-        @file_tokens = extract_file_handle(@items_lists[0]) unless
-          @items_lists[0].empty?
+    unless @items.empty?
+      if @items[0].class.to_s == 'Array'
+        @file_tokens = extract_file_handle(@items[0]) unless
+          @items[0].empty?
       end
     end
 
-    # @items_lists.each { |il| puts "IL: #{il}" }
-    
     # end with
     #   @file_tokens : exp or nil
-    #   #items_lists : list either expression, cc, or keyword
+    #   #items : list either expression, cc, or keyword
 
     # if item is keyword then it must be 'USING'
-    @items_lists.each do |items_list|
-      unless items_list.class.to_s == 'Array'
+    @items.each do |item|
+      unless item.class.to_s == 'Array'
         @errors << 'Syntax error' unless
-          items_list.keyword? && items_list.to_s == 'USING'
+          item.keyword? && item.to_s == 'USING'
       end
     end
 
     @elements = make_references(nil, @file_tokens)
 
-    @items_lists.each do |items_list|
-      if items_list.class.to_s == 'Array'
-        elements = make_references(items_list)
+    @items.each do |item|
+      if item.class.to_s == 'Array'
+        elements = make_references(item)
         elements.each do |k, v|
           @elements[k] += v
         end
-        items_list.each { |item| @comprehension_effort += item.comprehension_effort }
-      elsif items_list.keyword?
+        item.each { |it| @comprehension_effort += it.comprehension_effort }
+      elsif item.keyword?
         @comprehension_effort += 1
       end
     end
@@ -3214,29 +3212,26 @@ class PrintStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     j = 0
-    while j < @items_lists.size
-      items_list = @items_lists[j]
+    while j < @items.size
+      item = @items[j]
       
-      if items_list.class.to_s == 'Array'
+      if item.class.to_s == 'Array'
         i = 0
         last_was_printable = false
 
-        while i < items_list.size
-          item = items_list[i]
+        while i < item.size
+          it = item[i]
 
-          if item.keyword?
-          else
-            if item.printable?
-              if last_was_printable
-                # insert an implicit carriage control
-                carriage = CarriageControl.new('')
-                carriable.print(fhr, interpreter)
-              end
+          if it.printable?
+            if last_was_printable
+              # insert an implicit carriage control
+              carriage = CarriageControl.new('')
+              carriage.print(fhr, interpreter)
             end
-
-            item.print(fhr, interpreter)
-            last_was_printable = item.printable?
           end
+
+          it.print(fhr, interpreter)
+          last_was_printable = it.printable?
 
           i += 1
         end
@@ -3244,52 +3239,61 @@ class PrintStatement < AbstractStatement
         # item must be 'USING'
         j += 1
 
-        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items_lists.size
+        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items.size
 
-        items_list = @items_lists[j]
+        # extract formats
+        item = @items[j]
 
-        format_spec, items = extract_format(items_list, interpreter)
+        format_spec, items = extract_format(item, interpreter)
 
         raise BASICRuntimeError.new(:te_no_fmt) if format_spec.nil?
 
-        # split format
+        # split format spec into formats
         formats = split_format(format_spec)
         fhr = interpreter.console_io
+
+        # FIX: if item is not Array, throw exception
+        
+        last_was_printable = false
+
+        i = 0
 
         formats.each do |format|
           constant = nil
 
           if format.wants_item
             # skip all of the separators
-            items.shift while
-              !items.empty? && items[0].carriage_control?
+            i += 1 while
+              i < items.size && items[i].carriage_control?
 
-            raise BASICRuntimeError.new(:te_few_fmt) if items.empty?
+            raise BASICRuntimeError.new(:te_few_fmt) if i == items.size
 
-            item = items.shift
-            constants = item.evaluate(interpreter)
+            constants = items[i].evaluate(interpreter)
+
             constant = constants[0]
+
+            i += 1
           end
 
           text = format.format(constant)
           text.print(fhr)
+
+          last_was_printable = true
         end
 
-        if !items.empty? && !items[0].printable?
-          items.unshift(ValueExpression.new([], :scalar))
-        end
+        while i < items.size
+          item = items[i]
 
-        i = 0
-
-        items.each do |item|
           if item.printable?
-            carriage = CarriageControl.new('')
-            carriage = items[i + 1] if
-              i < items.size &&
-              !items[i + 1].printable?
-            item.print(fhr, interpreter)
-            carriage.print(fhr, interpreter)
+            if last_was_printable
+              # insert an implicit carriage control
+              carriage = CarriageControl.new('')
+              carriage.print(fhr, interpreter)
+            end
           end
+
+          item.print(fhr, interpreter)
+          last_was_printable = item.printable?
 
           i += 1
         end
@@ -3619,7 +3623,7 @@ class WriteStatement < AbstractStatement
         if last_was_printable
           # insert an implicit carriage control
           carriage = CarriageControl.new('')
-          carriable.write(fhr, interpreter)
+          carriage.write(fhr, interpreter)
         end
       end
 
@@ -3793,19 +3797,19 @@ class ArrPrintStatement < AbstractStatement
     tokens = tokens_lists.flatten
     list = split_keywords(tokens)
 
-    @items_lists = []
-    # walk list
+    @items = []
+
     if list.empty?
       expressions = tokens_to_expressions([], :array)
-      @items_lists << expressions
+      @items << expressions
     else
       list.each do |item|
         if item.class.to_s == 'Array'
           tokens_lists = split_tokens(item, true)
           expressions = tokens_to_expressions(tokens_lists, :array)
-          @items_lists << expressions
+          @items << expressions
         else
-          @items_lists << item
+          @items << item
         end
       end
     end
@@ -3813,37 +3817,35 @@ class ArrPrintStatement < AbstractStatement
     # if list first item is expression
     #   extract possible file handle
     @file_tokens = nil
-    unless @items_lists.empty?
-      if @items_lists[0].class.to_s == 'Array'
-        @file_tokens = extract_file_handle(@items_lists[0]) unless
-          @items_lists[0].empty?
+    unless @items.empty?
+      if @items[0].class.to_s == 'Array'
+        @file_tokens = extract_file_handle(@items[0]) unless
+          @items[0].empty?
       end
     end
 
-    # @items_lists.each { |il| puts "IL: #{il}" }
-    
     # end with
     #   @file_tokens : exp or nil
-    #   #items_lists : list either expression, cc, or keyword
+    #   #items : list either expression, cc, or keyword
 
     # if item is keyword then it must be 'USING'
-    @items_lists.each do |items_list|
-      unless items_list.class.to_s == 'Array'
+    @items.each do |item|
+      unless item.class.to_s == 'Array'
         @errors << 'Syntax error' unless
-          items_list.keyword? && items_list.to_s == 'USING'
+          item.keyword? && item.to_s == 'USING'
       end
     end
 
     @elements = make_references(nil, @file_tokens)
 
-    @items_lists.each do |items_list|
-      if items_list.class.to_s == 'Array'
-        elements = make_references(items_list)
+    @items.each do |item|
+      if item.class.to_s == 'Array'
+        elements = make_references(item)
         elements.each do |k, v|
           @elements[k] += v
         end
-        items_list.each { |item| @comprehension_effort += item.comprehension_effort }
-      elsif items_list.keyword?
+        item.each { |it| @comprehension_effort += it.comprehension_effort }
+      elsif item.keyword?
         @comprehension_effort += 1
       end
     end
@@ -3854,33 +3856,30 @@ class ArrPrintStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     j = 0
-    while j < @items_lists.size
-      items_list = @items_lists[j]
-      
-      if items_list.class.to_s == 'Array'
+    while j < @items.size
+      item = @items[j]
+
+      if item.class.to_s == 'Array'
         i = 0
         last_was_printable = false
 
-        while i < items_list.size
-          item = items_list[i]
+        while i < item.size
+          it = item[i]
 
-          if item.keyword?
-          else
-            if item.printable?
-              if last_was_printable
-                # insert an implicit carriage control
-                carriage = CarriageControl.new('')
-                carriable.print(fhr, interpreter)
-              end
-
-              formats = nil
-              item.compound_print(fhr, interpreter, formats)
-            else
-              item.print(fhr, interpreter)
+          if it.printable?
+            if last_was_printable
+              # insert an implicit carriage control
+              carriage = CarriageControl.new('')
+              carriage.print(fhr, interpreter)
             end
 
-            last_was_printable = item.printable?
+            formats = nil
+            it.compound_print(fhr, interpreter, formats)
+          else
+            it.print(fhr, interpreter)
           end
+
+          last_was_printable = it.printable?
 
           i += 1
         end
@@ -3888,32 +3887,23 @@ class ArrPrintStatement < AbstractStatement
         # item must be 'USING'
         j += 1
 
-        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items_lists.size
+        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items.size
 
-        items_list = @items_lists[j]
+        # extract formats
+        item = @items[j]
 
-        format_spec, items = extract_format(items_list, interpreter)
+        format_spec, items = extract_format(item, interpreter)
 
         raise BASICRuntimeError.new(:te_no_fmt) if format_spec.nil?
 
         # split format
         formats = split_format(format_spec)
+
         # TODO: check formats wants only one item
 
         raise BASICRuntimeError.new(:te_few_fmt) if items.empty?
 
         i = 0
-
-        # skip over first carriage control 
-        i += 1 if i < items.size && !items[i].printable?
-
-        # print carriage controls before variable
-        while i < items.size && !items[i].printable?
-          item.print(fhr, interpreter)
-          i += 1
-        end
-        
-        raise BASICRuntimeError.new(:te_few_fmt) if i >= items.size
 
         # print variable
         item = items[i]
@@ -3929,8 +3919,28 @@ class ArrPrintStatement < AbstractStatement
           last_was_printable = false
         end
 
-        # TODO: if more items print as normal (unformatted)
+        i += 1
 
+        while i < items.size
+          item = items[i]
+
+          if item.printable?
+            if last_was_printable
+              # insert an implicit carriage control
+              carriage = CarriageControl.new('')
+              carriage.print(fhr, interpreter)
+            end
+
+            formats = nil
+            item.compound_print(fhr, interpreter, formats)
+          else
+            item.print(fhr, interpreter)
+          end
+
+          last_was_printable = item.printable?
+
+          i += 1
+        end
       end
 
       j += 1
@@ -4325,19 +4335,19 @@ class MatPrintStatement < AbstractStatement
     tokens = tokens_lists.flatten
     list = split_keywords(tokens)
 
-    @items_lists = []
-    # walk list
+    @items = []
+
     if list.empty?
       expressions = tokens_to_expressions([], :matrix)
-      @items_lists << expressions
+      @items << expressions
     else
       list.each do |item|
         if item.class.to_s == 'Array'
           tokens_lists = split_tokens(item, true)
           expressions = tokens_to_expressions(tokens_lists, :matrix)
-          @items_lists << expressions
+          @items << expressions
         else
-          @items_lists << item
+          @items << item
         end
       end
     end
@@ -4345,37 +4355,35 @@ class MatPrintStatement < AbstractStatement
     # if list first item is expression
     #   extract possible file handle
     @file_tokens = nil
-    unless @items_lists.empty?
-      if @items_lists[0].class.to_s == 'Array'
-        @file_tokens = extract_file_handle(@items_lists[0]) unless
-          @items_lists[0].empty?
+    unless @items.empty?
+      if @items[0].class.to_s == 'Array'
+        @file_tokens = extract_file_handle(@items[0]) unless
+          @items[0].empty?
       end
     end
 
-    # @items_lists.each { |il| puts "IL: #{il}" }
-    
     # end with
     #   @file_tokens : exp or nil
-    #   #items_lists : list either expression, cc, or keyword
+    #   #items : list either expression, cc, or keyword
 
     # if item is keyword then it must be 'USING'
-    @items_lists.each do |items_list|
-      unless items_list.class.to_s == 'Array'
+    @items.each do |item|
+      unless item.class.to_s == 'Array'
         @errors << 'Syntax error' unless
-          items_list.keyword? && items_list.to_s == 'USING'
+          item.keyword? && item.to_s == 'USING'
       end
     end
 
     @elements = make_references(nil, @file_tokens)
 
-    @items_lists.each do |items_list|
-      if items_list.class.to_s == 'Array'
-        elements = make_references(items_list)
+    @items.each do |item|
+      if item.class.to_s == 'Array'
+        elements = make_references(item)
         elements.each do |k, v|
           @elements[k] += v
         end
-        items_list.each { |item| @comprehension_effort += item.comprehension_effort }
-      elsif items_list.keyword?
+        item.each { |it| @comprehension_effort += it.comprehension_effort }
+      elsif item.keyword?
         @comprehension_effort += 1
       end
     end
@@ -4386,52 +4394,34 @@ class MatPrintStatement < AbstractStatement
     fhr = interpreter.get_file_handler(fh, :print)
 
     j = 0
-    while j < @items_lists.size
-      items_list = @items_lists[j]
+    while j < @items.size
+      item = @items[j]
       
-      if items_list.class.to_s == 'Array'
+      if item.class.to_s == 'Array'
         i = 0
         last_was_printable = false
 
-        while i < items_list.size
-          item = items_list[i]
+        while i < item.size
+          it = item[i]
 
-          if item.keyword?
-          else
-            if item.printable?
-              if last_was_printable
-                # insert an implicit carriage control
-                carriage = CarriageControl.new('')
-                carriable.print(fhr, interpreter)
-              end
-
-              formats = nil
-              item.compound_print(fhr, interpreter, formats)
-            else
-              # MAT PRINT has different operations for carriage controls
+          if it.printable?
+            if last_was_printable
+              # insert an implicit carriage control
               carriage = CarriageControl.new('')
-
-              case item.to_s
-              when ', '
-                # a comma prints a newline
-                carriage = CarriageControl.new('NL')
-              when '; '
-                # a semi does nothing, even after numerics
-                carriage = CarriageControl.new('')
-              when ''
-                # a newline prints a newline (which is normal)
-                carriage = item
-              when ' '
-                # an implied carriage control does nothing
-                carriage = CarriageControl.new('')
-              end
-
-              # print the revised carriage control
               carriage.print(fhr, interpreter)
             end
 
-            last_was_printable = item.printable?
+            formats = nil
+            it.compound_print(fhr, interpreter, formats)
+          else
+            # MAT PRINT has different operations for carriage controls
+            carriage = map_carriage(it)
+
+            # print the revised carriage control
+            carriage.print(fhr, interpreter)
           end
+
+          last_was_printable = it.printable?
 
           i += 1
         end
@@ -4439,32 +4429,23 @@ class MatPrintStatement < AbstractStatement
         # item must be 'USING'
         j += 1
 
-        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items_lists.size
+        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items.size
 
-        items_list = @items_lists[j]
+        # extract formats
+        item = @items[j]
 
-        format_spec, items = extract_format(items_list, interpreter)
+        format_spec, items = extract_format(item, interpreter)
 
         raise BASICRuntimeError.new(:te_no_fmt) if format_spec.nil?
 
         # split format
         formats = split_format(format_spec)
+
         # TODO: check only one format wants an item
 
         raise BASICRuntimeError.new(:te_few_fmt) if items.empty?
 
         i = 0
-
-        # skip over first carriage control 
-        i += 1 if i < items.size && !items[i].printable?
-
-        # print carriage controls before variable
-        while i < items.size && !items[i].printable?
-          item.print(fhr, interpreter)
-          i += 1
-        end
-
-        raise BASICRuntimeError.new(:te_few_fmt) if i >= items.size
 
         # print variable
         item = items[i]
@@ -4476,16 +4457,62 @@ class MatPrintStatement < AbstractStatement
 
         if i < items.size && !items[i].printable?
           item = items[i]
-          item.print(fhr, interpreter)
+          # MAT PRINT has different operations for carriage controls
+          carriage = map_carriage(item)
+          carriage.print(fhr, interpreter)
           last_was_printable = false
         end
 
         # TODO: if more items print as normal (unformatted)
+        i += 1
 
+        while i < items.size
+          item = items[i]
+
+          if item.printable?
+            if last_was_printable
+              # insert an implicit carriage control
+              carriage = CarriageControl.new('')
+              carriage.print(fhr, interpreter)
+            end
+            
+            formats = nil
+            item.compound_print(fhr, interpreter, formats)
+          else
+            # MAT PRINT has different operations for carriage controls
+            carriage = map_carriage(item)
+            carriage.print(fhr, interpreter)
+          end
+
+          last_was_printable = item.printable?
+
+          i += 1
+        end
       end
 
       j += 1
     end
+  end
+
+  def map_carriage(it)
+    carriage = CarriageControl.new('')
+
+    case it.to_s
+    when ', '
+      # a comma prints a newline
+      carriage = CarriageControl.new('NL')
+    when '; '
+      # a semi does nothing, even after numerics
+      carriage = CarriageControl.new('')
+    when ''
+      # a newline prints a newline (which is normal)
+      carriage = it
+    when ' '
+      # an implied carriage control does nothing
+      carriage = CarriageControl.new('')
+    end
+
+    carriage
   end
 end
 
