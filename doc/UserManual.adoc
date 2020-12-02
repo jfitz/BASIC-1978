@@ -6,7 +6,7 @@ Overview
 
 BASIC-1978 is an implementation of the BASIC language.
 
-My references are Kemeny and Kurtz's "BASIC Programming" (John Wiley and Sons, 1967), James S. Coan's "Basic BASIC" (Hayden, 1978), and David Ahl's "101 BASIC Computer Games" (DEC, 1973).
+My references are Kemeny and Kurtz's "BASIC Programming" (John Wiley and Sons, 1967), James S. Coan's "Basic BASIC" (Hayden, 1978), David Ahl's "101 BASIC Computer Games" (DEC, 1973), and DEC's reference manual for BASIC PLUS.
 
 The code for the interpreter is a fork of my BASIC-1973 project, with changes to bring the language closer to Microsoft's BASIC interpreters of the late 1970s.
 BASIC-1978 includes features from BASIC-1965 (ARR and MAT statements) and BASIC-1973 (modifiers at the end of statements).
@@ -2369,7 +2369,7 @@ Modified statements
 Some statements may have modifiers; others may not.
 Statements that may have modifiers are:
 
-CHANGE, CLOSE, FORGET, GOSUB, GOTO, INPUT, LET, (LET-less assignment), LINE INPUT, OPEN, PRINT, PRINT USING, RANDOMIZE, READ, RESTORE, RETURN, SLEEP, STOP, WRITE, ARR, ARR FORGET, ARR PRINT, ARR READ, ARR WRITE, MAT, MAT FORGET, MAT PRINT, MAT READ, MAT WRITE
+CHANGE, CLOSE, FORGET, GOSUB, GOTO, INPUT, LET, (LET-less assignment), LINE INPUT, OPEN, PRINT, RANDOMIZE, READ, RESTORE, RETURN, SLEEP, STOP, WRITE, ARR, ARR FORGET, ARR PRINT, ARR READ, ARR WRITE, MAT, MAT FORGET, MAT PRINT, MAT READ, MAT WRITE
 
 IF modifier
 ~~~~~~~~~~~
@@ -2383,7 +2383,22 @@ Examples:
 	240 GOSUB 800 IF C2=4
 
 Notice that there is no 'THEN' clause for the IF modifier.
-The modifier controls the action for just the one line.
+The modifier controls the action for just the one statement.
+
+UNLESS modifier
+~~~~~~~~~~~
+
+Conditional execution of the statement.
+Opposite of the IF modifier.
+The main statement is executed when the condition is false.
+
+Examples:
+
+	10 PRINT A UNLESS B>0
+	200 GOTO 10 UNLESS A$="YES"
+	240 GOSUB 800 UNLESS C2=4
+
+The modifier controls the action for just the one statement.
 
 FOR modifier
 ~~~~~~~~~~~~

@@ -1,5 +1,9 @@
-# IF
-class IfModifier
+# Modifier
+class AbstractModifier
+  def self.extra_keywords
+    []
+  end
+
   attr_reader :errors
   attr_reader :numerics
   attr_reader :strings
@@ -10,8 +14,22 @@ class IfModifier
   attr_reader :userfuncs
   attr_reader :comprehension_effort
 
-  def initialize(expression_tokens)
+  def initialize
     @errors = []
+  end
+end
+
+# IF
+class IfModifier < AbstractModifier
+  def self.lead_keywords
+    [
+      [KeywordToken.new('IF')]
+    ]
+  end
+
+  def initialize(expression_tokens)
+    super()
+
     @expression = parse_expression(expression_tokens)
     @numerics = @expression.numerics
     @strings = @expression.strings
@@ -89,20 +107,109 @@ class IfModifier
   end
 end
 
+# UNLESS
+class UnlessModifier < AbstractModifier
+  def self.lead_keywords
+    [
+      [KeywordToken.new('UNLESS')]
+    ]
+  end
+
+  def initialize(expression_tokens)
+    super()
+    
+    @expression = parse_expression(expression_tokens)
+    @numerics = @expression.numerics
+    @strings = @expression.strings
+    @booleans = @expression.booleans
+    @variables = @expression.variables
+    @operators = @expression.operators
+    @functions = @expression.functions
+    @userfuncs = @expression.userfuncs
+    @comprehension_effort = @expression.comprehension_effort
+  end
+
+  def pretty
+    'UNLESS ' + @expression.to_s
+  end
+
+  def dump
+    lines = []
+
+    lines += @expression.dump unless @expression.nil?
+    lines += @statement.dump unless @statement.nil?
+    lines += @else_stmt.dump unless @else_stmt.nil?
+
+    lines
+  end
+
+  def pre_trace
+    ' UNLESS ' + @expression.to_s
+  end
+
+  def post_trace
+    ' ENDUNLESS'
+  end
+
+  def execute_pre(interpreter)
+    io = interpreter.trace_out
+
+    values = @expression.evaluate(interpreter)
+    raise(BASICExpressionError, 'Too many values') unless
+      values.size == 1
+
+    result = values[0]
+    result = BooleanConstant.new(result) unless
+      result.class.to_s == 'BooleanConstant'
+
+    s = ' ' + result.to_s
+    io.trace_output(s)
+
+    # if false then continue execution normally
+    return unless result.value
+
+    # if true then transfer to our post modifier
+    current_line_index = interpreter.current_line_index
+    number = current_line_index.number
+    statement_index = current_line_index.statement
+    index = current_line_index.index
+    fail_index = -index
+    destination = LineNumberIndex.new(number, statement_index, fail_index)
+    interpreter.next_line_index = destination
+  end
+
+  def execute_post(_) end
+
+  private
+
+  def parse_expression(expression_tokens)
+    expression = nil
+
+    begin
+      expression = ValueExpression.new(expression_tokens, :scalar)
+    rescue BASICExpressionError => e
+      @errors << e.message
+    end
+
+    expression
+  end
+end
+
 # FOR
-class ForModifier
-  attr_reader :errors
-  attr_reader :numerics
-  attr_reader :strings
-  attr_reader :booleans
-  attr_reader :variables
-  attr_reader :operators
-  attr_reader :functions
-  attr_reader :userfuncs
-  attr_reader :comprehension_effort
+class ForModifier < AbstractModifier
+  def self.lead_keywords
+    [
+      [KeywordToken.new('FOR')]
+    ]
+  end
+
+  def self.extra_keywords
+    %w[TO STEP]
+  end
 
   def initialize(control_and_start_tokens, end_tokens, step_tokens)
-    @errors = []
+    super()
+
     parts = split_on_token(control_and_start_tokens, '=')
 
     raise(BASICSyntaxError, 'Incorrect initialization') if

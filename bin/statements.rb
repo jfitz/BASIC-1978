@@ -97,6 +97,13 @@ class StatementFactory
       keywords += cl.extra_keywords
     end
 
+    modifier_classes.each do |cl|
+      kwds = cl.lead_keywords.flatten
+      kwds.each { |kwd| keywords << kwd.to_s }
+
+      keywords += cl.extra_keywords
+    end
+
     keywords.uniq
   end
 
@@ -148,6 +155,14 @@ class StatementFactory
       SleepStatement,
       StopStatement,
       WriteStatement
+    ]
+  end
+
+  def modifier_classes
+    [
+      IfModifier,
+      UnlessModifier,
+      ForModifier
     ]
   end
 
@@ -534,6 +549,26 @@ class AbstractStatement
       tokens_lists.pop(2)
       @core_tokens = tokens_lists.flatten
 
+      @any_if_modifiers = true
+
+      return true
+    end
+
+    template_unless = ['UNLESS', [1, '>=']]
+
+    if tokens_lists.size > 1 &&
+       check_template(tokens_lists.last(2), template_unless)
+
+      # create the modifier
+      modifier_tokens = tokens_lists.last
+      modifier = UnlessModifier.new(modifier_tokens)
+      @modifiers.unshift(modifier)
+
+      # remove the tokens used for the modifier
+      tokens_lists.pop(2)
+      @core_tokens = tokens_lists.flatten
+
+      # any_if because its a conditional
       @any_if_modifiers = true
 
       return true
