@@ -2681,6 +2681,8 @@ class NextStatement < AbstractStatement
     ]
   end
 
+  attr_reader :controls
+
   def initialize(_, keywords, tokens_lists)
     super
 
