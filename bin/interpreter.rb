@@ -17,9 +17,9 @@ class ForNextControl
   def bump_control(interpreter)
     current_value = interpreter.get_value(@control)
     current_value += @step
-    interpreter.unlock_variable(@control)
+    interpreter.unlock_variable(@control) if $options['lock_fornext'].value
     interpreter.set_value(@control, current_value)
-    interpreter.lock_variable(@control)
+    interpreter.lock_variable(@control) if $options['lock_fornext'].value
   end
 
   def front_terminated?
@@ -1062,7 +1062,7 @@ class Interpreter
 
     if $options['lock_fornext'].value &&
        @locked_variables.include?(variable)
-      raise BASICRuntimeError.new(:te_var_locked, variable.to_s)
+      raise BASICRuntimeError.new(:te_var_lock, variable.to_s)
     end
 
     # convert a numeric to a string when a string is expected
@@ -1148,7 +1148,7 @@ class Interpreter
 
     if $options['lock_fornext'].value &&
        @locked_variables.include?(variable)
-      raise BASICRuntimeError.new(:te_var_locked, variable.to_s)
+      raise BASICRuntimeError.new(:te_var_lock, variable.to_s)
     end
 
     v = variable.to_s
@@ -1244,20 +1244,16 @@ class Interpreter
   end
 
   def lock_variable(variable)
-    return unless $options['lock_fornext'].value
-
     if @locked_variables.include?(variable)
-      raise BASICRuntimeError.new(:te_var_locked2, variable.to_s)
+      raise BASICRuntimeError.new(:te_var_lock2, variable.to_s)
     end
 
     @locked_variables << variable
   end
 
   def unlock_variable(variable)
-    return unless $options['lock_fornext'].value
-
     unless @locked_variables.include?(variable)
-      raise BASICRuntimeError.new(:te_var_no_locked, variable.to_s)
+      raise BASICRuntimeError.new(:te_var_no_lock, variable.to_s)
     end
 
     @locked_variables.delete(variable)

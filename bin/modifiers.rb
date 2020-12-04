@@ -300,7 +300,7 @@ class ForModifier < AbstractModifier
     fornext_control =
       interpreter.assign_fornext(@control, from, to, step)
 
-    interpreter.lock_variable(@control)
+    interpreter.lock_variable(@control) if $options['lock_fornext'].value
     interpreter.enter_fornext(@control)
     terminated = fornext_control.front_terminated?
 
@@ -310,7 +310,7 @@ class ForModifier < AbstractModifier
     return unless terminated
 
     # front-terminated; go to post-exec of this modifier
-    interpreter.unlock_variable(@control)
+    interpreter.unlock_variable(@control) if $options['lock_fornext'].value
 
     current_line_index = interpreter.current_line_index
     number = current_line_index.number
@@ -333,7 +333,7 @@ class ForModifier < AbstractModifier
     print_trace_info(io, terminated)
 
     if terminated
-      interpreter.unlock_variable(@control)
+      interpreter.unlock_variable(@control) if $options['lock_fornext'].value
       interpreter.exit_fornext(fornext_control.forget, fornext_control.control)
     else
       # set next line from top item
