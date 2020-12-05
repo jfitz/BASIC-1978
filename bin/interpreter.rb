@@ -1,28 +1,39 @@
 # Helper class for FOR/NEXT
-class ForNextControl
+class AbstractForControl
   attr_reader :control
-  attr_reader :loop_start_index
-  attr_reader :end
-  attr_reader :forget
+  attr_reader :start
+  attr_accessor :loop_start_index
+  attr_accessor :forget
 
-  def initialize(control, start, endv, step, loop_start_index, forget)
+  def initialize(control, start, step)
     @control = control
     @start = start
-    @end = endv
     @step = step
-    @loop_start_index = loop_start_index
-    @forget = forget
+    @loop_start_index = nil
+    @forget = false
   end
 
   def bump_control(interpreter)
     current_value = interpreter.get_value(@control)
     current_value += @step
+
     interpreter.unlock_variable(@control) if $options['lock_fornext'].value
     interpreter.set_value(@control, current_value)
     interpreter.lock_variable(@control) if $options['lock_fornext'].value
   end
+end
 
-  def front_terminated?
+# Helper class for FOR-TO/NEXT
+class ForToControl < AbstractForControl
+  attr_reader :end
+
+  def initialize(control, start, step, endv)
+    super(control, start, step)
+
+    @end = endv
+  end
+
+  def front_terminated?(_)
     zero = NumericConstant.new(0)
 
     if @step > zero
@@ -1275,17 +1286,14 @@ class Interpreter
     @return_stack.pop
   end
 
-  def assign_fornext(control, from, to, step)
+  def assign_fornext(fornext_control)
+    control = fornext_control.control
     v = control.to_s
-    forget = !@variables.key?(v)
-
-    fornext_control =
-      ForNextControl.new(control, from, to, step, @next_line_index, forget)
-
+    fornext_control.forget = !@variables.key?(v)
+    fornext_control.loop_start_index = @next_line_index
     @fornexts[control] = fornext_control
+    from = fornext_control.start
     set_value(control, from)
-
-    fornext_control
   end
 
   def retrieve_fornext(control)
