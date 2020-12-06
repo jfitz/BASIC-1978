@@ -204,10 +204,10 @@ class ForModifier < AbstractModifier
   end
 
   def self.extra_keywords
-    %w[TO STEP]
+    %w[TO STEP UNTIL]
   end
 
-  def initialize(control_and_start_tokens, end_tokens, step_tokens)
+  def initialize(control_and_start_tokens, step_tokens, end_tokens, until_tokens)
     super()
 
     parts = split_on_token(control_and_start_tokens, '=')
@@ -229,44 +229,71 @@ class ForModifier < AbstractModifier
     control_name = VariableName.new(control_tokens[0])
     @control = Variable.new(control_name, :scalar, [])
     @start = ValueExpression.new(start_tokens, :scalar)
-    @end = ValueExpression.new(end_tokens, :scalar)
-
-    @step = nil
+    @end = ValueExpression.new(end_tokens, :scalar) unless end_tokens.nil?
+    @until = ValueExpression.new(until_tokens, :scalar) unless until_tokens.nil?
     @step = ValueExpression.new(step_tokens, :scalar) unless step_tokens.nil?
 
-    if @step.nil?
-      @numerics = @start.numerics + @end.numerics
-      @strings = @start.strings + @end.strings
-      @booleans = @start.booleans + @end.booleans
-      control = XrefEntry.new(@control.to_s, nil, true)
-      @variables = [control] + @start.variables + @end.variables
-      @operators = @start.operators + @end.operators
-      @functions = @start.functions + @end.functions
-      @userfuncs = @start.userfuncs + @end.userfuncs
-    else
-      @numerics = @start.numerics + @end.numerics + @step.numerics
-      @strings = @start.strings + @end.strings + @step.strings
-      @booleans = @start.booleans + @end.booleans + @step.booleans
-      control = XrefEntry.new(@control.to_s, nil, true)
+    control = XrefEntry.new(@control.to_s, nil, true)
 
-      @variables =
-        [control] + @start.variables + @end.variables + @step.variables
+    @numerics = @start.numerics
+    @strings = @start.strings
+    @booleans = @start.booleans
+    @variables = [control] + @start.variables
+    @operators = @start.operators
+    @functions = @start.functions
+    @userfuncs = @start.userfuncs
 
-      @operators = @start.operators + @end.operators + @step.operators
-      @functions = @start.functions + @end.functions + @step.functions
-      @userfuncs = @start.userfuncs + @end.userfuncs + @step.userfuncs
+    if !@end.nil?
+      @numerics += @end.numerics
+      @strings += @end.strings
+      @booleans += @end.booleans
+      @variables += @end.variables
+      @operators += @end.operators
+      @functions += @end.functions
+      @userfuncs += @end.userfuncs
+    end
+
+    if !@step.nil?
+      @numerics += @step.numerics
+      @strings += @step.strings
+      @booleans += @step.booleans
+      @variables += @step.variables
+      @operators += @step.operators
+      @functions += @step.functions
+      @userfuncs += @step.userfuncs
+    end
+
+    if !@until.nil?
+      @numerics += @until.numerics
+      @strings += @until.strings
+      @booleans += @until.booleans
+      @variables += @until.variables
+      @operators += @until.operators
+      @functions += @until.functions
+      @userfuncs += @until.userfuncs
     end
 
     @comprehension_effort = @start.comprehension_effort
-    @comprehension_effort += @end.comprehension_effort
+    @comprehension_effort += @end.comprehension_effort unless @end.nil?
     @comprehension_effort += @step.comprehension_effort unless @step.nil?
+    @comprehension_effort += @until.comprehension_effort unless @until.nil?
   end
 
   def pretty
-    if @step.nil?
-      "FOR #{@control} = #{@start} TO #{@end}"
-    else
-      "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+    if !@end.nil?
+      if @step.nil?
+        "FOR #{@control} = #{@start} TO #{@end}"
+      else
+        "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+      end
+    end
+
+    if !@until.nil?
+      if @step.nil?
+        "FOR #{@control} = #{@start} UNTIL #{@until}"
+      else
+        "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
+      end
     end
   end
 
@@ -276,15 +303,33 @@ class ForModifier < AbstractModifier
     lines << 'start:   ' + @start.dump.to_s unless @start.nil?
     lines << 'end:     ' + @end.dump.to_s unless @end.nil?
     lines << 'step:    ' + @step.dump.to_s unless @step.nil?
+    lines << 'until:   ' + @until.dump.to_s unless @until.nil?
     lines
   end
 
   def pre_trace
-    if @step.nil?
-      " FOR #{@control} = #{@start} TO #{@end}"
-    else
-      " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+    # notice that this output differs from pretty()
+    # we have a leading space here
+
+    s = ''
+
+    if !@end.nil?
+      if @step.nil?
+        s = " FOR #{@control} = #{@start} TO #{@end}"
+      else
+        s = " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+      end
     end
+
+    if !@until.nil?
+      if @step.nil?
+        s = " FOR #{@control} = #{@start} UNTIL #{@until}"
+      else
+        s = " FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
+      end
+    end
+
+    s
   end
 
   def post_trace
@@ -293,11 +338,18 @@ class ForModifier < AbstractModifier
 
   def execute_pre(interpreter)
     from = @start.evaluate(interpreter)[0]
-    to = @end.evaluate(interpreter)[0]
     step = NumericConstant.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    fornext_control = ForToControl.new(@control, from, step, to)
+    if !@end.nil?
+      to = @end.evaluate(interpreter)[0]
+      fornext_control = ForToControl.new(@control, from, step, to)
+    end
+
+    if !@until.nil?
+      fornext_control = ForUntilControl.new(@control, from, step, @until)
+    end
+
     interpreter.assign_fornext(fornext_control)
 
     interpreter.lock_variable(@control) if $options['lock_fornext'].value
@@ -325,9 +377,10 @@ class ForModifier < AbstractModifier
   def execute_post(interpreter)
     fornext_control = interpreter.retrieve_fornext(@control)
 
-    to = @end.evaluate(interpreter)[0]
-    step = NumericConstant.new(1)
-    step = @step.evaluate(interpreter)[0] unless @step.nil?
+    bump_early = fornext_control.bump_early?
+    
+    # change control variable value for FOR-WHILE and FOR-UNTIL
+    fornext_control.bump_control(interpreter) if bump_early
 
     terminated = fornext_control.terminated?(interpreter)
     io = interpreter.trace_out
@@ -340,7 +393,7 @@ class ForModifier < AbstractModifier
       # set next line from top item
       interpreter.next_line_index = fornext_control.loop_start_index
       # change control variable value
-      fornext_control.bump_control(interpreter)
+      fornext_control.bump_control(interpreter) unless bump_early
     end
   end
 

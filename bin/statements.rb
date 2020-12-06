@@ -577,6 +577,9 @@ class AbstractStatement
     template_for_to = ['FOR', [1, '>='], 'TO', [1, '>=']]
     template_for_to_step = ['FOR', [1, '>='], 'TO', [1, '='], 'STEP', [1, '>=']]
     template_for_step_to = ['FOR', [1, '>='], 'STEP', [1, '>='], 'TO', [1, '=']]
+    template_for_until = ['FOR', [1, '>='], 'UNTIL', [1, '>=']]
+    template_for_until_step = ['FOR', [1, '>='], 'UNTIL', [1, '>='], 'STEP', [1, '>=']]
+    template_for_step_until = ['FOR', [1, '>='], 'STEP', [1, '>='], 'UNTIL', [1, '>=']]
 
     if tokens_lists.size > 4 &&
        check_template(tokens_lists.last(4), template_for_to)
@@ -584,7 +587,7 @@ class AbstractStatement
       # create the modifier
       control_and_start_tokens = tokens_lists[-3]
       end_tokens = tokens_lists.last
-      modifier = ForModifier.new(control_and_start_tokens, end_tokens, nil)
+      modifier = ForModifier.new(control_and_start_tokens, nil, end_tokens, nil)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -602,7 +605,7 @@ class AbstractStatement
       end_tokens = tokens_lists[-3]
       step_tokens = tokens_lists.last
       modifier =
-        ForModifier.new(control_and_start_tokens, end_tokens, step_tokens)
+        ForModifier.new(control_and_start_tokens, step_tokens, end_tokens, nil)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -620,7 +623,59 @@ class AbstractStatement
       end_tokens = tokens_lists.last
       step_tokens = tokens_lists[-3]
       modifier =
-        ForModifier.new(control_and_start_tokens, end_tokens, step_tokens)
+        ForModifier.new(control_and_start_tokens, step_tokens, end_tokens, nil)
+      @modifiers.unshift(modifier)
+
+      # remove the tokens used for the modifier
+      tokens_lists.pop(6)
+      @core_tokens = tokens_lists.flatten
+
+      return true
+    end
+
+    if tokens_lists.size > 4 &&
+       check_template(tokens_lists.last(4), template_for_until)
+
+      # create the modifier
+      control_and_start_tokens = tokens_lists[-3]
+      until_tokens = tokens_lists.last
+      modifier = ForModifier.new(control_and_start_tokens, nil, nil, until_tokens)
+      @modifiers.unshift(modifier)
+
+      # remove the tokens used for the modifier
+      tokens_lists.pop(4)
+      @core_tokens = tokens_lists.flatten
+
+      return true
+    end
+
+    if tokens_lists.size > 6 &&
+       check_template(tokens_lists.last(6), template_for_until_step)
+
+      # create the modifier
+      control_and_start_tokens = tokens_lists[-5]
+      until_tokens = tokens_lists[-3]
+      step_tokens = tokens_lists.last
+      modifier =
+        ForModifier.new(control_and_start_tokens, step_tokens, nil, until_tokens)
+      @modifiers.unshift(modifier)
+
+      # remove the tokens used for the modifier
+      tokens_lists.pop(6)
+      @core_tokens = tokens_lists.flatten
+
+      return true
+    end
+
+    if tokens_lists.size > 6 &&
+       check_template(tokens_lists.last(6), template_for_step_until)
+
+      # create the modifier
+      control_and_start_tokens = tokens_lists[-5]
+      until_tokens = tokens_lists.last
+      step_tokens = tokens_lists[-3]
+      modifier =
+        ForModifier.new(control_and_start_tokens, step_tokens, nil, until_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -1666,17 +1721,20 @@ class ForStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w[TO STEP]
+    %w[TO STEP UNTIL]
   end
 
   def initialize(_, keywords, tokens_lists)
     super
 
-    template1 = [[1, '>='], 'TO', [1, '>=']]
-    template2 = [[1, '>='], 'TO', [1, '>='], 'STEP', [1, '>=']]
-    template3 = [[1, '>='], 'STEP', [1, '>='], 'TO', [1, '>=']]
+    template_to = [[1, '>='], 'TO', [1, '>=']]
+    template_to_step = [[1, '>='], 'TO', [1, '>='], 'STEP', [1, '>=']]
+    template_step_to = [[1, '>='], 'STEP', [1, '>='], 'TO', [1, '>=']]
+    template_until = [[1, '>='], 'UNTIL', [1, '>=']]
+    template_until_step = [[1, '>='], 'UNTIL', [1, '>='], 'STEP', [1, '>=']]
+    template_step_until = [[1, '>='], 'STEP', [1, '>='], 'UNTIL', [1, '>=']]
 
-    if check_template(tokens_lists, template1)
+    if check_template(tokens_lists, template_to)
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
@@ -1687,7 +1745,7 @@ class ForStatement < AbstractStatement
       rescue BASICExpressionError => e
         @errors << e.message
       end
-    elsif check_template(tokens_lists, template2)
+    elsif check_template(tokens_lists, template_to_step)
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
@@ -1698,7 +1756,7 @@ class ForStatement < AbstractStatement
       rescue BASICExpressionError => e
         @errors << e.message
      end
-    elsif check_template(tokens_lists, template3)
+    elsif check_template(tokens_lists, template_step_to)
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
@@ -1709,45 +1767,88 @@ class ForStatement < AbstractStatement
       rescue BASICExpressionError => e
         @errors << e.message
       end
+    elsif check_template(tokens_lists, template_until)
+      begin
+        tokens1, tokens2 = control_and_start(tokens_lists[0])
+        variable_name = VariableName.new(tokens1[0])
+        @control = Variable.new(variable_name, :scalar, [])
+        @start = ValueExpression.new(tokens2, :scalar)
+        @until = ValueExpression.new(tokens_lists[2], :scalar)
+      rescue BASICExpressionError => e
+        @errors << e.message
+      end
+    elsif check_template(tokens_lists, template_until_step)
+      begin
+        tokens1, tokens2 = control_and_start(tokens_lists[0])
+        variable_name = VariableName.new(tokens1[0])
+        @control = Variable.new(variable_name, :scalar, [])
+        @start = ValueExpression.new(tokens2, :scalar)
+        @until = ValueExpression.new(tokens_lists[2], :scalar)
+        @step = ValueExpression.new(tokens_lists[4], :scalar)
+      rescue BASICExpressionError => e
+        @errors << e.message
+      end
+    elsif check_template(tokens_lists, template_step_until)
+      begin
+        tokens1, tokens2 = control_and_start(tokens_lists[0])
+        variable_name = VariableName.new(tokens1[0])
+        @control = Variable.new(variable_name, :scalar, [])
+        @start = ValueExpression.new(tokens2, :scalar)
+        @step = ValueExpression.new(tokens_lists[4], :scalar)
+        @until = ValueExpression.new(tokens_lists[2], :scalar)
+      rescue BASICExpressionError => e
+        @errors << e.message
+      end
     else
       @errors << 'Syntax error'
     end
 
     @mccabe = 1
 
-    if !@start.nil? && !@end.nil?
-      if @step.nil?
-        @elements[:numerics] = @start.numerics + @end.numerics
-        @elements[:strings] = @start.strings + @end.strings
-        @elements[:booleans] = @start.booleans + @end.booleans
-        control = XrefEntry.new(@control.to_s, nil, true)
-        @elements[:variables] = [control] + @start.variables + @end.variables
-        @elements[:operators] = @start.operators + @end.operators
-        @elements[:functions] = @start.functions + @end.functions
-        @elements[:userfuncs] = @start.userfuncs + @end.userfuncs
-      else
-        @elements[:numerics] = @start.numerics + @end.numerics + @step.numerics
-        @elements[:strings] = @start.strings + @end.strings + @step.strings
-        @elements[:booleans] = @start.booleans + @end.booleans + @step.booleans
-        control = XrefEntry.new(@control.to_s, nil, true)
+    control = XrefEntry.new(@control.to_s, nil, true)
 
-        @elements[:variables] =
-          [control] + @start.variables + @end.variables + @step.variables
-
-        @elements[:operators] =
-          @start.operators + @end.operators + @step.operators
-
-        @elements[:functions] =
-          @start.functions + @end.functions + @step.functions
-
-        @elements[:userfuncs] =
-          @start.userfuncs + @end.userfuncs + @step.userfuncs
-      end
-
-      @comprehension_effort += @start.comprehension_effort
-      @comprehension_effort += @end.comprehension_effort
-      @comprehension_effort += @step.comprehension_effort unless @step.nil?
+    @elements[:numerics] = @start.numerics
+    @elements[:strings] = @start.strings
+    @elements[:booleans] = @start.booleans
+    @elements[:variables] = [control] + @start.variables
+    @elements[:operators] = @start.operators
+    @elements[:functions] = @start.functions
+    @elements[:userfuncs] = @start.userfuncs
+    
+    if !@end.nil?
+      @elements[:numerics] += @end.numerics
+      @elements[:strings] += @end.strings
+      @elements[:booleans] += @end.booleans
+      @elements[:variables] += @end.variables
+      @elements[:operators] += @end.operators
+      @elements[:functions] += @end.functions
+      @elements[:userfuncs] += @end.userfuncs
     end
+
+    if !@step.nil?
+      @elements[:numerics] += @step.numerics
+      @elements[:strings] += @step.strings
+      @elements[:booleans] += @step.booleans
+      @elements[:variables] += @step.variables
+      @elements[:operators] += @step.operators
+      @elements[:functions] += @step.functions
+      @elements[:userfuncs] += @step.userfuncs
+    end
+
+    if !@until.nil?
+      @elements[:numerics] += @until.numerics
+      @elements[:strings] += @until.strings
+      @elements[:booleans] += @until.booleans
+      @elements[:variables] += @until.variables
+      @elements[:operators] += @until.operators
+      @elements[:functions] += @until.functions
+      @elements[:userfuncs] += @until.userfuncs
+    end
+
+    @comprehension_effort += @start.comprehension_effort
+    @comprehension_effort += @end.comprehension_effort unless @end.nil?
+    @comprehension_effort += @step.comprehension_effort unless @step.nil?
+    @comprehension_effort += @until.comprehension_effort unless @until.nil?
   end
 
   def dump
@@ -1757,6 +1858,7 @@ class ForStatement < AbstractStatement
     lines << 'start:   ' + @start.dump.to_s unless @start.nil?
     lines << 'end:     ' + @end.dump.to_s unless @end.nil?
     lines << 'step:    ' + @step.dump.to_s unless @step.nil?
+    lines << 'until:   ' + @until.dump.to_s unless @until.nil?
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
@@ -1765,11 +1867,18 @@ class ForStatement < AbstractStatement
 
   def execute_core(interpreter)
     from = @start.evaluate(interpreter)[0]
-    to = @end.evaluate(interpreter)[0]
     step = NumericConstant.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    fornext_control = ForToControl.new(@control, from, step, to)
+    if !@end.nil?
+      to = @end.evaluate(interpreter)[0]
+      fornext_control = ForToControl.new(@control, from, step, to)
+    end
+
+    if !@until.nil?
+      fornext_control = ForUntilControl.new(@control, from, step, @until)
+    end
+
     interpreter.assign_fornext(fornext_control)
 
     interpreter.lock_variable(@control) if $options['lock_fornext'].value
@@ -1781,8 +1890,10 @@ class ForStatement < AbstractStatement
       interpreter.next_line_index = interpreter.find_closing_next(@control)
     end
 
+    untilv = nil
+    untilv = @until.evaluate(interpreter)[0] unless @until.nil?
     io = interpreter.trace_out
-    print_more_trace_info(io, from, to, step, terminated)
+    print_more_trace_info(io, from, to, step, untilv, terminated)
   end
 
   private
@@ -1800,12 +1911,14 @@ class ForStatement < AbstractStatement
     [parts[0], parts[2]]
   end
 
-  def print_more_trace_info(io, from, to, step, terminated)
+  def print_more_trace_info(io, from, to, step, untilv, terminated)
     io.trace_output(" #{@start} = #{from}") unless @start.numeric_constant?
-    io.trace_output(" #{@end} = #{to}") unless @end.numeric_constant?
+    io.trace_output(" #{@end} = #{to}") unless
+      @end.nil? || @end.numeric_constant?
     io.trace_output(" #{@step} = #{step}") unless
       @step.nil? || @step.numeric_constant?
     io.trace_output(" terminated:#{terminated}")
+    io.trace_output(" #{@until} = #{untilv}") unless @until.nil?
   end
 end
 
@@ -2782,6 +2895,12 @@ class NextStatement < AbstractStatement
       else
         fornext_control = interpreter.retrieve_fornext(@controls[index])
       end
+
+      bump_early = fornext_control.bump_early?
+
+      # change control variable value for FOR-WHILE and FOR-UNTIL
+      fornext_control.bump_control(interpreter) if bump_early
+
       # check control variable value
       # if matches end value, stop here
       terminated = fornext_control.terminated?(interpreter)
@@ -2797,8 +2916,8 @@ class NextStatement < AbstractStatement
       else
         # set next line from top item
         interpreter.next_line_index = fornext_control.loop_start_index
-        # change control variable value
-        fornext_control.bump_control(interpreter)
+        # change control variable value for FOR-TO
+        fornext_control.bump_control(interpreter) unless bump_early
 
         found_unterminated = true
       end
