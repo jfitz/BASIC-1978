@@ -207,7 +207,7 @@ class ForModifier < AbstractModifier
     %w[TO STEP UNTIL]
   end
 
-  def initialize(control_and_start_tokens, step_tokens, end_tokens, until_tokens)
+  def initialize(control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
     super()
 
     parts = split_on_token(control_and_start_tokens, '=')
@@ -229,9 +229,10 @@ class ForModifier < AbstractModifier
     control_name = VariableName.new(control_tokens[0])
     @control = Variable.new(control_name, :scalar, [])
     @start = ValueExpression.new(start_tokens, :scalar)
+    @step = ValueExpression.new(step_tokens, :scalar) unless step_tokens.nil?
     @end = ValueExpression.new(end_tokens, :scalar) unless end_tokens.nil?
     @until = ValueExpression.new(until_tokens, :scalar) unless until_tokens.nil?
-    @step = ValueExpression.new(step_tokens, :scalar) unless step_tokens.nil?
+    @while = ValueExpression.new(while_tokens, :scalar) unless while_tokens.nil?
 
     control = XrefEntry.new(@control.to_s, nil, true)
 
@@ -273,10 +274,21 @@ class ForModifier < AbstractModifier
       @userfuncs += @until.userfuncs
     end
 
+    if !@while.nil?
+      @numerics += @while.numerics
+      @strings += @while.strings
+      @booleans += @while.booleans
+      @variables += @while.variables
+      @operators += @while.operators
+      @functions += @while.functions
+      @userfuncs += @while.userfuncs
+    end
+
     @comprehension_effort = @start.comprehension_effort
     @comprehension_effort += @end.comprehension_effort unless @end.nil?
     @comprehension_effort += @step.comprehension_effort unless @step.nil?
     @comprehension_effort += @until.comprehension_effort unless @until.nil?
+    @comprehension_effort += @while.comprehension_effort unless @while.nil?
   end
 
   def pretty
@@ -295,6 +307,14 @@ class ForModifier < AbstractModifier
         "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
       end
     end
+
+    if !@while.nil?
+      if @step.nil?
+        "FOR #{@control} = #{@start} WHILE #{@while}"
+      else
+        "FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
+      end
+    end
   end
 
   def dump
@@ -304,6 +324,7 @@ class ForModifier < AbstractModifier
     lines << 'end:     ' + @end.dump.to_s unless @end.nil?
     lines << 'step:    ' + @step.dump.to_s unless @step.nil?
     lines << 'until:   ' + @until.dump.to_s unless @until.nil?
+    lines << 'while:   ' + @while.dump.to_s unless @while.nil?
     lines
   end
 
@@ -329,6 +350,14 @@ class ForModifier < AbstractModifier
       end
     end
 
+    if !@while.nil?
+      if @step.nil?
+        s = " FOR #{@control} = #{@start} UNTIL #{@while}"
+      else
+        s = " FOR #{@control} = #{@start} UNTIL #{@while} STEP #{@step}"
+      end
+    end
+
     s
   end
 
@@ -348,6 +377,10 @@ class ForModifier < AbstractModifier
 
     if !@until.nil?
       fornext_control = ForUntilControl.new(@control, from, step, @until)
+    end
+
+    if !@while.nil?
+      fornext_control = ForWhileControl.new(@control, from, step, @while)
     end
 
     interpreter.assign_fornext(fornext_control)
