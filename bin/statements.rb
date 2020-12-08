@@ -1897,13 +1897,23 @@ class ForStatement < AbstractStatement
 
     control = XrefEntry.new(@control.to_s, nil, true)
 
-    @elements[:numerics] = @start.numerics
-    @elements[:strings] = @start.strings
-    @elements[:booleans] = @start.booleans
-    @elements[:variables] = [control] + @start.variables
-    @elements[:operators] = @start.operators
-    @elements[:functions] = @start.functions
-    @elements[:userfuncs] = @start.userfuncs
+    @elements[:numerics] = []
+    @elements[:strings] = []
+    @elements[:booleans] = []
+    @elements[:variables] = []
+    @elements[:operators] = []
+    @elements[:functions] = []
+    @elements[:userfuncs] = []
+
+    if !@start.nil?
+      @elements[:numerics] += @start.numerics
+      @elements[:strings] += @start.strings
+      @elements[:booleans] += @start.booleans
+      @elements[:variables] += [control] + @start.variables
+      @elements[:operators] += @start.operators
+      @elements[:functions] += @start.functions
+      @elements[:userfuncs] += @start.userfuncs
+    end
     
     if !@end.nil?
       @elements[:numerics] += @end.numerics
@@ -1945,7 +1955,7 @@ class ForStatement < AbstractStatement
       @elements[:userfuncs] += @while.userfuncs
     end
 
-    @comprehension_effort += @start.comprehension_effort
+    @comprehension_effort += @start.comprehension_effort unless @start.nil?
     @comprehension_effort += @end.comprehension_effort unless @end.nil?
     @comprehension_effort += @step.comprehension_effort unless @step.nil?
     @comprehension_effort += @until.comprehension_effort unless @until.nil?
