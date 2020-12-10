@@ -17,6 +17,30 @@ class AbstractModifier
   def initialize
     @errors = []
   end
+
+  private
+
+  def parse_expression(expression_tokens)
+    expression = nil
+
+    begin
+      expression = ValueExpression.new(expression_tokens, :scalar)
+    rescue BASICExpressionError => e
+      @errors << e.message
+    end
+
+    expression
+  end
+
+  # get opposite modifier (pre- when in post; post- when in pre)
+  def get_counterpart(interpreter)
+    current_line_index = interpreter.current_line_index
+    number = current_line_index.number
+    statement_index = current_line_index.statement
+    index = current_line_index.index
+    other_index = -index
+    LineNumberIndex.new(number, statement_index, other_index)
+  end
 end
 
 # IF
@@ -81,30 +105,10 @@ class IfModifier < AbstractModifier
     return if result.value
 
     # if false then transfer to our post modifier
-    current_line_index = interpreter.current_line_index
-    number = current_line_index.number
-    statement_index = current_line_index.statement
-    index = current_line_index.index
-    fail_index = -index
-    destination = LineNumberIndex.new(number, statement_index, fail_index)
-    interpreter.next_line_index = destination
+    interpreter.next_line_index = get_counterpart(interpreter)
   end
 
   def execute_post(_) end
-
-  private
-
-  def parse_expression(expression_tokens)
-    expression = nil
-
-    begin
-      expression = ValueExpression.new(expression_tokens, :scalar)
-    rescue BASICExpressionError => e
-      @errors << e.message
-    end
-
-    expression
-  end
 end
 
 # UNLESS
@@ -169,29 +173,183 @@ class UnlessModifier < AbstractModifier
     return unless result.value
 
     # if true then transfer to our post modifier
-    current_line_index = interpreter.current_line_index
-    number = current_line_index.number
-    statement_index = current_line_index.statement
-    index = current_line_index.index
-    fail_index = -index
-    destination = LineNumberIndex.new(number, statement_index, fail_index)
-    interpreter.next_line_index = destination
+    interpreter.next_line_index = get_counterpart(interpreter)
   end
 
   def execute_post(_) end
+end
 
-  private
+# WHILE
+class WhileModifier < AbstractModifier
+  def self.lead_keywords
+    [
+      [KeywordToken.new('WHILE')]
+    ]
+  end
 
-  def parse_expression(expression_tokens)
-    expression = nil
+  def initialize(expression_tokens)
+    super()
+    
+    @expression = parse_expression(expression_tokens)
+    @numerics = @expression.numerics
+    @strings = @expression.strings
+    @booleans = @expression.booleans
+    @variables = @expression.variables
+    @operators = @expression.operators
+    @functions = @expression.functions
+    @userfuncs = @expression.userfuncs
+    @comprehension_effort = @expression.comprehension_effort
+  end
 
-    begin
-      expression = ValueExpression.new(expression_tokens, :scalar)
-    rescue BASICExpressionError => e
-      @errors << e.message
-    end
+  def pretty
+    'WHILE ' + @expression.to_s
+  end
 
-    expression
+  def dump
+    lines = []
+
+    lines += @expression.dump unless @expression.nil?
+    lines += @statement.dump unless @statement.nil?
+    lines += @else_stmt.dump unless @else_stmt.nil?
+
+    lines
+  end
+
+  def pre_trace
+    ' WHILE ' + @expression.to_s
+  end
+
+  def post_trace
+    ' ENDWHILE'
+  end
+
+  def execute_pre(interpreter)
+    io = interpreter.trace_out
+
+    values = @expression.evaluate(interpreter)
+    raise(BASICExpressionError, 'Too many values') unless
+      values.size == 1
+
+    result = values[0]
+    result = BooleanConstant.new(result) unless
+      result.class.to_s == 'BooleanConstant'
+
+    s = ' ' + result.to_s
+    io.trace_output(s)
+
+    # if not terminated then continue execution normally
+    return if result.value
+
+    # if terminated then transfer to our post modifier
+    interpreter.next_line_index = get_counterpart(interpreter)
+  end
+
+  def execute_post(interpreter)
+    io = interpreter.trace_out
+
+    values = @expression.evaluate(interpreter)
+    raise(BASICExpressionError, 'Too many values') unless
+      values.size == 1
+
+    result = values[0]
+   result = BooleanConstant.new(result) unless
+      result.class.to_s == 'BooleanConstant'
+
+    s = ' ' + result.to_s
+    io.trace_output(s)
+
+    # if terminated then continue to next statement
+    return unless result.value
+
+    # if not terminated then go to start of while
+    interpreter.next_line_index = get_counterpart(interpreter)
+  end
+end
+
+# UNTIL
+class UntilModifier < AbstractModifier
+  def self.lead_keywords
+    [
+      [KeywordToken.new('UNTIL')]
+    ]
+  end
+
+  def initialize(expression_tokens)
+    super()
+    
+    @expression = parse_expression(expression_tokens)
+    @numerics = @expression.numerics
+    @strings = @expression.strings
+    @booleans = @expression.booleans
+    @variables = @expression.variables
+    @operators = @expression.operators
+    @functions = @expression.functions
+    @userfuncs = @expression.userfuncs
+    @comprehension_effort = @expression.comprehension_effort
+  end
+
+  def pretty
+    'UNTIL ' + @expression.to_s
+  end
+
+  def dump
+    lines = []
+
+    lines += @expression.dump unless @expression.nil?
+    lines += @statement.dump unless @statement.nil?
+    lines += @else_stmt.dump unless @else_stmt.nil?
+
+    lines
+  end
+
+  def pre_trace
+    ' UNTIL ' + @expression.to_s
+  end
+
+  def post_trace
+    ' ENDUNTIL'
+  end
+
+  def execute_pre(interpreter)
+    io = interpreter.trace_out
+
+    values = @expression.evaluate(interpreter)
+    raise(BASICExpressionError, 'Too many values') unless
+      values.size == 1
+
+    result = values[0]
+    result = BooleanConstant.new(result) unless
+      result.class.to_s == 'BooleanConstant'
+
+    s = ' ' + result.to_s
+    io.trace_output(s)
+
+    # if terminated then continue execution normally
+    return unless result.value
+
+    # if not terminated then transfer to our post modifier
+    interpreter.next_line_index = get_counterpart(interpreter)
+  end
+
+  def execute_post(interpreter)
+    io = interpreter.trace_out
+
+    values = @expression.evaluate(interpreter)
+    raise(BASICExpressionError, 'Too many values') unless
+      values.size == 1
+
+    result = values[0]
+    result = BooleanConstant.new(result) unless
+      result.class.to_s == 'BooleanConstant'
+
+    s = ' ' + result.to_s
+    io.trace_output(s)
+
+    # if not terminated then continue to next statement
+    return if result.value
+
+    # if terminated then go to start of until
+    interpreter.next_line_index = get_counterpart(interpreter)
   end
 end
 
@@ -398,13 +556,7 @@ class ForModifier < AbstractModifier
     # front-terminated; go to post-exec of this modifier
     interpreter.unlock_variable(@control) if $options['lock_fornext'].value
 
-    current_line_index = interpreter.current_line_index
-    number = current_line_index.number
-    statement_index = current_line_index.statement
-    index = current_line_index.index
-    for_index = -index
-    destination = LineNumberIndex.new(number, statement_index, for_index)
-    interpreter.next_line_index = destination
+    interpreter.next_line_index = get_counterpart(interpreter)
   end
 
   def execute_post(interpreter)

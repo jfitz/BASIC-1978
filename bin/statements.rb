@@ -740,6 +740,48 @@ class AbstractStatement
       return true
     end
 
+    # WHILE modifier must follow FOR-WHILE
+    template_unless = ['WHILE', [1, '>=']]
+
+    if tokens_lists.size > 1 &&
+       check_template(tokens_lists.last(2), template_unless)
+
+      # create the modifier
+      modifier_tokens = tokens_lists.last
+      modifier = WhileModifier.new(modifier_tokens)
+      @modifiers.unshift(modifier)
+
+      # remove the tokens used for the modifier
+      tokens_lists.pop(2)
+      @core_tokens = tokens_lists.flatten
+
+      # any_if because its a conditional
+      @any_if_modifiers = true
+
+      return true
+    end
+
+    # UNTIL modifier must follow FOR-UNTIL
+    template_unless = ['UNTIL', [1, '>=']]
+
+    if tokens_lists.size > 1 &&
+       check_template(tokens_lists.last(2), template_unless)
+
+      # create the modifier
+      modifier_tokens = tokens_lists.last
+      modifier = UntilModifier.new(modifier_tokens)
+      @modifiers.unshift(modifier)
+
+      # remove the tokens used for the modifier
+      tokens_lists.pop(2)
+      @core_tokens = tokens_lists.flatten
+
+      # any_if because its a conditional
+      @any_if_modifiers = true
+
+      return true
+    end
+
     false
   end
 
