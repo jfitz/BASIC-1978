@@ -249,6 +249,7 @@ class AbstractStatement
   attr_reader :comprehension_effort
   attr_reader :mccabe
   attr_reader :is_if_no_else
+  attr_reader :may_be_if_sub
 
   def self.extra_keywords
     []
@@ -279,6 +280,7 @@ class AbstractStatement
     @comprehension_effort = 1
     @mccabe = 0
     @is_if_no_else = false
+    @may_be_if_sub = true
     @profile_count = 0
     @profile_time = 0
     @part_of_user_function = nil
@@ -1581,6 +1583,7 @@ class DataStatement < AbstractStatement
     super
 
     @executable = false
+    @may_be_if_sub = false
 
     template = [[1, '>=']]
 
@@ -1622,6 +1625,8 @@ class DefineFunctionStatement < AbstractStatement
 
   def initialize(_, keywords, tokens_lists)
     super
+
+    @may_be_if_sub = false
 
     template = [[1, '>=']]
 
@@ -1743,6 +1748,7 @@ class EndStatement < AbstractStatement
 
     @autonext = false
     @executable = false
+    @may_be_if_sub = false
 
     template = []
 
@@ -1786,6 +1792,8 @@ class FnendStatement < AbstractStatement
   def initialize(_, keywords, tokens_lists)
     super
 
+    @may_be_if_sub = false
+
     template = []
 
     @errors << 'Syntax error' unless
@@ -1823,6 +1831,8 @@ class ForStatement < AbstractStatement
 
   def initialize(_, keywords, tokens_lists)
     super
+
+    @may_be_if_sub = false
 
     template_to = [[1, '>='], 'TO', [1, '>=']]
     template_to_step = [[1, '>='], 'TO', [1, '>='], 'STEP', [1, '>=']]
@@ -2301,6 +2311,14 @@ class AbstractIfStatement < AbstractStatement
       @else_dest, @else_stmt = parse_target(line_number, tokens_lists['else']) if
         tokens_lists.key?('else')
 
+      unless @statement.nil?
+        @errors << 'Invalid substatement' unless @statement.may_be_if_sub
+      end
+      
+      unless @else_stmt.nil?
+        @errors << 'Invalid substatement' unless @else_stmt.may_be_if_sub
+      end
+      
       unless @destination.nil?
         if @destination > line_number
           @comprehension_effort += 1
@@ -2334,6 +2352,14 @@ class AbstractIfStatement < AbstractStatement
         @else_dest, @else_stmt = parse_target(line_number, stack['else']) if
           stack.key?('else')
 
+      unless @statement.nil?
+        @errors << 'Invalid substatement' unless @statement.may_be_if_sub
+      end
+      
+      unless @else_stmt.nil?
+        @errors << 'Invalid substatement' unless @else_stmt.may_be_if_sub
+      end
+      
         unless @destination.nil?
           if @destination > line_number
             @comprehension_effort += 1
