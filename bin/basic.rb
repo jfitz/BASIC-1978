@@ -471,7 +471,7 @@ def make_command_tokenbuilders(quotes, long_names)
     CHR_ALLOW_ALL
     DEFAULT_PROMPT DETECT_INFINITE_LOOP
     ECHO FIELD_SEP FORGET_FORNEXT HEADING
-    IF IF_FALSE_NEXT_LINE IGNORE_RND_ARG IMPLIED_SEMICOLON
+    IF IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON
     INT_FLOOR LOCK_FORNEXT LONG_NAMES MAX_LINE_NUM MIN_LINE_NUM
     NEWLINE_SPEED
     PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
@@ -562,6 +562,7 @@ OptionParser.new do |opt|
   opt.on('--field-sep-semi') { |o| options[:field_sep_semi] = o }
   opt.on('--forget-fornext') { |o| options[:forget_fornext] = o }
   opt.on('--heading') { |o| options[:heading] = o }
+  opt.on('--no-if-for-sub') { |o| options[:no_if_for_sub] = o }
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
   opt.on('--ignore-rnd-arg') { |o| options[:ignore_rnd_arg] = o }
   opt.on('--implied-semicolon') { |o| options[:implied_semicolon] = o }
@@ -635,6 +636,8 @@ $options['heading'] = Option.new(boolean, options.key?(:heading))
 field_sep = Option.new(separator, 'COMMA')
 field_sep = Option.new(separator, 'SEMI') if options.key?(:field_sep_semi)
 $options['field_sep'] = field_sep
+
+$options['if_for_sub'] = Option.new(boolean, !options.key?(:no_if_for_sub))
 
 $options['ignore_rnd_arg'] =
   Option.new(boolean, options.key?(:ignore_rnd_arg))

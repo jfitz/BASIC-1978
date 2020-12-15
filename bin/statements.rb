@@ -1832,7 +1832,7 @@ class ForStatement < AbstractStatement
   def initialize(_, keywords, tokens_lists)
     super
 
-    @may_be_if_sub = false
+    @may_be_if_sub = $options['if_for_sub'].value
 
     template_to = [[1, '>='], 'TO', [1, '>=']]
     template_to_step = [[1, '>='], 'TO', [1, '>='], 'STEP', [1, '>=']]
@@ -3462,7 +3462,7 @@ class OptionStatement < AbstractStatement
       BACK_TAB BASE
       CHR_ALLOW_ALL
       DEFAULT_PROMPT DETECT_INFINITE_LOOP
-      ECHO NO_EXTEND_IF FIELD_SEP FORGET_FORNEXT
+      ECHO FIELD_SEP FORGET_FORNEXT
       IGNORE_RND_ARG IMPLIED_SEMICOLON
       INT_FLOOR LOCK_FORNEXT NEWLINE_SPEED
       PRECISION PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
@@ -4280,7 +4280,11 @@ class ArrPrintStatement < AbstractStatement
         # split format
         formats = split_format(format_spec)
 
-        # TODO: check formats wants only one item
+        # check formats wants only one item
+        count = 0
+        formats.each { |format| count += 1 if format.wants_item }
+
+        raise(BASICSyntaxError, 'Too many fields in USING') unless count <= 1
 
         raise BASICRuntimeError.new(:te_few_fmt) if items.empty?
 
@@ -4822,7 +4826,11 @@ class MatPrintStatement < AbstractStatement
         # split format
         formats = split_format(format_spec)
 
-        # TODO: check only one format wants an item
+        # check formats wants only one item
+        count = 0
+        formats.each { |format| count += 1 if format.wants_item }
+
+        raise(BASICSyntaxError, 'Too many fields in USING') unless count <= 1
 
         raise BASICRuntimeError.new(:te_few_fmt) if items.empty?
 
