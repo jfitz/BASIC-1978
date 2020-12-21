@@ -88,9 +88,9 @@
  Variable:I
 220 FOR H=INT(-16*(V/32)^2+V^2/32+.5) TO 0 STEP -.5
  control: Variable:H
- start:   ["NumericConstant:16", "UnaryOperator:-", "Variable:V", "NumericConstant:32", "BinaryOperator:/", "NumericConstant:2", "BinaryOperator:^", "BinaryOperator:*", "Variable:V", "NumericConstant:2", "BinaryOperator:^", "NumericConstant:32", "BinaryOperator:/", "BinaryOperator:+", "NumericConstant:.5", "BinaryOperator:+", "FunctionInt"]
+ start:   ["NumericConstant:16", "UnaryOperatorMinus:-", "Variable:V", "NumericConstant:32", "BinaryOperator:/", "NumericConstant:2", "BinaryOperator:^", "BinaryOperator:*", "Variable:V", "NumericConstant:2", "BinaryOperator:^", "NumericConstant:32", "BinaryOperator:/", "BinaryOperator:+", "NumericConstant:.5", "BinaryOperator:+", "FunctionInt"]
  end:     ["NumericConstant:0"]
- step:    ["NumericConstant:.5", "UnaryOperator:-"]
+ step:    ["NumericConstant:.5", "UnaryOperatorMinus:-"]
 221 IF INT(H)<>H THEN 225
  Variable:H
  FunctionInt
@@ -122,7 +122,7 @@
  Variable:H
  NumericConstant:.5
  NumericConstant:32
- UnaryOperator:-
+ UnaryOperatorMinus:-
  BinaryOperator:*
  Variable:T
  NumericConstant:2
@@ -163,7 +163,7 @@
  AssignmentOperator:=
 276 IF -16*T^2+V*C^(I-1)*T<H THEN 290
  NumericConstant:16
- UnaryOperator:-
+ UnaryOperatorMinus:-
  Variable:T
  NumericConstant:2
  BinaryOperator:^
