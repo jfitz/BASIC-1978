@@ -19,7 +19,7 @@
 5 IF A$="NO" THEN 20
  Variable:A$
  TextConstant:"NO"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 6 PRINT "THE GAME IS PLAYED AS FOLLOWS:":PRINT
  TextConstant:"THE GAME IS PLAYED AS FOLLOWS:"
  CarriageControl:NL
@@ -97,21 +97,21 @@
  NumericConstant:13
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:9
- BinaryOperator:+
+ BinaryOperatorPlus:+
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  NumericConstant:2
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 100 IF P=1 THEN 530
  Variable:P
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 110 PRINT "THERE ARE";P;"CHIPS ON THE BOARD."
  TextConstant:"THERE ARE"
  CarriageControl:;
@@ -131,29 +131,29 @@
  Variable:E
  Variable:A
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  Variable:A
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:2
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
 150 L=INT((P/6-INT(P/6))*6+.5)
  Variable:L
  Variable:P
  NumericConstant:6
- BinaryOperator:/
+ BinaryOperatorDivide:/
  Variable:P
  NumericConstant:6
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:6
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:.5
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
  AssignmentOperator:=
 160 IF R(E,L)>=P THEN 320
@@ -161,7 +161,7 @@
  Variable:L
  Variable:R
  Variable:P
- BinaryOperator:>=
+ BinaryOperatorGreaterEqual:>=
 170 M=R(E,L)
  Variable:M
  Variable:E
@@ -171,17 +171,17 @@
 180 IF M<=0 THEN 370
  Variable:M
  NumericConstant:0
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
 190 P=P-M
  Variable:P
  Variable:P
  Variable:M
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 200 IF M=1 THEN 510
  Variable:M
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 210 PRINT "COMPUTER TAKES";M;"CHIPS LEAVING";P;"... YOUR MOVE";
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
@@ -197,7 +197,7 @@
  Variable:B
  Variable:B
  Variable:M
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 230 INPUT M
  Variable:M
@@ -209,37 +209,37 @@
 250 IF M<1 THEN 450
  Variable:M
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
 260 IF M>4 THEN 460
  Variable:M
  NumericConstant:4
- BinaryOperator:>
+ BinaryOperatorGreater:>
 270 IF M>P THEN 460
  Variable:M
  Variable:P
- BinaryOperator:>
+ BinaryOperatorGreater:>
 280 IF M=P THEN 360
  Variable:M
  Variable:P
- BinaryOperator:=
+ BinaryOperatorEqual:=
 290 P=P-M
  Variable:P
  Variable:P
  Variable:M
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 300 A=A+M
  Variable:A
  Variable:A
  Variable:M
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 310 GOTO 100
  LineNumber:100
 320 IF P=1 THEN 550
  Variable:P
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 330 PRINT "COMPUTER TAKES";P;"CHIPS."
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
@@ -257,17 +257,17 @@
  Variable:B
  Variable:B
  Variable:P
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 360 IF B/2=INT(B/2) THEN 420
  Variable:B
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  Variable:B
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
- BinaryOperator:=
+ BinaryOperatorEqual:=
 370 PRINT "GAME OVER ... YOU WIN!!!": PRINT
  TextConstant:"GAME OVER ... YOU WIN!!!"
  CarriageControl:NL
@@ -277,7 +277,7 @@
  Variable:L
  Variable:R
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 400 R(E,L)=R(E,L)-1
  Variable:E
  Variable:L
@@ -286,7 +286,7 @@
  Variable:L
  Variable:R
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 410 GOTO 70
  LineNumber:70
@@ -299,7 +299,7 @@
 450 IF M=0 THEN 570
  Variable:M
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 460 PRINT M;"IS AN ILLEGAL MOVE ... YOUR MOVE";
  Variable:M
  CarriageControl:;
@@ -312,7 +312,7 @@
  Variable:L1
  Variable:R
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 490 R(E1,L1)=R(E1,L1)-1
  Variable:E1
  Variable:L1
@@ -321,7 +321,7 @@
  Variable:L1
  Variable:R
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 500 GOTO 70
  LineNumber:70

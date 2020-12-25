@@ -26,7 +26,7 @@
 110 IF A$="NO" THEN 390
  Variable:A$
  TextConstant:"NO"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 160 PRINT
  CarriageControl:NL
 200 PRINT"YOU ARE LANDING ON THE MOON AND AND HAVE TAKEN OVER MANUAL"
@@ -140,7 +140,7 @@
  CarriageControl:;
  Variable:H
  NumericConstant:15
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionTab
  CarriageControl:;
  TextConstant:"*"
@@ -150,18 +150,18 @@
 510 IF B<0 THEN 650
  Variable:B
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
 520 IF B>30 THEN B=30
  Variable:B
  NumericConstant:30
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:B
  NumericConstant:30
  AssignmentOperator:=
 530 IF B>F THEN B=F
  Variable:B
  Variable:F
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:B
  Variable:F
  AssignmentOperator:=
@@ -169,15 +169,15 @@
  Variable:V1
  Variable:V
  Variable:B
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:5
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 560 F=F-B
  Variable:F
  Variable:F
  Variable:B
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 570 H=H- .5*(V+V1)
  Variable:H
@@ -185,19 +185,19 @@
  NumericConstant:.5
  Variable:V
  Variable:V1
- BinaryOperator:+
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorPlus:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 580 IF H<=0 THEN 670
  Variable:H
  NumericConstant:0
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
 590 T=T+1
  Variable:T
  Variable:T
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 600 V=V1
  Variable:V
@@ -206,11 +206,11 @@
 610 IF F>0 THEN 490
  Variable:F
  NumericConstant:0
- BinaryOperator:>
+ BinaryOperatorGreater:>
 615 IF B=0 THEN 640
  Variable:B
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 620 PRINT"**** OUT OF FUEL ****"
  TextConstant:"**** OUT OF FUEL ****"
  CarriageControl:NL
@@ -239,9 +239,9 @@
  CarriageControl:;
  Variable:H
  NumericConstant:12
- BinaryOperator:/
+ BinaryOperatorDivide:/
  NumericConstant:29
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionTab
  CarriageControl:;
  TextConstant:"*"
@@ -261,35 +261,35 @@
  NumericConstant:.5
  Variable:V1
  Variable:V
- BinaryOperator:+
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorPlus:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 690 IF B=5 THEN 720
  Variable:B
  NumericConstant:5
- BinaryOperator:=
+ BinaryOperatorEqual:=
 700 D=(-V+SQR(V*V+H*(10-2*B)))/(5-B)
  Variable:D
  Variable:V
  UnaryOperatorMinus:-
  Variable:V
  Variable:V
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:H
  NumericConstant:10
  NumericConstant:2
  Variable:B
- BinaryOperator:*
- BinaryOperator:-
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  FunctionSqr
- BinaryOperator:+
+ BinaryOperatorPlus:+
  NumericConstant:5
  Variable:B
- BinaryOperator:-
- BinaryOperator:/
+ BinaryOperatorMinus:-
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 710 GOTO 730
  LineNumber:730
@@ -297,24 +297,24 @@
  Variable:D
  Variable:H
  Variable:V
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 730 V1=V+(5-B)*D
  Variable:V1
  Variable:V
  NumericConstant:5
  Variable:B
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:D
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 760 PRINT"TOUCHDOWN AT";T+D;"SECONDS."
  TextConstant:"TOUCHDOWN AT"
  CarriageControl:;
  Variable:T
  Variable:D
- BinaryOperator:+
+ BinaryOperatorPlus:+
  CarriageControl:;
  TextConstant:"SECONDS."
  CarriageControl:NL
@@ -333,7 +333,7 @@
 790 IF V1<>0 THEN 810
  Variable:V1
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 800 PRINT"CONGRATULATIONS! A PERFECT LANDING!!"
  TextConstant:"CONGRATULATIONS! A PERFECT LANDING!!"
  CarriageControl:NL
@@ -344,7 +344,7 @@
  Variable:V1
  FunctionAbs
  NumericConstant:2
- BinaryOperator:<
+ BinaryOperatorLess:<
 820 PRINT"***** SORRY, BUT YOU BLEW IT!!!!"
  TextConstant:"***** SORRY, BUT YOU BLEW IT!!!!"
  CarriageControl:NL
@@ -360,7 +360,7 @@
 860 IF A$="YES" THEN 390
  Variable:A$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 870 PRINT: PRINT "CONTROL OUT.": PRINT
  CarriageControl:NL
  TextConstant:"CONTROL OUT."

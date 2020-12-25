@@ -55,13 +55,13 @@
 115 IF N>6 THEN 117
  Variable:N
  NumericConstant:6
- BinaryOperator:>
+ BinaryOperatorGreater:>
 116 GOTO 120
  LineNumber:120
 117 IF N<20 THEN 210
  Variable:N
  NumericConstant:20
- BinaryOperator:<
+ BinaryOperatorLess:<
 120 PRINT "I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19.": GOTO 110
  TextConstant:"I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19."
  CarriageControl:NL
@@ -96,7 +96,7 @@
  Variable:I
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:=
+ BinaryOperatorEqual:=
 330 X=I: Y=J: GOSUB 910: IF L=1 THEN 410
  Variable:X
  Variable:I
@@ -107,7 +107,7 @@
  LineNumber:910
  Variable:L
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 340 PRINT "ILLEGAL MOVE.  TRY AGAIN...": GOTO 310
  TextConstant:"ILLEGAL MOVE.  TRY AGAIN..."
  CarriageControl:NL
@@ -117,7 +117,7 @@
  Variable:J
  Variable:A
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 420 PRINT "SQUARE OCCUPIED.  TRY AGAIN...": GOTO 310
  TextConstant:"SQUARE OCCUPIED.  TRY AGAIN..."
  CarriageControl:NL
@@ -139,35 +139,35 @@
  end:     ["NumericConstant:1"]
  Variable:E
  Variable:F
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:E
  Variable:F
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 540 X=I+F: Y=J+F: GOSUB 910
  Variable:X
  Variable:I
  Variable:F
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  Variable:Y
  Variable:J
  Variable:F
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  LineNumber:910
 570 IF L=0 THEN 590
  Variable:L
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 580 IF A(X,Y)=1 THEN 710
  Variable:X
  Variable:Y
  Variable:A
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 590 NEXT F: NEXT E
  Variable:F
  Variable:E
@@ -178,30 +178,30 @@
  Variable:N
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
  AssignmentOperator:=
  Variable:Y
  Variable:N
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
  AssignmentOperator:=
  LineNumber:910
  Variable:L
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 650 IF A(X,Y)<>0 THEN 610
  Variable:X
  Variable:Y
  Variable:A
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 660 A(X,Y)=2: GOSUB 810: GOTO 310
  Variable:X
  Variable:Y
@@ -214,18 +214,18 @@
  Variable:X
  Variable:I
  Variable:E
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  Variable:Y
  Variable:J
  Variable:F
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  LineNumber:910
 750 IF L=0 THEN 610
  Variable:L
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 760 GOTO 650
  LineNumber:650
 800 REM *** PRINT THE BOARD ***
@@ -253,19 +253,19 @@
  AssignmentOperator:=
  Variable:X
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
 920 IF X>N THEN 970
  Variable:X
  Variable:N
- BinaryOperator:>
+ BinaryOperatorGreater:>
 930 IF Y<1 THEN 970
  Variable:Y
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
 940 IF Y>N THEN 970
  Variable:Y
  Variable:N
- BinaryOperator:>
+ BinaryOperatorGreater:>
 950 RETURN
  
 970 L=0: RETURN
@@ -284,7 +284,7 @@
 990 IF Q=1 THEN 110
  Variable:Q
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 999 END
  
 

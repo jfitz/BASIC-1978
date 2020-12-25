@@ -1185,11 +1185,11 @@ class BooleanConstant < AbstractValueElement
   end
 
   def b_and(other)
-    BooleanConstant.new(@value && other.to_v)
+    BooleanConstant.new(@value && other.to_b)
   end
 
   def b_or(other)
-    BooleanConstant.new(@value || other.to_v)
+    BooleanConstant.new(@value || other.to_b)
   end
 
   def +(other)

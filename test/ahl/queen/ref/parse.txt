@@ -103,11 +103,11 @@
 23 IF W$="NO" THEN 30
  Variable:W$
  TextConstant:"NO"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 24 IF W$="YES" THEN 28
  Variable:W$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 25 PRINT "PLEASE ANSWER 'YES' OR 'NO'."
  TextConstant:"PLEASE ANSWER 'YES' OR 'NO'."
  CarriageControl:NL
@@ -129,12 +129,12 @@
 115 IF M1=0 THEN 232
  Variable:M1
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 120 T1=INT(M1/10)
  Variable:T1
  Variable:M1
  NumericConstant:10
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  AssignmentOperator:=
 130 U1=M1-10*T1
@@ -142,17 +142,17 @@
  Variable:M1
  NumericConstant:10
  Variable:T1
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 140 IF U1=1 THEN 200
  Variable:U1
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 150 IF U1=T1 THEN 200
  Variable:U1
  Variable:T1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 160 PRINT "PLEASE READ THE DIRECTIONS AGAIN."
  TextConstant:"PLEASE READ THE DIRECTIONS AGAIN."
  CarriageControl:NL
@@ -173,7 +173,7 @@
 215 IF M=158 THEN 3400
  Variable:M
  NumericConstant:158
- BinaryOperator:=
+ BinaryOperatorEqual:=
 220 PRINT "WHAT IS YOUR MOVE";
  TextConstant:"WHAT IS YOUR MOVE"
  CarriageControl:;
@@ -182,7 +182,7 @@
 231 IF M1<>0 THEN 239
  Variable:M1
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 232 PRINT
  CarriageControl:NL
 233 PRINT "IT LOOKS LIKE I HAVE WON BY FORFEIT."
@@ -195,12 +195,12 @@
 239 IF M1<=M THEN 3200
  Variable:M1
  Variable:M
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
 240 T1=INT(M1/10)
  Variable:T1
  Variable:M1
  NumericConstant:10
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  AssignmentOperator:=
 250 U1=M1-10*T1
@@ -208,47 +208,47 @@
  Variable:M1
  NumericConstant:10
  Variable:T1
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 260 P=U1-U
  Variable:P
  Variable:U1
  Variable:U
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 270 IF P<>0 THEN 300
  Variable:P
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 280 L=T1-T
  Variable:L
  Variable:T1
  Variable:T
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 290 IF L<=0 THEN 3200
  Variable:L
  NumericConstant:0
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
 295 GOTO 200
  LineNumber:200
 300 IF T1-T <>P THEN 320
  Variable:T1
  Variable:T
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:P
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 310 GOTO 200
  LineNumber:200
 320 IF T1-T <>2*P THEN 3200
  Variable:T1
  Variable:T
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:2
  Variable:P
- BinaryOperator:*
- BinaryOperator:<>
+ BinaryOperatorMultiply:*
+ BinaryOperatorNotEqual:<>
 330 GOTO 200
  LineNumber:200
 1990 REM     LOCATE MOVE FOR COMPUTER
@@ -256,31 +256,31 @@
 2000 IF M1=41 THEN 2180
  Variable:M1
  NumericConstant:41
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2010 IF M1=44 THEN 2180
  Variable:M1
  NumericConstant:44
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2020 IF M1=73 THEN 2180
  Variable:M1
  NumericConstant:73
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2030 IF M1=75 THEN 2180
  Variable:M1
  NumericConstant:75
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2040 IF M1=126 THEN 2180
  Variable:M1
  NumericConstant:126
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2050 IF M1=127 THEN 2180
  Variable:M1
  NumericConstant:127
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2060 IF M1=158 THEN 3300
  Variable:M1
  NumericConstant:158
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2065 C=0
  Variable:C
  NumericConstant:0
@@ -298,38 +298,38 @@
  Variable:T
  Variable:T1
  Variable:K
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 2100 GOSUB 3500
  LineNumber:3500
 2105 IF C=1 THEN 2160
  Variable:C
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2110 U=U+K
  Variable:U
  Variable:U
  Variable:K
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 2120 GOSUB 3500
  LineNumber:3500
 2125 IF C=1 THEN 2160
  Variable:C
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2130 T=T+K
  Variable:T
  Variable:T
  Variable:K
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 2140 GOSUB 3500
  LineNumber:3500
 2145 IF C=1 THEN 2160
  Variable:C
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2150 NEXT K
  Variable:K
 2155 GOTO 2180
@@ -354,11 +354,11 @@
 3010 IF Z>.6 THEN 3110
  Variable:Z
  NumericConstant:.6
- BinaryOperator:>
+ BinaryOperatorGreater:>
 3020 IF Z>.3 THEN 3070
  Variable:Z
  NumericConstant:.3
- BinaryOperator:>
+ BinaryOperatorGreater:>
 3030 U=U1
  Variable:U
  Variable:U1
@@ -367,15 +367,15 @@
  Variable:T
  Variable:T1
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3050 M=10*T+U
  Variable:M
  NumericConstant:10
  Variable:T
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:U
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3060 RETURN
  
@@ -383,21 +383,21 @@
  Variable:U
  Variable:U1
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3080 T=T1+2
  Variable:T
  Variable:T1
  NumericConstant:2
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3090 M=10*T+U
  Variable:M
  NumericConstant:10
  Variable:T
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:U
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3100 RETURN
  
@@ -405,21 +405,21 @@
  Variable:U
  Variable:U1
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3120 T=T1+1
  Variable:T
  Variable:T1
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3130 M=10*T+U
  Variable:M
  NumericConstant:10
  Variable:T
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:U
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3140 RETURN
  
@@ -474,30 +474,30 @@
  Variable:M
  NumericConstant:10
  Variable:T
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:U
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3510 IF M=158 THEN 3570
  Variable:M
  NumericConstant:158
- BinaryOperator:=
+ BinaryOperatorEqual:=
 3520 IF M=127 THEN 3570
  Variable:M
  NumericConstant:127
- BinaryOperator:=
+ BinaryOperatorEqual:=
 3530 IF M=126 THEN 3570
  Variable:M
  NumericConstant:126
- BinaryOperator:=
+ BinaryOperatorEqual:=
 3540 IF M=75 THEN 3570
  Variable:M
  NumericConstant:75
- BinaryOperator:=
+ BinaryOperatorEqual:=
 3550 IF M=73 THEN 3570
  Variable:M
  NumericConstant:73
- BinaryOperator:=
+ BinaryOperatorEqual:=
 3560 RETURN
  
 3570 C=1
@@ -518,11 +518,11 @@
 4030 IF Q$="YES" THEN 30 
  Variable:Q$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 4040 IF Q$="NO" THEN 4050
  Variable:Q$
  TextConstant:"NO"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 4042 PRINT "PLEASE ANSWER 'YES' OR 'NO'."
  TextConstant:"PLEASE ANSWER 'YES' OR 'NO'."
  CarriageControl:NL
@@ -594,9 +594,9 @@
  Variable:I
  NumericConstant:8
  Variable:A
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:B
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 5190 PRINT S(I);
  Variable:I

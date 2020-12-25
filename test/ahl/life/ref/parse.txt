@@ -47,7 +47,7 @@
  Variable:C
  Variable:B$
  TextConstant:"DONE"
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:C
  Variable:B$
  TextConstant:""
@@ -59,7 +59,7 @@
  NumericConstant:1
  FunctionLeft
  TextConstant:"."
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:C
  Variable:B$
  TextConstant:" "
@@ -69,15 +69,15 @@
  Variable:B$
  FunctionLen
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  FunctionRight
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 60 C=C+1
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 70 GOTO 30
  LineNumber:30
@@ -85,7 +85,7 @@
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  Variable:L
  NumericConstant:0
@@ -93,13 +93,13 @@
 90 FOR X=1 TO C-1
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Variable:C", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:C", "NumericConstant:1", "BinaryOperatorMinus:-"]
 100 IF LEN(B$(X))>L THEN L=LEN(B$(X))
  Variable:X
  Variable:B$
  FunctionLen
  Variable:L
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:L
  Variable:X
  Variable:B$
@@ -112,16 +112,16 @@
  NumericConstant:11
  Variable:C
  NumericConstant:2
- BinaryOperator:/
- BinaryOperator:-
+ BinaryOperatorDivide:/
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 130 Y1=33-L/2
  Variable:Y1
  NumericConstant:33
  Variable:L
  NumericConstant:2
- BinaryOperator:/
- BinaryOperator:-
+ BinaryOperatorDivide:/
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 140 FOR X=1 TO C
  control: Variable:X
@@ -138,20 +138,20 @@
  NumericConstant:1
  FunctionMid
  TextConstant:" "
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
  Variable:X1
  Variable:X
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:Y1
  Variable:Y
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:A
  NumericConstant:1
  AssignmentOperator:=
  Variable:P
  Variable:P
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 170 NEXT Y
  Variable:Y
@@ -193,12 +193,12 @@
  Variable:G
  Variable:G
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 225 FOR X=1 TO X1-1: PRINT: NEXT X
  control: Variable:X
  start:   ["NumericConstant:1"]
- end:     ["Variable:X1", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:X1", "NumericConstant:1", "BinaryOperatorMinus:-"]
  CarriageControl:NL
  Variable:X
 230 FOR X=X1 TO X2
@@ -216,7 +216,7 @@
  Variable:Y
  Variable:A
  NumericConstant:2
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:X
  Variable:Y
  Variable:A
@@ -228,7 +228,7 @@
  Variable:Y
  Variable:A
  NumericConstant:3
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:X
  Variable:Y
  Variable:A
@@ -240,7 +240,7 @@
  Variable:Y
  Variable:A
  NumericConstant:1
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 261 PRINT TAB(Y);"*";
  Variable:Y
  FunctionTab
@@ -250,28 +250,28 @@
 262 IF X<X3 THEN X3=X
  Variable:X
  Variable:X3
- BinaryOperator:<
+ BinaryOperatorLess:<
  Variable:X3
  Variable:X
  AssignmentOperator:=
 264 IF X>X4 THEN X4=X
  Variable:X
  Variable:X4
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:X4
  Variable:X
  AssignmentOperator:=
 266 IF Y<Y3 THEN Y3=Y
  Variable:Y
  Variable:Y3
- BinaryOperator:<
+ BinaryOperatorLess:<
  Variable:Y3
  Variable:Y
  AssignmentOperator:=
 268 IF Y>Y4 THEN Y4=Y
  Variable:Y
  Variable:Y4
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:Y4
  Variable:Y
  AssignmentOperator:=
@@ -281,7 +281,7 @@
  Variable:X
 295 FOR X=X2+1 TO 24: PRINT: NEXT X
  control: Variable:X
- start:   ["Variable:X2", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Variable:X2", "NumericConstant:1", "BinaryOperatorPlus:+"]
  end:     ["NumericConstant:24"]
  CarriageControl:NL
  Variable:X
@@ -301,7 +301,7 @@
 301 IF X1<3 THEN X1=3:I9=-1
  Variable:X1
  NumericConstant:3
- BinaryOperator:<
+ BinaryOperatorLess:<
  Variable:X1
  NumericConstant:3
  AssignmentOperator:=
@@ -312,7 +312,7 @@
 303 IF X2>22 THEN X2=22:I9=-1
  Variable:X2
  NumericConstant:22
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:X2
  NumericConstant:22
  AssignmentOperator:=
@@ -323,7 +323,7 @@
 305 IF Y1<3 THEN Y1=3:I9=-1
  Variable:Y1
  NumericConstant:3
- BinaryOperator:<
+ BinaryOperatorLess:<
  Variable:Y1
  NumericConstant:3
  AssignmentOperator:=
@@ -334,7 +334,7 @@
 307 IF Y2>68 THEN Y2=68:I9=-1
  Variable:Y2
  NumericConstant:68
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:Y2
  NumericConstant:68
  AssignmentOperator:=
@@ -348,40 +348,40 @@
  AssignmentOperator:=
 500 FOR X=X1-1 TO X2+1
  control: Variable:X
- start:   ["Variable:X1", "NumericConstant:1", "BinaryOperator:-"]
- end:     ["Variable:X2", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Variable:X1", "NumericConstant:1", "BinaryOperatorMinus:-"]
+ end:     ["Variable:X2", "NumericConstant:1", "BinaryOperatorPlus:+"]
 510 FOR Y=Y1-1 TO Y2+1
  control: Variable:Y
- start:   ["Variable:Y1", "NumericConstant:1", "BinaryOperator:-"]
- end:     ["Variable:Y2", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Variable:Y1", "NumericConstant:1", "BinaryOperatorMinus:-"]
+ end:     ["Variable:Y2", "NumericConstant:1", "BinaryOperatorPlus:+"]
 520 C=0
  Variable:C
  NumericConstant:0
  AssignmentOperator:=
 530 FOR I=X-1 TO X+1
  control: Variable:I
- start:   ["Variable:X", "NumericConstant:1", "BinaryOperator:-"]
- end:     ["Variable:X", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Variable:X", "NumericConstant:1", "BinaryOperatorMinus:-"]
+ end:     ["Variable:X", "NumericConstant:1", "BinaryOperatorPlus:+"]
 540 FOR J=Y-1 TO Y+1
  control: Variable:J
- start:   ["Variable:Y", "NumericConstant:1", "BinaryOperator:-"]
- end:     ["Variable:Y", "NumericConstant:1", "BinaryOperator:+"]
+ start:   ["Variable:Y", "NumericConstant:1", "BinaryOperatorMinus:-"]
+ end:     ["Variable:Y", "NumericConstant:1", "BinaryOperatorPlus:+"]
 550 IF A(I,J)=1 OR A(I,J)=2 THEN C=C+1
  Variable:I
  Variable:J
  Variable:A
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:I
  Variable:J
  Variable:A
  NumericConstant:2
- BinaryOperator:=
- BinaryOperator:OR
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 560 NEXT J
  Variable:J
@@ -392,15 +392,15 @@
  Variable:Y
  Variable:A
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 590 IF C<3 OR C>4 THEN A(X,Y)=2: GOTO 600
  Variable:C
  NumericConstant:3
- BinaryOperator:<
+ BinaryOperatorLess:<
  Variable:C
  NumericConstant:4
- BinaryOperator:>
- BinaryOperator:OR
+ BinaryOperatorGreater:>
+ BinaryOperatorOr:OR
  Variable:X
  Variable:Y
  Variable:A
@@ -411,14 +411,14 @@
  Variable:P
  Variable:P
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 600 GOTO 620
  LineNumber:620
 610 IF C=3 THEN A(X,Y)=3:P=P+1
  Variable:C
  NumericConstant:3
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:X
  Variable:Y
  Variable:A
@@ -427,7 +427,7 @@
  Variable:P
  Variable:P
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 620 NEXT Y
  Variable:Y
@@ -437,22 +437,22 @@
  Variable:X1
  Variable:X1
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  Variable:Y1
  Variable:Y1
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  Variable:X2
  Variable:X2
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  Variable:Y2
  Variable:Y2
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 640 GOTO 210
  LineNumber:210

@@ -35,7 +35,7 @@
 180 IF A$="NO" THEN 210
  Variable:A$
  TextConstant:"NO"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 190 GOSUB 710
  LineNumber:710
 200 REM *** MAKE A RANDOM LIST A(1) TO A(N)
@@ -45,12 +45,12 @@
  Variable:A
  Variable:N
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:2
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
  AssignmentOperator:=
 220 FOR K=2 TO N
@@ -63,21 +63,21 @@
  Variable:N
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
  AssignmentOperator:=
 240 FOR J=1 TO K-1
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Variable:K", "NumericConstant:1", "BinaryOperator:-"]
+ end:     ["Variable:K", "NumericConstant:1", "BinaryOperatorMinus:-"]
 250 IF A(K)=A(J) THEN 230
  Variable:K
  Variable:A
  Variable:J
  Variable:A
- BinaryOperator:=
+ BinaryOperatorEqual:=
 260 NEXT J:NEXT K
  Variable:J
  Variable:K
@@ -101,11 +101,11 @@
 350 IF R=0 THEN 520
  Variable:R
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 360 IF R<=N THEN 390
  Variable:R
  Variable:N
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
 370 PRINT "OOPS! TOO MANY! I CAN REVERSE AT MOST";N:GOTO 330
  TextConstant:"OOPS! TOO MANY! I CAN REVERSE AT MOST"
  CarriageControl:;
@@ -116,14 +116,14 @@
  Variable:T
  Variable:T
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 400 REM *** REVERSE R NUMBERS AND PRINT NEW LIST
  Remark:*** REVERSE R NUMBERS AND PRINT NEW LIST
 410 FOR K=1 TO INT(R/2)
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["Variable:R", "NumericConstant:2", "BinaryOperator:/", "FunctionInt"]
+ end:     ["Variable:R", "NumericConstant:2", "BinaryOperatorDivide:/", "FunctionInt"]
 420 Z=A(K)
  Variable:Z
  Variable:K
@@ -134,17 +134,17 @@
  Variable:A
  Variable:R
  Variable:K
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:A
  AssignmentOperator:=
 440 A(R-K+1)=Z
  Variable:R
  Variable:K
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:A
  Variable:Z
  AssignmentOperator:=
@@ -162,7 +162,7 @@
  Variable:K
  Variable:A
  Variable:K
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 500 NEXT K
  Variable:K
 510 PRINT "YOU WON IT IN";T;"MOVES!!!":PRINT
@@ -183,7 +183,7 @@
 550 IF A$="YES" THEN 210
  Variable:A$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 560 PRINT: PRINT "O.K. HOPE YOU HAD FUN!!":GOTO 999
  CarriageControl:NL
  TextConstant:"O.K. HOPE YOU HAD FUN!!"

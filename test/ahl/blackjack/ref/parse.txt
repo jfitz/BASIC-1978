@@ -21,9 +21,9 @@
  NumericConstant:11
  Variable:Q
  NumericConstant:22
- BinaryOperator:>=
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorGreaterEqual:>=
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
 20 DIM P(15,12),Q(15),C(52),D(52),T(8),S(7),B(15)
  NumericConstant:15
  NumericConstant:12
@@ -60,7 +60,7 @@
 110 IF C<51 THEN 230
  Variable:C
  NumericConstant:51
- BinaryOperator:<
+ BinaryOperatorLess:<
 120 PRINT "RESHUFFLING"
  TextConstant:"RESHUFFLING"
  CarriageControl:NL
@@ -73,7 +73,7 @@
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 150 C(C)=D(D)
  Variable:C
@@ -94,13 +94,13 @@
  FunctionRnd
  Variable:C1
  Variable:C
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:1
- BinaryOperator:+
- BinaryOperator:*
+ BinaryOperatorPlus:+
+ BinaryOperatorMultiply:*
  FunctionInt
  Variable:C
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 190 C3=C(C2)
  Variable:C3
@@ -129,7 +129,7 @@
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 250 RETURN
  
@@ -178,7 +178,7 @@
  AssignmentOperator:=
  Variable:X1
  NumericConstant:10
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:X1
  NumericConstant:10
  AssignmentOperator:=
@@ -187,21 +187,21 @@
  Variable:Q1
  Variable:Q
  Variable:X1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 530 IF Q>=11 THEN 590
  Variable:Q
  NumericConstant:11
- BinaryOperator:>=
+ BinaryOperatorGreaterEqual:>=
 540 IF X>1 THEN 570
  Variable:X
  NumericConstant:1
- BinaryOperator:>
+ BinaryOperatorGreater:>
 550 Q=Q+11
  Variable:Q
  Variable:Q
  NumericConstant:11
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 560 RETURN
  
@@ -211,9 +211,9 @@
  NumericConstant:11
  Variable:Q1
  NumericConstant:11
- BinaryOperator:>=
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorGreaterEqual:>=
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 580 RETURN
  
@@ -222,17 +222,17 @@
  Variable:Q1
  Variable:Q
  NumericConstant:21
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
  Variable:Q1
  NumericConstant:21
- BinaryOperator:>
- BinaryOperator:AND
- BinaryOperator:-
+ BinaryOperatorGreater:>
+ BinaryOperatorAnd:AND
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 600 IF Q<33 THEN 620
  Variable:Q
  NumericConstant:33
- BinaryOperator:<
+ BinaryOperatorLess:<
 610 Q=-1
  Variable:Q
  NumericConstant:1
@@ -248,9 +248,9 @@
  Variable:D$
  NumericConstant:3
  Variable:X
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:2
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:3
  FunctionMid
  CarriageControl:;
@@ -267,9 +267,9 @@
  Variable:D$
  NumericConstant:3
  Variable:X
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:2
  FunctionMid
  CarriageControl:;
@@ -304,7 +304,7 @@
  Variable:I
  Variable:B
  NumericConstant:2
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
 880 PRINT "RECEIVED A";
  TextConstant:"RECEIVED A"
@@ -316,7 +316,7 @@
 910 IF Q>0 THEN GOSUB 1300
  Variable:Q
  NumericConstant:0
- BinaryOperator:>
+ BinaryOperatorGreater:>
  LineNumber:1300
 920 RETURN
  
@@ -336,7 +336,7 @@
 990 IF Q<0 THEN 940
  Variable:Q
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
 1000 PRINT "HIT";
  TextConstant:"HIT"
  CarriageControl:;
@@ -350,7 +350,7 @@
  Variable:I
  Variable:R
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1120 P(I,R(I))=X
  Variable:I
@@ -374,7 +374,7 @@
 1160 IF Q>=0 THEN 1190
  Variable:Q
  NumericConstant:0
- BinaryOperator:>=
+ BinaryOperatorGreaterEqual:>=
 1170 PRINT "...BUSTED"
  TextConstant:"...BUSTED"
  CarriageControl:NL
@@ -388,14 +388,14 @@
  Variable:I
  Variable:R
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 1220 RETURN
  
 1230 D=D+1
  Variable:D
  Variable:D
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1240 D(D)=P(I,R(I))
  Variable:D
@@ -411,7 +411,7 @@
  Variable:I
  Variable:R
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 1260 GOTO 1210
  LineNumber:1210
@@ -454,7 +454,7 @@
  Variable:H
  NumericConstant:1
  FunctionMid
- BinaryOperator:=
+ BinaryOperatorEqual:=
 1450 NEXT H
  Variable:H
 1460 PRINT "TYPE ";MID$(I$,1,H1-1);" OR ";MID$(I$,H1,2);" PLEASE";
@@ -464,7 +464,7 @@
  NumericConstant:1
  Variable:H1
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  FunctionMid
  CarriageControl:;
  TextConstant:" OR "
@@ -482,9 +482,9 @@
  Variable:H
  Variable:H
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 1490 RETURN
  
@@ -506,8 +506,8 @@
  end:     ["NumericConstant:13"]
 1550 FOR J=4*I-3 TO 4*I
  control: Variable:J
- start:   ["NumericConstant:4", "Variable:I", "BinaryOperator:*", "NumericConstant:3", "BinaryOperator:-"]
- end:     ["NumericConstant:4", "Variable:I", "BinaryOperator:*"]
+ start:   ["NumericConstant:4", "Variable:I", "BinaryOperatorMultiply:*", "NumericConstant:3", "BinaryOperatorMinus:-"]
+ end:     ["NumericConstant:4", "Variable:I", "BinaryOperatorMultiply:*"]
 1560 D(J)=I
  Variable:J
  Variable:D
@@ -535,13 +535,13 @@
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:H$
  NumericConstant:1
  FunctionLeft
  TextConstant:"n"
- BinaryOperator:=
- BinaryOperator:OR
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
 1640 PRINT "THIS IS THE GAME OF 21. AS MANY AS 7 PLAYERS MAY PLAY THE"
  TextConstant:"THIS IS THE GAME OF 21. AS MANY AS 7 PLAYERS MAY PLAY THE"
  CarriageControl:NL
@@ -588,16 +588,16 @@
 1780 IF N<1 OR N>7 OR N>INT(N) THEN 1760
  Variable:N
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
  Variable:N
  NumericConstant:7
- BinaryOperator:>
- BinaryOperator:OR
+ BinaryOperatorGreater:>
+ BinaryOperatorOr:OR
  Variable:N
  Variable:N
  FunctionInt
- BinaryOperator:>
- BinaryOperator:OR
+ BinaryOperatorGreater:>
+ BinaryOperatorOr:OR
 1790 FOR I=1 TO 8: T(I)=0: NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -611,25 +611,25 @@
  Variable:D1
  Variable:N
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1810 IF 2*D1+C>=52 THEN GOSUB 120
  NumericConstant:2
  Variable:D1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:C
- BinaryOperator:+
+ BinaryOperatorPlus:+
  NumericConstant:52
- BinaryOperator:>=
+ BinaryOperatorGreaterEqual:>=
  LineNumber:120
 1820 IF C=2 THEN C=C-1
  Variable:C
  NumericConstant:2
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 1830 FOR I=1 TO N: Z(I)=0: NEXT I
  control: Variable:I
@@ -698,12 +698,12 @@
  Variable:I
  Variable:Z
  NumericConstant:0
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
  Variable:I
  Variable:Z
  NumericConstant:500
- BinaryOperator:>
- BinaryOperator:OR
+ BinaryOperatorGreater:>
+ BinaryOperatorOr:OR
 1920 B(I)=Z(I)
  Variable:I
  Variable:B
@@ -722,7 +722,7 @@
 1960 PRINT TAB(I*7);I;
  Variable:I
  NumericConstant:7
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  FunctionTab
  CarriageControl:;
  Variable:I
@@ -732,9 +732,9 @@
 1980 PRINT TAB((N+1)*7)"DEALER"
  Variable:N
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  NumericConstant:7
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  FunctionTab
  CarriageControl:
  TextConstant:"DEALER"
@@ -762,11 +762,11 @@
 2040 IF J=1 OR I<=N THEN GOSUB 750
  Variable:J
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:I
  Variable:N
- BinaryOperator:<=
- BinaryOperator:OR
+ BinaryOperatorLessEqual:<=
+ BinaryOperatorOr:OR
  LineNumber:750
 2050 NEXT I
  Variable:I
@@ -792,7 +792,7 @@
  NumericConstant:1
  Variable:P
  NumericConstant:1
- BinaryOperator:>
+ BinaryOperatorGreater:>
 2130 PRINT "ANY INSURANCE";
  TextConstant:"ANY INSURANCE"
  CarriageControl:;
@@ -803,7 +803,7 @@
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 2160 PRINT "INSURANCE BETS"
  TextConstant:"INSURANCE BETS"
  CarriageControl:NL
@@ -826,15 +826,15 @@
  Variable:I
  Variable:Z
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
  Variable:I
  Variable:Z
  Variable:I
  Variable:B
  NumericConstant:2
- BinaryOperator:/
- BinaryOperator:>
- BinaryOperator:OR
+ BinaryOperatorDivide:/
+ BinaryOperatorGreater:>
+ BinaryOperatorOr:OR
 2200 NEXT I
  Variable:I
 2210 FOR I=1 TO N
@@ -851,12 +851,12 @@
  NumericConstant:2
  Variable:P
  NumericConstant:10
- BinaryOperator:>=
+ BinaryOperatorGreaterEqual:>=
  UnaryOperatorMinus:-
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:1
- BinaryOperator:-
- BinaryOperator:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
 2230 NEXT I
  Variable:I
@@ -874,13 +874,13 @@
  NumericConstant:1
  Variable:P
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:D1
  NumericConstant:2
  Variable:P
  NumericConstant:9
- BinaryOperator:>
- BinaryOperator:AND
+ BinaryOperatorGreater:>
+ BinaryOperatorAnd:AND
  Variable:L1
  NumericConstant:0
  AssignmentOperator:=
@@ -892,13 +892,13 @@
  NumericConstant:2
  Variable:P
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:D1
  NumericConstant:1
  Variable:P
  NumericConstant:9
- BinaryOperator:>
- BinaryOperator:AND
+ BinaryOperatorGreater:>
+ BinaryOperatorAnd:AND
  Variable:L1
  NumericConstant:0
  AssignmentOperator:=
@@ -908,11 +908,11 @@
 2254 IF L1<>0 OR L2<>0 THEN 2320
  Variable:L1
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
  Variable:L2
  NumericConstant:0
- BinaryOperator:<>
- BinaryOperator:OR
+ BinaryOperatorNotEqual:<>
+ BinaryOperatorOr:OR
 2260 PRINT:PRINT "DEALER HAS A";MID$(D$,3*P(D1,2)-2,3);" IN THE HOLE ";
  CarriageControl:NL
  TextConstant:"DEALER HAS A"
@@ -922,9 +922,9 @@
  Variable:D1
  NumericConstant:2
  Variable:P
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:2
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:3
  FunctionMid
  CarriageControl:;
@@ -950,13 +950,13 @@
  NumericConstant:1
  Variable:P
  NumericConstant:1
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:D1
  NumericConstant:1
  Variable:P
  NumericConstant:10
- BinaryOperator:<
- BinaryOperator:AND
+ BinaryOperatorLess:<
+ BinaryOperatorAnd:AND
 2340 PRINT:PRINT "NO DEALER BLACKJACK."
  CarriageControl:NL
  TextConstant:"NO DEALER BLACKJACK."
@@ -992,7 +992,7 @@
  Variable:I
  Variable:Q
  NumericConstant:21
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 2440 PRINT "BLACKJACK"
  TextConstant:"BLACKJACK"
  CarriageControl:NL
@@ -1004,8 +1004,8 @@
  NumericConstant:1.5
  Variable:I
  Variable:B
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 2460 B(I)=0
  Variable:I
@@ -1052,7 +1052,7 @@
  NumericConstant:1
  Variable:P
  NumericConstant:10
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:L1
  NumericConstant:10
  AssignmentOperator:=
@@ -1066,14 +1066,14 @@
  NumericConstant:2
  Variable:P
  NumericConstant:10
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:L2
  NumericConstant:10
  AssignmentOperator:=
 2614 IF L1=L2 THEN 2640
  Variable:L1
  Variable:L2
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2620 PRINT "SPLITTING NOT ALLOWED."
  TextConstant:"SPLITTING NOT ALLOWED."
  CarriageControl:NL
@@ -1085,7 +1085,7 @@
  Variable:I1
  Variable:I
  Variable:D1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 2660 R(I1)=2
  Variable:I1
@@ -1103,7 +1103,7 @@
 2680 B(I+D1)=B(I)
  Variable:I
  Variable:D1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:B
  Variable:I
  Variable:B
@@ -1150,14 +1150,14 @@
  Variable:I
  Variable:I1
  Variable:D1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 2830 IF P(I,1)=1 THEN 2900
  Variable:I
  NumericConstant:1
  Variable:P
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2840 REM--NOW PLAY THE TWO HANDS
  Remark:--NOW PLAY THE TWO HANDS
 2850 PRINT "HAND";1-(I>D1);
@@ -1166,8 +1166,8 @@
  NumericConstant:1
  Variable:I
  Variable:D1
- BinaryOperator:>
- BinaryOperator:-
+ BinaryOperatorGreater:>
+ BinaryOperatorMinus:-
  CarriageControl:;
 2860 GOSUB 800
  LineNumber:800
@@ -1175,17 +1175,17 @@
  Variable:I
  Variable:I
  Variable:D1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 2880 IF I=I1 THEN 2850
  Variable:I
  Variable:I1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 2890 I=I1-D1
  Variable:I
  Variable:I1
  Variable:D1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 2900 NEXT I
  Variable:I
@@ -1201,14 +1201,14 @@
  Variable:I
  Variable:R
  NumericConstant:0
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:I
  Variable:D1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:R
  NumericConstant:0
- BinaryOperator:>
- BinaryOperator:OR
+ BinaryOperatorGreater:>
+ BinaryOperatorOr:OR
 2950 NEXT I
  Variable:I
 2960 PRINT "DEALER HAD A";
@@ -1235,9 +1235,9 @@
  Variable:D1
  NumericConstant:2
  Variable:P
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:2
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:3
  FunctionMid
  CarriageControl:;
@@ -1261,7 +1261,7 @@
 3040 IF AA>16 THEN 3130
  Variable:AA
  NumericConstant:16
- BinaryOperator:>
+ BinaryOperatorGreater:>
 3050 PRINT "DRAWS";
  TextConstant:"DRAWS"
  CarriageControl:;
@@ -1279,26 +1279,26 @@
 3095 IF Q>0 AND AA<17 THEN 3060
  Variable:Q
  NumericConstant:0
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:AA
  NumericConstant:17
- BinaryOperator:<
- BinaryOperator:AND
+ BinaryOperatorLess:<
+ BinaryOperatorAnd:AND
 3100 Q(I)=Q-(Q<0)/2
  Variable:I
  Variable:Q
  Variable:Q
  Variable:Q
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
  NumericConstant:2
- BinaryOperator:/
- BinaryOperator:-
+ BinaryOperatorDivide:/
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 3110 IF Q<0 THEN 3140
  Variable:Q
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
 3120 AA=Q: GOSUB 3400
  Variable:AA
  Variable:Q
@@ -1335,7 +1335,7 @@
  Variable:AB
  Variable:I
  Variable:D1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:Q
  AssignmentOperator:=
  LineNumber:3410
@@ -1354,25 +1354,25 @@
  Variable:B
  Variable:AA
  Variable:AC
- BinaryOperator:-
+ BinaryOperatorMinus:-
  FunctionSgn
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  Variable:I
  Variable:D1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:B
  Variable:AB
  Variable:AC
- BinaryOperator:-
+ BinaryOperatorMinus:-
  FunctionSgn
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3188 B(I+D1)=0
  Variable:I
  Variable:D1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:B
  NumericConstant:0
  AssignmentOperator:=
@@ -1387,9 +1387,9 @@
  Variable:S
  FunctionSgn
  NumericConstant:6
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:7
- BinaryOperator:+
+ BinaryOperatorPlus:+
  NumericConstant:6
  FunctionMid
  CarriageControl:;
@@ -1399,7 +1399,7 @@
  Variable:I
  Variable:S
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 3230 PRINT "      ";
  TextConstant:"      "
  CarriageControl:;
@@ -1417,7 +1417,7 @@
  Variable:T
  Variable:I
  Variable:S
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3270 PRINT "TOTAL=";T(I)
  TextConstant:"TOTAL="
@@ -1434,13 +1434,13 @@
  Variable:T
  Variable:I
  Variable:S
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 3300 I=I+D1
  Variable:I
  Variable:I
  Variable:D1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 3310 GOSUB 1200
  LineNumber:1200
@@ -1448,7 +1448,7 @@
  Variable:I
  Variable:I
  Variable:D1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 3330 NEXT I
  Variable:I
@@ -1470,9 +1470,9 @@
  NumericConstant:11
  Variable:AA
  NumericConstant:22
- BinaryOperator:>=
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorGreaterEqual:>=
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  
 3410 AB=AB+11*(AB>=22): RETURN
@@ -1481,9 +1481,9 @@
  NumericConstant:11
  Variable:AB
  NumericConstant:22
- BinaryOperator:>=
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorGreaterEqual:>=
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  
 3420 AC=AC+11*(AC>=22): RETURN
@@ -1492,9 +1492,9 @@
  NumericConstant:11
  Variable:AC
  NumericConstant:22
- BinaryOperator:>=
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorGreaterEqual:>=
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  
 

@@ -10,7 +10,7 @@
  AssignmentOperator:=
  Variable:L$
  TextConstant:"P"
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:G1
  NumericConstant:1
  AssignmentOperator:=
@@ -68,11 +68,11 @@
 96 IF P$=" " THEN 812
  Variable:P$
  TextConstant:" "
- BinaryOperator:=
+ BinaryOperatorEqual:=
 100 IF P$=S$ THEN 200
  Variable:P$
  Variable:S$
- BinaryOperator:=
+ BinaryOperatorEqual:=
 120 NEXT O
  Variable:O
 200 RESTORE
@@ -84,7 +84,7 @@
 202 IF M$="ALL" THEN X$=S$
  Variable:M$
  TextConstant:"ALL"
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:X$
  Variable:S$
  AssignmentOperator:=
@@ -100,14 +100,14 @@
 230 IF 2^K<S(U) THEN 270
  NumericConstant:2
  Variable:K
- BinaryOperator:^
+ BinaryOperatorPower:^
  Variable:U
  Variable:S
- BinaryOperator:<
+ BinaryOperatorLess:<
 240 J(9-K)=0
  NumericConstant:9
  Variable:K
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:J
  NumericConstant:0
  AssignmentOperator:=
@@ -116,7 +116,7 @@
 270 J(9-K)=1: S(U)=S(U)-2^K
  NumericConstant:9
  Variable:K
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:J
  NumericConstant:1
  AssignmentOperator:=
@@ -126,14 +126,14 @@
  Variable:S
  NumericConstant:2
  Variable:K
- BinaryOperator:^
- BinaryOperator:-
+ BinaryOperatorPower:^
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 272 IF S(U)=1 THEN 815
  Variable:U
  Variable:S
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 280 NEXT K
  Variable:K
 445 FOR T1=1 TO X
@@ -144,15 +144,15 @@
  NumericConstant:63
  NumericConstant:4.5
  Variable:Y
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  Variable:G1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:X$
  FunctionLen
- BinaryOperator:/
+ BinaryOperatorDivide:/
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionTab
  CarriageControl:;
 450 FOR B=1 TO F(U)
@@ -163,7 +163,7 @@
  Variable:B
  Variable:J
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 465 FOR I=1 TO Y: PRINT X$;: NEXT I
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -198,7 +198,7 @@
 750 FOR H=1 TO 2*X: PRINT: NEXT H
  control: Variable:H
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:2", "Variable:X", "BinaryOperator:*"]
+ end:     ["NumericConstant:2", "Variable:X", "BinaryOperatorMultiply:*"]
  CarriageControl:NL
  Variable:H
 800 NEXT T
@@ -214,7 +214,7 @@
 812 FOR H=1 TO 7*X: PRINT: NEXT H
  control: Variable:H
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:7", "Variable:X", "BinaryOperator:*"]
+ end:     ["NumericConstant:7", "Variable:X", "BinaryOperatorMultiply:*"]
  CarriageControl:NL
  Variable:H
 813 GOTO 800
@@ -224,7 +224,7 @@
  Variable:F
  NumericConstant:9
  Variable:K
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  LineNumber:445
 899 DATA " ",0,0,0,0,0,0,0

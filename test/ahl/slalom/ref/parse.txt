@@ -22,11 +22,11 @@
 330 IF V>25 THEN 360
  Variable:V
  NumericConstant:25
- BinaryOperator:>
+ BinaryOperatorGreater:>
 340 IF V<1 THEN 390
  Variable:V
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
 350 GOTO 1440
  LineNumber:1440
 360 PRINT "25 IS THE LIMIT."
@@ -51,11 +51,11 @@
 430 IF A<1 THEN 460
  Variable:A
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
 440 IF A>3 THEN 460
  Variable:A
  NumericConstant:3
- BinaryOperator:>
+ BinaryOperatorGreater:>
 450 GOTO 480
  LineNumber:480
 460 PRINT "THE BOUNDS ARE 1-3"
@@ -78,10 +78,10 @@
  FunctionRnd
  NumericConstant:18
  NumericConstant:9
- BinaryOperator:-
- BinaryOperator:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
  NumericConstant:9
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
  AssignmentOperator:=
 520 PRINT
@@ -122,35 +122,35 @@
 600    IF O1=0 THEN 970
  Variable:O1
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 610   IF O1>8 THEN 1420
  Variable:O1
  NumericConstant:8
- BinaryOperator:>
+ BinaryOperatorGreater:>
 620    IF O1<1 THEN 1420
  Variable:O1
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
 630    GOSUB 990
  LineNumber:990
 640    IF S<7 THEN 1390
  Variable:S
  NumericConstant:7
- BinaryOperator:<
+ BinaryOperatorLess:<
 650    LET T=T+(Q-S+1)
  Variable:T
  Variable:T
  Variable:Q
  Variable:S
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:1
- BinaryOperator:+
- BinaryOperator:+
+ BinaryOperatorPlus:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 660    IF S>Q THEN 1630
  Variable:S
  Variable:Q
- BinaryOperator:>
+ BinaryOperatorGreater:>
 670 NEXT O
  Variable:O
 680 PRINT:PRINT "YOU TOOK";(T+RND(1));"SECONDS."
@@ -160,7 +160,7 @@
  Variable:T
  NumericConstant:1
  FunctionRnd
- BinaryOperator:+
+ BinaryOperatorPlus:+
  CarriageControl:;
  TextConstant:"SECONDS."
  CarriageControl:NL
@@ -172,32 +172,32 @@
  Variable:M
  Variable:M
  Variable:V
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 710 IF M<1.5-(A*.1) THEN 1650
  Variable:M
  NumericConstant:1.5
  Variable:A
  NumericConstant:.1
- BinaryOperator:*
- BinaryOperator:-
- BinaryOperator:<
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
+ BinaryOperatorLess:<
 720 IF M<2.9-(A*.1) THEN 1680
  Variable:M
  NumericConstant:2.9
  Variable:A
  NumericConstant:.1
- BinaryOperator:*
- BinaryOperator:-
- BinaryOperator:<
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
+ BinaryOperatorLess:<
 730 IF M<4.4-(A*.01) THEN 1710
  Variable:M
  NumericConstant:4.4
  Variable:A
  NumericConstant:.01
- BinaryOperator:*
- BinaryOperator:-
- BinaryOperator:<
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
+ BinaryOperatorLess:<
 740 PRINT:PRINT "DO YOU WANT TO RACE AGAIN";
  CarriageControl:NL
  TextConstant:"DO YOU WANT TO RACE AGAIN"
@@ -209,11 +209,11 @@
 770 IF B$="NO" THEN 1740
  Variable:B$
  TextConstant:"NO"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 780 IF B$="YES" THEN 480
  Variable:B$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 790 PRINT "PLEASE TYPE 'YES' OR 'NO'"
  TextConstant:"PLEASE TYPE 'YES' OR 'NO'"
  CarriageControl:NL
@@ -283,7 +283,7 @@
  Variable:T
  NumericConstant:1
  FunctionRnd
- BinaryOperator:+
+ BinaryOperatorPlus:+
  CarriageControl:;
  TextConstant:"SECONDS."
  CarriageControl:NL
@@ -308,12 +308,12 @@
  FunctionRnd
  NumericConstant:5
  NumericConstant:3
- BinaryOperator:-
- BinaryOperator:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
  NumericConstant:3
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1020 PRINT S;"M.P.H."
  Variable:S
@@ -323,13 +323,13 @@
 1030 IF S>Q THEN 1290
  Variable:S
  Variable:Q
- BinaryOperator:>
+ BinaryOperatorGreater:>
 1040 IF S>Q-1 THEN 1060
  Variable:S
  Variable:Q
  NumericConstant:1
- BinaryOperator:-
- BinaryOperator:>
+ BinaryOperatorMinus:-
+ BinaryOperatorGreater:>
 1050 RETURN
  
 1060 PRINT "CLOSE ONE!"
@@ -351,12 +351,12 @@
  FunctionRnd
  NumericConstant:5
  NumericConstant:3
- BinaryOperator:-
- BinaryOperator:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
  NumericConstant:3
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 1110 PRINT S;"M.P.H."
  Variable:S
@@ -372,12 +372,12 @@
  FunctionRnd
  NumericConstant:10
  NumericConstant:5
- BinaryOperator:-
- BinaryOperator:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
  NumericConstant:5
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1140 GOTO 1080
  LineNumber:1080
@@ -388,12 +388,12 @@
  FunctionRnd
  NumericConstant:10
  NumericConstant:5
- BinaryOperator:-
- BinaryOperator:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
  NumericConstant:5
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 1160 GOTO 1110
  LineNumber:1110
@@ -404,12 +404,12 @@
  FunctionRnd
  NumericConstant:4
  NumericConstant:1
- BinaryOperator:-
- BinaryOperator:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1180 GOTO 1110
  LineNumber:1110
@@ -420,12 +420,12 @@
  FunctionRnd
  NumericConstant:4
  NumericConstant:1
- BinaryOperator:-
- BinaryOperator:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 1200 GOTO 1110
  LineNumber:1110
@@ -436,7 +436,7 @@
  NumericConstant:1
  FunctionRnd
  NumericConstant:.7
- BinaryOperator:<
+ BinaryOperatorLess:<
 1230 PRINT "YOU MADE IT!"
  TextConstant:"YOU MADE IT!"
  CarriageControl:NL
@@ -444,7 +444,7 @@
  Variable:T
  Variable:T
  NumericConstant:1.5
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1250 RETURN
  
@@ -457,7 +457,7 @@
  Variable:T
  NumericConstant:1
  FunctionRnd
- BinaryOperator:+
+ BinaryOperatorPlus:+
  CarriageControl:;
  TextConstant:"SECONDS."
  CarriageControl:NL
@@ -468,12 +468,12 @@
  FunctionRnd
  Variable:S
  Variable:Q
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:.1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:.2
- BinaryOperator:+
- BinaryOperator:<
+ BinaryOperatorPlus:+
+ BinaryOperatorLess:<
 1300 PRINT "YOU WENT OVER THE NAXIMUM SPEED AND MADE IT!"
  TextConstant:"YOU WENT OVER THE NAXIMUM SPEED AND MADE IT!"
  CarriageControl:NL
@@ -486,7 +486,7 @@
  NumericConstant:1
  FunctionRnd
  NumericConstant:.5
- BinaryOperator:<
+ BinaryOperatorLess:<
 1340 PRINT "WIPED OUT!"
  TextConstant:"WIPED OUT!"
  CarriageControl:NL
@@ -496,7 +496,7 @@
  Variable:T
  NumericConstant:1
  FunctionRnd
- BinaryOperator:+
+ BinaryOperatorPlus:+
  CarriageControl:;
  TextConstant:"SECONDS"
  CarriageControl:NL
@@ -572,15 +572,15 @@
 1500 IF A$="INS" THEN 820
  Variable:A$
  TextConstant:"INS"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 1510 IF A$="MAX" THEN 1550
  Variable:A$
  TextConstant:"MAX"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 1520 IF A$="RUN" THEN 410
  Variable:A$
  TextConstant:"RUN"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 1530 PRINT CHR$(34);A$;CHR$(34);" IS AN ILLEGAL COMMAND--RETRY";
  NumericConstant:34
  FunctionChr
@@ -624,7 +624,7 @@
  Variable:T
  Variable:T
  NumericConstant:.5
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1640 GOTO 670
  LineNumber:670
@@ -637,7 +637,7 @@
  NumericConstant:1
  Variable:G
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1670 GOTO 1730
  LineNumber:1730
@@ -650,7 +650,7 @@
  NumericConstant:1
  Variable:S
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1700 GOTO 1730
  LineNumber:1730
@@ -663,7 +663,7 @@
  NumericConstant:1
  Variable:B
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 1730 GOTO 740
  LineNumber:740
@@ -674,7 +674,7 @@
  NumericConstant:1
  Variable:G
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
 1760 PRINT "GOLD MEDALS:";G(1)
  TextConstant:"GOLD MEDALS:"
  CarriageControl:;
@@ -685,7 +685,7 @@
  NumericConstant:1
  Variable:S
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
 1780 PRINT "SILVER MEDALS:";S(1)
  TextConstant:"SILVER MEDALS:"
  CarriageControl:;
@@ -696,7 +696,7 @@
  NumericConstant:1
  Variable:B
  NumericConstant:1
- BinaryOperator:<
+ BinaryOperatorLess:<
 1800 PRINT "BRONZE MEDALS:";B(1)
  TextConstant:"BRONZE MEDALS:"
  CarriageControl:;

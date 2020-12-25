@@ -51,39 +51,39 @@
  UnaryOperatorMinus:-
  Variable:X
  NumericConstant:1
- BinaryOperator:=
- BinaryOperator:*
+ BinaryOperatorEqual:=
+ BinaryOperatorMultiply:*
  Variable:X
  NumericConstant:3
- BinaryOperator:=
- BinaryOperator:-
+ BinaryOperatorEqual:=
+ BinaryOperatorMinus:-
  NumericConstant:4
  Variable:X
  NumericConstant:6
- BinaryOperator:=
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorEqual:=
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  NumericConstant:6
  Variable:X
  NumericConstant:4
- BinaryOperator:=
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorEqual:=
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  NumericConstant:7
  Variable:X
  NumericConstant:9
- BinaryOperator:=
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorEqual:=
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  NumericConstant:9
  Variable:X
  NumericConstant:7
- BinaryOperator:=
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorEqual:=
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  Variable:X
  UserFunction
- BinaryOperator:+
+ BinaryOperatorPlus:+
 25 DEF FNS(X)=-X*(X=2 OR X=5 OR X=8)
  UserFunctionName:FNS
  VariableName:X
@@ -91,27 +91,27 @@
  UnaryOperatorMinus:-
  Variable:X
  NumericConstant:2
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:X
  NumericConstant:5
- BinaryOperator:=
- BinaryOperator:OR
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
  Variable:X
  NumericConstant:8
- BinaryOperator:=
- BinaryOperator:OR
- BinaryOperator:*
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
+ BinaryOperatorMultiply:*
 30 DEF FNM(Y)=Y-INT(Y/10)*10
  UserFunctionName:FNM
  VariableName:Y
  Variable:Y
  Variable:Y
  NumericConstant:10
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  NumericConstant:10
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
 35 P$="X.O"
  Variable:P$
  TextConstant:"X.O"
@@ -154,11 +154,11 @@
 80 IF A$="Y" THEN 2000
  Variable:A$
  TextConstant:"Y"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 90 IF A$<>"N" THEN 50
  Variable:A$
  TextConstant:"N"
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 100 X=0: Y=0
  Variable:X
  NumericConstant:0
@@ -220,28 +220,28 @@
  Variable:M1
  Variable:M1
  FunctionInt
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:M2
  Variable:M2
  FunctionInt
- BinaryOperator:=
- BinaryOperator:AND
+ BinaryOperatorEqual:=
+ BinaryOperatorAnd:AND
  Variable:M1
  NumericConstant:0
- BinaryOperator:>
- BinaryOperator:AND
+ BinaryOperatorGreater:>
+ BinaryOperatorAnd:AND
  Variable:M1
  NumericConstant:10
- BinaryOperator:<
- BinaryOperator:AND
+ BinaryOperatorLess:<
+ BinaryOperatorAnd:AND
  Variable:M2
  NumericConstant:0
- BinaryOperator:>
- BinaryOperator:AND
+ BinaryOperatorGreater:>
+ BinaryOperatorAnd:AND
  Variable:M2
  NumericConstant:10
- BinaryOperator:<
- BinaryOperator:AND
+ BinaryOperatorLess:<
+ BinaryOperatorAnd:AND
 123 PRINT "ILLEGAL CO-ORDINATES."
  TextConstant:"ILLEGAL CO-ORDINATES."
  CarriageControl:NL
@@ -251,7 +251,7 @@
  Variable:M1
  Variable:S
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 140 PRINT "ILLEGAL MOVE.": GOTO 120
  TextConstant:"ILLEGAL MOVE."
  CarriageControl:NL
@@ -260,51 +260,51 @@
  Variable:M2
  Variable:S
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 160 IF M2-M1<>-3 AND S(M2)<>-1 THEN 140
  Variable:M2
  Variable:M1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:3
  UnaryOperatorMinus:-
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
  Variable:M2
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:<>
- BinaryOperator:AND
+ BinaryOperatorNotEqual:<>
+ BinaryOperatorAnd:AND
 170 IF M2>M1 THEN 140
  Variable:M2
  Variable:M1
- BinaryOperator:>
+ BinaryOperatorGreater:>
 180 IF M2-M1=-3 AND (S(M2)<>0) THEN 140
  Variable:M2
  Variable:M1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:3
  UnaryOperatorMinus:-
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:M2
  Variable:S
  NumericConstant:0
- BinaryOperator:<>
- BinaryOperator:AND
+ BinaryOperatorNotEqual:<>
+ BinaryOperatorAnd:AND
 185 IF M2-M1<-4 THEN 140
  Variable:M2
  Variable:M1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:4
  UnaryOperatorMinus:-
- BinaryOperator:<
+ BinaryOperatorLess:<
 186 IF M1=7 AND M2=3 THEN 140
  Variable:M1
  NumericConstant:7
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:M2
  NumericConstant:3
- BinaryOperator:=
- BinaryOperator:AND
+ BinaryOperatorEqual:=
+ BinaryOperatorAnd:AND
 190 S(M1)=0
  Variable:M1
  Variable:S
@@ -321,17 +321,17 @@
  NumericConstant:1
  Variable:S
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
  NumericConstant:2
  Variable:S
  NumericConstant:1
- BinaryOperator:=
- BinaryOperator:OR
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
  NumericConstant:3
  Variable:S
  NumericConstant:1
- BinaryOperator:=
- BinaryOperator:OR
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
 220 FOR I=1 TO 9
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -341,7 +341,7 @@
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:=
+ BinaryOperatorEqual:=
 222 NEXT I
  Variable:I
 223 GOTO 820
@@ -355,51 +355,51 @@
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 250 IF S(I+3)=0 THEN 350
  Variable:I
  NumericConstant:3
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:S
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 260 IF FNR(I)=I THEN 320
  Variable:I
  UserFunction
  Variable:I
- BinaryOperator:=
+ BinaryOperatorEqual:=
 270 IF I>3 THEN 300
  Variable:I
  NumericConstant:3
- BinaryOperator:>
+ BinaryOperatorGreater:>
 280 IF S(5)=1 THEN 350
  NumericConstant:5
  Variable:S
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 290 GOTO 330
  LineNumber:330
 300 IF S(8)=1 THEN 350
  NumericConstant:8
  Variable:S
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 310 GOTO 330
  LineNumber:330
 320 IF S(I+2)=1 OR S(I+4)=1 THEN 350
  Variable:I
  NumericConstant:2
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:S
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:I
  NumericConstant:4
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:S
  NumericConstant:1
- BinaryOperator:=
- BinaryOperator:OR
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
 330 NEXT I
  Variable:I
 340 GOTO 820
@@ -420,22 +420,22 @@
 380 T((J-1)*3+K)=B(I,(J-1)*3+4-K)
  Variable:J
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:3
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:K
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:T
  Variable:I
  Variable:J
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:3
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:4
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:K
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:B
  AssignmentOperator:=
 390 NEXT K
@@ -452,7 +452,7 @@
  Variable:I
  Variable:J
  Variable:B
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 430 NEXT J
  Variable:J
 440 R=0
@@ -470,7 +470,7 @@
  Variable:S
  Variable:J
  Variable:T
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 480 NEXT J
  Variable:J
 490 R=1
@@ -501,7 +501,7 @@
  Variable:I
  Variable:M
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 570 NEXT I
  Variable:I
 580 PRINT "I RESIGN."
@@ -514,9 +514,9 @@
  NumericConstant:1
  FunctionRnd
  NumericConstant:4
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
  AssignmentOperator:=
 601 IF M(X,Y)=0 THEN 600
@@ -524,11 +524,11 @@
  Variable:Y
  Variable:M
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 610 IF R<>0 THEN 630
  Variable:R
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 620 PRINT "I MOVE FROM ";STR$(INT(M(X,Y)/10));" TO ";STR$(FNM(M(X,Y)))
  TextConstant:"I MOVE FROM "
  CarriageControl:;
@@ -536,7 +536,7 @@
  Variable:Y
  Variable:M
  NumericConstant:10
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  FunctionStr
  CarriageControl:;
@@ -553,7 +553,7 @@
  Variable:Y
  Variable:M
  NumericConstant:10
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  Variable:S
  NumericConstant:0
@@ -576,7 +576,7 @@
  Variable:Y
  Variable:M
  NumericConstant:10
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  UserFunction
  FunctionStr
@@ -596,7 +596,7 @@
  Variable:Y
  Variable:M
  NumericConstant:10
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  UserFunction
  Variable:S
@@ -619,19 +619,19 @@
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:=
+ BinaryOperatorEqual:=
  NumericConstant:8
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:=
- BinaryOperator:OR
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
  NumericConstant:9
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:=
- BinaryOperator:OR
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
 650 FOR I=1 TO 9
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -640,7 +640,7 @@
  Variable:I
  Variable:S
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 670 NEXT I
  Variable:I
 680 GOTO 870
@@ -653,29 +653,29 @@
  Variable:I
  Variable:S
  NumericConstant:1
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 710 IF S(I-3)=0 THEN 120
  Variable:I
  NumericConstant:3
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:S
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 720 IF FNR(I)=I THEN 780
  Variable:I
  UserFunction
  Variable:I
- BinaryOperator:=
+ BinaryOperatorEqual:=
 730 IF I<7 THEN 760
  Variable:I
  NumericConstant:7
- BinaryOperator:<
+ BinaryOperatorLess:<
 740 IF S(5)=-1 THEN 120
  NumericConstant:5
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:=
+ BinaryOperatorEqual:=
 750 GOTO 790
  LineNumber:790
 760 IF S(2)=-1 THEN 120
@@ -683,25 +683,25 @@
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:=
+ BinaryOperatorEqual:=
 770 GOTO 790
  LineNumber:790
 780 IF S(I-2)=-1 OR S(I-4)=-1 THEN 120
  Variable:I
  NumericConstant:2
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:=
+ BinaryOperatorEqual:=
  Variable:I
  NumericConstant:4
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:S
  NumericConstant:1
  UnaryOperatorMinus:-
- BinaryOperator:=
- BinaryOperator:OR
+ BinaryOperatorEqual:=
+ BinaryOperatorOr:OR
 790 NEXT I
  Variable:I
 800 PRINT "YOU CAN'T MOVE, SO ";
@@ -722,7 +722,7 @@
  Variable:L
  Variable:L
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 850 PRINT "I HAVE WON";W;"AND YOU";L;"OUT OF";L+W;"GAMES."
  TextConstant:"I HAVE WON"
@@ -737,7 +737,7 @@
  CarriageControl:;
  Variable:L
  Variable:W
- BinaryOperator:+
+ BinaryOperatorPlus:+
  CarriageControl:;
  TextConstant:"GAMES."
  CarriageControl:NL
@@ -752,7 +752,7 @@
  Variable:W
  Variable:W
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 890 GOTO 850
  LineNumber:850
@@ -1081,14 +1081,14 @@
  Variable:P$
  Variable:I
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:3
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:J
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:S
  NumericConstant:2
- BinaryOperator:+
+ BinaryOperatorPlus:+
  NumericConstant:1
  FunctionMid
  CarriageControl:;

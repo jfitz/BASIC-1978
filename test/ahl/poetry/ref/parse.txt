@@ -100,7 +100,7 @@
 125 IF U=0 THEN 210
  Variable:U
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 126 PRINT "SIGN OF PARTING";:GOTO 210
  TextConstant:"SIGN OF PARTING"
  CarriageControl:;
@@ -134,12 +134,12 @@
 210 IF U=0 OR RND(1)>.19 THEN 212
  Variable:U
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
  NumericConstant:1
  FunctionRnd
  NumericConstant:.19
- BinaryOperator:>
- BinaryOperator:OR
+ BinaryOperatorGreater:>
+ BinaryOperatorOr:OR
 211 PRINT ",";:U=2
  TextConstant:","
  CarriageControl:;
@@ -150,14 +150,14 @@
  NumericConstant:1
  FunctionRnd
  NumericConstant:.65
- BinaryOperator:>
+ BinaryOperatorGreater:>
 213 PRINT " ";:U=U+1:GOTO 215
  TextConstant:" "
  CarriageControl:;
  Variable:U
  Variable:U
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  LineNumber:215
 214 PRINT : U=0
@@ -170,38 +170,38 @@
  NumericConstant:10
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  FunctionInt
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 220 J=J+1 : K=K+1
  Variable:J
  Variable:J
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  Variable:K
  Variable:K
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 230 IF U>0 OR INT(J/2)<>J/2 THEN 240
  Variable:U
  NumericConstant:0
- BinaryOperator:>
+ BinaryOperatorGreater:>
  Variable:J
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  Variable:J
  NumericConstant:2
- BinaryOperator:/
- BinaryOperator:<>
- BinaryOperator:OR
+ BinaryOperatorDivide:/
+ BinaryOperatorNotEqual:<>
+ BinaryOperatorOr:OR
 235 PRINT "     ";
  TextConstant:"     "
  CarriageControl:;
@@ -219,7 +219,7 @@
  CarriageControl:NL
  Variable:K
  NumericConstant:20
- BinaryOperator:>
+ BinaryOperatorGreater:>
 260 GOTO 215
  LineNumber:215
 270 PRINT : U=0 : K=0 : GOTO 110

@@ -56,7 +56,7 @@
  Variable:R
  Variable:R0
  Variable:H0
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 60 A=-3.425
  Variable:A
@@ -122,7 +122,7 @@
 135 IF Z$="YES" THEN 1150
  Variable:Z$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 140 PRINT
  CarriageControl:NL
 145 PRINT "LUNAR LANDING SIMULATION"
@@ -141,11 +141,11 @@
 170 IF Q$="YES" THEN 190
  Variable:Q$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 175 IF Q$="NO" THEN 205
  Variable:Q$
  TextConstant:"NO"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 180 PRINT "JUST ANSWER THE QUESTION, PLEASE, ";
  TextConstant:"JUST ANSWER THE QUESTION, PLEASE, "
  CarriageControl:;
@@ -176,11 +176,11 @@
 235 IF K=0 THEN 280
  Variable:K
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 240 IF K=1 THEN 250
  Variable:K
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 245 GOTO 220
  LineNumber:220
 250 Z=1852.8
@@ -228,11 +228,11 @@
 305 IF B1=3 THEN 670
  Variable:B1
  NumericConstant:3
- BinaryOperator:=
+ BinaryOperatorEqual:=
 310 IF Q$="YES" THEN 485
  Variable:Q$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 315 PRINT
  CarriageControl:NL
 320 PRINT "  YOU ARE ON A LUNAR LANDING MISSION.  AS THE PILOT OF"
@@ -362,7 +362,7 @@
 510 IF Q$="YES" THEN 535
  Variable:Q$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 515 PRINT "FOR EXAMPLE:"
  TextConstant:"FOR EXAMPLE:"
  CarriageControl:NL
@@ -421,35 +421,35 @@
  Variable:F
  Variable:F
  NumericConstant:100
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 595 IF T1<0 THEN 905
  Variable:T1
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
 600 IF T1=0 THEN 1090
  Variable:T1
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 605 IF ABS(F-.05)>1 THEN 945
  Variable:F
  NumericConstant:.05
- BinaryOperator:-
+ BinaryOperatorMinus:-
  FunctionAbs
  NumericConstant:1
- BinaryOperator:>
+ BinaryOperatorGreater:>
 610 IF ABS(F-.05)<.05 THEN 945
  Variable:F
  NumericConstant:.05
- BinaryOperator:-
+ BinaryOperatorMinus:-
  FunctionAbs
  NumericConstant:.05
- BinaryOperator:<
+ BinaryOperatorLess:<
 615 IF ABS(P)>180 THEN 925
  Variable:P
  FunctionAbs
  NumericConstant:180
- BinaryOperator:>
+ BinaryOperatorGreater:>
 620 N=20
  Variable:N
  NumericConstant:20
@@ -457,26 +457,26 @@
 625 IF T1<400 THEN 635
  Variable:T1
  NumericConstant:400
- BinaryOperator:<
+ BinaryOperatorLess:<
 630 N=T1/20
  Variable:N
  Variable:T1
  NumericConstant:20
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 635 T1=T1/N
  Variable:T1
  Variable:T1
  Variable:N
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 640 P=P*3.14159/180
  Variable:P
  Variable:P
  NumericConstant:3.14159
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:180
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 645 S=SIN(P)
  Variable:S
@@ -492,41 +492,41 @@
  Variable:M2
  Variable:M0
  Variable:T1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:F
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:B
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 660 R3=-.5*R0*((V0/R)^2)+R*A1*A1
  Variable:R3
  NumericConstant:.5
  UnaryOperatorMinus:-
  Variable:R0
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:V0
  Variable:R
- BinaryOperator:/
+ BinaryOperatorDivide:/
  NumericConstant:2
- BinaryOperator:^
- BinaryOperator:*
+ BinaryOperatorPower:^
+ BinaryOperatorMultiply:*
  Variable:R
  Variable:A1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:A1
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 665 A3=-2*R1*A1/R
  Variable:A3
  NumericConstant:2
  UnaryOperatorMinus:-
  Variable:R1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:A1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:R
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 670 FOR I=1 TO N
  control: Variable:I
@@ -535,32 +535,32 @@
 675 IF M1=0 THEN 715
  Variable:M1
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 680 M1=M1-M2
  Variable:M1
  Variable:M1
  Variable:M2
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 685 IF M1>0 THEN 725
  Variable:M1
  NumericConstant:0
- BinaryOperator:>
+ BinaryOperatorGreater:>
 690 F=F*(1+M1/M2)
  Variable:F
  Variable:F
  NumericConstant:1
  Variable:M1
  Variable:M2
- BinaryOperator:/
- BinaryOperator:+
- BinaryOperator:*
+ BinaryOperatorDivide:/
+ BinaryOperatorPlus:+
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
 695 M2=M1+M2
  Variable:M2
  Variable:M1
  Variable:M2
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 700 PRINT "YOU ARE OUT OF FUEL."
  TextConstant:"YOU ARE OUT OF FUEL."
@@ -584,8 +584,8 @@
  Variable:M
  NumericConstant:.5
  Variable:M2
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 730 R4=R3
  Variable:R4
@@ -596,39 +596,39 @@
  NumericConstant:.5
  UnaryOperatorMinus:-
  Variable:R0
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:V0
  Variable:R
- BinaryOperator:/
+ BinaryOperatorDivide:/
  NumericConstant:2
- BinaryOperator:^
- BinaryOperator:*
+ BinaryOperatorPower:^
+ BinaryOperatorMultiply:*
  Variable:R
  Variable:A1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:A1
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 740 R2=(3*R3-R4)/2+.00526*F1*F*C/M
  Variable:R2
  NumericConstant:3
  Variable:R3
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:R4
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  NumericConstant:.00526
  Variable:F1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:F
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:C
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:M
- BinaryOperator:/
- BinaryOperator:+
+ BinaryOperatorDivide:/
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 745 A4=A3
  Variable:A4
@@ -639,147 +639,147 @@
  NumericConstant:2
  UnaryOperatorMinus:-
  Variable:R1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:A1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:R
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 755 A2=(3*A3-A4)/2+.0056*F1*F*S/(M*R)
  Variable:A2
  NumericConstant:3
  Variable:A3
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:A4
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  NumericConstant:.0056
  Variable:F1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:F
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:S
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:M
  Variable:R
- BinaryOperator:*
- BinaryOperator:/
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorDivide:/
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 760 X=R1*T1+.5*R2*T1*T1
  Variable:X
  Variable:R1
  Variable:T1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:.5
  Variable:R2
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:T1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:T1
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 765 R=R+X
  Variable:R
  Variable:R
  Variable:X
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 770 H0=H0+X
  Variable:H0
  Variable:H0
  Variable:X
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 775 R1=R1+R2*T1
  Variable:R1
  Variable:R1
  Variable:R2
  Variable:T1
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 780 A=A+A1*T1+.5*A2*T1*T1
  Variable:A
  Variable:A
  Variable:A1
  Variable:T1
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  NumericConstant:.5
  Variable:A2
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:T1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:T1
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 785 A1=A1+A2*T1
  Variable:A1
  Variable:A1
  Variable:A2
  Variable:T1
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 790 M=M-.5*M2
  Variable:M
  Variable:M
  NumericConstant:.5
  Variable:M2
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 795 T=T+T1
  Variable:T
  Variable:T
  Variable:T1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 800 IF H0<3.287828E-04 THEN 810
  Variable:H0
  NumericConstant:3.287828E-04
- BinaryOperator:<
+ BinaryOperatorLess:<
 805 NEXT I
  Variable:I
 810 H=H0*Z
  Variable:H
  Variable:H0
  Variable:Z
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
 815 H1=R1*Z
  Variable:H1
  Variable:R1
  Variable:Z
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
 820 D=R0*A*Z
  Variable:D
  Variable:R0
  Variable:A
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:Z
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
 825 D1=R*A1*Z
  Variable:D1
  Variable:R
  Variable:A1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:Z
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
 830 T2=M1*B/M0
  Variable:T2
  Variable:M1
  Variable:B
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:M0
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 835 PRINT " ";T;TAB(10);H;TAB(23);D;
  TextConstant:" "
@@ -815,17 +815,17 @@
 845 IF H0<3.287828E-04 THEN 880
  Variable:H0
  NumericConstant:3.287828E-04
- BinaryOperator:<
+ BinaryOperatorLess:<
 850 IF R0*A>164.474 THEN 1050
  Variable:R0
  Variable:A
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:164.474
- BinaryOperator:>
+ BinaryOperatorGreater:>
 855 IF M1>0 THEN 580
  Variable:M1
  NumericConstant:0
- BinaryOperator:>
+ BinaryOperatorGreater:>
 860 T1=20
  Variable:T1
  NumericConstant:20
@@ -844,26 +844,26 @@
  Variable:R1
  NumericConstant:8.21957E-04
  UnaryOperatorMinus:-
- BinaryOperator:<
+ BinaryOperatorLess:<
 885 IF ABS(R*A1)>4.93174E-04 THEN 1020
  Variable:R
  Variable:A1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  FunctionAbs
  NumericConstant:4.93174E-04
- BinaryOperator:>
+ BinaryOperatorGreater:>
 890 IF H0<-3.287828E-04 THEN 1020
  Variable:H0
  NumericConstant:3.287828E-04
  UnaryOperatorMinus:-
- BinaryOperator:<
+ BinaryOperatorLess:<
 895 IF ABS(D)>10*Z THEN 1065
  Variable:D
  FunctionAbs
  NumericConstant:10
  Variable:Z
- BinaryOperator:*
- BinaryOperator:>
+ BinaryOperatorMultiply:*
+ BinaryOperatorGreater:>
 900 GOTO 995
  LineNumber:995
 905 PRINT
@@ -894,13 +894,13 @@
 955 IF F<0 THEN 985
  Variable:F
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
 960 IF F-.05<.05 THEN 975
  Variable:F
  NumericConstant:.05
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:.05
- BinaryOperator:<
+ BinaryOperatorLess:<
 965 PRINT "TOO LARGE"
  TextConstant:"TOO LARGE"
  CarriageControl:NL
@@ -948,14 +948,14 @@
  Variable:X1
  Variable:D1
  Variable:D1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:H1
  Variable:H1
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  FunctionSqr
  Variable:G3
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
 1040 PRINT "AT CONTACT YOU WERE TRAVELING";X1;N$;"/HR"
  TextConstant:"AT CONTACT YOU WERE TRAVELING"
@@ -985,7 +985,7 @@
  CarriageControl:;
  Variable:D
  Variable:G5
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionAbs
  CarriageControl:;
  Variable:N$
@@ -1009,11 +1009,11 @@
 1115 IF Z$="YES" THEN 20
  Variable:Z$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 1120 IF Z$="NO" THEN 1130
  Variable:Z$
  TextConstant:"NO"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 1125 GOTO 1105
  LineNumber:1105
 1130 PRINT
@@ -1052,7 +1052,7 @@
 1190 IF B1=1 THEN 205
  Variable:B1
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 1195 Q$="YES"
  Variable:Q$
  TextConstant:"YES"
@@ -1060,11 +1060,11 @@
 1200 IF B1=2 THEN 190
  Variable:B1
  NumericConstant:2
- BinaryOperator:=
+ BinaryOperatorEqual:=
 1205 IF B1=3 THEN 190
  Variable:B1
  NumericConstant:3
- BinaryOperator:=
+ BinaryOperatorEqual:=
 1210 GOTO 1165
  LineNumber:1165
 1215 END

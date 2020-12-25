@@ -95,7 +95,7 @@
 95 IF C<N THEN 100
  Variable:C
  Variable:N
- BinaryOperator:<
+ BinaryOperatorLess:<
 97 PRINT "YOU DID ALL THE WORDS!!": STOP
  TextConstant:"YOU DID ALL THE WORDS!!"
  CarriageControl:NL
@@ -105,16 +105,16 @@
  Variable:N
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  FunctionInt
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 110 IF U(Q)=1 THEN 100
  Variable:Q
  Variable:U
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 115 U(Q)=1: C=C+1: RESTORE: T1=0
  Variable:Q
  Variable:U
@@ -123,7 +123,7 @@
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  
  Variable:T1
@@ -163,10 +163,10 @@
  CarriageControl:;
  Variable:I
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  Variable:N$
  TextConstant:""
- BinaryOperator:=
+ BinaryOperatorEqual:=
 190 PRINT ",";: NEXT I
  TextConstant:","
  CarriageControl:;
@@ -195,12 +195,12 @@
  Variable:I
  Variable:N$
  TextConstant:""
- BinaryOperator:=
+ BinaryOperatorEqual:=
 230 IF G$=N$(I) THEN PRINT "YOU GUESSED THAT LETTER BEFORE!": GOTO 170
  Variable:G$
  Variable:I
  Variable:N$
- BinaryOperator:=
+ BinaryOperatorEqual:=
  TextConstant:"YOU GUESSED THAT LETTER BEFORE!"
  CarriageControl:NL
  LineNumber:170
@@ -217,7 +217,7 @@
  Variable:T1
  Variable:T1
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 260 FOR I=1 TO L: IF L$(I)=G$ THEN 280
  control: Variable:I
@@ -226,12 +226,12 @@
  Variable:I
  Variable:L$
  Variable:G$
- BinaryOperator:=
+ BinaryOperatorEqual:=
 270 NEXT I: IF R=0 THEN 290
  Variable:I
  Variable:R
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 275 GOTO 300
  LineNumber:300
 280 D$(I)=G$: R=R+1: GOTO 270
@@ -242,14 +242,14 @@
  Variable:R
  Variable:R
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  LineNumber:270
 290 M=M+1: GOTO 400
  Variable:M
  Variable:M
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  LineNumber:400
 300 FOR I=1 TO L: IF D$(I)="-" THEN 320
@@ -259,7 +259,7 @@
  Variable:I
  Variable:D$
  TextConstant:"-"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 310 NEXT I: GOTO 390
  Variable:I
  LineNumber:390
@@ -279,7 +279,7 @@
 340 IF A$=B$ THEN 360
  Variable:A$
  Variable:B$
- BinaryOperator:=
+ BinaryOperatorEqual:=
 350 PRINT "WRONG.  TRY ANOTHER LETTER.": PRINT: GOTO 170
  TextConstant:"WRONG.  TRY ANOTHER LETTER."
  CarriageControl:NL
@@ -296,7 +296,7 @@
  Variable:W$
  Variable:W$
  TextConstant:"YES"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 380 PRINT: PRINT "IT'S BEEN FUN!  BYE FOR NOW.": GOTO 999
  CarriageControl:NL
  TextConstant:"IT'S BEEN FUN!  BYE FOR NOW."
@@ -445,7 +445,7 @@
  Variable:I
  Variable:I
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:P$
  TextConstant:"\"
  AssignmentOperator:=
@@ -553,7 +553,7 @@
  CarriageControl:NL
  Variable:M
  NumericConstant:10
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 600 PRINT "SORRY, YOU LOSE.  THE WORD WAS ";A$
  TextConstant:"SORRY, YOU LOSE.  THE WORD WAS "
  CarriageControl:;
@@ -569,7 +569,7 @@
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 700 DATA "GUM","SIN","FOR","CRY","LUG","BYE","FLY"
  TextConstant:"GUM"
  TextConstant:"SIN"

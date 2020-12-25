@@ -44,7 +44,7 @@
  Variable:E
  Variable:H
  Variable:S
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 110 Y=3: A=H/Y: I=5: Q=1
  Variable:Y
@@ -53,7 +53,7 @@
  Variable:A
  Variable:H
  Variable:Y
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
  Variable:I
  NumericConstant:5
@@ -73,7 +73,7 @@
  Variable:Z
  Variable:Z
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 217 PRINT "IN YEAR";Z;",";D;"PEOPLE STARVED,";I;"CAME TO THE CITY,"
  TextConstant:"IN YEAR"
@@ -94,17 +94,17 @@
  Variable:P
  Variable:P
  Variable:I
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 227 IF Q>0 THEN 230
  Variable:Q
  NumericConstant:0
- BinaryOperator:>
+ BinaryOperatorGreater:>
 228 P=INT(P/2)
  Variable:P
  Variable:P
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  AssignmentOperator:=
 229 PRINT "A HORRIBLE PLAGUE STRUCK!  HALF THE PEOPLE DIED."
@@ -147,19 +147,19 @@
 270 IF Z=11 THEN 860
  Variable:Z
  NumericConstant:11
- BinaryOperator:=
+ BinaryOperatorEqual:=
 310 C=INT(10*RND(1)): Y=C+17
  Variable:C
  NumericConstant:10
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  FunctionInt
  AssignmentOperator:=
  Variable:Y
  Variable:C
  NumericConstant:17
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 312 PRINT "LAND IS TRADING AT";Y;"BUSHELS PER ACRE."
  TextConstant:"LAND IS TRADING AT"
@@ -175,13 +175,13 @@
  Variable:Q
  Variable:Q
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
 322 IF Y*Q<=S THEN 330
  Variable:Y
  Variable:Q
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:S
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
 323 GOSUB 710
  LineNumber:710
 324 GOTO 320
@@ -189,19 +189,19 @@
 330 IF Q=0 THEN 340
  Variable:Q
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 331 A=A+Q: S=S-Y*Q: C=0
  Variable:A
  Variable:A
  Variable:Q
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  Variable:S
  Variable:S
  Variable:Y
  Variable:Q
- BinaryOperator:*
- BinaryOperator:-
+ BinaryOperatorMultiply:*
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  Variable:C
  NumericConstant:0
@@ -215,11 +215,11 @@
  Variable:Q
  Variable:Q
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
 342 IF Q<A THEN 350
  Variable:Q
  Variable:A
- BinaryOperator:<
+ BinaryOperatorLess:<
 343 GOSUB 720
  LineNumber:720
 344 GOTO 340
@@ -228,14 +228,14 @@
  Variable:A
  Variable:A
  Variable:Q
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  Variable:S
  Variable:S
  Variable:Y
  Variable:Q
- BinaryOperator:*
- BinaryOperator:+
+ BinaryOperatorMultiply:*
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  Variable:C
  NumericConstant:0
@@ -250,13 +250,13 @@
 412 IF Q<0 THEN 850
  Variable:Q
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
 418 REM *** TRYING TO USE MORE GRAIN THAN IS IN SILOS?
  Remark:*** TRYING TO USE MORE GRAIN THAN IS IN SILOS?
 420 IF Q<=S THEN 430
  Variable:Q
  Variable:S
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
 421 GOSUB 710
  LineNumber:710
 422 GOTO 410
@@ -265,7 +265,7 @@
  Variable:S
  Variable:S
  Variable:Q
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  Variable:C
  NumericConstant:1
@@ -278,17 +278,17 @@
  Variable:D
  Variable:D
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 442 IF D<0 THEN 850
  Variable:D
  NumericConstant:0
- BinaryOperator:<
+ BinaryOperatorLess:<
 444 REM *** TRYING TO PLANT MORE ACRES THAN YOU OWN?
  Remark:*** TRYING TO PLANT MORE ACRES THAN YOU OWN?
 445 IF D<=A THEN 450
  Variable:D
  Variable:A
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
 446 GOSUB 720
  LineNumber:720
 447 GOTO 440
@@ -298,10 +298,10 @@
 450 IF INT(D/2)<=S THEN 455
  Variable:D
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  Variable:S
- BinaryOperator:<=
+ BinaryOperatorLessEqual:<=
 452 GOSUB 710
  LineNumber:710
 453 GOTO 440
@@ -312,8 +312,8 @@
  Variable:D
  NumericConstant:10
  Variable:P
- BinaryOperator:*
- BinaryOperator:<
+ BinaryOperatorMultiply:*
+ BinaryOperatorLess:<
 460 PRINT "BUT YOU HAVE ONLY";P;"PEOPLE TO TEND THE FIELDS!  NOW THEN,"
  TextConstant:"BUT YOU HAVE ONLY"
  CarriageControl:;
@@ -328,9 +328,9 @@
  Variable:S
  Variable:D
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 511 GOSUB 800
  LineNumber:800
@@ -343,7 +343,7 @@
  Variable:H
  Variable:D
  Variable:Y
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  AssignmentOperator:=
  Variable:E
  NumericConstant:0
@@ -353,28 +353,28 @@
 522 IF INT(C/2)<>C/2 THEN 530
  Variable:C
  NumericConstant:2
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  Variable:C
  NumericConstant:2
- BinaryOperator:/
- BinaryOperator:<>
+ BinaryOperatorDivide:/
+ BinaryOperatorNotEqual:<>
 523 REM *** RATS ARE RUNNING WILD!!
  Remark:*** RATS ARE RUNNING WILD!!
 525 E=INT(S/C)
  Variable:E
  Variable:S
  Variable:C
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  AssignmentOperator:=
 530 S=S-E+H
  Variable:S
  Variable:S
  Variable:E
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:H
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 531 GOSUB 800
  LineNumber:800
@@ -385,16 +385,16 @@
  Variable:C
  NumericConstant:20
  Variable:A
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:S
- BinaryOperator:+
- BinaryOperator:*
+ BinaryOperatorPlus:+
+ BinaryOperatorMultiply:*
  Variable:P
- BinaryOperator:/
+ BinaryOperatorDivide:/
  NumericConstant:100
- BinaryOperator:/
+ BinaryOperatorDivide:/
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  FunctionInt
  AssignmentOperator:=
 539 REM *** HOW MANY PEOPLE HAD FULL TUMMIES?
@@ -403,7 +403,7 @@
  Variable:C
  Variable:Q
  NumericConstant:20
- BinaryOperator:/
+ BinaryOperatorDivide:/
  FunctionInt
  AssignmentOperator:=
 541 REM *** HORROS, A 15% CHANCE OF PLAGUE
@@ -414,44 +414,44 @@
  NumericConstant:2
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:.3
- BinaryOperator:-
- BinaryOperator:*
+ BinaryOperatorMinus:-
+ BinaryOperatorMultiply:*
  FunctionInt
  AssignmentOperator:=
 550 IF P<C THEN 210
  Variable:P
  Variable:C
- BinaryOperator:<
+ BinaryOperatorLess:<
 551 REM *** STARVE ENOUGH FOR IMPEACHMENT?
  Remark:*** STARVE ENOUGH FOR IMPEACHMENT?
 552 D=P-C: IF D>.45*P THEN 560
  Variable:D
  Variable:P
  Variable:C
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
  Variable:D
  NumericConstant:.45
  Variable:P
- BinaryOperator:*
- BinaryOperator:>
+ BinaryOperatorMultiply:*
+ BinaryOperatorGreater:>
 553 P1=((Z-1)*P1+D*100/P)/Z
  Variable:P1
  Variable:Z
  NumericConstant:1
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:P1
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:D
  NumericConstant:100
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:P
- BinaryOperator:/
- BinaryOperator:+
+ BinaryOperatorDivide:/
+ BinaryOperatorPlus:+
  Variable:Z
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 555 P=C: D1=D1+D: GOTO 215
  Variable:P
@@ -460,7 +460,7 @@
  Variable:D1
  Variable:D1
  Variable:D
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
  LineNumber:215
 560 PRINT: PRINT "YOU STARVED";D;"PEOPLE IN ONE YEAR!!!"
@@ -505,10 +505,10 @@
  NumericConstant:1
  FunctionRnd
  NumericConstant:5
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  FunctionInt
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 801 RETURN
  
@@ -539,7 +539,7 @@
  Variable:L
  Variable:A
  Variable:P
- BinaryOperator:/
+ BinaryOperatorDivide:/
  AssignmentOperator:=
 870 PRINT "YOU STARTED WITH 10 ACRES PER PERSON AND ENDED WITH"
  TextConstant:"YOU STARTED WITH 10 ACRES PER PERSON AND ENDED WITH"
@@ -553,27 +553,27 @@
 880 IF P1>33 THEN 565
  Variable:P1
  NumericConstant:33
- BinaryOperator:>
+ BinaryOperatorGreater:>
 885 IF L<7 THEN 565
  Variable:L
  NumericConstant:7
- BinaryOperator:<
+ BinaryOperatorLess:<
 890 IF P1>10 THEN 940
  Variable:P1
  NumericConstant:10
- BinaryOperator:>
+ BinaryOperatorGreater:>
 892 IF L<9 THEN 940
  Variable:L
  NumericConstant:9
- BinaryOperator:<
+ BinaryOperatorLess:<
 895 IF P1>3 THEN 960
  Variable:P1
  NumericConstant:3
- BinaryOperator:>
+ BinaryOperatorGreater:>
 896 IF L<10 THEN 960
  Variable:L
  NumericConstant:10
- BinaryOperator:<
+ BinaryOperatorLess:<
 900 PRINT "A FANTASTIC PERFORMANCE!!!  CHARLEMANGE, DISRAELI, AND"
  TextConstant:"A FANTASTIC PERFORMANCE!!!  CHARLEMANGE, DISRAELI, AND"
  CarriageControl:NL
@@ -599,10 +599,10 @@
  CarriageControl:;
  Variable:P
  NumericConstant:.8
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:1
  FunctionRnd
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  FunctionInt
  CarriageControl:;
  TextConstant:"PEOPLE"

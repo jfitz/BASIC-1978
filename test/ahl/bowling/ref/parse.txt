@@ -40,11 +40,11 @@
 900 IF Z$="Y" THEN 990
  Variable:Z$
  TextConstant:"Y"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 960 IF Z$="N" THEN 1530
  Variable:Z$
  TextConstant:"N"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 990 PRINT "THE GAME OF BOWLING TAKES MIND AND SKILL.DURING THE GAME"
  TextConstant:"THE GAME OF BOWLING TAKES MIND AND SKILL.DURING THE GAME"
  CarriageControl:NL
@@ -142,7 +142,7 @@
  NumericConstant:1
  FunctionRnd
  NumericConstant:100
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  FunctionInt
  AssignmentOperator:=
 3060 FOR J=1 TO 10
@@ -153,16 +153,16 @@
  Variable:X
  NumericConstant:15
  Variable:J
- BinaryOperator:*
- BinaryOperator:<
+ BinaryOperatorMultiply:*
+ BinaryOperatorLess:<
 3240 NEXT J
  Variable:J
 3330 C(15*J-X)=1
  NumericConstant:15
  Variable:J
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:X
- BinaryOperator:-
+ BinaryOperatorMinus:-
  Variable:C
  NumericConstant:1
  AssignmentOperator:=
@@ -192,18 +192,18 @@
 3870 FOR J=1 TO 4-I
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:4", "Variable:I", "BinaryOperator:-"]
+ end:     ["NumericConstant:4", "Variable:I", "BinaryOperatorMinus:-"]
 3960 K=K+1
  Variable:K
  Variable:K
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 4050 IF C(K)=1 THEN 4320
  Variable:K
  Variable:C
  NumericConstant:1
- BinaryOperator:=
+ BinaryOperatorEqual:=
 4140 PRINT TAB(I);"+ ";
  Variable:I
  FunctionTab
@@ -236,27 +236,27 @@
  Variable:D
  Variable:I
  Variable:C
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 4950 NEXT I
  Variable:I
 5040 IF D-M <> 0 THEN 5220
  Variable:D
  Variable:M
- BinaryOperator:-
+ BinaryOperatorMinus:-
  NumericConstant:0
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
 5130 PRINT "GUTTER!!"
  TextConstant:"GUTTER!!"
  CarriageControl:NL
 5220 IF B<>1 OR D<>10 THEN 5490
  Variable:B
  NumericConstant:1
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
  Variable:D
  NumericConstant:10
- BinaryOperator:<>
- BinaryOperator:OR
+ BinaryOperatorNotEqual:<>
+ BinaryOperatorOr:OR
 5310 PRINT "STRIKE!!!!!"
  TextConstant:"STRIKE!!!!!"
  CarriageControl:NL
@@ -267,11 +267,11 @@
 5490 IF B<>2 OR D<>10 THEN 5760
  Variable:B
  NumericConstant:2
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
  Variable:D
  NumericConstant:10
- BinaryOperator:<>
- BinaryOperator:OR
+ BinaryOperatorNotEqual:<>
+ BinaryOperatorOr:OR
 5580 PRINT "SPARE!!!!"
  TextConstant:"SPARE!!!!"
  CarriageControl:NL
@@ -282,11 +282,11 @@
 5760 IF B<>2 OR D>=10 THEN 6030
  Variable:B
  NumericConstant:2
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
  Variable:D
  NumericConstant:10
- BinaryOperator:>=
- BinaryOperator:OR
+ BinaryOperatorGreaterEqual:>=
+ BinaryOperatorOr:OR
 5850 PRINT "ERROR!!!"
  TextConstant:"ERROR!!!"
  CarriageControl:NL
@@ -297,11 +297,11 @@
 6030 IF B<>1 OR D>=10 THEN 6210
  Variable:B
  NumericConstant:1
- BinaryOperator:<>
+ BinaryOperatorNotEqual:<>
  Variable:D
  NumericConstant:10
- BinaryOperator:>=
- BinaryOperator:OR
+ BinaryOperatorGreaterEqual:>=
+ BinaryOperatorOr:OR
 6120 PRINT "ROLL YOUR 2ND BALL"
  TextConstant:"ROLL YOUR 2ND BALL"
  CarriageControl:NL
@@ -312,7 +312,7 @@
 6390 A(F*P,B)=D
  Variable:F
  Variable:P
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:B
  Variable:A
  Variable:D
@@ -320,7 +320,7 @@
 6480 IF B=2 THEN 7020
  Variable:B
  NumericConstant:2
- BinaryOperator:=
+ BinaryOperatorEqual:=
 6570 B=2
  Variable:B
  NumericConstant:2
@@ -332,25 +332,25 @@
 6750 IF Q=3 THEN 6210
  Variable:Q
  NumericConstant:3
- BinaryOperator:=
+ BinaryOperatorEqual:=
 6840 A(F*P,B)=D-M
  Variable:F
  Variable:P
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:B
  Variable:A
  Variable:D
  Variable:M
- BinaryOperator:-
+ BinaryOperatorMinus:-
  AssignmentOperator:=
 6930 IF Q=0 THEN 2520
  Variable:Q
  NumericConstant:0
- BinaryOperator:=
+ BinaryOperatorEqual:=
 7020 A(F*P,3)=Q
  Variable:F
  Variable:P
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  NumericConstant:3
  Variable:A
  Variable:Q
@@ -361,12 +361,12 @@
  Variable:F
  Variable:F
  NumericConstant:1
- BinaryOperator:+
+ BinaryOperatorPlus:+
  AssignmentOperator:=
 7290 IF F<11 THEN 2070
  Variable:F
  NumericConstant:11
- BinaryOperator:<
+ BinaryOperatorLess:<
 7295 PRINT "FRAMES"
  TextConstant:"FRAMES"
  CarriageControl:NL
@@ -398,7 +398,7 @@
 8010 PRINT A(J*P,I);
  Variable:J
  Variable:P
- BinaryOperator:*
+ BinaryOperatorMultiply:*
  Variable:I
  Variable:A
  CarriageControl:;
@@ -424,7 +424,7 @@
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
- BinaryOperator:=
+ BinaryOperatorEqual:=
 8730 END
  
 
