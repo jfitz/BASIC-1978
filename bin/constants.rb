@@ -508,6 +508,14 @@ class NumericConstant < AbstractValueElement
     @value <= other.to_v
   end
 
+  def b_and(other)
+    BooleanConstant.new(to_b && other.to_b)
+  end
+
+  def b_or(other)
+    BooleanConstant.new(to_b || other.to_b)
+  end
+
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
 
@@ -815,6 +823,14 @@ class IntegerConstant < AbstractValueElement
     @value <= other.to_v
   end
 
+  def b_and(other)
+    BooleanConstant.new(to_b && other.to_b)
+  end
+
+  def b_or(other)
+    BooleanConstant.new(to_b || other.to_b)
+  end
+
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
 
@@ -1067,6 +1083,14 @@ class TextConstant < AbstractValueElement
 
   def <=(other)
     @value <= other.to_v
+  end
+
+  def b_and(other)
+    BooleanConstant.new(to_b && other.to_b)
+  end
+
+  def b_or(other)
+    BooleanConstant.new(to_b || other.to_b)
   end
 
   def +(other)
