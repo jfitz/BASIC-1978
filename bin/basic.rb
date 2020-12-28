@@ -472,7 +472,7 @@ def make_command_tokenbuilders(quotes, long_names)
     DEFAULT_PROMPT DETECT_INFINITE_LOOP
     ECHO FIELD_SEP FORGET_FORNEXT HEADING
     IF IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON
-    INT_FLOOR LOCK_FORNEXT LONG_NAMES MAX_LINE_NUM MIN_LINE_NUM
+    INT_BITWISE INT_FLOOR LOCK_FORNEXT LONG_NAMES MAX_LINE_NUM MIN_LINE_NUM
     NEWLINE_SPEED
     PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
     QMARK_AFTER_PROMPT RANDOMIZE REQUIRE_INITIALIZED RESPECT_RANDOMIZE
@@ -566,6 +566,7 @@ OptionParser.new do |opt|
   opt.on('--ignore-randomize') { |o| options[:ignore_randomize] = o }
   opt.on('--ignore-rnd-arg') { |o| options[:ignore_rnd_arg] = o }
   opt.on('--implied-semicolon') { |o| options[:implied_semicolon] = o }
+  opt.on('--no-int-bitwise') { |o| options[:no_int_bitwise] = o }
   opt.on('--int-floor') { |o| options[:int_floor] = o }
   opt.on('--lock-fornext') { |o| options[:lock_fornext] = o }
   opt.on('--long-names') { |o| options[:long_names] = o }
@@ -645,6 +646,7 @@ $options['ignore_rnd_arg'] =
 $options['implied_semicolon'] =
   Option.new(boolean, options.key?(:implied_semicolon))
 
+$options['int_bitwise'] = Option.new(boolean, !options.key?(:no_int_bitwose))
 $options['int_floor'] = Option.new(boolean, options.key?(:int_floor))
 
 $options['lock_fornext'] =

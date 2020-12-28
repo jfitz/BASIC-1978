@@ -824,11 +824,19 @@ class IntegerConstant < AbstractValueElement
   end
 
   def b_and(other)
-    BooleanConstant.new(to_b && other.to_b)
+    if other.content_type == :integer && $options['int_bitwise'].value
+      IntegerConstant.new(to_i & other.to_i)
+    else
+      BooleanConstant.new(to_b && other.to_b)
+    end
   end
 
   def b_or(other)
-    BooleanConstant.new(to_b || other.to_b)
+    if other.content_type == :integer && $options['int_bitwise'].value
+      IntegerConstant.new(to_i | other.to_i)
+    else
+      BooleanConstant.new(to_b || other.to_b)
+    end
   end
 
   def +(other)
