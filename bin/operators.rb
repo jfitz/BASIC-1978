@@ -863,7 +863,7 @@ class BinaryOperatorPlus < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -929,7 +929,7 @@ class BinaryOperatorMinus < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -995,7 +995,7 @@ class BinaryOperatorMultiply < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1061,7 +1061,7 @@ class BinaryOperatorDivide < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1128,7 +1128,7 @@ class BinaryOperatorPower < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1194,7 +1194,7 @@ class BinaryOperatorEqual < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1261,7 +1261,7 @@ class BinaryOperatorNotEqual < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1327,7 +1327,7 @@ class BinaryOperatorLess < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1394,7 +1394,7 @@ class BinaryOperatorLessEqual < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1460,7 +1460,7 @@ class BinaryOperatorGreater < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1527,7 +1527,7 @@ class BinaryOperatorGreaterEqual < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1593,7 +1593,7 @@ class BinaryOperatorAnd < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)
@@ -1659,7 +1659,7 @@ class BinaryOperatorOr < BinaryOperator
     y = stack.pop
     x = stack.pop
 
-    base = interpreter.base
+    base = $options['base'].value
 
     if x.matrix? && y.matrix?
       matrix_matrix(x, y)

@@ -296,7 +296,7 @@ class FunctionAsc < AbstractScalarFunction
       value = text[0].ord
 
       raise BASICRuntimeError.new(:te_val_out, @name) unless
-        value.between?(32, 126) || interpreter.asc_allow_all
+        value.between?(32, 126) || $options['asc_allow_all'].value
 
       token = NumericConstantToken.new(value.to_s)
       NumericConstant.new(token)
@@ -382,7 +382,7 @@ class FunctionChr < AbstractScalarFunction
       value = args[0].to_i
 
       raise BASICRuntimeError.new(:te_val_out, @name) unless
-        value.between?(32, 126) || interpreter.chr_allow_all
+        value.between?(32, 126) || $options['chr_allow_all'].value
 
       text = value.chr
       quoted = '"' + text + '"'
@@ -733,9 +733,9 @@ class FunctionInt < AbstractScalarFunction
   def evaluate(interpreter, stack)
     args = stack.pop
     if match_args_to_signature(args, @signature_1)
-      interpreter.int_floor? ? args[0].floor : args[0].truncate
+      $options['int_floor'].value ? args[0].floor : args[0].truncate
     elsif match_args_to_signature(args, @signature_2)
-      interpreter.int_floor? ? args[0].to_numeric.floor : args[0].to_numeric.truncate
+      $options['int_floor'].value ? args[0].to_numeric.floor : args[0].to_numeric.truncate
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
     end

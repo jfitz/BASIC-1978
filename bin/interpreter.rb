@@ -1464,24 +1464,4 @@ class Interpreter
 
     fh
   end
-
-  def int_floor?
-    $options['int_floor'].value
-  end
-
-  def base
-    $options['base'].value
-  end
-
-  def no_extend_if
-    $options['no_extend_if'].value
-  end
-
-  def asc_allow_all
-    $options['asc_allow_all'].value
-  end
-
-  def chr_allow_all
-    $options['chr_allow_all'].value
-  end
 end

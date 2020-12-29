@@ -2683,7 +2683,7 @@ class AbstractIfStatement < AbstractStatement
         interpreter.next_line_index = destination
       end
 
-      if !@statement.nil? && !@else_stmt.nil? && !interpreter.no_extend_if
+      if !@statement.nil? && !@else_stmt.nil? && $options['extend_if'].value
         # go to next numbered line, not next statement
         next_line_index = interpreter.find_next_line
         interpreter.next_line_index = next_line_index
@@ -2699,7 +2699,7 @@ class AbstractIfStatement < AbstractStatement
         interpreter.next_line_index = destination
       end
 
-      if @else_dest.nil? && @else_stmt.nil? && !interpreter.no_extend_if
+      if @else_dest.nil? && @else_stmt.nil? && $options['extend_if'].value
         # go to next numbered line, not next statement
         next_line_index = interpreter.find_next_line
         interpreter.next_line_index = next_line_index
@@ -4123,7 +4123,7 @@ class ArrInputStatement < AbstractStatement
         raise(BASICExpressionError, 'Not an array') unless dims.size == 1
 
         # build names
-        base = interpreter.base
+        base = $options['base'].value
         (base..dims[0].to_i).each do |col|
           coord = AbstractElement.make_coord(col)
           variable = Variable.new(name, :array, coord)
@@ -4395,7 +4395,7 @@ class ArrReadStatement < AbstractStatement
   def read_array(name, dims, interpreter, ds)
     values = {}
 
-    base = interpreter.base
+    base = $options['base'].value
     (base..dims[0].to_i).each do |col|
       coord = AbstractElement.make_coord(col)
       values[coord] = ds.read
@@ -4653,7 +4653,7 @@ class MatInputStatement < AbstractStatement
 
         # build names
         if dims.size == 1
-          base = interpreter.base
+          base = $options['base'].value
           (base..dims[0].to_i).each do |col|
             coord = AbstractElement.make_coord(col)
             variable = Variable.new(name, :matrix, coord)
@@ -4662,7 +4662,7 @@ class MatInputStatement < AbstractStatement
         end
 
         if dims.size == 2
-          base = interpreter.base
+          base = $options['base'].value
           (base..dims[0].to_i).each do |row|
             (base..dims[1].to_i).each do |col|
               coords = AbstractElement.make_coords(row, col)
