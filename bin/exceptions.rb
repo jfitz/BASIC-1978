@@ -83,7 +83,8 @@ $error_codes = {
   te_few_fmt: 145,
   te_func_no: 150,
   te_func_alr: 152,
-  te_no_chain: 160
+  te_no_chain: 160,
+  te_option_no_run: 160
 }
 
 $error_messages = {
@@ -135,5 +136,6 @@ $error_messages = {
   te_few_fmt: 'Too few items for USING',
   te_func_no: 'Function not defined',
   te_func_alr: 'Function already defined',
-  te_no_chain: 'Cannot chain to file'
+  te_no_chain: 'Cannot chain to file',
+  te_option_no_run: 'Cannot set option'
 }

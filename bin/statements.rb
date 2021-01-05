@@ -3457,18 +3457,7 @@ class OptionStatement < AbstractStatement
   end
 
   def self.extra_keywords
-    %w[
-      ASC_ALLOW_ALL
-      BACK_TAB BASE
-      CHR_ALLOW_ALL
-      DEFAULT_PROMPT DETECT_INFINITE_LOOP
-      ECHO FIELD_SEP FORGET_FORNEXT
-      IGNORE_RND_ARG IMPLIED_SEMICOLON
-      INT_BITWISE INT_FLOOR LOCK_FORNEXT NEWLINE_SPEED
-      PRECISION PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
-      QMARK_AFTER_PROMPT REQUIRE_INITIALIZED
-      SEMICOLON_ZONE_WIDTH TRACE ZONE_WIDTH
-    ]
+    $options.keys.map(&:upcase)
   end
 
   def initialize(_, keywords, tokens_lists)
@@ -3479,12 +3468,17 @@ class OptionStatement < AbstractStatement
     template = [OptionStatement.extra_keywords, [1, '>=']]
 
     if check_template(tokens_lists, template)
-      @key = tokens_lists[0].to_s.downcase
+      kwd = tokens_lists[0].to_s.upcase
+      @key = kwd.downcase
 
-      expression_tokens = split_tokens(tokens_lists[1], true)
-      @expression = ValueExpression.new(expression_tokens[0], :scalar)
-      @elements = make_references(nil, @expression)
-      @comprehension_effort += @expression.comprehension_effort
+      if $options[@key].types.include?(:runtime)
+        expression_tokens = split_tokens(tokens_lists[1], true)
+        @expression = ValueExpression.new(expression_tokens[0], :scalar)
+        @elements = make_references(nil, @expression)
+        @comprehension_effort += @expression.comprehension_effort
+      else
+        @errors << 'Cannot set option ' + kwd
+      end
     else
       @errors << 'Syntax error'
     end
