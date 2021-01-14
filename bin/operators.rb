@@ -12,16 +12,15 @@ class UnaryOperator < AbstractElement
 
   def initialize(text)
     super()
+
     @op = text.to_s
-    @content_types = { '#' => :filehandle, ':' => :filehandle, 'NOT' => :boolean }
-    @content_type = @content_types[@op]
-    @content_type = :unknown if @content_type.nil?
+    @content_type = :unknown
     @arguments = nil
     @operator = true
   end
 
   def set_arguments(stack)
-    raise(BASICExpressionError, 'Bad expression') if stack.size < 1
+    raise(BASICExpressionError, 'Not enough operands') if stack.empty?
 
     @arguments = stack.slice(-1, 1)
     pop_stack(stack)
@@ -81,21 +80,15 @@ class BinaryOperator < AbstractElement
 
   def initialize(text)
     super()
+
     @op = text.to_s
-    @content_types = {
-      '=' => :boolean, '<>' => :boolean, '#' => :boolean,
-      '>' => :boolean, '>=' => :boolean, '=>' => :boolean,
-      '<' => :boolean, '<=' => :boolean, '=<' => :boolean,
-      'AND' => :boolean, 'OR' => :boolean
-    }
-    @content_type = @content_types[@op]
-    @content_type = :unknown if @content_type.nil?
+    @content_type = :unknown
     @arguments = nil
     @operator = true
   end
 
   def set_arguments(stack)
-    raise(BASICExpressionError, 'Bad expression') if stack.size < 2
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
 
     @arguments = stack.slice(-2, 2)
     pop_stack(stack)
@@ -277,6 +270,18 @@ class BinaryOperator < AbstractElement
     values = add_matrix_matrix_2(a, b) if a_dims.size == 2
 
     Matrix.new(a_dims, values)
+  end
+
+  def result_type(type1, type2)
+    return type1 if type1 == type2
+
+    return :numeric if type1 == :numeric
+    return :numeric if type2 == :numeric
+
+    return :integer if type1 == :integer
+    return :integer if type2 == :integer
+
+    return :boolean
   end
 
   def subtract_matrix_matrix_1(a, b)
@@ -560,7 +565,8 @@ end
 # not a real operator, used only for parsing
 class InitialOperator < AbstractElement
   def initialize
-    super()
+    super
+
     @operator = true
     @terminal = true
     @precedence = 0
@@ -575,7 +581,8 @@ end
 # not a real operator, used only for parsing
 class TerminalOperator < AbstractElement
   def initialize
-    super()
+    super
+
     @operator = true
     @terminal = true
     @precedence = 0
@@ -596,6 +603,19 @@ class UnaryOperatorPlus < UnaryOperator
     super
 
     @precedence = 6
+  end
+
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.empty?
+
+    type = stack.pop
+
+    arg_types = [:numeric, :integer]
+    
+    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
+      !arg_types.include?(type)
+    
+    @content_type = type
   end
 
   def evaluate(_, stack)
@@ -689,6 +709,19 @@ class UnaryOperatorMinus < UnaryOperator
     super
 
     @precedence = 6
+  end
+
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.empty?
+
+    type = stack.pop
+
+    arg_types = [:numeric, :integer]
+    
+    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
+      !arg_types.include?(type)
+    
+    @content_type = type
   end
 
   def evaluate(_, stack)
@@ -789,6 +822,19 @@ class UnaryOperatorHash < UnaryOperator
     true
   end
 
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.empty?
+
+    type = stack.pop
+
+    arg_types = [:numeric, :integer]
+    
+    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
+      !arg_types.include?(type)
+    
+    @content_type = type
+  end
+
   def evaluate(_, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.empty?
 
@@ -825,6 +871,21 @@ class UnaryOperatorNot < UnaryOperator
     true
   end
 
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.empty?
+
+    type = stack.pop
+
+    arg_types = [:numeric, :integer, :boolean, :string]
+    
+    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
+      !arg_types.include?(type)
+    
+    @content_type = :boolean
+    @content_type = :integer if
+      type == :integer && $options['int_bitwise'].value
+  end
+
   def evaluate(_, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.empty?
 
@@ -833,7 +894,11 @@ class UnaryOperatorNot < UnaryOperator
     if x.matrix?
     elsif x.array?
     else
-      opposite(x)
+      if x.content_type == :integer
+        bitwise_not(x)
+      else
+        opposite(x)
+      end
     end
   end
 
@@ -842,6 +907,11 @@ class UnaryOperatorNot < UnaryOperator
   def opposite(a)
     b = a.to_b
     BooleanConstant.new(!b)
+  end
+
+  def bitwise_not(a)
+    b = ~a.to_i
+    IntegerConstant.new(b)
   end
 end
 
@@ -855,6 +925,21 @@ class BinaryOperatorPlus < BinaryOperator
     super
 
     @precedence = 4
+  end
+
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer, :string]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = result_type(a_type, b_type)
   end
 
   def evaluate(interpreter, stack)
@@ -923,6 +1008,21 @@ class BinaryOperatorMinus < BinaryOperator
     @precedence = 4
   end
 
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer]
+
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = result_type(a_type, b_type)
+  end
+
   def evaluate(interpreter, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
 
@@ -989,6 +1089,21 @@ class BinaryOperatorMultiply < BinaryOperator
     @precedence = 5
   end
 
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = result_type(a_type, b_type)
+  end
+
   def evaluate(interpreter, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
 
@@ -1053,6 +1168,21 @@ class BinaryOperatorDivide < BinaryOperator
     super
 
     @precedence = 5
+  end
+
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = result_type(a_type, b_type)
   end
 
   def evaluate(interpreter, stack)
@@ -1122,6 +1252,21 @@ class BinaryOperatorPower < BinaryOperator
     @precedence = 6
   end
 
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer]
+
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = result_type(a_type, b_type)
+  end
+
   def evaluate(interpreter, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
 
@@ -1186,6 +1331,22 @@ class BinaryOperatorEqual < BinaryOperator
     super
 
     @precedence = 2
+  end
+
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer, :string, :boolean]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = :boolean
+    @content_type = :integer if !$options['relational_boolean'].value
   end
 
   def evaluate(interpreter, stack)
@@ -1255,6 +1416,22 @@ class BinaryOperatorNotEqual < BinaryOperator
     @precedence = 2
   end
 
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer, :string, :boolean]
+
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = :boolean
+    @content_type = :integer if !$options['relational_boolean'].value
+  end
+
   def evaluate(interpreter, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
 
@@ -1319,6 +1496,22 @@ class BinaryOperatorLess < BinaryOperator
     super
 
     @precedence = 2
+  end
+
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer, :string]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = :boolean
+    @content_type = :integer if !$options['relational_boolean'].value
   end
 
   def evaluate(interpreter, stack)
@@ -1388,6 +1581,22 @@ class BinaryOperatorLessEqual < BinaryOperator
     @precedence = 2
   end
 
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer, :string]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = :boolean
+    @content_type = :integer if !$options['relational_boolean'].value
+  end
+
   def evaluate(interpreter, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
 
@@ -1452,6 +1661,22 @@ class BinaryOperatorGreater < BinaryOperator
     super
 
     @precedence = 2
+  end
+
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer, :string]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = :boolean
+    @content_type = :integer if !$options['relational_boolean'].value
   end
 
   def evaluate(interpreter, stack)
@@ -1521,6 +1746,22 @@ class BinaryOperatorGreaterEqual < BinaryOperator
     @precedence = 2
   end
 
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer, :string]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      !compatible(a_type, b_type)
+
+    @content_type = :boolean
+    @content_type = :integer if !$options['relational_boolean'].value
+  end
+
   def evaluate(interpreter, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
 
@@ -1587,6 +1828,22 @@ class BinaryOperatorAnd < BinaryOperator
     @precedence = 1
   end
 
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer, :string, :boolean]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type)
+
+    @content_type = :boolean
+    @content_type = :integer if
+      a_type == :integer && b_type == :integer && $options['int_bitwise'].value
+  end
+
   def evaluate(interpreter, stack)
     raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
 
@@ -1651,6 +1908,22 @@ class BinaryOperatorOr < BinaryOperator
     super
 
     @precedence = 1
+  end
+
+  def set_content_type(stack)
+    raise(BASICExpressionError, 'Not enough operands') if stack.size < 2
+
+    b_type = stack.pop
+    a_type = stack.pop
+
+    arg_types = [:numeric, :integer, :string, :boolean]
+    
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type)
+
+    @content_type = :boolean
+    @content_type = :integer if
+      a_type == :integer && b_type == :integer && $options['int_bitwise'].value
   end
 
   def evaluate(interpreter, stack)

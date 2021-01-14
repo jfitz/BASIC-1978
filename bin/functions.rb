@@ -16,6 +16,14 @@ class AbstractFunction < AbstractElement
     @precedence = 7
   end
 
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    type = stack.pop
+
+    raise(BASICExpressionError, "Bad expression a + #{type}") if type != :list
+  end
+
   def dump
     self.class.to_s
   end
@@ -174,6 +182,12 @@ class UserFunction < AbstractScalarFunction
     else
       false
     end
+  end
+
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    stack.pop if stack[-1] == :list
   end
 
   def evaluate(interpreter, stack)
@@ -403,6 +417,12 @@ class FunctionCon1 < AbstractScalarFunction
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    stack.pop if stack[-1] == :list
+  end
+
   def evaluate(interpreter, stack)
     if previous_is_array(stack)
       args = stack.pop
@@ -440,6 +460,12 @@ class FunctionCon2 < AbstractScalarFunction
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar }
       ]
+  end
+
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    stack.pop if stack[-1] == :list
   end
 
   def evaluate(interpreter, stack)
@@ -552,6 +578,12 @@ class FunctionErl < AbstractScalarFunction
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    stack.pop if stack[-1] == :list
+  end
+
   # return a single value
   def evaluate(interpreter, stack)
     if previous_is_array(stack)
@@ -578,6 +610,12 @@ class FunctionErr < AbstractScalarFunction
     super
 
     @signature = []
+  end
+
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    stack.pop if stack[-1] == :list
   end
 
   # return a single value
@@ -647,6 +685,12 @@ class FunctionIdn < AbstractScalarFunction
       ]
   end
 
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    stack.pop if stack[-1] == :list
+  end
+
   def evaluate(interpreter, stack)
     if previous_is_array(stack)
       args = stack.pop
@@ -654,7 +698,7 @@ class FunctionIdn < AbstractScalarFunction
       if match_args_to_signature(args, @signature_0)
         args = default_args(interpreter)
         dims = args.clone
-        values = Matrix.one_values(dims)
+        values = Matrix.identity_values(dims)
         Matrix.new(dims, values)
       elsif match_args_to_signature(args, @signature_1)
         dims = [args[0]] * 2
@@ -1026,6 +1070,12 @@ class FunctionRnd < AbstractScalarFunction
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    stack.pop if stack[-1] == :list
+  end
+
   # return a single value
   def evaluate(interpreter, stack)
     if previous_is_array(stack)
@@ -1321,6 +1371,12 @@ class FunctionZer1 < AbstractScalarFunction
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    stack.pop if stack[-1] == :list
+  end
+
   def evaluate(interpreter, stack)
     if previous_is_array(stack)
       args = stack.pop
@@ -1358,6 +1414,12 @@ class FunctionZer2 < AbstractScalarFunction
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar }
       ]
+  end
+
+  def set_content_type(stack)
+    return @content_type if stack.empty?
+
+    stack.pop if stack[-1] == :list
   end
 
   def evaluate(interpreter, stack)

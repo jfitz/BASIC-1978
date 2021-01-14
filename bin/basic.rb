@@ -504,7 +504,8 @@ def make_command_tokenbuilders(quotes, long_names)
     INT_BITWISE INT_FLOOR LOCK_FORNEXT LONG_NAMES MAX_LINE_NUM MIN_LINE_NUM
     NEWLINE_SPEED
     PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
-    QMARK_AFTER_PROMPT RANDOMIZE REQUIRE_INITIALIZED RESPECT_RANDOMIZE
+    QMARK_AFTER_PROMPT RANDOMIZE RELATIONAL_BOOLEAN
+    REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH TIMING TRACE ZONE_WIDTH
   ]
   tokenbuilders << ListTokenBuilder.new(keywords, KeywordToken)
@@ -605,6 +606,7 @@ OptionParser.new do |opt|
   opt.on('--provenance') { |o| options[:provenance] = o }
   opt.on('--qmark-after-prompt') { |o| options[:qmark_after_prompt] = o }
   opt.on('--randomize') { |o| options[:randomize] = o }
+  opt.on('--relational-boolean') { |o| options[:relational_boolean] = o }
   opt.on('--require-initialized') { |o| options[:require_initialized] = o }
 
   opt.on('--semicolon-zone-width WIDTH') do |o|
@@ -687,7 +689,7 @@ $options['implied_semicolon'] =
   Option.new(all_types, boolean, options.key?(:implied_semicolon))
 
 $options['int_bitwise'] =
-  Option.new(only_new, boolean, !options.key?(:no_int_bitwose))
+  Option.new(only_new, boolean, !options.key?(:no_int_bitwise))
 
 $options['int_floor'] =
   Option.new(all_types, boolean, options.key?(:int_floor))
@@ -736,6 +738,9 @@ $options['qmark_after_prompt'] =
 
 $options['randomize'] =
   Option.new(all_types, boolean, options.key?(:randomize))
+
+$options['relational_boolean'] =
+  Option.new(only_new, boolean, options.key?(:relational_boolean))
 
 $options['require_initialized'] =
   Option.new(all_types, boolean, options.key?(:require_initialized))

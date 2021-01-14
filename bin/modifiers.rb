@@ -20,18 +20,6 @@ class AbstractModifier
 
   private
 
-  def parse_expression(expression_tokens)
-    expression = nil
-
-    begin
-      expression = ValueExpression.new(expression_tokens, :scalar)
-    rescue BASICExpressionError => e
-      @errors << e.message
-    end
-
-    expression
-  end
-
   # get opposite modifier (pre- when in post; post- when in pre)
   def get_counterpart(interpreter)
     current_line_index = interpreter.current_line_index
@@ -54,7 +42,8 @@ class IfModifier < AbstractModifier
   def initialize(expression_tokens)
     super()
 
-    @expression = parse_expression(expression_tokens)
+    @expression = ValueExpression.new(expression_tokens, :scalar)
+
     @numerics = @expression.numerics
     @strings = @expression.strings
     @booleans = @expression.booleans
@@ -122,7 +111,8 @@ class UnlessModifier < AbstractModifier
   def initialize(expression_tokens)
     super()
     
-    @expression = parse_expression(expression_tokens)
+    @expression = ValueExpression.new(expression_tokens, :scalar)
+
     @numerics = @expression.numerics
     @strings = @expression.strings
     @booleans = @expression.booleans
@@ -190,7 +180,8 @@ class WhileModifier < AbstractModifier
   def initialize(expression_tokens)
     super()
     
-    @expression = parse_expression(expression_tokens)
+    @expression = ValueExpression.new(expression_tokens, :scalar)
+
     @numerics = @expression.numerics
     @strings = @expression.strings
     @booleans = @expression.booleans
@@ -277,7 +268,8 @@ class UntilModifier < AbstractModifier
   def initialize(expression_tokens)
     super()
     
-    @expression = parse_expression(expression_tokens)
+    @expression = ValueExpression.new(expression_tokens, :scalar)
+
     @numerics = @expression.numerics
     @strings = @expression.strings
     @booleans = @expression.booleans

@@ -301,37 +301,43 @@ class AbstractValueElement < AbstractElement
   def b_eq(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_eq()"
     raise(BASICExpressionError, message) unless compatible?(other)
-    BooleanConstant.new(@value == other.to_v)
+    b = BooleanConstant.new(@value == other.to_v)
+    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_ne(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ne()"
     raise(BASICExpressionError, message) unless compatible?(other)
-    BooleanConstant.new(@value != other.to_v)
+    b = BooleanConstant.new(@value != other.to_v)
+    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_gt(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_gt()"
     raise(BASICExpressionError, message) unless compatible?(other)
-    BooleanConstant.new(@value > other.to_v)
+    b = BooleanConstant.new(@value > other.to_v)
+    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_ge(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ge()"
     raise(BASICExpressionError, message) unless compatible?(other)
-    BooleanConstant.new(@value >= other.to_v)
+    b = BooleanConstant.new(@value >= other.to_v)
+    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_lt(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_lt()"
     raise(BASICExpressionError, message) unless compatible?(other)
-    BooleanConstant.new(@value < other.to_v)
+    b = BooleanConstant.new(@value < other.to_v)
+    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_le(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_le()"
     raise(BASICExpressionError, message) unless compatible?(other)
-    BooleanConstant.new(@value <= other.to_v)
+    b = BooleanConstant.new(@value <= other.to_v)
+    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_and(_)
@@ -476,6 +482,8 @@ class NumericConstant < AbstractValueElement
     :numeric
   end
 
+  def set_content_type(stack) ; end
+
   def eql?(other)
     @value == other.to_v
   end
@@ -604,6 +612,10 @@ class NumericConstant < AbstractValueElement
   def floor
     value = @value.floor
     NumericConstant.new(value)
+  end
+
+  def to_int
+    IntegerConstant.new(to_i)
   end
 
   def exp
@@ -790,6 +802,8 @@ class IntegerConstant < AbstractValueElement
   def content_type
     :integer
   end
+
+  def set_content_type(stack) ; end
 
   def eql?(other)
     @value == other.to_v
@@ -1061,6 +1075,8 @@ class TextConstant < AbstractValueElement
     :string
   end
 
+  def set_content_type(stack) ; end
+
   def eql?(other)
     @value == other.to_v
   end
@@ -1184,6 +1200,8 @@ class BooleanConstant < AbstractValueElement
     :boolean
   end
 
+  def set_content_type(stack) ; end
+
   def eql?(other)
     @value == other.to_v
   end
@@ -1291,6 +1309,10 @@ class BooleanConstant < AbstractValueElement
 
   def to_i
     @value ? 1 : 0
+  end
+
+  def to_ms_i
+    @value ? -1 : 0
   end
 
   def to_s
@@ -1503,6 +1525,8 @@ class Declaration < AbstractElement
     @variable_name.content_type
   end
 
+  def set_content_type(stack) ; end
+
   def to_s
     if subscripts.empty?
       @variable_name.to_s
@@ -1549,6 +1573,8 @@ class VariableName < AbstractElement
     @precedence = 7
     @content_type = @name.content_type
   end
+
+  def set_content_type(stack) ; end
 
   def eql?(other)
     to_s == other.to_s
@@ -1618,6 +1644,8 @@ class UserFunctionName < AbstractElement
     @precedence = 7
     @content_type = @name.content_type
   end
+
+  def set_content_type(stack) ; end
 
   def eql?(other)
     to_s == other.to_s
@@ -1698,6 +1726,14 @@ class Variable < AbstractElement
     @variable = true
     @operand = true
     @precedence = 7
+  end
+
+  def set_content_type(stack)
+    return @variable_name.content_type if stack.empty?
+
+    type = stack[-1]
+
+    stack.pop if type == :list
   end
 
   def eql?(other)
@@ -1945,6 +1981,12 @@ class List < AbstractElement
     end
     lines
   end
+
+  def content_type
+    :list
+  end
+
+  def set_content_type(_) ; end
 
   def evaluate(interpreter, _)
     interpreter.evaluate_n(@parsed_expressions)
