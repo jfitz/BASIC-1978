@@ -774,7 +774,7 @@ class Parser
       @operator_stack.empty?
 
     parsed_expressions = []
-    parsed_expressions.concat @parens_group unless @parens_group.empty?
+    @parens_group.each { |expression| parsed_expressions << expression }
     parsed_expressions << @current_expression unless @current_expression.empty?
     parsed_expressions
   end
@@ -941,16 +941,16 @@ class AbstractExpression
     elements = tokens_to_elements(tokens)
     parser = Parser.new(shape)
     elements.each { |element| parser.parse(element) }
-    @parsed_expressions = parser.expressions
-    set_arguments_1(@parsed_expressions)
+    parsed_tokens = parser.expressions
+    set_arguments_1(parsed_tokens)
 
     @shape = shape
 
     @comprehension_effort = 1
-    @parsed_expressions.each do |parsed_expression|
+    parsed_tokens.each do |element_list|
       prev = nil
 
-      parsed_expression.each do |element|
+      element_list.each do |element|
         @comprehension_effort += 1 if element.operator?
 
         @comprehension_effort += 1 if
@@ -964,6 +964,8 @@ class AbstractExpression
         prev = element
       end
     end
+
+    @parsed_expressions = parsed_tokens
   end
 
   def to_s
@@ -1329,7 +1331,7 @@ end
 
 # Value expression (an R-value)
 class ValueExpression < AbstractExpression
-  def self.content_type(parsed_expression)
+  def self.set_content_type(parsed_expression)
     stack = []
 
     parsed_expression.each do |element|
@@ -1345,7 +1347,7 @@ class ValueExpression < AbstractExpression
 
     types = []
     @parsed_expressions.each do |parsed_expression|
-      type = ValueExpression.content_type(parsed_expression)
+      type = ValueExpression.set_content_type(parsed_expression)
       types << type
     end
   end
