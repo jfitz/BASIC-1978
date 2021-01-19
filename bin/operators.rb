@@ -36,7 +36,7 @@ class UnaryOperator < AbstractElement
   end
 
   def dump
-    self.class.to_s + ':' + @op
+    "#{self.class}:#{@op}"
   end
 
   def unary?
@@ -110,7 +110,7 @@ class BinaryOperator < AbstractElement
   end
 
   def dump
-    self.class.to_s + ':' + @op
+    "#{self.class}:#{@op}"
   end
 
   def unary?
@@ -832,7 +832,7 @@ class UnaryOperatorHash < UnaryOperator
     raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
       !arg_types.include?(type)
     
-    @content_type = type
+    @content_type = :filehandle
   end
 
   def evaluate(_, stack)
@@ -882,6 +882,7 @@ class UnaryOperatorNot < UnaryOperator
       !arg_types.include?(type)
     
     @content_type = :boolean
+    @content_type = :numeric if !$options['relational_boolean'].value
     @content_type = :integer if
       type == :integer && $options['int_bitwise'].value
   end
@@ -1346,7 +1347,7 @@ class BinaryOperatorEqual < BinaryOperator
       !compatible(a_type, b_type)
 
     @content_type = :boolean
-    @content_type = :integer if !$options['relational_boolean'].value
+    @content_type = :numeric if !$options['relational_boolean'].value
   end
 
   def evaluate(interpreter, stack)
@@ -1429,7 +1430,7 @@ class BinaryOperatorNotEqual < BinaryOperator
       !compatible(a_type, b_type)
 
     @content_type = :boolean
-    @content_type = :integer if !$options['relational_boolean'].value
+    @content_type = :numeric if !$options['relational_boolean'].value
   end
 
   def evaluate(interpreter, stack)
@@ -1511,7 +1512,7 @@ class BinaryOperatorLess < BinaryOperator
       !compatible(a_type, b_type)
 
     @content_type = :boolean
-    @content_type = :integer if !$options['relational_boolean'].value
+    @content_type = :numeric if !$options['relational_boolean'].value
   end
 
   def evaluate(interpreter, stack)
@@ -1594,7 +1595,7 @@ class BinaryOperatorLessEqual < BinaryOperator
       !compatible(a_type, b_type)
 
     @content_type = :boolean
-    @content_type = :integer if !$options['relational_boolean'].value
+    @content_type = :numeric if !$options['relational_boolean'].value
   end
 
   def evaluate(interpreter, stack)
@@ -1676,7 +1677,7 @@ class BinaryOperatorGreater < BinaryOperator
       !compatible(a_type, b_type)
 
     @content_type = :boolean
-    @content_type = :integer if !$options['relational_boolean'].value
+    @content_type = :numeric if !$options['relational_boolean'].value
   end
 
   def evaluate(interpreter, stack)
@@ -1759,7 +1760,7 @@ class BinaryOperatorGreaterEqual < BinaryOperator
       !compatible(a_type, b_type)
 
     @content_type = :boolean
-    @content_type = :integer if !$options['relational_boolean'].value
+    @content_type = :numeric if !$options['relational_boolean'].value
   end
 
   def evaluate(interpreter, stack)
@@ -1840,8 +1841,10 @@ class BinaryOperatorAnd < BinaryOperator
       !arg_types.include?(a_type) || !arg_types.include?(b_type)
 
     @content_type = :boolean
+    @content_type = :numeric if !$options['relational_boolean'].value
     @content_type = :integer if
       a_type == :integer && b_type == :integer && $options['int_bitwise'].value
+    @content_type
   end
 
   def evaluate(interpreter, stack)
@@ -1922,6 +1925,7 @@ class BinaryOperatorOr < BinaryOperator
       !arg_types.include?(a_type) || !arg_types.include?(b_type)
 
     @content_type = :boolean
+    @content_type = :numeric if !$options['relational_boolean'].value
     @content_type = :integer if
       a_type == :integer && b_type == :integer && $options['int_bitwise'].value
   end

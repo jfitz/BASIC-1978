@@ -300,44 +300,56 @@ class AbstractValueElement < AbstractElement
 
   def b_eq(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_eq()"
+
     raise(BASICExpressionError, message) unless compatible?(other)
+
     b = BooleanConstant.new(@value == other.to_v)
-    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_ne(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ne()"
+
     raise(BASICExpressionError, message) unless compatible?(other)
+
     b = BooleanConstant.new(@value != other.to_v)
-    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_gt(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_gt()"
+
     raise(BASICExpressionError, message) unless compatible?(other)
+
     b = BooleanConstant.new(@value > other.to_v)
-    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_ge(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ge()"
+
     raise(BASICExpressionError, message) unless compatible?(other)
+
     b = BooleanConstant.new(@value >= other.to_v)
-    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_lt(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_lt()"
+
     raise(BASICExpressionError, message) unless compatible?(other)
+
     b = BooleanConstant.new(@value < other.to_v)
-    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_le(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in b_le()"
+
     raise(BASICExpressionError, message) unless compatible?(other)
+
     b = BooleanConstant.new(@value <= other.to_v)
-    IntegerConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_and(_)
@@ -517,11 +529,13 @@ class NumericConstant < AbstractValueElement
   end
 
   def b_and(other)
-    BooleanConstant.new(to_b && other.to_b)
+    b = BooleanConstant.new(to_b && other.to_b)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_or(other)
-    BooleanConstant.new(to_b || other.to_b)
+    b = BooleanConstant.new(to_b || other.to_b)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def +(other)
@@ -552,7 +566,8 @@ class NumericConstant < AbstractValueElement
   end
 
   def add(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
+    message =
+      "Type mismatch (#{content_type}/#{other.content_type}) in add()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -592,7 +607,8 @@ class NumericConstant < AbstractValueElement
   end
 
   def power(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in power()"
+    message =
+      "Type mismatch (#{content_type}/#{other.content_type}) in power()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -629,11 +645,13 @@ class NumericConstant < AbstractValueElement
   end
 
   def log10
-    NumericConstant.new(@value > 0 ? Math.log10(@value) : 0)
+    value = @value > 0 ? Math.log10(@value) : 0
+    NumericConstant.new(value)
   end
 
   def log2
-    NumericConstant.new(@value > 0 ? Math.log2(@value) : 0)
+    value = @value > 0 ? Math.log2(@value) : 0
+    NumericConstant.new(value)
   end
 
   def mod(other)
@@ -694,7 +712,8 @@ class NumericConstant < AbstractValueElement
   end
 
   def atn2(a2)
-    NumericConstant.new(Math.atan2(@value, a2.to_f))
+    value = Math.atan2(@value, a2.to_f)
+    NumericConstant.new(value)
   end
 
   def sec
@@ -837,11 +856,66 @@ class IntegerConstant < AbstractValueElement
     @value <= other.to_v
   end
 
+  def b_eq(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_eq()"
+
+    raise(BASICExpressionError, message) unless compatible?(other)
+
+    b = BooleanConstant.new(@value == other.to_v)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+  end
+
+  def b_ne(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ne()"
+
+    raise(BASICExpressionError, message) unless compatible?(other)
+
+    b = BooleanConstant.new(@value != other.to_v)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+  end
+
+  def b_gt(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_gt()"
+
+    raise(BASICExpressionError, message) unless compatible?(other)
+
+    b = BooleanConstant.new(@value > other.to_v)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+  end
+
+  def b_ge(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ge()"
+
+    raise(BASICExpressionError, message) unless compatible?(other)
+
+    b = BooleanConstant.new(@value >= other.to_v)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+  end
+
+  def b_lt(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_lt()"
+
+    raise(BASICExpressionError, message) unless compatible?(other)
+
+    b = BooleanConstant.new(@value < other.to_v)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+  end
+
+  def b_le(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_le()"
+
+    raise(BASICExpressionError, message) unless compatible?(other)
+
+    b = BooleanConstant.new(@value <= other.to_v)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+  end
+
   def b_and(other)
     if other.content_type == :integer && $options['int_bitwise'].value
       IntegerConstant.new(to_i & other.to_i)
     else
-      BooleanConstant.new(to_b && other.to_b)
+      b = BooleanConstant.new(to_b && other.to_b)
+      NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
     end
   end
 
@@ -849,7 +923,8 @@ class IntegerConstant < AbstractValueElement
     if other.content_type == :integer && $options['int_bitwise'].value
       IntegerConstant.new(to_i | other.to_i)
     else
-      BooleanConstant.new(to_b || other.to_b)
+      b = BooleanConstant.new(to_b || other.to_b)
+      NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
     end
   end
 
@@ -921,7 +996,8 @@ class IntegerConstant < AbstractValueElement
   end
 
   def power(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in power()"
+    message =
+      "Type mismatch (#{content_type}/#{other.content_type}) in power()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -930,7 +1006,7 @@ class IntegerConstant < AbstractValueElement
   end
 
   def negate
-    IntegerConstant.new(-(@value))
+    IntegerConstant.new(-@value)
   end
 
   def truncate
@@ -954,11 +1030,13 @@ class IntegerConstant < AbstractValueElement
   end
 
   def log10
-    IntegerConstant.new(@value > 0 ? Math.log10(@value) : 0)
+    value = @value > 0 ? Math.log10(@value) : 0
+    IntegerConstant.new(value)
   end
 
   def log2
-    IntegerConstant.new(@value > 0 ? Math.log2(@value) : 0)
+    value = @value > 0 ? Math.log2(@value) : 0
+    IntegerConstant.new(value)
   end
 
   def mod(other)
@@ -1110,16 +1188,20 @@ class TextConstant < AbstractValueElement
   end
 
   def b_and(other)
-    BooleanConstant.new(to_b && other.to_b)
+    b = BooleanConstant.new(to_b && other.to_b)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_or(other)
-    BooleanConstant.new(to_b || other.to_b)
+    b = BooleanConstant.new(to_b || other.to_b)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
+
     raise(BASICExpressionError, message) unless compatible?(other)
+
     unquoted = @value + other.to_v
     quoted = '"' + unquoted + '"'
     token = TextConstantToken.new(quoted)
@@ -1128,7 +1210,9 @@ class TextConstant < AbstractValueElement
 
   def add(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
+
     raise(BASICExpressionError, message) unless compatible?(other)
+
     unquoted = @value + other.to_v
     quoted = '"' + unquoted + '"'
     token = TextConstantToken.new(quoted)
@@ -1235,11 +1319,13 @@ class BooleanConstant < AbstractValueElement
   end
 
   def b_and(other)
-    BooleanConstant.new(@value && other.to_b)
+    b = BooleanConstant.new(@value && other.to_b)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def b_or(other)
-    BooleanConstant.new(@value || other.to_b)
+    b = BooleanConstant.new(@value || other.to_b)
+    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
   end
 
   def +(other)
@@ -1495,59 +1581,6 @@ class CarriageControl
     when ''
       printer.print_item(',')
     end
-  end
-end
-
-class Declaration < AbstractElement
-  attr_reader :subscripts
-
-  def initialize(variable_name)
-    super()
-
-    raise(BASICSyntaxError,
-          "'#{variable_name.class}:#{variable_name}' is not a variable name") if
-      variable_name.class.to_s != 'VariableName'
-
-    @variable_name = variable_name
-    @subscripts = []
-    @variable = true
-  end
-
-  def dump
-    self.class.to_s + ':' + @variable_name.to_s
-  end
-
-  def name
-    @variable_name
-  end
-
-  def content_type
-    @variable_name.content_type
-  end
-
-  def set_content_type(stack) ; end
-
-  def to_s
-    if subscripts.empty?
-      @variable_name.to_s
-    else
-      @variable_name.to_s + '(' + @subscripts.join(',') + ')'
-    end
-  end
-
-  # return a single value, a reference to this object
-  def evaluate(_, stack)
-    if previous_is_array(stack)
-      @subscripts = stack.pop
-      num_args = @subscripts.length
-
-      if num_args.zero?
-        raise(BASICSyntaxError,
-              'Variable expects subscripts, found empty parentheses')
-      end
-    end
-
-    self
   end
 end
 
@@ -1959,6 +1992,59 @@ class Variable < AbstractElement
   end
 end
 
+class Declaration < AbstractElement
+  attr_reader :subscripts
+
+  def initialize(variable_name)
+    super()
+
+    raise(BASICSyntaxError,
+          "'#{variable_name.class}:#{variable_name}' is not a variable name") if
+      variable_name.class.to_s != 'VariableName'
+
+    @variable_name = variable_name
+    @subscripts = []
+    @variable = true
+  end
+
+  def dump
+    self.class.to_s + ':' + @variable_name.to_s
+  end
+
+  def name
+    @variable_name
+  end
+
+  def content_type
+    @variable_name.content_type
+  end
+
+  def set_content_type(stack) ; end
+
+  def to_s
+    if subscripts.empty?
+      @variable_name.to_s
+    else
+      @variable_name.to_s + '(' + @subscripts.join(',') + ')'
+    end
+  end
+
+  # return a single value, a reference to this object
+  def evaluate(_, stack)
+    if previous_is_array(stack)
+      @subscripts = stack.pop
+      num_args = @subscripts.length
+
+      if num_args.zero?
+        raise(BASICSyntaxError,
+              'Variable expects subscripts, found empty parentheses')
+      end
+    end
+
+    self
+  end
+end
+
 # A list (needed because it has precedence value)
 class List < AbstractElement
   def initialize(expressions)
@@ -1976,9 +2062,11 @@ class List < AbstractElement
 
   def dump
     lines = []
+
     @expressions.each do |expression|
-      expression.each { |exp| lines << exp.dump }
+      lines.concat expression.dump
     end
+
     lines
   end
 

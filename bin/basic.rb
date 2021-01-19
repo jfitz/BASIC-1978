@@ -64,7 +64,8 @@ class Option
     when :bool
       legals = %w[TrueClass FalseClass]
 
-      raise(BASICSyntaxError, "Invalid type #{value.class} for boolean") unless
+      ## raise(BASICSyntaxError, "Invalid type #{value.class} for boolean") unless
+      raise(Exception, "Invalid type #{value.class} for boolean") unless
         legals.include?(value.class.to_s)
     when :int
       legals = %w[Fixnum Integer]
