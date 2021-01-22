@@ -85,8 +85,8 @@ class ForUntilControl < AbstractForControl
 
     result = values[0]
 
-    raise(BASICExpressionError, 'Expression error') unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanConstant.new(result.to_b) if
+      !result.boolean_constant?
 
     result.value
   end
@@ -99,8 +99,8 @@ class ForUntilControl < AbstractForControl
 
     result = values[0]
 
-    raise(BASICExpressionError, 'Expression error') unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanConstant.new(result.to_b) if
+      !result.boolean_constant?
 
     result.value
   end
@@ -124,8 +124,8 @@ class ForWhileControl < AbstractForControl
 
     result = values[0]
 
-    raise(BASICExpressionError, 'Expression error') unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanConstant.new(result.to_b) if
+      !result.boolean_constant?
 
     !result.value
   end
@@ -138,8 +138,8 @@ class ForWhileControl < AbstractForControl
 
     result = values[0]
 
-    raise(BASICExpressionError, 'Expression error') unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanConstant.new(result.to_b) if
+      !result.boolean_constant?
 
     !result.value
   end
@@ -755,7 +755,7 @@ class Interpreter
               tokens_list.size > 2
             
             expr_tokens = tokens_list[2..-1]
-            expression = ValueExpression.new(expr_tokens, :scalar)
+            expression = ValueExpressionSet.new(expr_tokens, :scalar)
             if @line_cond_breakpoints.key?(line_number)
               @line_cond_breakpoints[line_number] << expression
             else

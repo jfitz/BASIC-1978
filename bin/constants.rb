@@ -304,7 +304,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value == other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b
   end
 
   def b_ne(other)
@@ -313,7 +314,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value != other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b
   end
 
   def b_gt(other)
@@ -322,7 +324,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value > other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b
   end
 
   def b_ge(other)
@@ -331,7 +334,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value >= other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b
   end
 
   def b_lt(other)
@@ -340,7 +344,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value < other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b
   end
 
   def b_le(other)
@@ -349,7 +354,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value <= other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    b
   end
 
   def b_and(_)

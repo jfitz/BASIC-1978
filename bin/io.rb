@@ -52,7 +52,7 @@ module Inputter
     verify_tokens(tokens)
 
     # convert from tokens to values
-    expressions = ValueExpression.new(tokens, :scalar)
+    expressions = ValueExpressionSet.new(tokens, :scalar)
     expressions.evaluate(interpreter)
   end
 
@@ -62,7 +62,7 @@ module Inputter
     token = TextConstantToken.new(quoted)
     tokens = [token]
     # convert from tokens to values
-    expressions = ValueExpression.new(tokens, :scalar)
+    expressions = ValueExpressionSet.new(tokens, :scalar)
     expressions.evaluate(interpreter)
   end
 end
