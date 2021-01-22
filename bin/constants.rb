@@ -2077,7 +2077,7 @@ class List < AbstractElement
   def set_content_type(_) ; end
 
   def evaluate(interpreter, _)
-    interpreter.evaluate_n(@expressions)
+    interpreter.evaluate(@expressions)
   end
 
   def to_s

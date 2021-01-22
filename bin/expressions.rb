@@ -1040,6 +1040,17 @@ class Expression
     lines
   end
 
+  def evaluate(interpreter)
+    stack = []
+
+    @elements.each do |element|
+      value = element.evaluate(interpreter, stack)
+      stack.push value
+    end
+
+    stack
+  end
+
   def numerics
     vars = []
     previous = nil
@@ -1295,7 +1306,7 @@ class AbstractExpression
 
   # returns an Array of values
   def evaluate(interpreter)
-    interpreter.evaluate_n(@expressions)
+    interpreter.evaluate(@expressions)
   end
 
   def numerics
