@@ -31,6 +31,11 @@ class Option
   end
 
   def set(value)
+    num_types = %w[Fixnum Integer]
+    if @defs[:type] == :bool && num_types.include?(value.class.to_s)
+      value = value != 0
+    end
+
     check_value(value)
     @value = value
   end

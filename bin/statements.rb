@@ -1626,6 +1626,7 @@ class DefineFunctionStatement < AbstractStatement
   def initialize(_, keywords, tokens_lists)
     super
 
+    @executable = false
     @may_be_if_sub = false
 
     template = [[1, '>=']]
@@ -2346,6 +2347,10 @@ class AbstractIfStatement < AbstractStatement
       @elements[:operators] = make_operator_references
       @elements[:functions] = make_function_references
       @elements[:userfuncs] = make_userfunc_references
+
+      @comprehension_effort += @expression.comprehension_effort unless
+        @expression.nil?
+
       @linenums = make_linenum_references
     else
       begin
@@ -2387,6 +2392,10 @@ class AbstractIfStatement < AbstractStatement
         @elements[:operators] = make_operator_references
         @elements[:functions] = make_function_references
         @elements[:userfuncs] = make_userfunc_references
+
+        @comprehension_effort += @expression.comprehension_effort unless
+          @expression.nil?
+
         @linenums = make_linenum_references
       rescue BASICExpressionError => e
         @errors << 'Syntax Error: ' + e.message
@@ -3467,8 +3476,6 @@ class OptionStatement < AbstractStatement
   def initialize(_, keywords, tokens_lists)
     super
 
-    # omit HEADING and TIMING as they are not used in the interpreter
-    # omit PRETTY_MULTILINE too
     template = [OptionStatement.extra_keywords, [1, '>=']]
 
     if check_template(tokens_lists, template)

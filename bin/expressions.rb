@@ -1614,7 +1614,7 @@ class TargetExpressionSet < AbstractExpressionSet
       if elements[-1].class.to_s != 'Variable' &&
          elements[-1].class.to_s != 'UserFunction'
         raise(BASICSyntaxError,
-              "Value is not assignable (type #{expression[-1].class})")
+              "Value is not assignable (type #{elements[-1].class})")
       end
     end
   end
