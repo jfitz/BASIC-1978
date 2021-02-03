@@ -19,18 +19,18 @@
  VariableName:Z
  NumericConstant:30
  Variable:Z
- UnaryOperatorMinus:-
+ UnaryOperatorMinus:- numeric
  Variable:Z
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  NumericConstant:100
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  FunctionExp
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
 100 PRINT
  CarriageControl:NL
 110 FOR X=-30 TO 30 STEP 1.5
  control: Variable:X
- start:   ["NumericConstant:30", "UnaryOperatorMinus:-"]
+ start:   ["NumericConstant:30", "UnaryOperatorMinus:- numeric"]
  end:     ["NumericConstant:30"]
  step:    ["NumericConstant:1.5"]
 120 L=0
@@ -43,42 +43,42 @@
  NumericConstant:900
  Variable:X
  Variable:X
- BinaryOperatorMultiply:*
- BinaryOperatorMinus:-
+ BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:- numeric
  FunctionSqr
  NumericConstant:5
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  FunctionInt
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  AssignmentOperator:=
 140 FOR Y=Y1 TO -Y1 STEP -5
  control: Variable:Y
  start:   ["Variable:Y1"]
- end:     ["Variable:Y1", "UnaryOperatorMinus:-"]
- step:    ["NumericConstant:5", "UnaryOperatorMinus:-"]
+ end:     ["Variable:Y1", "UnaryOperatorMinus:- numeric"]
+ step:    ["NumericConstant:5", "UnaryOperatorMinus:- numeric"]
 150 Z=INT(25+FNA(SQR(X*X+Y*Y))-.7*Y)
  Variable:Z
  NumericConstant:25
  Variable:X
  Variable:X
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  Variable:Y
  Variable:Y
- BinaryOperatorMultiply:*
- BinaryOperatorPlus:+
+ BinaryOperatorMultiply:* numeric
+ BinaryOperatorPlus:+ numeric
  FunctionSqr
  UserFunction
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  NumericConstant:.7
  Variable:Y
- BinaryOperatorMultiply:*
- BinaryOperatorMinus:-
+ BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:- numeric
  FunctionInt
  AssignmentOperator:=
 160 IF Z<=L THEN 190
  Variable:Z
  Variable:L
- BinaryOperatorLessEqual:<=
+ BinaryOperatorLessEqual:<= numeric
 170 L=Z
  Variable:L
  Variable:Z

@@ -39,7 +39,7 @@
  NumericConstant:1
  FunctionLeft
  TextConstant:"N"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1070 PRINT
  CarriageControl:NL
 1080 PRINT "THIS IS THE BETTING LAYOUT"
@@ -218,12 +218,12 @@
 1650 IF Y<1 OR Y<>INT(Y) THEN 1630
  Variable:Y
  NumericConstant:1
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
  Variable:Y
  Variable:Y
  FunctionInt
- BinaryOperatorNotEqual:<>
- BinaryOperatorOr:OR
+ BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorOr:OR numeric
 1660 FOR I=1 TO 50: A(I)=0: NEXT I: REM  MAT A=ZER
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -259,38 +259,38 @@
 1720 IF X<1 OR X>50 OR X<>INT(X) THEN 1680
  Variable:X
  NumericConstant:1
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
  Variable:X
  NumericConstant:50
- BinaryOperatorGreater:>
- BinaryOperatorOr:OR
+ BinaryOperatorGreater:> numeric
+ BinaryOperatorOr:OR numeric
  Variable:X
  Variable:X
  FunctionInt
- BinaryOperatorNotEqual:<>
- BinaryOperatorOr:OR
+ BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorOr:OR numeric
 1730 IF Z<1 OR Z<>INT(Z) THEN 1680
  Variable:Z
  NumericConstant:1
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
  Variable:Z
  Variable:Z
  FunctionInt
- BinaryOperatorNotEqual:<>
- BinaryOperatorOr:OR
+ BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorOr:OR numeric
 1740 IF Z<5 OR Z>500 THEN 1680
  Variable:Z
  NumericConstant:5
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
  Variable:Z
  NumericConstant:500
- BinaryOperatorGreater:>
- BinaryOperatorOr:OR
+ BinaryOperatorGreater:> numeric
+ BinaryOperatorOr:OR numeric
 1750 IF A(X)=0 THEN 1780
  Variable:X
  Variable:A
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1760 PRINT "YOU MADE THAT BET ONCE ALREADY,DUM-DUM"
  TextConstant:"YOU MADE THAT BET ONCE ALREADY,DUM-DUM"
  CarriageControl:NL
@@ -315,33 +315,33 @@
  NumericConstant:1
  FunctionRnd
  NumericConstant:100
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  FunctionInt
  AssignmentOperator:=
 1840 IF S=0 OR S>38 THEN 1830
  Variable:S
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
  Variable:S
  NumericConstant:38
- BinaryOperatorGreater:>
- BinaryOperatorOr:OR
+ BinaryOperatorGreater:> numeric
+ BinaryOperatorOr:OR numeric
 1850 X(S)=X(S)+1
  Variable:S
  Variable:X
  Variable:S
  Variable:X
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1860 IF S<37 THEN 1920
  Variable:S
  NumericConstant:37
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 1870 IF S=37 THEN 1900
  Variable:S
  NumericConstant:37
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1880 PRINT "00"
  TextConstant:"00"
  CarriageControl:NL
@@ -363,7 +363,7 @@
 1950 IF R=S THEN 2000
  Variable:R
  Variable:S
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1960 NEXT I1
  Variable:I1
 1970 A$="BLACK"
@@ -393,12 +393,12 @@
  Variable:C
  Variable:T
  NumericConstant:37
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 2050 ON T(C)-36 GOTO 2090,2190,2220,2250,2300,2350,2400,2470,2500
  Variable:C
  Variable:T
  NumericConstant:36
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  LineNumber:2090
  LineNumber:2190
  LineNumber:2220
@@ -412,7 +412,7 @@
  Variable:C
  Variable:T
  NumericConstant:45
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  LineNumber:2530
  LineNumber:2560
  LineNumber:2630
@@ -425,7 +425,7 @@
 2100 IF S <= 12 THEN 2150
  Variable:S
  NumericConstant:12
- BinaryOperatorLessEqual:<=
+ BinaryOperatorLessEqual:<= numeric
 2110 PRINT "YOU LOSE";B(C);"DOLLARS ON BET";C
  TextConstant:"YOU LOSE"
  CarriageControl:;
@@ -441,14 +441,14 @@
  Variable:D
  Variable:C
  Variable:B
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2130 P=P-B(C)
  Variable:P
  Variable:P
  Variable:C
  Variable:B
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 2140 GOTO 2180
  LineNumber:2180
@@ -458,7 +458,7 @@
  Variable:C
  Variable:B
  NumericConstant:2
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:
@@ -470,8 +470,8 @@
  Variable:C
  Variable:B
  NumericConstant:2
- BinaryOperatorMultiply:*
- BinaryOperatorMinus:-
+ BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 2170 P=P+B(C)*2
  Variable:P
@@ -479,8 +479,8 @@
  Variable:C
  Variable:B
  NumericConstant:2
- BinaryOperatorMultiply:*
- BinaryOperatorPlus:+
+ BinaryOperatorMultiply:* numeric
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2180 GOTO 2810
  LineNumber:2810
@@ -489,11 +489,11 @@
 2200 IF S>12 AND S<25 THEN 2150
  Variable:S
  NumericConstant:12
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
  Variable:S
  NumericConstant:25
- BinaryOperatorLess:<
- BinaryOperatorAnd:AND
+ BinaryOperatorLess:< numeric
+ BinaryOperatorAnd:AND numeric
 2210 GOTO 2110
  LineNumber:2110
 2220 REM  25-36(39) 2:1
@@ -501,11 +501,11 @@
 2230 IF S>24 AND S<37 THEN 2150
  Variable:S
  NumericConstant:24
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
  Variable:S
  NumericConstant:37
- BinaryOperatorLess:<
- BinaryOperatorAnd:AND
+ BinaryOperatorLess:< numeric
+ BinaryOperatorAnd:AND numeric
 2240 GOTO 2110
  LineNumber:2110
 2250 REM  FIRST COLUMN(40) 2:1
@@ -518,7 +518,7 @@
 2270 IF S=I THEN 2150
  Variable:S
  Variable:I
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 2280 NEXT I
  Variable:I
 2290 GOTO 2110
@@ -533,7 +533,7 @@
 2320 IF S=I THEN 2150
  Variable:S
  Variable:I
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 2330 NEXT I
  Variable:I
 2340 GOTO 2110
@@ -548,7 +548,7 @@
 2370 IF S=I THEN 2150
  Variable:S
  Variable:I
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 2380 NEXT I
  Variable:I
 2390 GOTO 2110
@@ -558,7 +558,7 @@
 2410 IF S<19 THEN 2430
  Variable:S
  NumericConstant:19
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 2420 GOTO 2110
  LineNumber:2110
 2430 PRINT "YOU WIN";B(C);"DOLLARS ON BET";C
@@ -576,14 +576,14 @@
  Variable:D
  Variable:C
  Variable:B
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 2450 P=P+B(C)
  Variable:P
  Variable:P
  Variable:C
  Variable:B
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2460 GOTO 2810
  LineNumber:2810
@@ -592,11 +592,11 @@
 2480 IF S<37 AND S>18 THEN 2430
  Variable:S
  NumericConstant:37
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
  Variable:S
  NumericConstant:18
- BinaryOperatorGreater:>
- BinaryOperatorAnd:AND
+ BinaryOperatorGreater:> numeric
+ BinaryOperatorAnd:AND numeric
 2490 GOTO 2110
  LineNumber:2110
 2500 REM  EVEN(45) 1:1
@@ -604,16 +604,16 @@
 2510 IF S/2=INT(S/2) AND S<37 THEN 2430
  Variable:S
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  Variable:S
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  FunctionInt
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
  Variable:S
  NumericConstant:37
- BinaryOperatorLess:<
- BinaryOperatorAnd:AND
+ BinaryOperatorLess:< numeric
+ BinaryOperatorAnd:AND numeric
 2520 GOTO 2110
  LineNumber:2110
 2530 REM  ODD(46) 1:1
@@ -621,16 +621,16 @@
 2540 IF S/2<>INT(S/2) AND S<37 THEN 2430
  Variable:S
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  Variable:S
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  FunctionInt
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
  Variable:S
  NumericConstant:37
- BinaryOperatorLess:<
- BinaryOperatorAnd:AND
+ BinaryOperatorLess:< numeric
+ BinaryOperatorAnd:AND numeric
 2550 GOTO 2110
  LineNumber:2110
 2560 REM  RED(47) 1:1
@@ -646,7 +646,7 @@
 2600 IF S=R THEN 2430
  Variable:S
  Variable:R
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 2610 NEXT I
  Variable:I
 2620 GOTO 2110
@@ -664,13 +664,13 @@
 2670 IF S=R THEN 2110
  Variable:S
  Variable:R
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 2680 NEXT I
  Variable:I
 2690 IF S>36 THEN 2110
  Variable:S
  NumericConstant:36
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 2700 GOTO 2430
  LineNumber:2430
 2710 REM--1TO36,0,00(1-36,49,50)35:1
@@ -679,32 +679,32 @@
  Variable:C
  Variable:T
  NumericConstant:49
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 2730 IF T(C)=49 AND S=37 THEN 2780
  Variable:C
  Variable:T
  NumericConstant:49
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
  Variable:S
  NumericConstant:37
- BinaryOperatorEqual:=
- BinaryOperatorAnd:AND
+ BinaryOperatorEqual:= numeric
+ BinaryOperatorAnd:AND numeric
 2740 IF T(C)=50 AND S=38 THEN 2780
  Variable:C
  Variable:T
  NumericConstant:50
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
  Variable:S
  NumericConstant:38
- BinaryOperatorEqual:=
- BinaryOperatorAnd:AND
+ BinaryOperatorEqual:= numeric
+ BinaryOperatorAnd:AND numeric
 2750 GOTO 2110
  LineNumber:2110
 2760 IF T(C)=S THEN 2780
  Variable:C
  Variable:T
  Variable:S
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 2770 GOTO 2110
  LineNumber:2110
 2780 PRINT "YOU WIN";B(C)*35;"DOLLARS ON BET";C
@@ -713,7 +713,7 @@
  Variable:C
  Variable:B
  NumericConstant:35
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  CarriageControl:;
  TextConstant:"DOLLARS ON BET"
  CarriageControl:;
@@ -725,8 +725,8 @@
  Variable:C
  Variable:B
  NumericConstant:35
- BinaryOperatorMultiply:*
- BinaryOperatorMinus:-
+ BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 2800 P=P+B(C)*35
  Variable:P
@@ -734,8 +734,8 @@
  Variable:C
  Variable:B
  NumericConstant:35
- BinaryOperatorMultiply:*
- BinaryOperatorPlus:+
+ BinaryOperatorMultiply:* numeric
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2810 NEXT C
  Variable:C
@@ -758,7 +758,7 @@
 2850 IF P>0 THEN 2880
  Variable:P
  NumericConstant:0
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 2860 PRINT "OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
  TextConstant:"OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
  CarriageControl:NL
@@ -767,7 +767,7 @@
 2880 IF D>0 THEN 2920
  Variable:D
  NumericConstant:0
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 2890 PRINT "YOU BROKE THE HOUSE!"
  TextConstant:"YOU BROKE THE HOUSE!"
  CarriageControl:NL
@@ -787,7 +787,7 @@
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 2950 DATA 1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36
  NumericConstant:1
  NumericConstant:3
@@ -810,7 +810,7 @@
 2960 IF P<1 THEN 3190
  Variable:P
  NumericConstant:1
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 2970 PRINT "TO WHOM SHALL I MAKE THE CHECK";
  TextConstant:"TO WHOM SHALL I MAKE THE CHECK"
  CarriageControl:;
@@ -835,7 +835,7 @@
  NumericConstant:1
  FunctionRnd
  NumericConstant:100
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  FunctionInt
  CarriageControl:NL
 3020 PRINT 
@@ -930,9 +930,9 @@
  Variable:M$
  Variable:D$
  TextConstant:", "
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  Variable:E$
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  AssignmentOperator:=
 3320 RETURN
  

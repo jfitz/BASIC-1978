@@ -44,7 +44,7 @@
 100 FOR J=0 TO INT(60/L)
  control: Variable:J
  start:   ["NumericConstant:0"]
- end:     ["NumericConstant:60", "Variable:L", "BinaryOperatorDivide:/", "FunctionInt"]
+ end:     ["NumericConstant:60", "Variable:L", "BinaryOperatorDivide:/ numeric", "FunctionInt"]
 110 FOR I=1 TO L
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -52,9 +52,9 @@
 120 T$(J*L+I)=MID$(A$,I,1)
  Variable:J
  Variable:L
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  Variable:I
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:T$
  Variable:A$
  Variable:I
@@ -78,11 +78,11 @@
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
  Variable:C
  NumericConstant:37
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 205 PRINT
  CarriageControl:NL
 210 READ A: A1=A1+A: IF P=1 THEN 300
@@ -90,11 +90,11 @@
  Variable:A1
  Variable:A1
  Variable:A
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
  Variable:P
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 240 FOR I=1 TO A: PRINT " ";: NEXT I: P=1: GOTO 400
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -108,8 +108,8 @@
  LineNumber:400
 300 FOR I=A1-A TO A1-1: PRINT T$(I);: NEXT I: P=0
  control: Variable:I
- start:   ["Variable:A1", "Variable:A", "BinaryOperatorMinus:-"]
- end:     ["Variable:A1", "NumericConstant:1", "BinaryOperatorMinus:-"]
+ start:   ["Variable:A1", "Variable:A", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:A1", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
  Variable:I
  Variable:T$
  CarriageControl:;
@@ -120,7 +120,7 @@
 400 IF A1>60 THEN 200
  Variable:A1
  NumericConstant:60
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 410 GOTO 210
  LineNumber:210
 600 DATA 60,1,12,26,9,12,3,8,24,17,8,4,6,23,21,6,4,6,22,12,5,6,5

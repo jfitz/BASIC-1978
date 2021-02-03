@@ -49,13 +49,13 @@
 140 IF A$="LIST" THEN 600
  Variable:A$
  TextConstant:"LIST"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 150 IF LEFT$(A$,1)<>"Y" THEN 120
  Variable:A$
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 160 K=1
  Variable:K
  NumericConstant:1
@@ -67,14 +67,14 @@
  Variable:A$
  FunctionLen
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 190 IF LEFT$(A$(K),2)="\Q" THEN 170
  Variable:K
  Variable:A$
  NumericConstant:2
  FunctionLeft
  TextConstant:"\Q"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 200 PRINT "IS IT A ";RIGHT$(A$(K),LEN(A$(K))-2);
  TextConstant:"IS IT A "
  CarriageControl:;
@@ -84,7 +84,7 @@
  Variable:A$
  FunctionLen
  NumericConstant:2
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  FunctionRight
  CarriageControl:;
 210 INPUT A$
@@ -100,7 +100,7 @@
  NumericConstant:1
  FunctionLeft
  TextConstant:"Y"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
  TextConstant:"WHY NOT TRY ANOTHER ANIMAL?"
  CarriageControl:NL
  LineNumber:120
@@ -120,7 +120,7 @@
  Variable:A$
  FunctionLen
  NumericConstant:2
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  FunctionRight
  CarriageControl:NL
 270 INPUT X$
@@ -142,22 +142,22 @@
  AssignmentOperator:=
  Variable:A$
  TextConstant:"Y"
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
  Variable:A$
  TextConstant:"N"
- BinaryOperatorNotEqual:<>
- BinaryOperatorAnd:AND
+ BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorAnd:AND numeric
 310 IF A$="Y" THEN B$="N"
  Variable:A$
  TextConstant:"Y"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
  Variable:B$
  TextConstant:"N"
  AssignmentOperator:=
 320 IF A$="N" THEN B$="Y"
  Variable:A$
  TextConstant:"N"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
  Variable:B$
  TextConstant:"Y"
  AssignmentOperator:=
@@ -172,7 +172,7 @@
  Variable:A$
  Variable:Z1
  NumericConstant:2
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionStr
  AssignmentOperator:=
 350 A$(Z1)=A$(K)
@@ -184,36 +184,36 @@
 360 A$(Z1+1)="\A"+V$
  Variable:Z1
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:A$
  TextConstant:"\A"
  Variable:V$
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  AssignmentOperator:=
 370 A$(K)="\Q"+X$+"\"+A$+STR$(Z1+1)+"\"+B$+STR$(Z1)+"\"
  Variable:K
  Variable:A$
  TextConstant:"\Q"
  Variable:X$
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  TextConstant:"\"
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  Variable:A$
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  Variable:Z1
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionStr
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  TextConstant:"\"
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  Variable:B$
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  Variable:Z1
  FunctionStr
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  TextConstant:"\"
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  AssignmentOperator:=
 380 GOTO 120
  LineNumber:120
@@ -234,7 +234,7 @@
  NumericConstant:1
  FunctionMid
  TextConstant:"\"
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
  Variable:Q$
  Variable:Z
  NumericConstant:1
@@ -252,35 +252,35 @@
 440 IF C$<>"Y" AND C$<>"N" THEN 410
  Variable:C$
  TextConstant:"Y"
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
  Variable:C$
  TextConstant:"N"
- BinaryOperatorNotEqual:<>
- BinaryOperatorAnd:AND
+ BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorAnd:AND numeric
 450 T$="\"+C$
  Variable:T$
  TextConstant:"\"
  Variable:C$
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ string
  AssignmentOperator:=
 455 FOR X=3 TO LEN(Q$)-1
  control: Variable:X
  start:   ["NumericConstant:3"]
- end:     ["Variable:Q$", "FunctionLen", "NumericConstant:1", "BinaryOperatorMinus:-"]
+ end:     ["Variable:Q$", "FunctionLen", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
 460 IF MID$(Q$,X,2)=T$ THEN 480
  Variable:Q$
  Variable:X
  NumericConstant:2
  FunctionMid
  Variable:T$
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 470 NEXT X
  Variable:X
 475 STOP
  
 480 FOR Y=X+1 TO LEN(Q$)
  control: Variable:Y
- start:   ["Variable:X", "NumericConstant:1", "BinaryOperatorPlus:+"]
+ start:   ["Variable:X", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
  end:     ["Variable:Q$", "FunctionLen"]
 490 IF MID$(Q$,Y,1)="\" THEN 510
  Variable:Q$
@@ -288,7 +288,7 @@
  NumericConstant:1
  FunctionMid
  TextConstant:"\"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 500 NEXT Y
  Variable:Y
 505 STOP
@@ -298,12 +298,12 @@
  Variable:Q$
  Variable:X
  NumericConstant:2
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:Y
  Variable:X
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  NumericConstant:2
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  FunctionMid
  FunctionVal
  AssignmentOperator:=
@@ -332,11 +332,11 @@
  NumericConstant:2
  FunctionLeft
  TextConstant:"\A"
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 624 PRINT TAB(15*X);
  NumericConstant:15
  Variable:X
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  FunctionTab
  CarriageControl:;
 630 FOR Z=3 TO LEN(A$(I))
@@ -350,7 +350,7 @@
  NumericConstant:1
  FunctionMid
  TextConstant:"\"
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
  Variable:I
  Variable:A$
  Variable:Z
@@ -362,11 +362,11 @@
  Variable:X
  Variable:X
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
  Variable:X
  NumericConstant:4
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
  Variable:X
  NumericConstant:0
  AssignmentOperator:=

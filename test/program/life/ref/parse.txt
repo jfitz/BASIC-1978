@@ -72,7 +72,7 @@
 360 IF A$ <> "Y" THEN STOP
  Variable:A$
  TextConstant:"Y"
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
  
 400 REM *** CALCULATE NEIGHBORS
  Remark:*** CALCULATE NEIGHBORS
@@ -102,35 +102,35 @@
  AssignmentOperator:=
 450 FOR I0=-1 TO 1
  control: Variable:I0
- start:   ["NumericConstant:1", "UnaryOperatorMinus:-"]
+ start:   ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
  end:     ["NumericConstant:1"]
 460 FOR J0=-1 TO 1
  control: Variable:J0
- start:   ["NumericConstant:1", "UnaryOperatorMinus:-"]
+ start:   ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
  end:     ["NumericConstant:1"]
 470 IF I0 = 0 AND J0 = 0 THEN 500
  Variable:I0
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
  Variable:J0
  NumericConstant:0
- BinaryOperatorEqual:=
- BinaryOperatorAnd:AND
+ BinaryOperatorEqual:= numeric
+ BinaryOperatorAnd:AND numeric
 480 IF B$(I+I0,J+J0) <> L$ THEN 500
  Variable:I
  Variable:I0
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:J
  Variable:J0
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:B$
  Variable:L$
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 490 C = C + 1
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 500 NEXT J0
  Variable:J0
@@ -167,19 +167,19 @@
  Variable:J
  Variable:N
  NumericConstant:2
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 640 IF N(I,J)=2 THEN 720
  Variable:I
  Variable:J
  Variable:N
  NumericConstant:2
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 650 IF N(I,J)=3 THEN 690
  Variable:I
  Variable:J
  Variable:N
  NumericConstant:3
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 660 REM * CELL DIES
  Remark:* CELL DIES
 670 B$(I,J)=D$

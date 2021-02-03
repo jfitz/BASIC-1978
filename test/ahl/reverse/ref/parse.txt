@@ -35,7 +35,7 @@
 180 IF A$="NO" THEN 210
  Variable:A$
  TextConstant:"NO"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 190 GOSUB 710
  LineNumber:710
 200 REM *** MAKE A RANDOM LIST A(1) TO A(N)
@@ -45,12 +45,12 @@
  Variable:A
  Variable:N
  NumericConstant:1
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  NumericConstant:1
  FunctionRnd
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  NumericConstant:2
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionInt
  AssignmentOperator:=
 220 FOR K=2 TO N
@@ -63,21 +63,21 @@
  Variable:N
  NumericConstant:1
  FunctionRnd
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionInt
  AssignmentOperator:=
 240 FOR J=1 TO K-1
  control: Variable:J
  start:   ["NumericConstant:1"]
- end:     ["Variable:K", "NumericConstant:1", "BinaryOperatorMinus:-"]
+ end:     ["Variable:K", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
 250 IF A(K)=A(J) THEN 230
  Variable:K
  Variable:A
  Variable:J
  Variable:A
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 260 NEXT J:NEXT K
  Variable:J
  Variable:K
@@ -101,11 +101,11 @@
 350 IF R=0 THEN 520
  Variable:R
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 360 IF R<=N THEN 390
  Variable:R
  Variable:N
- BinaryOperatorLessEqual:<=
+ BinaryOperatorLessEqual:<= numeric
 370 PRINT "OOPS! TOO MANY! I CAN REVERSE AT MOST";N:GOTO 330
  TextConstant:"OOPS! TOO MANY! I CAN REVERSE AT MOST"
  CarriageControl:;
@@ -116,14 +116,14 @@
  Variable:T
  Variable:T
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 400 REM *** REVERSE R NUMBERS AND PRINT NEW LIST
  Remark:*** REVERSE R NUMBERS AND PRINT NEW LIST
 410 FOR K=1 TO INT(R/2)
  control: Variable:K
  start:   ["NumericConstant:1"]
- end:     ["Variable:R", "NumericConstant:2", "BinaryOperatorDivide:/", "FunctionInt"]
+ end:     ["Variable:R", "NumericConstant:2", "BinaryOperatorDivide:/ numeric", "FunctionInt"]
 420 Z=A(K)
  Variable:Z
  Variable:K
@@ -134,17 +134,17 @@
  Variable:A
  Variable:R
  Variable:K
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:A
  AssignmentOperator:=
 440 A(R-K+1)=Z
  Variable:R
  Variable:K
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:A
  Variable:Z
  AssignmentOperator:=
@@ -162,7 +162,7 @@
  Variable:K
  Variable:A
  Variable:K
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 500 NEXT K
  Variable:K
 510 PRINT "YOU WON IT IN";T;"MOVES!!!":PRINT
@@ -183,7 +183,7 @@
 550 IF A$="YES" THEN 210
  Variable:A$
  TextConstant:"YES"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 560 PRINT: PRINT "O.K. HOPE YOU HAD FUN!!":GOTO 999
  CarriageControl:NL
  TextConstant:"O.K. HOPE YOU HAD FUN!!"

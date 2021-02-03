@@ -500,7 +500,9 @@ class NumericConstant < AbstractValueElement
     :numeric
   end
 
-  def set_content_type(stack) ; end
+  def set_content_type(stack)
+    stack.push(content_type)
+  end
 
   def eql?(other)
     @value == other.to_v
@@ -828,7 +830,9 @@ class IntegerConstant < AbstractValueElement
     :integer
   end
 
-  def set_content_type(stack) ; end
+  def set_content_type(stack)
+    stack.push(content_type)
+  end
 
   def eql?(other)
     @value == other.to_v
@@ -1159,7 +1163,9 @@ class TextConstant < AbstractValueElement
     :string
   end
 
-  def set_content_type(stack) ; end
+  def set_content_type(stack)
+    stack.push(content_type)
+  end
 
   def eql?(other)
     @value == other.to_v
@@ -1290,7 +1296,9 @@ class BooleanConstant < AbstractValueElement
     :boolean
   end
 
-  def set_content_type(stack) ; end
+  def set_content_type(stack)
+    stack.push(content_type)
+  end
 
   def eql?(other)
     @value == other.to_v
@@ -1598,7 +1606,6 @@ class VariableName < AbstractElement
   end
 
   attr_reader :name
-  attr_reader :content_type
 
   def initialize(token)
     super()
@@ -1613,7 +1620,13 @@ class VariableName < AbstractElement
     @content_type = @name.content_type
   end
 
-  def set_content_type(stack) ; end
+  def content_type
+    @content_type
+  end
+
+  def set_content_type(stack)
+    stack.push(content_type)
+  end
 
   def eql?(other)
     to_s == other.to_s
@@ -1684,7 +1697,9 @@ class UserFunctionName < AbstractElement
     @content_type = @name.content_type
   end
 
-  def set_content_type(stack) ; end
+  def set_content_type(stack)
+    stack.push(content_type)
+  end
 
   def eql?(other)
     to_s == other.to_s
@@ -1767,12 +1782,11 @@ class Variable < AbstractElement
     @precedence = 7
   end
 
-  def set_content_type(stack)
-    return @variable_name.content_type if stack.empty?
+  def set_content_type(type_stack)
+    type = type_stack[-1]
+    type_stack.pop if type == :list
 
-    type = stack[-1]
-
-    stack.pop if type == :list
+    type_stack.push(@variable_name.content_type)
   end
 
   def eql?(other)
@@ -2025,7 +2039,9 @@ class Declaration < AbstractElement
     @variable_name.content_type
   end
 
-  def set_content_type(stack) ; end
+  def set_content_type(stack)
+    stack.push(content_type)
+  end
 
   def to_s
     if subscripts.empty?
@@ -2080,7 +2096,11 @@ class List < AbstractElement
     :list
   end
 
-  def set_content_type(_) ; end
+  def set_content_type(stack)
+    @expressions.each { |expression| expression.set_content_type }
+    
+    stack.push(content_type)
+  end
 
   def evaluate(interpreter, _)
     interpreter.evaluate(@expressions)

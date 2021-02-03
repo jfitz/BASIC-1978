@@ -31,7 +31,7 @@
 260 IF X$="NO" THEN 320
  Variable:X$
  TextConstant:"NO"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 270 PRINT"UP TO 10 MAY PLAY.  A TABLE OF ODDS WILL BE PRINTED.  YOU"
  TextConstant:"UP TO 10 MAY PLAY.  A TABLE OF ODDS WILL BE PRINTED.  YOU"
  CarriageControl:NL
@@ -98,9 +98,9 @@
  NumericConstant:10
  NumericConstant:1
  FunctionRnd
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionInt
  AssignmentOperator:=
 450 NEXT A
@@ -114,7 +114,7 @@
  Variable:R
  Variable:A
  Variable:D
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 480 NEXT A
  Variable:A
@@ -172,7 +172,7 @@
  Variable:R
  Variable:N
  Variable:D
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  CarriageControl:;
  TextConstant:":1"
  CarriageControl:NL
@@ -201,12 +201,12 @@
  Variable:J
  Variable:P
  NumericConstant:1
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 660 IF P(J)<100000 THEN 690
  Variable:J
  Variable:P
  NumericConstant:100000
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 670 PRINT"  YOU CAN'T DO THAT!"
  TextConstant:"  YOU CAN'T DO THAT!"
  CarriageControl:NL
@@ -242,9 +242,9 @@
  NumericConstant:100
  NumericConstant:1
  FunctionRnd
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionInt
  AssignmentOperator:=
 770 IF Y(M(I))<10 THEN 860
@@ -252,15 +252,15 @@
  Variable:M
  Variable:Y
  NumericConstant:10
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 780 LET S=INT(R/D(I)+.5)
  Variable:S
  Variable:R
  Variable:I
  Variable:D
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  NumericConstant:.5
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionInt
  AssignmentOperator:=
 790 IF Y(M(I))<S+17 THEN 880
@@ -269,40 +269,40 @@
  Variable:Y
  Variable:S
  NumericConstant:17
- BinaryOperatorPlus:+
- BinaryOperatorLess:<
+ BinaryOperatorPlus:+ numeric
+ BinaryOperatorLess:< numeric
 800 IF Y(M(I))<S+37 THEN 900
  Variable:I
  Variable:M
  Variable:Y
  Variable:S
  NumericConstant:37
- BinaryOperatorPlus:+
- BinaryOperatorLess:<
+ BinaryOperatorPlus:+ numeric
+ BinaryOperatorLess:< numeric
 810 IF Y(M(I))<S+57 THEN 920
  Variable:I
  Variable:M
  Variable:Y
  Variable:S
  NumericConstant:57
- BinaryOperatorPlus:+
- BinaryOperatorLess:<
+ BinaryOperatorPlus:+ numeric
+ BinaryOperatorLess:< numeric
 820 IF Y(M(I))<77+S THEN 940
  Variable:I
  Variable:M
  Variable:Y
  NumericConstant:77
  Variable:S
- BinaryOperatorPlus:+
- BinaryOperatorLess:<
+ BinaryOperatorPlus:+ numeric
+ BinaryOperatorLess:< numeric
 830 IF Y(M(I))<S+92 THEN 960
  Variable:I
  Variable:M
  Variable:Y
  Variable:S
  NumericConstant:92
- BinaryOperatorPlus:+
- BinaryOperatorLess:<
+ BinaryOperatorPlus:+ numeric
+ BinaryOperatorLess:< numeric
 840 LET Y(M(I))=7
  Variable:I
  Variable:M
@@ -377,7 +377,7 @@
  Variable:I
  Variable:M
  Variable:Y
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1010 NEXT I
  Variable:I
@@ -392,17 +392,17 @@
 1040 FOR I=1 TO 8-L
  control: Variable:I
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:8", "Variable:L", "BinaryOperatorMinus:-"]
+ end:     ["NumericConstant:8", "Variable:L", "BinaryOperatorMinus:- numeric"]
 1050 IF S(M(I))<S(M(I+1))THEN 1090
  Variable:I
  Variable:M
  Variable:S
  Variable:I
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:M
  Variable:S
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 1060 LET H=M(I)
  Variable:H
  Variable:I
@@ -413,13 +413,13 @@
  Variable:M
  Variable:I
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:M
  AssignmentOperator:=
 1080 LET M(I+1)=H
  Variable:I
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  Variable:M
  Variable:H
  AssignmentOperator:=
@@ -444,15 +444,15 @@
  Variable:S
  Variable:I
  NumericConstant:1
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  Variable:M
  Variable:S
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1140 IF B=0 THEN 1190
  Variable:B
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1150 FOR A=1 TO B
  control: Variable:A
  start:   ["NumericConstant:1"]
@@ -464,7 +464,7 @@
  Variable:M
  Variable:S
  NumericConstant:27
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 1180 NEXT A
  Variable:A
 1190 PRINT M(I);
@@ -476,7 +476,7 @@
 1210 FOR A=1 TO 28-T
  control: Variable:A
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:28", "Variable:T", "BinaryOperatorMinus:-"]
+ end:     ["NumericConstant:28", "Variable:T", "BinaryOperatorMinus:- numeric"]
 1220 PRINT
  CarriageControl:NL
 1230 NEXT A
@@ -496,7 +496,7 @@
 1250 IF T<28 THEN 720
  Variable:T
  NumericConstant:28
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 1270 PRINT "THE RACE RESULTS ARE:"
  TextConstant:"THE RACE RESULTS ARE:"
  CarriageControl:NL
@@ -508,7 +508,7 @@
  control: Variable:I
  start:   ["NumericConstant:8"]
  end:     ["NumericConstant:1"]
- step:    ["NumericConstant:1", "UnaryOperatorMinus:-"]
+ step:    ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
 1290 LET F=M(I)
  Variable:F
  Variable:I
@@ -528,7 +528,7 @@
  Variable:R
  Variable:F
  Variable:D
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  CarriageControl:;
  TextConstant:":1"
  CarriageControl:NL
@@ -536,7 +536,7 @@
  Variable:Z9
  Variable:Z9
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1320  NEXT I
  Variable:I
@@ -549,7 +549,7 @@
  Variable:Q
  NumericConstant:8
  Variable:M
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 1350 LET N=Q(J)
  Variable:N
  Variable:J
@@ -566,10 +566,10 @@
  Variable:R
  Variable:N
  Variable:D
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  Variable:J
  Variable:P
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  CarriageControl:NL
 1370 NEXT J
  Variable:J
@@ -581,7 +581,7 @@
 1376 IF O$="YES" THEN 380
  Variable:O$
  TextConstant:"YES"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1380 END
  
 

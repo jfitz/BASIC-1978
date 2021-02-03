@@ -33,19 +33,19 @@
 250 IF Z$="NO" THEN 440
  Variable:Z$
  TextConstant:"NO"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 260 IF Z$="no" THEN 440
  Variable:Z$
  TextConstant:"no"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 270 IF Z$="YES" THEN 310
  Variable:Z$
  TextConstant:"YES"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 280 IF Z$="yes" THEN 310
  Variable:Z$
  TextConstant:"yes"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 290 PRINT "PLEASE ANSWER YES OR NO"
  TextConstant:"PLEASE ANSWER YES OR NO"
  CarriageControl:NL
@@ -100,11 +100,11 @@
 470 IF W=1 THEN 490
  Variable:W
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 480 IF W<>2 THEN 450
  Variable:W
  NumericConstant:2
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 490 PRINT "ENTER NUMBER OF PILES";
  TextConstant:"ENTER NUMBER OF PILES"
  CarriageControl:;
@@ -113,16 +113,16 @@
 510 IF N>100 THEN 490
  Variable:N
  NumericConstant:100
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 520 IF N<1 THEN 490
  Variable:N
  NumericConstant:1
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 530 IF N<>INT(N) THEN 490
  Variable:N
  Variable:N
  FunctionInt
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 540 PRINT "ENTER PILE SIZES"
  TextConstant:"ENTER PILE SIZES"
  CarriageControl:NL
@@ -140,19 +140,19 @@
  Variable:I
  Variable:A
  NumericConstant:2000
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 590 IF A(I)<1 THEN 560
  Variable:I
  Variable:A
  NumericConstant:1
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 600 IF A(I)<>INT(A(I)) THEN 560
  Variable:I
  Variable:A
  Variable:I
  Variable:A
  FunctionInt
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 610 NEXT I
  Variable:I
 620 PRINT "DO YOU WANT TO MOVE FIRST";
@@ -163,19 +163,19 @@
 640 IF Q9$="YES" THEN 1450
  Variable:Q9$
  TextConstant:"YES"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 650 IF Q9$="yes" THEN 1450
  Variable:Q9$
  TextConstant:"yes"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 660 IF Q9$="NO" THEN 700
  Variable:Q9$
  TextConstant:"NO"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 670 IF Q9$="no" THEN 700
  Variable:Q9$
  TextConstant:"no"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 680 PRINT "PLEASE ANSWER YES OR NO."
  TextConstant:"PLEASE ANSWER YES OR NO."
  CarriageControl:NL
@@ -184,7 +184,7 @@
 700 IF W=1 THEN 940
  Variable:W
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 710 LET C=0
  Variable:C
  NumericConstant:0
@@ -197,17 +197,17 @@
  Variable:I
  Variable:A
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 740 LET C=C+1
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 750 IF C=3 THEN 840
  Variable:C
  NumericConstant:3
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 760 LET D(C)=I
  Variable:C
  Variable:D
@@ -218,13 +218,13 @@
 780 IF C=2 THEN 920
  Variable:C
  NumericConstant:2
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 790 IF A(D(1))>1 THEN 820
  NumericConstant:1
  Variable:D
  Variable:A
  NumericConstant:1
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 800 PRINT "MACHINE LOSES"
  TextConstant:"MACHINE LOSES"
  CarriageControl:NL
@@ -247,29 +247,29 @@
  Variable:I
  Variable:A
  NumericConstant:1
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 870 IF A(I)=0 THEN 890
  Variable:I
  Variable:A
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 880 LET C=C+1
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 890 NEXT I
  Variable:I
 900 IF C/2<>INT(C/2) THEN 800
  Variable:C
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  Variable:C
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  FunctionInt
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 910 GOTO 940
  LineNumber:940
 920 IF A(D(1))=1 THEN 820
@@ -277,13 +277,13 @@
  Variable:D
  Variable:A
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 930 IF A(D(2))=1 THEN 820
  NumericConstant:2
  Variable:D
  Variable:A
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 940 FOR I=1 TO N
  control: Variable:I
  start:   ["NumericConstant:1"]
@@ -301,7 +301,7 @@
  Variable:F
  Variable:E
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 980 LET B(I,J)=2*(F-INT(F))
  Variable:I
@@ -311,8 +311,8 @@
  Variable:F
  Variable:F
  FunctionInt
- BinaryOperatorMinus:-
- BinaryOperatorMultiply:*
+ BinaryOperatorMinus:- numeric
+ BinaryOperatorMultiply:* numeric
  AssignmentOperator:=
 990 LET E=INT(F)
  Variable:E
@@ -327,7 +327,7 @@
  control: Variable:J
  start:   ["NumericConstant:10"]
  end:     ["NumericConstant:0"]
- step:    ["NumericConstant:1", "UnaryOperatorMinus:-"]
+ step:    ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
 1030 LET C=0
  Variable:C
  NumericConstant:0
@@ -345,18 +345,18 @@
  Variable:J
  Variable:B
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1070 LET C=C+1
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1080 IF A(I)<=H THEN 1110
  Variable:I
  Variable:A
  Variable:H
- BinaryOperatorLessEqual:<=
+ BinaryOperatorLessEqual:<= numeric
 1090 LET H=A(I)
  Variable:H
  Variable:I
@@ -371,12 +371,12 @@
 1120 IF C/2<>INT(C/2) THEN 1190
  Variable:C
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  Variable:C
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  FunctionInt
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 1130 NEXT J
  Variable:J
 1140 LET E=INT(N*RND(1)+1)
@@ -384,25 +384,25 @@
  Variable:N
  NumericConstant:1
  FunctionRnd
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionInt
  AssignmentOperator:=
 1150 IF A(E)=0 THEN 1140
  Variable:E
  Variable:A
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1160 LET F=INT(A(E)*RND(1)+1)
  Variable:F
  Variable:E
  Variable:A
  NumericConstant:1
  FunctionRnd
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionInt
  AssignmentOperator:=
 1170 LET A(E)=A(E)-F
@@ -411,7 +411,7 @@
  Variable:E
  Variable:A
  Variable:F
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1180 GOTO 1380
  LineNumber:1380
@@ -443,12 +443,12 @@
  Variable:J
  Variable:B
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1250 LET C=C+1
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1260 NEXT I
  Variable:I
@@ -460,25 +460,25 @@
  NumericConstant:2
  Variable:C
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  Variable:C
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  FunctionInt
- BinaryOperatorMinus:-
- BinaryOperatorMultiply:*
+ BinaryOperatorMinus:- numeric
+ BinaryOperatorMultiply:* numeric
  NumericConstant:2
  Variable:J
- BinaryOperatorPower:^
- BinaryOperatorMultiply:*
- BinaryOperatorPlus:+
+ BinaryOperatorPower:^ numeric
+ BinaryOperatorMultiply:* numeric
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1280 NEXT J
  Variable:J
 1290 IF W=1 THEN 1380
  Variable:W
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1300 LET C=0
  Variable:C
  NumericConstant:0
@@ -491,36 +491,36 @@
  Variable:I
  Variable:A
  NumericConstant:1
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 1330 IF A(I)=0 THEN 1350
  Variable:I
  Variable:A
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1340 LET C=C+1
  Variable:C
  Variable:C
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1350 NEXT I
  Variable:I
 1360 IF C/2<>INT(C/2) THEN 1380
  Variable:C
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  Variable:C
  NumericConstant:2
- BinaryOperatorDivide:/
+ BinaryOperatorDivide:/ numeric
  FunctionInt
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 1370 LET A(G)=1-A(G)
  Variable:G
  Variable:A
  NumericConstant:1
  Variable:G
  Variable:A
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1380 PRINT "PILE  SIZE"
  TextConstant:"PILE  SIZE"
@@ -540,13 +540,13 @@
 1420 IF W=2 THEN 1450
  Variable:W
  NumericConstant:2
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1430 GOSUB 1570
  LineNumber:1570
 1440 IF Z=1 THEN 820
  Variable:Z
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1450 PRINT "YOUR MOVE - PILE, NUMBER TO BE REMOVED";
  TextConstant:"YOUR MOVE - PILE, NUMBER TO BE REMOVED"
  CarriageControl:;
@@ -556,44 +556,44 @@
 1470 IF X>N THEN 1450
  Variable:X
  Variable:N
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 1480 IF X<1 THEN 1450
  Variable:X
  NumericConstant:1
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 1490 IF X<>INT(X) THEN 1450
  Variable:X
  Variable:X
  FunctionInt
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 1500 IF Y>A(X) THEN 1450
  Variable:Y
  Variable:X
  Variable:A
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 1510 IF Y<1 THEN 1450
  Variable:Y
  NumericConstant:1
- BinaryOperatorLess:<
+ BinaryOperatorLess:< numeric
 1520 IF Y<>INT(Y) THEN 1450
  Variable:Y
  Variable:Y
  FunctionInt
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 1530 LET A(X)=A(X)-Y
  Variable:X
  Variable:A
  Variable:X
  Variable:A
  Variable:Y
- BinaryOperatorMinus:-
+ BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1540 GOSUB 1570
  LineNumber:1570
 1550 IF Z=1 THEN 800
  Variable:Z
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1560 GOTO 700
  LineNumber:700
 1570 LET Z=0
@@ -608,7 +608,7 @@
  Variable:I
  Variable:A
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1600 RETURN
  
 1610 NEXT I
@@ -627,19 +627,19 @@
 1660 IF Q9$="YES" THEN 1720
  Variable:Q9$
  TextConstant:"YES"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1670 IF Q9$="yes" THEN 1720
  Variable:Q9$
  TextConstant:"yes"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1680 IF Q9$="NO" THEN 1730
  Variable:Q9$
  TextConstant:"NO"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1690 IF Q9$="no" THEN 1730
  Variable:Q9$
  TextConstant:"no"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1700 PRINT "PLEASE.  YES OR NO."
  TextConstant:"PLEASE.  YES OR NO."
  CarriageControl:NL

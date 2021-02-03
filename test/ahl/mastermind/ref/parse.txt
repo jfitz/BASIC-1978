@@ -33,7 +33,7 @@
 90 IF C9>8 THEN PRINT "NO MORE THAN 8, PLEASE!":GOTO 80
  Variable:C9
  NumericConstant:8
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
  TextConstant:"NO MORE THAN 8, PLEASE!"
  CarriageControl:NL
  LineNumber:80
@@ -45,7 +45,7 @@
  Variable:P
  Variable:C9
  Variable:P9
- BinaryOperatorPower:^
+ BinaryOperatorPower:^ numeric
  AssignmentOperator:=
 130 PRINT "TOTAL POSSIBILITIES =";P
  TextConstant:"TOTAL POSSIBILITIES ="
@@ -136,9 +136,9 @@
  Variable:P
  NumericConstant:1
  FunctionRnd
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionInt
  AssignmentOperator:=
 330 GOSUB 3000
@@ -166,16 +166,16 @@
 390 IF X$="BOARD" THEN 2000
  Variable:X$
  TextConstant:"BOARD"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 400 IF X$="QUIT" THEN 2500
  Variable:X$
  TextConstant:"QUIT"
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 410 IF LEN(X$)<>P9 THEN PRINT "BAD NUMBER OF POSITIONS.":GOTO 380
  Variable:X$
  FunctionLen
  Variable:P9
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
  TextConstant:"BAD NUMBER OF POSITIONS."
  CarriageControl:NL
  LineNumber:380
@@ -198,7 +198,7 @@
  Variable:Y
  NumericConstant:1
  FunctionMid
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 460 NEXT Y
  Variable:Y
 470 PRINT "'"; MID$(X$,X,1); "' IS UNRECOGNIZED.":GOTO 380
@@ -233,7 +233,7 @@
 540 IF B=P9 THEN 630
  Variable:B
  Variable:P9
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 550 REM     TELL HUMAN RESULTS
  Remark:    TELL HUMAN RESULTS
 560 PRINT "YOU HAVE ";B;" BLACKS AND ";W;" WHITES."
@@ -300,7 +300,7 @@
  Variable:H
  Variable:H
  Variable:M
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 650 GOSUB 5000
  LineNumber:5000
@@ -339,16 +339,16 @@
  Variable:P
  NumericConstant:1
  FunctionRnd
- BinaryOperatorMultiply:*
+ BinaryOperatorMultiply:* numeric
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionInt
  AssignmentOperator:=
 780 IF I(G)=1 THEN 890
  Variable:G
  Variable:I
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 790 FOR X=G TO P
  control: Variable:X
  start:   ["Variable:G"]
@@ -357,7 +357,7 @@
  Variable:X
  Variable:I
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 810 NEXT X
  Variable:X
 820 FOR X=1 TO G
@@ -368,7 +368,7 @@
  Variable:X
  Variable:I
  NumericConstant:1
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 840 NEXT X
  Variable:X
 850 PRINT "YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
@@ -414,7 +414,7 @@
 990 IF B1=P9 THEN 1120
  Variable:B1
  Variable:P9
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1000 GOSUB 3000
  LineNumber:3000
 1010 FOR X=1 TO P
@@ -427,7 +427,7 @@
  Variable:X
  Variable:I
  NumericConstant:0
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 1035 GOSUB 6500
  LineNumber:6500
 1040 GOSUB 4000
@@ -437,11 +437,11 @@
 1060 IF B1<>B OR W1<>W THEN I(X)=0
  Variable:B1
  Variable:B
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
  Variable:W1
  Variable:W
- BinaryOperatorNotEqual:<>
- BinaryOperatorOr:OR
+ BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorOr:OR numeric
  Variable:X
  Variable:I
  NumericConstant:0
@@ -469,7 +469,7 @@
  Variable:C
  Variable:C
  Variable:M
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1140 GOSUB 5000
  LineNumber:5000
@@ -502,7 +502,7 @@
 2050 FOR Z=1 TO M-1
  control: Variable:Z
  start:   ["NumericConstant:1"]
- end:     ["Variable:M", "NumericConstant:1", "BinaryOperatorMinus:-"]
+ end:     ["Variable:M", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
 2060 PRINT Z;TAB(9);S$(Z);TAB(25);S(Z,1);TAB(35);S(Z,2)
  Variable:Z
  CarriageControl:;
@@ -589,7 +589,7 @@
  NumericConstant:1
  Variable:Q
  NumericConstant:0
- BinaryOperatorGreater:>
+ BinaryOperatorGreater:> numeric
 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
  Remark: IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
 3526 FOR S=1 TO P9
@@ -615,13 +615,13 @@
  Variable:Q
  Variable:Q
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3550 IF Q(Q)<=C9 THEN RETURN
  Variable:Q
  Variable:Q
  Variable:C9
- BinaryOperatorLessEqual:<=
+ BinaryOperatorLessEqual:<= numeric
  
 3560 Q(Q)=1
  Variable:Q
@@ -632,7 +632,7 @@
  Variable:Q
  Variable:Q
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3580 GOTO 3540
  LineNumber:3540
@@ -686,12 +686,12 @@
  Variable:G$
  Variable:S
  Variable:A$
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 4570 B=B+1
  Variable:B
  Variable:B
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 4580 G$(S)=CHR$(F)
  Variable:S
@@ -704,14 +704,14 @@
  Variable:A$
  Variable:F
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionChr
  AssignmentOperator:=
 4600 F=F+2
  Variable:F
  Variable:F
  NumericConstant:2
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 4610 GOTO 4660
  LineNumber:4660
@@ -724,18 +724,18 @@
  Variable:G$
  Variable:T
  Variable:A$
- BinaryOperatorNotEqual:<>
+ BinaryOperatorNotEqual:<> numeric
 4640 IF G$(T)=A$(T) THEN 4650
  Variable:T
  Variable:G$
  Variable:T
  Variable:A$
- BinaryOperatorEqual:=
+ BinaryOperatorEqual:= numeric
 4645 W=W+1:A$(T)=CHR$(F):G$(S)=CHR$(F+1):F=F+2:GOTO 4660
  Variable:W
  Variable:W
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
  Variable:T
  Variable:A$
@@ -746,13 +746,13 @@
  Variable:G$
  Variable:F
  NumericConstant:1
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  FunctionChr
  AssignmentOperator:=
  Variable:F
  Variable:F
  NumericConstant:2
- BinaryOperatorPlus:+
+ BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
  LineNumber:4660
 4650 NEXT T
