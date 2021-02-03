@@ -2068,7 +2068,9 @@ class Declaration < AbstractElement
 end
 
 # A list (needed because it has precedence value)
-class List < AbstractElement
+class ExpressionList < AbstractElement
+  attr_reader :expressions
+
   def initialize(expressions)
     super()
 
@@ -2076,10 +2078,6 @@ class List < AbstractElement
     @expressions = expressions
     @variable = true
     @precedence = 7
-  end
-
-  def list
-    @expressions
   end
 
   def dump
