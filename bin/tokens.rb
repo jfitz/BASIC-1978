@@ -3,25 +3,32 @@ class AbstractToken
   def self.pretty_tokens(keywords, tokens)
     pretty_tokens = []
 
+    token1 = NullToken.new
+    token2 = NullToken.new
+
     keywords.each do |token|
-      pretty_tokens << WhitespaceToken.new(' ')
+      pretty_tokens << WhitespaceToken.new(' ') unless pretty_tokens.empty?
       pretty_tokens << token
+
+      token2 = token1
+      token1 = token
     end
 
-    token1 = WhitespaceToken.new(' ')
-    token2 = WhitespaceToken.new(' ')
     tokens.each do |token|
       prev_is_variable = token1.variable? ||
                          token1.function? ||
                          token1.user_function?
 
       prev2_is_operand = token2.operand? || token2.groupend?
+
       pretty_tokens << WhitespaceToken.new(' ') unless
         token.separator? ||
         (token.groupstart? && prev_is_variable) ||
         token.groupend? ||
         token1.groupstart? ||
-        (token1.operator? && token1.to_s != 'NOT' && !prev2_is_operand)
+        (token1.operator? && token1.to_s != 'NOT' && !prev2_is_operand) ||
+        token1.whitespace? ||
+        token1.null?
 
       pretty_tokens << token
 
@@ -75,6 +82,7 @@ class AbstractToken
 
   def initialize(text)
     @text = text.to_s
+    @is_null = false
     @is_whitespace = false
     @is_comment = false
     @is_keyword = false
@@ -106,6 +114,10 @@ class AbstractToken
 
   def to_s
     @text
+  end
+
+  def null?
+    @is_null
   end
 
   def whitespace?
@@ -180,6 +192,15 @@ class InvalidToken < AbstractToken
     super
 
     @is_invalid = true
+  end
+end
+
+# null token used for pretty()
+class NullToken < AbstractToken
+  def initialize
+    super('')
+
+    @is_null = true
   end
 end
 

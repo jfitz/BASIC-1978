@@ -5,7 +5,7 @@ WHAT SIDE -- ITALY(1), ALLIES(2), JAPAN(3), GERMANY(4)? 1
  A = 1
 20: IF A > 0 AND A < 5 THEN 25
  A: 1
- A>0ANDA<5: true
+ A > 0 AND A < 5: true
 25: ON A GOTO 30, 110, 200, 220
  A: 1
  A = 1
@@ -14,7 +14,7 @@ YOUR TARGET -- ALBANIA(1), GREECE(2), NORTH AFRICA(3)? 2
  B = 2
 40: IF B > 0 AND B < 4 THEN 45
  B: 2
- B>0ANDB<4: true
+ B > 0 AND B < 4: true
 45: PRINT
 
 45.1: ON B GOTO 50, 80, 90
@@ -30,21 +30,21 @@ HOW MANY MISSIONS HAVE YOU FLOWN? 0
  D = 0
 290: IF D < 160 THEN 300
  D: 0
- D<160: true
+ D < 160: true
 300: PRINT
 
 300.1: IF D < 100 THEN 310
  D: 0
- D<100: true
+ D < 100: true
 310: IF D < 25 THEN PRINT "FRESH OUT OF TRAINING, EH?"
  D: 0
 FRESH OUT OF TRAINING, EH?
- D<25: true
+ D < 25: true
 320: PRINT
 
 320.1: IF D < 160 * RND(1) THEN 330
  D: 0
- D<160*RND(1): true
+ D < 160 * RND(1): true
 330: PRINT "MISSED TARGET BY" INT(2 + 30 * RND(1)) "MILES!"
 MISSED TARGET BY 23MILES!
 335: PRINT "NOW YOU'RE REALLY IN FOR IT !!"
@@ -56,20 +56,20 @@ DOES THE ENEMY HAVE GUNS(1), MISSILES(2), OR BOTH(3)? 3
  R = 3
 345: IF R > 0 AND R < 4 THEN 350
  R: 3
- R>0ANDR<4: true
+ R > 0 AND R < 4: true
 350: PRINT
 
 350.1: T = 0
  T = 0
 350.2: IF R = 2 THEN 360
  R: 3
- R=2: false
+ R = 2: false
 355: INPUT "WHAT'S THE PERCENT HIT RATE OF ENEMY GUNNERS (10 TO 50)"; S
 WHAT'S THE PERCENT HIT RATE OF ENEMY GUNNERS (10 TO 50)? 50
  S = 50
 357: IF S < 10 THEN PRINT "YOU LIE, BUT YOU'LL PAY..."
  S: 50
- S<10: false
+ S < 10: false
 358: PRINT
 
 360: PRINT
@@ -77,11 +77,11 @@ WHAT'S THE PERCENT HIT RATE OF ENEMY GUNNERS (10 TO 50)? 50
 360.1: IF R > 1 THEN T = 35
  R: 3
  T = 35
- R>1: true
+ R > 1: true
 365: IF S + T > 100 * RND(1) THEN 380
  S: 50
  T: 35
- S+T>100*RND(1): true
+ S + T > 100 * RND(1): true
 380: PRINT "* * * * BOOM * * * *"
 * * * * BOOM * * * *
 384: PRINT "YOU HAVE BEEN SHOT DOWN....."
@@ -101,7 +101,7 @@ ANOTHER MISSION (Y OR N)? N
  U$ = "N"
 395: IF U$ = "Y" THEN 8
  U$: "N"
- U$="Y": false
+ U$ = "Y": false
 400: PRINT "CHICKEN !!!"
 CHICKEN !!!
 400.1: PRINT

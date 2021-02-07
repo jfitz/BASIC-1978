@@ -351,7 +351,7 @@ class Interpreter
       program_clear
       file.each_line do |line|
         line = console_io.ascii_printables(line)
-        program_store_line(line, false)
+        program_store_line(line, false, false)
       end
     end
     program_check

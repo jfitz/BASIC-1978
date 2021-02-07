@@ -69,11 +69,11 @@ class IfModifier < AbstractModifier
   end
 
   def pre_trace
-    ' IF ' + @expression.to_s
+    'IF ' + @expression.to_s
   end
 
   def post_trace
-    ' ENDIF'
+    'ENDIF'
   end
 
   def execute_pre(interpreter)
@@ -138,11 +138,11 @@ class UnlessModifier < AbstractModifier
   end
 
   def pre_trace
-    ' UNLESS ' + @expression.to_s
+    'UNLESS ' + @expression.to_s
   end
 
   def post_trace
-    ' ENDUNLESS'
+    'ENDUNLESS'
   end
 
   def execute_pre(interpreter)
@@ -207,11 +207,11 @@ class WhileModifier < AbstractModifier
   end
 
   def pre_trace
-    ' WHILE ' + @expression.to_s
+    'WHILE ' + @expression.to_s
   end
 
   def post_trace
-    ' ENDWHILE'
+    'ENDWHILE'
   end
 
   def execute_pre(interpreter)
@@ -295,11 +295,11 @@ class UntilModifier < AbstractModifier
   end
 
   def pre_trace
-    ' UNTIL ' + @expression.to_s
+    'UNTIL ' + @expression.to_s
   end
 
   def post_trace
-    ' ENDUNTIL'
+    'ENDUNTIL'
   end
 
   def execute_pre(interpreter)
@@ -490,25 +490,25 @@ class ForModifier < AbstractModifier
 
     if !@end.nil?
       if @step.nil?
-        s = " FOR #{@control} = #{@start} TO #{@end}"
+        s = "FOR #{@control} = #{@start} TO #{@end}"
       else
-        s = " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+        s = "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
       end
     end
 
     if !@until.nil?
       if @step.nil?
-        s = " FOR #{@control} = #{@start} UNTIL #{@until}"
+        s = "FOR #{@control} = #{@start} UNTIL #{@until}"
       else
-        s = " FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
+        s = "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
       end
     end
 
     if !@while.nil?
       if @step.nil?
-        s = " FOR #{@control} = #{@start} UNTIL #{@while}"
+        s = "FOR #{@control} = #{@start} UNTIL #{@while}"
       else
-        s = " FOR #{@control} = #{@start} UNTIL #{@while} STEP #{@step}"
+        s = "FOR #{@control} = #{@start} UNTIL #{@while} STEP #{@step}"
       end
     end
 
@@ -516,7 +516,7 @@ class ForModifier < AbstractModifier
   end
 
   def post_trace
-    " NEXT #{@control}"
+    "NEXT #{@control}"
   end
 
   def execute_pre(interpreter)
