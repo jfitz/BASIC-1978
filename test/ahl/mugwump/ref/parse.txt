@@ -1,12 +1,12 @@
 1 PRINT TAB(33);"MUGWUMP"
  NumericConstant:33
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"MUGWUMP"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -19,7 +19,7 @@
 10 DIM P(4,2)
  NumericConstant:4
  NumericConstant:2
- Declaration:P
+ Declaration:P unknown
 20 PRINT "THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
  TextConstant:"THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
  CarriageControl:NL
@@ -51,12 +51,12 @@
 240 GOSUB 1000
  LineNumber:1000
 250 T=0
- Variable:T
+ Variable:T scalar
  NumericConstant:0
  AssignmentOperator:=
 260 T=T+1
- Variable:T
- Variable:T
+ Variable:T scalar
+ Variable:T scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
@@ -67,111 +67,111 @@
 290 PRINT "TURN NO.";T;"-- WHAT IS YOUR GUESS";
  TextConstant:"TURN NO."
  CarriageControl:;
- Variable:T
+ Variable:T scalar
  CarriageControl:;
  TextConstant:"-- WHAT IS YOUR GUESS"
  CarriageControl:;
 300 INPUT M,N
- Variable:M
- Variable:N
+ Variable:M scalar
+ Variable:N scalar
 310 FOR I=1 TO 4
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 320 IF P(I,1)=-1 THEN 400
- Variable:I
+ Variable:I scalar
  NumericConstant:1
- Variable:P
+ Variable:P scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  BinaryOperatorEqual:= numeric
 330 IF P(I,1)<>M THEN 380
- Variable:I
+ Variable:I scalar
  NumericConstant:1
- Variable:P
- Variable:M
+ Variable:P scalar
+ Variable:M scalar
  BinaryOperatorNotEqual:<> numeric
 340 IF P(I,2)<>N THEN 380
- Variable:I
+ Variable:I scalar
  NumericConstant:2
- Variable:P
- Variable:N
+ Variable:P scalar
+ Variable:N scalar
  BinaryOperatorNotEqual:<> numeric
 350 P(I,1)=-1
- Variable:I
+ Variable:I scalar
  NumericConstant:1
- Variable:P
+ Variable:P scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  AssignmentOperator:=
 360 PRINT "YOU HAVE FOUND MUGWUMP";I
  TextConstant:"YOU HAVE FOUND MUGWUMP"
  CarriageControl:;
- Variable:I
+ Variable:I scalar
  CarriageControl:NL
 370 GOTO 400
  LineNumber:400
 380 D=SQR((P(I,1)-M)^2+(P(I,2)-N)^2)
- Variable:D
- Variable:I
+ Variable:D scalar
+ Variable:I scalar
  NumericConstant:1
- Variable:P
- Variable:M
+ Variable:P scalar
+ Variable:M scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:2
  BinaryOperatorPower:^ numeric
- Variable:I
+ Variable:I scalar
  NumericConstant:2
- Variable:P
- Variable:N
+ Variable:P scalar
+ Variable:N scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorPlus:+ numeric
- FunctionSqr
+ FunctionSqr scalar
  AssignmentOperator:=
 390 PRINT "YOU ARE";(INT(D*10))/10;"UNITS FROM MUGWUMP";I
  TextConstant:"YOU ARE"
  CarriageControl:;
- Variable:D
+ Variable:D scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  NumericConstant:10
  BinaryOperatorDivide:/ numeric
  CarriageControl:;
  TextConstant:"UNITS FROM MUGWUMP"
  CarriageControl:;
- Variable:I
+ Variable:I scalar
  CarriageControl:NL
 400 NEXT I
- Variable:I
+ Variable:I scalar
 410 FOR J=1 TO 4
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 420 IF P(J,1)<>-1 THEN 470
- Variable:J
+ Variable:J scalar
  NumericConstant:1
- Variable:P
+ Variable:P scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  BinaryOperatorNotEqual:<> numeric
 430 NEXT J
- Variable:J
+ Variable:J scalar
 440 PRINT
  CarriageControl:NL
 450 PRINT "YOU GOT THEM ALL IN";T;"TURNS!"
  TextConstant:"YOU GOT THEM ALL IN"
  CarriageControl:;
- Variable:T
+ Variable:T scalar
  CarriageControl:;
  TextConstant:"TURNS!"
  CarriageControl:NL
 460 GOTO 580
  LineNumber:580
 470 IF T<10 THEN 260
- Variable:T
+ Variable:T scalar
  NumericConstant:10
  BinaryOperatorLess:< numeric
 480 PRINT
@@ -180,37 +180,37 @@
  TextConstant:"SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
  CarriageControl:NL
 540 FOR I=1 TO 4
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 550 IF P(I,1)=-1 THEN 570
- Variable:I
+ Variable:I scalar
  NumericConstant:1
- Variable:P
+ Variable:P scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  BinaryOperatorEqual:= numeric
 560 PRINT "MUGWUMP";I;"IS AT (";P(I,1);",";P(I,2);")"
  TextConstant:"MUGWUMP"
  CarriageControl:;
- Variable:I
+ Variable:I scalar
  CarriageControl:;
  TextConstant:"IS AT ("
  CarriageControl:;
- Variable:I
+ Variable:I scalar
  NumericConstant:1
- Variable:P
+ Variable:P scalar
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
- Variable:I
+ Variable:I scalar
  NumericConstant:2
- Variable:P
+ Variable:P scalar
  CarriageControl:;
  TextConstant:")"
  CarriageControl:NL
 570 NEXT I
- Variable:I
+ Variable:I scalar
 580 PRINT
  CarriageControl:NL
 600 PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
@@ -222,27 +222,27 @@
 630 GOTO 240
  LineNumber:240
 1000 FOR J=1 TO 2
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:2"]
 1010 FOR I=1 TO 4
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 1020 P(I,J)=INT(10*RND(1))
- Variable:I
- Variable:J
- Variable:P
+ Variable:I scalar
+ Variable:J scalar
+ Variable:P scalar
  NumericConstant:10
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1030 NEXT I
- Variable:I
+ Variable:I scalar
 1040 NEXT J
- Variable:J
+ Variable:J scalar
 1050 RETURN
  
 1099 END

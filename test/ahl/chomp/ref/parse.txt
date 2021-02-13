@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"CHOMP"
  NumericConstant:33
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CHOMP"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -17,7 +17,7 @@
 40 DIM A(10,10)
  NumericConstant:10
  NumericConstant:10
- Declaration:A
+ Declaration:A unknown
 100 REM *** THE GAME OF CHOMP *** COPYRIGHT PCC 1973 ***
  Remark:*** THE GAME OF CHOMP *** COPYRIGHT PCC 1973 ***
 110 PRINT 
@@ -29,21 +29,21 @@
  TextConstant:"DO YOU WANT THE RULES (1=YES, 0=NO!)"
  CarriageControl:;
 140 INPUT R
- Variable:R
+ Variable:R scalar
 150 IF R=0 THEN 340
- Variable:R
+ Variable:R scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 160 F=1
- Variable:F
+ Variable:F scalar
  NumericConstant:1
  AssignmentOperator:=
 170 R=5
- Variable:R
+ Variable:R scalar
  NumericConstant:5
  AssignmentOperator:=
 180 C=7
- Variable:C
+ Variable:C scalar
  NumericConstant:7
  AssignmentOperator:=
 190 PRINT "CHOMP IS FOR 1 OR MORE PLAYERS (HUMANS ONLY)."
@@ -93,45 +93,45 @@
 350 REM 
  Remark:
 360 F=0
- Variable:F
+ Variable:F scalar
  NumericConstant:0
  AssignmentOperator:=
 370 FOR I=1 TO 10
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 372 FOR J=1 TO 10
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 375 A(I,J)=0
- Variable:I
- Variable:J
- Variable:A
+ Variable:I scalar
+ Variable:J scalar
+ Variable:A scalar
  NumericConstant:0
  AssignmentOperator:=
 377 NEXT J
- Variable:J
+ Variable:J scalar
 379 NEXT I
- Variable:I
+ Variable:I scalar
 380 PRINT 
  CarriageControl:NL
 390 PRINT "HOW MANY PLAYERS";
  TextConstant:"HOW MANY PLAYERS"
  CarriageControl:;
 400 INPUT P
- Variable:P
+ Variable:P scalar
 410 I1=0
- Variable:I1
+ Variable:I1 scalar
  NumericConstant:0
  AssignmentOperator:=
 420 PRINT "HOW MANY ROWS";
  TextConstant:"HOW MANY ROWS"
  CarriageControl:;
 430 INPUT R
- Variable:R
+ Variable:R scalar
 440 IF R <= 9 THEN 470
- Variable:R
+ Variable:R scalar
  NumericConstant:9
  BinaryOperatorLessEqual:<= numeric
 450 PRINT "TOO MANY ROWS (9 IS MAXIMUM). NOW, ";
@@ -143,9 +143,9 @@
  TextConstant:"HOW MANY COLUMNS"
  CarriageControl:;
 480 INPUT C
- Variable:C
+ Variable:C scalar
 490 IF C <= 9 THEN 530
- Variable:C
+ Variable:C scalar
  NumericConstant:9
  BinaryOperatorLessEqual:<= numeric
 500 PRINT "TOO MANY COLUMNS (9 IS MAXIMUM). NOW, ";
@@ -156,27 +156,27 @@
 530 PRINT 
  CarriageControl:NL
 540 FOR I=1 TO R
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:R"]
+ end:     ["Variable:R scalar"]
 550 FOR J=1 TO C
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C"]
+ end:     ["Variable:C scalar"]
 560 A(I,J)=1
- Variable:I
- Variable:J
- Variable:A
+ Variable:I scalar
+ Variable:J scalar
+ Variable:A scalar
  NumericConstant:1
  AssignmentOperator:=
 570 NEXT J
- Variable:J
+ Variable:J scalar
 580 NEXT I
- Variable:I
+ Variable:I scalar
 590 A(1,1)=-1
  NumericConstant:1
  NumericConstant:1
- Variable:A
+ Variable:A scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  AssignmentOperator:=
@@ -186,35 +186,35 @@
  CarriageControl:NL
 620 PRINT TAB(7);"1 2 3 4 5 6 7 8 9"
  NumericConstant:7
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"1 2 3 4 5 6 7 8 9"
  CarriageControl:NL
 630 FOR I=1 TO R
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:R"]
+ end:     ["Variable:R scalar"]
 640 PRINT I;TAB(7);
- Variable:I
+ Variable:I scalar
  CarriageControl:;
  NumericConstant:7
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
 650 FOR J=1 TO C
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C"]
+ end:     ["Variable:C scalar"]
 660 IF A(I,J)=-1 THEN 700
- Variable:I
- Variable:J
- Variable:A
+ Variable:I scalar
+ Variable:J scalar
+ Variable:A scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  BinaryOperatorEqual:= numeric
 670 IF A(I,J)=0 THEN 720
- Variable:I
- Variable:J
- Variable:A
+ Variable:I scalar
+ Variable:J scalar
+ Variable:A scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 680 PRINT "* ";
@@ -226,15 +226,15 @@
  TextConstant:"P "
  CarriageControl:;
 710 NEXT J
- Variable:J
+ Variable:J scalar
 720 PRINT 
  CarriageControl:NL
 730 NEXT I
- Variable:I
+ Variable:I scalar
 740 PRINT 
  CarriageControl:NL
 750 IF F=0 THEN 770
- Variable:F
+ Variable:F scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 760 RETURN 
@@ -242,67 +242,67 @@
 770 REM GET CHOMPS FOR EACH PLAYER IN TURN
  Remark:GET CHOMPS FOR EACH PLAYER IN TURN
 780 LET I1=I1+1
- Variable:I1
- Variable:I1
+ Variable:I1 scalar
+ Variable:I1 scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 790 LET P1=I1-INT(I1/P)*P
- Variable:P1
- Variable:I1
- Variable:I1
- Variable:P
+ Variable:P1 scalar
+ Variable:I1 scalar
+ Variable:I1 scalar
+ Variable:P scalar
  BinaryOperatorDivide:/ numeric
- FunctionInt
- Variable:P
+ FunctionInt scalar
+ Variable:P scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 800 IF P1 <> 0 THEN 820
- Variable:P1
+ Variable:P1 scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 810 P1=P
- Variable:P1
- Variable:P
+ Variable:P1 scalar
+ Variable:P scalar
  AssignmentOperator:=
 820 PRINT "PLAYER";P1
  TextConstant:"PLAYER"
  CarriageControl:;
- Variable:P1
+ Variable:P1 scalar
  CarriageControl:NL
 830 PRINT "COORDINATES OF CHOMP (ROW,COLUMN)";
  TextConstant:"COORDINATES OF CHOMP (ROW,COLUMN)"
  CarriageControl:;
 840 INPUT R1,C1
- Variable:R1
- Variable:C1
+ Variable:R1 scalar
+ Variable:C1 scalar
 850 IF R1<1 THEN 920
- Variable:R1
+ Variable:R1 scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 860 IF R1>R THEN 920
- Variable:R1
- Variable:R
+ Variable:R1 scalar
+ Variable:R scalar
  BinaryOperatorGreater:> numeric
 870 IF C1<1 THEN 920
- Variable:C1
+ Variable:C1 scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 880 IF C1>C THEN 920
- Variable:C1
- Variable:C
+ Variable:C1 scalar
+ Variable:C scalar
  BinaryOperatorGreater:> numeric
 890 IF A(R1,C1)=0 THEN 920
- Variable:R1
- Variable:C1
- Variable:A
+ Variable:R1 scalar
+ Variable:C1 scalar
+ Variable:A scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 900 IF A(R1,C1)=-1 THEN 1010
- Variable:R1
- Variable:C1
- Variable:A
+ Variable:R1 scalar
+ Variable:C1 scalar
+ Variable:A scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  BinaryOperatorEqual:= numeric
@@ -314,23 +314,23 @@
 930 GOTO 820
  LineNumber:820
 940 FOR I=R1 TO R
- control: Variable:I
- start:   ["Variable:R1"]
- end:     ["Variable:R"]
+ control: Variable:I scalar
+ start:   ["Variable:R1 scalar"]
+ end:     ["Variable:R scalar"]
 950 FOR J=C1 TO C
- control: Variable:J
- start:   ["Variable:C1"]
- end:     ["Variable:C"]
+ control: Variable:J scalar
+ start:   ["Variable:C1 scalar"]
+ end:     ["Variable:C scalar"]
 960 A(I,J)=0
- Variable:I
- Variable:J
- Variable:A
+ Variable:I scalar
+ Variable:J scalar
+ Variable:A scalar
  NumericConstant:0
  AssignmentOperator:=
 970 NEXT J
- Variable:J
+ Variable:J scalar
 980 NEXT I
- Variable:I
+ Variable:I scalar
 990 GOTO 610
  LineNumber:610
 1000 REM END OF GAME DETECTED IN LINE 900
@@ -338,7 +338,7 @@
 1010 PRINT "YOU LOSE, PLAYER";P1
  TextConstant:"YOU LOSE, PLAYER"
  CarriageControl:;
- Variable:P1
+ Variable:P1 scalar
  CarriageControl:NL
 1020 PRINT 
  CarriageControl:NL
@@ -346,9 +346,9 @@
  TextConstant:"AGAIN (1=YES, 0=NO!)"
  CarriageControl:;
 1040 INPUT R
- Variable:R
+ Variable:R scalar
 1050 IF R=1 THEN 340
- Variable:R
+ Variable:R scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 1060 END

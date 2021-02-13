@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"BOUNCE"
  NumericConstant:33
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"BOUNCE"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -16,7 +16,7 @@
  CarriageControl:NL
 90 DIM T(20)
  NumericConstant:20
- Declaration:T
+ Declaration:T unknown
 100 PRINT "THIS SIMULATION LETS YOU SPECIFY THE INITIAL VELOCITY"
  TextConstant:"THIS SIMULATION LETS YOU SPECIFY THE INITIAL VELOCITY"
  CarriageControl:NL
@@ -40,15 +40,15 @@
 134 PRINT
  CarriageControl:NL
 135 INPUT "TIME INCREMENT (SEC)";S2
- Variable:S2
+ Variable:S2 scalar
 140 PRINT
  CarriageControl:NL
 150 INPUT "VELOCITY (FPS)";V
- Variable:V
+ Variable:V scalar
 160 PRINT
  CarriageControl:NL
 170 INPUT "COEFFICIENT";C
- Variable:C
+ Variable:C scalar
 180 PRINT
  CarriageControl:NL
 182 PRINT "FEET"
@@ -57,26 +57,26 @@
 184 PRINT
  CarriageControl:NL
 186 S1=INT(70/(V/(16*S2)))
- Variable:S1
+ Variable:S1 scalar
  NumericConstant:70
- Variable:V
+ Variable:V scalar
  NumericConstant:16
- Variable:S2
+ Variable:S2 scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorDivide:/ numeric
  BinaryOperatorDivide:/ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 190 FOR I=1 TO S1
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:S1"]
+ end:     ["Variable:S1 scalar"]
 200 T(I)=V*C^(I-1)/16
- Variable:I
- Variable:T
- Variable:V
- Variable:C
- Variable:I
+ Variable:I scalar
+ Variable:T scalar
+ Variable:V scalar
+ Variable:C scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  BinaryOperatorPower:^ numeric
@@ -85,154 +85,154 @@
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 210 NEXT I
- Variable:I
+ Variable:I scalar
 220 FOR H=INT(-16*(V/32)^2+V^2/32+.5) TO 0 STEP -.5
- control: Variable:H
- start:   ["NumericConstant:16", "UnaryOperatorMinus:- numeric", "Variable:V", "NumericConstant:32", "BinaryOperatorDivide:/ numeric", "NumericConstant:2", "BinaryOperatorPower:^ numeric", "BinaryOperatorMultiply:* numeric", "Variable:V", "NumericConstant:2", "BinaryOperatorPower:^ numeric", "NumericConstant:32", "BinaryOperatorDivide:/ numeric", "BinaryOperatorPlus:+ numeric", "NumericConstant:.5", "BinaryOperatorPlus:+ numeric", "FunctionInt"]
+ control: Variable:H scalar
+ start:   ["NumericConstant:16", "UnaryOperatorMinus:- numeric", "Variable:V scalar", "NumericConstant:32", "BinaryOperatorDivide:/ numeric", "NumericConstant:2", "BinaryOperatorPower:^ numeric", "BinaryOperatorMultiply:* numeric", "Variable:V scalar", "NumericConstant:2", "BinaryOperatorPower:^ numeric", "NumericConstant:32", "BinaryOperatorDivide:/ numeric", "BinaryOperatorPlus:+ numeric", "NumericConstant:.5", "BinaryOperatorPlus:+ numeric", "FunctionInt scalar"]
  end:     ["NumericConstant:0"]
  step:    ["NumericConstant:.5", "UnaryOperatorMinus:- numeric"]
 221 IF INT(H)<>H THEN 225
- Variable:H
- FunctionInt
- Variable:H
+ Variable:H scalar
+ FunctionInt scalar
+ Variable:H scalar
  BinaryOperatorNotEqual:<> numeric
 222 PRINT H;
- Variable:H
+ Variable:H scalar
  CarriageControl:;
 225 L=0
- Variable:L
+ Variable:L scalar
  NumericConstant:0
  AssignmentOperator:=
 230 FOR I=1 TO S1
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:S1"]
+ end:     ["Variable:S1 scalar"]
 240 FOR T=0 TO T(I) STEP S2
- control: Variable:T
+ control: Variable:T scalar
  start:   ["NumericConstant:0"]
- end:     ["Variable:I", "Variable:T"]
- step:    ["Variable:S2"]
+ end:     ["Variable:I scalar", "Variable:T scalar"]
+ step:    ["Variable:S2 scalar"]
 245 L=L+S2
- Variable:L
- Variable:L
- Variable:S2
+ Variable:L scalar
+ Variable:L scalar
+ Variable:S2 scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 250 IF ABS(H-(.5*(-32)*T^2+V*C^(I-1)*T))>.25 THEN 270
- Variable:H
+ Variable:H scalar
  NumericConstant:.5
  NumericConstant:32
  UnaryOperatorMinus:- numeric
  BinaryOperatorMultiply:* numeric
- Variable:T
+ Variable:T scalar
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorMultiply:* numeric
- Variable:V
- Variable:C
- Variable:I
+ Variable:V scalar
+ Variable:C scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  BinaryOperatorPower:^ numeric
  BinaryOperatorMultiply:* numeric
- Variable:T
+ Variable:T scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  BinaryOperatorMinus:- numeric
- FunctionAbs
+ FunctionAbs scalar
  NumericConstant:.25
  BinaryOperatorGreater:> numeric
 260 PRINT TAB(L/S2);"0";
- Variable:L
- Variable:S2
+ Variable:L scalar
+ Variable:S2 scalar
  BinaryOperatorDivide:/ numeric
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"0"
  CarriageControl:;
 270 NEXT T
- Variable:T
+ Variable:T scalar
 275 T=T(I+1)/2
- Variable:T
- Variable:I
+ Variable:T scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- Variable:T
+ Variable:T scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 276 IF -16*T^2+V*C^(I-1)*T<H THEN 290
  NumericConstant:16
  UnaryOperatorMinus:- numeric
- Variable:T
+ Variable:T scalar
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorMultiply:* numeric
- Variable:V
- Variable:C
- Variable:I
+ Variable:V scalar
+ Variable:C scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  BinaryOperatorPower:^ numeric
  BinaryOperatorMultiply:* numeric
- Variable:T
+ Variable:T scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- Variable:H
+ Variable:H scalar
  BinaryOperatorLess:< numeric
 280 NEXT I
- Variable:I
+ Variable:I scalar
 290 PRINT
  CarriageControl:NL
 300 NEXT H
- Variable:H
+ Variable:H scalar
 310 PRINT TAB(1);
  NumericConstant:1
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
 320 FOR I=1 TO INT(L+1)/S2+1
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:L", "NumericConstant:1", "BinaryOperatorPlus:+ numeric", "FunctionInt", "Variable:S2", "BinaryOperatorDivide:/ numeric", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
+ end:     ["Variable:L scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric", "FunctionInt scalar", "Variable:S2 scalar", "BinaryOperatorDivide:/ numeric", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
 330 PRINT ".";
  TextConstant:"."
  CarriageControl:;
 340 NEXT I
- Variable:I
+ Variable:I scalar
 350 PRINT
  CarriageControl:NL
 355 PRINT " 0";
  TextConstant:" 0"
  CarriageControl:;
 360 FOR I=1 TO INT(L+.9995)
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:L", "NumericConstant:.9995", "BinaryOperatorPlus:+ numeric", "FunctionInt"]
+ end:     ["Variable:L scalar", "NumericConstant:.9995", "BinaryOperatorPlus:+ numeric", "FunctionInt scalar"]
 380 PRINT TAB(INT(I/S2));I;
- Variable:I
- Variable:S2
+ Variable:I scalar
+ Variable:S2 scalar
  BinaryOperatorDivide:/ numeric
- FunctionInt
- FunctionTab
+ FunctionInt scalar
+ FunctionTab scalar
  CarriageControl:;
- Variable:I
+ Variable:I scalar
  CarriageControl:;
 390 NEXT I
- Variable:I
+ Variable:I scalar
 400 PRINT
  CarriageControl:NL
 410 PRINT TAB(INT(L+1)/(2*S2)-2);"SECONDS"
- Variable:L
+ Variable:L scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  NumericConstant:2
- Variable:S2
+ Variable:S2 scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorDivide:/ numeric
  NumericConstant:2
  BinaryOperatorMinus:- numeric
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"SECONDS"
  CarriageControl:NL

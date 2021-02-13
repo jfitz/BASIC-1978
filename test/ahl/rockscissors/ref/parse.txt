@@ -1,12 +1,12 @@
 10 PRINT TAB(21);"GAME OF ROCK, SCISSORS, PAPER"
  NumericConstant:21
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"GAME OF ROCK, SCISSORS, PAPER"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,9 +15,9 @@
  CarriageControl:NL
  CarriageControl:NL
 30 INPUT "HOW MANY GAMES";Q
- Variable:Q
+ Variable:Q scalar
 40 IF Q<11 THEN 60
- Variable:Q
+ Variable:Q scalar
  NumericConstant:11
  BinaryOperatorLess:< numeric
 50 PRINT "SORRY, BUT WE AREN'T ALLOWED TO PLAY THAT MANY.": GOTO 30
@@ -25,39 +25,39 @@
  CarriageControl:NL
  LineNumber:30
 60 FOR G=1 TO Q
- control: Variable:G
+ control: Variable:G scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:Q"]
+ end:     ["Variable:Q scalar"]
 70 PRINT: PRINT "GAME NUMBER";G
  CarriageControl:NL
  TextConstant:"GAME NUMBER"
  CarriageControl:;
- Variable:G
+ Variable:G scalar
  CarriageControl:NL
 80 X=INT(RND(1)*3+1)
- Variable:X
+ Variable:X scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:3
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 90 PRINT "3=ROCK...2=SCISSORS...1=PAPER"
  TextConstant:"3=ROCK...2=SCISSORS...1=PAPER"
  CarriageControl:NL
 100 INPUT "1...2...3...WHAT'S YOUR CHOICE";K
- Variable:K
+ Variable:K scalar
 110 IF (K-1)*(K-2)*(K-3)<>0 THEN PRINT "INVALID.": GOTO 90
- Variable:K
+ Variable:K scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- Variable:K
+ Variable:K scalar
  NumericConstant:2
  BinaryOperatorMinus:- numeric
  BinaryOperatorMultiply:* numeric
- Variable:K
+ Variable:K scalar
  NumericConstant:3
  BinaryOperatorMinus:- numeric
  BinaryOperatorMultiply:* numeric
@@ -70,7 +70,7 @@
  TextConstant:"THIS IS MY CHOICE..."
  CarriageControl:NL
 130 ON X GOTO 140,150,160
- Variable:X
+ Variable:X scalar
  LineNumber:140
  LineNumber:150
  LineNumber:160
@@ -86,44 +86,44 @@
  TextConstant:"...ROCK"
  CarriageControl:NL
 170 IF X=K THEN 250
- Variable:X
- Variable:K
+ Variable:X scalar
+ Variable:K scalar
  BinaryOperatorEqual:= numeric
 180 IF X>K THEN 230
- Variable:X
- Variable:K
+ Variable:X scalar
+ Variable:K scalar
  BinaryOperatorGreater:> numeric
 190 IF X=1 THEN 210
- Variable:X
+ Variable:X scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 200 PRINT "YOU WIN!!!":H=H+1: GOTO 260
  TextConstant:"YOU WIN!!!"
  CarriageControl:NL
- Variable:H
- Variable:H
+ Variable:H scalar
+ Variable:H scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
  LineNumber:260
 210 IF K<>3 THEN 200
- Variable:K
+ Variable:K scalar
  NumericConstant:3
  BinaryOperatorNotEqual:<> numeric
 220 PRINT "WOW!  I WIN!!!":C=C+1:GOTO 260
  TextConstant:"WOW!  I WIN!!!"
  CarriageControl:NL
- Variable:C
- Variable:C
+ Variable:C scalar
+ Variable:C scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
  LineNumber:260
 230 IF K<>1 OR X<>3 THEN 220
- Variable:K
+ Variable:K scalar
  NumericConstant:1
  BinaryOperatorNotEqual:<> numeric
- Variable:X
+ Variable:X scalar
  NumericConstant:3
  BinaryOperatorNotEqual:<> numeric
  BinaryOperatorOr:OR numeric
@@ -133,7 +133,7 @@
  TextConstant:"TIE GAME.  NO WINNER."
  CarriageControl:NL
 260 NEXT G
- Variable:G
+ Variable:G scalar
 270 PRINT: PRINT "HERE IS THE FINAL GAME SCORE:"
  CarriageControl:NL
  TextConstant:"HERE IS THE FINAL GAME SCORE:"
@@ -141,23 +141,23 @@
 280 PRINT "I HAVE WON";C;"GAME(S)."
  TextConstant:"I HAVE WON"
  CarriageControl:;
- Variable:C
+ Variable:C scalar
  CarriageControl:;
  TextConstant:"GAME(S)."
  CarriageControl:NL
 290 PRINT "YOU HAVE WON";H;"GAME(S)."
  TextConstant:"YOU HAVE WON"
  CarriageControl:;
- Variable:H
+ Variable:H scalar
  CarriageControl:;
  TextConstant:"GAME(S)."
  CarriageControl:NL
 300 PRINT "AND";Q-(C+H);"GAME(S) ENDED IN A TIE."
  TextConstant:"AND"
  CarriageControl:;
- Variable:Q
- Variable:C
- Variable:H
+ Variable:Q scalar
+ Variable:C scalar
+ Variable:H scalar
  BinaryOperatorPlus:+ numeric
  BinaryOperatorMinus:- numeric
  CarriageControl:;

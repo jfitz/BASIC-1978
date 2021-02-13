@@ -1,12 +1,12 @@
 1 PRINT TAB(34);"KING"
  NumericConstant:34
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"KING"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -18,19 +18,19 @@
  TextConstant:"DO YOU WANT INSTRUCTIONS"
  CarriageControl:;
 5 INPUT Z$
- Variable:Z$
+ Variable:Z$ scalar
 6 N5=8
- Variable:N5
+ Variable:N5 scalar
  NumericConstant:8
  AssignmentOperator:=
 10 IF LEFT$(Z$,1)="N" THEN 47
- Variable:Z$
+ Variable:Z$ scalar
  NumericConstant:1
- FunctionLeft
+ FunctionLeft scalar
  TextConstant:"N"
  BinaryOperatorEqual:= numeric
 11 IF Z$="AGAIN" THEN 1960
- Variable:Z$
+ Variable:Z$ scalar
  TextConstant:"AGAIN"
  BinaryOperatorEqual:= numeric
 12 PRINT:PRINT:PRINT
@@ -76,7 +76,7 @@
 44 PRINT "YOUR GOAL IS TO COMPLETE YOUR";N5;"YEAR TERM OF OFFICE."
  TextConstant:"YOUR GOAL IS TO COMPLETE YOUR"
  CarriageControl:;
- Variable:N5
+ Variable:N5 scalar
  CarriageControl:;
  TextConstant:"YEAR TERM OF OFFICE."
  CarriageControl:NL
@@ -86,98 +86,98 @@
 47 PRINT
  CarriageControl:NL
 50 A=INT(60000+(1000*RND(1))-(1000*RND(1)))
- Variable:A
+ Variable:A scalar
  NumericConstant:60000
  NumericConstant:1000
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:1000
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 55 B=INT(500+(10*RND(1))-(10*RND(1)))
- Variable:B
+ Variable:B scalar
  NumericConstant:500
  NumericConstant:10
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:10
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 65 D=2000
- Variable:D
+ Variable:D scalar
  NumericConstant:2000
  AssignmentOperator:=
 100 W=INT(10*RND(1)+95)
- Variable:W
+ Variable:W scalar
  NumericConstant:10
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:95
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 102 PRINT
  CarriageControl:NL
 105 PRINT "YOU NOW HAVE ";A;" RALLODS IN THE TREASURY."
  TextConstant:"YOU NOW HAVE "
  CarriageControl:;
- Variable:A
+ Variable:A scalar
  CarriageControl:;
  TextConstant:" RALLODS IN THE TREASURY."
  CarriageControl:NL
 110 PRINT INT(B);:PRINT "COUNTRYMEN, ";
- Variable:B
- FunctionInt
+ Variable:B scalar
+ FunctionInt scalar
  CarriageControl:;
  TextConstant:"COUNTRYMEN, "
  CarriageControl:;
 115 V9=INT(((RND(1)/2)*10+10))
- Variable:V9
+ Variable:V9 scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
  NumericConstant:10
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 120 IF C=0 THEN 140
- Variable:C
+ Variable:C scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 130 PRINT INT(C);"FOREIGN WORKERS, ";
- Variable:C
- FunctionInt
+ Variable:C scalar
+ FunctionInt scalar
  CarriageControl:;
  TextConstant:"FOREIGN WORKERS, "
  CarriageControl:;
 140 PRINT "AND";INT(D);"SQ. MILES OF LAND."
  TextConstant:"AND"
  CarriageControl:;
- Variable:D
- FunctionInt
+ Variable:D scalar
+ FunctionInt scalar
  CarriageControl:;
  TextConstant:"SQ. MILES OF LAND."
  CarriageControl:NL
 150 PRINT "THIS YEAR INDUSTRY WILL BUY LAND FOR";W;
  TextConstant:"THIS YEAR INDUSTRY WILL BUY LAND FOR"
  CarriageControl:;
- Variable:W
+ Variable:W scalar
  CarriageControl:;
 152 PRINT "RALLODS PER SQUARE MILE."
  TextConstant:"RALLODS PER SQUARE MILE."
@@ -185,7 +185,7 @@
 155 PRINT "LAND CURRENTLY COSTS";V9;"RALLODS PER SQUARE MILE TO PLANT."
  TextConstant:"LAND CURRENTLY COSTS"
  CarriageControl:;
- Variable:V9
+ Variable:V9 scalar
  CarriageControl:;
  TextConstant:"RALLODS PER SQUARE MILE TO PLANT."
  CarriageControl:NL
@@ -195,28 +195,28 @@
  TextConstant:"HOW MANY SQUARE MILES DO YOU WISH TO SELL TO INDUSTRY"
  CarriageControl:;
 210 INPUT H
- Variable:H
+ Variable:H scalar
 215 IF H<0 THEN 200
- Variable:H
+ Variable:H scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 220 IF H<=D-1000 THEN 300
- Variable:H
- Variable:D
+ Variable:H scalar
+ Variable:D scalar
  NumericConstant:1000
  BinaryOperatorMinus:- numeric
  BinaryOperatorLessEqual:<= numeric
 230 PRINT "***  THINK AGAIN. YOU ONLY HAVE";D-1000;"SQUARE MILES OF FARM LAND."
  TextConstant:"***  THINK AGAIN. YOU ONLY HAVE"
  CarriageControl:;
- Variable:D
+ Variable:D scalar
  NumericConstant:1000
  BinaryOperatorMinus:- numeric
  CarriageControl:;
  TextConstant:"SQUARE MILES OF FARM LAND."
  CarriageControl:NL
 240 IF X<>0 THEN 200
- Variable:X
+ Variable:X scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 250 PRINT:PRINT "(FOREIGN INDUSTRY WILL ONLY BUY FARM LAND BECAUSE"
@@ -230,86 +230,86 @@
  TextConstant:"THICKER TOP SOIL, ETC.)"
  CarriageControl:NL
 280 X=1
- Variable:X
+ Variable:X scalar
  NumericConstant:1
  AssignmentOperator:=
 299 GOTO 200
  LineNumber:200
 300 D=INT(D-H)
- Variable:D
- Variable:D
- Variable:H
+ Variable:D scalar
+ Variable:D scalar
+ Variable:H scalar
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 310 A=INT(A+(H*W))
- Variable:A
- Variable:A
- Variable:H
- Variable:W
+ Variable:A scalar
+ Variable:A scalar
+ Variable:H scalar
+ Variable:W scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 320 PRINT "HOW MANY RALLODS WILL YOU DISTRIBUTE AMONG YOUR COUNTRYMEN";
  TextConstant:"HOW MANY RALLODS WILL YOU DISTRIBUTE AMONG YOUR COUNTRYMEN"
  CarriageControl:;
 340 INPUT I
- Variable:I
+ Variable:I scalar
 342 IF I<0 THEN 320
- Variable:I
+ Variable:I scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 350 IF I<A THEN 400
- Variable:I
- Variable:A
+ Variable:I scalar
+ Variable:A scalar
  BinaryOperatorLess:< numeric
 360 IF I=A THEN 380
- Variable:I
- Variable:A
+ Variable:I scalar
+ Variable:A scalar
  BinaryOperatorEqual:= numeric
 370 PRINT "   THINK AGAIN. YOU'VE ONLY";A;" RALLODS IN THE TREASURY"
  TextConstant:"   THINK AGAIN. YOU'VE ONLY"
  CarriageControl:;
- Variable:A
+ Variable:A scalar
  CarriageControl:;
  TextConstant:" RALLODS IN THE TREASURY"
  CarriageControl:NL
 375 GOTO 320
  LineNumber:320
 380 J=0
- Variable:J
+ Variable:J scalar
  NumericConstant:0
  AssignmentOperator:=
 390 K=0
- Variable:K
+ Variable:K scalar
  NumericConstant:0
  AssignmentOperator:=
 395 A=0
- Variable:A
+ Variable:A scalar
  NumericConstant:0
  AssignmentOperator:=
 399 GOTO 1000
  LineNumber:1000
 400 A=INT(A-I)
- Variable:A
- Variable:A
- Variable:I
+ Variable:A scalar
+ Variable:A scalar
+ Variable:I scalar
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 410 PRINT "HOW MANY SQUARE MILES DO YOU WISH TO PLANT";
  TextConstant:"HOW MANY SQUARE MILES DO YOU WISH TO PLANT"
  CarriageControl:;
 420 INPUT J
- Variable:J
+ Variable:J scalar
 421 IF J<0 THEN 410
- Variable:J
+ Variable:J scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 422 IF J<=B*2 THEN 426
- Variable:J
- Variable:B
+ Variable:J scalar
+ Variable:B scalar
  NumericConstant:2
  BinaryOperatorMultiply:* numeric
  BinaryOperatorLessEqual:<= numeric
@@ -319,15 +319,15 @@
 424 GOTO 410
  LineNumber:410
 426 IF J<=D-1000 THEN 430
- Variable:J
- Variable:D
+ Variable:J scalar
+ Variable:D scalar
  NumericConstant:1000
  BinaryOperatorMinus:- numeric
  BinaryOperatorLessEqual:<= numeric
 427 PRINT "   SORRY, BUT YOU'VE ONLY";D-1000;"SQ. MILES OF FARM LAND."
  TextConstant:"   SORRY, BUT YOU'VE ONLY"
  CarriageControl:;
- Variable:D
+ Variable:D scalar
  NumericConstant:1000
  BinaryOperatorMinus:- numeric
  CarriageControl:;
@@ -336,81 +336,81 @@
 428 GOTO 410
  LineNumber:410
 430 U1=INT(J*V9)
- Variable:U1
- Variable:J
- Variable:V9
+ Variable:U1 scalar
+ Variable:J scalar
+ Variable:V9 scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 435 IF U1<A THEN 500
- Variable:U1
- Variable:A
+ Variable:U1 scalar
+ Variable:A scalar
  BinaryOperatorLess:< numeric
 440 IF U1=A THEN 490
- Variable:U1
- Variable:A
+ Variable:U1 scalar
+ Variable:A scalar
  BinaryOperatorEqual:= numeric
 450 PRINT "   THINK AGAIN. YOU'VE ONLY";A;" RALLODS LEFT IN THE TREASURY."
  TextConstant:"   THINK AGAIN. YOU'VE ONLY"
  CarriageControl:;
- Variable:A
+ Variable:A scalar
  CarriageControl:;
  TextConstant:" RALLODS LEFT IN THE TREASURY."
  CarriageControl:NL
 460 GOTO 410
  LineNumber:410
 490 K=0
- Variable:K
+ Variable:K scalar
  NumericConstant:0
  AssignmentOperator:=
 495 A=0
- Variable:A
+ Variable:A scalar
  NumericConstant:0
  AssignmentOperator:=
 499 GOTO 1000
  LineNumber:1000
 500 A=A-U1
- Variable:A
- Variable:A
- Variable:U1
+ Variable:A scalar
+ Variable:A scalar
+ Variable:U1 scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 510 PRINT "HOW MANY RALLODS DO YOU WISH TO SPEND ON POLLUTION CONTROL";
  TextConstant:"HOW MANY RALLODS DO YOU WISH TO SPEND ON POLLUTION CONTROL"
  CarriageControl:;
 520 INPUT K
- Variable:K
+ Variable:K scalar
 522 IF K<0 THEN 510
- Variable:K
+ Variable:K scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 530 IF K<=A THEN 1000
- Variable:K
- Variable:A
+ Variable:K scalar
+ Variable:A scalar
  BinaryOperatorLessEqual:<= numeric
 540 PRINT "   THINK AGAIN. YOU ONLY HAVE ";A;" RALLODS REMAINING."
  TextConstant:"   THINK AGAIN. YOU ONLY HAVE "
  CarriageControl:;
- Variable:A
+ Variable:A scalar
  CarriageControl:;
  TextConstant:" RALLODS REMAINING."
  CarriageControl:NL
 550 GOTO 510
  LineNumber:510
 600 IF H<>0 THEN 1002
- Variable:H
+ Variable:H scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 602 IF I<>0 THEN 1002
- Variable:I
+ Variable:I scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 604 IF J<>0 THEN 1002
- Variable:J
+ Variable:J scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 606 IF K<>0 THEN 1002
- Variable:K
+ Variable:K scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 609 PRINT
@@ -436,84 +436,84 @@
 1003 PRINT
  CarriageControl:NL
 1010 A=INT(A-K)
- Variable:A
- Variable:A
- Variable:K
+ Variable:A scalar
+ Variable:A scalar
+ Variable:K scalar
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1020 A4=A
- Variable:A4
- Variable:A
+ Variable:A4 scalar
+ Variable:A scalar
  AssignmentOperator:=
 1100 IF INT(I/100-B)>=0 THEN 1120
- Variable:I
+ Variable:I scalar
  NumericConstant:100
  BinaryOperatorDivide:/ numeric
- Variable:B
+ Variable:B scalar
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  NumericConstant:0
  BinaryOperatorGreaterEqual:>= numeric
 1105 IF I/100<50 THEN 1700
- Variable:I
+ Variable:I scalar
  NumericConstant:100
  BinaryOperatorDivide:/ numeric
  NumericConstant:50
  BinaryOperatorLess:< numeric
 1110 PRINT INT(B-(I/100));"COUNTRYMEN DIED OF STARVATION"
- Variable:B
- Variable:I
+ Variable:B scalar
+ Variable:I scalar
  NumericConstant:100
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  CarriageControl:;
  TextConstant:"COUNTRYMEN DIED OF STARVATION"
  CarriageControl:NL
 1120 F1=INT(RND(1)*(2000-D))
- Variable:F1
+ Variable:F1 scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:2000
- Variable:D
+ Variable:D scalar
  BinaryOperatorMinus:- numeric
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1122 IF K<25 THEN 1130
- Variable:K
+ Variable:K scalar
  NumericConstant:25
  BinaryOperatorLess:< numeric
 1125 F1=INT(F1/(K/25))
- Variable:F1
- Variable:F1
- Variable:K
+ Variable:F1 scalar
+ Variable:F1 scalar
+ Variable:K scalar
  NumericConstant:25
  BinaryOperatorDivide:/ numeric
  BinaryOperatorDivide:/ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1130 IF F1<=0 THEN 1150
- Variable:F1
+ Variable:F1 scalar
  NumericConstant:0
  BinaryOperatorLessEqual:<= numeric
 1140 PRINT F1;"COUNTRYMEN DIED OF CARBON-MONOXIDE AND DUST INHALATION"
- Variable:F1
+ Variable:F1 scalar
  CarriageControl:;
  TextConstant:"COUNTRYMEN DIED OF CARBON-MONOXIDE AND DUST INHALATION"
  CarriageControl:NL
 1150 IF INT((I/100)-B)<0 THEN 1170
- Variable:I
+ Variable:I scalar
  NumericConstant:100
  BinaryOperatorDivide:/ numeric
- Variable:B
+ Variable:B scalar
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 1160 IF F1>0 THEN 1180
- Variable:F1
+ Variable:F1 scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
 1165 GOTO 1200
@@ -521,37 +521,37 @@
 1170 PRINT "   YOU WERE FORCED TO SPEND";INT((F1+(B-(I/100)))*9);
  TextConstant:"   YOU WERE FORCED TO SPEND"
  CarriageControl:;
- Variable:F1
- Variable:B
- Variable:I
+ Variable:F1 scalar
+ Variable:B scalar
+ Variable:I scalar
  NumericConstant:100
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMinus:- numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:9
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  CarriageControl:;
 1172 PRINT "RALLODS ON FUNERAL EXPENSES"
  TextConstant:"RALLODS ON FUNERAL EXPENSES"
  CarriageControl:NL
 1174 B5=INT(F1+(B-(I/100)))
- Variable:B5
- Variable:F1
- Variable:B
- Variable:I
+ Variable:B5 scalar
+ Variable:F1 scalar
+ Variable:B scalar
+ Variable:I scalar
  NumericConstant:100
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMinus:- numeric
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1175 A=INT(A-((F1+(B-(I/100)))*9))
- Variable:A
- Variable:A
- Variable:F1
- Variable:B
- Variable:I
+ Variable:A scalar
+ Variable:A scalar
+ Variable:F1 scalar
+ Variable:B scalar
+ Variable:I scalar
  NumericConstant:100
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMinus:- numeric
@@ -559,17 +559,17 @@
  NumericConstant:9
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1176 GOTO 1185
  LineNumber:1185
 1180 PRINT "   YOU WERE FORCED TO SPEND ";INT(F1*9);"RALLODS ON ";
  TextConstant:"   YOU WERE FORCED TO SPEND "
  CarriageControl:;
- Variable:F1
+ Variable:F1 scalar
  NumericConstant:9
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  CarriageControl:;
  TextConstant:"RALLODS ON "
  CarriageControl:;
@@ -577,112 +577,112 @@
  TextConstant:"FUNERAL EXPENSES."
  CarriageControl:NL
 1182 B5=F1
- Variable:B5
- Variable:F1
+ Variable:B5 scalar
+ Variable:F1 scalar
  AssignmentOperator:=
 1183 A=INT(A-(F1*9))
- Variable:A
- Variable:A
- Variable:F1
+ Variable:A scalar
+ Variable:A scalar
+ Variable:F1 scalar
  NumericConstant:9
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1185 IF A>=0 THEN 1194
- Variable:A
+ Variable:A scalar
  NumericConstant:0
  BinaryOperatorGreaterEqual:>= numeric
 1187 PRINT "   INSUFFICIENT RESERVES TO COVER COST - LAND WAS SOLD"
  TextConstant:"   INSUFFICIENT RESERVES TO COVER COST - LAND WAS SOLD"
  CarriageControl:NL
 1189 D=INT(D+(A/W))
- Variable:D
- Variable:D
- Variable:A
- Variable:W
+ Variable:D scalar
+ Variable:D scalar
+ Variable:A scalar
+ Variable:W scalar
  BinaryOperatorDivide:/ numeric
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1190 A=0
- Variable:A
+ Variable:A scalar
  NumericConstant:0
  AssignmentOperator:=
 1194 B=INT(B-B5)
- Variable:B
- Variable:B
- Variable:B5
+ Variable:B scalar
+ Variable:B scalar
+ Variable:B5 scalar
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1200 IF H=0 THEN 1250
- Variable:H
+ Variable:H scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1220 C1=INT(H+(RND(1)*10)-(RND(1)*20))
- Variable:C1
- Variable:H
+ Variable:C1 scalar
+ Variable:H scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:20
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1224 IF C>0 THEN 1230
- Variable:C
+ Variable:C scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
 1226 C1=C1+20
- Variable:C1
- Variable:C1
+ Variable:C1 scalar
+ Variable:C1 scalar
  NumericConstant:20
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1230 PRINT C1;"WORKERS CAME TO THE COUNTRY AND";
- Variable:C1
+ Variable:C1 scalar
  CarriageControl:;
  TextConstant:"WORKERS CAME TO THE COUNTRY AND"
  CarriageControl:;
 1250 P1=INT(((I/100-B)/10)+(K/25)-((2000-D)/50)-(F1/2))
- Variable:P1
- Variable:I
+ Variable:P1 scalar
+ Variable:I scalar
  NumericConstant:100
  BinaryOperatorDivide:/ numeric
- Variable:B
+ Variable:B scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:10
  BinaryOperatorDivide:/ numeric
- Variable:K
+ Variable:K scalar
  NumericConstant:25
  BinaryOperatorDivide:/ numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:2000
- Variable:D
+ Variable:D scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:50
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMinus:- numeric
- Variable:F1
+ Variable:F1 scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1255 PRINT ABS(P1);"COUNTRYMEN ";
- Variable:P1
- FunctionAbs
+ Variable:P1 scalar
+ FunctionAbs scalar
  CarriageControl:;
  TextConstant:"COUNTRYMEN "
  CarriageControl:;
 1260 IF P1<0 THEN 1275
- Variable:P1
+ Variable:P1 scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 1265 PRINT "CAME TO";
@@ -697,76 +697,76 @@
  TextConstant:" THE ISLAND."
  CarriageControl:NL
 1290 B=INT(B+P1)
- Variable:B
- Variable:B
- Variable:P1
+ Variable:B scalar
+ Variable:B scalar
+ Variable:P1 scalar
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1292 C=INT(C+C1)
- Variable:C
- Variable:C
- Variable:C1
+ Variable:C scalar
+ Variable:C scalar
+ Variable:C1 scalar
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1305 U2=INT(((2000-D)*((RND(1)+1.5)/2)))
- Variable:U2
+ Variable:U2 scalar
  NumericConstant:2000
- Variable:D
+ Variable:D scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:1.5
  BinaryOperatorPlus:+ numeric
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1310 IF C=0 THEN 1324
- Variable:C
+ Variable:C scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1320 PRINT "OF ";INT(J);"SQ. MILES PLANTED,";
  TextConstant:"OF "
  CarriageControl:;
- Variable:J
- FunctionInt
+ Variable:J scalar
+ FunctionInt scalar
  CarriageControl:;
  TextConstant:"SQ. MILES PLANTED,"
  CarriageControl:;
 1324 IF J>U2 THEN 1330
- Variable:J
- Variable:U2
+ Variable:J scalar
+ Variable:U2 scalar
  BinaryOperatorGreater:> numeric
 1326 U2=J
- Variable:U2
- Variable:J
+ Variable:U2 scalar
+ Variable:J scalar
  AssignmentOperator:=
 1330 PRINT " YOU HARVESTED ";INT(J-U2);"SQ. MILES OF CROPS."
  TextConstant:" YOU HARVESTED "
  CarriageControl:;
- Variable:J
- Variable:U2
+ Variable:J scalar
+ Variable:U2 scalar
  BinaryOperatorMinus:- numeric
- FunctionInt
+ FunctionInt scalar
  CarriageControl:;
  TextConstant:"SQ. MILES OF CROPS."
  CarriageControl:NL
 1340 IF U2=0 THEN 1370
- Variable:U2
+ Variable:U2 scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1344 IF T1>=2 THEN 1370
- Variable:T1
+ Variable:T1 scalar
  NumericConstant:2
  BinaryOperatorGreaterEqual:>= numeric
 1350 PRINT "   (DUE TO ";
  TextConstant:"   (DUE TO "
  CarriageControl:;
 1355 IF T1=0 THEN 1365
- Variable:T1
+ Variable:T1 scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1360 PRINT "INCREASED ";
@@ -776,118 +776,118 @@
  TextConstant:"AIR AND WATER POLLUTION FROM FOREIGN INDUSTRY.)"
  CarriageControl:NL
 1370 Q=INT((J-U2)*(W/2))
- Variable:Q
- Variable:J
- Variable:U2
+ Variable:Q scalar
+ Variable:J scalar
+ Variable:U2 scalar
  BinaryOperatorMinus:- numeric
- Variable:W
+ Variable:W scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1380 PRINT "MAKING";INT(Q);"RALLODS."
  TextConstant:"MAKING"
  CarriageControl:;
- Variable:Q
- FunctionInt
+ Variable:Q scalar
+ FunctionInt scalar
  CarriageControl:;
  TextConstant:"RALLODS."
  CarriageControl:NL
 1390 A=INT(A+Q)
- Variable:A
- Variable:A
- Variable:Q
+ Variable:A scalar
+ Variable:A scalar
+ Variable:Q scalar
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1400 V1=INT(((B-P1)*22)+(RND(1)*500))
- Variable:V1
- Variable:B
- Variable:P1
+ Variable:V1 scalar
+ Variable:B scalar
+ Variable:P1 scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:22
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:500
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1405 V2=INT((2000-D)*15)
- Variable:V2
+ Variable:V2 scalar
  NumericConstant:2000
- Variable:D
+ Variable:D scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:15
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1410 PRINT " YOU MADE";ABS(INT(V1-V2));"RALLODS FROM TOURIST TRADE."
  TextConstant:" YOU MADE"
  CarriageControl:;
- Variable:V1
- Variable:V2
+ Variable:V1 scalar
+ Variable:V2 scalar
  BinaryOperatorMinus:- numeric
- FunctionInt
- FunctionAbs
+ FunctionInt scalar
+ FunctionAbs scalar
  CarriageControl:;
  TextConstant:"RALLODS FROM TOURIST TRADE."
  CarriageControl:NL
 1420 IF V2=0 THEN 1450
- Variable:V2
+ Variable:V2 scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1425 IF V1-V2>=V3 THEN 1450
- Variable:V1
- Variable:V2
+ Variable:V1 scalar
+ Variable:V2 scalar
  BinaryOperatorMinus:- numeric
- Variable:V3
+ Variable:V3 scalar
  BinaryOperatorGreaterEqual:>= numeric
 1430 PRINT "   DECREASE BECAUSE ";
  TextConstant:"   DECREASE BECAUSE "
  CarriageControl:;
 1435 G1=10*RND(1)
- Variable:G1
+ Variable:G1 scalar
  NumericConstant:10
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  AssignmentOperator:=
 1440 IF G1<=2 THEN 1460
- Variable:G1
+ Variable:G1 scalar
  NumericConstant:2
  BinaryOperatorLessEqual:<= numeric
 1442 IF G1<=4 THEN 1465
- Variable:G1
+ Variable:G1 scalar
  NumericConstant:4
  BinaryOperatorLessEqual:<= numeric
 1444 IF G1<=6 THEN 1470
- Variable:G1
+ Variable:G1 scalar
  NumericConstant:6
  BinaryOperatorLessEqual:<= numeric
 1446 IF G1<=8 THEN 1475
- Variable:G1
+ Variable:G1 scalar
  NumericConstant:8
  BinaryOperatorLessEqual:<= numeric
 1448 IF G1<=10 THEN 1480
- Variable:G1
+ Variable:G1 scalar
  NumericConstant:10
  BinaryOperatorLessEqual:<= numeric
 1450 V3=INT(A+V3)
- Variable:V3
- Variable:A
- Variable:V3
+ Variable:V3 scalar
+ Variable:A scalar
+ Variable:V3 scalar
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1451 A=INT(A+V3)
- Variable:A
- Variable:A
- Variable:V3
+ Variable:A scalar
+ Variable:A scalar
+ Variable:V3 scalar
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1452 GOTO 1500
  LineNumber:1500
@@ -917,28 +917,28 @@
 1482 GOTO 1450
  LineNumber:1450
 1500 IF B5>200 THEN 1600
- Variable:B5
+ Variable:B5 scalar
  NumericConstant:200
  BinaryOperatorGreater:> numeric
 1505 IF B<343 THEN 1700
- Variable:B
+ Variable:B scalar
  NumericConstant:343
  BinaryOperatorLess:< numeric
 1510 IF (A4/100)>5 THEN 1800
- Variable:A4
+ Variable:A4 scalar
  NumericConstant:100
  BinaryOperatorDivide:/ numeric
  NumericConstant:5
  BinaryOperatorGreater:> numeric
 1515 IF C>B THEN 1550
- Variable:C
- Variable:B
+ Variable:C scalar
+ Variable:B scalar
  BinaryOperatorGreater:> numeric
 1520 IF N5-1=X5 THEN 1900
- Variable:N5
+ Variable:N5 scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- Variable:X5
+ Variable:X5 scalar
  BinaryOperatorEqual:= numeric
 1545 GOTO 2000
  LineNumber:2000
@@ -957,7 +957,7 @@
  CarriageControl:NL
 1570 IF RND(1)<=.5 THEN 1580
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:.5
  BinaryOperatorLessEqual:<= numeric
 1574 PRINT "YOU HAVE BEEN THROWN OUT OF OFFICE AND ARE NOW"
@@ -982,7 +982,7 @@
 1602 PRINT
  CarriageControl:NL
 1610 PRINT B5;"COUNTRYMEN DIED IN ONE YEAR!!!!!"
- Variable:B5
+ Variable:B5 scalar
  CarriageControl:;
  TextConstant:"COUNTRYMEN DIED IN ONE YEAR!!!!!"
  CarriageControl:NL
@@ -993,23 +993,23 @@
  TextConstant:"BEEN IMPEACHED AND THROWN OUT OF OFFICE, BUT YOU"
  CarriageControl:NL
 1622 M6=INT(RND(1)*10)
- Variable:M6
+ Variable:M6 scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1625 IF M6<=3 THEN 1670
- Variable:M6
+ Variable:M6 scalar
  NumericConstant:3
  BinaryOperatorLessEqual:<= numeric
 1630 IF M6<=6 THEN 1680
- Variable:M6
+ Variable:M6 scalar
  NumericConstant:6
  BinaryOperatorLessEqual:<= numeric
 1635 IF M6<=10 THEN 1690
- Variable:M6
+ Variable:M6 scalar
  NumericConstant:10
  BinaryOperatorLessEqual:<= numeric
 1670 PRINT "ALSO HAD YOUR LEFT EYE GOUGED OUT!"
@@ -1043,8 +1043,8 @@
 1730 GOTO 1570
  LineNumber:1570
 1800 IF B5-F1<2 THEN 1515
- Variable:B5
- Variable:F1
+ Variable:B5 scalar
+ Variable:F1 scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:2
  BinaryOperatorLess:< numeric
@@ -1083,7 +1083,7 @@
 1925 PRINT "YOU HAVE SUCCESFULLY COMPLETED YOUR";N5;"YEAR TERM"
  TextConstant:"YOU HAVE SUCCESFULLY COMPLETED YOUR"
  CarriageControl:;
- Variable:N5
+ Variable:N5 scalar
  CarriageControl:;
  TextConstant:"YEAR TERM"
  CarriageControl:NL
@@ -1105,19 +1105,19 @@
  TextConstant:"HOW MANY YEARS HAD YOU BEEN IN OFFICE WHEN INTERRUPTED"
  CarriageControl:;
 1961 INPUT X5
- Variable:X5
+ Variable:X5 scalar
 1962 IF X5<0 THEN 1590
- Variable:X5
+ Variable:X5 scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 1963 IF X5<8 THEN 1969
- Variable:X5
+ Variable:X5 scalar
  NumericConstant:8
  BinaryOperatorLess:< numeric
 1965 PRINT "   COME ON, YOUR TERM IN OFFICE IS ONLY";N5;"YEARS."
  TextConstant:"   COME ON, YOUR TERM IN OFFICE IS ONLY"
  CarriageControl:;
- Variable:N5
+ Variable:N5 scalar
  CarriageControl:;
  TextConstant:"YEARS."
  CarriageControl:NL
@@ -1127,44 +1127,44 @@
  TextConstant:"HOW MUCH DID YOU HAVE IN THE TREASURY"
  CarriageControl:;
 1970 INPUT A
- Variable:A
+ Variable:A scalar
 1971 IF A<0 THEN 1590
- Variable:A
+ Variable:A scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 1975 PRINT "HOW MANY COUNTRYMEN";    
  TextConstant:"HOW MANY COUNTRYMEN"
  CarriageControl:;
 1976 INPUT B
- Variable:B
+ Variable:B scalar
 1977 IF B<0 THEN 1590
- Variable:B
+ Variable:B scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 1980 PRINT "HOW MANY WORKERS";
  TextConstant:"HOW MANY WORKERS"
  CarriageControl:;
 1981 INPUT C
- Variable:C
+ Variable:C scalar
 1982 IF C<0 THEN 1590
- Variable:C
+ Variable:C scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 1990 PRINT "HOW MANY SQUARE MILES OF LAND";
  TextConstant:"HOW MANY SQUARE MILES OF LAND"
  CarriageControl:;
 1991 INPUT D
- Variable:D
+ Variable:D scalar
 1992 IF D<0 THEN 1590
- Variable:D
+ Variable:D scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 1993 IF D>2000 THEN 1996
- Variable:D
+ Variable:D scalar
  NumericConstant:2000
  BinaryOperatorGreater:> numeric
 1994 IF D>1000 THEN 100
- Variable:D
+ Variable:D scalar
  NumericConstant:1000
  BinaryOperatorGreater:> numeric
 1996 PRINT "   COME ON, YOU STARTED WITH 1000 SQ. MILES OF FARM LAND"
@@ -1176,13 +1176,13 @@
 1998 GOTO 1990
  LineNumber:1990
 2000 X5=X5+1
- Variable:X5
- Variable:X5
+ Variable:X5 scalar
+ Variable:X5 scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2020 B5=0
- Variable:B5
+ Variable:B5 scalar
  NumericConstant:0
  AssignmentOperator:=
 2040 GOTO 100

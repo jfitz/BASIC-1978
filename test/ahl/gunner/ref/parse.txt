@@ -1,12 +1,12 @@
 10 PRINT TAB(30);"GUNNER"
  NumericConstant:30
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"GUNNER"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -28,46 +28,46 @@
  CarriageControl:NL
  CarriageControl:NL
 170 R=INT(40000*RND(1)+20000)
- Variable:R
+ Variable:R scalar
  NumericConstant:40000
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:20000
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 180 PRINT "MAXIMUM RANGE OF YOUR GUN IS";R;" YARDS."
  TextConstant:"MAXIMUM RANGE OF YOUR GUN IS"
  CarriageControl:;
- Variable:R
+ Variable:R scalar
  CarriageControl:;
  TextConstant:" YARDS."
  CarriageControl:NL
 185 Z=0
- Variable:Z
+ Variable:Z scalar
  NumericConstant:0
  AssignmentOperator:=
 190 PRINT
  CarriageControl:NL
 195 S1=0
- Variable:S1
+ Variable:S1 scalar
  NumericConstant:0
  AssignmentOperator:=
 200 T=INT(R*(.1+.8*RND(1)))
- Variable:T
- Variable:R
+ Variable:T scalar
+ Variable:R scalar
  NumericConstant:.1
  NumericConstant:.8
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 210 S=0
- Variable:S
+ Variable:S scalar
  NumericConstant:0
  AssignmentOperator:=
 220 GOTO 370
@@ -85,8 +85,8 @@
 270 PRINT "OVER TARGET BY ";ABS(E);"YARDS."
  TextConstant:"OVER TARGET BY "
  CarriageControl:;
- Variable:E
- FunctionAbs
+ Variable:E scalar
+ FunctionAbs scalar
  CarriageControl:;
  TextConstant:"YARDS."
  CarriageControl:NL
@@ -95,8 +95,8 @@
 290 PRINT "SHORT OF TARGET BY "ABS(E);"YARDS."
  TextConstant:"SHORT OF TARGET BY "
  CarriageControl:
- Variable:E
- FunctionAbs
+ Variable:E scalar
+ FunctionAbs scalar
  CarriageControl:;
  TextConstant:"YARDS."
  CarriageControl:NL
@@ -105,23 +105,23 @@
 320 PRINT "*** TARGET DESTROYED ***  ";S;"ROUNDS OF AMMUNITION EXPENDED."
  TextConstant:"*** TARGET DESTROYED ***  "
  CarriageControl:;
- Variable:S
+ Variable:S scalar
  CarriageControl:;
  TextConstant:"ROUNDS OF AMMUNITION EXPENDED."
  CarriageControl:NL
 325 S1=S1+S
- Variable:S1
- Variable:S1
- Variable:S
+ Variable:S1 scalar
+ Variable:S1 scalar
+ Variable:S scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 330 IF Z=4 THEN 490
- Variable:Z
+ Variable:Z scalar
  NumericConstant:4
  BinaryOperatorEqual:= numeric
 340 Z=Z+1
- Variable:Z
- Variable:Z
+ Variable:Z scalar
+ Variable:Z scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
@@ -135,7 +135,7 @@
 370 PRINT "DISTANCE TO THE TARGET IS "T;" YARDS."
  TextConstant:"DISTANCE TO THE TARGET IS "
  CarriageControl:
- Variable:T
+ Variable:T scalar
  CarriageControl:;
  TextConstant:" YARDS."
  CarriageControl:NL
@@ -144,23 +144,23 @@
 390 PRINT
  CarriageControl:NL
 400 INPUT "ELEVATION";B
- Variable:B
+ Variable:B scalar
 420 IF B>89 THEN 250
- Variable:B
+ Variable:B scalar
  NumericConstant:89
  BinaryOperatorGreater:> numeric
 430 IF B<1 THEN 230
- Variable:B
+ Variable:B scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 440 S=S+1
- Variable:S
- Variable:S
+ Variable:S scalar
+ Variable:S scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 442 IF S<6 THEN 450
- Variable:S
+ Variable:S scalar
  NumericConstant:6
  BinaryOperatorLess:< numeric
 444 PRINT:PRINT "BOOM !!!!   YOU HAVE JUST BEEN DESTROYED ";
@@ -175,35 +175,35 @@
  CarriageControl:NL
  LineNumber:495
 450 B2=2*B/57.3 : I=R*SIN(B2) : X=T-I : E=INT(X)
- Variable:B2
+ Variable:B2 scalar
  NumericConstant:2
- Variable:B
+ Variable:B scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:57.3
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
- Variable:I
- Variable:R
- Variable:B2
- FunctionSin
+ Variable:I scalar
+ Variable:R scalar
+ Variable:B2 scalar
+ FunctionSin scalar
  BinaryOperatorMultiply:* numeric
  AssignmentOperator:=
- Variable:X
- Variable:T
- Variable:I
+ Variable:X scalar
+ Variable:T scalar
+ Variable:I scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
- Variable:E
- Variable:X
- FunctionInt
+ Variable:E scalar
+ Variable:X scalar
+ FunctionInt scalar
  AssignmentOperator:=
 460 IF ABS(E)<100 THEN 320
- Variable:E
- FunctionAbs
+ Variable:E scalar
+ FunctionAbs scalar
  NumericConstant:100
  BinaryOperatorLess:< numeric
 470 IF E>100 THEN 290
- Variable:E
+ Variable:E scalar
  NumericConstant:100
  BinaryOperatorGreater:> numeric
 480 GOTO 270
@@ -213,10 +213,10 @@
  CarriageControl:NL
  TextConstant:"TOTAL ROUNDS EXPENDED WERE:"
  CarriageControl:;
- Variable:S1
+ Variable:S1 scalar
  CarriageControl:NL
 492 IF S1>18 THEN 495
- Variable:S1
+ Variable:S1 scalar
  NumericConstant:18
  BinaryOperatorGreater:> numeric
 493 PRINT "NICE SHOOTING !!" : GOTO 500
@@ -228,9 +228,9 @@
  CarriageControl:NL
 500 PRINT : INPUT "TRY AGAIN (Y OR N)";Z$
  CarriageControl:NL
- Variable:Z$
+ Variable:Z$ scalar
 510 IF Z$="Y" THEN 170
- Variable:Z$
+ Variable:Z$ scalar
  TextConstant:"Y"
  BinaryOperatorEqual:= numeric
 520 PRINT:PRINT "OK.  RETURN TO BASE CAMP."

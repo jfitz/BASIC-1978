@@ -1,12 +1,12 @@
 1 PRINT TAB(33);"QUEEN"
  NumericConstant:33
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"QUEEN"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -16,16 +16,16 @@
  CarriageControl:NL
 10 DIM S(64)
  NumericConstant:64
- Declaration:S
+ Declaration:S unknown
 11 FOR I=1 TO 64
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:64"]
 12 READ S(I)
- Variable:I
- Variable:S
+ Variable:I scalar
+ Variable:S scalar
 13 NEXT I
- Variable:I
+ Variable:I scalar
 14 DATA  81,  71,  61,  51,  41,  31,  21,  11
  NumericConstant:81
  NumericConstant:71
@@ -99,13 +99,13 @@
  NumericConstant:98
  NumericConstant:88
 22 INPUT "DO YOU WANT INSTRUCTIONS";W$
- Variable:W$
+ Variable:W$ scalar
 23 IF W$="NO" THEN 30
- Variable:W$
+ Variable:W$ scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 24 IF W$="YES" THEN 28
- Variable:W$
+ Variable:W$ scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 25 PRINT "PLEASE ANSWER 'YES' OR 'NO'."
@@ -125,33 +125,33 @@
  TextConstant:"WHERE WOULD YOU LIKE TO START"
  CarriageControl:;
 110 INPUT M1
- Variable:M1
+ Variable:M1 scalar
 115 IF M1=0 THEN 232
- Variable:M1
+ Variable:M1 scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 120 T1=INT(M1/10)
- Variable:T1
- Variable:M1
+ Variable:T1 scalar
+ Variable:M1 scalar
  NumericConstant:10
  BinaryOperatorDivide:/ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 130 U1=M1-10*T1
- Variable:U1
- Variable:M1
+ Variable:U1 scalar
+ Variable:M1 scalar
  NumericConstant:10
- Variable:T1
+ Variable:T1 scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 140 IF U1=1 THEN 200
- Variable:U1
+ Variable:U1 scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 150 IF U1=T1 THEN 200
- Variable:U1
- Variable:T1
+ Variable:U1 scalar
+ Variable:T1 scalar
  BinaryOperatorEqual:= numeric
 160 PRINT "PLEASE READ THE DIRECTIONS AGAIN."
  TextConstant:"PLEASE READ THE DIRECTIONS AGAIN."
@@ -168,19 +168,19 @@
 210 PRINT "COMPUTER MOVES TO SQUARE";M
  TextConstant:"COMPUTER MOVES TO SQUARE"
  CarriageControl:;
- Variable:M
+ Variable:M scalar
  CarriageControl:NL
 215 IF M=158 THEN 3400
- Variable:M
+ Variable:M scalar
  NumericConstant:158
  BinaryOperatorEqual:= numeric
 220 PRINT "WHAT IS YOUR MOVE";
  TextConstant:"WHAT IS YOUR MOVE"
  CarriageControl:;
 230 INPUT M1
- Variable:M1
+ Variable:M1 scalar
 231 IF M1<>0 THEN 239
- Variable:M1
+ Variable:M1 scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 232 PRINT
@@ -193,60 +193,60 @@
 235 GOTO 4000
  LineNumber:4000
 239 IF M1<=M THEN 3200
- Variable:M1
- Variable:M
+ Variable:M1 scalar
+ Variable:M scalar
  BinaryOperatorLessEqual:<= numeric
 240 T1=INT(M1/10)
- Variable:T1
- Variable:M1
+ Variable:T1 scalar
+ Variable:M1 scalar
  NumericConstant:10
  BinaryOperatorDivide:/ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 250 U1=M1-10*T1
- Variable:U1
- Variable:M1
+ Variable:U1 scalar
+ Variable:M1 scalar
  NumericConstant:10
- Variable:T1
+ Variable:T1 scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 260 P=U1-U
- Variable:P
- Variable:U1
- Variable:U
+ Variable:P scalar
+ Variable:U1 scalar
+ Variable:U scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 270 IF P<>0 THEN 300
- Variable:P
+ Variable:P scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 280 L=T1-T
- Variable:L
- Variable:T1
- Variable:T
+ Variable:L scalar
+ Variable:T1 scalar
+ Variable:T scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 290 IF L<=0 THEN 3200
- Variable:L
+ Variable:L scalar
  NumericConstant:0
  BinaryOperatorLessEqual:<= numeric
 295 GOTO 200
  LineNumber:200
 300 IF T1-T <>P THEN 320
- Variable:T1
- Variable:T
+ Variable:T1 scalar
+ Variable:T scalar
  BinaryOperatorMinus:- numeric
- Variable:P
+ Variable:P scalar
  BinaryOperatorNotEqual:<> numeric
 310 GOTO 200
  LineNumber:200
 320 IF T1-T <>2*P THEN 3200
- Variable:T1
- Variable:T
+ Variable:T1 scalar
+ Variable:T scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:2
- Variable:P
+ Variable:P scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorNotEqual:<> numeric
 330 GOTO 200
@@ -254,88 +254,88 @@
 1990 REM     LOCATE MOVE FOR COMPUTER
  Remark:    LOCATE MOVE FOR COMPUTER
 2000 IF M1=41 THEN 2180
- Variable:M1
+ Variable:M1 scalar
  NumericConstant:41
  BinaryOperatorEqual:= numeric
 2010 IF M1=44 THEN 2180
- Variable:M1
+ Variable:M1 scalar
  NumericConstant:44
  BinaryOperatorEqual:= numeric
 2020 IF M1=73 THEN 2180
- Variable:M1
+ Variable:M1 scalar
  NumericConstant:73
  BinaryOperatorEqual:= numeric
 2030 IF M1=75 THEN 2180
- Variable:M1
+ Variable:M1 scalar
  NumericConstant:75
  BinaryOperatorEqual:= numeric
 2040 IF M1=126 THEN 2180
- Variable:M1
+ Variable:M1 scalar
  NumericConstant:126
  BinaryOperatorEqual:= numeric
 2050 IF M1=127 THEN 2180
- Variable:M1
+ Variable:M1 scalar
  NumericConstant:127
  BinaryOperatorEqual:= numeric
 2060 IF M1=158 THEN 3300
- Variable:M1
+ Variable:M1 scalar
  NumericConstant:158
  BinaryOperatorEqual:= numeric
 2065 C=0
- Variable:C
+ Variable:C scalar
  NumericConstant:0
  AssignmentOperator:=
 2070 FOR K=7 TO 1 STEP -1
- control: Variable:K
+ control: Variable:K scalar
  start:   ["NumericConstant:7"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
 2080 U=U1
- Variable:U
- Variable:U1
+ Variable:U scalar
+ Variable:U1 scalar
  AssignmentOperator:=
 2090 T=T1+K
- Variable:T
- Variable:T1
- Variable:K
+ Variable:T scalar
+ Variable:T1 scalar
+ Variable:K scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2100 GOSUB 3500
  LineNumber:3500
 2105 IF C=1 THEN 2160
- Variable:C
+ Variable:C scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 2110 U=U+K
- Variable:U
- Variable:U
- Variable:K
+ Variable:U scalar
+ Variable:U scalar
+ Variable:K scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2120 GOSUB 3500
  LineNumber:3500
 2125 IF C=1 THEN 2160
- Variable:C
+ Variable:C scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 2130 T=T+K
- Variable:T
- Variable:T
- Variable:K
+ Variable:T scalar
+ Variable:T scalar
+ Variable:K scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2140 GOSUB 3500
  LineNumber:3500
 2145 IF C=1 THEN 2160
- Variable:C
+ Variable:C scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 2150 NEXT K
- Variable:K
+ Variable:K scalar
 2155 GOTO 2180
  LineNumber:2180
 2160 C=0
- Variable:C
+ Variable:C scalar
  NumericConstant:0
  AssignmentOperator:=
 2170 RETURN
@@ -347,78 +347,78 @@
 2990 REM     RANDOM MOVE
  Remark:    RANDOM MOVE
 3000 Z=RND(1)
- Variable:Z
+ Variable:Z scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  AssignmentOperator:=
 3010 IF Z>.6 THEN 3110
- Variable:Z
+ Variable:Z scalar
  NumericConstant:.6
  BinaryOperatorGreater:> numeric
 3020 IF Z>.3 THEN 3070
- Variable:Z
+ Variable:Z scalar
  NumericConstant:.3
  BinaryOperatorGreater:> numeric
 3030 U=U1
- Variable:U
- Variable:U1
+ Variable:U scalar
+ Variable:U1 scalar
  AssignmentOperator:=
 3040 T=T1+1
- Variable:T
- Variable:T1
+ Variable:T scalar
+ Variable:T1 scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3050 M=10*T+U
- Variable:M
+ Variable:M scalar
  NumericConstant:10
- Variable:T
+ Variable:T scalar
  BinaryOperatorMultiply:* numeric
- Variable:U
+ Variable:U scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3060 RETURN
  
 3070 U=U1+1
- Variable:U
- Variable:U1
+ Variable:U scalar
+ Variable:U1 scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3080 T=T1+2
- Variable:T
- Variable:T1
+ Variable:T scalar
+ Variable:T1 scalar
  NumericConstant:2
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3090 M=10*T+U
- Variable:M
+ Variable:M scalar
  NumericConstant:10
- Variable:T
+ Variable:T scalar
  BinaryOperatorMultiply:* numeric
- Variable:U
+ Variable:U scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3100 RETURN
  
 3110 U=U1+1
- Variable:U
- Variable:U1
+ Variable:U scalar
+ Variable:U1 scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3120 T=T1+1
- Variable:T
- Variable:T1
+ Variable:T scalar
+ Variable:T1 scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3130 M=10*T+U
- Variable:M
+ Variable:M scalar
  NumericConstant:10
- Variable:T
+ Variable:T scalar
  BinaryOperatorMultiply:* numeric
- Variable:U
+ Variable:U scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3140 RETURN
@@ -471,37 +471,37 @@
 3490 REM     TEST FOR COMPUTER MOVE
  Remark:    TEST FOR COMPUTER MOVE
 3500 M=10*T+U
- Variable:M
+ Variable:M scalar
  NumericConstant:10
- Variable:T
+ Variable:T scalar
  BinaryOperatorMultiply:* numeric
- Variable:U
+ Variable:U scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3510 IF M=158 THEN 3570
- Variable:M
+ Variable:M scalar
  NumericConstant:158
  BinaryOperatorEqual:= numeric
 3520 IF M=127 THEN 3570
- Variable:M
+ Variable:M scalar
  NumericConstant:127
  BinaryOperatorEqual:= numeric
 3530 IF M=126 THEN 3570
- Variable:M
+ Variable:M scalar
  NumericConstant:126
  BinaryOperatorEqual:= numeric
 3540 IF M=75 THEN 3570
- Variable:M
+ Variable:M scalar
  NumericConstant:75
  BinaryOperatorEqual:= numeric
 3550 IF M=73 THEN 3570
- Variable:M
+ Variable:M scalar
  NumericConstant:73
  BinaryOperatorEqual:= numeric
 3560 RETURN
  
 3570 C=1
- Variable:C
+ Variable:C scalar
  NumericConstant:1
  AssignmentOperator:=
 3580 GOTO 3560
@@ -512,15 +512,15 @@
  TextConstant:"ANYONE ELSE CARE TO TRY"
  CarriageControl:;
 4010 INPUT Q$
- Variable:Q$
+ Variable:Q$ scalar
 4020 PRINT
  CarriageControl:NL
 4030 IF Q$="YES" THEN 30 
- Variable:Q$
+ Variable:Q$ scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 4040 IF Q$="NO" THEN 4050
- Variable:Q$
+ Variable:Q$ scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 4042 PRINT "PLEASE ANSWER 'YES' OR 'NO'."
@@ -583,27 +583,27 @@
 5160 PRINT
  CarriageControl:NL
 5170 FOR A=0 TO 7
- control: Variable:A
+ control: Variable:A scalar
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
 5180 FOR B=1 TO 8
- control: Variable:B
+ control: Variable:B scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 5185 I=8*A+B
- Variable:I
+ Variable:I scalar
  NumericConstant:8
- Variable:A
+ Variable:A scalar
  BinaryOperatorMultiply:* numeric
- Variable:B
+ Variable:B scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 5190 PRINT S(I);
- Variable:I
- Variable:S
+ Variable:I scalar
+ Variable:S scalar
  CarriageControl:;
 5200 NEXT B
- Variable:B
+ Variable:B scalar
 5210 PRINT
  CarriageControl:NL
 5220 PRINT
@@ -611,7 +611,7 @@
 5230 PRINT
  CarriageControl:NL
 5240 NEXT A
- Variable:A
+ Variable:A scalar
 5250 PRINT
  CarriageControl:NL
 5260 RETURN

@@ -2,12 +2,12 @@
  TextConstant:"YOU ARE A PILOT IN A WORLD WAR II BOMBER."
  CarriageControl:NL
 10 INPUT "WHAT SIDE -- ITALY(1), ALLIES(2), JAPAN(3), GERMANY(4)";A
- Variable:A
+ Variable:A scalar
 20 IF A>0 AND A<5 THEN 25
- Variable:A
+ Variable:A scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
- Variable:A
+ Variable:A scalar
  NumericConstant:5
  BinaryOperatorLess:< numeric
  BinaryOperatorAnd:AND numeric
@@ -16,18 +16,18 @@
  CarriageControl:NL
  LineNumber:10
 25 ON A GOTO 30, 110, 200, 220
- Variable:A
+ Variable:A scalar
  LineNumber:30
  LineNumber:110
  LineNumber:200
  LineNumber:220
 30 INPUT "YOUR TARGET -- ALBANIA(1), GREECE(2), NORTH AFRICA(3)";B
- Variable:B
+ Variable:B scalar
 40 IF B>0 AND B<4 THEN 45
- Variable:B
+ Variable:B scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
- Variable:B
+ Variable:B scalar
  NumericConstant:4
  BinaryOperatorLess:< numeric
  BinaryOperatorAnd:AND numeric
@@ -37,7 +37,7 @@
  LineNumber:30
 45 PRINT : ON B GOTO 50, 80,90
  CarriageControl:NL
- Variable:B
+ Variable:B scalar
  LineNumber:50
  LineNumber:80
  LineNumber:90
@@ -55,12 +55,12 @@
  CarriageControl:NL
  LineNumber:280
 110 INPUT "AIRCRAFT -- LIBERATOR(1), B-29(2), B-17(3), LANCASTER(4)";G
- Variable:G
+ Variable:G scalar
 120 IF G>0 AND G<5 THEN 125
- Variable:G
+ Variable:G scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
- Variable:G
+ Variable:G scalar
  NumericConstant:5
  BinaryOperatorLess:< numeric
  BinaryOperatorAnd:AND numeric
@@ -70,7 +70,7 @@
  LineNumber:110
 125 PRINT : ON G GOTO 130, 150, 170, 190
  CarriageControl:NL
- Variable:G
+ Variable:G scalar
  LineNumber:130
  LineNumber:150
  LineNumber:170
@@ -96,19 +96,19 @@
  TextConstant:"YOU'RE FLYING A KAMIKAZE MISSION OVER THE USS LEXINGTON."
  CarriageControl:NL
 205 INPUT "YOUR FIRST KAMIKAZE MISSION(Y OR N)";F$
- Variable:F$
+ Variable:F$ scalar
 207 IF F$="N" THEN S=0 : GOTO 358
- Variable:F$
+ Variable:F$ scalar
  TextConstant:"N"
  BinaryOperatorEqual:= numeric
- Variable:S
+ Variable:S scalar
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:358
 210 PRINT : IF RND(1)>.65 THEN 325
  CarriageControl:NL
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:.65
  BinaryOperatorGreater:> numeric
 215 GOTO 380
@@ -117,11 +117,11 @@
  TextConstant:"A NAZI, EH?  OH WELL.  ARE YOU GOING FOR RUSSIA(1),"
  CarriageControl:NL
 230 INPUT "ENGLAND(2), OR FRANCE(3)";M : IF M>0 AND M<4 THEN 235
- Variable:M
- Variable:M
+ Variable:M scalar
+ Variable:M scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
- Variable:M
+ Variable:M scalar
  NumericConstant:4
  BinaryOperatorLess:< numeric
  BinaryOperatorAnd:AND numeric
@@ -131,7 +131,7 @@
  LineNumber:220
 235 PRINT : ON M GOTO 250, 260, 270
  CarriageControl:NL
- Variable:M
+ Variable:M scalar
  LineNumber:250
  LineNumber:260
  LineNumber:270
@@ -149,9 +149,9 @@
 280 PRINT
  CarriageControl:NL
 285 INPUT "HOW MANY MISSIONS HAVE YOU FLOWN";D
- Variable:D
+ Variable:D scalar
 290 IF D<160 THEN 300
- Variable:D
+ Variable:D scalar
  NumericConstant:160
  BinaryOperatorLess:< numeric
 292 PRINT "MISSIONS, NOT MILES..." 
@@ -166,7 +166,7 @@
  LineNumber:285
 300 PRINT:IF D<100 THEN 310
  CarriageControl:NL
- Variable:D
+ Variable:D scalar
  NumericConstant:100
  BinaryOperatorLess:< numeric
 305 PRINT "THAT'S PUSHING THE ODDS!" : GOTO 320
@@ -174,17 +174,17 @@
  CarriageControl:NL
  LineNumber:320
 310 IF D<25 THEN PRINT "FRESH OUT OF TRAINING, EH?"
- Variable:D
+ Variable:D scalar
  NumericConstant:25
  BinaryOperatorLess:< numeric
  TextConstant:"FRESH OUT OF TRAINING, EH?"
  CarriageControl:NL
 320 PRINT : IF D<160*RND(1) THEN 330
  CarriageControl:NL
- Variable:D
+ Variable:D scalar
  NumericConstant:160
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorLess:< numeric
 325 PRINT "DIRECT HIT!!!! "INT(100*RND(1))"KILLED."
@@ -192,9 +192,9 @@
  CarriageControl:
  NumericConstant:100
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  CarriageControl:
  TextConstant:"KILLED."
  CarriageControl:NL
@@ -208,10 +208,10 @@
  NumericConstant:2
  NumericConstant:30
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  CarriageControl:
  TextConstant:"MILES!"
  CarriageControl:NL
@@ -220,12 +220,12 @@
  CarriageControl:NL
  CarriageControl:NL
 340 INPUT "DOES THE ENEMY HAVE GUNS(1), MISSILES(2), OR BOTH(3)";R
- Variable:R
+ Variable:R scalar
 345 IF R>0 AND R<4 THEN 350
- Variable:R
+ Variable:R scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
- Variable:R
+ Variable:R scalar
  NumericConstant:4
  BinaryOperatorLess:< numeric
  BinaryOperatorAnd:AND numeric
@@ -235,16 +235,16 @@
  LineNumber:340
 350 PRINT : T=0 : IF R=2 THEN 360
  CarriageControl:NL
- Variable:T
+ Variable:T scalar
  NumericConstant:0
  AssignmentOperator:=
- Variable:R
+ Variable:R scalar
  NumericConstant:2
  BinaryOperatorEqual:= numeric
 355 INPUT "WHAT'S THE PERCENT HIT RATE OF ENEMY GUNNERS (10 TO 50)";S
- Variable:S
+ Variable:S scalar
 357 IF S<10 THEN PRINT "YOU LIE, BUT YOU'LL PAY...": GOTO 380
- Variable:S
+ Variable:S scalar
  NumericConstant:10
  BinaryOperatorLess:< numeric
  TextConstant:"YOU LIE, BUT YOU'LL PAY..."
@@ -254,19 +254,19 @@
  CarriageControl:NL
 360 PRINT : IF R>1 THEN T=35
  CarriageControl:NL
- Variable:R
+ Variable:R scalar
  NumericConstant:1
  BinaryOperatorGreater:> numeric
- Variable:T
+ Variable:T scalar
  NumericConstant:35
  AssignmentOperator:=
 365 IF S+T>100*RND(1) THEN 380
- Variable:S
- Variable:T
+ Variable:S scalar
+ Variable:T scalar
  BinaryOperatorPlus:+ numeric
  NumericConstant:100
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorGreater:> numeric
 370 PRINT "YOU MADE IT THROUGH TREMENDOUS FLAK!!" : GOTO 390
@@ -289,9 +289,9 @@
  CarriageControl:NL
  CarriageControl:NL
  CarriageControl:NL
- Variable:U$
+ Variable:U$ scalar
 395 IF U$="Y" THEN 8
- Variable:U$
+ Variable:U$ scalar
  TextConstant:"Y"
  BinaryOperatorEqual:= numeric
 400 PRINT "CHICKEN !!!" : PRINT : END

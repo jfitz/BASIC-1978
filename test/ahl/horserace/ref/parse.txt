@@ -1,12 +1,12 @@
 100 PRINT TAB(31);"HORSERACE"
  NumericConstant:31
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"HORSERACE"
  CarriageControl:NL
 110 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -16,7 +16,7 @@
  CarriageControl:NL
 210 DIM S(8)
  NumericConstant:8
- Declaration:S
+ Declaration:S unknown
 220 PRINT "WELCOME TO SOUTH PORTLAND HIGH RACETRACK"
  TextConstant:"WELCOME TO SOUTH PORTLAND HIGH RACETRACK"
  CarriageControl:NL
@@ -27,9 +27,9 @@
  TextConstant:"DO YOU WANT DIRECTIONS"
  CarriageControl:;
 250 INPUT X$
- Variable:X$
+ Variable:X$ scalar
 260 IF X$="NO" THEN 320
- Variable:X$
+ Variable:X$ scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 270 PRINT"UP TO 10 MAY PLAY.  A TABLE OF ODDS WILL BE PRINTED.  YOU"
@@ -50,19 +50,19 @@
  TextConstant:"HOW MANY WANT TO BET"
  CarriageControl:;
 330 INPUT C
- Variable:C
+ Variable:C scalar
 340 PRINT "WHEN ? APPEARS,TYPE NAME"
  TextConstant:"WHEN ? APPEARS,TYPE NAME"
  CarriageControl:NL
 350 FOR A=1 TO C
- control: Variable:A
+ control: Variable:A scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C"]
+ end:     ["Variable:C scalar"]
 360 INPUT W$(A)
- Variable:A
- Variable:W$
+ Variable:A scalar
+ Variable:W$ scalar
 370 NEXT A
- Variable:A
+ Variable:A scalar
 380 PRINT
  CarriageControl:NL
 390 PRINT"HORSE",,"NUMBER","ODDS"
@@ -76,108 +76,108 @@
 400 PRINT
  CarriageControl:NL
 410 FOR I=1 TO 8: S(I)=0: NEXT I
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
- Variable:I
- Variable:S
+ Variable:I scalar
+ Variable:S scalar
  NumericConstant:0
  AssignmentOperator:=
- Variable:I
+ Variable:I scalar
 420 LET R=0
- Variable:R
+ Variable:R scalar
  NumericConstant:0
  AssignmentOperator:=
 430 FOR A=1 TO 8
- control: Variable:A
+ control: Variable:A scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 440 LET D(A)=INT(10*RND(1)+1)
- Variable:A
- Variable:D
+ Variable:A scalar
+ Variable:D scalar
  NumericConstant:10
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 450 NEXT A
- Variable:A
+ Variable:A scalar
 460 FOR A=1 TO 8
- control: Variable:A
+ control: Variable:A scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 470 LET R=R+D(A)
- Variable:R
- Variable:R
- Variable:A
- Variable:D
+ Variable:R scalar
+ Variable:R scalar
+ Variable:A scalar
+ Variable:D scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 480 NEXT A
- Variable:A
+ Variable:A scalar
 490 LET V$(1)="JOE MAW"
  NumericConstant:1
- Variable:V$
+ Variable:V$ scalar
  TextConstant:"JOE MAW"
  AssignmentOperator:=
 500 LET V$(2)="L.B.J."
  NumericConstant:2
- Variable:V$
+ Variable:V$ scalar
  TextConstant:"L.B.J."
  AssignmentOperator:=
 510 LET V$(3)="MR.WASHBURN"
  NumericConstant:3
- Variable:V$
+ Variable:V$ scalar
  TextConstant:"MR.WASHBURN"
  AssignmentOperator:=
 520 LET V$(4)="MISS KAREN"
  NumericConstant:4
- Variable:V$
+ Variable:V$ scalar
  TextConstant:"MISS KAREN"
  AssignmentOperator:=
 530 LET V$(5)="JOLLY"
  NumericConstant:5
- Variable:V$
+ Variable:V$ scalar
  TextConstant:"JOLLY"
  AssignmentOperator:=
 540 LET V$(6)="HORSE"
  NumericConstant:6
- Variable:V$
+ Variable:V$ scalar
  TextConstant:"HORSE"
  AssignmentOperator:=
 550 LET V$(7)="JELLY DO NOT"
  NumericConstant:7
- Variable:V$
+ Variable:V$ scalar
  TextConstant:"JELLY DO NOT"
  AssignmentOperator:=
 560 LET V$(8)="MIDNIGHT"
  NumericConstant:8
- Variable:V$
+ Variable:V$ scalar
  TextConstant:"MIDNIGHT"
  AssignmentOperator:=
 570 FOR N=1 TO 8
- control: Variable:N
+ control: Variable:N scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 580 PRINT V$(N),,N,R/D(N);":1"
- Variable:N
- Variable:V$
+ Variable:N scalar
+ Variable:V$ scalar
  CarriageControl:,
  CarriageControl:,
- Variable:N
+ Variable:N scalar
  CarriageControl:,
- Variable:R
- Variable:N
- Variable:D
+ Variable:R scalar
+ Variable:N scalar
+ Variable:D scalar
  BinaryOperatorDivide:/ numeric
  CarriageControl:;
  TextConstant:":1"
  CarriageControl:NL
 590 NEXT N
- Variable:N
+ Variable:N scalar
 600 PRINT"--------------------------------------------------"
  TextConstant:"--------------------------------------------------"
  CarriageControl:NL
@@ -185,26 +185,26 @@
  TextConstant:"PLACE YOUR BETS...HORSE # THEN AMOUNT"
  CarriageControl:NL
 620 FOR J=1 TO C
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C"]
+ end:     ["Variable:C scalar"]
 630 PRINT W$(J);
- Variable:J
- Variable:W$
+ Variable:J scalar
+ Variable:W$ scalar
  CarriageControl:;
 640 INPUT Q(J),P(J)
- Variable:J
- Variable:Q
- Variable:J
- Variable:P
+ Variable:J scalar
+ Variable:Q scalar
+ Variable:J scalar
+ Variable:P scalar
 650 IF P(J)<1 THEN 670
- Variable:J
- Variable:P
+ Variable:J scalar
+ Variable:P scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 660 IF P(J)<100000 THEN 690
- Variable:J
- Variable:P
+ Variable:J scalar
+ Variable:P scalar
  NumericConstant:100000
  BinaryOperatorLess:< numeric
 670 PRINT"  YOU CAN'T DO THAT!"
@@ -213,7 +213,7 @@
 680 GOTO 630
  LineNumber:630
 690 NEXT J
- Variable:J
+ Variable:J scalar
 700 PRINT
  CarriageControl:NL
 710 PRINT"1 2 3 4 5 6 7 8"
@@ -223,264 +223,264 @@
  TextConstant:"XXXXSTARTXXXX"
  CarriageControl:NL
 730 FOR I=1 TO 8
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 740 LET M=I
- Variable:M
- Variable:I
+ Variable:M scalar
+ Variable:I scalar
  AssignmentOperator:=
 750 LET M(I)=M
- Variable:I
- Variable:M
- Variable:M
+ Variable:I scalar
+ Variable:M scalar
+ Variable:M scalar
  AssignmentOperator:=
 760 LET Y(M(I))=INT(100*RND(1)+1)
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:100
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 770 IF Y(M(I))<10 THEN 860
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:10
  BinaryOperatorLess:< numeric
 780 LET S=INT(R/D(I)+.5)
- Variable:S
- Variable:R
- Variable:I
- Variable:D
+ Variable:S scalar
+ Variable:R scalar
+ Variable:I scalar
+ Variable:D scalar
  BinaryOperatorDivide:/ numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 790 IF Y(M(I))<S+17 THEN 880
- Variable:I
- Variable:M
- Variable:Y
- Variable:S
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
+ Variable:S scalar
  NumericConstant:17
  BinaryOperatorPlus:+ numeric
  BinaryOperatorLess:< numeric
 800 IF Y(M(I))<S+37 THEN 900
- Variable:I
- Variable:M
- Variable:Y
- Variable:S
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
+ Variable:S scalar
  NumericConstant:37
  BinaryOperatorPlus:+ numeric
  BinaryOperatorLess:< numeric
 810 IF Y(M(I))<S+57 THEN 920
- Variable:I
- Variable:M
- Variable:Y
- Variable:S
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
+ Variable:S scalar
  NumericConstant:57
  BinaryOperatorPlus:+ numeric
  BinaryOperatorLess:< numeric
 820 IF Y(M(I))<77+S THEN 940
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:77
- Variable:S
+ Variable:S scalar
  BinaryOperatorPlus:+ numeric
  BinaryOperatorLess:< numeric
 830 IF Y(M(I))<S+92 THEN 960
- Variable:I
- Variable:M
- Variable:Y
- Variable:S
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
+ Variable:S scalar
  NumericConstant:92
  BinaryOperatorPlus:+ numeric
  BinaryOperatorLess:< numeric
 840 LET Y(M(I))=7
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:7
  AssignmentOperator:=
 850 GOTO 970
  LineNumber:970
 860 LET Y(M(I))=1
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:1
  AssignmentOperator:=
 870 GOTO 970
  LineNumber:970
 880 LET Y(M(I))=2
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:2
  AssignmentOperator:=
 890 GOTO 970
  LineNumber:970
 900 LET Y(M(I))=3
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:3
  AssignmentOperator:=
 910 GOTO 970
  LineNumber:970
 920 LET Y(M(I))=4
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:4
  AssignmentOperator:=
 930 GOTO 970
  LineNumber:970
 940 LET Y(M(I))=5
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:5
  AssignmentOperator:=
 950 GOTO 970
  LineNumber:970
 960 LET Y(M(I))=6
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  NumericConstant:6
  AssignmentOperator:=
 970 NEXT I
- Variable:I
+ Variable:I scalar
 980 LET M=I
- Variable:M
- Variable:I
+ Variable:M scalar
+ Variable:I scalar
  AssignmentOperator:=
 990 FOR I=1 TO 8
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 1000 LET S(M(I))=S(M(I))+Y(M(I))
- Variable:I
- Variable:M
- Variable:S
- Variable:I
- Variable:M
- Variable:S
- Variable:I
- Variable:M
- Variable:Y
+ Variable:I scalar
+ Variable:M scalar
+ Variable:S scalar
+ Variable:I scalar
+ Variable:M scalar
+ Variable:S scalar
+ Variable:I scalar
+ Variable:M scalar
+ Variable:Y scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1010 NEXT I
- Variable:I
+ Variable:I scalar
 1020 LET I=1
- Variable:I
+ Variable:I scalar
  NumericConstant:1
  AssignmentOperator:=
 1030 FOR L=1 TO 8
- control: Variable:L
+ control: Variable:L scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 1040 FOR I=1 TO 8-L
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:8", "Variable:L", "BinaryOperatorMinus:- numeric"]
+ end:     ["NumericConstant:8", "Variable:L scalar", "BinaryOperatorMinus:- numeric"]
 1050 IF S(M(I))<S(M(I+1))THEN 1090
- Variable:I
- Variable:M
- Variable:S
- Variable:I
+ Variable:I scalar
+ Variable:M scalar
+ Variable:S scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- Variable:M
- Variable:S
+ Variable:M scalar
+ Variable:S scalar
  BinaryOperatorLess:< numeric
 1060 LET H=M(I)
- Variable:H
- Variable:I
- Variable:M
+ Variable:H scalar
+ Variable:I scalar
+ Variable:M scalar
  AssignmentOperator:=
 1070 LET M(I)=M(I+1)
- Variable:I
- Variable:M
- Variable:I
+ Variable:I scalar
+ Variable:M scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- Variable:M
+ Variable:M scalar
  AssignmentOperator:=
 1080 LET M(I+1)=H
- Variable:I
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- Variable:M
- Variable:H
+ Variable:M scalar
+ Variable:H scalar
  AssignmentOperator:=
 1090 NEXT I
- Variable:I
+ Variable:I scalar
 1100 NEXT L
- Variable:L
+ Variable:L scalar
 1110 LET T=S(M(8))
- Variable:T
+ Variable:T scalar
  NumericConstant:8
- Variable:M
- Variable:S
+ Variable:M scalar
+ Variable:S scalar
  AssignmentOperator:=
 1120 FOR I=1 TO 8
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
 1130 LET B=S(M(I))-S(M(I-1))
- Variable:B
- Variable:I
- Variable:M
- Variable:S
- Variable:I
+ Variable:B scalar
+ Variable:I scalar
+ Variable:M scalar
+ Variable:S scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- Variable:M
- Variable:S
+ Variable:M scalar
+ Variable:S scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1140 IF B=0 THEN 1190
- Variable:B
+ Variable:B scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1150 FOR A=1 TO B
- control: Variable:A
+ control: Variable:A scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:B"]
+ end:     ["Variable:B scalar"]
 1160 PRINT
  CarriageControl:NL
 1170 IF S(M(I))>27 THEN 1240
- Variable:I
- Variable:M
- Variable:S
+ Variable:I scalar
+ Variable:M scalar
+ Variable:S scalar
  NumericConstant:27
  BinaryOperatorGreater:> numeric
 1180 NEXT A
- Variable:A
+ Variable:A scalar
 1190 PRINT M(I);
- Variable:I
- Variable:M
+ Variable:I scalar
+ Variable:M scalar
  CarriageControl:;
 1200 NEXT I
- Variable:I
+ Variable:I scalar
 1210 FOR A=1 TO 28-T
- control: Variable:A
+ control: Variable:A scalar
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:28", "Variable:T", "BinaryOperatorMinus:- numeric"]
+ end:     ["NumericConstant:28", "Variable:T scalar", "BinaryOperatorMinus:- numeric"]
 1220 PRINT
  CarriageControl:NL
 1230 NEXT A
- Variable:A
+ Variable:A scalar
 1240 PRINT "XXXXFINISHXXXX";
  TextConstant:"XXXXFINISHXXXX"
  CarriageControl:;
@@ -494,92 +494,92 @@
 1245 PRINT
  CarriageControl:NL
 1250 IF T<28 THEN 720
- Variable:T
+ Variable:T scalar
  NumericConstant:28
  BinaryOperatorLess:< numeric
 1270 PRINT "THE RACE RESULTS ARE:"
  TextConstant:"THE RACE RESULTS ARE:"
  CarriageControl:NL
 1272 LET Z9=1
- Variable:Z9
+ Variable:Z9 scalar
  NumericConstant:1
  AssignmentOperator:=
 1280 FOR I=8 TO 1 STEP-1
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:8"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
 1290 LET F=M(I)
- Variable:F
- Variable:I
- Variable:M
+ Variable:F scalar
+ Variable:I scalar
+ Variable:M scalar
  AssignmentOperator:=
 1300 PRINT
  CarriageControl:NL
 1310 PRINT Z9;"PLACE HORSE NO.";F,"AT ";R/D(F);":1"
- Variable:Z9
+ Variable:Z9 scalar
  CarriageControl:;
  TextConstant:"PLACE HORSE NO."
  CarriageControl:;
- Variable:F
+ Variable:F scalar
  CarriageControl:,
  TextConstant:"AT "
  CarriageControl:;
- Variable:R
- Variable:F
- Variable:D
+ Variable:R scalar
+ Variable:F scalar
+ Variable:D scalar
  BinaryOperatorDivide:/ numeric
  CarriageControl:;
  TextConstant:":1"
  CarriageControl:NL
 1312 LET Z9=Z9+1
- Variable:Z9
- Variable:Z9
+ Variable:Z9 scalar
+ Variable:Z9 scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1320  NEXT I
- Variable:I
+ Variable:I scalar
 1330 FOR J=1 TO C
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C"]
+ end:     ["Variable:C scalar"]
 1340 IF Q(J)<>M(8) THEN 1370
- Variable:J
- Variable:Q
+ Variable:J scalar
+ Variable:Q scalar
  NumericConstant:8
- Variable:M
+ Variable:M scalar
  BinaryOperatorNotEqual:<> numeric
 1350 LET N=Q(J)
- Variable:N
- Variable:J
- Variable:Q
+ Variable:N scalar
+ Variable:J scalar
+ Variable:Q scalar
  AssignmentOperator:=
 1355 PRINT
  CarriageControl:NL
 1360 PRINT W$(J);" WINS $";(R/D(N))*P(J)
- Variable:J
- Variable:W$
+ Variable:J scalar
+ Variable:W$ scalar
  CarriageControl:;
  TextConstant:" WINS $"
  CarriageControl:;
- Variable:R
- Variable:N
- Variable:D
+ Variable:R scalar
+ Variable:N scalar
+ Variable:D scalar
  BinaryOperatorDivide:/ numeric
- Variable:J
- Variable:P
+ Variable:J scalar
+ Variable:P scalar
  BinaryOperatorMultiply:* numeric
  CarriageControl:NL
 1370 NEXT J
- Variable:J
+ Variable:J scalar
 1372 PRINT "DO YOU WANT TO BET ON THE NEXT RACE ?"
  TextConstant:"DO YOU WANT TO BET ON THE NEXT RACE ?"
  CarriageControl:NL
 1374 INPUT "YES OR NO"; O$
- Variable:O$
+ Variable:O$ scalar
 1376 IF O$="YES" THEN 380
- Variable:O$
+ Variable:O$ scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 1380 END

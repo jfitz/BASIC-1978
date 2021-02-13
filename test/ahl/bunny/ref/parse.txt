@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"BUNNY"
  NumericConstant:33
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"BUNNY"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -19,16 +19,16 @@
 110 REM
  Remark:
 120 FOR I=0 TO 4: READ B(I): NEXT I
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:4"]
- Variable:I
- Variable:B
- Variable:I
+ Variable:I scalar
+ Variable:B scalar
+ Variable:I scalar
 130 GOSUB 260
  LineNumber:260
 140 L=64: REM  ASCII LETTER CODE...
- Variable:L
+ Variable:L scalar
  NumericConstant:64
  AssignmentOperator:=
  Remark: ASCII LETTER CODE...
@@ -37,42 +37,42 @@
 160 PRINT
  CarriageControl:NL
 170 READ X: IF X<0 THEN 160
- Variable:X
- Variable:X
+ Variable:X scalar
+ Variable:X scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 175 IF X>128 THEN 240
- Variable:X
+ Variable:X scalar
  NumericConstant:128
  BinaryOperatorGreater:> numeric
 180 PRINT TAB(X);: READ Y
- Variable:X
- FunctionTab
+ Variable:X scalar
+ FunctionTab scalar
  CarriageControl:;
- Variable:Y
+ Variable:Y scalar
 190 FOR I=X TO Y: J=I-5*INT(I/5)
- control: Variable:I
- start:   ["Variable:X"]
- end:     ["Variable:Y"]
- Variable:J
- Variable:I
+ control: Variable:I scalar
+ start:   ["Variable:X scalar"]
+ end:     ["Variable:Y scalar"]
+ Variable:J scalar
+ Variable:I scalar
  NumericConstant:5
- Variable:I
+ Variable:I scalar
  NumericConstant:5
  BinaryOperatorDivide:/ numeric
- FunctionInt
+ FunctionInt scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 200 PRINT CHR$(L+B(J));
- Variable:L
- Variable:J
- Variable:B
+ Variable:L scalar
+ Variable:J scalar
+ Variable:B scalar
  BinaryOperatorPlus:+ numeric
- FunctionChr
+ FunctionChr scalar
  CarriageControl:;
 210 NEXT I
- Variable:I
+ Variable:I scalar
 220 GOTO 170
  LineNumber:170
 230 REM
@@ -83,13 +83,13 @@
 250 REM
  Remark:
 260 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  NumericConstant:10
- FunctionChr
+ FunctionChr scalar
  CarriageControl:;
- Variable:I
+ Variable:I scalar
 270 RETURN
  
 280 REM

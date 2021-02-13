@@ -1,12 +1,12 @@
 10 PRINT TAB(32);"CALENDAR"
  NumericConstant:32
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CALENDAR"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -18,67 +18,67 @@
  Remark:    VALUES FOR 1979 - SEE NOTES
 110 DIM M(12)
  NumericConstant:12
- Declaration:M
+ Declaration:M unknown
 120 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  NumericConstant:10
- FunctionChr
+ FunctionChr scalar
  CarriageControl:;
- Variable:I
+ Variable:I scalar
 130 D=1: REM 1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
- Variable:D
+ Variable:D scalar
  NumericConstant:1
  AssignmentOperator:=
  Remark:1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
 140 S=0
- Variable:S
+ Variable:S scalar
  NumericConstant:0
  AssignmentOperator:=
 150 REM     READ DAYS OF EACH MONTH
  Remark:    READ DAYS OF EACH MONTH
 160 FOR N=0 TO 12: READ M(N): NEXT N
- control: Variable:N
+ control: Variable:N scalar
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:12"]
- Variable:N
- Variable:M
- Variable:N
+ Variable:N scalar
+ Variable:M scalar
+ Variable:N scalar
 170 REM
  Remark:
 180 FOR N=1 TO 12
- control: Variable:N
+ control: Variable:N scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 190 PRINT: PRINT: S=S+M(N-1)
  CarriageControl:NL
  CarriageControl:NL
- Variable:S
- Variable:S
- Variable:N
+ Variable:S scalar
+ Variable:S scalar
+ Variable:N scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- Variable:M
+ Variable:M scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 200 PRINT "**";S;TAB(7);
  TextConstant:"**"
  CarriageControl:;
- Variable:S
+ Variable:S scalar
  CarriageControl:;
  NumericConstant:7
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
 210 FOR I=1 TO 18: PRINT "*";: NEXT I
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:18"]
  TextConstant:"*"
  CarriageControl:;
- Variable:I
+ Variable:I scalar
 220 ON N GOTO 230,240,250,260,270,280,290,300,310,320,330,340
- Variable:N
+ Variable:N scalar
  LineNumber:230
  LineNumber:240
  LineNumber:250
@@ -139,19 +139,19 @@
  TextConstant:" DECEMBER"
  CarriageControl:;
 350 FOR I=1 TO 18: PRINT "*";: NEXT I
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:18"]
  TextConstant:"*"
  CarriageControl:;
- Variable:I
+ Variable:I scalar
 360 PRINT 365-S;TAB(57);"**";
  NumericConstant:365
- Variable:S
+ Variable:S scalar
  BinaryOperatorMinus:- numeric
  CarriageControl:;
  NumericConstant:57
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"**"
  CarriageControl:;
@@ -159,7 +159,7 @@
  Remark:  366-S;     ON LEAP YEARS
 380 PRINT CHR$(10): PRINT "     S       M       T       W";
  NumericConstant:10
- FunctionChr
+ FunctionChr scalar
  CarriageControl:NL
  TextConstant:"     S       M       T       W"
  CarriageControl:;
@@ -169,94 +169,94 @@
 400 PRINT
  CarriageControl:NL
 410 FOR I=1 TO 59: PRINT "*";: NEXT I
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:59"]
  TextConstant:"*"
  CarriageControl:;
- Variable:I
+ Variable:I scalar
 420 REM
  Remark:
 430 FOR W=1 TO 6
- control: Variable:W
+ control: Variable:W scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
 440 PRINT CHR$(10)
  NumericConstant:10
- FunctionChr
+ FunctionChr scalar
  CarriageControl:NL
 450 PRINT TAB(4);
  NumericConstant:4
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
 460 REM
  Remark:
 470 FOR G=1 TO 7
- control: Variable:G
+ control: Variable:G scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
 480 D=D+1
- Variable:D
- Variable:D
+ Variable:D scalar
+ Variable:D scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 490 D2=D-S
- Variable:D2
- Variable:D
- Variable:S
+ Variable:D2 scalar
+ Variable:D scalar
+ Variable:S scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 500 IF D2>M(N) THEN 580
- Variable:D2
- Variable:N
- Variable:M
+ Variable:D2 scalar
+ Variable:N scalar
+ Variable:M scalar
  BinaryOperatorGreater:> numeric
 510 IF D2>0 THEN PRINT D2;
- Variable:D2
+ Variable:D2 scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
- Variable:D2
+ Variable:D2 scalar
  CarriageControl:;
 520 PRINT TAB(4+8*G);
  NumericConstant:4
  NumericConstant:8
- Variable:G
+ Variable:G scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
 530 NEXT G
- Variable:G
+ Variable:G scalar
 540 REM
  Remark:
 550 IF D2=M(N) THEN 590
- Variable:D2
- Variable:N
- Variable:M
+ Variable:D2 scalar
+ Variable:N scalar
+ Variable:M scalar
  BinaryOperatorEqual:= numeric
 560 NEXT W
- Variable:W
+ Variable:W scalar
 570 REM
  Remark:
 580 D=D-G
- Variable:D
- Variable:D
- Variable:G
+ Variable:D scalar
+ Variable:D scalar
+ Variable:G scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 590 NEXT N
- Variable:N
+ Variable:N scalar
 600 REM
  Remark:
 610 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  NumericConstant:10
- FunctionChr
+ FunctionChr scalar
  CarriageControl:;
- Variable:I
+ Variable:I scalar
 620 DATA 0,31,28,31,30,31,30,31,31,30,31,30,31
  NumericConstant:0
  NumericConstant:31

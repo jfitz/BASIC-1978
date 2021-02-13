@@ -1,12 +1,12 @@
 2 PRINT TAB(30);"MASTERMIND"
  NumericConstant:30
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"MASTERMIND"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -29,54 +29,54 @@
 70 REM
  Remark:
 80 INPUT "NUMBER OF COLORS";C9
- Variable:C9
+ Variable:C9 scalar
 90 IF C9>8 THEN PRINT "NO MORE THAN 8, PLEASE!":GOTO 80
- Variable:C9
+ Variable:C9 scalar
  NumericConstant:8
  BinaryOperatorGreater:> numeric
  TextConstant:"NO MORE THAN 8, PLEASE!"
  CarriageControl:NL
  LineNumber:80
 100 INPUT "NUMBER OF POSITIONS";P9
- Variable:P9
+ Variable:P9 scalar
 110 INPUT "NUMBER OF ROUNDS";R9
- Variable:R9
+ Variable:R9 scalar
 120 P=C9^P9
- Variable:P
- Variable:C9
- Variable:P9
+ Variable:P scalar
+ Variable:C9 scalar
+ Variable:P9 scalar
  BinaryOperatorPower:^ numeric
  AssignmentOperator:=
 130 PRINT "TOTAL POSSIBILITIES =";P
  TextConstant:"TOTAL POSSIBILITIES ="
  CarriageControl:;
- Variable:P
+ Variable:P scalar
  CarriageControl:NL
 140 H=0:C=0
- Variable:H
+ Variable:H scalar
  NumericConstant:0
  AssignmentOperator:=
- Variable:C
+ Variable:C scalar
  NumericConstant:0
  AssignmentOperator:=
 150 DIM Q(P9),S(10,2),S$(10),A$(P9),G$(P9),I(P),H$(P9)
- Variable:P9
- Declaration:Q
+ Variable:P9 scalar
+ Declaration:Q unknown
  NumericConstant:10
  NumericConstant:2
- Declaration:S
+ Declaration:S unknown
  NumericConstant:10
- Declaration:S$
- Variable:P9
- Declaration:A$
- Variable:P9
- Declaration:G$
- Variable:P
- Declaration:I
- Variable:P9
- Declaration:H$
+ Declaration:S$ unknown
+ Variable:P9 scalar
+ Declaration:A$ unknown
+ Variable:P9 scalar
+ Declaration:G$ unknown
+ Variable:P scalar
+ Declaration:I unknown
+ Variable:P9 scalar
+ Declaration:H$ unknown
 160 L$="BWRGOYPT"
- Variable:L$
+ Variable:L$ scalar
  TextConstant:"BWRGOYPT"
  AssignmentOperator:=
 170 PRINT
@@ -90,36 +90,36 @@
  TextConstant:"=====     ======"
  CarriageControl:NL
 210 FOR X=1 TO C9
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C9"]
+ end:     ["Variable:C9 scalar"]
 220 READ X$
- Variable:X$
+ Variable:X$ scalar
 230 PRINT X$;TAB(13);MID$(L$,X,1)
- Variable:X$
+ Variable:X$ scalar
  CarriageControl:;
  NumericConstant:13
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
- Variable:L$
- Variable:X
+ Variable:L$ scalar
+ Variable:X scalar
  NumericConstant:1
- FunctionMid
+ FunctionMid scalar
  CarriageControl:NL
 240 NEXT X
- Variable:X
+ Variable:X scalar
 250 PRINT
  CarriageControl:NL
 260 FOR R=1 TO R9
- control: Variable:R
+ control: Variable:R scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:R9"]
+ end:     ["Variable:R9 scalar"]
 270 PRINT 
  CarriageControl:NL
 280 PRINT "ROUND NUMBER";R;"----"
  TextConstant:"ROUND NUMBER"
  CarriageControl:;
- Variable:R
+ Variable:R scalar
  CarriageControl:;
  TextConstant:"----"
  CarriageControl:NL
@@ -132,49 +132,49 @@
 310 REM     GET A COMBINATION
  Remark:    GET A COMBINATION
 320 A=INT(P*RND(1)+1)
- Variable:A
- Variable:P
+ Variable:A scalar
+ Variable:P scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 330 GOSUB 3000
  LineNumber:3000
 340 FOR X=1 TO A
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:A"]
+ end:     ["Variable:A scalar"]
 350 GOSUB 3500
  LineNumber:3500
 360 NEXT X
- Variable:X
+ Variable:X scalar
 370 FOR M=1 TO 10
- control: Variable:M
+ control: Variable:M scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 380 PRINT "MOVE # ";M;" GUESS ";:INPUT X$
  TextConstant:"MOVE # "
  CarriageControl:;
- Variable:M
+ Variable:M scalar
  CarriageControl:;
  TextConstant:" GUESS "
  CarriageControl:;
- Variable:X$
+ Variable:X$ scalar
 390 IF X$="BOARD" THEN 2000
- Variable:X$
+ Variable:X$ scalar
  TextConstant:"BOARD"
  BinaryOperatorEqual:= numeric
 400 IF X$="QUIT" THEN 2500
- Variable:X$
+ Variable:X$ scalar
  TextConstant:"QUIT"
  BinaryOperatorEqual:= numeric
 410 IF LEN(X$)<>P9 THEN PRINT "BAD NUMBER OF POSITIONS.":GOTO 380
- Variable:X$
- FunctionLen
- Variable:P9
+ Variable:X$ scalar
+ FunctionLen scalar
+ Variable:P9 scalar
  BinaryOperatorNotEqual:<> numeric
  TextConstant:"BAD NUMBER OF POSITIONS."
  CarriageControl:NL
@@ -182,46 +182,46 @@
 420 REM     UNPACK X$ INTO G$(1-P9)
  Remark:    UNPACK X$ INTO G$(1-P9)
 430 FOR X=1 TO P9
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 440 FOR Y=1 TO C9
- control: Variable:Y
+ control: Variable:Y scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C9"]
+ end:     ["Variable:C9 scalar"]
 450 IF MID$(X$,X,1)=MID$(L$,Y,1) THEN 480
- Variable:X$
- Variable:X
+ Variable:X$ scalar
+ Variable:X scalar
  NumericConstant:1
- FunctionMid
- Variable:L$
- Variable:Y
+ FunctionMid scalar
+ Variable:L$ scalar
+ Variable:Y scalar
  NumericConstant:1
- FunctionMid
+ FunctionMid scalar
  BinaryOperatorEqual:= numeric
 460 NEXT Y
- Variable:Y
+ Variable:Y scalar
 470 PRINT "'"; MID$(X$,X,1); "' IS UNRECOGNIZED.":GOTO 380
  TextConstant:"'"
  CarriageControl:;
- Variable:X$
- Variable:X
+ Variable:X$ scalar
+ Variable:X scalar
  NumericConstant:1
- FunctionMid
+ FunctionMid scalar
  CarriageControl:;
  TextConstant:"' IS UNRECOGNIZED."
  CarriageControl:NL
  LineNumber:380
 480 G$(X)=MID$(X$,X,1)
- Variable:X
- Variable:G$
- Variable:X$
- Variable:X
+ Variable:X scalar
+ Variable:G$ scalar
+ Variable:X$ scalar
+ Variable:X scalar
  NumericConstant:1
- FunctionMid
+ FunctionMid scalar
  AssignmentOperator:=
 490 NEXT X
- Variable:X
+ Variable:X scalar
 500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
  Remark:    NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
 510 GOSUB 4000
@@ -231,43 +231,43 @@
 530 GOSUB 4500
  LineNumber:4500
 540 IF B=P9 THEN 630
- Variable:B
- Variable:P9
+ Variable:B scalar
+ Variable:P9 scalar
  BinaryOperatorEqual:= numeric
 550 REM     TELL HUMAN RESULTS
  Remark:    TELL HUMAN RESULTS
 560 PRINT "YOU HAVE ";B;" BLACKS AND ";W;" WHITES."
  TextConstant:"YOU HAVE "
  CarriageControl:;
- Variable:B
+ Variable:B scalar
  CarriageControl:;
  TextConstant:" BLACKS AND "
  CarriageControl:;
- Variable:W
+ Variable:W scalar
  CarriageControl:;
  TextConstant:" WHITES."
  CarriageControl:NL
 570 REM     SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
  Remark:    SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
 580 S$(M)=X$
- Variable:M
- Variable:S$
- Variable:X$
+ Variable:M scalar
+ Variable:S$ scalar
+ Variable:X$ scalar
  AssignmentOperator:=
 590 S(M,1)=B
- Variable:M
+ Variable:M scalar
  NumericConstant:1
- Variable:S
- Variable:B
+ Variable:S scalar
+ Variable:B scalar
  AssignmentOperator:=
 600 S(M,2)=W
- Variable:M
+ Variable:M scalar
  NumericConstant:2
- Variable:S
- Variable:W
+ Variable:S scalar
+ Variable:W scalar
  AssignmentOperator:=
 610 NEXT M
- Variable:M
+ Variable:M scalar
 620 PRINT "YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!":GOTO 640
  TextConstant:"YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!"
  CarriageControl:NL
@@ -278,28 +278,28 @@
  TextConstant:"THE ACTUAL COMBINATION WAS: "
  CarriageControl:;
 624 FOR X=1 TO P9
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 625 PRINT A$(X);
- Variable:X
- Variable:A$
+ Variable:X scalar
+ Variable:A$ scalar
  CarriageControl:;
 626 NEXT X
- Variable:X
+ Variable:X scalar
 627 PRINT
  CarriageControl:NL
 630 PRINT "YOU GUESSED IT IN ";M;" MOVES!"
  TextConstant:"YOU GUESSED IT IN "
  CarriageControl:;
- Variable:M
+ Variable:M scalar
  CarriageControl:;
  TextConstant:" MOVES!"
  CarriageControl:NL
 640 H=H+M
- Variable:H
- Variable:H
- Variable:M
+ Variable:H scalar
+ Variable:H scalar
+ Variable:M scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 650 GOSUB 5000
@@ -311,23 +311,23 @@
 680 REM
  Remark:
 690 FOR X=1 TO P
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P"]
+ end:     ["Variable:P scalar"]
 700 I(X)=1
- Variable:X
- Variable:I
+ Variable:X scalar
+ Variable:I scalar
  NumericConstant:1
  AssignmentOperator:=
 710 NEXT X
- Variable:X
+ Variable:X scalar
 720 PRINT "NOW I GUESS.  THINK OF A COMBINATION."
  TextConstant:"NOW I GUESS.  THINK OF A COMBINATION."
  CarriageControl:NL
 730 INPUT "HIT RETURN WHEN READY:";X$
- Variable:X$
+ Variable:X$ scalar
 740 FOR M=1 TO 10
- control: Variable:M
+ control: Variable:M scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 750 GOSUB 3000
@@ -335,42 +335,42 @@
 760 REM     FIND A GUESS
  Remark:    FIND A GUESS
 770 G=INT(P*RND(1)+1)
- Variable:G
- Variable:P
+ Variable:G scalar
+ Variable:P scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 780 IF I(G)=1 THEN 890
- Variable:G
- Variable:I
+ Variable:G scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 790 FOR X=G TO P
- control: Variable:X
- start:   ["Variable:G"]
- end:     ["Variable:P"]
+ control: Variable:X scalar
+ start:   ["Variable:G scalar"]
+ end:     ["Variable:P scalar"]
 800 IF I(X)=1 THEN 880
- Variable:X
- Variable:I
+ Variable:X scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 810 NEXT X
- Variable:X
+ Variable:X scalar
 820 FOR X=1 TO G
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:G"]
+ end:     ["Variable:G scalar"]
 830 IF I(X)=1 THEN 880
- Variable:X
- Variable:I
+ Variable:X scalar
+ Variable:I scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 840 NEXT X
- Variable:X
+ Variable:X scalar
 850 PRINT "YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
  TextConstant:"YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
  CarriageControl:NL
@@ -380,52 +380,52 @@
 870 GOTO 660
  LineNumber:660
 880 G=X
- Variable:G
- Variable:X
+ Variable:G scalar
+ Variable:X scalar
  AssignmentOperator:=
 890 REM     NOW WE CONVERT GUESS #G INTO G$
  Remark:    NOW WE CONVERT GUESS #G INTO G$
 900 FOR X=1 TO G
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:G"]
+ end:     ["Variable:G scalar"]
 910 GOSUB 3500
  LineNumber:3500
 920 NEXT X
- Variable:X
+ Variable:X scalar
 930 GOSUB 6000
  LineNumber:6000
 940 PRINT "MY GUESS IS: ";
  TextConstant:"MY GUESS IS: "
  CarriageControl:;
 950 FOR X=1 TO P9
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 960 PRINT H$(X);
- Variable:X
- Variable:H$
+ Variable:X scalar
+ Variable:H$ scalar
  CarriageControl:;
 970 NEXT X
- Variable:X
+ Variable:X scalar
 980 INPUT "  BLACKS, WHITES ";B1,W1
- Variable:B1
- Variable:W1
+ Variable:B1 scalar
+ Variable:W1 scalar
 990 IF B1=P9 THEN 1120
- Variable:B1
- Variable:P9
+ Variable:B1 scalar
+ Variable:P9 scalar
  BinaryOperatorEqual:= numeric
 1000 GOSUB 3000
  LineNumber:3000
 1010 FOR X=1 TO P
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P"]
+ end:     ["Variable:P scalar"]
 1020 GOSUB 3500
  LineNumber:3500
 1030 IF I(X)=0 THEN 1070
- Variable:X
- Variable:I
+ Variable:X scalar
+ Variable:I scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1035 GOSUB 6500
@@ -435,21 +435,21 @@
 1050 GOSUB 4500
  LineNumber:4500
 1060 IF B1<>B OR W1<>W THEN I(X)=0
- Variable:B1
- Variable:B
+ Variable:B1 scalar
+ Variable:B scalar
  BinaryOperatorNotEqual:<> numeric
- Variable:W1
- Variable:W
+ Variable:W1 scalar
+ Variable:W scalar
  BinaryOperatorNotEqual:<> numeric
  BinaryOperatorOr:OR numeric
- Variable:X
- Variable:I
+ Variable:X scalar
+ Variable:I scalar
  NumericConstant:0
  AssignmentOperator:=
 1070 NEXT X
- Variable:X
+ Variable:X scalar
 1080 NEXT M
- Variable:M
+ Variable:M scalar
 1090 PRINT "I USED UP ALL MY MOVES!"
  TextConstant:"I USED UP ALL MY MOVES!"
  CarriageControl:NL
@@ -461,20 +461,20 @@
 1120 PRINT "I GOT IT IN ";M;" MOVES!"
  TextConstant:"I GOT IT IN "
  CarriageControl:;
- Variable:M
+ Variable:M scalar
  CarriageControl:;
  TextConstant:" MOVES!"
  CarriageControl:NL
 1130 C=C+M
- Variable:C
- Variable:C
- Variable:M
+ Variable:C scalar
+ Variable:C scalar
+ Variable:M scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1140 GOSUB 5000
  LineNumber:5000
 1150 NEXT R
- Variable:R
+ Variable:R scalar
 1160 PRINT "GAME OVER"
  TextConstant:"GAME OVER"
  CarriageControl:NL
@@ -500,34 +500,34 @@
  TextConstant:"MOVE     GUESS          BLACK     WHITE"
  CarriageControl:NL
 2050 FOR Z=1 TO M-1
- control: Variable:Z
+ control: Variable:Z scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:M", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:M scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
 2060 PRINT Z;TAB(9);S$(Z);TAB(25);S(Z,1);TAB(35);S(Z,2)
- Variable:Z
+ Variable:Z scalar
  CarriageControl:;
  NumericConstant:9
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
- Variable:Z
- Variable:S$
+ Variable:Z scalar
+ Variable:S$ scalar
  CarriageControl:;
  NumericConstant:25
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
- Variable:Z
+ Variable:Z scalar
  NumericConstant:1
- Variable:S
+ Variable:S scalar
  CarriageControl:;
  NumericConstant:35
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
- Variable:Z
+ Variable:Z scalar
  NumericConstant:2
- Variable:S
+ Variable:S scalar
  CarriageControl:NL
 2070 NEXT Z
- Variable:Z
+ Variable:Z scalar
 2075 PRINT
  CarriageControl:NL
 2080 GOTO 380
@@ -544,15 +544,15 @@
 2535 GOSUB 4000
  LineNumber:4000
 2540 FOR X=1 TO P9
- control: Variable:X
+ control: Variable:X scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 2550 PRINT A$(X);
- Variable:X
- Variable:A$
+ Variable:X scalar
+ Variable:A$ scalar
  CarriageControl:;
 2560 NEXT X
- Variable:X
+ Variable:X scalar
 2565 PRINT
  CarriageControl:NL
 2570 PRINT "GOOD BYE"
@@ -567,16 +567,16 @@
 3020 REM
  Remark:
 3030 FOR S=1 TO P9
- control: Variable:S
+ control: Variable:S scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 3040 Q(S)=0
- Variable:S
- Variable:Q
+ Variable:S scalar
+ Variable:Q scalar
  NumericConstant:0
  AssignmentOperator:=
 3050 NEXT S
- Variable:S
+ Variable:S scalar
 3060 RETURN
  
 3500 REM
@@ -587,50 +587,50 @@
  Remark:
 3522 IF Q(1)>0 THEN 3530
  NumericConstant:1
- Variable:Q
+ Variable:Q scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
  Remark: IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
 3526 FOR S=1 TO P9
- control: Variable:S
+ control: Variable:S scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 3527 Q(S)=1
- Variable:S
- Variable:Q
+ Variable:S scalar
+ Variable:Q scalar
  NumericConstant:1
  AssignmentOperator:=
 3528 NEXT S
- Variable:S
+ Variable:S scalar
 3529 RETURN
  
 3530 Q=1
- Variable:Q
+ Variable:Q scalar
  NumericConstant:1
  AssignmentOperator:=
 3540 Q(Q)=Q(Q)+1
- Variable:Q
- Variable:Q
- Variable:Q
- Variable:Q
+ Variable:Q scalar
+ Variable:Q scalar
+ Variable:Q scalar
+ Variable:Q scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3550 IF Q(Q)<=C9 THEN RETURN
- Variable:Q
- Variable:Q
- Variable:C9
+ Variable:Q scalar
+ Variable:Q scalar
+ Variable:C9 scalar
  BinaryOperatorLessEqual:<= numeric
  
 3560 Q(Q)=1
- Variable:Q
- Variable:Q
+ Variable:Q scalar
+ Variable:Q scalar
  NumericConstant:1
  AssignmentOperator:=
 3570 Q=Q+1
- Variable:Q
- Variable:Q
+ Variable:Q scalar
+ Variable:Q scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
@@ -643,20 +643,20 @@
 4020 REM
  Remark:
 4030 FOR S=1 TO P9
- control: Variable:S
+ control: Variable:S scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 4040 A$(S)=MID$(L$,Q(S),1)
- Variable:S
- Variable:A$
- Variable:L$
- Variable:S
- Variable:Q
+ Variable:S scalar
+ Variable:A$ scalar
+ Variable:L$ scalar
+ Variable:S scalar
+ Variable:Q scalar
  NumericConstant:1
- FunctionMid
+ FunctionMid scalar
  AssignmentOperator:=
 4050 NEXT S
- Variable:S
+ Variable:S scalar
 4060 RETURN
  
 4500 REM
@@ -668,97 +668,97 @@
 4530 REM
  Remark:
 4540 B=0:W=0:F=0
- Variable:B
+ Variable:B scalar
  NumericConstant:0
  AssignmentOperator:=
- Variable:W
+ Variable:W scalar
  NumericConstant:0
  AssignmentOperator:=
- Variable:F
+ Variable:F scalar
  NumericConstant:0
  AssignmentOperator:=
 4550 FOR S=1 TO P9
- control: Variable:S
+ control: Variable:S scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 4560 IF G$(S)<>A$(S) THEN 4620
- Variable:S
- Variable:G$
- Variable:S
- Variable:A$
+ Variable:S scalar
+ Variable:G$ scalar
+ Variable:S scalar
+ Variable:A$ scalar
  BinaryOperatorNotEqual:<> numeric
 4570 B=B+1
- Variable:B
- Variable:B
+ Variable:B scalar
+ Variable:B scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 4580 G$(S)=CHR$(F)
- Variable:S
- Variable:G$
- Variable:F
- FunctionChr
+ Variable:S scalar
+ Variable:G$ scalar
+ Variable:F scalar
+ FunctionChr scalar
  AssignmentOperator:=
 4590 A$(S)=CHR$(F+1)
- Variable:S
- Variable:A$
- Variable:F
+ Variable:S scalar
+ Variable:A$ scalar
+ Variable:F scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionChr
+ FunctionChr scalar
  AssignmentOperator:=
 4600 F=F+2
- Variable:F
- Variable:F
+ Variable:F scalar
+ Variable:F scalar
  NumericConstant:2
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 4610 GOTO 4660
  LineNumber:4660
 4620 FOR T=1 TO P9
- control: Variable:T
+ control: Variable:T scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 4630 IF G$(S)<>A$(T) THEN 4650
- Variable:S
- Variable:G$
- Variable:T
- Variable:A$
+ Variable:S scalar
+ Variable:G$ scalar
+ Variable:T scalar
+ Variable:A$ scalar
  BinaryOperatorNotEqual:<> numeric
 4640 IF G$(T)=A$(T) THEN 4650
- Variable:T
- Variable:G$
- Variable:T
- Variable:A$
+ Variable:T scalar
+ Variable:G$ scalar
+ Variable:T scalar
+ Variable:A$ scalar
  BinaryOperatorEqual:= numeric
 4645 W=W+1:A$(T)=CHR$(F):G$(S)=CHR$(F+1):F=F+2:GOTO 4660
- Variable:W
- Variable:W
+ Variable:W scalar
+ Variable:W scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
- Variable:T
- Variable:A$
- Variable:F
- FunctionChr
+ Variable:T scalar
+ Variable:A$ scalar
+ Variable:F scalar
+ FunctionChr scalar
  AssignmentOperator:=
- Variable:S
- Variable:G$
- Variable:F
+ Variable:S scalar
+ Variable:G$ scalar
+ Variable:F scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionChr
+ FunctionChr scalar
  AssignmentOperator:=
- Variable:F
- Variable:F
+ Variable:F scalar
+ Variable:F scalar
  NumericConstant:2
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
  LineNumber:4660
 4650 NEXT T
- Variable:T
+ Variable:T scalar
 4660 NEXT S
- Variable:S
+ Variable:S scalar
 4670 RETURN
  
 5000 REM
@@ -773,12 +773,12 @@
 5040 PRINT "     COMPUTER ";C
  TextConstant:"     COMPUTER "
  CarriageControl:;
- Variable:C
+ Variable:C scalar
  CarriageControl:NL
 5050 PRINT "     HUMAN    ";H
  TextConstant:"     HUMAN    "
  CarriageControl:;
- Variable:H
+ Variable:H scalar
  CarriageControl:NL
 5060 PRINT
  CarriageControl:NL
@@ -791,20 +791,20 @@
 5520 REM
  Remark:
 5530 FOR S=1 TO P9
- control: Variable:S
+ control: Variable:S scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 5540 G$(S)=MID$(L$,Q(S),1)
- Variable:S
- Variable:G$
- Variable:L$
- Variable:S
- Variable:Q
+ Variable:S scalar
+ Variable:G$ scalar
+ Variable:L$ scalar
+ Variable:S scalar
+ Variable:Q scalar
  NumericConstant:1
- FunctionMid
+ FunctionMid scalar
  AssignmentOperator:=
 5550 NEXT S
- Variable:S
+ Variable:S scalar
 5560 RETURN
  
 6000 REM
@@ -814,20 +814,20 @@
 6020 REM
  Remark:
 6030 FOR S=1 TO P9
- control: Variable:S
+ control: Variable:S scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 6040 H$(S)=MID$(L$,Q(S),1)
- Variable:S
- Variable:H$
- Variable:L$
- Variable:S
- Variable:Q
+ Variable:S scalar
+ Variable:H$ scalar
+ Variable:L$ scalar
+ Variable:S scalar
+ Variable:Q scalar
  NumericConstant:1
- FunctionMid
+ FunctionMid scalar
  AssignmentOperator:=
 6050 NEXT S
- Variable:S
+ Variable:S scalar
 6060 RETURN
  
 6500 REM
@@ -837,17 +837,17 @@
 6520 REM
  Remark:
 6530 FOR S=1 TO P9
- control: Variable:S
+ control: Variable:S scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:P9"]
+ end:     ["Variable:P9 scalar"]
 6540 G$(S)=H$(S)
- Variable:S
- Variable:G$
- Variable:S
- Variable:H$
+ Variable:S scalar
+ Variable:G$ scalar
+ Variable:S scalar
+ Variable:H$ scalar
  AssignmentOperator:=
 6550 NEXT S
- Variable:S
+ Variable:S scalar
 6560 RETURN
  
 8000 REM     PROGRAM DATA FOR COLOR NAMES

@@ -2,23 +2,23 @@
  Remark:THIS PROGRAM PLAYS BATNUM. IT IS SELF-EXPLANATORY
 110
 120 LET N = 20 + INT(80*RND(X))
- Variable:N
+ Variable:N scalar
  NumericConstant:20
  NumericConstant:80
- Variable:X
- FunctionRnd
+ Variable:X scalar
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 130 LET K = 5 + INT(10*RND(X))
- Variable:K
+ Variable:K scalar
  NumericConstant:5
  NumericConstant:10
- Variable:X
- FunctionRnd
+ Variable:X scalar
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 140 PRINT "LEGAL MOVES ARE:"
@@ -27,7 +27,7 @@
 150 PRINT "TAKE AWAY 1 THROUGH" K
  TextConstant:"TAKE AWAY 1 THROUGH"
  CarriageControl:
- Variable:K
+ Variable:K scalar
  CarriageControl:NL
 160 PRINT "LAST PERSON TO MOVE LOSES"
  TextConstant:"LAST PERSON TO MOVE LOSES"
@@ -37,7 +37,7 @@
 180 PRINT "THE INITIAL NUMBER IS" N
  TextConstant:"THE INITIAL NUMBER IS"
  CarriageControl:
- Variable:N
+ Variable:N scalar
  CarriageControl:NL
 190 PRINT
  CarriageControl:NL
@@ -48,18 +48,18 @@
  TextConstant:"YOUR MOVE"
  CarriageControl:;
 230 INPUT X
- Variable:X
+ Variable:X scalar
 240 IF X > K THEN 270
- Variable:X
- Variable:K
+ Variable:X scalar
+ Variable:K scalar
  BinaryOperatorGreater:> numeric
 250 IF X < 1 THEN 270
- Variable:X
+ Variable:X scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 260 IF X <= N THEN 310
- Variable:X
- Variable:N
+ Variable:X scalar
+ Variable:N scalar
  BinaryOperatorLessEqual:<= numeric
 270 PRINT "ILLEGAL MOVE"
  TextConstant:"ILLEGAL MOVE"
@@ -72,13 +72,13 @@
 310 REM TEST FOR WIN
  Remark:TEST FOR WIN
 320 LET N = N-X
- Variable:N
- Variable:N
- Variable:X
+ Variable:N scalar
+ Variable:N scalar
+ Variable:X scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 330 IF N > 0 THEN 410
- Variable:N
+ Variable:N scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
 340 PRINT "I WIN ***"
@@ -99,53 +99,53 @@
 410 REM MACHINE'S MOVE
  Remark:MACHINE'S MOVE
 420 LET Q = INT((N-1)/(K+1))
- Variable:Q
- Variable:N
+ Variable:Q scalar
+ Variable:N scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- Variable:K
+ Variable:K scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  BinaryOperatorDivide:/ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 430 LET Y = N-1 - Q*(K+1)
- Variable:Y
- Variable:N
+ Variable:Y scalar
+ Variable:N scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- Variable:Q
- Variable:K
+ Variable:Q scalar
+ Variable:K scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 440 IF Y = 0 THEN 530
- Variable:Y
+ Variable:Y scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 450 LET N = N - Y
- Variable:N
- Variable:N
- Variable:Y
+ Variable:N scalar
+ Variable:N scalar
+ Variable:Y scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 460 PRINT "MY MOVE:" Y
  TextConstant:"MY MOVE:"
  CarriageControl:
- Variable:Y
+ Variable:Y scalar
  CarriageControl:NL
 470 PRINT
  CarriageControl:NL
 480 IF N = 0 THEN 600
- Variable:N
+ Variable:N scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 490 PRINT "NEW TOTAL IS" N
  TextConstant:"NEW TOTAL IS"
  CarriageControl:
- Variable:N
+ Variable:N scalar
  CarriageControl:NL
 500 PRINT
  CarriageControl:NL
@@ -155,23 +155,23 @@
 530 REM MAKE RANDOM MOVE
  Remark:MAKE RANDOM MOVE
 540 IF N > 1 THEN 570
- Variable:N
+ Variable:N scalar
  NumericConstant:1
  BinaryOperatorGreater:> numeric
 550 LET Y = 1
- Variable:Y
+ Variable:Y scalar
  NumericConstant:1
  AssignmentOperator:=
 560 GOTO 450
  LineNumber:450
 570 LET Y = 1 + INT(K*RND(0))
- Variable:Y
+ Variable:Y scalar
  NumericConstant:1
- Variable:K
+ Variable:K scalar
  NumericConstant:0
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt
+ FunctionInt scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 580 GOTO 450

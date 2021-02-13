@@ -41,44 +41,44 @@
 199 STOP
  
 400 READ R,C
- Variable:R
- Variable:C
+ Variable:R scalar
+ Variable:C scalar
 405 DIM M1(R,C)
- Variable:R
- Variable:C
- Declaration:M1
+ Variable:R scalar
+ Variable:C scalar
+ Declaration:M1 unknown
 410 FOR I = 1 TO R
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:R"]
+ end:     ["Variable:R scalar"]
 420 FOR J = 1 TO C
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C"]
+ end:     ["Variable:C scalar"]
 430 READ M1(I,J)
- Variable:I
- Variable:J
- Variable:M1
+ Variable:I scalar
+ Variable:J scalar
+ Variable:M1 scalar
 440 NEXT J
- Variable:J
+ Variable:J scalar
 450 NEXT I
- Variable:I
+ Variable:I scalar
 460 PRINT "MATRIX:"
  TextConstant:"MATRIX:"
  CarriageControl:NL
 470 MAT PRINT M1;
- Variable:M1
+ Variable:M1 matrix
  CarriageControl:;
 480 MAT M2 = INV(M1)
- Variable:M2
- Variable:M1
- FunctionInv
+ Variable:M2 matrix
+ Variable:M1 matrix
+ FunctionInv matrix
  AssignmentOperator:=
 490 PRINT "INVERSE:"
  TextConstant:"INVERSE:"
  CarriageControl:NL
 492 MAT PRINT M2;
- Variable:M2
+ Variable:M2 matrix
  CarriageControl:;
 495 PRINT
  CarriageControl:NL

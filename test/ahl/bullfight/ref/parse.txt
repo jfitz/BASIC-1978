@@ -1,12 +1,12 @@
 10 PRINT TAB(34);"BULL"
  NumericConstant:34
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"BULL"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab
+ FunctionTab scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -14,27 +14,27 @@
  UserFunctionName:FNA
  VariableName:K
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:2
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
 200 PRINT:PRINT:PRINT
  CarriageControl:NL
  CarriageControl:NL
  CarriageControl:NL
 202 L=1
- Variable:L
+ Variable:L scalar
  NumericConstant:1
  AssignmentOperator:=
 205 PRINT "DO YOU WANT INSTRUCTIONS";
  TextConstant:"DO YOU WANT INSTRUCTIONS"
  CarriageControl:;
 206 INPUT Z$
- Variable:Z$
+ Variable:Z$ scalar
 207 IF Z$="NO" THEN 400
- Variable:Z$
+ Variable:Z$ scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 210 PRINT "HELLO, ALL YOU BLOODLOVERS AND AFICIONADOS."
@@ -96,36 +96,36 @@
  CarriageControl:NL
 420 D(5)=1
  NumericConstant:5
- Variable:D
+ Variable:D scalar
  NumericConstant:1
  AssignmentOperator:=
 430 D(4)=1
  NumericConstant:4
- Variable:D
+ Variable:D scalar
  NumericConstant:1
  AssignmentOperator:=
 450 DIM L$(5)
  NumericConstant:5
- Declaration:L$
+ Declaration:L$ unknown
 455 A=INT(RND(1)*5+1)
- Variable:A
+ Variable:A scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  NumericConstant:5
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 460 FOR I=1 TO 5
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 463 READ L$(I)
- Variable:I
- Variable:L$
+ Variable:I scalar
+ Variable:L$ scalar
 467 NEXT I
- Variable:I
+ Variable:I scalar
 470 DATA "SUPERB","GOOD","FAIR","POOR","AWFUL"
  TextConstant:"SUPERB"
  TextConstant:"GOOD"
@@ -135,17 +135,17 @@
 490 PRINT "YOU HAVE DRAWN A ";L$(A);" BULL."
  TextConstant:"YOU HAVE DRAWN A "
  CarriageControl:;
- Variable:A
- Variable:L$
+ Variable:A scalar
+ Variable:L$ scalar
  CarriageControl:;
  TextConstant:" BULL."
  CarriageControl:NL
 500 IF A>4 THEN 530
- Variable:A
+ Variable:A scalar
  NumericConstant:4
  BinaryOperatorGreater:> numeric
 510 IF A<2 THEN 550
- Variable:A
+ Variable:A scalar
  NumericConstant:2
  BinaryOperatorLess:< numeric
 520 GOTO 570
@@ -163,48 +163,48 @@
 570 PRINT
  CarriageControl:NL
 590 A$="PICADO"
- Variable:A$
+ Variable:A$ scalar
  TextConstant:"PICADO"
  AssignmentOperator:=
 595 B$="RES"
- Variable:B$
+ Variable:B$ scalar
  TextConstant:"RES"
  AssignmentOperator:=
 600 GOSUB 1610
  LineNumber:1610
 610 D(1)=C
  NumericConstant:1
- Variable:D
- Variable:C
+ Variable:D scalar
+ Variable:C scalar
  AssignmentOperator:=
 630 A$="TOREAD"
- Variable:A$
+ Variable:A$ scalar
  TextConstant:"TOREAD"
  AssignmentOperator:=
 635 B$="ORES"
- Variable:B$
+ Variable:B$ scalar
  TextConstant:"ORES"
  AssignmentOperator:=
 640 GOSUB 1610
  LineNumber:1610
 650 D(2)=C
  NumericConstant:2
- Variable:D
- Variable:C
+ Variable:D scalar
+ Variable:C scalar
  AssignmentOperator:=
 660 PRINT
  CarriageControl:NL
 670 PRINT
  CarriageControl:NL
 680 IF Z=1 THEN 1310
- Variable:Z
+ Variable:Z scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 690 D(3)=D(3)+1
  NumericConstant:3
- Variable:D
+ Variable:D scalar
  NumericConstant:3
- Variable:D
+ Variable:D scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
@@ -212,11 +212,11 @@
  TextConstant:"PASS NUMBER"
  CarriageControl:;
  NumericConstant:3
- Variable:D
+ Variable:D scalar
  CarriageControl:NL
 710 IF D(3)<3 THEN 760
  NumericConstant:3
- Variable:D
+ Variable:D scalar
  NumericConstant:3
  BinaryOperatorLess:< numeric
 720 PRINT "HERE COMES THE BULL.  TRY FOR A KILL";
@@ -225,7 +225,7 @@
 730 GOSUB 1930
  LineNumber:1930
 735 IF Z1=1 THEN 1130
- Variable:Z1
+ Variable:Z1 scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 740 PRINT "CAPE MOVE";
@@ -242,22 +242,22 @@
 780 GOSUB 1930
  LineNumber:1930
 785 IF Z1=1 THEN 1130
- Variable:Z1
+ Variable:Z1 scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 790 PRINT "WHAT MOVE DO YOU MAKE WITH THE CAPE";
  TextConstant:"WHAT MOVE DO YOU MAKE WITH THE CAPE"
  CarriageControl:;
 800 INPUT E
- Variable:E
+ Variable:E scalar
 810 IF E<>INT(ABS(E)) THEN 830
- Variable:E
- Variable:E
- FunctionAbs
- FunctionInt
+ Variable:E scalar
+ Variable:E scalar
+ FunctionAbs scalar
+ FunctionInt scalar
  BinaryOperatorNotEqual:<> numeric
 820 IF E<3 THEN 850
- Variable:E
+ Variable:E scalar
  NumericConstant:3
  BinaryOperatorLess:< numeric
 830 PRINT "DON'T PANIC, YOU IDIOT!  PUT DOWN A CORRECT NUMBER"
@@ -268,54 +268,54 @@
 850 REM
  Remark:
 860 IF E=0 THEN 920
- Variable:E
+ Variable:E scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 870 IF E=1 THEN 900
- Variable:E
+ Variable:E scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 880 M=.5
- Variable:M
+ Variable:M scalar
  NumericConstant:.5
  AssignmentOperator:=
 890 GOTO 930
  LineNumber:930
 900 M=2
- Variable:M
+ Variable:M scalar
  NumericConstant:2
  AssignmentOperator:=
 910 GOTO 930
  LineNumber:930
 920 M=3
- Variable:M
+ Variable:M scalar
  NumericConstant:3
  AssignmentOperator:=
 930 L=L+M
- Variable:L
- Variable:L
- Variable:M
+ Variable:L scalar
+ Variable:L scalar
+ Variable:M scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 940 F=(6-A+M/10)*RND(1)/((D(1)+D(2)+D(3)/10)*5)
- Variable:F
+ Variable:F scalar
  NumericConstant:6
- Variable:A
+ Variable:A scalar
  BinaryOperatorMinus:- numeric
- Variable:M
+ Variable:M scalar
  NumericConstant:10
  BinaryOperatorDivide:/ numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
- Variable:D
+ Variable:D scalar
  NumericConstant:2
- Variable:D
+ Variable:D scalar
  BinaryOperatorPlus:+ numeric
  NumericConstant:3
- Variable:D
+ Variable:D scalar
  NumericConstant:10
  BinaryOperatorDivide:/ numeric
  BinaryOperatorPlus:+ numeric
@@ -324,7 +324,7 @@
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 950 IF F<.51 THEN 660
- Variable:F
+ Variable:F scalar
  NumericConstant:.51
  BinaryOperatorLess:< numeric
 960 PRINT "THE BULL HAS GORED YOU!"
@@ -332,7 +332,7 @@
  CarriageControl:NL
 970 ON FNA(0) GOTO 980,1010
  NumericConstant:0
- UserFunction
+ UserFunction scalar
  LineNumber:980
  LineNumber:1010
 980 PRINT "YOU ARE DEAD."
@@ -340,7 +340,7 @@
  CarriageControl:NL
 990 D(4)=1.5
  NumericConstant:4
- Variable:D
+ Variable:D scalar
  NumericConstant:1.5
  AssignmentOperator:=
 1000 GOTO 1310
@@ -355,7 +355,7 @@
 1030 GOSUB 1930
  LineNumber:1930
 1035 IF Z1=2 THEN 1070
- Variable:Z1
+ Variable:Z1 scalar
  NumericConstant:2
  BinaryOperatorEqual:= numeric
 1040 PRINT "COWARD"
@@ -363,7 +363,7 @@
  CarriageControl:NL
 1050 D(4)=0
  NumericConstant:4
- Variable:D
+ Variable:D scalar
  NumericConstant:0
  AssignmentOperator:=
 1060 GOTO 1310
@@ -373,12 +373,12 @@
  CarriageControl:NL
 1080 ON FNA(0) GOTO 1090,1110
  NumericConstant:0
- UserFunction
+ UserFunction scalar
  LineNumber:1090
  LineNumber:1110
 1090 D(4)=2
  NumericConstant:4
- Variable:D
+ Variable:D scalar
  NumericConstant:2
  AssignmentOperator:=
 1100 GOTO 660
@@ -391,7 +391,7 @@
 1130 REM
  Remark:
 1140 Z=1
- Variable:Z
+ Variable:Z scalar
  NumericConstant:1
  AssignmentOperator:=
 1150 PRINT:PRINT "IT IS THE MOMENT OF TRUTH.":PRINT
@@ -403,13 +403,13 @@
  TextConstant:"HOW DO YOU TRY TO KILL THE BULL"
  CarriageControl:;
 1160 INPUT H
- Variable:H
+ Variable:H scalar
 1170 IF H=4 THEN 1230
- Variable:H
+ Variable:H scalar
  NumericConstant:4
  BinaryOperatorEqual:= numeric
 1180 IF H=5 THEN 1230
- Variable:H
+ Variable:H scalar
  NumericConstant:5
  BinaryOperatorEqual:= numeric
 1190 PRINT "YOU PANICKED.  THE BULL GORED YOU."
@@ -418,33 +418,33 @@
 1220 GOTO 970
  LineNumber:970
 1230 K=(6-A)*10*RND(1)/((D(1)+D(2))*5*D(3))
- Variable:K
+ Variable:K scalar
  NumericConstant:6
- Variable:A
+ Variable:A scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
- Variable:D
+ Variable:D scalar
  NumericConstant:2
- Variable:D
+ Variable:D scalar
  BinaryOperatorPlus:+ numeric
  NumericConstant:5
  BinaryOperatorMultiply:* numeric
  NumericConstant:3
- Variable:D
+ Variable:D scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1240 IF J=4 THEN 1290
- Variable:J
+ Variable:J scalar
  NumericConstant:4
  BinaryOperatorEqual:= numeric
 1250 IF K>.2 THEN 960
- Variable:K
+ Variable:K scalar
  NumericConstant:.2
  BinaryOperatorGreater:> numeric
 1260 PRINT "YOU KILLED THE BULL!"
@@ -452,13 +452,13 @@
  CarriageControl:NL
 1270 D(5)=2
  NumericConstant:5
- Variable:D
+ Variable:D scalar
  NumericConstant:2
  AssignmentOperator:=
 1280 GOTO 1320
  LineNumber:1320
 1290 IF K>.8 THEN 960
- Variable:K
+ Variable:K scalar
  NumericConstant:.8
  BinaryOperatorGreater:> numeric
 1300 GOTO 1260
@@ -471,7 +471,7 @@
  CarriageControl:NL
 1340 IF D(4)<>0 THEN 1390
  NumericConstant:4
- Variable:D
+ Variable:D scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 1350 PRINT "THE CROWD BOOS FOR TEN MINUTES.  IF YOU EVER DARE TO SHOW"
@@ -488,49 +488,49 @@
 1390 DEF FNC(Q)=FND(Q)*RND(1)
  UserFunctionName:FNC
  VariableName:Q
- Variable:Q
- UserFunction
+ Variable:Q scalar
+ UserFunction scalar
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
 1395 DEF FND(Q)=(4.5+L/6-(D(1)+D(2))*2.5+4*D(4)+2*D(5)-D(3)^2/120-A)
  UserFunctionName:FND
  VariableName:Q
  NumericConstant:4.5
- Variable:L
+ Variable:L scalar
  NumericConstant:6
  BinaryOperatorDivide:/ numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:1
- Variable:D
+ Variable:D scalar
  NumericConstant:2
- Variable:D
+ Variable:D scalar
  BinaryOperatorPlus:+ numeric
  NumericConstant:2.5
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  NumericConstant:4
  NumericConstant:4
- Variable:D
+ Variable:D scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:2
  NumericConstant:5
- Variable:D
+ Variable:D scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:3
- Variable:D
+ Variable:D scalar
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  NumericConstant:120
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMinus:- numeric
- Variable:A
+ Variable:A scalar
  BinaryOperatorMinus:- numeric
 1400 IF D(4)<>2 THEN 1430
  NumericConstant:4
- Variable:D
+ Variable:D scalar
  NumericConstant:2
  BinaryOperatorNotEqual:<> numeric
 1410 PRINT "THE CROWD CHEERS WILDLY!"
@@ -540,7 +540,7 @@
  LineNumber:1450
 1430 IF D(5)<>2 THEN 1450
  NumericConstant:5
- Variable:D
+ Variable:D scalar
  NumericConstant:2
  BinaryOperatorNotEqual:<> numeric
 1440 PRINT "THE CROWD CHEERS!":PRINT
@@ -551,18 +551,18 @@
  TextConstant:"THE CROWD AWARDS YOU"
  CarriageControl:NL
 1460 IF FNC(Q)<2.4 THEN 1570
- Variable:Q
- UserFunction
+ Variable:Q scalar
+ UserFunction scalar
  NumericConstant:2.4
  BinaryOperatorLess:< numeric
 1470 IF FNC(Q)<4.9 THEN 1550
- Variable:Q
- UserFunction
+ Variable:Q scalar
+ UserFunction scalar
  NumericConstant:4.9
  BinaryOperatorLess:< numeric
 1480 IF FNC(Q)<7.4 THEN 1520
- Variable:Q
- UserFunction
+ Variable:Q scalar
+ UserFunction scalar
  NumericConstant:7.4
  BinaryOperatorLess:< numeric
 1500 PRINT "OLE!  YOU ARE 'MUY HOMBRE'!! OLE!  OLE!"
@@ -597,118 +597,118 @@
 1600 GOTO 2030
  LineNumber:2030
 1610 B=3/A*RND(1)
- Variable:B
+ Variable:B scalar
  NumericConstant:3
- Variable:A
+ Variable:A scalar
  BinaryOperatorDivide:/ numeric
  NumericConstant:1
- FunctionRnd
+ FunctionRnd scalar
  BinaryOperatorMultiply:* numeric
  AssignmentOperator:=
 1620 IF B<.37 THEN 1740
- Variable:B
+ Variable:B scalar
  NumericConstant:.37
  BinaryOperatorLess:< numeric
 1630 IF B<.5 THEN 1720
- Variable:B
+ Variable:B scalar
  NumericConstant:.5
  BinaryOperatorLess:< numeric
 1640 IF B<.63 THEN 1700
- Variable:B
+ Variable:B scalar
  NumericConstant:.63
  BinaryOperatorLess:< numeric
 1650 IF B<.87 THEN 1680
- Variable:B
+ Variable:B scalar
  NumericConstant:.87
  BinaryOperatorLess:< numeric
 1660 C=.1
- Variable:C
+ Variable:C scalar
  NumericConstant:.1
  AssignmentOperator:=
 1670 GOTO 1750
  LineNumber:1750
 1680 C=.2
- Variable:C
+ Variable:C scalar
  NumericConstant:.2
  AssignmentOperator:=
 1690 GOTO 1750
  LineNumber:1750
 1700 C=.3
- Variable:C
+ Variable:C scalar
  NumericConstant:.3
  AssignmentOperator:=
 1710 GOTO 1750
  LineNumber:1750
 1720 C=.4
- Variable:C
+ Variable:C scalar
  NumericConstant:.4
  AssignmentOperator:=
 1730 GOTO 1750
  LineNumber:1750
 1740 C=.5
- Variable:C
+ Variable:C scalar
  NumericConstant:.5
  AssignmentOperator:=
 1750 T=INT(10*C+.2)
- Variable:T
+ Variable:T scalar
  NumericConstant:10
- Variable:C
+ Variable:C scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:.2
  BinaryOperatorPlus:+ numeric
- FunctionInt
+ FunctionInt scalar
  AssignmentOperator:=
 1760 PRINT "THE ";A$;B$;" DID A ";L$(T);" JOB."
  TextConstant:"THE "
  CarriageControl:;
- Variable:A$
+ Variable:A$ scalar
  CarriageControl:;
- Variable:B$
+ Variable:B$ scalar
  CarriageControl:;
  TextConstant:" DID A "
  CarriageControl:;
- Variable:T
- Variable:L$
+ Variable:T scalar
+ Variable:L$ scalar
  CarriageControl:;
  TextConstant:" JOB."
  CarriageControl:NL
 1770 IF 4>T THEN 1900
  NumericConstant:4
- Variable:T
+ Variable:T scalar
  BinaryOperatorGreater:> numeric
 1780 IF 5=T THEN 1870
  NumericConstant:5
- Variable:T
+ Variable:T scalar
  BinaryOperatorEqual:= numeric
 1790 ON FNA(K) GOTO 1830,1850
- Variable:K
- UserFunction
+ Variable:K scalar
+ UserFunction scalar
  LineNumber:1830
  LineNumber:1850
 1800 IF A$="TOREAD" THEN 1820
- Variable:A$
+ Variable:A$ scalar
  TextConstant:"TOREAD"
  BinaryOperatorEqual:= numeric
 1810 PRINT "ONE OF THE HORSES OF THE ";A$;B$;" WAS KILLED."
  TextConstant:"ONE OF THE HORSES OF THE "
  CarriageControl:;
- Variable:A$
+ Variable:A$ scalar
  CarriageControl:;
- Variable:B$
+ Variable:B$ scalar
  CarriageControl:;
  TextConstant:" WAS KILLED."
  CarriageControl:NL
 1820 ON FNA(K) GOTO 1830,1850
- Variable:K
- UserFunction
+ Variable:K scalar
+ UserFunction scalar
  LineNumber:1830
  LineNumber:1850
 1830 PRINT "ONE OF THE ";A$;B$;" WAS KILLED."
  TextConstant:"ONE OF THE "
  CarriageControl:;
- Variable:A$
+ Variable:A$ scalar
  CarriageControl:;
- Variable:B$
+ Variable:B$ scalar
  CarriageControl:;
  TextConstant:" WAS KILLED."
  CarriageControl:NL
@@ -717,39 +717,39 @@
 1850 PRINT "NO ";A$;B$;" WERE KILLED."
  TextConstant:"NO "
  CarriageControl:;
- Variable:A$
+ Variable:A$ scalar
  CarriageControl:;
- Variable:B$
+ Variable:B$ scalar
  CarriageControl:;
  TextConstant:" WERE KILLED."
  CarriageControl:NL
 1860 GOTO 1900
  LineNumber:1900
 1870 IF A$="TOREAD" THEN 1890
- Variable:A$
+ Variable:A$ scalar
  TextConstant:"TOREAD"
  BinaryOperatorEqual:= numeric
 1880 PRINT FNA(K);"OF THE HORSES OF THE ";A$;B$;" KILLED."
- Variable:K
- UserFunction
+ Variable:K scalar
+ UserFunction scalar
  CarriageControl:;
  TextConstant:"OF THE HORSES OF THE "
  CarriageControl:;
- Variable:A$
+ Variable:A$ scalar
  CarriageControl:;
- Variable:B$
+ Variable:B$ scalar
  CarriageControl:;
  TextConstant:" KILLED."
  CarriageControl:NL
 1890 PRINT FNA(K);"OF THE ";A$;B$;" KILLED."
- Variable:K
- UserFunction
+ Variable:K scalar
+ UserFunction scalar
  CarriageControl:;
  TextConstant:"OF THE "
  CarriageControl:;
- Variable:A$
+ Variable:A$ scalar
  CarriageControl:;
- Variable:B$
+ Variable:B$ scalar
  CarriageControl:;
  TextConstant:" KILLED."
  CarriageControl:NL
@@ -760,13 +760,13 @@
 1920 REM
  Remark:
 1930 INPUT A$
- Variable:A$
+ Variable:A$ scalar
 1940 IF A$="YES" THEN 1990
- Variable:A$
+ Variable:A$ scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 1950 IF A$="NO" THEN 2010
- Variable:A$
+ Variable:A$ scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 1970 PRINT "INCORRECT ANSWER - - PLEASE TYPE 'YES' OR 'NO'."
@@ -775,13 +775,13 @@
 1980 GOTO 1930
  LineNumber:1930
 1990 Z1=1
- Variable:Z1
+ Variable:Z1 scalar
  NumericConstant:1
  AssignmentOperator:=
 2000 GOTO 2020
  LineNumber:2020
 2010 Z1=2
- Variable:Z1
+ Variable:Z1 scalar
  NumericConstant:2
  AssignmentOperator:=
 2020 RETURN

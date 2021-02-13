@@ -5,52 +5,52 @@
 20 DIM A(3,4), B(4,3)
  NumericConstant:3
  NumericConstant:4
- Declaration:A
+ Declaration:A unknown
  NumericConstant:4
  NumericConstant:3
- Declaration:B
+ Declaration:B unknown
 30 FOR I = 1 TO 3
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 31 FOR J = 1 TO 4
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 32 LET A(I,J) = I / J
- Variable:I
- Variable:J
- Variable:A
- Variable:I
- Variable:J
+ Variable:I scalar
+ Variable:J scalar
+ Variable:A scalar
+ Variable:I scalar
+ Variable:J scalar
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 33 NEXT J
- Variable:J
+ Variable:J scalar
 34 NEXT I
- Variable:I
+ Variable:I scalar
 40 FOR I = 1 TO 4
- control: Variable:I
+ control: Variable:I scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 41 FOR J = 1 TO 3
- control: Variable:J
+ control: Variable:J scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 42 LET B(I,J) = 3.14159 * I / J
- Variable:I
- Variable:J
- Variable:B
+ Variable:I scalar
+ Variable:J scalar
+ Variable:B scalar
  NumericConstant:3.14159
- Variable:I
+ Variable:I scalar
  BinaryOperatorMultiply:* numeric
- Variable:J
+ Variable:J scalar
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 43 NEXT J
- Variable:J
+ Variable:J scalar
 44 NEXT I
- Variable:I
+ Variable:I scalar
 50 PRINT "MAT PRINT WITH COMMA"
  TextConstant:"MAT PRINT WITH COMMA"
  CarriageControl:NL
@@ -58,7 +58,7 @@
  Keyword:USING
  TextConstant:"###.##"
  CarriageControl:,
- Variable:A
+ Variable:A matrix
  CarriageControl:NL
 60 PRINT "MAT PRINT WITH SEMICOLON"
  TextConstant:"MAT PRINT WITH SEMICOLON"
@@ -67,7 +67,7 @@
  Keyword:USING
  TextConstant:"###.##"
  CarriageControl:;
- Variable:A
+ Variable:A matrix
  CarriageControl:NL
 99 END
  

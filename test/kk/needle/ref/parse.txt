@@ -1,29 +1,29 @@
 100 LET P = 3.14159265
- Variable:P
+ Variable:P scalar
  NumericConstant:3.14159265
  AssignmentOperator:=
 110 LET C = 0
- Variable:C
+ Variable:C scalar
  NumericConstant:0
  AssignmentOperator:=
 120 FOR N = 1 TO 1000
- control: Variable:N
+ control: Variable:N scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:1000"]
 130    LET Y = RND(Z)
- Variable:Y
- Variable:Z
- FunctionRnd
+ Variable:Y scalar
+ Variable:Z scalar
+ FunctionRnd scalar
  AssignmentOperator:=
 140    LET R = RND(Z)
- Variable:R
- Variable:Z
- FunctionRnd
+ Variable:R scalar
+ Variable:Z scalar
+ FunctionRnd scalar
  AssignmentOperator:=
 150    LET A = P*(R-1/2)
- Variable:A
- Variable:P
- Variable:R
+ Variable:A scalar
+ Variable:P scalar
+ Variable:R scalar
  NumericConstant:1
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
@@ -31,54 +31,54 @@
  BinaryOperatorMultiply:* numeric
  AssignmentOperator:=
 160    LET Y1 = Y - COS(A)
- Variable:Y1
- Variable:Y
- Variable:A
- FunctionCos
+ Variable:Y1 scalar
+ Variable:Y scalar
+ Variable:A scalar
+ FunctionCos scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 170    LET Y2 = Y + COS(A)
- Variable:Y2
- Variable:Y
- Variable:A
- FunctionCos
+ Variable:Y2 scalar
+ Variable:Y scalar
+ Variable:A scalar
+ FunctionCos scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 172    LET C2 = COS(A)
- Variable:C2
- Variable:A
- FunctionCos
+ Variable:C2 scalar
+ Variable:A scalar
+ FunctionCos scalar
  AssignmentOperator:=
 180    IF SGN(Y1) = SGN(Y2) THEN 200
- Variable:Y1
- FunctionSgn
- Variable:Y2
- FunctionSgn
+ Variable:Y1 scalar
+ FunctionSgn scalar
+ Variable:Y2 scalar
+ FunctionSgn scalar
  BinaryOperatorEqual:= numeric
 190    LET C = C+1
- Variable:C
- Variable:C
+ Variable:C scalar
+ Variable:C scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 200 NEXT N
- Variable:N
+ Variable:N scalar
 210 LET F = C/N
- Variable:F
- Variable:C
- Variable:N
+ Variable:F scalar
+ Variable:C scalar
+ Variable:N scalar
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 220 PRINT "FRACTION OF CROSSINGS = " F
  TextConstant:"FRACTION OF CROSSINGS = "
  CarriageControl:
- Variable:F
+ Variable:F scalar
  CarriageControl:NL
 230 PRINT "ESTIMATE OF PI = " 2/F
  TextConstant:"ESTIMATE OF PI = "
  CarriageControl:
  NumericConstant:2
- Variable:F
+ Variable:F scalar
  BinaryOperatorDivide:/ numeric
  CarriageControl:NL
 240 END
