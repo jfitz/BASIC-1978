@@ -1,12 +1,12 @@
 2 PRINT TAB(30);"DEPTH CHARGE"
  NumericConstant:30
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"DEPTH CHARGE"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,16 +15,16 @@
  CarriageControl:NL
  CarriageControl:NL
 20 INPUT "DIMENSION OF SEARCH AREA";G: PRINT
- Variable:G scalar
+ Variable:G numeric scalar
  CarriageControl:NL
 30 N=INT(LOG(G)/LOG(2))+1
- Variable:N scalar
- Variable:G scalar
- FunctionLog scalar
+ Variable:N numeric scalar
+ Variable:G numeric scalar
+ FunctionLog:LOG numeric scalar
  NumericConstant:2
- FunctionLog scalar
+ FunctionLog:LOG numeric scalar
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
@@ -37,7 +37,7 @@
 60 PRINT "MISSION IS TO DESTROY IT.  YOU HAVE";N;"SHOTS."
  TextConstant:"MISSION IS TO DESTROY IT.  YOU HAVE"
  CarriageControl:;
- Variable:N scalar
+ Variable:N numeric scalar
  CarriageControl:;
  TextConstant:"SHOTS."
  CarriageControl:NL
@@ -56,60 +56,60 @@
  CarriageControl:NL
  CarriageControl:NL
 110 A=INT(G*RND(1)) : B=INT(G*RND(1)) : C=INT(G*RND(1))
- Variable:A scalar
- Variable:G scalar
+ Variable:A numeric scalar
+ Variable:G numeric scalar
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
- Variable:B scalar
- Variable:G scalar
+ Variable:B numeric scalar
+ Variable:G numeric scalar
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
- Variable:C scalar
- Variable:G scalar
+ Variable:C numeric scalar
+ Variable:G numeric scalar
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 120 FOR D=1 TO N : PRINT : PRINT "TRIAL #";D; : INPUT X,Y,Z
- control: Variable:D scalar
+ control: Variable:D numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
  CarriageControl:NL
  TextConstant:"TRIAL #"
  CarriageControl:;
- Variable:D scalar
+ Variable:D numeric scalar
  CarriageControl:;
- Variable:X scalar
- Variable:Y scalar
- Variable:Z scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
+ Variable:Z numeric scalar
 130 IF ABS(X-A)+ABS(Y-B)+ABS(Z-C)=0 THEN 300
- Variable:X scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorMinus:- numeric
- FunctionAbs scalar
- Variable:Y scalar
- Variable:B scalar
+ FunctionAbs:ABS numeric scalar
+ Variable:Y numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorMinus:- numeric
- FunctionAbs scalar
+ FunctionAbs:ABS numeric scalar
  BinaryOperatorPlus:+ numeric
- Variable:Z scalar
- Variable:C scalar
+ Variable:Z numeric scalar
+ Variable:C numeric scalar
  BinaryOperatorMinus:- numeric
- FunctionAbs scalar
+ FunctionAbs:ABS numeric scalar
  BinaryOperatorPlus:+ numeric
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 140 GOSUB 500 : PRINT : NEXT D
  LineNumber:500
  CarriageControl:NL
- Variable:D scalar
+ Variable:D numeric scalar
 200 PRINT : PRINT "YOU HAVE BEEN TORPEDOED!  ABANDON SHIP!"
  CarriageControl:NL
  TextConstant:"YOU HAVE BEEN TORPEDOED!  ABANDON SHIP!"
@@ -117,31 +117,31 @@
 210 PRINT "THE SUBMARINE WAS AT";A;",";B;",";C : GOTO 400
  TextConstant:"THE SUBMARINE WAS AT"
  CarriageControl:;
- Variable:A scalar
+ Variable:A numeric scalar
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
- Variable:B scalar
+ Variable:B numeric scalar
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
- Variable:C scalar
+ Variable:C numeric scalar
  CarriageControl:NL
  LineNumber:400
 300 PRINT : PRINT "B O O M ! ! YOU FOUND IT IN";D;"TRIES!"
  CarriageControl:NL
  TextConstant:"B O O M ! ! YOU FOUND IT IN"
  CarriageControl:;
- Variable:D scalar
+ Variable:D numeric scalar
  CarriageControl:;
  TextConstant:"TRIES!"
  CarriageControl:NL
 400 PRINT : PRINT: INPUT "ANOTHER GAME (Y OR N)";A$
  CarriageControl:NL
  CarriageControl:NL
- Variable:A$ scalar
+ Variable:A$ string scalar
 410 IF A$="Y" THEN 100
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"Y"
  BinaryOperatorEqual:= numeric
 420 PRINT "OK.  HOPE YOU ENJOYED YOURSELF." : GOTO 600
@@ -152,54 +152,54 @@
  TextConstant:"SONAR REPORTS SHOT WAS "
  CarriageControl:;
 510 IF Y>B THEN PRINT "NORTH";
- Variable:Y scalar
- Variable:B scalar
+ Variable:Y numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorGreater:> numeric
  TextConstant:"NORTH"
  CarriageControl:;
 520 IF Y<B THEN PRINT "SOUTH";
- Variable:Y scalar
- Variable:B scalar
+ Variable:Y numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorLess:< numeric
  TextConstant:"SOUTH"
  CarriageControl:;
 530 IF X>A THEN PRINT "EAST";
- Variable:X scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorGreater:> numeric
  TextConstant:"EAST"
  CarriageControl:;
 540 IF X<A THEN PRINT "WEST";
- Variable:X scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorLess:< numeric
  TextConstant:"WEST"
  CarriageControl:;
 550 IF Y<>B OR X<>A THEN PRINT " AND";
- Variable:Y scalar
- Variable:B scalar
+ Variable:Y numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorNotEqual:<> numeric
- Variable:X scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorNotEqual:<> numeric
  BinaryOperatorOr:OR numeric
  TextConstant:" AND"
  CarriageControl:;
 560 IF Z>C THEN PRINT " TOO LOW."
- Variable:Z scalar
- Variable:C scalar
+ Variable:Z numeric scalar
+ Variable:C numeric scalar
  BinaryOperatorGreater:> numeric
  TextConstant:" TOO LOW."
  CarriageControl:NL
 570 IF Z<C THEN PRINT " TOO HIGH."
- Variable:Z scalar
- Variable:C scalar
+ Variable:Z numeric scalar
+ Variable:C numeric scalar
  BinaryOperatorLess:< numeric
  TextConstant:" TOO HIGH."
  CarriageControl:NL
 580 IF Z=C THEN PRINT " DEPTH OK."
- Variable:Z scalar
- Variable:C scalar
+ Variable:Z numeric scalar
+ Variable:C numeric scalar
  BinaryOperatorEqual:= numeric
  TextConstant:" DEPTH OK."
  CarriageControl:NL

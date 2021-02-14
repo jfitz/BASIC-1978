@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"BATNUM"
  NumericConstant:33
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"BATNUM"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -45,194 +45,194 @@
 210 GOTO 330
  LineNumber:330
 220 FOR I=1 TO 10
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 230 PRINT
  CarriageControl:NL
 240 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 330 INPUT "ENTER PILE SIZE";N
- Variable:N scalar
+ Variable:N numeric scalar
 350 IF N>=1 THEN 370
- Variable:N scalar
+ Variable:N numeric scalar
  NumericConstant:1
  BinaryOperatorGreaterEqual:>= numeric
 360 GOTO 330
  LineNumber:330
 370 IF N<>INT(N) THEN 220
- Variable:N scalar
- Variable:N scalar
- FunctionInt scalar
+ Variable:N numeric scalar
+ Variable:N numeric scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 380 IF N<1 THEN 220
- Variable:N scalar
+ Variable:N numeric scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 390 INPUT "ENTER WIN OPTION - 1 TO TAKE LAST, 2 TO AVOID LAST: ";M
- Variable:M scalar
+ Variable:M numeric scalar
 410 IF M=1 THEN 430
- Variable:M scalar
+ Variable:M numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 420 IF M<>2 THEN 390
- Variable:M scalar
+ Variable:M numeric scalar
  NumericConstant:2
  BinaryOperatorNotEqual:<> numeric
 430 INPUT "ENTER MIN AND MAX ";A,B
- Variable:A scalar
- Variable:B scalar
+ Variable:A numeric scalar
+ Variable:B numeric scalar
 450 IF A>B THEN 430
- Variable:A scalar
- Variable:B scalar
+ Variable:A numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorGreater:> numeric
 460 IF A<1 THEN 430
- Variable:A scalar
+ Variable:A numeric scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 470 IF A<>INT(A) THEN 430
- Variable:A scalar
- Variable:A scalar
- FunctionInt scalar
+ Variable:A numeric scalar
+ Variable:A numeric scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 480 IF B<>INT(B) THEN 430
- Variable:B scalar
- Variable:B scalar
- FunctionInt scalar
+ Variable:B numeric scalar
+ Variable:B numeric scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 490 INPUT "ENTER START OPTION - 1 COMPUTER FIRST, 2 YOU FIRST ";S
- Variable:S scalar
+ Variable:S numeric scalar
 500 PRINT:PRINT
  CarriageControl:NL
  CarriageControl:NL
 510 IF S=1 THEN 530
- Variable:S scalar
+ Variable:S numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 520 IF S<>2 THEN 490
- Variable:S scalar
+ Variable:S numeric scalar
  NumericConstant:2
  BinaryOperatorNotEqual:<> numeric
 530 C=A+B
- Variable:C scalar
- Variable:A scalar
- Variable:B scalar
+ Variable:C numeric scalar
+ Variable:A numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 540 IF S=2 THEN 570
- Variable:S scalar
+ Variable:S numeric scalar
  NumericConstant:2
  BinaryOperatorEqual:= numeric
 550 GOSUB 600
  LineNumber:600
 560 IF W=1 THEN 220
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 570 GOSUB 810
  LineNumber:810
 580 IF W=1 THEN 220
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 590 GOTO 550
  LineNumber:550
 600 Q=N
- Variable:Q scalar
- Variable:N scalar
+ Variable:Q numeric scalar
+ Variable:N numeric scalar
  AssignmentOperator:=
 610 IF M=1 THEN 630
- Variable:M scalar
+ Variable:M numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 620 Q=Q-1
- Variable:Q scalar
- Variable:Q scalar
+ Variable:Q numeric scalar
+ Variable:Q numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 630 IF M=1 THEN 680
- Variable:M scalar
+ Variable:M numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 640 IF N>A THEN 720
- Variable:N scalar
- Variable:A scalar
+ Variable:N numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorGreater:> numeric
 650 W=1
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 660 PRINT "COMPUTER TAKES";N;"AND LOSES."
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Variable:N scalar
+ Variable:N numeric scalar
  CarriageControl:;
  TextConstant:"AND LOSES."
  CarriageControl:NL
 670 RETURN
  
 680 IF N>B THEN 720
- Variable:N scalar
- Variable:B scalar
+ Variable:N numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorGreater:> numeric
 690 W=1
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 700 PRINT "COMPUTER TAKES";N;"AND WINS."
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Variable:N scalar
+ Variable:N numeric scalar
  CarriageControl:;
  TextConstant:"AND WINS."
  CarriageControl:NL
 710 RETURN
  
 720 P=Q-C*INT(Q/C)
- Variable:P scalar
- Variable:Q scalar
- Variable:C scalar
- Variable:Q scalar
- Variable:C scalar
+ Variable:P numeric scalar
+ Variable:Q numeric scalar
+ Variable:C numeric scalar
+ Variable:Q numeric scalar
+ Variable:C numeric scalar
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 730 IF P>=A THEN 750
- Variable:P scalar
- Variable:A scalar
+ Variable:P numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorGreaterEqual:>= numeric
 740 P=A
- Variable:P scalar
- Variable:A scalar
+ Variable:P numeric scalar
+ Variable:A numeric scalar
  AssignmentOperator:=
 750 IF P<=B THEN 770
- Variable:P scalar
- Variable:B scalar
+ Variable:P numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorLessEqual:<= numeric
 760 P=B
- Variable:P scalar
- Variable:B scalar
+ Variable:P numeric scalar
+ Variable:B numeric scalar
  AssignmentOperator:=
 770 N=N-P
- Variable:N scalar
- Variable:N scalar
- Variable:P scalar
+ Variable:N numeric scalar
+ Variable:N numeric scalar
+ Variable:P numeric scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 780 PRINT "COMPUTER TAKES";P;"AND LEAVES";N
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Variable:P scalar
+ Variable:P numeric scalar
  CarriageControl:;
  TextConstant:"AND LEAVES"
  CarriageControl:;
- Variable:N scalar
+ Variable:N numeric scalar
  CarriageControl:NL
 790 W=0
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 800 RETURN
@@ -242,38 +242,38 @@
  TextConstant:"YOUR MOVE "
  CarriageControl:;
 820 INPUT P
- Variable:P scalar
+ Variable:P numeric scalar
 830 IF P<>0 THEN 870
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 840 PRINT "I TOLD YOU NOT TO USE ZERO! COMPUTER WINS BY FORFEIT."
  TextConstant:"I TOLD YOU NOT TO USE ZERO! COMPUTER WINS BY FORFEIT."
  CarriageControl:NL
 850 W=1
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 860 RETURN
  
 870 IF P<>INT(P) THEN 920
- Variable:P scalar
- Variable:P scalar
- FunctionInt scalar
+ Variable:P numeric scalar
+ Variable:P numeric scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 880 IF P>=A THEN 910
- Variable:P scalar
- Variable:A scalar
+ Variable:P numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorGreaterEqual:>= numeric
 890 IF P=N THEN 960
- Variable:P scalar
- Variable:N scalar
+ Variable:P numeric scalar
+ Variable:N numeric scalar
  BinaryOperatorEqual:= numeric
 900 GOTO 920
  LineNumber:920
 910 IF P<=B THEN 940
- Variable:P scalar
- Variable:B scalar
+ Variable:P numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorLessEqual:<= numeric
 920 PRINT "ILLEGAL MOVE, REENTER IT ";
  TextConstant:"ILLEGAL MOVE, REENTER IT "
@@ -281,24 +281,24 @@
 930 GOTO 820
  LineNumber:820
 940 N=N-P
- Variable:N scalar
- Variable:N scalar
- Variable:P scalar
+ Variable:N numeric scalar
+ Variable:N numeric scalar
+ Variable:P numeric scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 950 IF N<>0 THEN 1030
- Variable:N scalar
+ Variable:N numeric scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 960 IF M=1 THEN 1000
- Variable:M scalar
+ Variable:M numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 970 PRINT "TOUGH LUCK, YOU LOSE."
  TextConstant:"TOUGH LUCK, YOU LOSE."
  CarriageControl:NL
 980 W=1
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 990 RETURN
@@ -307,25 +307,25 @@
  TextConstant:"CONGRATULATIONS, YOU WIN."
  CarriageControl:NL
 1010 W=1
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 1020 RETURN
  
 1030 IF N>=0 THEN 1060
- Variable:N scalar
+ Variable:N numeric scalar
  NumericConstant:0
  BinaryOperatorGreaterEqual:>= numeric
 1040 N=N+P
- Variable:N scalar
- Variable:N scalar
- Variable:P scalar
+ Variable:N numeric scalar
+ Variable:N numeric scalar
+ Variable:P numeric scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1050 GOTO 920
  LineNumber:920
 1060 W=0
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1070 RETURN

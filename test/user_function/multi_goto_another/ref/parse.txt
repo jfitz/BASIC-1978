@@ -1,0 +1,64 @@
+10 REM TEST MULTILINE USER FUNCTION
+ Remark:TEST MULTILINE USER FUNCTION
+20 PRINT "START"
+ TextConstant:"START"
+ CarriageControl:NL
+30 A = FNA(100)
+ Variable:A numeric scalar
+ NumericConstant:100
+ UserFunction:FNA numeric scalar
+ AssignmentOperator:=
+40 PRINT "A IS:"; A
+ TextConstant:"A IS:"
+ CarriageControl:;
+ Variable:A numeric scalar
+ CarriageControl:NL
+50 PRINT "R IS:"; R
+ TextConstant:"R IS:"
+ CarriageControl:;
+ Variable:R numeric scalar
+ CarriageControl:NL
+90 PRINT "END"
+ TextConstant:"END"
+ CarriageControl:NL
+100 DEF FNA(H)
+ UserFunctionName:FNA
+ VariableName:H
+110 PRINT "START FNA()"
+ TextConstant:"START FNA()"
+ CarriageControl:NL
+120 FNA = H - 9
+ UserFunction:FNA numeric scalar
+ Variable:H numeric scalar
+ NumericConstant:9
+ BinaryOperatorMinus:- numeric
+ AssignmentOperator:=
+130 PRINT "END FNA()"
+ TextConstant:"END FNA()"
+ CarriageControl:NL
+132 R = 2
+ Variable:R numeric scalar
+ NumericConstant:2
+ AssignmentOperator:=
+135 GOTO 210
+ LineNumber:210
+140 FNEND
+ 
+200 DEF FNB(J)
+ UserFunctionName:FNB
+ VariableName:J
+210 R = 10
+ Variable:R numeric scalar
+ NumericConstant:10
+ AssignmentOperator:=
+220 FNB = 10 * J
+ UserFunction:FNB numeric scalar
+ NumericConstant:10
+ Variable:J numeric scalar
+ BinaryOperatorMultiply:* numeric
+ AssignmentOperator:=
+230 FNEND
+ 
+999 END
+ 
+

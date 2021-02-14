@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"BUNNY"
  NumericConstant:33
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"BUNNY"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -19,16 +19,16 @@
 110 REM
  Remark:
 120 FOR I=0 TO 4: READ B(I): NEXT I
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:4"]
- Variable:I scalar
- Variable:B scalar
- Variable:I scalar
+ Variable:I numeric scalar
+ Variable:B numeric scalar
+ Variable:I numeric scalar
 130 GOSUB 260
  LineNumber:260
 140 L=64: REM  ASCII LETTER CODE...
- Variable:L scalar
+ Variable:L numeric scalar
  NumericConstant:64
  AssignmentOperator:=
  Remark: ASCII LETTER CODE...
@@ -37,42 +37,42 @@
 160 PRINT
  CarriageControl:NL
 170 READ X: IF X<0 THEN 160
- Variable:X scalar
- Variable:X scalar
+ Variable:X numeric scalar
+ Variable:X numeric scalar
  NumericConstant:0
  BinaryOperatorLess:< numeric
 175 IF X>128 THEN 240
- Variable:X scalar
+ Variable:X numeric scalar
  NumericConstant:128
  BinaryOperatorGreater:> numeric
 180 PRINT TAB(X);: READ Y
- Variable:X scalar
- FunctionTab scalar
+ Variable:X numeric scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
- Variable:Y scalar
+ Variable:Y numeric scalar
 190 FOR I=X TO Y: J=I-5*INT(I/5)
- control: Variable:I scalar
- start:   ["Variable:X scalar"]
- end:     ["Variable:Y scalar"]
- Variable:J scalar
- Variable:I scalar
+ control: Variable:I numeric scalar
+ start:   ["Variable:X numeric scalar"]
+ end:     ["Variable:Y numeric scalar"]
+ Variable:J numeric scalar
+ Variable:I numeric scalar
  NumericConstant:5
- Variable:I scalar
+ Variable:I numeric scalar
  NumericConstant:5
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 200 PRINT CHR$(L+B(J));
- Variable:L scalar
- Variable:J scalar
- Variable:B scalar
+ Variable:L numeric scalar
+ Variable:J numeric scalar
+ Variable:B numeric scalar
  BinaryOperatorPlus:+ numeric
- FunctionChr scalar
+ FunctionChr:CHR$ string scalar
  CarriageControl:;
 210 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 220 GOTO 170
  LineNumber:170
 230 REM
@@ -83,13 +83,13 @@
 250 REM
  Remark:
 260 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:6"]
  NumericConstant:10
- FunctionChr scalar
+ FunctionChr:CHR$ string scalar
  CarriageControl:;
- Variable:I scalar
+ Variable:I numeric scalar
 270 RETURN
  
 280 REM

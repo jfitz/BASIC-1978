@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"WAR"
  NumericConstant:33
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"WAR"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -24,13 +24,13 @@
  TextConstant:"DO YOU WANT DIRECTIONS"
  CarriageControl:;
 130 INPUT B$
- Variable:B$ scalar
+ Variable:B$ string scalar
 140 IF B$="NO" THEN 210
- Variable:B$ scalar
+ Variable:B$ string scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 150 IF B$="YES" THEN 180
- Variable:B$ scalar
+ Variable:B$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 160 PRINT "YES OR NO, PLEASE.  ";
@@ -53,149 +53,149 @@
  CarriageControl:NL
 230 DIM A$(52),L(54)
  NumericConstant:52
- Declaration:A$ unknown
+ Declaration:A$ scalar
  NumericConstant:54
- Declaration:L unknown
+ Declaration:L scalar
 240 FOR I=1 TO 52
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:52"]
 250 READ A$(I)
- Variable:I scalar
- Variable:A$ scalar
+ Variable:I numeric scalar
+ Variable:A$ string scalar
 260 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 270 REM
  Remark:
 280 FOR J=1 TO 52
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:52"]
 290 LET L(J)=INT(52*RND(1))+1
- Variable:J scalar
- Variable:L scalar
+ Variable:J numeric scalar
+ Variable:L numeric scalar
  NumericConstant:52
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 295 IF J=1 THEN 350
- Variable:J scalar
+ Variable:J numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 300 FOR K=1 TO J-1
- control: Variable:K scalar
+ control: Variable:K numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:J scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:J numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
 310 IF L(K)<>L(J) THEN 340
- Variable:K scalar
- Variable:L scalar
- Variable:J scalar
- Variable:L scalar
+ Variable:K numeric scalar
+ Variable:L numeric scalar
+ Variable:J numeric scalar
+ Variable:L numeric scalar
  BinaryOperatorNotEqual:<> numeric
 320 REM
  Remark:
 330 GOTO 290
  LineNumber:290
 340 NEXT K
- Variable:K scalar
+ Variable:K numeric scalar
 350 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 360 P=P+1
- Variable:P scalar
- Variable:P scalar
+ Variable:P numeric scalar
+ Variable:P numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 370 M1=L(P)
- Variable:M1 scalar
- Variable:P scalar
- Variable:L scalar
+ Variable:M1 numeric scalar
+ Variable:P numeric scalar
+ Variable:L numeric scalar
  AssignmentOperator:=
 380 P=P+1
- Variable:P scalar
- Variable:P scalar
+ Variable:P numeric scalar
+ Variable:P numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 390 M2=L(P)
- Variable:M2 scalar
- Variable:P scalar
- Variable:L scalar
+ Variable:M2 numeric scalar
+ Variable:P numeric scalar
+ Variable:L numeric scalar
  AssignmentOperator:=
 400 PRINT
  CarriageControl:NL
 420 PRINT "YOU: ";A$(M1),"COMPUTER: ";A$(M2)
  TextConstant:"YOU: "
  CarriageControl:;
- Variable:M1 scalar
- Variable:A$ scalar
+ Variable:M1 numeric scalar
+ Variable:A$ string scalar
  CarriageControl:,
  TextConstant:"COMPUTER: "
  CarriageControl:;
- Variable:M2 scalar
- Variable:A$ scalar
+ Variable:M2 numeric scalar
+ Variable:A$ string scalar
  CarriageControl:NL
 430 N1=INT((M1-.5)/4)
- Variable:N1 scalar
- Variable:M1 scalar
+ Variable:N1 numeric scalar
+ Variable:M1 numeric scalar
  NumericConstant:.5
  BinaryOperatorMinus:- numeric
  NumericConstant:4
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 440 N2=INT((M2-.5)/4)
- Variable:N2 scalar
- Variable:M2 scalar
+ Variable:N2 numeric scalar
+ Variable:M2 numeric scalar
  NumericConstant:.5
  BinaryOperatorMinus:- numeric
  NumericConstant:4
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 450 IF N1>=N2 THEN 490
- Variable:N1 scalar
- Variable:N2 scalar
+ Variable:N1 numeric scalar
+ Variable:N2 numeric scalar
  BinaryOperatorGreaterEqual:>= numeric
 460 A1=A1+1
- Variable:A1 scalar
- Variable:A1 scalar
+ Variable:A1 numeric scalar
+ Variable:A1 numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 470 PRINT "THE COMPUTER WINS!!! YOU HAVE";B1;"AND THE COMPUTER HAS";A1
  TextConstant:"THE COMPUTER WINS!!! YOU HAVE"
  CarriageControl:;
- Variable:B1 scalar
+ Variable:B1 numeric scalar
  CarriageControl:;
  TextConstant:"AND THE COMPUTER HAS"
  CarriageControl:;
- Variable:A1 scalar
+ Variable:A1 numeric scalar
  CarriageControl:NL
 480 GOTO 540
  LineNumber:540
 490 IF N1=N2 THEN 530
- Variable:N1 scalar
- Variable:N2 scalar
+ Variable:N1 numeric scalar
+ Variable:N2 numeric scalar
  BinaryOperatorEqual:= numeric
 500 B1=B1+1
- Variable:B1 scalar
- Variable:B1 scalar
+ Variable:B1 numeric scalar
+ Variable:B1 numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 510 PRINT "YOU WIN. YOU HAVE";B1;"AND THE COMPUTER HAS";A1
  TextConstant:"YOU WIN. YOU HAVE"
  CarriageControl:;
- Variable:B1 scalar
+ Variable:B1 numeric scalar
  CarriageControl:;
  TextConstant:"AND THE COMPUTER HAS"
  CarriageControl:;
- Variable:A1 scalar
+ Variable:A1 numeric scalar
  CarriageControl:NL
 520 GOTO 540
  LineNumber:540
@@ -203,23 +203,23 @@
  TextConstant:"TIE.  NO SCORE CHANGE."
  CarriageControl:NL
 540 IF L(P+1)=0 THEN 610
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- Variable:L scalar
+ Variable:L numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 550 PRINT "DO YOU WANT TO CONTINUE";
  TextConstant:"DO YOU WANT TO CONTINUE"
  CarriageControl:;
 560 INPUT V$
- Variable:V$ scalar
+ Variable:V$ string scalar
 570 IF V$="YES" THEN 360
- Variable:V$ scalar
+ Variable:V$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 580 IF V$="NO" THEN 650
- Variable:V$ scalar
+ Variable:V$ string scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 590 PRINT "YES OR NO, PLEASE.  ";
@@ -234,12 +234,12 @@
 630 PRINT "WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: ";B1;
  TextConstant:"WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: "
  CarriageControl:;
- Variable:B1 scalar
+ Variable:B1 numeric scalar
  CarriageControl:;
 640 PRINT "  THE COMPUTER: ";A1:PRINT
  TextConstant:"  THE COMPUTER: "
  CarriageControl:;
- Variable:A1 scalar
+ Variable:A1 numeric scalar
  CarriageControl:NL
  CarriageControl:NL
 650 PRINT "THANKS FOR PLAYING.  IT WAS FUN."

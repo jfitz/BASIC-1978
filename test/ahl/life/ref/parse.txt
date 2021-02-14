@@ -1,12 +1,12 @@
 2 PRINT TAB(34);"LIFE"
  NumericConstant:34
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"LIFE"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -18,145 +18,145 @@
  TextConstant:"ENTER YOUR PATTERN:"
  CarriageControl:NL
 9 X1=1: Y1=1: X2=24: Y2=70
- Variable:X1 scalar
+ Variable:X1 numeric scalar
  NumericConstant:1
  AssignmentOperator:=
- Variable:Y1 scalar
+ Variable:Y1 numeric scalar
  NumericConstant:1
  AssignmentOperator:=
- Variable:X2 scalar
+ Variable:X2 numeric scalar
  NumericConstant:24
  AssignmentOperator:=
- Variable:Y2 scalar
+ Variable:Y2 numeric scalar
  NumericConstant:70
  AssignmentOperator:=
 10 DIM A(24,70),B$(24)
  NumericConstant:24
  NumericConstant:70
- Declaration:A unknown
+ Declaration:A scalar
  NumericConstant:24
- Declaration:B$ unknown
+ Declaration:B$ scalar
 20 C=1
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 30 INPUT B$(C)
- Variable:C scalar
- Variable:B$ scalar
+ Variable:C numeric scalar
+ Variable:B$ string scalar
 40 IF B$(C)="DONE" THEN B$(C)="": GOTO 80
- Variable:C scalar
- Variable:B$ scalar
+ Variable:C numeric scalar
+ Variable:B$ string scalar
  TextConstant:"DONE"
  BinaryOperatorEqual:= numeric
- Variable:C scalar
- Variable:B$ scalar
+ Variable:C numeric scalar
+ Variable:B$ string scalar
  TextConstant:""
  AssignmentOperator:=
  LineNumber:80
 50 IF LEFT$(B$(C),1)="." THEN B$(C)=" "+RIGHT$(B$(C),LEN(B$(C))-1)
- Variable:C scalar
- Variable:B$ scalar
+ Variable:C numeric scalar
+ Variable:B$ string scalar
  NumericConstant:1
- FunctionLeft scalar
+ FunctionLeft:LEFT$ string scalar
  TextConstant:"."
  BinaryOperatorEqual:= numeric
- Variable:C scalar
- Variable:B$ scalar
+ Variable:C numeric scalar
+ Variable:B$ string scalar
  TextConstant:" "
- Variable:C scalar
- Variable:B$ scalar
- Variable:C scalar
- Variable:B$ scalar
- FunctionLen scalar
+ Variable:C numeric scalar
+ Variable:B$ string scalar
+ Variable:C numeric scalar
+ Variable:B$ string scalar
+ FunctionLen:LEN numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- FunctionRight scalar
+ FunctionRight:RIGHT$ string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
 60 C=C+1
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 70 GOTO 30
  LineNumber:30
 80 C=C-1: L=0
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
- Variable:L scalar
+ Variable:L numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 90 FOR X=1 TO C-1
- control: Variable:X scalar
+ control: Variable:X numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:C numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
 100 IF LEN(B$(X))>L THEN L=LEN(B$(X))
- Variable:X scalar
- Variable:B$ scalar
- FunctionLen scalar
- Variable:L scalar
+ Variable:X numeric scalar
+ Variable:B$ string scalar
+ FunctionLen:LEN numeric scalar
+ Variable:L numeric scalar
  BinaryOperatorGreater:> numeric
- Variable:L scalar
- Variable:X scalar
- Variable:B$ scalar
- FunctionLen scalar
+ Variable:L numeric scalar
+ Variable:X numeric scalar
+ Variable:B$ string scalar
+ FunctionLen:LEN numeric scalar
  AssignmentOperator:=
 110 NEXT X
- Variable:X scalar
+ Variable:X numeric scalar
 120 X1=11-C/2
- Variable:X1 scalar
+ Variable:X1 numeric scalar
  NumericConstant:11
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 130 Y1=33-L/2
- Variable:Y1 scalar
+ Variable:Y1 numeric scalar
  NumericConstant:33
- Variable:L scalar
+ Variable:L numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 140 FOR X=1 TO C
- control: Variable:X scalar
+ control: Variable:X numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C scalar"]
+ end:     ["Variable:C numeric scalar"]
 150 FOR Y=1 TO LEN(B$(X))
- control: Variable:Y scalar
+ control: Variable:Y numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:X scalar", "Variable:B$ scalar", "FunctionLen scalar"]
+ end:     ["Variable:X numeric scalar", "Variable:B$ string scalar", "FunctionLen:LEN numeric scalar"]
 160 IF MID$(B$(X),Y,1)<>" " THEN A(X1+X,Y1+Y)=1:P=P+1
- Variable:X scalar
- Variable:B$ scalar
- Variable:Y scalar
+ Variable:X numeric scalar
+ Variable:B$ string scalar
+ Variable:Y numeric scalar
  NumericConstant:1
- FunctionMid scalar
+ FunctionMid:MID$ string scalar
  TextConstant:" "
  BinaryOperatorNotEqual:<> numeric
- Variable:X1 scalar
- Variable:X scalar
+ Variable:X1 numeric scalar
+ Variable:X numeric scalar
  BinaryOperatorPlus:+ numeric
- Variable:Y1 scalar
- Variable:Y scalar
+ Variable:Y1 numeric scalar
+ Variable:Y numeric scalar
  BinaryOperatorPlus:+ numeric
- Variable:A scalar
+ Variable:A numeric scalar
  NumericConstant:1
  AssignmentOperator:=
- Variable:P scalar
- Variable:P scalar
+ Variable:P numeric scalar
+ Variable:P numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 170 NEXT Y
- Variable:Y scalar
+ Variable:Y numeric scalar
 180 NEXT X
- Variable:X scalar
+ Variable:X numeric scalar
 200 PRINT:PRINT:PRINT
  CarriageControl:NL
  CarriageControl:NL
@@ -164,293 +164,293 @@
 210 PRINT "GENERATION:";G,"POPULATION:";P;: IF I9 THEN PRINT "INVALID!";
  TextConstant:"GENERATION:"
  CarriageControl:;
- Variable:G scalar
+ Variable:G numeric scalar
  CarriageControl:,
  TextConstant:"POPULATION:"
  CarriageControl:;
- Variable:P scalar
+ Variable:P numeric scalar
  CarriageControl:;
- Variable:I9 scalar
+ Variable:I9 numeric scalar
  TextConstant:"INVALID!"
  CarriageControl:;
 215 X3=24:Y3=70:X4=1: Y4=1: P=0
- Variable:X3 scalar
+ Variable:X3 numeric scalar
  NumericConstant:24
  AssignmentOperator:=
- Variable:Y3 scalar
+ Variable:Y3 numeric scalar
  NumericConstant:70
  AssignmentOperator:=
- Variable:X4 scalar
+ Variable:X4 numeric scalar
  NumericConstant:1
  AssignmentOperator:=
- Variable:Y4 scalar
+ Variable:Y4 numeric scalar
  NumericConstant:1
  AssignmentOperator:=
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 220 G=G+1
- Variable:G scalar
- Variable:G scalar
+ Variable:G numeric scalar
+ Variable:G numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 225 FOR X=1 TO X1-1: PRINT: NEXT X
- control: Variable:X scalar
+ control: Variable:X numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:X1 scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:X1 numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
  CarriageControl:NL
- Variable:X scalar
+ Variable:X numeric scalar
 230 FOR X=X1 TO X2
- control: Variable:X scalar
- start:   ["Variable:X1 scalar"]
- end:     ["Variable:X2 scalar"]
+ control: Variable:X numeric scalar
+ start:   ["Variable:X1 numeric scalar"]
+ end:     ["Variable:X2 numeric scalar"]
 240 PRINT
  CarriageControl:NL
 250 FOR Y=Y1 TO Y2
- control: Variable:Y scalar
- start:   ["Variable:Y1 scalar"]
- end:     ["Variable:Y2 scalar"]
+ control: Variable:Y numeric scalar
+ start:   ["Variable:Y1 numeric scalar"]
+ end:     ["Variable:Y2 numeric scalar"]
 253 IF A(X,Y)=2 THEN A(X,Y)=0:GOTO 270
- Variable:X scalar
- Variable:Y scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
+ Variable:A numeric scalar
  NumericConstant:2
  BinaryOperatorEqual:= numeric
- Variable:X scalar
- Variable:Y scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
+ Variable:A numeric scalar
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:270
 256 IF A(X,Y)=3 THEN A(X,Y)=1:GOTO 261
- Variable:X scalar
- Variable:Y scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
+ Variable:A numeric scalar
  NumericConstant:3
  BinaryOperatorEqual:= numeric
- Variable:X scalar
- Variable:Y scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:261
 260 IF A(X,Y)<>1 THEN 270
- Variable:X scalar
- Variable:Y scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
  BinaryOperatorNotEqual:<> numeric
 261 PRINT TAB(Y);"*";
- Variable:Y scalar
- FunctionTab scalar
+ Variable:Y numeric scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"*"
  CarriageControl:;
 262 IF X<X3 THEN X3=X
- Variable:X scalar
- Variable:X3 scalar
+ Variable:X numeric scalar
+ Variable:X3 numeric scalar
  BinaryOperatorLess:< numeric
- Variable:X3 scalar
- Variable:X scalar
+ Variable:X3 numeric scalar
+ Variable:X numeric scalar
  AssignmentOperator:=
 264 IF X>X4 THEN X4=X
- Variable:X scalar
- Variable:X4 scalar
+ Variable:X numeric scalar
+ Variable:X4 numeric scalar
  BinaryOperatorGreater:> numeric
- Variable:X4 scalar
- Variable:X scalar
+ Variable:X4 numeric scalar
+ Variable:X numeric scalar
  AssignmentOperator:=
 266 IF Y<Y3 THEN Y3=Y
- Variable:Y scalar
- Variable:Y3 scalar
+ Variable:Y numeric scalar
+ Variable:Y3 numeric scalar
  BinaryOperatorLess:< numeric
- Variable:Y3 scalar
- Variable:Y scalar
+ Variable:Y3 numeric scalar
+ Variable:Y numeric scalar
  AssignmentOperator:=
 268 IF Y>Y4 THEN Y4=Y
- Variable:Y scalar
- Variable:Y4 scalar
+ Variable:Y numeric scalar
+ Variable:Y4 numeric scalar
  BinaryOperatorGreater:> numeric
- Variable:Y4 scalar
- Variable:Y scalar
+ Variable:Y4 numeric scalar
+ Variable:Y numeric scalar
  AssignmentOperator:=
 270 NEXT Y
- Variable:Y scalar
+ Variable:Y numeric scalar
 290 NEXT X
- Variable:X scalar
+ Variable:X numeric scalar
 295 FOR X=X2+1 TO 24: PRINT: NEXT X
- control: Variable:X scalar
- start:   ["Variable:X2 scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
+ control: Variable:X numeric scalar
+ start:   ["Variable:X2 numeric scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
  end:     ["NumericConstant:24"]
  CarriageControl:NL
- Variable:X scalar
+ Variable:X numeric scalar
 299 X1=X3: X2=X4: Y1=Y3: Y2=Y4
- Variable:X1 scalar
- Variable:X3 scalar
+ Variable:X1 numeric scalar
+ Variable:X3 numeric scalar
  AssignmentOperator:=
- Variable:X2 scalar
- Variable:X4 scalar
+ Variable:X2 numeric scalar
+ Variable:X4 numeric scalar
  AssignmentOperator:=
- Variable:Y1 scalar
- Variable:Y3 scalar
+ Variable:Y1 numeric scalar
+ Variable:Y3 numeric scalar
  AssignmentOperator:=
- Variable:Y2 scalar
- Variable:Y4 scalar
+ Variable:Y2 numeric scalar
+ Variable:Y4 numeric scalar
  AssignmentOperator:=
 301 IF X1<3 THEN X1=3:I9=-1
- Variable:X1 scalar
+ Variable:X1 numeric scalar
  NumericConstant:3
  BinaryOperatorLess:< numeric
- Variable:X1 scalar
+ Variable:X1 numeric scalar
  NumericConstant:3
  AssignmentOperator:=
- Variable:I9 scalar
+ Variable:I9 numeric scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  AssignmentOperator:=
 303 IF X2>22 THEN X2=22:I9=-1
- Variable:X2 scalar
+ Variable:X2 numeric scalar
  NumericConstant:22
  BinaryOperatorGreater:> numeric
- Variable:X2 scalar
+ Variable:X2 numeric scalar
  NumericConstant:22
  AssignmentOperator:=
- Variable:I9 scalar
+ Variable:I9 numeric scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  AssignmentOperator:=
 305 IF Y1<3 THEN Y1=3:I9=-1
- Variable:Y1 scalar
+ Variable:Y1 numeric scalar
  NumericConstant:3
  BinaryOperatorLess:< numeric
- Variable:Y1 scalar
+ Variable:Y1 numeric scalar
  NumericConstant:3
  AssignmentOperator:=
- Variable:I9 scalar
+ Variable:I9 numeric scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  AssignmentOperator:=
 307 IF Y2>68 THEN Y2=68:I9=-1
- Variable:Y2 scalar
+ Variable:Y2 numeric scalar
  NumericConstant:68
  BinaryOperatorGreater:> numeric
- Variable:Y2 scalar
+ Variable:Y2 numeric scalar
  NumericConstant:68
  AssignmentOperator:=
- Variable:I9 scalar
+ Variable:I9 numeric scalar
  NumericConstant:1
  UnaryOperatorMinus:- numeric
  AssignmentOperator:=
 309 P=0
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 500 FOR X=X1-1 TO X2+1
- control: Variable:X scalar
- start:   ["Variable:X1 scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
- end:     ["Variable:X2 scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
+ control: Variable:X numeric scalar
+ start:   ["Variable:X1 numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:X2 numeric scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
 510 FOR Y=Y1-1 TO Y2+1
- control: Variable:Y scalar
- start:   ["Variable:Y1 scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
- end:     ["Variable:Y2 scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
+ control: Variable:Y numeric scalar
+ start:   ["Variable:Y1 numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:Y2 numeric scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
 520 C=0
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 530 FOR I=X-1 TO X+1
- control: Variable:I scalar
- start:   ["Variable:X scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
- end:     ["Variable:X scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
+ control: Variable:I numeric scalar
+ start:   ["Variable:X numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:X numeric scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
 540 FOR J=Y-1 TO Y+1
- control: Variable:J scalar
- start:   ["Variable:Y scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
- end:     ["Variable:Y scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
+ control: Variable:J numeric scalar
+ start:   ["Variable:Y numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:Y numeric scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
 550 IF A(I,J)=1 OR A(I,J)=2 THEN C=C+1
- Variable:I scalar
- Variable:J scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
- Variable:I scalar
- Variable:J scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:A numeric scalar
  NumericConstant:2
  BinaryOperatorEqual:= numeric
  BinaryOperatorOr:OR numeric
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 560 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 570 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 580 IF A(X,Y)=0 THEN 610
- Variable:X scalar
- Variable:Y scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
+ Variable:A numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 590 IF C<3 OR C>4 THEN A(X,Y)=2: GOTO 600
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:3
  BinaryOperatorLess:< numeric
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:4
  BinaryOperatorGreater:> numeric
  BinaryOperatorOr:OR numeric
- Variable:X scalar
- Variable:Y scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
+ Variable:A numeric scalar
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:600
 595 P=P+1
- Variable:P scalar
- Variable:P scalar
+ Variable:P numeric scalar
+ Variable:P numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 600 GOTO 620
  LineNumber:620
 610 IF C=3 THEN A(X,Y)=3:P=P+1
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:3
  BinaryOperatorEqual:= numeric
- Variable:X scalar
- Variable:Y scalar
- Variable:A scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
+ Variable:A numeric scalar
  NumericConstant:3
  AssignmentOperator:=
- Variable:P scalar
- Variable:P scalar
+ Variable:P numeric scalar
+ Variable:P numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 620 NEXT Y
- Variable:Y scalar
+ Variable:Y numeric scalar
 630 NEXT X
- Variable:X scalar
+ Variable:X numeric scalar
 635 X1=X1-1:Y1=Y1-1:X2=X2+1:Y2=Y2+1
- Variable:X1 scalar
- Variable:X1 scalar
+ Variable:X1 numeric scalar
+ Variable:X1 numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
- Variable:Y1 scalar
- Variable:Y1 scalar
+ Variable:Y1 numeric scalar
+ Variable:Y1 numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
- Variable:X2 scalar
- Variable:X2 scalar
+ Variable:X2 numeric scalar
+ Variable:X2 numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
- Variable:Y2 scalar
- Variable:Y2 scalar
+ Variable:Y2 numeric scalar
+ Variable:Y2 numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=

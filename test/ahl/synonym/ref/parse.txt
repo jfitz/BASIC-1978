@@ -1,12 +1,12 @@
 2 PRINT TAB(33);"SYNONYM"
  NumericConstant:33
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"SYNONYM"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -16,37 +16,37 @@
  CarriageControl:NL
 10 DIM R$(5),W$(10),L(30),R(30)
  NumericConstant:5
- Declaration:R$ unknown
+ Declaration:R$ scalar
  NumericConstant:10
- Declaration:W$ unknown
+ Declaration:W$ scalar
  NumericConstant:30
- Declaration:L unknown
+ Declaration:L scalar
  NumericConstant:30
- Declaration:R unknown
+ Declaration:R scalar
 20 R$(1)="RIGHT": R$(2)="CORRECT": R$(3)="FINE": R$(4)="GOOD!"
  NumericConstant:1
- Variable:R$ scalar
+ Variable:R$ string scalar
  TextConstant:"RIGHT"
  AssignmentOperator:=
  NumericConstant:2
- Variable:R$ scalar
+ Variable:R$ string scalar
  TextConstant:"CORRECT"
  AssignmentOperator:=
  NumericConstant:3
- Variable:R$ scalar
+ Variable:R$ string scalar
  TextConstant:"FINE"
  AssignmentOperator:=
  NumericConstant:4
- Variable:R$ scalar
+ Variable:R$ string scalar
  TextConstant:"GOOD!"
  AssignmentOperator:=
 30 R$(5)="CHECK"
  NumericConstant:5
- Variable:R$ scalar
+ Variable:R$ string scalar
  TextConstant:"CHECK"
  AssignmentOperator:=
 70 C=0
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 90 PRINT "A SYNONYM OF A WORD MEANS ANOTHER WORD IN THE ENGLISH"
@@ -70,81 +70,81 @@
  CarriageControl:NL
 150 RESTORE: C=C+1: READ N
  
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
- Variable:N scalar
+ Variable:N numeric scalar
 160 IF C>N THEN 420
- Variable:C scalar
- Variable:N scalar
+ Variable:C numeric scalar
+ Variable:N numeric scalar
  BinaryOperatorGreater:> numeric
 170 N1=INT(RND(1)*N+1)
- Variable:N1 scalar
+ Variable:N1 numeric scalar
  NumericConstant:1
- FunctionRnd scalar
- Variable:N scalar
+ FunctionRnd:RND numeric scalar
+ Variable:N numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 174 IF R(N1)=1 THEN 170
- Variable:N1 scalar
- Variable:R scalar
+ Variable:N1 numeric scalar
+ Variable:R numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 176 R(N1)=1
- Variable:N1 scalar
- Variable:R scalar
+ Variable:N1 numeric scalar
+ Variable:R numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 180 FOR I=1 TO N1
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N1 scalar"]
+ end:     ["Variable:N1 numeric scalar"]
 190 READ N2
- Variable:N2 scalar
+ Variable:N2 numeric scalar
 200 FOR J=1 TO N2
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N2 scalar"]
+ end:     ["Variable:N2 numeric scalar"]
 210 READ W$(J)
- Variable:J scalar
- Variable:W$ scalar
+ Variable:J numeric scalar
+ Variable:W$ string scalar
 220 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 230 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 232 FOR J=1 TO N2: L(J)=J: NEXT J
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N2 scalar"]
- Variable:J scalar
- Variable:L scalar
- Variable:J scalar
+ end:     ["Variable:N2 numeric scalar"]
+ Variable:J numeric scalar
+ Variable:L numeric scalar
+ Variable:J numeric scalar
  AssignmentOperator:=
- Variable:J scalar
+ Variable:J numeric scalar
 235 L(0)=N2: G=1: PRINT
  NumericConstant:0
- Variable:L scalar
- Variable:N2 scalar
+ Variable:L numeric scalar
+ Variable:N2 numeric scalar
  AssignmentOperator:=
- Variable:G scalar
+ Variable:G numeric scalar
  NumericConstant:1
  AssignmentOperator:=
  CarriageControl:NL
 237 L(G)=L(L(0)): L(0)=N2-1: PRINT
- Variable:G scalar
- Variable:L scalar
+ Variable:G numeric scalar
+ Variable:L numeric scalar
  NumericConstant:0
- Variable:L scalar
- Variable:L scalar
+ Variable:L numeric scalar
+ Variable:L numeric scalar
  AssignmentOperator:=
  NumericConstant:0
- Variable:L scalar
- Variable:N2 scalar
+ Variable:L numeric scalar
+ Variable:N2 numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
@@ -152,81 +152,81 @@
 240 PRINT "     WHAT IS A SYNONYM OF ";W$(G);: INPUT A$
  TextConstant:"     WHAT IS A SYNONYM OF "
  CarriageControl:;
- Variable:G scalar
- Variable:W$ scalar
+ Variable:G numeric scalar
+ Variable:W$ string scalar
  CarriageControl:;
- Variable:A$ scalar
+ Variable:A$ string scalar
 250 IF A$="HELP" THEN 340
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"HELP"
  BinaryOperatorEqual:= numeric
 260 FOR K=1 TO N2
- control: Variable:K scalar
+ control: Variable:K numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N2 scalar"]
+ end:     ["Variable:N2 numeric scalar"]
 270 IF G=K THEN 290
- Variable:G scalar
- Variable:K scalar
+ Variable:G numeric scalar
+ Variable:K numeric scalar
  BinaryOperatorEqual:= numeric
 280 IF A$=W$(K) THEN 320
- Variable:A$ scalar
- Variable:K scalar
- Variable:W$ scalar
+ Variable:A$ string scalar
+ Variable:K numeric scalar
+ Variable:W$ string scalar
  BinaryOperatorEqual:= numeric
 290 NEXT K
- Variable:K scalar
+ Variable:K numeric scalar
 300 PRINT "     TRY AGAIN.": GOTO 240
  TextConstant:"     TRY AGAIN."
  CarriageControl:NL
  LineNumber:240
 320 PRINT R$(INT(RND(1)*5+1)): GOTO 150
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  NumericConstant:5
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
- Variable:R$ scalar
+ FunctionInt:INT numeric scalar
+ Variable:R$ string scalar
  CarriageControl:NL
  LineNumber:150
 340 G1=INT(RND(1)*L(0)+1)
- Variable:G1 scalar
+ Variable:G1 numeric scalar
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  NumericConstant:0
- Variable:L scalar
+ Variable:L numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 360 PRINT "**** A SYNONYM OF ";W$(G);" IS ";W$(L(G1));".": PRINT
  TextConstant:"**** A SYNONYM OF "
  CarriageControl:;
- Variable:G scalar
- Variable:W$ scalar
+ Variable:G numeric scalar
+ Variable:W$ string scalar
  CarriageControl:;
  TextConstant:" IS "
  CarriageControl:;
- Variable:G1 scalar
- Variable:L scalar
- Variable:W$ scalar
+ Variable:G1 numeric scalar
+ Variable:L numeric scalar
+ Variable:W$ string scalar
  CarriageControl:;
  TextConstant:"."
  CarriageControl:NL
  CarriageControl:NL
 370 L(G1)=L(L(0)): L(0)=L(0)-1: GOTO 240
- Variable:G1 scalar
- Variable:L scalar
+ Variable:G1 numeric scalar
+ Variable:L numeric scalar
  NumericConstant:0
- Variable:L scalar
- Variable:L scalar
+ Variable:L numeric scalar
+ Variable:L numeric scalar
  AssignmentOperator:=
  NumericConstant:0
- Variable:L scalar
+ Variable:L numeric scalar
  NumericConstant:0
- Variable:L scalar
+ Variable:L numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=

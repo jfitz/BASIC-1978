@@ -1,12 +1,12 @@
 10 PRINT TAB(32);"ANIMAL"
  NumericConstant:32
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"ANIMAL"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -26,191 +26,191 @@
  CarriageControl:NL
 70 DIM A$(200)
  NumericConstant:200
- Declaration:A$ unknown
+ Declaration:A$ scalar
 80 FOR I=0 TO 3
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:3"]
 90 READ A$(I)
- Variable:I scalar
- Variable:A$ scalar
+ Variable:I numeric scalar
+ Variable:A$ string scalar
 100 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 110 N=VAL(A$(0))
- Variable:N scalar
+ Variable:N numeric scalar
  NumericConstant:0
- Variable:A$ scalar
- FunctionVal scalar
+ Variable:A$ string scalar
+ FunctionVal:VAL numeric scalar
  AssignmentOperator:=
 120 REM          MAIN CONTROL SECTION
  Remark:         MAIN CONTROL SECTION
 130 INPUT "ARE YOU THINKING OF AN ANIMAL";A$
- Variable:A$ scalar
+ Variable:A$ string scalar
 140 IF A$="LIST" THEN 600
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"LIST"
  BinaryOperatorEqual:= numeric
 150 IF LEFT$(A$,1)<>"Y" THEN 120
- Variable:A$ scalar
+ Variable:A$ string scalar
  NumericConstant:1
- FunctionLeft scalar
+ FunctionLeft:LEFT$ string scalar
  TextConstant:"Y"
  BinaryOperatorNotEqual:<> numeric
 160 K=1
- Variable:K scalar
+ Variable:K numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 170 GOSUB 390
  LineNumber:390
 180 IF LEN(A$(K))=0 THEN 999
- Variable:K scalar
- Variable:A$ scalar
- FunctionLen scalar
+ Variable:K numeric scalar
+ Variable:A$ string scalar
+ FunctionLen:LEN numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 190 IF LEFT$(A$(K),2)="\Q" THEN 170
- Variable:K scalar
- Variable:A$ scalar
+ Variable:K numeric scalar
+ Variable:A$ string scalar
  NumericConstant:2
- FunctionLeft scalar
+ FunctionLeft:LEFT$ string scalar
  TextConstant:"\Q"
  BinaryOperatorEqual:= numeric
 200 PRINT "IS IT A ";RIGHT$(A$(K),LEN(A$(K))-2);
  TextConstant:"IS IT A "
  CarriageControl:;
- Variable:K scalar
- Variable:A$ scalar
- Variable:K scalar
- Variable:A$ scalar
- FunctionLen scalar
+ Variable:K numeric scalar
+ Variable:A$ string scalar
+ Variable:K numeric scalar
+ Variable:A$ string scalar
+ FunctionLen:LEN numeric scalar
  NumericConstant:2
  BinaryOperatorMinus:- numeric
- FunctionRight scalar
+ FunctionRight:RIGHT$ string scalar
  CarriageControl:;
 210 INPUT A$
- Variable:A$ scalar
+ Variable:A$ string scalar
 220 A$=LEFT$(A$,1)
- Variable:A$ scalar
- Variable:A$ scalar
+ Variable:A$ string scalar
+ Variable:A$ string scalar
  NumericConstant:1
- FunctionLeft scalar
+ FunctionLeft:LEFT$ string scalar
  AssignmentOperator:=
 230 IF LEFT$(A$,1)="Y" THEN PRINT "WHY NOT TRY ANOTHER ANIMAL?": GOTO 120
- Variable:A$ scalar
+ Variable:A$ string scalar
  NumericConstant:1
- FunctionLeft scalar
+ FunctionLeft:LEFT$ string scalar
  TextConstant:"Y"
  BinaryOperatorEqual:= numeric
  TextConstant:"WHY NOT TRY ANOTHER ANIMAL?"
  CarriageControl:NL
  LineNumber:120
 240 INPUT "THE ANIMAL YOU WERE THINKING OF WAS A ";V$
- Variable:V$ scalar
+ Variable:V$ string scalar
 250 PRINT "PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
  TextConstant:"PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
  CarriageControl:NL
 260 PRINT V$;" FROM A ";RIGHT$(A$(K),LEN(A$(K))-2)
- Variable:V$ scalar
+ Variable:V$ string scalar
  CarriageControl:;
  TextConstant:" FROM A "
  CarriageControl:;
- Variable:K scalar
- Variable:A$ scalar
- Variable:K scalar
- Variable:A$ scalar
- FunctionLen scalar
+ Variable:K numeric scalar
+ Variable:A$ string scalar
+ Variable:K numeric scalar
+ Variable:A$ string scalar
+ FunctionLen:LEN numeric scalar
  NumericConstant:2
  BinaryOperatorMinus:- numeric
- FunctionRight scalar
+ FunctionRight:RIGHT$ string scalar
  CarriageControl:NL
 270 INPUT X$
- Variable:X$ scalar
+ Variable:X$ string scalar
 280 PRINT "FOR A ";V$;" THE ANSWER WOULD BE ";
  TextConstant:"FOR A "
  CarriageControl:;
- Variable:V$ scalar
+ Variable:V$ string scalar
  CarriageControl:;
  TextConstant:" THE ANSWER WOULD BE "
  CarriageControl:;
 290 INPUT A$
- Variable:A$ scalar
+ Variable:A$ string scalar
 300 A$=LEFT$(A$,1): IF A$<>"Y" AND A$<>"N" THEN 280
- Variable:A$ scalar
- Variable:A$ scalar
+ Variable:A$ string scalar
+ Variable:A$ string scalar
  NumericConstant:1
- FunctionLeft scalar
+ FunctionLeft:LEFT$ string scalar
  AssignmentOperator:=
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"Y"
  BinaryOperatorNotEqual:<> numeric
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"N"
  BinaryOperatorNotEqual:<> numeric
  BinaryOperatorAnd:AND numeric
 310 IF A$="Y" THEN B$="N"
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"Y"
  BinaryOperatorEqual:= numeric
- Variable:B$ scalar
+ Variable:B$ string scalar
  TextConstant:"N"
  AssignmentOperator:=
 320 IF A$="N" THEN B$="Y"
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"N"
  BinaryOperatorEqual:= numeric
- Variable:B$ scalar
+ Variable:B$ string scalar
  TextConstant:"Y"
  AssignmentOperator:=
 330 Z1=VAL(A$(0))
- Variable:Z1 scalar
+ Variable:Z1 numeric scalar
  NumericConstant:0
- Variable:A$ scalar
- FunctionVal scalar
+ Variable:A$ string scalar
+ FunctionVal:VAL numeric scalar
  AssignmentOperator:=
 340 A$(0)=STR$(Z1+2)
  NumericConstant:0
- Variable:A$ scalar
- Variable:Z1 scalar
+ Variable:A$ string scalar
+ Variable:Z1 numeric scalar
  NumericConstant:2
  BinaryOperatorPlus:+ numeric
- FunctionStr scalar
+ FunctionStr:STR$ string scalar
  AssignmentOperator:=
 350 A$(Z1)=A$(K)
- Variable:Z1 scalar
- Variable:A$ scalar
- Variable:K scalar
- Variable:A$ scalar
+ Variable:Z1 numeric scalar
+ Variable:A$ string scalar
+ Variable:K numeric scalar
+ Variable:A$ string scalar
  AssignmentOperator:=
 360 A$(Z1+1)="\A"+V$
- Variable:Z1 scalar
+ Variable:Z1 numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"\A"
- Variable:V$ scalar
+ Variable:V$ string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
 370 A$(K)="\Q"+X$+"\"+A$+STR$(Z1+1)+"\"+B$+STR$(Z1)+"\"
- Variable:K scalar
- Variable:A$ scalar
+ Variable:K numeric scalar
+ Variable:A$ string scalar
  TextConstant:"\Q"
- Variable:X$ scalar
+ Variable:X$ string scalar
  BinaryOperatorPlus:+ string
  TextConstant:"\"
  BinaryOperatorPlus:+ string
- Variable:A$ scalar
+ Variable:A$ string scalar
  BinaryOperatorPlus:+ string
- Variable:Z1 scalar
+ Variable:Z1 numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionStr scalar
+ FunctionStr:STR$ string scalar
  BinaryOperatorPlus:+ string
  TextConstant:"\"
  BinaryOperatorPlus:+ string
- Variable:B$ scalar
+ Variable:B$ string scalar
  BinaryOperatorPlus:+ string
- Variable:Z1 scalar
- FunctionStr scalar
+ Variable:Z1 numeric scalar
+ FunctionStr:STR$ string scalar
  BinaryOperatorPlus:+ string
  TextConstant:"\"
  BinaryOperatorPlus:+ string
@@ -220,92 +220,92 @@
 390 REM     SUBROUTINE TO PRINT QUESTIONS
  Remark:    SUBROUTINE TO PRINT QUESTIONS
 400 Q$=A$(K)
- Variable:Q$ scalar
- Variable:K scalar
- Variable:A$ scalar
+ Variable:Q$ string scalar
+ Variable:K numeric scalar
+ Variable:A$ string scalar
  AssignmentOperator:=
 410 FOR Z=3 TO LEN(Q$)
- control: Variable:Z scalar
+ control: Variable:Z numeric scalar
  start:   ["NumericConstant:3"]
- end:     ["Variable:Q$ scalar", "FunctionLen scalar"]
+ end:     ["Variable:Q$ string scalar", "FunctionLen:LEN numeric scalar"]
 415 IF MID$(Q$,Z,1)<>"\" THEN PRINT MID$(Q$,Z,1);: NEXT Z
- Variable:Q$ scalar
- Variable:Z scalar
+ Variable:Q$ string scalar
+ Variable:Z numeric scalar
  NumericConstant:1
- FunctionMid scalar
+ FunctionMid:MID$ string scalar
  TextConstant:"\"
  BinaryOperatorNotEqual:<> numeric
- Variable:Q$ scalar
- Variable:Z scalar
+ Variable:Q$ string scalar
+ Variable:Z numeric scalar
  NumericConstant:1
- FunctionMid scalar
+ FunctionMid:MID$ string scalar
  CarriageControl:;
- Variable:Z scalar
+ Variable:Z numeric scalar
 420 INPUT C$
- Variable:C$ scalar
+ Variable:C$ string scalar
 430 C$=LEFT$(C$,1)
- Variable:C$ scalar
- Variable:C$ scalar
+ Variable:C$ string scalar
+ Variable:C$ string scalar
  NumericConstant:1
- FunctionLeft scalar
+ FunctionLeft:LEFT$ string scalar
  AssignmentOperator:=
 440 IF C$<>"Y" AND C$<>"N" THEN 410
- Variable:C$ scalar
+ Variable:C$ string scalar
  TextConstant:"Y"
  BinaryOperatorNotEqual:<> numeric
- Variable:C$ scalar
+ Variable:C$ string scalar
  TextConstant:"N"
  BinaryOperatorNotEqual:<> numeric
  BinaryOperatorAnd:AND numeric
 450 T$="\"+C$
- Variable:T$ scalar
+ Variable:T$ string scalar
  TextConstant:"\"
- Variable:C$ scalar
+ Variable:C$ string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
 455 FOR X=3 TO LEN(Q$)-1
- control: Variable:X scalar
+ control: Variable:X numeric scalar
  start:   ["NumericConstant:3"]
- end:     ["Variable:Q$ scalar", "FunctionLen scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:Q$ string scalar", "FunctionLen:LEN numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
 460 IF MID$(Q$,X,2)=T$ THEN 480
- Variable:Q$ scalar
- Variable:X scalar
+ Variable:Q$ string scalar
+ Variable:X numeric scalar
  NumericConstant:2
- FunctionMid scalar
- Variable:T$ scalar
+ FunctionMid:MID$ string scalar
+ Variable:T$ string scalar
  BinaryOperatorEqual:= numeric
 470 NEXT X
- Variable:X scalar
+ Variable:X numeric scalar
 475 STOP
  
 480 FOR Y=X+1 TO LEN(Q$)
- control: Variable:Y scalar
- start:   ["Variable:X scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
- end:     ["Variable:Q$ scalar", "FunctionLen scalar"]
+ control: Variable:Y numeric scalar
+ start:   ["Variable:X numeric scalar", "NumericConstant:1", "BinaryOperatorPlus:+ numeric"]
+ end:     ["Variable:Q$ string scalar", "FunctionLen:LEN numeric scalar"]
 490 IF MID$(Q$,Y,1)="\" THEN 510
- Variable:Q$ scalar
- Variable:Y scalar
+ Variable:Q$ string scalar
+ Variable:Y numeric scalar
  NumericConstant:1
- FunctionMid scalar
+ FunctionMid:MID$ string scalar
  TextConstant:"\"
  BinaryOperatorEqual:= numeric
 500 NEXT Y
- Variable:Y scalar
+ Variable:Y numeric scalar
 505 STOP
  
 510 K=VAL(MID$(Q$,X+2,Y-X-2))
- Variable:K scalar
- Variable:Q$ scalar
- Variable:X scalar
+ Variable:K numeric scalar
+ Variable:Q$ string scalar
+ Variable:X numeric scalar
  NumericConstant:2
  BinaryOperatorPlus:+ numeric
- Variable:Y scalar
- Variable:X scalar
+ Variable:Y numeric scalar
+ Variable:X numeric scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:2
  BinaryOperatorMinus:- numeric
- FunctionMid scalar
- FunctionVal scalar
+ FunctionMid:MID$ string scalar
+ FunctionVal:VAL numeric scalar
  AssignmentOperator:=
 520 RETURN
  
@@ -319,60 +319,60 @@
  TextConstant:"ANIMALS I ALREADY KNOW ARE:"
  CarriageControl:NL
 605 X=0
- Variable:X scalar
+ Variable:X numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 610 FOR I=1 TO 200
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:200"]
 620 IF LEFT$(A$(I),2)<>"\A" THEN 650
- Variable:I scalar
- Variable:A$ scalar
+ Variable:I numeric scalar
+ Variable:A$ string scalar
  NumericConstant:2
- FunctionLeft scalar
+ FunctionLeft:LEFT$ string scalar
  TextConstant:"\A"
  BinaryOperatorNotEqual:<> numeric
 624 PRINT TAB(15*X);
  NumericConstant:15
- Variable:X scalar
+ Variable:X numeric scalar
  BinaryOperatorMultiply:* numeric
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
 630 FOR Z=3 TO LEN(A$(I))
- control: Variable:Z scalar
+ control: Variable:Z numeric scalar
  start:   ["NumericConstant:3"]
- end:     ["Variable:I scalar", "Variable:A$ scalar", "FunctionLen scalar"]
+ end:     ["Variable:I numeric scalar", "Variable:A$ string scalar", "FunctionLen:LEN numeric scalar"]
 640 IF MID$(A$(I),Z,1)<>"\" THEN PRINT MID$(A$(I),Z,1);: NEXT Z
- Variable:I scalar
- Variable:A$ scalar
- Variable:Z scalar
+ Variable:I numeric scalar
+ Variable:A$ string scalar
+ Variable:Z numeric scalar
  NumericConstant:1
- FunctionMid scalar
+ FunctionMid:MID$ string scalar
  TextConstant:"\"
  BinaryOperatorNotEqual:<> numeric
- Variable:I scalar
- Variable:A$ scalar
- Variable:Z scalar
+ Variable:I numeric scalar
+ Variable:A$ string scalar
+ Variable:Z numeric scalar
  NumericConstant:1
- FunctionMid scalar
+ FunctionMid:MID$ string scalar
  CarriageControl:;
- Variable:Z scalar
+ Variable:Z numeric scalar
 645 X=X+1: IF X=4 THEN X=0: PRINT
- Variable:X scalar
- Variable:X scalar
+ Variable:X numeric scalar
+ Variable:X numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
- Variable:X scalar
+ Variable:X numeric scalar
  NumericConstant:4
  BinaryOperatorEqual:= numeric
- Variable:X scalar
+ Variable:X numeric scalar
  NumericConstant:0
  AssignmentOperator:=
  CarriageControl:NL
 650 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 660 PRINT
  CarriageControl:NL
 670 PRINT

@@ -5,11 +5,11 @@
 120 OPTION FIELD_SEP "SEMI"
  TextConstant:"SEMI"
 130 L$="[]"       ' LIVE CELL
- Variable:L$ scalar
+ Variable:L$ string scalar
  TextConstant:"[]"
  AssignmentOperator:=
 140 D$="  "       ' DEAD CELL
- Variable:D$ scalar
+ Variable:D$ string scalar
  TextConstant:"  "
  AssignmentOperator:=
 200 REM *** SET UP BOARD
@@ -19,40 +19,40 @@
 220 DIM B$(10,10)
  NumericConstant:10
  NumericConstant:10
- Declaration:B$ unknown
+ Declaration:B$ scalar
 221 FOR I=1 TO 10\FOR J=1 TO 10\B$(I,J)=D$\NEXT J\NEXT I
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
- Variable:I scalar
- Variable:J scalar
- Variable:B$ scalar
- Variable:D$ scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:B$ string scalar
+ Variable:D$ string scalar
  AssignmentOperator:=
- Variable:J scalar
- Variable:I scalar
+ Variable:J numeric scalar
+ Variable:I numeric scalar
 230 REM *** INITIAL PATTERN
  Remark:*** INITIAL PATTERN
 240 B$(4,4)=L$
  NumericConstant:4
  NumericConstant:4
- Variable:B$ scalar
- Variable:L$ scalar
+ Variable:B$ string scalar
+ Variable:L$ string scalar
  AssignmentOperator:=
 241 B$(4,5)=L$
  NumericConstant:4
  NumericConstant:5
- Variable:B$ scalar
- Variable:L$ scalar
+ Variable:B$ string scalar
+ Variable:L$ string scalar
  AssignmentOperator:=
 242 B$(4,6)=L$
  NumericConstant:4
  NumericConstant:6
- Variable:B$ scalar
- Variable:L$ scalar
+ Variable:B$ string scalar
+ Variable:L$ string scalar
  AssignmentOperator:=
 300 REM *** DISPLAY BOARD
  Remark:*** DISPLAY BOARD
@@ -60,7 +60,7 @@
  TextConstant:"********************"
  CarriageControl:NL
 320 MAT PRINT B$
- Variable:B$ matrix
+ Variable:B$ string matrix
  CarriageControl:NL
 330 PRINT "********************"
  TextConstant:"********************"
@@ -68,144 +68,144 @@
 340 PRINT
  CarriageControl:NL
 350 INPUT "CONTINUE", A$
- Variable:A$ scalar
+ Variable:A$ string scalar
 360 IF A$ <> "Y" THEN STOP
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"Y"
  BinaryOperatorNotEqual:<> numeric
  
 400 REM *** CALCULATE NEIGHBORS
  Remark:*** CALCULATE NEIGHBORS
 410 MAT N=ZER(10,10)
- Variable:N matrix
+ Variable:N numeric matrix
  NumericConstant:10
  NumericConstant:10
- FunctionZer2 scalar
+ FunctionZer2:ZER numeric scalar
  AssignmentOperator:=
 415 OPTION BASE 0
  NumericConstant:0
 420 DIM B$(11,11)
  NumericConstant:11
  NumericConstant:11
- Declaration:B$ unknown
+ Declaration:B$ scalar
 430 FOR I=1 TO 10
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 440 FOR J=1 TO 10
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 442 C = 0
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 450 FOR I0=-1 TO 1
- control: Variable:I0 scalar
+ control: Variable:I0 numeric scalar
  start:   ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
  end:     ["NumericConstant:1"]
 460 FOR J0=-1 TO 1
- control: Variable:J0 scalar
+ control: Variable:J0 numeric scalar
  start:   ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
  end:     ["NumericConstant:1"]
 470 IF I0 = 0 AND J0 = 0 THEN 500
- Variable:I0 scalar
+ Variable:I0 numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
- Variable:J0 scalar
+ Variable:J0 numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
  BinaryOperatorAnd:AND numeric
 480 IF B$(I+I0,J+J0) <> L$ THEN 500
- Variable:I scalar
- Variable:I0 scalar
+ Variable:I numeric scalar
+ Variable:I0 numeric scalar
  BinaryOperatorPlus:+ numeric
- Variable:J scalar
- Variable:J0 scalar
+ Variable:J numeric scalar
+ Variable:J0 numeric scalar
  BinaryOperatorPlus:+ numeric
- Variable:B$ scalar
- Variable:L$ scalar
+ Variable:B$ string scalar
+ Variable:L$ string scalar
  BinaryOperatorNotEqual:<> numeric
 490 C = C + 1
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 500 NEXT J0
- Variable:J0 scalar
+ Variable:J0 numeric scalar
 510 NEXT I0
- Variable:I0 scalar
+ Variable:I0 numeric scalar
 512 N(I,J)=C
- Variable:I scalar
- Variable:J scalar
- Variable:N scalar
- Variable:C scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:N numeric scalar
+ Variable:C numeric scalar
  AssignmentOperator:=
 520 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 530 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 540 DIM B$(10,10)
  NumericConstant:10
  NumericConstant:10
- Declaration:B$ unknown
+ Declaration:B$ scalar
 550 OPTION BASE 1
  NumericConstant:1
 600 REM *** CALCULATE NEW BOARD
  Remark:*** CALCULATE NEW BOARD
 610 FOR I=1 TO 10
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 620 FOR J=1 TO 10
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:10"]
 630 IF N(I,J)<2 THEN 660
- Variable:I scalar
- Variable:J scalar
- Variable:N scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:N numeric scalar
  NumericConstant:2
  BinaryOperatorLess:< numeric
 640 IF N(I,J)=2 THEN 720
- Variable:I scalar
- Variable:J scalar
- Variable:N scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:N numeric scalar
  NumericConstant:2
  BinaryOperatorEqual:= numeric
 650 IF N(I,J)=3 THEN 690
- Variable:I scalar
- Variable:J scalar
- Variable:N scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:N numeric scalar
  NumericConstant:3
  BinaryOperatorEqual:= numeric
 660 REM * CELL DIES
  Remark:* CELL DIES
 670 B$(I,J)=D$
- Variable:I scalar
- Variable:J scalar
- Variable:B$ scalar
- Variable:D$ scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:B$ string scalar
+ Variable:D$ string scalar
  AssignmentOperator:=
 680 GOTO 730
  LineNumber:730
 690 REM * CELL IS BORN
  Remark:* CELL IS BORN
 700 B$(I,J)=L$
- Variable:I scalar
- Variable:J scalar
- Variable:B$ scalar
- Variable:L$ scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:B$ string scalar
+ Variable:L$ string scalar
  AssignmentOperator:=
 710 GOTO 730
  LineNumber:730
 720 REM * CELL REMAINS UNCHANGED
  Remark:* CELL REMAINS UNCHANGED
 730 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 740 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 800 REM *** NEXT ITERATION
  Remark:*** NEXT ITERATION
 810 GOTO 300

@@ -1564,6 +1564,14 @@ class DeclarationExpressionSet < AbstractExpressionSet
 
     check_all_lengths
     check_resolve_types
+
+    @expressions.each do |expression|
+      expression.set_content_type
+    end
+
+    @expressions.each do |expression|
+      expression.set_shape
+    end
   end
 
   private

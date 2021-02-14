@@ -1,33 +1,33 @@
 10 REM TEST PROGRAM FOR PACK$() FUNCTION
  Remark:TEST PROGRAM FOR PACK$() FUNCTION
 20 READ N%
- Variable:N% scalar
+ Variable:N% integer scalar
 30 DIM A%(N%)
- Variable:N% scalar
- Declaration:A% unknown
+ Variable:N% integer scalar
+ Declaration:A% scalar
 40 A%(0%) = N%
  IntegerConstant:0
- Variable:A% scalar
- Variable:N% scalar
+ Variable:A% integer scalar
+ Variable:N% integer scalar
  AssignmentOperator:=
 50 FOR I% = 1% TO N%
- control: Variable:I% scalar
+ control: Variable:I% integer scalar
  start:   ["IntegerConstant:1"]
- end:     ["Variable:N% scalar"]
+ end:     ["Variable:N% integer scalar"]
 60 READ A%(I%)
- Variable:I% scalar
- Variable:A% scalar
+ Variable:I% integer scalar
+ Variable:A% integer scalar
 70 NEXT I%
- Variable:I% scalar
+ Variable:I% integer scalar
 80 A$ = PACK$(A%)
- Variable:A$ scalar
- Variable:A% array
- FunctionPack scalar
+ Variable:A$ string scalar
+ Variable:A% integer array
+ FunctionPack:PACK$ string scalar
  AssignmentOperator:=
 90 PRINT "A$ IS '"; A$; "'"
  TextConstant:"A$ IS '"
  CarriageControl:;
- Variable:A$ scalar
+ Variable:A$ string scalar
  CarriageControl:;
  TextConstant:"'"
  CarriageControl:NL

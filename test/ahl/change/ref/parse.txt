@@ -1,12 +1,12 @@
 2 PRINT TAB(33);"CHANGE"
  NumericConstant:33
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CHANGE"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -26,20 +26,20 @@
 10 PRINT "COST OF ITEM";:INPUT A:PRINT "AMOUNT OF PAYMENT";:INPUT P
  TextConstant:"COST OF ITEM"
  CarriageControl:;
- Variable:A scalar
+ Variable:A numeric scalar
  TextConstant:"AMOUNT OF PAYMENT"
  CarriageControl:;
- Variable:P scalar
+ Variable:P numeric scalar
 20 C=P-A:M=C:IF C<>0 THEN 90
- Variable:C scalar
- Variable:P scalar
- Variable:A scalar
+ Variable:C numeric scalar
+ Variable:P numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
- Variable:M scalar
- Variable:C scalar
+ Variable:M numeric scalar
+ Variable:C numeric scalar
  AssignmentOperator:=
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<> numeric
 25 PRINT "CORRECT AMOUNT, THANK YOU."
@@ -48,14 +48,14 @@
 30 GOTO 400
  LineNumber:400
 90 IF C>0 THEN 120
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  BinaryOperatorGreater:> numeric
 95 PRINT "SORRY, YOU HAVE SHORT-CHANGED ME $";A-P
  TextConstant:"SORRY, YOU HAVE SHORT-CHANGED ME $"
  CarriageControl:;
- Variable:A scalar
- Variable:P scalar
+ Variable:A numeric scalar
+ Variable:P numeric scalar
  BinaryOperatorMinus:- numeric
  CarriageControl:NL
 100 GOTO 10
@@ -63,231 +63,231 @@
 120 PRINT "YOUR CHANGE, $";C
  TextConstant:"YOUR CHANGE, $"
  CarriageControl:;
- Variable:C scalar
+ Variable:C numeric scalar
  CarriageControl:NL
 130 D=INT(C/10)
- Variable:D scalar
- Variable:C scalar
+ Variable:D numeric scalar
+ Variable:C numeric scalar
  NumericConstant:10
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 140 IF D=0 THEN 155
- Variable:D scalar
+ Variable:D numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 150 PRINT D;"TEN DOLLAR BILL(S)"
- Variable:D scalar
+ Variable:D numeric scalar
  CarriageControl:;
  TextConstant:"TEN DOLLAR BILL(S)"
  CarriageControl:NL
 155 C=M-(D*10)
- Variable:C scalar
- Variable:M scalar
- Variable:D scalar
+ Variable:C numeric scalar
+ Variable:M numeric scalar
+ Variable:D numeric scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 160 E=INT(C/5)
- Variable:E scalar
- Variable:C scalar
+ Variable:E numeric scalar
+ Variable:C numeric scalar
  NumericConstant:5
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 170 IF E=0 THEN 185
- Variable:E scalar
+ Variable:E numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 180 PRINT E;"FIVE DOLLARS BILL(S)"
- Variable:E scalar
+ Variable:E numeric scalar
  CarriageControl:;
  TextConstant:"FIVE DOLLARS BILL(S)"
  CarriageControl:NL
 185 C=M-(D*10+E*5)
- Variable:C scalar
- Variable:M scalar
- Variable:D scalar
+ Variable:C numeric scalar
+ Variable:M numeric scalar
+ Variable:D numeric scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
- Variable:E scalar
+ Variable:E numeric scalar
  NumericConstant:5
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 190 F=INT(C)
- Variable:F scalar
- Variable:C scalar
- FunctionInt scalar
+ Variable:F numeric scalar
+ Variable:C numeric scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 200 IF F=0 THEN 215
- Variable:F scalar
+ Variable:F numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 210 PRINT F;"ONE DOLLAR BILL(S)"
- Variable:F scalar
+ Variable:F numeric scalar
  CarriageControl:;
  TextConstant:"ONE DOLLAR BILL(S)"
  CarriageControl:NL
 215 C=M-(D*10+E*5+F)
- Variable:C scalar
- Variable:M scalar
- Variable:D scalar
+ Variable:C numeric scalar
+ Variable:M numeric scalar
+ Variable:D numeric scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
- Variable:E scalar
+ Variable:E numeric scalar
  NumericConstant:5
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorPlus:+ numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 220 C=C*100
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:100
  BinaryOperatorMultiply:* numeric
  AssignmentOperator:=
 225 N=C
- Variable:N scalar
- Variable:C scalar
+ Variable:N numeric scalar
+ Variable:C numeric scalar
  AssignmentOperator:=
 230 G=INT(C/50)
- Variable:G scalar
- Variable:C scalar
+ Variable:G numeric scalar
+ Variable:C numeric scalar
  NumericConstant:50
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 240 IF G=0 THEN 255
- Variable:G scalar
+ Variable:G numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 250 PRINT G;"ONE HALF DOLLAR(S)"
- Variable:G scalar
+ Variable:G numeric scalar
  CarriageControl:;
  TextConstant:"ONE HALF DOLLAR(S)"
  CarriageControl:NL
 255 C=N-(G*50)
- Variable:C scalar
- Variable:N scalar
- Variable:G scalar
+ Variable:C numeric scalar
+ Variable:N numeric scalar
+ Variable:G numeric scalar
  NumericConstant:50
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 260 H=INT(C/25)
- Variable:H scalar
- Variable:C scalar
+ Variable:H numeric scalar
+ Variable:C numeric scalar
  NumericConstant:25
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 270 IF H=0 THEN 285
- Variable:H scalar
+ Variable:H numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 280 PRINT H;"QUARTER(S)"
- Variable:H scalar
+ Variable:H numeric scalar
  CarriageControl:;
  TextConstant:"QUARTER(S)"
  CarriageControl:NL
 285 C=N-(G*50+H*25)
- Variable:C scalar
- Variable:N scalar
- Variable:G scalar
+ Variable:C numeric scalar
+ Variable:N numeric scalar
+ Variable:G numeric scalar
  NumericConstant:50
  BinaryOperatorMultiply:* numeric
- Variable:H scalar
+ Variable:H numeric scalar
  NumericConstant:25
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 290 I=INT(C/10)
- Variable:I scalar
- Variable:C scalar
+ Variable:I numeric scalar
+ Variable:C numeric scalar
  NumericConstant:10
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 300 IF I=0 THEN 315
- Variable:I scalar
+ Variable:I numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 310 PRINT I;"DIME(S)"
- Variable:I scalar
+ Variable:I numeric scalar
  CarriageControl:;
  TextConstant:"DIME(S)"
  CarriageControl:NL
 315 C=N-(G*50+H*25+I*10)
- Variable:C scalar
- Variable:N scalar
- Variable:G scalar
+ Variable:C numeric scalar
+ Variable:N numeric scalar
+ Variable:G numeric scalar
  NumericConstant:50
  BinaryOperatorMultiply:* numeric
- Variable:H scalar
+ Variable:H numeric scalar
  NumericConstant:25
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- Variable:I scalar
+ Variable:I numeric scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 320 J=INT(C/5)
- Variable:J scalar
- Variable:C scalar
+ Variable:J numeric scalar
+ Variable:C numeric scalar
  NumericConstant:5
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 330 IF J=0 THEN 345
- Variable:J scalar
+ Variable:J numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 340 PRINT J;"NICKEL(S)"
- Variable:J scalar
+ Variable:J numeric scalar
  CarriageControl:;
  TextConstant:"NICKEL(S)"
  CarriageControl:NL
 345 C=N-(G*50+H*25+I*10+J*5)
- Variable:C scalar
- Variable:N scalar
- Variable:G scalar
+ Variable:C numeric scalar
+ Variable:N numeric scalar
+ Variable:G numeric scalar
  NumericConstant:50
  BinaryOperatorMultiply:* numeric
- Variable:H scalar
+ Variable:H numeric scalar
  NumericConstant:25
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- Variable:I scalar
+ Variable:I numeric scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- Variable:J scalar
+ Variable:J numeric scalar
  NumericConstant:5
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 350 K=INT(C+.5)
- Variable:K scalar
- Variable:C scalar
+ Variable:K numeric scalar
+ Variable:C numeric scalar
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 360 IF K=0 THEN 380
- Variable:K scalar
+ Variable:K numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 370 PRINT K;"PENNY(S)"
- Variable:K scalar
+ Variable:K numeric scalar
  CarriageControl:;
  TextConstant:"PENNY(S)"
  CarriageControl:NL

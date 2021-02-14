@@ -1,12 +1,12 @@
 2 PRINT TAB(33);"WORD"
  NumericConstant:33
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"WORD"
  CarriageControl:NL
 3 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -16,15 +16,15 @@
  CarriageControl:NL
 5 DIM S(7),A(7),L(7),D(7),P(7)
  NumericConstant:7
- Declaration:S unknown
+ Declaration:S scalar
  NumericConstant:7
- Declaration:A unknown
+ Declaration:A scalar
  NumericConstant:7
- Declaration:L unknown
+ Declaration:L scalar
  NumericConstant:7
- Declaration:D unknown
+ Declaration:D scalar
  NumericConstant:7
- Declaration:P unknown
+ Declaration:P scalar
 10 PRINT "I AM THINKING OF A WORD -- YOU GUESS IT.  I WILL GIVE YOU"
  TextConstant:"I AM THINKING OF A WORD -- YOU GUESS IT.  I WILL GIVE YOU"
  CarriageControl:NL
@@ -43,236 +43,236 @@
 35 RESTORE
  
 40 READ N
- Variable:N scalar
+ Variable:N numeric scalar
 50 C=INT(RND(1)*N+1)
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:1
- FunctionRnd scalar
- Variable:N scalar
+ FunctionRnd:RND numeric scalar
+ Variable:N numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 60 FOR I=1 TO C
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:C scalar"]
+ end:     ["Variable:C numeric scalar"]
 70 READ S$
- Variable:S$ scalar
+ Variable:S$ string scalar
 80 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 90 G=0
- Variable:G scalar
+ Variable:G numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 95 S(0)=LEN(S$)
  NumericConstant:0
- Variable:S scalar
- Variable:S$ scalar
- FunctionLen scalar
+ Variable:S numeric scalar
+ Variable:S$ string scalar
+ FunctionLen:LEN numeric scalar
  AssignmentOperator:=
 100 FOR I=1 TO LEN(S$): S(I)=ASC(MID$(S$,I,1)): NEXT I
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:S$ scalar", "FunctionLen scalar"]
- Variable:I scalar
- Variable:S scalar
- Variable:S$ scalar
- Variable:I scalar
+ end:     ["Variable:S$ string scalar", "FunctionLen:LEN numeric scalar"]
+ Variable:I numeric scalar
+ Variable:S numeric scalar
+ Variable:S$ string scalar
+ Variable:I numeric scalar
  NumericConstant:1
- FunctionMid scalar
- FunctionAsc scalar
+ FunctionMid:MID$ string scalar
+ FunctionAsc:ASC numeric scalar
  AssignmentOperator:=
- Variable:I scalar
+ Variable:I numeric scalar
 110 FOR I=1 TO 5
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 120 A(I)=45
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  NumericConstant:45
  AssignmentOperator:=
 130 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 140 FOR J=1 TO 5
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 144 P(J)=0
- Variable:J scalar
- Variable:P scalar
+ Variable:J numeric scalar
+ Variable:P numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 146 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 150 PRINT "GUESS A FIVE LETTER WORD";
  TextConstant:"GUESS A FIVE LETTER WORD"
  CarriageControl:;
 160 INPUT L$
- Variable:L$ scalar
+ Variable:L$ string scalar
 170 G=G+1
- Variable:G scalar
- Variable:G scalar
+ Variable:G numeric scalar
+ Variable:G numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 172 IF S$=L$ THEN 500
- Variable:S$ scalar
- Variable:L$ scalar
+ Variable:S$ string scalar
+ Variable:L$ string scalar
  BinaryOperatorEqual:= numeric
 173 FOR I=1 TO 7: P(I)=0: NEXT I
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
- Variable:I scalar
- Variable:P scalar
+ Variable:I numeric scalar
+ Variable:P numeric scalar
  NumericConstant:0
  AssignmentOperator:=
- Variable:I scalar
+ Variable:I numeric scalar
 175 L(0)=LEN(L$)
  NumericConstant:0
- Variable:L scalar
- Variable:L$ scalar
- FunctionLen scalar
+ Variable:L numeric scalar
+ Variable:L$ string scalar
+ FunctionLen:LEN numeric scalar
  AssignmentOperator:=
 180 FOR I=1 TO LEN(L$): L(I)=ASC(MID$(L$,I,1)): NEXT I
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:L$ scalar", "FunctionLen scalar"]
- Variable:I scalar
- Variable:L scalar
- Variable:L$ scalar
- Variable:I scalar
+ end:     ["Variable:L$ string scalar", "FunctionLen:LEN numeric scalar"]
+ Variable:I numeric scalar
+ Variable:L numeric scalar
+ Variable:L$ string scalar
+ Variable:I numeric scalar
  NumericConstant:1
- FunctionMid scalar
- FunctionAsc scalar
+ FunctionMid:MID$ string scalar
+ FunctionAsc:ASC numeric scalar
  AssignmentOperator:=
- Variable:I scalar
+ Variable:I numeric scalar
 190 IF L(1)=63 THEN 300
  NumericConstant:1
- Variable:L scalar
+ Variable:L numeric scalar
  NumericConstant:63
  BinaryOperatorEqual:= numeric
 200 IF L(0)<>5 THEN 400
  NumericConstant:0
- Variable:L scalar
+ Variable:L numeric scalar
  NumericConstant:5
  BinaryOperatorNotEqual:<> numeric
 205 M=0: Q=1
- Variable:M scalar
+ Variable:M numeric scalar
  NumericConstant:0
  AssignmentOperator:=
- Variable:Q scalar
+ Variable:Q numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 210 FOR I=1 TO 5
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 220 FOR J=1 TO 5
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 230 IF S(I)<>L(J) THEN 260
- Variable:I scalar
- Variable:S scalar
- Variable:J scalar
- Variable:L scalar
+ Variable:I numeric scalar
+ Variable:S numeric scalar
+ Variable:J numeric scalar
+ Variable:L numeric scalar
  BinaryOperatorNotEqual:<> numeric
 231 P(Q)=L(J)
- Variable:Q scalar
- Variable:P scalar
- Variable:J scalar
- Variable:L scalar
+ Variable:Q numeric scalar
+ Variable:P numeric scalar
+ Variable:J numeric scalar
+ Variable:L numeric scalar
  AssignmentOperator:=
 232 Q=Q+1
- Variable:Q scalar
- Variable:Q scalar
+ Variable:Q numeric scalar
+ Variable:Q numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 233 IF I<>J THEN 250
- Variable:I scalar
- Variable:J scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
  BinaryOperatorNotEqual:<> numeric
 240 A(J)=L(J)
- Variable:J scalar
- Variable:A scalar
- Variable:J scalar
- Variable:L scalar
+ Variable:J numeric scalar
+ Variable:A numeric scalar
+ Variable:J numeric scalar
+ Variable:L numeric scalar
  AssignmentOperator:=
 250 M=M+1
- Variable:M scalar
- Variable:M scalar
+ Variable:M numeric scalar
+ Variable:M numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 260 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 265 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 270 A(0)=5
  NumericConstant:0
- Variable:A scalar
+ Variable:A numeric scalar
  NumericConstant:5
  AssignmentOperator:=
 272 P(0)=M
  NumericConstant:0
- Variable:P scalar
- Variable:M scalar
+ Variable:P numeric scalar
+ Variable:M numeric scalar
  AssignmentOperator:=
 275 A$="": FOR I=1 TO A(0): A$=A$+CHR$(A(I)): NEXT I
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:""
  AssignmentOperator:=
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:0", "Variable:A scalar"]
- Variable:A$ scalar
- Variable:A$ scalar
- Variable:I scalar
- Variable:A scalar
- FunctionChr scalar
+ end:     ["NumericConstant:0", "Variable:A numeric scalar"]
+ Variable:A$ string scalar
+ Variable:A$ string scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
+ FunctionChr:CHR$ string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
- Variable:I scalar
+ Variable:I numeric scalar
 277 P$="": FOR I=1 TO P(0): P$=P$+CHR$(P(I)): NEXT I
- Variable:P$ scalar
+ Variable:P$ string scalar
  TextConstant:""
  AssignmentOperator:=
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:0", "Variable:P scalar"]
- Variable:P$ scalar
- Variable:P$ scalar
- Variable:I scalar
- Variable:P scalar
- FunctionChr scalar
+ end:     ["NumericConstant:0", "Variable:P numeric scalar"]
+ Variable:P$ string scalar
+ Variable:P$ string scalar
+ Variable:I numeric scalar
+ Variable:P numeric scalar
+ FunctionChr:CHR$ string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
- Variable:I scalar
+ Variable:I numeric scalar
 280 PRINT "THERE WERE";M;"MATCHES AND THE COMMON LETTERS WERE...";P$
  TextConstant:"THERE WERE"
  CarriageControl:;
- Variable:M scalar
+ Variable:M numeric scalar
  CarriageControl:;
  TextConstant:"MATCHES AND THE COMMON LETTERS WERE..."
  CarriageControl:;
- Variable:P$ scalar
+ Variable:P$ string scalar
  CarriageControl:NL
 285 PRINT "FROM THE EXACT LETTER MATCHES, YOU KNOW................";A$
  TextConstant:"FROM THE EXACT LETTER MATCHES, YOU KNOW................"
  CarriageControl:;
- Variable:A$ scalar
+ Variable:A$ string scalar
  CarriageControl:NL
 286 IF A$=S$ THEN 500
- Variable:A$ scalar
- Variable:S$ scalar
+ Variable:A$ string scalar
+ Variable:S$ string scalar
  BinaryOperatorEqual:= numeric
 287 IF M>1 THEN 289
- Variable:M scalar
+ Variable:M numeric scalar
  NumericConstant:1
  BinaryOperatorGreater:> numeric
 288 PRINT: PRINT "IF YOU GIVE UP, TYPE '?' FOR YOUR NEXT GUESS."
@@ -284,24 +284,24 @@
 290 GOTO 150
  LineNumber:150
 300 S$="": FOR I=1 TO 7: S$=S$+CHR$(S(I)): NEXT I
- Variable:S$ scalar
+ Variable:S$ string scalar
  TextConstant:""
  AssignmentOperator:=
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
- Variable:S$ scalar
- Variable:S$ scalar
- Variable:I scalar
- Variable:S scalar
- FunctionChr scalar
+ Variable:S$ string scalar
+ Variable:S$ string scalar
+ Variable:I numeric scalar
+ Variable:S numeric scalar
+ FunctionChr:CHR$ string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
- Variable:I scalar
+ Variable:I numeric scalar
 310 PRINT "THE SECRET WORD IS ";S$: PRINT
  TextConstant:"THE SECRET WORD IS "
  CarriageControl:;
- Variable:S$ scalar
+ Variable:S$ string scalar
  CarriageControl:NL
  CarriageControl:NL
 320 GOTO 30
@@ -311,8 +311,8 @@
  CarriageControl:NL
 410 PRINT: G=G-1: GOTO 150
  CarriageControl:NL
- Variable:G scalar
- Variable:G scalar
+ Variable:G numeric scalar
+ Variable:G numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
@@ -320,15 +320,15 @@
 500 PRINT "YOU HAVE GUESSED THE WORD.  IT TOOK";G;"GUESSES!": PRINT
  TextConstant:"YOU HAVE GUESSED THE WORD.  IT TOOK"
  CarriageControl:;
- Variable:G scalar
+ Variable:G numeric scalar
  CarriageControl:;
  TextConstant:"GUESSES!"
  CarriageControl:NL
  CarriageControl:NL
 510 INPUT "WANT TO PLAY AGAIN";Q$
- Variable:Q$ scalar
+ Variable:Q$ string scalar
 520 IF Q$="YES" THEN 30
- Variable:Q$ scalar
+ Variable:Q$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 530 DATA 12,"DINKY","SMOKE","WATER","GRASS","TRAIN","MIGHT","FIRST"

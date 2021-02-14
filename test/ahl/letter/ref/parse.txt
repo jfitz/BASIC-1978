@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"LETTER"
  NumericConstant:33
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"LETTER"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -28,17 +28,17 @@
  TextConstant:"AS TO HOW CLOSE YOU'RE GETTING TO MY LETTER."
  CarriageControl:NL
 310 L=65+INT(RND(1)*26)
- Variable:L scalar
+ Variable:L numeric scalar
  NumericConstant:65
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  NumericConstant:26
  BinaryOperatorMultiply:* numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 320 G=0
- Variable:G scalar
+ Variable:G numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 340 PRINT: PRINT "O.K., I HAVE A LETTER.  START GUESSING."
@@ -50,25 +50,25 @@
  TextConstant:"WHAT IS YOUR GUESS"
  CarriageControl:;
 420 G=G+1
- Variable:G scalar
- Variable:G scalar
+ Variable:G numeric scalar
+ Variable:G numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 430 INPUT A$: A=ASC(A$): PRINT
- Variable:A$ scalar
- Variable:A scalar
- Variable:A$ scalar
- FunctionAsc scalar
+ Variable:A$ string scalar
+ Variable:A numeric scalar
+ Variable:A$ string scalar
+ FunctionAsc:ASC numeric scalar
  AssignmentOperator:=
  CarriageControl:NL
 440 IF A=L THEN 500
- Variable:A scalar
- Variable:L scalar
+ Variable:A numeric scalar
+ Variable:L numeric scalar
  BinaryOperatorEqual:= numeric
 450 IF A>L THEN 480
- Variable:A scalar
- Variable:L scalar
+ Variable:A numeric scalar
+ Variable:L numeric scalar
  BinaryOperatorGreater:> numeric
 460 PRINT "TOO LOW.  TRY A HIGHER LETTER.": GOTO 410
  TextConstant:"TOO LOW.  TRY A HIGHER LETTER."
@@ -82,12 +82,12 @@
  CarriageControl:NL
  TextConstant:"YOU GOT IT IN"
  CarriageControl:;
- Variable:G scalar
+ Variable:G numeric scalar
  CarriageControl:;
  TextConstant:"GUESSES!!"
  CarriageControl:NL
 504 IF G<=5 THEN 508
- Variable:G scalar
+ Variable:G numeric scalar
  NumericConstant:5
  BinaryOperatorLessEqual:<= numeric
 506 PRINT "BUT IT SHOULDN'T TAKE MORE THAN 5 GUESSES!": GOTO 515
@@ -98,13 +98,13 @@
  TextConstant:"GOOD JOB !!!!!"
  CarriageControl:NL
 510 FOR N=1 TO 15: PRINT CHR$(7);: NEXT N
- control: Variable:N scalar
+ control: Variable:N numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:15"]
  NumericConstant:7
- FunctionChr scalar
+ FunctionChr:CHR$ string scalar
  CarriageControl:;
- Variable:N scalar
+ Variable:N numeric scalar
 515 PRINT
  CarriageControl:NL
 520 PRINT "LET'S PLAN AGAIN....."

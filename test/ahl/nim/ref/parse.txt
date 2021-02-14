@@ -1,12 +1,12 @@
 100 PRINT TAB(33);"NIM"
  NumericConstant:33
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"NIM"
  CarriageControl:NL
 110 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -16,12 +16,12 @@
  CarriageControl:NL
 210 DIM A(100),B(100,10),D(2)
  NumericConstant:100
- Declaration:A unknown
+ Declaration:A scalar
  NumericConstant:100
  NumericConstant:10
- Declaration:B unknown
+ Declaration:B scalar
  NumericConstant:2
- Declaration:D unknown
+ Declaration:D scalar
 220 PRINT "THIS IS THE GAME OF NIM."
  TextConstant:"THIS IS THE GAME OF NIM."
  CarriageControl:NL
@@ -29,21 +29,21 @@
  TextConstant:"DO YOU WANT INSTRUCTIONS"
  CarriageControl:;
 240 INPUT Z$
- Variable:Z$ scalar
+ Variable:Z$ string scalar
 250 IF Z$="NO" THEN 440
- Variable:Z$ scalar
+ Variable:Z$ string scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 260 IF Z$="no" THEN 440
- Variable:Z$ scalar
+ Variable:Z$ string scalar
  TextConstant:"no"
  BinaryOperatorEqual:= numeric
 270 IF Z$="YES" THEN 310
- Variable:Z$ scalar
+ Variable:Z$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 280 IF Z$="yes" THEN 310
- Variable:Z$ scalar
+ Variable:Z$ string scalar
  TextConstant:"yes"
  BinaryOperatorEqual:= numeric
 290 PRINT "PLEASE ANSWER YES OR NO"
@@ -96,84 +96,84 @@
  TextConstant:"ENTER WIN OPTION - 1 TO TAKE LAST, 2 TO AVOID LAST"
  CarriageControl:;
 460 INPUT W
- Variable:W scalar
+ Variable:W numeric scalar
 470 IF W=1 THEN 490
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 480 IF W<>2 THEN 450
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:2
  BinaryOperatorNotEqual:<> numeric
 490 PRINT "ENTER NUMBER OF PILES";
  TextConstant:"ENTER NUMBER OF PILES"
  CarriageControl:;
 500 INPUT N
- Variable:N scalar
+ Variable:N numeric scalar
 510 IF N>100 THEN 490
- Variable:N scalar
+ Variable:N numeric scalar
  NumericConstant:100
  BinaryOperatorGreater:> numeric
 520 IF N<1 THEN 490
- Variable:N scalar
+ Variable:N numeric scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 530 IF N<>INT(N) THEN 490
- Variable:N scalar
- Variable:N scalar
- FunctionInt scalar
+ Variable:N numeric scalar
+ Variable:N numeric scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 540 PRINT "ENTER PILE SIZES"
  TextConstant:"ENTER PILE SIZES"
  CarriageControl:NL
 550 FOR I=1 TO N
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 560 PRINT I;
- Variable:I scalar
+ Variable:I numeric scalar
  CarriageControl:;
 570 INPUT A(I)
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
 580 IF A(I)>2000 THEN 560
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  NumericConstant:2000
  BinaryOperatorGreater:> numeric
 590 IF A(I)<1 THEN 560
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 600 IF A(I)<>INT(A(I)) THEN 560
- Variable:I scalar
- Variable:A scalar
- Variable:I scalar
- Variable:A scalar
- FunctionInt scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 610 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 620 PRINT "DO YOU WANT TO MOVE FIRST";
  TextConstant:"DO YOU WANT TO MOVE FIRST"
  CarriageControl:;
 630 INPUT Q9$
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
 640 IF Q9$="YES" THEN 1450
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 650 IF Q9$="yes" THEN 1450
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
  TextConstant:"yes"
  BinaryOperatorEqual:= numeric
 660 IF Q9$="NO" THEN 700
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 670 IF Q9$="no" THEN 700
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
  TextConstant:"no"
  BinaryOperatorEqual:= numeric
 680 PRINT "PLEASE ANSWER YES OR NO."
@@ -182,47 +182,47 @@
 690 GOTO 630
  LineNumber:630
 700 IF W=1 THEN 940
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 710 LET C=0
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 720 FOR I=1 TO N
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 730 IF A(I)=0 THEN 770
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 740 LET C=C+1
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 750 IF C=3 THEN 840
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:3
  BinaryOperatorEqual:= numeric
 760 LET D(C)=I
- Variable:C scalar
- Variable:D scalar
- Variable:I scalar
+ Variable:C numeric scalar
+ Variable:D numeric scalar
+ Variable:I numeric scalar
  AssignmentOperator:=
 770 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 780 IF C=2 THEN 920
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:2
  BinaryOperatorEqual:= numeric
 790 IF A(D(1))>1 THEN 820
  NumericConstant:1
- Variable:D scalar
- Variable:A scalar
+ Variable:D numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
  BinaryOperatorGreater:> numeric
 800 PRINT "MACHINE LOSES"
@@ -236,385 +236,385 @@
 830 GOTO 1640
  LineNumber:1640
 840 LET C=0
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 850 FOR I=1 TO N
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 860 IF A(I)>1 THEN 940
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
  BinaryOperatorGreater:> numeric
 870 IF A(I)=0 THEN 890
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 880 LET C=C+1
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 890 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 900 IF C/2<>INT(C/2) THEN 800
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 910 GOTO 940
  LineNumber:940
 920 IF A(D(1))=1 THEN 820
  NumericConstant:1
- Variable:D scalar
- Variable:A scalar
+ Variable:D numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 930 IF A(D(2))=1 THEN 820
  NumericConstant:2
- Variable:D scalar
- Variable:A scalar
+ Variable:D numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 940 FOR I=1 TO N
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 950 LET E=A(I)
- Variable:E scalar
- Variable:I scalar
- Variable:A scalar
+ Variable:E numeric scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  AssignmentOperator:=
 960 FOR J=0 TO 10
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:10"]
 970 LET F=E/2
- Variable:F scalar
- Variable:E scalar
+ Variable:F numeric scalar
+ Variable:E numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 980 LET B(I,J)=2*(F-INT(F))
- Variable:I scalar
- Variable:J scalar
- Variable:B scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:B numeric scalar
  NumericConstant:2
- Variable:F scalar
- Variable:F scalar
- FunctionInt scalar
+ Variable:F numeric scalar
+ Variable:F numeric scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorMinus:- numeric
  BinaryOperatorMultiply:* numeric
  AssignmentOperator:=
 990 LET E=INT(F)
- Variable:E scalar
- Variable:F scalar
- FunctionInt scalar
+ Variable:E numeric scalar
+ Variable:F numeric scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 1000 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 1010 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 1020 FOR J=10 TO 0 STEP -1
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:10"]
  end:     ["NumericConstant:0"]
  step:    ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
 1030 LET C=0
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1040 LET H=0
- Variable:H scalar
+ Variable:H numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1050 FOR I=1 TO N
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 1060 IF B(I,J)=0 THEN 1110
- Variable:I scalar
- Variable:J scalar
- Variable:B scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:B numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1070 LET C=C+1
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1080 IF A(I)<=H THEN 1110
- Variable:I scalar
- Variable:A scalar
- Variable:H scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
+ Variable:H numeric scalar
  BinaryOperatorLessEqual:<= numeric
 1090 LET H=A(I)
- Variable:H scalar
- Variable:I scalar
- Variable:A scalar
+ Variable:H numeric scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  AssignmentOperator:=
 1100 LET G=I
- Variable:G scalar
- Variable:I scalar
+ Variable:G numeric scalar
+ Variable:I numeric scalar
  AssignmentOperator:=
 1110 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 1120 IF C/2<>INT(C/2) THEN 1190
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 1130 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 1140 LET E=INT(N*RND(1)+1)
- Variable:E scalar
- Variable:N scalar
+ Variable:E numeric scalar
+ Variable:N numeric scalar
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 1150 IF A(E)=0 THEN 1140
- Variable:E scalar
- Variable:A scalar
+ Variable:E numeric scalar
+ Variable:A numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1160 LET F=INT(A(E)*RND(1)+1)
- Variable:F scalar
- Variable:E scalar
- Variable:A scalar
+ Variable:F numeric scalar
+ Variable:E numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
 1170 LET A(E)=A(E)-F
- Variable:E scalar
- Variable:A scalar
- Variable:E scalar
- Variable:A scalar
- Variable:F scalar
+ Variable:E numeric scalar
+ Variable:A numeric scalar
+ Variable:E numeric scalar
+ Variable:A numeric scalar
+ Variable:F numeric scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1180 GOTO 1380
  LineNumber:1380
 1190 LET A(G)=0
- Variable:G scalar
- Variable:A scalar
+ Variable:G numeric scalar
+ Variable:A numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1200 FOR J=0 TO 10
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:10"]
 1210 LET B(G,J)=0
- Variable:G scalar
- Variable:J scalar
- Variable:B scalar
+ Variable:G numeric scalar
+ Variable:J numeric scalar
+ Variable:B numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1220 LET C=0
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1230 FOR I=1 TO N
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 1240 IF B(I,J)=0 THEN 1260
- Variable:I scalar
- Variable:J scalar
- Variable:B scalar
+ Variable:I numeric scalar
+ Variable:J numeric scalar
+ Variable:B numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1250 LET C=C+1
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1260 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 1270 LET A(G)=A(G)+2*(C/2-INT(C/2))*2^J
- Variable:G scalar
- Variable:A scalar
- Variable:G scalar
- Variable:A scalar
+ Variable:G numeric scalar
+ Variable:A numeric scalar
+ Variable:G numeric scalar
+ Variable:A numeric scalar
  NumericConstant:2
- Variable:C scalar
- NumericConstant:2
- BinaryOperatorDivide:/ numeric
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ Variable:C numeric scalar
+ NumericConstant:2
+ BinaryOperatorDivide:/ numeric
+ FunctionInt:INT numeric scalar
  BinaryOperatorMinus:- numeric
  BinaryOperatorMultiply:* numeric
  NumericConstant:2
- Variable:J scalar
+ Variable:J numeric scalar
  BinaryOperatorPower:^ numeric
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1280 NEXT J
- Variable:J scalar
+ Variable:J numeric scalar
 1290 IF W=1 THEN 1380
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 1300 LET C=0
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1310 FOR I=1 TO N
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 1320 IF A(I)>1 THEN 1380
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
  BinaryOperatorGreater:> numeric
 1330 IF A(I)=0 THEN 1350
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1340 LET C=C+1
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1350 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 1360 IF C/2<>INT(C/2) THEN 1380
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 1370 LET A(G)=1-A(G)
- Variable:G scalar
- Variable:A scalar
+ Variable:G numeric scalar
+ Variable:A numeric scalar
  NumericConstant:1
- Variable:G scalar
- Variable:A scalar
+ Variable:G numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1380 PRINT "PILE  SIZE"
  TextConstant:"PILE  SIZE"
  CarriageControl:NL
 1390 FOR I=1 TO N
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 1400 PRINT I;A(I)
- Variable:I scalar
+ Variable:I numeric scalar
  CarriageControl:;
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  CarriageControl:NL
 1410 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 1420 IF W=2 THEN 1450
- Variable:W scalar
+ Variable:W numeric scalar
  NumericConstant:2
  BinaryOperatorEqual:= numeric
 1430 GOSUB 1570
  LineNumber:1570
 1440 IF Z=1 THEN 820
- Variable:Z scalar
+ Variable:Z numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 1450 PRINT "YOUR MOVE - PILE, NUMBER TO BE REMOVED";
  TextConstant:"YOUR MOVE - PILE, NUMBER TO BE REMOVED"
  CarriageControl:;
 1460 INPUT X,Y
- Variable:X scalar
- Variable:Y scalar
+ Variable:X numeric scalar
+ Variable:Y numeric scalar
 1470 IF X>N THEN 1450
- Variable:X scalar
- Variable:N scalar
+ Variable:X numeric scalar
+ Variable:N numeric scalar
  BinaryOperatorGreater:> numeric
 1480 IF X<1 THEN 1450
- Variable:X scalar
+ Variable:X numeric scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 1490 IF X<>INT(X) THEN 1450
- Variable:X scalar
- Variable:X scalar
- FunctionInt scalar
+ Variable:X numeric scalar
+ Variable:X numeric scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 1500 IF Y>A(X) THEN 1450
- Variable:Y scalar
- Variable:X scalar
- Variable:A scalar
+ Variable:Y numeric scalar
+ Variable:X numeric scalar
+ Variable:A numeric scalar
  BinaryOperatorGreater:> numeric
 1510 IF Y<1 THEN 1450
- Variable:Y scalar
+ Variable:Y numeric scalar
  NumericConstant:1
  BinaryOperatorLess:< numeric
 1520 IF Y<>INT(Y) THEN 1450
- Variable:Y scalar
- Variable:Y scalar
- FunctionInt scalar
+ Variable:Y numeric scalar
+ Variable:Y numeric scalar
+ FunctionInt:INT numeric scalar
  BinaryOperatorNotEqual:<> numeric
 1530 LET A(X)=A(X)-Y
- Variable:X scalar
- Variable:A scalar
- Variable:X scalar
- Variable:A scalar
- Variable:Y scalar
+ Variable:X numeric scalar
+ Variable:A numeric scalar
+ Variable:X numeric scalar
+ Variable:A numeric scalar
+ Variable:Y numeric scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1540 GOSUB 1570
  LineNumber:1570
 1550 IF Z=1 THEN 800
- Variable:Z scalar
+ Variable:Z numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 1560 GOTO 700
  LineNumber:700
 1570 LET Z=0
- Variable:Z scalar
+ Variable:Z numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1580 FOR I=1 TO N
- control: Variable:I scalar
+ control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 1590 IF A(I)=0 THEN 1610
- Variable:I scalar
- Variable:A scalar
+ Variable:I numeric scalar
+ Variable:A numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:= numeric
 1600 RETURN
  
 1610 NEXT I
- Variable:I scalar
+ Variable:I numeric scalar
 1620 LET Z=1
- Variable:Z scalar
+ Variable:Z numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 1630 RETURN
@@ -623,21 +623,21 @@
  TextConstant:"do you want to play another game"
  CarriageControl:;
 1650 INPUT Q9$
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
 1660 IF Q9$="YES" THEN 1720
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 1670 IF Q9$="yes" THEN 1720
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
  TextConstant:"yes"
  BinaryOperatorEqual:= numeric
 1680 IF Q9$="NO" THEN 1730
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
  TextConstant:"NO"
  BinaryOperatorEqual:= numeric
 1690 IF Q9$="no" THEN 1730
- Variable:Q9$ scalar
+ Variable:Q9$ string scalar
  TextConstant:"no"
  BinaryOperatorEqual:= numeric
 1700 PRINT "PLEASE.  YES OR NO."

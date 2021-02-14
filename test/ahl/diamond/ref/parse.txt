@@ -1,12 +1,12 @@
 1 PRINT TAB(33);"DIAMOND"
  NumericConstant:33
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"DIAMOND"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -18,122 +18,122 @@
  TextConstant:"FOR A PRETTY DIAMOND PATTERN,"
  CarriageControl:NL
 5 INPUT "TYPE IN AN ODD NUMBER BETWEEN 5 AND 21";R:PRINT
- Variable:R scalar
+ Variable:R numeric scalar
  CarriageControl:NL
 6 Q=INT(60/R):A$="CC"
- Variable:Q scalar
+ Variable:Q numeric scalar
  NumericConstant:60
- Variable:R scalar
+ Variable:R numeric scalar
  BinaryOperatorDivide:/ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  AssignmentOperator:=
- Variable:A$ scalar
+ Variable:A$ string scalar
  TextConstant:"CC"
  AssignmentOperator:=
 8 FOR L=1 TO Q
- control: Variable:L scalar
+ control: Variable:L numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:Q scalar"]
+ end:     ["Variable:Q numeric scalar"]
 10 X=1:Y=R:Z=2
- Variable:X scalar
+ Variable:X numeric scalar
  NumericConstant:1
  AssignmentOperator:=
- Variable:Y scalar
- Variable:R scalar
+ Variable:Y numeric scalar
+ Variable:R numeric scalar
  AssignmentOperator:=
- Variable:Z scalar
+ Variable:Z numeric scalar
  NumericConstant:2
  AssignmentOperator:=
 20 FOR N=X TO Y STEP Z
- control: Variable:N scalar
- start:   ["Variable:X scalar"]
- end:     ["Variable:Y scalar"]
- step:    ["Variable:Z scalar"]
+ control: Variable:N numeric scalar
+ start:   ["Variable:X numeric scalar"]
+ end:     ["Variable:Y numeric scalar"]
+ step:    ["Variable:Z numeric scalar"]
 25 PRINT TAB((R-N)/2);
- Variable:R scalar
- Variable:N scalar
+ Variable:R numeric scalar
+ Variable:N numeric scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
 28 FOR M=1 TO Q
- control: Variable:M scalar
+ control: Variable:M numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:Q scalar"]
+ end:     ["Variable:Q numeric scalar"]
 29 C=1
- Variable:C scalar
+ Variable:C numeric scalar
  NumericConstant:1
  AssignmentOperator:=
 30 FOR A=1 TO N
- control: Variable:A scalar
+ control: Variable:A numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:N scalar"]
+ end:     ["Variable:N numeric scalar"]
 32 IF C>LEN(A$) THEN PRINT "!";:GOTO 50
- Variable:C scalar
- Variable:A$ scalar
- FunctionLen scalar
+ Variable:C numeric scalar
+ Variable:A$ string scalar
+ FunctionLen:LEN numeric scalar
  BinaryOperatorGreater:> numeric
  TextConstant:"!"
  CarriageControl:;
  LineNumber:50
 34 PRINT MID$(A$,C,1);
- Variable:A$ scalar
- Variable:C scalar
+ Variable:A$ string scalar
+ Variable:C numeric scalar
  NumericConstant:1
- FunctionMid scalar
+ FunctionMid:MID$ string scalar
  CarriageControl:;
 36 C=C+1
- Variable:C scalar
- Variable:C scalar
+ Variable:C numeric scalar
+ Variable:C numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 50 NEXT A
- Variable:A scalar
+ Variable:A numeric scalar
 53 IF M=Q THEN 60
- Variable:M scalar
- Variable:Q scalar
+ Variable:M numeric scalar
+ Variable:Q numeric scalar
  BinaryOperatorEqual:= numeric
 55 PRINT TAB(R*M+(R-N)/2);
- Variable:R scalar
- Variable:M scalar
+ Variable:R numeric scalar
+ Variable:M numeric scalar
  BinaryOperatorMultiply:* numeric
- Variable:R scalar
- Variable:N scalar
+ Variable:R numeric scalar
+ Variable:N numeric scalar
  BinaryOperatorMinus:- numeric
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  BinaryOperatorPlus:+ numeric
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
 56 NEXT M
- Variable:M scalar
+ Variable:M numeric scalar
 60 PRINT
  CarriageControl:NL
 70 NEXT N
- Variable:N scalar
+ Variable:N numeric scalar
 83 IF X<>1 THEN 95
- Variable:X scalar
+ Variable:X numeric scalar
  NumericConstant:1
  BinaryOperatorNotEqual:<> numeric
 85 X=R-2:Y=1:Z=-2
- Variable:X scalar
- Variable:R scalar
+ Variable:X numeric scalar
+ Variable:R numeric scalar
  NumericConstant:2
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
- Variable:Y scalar
+ Variable:Y numeric scalar
  NumericConstant:1
  AssignmentOperator:=
- Variable:Z scalar
+ Variable:Z numeric scalar
  NumericConstant:2
  UnaryOperatorMinus:- numeric
  AssignmentOperator:=
 90 GOTO 20
  LineNumber:20
 95 NEXT L
- Variable:L scalar
+ Variable:L numeric scalar
 99 END
  
 

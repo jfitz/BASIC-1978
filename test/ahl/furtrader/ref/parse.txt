@@ -1,15 +1,15 @@
 1 DIM F(4) 
  NumericConstant:4
- Declaration:F unknown
+ Declaration:F scalar
 2 PRINT TAB(31);"FUR TRADER"
  NumericConstant:31
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"FUR TRADER"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab scalar
+ FunctionTab:TAB string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -20,7 +20,7 @@
 15 GOSUB 1091 
  LineNumber:1091
 16 LET I=600
- Variable:I scalar
+ Variable:I numeric scalar
  NumericConstant:600
  AssignmentOperator:=
 17 PRINT "DO YOU WISH TO TRADE FURS?"
@@ -29,11 +29,11 @@
 18 GOSUB 1402 
  LineNumber:1402
 19 IF B$="YES" THEN 100
- Variable:B$ scalar
+ Variable:B$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 20 IF B$="YES " THEN 100
- Variable:B$ scalar
+ Variable:B$ string scalar
  TextConstant:"YES "
  BinaryOperatorEqual:= numeric
 21 STOP
@@ -43,7 +43,7 @@
 101 PRINT "YOU HAVE $";I " SAVINGS."
  TextConstant:"YOU HAVE $"
  CarriageControl:;
- Variable:I scalar
+ Variable:I numeric scalar
  CarriageControl:
  TextConstant:" SAVINGS."
  CarriageControl:NL
@@ -51,10 +51,10 @@
  TextConstant:"AND 190 FURS TO BEGIN THE EXPEDITION."
  CarriageControl:NL
 261 LET E1=INT((.15*RND(1)+.95)*10^2+.5)/10^2
- Variable:E1 scalar
+ Variable:E1 numeric scalar
  NumericConstant:.15
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:.95
  BinaryOperatorPlus:+ numeric
@@ -64,17 +64,17 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 262 LET B1=INT((.25*RND(1)+1.00)*10^2+.5)/10^2
- Variable:B1 scalar
+ Variable:B1 numeric scalar
  NumericConstant:.25
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1.00
  BinaryOperatorPlus:+ numeric
@@ -84,7 +84,7 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
@@ -103,50 +103,50 @@
 315 RESTORE
  
 330 FOR J=1 TO 4 
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 332 READ B$
- Variable:B$ scalar
+ Variable:B$ string scalar
 333 PRINT  
  CarriageControl:NL
 335 PRINT "HOW MANY ";B$;" PELTS DO YOU HAVE"; 
  TextConstant:"HOW MANY "
  CarriageControl:;
- Variable:B$ scalar
+ Variable:B$ string scalar
  CarriageControl:;
  TextConstant:" PELTS DO YOU HAVE"
  CarriageControl:;
 338 INPUT F(J) 
- Variable:J scalar
- Variable:F scalar
+ Variable:J numeric scalar
+ Variable:F numeric scalar
 340 LET F(0)=F(1)+F(2)+F(3)+F(4) 
  NumericConstant:0
- Variable:F scalar
+ Variable:F numeric scalar
  NumericConstant:1
- Variable:F scalar
+ Variable:F numeric scalar
  NumericConstant:2
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorPlus:+ numeric
  NumericConstant:3
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorPlus:+ numeric
  NumericConstant:4
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 342 IF F(0)=190 THEN 1100
  NumericConstant:0
- Variable:F scalar
+ Variable:F numeric scalar
  NumericConstant:190
  BinaryOperatorEqual:= numeric
 344 IF F(0)>190 THEN 500 
  NumericConstant:0
- Variable:F scalar
+ Variable:F numeric scalar
  NumericConstant:190
  BinaryOperatorGreater:> numeric
 348 NEXT J 
- Variable:J scalar
+ Variable:J numeric scalar
 350 GOTO 1100 
  LineNumber:1100
 500 PRINT
@@ -217,17 +217,17 @@
  TextConstant:"ANSWER 1, 2, OR 3."
  CarriageControl:NL
 1111 INPUT B
- Variable:B scalar
+ Variable:B numeric scalar
 1112 IF B=1 THEN 1120 
- Variable:B scalar
+ Variable:B numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:= numeric
 1113 IF B=2 THEN 1135 
- Variable:B scalar
+ Variable:B numeric scalar
  NumericConstant:2
  BinaryOperatorEqual:= numeric
 1115 IF B=3 THEN 1147 
- Variable:B scalar
+ Variable:B numeric scalar
  NumericConstant:3
  BinaryOperatorEqual:= numeric
 1116 GOTO 1110 
@@ -247,7 +247,7 @@
 1125 GOSUB 1400 
  LineNumber:1400
 1129 IF B$="YES" THEN 1110
- Variable:B$ scalar
+ Variable:B$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 1130 GOTO 1160
@@ -267,7 +267,7 @@
 1141 GOSUB 1400 
  LineNumber:1400
 1144 IF B$="YES" THEN 1110
- Variable:B$ scalar
+ Variable:B$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 1145 GOTO 1198
@@ -287,24 +287,24 @@
 1152 GOSUB 1400 
  LineNumber:1400
 1155 IF B$="YES" THEN 1110
- Variable:B$ scalar
+ Variable:B$ string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 1156 GOTO 1250
  LineNumber:1250
 1160 LET I=I-160
- Variable:I scalar
- Variable:I scalar
+ Variable:I numeric scalar
+ Variable:I numeric scalar
  NumericConstant:160
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1169 PRINT
  CarriageControl:NL
 1174 LET M1=INT((.2*RND(1)+.7)*10^2+.5)/10^2
- Variable:M1 scalar
+ Variable:M1 numeric scalar
  NumericConstant:.2
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:.7
  BinaryOperatorPlus:+ numeric
@@ -314,17 +314,17 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1175 LET E1=INT((.2*RND(1)+.65)*10^2+.5)/10^2
- Variable:E1 scalar
+ Variable:E1 numeric scalar
  NumericConstant:.2
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:.65
  BinaryOperatorPlus:+ numeric
@@ -334,17 +334,17 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1176 LET B1=INT((.2*RND(1)+.75)*10^2+.5)/10^2
- Variable:B1 scalar
+ Variable:B1 numeric scalar
  NumericConstant:.2
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:.75
  BinaryOperatorPlus:+ numeric
@@ -354,17 +354,17 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1177 LET D1=INT((.2*RND(1)+.8)*10^2+.5)/10^2
- Variable:D1 scalar
+ Variable:D1 numeric scalar
  NumericConstant:.2
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:.8
  BinaryOperatorPlus:+ numeric
@@ -374,7 +374,7 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
@@ -389,18 +389,18 @@
 1190 GOTO 1410 
  LineNumber:1410
 1198 LET I=I-140
- Variable:I scalar
- Variable:I scalar
+ Variable:I numeric scalar
+ Variable:I numeric scalar
  NumericConstant:140
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1201 PRINT
  CarriageControl:NL
 1205 LET M1=INT((.3*RND(1)+.85)*10^2+.5)/10^2
- Variable:M1 scalar
+ Variable:M1 numeric scalar
  NumericConstant:.3
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:.85
  BinaryOperatorPlus:+ numeric
@@ -410,17 +410,17 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1206 LET E1=INT((.15*RND(1)+.8)*10^2+.5)/10^2
- Variable:E1 scalar
+ Variable:E1 numeric scalar
  NumericConstant:.15
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:.8
  BinaryOperatorPlus:+ numeric
@@ -430,17 +430,17 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1207 LET B1=INT((.2*RND(1)+.9)*10^2+.5)/10^2
- Variable:B1 scalar
+ Variable:B1 numeric scalar
  NumericConstant:.2
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:.9
  BinaryOperatorPlus:+ numeric
@@ -450,41 +450,41 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1209 LET P=INT(10*RND(1))+1
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:10
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1210 IF P<=2 THEN 1216
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:2
  BinaryOperatorLessEqual:<= numeric
 1212 IF P<=6 THEN 1224
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:6
  BinaryOperatorLessEqual:<= numeric
 1213 IF P<=8 THEN 1226
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:8
  BinaryOperatorLessEqual:<= numeric
 1215 IF P<=10 THEN 1235
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:10
  BinaryOperatorLessEqual:<= numeric
 1216 LET F(2)=0
  NumericConstant:2
- Variable:F scalar
+ Variable:F numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1218 PRINT "YOUR BEAVER WERE TOO HEAVY TO CARRY ACROSS" 
@@ -519,7 +519,7 @@
  LineNumber:1418
 1235 LET F(4)=0 
  NumericConstant:4
- Variable:F scalar
+ Variable:F numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1237 PRINT "YOUR FOX PELTS WERE NOT CURED PROPERLY."
@@ -541,18 +541,18 @@
 1248 RETURN 
  
 1250 LET I=I-105
- Variable:I scalar
- Variable:I scalar
+ Variable:I numeric scalar
+ Variable:I numeric scalar
  NumericConstant:105
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 1254 PRINT
  CarriageControl:NL
 1260 LET M1=INT((.15*RND(1)+1.05)*10^2+.5)/10^2
- Variable:M1 scalar
+ Variable:M1 numeric scalar
  NumericConstant:.15
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1.05
  BinaryOperatorPlus:+ numeric
@@ -562,17 +562,17 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1263 LET D1=INT((.25*RND(1)+1.1)*10^2+.5)/10^2
- Variable:D1 scalar
+ Variable:D1 numeric scalar
  NumericConstant:.25
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1.1
  BinaryOperatorPlus:+ numeric
@@ -582,36 +582,36 @@
  BinaryOperatorMultiply:* numeric
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:10
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1270 LET P=INT(10*RND(1))+1
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:10
  NumericConstant:1
- FunctionRnd scalar
+ FunctionRnd:RND numeric scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt scalar
+ FunctionInt:INT numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1271 IF P<=2 THEN 1281
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:2
  BinaryOperatorLessEqual:<= numeric
 1272 IF P<=6 THEN 1291
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:6
  BinaryOperatorLessEqual:<= numeric
 1273 IF P<=8 THEN 1295
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:8
  BinaryOperatorLessEqual:<= numeric
 1274 IF P<=10 THEN 1306
- Variable:P scalar
+ Variable:P numeric scalar
  NumericConstant:10
  BinaryOperatorLessEqual:<= numeric
 1281 PRINT "YOU WERE ATTACKED BY A PARTY OF IROQUOIS."
@@ -646,14 +646,14 @@
 1304 GOTO 1418 
  LineNumber:1418
 1306 LET B1=B1/2
- Variable:B1 scalar
- Variable:B1 scalar
+ Variable:B1 numeric scalar
+ Variable:B1 numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
 1307 LET M1=M1/2
- Variable:M1 scalar
- Variable:M1 scalar
+ Variable:M1 numeric scalar
+ Variable:M1 numeric scalar
  NumericConstant:2
  BinaryOperatorDivide:/ numeric
  AssignmentOperator:=
@@ -682,7 +682,7 @@
  TextConstant:"ANSWER YES OR NO"
  CarriageControl:,
 1403 INPUT B$
- Variable:B$ scalar
+ Variable:B$ string scalar
 1404 RETURN 
  
 1410 PRINT
@@ -690,57 +690,57 @@
 1412 PRINT "YOUR BEAVER SOLD FOR $";B1*F(2);
  TextConstant:"YOUR BEAVER SOLD FOR $"
  CarriageControl:;
- Variable:B1 scalar
+ Variable:B1 numeric scalar
  NumericConstant:2
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorMultiply:* numeric
  CarriageControl:;
 1414 PRINT "YOUR FOX SOLD FOR $";D1*F(4)
  TextConstant:"YOUR FOX SOLD FOR $"
  CarriageControl:;
- Variable:D1 scalar
+ Variable:D1 numeric scalar
  NumericConstant:4
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorMultiply:* numeric
  CarriageControl:NL
 1416 PRINT "YOUR ERMINE SOLD FOR $";E1*F(3);
  TextConstant:"YOUR ERMINE SOLD FOR $"
  CarriageControl:;
- Variable:E1 scalar
+ Variable:E1 numeric scalar
  NumericConstant:3
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorMultiply:* numeric
  CarriageControl:;
 1417 PRINT "YOUR MINK SOLD FOR $";M1*F(1)
  TextConstant:"YOUR MINK SOLD FOR $"
  CarriageControl:;
- Variable:M1 scalar
+ Variable:M1 numeric scalar
  NumericConstant:1
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorMultiply:* numeric
  CarriageControl:NL
 1418 LET I=M1*F(1)+B1*F(2)+E1*F(3)+D1*F(4)+I
- Variable:I scalar
- Variable:M1 scalar
+ Variable:I numeric scalar
+ Variable:M1 numeric scalar
  NumericConstant:1
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorMultiply:* numeric
- Variable:B1 scalar
+ Variable:B1 numeric scalar
  NumericConstant:2
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- Variable:E1 scalar
+ Variable:E1 numeric scalar
  NumericConstant:3
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- Variable:D1 scalar
+ Variable:D1 numeric scalar
  NumericConstant:4
- Variable:F scalar
+ Variable:F numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
- Variable:I scalar
+ Variable:I numeric scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 1420 PRINT
@@ -748,23 +748,23 @@
 1422 PRINT "YOU NOW HAVE $";I;" INCLUDING YOUR PREVIOUS SAVINGS"
  TextConstant:"YOU NOW HAVE $"
  CarriageControl:;
- Variable:I scalar
+ Variable:I numeric scalar
  CarriageControl:;
  TextConstant:" INCLUDING YOUR PREVIOUS SAVINGS"
  CarriageControl:NL
 1425 GOTO 508
  LineNumber:508
 1430 FOR J=1 TO 4 
- control: Variable:J scalar
+ control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 1432 LET F(J)=0 
- Variable:J scalar
- Variable:F scalar
+ Variable:J numeric scalar
+ Variable:F numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 1434 NEXT J 
- Variable:J scalar
+ Variable:J numeric scalar
 1436 RETURN 
  
 2000 DATA "MINK","BEAVER","ERMINE","FOX"
