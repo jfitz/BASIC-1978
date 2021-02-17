@@ -1,12 +1,12 @@
 2 PRINT TAB(33);"WORD"
  NumericConstant:33
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"WORD"
  CarriageControl:NL
 3 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -47,12 +47,12 @@
 50 C=INT(RND(1)*N+1)
  Variable:C numeric scalar
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  Variable:N numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 60 FOR I=1 TO C
  control: Variable:I numeric scalar
@@ -70,19 +70,19 @@
  NumericConstant:0
  Variable:S numeric scalar
  Variable:S$ string scalar
- FunctionLen:LEN numeric scalar
+ FunctionLen:LEN($) numeric scalar
  AssignmentOperator:=
 100 FOR I=1 TO LEN(S$): S(I)=ASC(MID$(S$,I,1)): NEXT I
  control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:S$ string scalar", "FunctionLen:LEN numeric scalar"]
+ end:     ["Variable:S$ string scalar", "FunctionLen:LEN($) numeric scalar"]
  Variable:I numeric scalar
  Variable:S numeric scalar
  Variable:S$ string scalar
  Variable:I numeric scalar
  NumericConstant:1
- FunctionMid:MID$ string scalar
- FunctionAsc:ASC numeric scalar
+ FunctionMid:MID$($,_,_) string scalar
+ FunctionAsc:ASC($) numeric scalar
  AssignmentOperator:=
  Variable:I numeric scalar
 110 FOR I=1 TO 5
@@ -135,19 +135,19 @@
  NumericConstant:0
  Variable:L numeric scalar
  Variable:L$ string scalar
- FunctionLen:LEN numeric scalar
+ FunctionLen:LEN($) numeric scalar
  AssignmentOperator:=
 180 FOR I=1 TO LEN(L$): L(I)=ASC(MID$(L$,I,1)): NEXT I
  control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:L$ string scalar", "FunctionLen:LEN numeric scalar"]
+ end:     ["Variable:L$ string scalar", "FunctionLen:LEN($) numeric scalar"]
  Variable:I numeric scalar
  Variable:L numeric scalar
  Variable:L$ string scalar
  Variable:I numeric scalar
  NumericConstant:1
- FunctionMid:MID$ string scalar
- FunctionAsc:ASC numeric scalar
+ FunctionMid:MID$($,_,_) string scalar
+ FunctionAsc:ASC($) numeric scalar
  AssignmentOperator:=
  Variable:I numeric scalar
 190 IF L(1)=63 THEN 300
@@ -234,7 +234,7 @@
  Variable:A$ string scalar
  Variable:I numeric scalar
  Variable:A numeric scalar
- FunctionChr:CHR$ string scalar
+ FunctionChr:CHR$(_) string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
  Variable:I numeric scalar
@@ -249,7 +249,7 @@
  Variable:P$ string scalar
  Variable:I numeric scalar
  Variable:P numeric scalar
- FunctionChr:CHR$ string scalar
+ FunctionChr:CHR$(_) string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
  Variable:I numeric scalar
@@ -294,7 +294,7 @@
  Variable:S$ string scalar
  Variable:I numeric scalar
  Variable:S numeric scalar
- FunctionChr:CHR$ string scalar
+ FunctionChr:CHR$(_) string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
  Variable:I numeric scalar

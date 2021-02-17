@@ -27,8 +27,8 @@
  Variable:A numeric scalar
  Variable:A$ string scalar
  NumericConstant:1
- FunctionLeft:LEFT$ string scalar
- FunctionAsc:ASC numeric scalar
+ FunctionLeft:LEFT$($,_) string scalar
+ FunctionAsc:ASC($) numeric scalar
  AssignmentOperator:=
 50 REM
  Remark:
@@ -37,13 +37,13 @@
 70 FOR T=1 TO LEN(A$)
  control: Variable:T numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:A$ string scalar", "FunctionLen:LEN numeric scalar"]
+ end:     ["Variable:A$ string scalar", "FunctionLen:LEN($) numeric scalar"]
 80 P$=MID$(A$,T,1)
  Variable:P$ string scalar
  Variable:A$ string scalar
  Variable:T numeric scalar
  NumericConstant:1
- FunctionMid:MID$ string scalar
+ FunctionMid:MID$($,_,_) string scalar
  AssignmentOperator:=
 90 FOR O=1 TO 50
  control: Variable:O numeric scalar
@@ -149,11 +149,11 @@
  Variable:G1 numeric scalar
  BinaryOperatorMultiply:* numeric
  Variable:X$ string scalar
- FunctionLen:LEN numeric scalar
+ FunctionLen:LEN($) numeric scalar
  BinaryOperatorDivide:/ numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
 450 FOR B=1 TO F(U)
  control: Variable:B numeric scalar
@@ -180,7 +180,7 @@
 510 FOR I1=1 TO LEN(X$)
  control: Variable:I1 numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:X$ string scalar", "FunctionLen:LEN numeric scalar"]
+ end:     ["Variable:X$ string scalar", "FunctionLen:LEN($) numeric scalar"]
 520 PRINT " ";: NEXT I1
  TextConstant:" "
  CarriageControl:;

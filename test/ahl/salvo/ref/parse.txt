@@ -1,12 +1,12 @@
 1000 PRINT TAB(33);"SALVO"
  NumericConstant:33
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"SALVO"
  CarriageControl:NL
 1010 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -135,13 +135,13 @@
  Variable:K numeric scalar
  NumericConstant:4
  BinaryOperatorDivide:/ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  Variable:K numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- FunctionSgn:SGN numeric scalar
+ FunctionSgn:SGN(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  NumericConstant:1
  BinaryOperatorMinus:- numeric
@@ -152,12 +152,12 @@
  Variable:K numeric scalar
  NumericConstant:4
  BinaryOperatorDivide:/ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  Variable:K numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- FunctionSgn:SGN numeric scalar
+ FunctionSgn:SGN(_) numeric scalar
  BinaryOperatorMinus:- numeric
 1290 IF V+V2+V*V2=0 THEN 1260
  Variable:V numeric scalar
@@ -173,7 +173,7 @@
  Variable:Y numeric scalar
  Variable:V numeric scalar
  Variable:K numeric scalar
- UserFunction:FNB numeric scalar
+ UserFunction:FNB(_) numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:10
@@ -182,7 +182,7 @@
  Variable:Y numeric scalar
  Variable:V numeric scalar
  Variable:K numeric scalar
- UserFunction:FNB numeric scalar
+ UserFunction:FNB(_) numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:1
@@ -191,7 +191,7 @@
  Variable:X numeric scalar
  Variable:V2 numeric scalar
  Variable:K numeric scalar
- UserFunction:FNB numeric scalar
+ UserFunction:FNB(_) numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:10
@@ -200,7 +200,7 @@
  Variable:X numeric scalar
  Variable:V2 numeric scalar
  Variable:K numeric scalar
- UserFunction:FNB numeric scalar
+ UserFunction:FNB(_) numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorPlus:+ numeric
  NumericConstant:1
@@ -218,11 +218,11 @@
 1360 FOR Z=0 TO FNB(K)
  control: Variable:Z numeric scalar
  start:   ["NumericConstant:0"]
- end:     ["Variable:K numeric scalar", "UserFunction:FNB numeric scalar"]
+ end:     ["Variable:K numeric scalar", "UserFunction:FNB(_) numeric scalar"]
 1370 F(Z+FNA(K))=X+V2*Z
  Variable:Z numeric scalar
  Variable:K numeric scalar
- UserFunction:FNA numeric scalar
+ UserFunction:FNA(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  Variable:F numeric scalar
  Variable:X numeric scalar
@@ -234,7 +234,7 @@
 1380 G(Z+FNA(K))=Y+V*Z
  Variable:Z numeric scalar
  Variable:K numeric scalar
- UserFunction:FNA numeric scalar
+ UserFunction:FNA(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  Variable:G numeric scalar
  Variable:Y numeric scalar
@@ -248,19 +248,19 @@
 1400 U8=FNA(K)
  Variable:U8 numeric scalar
  Variable:K numeric scalar
- UserFunction:FNA numeric scalar
+ UserFunction:FNA(_) numeric scalar
  AssignmentOperator:=
 1405 IF U8>U8+FNB(K) THEN 1460
  Variable:U8 numeric scalar
  Variable:U8 numeric scalar
  Variable:K numeric scalar
- UserFunction:FNB numeric scalar
+ UserFunction:FNB(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  BinaryOperatorGreater:> numeric
 1410 FOR Z2= U8 TO U8+FNB(K)
  control: Variable:Z2 numeric scalar
  start:   ["Variable:U8 numeric scalar"]
- end:     ["Variable:U8 numeric scalar", "Variable:K numeric scalar", "UserFunction:FNB numeric scalar", "BinaryOperatorPlus:+ numeric"]
+ end:     ["Variable:U8 numeric scalar", "Variable:K numeric scalar", "UserFunction:FNB(_) numeric scalar", "BinaryOperatorPlus:+ numeric"]
 1415 IF U8<2 THEN 1450
  Variable:U8 numeric scalar
  NumericConstant:2
@@ -285,7 +285,7 @@
  NumericConstant:2
  BinaryOperatorPower:^ numeric
  BinaryOperatorPlus:+ numeric
- FunctionSqr:SQR numeric scalar
+ FunctionSqr:SQR(_) numeric scalar
  NumericConstant:3.59
  BinaryOperatorLess:< numeric
 1440 NEXT Z3
@@ -295,7 +295,7 @@
 1460 FOR Z=0 TO FNB(K)
  control: Variable:Z numeric scalar
  start:   ["NumericConstant:0"]
- end:     ["Variable:K numeric scalar", "UserFunction:FNB numeric scalar"]
+ end:     ["Variable:K numeric scalar", "UserFunction:FNB(_) numeric scalar"]
 1470 A(F(Z+U8),G(Z+U8))=.5+SGN(K-1)*(K-1.5)
  Variable:Z numeric scalar
  Variable:U8 numeric scalar
@@ -310,7 +310,7 @@
  Variable:K numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- FunctionSgn:SGN numeric scalar
+ FunctionSgn:SGN(_) numeric scalar
  Variable:K numeric scalar
  NumericConstant:1.5
  BinaryOperatorMinus:- numeric
@@ -550,7 +550,7 @@
  Variable:W numeric scalar
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2080 NEXT W
@@ -644,7 +644,7 @@
 2310 IF X<>INT(X) THEN 2370
  Variable:X numeric scalar
  Variable:X numeric scalar
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorNotEqual:<> numeric
 2320 IF X>10 THEN 2370
  Variable:X numeric scalar
@@ -657,7 +657,7 @@
 2340 IF Y<>INT(Y) THEN 2370
  Variable:Y numeric scalar
  Variable:Y numeric scalar
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorNotEqual:<> numeric
 2350 IF Y>10 THEN 2370
  Variable:Y numeric scalar
@@ -829,7 +829,7 @@
  Variable:W numeric scalar
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 2760 NEXT W
@@ -890,42 +890,42 @@
 2910 X=INT(RND(1)*10+1)
  Variable:X numeric scalar
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 2920 Y=INT(RND(1)*10+1)
  Variable:Y numeric scalar
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  NumericConstant:10
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 2930 V=INT(3*RND(1)-1)
  Variable:V numeric scalar
  NumericConstant:3
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 2940 V2=INT(3*RND(1)-1)
  Variable:V2 numeric scalar
  NumericConstant:3
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  BinaryOperatorMultiply:* numeric
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 2950 RETURN
  
@@ -980,10 +980,10 @@
  Variable:X numeric scalar
  NumericConstant:1
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  NumericConstant:2.5
  BinaryOperatorMultiply:* numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3100 GOTO 3120
@@ -992,10 +992,10 @@
  Variable:X numeric scalar
  NumericConstant:10
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  NumericConstant:2.5
  BinaryOperatorMultiply:* numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 3120 IF Y>10 THEN 3160
@@ -1010,10 +1010,10 @@
  Variable:Y numeric scalar
  NumericConstant:1
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  NumericConstant:2.5
  BinaryOperatorMultiply:* numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  AssignmentOperator:=
 3150 GOTO 3270
@@ -1022,10 +1022,10 @@
  Variable:Y numeric scalar
  NumericConstant:10
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  NumericConstant:2.5
  BinaryOperatorMultiply:* numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=
 3170 GOTO 3270
@@ -1270,17 +1270,17 @@
  Variable:H numeric scalar
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+ numeric
  Variable:Q numeric scalar
  Variable:H numeric scalar
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  NumericConstant:3
  BinaryOperatorDivide:/ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorPlus:+ numeric
  BinaryOperatorNotEqual:<> numeric
 3670 FOR M2=1 TO 12
@@ -1396,12 +1396,12 @@
  LineNumber:4000
 3930 FOR M=SGN(1-R) TO SGN(10-R)
  control: Variable:M numeric scalar
- start:   ["NumericConstant:1", "Variable:R numeric scalar", "BinaryOperatorMinus:- numeric", "FunctionSgn:SGN numeric scalar"]
- end:     ["NumericConstant:10", "Variable:R numeric scalar", "BinaryOperatorMinus:- numeric", "FunctionSgn:SGN numeric scalar"]
+ start:   ["NumericConstant:1", "Variable:R numeric scalar", "BinaryOperatorMinus:- numeric", "FunctionSgn:SGN(_) numeric scalar"]
+ end:     ["NumericConstant:10", "Variable:R numeric scalar", "BinaryOperatorMinus:- numeric", "FunctionSgn:SGN(_) numeric scalar"]
 3940 FOR N=SGN(1-S) TO SGN(10-S)
  control: Variable:N numeric scalar
- start:   ["NumericConstant:1", "Variable:S numeric scalar", "BinaryOperatorMinus:- numeric", "FunctionSgn:SGN numeric scalar"]
- end:     ["NumericConstant:10", "Variable:S numeric scalar", "BinaryOperatorMinus:- numeric", "FunctionSgn:SGN numeric scalar"]
+ start:   ["NumericConstant:1", "Variable:S numeric scalar", "BinaryOperatorMinus:- numeric", "FunctionSgn:SGN(_) numeric scalar"]
+ end:     ["NumericConstant:10", "Variable:S numeric scalar", "BinaryOperatorMinus:- numeric", "FunctionSgn:SGN(_) numeric scalar"]
 3950 IF N+M+N*M=0 THEN 3980
  Variable:N numeric scalar
  Variable:M numeric scalar
@@ -1438,7 +1438,7 @@
  Variable:H numeric scalar
  NumericConstant:.5
  BinaryOperatorPlus:+ numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  BinaryOperatorMultiply:* numeric
  BinaryOperatorMinus:- numeric
  AssignmentOperator:=

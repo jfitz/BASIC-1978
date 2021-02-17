@@ -1,12 +1,12 @@
 2 PRINT TAB(34);"LIFE"
  NumericConstant:34
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"LIFE"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -57,7 +57,7 @@
  Variable:C numeric scalar
  Variable:B$ string scalar
  NumericConstant:1
- FunctionLeft:LEFT$ string scalar
+ FunctionLeft:LEFT$($,_) string scalar
  TextConstant:"."
  BinaryOperatorEqual:= numeric
  Variable:C numeric scalar
@@ -67,10 +67,10 @@
  Variable:B$ string scalar
  Variable:C numeric scalar
  Variable:B$ string scalar
- FunctionLen:LEN numeric scalar
+ FunctionLen:LEN($) numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:- numeric
- FunctionRight:RIGHT$ string scalar
+ FunctionRight:RIGHT$($,_) string scalar
  BinaryOperatorPlus:+ string
  AssignmentOperator:=
 60 C=C+1
@@ -97,13 +97,13 @@
 100 IF LEN(B$(X))>L THEN L=LEN(B$(X))
  Variable:X numeric scalar
  Variable:B$ string scalar
- FunctionLen:LEN numeric scalar
+ FunctionLen:LEN($) numeric scalar
  Variable:L numeric scalar
  BinaryOperatorGreater:> numeric
  Variable:L numeric scalar
  Variable:X numeric scalar
  Variable:B$ string scalar
- FunctionLen:LEN numeric scalar
+ FunctionLen:LEN($) numeric scalar
  AssignmentOperator:=
 110 NEXT X
  Variable:X numeric scalar
@@ -130,13 +130,13 @@
 150 FOR Y=1 TO LEN(B$(X))
  control: Variable:Y numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:X numeric scalar", "Variable:B$ string scalar", "FunctionLen:LEN numeric scalar"]
+ end:     ["Variable:X numeric scalar", "Variable:B$ string scalar", "FunctionLen:LEN($) numeric scalar"]
 160 IF MID$(B$(X),Y,1)<>" " THEN A(X1+X,Y1+Y)=1:P=P+1
  Variable:X numeric scalar
  Variable:B$ string scalar
  Variable:Y numeric scalar
  NumericConstant:1
- FunctionMid:MID$ string scalar
+ FunctionMid:MID$($,_,_) string scalar
  TextConstant:" "
  BinaryOperatorNotEqual:<> numeric
  Variable:X1 numeric scalar
@@ -243,7 +243,7 @@
  BinaryOperatorNotEqual:<> numeric
 261 PRINT TAB(Y);"*";
  Variable:Y numeric scalar
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"*"
  CarriageControl:;

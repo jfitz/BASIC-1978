@@ -1,12 +1,12 @@
 5 PRINT TAB(33);"BAGELS"
  NumericConstant:33
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"BAGELS"
  CarriageControl:NL
 10 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY":PRINT:PRINT
  NumericConstant:15
- FunctionTab:TAB string scalar
+ FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -41,7 +41,7 @@
 90 IF LEFT$(A$,1)="N" THEN 150
  Variable:A$ string scalar
  NumericConstant:1
- FunctionLeft:LEFT$ string scalar
+ FunctionLeft:LEFT$($,_) string scalar
  TextConstant:"N"
  BinaryOperatorEqual:= numeric
 100 PRINT:PRINT "I AM THINKING OF A THREE-DIGIT NUMBER.  TRY TO GUESS"
@@ -69,9 +69,9 @@
  Variable:A numeric scalar
  NumericConstant:10
  NumericConstant:1
- FunctionRnd:RND numeric scalar
+ FunctionRnd:RND(_) numeric scalar
  BinaryOperatorMultiply:* numeric
- FunctionInt:INT numeric scalar
+ FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 165 IF I-1=0 THEN 200
  Variable:I numeric scalar
@@ -110,7 +110,7 @@
  Variable:A$ string scalar
 245 IF LEN(A$)<>3 THEN 630
  Variable:A$ string scalar
- FunctionLen:LEN numeric scalar
+ FunctionLen:LEN($) numeric scalar
  NumericConstant:3
  BinaryOperatorNotEqual:<> numeric
 250 FOR Z=1 TO 3:A1(Z)=ASC(MID$(A$,Z,1)):NEXT Z
@@ -122,8 +122,8 @@
  Variable:A$ string scalar
  Variable:Z numeric scalar
  NumericConstant:1
- FunctionMid:MID$ string scalar
- FunctionAsc:ASC numeric scalar
+ FunctionMid:MID$($,_,_) string scalar
+ FunctionAsc:ASC($) numeric scalar
  AssignmentOperator:=
  Variable:Z numeric scalar
 260 FOR J=1 TO 3
@@ -348,7 +348,7 @@
 720 IF LEFT$(A$,1)="YES" THEN 150
  Variable:A$ string scalar
  NumericConstant:1
- FunctionLeft:LEFT$ string scalar
+ FunctionLeft:LEFT$($,_) string scalar
  TextConstant:"YES"
  BinaryOperatorEqual:= numeric
 730 IF Y=0 THEN 750
