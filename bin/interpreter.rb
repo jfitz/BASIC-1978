@@ -1009,24 +1009,22 @@ class Interpreter
     @program.find_closing_next(control, @current_line_index)
   end
 
-  def set_user_function(name, signature, definition)
-    sig = signature.join(',')
-    tag = name.to_s + '(' + sig + ')'
+  def set_user_function(name, sigils, definition)
+    signature = name.to_s + '(' + sigils.join(',') + ')'
 
-    raise BASICRuntimeError.new(:te_func_alr, tag) if
-      @user_function_defs.key?(tag)
+    raise BASICRuntimeError.new(:te_func_alr, signature) if
+      @user_function_defs.key?(signature)
 
-    @user_function_defs[tag] = definition
+    @user_function_defs[signature] = definition
   end
 
-  def get_user_function(name, signature)
-    sig = signature.join(',')
-    tag = name.to_s + '(' + sig + ')'
+  def get_user_function(name, sigils)
+    signature = name.to_s + '(' + sigils.join(',') + ')'
 
-    raise BASICRuntimeError.new(:te_func_no, tag) unless
-      @user_function_defs.key?(tag)
+    raise BASICRuntimeError.new(:te_func_no, signature) unless
+      @user_function_defs.key?(signature)
 
-    @user_function_defs[tag]
+    @user_function_defs[signature]
   end
 
   def define_user_var_values(names_and_values)

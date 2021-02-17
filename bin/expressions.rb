@@ -42,16 +42,6 @@ class BASICArray
     Array.new(@dimensions.clone, @values.clone)
   end
 
-  def numeric_constant?
-    value = get_value(0)
-    value.numeric_constant?
-  end
-
-  def text_constant?
-    value = get_value(0)
-    value.text_constant?
-  end
-
   def scalar?
     false
   end
@@ -62,6 +52,16 @@ class BASICArray
 
   def matrix?
     false
+  end
+
+  def numeric_constant?
+    value = get_value(0)
+    value.numeric_constant?
+  end
+
+  def text_constant?
+    value = get_value(0)
+    value.text_constant?
   end
 
   def values(interpreter)
@@ -621,7 +621,7 @@ class XrefEntry
   attr_reader :signature
   attr_reader :is_ref
 
-  def self.make_signature(arguments)
+  def self.make_sigils(arguments)
     return nil if arguments.nil?
 
     sigil_chars = {
@@ -749,12 +749,12 @@ end
 
 # Expression parser
 class Parser
-  def initialize(shape)
+  def initialize(default_shape)
     @operator_stack = []
     @elements_stack = []
     @current_elements = []
     @parens_stack = []
-    @shape_stack = [shape]
+    @shape_stack = [default_shape]
     @parens_group = []
     @previous_element = InitialOperator.new
   end
@@ -887,6 +887,7 @@ class Parser
   # append them to the output list
   def operator_higher(element)
     stack_to_precedence(@operator_stack, @current_elements, element)
+
     # push the operator onto the operator stack
     @operator_stack.push(element) unless element.terminal?
   end
@@ -1102,6 +1103,7 @@ class Expression
           vars << element
         end
       end
+
       previous = element
     end
 
@@ -1168,8 +1170,8 @@ class Expression
 
         is_ref = element.reference?
 
-        signature = XrefEntry.make_signature(arguments)
-        vars << XrefEntry.new(element.to_s, signature, is_ref)
+        sigils = XrefEntry.make_sigils(arguments)
+        vars << XrefEntry.new(element.to_s, sigils, is_ref)
       end
 
       previous = element
@@ -1191,8 +1193,8 @@ class Expression
 
         is_ref = false
 
-        signature = XrefEntry.make_signature(arguments)
-        opers << XrefEntry.new(element.to_s, signature, is_ref)
+        sigils = XrefEntry.make_sigils(arguments)
+        opers << XrefEntry.new(element.to_s, sigils, is_ref)
       end
     end
 
@@ -1214,8 +1216,8 @@ class Expression
 
         is_ref = element.reference?
 
-        signature = XrefEntry.make_signature(arguments)
-        vars << XrefEntry.new(element.to_s, signature, is_ref)
+        sigils = XrefEntry.make_sigils(arguments)
+        vars << XrefEntry.new(element.to_s, sigils, is_ref)
       end
 
       previous = element
@@ -1240,8 +1242,8 @@ class Expression
 
         is_ref = element.reference?
 
-        signature = XrefEntry.make_signature(arguments)
-        vars << XrefEntry.new(element.to_s, signature, is_ref)
+        sigils = XrefEntry.make_sigils(arguments)
+        vars << XrefEntry.new(element.to_s, sigils, is_ref)
       end
 
       previous = element
@@ -1578,7 +1580,7 @@ class DeclarationExpressionSet < AbstractExpressionSet
 
   def check_all_lengths
     @expressions.each do |expression|
-      raise(BASICSyntaxError, 'Empty expression is not declaration') if
+      raise(BASICExpressionError, 'Empty expression is not declaration') if
         expression.empty?
     end
   end
@@ -1589,7 +1591,7 @@ class DeclarationExpressionSet < AbstractExpressionSet
       last_element = elements[-1]
 
       if last_element.class.to_s != 'Declaration'
-        raise(BASICSyntaxError,
+        raise(BASICExpressionError,
               "Expression is not declaration (type #{last_element.class})")
       end
     end
@@ -1629,7 +1631,7 @@ class TargetExpressionSet < AbstractExpressionSet
   private
 
   def check_length
-    raise(BASICSyntaxError, 'Value list is empty (length 0)') if
+    raise(BASICExpressionError, 'Value list is empty (length 0)') if
       @expressions.empty?
   end
 
@@ -1637,7 +1639,7 @@ class TargetExpressionSet < AbstractExpressionSet
     @expressions.each do |expression|
       elements = expression.elements
 
-      raise(BASICSyntaxError, 'Value is not assignable (length 0)') if
+      raise(BASICExpressionError, 'Value is not assignable (length 0)') if
         elements.empty?
     end
   end
@@ -1648,7 +1650,7 @@ class TargetExpressionSet < AbstractExpressionSet
 
       if elements[-1].class.to_s != 'Variable' &&
          elements[-1].class.to_s != 'UserFunction'
-        raise(BASICSyntaxError,
+        raise(BASICExpressionError,
               "Value is not assignable (type #{elements[-1].class})")
       end
     end
@@ -1660,7 +1662,7 @@ end
 class UserFunctionDefinition
   attr_reader :name
   attr_reader :arguments
-  attr_reader :sig
+  attr_reader :sigils
   attr_reader :expression
   attr_reader :numerics
   attr_reader :strings
@@ -1682,7 +1684,7 @@ class UserFunctionDefinition
     user_function_prototype = UserFunctionPrototype.new(parts[0])
     @name = user_function_prototype.name
     @arguments = user_function_prototype.arguments
-    @sig = XrefEntry.make_signature(@arguments)
+    @sigils = XrefEntry.make_sigils(@arguments)
     @expression = nil
     @expression = ValueExpressionSet.new(parts[2], :scalar) if parts.size == 3
     if @expression.nil?
@@ -1692,7 +1694,7 @@ class UserFunctionDefinition
       @variables = []
       @operators = []
       @functions = []
-      xr = XrefEntry.new(@name.to_s, @sig, true)
+      xr = XrefEntry.new(@name.to_s, @sigils, true)
       @userfuncs = [xr]
 
       @comprehension_effort = 0
@@ -1703,7 +1705,7 @@ class UserFunctionDefinition
       @variables = @expression.variables
       @operators = @expression.operators
       @functions = @expression.functions
-      xr = XrefEntry.new(@name.to_s, @sig, true)
+      xr = XrefEntry.new(@name.to_s, @sigils, true)
       @userfuncs = [xr] + @expression.userfuncs
 
       @comprehension_effort = @expression.comprehension_effort
@@ -1735,18 +1737,7 @@ class UserFunctionDefinition
   end
 
   def signature
-    numeric_spec = { 'type' => :numeric, 'shape' => :scalar }
-    text_spec = { 'type' => :string, 'shape' => :scalar }
-    integer_spec = { 'type' => :integer, 'shape' => :scalar }
-    sig = []
-
-    @arguments.each do |arg|
-      sig << numeric_spec if arg.content_type == :numeric
-      sig << text_spec if arg.content_type == :string
-      sig << integer_spec if arg.content_type == :integer
-    end
-
-    sig
+    @sigils
   end
 
   private

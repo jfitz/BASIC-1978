@@ -162,6 +162,8 @@ class StatementFactory
     [
       IfModifier,
       UnlessModifier,
+      WhileModifier,
+      UntilModifier,
       ForModifier
     ]
   end
@@ -1677,8 +1679,8 @@ class DefineFunctionStatement < AbstractStatement
 
   def pre_execute(interpreter)
     name = @definition.name
-    signature = @definition.sig
-    interpreter.set_user_function(name, signature, @definition)
+    sigils = @definition.sigils
+    interpreter.set_user_function(name, sigils, @definition)
   rescue BASICRuntimeError => e
     raise BASICPreexecuteError.new(e.scode, e.extra)
   end
