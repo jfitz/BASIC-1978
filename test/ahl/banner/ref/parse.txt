@@ -10,7 +10,7 @@
  AssignmentOperator:=
  Variable:L$ string scalar
  TextConstant:"P"
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>($,$) numeric
  Variable:G1 numeric scalar
  NumericConstant:1
  AssignmentOperator:=
@@ -68,11 +68,11 @@
 96 IF P$=" " THEN 812
  Variable:P$ string scalar
  TextConstant:" "
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 100 IF P$=S$ THEN 200
  Variable:P$ string scalar
  Variable:S$ string scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 120 NEXT O
  Variable:O numeric scalar
 200 RESTORE
@@ -84,7 +84,7 @@
 202 IF M$="ALL" THEN X$=S$
  Variable:M$ string scalar
  TextConstant:"ALL"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
  Variable:X$ string scalar
  Variable:S$ string scalar
  AssignmentOperator:=
@@ -96,18 +96,18 @@
  control: Variable:K numeric scalar
  start:   ["NumericConstant:8"]
  end:     ["NumericConstant:0"]
- step:    ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
+ step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) numeric"]
 230 IF 2^K<S(U) THEN 270
  NumericConstant:2
  Variable:K numeric scalar
- BinaryOperatorPower:^ numeric
+ BinaryOperatorPower:^(_,_) numeric
  Variable:U numeric scalar
  Variable:S numeric scalar
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 240 J(9-K)=0
  NumericConstant:9
  Variable:K numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  Variable:J numeric scalar
  NumericConstant:0
  AssignmentOperator:=
@@ -116,7 +116,7 @@
 270 J(9-K)=1: S(U)=S(U)-2^K
  NumericConstant:9
  Variable:K numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  Variable:J numeric scalar
  NumericConstant:1
  AssignmentOperator:=
@@ -126,14 +126,14 @@
  Variable:S numeric scalar
  NumericConstant:2
  Variable:K numeric scalar
- BinaryOperatorPower:^ numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorPower:^(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 272 IF S(U)=1 THEN 815
  Variable:U numeric scalar
  Variable:S numeric scalar
  NumericConstant:1
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 280 NEXT K
  Variable:K numeric scalar
 445 FOR T1=1 TO X
@@ -144,15 +144,15 @@
  NumericConstant:63
  NumericConstant:4.5
  Variable:Y numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  Variable:G1 numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  Variable:X$ string scalar
  FunctionLen:LEN($) numeric scalar
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionTab:TAB(_) string scalar
  CarriageControl:;
 450 FOR B=1 TO F(U)
@@ -163,7 +163,7 @@
  Variable:B numeric scalar
  Variable:J numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 465 FOR I=1 TO Y: PRINT X$;: NEXT I
  control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
@@ -198,7 +198,7 @@
 750 FOR H=1 TO 2*X: PRINT: NEXT H
  control: Variable:H numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:2", "Variable:X numeric scalar", "BinaryOperatorMultiply:* numeric"]
+ end:     ["NumericConstant:2", "Variable:X numeric scalar", "BinaryOperatorMultiply:*(_,_) numeric"]
  CarriageControl:NL
  Variable:H numeric scalar
 800 NEXT T
@@ -214,7 +214,7 @@
 812 FOR H=1 TO 7*X: PRINT: NEXT H
  control: Variable:H numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:7", "Variable:X numeric scalar", "BinaryOperatorMultiply:* numeric"]
+ end:     ["NumericConstant:7", "Variable:X numeric scalar", "BinaryOperatorMultiply:*(_,_) numeric"]
  CarriageControl:NL
  Variable:H numeric scalar
 813 GOTO 800
@@ -224,7 +224,7 @@
  Variable:F numeric scalar
  NumericConstant:9
  Variable:K numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
  LineNumber:445
 899 DATA " ",0,0,0,0,0,0,0

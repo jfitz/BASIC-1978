@@ -35,7 +35,7 @@
 180 IF A$="NO" THEN 210
  Variable:A$ string scalar
  TextConstant:"NO"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 190 GOSUB 710
  LineNumber:710
 200 REM *** MAKE A RANDOM LIST A(1) TO A(N)
@@ -45,12 +45,12 @@
  Variable:A numeric scalar
  Variable:N numeric scalar
  NumericConstant:1
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:2
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 220 FOR K=2 TO N
@@ -63,21 +63,21 @@
  Variable:N numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 240 FOR J=1 TO K-1
  control: Variable:J numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:K numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:K numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) numeric"]
 250 IF A(K)=A(J) THEN 230
  Variable:K numeric scalar
  Variable:A numeric scalar
  Variable:J numeric scalar
  Variable:A numeric scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 260 NEXT J:NEXT K
  Variable:J numeric scalar
  Variable:K numeric scalar
@@ -101,11 +101,11 @@
 350 IF R=0 THEN 520
  Variable:R numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 360 IF R<=N THEN 390
  Variable:R numeric scalar
  Variable:N numeric scalar
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 370 PRINT "OOPS! TOO MANY! I CAN REVERSE AT MOST";N:GOTO 330
  TextConstant:"OOPS! TOO MANY! I CAN REVERSE AT MOST"
  CarriageControl:;
@@ -116,14 +116,14 @@
  Variable:T numeric scalar
  Variable:T numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 400 REM *** REVERSE R NUMBERS AND PRINT NEW LIST
  Remark:*** REVERSE R NUMBERS AND PRINT NEW LIST
 410 FOR K=1 TO INT(R/2)
  control: Variable:K numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:R numeric scalar", "NumericConstant:2", "BinaryOperatorDivide:/ numeric", "FunctionInt:INT(_) numeric scalar"]
+ end:     ["Variable:R numeric scalar", "NumericConstant:2", "BinaryOperatorDivide:/(_,_) numeric", "FunctionInt:INT(_) numeric scalar"]
 420 Z=A(K)
  Variable:Z numeric scalar
  Variable:K numeric scalar
@@ -134,17 +134,17 @@
  Variable:A numeric scalar
  Variable:R numeric scalar
  Variable:K numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:A numeric scalar
  AssignmentOperator:=
 440 A(R-K+1)=Z
  Variable:R numeric scalar
  Variable:K numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:A numeric scalar
  Variable:Z numeric scalar
  AssignmentOperator:=
@@ -162,7 +162,7 @@
  Variable:K numeric scalar
  Variable:A numeric scalar
  Variable:K numeric scalar
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
 500 NEXT K
  Variable:K numeric scalar
 510 PRINT "YOU WON IT IN";T;"MOVES!!!":PRINT
@@ -183,7 +183,7 @@
 550 IF A$="YES" THEN 210
  Variable:A$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 560 PRINT: PRINT "O.K. HOPE YOU HAD FUN!!":GOTO 999
  CarriageControl:NL
  TextConstant:"O.K. HOPE YOU HAD FUN!!"

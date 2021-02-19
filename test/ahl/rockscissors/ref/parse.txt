@@ -19,7 +19,7 @@
 40 IF Q<11 THEN 60
  Variable:Q numeric scalar
  NumericConstant:11
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 50 PRINT "SORRY, BUT WE AREN'T ALLOWED TO PLAY THAT MANY.": GOTO 30
  TextConstant:"SORRY, BUT WE AREN'T ALLOWED TO PLAY THAT MANY."
  CarriageControl:NL
@@ -39,9 +39,9 @@
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:3
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 90 PRINT "3=ROCK...2=SCISSORS...1=PAPER"
@@ -52,17 +52,17 @@
 110 IF (K-1)*(K-2)*(K-3)<>0 THEN PRINT "INVALID.": GOTO 90
  Variable:K numeric scalar
  NumericConstant:1
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  Variable:K numeric scalar
  NumericConstant:2
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  Variable:K numeric scalar
  NumericConstant:3
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:0
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
  TextConstant:"INVALID."
  CarriageControl:NL
  LineNumber:90
@@ -88,45 +88,45 @@
 170 IF X=K THEN 250
  Variable:X numeric scalar
  Variable:K numeric scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 180 IF X>K THEN 230
  Variable:X numeric scalar
  Variable:K numeric scalar
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 190 IF X=1 THEN 210
  Variable:X numeric scalar
  NumericConstant:1
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 200 PRINT "YOU WIN!!!":H=H+1: GOTO 260
  TextConstant:"YOU WIN!!!"
  CarriageControl:NL
  Variable:H numeric scalar
  Variable:H numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
  LineNumber:260
 210 IF K<>3 THEN 200
  Variable:K numeric scalar
  NumericConstant:3
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
 220 PRINT "WOW!  I WIN!!!":C=C+1:GOTO 260
  TextConstant:"WOW!  I WIN!!!"
  CarriageControl:NL
  Variable:C numeric scalar
  Variable:C numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
  LineNumber:260
 230 IF K<>1 OR X<>3 THEN 220
  Variable:K numeric scalar
  NumericConstant:1
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
  Variable:X numeric scalar
  NumericConstant:3
- BinaryOperatorNotEqual:<> numeric
- BinaryOperatorOr:OR numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorOr:OR(_,_) numeric
 240 GOTO 200
  LineNumber:200
 250 PRINT "TIE GAME.  NO WINNER."
@@ -158,8 +158,8 @@
  Variable:Q numeric scalar
  Variable:C numeric scalar
  Variable:H numeric scalar
- BinaryOperatorPlus:+ numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  CarriageControl:;
  TextConstant:"GAME(S) ENDED IN A TIE."
  CarriageControl:NL

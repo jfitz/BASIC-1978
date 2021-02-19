@@ -44,7 +44,7 @@
 100 FOR J=0 TO INT(60/L)
  control: Variable:J numeric scalar
  start:   ["NumericConstant:0"]
- end:     ["NumericConstant:60", "Variable:L numeric scalar", "BinaryOperatorDivide:/ numeric", "FunctionInt:INT(_) numeric scalar"]
+ end:     ["NumericConstant:60", "Variable:L numeric scalar", "BinaryOperatorDivide:/(_,_) numeric", "FunctionInt:INT(_) numeric scalar"]
 110 FOR I=1 TO L
  control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
@@ -52,9 +52,9 @@
 120 T$(J*L+I)=MID$(A$,I,1)
  Variable:J numeric scalar
  Variable:L numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  Variable:I numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:T$ string scalar
  Variable:A$ string scalar
  Variable:I numeric scalar
@@ -78,11 +78,11 @@
  Variable:C numeric scalar
  Variable:C numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
  Variable:C numeric scalar
  NumericConstant:37
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 205 PRINT
  CarriageControl:NL
 210 READ A: A1=A1+A: IF P=1 THEN 300
@@ -90,11 +90,11 @@
  Variable:A1 numeric scalar
  Variable:A1 numeric scalar
  Variable:A numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
  Variable:P numeric scalar
  NumericConstant:1
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 240 FOR I=1 TO A: PRINT " ";: NEXT I: P=1: GOTO 400
  control: Variable:I numeric scalar
  start:   ["NumericConstant:1"]
@@ -108,8 +108,8 @@
  LineNumber:400
 300 FOR I=A1-A TO A1-1: PRINT T$(I);: NEXT I: P=0
  control: Variable:I numeric scalar
- start:   ["Variable:A1 numeric scalar", "Variable:A numeric scalar", "BinaryOperatorMinus:- numeric"]
- end:     ["Variable:A1 numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ start:   ["Variable:A1 numeric scalar", "Variable:A numeric scalar", "BinaryOperatorMinus:-(_,_) numeric"]
+ end:     ["Variable:A1 numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) numeric"]
  Variable:I numeric scalar
  Variable:T$ string scalar
  CarriageControl:;
@@ -120,7 +120,7 @@
 400 IF A1>60 THEN 200
  Variable:A1 numeric scalar
  NumericConstant:60
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 410 GOTO 210
  LineNumber:210
 600 DATA 60,1,12,26,9,12,3,8,24,17,8,4,6,23,21,6,4,6,22,12,5,6,5

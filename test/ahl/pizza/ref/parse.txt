@@ -114,10 +114,10 @@
  NumericConstant:16
  NumericConstant:4
  Variable:I numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 340 PRINT "     ";S$(S1);"     ";S$(S1+1);"     ";S$(S1+2);"     ";
  TextConstant:"     "
@@ -129,14 +129,14 @@
  CarriageControl:;
  Variable:S1 numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:S$ string scalar
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
  Variable:S1 numeric scalar
  NumericConstant:2
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:S$ string scalar
  CarriageControl:;
  TextConstant:"     "
@@ -144,7 +144,7 @@
 350 PRINT S$(S1+3);"     ";M$(K)
  Variable:S1 numeric scalar
  NumericConstant:3
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:S$ string scalar
  CarriageControl:;
  TextConstant:"     "
@@ -156,7 +156,7 @@
  Variable:K numeric scalar
  Variable:K numeric scalar
  NumericConstant:1
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 390 NEXT I
  Variable:I numeric scalar
@@ -195,11 +195,11 @@
 530 IF A$="YES" THEN 590
  Variable:A$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 540 IF A$="NO" THEN 750
  Variable:A$ string scalar
  TextConstant:"NO"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 550 PRINT "'YES' OR 'NO' PLEASE, NOW THEN,": GOTO 520
  TextConstant:"'YES' OR 'NO' PLEASE, NOW THEN,"
  CarriageControl:NL
@@ -235,7 +235,7 @@
 670 IF A$="YES" THEN 690
  Variable:A$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 680 PRINT "THIS JOB IS DEFINITELY TOO DIFFICULT FOR YOU. THANKS ANYWAY"
  TextConstant:"THIS JOB IS DEFINITELY TOO DIFFICULT FOR YOU. THANKS ANYWAY"
  CarriageControl:NL
@@ -258,9 +258,9 @@
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:16
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
  CarriageControl:NL
@@ -303,15 +303,15 @@
  NumericConstant:2
  Variable:A numeric scalar
  NumericConstant:1
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:4
- BinaryOperatorMultiply:* numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 880 IF T=S THEN 920
  Variable:T numeric scalar
  Variable:S numeric scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 890 PRINT "THIS IS ";S$(T);".  I DID NOT ORDER A PIZZA."
  TextConstant:"THIS IS "
  CarriageControl:;
@@ -353,7 +353,7 @@
 960 IF A$="YES" THEN 750
  Variable:A$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 970 PRINT: PRINT "O.K. ";N$;", SEE YOU LATER!":PRINT
  CarriageControl:NL
  TextConstant:"O.K. "

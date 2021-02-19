@@ -48,9 +48,9 @@
  NumericConstant:9001
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:1000
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 119 PRINT "SELECT YOUR OWN TERMINAL VELOCITY (YES OR NO)";:INPUT A1$    
@@ -60,11 +60,11 @@
 120 IF A1$="NO" THEN 128
  Variable:A1$ string scalar
  TextConstant:"NO"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 121 IF A1$<>"YES" THEN PRINT "YES OR NO";:INPUT A1$:GOTO 120
  Variable:A1$ string scalar
  TextConstant:"YES"
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>($,$) numeric
  TextConstant:"YES OR NO"
  CarriageControl:;
  Variable:A1$ string scalar
@@ -78,25 +78,25 @@
  Variable:V1 numeric scalar
  NumericConstant:5280
  NumericConstant:3600
- BinaryOperatorDivide:/ numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  AssignmentOperator:=
  Variable:V numeric scalar
  Variable:V1 numeric scalar
  Variable:V1 numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:20
- BinaryOperatorDivide:/ numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:V1 numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:20
- BinaryOperatorDivide:/ numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
  LineNumber:135
 128 V1=INT(1000*RND(1))
@@ -104,7 +104,7 @@
  NumericConstant:1000
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 130 PRINT "OK.  TERMINAL VELOCITY ="V1"MI/HR"
@@ -119,25 +119,25 @@
  Variable:V1 numeric scalar
  NumericConstant:5280
  NumericConstant:3600
- BinaryOperatorDivide:/ numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  AssignmentOperator:=
  Variable:V numeric scalar
  Variable:V1 numeric scalar
  Variable:V1 numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:20
- BinaryOperatorDivide:/ numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:V1 numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:20
- BinaryOperatorDivide:/ numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 135  PRINT "WANT TO SELECT ACCELERATION DUE TO GRAVITY (YES OR NO)"; 
  TextConstant:"WANT TO SELECT ACCELERATION DUE TO GRAVITY (YES OR NO)"
@@ -147,11 +147,11 @@
 140 IF B1$="NO" THEN 150
  Variable:B1$ string scalar
  TextConstant:"NO"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 141 IF B1$<>"YES" THEN PRINT "YES OR NO";:INPUT B1$:GOTO 140
  Variable:B1$ string scalar
  TextConstant:"YES"
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>($,$) numeric
  TextConstant:"YES OR NO"
  CarriageControl:;
  Variable:B1$ string scalar
@@ -166,17 +166,17 @@
  Variable:A2 numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:20
- BinaryOperatorDivide:/ numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:A2 numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:20
- BinaryOperatorDivide:/ numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
  LineNumber:205
 150 ON INT(1+(10*RND(1)))GOTO 151,152,153,154,155,156,157,158,159,160 
@@ -184,8 +184,8 @@
  NumericConstant:10
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  LineNumber:151
  LineNumber:152
@@ -336,29 +336,29 @@
  control: Variable:I numeric scalar
  start:   ["NumericConstant:0"]
  end:     ["Variable:T numeric scalar"]
- step:    ["Variable:T numeric scalar", "NumericConstant:8", "BinaryOperatorDivide:/ numeric"]
+ step:    ["Variable:T numeric scalar", "NumericConstant:8", "BinaryOperatorDivide:/(_,_) numeric"]
 310 IF I>V/A THEN 400
  Variable:I numeric scalar
  Variable:V numeric scalar
  Variable:A numeric scalar
- BinaryOperatorDivide:/ numeric
- BinaryOperatorGreater:> numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorGreater:>(_,_) numeric
 320 D=D1-((A/2)*I^2) 
  Variable:D numeric scalar
  Variable:D1 numeric scalar
  Variable:A numeric scalar
  NumericConstant:2
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  Variable:I numeric scalar
  NumericConstant:2
- BinaryOperatorPower:^ numeric
- BinaryOperatorMultiply:* numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorPower:^(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 330 IF D<=0 THEN 1000
  Variable:D numeric scalar
  NumericConstant:0
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 340 PRINT I,D
  Variable:I numeric scalar
  CarriageControl:,
@@ -373,7 +373,7 @@
  CarriageControl:
  Variable:V numeric scalar
  Variable:A numeric scalar
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  CarriageControl:
  TextConstant:"SECONDS."
  CarriageControl:NL
@@ -381,31 +381,31 @@
  control: Variable:I numeric scalar
  start:   ["Variable:I numeric scalar"]
  end:     ["Variable:T numeric scalar"]
- step:    ["Variable:T numeric scalar", "NumericConstant:8", "BinaryOperatorDivide:/ numeric"]
+ step:    ["Variable:T numeric scalar", "NumericConstant:8", "BinaryOperatorDivide:/(_,_) numeric"]
 410 D=D1-((V^2/(2*A))+(V*(I-(V/A)))) 
  Variable:D numeric scalar
  Variable:D1 numeric scalar
  Variable:V numeric scalar
  NumericConstant:2
- BinaryOperatorPower:^ numeric
+ BinaryOperatorPower:^(_,_) numeric
  NumericConstant:2
  Variable:A numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorDivide:/(_,_) numeric
  Variable:V numeric scalar
  Variable:I numeric scalar
  Variable:V numeric scalar
  Variable:A numeric scalar
- BinaryOperatorDivide:/ numeric
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
- BinaryOperatorPlus:+ numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 420 IF D<=0 THEN 1010
  Variable:D numeric scalar
  NumericConstant:0
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 430 PRINT I,D
  Variable:I numeric scalar
  CarriageControl:,
@@ -433,23 +433,23 @@
  Variable:J numeric scalar
  Variable:A numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 560 K=K+1
  Variable:K numeric scalar
  Variable:K numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 570 IF D>=A(J) THEN 600
  Variable:D numeric scalar
  Variable:J numeric scalar
  Variable:A numeric scalar
- BinaryOperatorGreaterEqual:>= numeric
+ BinaryOperatorGreaterEqual:>=(_,_) numeric
 580 K1=K1+1
  Variable:K1 numeric scalar
  Variable:K1 numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 600 NEXT J 
  Variable:J numeric scalar
@@ -463,26 +463,26 @@
 630 IF J>2 THEN 650
  Variable:J numeric scalar
  NumericConstant:2
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 635 PRINT "AMAZING!!! NOT BAD FOR YOUR ";
  TextConstant:"AMAZING!!! NOT BAD FOR YOUR "
  CarriageControl:;
 636 IF J=0 THEN PRINT "1ST ";
  Variable:J numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
  TextConstant:"1ST "
  CarriageControl:;
 637 IF J=1 THEN PRINT "2ND ";
  Variable:J numeric scalar
  NumericConstant:1
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
  TextConstant:"2ND "
  CarriageControl:;
 638 IF J=2 THEN PRINT "3RD ";
  Variable:J numeric scalar
  NumericConstant:2
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
  TextConstant:"3RD "
  CarriageControl:;
 639 PRINT "SUCCESSFUL JUMP!!!":GOTO 2000
@@ -492,43 +492,43 @@
 650 IF K-K1<=.1*K THEN 700 
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:.1
  Variable:K numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 660 IF K-K1<=.25*K THEN 710
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:.25
  Variable:K numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 670 IF K-K1<=.5*K THEN 720 
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:.5
  Variable:K numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 680 IF K-K1<=.75*K THEN 730
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:.75
  Variable:K numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 690 IF K-K1<=.9*K THEN 740 
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:.9
  Variable:K numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 695 GOTO 750 
  LineNumber:750
 700 PRINT "WOW!  THAT'S SOME JUMPING.  OF THE"K"SUCCESSFUL JUMPS"
@@ -543,7 +543,7 @@
  CarriageControl:
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  CarriageControl:
  TextConstant:"OPENED THEIR CHUTES LOWER THAN"
  CarriageControl:NL
@@ -562,7 +562,7 @@
 711 PRINT K-K1" OF THEM GOT LOWER THAN YOU DID BEFORE THEIR CHUTES"
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  CarriageControl:
  TextConstant:" OF THEM GOT LOWER THAN YOU DID BEFORE THEIR CHUTES"
  CarriageControl:NL
@@ -582,7 +582,7 @@
  CarriageControl:
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  CarriageControl:
  TextConstant:"OF THEM."
  CarriageControl:NL
@@ -592,7 +592,7 @@
  CarriageControl:
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  CarriageControl:
  TextConstant:"IN THE"
  CarriageControl:NL
@@ -630,7 +630,7 @@
  CarriageControl:
  Variable:K numeric scalar
  Variable:K1 numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  CarriageControl:
  TextConstant:"!  GET WITH IT!"
  CarriageControl:NL
@@ -679,9 +679,9 @@
 1000 PRINT SQR(2*D1/A),"SPLAT"
  NumericConstant:2
  Variable:D1 numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  Variable:A numeric scalar
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  FunctionSqr:SQR(_) numeric scalar
  CarriageControl:,
  TextConstant:"SPLAT"
@@ -691,8 +691,8 @@
  NumericConstant:10
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  LineNumber:800
  LineNumber:801
@@ -707,19 +707,19 @@
 1010 PRINT (V/A)+((D1-(V^2/(2*A)))/V),"SPLAT"
  Variable:V numeric scalar
  Variable:A numeric scalar
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  Variable:D1 numeric scalar
  Variable:V numeric scalar
  NumericConstant:2
- BinaryOperatorPower:^ numeric
+ BinaryOperatorPower:^(_,_) numeric
  NumericConstant:2
  Variable:A numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorDivide:/ numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  Variable:V numeric scalar
- BinaryOperatorDivide:/ numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  CarriageControl:,
  TextConstant:"SPLAT"
  CarriageControl:NL
@@ -736,11 +736,11 @@
 2001 IF Z$="YES" THEN 118
  Variable:Z$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 2002 IF Z$="NO" THEN 2005
  Variable:Z$ string scalar
  TextConstant:"NO"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 2003 PRINT "YES OR NO":GOTO 2000
  TextConstant:"YES OR NO"
  CarriageControl:NL
@@ -751,11 +751,11 @@
  Variable:Z$ string scalar
  Variable:Z$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 2006 IF Z$<>"NO" THEN PRINT "YES OR NO ";:GOTO 2005
  Variable:Z$ string scalar
  TextConstant:"NO"
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>($,$) numeric
  TextConstant:"YES OR NO "
  CarriageControl:;
  LineNumber:2005

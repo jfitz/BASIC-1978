@@ -22,11 +22,11 @@
 330 IF V>25 THEN 360
  Variable:V numeric scalar
  NumericConstant:25
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 340 IF V<1 THEN 390
  Variable:V numeric scalar
  NumericConstant:1
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 350 GOTO 1440
  LineNumber:1440
 360 PRINT "25 IS THE LIMIT."
@@ -51,11 +51,11 @@
 430 IF A<1 THEN 460
  Variable:A numeric scalar
  NumericConstant:1
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 440 IF A>3 THEN 460
  Variable:A numeric scalar
  NumericConstant:3
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 450 GOTO 480
  LineNumber:480
 460 PRINT "THE BOUNDS ARE 1-3"
@@ -78,10 +78,10 @@
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:18
  NumericConstant:9
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:9
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 520 PRINT
@@ -122,35 +122,35 @@
 600    IF O1=0 THEN 970
  Variable:O1 numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 610   IF O1>8 THEN 1420
  Variable:O1 numeric scalar
  NumericConstant:8
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 620    IF O1<1 THEN 1420
  Variable:O1 numeric scalar
  NumericConstant:1
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 630    GOSUB 990
  LineNumber:990
 640    IF S<7 THEN 1390
  Variable:S numeric scalar
  NumericConstant:7
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 650    LET T=T+(Q-S+1)
  Variable:T numeric scalar
  Variable:T numeric scalar
  Variable:Q numeric scalar
  Variable:S numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 660    IF S>Q THEN 1630
  Variable:S numeric scalar
  Variable:Q numeric scalar
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 670 NEXT O
  Variable:O numeric scalar
 680 PRINT:PRINT "YOU TOOK";(T+RND(1));"SECONDS."
@@ -160,7 +160,7 @@
  Variable:T numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  CarriageControl:;
  TextConstant:"SECONDS."
  CarriageControl:NL
@@ -172,32 +172,32 @@
  Variable:M numeric scalar
  Variable:M numeric scalar
  Variable:V numeric scalar
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  AssignmentOperator:=
 710 IF M<1.5-(A*.1) THEN 1650
  Variable:M numeric scalar
  NumericConstant:1.5
  Variable:A numeric scalar
  NumericConstant:.1
- BinaryOperatorMultiply:* numeric
- BinaryOperatorMinus:- numeric
- BinaryOperatorLess:< numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorLess:<(_,_) numeric
 720 IF M<2.9-(A*.1) THEN 1680
  Variable:M numeric scalar
  NumericConstant:2.9
  Variable:A numeric scalar
  NumericConstant:.1
- BinaryOperatorMultiply:* numeric
- BinaryOperatorMinus:- numeric
- BinaryOperatorLess:< numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorLess:<(_,_) numeric
 730 IF M<4.4-(A*.01) THEN 1710
  Variable:M numeric scalar
  NumericConstant:4.4
  Variable:A numeric scalar
  NumericConstant:.01
- BinaryOperatorMultiply:* numeric
- BinaryOperatorMinus:- numeric
- BinaryOperatorLess:< numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorLess:<(_,_) numeric
 740 PRINT:PRINT "DO YOU WANT TO RACE AGAIN";
  CarriageControl:NL
  TextConstant:"DO YOU WANT TO RACE AGAIN"
@@ -209,11 +209,11 @@
 770 IF B$="NO" THEN 1740
  Variable:B$ string scalar
  TextConstant:"NO"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 780 IF B$="YES" THEN 480
  Variable:B$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 790 PRINT "PLEASE TYPE 'YES' OR 'NO'"
  TextConstant:"PLEASE TYPE 'YES' OR 'NO'"
  CarriageControl:NL
@@ -283,7 +283,7 @@
  Variable:T numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  CarriageControl:;
  TextConstant:"SECONDS."
  CarriageControl:NL
@@ -308,12 +308,12 @@
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:5
  NumericConstant:3
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:3
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 1020 PRINT S;"M.P.H."
  Variable:S numeric scalar
@@ -323,13 +323,13 @@
 1030 IF S>Q THEN 1290
  Variable:S numeric scalar
  Variable:Q numeric scalar
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 1040 IF S>Q-1 THEN 1060
  Variable:S numeric scalar
  Variable:Q numeric scalar
  NumericConstant:1
- BinaryOperatorMinus:- numeric
- BinaryOperatorGreater:> numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorGreater:>(_,_) numeric
 1050 RETURN
  
 1060 PRINT "CLOSE ONE!"
@@ -351,12 +351,12 @@
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:5
  NumericConstant:3
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:3
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 1110 PRINT S;"M.P.H."
  Variable:S numeric scalar
@@ -372,12 +372,12 @@
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:10
  NumericConstant:5
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:5
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 1140 GOTO 1080
  LineNumber:1080
@@ -388,12 +388,12 @@
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:10
  NumericConstant:5
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:5
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 1160 GOTO 1110
  LineNumber:1110
@@ -404,12 +404,12 @@
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:4
  NumericConstant:1
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 1180 GOTO 1110
  LineNumber:1110
@@ -420,12 +420,12 @@
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:4
  NumericConstant:1
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionInt:INT(_) numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 1200 GOTO 1110
  LineNumber:1110
@@ -436,7 +436,7 @@
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:.7
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 1230 PRINT "YOU MADE IT!"
  TextConstant:"YOU MADE IT!"
  CarriageControl:NL
@@ -444,7 +444,7 @@
  Variable:T numeric scalar
  Variable:T numeric scalar
  NumericConstant:1.5
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 1250 RETURN
  
@@ -457,7 +457,7 @@
  Variable:T numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  CarriageControl:;
  TextConstant:"SECONDS."
  CarriageControl:NL
@@ -468,12 +468,12 @@
  FunctionRnd:RND(_) numeric scalar
  Variable:S numeric scalar
  Variable:Q numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:.1
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  NumericConstant:.2
- BinaryOperatorPlus:+ numeric
- BinaryOperatorLess:< numeric
+ BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorLess:<(_,_) numeric
 1300 PRINT "YOU WENT OVER THE NAXIMUM SPEED AND MADE IT!"
  TextConstant:"YOU WENT OVER THE NAXIMUM SPEED AND MADE IT!"
  CarriageControl:NL
@@ -486,7 +486,7 @@
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:.5
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 1340 PRINT "WIPED OUT!"
  TextConstant:"WIPED OUT!"
  CarriageControl:NL
@@ -496,7 +496,7 @@
  Variable:T numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  CarriageControl:;
  TextConstant:"SECONDS"
  CarriageControl:NL
@@ -572,15 +572,15 @@
 1500 IF A$="INS" THEN 820
  Variable:A$ string scalar
  TextConstant:"INS"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 1510 IF A$="MAX" THEN 1550
  Variable:A$ string scalar
  TextConstant:"MAX"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 1520 IF A$="RUN" THEN 410
  Variable:A$ string scalar
  TextConstant:"RUN"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 1530 PRINT CHR$(34);A$;CHR$(34);" IS AN ILLEGAL COMMAND--RETRY";
  NumericConstant:34
  FunctionChr:CHR$(_) string scalar
@@ -624,7 +624,7 @@
  Variable:T numeric scalar
  Variable:T numeric scalar
  NumericConstant:.5
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 1640 GOTO 670
  LineNumber:670
@@ -637,7 +637,7 @@
  NumericConstant:1
  Variable:G numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 1670 GOTO 1730
  LineNumber:1730
@@ -650,7 +650,7 @@
  NumericConstant:1
  Variable:S numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 1700 GOTO 1730
  LineNumber:1730
@@ -663,7 +663,7 @@
  NumericConstant:1
  Variable:B numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 1730 GOTO 740
  LineNumber:740
@@ -674,7 +674,7 @@
  NumericConstant:1
  Variable:G numeric scalar
  NumericConstant:1
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 1760 PRINT "GOLD MEDALS:";G(1)
  TextConstant:"GOLD MEDALS:"
  CarriageControl:;
@@ -685,7 +685,7 @@
  NumericConstant:1
  Variable:S numeric scalar
  NumericConstant:1
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 1780 PRINT "SILVER MEDALS:";S(1)
  TextConstant:"SILVER MEDALS:"
  CarriageControl:;
@@ -696,7 +696,7 @@
  NumericConstant:1
  Variable:B numeric scalar
  NumericConstant:1
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 1800 PRINT "BRONZE MEDALS:";B(1)
  TextConstant:"BRONZE MEDALS:"
  CarriageControl:;

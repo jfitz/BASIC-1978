@@ -95,7 +95,7 @@
 95 IF C<N THEN 100
  Variable:C numeric scalar
  Variable:N numeric scalar
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 97 PRINT "YOU DID ALL THE WORDS!!": STOP
  TextConstant:"YOU DID ALL THE WORDS!!"
  CarriageControl:NL
@@ -105,16 +105,16 @@
  Variable:N numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 110 IF U(Q)=1 THEN 100
  Variable:Q numeric scalar
  Variable:U numeric scalar
  NumericConstant:1
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 115 U(Q)=1: C=C+1: RESTORE: T1=0
  Variable:Q numeric scalar
  Variable:U numeric scalar
@@ -123,7 +123,7 @@
  Variable:C numeric scalar
  Variable:C numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
  
  Variable:T1 numeric scalar
@@ -163,10 +163,10 @@
  CarriageControl:;
  Variable:I numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:N$ string scalar
  TextConstant:""
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 190 PRINT ",";: NEXT I
  TextConstant:","
  CarriageControl:;
@@ -195,12 +195,12 @@
  Variable:I numeric scalar
  Variable:N$ string scalar
  TextConstant:""
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 230 IF G$=N$(I) THEN PRINT "YOU GUESSED THAT LETTER BEFORE!": GOTO 170
  Variable:G$ string scalar
  Variable:I numeric scalar
  Variable:N$ string scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
  TextConstant:"YOU GUESSED THAT LETTER BEFORE!"
  CarriageControl:NL
  LineNumber:170
@@ -217,7 +217,7 @@
  Variable:T1 numeric scalar
  Variable:T1 numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 260 FOR I=1 TO L: IF L$(I)=G$ THEN 280
  control: Variable:I numeric scalar
@@ -226,12 +226,12 @@
  Variable:I numeric scalar
  Variable:L$ string scalar
  Variable:G$ string scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 270 NEXT I: IF R=0 THEN 290
  Variable:I numeric scalar
  Variable:R numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 275 GOTO 300
  LineNumber:300
 280 D$(I)=G$: R=R+1: GOTO 270
@@ -242,14 +242,14 @@
  Variable:R numeric scalar
  Variable:R numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
  LineNumber:270
 290 M=M+1: GOTO 400
  Variable:M numeric scalar
  Variable:M numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
  LineNumber:400
 300 FOR I=1 TO L: IF D$(I)="-" THEN 320
@@ -259,7 +259,7 @@
  Variable:I numeric scalar
  Variable:D$ string scalar
  TextConstant:"-"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 310 NEXT I: GOTO 390
  Variable:I numeric scalar
  LineNumber:390
@@ -279,7 +279,7 @@
 340 IF A$=B$ THEN 360
  Variable:A$ string scalar
  Variable:B$ string scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 350 PRINT "WRONG.  TRY ANOTHER LETTER.": PRINT: GOTO 170
  TextConstant:"WRONG.  TRY ANOTHER LETTER."
  CarriageControl:NL
@@ -296,7 +296,7 @@
  Variable:W$ string scalar
  Variable:W$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 380 PRINT: PRINT "IT'S BEEN FUN!  BYE FOR NOW.": GOTO 999
  CarriageControl:NL
  TextConstant:"IT'S BEEN FUN!  BYE FOR NOW."
@@ -445,7 +445,7 @@
  Variable:I numeric scalar
  Variable:I numeric scalar
  NumericConstant:1
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  Variable:P$ string scalar
  TextConstant:"\"
  AssignmentOperator:=
@@ -553,7 +553,7 @@
  CarriageControl:NL
  Variable:M numeric scalar
  NumericConstant:10
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
 600 PRINT "SORRY, YOU LOSE.  THE WORD WAS ";A$
  TextConstant:"SORRY, YOU LOSE.  THE WORD WAS "
  CarriageControl:;
@@ -569,7 +569,7 @@
  NumericConstant:1
  FunctionLeft:LEFT$($,_) string scalar
  TextConstant:"Y"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 700 DATA "GUM","SIN","FOR","CRY","LUG","BYE","FLY"
  TextConstant:"GUM"
  TextConstant:"SIN"

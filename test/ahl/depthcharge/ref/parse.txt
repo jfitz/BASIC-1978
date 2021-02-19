@@ -23,10 +23,10 @@
  FunctionLog:LOG(_) numeric scalar
  NumericConstant:2
  FunctionLog:LOG(_) numeric scalar
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 40 PRINT "YOU ARE THE CAPTAIN OF THE DESTROYER USS COMPUTER"
  TextConstant:"YOU ARE THE CAPTAIN OF THE DESTROYER USS COMPUTER"
@@ -60,21 +60,21 @@
  Variable:G numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
  Variable:B numeric scalar
  Variable:G numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
  Variable:C numeric scalar
  Variable:G numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 120 FOR D=1 TO N : PRINT : PRINT "TRIAL #";D; : INPUT X,Y,Z
@@ -92,20 +92,20 @@
 130 IF ABS(X-A)+ABS(Y-B)+ABS(Z-C)=0 THEN 300
  Variable:X numeric scalar
  Variable:A numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  FunctionAbs:ABS(_) numeric scalar
  Variable:Y numeric scalar
  Variable:B numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  FunctionAbs:ABS(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:Z numeric scalar
  Variable:C numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  FunctionAbs:ABS(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 140 GOSUB 500 : PRINT : NEXT D
  LineNumber:500
  CarriageControl:NL
@@ -143,7 +143,7 @@
 410 IF A$="Y" THEN 100
  Variable:A$ string scalar
  TextConstant:"Y"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 420 PRINT "OK.  HOPE YOU ENJOYED YOURSELF." : GOTO 600
  TextConstant:"OK.  HOPE YOU ENJOYED YOURSELF."
  CarriageControl:NL
@@ -154,53 +154,53 @@
 510 IF Y>B THEN PRINT "NORTH";
  Variable:Y numeric scalar
  Variable:B numeric scalar
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
  TextConstant:"NORTH"
  CarriageControl:;
 520 IF Y<B THEN PRINT "SOUTH";
  Variable:Y numeric scalar
  Variable:B numeric scalar
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
  TextConstant:"SOUTH"
  CarriageControl:;
 530 IF X>A THEN PRINT "EAST";
  Variable:X numeric scalar
  Variable:A numeric scalar
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
  TextConstant:"EAST"
  CarriageControl:;
 540 IF X<A THEN PRINT "WEST";
  Variable:X numeric scalar
  Variable:A numeric scalar
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
  TextConstant:"WEST"
  CarriageControl:;
 550 IF Y<>B OR X<>A THEN PRINT " AND";
  Variable:Y numeric scalar
  Variable:B numeric scalar
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
  Variable:X numeric scalar
  Variable:A numeric scalar
- BinaryOperatorNotEqual:<> numeric
- BinaryOperatorOr:OR numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorOr:OR(_,_) numeric
  TextConstant:" AND"
  CarriageControl:;
 560 IF Z>C THEN PRINT " TOO LOW."
  Variable:Z numeric scalar
  Variable:C numeric scalar
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
  TextConstant:" TOO LOW."
  CarriageControl:NL
 570 IF Z<C THEN PRINT " TOO HIGH."
  Variable:Z numeric scalar
  Variable:C numeric scalar
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
  TextConstant:" TOO HIGH."
  CarriageControl:NL
 580 IF Z=C THEN PRINT " DEPTH OK."
  Variable:Z numeric scalar
  Variable:C numeric scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
  TextConstant:" DEPTH OK."
  CarriageControl:NL
 590 RETURN

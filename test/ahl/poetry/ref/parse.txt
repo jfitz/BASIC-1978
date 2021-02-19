@@ -100,7 +100,7 @@
 125 IF U=0 THEN 210
  Variable:U numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 126 PRINT "SIGN OF PARTING";:GOTO 210
  TextConstant:"SIGN OF PARTING"
  CarriageControl:;
@@ -134,12 +134,12 @@
 210 IF U=0 OR RND(1)>.19 THEN 212
  Variable:U numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:.19
- BinaryOperatorGreater:> numeric
- BinaryOperatorOr:OR numeric
+ BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorOr:OR(_,_) numeric
 211 PRINT ",";:U=2
  TextConstant:","
  CarriageControl:;
@@ -150,14 +150,14 @@
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
  NumericConstant:.65
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 213 PRINT " ";:U=U+1:GOTO 215
  TextConstant:" "
  CarriageControl:;
  Variable:U numeric scalar
  Variable:U numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
  LineNumber:215
 214 PRINT : U=0
@@ -170,38 +170,38 @@
  NumericConstant:10
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  NumericConstant:2
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 220 J=J+1 : K=K+1
  Variable:J numeric scalar
  Variable:J numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
  Variable:K numeric scalar
  Variable:K numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 230 IF U>0 OR INT(J/2)<>J/2 THEN 240
  Variable:U numeric scalar
  NumericConstant:0
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
  Variable:J numeric scalar
  NumericConstant:2
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  Variable:J numeric scalar
  NumericConstant:2
- BinaryOperatorDivide:/ numeric
- BinaryOperatorNotEqual:<> numeric
- BinaryOperatorOr:OR numeric
+ BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorOr:OR(_,_) numeric
 235 PRINT "     ";
  TextConstant:"     "
  CarriageControl:;
@@ -219,7 +219,7 @@
  CarriageControl:NL
  Variable:K numeric scalar
  NumericConstant:20
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 260 GOTO 215
  LineNumber:215
 270 PRINT : U=0 : K=0 : GOTO 110

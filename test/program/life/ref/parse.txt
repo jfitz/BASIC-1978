@@ -72,7 +72,7 @@
 360 IF A$ <> "Y" THEN STOP
  Variable:A$ string scalar
  TextConstant:"Y"
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>($,$) numeric
  
 400 REM *** CALCULATE NEIGHBORS
  Remark:*** CALCULATE NEIGHBORS
@@ -102,35 +102,35 @@
  AssignmentOperator:=
 450 FOR I0=-1 TO 1
  control: Variable:I0 numeric scalar
- start:   ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
+ start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) numeric"]
  end:     ["NumericConstant:1"]
 460 FOR J0=-1 TO 1
  control: Variable:J0 numeric scalar
- start:   ["NumericConstant:1", "UnaryOperatorMinus:- numeric"]
+ start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) numeric"]
  end:     ["NumericConstant:1"]
 470 IF I0 = 0 AND J0 = 0 THEN 500
  Variable:I0 numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
  Variable:J0 numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
- BinaryOperatorAnd:AND numeric
+ BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorAnd:AND(_,_) numeric
 480 IF B$(I+I0,J+J0) <> L$ THEN 500
  Variable:I numeric scalar
  Variable:I0 numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:J numeric scalar
  Variable:J0 numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:B$ string scalar
  Variable:L$ string scalar
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>($,$) numeric
 490 C = C + 1
  Variable:C numeric scalar
  Variable:C numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 500 NEXT J0
  Variable:J0 numeric scalar
@@ -167,19 +167,19 @@
  Variable:J numeric scalar
  Variable:N numeric scalar
  NumericConstant:2
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 640 IF N(I,J)=2 THEN 720
  Variable:I numeric scalar
  Variable:J numeric scalar
  Variable:N numeric scalar
  NumericConstant:2
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 650 IF N(I,J)=3 THEN 690
  Variable:I numeric scalar
  Variable:J numeric scalar
  Variable:N numeric scalar
  NumericConstant:3
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 660 REM * CELL DIES
  Remark:* CELL DIES
 670 B$(I,J)=D$

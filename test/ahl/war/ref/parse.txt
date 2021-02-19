@@ -28,11 +28,11 @@
 140 IF B$="NO" THEN 210
  Variable:B$ string scalar
  TextConstant:"NO"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 150 IF B$="YES" THEN 180
  Variable:B$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 160 PRINT "YES OR NO, PLEASE.  ";
  TextConstant:"YES OR NO, PLEASE.  "
  CarriageControl:;
@@ -77,25 +77,25 @@
  NumericConstant:52
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 295 IF J=1 THEN 350
  Variable:J numeric scalar
  NumericConstant:1
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 300 FOR K=1 TO J-1
  control: Variable:K numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:J numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:J numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) numeric"]
 310 IF L(K)<>L(J) THEN 340
  Variable:K numeric scalar
  Variable:L numeric scalar
  Variable:J numeric scalar
  Variable:L numeric scalar
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
 320 REM
  Remark:
 330 GOTO 290
@@ -108,7 +108,7 @@
  Variable:P numeric scalar
  Variable:P numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 370 M1=L(P)
  Variable:M1 numeric scalar
@@ -119,7 +119,7 @@
  Variable:P numeric scalar
  Variable:P numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 390 M2=L(P)
  Variable:M2 numeric scalar
@@ -143,29 +143,29 @@
  Variable:N1 numeric scalar
  Variable:M1 numeric scalar
  NumericConstant:.5
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:4
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 440 N2=INT((M2-.5)/4)
  Variable:N2 numeric scalar
  Variable:M2 numeric scalar
  NumericConstant:.5
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:4
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  AssignmentOperator:=
 450 IF N1>=N2 THEN 490
  Variable:N1 numeric scalar
  Variable:N2 numeric scalar
- BinaryOperatorGreaterEqual:>= numeric
+ BinaryOperatorGreaterEqual:>=(_,_) numeric
 460 A1=A1+1
  Variable:A1 numeric scalar
  Variable:A1 numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 470 PRINT "THE COMPUTER WINS!!! YOU HAVE";B1;"AND THE COMPUTER HAS";A1
  TextConstant:"THE COMPUTER WINS!!! YOU HAVE"
@@ -181,12 +181,12 @@
 490 IF N1=N2 THEN 530
  Variable:N1 numeric scalar
  Variable:N2 numeric scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 500 B1=B1+1
  Variable:B1 numeric scalar
  Variable:B1 numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 510 PRINT "YOU WIN. YOU HAVE";B1;"AND THE COMPUTER HAS";A1
  TextConstant:"YOU WIN. YOU HAVE"
@@ -205,10 +205,10 @@
 540 IF L(P+1)=0 THEN 610
  Variable:P numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  Variable:L numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 550 PRINT "DO YOU WANT TO CONTINUE";
  TextConstant:"DO YOU WANT TO CONTINUE"
  CarriageControl:;
@@ -217,11 +217,11 @@
 570 IF V$="YES" THEN 360
  Variable:V$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 580 IF V$="NO" THEN 650
  Variable:V$ string scalar
  TextConstant:"NO"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 590 PRINT "YES OR NO, PLEASE.  ";
  TextConstant:"YES OR NO, PLEASE.  "
  CarriageControl:;

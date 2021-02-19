@@ -26,7 +26,7 @@
 110 IF A$="NO" THEN 390
  Variable:A$ string scalar
  TextConstant:"NO"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 160 PRINT
  CarriageControl:NL
 200 PRINT"YOU ARE LANDING ON THE MOON AND AND HAVE TAKEN OVER MANUAL"
@@ -140,7 +140,7 @@
  CarriageControl:;
  Variable:H numeric scalar
  NumericConstant:15
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"*"
@@ -150,18 +150,18 @@
 510 IF B<0 THEN 650
  Variable:B numeric scalar
  NumericConstant:0
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 520 IF B>30 THEN B=30
  Variable:B numeric scalar
  NumericConstant:30
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
  Variable:B numeric scalar
  NumericConstant:30
  AssignmentOperator:=
 530 IF B>F THEN B=F
  Variable:B numeric scalar
  Variable:F numeric scalar
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
  Variable:B numeric scalar
  Variable:F numeric scalar
  AssignmentOperator:=
@@ -169,15 +169,15 @@
  Variable:V1 numeric scalar
  Variable:V numeric scalar
  Variable:B numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  NumericConstant:5
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 560 F=F-B
  Variable:F numeric scalar
  Variable:F numeric scalar
  Variable:B numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 570 H=H- .5*(V+V1)
  Variable:H numeric scalar
@@ -185,19 +185,19 @@
  NumericConstant:.5
  Variable:V numeric scalar
  Variable:V1 numeric scalar
- BinaryOperatorPlus:+ numeric
- BinaryOperatorMultiply:* numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  AssignmentOperator:=
 580 IF H<=0 THEN 670
  Variable:H numeric scalar
  NumericConstant:0
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 590 T=T+1
  Variable:T numeric scalar
  Variable:T numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 600 V=V1
  Variable:V numeric scalar
@@ -206,11 +206,11 @@
 610 IF F>0 THEN 490
  Variable:F numeric scalar
  NumericConstant:0
- BinaryOperatorGreater:> numeric
+ BinaryOperatorGreater:>(_,_) numeric
 615 IF B=0 THEN 640
  Variable:B numeric scalar
  NumericConstant:0
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 620 PRINT"**** OUT OF FUEL ****"
  TextConstant:"**** OUT OF FUEL ****"
  CarriageControl:NL
@@ -239,9 +239,9 @@
  CarriageControl:;
  Variable:H numeric scalar
  NumericConstant:12
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  NumericConstant:29
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionTab:TAB(_) string scalar
  CarriageControl:;
  TextConstant:"*"
@@ -261,35 +261,35 @@
  NumericConstant:.5
  Variable:V1 numeric scalar
  Variable:V numeric scalar
- BinaryOperatorPlus:+ numeric
- BinaryOperatorMultiply:* numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 690 IF B=5 THEN 720
  Variable:B numeric scalar
  NumericConstant:5
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 700 D=(-V+SQR(V*V+H*(10-2*B)))/(5-B)
  Variable:D numeric scalar
  Variable:V numeric scalar
- UnaryOperatorMinus:- numeric
+ UnaryOperatorMinus:-(_) numeric
  Variable:V numeric scalar
  Variable:V numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  Variable:H numeric scalar
  NumericConstant:10
  NumericConstant:2
  Variable:B numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorMinus:- numeric
- BinaryOperatorMultiply:* numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  FunctionSqr:SQR(_) numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  NumericConstant:5
  Variable:B numeric scalar
- BinaryOperatorMinus:- numeric
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorDivide:/(_,_) numeric
  AssignmentOperator:=
 710 GOTO 730
  LineNumber:730
@@ -297,24 +297,24 @@
  Variable:D numeric scalar
  Variable:H numeric scalar
  Variable:V numeric scalar
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  AssignmentOperator:=
 730 V1=V+(5-B)*D
  Variable:V1 numeric scalar
  Variable:V numeric scalar
  NumericConstant:5
  Variable:B numeric scalar
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMinus:-(_,_) numeric
  Variable:D numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 760 PRINT"TOUCHDOWN AT";T+D;"SECONDS."
  TextConstant:"TOUCHDOWN AT"
  CarriageControl:;
  Variable:T numeric scalar
  Variable:D numeric scalar
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  CarriageControl:;
  TextConstant:"SECONDS."
  CarriageControl:NL
@@ -333,7 +333,7 @@
 790 IF V1<>0 THEN 810
  Variable:V1 numeric scalar
  NumericConstant:0
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>(_,_) numeric
 800 PRINT"CONGRATULATIONS! A PERFECT LANDING!!"
  TextConstant:"CONGRATULATIONS! A PERFECT LANDING!!"
  CarriageControl:NL
@@ -344,7 +344,7 @@
  Variable:V1 numeric scalar
  FunctionAbs:ABS(_) numeric scalar
  NumericConstant:2
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 820 PRINT"***** SORRY, BUT YOU BLEW IT!!!!"
  TextConstant:"***** SORRY, BUT YOU BLEW IT!!!!"
  CarriageControl:NL
@@ -360,7 +360,7 @@
 860 IF A$="YES" THEN 390
  Variable:A$ string scalar
  TextConstant:"YES"
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=($,$) numeric
 870 PRINT: PRINT "CONTROL OUT.": PRINT
  CarriageControl:NL
  TextConstant:"CONTROL OUT."

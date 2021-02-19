@@ -12,26 +12,26 @@
 40       FOR K = 0 TO M-1
  control: Variable:K numeric scalar
  start:   ["NumericConstant:0"]
- end:     ["Variable:M numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:- numeric"]
+ end:     ["Variable:M numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) numeric"]
 50       LET X = B + K*P
  Variable:X numeric scalar
  Variable:B numeric scalar
  Variable:K numeric scalar
  Variable:P numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 60       IF X - M*INT(X/M) = A THEN 100
  Variable:X numeric scalar
  Variable:M numeric scalar
  Variable:X numeric scalar
  Variable:M numeric scalar
- BinaryOperatorDivide:/ numeric
+ BinaryOperatorDivide:/(_,_) numeric
  FunctionInt:INT(_) numeric scalar
- BinaryOperatorMultiply:* numeric
- BinaryOperatorMinus:- numeric
+ BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMinus:-(_,_) numeric
  Variable:A numeric scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
 70    NEXT K
  Variable:K numeric scalar
 80    PRINT "ERROR"
@@ -43,7 +43,7 @@
  Variable:P numeric scalar
  Variable:P numeric scalar
  Variable:M numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  AssignmentOperator:=
 110 LET B = X
  Variable:B numeric scalar

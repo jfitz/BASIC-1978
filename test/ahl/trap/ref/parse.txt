@@ -36,7 +36,7 @@
  NumericConstant:1
  FunctionLeft:LEFT$($,_) string scalar
  TextConstant:"Y"
- BinaryOperatorNotEqual:<> numeric
+ BinaryOperatorNotEqual:<>($,$) numeric
 80 PRINT "I AM THINKING OF A NUMBER BETWEEN 1 AND";N
  TextConstant:"I AM THINKING OF A NUMBER BETWEEN 1 AND"
  CarriageControl:;
@@ -78,10 +78,10 @@
  Variable:N numeric scalar
  NumericConstant:1
  FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:* numeric
+ BinaryOperatorMultiply:*(_,_) numeric
  FunctionInt:INT(_) numeric scalar
  NumericConstant:1
- BinaryOperatorPlus:+ numeric
+ BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
 190 FOR Q=1 TO G
  control: Variable:Q numeric scalar
@@ -100,29 +100,29 @@
 230 IF A=B AND X=A THEN 400
  Variable:A numeric scalar
  Variable:B numeric scalar
- BinaryOperatorEqual:= numeric
+ BinaryOperatorEqual:=(_,_) numeric
  Variable:X numeric scalar
  Variable:A numeric scalar
- BinaryOperatorEqual:= numeric
- BinaryOperatorAnd:AND numeric
+ BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorAnd:AND(_,_) numeric
 240 IF A <= B THEN 260
  Variable:A numeric scalar
  Variable:B numeric scalar
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
 250 GOSUB 360
  LineNumber:360
 260 IF A <= X AND X <= B THEN 320
  Variable:A numeric scalar
  Variable:X numeric scalar
- BinaryOperatorLessEqual:<= numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
  Variable:X numeric scalar
  Variable:B numeric scalar
- BinaryOperatorLessEqual:<= numeric
- BinaryOperatorAnd:AND numeric
+ BinaryOperatorLessEqual:<=(_,_) numeric
+ BinaryOperatorAnd:AND(_,_) numeric
 270 IF X<A THEN 300
  Variable:X numeric scalar
  Variable:A numeric scalar
- BinaryOperatorLess:< numeric
+ BinaryOperatorLess:<(_,_) numeric
 280 PRINT "MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
  TextConstant:"MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
  CarriageControl:NL
