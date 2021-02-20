@@ -42,31 +42,31 @@
  AssignmentOperator:=
 30 INPUT B$(C)
  Variable:C numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
 40 IF B$(C)="DONE" THEN B$(C)="": GOTO 80
  Variable:C numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
  TextConstant:"DONE"
  BinaryOperatorEqual:=($,$) numeric
  Variable:C numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
  TextConstant:""
  AssignmentOperator:=
  LineNumber:80
 50 IF LEFT$(B$(C),1)="." THEN B$(C)=" "+RIGHT$(B$(C),LEN(B$(C))-1)
  Variable:C numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
  NumericConstant:1
  FunctionLeft:LEFT$($,_) string scalar
  TextConstant:"."
  BinaryOperatorEqual:=($,$) numeric
  Variable:C numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
  TextConstant:" "
  Variable:C numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
  Variable:C numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
  FunctionLen:LEN($) numeric scalar
  NumericConstant:1
  BinaryOperatorMinus:-(_,_) numeric
@@ -96,13 +96,13 @@
  end:     ["Variable:C numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) numeric"]
 100 IF LEN(B$(X))>L THEN L=LEN(B$(X))
  Variable:X numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
  FunctionLen:LEN($) numeric scalar
  Variable:L numeric scalar
  BinaryOperatorGreater:>(_,_) numeric
  Variable:L numeric scalar
  Variable:X numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
  FunctionLen:LEN($) numeric scalar
  AssignmentOperator:=
 110 NEXT X
@@ -130,10 +130,10 @@
 150 FOR Y=1 TO LEN(B$(X))
  control: Variable:Y numeric scalar
  start:   ["NumericConstant:1"]
- end:     ["Variable:X numeric scalar", "Variable:B$ string scalar", "FunctionLen:LEN($) numeric scalar"]
+ end:     ["Variable:X numeric scalar", "Variable:B$(_) string scalar", "FunctionLen:LEN($) numeric scalar"]
 160 IF MID$(B$(X),Y,1)<>" " THEN A(X1+X,Y1+Y)=1:P=P+1
  Variable:X numeric scalar
- Variable:B$ string scalar
+ Variable:B$(_) string scalar
  Variable:Y numeric scalar
  NumericConstant:1
  FunctionMid:MID$($,_,_) string scalar
@@ -145,7 +145,7 @@
  Variable:Y1 numeric scalar
  Variable:Y numeric scalar
  BinaryOperatorPlus:+(_,_) numeric
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:1
  AssignmentOperator:=
  Variable:P numeric scalar
@@ -214,31 +214,31 @@
 253 IF A(X,Y)=2 THEN A(X,Y)=0:GOTO 270
  Variable:X numeric scalar
  Variable:Y numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:2
  BinaryOperatorEqual:=(_,_) numeric
  Variable:X numeric scalar
  Variable:Y numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:270
 256 IF A(X,Y)=3 THEN A(X,Y)=1:GOTO 261
  Variable:X numeric scalar
  Variable:Y numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:3
  BinaryOperatorEqual:=(_,_) numeric
  Variable:X numeric scalar
  Variable:Y numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:1
  AssignmentOperator:=
  LineNumber:261
 260 IF A(X,Y)<>1 THEN 270
  Variable:X numeric scalar
  Variable:Y numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:1
  BinaryOperatorNotEqual:<>(_,_) numeric
 261 PRINT TAB(Y);"*";
@@ -369,12 +369,12 @@
 550 IF A(I,J)=1 OR A(I,J)=2 THEN C=C+1
  Variable:I numeric scalar
  Variable:J numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) numeric
  Variable:I numeric scalar
  Variable:J numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:2
  BinaryOperatorEqual:=(_,_) numeric
  BinaryOperatorOr:OR(_,_) numeric
@@ -390,7 +390,7 @@
 580 IF A(X,Y)=0 THEN 610
  Variable:X numeric scalar
  Variable:Y numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:0
  BinaryOperatorEqual:=(_,_) numeric
 590 IF C<3 OR C>4 THEN A(X,Y)=2: GOTO 600
@@ -403,7 +403,7 @@
  BinaryOperatorOr:OR(_,_) numeric
  Variable:X numeric scalar
  Variable:Y numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:600
@@ -421,7 +421,7 @@
  BinaryOperatorEqual:=(_,_) numeric
  Variable:X numeric scalar
  Variable:Y numeric scalar
- Variable:A numeric scalar
+ Variable:A(_,_) numeric scalar
  NumericConstant:3
  AssignmentOperator:=
  Variable:P numeric scalar

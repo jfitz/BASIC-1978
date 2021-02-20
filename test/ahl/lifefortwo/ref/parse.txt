@@ -51,7 +51,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:18"]
  Variable:M numeric scalar
- Variable:K numeric scalar
+ Variable:K(_) numeric scalar
  Variable:M numeric scalar
 13 DATA -1,0,1,0,0,-1,0,1,-1,-1,1,-1,-1,1,1,1
  NumericConstant:1
@@ -81,7 +81,7 @@
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:16"]
  Variable:O1 numeric scalar
- Variable:A numeric scalar
+ Variable:A(_) numeric scalar
  Variable:O1 numeric scalar
 20 GOTO 500
  LineNumber:500
@@ -96,7 +96,7 @@
 55 IF N(J,K)>99 THEN GOSUB 200
  Variable:J numeric scalar
  Variable:K numeric scalar
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:99
  BinaryOperatorGreater:>(_,_) numeric
  LineNumber:200
@@ -173,7 +173,7 @@
  AssignmentOperator:=
  Variable:J numeric scalar
  Variable:K numeric scalar
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:999
  BinaryOperatorGreater:>(_,_) numeric
  Variable:B numeric scalar
@@ -187,26 +187,26 @@
 230 N(J+A(O1),K+A(O1+1))=N(J+A(O1),K+A(O1+1))+B
  Variable:J numeric scalar
  Variable:O1 numeric scalar
- Variable:A numeric scalar
+ Variable:A(_) numeric scalar
  BinaryOperatorPlus:+(_,_) numeric
  Variable:K numeric scalar
  Variable:O1 numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) numeric
- Variable:A numeric scalar
+ Variable:A(_) numeric scalar
  BinaryOperatorPlus:+(_,_) numeric
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  Variable:J numeric scalar
  Variable:O1 numeric scalar
- Variable:A numeric scalar
+ Variable:A(_) numeric scalar
  BinaryOperatorPlus:+(_,_) numeric
  Variable:K numeric scalar
  Variable:O1 numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) numeric
- Variable:A numeric scalar
+ Variable:A(_) numeric scalar
  BinaryOperatorPlus:+(_,_) numeric
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  Variable:B numeric scalar
  BinaryOperatorPlus:+(_,_) numeric
  AssignmentOperator:=
@@ -217,7 +217,7 @@
 300 IF N(J,K)<3 THEN 399
  Variable:J numeric scalar
  Variable:K numeric scalar
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:3
  BinaryOperatorLess:<(_,_) numeric
 305 FOR O1=1 TO 18
@@ -227,9 +227,9 @@
 310 IF N(J,K)=K(O1) THEN 350
  Variable:J numeric scalar
  Variable:K numeric scalar
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  Variable:O1 numeric scalar
- Variable:K numeric scalar
+ Variable:K(_) numeric scalar
  BinaryOperatorEqual:=(_,_) numeric
 315 NEXT O1
  Variable:O1 numeric scalar
@@ -242,7 +242,7 @@
 351 N(J,K)=100: M2=M2+1: PRINT " * ";
  Variable:J numeric scalar
  Variable:K numeric scalar
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:100
  AssignmentOperator:=
  Variable:M2 numeric scalar
@@ -257,7 +257,7 @@
 360 N(J,K)=1000: M3=M3+1: PRINT " # ";
  Variable:J numeric scalar
  Variable:K numeric scalar
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:1000
  AssignmentOperator:=
  Variable:M3 numeric scalar
@@ -272,7 +272,7 @@
 399 N(J,K)=0: PRINT "   ";: RETURN
  Variable:J numeric scalar
  Variable:K numeric scalar
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:0
  AssignmentOperator:=
  TextConstant:"   "
@@ -302,7 +302,7 @@
 515 N(J,K)=0
  Variable:J numeric scalar
  Variable:K numeric scalar
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:0
  AssignmentOperator:=
 516 NEXT K
@@ -337,10 +337,10 @@
  LineNumber:700
 540 N(X(B),Y(B))=P1: NEXT K1
  Variable:B numeric scalar
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
  Variable:B numeric scalar
- Variable:Y numeric scalar
- Variable:N numeric scalar
+ Variable:Y(_) numeric scalar
+ Variable:N(_,_) numeric scalar
  Variable:P1 numeric scalar
  AssignmentOperator:=
  Variable:K1 numeric scalar
@@ -409,17 +409,17 @@
  Variable:B numeric scalar
 586 N(X(1),Y(1))=100: N(X(2),Y(2))=1000
  NumericConstant:1
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
  NumericConstant:1
- Variable:Y numeric scalar
- Variable:N numeric scalar
+ Variable:Y(_) numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:100
  AssignmentOperator:=
  NumericConstant:2
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
  NumericConstant:2
- Variable:Y numeric scalar
- Variable:N numeric scalar
+ Variable:Y(_) numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:1000
  AssignmentOperator:=
 596 GOTO 560
@@ -444,37 +444,37 @@
  FunctionChr:CHR$(_) string scalar
  CarriageControl:;
  Variable:B numeric scalar
- Variable:Y numeric scalar
+ Variable:Y(_) numeric scalar
  Variable:B numeric scalar
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
 705 IF X(B)<=5 THEN IF X(B)>0 THEN 708
  Variable:B numeric scalar
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
  NumericConstant:5
  BinaryOperatorLessEqual:<=(_,_) numeric
  Variable:B numeric scalar
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
  NumericConstant:0
  BinaryOperatorGreater:>(_,_) numeric
 706 GOTO 750
  LineNumber:750
 708 IF Y(B)<=5 THEN IF Y(B)>0 THEN 715
  Variable:B numeric scalar
- Variable:Y numeric scalar
+ Variable:Y(_) numeric scalar
  NumericConstant:5
  BinaryOperatorLessEqual:<=(_,_) numeric
  Variable:B numeric scalar
- Variable:Y numeric scalar
+ Variable:Y(_) numeric scalar
  NumericConstant:0
  BinaryOperatorGreater:>(_,_) numeric
 710 GOTO 750
  LineNumber:750
 715 IF N(X(B),Y(B))<>0 THEN 750
  Variable:B numeric scalar
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
  Variable:B numeric scalar
- Variable:Y numeric scalar
- Variable:N numeric scalar
+ Variable:Y(_) numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) numeric
 720 IF B=1 THEN RETURN
@@ -484,14 +484,14 @@
  
 725 IF X(1)=X(2) THEN IF Y(1)=Y(2) THEN 740
  NumericConstant:1
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
  NumericConstant:2
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
  BinaryOperatorEqual:=(_,_) numeric
  NumericConstant:1
- Variable:Y numeric scalar
+ Variable:Y(_) numeric scalar
  NumericConstant:2
- Variable:Y numeric scalar
+ Variable:Y(_) numeric scalar
  BinaryOperatorEqual:=(_,_) numeric
 730 RETURN
  
@@ -500,14 +500,14 @@
  CarriageControl:NL
 741 N(X(B)+1,Y(B)+1)=0: B=99: RETURN
  Variable:B numeric scalar
- Variable:X numeric scalar
+ Variable:X(_) numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) numeric
  Variable:B numeric scalar
- Variable:Y numeric scalar
+ Variable:Y(_) numeric scalar
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) numeric
- Variable:N numeric scalar
+ Variable:N(_,_) numeric scalar
  NumericConstant:0
  AssignmentOperator:=
  Variable:B numeric scalar
