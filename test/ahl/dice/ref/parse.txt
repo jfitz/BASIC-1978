@@ -1,12 +1,12 @@
 2 PRINT TAB(34);"DICE"
  NumericConstant:34
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"DICE"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -16,7 +16,7 @@
  CarriageControl:NL
 10 DIM F(12)
  NumericConstant:12
- Declaration:F() array
+ Declaration:F() -> _()
 20 REM  DANNY FREIDUS
  Remark: DANNY FREIDUS
 30 PRINT "THIS PROGRAM SIMULATES THE ROLLING OF A"
@@ -35,62 +35,62 @@
  TextConstant:"A LONG TIME.  IN PARTICULAR, NUMBERS OVER 5000."
  CarriageControl:NL
 80 FOR Q=1 TO 12
- control: Variable:Q numeric scalar
+ control: Variable:Q -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:12"]
 90 F(Q)=0
- Variable:Q numeric scalar
- Variable:F(_) numeric scalar
+ Variable:Q -> _
+ Variable:F(_) -> _
  NumericConstant:0
  AssignmentOperator:=
 100 NEXT Q
- Variable:Q numeric scalar
+ Variable:Q -> _
 110 PRINT:PRINT "HOW MANY ROLLS";
  CarriageControl:NL
  TextConstant:"HOW MANY ROLLS"
  CarriageControl:;
 120 INPUT X
- Variable:X numeric scalar
+ Variable:X -> _
 130 FOR S=1 TO X
- control: Variable:S numeric scalar
+ control: Variable:S -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:X numeric scalar"]
+ end:     ["Variable:X -> _"]
 140 A=INT(6*RND(1)+1)
- Variable:A numeric scalar
+ Variable:A -> _
  NumericConstant:6
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 150 B=INT(6*RND(1)+1)
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:6
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 160 R=A+B
- Variable:R numeric scalar
- Variable:A numeric scalar
- Variable:B numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:R -> _
+ Variable:A -> _
+ Variable:B -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 170 F(R)=F(R)+1
- Variable:R numeric scalar
- Variable:F(_) numeric scalar
- Variable:R numeric scalar
- Variable:F(_) numeric scalar
+ Variable:R -> _
+ Variable:F(_) -> _
+ Variable:R -> _
+ Variable:F(_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 180 NEXT S
- Variable:S numeric scalar
+ Variable:S -> _
 185 PRINT
  CarriageControl:NL
 190 PRINT "TOTAL SPOTS","NUMBER OF TIMES"
@@ -99,17 +99,17 @@
  TextConstant:"NUMBER OF TIMES"
  CarriageControl:NL
 200 FOR V=2 TO 12
- control: Variable:V numeric scalar
+ control: Variable:V -> _
  start:   ["NumericConstant:2"]
  end:     ["NumericConstant:12"]
 210 PRINT V,F(V)
- Variable:V numeric scalar
+ Variable:V -> _
  CarriageControl:,
- Variable:V numeric scalar
- Variable:F(_) numeric scalar
+ Variable:V -> _
+ Variable:F(_) -> _
  CarriageControl:NL
 220 NEXT V
- Variable:V numeric scalar
+ Variable:V -> _
 221 PRINT
  CarriageControl:NL
 222 PRINT:PRINT "TRY AGAIN";
@@ -117,11 +117,11 @@
  TextConstant:"TRY AGAIN"
  CarriageControl:;
 223 INPUT Z$
- Variable:Z$ string scalar
+ Variable:Z$ -> $
 224 IF Z$="YES" THEN 80
- Variable:Z$ string scalar
+ Variable:Z$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 240 END
  
 

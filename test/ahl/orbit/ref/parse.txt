@@ -1,12 +1,12 @@
 2 PRINT TAB(33);"ORBIT"
  NumericConstant:33
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"ORBIT"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -178,46 +178,46 @@
  TextConstant:"GOOD LUCK.  THE FEDERATION IS COUNTING ON YOU."
  CarriageControl:NL
 270 A=INT(360*RND(1))
- Variable:A numeric scalar
+ Variable:A -> _
  NumericConstant:360
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 280 D=INT(200*RND(1)+200)
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:200
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:200
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 290 R=INT(20*RND(1)+10)
- Variable:R numeric scalar
+ Variable:R -> _
  NumericConstant:20
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:10
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 300 H=0
- Variable:H numeric scalar
+ Variable:H -> _
  NumericConstant:0
  AssignmentOperator:=
 310 IF H=7 THEN 490
- Variable:H numeric scalar
+ Variable:H -> _
  NumericConstant:7
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 320 H=H+1
- Variable:H numeric scalar
- Variable:H numeric scalar
+ Variable:H -> _
+ Variable:H -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 325 PRINT
  CarriageControl:NL
@@ -226,7 +226,7 @@
 330 PRINT "THIS IS HOUR";H;", AT WHAT ANGLE DO YOU WISH TO SEND"
  TextConstant:"THIS IS HOUR"
  CarriageControl:;
- Variable:H numeric scalar
+ Variable:H -> _
  CarriageControl:;
  TextConstant:", AT WHAT ANGLE DO YOU WISH TO SEND"
  CarriageControl:NL
@@ -234,77 +234,77 @@
  TextConstant:"YOUR PHOTON BOMB"
  CarriageControl:;
 340 INPUT A1
- Variable:A1 numeric scalar
+ Variable:A1 -> _
 350 PRINT "HOW FAR OUT DO YOU WISH TO DETONATE IT";
  TextConstant:"HOW FAR OUT DO YOU WISH TO DETONATE IT"
  CarriageControl:;
 360 INPUT D1
- Variable:D1 numeric scalar
+ Variable:D1 -> _
 365 PRINT
  CarriageControl:NL
 366 PRINT
  CarriageControl:NL
 370 A=A+R
- Variable:A numeric scalar
- Variable:A numeric scalar
- Variable:R numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:A -> _
+ Variable:A -> _
+ Variable:R -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 380 IF A<360 THEN 400
- Variable:A numeric scalar
+ Variable:A -> _
  NumericConstant:360
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 390 A=A-360
- Variable:A numeric scalar
- Variable:A numeric scalar
+ Variable:A -> _
+ Variable:A -> _
  NumericConstant:360
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 400 T=ABS(A-A1)
- Variable:T numeric scalar
- Variable:A numeric scalar
- Variable:A1 numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ Variable:T -> _
+ Variable:A -> _
+ Variable:A1 -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  AssignmentOperator:=
 410 IF T<180 THEN 430
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:180
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 420 T=360-T
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:360
- Variable:T numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:T -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 430 C=SQR(D*D+D1*D1-2*D*D1*COS(T*3.14159/180))
- Variable:C numeric scalar
- Variable:D numeric scalar
- Variable:D numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:D1 numeric scalar
- Variable:D1 numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:C -> _
+ Variable:D -> _
+ Variable:D -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:D1 -> _
+ Variable:D1 -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:2
- Variable:D numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:D1 numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
+ Variable:D -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:D1 -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
  NumericConstant:3.14159
- BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:180
- BinaryOperatorDivide:/(_,_) numeric
- FunctionCos:COS(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
- FunctionSqr:SQR(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionCos:COS(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionSqr:SQR(_) -> _
  AssignmentOperator:=
 440 PRINT "YOUR PHOTON BOMB EXPLODED";C;"*10^2 MILES FROM THE"
  TextConstant:"YOUR PHOTON BOMB EXPLODED"
  CarriageControl:;
- Variable:C numeric scalar
+ Variable:C -> _
  CarriageControl:;
  TextConstant:"*10^2 MILES FROM THE"
  CarriageControl:NL
@@ -312,9 +312,9 @@
  TextConstant:"ROMULAN SHIP."
  CarriageControl:NL
 450 IF C<=50 THEN 470
- Variable:C numeric scalar
+ Variable:C -> _
  NumericConstant:50
- BinaryOperatorLessEqual:<=(_,_) numeric
+ BinaryOperatorLessEqual:<=(_,_) -> _
 460 GOTO 310
  LineNumber:310
 470 PRINT "YOU HAVE SUCCESFULLY COMPLETED YOUR MISSION."
@@ -332,11 +332,11 @@
  TextConstant:"DO YOU WISH TO TRY TO DESTROY IT"
  CarriageControl:;
 520 INPUT C$
- Variable:C$ string scalar
+ Variable:C$ -> $
 530 IF C$="YES" THEN 270
- Variable:C$ string scalar
+ Variable:C$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 540 PRINT "GOOD BYE."
  TextConstant:"GOOD BYE."
  CarriageControl:NL

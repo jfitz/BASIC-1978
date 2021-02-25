@@ -1,12 +1,12 @@
 1 PRINT TAB(32);"3D PLOT"
  NumericConstant:32
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"3D PLOT"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,86 +15,86 @@
  CarriageControl:NL
  CarriageControl:NL
 5 DEF FNA(Z)=30*EXP(-Z*Z/100)
- UserFunctionName:FNA
- VariableName:Z
+ UserFunctionName:FNA -> _
+ VariableName:Z -> _
  NumericConstant:30
- Variable:Z numeric scalar
- UnaryOperatorMinus:-(_) numeric
- Variable:Z numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:Z -> _
+ UnaryOperatorMinus:-(_) -> _
+ Variable:Z -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:100
- BinaryOperatorDivide:/(_,_) numeric
- FunctionExp:EXP(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionExp:EXP(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
 100 PRINT
  CarriageControl:NL
 110 FOR X=-30 TO 30 STEP 1.5
- control: Variable:X numeric scalar
- start:   ["NumericConstant:30", "UnaryOperatorMinus:-(_) numeric"]
+ control: Variable:X -> _
+ start:   ["NumericConstant:30", "UnaryOperatorMinus:-(_) -> _"]
  end:     ["NumericConstant:30"]
  step:    ["NumericConstant:1.5"]
 120 L=0
- Variable:L numeric scalar
+ Variable:L -> _
  NumericConstant:0
  AssignmentOperator:=
 130 Y1=5*INT(SQR(900-X*X)/5)
- Variable:Y1 numeric scalar
+ Variable:Y1 -> _
  NumericConstant:5
  NumericConstant:900
- Variable:X numeric scalar
- Variable:X numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
- FunctionSqr:SQR(_) numeric scalar
+ Variable:X -> _
+ Variable:X -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionSqr:SQR(_) -> _
  NumericConstant:5
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  AssignmentOperator:=
 140 FOR Y=Y1 TO -Y1 STEP -5
- control: Variable:Y numeric scalar
- start:   ["Variable:Y1 numeric scalar"]
- end:     ["Variable:Y1 numeric scalar", "UnaryOperatorMinus:-(_) numeric"]
- step:    ["NumericConstant:5", "UnaryOperatorMinus:-(_) numeric"]
+ control: Variable:Y -> _
+ start:   ["Variable:Y1 -> _"]
+ end:     ["Variable:Y1 -> _", "UnaryOperatorMinus:-(_) -> _"]
+ step:    ["NumericConstant:5", "UnaryOperatorMinus:-(_) -> _"]
 150 Z=INT(25+FNA(SQR(X*X+Y*Y))-.7*Y)
- Variable:Z numeric scalar
+ Variable:Z -> _
  NumericConstant:25
- Variable:X numeric scalar
- Variable:X numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:Y numeric scalar
- Variable:Y numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorPlus:+(_,_) numeric
- FunctionSqr:SQR(_) numeric scalar
- UserFunction:FNA(_) numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:X -> _
+ Variable:X -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:Y -> _
+ Variable:Y -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionSqr:SQR(_) -> _
+ UserFunction:FNA(_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:.7
- Variable:Y numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ Variable:Y -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 160 IF Z<=L THEN 190
- Variable:Z numeric scalar
- Variable:L numeric scalar
- BinaryOperatorLessEqual:<=(_,_) numeric
+ Variable:Z -> _
+ Variable:L -> _
+ BinaryOperatorLessEqual:<=(_,_) -> _
 170 L=Z
- Variable:L numeric scalar
- Variable:Z numeric scalar
+ Variable:L -> _
+ Variable:Z -> _
  AssignmentOperator:=
 180 PRINT TAB(Z);"*";
- Variable:Z numeric scalar
- FunctionTab:TAB(_) string scalar
+ Variable:Z -> _
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"*"
  CarriageControl:;
 190 NEXT Y
- Variable:Y numeric scalar
+ Variable:Y -> _
 200 PRINT
  CarriageControl:NL
 210 NEXT X
- Variable:X numeric scalar
+ Variable:X -> _
 300 END
  
 

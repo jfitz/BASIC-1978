@@ -1,12 +1,12 @@
 1 PRINT TAB(32);"FOOTBALL"
  NumericConstant:32
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"FOOTBALL"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -18,30 +18,30 @@
  Remark:
 120 DIM A(20),B(20),C(40),H(2),T(2),W(2),X(2),Y(2),Z(2)
  NumericConstant:20
- Declaration:A() array
+ Declaration:A() -> _()
  NumericConstant:20
- Declaration:B() array
+ Declaration:B() -> _()
  NumericConstant:40
- Declaration:C() array
+ Declaration:C() -> _()
  NumericConstant:2
- Declaration:H() array
+ Declaration:H() -> _()
  NumericConstant:2
- Declaration:T() array
+ Declaration:T() -> _()
  NumericConstant:2
- Declaration:W() array
+ Declaration:W() -> _()
  NumericConstant:2
- Declaration:X() array
+ Declaration:X() -> _()
  NumericConstant:2
- Declaration:Y() array
+ Declaration:Y() -> _()
  NumericConstant:2
- Declaration:Z() array
+ Declaration:Z() -> _()
 130 DIM M$(2),D(2),P$(20)
  NumericConstant:2
- Declaration:M$() array
+ Declaration:M$() -> $()
  NumericConstant:2
- Declaration:D() array
+ Declaration:D() -> _()
  NumericConstant:20
- Declaration:P$() array
+ Declaration:P$() -> $()
 140 PRINT "PRESENTING N.F.U. FOOTBALL (NO FORTRAN USED)"
  TextConstant:"PRESENTING N.F.U. FOOTBALL (NO FORTRAN USED)"
  CarriageControl:NL
@@ -49,15 +49,15 @@
  CarriageControl:NL
  CarriageControl:NL
 150 INPUT "DO YOU WANT INSTRUCTIONS";A$
- Variable:A$ string scalar
+ Variable:A$ -> $
 160 IF A$="NO" THEN 290
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"NO"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 165 IF A$<>"YES" THEN 150
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorNotEqual:<>($,$) numeric
+ BinaryOperatorNotEqual:<>($,$) -> _
 170 PRINT "THIS IS A FOOTBALL GAME FOR TWO TEAMS IN WHICH PLAYERS MUST"
  TextConstant:"THIS IS A FOOTBALL GAME FOR TWO TEAMS IN WHICH PLAYERS MUST"
  CarriageControl:NL
@@ -111,52 +111,52 @@
  CarriageControl:NL
  TextConstant:"PLEASE INPUT SCORE LIMIT ON GAME"
  CarriageControl:;
- Variable:E numeric scalar
+ Variable:E -> _
 300 FOR I=1 TO 40: READ N: IF I>20 THEN 350
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:40"]
- Variable:N numeric scalar
- Variable:I numeric scalar
+ Variable:N -> _
+ Variable:I -> _
  NumericConstant:20
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 330 A(N)=I: GOTO 360
- Variable:N numeric scalar
- Variable:A(_) numeric scalar
- Variable:I numeric scalar
+ Variable:N -> _
+ Variable:A(_) -> _
+ Variable:I -> _
  AssignmentOperator:=
  LineNumber:360
 350 B(N)=I-20
- Variable:N numeric scalar
- Variable:B(_) numeric scalar
- Variable:I numeric scalar
+ Variable:N -> _
+ Variable:B(_) -> _
+ Variable:I -> _
  NumericConstant:20
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 360 C(I)=N: NEXT I
- Variable:I numeric scalar
- Variable:C(_) numeric scalar
- Variable:N numeric scalar
+ Variable:I -> _
+ Variable:C(_) -> _
+ Variable:N -> _
  AssignmentOperator:=
- Variable:I numeric scalar
+ Variable:I -> _
 370 FOR I=1 TO 20: READ P$(I): NEXT I
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
- Variable:I numeric scalar
- Variable:P$(_) string scalar
- Variable:I numeric scalar
+ Variable:I -> _
+ Variable:P$(_) -> $
+ Variable:I -> _
 380 L=0: T=1
- Variable:L numeric scalar
+ Variable:L -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:1
  AssignmentOperator:=
 410 PRINT "TEAM";T;"PLAY CHART"
  TextConstant:"TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"PLAY CHART"
  CarriageControl:NL
@@ -164,32 +164,32 @@
  TextConstant:"NO.      PLAY"
  CarriageControl:NL
 430 FOR I=1 TO 20
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
 440 REM
  Remark:
 450 PRINT C(I+L);TAB(6);P$(I)
- Variable:I numeric scalar
- Variable:L numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:C(_) numeric scalar
+ Variable:I -> _
+ Variable:L -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:C(_) -> _
  CarriageControl:;
  NumericConstant:6
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
- Variable:I numeric scalar
- Variable:P$(_) string scalar
+ Variable:I -> _
+ Variable:P$(_) -> $
  CarriageControl:NL
 460 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 630 L=L+20:T=2
- Variable:L numeric scalar
- Variable:L numeric scalar
+ Variable:L -> _
+ Variable:L -> _
  NumericConstant:20
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:2
  AssignmentOperator:=
 640 PRINT
@@ -198,88 +198,88 @@
  TextConstant:"TEAR OFF HERE----------------------------------------------"
  CarriageControl:NL
 660 FOR X=1 TO 11: PRINT: NEXT X
- control: Variable:X numeric scalar
+ control: Variable:X -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:11"]
  CarriageControl:NL
- Variable:X numeric scalar
+ Variable:X -> _
 670 FOR Z=1 TO 3000: NEXT Z
- control: Variable:Z numeric scalar
+ control: Variable:Z -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3000"]
- Variable:Z numeric scalar
+ Variable:Z -> _
 680 IF L=20 THEN 410
- Variable:L numeric scalar
+ Variable:L -> _
  NumericConstant:20
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 690 D(1)=0: D(2)=3: M$(1)="--->": M$(2)="<---"
  NumericConstant:1
- Variable:D(_) numeric scalar
+ Variable:D(_) -> _
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:2
- Variable:D(_) numeric scalar
+ Variable:D(_) -> _
  NumericConstant:3
  AssignmentOperator:=
  NumericConstant:1
- Variable:M$(_) string scalar
+ Variable:M$(_) -> $
  TextConstant:"--->"
  AssignmentOperator:=
  NumericConstant:2
- Variable:M$(_) string scalar
+ Variable:M$(_) -> $
  TextConstant:"<---"
  AssignmentOperator:=
 700 H(1)=0: H(2)=0: T(1)=2: T(2)=1
  NumericConstant:1
- Variable:H(_) numeric scalar
+ Variable:H(_) -> _
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:2
- Variable:H(_) numeric scalar
+ Variable:H(_) -> _
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:1
- Variable:T(_) numeric scalar
+ Variable:T(_) -> _
  NumericConstant:2
  AssignmentOperator:=
  NumericConstant:2
- Variable:T(_) numeric scalar
+ Variable:T(_) -> _
  NumericConstant:1
  AssignmentOperator:=
 710 W(1)=-1: W(2)=1: X(1)=100: X(2)=0
  NumericConstant:1
- Variable:W(_) numeric scalar
+ Variable:W(_) -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  AssignmentOperator:=
  NumericConstant:2
- Variable:W(_) numeric scalar
+ Variable:W(_) -> _
  NumericConstant:1
  AssignmentOperator:=
  NumericConstant:1
- Variable:X(_) numeric scalar
+ Variable:X(_) -> _
  NumericConstant:100
  AssignmentOperator:=
  NumericConstant:2
- Variable:X(_) numeric scalar
+ Variable:X(_) -> _
  NumericConstant:0
  AssignmentOperator:=
 720 Y(1)=1: Y(2)=-1: Z(1)=0: Z(2)=100
  NumericConstant:1
- Variable:Y(_) numeric scalar
+ Variable:Y(_) -> _
  NumericConstant:1
  AssignmentOperator:=
  NumericConstant:2
- Variable:Y(_) numeric scalar
+ Variable:Y(_) -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  AssignmentOperator:=
  NumericConstant:1
- Variable:Z(_) numeric scalar
+ Variable:Z(_) -> _
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:2
- Variable:Z(_) numeric scalar
+ Variable:Z(_) -> _
  NumericConstant:100
  AssignmentOperator:=
 725 GOSUB 1910
@@ -288,67 +288,67 @@
  TextConstant:"TEAM 1 DEFENDS 0 YD GOAL -- TEAM 2 DEFENDS 100 YD GOAL."
  CarriageControl:NL
 740 T=INT(2*RND(1)+1)
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:2
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 760 PRINT: PRINT "THE COIN IS FLIPPED"
  CarriageControl:NL
  TextConstant:"THE COIN IS FLIPPED"
  CarriageControl:NL
 765 P=X(T)-Y(T)*40
- Variable:P numeric scalar
- Variable:T numeric scalar
- Variable:X(_) numeric scalar
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
+ Variable:P -> _
+ Variable:T -> _
+ Variable:X(_) -> _
+ Variable:T -> _
+ Variable:Y(_) -> _
  NumericConstant:40
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 770 GOSUB 1860: PRINT : PRINT "TEAM";T;"RECEIVES KICK-OFF"
  LineNumber:1860
  CarriageControl:NL
  TextConstant:"TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"RECEIVES KICK-OFF"
  CarriageControl:NL
 780 K=INT(26*RND(1)+40)
- Variable:K numeric scalar
+ Variable:K -> _
  NumericConstant:26
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:40
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 790 P=P-Y(T)*K
- Variable:P numeric scalar
- Variable:P numeric scalar
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:K numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:P -> _
+ Variable:P -> _
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:K -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 794 IF W(T)*P<Z(T)+10 THEN 810
- Variable:T numeric scalar
- Variable:W(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:Z(_) numeric scalar
+ Variable:T -> _
+ Variable:W(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:Z(_) -> _
  NumericConstant:10
- BinaryOperatorPlus:+(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 795 PRINT: PRINT "BALL WENT OUT OF ENDZONE --AUTOMATIC TOUCHBACK--"
  CarriageControl:NL
  TextConstant:"BALL WENT OUT OF ENDZONE --AUTOMATIC TOUCHBACK--"
@@ -358,120 +358,120 @@
 810 PRINT "BALL WENT";K;"YARDS.  NOW ON";P:GOSUB 1900
  TextConstant:"BALL WENT"
  CarriageControl:;
- Variable:K numeric scalar
+ Variable:K -> _
  CarriageControl:;
  TextConstant:"YARDS.  NOW ON"
  CarriageControl:;
- Variable:P numeric scalar
+ Variable:P -> _
  CarriageControl:NL
  LineNumber:1900
 830 PRINT "TEAM";T;"DO YOU WANT TO RUNBACK";:INPUT A$
  TextConstant:"TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"DO YOU WANT TO RUNBACK"
  CarriageControl:;
- Variable:A$ string scalar
+ Variable:A$ -> $
 840 IF A$="YES" THEN 1430
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 845 IF A$<>"NO" THEN 830
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"NO"
- BinaryOperatorNotEqual:<>($,$) numeric
+ BinaryOperatorNotEqual:<>($,$) -> _
 850 IF W(T)*P<Z(T) THEN 880
- Variable:T numeric scalar
- Variable:W(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:Z(_) numeric scalar
- BinaryOperatorLess:<(_,_) numeric
+ Variable:T -> _
+ Variable:W(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:Z(_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 870 P=Z(T)-W(T)*20
- Variable:P numeric scalar
- Variable:T numeric scalar
- Variable:Z(_) numeric scalar
- Variable:T numeric scalar
- Variable:W(_) numeric scalar
+ Variable:P -> _
+ Variable:T -> _
+ Variable:Z(_) -> _
+ Variable:T -> _
+ Variable:W(_) -> _
  NumericConstant:20
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 880 D=1: S=P
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:1
  AssignmentOperator:=
- Variable:S numeric scalar
- Variable:P numeric scalar
+ Variable:S -> _
+ Variable:P -> _
  AssignmentOperator:=
 885 FOR I=1 TO 72: PRINT "=";: NEXT I
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:72"]
  TextConstant:"="
  CarriageControl:;
- Variable:I numeric scalar
+ Variable:I -> _
 890 PRINT: PRINT "TEAM";T;"DOWN";D;"ON";P
  CarriageControl:NL
  TextConstant:"TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"DOWN"
  CarriageControl:;
- Variable:D numeric scalar
+ Variable:D -> _
  CarriageControl:;
  TextConstant:"ON"
  CarriageControl:;
- Variable:P numeric scalar
+ Variable:P -> _
  CarriageControl:NL
 893 IF D<>1 THEN 900
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:1
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 895 IF Y(T)*(P+Y(T)*10)>=X(T) THEN 898
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ Variable:T -> _
+ Variable:Y(_) -> _
  NumericConstant:10
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorPlus:+(_,_) numeric
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:X(_) numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:X(_) -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 897 C=4: GOTO 900
- Variable:C numeric scalar
+ Variable:C -> _
  NumericConstant:4
  AssignmentOperator:=
  LineNumber:900
 898 C=8
- Variable:C numeric scalar
+ Variable:C -> _
  NumericConstant:8
  AssignmentOperator:=
 900 IF C=8 THEN 904
- Variable:C numeric scalar
+ Variable:C -> _
  NumericConstant:8
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 901 PRINT TAB(27);10-(Y(T)*P-Y(T)*S);"YARDS TO 1ST DOWN"
  NumericConstant:27
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  NumericConstant:10
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:S numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:S -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  CarriageControl:;
  TextConstant:"YARDS TO 1ST DOWN"
  CarriageControl:NL
@@ -479,34 +479,34 @@
  LineNumber:910
 904 PRINT TAB(27);X(T)-Y(T)*P;"YARDS"
  NumericConstant:27
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
- Variable:T numeric scalar
- Variable:X(_) numeric scalar
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:T -> _
+ Variable:X(_) -> _
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  CarriageControl:;
  TextConstant:"YARDS"
  CarriageControl:NL
 910 GOSUB 1900: IF D=4 THEN 1180
  LineNumber:1900
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:4
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 920 REM
  Remark:
 930 U=INT(3*RND(0)-1): GOTO 940
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:3
  NumericConstant:0
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:1
- BinaryOperatorMinus:-(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
  LineNumber:940
 936 PRINT "ILLEGAL PLAY NUMBER, CHECK AND"
@@ -516,115 +516,115 @@
  TextConstant:"INPUT OFFENSIVE PLAY, DEFENSIVE PLAY"
  CarriageControl:;
 950 IF T=2 THEN 970
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:2
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 960 INPUT P1,P2: GOTO 975
- Variable:P1 numeric scalar
- Variable:P2 numeric scalar
+ Variable:P1 -> _
+ Variable:P2 -> _
  LineNumber:975
 970 INPUT P2,P1
- Variable:P2 numeric scalar
- Variable:P1 numeric scalar
+ Variable:P2 -> _
+ Variable:P1 -> _
 975 IF P1=77 THEN 1180
- Variable:P1 numeric scalar
+ Variable:P1 -> _
  NumericConstant:77
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 980 IF P1>20 THEN 1800
- Variable:P1 numeric scalar
+ Variable:P1 -> _
  NumericConstant:20
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 985 IF P1<1 THEN 1800
- Variable:P1 numeric scalar
+ Variable:P1 -> _
  NumericConstant:1
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 990 IF P2>20 THEN 1800
- Variable:P2 numeric scalar
+ Variable:P2 -> _
  NumericConstant:20
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 992 IF P2<1 THEN 1800
- Variable:P2 numeric scalar
+ Variable:P2 -> _
  NumericConstant:1
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 995 P1=INT(P1): P2=INT(P2)
- Variable:P1 numeric scalar
- Variable:P1 numeric scalar
- FunctionInt:INT(_) numeric scalar
+ Variable:P1 -> _
+ Variable:P1 -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
- Variable:P2 numeric scalar
- Variable:P2 numeric scalar
- FunctionInt:INT(_) numeric scalar
+ Variable:P2 -> _
+ Variable:P2 -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 1000 Y=INT(ABS(A(P1)-B(P2))/19*((X(T)-Y(T)*P+25)*RND(1)-15))
- Variable:Y numeric scalar
- Variable:P1 numeric scalar
- Variable:A(_) numeric scalar
- Variable:P2 numeric scalar
- Variable:B(_) numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ Variable:Y -> _
+ Variable:P1 -> _
+ Variable:A(_) -> _
+ Variable:P2 -> _
+ Variable:B(_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  NumericConstant:19
- BinaryOperatorDivide:/(_,_) numeric
- Variable:T numeric scalar
- Variable:X(_) numeric scalar
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ Variable:T -> _
+ Variable:X(_) -> _
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:25
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:15
- BinaryOperatorMinus:-(_,_) numeric
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 1005 PRINT: IF T=2 THEN 1015
  CarriageControl:NL
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:2
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 1010 IF A(P1)<11 THEN 1048
- Variable:P1 numeric scalar
- Variable:A(_) numeric scalar
+ Variable:P1 -> _
+ Variable:A(_) -> _
  NumericConstant:11
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 1012 GOTO 1020
  LineNumber:1020
 1015 IF B(P2)<11 THEN 1048
- Variable:P2 numeric scalar
- Variable:B(_) numeric scalar
+ Variable:P2 -> _
+ Variable:B(_) -> _
  NumericConstant:11
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 1020 IF U<>0 THEN 1035
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 1025 PRINT "PASS INCOMPLETE TEAM";T
  TextConstant:"PASS INCOMPLETE TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:NL
 1030 Y=0: GOTO 1050
- Variable:Y numeric scalar
+ Variable:Y -> _
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:1050
 1035 G=RND(1): IF G>.025 THEN 1040
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  AssignmentOperator:=
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:.025
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 1037 IF Y>2 THEN 1045
- Variable:Y numeric scalar
+ Variable:Y -> _
  NumericConstant:2
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 1040 PRINT "QUARTERBACK SCRAMBLED": GOTO 1050
  TextConstant:"QUARTERBACK SCRAMBLED"
  CarriageControl:NL
@@ -637,97 +637,97 @@
  TextConstant:"THE BALL WAS RUN"
  CarriageControl:NL
 1050 P=P-W(T)*Y
- Variable:P numeric scalar
- Variable:P numeric scalar
- Variable:T numeric scalar
- Variable:W(_) numeric scalar
- Variable:Y numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:P -> _
+ Variable:P -> _
+ Variable:T -> _
+ Variable:W(_) -> _
+ Variable:Y -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 1060 PRINT: PRINT "NET YARDS GAINED ON DOWN";D;"ARE ";Y
  CarriageControl:NL
  TextConstant:"NET YARDS GAINED ON DOWN"
  CarriageControl:;
- Variable:D numeric scalar
+ Variable:D -> _
  CarriageControl:;
  TextConstant:"ARE "
  CarriageControl:;
- Variable:Y numeric scalar
+ Variable:Y -> _
  CarriageControl:NL
 1070 G=RND(1): IF G>.025 THEN 1110
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  AssignmentOperator:=
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:.025
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 1080 PRINT: PRINT "** LOSS OF POSSESSION FROM TEAM";T;"TO TEAM";T(T)
  CarriageControl:NL
  TextConstant:"** LOSS OF POSSESSION FROM TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"TO TEAM"
  CarriageControl:;
- Variable:T numeric scalar
- Variable:T(_) numeric scalar
+ Variable:T -> _
+ Variable:T(_) -> _
  CarriageControl:NL
 1100 GOSUB 1850: PRINT: T=T(T): GOTO 830
  LineNumber:1850
  CarriageControl:NL
- Variable:T numeric scalar
- Variable:T numeric scalar
- Variable:T(_) numeric scalar
+ Variable:T -> _
+ Variable:T -> _
+ Variable:T(_) -> _
  AssignmentOperator:=
  LineNumber:830
 1110 IF Y(T)*P>=X(T) THEN 1320
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:X(_) numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:X(_) -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 1120 IF W(T)*P>=Z(T) THEN 1230
- Variable:T numeric scalar
- Variable:W(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:Z(_) numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ Variable:T -> _
+ Variable:W(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:Z(_) -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 1130 IF Y(T)*P-Y(T)*S>=10 THEN 880
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:S numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:S -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:10
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 1140 D=D+1: IF D<>5 THEN 885
- Variable:D numeric scalar
- Variable:D numeric scalar
+ Variable:D -> _
+ Variable:D -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:5
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 1160 PRINT: PRINT "CONVERSION UNSUCCESSFUL TEAM";T:T=T(T)
  CarriageControl:NL
  TextConstant:"CONVERSION UNSUCCESSFUL TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:NL
- Variable:T numeric scalar
- Variable:T numeric scalar
- Variable:T(_) numeric scalar
+ Variable:T -> _
+ Variable:T -> _
+ Variable:T(_) -> _
  AssignmentOperator:=
 1170 GOSUB 1850: GOTO 880
  LineNumber:1850
@@ -735,129 +735,129 @@
 1180 PRINT "DOES TEAM";T;"WANT TO PUNT";: INPUT A$
  TextConstant:"DOES TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"WANT TO PUNT"
  CarriageControl:;
- Variable:A$ string scalar
+ Variable:A$ -> $
 1185 IF A$="NO" THEN 1200
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"NO"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 1187 IF A$<>"YES" THEN 1180
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorNotEqual:<>($,$) numeric
+ BinaryOperatorNotEqual:<>($,$) -> _
 1190 PRINT:PRINT "TEAM";T;"WILL PUNT": G=RND(1): IF G<.025 THEN 1080
  CarriageControl:NL
  TextConstant:"TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"WILL PUNT"
  CarriageControl:NL
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  AssignmentOperator:=
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:.025
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 1195 GOSUB 1850: K=INT(25*RND(1)+35): T=T(T): GOTO 790
  LineNumber:1850
- Variable:K numeric scalar
+ Variable:K -> _
  NumericConstant:25
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:35
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
- Variable:T numeric scalar
- Variable:T numeric scalar
- Variable:T(_) numeric scalar
+ Variable:T -> _
+ Variable:T -> _
+ Variable:T(_) -> _
  AssignmentOperator:=
  LineNumber:790
 1200 PRINT "DOES TEAM";T;"WANT TO ATTEMPT A FIELD GOAL";: INPUT A$
  TextConstant:"DOES TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"WANT TO ATTEMPT A FIELD GOAL"
  CarriageControl:;
- Variable:A$ string scalar
+ Variable:A$ -> $
 1210 IF A$="YES" THEN 1640
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 1215 IF A$<>"NO" THEN 1200
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"NO"
- BinaryOperatorNotEqual:<>($,$) numeric
+ BinaryOperatorNotEqual:<>($,$) -> _
 1217 GOTO 920
  LineNumber:920
 1230 PRINT: PRINT "SAFETY AGAINST TEAM";T;"**********************OH-OH"
  CarriageControl:NL
  TextConstant:"SAFETY AGAINST TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"**********************OH-OH"
  CarriageControl:NL
 1240 H(T(T))=H(T(T))+2: GOSUB 1810
- Variable:T numeric scalar
- Variable:T(_) numeric scalar
- Variable:H(_) numeric scalar
- Variable:T numeric scalar
- Variable:T(_) numeric scalar
- Variable:H(_) numeric scalar
+ Variable:T -> _
+ Variable:T(_) -> _
+ Variable:H(_) -> _
+ Variable:T -> _
+ Variable:T(_) -> _
+ Variable:H(_) -> _
  NumericConstant:2
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
  LineNumber:1810
 1280 PRINT"TEAM";T;"DO YOU WANT TO PUNT INSTEAD OF A KICKOFF";:INPUT A$
  TextConstant:"TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"DO YOU WANT TO PUNT INSTEAD OF A KICKOFF"
  CarriageControl:;
- Variable:A$ string scalar
+ Variable:A$ -> $
 1290 P=Z(T)-W(T)*20: IF A$="YES" THEN 1190
- Variable:P numeric scalar
- Variable:T numeric scalar
- Variable:Z(_) numeric scalar
- Variable:T numeric scalar
- Variable:W(_) numeric scalar
+ Variable:P -> _
+ Variable:T -> _
+ Variable:Z(_) -> _
+ Variable:T -> _
+ Variable:W(_) -> _
  NumericConstant:20
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 1320 PRINT: PRINT "TOUCHDOWN BY TEAM";T;"*********************YEA TEAM"
  CarriageControl:NL
  TextConstant:"TOUCHDOWN BY TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"*********************YEA TEAM"
  CarriageControl:NL
 1340 Q=7: G=RND(1): IF G>.1 THEN 1380
- Variable:Q numeric scalar
+ Variable:Q -> _
  NumericConstant:7
  AssignmentOperator:=
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  AssignmentOperator:=
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:.1
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 1360 Q=6: PRINT "EXTRA POINT NO GOOD": GOTO 1390
- Variable:Q numeric scalar
+ Variable:Q -> _
  NumericConstant:6
  AssignmentOperator:=
  TextConstant:"EXTRA POINT NO GOOD"
@@ -867,163 +867,163 @@
  TextConstant:"EXTRA POINT GOOD"
  CarriageControl:NL
 1390 H(T)=H(T)+Q: GOSUB 1810
- Variable:T numeric scalar
- Variable:H(_) numeric scalar
- Variable:T numeric scalar
- Variable:H(_) numeric scalar
- Variable:Q numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:T -> _
+ Variable:H(_) -> _
+ Variable:T -> _
+ Variable:H(_) -> _
+ Variable:Q -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
  LineNumber:1810
 1420 T=T(T): GOTO 765
- Variable:T numeric scalar
- Variable:T numeric scalar
- Variable:T(_) numeric scalar
+ Variable:T -> _
+ Variable:T -> _
+ Variable:T(_) -> _
  AssignmentOperator:=
  LineNumber:765
 1430 K=INT(9*RND(0)+1)
- Variable:K numeric scalar
+ Variable:K -> _
  NumericConstant:9
  NumericConstant:0
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 1440 R=INT(((X(T)-Y(T)*P+25)*RND(1)-15)/K)
- Variable:R numeric scalar
- Variable:T numeric scalar
- Variable:X(_) numeric scalar
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:R -> _
+ Variable:T -> _
+ Variable:X(_) -> _
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:25
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:15
- BinaryOperatorMinus:-(_,_) numeric
- Variable:K numeric scalar
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorMinus:-(_,_) -> _
+ Variable:K -> _
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 1460 P=P-W(T)*R
- Variable:P numeric scalar
- Variable:P numeric scalar
- Variable:T numeric scalar
- Variable:W(_) numeric scalar
- Variable:R numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:P -> _
+ Variable:P -> _
+ Variable:T -> _
+ Variable:W(_) -> _
+ Variable:R -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 1480 PRINT:PRINT "RUNBACK TEAM";T;R;"YARDS"
  CarriageControl:NL
  TextConstant:"RUNBACK TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
- Variable:R numeric scalar
+ Variable:R -> _
  CarriageControl:;
  TextConstant:"YARDS"
  CarriageControl:NL
 1485 G=RND(1): IF G<.025 THEN 1080
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  AssignmentOperator:=
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:.025
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 1490 IF Y(T)*P>=X(T) THEN 1320
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:X(_) numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:X(_) -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 1500 IF W(T)*P>=Z(T) THEN 1230
- Variable:T numeric scalar
- Variable:W(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:Z(_) numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ Variable:T -> _
+ Variable:W(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:Z(_) -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 1510 GOTO 880
  LineNumber:880
 1640 PRINT: PRINT "TEAM";T;"WILL ATTEMPT A FIELD GOAL"
  CarriageControl:NL
  TextConstant:"TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"WILL ATTEMPT A FIELD GOAL"
  CarriageControl:NL
 1645 G=RND(1): IF G<.025 THEN 1080
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  AssignmentOperator:=
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:.025
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 1650 F=INT(35*RND(1)+20)
- Variable:F numeric scalar
+ Variable:F -> _
  NumericConstant:35
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:20
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 1660 PRINT: PRINT "KICK IS";F;"YARDS LONG"
  CarriageControl:NL
  TextConstant:"KICK IS"
  CarriageControl:;
- Variable:F numeric scalar
+ Variable:F -> _
  CarriageControl:;
  TextConstant:"YARDS LONG"
  CarriageControl:NL
 1680 P=P-W(T)*F: G=RND(1)
- Variable:P numeric scalar
- Variable:P numeric scalar
- Variable:T numeric scalar
- Variable:W(_) numeric scalar
- Variable:F numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:P -> _
+ Variable:P -> _
+ Variable:T -> _
+ Variable:W(_) -> _
+ Variable:F -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  AssignmentOperator:=
 1690 IF G<.35 THEN 1735
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:.35
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 1700 IF Y(T)*P<X(T) THEN 1740
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:X(_) numeric scalar
- BinaryOperatorLess:<(_,_) numeric
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:X(_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 1710 PRINT "FIELD GOAL GOOD FOR TEAM";T;"*********************YEA"
  TextConstant:"FIELD GOAL GOOD FOR TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"*********************YEA"
  CarriageControl:NL
 1720 Q=3: GOTO 1390
- Variable:Q numeric scalar
+ Variable:Q -> _
  NumericConstant:3
  AssignmentOperator:=
  LineNumber:1390
@@ -1033,37 +1033,37 @@
 1740 PRINT "FIELD GOAL UNSUCCESFUL TEAM";T;"-----------------TOO BAD"
  TextConstant:"FIELD GOAL UNSUCCESFUL TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"-----------------TOO BAD"
  CarriageControl:NL
 1742 GOSUB 1850: IF Y(T)*P<X(T)+10 THEN 1745
  LineNumber:1850
- Variable:T numeric scalar
- Variable:Y(_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:T numeric scalar
- Variable:X(_) numeric scalar
+ Variable:T -> _
+ Variable:Y(_) -> _
+ Variable:P -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ Variable:X(_) -> _
  NumericConstant:10
- BinaryOperatorPlus:+(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 1744 T=T(T): GOTO 794
- Variable:T numeric scalar
- Variable:T numeric scalar
- Variable:T(_) numeric scalar
+ Variable:T -> _
+ Variable:T -> _
+ Variable:T(_) -> _
  AssignmentOperator:=
  LineNumber:794
 1745 PRINT: PRINT "BALL NOW ON";P
  CarriageControl:NL
  TextConstant:"BALL NOW ON"
  CarriageControl:;
- Variable:P numeric scalar
+ Variable:P -> _
  CarriageControl:NL
 1750 T=T(T): GOSUB 1900: GOTO 830
- Variable:T numeric scalar
- Variable:T numeric scalar
- Variable:T(_) numeric scalar
+ Variable:T -> _
+ Variable:T -> _
+ Variable:T(_) -> _
  AssignmentOperator:=
  LineNumber:1900
  LineNumber:830
@@ -1135,67 +1135,67 @@
  TextConstant:"RAZZLE-DAZZLE"
  TextConstant:"BOMB!!!!"
 1800 IF P1<>99 THEN 936
- Variable:P1 numeric scalar
+ Variable:P1 -> _
  NumericConstant:99
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 1810 PRINT: PRINT "TEAM 1 SCORE IS";H(1)
  CarriageControl:NL
  TextConstant:"TEAM 1 SCORE IS"
  CarriageControl:;
  NumericConstant:1
- Variable:H(_) numeric scalar
+ Variable:H(_) -> _
  CarriageControl:NL
 1820 PRINT "TEAM 2 SCORE IS";H(2): PRINT
  TextConstant:"TEAM 2 SCORE IS"
  CarriageControl:;
  NumericConstant:2
- Variable:H(_) numeric scalar
+ Variable:H(_) -> _
  CarriageControl:NL
  CarriageControl:NL
 1825 IF H(T)<E THEN 1830
- Variable:T numeric scalar
- Variable:H(_) numeric scalar
- Variable:E numeric scalar
- BinaryOperatorLess:<(_,_) numeric
+ Variable:T -> _
+ Variable:H(_) -> _
+ Variable:E -> _
+ BinaryOperatorLess:<(_,_) -> _
 1827 PRINT "TEAM";T;"WINS*******************": GOTO 2000
  TextConstant:"TEAM"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"WINS*******************"
  CarriageControl:NL
  LineNumber:2000
 1830 IF P1=99 THEN 940
- Variable:P1 numeric scalar
+ Variable:P1 -> _
  NumericConstant:99
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 1835 RETURN
  
 1850 PRINT
  CarriageControl:NL
 1860 FOR X=1 TO 72: PRINT "+";: NEXT X: PRINT
- control: Variable:X numeric scalar
+ control: Variable:X -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:72"]
  TextConstant:"+"
  CarriageControl:;
- Variable:X numeric scalar
+ Variable:X -> _
  CarriageControl:NL
 1870 RETURN
  
 1900 PRINT TAB(D(T)+5+P/2);M$(T)
- Variable:T numeric scalar
- Variable:D(_) numeric scalar
+ Variable:T -> _
+ Variable:D(_) -> _
  NumericConstant:5
- BinaryOperatorPlus:+(_,_) numeric
- Variable:P numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:P -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorPlus:+(_,_) numeric
- FunctionTab:TAB(_) string scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
- Variable:T numeric scalar
- Variable:M$(_) string scalar
+ Variable:T -> _
+ Variable:M$(_) -> $
  CarriageControl:NL
 1910 PRINT "TEAM 1 [0   10   20   30   40   50   60   70   80   90";
  TextConstant:"TEAM 1 [0   10   20   30   40   50   60   70   80   90"

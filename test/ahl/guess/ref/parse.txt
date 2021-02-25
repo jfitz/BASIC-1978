@@ -1,12 +1,12 @@
 1 PRINT TAB(33);"GUESS"
  NumericConstant:33
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"GUESS"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -29,66 +29,66 @@
  TextConstant:"WHAT LIMIT DO YOU WANT"
  CarriageControl:;
 9 INPUT L
- Variable:L numeric scalar
+ Variable:L -> _
 10 PRINT
  CarriageControl:NL
 11 L1=INT(LOG(L)/LOG(2))+1
- Variable:L1 numeric scalar
- Variable:L numeric scalar
- FunctionLog:LOG(_) numeric scalar
+ Variable:L1 -> _
+ Variable:L -> _
+ FunctionLog:LOG(_) -> _
  NumericConstant:2
- FunctionLog:LOG(_) numeric scalar
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionLog:LOG(_) -> _
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 12 PRINT "I'M THINKING OF A NUMBER BETWEEN 1 AND";L
  TextConstant:"I'M THINKING OF A NUMBER BETWEEN 1 AND"
  CarriageControl:;
- Variable:L numeric scalar
+ Variable:L -> _
  CarriageControl:NL
 13 G=1
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:1
  AssignmentOperator:=
 14 PRINT "NOW YOU TRY TO GUESS WHAT IT IS."
  TextConstant:"NOW YOU TRY TO GUESS WHAT IT IS."
  CarriageControl:NL
 15 M=INT(L*RND(1)+1)
- Variable:M numeric scalar
- Variable:L numeric scalar
+ Variable:M -> _
+ Variable:L -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 20 INPUT N
- Variable:N numeric scalar
+ Variable:N -> _
 21 IF N>0 THEN 25
- Variable:N numeric scalar
+ Variable:N -> _
  NumericConstant:0
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 22 GOSUB 70
  LineNumber:70
 23 GOTO 1
  LineNumber:1
 25 IF N=M THEN 50
- Variable:N numeric scalar
- Variable:M numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:N -> _
+ Variable:M -> _
+ BinaryOperatorEqual:=(_,_) -> _
 30 G=G+1
- Variable:G numeric scalar
- Variable:G numeric scalar
+ Variable:G -> _
+ Variable:G -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 31 IF N>M THEN 40
- Variable:N numeric scalar
- Variable:M numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:N -> _
+ Variable:M -> _
+ BinaryOperatorGreater:>(_,_) -> _
 32 PRINT "TOO LOW. TRY A BIGGER ANSWER."
  TextConstant:"TOO LOW. TRY A BIGGER ANSWER."
  CarriageControl:NL
@@ -102,22 +102,22 @@
 50 PRINT "THAT'S IT! YOU GOT IT IN";G;"TRIES."
  TextConstant:"THAT'S IT! YOU GOT IT IN"
  CarriageControl:;
- Variable:G numeric scalar
+ Variable:G -> _
  CarriageControl:;
  TextConstant:"TRIES."
  CarriageControl:NL
 52 IF G<L1 THEN 58
- Variable:G numeric scalar
- Variable:L1 numeric scalar
- BinaryOperatorLess:<(_,_) numeric
+ Variable:G -> _
+ Variable:L1 -> _
+ BinaryOperatorLess:<(_,_) -> _
 54 IF G=L1 THEN 60
- Variable:G numeric scalar
- Variable:L1 numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:G -> _
+ Variable:L1 -> _
+ BinaryOperatorEqual:=(_,_) -> _
 56 PRINT "YOU SHOULD HAVE BEEN ABLE TO GET IT IN ONLY";L1
  TextConstant:"YOU SHOULD HAVE BEEN ABLE TO GET IT IN ONLY"
  CarriageControl:;
- Variable:L1 numeric scalar
+ Variable:L1 -> _
  CarriageControl:NL
 57 GOTO 65
  LineNumber:65
@@ -132,13 +132,13 @@
 66 GOTO 12
  LineNumber:12
 70 FOR H=1 TO 5
- control: Variable:H numeric scalar
+ control: Variable:H -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 71 PRINT
  CarriageControl:NL
 72 NEXT H
- Variable:H numeric scalar
+ Variable:H -> _
 73 RETURN
  
 99 END

@@ -1,12 +1,12 @@
 5 PRINT TAB(33);"PIZZA"
  NumericConstant:33
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"PIZZA"
  CarriageControl:NL
 10 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -16,20 +16,20 @@
  CarriageControl:NL
 20 DIM S$(16),M$(4)
  NumericConstant:16
- Declaration:S$() array
+ Declaration:S$() -> $()
  NumericConstant:4
- Declaration:M$() array
+ Declaration:M$() -> $()
 30 PRINT "PIZZA DELIVERY GAME": PRINT
  TextConstant:"PIZZA DELIVERY GAME"
  CarriageControl:NL
  CarriageControl:NL
 50 INPUT "WHAT IS YOUR FIRST NAME";N$: PRINT
- Variable:N$ string scalar
+ Variable:N$ -> $
  CarriageControl:NL
 80 PRINT "HI, ";N$;".  IN THIS GAME YOU ARE TO TAKE ORDERS"
  TextConstant:"HI, "
  CarriageControl:;
- Variable:N$ string scalar
+ Variable:N$ -> $
  CarriageControl:;
  TextConstant:".  IN THIS GAME YOU ARE TO TAKE ORDERS"
  CarriageControl:NL
@@ -42,23 +42,23 @@
  CarriageControl:NL
  CarriageControl:NL
 140 FOR I=1 TO 16
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:16"]
 150 READ S$(I)
- Variable:I numeric scalar
- Variable:S$(_) string scalar
+ Variable:I -> _
+ Variable:S$(_) -> $
 160 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 170 FOR I=1 TO 4
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 180 READ M$(I)
- Variable:I numeric scalar
- Variable:M$(_) string scalar
+ Variable:I -> _
+ Variable:M$(_) -> $
 190 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 200 DATA "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"
  TextConstant:"A"
  TextConstant:"B"
@@ -89,11 +89,11 @@
  TextConstant:" -----1-----2-----3-----4-----"
  CarriageControl:NL
 260 K=4
- Variable:K numeric scalar
+ Variable:K -> _
  NumericConstant:4
  AssignmentOperator:=
 270 FOR I=1 TO 4
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:4"]
 280 PRINT "-": PRINT "-": PRINT"-": PRINT "-"
@@ -106,60 +106,60 @@
  TextConstant:"-"
  CarriageControl:NL
 320 PRINT M$(K);
- Variable:K numeric scalar
- Variable:M$(_) string scalar
+ Variable:K -> _
+ Variable:M$(_) -> $
  CarriageControl:;
 330 S1=16-4*I+1
- Variable:S1 numeric scalar
+ Variable:S1 -> _
  NumericConstant:16
  NumericConstant:4
- Variable:I numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:I -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 340 PRINT "     ";S$(S1);"     ";S$(S1+1);"     ";S$(S1+2);"     ";
  TextConstant:"     "
  CarriageControl:;
- Variable:S1 numeric scalar
- Variable:S$(_) string scalar
+ Variable:S1 -> _
+ Variable:S$(_) -> $
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
- Variable:S1 numeric scalar
+ Variable:S1 -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- Variable:S$(_) string scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:S$(_) -> $
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
- Variable:S1 numeric scalar
+ Variable:S1 -> _
  NumericConstant:2
- BinaryOperatorPlus:+(_,_) numeric
- Variable:S$(_) string scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:S$(_) -> $
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
 350 PRINT S$(S1+3);"     ";M$(K)
- Variable:S1 numeric scalar
+ Variable:S1 -> _
  NumericConstant:3
- BinaryOperatorPlus:+(_,_) numeric
- Variable:S$(_) string scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:S$(_) -> $
  CarriageControl:;
  TextConstant:"     "
  CarriageControl:;
- Variable:K numeric scalar
- Variable:M$(_) string scalar
+ Variable:K -> _
+ Variable:M$(_) -> $
  CarriageControl:NL
 380 K=K-1
- Variable:K numeric scalar
- Variable:K numeric scalar
+ Variable:K -> _
+ Variable:K -> _
  NumericConstant:1
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 390 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 400 PRINT "-": PRINT "-": PRINT "-": PRINT "-"
  TextConstant:"-"
  CarriageControl:NL
@@ -191,15 +191,15 @@
  CarriageControl:NL
  CarriageControl:NL
 520 INPUT "DO YOU NEED MORE DIRECTIONS";A$
- Variable:A$ string scalar
+ Variable:A$ -> $
 530 IF A$="YES" THEN 590
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 540 IF A$="NO" THEN 750
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"NO"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 550 PRINT "'YES' OR 'NO' PLEASE, NOW THEN,": GOTO 520
  TextConstant:"'YES' OR 'NO' PLEASE, NOW THEN,"
  CarriageControl:NL
@@ -222,7 +222,7 @@
 640 PRINT "DRIVER TO ";N$;".  WHERE DOES J LIVE?"
  TextConstant:"DRIVER TO "
  CarriageControl:;
- Variable:N$ string scalar
+ Variable:N$ -> $
  CarriageControl:;
  TextConstant:".  WHERE DOES J LIVE?"
  CarriageControl:NL
@@ -231,11 +231,11 @@
  CarriageControl:NL
  CarriageControl:NL
 660 INPUT "UNDERSTAND";A$
- Variable:A$ string scalar
+ Variable:A$ -> $
 670 IF A$="YES" THEN 690
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 680 PRINT "THIS JOB IS DEFINITELY TOO DIFFICULT FOR YOU. THANKS ANYWAY"
  TextConstant:"THIS JOB IS DEFINITELY TOO DIFFICULT FOR YOU. THANKS ANYWAY"
  CarriageControl:NL
@@ -250,29 +250,29 @@
  CarriageControl:NL
  CarriageControl:NL
 750 FOR I=1 TO 5
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:5"]
 760 S=INT(RND(1)*16+1): PRINT
- Variable:S numeric scalar
+ Variable:S -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  NumericConstant:16
- BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
  CarriageControl:NL
 770 PRINT "HELLO ";N$;"'S PIZZA.  THIS IS ";S$(S);".";
  TextConstant:"HELLO "
  CarriageControl:;
- Variable:N$ string scalar
+ Variable:N$ -> $
  CarriageControl:;
  TextConstant:"'S PIZZA.  THIS IS "
  CarriageControl:;
- Variable:S numeric scalar
- Variable:S$(_) string scalar
+ Variable:S -> _
+ Variable:S$(_) -> $
  CarriageControl:;
  TextConstant:"."
  CarriageControl:;
@@ -282,41 +282,41 @@
 780 PRINT "  DRIVER TO ";N$;":  WHERE DOES ";S$(S);" LIVE";
  TextConstant:"  DRIVER TO "
  CarriageControl:;
- Variable:N$ string scalar
+ Variable:N$ -> $
  CarriageControl:;
  TextConstant:":  WHERE DOES "
  CarriageControl:;
- Variable:S numeric scalar
- Variable:S$(_) string scalar
+ Variable:S -> _
+ Variable:S$(_) -> $
  CarriageControl:;
  TextConstant:" LIVE"
  CarriageControl:;
 790 INPUT A(1),A(2)
  NumericConstant:1
- Variable:A(_) numeric scalar
+ Variable:A(_) -> _
  NumericConstant:2
- Variable:A(_) numeric scalar
+ Variable:A(_) -> _
 870 T=A(1)+(A(2)-1)*4
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:1
- Variable:A(_) numeric scalar
+ Variable:A(_) -> _
  NumericConstant:2
- Variable:A(_) numeric scalar
+ Variable:A(_) -> _
  NumericConstant:1
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:4
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 880 IF T=S THEN 920
- Variable:T numeric scalar
- Variable:S numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:T -> _
+ Variable:S -> _
+ BinaryOperatorEqual:=(_,_) -> _
 890 PRINT "THIS IS ";S$(T);".  I DID NOT ORDER A PIZZA."
  TextConstant:"THIS IS "
  CarriageControl:;
- Variable:T numeric scalar
- Variable:S$(_) string scalar
+ Variable:T -> _
+ Variable:S$(_) -> $
  CarriageControl:;
  TextConstant:".  I DID NOT ORDER A PIZZA."
  CarriageControl:NL
@@ -324,41 +324,41 @@
  TextConstant:"I LIVE AT "
  CarriageControl:;
  NumericConstant:1
- Variable:A(_) numeric scalar
+ Variable:A(_) -> _
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
  NumericConstant:2
- Variable:A(_) numeric scalar
+ Variable:A(_) -> _
  CarriageControl:NL
 910 GOTO 780
  LineNumber:780
 920 PRINT "HELLO "N$;".  THIS IS ";S$(S);", THANKS FOR THE PIZZA."
  TextConstant:"HELLO "
  CarriageControl:
- Variable:N$ string scalar
+ Variable:N$ -> $
  CarriageControl:;
  TextConstant:".  THIS IS "
  CarriageControl:;
- Variable:S numeric scalar
- Variable:S$(_) string scalar
+ Variable:S -> _
+ Variable:S$(_) -> $
  CarriageControl:;
  TextConstant:", THANKS FOR THE PIZZA."
  CarriageControl:NL
 930 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 940 PRINT: INPUT "DO YOU WANT TO DELIVER MORE PIZZAS";A$
  CarriageControl:NL
- Variable:A$ string scalar
+ Variable:A$ -> $
 960 IF A$="YES" THEN 750
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 970 PRINT: PRINT "O.K. ";N$;", SEE YOU LATER!":PRINT
  CarriageControl:NL
  TextConstant:"O.K. "
  CarriageControl:;
- Variable:N$ string scalar
+ Variable:N$ -> $
  CarriageControl:;
  TextConstant:", SEE YOU LATER!"
  CarriageControl:NL

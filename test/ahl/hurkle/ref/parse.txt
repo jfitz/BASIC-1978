@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"HURKLE"
  NumericConstant:33
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"HURKLE"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,11 +15,11 @@
  CarriageControl:NL
  CarriageControl:NL
 110 N=5
- Variable:N numeric scalar
+ Variable:N -> _
  NumericConstant:5
  AssignmentOperator:=
 120 G=10
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:10
  AssignmentOperator:=
 210 PRINT
@@ -27,11 +27,11 @@
 220 PRINT "A HURKLE IS HIDING ON A";G;"BY";G;"GRID. HOMEBASE"
  TextConstant:"A HURKLE IS HIDING ON A"
  CarriageControl:;
- Variable:G numeric scalar
+ Variable:G -> _
  CarriageControl:;
  TextConstant:"BY"
  CarriageControl:;
- Variable:G numeric scalar
+ Variable:G -> _
  CarriageControl:;
  TextConstant:"GRID. HOMEBASE"
  CarriageControl:NL
@@ -53,7 +53,7 @@
 250 PRINT "GUESS THE HURKLE'S GRIDPOINT. YOU GET";N;"TRIES."
  TextConstant:"GUESS THE HURKLE'S GRIDPOINT. YOU GET"
  CarriageControl:;
- Variable:N numeric scalar
+ Variable:N -> _
  CarriageControl:;
  TextConstant:"TRIES."
  CarriageControl:NL
@@ -66,45 +66,45 @@
 280 PRINT
  CarriageControl:NL
 285 A=INT(G*RND(1))
- Variable:A numeric scalar
- Variable:G numeric scalar
+ Variable:A -> _
+ Variable:G -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 286 B=INT(G*RND(1))
- Variable:B numeric scalar
- Variable:G numeric scalar
+ Variable:B -> _
+ Variable:G -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 310 FOR K=1 TO N
- control: Variable:K numeric scalar
+ control: Variable:K -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:N numeric scalar"]
+ end:     ["Variable:N -> _"]
 320 PRINT "GUESS #";K;
  TextConstant:"GUESS #"
  CarriageControl:;
- Variable:K numeric scalar
+ Variable:K -> _
  CarriageControl:;
 330 INPUT X,Y
- Variable:X numeric scalar
- Variable:Y numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
 340 IF ABS(X-A)+ABS(Y-B)=0 THEN 500
- Variable:X numeric scalar
- Variable:A numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
- Variable:Y numeric scalar
- Variable:B numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:X -> _
+ Variable:A -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
+ Variable:Y -> _
+ Variable:B -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 350 REM PRINT INFO
  Remark:PRINT INFO
 360 GOSUB 610
@@ -112,24 +112,24 @@
 370 PRINT
  CarriageControl:NL
 380 NEXT K
- Variable:K numeric scalar
+ Variable:K -> _
 410 PRINT
  CarriageControl:NL
 420 PRINT "SORRY, THAT'S";N;"GUESSES."
  TextConstant:"SORRY, THAT'S"
  CarriageControl:;
- Variable:N numeric scalar
+ Variable:N -> _
  CarriageControl:;
  TextConstant:"GUESSES."
  CarriageControl:NL
 430 PRINT "THE HURKLE IS AT ";A;",";B
  TextConstant:"THE HURKLE IS AT "
  CarriageControl:;
- Variable:A numeric scalar
+ Variable:A -> _
  CarriageControl:;
  TextConstant:","
  CarriageControl:;
- Variable:B numeric scalar
+ Variable:B -> _
  CarriageControl:NL
 440 PRINT
  CarriageControl:NL
@@ -147,7 +147,7 @@
 520 PRINT "YOU FOUND HIM IN";K;"GUESSES!"
  TextConstant:"YOU FOUND HIM IN"
  CarriageControl:;
- Variable:K numeric scalar
+ Variable:K -> _
  CarriageControl:;
  TextConstant:"GUESSES!"
  CarriageControl:NL
@@ -157,13 +157,13 @@
  TextConstant:"GO "
  CarriageControl:;
 620 IF Y=B THEN 670
- Variable:Y numeric scalar
- Variable:B numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:Y -> _
+ Variable:B -> _
+ BinaryOperatorEqual:=(_,_) -> _
 630 IF Y<B THEN 660
- Variable:Y numeric scalar
- Variable:B numeric scalar
- BinaryOperatorLess:<(_,_) numeric
+ Variable:Y -> _
+ Variable:B -> _
+ BinaryOperatorLess:<(_,_) -> _
 640 PRINT "SOUTH";
  TextConstant:"SOUTH"
  CarriageControl:;
@@ -173,13 +173,13 @@
  TextConstant:"NORTH"
  CarriageControl:;
 670 IF X=A THEN 720
- Variable:X numeric scalar
- Variable:A numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:X -> _
+ Variable:A -> _
+ BinaryOperatorEqual:=(_,_) -> _
 680 IF X<A THEN 710
- Variable:X numeric scalar
- Variable:A numeric scalar
- BinaryOperatorLess:<(_,_) numeric
+ Variable:X -> _
+ Variable:A -> _
+ BinaryOperatorLess:<(_,_) -> _
 690 PRINT "WEST";
  TextConstant:"WEST"
  CarriageControl:;

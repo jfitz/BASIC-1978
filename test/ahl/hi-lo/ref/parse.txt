@@ -1,12 +1,12 @@
 10 PRINT TAB(34);"HI LO"
  NumericConstant:34
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"HI LO"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -35,41 +35,41 @@
  CarriageControl:NL
  CarriageControl:NL
 160 R=0
- Variable:R numeric scalar
+ Variable:R -> _
  NumericConstant:0
  AssignmentOperator:=
 170 B=0:PRINT
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:0
  AssignmentOperator:=
  CarriageControl:NL
 180 Y=INT(100*RND(1))
- Variable:Y numeric scalar
+ Variable:Y -> _
  NumericConstant:100
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 200 PRINT "YOUR GUESS";
  TextConstant:"YOUR GUESS"
  CarriageControl:;
 210 INPUT A
- Variable:A numeric scalar
+ Variable:A -> _
 220 B=B+1
- Variable:B numeric scalar
- Variable:B numeric scalar
+ Variable:B -> _
+ Variable:B -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 230 IF A=Y THEN 300
- Variable:A numeric scalar
- Variable:Y numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:A -> _
+ Variable:Y -> _
+ BinaryOperatorEqual:=(_,_) -> _
 240 IF A>Y THEN 270
- Variable:A numeric scalar
- Variable:Y numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:A -> _
+ Variable:Y -> _
+ BinaryOperatorGreater:>(_,_) -> _
 250 PRINT "YOUR GUESS IS TOO LOW.":GOTO 280
  TextConstant:"YOUR GUESS IS TOO LOW."
  CarriageControl:NL
@@ -79,36 +79,36 @@
  CarriageControl:NL
 280 PRINT:IF B<6 THEN 200
  CarriageControl:NL
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:6
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 290 PRINT "YOU BLEW IT...TOO BAD...THE NUMBER WAS";Y
  TextConstant:"YOU BLEW IT...TOO BAD...THE NUMBER WAS"
  CarriageControl:;
- Variable:Y numeric scalar
+ Variable:Y -> _
  CarriageControl:NL
 295 R=0:GOTO 350
- Variable:R numeric scalar
+ Variable:R -> _
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:350
 300 PRINT "GOT IT!!!!!!!!!!   YOU WIN";Y;"DOLLARS."
  TextConstant:"GOT IT!!!!!!!!!!   YOU WIN"
  CarriageControl:;
- Variable:Y numeric scalar
+ Variable:Y -> _
  CarriageControl:;
  TextConstant:"DOLLARS."
  CarriageControl:NL
 310 R=R+Y
- Variable:R numeric scalar
- Variable:R numeric scalar
- Variable:Y numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:R -> _
+ Variable:R -> _
+ Variable:Y -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 320 PRINT "YOUR TOTAL WINNINGS ARE NOW";R;"DOLLARS."
  TextConstant:"YOUR TOTAL WINNINGS ARE NOW"
  CarriageControl:;
- Variable:R numeric scalar
+ Variable:R -> _
  CarriageControl:;
  TextConstant:"DOLLARS."
  CarriageControl:NL
@@ -117,10 +117,10 @@
  TextConstant:"PLAY AGAIN (YES OR NO)"
  CarriageControl:;
 360 INPUT A$:IF A$="YES" THEN 170
- Variable:A$ string scalar
- Variable:A$ string scalar
+ Variable:A$ -> $
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 380 PRINT:PRINT "SO LONG.  HOPE YOU ENJOYED YOURSELF!!!"
  CarriageControl:NL
  TextConstant:"SO LONG.  HOPE YOU ENJOYED YOURSELF!!!"

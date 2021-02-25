@@ -1,12 +1,12 @@
 1 PRINT TAB(34);"TRAP"
  NumericConstant:34
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"TRAP"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,11 +15,11 @@
  CarriageControl:NL
  CarriageControl:NL
 10 G=6
- Variable:G numeric scalar
+ Variable:G -> _
  NumericConstant:6
  AssignmentOperator:=
 20 N=100
- Variable:N numeric scalar
+ Variable:N -> _
  NumericConstant:100
  AssignmentOperator:=
 30 REM-TRAP
@@ -30,17 +30,17 @@
  TextConstant:"INSTRUCTIONS"
  CarriageControl:;
 60 INPUT Z$
- Variable:Z$ string scalar
+ Variable:Z$ -> $
 70 IF LEFT$(Z$,1)<>"Y" THEN 180
- Variable:Z$ string scalar
+ Variable:Z$ -> $
  NumericConstant:1
- FunctionLeft:LEFT$($,_) string scalar
+ FunctionLeft:LEFT$($,_) -> $
  TextConstant:"Y"
- BinaryOperatorNotEqual:<>($,$) numeric
+ BinaryOperatorNotEqual:<>($,$) -> _
 80 PRINT "I AM THINKING OF A NUMBER BETWEEN 1 AND";N
  TextConstant:"I AM THINKING OF A NUMBER BETWEEN 1 AND"
  CarriageControl:;
- Variable:N numeric scalar
+ Variable:N -> _
  CarriageControl:NL
 90 PRINT "TRY TO GUESS MY NUMBER. ON EACH GUESS,"
  TextConstant:"TRY TO GUESS MY NUMBER. ON EACH GUESS,"
@@ -69,60 +69,60 @@
 170 PRINT "YOU GET";G;"GUESSES TO GET MY NUMBER."
  TextConstant:"YOU GET"
  CarriageControl:;
- Variable:G numeric scalar
+ Variable:G -> _
  CarriageControl:;
  TextConstant:"GUESSES TO GET MY NUMBER."
  CarriageControl:NL
 180 X=INT(N*RND(1))+1
- Variable:X numeric scalar
- Variable:N numeric scalar
+ Variable:X -> _
+ Variable:N -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 190 FOR Q=1 TO G
- control: Variable:Q numeric scalar
+ control: Variable:Q -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:G numeric scalar"]
+ end:     ["Variable:G -> _"]
 200 PRINT 
  CarriageControl:NL
 210 PRINT "GUESS #";Q;
  TextConstant:"GUESS #"
  CarriageControl:;
- Variable:Q numeric scalar
+ Variable:Q -> _
  CarriageControl:;
 220 INPUT A,B
- Variable:A numeric scalar
- Variable:B numeric scalar
+ Variable:A -> _
+ Variable:B -> _
 230 IF A=B AND X=A THEN 400
- Variable:A numeric scalar
- Variable:B numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
- Variable:X numeric scalar
- Variable:A numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
- BinaryOperatorAnd:AND(_,_) numeric
+ Variable:A -> _
+ Variable:B -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:X -> _
+ Variable:A -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
 240 IF A <= B THEN 260
- Variable:A numeric scalar
- Variable:B numeric scalar
- BinaryOperatorLessEqual:<=(_,_) numeric
+ Variable:A -> _
+ Variable:B -> _
+ BinaryOperatorLessEqual:<=(_,_) -> _
 250 GOSUB 360
  LineNumber:360
 260 IF A <= X AND X <= B THEN 320
- Variable:A numeric scalar
- Variable:X numeric scalar
- BinaryOperatorLessEqual:<=(_,_) numeric
- Variable:X numeric scalar
- Variable:B numeric scalar
- BinaryOperatorLessEqual:<=(_,_) numeric
- BinaryOperatorAnd:AND(_,_) numeric
+ Variable:A -> _
+ Variable:X -> _
+ BinaryOperatorLessEqual:<=(_,_) -> _
+ Variable:X -> _
+ Variable:B -> _
+ BinaryOperatorLessEqual:<=(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
 270 IF X<A THEN 300
- Variable:X numeric scalar
- Variable:A numeric scalar
- BinaryOperatorLess:<(_,_) numeric
+ Variable:X -> _
+ Variable:A -> _
+ BinaryOperatorLess:<(_,_) -> _
 280 PRINT "MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
  TextConstant:"MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
  CarriageControl:NL
@@ -137,31 +137,31 @@
  TextConstant:"YOU HAVE TRAPPED MY NUMBER."
  CarriageControl:NL
 330 NEXT Q
- Variable:Q numeric scalar
+ Variable:Q -> _
 340 PRINT "SORRY, THAT'S";G;"GUESSES. THE NUMBER WAS";X
  TextConstant:"SORRY, THAT'S"
  CarriageControl:;
- Variable:G numeric scalar
+ Variable:G -> _
  CarriageControl:;
  TextConstant:"GUESSES. THE NUMBER WAS"
  CarriageControl:;
- Variable:X numeric scalar
+ Variable:X -> _
  CarriageControl:NL
 345 PRINT
  CarriageControl:NL
 350 GOTO 410
  LineNumber:410
 360 R=A
- Variable:R numeric scalar
- Variable:A numeric scalar
+ Variable:R -> _
+ Variable:A -> _
  AssignmentOperator:=
 370 A=B
- Variable:A numeric scalar
- Variable:B numeric scalar
+ Variable:A -> _
+ Variable:B -> _
  AssignmentOperator:=
 380 B=R
- Variable:B numeric scalar
- Variable:R numeric scalar
+ Variable:B -> _
+ Variable:R -> _
  AssignmentOperator:=
 390 RETURN 
  

@@ -1,12 +1,12 @@
 5 PRINT TAB(33);"BAGELS"
  NumericConstant:33
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"BAGELS"
  CarriageControl:NL
 10 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY":PRINT:PRINT
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -20,16 +20,16 @@
  Remark:*** LAWRENCE HALL OF SCIENCE, U.C. BERKELY
 30 DIM A1(6),A(3),B(3)
  NumericConstant:6
- Declaration:A1() array
+ Declaration:A1() -> _()
  NumericConstant:3
- Declaration:A() array
+ Declaration:A() -> _()
  NumericConstant:3
- Declaration:B() array
+ Declaration:B() -> _()
 40 Y=0:T=255
- Variable:Y numeric scalar
+ Variable:Y -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:255
  AssignmentOperator:=
 50 PRINT:PRINT:PRINT
@@ -37,13 +37,13 @@
  CarriageControl:NL
  CarriageControl:NL
 70 INPUT "WOULD YOU LIKE THE RULES (YES OR NO)";A$
- Variable:A$ string scalar
+ Variable:A$ -> $
 90 IF LEFT$(A$,1)="N" THEN 150
- Variable:A$ string scalar
+ Variable:A$ -> $
  NumericConstant:1
- FunctionLeft:LEFT$($,_) string scalar
+ FunctionLeft:LEFT$($,_) -> $
  TextConstant:"N"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 100 PRINT:PRINT "I AM THINKING OF A THREE-DIGIT NUMBER.  TRY TO GUESS"
  CarriageControl:NL
  TextConstant:"I AM THINKING OF A THREE-DIGIT NUMBER.  TRY TO GUESS"
@@ -61,95 +61,95 @@
  TextConstant:"   BAGELS - NO DIGITS CORRECT"
  CarriageControl:NL
 150 FOR I=1 TO 3
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 160 A(I)=INT(10*RND(1))
- Variable:I numeric scalar
- Variable:A(_) numeric scalar
+ Variable:I -> _
+ Variable:A(_) -> _
  NumericConstant:10
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 165 IF I-1=0 THEN 200
- Variable:I numeric scalar
+ Variable:I -> _
  NumericConstant:1
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 170 FOR J=1 TO I-1
- control: Variable:J numeric scalar
+ control: Variable:J -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:I numeric scalar", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) numeric"]
+ end:     ["Variable:I -> _", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) -> _"]
 180 IF A(I)=A(J) THEN 160
- Variable:I numeric scalar
- Variable:A(_) numeric scalar
- Variable:J numeric scalar
- Variable:A(_) numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:I -> _
+ Variable:A(_) -> _
+ Variable:J -> _
+ Variable:A(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
 190 NEXT J
- Variable:J numeric scalar
+ Variable:J -> _
 200 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 210 PRINT:PRINT "O.K.  I HAVE A NUMBER IN MIND."
  CarriageControl:NL
  TextConstant:"O.K.  I HAVE A NUMBER IN MIND."
  CarriageControl:NL
 220 FOR I=1 TO 20
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
 230 PRINT "GUESS #";I,
  TextConstant:"GUESS #"
  CarriageControl:;
- Variable:I numeric scalar
+ Variable:I -> _
  CarriageControl:,
 240 INPUT A$
- Variable:A$ string scalar
+ Variable:A$ -> $
 245 IF LEN(A$)<>3 THEN 630
- Variable:A$ string scalar
- FunctionLen:LEN($) numeric scalar
+ Variable:A$ -> $
+ FunctionLen:LEN($) -> _
  NumericConstant:3
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 250 FOR Z=1 TO 3:A1(Z)=ASC(MID$(A$,Z,1)):NEXT Z
- control: Variable:Z numeric scalar
+ control: Variable:Z -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
- Variable:Z numeric scalar
- Variable:A1(_) numeric scalar
- Variable:A$ string scalar
- Variable:Z numeric scalar
+ Variable:Z -> _
+ Variable:A1(_) -> _
+ Variable:A$ -> $
+ Variable:Z -> _
  NumericConstant:1
- FunctionMid:MID$($,_,_) string scalar
- FunctionAsc:ASC($) numeric scalar
+ FunctionMid:MID$($,_,_) -> $
+ FunctionAsc:ASC($) -> _
  AssignmentOperator:=
- Variable:Z numeric scalar
+ Variable:Z -> _
 260 FOR J=1 TO 3
- control: Variable:J numeric scalar
+ control: Variable:J -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 270 IF A1(J)<48 THEN 300
- Variable:J numeric scalar
- Variable:A1(_) numeric scalar
+ Variable:J -> _
+ Variable:A1(_) -> _
  NumericConstant:48
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 280 IF A1(J)>57 THEN 300
- Variable:J numeric scalar
- Variable:A1(_) numeric scalar
+ Variable:J -> _
+ Variable:A1(_) -> _
  NumericConstant:57
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 285 B(J)=A1(J)-48
- Variable:J numeric scalar
- Variable:B(_) numeric scalar
- Variable:J numeric scalar
- Variable:A1(_) numeric scalar
+ Variable:J -> _
+ Variable:B(_) -> _
+ Variable:J -> _
+ Variable:A1(_) -> _
  NumericConstant:48
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 290 NEXT J
- Variable:J numeric scalar
+ Variable:J -> _
 295 GOTO 320
  LineNumber:320
 300 PRINT "WHAT?"
@@ -159,148 +159,148 @@
  LineNumber:230
 320 IF B(1)=B(2) THEN 650
  NumericConstant:1
- Variable:B(_) numeric scalar
+ Variable:B(_) -> _
  NumericConstant:2
- Variable:B(_) numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:B(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
 330 IF B(2)=B(3) THEN 650
  NumericConstant:2
- Variable:B(_) numeric scalar
+ Variable:B(_) -> _
  NumericConstant:3
- Variable:B(_) numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:B(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
 340 IF B(3)=B(1) THEN 650
  NumericConstant:3
- Variable:B(_) numeric scalar
+ Variable:B(_) -> _
  NumericConstant:1
- Variable:B(_) numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:B(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
 350 C=0:D=0
- Variable:C numeric scalar
+ Variable:C -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:0
  AssignmentOperator:=
 360 FOR J=1 TO 2
- control: Variable:J numeric scalar
+ control: Variable:J -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:2"]
 370 IF A(J)<>B(J+1) THEN 390
- Variable:J numeric scalar
- Variable:A(_) numeric scalar
- Variable:J numeric scalar
+ Variable:J -> _
+ Variable:A(_) -> _
+ Variable:J -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- Variable:B(_) numeric scalar
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:B(_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> _
 380 C=C+1
- Variable:C numeric scalar
- Variable:C numeric scalar
+ Variable:C -> _
+ Variable:C -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 390 IF A(J+1)<>B(J) THEN 410
- Variable:J numeric scalar
+ Variable:J -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- Variable:A(_) numeric scalar
- Variable:J numeric scalar
- Variable:B(_) numeric scalar
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:A(_) -> _
+ Variable:J -> _
+ Variable:B(_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> _
 400 C=C+1
- Variable:C numeric scalar
- Variable:C numeric scalar
+ Variable:C -> _
+ Variable:C -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 410 NEXT J
- Variable:J numeric scalar
+ Variable:J -> _
 420 IF A(1)<>B(3) THEN 440
  NumericConstant:1
- Variable:A(_) numeric scalar
+ Variable:A(_) -> _
  NumericConstant:3
- Variable:B(_) numeric scalar
- BinaryOperatorNotEqual:<>(_,_) numeric
+ Variable:B(_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> _
 430 C=C+1
- Variable:C numeric scalar
- Variable:C numeric scalar
+ Variable:C -> _
+ Variable:C -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 440 IF A(3)<>B(1) THEN 460
  NumericConstant:3
- Variable:A(_) numeric scalar
+ Variable:A(_) -> _
  NumericConstant:1
- Variable:B(_) numeric scalar
- BinaryOperatorNotEqual:<>(_,_) numeric
+ Variable:B(_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> _
 450 C=C+1
- Variable:C numeric scalar
- Variable:C numeric scalar
+ Variable:C -> _
+ Variable:C -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 460 FOR J=1 TO 3
- control: Variable:J numeric scalar
+ control: Variable:J -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
 470 IF A(J)<>B(J) THEN 490
- Variable:J numeric scalar
- Variable:A(_) numeric scalar
- Variable:J numeric scalar
- Variable:B(_) numeric scalar
- BinaryOperatorNotEqual:<>(_,_) numeric
+ Variable:J -> _
+ Variable:A(_) -> _
+ Variable:J -> _
+ Variable:B(_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> _
 480 D=D+1
- Variable:D numeric scalar
- Variable:D numeric scalar
+ Variable:D -> _
+ Variable:D -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 490 NEXT J
- Variable:J numeric scalar
+ Variable:J -> _
 500 IF D=3 THEN 680
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:3
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 505 IF C=0 THEN 545
- Variable:C numeric scalar
+ Variable:C -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 520 FOR J=1 TO C
- control: Variable:J numeric scalar
+ control: Variable:J -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:C numeric scalar"]
+ end:     ["Variable:C -> _"]
 530 PRINT "PICO ";
  TextConstant:"PICO "
  CarriageControl:;
 540 NEXT J
- Variable:J numeric scalar
+ Variable:J -> _
 545 IF D=0 THEN 580
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 550 FOR J=1 TO D
- control: Variable:J numeric scalar
+ control: Variable:J -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:D numeric scalar"]
+ end:     ["Variable:D -> _"]
 560 PRINT "FERMI ";
  TextConstant:"FERMI "
  CarriageControl:;
 570 NEXT J
- Variable:J numeric scalar
+ Variable:J -> _
 580 IF C+D<>0 THEN 600
- Variable:C numeric scalar
- Variable:D numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:C -> _
+ Variable:D -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:0
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 590 PRINT "BAGELS";
  TextConstant:"BAGELS"
  CarriageControl:;
 600 PRINT
  CarriageControl:NL
 605 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 610 PRINT "OH WELL."
  TextConstant:"OH WELL."
  CarriageControl:NL
@@ -309,16 +309,16 @@
  CarriageControl:;
  NumericConstant:100
  NumericConstant:1
- Variable:A(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:A(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:10
  NumericConstant:2
- Variable:A(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:A(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:3
- Variable:A(_) numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:A(_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
  CarriageControl:NL
 620 GOTO 700
  LineNumber:700
@@ -338,28 +338,28 @@
  CarriageControl:NL
  CarriageControl:NL
 690 Y=Y+1
- Variable:Y numeric scalar
- Variable:Y numeric scalar
+ Variable:Y -> _
+ Variable:Y -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 700 INPUT "PLAY AGAIN (YES OR NO)";A$
- Variable:A$ string scalar
+ Variable:A$ -> $
 720 IF LEFT$(A$,1)="YES" THEN 150
- Variable:A$ string scalar
+ Variable:A$ -> $
  NumericConstant:1
- FunctionLeft:LEFT$($,_) string scalar
+ FunctionLeft:LEFT$($,_) -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 730 IF Y=0 THEN 750
- Variable:Y numeric scalar
+ Variable:Y -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 740 PRINT:PRINT "A";Y;"POINT BAGELS BUFF!!"
  CarriageControl:NL
  TextConstant:"A"
  CarriageControl:;
- Variable:Y numeric scalar
+ Variable:Y -> _
  CarriageControl:;
  TextConstant:"POINT BAGELS BUFF!!"
  CarriageControl:NL

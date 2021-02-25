@@ -1,12 +1,12 @@
 1 PRINT TAB(33);"TRAIN"
  NumericConstant:33
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"TRAIN"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -19,48 +19,48 @@
  CarriageControl:NL
  CarriageControl:NL
 10 C=INT(25*RND(1))+40
- Variable:C numeric scalar
+ Variable:C -> _
  NumericConstant:25
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  NumericConstant:40
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 15 D=INT(15*RND(1))+5
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:15
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  NumericConstant:5
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 20 T=INT(19*RND(1))+20
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:19
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  NumericConstant:20
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 25 PRINT " A CAR TRAVELING";C;"MPH CAN MAKE A CERTAIN TRIP IN"
  TextConstant:" A CAR TRAVELING"
  CarriageControl:;
- Variable:C numeric scalar
+ Variable:C -> _
  CarriageControl:;
  TextConstant:"MPH CAN MAKE A CERTAIN TRIP IN"
  CarriageControl:NL
 30 PRINT D;"HOURS LESS THAN A TRAIN TRAVELING AT";T;"MPH."
- Variable:D numeric scalar
+ Variable:D -> _
  CarriageControl:;
  TextConstant:"HOURS LESS THAN A TRAIN TRAVELING AT"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
  CarriageControl:;
  TextConstant:"MPH."
  CarriageControl:NL
@@ -68,39 +68,39 @@
  TextConstant:"HOW LONG DOES THE TRIP TAKE BY CAR"
  CarriageControl:;
 40 INPUT A
- Variable:A numeric scalar
+ Variable:A -> _
 45 V=D*T/(C-T)
- Variable:V numeric scalar
- Variable:D numeric scalar
- Variable:T numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:C numeric scalar
- Variable:T numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- BinaryOperatorDivide:/(_,_) numeric
+ Variable:V -> _
+ Variable:D -> _
+ Variable:T -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:C -> _
+ Variable:T -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:=
 50 E=INT(ABS((V-A)*100/A)+.5)
- Variable:E numeric scalar
- Variable:V numeric scalar
- Variable:A numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:E -> _
+ Variable:V -> _
+ Variable:A -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:100
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:A numeric scalar
- BinaryOperatorDivide:/(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:A -> _
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  NumericConstant:.5
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 55 IF E>5 THEN 70
- Variable:E numeric scalar
+ Variable:E -> _
  NumericConstant:5
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 60 PRINT "GOOD! ANSWER WITHIN";E;"PERCENT."
  TextConstant:"GOOD! ANSWER WITHIN"
  CarriageControl:;
- Variable:E numeric scalar
+ Variable:E -> _
  CarriageControl:;
  TextConstant:"PERCENT."
  CarriageControl:NL
@@ -109,14 +109,14 @@
 70 PRINT "SORRY.  YOU WERE OFF BY";E;"PERCENT."
  TextConstant:"SORRY.  YOU WERE OFF BY"
  CarriageControl:;
- Variable:E numeric scalar
+ Variable:E -> _
  CarriageControl:;
  TextConstant:"PERCENT."
  CarriageControl:NL
 80 PRINT "CORRECT ANSWER IS";V;"HOURS."
  TextConstant:"CORRECT ANSWER IS"
  CarriageControl:;
- Variable:V numeric scalar
+ Variable:V -> _
  CarriageControl:;
  TextConstant:"HOURS."
  CarriageControl:NL
@@ -126,13 +126,13 @@
  TextConstant:"ANOTHER PROBLEM (YES OR NO)"
  CarriageControl:;
 100 INPUT A$
- Variable:A$ string scalar
+ Variable:A$ -> $
 105 PRINT
  CarriageControl:NL
 110 IF A$="YES" THEN 10
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"YES"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 999 END
  
 

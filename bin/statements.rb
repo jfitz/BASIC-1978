@@ -1607,7 +1607,9 @@ class DataStatement < AbstractStatement
   end
 
   def dump
-    lines = @expressions.dump
+    lines = []
+
+    lines += @expressions.dump unless @expressions.nil?
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 

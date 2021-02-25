@@ -1,12 +1,12 @@
 5 PRINT TAB(32);"CHECKERS"
  NumericConstant:32
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CHECKERS"
  CarriageControl:NL
 10 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -47,18 +47,18 @@
  CarriageControl:NL
 80 DIM R(4),S(7,7):G=-1:R(0)=-99
  NumericConstant:4
- Declaration:R() array
+ Declaration:R() -> _()
  NumericConstant:7
  NumericConstant:7
- Declaration:S(,) matrix
- Variable:G numeric scalar
+ Declaration:S(,) -> _(,)
+ Variable:G -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  AssignmentOperator:=
  NumericConstant:0
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:99
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  AssignmentOperator:=
 90 DATA 1,0,1,0,0,0,-1,0,0,1,0,0,0,-1,0,-1,15
  NumericConstant:1
@@ -68,7 +68,7 @@
  NumericConstant:0
  NumericConstant:0
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  NumericConstant:0
  NumericConstant:0
  NumericConstant:1
@@ -76,538 +76,538 @@
  NumericConstant:0
  NumericConstant:0
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  NumericConstant:0
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  NumericConstant:15
 120 FOR X=0 TO 7:FOR Y=0 TO 7:READ J:IF J=15 THEN 180
- control: Variable:X numeric scalar
+ control: Variable:X -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
- control: Variable:Y numeric scalar
+ control: Variable:Y -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
- Variable:J numeric scalar
- Variable:J numeric scalar
+ Variable:J -> _
+ Variable:J -> _
  NumericConstant:15
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 160 S(X,Y)=J:GOTO 200
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
- Variable:J numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
+ Variable:J -> _
  AssignmentOperator:=
  LineNumber:200
 180 RESTORE:READ S(X,Y)
  
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
 200 NEXT Y,X
- Variable:Y numeric scalar
- Variable:X numeric scalar
+ Variable:Y -> _
+ Variable:X -> _
 230 FOR X=0 TO 7:FOR Y=0 TO 7:IF S(X,Y)>-1 THEN 350
- control: Variable:X numeric scalar
+ control: Variable:X -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
- control: Variable:Y numeric scalar
+ control: Variable:Y -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorGreater:>(_,_) numeric
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorGreater:>(_,_) -> _
 310 IF S(X,Y)=-1 THEN FOR A=-1 TO 1 STEP 2:B=G:GOSUB 650:NEXT A
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
- control: Variable:A numeric scalar
- start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) numeric"]
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ control: Variable:A -> _
+ start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> _"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:2"]
- Variable:B numeric scalar
- Variable:G numeric scalar
+ Variable:B -> _
+ Variable:G -> _
  AssignmentOperator:=
  LineNumber:650
- Variable:A numeric scalar
+ Variable:A -> _
 330 IF S(X,Y)=-2 THEN FOR A=-1 TO 1 STEP 2:FOR B=-1 TO 1 STEP 2:GOSUB 650:NEXT B,A
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:2
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
- control: Variable:A numeric scalar
- start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) numeric"]
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ control: Variable:A -> _
+ start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> _"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:2"]
- control: Variable:B numeric scalar
- start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) numeric"]
+ control: Variable:B -> _
+ start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> _"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:2"]
  LineNumber:650
- Variable:B numeric scalar
- Variable:A numeric scalar
+ Variable:B -> _
+ Variable:A -> _
 350 NEXT Y,X:GOTO 1140
- Variable:Y numeric scalar
- Variable:X numeric scalar
+ Variable:Y -> _
+ Variable:X -> _
  LineNumber:1140
 650 U=X+A:V=Y+B:IF U<0 OR U>7 OR V<0 OR V>7 THEN 870
- Variable:U numeric scalar
- Variable:X numeric scalar
- Variable:A numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:U -> _
+ Variable:X -> _
+ Variable:A -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:V numeric scalar
- Variable:Y numeric scalar
- Variable:B numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:V -> _
+ Variable:Y -> _
+ Variable:B -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- Variable:U numeric scalar
+ BinaryOperatorLess:<(_,_) -> _
+ Variable:U -> _
  NumericConstant:7
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:V numeric scalar
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:V -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:V numeric scalar
+ BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:V -> _
  NumericConstant:7
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
 740 IF S(U,V)=0 THEN GOSUB 910:GOTO 870
- Variable:U numeric scalar
- Variable:V numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:U -> _
+ Variable:V -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
  LineNumber:910
  LineNumber:870
 770 IF S(U,V)<0 THEN 870
- Variable:U numeric scalar
- Variable:V numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:U -> _
+ Variable:V -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 790 U=U+A:V=V+B:IF U<0 OR V<0 OR U>7 OR V>7 THEN 870
- Variable:U numeric scalar
- Variable:U numeric scalar
- Variable:A numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:U -> _
+ Variable:U -> _
+ Variable:A -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:V numeric scalar
- Variable:V numeric scalar
- Variable:B numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:V -> _
+ Variable:V -> _
+ Variable:B -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- Variable:V numeric scalar
+ BinaryOperatorLess:<(_,_) -> _
+ Variable:V -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:U numeric scalar
+ BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:U -> _
  NumericConstant:7
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:V numeric scalar
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:V -> _
  NumericConstant:7
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
 850 IF S(U,V)=0 THEN GOSUB 910
- Variable:U numeric scalar
- Variable:V numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:U -> _
+ Variable:V -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
  LineNumber:910
 870 RETURN
  
 910 IF V=0 AND S(X,Y)=-1 THEN Q=Q+2
- Variable:V numeric scalar
+ Variable:V -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
- BinaryOperatorAnd:AND(_,_) numeric
- Variable:Q numeric scalar
- Variable:Q numeric scalar
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
+ Variable:Q -> _
+ Variable:Q -> _
  NumericConstant:2
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 920 IF ABS(Y-V)=2 THEN Q=Q+5
- Variable:Y numeric scalar
- Variable:V numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ Variable:Y -> _
+ Variable:V -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  NumericConstant:2
- BinaryOperatorEqual:=(_,_) numeric
- Variable:Q numeric scalar
- Variable:Q numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:Q -> _
+ Variable:Q -> _
  NumericConstant:5
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 960 IF Y=7 THEN Q=Q-2
- Variable:Y numeric scalar
+ Variable:Y -> _
  NumericConstant:7
- BinaryOperatorEqual:=(_,_) numeric
- Variable:Q numeric scalar
- Variable:Q numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:Q -> _
+ Variable:Q -> _
  NumericConstant:2
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 980 IF U=0 OR U=7 THEN Q=Q+1
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
- Variable:U numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:U -> _
  NumericConstant:7
- BinaryOperatorEqual:=(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:Q numeric scalar
- Variable:Q numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:Q -> _
+ Variable:Q -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 1030 FOR C=-1 TO 1 STEP 2:IF U+C<0 OR U+C>7 OR V+G<0 THEN 1080
- control: Variable:C numeric scalar
- start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) numeric"]
+ control: Variable:C -> _
+ start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> _"]
  end:     ["NumericConstant:1"]
  step:    ["NumericConstant:2"]
- Variable:U numeric scalar
- Variable:C numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:U -> _
+ Variable:C -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- Variable:U numeric scalar
- Variable:C numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
+ Variable:U -> _
+ Variable:C -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:7
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:V numeric scalar
- Variable:G numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:V -> _
+ Variable:G -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
 1035 IF S(U+C,V+G)<0 THEN Q=Q+1:GOTO 1080
- Variable:U numeric scalar
- Variable:C numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:V numeric scalar
- Variable:G numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:S(_,_) numeric scalar
+ Variable:U -> _
+ Variable:C -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:V -> _
+ Variable:G -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- Variable:Q numeric scalar
- Variable:Q numeric scalar
+ BinaryOperatorLess:<(_,_) -> _
+ Variable:Q -> _
+ Variable:Q -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
  LineNumber:1080
 1040 IF U-C<0 OR U-C>7 OR V-G>7 THEN 1080
- Variable:U numeric scalar
- Variable:C numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:U -> _
+ Variable:C -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- Variable:U numeric scalar
- Variable:C numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
+ Variable:U -> _
+ Variable:C -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:7
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:V numeric scalar
- Variable:G numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:V -> _
+ Variable:G -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:7
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
 1045 IF S(U+C,V+G)>0 AND(S(U-C,V-G)=0 OR(U-C=X AND V-G=Y))THEN Q=Q-2
- Variable:U numeric scalar
- Variable:C numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:V numeric scalar
- Variable:G numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:S(_,_) numeric scalar
+ Variable:U -> _
+ Variable:C -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:V -> _
+ Variable:G -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorGreater:>(_,_) numeric
- Variable:U numeric scalar
- Variable:C numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- Variable:V numeric scalar
- Variable:G numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- Variable:S(_,_) numeric scalar
+ BinaryOperatorGreater:>(_,_) -> _
+ Variable:U -> _
+ Variable:C -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ Variable:V -> _
+ Variable:G -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
- Variable:U numeric scalar
- Variable:C numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- Variable:X numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
- Variable:V numeric scalar
- Variable:G numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- Variable:Y numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
- BinaryOperatorAnd:AND(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- BinaryOperatorAnd:AND(_,_) numeric
- Variable:Q numeric scalar
- Variable:Q numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:U -> _
+ Variable:C -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ Variable:X -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:V -> _
+ Variable:G -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ Variable:Y -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
+ Variable:Q -> _
+ Variable:Q -> _
  NumericConstant:2
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 1080 NEXT C:IF Q>R(0)THEN R(0)=Q:R(1)=X:R(2)=Y:R(3)=U:R(4)=V
- Variable:C numeric scalar
- Variable:Q numeric scalar
+ Variable:C -> _
+ Variable:Q -> _
  NumericConstant:0
- Variable:R(_) numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:R(_) -> _
+ BinaryOperatorGreater:>(_,_) -> _
  NumericConstant:0
- Variable:R(_) numeric scalar
- Variable:Q numeric scalar
+ Variable:R(_) -> _
+ Variable:Q -> _
  AssignmentOperator:=
  NumericConstant:1
- Variable:R(_) numeric scalar
- Variable:X numeric scalar
+ Variable:R(_) -> _
+ Variable:X -> _
  AssignmentOperator:=
  NumericConstant:2
- Variable:R(_) numeric scalar
- Variable:Y numeric scalar
+ Variable:R(_) -> _
+ Variable:Y -> _
  AssignmentOperator:=
  NumericConstant:3
- Variable:R(_) numeric scalar
- Variable:U numeric scalar
+ Variable:R(_) -> _
+ Variable:U -> _
  AssignmentOperator:=
  NumericConstant:4
- Variable:R(_) numeric scalar
- Variable:V numeric scalar
+ Variable:R(_) -> _
+ Variable:V -> _
  AssignmentOperator:=
 1100 Q=0:RETURN
- Variable:Q numeric scalar
+ Variable:Q -> _
  NumericConstant:0
  AssignmentOperator:=
  
 1140 IF R(0)=-99 THEN 1880
  NumericConstant:0
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:99
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
 1230 PRINT CHR$(30)"FROM"R(1);R(2)"TO"R(3);R(4);:R(0)=-99
  NumericConstant:30
- FunctionChr:CHR$(_) string scalar
+ FunctionChr:CHR$(_) -> $
  CarriageControl:
  TextConstant:"FROM"
  CarriageControl:
  NumericConstant:1
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  CarriageControl:;
  NumericConstant:2
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  CarriageControl:
  TextConstant:"TO"
  CarriageControl:
  NumericConstant:3
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  CarriageControl:;
  NumericConstant:4
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  CarriageControl:;
  NumericConstant:0
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:99
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  AssignmentOperator:=
 1240 IF R(4)=0 THEN S(R(3),R(4))=-2:GOTO 1420
  NumericConstant:4
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
  NumericConstant:3
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:4
- Variable:R(_) numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:R(_) -> _
+ Variable:S(_,_) -> _
  NumericConstant:2
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  AssignmentOperator:=
  LineNumber:1420
 1250 S(R(3),R(4))=S(R(1),R(2))
  NumericConstant:3
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:4
- Variable:R(_) numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:R(_) -> _
+ Variable:S(_,_) -> _
  NumericConstant:1
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:2
- Variable:R(_) numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:R(_) -> _
+ Variable:S(_,_) -> _
  AssignmentOperator:=
 1310 S(R(1),R(2))=0:IF ABS(R(1)-R(3))<>2 THEN 1420
  NumericConstant:1
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:2
- Variable:R(_) numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:R(_) -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
  AssignmentOperator:=
  NumericConstant:1
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:3
- Variable:R(_) numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ Variable:R(_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  NumericConstant:2
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 1330 S((R(1)+R(3))/2,(R(2)+R(4))/2)=0
  NumericConstant:1
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:3
- Variable:R(_) numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:R(_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
  NumericConstant:2
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:4
- Variable:R(_) numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:R(_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- Variable:S(_,_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
  AssignmentOperator:=
 1340 X=R(3):Y=R(4):IF S(X,Y)=-1 THEN B=-2:FOR A=-2 TO 2 STEP 4:GOSUB 1370
- Variable:X numeric scalar
+ Variable:X -> _
  NumericConstant:3
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  AssignmentOperator:=
- Variable:Y numeric scalar
+ Variable:Y -> _
  NumericConstant:4
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  AssignmentOperator:=
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
- Variable:B numeric scalar
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:B -> _
  NumericConstant:2
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  AssignmentOperator:=
- control: Variable:A numeric scalar
- start:   ["NumericConstant:2", "UnaryOperatorMinus:-(_) numeric"]
+ control: Variable:A -> _
+ start:   ["NumericConstant:2", "UnaryOperatorMinus:-(_) -> _"]
  end:     ["NumericConstant:2"]
  step:    ["NumericConstant:4"]
  LineNumber:1370
 1350 IF S(X,Y)=-2 THEN FOR A=-2 TO 2 STEP 4:FOR B=-2 TO 2 STEP 4:GOSUB 1370:NEXT B
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:2
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
- control: Variable:A numeric scalar
- start:   ["NumericConstant:2", "UnaryOperatorMinus:-(_) numeric"]
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ control: Variable:A -> _
+ start:   ["NumericConstant:2", "UnaryOperatorMinus:-(_) -> _"]
  end:     ["NumericConstant:2"]
  step:    ["NumericConstant:4"]
- control: Variable:B numeric scalar
- start:   ["NumericConstant:2", "UnaryOperatorMinus:-(_) numeric"]
+ control: Variable:B -> _
+ start:   ["NumericConstant:2", "UnaryOperatorMinus:-(_) -> _"]
  end:     ["NumericConstant:2"]
  step:    ["NumericConstant:4"]
  LineNumber:1370
- Variable:B numeric scalar
+ Variable:B -> _
 1360 NEXT A:IF R(0)<>-99 THEN PRINT"TO"R(3);R(4);:R(0)=-99:GOTO 1240
- Variable:A numeric scalar
+ Variable:A -> _
  NumericConstant:0
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:99
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorNotEqual:<>(_,_) numeric
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> _
  TextConstant:"TO"
  CarriageControl:
  NumericConstant:3
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  CarriageControl:;
  NumericConstant:4
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  CarriageControl:;
  NumericConstant:0
- Variable:R(_) numeric scalar
+ Variable:R(_) -> _
  NumericConstant:99
- UnaryOperatorMinus:-(_) numeric
+ UnaryOperatorMinus:-(_) -> _
  AssignmentOperator:=
  LineNumber:1240
 1365 GOTO 1420
  LineNumber:1420
 1370 U=X+A:V=Y+B:IF U<0 OR U>7 OR V<0 OR V>7 THEN 1400
- Variable:U numeric scalar
- Variable:X numeric scalar
- Variable:A numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:U -> _
+ Variable:X -> _
+ Variable:A -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:V numeric scalar
- Variable:Y numeric scalar
- Variable:B numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:V -> _
+ Variable:Y -> _
+ Variable:B -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- Variable:U numeric scalar
+ BinaryOperatorLess:<(_,_) -> _
+ Variable:U -> _
  NumericConstant:7
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:V numeric scalar
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:V -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:V numeric scalar
+ BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:V -> _
  NumericConstant:7
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
 1380 IF S(U,V)=0 AND S(X+A/2,Y+B/2)>0 THEN GOSUB 910
- Variable:U numeric scalar
- Variable:V numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:U -> _
+ Variable:V -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
- Variable:X numeric scalar
- Variable:A numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:X -> _
+ Variable:A -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorPlus:+(_,_) numeric
- Variable:Y numeric scalar
- Variable:B numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:Y -> _
+ Variable:B -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorPlus:+(_,_) numeric
- Variable:S(_,_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorAnd:AND(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
  LineNumber:910
 1400 RETURN
  
@@ -615,272 +615,272 @@
  CarriageControl:NL
  CarriageControl:NL
  CarriageControl:NL
- control: Variable:Y numeric scalar
+ control: Variable:Y -> _
  start:   ["NumericConstant:7"]
  end:     ["NumericConstant:0"]
- step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) numeric"]
- control: Variable:X numeric scalar
+ step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> _"]
+ control: Variable:X -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
- Variable:I numeric scalar
+ Variable:I -> _
  NumericConstant:5
- Variable:X numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:X -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  AssignmentOperator:=
- Variable:I numeric scalar
- FunctionTab:TAB(_) string scalar
+ Variable:I -> _
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
 1430 IF S(X,Y)=0 THEN PRINT".";
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
  TextConstant:"."
  CarriageControl:;
 1470 IF S(X,Y)=1 THEN PRINT"O";
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
  TextConstant:"O"
  CarriageControl:;
 1490 IF S(X,Y)=-1 THEN PRINT"X";
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
  TextConstant:"X"
  CarriageControl:;
 1510 IF S(X,Y)=-2 THEN PRINT"X*";
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:2
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
  TextConstant:"X*"
  CarriageControl:;
 1530 IF S(X,Y)=2 THEN PRINT"O*";
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:2
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
  TextConstant:"O*"
  CarriageControl:;
 1550 NEXT X:PRINT" ":PRINT:NEXT Y:PRINT
- Variable:X numeric scalar
+ Variable:X -> _
  TextConstant:" "
  CarriageControl:NL
  CarriageControl:NL
- Variable:Y numeric scalar
+ Variable:Y -> _
  CarriageControl:NL
 1552 FOR L=0 TO 7
- control: Variable:L numeric scalar
+ control: Variable:L -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
 1554 FOR M=0 TO 7
- control: Variable:M numeric scalar
+ control: Variable:M -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:7"]
 1556 IF S(L,M)=1 OR S(L,M)=2 THEN Z=1
- Variable:L numeric scalar
- Variable:M numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:L -> _
+ Variable:M -> _
+ Variable:S(_,_) -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) numeric
- Variable:L numeric scalar
- Variable:M numeric scalar
- Variable:S(_,_) numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:L -> _
+ Variable:M -> _
+ Variable:S(_,_) -> _
  NumericConstant:2
- BinaryOperatorEqual:=(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:Z numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:Z -> _
  NumericConstant:1
  AssignmentOperator:=
 1558 IF S(L,M)=-1 OR S(L,M)=-2 THEN T=1
- Variable:L numeric scalar
- Variable:M numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:L -> _
+ Variable:M -> _
+ Variable:S(_,_) -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
- Variable:L numeric scalar
- Variable:M numeric scalar
- Variable:S(_,_) numeric scalar
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:L -> _
+ Variable:M -> _
+ Variable:S(_,_) -> _
  NumericConstant:2
- UnaryOperatorMinus:-(_) numeric
- BinaryOperatorEqual:=(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:T numeric scalar
+ UnaryOperatorMinus:-(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:T -> _
  NumericConstant:1
  AssignmentOperator:=
 1560 NEXT M
- Variable:M numeric scalar
+ Variable:M -> _
 1562 NEXT L
- Variable:L numeric scalar
+ Variable:L -> _
 1564 IF Z<>1 THEN 1885
- Variable:Z numeric scalar
+ Variable:Z -> _
  NumericConstant:1
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 1566 IF T<>1 THEN 1880
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:1
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 1570 Z=0: T=0
- Variable:Z numeric scalar
+ Variable:Z -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:0
  AssignmentOperator:=
 1590 INPUT "FROM";E,H:X=E:Y=H:IF S(X,Y)<=0 THEN 1590
- Variable:E numeric scalar
- Variable:H numeric scalar
- Variable:X numeric scalar
- Variable:E numeric scalar
+ Variable:E -> _
+ Variable:H -> _
+ Variable:X -> _
+ Variable:E -> _
  AssignmentOperator:=
- Variable:Y numeric scalar
- Variable:H numeric scalar
+ Variable:Y -> _
+ Variable:H -> _
  AssignmentOperator:=
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorLessEqual:<=(_,_) numeric
+ BinaryOperatorLessEqual:<=(_,_) -> _
 1670 INPUT "TO";A,B:X=A:Y=B
- Variable:A numeric scalar
- Variable:B numeric scalar
- Variable:X numeric scalar
- Variable:A numeric scalar
+ Variable:A -> _
+ Variable:B -> _
+ Variable:X -> _
+ Variable:A -> _
  AssignmentOperator:=
- Variable:Y numeric scalar
- Variable:B numeric scalar
+ Variable:Y -> _
+ Variable:B -> _
  AssignmentOperator:=
 1680 IF S(X,Y)=0 AND ABS(A-E)<=2 AND ABS(A-E)=ABS(B-H)THEN 1700
- Variable:X numeric scalar
- Variable:Y numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:X -> _
+ Variable:Y -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
- Variable:A numeric scalar
- Variable:E numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:A -> _
+ Variable:E -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  NumericConstant:2
- BinaryOperatorLessEqual:<=(_,_) numeric
- BinaryOperatorAnd:AND(_,_) numeric
- Variable:A numeric scalar
- Variable:E numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
- Variable:B numeric scalar
- Variable:H numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
- BinaryOperatorAnd:AND(_,_) numeric
+ BinaryOperatorLessEqual:<=(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
+ Variable:A -> _
+ Variable:E -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
+ Variable:B -> _
+ Variable:H -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
 1690 PRINT CHR$(7)CHR$(11);:GOTO 1670
  NumericConstant:7
- FunctionChr:CHR$(_) string scalar
+ FunctionChr:CHR$(_) -> $
  CarriageControl:
  NumericConstant:11
- FunctionChr:CHR$(_) string scalar
+ FunctionChr:CHR$(_) -> $
  CarriageControl:;
  LineNumber:1670
 1700 I=46
- Variable:I numeric scalar
+ Variable:I -> _
  NumericConstant:46
  AssignmentOperator:=
 1750 S(A,B)=S(E,H):S(E,H)=0:IF ABS(E-A)<>2 THEN 1810
- Variable:A numeric scalar
- Variable:B numeric scalar
- Variable:S(_,_) numeric scalar
- Variable:E numeric scalar
- Variable:H numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:A -> _
+ Variable:B -> _
+ Variable:S(_,_) -> _
+ Variable:E -> _
+ Variable:H -> _
+ Variable:S(_,_) -> _
  AssignmentOperator:=
- Variable:E numeric scalar
- Variable:H numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:E -> _
+ Variable:H -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:E numeric scalar
- Variable:A numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ Variable:E -> _
+ Variable:A -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  NumericConstant:2
- BinaryOperatorNotEqual:<>(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
 1800 S((E+A)/2,(H+B)/2)=0
- Variable:E numeric scalar
- Variable:A numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:E -> _
+ Variable:A -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- Variable:H numeric scalar
- Variable:B numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ Variable:H -> _
+ Variable:B -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- Variable:S(_,_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
  AssignmentOperator:=
 1802 INPUT "+TO";A1,B1:IF A1<0 THEN 1810
- Variable:A1 numeric scalar
- Variable:B1 numeric scalar
- Variable:A1 numeric scalar
+ Variable:A1 -> _
+ Variable:B1 -> _
+ Variable:A1 -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 1804 IF S(A1,B1)<>0 OR ABS(A1-A)<>2 OR ABS(B1-B)<>2 THEN 1802
- Variable:A1 numeric scalar
- Variable:B1 numeric scalar
- Variable:S(_,_) numeric scalar
+ Variable:A1 -> _
+ Variable:B1 -> _
+ Variable:S(_,_) -> _
  NumericConstant:0
- BinaryOperatorNotEqual:<>(_,_) numeric
- Variable:A1 numeric scalar
- Variable:A numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ BinaryOperatorNotEqual:<>(_,_) -> _
+ Variable:A1 -> _
+ Variable:A -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  NumericConstant:2
- BinaryOperatorNotEqual:<>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
- Variable:B1 numeric scalar
- Variable:B numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ BinaryOperatorNotEqual:<>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
+ Variable:B1 -> _
+ Variable:B -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  NumericConstant:2
- BinaryOperatorNotEqual:<>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
+ BinaryOperatorNotEqual:<>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
 1806 E=A:H=B:A=A1:B=B1:I=I+15:GOTO 1750
- Variable:E numeric scalar
- Variable:A numeric scalar
+ Variable:E -> _
+ Variable:A -> _
  AssignmentOperator:=
- Variable:H numeric scalar
- Variable:B numeric scalar
+ Variable:H -> _
+ Variable:B -> _
  AssignmentOperator:=
- Variable:A numeric scalar
- Variable:A1 numeric scalar
+ Variable:A -> _
+ Variable:A1 -> _
  AssignmentOperator:=
- Variable:B numeric scalar
- Variable:B1 numeric scalar
+ Variable:B -> _
+ Variable:B1 -> _
  AssignmentOperator:=
- Variable:I numeric scalar
- Variable:I numeric scalar
+ Variable:I -> _
+ Variable:I -> _
  NumericConstant:15
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
  LineNumber:1750
 1810 IF B=7 THEN S(A,B)=2
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:7
- BinaryOperatorEqual:=(_,_) numeric
- Variable:A numeric scalar
- Variable:B numeric scalar
- Variable:S(_,_) numeric scalar
+ BinaryOperatorEqual:=(_,_) -> _
+ Variable:A -> _
+ Variable:B -> _
+ Variable:S(_,_) -> _
  NumericConstant:2
  AssignmentOperator:=
 1830 GOTO 230

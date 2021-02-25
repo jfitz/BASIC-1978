@@ -1,12 +1,12 @@
 5 PRINT TAB(32);"BULLSEYE"
  NumericConstant:32
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"BULLSEYE"
  CarriageControl:NL
 10 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -28,12 +28,12 @@
  TextConstant:"THROW"
  CarriageControl:,
  NumericConstant:20
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"DESCRIPTION"
  CarriageControl:;
  NumericConstant:45
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"PROBABLE SCORE"
  CarriageControl:NL
@@ -41,12 +41,12 @@
  TextConstant:" 1"
  CarriageControl:;
  NumericConstant:20
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"FAST OVERARM"
  CarriageControl:;
  NumericConstant:45
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"BULLSEYE OR COMPLETE MISS"
  CarriageControl:NL
@@ -54,12 +54,12 @@
  TextConstant:" 2"
  CarriageControl:;
  NumericConstant:20
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CONTROLLED OVERARM"
  CarriageControl:;
  NumericConstant:45
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"10, 20 OR 30 POINTS"
  CarriageControl:NL
@@ -67,246 +67,246 @@
  TextConstant:" 3"
  CarriageControl:;
  NumericConstant:20
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"UNDERARM"
  CarriageControl:;
  NumericConstant:45
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"ANYTHING"
  CarriageControl:NL
  CarriageControl:NL
 100 DIM A$(20),S(20),W(10): M=0: R=0: FOR I=1 TO 20: S(I)=0: NEXT I
  NumericConstant:20
- Declaration:A$() array
+ Declaration:A$() -> $()
  NumericConstant:20
- Declaration:S() array
+ Declaration:S() -> _()
  NumericConstant:10
- Declaration:W() array
- Variable:M numeric scalar
+ Declaration:W() -> _()
+ Variable:M -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:R numeric scalar
+ Variable:R -> _
  NumericConstant:0
  AssignmentOperator:=
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:20"]
- Variable:I numeric scalar
- Variable:S(_) numeric scalar
+ Variable:I -> _
+ Variable:S(_) -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:I numeric scalar
+ Variable:I -> _
 110 INPUT "HOW MANY PLAYERS";N: PRINT
- Variable:N numeric scalar
+ Variable:N -> _
  CarriageControl:NL
 120 FOR I=1 TO N
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:N numeric scalar"]
+ end:     ["Variable:N -> _"]
 130 PRINT "NAME OF PLAYER #";I;:INPUT A$(I)
  TextConstant:"NAME OF PLAYER #"
  CarriageControl:;
- Variable:I numeric scalar
+ Variable:I -> _
  CarriageControl:;
- Variable:I numeric scalar
- Variable:A$(_) string scalar
+ Variable:I -> _
+ Variable:A$(_) -> $
 140 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 150 R=R+1: PRINT: PRINT "ROUND";R:PRINT "---------"
- Variable:R numeric scalar
- Variable:R numeric scalar
+ Variable:R -> _
+ Variable:R -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
  CarriageControl:NL
  TextConstant:"ROUND"
  CarriageControl:;
- Variable:R numeric scalar
+ Variable:R -> _
  CarriageControl:NL
  TextConstant:"---------"
  CarriageControl:NL
 160 FOR I=1 TO N
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:N numeric scalar"]
+ end:     ["Variable:N -> _"]
 170 PRINT: PRINT A$(I)"'S THROW";: INPUT T
  CarriageControl:NL
- Variable:I numeric scalar
- Variable:A$(_) string scalar
+ Variable:I -> _
+ Variable:A$(_) -> $
  CarriageControl:
  TextConstant:"'S THROW"
  CarriageControl:;
- Variable:T numeric scalar
+ Variable:T -> _
 180 IF T<0 OR T>3 THEN PRINT "INPUT 1, 2, OR 3!": GOTO 170
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
- Variable:T numeric scalar
+ BinaryOperatorLess:<(_,_) -> _
+ Variable:T -> _
  NumericConstant:3
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
  TextConstant:"INPUT 1, 2, OR 3!"
  CarriageControl:NL
  LineNumber:170
 190 ON T GOTO 200, 210, 200
- Variable:T numeric scalar
+ Variable:T -> _
  LineNumber:200
  LineNumber:210
  LineNumber:200
 200 P1=.65: P2=.55: P3=.5: P4=.5: GOTO 230
- Variable:P1 numeric scalar
+ Variable:P1 -> _
  NumericConstant:.65
  AssignmentOperator:=
- Variable:P2 numeric scalar
+ Variable:P2 -> _
  NumericConstant:.55
  AssignmentOperator:=
- Variable:P3 numeric scalar
+ Variable:P3 -> _
  NumericConstant:.5
  AssignmentOperator:=
- Variable:P4 numeric scalar
+ Variable:P4 -> _
  NumericConstant:.5
  AssignmentOperator:=
  LineNumber:230
 210 P1=.99: P2=.77: P3=.43: P4=.01: GOTO 230
- Variable:P1 numeric scalar
+ Variable:P1 -> _
  NumericConstant:.99
  AssignmentOperator:=
- Variable:P2 numeric scalar
+ Variable:P2 -> _
  NumericConstant:.77
  AssignmentOperator:=
- Variable:P3 numeric scalar
+ Variable:P3 -> _
  NumericConstant:.43
  AssignmentOperator:=
- Variable:P4 numeric scalar
+ Variable:P4 -> _
  NumericConstant:.01
  AssignmentOperator:=
  LineNumber:230
 220 P1=.95: P2=.75: P3=.45: P4=.05
- Variable:P1 numeric scalar
+ Variable:P1 -> _
  NumericConstant:.95
  AssignmentOperator:=
- Variable:P2 numeric scalar
+ Variable:P2 -> _
  NumericConstant:.75
  AssignmentOperator:=
- Variable:P3 numeric scalar
+ Variable:P3 -> _
  NumericConstant:.45
  AssignmentOperator:=
- Variable:P4 numeric scalar
+ Variable:P4 -> _
  NumericConstant:.05
  AssignmentOperator:=
 230 U=RND(1)
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  AssignmentOperator:=
 240 IF U>=P1 THEN PRINT "BULLSEYE!!  40 POINTS!":B=40: GOTO 290
- Variable:U numeric scalar
- Variable:P1 numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ Variable:U -> _
+ Variable:P1 -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
  TextConstant:"BULLSEYE!!  40 POINTS!"
  CarriageControl:NL
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:40
  AssignmentOperator:=
  LineNumber:290
 250 IF U>=P2 THEN PRINT "30-POINT ZONE!":B=30: GOTO 290
- Variable:U numeric scalar
- Variable:P2 numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ Variable:U -> _
+ Variable:P2 -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
  TextConstant:"30-POINT ZONE!"
  CarriageControl:NL
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:30
  AssignmentOperator:=
  LineNumber:290
 260 IF U>=P3 THEN PRINT "20-POINT ZONE":B=20: GOTO 290
- Variable:U numeric scalar
- Variable:P3 numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ Variable:U -> _
+ Variable:P3 -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
  TextConstant:"20-POINT ZONE"
  CarriageControl:NL
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:20
  AssignmentOperator:=
  LineNumber:290
 270 IF U>=P4 THEN PRINT "WHEW!  10 POINTS.":B=10: GOTO 290
- Variable:U numeric scalar
- Variable:P4 numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ Variable:U -> _
+ Variable:P4 -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
  TextConstant:"WHEW!  10 POINTS."
  CarriageControl:NL
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:10
  AssignmentOperator:=
  LineNumber:290
 280 PRINT "MISSED THE TARGET!  TOO BAD.": B=0
  TextConstant:"MISSED THE TARGET!  TOO BAD."
  CarriageControl:NL
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:0
  AssignmentOperator:=
 290 S(I)=S(I)+B: PRINT "TOTAL SCORE =";S(I): NEXT I
- Variable:I numeric scalar
- Variable:S(_) numeric scalar
- Variable:I numeric scalar
- Variable:S(_) numeric scalar
- Variable:B numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:I -> _
+ Variable:S(_) -> _
+ Variable:I -> _
+ Variable:S(_) -> _
+ Variable:B -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
  TextConstant:"TOTAL SCORE ="
  CarriageControl:;
- Variable:I numeric scalar
- Variable:S(_) numeric scalar
+ Variable:I -> _
+ Variable:S(_) -> _
  CarriageControl:NL
- Variable:I numeric scalar
+ Variable:I -> _
 300 FOR I=1 TO N
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:N numeric scalar"]
+ end:     ["Variable:N -> _"]
 310 IF S(I)>=200 THEN M=M+1: W(M)=I
- Variable:I numeric scalar
- Variable:S(_) numeric scalar
+ Variable:I -> _
+ Variable:S(_) -> _
  NumericConstant:200
- BinaryOperatorGreaterEqual:>=(_,_) numeric
- Variable:M numeric scalar
- Variable:M numeric scalar
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
+ Variable:M -> _
+ Variable:M -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:M numeric scalar
- Variable:W(_) numeric scalar
- Variable:I numeric scalar
+ Variable:M -> _
+ Variable:W(_) -> _
+ Variable:I -> _
  AssignmentOperator:=
 320 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 330 IF M=0 THEN 150
- Variable:M numeric scalar
+ Variable:M -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 340 PRINT: PRINT "WE HAVE A WINNER!!": PRINT
  CarriageControl:NL
  TextConstant:"WE HAVE A WINNER!!"
  CarriageControl:NL
  CarriageControl:NL
 350 FOR I=1 TO M: PRINT A$(W(I));" SCORED";S(W(I));"POINTS.": NEXT I
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:M numeric scalar"]
- Variable:I numeric scalar
- Variable:W(_) numeric scalar
- Variable:A$(_) string scalar
+ end:     ["Variable:M -> _"]
+ Variable:I -> _
+ Variable:W(_) -> _
+ Variable:A$(_) -> $
  CarriageControl:;
  TextConstant:" SCORED"
  CarriageControl:;
- Variable:I numeric scalar
- Variable:W(_) numeric scalar
- Variable:S(_) numeric scalar
+ Variable:I -> _
+ Variable:W(_) -> _
+ Variable:S(_) -> _
  CarriageControl:;
  TextConstant:"POINTS."
  CarriageControl:NL
- Variable:I numeric scalar
+ Variable:I -> _
 360 PRINT: PRINT "THANKS FOR THE GAME.": END
  CarriageControl:NL
  TextConstant:"THANKS FOR THE GAME."

@@ -1,12 +1,12 @@
 1 PRINT TAB(28);"GAME OF EVEN WINS"
  NumericConstant:28
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"GAME OF EVEN WINS"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -14,12 +14,12 @@
  CarriageControl:NL
  CarriageControl:NL
 4 INPUT "DO YOU WANT INSTRUCTIONS (YES OR NO)";A$:PRINT
- Variable:A$ string scalar
+ Variable:A$ -> $
  CarriageControl:NL
 5 IF A$="NO" THEN 20
- Variable:A$ string scalar
+ Variable:A$ -> $
  TextConstant:"NO"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 6 PRINT "THE GAME IS PLAYED AS FOLLOWS:":PRINT
  TextConstant:"THE GAME IS PLAYED AS FOLLOWS:"
  CarriageControl:NL
@@ -59,234 +59,234 @@
 20 DIM R(1,5)
  NumericConstant:1
  NumericConstant:5
- Declaration:R(,) matrix
+ Declaration:R(,) -> _(,)
 25 L=0: B=0
- Variable:L numeric scalar
+ Variable:L -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:0
  AssignmentOperator:=
 30 FOR I=0 TO 5
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:5"]
 40 R(1,I)=4
  NumericConstant:1
- Variable:I numeric scalar
- Variable:R(_,_) numeric scalar
+ Variable:I -> _
+ Variable:R(_,_) -> _
  NumericConstant:4
  AssignmentOperator:=
 50 R(0,I)=4
  NumericConstant:0
- Variable:I numeric scalar
- Variable:R(_,_) numeric scalar
+ Variable:I -> _
+ Variable:R(_,_) -> _
  NumericConstant:4
  AssignmentOperator:=
 60 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 70 A=0: B=0
- Variable:A numeric scalar
+ Variable:A -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:0
  AssignmentOperator:=
 90 P=INT((13*RND(1)+9)/2)*2+1
- Variable:P numeric scalar
+ Variable:P -> _
  NumericConstant:13
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:9
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  NumericConstant:2
- BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 100 IF P=1 THEN 530
- Variable:P numeric scalar
+ Variable:P -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 110 PRINT "THERE ARE";P;"CHIPS ON THE BOARD."
  TextConstant:"THERE ARE"
  CarriageControl:;
- Variable:P numeric scalar
+ Variable:P -> _
  CarriageControl:;
  TextConstant:"CHIPS ON THE BOARD."
  CarriageControl:NL
 120 E1=E
- Variable:E1 numeric scalar
- Variable:E numeric scalar
+ Variable:E1 -> _
+ Variable:E -> _
  AssignmentOperator:=
 130 L1=L
- Variable:L1 numeric scalar
- Variable:L numeric scalar
+ Variable:L1 -> _
+ Variable:L -> _
  AssignmentOperator:=
 140 E=(A/2-INT(A/2))*2
- Variable:E numeric scalar
- Variable:A numeric scalar
+ Variable:E -> _
+ Variable:A -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- Variable:A numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ Variable:A -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:2
- BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
  AssignmentOperator:=
 150 L=INT((P/6-INT(P/6))*6+.5)
- Variable:L numeric scalar
- Variable:P numeric scalar
+ Variable:L -> _
+ Variable:P -> _
  NumericConstant:6
- BinaryOperatorDivide:/(_,_) numeric
- Variable:P numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ Variable:P -> _
  NumericConstant:6
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:6
- BinaryOperatorMultiply:*(_,_) numeric
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:.5
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 160 IF R(E,L)>=P THEN 320
- Variable:E numeric scalar
- Variable:L numeric scalar
- Variable:R(_,_) numeric scalar
- Variable:P numeric scalar
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ Variable:E -> _
+ Variable:L -> _
+ Variable:R(_,_) -> _
+ Variable:P -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 170 M=R(E,L)
- Variable:M numeric scalar
- Variable:E numeric scalar
- Variable:L numeric scalar
- Variable:R(_,_) numeric scalar
+ Variable:M -> _
+ Variable:E -> _
+ Variable:L -> _
+ Variable:R(_,_) -> _
  AssignmentOperator:=
 180 IF M<=0 THEN 370
- Variable:M numeric scalar
+ Variable:M -> _
  NumericConstant:0
- BinaryOperatorLessEqual:<=(_,_) numeric
+ BinaryOperatorLessEqual:<=(_,_) -> _
 190 P=P-M
- Variable:P numeric scalar
- Variable:P numeric scalar
- Variable:M numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:P -> _
+ Variable:P -> _
+ Variable:M -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 200 IF M=1 THEN 510
- Variable:M numeric scalar
+ Variable:M -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 210 PRINT "COMPUTER TAKES";M;"CHIPS LEAVING";P;"... YOUR MOVE";
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Variable:M numeric scalar
+ Variable:M -> _
  CarriageControl:;
  TextConstant:"CHIPS LEAVING"
  CarriageControl:;
- Variable:P numeric scalar
+ Variable:P -> _
  CarriageControl:;
  TextConstant:"... YOUR MOVE"
  CarriageControl:;
 220 B=B+M
- Variable:B numeric scalar
- Variable:B numeric scalar
- Variable:M numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:B -> _
+ Variable:B -> _
+ Variable:M -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 230 INPUT M
- Variable:M numeric scalar
+ Variable:M -> _
 240 M=INT(M)
- Variable:M numeric scalar
- Variable:M numeric scalar
- FunctionInt:INT(_) numeric scalar
+ Variable:M -> _
+ Variable:M -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 250 IF M<1 THEN 450
- Variable:M numeric scalar
+ Variable:M -> _
  NumericConstant:1
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 260 IF M>4 THEN 460
- Variable:M numeric scalar
+ Variable:M -> _
  NumericConstant:4
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 270 IF M>P THEN 460
- Variable:M numeric scalar
- Variable:P numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:M -> _
+ Variable:P -> _
+ BinaryOperatorGreater:>(_,_) -> _
 280 IF M=P THEN 360
- Variable:M numeric scalar
- Variable:P numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:M -> _
+ Variable:P -> _
+ BinaryOperatorEqual:=(_,_) -> _
 290 P=P-M
- Variable:P numeric scalar
- Variable:P numeric scalar
- Variable:M numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:P -> _
+ Variable:P -> _
+ Variable:M -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 300 A=A+M
- Variable:A numeric scalar
- Variable:A numeric scalar
- Variable:M numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:A -> _
+ Variable:A -> _
+ Variable:M -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 310 GOTO 100
  LineNumber:100
 320 IF P=1 THEN 550
- Variable:P numeric scalar
+ Variable:P -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 330 PRINT "COMPUTER TAKES";P;"CHIPS."
  TextConstant:"COMPUTER TAKES"
  CarriageControl:;
- Variable:P numeric scalar
+ Variable:P -> _
  CarriageControl:;
  TextConstant:"CHIPS."
  CarriageControl:NL
 340 R(E,L)=P
- Variable:E numeric scalar
- Variable:L numeric scalar
- Variable:R(_,_) numeric scalar
- Variable:P numeric scalar
+ Variable:E -> _
+ Variable:L -> _
+ Variable:R(_,_) -> _
+ Variable:P -> _
  AssignmentOperator:=
 350 B=B+P
- Variable:B numeric scalar
- Variable:B numeric scalar
- Variable:P numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:B -> _
+ Variable:B -> _
+ Variable:P -> _
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 360 IF B/2=INT(B/2) THEN 420
- Variable:B numeric scalar
+ Variable:B -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- Variable:B numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ Variable:B -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
+ BinaryOperatorEqual:=(_,_) -> _
 370 PRINT "GAME OVER ... YOU WIN!!!": PRINT
  TextConstant:"GAME OVER ... YOU WIN!!!"
  CarriageControl:NL
  CarriageControl:NL
 390 IF R(E,L)=1 THEN 480
- Variable:E numeric scalar
- Variable:L numeric scalar
- Variable:R(_,_) numeric scalar
+ Variable:E -> _
+ Variable:L -> _
+ Variable:R(_,_) -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 400 R(E,L)=R(E,L)-1
- Variable:E numeric scalar
- Variable:L numeric scalar
- Variable:R(_,_) numeric scalar
- Variable:E numeric scalar
- Variable:L numeric scalar
- Variable:R(_,_) numeric scalar
+ Variable:E -> _
+ Variable:L -> _
+ Variable:R(_,_) -> _
+ Variable:E -> _
+ Variable:L -> _
+ Variable:R(_,_) -> _
  NumericConstant:1
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 410 GOTO 70
  LineNumber:70
@@ -297,38 +297,38 @@
 430 GOTO 70
  LineNumber:70
 450 IF M=0 THEN 570
- Variable:M numeric scalar
+ Variable:M -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 460 PRINT M;"IS AN ILLEGAL MOVE ... YOUR MOVE";
- Variable:M numeric scalar
+ Variable:M -> _
  CarriageControl:;
  TextConstant:"IS AN ILLEGAL MOVE ... YOUR MOVE"
  CarriageControl:;
 470 GOTO 230
  LineNumber:230
 480 IF R(E1,L1)=1 THEN 70
- Variable:E1 numeric scalar
- Variable:L1 numeric scalar
- Variable:R(_,_) numeric scalar
+ Variable:E1 -> _
+ Variable:L1 -> _
+ Variable:R(_,_) -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 490 R(E1,L1)=R(E1,L1)-1
- Variable:E1 numeric scalar
- Variable:L1 numeric scalar
- Variable:R(_,_) numeric scalar
- Variable:E1 numeric scalar
- Variable:L1 numeric scalar
- Variable:R(_,_) numeric scalar
+ Variable:E1 -> _
+ Variable:L1 -> _
+ Variable:R(_,_) -> _
+ Variable:E1 -> _
+ Variable:L1 -> _
+ Variable:R(_,_) -> _
  NumericConstant:1
- BinaryOperatorMinus:-(_,_) numeric
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 500 GOTO 70
  LineNumber:70
 510 PRINT "COMPUTER TAKES 1 CHIP LEAVING";P;"... YOUR MOVE";
  TextConstant:"COMPUTER TAKES 1 CHIP LEAVING"
  CarriageControl:;
- Variable:P numeric scalar
+ Variable:P -> _
  CarriageControl:;
  TextConstant:"... YOUR MOVE"
  CarriageControl:;

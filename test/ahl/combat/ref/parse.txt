@@ -1,12 +1,12 @@
 1 PRINT TAB(33);"COMBAT"
  NumericConstant:33
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"COMBAT"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -35,39 +35,39 @@
  NumericConstant:30000
  CarriageControl:,
 8 INPUT A
- Variable:A numeric scalar
+ Variable:A -> _
 9 PRINT "NAVY",20000,
  TextConstant:"NAVY"
  CarriageControl:,
  NumericConstant:20000
  CarriageControl:,
 10 INPUT B
- Variable:B numeric scalar
+ Variable:B -> _
 11 PRINT "A. F.",22000,
  TextConstant:"A. F."
  CarriageControl:,
  NumericConstant:22000
  CarriageControl:,
 12 INPUT C
- Variable:C numeric scalar
+ Variable:C -> _
 13 IF A+B+C>72000 THEN 5
- Variable:A numeric scalar
- Variable:B numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:C numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:A -> _
+ Variable:B -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:C -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:72000
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 14 D=30000
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:30000
  AssignmentOperator:=
 15 E=20000
- Variable:E numeric scalar
+ Variable:E -> _
  NumericConstant:20000
  AssignmentOperator:=
 16 F=22000
- Variable:F numeric scalar
+ Variable:F -> _
  NumericConstant:22000
  AssignmentOperator:=
 17 PRINT "YOU ATTACK FIRST. TYPE (1) FOR ARMY; (2) FOR NAVY;"
@@ -77,118 +77,118 @@
  TextConstant:"AND (3) FOR AIR FORCE."
  CarriageControl:NL
 19 INPUT Y
- Variable:Y numeric scalar
+ Variable:Y -> _
 20 PRINT "HOW MANY MEN"
  TextConstant:"HOW MANY MEN"
  CarriageControl:NL
 21 INPUT X
- Variable:X numeric scalar
+ Variable:X -> _
 22 IF X<0 THEN 20
- Variable:X numeric scalar
+ Variable:X -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 23 ON Y GOTO 100,200,300
- Variable:Y numeric scalar
+ Variable:Y -> _
  LineNumber:100
  LineNumber:200
  LineNumber:300
 100 IF X>A THEN 20
- Variable:X numeric scalar
- Variable:A numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:X -> _
+ Variable:A -> _
+ BinaryOperatorGreater:>(_,_) -> _
 105 IF X<A/3 THEN 120
- Variable:X numeric scalar
- Variable:A numeric scalar
+ Variable:X -> _
+ Variable:A -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 110 IF X<2*A/3 THEN 150
- Variable:X numeric scalar
+ Variable:X -> _
  NumericConstant:2
- Variable:A numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:A -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 115 GOTO 270
  LineNumber:270
 120 PRINT "YOU LOST";X;"MEN FROM YOUR ARMY."
  TextConstant:"YOU LOST"
  CarriageControl:;
- Variable:X numeric scalar
+ Variable:X -> _
  CarriageControl:;
  TextConstant:"MEN FROM YOUR ARMY."
  CarriageControl:NL
 125 A=INT(A-X)
- Variable:A numeric scalar
- Variable:A numeric scalar
- Variable:X numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ Variable:A -> _
+ Variable:A -> _
+ Variable:X -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 130 GOTO 500
  LineNumber:500
 150 PRINT "YOU LOST";INT(X/3);"MEN, BUT I LOST ";INT(2*D/3)
  TextConstant:"YOU LOST"
  CarriageControl:;
- Variable:X numeric scalar
+ Variable:X -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  CarriageControl:;
  TextConstant:"MEN, BUT I LOST "
  CarriageControl:;
  NumericConstant:2
- Variable:D numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:D -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  CarriageControl:NL
 155 A=INT(A-X/3)
- Variable:A numeric scalar
- Variable:A numeric scalar
- Variable:X numeric scalar
+ Variable:A -> _
+ Variable:A -> _
+ Variable:X -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 160 D=0
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:0
  AssignmentOperator:=
 165 GOTO 500 
  LineNumber:500
 200 IF X>B THEN 20
- Variable:X numeric scalar
- Variable:B numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:X -> _
+ Variable:B -> _
+ BinaryOperatorGreater:>(_,_) -> _
 210 IF X<E/3 THEN 230
- Variable:X numeric scalar
- Variable:E numeric scalar
+ Variable:X -> _
+ Variable:E -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 215 IF X<2*E/3 THEN 250
- Variable:X numeric scalar
+ Variable:X -> _
  NumericConstant:2
- Variable:E numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:E -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 220 GOTO 270
  LineNumber:270
 230 PRINT "YOUR ATTACK WAS STOPPED!"
  TextConstant:"YOUR ATTACK WAS STOPPED!"
  CarriageControl:NL
 232 B=INT(B-X)
- Variable:B numeric scalar
- Variable:B numeric scalar
- Variable:X numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ Variable:B -> _
+ Variable:B -> _
+ Variable:X -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 235 GOTO 500
  LineNumber:500
@@ -196,20 +196,20 @@
  TextConstant:"YOU DESTROYED"
  CarriageControl:;
  NumericConstant:2
- Variable:E numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:E -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  CarriageControl:;
  TextConstant:"OF MY ARMY."
  CarriageControl:NL
 255 E=INT(E/3)
- Variable:E numeric scalar
- Variable:E numeric scalar
+ Variable:E -> _
+ Variable:E -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 260 GOTO 500
  LineNumber:500
@@ -220,59 +220,59 @@
  TextConstant:"OF YOUR AIR FORCE BASES AND 3 ARMY BASES."
  CarriageControl:NL
 280 A=INT(A/3)
- Variable:A numeric scalar
- Variable:A numeric scalar
+ Variable:A -> _
+ Variable:A -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 285 C=INT(C/3)
- Variable:C numeric scalar
- Variable:C numeric scalar
+ Variable:C -> _
+ Variable:C -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 290 E=INT(2*E/3)
- Variable:E numeric scalar
+ Variable:E -> _
  NumericConstant:2
- Variable:E numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:E -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 293 GOTO 500
  LineNumber:500
 300 IF X>C THEN 20
- Variable:X numeric scalar
- Variable:C numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:X -> _
+ Variable:C -> _
+ BinaryOperatorGreater:>(_,_) -> _
 310 IF X<C/3 THEN 350
- Variable:X numeric scalar
- Variable:C numeric scalar
+ Variable:X -> _
+ Variable:C -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 320 IF X<2*C/3 THEN 370
- Variable:X numeric scalar
+ Variable:X -> _
  NumericConstant:2
- Variable:C numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:C -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 330 GOTO 380
  LineNumber:380
 350 PRINT "YOUR ATTACK WAS WIPED OUT."
  TextConstant:"YOUR ATTACK WAS WIPED OUT."
  CarriageControl:NL
 355 C=INT(C-X)
- Variable:C numeric scalar
- Variable:C numeric scalar
- Variable:X numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ Variable:C -> _
+ Variable:C -> _
+ Variable:X -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 360 GOTO 500
  LineNumber:500
@@ -280,27 +280,27 @@
  TextConstant:"WE HAD A DOGFIGHT. YOU WON - AND FINISHED YOUR MISSION."
  CarriageControl:NL
 375 D=INT(2*D/3)
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:2
- Variable:D numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:D -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 377 E=INT(E/3)
- Variable:E numeric scalar
- Variable:E numeric scalar
+ Variable:E -> _
+ Variable:E -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 378 F=INT(F/3)
- Variable:F numeric scalar
- Variable:F numeric scalar
+ Variable:F -> _
+ Variable:F -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 379 GOTO 500
  LineNumber:500
@@ -311,27 +311,27 @@
  TextConstant:"TWO NAVY BASES AND BOMBED THREE ARMY BASES."
  CarriageControl:NL
 385 A=INT(A/4)
- Variable:A numeric scalar
- Variable:A numeric scalar
+ Variable:A -> _
+ Variable:A -> _
  NumericConstant:4
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 387 B=INT(B/3)
- Variable:B numeric scalar
- Variable:B numeric scalar
+ Variable:B -> _
+ Variable:B -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 390 D=INT(2*D/3)
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:2
- Variable:D numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:D -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 500 PRINT
  CarriageControl:NL
@@ -344,23 +344,23 @@
 510 PRINT "ARMY",A,D
  TextConstant:"ARMY"
  CarriageControl:,
- Variable:A numeric scalar
+ Variable:A -> _
  CarriageControl:,
- Variable:D numeric scalar
+ Variable:D -> _
  CarriageControl:NL
 520 PRINT "NAVY",B,E
  TextConstant:"NAVY"
  CarriageControl:,
- Variable:B numeric scalar
+ Variable:B -> _
  CarriageControl:,
- Variable:E numeric scalar
+ Variable:E -> _
  CarriageControl:NL
 530 PRINT "A. F.",C,F
  TextConstant:"A. F."
  CarriageControl:,
- Variable:C numeric scalar
+ Variable:C -> _
  CarriageControl:,
- Variable:F numeric scalar
+ Variable:F -> _
  CarriageControl:NL
 1000 PRINT "WHAT IS YOUR NEXT MOVE?"
  TextConstant:"WHAT IS YOUR NEXT MOVE?"
@@ -369,36 +369,36 @@
  TextConstant:"ARMY=1  NAVY=2  AIR FORCE=3"
  CarriageControl:NL
 1020 INPUT G
- Variable:G numeric scalar
+ Variable:G -> _
 1030 PRINT "HOW MANY MEN"
  TextConstant:"HOW MANY MEN"
  CarriageControl:NL
 1040 INPUT T
- Variable:T numeric scalar
+ Variable:T -> _
 1045 IF T<0 THEN 1030
- Variable:T numeric scalar
+ Variable:T -> _
  NumericConstant:0
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorLess:<(_,_) -> _
 1050 ON G GOTO 1600,1700,1800
- Variable:G numeric scalar
+ Variable:G -> _
  LineNumber:1600
  LineNumber:1700
  LineNumber:1800
 1600 IF T>A THEN 1030
- Variable:T numeric scalar
- Variable:A numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:T -> _
+ Variable:A -> _
+ BinaryOperatorGreater:>(_,_) -> _
 1610 IF T<D/2 THEN 1630
- Variable:T numeric scalar
- Variable:D numeric scalar
+ Variable:T -> _
+ Variable:D -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 1615 PRINT "YOU DESTROYED MY ARMY!"
  TextConstant:"YOU DESTROYED MY ARMY!"
  CarriageControl:NL
 1616 D=0
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:0
  AssignmentOperator:=
 1617 GOTO 2000
@@ -407,23 +407,23 @@
  TextConstant:"I WIPED OUT YOUR ATTACK!"
  CarriageControl:NL
 1635 A=A-T
- Variable:A numeric scalar
- Variable:A numeric scalar
- Variable:T numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:A -> _
+ Variable:A -> _
+ Variable:T -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 1640 GOTO 2000
  LineNumber:2000
 1700 IF T>B THEN 1030 
- Variable:T numeric scalar
- Variable:B numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:T -> _
+ Variable:B -> _
+ BinaryOperatorGreater:>(_,_) -> _
 1710 IF T<E/2 THEN 1750
- Variable:T numeric scalar
- Variable:E numeric scalar
+ Variable:T -> _
+ Variable:E -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 1720 GOTO 1770
  LineNumber:1770
 1750 PRINT "I SUNK TWO OF YOUR BATTLESHIPS, AND MY AIR FORCE"
@@ -433,16 +433,16 @@
  TextConstant:"WIPED OUT YOUR UNGAURDED CAPITOL."
  CarriageControl:NL
 1755 A=A/4
- Variable:A numeric scalar
- Variable:A numeric scalar
+ Variable:A -> _
+ Variable:A -> _
  NumericConstant:4
- BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:=
 1760 B=B/2
- Variable:B numeric scalar
- Variable:B numeric scalar
+ Variable:B -> _
+ Variable:B -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:=
 1765 GOTO 2000
  LineNumber:2000
@@ -453,31 +453,31 @@
  TextConstant:"AND SUNK THREE BATTLESHIPS."
  CarriageControl:NL
 1775 F=2*F/3
- Variable:F numeric scalar
+ Variable:F -> _
  NumericConstant:2
- Variable:F numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ Variable:F -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:=
 1780 E=(E/2)
- Variable:E numeric scalar
- Variable:E numeric scalar
+ Variable:E -> _
+ Variable:E -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:=
 1790 GOTO 2000
  LineNumber:2000
 1800 IF T>C THEN 1030 
- Variable:T numeric scalar
- Variable:C numeric scalar
- BinaryOperatorGreater:>(_,_) numeric
+ Variable:T -> _
+ Variable:C -> _
+ BinaryOperatorGreater:>(_,_) -> _
 1810 IF T>F/2 THEN 1830 
- Variable:T numeric scalar
- Variable:F numeric scalar
+ Variable:T -> _
+ Variable:F -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> _
 1820 GOTO 1850
  LineNumber:1850
 1830 PRINT "MY NAVY AND AIR FORCE IN A COMBINED ATTACK LEFT"
@@ -487,22 +487,22 @@
  TextConstant:"YOUR COUNTRY IN SHAMBLES."
  CarriageControl:NL
 1835 A=A/3
- Variable:A numeric scalar
- Variable:A numeric scalar
+ Variable:A -> _
+ Variable:A -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:=
 1837 B=B/3
- Variable:B numeric scalar
- Variable:B numeric scalar
+ Variable:B -> _
+ Variable:B -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:=
 1840 C=C/3
- Variable:C numeric scalar
- Variable:C numeric scalar
+ Variable:C -> _
+ Variable:C -> _
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:=
 1845 GOTO 2000
  LineNumber:2000
@@ -520,37 +520,37 @@
  TextConstant:"FROM THE RESULTS OF BOTH OF YOUR ATTACKS,"
  CarriageControl:NL
 2002 IF A+B+C>3/2*(D+E+F) THEN 2010
- Variable:A numeric scalar
- Variable:B numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:C numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:A -> _
+ Variable:B -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:C -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:3
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- Variable:D numeric scalar
- Variable:E numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:F numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ Variable:D -> _
+ Variable:E -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:F -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> _
 2005 IF A+B+C<2/3*(D+E+F) THEN 2015
- Variable:A numeric scalar
- Variable:B numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:C numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
+ Variable:A -> _
+ Variable:B -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:C -> _
+ BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:2
  NumericConstant:3
- BinaryOperatorDivide:/(_,_) numeric
- Variable:D numeric scalar
- Variable:E numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- Variable:F numeric scalar
- BinaryOperatorPlus:+(_,_) numeric
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorLess:<(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ Variable:D -> _
+ Variable:E -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:F -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 2006 PRINT "THE TREATY OF PARIS CONCLUDED THAT WE TAKE OUR"
  TextConstant:"THE TREATY OF PARIS CONCLUDED THAT WE TAKE OUR"
  CarriageControl:NL

@@ -1,12 +1,12 @@
 10 PRINT TAB(30);"POETRY"
  NumericConstant:30
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"POETRY"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,7 +15,7 @@
  CarriageControl:NL
  CarriageControl:NL
 90 ON I GOTO 100,101,102,103,104
- Variable:I numeric scalar
+ Variable:I -> _
  LineNumber:100
  LineNumber:101
  LineNumber:102
@@ -42,7 +42,7 @@
  CarriageControl:;
  LineNumber:210
 110 ON I GOTO 111,112,113,114,115
- Variable:I numeric scalar
+ Variable:I -> _
  LineNumber:111
  LineNumber:112
  LineNumber:113
@@ -51,7 +51,7 @@
 111 PRINT "BEGUILING ME";:U=2:GOTO 210
  TextConstant:"BEGUILING ME"
  CarriageControl:;
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:210
@@ -66,7 +66,7 @@
 114 PRINT "NEVER FLITTING";:U=2:GOTO 210
  TextConstant:"NEVER FLITTING"
  CarriageControl:;
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:2
  AssignmentOperator:=
  LineNumber:210
@@ -75,7 +75,7 @@
  CarriageControl:;
  LineNumber:210
 120 ON I GOTO 121,122,123,124,125
- Variable:I numeric scalar
+ Variable:I -> _
  LineNumber:121
  LineNumber:122
  LineNumber:123
@@ -98,15 +98,15 @@
  CarriageControl:;
  LineNumber:210
 125 IF U=0 THEN 210
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 126 PRINT "SIGN OF PARTING";:GOTO 210
  TextConstant:"SIGN OF PARTING"
  CarriageControl:;
  LineNumber:210
 130 ON I GOTO 131,132,133,134,135
- Variable:I numeric scalar
+ Variable:I -> _
  LineNumber:131
  LineNumber:132
  LineNumber:133
@@ -132,102 +132,102 @@
  TextConstant:"NEVERMORE"
  CarriageControl:;
 210 IF U=0 OR RND(1)>.19 THEN 212
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  NumericConstant:.19
- BinaryOperatorGreater:>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
 211 PRINT ",";:U=2
  TextConstant:","
  CarriageControl:;
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:2
  AssignmentOperator:=
 212 IF RND(1)>.65 THEN 214
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
+ FunctionRnd:RND(_) -> _
  NumericConstant:.65
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 213 PRINT " ";:U=U+1:GOTO 215
  TextConstant:" "
  CarriageControl:;
- Variable:U numeric scalar
- Variable:U numeric scalar
+ Variable:U -> _
+ Variable:U -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
  LineNumber:215
 214 PRINT : U=0
  CarriageControl:NL
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
  AssignmentOperator:=
 215 I=INT(INT(10*RND(1))/2)+1
- Variable:I numeric scalar
+ Variable:I -> _
  NumericConstant:10
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ FunctionInt:INT(_) -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 220 J=J+1 : K=K+1
- Variable:J numeric scalar
- Variable:J numeric scalar
+ Variable:J -> _
+ Variable:J -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
- Variable:K numeric scalar
- Variable:K numeric scalar
+ Variable:K -> _
+ Variable:K -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
+ BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:=
 230 IF U>0 OR INT(J/2)<>J/2 THEN 240
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
- BinaryOperatorGreater:>(_,_) numeric
- Variable:J numeric scalar
+ BinaryOperatorGreater:>(_,_) -> _
+ Variable:J -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- FunctionInt:INT(_) numeric scalar
- Variable:J numeric scalar
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
+ Variable:J -> _
  NumericConstant:2
- BinaryOperatorDivide:/(_,_) numeric
- BinaryOperatorNotEqual:<>(_,_) numeric
- BinaryOperatorOr:OR(_,_) numeric
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> _
+ BinaryOperatorOr:OR(_,_) -> _
 235 PRINT "     ";
  TextConstant:"     "
  CarriageControl:;
 240 ON J GOTO 90,110,120,130,250
- Variable:J numeric scalar
+ Variable:J -> _
  LineNumber:90
  LineNumber:110
  LineNumber:120
  LineNumber:130
  LineNumber:250
 250 J=0 : PRINT : IF K>20 THEN 270
- Variable:J numeric scalar
+ Variable:J -> _
  NumericConstant:0
  AssignmentOperator:=
  CarriageControl:NL
- Variable:K numeric scalar
+ Variable:K -> _
  NumericConstant:20
- BinaryOperatorGreater:>(_,_) numeric
+ BinaryOperatorGreater:>(_,_) -> _
 260 GOTO 215
  LineNumber:215
 270 PRINT : U=0 : K=0 : GOTO 110
  CarriageControl:NL
- Variable:U numeric scalar
+ Variable:U -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:K numeric scalar
+ Variable:K -> _
  NumericConstant:0
  AssignmentOperator:=
  LineNumber:110

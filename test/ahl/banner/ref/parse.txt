@@ -1,230 +1,230 @@
 10 INPUT "HORIZONTAL";X
- Variable:X numeric scalar
+ Variable:X -> _
 20 INPUT "VERTICAL";Y
- Variable:Y numeric scalar
+ Variable:Y -> _
 21 INPUT "CENTERED";L$
- Variable:L$ string scalar
+ Variable:L$ -> $
 22 G1=0:IF L$>"P" THEN G1=1
- Variable:G1 numeric scalar
+ Variable:G1 -> _
  NumericConstant:0
  AssignmentOperator:=
- Variable:L$ string scalar
+ Variable:L$ -> $
  TextConstant:"P"
- BinaryOperatorGreater:>($,$) numeric
- Variable:G1 numeric scalar
+ BinaryOperatorGreater:>($,$) -> _
+ Variable:G1 -> _
  NumericConstant:1
  AssignmentOperator:=
 23 INPUT "CHARACTER (TYPE 'ALL' IF YOU WANT CHARACTER BEING PRINTED)";M$
- Variable:M$ string scalar
+ Variable:M$ -> $
 29 PRINT "STATEMENT";
  TextConstant:"STATEMENT"
  CarriageControl:;
 30 INPUT A$
- Variable:A$ string scalar
+ Variable:A$ -> $
 35 INPUT "SET PAGE";O$
- Variable:O$ string scalar
+ Variable:O$ -> $
 40 A=ASC(LEFT$(A$,1))
- Variable:A numeric scalar
- Variable:A$ string scalar
+ Variable:A -> _
+ Variable:A$ -> $
  NumericConstant:1
- FunctionLeft:LEFT$($,_) string scalar
- FunctionAsc:ASC($) numeric scalar
+ FunctionLeft:LEFT$($,_) -> $
+ FunctionAsc:ASC($) -> _
  AssignmentOperator:=
 50 REM
  Remark:
 60 REM
  Remark:
 70 FOR T=1 TO LEN(A$)
- control: Variable:T numeric scalar
+ control: Variable:T -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:A$ string scalar", "FunctionLen:LEN($) numeric scalar"]
+ end:     ["Variable:A$ -> $", "FunctionLen:LEN($) -> _"]
 80 P$=MID$(A$,T,1)
- Variable:P$ string scalar
- Variable:A$ string scalar
- Variable:T numeric scalar
+ Variable:P$ -> $
+ Variable:A$ -> $
+ Variable:T -> _
  NumericConstant:1
- FunctionMid:MID$($,_,_) string scalar
+ FunctionMid:MID$($,_,_) -> $
  AssignmentOperator:=
 90 FOR O=1 TO 50
- control: Variable:O numeric scalar
+ control: Variable:O -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:50"]
 95 READ S$,S(1),S(2),S(3),S(4),S(5),S(6),S(7)
- Variable:S$ string scalar
+ Variable:S$ -> $
  NumericConstant:1
- Variable:S(_) numeric scalar
+ Variable:S(_) -> _
  NumericConstant:2
- Variable:S(_) numeric scalar
+ Variable:S(_) -> _
  NumericConstant:3
- Variable:S(_) numeric scalar
+ Variable:S(_) -> _
  NumericConstant:4
- Variable:S(_) numeric scalar
+ Variable:S(_) -> _
  NumericConstant:5
- Variable:S(_) numeric scalar
+ Variable:S(_) -> _
  NumericConstant:6
- Variable:S(_) numeric scalar
+ Variable:S(_) -> _
  NumericConstant:7
- Variable:S(_) numeric scalar
+ Variable:S(_) -> _
 96 IF P$=" " THEN 812
- Variable:P$ string scalar
+ Variable:P$ -> $
  TextConstant:" "
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 100 IF P$=S$ THEN 200
- Variable:P$ string scalar
- Variable:S$ string scalar
- BinaryOperatorEqual:=($,$) numeric
+ Variable:P$ -> $
+ Variable:S$ -> $
+ BinaryOperatorEqual:=($,$) -> _
 120 NEXT O
- Variable:O numeric scalar
+ Variable:O -> _
 200 RESTORE
  
 201 X$=M$
- Variable:X$ string scalar
- Variable:M$ string scalar
+ Variable:X$ -> $
+ Variable:M$ -> $
  AssignmentOperator:=
 202 IF M$="ALL" THEN X$=S$
- Variable:M$ string scalar
+ Variable:M$ -> $
  TextConstant:"ALL"
- BinaryOperatorEqual:=($,$) numeric
- Variable:X$ string scalar
- Variable:S$ string scalar
+ BinaryOperatorEqual:=($,$) -> _
+ Variable:X$ -> $
+ Variable:S$ -> $
  AssignmentOperator:=
 205 FOR U=1 TO 7
- control: Variable:U numeric scalar
+ control: Variable:U -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
 210 FOR K=8 TO 0 STEP -1
- control: Variable:K numeric scalar
+ control: Variable:K -> _
  start:   ["NumericConstant:8"]
  end:     ["NumericConstant:0"]
- step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) numeric"]
+ step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> _"]
 230 IF 2^K<S(U) THEN 270
  NumericConstant:2
- Variable:K numeric scalar
- BinaryOperatorPower:^(_,_) numeric
- Variable:U numeric scalar
- Variable:S(_) numeric scalar
- BinaryOperatorLess:<(_,_) numeric
+ Variable:K -> _
+ BinaryOperatorPower:^(_,_) -> _
+ Variable:U -> _
+ Variable:S(_) -> _
+ BinaryOperatorLess:<(_,_) -> _
 240 J(9-K)=0
  NumericConstant:9
- Variable:K numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- Variable:J(_) numeric scalar
+ Variable:K -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ Variable:J(_) -> _
  NumericConstant:0
  AssignmentOperator:=
 250 GOTO 280
  LineNumber:280
 270 J(9-K)=1: S(U)=S(U)-2^K
  NumericConstant:9
- Variable:K numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- Variable:J(_) numeric scalar
+ Variable:K -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ Variable:J(_) -> _
  NumericConstant:1
  AssignmentOperator:=
- Variable:U numeric scalar
- Variable:S(_) numeric scalar
- Variable:U numeric scalar
- Variable:S(_) numeric scalar
+ Variable:U -> _
+ Variable:S(_) -> _
+ Variable:U -> _
+ Variable:S(_) -> _
  NumericConstant:2
- Variable:K numeric scalar
- BinaryOperatorPower:^(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:K -> _
+ BinaryOperatorPower:^(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
 272 IF S(U)=1 THEN 815
- Variable:U numeric scalar
- Variable:S(_) numeric scalar
+ Variable:U -> _
+ Variable:S(_) -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 280 NEXT K
- Variable:K numeric scalar
+ Variable:K -> _
 445 FOR T1=1 TO X
- control: Variable:T1 numeric scalar
+ control: Variable:T1 -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:X numeric scalar"]
+ end:     ["Variable:X -> _"]
 447 PRINT TAB((63-4.5*Y)*G1/(LEN(X$))+1);
  NumericConstant:63
  NumericConstant:4.5
- Variable:Y numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- BinaryOperatorMinus:-(_,_) numeric
- Variable:G1 numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
- Variable:X$ string scalar
- FunctionLen:LEN($) numeric scalar
- BinaryOperatorDivide:/(_,_) numeric
+ Variable:Y -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ Variable:G1 -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:X$ -> $
+ FunctionLen:LEN($) -> _
+ BinaryOperatorDivide:/(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- FunctionTab:TAB(_) string scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
 450 FOR B=1 TO F(U)
- control: Variable:B numeric scalar
+ control: Variable:B -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:U numeric scalar", "Variable:F(_) numeric scalar"]
+ end:     ["Variable:U -> _", "Variable:F(_) -> _"]
 460 IF J(B)=0 THEN 500
- Variable:B numeric scalar
- Variable:J(_) numeric scalar
+ Variable:B -> _
+ Variable:J(_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) numeric
+ BinaryOperatorEqual:=(_,_) -> _
 465 FOR I=1 TO Y: PRINT X$;: NEXT I
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:Y numeric scalar"]
- Variable:X$ string scalar
+ end:     ["Variable:Y -> _"]
+ Variable:X$ -> $
  CarriageControl:;
- Variable:I numeric scalar
+ Variable:I -> _
 470 GOTO 600
  LineNumber:600
 500 FOR I=1 TO Y
- control: Variable:I numeric scalar
+ control: Variable:I -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:Y numeric scalar"]
+ end:     ["Variable:Y -> _"]
 510 FOR I1=1 TO LEN(X$)
- control: Variable:I1 numeric scalar
+ control: Variable:I1 -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:X$ string scalar", "FunctionLen:LEN($) numeric scalar"]
+ end:     ["Variable:X$ -> $", "FunctionLen:LEN($) -> _"]
 520 PRINT " ";: NEXT I1
  TextConstant:" "
  CarriageControl:;
- Variable:I1 numeric scalar
+ Variable:I1 -> _
 530 NEXT I
- Variable:I numeric scalar
+ Variable:I -> _
 600 NEXT B
- Variable:B numeric scalar
+ Variable:B -> _
 620 PRINT
  CarriageControl:NL
 630 NEXT T1
- Variable:T1 numeric scalar
+ Variable:T1 -> _
 700 NEXT U
- Variable:U numeric scalar
+ Variable:U -> _
 750 FOR H=1 TO 2*X: PRINT: NEXT H
- control: Variable:H numeric scalar
+ control: Variable:H -> _
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:2", "Variable:X numeric scalar", "BinaryOperatorMultiply:*(_,_) numeric"]
+ end:     ["NumericConstant:2", "Variable:X -> _", "BinaryOperatorMultiply:*(_,_) -> _"]
  CarriageControl:NL
- Variable:H numeric scalar
+ Variable:H -> _
 800 NEXT T
- Variable:T numeric scalar
+ Variable:T -> _
 806 FOR H=1 TO 75: PRINT: NEXT H
- control: Variable:H numeric scalar
+ control: Variable:H -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:75"]
  CarriageControl:NL
- Variable:H numeric scalar
+ Variable:H -> _
 810 STOP
  
 812 FOR H=1 TO 7*X: PRINT: NEXT H
- control: Variable:H numeric scalar
+ control: Variable:H -> _
  start:   ["NumericConstant:1"]
- end:     ["NumericConstant:7", "Variable:X numeric scalar", "BinaryOperatorMultiply:*(_,_) numeric"]
+ end:     ["NumericConstant:7", "Variable:X -> _", "BinaryOperatorMultiply:*(_,_) -> _"]
  CarriageControl:NL
- Variable:H numeric scalar
+ Variable:H -> _
 813 GOTO 800
  LineNumber:800
 815 F(U)=9-K: GOTO 445
- Variable:U numeric scalar
- Variable:F(_) numeric scalar
+ Variable:U -> _
+ Variable:F(_) -> _
  NumericConstant:9
- Variable:K numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
+ Variable:K -> _
+ BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:=
  LineNumber:445
 899 DATA " ",0,0,0,0,0,0,0

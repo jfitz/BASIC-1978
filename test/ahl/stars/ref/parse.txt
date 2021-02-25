@@ -1,12 +1,12 @@
 10 PRINT TAB(34);"STARS"
  NumericConstant:34
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"STARS"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) string scalar
+ FunctionTab:TAB(_) -> $
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -19,26 +19,26 @@
 140 REM *** A IS LIMIT ON NUMBER, M IS NUMBER OF GUESSES
  Remark:*** A IS LIMIT ON NUMBER, M IS NUMBER OF GUESSES
 150 A=100:M=7
- Variable:A numeric scalar
+ Variable:A -> _
  NumericConstant:100
  AssignmentOperator:=
- Variable:M numeric scalar
+ Variable:M -> _
  NumericConstant:7
  AssignmentOperator:=
 170 INPUT "DO YOU WANT INSTRUCTIONS";A$
- Variable:A$ string scalar
+ Variable:A$ -> $
 190 IF LEFT$(A$,1)="N" THEN 280
- Variable:A$ string scalar
+ Variable:A$ -> $
  NumericConstant:1
- FunctionLeft:LEFT$($,_) string scalar
+ FunctionLeft:LEFT$($,_) -> $
  TextConstant:"N"
- BinaryOperatorEqual:=($,$) numeric
+ BinaryOperatorEqual:=($,$) -> _
 200 REM *** INSTRUCTIONS ON HOW TO PLAY
  Remark:*** INSTRUCTIONS ON HOW TO PLAY
 210 PRINT "I AM THINKING OF A WHOLE NUMBER FROM 1 TO";A
  TextConstant:"I AM THINKING OF A WHOLE NUMBER FROM 1 TO"
  CarriageControl:;
- Variable:A numeric scalar
+ Variable:A -> _
  CarriageControl:NL
 220 PRINT "TRY TO GUESS MY NUMBER.  AFTER YOU GUESS, I"
  TextConstant:"TRY TO GUESS MY NUMBER.  AFTER YOU GUESS, I"
@@ -55,7 +55,7 @@
 260 PRINT "MEANS REALLY CLOSE!  YOU GET";M;"GUESSES."
  TextConstant:"MEANS REALLY CLOSE!  YOU GET"
  CarriageControl:;
- Variable:M numeric scalar
+ Variable:M -> _
  CarriageControl:;
  TextConstant:"GUESSES."
  CarriageControl:NL
@@ -66,14 +66,14 @@
 290 PRINT
  CarriageControl:NL
 300 X=INT(A*RND(1)+1)
- Variable:X numeric scalar
- Variable:A numeric scalar
+ Variable:X -> _
+ Variable:A -> _
  NumericConstant:1
- FunctionRnd:RND(_) numeric scalar
- BinaryOperatorMultiply:*(_,_) numeric
+ FunctionRnd:RND(_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
  NumericConstant:1
- BinaryOperatorPlus:+(_,_) numeric
- FunctionInt:INT(_) numeric scalar
+ BinaryOperatorPlus:+(_,_) -> _
+ FunctionInt:INT(_) -> _
  AssignmentOperator:=
 310 PRINT "OK, I AM THINKING OF A NUMBER, START GUESSING."
  TextConstant:"OK, I AM THINKING OF A NUMBER, START GUESSING."
@@ -81,51 +81,51 @@
 320 REM *** GUESSING BEGINS, HUMAN GETS M GUESSES
  Remark:*** GUESSING BEGINS, HUMAN GETS M GUESSES
 330 FOR K=1 TO M
- control: Variable:K numeric scalar
+ control: Variable:K -> _
  start:   ["NumericConstant:1"]
- end:     ["Variable:M numeric scalar"]
+ end:     ["Variable:M -> _"]
 340 PRINT
  CarriageControl:NL
 350 PRINT "YOUR GUESS";
  TextConstant:"YOUR GUESS"
  CarriageControl:;
 360 INPUT G
- Variable:G numeric scalar
+ Variable:G -> _
 370 IF G=X THEN 600
- Variable:G numeric scalar
- Variable:X numeric scalar
- BinaryOperatorEqual:=(_,_) numeric
+ Variable:G -> _
+ Variable:X -> _
+ BinaryOperatorEqual:=(_,_) -> _
 380 D=ABS(G-X)
- Variable:D numeric scalar
- Variable:G numeric scalar
- Variable:X numeric scalar
- BinaryOperatorMinus:-(_,_) numeric
- FunctionAbs:ABS(_) numeric scalar
+ Variable:D -> _
+ Variable:G -> _
+ Variable:X -> _
+ BinaryOperatorMinus:-(_,_) -> _
+ FunctionAbs:ABS(_) -> _
  AssignmentOperator:=
 390 IF D>=64 THEN 510
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:64
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 400 IF D>=32 THEN 500
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:32
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 410 IF D>=16 THEN 490
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:16
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 420 IF D>=8 THEN 480
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:8
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 430 IF D>=4 THEN 470
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:4
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 440 IF D>=2 THEN 460
- Variable:D numeric scalar
+ Variable:D -> _
  NumericConstant:2
- BinaryOperatorGreaterEqual:>=(_,_) numeric
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
 450 PRINT "*";
  TextConstant:"*"
  CarriageControl:;
@@ -150,7 +150,7 @@
 520 PRINT
  CarriageControl:NL
 530 NEXT K
- Variable:K numeric scalar
+ Variable:K -> _
 540 REM *** DID NOT GUESS IN M GUESSES
  Remark:*** DID NOT GUESS IN M GUESSES
 550 PRINT 
@@ -158,11 +158,11 @@
 560 PRINT "SORRY, THAT'S";M;"GUESSES. THE NUMBER WAS";X
  TextConstant:"SORRY, THAT'S"
  CarriageControl:;
- Variable:M numeric scalar
+ Variable:M -> _
  CarriageControl:;
  TextConstant:"GUESSES. THE NUMBER WAS"
  CarriageControl:;
- Variable:X numeric scalar
+ Variable:X -> _
  CarriageControl:NL
 580 GOTO 650
  LineNumber:650
@@ -170,21 +170,21 @@
  Remark:*** WE HAVE A WINNER
 600 PRINT:FOR N=1 TO 79
  CarriageControl:NL
- control: Variable:N numeric scalar
+ control: Variable:N -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:79"]
 610 PRINT "*";
  TextConstant:"*"
  CarriageControl:;
 620 NEXT N
- Variable:N numeric scalar
+ Variable:N -> _
 630 PRINT:PRINT
  CarriageControl:NL
  CarriageControl:NL
 640 PRINT "YOU GOT IT IN";K;"GUESSES!!!  LET'S PLAY AGAIN..."
  TextConstant:"YOU GOT IT IN"
  CarriageControl:;
- Variable:K numeric scalar
+ Variable:K -> _
  CarriageControl:;
  TextConstant:"GUESSES!!!  LET'S PLAY AGAIN..."
  CarriageControl:NL
