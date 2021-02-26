@@ -53,7 +53,7 @@
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) -> _
  FunctionInt:INT(_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 60 FOR I=1 TO C
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
@@ -65,13 +65,13 @@
 90 G=0
  Variable:G -> _
  NumericConstant:0
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 95 S(0)=LEN(S$)
  NumericConstant:0
  Variable:S(_) -> _
  Variable:S$ -> $
  FunctionLen:LEN($) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 100 FOR I=1 TO LEN(S$): S(I)=ASC(MID$(S$,I,1)): NEXT I
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
@@ -83,7 +83,7 @@
  NumericConstant:1
  FunctionMid:MID$($,_,_) -> $
  FunctionAsc:ASC($) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:I -> _
 110 FOR I=1 TO 5
  control: Variable:I -> _
@@ -93,7 +93,7 @@
  Variable:I -> _
  Variable:A(_) -> _
  NumericConstant:45
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 130 NEXT I
  Variable:I -> _
 140 FOR J=1 TO 5
@@ -104,7 +104,7 @@
  Variable:J -> _
  Variable:P(_) -> _
  NumericConstant:0
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 146 NEXT J
  Variable:J -> _
 150 PRINT "GUESS A FIVE LETTER WORD";
@@ -117,7 +117,7 @@
  Variable:G -> _
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 172 IF S$=L$ THEN 500
  Variable:S$ -> $
  Variable:L$ -> $
@@ -129,14 +129,14 @@
  Variable:I -> _
  Variable:P(_) -> _
  NumericConstant:0
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:I -> _
 175 L(0)=LEN(L$)
  NumericConstant:0
  Variable:L(_) -> _
  Variable:L$ -> $
  FunctionLen:LEN($) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 180 FOR I=1 TO LEN(L$): L(I)=ASC(MID$(L$,I,1)): NEXT I
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
@@ -148,7 +148,7 @@
  NumericConstant:1
  FunctionMid:MID$($,_,_) -> $
  FunctionAsc:ASC($) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:I -> _
 190 IF L(1)=63 THEN 300
  NumericConstant:1
@@ -163,10 +163,10 @@
 205 M=0: Q=1
  Variable:M -> _
  NumericConstant:0
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:Q -> _
  NumericConstant:1
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 210 FOR I=1 TO 5
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
@@ -186,13 +186,13 @@
  Variable:P(_) -> _
  Variable:J -> _
  Variable:L(_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 232 Q=Q+1
  Variable:Q -> _
  Variable:Q -> _
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 233 IF I<>J THEN 250
  Variable:I -> _
  Variable:J -> _
@@ -202,13 +202,13 @@
  Variable:A(_) -> _
  Variable:J -> _
  Variable:L(_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 250 M=M+1
  Variable:M -> _
  Variable:M -> _
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 260 NEXT J
  Variable:J -> _
 265 NEXT I
@@ -217,16 +217,16 @@
  NumericConstant:0
  Variable:A(_) -> _
  NumericConstant:5
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 272 P(0)=M
  NumericConstant:0
  Variable:P(_) -> _
  Variable:M -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 275 A$="": FOR I=1 TO A(0): A$=A$+CHR$(A(I)): NEXT I
  Variable:A$ -> $
  TextConstant:""
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:0", "Variable:A(_) -> _"]
@@ -236,12 +236,12 @@
  Variable:A(_) -> _
  FunctionChr:CHR$(_) -> $
  BinaryOperatorPlus:+($,$) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
  Variable:I -> _
 277 P$="": FOR I=1 TO P(0): P$=P$+CHR$(P(I)): NEXT I
  Variable:P$ -> $
  TextConstant:""
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:0", "Variable:P(_) -> _"]
@@ -251,7 +251,7 @@
  Variable:P(_) -> _
  FunctionChr:CHR$(_) -> $
  BinaryOperatorPlus:+($,$) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
  Variable:I -> _
 280 PRINT "THERE WERE";M;"MATCHES AND THE COMMON LETTERS WERE...";P$
  TextConstant:"THERE WERE"
@@ -286,7 +286,7 @@
 300 S$="": FOR I=1 TO 7: S$=S$+CHR$(S(I)): NEXT I
  Variable:S$ -> $
  TextConstant:""
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:7"]
@@ -296,7 +296,7 @@
  Variable:S(_) -> _
  FunctionChr:CHR$(_) -> $
  BinaryOperatorPlus:+($,$) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
  Variable:I -> _
 310 PRINT "THE SECRET WORD IS ";S$: PRINT
  TextConstant:"THE SECRET WORD IS "
@@ -315,7 +315,7 @@
  Variable:G -> _
  NumericConstant:1
  BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  LineNumber:150
 500 PRINT "YOU HAVE GUESSED THE WORD.  IT TOOK";G;"GUESSES!": PRINT
  TextConstant:"YOU HAVE GUESSED THE WORD.  IT TOOK"

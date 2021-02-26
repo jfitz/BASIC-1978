@@ -41,7 +41,7 @@
  NumericConstant:0
  Variable:A$(_) -> $
  FunctionVal:VAL($) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 120 REM          MAIN CONTROL SECTION
  Remark:         MAIN CONTROL SECTION
 130 INPUT "ARE YOU THINKING OF AN ANIMAL";A$
@@ -59,7 +59,7 @@
 160 K=1
  Variable:K -> _
  NumericConstant:1
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 170 GOSUB 390
  LineNumber:390
 180 IF LEN(A$(K))=0 THEN 999
@@ -94,7 +94,7 @@
  Variable:A$ -> $
  NumericConstant:1
  FunctionLeft:LEFT$($,_) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 230 IF LEFT$(A$,1)="Y" THEN PRINT "WHY NOT TRY ANOTHER ANIMAL?": GOTO 120
  Variable:A$ -> $
  NumericConstant:1
@@ -139,7 +139,7 @@
  Variable:A$ -> $
  NumericConstant:1
  FunctionLeft:LEFT$($,_) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
  Variable:A$ -> $
  TextConstant:"Y"
  BinaryOperatorNotEqual:<>($,$) -> _
@@ -153,20 +153,20 @@
  BinaryOperatorEqual:=($,$) -> _
  Variable:B$ -> $
  TextConstant:"N"
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 320 IF A$="N" THEN B$="Y"
  Variable:A$ -> $
  TextConstant:"N"
  BinaryOperatorEqual:=($,$) -> _
  Variable:B$ -> $
  TextConstant:"Y"
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 330 Z1=VAL(A$(0))
  Variable:Z1 -> _
  NumericConstant:0
  Variable:A$(_) -> $
  FunctionVal:VAL($) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 340 A$(0)=STR$(Z1+2)
  NumericConstant:0
  Variable:A$(_) -> $
@@ -174,13 +174,13 @@
  NumericConstant:2
  BinaryOperatorPlus:+(_,_) -> _
  FunctionStr:STR$(_) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 350 A$(Z1)=A$(K)
  Variable:Z1 -> _
  Variable:A$(_) -> $
  Variable:K -> _
  Variable:A$(_) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 360 A$(Z1+1)="\A"+V$
  Variable:Z1 -> _
  NumericConstant:1
@@ -189,7 +189,7 @@
  TextConstant:"\A"
  Variable:V$ -> $
  BinaryOperatorPlus:+($,$) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 370 A$(K)="\Q"+X$+"\"+A$+STR$(Z1+1)+"\"+B$+STR$(Z1)+"\"
  Variable:K -> _
  Variable:A$(_) -> $
@@ -214,7 +214,7 @@
  BinaryOperatorPlus:+($,$) -> $
  TextConstant:"\"
  BinaryOperatorPlus:+($,$) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 380 GOTO 120
  LineNumber:120
 390 REM     SUBROUTINE TO PRINT QUESTIONS
@@ -223,7 +223,7 @@
  Variable:Q$ -> $
  Variable:K -> _
  Variable:A$(_) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 410 FOR Z=3 TO LEN(Q$)
  control: Variable:Z -> _
  start:   ["NumericConstant:3"]
@@ -248,7 +248,7 @@
  Variable:C$ -> $
  NumericConstant:1
  FunctionLeft:LEFT$($,_) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 440 IF C$<>"Y" AND C$<>"N" THEN 410
  Variable:C$ -> $
  TextConstant:"Y"
@@ -262,7 +262,7 @@
  TextConstant:"\"
  Variable:C$ -> $
  BinaryOperatorPlus:+($,$) -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 455 FOR X=3 TO LEN(Q$)-1
  control: Variable:X -> _
  start:   ["NumericConstant:3"]
@@ -306,7 +306,7 @@
  BinaryOperatorMinus:-(_,_) -> _
  FunctionMid:MID$($,_,_) -> $
  FunctionVal:VAL($) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 520 RETURN
  
 530 DATA "4","\QDOES IT SWIM\Y2\N3\","\AFISH","\ABIRD"
@@ -321,7 +321,7 @@
 605 X=0
  Variable:X -> _
  NumericConstant:0
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 610 FOR I=1 TO 200
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
@@ -363,13 +363,13 @@
  Variable:X -> _
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:X -> _
  NumericConstant:4
  BinaryOperatorEqual:=(_,_) -> _
  Variable:X -> _
  NumericConstant:0
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  CarriageControl:NL
 650 NEXT I
  Variable:I -> _

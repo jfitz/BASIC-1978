@@ -7,11 +7,11 @@
 130 L$="[]"       ' LIVE CELL
  Variable:L$ -> $
  TextConstant:"[]"
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 140 D$="  "       ' DEAD CELL
  Variable:D$ -> $
  TextConstant:"  "
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 200 REM *** SET UP BOARD
  Remark:*** SET UP BOARD
 210 REM *** EMPTY GRID
@@ -31,7 +31,7 @@
  Variable:J -> _
  Variable:B$(_,_) -> $
  Variable:D$ -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
  Variable:J -> _
  Variable:I -> _
 230 REM *** INITIAL PATTERN
@@ -41,19 +41,19 @@
  NumericConstant:4
  Variable:B$(_,_) -> $
  Variable:L$ -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 241 B$(4,5)=L$
  NumericConstant:4
  NumericConstant:5
  Variable:B$(_,_) -> $
  Variable:L$ -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 242 B$(4,6)=L$
  NumericConstant:4
  NumericConstant:6
  Variable:B$(_,_) -> $
  Variable:L$ -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 300 REM *** DISPLAY BOARD
  Remark:*** DISPLAY BOARD
 310 PRINT "********************"
@@ -80,8 +80,8 @@
  Variable:N(,) -> _(,)
  NumericConstant:10
  NumericConstant:10
- FunctionZer2:ZER(_,_) -> _
- AssignmentOperator:=
+ FunctionZer2:ZER(_,_) -> _(,)
+ AssignmentOperator:= _(,) -> _(,)
 415 OPTION BASE 0
  NumericConstant:0
 420 DIM B$(11,11)
@@ -99,7 +99,7 @@
 442 C = 0
  Variable:C -> _
  NumericConstant:0
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 450 FOR I0=-1 TO 1
  control: Variable:I0 -> _
  start:   ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> _"]
@@ -131,7 +131,7 @@
  Variable:C -> _
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 500 NEXT J0
  Variable:J0 -> _
 510 NEXT I0
@@ -141,7 +141,7 @@
  Variable:J -> _
  Variable:N(_,_) -> _
  Variable:C -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 520 NEXT J
  Variable:J -> _
 530 NEXT I
@@ -187,7 +187,7 @@
  Variable:J -> _
  Variable:B$(_,_) -> $
  Variable:D$ -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 680 GOTO 730
  LineNumber:730
 690 REM * CELL IS BORN
@@ -197,7 +197,7 @@
  Variable:J -> _
  Variable:B$(_,_) -> $
  Variable:L$ -> $
- AssignmentOperator:=
+ AssignmentOperator:= $ -> $
 710 GOTO 730
  LineNumber:730
 720 REM * CELL REMAINS UNCHANGED

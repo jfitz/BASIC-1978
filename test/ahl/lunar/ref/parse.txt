@@ -51,7 +51,7 @@
 120 L=0
  Variable:L -> _
  NumericConstant:0
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 130 PRINT: PRINT "SEC","MI + FT","MPH","LB FUEL","BURN RATE":PRINT 
  CarriageControl:NL
  TextConstant:"SEC"
@@ -68,22 +68,22 @@
 140 A=120:V=1:M=33000:N=16500:G=1E-03:Z=1.8
  Variable:A -> _
  NumericConstant:120
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:V -> _
  NumericConstant:1
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:M -> _
  NumericConstant:33000
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:N -> _
  NumericConstant:16500
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:G -> _
  NumericConstant:1E-03
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:Z -> _
  NumericConstant:1.8
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 150 PRINT L,INT(A);INT(5280*(A-INT(A))),3600*V,M-N,:INPUT K:T=10 
  Variable:L -> _
  CarriageControl:,
@@ -109,7 +109,7 @@
  Variable:K -> _
  Variable:T -> _
  NumericConstant:10
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 160 IF M-N<1E-03 THEN 240
  Variable:M -> _
  Variable:N -> _
@@ -123,7 +123,7 @@
 180 S=T: IF M>=N+S*K THEN 200
  Variable:S -> _
  Variable:T -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:M -> _
  Variable:N -> _
  Variable:S -> _
@@ -138,7 +138,7 @@
  BinaryOperatorMinus:-(_,_) -> _
  Variable:K -> _
  BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 200 GOSUB 420: IF I<=0 THEN 340
  LineNumber:420
  Variable:I -> _
@@ -178,7 +178,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  Variable:G -> _
  BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 250 V=V+G*S: L=L+S
  Variable:V -> _
  Variable:V -> _
@@ -186,18 +186,18 @@
  Variable:S -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:L -> _
  Variable:L -> _
  Variable:S -> _
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 260 W=3600*V: PRINT "ON MOON AT";L;"SECONDS - IMPACT VELOCITY";W;"MPH" 
  Variable:W -> _
  NumericConstant:3600
  Variable:V -> _
  BinaryOperatorMultiply:*(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  TextConstant:"ON MOON AT"
  CarriageControl:;
  Variable:L -> _
@@ -253,25 +253,25 @@
  Variable:L -> _
  Variable:S -> _
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:T -> _
  Variable:T -> _
  Variable:S -> _
  BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:M -> _
  Variable:M -> _
  Variable:S -> _
  Variable:K -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:A -> _
  Variable:I -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:V -> _
  Variable:J -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  
 340 IF S<5E-03 THEN 260
  Variable:S -> _
@@ -297,14 +297,14 @@
  BinaryOperatorPlus:+(_,_) -> _
  FunctionSqr:SQR(_) -> _
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:S -> _
  NumericConstant:2
  Variable:A -> _
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:D -> _
  BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 360 GOSUB 420: GOSUB 330: GOTO 340
  LineNumber:420
  LineNumber:330
@@ -322,7 +322,7 @@
  BinaryOperatorMinus:-(_,_) -> _
  NumericConstant:2
  BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:S -> _
  Variable:M -> _
  Variable:V -> _
@@ -344,7 +344,7 @@
  BinaryOperatorDivide:/(_,_) -> _
  NumericConstant:.05
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  LineNumber:420
 380 IF I<=0 THEN 340
  Variable:I -> _
@@ -368,7 +368,7 @@
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:M -> _
  BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  Variable:J -> _
  Variable:V -> _
  Variable:G -> _
@@ -404,7 +404,7 @@
  BinaryOperatorMinus:-(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
 430 I=A-G*S*S/2-V*S+Z*S*(Q/2+Q^2/6+Q^3/12+Q^4/20+Q^5/30):RETURN
  Variable:I -> _
  Variable:A -> _
@@ -452,7 +452,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:=
+ AssignmentOperator:= _ -> _
  
 440 PRINT:PRINT:PRINT:PRINT "TRY AGAIN??": GOTO 70
  CarriageControl:NL
