@@ -933,6 +933,28 @@ class FunctionInt < AbstractScalarFunction
   end
 end
 
+# function INT%
+class FunctionIntI < AbstractScalarFunction
+  def initialize(text)
+    super
+
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+
+    @shape = :scalar
+  end
+
+  # return a single value
+  def evaluate(interpreter, arg_stack)
+    args = arg_stack.pop
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    x = $options['int_floor'].value ? args[0].floor : args[0].truncate
+    x.to_int
+  end
+end
+
 # function INV
 class FunctionInv < AbstractMatrixFunction
   def initialize(text)
@@ -1732,6 +1754,7 @@ class FunctionFactory
     'IDN' => FunctionIdn,
     'INSTR$' => FunctionInstr,
     'INT' => FunctionInt,
+    'INT%' => FunctionIntI,
     'INV' => FunctionInv,
     'LEFT$' => FunctionLeft,
     'LEN' => FunctionLen,
