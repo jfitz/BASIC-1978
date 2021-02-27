@@ -1710,7 +1710,7 @@ class UserFunctionDefinition
     line_text = tokens.map(&:to_s).join
     parts = split_tokens(tokens)
 
-    raise(BASICExpressionError, "'#{line_text}' is not a valid assignment") if
+    raise(BASICExpressionError, "'#{line_text}' is not a valid definition") if
       parts.size != 3 && parts.size != 1
 
     user_function_prototype = UserFunctionPrototype.new(parts[0])
@@ -1898,12 +1898,14 @@ class Assignment
   def split_tokens(tokens)
     results = []
     nonkeywords = []
+    eq_count = 0
 
     tokens.each do |token|
-      if token.operator? && token.equals?
+      if token.operator? && token.equals? && eq_count < 1
         results << nonkeywords unless nonkeywords.empty?
         nonkeywords = []
         results << token
+        eq_count += 1
       else
         nonkeywords << token
       end

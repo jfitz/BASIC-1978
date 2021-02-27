@@ -1165,6 +1165,36 @@ class FunctionMod < AbstractScalarFunction
   end
 end
 
+# function NUM
+class FunctionNum < AbstractScalarFunction
+  def initialize(text)
+    super
+
+    @signature_ts = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature_bs = [{ 'type' => :boolean, 'shape' => :scalar }]
+    @signature_is = [{ 'type' => :integer, 'shape' => :scalar }]
+
+    @shape = :scalar
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    if match_args_to_signature(args, @signature_ts)
+      f = args[0].to_v.to_f
+    elsif match_args_to_signature(args, @signature_bs)
+      f = args[0].to_f
+    elsif match_args_to_signature(args, @signature_is)
+      f = args[0].to_v.to_f
+    else
+      raise BASICRuntimeError.new(:te_args_no_match, @name)
+    end
+
+    token = NumericConstantToken.new(f)
+    NumericConstant.new(token)
+  end
+end
+
 # function PACK$
 class FunctionPack < AbstractArrayFunction
   def initialize(text)
@@ -1763,6 +1793,7 @@ class FunctionFactory
     'LOG2' => FunctionLog2,
     'MID$' => FunctionMid,
     'MOD' => FunctionMod,
+    'NUM' => FunctionNum,
     'NUM$' => FunctionStr,
     'PACK$' => FunctionPack,
     'RIGHT$' => FunctionRight,
