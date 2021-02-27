@@ -1316,17 +1316,35 @@ class TextConstant < AbstractValueElement
     printer.print_item v
   end
 
-  def unpack
+  def na_unpack
     length = NumericConstant.new(@value.size)
     dims = [length]
     values = {}
     values[[NumericConstant.new(0)]] = length
     index = 1
+
     @value.each_char do |char|
       key = [NumericConstant.new(index)]
       values[key] = NumericConstant.new(char.ord)
       index += 1
     end
+
+    BASICArray.new(dims, values)
+  end
+
+  def ia_unpack
+    length = IntegerConstant.new(@value.size)
+    dims = [length]
+    values = {}
+    values[[IntegerConstant.new(0)]] = length
+    index = 1
+
+    @value.each_char do |char|
+      key = [NumericConstant.new(index)]
+      values[key] = IntegerConstant.new(char.ord)
+      index += 1
+    end
+
     BASICArray.new(dims, values)
   end
 end

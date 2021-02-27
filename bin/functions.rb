@@ -1518,7 +1518,28 @@ class FunctionUnpack < AbstractScalarFunction
       match_args_to_signature(args, @signature_1)
 
     text = args[0]
-    text.unpack
+    text.na_unpack
+  end
+end
+
+# function UNPACK%
+class FunctionUnpackI < AbstractScalarFunction
+  def initialize(text)
+    super
+
+    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
+
+    @shape = :array
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    text = args[0]
+    text.ia_unpack
   end
 end
 
@@ -1735,6 +1756,7 @@ class FunctionFactory
     'TIME' => FunctionTime,
     'TRN' => FunctionTrn,
     'UNPACK' => FunctionUnpack,
+    'UNPACK%' => FunctionUnpackI,
     'VAL' => FunctionVal,
     'ZER' => FunctionZer2,
     'ZER1' => FunctionZer1,

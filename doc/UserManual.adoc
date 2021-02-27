@@ -806,7 +806,7 @@ Syntax:	CHA variable TO variable
 The two variables must refer to a numeric array and a string variable (one of each).
 
 When converting an array to a string the CHANGE statement is equivalent to an assignment with the PACK$() function.
-When converting a string to an array, the statement is equivalent to an assignment with the UNPACK() function.
+When converting a string to an array, the statement is equivalent to an assignment with the UNPACK%() function.
 
 Examples:
 
@@ -816,7 +816,7 @@ Examples:
 
 The array of numeric values contains the length in the zero position and one value for each character in the corresponding string.
 
-OPTION BASE 1 breaks the CHANGE command, because CHANGE relies on PACK$() and UNPACK().
+OPTION BASE 1 breaks the CHANGE command, because CHANGE relies on PACK$() and UNPACK%().
 
 CLOSE
 ~~~~~
@@ -2357,6 +2357,7 @@ Functions may be used in expressions.
 |TIME(n) |numeric |Returns the time since the start of the program, in seconds.
 |TRN(m) |matrix |Transposes values in matrix m, exchanging values by rows and columns.
 |UNPACK(t)|numeric array |Converts a string variable (or expression) to an array of numeric values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
+|UNPACK%(t)|numeric array |Converts a string variable (or expression) to an array of integer values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
 |VAL(t) |string |Converts a string to a numeric value. Ignores leading spaces. Converts digits and stops on first non-numeric character.
 |ZER1(n) |numeric array |Creates an array containing all zeros, with n values
 |ZER2(n) |numeric matrix|Creates a matrix containing all zeros, with n columns
@@ -2366,7 +2367,7 @@ Functions may be used in expressions.
 |ZER or ZER() |numeric matrix |Creates a matrix containins all zeros, with dimensions based on the assignment target.
 |==========
 
-OPTION BASE 1 breaks the PACK$() and UNPACK() functions, as they both access index position zero.
+OPTION BASE 1 breaks the PACK$() and UNPACK%() functions, as they both access index position zero.
 
 
 Array and matrix function special forms
