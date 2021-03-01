@@ -19,13 +19,13 @@ class AbstractToken
                          token1.function? ||
                          token1.user_function?
 
-      prev2_is_operand = token2.operand? || token2.groupend?
+      prev2_is_operand = token2.operand? || token2.group_end?
 
       pretty_tokens << WhitespaceToken.new(' ') unless
         token.separator? ||
-        (token.groupstart? && prev_is_variable) ||
-        token.groupend? ||
-        token1.groupstart? ||
+        (token.group_start? && prev_is_variable) ||
+        token.group_end? ||
+        token1.group_start? ||
         (token1.operator? && token1.to_s != 'NOT' && !prev2_is_operand) ||
         token1.whitespace? ||
         token1.null?
@@ -55,12 +55,12 @@ class AbstractToken
                          token1.function? ||
                          token1.user_function?
 
-      prev2_is_operand = token2.operand? || token2.groupend?
+      prev2_is_operand = token2.operand? || token2.group_end?
       pretty_tokens << WhitespaceToken.new(' ') unless
         token.separator? ||
-        (token.groupstart? && prev_is_variable) ||
-        token.groupend? ||
-        token1.groupstart? ||
+        (token.group_start? && prev_is_variable) ||
+        token.group_end? ||
+        token1.group_start? ||
         (token1.operator? && token1.to_s != 'NOT' && !prev2_is_operand)
 
       pretty_tokens << token
@@ -95,8 +95,8 @@ class AbstractToken
     @is_user_function = false
     @is_variable = false
     @is_statement_separator = false
-    @is_groupstart = false
-    @is_groupend = false
+    @is_group_start = false
+    @is_group_end = false
     @is_invalid = false
   end
 
@@ -164,12 +164,12 @@ class AbstractToken
     @is_variable
   end
 
-  def groupstart?
-    @is_groupstart
+  def group_start?
+    @is_group_start
   end
 
-  def groupend?
-    @is_groupend
+  def group_end?
+    @is_group_end
   end
 
   def operand?
@@ -275,7 +275,7 @@ class GroupStartToken < AbstractToken
   def initialize(text)
     super
 
-    @is_groupstart = true
+    @is_group_start = true
   end
 end
 
@@ -284,7 +284,7 @@ class GroupEndToken < AbstractToken
   def initialize(text)
     super
 
-    @is_groupend = true
+    @is_group_end = true
   end
 end
 
