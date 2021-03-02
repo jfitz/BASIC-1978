@@ -498,6 +498,8 @@ class NumericConstant < AbstractValueElement
 
   public
 
+  attr_reader :content_type
+  attr_reader :shape
   attr_reader :symbol_text
 
   def initialize(text)
@@ -527,6 +529,8 @@ class NumericConstant < AbstractValueElement
 
     @symbol_text = text.to_s
     @value = float_to_possible_int(f)
+    @content_type = :numeric
+    @shape = :scalar
     @operand = true
     @precedence = 0
     @numeric_constant = true
@@ -540,20 +544,12 @@ class NumericConstant < AbstractValueElement
     @value.zero?
   end
 
-  def content_type
-    :numeric
-  end
-
   def set_content_type(type_stack)
     type_stack.push(content_type)
   end
 
-  def shape
-    :scalar
-  end
-
   def set_shape(shape_stack)
-    shape_stack.push(:scalar)
+    shape_stack.push(@shape)
   end
 
   def eql?(other)
@@ -855,6 +851,8 @@ class IntegerConstant < AbstractValueElement
     text.to_f.to_i if /\A\s*[+-]?\d+%\z/ =~ text
   end
 
+  attr_reader :content_type
+  attr_reader :shape
   attr_reader :symbol_text
 
   def initialize(text)
@@ -868,6 +866,8 @@ class IntegerConstant < AbstractValueElement
     raise BASICSyntaxError, "'#{text}' is not a number" if f.nil?
 
     @symbol_text = text.to_s
+    @content_type = :integer
+    @shape = :scalar
     @value = f
     @operand = true
     @precedence = 0
@@ -878,20 +878,12 @@ class IntegerConstant < AbstractValueElement
     @value.zero?
   end
 
-  def content_type
-    :integer
-  end
-
   def set_content_type(type_stack)
     type_stack.push(content_type)
   end
 
-  def shape
-    :scalar
-  end
-
   def set_shape(shape_stack)
-    shape_stack.push(:scalar)
+    shape_stack.push(@shape)
   end
 
   def eql?(other)
@@ -1205,6 +1197,8 @@ class TextConstant < AbstractValueElement
   end
 
   attr_reader :value
+  attr_reader :content_type
+  attr_reader :shape
 
   def initialize(text)
     super()
@@ -1214,25 +1208,19 @@ class TextConstant < AbstractValueElement
 
     raise(BASICSyntaxError, "'#{text}' is not a text constant") if @value.nil?
 
+    @content_type = :string
+    @shape = :scalar
     @operand = true
     @precedence = 0
     @text_constant = true
-  end
-
-  def content_type
-    :string
   end
 
   def set_content_type(type_stack)
     type_stack.push(content_type)
   end
 
-  def shape
-    :scalar
-  end
-
   def set_shape(shape_stack)
-    shape_stack.push(:scalar)
+    shape_stack.push(@shape)
   end
 
   def eql?(other)
@@ -1358,6 +1346,8 @@ class BooleanConstant < AbstractValueElement
 
   attr_reader :value
   attr_reader :symbol_text
+  attr_reader :content_type
+  attr_reader :shape
 
   def initialize(obj)
     super()
@@ -1373,25 +1363,19 @@ class BooleanConstant < AbstractValueElement
       (obj_class == 'TextConstant' && !obj.value.strip.size.zero?) ||
       obj_class == 'TrueClass'
 
+    @content_type = :boolean
+    @shape = :scalar
     @operand = true
     @precedence = 0
     @boolean_constant = true
-  end
-
-  def content_type
-    :boolean
   end
 
   def set_content_type(stack)
     stack.push(content_type)
   end
 
-  def shape
-    :scalar
-  end
-
   def set_shape(shape_stack)
-    shape_stack.push(:scalar)
+    shape_stack.push(@scalar)
   end
 
   def eql?(other)
@@ -1704,6 +1688,7 @@ class VariableName < AbstractElement
   end
 
   attr_reader :name
+  attr_reader :content_type
 
   def initialize(token)
     super()
@@ -1716,10 +1701,6 @@ class VariableName < AbstractElement
     @operand = true
     @precedence = 10
     @content_type = @name.content_type
-  end
-
-  def content_type
-    @content_type
   end
 
   def set_content_type(stack)
@@ -1803,7 +1784,7 @@ class UserFunctionName < AbstractElement
   end
 
   def set_shape(shape_stack)
-    shape_stack.push(:scalar)
+    shape_stack.push(@shape)
   end
 
   def eql?(other)
@@ -1870,6 +1851,7 @@ end
 # Hold a variable (name with possible subscripts and value)
 class Variable < AbstractElement
   attr_writer :valref
+  attr_reader :content_type
   attr_reader :shape
   attr_reader :subscripts
 
@@ -1881,15 +1863,12 @@ class Variable < AbstractElement
 
     @variable_name = variable_name
     @valref = :value
+    @content_type = @variable_name.content_type
     @shape = my_shape
     @subscripts = normalize_subscripts(subscripts)
     @variable = true
     @operand = true
     @precedence = 10
-  end
-
-  def content_type
-    @variable_name.content_type
   end
 
   def set_content_type(type_stack)
@@ -2141,6 +2120,7 @@ end
 
 class Declaration < AbstractElement
   attr_reader :subscripts
+  attr_reader :content_type
   attr_reader :shape
 
   def initialize(variable_name)
@@ -2153,15 +2133,12 @@ class Declaration < AbstractElement
     @variable_name = variable_name
     @subscripts = []
     @variable = true
+    @content_type = @variable_name.content_type
     @shape = :unknown
   end
 
   def name
     @variable_name
-  end
-
-  def content_type
-    @variable_name.content_type
   end
 
   def set_content_type(type_stack)
