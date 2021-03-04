@@ -1216,7 +1216,7 @@ class Expression
 
         is_ref = element.reference?
 
-        sigils = XrefEntry.make_sigils(arguments)
+        sigils = element.sigils
         vars << XrefEntry.new(element.to_s, sigils, is_ref)
       end
 
@@ -1242,7 +1242,7 @@ class Expression
 
         is_ref = element.reference?
 
-        sigils = XrefEntry.make_sigils(arguments)
+        sigils = element.sigils
         vars << XrefEntry.new(element.to_s, sigils, is_ref)
       end
 
@@ -1630,7 +1630,7 @@ class DeclarationExpressionSet < AbstractExpressionSet
       last_element = elements[-1]
 
       if last_element.class.to_s != 'Declaration'
-        raise(BASICExpressionError,
+        raise(BASICSyntaxError,
               "Expression is not declaration (type #{last_element.class})")
       end
     end
