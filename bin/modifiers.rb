@@ -243,7 +243,7 @@ class WhileModifier < AbstractModifier
       values.size == 1
 
     result = values[0]
-   result = BooleanConstant.new(result) unless
+    result = BooleanConstant.new(result) unless
       result.class.to_s == 'BooleanConstant'
 
     s = ' ' + result.to_s
