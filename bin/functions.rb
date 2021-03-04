@@ -73,7 +73,7 @@ class AbstractFunction < AbstractElement
 
     arg
   end
-  
+
   def counts_to_text(counts)
     words = %w[zero one two]
     texts = counts.map { |v| words[v] }
@@ -182,7 +182,6 @@ class UserFunction < AbstractScalarFunction
     super
 
     @user_function = true
-
     @shape = :scalar
   end
 
@@ -258,6 +257,7 @@ class UserFunction < AbstractScalarFunction
       end
     rescue BASICRuntimeError => e
       interpreter.clear_user_var_values
+
       raise e
     end
 
@@ -688,7 +688,7 @@ class FunctionErl < AbstractScalarFunction
 
     shape_stack.push(shape)
   end
-  
+
   # return a single value
   def evaluate(interpreter, arg_stack)
     if previous_is_array(arg_stack)
@@ -738,7 +738,7 @@ class FunctionErr < AbstractScalarFunction
 
     shape_stack.push(shape)
   end
-  
+
   # return a single value
   def evaluate(interpreter, arg_stack)
     if previous_is_array(arg_stack)
@@ -1158,7 +1158,7 @@ class FunctionMod < AbstractScalarFunction
   def evaluate(_, arg_stack)
     args = arg_stack.pop
 
-    raise BASICRuntimeError(:te_args_no_match, @name) unless
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
       match_args_to_signature(args, @signature_2)
 
     args[0].mod(args[1])
@@ -1243,7 +1243,7 @@ class FunctionRight < AbstractScalarFunction
     count = args[1].to_i
 
     raise BASICRuntimeError.new(:te_count_inv, @name) if count < 0
-    
+
     start = value.size - count
     start = 0 if start < 0
     text = value[start..-1]
@@ -1306,7 +1306,7 @@ class FunctionRnd < AbstractScalarFunction
 
     shape_stack.push(shape)
   end
-  
+
   # return a single value
   def evaluate(interpreter, arg_stack)
     if previous_is_array(arg_stack)
