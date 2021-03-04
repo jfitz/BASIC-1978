@@ -165,26 +165,29 @@ class Interpreter
     longnames_option = $options['long_names']
     @tokenbuilders = make_debug_tokenbuilders(longnames_option)
 
-    @default_args = {}
     @null_out = NullOut.new
+
     @line_breakpoints = {}
     @line_cond_breakpoints = {}
     @locked_variables = []
+    @fornext_stack = []
     @data_store = DataStore.new
     @file_handlers = {}
     @return_stack = []
-    @dimensions = {}
-    @variables = {}
     @fornexts = {}
+    @dimensions = {}
+    @default_args = {}
+    @variables = {}
     @user_function_defs = {}
     @user_function_lines = {}
     @user_var_values = []
-    @get_value_seen = []
+
     @function_stack = []
     @errorgoto_stack = []
     @resume_stack = []
     @error_stack = []
-    @fornext_stack = []
+
+    @get_value_seen = []
     @running = false
     @start_time = Time.now
   end
@@ -215,9 +218,9 @@ class Interpreter
     tokenbuilders <<
       ListTokenBuilder.new(FunctionFactory.function_names, FunctionToken)
 
+    user_function_names = FunctionFactory.user_function_names
     tokenbuilders <<
-      ListTokenBuilder.new(FunctionFactory.user_function_names,
-                           UserFunctionToken)
+      ListTokenBuilder.new(user_function_names, UserFunctionToken)
 
     tokenbuilders << TextTokenBuilder.new(@quotes)
     tokenbuilders << NumberTokenBuilder.new
@@ -285,7 +288,7 @@ class Interpreter
     renumber_map = @program.renumber(args)
     renumber_breakpoints(renumber_map)
   end
-  
+
   def program_store_line(line, print_seq_errors, print_errors)
     @program.store_line(line, print_seq_errors, print_errors)
   end
@@ -370,7 +373,7 @@ class Interpreter
     @user_var_values = []
 
     filename, keywords = parse_args(tokens)
-    
+
     chain_to(filename)
 
     raise(BASICSyntaxError, "Cannot start CHAIN program") unless
@@ -432,8 +435,8 @@ class Interpreter
   end
 
   def seterrorgoto(line_number)
-    if line_number.zero?
-      # zero means we discard the current error handler
+    if line_number.nil? || line_number.zero?
+      # discard the current error handler
       @errorgoto_stack.pop
     else
       # if errorgoto stack is larger than resume stack
@@ -658,6 +661,7 @@ class Interpreter
     begin
       execute_a_statement
       @get_value_seen = []
+
       # set the next line number
       @current_line_index = nil
 
@@ -696,7 +700,6 @@ class Interpreter
 
   def split_breakpoint_tokens(tokens)
     tokens_lists = []
-
     tokens_list = []
 
     tokens.each do |token|
@@ -763,8 +766,8 @@ class Interpreter
             end
           rescue BASICSyntaxError, BASICExpressionError => e
             tkns = tokens_list.map(&:to_s).join
+
             raise BASICCommandError.new('INVALID BREAKPOINT ' + tkns)
-            @console_io.print_line('INVALID BREAKPOINT ' + tkns)
           end
         end
       end
@@ -854,6 +857,7 @@ class Interpreter
 
   def statement_start_index(line_number, _statement_index)
     line = @program.lines[line_number]
+
     return if line.nil?
 
     statements = line.statements
@@ -885,6 +889,7 @@ class Interpreter
   # returns an Array of values
   def evaluate(expressions)
     result_values = []
+
     expressions.each do |expression|
       stack = expression.evaluate(self)
       act = stack.length
@@ -953,8 +958,7 @@ class Interpreter
 
   # get the current value for ERL()
   def error_line(part)
-    raise BASICRuntimeError.new(:te_erl_no_err) if
-      @resume_stack.empty?
+    raise BASICRuntimeError.new(:te_erl_no_err) if @resume_stack.empty?
 
     line_index = @resume_stack[-1]
 
@@ -991,6 +995,7 @@ class Interpreter
       subscripts.class.to_s == 'Array'
 
     int_subscripts = []
+
     subscripts.each do |subscript|
       raise(BASICExpressionError, "Invalid subscript #{subscript}") unless
         subscript.numeric_constant?
@@ -1061,11 +1066,11 @@ class Interpreter
     # check subscript value against lower and upper bounds
     int_subscripts.zip(dimensions).each do |pair|
       if pair[0] < lower
-        raise BASICRuntimeError.new(:te_val_out, pair[0].to_s)
+        raise BASICRuntimeError.new(:te_subscript_out, pair[0].to_s)
       end
 
       if pair[0] > pair[1]
-        raise BASICRuntimeError.new(:te_val_out, pair[0].to_s)
+        raise BASICRuntimeError.new(:te_subscript_out, pair[0].to_s)
       end
     end
   end
@@ -1123,6 +1128,7 @@ class Interpreter
 
     if trace && !seen
       provenance_option = $options['provenance'].value
+
       if provenance_option && !provenance.nil?
         text = ' ' + variable.to_s + ': (' + provenance.to_s + ') ' + value.to_s
       else
@@ -1409,11 +1415,11 @@ class Interpreter
       raise BASICRuntimeError.new(:te_fname_inv, name.to_s) unless
         name.content_type == :string
 
-      raise BASICRuntimeError.new(:te_file_no_fnd, name.to_v.to_s) unless
+      raise BASICRuntimeError.new(:te_file_no_fnd, name.value.to_s) unless
         File.file?(name.to_v)
 
       file_handle = FileHandle.new(@file_handlers.size + 1)
-      @file_handlers[file_handle] = FileHandler.new(name.to_v)
+      @file_handlers[file_handle] = FileHandler.new(name.value)
     end
   end
 
