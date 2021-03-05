@@ -30,17 +30,22 @@ class UnaryOperator < AbstractElement
 
     @content_type = @arguments[0].content_type if @content_type == :unknown
 
-    raise(BASICExpressionError, 'Bad expression') if
-      @content_type == :unknown
+    raise(BASICExpressionError, 'Bad expression') if @content_type == :unknown
+  end
+
+  def pop_stack(stack)
+    stack.pop
   end
 
   def set_content_type(type_stack)
     raise(BASICExpressionError, 'Not enough operands') if type_stack.empty?
 
+    type = type_stack.pop
+    
     @sigils = make_sigils([type])
     @signature = make_signature([type])
 
-    @content_type = type_stack.pop
+    @content_type = type
     type_stack.push(@content_type)
   end
 
@@ -50,10 +55,6 @@ class UnaryOperator < AbstractElement
     @shape = shape_stack.pop
 
     shape_stack.push(@shape)
-  end
-
-  def pop_stack(stack)
-    stack.pop
   end
 
   def dump
@@ -126,11 +127,15 @@ class BinaryOperator < AbstractElement
 
     raise(BASICExpressionError, 'Bad expression') if other_type == :unknown
 
+    raise(BASICExpressionError, 'Type mismatch') unless
+      compatible(this_type, other_type)
+
     @content_type = @arguments[0].content_type if @content_type == :unknown
   end
 
   def set_shape(shape_stack)
-    raise(BASICExpressionError, 'Not enough operands +') if shape_stack.size < 2
+    raise(BASICExpressionError, 'Not enough operands') if
+      shape_stack.size < 2
 
     b_shape = shape_stack.pop
     a_shape = shape_stack.pop
@@ -193,7 +198,19 @@ class BinaryOperator < AbstractElement
 
     false
   end
-  
+
+  def result_type(type1, type2)
+    return type1 if type1 == type2
+
+    return :numeric if type1 == :numeric
+    return :numeric if type2 == :numeric
+
+    return :integer if type1 == :integer
+    return :integer if type2 == :integer
+
+    return :boolean
+  end
+
   def op_scalar_matrix_1(op, a, b)
     dims = b.dimensions
     n_cols = dims[0].to_i
@@ -323,18 +340,6 @@ class BinaryOperator < AbstractElement
     values = add_matrix_matrix_2(a, b) if a_dims.size == 2
 
     Matrix.new(a_dims, values)
-  end
-
-  def result_type(type1, type2)
-    return type1 if type1 == type2
-
-    return :numeric if type1 == :numeric
-    return :numeric if type2 == :numeric
-
-    return :integer if type1 == :integer
-    return :integer if type2 == :integer
-
-    return :boolean
   end
 
   def subtract_matrix_matrix_1(a, b)
@@ -664,7 +669,7 @@ class UnaryOperatorPlus < UnaryOperator
     type = type_stack.pop
 
     arg_types = [:numeric, :integer]
-    
+
     raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
       !arg_types.include?(type)
 
@@ -774,7 +779,7 @@ class UnaryOperatorMinus < UnaryOperator
     type = type_stack.pop
 
     arg_types = [:numeric, :integer]
-    
+
     raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
       !arg_types.include?(type)
 
@@ -800,7 +805,7 @@ class UnaryOperatorMinus < UnaryOperator
   end
 
   private
- 
+
   def negate_a(source)
     n_cols = source.dimensions[0].to_i
     values = {}
@@ -876,6 +881,7 @@ class UnaryOperatorHash < UnaryOperator
   def initialize(text)
     super
 
+    @content_type = :filehandle
     @precedence = 9
   end
 
@@ -889,7 +895,7 @@ class UnaryOperatorHash < UnaryOperator
     type = type_stack.pop
 
     arg_types = [:numeric, :integer]
-    
+
     raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
       !arg_types.include?(type)
 
@@ -942,7 +948,7 @@ class UnaryOperatorNot < UnaryOperator
     type = type_stack.pop
 
     arg_types = [:numeric, :integer, :boolean, :string]
-    
+
     raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
       !arg_types.include?(type)
 
@@ -1005,7 +1011,7 @@ class BinaryOperatorPlus < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer, :string]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
@@ -1175,7 +1181,7 @@ class BinaryOperatorMultiply < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
@@ -1260,7 +1266,7 @@ class BinaryOperatorDivide < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
@@ -1431,7 +1437,7 @@ class BinaryOperatorEqual < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer, :string, :boolean]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
@@ -1604,7 +1610,7 @@ class BinaryOperatorLess < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer, :string]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
@@ -1691,7 +1697,7 @@ class BinaryOperatorLessEqual < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer, :string]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
@@ -1777,7 +1783,7 @@ class BinaryOperatorGreater < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer, :string]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
@@ -1864,7 +1870,7 @@ class BinaryOperatorGreaterEqual < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer, :string]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
@@ -1950,7 +1956,7 @@ class BinaryOperatorAnd < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer, :string, :boolean]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type)
 
@@ -2037,7 +2043,7 @@ class BinaryOperatorOr < BinaryOperator
     a_type = type_stack.pop
 
     arg_types = [:numeric, :integer, :string, :boolean]
-    
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type)
 
