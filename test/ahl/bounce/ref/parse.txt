@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"BOUNCE"
  NumericConstant:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(_) -> =$
  CarriageControl:;
  TextConstant:"BOUNCE"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(_) -> =$
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -88,9 +88,9 @@
  Variable:I -> _
 220 FOR H=INT(-16*(V/32)^2+V^2/32+.5) TO 0 STEP -.5
  control: Variable:H -> _
- start:   ["NumericConstant:16", "UnaryOperatorMinus:-(_) -> _", "Variable:V -> _", "NumericConstant:32", "BinaryOperatorDivide:/(_,_) -> _", "NumericConstant:2", "BinaryOperatorPower:^(_,_) -> _", "BinaryOperatorMultiply:*(_,_) -> _", "Variable:V -> _", "NumericConstant:2", "BinaryOperatorPower:^(_,_) -> _", "NumericConstant:32", "BinaryOperatorDivide:/(_,_) -> _", "BinaryOperatorPlus:+(_,_) -> _", "NumericConstant:.5", "BinaryOperatorPlus:+(_,_) -> _", "FunctionInt:INT(_) -> _"]
+ start:   ["NumericConstant:16", "UnaryOperatorMinus:-(_) -> =_", "Variable:V -> _", "NumericConstant:32", "BinaryOperatorDivide:/(_,_) -> _", "NumericConstant:2", "BinaryOperatorPower:^(_,_) -> _", "BinaryOperatorMultiply:*(_,_) -> _", "Variable:V -> _", "NumericConstant:2", "BinaryOperatorPower:^(_,_) -> _", "NumericConstant:32", "BinaryOperatorDivide:/(_,_) -> _", "BinaryOperatorPlus:+(_,_) -> _", "NumericConstant:.5", "BinaryOperatorPlus:+(_,_) -> _", "FunctionInt:INT(_) -> _"]
  end:     ["NumericConstant:0"]
- step:    ["NumericConstant:.5", "UnaryOperatorMinus:-(_) -> _"]
+ step:    ["NumericConstant:.5", "UnaryOperatorMinus:-(_) -> =_"]
 221 IF INT(H)<>H THEN 225
  Variable:H -> _
  FunctionInt:INT(_) -> _
@@ -102,7 +102,7 @@
 225 L=0
  Variable:L -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 230 FOR I=1 TO S1
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
@@ -122,8 +122,8 @@
  Variable:H -> _
  NumericConstant:.5
  NumericConstant:32
- UnaryOperatorMinus:-(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ UnaryOperatorMinus:-(_) -> =_
+ BinaryOperatorMultiply:*(_,_) -> =_
  Variable:T -> _
  NumericConstant:2
  BinaryOperatorPower:^(_,_) -> _
@@ -163,7 +163,7 @@
  AssignmentOperator:= _ -> _
 276 IF -16*T^2+V*C^(I-1)*T<H THEN 290
  NumericConstant:16
- UnaryOperatorMinus:-(_) -> _
+ UnaryOperatorMinus:-(_) -> =_
  Variable:T -> _
  NumericConstant:2
  BinaryOperatorPower:^(_,_) -> _
@@ -188,7 +188,7 @@
  Variable:H -> _
 310 PRINT TAB(1);
  NumericConstant:1
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(_) -> =$
  CarriageControl:;
 320 FOR I=1 TO INT(L+1)/S2+1
  control: Variable:I -> _

@@ -1,12 +1,12 @@
 2 PRINT TAB(31);"BLACK JACK"
  NumericConstant:31
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(_) -> =$
  CarriageControl:;
  TextConstant:"BLACK JACK"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericConstant:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(_) -> =$
  CarriageControl:;
  TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -68,7 +68,7 @@
  control: Variable:D -> _
  start:   ["Variable:D -> _"]
  end:     ["NumericConstant:1"]
- step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> _"]
+ step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> =_"]
 140 C=C-1
  Variable:C -> _
  Variable:C -> _
@@ -87,7 +87,7 @@
  control: Variable:C1 -> _
  start:   ["NumericConstant:52"]
  end:     ["Variable:C -> _"]
- step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> _"]
+ step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> =_"]
 180 C2=INT(RND(1)*(C1-C+1))+C
  Variable:C2 -> _
  NumericConstant:1
@@ -148,7 +148,7 @@
 360 Q=0
  Variable:Q -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 370 FOR Q2=1 TO R(I)
  control: Variable:Q2 -> _
  start:   ["NumericConstant:1"]
@@ -181,7 +181,7 @@
  BinaryOperatorGreater:>(_,_) -> _
  Variable:X1 -> _
  NumericConstant:10
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Remark: SAME AS X1=10 MIN X
 520 Q1=Q+X1
  Variable:Q1 -> _
@@ -236,8 +236,8 @@
 610 Q=-1
  Variable:Q -> _
  NumericConstant:1
- UnaryOperatorMinus:-(_) -> _
- AssignmentOperator:= _ -> _
+ UnaryOperatorMinus:-(_) -> =_
+ AssignmentOperator:= =_ -> _
 620 RETURN
  
 700 REM--CARD PRINTING SUBROUTINE
@@ -285,13 +285,13 @@
 820 H1=5
  Variable:H1 -> _
  NumericConstant:5
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 830 GOSUB 1410
  LineNumber:1410
 840 H1=3
  Variable:H1 -> _
  NumericConstant:3
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 850 ON H GOTO 950,930
  Variable:H -> _
  LineNumber:950
@@ -495,11 +495,11 @@
 1520 D$="  A  2  3  4  5  6  7  8  9 10  J  Q  K"
  Variable:D$ -> $
  TextConstant:"  A  2  3  4  5  6  7  8  9 10  J  Q  K"
- AssignmentOperator:= $ -> $
+ AssignmentOperator:= =$ -> $
 1530 I$="H,S,D,C"
  Variable:I$ -> $
  TextConstant:"H,S,D,C"
- AssignmentOperator:= $ -> $
+ AssignmentOperator:= =$ -> $
 1540 FOR I=1 TO 13
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
@@ -520,11 +520,11 @@
 1590 D=52
  Variable:D -> _
  NumericConstant:52
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 1600 C=53
  Variable:C -> _
  NumericConstant:53
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 1610 PRINT "DO YOU WANT INSTRUCTIONS";
  TextConstant:"DO YOU WANT INSTRUCTIONS"
  CarriageControl:;
@@ -605,7 +605,7 @@
  Variable:I -> _
  Variable:T(_) -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Variable:I -> _
 1800 D1=N+1
  Variable:D1 -> _
@@ -638,7 +638,7 @@
  Variable:I -> _
  Variable:Z(_) -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Variable:I -> _
 1840 FOR I=1 TO 15: B(I)=0: NEXT I
  control: Variable:I -> _
@@ -647,7 +647,7 @@
  Variable:I -> _
  Variable:B(_) -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Variable:I -> _
 1850 FOR I=1 TO 15: Q(I)=0: NEXT I
  control: Variable:I -> _
@@ -656,7 +656,7 @@
  Variable:I -> _
  Variable:Q(_) -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Variable:I -> _
 1860 FOR I=1 TO 7: S(I)=0: NEXT I
  control: Variable:I -> _
@@ -665,7 +665,7 @@
  Variable:I -> _
  Variable:S(_) -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Variable:I -> _
 1870 FOR I=1 TO 15: R(I)=0: NEXT I
  control: Variable:I -> _
@@ -674,7 +674,7 @@
  Variable:I -> _
  Variable:R(_) -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Variable:I -> _
 1880 PRINT "BETS:"
  TextConstant:"BETS:"
@@ -745,7 +745,7 @@
  end:     ["NumericConstant:2"]
 2000 PRINT TAB(7);
  NumericConstant:7
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(_) -> =$
  CarriageControl:;
 2010 FOR I=1 TO D1
  control: Variable:I -> _
@@ -782,7 +782,7 @@
  Variable:I -> _
  Variable:R(_) -> _
  NumericConstant:2
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2100 NEXT I
  Variable:I -> _
 2110 REM--TEST FOR INSURANCE
@@ -865,10 +865,10 @@
 2250 L1=1: L2=1
  Variable:L1 -> _
  NumericConstant:1
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Variable:L2 -> _
  NumericConstant:1
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2252 IF P(D1,1)=1 AND P(D1,2)>9 THEN L1=0: L2=0
  Variable:D1 -> _
  NumericConstant:1
@@ -883,10 +883,10 @@
  BinaryOperatorAnd:AND(_,_) -> _
  Variable:L1 -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Variable:L2 -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2253 IF P(D1,2)=1 AND P(D1,1)>9 THEN L1=0: L2=0
  Variable:D1 -> _
  NumericConstant:2
@@ -901,10 +901,10 @@
  BinaryOperatorAnd:AND(_,_) -> _
  Variable:L1 -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
  Variable:L2 -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2254 IF L1<>0 OR L2<>0 THEN 2320
  Variable:L1 -> _
  NumericConstant:0
@@ -975,7 +975,7 @@
 2380 H1=7
  Variable:H1 -> _
  NumericConstant:7
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2390 GOSUB 1410
  LineNumber:1410
 2400 ON H GOTO 2550,2410,2510,2600
@@ -1011,7 +1011,7 @@
  Variable:I -> _
  Variable:B(_) -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2470 GOSUB 1200
  LineNumber:1200
 2480 GOTO 2900
@@ -1035,7 +1035,7 @@
 2570 H1=3
  Variable:H1 -> _
  NumericConstant:3
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2580 GOSUB 950
  LineNumber:950
 2590 GOTO 2900
@@ -1055,7 +1055,7 @@
  BinaryOperatorGreater:>(_,_) -> _
  Variable:L1 -> _
  NumericConstant:10
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2612 L2=P(I,2): IF P(I,2)>10 THEN L2=10
  Variable:L2 -> _
  Variable:I -> _
@@ -1069,7 +1069,7 @@
  BinaryOperatorGreater:>(_,_) -> _
  Variable:L2 -> _
  NumericConstant:10
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2614 IF L1=L2 THEN 2640
  Variable:L1 -> _
  Variable:L2 -> _
@@ -1091,7 +1091,7 @@
  Variable:I1 -> _
  Variable:R(_) -> _
  NumericConstant:2
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 2670 P(I1,1)=P(I,2)
  Variable:I1 -> _
  NumericConstant:1
@@ -1318,7 +1318,7 @@
 3160 Z$="LOSES PUSHES WINS "
  Variable:Z$ -> $
  TextConstant:"LOSES PUSHES WINS "
- AssignmentOperator:= $ -> $
+ AssignmentOperator:= =$ -> $
 3165 PRINT
  CarriageControl:NL
 3170 FOR I=1 TO N
@@ -1375,7 +1375,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  Variable:B(_) -> _
  NumericConstant:0
- AssignmentOperator:= _ -> _
+ AssignmentOperator:= =_ -> _
 3200 PRINT "PLAYER";I;
  TextConstant:"PLAYER"
  CarriageControl:;
