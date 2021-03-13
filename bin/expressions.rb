@@ -618,7 +618,7 @@ end
 # Entry for cross-reference list
 class XrefEntry
   attr_reader :variable
-  attr_reader :signature
+  attr_reader :sigils
   attr_reader :is_ref
 
   def self.make_sigils(arguments)
@@ -652,20 +652,23 @@ class XrefEntry
     return sigils
   end
   
-  def initialize(variable, signature, is_ref)
+  def initialize(variable, sigils, is_ref)
     @variable = variable
-    @signature = signature
+    @sigils = sigils
     @is_ref = is_ref
+
+    @signature = ''
+    @signature = '(' + @sigils.join(',') + ')' unless @sigils.nil?
   end
 
   def eql?(other)
     @variable == other.variable &&
-      @signature == other.signature &&
+      @sigils == other.sigils &&
       @is_ref == other.is_ref
   end
 
   def hash
-    @variable.hash + @signature.hash + @is_ref.hash
+    @variable.hash + @sigils.hash + @is_ref.hash
   end
 
   def asize(x)
@@ -681,7 +684,7 @@ class XrefEntry
 
   def ==(other)
     @variable == other.variable &&
-      @signature == other.signature &&
+      @sigils == other.sigils &&
       @is_ref == other.is_ref
   end
 
@@ -689,8 +692,8 @@ class XrefEntry
     return true if @variable > other.variable
     return false if @variable < other.variable
 
-    return true if asize(@signature) > asize(other.signature)
-    return false if asize(@signature) < asize(other.signature)
+    return true if asize(@sigils) > asize(other.sigils)
+    return false if asize(@sigils) < asize(other.sigils)
 
     !@is_ref && other.is_ref
   end
@@ -699,8 +702,8 @@ class XrefEntry
     return true if @variable > other.variable
     return false if @variable < other.variable
 
-    return true if asize(@signature) > asize(other.signature)
-    return false if asize(@signature) < asize(other.signature)
+    return true if asize(@sigils) > asize(other.sigils)
+    return false if asize(@sigils) < asize(other.sigils)
 
     !@is_ref && other.is_ref
   end
@@ -709,8 +712,8 @@ class XrefEntry
     return true if @variable < other.variable
     return false if @variable > other.variable
 
-    return true if asize(@signature) < asize(other.signature)
-    return false if asize(@signature) > asize(other.signature)
+    return true if asize(@sigils) < asize(other.sigils)
+    return false if asize(@sigils) > asize(other.sigils)
 
     @is_ref && !other.is_ref
   end
@@ -719,31 +722,25 @@ class XrefEntry
     return true if @variable < other.variable
     return false if @variable > other.variable
 
-    return true if asize(@signature) < asize(other.signature)
-    return false if asize(@signature) > asize(other.signature)
+    return true if asize(@sigils) < asize(other.sigils)
+    return false if asize(@sigils) > asize(other.sigils)
 
     @is_ref && !other.is_ref
   end
 
   def n_dims
-    @signature.size
+    @sigils.size
   end
 
   def to_s
-    dims = ''
-    dims = '(' + @signature.join(',') + ')' unless @signature.nil?
-
     ref = ''
     ref = '=' if @is_ref
 
-    @variable.to_s + dims + ref
+    @variable.to_s + @signature + ref
   end
 
   def to_text
-    dims = ''
-    dims = '(' + @signature.join(',') + ')' unless @signature.nil?
-
-    @variable.to_s + dims
+    @variable.to_s + @signature
   end
 end
 

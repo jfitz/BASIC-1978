@@ -149,7 +149,9 @@ class AbstractElement
 
   private
   
-  def make_sigils(types)
+  def make_sigils(types, shapes)
+    return nil if types.nil? || shapes.nil?
+
     sigil_chars = {
       numeric: '_',
       integer: '%',
@@ -185,8 +187,10 @@ class AbstractElement
     sigil
   end
 
-  def make_signature(types)
-    sigils = make_sigils(types)
+  def make_signature(types, shapes)
+    return '' if types.nil? || shapes.nil?
+
+    sigils = make_sigils(types, shapes)
 
     '(' + sigils.join(',') + ')'
   end
@@ -1909,18 +1913,16 @@ class Variable < AbstractElement
     @variable = true
     @operand = true
     @precedence = 10
+    @arg_types = nil
+    @arg_shapes = []
+    @arg_consts = []
   end
 
   def set_content_type(type_stack)
     unless type_stack.empty?
       types = type_stack[-1]
 
-      if types.class.to_s == 'Array'
-        type_stack.pop
-
-        @sigils = make_sigils(types)
-        @signature = make_signature(types)
-      end
+      @arg_types = type_stack.pop if types.class.to_s == 'Array'
     end
 
     type_stack.push(@content_type)
@@ -1929,11 +1931,8 @@ class Variable < AbstractElement
   def set_shape(shape_stack)
     unless shape_stack.empty?
       shapes = shape_stack[-1]
-      shape_stack.pop if shapes.class.to_s == 'Array'
+      @arg_shapes = shape_stack.pop if shapes.class.to_s == 'Array'
     end
-
-    @signature = make_shape_sigil(@shape) if
-      @shape == :array || @shape == :matrix
 
     shape_stack.push(@shape)
   end
@@ -1954,9 +1953,15 @@ class Variable < AbstractElement
     @variable_name.hash && @subscripts.hash
   end
 
+  def signature
+    sig = make_signature(@arg_types, @arg_shapes)
+    sig += make_shape_sigil(@shape) if sig.empty?
+    sig
+  end
+
   def dump
     result = make_type_sigil(@content_type) + make_shape_sigil(@shape)
-    "#{self.class}:#{@variable_name}#{@signature} -> #{result}"
+    "#{self.class}:#{@variable_name}#{signature} -> #{result}"
   end
 
   def name
@@ -2188,6 +2193,9 @@ class Declaration < AbstractElement
     @variable = true
     @content_type = @variable_name.content_type
     @shape = :unknown
+    @arg_types = []
+    @arg_shapes = []
+    @arg_consts = []
   end
 
   def name
@@ -2202,17 +2210,14 @@ class Declaration < AbstractElement
     raise(BASICExpressionError, "Bad expression #{@name}") if
       shape_stack.empty?
 
-    shapes = shape_stack.pop
-
     raise(BASICExpressionError, "Bad expression #{@name} #{shapes}") unless
-      shapes.class.to_s == 'Array'
+      shape_stack[-1].class.to_s == 'Array'
+
+    @arg_shapes = shape_stack.pop
 
     @shape = :scalar
-    @shape = :array if shapes.size == 1
-    @shape = :matrix if shapes.size == 2
-
-    @signature = make_shape_sigil(@shape) if
-      @shape == :array || @shape == :matrix
+    @shape = :array if @arg_shapes.size == 1
+    @shape = :matrix if @arg_shapes.size == 2
 
     shape_stack.push(@shape)
   end
@@ -2221,9 +2226,13 @@ class Declaration < AbstractElement
     constant_stack.push(@constant)
   end
 
+  def signature
+    make_shape_sigil(@shape)
+  end
+
   def dump
     result = make_type_sigil(@content_type) + make_shape_sigil(@shape)
-    "#{self.class}:#{@variable_name}#{@signature} -> #{result}"
+    "#{self.class}:#{@variable_name}#{signature} -> #{result}"
   end
 
   def to_s
