@@ -777,8 +777,8 @@ class Parser
 
     expressions = []
 
-    @parens_group.each do |expression|
-      expressions << Expression.new(expression)
+    @parens_group.each do |elements|
+      expressions << Expression.new(elements)
     end
 
     expressions << Expression.new(@current_elements) unless
@@ -1097,10 +1097,6 @@ class Expression
 
   def to_s
     '[' + @elements.map(&:to_s).join(', ') + ']'
-  end
-
-  def pretty
-    AbstractToken.pretty_tokens([], @elements)
   end
 
   def numerics

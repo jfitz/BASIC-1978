@@ -5,6 +5,7 @@ class AbstractModifier
   end
 
   attr_reader :errors
+  attr_reader :warnings
   attr_reader :numerics
   attr_reader :strings
   attr_reader :booleans
@@ -16,6 +17,7 @@ class AbstractModifier
 
   def initialize
     @errors = []
+    @warnings = []
   end
 
   private
@@ -43,6 +45,7 @@ class IfModifier < AbstractModifier
     super()
 
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
+    @warnings << 'Constant expression' if @expression.constant
 
     @numerics = @expression.numerics
     @strings = @expression.strings
@@ -112,6 +115,7 @@ class UnlessModifier < AbstractModifier
     super()
     
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
+    @warnings << 'Constant expression' if @expression.constant
 
     @numerics = @expression.numerics
     @strings = @expression.strings
@@ -181,6 +185,7 @@ class WhileModifier < AbstractModifier
     super()
     
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
+    @warnings << 'Constant expression' if @expression.constant
 
     @numerics = @expression.numerics
     @strings = @expression.strings
@@ -269,6 +274,7 @@ class UntilModifier < AbstractModifier
     super()
     
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
+    @warnings << 'Constant expression' if @expression.constant
 
     @numerics = @expression.numerics
     @strings = @expression.strings
@@ -379,14 +385,22 @@ class ForModifier < AbstractModifier
     control_name = VariableName.new(control_tokens[0])
     @control = Variable.new(control_name, :scalar, [])
     @start = ValueExpressionSet.new(start_tokens, :scalar)
+
     @step = ValueExpressionSet.new(step_tokens, :scalar) unless
       step_tokens.nil?
+
     @end = ValueExpressionSet.new(end_tokens, :scalar) unless
       end_tokens.nil?
-    @until = ValueExpressionSet.new(until_tokens, :scalar) unless
-      until_tokens.nil?
-    @while = ValueExpressionSet.new(while_tokens, :scalar) unless
-      while_tokens.nil?
+
+    unless until_tokens.nil?
+      @until = ValueExpressionSet.new(until_tokens, :scalar)
+      @warnings << 'Constant expression' if @until.constant
+    end
+
+    unless while_tokens.nil?
+      @while = ValueExpressionSet.new(while_tokens, :scalar)
+      @warnings << 'Constant expression' if @while.constant
+    end
 
     control = XrefEntry.new(@control.to_s, nil, true)
 
