@@ -532,7 +532,7 @@ Assigns control to the specified statement.
 LET
 ~~~
 
-Assigns a value to a variable.
+Assigns a value or values to a variable or variables.
 The assigned value may be a constant or an expression.
 
 PRINT
@@ -1203,7 +1203,7 @@ The LINE INPUT statement is similar to this statement, but reads an entire line 
 LET
 ~~~
 
-Assigns a value to a variable or a group of variables.
+Assigns a value or group of values to a variable or a group of variables.
 
 Syntax:	LET target variable [, target variable...] = expression
 
@@ -1216,6 +1216,13 @@ Examples:
 	70 LET D, E = A + B
 
 Expressions may use a combination of operators, functions, and variables.
+
+Variables may be swapped:
+
+	80 LET A, B = B, A
+
+If more values than targets are specified, the extra values are dropped.
+If more targets than values are specified, the last value is repeated for the extra targets.
 
 Targets must have the same type, as the same value is assigned to each target.
 
@@ -1234,6 +1241,13 @@ Examples:
 	70 D, E = A + B
 
 Expressions may use a combination of operators, functions, and variables.
+
+Variables may be swapped:
+
+	80 LET A, B = B, A
+
+If more values than targets are specified, the extra values are dropped.
+If more targets than values are specified, the last value is repeated for the extra targets.
 
 Targets must have the same type, as the same value is assigned to each target.
 
@@ -1968,7 +1982,7 @@ Values are printed sequentially with each set of values on one line.
 ARR LET
 ~~~~~~~
 
-Assigns a value to a array variable.
+Assigns a value or group of values to an array variable or group of array variables.
 
 Syntax:	ARR LET target variable [, target variable...] = expression
 Syntax:	ARR target variable [, target variable...] = expression
@@ -2236,7 +2250,7 @@ For two-dimensional matrices, values for each row in the matrix are printed on a
 MAT LET
 ~~~~~~~
 
-Assigns a value to a matrix variable or group of matrix variables.
+Assigns a value or group of values to a matrix variable or group of matrix variables.
 
 Syntax:	MAT LET target variable [, target variable...] = expression
 Syntax:	MAT target variable [, target variable...] = expression

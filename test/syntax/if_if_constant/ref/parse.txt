@@ -1,12 +1,20 @@
 10 REM TEST OF CONSTANT EXPRESSION
  Remark:TEST OF CONSTANT EXPRESSION
-20 IF 3 < 7 THEN 90
- WARNING: Constant expression
+20 IF A = B THEN IF 3 < 7 THEN 90
+ Constant expression
+ Variable:A -> _
+ Variable:B -> _
+ BinaryOperatorEqual:=(_,_) -> _
  NumericConstant:3
  NumericConstant:7
- BinaryOperatorLess:<(_,_) -> =?
+ BinaryOperatorLess:<(_,_) -> =_
 30 PRINT "FAILURE"
  TextConstant:"FAILURE"
+ CarriageControl:NL
+80 GOTO 99
+ LineNumber:99
+90 PRINT "SUCCESS"
+ TextConstant:"SUCCESS"
  CarriageControl:NL
 99 END
  
