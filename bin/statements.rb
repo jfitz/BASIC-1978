@@ -1913,8 +1913,8 @@ class ForStatement < AbstractStatement
         variable_name = VariableName.new(tokens1[0])
         @control = Variable.new(variable_name, :scalar, [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
-        @step = ValueExpressionSet.new(tokens_lists[4], :scalar)
         @until = ValueExpressionSet.new(tokens_lists[2], :scalar)
+        @step = ValueExpressionSet.new(tokens_lists[4], :scalar)
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -1924,8 +1924,8 @@ class ForStatement < AbstractStatement
         variable_name = VariableName.new(tokens1[0])
         @control = Variable.new(variable_name, :scalar, [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
-        @step = ValueExpressionSet.new(tokens_lists[4], :scalar)
-        @until = ValueExpressionSet.new(tokens_lists[2], :scalar)
+        @step = ValueExpressionSet.new(tokens_lists[2], :scalar)
+        @until = ValueExpressionSet.new(tokens_lists[4], :scalar)
       rescue BASICExpressionError => e
         @errors << e.message
       end
