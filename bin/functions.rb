@@ -1592,6 +1592,17 @@ class FunctionTab < AbstractScalarFunction
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
 
     @shape = :scalar
+    @constant = false
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
+    end
+
+    # TAB() is never constant
+    
+    constant_stack.push(@constant)
   end
 
   def evaluate(interpreter, arg_stack)
