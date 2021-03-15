@@ -137,9 +137,14 @@ class Shell
     @done = false
 
     until @done
-      @console_io.print_line('READY') if need_prompt
+      prompt = $options['prompt'].value
+      if need_prompt
+        @console_io.print_item(prompt)
+        @console_io.newline if prompt.size > 1
+      end
       cmd = @console_io.read_line
       need_prompt = process_line_keyboard(cmd)
+      need_prompt = true if prompt.size == 1
     end
   end
 
@@ -223,7 +228,7 @@ class Shell
       kwd_d = kwd.downcase
 
       if $options.key?(kwd_d)
-        value = $options[kwd_d].value.to_s.upcase
+        value = $options[kwd_d].to_s.upcase
         lines << 'OPTION ' + kwd + ' ' + value.to_s if echo_set
       else
         raise BASICCommandError.new("Unknown option #{kwd}")
@@ -510,7 +515,8 @@ def make_command_tokenbuilders(quotes, long_names)
     IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON
     INT_BITWISE INT_FLOOR LOCK_FORNEXT LONG_NAMES MAX_LINE_NUM MIN_LINE_NUM
     NEWLINE_SPEED
-    PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH PROMPT_COUNT PROVENANCE
+    PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH
+    PROMPT PROMPTD PROMPT_COUNT PROVENANCE
     QMARK_AFTER_PROMPT RANDOMIZE RELATIONAL_BOOLEAN
     REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH TIMING TRACE ZONE_WIDTH
@@ -609,7 +615,9 @@ OptionParser.new do |opt|
   opt.on('--long-names') { |o| options[:long_names] = o }
   opt.on('--precision DIGITS') { |o| options[:precision] = o }
   opt.on('--print-width WIDTH') { |o| options[:print_width] = o }
+  opt.on('--prompt PROMPT') { |o| options[:prompt] = o }
   opt.on('--prompt-count') { |o| options[:prompt_count] = o }
+  opt.on('--promptd PROMPT') { |o| options[:promptd] = o }
   opt.on('--provenance') { |o| options[:provenance] = o }
   opt.on('--qmark-after-prompt') { |o| options[:qmark_after_prompt] = o }
   opt.on('--randomize') { |o| options[:randomize] = o }
@@ -648,7 +656,7 @@ separator = { type: :list, values: %w[COMMA SEMI NL NONE] }
 
 all_types = [:new, :loaded, :runtime]
 loaded = [:new, :loaded]
-only_new = [:new] 
+only_new = [:new]
 
 $options = {}
 
@@ -733,6 +741,18 @@ $options['print_speed'] = Option.new(all_types, int, print_speed)
 print_width = 72
 print_width = options[:print_width].to_i if options.key?(:print_width)
 $options['print_width'] = Option.new(all_types, int_132, print_width)
+
+$options['prompt'] = Option.new(loaded, string, 'READY')
+if options.key?(:prompt)
+  prompt = options[:prompt]
+  $options['prompt'] = Option.new(loaded, string, prompt)
+end
+
+$options['promptd'] = Option.new(loaded, string, 'DEBUG')
+if options.key?(:promptd)
+  promptd = options[:promptd]
+  $options['promptd'] = Option.new(loaded, string, promptd)
+end
 
 $options['prompt_count'] =
   Option.new(all_types, boolean, options.key?(:prompt_count))
