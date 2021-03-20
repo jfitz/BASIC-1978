@@ -83,6 +83,21 @@ class BASICArray
     NumericConstant.new(0)
   end
 
+  def posate
+    values = posate_1
+    BASICArray.new(@dimensions, values)
+  end
+
+  def negate
+    values = negate_1
+    BASICArray.new(@dimensions, values)
+  end
+
+  def not
+    values = not_1
+    BASICArray.new(@dimensions, values)
+  end
+
   def to_s
     'ARRAY: ' + @values.to_s
   end
@@ -124,6 +139,48 @@ class BASICArray
   end
 
   private
+
+  def posate_1
+    n_cols = @dimensions[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      value = get_value(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value.posate
+    end
+
+    values
+  end
+
+  def negate_1
+    n_cols = @dimensions[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      value = get_value(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value.negate
+    end
+
+    values
+  end
+
+  def not_1
+    n_cols = @dimensions[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      value = get_value(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value.not
+    end
+
+    values
+  end
 
   def print_1(printer, interpreter, formats)
     n_cols = @dimensions[0].to_i
@@ -300,6 +357,27 @@ class Matrix
     NumericConstant.new(0)
   end
 
+  def posate
+    values = posate_1 if @dimensions.size == 1
+    values = posate_2 if @dimensions.size == 2
+
+    Matrix.new(@dimensions, values)
+  end
+
+  def negate
+    values = negate_1 if @dimensions.size == 1
+    values = negate_2 if @dimensions.size == 2
+
+    Matrix.new(@dimensions, values)
+  end
+
+  def not
+    values = not_1 if @dimensions.size == 1
+    values = not_2 if @dimensions.size == 2
+
+    Matrix.new(@dimensions, values)
+  end
+
   def to_s
     'MATRIX: ' + @values.to_s
   end
@@ -387,6 +465,99 @@ class Matrix
   end
 
   private
+
+  def posate_1
+    n_cols = @dimensions[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value.posate
+    end
+
+    values
+  end
+
+  def posate_2
+    n_rows = @dimensions[0].to_i
+    n_cols = @dimensions[1].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_rows).each do |row|
+      (base..n_cols).each do |col|
+        value = get_value_2(row, col)
+        coords = AbstractElement.make_coords(row, col)
+        values[coords] = value.posate
+      end
+    end
+
+    values
+  end
+
+  def negate_1
+    n_cols = @dimensions[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value.negate
+    end
+
+    values
+  end
+
+  def negate_2
+    n_rows = @dimensions[0].to_i
+    n_cols = @dimensions[1].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_rows).each do |row|
+      (base..n_cols).each do |col|
+        value = get_value_2(row, col)
+        coords = AbstractElement.make_coords(row, col)
+        values[coords] = value.negate
+      end
+    end
+
+    values
+  end
+
+  def not_1
+    n_cols = @dimensions[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value.not
+    end
+
+    values
+  end
+
+  def not_2
+    n_rows = @dimensions[0].to_i
+    n_cols = @dimensions[1].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_rows).each do |row|
+      (base..n_cols).each do |col|
+        value = get_value_2(row, col)
+        coords = AbstractElement.make_coords(row, col)
+        values[coords] = value.not
+      end
+    end
+
+    values
+  end
 
   def print_1(printer, interpreter, formats)
     n_cols = @dimensions[0].to_i
