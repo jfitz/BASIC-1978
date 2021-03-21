@@ -64,6 +64,12 @@ class BASICArray
     value.text_constant?
   end
 
+  def size
+    base = $options['base'].value
+
+    NumericConstant.new(@dimensions[0].to_i - base + 1)
+  end
+
   def values(interpreter)
     values = {}
 
