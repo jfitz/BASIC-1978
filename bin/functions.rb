@@ -168,33 +168,6 @@ class AbstractFunction < AbstractElement
 
     compatible
   end
-end
-
-# Function that expects scalar parameters
-class AbstractScalarFunction < AbstractFunction
-  def initialize(text)
-    super
-
-    @default_shape = :scalar
-  end
-end
-
-# Function that expects array parameters
-class AbstractArrayFunction < AbstractFunction
-  def initialize(text)
-    super
-
-    @default_shape = :array
-  end
-end
-
-# Function that expects matrix parameters
-class AbstractMatrixFunction < AbstractFunction
-  def initialize(text)
-    super
-
-    @default_shape = :matrix
-  end
 
   def check_square(dims)
     raise(BASICSyntaxError, @name + ' requires matrix') unless dims.size == 2
@@ -205,7 +178,7 @@ class AbstractMatrixFunction < AbstractFunction
 end
 
 # User-defined function (provides a scalar value)
-class UserFunction < AbstractScalarFunction
+class UserFunction < AbstractFunction
   attr_writer :valref
 
   def self.accept?(token)
@@ -219,6 +192,7 @@ class UserFunction < AbstractScalarFunction
     @user_function = true
     @shape = :scalar
     @constant = false
+    @default_shape = :scalar
   end
 
   def to_s
@@ -355,13 +329,14 @@ class UserFunction < AbstractScalarFunction
 end
 
 # function ABS
-class FunctionAbs < AbstractScalarFunction
+class FunctionAbs < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -375,44 +350,45 @@ class FunctionAbs < AbstractScalarFunction
 end
 
 # function ASC
-class FunctionAsc < AbstractScalarFunction
+class FunctionAsc < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(interpreter, arg_stack)
     args = arg_stack.pop
 
-    if match_args_to_signature(args, @signature_1)
-      text = args[0].to_v
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
 
-      raise BASICRuntimeError.new(:te_str_empty, @name) if text.empty?
+    text = args[0].to_v
 
-      value = text[0].ord
+    raise BASICRuntimeError.new(:te_str_empty, @name) if text.empty?
 
-      raise BASICRuntimeError.new(:te_val_out, @name) unless
-        value.between?(32, 126) || $options['asc_allow_all'].value
+    value = text[0].ord
 
-      token = NumericConstantToken.new(value.to_s)
-      NumericConstant.new(token)
-    else
-      raise BASICRuntimeError.new(:te_args_no_match, @name)
-    end
+    raise BASICRuntimeError.new(:te_val_out, @name) unless
+      value.between?(32, 126) || $options['asc_allow_all'].value
+
+    token = NumericConstantToken.new(value.to_s)
+    NumericConstant.new(token)
   end
 end
 
 # function ARCCOS
-class FunctionArcCos < AbstractScalarFunction
+class FunctionArcCos < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -426,13 +402,14 @@ class FunctionArcCos < AbstractScalarFunction
 end
 
 # function ARCSIN
-class FunctionArcSin < AbstractScalarFunction
+class FunctionArcSin < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -446,17 +423,18 @@ class FunctionArcSin < AbstractScalarFunction
 end
 
 # function ARCTAN
-class FunctionArcTan < AbstractScalarFunction
+class FunctionArcTan < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
     @signature_2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
-
-    @shape = :scalar
   end
 
   def evaluate(_, arg_stack)
@@ -473,13 +451,14 @@ class FunctionArcTan < AbstractScalarFunction
 end
 
 # function CHR$
-class FunctionChr < AbstractScalarFunction
+class FunctionChr < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(interpreter, arg_stack)
@@ -502,14 +481,15 @@ class FunctionChr < AbstractScalarFunction
 end
 
 # function CON1
-class FunctionCon1 < AbstractScalarFunction
+class FunctionCon1 < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :array
+
+    @default_shape = :scalar
     @signature_0 = []
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
-    @shape = :array
   end
 
   def set_content_type(type_stack)
@@ -572,10 +552,13 @@ class FunctionCon1 < AbstractScalarFunction
 end
 
 # function CON, CON2
-class FunctionCon2 < AbstractScalarFunction
+class FunctionCon2 < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :matrix
+
+    @default_shape = :scalar
     @signature_0 = []
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
     @signature_2 =
@@ -583,8 +566,6 @@ class FunctionCon2 < AbstractScalarFunction
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar }
       ]
-
-    @shape = :matrix
   end
 
   def set_content_type(type_stack)
@@ -651,13 +632,14 @@ class FunctionCon2 < AbstractScalarFunction
 end
 
 # function COS
-class FunctionCos < AbstractScalarFunction
+class FunctionCos < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -671,13 +653,14 @@ class FunctionCos < AbstractScalarFunction
 end
 
 # function COT
-class FunctionCot < AbstractScalarFunction
+class FunctionCot < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -691,13 +674,14 @@ class FunctionCot < AbstractScalarFunction
 end
 
 # function CSC
-class FunctionCsc < AbstractScalarFunction
+class FunctionCsc < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -711,13 +695,14 @@ class FunctionCsc < AbstractScalarFunction
 end
 
 # function DET
-class FunctionDet < AbstractMatrixFunction
+class FunctionDet < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
-
     @shape = :scalar
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
   def evaluate(_, arg_stack)
@@ -731,15 +716,16 @@ class FunctionDet < AbstractMatrixFunction
 end
 
 # function ERL
-class FunctionErl < AbstractScalarFunction
+class FunctionErl < AbstractFunction
   def initialize(text)
     super
 
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
     @constant = false
+
+    @default_shape = :scalar
+    @signature_0 = []
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def set_content_type(type_stack)
@@ -790,14 +776,15 @@ class FunctionErl < AbstractScalarFunction
 end
 
 # function ERR
-class FunctionErr < AbstractScalarFunction
+class FunctionErr < AbstractFunction
   def initialize(text)
     super
 
-    @signature_0 = []
-
     @shape = :scalar
     @constant = false
+
+    @default_shape = :scalar
+    @signature_0 = []
   end
 
   def set_content_type(type_stack)
@@ -844,13 +831,14 @@ class FunctionErr < AbstractScalarFunction
 end
 
 # function EXP
-class FunctionExp < AbstractScalarFunction
+class FunctionExp < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -864,13 +852,14 @@ class FunctionExp < AbstractScalarFunction
 end
 
 # function FRAC
-class FunctionFrac < AbstractScalarFunction
+class FunctionFrac < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   # return a single value
@@ -885,10 +874,13 @@ class FunctionFrac < AbstractScalarFunction
 end
 
 # function IDN
-class FunctionIdn < AbstractScalarFunction
+class FunctionIdn < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :matrix
+
+    @default_shape = :scalar
     @signature_0 = []
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
     @signature_2 =
@@ -896,8 +888,6 @@ class FunctionIdn < AbstractScalarFunction
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar }
       ]
-
-    @shape = :matrix
   end
 
   def set_content_type(type_stack)
@@ -970,18 +960,19 @@ class FunctionIdn < AbstractScalarFunction
   end
 end
 
-# function INSTR$
-class FunctionInstr < AbstractScalarFunction
+# function INSTR
+class FunctionInstr < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_3 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar }
     ]
-
-    @shape = :scalar
   end
 
   def evaluate(_, arg_stack)
@@ -1011,14 +1002,15 @@ class FunctionInstr < AbstractScalarFunction
 end
 
 # function INT
-class FunctionInt < AbstractScalarFunction
+class FunctionInt < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
     @signature_2 = [{ 'type' => :boolean, 'shape' => :scalar }]
-
-    @shape = :scalar
   end
 
   # return a single value
@@ -1036,13 +1028,14 @@ class FunctionInt < AbstractScalarFunction
 end
 
 # function INT%
-class FunctionIntI < AbstractScalarFunction
+class FunctionIntI < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   # return a single value
@@ -1058,13 +1051,14 @@ class FunctionIntI < AbstractScalarFunction
 end
 
 # function INV
-class FunctionInv < AbstractMatrixFunction
+class FunctionInv < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
-
     @shape = :matrix
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
   def evaluate(_, arg_stack)
@@ -1080,16 +1074,17 @@ class FunctionInv < AbstractMatrixFunction
 end
 
 # function LEFT$
-class FunctionLeft < AbstractScalarFunction
+class FunctionLeft < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_2 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
-
-    @shape = :scalar
   end
 
   def evaluate(_, arg_stack)
@@ -1117,13 +1112,14 @@ class FunctionLeft < AbstractScalarFunction
 end
 
 # function LEN
-class FunctionLen < AbstractScalarFunction
+class FunctionLen < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1140,13 +1136,14 @@ class FunctionLen < AbstractScalarFunction
 end
 
 # function LOG
-class FunctionLog < AbstractScalarFunction
+class FunctionLog < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1160,13 +1157,14 @@ class FunctionLog < AbstractScalarFunction
 end
 
 # function LOG10
-class FunctionLog10 < AbstractScalarFunction
+class FunctionLog10 < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1180,13 +1178,14 @@ class FunctionLog10 < AbstractScalarFunction
 end
 
 # function LOG2
-class FunctionLog2 < AbstractScalarFunction
+class FunctionLog2 < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1200,17 +1199,18 @@ class FunctionLog2 < AbstractScalarFunction
 end
 
 # function MID$
-class FunctionMid < AbstractScalarFunction
+class FunctionMid < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_3 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
-
-    @shape = :scalar
   end
 
   def evaluate(_, arg_stack)
@@ -1244,16 +1244,17 @@ class FunctionMid < AbstractScalarFunction
 end
 
 # function MOD
-class FunctionMod < AbstractScalarFunction
+class FunctionMod < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
-
-    @shape = :scalar
   end
 
   # return a single value
@@ -1268,15 +1269,16 @@ class FunctionMod < AbstractScalarFunction
 end
 
 # function NUM
-class FunctionNum < AbstractScalarFunction
+class FunctionNum < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_ts = [{ 'type' => :string, 'shape' => :scalar }]
     @signature_bs = [{ 'type' => :boolean, 'shape' => :scalar }]
     @signature_is = [{ 'type' => :integer, 'shape' => :scalar }]
-
-    @shape = :scalar
   end
 
   def evaluate(_, arg_stack)
@@ -1298,13 +1300,14 @@ class FunctionNum < AbstractScalarFunction
 end
 
 # function PACK$
-class FunctionPack < AbstractArrayFunction
+class FunctionPack < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
-
     @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
   end
 
   def evaluate(_, arg_stack)
@@ -1323,16 +1326,17 @@ class FunctionPack < AbstractArrayFunction
 end
 
 # function RIGHT$
-class FunctionRight < AbstractScalarFunction
+class FunctionRight < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_2 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
-
-    @shape = :scalar
   end
 
   def evaluate(_, arg_stack)
@@ -1356,16 +1360,17 @@ class FunctionRight < AbstractScalarFunction
 end
 
 # function ROUND
-class FunctionRound < AbstractScalarFunction
+class FunctionRound < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
-
-    @shape = :scalar
   end
 
   def evaluate(_, arg_stack)
@@ -1379,15 +1384,16 @@ class FunctionRound < AbstractScalarFunction
 end
 
 # function RND
-class FunctionRnd < AbstractScalarFunction
+class FunctionRnd < AbstractFunction
   def initialize(text)
     super
 
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
     @constant = false
+
+    @default_shape = :scalar
+    @signature_0 = []
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def set_content_type(type_stack)
@@ -1438,13 +1444,14 @@ class FunctionRnd < AbstractScalarFunction
 end
 
 # function SEC
-class FunctionSec < AbstractScalarFunction
+class FunctionSec < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1458,13 +1465,35 @@ class FunctionSec < AbstractScalarFunction
 end
 
 # function SGN
-class FunctionSgn < AbstractScalarFunction
+class FunctionSgn < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    args[0].sign
+  end
+end
+
+# function SGN%
+class FunctionSgnI < AbstractFunction
+  def initialize(text)
+    super
 
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :integer, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1478,13 +1507,14 @@ class FunctionSgn < AbstractScalarFunction
 end
 
 # function SIN
-class FunctionSin < AbstractScalarFunction
+class FunctionSin < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1498,13 +1528,14 @@ class FunctionSin < AbstractScalarFunction
 end
 
 # function SPC$
-class FunctionSpc < AbstractScalarFunction
+class FunctionSpc < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1529,13 +1560,14 @@ class FunctionSpc < AbstractScalarFunction
 end
 
 # function SQR
-class FunctionSqr < AbstractScalarFunction
+class FunctionSqr < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1549,17 +1581,18 @@ class FunctionSqr < AbstractScalarFunction
 end
 
 # function STR$
-class FunctionStr < AbstractScalarFunction
+class FunctionStr < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :scalar
+
+    @default_shape = :scalar
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
     @signature_2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
-
-    @shape = :scalar
   end
 
   # return a single value
@@ -1585,16 +1618,16 @@ class FunctionStr < AbstractScalarFunction
 end
 
 # function TAB
-class FunctionTab < AbstractScalarFunction
+class FunctionTab < AbstractFunction
   def initialize(text)
     super
 
     @content_type = :string
-
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
     @constant = false
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def set_constant(constant_stack)
@@ -1631,13 +1664,14 @@ class FunctionTab < AbstractScalarFunction
 end
 
 # function TAN
-class FunctionTan < AbstractScalarFunction
+class FunctionTan < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1651,13 +1685,15 @@ class FunctionTan < AbstractScalarFunction
 end
 
 # function TIME
-class FunctionTime < AbstractScalarFunction
+class FunctionTime < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
     @shape = :scalar
+    @constant = false
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(interpreter, arg_stack)
@@ -1675,13 +1711,14 @@ class FunctionTime < AbstractScalarFunction
 end
 
 # function UNPACK
-class FunctionUnpack < AbstractScalarFunction
+class FunctionUnpack < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
-
     @shape = :array
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1696,13 +1733,14 @@ class FunctionUnpack < AbstractScalarFunction
 end
 
 # function UNPACK%
-class FunctionUnpackI < AbstractScalarFunction
+class FunctionUnpackI < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
-
     @shape = :array
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1717,13 +1755,14 @@ class FunctionUnpackI < AbstractScalarFunction
 end
 
 # function TRN
-class FunctionTrn < AbstractMatrixFunction
+class FunctionTrn < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
-
     @shape = :matrix
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
   def evaluate(_, arg_stack)
@@ -1739,13 +1778,14 @@ class FunctionTrn < AbstractMatrixFunction
 end
 
 # function VAL
-class FunctionVal < AbstractScalarFunction
+class FunctionVal < AbstractFunction
   def initialize(text)
     super
 
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
-
     @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -1761,14 +1801,15 @@ class FunctionVal < AbstractScalarFunction
 end
 
 # function ZER1
-class FunctionZer1 < AbstractScalarFunction
+class FunctionZer1 < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :array
+
+    @default_shape = :scalar
     @signature_0 = []
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-
-    @shape = :array
   end
 
   def set_content_type(type_stack)
@@ -1831,10 +1872,13 @@ class FunctionZer1 < AbstractScalarFunction
 end
 
 # function ZER, ZER2
-class FunctionZer2 < AbstractScalarFunction
+class FunctionZer2 < AbstractFunction
   def initialize(text)
     super
 
+    @shape = :matrix
+
+    @default_shape = :scalar
     @signature_0 = []
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
     @signature_2 =
@@ -1842,8 +1886,6 @@ class FunctionZer2 < AbstractScalarFunction
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar }
       ]
-
-    @shape = :matrix
   end
 
   def set_content_type(type_stack)
@@ -1931,7 +1973,7 @@ class FunctionFactory
     'EXP' => FunctionExp,
     'FRAC' => FunctionFrac,
     'IDN' => FunctionIdn,
-    'INSTR$' => FunctionInstr,
+    'INSTR' => FunctionInstr,
     'INT' => FunctionInt,
     'INT%' => FunctionIntI,
     'INV' => FunctionInv,
@@ -1950,6 +1992,7 @@ class FunctionFactory
     'ROUND' => FunctionRound,
     'SEC' => FunctionSec,
     'SGN' => FunctionSgn,
+    'SGN%' => FunctionSgnI,
     'SIN' => FunctionSin,
     'SPC$' => FunctionSpc,
     'SQR' => FunctionSqr,
