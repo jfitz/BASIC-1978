@@ -1,0 +1,106 @@
+10 REM LENGTH OF ARRAY
+ Remark:LENGTH OF ARRAY
+20 OPTION BASE 0
+ NumericConstant:0
+22 LET B = 0
+ Variable:B -> _
+ NumericConstant:0
+ AssignmentOperator:= =_ -> _
+50 DATA 3
+ NumericConstant:3
+52 DATA "THREE", "FOUR", "EIGHT", "TEN"
+ TextConstant:"THREE"
+ TextConstant:"FOUR"
+ TextConstant:"EIGHT"
+ TextConstant:"TEN"
+60 GOSUB 400
+ LineNumber:400
+70 DATA 15
+ NumericConstant:15
+72 DATA "ONE", "ZERO", "TWO", "MINUS ONE", "THREE", "ZERO", "ZERO", "FIVE"
+ TextConstant:"ONE"
+ TextConstant:"ZERO"
+ TextConstant:"TWO"
+ TextConstant:"MINUS ONE"
+ TextConstant:"THREE"
+ TextConstant:"ZERO"
+ TextConstant:"ZERO"
+ TextConstant:"FIVE"
+73 DATA "TWO", "ONE", "FOUR", "MINUS THREE", "ONE", "ZERO", "FIVE", "ZERO"
+ TextConstant:"TWO"
+ TextConstant:"ONE"
+ TextConstant:"FOUR"
+ TextConstant:"MINUS THREE"
+ TextConstant:"ONE"
+ TextConstant:"ZERO"
+ TextConstant:"FIVE"
+ TextConstant:"ZERO"
+80 GOSUB 400
+ LineNumber:400
+120 OPTION BASE 1
+ NumericConstant:1
+122 LET B = 1
+ Variable:B -> _
+ NumericConstant:1
+ AssignmentOperator:= =_ -> _
+150 DATA 4
+ NumericConstant:4
+152 DATA "NINE", "THREE", "FOUR", "EIGHT"
+ TextConstant:"NINE"
+ TextConstant:"THREE"
+ TextConstant:"FOUR"
+ TextConstant:"EIGHT"
+160 GOSUB 400
+ LineNumber:400
+170 DATA 16
+ NumericConstant:16
+172 DATA "FOUR", "ONE", "ZERO", "TWO", "MINUS ONE", "THREE", "ZERO", "ZERO"
+ TextConstant:"FOUR"
+ TextConstant:"ONE"
+ TextConstant:"ZERO"
+ TextConstant:"TWO"
+ TextConstant:"MINUS ONE"
+ TextConstant:"THREE"
+ TextConstant:"ZERO"
+ TextConstant:"ZERO"
+173 DATA "FIVE", "TWO", "ONE", "FOUR", "MINUS THREE", "ONE", "ZERO", "FIVE"
+ TextConstant:"FIVE"
+ TextConstant:"TWO"
+ TextConstant:"ONE"
+ TextConstant:"FOUR"
+ TextConstant:"MINUS THREE"
+ TextConstant:"ONE"
+ TextConstant:"ZERO"
+ TextConstant:"FIVE"
+180 GOSUB 400
+ LineNumber:400
+199 STOP
+ 
+400 READ N
+ Variable:N -> _
+420 ARR READ A$(N)
+ Variable:N -> _
+ Variable:A$(_) -> $()
+460 PRINT "ARRAY:"
+ TextConstant:"ARRAY:"
+ CarriageControl:NL
+470 ARR PRINT A$
+ Variable:A$() -> $()
+ CarriageControl:NL
+480 LET L = NELEM(A$)
+ Variable:L -> _
+ Variable:A$() -> $()
+ FunctionNelem:NELEM($()) -> _
+ AssignmentOperator:= _ -> _
+490 PRINT "LENGTH:" L
+ TextConstant:"LENGTH:"
+ CarriageControl:
+ Variable:L -> _
+ CarriageControl:NL
+495 PRINT
+ CarriageControl:NL
+499 RETURN
+ 
+999 END
+ 
+

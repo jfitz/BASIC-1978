@@ -1268,6 +1268,56 @@ class FunctionMod < AbstractFunction
   end
 end
 
+# function NELEM
+class FunctionNelem < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+    @signature_2 = [{ 'type' => :integer, 'shape' => :array }]
+    @signature_3 = [{ 'type' => :string, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1) ||
+      match_args_to_signature(args, @signature_2) ||
+      match_args_to_signature(args, @signature_3)
+
+    args[0].size
+  end
+end
+
+# function NELEM%
+class FunctionNelemI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+    @signature_2 = [{ 'type' => :integer, 'shape' => :array }]
+    @signature_3 = [{ 'type' => :string, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1) ||
+      match_args_to_signature(args, @signature_2) ||
+      match_args_to_signature(args, @signature_3)
+
+    args[0].size.to_int
+  end
+end
+
 # function NUM
 class FunctionNum < AbstractFunction
   def initialize(text)
@@ -1984,6 +2034,8 @@ class FunctionFactory
     'LOG2' => FunctionLog2,
     'MID$' => FunctionMid,
     'MOD' => FunctionMod,
+    'NELEM' => FunctionNelem,
+    'NELEM%' => FunctionNelemI,
     'NUM' => FunctionNum,
     'NUM$' => FunctionStr,
     'PACK$' => FunctionPack,
