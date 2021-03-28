@@ -509,7 +509,7 @@ def make_command_tokenbuilders(quotes, long_names)
     PARSE PRETTY PROFILE RENUMBER RUN SAVE TOKENS UDFS VARS
     APOSTROPHE_COMMENT ASC_ALLOW_ALL
     BACK_TAB BASE
-    CHR_ALLOW_ALL
+    CACHE_CONST_EXPR CHR_ALLOW_ALL
     DEFAULT_PROMPT DETECT_INFINITE_LOOP
     ECHO EXTEND_IF FIELD_SEP FORGET_FORNEXT HEADING
     IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON
@@ -594,6 +594,7 @@ OptionParser.new do |opt|
   opt.on('--asc-allow-all') { |o| options[:asc_allow_all] = o }
   opt.on('--back-tab') { |o| options[:back_tab] = o }
   opt.on('--base BASE') { |o| options[:base] = o }
+  opt.on('--no-cache-const-expr') { |o| options[:no_cache_const_expr] = o }
   opt.on('--chr-allow-all') { |o| options[:chr_allow_all] = o }
 
   opt.on('--no-detect-infinite-loop') do |o|
@@ -670,6 +671,9 @@ $options['back_tab'] = Option.new(all_types, boolean, options.key?(:back_tab))
 base = 0
 base = options[:base].to_i if options.key?(:base)
 $options['base'] = Option.new(all_types, int_1, base)
+
+$options['cache_const_expr'] =
+  Option.new(all_types, boolean, !options.key?(:no_cache_const_expr))
 
 $options['chr_allow_all'] =
   Option.new(all_types, boolean, options.key?(:chr_allow_all))

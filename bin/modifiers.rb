@@ -57,6 +57,10 @@ class IfModifier < AbstractModifier
     @comprehension_effort = @expression.comprehension_effort
   end
 
+  def uncache
+    @expression.uncache
+  end
+
   def pretty
     'IF ' + @expression.to_s
   end
@@ -127,6 +131,10 @@ class UnlessModifier < AbstractModifier
     @comprehension_effort = @expression.comprehension_effort
   end
 
+  def uncache
+    @expression.uncache
+  end
+
   def pretty
     'UNLESS ' + @expression.to_s
   end
@@ -195,6 +203,10 @@ class WhileModifier < AbstractModifier
     @functions = @expression.functions
     @userfuncs = @expression.userfuncs
     @comprehension_effort = @expression.comprehension_effort
+  end
+
+  def uncache
+    @expression.uncache
   end
 
   def pretty
@@ -284,6 +296,10 @@ class UntilModifier < AbstractModifier
     @functions = @expression.functions
     @userfuncs = @expression.userfuncs
     @comprehension_effort = @expression.comprehension_effort
+  end
+
+  def uncache
+    @expression.uncache
   end
 
   def pretty
@@ -457,6 +473,14 @@ class ForModifier < AbstractModifier
     @comprehension_effort += @step.comprehension_effort unless @step.nil?
     @comprehension_effort += @until.comprehension_effort unless @until.nil?
     @comprehension_effort += @while.comprehension_effort unless @while.nil?
+  end
+
+  def uncache
+    @start.uncache unless @start.nil?
+    @end.uncache unless @end.nil?
+    @step.uncache unless @step.nil?
+    @until.uncache unless @unless.nil?
+    @while.uncache unless @while.nil?
   end
 
   def pretty

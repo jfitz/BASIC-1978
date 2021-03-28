@@ -873,6 +873,10 @@ class Interpreter
     if name == 'trace'
       @trace_out = value ? @console_io : @null_out
     end
+
+    if ['cache_const_expr', 'precision', 'base'].include?(name)
+      @program.uncache
+    end
   end
 
   def clear_variables

@@ -306,6 +306,14 @@ class AbstractStatement
 
   public
 
+  def uncache
+    uncache_core
+    
+    @modifiers.each { |modifier| modifier.uncache }
+  end
+
+  def uncache_core ; end
+
   def pretty
     AbstractToken.pretty_tokens(@keywords, @tokens)
   end
@@ -1223,6 +1231,10 @@ module InputFunctions
     values
   end
 
+  def uncache_core
+    @items.each {|item| item.uncache }
+  end
+
   def file_values(fhr, interpreter)
     values = []
 
@@ -1262,7 +1274,15 @@ module PrintFunctions
     line_text = tokens.map(&:to_s).join
     @errors << 'Syntax error: "' + line_text + '" ' + e.to_s
   end
-  
+
+  def uncache_core
+    @items.each do |item|
+      if item.class.to_s == 'Array'
+        item.each { |it| it.uncache }
+      end
+    end
+  end
+
   def extract_format(items, interpreter)
     items = items.clone
     format = nil
@@ -1349,6 +1369,10 @@ module ReadFunctions
     line_text = tokens.map(&:to_s).join
     @errors << 'Syntax error: "' + line_text + '" ' + e.to_s
   end
+
+  def uncache_core
+    @items.each {|item| item.uncache }
+  end
 end
 
 # common functions for WRITE statements
@@ -1381,6 +1405,10 @@ module WriteFunctions
     line_text = tokens.map(&:to_s).join
     @errors << 'Syntax error: "' + line_text + '" ' + e.to_s
   end
+
+  def uncache_core
+    @items.each {|item| item.uncache }
+  end
 end
 
 # CHAIN
@@ -1406,6 +1434,10 @@ class ChainStatement < AbstractStatement
     @target = ValueExpressionSet.new(target_tokens, :scalar)
     @elements = make_references(nil, @target)
     @comprehension_effort += @target.comprehension_effort
+  end
+
+  def uncache_core
+    @target.uncache
   end
 
   def dump
@@ -1458,11 +1490,11 @@ class ChangeStatement < AbstractStatement
       when :string
         # string to array
         @source = ValueExpressionSet.new(source_tokens, :scalar)
-        @target = TargetExpressionSet.new(target_tokens, :array)
+        @target = TargetExpressionSet.new(target_tokens, :array, false)
       when :numeric
         # array to string
         @source = ValueExpressionSet.new(source_tokens, :array)
-        @target = TargetExpressionSet.new(target_tokens, :scalar)
+        @target = TargetExpressionSet.new(target_tokens, :scalar, false)
       else
         raise BASICExpressionError, 'Type mismatch'
       end
@@ -1473,6 +1505,11 @@ class ChangeStatement < AbstractStatement
     else
       @errors << 'Syntax error'
     end
+  end
+
+  def uncache_core
+    @source.uncache
+    @target.uncache
   end
 
   def dump
@@ -1569,6 +1606,10 @@ class CloseStatement < AbstractStatement
     end
   end
 
+  def uncache_core
+    @filenum_expression.each {|item| item.uncache }
+  end
+
   def dump
     lines = @filenum_expression.dump
 
@@ -1607,6 +1648,10 @@ class DataStatement < AbstractStatement
     else
       @errors << 'Syntax error'
     end
+  end
+
+  def uncache_core
+    @expressions.uncache unless @expressions.nil?
   end
 
   def dump
@@ -1706,22 +1751,22 @@ class DimStatement < AbstractStatement
 
     template = [[1, '>=']]
 
-    @declaration_sets = []
+    @declarations = []
     if check_template(tokens_lists, template)
       tokens_lists = split_tokens(tokens_lists[0], false)
 
       tokens_lists.each do |tokens_list|
         begin
-          @declaration_sets << DeclarationExpressionSet.new(tokens_list)
+          @declarations << DeclarationExpressionSet.new(tokens_list)
         rescue BASICExpressionError
           @errors << 'Invalid variable ' + tokens_list.map(&:to_s).join
         end
       end
 
-      @elements = make_references(@declaration_sets)
+      @elements = make_references(@declarations)
 
-      @declaration_sets.each do |declaration_set|
-        @comprehension_effort += declaration_set.comprehension_effort
+      @declarations.each do |expression|
+        @comprehension_effort += expression.comprehension_effort
       end
     else
       @errors << 'Syntax error'
@@ -1731,8 +1776,8 @@ class DimStatement < AbstractStatement
   def dump
     lines = []
 
-    @declaration_sets.each do |declaration_set|
-      lines += declaration_set.dump
+    @declarations.each do |expression|
+      lines += expression.dump
     end
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
@@ -1741,8 +1786,8 @@ class DimStatement < AbstractStatement
   end
 
   def execute_core(interpreter)
-    @declaration_sets.each do |declaration_set|
-      variables = declaration_set.evaluate(interpreter)
+    @declarations.each do |expression|
+      variables = expression.evaluate(interpreter)
       variable = variables[0]
       subscripts = variable.subscripts
 
@@ -2035,6 +2080,14 @@ class ForStatement < AbstractStatement
     @comprehension_effort += @step.comprehension_effort unless @step.nil?
     @comprehension_effort += @until.comprehension_effort unless @until.nil?
     @comprehension_effort += @while.comprehension_effort unless @while.nil?
+  end
+
+  def uncache_core
+    @start.uncache unless @start.nil?
+    @end.uncache unless @end.nil?
+    @step.uncache unless @step.nil?
+    @until.uncache unless @until.nil?
+    @while.uncache unless @while.nil?
   end
 
   def dump
@@ -2633,6 +2686,12 @@ class AbstractIfStatement < AbstractStatement
 
   public
 
+  def uncache_core
+    @expression.uncache unless @expression.nil?
+    @statement.uncache unless @statement.nil?
+    @else_stmt.uncache unless @else_stmt.nil?
+  end
+
   def dump
     lines = []
 
@@ -2889,6 +2948,10 @@ end
 class AbstractLetStatement < AbstractStatement
   def initialize(_, _, _)
     super
+  end
+
+  def uncache_core
+    @assignment.uncache
   end
 
   def dump
@@ -3327,6 +3390,10 @@ class OnStatement < AbstractStatement
     end
   end
 
+  def uncache_core
+    @expression.uncache
+  end
+
   def dump
     lines = []
 
@@ -3476,6 +3543,11 @@ class OpenStatement < AbstractStatement
     end
   end
 
+  def uncache_core
+    @filenum_expression.uncache
+    @filename_expression.uncache
+  end
+
   def dump
     lines = []
 
@@ -3528,6 +3600,10 @@ class OptionStatement < AbstractStatement
     else
       @errors << 'Syntax error'
     end
+  end
+
+  def uncache_core
+    @expression.uncache
   end
 
   def dump
@@ -3949,6 +4025,10 @@ class SleepStatement < AbstractStatement
     end
 
     @errors << 'Too many values' if token_lists.size > 1
+  end
+
+  def uncache_core
+    @expression.uncache
   end
 
   def dump

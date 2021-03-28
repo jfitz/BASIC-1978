@@ -172,6 +172,10 @@ class Line
     @comment = comment
   end
 
+  def uncache
+    @statements.each { |statement| statement.uncache }
+  end
+
   def list
     @text
   end
@@ -344,6 +348,15 @@ class Program
   def clear
     @lines = {}
     @errors = []
+  end
+
+  def uncache
+    line_numbers = @lines.keys.sort
+
+    line_numbers.each do |line_number|
+      line = @lines[line_number]
+      line.uncache
+    end
   end
 
   def empty?

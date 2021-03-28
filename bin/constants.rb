@@ -34,6 +34,10 @@ class AbstractElement
     @boolean_constant = false
   end
 
+  def uncache
+    @cached = nil
+  end
+
   def dump
     "#{self.class}:Unimplemented"
   end
@@ -1691,6 +1695,8 @@ class CarriageControl
     @file_handle = false
     @comprehension_effort = 0
   end
+
+  def uncache ; end
 
   def printable?
     false
