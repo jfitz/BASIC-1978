@@ -1,0 +1,33 @@
+10 REM TEST DEF FN WITH STRING ARGS
+ Remark:TEST DEF FN WITH STRING ARGS
+20 DEF FNL9(S$)=LEN(S$)+1
+ UserFunctionName:FNL9 -> _
+ VariableName:S$ -> $
+ Variable:S$ -> $
+ FunctionLen:LEN($) -> _
+ NumericConstant:1
+ BinaryOperatorPlus:+(_,_) -> _
+100 A$="HELLO, WORLD!"
+ Variable:A$ -> $
+ TextConstant:"HELLO, WORLD!"
+ AssignmentOperator:= =$ -> $
+110 PRINT "STRING IS: [";A$;"]"
+ TextConstant:"STRING IS: ["
+ CarriageControl:;
+ Variable:A$ -> $
+ CarriageControl:;
+ TextConstant:"]"
+ CarriageControl:NL
+120 L=FNL9(A$)
+ Variable:L -> _
+ Variable:A$ -> $
+ UserFunction:FNL9($) -> _
+ AssignmentOperator:= _ -> _
+130 PRINT "LENGTH IS: "; L
+ TextConstant:"LENGTH IS: "
+ CarriageControl:;
+ Variable:L -> _
+ CarriageControl:NL
+999 END
+ 
+

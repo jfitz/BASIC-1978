@@ -2486,9 +2486,12 @@ class FunctionFactory
   end
 
   def self.user_function_names
-    functions_numeric = ('FNA'..'FNZ').to_a
-    functions_string = ('FNA$'..'FNZ$').to_a
-    functions_integer = ('FNA%'..'FNZ%').to_a
-    functions_numeric + functions_string + functions_integer
+    fns_n = ('FNA'..'FNZ').to_a
+    fns_n_n = ('FNA0'..'FNZ9').to_a
+    fns_s = ('FNA$'..'FNZ$').to_a
+    fns_n_s = ('FNA0$'..'FNZ9$').to_a
+    fns_i = ('FNA%'..'FNZ%').to_a
+    fns_n_i = ('FNA0%'..'FNZ9%').to_a
+    fns_n + fns_n_n + fns_s + fns_n_s + fns_i + fns_n_i
   end
 end
