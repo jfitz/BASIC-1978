@@ -360,8 +360,8 @@ class FunctionAbs < AbstractFunction
   end
 end
 
-# function ASC
-class FunctionAsc < AbstractFunction
+# function ASCII, ASC
+class FunctionAscii < AbstractFunction
   def initialize(text)
     super
 
@@ -388,8 +388,42 @@ class FunctionAsc < AbstractFunction
     raise BASICRuntimeError.new(:te_val_out, @name) unless
       value.between?(32, 126) || $options['asc_allow_all'].value
 
-    token = NumericConstantToken.new(value.to_s)
-    res = NumericConstant.new(token)
+    res = NumericConstant.new(value)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function ASCII%
+class FunctionAsciiI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
+  end
+
+  def evaluate(interpreter, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    text = args[0].to_v
+
+    raise BASICRuntimeError.new(:te_str_empty, @name) if text.empty?
+
+    value = text[0].ord
+
+    raise BASICRuntimeError.new(:te_val_out, @name) unless
+      value.between?(32, 126) || $options['asc_allow_all'].value
+
+    res = IntegerConstant.new(value)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2376,7 +2410,10 @@ end
 class FunctionFactory
   @functions = {
     'ABS' => FunctionAbs,
-    'ASC' => FunctionAsc,
+    'ASC' => FunctionAscii,
+    'ASC%' => FunctionAsciiI,
+    'ASCII' => FunctionAscii,
+    'ASCII%' => FunctionAsciiI,
     'ARCCOS' => FunctionArcCos,
     'ARCSIN' => FunctionArcSin,
     'ARCTAN' => FunctionArcTan,
