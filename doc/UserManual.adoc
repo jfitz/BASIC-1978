@@ -2293,12 +2293,12 @@ Functions may be used in expressions.
 |Function |Return type |Result
 |ABS(x) |numeric |Computes the absolute value of x.
 |ASC(t) |numeric |Returns the ASCII value of the first character of the string t. The character must be in the printable range of 32 to 126.
-|ARCCOS(x) |Computes the arccosine of x, providing the answer in radians.
-|ARCSIN(x) |Computes the arcsine of x, providing the answer in radians.
-|ARCTAN(x) |Computes the arctangent of x, providing the answer in radians.
-|ARCTAN(y,x) |Computes the arctangent of y and x, providing the answer in radians.
-|ATN(x) |Synonym for ARCTAN(x)
-|ATN(y,x) |Synonym for ARCTAN(y,x)
+|ARCCOS(x) |numeric |Computes the arccosine of x, providing the answer in radians.
+|ARCSIN(x) |numeric |Computes the arcsine of x, providing the answer in radians.
+|ARCTAN(x) |numeric |Computes the arctangent of x, providing the answer in radians.
+|ARCTAN(y,x) |numeric |Computes the arctangent of y and x, providing the answer in radians.
+|ATN(x) |numeric |Synonym for ARCTAN(x)
+|ATN(y,x) |numeric |Synonym for ARCTAN(y,x)
 |CHR$(n) |string |Returns a string of one character, defined by n. N must be within the ASCII printable range of 32 to 126.
 |CON1(n) |numeric array |Creates an array containing all ones, with n values
 |CON2(n) |numeric matrix |Creates a matrix containing all ones, with n columns
@@ -2316,21 +2316,23 @@ Functions may be used in expressions.
 |ERR() |numeric |Returns the current error code.
 |ERR |numeric |Same as ERR()
 |EXP(x) |numeric |Computes e to the x power.
+|FIX(x) |numeric |Returns the integer part of a number. Truncates towards negative infinity.
+|FIX%(x) |numeric |Returns the integer part of a number. Truncates towards negative infinity.
 |FRAC(x) |numeric |Return the fraction part of a numeric value. Retains the sign of the original value.
 |IDN(n) |numeric matrix |Creates an identity matrix (all zeros except for ones on the diagonal) fo dimension n.
 |IDN(n,n) |numeric matrix |Same as IDN(x). The two values must be identical, as identity matrices are always square.
 |IDN or IDN() |numeric matrix |Creates an identity matrix with dimensions based on the assignment target.
 |INSTR(i,t,s) |integer |Find string s in string t and report position. Start search as position i (first position is 1, not 0).
-|INT(x) |numeric |Return the integer part of a numeric value.
-|INT%(x) |integer |Return the integer part of a numeric value.
+|INT(x) |numeric |Return the integer part of a numeric value. Truncates towards zero.
+|INT%(x) |integer |Return the integer part of a numeric value. Truncates towards zero.
 |LEFT$(t,n) |string |Leftmost n characters of string t.
 |LEN(t) |numeric |Returns the length of the string value.
 |LOG(x) |numeric |Computes the natural log of x. A value of zero or a negative value will cause an error.
 |LOG10(x) |numeric |Computes the base-10 log of x. A value of zero or a negative value will cause an error.
 |LOG2(x) |numeric |Computes the base-2 log of x. A value of zero or a negative value will cause an error.
 |MID$(t,p,l) |string |Extract substring of t from position p for length l. The first character is position 1. If p is greater than the length of the string, the result is empty (""). If l extends beyond the end of the string, the result is ths string from p to the end.
-|NELEM(a) |numeric scalar |Number of elements in array a. Array may be of any type.
-|NELEM%(a) |integer scalar |Number of elements in array a. Array may be of any type.
+|NELEM(a) |numeric |Number of elements in array a. Array may be of any type.
+|NELEM%(a) |integer |Number of elements in array a. Array may be of any type.
 |NUM(x) |numeric |Converts string, integer, or boolean to numeric.
 |PACK$(a) |string |Converts a numeric array to a string variable. The first element (index 0) must contain the number of numeric values to convert. (It may be zero.) Each numeric element is converted to the corresponding ASCII character.
 |RIGHT$(t,n) |string |Rightmost n characters of string t.
