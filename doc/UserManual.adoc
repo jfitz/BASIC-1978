@@ -2292,7 +2292,7 @@ Functions may be used in expressions.
 |==========
 |Function |Return type |Result
 |ABS(x) |numeric |Computes the absolute value of x.
-|ASC(t) |numeric |Returns the ASCII value of the first character of the string t. The character must be in the printable range of 32 to 126.
+|ASC(t$) |numeric |Returns the ASCII value of the first character of the string t. The character must be in the printable range of 32 to 126.
 |ARCCOS(x) |numeric |Computes the arccosine of x, providing the answer in radians.
 |ARCSIN(x) |numeric |Computes the arcsine of x, providing the answer in radians.
 |ARCTAN(x) |numeric |Computes the arctangent of x, providing the answer in radians.
@@ -2322,20 +2322,20 @@ Functions may be used in expressions.
 |IDN(n) |numeric matrix |Creates an identity matrix (all zeros except for ones on the diagonal) fo dimension n.
 |IDN(n,n) |numeric matrix |Same as IDN(x). The two values must be identical, as identity matrices are always square.
 |IDN or IDN() |numeric matrix |Creates an identity matrix with dimensions based on the assignment target.
-|INSTR(i,t,s) |integer |Find string s in string t and report position. Start search as position i (first position is 1, not 0).
+|INSTR(i,t$,s$) |integer |Find string s in string t and report position. Start search as position i (first position is 1, not 0).
 |INT(x) |numeric |Return the integer part of a numeric value. Truncates towards zero.
 |INT%(x) |integer |Return the integer part of a numeric value. Truncates towards zero.
-|LEFT$(t,n) |string |Leftmost n characters of string t.
+|LEFT$(t$,n) |string |Leftmost n characters of string t.
 |LEN(t) |numeric |Returns the length of the string value.
 |LOG(x) |numeric |Computes the natural log of x. A value of zero or a negative value will cause an error.
 |LOG10(x) |numeric |Computes the base-10 log of x. A value of zero or a negative value will cause an error.
 |LOG2(x) |numeric |Computes the base-2 log of x. A value of zero or a negative value will cause an error.
-|MID$(t,p,l) |string |Extract substring of t from position p for length l. The first character is position 1. If p is greater than the length of the string, the result is empty (""). If l extends beyond the end of the string, the result is ths string from p to the end.
+|MID$(t$,p,l) |string |Extract substring of t from position p for length l. The first character is position 1. If p is greater than the length of the string, the result is empty (""). If l extends beyond the end of the string, the result is ths string from p to the end.
 |NELEM(a) |numeric |Number of elements in array a. Array may be of any type.
 |NELEM%(a) |integer |Number of elements in array a. Array may be of any type.
 |NUM(x) |numeric |Converts string, integer, or boolean to numeric.
 |PACK$(a) |string |Converts a numeric array to a string variable. The first element (index 0) must contain the number of numeric values to convert. (It may be zero.) Each numeric element is converted to the corresponding ASCII character.
-|RIGHT$(t,n) |string |Rightmost n characters of string t.
+|RIGHT$(t$,n) |string |Rightmost n characters of string t.
 |RND(x) |numeric |Return a random number from zero to x. The value is a floating-point value; RND(1) can return any value from zero to 1. A value of zero or less than zero is considered to be 1.
 |RND() |numeric |Equivalent to RND(1).
 |RND | numeric |Special form of RND, equivalent to RND(1).
@@ -2345,15 +2345,17 @@ Functions may be used in expressions.
 |SIN(x) |numeric |Computes the sine of x, where x is in radians.
 |SPC$(n) |numeric |Creates a string of n space characters.
 |SQR(x) |numeric |Computes the square root of x. A negative value will cause an error.
+|SUM(a) |numeric |Computes sum of elements in array.
+|SUM%(a%) |numeric |Computes sum of elements in array.
 |STR$(n) |string |Converts numeric value to string.
 |STR$(n,p) |string |Converts numeric value to string, formats with p decimal places.
 |TAB(n) |string |Advances the print position to column 'n'. Returns a string value with the proper number of spaces or backspaces. Useful in PRINT statements. In other statements, it returns the string value but does not advance the print position.
 |TAN(x) |numeric |Computes the tangent of x, where x is in radians.
 |TIME(n) |numeric |Returns the time since the start of the program, in seconds.
 |TRN(m) |matrix |Transposes values in matrix m, exchanging values by rows and columns.
-|UNPACK(t)|numeric array |Converts a string variable (or expression) to an array of numeric values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
-|UNPACK%(t)|numeric array |Converts a string variable (or expression) to an array of integer values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
-|VAL(t) |string |Converts a string to a numeric value. Ignores leading spaces. Converts digits and stops on first non-numeric character.
+|UNPACK(t$)|numeric array |Converts a string variable (or expression) to an array of numeric values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
+|UNPACK%(t$)|numeric array |Converts a string variable (or expression) to an array of integer values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
+|VAL(t$) |string |Converts a string to a numeric value. Ignores leading spaces. Converts digits and stops on first non-numeric character.
 |ZER1(n) |numeric array |Creates an array containing all zeros, with n values
 |ZER2(n) |numeric matrix|Creates a matrix containing all zeros, with n columns
 |ZER(n) |numeric matrix|Synonym for ZER2(n)

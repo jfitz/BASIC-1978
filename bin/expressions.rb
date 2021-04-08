@@ -104,6 +104,10 @@ class BASICArray
     BASICArray.new(@dimensions, values)
   end
 
+  def sum
+    sum_1
+  end
+
   def to_s
     'ARRAY: ' + @values.to_s
   end
@@ -186,6 +190,21 @@ class BASICArray
     end
 
     values
+  end
+
+  def sum_1
+    n_cols = @dimensions[0].to_i
+    base = $options['base'].value
+
+    sum = 0
+
+    (base..n_cols).each do |col|
+      value = get_value(col)
+      coords = AbstractElement.make_coord(col)
+      sum += value.to_f
+    end
+
+    sum
   end
 
   def print_1(printer, interpreter, formats)
