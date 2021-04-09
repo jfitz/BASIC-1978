@@ -2320,12 +2320,15 @@ Functions may be used in expressions.
 |ERR |numeric |Same as ERR()
 |EXP(x) |numeric |Computes e to the x power.
 |FIX(x) |numeric |Returns the integer part of a number. Truncates towards negative infinity.
-|FIX%(x) |numeric |Returns the integer part of a number. Truncates towards negative infinity.
+|FIX%(x) |integer |Returns the integer part of a number. Truncates towards negative infinity.
 |FRAC(x) |numeric |Return the fraction part of a numeric value. Retains the sign of the original value.
 |IDN(n) |numeric matrix |Creates an identity matrix (all zeros except for ones on the diagonal) fo dimension n.
 |IDN(n,n) |numeric matrix |Same as IDN(x). The two values must be identical, as identity matrices are always square.
 |IDN or IDN() |numeric matrix |Creates an identity matrix with dimensions based on the assignment target.
-|INSTR(i,t$,s$) |integer |Find string s in string t and report position. Start search as position i (first position is 1, not 0).
+|INSTR(t$,s$) |numeric |Find string s in string t and report position.
+|INSTR(i,t$,s$) |numeric |Find string s in string t and report position. Start search as position i (first position is 1, not 0).
+|INSTR%(t$,s$) |integer |Find string s in string t and report position.
+|INSTR%(i,t$,s$) |integer |Find string s in string t and report position. Start search as position i (first position is 1, not 0).
 |INT(x) |numeric |Return the integer part of a numeric value. Truncates towards zero.
 |INT%(x) |integer |Return the integer part of a numeric value. Truncates towards zero.
 |LEFT$(t$,n) |string |Leftmost n characters of string t.
@@ -2346,12 +2349,12 @@ Functions may be used in expressions.
 |SEC(x) |numeric |Computes the secant of x, where x is in radians.
 |SGN(x) |numeric |Returns 1, 0, or -1, for positive, zero, or negative values of x.
 |SIN(x) |numeric |Computes the sine of x, where x is in radians.
-|SPACE$(n) |numeric |Creates a string of n space characters.
-|SPC$(n) |numeric |Synonym for SPACE$()
-|SPC(n) |numeric |Synonym for SPACE$()
+|SPACE$(n) |string |Creates a string of n space characters.
+|SPC$(n) |string |Synonym for SPACE$()
+|SPC(n) |string |Synonym for SPACE$()
 |SQR(x) |numeric |Computes the square root of x. A negative value will cause an error.
 |SUM(a) |numeric |Computes sum of elements in array.
-|SUM%(a%) |numeric |Computes sum of elements in array.
+|SUM%(a%) |integer |Computes sum of elements in array.
 |STR$(n) |string |Converts numeric value to string.
 |STR$(n,p) |string |Converts numeric value to string, formats with p decimal places.
 |TAB(n) |string |Advances the print position to column 'n'. Returns a string value with the proper number of spaces or backspaces. Useful in PRINT statements. In other statements, it returns the string value but does not advance the print position.
@@ -2359,7 +2362,7 @@ Functions may be used in expressions.
 |TIME(n) |numeric |Returns the time since the start of the program, in seconds.
 |TRN(m) |matrix |Transposes values in matrix m, exchanging values by rows and columns.
 |UNPACK(t$)|numeric array |Converts a string variable (or expression) to an array of numeric values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
-|UNPACK%(t$)|numeric array |Converts a string variable (or expression) to an array of integer values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
+|UNPACK%(t$)|integer array |Converts a string variable (or expression) to an array of integer values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
 |VAL(t$) |string |Converts a string to a numeric value. Ignores leading spaces. Converts digits and stops on first non-numeric character.
 |ZER1(n) |numeric array |Creates an array containing all zeros, with n values
 |ZER2(n) |numeric matrix|Creates a matrix containing all zeros, with n columns
