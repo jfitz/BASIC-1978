@@ -1868,8 +1868,8 @@ class FunctionSin < AbstractFunction
   end
 end
 
-# function SPC$
-class FunctionSpc < AbstractFunction
+# function SPACE$, SPC$
+class FunctionSpace < AbstractFunction
   def initialize(text)
     super
 
@@ -2456,7 +2456,8 @@ class FunctionFactory
     'SGN' => FunctionSgn,
     'SGN%' => FunctionSgnI,
     'SIN' => FunctionSin,
-    'SPC$' => FunctionSpc,
+    'SPACE$' => FunctionSpace,
+    'SPC$' => FunctionSpace,
     'SQR' => FunctionSqr,
     'STR$' => FunctionStr,
     'SUM' => FunctionSum,
