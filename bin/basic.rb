@@ -819,8 +819,7 @@ end
 
 # list the source
 unless list_filename.nil?
-  token = TextConstantToken.new('"' + list_filename + '"')
-  args = [TextConstant.new(token)]
+  args = [TextConstant.new(list_filename)]
 
   filename, keywords = parse_args(args)
 
@@ -836,8 +835,7 @@ end
 
 # show parse dump
 unless parse_filename.nil?
-  token = TextConstantToken.new('"' + parse_filename + '"')
-  args = [TextConstant.new(token)]
+  args = [TextConstant.new(parse_filename)]
 
   filename, keywords = parse_args(args)
 
@@ -853,8 +851,7 @@ end
 
 # show analysis
 unless analyze_filename.nil?
-  token = TextConstantToken.new('"' + analyze_filename + '"')
-  args = [TextConstant.new(token)]
+  args = [TextConstant.new(analyze_filename)]
 
   filename, keywords = parse_args(args)
 
@@ -869,8 +866,7 @@ end
 
 # pretty-print the source
 unless pretty_filename.nil?
-  token = TextConstantToken.new('"' + pretty_filename + '"')
-  args = [TextConstant.new(token)]
+  args = [TextConstant.new(pretty_filename)]
 
   filename, keywords = parse_args(args)
 
@@ -887,8 +883,7 @@ end
 
 # cross-reference the source
 unless cref_filename.nil?
-  token = TextConstantToken.new('"' + cref_filename + '"')
-  args = [TextConstant.new(token)]
+  args = [TextConstant.new(cref_filename)]
 
   filename, keywords = parse_args(args)
 
@@ -902,8 +897,7 @@ end
 
 # run the source
 unless run_filename.nil?
-  token = TextConstantToken.new('"' + run_filename + '"')
-  args = [TextConstant.new(token)]
+  args = [TextConstant.new(run_filename)]
 
   filename, keywords = parse_args(args)
 

@@ -932,7 +932,7 @@ class IntegerConstant < AbstractValueElement
     f = text.to_i if numeric_classes.include?(text.class.to_s)
     f = text.to_f.to_i if text.class.to_s == 'IntegerConstantToken'
 
-    raise BASICSyntaxError, "'#{text}' is not a number" if f.nil?
+    raise BASICSyntaxError, "'#{text}' is not an integer" if f.nil?
 
     @symbol_text = text.to_s
     @content_type = :integer
@@ -1285,7 +1285,7 @@ end
 # Text constants
 class TextConstant < AbstractValueElement
   def self.accept?(token)
-    classes = %w[TextConstantToken]
+    classes = %w[TextConstantToken String]
     classes.include?(token.class.to_s)
   end
 
@@ -1296,6 +1296,7 @@ class TextConstant < AbstractValueElement
     super()
 
     @value = nil
+    @value = text if text.class.to_s == 'String'
     @value = text.value if text.class.to_s == 'TextConstantToken'
 
     raise(BASICSyntaxError, "'#{text}' is not a text constant") if @value.nil?
@@ -1303,7 +1304,6 @@ class TextConstant < AbstractValueElement
     @content_type = :string
     @shape = :scalar
     @constant = true
-    @symbol_text = text.value
 
     @text_constant = true
   end
@@ -1372,10 +1372,7 @@ class TextConstant < AbstractValueElement
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
-    unquoted = @value + other.to_v
-    quoted = '"' + unquoted + '"'
-    token = TextConstantToken.new(quoted)
-    TextConstant.new(token)
+    TextConstant.new(@value + other.to_v)
   end
 
   def add(other)
@@ -1383,10 +1380,7 @@ class TextConstant < AbstractValueElement
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
-    unquoted = @value + other.to_v
-    quoted = '"' + unquoted + '"'
-    token = TextConstantToken.new(quoted)
-    TextConstant.new(token)
+    TextConstant.new(@value + other.to_v)
   end
 
   def multiply(other)
@@ -1394,10 +1388,7 @@ class TextConstant < AbstractValueElement
 
     raise(BASICExpressionError, message) unless other.numeric_constant?
 
-    unquoted = @value * other.to_v
-    quoted = '"' + unquoted + '"'
-    token = TextConstantToken.new(quoted)
-    TextConstant.new(token)
+    TextConstant.new(@value * other.to_v)
   end
 
   def to_s

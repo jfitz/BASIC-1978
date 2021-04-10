@@ -483,8 +483,7 @@ class NumericFormatToken < AbstractToken
     text = sprintf(spec, numeric_constant.to_v)
 
     text.tr!(' ', '*') if @text.include?('*')
-    token = TextConstantToken.new('"' + text + '"')
-    TextConstant.new(token)
+    TextConstant.new(text)
   end
 end
 
@@ -501,8 +500,7 @@ class CharFormatToken < AbstractToken
   def format(text_constant)
     text = text_constant.to_v
     text = text[0]
-    token = TextConstantToken.new('"' + text + '"')
-    TextConstant.new(token)
+    TextConstant.new(text)
   end
 end
 
@@ -518,8 +516,7 @@ class PlainStringFormatToken < AbstractToken
 
   def format(text_constant)
     text = text_constant.to_v
-    token = TextConstantToken.new('"' + text + '"')
-    TextConstant.new(token)
+    TextConstant.new(text)
   end
 end
 
@@ -536,8 +533,7 @@ class PaddedStringFormatToken < AbstractToken
   def format(text_constant)
     text = text_constant.to_v
     text += ' ' while text.size < @text.size
-    token = TextConstantToken.new('"' + text + '"')
-    TextConstant.new(token)
+    TextConstant.new(text)
   end
 end
 
@@ -552,7 +548,6 @@ class ConstantFormatToken < AbstractToken
   end
 
   def format(text_constant)
-    token = TextConstantToken.new('"' + @text + '"')
-    TextConstant.new(token)
+    TextConstant.new(@text)
   end
 end

@@ -1107,7 +1107,7 @@ class Interpreter
       default_type = variable.content_type
       default_value = NumericConstant.new(0)
 
-      default_value = TextConstant.new(TextConstantToken.new('""')) if
+      default_value = TextConstant.new('') if
         default_type == :string
 
       unless @variables.key?(v)
@@ -1171,10 +1171,7 @@ class Interpreter
     # convert a numeric to a string when a string is expected
     if value.numeric_constant? &&
        variable.content_type == :string
-      val = value.symbol_text
-      quoted_val = '"' + val + '"'
-      token = TextConstantToken.new(quoted_val)
-      value = TextConstant.new(token)
+      value = TextConstant.new(value.symbol_text)
     end
 
     # convert an integer to a numeric

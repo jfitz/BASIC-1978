@@ -143,9 +143,7 @@ class BASICArray
       result += value.to_i.chr unless value.nil?
     end
 
-    quoted = '"' + result + '"'
-    token = TextConstantToken.new(quoted)
-    TextConstant.new(token)
+    TextConstant.new(result)
   end
 
   private

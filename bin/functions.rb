@@ -539,10 +539,7 @@ class FunctionChr < AbstractFunction
     raise BASICRuntimeError.new(:te_val_out, @name) unless
       value.between?(32, 126) || $options['chr_allow_all'].value
 
-    text = value.chr
-    quoted = '"' + text + '"'
-    token = TextConstantToken.new(quoted)
-    res = TextConstant.new(token)
+    res = TextConstant.new(value.chr)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1319,9 +1316,7 @@ class FunctionLeft < AbstractFunction
       text = ''
     end
 
-    quoted = '"' + text + '"'
-    token = TextConstantToken.new(quoted)
-    res = TextConstant.new(token)
+    res = TextConstant.new(text)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1348,9 +1343,7 @@ class FunctionLen < AbstractFunction
       match_args_to_signature(args, @signature_1)
 
     text = args[0].to_v
-    length = text.size
-    token = NumericConstantToken.new(length.to_s)
-    res = NumericConstant.new(token)
+    res = NumericConstant.new(text.size)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1476,9 +1469,7 @@ class FunctionMid < AbstractFunction
       text = ''
     end
 
-    quoted = '"' + text + '"'
-    token = TextConstantToken.new(quoted)
-    res = TextConstant.new(token)
+    res = TextConstant.new(text)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1603,8 +1594,7 @@ class FunctionNum < AbstractFunction
       raise BASICRuntimeError.new(:te_args_no_match, @name)
     end
 
-    token = NumericConstantToken.new(f)
-    res = NumericConstant.new(token)
+    res = NumericConstant.new(f)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1671,10 +1661,7 @@ class FunctionRight < AbstractFunction
 
     start = value.size - count
     start = 0 if start < 0
-    text = value[start..-1]
-    quoted = '"' + text + '"'
-    token = TextConstantToken.new(quoted)
-    res = TextConstant.new(token)
+    res = TextConstant.new(value[start..-1])
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1910,9 +1897,7 @@ class FunctionSpace < AbstractFunction
       spaces = ''
     end
 
-    quoted = '"' + spaces + '"'
-    v = TextConstantToken.new(quoted)
-    res = TextConstant.new(v)
+    res = TextConstant.new(spaces)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1967,17 +1952,12 @@ class FunctionStr < AbstractFunction
     return @cached unless @cached.nil?
 
     if match_args_to_signature(args, @signature_1)
-      text = args[0].to_s
-      quoted = '"' + text + '"'
-      token = TextConstantToken.new(quoted)
-      res = TextConstant.new(token)
+      res = TextConstant.new(args[0].to_s)
     elsif match_args_to_signature(args, @signature_2)
       places = args[1].to_i
       value = args[0].to_f
       text = sprintf('%.*f', places, value)
-      quoted = '"' + text + '"'
-      token = TextConstantToken.new(quoted)
-      res = TextConstant.new(token)
+      res = TextConstant.new(text)
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
     end
@@ -2025,9 +2005,7 @@ class FunctionString < AbstractFunction
       s = ''
     end
 
-    quoted = '"' + s + '"'
-    v = TextConstantToken.new(quoted)
-    res = TextConstant.new(v)
+    res = TextConstant.new(s)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2130,9 +2108,7 @@ class FunctionTab < AbstractFunction
       spaces = ''
     end
 
-    quoted = '"' + spaces + '"'
-    v = TextConstantToken.new(quoted)
-    res = TextConstant.new(v)
+    res = TextConstant.new(spaces)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2297,9 +2273,7 @@ class FunctionVal < AbstractFunction
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
       match_args_to_signature(args, @signature_1)
 
-    f = args[0].to_v.to_f
-    token = NumericConstantToken.new(f)
-    res = NumericConstant.new(token)
+    res = NumericConstant.new(args[0].to_v.to_f)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
