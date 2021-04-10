@@ -286,6 +286,8 @@ class BinaryOperator < AbstractElement
   def result_type(type1, type2)
     return type1 if type1 == type2
 
+    return :string if type1 == :string
+    
     return :numeric if type1 == :numeric
     return :numeric if type2 == :numeric
 
@@ -1002,11 +1004,14 @@ class BinaryOperatorMultiply < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer]
+    arg_1_types = [:numeric, :integer, :string]
+    arg_2_types = [:numeric, :integer]
 
-    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
-      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
-      !compatible(a_type, b_type)
+    arg_1_types = [:numeric, :integer, :string]
+    arg_2_types = [:numeric, :integer]
+
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") unless
+      arg_1_types.include?(a_type) && arg_2_types.include?(b_type)
 
     @content_type = result_type(a_type, b_type)
     type_stack.push(@content_type)

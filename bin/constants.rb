@@ -1389,6 +1389,17 @@ class TextConstant < AbstractValueElement
     TextConstant.new(token)
   end
 
+  def multiply(other)
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
+
+    raise(BASICExpressionError, message) unless other.numeric_constant?
+
+    unquoted = @value * other.to_v
+    quoted = '"' + unquoted + '"'
+    token = TextConstantToken.new(quoted)
+    TextConstant.new(token)
+  end
+
   def to_s
     "\"#{@value}\""
   end
