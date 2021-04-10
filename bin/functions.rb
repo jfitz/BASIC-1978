@@ -1987,6 +1987,53 @@ class FunctionStr < AbstractFunction
   end
 end
 
+# function STRING$
+class FunctionString < AbstractFunction
+  def initialize(text)
+    super
+
+    @content_type = :string
+    @shape = :scalar
+
+    @default_shape = :scalar
+    @signature_2 = [
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :numeric, 'shape' => :scalar }
+    ]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_2)
+
+    text = args[0].to_v
+
+    raise BASICRuntimeError.new(:te_str_empty, @name) if text.empty?
+
+    char = text[0]
+
+    width = args[1].to_v
+
+    if width > 0
+      s = char * width
+    else
+      # zero or negative value yields empty string
+      s = ''
+    end
+
+    quoted = '"' + s + '"'
+    v = TextConstantToken.new(quoted)
+    res = TextConstant.new(v)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function SUM
 class FunctionSum < AbstractFunction
   def initialize(text)
@@ -2475,6 +2522,7 @@ class FunctionFactory
     'SPC$' => FunctionSpace,
     'SQR' => FunctionSqr,
     'STR$' => FunctionStr,
+    'STRING$' => FunctionString,
     'SUM' => FunctionSum,
     'SUM%' => FunctionSumI,
     'TAB' => FunctionTab,
