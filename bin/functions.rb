@@ -360,7 +360,7 @@ class FunctionAbs < AbstractFunction
   end
 end
 
-# function ASCII, ASC
+# function ASCII, ASCII%, ASC
 class FunctionAscii < AbstractFunction
   def initialize(text)
     super
@@ -388,42 +388,11 @@ class FunctionAscii < AbstractFunction
     raise BASICRuntimeError.new(:te_val_out, @name) unless
       value.between?(32, 126) || $options['asc_allow_all'].value
 
-    res = NumericConstant.new(value)
-
-    @cached = res if @constant && $options['cache_const_expr']
-    res
-  end
-end
-
-# function ASCII%
-class FunctionAsciiI < AbstractFunction
-  def initialize(text)
-    super
-
-    @shape = :scalar
-
-    @default_shape = :scalar
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
-  end
-
-  def evaluate(interpreter, arg_stack)
-    args = arg_stack.pop
-
-    return @cached unless @cached.nil?
-
-    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
-
-    text = args[0].to_v
-
-    raise BASICRuntimeError.new(:te_str_empty, @name) if text.empty?
-
-    value = text[0].ord
-
-    raise BASICRuntimeError.new(:te_val_out, @name) unless
-      value.between?(32, 126) || $options['asc_allow_all'].value
-
-    res = IntegerConstant.new(value)
+    if content_type == :integer
+      res = IntegerConstant.new(value)
+    else
+      res = NumericConstant.new(value)
+    end
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -509,6 +478,33 @@ class FunctionArcTan < AbstractFunction
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
     end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function AVG
+class FunctionAvg < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    sum = args[0].sum / args[0].size
+    res = NumericConstant.new(sum)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -962,7 +958,7 @@ class FunctionExp < AbstractFunction
   end
 end
 
-# function FIX
+# function FIX, FIX%
 class FunctionFix < AbstractFunction
   def initialize(text)
     super
@@ -982,34 +978,11 @@ class FunctionFix < AbstractFunction
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
       match_args_to_signature(args, @signature_1)
 
-    res = args[0].floor
-
-    @cached = res if @constant && $options['cache_const_expr']
-    res
-  end
-end
-
-# function FIX%
-class FunctionFixI < AbstractFunction
-  def initialize(text)
-    super
-
-    @shape = :scalar
-
-    @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-  end
-
-  # return a single value
-  def evaluate(interpreter, arg_stack)
-    args = arg_stack.pop
-
-    return @cached unless @cached.nil?
-
-    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
-
-    res = args[0].floor.to_int
+    if content_type == :integer
+      res = args[0].floor.to_int
+    else
+      res = args[0].floor
+    end
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1183,11 +1156,9 @@ class FunctionInstr < AbstractFunction
     end
 
     if content_type == :integer
-      token = IntegerConstantToken.new(index)
-      res = IntegerConstant.new(token)
+      res = IntegerConstant.new(index)
     else
-      token = NumericConstantToken.new(index)
-      res = NumericConstant.new(token)
+      res = NumericConstant.new(index)
     end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -1195,7 +1166,7 @@ class FunctionInstr < AbstractFunction
   end
 end
 
-# function INT
+# function INT, INT%
 class FunctionInt < AbstractFunction
   def initialize(text)
     super
@@ -1220,34 +1191,7 @@ class FunctionInt < AbstractFunction
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
     end
-
-    @cached = res if @constant && $options['cache_const_expr']
-    res
-  end
-end
-
-# function INT%
-class FunctionIntI < AbstractFunction
-  def initialize(text)
-    super
-
-    @shape = :scalar
-
-    @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-  end
-
-  # return a single value
-  def evaluate(interpreter, arg_stack)
-    args = arg_stack.pop
-
-    return @cached unless @cached.nil?
-
-    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
-
-    x = $options['int_floor'].value ? args[0].floor : args[0].truncate
-    res = x.to_int
+    res = res.to_int if @content_type == :integer
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1529,37 +1473,11 @@ class FunctionNelem < AbstractFunction
       match_args_to_signature(args, @signature_2) ||
       match_args_to_signature(args, @signature_3)
 
-    res = args[0].size
-
-    @cached = res if @constant && $options['cache_const_expr']
-    res
-  end
-end
-
-# function NELEM%
-class FunctionNelemI < AbstractFunction
-  def initialize(text)
-    super
-
-    @shape = :scalar
-
-    @default_shape = :array
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
-    @signature_2 = [{ 'type' => :integer, 'shape' => :array }]
-    @signature_3 = [{ 'type' => :string, 'shape' => :array }]
-  end
-
-  def evaluate(_, arg_stack)
-    args = arg_stack.pop
-
-    return @cached unless @cached.nil?
-
-    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1) ||
-      match_args_to_signature(args, @signature_2) ||
-      match_args_to_signature(args, @signature_3)
-
-    res = args[0].size.to_int
+    if content_type == :integer
+      res = IntegerConstant.new(args[0].size)
+    else
+      res = NumericConstant.new(args[0].size)
+    end
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1626,6 +1544,33 @@ class FunctionPack < AbstractFunction
     raise(BASICSyntaxError, @name + ' requires array') unless dims.size == 1
 
     res = array.pack
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function PROD
+class FunctionProd < AbstractFunction
+ def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    sum = args[0].prod
+    res = NumericConstant.new(sum)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1788,7 +1733,7 @@ class FunctionSec < AbstractFunction
   end
 end
 
-# function SGN
+# function SGN, SGN%
 class FunctionSgn < AbstractFunction
   def initialize(text)
     super
@@ -1797,32 +1742,6 @@ class FunctionSgn < AbstractFunction
 
     @default_shape = :scalar
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-  end
-
-  def evaluate(_, arg_stack)
-    args = arg_stack.pop
-
-    return @cached unless @cached.nil?
-
-    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
-
-    res = args[0].sign
-
-    @cached = res if @constant && $options['cache_const_expr']
-    res
-  end
-end
-
-# function SGN%
-class FunctionSgnI < AbstractFunction
-  def initialize(text)
-    super
-
-    @shape = :scalar
-
-    @default_shape = :scalar
-    @signature_1 = [{ 'type' => :integer, 'shape' => :scalar }]
   end
 
   def evaluate(_, arg_stack)
@@ -2012,7 +1931,7 @@ class FunctionString < AbstractFunction
   end
 end
 
-# function SUM
+# function SUM, SUM%
 class FunctionSum < AbstractFunction
   def initialize(text)
     super
@@ -2032,34 +1951,12 @@ class FunctionSum < AbstractFunction
       match_args_to_signature(args, @signature_1)
 
     sum = args[0].sum
-    res = NumericConstant.new(sum)
 
-    @cached = res if @constant && $options['cache_const_expr']
-    res
-  end
-end
-
-# function SUM%
-class FunctionSumI < AbstractFunction
-  def initialize(text)
-    super
-
-    @shape = :scalar
-
-    @default_shape = :array
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
-  end
-
-  def evaluate(_, arg_stack)
-    args = arg_stack.pop
-
-    return @cached unless @cached.nil?
-
-    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
-
-    sum = args[0].sum
-    res = IntegerConstant.new(sum)
+    if content_type == :integer
+      res = IntegerConstant.new(sum)
+    else
+      res = NumericConstant.new(sum)
+    end
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2172,7 +2069,7 @@ class FunctionTime < AbstractFunction
   end
 end
 
-# function UNPACK
+# function UNPACK, UNPACK%
 class FunctionUnpack < AbstractFunction
   def initialize(text)
     super
@@ -2192,34 +2089,12 @@ class FunctionUnpack < AbstractFunction
       match_args_to_signature(args, @signature_1)
 
     text = args[0]
-    res = text.na_unpack
 
-    @cached = res if @constant && $options['cache_const_expr']
-    res
-  end
-end
-
-# function UNPACK%
-class FunctionUnpackI < AbstractFunction
-  def initialize(text)
-    super
-
-    @shape = :array
-
-    @default_shape = :scalar
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
-  end
-
-  def evaluate(_, arg_stack)
-    args = arg_stack.pop
-
-    return @cached unless @cached.nil?
-
-    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
-
-    text = args[0]
-    res = text.ia_unpack
+    if content_type == :integer
+      res = text.ia_unpack
+    else
+      res = text.na_unpack
+    end
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2446,13 +2321,14 @@ class FunctionFactory
   @functions = {
     'ABS' => FunctionAbs,
     'ASC' => FunctionAscii,
-    'ASC%' => FunctionAsciiI,
+    'ASC%' => FunctionAscii,
     'ASCII' => FunctionAscii,
-    'ASCII%' => FunctionAsciiI,
+    'ASCII%' => FunctionAscii,
     'ARCCOS' => FunctionArcCos,
     'ARCSIN' => FunctionArcSin,
     'ARCTAN' => FunctionArcTan,
     'ATN' => FunctionArcTan,
+    'AVG' => FunctionAvg,
     'CHR$' => FunctionChr,
     'CON' => FunctionCon2,
     'CON1' => FunctionCon1,
@@ -2465,13 +2341,13 @@ class FunctionFactory
     'ERR' => FunctionErr,
     'EXP' => FunctionExp,
     'FIX' => FunctionFix,
-    'FIX%' => FunctionFixI,
+    'FIX%' => FunctionFix,
     'FRAC' => FunctionFrac,
     'IDN' => FunctionIdn,
     'INSTR' => FunctionInstr,
     'INSTR%' => FunctionInstr,
     'INT' => FunctionInt,
-    'INT%' => FunctionIntI,
+    'INT%' => FunctionInt,
     'INV' => FunctionInv,
     'LEFT$' => FunctionLeft,
     'LEN' => FunctionLen,
@@ -2481,16 +2357,18 @@ class FunctionFactory
     'MID$' => FunctionMid,
     'MOD' => FunctionMod,
     'NELEM' => FunctionNelem,
-    'NELEM%' => FunctionNelemI,
+    'NELEM%' => FunctionNelem,
     'NUM' => FunctionNum,
     'NUM$' => FunctionStr,
     'PACK$' => FunctionPack,
+    'PROD' => FunctionProd,
+    'PROD%' => FunctionProd,
     'RIGHT$' => FunctionRight,
     'RND' => FunctionRnd,
     'ROUND' => FunctionRound,
     'SEC' => FunctionSec,
     'SGN' => FunctionSgn,
-    'SGN%' => FunctionSgnI,
+    'SGN%' => FunctionSgn,
     'SIN' => FunctionSin,
     'SPACE$' => FunctionSpace,
     'SPC$' => FunctionSpace,
@@ -2498,13 +2376,13 @@ class FunctionFactory
     'STR$' => FunctionStr,
     'STRING$' => FunctionString,
     'SUM' => FunctionSum,
-    'SUM%' => FunctionSumI,
+    'SUM%' => FunctionSum,
     'TAB' => FunctionTab,
     'TAN' => FunctionTan,
     'TIME' => FunctionTime,
     'TRN' => FunctionTrn,
     'UNPACK' => FunctionUnpack,
-    'UNPACK%' => FunctionUnpackI,
+    'UNPACK%' => FunctionUnpack,
     'VAL' => FunctionVal,
     'ZER' => FunctionZer2,
     'ZER1' => FunctionZer1,

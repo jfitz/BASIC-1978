@@ -564,7 +564,7 @@ class NumericConstant < AbstractValueElement
       f = t[1].ord if !t.empty? && t[0] == '#'
     end
 
-    raise(BASICSyntaxError, "'#{text}' is not a number") if f.nil?
+    raise BASICSyntaxError.new("'#{text}' is not a number") if f.nil?
 
     precision = $options['precision'].value
     if precision != 'INFINITE' && f != 0 && f != Float::INFINITY
@@ -932,7 +932,7 @@ class IntegerConstant < AbstractValueElement
     f = text.to_i if numeric_classes.include?(text.class.to_s)
     f = text.to_f.to_i if text.class.to_s == 'IntegerConstantToken'
 
-    raise BASICSyntaxError, "'#{text}' is not an integer" if f.nil?
+    raise BASICSyntaxError.new("'#{text}' is not an integer") if f.nil?
 
     @symbol_text = text.to_s
     @content_type = :integer
@@ -1299,7 +1299,8 @@ class TextConstant < AbstractValueElement
     @value = text if text.class.to_s == 'String'
     @value = text.value if text.class.to_s == 'TextConstantToken'
 
-    raise(BASICSyntaxError, "'#{text}' is not a text constant") if @value.nil?
+    raise BASICSyntaxError.new("'#{text}' is not a text constant") if
+      @value.nil?
 
     @content_type = :string
     @shape = :scalar
