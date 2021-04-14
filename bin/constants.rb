@@ -2144,9 +2144,11 @@ class Variable < AbstractElement
   def evaluate_value_array(interpreter, _)
     dims = interpreter.get_dimensions(@variable_name)
 
-    raise(BASICExpressionError, 'Variable has no dimensions') if dims.nil?
-    raise(BASICExpressionError, 'Array requires one dimension') unless
-      dims.size == 1
+    msg = "Variable #{@variable_name} has no dimensions"
+    raise BASICExpressionError.new(msg) if dims.nil?
+
+    msg = "Array #{@variable_name} requires one dimension"
+    raise BASICExpressionError.new(msg) if dims.size != 1
 
     values = evaluate_value_array_1(interpreter, dims[0].to_i)
     BASICArray.new(dims, values)
@@ -2169,7 +2171,12 @@ class Variable < AbstractElement
   def evaluate_value_matrix(interpreter, _)
     dims = interpreter.get_dimensions(@variable_name)
 
-    raise(BASICExpressionError, 'Variable has no dimensions') if dims.nil?
+    msg = "Variable #{@variable_name} has no dimensions"
+    raise BASICExpressionError.new(msg) if dims.nil?
+
+    msg = "Matrix #{@variable_name} requires two dimensions"
+    # don't check this; it causes problems for special forms
+    # raise BASICExpressionError.new(msg) if dims.size != 2
 
     values = evaluate_matrix_n(interpreter, dims)
     Matrix.new(dims, values)

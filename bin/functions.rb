@@ -843,7 +843,7 @@ class FunctionErl < AbstractFunction
     end
 
     # ERL() is never constant
-    
+
     constant_stack.push(@constant)
   end
 
@@ -907,7 +907,7 @@ class FunctionErr < AbstractFunction
     end
 
     # ERR() is never constant
-    
+
     constant_stack.push(@constant)
   end
 
@@ -1450,7 +1450,54 @@ class FunctionMod < AbstractFunction
   end
 end
 
-# function NELEM
+# function NCOL, NCOL%
+class FunctionNcol < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+    @signature_2 = [{ 'type' => :integer, 'shape' => :matrix }]
+    @signature_3 = [{ 'type' => :string, 'shape' => :matrix }]
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
+    end
+
+    # NCOL() is never constant
+
+    res = constant_stack.push(@constant)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1) ||
+      match_args_to_signature(args, @signature_2) ||
+      match_args_to_signature(args, @signature_3)
+
+    if content_type == :integer
+      res = IntegerConstant.new(args[0].ncol)
+    else
+      res = NumericConstant.new(args[0].ncol)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function NELEM, NELEM%
 class FunctionNelem < AbstractFunction
   def initialize(text)
     super
@@ -1461,6 +1508,19 @@ class FunctionNelem < AbstractFunction
     @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
     @signature_2 = [{ 'type' => :integer, 'shape' => :array }]
     @signature_3 = [{ 'type' => :string, 'shape' => :array }]
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
+    end
+
+    # NELEM() is never constant
+
+    res = constant_stack.push(@constant)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
   end
 
   def evaluate(_, arg_stack)
@@ -1477,6 +1537,53 @@ class FunctionNelem < AbstractFunction
       res = IntegerConstant.new(args[0].size)
     else
       res = NumericConstant.new(args[0].size)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function NROW
+class FunctionNrow < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+    @signature_2 = [{ 'type' => :integer, 'shape' => :matrix }]
+    @signature_3 = [{ 'type' => :string, 'shape' => :matrix }]
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
+    end
+
+    # NROW() is never constant
+
+    res = constant_stack.push(@constant)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1) ||
+      match_args_to_signature(args, @signature_2) ||
+      match_args_to_signature(args, @signature_3)
+
+    if content_type == :integer
+      res = IntegerConstant.new(args[0].nrow)
+    else
+      res = NumericConstant.new(args[0].nrow)
     end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -1678,7 +1785,7 @@ class FunctionRnd < AbstractFunction
     end
 
     # RND() is never constant
-    
+
     constant_stack.push(@constant)
   end
 
@@ -1982,7 +2089,7 @@ class FunctionTab < AbstractFunction
     end
 
     # TAB() is never constant
-    
+
     constant_stack.push(@constant)
   end
 
@@ -2356,8 +2463,12 @@ class FunctionFactory
     'LOG2' => FunctionLog2,
     'MID$' => FunctionMid,
     'MOD' => FunctionMod,
+    'NCOL' => FunctionNcol,
+    'NCOL%' => FunctionNcol,
     'NELEM' => FunctionNelem,
     'NELEM%' => FunctionNelem,
+    'NROW' => FunctionNrow,
+    'NROW%' => FunctionNrow,
     'NUM' => FunctionNum,
     'NUM$' => FunctionStr,
     'PACK$' => FunctionPack,
