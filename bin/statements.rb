@@ -1537,7 +1537,7 @@ class ChangeStatement < AbstractStatement
 
       target_token = VariableToken.new(@target.to_s)
       target_name = VariableName.new(target_token)
-      target = Variable.new(target_name, :scalar, [])
+      target = Variable.new(target_name, :scalar, [], [])
       target.valref = :reference
 
       interpreter.set_dimensions(target, dims)
@@ -1562,7 +1562,7 @@ class ChangeStatement < AbstractStatement
       values = {}
       (0..cols).each do |col|
         column = IntegerConstant.new(col)
-        variable = Variable.new(source_variable_name, :scalar, [column])
+        variable = Variable.new(source_variable_name, :scalar, [column], [column])
         coord = AbstractElement.make_coord(col)
         values[coord] = interpreter.get_value(variable)
       end
@@ -1607,7 +1607,7 @@ class CloseStatement < AbstractStatement
   end
 
   def uncache_core
-    @filenum_expression.each {|item| item.uncache }
+    @filenum_expression.uncache
   end
 
   def dump
@@ -1913,7 +1913,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, :scalar, [])
+        @control = Variable.new(variable_name, :scalar, [], [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
         @step = nil
         @end = ValueExpressionSet.new(tokens_lists[2], :scalar)
@@ -1924,7 +1924,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, :scalar, [])
+        @control = Variable.new(variable_name, :scalar, [], [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
         @step = ValueExpressionSet.new(tokens_lists[4], :scalar)
         @end = ValueExpressionSet.new(tokens_lists[2], :scalar)
@@ -1935,7 +1935,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, :scalar, [])
+        @control = Variable.new(variable_name, :scalar, [], [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
         @step = ValueExpressionSet.new(tokens_lists[2], :scalar)
         @end = ValueExpressionSet.new(tokens_lists[4], :scalar)
@@ -1946,7 +1946,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, :scalar, [])
+        @control = Variable.new(variable_name, :scalar, [], [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
         @until = ValueExpressionSet.new(tokens_lists[2], :scalar)
       rescue BASICExpressionError => e
@@ -1956,7 +1956,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, :scalar, [])
+        @control = Variable.new(variable_name, :scalar, [], [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
         @until = ValueExpressionSet.new(tokens_lists[2], :scalar)
         @step = ValueExpressionSet.new(tokens_lists[4], :scalar)
@@ -1967,7 +1967,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, :scalar, [])
+        @control = Variable.new(variable_name, :scalar, [], [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
         @step = ValueExpressionSet.new(tokens_lists[2], :scalar)
         @until = ValueExpressionSet.new(tokens_lists[4], :scalar)
@@ -1978,7 +1978,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, :scalar, [])
+        @control = Variable.new(variable_name, :scalar, [], [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
         @while = ValueExpressionSet.new(tokens_lists[2], :scalar)
       rescue BASICExpressionError => e
@@ -1988,7 +1988,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, :scalar, [])
+        @control = Variable.new(variable_name, :scalar, [], [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
         @while = ValueExpressionSet.new(tokens_lists[2], :scalar)
         @step = ValueExpressionSet.new(tokens_lists[4], :scalar)
@@ -1999,7 +1999,7 @@ class ForStatement < AbstractStatement
       begin
         tokens1, tokens2 = control_and_start(tokens_lists[0])
         variable_name = VariableName.new(tokens1[0])
-        @control = Variable.new(variable_name, :scalar, [])
+        @control = Variable.new(variable_name, :scalar, [], [])
         @start = ValueExpressionSet.new(tokens2, :scalar)
         @step = ValueExpressionSet.new(tokens_lists[2], :scalar)
         @while = ValueExpressionSet.new(tokens_lists[4], :scalar)
@@ -2193,7 +2193,7 @@ class ForgetStatement < AbstractStatement
         if tokens[0].variable?
           variable_name = VariableName.new(tokens[0])
           # FIX: parse subscripts
-          variable = Variable.new(variable_name, :scalar, [])
+          variable = Variable.new(variable_name, :scalar, [], [])
           @variables << variable
           variablex = XrefEntry.new(variable.to_s, nil, false)
           @elements[:variables] += [variablex]
@@ -3144,7 +3144,7 @@ class NextStatement < AbstractStatement
           @controls << EmptyVariable.new
         elsif tokens.size == 1 && tokens[0].variable?
           variable_name = VariableName.new(tokens[0])
-          control = Variable.new(variable_name, :scalar, [])
+          control = Variable.new(variable_name, :scalar, [], [])
           @controls << control
           controlx = XrefEntry.new(control.to_s, nil, false)
           @elements[:variables] += [controlx]
@@ -4159,7 +4159,7 @@ class ArrForgetStatement < AbstractStatement
       tokens_list.each do |tokens|
         if tokens[0].variable?
           variable_name = VariableName.new(tokens[0])
-          variable = Variable.new(variable_name, :array, [])
+          variable = Variable.new(variable_name, :array, [], [])
           @variables << variable
           variablex = XrefEntry.new(variable.to_s, nil, false)
           @elements[:variables] += [variablex]
@@ -4246,7 +4246,8 @@ class ArrInputStatement < AbstractStatement
         base = $options['base'].value
         (base..dims[0].to_i).each do |col|
           coord = AbstractElement.make_coord(col)
-          variable = Variable.new(name, :array, coord)
+          wcoord = interpreter.wrap_subscripts(name, coord)
+          variable = Variable.new(name, :array, coord, wcoord)
           item_names << variable
         end
       end
@@ -4690,7 +4691,7 @@ class MatForgetStatement < AbstractStatement
       tokens_list.each do |tokens|
         if tokens[0].variable?
           variable_name = VariableName.new(tokens[0])
-          variable = Variable.new(variable_name, :matrix, [])
+          variable = Variable.new(variable_name, :matrix, [], [])
           @variables << variable
           variablex = XrefEntry.new(variable.to_s, nil, false)
           @elements[:variables] += [variablex]
@@ -4779,7 +4780,8 @@ class MatInputStatement < AbstractStatement
           base = $options['base'].value
           (base..dims[0].to_i).each do |col|
             coord = AbstractElement.make_coord(col)
-            variable = Variable.new(name, :matrix, coord)
+            wcoord = interpreter.wrap_subscripts(name, coord)
+            variable = Variable.new(name, :matrix, coord, wcoord)
             item_names << variable
           end
         end
@@ -4789,7 +4791,8 @@ class MatInputStatement < AbstractStatement
           (base..dims[0].to_i).each do |row|
             (base..dims[1].to_i).each do |col|
               coords = AbstractElement.make_coords(row, col)
-              variable = Variable.new(name, :matrix, coords)
+              wcoords = interpreter.wrap_subscripts(name, coords)
+              variable = Variable.new(name, :matrix, coords, wcoords)
               item_names << variable
             end
           end

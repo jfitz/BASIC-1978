@@ -1954,6 +1954,10 @@ class UserFunctionName < AbstractElement
   def to_s
     @name.to_s
   end
+
+  def to_sw
+    @name.to_s
+  end
 end
 
 # empty variable, used only for NEXT without control variable
@@ -1976,7 +1980,7 @@ class Variable < AbstractElement
   attr_reader :constant
   attr_reader :subscripts
 
-  def initialize(variable_name, my_shape, subscripts)
+  def initialize(variable_name, my_shape, subscripts, wrapped_subscripts)
     super()
 
     raise(BASICSyntaxError, "'#{variable_name}' is not a variable name") unless
@@ -1988,6 +1992,7 @@ class Variable < AbstractElement
     @constant = false
     @valref = :value
     @subscripts = normalize_subscripts(subscripts)
+    @wrapped_subscripts = wrapped_subscripts
     @variable = true
     @operand = true
     @precedence = 10
@@ -2078,6 +2083,14 @@ class Variable < AbstractElement
     end
   end
 
+  def to_sw
+    if subscripts.empty?
+      @variable_name.to_s
+    else
+      @variable_name.to_s + '(' + @wrapped_subscripts.join(',') + ')'
+    end
+  end
+
   def evaluate(interpreter, stack)
     x = false
     x = evaluate_value(interpreter, stack) if @valref == :value
@@ -2124,7 +2137,11 @@ class Variable < AbstractElement
     if previous_is_array(stack)
       subscripts = get_subscripts(stack)
       @subscripts = interpreter.normalize_subscripts(subscripts)
-      interpreter.check_subscripts(@variable_name, @subscripts)
+
+      @wrapped_subscripts =
+        interpreter.wrap_subscripts(@variable_name, @subscripts)
+
+      interpreter.check_subscripts(@variable_name, @subscripts, @wrapped_subscripts)
     end
 
     interpreter.get_value(self)
@@ -2161,7 +2178,8 @@ class Variable < AbstractElement
 
     (base..n_cols).each do |col|
       coords = AbstractElement.make_coord(col)
-      variable = Variable.new(@variable_name, :array, coords)
+      wcoords = interpreter.wrap_subscripts(@variable_name, coords)
+      variable = Variable.new(@variable_name, :array, coords, wcoords)
       values[coords] = interpreter.get_value(variable)
     end
 
@@ -2201,7 +2219,8 @@ class Variable < AbstractElement
 
     (base..n_cols).each do |col|
       coords = AbstractElement.make_coord(col)
-      variable = Variable.new(@variable_name, :matrix, coords)
+      wcoords = interpreter.wrap_subscripts(@variable_name, coords)
+      variable = Variable.new(@variable_name, :matrix, coords, wcoords)
       values[coords] = interpreter.get_value(variable)
     end
 
@@ -2216,7 +2235,8 @@ class Variable < AbstractElement
     (base..n_rows).each do |row|
       (base..n_cols).each do |col|
         coords = AbstractElement.make_coords(row, col)
-        variable = Variable.new(@variable_name, :matrix, coords)
+        wcoords = interpreter.wrap_subscripts(@variable_name, coords)
+        variable = Variable.new(@variable_name, :matrix, coords, wcoords)
         values[coords] = interpreter.get_value(variable)
       end
     end
@@ -2231,13 +2251,17 @@ class Variable < AbstractElement
       @subscripts = interpreter.normalize_subscripts(subscripts)
       num_args = @subscripts.length
 
+      @wrapped_subscripts =
+        interpreter.wrap_subscripts(@variable_name, @subscripts)
+
       if num_args.zero?
         raise(BASICExpressionError,
               'Variable expects subscripts, found empty parentheses')
       end
 
-      interpreter.check_subscripts(@variable_name, @subscripts)
+      interpreter.check_subscripts(@variable_name, @subscripts, @wrapped_subscripts)
     end
+
     self
   end
 
@@ -2248,12 +2272,16 @@ class Variable < AbstractElement
       @subscripts = interpreter.normalize_subscripts(subscripts)
       num_args = @subscripts.length
 
+      @wrapped_subscripts =
+        interpreter.wrap_subscripts(@variable_name, @subscripts)
+
       if num_args.zero?
         raise(BASICExpressionError,
               'Variable expects subscripts, found empty parentheses')
       end
 
-      interpreter.check_subscripts(@variable_name, @subscripts) unless @set_dims
+      interpreter.check_subscripts(@variable_name, @subscripts, @wrapped_subscripts) unless
+        @set_dims
     end
 
     self

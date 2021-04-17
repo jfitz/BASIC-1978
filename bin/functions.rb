@@ -200,6 +200,14 @@ class UserFunction < AbstractFunction
     @name.to_s
   end
 
+  def to_s
+    @name.to_sw
+  end
+
+  def to_sw
+    @name.to_sw
+  end
+
   def set_content_type(type_stack)
     unless type_stack.empty?
       @arg_types = type_stack.pop if
@@ -300,35 +308,16 @@ class UserFunction < AbstractFunction
 
   # return a single value, a reference to this object
   def evaluate_ref_scalar(interpreter, arg_stack)
-    if previous_is_array(arg_stack)
-      subscripts = arg_stack.pop
-      @subscripts = interpreter.normalize_subscripts(subscripts)
-      num_args = @subscripts.length
+    raise BASICSyntaxError.new('function evaluated with arguments') if
+      previous_is_array(arg_stack)
 
-      if num_args.zero?
-        raise(BASICSyntaxError,
-              'Variable expects subscripts, found empty parentheses')
-      end
-
-      interpreter.check_subscripts(@variable_name, @subscripts)
-    end
     self
   end
 
   # return a single value, a reference to this object
   def evaluate_ref_compound(interpreter, arg_stack)
-    if previous_is_array(arg_stack)
-      subscripts = arg_stack.pop
-      @subscripts = interpreter.normalize_subscripts(subscripts)
-      num_args = @subscripts.length
-
-      if num_args.zero?
-        raise(BASICSyntaxError,
-              'Variable expects subscripts, found empty parentheses')
-      end
-
-      interpreter.check_subscripts(@variable_name, @subscripts)
-    end
+    raise BASICSyntaxError.new('function evaluated with arguments') if
+      previous_is_array(arg_stack)
 
     self
   end

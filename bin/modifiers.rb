@@ -399,7 +399,7 @@ class ForModifier < AbstractModifier
       control_tokens[0].variable?
 
     control_name = VariableName.new(control_tokens[0])
-    @control = Variable.new(control_name, :scalar, [])
+    @control = Variable.new(control_name, :scalar, [], [])
     @start = ValueExpressionSet.new(start_tokens, :scalar)
 
     @step = ValueExpressionSet.new(step_tokens, :scalar) unless
