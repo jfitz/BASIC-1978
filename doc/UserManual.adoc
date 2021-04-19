@@ -2356,6 +2356,9 @@ Functions may be used in expressions.
 |RND(x) |numeric |Return a random number from zero to x. The value is a floating-point value; RND(1) can return any value from zero to 1. A value of zero or less than zero is considered to be 1.
 |RND() |numeric |Equivalent to RND(1).
 |RND | numeric |Special form of RND, equivalent to RND(1).
+|RND$(i) |string |Return a string of length n, consting of random uppercase letters.
+|RND$() |string |Equivalent to RND$(6).
+|RND$ |string |Special form of RND$, equivalent to RND$(6).
 |ROUND(x,p) |Rounds the value x to p places.
 |SEC(x) |numeric |Computes the secant of x, where x is in radians.
 |SGN(x) |numeric |Returns 1, 0, or -1, for positive, zero, or negative values of x.
@@ -2377,15 +2380,21 @@ Functions may be used in expressions.
 |UNPACK%(t$)|integer array |Converts a string variable (or expression) to an array of integer values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
 |VAL(t$) |string |Converts a string to a numeric value. Ignores leading spaces. Converts digits and stops on first non-numeric character.
 |ZER1(n) |numeric array |Creates an array containing all zeros, with n values
-|ZER2(n) |numeric matrix|Creates a matrix containing all zeros, with n columns
-|ZER(n) |numeric matrix|Synonym for ZER2(n)
-|ZER2(r,c) |numeric matrix|Creates a matrix containing all zeros, with r rows and c columns.
-|ZER(r,c) |numeric matrix|Synonym for ZER2(r,c)
+|ZER2(n) |numeric matrix |Creates a matrix containing all zeros, with n columns
+|ZER(n) |numeric matrix |Synonym for ZER2(n)
+|ZER2(r,c) |numeric matrix |Creates a matrix containing all zeros, with r rows and c columns.
+|ZER(r,c) |numeric matrix |Synonym for ZER2(r,c)
 |ZER or ZER() |numeric matrix |Creates a matrix containins all zeros, with dimensions based on the assignment target.
 |==========
 
 OPTION BASE 1 breaks the PACK$() and UNPACK%() functions, as they both access index position zero.
 
+Scalar function special forms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The functions RND() and RND$() have normal forms and special forms.
+The normal forms require a parameter to specify the upper range of values or the length of the string.
+The special forms use a value of 1 for the upper bound and 6 for the length of a string.
 
 Array and matrix function special forms
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -954,7 +954,7 @@ class Interpreter
 
     clear_previous_lines
 
-    NumericConstant.new(@randomizer.rand(upper_bound))
+    @randomizer.rand(upper_bound)
   end
 
   # set a new randomizer (unless option says to ignore)

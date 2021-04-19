@@ -1787,16 +1787,107 @@ class FunctionRnd < AbstractFunction
 
       if match_args_to_signature(args, @signature_0)
         arg = default_args(interpreter)
-        res = interpreter.rand(arg)
+        value = interpreter.rand(arg)
       elsif match_args_to_signature(args, @signature_1)
-        res = interpreter.rand(args[0])
+        value = interpreter.rand(args[0])
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
       end
     else
       arg = default_args(interpreter)
-      res = interpreter.rand(arg)
+      value = interpreter.rand(arg)
     end
+
+    res = NumericConstant.new(value)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function RND$
+class FunctionRndT < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+    @constant = false
+
+    @default_shape = :scalar
+    @signature_0 = []
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+  end
+
+  def set_content_type(type_stack)
+    unless type_stack.empty?
+      @arg_types = type_stack.pop if
+        type_stack[-1].class.to_s == 'Array'
+    end
+
+    type_stack.push(@content_type)
+  end
+
+  def set_shape(shape_stack)
+    unless shape_stack.empty?
+      @arg_shapes = shape_stack.pop if shape_stack[-1].class.to_s == 'Array'
+    end
+
+    shape_stack.push(@shape)
+  end
+  
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
+    end
+
+    # RND$() is never constant
+
+    constant_stack.push(@constant)
+  end
+
+  # return a single value
+  def evaluate(interpreter, arg_stack)
+    # assume the set of uppercase alphas
+    set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    # parameters specify length of string and may change set
+    if previous_is_array(arg_stack)
+      args = arg_stack.pop
+
+      return @cached unless @cached.nil?
+
+      if match_args_to_signature(args, @signature_0)
+        count = default_args(interpreter)
+      elsif match_args_to_signature(args, @signature_1)
+        count = args[0]
+      else
+        raise BASICRuntimeError.new(:te_args_no_match, @name)
+      end
+    else
+      count = default_args(interpreter)
+    end
+
+    length = count.to_i
+
+    # negative length means random length up to positive value
+    if length < 0
+      v1 = interpreter.rand(NumericConstant.new(-length))
+      v2 = v1 + 1
+      length = v2.to_i
+    end
+
+    # generate N characters from specified set
+    s = ''
+
+    (1..length).each do |i|
+      v1 = interpreter.rand(NumericConstant.new(set.size))
+      v2 = v1.to_i
+      raise Exception.new('RND$ out of range') if v2 >= set.size
+      c = set[v2]
+      s += c
+    end
+
+    res = TextConstant.new(s)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2465,6 +2556,7 @@ class FunctionFactory
     'PROD%' => FunctionProd,
     'RIGHT$' => FunctionRight,
     'RND' => FunctionRnd,
+    'RND$' => FunctionRndT,
     'ROUND' => FunctionRound,
     'SEC' => FunctionSec,
     'SGN' => FunctionSgn,
