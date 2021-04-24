@@ -2376,8 +2376,8 @@ Functions may be used in expressions.
 |TAN(x) |numeric |Computes the tangent of x, where x is in radians.
 |TIME(n) |numeric |Returns the time since the start of the program, in seconds.
 |TRN(m) |matrix |Transposes values in matrix m, exchanging values by rows and columns.
-|UNPACK(t$)|numeric array |Converts a string variable (or expression) to an array of numeric values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
-|UNPACK%(t$)|integer array |Converts a string variable (or expression) to an array of integer values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
+|UNPACK(t$) |numeric array |Converts a string variable (or expression) to an array of numeric values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
+|UNPACK%(t$) |integer array |Converts a string variable (or expression) to an array of integer values. The first element (index 0) contains the number of converted elements. Each element is the ASCII value for the corresponding character in the original string.
 |VAL(t$) |string |Converts a string to a numeric value. Ignores leading spaces. Converts digits and stops on first non-numeric character.
 |ZER1(n) |numeric array |Creates an array containing all zeros, with n values
 |ZER2(n) |numeric matrix |Creates a matrix containing all zeros, with n columns
@@ -2416,6 +2416,690 @@ The special form allows for parameters to be omitted.
 	260 ARR C = ZER1
 
 In this special form, the target variable must already exist and have dimensions specified.
+
+ABS(x)
+~~~~~~
+
+numeric
+
+Computes the absolute value of x.
+
+ASCII(t$)
+~~~~~~~~~
+
+numeric
+
+Returns the ASCII value of the first character of the string t.
+The character must be in the printable range of 32 to 126.
+
+ASCII%(t$)
+~~~~~~~~~~
+
+integer
+
+Returns the ASCII value of the first character of the string t.
+The character must be in the printable range of 32 to 126.
+
+ASC(t$)
+~~~~~~~
+
+numeric
+
+Synonym for ASCII().
+
+ASC%(t$)
+~~~~~~~~
+
+integer
+
+Synonym for ASCII%().
+
+ARCCOS(x)
+~~~~~~~~~
+
+numeric
+
+Computes the arccosine of x, providing the answer in radians.
+
+ARCSIN(x)
+~~~~~~~~~
+
+numeric
+
+Computes the arcsine of x, providing the answer in radians.
+
+ARCTAN(x)
+~~~~~~~~~
+
+numeric
+
+Computes the arctangent of x, providing the answer in radians.
+
+ARCTAN(y,x)
+~~~~~~~~~~~
+
+numeric
+
+Computes the arctangent of y and x, providing the answer in radians.
+
+ATN(x)
+~~~~~~
+
+numeric
+
+Synonym for ARCTAN(x)
+
+ATN(y,x)
+~~~~~~~~
+
+numeric
+
+Synonym for ARCTAN(y,x)
+
+AVG(a)
+~~~~~~
+
+numeric
+
+Computes average of elements in array.
+
+CHR$(n)
+~~~~~~~
+
+string
+
+Returns a string of one character, defined by n.
+N must be within the ASCII printable range of 32 to 126.
+
+CON1(n)
+~~~~~~~
+
+numeric array
+
+Creates an array containing all ones, with n values.
+
+CON2(n)
+~~~~~~~
+
+numeric matrix
+
+Creates a matrix containing all ones, with n columns and n rows.
+
+CON2(r,c)
+~~~~~~~~~
+
+numeric matrix
+
+Creates a matrix containing all ones, with r rows and c columns.
+
+CON(n)
+~~~~~~
+
+numeric matrix
+
+Synonym for CON2(n).
+
+CON(r,c)
+~~~~~~~~
+
+numeric matrix
+
+Synonym for CON2(r,c).
+
+CON()
+~~~~~
+
+numeric matrix
+
+Creates a matrix containing all ones, with dimensions based on the assignment target.
+
+CON
+~~~
+
+numeric matrix
+
+Special form of CON().
+
+COS(r)
+~~~~~~
+
+numeric
+
+Computes the cosine of r, where r is in radians.
+
+COT(r)
+~~~~~~
+
+numeric
+
+Computes the cotangent of r, where r is in radians.
+
+CSC(r)
+~~~~~~
+
+numeric
+
+Computes the cosecant of r, where r is in radians.
+
+DET(m)
+~~~~~~
+
+numeric
+
+Computes the determinant of the matrix.
+The matrix must be square.
+
+ERL(n)
+~~~~~~
+
+numeric
+
+Returns the line number (n = 0), statement index (n = 1), or modifier index (n = 2) of the line which caused the current error.
+
+ERL()
+~~~~~
+
+numeric
+
+Same as ERL(0).
+
+ERL
+~~~
+
+numeric
+
+Same as ERL(0).
+
+ERR()
+~~~~~
+
+numeric
+
+Returns the current error code.
+
+ERR
+~~~
+
+numeric
+
+Same as ERR().
+
+EXP(x)
+~~~~~~
+
+numeric
+
+Computes e to the x power.
+
+FIX(x)
+~~~~~~
+
+numeric
+
+Returns the integer part of a number.
+Truncates towards negative infinity.
+
+FIX%(x)
+~~~~~~~
+
+integer
+
+Returns the integer part of a number.
+Truncates towards negative infinity.
+
+FRAC(x)
+~~~~~~~
+
+numeric
+
+Return the fraction part of a numeric value.
+Retains the sign of the original value.
+
+IDN(n)
+~~~~~~
+
+numeric matrix
+
+Creates an identity matrix (all zeros except for ones on the diagonal) with n rows and n columns.
+
+IDN(n,n)
+~~~~~~~~
+
+numeric matrix
+
+Same as IDN(x).
+The two values must be identical, as identity matrices are always square.
+
+IDN()
+~~~~~
+
+numeric matrix
+
+Creates an identity matrix with dimensions based on the assignment target.
+
+IDN
+~~~
+
+numeric matrix
+
+Special form of IDN().
+
+INSTR(t$,s$)
+~~~~~~~~~~~~
+
+numeric
+
+Find string s in string t and report position.
+
+INSTR(i,t$,s$)
+~~~~~~~~~~~~~~
+
+numeric
+
+Find string s in string t and report position.
+Start search as position i (first position is 1, not 0).
+
+INSTR%(t$,s$)
+~~~~~~~~~~~~~
+
+integer
+
+Find string s in string t and report position.
+
+INSTR%(i,t$,s$)
+~~~~~~~~~~~~~~~
+
+integer
+
+Find string s in string t and report position.
+Start search as position i (first position is 1, not 0).
+
+INT(x)
+~~~~~~
+
+numeric
+
+Return the integer part of a numeric value.
+Truncates towards zero.
+
+INT%(x)
+~~~~~~~
+
+integer
+
+Return the integer part of a numeric value.
+Truncates towards zero.
+
+LEFT$(t$,n)
+~~~~~~~~~~~
+
+string
+
+Leftmost n characters of string t.
+
+LEN(t)
+~~~~~~
+
+numeric
+
+Returns the length of the string value.
+
+LOG(x)
+~~~~~~
+
+numeric
+
+Computes the natural log of x.
+A value of zero or a negative value will cause an error.
+
+LOG10(x)
+~~~~~~~~
+
+numeric
+
+Computes the base-10 log of x.
+A value of zero or a negative value will cause an error.
+
+LOG2(x)
+~~~~~~~
+
+numeric
+
+Computes the base-2 log of x.
+A value of zero or a negative value will cause an error.
+
+MID$(t$,p,l)
+~~~~~~~~~~~~
+
+string
+
+Extract substring of t from position p for length l.
+The first character is position 1.
+If p is greater than the length of the string, the result is empty ("").
+If l extends beyond the end of the string, the result is ths string from p to the end.
+
+NCOL(m)
+~~~~~~~
+
+numeric
+
+Number of columns in matrix m.
+Matrix may be of any type.
+
+NCOL%(m)
+~~~~~~~~
+
+integer
+
+Number of columns in matrix m.
+Matrix may be of any type.
+
+NELEM(a)
+
+numeric
+
+Number of elements in array a.
+Array may be of any type.
+
+NELEM%(a)
+~~~~~~~~~
+
+integer
+
+Number of elements in array a.
+Array may be of any type.
+
+NROW(m)
+~~~~~~~
+
+numeric
+
+Number of rows in matrix m.
+Matrix may be of any type.
+
+NROW%(m)
+~~~~~~~~
+
+numeric
+
+Number of rows in matrix m.
+Matrix may be of any type.
+
+NUM(x)
+~~~~~~
+
+numeric
+
+Converts string, integer, or boolean to numeric.
+
+PACK$(a)
+~~~~~~~~
+
+string
+
+Converts a numeric array to a string variable.
+The first element (index 0) must contain the number of numeric values to convert.
+(It may be zero.)
+Each numeric element is converted to the corresponding ASCII character.
+
+PROD(a)
+~~~~~~~
+
+numeric
+
+Computes product of elements in array.
+
+PROD%(a%)
+~~~~~~~~~
+
+integer
+
+Computes product of elements in array.
+
+RIGHT$(t$,n)
+~~~~~~~~~~~~
+
+string
+
+Rightmost n characters of string t.
+
+RND(x)
+~~~~~~
+
+numeric
+
+Return a random number from zero to x.
+The value is a floating-point value; RND(1) can return any value from zero to 1.
+A value of zero or less than zero is considered to be 1.
+
+RND()
+~~~~~
+
+numeric
+
+Equivalent to RND(1).
+
+RND
+~~~
+
+numeric
+
+Special form of RND, equivalent to RND(1).
+
+RND$(i)
+
+string
+
+Return a string of length n, consting of random uppercase letters.
+
+RND$()
+
+string
+
+Equivalent to RND$(6).
+
+RND$
+
+string
+
+Special form of RND$, equivalent to RND$(6).
+
+ROUND(x,p)
+~~~~~~~~~~
+
+Rounds the value x to p places.
+
+SEC(r)
+~~~~~~
+
+numeric
+
+Computes the secant of r, where r is in radians.
+
+SGN(x)
+~~~~~~
+
+numeric
+
+Returns 1, 0, or -1, for positive, zero, or negative values of x.
+
+SIN(r)
+~~~~~~
+
+numeric
+
+Computes the sine of r, where r is in radians.
+
+SPACE$(n)
+~~~~~~~~~
+
+string
+
+Creates a string of n space characters.
+
+SPC$(n)
+~~~~~~~
+
+string
+
+Synonym for SPACE$(n).
+
+SPC(n)
+~~~~~~
+
+string
+
+Synonym for SPACE$(n).
+
+SQR(x)
+~~~~~~
+
+|numeric
+
+Computes the square root of x.
+A negative value will cause an error.
+
+SUM(a)
+~~~~~~
+
+numeric
+
+Computes sum of elements in array.
+
+SUM%(a%)
+~~~~~~~~
+
+integer
+
+Computes sum of elements in array.
+
+STR$(n)
+~~~~~~~
+
+string
+
+Converts numeric value to string.
+
+STR$(n,p)
+~~~~~~~~~
+
+string
+
+Converts numeric value to string, formats with p decimal places.
+
+STRING$(t,n)
+~~~~~~~~~~~~
+
+string
+
+Repeats first character of string n times.
+
+TAB(n)
+~~~~~~
+
+string
+
+Advances the print position to column 'n'.
+Returns a string value with the proper number of spaces or backspaces.
+Useful in PRINT statements.
+In other statements, it returns the string value but does not advance the print position.
+
+TAN(r)
+~~~~~~
+
+numeric
+
+Computes the tangent of r, where r is in radians.
+
+TIME(n)
+~~~~~~~
+
+numeric
+
+Returns the time since the start of the program, in seconds.
+
+TRN(m)
+~~~~~~
+
+matrix
+
+Transposes values in matrix m, exchanging values by rows and columns.
+
+UNPACK(t$)
+~~~~~~~~~~
+
+numeric array
+
+Converts a string variable (or expression) to an array of numeric values.
+The first element (index 0) contains the number of converted elements.
+Each element is the ASCII value for the corresponding character in the original string.
+
+UNPACK%(t$)
+~~~~~~~~~~~
+
+integer array
+
+Converts a string variable (or expression) to an array of integer values.
+The first element (index 0) contains the number of converted elements.
+Each element is the ASCII value for the corresponding character in the original string.
+
+VAL(t$)
+~~~~~~~
+
+string
+
+Converts a string to a numeric value.
+Ignores leading spaces.
+Converts digits and stops on first non-numeric character.
+
+ZER1(n)
+~~~~~~~
+
+numeric array
+
+Creates an array containing all zeros, with n values.
+
+ZER2(n)
+~~~~~~~
+
+numeric matrix
+
+Creates a matrix containing all zeros, with n columns and n rows.
+
+ZER2(r,c)
+~~~~~~~~~
+
+numeric matrix
+
+Creates a matrix containing all zeros, with r rows and c columns.
+
+ZER(n)
+~~~~~~
+
+numeric matrix
+
+Synonym for ZER2(n).
+
+ZER(r,c)
+~~~~~~~~
+
+numeric matrix
+
+Synonym for ZER2(r,c).
+
+ZER()
+~~~~~
+
+numeric matrix
+
+Creates a matrix containins all zeros, with dimensions based on the assignment target.
+
+ZER
+~~~
+
+numeric matrix
+
+Special form of ZER().
 
 Statement modifiers
 -------------------
