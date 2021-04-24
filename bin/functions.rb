@@ -1820,6 +1820,25 @@ class FunctionRndT < AbstractFunction
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar }
     ]
+    @signature_3 = [
+      { 'type' => :numeric, 'shape' => :scalar },
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :string, 'shape' => :scalar }
+    ]
+
+    @sets = {
+      'A' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      'a' => 'abcdefghijklmnopqrstuvwxyz',
+      'B' => 'BCDFGHJKLMNPQRSTVWXYZ',
+      'b' => 'bcdfghjklmnpqrstvwxyz',
+      'C' => 'ACDEFHJKLMNPQRTUVWXY',
+      'c' => 'acdefhjklmnpqrtuvwxy',
+      '0' => '0123456789',
+      '1' => '123456789',
+      'X' => '01234567890ABCDEF',
+      'x' => '01234567890abcdef'
+    }
+    
   end
 
   def set_content_type(type_stack)
@@ -1854,19 +1873,6 @@ class FunctionRndT < AbstractFunction
     # assume the set of uppercase alphas
     set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-    sets = {
-      'A' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-      'a' => 'abcdefghijklmnopqrstuvwxyz',
-      'B' => 'BCDFGHJKLMNPQRSTVWXYZ',
-      'b' => 'bcdfghjklmnpqrstvwxyz',
-      'C' => 'ACDEFHJKLMNPQRTUVWXY',
-      'c' => 'acdefhjklmnpqrtuvwxy',
-      '0' => '0123456789',
-      '1' => '123456789',
-      'X' => '01234567890ABCDEF',
-      'x' => '01234567890abcdef'
-    }
-    
     # parameters specify length of string and may change set
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -1880,7 +1886,13 @@ class FunctionRndT < AbstractFunction
       elsif match_args_to_signature(args, @signature_2)
         count = args[0]
         key = args[1].value
-        set = sets[key] if sets.include?(key)
+        set = key
+        set = @sets[key] if @sets.include?(key)
+      elsif match_args_to_signature(args, @signature_3)
+        count = args[0]
+        key = args[1].value
+        set = key + args[2].value
+        set = @sets[key] + args[2].value if @sets.include?(key)
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
       end
