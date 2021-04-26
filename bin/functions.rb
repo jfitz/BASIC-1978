@@ -5,6 +5,7 @@ class AbstractFunction < AbstractElement
   attr_reader :content_type
   attr_reader :shape
   attr_reader :constant
+  attr_reader :warnings
 
   def initialize(text)
     super()
@@ -17,6 +18,7 @@ class AbstractFunction < AbstractElement
     @content_type = :integer if @name.to_s[-1] == '%'
     @shape = nil
     @constant = false
+    @warnings = []
     @valref = :value
     @operand = true
     @precedence = 10

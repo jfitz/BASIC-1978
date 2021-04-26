@@ -9,6 +9,7 @@ class UnaryOperator < AbstractElement
   attr_reader :content_type
   attr_reader :shape
   attr_reader :constant
+  attr_reader :warnings
   attr_reader :arguments
   attr_reader :precedence
 
@@ -19,6 +20,7 @@ class UnaryOperator < AbstractElement
     @content_type = :unknown
     @shape = :unknown
     @constant = false
+    @warnings = []
     @precedence = 0
     @arguments = nil
     @operator = true
@@ -119,6 +121,7 @@ class BinaryOperator < AbstractElement
   attr_reader :content_type
   attr_reader :shape
   attr_reader :constant
+  attr_reader :warnings
   attr_reader :arguments
   attr_reader :precedence
 
@@ -130,6 +133,7 @@ class BinaryOperator < AbstractElement
     @content_type = :unknown
     @shape = :unknown
     @constant =  false
+    @warnings = []
     @arguments = nil
     @precedence = 0
     @operator = true
@@ -948,6 +952,9 @@ class BinaryOperatorPlus < BinaryOperator
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
 
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
+
     @content_type = result_type(a_type, b_type)
     type_stack.push(@content_type)
   end
@@ -978,6 +985,9 @@ class BinaryOperatorMinus < BinaryOperator
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
+
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
 
     @content_type = result_type(a_type, b_type)
     type_stack.push(@content_type)
@@ -1013,6 +1023,9 @@ class BinaryOperatorMultiply < BinaryOperator
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") unless
       arg_1_types.include?(a_type) && arg_2_types.include?(b_type)
 
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
+
     @content_type = result_type(a_type, b_type)
     type_stack.push(@content_type)
   end
@@ -1043,6 +1056,9 @@ class BinaryOperatorDivide < BinaryOperator
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
+
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
 
     @content_type = result_type(a_type, b_type)
     type_stack.push(@content_type)
@@ -1105,6 +1121,9 @@ class BinaryOperatorEqual < BinaryOperator
 
     arg_types = [:numeric, :integer, :string, :boolean]
 
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
+
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
@@ -1144,6 +1163,9 @@ class BinaryOperatorNotEqual < BinaryOperator
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
 
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
+
     @content_type = :boolean
     @content_type = :numeric if !$options['relational_boolean'].value
     type_stack.push(@content_type)
@@ -1177,6 +1199,9 @@ class BinaryOperatorLess < BinaryOperator
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
+
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
 
     @content_type = :boolean
     @content_type = :numeric if !$options['relational_boolean'].value
@@ -1213,6 +1238,9 @@ class BinaryOperatorLessEqual < BinaryOperator
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
 
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
+
     @content_type = :boolean
     @content_type = :numeric if !$options['relational_boolean'].value
     type_stack.push(@content_type)
@@ -1246,6 +1274,9 @@ class BinaryOperatorGreater < BinaryOperator
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
+
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
 
     @content_type = :boolean
     @content_type = :numeric if !$options['relational_boolean'].value
@@ -1282,6 +1313,9 @@ class BinaryOperatorGreaterEqual < BinaryOperator
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
       !compatible(a_type, b_type)
 
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
+
     @content_type = :boolean
     @content_type = :numeric if !$options['relational_boolean'].value
     type_stack.push(@content_type)
@@ -1314,6 +1348,9 @@ class BinaryOperatorAnd < BinaryOperator
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type)
+
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
 
     @content_type = :boolean
     @content_type = :numeric if !$options['relational_boolean'].value
@@ -1349,6 +1386,9 @@ class BinaryOperatorOr < BinaryOperator
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type)
+
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
 
     @content_type = :boolean
     @content_type = :numeric if !$options['relational_boolean'].value
