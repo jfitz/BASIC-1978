@@ -39,6 +39,19 @@ class BASICArray
     values
   end
 
+  def self.make_rndt_array(dims, interpreter, length, set)
+    values = {}
+
+    base = $options['base'].value
+
+    (base..dims[0].to_i).each do |col|
+      coords = AbstractElement.make_coord(col)
+      values[coords] = TextConstant.new_rand(interpreter, length, set)
+    end
+
+    values
+  end
+
   def self.zero_values(dimensions)
     case dimensions.size
     when 0
@@ -84,6 +97,19 @@ class BASICArray
       raise BASICSyntaxError, 'No dimensions in array'
     when 1
       BASICArray.make_rndi_array(dimensions, interpreter, upper_bound)
+    when 2
+      raise BASICSyntaxError, 'Too many dimensions in array'
+    else
+      raise BASICSyntaxError, 'Too many dimensions in array'
+    end
+  end
+
+  def self.rndt_values(dimensions, interpreter, length, set)
+    case dimensions.size
+    when 0
+      raise BASICSyntaxError, 'No dimensions in array'
+    when 1
+      BASICArray.make_rndt_array(dimensions, interpreter, length, set)
     when 2
       raise BASICSyntaxError, 'Too many dimensions in array'
     else
