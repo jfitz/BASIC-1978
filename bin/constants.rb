@@ -537,6 +537,11 @@ class NumericConstant < AbstractValueElement
     end
   end
 
+  def self.new_rand(interpreter, upper_bound)
+    v = interpreter.rand(upper_bound)
+    NumericConstant.new(v)
+  end
+
   private
 
   def float_to_possible_int(f)
@@ -924,6 +929,11 @@ class IntegerConstant < AbstractValueElement
     text.to_f.to_i if /\A\s*[+-]?\d+%\z/ =~ text
   end
 
+  def self.new_rand(interpreter, upper_bound)
+    v = interpreter.rand(upper_bound)
+    IntegerConstant.new(v.to_i)
+  end
+
   attr_reader :symbol_text
 
   def initialize(text)
@@ -1289,6 +1299,28 @@ class TextConstant < AbstractValueElement
   def self.accept?(token)
     classes = %w[TextConstantToken String]
     classes.include?(token.class.to_s)
+  end
+
+  def self.new_rand(interpreter, length, set)
+    # negative length means random length up to positive value
+    if length < 0
+      v1 = interpreter.rand(NumericConstant.new(-length))
+      v2 = v1 + 1
+      length = v2.to_i
+    end
+
+    # generate N characters from specified set
+    s = ''
+
+    (1..length).each do |i|
+      v1 = interpreter.rand(NumericConstant.new(set.size))
+      v2 = v1.to_i
+      raise Exception.new('RND$ out of range') if v2 >= set.size
+      c = set[v2]
+      s += c
+    end
+
+    TextConstant.new(s)
   end
 
   attr_reader :value

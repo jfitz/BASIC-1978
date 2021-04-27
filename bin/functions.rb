@@ -1789,18 +1789,16 @@ class FunctionRnd < AbstractFunction
 
       if match_args_to_signature(args, @signature_0)
         arg = default_args(interpreter)
-        value = interpreter.rand(arg)
+        res = NumericConstant.new_rand(interpreter, arg)
       elsif match_args_to_signature(args, @signature_1)
-        value = interpreter.rand(args[0])
+        res = NumericConstant.new_rand(interpreter, args[0])
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
       end
     else
       arg = default_args(interpreter)
-      value = interpreter.rand(arg)
+      res = NumericConstant.new_rand(interpreter, arg)
     end
-
-    res = NumericConstant.new(value)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1856,18 +1854,16 @@ class FunctionRndI < AbstractFunction
 
       if match_args_to_signature(args, @signature_0)
         arg = default_args(interpreter)
-        value = interpreter.rand(arg)
+        res = IntegerConstant.new_rand(interpreter, arg)
       elsif match_args_to_signature(args, @signature_1)
-        value = interpreter.rand(args[0])
+        res = IntegerConstant.new_rand(interpreter, args[0])
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
       end
     else
       arg = default_args(interpreter)
-      value = interpreter.rand(arg)
+      res = IntegerConstant.new_rand(interpreter, arg)
     end
-
-    res = IntegerConstant.new(value)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1971,25 +1967,7 @@ class FunctionRndT < AbstractFunction
 
     length = count.to_i
 
-    # negative length means random length up to positive value
-    if length < 0
-      v1 = interpreter.rand(NumericConstant.new(-length))
-      v2 = v1 + 1
-      length = v2.to_i
-    end
-
-    # generate N characters from specified set
-    s = ''
-
-    (1..length).each do |i|
-      v1 = interpreter.rand(NumericConstant.new(set.size))
-      v2 = v1.to_i
-      raise Exception.new('RND$ out of range') if v2 >= set.size
-      c = set[v2]
-      s += c
-    end
-
-    res = TextConstant.new(s)
+    res = TextConstant.new_rand(interpreter, length, set)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2118,7 +2096,7 @@ class FunctionRnd1I < AbstractFunction
         constant_stack[-1].class.to_s == 'Array'
     end
 
-    # RND1() is never constant
+    # RND1%() is never constant
 
     constant_stack.push(@constant)
   end
