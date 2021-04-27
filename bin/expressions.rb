@@ -26,6 +26,19 @@ class BASICArray
     values
   end
 
+  def self.make_rndi_array(dims, interpreter, upper_bound)
+    values = {}
+
+    base = $options['base'].value
+
+    (base..dims[0].to_i).each do |col|
+      coords = AbstractElement.make_coord(col)
+      values[coords] = IntegerConstant.new(interpreter.rand(upper_bound))
+    end
+
+    values
+  end
+
   def self.zero_values(dimensions)
     case dimensions.size
     when 0
@@ -58,6 +71,19 @@ class BASICArray
       raise BASICSyntaxError, 'No dimensions in array'
     when 1
       BASICArray.make_rnd_array(dimensions, interpreter, upper_bound)
+    when 2
+      raise BASICSyntaxError, 'Too many dimensions in array'
+    else
+      raise BASICSyntaxError, 'Too many dimensions in array'
+    end
+  end
+
+  def self.rndi_values(dimensions, interpreter, upper_bound)
+    case dimensions.size
+    when 0
+      raise BASICSyntaxError, 'No dimensions in array'
+    when 1
+      BASICArray.make_rndi_array(dimensions, interpreter, upper_bound)
     when 2
       raise BASICSyntaxError, 'Too many dimensions in array'
     else
@@ -326,6 +352,19 @@ class Matrix
     values
   end
 
+  def self.make_rndi_array(dims, interpreter, upper_bound)
+    values = {}
+
+    base = $options['base'].value
+
+    (base..dims[0].to_i).each do |col|
+      coords = AbstractElement.make_coord(col)
+      values[coords] = IntegerConstant.new(interpreter.rand(upper_bound))
+    end
+
+    values
+  end
+
   def self.make_matrix(dims, init_value)
     values = {}
 
@@ -350,6 +389,21 @@ class Matrix
       (base..dims[1].to_i).each do |col|
         coords = AbstractElement.make_coords(row, col)
         values[coords] = NumericConstant.new(interpreter.rand(upper_bound))
+      end
+    end
+
+    values
+  end
+
+  def self.make_rndi_matrix(dims, interpreter, upper_bound)
+    values = {}
+
+    base = $options['base'].value
+
+    (base..dims[0].to_i).each do |row|
+      (base..dims[1].to_i).each do |col|
+        coords = AbstractElement.make_coords(row, col)
+        values[coords] = IntegerConstant.new(interpreter.rand(upper_bound))
       end
     end
 
@@ -390,6 +444,19 @@ class Matrix
       Matrix.make_rnd_array(dimensions, interpreter, upper_bound)
     when 2
       Matrix.make_rnd_matrix(dimensions, interpreter, upper_bound)
+    else
+      raise BASICSyntaxError, 'Too many dimensions in matrix'
+    end
+  end
+
+  def self.rndi_values(dimensions, interpreter, upper_bound)
+    case dimensions.size
+    when 0
+      raise BASICSyntaxError, 'No dimensions in matrix'
+    when 1
+      Matrix.make_rndi_array(dimensions, interpreter, upper_bound)
+    when 2
+      Matrix.make_rndi_matrix(dimensions, interpreter, upper_bound)
     else
       raise BASICSyntaxError, 'Too many dimensions in matrix'
     end

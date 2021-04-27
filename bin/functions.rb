@@ -1807,6 +1807,73 @@ class FunctionRnd < AbstractFunction
   end
 end
 
+# function RND%
+class FunctionRndI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+    @constant = false
+
+    @default_shape = :scalar
+    @signature_0 = []
+    @signature_1 = [{ 'type' => :integer, 'shape' => :scalar }]
+  end
+
+  def set_content_type(type_stack)
+    unless type_stack.empty?
+      @arg_types = type_stack.pop if
+        type_stack[-1].class.to_s == 'Array'
+    end
+
+    type_stack.push(@content_type)
+  end
+
+  def set_shape(shape_stack)
+    unless shape_stack.empty?
+      @arg_shapes = shape_stack.pop if shape_stack[-1].class.to_s == 'Array'
+    end
+
+    shape_stack.push(@shape)
+  end
+  
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
+    end
+
+    # RND%() is never constant
+
+    constant_stack.push(@constant)
+  end
+
+  # return a single value
+  def evaluate(interpreter, arg_stack)
+    if previous_is_array(arg_stack)
+      args = arg_stack.pop
+
+      return @cached unless @cached.nil?
+
+      if match_args_to_signature(args, @signature_0)
+        arg = default_args(interpreter)
+        value = interpreter.rand(arg)
+      elsif match_args_to_signature(args, @signature_1)
+        value = interpreter.rand(args[0])
+      else
+        raise BASICRuntimeError.new(:te_args_no_match, @name)
+      end
+    else
+      arg = default_args(interpreter)
+      value = interpreter.rand(arg)
+    end
+
+    res = IntegerConstant.new(value)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function RND$
 class FunctionRndT < AbstractFunction
   def initialize(text)
@@ -2011,6 +2078,88 @@ class FunctionRnd1 < AbstractFunction
   end
 end
 
+# function RND1%
+class FunctionRnd1I < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :array
+    @constant = false
+
+    @default_shape = :scalar
+    @signature_0 = []
+    @signature_1 = [{ 'type' => :integer, 'shape' => :scalar }]
+    @signature_2 = [
+      { 'type' => :integer, 'shape' => :scalar },
+      { 'type' => :integer, 'shape' => :scalar }
+    ]
+  end
+
+  def set_content_type(type_stack)
+    unless type_stack.empty?
+      @arg_types = type_stack.pop if
+        type_stack[-1].class.to_s == 'Array'
+    end
+
+    type_stack.push(@content_type)
+  end
+
+  def set_shape(shape_stack)
+    unless shape_stack.empty?
+      @arg_shapes = shape_stack.pop if shape_stack[-1].class.to_s == 'Array'
+    end
+
+    shape_stack.push(@shape)
+  end
+  
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      constants = constant_stack.pop if
+        constant_stack[-1].class.to_s == 'Array'
+    end
+
+    # RND1() is never constant
+
+    constant_stack.push(@constant)
+  end
+  
+  def evaluate(interpreter, arg_stack)
+    upper_bound = IntegerConstant.new(100)
+
+    if previous_is_array(arg_stack)
+      args = arg_stack.pop
+
+      return @cached unless @cached.nil?
+
+      if match_args_to_signature(args, @signature_0)
+        args = default_args(interpreter)
+        dims = args.clone
+        values = BASICArray.rndi_values(dims, interpreter, upper_bound)
+        res = BASICArray.new(dims, values)
+      elsif match_args_to_signature(args, @signature_1)
+        dims = args.clone
+        values = BASICArray.rndi_values(dims, interpreter, upper_bound)
+        res = BASICArray.new(dims, values)
+      elsif match_args_to_signature(args, @signature_2)
+        dims = [args[0]]
+        upper_bound = args[1]
+        values = BASICArray.rndi_values(dims, interpreter, upper_bound)
+        res = BASICArray.new(dims, values)
+      else
+        raise BASICRuntimeError.new(:te_args_no_match, @name)
+      end
+    else
+      args = default_args(interpreter)
+      dims = args.clone
+      values = BASICArray.rndi_values(dims, interpreter, upper_bound)
+      res = BASICArray.new(dims, values)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function RND2
 class FunctionRnd2 < AbstractFunction
   def initialize(text)
@@ -2096,6 +2245,99 @@ class FunctionRnd2 < AbstractFunction
       args = default_args(interpreter)
       dims = args.clone
       values = Matrix.rnd_values(dims, interpreter, upper_bound)
+      res = Matrix.new(dims, values)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function RND2%
+class FunctionRnd2I < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :matrix
+    @constant = false
+
+    @default_shape = :scalar
+    @signature_0 = []
+    @signature_1 = [{ 'type' => :integer, 'shape' => :scalar }]
+    @signature_2 =
+      [
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar }
+      ]
+    @signature_3 =
+      [
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar }
+      ]
+  end
+
+  def set_content_type(type_stack)
+    unless type_stack.empty?
+      @arg_types = type_stack.pop if
+        type_stack[-1].class.to_s == 'Array'
+  end
+
+    type_stack.push(@content_type)
+  end
+
+  def set_shape(shape_stack)
+    unless shape_stack.empty?
+      @arg_shapes = shape_stack.pop if shape_stack[-1].class.to_s == 'Array'
+    end
+
+    shape_stack.push(@shape)
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      constants = constant_stack.pop if
+        constant_stack[-1].class.to_s == 'Array'
+    end
+
+    # RND2() is never constant
+
+    constant_stack.push(@constant)
+  end
+
+  def evaluate(interpreter, arg_stack)
+    upper_bound = IntegerConstant.new(100)
+
+    if previous_is_array(arg_stack)
+      args = arg_stack.pop
+
+      return @cached unless @cached.nil?
+
+      if match_args_to_signature(args, @signature_0)
+        args = default_args(interpreter)
+        dims = args.clone
+        values = Matrix.rndi_values(dims, interpreter, upper_bound)
+        res = Matrix.new(dims, values)
+      elsif match_args_to_signature(args, @signature_1)
+        dims = args.clone
+        values = Matrix.rndi_values(dims, interpreter, upper_bound)
+        res = Matrix.new(dims, values)
+      elsif match_args_to_signature(args, @signature_2)
+        dims = args.clone
+        values = Matrix.rndi_values(dims, interpreter, upper_bound)
+        res = Matrix.new(dims, values)
+      elsif match_args_to_signature(args, @signature_3)
+        dims = args.clone[0..1]
+        upper_bound = args[2]
+        values = Matrix.rndi_values(dims, interpreter, upper_bound)
+        res = Matrix.new(dims, values)
+      else
+        raise BASICRuntimeError.new(:te_args_no_match, @name)
+      end
+    else
+      args = default_args(interpreter)
+      dims = args.clone
+      values = Matrix.rndi_values(dims, interpreter, upper_bound)
       res = Matrix.new(dims, values)
     end
 
@@ -2766,9 +3008,12 @@ class FunctionFactory
     'PROD%' => FunctionProd,
     'RIGHT$' => FunctionRight,
     'RND' => FunctionRnd,
+    'RND%' => FunctionRndI,
     'RND$' => FunctionRndT,
     'RND1' => FunctionRnd1,
+    'RND1%' => FunctionRnd1I,
     'RND2' => FunctionRnd2,
+    'RND2%' => FunctionRnd2I,
     'ROUND' => FunctionRound,
     'SEC' => FunctionSec,
     'SGN' => FunctionSgn,

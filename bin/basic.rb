@@ -811,6 +811,7 @@ tokenbuilders =
 
 interpreter = Interpreter.new(console_io)
 interpreter.set_default_args('RND', NumericConstant.new(1))
+interpreter.set_default_args('RND%', IntegerConstant.new(100))
 interpreter.set_default_args('RND$', NumericConstant.new(6))
 program = Program.new(console_io, tokenbuilders)
 interpreter.program = program
