@@ -2403,7 +2403,7 @@ class FunctionRnd2I < AbstractFunction
         constant_stack[-1].class.to_s == 'Array'
     end
 
-    # RND2() is never constant
+    # RND2%() is never constant
 
     constant_stack.push(@constant)
   end
@@ -2441,6 +2441,141 @@ class FunctionRnd2I < AbstractFunction
       args = default_args(interpreter)
       dims = args.clone
       values = Matrix.rndi_values(dims, interpreter, upper_bound)
+      res = Matrix.new(dims, values)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function RND2$
+class FunctionRnd2T < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :matrix
+    @constant = false
+
+    @default_shape = :scalar
+    @signature_0 = []
+    @signature_2 =
+      [
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar }
+      ]
+    @signature_3 =
+      [
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar }
+      ]
+    @signature_4 =
+      [
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :string, 'shape' => :scalar }
+      ]
+    @signature_5 =
+      [
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :integer, 'shape' => :scalar },
+        { 'type' => :string, 'shape' => :scalar },
+        { 'type' => :string, 'shape' => :scalar }
+      ]
+
+    @sets = {
+      'A' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      'a' => 'abcdefghijklmnopqrstuvwxyz',
+      'B' => 'BCDFGHJKLMNPQRSTVWXYZ',
+      'b' => 'bcdfghjklmnpqrstvwxyz',
+      'C' => 'ACDEFHJKLMNPQRTUVWXY',
+      'c' => 'acdefhjklmnpqrtuvwxy',
+      '0' => '0123456789',
+      '1' => '123456789',
+      'X' => '01234567890ABCDEF',
+      'x' => '01234567890abcdef'
+    }
+    
+  end
+
+  def set_content_type(type_stack)
+    unless type_stack.empty?
+      @arg_types = type_stack.pop if
+        type_stack[-1].class.to_s == 'Array'
+  end
+
+    type_stack.push(@content_type)
+  end
+
+  def set_shape(shape_stack)
+    unless shape_stack.empty?
+      @arg_shapes = shape_stack.pop if shape_stack[-1].class.to_s == 'Array'
+    end
+
+    shape_stack.push(@shape)
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      constants = constant_stack.pop if
+        constant_stack[-1].class.to_s == 'Array'
+    end
+
+    # RND2$() is never constant
+
+    constant_stack.push(@constant)
+  end
+
+  def evaluate(interpreter, arg_stack)
+    length = 6
+    set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    if previous_is_array(arg_stack)
+      args = arg_stack.pop
+
+      return @cached unless @cached.nil?
+
+      if match_args_to_signature(args, @signature_0)
+        args = default_args(interpreter)
+        dims = args.clone
+        values = Matrix.rndt_values(dims, interpreter, length, set)
+        res = Matrix.new(dims, values)
+      elsif match_args_to_signature(args, @signature_2)
+        dims = args.clone
+        values = Matrix.rndt_values(dims, interpreter, length, set)
+        res = Matrix.new(dims, values)
+      elsif match_args_to_signature(args, @signature_3)
+        dims = args.clone[0..1]
+        length = args[2].to_i
+        values = Matrix.rndt_values(dims, interpreter, length, set)
+        res = Matrix.new(dims, values)
+      elsif match_args_to_signature(args, @signature_4)
+        dims = args.clone[0..1]
+        length = args[2].to_i
+        key = args[3].value
+        set = key
+        set = @sets[key] if @sets.include?(key)
+        values = Matrix.rndt_values(dims, interpreter, length, set)
+        res = Matrix.new(dims, values)
+      elsif match_args_to_signature(args, @signature_5)
+        dims = args.clone[0..1]
+        length = args[2].to_i
+        key = args[3].value
+        extras = args[4].value
+        set = key + extras
+        set = @sets[key] + extras if @sets.include?(key)
+        values = Matrix.rndt_values(dims, interpreter, length, set)
+        res = Matrix.new(dims, values)
+      else
+        raise BASICRuntimeError.new(:te_args_no_match, @name)
+      end
+    else
+      args = default_args(interpreter)
+      dims = args.clone
+      values = Matrix.rndt_values(dims, interpreter, length, set)
       res = Matrix.new(dims, values)
     end
 
@@ -3118,6 +3253,7 @@ class FunctionFactory
     'RND1$' => FunctionRnd1T,
     'RND2' => FunctionRnd2,
     'RND2%' => FunctionRnd2I,
+    'RND2$' => FunctionRnd2T,
     'ROUND' => FunctionRound,
     'SEC' => FunctionSec,
     'SGN' => FunctionSgn,
