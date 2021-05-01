@@ -867,11 +867,35 @@ class Interpreter
     statement.start_index unless statement.nil?
   end
 
-  def set_action(name, value)
-    $options[name].set(value)
+  def set_action(name, v)
+    $options[name].set(v)
 
     if name == 'trace'
-      @trace_out = value ? @console_io : @null_out
+      @trace_out = v ? @console_io : @null_out
+    end
+
+    if ['cache_const_expr', 'precision', 'base'].include?(name)
+      @program.uncache
+    end
+  end
+
+  def push_option(name, v)
+    $options[name].push(v)
+
+    if name == 'trace'
+      @trace_out = v ? @console_io : @null_out
+    end
+
+    if ['cache_const_expr', 'precision', 'base'].include?(name)
+      @program.uncache
+    end
+  end
+
+  def pop_option(name)
+    v = $options[name].pop
+
+    if name == 'trace'
+      @trace_out = v ? @console_io : @null_out
     end
 
     if ['cache_const_expr', 'precision', 'base'].include?(name)
