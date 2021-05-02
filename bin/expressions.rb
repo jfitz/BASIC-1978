@@ -1573,6 +1573,16 @@ class Expression
     lines
   end
 
+  def has_tab
+    has = false
+
+    @elements.each do |element|
+      has ||= element.function? && element.name == 'TAB'
+    end
+
+    has
+  end
+
   def evaluate(interpreter)
     stack = []
 
@@ -1863,6 +1873,16 @@ class AbstractExpressionSet
 
   def target?
     @target
+  end
+
+  def has_tab
+    has = false
+
+    @expressions.each do |expression|
+      has ||= expression.has_tab
+    end
+
+    has
   end
 
   # returns an Array of values
@@ -2407,6 +2427,10 @@ class Assignment
   def uncache
     @targetset.uncache
     @expressionset.uncache
+  end
+
+  def has_tab
+    @targetset.has_tab || @expressionset.has_tab
   end
 
   def dump

@@ -1432,6 +1432,8 @@ class ChainStatement < AbstractStatement
 
     target_tokens = tokens_lists[0]
     @target = ValueExpressionSet.new(target_tokens, :scalar)
+    @errors << 'TAB() not allowed' if @target.has_tab
+
     @elements = make_references(nil, @target)
     @comprehension_effort += @target.comprehension_effort
   end
@@ -1498,6 +1500,9 @@ class ChangeStatement < AbstractStatement
       else
         raise BASICExpressionError, 'Type mismatch'
       end
+
+      @errors << 'TAB() not allowed' if @target.has_tab
+      @errors << 'TAB() not allowed' if @source.has_tab
 
       @elements = make_references(nil, @source, @target)
       @comprehension_effort += @source.comprehension_effort
@@ -1598,6 +1603,7 @@ class CloseStatement < AbstractStatement
     if check_template(tokens_lists, template) ||
        check_template(tokens_lists, template_file)
       @filenum_expression = ValueExpressionSet.new(tokens_lists[-1], :scalar)
+      @errors << 'TAB() not allowed' if @filenum_expression.has_tab
 
       @elements = make_references(nil, @filenum_expression)
       @comprehension_effort += @filenum_expression.comprehension_effort
@@ -1643,6 +1649,8 @@ class DataStatement < AbstractStatement
 
     if check_template(tokens_lists, template)
       @expressions = ValueExpressionSet.new(tokens_lists[0], :scalar)
+      @errors << 'TAB() not allowed' if @expressions.has_tab
+
       @elements = make_references(nil, @expressions)
       @comprehension_effort += @expressions.comprehension_effort
     else
@@ -2009,6 +2017,12 @@ class ForStatement < AbstractStatement
     else
       @errors << 'Syntax error'
     end
+
+    @errors << 'TAB() not allowed' if !@start.nil? && @start.has_tab
+    @errors << 'TAB() not allowed' if !@step.nil? && @step.has_tab
+    @errors << 'TAB() not allowed' if !@end.nil? && @end.has_tab
+    @errors << 'TAB() not allowed' if !@while.nil? && @while.has_tab
+    @errors << 'TAB() not allowed' if !@until.nil? && @until.has_tab
 
     @warnings << 'Constant expression' if !@until.nil? && @until.constant
     @warnings << 'Constant expression' if !@while.nil? && @while.constant
@@ -2382,6 +2396,8 @@ class AbstractIfStatement < AbstractStatement
 
     if tokens_lists.class.to_s == 'Hash'
       @expression = parse_expression(tokens_lists['expr'])
+      @errors << 'TAB() not allowed' if @expression.has_tab
+      
       @warnings << 'Constant expression' if
         !@expression.nil? && @expression.constant
 
@@ -2432,6 +2448,10 @@ class AbstractIfStatement < AbstractStatement
       begin
         stack = parse_if(tokens_lists)
         @expression = parse_expression(stack['expr'])
+
+        @errors << 'TAB() not allowed' if
+          !@expression.nil? && @expression.has_tab
+
         @warnings << 'Constant expression' if
           !@expression.nil? && @expression.constant
 
@@ -2888,6 +2908,11 @@ class InputStatement < AbstractStatement
     if check_template(tokens_lists, template)
       items = split_tokens(tokens_lists[0], false)
       @items = tokens_to_expressions(items, :scalar, false)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @prompt = extract_prompt(@items)
       @elements = make_references(@items, @file_tokens, @prompt)
@@ -2986,6 +3011,8 @@ class AbstractScalarLetStatement < AbstractLetStatement
           @errors << 'Assignment must have right-hand value(s)'
         end
 
+        @errors << 'TAB() not allowed' if @assignment.has_tab
+
         @warnings << 'Extra values ignored' if
           @assignment.count_value > @assignment.count_target
 
@@ -3062,6 +3089,11 @@ class LineInputStatement < AbstractStatement
     if check_template(tokens_lists, template)
       items = split_tokens(tokens_lists[0], false)
       @items = tokens_to_expressions(items, :scalar, false)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @prompt = extract_prompt(@items)
       @elements = make_references(@items, @file_tokens, @prompt)
@@ -3347,14 +3379,15 @@ class OnStatement < AbstractStatement
 
       begin
         @expression = ValueExpressionSet.new(expression, :scalar)
-        @elements = make_references(nil, @expression)
       rescue BASICExpressionError => e
         @errors << e.message
       end
 
-      @gosub = tokens_lists[1] == 'GOSUB'
-
+      @errors << 'TAB() not allowed' if @expression.has_tab
       @warnings << 'Constant expression' if @expression.constant
+      @elements = make_references(nil, @expression)
+
+      @gosub = tokens_lists[1] == 'GOSUB'
 
       destinations = tokens_lists[2]
       line_nums = split_tokens(destinations, false)
@@ -3514,7 +3547,10 @@ class OpenStatement < AbstractStatement
     if check_template(tokens_lists, template_input_as) ||
        check_template(tokens_lists, template_input_as_file)
       @filename_expression = ValueExpressionSet.new(tokens_lists[0], :scalar)
+      @errors << 'TAB() not allowed' if @filename_expression.has_tab
       @filenum_expression = ValueExpressionSet.new(tokens_lists[-1], :scalar)
+      @errors << 'TAB() not allowed' if @filenum_expression.has_tab
+
       @elements = make_references(nil, @filename_expression, @filenum_expression)
 
       @mode = :read
@@ -3523,7 +3559,10 @@ class OpenStatement < AbstractStatement
     elsif check_template(tokens_lists, template_output_as) ||
           check_template(tokens_lists, template_output_as_file)
       @filename_expression = ValueExpressionSet.new(tokens_lists[0], :scalar)
+      @errors << 'TAB() not allowed' if @filename_expression.has_tab
       @filenum_expression = ValueExpressionSet.new(tokens_lists[-1], :scalar)
+      @errors << 'TAB() not allowed' if @filenum_expression.has_tab
+
       @elements = make_references(nil, @filename_expression, @filenum_expression)
 
       @mode = :print
@@ -3532,7 +3571,10 @@ class OpenStatement < AbstractStatement
     elsif check_template(tokens_lists, template_append_as) ||
           check_template(tokens_lists, template_append_as_file)
       @filename_expression = ValueExpressionSet.new(tokens_lists[0], :scalar)
+      @errors << 'TAB() not allowed' if @filename_expression.has_tab
       @filenum_expression = ValueExpressionSet.new(tokens_lists[-1], :scalar)
+      @errors << 'TAB() not allowed' if @filenum_expression.has_tab
+
       @elements = make_references(nil, @filename_expression, @filenum_expression)
 
       @mode = :append
@@ -3593,6 +3635,8 @@ class OptionStatement < AbstractStatement
       if $options[@key].types.include?(:runtime)
         expression_tokens = split_tokens(tokens_lists[1], true)
         @expression = ValueExpressionSet.new(expression_tokens[0], :scalar)
+        @errors << 'TAB() not allowed' if @expression.has_tab
+
         @elements = make_references(nil, @expression)
         @comprehension_effort += @expression.comprehension_effort
       else
@@ -3866,6 +3910,11 @@ class ReadStatement < AbstractStatement
     if check_template(tokens_lists, template)
       items = split_tokens(tokens_lists[0], false)
       @items = tokens_to_expressions(items, :scalar, false)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @elements = make_references(@items, @file_tokens)
       @items.each { |item| @comprehension_effort += item.comprehension_effort }
@@ -4026,17 +4075,19 @@ class SleepStatement < AbstractStatement
     if check_template(tokens_lists, template_0)
       token_list = [NumericConstantToken.new('5')]
       @expression = ValueExpressionSet.new(token_list, :scalar)
-      @comprehension_effort += @expression.comprehension_effort
+      @errors << 'TAB() not allowed' if @expression.has_tab
     elsif check_template(tokens_lists, template_1)
       token_lists = split_tokens(tokens_lists[0], false)
       @expression = ValueExpressionSet.new(token_lists[0], :scalar)
+      @errors << 'TAB() not allowed' if @expression.has_tab
       @elements = make_references(nil, @expression)
-      @comprehension_effort += @expression.comprehension_effort
     else
       @errors << 'Syntax error'
     end
 
     @errors << 'Too many values' if token_lists.size > 1
+
+    @comprehension_effort += @expression.comprehension_effort
   end
 
   def uncache_core
@@ -4114,6 +4165,11 @@ class WriteStatement < AbstractStatement
     if check_template(tokens_lists, template)
       tokens_lists = split_tokens(tokens_lists[0], true)
       @items = tokens_to_expressions(tokens_lists, :scalar)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @elements = make_references(@items, @file_tokens)
       @items.each { |item| @comprehension_effort += item.comprehension_effort }
@@ -4218,6 +4274,11 @@ class ArrInputStatement < AbstractStatement
     if check_template(tokens_lists, template)
       tokens_lists = split_tokens(tokens_lists[0], true)
       @items = tokens_to_expressions(tokens_lists, :array, true)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @prompt = extract_prompt(@items)
       @elements = make_references(@items, @file_tokens, @prompt)
@@ -4487,6 +4548,11 @@ class ArrReadStatement < AbstractStatement
     if check_template(tokens_lists, template)
       items = split_tokens(tokens_lists[0], false)
       @items = tokens_to_expressions(items, :array, true)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @elements = make_references(@items, @file_tokens)
       @items.each { |item| @comprehension_effort += item.comprehension_effort }
@@ -4559,6 +4625,11 @@ class ArrWriteStatement < AbstractStatement
     if check_template(tokens_lists, template)
       tokens_lists = split_tokens(tokens_lists[0], true)
       @items = tokens_to_expressions(tokens_lists, :array)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @elements = make_references(@items, @file_tokens)
       @items.each { |item| @comprehension_effort += item.comprehension_effort }
@@ -4623,6 +4694,8 @@ class ArrLetStatement < AbstractLetStatement
         if @assignment.count_value.zero?
           @errors << 'Assignment must have right-hand value(s)'
         end
+
+        @errors << 'TAB() not allowed' if @assignment.has_tab
 
         @warnings << 'Extra values ignored' if
           @assignment.count_value > @assignment.count_target
@@ -4756,6 +4829,11 @@ class MatInputStatement < AbstractStatement
     if check_template(tokens_lists, template)
       tokens_lists = split_tokens(tokens_lists[0], true)
       @items = tokens_to_expressions(tokens_lists, :array, true)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @prompt = extract_prompt(@items)
       @elements = make_references(@items, @file_tokens, @prompt)
@@ -5070,6 +5148,11 @@ class MatReadStatement < AbstractStatement
     if check_template(tokens_lists, template)
       items = split_tokens(tokens_lists[0], false)
       @items = tokens_to_expressions(items, :matrix, true)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @elements = make_references(@items, @file_tokens)
       @items.each { |item| @comprehension_effort += item.comprehension_effort }
@@ -5160,6 +5243,11 @@ class MatWriteStatement < AbstractStatement
     if check_template(tokens_lists, template)
       tokens_lists = split_tokens(tokens_lists[0], true)
       @items = tokens_to_expressions(tokens_lists, :matrix)
+
+      @items.each do |item|
+        @errors << 'TAB() not allowed' if item.has_tab
+      end
+
       @file_tokens = extract_file_handle(@items)
       @elements = make_references(@items, @file_tokens)
       @items.each { |item| @comprehension_effort += item.comprehension_effort }
@@ -5224,6 +5312,8 @@ class MatLetStatement < AbstractLetStatement
         if @assignment.count_value.zero?
           @errors << 'Assignment must have right-hand value(s)'
         end
+
+        @errors << 'TAB() not allowed' if @assignment.has_tab
 
         @warnings << 'Extra values ignored' if
           @assignment.count_value > @assignment.count_target

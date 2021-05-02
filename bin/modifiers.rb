@@ -45,6 +45,7 @@ class IfModifier < AbstractModifier
     super()
 
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
+    @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
 
     @numerics = @expression.numerics
@@ -119,6 +120,7 @@ class UnlessModifier < AbstractModifier
     super()
     
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
+    @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
 
     @numerics = @expression.numerics
@@ -193,6 +195,7 @@ class WhileModifier < AbstractModifier
     super()
     
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
+    @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
 
     @numerics = @expression.numerics
@@ -286,6 +289,7 @@ class UntilModifier < AbstractModifier
     super()
     
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
+    @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
 
     @numerics = @expression.numerics
@@ -417,6 +421,12 @@ class ForModifier < AbstractModifier
       @while = ValueExpressionSet.new(while_tokens, :scalar)
       @warnings << 'Constant expression' if @while.constant
     end
+
+    @errors << 'TAB() not allowed' if !@start.nil? && @start.has_tab
+    @errors << 'TAB() not allowed' if !@step.nil? && @step.has_tab
+    @errors << 'TAB() not allowed' if !@end.nil? && @end.has_tab
+    @errors << 'TAB() not allowed' if !@while.nil? && @while.has_tab
+    @errors << 'TAB() not allowed' if !@until.nil? && @until.has_tab
 
     control = XrefEntry.new(@control.to_s, nil, true)
 
