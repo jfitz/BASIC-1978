@@ -158,6 +158,10 @@ class BASICArray
     @dimensions[0].to_i - base + 1
   end
 
+  def empty?
+    return size == 0
+  end
+
   def values(interpreter)
     values = {}
 
@@ -198,6 +202,30 @@ class BASICArray
 
   def prod
     prod_1
+  end
+
+  def max
+    NumericConstant.new(max_1)
+  end
+
+  def min
+    NumericConstant.new(min_1)
+  end
+
+  def max_i
+    IntegerConstant.new(max_1)
+  end
+
+  def min_i
+    IntegerConstant.new(min_1)
+  end
+
+  def max_t
+    TextConstant.new(max_1)
+  end
+
+  def min_t
+    TextConstant.new(min_1)
   end
 
   def to_s
@@ -290,7 +318,6 @@ class BASICArray
 
     (base..n_cols).each do |col|
       value = get_value(col)
-      coords = AbstractElement.make_coord(col)
       sum += value.to_f
     end
 
@@ -305,11 +332,38 @@ class BASICArray
 
     (base..n_cols).each do |col|
       value = get_value(col)
-      coords = AbstractElement.make_coord(col)
       prod *= value.to_f
     end
 
     prod
+  end
+
+  def max_1
+    n_cols = @dimensions[0].to_i
+    base = $options['base'].value
+
+   max_value = get_value(0).to_v
+
+    (base..n_cols).each do |col|
+      value = get_value(col).to_v
+      max_value = value if value > max_value
+    end
+
+    max_value
+  end
+
+  def min_1
+    n_cols = @dimensions[0].to_i
+    base = $options['base'].value
+
+    min_value = get_value(0).to_v
+
+    (base..n_cols).each do |col|
+      value = get_value(col).to_v
+      min_value = value if value < min_value
+    end
+
+    min_value
   end
 
   def print_1(printer, interpreter, formats)

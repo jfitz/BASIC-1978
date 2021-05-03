@@ -494,6 +494,9 @@ class FunctionAvg < AbstractFunction
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
       match_args_to_signature(args, @signature_1)
 
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
     sum = args[0].sum / args[0].size
     res = NumericConstant.new(sum)
 
@@ -1363,6 +1366,93 @@ class FunctionLog2 < AbstractFunction
   end
 end
 
+# function MAXA
+class FunctionMaxA < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].max
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MAXA%
+class FunctionMaxAI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :integer, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].max_i
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MAXA$
+class FunctionMaxAT < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :string, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].max_t
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function MID$
 class FunctionMid < AbstractFunction
   def initialize(text)
@@ -1405,6 +1495,93 @@ class FunctionMid < AbstractFunction
     end
 
     res = TextConstant.new(text)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MINA
+class FunctionMinA < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].min
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MINA%
+class FunctionMinAI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :integer, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].min_i
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MINA$
+class FunctionMinAT < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => :string, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].min_t
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -3231,7 +3408,13 @@ class FunctionFactory
     'LOG' => FunctionLog,
     'LOG10' => FunctionLog10,
     'LOG2' => FunctionLog2,
+    'MAXA' => FunctionMaxA,
+    'MAXA%' => FunctionMaxAI,
+    'MAXA$' => FunctionMaxAT,
     'MID$' => FunctionMid,
+    'MINA' => FunctionMinA,
+    'MINA%' => FunctionMinAI,
+    'MINA$' => FunctionMinAT,
     'MOD' => FunctionMod,
     'NCOL' => FunctionNcol,
     'NCOL%' => FunctionNcol,
