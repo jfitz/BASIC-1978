@@ -113,6 +113,7 @@ class StatementFactory
     [
       ArrForgetStatement,
       ArrInputStatement,
+      ArrPlotStatement,
       ArrPrintStatement,
       ArrReadStatement,
       ArrWriteStatement,
@@ -1260,6 +1261,18 @@ module PrintFunctions
 
     add_final_carriage(items, CarriageControl.new('NL'))
     add_default_value_carriage(items, shape)
+    items
+  end
+
+  def tokens_to_expressions_2(tokens_lists, shape)
+    items = []
+
+    tokens_lists.each do |tokens_list|
+      if tokens_list.class.to_s == 'Array'
+        add_expression(items, tokens_list, shape)
+      end
+    end
+
     items
   end
 
@@ -4349,6 +4362,70 @@ class ArrInputStatement < AbstractStatement
     end
 
     interpreter.clear_previous_lines
+  end
+end
+
+# ARR PLOT
+class ArrPlotStatement < AbstractStatement
+  def self.lead_keywords
+    [
+      [KeywordToken.new('ARR'), KeywordToken.new('PLOT')]
+    ]
+  end
+
+  include FileFunctions
+  include PrintFunctions
+
+  def initialize(_, keywords, tokens_lists)
+    super
+
+    extract_modifiers(tokens_lists)
+
+    template2 = [[1, '>=']]
+
+    @items = []
+
+    if check_template(tokens_lists, template2)
+      items = split_tokens(tokens_lists[0], false)
+      @items = tokens_to_expressions_2(items, :array)
+      @file_tokens = extract_file_handle(@items)
+
+      @items.each do |item|
+        if item.class.to_s == 'ValueExpressionSet'
+          @errors << 'Wrong type' unless
+            [:numeric, :integer].include?(item.content_type)
+        end
+      end
+
+      @elements = make_references(@items, @file_tokens)
+      @items.each { |item| @comprehension_effort += item.comprehension_effort }
+      @mccabe = @items.size
+    else
+      @errors << 'Syntax error'
+    end
+  end
+
+  def dump
+    lines = []
+
+    lines += @file_tokens.dump unless @file_tokens.nil?
+
+    @items.each do |item|
+      lines += item.dump
+    end
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
+  end
+
+  def execute(interpreter)
+    fh = get_file_handle(interpreter, @file_tokens)
+    fhr = interpreter.get_file_handler(fh, :print)
+
+    @items.each do |item|
+      item.compound_plot(fhr, interpreter)
+    end
   end
 end
 
