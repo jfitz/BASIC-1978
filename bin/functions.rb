@@ -1453,6 +1453,93 @@ class FunctionMaxAT < AbstractFunction
   end
 end
 
+# function MAXM
+class FunctionMaxM < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].max
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MAXM%
+class FunctionMaxMI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :integer, 'shape' => :matrix }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].max_i
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MAXM$
+class FunctionMaxMT < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :string, 'shape' => :matrix }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].max_t
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function MID$
 class FunctionMid < AbstractFunction
   def initialize(text)
@@ -1568,6 +1655,93 @@ class FunctionMinAT < AbstractFunction
 
     @default_shape = :array
     @signature_1 = [{ 'type' => :string, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].min_t
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MINM
+class FunctionMinM < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].min
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MINM%
+class FunctionMinMI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :integer, 'shape' => :matrix }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    res = args[0].min_i
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MINM$
+class FunctionMinMT < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :matrix
+    @signature_1 = [{ 'type' => :string, 'shape' => :matrix }]
   end
 
   def evaluate(_, arg_stack)
@@ -3411,10 +3585,16 @@ class FunctionFactory
     'MAXA' => FunctionMaxA,
     'MAXA%' => FunctionMaxAI,
     'MAXA$' => FunctionMaxAT,
+    'MAXM' => FunctionMaxM,
+    'MAXM%' => FunctionMaxMI,
+    'MAXM$' => FunctionMaxMT,
     'MID$' => FunctionMid,
     'MINA' => FunctionMinA,
     'MINA%' => FunctionMinAI,
     'MINA$' => FunctionMinAT,
+    'MINM' => FunctionMinM,
+    'MINM%' => FunctionMinMI,
+    'MINM$' => FunctionMinMT,
     'MOD' => FunctionMod,
     'NCOL' => FunctionNcol,
     'NCOL%' => FunctionNcol,
