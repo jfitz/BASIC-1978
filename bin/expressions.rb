@@ -1,536 +1,5 @@
-# Array with values
-class BASICArray
-  def self.make_array(dims, init_value)
-    values = {}
-
-    base = $options['base'].value
-
-    (base..dims[0].to_i).each do |col|
-      coords = AbstractElement.make_coord(col)
-      values[coords] = init_value
-    end
-
-    values
-  end
-
-  def self.make_rnd_array(dims, interpreter, upper_bound)
-    values = {}
-
-    base = $options['base'].value
-
-    (base..dims[0].to_i).each do |col|
-      coords = AbstractElement.make_coord(col)
-      values[coords] = NumericConstant.new_rand(interpreter, upper_bound)
-    end
-
-    values
-  end
-
-  def self.make_rndi_array(dims, interpreter, upper_bound)
-    values = {}
-
-    base = $options['base'].value
-
-    (base..dims[0].to_i).each do |col|
-      coords = AbstractElement.make_coord(col)
-      values[coords] = IntegerConstant.new_rand(interpreter, upper_bound)
-    end
-
-    values
-  end
-
-  def self.make_rndt_array(dims, interpreter, length, set)
-    values = {}
-
-    base = $options['base'].value
-
-    (base..dims[0].to_i).each do |col|
-      coords = AbstractElement.make_coord(col)
-      values[coords] = TextConstant.new_rand(interpreter, length, set)
-    end
-
-    values
-  end
-
-  def self.zero_values(dimensions)
-    case dimensions.size
-    when 0
-      raise BASICSyntaxError, 'No dimensions in array'
-    when 1
-      BASICArray.make_array(dimensions, NumericConstant.new(0))
-    when 2
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    else
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    end
-  end
-
-  def self.one_values(dimensions)
-    case dimensions.size
-    when 0
-      raise BASICSyntaxError, 'No dimensions in array'
-    when 1
-      BASICArray.make_array(dimensions, NumericConstant.new(1))
-    when 2
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    else
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    end
-  end
-
-  def self.rnd_values(dimensions, interpreter, upper_bound)
-    case dimensions.size
-    when 0
-      raise BASICSyntaxError, 'No dimensions in array'
-    when 1
-      BASICArray.make_rnd_array(dimensions, interpreter, upper_bound)
-    when 2
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    else
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    end
-  end
-
-  def self.rndi_values(dimensions, interpreter, upper_bound)
-    case dimensions.size
-    when 0
-      raise BASICSyntaxError, 'No dimensions in array'
-    when 1
-      BASICArray.make_rndi_array(dimensions, interpreter, upper_bound)
-    when 2
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    else
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    end
-  end
-
-  def self.rndt_values(dimensions, interpreter, length, set)
-    case dimensions.size
-    when 0
-      raise BASICSyntaxError, 'No dimensions in array'
-    when 1
-      BASICArray.make_rndt_array(dimensions, interpreter, length, set)
-    when 2
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    else
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    end
-  end
-
-  attr_reader :dimensions
-
-  def initialize(dimensions, values)
-    @dimensions = dimensions
-    @values = values
-  end
-
-  def clone
-    Array.new(@dimensions.clone, @values.clone)
-  end
-
-  def scalar?
-    false
-  end
-
-  def array?
-    true
-  end
-
-  def matrix?
-    false
-  end
-
-  def numeric_constant?
-    base = $options['base'].value
-
-    value = get_value(base)
-    value.numeric_constant?
-  end
-
-  def text_constant?
-    base = $options['base'].value
-
-    value = get_value(base)
-    value.text_constant?
-  end
-
-  def size
-    return 0 if @dimensions.size < 1
-
-    base = $options['base'].value
-
-    @dimensions[0].to_i - base + 1
-  end
-
-  def empty?
-    return size == 0
-  end
-
-  def values(interpreter)
-    values = {}
-
-    base = $options['base'].value
-    (base..@dimensions[0].to_i).each do |col|
-      value = get_value(col)
-      coords = AbstractElement.make_coord(col)
-      values[coords] = value
-    end
-
-    values
-  end
-
-  def get_value(col)
-    coords = AbstractElement.make_coord(col)
-    return @values[coords] if @values.key?(coords)
-    NumericConstant.new(0)
-  end
-
-  def posate
-    values = posate_1
-    BASICArray.new(@dimensions, values)
-  end
-
-  def negate
-    values = negate_1
-    BASICArray.new(@dimensions, values)
-  end
-
-  def not
-    values = not_1
-    BASICArray.new(@dimensions, values)
-  end
-
-  def sum
-    sum_1
-  end
-
-  def prod
-    prod_1
-  end
-
-  def max
-    NumericConstant.new(max_1)
-  end
-
-  def min
-    NumericConstant.new(min_1)
-  end
-
-  def max_i
-    IntegerConstant.new(max_1)
-  end
-
-  def min_i
-    IntegerConstant.new(min_1)
-  end
-
-  def max_t
-    TextConstant.new(max_1)
-  end
-
-  def min_t
-    TextConstant.new(min_1)
-  end
-
-  def to_s
-    'ARRAY: ' + @values.to_s
-  end
-
-  def plot(printer, interpreter)
-    case @dimensions.size
-    when 0
-      raise BASICSyntaxError, 'Need dimension in array'
-    when 1
-      plot_1(printer, interpreter)
-    else
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    end
-  end
-
-  def print(printer, interpreter, formats)
-    case @dimensions.size
-    when 0
-      raise BASICSyntaxError, 'Need dimension in array'
-    when 1
-      print_1(printer, interpreter, formats)
-    else
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    end
-  end
-
-  def write(printer, interpreter)
-    case @dimensions.size
-    when 0
-      raise BASICSyntaxError, 'Need dimension in array'
-    when 1
-      write_1(printer, interpreter)
-    else
-      raise BASICSyntaxError, 'Too many dimensions in array'
-    end
-  end
-
-  def pack
-    count = get_value(0).to_i
-    result = ''
-
-    (1..count).each do |index|
-      value = get_value(index)
-      result += value.to_i.chr unless value.nil?
-    end
-
-    TextConstant.new(result)
-  end
-
-  private
-
-  def posate_1
-    n_cols = @dimensions[0].to_i
-    values = {}
-    base = $options['base'].value
-
-    (base..n_cols).each do |col|
-      value = get_value(col)
-      coords = AbstractElement.make_coord(col)
-      values[coords] = value.posate
-    end
-
-    values
-  end
-
-  def negate_1
-    n_cols = @dimensions[0].to_i
-    values = {}
-    base = $options['base'].value
-
-    (base..n_cols).each do |col|
-      value = get_value(col)
-      coords = AbstractElement.make_coord(col)
-      values[coords] = value.negate
-    end
-
-    values
-  end
-
-  def not_1
-    n_cols = @dimensions[0].to_i
-    values = {}
-    base = $options['base'].value
-
-    (base..n_cols).each do |col|
-      value = get_value(col)
-      coords = AbstractElement.make_coord(col)
-      values[coords] = value.not
-    end
-
-    values
-  end
-
-  def sum_1
-    n_cols = @dimensions[0].to_i
-    base = $options['base'].value
-
-    sum = 0
-
-    (base..n_cols).each do |col|
-      value = get_value(col)
-      sum += value.to_f
-    end
-
-    sum
-  end
-
-  def prod_1
-    n_cols = @dimensions[0].to_i
-    base = $options['base'].value
-
-    prod = 1
-
-    (base..n_cols).each do |col|
-      value = get_value(col)
-      prod *= value.to_f
-    end
-
-    prod
-  end
-
-  def max_1
-    n_cols = @dimensions[0].to_i
-    base = $options['base'].value
-
-    max_value = get_value(base).to_v
-
-    (base..n_cols).each do |col|
-      value = get_value(col).to_v
-      max_value = value if value > max_value
-    end
-
-    max_value
-  end
-
-  def min_1
-    n_cols = @dimensions[0].to_i
-    base = $options['base'].value
-
-    min_value = get_value(base).to_v
-
-    (base..n_cols).each do |col|
-      value = get_value(col).to_v
-      min_value = value if value < min_value
-    end
-
-    min_value
-  end
-
-  def plot_1(printer, interpreter)
-    base = $options['base'].value
-    upper = @dimensions[0].to_i - base
-    n_cols = upper + 1
-
-    # height above x-axis
-    max_value = max_1
-    max_value = 0 if max_value < 0
-    min_value = min_1
-    min_value = 0 if min_value > 0
-    
-    value_span = max_value - min_value
-
-    factor = 1.0
-
-    while value_span > 10
-      value_span /= 10
-      factor *= 10
-    end
-
-    while value_span < 1
-      value_span *= 10
-      factor /= 10
-    end
-
-    span = value_span.to_i + 1
-    # span = value_span.to_i if max_value > 0 && min_value < 0
-
-    value_span = value_span.to_i + 1
-    value_span *= factor
-
-    # adjust height and depth
-    if span < 3
-      span *= 10
-    elsif span < 5
-      span *= 5
-    elsif span < 10
-      span *= 2
-    end
-
-    height = (max_value / value_span * span).to_i
-    depth = -(span - height) + 1
-    
-    y_delta = value_span / span
-    upper_value = (y_delta * height).round(6)
-    lower_value = (y_delta * depth).round(6)
-
-    # stub width
-    w_p = upper_value.to_s.size
-    w_n = lower_value.to_s.size - 1
-    stub_width = [w_p, w_n].max + 2
-
-    print_width = $options['print_width'].value
-    print_width = 72 if print_width == 0
-    print_width -= 1
-
-    plot_width = print_width - stub_width - 1
-
-    ## error when plot width < number of data points
-    raise BASICRuntimeError.new(:te_too_many, 'PLOT') if
-      plot_width < n_cols
-
-    spacer = (plot_width / n_cols).to_i
-    plot_width = spacer * n_cols
-
-    if factor > 1
-      text = upper_value.to_s.rjust(stub_width) + '|'
-    else
-      text = upper_value.round(4).to_s.rjust(stub_width) + '|'
-    end
-
-    plot_text = ''
-    plot_text = '-' * plot_width if upper_value == 0
-    text += plot_text
-
-    tc = TextConstant.new(text)
-    tc.print(printer)
-    printer.newline
-
-    ## this fails when Y value is negative
-    (depth..height).reverse_each do |row|
-      upper_bound = y_delta * row
-      lower_bound = upper_bound - y_delta
-
-      if factor > 1
-        text = lower_bound.to_s.rjust(stub_width) + '|'
-      else
-        text = lower_bound.round(4).to_s.rjust(stub_width) + '|'
-      end
-
-      plot_text = ' ' * plot_width
-      plot_text = '-' * plot_width if lower_bound == 0
-
-      (base..upper).each do |col|
-        value = get_value(col).to_f
-
-        if value >= lower_bound && value < upper_bound
-          pos = col * spacer
-          plot_text[pos] = '*'
-        end
-      end
-
-      text += plot_text
-
-      tc = TextConstant.new(text.rstrip)
-      tc.print(printer)
-      printer.newline
-    end
-  end
-
-  def print_1(printer, interpreter, formats)
-    n_cols = @dimensions[0].to_i
-
-    fs_carriage = CarriageControl.new($options['field_sep'].value)
-
-    base = $options['base'].value
-    (base..n_cols).each do |col|
-      if formats.nil?
-        value = get_value(col)
-        value.print(printer)
-      else
-        # apply using formats
-        formats.each do |format|
-          value = nil
-          value = get_value(col) if format.wants_item
-          text = format.format(value)
-          text.print(printer)
-        end
-      end
-
-      fs_carriage.print(printer, interpreter) if col < n_cols
-    end
-  end
-
-  def write_1(printer, interpreter)
-    n_cols = @dimensions[0].to_i
-
-    fs_carriage = CarriageControl.new(',')
-
-    base = $options['base'].value
-    (base..n_cols).each do |col|
-      value = get_value(col)
-      value.write(printer)
-      fs_carriage.write(printer, interpreter) if col < n_cols
-    end
-  end
-end
-
-# Matrix with values
-class Matrix
+# BASIC compound class
+class AbstractCompound
   def self.make_array(dims, init_value)
     values = {}
 
@@ -646,68 +115,516 @@ class Matrix
   def self.zero_values(dimensions)
     case dimensions.size
     when 0
-      raise BASICSyntaxError, 'No dimensions in matrix'
+      raise BASICSyntaxError, 'No dimensions in variable'
     when 1
-      Matrix.make_array(dimensions, NumericConstant.new(0))
+      AbstractCompound.make_array(dimensions, NumericConstant.new(0))
     when 2
-      Matrix.make_matrix(dimensions, NumericConstant.new(0))
+      AbstractCompound.make_matrix(dimensions, NumericConstant.new(0))
     else
-      raise BASICSyntaxError, 'Too many dimensions in matrix'
+      raise BASICSyntaxError, 'Too many dimensions in variable'
     end
   end
 
   def self.one_values(dimensions)
     case dimensions.size
     when 0
-      raise BASICSyntaxError, 'No dimensions in matrix'
+      raise BASICSyntaxError, 'No dimensions in variable'
     when 1
-      Matrix.make_array(dimensions, NumericConstant.new(1))
+      AbstractCompound.make_array(dimensions, NumericConstant.new(1))
     when 2
-      Matrix.make_matrix(dimensions, NumericConstant.new(1))
+      AbstractCompound.make_matrix(dimensions, NumericConstant.new(1))
     else
-      raise BASICSyntaxError, 'Too many dimensions in matrix'
+      raise BASICSyntaxError, 'Too many dimensions in variable'
     end
   end
 
   def self.rnd_values(dimensions, interpreter, upper_bound)
     case dimensions.size
     when 0
-      raise BASICSyntaxError, 'No dimensions in matrix'
+      raise BASICSyntaxError, 'No dimensions in variable'
     when 1
-      Matrix.make_rnd_array(dimensions, interpreter, upper_bound)
+      AbstractCompound.make_rnd_array(dimensions, interpreter, upper_bound)
     when 2
-      Matrix.make_rnd_matrix(dimensions, interpreter, upper_bound)
+      AbstractCompound.make_rnd_matrix(dimensions, interpreter, upper_bound)
     else
-      raise BASICSyntaxError, 'Too many dimensions in matrix'
+      raise BASICSyntaxError, 'Too many dimensions in variable'
     end
   end
 
   def self.rndi_values(dimensions, interpreter, upper_bound)
     case dimensions.size
     when 0
-      raise BASICSyntaxError, 'No dimensions in matrix'
+      raise BASICSyntaxError, 'No dimensions in variable'
     when 1
-      Matrix.make_rndi_array(dimensions, interpreter, upper_bound)
+      AbstractCompound.make_rndi_array(dimensions, interpreter, upper_bound)
     when 2
-      Matrix.make_rndi_matrix(dimensions, interpreter, upper_bound)
+      AbstractCompound.make_rndi_matrix(dimensions, interpreter, upper_bound)
     else
-      raise BASICSyntaxError, 'Too many dimensions in matrix'
+      raise BASICSyntaxError, 'Too many dimensions in variable'
     end
   end
 
   def self.rndt_values(dimensions, interpreter, length, set)
     case dimensions.size
     when 0
-      raise BASICSyntaxError, 'No dimensions in matrix'
+      raise BASICSyntaxError, 'No dimensions in variable'
     when 1
-      Matrix.make_rndt_array(dimensions, interpreter, length, set)
+      AbstractCompound.make_rndt_array(dimensions, interpreter, length, set)
     when 2
-      Matrix.make_rndt_matrix(dimensions, interpreter, length, set)
+      AbstractCompound.make_rndt_matrix(dimensions, interpreter, length, set)
     else
-      raise BASICSyntaxError, 'Too many dimensions in matrix'
+      raise BASICSyntaxError, 'Too many dimensions in variable'
     end
   end
 
+  attr_reader :dimensions
+
+  def initialize(dimensions, values)
+    @dimensions = dimensions
+    @values = values
+  end
+
+  def scalar?
+    false
+  end
+
+  def array?
+    false
+  end
+
+  def matrix?
+    false
+  end
+
+  def numeric_constant?
+    base = $options['base'].value
+
+    case dimensions.size
+    when 0
+      raise BASICSyntaxError, 'No dimensions in variable'
+    when 1
+      value = get_value_1(base)
+    when 2
+      value = get_value_2(base, base)
+    else
+      raise BASICSyntaxError, 'Too many dimensions in variable'
+    end
+
+    value.numeric_constant?
+  end
+
+  def text_constant?
+    base = $options['base'].value
+
+    case dimensions.size
+    when 0
+      raise BASICSyntaxError, 'No dimensions in variable'
+    when 1
+      value = get_value_1(base)
+    when 2
+      value = get_value_2(base, base)
+    else
+      raise BASICSyntaxError, 'Too many dimensions in variable'
+    end
+
+    value.text_constant?
+  end
+
+  private
+
+  def posate_1
+    n_cols = @dimensions[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value.posate
+    end
+
+    values
+  end
+
+  def negate_1
+    n_cols = @dimensions[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value.negate
+    end
+
+    values
+  end
+
+  def not_1
+    n_cols = @dimensions[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value.not
+    end
+
+    values
+  end
+
+  def max_1
+    n_cols = @dimensions[0].to_i
+    base = $options['base'].value
+
+    max_value = get_value_1(base).to_v
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col).to_v
+      max_value = value if value > max_value
+    end
+
+    max_value
+  end
+
+  def min_1
+    n_cols = @dimensions[0].to_i
+    base = $options['base'].value
+
+    min_value = get_value_1(base).to_v
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col).to_v
+      min_value = value if value < min_value
+    end
+
+    min_value
+  end
+
+end
+
+# Array with values
+class BASICArray < AbstractCompound
+  def initialize(_, _)
+    super
+  end
+
+  def clone
+    Array.new(@dimensions.clone, @values.clone)
+  end
+
+  def array?
+    true
+  end
+
+  def size
+    return 0 if @dimensions.size < 1
+
+    base = $options['base'].value
+
+    @dimensions[0].to_i - base + 1
+  end
+
+  def empty?
+    return size == 0
+  end
+
+  def values(interpreter)
+    values = {}
+
+    base = $options['base'].value
+    (base..@dimensions[0].to_i).each do |col|
+      value = get_value_1(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = value
+    end
+
+    values
+  end
+
+  def get_value_1(col)
+    coords = AbstractElement.make_coord(col)
+    return @values[coords] if @values.key?(coords)
+    NumericConstant.new(0)
+  end
+
+  def posate
+    values = posate_1
+    BASICArray.new(@dimensions, values)
+  end
+
+  def negate
+    values = negate_1
+    BASICArray.new(@dimensions, values)
+  end
+
+  def not
+    values = not_1
+    BASICArray.new(@dimensions, values)
+  end
+
+  def sum
+    sum_1
+  end
+
+  def prod
+    prod_1
+  end
+
+  def max
+    NumericConstant.new(max_1)
+  end
+
+  def min
+    NumericConstant.new(min_1)
+  end
+
+  def max_i
+    IntegerConstant.new(max_1)
+  end
+
+  def min_i
+    IntegerConstant.new(min_1)
+  end
+
+  def max_t
+    TextConstant.new(max_1)
+  end
+
+  def min_t
+    TextConstant.new(min_1)
+  end
+
+  def to_s
+    'ARRAY: ' + @values.to_s
+  end
+
+  def plot(printer, interpreter)
+    case @dimensions.size
+    when 0
+      raise BASICSyntaxError, 'Need dimension in array'
+    when 1
+      plot_1(printer, interpreter)
+    else
+      raise BASICSyntaxError, 'Too many dimensions in array'
+    end
+  end
+
+  def print(printer, interpreter, formats)
+    case @dimensions.size
+    when 0
+      raise BASICSyntaxError, 'Need dimension in array'
+    when 1
+      print_1(printer, interpreter, formats)
+    else
+      raise BASICSyntaxError, 'Too many dimensions in array'
+    end
+  end
+
+  def write(printer, interpreter)
+    case @dimensions.size
+    when 0
+      raise BASICSyntaxError, 'Need dimension in array'
+    when 1
+      write_1(printer, interpreter)
+    else
+      raise BASICSyntaxError, 'Too many dimensions in array'
+    end
+  end
+
+  def pack
+    count = get_value_1(0).to_i
+    result = ''
+
+    (1..count).each do |index|
+      value = get_value_1(index)
+      result += value.to_i.chr unless value.nil?
+    end
+
+    TextConstant.new(result)
+  end
+
+  private
+
+  def sum_1
+    n_cols = @dimensions[0].to_i
+    base = $options['base'].value
+
+    sum = 0
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      sum += value.to_f
+    end
+
+    sum
+  end
+
+  def prod_1
+    n_cols = @dimensions[0].to_i
+    base = $options['base'].value
+
+    prod = 1
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      prod *= value.to_f
+    end
+
+    prod
+  end
+
+  def plot_1(printer, interpreter)
+    base = $options['base'].value
+    upper = @dimensions[0].to_i - base
+    n_cols = upper + 1
+
+    # height above x-axis
+    max_value = max_1
+    max_value = 0 if max_value < 0
+    min_value = min_1
+    min_value = 0 if min_value > 0
+    
+    value_span = max_value - min_value
+
+    factor = 1.0
+
+    while value_span > 10
+      value_span /= 10
+      factor *= 10
+    end
+
+    while value_span < 1
+      value_span *= 10
+      factor /= 10
+    end
+
+    span = value_span.to_i + 1
+    # span = value_span.to_i if max_value > 0 && min_value < 0
+
+    value_span = value_span.to_i + 1
+    value_span *= factor
+
+    # adjust height and depth
+    if span < 3
+      span *= 10
+    elsif span < 5
+      span *= 5
+    elsif span < 10
+      span *= 2
+    end
+
+    height = (max_value / value_span * span).to_i
+    depth = -(span - height) + 1
+    
+    y_delta = value_span / span
+    upper_value = (y_delta * height).round(6)
+    lower_value = (y_delta * depth).round(6)
+
+    # stub width
+    w_p = upper_value.to_s.size
+    w_n = lower_value.to_s.size - 1
+    stub_width = [w_p, w_n].max + 2
+
+    print_width = $options['print_width'].value
+    print_width = 72 if print_width == 0
+    print_width -= 1
+
+    plot_width = print_width - stub_width - 1
+
+    ## error when plot width < number of data points
+    raise BASICRuntimeError.new(:te_too_many, 'PLOT') if
+      plot_width < n_cols
+
+    spacer = (plot_width / n_cols).to_i
+    plot_width = spacer * n_cols
+
+    if factor > 1
+      text = upper_value.to_s.rjust(stub_width) + '|'
+    else
+      text = upper_value.round(4).to_s.rjust(stub_width) + '|'
+    end
+
+    plot_text = ''
+    plot_text = '-' * plot_width if upper_value == 0
+    text += plot_text
+
+    tc = TextConstant.new(text)
+    tc.print(printer)
+    printer.newline
+
+    ## this fails when Y value is negative
+    (depth..height).reverse_each do |row|
+      upper_bound = y_delta * row
+      lower_bound = upper_bound - y_delta
+
+      if factor > 1
+        text = lower_bound.to_s.rjust(stub_width) + '|'
+      else
+        text = lower_bound.round(4).to_s.rjust(stub_width) + '|'
+      end
+
+      plot_text = ' ' * plot_width
+      plot_text = '-' * plot_width if lower_bound == 0
+
+      (base..upper).each do |col|
+        value = get_value_1(col).to_f
+
+        if value >= lower_bound && value < upper_bound
+          pos = col * spacer
+          plot_text[pos] = '*'
+        end
+      end
+
+      text += plot_text
+
+      tc = TextConstant.new(text.rstrip)
+      tc.print(printer)
+      printer.newline
+    end
+  end
+
+  def print_1(printer, interpreter, formats)
+    n_cols = @dimensions[0].to_i
+
+    fs_carriage = CarriageControl.new($options['field_sep'].value)
+
+    base = $options['base'].value
+    (base..n_cols).each do |col|
+      if formats.nil?
+        value = get_value_1(col)
+        value.print(printer)
+      else
+        # apply using formats
+        formats.each do |format|
+          value = nil
+          value = get_value_1(col) if format.wants_item
+          text = format.format(value)
+          text.print(printer)
+        end
+      end
+
+      fs_carriage.print(printer, interpreter) if col < n_cols
+    end
+  end
+
+  def write_1(printer, interpreter)
+    n_cols = @dimensions[0].to_i
+
+    fs_carriage = CarriageControl.new(',')
+
+    base = $options['base'].value
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      value.write(printer)
+      fs_carriage.write(printer, interpreter) if col < n_cols
+    end
+  end
+end
+
+# Matrix with values
+class Matrix < AbstractCompound
   def self.identity_values(dimensions)
     new_values = make_matrix(dimensions, NumericConstant.new(0))
     one = NumericConstant.new(1)
@@ -722,37 +639,12 @@ class Matrix
     new_values
   end
 
-  attr_reader :dimensions
-
-  def initialize(dimensions, values)
-    @dimensions = dimensions
-    @values = values
+  def initialize(_, _)
+    super
   end
 
   def clone
     Matrix.new(@dimensions.clone, @values.clone)
-  end
-
-  def numeric_constant?
-    base = $options['base'].value
-
-    value = get_value_2(base, base)
-    value.numeric_constant?
-  end
-
-  def text_constant?
-    base = $options['base'].value
-
-    value = get_value_2(base, base)
-    value.text_constant?
-  end
-
-  def scalar?
-    false
-  end
-
-  def array?
-    false
   end
 
   def matrix?
@@ -979,20 +871,6 @@ class Matrix
 
   private
 
-  def posate_1
-    n_cols = @dimensions[0].to_i
-    values = {}
-    base = $options['base'].value
-
-    (base..n_cols).each do |col|
-      value = get_value_1(col)
-      coords = AbstractElement.make_coord(col)
-      values[coords] = value.posate
-    end
-
-    values
-  end
-
   def posate_2
     n_rows = @dimensions[0].to_i
     n_cols = @dimensions[1].to_i
@@ -1005,20 +883,6 @@ class Matrix
         coords = AbstractElement.make_coords(row, col)
         values[coords] = value.posate
       end
-    end
-
-    values
-  end
-
-  def negate_1
-    n_cols = @dimensions[0].to_i
-    values = {}
-    base = $options['base'].value
-
-    (base..n_cols).each do |col|
-      value = get_value_1(col)
-      coords = AbstractElement.make_coord(col)
-      values[coords] = value.negate
     end
 
     values
@@ -1041,20 +905,6 @@ class Matrix
     values
   end
 
-  def not_1
-    n_cols = @dimensions[0].to_i
-    values = {}
-    base = $options['base'].value
-
-    (base..n_cols).each do |col|
-      value = get_value_1(col)
-      coords = AbstractElement.make_coord(col)
-      values[coords] = value.not
-    end
-
-    values
-  end
-
   def not_2
     n_rows = @dimensions[0].to_i
     n_cols = @dimensions[1].to_i
@@ -1070,21 +920,6 @@ class Matrix
     end
 
     values
-  end
-
-  def max_1
-    n_cols = @dimensions[0].to_i
-    values = {}
-    base = $options['base'].value
-
-    max_value = get_value_1(base).to_v
-
-    (base..n_cols).each do |col|
-      value = get_value_1(col).to_v
-      max_value = value if value > max_value
-    end
-
-    max_value
   end
 
   def max_2
@@ -1103,20 +938,6 @@ class Matrix
     end
 
     max_value
-  end
-
-  def min_1
-    n_cols = @dimensions[0].to_i
-    base = $options['base'].value
-
-    min_value = get_value_1(base).to_v
-
-    (base..n_cols).each do |col|
-      value = get_value_1(col).to_v
-      min_value = value if value < min_value
-    end
-
-    min_value
   end
 
   def min_2
@@ -1230,11 +1051,11 @@ class Matrix
       plot_text = '-' * plot_width if lower_bound == 0
 
       (base..upper).each do |col|
-        value = get_value_2(row, col).to_f
+        value = get_value_1(col).to_f
 
         if value >= lower_bound && value < upper_bound
           pos = col * spacer
-          plot_text[pos] = marker
+          plot_text[pos] = '*'
         end
       end
 
