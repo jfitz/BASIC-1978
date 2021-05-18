@@ -481,6 +481,7 @@ class AbstractCompound
     base = $options['base'].value
 
     upper = @dimensions[0].to_i - base
+
     n_cols = upper + 1
 
     # height above x-axis
@@ -518,8 +519,8 @@ class AbstractCompound
       span *= 2
     end
 
-    height = (max_value / value_span * span).to_i
-    depth = -(span - height) + 1
+    height = (max_value / value_span * span).to_i + 1
+    depth = -(span - height)
     
     y_delta = value_span / span
     upper_value = (y_delta * height).round(6)
@@ -541,23 +542,8 @@ class AbstractCompound
       plot_width < n_cols
 
     spacer = (plot_width / n_cols).to_i
-    plot_width = spacer * n_cols
+    plot_width = spacer * (n_cols + 1)
 
-    if factor > 1
-      text = upper_value.to_s.rjust(stub_width) + '|'
-    else
-      text = upper_value.round(4).to_s.rjust(stub_width) + '|'
-    end
-
-    plot_text = ''
-    plot_text = '-' * plot_width if upper_value == 0
-    text += plot_text
-
-    tc = TextConstant.new(text)
-    tc.print(printer)
-    printer.newline
-
-    ## this fails when Y value is negative
     (depth..height).reverse_each do |row|
       upper_bound = y_delta * row
       lower_bound = upper_bound - y_delta
@@ -575,7 +561,7 @@ class AbstractCompound
         value = get_value_1(col).to_f
 
         if value >= lower_bound && value < upper_bound
-          pos = col * spacer
+          pos = (col - base) * spacer
           plot_text[pos] = '*'
         end
       end
@@ -591,8 +577,8 @@ class AbstractCompound
   def plot_2(printer, interpreter)
     base = $options['base'].value
 
-    upper_r = @dimensions[0].to_i - base
-    upper_c = @dimensions[1].to_i - base
+    upper_r = @dimensions[0].to_i
+    upper_c = @dimensions[1].to_i
 
     markers = '1234567890'
     
@@ -601,7 +587,7 @@ class AbstractCompound
       upper_r > markers.size
 
     n_rows = upper_r + 1
-    n_cols = upper_c + 1
+    n_cols = upper_c
 
     # height above x-axis
     max_value = max_2
@@ -638,8 +624,8 @@ class AbstractCompound
       span *= 2
     end
 
-    height = (max_value / value_span * span).to_i
-    depth = -(span - height) + 1
+    height = (max_value / value_span * span).to_i + 1
+    depth = -(span - height)
     
     y_delta = value_span / span
     upper_value = (y_delta * height).round(6)
@@ -661,23 +647,8 @@ class AbstractCompound
       plot_width < n_cols
 
     spacer = (plot_width / n_cols).to_i
-    plot_width = spacer * n_cols
+    plot_width = spacer * (n_cols + 1)
 
-    if factor > 1
-      text = upper_value.to_s.rjust(stub_width) + '|'
-    else
-      text = upper_value.round(4).to_s.rjust(stub_width) + '|'
-    end
-
-    plot_text = ''
-    plot_text = '-' * plot_width if upper_value == 0
-    text += plot_text
-
-    tc = TextConstant.new(text)
-    tc.print(printer)
-    printer.newline
-
-    ## this fails when Y value is negative
     (depth..height).reverse_each do |row|
       upper_bound = y_delta * row
       lower_bound = upper_bound - y_delta
@@ -698,7 +669,7 @@ class AbstractCompound
           value = get_value_2(row, col).to_f
 
           if value >= lower_bound && value < upper_bound
-            pos = col * spacer
+            pos = (col - base) * spacer
             plot_text[pos] = marker
           end
         end
