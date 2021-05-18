@@ -1444,11 +1444,14 @@ class TextConstant < AbstractValueElement
   end
 
   def na_unpack
-    length = NumericConstant.new(@value.size)
+    base = $options['base'].value
+
+    length = NumericConstant.new(@value.size + base)
     dims = [length]
+
     values = {}
-    values[[NumericConstant.new(0)]] = length
-    index = 1
+
+    index = base
 
     @value.each_char do |char|
       key = [NumericConstant.new(index)]
@@ -1460,11 +1463,14 @@ class TextConstant < AbstractValueElement
   end
 
   def ia_unpack
-    length = IntegerConstant.new(@value.size)
+    base = $options['base'].value
+
+    length = IntegerConstant.new(@value.size + base)
     dims = [length]
+
     values = {}
-    values[[IntegerConstant.new(0)]] = length
-    index = 1
+
+    index = base
 
     @value.each_char do |char|
       key = [NumericConstant.new(index)]

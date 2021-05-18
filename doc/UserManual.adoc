@@ -778,29 +778,6 @@ The CHAIN operation preserves variables, dimension specifications, and open file
 It destroys definitions for user-defined functions, the call stack for GOSUB statements, and the internal blocks for active FOR/NEXT statements.
 (You cannot RETURN from the second program to the first program, but you can CHAIN back.)
 
-CHANGE
-~~~~~~
-
-Changes string variables to an array of numbers, or an array of numbers to a string variable
-
-Syntax:	CHANGE variable TO variable
-Syntax:	CHA variable TO variable
-
-The two variables must refer to a numeric array and a string variable (one of each).
-
-When converting an array to a string the CHANGE statement is equivalent to an assignment with the PACK$() function.
-When converting a string to an array, the statement is equivalent to an assignment with the UNPACK%() function.
-
-Examples:
-
-	90 CHANGE A TO A$
-	100 CHANGE B$ TO C
-	110 CHANGE A1 TO Z4$
-
-The array of numeric values contains the length in the zero position and one value for each character in the corresponding string.
-
-OPTION BASE 1 breaks the CHANGE command, because CHANGE relies on PACK$() and UNPACK%().
-
 CLOSE
 ~~~~~
 
@@ -2927,11 +2904,7 @@ PACK$(a)
 string
 
 Converts a numeric array to a string variable.
-The first element (index 0) must contain the number of numeric values to convert.
-(It may be zero.)
 Each numeric element is converted to the corresponding ASCII character.
-
-This function works poorly with OPTION BASE 1, as the [0] element of the array must contain the number of characters to pack into a string.
 
 POS(n)
 ~~~~~~
@@ -3335,10 +3308,8 @@ UNPACK(t$)
 numeric array
 
 Converts a string variable (or expression) to an array of numeric values.
-The first element (index 0) contains the number of converted elements.
 Each element is the ASCII value for the corresponding character in the original string.
-
-This function works poorly with OPTION BASE 1, as the resulting array contains a [0] element with the number of characters.
+Use the function NELEM() to find the length of the array.
 
 UNPACK%(t$)
 ~~~~~~~~~~~
@@ -3346,10 +3317,8 @@ UNPACK%(t$)
 integer array
 
 Converts a string variable (or expression) to an array of integer values.
-The first element (index 0) contains the number of converted elements.
 Each element is the ASCII value for the corresponding character in the original string.
-
-This function works poorly with OPTION BASE 1, as the resulting array contains a [0] element with the number of characters.
+Use the function NELEM() to find the length of the array.
 
 VAL(t$)
 ~~~~~~~
@@ -3422,7 +3391,7 @@ Modified statements
 Some statements may have modifiers; others may not.
 Statements that may have modifiers are:
 
-CHANGE, CLOSE, FORGET, GOSUB, GOTO, INPUT, LET, (LET-less assignment), LINE INPUT, OPEN, PRINT, RANDOMIZE, READ, RESTORE, RETURN, SLEEP, STOP, WRITE, ARR, ARR FORGET, ARR PRINT, ARR READ, ARR WRITE, MAT, MAT FORGET, MAT PRINT, MAT READ, MAT WRITE
+CLOSE, FORGET, GOSUB, GOTO, INPUT, LET, (LET-less assignment), LINE INPUT, OPEN, PRINT, RANDOMIZE, READ, RESTORE, RETURN, SLEEP, STOP, WRITE, ARR, ARR FORGET, ARR PRINT, ARR READ, ARR WRITE, MAT, MAT FORGET, MAT PRINT, MAT READ, MAT WRITE
 
 IF modifier
 ~~~~~~~~~~~

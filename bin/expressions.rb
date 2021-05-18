@@ -824,10 +824,14 @@ class BASICArray < AbstractCompound
   end
 
   def pack
-    count = get_value_1(0).to_i
+    base = $options['base'].value
+
+    count = size
+    
     result = ''
 
-    (1..count).each do |index|
+    (0..count).each do |i|
+      index = i + base
       value = get_value_1(index)
       result += value.to_i.chr unless value.nil?
     end

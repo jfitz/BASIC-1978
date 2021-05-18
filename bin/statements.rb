@@ -119,7 +119,6 @@ class StatementFactory
       ArrWriteStatement,
       ArrLetStatement,
       ChainStatement,
-      ChangeStatement,
       CloseStatement,
       DataStatement,
       DefineFunctionStatement,
@@ -1474,126 +1473,6 @@ class ChainStatement < AbstractStatement
       target_value.text_constant?
 
     interpreter.chain(target_values)
-  end
-end
-
-# CHANGE
-class ChangeStatement < AbstractStatement
-  def self.lead_keywords
-    [
-      [KeywordToken.new('CHANGE')]
-    ]
-  end
-
-  def self.extra_keywords
-    ['TO']
-  end
-
-  def initialize(_, keywords, tokens_lists)
-    super
-
-    extract_modifiers(tokens_lists)
-
-    template = [[1, '>='], 'TO', [1, '=']]
-
-    if check_template(tokens_lists, template)
-      source_tokens = tokens_lists[0]
-      target_tokens = tokens_lists[2]
-
-      source = ValueExpressionSet.new(source_tokens, :scalar)
-
-      case source.content_type
-      when :string
-        # string to array
-        @source = ValueExpressionSet.new(source_tokens, :scalar)
-        @target = TargetExpressionSet.new(target_tokens, :array, false)
-      when :numeric
-        # array to string
-        @source = ValueExpressionSet.new(source_tokens, :array)
-        @target = TargetExpressionSet.new(target_tokens, :scalar, false)
-      else
-        raise BASICExpressionError, 'Type mismatch'
-      end
-
-      @errors << 'TAB() not allowed' if @target.has_tab
-      @errors << 'TAB() not allowed' if @source.has_tab
-
-      @elements = make_references(nil, @source, @target)
-      @comprehension_effort += @source.comprehension_effort
-      @comprehension_effort += @target.comprehension_effort
-    else
-      @errors << 'Syntax error'
-    end
-  end
-
-  def uncache_core
-    @source.uncache
-    @target.uncache
-  end
-
-  def dump
-    lines = []
-
-    lines += @source.dump unless @source.nil?
-
-    lines += @target.dump unless @target.nil?
-
-    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
-
-    lines
-  end
-
-  def execute_core(interpreter)
-    source_values = @source.evaluate(interpreter)
-    source_value = source_values[0]
-
-    if source_value.text_constant?
-      # string to array
-
-      array = source_value.na_unpack
-      dims = array.dimensions
-      values = array.values_1
-
-      target_token = VariableToken.new(@target.to_s)
-      target_name = VariableName.new(target_token)
-      target = Variable.new(target_name, :scalar, [], [])
-      target.valref = :reference
-
-      interpreter.set_dimensions(target, dims)
-      interpreter.set_values(target_name, values)
-
-    elsif source_value.numeric_constant?
-      # array to string
-      source_variable_token = VariableToken.new(@source.to_s)
-      source_variable_name = VariableName.new(source_variable_token)
-
-      target_values = @target.evaluate(interpreter)
-      target = target_values[0]
-
-      dims = interpreter.get_dimensions(source_variable_name)
-
-      raise(BASICSyntaxError, 'Source not an array') if dims.nil?
-
-      raise(BASICSyntaxError, 'Source must have 1 dimension') unless
-        dims.size == 1
-
-      cols = dims[0].to_i
-      values = {}
-      (0..cols).each do |col|
-        column = IntegerConstant.new(col)
-        variable = Variable.new(source_variable_name, :scalar, [column], [column])
-        coord = AbstractElement.make_coord(col)
-        values[coord] = interpreter.get_value(variable)
-      end
-
-      array = BASICArray.new(dims, values)
-      text = array.pack
-
-      interpreter.set_value(target, text)
-
-    else
-      raise BASICExpressionError, 'Type mismatch'
-    end
   end
 end
 
