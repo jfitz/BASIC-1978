@@ -3133,6 +3133,68 @@ class FunctionSpace < AbstractFunction
   end
 end
 
+# function SPLIT1$
+class FunctionSplit1T < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :array
+
+    @default_shape = :scalar
+    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature_2 = [
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :string, 'shape' => :scalar }
+    ]
+    @signature_3 = [
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :integer, 'shape' => :scalar }
+    ]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    if match_args_to_signature(args, @signature_1)
+      t = args[0].to_v
+      ts = t.split()
+    elsif match_args_to_signature(args, @signature_2)
+      t = args[0].to_v
+      s = args[1].to_v
+      ts = t.split(s)
+    elsif match_args_to_signature(args, @signature_3)
+      t = args[0].to_v
+      s = args[1].to_v
+      m = args[2].to_i
+      ts = t.split(s,m)
+    else
+      raise BASICRuntimeError.new(:te_args_no_match, @name)
+    end     
+
+    base = $options['base'].value
+
+    upper = ts.size - (1 - base)
+    u_dim = NumericConstant.new(upper)
+
+    dims = [u_dim]
+
+    values = {}
+
+    (base..dims[0].to_i).each_with_index do |col, index|
+      coords = AbstractElement.make_coord(col)
+      values[coords] = TextConstant.new(ts[index])
+    end
+
+    res = BASICArray.new(dims, values)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function SQR
 class FunctionSqr < AbstractFunction
   def initialize(text)
@@ -3735,6 +3797,7 @@ class FunctionFactory
     'SIN' => FunctionSin,
     'SPACE$' => FunctionSpace,
     'SPC$' => FunctionSpace,
+    'SPLIT1$' => FunctionSplit1T,
     'SQR' => FunctionSqr,
     'STR$' => FunctionStr,
     'STRING$' => FunctionString,
