@@ -46,6 +46,7 @@ BASIC-1978 is designed to run programs for an early version of Microsoft BASIC.
 
 Absent from BASIC-1978 are:
 
+       The CHANGE statement
        The INPUT$ statement
        The INPUT LINE statement
        The constant PI
@@ -889,6 +890,13 @@ When arrays are zero-based, the DIM A(20) statement allows for values A(0) throu
 
 OPTION BASE 1 changes arrays to one-based, but does not change the upper bound.
 With OPTION BASE 1, the statement DIM A(20) allows for values A(1) through A(20).
+
+The DIM statement allows expressions, which can be used as follows:
+
+    10 READ N
+    20 DIM A(N)
+    30 REM more code
+    90 DATA 4, 1,2,3,4,5
 
 END
 ~~~
@@ -1788,7 +1796,7 @@ The FORGET command is useful with the REQUIRE_INITIALIZED option.
 It is a way to force a variable 'out of scope' or to be forgotten.
 Forgotten variables are not initialized, and references to them will cause an error.
 
-The ARR FORGET statement leaves the dimensions for the variable unchanged.
+The ARR FORGET statement removes the dimensions for the variable.
 
 ARR INPUT
 ~~~~~~~~~
@@ -2072,7 +2080,7 @@ The FORGET command is useful with the REQUIRE_INITIALIZED option.
 It is a way to force a variable 'out of scope' or to be forgotten.
 Forgotten variables are not initialized, and references to them will cause an error.
 
-The MAT FORGET statement leaves the dimensions for the variable unchanged.
+The MAT FORGET statement removes the dimensions for the variable.
 
 MAT INPUT
 ~~~~~~~~~
