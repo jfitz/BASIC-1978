@@ -531,7 +531,8 @@ def make_command_tokenbuilders(quotes, long_names)
     DEFAULT_PROMPT DETECT_INFINITE_LOOP
     ECHO EXTEND_IF FIELD_SEP FORGET_FORNEXT HEADING
     IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON
-    INT_BITWISE INT_FLOOR LOCK_FORNEXT LONG_NAMES MAX_LINE_NUM MIN_LINE_NUM
+    INT_BITWISE INT_FLOOR LOCK_FORNEXT LONG_NAMES
+    MAX_DIM MAX_LINE_NUM MIN_LINE_NUM
     NEWLINE_SPEED
     PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH
     PROMPT PROMPTD PROMPT_COUNT PROVENANCE
@@ -632,6 +633,7 @@ OptionParser.new do |opt|
   opt.on('--int-floor') { |o| options[:int_floor] = o }
   opt.on('--lock-fornext') { |o| options[:lock_fornext] = o }
   opt.on('--long-names') { |o| options[:long_names] = o }
+  opt.on('--max-dim LIMIT') { |o| options[:max_dim] = o }
   opt.on('--precision DIGITS') { |o| options[:precision] = o }
   opt.on('--print-width WIDTH') { |o| options[:print_width] = o }
   opt.on('--prompt PROMPT') { |o| options[:prompt] = o }
@@ -737,6 +739,10 @@ $options['lock_fornext'] =
 
 long_names = options.key?(:long_names)
 $options['long_names'] = Option.new(only_new, boolean, long_names)
+
+max_dim = 255
+max_dim = options[:max_dim].to_i if options.key?(:max_dim)
+$options['max_dim'] = Option.new(all_types, int, max_dim)
 
 $options['max_line_num'] = Option.new(only_new, int_32767, 32767)
 $options['min_line_num'] = Option.new(only_new, int_1, 1)
