@@ -3017,6 +3017,33 @@ class FunctionRnd2T < AbstractFunction
   end
 end
 
+# function REV1, REV1%, REV1$
+class FunctionRev1 < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :array
+
+    @default_shape = :array
+    @signature_1 = [{ 'type' => @content_type, 'shape' => :array }]
+  end
+
+  def evaluate(_, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature_1)
+
+    dims = args[0].dimensions
+    res = BASICArray.new(dims, args[0].reverse_values)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function SEC
 class FunctionSec < AbstractFunction
   def initialize(text)
@@ -3790,6 +3817,9 @@ class FunctionFactory
     'RND2' => FunctionRnd2,
     'RND2%' => FunctionRnd2I,
     'RND2$' => FunctionRnd2T,
+    'REV1' => FunctionRev1,
+    'REV1%' => FunctionRev1,
+    'REV1$' => FunctionRev1,
     'ROUND' => FunctionRound,
     'SEC' => FunctionSec,
     'SGN' => FunctionSgn,

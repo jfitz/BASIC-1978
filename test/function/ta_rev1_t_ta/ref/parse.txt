@@ -1,0 +1,58 @@
+10 OPTION BASE 0
+ NumericConstant:0
+20 DIM A$(6)
+ NumericConstant:6
+ Declaration:A$() -> $()
+30 FOR I = 0 TO 6
+ control: Variable:I -> _
+ start:   ["NumericConstant:0"]
+ end:     ["NumericConstant:6"]
+40 LET A$(I) = "V" + STR$(I)
+ Variable:I -> _
+ Variable:A$(_) -> $
+ TextConstant:"V"
+ Variable:I -> _
+ FunctionStr:STR$(_) -> $
+ BinaryOperatorPlus:+($,$) -> $
+ AssignmentOperator:= $ -> $
+50 NEXT I
+ Variable:I -> _
+100 ARR B$ = REV1$(A$)
+ Variable:B$() -> $()
+ Variable:A$() -> $()
+ FunctionRev1:REV1$($()) -> $()
+ AssignmentOperator:= $() -> $()
+110 GOSUB 800
+ LineNumber:800
+120 OPTION BASE 1
+ NumericConstant:1
+130 ARR B$ = REV1$(A$)
+ Variable:B$() -> $()
+ Variable:A$() -> $()
+ FunctionRev1:REV1$($()) -> $()
+ AssignmentOperator:= $() -> $()
+140 OPTION BASE 0
+ NumericConstant:0
+150 GOSUB 800
+ LineNumber:800
+790 STOP
+ 
+800 REM PROCEDURE A
+ Remark:PROCEDURE A
+810 PRINT "ARRAY A"
+ TextConstant:"ARRAY A"
+ CarriageControl:NL
+820 ARR PRINT A$
+ Variable:A$() -> $()
+ CarriageControl:NL
+830 PRINT "ARRAY B"
+ TextConstant:"ARRAY B"
+ CarriageControl:NL
+840 ARR PRINT B$
+ Variable:B$() -> $()
+ CarriageControl:NL
+890 RETURN
+ 
+999 END
+ 
+

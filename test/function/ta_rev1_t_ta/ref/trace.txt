@@ -1,0 +1,136 @@
+10: OPTION BASE 0
+20: DIM A$(6)
+30: FOR I = 0 TO 6
+ I = 0
+ terminated:false
+40: LET A$(I) = "V" + STR$(I)
+ I: 0
+ A$(0) = "V0"
+50: NEXT I
+ I: 0
+ terminated:false
+ I = 1
+40: LET A$(I) = "V" + STR$(I)
+ I: 1
+ A$(1) = "V1"
+50: NEXT I
+ I: 1
+ terminated:false
+ I = 2
+40: LET A$(I) = "V" + STR$(I)
+ I: 2
+ A$(2) = "V2"
+50: NEXT I
+ I: 2
+ terminated:false
+ I = 3
+40: LET A$(I) = "V" + STR$(I)
+ I: 3
+ A$(3) = "V3"
+50: NEXT I
+ I: 3
+ terminated:false
+ I = 4
+40: LET A$(I) = "V" + STR$(I)
+ I: 4
+ A$(4) = "V4"
+50: NEXT I
+ I: 4
+ terminated:false
+ I = 5
+40: LET A$(I) = "V" + STR$(I)
+ I: 5
+ A$(5) = "V5"
+50: NEXT I
+ I: 5
+ terminated:false
+ I = 6
+40: LET A$(I) = "V" + STR$(I)
+ I: 6
+ A$(6) = "V6"
+50: NEXT I
+ I: 6
+ terminated:true
+100: ARR B$ = REV1$(A$)
+ A$(0): "V0"
+ A$(1): "V1"
+ A$(2): "V2"
+ A$(3): "V3"
+ A$(4): "V4"
+ A$(5): "V5"
+ A$(6): "V6"
+ B$(0) = "V6"
+ B$(1) = "V5"
+ B$(2) = "V4"
+ B$(3) = "V3"
+ B$(4) = "V2"
+ B$(5) = "V1"
+ B$(6) = "V0"
+110: GOSUB 800
+800: REM PROCEDURE A
+810: PRINT "ARRAY A"
+ARRAY A
+820: ARR PRINT A$
+ A$(0): "V0"
+ A$(1): "V1"
+ A$(2): "V2"
+ A$(3): "V3"
+ A$(4): "V4"
+ A$(5): "V5"
+ A$(6): "V6"
+V0              V1              V2              V3              V4              V5              V6
+830: PRINT "ARRAY B"
+ARRAY B
+840: ARR PRINT B$
+ B$(0): "V6"
+ B$(1): "V5"
+ B$(2): "V4"
+ B$(3): "V3"
+ B$(4): "V2"
+ B$(5): "V1"
+ B$(6): "V0"
+V6              V5              V4              V3              V2              V1              V0
+890: RETURN
+120: OPTION BASE 1
+130: ARR B$ = REV1$(A$)
+ A$(1): "V1"
+ A$(2): "V2"
+ A$(3): "V3"
+ A$(4): "V4"
+ A$(5): "V5"
+ A$(6): "V6"
+ B$(1) = "V6"
+ B$(2) = "V5"
+ B$(3) = "V4"
+ B$(4) = "V3"
+ B$(5) = "V2"
+ B$(6) = "V1"
+140: OPTION BASE 0
+150: GOSUB 800
+800: REM PROCEDURE A
+810: PRINT "ARRAY A"
+ARRAY A
+820: ARR PRINT A$
+ A$(0): "V0"
+ A$(1): "V1"
+ A$(2): "V2"
+ A$(3): "V3"
+ A$(4): "V4"
+ A$(5): "V5"
+ A$(6): "V6"
+V0              V1              V2              V3              V4              V5              V6
+830: PRINT "ARRAY B"
+ARRAY B
+840: ARR PRINT B$
+ B$(0): "V6"
+ B$(1): "V6"
+ B$(2): "V5"
+ B$(3): "V4"
+ B$(4): "V3"
+ B$(5): "V2"
+ B$(6): "V1"
+V6              V6              V5              V4              V3              V2              V1
+890: RETURN
+790: STOP
+STOP in line 790
+
