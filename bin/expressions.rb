@@ -479,10 +479,9 @@ class AbstractCompound
 
   def plot_1(printer, interpreter)
     base = $options['base'].value
+    upper = @dimensions[0].to_i
 
-    upper = @dimensions[0].to_i - base
-
-    n_cols = upper + 1
+    n_cols = upper + 1 - base
 
     # height above x-axis
     max_value = max_1
@@ -542,7 +541,7 @@ class AbstractCompound
       plot_width < n_cols
 
     spacer = (plot_width / n_cols).to_i
-    plot_width = spacer * (n_cols + 1)
+    plot_width = spacer * n_cols
 
     (depth..height).reverse_each do |row|
       upper_bound = y_delta * row
