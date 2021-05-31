@@ -208,7 +208,7 @@ class Shell
       process_command_load_command(tokens, line)
       return
     end
-    
+
     # starts with a number, so maybe it is a program line
     return @interpreter.program_store_line(line, true, true) if
       /\A[ \t]*\d/ =~ line
@@ -262,7 +262,7 @@ class Shell
          !$options[kwd_d].types.include?(:loaded)
         raise BASICCommandError.new("Cannot change #{kwd} when program is loaded")
       end
-      
+
       if args[1].boolean_constant?
         boolean = BooleanConstant.new(args[1])
         $options[kwd_d].set(boolean.to_v)
@@ -279,7 +279,7 @@ class Shell
       value = $options[kwd_d].value.to_s.upcase
       lines << 'OPTION ' +  kwd + ' ' + value
     else
-      raise BASICCommandError.new("Too many arguments")
+      raise BASICCommandError.new('Too many arguments')
     end
 
     lines
@@ -327,7 +327,7 @@ class Shell
       texts.each { |text| @console_io.print_line(text) }
     when 'LOAD'
       @interpreter.clear_all_breakpoints
-      filename, keywords = parse_args(args)
+      filename, _keywords = parse_args(args)
 
       raise BASICCommandError.new('Filename not specified') if filename.nil?
 
@@ -465,7 +465,7 @@ class Shell
   rescue Errno::ENOENT, Errno::EISDIR
     @console_io.print_line("File '#{filename}' not found")
   end
-    
+
   def save_file(filename, lines)
     File.open(filename, 'w') do |file|
       lines.each do |line|
@@ -582,7 +582,7 @@ def parse_args(tokens)
     filename = token.value.strip if token.text_constant? && filename.nil?
   end
 
-  return filename, keywords
+  [filename, keywords]
 end
 
 def load_file_command_line(filename, interpreter, console_io)
@@ -754,9 +754,7 @@ $options['newline_speed'] = Option.new(all_types, int, newline_speed)
 precision = 9
 if options.key?(:precision)
   precision = options[:precision]
-  if precision.match(/\A\d+\z/)
-    precision = precision.to_i
-  end
+  precision = precision.to_i if precision =~ /\A\d+\z/
 end
 $options['precision'] = Option.new(all_types, int_1_17, precision)
 
@@ -849,7 +847,7 @@ end
 unless list_filename.nil?
   args = [TextConstant.new(list_filename)]
 
-  filename, keywords = parse_args(args)
+  filename, _keywords = parse_args(args)
 
   if load_file_command_line(filename, interpreter, console_io)
     texts = interpreter.program_list('', list_tokens)
@@ -865,7 +863,7 @@ end
 unless parse_filename.nil?
   args = [TextConstant.new(parse_filename)]
 
-  filename, keywords = parse_args(args)
+  filename, _keywords = parse_args(args)
 
   if load_file_command_line(filename, interpreter, console_io)
     texts = interpreter.program_parse('')
@@ -881,7 +879,7 @@ end
 unless analyze_filename.nil?
   args = [TextConstant.new(analyze_filename)]
 
-  filename, keywords = parse_args(args)
+  filename, _keywords = parse_args(args)
 
   if load_file_command_line(filename, interpreter, console_io) &&
      interpreter.program_okay?
@@ -896,7 +894,7 @@ end
 unless pretty_filename.nil?
   args = [TextConstant.new(pretty_filename)]
 
-  filename, keywords = parse_args(args)
+  filename, _keywords = parse_args(args)
 
   if load_file_command_line(filename, interpreter, console_io)
     pretty_multiline = $options['pretty_multiline'].value
@@ -913,7 +911,7 @@ end
 unless cref_filename.nil?
   args = [TextConstant.new(cref_filename)]
 
-  filename, keywords = parse_args(args)
+  filename, _keywords = parse_args(args)
 
   if load_file_command_line(filename, interpreter, console_io)
     texts = interpreter.program_crossref
@@ -927,7 +925,7 @@ end
 unless run_filename.nil?
   args = [TextConstant.new(run_filename)]
 
-  filename, keywords = parse_args(args)
+  filename, _keywords = parse_args(args)
 
   if load_file_command_line(filename, interpreter, console_io) &&
      interpreter.program_okay?
