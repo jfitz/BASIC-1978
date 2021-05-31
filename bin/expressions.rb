@@ -586,8 +586,8 @@ class AbstractCompound
     raise BASICRuntimeError.new(:te_too_many, 'PLOT') if
       upper_r > markers.size
 
-    n_rows = upper_r + 1
-    n_cols = upper_c
+    n_rows = upper_r + 1 - base
+    n_cols = upper_c + 1 - base
 
     # height above x-axis
     max_value = max_2
@@ -647,7 +647,7 @@ class AbstractCompound
       plot_width < n_cols
 
     spacer = (plot_width / n_cols).to_i
-    plot_width = spacer * (n_cols + 1)
+    plot_width = spacer * n_cols
 
     (depth..height).reverse_each do |row|
       upper_bound = y_delta * row
