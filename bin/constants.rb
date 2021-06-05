@@ -153,7 +153,7 @@ class AbstractElement
   def pop_stack(stack); end
 
   private
-  
+
   def make_sigils(types, shapes)
     return nil if types.nil? || shapes.nil?
 
@@ -191,7 +191,7 @@ class AbstractElement
 
     sigil_chars[type]
   end
-  
+
   def make_shape_sigil(shape)
     sigil = ''
     sigil = '()' if shape == :array
@@ -383,8 +383,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value == other.to_v)
-    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
-    b
+    b = NumericConstant.new(b.to_ms_i) unless
+      $options['relational_boolean'].value
   end
 
   def b_ne(other)
@@ -393,8 +393,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value != other.to_v)
-    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
-    b
+    b = NumericConstant.new(b.to_ms_i) unless
+      $options['relational_boolean'].value
   end
 
   def b_gt(other)
@@ -403,8 +403,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value > other.to_v)
-    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
-    b
+    b = NumericConstant.new(b.to_ms_i) unless
+      $options['relational_boolean'].value
   end
 
   def b_ge(other)
@@ -413,8 +413,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value >= other.to_v)
-    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
-    b
+    b = NumericConstant.new(b.to_ms_i) unless
+      $options['relational_boolean'].value
   end
 
   def b_lt(other)
@@ -423,8 +423,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value < other.to_v)
-    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
-    b
+    b = NumericConstant.new(b.to_ms_i) unless
+      $options['relational_boolean'].value
   end
 
   def b_le(other)
@@ -433,8 +433,8 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value <= other.to_v)
-    b = NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
-    b
+    b = NumericConstant.new(b.to_ms_i) unless
+      $options['relational_boolean'].value
   end
 
   def b_and(_)
@@ -644,21 +644,21 @@ class NumericConstant < AbstractValueElement
 
   def b_and(other)
     b = BooleanConstant.new(to_b && other.to_b)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def b_or(other)
     b = BooleanConstant.new(to_b || other.to_b)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def posate
-    f = to_f
+    f = @value
     NumericConstant.new(f)
   end
 
   def negate
-    f = -to_f
+    f = -@value
     NumericConstant.new(f)
   end
 
@@ -748,10 +748,6 @@ class NumericConstant < AbstractValueElement
 
     value = @value**other.to_numeric.to_v
     NumericConstant.new(value)
-  end
-
-  def negate
-    NumericConstant.new(-@value)
   end
 
   def truncate
@@ -1006,7 +1002,7 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value == other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def b_ne(other)
@@ -1015,7 +1011,7 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value != other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def b_gt(other)
@@ -1024,7 +1020,7 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value > other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def b_ge(other)
@@ -1033,7 +1029,7 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value >= other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def b_lt(other)
@@ -1042,7 +1038,7 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value < other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def b_le(other)
@@ -1051,7 +1047,7 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value <= other.to_v)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def b_and(other)
@@ -1059,7 +1055,8 @@ class IntegerConstant < AbstractValueElement
       IntegerConstant.new(to_i & other.to_i)
     else
       b = BooleanConstant.new(to_b && other.to_b)
-      NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+      NumericConstant.new(b.to_ms_i) unless
+        $options['relational_boolean'].value
     end
   end
 
@@ -1068,7 +1065,8 @@ class IntegerConstant < AbstractValueElement
       IntegerConstant.new(to_i | other.to_i)
     else
       b = BooleanConstant.new(to_b || other.to_b)
-      NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+      NumericConstant.new(b.to_ms_i) unless
+        $options['relational_boolean'].value
     end
   end
 
@@ -1308,7 +1306,7 @@ class TextConstant < AbstractValueElement
     # generate N characters from specified set
     s = ''
 
-    (1..length).each do |i|
+    (1..length).each do
       v1 = interpreter.rand(NumericConstant.new(set.size))
       v2 = v1.to_i
       raise Exception.new('RND$ out of range') if v2 >= set.size
@@ -1385,12 +1383,12 @@ class TextConstant < AbstractValueElement
 
   def b_and(other)
     b = BooleanConstant.new(to_b && other.to_b)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def b_or(other)
     b = BooleanConstant.new(to_b || other.to_b)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def not
@@ -1562,12 +1560,12 @@ class BooleanConstant < AbstractValueElement
 
   def b_and(other)
     b = BooleanConstant.new(@value && other.to_b)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def b_or(other)
     b = BooleanConstant.new(@value || other.to_b)
-    NumericConstant.new(b.to_ms_i) if !$options['relational_boolean'].value
+    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
   end
 
   def +(other)
@@ -1750,7 +1748,7 @@ class CarriageControl
     []
   end
 
-  def uncache ; end
+  def uncache; end
 
   def printable?
     false
@@ -2256,7 +2254,7 @@ class Variable < AbstractElement
     msg = "Variable #{@variable_name} has no dimensions"
     raise BASICExpressionError.new(msg) if dims.nil?
 
-    msg = "Matrix #{@variable_name} requires two dimensions"
+    # msg = "Matrix #{@variable_name} requires two dimensions"
     # don't check this; it causes problems for special forms
     # raise BASICExpressionError.new(msg) if dims.size != 2
 
@@ -2478,8 +2476,8 @@ class ExpressionList < AbstractElement
   end
 
   def set_content_type(type_stack)
-    @expressions.each { |expression| expression.set_content_type }
-    
+    @expressions.each(&:set_content_type)
+
     type_stack.push(content_type)
   end
 
@@ -2492,7 +2490,7 @@ class ExpressionList < AbstractElement
   end
 
   def set_shape(shape_stack)
-    @expressions.each { |expression| expression.set_shape }
+    @expressions.each(&:set_shape)
 
     shape_stack.push(shape)
   end
@@ -2506,7 +2504,7 @@ class ExpressionList < AbstractElement
   end
 
   def set_constant(constant_stack)
-    @expressions.each { |expression| expression.set_constant }
+    @expressions.each(&:set_constant)
 
     constant_stack.push(constant)
   end

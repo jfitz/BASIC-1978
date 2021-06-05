@@ -118,7 +118,7 @@ class UnlessModifier < AbstractModifier
 
   def initialize(expression_tokens)
     super()
-    
+
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
@@ -193,7 +193,7 @@ class WhileModifier < AbstractModifier
 
   def initialize(expression_tokens)
     super()
-    
+
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
@@ -287,7 +287,7 @@ class UntilModifier < AbstractModifier
 
   def initialize(expression_tokens)
     super()
-    
+
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
@@ -438,7 +438,7 @@ class ForModifier < AbstractModifier
     @functions = @start.functions
     @userfuncs = @start.userfuncs
 
-    if !@end.nil?
+    unless @end.nil?
       @numerics += @end.numerics
       @strings += @end.strings
       @booleans += @end.booleans
@@ -448,7 +448,7 @@ class ForModifier < AbstractModifier
       @userfuncs += @end.userfuncs
     end
 
-    if !@step.nil?
+    unless @step.nil?
       @numerics += @step.numerics
       @strings += @step.strings
       @booleans += @step.booleans
@@ -458,7 +458,7 @@ class ForModifier < AbstractModifier
       @userfuncs += @step.userfuncs
     end
 
-    if !@until.nil?
+    unless @until.nil?
       @numerics += @until.numerics
       @strings += @until.strings
       @booleans += @until.booleans
@@ -468,7 +468,7 @@ class ForModifier < AbstractModifier
       @userfuncs += @until.userfuncs
     end
 
-    if !@while.nil?
+    unless @while.nil?
       @numerics += @while.numerics
       @strings += @while.strings
       @booleans += @while.booleans
@@ -494,7 +494,7 @@ class ForModifier < AbstractModifier
   end
 
   def pretty
-    if !@end.nil?
+    unless @end.nil?
       if @step.nil?
         "FOR #{@control} = #{@start} TO #{@end}"
       else
@@ -502,7 +502,7 @@ class ForModifier < AbstractModifier
       end
     end
 
-    if !@until.nil?
+    unless @until.nil?
       if @step.nil?
         "FOR #{@control} = #{@start} UNTIL #{@until}"
       else
@@ -510,7 +510,7 @@ class ForModifier < AbstractModifier
       end
     end
 
-    if !@while.nil?
+    unless @while.nil?
       if @step.nil?
         "FOR #{@control} = #{@start} WHILE #{@while}"
       else
@@ -536,7 +536,7 @@ class ForModifier < AbstractModifier
 
     s = ''
 
-    if !@end.nil?
+    unless @end.nil?
       if @step.nil?
         s = "FOR #{@control} = #{@start} TO #{@end}"
       else
@@ -544,7 +544,7 @@ class ForModifier < AbstractModifier
       end
     end
 
-    if !@until.nil?
+    unless @until.nil?
       if @step.nil?
         s = "FOR #{@control} = #{@start} UNTIL #{@until}"
       else
@@ -552,7 +552,7 @@ class ForModifier < AbstractModifier
       end
     end
 
-    if !@while.nil?
+    unless @while.nil?
       if @step.nil?
         s = "FOR #{@control} = #{@start} UNTIL #{@while}"
       else
@@ -572,18 +572,16 @@ class ForModifier < AbstractModifier
     step = NumericConstant.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    if !@end.nil?
+    unless @end.nil?
       to = @end.evaluate(interpreter)[0]
       fornext_control = ForToControl.new(@control, from, step, to)
     end
 
-    if !@until.nil?
-      fornext_control = ForUntilControl.new(@control, from, step, @until)
-    end
+    fornext_control = ForUntilControl.new(@control, from, step, @until) unless
+      @until.nil?
 
-    if !@while.nil?
-      fornext_control = ForWhileControl.new(@control, from, step, @while)
-    end
+    fornext_control = ForWhileControl.new(@control, from, step, @while) unless
+      @while.nil?
 
     interpreter.assign_fornext(fornext_control)
 
@@ -607,7 +605,7 @@ class ForModifier < AbstractModifier
     fornext_control = interpreter.retrieve_fornext(@control)
 
     bump_early = fornext_control.bump_early?
-    
+
     # change control variable value for FOR-WHILE and FOR-UNTIL
     fornext_control.bump_control(interpreter) if bump_early
 

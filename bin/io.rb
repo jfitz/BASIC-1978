@@ -92,8 +92,9 @@ class ConsoleIo
 
     raise BASICRuntimeError.new(:te_eof) if input_text.empty?
 
-    input_text.bytes.collect { |c| raise BASICRuntimeError.new(:te_break) if
-                               c < 8 }
+    input_text.bytes.collect do |c|
+      raise BASICRuntimeError.new(:te_break) if c < 8
+    end
 
     ascii_text = ascii_printables(input_text)
 
@@ -174,9 +175,7 @@ class ConsoleIo
 
     zone_width = $options['semicolon_zone_width'].value
 
-    if zone_width > 0
-      print_item(' ') while @column % zone_width != 0
-    end
+    print_item(' ') while @column % zone_width !=0 unless zone_width.zero?
 
     @last_was_numeric = false
     @last_was_tab = false
@@ -364,7 +363,7 @@ class FileHandler
         @records[@rec_number] = @record
         @record = ''
       end
-      
+
       write_file(@file_name, @records)
       @records = []
       @rec_number = -1
@@ -378,7 +377,7 @@ class FileHandler
   end
 
   def read_record(interpreter, rec_number)
-    raise BASICRuntimeError.new(:te_mode_inc) if @mode != :memory
+    raise BASICRuntimeError.new(:te_mode_inc) unless @mode == :memory
 
     # error if format not specified by RECORD
     raise BASICRuntimeError.new(:te_recno_inv) if rec_number < 0
@@ -387,7 +386,7 @@ class FileHandler
 
     raise BASICRuntimeError.new(:te_recno_out) if
       rec_number >= @records.size
-    
+
     input_text = @records[rec_number]
 
     tokenbuilders = make_tokenbuilders(@quotes)
@@ -407,7 +406,7 @@ class FileHandler
   end
 
   def write_record(record, rec_number)
-    raise BASICRuntimeError.new(:te_mode_inc) if @mode != :memory
+    raise BASICRuntimeError.new(:te_mode_inc) unless @mode == :memory
 
     # error if format not specified by RECORD
     raise BASICRuntimeError.new(:te_recno_inv) if rec_number < 0
@@ -415,7 +414,7 @@ class FileHandler
     raise BASICRuntimeError.new(:te_recno_inv) if rec_number > 65534
 
     # add empty lines if rec_num > size
-    @records << "" while @records.size < rec_number
+    @records << '' while @records.size < rec_number
 
     # write to data store
     @records[rec_number] = record
@@ -521,7 +520,7 @@ class FileHandler
     file = File.open(file_name, 'rt')
     file.each_line { |line| lines << line.strip }
     file.close
-  rescue Exception => e
+  rescue Exception
     raise BASICRuntimeError.new(:te_file_no_read, file_name)
   else
     lines
@@ -531,7 +530,7 @@ class FileHandler
     file = File.open(file_name, 'wt')
     lines.each { |line| file.puts(line) }
     file.close
-  rescue Exception => e
+  rescue Exception
     raise BASICRuntimeError.new(:te_file_no_write, file_name)
   end
 end

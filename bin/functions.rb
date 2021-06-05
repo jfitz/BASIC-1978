@@ -309,7 +309,7 @@ class UserFunction < AbstractFunction
   end
 
   # return a single value, a reference to this object
-  def evaluate_ref_scalar(interpreter, arg_stack)
+  def evaluate_ref_scalar(_interpreter, arg_stack)
     raise BASICSyntaxError.new('function evaluated with arguments') if
       previous_is_array(arg_stack)
 
@@ -317,7 +317,7 @@ class UserFunction < AbstractFunction
   end
 
   # return a single value, a reference to this object
-  def evaluate_ref_compound(interpreter, arg_stack)
+  def evaluate_ref_compound(_interpreter, arg_stack)
     raise BASICSyntaxError.new('function evaluated with arguments') if
       previous_is_array(arg_stack)
 
@@ -362,7 +362,7 @@ class FunctionAscii < AbstractFunction
     @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
-  def evaluate(interpreter, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
@@ -516,7 +516,7 @@ class FunctionChr < AbstractFunction
     @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(interpreter, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
@@ -581,7 +581,7 @@ class FunctionCon1 < AbstractFunction
 
     constant_stack.push(@constant)
   end
-  
+
   def evaluate(interpreter, arg_stack)
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -662,7 +662,7 @@ class FunctionCon2 < AbstractFunction
 
     constant_stack.push(@constant)
   end
-  
+
   def evaluate(interpreter, arg_stack)
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -992,7 +992,7 @@ class FunctionFix < AbstractFunction
   end
 
   # return a single value
-  def evaluate(interpreter, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
@@ -1201,7 +1201,7 @@ class FunctionInt < AbstractFunction
   end
 
   # return a single value
-  def evaluate(interpreter, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
@@ -2010,7 +2010,7 @@ end
 
 # function PROD
 class FunctionProd < AbstractFunction
- def initialize(text)
+  def initialize(text)
     super
 
     @shape = :scalar
@@ -2222,7 +2222,7 @@ class FunctionRndI < AbstractFunction
 
     shape_stack.push(@shape)
   end
-  
+
   def set_constant(constant_stack)
     unless constant_stack.empty?
       constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
@@ -2291,7 +2291,7 @@ class FunctionRndT < AbstractFunction
       'X' => '01234567890ABCDEF',
       'x' => '01234567890abcdef'
     }
-    
+
   end
 
   def set_content_type(type_stack)
@@ -2310,7 +2310,7 @@ class FunctionRndT < AbstractFunction
 
     shape_stack.push(@shape)
   end
-  
+
   def set_constant(constant_stack)
     unless constant_stack.empty?
       constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
@@ -2395,18 +2395,17 @@ class FunctionRnd1 < AbstractFunction
 
     shape_stack.push(@shape)
   end
-  
+
   def set_constant(constant_stack)
     unless constant_stack.empty?
-      constants = constant_stack.pop if
-        constant_stack[-1].class.to_s == 'Array'
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
     end
 
     # RND1() is never constant
 
     constant_stack.push(@constant)
   end
-  
+
   def evaluate(interpreter, arg_stack)
     upper_bound = NumericConstant.new(1)
 
@@ -2477,18 +2476,17 @@ class FunctionRnd1I < AbstractFunction
 
     shape_stack.push(@shape)
   end
-  
+
   def set_constant(constant_stack)
     unless constant_stack.empty?
-      constants = constant_stack.pop if
-        constant_stack[-1].class.to_s == 'Array'
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
     end
 
     # RND1%() is never constant
 
     constant_stack.push(@constant)
   end
-  
+
   def evaluate(interpreter, arg_stack)
     upper_bound = IntegerConstant.new(100)
 
@@ -2565,7 +2563,7 @@ class FunctionRnd1T < AbstractFunction
       'X' => '01234567890ABCDEF',
       'x' => '01234567890abcdef'
     }
-    
+
   end
 
   def set_content_type(type_stack)
@@ -2584,11 +2582,10 @@ class FunctionRnd1T < AbstractFunction
 
     shape_stack.push(@shape)
   end
-  
+
   def set_constant(constant_stack)
     unless constant_stack.empty?
-      constants = constant_stack.pop if
-        constant_stack[-1].class.to_s == 'Array'
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
     end
 
     # RND1() is never constant
@@ -2679,7 +2676,7 @@ class FunctionRnd2 < AbstractFunction
     unless type_stack.empty?
       @arg_types = type_stack.pop if
         type_stack[-1].class.to_s == 'Array'
-  end
+    end
 
     type_stack.push(@content_type)
   end
@@ -2694,8 +2691,7 @@ class FunctionRnd2 < AbstractFunction
 
   def set_constant(constant_stack)
     unless constant_stack.empty?
-      constants = constant_stack.pop if
-        constant_stack[-1].class.to_s == 'Array'
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
     end
 
     # RND2() is never constant
@@ -2772,7 +2768,7 @@ class FunctionRnd2I < AbstractFunction
     unless type_stack.empty?
       @arg_types = type_stack.pop if
         type_stack[-1].class.to_s == 'Array'
-  end
+    end
 
     type_stack.push(@content_type)
   end
@@ -2787,8 +2783,7 @@ class FunctionRnd2I < AbstractFunction
 
   def set_constant(constant_stack)
     unless constant_stack.empty?
-      constants = constant_stack.pop if
-        constant_stack[-1].class.to_s == 'Array'
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
     end
 
     # RND2%() is never constant
@@ -2886,14 +2881,14 @@ class FunctionRnd2T < AbstractFunction
       'X' => '01234567890ABCDEF',
       'x' => '01234567890abcdef'
     }
-    
+
   end
 
   def set_content_type(type_stack)
     unless type_stack.empty?
       @arg_types = type_stack.pop if
         type_stack[-1].class.to_s == 'Array'
-  end
+    end
 
     type_stack.push(@content_type)
   end
@@ -2908,8 +2903,7 @@ class FunctionRnd2T < AbstractFunction
 
   def set_constant(constant_stack)
     unless constant_stack.empty?
-      constants = constant_stack.pop if
-        constant_stack[-1].class.to_s == 'Array'
+      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
     end
 
     # RND2$() is never constant
@@ -3074,9 +3068,6 @@ class FunctionSin < AbstractFunction
 
     @cached = res if @constant && $options['cache_const_expr']
     res
-
-    @cached = res if @constant && $options['cache_const_expr']
-    res
   end
 end
 
@@ -3135,14 +3126,14 @@ class FunctionSplit1T < AbstractFunction
     ]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     if match_args_to_signature(args, @signature_1)
       t = args[0].to_v
-      ts = t.split()
+      ts = t.split
     elsif match_args_to_signature(args, @signature_2)
       t = args[0].to_v
       s = args[1].to_v
@@ -3151,10 +3142,10 @@ class FunctionSplit1T < AbstractFunction
       t = args[0].to_v
       s = args[1].to_v
       m = args[2].to_i
-      ts = t.split(s,m)
+      ts = t.split(s, m)
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
-    end     
+    end
 
     base = $options['base'].value
 

@@ -80,13 +80,10 @@ class ForUntilControl < AbstractForControl
   def front_terminated?(interpreter)
     values = @expression.evaluate(interpreter)
 
-    raise(BASICExpressionError, 'Expression error') unless
-      values.size == 1
+    raise(BASICExpressionError, 'Expression error') unless values.size == 1
 
     result = values[0]
-
-    result = BooleanConstant.new(result.to_b) if
-      !result.boolean_constant?
+    result = BooleanConstant.new(result.to_b) unless result.boolean_constant?
 
     result.value
   end
@@ -94,13 +91,10 @@ class ForUntilControl < AbstractForControl
   def terminated?(interpreter)
     values = @expression.evaluate(interpreter)
 
-    raise(BASICExpressionError, 'Expression error') unless
-      values.size == 1
+    raise(BASICExpressionError, 'Expression error') unless values.size == 1
 
     result = values[0]
-
-    result = BooleanConstant.new(result.to_b) if
-      !result.boolean_constant?
+    result = BooleanConstant.new(result.to_b) unless result.boolean_constant?
 
     result.value
   end
@@ -119,13 +113,10 @@ class ForWhileControl < AbstractForControl
   def front_terminated?(interpreter)
     values = @expression.evaluate(interpreter)
 
-    raise(BASICExpressionError, 'Expression error') unless
-      values.size == 1
+    raise(BASICExpressionError, 'Expression error') unless values.size == 1
 
     result = values[0]
-
-    result = BooleanConstant.new(result.to_b) if
-      !result.boolean_constant?
+    result = BooleanConstant.new(result.to_b) unless result.boolean_constant?
 
     !result.value
   end
@@ -133,13 +124,10 @@ class ForWhileControl < AbstractForControl
   def terminated?(interpreter)
     values = @expression.evaluate(interpreter)
 
-    raise(BASICExpressionError, 'Expression error') unless
-      values.size == 1
+    raise(BASICExpressionError, 'Expression error') unless values.size == 1
 
     result = values[0]
-
-    result = BooleanConstant.new(result.to_b) if
-      !result.boolean_constant?
+    result = BooleanConstant.new(result.to_b) unless result.boolean_constant?
 
     !result.value
   end
@@ -259,27 +247,27 @@ class Interpreter
   def program_parse(args)
     @program.parse(args)
   end
-  
+
   def program_list(args, list_tokens)
     @program.list(args, list_tokens)
   end
-  
+
   def program_pretty(args, pretty_multiline)
     @program.pretty(args, pretty_multiline)
   end
-  
+
   def program_delete(args)
     @program.delete(args)
   end
-  
+
   def program_profile(args, show_timing)
     @program.profile(args, show_timing)
   end
-  
+
   def program_crossref
     @program.crossref
   end
-  
+
   def program_analyze
     @program.analyze
   end
@@ -311,7 +299,7 @@ class Interpreter
   def program_save
     @program.save
   end
-  
+
   def run
     raise(BASICCommandError, 'No program loaded') if @program.empty?
 
@@ -363,7 +351,7 @@ class Interpreter
   end
 
   def chain(tokens)
-    raise(BASICSyntaxError, "Cannot CHAIN in a user function.") unless
+    raise(BASICSyntaxError, 'Cannot CHAIN in a user function.') unless
       @function_stack.empty?
 
     @fornexts = {}
@@ -372,11 +360,11 @@ class Interpreter
     @user_function_lines = {}
     @user_var_values = []
 
-    filename, keywords = parse_args(tokens)
+    filename, _keywords = parse_args(tokens)
 
     chain_to(filename)
 
-    raise(BASICSyntaxError, "Cannot start CHAIN program") unless
+    raise(BASICSyntaxError, 'Cannot start CHAIN program') unless
       program_okay?
 
     @next_line_index = find_first_statement
@@ -483,7 +471,8 @@ class Interpreter
     statement = statements[statement_index]
 
     statement.execute_a_statement(
-      self, @trace_out, @current_line_index, @function_running)
+      self, @trace_out, @current_line_index, @function_running
+    )
   end
 
   def current_user_function
@@ -632,24 +621,20 @@ class Interpreter
       breakpoint = true
     end
 
-    if !breakpoint
+    unless breakpoint
       if @line_cond_breakpoints.key?(line_number)
         expressions = @line_cond_breakpoints[line_number]
 
         expressions.each do |expression|
           results = expression.evaluate(self)
           result = results[0]
-          if result.value
-            breakpoint = true
-          end
+          breakpoint = true if result.value
         end
       end
     end
 
     # check step mode
-    if @step_mode
-      breakpoint = true
-    end
+    breakpoint = true if @step_mode
 
     # debug shell may change @next_line_index
     debug_shell if breakpoint
@@ -745,7 +730,7 @@ class Interpreter
           begin
             line_number = LineNumber.new(tokens_list[0])
             @line_breakpoints[line_number] = ''
-          rescue BASICSyntaxError => e
+          rescue BASICSyntaxError
             tkns = tokens_list.map(&:to_s).join
             raise BASICCommandError.new('INVALID BREAKPOINT ' + tkns)
           end
@@ -766,7 +751,7 @@ class Interpreter
             else
               @line_cond_breakpoints[line_number] = [expression]
             end
-          rescue BASICSyntaxError, BASICExpressionError => e
+          rescue BASICSyntaxError, BASICExpressionError
             tkns = tokens_list.map(&:to_s).join
 
             raise BASICCommandError.new('INVALID BREAKPOINT ' + tkns)
@@ -801,7 +786,7 @@ class Interpreter
             # TODO: distinguish between line and condition breakpoints
             @line_breakpoints.delete(line_number)
             @line_cond_breakpoints.delete(line_number)
-          rescue BASICSyntaxError => e
+          rescue BASICSyntaxError
             tkns = tokens_list.map(&:to_s).join
             raise BASICCommandError.new('INVALID BREAKPOINT ' + tkns)
           end
@@ -874,9 +859,7 @@ class Interpreter
       @trace_out = v ? @console_io : @null_out
     end
 
-    if ['cache_const_expr', 'precision', 'base'].include?(name)
-      @program.uncache
-    end
+    @program.uncache if %w[cache_const_expr precision base].include?(name)
   end
 
   def push_option(name, v)
@@ -886,9 +869,7 @@ class Interpreter
       @trace_out = v ? @console_io : @null_out
     end
 
-    if ['cache_const_expr', 'precision', 'base'].include?(name)
-      @program.uncache
-    end
+    @program.uncache if %w[cache_const_expr precision base].include?(name)
   end
 
   def pop_option(name)
@@ -898,9 +879,7 @@ class Interpreter
       @trace_out = v ? @console_io : @null_out
     end
 
-    if ['cache_const_expr', 'precision', 'base'].include?(name)
-      @program.uncache
-    end
+    @program.uncache if %w[cache_const_expr precision base].include?(name)
   end
 
   def clear_variables
@@ -1133,7 +1112,7 @@ class Interpreter
 
     ss = subscripts
     ss = wrapped_subscripts if $options['wrap'].value
-    
+
     # check subscript value against lower and upper bounds
     ss.each_with_index do |subscript, index|
       if subscript < lower
@@ -1147,10 +1126,7 @@ class Interpreter
   end
 
   def get_value(variable)
-    legals = [
-      'Variable',
-      'UserFunctionName'
-    ]
+    legals = %w[Variable UserFunctionName]
 
     raise(BASICSyntaxError,
           "#{variable.class}:#{variable} is not a variable") unless
@@ -1215,10 +1191,7 @@ class Interpreter
   end
 
   def set_value(variable, value)
-    legals = [
-      'Variable',
-      'UserFunction'
-    ]
+    legals = %w[Variable UserFunction]
 
     raise(BASICSyntaxError,
           "#{variable.class}:#{variable} is not a variable name") unless
@@ -1483,9 +1456,7 @@ class Interpreter
 
     @fornext_stack.pop
 
-    if $options['forget_fornext'].value && forget
-      forget_value(control)
-    end
+    forget_value(control) if $options['forget_fornext'].value && forget
   end
 
   def top_fornext

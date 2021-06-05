@@ -1,6 +1,6 @@
 # Unary scalar operators
 class UnaryOperator < AbstractElement
-  @operators = [ '+', '-', '#', ':', 'NOT' ]
+  @operators = ['+', '-', '#', ':', 'NOT']
 
   def self.operators
     @operators
@@ -38,7 +38,7 @@ class UnaryOperator < AbstractElement
 
     type = type_stack.pop
     @arg_types = [type]
-    
+
     @content_type = type
     type_stack.push(@content_type)
   end
@@ -67,10 +67,6 @@ class UnaryOperator < AbstractElement
 
   def signature
     make_signature(@arg_types, @arg_shapes)
-  end
-
-  def pop_stack(stack)
-    stack.pop
   end
 
   def pop_stack(stack)
@@ -132,7 +128,7 @@ class BinaryOperator < AbstractElement
     @operation = nil
     @content_type = :unknown
     @shape = :unknown
-    @constant =  false
+    @constant = false
     @warnings = []
     @arguments = nil
     @precedence = 0
@@ -152,17 +148,17 @@ class BinaryOperator < AbstractElement
     @arg_shapes = [a_shape, b_shape]
 
     table =
-    {
-      [:scalar, :scalar] => :scalar,
-      [:scalar, :array]  => :array,
-      [:scalar, :matrix] => :matrix,
-      [:array,  :scalar] => :array,
-      [:array,  :array]  => :array,
-      [:array,  :matrix] => nil,
-      [:matrix, :scalar] => :matrix,
-      [:matrix, :array]  => nil,
-      [:matrix, :matrix] => :matrix
-    }
+      {
+        %i[scalar scalar] => :scalar,
+        %i[scalar array]  => :array,
+        %i[scalar matrix] => :matrix,
+        %i[array  scalar] => :array,
+        %i[array  array]  => :array,
+        %i[array  matrix] => nil,
+        %i[matrix scalar] => :matrix,
+        %i[matrix array]  => nil,
+        %i[matrix matrix] => :matrix
+      }
 
     @shape = table[[a_shape, b_shape]]
 
@@ -219,7 +215,7 @@ class BinaryOperator < AbstractElement
     @op
   end
 
-  def evaluate(interpreter, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     raise(BASICExpressionError, 'Not enough operands') if arg_stack.size < 2
 
     y = arg_stack.pop
@@ -280,7 +276,7 @@ class BinaryOperator < AbstractElement
   def compatible(type1, type2)
     return true if type1 == type2
 
-    numerics = [:numeric, :integer, :boolean]
+    numerics = %i[numeric integer boolean]
 
     return true if numerics.include?(type1) && numerics.include?(type2)
 
@@ -291,14 +287,14 @@ class BinaryOperator < AbstractElement
     return type1 if type1 == type2
 
     return :string if type1 == :string
-    
+
     return :numeric if type1 == :numeric
     return :numeric if type2 == :numeric
 
     return :integer if type1 == :integer
     return :integer if type2 == :integer
 
-    return :boolean
+    :boolean
   end
 
   def op_scalar_matrix_1(op, a, b)
@@ -765,10 +761,10 @@ class UnaryOperatorPlus < UnaryOperator
     type = type_stack.pop
     @arg_types = [type]
 
-    arg_types = [:numeric, :integer]
+    arg_types = %i[numeric integer]
 
-    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
-      !arg_types.include?(type)
+    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") unless
+      arg_types.include?(type)
 
     @content_type = type
     type_stack.push(@content_type)
@@ -806,10 +802,10 @@ class UnaryOperatorMinus < UnaryOperator
     type = type_stack.pop
     @arg_types = [type]
 
-    arg_types = [:numeric, :integer]
+    arg_types = %i[numeric integer]
 
-    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
-      !arg_types.include?(type)
+    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") unless
+      arg_types.include?(type)
 
     @content_type = type
     type_stack.push(@content_type)
@@ -852,10 +848,10 @@ class UnaryOperatorHash < UnaryOperator
     type = type_stack.pop
     @arg_types = [type]
 
-    arg_types = [:numeric, :integer]
+    arg_types = %i[numeric integer]
 
-    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
-      !arg_types.include?(type)
+    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") unless
+      arg_types.include?(type)
 
     @content_type = :filehandle
     type_stack.push(@content_type)
@@ -885,7 +881,7 @@ class UnaryOperatorNot < UnaryOperator
     super
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @precedence = 9
   end
 
@@ -899,13 +895,13 @@ class UnaryOperatorNot < UnaryOperator
     type = type_stack.pop
     @arg_types = [type]
 
-    arg_types = [:numeric, :integer, :boolean, :string]
+    arg_types = %i[numeric integer boolean string]
 
-    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") if
-      !arg_types.include?(type)
+    raise(BASICExpressionError, "Type mismatch #{@op} #{type}") unless
+      arg_types.include?(type)
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @content_type = :integer if
       type == :integer && $options['int_bitwise'].value
 
@@ -946,7 +942,7 @@ class BinaryOperatorPlus < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer, :string]
+    arg_types = %i[numeric integer string]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
@@ -980,7 +976,7 @@ class BinaryOperatorMinus < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer]
+    arg_types = %i[numeric integer]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
@@ -1014,11 +1010,11 @@ class BinaryOperatorMultiply < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_1_types = [:numeric, :integer, :string]
-    arg_2_types = [:numeric, :integer]
+    arg_1_types = %i[numeric integer string]
+    arg_2_types = %i[numeric integer]
 
-    arg_1_types = [:numeric, :integer, :string]
-    arg_2_types = [:numeric, :integer]
+    arg_1_types = %i[numeric integer string]
+    arg_2_types = %i[numeric integer]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") unless
       arg_1_types.include?(a_type) && arg_2_types.include?(b_type)
@@ -1051,7 +1047,7 @@ class BinaryOperatorDivide < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer]
+    arg_types = %i[numeric integer]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
@@ -1086,7 +1082,7 @@ class BinaryOperatorPower < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer]
+    arg_types = %i[numeric integer]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
@@ -1108,7 +1104,7 @@ class BinaryOperatorEqual < BinaryOperator
 
     @operation = :b_eq
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @precedence = 4
   end
 
@@ -1119,7 +1115,7 @@ class BinaryOperatorEqual < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer, :string, :boolean]
+    arg_types = %i[numeric integer string boolean]
 
     @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
       a_type != b_type
@@ -1129,7 +1125,7 @@ class BinaryOperatorEqual < BinaryOperator
       !compatible(a_type, b_type)
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     type_stack.push(@content_type)
   end
 end
@@ -1146,7 +1142,7 @@ class BinaryOperatorNotEqual < BinaryOperator
 
     @operation = :b_ne
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @precedence = 4
   end
 
@@ -1157,7 +1153,7 @@ class BinaryOperatorNotEqual < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer, :string, :boolean]
+    arg_types = %i[numeric integer string boolean]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
@@ -1167,7 +1163,7 @@ class BinaryOperatorNotEqual < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     type_stack.push(@content_type)
   end
 end
@@ -1183,7 +1179,7 @@ class BinaryOperatorLess < BinaryOperator
 
     @operation = :b_lt
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @precedence = 4
   end
 
@@ -1194,7 +1190,7 @@ class BinaryOperatorLess < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer, :string]
+    arg_types = %i[numeric integer string]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
@@ -1204,7 +1200,7 @@ class BinaryOperatorLess < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     type_stack.push(@content_type)
   end
 end
@@ -1221,7 +1217,7 @@ class BinaryOperatorLessEqual < BinaryOperator
 
     @operation = :b_le
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @precedence = 4
   end
 
@@ -1232,7 +1228,7 @@ class BinaryOperatorLessEqual < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer, :string]
+    arg_types = %i[numeric integer string]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
@@ -1242,7 +1238,7 @@ class BinaryOperatorLessEqual < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     type_stack.push(@content_type)
   end
 end
@@ -1258,7 +1254,7 @@ class BinaryOperatorGreater < BinaryOperator
 
     @operation = :b_gt
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @precedence = 4
   end
 
@@ -1269,7 +1265,7 @@ class BinaryOperatorGreater < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer, :string]
+    arg_types = %i[numeric integer string]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
@@ -1279,7 +1275,7 @@ class BinaryOperatorGreater < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     type_stack.push(@content_type)
   end
 end
@@ -1296,7 +1292,7 @@ class BinaryOperatorGreaterEqual < BinaryOperator
 
     @operation = :b_ge
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @precedence = 4
   end
 
@@ -1307,7 +1303,7 @@ class BinaryOperatorGreaterEqual < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer, :string]
+    arg_types = %i[numeric integer string]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
@@ -1317,7 +1313,7 @@ class BinaryOperatorGreaterEqual < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     type_stack.push(@content_type)
   end
 end
@@ -1333,7 +1329,7 @@ class BinaryOperatorAnd < BinaryOperator
 
     @operation = :b_and
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @precedence = 3
   end
 
@@ -1344,7 +1340,7 @@ class BinaryOperatorAnd < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer, :string, :boolean]
+    arg_types = %i[numeric integer string boolean]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type)
@@ -1353,7 +1349,7 @@ class BinaryOperatorAnd < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @content_type = :integer if
       a_type == :integer && b_type == :integer && $options['int_bitwise'].value
     type_stack.push(@content_type)
@@ -1371,7 +1367,7 @@ class BinaryOperatorOr < BinaryOperator
 
     @operation = :b_or
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @precedence = 2
   end
 
@@ -1382,7 +1378,7 @@ class BinaryOperatorOr < BinaryOperator
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
 
-    arg_types = [:numeric, :integer, :string, :boolean]
+    arg_types = %i[numeric integer string boolean]
 
     raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
       !arg_types.include?(a_type) || !arg_types.include?(b_type)
@@ -1391,7 +1387,7 @@ class BinaryOperatorOr < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric if !$options['relational_boolean'].value
+    @content_type = :numeric unless $options['relational_boolean'].value
     @content_type = :integer if
       a_type == :integer && b_type == :integer && $options['int_bitwise'].value
     type_stack.push(@content_type)
