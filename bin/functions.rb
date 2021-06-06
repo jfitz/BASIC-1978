@@ -202,12 +202,8 @@ class UserFunction < AbstractFunction
     @name.to_s
   end
 
-  def to_s
-    @name.to_sw
-  end
-
   def to_sw
-    @name.to_sw
+    @name.to_s
   end
 
   def set_content_type(type_stack)
@@ -255,7 +251,6 @@ class UserFunction < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-
     return @cached unless @cached.nil?
 
     res = false
@@ -333,16 +328,16 @@ class FunctionAbs < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].abs
 
@@ -359,7 +354,7 @@ class FunctionAscii < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
   def evaluate(_interpreter, arg_stack)
@@ -368,7 +363,7 @@ class FunctionAscii < AbstractFunction
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     text = args[0].to_v
 
@@ -398,16 +393,16 @@ class FunctionArcCos < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].arccos
 
@@ -424,16 +419,16 @@ class FunctionArcSin < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].arcsin
 
@@ -450,21 +445,21 @@ class FunctionArcTan < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 = [
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
-    if match_args_to_signature(args, @signature_1)
+    if match_args_to_signature(args, @signature1)
       res = args[0].atn
-    elsif match_args_to_signature(args, @signature_2)
+    elsif match_args_to_signature(args, @signature2)
       res = args[0].atn2(args[1])
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
@@ -483,16 +478,16 @@ class FunctionAvg < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -513,7 +508,7 @@ class FunctionChr < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(_interpreter, arg_stack)
@@ -522,7 +517,7 @@ class FunctionChr < AbstractFunction
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     value = args[0].to_i
 
@@ -544,8 +539,8 @@ class FunctionCon1 < AbstractFunction
     @shape = :array
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def set_content_type(type_stack)
@@ -588,12 +583,12 @@ class FunctionCon1 < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = BASICArray.one_values(dims)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = args.clone
         values = BASICArray.one_values(dims)
         res = BASICArray.new(dims, values)
@@ -620,9 +615,9 @@ class FunctionCon2 < AbstractFunction
     @shape = :matrix
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 =
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 =
       [
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar }
@@ -669,16 +664,16 @@ class FunctionCon2 < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = Matrix.one_values(dims)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = args.clone
         values = Matrix.one_values(dims)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         dims = args.clone
         values = Matrix.one_values(dims)
         res = Matrix.new(dims, values)
@@ -705,16 +700,16 @@ class FunctionCos < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].cos
 
@@ -731,16 +726,16 @@ class FunctionCot < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].cot
 
@@ -757,16 +752,16 @@ class FunctionCsc < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].csc
 
@@ -783,16 +778,16 @@ class FunctionDeg < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     v = args[0].to_v
     v1 = v * 180 / 3.14156926
@@ -811,16 +806,16 @@ class FunctionDet < AbstractFunction
     @shape = :scalar
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].determinant
 
@@ -838,8 +833,8 @@ class FunctionErl < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def set_content_type(type_stack)
@@ -876,10 +871,10 @@ class FunctionErl < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         arg = NumericConstant.new(0)
         res = interpreter.error_line(arg)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         res = interpreter.error_line(args[0])
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
@@ -903,7 +898,7 @@ class FunctionErr < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
+    @signature0 = []
   end
 
   def set_content_type(type_stack)
@@ -940,7 +935,7 @@ class FunctionErr < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         res = interpreter.error_code
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
@@ -962,16 +957,16 @@ class FunctionExp < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].exp
 
@@ -988,7 +983,7 @@ class FunctionFix < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   # return a single value
@@ -998,7 +993,7 @@ class FunctionFix < AbstractFunction
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     if content_type == :integer
       res = args[0].floor.to_int
@@ -1019,17 +1014,17 @@ class FunctionFrac < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   # return a single value
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0] - args[0].truncate
 
@@ -1046,9 +1041,9 @@ class FunctionIdn < AbstractFunction
     @shape = :matrix
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 =
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 =
       [
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar }
@@ -1095,16 +1090,16 @@ class FunctionIdn < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = Matrix.identity_values(dims)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = [args[0]] * 2
         values = Matrix.identity_values(dims)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         raise BASICRuntimeError.new(:te_mat_no_sq, @name) unless
           args[1] == args[0]
 
@@ -1138,34 +1133,34 @@ class FunctionInstr < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_2 = [
+    @signature2 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar }
     ]
-    @signature_3 = [
+    @signature3 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar }
     ]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
-    if match_args_to_signature(args, @signature_2)
+    if match_args_to_signature(args, @signature2)
       start = 1
       value = args[0].to_v
       search = args[1].to_v
-    elsif match_args_to_signature(args, @signature_3)
+    elsif match_args_to_signature(args, @signature3)
       start = args[0].to_i
       value = args[1].to_v
       search = args[2].to_v
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
     end
-    
+
     raise BASICRuntimeError.new(:te_val_out, @name) if start < 1
 
     start -= 1
@@ -1196,8 +1191,8 @@ class FunctionInt < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 = [{ 'type' => :boolean, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 = [{ 'type' => :boolean, 'shape' => :scalar }]
   end
 
   # return a single value
@@ -1206,9 +1201,9 @@ class FunctionInt < AbstractFunction
 
     return @cached unless @cached.nil?
 
-    if match_args_to_signature(args, @signature_1)
+    if match_args_to_signature(args, @signature1)
       res = $options['int_floor'].value ? args[0].floor : args[0].truncate
-    elsif match_args_to_signature(args, @signature_2)
+    elsif match_args_to_signature(args, @signature2)
       res = $options['int_floor'].value ? args[0].to_numeric.floor : args[0].to_numeric.truncate
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
@@ -1228,16 +1223,16 @@ class FunctionInv < AbstractFunction
     @shape = :matrix
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     dims = args[0].dimensions
     check_square(dims)
@@ -1256,19 +1251,19 @@ class FunctionLeft < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_2 = [
+    @signature2 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_2)
+      match_args_to_signature(args, @signature2)
 
     value = args[0].to_v
     count = args[1].to_i
@@ -1297,16 +1292,16 @@ class FunctionLen < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     text = args[0].to_v
     res = NumericConstant.new(text.size)
@@ -1324,21 +1319,21 @@ class FunctionLog < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 = [
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
-    if match_args_to_signature(args, @signature_1)
+    if match_args_to_signature(args, @signature1)
       res = args[0].log
-    elsif match_args_to_signature(args, @signature_2)
+    elsif match_args_to_signature(args, @signature2)
       res = args[0].logb(args[1])
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
@@ -1357,16 +1352,16 @@ class FunctionLowerT < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].lower
 
@@ -1383,16 +1378,16 @@ class FunctionMaxA < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1412,16 +1407,16 @@ class FunctionMaxAI < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :integer, 'shape' => :array }]
+    @signature1 = [{ 'type' => :integer, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1441,16 +1436,16 @@ class FunctionMaxAT < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :string, 'shape' => :array }]
+    @signature1 = [{ 'type' => :string, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1470,16 +1465,16 @@ class FunctionMaxM < AbstractFunction
     @shape = :scalar
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1499,16 +1494,16 @@ class FunctionMaxMI < AbstractFunction
     @shape = :scalar
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :integer, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :integer, 'shape' => :matrix }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1528,16 +1523,16 @@ class FunctionMaxMT < AbstractFunction
     @shape = :scalar
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :string, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :string, 'shape' => :matrix }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1557,20 +1552,20 @@ class FunctionMid < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_3 = [
+    @signature3 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_3)
+      match_args_to_signature(args, @signature3)
 
     value = args[0].to_v
     start = args[1].to_i
@@ -1605,16 +1600,16 @@ class FunctionMinA < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1634,16 +1629,16 @@ class FunctionMinAI < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :integer, 'shape' => :array }]
+    @signature1 = [{ 'type' => :integer, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1663,16 +1658,16 @@ class FunctionMinAT < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :string, 'shape' => :array }]
+    @signature1 = [{ 'type' => :string, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1692,16 +1687,16 @@ class FunctionMinM < AbstractFunction
     @shape = :scalar
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1721,16 +1716,16 @@ class FunctionMinMI < AbstractFunction
     @shape = :scalar
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :integer, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :integer, 'shape' => :matrix }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1750,16 +1745,16 @@ class FunctionMinMT < AbstractFunction
     @shape = :scalar
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :string, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :string, 'shape' => :matrix }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     raise BASICRunTimeError.new(:te_too_few, @name) if
       args[0].empty?
@@ -1779,20 +1774,20 @@ class FunctionMod < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_2 = [
+    @signature2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
   # return a single value
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_2)
+      match_args_to_signature(args, @signature2)
 
     res = args[0].mod(args[1])
 
@@ -1809,9 +1804,9 @@ class FunctionNcol < AbstractFunction
     @shape = :scalar
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
-    @signature_2 = [{ 'type' => :integer, 'shape' => :matrix }]
-    @signature_3 = [{ 'type' => :string, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+    @signature2 = [{ 'type' => :integer, 'shape' => :matrix }]
+    @signature3 = [{ 'type' => :string, 'shape' => :matrix }]
   end
 
   def set_constant(constant_stack)
@@ -1827,15 +1822,15 @@ class FunctionNcol < AbstractFunction
     res
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1) ||
-      match_args_to_signature(args, @signature_2) ||
-      match_args_to_signature(args, @signature_3)
+      match_args_to_signature(args, @signature1) ||
+      match_args_to_signature(args, @signature2) ||
+      match_args_to_signature(args, @signature3)
 
     if content_type == :integer
       res = IntegerConstant.new(args[0].ncol)
@@ -1856,9 +1851,9 @@ class FunctionNelem < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
-    @signature_2 = [{ 'type' => :integer, 'shape' => :array }]
-    @signature_3 = [{ 'type' => :string, 'shape' => :array }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :array }]
+    @signature2 = [{ 'type' => :integer, 'shape' => :array }]
+    @signature3 = [{ 'type' => :string, 'shape' => :array }]
   end
 
   def set_constant(constant_stack)
@@ -1874,15 +1869,15 @@ class FunctionNelem < AbstractFunction
     res
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1) ||
-      match_args_to_signature(args, @signature_2) ||
-      match_args_to_signature(args, @signature_3)
+      match_args_to_signature(args, @signature1) ||
+      match_args_to_signature(args, @signature2) ||
+      match_args_to_signature(args, @signature3)
 
     if content_type == :integer
       res = IntegerConstant.new(args[0].size)
@@ -1903,9 +1898,9 @@ class FunctionNrow < AbstractFunction
     @shape = :scalar
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
-    @signature_2 = [{ 'type' => :integer, 'shape' => :matrix }]
-    @signature_3 = [{ 'type' => :string, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+    @signature2 = [{ 'type' => :integer, 'shape' => :matrix }]
+    @signature3 = [{ 'type' => :string, 'shape' => :matrix }]
   end
 
   def set_constant(constant_stack)
@@ -1921,15 +1916,15 @@ class FunctionNrow < AbstractFunction
     res
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1) ||
-      match_args_to_signature(args, @signature_2) ||
-      match_args_to_signature(args, @signature_3)
+      match_args_to_signature(args, @signature1) ||
+      match_args_to_signature(args, @signature2) ||
+      match_args_to_signature(args, @signature3)
 
     if content_type == :integer
       res = IntegerConstant.new(args[0].nrow)
@@ -1955,7 +1950,7 @@ class FunctionNum < AbstractFunction
     @signature_is = [{ 'type' => :integer, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
@@ -1985,16 +1980,16 @@ class FunctionPack < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     array = args[0]
     dims = array.dimensions
@@ -2016,16 +2011,16 @@ class FunctionProd < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     sum = args[0].prod
     res = NumericConstant.new(sum)
@@ -2043,16 +2038,16 @@ class FunctionRad < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     v = args[0].to_v
     v1 = v * 3.14156926 / 180
@@ -2071,19 +2066,19 @@ class FunctionRight < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_2 = [
+    @signature2 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_2)
+      match_args_to_signature(args, @signature2)
 
     value = args[0].to_v
     count = args[1].to_i
@@ -2107,19 +2102,19 @@ class FunctionRound < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_2 = [
+    @signature2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_2)
+      match_args_to_signature(args, @signature2)
 
     res = args[0].round(args[1])
 
@@ -2137,8 +2132,8 @@ class FunctionRnd < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def set_content_type(type_stack)
@@ -2175,10 +2170,10 @@ class FunctionRnd < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         arg = default_args(interpreter)
         res = NumericConstant.new_rand(interpreter, arg)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         res = NumericConstant.new_rand(interpreter, args[0])
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
@@ -2202,8 +2197,8 @@ class FunctionRndI < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :integer, 'shape' => :scalar }]
+    @signature0 = []
+    @signature1 = [{ 'type' => :integer, 'shape' => :scalar }]
   end
 
   def set_content_type(type_stack)
@@ -2240,10 +2235,10 @@ class FunctionRndI < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         arg = default_args(interpreter)
         res = IntegerConstant.new_rand(interpreter, arg)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         res = IntegerConstant.new_rand(interpreter, args[0])
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
@@ -2267,13 +2262,13 @@ class FunctionRndT < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 = [
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar }
     ]
-    @signature_3 = [
+    @signature3 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar }
@@ -2291,7 +2286,6 @@ class FunctionRndT < AbstractFunction
       'X' => '01234567890ABCDEF',
       'x' => '01234567890abcdef'
     }
-
   end
 
   def set_content_type(type_stack)
@@ -2332,16 +2326,16 @@ class FunctionRndT < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         count = default_args(interpreter)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         count = args[0]
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         count = args[0]
         key = args[1].value
         set = key
         set = @sets[key] if @sets.include?(key)
-      elsif match_args_to_signature(args, @signature_3)
+      elsif match_args_to_signature(args, @signature3)
         count = args[0]
         key = args[1].value
         set = key + args[2].value
@@ -2371,9 +2365,9 @@ class FunctionRnd1 < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 = [
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
@@ -2414,16 +2408,16 @@ class FunctionRnd1 < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = BASICArray.rnd_values(dims, interpreter, upper_bound)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = args.clone
         values = BASICArray.rnd_values(dims, interpreter, upper_bound)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         dims = [args[0]]
         upper_bound = args[1]
         values = BASICArray.rnd_values(dims, interpreter, upper_bound)
@@ -2452,9 +2446,9 @@ class FunctionRnd1I < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :integer, 'shape' => :scalar }]
-    @signature_2 = [
+    @signature0 = []
+    @signature1 = [{ 'type' => :integer, 'shape' => :scalar }]
+    @signature2 = [
       { 'type' => :integer, 'shape' => :scalar },
       { 'type' => :integer, 'shape' => :scalar }
     ]
@@ -2495,16 +2489,16 @@ class FunctionRnd1I < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = BASICArray.rndi_values(dims, interpreter, upper_bound)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = args.clone
         values = BASICArray.rndi_values(dims, interpreter, upper_bound)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         dims = [args[0]]
         upper_bound = args[1]
         values = BASICArray.rndi_values(dims, interpreter, upper_bound)
@@ -2533,18 +2527,18 @@ class FunctionRnd1T < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :integer, 'shape' => :scalar }]
-    @signature_2 = [
+    @signature0 = []
+    @signature1 = [{ 'type' => :integer, 'shape' => :scalar }]
+    @signature2 = [
       { 'type' => :integer, 'shape' => :scalar },
       { 'type' => :integer, 'shape' => :scalar }
     ]
-    @signature_3 = [
+    @signature3 = [
       { 'type' => :integer, 'shape' => :scalar },
       { 'type' => :integer, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar }
     ]
-    @signature_4 = [
+    @signature4 = [
       { 'type' => :integer, 'shape' => :scalar },
       { 'type' => :integer, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar },
@@ -2563,7 +2557,6 @@ class FunctionRnd1T < AbstractFunction
       'X' => '01234567890ABCDEF',
       'x' => '01234567890abcdef'
     }
-
   end
 
   def set_content_type(type_stack)
@@ -2592,7 +2585,7 @@ class FunctionRnd1T < AbstractFunction
 
     constant_stack.push(@constant)
   end
-  
+
   def evaluate(interpreter, arg_stack)
     length = 6
     set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -2602,21 +2595,21 @@ class FunctionRnd1T < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = BASICArray.rndt_values(dims, interpreter, length, set)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = args.clone
         values = BASICArray.rndt_values(dims, interpreter, length, set)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         dims = [args[0]]
         length = args[1].to_i
         values = BASICArray.rndt_values(dims, interpreter, length, set)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_3)
+      elsif match_args_to_signature(args, @signature3)
         dims = [args[0]]
         length = args[1].to_i
         key = args[2].value
@@ -2624,7 +2617,7 @@ class FunctionRnd1T < AbstractFunction
         set = @sets[key] if @sets.include?(key)
         values = BASICArray.rndt_values(dims, interpreter, length, set)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_4)
+      elsif match_args_to_signature(args, @signature4)
         dims = [args[0]]
         length = args[1].to_i
         key = args[2].value
@@ -2657,14 +2650,14 @@ class FunctionRnd2 < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 =
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 =
       [
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar }
       ]
-    @signature_3 =
+    @signature3 =
       [
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar },
@@ -2707,20 +2700,20 @@ class FunctionRnd2 < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = Matrix.rnd_values(dims, interpreter, upper_bound)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = args.clone
         values = Matrix.rnd_values(dims, interpreter, upper_bound)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         dims = args.clone
         values = Matrix.rnd_values(dims, interpreter, upper_bound)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_3)
+      elsif match_args_to_signature(args, @signature3)
         dims = args.clone[0..1]
         upper_bound = args[2]
         values = Matrix.rnd_values(dims, interpreter, upper_bound)
@@ -2749,14 +2742,14 @@ class FunctionRnd2I < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :integer, 'shape' => :scalar }]
-    @signature_2 =
+    @signature0 = []
+    @signature1 = [{ 'type' => :integer, 'shape' => :scalar }]
+    @signature2 =
       [
         { 'type' => :integer, 'shape' => :scalar },
         { 'type' => :integer, 'shape' => :scalar }
       ]
-    @signature_3 =
+    @signature3 =
       [
         { 'type' => :integer, 'shape' => :scalar },
         { 'type' => :integer, 'shape' => :scalar },
@@ -2799,20 +2792,20 @@ class FunctionRnd2I < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = Matrix.rndi_values(dims, interpreter, upper_bound)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = args.clone
         values = Matrix.rndi_values(dims, interpreter, upper_bound)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         dims = args.clone
         values = Matrix.rndi_values(dims, interpreter, upper_bound)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_3)
+      elsif match_args_to_signature(args, @signature3)
         dims = args.clone[0..1]
         upper_bound = args[2]
         values = Matrix.rndi_values(dims, interpreter, upper_bound)
@@ -2841,26 +2834,26 @@ class FunctionRnd2T < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_2 =
+    @signature0 = []
+    @signature2 =
       [
         { 'type' => :integer, 'shape' => :scalar },
         { 'type' => :integer, 'shape' => :scalar }
       ]
-    @signature_3 =
+    @signature3 =
       [
         { 'type' => :integer, 'shape' => :scalar },
         { 'type' => :integer, 'shape' => :scalar },
         { 'type' => :integer, 'shape' => :scalar }
       ]
-    @signature_4 =
+    @signature4 =
       [
         { 'type' => :integer, 'shape' => :scalar },
         { 'type' => :integer, 'shape' => :scalar },
         { 'type' => :integer, 'shape' => :scalar },
         { 'type' => :string, 'shape' => :scalar }
       ]
-    @signature_5 =
+    @signature5 =
       [
         { 'type' => :integer, 'shape' => :scalar },
         { 'type' => :integer, 'shape' => :scalar },
@@ -2881,7 +2874,6 @@ class FunctionRnd2T < AbstractFunction
       'X' => '01234567890ABCDEF',
       'x' => '01234567890abcdef'
     }
-
   end
 
   def set_content_type(type_stack)
@@ -2920,21 +2912,21 @@ class FunctionRnd2T < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = Matrix.rndt_values(dims, interpreter, length, set)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         dims = args.clone
         values = Matrix.rndt_values(dims, interpreter, length, set)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_3)
+      elsif match_args_to_signature(args, @signature3)
         dims = args.clone[0..1]
         length = args[2].to_i
         values = Matrix.rndt_values(dims, interpreter, length, set)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_4)
+      elsif match_args_to_signature(args, @signature4)
         dims = args.clone[0..1]
         length = args[2].to_i
         key = args[3].value
@@ -2942,7 +2934,7 @@ class FunctionRnd2T < AbstractFunction
         set = @sets[key] if @sets.include?(key)
         values = Matrix.rndt_values(dims, interpreter, length, set)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_5)
+      elsif match_args_to_signature(args, @signature5)
         dims = args.clone[0..1]
         length = args[2].to_i
         key = args[3].value
@@ -2974,16 +2966,16 @@ class FunctionRev1 < AbstractFunction
     @shape = :array
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => @content_type, 'shape' => :array }]
+    @signature1 = [{ 'type' => @content_type, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     dims = args[0].dimensions
     res = BASICArray.new(dims, args[0].reverse_values)
@@ -3001,16 +2993,16 @@ class FunctionSec < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].sec
 
@@ -3027,16 +3019,16 @@ class FunctionSgn < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].sign
 
@@ -3053,16 +3045,16 @@ class FunctionSin < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].sin
 
@@ -3079,16 +3071,16 @@ class FunctionSpace < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     width = args[0].to_v
 
@@ -3114,12 +3106,12 @@ class FunctionSplit1T < AbstractFunction
     @shape = :array
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
-    @signature_2 = [
+    @signature1 = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature2 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar }
     ]
-    @signature_3 = [
+    @signature3 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :integer, 'shape' => :scalar }
@@ -3131,14 +3123,14 @@ class FunctionSplit1T < AbstractFunction
 
     return @cached unless @cached.nil?
 
-    if match_args_to_signature(args, @signature_1)
+    if match_args_to_signature(args, @signature1)
       t = args[0].to_v
       ts = t.split
-    elsif match_args_to_signature(args, @signature_2)
+    elsif match_args_to_signature(args, @signature2)
       t = args[0].to_v
       s = args[1].to_v
       ts = t.split(s)
-    elsif match_args_to_signature(args, @signature_3)
+    elsif match_args_to_signature(args, @signature3)
       t = args[0].to_v
       s = args[1].to_v
       m = args[2].to_i
@@ -3176,16 +3168,16 @@ class FunctionSqr < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].sqrt
 
@@ -3202,22 +3194,22 @@ class FunctionStr < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 = [
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 = [
       { 'type' => :numeric, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
   # return a single value
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
-    if match_args_to_signature(args, @signature_1)
+    if match_args_to_signature(args, @signature1)
       res = TextConstant.new(args[0].to_s)
-    elsif match_args_to_signature(args, @signature_2)
+    elsif match_args_to_signature(args, @signature2)
       places = args[1].to_i
       value = args[0].to_f
       text = sprintf('%.*f', places, value)
@@ -3240,19 +3232,19 @@ class FunctionString < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_2 = [
+    @signature2 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar }
     ]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_2)
+      match_args_to_signature(args, @signature2)
 
     text = args[0].to_v
 
@@ -3284,16 +3276,16 @@ class FunctionSum < AbstractFunction
     @shape = :scalar
 
     @default_shape = :array
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :array }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :array }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     sum = args[0].sum
 
@@ -3318,7 +3310,7 @@ class FunctionTab < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def set_constant(constant_stack)
@@ -3337,7 +3329,7 @@ class FunctionTab < AbstractFunction
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     console_io = interpreter.console_io
     width = console_io.columns_to_advance(args[0].to_v)
@@ -3365,16 +3357,16 @@ class FunctionTan < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].tan
 
@@ -3392,7 +3384,7 @@ class FunctionTime < AbstractFunction
     @constant = false
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def evaluate(interpreter, arg_stack)
@@ -3401,7 +3393,7 @@ class FunctionTime < AbstractFunction
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     # ignore argument
     now = Time.now
@@ -3422,16 +3414,16 @@ class FunctionTrn < AbstractFunction
     @shape = :matrix
 
     @default_shape = :matrix
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :matrix }]
+    @signature1 = [{ 'type' => :numeric, 'shape' => :matrix }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     dims = args[0].dimensions
     new_dims = [dims[1], dims[0]]
@@ -3450,16 +3442,16 @@ class FunctionUnpack < AbstractFunction
     @shape = :array
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     text = args[0]
 
@@ -3482,16 +3474,16 @@ class FunctionUpperT < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = args[0].upper
 
@@ -3508,16 +3500,16 @@ class FunctionVal < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
-    @signature_1 = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature1 = [{ 'type' => :string, 'shape' => :scalar }]
   end
 
-  def evaluate(_, arg_stack)
+  def evaluate(_interpreter, arg_stack)
     args = arg_stack.pop
 
     return @cached unless @cached.nil?
 
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature_1)
+      match_args_to_signature(args, @signature1)
 
     res = NumericConstant.new(args[0].to_v.to_f)
 
@@ -3534,8 +3526,8 @@ class FunctionZer1 < AbstractFunction
     @shape = :array
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
   end
 
   def set_content_type(type_stack)
@@ -3578,12 +3570,12 @@ class FunctionZer1 < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = BASICArray.zero_values(dims)
         res = BASICArray.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = args.clone
         values = BASICArray.zero_values(dims)
         res = BASICArray.new(dims, values)
@@ -3610,9 +3602,9 @@ class FunctionZer2 < AbstractFunction
     @shape = :matrix
 
     @default_shape = :scalar
-    @signature_0 = []
-    @signature_1 = [{ 'type' => :numeric, 'shape' => :scalar }]
-    @signature_2 =
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+    @signature2 =
       [
         { 'type' => :numeric, 'shape' => :scalar },
         { 'type' => :numeric, 'shape' => :scalar }
@@ -3659,16 +3651,16 @@ class FunctionZer2 < AbstractFunction
 
       return @cached unless @cached.nil?
 
-      if match_args_to_signature(args, @signature_0)
+      if match_args_to_signature(args, @signature0)
         args = default_args(interpreter)
         dims = args.clone
         values = Matrix.zero_values(dims)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_1)
+      elsif match_args_to_signature(args, @signature1)
         dims = args.clone
         values = Matrix.zero_values(dims)
         res = Matrix.new(dims, values)
-      elsif match_args_to_signature(args, @signature_2)
+      elsif match_args_to_signature(args, @signature2)
         dims = args.clone
         values = Matrix.zero_values(dims)
         res = Matrix.new(dims, values)

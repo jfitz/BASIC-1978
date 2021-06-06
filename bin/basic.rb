@@ -29,28 +29,28 @@ class Option
     @values = [value]
   end
 
-  def set(v)
+  def set(value)
     num_types = %w[Fixnum Integer]
-    if @defs[:type] == :bool && num_types.include?(v.class.to_s)
-      v = v != 0
+    if @defs[:type] == :bool && num_types.include?(value.class.to_s)
+      value = value != 0
     end
 
-    check_value(v)
-    @values = [v]
+    check_value(value)
+    @values = [value]
   end
 
   def value
     @values[-1]
   end
 
-  def push(v)
+  def push(value)
     num_types = %w[Fixnum Integer]
-    if @defs[:type] == :bool && num_types.include?(v.class.to_s)
-      v = v != 0
+    if @defs[:type] == :bool && num_types.include?(value.class.to_s)
+      value = value != 0
     end
 
-    check_value(v)
-    @values.push(v)
+    check_value(value)
+    @values.push(value)
   end
 
   def pop
@@ -75,66 +75,65 @@ class Option
 
   private
 
-  def check_value(v)
-    check_value_and_type(v)
+  def check_value(value)
+    check_value_and_type(value)
   rescue BASICSyntaxError => e
-    raise e unless @defs.key?(:off) && v == @defs[:off]
+    raise e unless @defs.key?(:off) && value == @defs[:off]
   end
 
-  def check_value_and_type(v)
+  def check_value_and_type(value)
     type = @defs[:type]
     case type
     when :bool
       legals = %w[TrueClass FalseClass]
 
-      ## raise(BASICSyntaxError, "Invalid type #{v.class} for boolean") unless
-      raise(Exception, "Invalid type #{v.class} for boolean") unless
-        legals.include?(v.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{value.class} for boolean") unless
+        legals.include?(value.class.to_s)
     when :int
       legals = %w[Fixnum Integer]
 
-      raise(BASICSyntaxError, "Invalid type #{v.class} for integer") unless
-        legals.include?(v.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{value.class} for integer") unless
+        legals.include?(value.class.to_s)
 
       min = @defs[:min]
-      if !min.nil? && v < min
-        raise(BASICSyntaxError, "Value #{v} below minimum #{min}")
+      if !min.nil? && value < min
+        raise(BASICSyntaxError, "Value #{value} below minimum #{min}")
       end
 
       max = @defs[:max]
-      if !max.nil? && v > max
-        raise(BASICSyntaxError, "Value #{v} above maximum #{max}")
+      if !max.nil? && value > max
+        raise(BASICSyntaxError, "Value #{value} above maximum #{max}")
       end
     when :float
       legals = %w[Fixnum Integer Float Rational]
 
-      raise(BASICSyntaxError, "Invalid type #{v.class} for float") unless
-        legals.include?(v.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{value.class} for float") unless
+        legals.include?(value.class.to_s)
 
       min = @defs[:min]
-      if !min.nil? && v < min
-        raise(BASICSyntaxError, "Value #{v} below minimum #{min}")
+      if !min.nil? && value < min
+        raise(BASICSyntaxError, "Value #{value} below minimum #{min}")
       end
 
       max = @defs[:max]
-      if !max.nil? && v > max
-        raise(BASICSyntaxError, "Value #{v} above maximum #{max}")
+      if !max.nil? && value > max
+        raise(BASICSyntaxError, "Value #{value} above maximum #{max}")
       end
     when :string
       legals = %(String)
 
-      raise(BASICSyntaxError, "Invalid type #{v.class} for string") unless
-        legals.include?(v.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{value.class} for string") unless
+        legals.include?(value.class.to_s)
     when :list
       legal_types = %(String)
 
-      raise(BASICSyntaxError, "Invalid type #{v.class} for list") unless
-        legal_types.include?(v.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{value.class} for list") unless
+        legal_types.include?(value.class.to_s)
 
       legal_values = @defs[:values]
 
-      raise(BASICSyntaxError, "Invalid value #{v} for list #{legal_values}") unless
-        legal_values.include?(v.to_s)
+      raise(BASICSyntaxError, "Invalid value #{value} for list #{legal_values}") unless
+        legal_values.include?(value.to_s)
     else
       raise(BASICSyntaxError, 'Unknown value type')
     end
@@ -277,7 +276,7 @@ class Shell
       end
 
       value = $options[kwd_d].value.to_s.upcase
-      lines << 'OPTION ' +  kwd + ' ' + value
+      lines << 'OPTION ' + kwd + ' ' + value
     else
       raise BASICCommandError.new('Too many arguments')
     end
@@ -303,15 +302,15 @@ class Shell
     when 'RUN'
       if @interpreter.program_okay?
         # duplicate the options
-        options_2 = {}
-        $options.each { |name, option| options_2[name] = duplicate(option) }
+        options2 = {}
+        $options.each { |name, option| options2[name] = duplicate(option) }
 
         timing = Benchmark.measure do
           @interpreter.run
         end
 
         # restore options to undo any changes during the run
-        options_2.each { |name, option| $options[name] = option }
+        options2.each { |name, option| $options[name] = option }
 
         # print timing info
         if $options['timing'].value
@@ -669,15 +668,15 @@ show_profile = options.key?(:profile)
 boolean = { type: :bool }
 string = { type: :string }
 int = { type: :int, min: 0 }
-int_1_17 = { type: :int, max: 17, min: 1, off: 'INFINITE' }
-int_132 = { type: :int, max: 132, min: 0 }
-int_40 = { type: :int, max: 40, min: 0 }
-int_1 = { type: :int, max: 1, min: 0 }
-int_32767 = { type: :int, max: 32767, min: 999 }
+int1to17 = { type: :int, max: 17, min: 1, off: 'INFINITE' }
+int132 = { type: :int, max: 132, min: 0 }
+int40 = { type: :int, max: 40, min: 0 }
+int1 = { type: :int, max: 1, min: 0 }
+int32767 = { type: :int, max: 32_767, min: 999 }
 separator = { type: :list, values: %w[COMMA SEMI NL NONE] }
 
 all_types = %i[new loaded runtime]
-loaded = %[new loaded]
+loaded = %i[new loaded]
 only_new = %i[new]
 
 $options = {}
@@ -691,7 +690,7 @@ $options['back_tab'] = Option.new(all_types, boolean, options.key?(:back_tab))
 
 base = 0
 base = options[:base].to_i if options.key?(:base)
-$options['base'] = Option.new(all_types, int_1, base)
+$options['base'] = Option.new(all_types, int1, base)
 
 $options['cache_const_expr'] =
   Option.new(all_types, boolean, !options.key?(:no_cache_const_expr))
@@ -744,8 +743,8 @@ max_dim = 255
 max_dim = options[:max_dim].to_i if options.key?(:max_dim)
 $options['max_dim'] = Option.new(all_types, int, max_dim)
 
-$options['max_line_num'] = Option.new(only_new, int_32767, 32767)
-$options['min_line_num'] = Option.new(only_new, int_1, 1)
+$options['max_line_num'] = Option.new(only_new, int32767, 32_767)
+$options['min_line_num'] = Option.new(only_new, int1, 1)
 
 newline_speed = 0
 newline_speed = 10 if options.key?(:tty_lf)
@@ -756,7 +755,7 @@ if options.key?(:precision)
   precision = options[:precision]
   precision = precision.to_i if precision =~ /\A\d+\z/
 end
-$options['precision'] = Option.new(all_types, int_1_17, precision)
+$options['precision'] = Option.new(all_types, int1to17, precision)
 
 $options['pretty_multiline'] =
   Option.new(loaded, boolean, options.key?(:pretty_multiline))
@@ -767,7 +766,7 @@ $options['print_speed'] = Option.new(all_types, int, print_speed)
 
 print_width = 72
 print_width = options[:print_width].to_i if options.key?(:print_width)
-$options['print_width'] = Option.new(all_types, int_132, print_width)
+$options['print_width'] = Option.new(all_types, int132, print_width)
 
 $options['prompt'] = Option.new(loaded, string, 'READY')
 if options.key?(:prompt)
@@ -816,7 +815,7 @@ $options['wrap'] = Option.new(all_types, boolean, options.key?(:wrap))
 
 zone_width = 16
 zone_width = options[:zone_width].to_i if options.key?(:zone_width)
-$options['zone_width'] = Option.new(all_types, int_40, zone_width)
+$options['zone_width'] = Option.new(all_types, int40, zone_width)
 
 statement_seps = [':', '\\']
 
