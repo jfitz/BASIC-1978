@@ -510,6 +510,7 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
 
   tokenbuilders << TextTokenBuilder.new(quotes)
   tokenbuilders << NumberTokenBuilder.new
+  tokenbuilders << NumericSymbolTokenBuilder.new
   tokenbuilders << IntegerTokenBuilder.new
 
   long_names = options['long_names'].value
