@@ -1,0 +1,98 @@
+10: DIM A$(6)
+20: OPTION BASE 0
+30: ARR READ A$
+ A$(0) = "TEN"
+ A$(1) = "TWENTY"
+ A$(2) = "TEN"
+ A$(3) = "TWENTY"
+ A$(4) = "THIRTY"
+ A$(5) = "FORTY"
+ A$(6) = "FIFTY"
+40: ARR B$ = SORT1$(A$)
+ A$(0): "TEN"
+ A$(1): "TWENTY"
+ A$(2): "TEN"
+ A$(3): "TWENTY"
+ A$(4): "THIRTY"
+ A$(5): "FORTY"
+ A$(6): "FIFTY"
+ B$(0) = "FIFTY"
+ B$(1) = "FORTY"
+ B$(2) = "TEN"
+ B$(3) = "TEN"
+ B$(4) = "THIRTY"
+ B$(5) = "TWENTY"
+ B$(6) = "TWENTY"
+50: GOSUB 800
+800: REM PROCEDURE A
+810: PRINT "ARRAY A"
+ARRAY A
+820: ARR PRINT A$
+ A$(0): "TEN"
+ A$(1): "TWENTY"
+ A$(2): "TEN"
+ A$(3): "TWENTY"
+ A$(4): "THIRTY"
+ A$(5): "FORTY"
+ A$(6): "FIFTY"
+TEN             TWENTY          TEN             TWENTY          THIRTY          FORTY           FIFTY
+830: PRINT "ARRAY B"
+ARRAY B
+840: ARR PRINT B$
+ B$(0): "FIFTY"
+ B$(1): "FORTY"
+ B$(2): "TEN"
+ B$(3): "TEN"
+ B$(4): "THIRTY"
+ B$(5): "TWENTY"
+ B$(6): "TWENTY"
+FIFTY           FORTY           TEN             TEN             THIRTY          TWENTY          TWENTY
+890: RETURN
+100: RESTORE
+120: OPTION BASE 1
+130: ARR READ A$
+ A$(1) = "TEN"
+ A$(2) = "TWENTY"
+ A$(3) = "TEN"
+ A$(4) = "TWENTY"
+ A$(5) = "THIRTY"
+ A$(6) = "FORTY"
+140: ARR B$ = SORT1$(A$)
+ A$(1): "TEN"
+ A$(2): "TWENTY"
+ A$(3): "TEN"
+ A$(4): "TWENTY"
+ A$(5): "THIRTY"
+ A$(6): "FORTY"
+ B$(1) = "FORTY"
+ B$(2) = "TEN"
+ B$(3) = "TEN"
+ B$(4) = "THIRTY"
+ B$(5) = "TWENTY"
+ B$(6) = "TWENTY"
+150: GOSUB 800
+800: REM PROCEDURE A
+810: PRINT "ARRAY A"
+ARRAY A
+820: ARR PRINT A$
+ A$(1): "TEN"
+ A$(2): "TWENTY"
+ A$(3): "TEN"
+ A$(4): "TWENTY"
+ A$(5): "THIRTY"
+ A$(6): "FORTY"
+TEN             TWENTY          TEN             TWENTY          THIRTY          FORTY
+830: PRINT "ARRAY B"
+ARRAY B
+840: ARR PRINT B$
+ B$(1): "FORTY"
+ B$(2): "TEN"
+ B$(3): "TEN"
+ B$(4): "THIRTY"
+ B$(5): "TWENTY"
+ B$(6): "TWENTY"
+FORTY           TEN             TEN             THIRTY          TWENTY          TWENTY
+890: RETURN
+790: STOP
+STOP in line 790
+
