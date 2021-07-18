@@ -1055,6 +1055,10 @@ class Interpreter
     @dimensions[variable_name]
   end
 
+  def dimensions?(variable_name)
+    @dimensions.key?(variable_name)
+  end
+
   def find_closing_next(control)
     @program.find_closing_next(control, @current_line_index)
   end
