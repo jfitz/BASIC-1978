@@ -125,6 +125,32 @@ class AbstractCompound
     end
   end
 
+  def self.zero_values_i(dimensions)
+    case dimensions.size
+    when 0
+      raise BASICSyntaxError, 'No dimensions in variable'
+    when 1
+      AbstractCompound.make_array(dimensions, IntegerConstant.new(0))
+    when 2
+      AbstractCompound.make_matrix(dimensions, IntegerConstant.new(0))
+    else
+      raise BASICSyntaxError, 'Too many dimensions in variable'
+    end
+  end
+
+  def self.zero_values_t(dimensions)
+    case dimensions.size
+    when 0
+      raise BASICSyntaxError, 'No dimensions in variable'
+    when 1
+      AbstractCompound.make_array(dimensions, TextConstant.new(''))
+    when 2
+      AbstractCompound.make_matrix(dimensions, TextConstant.new(''))
+    else
+      raise BASICSyntaxError, 'Too many dimensions in variable'
+    end
+  end
+
   def self.one_values(dimensions)
     case dimensions.size
     when 0
@@ -133,6 +159,32 @@ class AbstractCompound
       AbstractCompound.make_array(dimensions, NumericConstant.new(1))
     when 2
       AbstractCompound.make_matrix(dimensions, NumericConstant.new(1))
+    else
+      raise BASICSyntaxError, 'Too many dimensions in variable'
+    end
+  end
+
+  def self.one_values_i(dimensions)
+    case dimensions.size
+    when 0
+      raise BASICSyntaxError, 'No dimensions in variable'
+    when 1
+      AbstractCompound.make_array(dimensions, IntegerConstant.new(1))
+    when 2
+      AbstractCompound.make_matrix(dimensions, IntegerConstant.new(1))
+    else
+      raise BASICSyntaxError, 'Too many dimensions in variable'
+    end
+  end
+
+  def self.one_values_t(dimensions, init)
+    case dimensions.size
+    when 0
+      raise BASICSyntaxError, 'No dimensions in variable'
+    when 1
+      AbstractCompound.make_array(dimensions, init)
+    when 2
+      AbstractCompound.make_matrix(dimensions, init)
     else
       raise BASICSyntaxError, 'Too many dimensions in variable'
     end
@@ -475,6 +527,53 @@ class AbstractCompound
     prod
   end
 
+  def median_1_avg
+    base = $options['base'].value
+
+    # get all values
+    values = []
+
+    (base..@dimensions[0].to_i).each do |col|
+      values << get_value_1(col)
+    end
+
+    # sort
+    values_sorted = values.sort
+
+    n = values_sorted.size
+    mid = (n / 2).to_i
+    
+    if n.odd?
+      # if odd number of values, take center value
+      value = values_sorted[mid].to_v
+    else
+      # else even number of values, take average of center two
+      value0 = values_sorted[mid].to_v
+      value1 = values_sorted[mid + 1].to_v
+      value = (value0 + value1) / 2
+    end
+
+    value
+  end
+
+  def median_1_less
+    base = $options['base'].value
+
+    # get all values
+    values = []
+
+    (base..@dimensions[0].to_i).each do |col|
+      values << get_value_1(col)
+    end
+
+    # sort
+    values_sorted = values.sort
+
+    n = values_sorted.size
+    mid = (n / 2).to_i
+    values_sorted[mid].to_v
+  end
+
   def plot_1(printer, _interpreter)
     base = $options['base'].value
     upper = @dimensions[0].to_i
@@ -752,6 +851,14 @@ class BASICArray < AbstractCompound
 
   def min_t
     TextConstant.new(min_1)
+  end
+
+  def median_average
+    median_1_avg
+  end
+
+  def median_lesser
+    median_1_less
   end
 
   def to_s

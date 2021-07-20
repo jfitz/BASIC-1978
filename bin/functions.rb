@@ -607,6 +607,158 @@ class FunctionCon1 < AbstractFunction
   end
 end
 
+# function CON1%
+class FunctionCon1I < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :array
+
+    @default_shape = :scalar
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+  end
+
+  def set_content_type(type_stack)
+    unless type_stack.empty?
+      @arg_types = type_stack.pop if
+        type_stack[-1].class.to_s == 'Array'
+    end
+
+    type_stack.push(@content_type)
+  end
+
+  def set_shape(shape_stack)
+    unless shape_stack.empty?
+      @arg_shapes = shape_stack.pop if shape_stack[-1].class.to_s == 'Array'
+    end
+
+    shape_stack.push(@shape)
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      if constant_stack[-1].class.to_s == 'Array'
+        constants = constant_stack.pop
+
+        if constants.empty?
+          @constant = false
+        else
+          @constant = true
+          constants.each { |c| @constant &&= c }
+        end
+      end
+    end
+
+    constant_stack.push(@constant)
+  end
+
+  def evaluate(interpreter, arg_stack)
+    if previous_is_array(arg_stack)
+      args = arg_stack.pop
+
+      return @cached unless @cached.nil?
+
+      if match_args_to_signature(args, @signature0)
+        args = default_args(interpreter)
+        dims = args.clone
+        values = BASICArray.one_values_i(dims)
+        res = BASICArray.new(dims, values)
+      elsif match_args_to_signature(args, @signature1)
+        dims = args.clone
+        values = BASICArray.one_values_i(dims)
+        res = BASICArray.new(dims, values)
+      else
+        raise BASICRuntimeError.new(:te_args_no_match, @name)
+      end
+    else
+      args = default_args(interpreter)
+      dims = args.clone
+      values = BASICArray.one_values_i(dims)
+      res = BASICArray.new(dims, values)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function CON1$
+class FunctionCon1T < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :array
+
+    @default_shape = :scalar
+    @signature0 = [
+      { 'type' => :string, 'shape' => :scalar }
+    ]
+    @signature1 = [
+      { 'type' => :numeric, 'shape' => :scalar },
+      { 'type' => :string, 'shape' => :scalar }
+    ]
+  end
+
+  def set_content_type(type_stack)
+    unless type_stack.empty?
+      @arg_types = type_stack.pop if
+        type_stack[-1].class.to_s == 'Array'
+    end
+
+    type_stack.push(@content_type)
+  end
+
+  def set_shape(shape_stack)
+    unless shape_stack.empty?
+      @arg_shapes = shape_stack.pop if shape_stack[-1].class.to_s == 'Array'
+    end
+
+    shape_stack.push(@shape)
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      if constant_stack[-1].class.to_s == 'Array'
+        constants = constant_stack.pop
+
+        if constants.empty?
+          @constant = false
+        else
+          @constant = true
+          constants.each { |c| @constant &&= c }
+        end
+      end
+    end
+
+    constant_stack.push(@constant)
+  end
+
+  def evaluate(interpreter, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    if match_args_to_signature(args, @signature0)
+      args0 = default_args(interpreter)
+      dims = args0.clone
+      init = args[0]
+      values = BASICArray.one_values_t(dims, init)
+      res = BASICArray.new(dims, values)
+    elsif match_args_to_signature(args, @signature1)
+      dims = [args[0]]
+      init = args[1]
+      values = BASICArray.one_values_t(dims, init)
+      res = BASICArray.new(dims, values)
+    else
+      raise BASICRuntimeError.new(:te_args_no_match, @name)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function CON, CON2
 class FunctionCon2 < AbstractFunction
   def initialize(text)
@@ -1538,6 +1690,67 @@ class FunctionMaxMT < AbstractFunction
       args[0].empty?
 
     res = args[0].max_t
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MEDIAN
+class FunctionMedian < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature1 = [{ 'type' => :numeric, 'shape' => :array }]
+  end
+
+  def evaluate(_intepreter, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    med = args[0].median_average
+    res = NumericConstant.new(med)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function MEDIAN%, MEDIAN$
+class FunctionMedianIT < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :array
+    @signature1 = [{ 'type' => @content_type, 'shape' => :array }]
+  end
+
+  def evaluate(_intepreter, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature1)
+
+    raise BASICRunTimeError.new(:te_too_few, @name) if
+      args[0].empty?
+
+    med = args[0].median_lesser
+    res = IntegerConstant.new(med) if @content_type == :integer
+    res = TextConstant.new(med) if @content_type == :string
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -3650,6 +3863,158 @@ class FunctionZer1 < AbstractFunction
   end
 end
 
+# function ZER1%
+class FunctionZer1I < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :array
+
+    @default_shape = :scalar
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+  end
+
+  def set_content_type(type_stack)
+    unless type_stack.empty?
+      @arg_types = type_stack.pop if
+        type_stack[-1].class.to_s == 'Array'
+    end
+
+    type_stack.push(@content_type)
+  end
+
+  def set_shape(shape_stack)
+    unless shape_stack.empty?
+      @arg_shapes = shape_stack.pop if shape_stack[-1].class.to_s == 'Array'
+    end
+
+    shape_stack.push(@shape)
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      if constant_stack[-1].class.to_s == 'Array'
+        constants = constant_stack.pop
+
+        if constants.empty?
+          @constant = false
+        else
+          @constant = true
+          constants.each { |c| @constant &&= c }
+        end
+      end
+    end
+
+    constant_stack.push(@constant)
+  end
+
+  def evaluate(interpreter, arg_stack)
+    if previous_is_array(arg_stack)
+      args = arg_stack.pop
+
+      return @cached unless @cached.nil?
+
+      if match_args_to_signature(args, @signature0)
+        args = default_args(interpreter)
+        dims = args.clone
+        values = BASICArray.zero_values_i(dims)
+        res = BASICArray.new(dims, values)
+      elsif match_args_to_signature(args, @signature1)
+        dims = args.clone
+        values = BASICArray.zero_values_i(dims)
+        res = BASICArray.new(dims, values)
+      else
+        raise BASICRuntimeError.new(:te_args_no_match, @name)
+      end
+    else
+      args = default_args(interpreter)
+      dims = args.clone
+      values = BASICArray.zero_values_i(dims)
+      res = BASICArray.new(dims, values)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function ZER1$
+class FunctionZer1T < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :array
+
+    @default_shape = :scalar
+    @signature0 = []
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+  end
+
+  def set_content_type(type_stack)
+    unless type_stack.empty?
+      @arg_types = type_stack.pop if
+        type_stack[-1].class.to_s == 'Array'
+    end
+
+    type_stack.push(@content_type)
+  end
+
+  def set_shape(shape_stack)
+    unless shape_stack.empty?
+      @arg_shapes = shape_stack.pop if shape_stack[-1].class.to_s == 'Array'
+    end
+
+    shape_stack.push(@shape)
+  end
+
+  def set_constant(constant_stack)
+    unless constant_stack.empty?
+      if constant_stack[-1].class.to_s == 'Array'
+        constants = constant_stack.pop
+
+        if constants.empty?
+          @constant = false
+        else
+          @constant = true
+          constants.each { |c| @constant &&= c }
+        end
+      end
+    end
+
+    constant_stack.push(@constant)
+  end
+
+  def evaluate(interpreter, arg_stack)
+    if previous_is_array(arg_stack)
+      args = arg_stack.pop
+
+      return @cached unless @cached.nil?
+
+      if match_args_to_signature(args, @signature0)
+        args = default_args(interpreter)
+        dims = args.clone
+        values = BASICArray.zero_values_t(dims)
+        res = BASICArray.new(dims, values)
+      elsif match_args_to_signature(args, @signature1)
+        dims = args.clone
+        values = BASICArray.zero_values_t(dims)
+        res = BASICArray.new(dims, values)
+      else
+        raise BASICRuntimeError.new(:te_args_no_match, @name)
+      end
+    else
+      args = default_args(interpreter)
+      dims = args.clone
+      values = BASICArray.zero_values_t(dims)
+      res = BASICArray.new(dims, values)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function ZER, ZER2
 class FunctionZer2 < AbstractFunction
   def initialize(text)
@@ -3751,6 +4116,8 @@ class FunctionFactory
     'CHR$' => FunctionChr,
     'CON' => FunctionCon2,
     'CON1' => FunctionCon1,
+    'CON1%' => FunctionCon1I,
+    'CON1$' => FunctionCon1T,
     'CON2' => FunctionCon2,
     'COS' => FunctionCos,
     'COT' => FunctionCot,
@@ -3779,6 +4146,9 @@ class FunctionFactory
     'MAXM' => FunctionMaxM,
     'MAXM%' => FunctionMaxMI,
     'MAXM$' => FunctionMaxMT,
+    'MEDIAN' => FunctionMedian,
+    'MEDIAN%' => FunctionMedianIT,
+    'MEDIAN$' => FunctionMedianIT,
     'MID$' => FunctionMid,
     'MINA' => FunctionMinA,
     'MINA%' => FunctionMinAI,
@@ -3841,6 +4211,8 @@ class FunctionFactory
     'VAL' => FunctionVal,
     'ZER' => FunctionZer2,
     'ZER1' => FunctionZer1,
+    'ZER1%' => FunctionZer1I,
+    'ZER1$' => FunctionZer1T,
     'ZER2' => FunctionZer2
   }
 
