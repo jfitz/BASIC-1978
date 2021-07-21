@@ -5364,30 +5364,33 @@ class MatLetStatement < AbstractLetStatement
     l_value0 = l_values[0]
     l_dims = interpreter.get_dimensions(l_value0.name)
 
-    interpreter.set_default_args('CON2', l_dims)
     interpreter.set_default_args('CON', l_dims)
+    interpreter.set_default_args('CON2', l_dims)
+    interpreter.set_default_args('CON2%', l_dims)
+    interpreter.set_default_args('CON2$', l_dims)
     interpreter.set_default_args('IDN', l_dims)
     interpreter.set_default_args('RND2', l_dims)
     interpreter.set_default_args('RND2%', l_dims)
     interpreter.set_default_args('RND2$', l_dims)
-    interpreter.set_default_args('ZER2', l_dims)
     interpreter.set_default_args('ZER', l_dims)
+    interpreter.set_default_args('ZER2', l_dims)
+    interpreter.set_default_args('ZER2%', l_dims)
+    interpreter.set_default_args('ZER2$', l_dims)
 
-    # evaluate, use default args if needed
-    r_values = @assignment.eval_value(interpreter)
-    r_value = r_values[0]
+    r_value = first_value(interpreter)
 
-    raise(BASICSyntaxError, 'Expected Matrix') if
-      r_value.class.to_s != 'Matrix'
-
-    interpreter.set_default_args('CON2', nil)
     interpreter.set_default_args('CON', nil)
+    interpreter.set_default_args('CON2', nil)
+    interpreter.set_default_args('CON2%', nil)
+    interpreter.set_default_args('CON2$', nil)
     interpreter.set_default_args('IDN', nil)
     interpreter.set_default_args('RND2', nil)
     interpreter.set_default_args('RND2%', nil)
     interpreter.set_default_args('RND2$', nil)
-    interpreter.set_default_args('ZER2', nil)
     interpreter.set_default_args('ZER', nil)
+    interpreter.set_default_args('ZER2', nil)
+    interpreter.set_default_args('ZER2%', nil)
+    interpreter.set_default_args('ZER2$', nil)
 
     r_dims = r_value.dimensions
 
@@ -5398,5 +5401,15 @@ class MatLetStatement < AbstractLetStatement
       interpreter.set_dimensions(l_value, r_dims)
       interpreter.set_values(l_value.name, values)
     end
+  end
+
+  def first_value(interpreter)
+    r_values = @assignment.eval_value(interpreter)
+    r_value = r_values[0]
+
+    raise(BASICSyntaxError, 'Expected Matrix') if
+      r_value.class.to_s != 'Matrix'
+
+    r_value
   end
 end
