@@ -489,10 +489,6 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, 'Invalid operator power')
   end
 
-  def printable?
-    true
-  end
-
   def keyword?
     false
   end
@@ -1751,10 +1747,6 @@ class CarriageControl
   end
 
   def uncache; end
-
-  def printable?
-    false
-  end
 
   def keyword?
     false
