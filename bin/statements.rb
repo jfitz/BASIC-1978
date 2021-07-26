@@ -3664,11 +3664,16 @@ class PrintStatement < AbstractStatement
             if last_was_printable
               # insert an implicit carriage control
               carriage = CarriageControl.new('')
-              carriage.print(fhr, interpreter)
+              carriage.print(fhr)
             end
           end
 
-          it.print(fhr, interpreter)
+          if it.carriage_control?
+            it.print(fhr)
+          else
+            it.print(fhr, interpreter)
+          end
+
           last_was_printable = !it.carriage_control?
 
           i += 1
@@ -3725,12 +3730,12 @@ class PrintStatement < AbstractStatement
             if last_was_printable
               # insert an implicit carriage control
               carriage = CarriageControl.new('')
-              carriage.print(fhr, interpreter)
+              carriage.print(fhr)
             end
           end
 
           if item.carriage_control?
-            item.print(fhr, interpreter)
+            item.print(fhr)
           else
             item.print(fhr, interpreter)
           end
@@ -4081,12 +4086,12 @@ class WriteStatement < AbstractStatement
         if last_was_printable
           # insert an implicit carriage control
           carriage = CarriageControl.new('')
-          carriage.write(fhr, interpreter)
+          carriage.write(fhr)
         end
       end
 
       if item.carriage_control?
-        item.write(fhr, interpreter)
+        item.write(fhr)
       else
         item.write(fhr, interpreter)
       end
@@ -4406,12 +4411,12 @@ class ArrPrintStatement < AbstractStatement
             if last_was_printable
               # insert an implicit carriage control
               carriage = CarriageControl.new('')
-              carriage.print(fhr, interpreter)
+              carriage.print(fhr)
             end
           end
 
           if it.carriage_control?
-            it.print(fhr, interpreter)
+            it.print(fhr)
           else
             formats = nil
             it.compound_print(fhr, interpreter, formats)
@@ -4457,7 +4462,7 @@ class ArrPrintStatement < AbstractStatement
 
         if i < items.size && items[i].carriage_control?
           item = items[i]
-          item.print(fhr, interpreter)
+          item.print(fhr)
           last_was_printable = false
         end
 
@@ -4470,12 +4475,12 @@ class ArrPrintStatement < AbstractStatement
             if last_was_printable
               # insert an implicit carriage control
               carriage = CarriageControl.new('')
-              carriage.print(fhr, interpreter)
+              carriage.print(fhr)
             end
           end
 
           if item.carriage_control?
-            item.print(fhr, interpreter)
+            item.print(fhr)
           else
             formats = nil
             item.compound_print(fhr, interpreter, formats)
@@ -4621,12 +4626,12 @@ class ArrWriteStatement < AbstractStatement
         if last_was_printable
           # insert an implicit carriage control
           carriage = CarriageControl.new('')
-          carriage.write(fhr, interpreter)
+          carriage.write(fhr)
         end
       end
 
       if item.carriage_control?
-        item.write(fhr, interpreter)
+        item.write(fhr)
       else
         item.compound_write(fhr, interpreter)
       end
@@ -5059,14 +5064,14 @@ class MatPrintStatement < AbstractStatement
             if last_was_printable
               # insert an implicit carriage control
               carriage = CarriageControl.new('')
-              carriage.print(fhr, interpreter)
+              carriage.print(fhr)
             end
           end
 
           if it.carriage_control?
             # MAT PRINT has different operations for carriage controls
             carriage = map_carriage(it)
-            carriage.print(fhr, interpreter)
+            carriage.print(fhr)
           else
             formats = nil
             it.compound_print(fhr, interpreter, formats)
@@ -5114,7 +5119,7 @@ class MatPrintStatement < AbstractStatement
           item = items[i]
           # MAT PRINT has different operations for carriage controls
           carriage = map_carriage(item)
-          carriage.print(fhr, interpreter)
+          carriage.print(fhr)
           last_was_printable = false
         end
 
@@ -5128,14 +5133,14 @@ class MatPrintStatement < AbstractStatement
             if last_was_printable
               # insert an implicit carriage control
               carriage = CarriageControl.new('')
-              carriage.print(fhr, interpreter)
+              carriage.print(fhr)
             end
           end
 
           if item.carriage_control?
             # MAT PRINT has different operations for carriage controls
             carriage = map_carriage(item)
-            carriage.print(fhr, interpreter)
+            carriage.print(fhr)
           else
             formats = nil
             item.compound_print(fhr, interpreter, formats)
@@ -5320,12 +5325,12 @@ class MatWriteStatement < AbstractStatement
         if last_was_printable
           # insert an implicit carriage control
           carriage = CarriageControl.new('')
-          carriage.write(fhr, interpreter)
+          carriage.write(fhr)
         end
       end
 
       if item.carriage_control?
-        item.write(fhr, interpreter)
+        item.write(fhr)
       else
         item.compound_write(fhr, interpreter)
       end
