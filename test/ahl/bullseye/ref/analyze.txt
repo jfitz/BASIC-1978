@@ -19,6 +19,90 @@ Halstead complexity:
  intelligence: 86.521
  time: 21.367
 
+(0 4) 5 PRINT TAB(32); "BULLSEYE"
+(0 4) 10 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+(0 2) 20 PRINT
+(0 2)    PRINT
+(0 2)    PRINT
+(0 2) 30 PRINT "IN THIS GAME, UP TO 20 PLAYERS THROW DARTS AT A TARGET"
+(0 2) 40 PRINT "WITH 10, 20, 30, AND 40 POINT ZONES.  THE OBJECTIVE IS"
+(0 2) 50 PRINT "TO GET 200 POINTS."
+(0 2)    PRINT
+(0 8) 60 PRINT "THROW", TAB(20); "DESCRIPTION"; TAB(45); "PROBABLE SCORE"
+(0 8) 70 PRINT " 1"; TAB(20); "FAST OVERARM"; TAB(45); "BULLSEYE OR COMPLETE MISS"
+(0 8) 80 PRINT " 2"; TAB(20); "CONTROLLED OVERARM"; TAB(45); "10, 20 OR 30 POINTS"
+(0 8) 90 PRINT " 3"; TAB(20); "UNDERARM"; TAB(45); "ANYTHING"
+(0 2)    PRINT
+(0 4) 100 DIM A$(20), S(20), W(10)
+(0 3)     M = 0
+(0 3)     R = 0
+(1 3)     FOR I = 1 TO 20
+(0 3)     S(I) = 0
+(0 1)     NEXT I
+(1 2) 110 INPUT "HOW MANY PLAYERS"; N
+(0 2)     PRINT
+(1 3) 120 FOR I = 1 TO N
+(0 3) 130 PRINT "NAME OF PLAYER #"; I;
+(1 2)     INPUT A$(I)
+(0 1) 140 NEXT I
+(0 4) 150 R = R + 1
+(0 2)     PRINT
+(0 3)     PRINT "ROUND"; R
+(0 2)     PRINT "---------"
+(1 3) 160 FOR I = 1 TO N
+(0 2) 170 PRINT
+(0 3)     PRINT A$(I) "'S THROW";
+(1 2)     INPUT T
+(1 8) 180 IF T < 0 OR T > 3 THEN PRINT "INPUT 1, 2, OR 3!"
+(0 3)     GOTO 170
+(3 5) 190 ON T GOTO 200, 210, 200
+(0 3) 200 P1 = .65
+(0 3)     P2 = .55
+(0 3)     P3 = .5
+(0 3)     P4 = .5
+(0 2)     GOTO 230
+(0 3) 210 P1 = .99
+(0 3)     P2 = .77
+(0 3)     P3 = .43
+(0 3)     P4 = .01
+(0 2)     GOTO 230
+(0 3) 220 P1 = .95
+(0 3)     P2 = .75
+(0 3)     P3 = .45
+(0 3)     P4 = .05
+(0 4) 230 U = RND(1)
+(1 5) 240 IF U >= P1 THEN PRINT "BULLSEYE!!  40 POINTS!"
+(0 3)     B = 40
+(0 2)     GOTO 290
+(1 5) 250 IF U >= P2 THEN PRINT "30-POINT ZONE!"
+(0 3)     B = 30
+(0 2)     GOTO 290
+(1 5) 260 IF U >= P3 THEN PRINT "20-POINT ZONE"
+(0 3)     B = 20
+(0 2)     GOTO 290
+(1 5) 270 IF U >= P4 THEN PRINT "WHEW!  10 POINTS."
+(0 3)     B = 10
+(0 2)     GOTO 290
+(0 2) 280 PRINT "MISSED THE TARGET!  TOO BAD."
+(0 3)     B = 0
+(0 4) 290 S(I) = S(I) + B
+(0 3)     PRINT "TOTAL SCORE ="; S(I)
+(0 1)     NEXT I
+(1 3) 300 FOR I = 1 TO N
+(1 7) 310 IF S(I) >= 200 THEN M = M + 1
+(0 3)     W(M) = I
+(0 1) 320 NEXT I
+(1 5) 330 IF M = 0 THEN 150
+(0 2) 340 PRINT
+(0 2)     PRINT "WE HAVE A WINNER!!"
+(0 2)     PRINT
+(1 3) 350 FOR I = 1 TO M
+(0 5)     PRINT A$(W(I)); " SCORED"; S(W(I)); "POINTS."
+(0 1)     NEXT I
+(0 2) 360 PRINT
+(0 2)     PRINT "THANKS FOR THE GAME."
+(0 1)     END
+
 Unreachable code:
 
 220: P1 = .95

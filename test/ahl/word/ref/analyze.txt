@@ -19,6 +19,99 @@ Halstead complexity:
  intelligence: 59.514
  time: 49.073
 
+(0 4) 2 PRINT TAB(33); "WORD"
+(0 4) 3 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+(0 2) 4 PRINT
+(0 2)   PRINT
+(0 2)   PRINT
+(0 6) 5 DIM S(7), A(7), L(7), D(7), P(7)
+(0 2) 10 PRINT "I AM THINKING OF A WORD -- YOU GUESS IT.  I WILL GIVE YOU"
+(0 2) 15 PRINT "CLUES TO HELP YOU GET IT.  GOOD LUCK!!"
+(0 2)    PRINT
+(0 2)    PRINT
+(0 1) 20 REM
+(0 2) 30 PRINT
+(0 2)    PRINT
+(0 2)    PRINT "YOU ARE STARTING A NEW GAME..."
+(0 1) 35 RESTORE
+(1 2) 40 READ N
+(0 4) 50 C = INT(RND(1) * N + 1)
+(1 3) 60 FOR I = 1 TO C
+(1 2) 70 READ S$
+(0 1) 80 NEXT I
+(0 3) 90 G = 0
+(0 4) 95 S(0) = LEN(S$)
+(1 4) 100 FOR I = 1 TO LEN(S$)
+(0 4)     S(I) = ASC(MID$(S$, I, 1))
+(0 1)     NEXT I
+(1 3) 110 FOR I = 1 TO 5
+(0 3) 120 A(I) = 45
+(0 1) 130 NEXT I
+(1 3) 140 FOR J = 1 TO 5
+(0 3) 144 P(J) = 0
+(0 1) 146 NEXT J
+(0 2) 150 PRINT "GUESS A FIVE LETTER WORD";
+(1 2) 160 INPUT L$
+(0 4) 170 G = G + 1
+(1 4) 172 IF S$ = L$ THEN 500
+(1 3) 173 FOR I = 1 TO 7
+(0 3)     P(I) = 0
+(0 1)     NEXT I
+(0 4) 175 L(0) = LEN(L$)
+(1 4) 180 FOR I = 1 TO LEN(L$)
+(0 4)     L(I) = ASC(MID$(L$, I, 1))
+(0 1)     NEXT I
+(1 4) 190 IF L(1) = 63 THEN 300
+(1 4) 200 IF L(0) <> 5 THEN 400
+(0 3) 205 M = 0
+(0 3)     Q = 1
+(1 3) 210 FOR I = 1 TO 5
+(1 3) 220 FOR J = 1 TO 5
+(1 4) 230 IF S(I) <> L(J) THEN 260
+(0 3) 231 P(Q) = L(J)
+(0 4) 232 Q = Q + 1
+(1 4) 233 IF I <> J THEN 250
+(0 3) 240 A(J) = L(J)
+(0 4) 250 M = M + 1
+(0 1) 260 NEXT J
+(0 1) 265 NEXT I
+(0 3) 270 A(0) = 5
+(0 3) 272 P(0) = M
+(0 3) 275 A$ = ""
+(1 3)     FOR I = 1 TO A(0)
+(0 5)     A$ = A$ + CHR$(A(I))
+(0 1)     NEXT I
+(0 3) 277 P$ = ""
+(1 3)     FOR I = 1 TO P(0)
+(0 5)     P$ = P$ + CHR$(P(I))
+(0 1)     NEXT I
+(0 5) 280 PRINT "THERE WERE"; M; "MATCHES AND THE COMMON LETTERS WERE..."; P$
+(0 3) 285 PRINT "FROM THE EXACT LETTER MATCHES, YOU KNOW................"; A$
+(1 4) 286 IF A$ = S$ THEN 500
+(1 4) 287 IF M > 1 THEN 289
+(0 2) 288 PRINT
+(0 2)     PRINT "IF YOU GIVE UP, TYPE '?' FOR YOUR NEXT GUESS."
+(0 2) 289 PRINT
+(0 3) 290 GOTO 150
+(0 3) 300 S$ = ""
+(1 3)     FOR I = 1 TO 7
+(0 5)     S$ = S$ + CHR$(S(I))
+(0 1)     NEXT I
+(0 3) 310 PRINT "THE SECRET WORD IS "; S$
+(0 2)     PRINT
+(0 3) 320 GOTO 30
+(0 2) 400 PRINT "YOU MUST GUESS A 5 LETTER WORD.  START AGAIN."
+(0 2) 410 PRINT
+(0 4)     G = G - 1
+(0 3)     GOTO 150
+(0 4) 500 PRINT "YOU HAVE GUESSED THE WORD.  IT TOOK"; G; "GUESSES!"
+(0 2)     PRINT
+(1 2) 510 INPUT "WANT TO PLAY AGAIN"; Q$
+(1 5) 520 IF Q$ = "YES" THEN 30
+(0 2) 530 DATA 12, "DINKY", "SMOKE", "WATER", "GRASS", "TRAIN", "MIGHT", "FIRST"
+(0 2) 540 DATA "CANDY", "CHAMP", "WOULD", "CLUMP", "DOPEY"
+(0 1) 999 END
+
 Unreachable code:
 
 All executable lines are reachable.

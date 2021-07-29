@@ -19,6 +19,166 @@ Halstead complexity:
  intelligence: 75.046
  time: 341.225
 
+(0 4) 5 PRINT TAB(32); "CHECKERS"
+(0 4) 10 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+(0 2) 15 PRINT
+(0 2)    PRINT
+(0 2)    PRINT
+(0 2) 20 PRINT "THIS IS THE GAME OF CHECKERS.  THE COMPUTER IS X,"
+(0 2) 25 PRINT "AND YOU ARE O.  THE COMPUTER WILL MOVE FIRST."
+(0 2) 30 PRINT "SQUARES ARE REFERRED TO BY A COORDINATE SYSTEM."
+(0 2) 35 PRINT "(0,0) IS THE LOWER LEFT CORNER"
+(0 2) 40 PRINT "(0,7) IS THE UPPER LEFT CORNER"
+(0 2) 45 PRINT "(7,0) IS THE LOWER RIGHT CORNER"
+(0 2) 50 PRINT "(7,7) IS THE UPPER RIGHT CORNER"
+(0 2) 55 PRINT "THE COMPUTER WILL TYPE '+TO' WHEN YOU HAVE ANOTHER"
+(0 2) 60 PRINT "JUMP.  TYPE TWO NEGATIVE NUMBERS IF YOU CANNOT JUMP."
+(0 2) 65 PRINT
+(0 2)    PRINT
+(0 2)    PRINT
+(0 3) 80 DIM R(4), S(7, 7)
+(0 4)    G = -1
+(0 4)    R(0) = -99
+(0 5) 90 DATA 1, 0, 1, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, -1, 0, -1, 15
+(1 3) 120 FOR X = 0 TO 7
+(1 3)     FOR Y = 0 TO 7
+(1 2)     READ J
+(1 4)     IF J = 15 THEN 180
+(0 3) 160 S(X, Y) = J
+(0 2)     GOTO 200
+(0 1) 180 RESTORE
+(1 2)     READ S(X, Y)
+(0 1) 200 NEXT Y, X
+(1 3) 230 FOR X = 0 TO 7
+(1 3)     FOR Y = 0 TO 7
+(1 6)     IF S(X, Y) > -1 THEN 350
+(2 10) 310 IF S(X, Y) = -1 THEN FOR A = -1 TO 1 STEP 2
+(0 3)     B = G
+(0 2)     GOSUB 650
+(0 1)     NEXT A
+(2 10) 330 IF S(X, Y) = -2 THEN FOR A = -1 TO 1 STEP 2
+(1 5)     FOR B = -1 TO 1 STEP 2
+(0 2)     GOSUB 650
+(0 1)     NEXT B, A
+(0 1) 350 NEXT Y, X
+(0 2)     GOTO 1140
+(0 4) 650 U = X + A
+(0 4)     V = Y + B
+(1 13)     IF U < 0 OR U > 7 OR V < 0 OR V > 7 THEN 870
+(1 5) 740 IF S(U, V) = 0 THEN GOSUB 910
+(0 2)     GOTO 870
+(1 4) 770 IF S(U, V) < 0 THEN 870
+(0 4) 790 U = U + A
+(0 4)     V = V + B
+(1 13)     IF U < 0 OR V < 0 OR U > 7 OR V > 7 THEN 870
+(1 5) 850 IF S(U, V) = 0 THEN GOSUB 910
+(0 1) 870 RETURN
+(1 12) 910 IF V = 0 AND S(X, Y) = -1 THEN Q = Q + 2
+(1 8) 920 IF ABS(Y - V) = 2 THEN Q = Q + 5
+(1 7) 960 IF Y = 7 THEN Q = Q - 2
+(1 10) 980 IF U = 0 OR U = 7 THEN Q = Q + 1
+(1 5) 1030 FOR C = -1 TO 1 STEP 2
+(1 13)      IF U + C < 0 OR U + C > 7 OR V + G < 0 THEN 1080
+(1 7) 1035 IF S(U + C, V + G) < 0 THEN Q = Q + 1
+(0 2)      GOTO 1080
+(1 13) 1040 IF U - C < 0 OR U - C > 7 OR V - G > 7 THEN 1080
+(1 18) 1045 IF S(U + C, V + G) > 0 AND (S(U - C, V - G) = 0 OR (U - C = X AND V - G = Y)) THEN Q = Q - 2
+(0 1) 1080 NEXT C
+(1 6)      IF Q > R(0) THEN R(0) = Q
+(0 3)      R(1) = X
+(0 3)      R(2) = Y
+(0 3)      R(3) = U
+(0 3)      R(4) = V
+(0 3) 1100 Q = 0
+(0 1)      RETURN
+(1 6) 1140 IF R(0) = -99 THEN 1880
+(0 9) 1230 PRINT CHR$(30) "FROM" R(1); R(2) "TO" R(3); R(4);
+(0 4)      R(0) = -99
+(1 7) 1240 IF R(4) = 0 THEN S(R(3), R(4)) = -2
+(0 2)      GOTO 1420
+(0 3) 1250 S(R(3), R(4)) = S(R(1), R(2))
+(0 3) 1310 S(R(1), R(2)) = 0
+(1 5)      IF ABS(R(1) - R(3)) <> 2 THEN 1420
+(0 3) 1330 S((R(1) + R(3)) / 2, (R(2) + R(4)) / 2) = 0
+(0 3) 1340 X = R(3)
+(0 3)      Y = R(4)
+(1 9)      IF S(X, Y) = -1 THEN B = -2
+(1 5)      FOR A = -2 TO 2 STEP 4
+(0 2)      GOSUB 1370
+(2 10) 1350 IF S(X, Y) = -2 THEN FOR A = -2 TO 2 STEP 4
+(1 5)      FOR B = -2 TO 2 STEP 4
+(0 2)      GOSUB 1370
+(0 1)      NEXT B
+(0 1) 1360 NEXT A
+(1 9)      IF R(0) <> -99 THEN PRINT "TO" R(3); R(4);
+(0 4)      R(0) = -99
+(0 3)      GOTO 1240
+(0 2) 1365 GOTO 1420
+(0 4) 1370 U = X + A
+(0 4)      V = Y + B
+(1 13)      IF U < 0 OR U > 7 OR V < 0 OR V > 7 THEN 1400
+(1 9) 1380 IF S(U, V) = 0 AND S(X + A / 2, Y + B / 2) > 0 THEN GOSUB 910
+(0 1) 1400 RETURN
+(0 2) 1420 PRINT
+(0 2)      PRINT
+(0 2)      PRINT
+(1 5)      FOR Y = 7 TO 0 STEP -1
+(1 3)      FOR X = 0 TO 7
+(0 4)      I = 5 * X
+(0 3)      PRINT TAB(I);
+(1 5) 1430 IF S(X, Y) = 0 THEN PRINT ".";
+(1 5) 1470 IF S(X, Y) = 1 THEN PRINT "O";
+(1 7) 1490 IF S(X, Y) = -1 THEN PRINT "X";
+(1 7) 1510 IF S(X, Y) = -2 THEN PRINT "X*";
+(1 5) 1530 IF S(X, Y) = 2 THEN PRINT "O*";
+(0 1) 1550 NEXT X
+(0 2)      PRINT " "
+(0 2)      PRINT
+(0 1)      NEXT Y
+(0 2)      PRINT
+(1 3) 1552 FOR L = 0 TO 7
+(1 3) 1554 FOR M = 0 TO 7
+(1 9) 1556 IF S(L, M) = 1 OR S(L, M) = 2 THEN Z = 1
+(1 13) 1558 IF S(L, M) = -1 OR S(L, M) = -2 THEN T = 1
+(0 1) 1560 NEXT M
+(0 1) 1562 NEXT L
+(1 4) 1564 IF Z <> 1 THEN 1885
+(1 4) 1566 IF T <> 1 THEN 1880
+(0 3) 1570 Z = 0
+(0 3)      T = 0
+(2 3) 1590 INPUT "FROM"; E, H
+(0 3)      X = E
+(0 3)      Y = H
+(1 5)      IF S(X, Y) <= 0 THEN 1590
+(2 3) 1670 INPUT "TO"; A, B
+(0 3)      X = A
+(0 3)      Y = B
+(1 13) 1680 IF S(X, Y) = 0 AND ABS(A - E) <= 2 AND ABS(A - E) = ABS(B - H) THEN 1700
+(0 5) 1690 PRINT CHR$(7) CHR$(11);
+(0 3)      GOTO 1670
+(0 3) 1700 I = 46
+(0 3) 1750 S(A, B) = S(E, H)
+(0 3)      S(E, H) = 0
+(1 5)      IF ABS(E - A) <> 2 THEN 1810
+(0 3) 1800 S((E + A) / 2, (H + B) / 2) = 0
+(2 3) 1802 INPUT "+TO"; A1, B1
+(1 4)      IF A1 < 0 THEN 1810
+(1 13) 1804 IF S(A1, B1) <> 0 OR ABS(A1 - A) <> 2 OR ABS(B1 - B) <> 2 THEN 1802
+(0 3) 1806 E = A
+(0 3)      H = B
+(0 3)      A = A1
+(0 3)      B = B1
+(0 4)      I = I + 15
+(0 3)      GOTO 1750
+(1 6) 1810 IF B = 7 THEN S(A, B) = 2
+(0 3) 1830 GOTO 230
+(0 2) 1880 PRINT
+(0 2)      PRINT "YOU WIN."
+(0 1)      STOP
+(0 2) 1885 PRINT
+(0 2)      PRINT "I WIN."
+(0 1)      END
+
 Unreachable code:
 
 All executable lines are reachable.

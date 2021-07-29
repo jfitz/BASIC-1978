@@ -19,6 +19,87 @@ Halstead complexity:
  intelligence: 56.327
  time: 70.575
 
+(0 4) 10 PRINT TAB(32); "ANIMAL"
+(0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+(0 2) 30 PRINT
+(0 2)    PRINT
+(0 2)    PRINT
+(0 2) 40 PRINT "PLAY 'GUESS THE ANIMAL'"
+(0 2) 45 PRINT
+(0 2) 50 PRINT "THINK OF AN ANIMAL AND THE COMPUTER WILL TRY TO GUESS IT."
+(0 2) 60 PRINT
+(0 2) 70 DIM A$(200)
+(1 3) 80 FOR I = 0 TO 3
+(1 2) 90 READ A$(I)
+(0 1) 100 NEXT I
+(0 4) 110 N = VAL(A$(0))
+(0 1) 120 REM          MAIN CONTROL SECTION
+(1 2) 130 INPUT "ARE YOU THINKING OF AN ANIMAL"; A$
+(1 4) 140 IF A$ = "LIST" THEN 600
+(1 6) 150 IF LEFT$(A$, 1) <> "Y" THEN 120
+(0 3) 160 K = 1
+(0 2) 170 GOSUB 390
+(1 5) 180 IF LEN(A$(K)) = 0 THEN 999
+(1 6) 190 IF LEFT$(A$(K), 2) = "\Q" THEN 170
+(0 4) 200 PRINT "IS IT A "; RIGHT$(A$(K), LEN(A$(K)) - 2);
+(1 2) 210 INPUT A$
+(0 4) 220 A$ = LEFT$(A$, 1)
+(1 6) 230 IF LEFT$(A$, 1) = "Y" THEN PRINT "WHY NOT TRY ANOTHER ANIMAL?"
+(0 3)     GOTO 120
+(1 2) 240 INPUT "THE ANIMAL YOU WERE THINKING OF WAS A "; V$
+(0 2) 250 PRINT "PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
+(0 5) 260 PRINT V$; " FROM A "; RIGHT$(A$(K), LEN(A$(K)) - 2)
+(1 2) 270 INPUT X$
+(0 4) 280 PRINT "FOR A "; V$; " THE ANSWER WOULD BE ";
+(1 2) 290 INPUT A$
+(0 4) 300 A$ = LEFT$(A$, 1)
+(1 8)     IF A$ <> "Y" AND A$ <> "N" THEN 280
+(1 6) 310 IF A$ = "Y" THEN B$ = "N"
+(1 6) 320 IF A$ = "N" THEN B$ = "Y"
+(0 4) 330 Z1 = VAL(A$(0))
+(0 4) 340 A$(0) = STR$(Z1 + 2)
+(0 3) 350 A$(Z1) = A$(K)
+(0 4) 360 A$(Z1 + 1) = "\A" + V$
+(0 13) 370 A$(K) = "\Q" + X$ + "\" + A$ + STR$(Z1 + 1) + "\" + B$ + STR$(Z1) + "\"
+(0 3) 380 GOTO 120
+(0 1) 390 REM     SUBROUTINE TO PRINT QUESTIONS
+(0 3) 400 Q$ = A$(K)
+(1 4) 410 FOR Z = 3 TO LEN(Q$)
+(1 7) 415 IF MID$(Q$, Z, 1) <> "\" THEN PRINT MID$(Q$, Z, 1);
+(0 1)     NEXT Z
+(1 2) 420 INPUT C$
+(0 4) 430 C$ = LEFT$(C$, 1)
+(1 8) 440 IF C$ <> "Y" AND C$ <> "N" THEN 410
+(0 4) 450 T$ = "\" + C$
+(1 5) 455 FOR X = 3 TO LEN(Q$) - 1
+(1 5) 460 IF MID$(Q$, X, 2) = T$ THEN 480
+(0 1) 470 NEXT X
+(0 1) 475 STOP
+(1 5) 480 FOR Y = X + 1 TO LEN(Q$)
+(1 5) 490 IF MID$(Q$, Y, 1) = "\" THEN 510
+(0 1) 500 NEXT Y
+(0 1) 505 STOP
+(0 4) 510 K = VAL(MID$(Q$, X + 2, Y - X - 2))
+(0 1) 520 RETURN
+(0 2) 530 DATA "4", "\QDOES IT SWIM\Y2\N3\", "\AFISH", "\ABIRD"
+(0 2) 600 PRINT
+(0 2)     PRINT "ANIMALS I ALREADY KNOW ARE:"
+(0 3) 605 X = 0
+(1 3) 610 FOR I = 1 TO 200
+(1 5) 620 IF LEFT$(A$(I), 2) <> "\A" THEN 650
+(0 3) 624 PRINT TAB(15 * X);
+(1 4) 630 FOR Z = 3 TO LEN(A$(I))
+(1 7) 640 IF MID$(A$(I), Z, 1) <> "\" THEN PRINT MID$(A$(I), Z, 1);
+(0 1)     NEXT Z
+(0 4) 645 X = X + 1
+(1 6)     IF X = 4 THEN X = 0
+(0 2)     PRINT
+(0 1) 650 NEXT I
+(0 2) 660 PRINT
+(0 2) 670 PRINT
+(0 3) 680 GOTO 120
+(0 1) 999 END
+
 Unreachable code:
 
 All executable lines are reachable.

@@ -19,6 +19,94 @@ Halstead complexity:
  intelligence: 71.431
  time: 19.594
 
+(0 4) 10 PRINT TAB(32); "CALENDAR"
+(0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+(0 2) 30 PRINT
+(0 2)    PRINT
+(0 2)    PRINT
+(0 1) 100 REM     VALUES FOR 1979 - SEE NOTES
+(0 2) 110 DIM M(12)
+(1 3) 120 FOR I = 1 TO 6
+(0 3)     PRINT CHR$(10);
+(0 1)     NEXT I
+(0 3) 130 D = 1
+(0 1)     REM 1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
+(0 3) 140 S = 0
+(0 1) 150 REM     READ DAYS OF EACH MONTH
+(1 3) 160 FOR N = 0 TO 12
+(1 2)     READ M(N)
+(0 1)     NEXT N
+(0 1) 170 REM
+(1 3) 180 FOR N = 1 TO 12
+(0 2) 190 PRINT
+(0 2)     PRINT
+(0 4)     S = S + M(N - 1)
+(0 5) 200 PRINT "**"; S; TAB(7);
+(1 3) 210 FOR I = 1 TO 18
+(0 2)     PRINT "*";
+(0 1)     NEXT I
+(12 14) 220 ON N GOTO 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340
+(0 2) 230 PRINT " JANUARY ";
+(0 2)     GOTO 350
+(0 2) 240 PRINT " FEBRUARY";
+(0 2)     GOTO 350
+(0 2) 250 PRINT "  MARCH  ";
+(0 2)     GOTO 350
+(0 2) 260 PRINT "  APRIL  ";
+(0 2)     GOTO 350
+(0 2) 270 PRINT "   MAY   ";
+(0 2)     GOTO 350
+(0 2) 280 PRINT "   JUNE  ";
+(0 2)     GOTO 350
+(0 2) 290 PRINT "   JULY  ";
+(0 2)     GOTO 350
+(0 2) 300 PRINT "  AUGUST ";
+(0 2)     GOTO 350
+(0 2) 310 PRINT "SEPTEMBER";
+(0 2)     GOTO 350
+(0 2) 320 PRINT " OCTOBER ";
+(0 2)     GOTO 350
+(0 2) 330 PRINT " NOVEMBER";
+(0 2)     GOTO 350
+(0 2) 340 PRINT " DECEMBER";
+(1 3) 350 FOR I = 1 TO 18
+(0 2)     PRINT "*";
+(0 1)     NEXT I
+(0 6) 360 PRINT 365 - S; TAB(57); "**";
+(0 1) 370 REM   366-S;     ON LEAP YEARS
+(0 3) 380 PRINT CHR$(10)
+(0 2)     PRINT "     S       M       T       W";
+(0 2) 390 PRINT "       T       F       S"
+(0 2) 400 PRINT
+(1 3) 410 FOR I = 1 TO 59
+(0 2)     PRINT "*";
+(0 1)     NEXT I
+(0 1) 420 REM
+(1 3) 430 FOR W = 1 TO 6
+(0 3) 440 PRINT CHR$(10)
+(0 3) 450 PRINT TAB(4);
+(0 1) 460 REM
+(1 3) 470 FOR G = 1 TO 7
+(0 4) 480 D = D + 1
+(0 4) 490 D2 = D - S
+(1 4) 500 IF D2 > M(N) THEN 580
+(1 5) 510 IF D2 > 0 THEN PRINT D2;
+(0 3) 520 PRINT TAB(4 + 8 * G);
+(0 1) 530 NEXT G
+(0 1) 540 REM
+(1 4) 550 IF D2 = M(N) THEN 590
+(0 1) 560 NEXT W
+(0 1) 570 REM
+(0 4) 580 D = D - G
+(0 1) 590 NEXT N
+(0 1) 600 REM
+(1 3) 610 FOR I = 1 TO 6
+(0 3)     PRINT CHR$(10);
+(0 1)     NEXT I
+(0 2) 620 DATA 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+(0 1) 630 REM  0,31,29,  ..., ON LEAP YEARS
+(0 1) 640 END
+
 Unreachable code:
 
 All executable lines are reachable.

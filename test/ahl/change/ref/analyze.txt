@@ -19,6 +19,67 @@ Halstead complexity:
  intelligence: 74.948
  time: 16.689
 
+(0 4) 2 PRINT TAB(33); "CHANGE"
+(0 4) 4 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+(0 2) 5 PRINT
+(0 2)   PRINT
+(0 2)   PRINT
+(0 2) 6 PRINT "I, YOUR FRIENDLY MICROCOMPUTER, WILL DETERMINE"
+(0 2) 8 PRINT "THE CORRECT CHANGE FOR ITEMS COSTING UP TO $100."
+(0 2) 9 PRINT
+(0 2)   PRINT
+(0 2) 10 PRINT "COST OF ITEM";
+(1 2)    INPUT A
+(0 2)    PRINT "AMOUNT OF PAYMENT";
+(1 2)    INPUT P
+(0 4) 20 C = P - A
+(0 3)    M = C
+(1 4)    IF C <> 0 THEN 90
+(0 2) 25 PRINT "CORRECT AMOUNT, THANK YOU."
+(0 2) 30 GOTO 400
+(1 4) 90 IF C > 0 THEN 120
+(0 4) 95 PRINT "SORRY, YOU HAVE SHORT-CHANGED ME $"; A - P
+(0 3) 100 GOTO 10
+(0 3) 120 PRINT "YOUR CHANGE, $"; C
+(0 4) 130 D = INT(C / 10)
+(1 4) 140 IF D = 0 THEN 155
+(0 3) 150 PRINT D; "TEN DOLLAR BILL(S)"
+(0 6) 155 C = M - (D * 10)
+(0 4) 160 E = INT(C / 5)
+(1 4) 170 IF E = 0 THEN 185
+(0 3) 180 PRINT E; "FIVE DOLLARS BILL(S)"
+(0 9) 185 C = M - (D * 10 + E * 5)
+(0 4) 190 F = INT(C)
+(1 4) 200 IF F = 0 THEN 215
+(0 3) 210 PRINT F; "ONE DOLLAR BILL(S)"
+(0 10) 215 C = M - (D * 10 + E * 5 + F)
+(0 4) 220 C = C * 100
+(0 3) 225 N = C
+(0 4) 230 G = INT(C / 50)
+(1 4) 240 IF G = 0 THEN 255
+(0 3) 250 PRINT G; "ONE HALF DOLLAR(S)"
+(0 6) 255 C = N - (G * 50)
+(0 4) 260 H = INT(C / 25)
+(1 4) 270 IF H = 0 THEN 285
+(0 3) 280 PRINT H; "QUARTER(S)"
+(0 9) 285 C = N - (G * 50 + H * 25)
+(0 4) 290 I = INT(C / 10)
+(1 4) 300 IF I = 0 THEN 315
+(0 3) 310 PRINT I; "DIME(S)"
+(0 12) 315 C = N - (G * 50 + H * 25 + I * 10)
+(0 4) 320 J = INT(C / 5)
+(1 4) 330 IF J = 0 THEN 345
+(0 3) 340 PRINT J; "NICKEL(S)"
+(0 15) 345 C = N - (G * 50 + H * 25 + I * 10 + J * 5)
+(0 4) 350 K = INT(C + .5)
+(1 4) 360 IF K = 0 THEN 380
+(0 3) 370 PRINT K; "PENNY(S)"
+(0 2) 380 PRINT "THANK YOU, COME AGAIN."
+(0 2) 390 PRINT
+(0 2)     PRINT
+(0 3) 400 GOTO 10
+(0 1) 410 END
+
 Unreachable code:
 
 All executable lines are reachable.

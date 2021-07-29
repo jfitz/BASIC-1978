@@ -19,6 +19,58 @@ Halstead complexity:
  intelligence: 35.570
  time: 8.850
 
+(0 4) 1 PRINT TAB(34); "NAME"
+(0 4) 2 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+(0 2) 3 PRINT
+(0 2)   PRINT
+(0 2)   PRINT
+(0 2) 5 DIM B$(40)
+(0 2) 10 PRINT "HELLO."
+(0 2)    PRINT "MY NAME IS CREATIVE COMPUTER."
+(0 2) 20 PRINT "WHAT'S YOUR NAME (FIRST AND LAST)";
+(1 2)    INPUT A$
+(0 4)    L = LEN(A$)
+(0 2) 30 PRINT
+(0 2)    PRINT "THANK YOU, ";
+(1 3) 40 FOR I = 1 TO L
+(0 4)    B$(I) = MID$(A$, I, 1)
+(0 1)    NEXT I
+(1 5) 50 FOR I = L TO 1 STEP -1
+(0 2)    PRINT B$(I);
+(0 1)    NEXT I
+(0 2) 60 PRINT "."
+(0 2)    PRINT "OOPS!  I GUESS I GOT IT BACKWARDS.  A SMART"
+(0 2) 70 PRINT "COMPUTER LIKE ME SHOULDN'T MAKE A MISTAKE LIKE THAT!"
+(0 2)    PRINT
+(0 2) 80 PRINT "BUT I JUST NOTICED YOUR LETTERS ARE OUT OF ORDER."
+(0 2) 90 PRINT "LET'S PUT THEM IN ORDER LIKE THIS: ";
+(1 3) 100 FOR J = 2 TO L
+(0 4)     I = J - 1
+(0 3)     T$ = B$(J)
+(1 4) 110 IF T$ > B$(I) THEN 130
+(0 3) 120 B$(I + 1) = B$(I)
+(0 4)     I = I - 1
+(1 5)     IF I > 0 THEN 110
+(0 3) 130 B$(I + 1) = T$
+(0 1)     NEXT J
+(1 3) 140 FOR I = 1 TO L
+(0 2)     PRINT B$(I);
+(0 1)     NEXT I
+(0 2)     PRINT
+(0 2)     PRINT
+(0 2) 150 PRINT "DON'T YOU LIKE THAT BETTER";
+(1 2)     INPUT D$
+(1 4) 160 IF D$ = "YES" THEN 180
+(0 2) 170 PRINT
+(0 2)     PRINT "I'M SORRY YOU DON'T LIKE IT THAT WAY."
+(0 2)     GOTO 200
+(0 2) 180 PRINT
+(0 2)     PRINT "I KNEW YOU'D AGREE!!"
+(0 2) 200 PRINT
+(0 4)     PRINT "I REALLY ENJOYED MEETING YOU "; A$; "."
+(0 2) 210 PRINT "HAVE A NICE DAY!"
+(0 1) 999 END
+
 Unreachable code:
 
 All executable lines are reachable.
