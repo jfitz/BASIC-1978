@@ -1574,12 +1574,19 @@ class Program
 
     line_numbers.each do |line_number|
       line = @lines[line_number]
+
       number = line_number.to_s
+
       statements = line.statements
 
-      statements.each_with_index do |statement, index|
+      statements.each do |statement|
         profile = statement.profile(show_timing)
-        texts << number + '.' + index.to_s + profile
+
+        text = number + profile
+
+        texts << text
+
+        number = ' ' * number.size
       end
     end
 

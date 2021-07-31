@@ -19,6 +19,21 @@ Halstead complexity:
  intelligence: 16.237
  time: 0.414
 
+(0 1) 10 REM TEST ERROR TRAP INSIDE FUNCTION
+(0 2) 20 PRINT "START"
+(0 5) 30 R = FNA(0)
+(0 3) 40 PRINT "R IS:"; R
+(0 1) 99 STOP
+(0 1) 400 DEF FNA(A)
+(1 2) 410 ON ERROR GOTO 480
+(0 6) 420 FNA = 1 / A
+(0 3) 430 PRINT "A IS: "; A
+(0 2) 470 GOTO 490
+(0 5) 480 FNA = 0
+(0 1) 481 RESUME 430
+(0 1) 490 FNEND
+(0 1) 999 END
+
 Unreachable code:
 
 All executable lines are reachable.
