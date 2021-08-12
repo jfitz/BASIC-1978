@@ -45,7 +45,7 @@ class StatementFactory
 
         begin
           statement = create_statement(line_number, statement_tokens)
-        rescue BASICExpressionError => e
+        rescue BASICExpressionError, BASICRuntimeError => e
           statement = InvalidStatement.new(line_number, text, all_tokens, e)
         end
 
@@ -264,7 +264,7 @@ class AbstractStatement
     @executable = true
     @tokens = tokens_lists.flatten
     @core_tokens = tokens_lists.flatten
-    @separators = get_separators(@tokens)
+    @separators = get_separators(@core_tokens)
     @errors = []
     @warnings = []
     @valid = true
@@ -295,6 +295,7 @@ class AbstractStatement
 
   def extract_modifiers(tokens_lists)
     while make_modifier(tokens_lists); end
+    @core_tokens = tokens_lists.flatten
 
     @modifiers.each do |modifier|
       @errors += modifier.errors
@@ -462,20 +463,52 @@ class AbstractStatement
   def reset_profile_metrics
     @profile_count = 0
     @profile_time = 0
+
+    @modifiers.each { |modifier| modifier.reset_profile_metrics }
   end
 
   def profile(show_timing)
-    text = AbstractToken.pretty_tokens(@keywords, @tokens)
+    # core statement
+    text = AbstractToken.pretty_tokens(@keywords, @core_tokens)
     text = ' ' + text unless text.empty?
 
     if show_timing
       timing = @profile_time.round(3).to_s
-      ' (' + timing + '/' + @profile_count.to_s + ')' + text
+      line = ' (' + timing + '/' + @profile_count.to_s + ')' + text
     else
-      ' (' + @profile_count.to_s + ')' + text
+      line = ' (' + @profile_count.to_s + ')' + text
     end
 
-    ### TODO: add profile for modifiers
+    lines = [line]
+
+    # modifiers
+    @modifiers.each do |modifier|
+      # first the pre line
+      text = modifier.pre_pretty
+
+      if show_timing
+        timing = modifier.profile_pre_time.round(3).to_s
+        line = ' (' + timing + '/' + modifier.profile_pre_count.to_s + ')' + text
+        lines << line
+      else
+        line = ' (' + modifier.profile_pre_count.to_s + ')' + text
+        lines << line
+      end
+
+      # then the post line
+      text = modifier.post_pretty
+
+      if show_timing
+        timing = modifier.profile_post_time.round(3).to_s
+        line = ' (' + timing + '/' + modifier.profile_post_count.to_s + ')' + text
+        lines << line
+      else
+        line = ' (' + modifier.profile_post_count.to_s + ')' + text
+        lines << line
+      end
+    end
+
+    lines
   end
 
   def renumber(_) end
@@ -485,9 +518,24 @@ class AbstractStatement
   def execute(interpreter)
     current_line_index = interpreter.current_line_index
     index = current_line_index.index
-    execute_premodifier(interpreter) if index < 0
-    execute_core(interpreter) if index.zero?
-    execute_postmodifier(interpreter) if index > 0
+    if index < 0
+      execute_premodifier(interpreter)
+    end
+
+    if index.zero?
+      timing = Benchmark.measure { execute_core(interpreter) }
+
+      user_time = timing.utime + timing.cutime
+      sys_time = timing.stime + timing.cstime
+      time = user_time + sys_time
+
+      @profile_time += time
+      @profile_count += 1
+    end
+
+    if index > 0
+      execute_postmodifier(interpreter)
+    end
   end
 
   public
@@ -523,14 +571,7 @@ class AbstractStatement
         raise(BASICSyntaxError, 'Invalid transfer in/out of function')
       end
 
-      timing = Benchmark.measure { execute(interpreter) }
-
-      user_time = timing.utime + timing.cutime
-      sys_time = timing.stime + timing.cstime
-      time = user_time + sys_time
-
-      @profile_time += time
-      @profile_count += 1
+      execute(interpreter)
     else
       trace_out.print_line(' Line ignored')
     end
@@ -561,13 +602,12 @@ class AbstractStatement
        check_template(tokens_lists.last(2), template_if)
 
       # create the modifier
-      modifier_tokens = tokens_lists.last
+      modifier_tokens = tokens_lists.last(2)
       modifier = IfModifier.new(modifier_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(2)
-      @core_tokens = tokens_lists.flatten
 
       @any_if_modifiers = true
 
@@ -580,13 +620,12 @@ class AbstractStatement
        check_template(tokens_lists.last(2), template_unless)
 
       # create the modifier
-      modifier_tokens = tokens_lists.last
+      modifier_tokens = tokens_lists.last(2)
       modifier = UnlessModifier.new(modifier_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(2)
-      @core_tokens = tokens_lists.flatten
 
       # any_if because its a conditional
       @any_if_modifiers = true
@@ -608,14 +647,14 @@ class AbstractStatement
        check_template(tokens_lists.last(4), template_for_to)
 
       # create the modifier
+      expression_tokens = tokens_lists.last(4)
       control_and_start_tokens = tokens_lists[-3]
       end_tokens = tokens_lists.last
-      modifier = ForModifier.new(control_and_start_tokens, nil, end_tokens, nil, nil)
+      modifier = ForModifier.new(expression_tokens, control_and_start_tokens, nil, end_tokens, nil, nil)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(4)
-      @core_tokens = tokens_lists.flatten
 
       return true
     end
@@ -624,16 +663,16 @@ class AbstractStatement
        check_template(tokens_lists.last(6), template_for_to_step)
 
       # create the modifier
+      expression_tokens = tokens_lists.last(6)
       control_and_start_tokens = tokens_lists[-5]
       end_tokens = tokens_lists[-3]
       step_tokens = tokens_lists.last
       modifier =
-        ForModifier.new(control_and_start_tokens, step_tokens, end_tokens, nil, nil)
+        ForModifier.new(expression_tokens, control_and_start_tokens, step_tokens, end_tokens, nil, nil)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(6)
-      @core_tokens = tokens_lists.flatten
 
       return true
     end
@@ -642,16 +681,16 @@ class AbstractStatement
        check_template(tokens_lists.last(6), template_for_step_to)
 
       # create the modifier
+      expression_tokens = tokens_lists.last(6)
       control_and_start_tokens = tokens_lists[-5]
       end_tokens = tokens_lists.last
       step_tokens = tokens_lists[-3]
       modifier =
-        ForModifier.new(control_and_start_tokens, step_tokens, end_tokens, nil, nil)
+        ForModifier.new(expression_tokens, control_and_start_tokens, step_tokens, end_tokens, nil, nil)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(6)
-      @core_tokens = tokens_lists.flatten
 
       return true
     end
@@ -660,14 +699,14 @@ class AbstractStatement
        check_template(tokens_lists.last(4), template_for_until)
 
       # create the modifier
+      expression_tokens = tokens_lists.last(4)
       control_and_start_tokens = tokens_lists[-3]
       until_tokens = tokens_lists.last
-      modifier = ForModifier.new(control_and_start_tokens, nil, nil, until_tokens, nil)
+      modifier = ForModifier.new(expression_tokens, control_and_start_tokens, nil, nil, until_tokens, nil)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(4)
-      @core_tokens = tokens_lists.flatten
 
       return true
     end
@@ -676,16 +715,16 @@ class AbstractStatement
        check_template(tokens_lists.last(6), template_for_until_step)
 
       # create the modifier
+      expression_tokens = tokens_lists.last(6)
       control_and_start_tokens = tokens_lists[-5]
       until_tokens = tokens_lists[-3]
       step_tokens = tokens_lists.last
       modifier =
-        ForModifier.new(control_and_start_tokens, step_tokens, nil, until_tokens, nil)
+        ForModifier.new(expression_tokens, control_and_start_tokens, step_tokens, nil, until_tokens, nil)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(6)
-      @core_tokens = tokens_lists.flatten
 
       return true
     end
@@ -694,16 +733,16 @@ class AbstractStatement
        check_template(tokens_lists.last(6), template_for_step_until)
 
       # create the modifier
+      expression_tokens = tokens_lists.last(6)
       control_and_start_tokens = tokens_lists[-5]
       until_tokens = tokens_lists.last
       step_tokens = tokens_lists[-3]
       modifier =
-        ForModifier.new(control_and_start_tokens, step_tokens, nil, until_tokens, nil)
+        ForModifier.new(expression_tokens, control_and_start_tokens, step_tokens, nil, until_tokens, nil)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(6)
-      @core_tokens = tokens_lists.flatten
 
       return true
     end
@@ -712,14 +751,14 @@ class AbstractStatement
        check_template(tokens_lists.last(4), template_for_while)
 
       # create the modifier
+      expression_tokens = tokens_lists.last(4)
       control_and_start_tokens = tokens_lists[-3]
       while_tokens = tokens_lists.last
-      modifier = ForModifier.new(control_and_start_tokens, nil, nil, nil, while_tokens)
+      modifier = ForModifier.new(expression_tokens, control_and_start_tokens, nil, nil, nil, while_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(4)
-      @core_tokens = tokens_lists.flatten
 
       return true
     end
@@ -728,16 +767,16 @@ class AbstractStatement
        check_template(tokens_lists.last(6), template_for_while_step)
 
       # create the modifier
+      expression_tokens = tokens_lists.last(6)
       control_and_start_tokens = tokens_lists[-5]
       while_tokens = tokens_lists[-3]
       step_tokens = tokens_lists.last
       modifier =
-        ForModifier.new(control_and_start_tokens, step_tokens, nil, nil, while_tokens)
+        ForModifier.new(expression_tokens, control_and_start_tokens, step_tokens, nil, nil, while_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(6)
-      @core_tokens = tokens_lists.flatten
 
       return true
     end
@@ -746,16 +785,16 @@ class AbstractStatement
        check_template(tokens_lists.last(6), template_for_step_while)
 
       # create the modifier
+      expression_tokens = tokens_lists.last(6)
       control_and_start_tokens = tokens_lists[-5]
       while_tokens = tokens_lists.last
       step_tokens = tokens_lists[-3]
       modifier =
-        ForModifier.new(control_and_start_tokens, step_tokens, nil, nil, while_tokens)
+        ForModifier.new(expression_tokens, control_and_start_tokens, step_tokens, nil, nil, while_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(6)
-      @core_tokens = tokens_lists.flatten
 
       return true
     end
@@ -767,13 +806,12 @@ class AbstractStatement
        check_template(tokens_lists.last(2), template_unless)
 
       # create the modifier
-      modifier_tokens = tokens_lists.last
+      modifier_tokens = tokens_lists.last(2)
       modifier = WhileModifier.new(modifier_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(2)
-      @core_tokens = tokens_lists.flatten
 
       # any_if because its a conditional
       @any_if_modifiers = true
@@ -788,13 +826,12 @@ class AbstractStatement
        check_template(tokens_lists.last(2), template_unless)
 
       # create the modifier
-      modifier_tokens = tokens_lists.last
+      modifier_tokens = tokens_lists.last(2)
       modifier = UntilModifier.new(modifier_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
       tokens_lists.pop(2)
-      @core_tokens = tokens_lists.flatten
 
       # any_if because its a conditional
       @any_if_modifiers = true
@@ -836,6 +873,7 @@ class AbstractStatement
 
         # control array and value array implies an expression
         result &= value.size == control[0] if control.size == 1
+
         result &= value.size >= control[0] if
           control.size == 2 && control[1] == '>='
 
@@ -877,6 +915,7 @@ class AbstractStatement
       else
         list << token
       end
+
       parens_level += 1 if token.group_start?
       parens_level -= 1 if token.group_end? && !parens_level.zero?
     end
@@ -1005,6 +1044,7 @@ class InvalidStatement < AbstractStatement
 
     @valid = false
     @executable = false
+    @autonext = false
     @text = text
     @errors << 'Invalid statement: ' + error.message
   end
@@ -1613,7 +1653,8 @@ class DefineFunctionStatement < AbstractStatement
   def dump
     lines = []
 
-    lines += @definition.dump unless @definition.nil?
+    lines += @definition.dump unless
+      @definition.nil? || @definition.multidef?
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
@@ -1651,8 +1692,8 @@ class DimStatement < AbstractStatement
       tokens_lists.each do |tokens_list|
         begin
           @declarations << DeclarationExpressionSet.new(tokens_list)
-        rescue BASICExpressionError
-          @errors << 'Invalid variable ' + tokens_list.map(&:to_s).join
+        rescue BASICExpressionError => e
+          @errors << 'Invalid ' + tokens_list.map(&:to_s).join + ' ' + e.to_s
         end
       end
 
@@ -1669,9 +1710,7 @@ class DimStatement < AbstractStatement
   def dump
     lines = []
 
-    @declarations.each do |expression|
-      lines += expression.dump
-    end
+    @declarations.each { |expression| lines += expression.dump }
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
@@ -2115,7 +2154,7 @@ class ForgetStatement < AbstractStatement
     lines
   end
 
-  def execute(interpreter)
+  def execute_core(interpreter)
     @variables.each { |variable| interpreter.forget_value(variable) }
   end
 end
@@ -2354,7 +2393,7 @@ class AbstractIfStatement < AbstractStatement
           @errors << 'Invalid substatement' unless @else_stmt.may_be_if_sub
           @warnings += @else_stmt.warnings
         end
-      
+
         unless @destination.nil?
           if @destination > line_number
             @comprehension_effort += 1
@@ -2683,7 +2722,9 @@ class AbstractIfStatement < AbstractStatement
       unless @destination.nil?
         line_number = @destination
         index = interpreter.statement_start_index(line_number, 0)
+
         raise(BASICSyntaxError, 'Line number not found') if index.nil?
+
         destination = LineNumberIndex.new(line_number, 0, index)
         interpreter.next_line_index = destination
       end
@@ -2699,7 +2740,9 @@ class AbstractIfStatement < AbstractStatement
       unless @else_dest.nil?
         line_number = @else_dest
         index = interpreter.statement_start_index(line_number, 0)
+
         raise(BASICSyntaxError, 'Line number not found') if index.nil?
+
         destination = LineNumberIndex.new(line_number, 0, index)
         interpreter.next_line_index = destination
       end
@@ -2983,7 +3026,7 @@ class LineInputStatement < AbstractStatement
       @prompt = extract_prompt(@items)
       @elements = make_references(@items, @file_tokens, @prompt)
       @items.each { |item| @comprehension_effort += item.comprehension_effort }
-      @mccabe += @modifiers.size
+      @mccabe += @items.size
     else
       @errors << 'Syntax error'
     end
@@ -3019,6 +3062,8 @@ class LineInputStatement < AbstractStatement
 
     interpreter.clear_previous_lines
   end
+
+  private
 
   def input_values(fhr, interpreter, prompt, count)
     values = []
@@ -3315,9 +3360,10 @@ class OnStatement < AbstractStatement
   def dump
     lines = []
 
-    lines += @expression.dump
+    lines += @expression.dump unless @expression.nil?
 
-    @destinations.each { |destination| lines << destination.dump }
+    @destinations.each { |destination| lines << destination.dump } unless
+      @destinations.nil?
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
@@ -3418,49 +3464,60 @@ class OpenStatement < AbstractStatement
     extract_modifiers(tokens_lists)
 
     template_input_as = [[1, '>='], 'FOR', 'INPUT', 'AS', [1, '>=']]
+
     template_input_as_file =
       [[1, '>='], 'FOR', 'INPUT', 'AS', 'FILE', [1, '>=']]
 
     template_output_as = [[1, '>='], 'FOR', 'OUTPUT', 'AS', [1, '>=']]
+
     template_output_as_file =
       [[1, '>='], 'FOR', 'OUTPUT', 'AS', 'FILE', [1, '>=']]
 
     template_append_as = [[1, '>='], 'FOR', 'APPEND', 'AS', [1, '>=']]
+
     template_append_as_file =
       [[1, '>='], 'FOR', 'APPEND', 'AS', 'FILE', [1, '>=']]
 
     if check_template(tokens_lists, template_input_as) ||
        check_template(tokens_lists, template_input_as_file)
+
       @filename_expression = ValueExpressionSet.new(tokens_lists[0], :scalar)
       @errors << 'TAB() not allowed' if @filename_expression.has_tab
       @filenum_expression = ValueExpressionSet.new(tokens_lists[-1], :scalar)
       @errors << 'TAB() not allowed' if @filenum_expression.has_tab
 
-      @elements = make_references(nil, @filename_expression, @filenum_expression)
+      @elements =
+        make_references(nil, @filename_expression, @filenum_expression)
 
       @mode = :read
       @comprehension_effort += @filenum_expression.comprehension_effort
       @comprehension_effort += @filename_expression.comprehension_effort
+
     elsif check_template(tokens_lists, template_output_as) ||
           check_template(tokens_lists, template_output_as_file)
+
       @filename_expression = ValueExpressionSet.new(tokens_lists[0], :scalar)
       @errors << 'TAB() not allowed' if @filename_expression.has_tab
       @filenum_expression = ValueExpressionSet.new(tokens_lists[-1], :scalar)
       @errors << 'TAB() not allowed' if @filenum_expression.has_tab
 
-      @elements = make_references(nil, @filename_expression, @filenum_expression)
+      @elements =
+        make_references(nil, @filename_expression, @filenum_expression)
 
       @mode = :print
       @comprehension_effort += @filenum_expression.comprehension_effort
       @comprehension_effort += @filename_expression.comprehension_effort
+
     elsif check_template(tokens_lists, template_append_as) ||
           check_template(tokens_lists, template_append_as_file)
+
       @filename_expression = ValueExpressionSet.new(tokens_lists[0], :scalar)
       @errors << 'TAB() not allowed' if @filename_expression.has_tab
       @filenum_expression = ValueExpressionSet.new(tokens_lists[-1], :scalar)
       @errors << 'TAB() not allowed' if @filenum_expression.has_tab
 
-      @elements = make_references(nil, @filename_expression, @filenum_expression)
+      @elements =
+        make_references(nil, @filename_expression, @filenum_expression)
 
       @mode = :append
       @comprehension_effort += @filenum_expression.comprehension_effort
@@ -3553,7 +3610,7 @@ class OptionStatement < AbstractStatement
     lines
   end
 
-  def execute(interpreter)
+  def execute_core(interpreter)
     if @expression.nil?
       interpreter.pop_option(@key)
     else
@@ -3618,7 +3675,7 @@ class PrintStatement < AbstractStatement
 
     # end with
     #   @file_tokens : exp or nil
-    #   #items : list either expression, cc, or keyword
+    #   @items : list either expression, cc, or keyword
 
     # if item is keyword then it must be 'USING'
     @items.each do |item|
@@ -3652,7 +3709,7 @@ class PrintStatement < AbstractStatement
     j = 0
     while j < @items.size
       item = @items[j]
-      
+
       if item.class.to_s == 'Array'
         i = 0
         last_was_carriage = true
@@ -4134,7 +4191,7 @@ class ArrForgetStatement < AbstractStatement
     lines
   end
 
-  def execute(interpreter)
+  def execute_core(interpreter)
     @variables.each { |variable| interpreter.forget_compound_values(variable) }
   end
 end
@@ -4172,7 +4229,7 @@ class ArrInputStatement < AbstractStatement
     end
   end
 
-  def execute(interpreter)
+  def execute_core(interpreter)
     fh = get_file_handle(interpreter, @file_tokens)
     fhr = interpreter.get_file_handler(fh, :read)
 
@@ -4293,7 +4350,7 @@ class ArrPlotStatement < AbstractStatement
     lines
   end
 
-  def execute(interpreter)
+  def execute_core(interpreter)
     fh = get_file_handle(interpreter, @file_tokens)
     fhr = interpreter.get_file_handler(fh, :print)
 
@@ -4763,7 +4820,7 @@ class MatForgetStatement < AbstractStatement
     lines
   end
 
-  def execute(interpreter)
+  def execute_core(interpreter)
     @variables.each { |variable| interpreter.forget_compound_values(variable) }
   end
 end
@@ -4801,7 +4858,7 @@ class MatInputStatement < AbstractStatement
     end
   end
 
-  def execute(interpreter)
+  def execute_core(interpreter)
     fh = get_file_handle(interpreter, @file_tokens)
     fhr = interpreter.get_file_handler(fh, :read)
 
@@ -4935,7 +4992,7 @@ class MatPlotStatement < AbstractStatement
     lines
   end
 
-  def execute(interpreter)
+  def execute_core(interpreter)
     fh = get_file_handle(interpreter, @file_tokens)
     fhr = interpreter.get_file_handler(fh, :print)
 
@@ -4998,7 +5055,7 @@ class MatPrintStatement < AbstractStatement
 
     # end with
     #   @file_tokens : exp or nil
-    #   #items : list either expression, cc, or keyword
+    #   @items : list either expression, cc, or keyword
 
     # if item is keyword then it must be 'USING'
     @items.each do |item|
@@ -5096,7 +5153,6 @@ class MatPrintStatement < AbstractStatement
           last_was_carriage = true
         end
 
-        # TODO: if more items print as normal (unformatted)
         i += 1
 
         while i < items.size
@@ -5188,7 +5244,7 @@ class MatReadStatement < AbstractStatement
     @items.each do |item|
       targets = item.evaluate(interpreter)
       targets.each do |target|
-        interpreter.set_dimensions(target, target.dimensions) if
+        interpreter.set_dimensions(target.name, target.dimensions) if
           target.dimensions?
 
         raise BASICRuntimeError.new(:te_mat_no_dim) unless

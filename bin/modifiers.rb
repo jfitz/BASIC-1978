@@ -14,10 +14,48 @@ class AbstractModifier
   attr_reader :functions
   attr_reader :userfuncs
   attr_reader :comprehension_effort
+  attr_reader :profile_pre_count
+  attr_reader :profile_post_count
+  attr_reader :profile_pre_time
+  attr_reader :profile_post_time
 
-  def initialize
+  def initialize(tokens_lists)
+    @tokens = tokens_lists.flatten
     @errors = []
     @warnings = []
+    @profile_pre_count = 0
+    @profile_post_count = 0
+    @profile_pre_time = 0
+    @profile_post_time = 0
+  end
+
+  def reset_profile_metrics
+    @profile_pre_count = 0
+    @profile_post_count = 0
+    @profile_pre_time = 0
+    @profile_post_time = 0
+  end
+
+  def execute_pre(interpreter)
+    timing = Benchmark.measure { execute_pre_stmt(interpreter) }
+
+    user_time = timing.utime + timing.cutime
+    sys_time = timing.stime + timing.cstime
+    time = user_time + sys_time
+
+    @profile_pre_time += time
+    @profile_pre_count += 1
+  end
+
+  def execute_post(interpreter)
+    timing = Benchmark.measure { execute_post_stmt(interpreter) }
+
+    user_time = timing.utime + timing.cutime
+    sys_time = timing.stime + timing.cstime
+    time = user_time + sys_time
+
+    @profile_post_time += time
+    @profile_post_count += 1
   end
 
   private
@@ -31,6 +69,10 @@ class AbstractModifier
     other_index = -index
     LineNumberIndex.new(number, statement_index, other_index)
   end
+
+  def execute_pre_stmt(_); end
+
+  def execute_post_stmt(_); end
 end
 
 # IF
@@ -41,9 +83,10 @@ class IfModifier < AbstractModifier
     ]
   end
 
-  def initialize(expression_tokens)
-    super()
+  def initialize(tokens_lists)
+    super(tokens_lists)
 
+    expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
@@ -62,8 +105,12 @@ class IfModifier < AbstractModifier
     @expression.uncache
   end
 
-  def pretty
-    'IF ' + @expression.to_s
+  def pre_pretty
+    ' IF ' + @expression.to_s
+  end
+
+  def post_pretty
+    ' ENDIF'
   end
 
   def dump
@@ -84,7 +131,9 @@ class IfModifier < AbstractModifier
     'ENDIF'
   end
 
-  def execute_pre(interpreter)
+  private
+
+  def execute_pre_stmt(interpreter)
     io = interpreter.trace_out
 
     values = @expression.evaluate(interpreter)
@@ -104,8 +153,6 @@ class IfModifier < AbstractModifier
     # if false then transfer to our post modifier
     interpreter.next_line_index = get_counterpart(interpreter)
   end
-
-  def execute_post(_interpreter) end
 end
 
 # UNLESS
@@ -116,9 +163,10 @@ class UnlessModifier < AbstractModifier
     ]
   end
 
-  def initialize(expression_tokens)
-    super()
+  def initialize(tokens_lists)
+    super
 
+    expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
@@ -137,8 +185,12 @@ class UnlessModifier < AbstractModifier
     @expression.uncache
   end
 
-  def pretty
-    'UNLESS ' + @expression.to_s
+  def pre_pretty
+    ' UNLESS ' + @expression.to_s
+  end
+
+  def post_pretty
+    ' ENDUNLESS'
   end
 
   def dump
@@ -159,7 +211,9 @@ class UnlessModifier < AbstractModifier
     'ENDUNLESS'
   end
 
-  def execute_pre(interpreter)
+  private
+
+  def execute_pre_stmt(interpreter)
     io = interpreter.trace_out
 
     values = @expression.evaluate(interpreter)
@@ -172,15 +226,13 @@ class UnlessModifier < AbstractModifier
 
     s = ' ' + result.to_s
     io.trace_output(s)
-
+    
     # if false then continue execution normally
     return unless result.value
 
     # if true then transfer to our post modifier
     interpreter.next_line_index = get_counterpart(interpreter)
   end
-
-  def execute_post(_interpreter) end
 end
 
 # WHILE
@@ -191,9 +243,10 @@ class WhileModifier < AbstractModifier
     ]
   end
 
-  def initialize(expression_tokens)
-    super()
+  def initialize(tokens_lists)
+    super
 
+    expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
@@ -212,8 +265,12 @@ class WhileModifier < AbstractModifier
     @expression.uncache
   end
 
-  def pretty
-    'WHILE ' + @expression.to_s
+  def pre_pretty
+    ' WHILE ' + @expression.to_s
+  end
+
+  def post_pretty
+    ' ENDWHILE'
   end
 
   def dump
@@ -234,7 +291,9 @@ class WhileModifier < AbstractModifier
     'ENDWHILE'
   end
 
-  def execute_pre(interpreter)
+  private
+  
+  def execute_pre_stmt(interpreter)
     io = interpreter.trace_out
 
     values = @expression.evaluate(interpreter)
@@ -255,7 +314,7 @@ class WhileModifier < AbstractModifier
     interpreter.next_line_index = get_counterpart(interpreter)
   end
 
-  def execute_post(interpreter)
+  def execute_post_stmt(interpreter)
     io = interpreter.trace_out
 
     values = @expression.evaluate(interpreter)
@@ -285,9 +344,10 @@ class UntilModifier < AbstractModifier
     ]
   end
 
-  def initialize(expression_tokens)
-    super()
+  def initialize(tokens_lists)
+    super
 
+    expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
     @warnings << 'Constant expression' if @expression.constant
@@ -306,8 +366,12 @@ class UntilModifier < AbstractModifier
     @expression.uncache
   end
 
-  def pretty
-    'UNTIL ' + @expression.to_s
+  def pre_pretty
+    ' UNTIL ' + @expression.to_s
+  end
+
+  def post_pretty
+    ' ENDUNTIL'
   end
 
   def dump
@@ -328,7 +392,9 @@ class UntilModifier < AbstractModifier
     'ENDUNTIL'
   end
 
-  def execute_pre(interpreter)
+  private
+
+  def execute_pre_stmt(interpreter)
     io = interpreter.trace_out
 
     values = @expression.evaluate(interpreter)
@@ -342,6 +408,8 @@ class UntilModifier < AbstractModifier
     s = ' ' + result.to_s
     io.trace_output(s)
 
+    @profile_pre_count += 1
+    
     # if terminated then continue execution normally
     return unless result.value
 
@@ -349,7 +417,7 @@ class UntilModifier < AbstractModifier
     interpreter.next_line_index = get_counterpart(interpreter)
   end
 
-  def execute_post(interpreter)
+  def execute_post_stmt(interpreter)
     io = interpreter.trace_out
 
     values = @expression.evaluate(interpreter)
@@ -362,6 +430,8 @@ class UntilModifier < AbstractModifier
 
     s = ' ' + result.to_s
     io.trace_output(s)
+
+    @profile_post_count += 1
 
     # if not terminated then continue to next statement
     return if result.value
@@ -383,8 +453,8 @@ class ForModifier < AbstractModifier
     %w[STEP TO UNTIL WHILE]
   end
 
-  def initialize(control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
-    super()
+  def initialize(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+    super(tokens_lists)
 
     parts = split_on_token(control_and_start_tokens, '=')
 
@@ -493,30 +563,38 @@ class ForModifier < AbstractModifier
     @while.uncache unless @while.nil?
   end
 
-  def pretty
+  def pre_pretty
+    text = ''
+    
     unless @end.nil?
       if @step.nil?
-        "FOR #{@control} = #{@start} TO #{@end}"
+        text = " FOR #{@control} = #{@start} TO #{@end}"
       else
-        "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+        text = " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
       end
     end
 
     unless @until.nil?
       if @step.nil?
-        "FOR #{@control} = #{@start} UNTIL #{@until}"
+        text = " FOR #{@control} = #{@start} UNTIL #{@until}"
       else
-        "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
+        text = " FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
       end
     end
 
     unless @while.nil?
       if @step.nil?
-        "FOR #{@control} = #{@start} WHILE #{@while}"
+        text = " FOR #{@control} = #{@start} WHILE #{@while}"
       else
-        "FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
+        text = " FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
       end
     end
+
+    text
+  end
+
+  def post_pretty
+    ' NEXT'
   end
 
   def dump
@@ -554,9 +632,9 @@ class ForModifier < AbstractModifier
 
     unless @while.nil?
       if @step.nil?
-        s = "FOR #{@control} = #{@start} WHILE #{@while}"
+        s = "FOR #{@control} = #{@start} UNTIL #{@while}"
       else
-        s = "FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
+        s = "FOR #{@control} = #{@start} UNTIL #{@while} STEP #{@step}"
       end
     end
 
@@ -567,7 +645,9 @@ class ForModifier < AbstractModifier
     "NEXT #{@control}"
   end
 
-  def execute_pre(interpreter)
+  private
+
+  def execute_pre_stmt(interpreter)
     from = @start.evaluate(interpreter)[0]
     step = NumericConstant.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
@@ -601,7 +681,7 @@ class ForModifier < AbstractModifier
     interpreter.next_line_index = get_counterpart(interpreter)
   end
 
-  def execute_post(interpreter)
+  def execute_post_stmt(interpreter)
     fornext_control = interpreter.retrieve_fornext(@control)
 
     bump_early = fornext_control.bump_early?
@@ -623,8 +703,6 @@ class ForModifier < AbstractModifier
       fornext_control.bump_control(interpreter) unless bump_early
     end
   end
-
-  private
 
   def split_on_token(tokens, token_to_split)
     results = []

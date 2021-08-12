@@ -1,0 +1,164 @@
+Statistics:
+
+Number of lines: 138
+Number of valid statements: 115
+Number of comments: 23
+Number of executable statements: 101
+
+Complexity:
+
+Comment density: 0.200
+Comprehension effort: 349
+McCabe complexity: 29
+Halstead complexity:
+ length: 729
+ volume: 3633.049
+ difficulty: 39.148
+ effort: 142224.944
+ language: 2.371
+ intelligence: 92.804
+ time: 131.690
+
+(0 1) 10 REM SIMULATION OF NEIGHBORS AND MOVES
+(0 2) 20 OPTION BASE 0
+(0 2) 21 OPTION FIELD_SEP "SEMI"
+(0 1) 100 REM collect data
+(2 3) 110 READ R0, C0
+(1 2) 120 READ N0
+(0 2) 122 DIM M(N0)
+(1 2) 130 READ D0
+(1 2) 132 READ I0
+(1 2) 134 READ Z8
+(0 8) 136 LET Z0 = R0 * 2 + C0 * 2 + Z8
+(0 7) 150 PRINT "Board size:"; R0 + 1; "x"; C0 + 1
+(0 3) 152 PRINT "Number of populations:"; N0
+(0 3) 154 PRINT "Discomfort threshold:"; D0
+(0 3) 156 PRINT "Iteration threshold:"; I0
+(0 3) 158 PRINT "Number of zero cells:"; Z0
+(0 1) 200 REM configure initial board
+(0 2) 210 PRINT "Initializing board... ";
+(0 2) 220 GOSUB 1100
+(0 2) 230 PRINT "done."
+(0 3) 240 LET I1 = 1
+(0 3) 242 LET P2 = 0.99
+(0 1) 300 REM display board
+(0 2) 310 PRINT
+(0 4) 312 PRINT "Iteration"; I1; ":"
+(0 2) 314 PRINT
+(0 2) 320 GOSUB 1200
+(0 1) 400 REM ask to continue
+(1 4) 410 IF P2 < I0 THEN 900
+(0 4) 430 LET I1 = I1 + 1
+(0 1) 500 REM calculate comfort
+(0 2) 510 PRINT "Calculating moves... ";
+(0 2) 520 GOSUB 1300
+(0 2) 530 PRINT "done."
+(0 2) 540 PRINT "Moves: ";
+(0 2) 542 ARR PRINT M;
+(0 3) 550 LET M = 0
+(1 3) 552 FOR I = 1 TO N0
+(0 4) 554 LET M = M + M(I)
+(0 1) 556 NEXT I
+(0 8) 558 LET T = (R0 + 1) * (C0 + 1) - Z0
+(0 4) 560 LET P2 = M / T
+(0 5) 562 PRINT "("; P2 * 100; "%)"
+(0 2) 570 PRINT
+(0 1) 600 REM fill in new board
+(0 2) 610 PRINT "Filling in new board... ";
+(0 2) 620 GOSUB 1400
+(0 2) 630 PRINT "done."
+(0 1) 700 REM new board becomes the board
+(0 3) 710 MAT B = B1
+(0 3) 800 GOTO 300
+(0 1) 900 REM End the simulation
+(0 2) 910 PRINT
+(0 2) 920 PRINT "SIMULATION TERMINATED"
+(0 1) 990 STOP
+(0 1) 1100 REM configure initial board
+(0 1) 1110 REM SET EVERYTHING TO -1
+(0 7) 1112 MAT B = CON(R0, C0) * -1
+(0 1) 1120 REM SET HORIZONTAL BORDERS TO 0
+(1 3) 1122 FOR C = 0 TO C0
+(0 3) 1124 LET B(0, C) = 0
+(0 3) 1126 LET B(R0, C) = 0
+(0 1) 1128 NEXT C
+(0 1) 1130 REM SET VERTICAL BORDERS TO 0
+(1 3) 1132 FOR R = 0 TO R0
+(0 3) 1134 LET B(R, 0) = 0
+(0 3) 1136 LET B(R, C0) = 0
+(0 1) 1138 NEXT R
+(0 1) 1140 REM SET INSIDE EMPTY AREAS TO 0
+(1 3) 1142 FOR I = 1 TO Z8
+(2 3) 1144 READ R, C
+(0 3) 1146 LET B(R, C) = 0
+(0 1) 1148 NEXT I
+(0 1) 1150 REM SET REMAINING CELLS TO POPULATION GROUP
+(1 4) 1152 FOR R = 1 TO R0 - 1
+(1 4) 1153 FOR C = 1 TO C0 - 1
+(1 6) 1154 IF B(R, C) <> -1 THEN 1157
+(0 4) 1155 LET B(R, C) = INT(RND(N0) + 1)
+(0 1) 1157 NEXT C
+(0 1) 1158 NEXT R
+(0 1) 1190 RETURN
+(0 1) 1200 REM display board
+(0 2) 1210 MAT PRINT B;
+(0 1) 1290 RETURN
+(0 1) 1300 REM calculate comfort, count people who move
+(0 3) 1302 MAT B1 = B
+(0 4) 1304 ARR M = ZER1()
+(1 4) 1310 FOR R = 1 TO R0 - 1
+(1 4) 1312 FOR C = 1 TO C0 - 1
+(1 4) 1314 IF B(R, C) = 0 THEN 1380
+(0 3) 1317 LET X7 = 0
+(0 3) 1318 LET X8 = 0
+(1 5) 1320 FOR R9 = R - 1 TO R + 1
+(1 5) 1322 FOR C9 = C - 1 TO C + 1
+(1 4) 1330 IF B(R9, C9) = 0 THEN 1340
+(1 4) 1332 IF B(R9, C9) = B(R, C) THEN 1340
+(0 4) 1334 LET X8 = X8 + 1
+(0 2) 1336 GOTO 1350
+(0 4) 1340 LET X7 = X7 + 1
+(0 1) 1350 NEXT C9
+(0 1) 1352 NEXT R9
+(0 4) 1360 LET X = X8 / X7
+(1 4) 1370 IF X < D0 THEN 1380
+(0 4) 1372 LET M(B(R, C)) = M(B(R, C)) + 1
+(0 4) 1374 LET B1(R, C) = -1
+(0 1) 1380 NEXT C
+(0 1) 1382 NEXT R
+(0 1) 1390 RETURN
+(0 1) 1400 REM fill in new board
+(1 4) 1410 FOR R = 1 TO R0 - 1
+(1 4) 1412 FOR C = 1 TO C0 - 1
+(1 6) 1420 IF B1(R, C) <> -1 THEN 1450
+(0 4) 1430 LET P = INT(RND(N0) + 1)
+(1 5) 1432 IF M(P) <= 0 THEN 1430
+(0 3) 1440 LET B1(R, C) = P
+(0 4) 1442 LET M(P) = M(P) - 1
+(0 1) 1450 NEXT C
+(0 1) 1452 NEXT R
+(0 1) 1490 RETURN
+(0 1) 3000 REM NUMBER OF ROWS AND COLUMNS
+(0 2) 3005 DATA 40, 40
+(0 1) 3010 REM NUMBER OF POPULATION GROUPS
+(0 2) 3012 DATA 3
+(0 1) 3020 REM DISCOMFORT THRESHOLD, ITERATION THRESHOLD
+(0 2) 3022 DATA 0.8, 0.10
+(0 1) 3030 REM NUMBER OF ZERO-CELLS
+(0 2) 3032 DATA 73
+(0 1) 3050 REM COORDS FOR ZERO-CELLS
+(0 2) 3051 DATA 1, 10, 2, 10, 3, 10, 4, 10, 5, 10
+(0 2) 3052 DATA 39, 20, 38, 20, 37, 20, 36, 20, 35, 20, 34, 20, 33, 20, 32, 20, 31, 20, 30, 20
+(0 2) 3053 DATA 29, 20, 28, 20, 27, 20, 26, 20, 25, 20
+(0 2) 3054 DATA 6, 11, 7, 12, 8, 13, 9, 14, 10, 15, 11, 16, 12, 17, 13, 18
+(0 2) 3055 DATA 12, 1, 12, 2, 12, 3, 12, 4, 12, 5, 12, 6
+(0 2) 3056 DATA 18, 39, 18, 38, 18, 37, 18, 36, 18, 35, 18, 34
+(0 2) 3057 DATA 24, 19, 23, 18, 22, 17, 21, 16, 20, 15, 19, 14, 18, 13, 17, 12, 16, 11
+(0 2) 3058 DATA 24, 21, 23, 22, 22, 23, 21, 24, 20, 25, 19, 26, 18, 27, 17, 28, 16, 29, 16, 30, 16, 31, 16, 32, 17, 33
+(0 2) 3059 DATA 24, 20, 23, 20, 22, 20, 21, 20, 20, 20, 19, 20, 18, 20, 17, 20, 16, 20, 15, 20, 14, 19, 13, 19
+(0 1) 4999 END
+
+Unreachable code:
+
+All executable lines are reachable.
+

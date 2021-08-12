@@ -1,0 +1,540 @@
+2 REM RAIL SIMULATION
+ Remark:RAIL SIMULATION
+10 REM ********** INITIALIZATION
+ Remark:********** INITIALIZATION
+11 REM ***** OPTIONS
+ Remark:***** OPTIONS
+12 OPTION REQUIRE_INITIALIZED TRUE
+ BooleanConstant:true
+13 OPTION BASE 1
+ NumericConstant:1
+14 OPTION PRINT_WIDTH 132
+ NumericConstant:132
+15 OPTION FORGET_FORNEXT TRUE
+ BooleanConstant:true
+20 REM ***** FUNCTIONS
+ Remark:***** FUNCTIONS
+21 REM FORMAT TIME INTO STRING
+ Remark:FORMAT TIME INTO STRING
+22 DEF FNH$(T) = RIGHT$("0"+STR$(INT(T/3600)),2)+":"+RIGHT$("0"+STR$(INT(MOD(T,3600)/60)),2)+":"+RIGHT$("0"+STR$(MOD(T,60)),2)
+ UserFunctionName:FNH$ -> $
+ VariableName:T -> _
+ TextConstant:"0"
+ Variable:T -> _
+ NumericConstant:3600
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
+ FunctionStr:STR$(_) -> $
+ BinaryOperatorPlus:+($,$) -> $
+ NumericConstant:2
+ FunctionRight:RIGHT$($,_) -> $
+ TextConstant:":"
+ BinaryOperatorPlus:+($,$) -> $
+ TextConstant:"0"
+ Variable:T -> _
+ NumericConstant:3600
+ FunctionMod:MOD(_,_) -> _
+ NumericConstant:60
+ BinaryOperatorDivide:/(_,_) -> _
+ FunctionInt:INT(_) -> _
+ FunctionStr:STR$(_) -> $
+ BinaryOperatorPlus:+($,$) -> $
+ NumericConstant:2
+ FunctionRight:RIGHT$($,_) -> $
+ BinaryOperatorPlus:+($,$) -> $
+ TextConstant:":"
+ BinaryOperatorPlus:+($,$) -> $
+ TextConstant:"0"
+ Variable:T -> _
+ NumericConstant:60
+ FunctionMod:MOD(_,_) -> _
+ FunctionStr:STR$(_) -> $
+ BinaryOperatorPlus:+($,$) -> $
+ NumericConstant:2
+ FunctionRight:RIGHT$($,_) -> $
+ BinaryOperatorPlus:+($,$) -> $
+23 REM CALCULATE STOPPING TIME
+ Remark:CALCULATE STOPPING TIME
+24 DEF FNS(V,A) = 2.0*(ABS(V)/ABS(A))
+ UserFunctionName:FNS -> _
+ VariableName:V -> _
+ VariableName:A -> _
+ NumericConstant:2.0
+ Variable:V -> _
+ FunctionAbs:ABS(_) -> _
+ Variable:A -> _
+ FunctionAbs:ABS(_) -> _
+ BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+25 REM CALCULATE STOPPING DISTANCE
+ Remark:CALCULATE STOPPING DISTANCE
+26 DEF FND(V,A,T) = V*T + 0.5*(A)*T^2
+ UserFunctionName:FND -> _
+ VariableName:V -> _
+ VariableName:A -> _
+ VariableName:T -> _
+ Variable:V -> _
+ Variable:T -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ NumericConstant:0.5
+ Variable:A -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ Variable:T -> _
+ NumericConstant:2
+ BinaryOperatorPower:^(_,_) -> _
+ BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorPlus:+(_,_) -> _
+70 REM ***** DATA
+ Remark:***** DATA
+71 REM NUMBER OF STATIONS, POSITIONS (in meters), NAMES
+ Remark:NUMBER OF STATIONS, POSITIONS (in meters), NAMES
+72 DATA 17
+ NumericConstant:17
+73 DATA 0, 5.6E3, 13.53E3, 16.7E3, 18.2E3, 20.4E3, 24.6E3, 26.6E3, 29.3E3, 33.6E3, 35.6E3, 37.3E3, 39.6E3, 42.6E3, 44.9E3, 46.8E3, 49.1E3
+ NumericConstant:0
+ NumericConstant:5.6E3
+ NumericConstant:13.53E3
+ NumericConstant:16.7E3
+ NumericConstant:18.2E3
+ NumericConstant:20.4E3
+ NumericConstant:24.6E3
+ NumericConstant:26.6E3
+ NumericConstant:29.3E3
+ NumericConstant:33.6E3
+ NumericConstant:35.6E3
+ NumericConstant:37.3E3
+ NumericConstant:39.6E3
+ NumericConstant:42.6E3
+ NumericConstant:44.9E3
+ NumericConstant:46.8E3
+ NumericConstant:49.1E3
+74 DATA "HOBOKEN", "SEACAUCUS", "RUTHERFORD", "WESMONT", "GARFIELD", "PLAUDERVILLE", "BROADWAY", "RADBURN", "GLEN ROCK", "RIDGEWOOD", "HO_HO_KUS"
+ TextConstant:"HOBOKEN"
+ TextConstant:"SEACAUCUS"
+ TextConstant:"RUTHERFORD"
+ TextConstant:"WESMONT"
+ TextConstant:"GARFIELD"
+ TextConstant:"PLAUDERVILLE"
+ TextConstant:"BROADWAY"
+ TextConstant:"RADBURN"
+ TextConstant:"GLEN ROCK"
+ TextConstant:"RIDGEWOOD"
+ TextConstant:"HO_HO_KUS"
+75 DATA "WALDWICK", "ALLENDALE", "RAMSEY", "RAMSEY RT17", "MAHWAH", "SUFFERN"
+ TextConstant:"WALDWICK"
+ TextConstant:"ALLENDALE"
+ TextConstant:"RAMSEY"
+ TextConstant:"RAMSEY RT17"
+ TextConstant:"MAHWAH"
+ TextConstant:"SUFFERN"
+76 REM NUMBER OF TRACK SPEED SIGNS, POSITIONS (in meters) AND VALUES
+ Remark:NUMBER OF TRACK SPEED SIGNS, POSITIONS (in meters) AND VALUES
+77 DATA 7
+ NumericConstant:7
+78 DATA 0,5, 1.0E3,30, 1.5E3,50, 2.0E3,30, 2.5E3,80, 5.7E3,40, 6.0E3,80
+ NumericConstant:0
+ NumericConstant:5
+ NumericConstant:1.0E3
+ NumericConstant:30
+ NumericConstant:1.5E3
+ NumericConstant:50
+ NumericConstant:2.0E3
+ NumericConstant:30
+ NumericConstant:2.5E3
+ NumericConstant:80
+ NumericConstant:5.7E3
+ NumericConstant:40
+ NumericConstant:6.0E3
+ NumericConstant:80
+100 REM ***** STATIONS
+ Remark:***** STATIONS
+101 READ K0
+ Variable:K0 -> _
+110 DIM K(K0), K$(K0)
+ Variable:K0 -> _
+ Declaration:K() -> _()
+ Variable:K0 -> _
+ Declaration:K$() -> $()
+111 ARR READ K,K$
+ Variable:K() -> _()
+ Variable:K$() -> $()
+120 REM ***** TRAINSET
+ Remark:***** TRAINSET
+121 REM ACCELERATION (meters/second^2)
+ Remark:ACCELERATION (meters/second^2)
+122 LET A0 = 1.0
+ Variable:A0 -> _
+ NumericConstant:1.0
+ AssignmentOperator:= =_ -> _
+123 REM MAX VELOCITY (meters/second)
+ Remark:MAX VELOCITY (meters/second)
+124 LET V9 = 80
+ Variable:V9 -> _
+ NumericConstant:80
+ AssignmentOperator:= =_ -> _
+150 REM ***** SPEED SIGNALS
+ Remark:***** SPEED SIGNALS
+151 READ P0
+ Variable:P0 -> _
+152 DIM P(P0,2)
+ Variable:P0 -> _
+ NumericConstant:2
+ Declaration:P(,) -> _(,)
+153 MAT READ P
+ Variable:P(,) -> _(,)
+200 REM ********** ONE TRIP
+ Remark:********** ONE TRIP
+201 LET K5 = 1
+ Variable:K5 -> _
+ NumericConstant:1
+ AssignmentOperator:= =_ -> _
+202 LET X = K(K5)
+ Variable:X -> _
+ Variable:K5 -> _
+ Variable:K(_) -> _
+ AssignmentOperator:= _ -> _
+203 LET X0 = X - 1
+ Variable:X0 -> _
+ Variable:X -> _
+ NumericConstant:1
+ BinaryOperatorMinus:-(_,_) -> _
+ AssignmentOperator:= _ -> _
+210 LET V = 0
+ Variable:V -> _
+ NumericConstant:0
+ AssignmentOperator:= =_ -> _
+290 PRINT "T      ";"TIME     ";"X  ";"V  ";"A  ";"T5 ";"X5 ";"K(2) ";"STATUS"
+ TextConstant:"T      "
+ CarriageControl:;
+ TextConstant:"TIME     "
+ CarriageControl:;
+ TextConstant:"X  "
+ CarriageControl:;
+ TextConstant:"V  "
+ CarriageControl:;
+ TextConstant:"A  "
+ CarriageControl:;
+ TextConstant:"T5 "
+ CarriageControl:;
+ TextConstant:"X5 "
+ CarriageControl:;
+ TextConstant:"K(2) "
+ CarriageControl:;
+ TextConstant:"STATUS"
+ CarriageControl:NL
+299 LET T = 17*60*60+2*60
+ Variable:T -> _
+ NumericConstant:17
+ NumericConstant:60
+ BinaryOperatorMultiply:*(_,_) -> =_
+ NumericConstant:60
+ BinaryOperatorMultiply:*(_,_) -> =_
+ NumericConstant:2
+ NumericConstant:60
+ BinaryOperatorMultiply:*(_,_) -> =_
+ BinaryOperatorPlus:+(_,_) -> =_
+ AssignmentOperator:= =_ -> _
+1000 REM ********* LOOP
+ Remark:********* LOOP
+1001 LET S$ = ""
+ Variable:S$ -> $
+ TextConstant:""
+ AssignmentOperator:= =$ -> $
+1010 REM COMPUTE STOPPING TIME
+ Remark:COMPUTE STOPPING TIME
+1011 LET T5 = FNS(V, A0)
+ Variable:T5 -> _
+ Variable:V -> _
+ Variable:A0 -> _
+ UserFunction:FNS(_,_) -> _
+ AssignmentOperator:= _ -> _
+1020 REM COMPUTE STOPPING DISTANCE
+ Remark:COMPUTE STOPPING DISTANCE
+1021 LET X5 = FND(V, A0, T5)
+ Variable:X5 -> _
+ Variable:V -> _
+ Variable:A0 -> _
+ Variable:T5 -> _
+ UserFunction:FND(_,_,_) -> _
+ AssignmentOperator:= _ -> _
+1100 REM *** FIND MOST RECENT STATION
+ Remark:*** FIND MOST RECENT STATION
+1101 K5 = 1
+ Variable:K5 -> _
+ NumericConstant:1
+ AssignmentOperator:= =_ -> _
+1102 FOR I = 1 TO K0
+ control: Variable:I -> _
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:K0 -> _"]
+1103 IF X > K(I) THEN K5 = I
+ Variable:X -> _
+ Variable:I -> _
+ Variable:K(_) -> _
+ BinaryOperatorGreater:>(_,_) -> _
+ Variable:K5 -> _
+ Variable:I -> _
+ AssignmentOperator:= _ -> _
+1104 NEXT I
+ Variable:I -> _
+1110 REM *** FIND MOST RECENT TRACK SIGN
+ Remark:*** FIND MOST RECENT TRACK SIGN
+1111 P5 = -1
+ Variable:P5 -> _
+ NumericConstant:1
+ UnaryOperatorMinus:-(_) -> =_
+ AssignmentOperator:= =_ -> _
+1112 FOR I = 1 TO P0
+ control: Variable:I -> _
+ start:   ["NumericConstant:1"]
+ end:     ["Variable:P0 -> _"]
+1113 IF X > P(I,1) THEN P5 = I
+ Variable:X -> _
+ Variable:I -> _
+ NumericConstant:1
+ Variable:P(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> _
+ Variable:P5 -> _
+ Variable:I -> _
+ AssignmentOperator:= _ -> _
+1114 NEXT I
+ Variable:I -> _
+1200 REM *** SET MAX SPEED FOR STATION APPROACH
+ Remark:*** SET MAX SPEED FOR STATION APPROACH
+1201 LET V8 = V9
+ Variable:V8 -> _
+ Variable:V9 -> _
+ AssignmentOperator:= _ -> _
+1202 LET K6 = K5 + 1
+ Variable:K6 -> _
+ Variable:K5 -> _
+ NumericConstant:1
+ BinaryOperatorPlus:+(_,_) -> _
+ AssignmentOperator:= _ -> _
+1203 IF K6 > K0 THEN 1210
+ Variable:K6 -> _
+ Variable:K0 -> _
+ BinaryOperatorGreater:>(_,_) -> _
+1204 IF X < K(K6) AND X + X5 >= K(K6) THEN 1206 ' IF K(K6) IN X, X + X5 
+ Variable:X -> _
+ Variable:K6 -> _
+ Variable:K(_) -> _
+ BinaryOperatorLess:<(_,_) -> _
+ Variable:X -> _
+ Variable:X5 -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ Variable:K6 -> _
+ Variable:K(_) -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
+1205 GOTO 1209
+ LineNumber:1209
+1206 LET V8 = 0
+ Variable:V8 -> _
+ NumericConstant:0
+ AssignmentOperator:= =_ -> _
+1207 LET S$ = "APPROACHING " + K$(K6)
+ Variable:S$ -> $
+ TextConstant:"APPROACHING "
+ Variable:K6 -> _
+ Variable:K$(_) -> $
+ BinaryOperatorPlus:+($,$) -> $
+ AssignmentOperator:= $ -> $
+1209 GOTO 1220
+ LineNumber:1220
+1210 REM *** NO MORE STATIONS, STOP
+ Remark:*** NO MORE STATIONS, STOP
+1211 LET V8 = 0
+ Variable:V8 -> _
+ NumericConstant:0
+ AssignmentOperator:= =_ -> _
+1220 REM *** SET MAX SPEED FROM TRACK SIGN
+ Remark:*** SET MAX SPEED FROM TRACK SIGN
+1221 LET V7 = V9
+ Variable:V7 -> _
+ Variable:V9 -> _
+ AssignmentOperator:= _ -> _
+1222 IF P5 = -1 THEN 1229
+ Variable:P5 -> _
+ NumericConstant:1
+ UnaryOperatorMinus:-(_) -> =_
+ BinaryOperatorEqual:=(_,_) -> _
+1223 LET V7 = P(P5,2)
+ Variable:V7 -> _
+ Variable:P5 -> _
+ NumericConstant:2
+ Variable:P(_,_) -> _
+ AssignmentOperator:= _ -> _
+1229 REM CONTINUE
+ Remark:CONTINUE
+1290 REM ***** SET MAX SPEED
+ Remark:***** SET MAX SPEED
+1291 LET V5 = V9
+ Variable:V5 -> _
+ Variable:V9 -> _
+ AssignmentOperator:= _ -> _
+1292 IF V5 > V8 THEN LET V5 = V8
+ Variable:V5 -> _
+ Variable:V8 -> _
+ BinaryOperatorGreater:>(_,_) -> _
+ Variable:V5 -> _
+ Variable:V8 -> _
+ AssignmentOperator:= _ -> _
+1293 IF V5 > V7 THEN LET V5 = V7
+ Variable:V5 -> _
+ Variable:V7 -> _
+ BinaryOperatorGreater:>(_,_) -> _
+ Variable:V5 -> _
+ Variable:V7 -> _
+ AssignmentOperator:= _ -> _
+1700 REM ***** ADJUST SPEED
+ Remark:***** ADJUST SPEED
+1711 IF V > V5 THEN 1740
+ Variable:V -> _
+ Variable:V5 -> _
+ BinaryOperatorGreater:>(_,_) -> _
+1712 IF V < V5 THEN 1730
+ Variable:V -> _
+ Variable:V5 -> _
+ BinaryOperatorLess:<(_,_) -> _
+1720 REM CONTINUE AT CURRENT SPEED
+ Remark:CONTINUE AT CURRENT SPEED
+1721 LET A = 0
+ Variable:A -> _
+ NumericConstant:0
+ AssignmentOperator:= =_ -> _
+1729 GOTO 1799
+ LineNumber:1799
+1730 REM INCREASE SPEED
+ Remark:INCREASE SPEED
+1731 LET A = A0
+ Variable:A -> _
+ Variable:A0 -> _
+ AssignmentOperator:= _ -> _
+1739 GOTO 1790
+ LineNumber:1790
+1740 REM BRAKE
+ Remark:BRAKE
+1741 LET A = -A0
+ Variable:A -> _
+ Variable:A0 -> _
+ UnaryOperatorMinus:-(_) -> _
+ AssignmentOperator:= _ -> _
+1742 LET S$ = S$ + " BRAKING"
+ Variable:S$ -> $
+ Variable:S$ -> $
+ TextConstant:" BRAKING"
+ BinaryOperatorPlus:+($,$) -> $
+ AssignmentOperator:= $ -> $
+1790 LET V = V + A
+ Variable:V -> _
+ Variable:V -> _
+ Variable:A -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ AssignmentOperator:= _ -> _
+1799 REM CONTINUE
+ Remark:CONTINUE
+1900 REM ***** CHECK SPEED
+ Remark:***** CHECK SPEED
+1901 IF V >= 0 THEN 1910
+ Variable:V -> _
+ NumericConstant:0
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
+1902 LET V = 0
+ Variable:V -> _
+ NumericConstant:0
+ AssignmentOperator:= =_ -> _
+1910 REM ***** MOVE THE TRAIN
+ Remark:***** MOVE THE TRAIN
+1911 LET X0 = X
+ Variable:X0 -> _
+ Variable:X -> _
+ AssignmentOperator:= _ -> _
+1912 LET X = X + V
+ Variable:X -> _
+ Variable:X -> _
+ Variable:V -> _
+ BinaryOperatorPlus:+(_,_) -> _
+ AssignmentOperator:= _ -> _
+1919 LET S$ = S$ + " TRACK SPEED " + STR$(V7)
+ Variable:S$ -> $
+ Variable:S$ -> $
+ TextConstant:" TRACK SPEED "
+ BinaryOperatorPlus:+($,$) -> $
+ Variable:V7 -> _
+ FunctionStr:STR$(_) -> $
+ BinaryOperatorPlus:+($,$) -> $
+ AssignmentOperator:= $ -> $
+1920 REM SLOW APPROACH TO STATION MEANS STOP AT THE STATION
+ Remark:SLOW APPROACH TO STATION MEANS STOP AT THE STATION
+1921 IF V < 3 AND X > K(K6) AND X < K(K6) + 1 THEN X = K(K6)
+ Variable:V -> _
+ NumericConstant:3
+ BinaryOperatorLess:<(_,_) -> _
+ Variable:X -> _
+ Variable:K6 -> _
+ Variable:K(_) -> _
+ BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
+ Variable:X -> _
+ Variable:K6 -> _
+ Variable:K(_) -> _
+ NumericConstant:1
+ BinaryOperatorPlus:+(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorAnd:AND(_,_) -> _
+ Variable:X -> _
+ Variable:K6 -> _
+ Variable:K(_) -> _
+ AssignmentOperator:= _ -> _
+1970 REM ***** REPORT TIME, POSITION, AND SPEED
+ Remark:***** REPORT TIME, POSITION, AND SPEED
+1971 LET T$ = FNH$(T)
+ Variable:T$ -> $
+ Variable:T -> _
+ UserFunction:FNH$(_) -> $
+ AssignmentOperator:= $ -> $
+1972 PRINT T;T$;X;V;A;T5;X5;K(2);S$
+ Variable:T -> _
+ CarriageControl:;
+ Variable:T$ -> $
+ CarriageControl:;
+ Variable:X -> _
+ CarriageControl:;
+ Variable:V -> _
+ CarriageControl:;
+ Variable:A -> _
+ CarriageControl:;
+ Variable:T5 -> _
+ CarriageControl:;
+ Variable:X5 -> _
+ CarriageControl:;
+ NumericConstant:2
+ Variable:K(_) -> _
+ CarriageControl:;
+ Variable:S$ -> $
+ CarriageControl:NL
+1980 REM ***** END OF LOOP
+ Remark:***** END OF LOOP
+1981 IF X >= K(2) THEN 9997
+ Variable:X -> _
+ NumericConstant:2
+ Variable:K(_) -> _
+ BinaryOperatorGreaterEqual:>=(_,_) -> _
+1990 REM STEP INTO FUTURE
+ Remark:STEP INTO FUTURE
+1991 LET T = T + 1
+ Variable:T -> _
+ Variable:T -> _
+ NumericConstant:1
+ BinaryOperatorPlus:+(_,_) -> _
+ AssignmentOperator:= _ -> _
+1999 GOTO 1000
+ LineNumber:1000
+9997 REM ********** END OF SIMULATION
+ Remark:********** END OF SIMULATION
+9998 STOP
+ 
+9999 END
+ 
+
