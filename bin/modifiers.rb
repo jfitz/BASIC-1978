@@ -442,7 +442,7 @@ class UntilModifier < AbstractModifier
 end
 
 # FOR
-class ForModifier < AbstractModifier
+class AbstractForModifier < AbstractModifier
   def self.lead_keywords
     [
       [KeywordToken.new('FOR')]
@@ -594,7 +594,7 @@ class ForModifier < AbstractModifier
   end
 
   def post_pretty
-    ' NEXT'
+    " NEXT #{@control}"
   end
 
   def dump
@@ -724,5 +724,98 @@ class ForModifier < AbstractModifier
 
   def print_trace_info(io, terminated)
     io.trace_output(" terminated:#{terminated}")
+  end
+end
+
+class ForToModifier < AbstractForModifier
+  def initialize(tokens_lists, control_and_start_tokens, end_tokens)
+    step_tokens = nil
+    until_tokens = nil
+    while_tokens = nil
+
+    super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+
+  end
+end
+
+class ForToStepModifier < AbstractForModifier
+  def initialize(tokens_lists, control_and_start_tokens, step_tokens, end_tokens)
+    until_tokens = nil
+    while_tokens = nil
+
+    super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+
+  end
+end
+
+class ForStepToModifier < AbstractForModifier
+  def initialize(tokens_lists, control_and_start_tokens, step_tokens, end_tokens)
+    until_tokens = nil
+    while_tokens = nil
+
+    super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+
+  end
+end
+
+class ForUntilModifier < AbstractForModifier
+  def initialize(tokens_lists, control_and_start_tokens, until_tokens)
+    step_tokens = nil
+    end_tokens = nil
+    while_tokens = nil
+
+    super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+
+  end
+end
+
+class ForUntilStepModifier < AbstractForModifier
+  def initialize(tokens_lists, control_and_start_tokens, step_tokens, until_tokens)
+    end_tokens = nil
+    while_tokens = nil
+
+    super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+
+  end
+end
+
+class ForStepUntilModifier < AbstractForModifier
+  def initialize(tokens_lists, control_and_start_tokens, step_tokens, until_tokens)
+    end_tokens = nil
+    while_tokens = nil
+
+    super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+
+  end
+end
+
+class ForWhileModifier < AbstractForModifier
+  def initialize(tokens_lists, control_and_start_tokens, while_tokens)
+    step_tokens = nil
+    end_tokens = nil
+    until_tokens = nil
+
+    super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+
+  end
+end
+
+class ForWhileStepModifier < AbstractForModifier
+  def initialize(tokens_lists, control_and_start_tokens, step_tokens, while_tokens)
+    end_tokens = nil
+    until_tokens = nil
+
+    super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+
+  end
+end
+
+class ForStepWhileModifier < AbstractForModifier
+  def initialize(tokens_lists, control_and_start_tokens, step_tokens, while_tokens)
+    end_tokens = nil
+    until_tokens = nil
+
+    super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+
   end
 end

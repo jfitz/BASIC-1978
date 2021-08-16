@@ -88,7 +88,7 @@ STOP in line 999
 113 (1) DIM C(N1 + N2)
 114 (4) C(J) = 0
     (1) FOR J = N1 + 1 TO N1 + N2
-    (4) NEXT
+    (4) NEXT J
 120 (1) REM BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
 121 (1) DIM C$(N1 + N2)
 122 (1) FOR I = 1 TO N1
@@ -106,12 +106,12 @@ STOP in line 999
 143 (1) DIM X(N2, N1 + N2)
 144 (16) X(I, J) = 0
     (4) FOR J = N1 + 1 TO N1 + N2
-    (16) NEXT
+    (16) NEXT J
     (1) FOR I = 1 TO N2
-    (4) NEXT
+    (4) NEXT I
 145 (4) X(I, I + N1) = 1
     (1) FOR I = 1 TO N2
-    (4) NEXT
+    (4) NEXT I
 160 (1) REM BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
 161 (1) DIM B(N2)
 162 (1) ARR READ B
@@ -119,7 +119,7 @@ STOP in line 999
 171 (1) DIM R(N2)
 172 (4) R(I) = 0
     (1) FOR I = 1 TO N2
-    (4) NEXT
+    (4) NEXT I
 200 (3) REM PRINT THE TABLEAU
 201 (3) PRINT
 202 (3) PRINT "TABLEAU"
@@ -129,24 +129,24 @@ STOP in line 999
 210 (3) PRINT "CB", "BV",
 211 (18) PRINT C$(I),
     (3) FOR I = 1 TO N1 + N2
-    (18) NEXT
+    (18) NEXT I
 212 (3) PRINT "B"
 220 (3) FOR I = 1 TO N2
 221 (12) PRINT R(I), C1$(I),
 222 (72) PRINT X(I, J),
     (12) FOR J = 1 TO N1 + N2
-    (72) NEXT
+    (72) NEXT J
 230 (12) PRINT B(I)
 239 (12) NEXT I
 300 (3) REM EVALUATE TABLEAU FOR OPTIMUM SOLUTION
 301 (3) DIM Z(N1 + N2)
 302 (18) Z(J) = 0
     (3) FOR J = 1 TO N1 + N2
-    (18) NEXT
+    (18) NEXT J
 305 (3) FOR I = 1 TO N2
 306 (72) Z(J) = Z(J) + R(I) * X(I, J)
     (12) FOR J = 1 TO N1 + N2
-    (72) NEXT
+    (72) NEXT J
 307 (12) NEXT I
 310 (3) REM COMPUTE Z - C
 311 (3) ARR Y = Z - C
@@ -164,12 +164,12 @@ STOP in line 999
 331 (2) DIM W(N2)
 332 (8) W(I) = 0
     (2) FOR I = 1 TO N2
-    (8) NEXT
+    (8) NEXT I
 333 (8) W(I) = B(I) / X(I, J0)
     (8) IF X(I, J0) <> 0
     (8) ENDIF
     (2) FOR I = 1 TO N2
-    (8) NEXT
+    (8) NEXT I
 340 (2) REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
 341 (2) PRINT
 342 (2) PRINT "EXPANDED TABLEAU"
@@ -179,13 +179,13 @@ STOP in line 999
 350 (2) PRINT "CB", "BV",
 351 (12) PRINT C$(I),
     (2) FOR I = 1 TO N1 + N2
-    (12) NEXT
+    (12) NEXT I
 352 (2) PRINT "B", "B / "; C$(J0)
 360 (2) FOR I = 1 TO N2
 361 (8) PRINT R(I), C1$(I),
 362 (48) PRINT X(I, J),
     (8) FOR J = 1 TO N1 + N2
-    (48) NEXT
+    (48) NEXT J
 363 (8) PRINT B(I), W(I)
 364 (8) NEXT I
 370 (2) PRINT " ", "Z",
