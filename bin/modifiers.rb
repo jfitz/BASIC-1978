@@ -449,10 +449,6 @@ class AbstractForModifier < AbstractModifier
     ]
   end
 
-  def self.extra_keywords
-    %w[STEP TO UNTIL WHILE]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
     super(tokens_lists)
 
@@ -476,27 +472,7 @@ class AbstractForModifier < AbstractModifier
     @control = Variable.new(control_name, :scalar, [], [])
     @start = ValueExpressionSet.new(start_tokens, :scalar)
 
-    @step = ValueExpressionSet.new(step_tokens, :scalar) unless
-      step_tokens.nil?
-
-    @end = ValueExpressionSet.new(end_tokens, :scalar) unless
-      end_tokens.nil?
-
-    unless until_tokens.nil?
-      @until = ValueExpressionSet.new(until_tokens, :scalar)
-      @warnings << 'Constant expression' if @until.constant
-    end
-
-    unless while_tokens.nil?
-      @while = ValueExpressionSet.new(while_tokens, :scalar)
-      @warnings << 'Constant expression' if @while.constant
-    end
-
-    @errors << 'TAB() not allowed' if !@start.nil? && @start.has_tab
-    @errors << 'TAB() not allowed' if !@step.nil? && @step.has_tab
-    @errors << 'TAB() not allowed' if !@end.nil? && @end.has_tab
-    @errors << 'TAB() not allowed' if !@while.nil? && @while.has_tab
-    @errors << 'TAB() not allowed' if !@until.nil? && @until.has_tab
+    @errors << 'TAB() not allowed' if @start.has_tab
 
     control = XrefEntry.new(@control.to_s, nil, true)
 
@@ -508,137 +484,11 @@ class AbstractForModifier < AbstractModifier
     @functions = @start.functions
     @userfuncs = @start.userfuncs
 
-    unless @end.nil?
-      @numerics += @end.numerics
-      @strings += @end.strings
-      @booleans += @end.booleans
-      @variables += @end.variables
-      @operators += @end.operators
-      @functions += @end.functions
-      @userfuncs += @end.userfuncs
-    end
-
-    unless @step.nil?
-      @numerics += @step.numerics
-      @strings += @step.strings
-      @booleans += @step.booleans
-      @variables += @step.variables
-      @operators += @step.operators
-      @functions += @step.functions
-      @userfuncs += @step.userfuncs
-    end
-
-    unless @until.nil?
-      @numerics += @until.numerics
-      @strings += @until.strings
-      @booleans += @until.booleans
-      @variables += @until.variables
-      @operators += @until.operators
-      @functions += @until.functions
-      @userfuncs += @until.userfuncs
-    end
-
-    unless @while.nil?
-      @numerics += @while.numerics
-      @strings += @while.strings
-      @booleans += @while.booleans
-      @variables += @while.variables
-      @operators += @while.operators
-      @functions += @while.functions
-      @userfuncs += @while.userfuncs
-    end
-
     @comprehension_effort = @start.comprehension_effort
-    @comprehension_effort += @end.comprehension_effort unless @end.nil?
-    @comprehension_effort += @step.comprehension_effort unless @step.nil?
-    @comprehension_effort += @until.comprehension_effort unless @until.nil?
-    @comprehension_effort += @while.comprehension_effort unless @while.nil?
-  end
-
-  def uncache
-    @start.uncache unless @start.nil?
-    @end.uncache unless @end.nil?
-    @step.uncache unless @step.nil?
-    @until.uncache unless @unless.nil?
-    @while.uncache unless @while.nil?
-  end
-
-  def pre_pretty
-    text = ''
-    
-    unless @end.nil?
-      if @step.nil?
-        text = " FOR #{@control} = #{@start} TO #{@end}"
-      else
-        text = " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
-      end
-    end
-
-    unless @until.nil?
-      if @step.nil?
-        text = " FOR #{@control} = #{@start} UNTIL #{@until}"
-      else
-        text = " FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
-      end
-    end
-
-    unless @while.nil?
-      if @step.nil?
-        text = " FOR #{@control} = #{@start} WHILE #{@while}"
-      else
-        text = " FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
-      end
-    end
-
-    text
   end
 
   def post_pretty
     " NEXT #{@control}"
-  end
-
-  def dump
-    lines = []
-    lines << 'control: ' + @control.dump unless @control.nil?
-    lines << 'start:   ' + @start.dump.to_s unless @start.nil?
-    lines << 'end:     ' + @end.dump.to_s unless @end.nil?
-    lines << 'step:    ' + @step.dump.to_s unless @step.nil?
-    lines << 'until:   ' + @until.dump.to_s unless @until.nil?
-    lines << 'while:   ' + @while.dump.to_s unless @while.nil?
-    lines
-  end
-
-  def pre_trace
-    # notice that this output differs from pretty()
-    # we have a leading space here
-
-    s = ''
-
-    unless @end.nil?
-      if @step.nil?
-        s = "FOR #{@control} = #{@start} TO #{@end}"
-      else
-        s = "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
-      end
-    end
-
-    unless @until.nil?
-      if @step.nil?
-        s = "FOR #{@control} = #{@start} UNTIL #{@until}"
-      else
-        s = "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
-      end
-    end
-
-    unless @while.nil?
-      if @step.nil?
-        s = "FOR #{@control} = #{@start} UNTIL #{@while}"
-      else
-        s = "FOR #{@control} = #{@start} UNTIL #{@while} STEP #{@step}"
-      end
-    end
-
-    s
   end
 
   def post_trace
@@ -728,6 +578,10 @@ class AbstractForModifier < AbstractModifier
 end
 
 class ForToModifier < AbstractForModifier
+  def self.extra_keywords
+    %w[TO]
+  end
+
   def initialize(tokens_lists, control_and_start_tokens, end_tokens)
     step_tokens = nil
     until_tokens = nil
@@ -735,30 +589,170 @@ class ForToModifier < AbstractForModifier
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
+    @end = ValueExpressionSet.new(end_tokens, :scalar)
+
+    @errors << 'TAB() not allowed' if @end.has_tab
+
+    @numerics += @end.numerics
+    @strings += @end.strings
+    @booleans += @end.booleans
+    @variables += @end.variables
+    @operators += @end.operators
+    @functions += @end.functions
+    @userfuncs += @end.userfuncs
+
+    @comprehension_effort += @end.comprehension_effort unless @end.nil?
+  end
+
+  def uncache
+    @start.uncache
+    @end.uncache
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump
+    lines << 'start:   ' + @start.dump.to_s
+    lines << 'end:     ' + @end.dump.to_s
+    lines
+  end
+
+  def pre_pretty
+    " FOR #{@control} = #{@start} TO #{@end}"
+  end
+
+  def pre_trace
+    "FOR #{@control} = #{@start} TO #{@end}"
   end
 end
 
 class ForToStepModifier < AbstractForModifier
+  def self.extra_keywords
+    %w[STEP TO]
+  end
+
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, end_tokens)
     until_tokens = nil
     while_tokens = nil
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
+    @step = ValueExpressionSet.new(step_tokens, :scalar)
+    @end = ValueExpressionSet.new(end_tokens, :scalar)
+
+    @errors << 'TAB() not allowed' if @step.has_tab
+    @errors << 'TAB() not allowed' if @end.has_tab
+
+    @numerics += @end.numerics
+    @strings += @end.strings
+    @booleans += @end.booleans
+    @variables += @end.variables
+    @operators += @end.operators
+    @functions += @end.functions
+    @userfuncs += @end.userfuncs
+
+    @numerics += @step.numerics
+    @strings += @step.strings
+    @booleans += @step.booleans
+    @variables += @step.variables
+    @operators += @step.operators
+    @functions += @step.functions
+    @userfuncs += @step.userfuncs
+
+    @comprehension_effort += @end.comprehension_effort unless @end.nil?
+    @comprehension_effort += @step.comprehension_effort unless @step.nil?
+  end
+
+  def uncache
+    @start.uncache
+    @end.uncache
+    @step.uncache
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump
+    lines << 'start:   ' + @start.dump.to_s
+    lines << 'end:     ' + @end.dump.to_s
+    lines << 'step:    ' + @step.dump.to_s
+    lines
+  end
+
+  def pre_pretty
+    " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+  end
+
+  def pre_trace
+    "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
   end
 end
 
 class ForStepToModifier < AbstractForModifier
+  def self.extra_keywords
+    %w[STEP TO]
+  end
+
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, end_tokens)
     until_tokens = nil
     while_tokens = nil
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
+    @step = ValueExpressionSet.new(step_tokens, :scalar)
+    @end = ValueExpressionSet.new(end_tokens, :scalar)
+
+    @errors << 'TAB() not allowed' if @step.has_tab
+    @errors << 'TAB() not allowed' if @end.has_tab
+
+    @numerics += @end.numerics
+    @strings += @end.strings
+    @booleans += @end.booleans
+    @variables += @end.variables
+    @operators += @end.operators
+    @functions += @end.functions
+    @userfuncs += @end.userfuncs
+
+    @numerics += @step.numerics
+    @strings += @step.strings
+    @booleans += @step.booleans
+    @variables += @step.variables
+    @operators += @step.operators
+    @functions += @step.functions
+    @userfuncs += @step.userfuncs
+
+    @comprehension_effort += @end.comprehension_effort unless @end.nil?
+    @comprehension_effort += @step.comprehension_effort unless @step.nil?
+  end
+
+  def uncache
+    @start.uncache
+    @end.uncache
+    @step.uncache
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump
+    lines << 'start:   ' + @start.dump.to_s
+    lines << 'end:     ' + @end.dump.to_s
+    lines << 'step:    ' + @step.dump.to_s
+    lines
+  end
+
+  def pre_pretty
+    " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+  end
+
+  def pre_trace
+    "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
   end
 end
 
 class ForUntilModifier < AbstractForModifier
+  def self.extra_keywords
+    %w[UNTIL]
+  end
+
   def initialize(tokens_lists, control_and_start_tokens, until_tokens)
     step_tokens = nil
     end_tokens = nil
@@ -766,30 +760,173 @@ class ForUntilModifier < AbstractForModifier
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
+    @until = ValueExpressionSet.new(until_tokens, :scalar)
+    @warnings << 'Constant expression' if @until.constant
+
+    @errors << 'TAB() not allowed' if @until.has_tab
+
+    @numerics += @until.numerics
+    @strings += @until.strings
+    @booleans += @until.booleans
+    @variables += @until.variables
+    @operators += @until.operators
+    @functions += @until.functions
+    @userfuncs += @until.userfuncs
+
+    @comprehension_effort += @until.comprehension_effort unless @until.nil?
+  end
+
+  def uncache
+    @start.uncache
+    @until.uncache
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump
+    lines << 'start:   ' + @start.dump.to_s
+    lines << 'until:   ' + @until.dump.to_s
+    lines
+  end
+
+  def pre_pretty
+    " FOR #{@control} = #{@start} UNTIL #{@until}"
+  end
+
+  def pre_trace
+    "FOR #{@control} = #{@start} UNTIL #{@until}"
   end
 end
 
 class ForUntilStepModifier < AbstractForModifier
+  def self.extra_keywords
+    %w[STEP UNTIL]
+  end
+
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, until_tokens)
     end_tokens = nil
     while_tokens = nil
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
+    @step = ValueExpressionSet.new(step_tokens, :scalar)
+    @until = ValueExpressionSet.new(until_tokens, :scalar)
+    @warnings << 'Constant expression' if @until.constant
+
+    @errors << 'TAB() not allowed' if @step.has_tab
+    @errors << 'TAB() not allowed' if @until.has_tab
+
+    @numerics += @step.numerics
+    @strings += @step.strings
+    @booleans += @step.booleans
+    @variables += @step.variables
+    @operators += @step.operators
+    @functions += @step.functions
+    @userfuncs += @step.userfuncs
+
+    @numerics += @until.numerics
+    @strings += @until.strings
+    @booleans += @until.booleans
+    @variables += @until.variables
+    @operators += @until.operators
+    @functions += @until.functions
+    @userfuncs += @until.userfuncs
+
+    @comprehension_effort += @step.comprehension_effort unless @step.nil?
+    @comprehension_effort += @until.comprehension_effort unless @until.nil?
+  end
+
+  def uncache
+    @start.uncache
+    @step.uncache
+    @until.uncache
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump
+    lines << 'start:   ' + @start.dump.to_s
+    lines << 'step:    ' + @step.dump.to_s
+    lines << 'until:   ' + @until.dump.to_s
+    lines
+  end
+
+  def pre_pretty
+    " FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
+  end
+
+  def pre_trace
+    "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
   end
 end
 
 class ForStepUntilModifier < AbstractForModifier
+  def self.extra_keywords
+    %w[STEP UNTIL]
+  end
+
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, until_tokens)
     end_tokens = nil
     while_tokens = nil
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
+    @step = ValueExpressionSet.new(step_tokens, :scalar)
+    @until = ValueExpressionSet.new(until_tokens, :scalar)
+    @warnings << 'Constant expression' if @until.constant
+
+    @errors << 'TAB() not allowed' if @step.has_tab
+    @errors << 'TAB() not allowed' if @until.has_tab
+
+    @numerics += @step.numerics
+    @strings += @step.strings
+    @booleans += @step.booleans
+    @variables += @step.variables
+    @operators += @step.operators
+    @functions += @step.functions
+    @userfuncs += @step.userfuncs
+
+    @numerics += @until.numerics
+    @strings += @until.strings
+    @booleans += @until.booleans
+    @variables += @until.variables
+    @operators += @until.operators
+    @functions += @until.functions
+    @userfuncs += @until.userfuncs
+
+    @comprehension_effort += @step.comprehension_effort unless @step.nil?
+    @comprehension_effort += @until.comprehension_effort unless @until.nil?
+  end
+
+  def uncache
+    @start.uncache
+    @step.uncache
+    @until.uncache
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump
+    lines << 'start:   ' + @start.dump.to_s
+    lines << 'step:    ' + @step.dump.to_s
+    lines << 'until:   ' + @until.dump.to_s
+    lines
+  end
+
+  def pre_pretty
+    " FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
+  end
+
+  def pre_trace
+    "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
   end
 end
 
 class ForWhileModifier < AbstractForModifier
+  def self.extra_keywords
+    %w[WHILE]
+  end
+
   def initialize(tokens_lists, control_and_start_tokens, while_tokens)
     step_tokens = nil
     end_tokens = nil
@@ -797,25 +934,164 @@ class ForWhileModifier < AbstractForModifier
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
+    @while = ValueExpressionSet.new(while_tokens, :scalar)
+    @warnings << 'Constant expression' if @while.constant
+
+    @errors << 'TAB() not allowed' if @while.has_tab
+
+    @numerics += @while.numerics
+    @strings += @while.strings
+    @booleans += @while.booleans
+    @variables += @while.variables
+    @operators += @while.operators
+    @functions += @while.functions
+    @userfuncs += @while.userfuncs
+
+    @comprehension_effort += @while.comprehension_effort unless @while.nil?
+  end
+
+  def uncache
+    @start.uncache
+    @while.uncache
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump unless @control.nil?
+    lines << 'start:   ' + @start.dump.to_s unless @start.nil?
+    lines << 'while:   ' + @while.dump.to_s unless @while.nil?
+    lines
+  end
+
+  def pre_pretty
+    " FOR #{@control} = #{@start} WHILE #{@while}"
+  end
+
+  def pre_trace
+    "FOR #{@control} = #{@start} WHILE #{@while}"
   end
 end
 
 class ForWhileStepModifier < AbstractForModifier
+  def self.extra_keywords
+    %w[STEP WHILE]
+  end
+
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, while_tokens)
     end_tokens = nil
     until_tokens = nil
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+ 
+    @step = ValueExpressionSet.new(step_tokens, :scalar)
+    @while = ValueExpressionSet.new(while_tokens, :scalar)
+    @warnings << 'Constant expression' if @while.constant
 
+    @errors << 'TAB() not allowed' if @step.has_tab
+    @errors << 'TAB() not allowed' if @while.has_tab
+
+    @numerics += @step.numerics
+    @strings += @step.strings
+    @booleans += @step.booleans
+    @variables += @step.variables
+    @operators += @step.operators
+    @functions += @step.functions
+    @userfuncs += @step.userfuncs
+
+    @numerics += @while.numerics
+    @strings += @while.strings
+    @booleans += @while.booleans
+    @variables += @while.variables
+    @operators += @while.operators
+    @functions += @while.functions
+    @userfuncs += @while.userfuncs
+
+    @comprehension_effort += @step.comprehension_effort unless @step.nil?
+    @comprehension_effort += @while.comprehension_effort unless @while.nil?
+  end
+
+  def uncache
+    @start.uncache
+    @step.uncache
+    @while.uncache
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump
+    lines << 'start:   ' + @start.dump.to_s
+    lines << 'step:    ' + @step.dump.to_s
+    lines << 'while:   ' + @while.dump.to_s
+    lines
+  end
+
+  def pre_pretty
+    " FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
+  end
+
+  def pre_trace
+    "FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
   end
 end
 
 class ForStepWhileModifier < AbstractForModifier
+  def self.extra_keywords
+    %w[STEP WHILE]
+  end
+
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, while_tokens)
     end_tokens = nil
     until_tokens = nil
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
+    @step = ValueExpressionSet.new(step_tokens, :scalar)
+    @while = ValueExpressionSet.new(while_tokens, :scalar)
+    @warnings << 'Constant expression' if @while.constant
+
+    @errors << 'TAB() not allowed' if @step.has_tab
+    @errors << 'TAB() not allowed' if @while.has_tab
+
+    @numerics += @step.numerics
+    @strings += @step.strings
+    @booleans += @step.booleans
+    @variables += @step.variables
+    @operators += @step.operators
+    @functions += @step.functions
+    @userfuncs += @step.userfuncs
+
+    @numerics += @while.numerics
+    @strings += @while.strings
+    @booleans += @while.booleans
+    @variables += @while.variables
+    @operators += @while.operators
+    @functions += @while.functions
+    @userfuncs += @while.userfuncs
+
+    @comprehension_effort += @step.comprehension_effort unless @step.nil?
+    @comprehension_effort += @while.comprehension_effort unless @while.nil?
+  end
+
+  def uncache
+    @start.uncache
+    @step.uncache
+    @while.uncache
+  end
+
+  def dump
+    lines = []
+    lines << 'control: ' + @control.dump
+    lines << 'start:   ' + @start.dump.to_s
+    lines << 'step:    ' + @step.dump.to_s
+    lines << 'while:   ' + @while.dump.to_s
+    lines
+  end
+
+  def pre_pretty
+    " FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
+  end
+
+  def pre_trace
+    "FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
   end
 end
