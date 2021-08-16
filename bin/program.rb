@@ -180,6 +180,36 @@ class Line
     @text
   end
 
+  def number_valid_statements
+    num = 0
+    @statements.each { |statement| num += 1 if statement.valid }
+    num
+  end
+
+  def number_exec_statements
+    num = 0
+    @statements.each { |statement| num += 1 if statement.executable }
+    num
+  end
+
+  def number_comments
+    num = 0
+    @statements.each { |statement| num += 1 if statement.comment }
+    num
+  end
+
+  def comprehension_effort
+    num = 0
+    @statements.each { |statement| num += statement.comprehension_effort }
+    num
+  end
+
+  def mccabe_complexity
+    num = 0
+    @statements.each { |statement| num += statement.mccabe }
+    num
+  end
+
   def pretty(multiline)
     if multiline
       pretty_lines = AbstractToken.pretty_multiline([], @tokens)
@@ -216,12 +246,42 @@ class Line
     texts
   end
 
-  def profile(show_timing)
+  def analyze_pretty(number)
     texts = []
 
-    @statements.each { |statement| texts << statement.profile(show_timing) }
+    @statements.each do |statement|
+      mccabe = statement.mccabe
+      effort = statement.comprehension_effort
+
+      text = "(#{mccabe} #{effort}) #{number} " + statement.pretty
+
+      texts << text
+
+      number = ' ' * number.size
+    end
 
     texts
+  end
+
+  def profile(number, show_timing)
+    texts = []
+
+    @statements.each do |statement|
+      profile_lines = statement.profile(show_timing)
+
+      profile_lines.each do |profile|
+        text = number + profile
+        texts << text
+
+        number = ' ' * number.size
+      end
+    end
+
+    texts
+  end
+
+  def reset_profile_metrics
+    @statements.each(&:reset_profile_metrics)
   end
 
   def renumber(renumber_map)
@@ -618,18 +678,7 @@ class Program
 
       number = line_number.to_s
 
-      statements = line.statements
-
-      statements.each do |statement|
-        mccabe = statement.mccabe
-        effort = statement.comprehension_effort
-
-        text = "(#{mccabe} #{effort}) #{number} " + statement.pretty
-
-        texts << text
-
-        number = ' ' * number.size
-      end
+      texts += line.analyze_pretty(number)
     end
 
     texts << ''
@@ -646,8 +695,7 @@ class Program
   def reset_profile_metrics
     @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
-      statements = line.statements
-      statements.each(&:reset_profile_metrics)
+      line.reset_profile_metrics
     end
   end
 
@@ -664,56 +712,31 @@ class Program
 
   def number_valid_statements
     num = 0
-
-    @lines.each do |_, line|
-      statements = line.statements
-      statements.each { |statement| num += 1 if statement.valid }
-    end
-
+    @lines.each { |_, line| num += line.number_valid_statements }
     num
   end
 
   def number_exec_statements
     num = 0
-
-    @lines.each do |_, line|
-      statements = line.statements
-      statements.each { |statement| num += 1 if statement.executable }
-    end
-
+    @lines.each { |_, line| num += line.number_exec_statements }
     num
   end
 
   def number_comments
     num = 0
-
-    @lines.each do |_, line|
-      statements = line.statements
-      statements.each { |statement| num += 1 if statement.comment }
-    end
-
+    @lines.each { |_, line| num += line.number_comments }
     num
   end
 
   def comprehension_effort
     num = 0
-
-    @lines.each do |_, line|
-      statements = line.statements
-      statements.each { |statement| num += statement.comprehension_effort }
-    end
-
+    @lines.each { |_, line| num += line.comprehension_effort }
     num
   end
 
   def mccabe_complexity
     num = 1
-
-    @lines.each do |_, line|
-      statements = line.statements
-      statements.each { |statement| num += statement.mccabe }
-    end
-
+    @lines.each { |_, line| num += line.mccabe_complexity }
     num
   end
 
@@ -1576,19 +1599,7 @@ class Program
       line = @lines[line_number]
 
       number = line_number.to_s
-
-      statements = line.statements
-
-      statements.each do |statement|
-        profile_lines = statement.profile(show_timing)
-
-        profile_lines.each do |profile|
-          text = number + profile
-          texts << text
-
-          number = ' ' * number.size
-        end
-      end
+      texts += line.profile(number, show_timing)
     end
 
     texts
