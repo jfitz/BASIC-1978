@@ -258,8 +258,6 @@ class AbstractStatement
   attr_reader :comment
   attr_reader :linenums
   attr_reader :autonext
-  attr_reader :comprehension_effort
-  attr_reader :mccabe
   attr_reader :is_if_no_else
   attr_reader :may_be_if_sub
 
@@ -308,10 +306,7 @@ class AbstractStatement
     @modifiers.each do |modifier|
       @errors += modifier.errors
       @warnings += modifier.warnings
-      @comprehension_effort += modifier.comprehension_effort
     end
-
-    @mccabe += @modifiers.size
   end
 
   public
@@ -326,6 +321,36 @@ class AbstractStatement
 
   def pretty
     AbstractToken.pretty_tokens(@keywords, @tokens)
+  end
+
+  def core_pretty
+    AbstractToken.pretty_tokens(@keywords, @core_tokens)
+  end
+
+  def analyze_pretty(number)
+    texts = []
+
+    texts << "(#{@mccabe} #{@comprehension_effort}) #{number} #{core_pretty}"
+
+    number = ' ' * number.size
+
+    @modifiers.each do |modifier|
+      texts << modifier.analyze_pretty(number)
+    end
+
+    texts
+  end
+
+  def comprehension_effort
+    result = @comprehension_effort
+    @modifiers.each { |modifier| result += modifier.comprehension_effort }
+    result
+  end
+
+  def mccabe
+    result = @mccabe
+    @modifiers.each { |modifier| result += modifier.mccabe }
+    result
   end
 
   def pre_trace(index)

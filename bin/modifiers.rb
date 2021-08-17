@@ -14,6 +14,7 @@ class AbstractModifier
   attr_reader :functions
   attr_reader :userfuncs
   attr_reader :comprehension_effort
+  attr_reader :mccabe
   attr_reader :profile_pre_count
   attr_reader :profile_post_count
   attr_reader :profile_pre_time
@@ -27,6 +28,8 @@ class AbstractModifier
     @profile_post_count = 0
     @profile_pre_time = 0
     @profile_post_time = 0
+    @mccabe = 1
+    @comprehension_effort = 0
   end
 
   def reset_profile_metrics
@@ -34,6 +37,14 @@ class AbstractModifier
     @profile_post_count = 0
     @profile_pre_time = 0
     @profile_post_time = 0
+  end
+
+  def pretty
+    AbstractToken.pretty_tokens([], @tokens)
+  end
+
+  def analyze_pretty(number)
+    "(#{@mccabe} #{comprehension_effort}) #{number}   #{pretty}"
   end
 
   def execute_pre(interpreter)

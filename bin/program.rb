@@ -250,12 +250,7 @@ class Line
     texts = []
 
     @statements.each do |statement|
-      mccabe = statement.mccabe
-      effort = statement.comprehension_effort
-
-      text = "(#{mccabe} #{effort}) #{number} " + statement.pretty
-
-      texts << text
+      texts += statement.analyze_pretty(number)
 
       number = ' ' * number.size
     end
