@@ -335,7 +335,8 @@ class AbstractStatement
     number = ' ' * number.size
 
     @modifiers.each do |modifier|
-      texts << modifier.analyze_pretty(number)
+      texts << modifier.pre_analyze(number)
+      texts << modifier.post_analyze(number)
     end
 
     texts
@@ -343,7 +344,11 @@ class AbstractStatement
 
   def comprehension_effort
     result = @comprehension_effort
-    @modifiers.each { |modifier| result += modifier.comprehension_effort }
+
+    @modifiers.each do |modifier|
+      result += modifier.pre_comp_effort + modifier.post_comp_effort
+    end
+
     result
   end
 

@@ -13,7 +13,8 @@ class AbstractModifier
   attr_reader :operators
   attr_reader :functions
   attr_reader :userfuncs
-  attr_reader :comprehension_effort
+  attr_reader :pre_comp_effort
+  attr_reader :post_comp_effort
   attr_reader :mccabe
   attr_reader :profile_pre_count
   attr_reader :profile_post_count
@@ -29,7 +30,8 @@ class AbstractModifier
     @profile_pre_time = 0
     @profile_post_time = 0
     @mccabe = 1
-    @comprehension_effort = 0
+    @pre_comp_effort = 0
+    @post_comp_effort = 0
   end
 
   def reset_profile_metrics
@@ -43,8 +45,8 @@ class AbstractModifier
     AbstractToken.pretty_tokens([], @tokens)
   end
 
-  def analyze_pretty(number)
-    "(#{@mccabe} #{comprehension_effort}) #{number}   #{pretty}"
+  def pre_analyze(number)
+    "(#{@mccabe} #{@pre_comp_effort}) #{number}   #{pretty}"
   end
 
   def execute_pre(interpreter)
@@ -109,7 +111,9 @@ class IfModifier < AbstractModifier
     @operators = @expression.operators
     @functions = @expression.functions
     @userfuncs = @expression.userfuncs
-    @comprehension_effort = @expression.comprehension_effort
+
+    @pre_comp_effort = @expression.comprehension_effort
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -122,6 +126,10 @@ class IfModifier < AbstractModifier
 
   def post_pretty
     ' ENDIF'
+  end
+
+  def post_analyze(number)
+    "(0 1) #{number}   ENDIF"
   end
 
   def dump
@@ -189,7 +197,9 @@ class UnlessModifier < AbstractModifier
     @operators = @expression.operators
     @functions = @expression.functions
     @userfuncs = @expression.userfuncs
-    @comprehension_effort = @expression.comprehension_effort
+
+    @pre_comp_effort = @expression.comprehension_effort
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -202,6 +212,10 @@ class UnlessModifier < AbstractModifier
 
   def post_pretty
     ' ENDUNLESS'
+  end
+
+  def post_analyze(number)
+    "(0 1) #{number}   ENDUNLESS"
   end
 
   def dump
@@ -269,7 +283,9 @@ class WhileModifier < AbstractModifier
     @operators = @expression.operators
     @functions = @expression.functions
     @userfuncs = @expression.userfuncs
-    @comprehension_effort = @expression.comprehension_effort
+
+    @pre_comp_effort = @expression.comprehension_effort
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -282,6 +298,10 @@ class WhileModifier < AbstractModifier
 
   def post_pretty
     ' ENDWHILE'
+  end
+
+  def post_analyze(number)
+    "(0 1) #{number}   ENDWHILE"
   end
 
   def dump
@@ -370,7 +390,9 @@ class UntilModifier < AbstractModifier
     @operators = @expression.operators
     @functions = @expression.functions
     @userfuncs = @expression.userfuncs
-    @comprehension_effort = @expression.comprehension_effort
+
+    @pre_comp_effort = @expression.comprehension_effort
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -383,6 +405,10 @@ class UntilModifier < AbstractModifier
 
   def post_pretty
     ' ENDUNTIL'
+  end
+
+  def post_analyze(number)
+    "(0 1) #{number}   ENDUNTIL"
   end
 
   def dump
@@ -495,11 +521,16 @@ class AbstractForModifier < AbstractModifier
     @functions = @start.functions
     @userfuncs = @start.userfuncs
 
-    @comprehension_effort = @start.comprehension_effort
+    @pre_comp_effort = @start.comprehension_effort
+    @post_comp_effort = 1
   end
 
   def post_pretty
     " NEXT #{@control}"
+  end
+
+  def post_analyze(number)
+    "(0 1) #{number}   NEXT #{@control}"
   end
 
   def post_trace
@@ -612,7 +643,8 @@ class ForToModifier < AbstractForModifier
     @functions += @end.functions
     @userfuncs += @end.userfuncs
 
-    @comprehension_effort += @end.comprehension_effort unless @end.nil?
+    @pre_comp_effort = @end.comprehension_effort
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -670,8 +702,10 @@ class ForToStepModifier < AbstractForModifier
     @functions += @step.functions
     @userfuncs += @step.userfuncs
 
-    @comprehension_effort += @end.comprehension_effort unless @end.nil?
-    @comprehension_effort += @step.comprehension_effort unless @step.nil?
+    @pre_comp_effort =
+      @end.comprehension_effort + @step.comprehension_effort
+
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -731,8 +765,10 @@ class ForStepToModifier < AbstractForModifier
     @functions += @step.functions
     @userfuncs += @step.userfuncs
 
-    @comprehension_effort += @end.comprehension_effort unless @end.nil?
-    @comprehension_effort += @step.comprehension_effort unless @step.nil?
+    @pre_comp_effort =
+      @end.comprehension_effort + @step.comprehension_effort
+
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -784,7 +820,8 @@ class ForUntilModifier < AbstractForModifier
     @functions += @until.functions
     @userfuncs += @until.userfuncs
 
-    @comprehension_effort += @until.comprehension_effort unless @until.nil?
+    @pre_comp_effort = @until.comprehension_effort
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -843,8 +880,10 @@ class ForUntilStepModifier < AbstractForModifier
     @functions += @until.functions
     @userfuncs += @until.userfuncs
 
-    @comprehension_effort += @step.comprehension_effort unless @step.nil?
-    @comprehension_effort += @until.comprehension_effort unless @until.nil?
+    @pre_comp_effort =
+      @step.comprehension_effort + @until.comprehension_effort
+
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -905,8 +944,10 @@ class ForStepUntilModifier < AbstractForModifier
     @functions += @until.functions
     @userfuncs += @until.userfuncs
 
-    @comprehension_effort += @step.comprehension_effort unless @step.nil?
-    @comprehension_effort += @until.comprehension_effort unless @until.nil?
+    @pre_comp_effort =
+      @step.comprehension_effort + @until.comprehension_effort
+
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -958,7 +999,8 @@ class ForWhileModifier < AbstractForModifier
     @functions += @while.functions
     @userfuncs += @while.userfuncs
 
-    @comprehension_effort += @while.comprehension_effort unless @while.nil?
+    @pre_comp_effort = @while.comprehension_effort
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -1017,8 +1059,10 @@ class ForWhileStepModifier < AbstractForModifier
     @functions += @while.functions
     @userfuncs += @while.userfuncs
 
-    @comprehension_effort += @step.comprehension_effort unless @step.nil?
-    @comprehension_effort += @while.comprehension_effort unless @while.nil?
+    @pre_comp_effort =
+      @step.comprehension_effort + @while.comprehension_effort
+
+    @post_comp_effort = 1
   end
 
   def uncache
@@ -1079,8 +1123,10 @@ class ForStepWhileModifier < AbstractForModifier
     @functions += @while.functions
     @userfuncs += @while.userfuncs
 
-    @comprehension_effort += @step.comprehension_effort unless @step.nil?
-    @comprehension_effort += @while.comprehension_effort unless @while.nil?
+    @pre_comp_effort =
+      @step.comprehension_effort + @while.comprehension_effort
+
+    @post_comp_effort = 1
   end
 
   def uncache

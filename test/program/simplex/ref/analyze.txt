@@ -8,7 +8,7 @@ Number of executable statements: 119
 Complexity:
 
 Comment density: 0.298
-Comprehension effort: 419
+Comprehension effort: 418
 McCabe complexity: 38
 Halstead complexity:
  length: 639
@@ -42,7 +42,8 @@ Halstead complexity:
 (1 2) 112 ARR READ C
 (0 2) 113 DIM C(N1 + N2)
 (0 3) 114 C(J) = 0
-(1 4)       FOR J = N1 + 1 TO N1 + N2
+(1 2)       FOR J = N1 + 1 TO N1 + N2
+(0 1)       NEXT J
 (0 1) 120 REM BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
 (0 2) 121 DIM C$(N1 + N2)
 (1 3) 122 FOR I = 1 TO N1
@@ -59,17 +60,21 @@ Halstead complexity:
 (1 2) 142 MAT READ X
 (0 2) 143 DIM X(N2, N1 + N2)
 (0 3) 144 X(I, J) = 0
-(1 4)       FOR J = N1 + 1 TO N1 + N2
-(1 2)       FOR I = 1 TO N2
+(1 2)       FOR J = N1 + 1 TO N1 + N2
+(0 1)       NEXT J
+(1 1)       FOR I = 1 TO N2
+(0 1)       NEXT I
 (0 3) 145 X(I, I + N1) = 1
-(1 2)       FOR I = 1 TO N2
+(1 1)       FOR I = 1 TO N2
+(0 1)       NEXT I
 (0 1) 160 REM BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
 (0 2) 161 DIM B(N2)
 (1 2) 162 ARR READ B
 (0 1) 170 REM COPY COEFFICIENTS FOR BASIC VARIABLES
 (0 2) 171 DIM R(N2)
 (0 3) 172 R(I) = 0
-(1 2)       FOR I = 1 TO N2
+(1 1)       FOR I = 1 TO N2
+(0 1)       NEXT I
 (0 1) 200 REM PRINT THE TABLEAU
 (0 2) 201 PRINT
 (0 2) 202 PRINT "TABLEAU"
@@ -78,21 +83,25 @@ Halstead complexity:
 (0 2) 205 ARR PRINT C
 (0 3) 210 PRINT "CB", "BV",
 (0 2) 211 PRINT C$(I),
-(1 3)       FOR I = 1 TO N1 + N2
+(1 2)       FOR I = 1 TO N1 + N2
+(0 1)       NEXT I
 (0 2) 212 PRINT "B"
 (1 3) 220 FOR I = 1 TO N2
 (0 3) 221 PRINT R(I), C1$(I),
 (0 2) 222 PRINT X(I, J),
-(1 3)       FOR J = 1 TO N1 + N2
+(1 2)       FOR J = 1 TO N1 + N2
+(0 1)       NEXT J
 (0 2) 230 PRINT B(I)
 (0 1) 239 NEXT I
 (0 1) 300 REM EVALUATE TABLEAU FOR OPTIMUM SOLUTION
 (0 2) 301 DIM Z(N1 + N2)
 (0 3) 302 Z(J) = 0
-(1 3)       FOR J = 1 TO N1 + N2
+(1 2)       FOR J = 1 TO N1 + N2
+(0 1)       NEXT J
 (1 3) 305 FOR I = 1 TO N2
 (0 6) 306 Z(J) = Z(J) + R(I) * X(I, J)
-(1 3)       FOR J = 1 TO N1 + N2
+(1 2)       FOR J = 1 TO N1 + N2
+(0 1)       NEXT J
 (0 1) 307 NEXT I
 (0 1) 310 REM COMPUTE Z - C
 (0 4) 311 ARR Y = Z - C
@@ -109,10 +118,13 @@ Halstead complexity:
 (0 1) 330 REM EVALUATE BASIC VARIABLES
 (0 2) 331 DIM W(N2)
 (0 3) 332 W(I) = 0
-(1 2)       FOR I = 1 TO N2
+(1 1)       FOR I = 1 TO N2
+(0 1)       NEXT I
 (0 4) 333 W(I) = B(I) / X(I, J0)
 (1 2)       IF X(I, J0) <> 0
-(1 2)       FOR I = 1 TO N2
+(0 1)       ENDIF
+(1 1)       FOR I = 1 TO N2
+(0 1)       NEXT I
 (0 1) 340 REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
 (0 2) 341 PRINT
 (0 2) 342 PRINT "EXPANDED TABLEAU"
@@ -121,12 +133,14 @@ Halstead complexity:
 (0 2) 345 ARR PRINT C
 (0 3) 350 PRINT "CB", "BV",
 (0 2) 351 PRINT C$(I),
-(1 3)       FOR I = 1 TO N1 + N2
+(1 2)       FOR I = 1 TO N1 + N2
+(0 1)       NEXT I
 (0 4) 352 PRINT "B", "B / "; C$(J0)
 (1 3) 360 FOR I = 1 TO N2
 (0 3) 361 PRINT R(I), C1$(I),
 (0 2) 362 PRINT X(I, J),
-(1 3)       FOR J = 1 TO N1 + N2
+(1 2)       FOR J = 1 TO N1 + N2
+(0 1)       NEXT J
 (0 3) 363 PRINT B(I), W(I)
 (0 1) 364 NEXT I
 (0 3) 370 PRINT " ", "Z",
