@@ -164,12 +164,24 @@ end
 class Line
   attr_reader :statements
   attr_reader :tokens
+  attr_reader :warnings
 
   def initialize(text, statements, tokens, comment)
     @text = text
     @statements = statements
     @tokens = tokens
     @comment = comment
+    @warnings = []
+
+    list_width_max = $options['warn_list_width'].value
+    @warnings << "Line exceeds LIST width limit #{list_width_max}" if
+      list_width_max > 0 && text.size > list_width_max
+
+    pretty_width_max = $options['warn_pretty_width'].value
+    pretty_lines = pretty(false)
+    pretty_line = pretty_lines[0]
+    @warnings << "Line exceeds PRETTY width limit #{pretty_width_max}" if
+      pretty_width_max > 0 && pretty_line.size > pretty_width_max
   end
 
   def uncache
@@ -1503,6 +1515,8 @@ class Program
     line_numbers.each do |line_number|
       line = @lines[line_number]
 
+      line.warnings.each { |warning| texts << ' WARNING: ' + warning }
+
       # print the line
       texts << line_number.to_s + line.list
       statements = line.statements
@@ -1533,6 +1547,8 @@ class Program
     line_numbers.each do |line_number|
       line = @lines[line_number]
 
+      line.warnings.each { |warning| texts << ' WARNING: ' + warning }
+
       # print the line
       texts << line_number.to_s + line.list
       statements = line.statements
@@ -1562,6 +1578,8 @@ class Program
 
     line_numbers.each do |line_number|
       line = @lines[line_number]
+
+      line.warnings.each { |warning| texts << ' WARNING: ' + warning }
 
       # print the line
       number = line_number.to_s
