@@ -20,56 +20,154 @@ Halstead complexity:
  time: 7.641
 
 (0 4) 1 PRINT TAB(34); "TRAP"
+  Origs: 
+  Dests: 2
 (0 4) 2 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 1
+  Dests: 3
 (0 2) 3 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
+  Origs: 2
+  Dests: 10
 (0 3) 10 G = 6
+  Origs: 3
+  Dests: 20
 (0 3) 20 N = 100
+  Origs: 10
+  Dests: 30
 (0 1) 30 REM -TRAP
+  Origs: 20
+  Dests: 40
 (0 1) 40 REM -STEVE ULLMAN, 8-1-72
+  Origs: 30
+  Dests: 50
 (0 2) 50 PRINT "INSTRUCTIONS";
+  Origs: 40
+  Dests: 60
 (1 2) 60 INPUT Z$
+  Origs: 50
+  Dests: 70
 (1 5) 70 IF LEFT$(Z$, 1) <> "Y" THEN 180
+  Origs: 60
+  Dests: 80, 180
 (0 3) 80 PRINT "I AM THINKING OF A NUMBER BETWEEN 1 AND"; N
+  Origs: 70
+  Dests: 90
 (0 2) 90 PRINT "TRY TO GUESS MY NUMBER. ON EACH GUESS,"
+  Origs: 80
+  Dests: 100
 (0 2) 100 PRINT "YOU ARE TO ENTER 2 NUMBERS, TRYING TO TRAP"
+  Origs: 90
+  Dests: 110
 (0 2) 110 PRINT "MY NUMBER BETWEEN THE TWO NUMBERS. I WILL"
+  Origs: 100
+  Dests: 120
 (0 2) 120 PRINT "TELL YOU IF YOU HAVE TRAPPED MY NUMBER, IF MY"
+  Origs: 110
+  Dests: 130
 (0 2) 130 PRINT "NUMBER IS LARGER THAN YOUR TWO NUMBERS, OR IF"
+  Origs: 120
+  Dests: 140
 (0 2) 140 PRINT "MY NUMBER IS SMALLER THAN YOUR TWO NUMBERS."
+  Origs: 130
+  Dests: 150
 (0 2) 150 PRINT "IF YOU WANT TO GUESS ONE SINGLE NUMBER, TYPE"
+  Origs: 140
+  Dests: 160
 (0 2) 160 PRINT "YOUR GUESS FOR BOTH YOUR TRAP NUMBERS."
+  Origs: 150
+  Dests: 170
 (0 4) 170 PRINT "YOU GET"; G; "GUESSES TO GET MY NUMBER."
+  Origs: 160
+  Dests: 180
 (0 5) 180 X = INT(N * RND(1)) + 1
+  Origs: 70, 170, 440
+  Dests: 190
 (1 3) 190 FOR Q = 1 TO G
+  Origs: 180
+  Dests: 200
 (0 2) 200 PRINT
+  Origs: 190
+  Dests: 210
 (0 3) 210 PRINT "GUESS #"; Q;
+  Origs: 200
+  Dests: 220
 (2 3) 220 INPUT A, B
+  Origs: 210
+  Dests: 230
 (1 7) 230 IF A = B AND X = A THEN 400
+  Origs: 220
+  Dests: 240, 400
 (1 4) 240 IF A <= B THEN 260
+  Origs: 230
+  Dests: 250, 260
 (0 2) 250 GOSUB 360
+  Origs: 240
+  Dests: 260, 360
 (1 7) 260 IF A <= X AND X <= B THEN 320
+  Origs: 240, 250
+  Dests: 270, 320
 (1 4) 270 IF X < A THEN 300
+  Origs: 260
+  Dests: 280, 300
 (0 2) 280 PRINT "MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
+  Origs: 270
+  Dests: 290
 (0 2) 290 GOTO 330
+  Origs: 280
+  Dests: 330
 (0 2) 300 PRINT "MY NUMBER IS SMALLER THAN YOUR TRAP NUMBERS."
+  Origs: 270
+  Dests: 310
 (0 2) 310 GOTO 330
+  Origs: 300
+  Dests: 330
 (0 2) 320 PRINT "YOU HAVE TRAPPED MY NUMBER."
+  Origs: 260
+  Dests: 330
 (0 1) 330 NEXT Q
+  Origs: 290, 310, 320
+  Dests: 340
 (0 5) 340 PRINT "SORRY, THAT'S"; G; "GUESSES. THE NUMBER WAS"; X
+  Origs: 330
+  Dests: 345
 (0 2) 345 PRINT
+  Origs: 340
+  Dests: 350
 (0 2) 350 GOTO 410
+  Origs: 345
+  Dests: 410
 (0 3) 360 R = A
+  Origs: 250
+  Dests: 370
 (0 3) 370 A = B
+  Origs: 360
+  Dests: 380
 (0 3) 380 B = R
+  Origs: 370
+  Dests: 390
 (0 1) 390 RETURN
+  Origs: 380
+  Dests: 
 (0 2) 400 PRINT "YOU GOT IT!!!"
+  Origs: 230
+  Dests: 410
 (0 2) 410 PRINT
+  Origs: 350, 400
+  Dests: 420
 (0 2) 420 PRINT "TRY AGAIN."
+  Origs: 410
+  Dests: 430
 (0 2) 430 PRINT
+  Origs: 420
+  Dests: 440
 (0 3) 440 GOTO 180
+  Origs: 430
+  Dests: 180
 (0 1) 450 END
+  Origs: 
+  Dests: 
 
 Unreachable code:
 

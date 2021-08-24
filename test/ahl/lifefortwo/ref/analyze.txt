@@ -20,131 +20,297 @@ Halstead complexity:
  time: 88.820
 
 (0 4) 2 PRINT TAB(33); "LIFE2"
+  Origs: 
+  Dests: 4
 (0 4) 4 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 2
+  Dests: 6
 (0 2) 6 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
+  Origs: 4
+  Dests: 7
 (0 6) 7 DIM N(6, 6), K(18), A(16), X(2), Y(2)
+  Origs: 6
+  Dests: 8
 (0 2) 8 DATA 3, 102, 103, 120, 130, 121, 112, 111, 12
+  Origs: 7
+  Dests: 9
 (0 2) 9 DATA 21, 30, 1020, 1030, 1011, 1021, 1003, 1002, 1012
+  Origs: 8
+  Dests: 10
 (1 3) 10 FOR M = 1 TO 18
 (1 2)    READ K(M)
 (0 1)    NEXT M
+  Origs: 9
+  Dests: 13
 (0 8) 13 DATA -1, 0, 1, 0, 0, -1, 0, 1, -1, -1, 1, -1, -1, 1, 1, 1
+  Origs: 10
+  Dests: 14
 (1 3) 14 FOR O1 = 1 TO 16
 (1 2)    READ A(O1)
 (0 1)    NEXT O1
+  Origs: 13
+  Dests: 20
 (0 2) 20 GOTO 500
+  Origs: 14
+  Dests: 500
 (1 3) 50 FOR J = 1 TO 5
+  Origs: 560
+  Dests: 51
 (1 3) 51 FOR K = 1 TO 5
+  Origs: 50
+  Dests: 55
 (1 5) 55 IF N(J, K) > 99 THEN GOSUB 200
+  Origs: 51
+  Dests: 60, 200
 (0 1) 60 NEXT K
+  Origs: 55
+  Dests: 65
 (0 1) 65 NEXT J
+  Origs: 60
+  Dests: 90
 (0 3) 90 K = 0
 (0 3)    M2 = 0
 (0 3)    M3 = 0
+  Origs: 65, 559
+  Dests: 99
 (1 3) 99 FOR J = 0 TO 6
 (0 2)    PRINT
+  Origs: 90
+  Dests: 100
 (1 3) 100 FOR K = 0 TO 6
+  Origs: 99
+  Dests: 101
 (2 7) 101 IF J <> 0 THEN IF J <> 6 THEN 105
+  Origs: 100
+  Dests: 102, 105
 (1 5) 102 IF K = 6 THEN PRINT 0;
 (0 2)     GOTO 125
+  Origs: 101
+  Dests: 103, 125
 (0 2) 103 PRINT K;
 (0 2)     GOTO 120
+  Origs: 102
+  Dests: 120
 (2 7) 105 IF K <> 0 THEN IF K <> 6 THEN 110
+  Origs: 101
+  Dests: 106, 110
 (1 5) 106 IF J = 6 THEN PRINT 0
 (0 2)     GOTO 126
+  Origs: 105
+  Dests: 107, 126
 (0 2) 107 PRINT J;
 (0 2)     GOTO 120
+  Origs: 106
+  Dests: 120
 (0 2) 110 GOSUB 300
+  Origs: 105
+  Dests: 120, 300
 (0 1) 120 NEXT K
+  Origs: 103, 107, 110
+  Dests: 125
 (0 1) 125 NEXT J
+  Origs: 102, 120
+  Dests: 126
 (0 1) 126 RETURN
+  Origs: 106, 125
+  Dests: 
 (0 3) 200 B = 1
 (1 6)     IF N(J, K) > 999 THEN B = 10
+  Origs: 55
+  Dests: 220
 (1 4) 220 FOR O1 = 1 TO 15 STEP 2
+  Origs: 200
+  Dests: 230
 (0 4) 230 N(J + A(O1), K + A(O1 + 1)) = N(J + A(O1), K + A(O1 + 1)) + B
+  Origs: 220
+  Dests: 231
 (0 1) 231 NEXT O1
+  Origs: 230
+  Dests: 239
 (0 1) 239 RETURN
+  Origs: 231
+  Dests: 
 (1 4) 300 IF N(J, K) < 3 THEN 399
+  Origs: 110
+  Dests: 305, 399
 (1 3) 305 FOR O1 = 1 TO 18
+  Origs: 300
+  Dests: 310
 (1 4) 310 IF N(J, K) = K(O1) THEN 350
+  Origs: 305
+  Dests: 315, 350
 (0 1) 315 NEXT O1
+  Origs: 310
+  Dests: 320
 (0 2) 320 GOTO 399
+  Origs: 315
+  Dests: 399
 (1 4) 350 IF O1 > 9 THEN 360
+  Origs: 310
+  Dests: 351, 360
 (0 3) 351 N(J, K) = 100
 (0 4)     M2 = M2 + 1
 (0 2)     PRINT " * ";
+  Origs: 350
+  Dests: 355
 (0 1) 355 RETURN
+  Origs: 351
+  Dests: 
 (0 3) 360 N(J, K) = 1000
 (0 4)     M3 = M3 + 1
 (0 2)     PRINT " # ";
+  Origs: 350
+  Dests: 365
 (0 1) 365 RETURN
+  Origs: 360
+  Dests: 
 (0 3) 399 N(J, K) = 0
 (0 2)     PRINT "   ";
 (0 1)     RETURN
+  Origs: 300, 320
+  Dests: 
 (0 4) 500 PRINT TAB(10); "U.B. LIFE GAME"
+  Origs: 20
+  Dests: 505
 (0 3) 505 M2 = 0
 (0 3)     M3 = 0
+  Origs: 500
+  Dests: 510
 (1 3) 510 FOR J = 1 TO 5
+  Origs: 505
+  Dests: 511
 (1 3) 511 FOR K = 1 TO 5
+  Origs: 510
+  Dests: 515
 (0 3) 515 N(J, K) = 0
+  Origs: 511
+  Dests: 516
 (0 1) 516 NEXT K
+  Origs: 515
+  Dests: 517
 (0 1) 517 NEXT J
+  Origs: 516
+  Dests: 519
 (1 3) 519 FOR B = 1 TO 2
 (0 3)     P1 = 3
 (1 6)     IF B = 2 THEN P1 = 30
+  Origs: 517
+  Dests: 520
 (0 2) 520 PRINT
 (0 4)     PRINT "PLAYER"; B; " - 3 LIVE PIECES."
+  Origs: 519
+  Dests: 535
 (1 3) 535 FOR K1 = 1 TO 3
 (0 2)     GOSUB 700
+  Origs: 520
+  Dests: 540, 700
 (0 3) 540 N(X(B), Y(B)) = P1
 (0 1)     NEXT K1
+  Origs: 535
+  Dests: 542
 (0 1) 542 NEXT B
+  Origs: 540
+  Dests: 559
 (0 3) 559 GOSUB 90
+  Origs: 542
+  Dests: 90, 560
 (0 2) 560 PRINT
 (0 3)     GOSUB 50
+  Origs: 559, 581, 596
+  Dests: 50, 570
 (2 7) 570 IF M2 = 0 THEN IF M3 = 0 THEN 574
+  Origs: 560
+  Dests: 571, 574
 (1 6) 571 IF M3 = 0 THEN B = 1
 (0 2)     GOTO 575
+  Origs: 570
+  Dests: 572, 575
 (1 6) 572 IF M2 = 0 THEN B = 2
 (0 2)     GOTO 575
+  Origs: 571
+  Dests: 573, 575
 (0 2) 573 GOTO 580
+  Origs: 572
+  Dests: 580
 (0 2) 574 PRINT
 (0 2)     PRINT "A DRAW"
 (0 2)     GOTO 800
+  Origs: 570
+  Dests: 800
 (0 2) 575 PRINT
 (0 4)     PRINT "PLAYER"; B; "IS THE WINNER"
 (0 2)     GOTO 800
+  Origs: 571, 572
+  Dests: 800
 (1 3) 580 FOR B = 1 TO 2
 (0 2)     PRINT
 (0 2)     PRINT
 (0 3)     PRINT "PLAYER"; B;
 (0 2)     GOSUB 700
+  Origs: 573
+  Dests: 581, 700
 (1 5) 581 IF B = 99 THEN 560
+  Origs: 580
+  Dests: 560, 582
 (0 1) 582 NEXT B
+  Origs: 581
+  Dests: 586
 (0 3) 586 N(X(1), Y(1)) = 100
 (0 3)     N(X(2), Y(2)) = 1000
+  Origs: 582
+  Dests: 596
 (0 3) 596 GOTO 560
+  Origs: 586
+  Dests: 560
 (0 2) 700 PRINT "X,Y"
 (0 8)     PRINT "XXXXXX"; CHR$(13); "$$$$$$"; CHR$(13); "&&&&&&";
+  Origs: 535, 580, 750
+  Dests: 701
 (0 3) 701 PRINT CHR$(13);
 (2 3)     INPUT Y(B), X(B)
+  Origs: 700
+  Dests: 705
 (2 7) 705 IF X(B) <= 5 THEN IF X(B) > 0 THEN 708
+  Origs: 701
+  Dests: 706, 708
 (0 2) 706 GOTO 750
+  Origs: 705
+  Dests: 750
 (2 7) 708 IF Y(B) <= 5 THEN IF Y(B) > 0 THEN 715
+  Origs: 705
+  Dests: 710, 715
 (0 2) 710 GOTO 750
+  Origs: 708
+  Dests: 750
 (1 4) 715 IF N(X(B), Y(B)) <> 0 THEN 750
+  Origs: 708
+  Dests: 720, 750
 (1 4) 720 IF B = 1 THEN RETURN
+  Origs: 715
+  Dests: 725
 (2 7) 725 IF X(1) = X(2) THEN IF Y(1) = Y(2) THEN 740
+  Origs: 720
+  Dests: 730, 740
 (0 1) 730 RETURN
+  Origs: 725
+  Dests: 
 (0 2) 740 PRINT "SAME COORD.  SET TO 0"
+  Origs: 725
+  Dests: 741
 (0 3) 741 N(X(B) + 1, Y(B) + 1) = 0
 (0 3)     B = 99
 (0 1)     RETURN
+  Origs: 740
+  Dests: 
 (0 2) 750 PRINT "ILLEGAL COORDS. RETYPE"
 (0 3)     GOTO 700
+  Origs: 706, 710, 715
+  Dests: 700
 (0 1) 800 END
+  Origs: 574, 575
+  Dests: 
 
 Unreachable code:
 

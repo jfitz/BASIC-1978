@@ -20,14 +20,28 @@ Halstead complexity:
  time: 88.049
 
 (0 4) 10 PRINT TAB(33); "SPLAT"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 40
 (0 2) 40 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 50
 (0 2) 50 DIM A(42)
+  Origs: 40
+  Dests: 95
 (0 2) 95 PRINT "WELCOME TO 'SPLAT' -- THE GAME THAT SIMULATES A PARACHUTE"
+  Origs: 50
+  Dests: 96
 (0 2) 96 PRINT "JUMP.  TRY TO OPEN YOUR CHUTE AT THE LAST POSSIBLE"
+  Origs: 95
+  Dests: 97
 (0 2) 97 PRINT "MOMENT WITHOUT GOING SPLAT."
+  Origs: 96
+  Dests: 118
 (0 2) 118 PRINT
 (0 2)     PRINT
 (0 3)     D1 = 0
@@ -36,183 +50,427 @@ Halstead complexity:
 (0 3)     N = 0
 (0 3)     M = 0
 (0 4)     D1 = INT(9001 * RND(1) + 1000)
+  Origs: 97, 2001, 2005
+  Dests: 119
 (0 2) 119 PRINT "SELECT YOUR OWN TERMINAL VELOCITY (YES OR NO)";
 (1 2)     INPUT A1$
+  Origs: 118
+  Dests: 120
 (1 4) 120 IF A1$ = "NO" THEN 128
+  Origs: 119, 121
+  Dests: 121, 128
 (1 5) 121 IF A1$ <> "YES" THEN PRINT "YES OR NO";
 (1 2)     INPUT A1$
 (0 3)     GOTO 120
+  Origs: 120
+  Dests: 120, 123
 (0 2) 123 PRINT "WHAT TERMINAL VELOCITY (MI/HR)";
 (1 2)     INPUT V1
+  Origs: 121
+  Dests: 125
 (0 6) 125 V1 = V1 * (5280 / 3600)
 (0 13)     V = V1 + ((V1 * RND(1)) / 20) - ((V1 * RND(1)) / 20)
 (0 2)     GOTO 135
+  Origs: 123
+  Dests: 135
 (0 4) 128 V1 = INT(1000 * RND(1))
+  Origs: 120
+  Dests: 130
 (0 4) 130 PRINT "OK.  TERMINAL VELOCITY =" V1 "MI/HR"
+  Origs: 128
+  Dests: 131
 (0 6) 131 V1 = V1 * (5280 / 3600)
 (0 13)     V = V1 + ((V1 * RND(1)) / 20) - ((V1 * RND(1)) / 20)
+  Origs: 130
+  Dests: 135
 (0 2) 135 PRINT "WANT TO SELECT ACCELERATION DUE TO GRAVITY (YES OR NO)";
+  Origs: 125, 131
+  Dests: 136
 (1 2) 136 INPUT B1$
+  Origs: 135
+  Dests: 140
 (1 4) 140 IF B1$ = "NO" THEN 150
+  Origs: 136, 141
+  Dests: 141, 150
 (1 5) 141 IF B1$ <> "YES" THEN PRINT "YES OR NO";
 (1 2)     INPUT B1$
 (0 3)     GOTO 140
+  Origs: 140
+  Dests: 140, 143
 (0 2) 143 PRINT "WHAT ACCELERATION (FT/SEC/SEC)";
 (1 2)     INPUT A2
+  Origs: 141
+  Dests: 145
 (0 13) 145 A = A2 + ((A2 * RND(1)) / 20) - ((A2 * RND(1)) / 20)
 (0 2)     GOTO 205
+  Origs: 143, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170
+  Dests: 205
 (10 13) 150 ON INT(1 + (10 * RND(1))) GOTO 151, 152, 153, 154, 155, 156, 157, 158, 159, 160
+  Origs: 140
+  Dests: 151, 152, 153, 154, 155, 156, 157, 158, 159, 160
 (0 2) 151 PRINT "FINE. YOU'RE ON MERCURY. ACCELERATION=12.2 FT/SEC/SEC."
 (0 2)     GOTO 161
+  Origs: 150
+  Dests: 161
 (0 2) 152 PRINT "ALL RIGHT. YOU'RE ON VENUS. ACCELERATION=28.3 FT/SEC/SEC."
 (0 2)     GOTO 162
+  Origs: 150
+  Dests: 162
 (0 2) 153 PRINT "THEN YOU'RE ON EARTH. ACCELERATION=32.16 FT/SEC/SEC."
 (0 2)     GOTO 163
+  Origs: 150
+  Dests: 163
 (0 2) 154 PRINT "FINE. YOU'RE ON THE MOON. ACCELERATION=5.15 FT/SEC/SEC."
 (0 2)     GOTO 164
+  Origs: 150
+  Dests: 164
 (0 2) 155 PRINT "ALL RIGHT. YOU'RE ON MARS. ACCELERATION=12.5 FT/SEC/SEC."
 (0 2)     GOTO 165
+  Origs: 150
+  Dests: 165
 (0 2) 156 PRINT "THEN YOU'RE ON JUPITER. ACCELERATION=85.2 FT/SEC/SEC."
 (0 2)     GOTO 166
+  Origs: 150
+  Dests: 166
 (0 2) 157 PRINT "FINE. YOU'RE ON SATURN. ACCELERATION=37.6 FT/SEC/SEC."
 (0 2)     GOTO 167
+  Origs: 150
+  Dests: 167
 (0 2) 158 PRINT "ALL RIGHT. YOU'RE ON URANUS. ACCELERATION=33.8 FT/SEC/SEC."
 (0 2)     GOTO 168
+  Origs: 150
+  Dests: 168
 (0 2) 159 PRINT "THEN YOU'RE ON NEPTUNE. ACCELERATION=39.6 FT/SEC/SEC."
 (0 2)     GOTO 169
+  Origs: 150
+  Dests: 169
 (0 2) 160 PRINT "FINE. YOU'RE ON THE SUN. ACCELERATION=896 FT/SEC/SEC."
 (0 2)     GOTO 170
+  Origs: 150
+  Dests: 170
 (0 3) 161 A2 = 12.2
 (0 3)     GOTO 145
+  Origs: 151
+  Dests: 145
 (0 3) 162 A2 = 28.3
 (0 3)     GOTO 145
+  Origs: 152
+  Dests: 145
 (0 3) 163 A2 = 32.16
 (0 3)     GOTO 145
+  Origs: 153
+  Dests: 145
 (0 3) 164 A2 = 5.15
 (0 3)     GOTO 145
+  Origs: 154
+  Dests: 145
 (0 3) 165 A2 = 12.5
 (0 3)     GOTO 145
+  Origs: 155
+  Dests: 145
 (0 3) 166 A2 = 85.2
 (0 3)     GOTO 145
+  Origs: 156
+  Dests: 145
 (0 3) 167 A2 = 37.6
 (0 3)     GOTO 145
+  Origs: 157
+  Dests: 145
 (0 3) 168 A2 = 33.8
 (0 3)     GOTO 145
+  Origs: 158
+  Dests: 145
 (0 3) 169 A2 = 39.6
 (0 3)     GOTO 145
+  Origs: 159
+  Dests: 145
 (0 3) 170 A2 = 896
 (0 3)     GOTO 145
+  Origs: 160
+  Dests: 145
 (0 2) 205 PRINT
+  Origs: 145
+  Dests: 206
 (0 4) 206 PRINT "    ALTITUDE         =" D1 "FT"
+  Origs: 205
+  Dests: 207
 (0 4) 207 PRINT "    TERM. VELOCITY   =" V1 "FT/SEC +/-5%"
+  Origs: 206
+  Dests: 208
 (0 4) 208 PRINT "    ACCELERATION     =" A2 "FT/SEC/SEC +/-5%"
+  Origs: 207
+  Dests: 210
 (0 2) 210 PRINT "SET THE TIMER FOR YOUR FREEFALL."
+  Origs: 208
+  Dests: 211
 (0 2) 211 PRINT "HOW MANY SECONDS";
 (1 2)     INPUT T
+  Origs: 210
+  Dests: 215
 (0 2) 215 PRINT "HERE WE GO."
+  Origs: 211
+  Dests: 217
 (0 2) 217 PRINT
+  Origs: 215
+  Dests: 218
 (0 3) 218 PRINT "TIME (SEC)", "DIST TO FALL (FT)"
+  Origs: 217
+  Dests: 219
 (0 3) 219 PRINT "==========", "================="
+  Origs: 218
+  Dests: 300
 (1 5) 300 FOR I = 0 TO T STEP (T / 8)
+  Origs: 219
+  Dests: 310
 (1 6) 310 IF I > V / A THEN 400
+  Origs: 300
+  Dests: 320, 400
 (0 9) 320 D = D1 - ((A / 2) * I ^ 2)
+  Origs: 310
+  Dests: 330
 (1 4) 330 IF D <= 0 THEN 1000
+  Origs: 320
+  Dests: 340, 1000
 (0 3) 340 PRINT I, D
+  Origs: 330
+  Dests: 350
 (0 1) 350 NEXT I
+  Origs: 340
+  Dests: 360
 (0 2) 360 GOTO 500
+  Origs: 350
+  Dests: 500
 (0 5) 400 PRINT "TERMINAL VELOCITY REACHED AT T PLUS" V / A "SECONDS."
+  Origs: 310
+  Dests: 405
 (1 5) 405 FOR I = I TO T STEP (T / 8)
+  Origs: 400
+  Dests: 410
 (0 16) 410 D = D1 - ((V ^ 2 / (2 * A)) + (V * (I - (V / A))))
+  Origs: 405
+  Dests: 420
 (1 4) 420 IF D <= 0 THEN 1010
+  Origs: 410
+  Dests: 430, 1010
 (0 3) 430 PRINT I, D
+  Origs: 420
+  Dests: 440
 (0 1) 440 NEXT I
+  Origs: 430
+  Dests: 500
 (0 2) 500 PRINT "CHUTE OPEN"
+  Origs: 360, 440
+  Dests: 510
 (0 3) 510 K = 0
 (0 3)     K1 = 0
+  Origs: 500
+  Dests: 540
 (0 1) 540 REM
+  Origs: 510, 610
+  Dests: 550
 (1 3) 550 FOR J = 0 TO 42
+  Origs: 540
+  Dests: 555
 (1 4) 555 IF A(J) = 0 THEN 620
+  Origs: 550
+  Dests: 560, 620
 (0 4) 560 K = K + 1
+  Origs: 555
+  Dests: 570
 (1 4) 570 IF D >= A(J) THEN 600
+  Origs: 560
+  Dests: 580, 600
 (0 4) 580 K1 = K1 + 1
+  Origs: 570
+  Dests: 600
 (0 1) 600 NEXT J
+  Origs: 570, 580
+  Dests: 610
 (0 3) 610 GOTO 540
+  Origs: 600
+  Dests: 540
 (0 3) 620 A(J) = D
+  Origs: 555
+  Dests: 630
 (1 4) 630 IF J > 2 THEN 650
+  Origs: 620
+  Dests: 635, 650
 (0 2) 635 PRINT "AMAZING!!! NOT BAD FOR YOUR ";
+  Origs: 630
+  Dests: 636
 (1 5) 636 IF J = 0 THEN PRINT "1ST ";
+  Origs: 635
+  Dests: 637
 (1 5) 637 IF J = 1 THEN PRINT "2ND ";
+  Origs: 636
+  Dests: 638
 (1 5) 638 IF J = 2 THEN PRINT "3RD ";
+  Origs: 637
+  Dests: 639
 (0 2) 639 PRINT "SUCCESSFUL JUMP!!!"
 (0 2)     GOTO 2000
+  Origs: 638
+  Dests: 2000
 (1 7) 650 IF K - K1 <= .1 * K THEN 700
+  Origs: 630
+  Dests: 660, 700
 (1 7) 660 IF K - K1 <= .25 * K THEN 710
+  Origs: 650
+  Dests: 670, 710
 (1 7) 670 IF K - K1 <= .5 * K THEN 720
+  Origs: 660
+  Dests: 680, 720
 (1 7) 680 IF K - K1 <= .75 * K THEN 730
+  Origs: 670
+  Dests: 690, 730
 (1 7) 690 IF K - K1 <= .9 * K THEN 740
+  Origs: 680
+  Dests: 695, 740
 (0 2) 695 GOTO 750
+  Origs: 690
+  Dests: 750
 (0 4) 700 PRINT "WOW!  THAT'S SOME JUMPING.  OF THE" K "SUCCESSFUL JUMPS"
+  Origs: 650
+  Dests: 701
 (0 5) 701 PRINT "BEFORE YOURS, ONLY" K - K1 "OPENED THEIR CHUTES LOWER THAN"
+  Origs: 700
+  Dests: 702
 (0 2) 702 PRINT "YOU DID."
+  Origs: 701
+  Dests: 703
 (0 2) 703 GOTO 2000
+  Origs: 702
+  Dests: 2000
 (0 4) 710 PRINT "PRETTY GOOD! " K "SUCCESSFUL JUMPS PRECEDED YOURS AND ONLY"
+  Origs: 660
+  Dests: 711
 (0 4) 711 PRINT K - K1 " OF THEM GOT LOWER THAN YOU DID BEFORE THEIR CHUTES"
+  Origs: 710
+  Dests: 712
 (0 2) 712 PRINT "OPENED."
 (0 2)     GOTO 2000
+  Origs: 711
+  Dests: 2000
 (0 4) 720 PRINT "NOT BAD.  THERE HAVE BEEN" K "SUCCESSFUL JUMPS BEFORE YOURS."
+  Origs: 670
+  Dests: 721
 (0 5) 721 PRINT "YOU WERE BEATEN OUT BY" K - K1 "OF THEM."
 (0 2)     GOTO 2000
+  Origs: 720
+  Dests: 2000
 (0 5) 730 PRINT "CONSERVATIVE, AREN'T YOU?  YOU RANKED ONLY" K - K1 "IN THE"
+  Origs: 680
+  Dests: 731
 (0 3) 731 PRINT K "SUCCESSFUL JUMPS BEFORE YOURS."
 (0 2)     GOTO 2000
+  Origs: 730
+  Dests: 2000
 (0 2) 740 PRINT "HUMPH!  DON'T YOU HAVE ANY SPORTING BLOOD?  THERE WERE"
+  Origs: 690
+  Dests: 741
 (0 5) 741 PRINT K "SUCCESSFUL JUMPS BEFORE YOURS AND YOU CAME IN" K1 "JUMPS"
+  Origs: 740
+  Dests: 742
 (0 2) 742 PRINT "BETTER THAN THE WORST.  SHAPE UP!!!"
 (0 2)     GOTO 2000
+  Origs: 741
+  Dests: 2000
 (0 4) 750 PRINT "HEY!  YOU PULLED THE RIP CORD MUCH TOO SOON.  " K "SUCCESSFUL"
+  Origs: 695
+  Dests: 751
 (0 5) 751 PRINT "JUMPS BEFORE YOURS AND YOU CAME IN NUMBER" K - K1 "!  GET WITH IT!"
+  Origs: 750
+  Dests: 752
 (0 2) 752 GOTO 2000
+  Origs: 751
+  Dests: 2000
 (0 2) 800 PRINT "REQUIESCAT IN PACE."
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 2) 801 PRINT "MAY THE ANGEL OF HEAVEN LEAD YOU INTO PARADISE."
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 2) 802 PRINT "REST IN PEACE."
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 2) 803 PRINT "SON-OF-A-GUN."
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 2) 804 PRINT "#$%&&%!$"
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 2) 805 PRINT "A KICK IN THE PANTS IS A BOOST IF YOU'RE HEADED RIGHT."
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 2) 806 PRINT "HMMM. SHOULD HAVE PICKED A SHORTER TIME."
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 2) 807 PRINT "MUTTER. MUTTER. MUTTER."
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 2) 808 PRINT "PUSHING UP DAISIES."
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 2) 809 PRINT "EASY COME, EASY GO."
 (0 2)     GOTO 1950
+  Origs: 1005
+  Dests: 1950
 (0 4) 1000 PRINT SQR(2 * D1 / A), "SPLAT"
+  Origs: 330
+  Dests: 1005
 (10 23) 1005 ON INT(1 + (10 * RND(1))) GOTO 800, 801, 802, 803, 804, 805, 806, 807, 808, 809
+  Origs: 1000, 1020
+  Dests: 800, 801, 802, 803, 804, 805, 806, 807, 808, 809, 1010
 (0 13) 1010 PRINT (V / A) + ((D1 - (V ^ 2 / (2 * A))) / V), "SPLAT"
+  Origs: 420, 1005
+  Dests: 1020
 (0 3) 1020 GOTO 1005
+  Origs: 1010
+  Dests: 1005
 (0 2) 1950 PRINT "I'LL GIVE YOU ANOTHER CHANCE."
 (0 2)      GOTO 2000
+  Origs: 800, 801, 802, 803, 804, 805, 806, 807, 808, 809
+  Dests: 2000
 (0 2) 2000 PRINT "DO YOU WANT TO PLAY AGAIN";
 (1 2)      INPUT Z$
+  Origs: 639, 703, 712, 721, 731, 742, 752, 1950, 2003
+  Dests: 2001
 (1 5) 2001 IF Z$ = "YES" THEN 118
+  Origs: 2000
+  Dests: 118, 2002
 (1 4) 2002 IF Z$ = "NO" THEN 2005
+  Origs: 2001
+  Dests: 2003, 2005
 (0 2) 2003 PRINT "YES OR NO"
 (0 3)      GOTO 2000
+  Origs: 2002
+  Dests: 2000
 (0 2) 2005 PRINT "PLEASE";
 (1 2)      INPUT Z$
 (1 5)      IF Z$ = "YES" THEN 118
+  Origs: 2002, 2006
+  Dests: 118, 2006
 (1 5) 2006 IF Z$ <> "NO" THEN PRINT "YES OR NO ";
 (0 3)      GOTO 2005
+  Origs: 2005
+  Dests: 2005, 2007
 (0 2) 2007 PRINT "SSSSSSSSSS."
 (0 2)      PRINT
 (0 2)      GOTO 2046
+  Origs: 2006
+  Dests: 2046
 (0 1) 2046 END
+  Origs: 2007
+  Dests: 
 
 Unreachable code:
 

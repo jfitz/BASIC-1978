@@ -20,90 +20,214 @@ Halstead complexity:
  time: 17.434
 
 (0 4) 10 PRINT TAB(32); "REVERSE"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 30
 (0 2) 30 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 100
 (0 2) 100 PRINT "REVERSE -- A GAME OF SKILL"
 (0 2)     PRINT
+  Origs: 30
+  Dests: 130
 (0 2) 130 DIM A(20)
+  Origs: 100
+  Dests: 140
 (0 1) 140 REM *** N=NUMBER OF NUMBERS
+  Origs: 130
+  Dests: 150
 (0 3) 150 N = 9
+  Origs: 140
+  Dests: 160
 (0 2) 160 PRINT "DO YOU WANT THE RULES";
+  Origs: 150
+  Dests: 170
 (1 2) 170 INPUT A$
+  Origs: 160
+  Dests: 180
 (1 4) 180 IF A$ = "NO" THEN 210
+  Origs: 170
+  Dests: 190, 210
 (0 2) 190 GOSUB 710
+  Origs: 180
+  Dests: 200, 710
 (0 1) 200 REM *** MAKE A RANDOM LIST A(1) TO A(N)
+  Origs: 190
+  Dests: 210
 (0 4) 210 A(1) = INT((N - 1) * RND(1) + 2)
+  Origs: 180, 200, 550
+  Dests: 220
 (1 3) 220 FOR K = 2 TO N
+  Origs: 210
+  Dests: 230
 (0 4) 230 A(K) = INT(N * RND(1) + 1)
+  Origs: 220, 250
+  Dests: 240
 (1 4) 240 FOR J = 1 TO K - 1
+  Origs: 230
+  Dests: 250
 (1 5) 250 IF A(K) = A(J) THEN 230
+  Origs: 240
+  Dests: 230, 260
 (0 1) 260 NEXT J
 (0 1)     NEXT K
+  Origs: 250
+  Dests: 280
 (0 1) 280 REM *** PRINT ORIGINAL LIST AND START GAME
+  Origs: 260
+  Dests: 290
 (0 2) 290 PRINT
 (0 2)     PRINT "HERE WE GO ... THE LIST IS:"
+  Origs: 280
+  Dests: 310
 (0 3) 310 T = 0
+  Origs: 290
+  Dests: 320
 (0 2) 320 GOSUB 610
+  Origs: 310
+  Dests: 330, 610
 (0 2) 330 PRINT "HOW MANY SHALL I REVERSE";
+  Origs: 320, 370, 490
+  Dests: 340
 (1 2) 340 INPUT R
+  Origs: 330
+  Dests: 350
 (1 4) 350 IF R = 0 THEN 520
+  Origs: 340
+  Dests: 360, 520
 (1 4) 360 IF R <= N THEN 390
+  Origs: 350
+  Dests: 370, 390
 (0 3) 370 PRINT "OOPS! TOO MANY! I CAN REVERSE AT MOST"; N
 (0 3)     GOTO 330
+  Origs: 360
+  Dests: 330
 (0 4) 390 T = T + 1
+  Origs: 360
+  Dests: 400
 (0 1) 400 REM *** REVERSE R NUMBERS AND PRINT NEW LIST
+  Origs: 390
+  Dests: 410
 (1 4) 410 FOR K = 1 TO INT(R / 2)
+  Origs: 400
+  Dests: 420
 (0 3) 420 Z = A(K)
+  Origs: 410
+  Dests: 430
 (0 3) 430 A(K) = A(R - K + 1)
+  Origs: 420
+  Dests: 440
 (0 3) 440 A(R - K + 1) = Z
+  Origs: 430
+  Dests: 450
 (0 1) 450 NEXT K
+  Origs: 440
+  Dests: 460
 (0 2) 460 GOSUB 610
+  Origs: 450
+  Dests: 470, 610
 (0 1) 470 REM *** CHECK FOR A WIN
+  Origs: 460
+  Dests: 480
 (1 3) 480 FOR K = 1 TO N
+  Origs: 470
+  Dests: 490
 (1 5) 490 IF A(K) <> K THEN 330
+  Origs: 480
+  Dests: 330, 500
 (0 1) 500 NEXT K
+  Origs: 490
+  Dests: 510
 (0 4) 510 PRINT "YOU WON IT IN"; T; "MOVES!!!"
 (0 2)     PRINT
+  Origs: 500
+  Dests: 520
 (0 2) 520 PRINT
+  Origs: 350, 510
+  Dests: 530
 (0 2) 530 PRINT "TRY AGAIN (YES OR NO)";
+  Origs: 520
+  Dests: 540
 (1 2) 540 INPUT A$
+  Origs: 530
+  Dests: 550
 (1 5) 550 IF A$ = "YES" THEN 210
+  Origs: 540
+  Dests: 210, 560
 (0 2) 560 PRINT
 (0 2)     PRINT "O.K. HOPE YOU HAD FUN!!"
 (0 2)     GOTO 999
+  Origs: 550
+  Dests: 999
 (0 1) 600 REM *** SUBROUTINE TO PRINT LIST
+  Origs: 
+  Dests: 610
 (0 2) 610 PRINT
 (1 3)     FOR K = 1 TO N
 (0 2)     PRINT A(K);
 (0 1)     NEXT K
+  Origs: 320, 460, 600
+  Dests: 650
 (0 2) 650 PRINT
 (0 2)     PRINT
 (0 1)     RETURN
+  Origs: 610
+  Dests: 
 (0 1) 700 REM *** SUBROUTINE TO PRINT THE RULES
+  Origs: 
+  Dests: 710
 (0 2) 710 PRINT
 (0 2)     PRINT "THIS IS THE GAME OF 'REVERSE'.  TO WIN, ALL YOU HAVE"
+  Origs: 190, 700
+  Dests: 720
 (0 4) 720 PRINT "TO DO IS ARRANGE A LIST OF NUMBERS (1 THROUGH"; N; ")"
+  Origs: 710
+  Dests: 730
 (0 2) 730 PRINT "IN NUMERICAL ORDER FROM LEFT TO RIGHT.  TO MOVE, YOU"
+  Origs: 720
+  Dests: 740
 (0 2) 740 PRINT "TELL ME HOW MANY NUMBERS (COUNTING FROM THE LEFT) TO"
+  Origs: 730
+  Dests: 750
 (0 2) 750 PRINT "REVERSE.  FOR EXAMPLE, IF THE CURRENT LIST IS:"
+  Origs: 740
+  Dests: 760
 (0 2) 760 PRINT
 (0 2)     PRINT "2 3 4 5 1 6 7 8 9"
+  Origs: 750
+  Dests: 770
 (0 2) 770 PRINT
 (0 2)     PRINT "AND YOU REVERSE 4, THE RESULT WILL BE:"
+  Origs: 760
+  Dests: 780
 (0 2) 780 PRINT
 (0 2)     PRINT "5 4 3 2 1 6 7 8 9"
+  Origs: 770
+  Dests: 790
 (0 2) 790 PRINT
 (0 2)     PRINT "NOW IF YOU REVERSE 5, YOU WIN!"
+  Origs: 780
+  Dests: 800
 (0 2) 800 PRINT
 (0 2)     PRINT "1 2 3 4 5 6 7 8 9"
 (0 2)     PRINT
+  Origs: 790
+  Dests: 810
 (0 2) 810 PRINT "NO DOUBT YOU WILL LIKE THIS GAME, BUT"
+  Origs: 800
+  Dests: 820
 (0 2) 820 PRINT "IF YOU WANT TO QUIT, REVERSE 0 (ZERO)."
 (0 2)     PRINT
 (0 1)     RETURN
+  Origs: 810
+  Dests: 
 (0 1) 999 END
+  Origs: 560
+  Dests: 
 
 Unreachable code:
 

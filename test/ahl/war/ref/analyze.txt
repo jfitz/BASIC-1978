@@ -20,76 +20,212 @@ Halstead complexity:
  time: 20.074
 
 (0 4) 10 PRINT TAB(33); "WAR"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 30
 (0 2) 30 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 100
 (0 2) 100 PRINT "THIS IS THE CARD GAME OF WAR.  EACH CARD IS GIVEN BY SUIT-#"
+  Origs: 30
+  Dests: 110
 (0 2) 110 PRINT "AS S-7 FOR SPADE 7.  ";
+  Origs: 100
+  Dests: 120
 (0 2) 120 PRINT "DO YOU WANT DIRECTIONS";
+  Origs: 110, 170
+  Dests: 130
 (1 2) 130 INPUT B$
+  Origs: 120
+  Dests: 140
 (1 4) 140 IF B$ = "NO" THEN 210
+  Origs: 130
+  Dests: 150, 210
 (1 4) 150 IF B$ = "YES" THEN 180
+  Origs: 140
+  Dests: 160, 180
 (0 2) 160 PRINT "YES OR NO, PLEASE.  ";
+  Origs: 150
+  Dests: 170
 (0 3) 170 GOTO 120
+  Origs: 160
+  Dests: 120
 (0 2) 180 PRINT "THE COMPUTER GIVES YOU AND IT A 'CARD'.  THE HIGHER CARD"
+  Origs: 150
+  Dests: 190
 (0 2) 190 PRINT "(NUMERICALLY) WINS.  THE GAME ENDS WHEN YOU CHOOSE NOT TO"
+  Origs: 180
+  Dests: 200
 (0 2) 200 PRINT "CONTINUE OR WHEN YOU HAVE FINISHED THE PACK."
+  Origs: 190
+  Dests: 210
 (0 2) 210 PRINT
+  Origs: 140, 200
+  Dests: 220
 (0 2) 220 PRINT
+  Origs: 210
+  Dests: 230
 (0 3) 230 DIM A$(52), L(54)
+  Origs: 220
+  Dests: 240
 (1 3) 240 FOR I = 1 TO 52
+  Origs: 230
+  Dests: 250
 (1 2) 250 READ A$(I)
+  Origs: 240
+  Dests: 260
 (0 1) 260 NEXT I
+  Origs: 250
+  Dests: 270
 (0 1) 270 REM
+  Origs: 260
+  Dests: 280
 (1 3) 280 FOR J = 1 TO 52
+  Origs: 270
+  Dests: 290
 (0 5) 290 LET L(J) = INT(52 * RND(1)) + 1
+  Origs: 280, 330
+  Dests: 295
 (1 4) 295 IF J = 1 THEN 350
+  Origs: 290
+  Dests: 300, 350
 (1 4) 300 FOR K = 1 TO J - 1
+  Origs: 295
+  Dests: 310
 (1 4) 310 IF L(K) <> L(J) THEN 340
+  Origs: 300
+  Dests: 320, 340
 (0 1) 320 REM
+  Origs: 310
+  Dests: 330
 (0 3) 330 GOTO 290
+  Origs: 320
+  Dests: 290
 (0 1) 340 NEXT K
+  Origs: 310
+  Dests: 350
 (0 1) 350 NEXT J
+  Origs: 295, 340
+  Dests: 360
 (0 4) 360 P = P + 1
+  Origs: 350, 570
+  Dests: 370
 (0 3) 370 M1 = L(P)
+  Origs: 360
+  Dests: 380
 (0 4) 380 P = P + 1
+  Origs: 370
+  Dests: 390
 (0 3) 390 M2 = L(P)
+  Origs: 380
+  Dests: 400
 (0 2) 400 PRINT
+  Origs: 390
+  Dests: 420
 (0 5) 420 PRINT "YOU: "; A$(M1), "COMPUTER: "; A$(M2)
+  Origs: 400
+  Dests: 430
 (0 4) 430 N1 = INT((M1 - .5) / 4)
+  Origs: 420
+  Dests: 440
 (0 4) 440 N2 = INT((M2 - .5) / 4)
+  Origs: 430
+  Dests: 450
 (1 4) 450 IF N1 >= N2 THEN 490
+  Origs: 440
+  Dests: 460, 490
 (0 4) 460 A1 = A1 + 1
+  Origs: 450
+  Dests: 470
 (0 5) 470 PRINT "THE COMPUTER WINS!!! YOU HAVE"; B1; "AND THE COMPUTER HAS"; A1
+  Origs: 460
+  Dests: 480
 (0 2) 480 GOTO 540
+  Origs: 470
+  Dests: 540
 (1 4) 490 IF N1 = N2 THEN 530
+  Origs: 450
+  Dests: 500, 530
 (0 4) 500 B1 = B1 + 1
+  Origs: 490
+  Dests: 510
 (0 5) 510 PRINT "YOU WIN. YOU HAVE"; B1; "AND THE COMPUTER HAS"; A1
+  Origs: 500
+  Dests: 520
 (0 2) 520 GOTO 540
+  Origs: 510
+  Dests: 540
 (0 2) 530 PRINT "TIE.  NO SCORE CHANGE."
+  Origs: 490
+  Dests: 540
 (1 4) 540 IF L(P + 1) = 0 THEN 610
+  Origs: 480, 520, 530, 600
+  Dests: 550, 610
 (0 2) 550 PRINT "DO YOU WANT TO CONTINUE";
+  Origs: 540
+  Dests: 560
 (1 2) 560 INPUT V$
+  Origs: 550
+  Dests: 570
 (1 5) 570 IF V$ = "YES" THEN 360
+  Origs: 560
+  Dests: 360, 580
 (1 4) 580 IF V$ = "NO" THEN 650
+  Origs: 570
+  Dests: 590, 650
 (0 2) 590 PRINT "YES OR NO, PLEASE.  ";
+  Origs: 580
+  Dests: 600
 (0 3) 600 GOTO 540
+  Origs: 590
+  Dests: 540
 (0 2) 610 PRINT
+  Origs: 540
+  Dests: 620
 (0 2) 620 PRINT
+  Origs: 610
+  Dests: 630
 (0 3) 630 PRINT "WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: "; B1;
+  Origs: 620
+  Dests: 640
 (0 3) 640 PRINT "  THE COMPUTER: "; A1
 (0 2)     PRINT
+  Origs: 630
+  Dests: 650
 (0 2) 650 PRINT "THANKS FOR PLAYING.  IT WAS FUN."
+  Origs: 580, 640
+  Dests: 655
 (0 2) 655 PRINT
+  Origs: 650
+  Dests: 660
 (0 2) 660 DATA "S-2", "H-2", "C-2", "D-2", "S-3", "H-3", "C-3", "D-3"
+  Origs: 655
+  Dests: 670
 (0 2) 670 DATA "S-4", "H-4", "C-4", "D-4", "S-5", "H-5", "C-5", "D-5"
+  Origs: 660
+  Dests: 680
 (0 2) 680 DATA "S-6", "H-6", "C-6", "D-6", "S-7", "H-7", "C-7", "D-7"
+  Origs: 670
+  Dests: 690
 (0 2) 690 DATA "S-8", "H-8", "C-8", "D-8", "S-9", "H-9", "C-9", "D-9"
+  Origs: 680
+  Dests: 700
 (0 2) 700 DATA "S-10", "H-10", "C-10", "D-10", "S-J", "H-J", "C-J", "D-J"
+  Origs: 690
+  Dests: 710
 (0 2) 710 DATA "S-Q", "H-Q", "C-Q", "D-Q", "S-K", "H-K", "C-K", "D-K"
+  Origs: 700
+  Dests: 720
 (0 2) 720 DATA "S-A", "H-A", "C-A", "D-A"
+  Origs: 710
+  Dests: 999
 (0 1) 999 END
+  Origs: 720
+  Dests: 
 
 Unreachable code:
 

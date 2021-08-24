@@ -20,104 +20,236 @@ Halstead complexity:
  time: 102.658
 
 (0 4) 2 PRINT TAB(34); "LIFE"
+  Origs: 
+  Dests: 4
 (0 4) 4 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 2
+  Dests: 6
 (0 2) 6 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
+  Origs: 4
+  Dests: 8
 (0 2) 8 PRINT "ENTER YOUR PATTERN:"
+  Origs: 6
+  Dests: 9
 (0 3) 9 X1 = 1
 (0 3)   Y1 = 1
 (0 3)   X2 = 24
 (0 3)   Y2 = 70
+  Origs: 8
+  Dests: 10
 (0 3) 10 DIM A(24, 70), B$(24)
+  Origs: 9
+  Dests: 20
 (0 3) 20 C = 1
+  Origs: 10
+  Dests: 30
 (1 2) 30 INPUT B$(C)
+  Origs: 20, 70
+  Dests: 40
 (1 6) 40 IF B$(C) = "DONE" THEN B$(C) = ""
 (0 2)    GOTO 80
+  Origs: 30
+  Dests: 50, 80
 (1 9) 50 IF LEFT$(B$(C), 1) = "." THEN B$(C) = " " + RIGHT$(B$(C), LEN(B$(C)) - 1)
+  Origs: 40
+  Dests: 60
 (0 4) 60 C = C + 1
+  Origs: 50
+  Dests: 70
 (0 3) 70 GOTO 30
+  Origs: 60
+  Dests: 30
 (0 4) 80 C = C - 1
 (0 3)    L = 0
+  Origs: 40
+  Dests: 90
 (1 4) 90 FOR X = 1 TO C - 1
+  Origs: 80
+  Dests: 100
 (1 8) 100 IF LEN(B$(X)) > L THEN L = LEN(B$(X))
+  Origs: 90
+  Dests: 110
 (0 1) 110 NEXT X
+  Origs: 100
+  Dests: 120
 (0 6) 120 X1 = 11 - C / 2
+  Origs: 110
+  Dests: 130
 (0 6) 130 Y1 = 33 - L / 2
+  Origs: 120
+  Dests: 140
 (1 3) 140 FOR X = 1 TO C
+  Origs: 130
+  Dests: 150
 (1 4) 150 FOR Y = 1 TO LEN(B$(X))
+  Origs: 140
+  Dests: 160
 (1 7) 160 IF MID$(B$(X), Y, 1) <> " " THEN A(X1 + X, Y1 + Y) = 1
 (0 4)     P = P + 1
+  Origs: 150
+  Dests: 170, 170
 (0 1) 170 NEXT Y
+  Origs: 160, 160
+  Dests: 180
 (0 1) 180 NEXT X
+  Origs: 170
+  Dests: 200
 (0 2) 200 PRINT
 (0 2)     PRINT
 (0 2)     PRINT
+  Origs: 180
+  Dests: 210
 (0 5) 210 PRINT "GENERATION:"; G, "POPULATION:"; P;
 (1 4)     IF I9 THEN PRINT "INVALID!";
+  Origs: 200, 640
+  Dests: 215
 (0 3) 215 X3 = 24
 (0 3)     Y3 = 70
 (0 3)     X4 = 1
 (0 3)     Y4 = 1
 (0 3)     P = 0
+  Origs: 210
+  Dests: 220
 (0 4) 220 G = G + 1
+  Origs: 215
+  Dests: 225
 (1 4) 225 FOR X = 1 TO X1 - 1
 (0 2)     PRINT
 (0 1)     NEXT X
+  Origs: 220
+  Dests: 230
 (1 3) 230 FOR X = X1 TO X2
+  Origs: 225
+  Dests: 240
 (0 2) 240 PRINT
+  Origs: 230
+  Dests: 250
 (1 3) 250 FOR Y = Y1 TO Y2
+  Origs: 240
+  Dests: 253
 (1 6) 253 IF A(X, Y) = 2 THEN A(X, Y) = 0
 (0 2)     GOTO 270
+  Origs: 250
+  Dests: 256, 270
 (1 6) 256 IF A(X, Y) = 3 THEN A(X, Y) = 1
 (0 2)     GOTO 261
+  Origs: 253
+  Dests: 260, 261
 (1 4) 260 IF A(X, Y) <> 1 THEN 270
+  Origs: 256
+  Dests: 261, 270
 (0 4) 261 PRINT TAB(Y); "*";
+  Origs: 256, 260
+  Dests: 262
 (1 6) 262 IF X < X3 THEN X3 = X
+  Origs: 261
+  Dests: 264
 (1 6) 264 IF X > X4 THEN X4 = X
+  Origs: 262
+  Dests: 266
 (1 6) 266 IF Y < Y3 THEN Y3 = Y
+  Origs: 264
+  Dests: 268
 (1 6) 268 IF Y > Y4 THEN Y4 = Y
+  Origs: 266
+  Dests: 270
 (0 1) 270 NEXT Y
+  Origs: 253, 260, 268
+  Dests: 290
 (0 1) 290 NEXT X
+  Origs: 270
+  Dests: 295
 (1 4) 295 FOR X = X2 + 1 TO 24
 (0 2)     PRINT
 (0 1)     NEXT X
+  Origs: 290
+  Dests: 299
 (0 3) 299 X1 = X3
 (0 3)     X2 = X4
 (0 3)     Y1 = Y3
 (0 3)     Y2 = Y4
+  Origs: 295
+  Dests: 301
 (1 6) 301 IF X1 < 3 THEN X1 = 3
 (0 4)     I9 = -1
+  Origs: 299
+  Dests: 303, 303
 (1 6) 303 IF X2 > 22 THEN X2 = 22
 (0 4)     I9 = -1
+  Origs: 301, 301
+  Dests: 305, 305
 (1 6) 305 IF Y1 < 3 THEN Y1 = 3
 (0 4)     I9 = -1
+  Origs: 303, 303
+  Dests: 307, 307
 (1 6) 307 IF Y2 > 68 THEN Y2 = 68
 (0 4)     I9 = -1
+  Origs: 305, 305
+  Dests: 309, 309
 (0 3) 309 P = 0
+  Origs: 307, 307
+  Dests: 500
 (1 5) 500 FOR X = X1 - 1 TO X2 + 1
+  Origs: 309
+  Dests: 510
 (1 5) 510 FOR Y = Y1 - 1 TO Y2 + 1
+  Origs: 500
+  Dests: 520
 (0 3) 520 C = 0
+  Origs: 510
+  Dests: 530
 (1 5) 530 FOR I = X - 1 TO X + 1
+  Origs: 520
+  Dests: 540
 (1 5) 540 FOR J = Y - 1 TO Y + 1
+  Origs: 530
+  Dests: 550
 (1 10) 550 IF A(I, J) = 1 OR A(I, J) = 2 THEN C = C + 1
+  Origs: 540
+  Dests: 560
 (0 1) 560 NEXT J
+  Origs: 550
+  Dests: 570
 (0 1) 570 NEXT I
+  Origs: 560
+  Dests: 580
 (1 4) 580 IF A(X, Y) = 0 THEN 610
+  Origs: 570
+  Dests: 590, 610
 (1 9) 590 IF C < 3 OR C > 4 THEN A(X, Y) = 2
 (0 2)     GOTO 600
+  Origs: 580
+  Dests: 595, 600
 (0 4) 595 P = P + 1
+  Origs: 590
+  Dests: 600
 (0 2) 600 GOTO 620
+  Origs: 590, 595
+  Dests: 620
 (1 6) 610 IF C = 3 THEN A(X, Y) = 3
 (0 4)     P = P + 1
+  Origs: 580
+  Dests: 620, 620
 (0 1) 620 NEXT Y
+  Origs: 600, 610, 610
+  Dests: 630
 (0 1) 630 NEXT X
+  Origs: 620
+  Dests: 635
 (0 4) 635 X1 = X1 - 1
 (0 4)     Y1 = Y1 - 1
 (0 4)     X2 = X2 + 1
 (0 4)     Y2 = Y2 + 1
+  Origs: 630
+  Dests: 640
 (0 3) 640 GOTO 210
+  Origs: 635
+  Dests: 210
 (0 1) 650 END
+  Origs: 
+  Dests: 
 
 Unreachable code:
 

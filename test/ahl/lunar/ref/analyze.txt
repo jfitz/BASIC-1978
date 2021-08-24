@@ -20,96 +20,192 @@ Halstead complexity:
  time: 47.777
 
 (0 4) 10 PRINT TAB(33); "LUNAR"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 25
 (0 2) 25 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 30
 (0 2) 30 PRINT "THIS IS A COMPUTER SIMULATION OF AN APOLLO LUNAR"
+  Origs: 25
+  Dests: 40
 (0 2) 40 PRINT "LANDING CAPSULE."
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 30
+  Dests: 50
 (0 2) 50 PRINT "THE ON-BOARD COMPUTER HAS FAILED (IT WAS MADE BY"
+  Origs: 40
+  Dests: 60
 (0 2) 60 PRINT "XEROX) SO YOU HAVE TO LAND THE CAPSULE MANUALLY."
+  Origs: 50
+  Dests: 70
 (0 2) 70 PRINT
 (0 2)    PRINT "SET BURN RATE OF RETRO ROCKETS TO ANY VALUE BETWEEN"
+  Origs: 60, 440
+  Dests: 80
 (0 2) 80 PRINT "0 (FREE FALL) AND 200 (MAXIMUM BURN) POUNDS PER SECOND."
+  Origs: 70
+  Dests: 90
 (0 2) 90 PRINT "SET NEW BURN RATE EVERY 10 SECONDS."
 (0 2)    PRINT
+  Origs: 80
+  Dests: 100
 (0 2) 100 PRINT "CAPSULE WEIGHT 32,500 LBS; FUEL WEIGHT 16,500 LBS."
+  Origs: 90
+  Dests: 110
 (0 2) 110 PRINT
 (0 2)     PRINT
 (0 2)     PRINT
 (0 2)     PRINT "GOOD LUCK"
+  Origs: 100
+  Dests: 120
 (0 3) 120 L = 0
+  Origs: 110
+  Dests: 130
 (0 2) 130 PRINT
 (0 6)     PRINT "SEC", "MI + FT", "MPH", "LB FUEL", "BURN RATE"
 (0 2)     PRINT
+  Origs: 120
+  Dests: 140
 (0 3) 140 A = 120
 (0 3)     V = 1
 (0 3)     M = 33000
 (0 3)     N = 16500
 (0 3)     G = 1E-03
 (0 3)     Z = 1.8
+  Origs: 130
+  Dests: 150
 (0 10) 150 PRINT L, INT(A); INT(5280 * (A - INT(A))), 3600 * V, M - N,
 (1 2)     INPUT K
 (0 3)     T = 10
+  Origs: 140, 170
+  Dests: 160
 (1 5) 160 IF M - N < 1E-03 THEN 240
+  Origs: 150, 230, 390, 410
+  Dests: 170, 240
 (1 5) 170 IF T < 1E-03 THEN 150
+  Origs: 160
+  Dests: 150, 180
 (0 3) 180 S = T
 (1 8)     IF M >= N + S * K THEN 200
+  Origs: 170
+  Dests: 190, 200
 (0 5) 190 S = (M - N) / K
+  Origs: 180
+  Dests: 200
 (0 2) 200 GOSUB 420
 (1 4)     IF I <= 0 THEN 340
+  Origs: 180, 190
+  Dests: 210, 340, 420
 (1 4) 210 IF V <= 0 THEN 230
+  Origs: 200
+  Dests: 220, 230
 (1 4) 220 IF J < 0 THEN 370
+  Origs: 210
+  Dests: 230, 370
 (0 2) 230 GOSUB 330
 (0 3)     GOTO 160
+  Origs: 210, 220
+  Dests: 160, 330
 (0 4) 240 PRINT "FUEL OUT AT"; L; "SECONDS"
 (0 7)     S = (-V + SQR(V * V + 2 * A * G)) / G
+  Origs: 160
+  Dests: 250
 (0 6) 250 V = V + G * S
 (0 4)     L = L + S
+  Origs: 240
+  Dests: 260
 (0 4) 260 W = 3600 * V
 (0 6)     PRINT "ON MOON AT"; L; "SECONDS - IMPACT VELOCITY"; W; "MPH"
+  Origs: 250, 340
+  Dests: 274
 (1 5) 274 IF W <= 1.2 THEN PRINT "PERFECT LANDING!"
 (0 2)     GOTO 440
+  Origs: 260
+  Dests: 280, 440
 (1 5) 280 IF W <= 10 THEN PRINT "GOOD LANDING (COULD RE BETTER)"
 (0 2)     GOTO 440
+  Origs: 274
+  Dests: 282, 440
 (1 4) 282 IF W > 60 THEN 300
+  Origs: 280
+  Dests: 284, 300
 (0 2) 284 PRINT "CRAFT DAMAGE... YOU'RE STRANDED HERE UNTIL A RESCUE"
+  Origs: 282
+  Dests: 286
 (0 2) 286 PRINT "PARTY ARRIVES. HOPE YOU HAVE ENOUGH OXYGEN!"
+  Origs: 284
+  Dests: 288
 (0 2) 288 GOTO 440
+  Origs: 286
+  Dests: 440
 (0 2) 300 PRINT "SORRY THERE NERE NO SURVIVORS. YOU BLOW IT!"
+  Origs: 282
+  Dests: 310
 (0 5) 310 PRINT "IN FACT, YOU BLASTED A NEW LUNAR CRATER"; W * .227; "FEET DEEP!"
+  Origs: 300
+  Dests: 320
 (0 2) 320 GOTO 440
+  Origs: 310
+  Dests: 440
 (0 4) 330 L = L + S
 (0 4)     T = T - S
 (0 6)     M = M - S * K
 (0 3)     A = I
 (0 3)     V = J
 (0 1)     RETURN
+  Origs: 230, 360, 390
+  Dests: 
 (1 5) 340 IF S < 5E-03 THEN 260
+  Origs: 200, 360, 380
+  Dests: 260, 350
 (0 5) 350 D = V + SQR(V * V + 2 * A * (G - Z * K / M))
 (0 5)     S = 2 * A / D
+  Origs: 340
+  Dests: 360
 (0 2) 360 GOSUB 420
 (0 3)     GOSUB 330
 (0 3)     GOTO 340
+  Origs: 350
+  Dests: 330, 340, 420
 (0 10) 370 W = (1 - M * G / (Z * K)) / 2
 (0 12)     S = M * V / (Z * K * (W + SQR(W * W + V / Z))) + .05
 (0 2)     GOSUB 420
+  Origs: 220, 400
+  Dests: 380, 420
 (1 5) 380 IF I <= 0 THEN 340
+  Origs: 370
+  Dests: 340, 390
 (0 3) 390 GOSUB 330
 (1 5)     IF J > 0 THEN 160
+  Origs: 380
+  Dests: 160, 330, 400
 (1 5) 400 IF V > 0 THEN 370
+  Origs: 390
+  Dests: 370, 410
 (0 3) 410 GOTO 160
+  Origs: 400
+  Dests: 160
 (0 5) 420 Q = S * K / M
 (0 27)     J = V + G * S + Z * (-Q - Q * Q / 2 - Q ^ 3 / 3 - Q ^ 4 / 4 - Q ^ 5 / 5)
+  Origs: 200, 360, 370
+  Dests: 430
 (0 33) 430 I = A - G * S * S / 2 - V * S + Z * S * (Q / 2 + Q ^ 2 / 6 + Q ^ 3 / 12 + Q ^ 4 / 20 + Q ^ 5 / 30)
 (0 1)     RETURN
+  Origs: 420
+  Dests: 
 (0 2) 440 PRINT
 (0 2)     PRINT
 (0 2)     PRINT
 (0 2)     PRINT "TRY AGAIN??"
 (0 3)     GOTO 70
+  Origs: 274, 280, 288, 320
+  Dests: 70
 
 Unreachable code:
 

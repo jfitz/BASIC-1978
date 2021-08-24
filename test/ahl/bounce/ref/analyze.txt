@@ -20,60 +20,166 @@ Halstead complexity:
  time: 23.103
 
 (0 4) 10 PRINT TAB(33); "BOUNCE"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 30
 (0 2) 30 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 90
 (0 2) 90 DIM T(20)
+  Origs: 30
+  Dests: 100
 (0 2) 100 PRINT "THIS SIMULATION LETS YOU SPECIFY THE INITIAL VELOCITY"
+  Origs: 90
+  Dests: 110
 (0 2) 110 PRINT "OF A BALL THROWN STRAIGHT UP, AND THE COEFFICIENT OF"
+  Origs: 100
+  Dests: 120
 (0 2) 120 PRINT "ELASTICITY OF THE BALL.  PLEASE USE A DECIMAL FRACTION"
+  Origs: 110
+  Dests: 130
 (0 2) 130 PRINT "COEFFICIENCY (LESS THAN 1)."
+  Origs: 120
+  Dests: 131
 (0 2) 131 PRINT
+  Origs: 130
+  Dests: 132
 (0 2) 132 PRINT "YOU ALSO SPECIFY THE TIME INCREMENT TO BE USED IN"
+  Origs: 131
+  Dests: 133
 (0 2) 133 PRINT "'STROBING' THE BALL'S FLIGHT (TRY .1 INITIALLY)."
+  Origs: 132
+  Dests: 134
 (0 2) 134 PRINT
+  Origs: 133
+  Dests: 135
 (1 2) 135 INPUT "TIME INCREMENT (SEC)"; S2
+  Origs: 134, 430
+  Dests: 140
 (0 2) 140 PRINT
+  Origs: 135
+  Dests: 150
 (1 2) 150 INPUT "VELOCITY (FPS)"; V
+  Origs: 140
+  Dests: 160
 (0 2) 160 PRINT
+  Origs: 150
+  Dests: 170
 (1 2) 170 INPUT "COEFFICIENT"; C
+  Origs: 160
+  Dests: 180
 (0 2) 180 PRINT
+  Origs: 170
+  Dests: 182
 (0 2) 182 PRINT "FEET"
+  Origs: 180
+  Dests: 184
 (0 2) 184 PRINT
+  Origs: 182
+  Dests: 186
 (0 4) 186 S1 = INT(70 / (V / (16 * S2)))
+  Origs: 184
+  Dests: 190
 (1 3) 190 FOR I = 1 TO S1
+  Origs: 186
+  Dests: 200
 (0 9) 200 T(I) = V * C ^ (I - 1) / 16
+  Origs: 190
+  Dests: 210
 (0 1) 210 NEXT I
+  Origs: 200
+  Dests: 220
 (1 6) 220 FOR H = INT(-16 * (V / 32) ^ 2 + V ^ 2 / 32 + .5) TO 0 STEP -.5
+  Origs: 210
+  Dests: 221
 (1 5) 221 IF INT(H) <> H THEN 225
+  Origs: 220
+  Dests: 222, 225
 (0 2) 222 PRINT H;
+  Origs: 221
+  Dests: 225
 (0 3) 225 L = 0
+  Origs: 221, 222
+  Dests: 230
 (1 3) 230 FOR I = 1 TO S1
+  Origs: 225
+  Dests: 240
 (1 4) 240 FOR T = 0 TO T(I) STEP S2
+  Origs: 230
+  Dests: 245
 (0 4) 245 L = L + S2
+  Origs: 240
+  Dests: 250
 (1 5) 250 IF ABS(H - (.5 * (-32) * T ^ 2 + V * C ^ (I - 1) * T)) > .25 THEN 270
+  Origs: 245
+  Dests: 260, 270
 (0 4) 260 PRINT TAB(L / S2); "0";
+  Origs: 250
+  Dests: 270
 (0 1) 270 NEXT T
+  Origs: 250, 260
+  Dests: 275
 (0 4) 275 T = T(I + 1) / 2
+  Origs: 270
+  Dests: 276
 (1 16) 276 IF -16 * T ^ 2 + V * C ^ (I - 1) * T < H THEN 290
+  Origs: 275
+  Dests: 280, 290
 (0 1) 280 NEXT I
+  Origs: 276
+  Dests: 290
 (0 2) 290 PRINT
+  Origs: 276, 280
+  Dests: 300
 (0 1) 300 NEXT H
+  Origs: 290
+  Dests: 310
 (0 3) 310 PRINT TAB(1);
+  Origs: 300
+  Dests: 320
 (1 6) 320 FOR I = 1 TO INT(L + 1) / S2 + 1
+  Origs: 310
+  Dests: 330
 (0 2) 330 PRINT ".";
+  Origs: 320
+  Dests: 340
 (0 1) 340 NEXT I
+  Origs: 330
+  Dests: 350
 (0 2) 350 PRINT
+  Origs: 340
+  Dests: 355
 (0 2) 355 PRINT " 0";
+  Origs: 350
+  Dests: 360
 (1 4) 360 FOR I = 1 TO INT(L + .9995)
+  Origs: 355
+  Dests: 380
 (0 4) 380 PRINT TAB(INT(I / S2)); I;
+  Origs: 360
+  Dests: 390
 (0 1) 390 NEXT I
+  Origs: 380
+  Dests: 400
 (0 2) 400 PRINT
+  Origs: 390
+  Dests: 410
 (0 4) 410 PRINT TAB(INT(L + 1) / (2 * S2) - 2); "SECONDS"
+  Origs: 400
+  Dests: 420
 (0 2) 420 PRINT
+  Origs: 410
+  Dests: 430
 (0 3) 430 GOTO 135
+  Origs: 420
+  Dests: 135
 (0 1) 440 END
+  Origs: 
+  Dests: 
 
 Unreachable code:
 

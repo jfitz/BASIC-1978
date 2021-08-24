@@ -20,32 +20,82 @@ Halstead complexity:
  time: 0.445
 
 (0 3) 10 LET A = 1
+  Origs: 
+  Dests: 20
 (0 3) 20 LET B = 1
+  Origs: 10
+  Dests: 30
 (1 4) 30 IF A = B THEN 37
+  Origs: 20
+  Dests: 31, 37
 (0 2) 31 PRINT "30 NOT EQUAL"
+  Origs: 30
+  Dests: 32
 (0 2) 32 GOTO 40
+  Origs: 31
+  Dests: 40
 (0 2) 37 PRINT "30 EQUAL"
+  Origs: 30
+  Dests: 40
 (1 5) 40 IF A = B THEN 47 ELSE 43
+  Origs: 32, 37
+  Dests: 41, 43, 47
 (0 2) 41 PRINT "40 EQUAL"
+  Origs: 40
+  Dests: 42
 (0 2) 42 GOTO 50
+  Origs: 41
+  Dests: 50
 (0 2) 43 PRINT "40 NOT EQUAL"
+  Origs: 40
+  Dests: 44
 (0 2) 44 GOTO 50
+  Origs: 43
+  Dests: 50
 (0 2) 47 PRINT "40 EQUAL"
+  Origs: 40
+  Dests: 50
 (1 5) 50 IF A = B THEN PRINT "50 EQUAL"
 (0 2)    PRINT "50 EQUAL 2"
+  Origs: 42, 44, 47
+  Dests: 55
 (0 2) 55 PRINT "50 DONE"
+  Origs: 50
+  Dests: 60
 (1 6) 60 IF A = B THEN 67 ELSE PRINT "60 NOT EQUAL"
+  Origs: 55
+  Dests: 65, 67
 (0 2) 65 PRINT "60 NOT EQUAL"
+  Origs: 60
+  Dests: 66
 (0 2) 66 GOTO 70
+  Origs: 65
+  Dests: 70
 (0 2) 67 PRINT "60 EQUAL"
+  Origs: 60
+  Dests: 70
 (1 6) 70 IF A = B THEN PRINT "70 EQUAL" ELSE 73
+  Origs: 66, 67
+  Dests: 71, 73
 (0 2) 71 PRINT "70 EQUAL"
+  Origs: 70
+  Dests: 72
 (0 2) 72 GOTO 80
+  Origs: 71
+  Dests: 80
 (0 2) 73 PRINT "70 NOT EQUAL"
+  Origs: 70
+  Dests: 80
 (1 7) 80 IF A = B THEN PRINT "80 EQUAL" ELSE PRINT "80 NOT EQUAL"
 (0 2)    PRINT "80 NOT EQUAL 2"
+  Origs: 72, 73
+  Dests: 85
 (0 2) 85 PRINT "80 DONE"
+  Origs: 80
+  Dests: 99
 (0 1) 99 END
+  Origs: 85
+  Dests: 
 
 Unreachable code:
 

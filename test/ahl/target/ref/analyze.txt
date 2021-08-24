@@ -20,99 +20,201 @@ Halstead complexity:
  time: 34.915
 
 (0 4) 10 PRINT TAB(33); "TARGET"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 30
 (0 2) 30 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 100
 (0 3) 100 R = 1
 (0 3)     R1 = 57.296
 (0 3)     P = 3.14159
+  Origs: 30
+  Dests: 110
 (0 2) 110 PRINT "YOU ARE THE WEAPONS OFFICER ON THE STARSHIP ENTERPRISE"
+  Origs: 100
+  Dests: 120
 (0 2) 120 PRINT "AND THIS IS A TEST TO SEE HOW ACCURATE A SHOT YOU"
+  Origs: 110
+  Dests: 130
 (0 2) 130 PRINT "ARE IN A THREE-DIMENSIONAL RANGE.  YOU WILL BE TOLD"
+  Origs: 120
+  Dests: 140
 (0 2) 140 PRINT "THE RADIAN OFFSET FOR THE X AND Z AXES, THE LOCATION"
+  Origs: 130
+  Dests: 150
 (0 2) 150 PRINT "OF THE TARGET IN THREE DIMENSIONAL RECTANGULAR COORDINATES,"
+  Origs: 140
+  Dests: 160
 (0 2) 160 PRINT "THE APPROXIMATE NUMBER OF DEGREES FROM THE X AND Z"
+  Origs: 150
+  Dests: 170
 (0 2) 170 PRINT "AXES, AND THE APPROXIMATE DISTANCE TO THE TARGET."
+  Origs: 160
+  Dests: 180
 (0 2) 180 PRINT "YOU WILL THEN PROCEEED TO SHOOT AT THE TARGET UNTIL IT IS"
+  Origs: 170
+  Dests: 190
 (0 2) 190 PRINT "DESTROYED!"
 (0 2)     PRINT
 (0 2)     PRINT "GOOD LUCK!!"
 (0 2)     PRINT
 (0 2)     PRINT
+  Origs: 180
+  Dests: 220
 (0 6) 220 A = RND(1) * 2 * P
 (0 6)     B = RND(1) * 2 * P
 (0 4)     Q = INT(A * R1)
 (0 4)     W = INT(B * R1)
+  Origs: 190, 590
+  Dests: 260
 (0 5) 260 PRINT "RADIANS FROM X AXIS ="; A; "   FROM Z AXIS ="; B
+  Origs: 220
+  Dests: 280
 (0 7) 280 P1 = 100000 * RND(1) + RND(1)
 (0 7)     X = SIN(B) * COS(A) * P1
 (0 7)     Y = SIN(B) * SIN(A) * P1
+  Origs: 260
+  Dests: 290
 (0 5) 290 Z = COS(B) * P1
+  Origs: 280
+  Dests: 340
 (0 7) 340 PRINT "TARGET SIGHTED: APPROXIMATE COORDINATES:  X="; X; "  Y="; Y; "  Z="; Z
+  Origs: 290
+  Dests: 345
 (0 4) 345 R = R + 1
 (1 4)     IF R > 5 THEN 390
+  Origs: 340, 830
+  Dests: 350, 390
 (5 7) 350 ON R GOTO 355, 360, 365, 370, 375
+  Origs: 345
+  Dests: 355, 360, 365, 370, 375
 (0 5) 355 P3 = INT(P1 * .05) * 20
 (0 2)     GOTO 390
+  Origs: 350
+  Dests: 390
 (0 5) 360 P3 = INT(P1 * .1) * 10
 (0 2)     GOTO 390
+  Origs: 350
+  Dests: 390
 (0 5) 365 P3 = INT(P1 * .5) * 2
 (0 2)     GOTO 390
+  Origs: 350
+  Dests: 390
 (0 4) 370 P3 = INT(P1)
 (0 2)     GOTO 390
+  Origs: 350
+  Dests: 390
 (0 3) 375 P3 = P1
+  Origs: 350
+  Dests: 390
 (0 3) 390 PRINT "     ESTIMATED DISTANCE:"; P3
+  Origs: 345, 355, 360, 365, 370, 375
+  Dests: 400
 (0 2) 400 PRINT
 (0 2)     PRINT "INPUT ANGLE DEVIATION FROM X, DEVIATION FROM Z, DISTANCE";
+  Origs: 390
+  Dests: 405
 (3 4) 405 INPUT A1, B1, P2
+  Origs: 400
+  Dests: 410
 (0 2) 410 PRINT
 (1 5)     IF P2 < 20 THEN PRINT "YOU BLEW YOURSELF UP!!"
 (0 2)     GOTO 580
+  Origs: 405
+  Dests: 420, 580
 (0 4) 420 A1 = A1 / R1
 (0 4)     B1 = B1 / R1
 (0 4)     PRINT "RADIANS FROM X AXIS ="; A1; "  ";
+  Origs: 410
+  Dests: 425
 (0 3) 425 PRINT "FROM Z AXIS ="; B1
+  Origs: 420
+  Dests: 480
 (0 7) 480 X1 = P2 * SIN(B1) * COS(A1)
 (0 7)     Y1 = P2 * SIN(B1) * SIN(A1)
 (0 5)     Z1 = P2 * COS(B1)
+  Origs: 425
+  Dests: 510
 (0 16) 510 D = ((X1 - X) ^ 2 + (Y1 - Y) ^ 2 + (Z1 - Z) ^ 2) ^ (1 / 2)
+  Origs: 480
+  Dests: 520
 (1 4) 520 IF D > 20 THEN 670
+  Origs: 510
+  Dests: 530, 670
 (0 2) 530 PRINT
 (0 2)     PRINT " * * * HIT * * *   TARGET IS NON-FUNCTIONAL"
 (0 2)     PRINT
+  Origs: 520
+  Dests: 550
 (0 4) 550 PRINT "DISTANCE OF EXPLOSION FROM TARGET WAS"; D; "KILOMETERS."
+  Origs: 530
+  Dests: 570
 (0 2) 570 PRINT
 (0 4)     PRINT "MISSION ACCOMPLISHED IN "; R; " SHOTS."
+  Origs: 550
+  Dests: 580
 (0 3) 580 R = 0
 (1 3)     FOR I = 1 TO 5
 (0 2)     PRINT
 (0 1)     NEXT I
 (0 2)     PRINT "NEXT TARGET..."
 (0 2)     PRINT
+  Origs: 410, 570
+  Dests: 590
 (0 3) 590 GOTO 220
+  Origs: 580
+  Dests: 220
 (0 4) 670 X2 = X1 - X
 (0 4)     Y2 = Y1 - Y
 (0 4)     Z2 = Z1 - Z
 (1 4)     IF X2 < 0 THEN 730
+  Origs: 520
+  Dests: 710, 730
 (0 4) 710 PRINT "SHOT IN FRONT OF TARGET"; X2; "KILOMETERS."
 (0 2)     GOTO 740
+  Origs: 670
+  Dests: 740
 (0 5) 730 PRINT "SHOT BEHIND TARGET"; -X2; "KILOMETERS."
+  Origs: 670
+  Dests: 740
 (1 4) 740 IF Y2 < 0 THEN 770
+  Origs: 710, 730
+  Dests: 750, 770
 (0 4) 750 PRINT "SHOT TO LEFT OF TARGET"; Y2; "KILOMETERS."
 (0 2)     GOTO 780
+  Origs: 740
+  Dests: 780
 (0 5) 770 PRINT "SHOT TO RIGHT OF TARGET"; -Y2; "KILOMETERS."
+  Origs: 740
+  Dests: 780
 (1 4) 780 IF Z2 < 0 THEN 810
+  Origs: 750, 770
+  Dests: 790, 810
 (0 4) 790 PRINT "SHOT ABOVE TARGET"; Z2; "KILOMETERS."
 (0 2)     GOTO 820
+  Origs: 780
+  Dests: 820
 (0 5) 810 PRINT "SHOT BELOW TARGET"; -Z2; "KILOMETERS."
+  Origs: 780
+  Dests: 820
 (0 7) 820 PRINT "APPROX POSITION OF EXPLOSION:  X="; X1; "   Y="; Y1; "   Z="; Z1
+  Origs: 790, 810
+  Dests: 830
 (0 3) 830 PRINT "     DISTANCE FROM TARGET ="; D
 (0 2)     PRINT
 (0 2)     PRINT
 (0 2)     PRINT
 (0 3)     GOTO 345
+  Origs: 820
+  Dests: 345
 (0 1) 999 END
+  Origs: 
+  Dests: 
 
 Unreachable code:
 

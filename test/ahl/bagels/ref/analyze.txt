@@ -20,100 +20,262 @@ Halstead complexity:
  time: 53.410
 
 (0 4) 5 PRINT TAB(33); "BAGELS"
+  Origs: 
+  Dests: 10
 (0 4) 10 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 5
+  Dests: 15
 (0 1) 15 REM *** BAGLES NUMBER GUESSING GAME
+  Origs: 10
+  Dests: 20
 (0 1) 20 REM *** ORIGINAL SOURCE UNKNOWN BUT SUSPECTED TO BE
+  Origs: 15
+  Dests: 25
 (0 1) 25 REM *** LAWRENCE HALL OF SCIENCE, U.C. BERKELY
+  Origs: 20
+  Dests: 30
 (0 4) 30 DIM A1(6), A(3), B(3)
+  Origs: 25
+  Dests: 40
 (0 3) 40 Y = 0
 (0 3)    T = 255
+  Origs: 30
+  Dests: 50
 (0 2) 50 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 40
+  Dests: 70
 (1 2) 70 INPUT "WOULD YOU LIKE THE RULES (YES OR NO)"; A$
+  Origs: 50
+  Dests: 90
 (1 5) 90 IF LEFT$(A$, 1) = "N" THEN 150
+  Origs: 70
+  Dests: 100, 150
 (0 2) 100 PRINT
 (0 2)     PRINT "I AM THINKING OF A THREE-DIGIT NUMBER.  TRY TO GUESS"
+  Origs: 90
+  Dests: 110
 (0 2) 110 PRINT "MY NUMBER AND I WILL GIVE YOU CLUES AS FOLLOWS:"
+  Origs: 100
+  Dests: 120
 (0 2) 120 PRINT "   PICO   - ONE DIGIT CORRECT BUT IN THE WRONG POSITION"
+  Origs: 110
+  Dests: 130
 (0 2) 130 PRINT "   FERMI  - ONE DIGIT CORRECT AND IN THE RIGHT POSITION"
+  Origs: 120
+  Dests: 140
 (0 2) 140 PRINT "   BAGELS - NO DIGITS CORRECT"
+  Origs: 130
+  Dests: 150
 (1 3) 150 FOR I = 1 TO 3
+  Origs: 90, 140, 720
+  Dests: 160
 (0 4) 160 A(I) = INT(10 * RND(1))
+  Origs: 150, 180
+  Dests: 165
 (1 5) 165 IF I - 1 = 0 THEN 200
+  Origs: 160
+  Dests: 170, 200
 (1 4) 170 FOR J = 1 TO I - 1
+  Origs: 165
+  Dests: 180
 (1 5) 180 IF A(I) = A(J) THEN 160
+  Origs: 170
+  Dests: 160, 190
 (0 1) 190 NEXT J
+  Origs: 180
+  Dests: 200
 (0 1) 200 NEXT I
+  Origs: 165, 190
+  Dests: 210
 (0 2) 210 PRINT
 (0 2)     PRINT "O.K.  I HAVE A NUMBER IN MIND."
+  Origs: 200
+  Dests: 220
 (1 3) 220 FOR I = 1 TO 20
+  Origs: 210
+  Dests: 230
 (0 3) 230 PRINT "GUESS #"; I,
+  Origs: 220, 310, 630, 660
+  Dests: 240
 (1 2) 240 INPUT A$
+  Origs: 230
+  Dests: 245
 (1 5) 245 IF LEN(A$) <> 3 THEN 630
+  Origs: 240
+  Dests: 250, 630
 (1 3) 250 FOR Z = 1 TO 3
 (0 4)     A1(Z) = ASC(MID$(A$, Z, 1))
 (0 1)     NEXT Z
+  Origs: 245
+  Dests: 260
 (1 3) 260 FOR J = 1 TO 3
+  Origs: 250
+  Dests: 270
 (1 4) 270 IF A1(J) < 48 THEN 300
+  Origs: 260
+  Dests: 280, 300
 (1 4) 280 IF A1(J) > 57 THEN 300
+  Origs: 270
+  Dests: 285, 300
 (0 4) 285 B(J) = A1(J) - 48
+  Origs: 280
+  Dests: 290
 (0 1) 290 NEXT J
+  Origs: 285
+  Dests: 295
 (0 2) 295 GOTO 320
+  Origs: 290
+  Dests: 320
 (0 2) 300 PRINT "WHAT?"
+  Origs: 270, 280
+  Dests: 310
 (0 3) 310 GOTO 230
+  Origs: 300
+  Dests: 230
 (1 4) 320 IF B(1) = B(2) THEN 650
+  Origs: 295
+  Dests: 330, 650
 (1 4) 330 IF B(2) = B(3) THEN 650
+  Origs: 320
+  Dests: 340, 650
 (1 4) 340 IF B(3) = B(1) THEN 650
+  Origs: 330
+  Dests: 350, 650
 (0 3) 350 C = 0
 (0 3)     D = 0
+  Origs: 340
+  Dests: 360
 (1 3) 360 FOR J = 1 TO 2
+  Origs: 350
+  Dests: 370
 (1 4) 370 IF A(J) <> B(J + 1) THEN 390
+  Origs: 360
+  Dests: 380, 390
 (0 4) 380 C = C + 1
+  Origs: 370
+  Dests: 390
 (1 4) 390 IF A(J + 1) <> B(J) THEN 410
+  Origs: 370, 380
+  Dests: 400, 410
 (0 4) 400 C = C + 1
+  Origs: 390
+  Dests: 410
 (0 1) 410 NEXT J
+  Origs: 390, 400
+  Dests: 420
 (1 4) 420 IF A(1) <> B(3) THEN 440
+  Origs: 410
+  Dests: 430, 440
 (0 4) 430 C = C + 1
+  Origs: 420
+  Dests: 440
 (1 4) 440 IF A(3) <> B(1) THEN 460
+  Origs: 420, 430
+  Dests: 450, 460
 (0 4) 450 C = C + 1
+  Origs: 440
+  Dests: 460
 (1 3) 460 FOR J = 1 TO 3
+  Origs: 440, 450
+  Dests: 470
 (1 4) 470 IF A(J) <> B(J) THEN 490
+  Origs: 460
+  Dests: 480, 490
 (0 4) 480 D = D + 1
+  Origs: 470
+  Dests: 490
 (0 1) 490 NEXT J
+  Origs: 470, 480
+  Dests: 500
 (1 4) 500 IF D = 3 THEN 680
+  Origs: 490
+  Dests: 505, 680
 (1 4) 505 IF C = 0 THEN 545
+  Origs: 500
+  Dests: 520, 545
 (1 3) 520 FOR J = 1 TO C
+  Origs: 505
+  Dests: 530
 (0 2) 530 PRINT "PICO ";
+  Origs: 520
+  Dests: 540
 (0 1) 540 NEXT J
+  Origs: 530
+  Dests: 545
 (1 4) 545 IF D = 0 THEN 580
+  Origs: 505, 540
+  Dests: 550, 580
 (1 3) 550 FOR J = 1 TO D
+  Origs: 545
+  Dests: 560
 (0 2) 560 PRINT "FERMI ";
+  Origs: 550
+  Dests: 570
 (0 1) 570 NEXT J
+  Origs: 560
+  Dests: 580
 (1 5) 580 IF C + D <> 0 THEN 600
+  Origs: 545, 570
+  Dests: 590, 600
 (0 2) 590 PRINT "BAGELS";
+  Origs: 580
+  Dests: 600
 (0 2) 600 PRINT
+  Origs: 580, 590
+  Dests: 605
 (0 1) 605 NEXT I
+  Origs: 600
+  Dests: 610
 (0 2) 610 PRINT "OH WELL."
+  Origs: 605
+  Dests: 615
 (0 8) 615 PRINT "THAT'S TWNETY GUESSES.  MY NUMBER WAS"; 100 * A(1) + 10 * A(2) + A(3)
+  Origs: 610
+  Dests: 620
 (0 2) 620 GOTO 700
+  Origs: 615
+  Dests: 700
 (0 2) 630 PRINT "TRY GUESSING A THREE-DIGIT NUMBER."
 (0 3)     GOTO 230
+  Origs: 245
+  Dests: 230
 (0 2) 650 PRINT "OH, I FORGOT TO TELL YOU THAT THE NUMBER I HAVE IN MIND"
+  Origs: 320, 330, 340
+  Dests: 660
 (0 2) 660 PRINT "HAS NO TWO DIGITS THE SAME."
 (0 3)     GOTO 230
+  Origs: 650
+  Dests: 230
 (0 2) 680 PRINT "YOU GOT IT!!!"
 (0 2)     PRINT
+  Origs: 500
+  Dests: 690
 (0 4) 690 Y = Y + 1
+  Origs: 680
+  Dests: 700
 (1 2) 700 INPUT "PLAY AGAIN (YES OR NO)"; A$
+  Origs: 620, 690
+  Dests: 720
 (1 6) 720 IF LEFT$(A$, 1) = "YES" THEN 150
+  Origs: 700
+  Dests: 150, 730
 (1 4) 730 IF Y = 0 THEN 750
+  Origs: 720
+  Dests: 740, 750
 (0 2) 740 PRINT
 (0 4)     PRINT "A"; Y; "POINT BAGELS BUFF!!"
+  Origs: 730
+  Dests: 750
 (0 2) 750 PRINT "HOPE YOU HAD FUN.  BYE."
+  Origs: 730, 740
+  Dests: 999
 (0 1) 999 END
+  Origs: 750
+  Dests: 
 
 Unreachable code:
 

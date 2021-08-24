@@ -20,194 +20,516 @@ Halstead complexity:
  time: 108.333
 
 (0 1) 10 REM SOLVE LINEAR PROGRAM VIA SIMPLEX ALGORITHM
+  Origs: 
+  Dests: 11
 (0 2) 11 OPTION BASE 1
+  Origs: 10
+  Dests: 12
 (0 2) 12 OPTION REQUIRE_INITIALIZED TRUE
+  Origs: 11
+  Dests: 13
 (0 2) 13 OPTION FORGET_FORNEXT TRUE
+  Origs: 12
+  Dests: 14
 (0 2) 14 OPTION LOCK_FORNEXT TRUE
+  Origs: 13
+  Dests: 20
 (0 1) 20 REM N1 = 0 ' NUMBER OF DECISION VARIABLES
+  Origs: 14
+  Dests: 21
 (0 1) 21 REM N2 = 0 ' NUMBER OF CONSTRAINTS (AND SLACK VARIABLES)
+  Origs: 20
+  Dests: 30
 (0 1) 30 REM X(N2, N1+N2) ' CENTRAL MATRIX
+  Origs: 21
+  Dests: 31
 (0 1) 31 REM B(N2)        ' RIGHT-HAND SIDE VALUES
+  Origs: 30
+  Dests: 32
 (0 1) 32 REM C1$(N2)      ' NAMES OF BASIC VARIABLES
+  Origs: 31
+  Dests: 33
 (0 1) 33 REM C$(N1+N2)    ' NAMES OF DECISION AND SLACK VARIABLES
+  Origs: 32
+  Dests: 34
 (0 1) 34 REM C(N1+N2)     ' COEFFICIENTS FOR OBJECTIVE FUNCTION
+  Origs: 33
+  Dests: 35
 (0 1) 35 REM Z(N1+N2)     ' EVAL STEP FOR PIVOT COLUMN SELECTION
+  Origs: 34
+  Dests: 36
 (0 1) 36 REM B1(N2)       ' EVAL STEP FOR PIVOT ROW SELECTION
+  Origs: 35
+  Dests: 37
 (0 1) 37 REM R()          ' OBJECTIVE COEFFICIENT FOR BASIC VARIABLE
+  Origs: 36
+  Dests: 38
 (0 1) 38 REM I0, J0       ' ROW AND COLUMN OF PIVOT CELL
+  Origs: 37
+  Dests: 100
 (0 1) 100 REM READ DIMENSIONS
+  Origs: 38
+  Dests: 101
 (2 3) 101 READ N1, N2
+  Origs: 100
+  Dests: 110
 (0 1) 110 REM BUILD COEFFICIENTS FOR EXPANDED OBJECTIVE FUNCTION
+  Origs: 101
+  Dests: 111
 (0 2) 111 DIM C(N1)
+  Origs: 110
+  Dests: 112
 (1 2) 112 ARR READ C
+  Origs: 111
+  Dests: 113
 (0 2) 113 DIM C(N1 + N2)
+  Origs: 112
+  Dests: 114
 (0 3) 114 C(J) = 0
 (1 2)       FOR J = N1 + 1 TO N1 + N2
 (0 1)       NEXT J
+  Origs: 113
+  Dests: 120
 (0 1) 120 REM BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
+  Origs: 114
+  Dests: 121
 (0 2) 121 DIM C$(N1 + N2)
+  Origs: 120
+  Dests: 122
 (1 3) 122 FOR I = 1 TO N1
+  Origs: 121
+  Dests: 123
 (0 5) 123 C$(I) = "X" + STR$(I)
+  Origs: 122
+  Dests: 124
 (0 1) 124 NEXT I
+  Origs: 123
+  Dests: 125
 (1 3) 125 FOR I = 1 TO N2
+  Origs: 124
+  Dests: 126
 (0 5) 126 C$(I + N1) = "S" + STR$(I)
+  Origs: 125
+  Dests: 127
 (0 1) 127 NEXT I
+  Origs: 126
+  Dests: 128
 (1 3) 128 FOR I = 1 TO N2
+  Origs: 127
+  Dests: 129
 (0 3) 129 C1$(I) = C$(I + N1)
+  Origs: 128
+  Dests: 130
 (0 1) 130 NEXT I
+  Origs: 129
+  Dests: 140
 (0 1) 140 REM BUILD CENTRAL MATRIX (CONSTRAINTS)
+  Origs: 130
+  Dests: 141
 (0 2) 141 DIM X(N2, N1)
+  Origs: 140
+  Dests: 142
 (1 2) 142 MAT READ X
+  Origs: 141
+  Dests: 143
 (0 2) 143 DIM X(N2, N1 + N2)
+  Origs: 142
+  Dests: 144
 (0 3) 144 X(I, J) = 0
 (1 2)       FOR J = N1 + 1 TO N1 + N2
 (0 1)       NEXT J
 (1 1)       FOR I = 1 TO N2
 (0 1)       NEXT I
+  Origs: 143
+  Dests: 145
 (0 3) 145 X(I, I + N1) = 1
 (1 1)       FOR I = 1 TO N2
 (0 1)       NEXT I
+  Origs: 144
+  Dests: 160
 (0 1) 160 REM BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
+  Origs: 145
+  Dests: 161
 (0 2) 161 DIM B(N2)
+  Origs: 160
+  Dests: 162
 (1 2) 162 ARR READ B
+  Origs: 161
+  Dests: 170
 (0 1) 170 REM COPY COEFFICIENTS FOR BASIC VARIABLES
+  Origs: 162
+  Dests: 171
 (0 2) 171 DIM R(N2)
+  Origs: 170
+  Dests: 172
 (0 3) 172 R(I) = 0
 (1 1)       FOR I = 1 TO N2
 (0 1)       NEXT I
+  Origs: 171
+  Dests: 200
 (0 1) 200 REM PRINT THE TABLEAU
+  Origs: 172, 453
+  Dests: 201
 (0 2) 201 PRINT
+  Origs: 200
+  Dests: 202
 (0 2) 202 PRINT "TABLEAU"
+  Origs: 201
+  Dests: 203
 (0 2) 203 PRINT
+  Origs: 202
+  Dests: 204
 (0 3) 204 PRINT " ", "C->",
+  Origs: 203
+  Dests: 205
 (0 2) 205 ARR PRINT C
+  Origs: 204
+  Dests: 210
 (0 3) 210 PRINT "CB", "BV",
+  Origs: 205
+  Dests: 211
 (0 2) 211 PRINT C$(I),
 (1 2)       FOR I = 1 TO N1 + N2
 (0 1)       NEXT I
+  Origs: 210
+  Dests: 212
 (0 2) 212 PRINT "B"
+  Origs: 211
+  Dests: 220
 (1 3) 220 FOR I = 1 TO N2
+  Origs: 212
+  Dests: 221
 (0 3) 221 PRINT R(I), C1$(I),
+  Origs: 220
+  Dests: 222
 (0 2) 222 PRINT X(I, J),
 (1 2)       FOR J = 1 TO N1 + N2
 (0 1)       NEXT J
+  Origs: 221
+  Dests: 230
 (0 2) 230 PRINT B(I)
+  Origs: 222
+  Dests: 239
 (0 1) 239 NEXT I
+  Origs: 230
+  Dests: 300
 (0 1) 300 REM EVALUATE TABLEAU FOR OPTIMUM SOLUTION
+  Origs: 239
+  Dests: 301
 (0 2) 301 DIM Z(N1 + N2)
+  Origs: 300
+  Dests: 302
 (0 3) 302 Z(J) = 0
 (1 2)       FOR J = 1 TO N1 + N2
 (0 1)       NEXT J
+  Origs: 301
+  Dests: 305
 (1 3) 305 FOR I = 1 TO N2
+  Origs: 302
+  Dests: 306
 (0 6) 306 Z(J) = Z(J) + R(I) * X(I, J)
 (1 2)       FOR J = 1 TO N1 + N2
 (0 1)       NEXT J
+  Origs: 305
+  Dests: 307
 (0 1) 307 NEXT I
+  Origs: 306
+  Dests: 310
 (0 1) 310 REM COMPUTE Z - C
+  Origs: 307
+  Dests: 311
 (0 4) 311 ARR Y = Z - C
+  Origs: 310
+  Dests: 320
 (0 1) 320 REM CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
+  Origs: 311
+  Dests: 321
 (0 3) 321 J0 = 0
+  Origs: 320
+  Dests: 322
 (0 3) 322 M = 0
+  Origs: 321
+  Dests: 323
 (1 4) 323 FOR J = 1 TO N1 + N2
+  Origs: 322
+  Dests: 324
 (1 4) 324 IF Y(J) >= M THEN 327
+  Origs: 323
+  Dests: 325, 327
 (0 3) 325 J0 = J
+  Origs: 324
+  Dests: 326
 (0 3) 326 M = Y(J)
+  Origs: 325
+  Dests: 327
 (0 1) 327 NEXT J
+  Origs: 324, 326
+  Dests: 328
 (1 4) 328 IF M >= 0 THEN 500
+  Origs: 327
+  Dests: 329, 500
 (0 2) 329 PRINT "NON-OPTIMUM."
+  Origs: 328
+  Dests: 330
 (0 1) 330 REM EVALUATE BASIC VARIABLES
+  Origs: 329
+  Dests: 331
 (0 2) 331 DIM W(N2)
+  Origs: 330
+  Dests: 332
 (0 3) 332 W(I) = 0
 (1 1)       FOR I = 1 TO N2
 (0 1)       NEXT I
+  Origs: 331
+  Dests: 333
 (0 4) 333 W(I) = B(I) / X(I, J0)
 (1 2)       IF X(I, J0) <> 0
 (0 1)       ENDIF
 (1 1)       FOR I = 1 TO N2
 (0 1)       NEXT I
+  Origs: 332
+  Dests: 340
 (0 1) 340 REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
+  Origs: 333
+  Dests: 341
 (0 2) 341 PRINT
+  Origs: 340
+  Dests: 342
 (0 2) 342 PRINT "EXPANDED TABLEAU"
+  Origs: 341
+  Dests: 343
 (0 2) 343 PRINT
+  Origs: 342
+  Dests: 344
 (0 3) 344 PRINT " ", "C->",
+  Origs: 343
+  Dests: 345
 (0 2) 345 ARR PRINT C
+  Origs: 344
+  Dests: 350
 (0 3) 350 PRINT "CB", "BV",
+  Origs: 345
+  Dests: 351
 (0 2) 351 PRINT C$(I),
 (1 2)       FOR I = 1 TO N1 + N2
 (0 1)       NEXT I
+  Origs: 350
+  Dests: 352
 (0 4) 352 PRINT "B", "B / "; C$(J0)
+  Origs: 351
+  Dests: 360
 (1 3) 360 FOR I = 1 TO N2
+  Origs: 352
+  Dests: 361
 (0 3) 361 PRINT R(I), C1$(I),
+  Origs: 360
+  Dests: 362
 (0 2) 362 PRINT X(I, J),
 (1 2)       FOR J = 1 TO N1 + N2
 (0 1)       NEXT J
+  Origs: 361
+  Dests: 363
 (0 3) 363 PRINT B(I), W(I)
+  Origs: 362
+  Dests: 364
 (0 1) 364 NEXT I
+  Origs: 363
+  Dests: 370
 (0 3) 370 PRINT " ", "Z",
+  Origs: 364
+  Dests: 371
 (0 2) 371 ARR PRINT Z
+  Origs: 370
+  Dests: 372
 (0 3) 372 PRINT " ", "Z-C",
+  Origs: 371
+  Dests: 373
 (0 2) 373 ARR PRINT Y
+  Origs: 372
+  Dests: 374
 (0 6) 374 PRINT "KEY COLUMN"; J0; "VARIABLE "; C$(J0); " ENTERS"
+  Origs: 373
+  Dests: 380
 (0 1) 380 REM IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
+  Origs: 374
+  Dests: 381
 (0 3) 381 I0 = 0
+  Origs: 380
+  Dests: 382
 (0 3) 382 M = 1E6
+  Origs: 381
+  Dests: 383
 (1 3) 383 FOR I = 1 TO N2
+  Origs: 382
+  Dests: 384
 (1 7) 384 IF W(I) <= 0 OR W(I) >= M THEN 387
+  Origs: 383
+  Dests: 385, 387
 (0 3) 385 I0 = I
+  Origs: 384
+  Dests: 386
 (0 3) 386 M = W(I)
+  Origs: 385
+  Dests: 387
 (0 1) 387 NEXT I
+  Origs: 384, 386
+  Dests: 389
 (0 6) 389 PRINT "KEY ROW"; I0; "VARIABLE "; C1$(I0); " EXITS"
+  Origs: 387
+  Dests: 400
 (0 1) 400 REM PIVOT ON KEY CELL
+  Origs: 389
+  Dests: 401
 (0 1) 401 REM CHANGE BASIC VARIABLE NAME AND COEFFICIENT
+  Origs: 400
+  Dests: 402
 (0 3) 402 C1$(I0) = C$(J0)
+  Origs: 401
+  Dests: 403
 (0 3) 403 R(I0) = C(J0)
+  Origs: 402
+  Dests: 410
 (0 1) 410 REM BUILD NEW MATRIX X2 AND ARRAY B2
+  Origs: 403
+  Dests: 411
 (0 3) 411 MAT X2 = X
+  Origs: 410
+  Dests: 412
 (0 3) 412 ARR B2 = B
+  Origs: 411
+  Dests: 420
 (0 1) 420 REM ADJUST VALUES IN KEY ROW
+  Origs: 412
+  Dests: 421
 (1 4) 421 FOR J = 1 TO N1 + N2
+  Origs: 420
+  Dests: 422
 (0 4) 422 X2(I0, J) = X(I0, J) / X(I0, J0)
+  Origs: 421
+  Dests: 423
 (0 1) 423 NEXT J
+  Origs: 422
+  Dests: 430
 (0 1) 430 REM ADJUST VALUES IN OTHER ROWS
+  Origs: 423
+  Dests: 431
 (1 3) 431 FOR I = 1 TO N2
+  Origs: 430
+  Dests: 432
 (1 4) 432 IF I = I0 THEN 436
+  Origs: 431
+  Dests: 433, 436
 (1 4) 433 FOR J = 1 TO N1 + N2
+  Origs: 432
+  Dests: 434
 (0 7) 434 X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+  Origs: 433
+  Dests: 435
 (0 1) 435 NEXT J
+  Origs: 434
+  Dests: 436
 (0 1) 436 NEXT I
+  Origs: 432, 435
+  Dests: 440
 (0 1) 440 REM ADJUST VALUES IN RIGHT-HAND-SIDE
+  Origs: 436
+  Dests: 441
 (0 4) 441 B2(I0) = B(I0) / X(I0, J0)
+  Origs: 440
+  Dests: 442
 (1 3) 442 FOR I = 1 TO N2
+  Origs: 441
+  Dests: 443
 (1 4) 443 IF I = I0 THEN 445
+  Origs: 442
+  Dests: 444, 445
 (0 7) 444 B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+  Origs: 443
+  Dests: 445
 (0 1) 445 NEXT I
+  Origs: 443, 444
+  Dests: 450
 (0 1) 450 REM SWAP IN THE NEW MATRIX AND CONSTANTS
+  Origs: 445
+  Dests: 451
 (0 3) 451 MAT X = X2
+  Origs: 450
+  Dests: 452
 (0 3) 452 ARR B = B2
+  Origs: 451
+  Dests: 453
 (0 3) 453 GOTO 200
+  Origs: 452
+  Dests: 200
 (0 1) 500 REM NO MORE CHANGES
+  Origs: 328
+  Dests: 501
 (0 2) 501 PRINT "SOLUTION FOUND"
+  Origs: 500
+  Dests: 511
 (0 3) 511 PRINT " ", "Z",
+  Origs: 501
+  Dests: 512
 (0 2) 512 ARR PRINT Z
+  Origs: 511
+  Dests: 513
 (0 3) 513 PRINT " ", "Z-C",
+  Origs: 512
+  Dests: 514
 (0 2) 514 ARR PRINT Y
+  Origs: 513
+  Dests: 520
 (0 2) 520 PRINT "OBJECTIVE VALUE"
+  Origs: 514
+  Dests: 521
 (0 3) 521 Z = 0
+  Origs: 520
+  Dests: 522
 (1 3) 522 FOR I = 1 TO N2
+  Origs: 521
+  Dests: 523
 (0 6) 523 PRINT C1$(I); " = "; B(I); " * "; R(I)
+  Origs: 522
+  Dests: 524
 (0 6) 524 Z = Z + B(I) * R(I)
+  Origs: 523
+  Dests: 525
 (0 1) 525 NEXT I
+  Origs: 524
+  Dests: 527
 (0 3) 527 PRINT "Z = "; Z
+  Origs: 525
+  Dests: 999
 (0 1) 999 STOP
+  Origs: 527
+  Dests: 
 (0 1) 4000 REM NUMBER DECISION VARS, NUMBER CONSTRAINTS
+  Origs: 
+  Dests: 4001
 (0 2) 4001 DATA 2, 4
+  Origs: 4000
+  Dests: 4010
 (0 1) 4010 REM COEFFICIENTS FOR OBJECTIVE FUNCTION (WITHOUT SLACK)
+  Origs: 4001
+  Dests: 4011
 (0 2) 4011 DATA 20, 14
+  Origs: 4010
+  Dests: 4020
 (0 1) 4020 REM CONSTRAINT COEFFICIENTS (WITHOUT SLACK)
+  Origs: 4011
+  Dests: 4021
 (0 2) 4021 DATA 6, 2, 8, 6, 6, 4, 40, 25
+  Origs: 4020
+  Dests: 4030
 (0 1) 4030 REM RIGHT-HAND SIDE CONSTANTS
+  Origs: 4021
+  Dests: 4031
 (0 2) 4031 DATA 2000, 2000, 1440, 9600
+  Origs: 4030
+  Dests: 4999
 (0 1) 4999 END
+  Origs: 4031
+  Dests: 
 
 Unreachable code:
 

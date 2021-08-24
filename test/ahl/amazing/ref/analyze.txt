@@ -20,183 +20,459 @@ Halstead complexity:
  time: 205.176
 
 (0 4) 10 PRINT TAB(28); "AMAZING PROGRAM"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 30
 (0 2) 30 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 100
 (2 3) 100 INPUT "WHAT ARE YOUR WIDTH AND LENGTH"; H, V
+  Origs: 30, 104
+  Dests: 102
 (1 7) 102 IF H <> 1 AND V <> 1 THEN 110
+  Origs: 100
+  Dests: 104, 110
 (0 2) 104 PRINT "MEANINGLESS DIMENSIONS.  TRY AGAIN."
 (0 3)     GOTO 100
+  Origs: 102
+  Dests: 100
 (0 3) 110 DIM W(H, V), V(H, V)
+  Origs: 102
+  Dests: 120
 (0 2) 120 PRINT
+  Origs: 110
+  Dests: 130
 (0 2) 130 PRINT
+  Origs: 120
+  Dests: 140
 (0 2) 140 PRINT
+  Origs: 130
+  Dests: 150
 (0 2) 150 PRINT
+  Origs: 140
+  Dests: 160
 (0 3) 160 Q = 0
 (0 3)     Z = 0
 (0 4)     X = INT(RND(1) * H + 1)
+  Origs: 150
+  Dests: 165
 (1 3) 165 FOR I = 1 TO H
+  Origs: 160
+  Dests: 170
 (1 4) 170 IF I = X THEN 173
+  Origs: 165
+  Dests: 171, 173
 (0 2) 171 PRINT ".--";
 (0 2)     GOTO 180
+  Origs: 170
+  Dests: 180
 (0 2) 173 PRINT ".  ";
+  Origs: 170
+  Dests: 180
 (0 1) 180 NEXT I
+  Origs: 171, 173
+  Dests: 190
 (0 2) 190 PRINT "."
+  Origs: 180
+  Dests: 195
 (0 3) 195 C = 1
 (0 3)     W(X, 1) = C
 (0 4)     C = C + 1
+  Origs: 190
+  Dests: 200
 (0 3) 200 R = X
 (0 3)     S = 1
 (0 2)     GOTO 260
+  Origs: 195
+  Dests: 260
 (1 4) 210 IF R <> H THEN 240
+  Origs: 250, 1000
+  Dests: 215, 240
 (1 4) 215 IF S <> V THEN 230
+  Origs: 210
+  Dests: 220, 230
 (0 3) 220 R = 1
 (0 3)     S = 1
 (0 2)     GOTO 250
+  Origs: 215
+  Dests: 250
 (0 3) 230 R = 1
 (0 4)     S = S + 1
 (0 2)     GOTO 250
+  Origs: 215
+  Dests: 250
 (0 4) 240 R = R + 1
+  Origs: 210
+  Dests: 250
 (1 5) 250 IF W(R, S) = 0 THEN 210
+  Origs: 220, 230, 240, 980
+  Dests: 210, 260
 (1 5) 260 IF R - 1 = 0 THEN 530
+  Origs: 200, 250, 815, 850, 955
+  Dests: 265, 530
 (1 4) 265 IF W(R - 1, S) <> 0 THEN 530
+  Origs: 260
+  Dests: 270, 530
 (1 5) 270 IF S - 1 = 0 THEN 390
+  Origs: 265
+  Dests: 280, 390
 (1 4) 280 IF W(R, S - 1) <> 0 THEN 390
+  Origs: 270
+  Dests: 290, 390
 (1 4) 290 IF R = H THEN 330
+  Origs: 280
+  Dests: 300, 330
 (1 4) 300 IF W(R + 1, S) <> 0 THEN 330
+  Origs: 290
+  Dests: 310, 330
 (0 4) 310 X = INT(RND(1) * 3 + 1)
+  Origs: 300
+  Dests: 320
 (3 5) 320 ON X GOTO 790, 820, 860
+  Origs: 310
+  Dests: 330, 790, 820, 860
 (1 4) 330 IF S <> V THEN 340
+  Origs: 290, 300, 320
+  Dests: 334, 340
 (1 4) 334 IF Z = 1 THEN 370
+  Origs: 330
+  Dests: 338, 370
 (0 3) 338 Q = 1
 (0 2)     GOTO 350
+  Origs: 334
+  Dests: 350
 (1 4) 340 IF W(R, S + 1) <> 0 THEN 370
+  Origs: 330
+  Dests: 350, 370
 (0 4) 350 X = INT(RND(1) * 3 + 1)
+  Origs: 338, 340
+  Dests: 360
 (3 5) 360 ON X GOTO 790, 820, 910
+  Origs: 350
+  Dests: 370, 790, 820, 910
 (0 4) 370 X = INT(RND(1) * 2 + 1)
+  Origs: 334, 340, 360
+  Dests: 380
 (2 4) 380 ON X GOTO 790, 820
+  Origs: 370
+  Dests: 390, 790, 820
 (1 4) 390 IF R = H THEN 470
+  Origs: 270, 280, 380
+  Dests: 400, 470
 (1 4) 400 IF W(R + 1, S) <> 0 THEN 470
+  Origs: 390
+  Dests: 405, 470
 (1 4) 405 IF S <> V THEN 420
+  Origs: 400
+  Dests: 410, 420
 (1 4) 410 IF Z = 1 THEN 450
+  Origs: 405
+  Dests: 415, 450
 (0 3) 415 Q = 1
 (0 2)     GOTO 430
+  Origs: 410
+  Dests: 430
 (1 4) 420 IF W(R, S + 1) <> 0 THEN 450
+  Origs: 405
+  Dests: 430, 450
 (0 4) 430 X = INT(RND(1) * 3 + 1)
+  Origs: 415, 420
+  Dests: 440
 (3 5) 440 ON X GOTO 790, 860, 910
+  Origs: 430
+  Dests: 450, 790, 860, 910
 (0 4) 450 X = INT(RND(1) * 2 + 1)
+  Origs: 410, 420, 440
+  Dests: 460
 (2 4) 460 ON X GOTO 790, 860
+  Origs: 450
+  Dests: 470, 790, 860
 (1 4) 470 IF S <> V THEN 490
+  Origs: 390, 400, 460
+  Dests: 480, 490
 (1 4) 480 IF Z = 1 THEN 520
+  Origs: 470
+  Dests: 485, 520
 (0 3) 485 Q = 1
 (0 2)     GOTO 500
+  Origs: 480
+  Dests: 500
 (1 4) 490 IF W(R, S + 1) <> 0 THEN 520
+  Origs: 470
+  Dests: 500, 520
 (0 4) 500 X = INT(RND(1) * 2 + 1)
+  Origs: 485, 490
+  Dests: 510
 (2 4) 510 ON X GOTO 790, 910
+  Origs: 500
+  Dests: 520, 790, 910
 (0 2) 520 GOTO 790
+  Origs: 480, 490, 510
+  Dests: 790
 (1 5) 530 IF S - 1 = 0 THEN 670
+  Origs: 260, 265, 905
+  Dests: 540, 670
 (1 4) 540 IF W(R, S - 1) <> 0 THEN 670
+  Origs: 530
+  Dests: 545, 670
 (1 4) 545 IF R = H THEN 610
+  Origs: 540
+  Dests: 547, 610
 (1 4) 547 IF W(R + 1, S) <> 0 THEN 610
+  Origs: 545
+  Dests: 550, 610
 (1 4) 550 IF S <> V THEN 560
+  Origs: 547
+  Dests: 552, 560
 (1 4) 552 IF Z = 1 THEN 590
+  Origs: 550
+  Dests: 554, 590
 (0 3) 554 Q = 1
 (0 2)     GOTO 570
+  Origs: 552
+  Dests: 570
 (1 4) 560 IF W(R, S + 1) <> 0 THEN 590
+  Origs: 550
+  Dests: 570, 590
 (0 4) 570 X = INT(RND(1) * 3 + 1)
+  Origs: 554, 560
+  Dests: 580
 (3 5) 580 ON X GOTO 820, 860, 910
+  Origs: 570
+  Dests: 590, 820, 860, 910
 (0 4) 590 X = INT(RND(1) * 2 + 1)
+  Origs: 552, 560, 580
+  Dests: 600
 (2 4) 600 ON X GOTO 820, 860
+  Origs: 590
+  Dests: 610, 820, 860
 (1 4) 610 IF S <> V THEN 630
+  Origs: 545, 547, 600
+  Dests: 620, 630
 (1 4) 620 IF Z = 1 THEN 660
+  Origs: 610
+  Dests: 625, 660
 (0 3) 625 Q = 1
 (0 2)     GOTO 640
+  Origs: 620
+  Dests: 640
 (1 4) 630 IF W(R, S + 1) <> 0 THEN 660
+  Origs: 610
+  Dests: 640, 660
 (0 4) 640 X = INT(RND(1) * 2 + 1)
+  Origs: 625, 630
+  Dests: 650
 (2 4) 650 ON X GOTO 820, 910
+  Origs: 640
+  Dests: 660, 820, 910
 (0 2) 660 GOTO 820
+  Origs: 620, 630, 650
+  Dests: 820
 (1 4) 670 IF R = H THEN 740
+  Origs: 530, 540
+  Dests: 680, 740
 (1 4) 680 IF W(R + 1, S) <> 0 THEN 740
+  Origs: 670
+  Dests: 685, 740
 (1 4) 685 IF S <> V THEN 700
+  Origs: 680
+  Dests: 690, 700
 (1 4) 690 IF Z = 1 THEN 730
+  Origs: 685
+  Dests: 695, 730
 (0 3) 695 Q = 1
 (0 2)     GOTO 830
+  Origs: 690
+  Dests: 830
 (1 4) 700 IF W(R, S + 1) <> 0 THEN 730
+  Origs: 685
+  Dests: 710, 730
 (0 4) 710 X = INT(RND(1) * 2 + 1)
+  Origs: 700
+  Dests: 720
 (2 4) 720 ON X GOTO 860, 910
+  Origs: 710
+  Dests: 730, 860, 910
 (0 2) 730 GOTO 860
+  Origs: 690, 700, 720
+  Dests: 860
 (1 4) 740 IF S <> V THEN 760
+  Origs: 670, 680
+  Dests: 750, 760
 (1 4) 750 IF Z = 1 THEN 780
+  Origs: 740
+  Dests: 755, 780
 (0 3) 755 Q = 1
 (0 2)     GOTO 770
+  Origs: 750
+  Dests: 770
 (1 4) 760 IF W(R, S + 1) <> 0 THEN 780
+  Origs: 740
+  Dests: 770, 780
 (0 2) 770 GOTO 910
+  Origs: 755, 760
+  Dests: 910
 (0 2) 780 GOTO 1000
+  Origs: 750, 760
+  Dests: 1000
 (0 3) 790 W(R - 1, S) = C
+  Origs: 320, 360, 380, 440, 460, 510, 520
+  Dests: 800
 (0 4) 800 C = C + 1
 (0 3)     V(R - 1, S) = 2
 (0 4)     R = R - 1
+  Origs: 790
+  Dests: 810
 (1 7) 810 IF C = H * V + 1 THEN 1010
+  Origs: 800
+  Dests: 815, 1010
 (0 3) 815 Q = 0
 (0 3)     GOTO 260
+  Origs: 810
+  Dests: 260
 (0 3) 820 W(R, S - 1) = C
+  Origs: 320, 360, 380, 580, 600, 650, 660
+  Dests: 830
 (0 4) 830 C = C + 1
+  Origs: 695, 820
+  Dests: 840
 (0 3) 840 V(R, S - 1) = 1
 (0 4)     S = S - 1
 (1 7)     IF C = H * V + 1 THEN 1010
+  Origs: 830
+  Dests: 850, 1010
 (0 3) 850 Q = 0
 (0 3)     GOTO 260
+  Origs: 840
+  Dests: 260
 (0 3) 860 W(R + 1, S) = C
+  Origs: 320, 440, 460, 580, 600, 720, 730
+  Dests: 870
 (0 4) 870 C = C + 1
 (1 4)     IF V(R, S) = 0 THEN 880
+  Origs: 860
+  Dests: 875, 880
 (0 3) 875 V(R, S) = 3
 (0 2)     GOTO 890
+  Origs: 870
+  Dests: 890
 (0 3) 880 V(R, S) = 2
+  Origs: 870
+  Dests: 890
 (0 4) 890 R = R + 1
+  Origs: 875, 880
+  Dests: 900
 (1 7) 900 IF C = H * V + 1 THEN 1010
+  Origs: 890
+  Dests: 905, 1010
 (0 3) 905 GOTO 530
+  Origs: 900
+  Dests: 530
 (1 4) 910 IF Q = 1 THEN 960
+  Origs: 360, 440, 510, 580, 650, 720, 770
+  Dests: 920, 960
 (0 3) 920 W(R, S + 1) = C
 (0 4)     C = C + 1
 (1 4)     IF V(R, S) = 0 THEN 940
+  Origs: 910
+  Dests: 930, 940
 (0 3) 930 V(R, S) = 3
 (0 2)     GOTO 950
+  Origs: 920
+  Dests: 950
 (0 3) 940 V(R, S) = 1
+  Origs: 920
+  Dests: 950
 (0 4) 950 S = S + 1
 (1 7)     IF C = H * V + 1 THEN 1010
+  Origs: 930, 940
+  Dests: 955, 1010
 (0 3) 955 GOTO 260
+  Origs: 950
+  Dests: 260
 (0 3) 960 Z = 1
+  Origs: 910
+  Dests: 970
 (1 4) 970 IF V(R, S) = 0 THEN 980
+  Origs: 960
+  Dests: 975, 980
 (0 3) 975 V(R, S) = 3
 (0 3)     Q = 0
 (0 2)     GOTO 1000
+  Origs: 970
+  Dests: 1000
 (0 3) 980 V(R, S) = 1
 (0 3)     Q = 0
 (0 3)     R = 1
 (0 3)     S = 1
 (0 3)     GOTO 250
+  Origs: 970
+  Dests: 250
 (0 3) 1000 GOTO 210
+  Origs: 780, 975
+  Dests: 210
 (1 3) 1010 FOR J = 1 TO V
+  Origs: 810, 840, 900, 950
+  Dests: 1011
 (0 2) 1011 PRINT "I";
+  Origs: 1010
+  Dests: 1012
 (1 3) 1012 FOR I = 1 TO H
+  Origs: 1011
+  Dests: 1013
 (1 4) 1013 IF V(I, J) < 2 THEN 1030
+  Origs: 1012
+  Dests: 1020, 1030
 (0 2) 1020 PRINT "   ";
+  Origs: 1013
+  Dests: 1021
 (0 2) 1021 GOTO 1040
+  Origs: 1020
+  Dests: 1040
 (0 2) 1030 PRINT "  I";
+  Origs: 1013
+  Dests: 1040
 (0 1) 1040 NEXT I
+  Origs: 1021, 1030
+  Dests: 1041
 (0 2) 1041 PRINT
+  Origs: 1040
+  Dests: 1043
 (1 3) 1043 FOR I = 1 TO H
+  Origs: 1041
+  Dests: 1045
 (1 4) 1045 IF V(I, J) = 0 THEN 1060
+  Origs: 1043
+  Dests: 1050, 1060
 (1 4) 1050 IF V(I, J) = 2 THEN 1060
+  Origs: 1045
+  Dests: 1051, 1060
 (0 2) 1051 PRINT ":  ";
+  Origs: 1050
+  Dests: 1052
 (0 2) 1052 GOTO 1070
+  Origs: 1051
+  Dests: 1070
 (0 2) 1060 PRINT ":--";
+  Origs: 1045, 1050
+  Dests: 1070
 (0 1) 1070 NEXT I
+  Origs: 1052, 1060
+  Dests: 1071
 (0 2) 1071 PRINT "."
+  Origs: 1070
+  Dests: 1072
 (0 1) 1072 NEXT J
+  Origs: 1071
+  Dests: 1073
 (0 1) 1073 END
+  Origs: 1072
+  Dests: 
 
 Unreachable code:
 

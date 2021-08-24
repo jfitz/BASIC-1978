@@ -20,90 +20,232 @@ Halstead complexity:
  time: 21.972
 
 (0 4) 10 PRINT TAB(30); "ROCKET"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 30
 (0 2) 30 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 70
 (0 2) 70 PRINT "LUNAR LANDING SIMULATION"
+  Origs: 30
+  Dests: 80
 (0 2) 80 PRINT "----- ------- ----------"
 (0 2)    PRINT
+  Origs: 70
+  Dests: 100
 (1 2) 100 INPUT "DO YOU WANT INSTRUCTIONS (YES OR NO)"; A$
+  Origs: 80
+  Dests: 110
 (1 4) 110 IF A$ = "NO" THEN 390
+  Origs: 100
+  Dests: 160, 390
 (0 2) 160 PRINT
+  Origs: 110
+  Dests: 200
 (0 2) 200 PRINT "YOU ARE LANDING ON THE MOON AND AND HAVE TAKEN OVER MANUAL"
+  Origs: 160
+  Dests: 210
 (0 2) 210 PRINT "CONTROL 1000 FEET ABOVE A GOOD LANDING SPOT. YOU HAVE A DOWN-"
+  Origs: 200
+  Dests: 220
 (0 2) 220 PRINT "WARD VELOCITY OF 50 FEET/SEC. 150 UNITS OF FUEL REMAIN."
+  Origs: 210
+  Dests: 225
 (0 2) 225 PRINT
+  Origs: 220
+  Dests: 230
 (0 2) 230 PRINT "HERE ARE THE RULES THAT GOVERN YOUR APOLLO SPACE-CRAFT:"
 (0 2)     PRINT
+  Origs: 225
+  Dests: 240
 (0 2) 240 PRINT "(1) AFTER EACH SECOND THE HEIGHT, VELOCITY, AND REMAINING FUEL"
+  Origs: 230
+  Dests: 250
 (0 2) 250 PRINT "    WILL BE REPORTED VIA DIGBY YOUR ON-BOARD COMPUTER."
+  Origs: 240
+  Dests: 260
 (0 2) 260 PRINT "(2) AFTER THE REPORT A '?' WILL APPEAR. ENTER THE NUMBER"
+  Origs: 250
+  Dests: 270
 (0 2) 270 PRINT "    OF UNITS OF FUEL YOU WISH TO BURN DURING THE NEXT"
+  Origs: 260
+  Dests: 280
 (0 2) 280 PRINT "    SECOND. EACH UNIT OF FUEL WILL SLOW YOUR DESCENT BY"
+  Origs: 270
+  Dests: 290
 (0 2) 290 PRINT "    1 FOOT/SEC."
+  Origs: 280
+  Dests: 310
 (0 2) 310 PRINT "(3) THE MAXIMUM THRUST OF YOUR ENGINE IS 30 FEET/SEC/SEC"
+  Origs: 290
+  Dests: 320
 (0 2) 320 PRINT "    OR 30 UNITS OF FUEL PER SECOND."
+  Origs: 310
+  Dests: 330
 (0 2) 330 PRINT "(4) WHEN YOU CONTACT THE LUNAR SURFACE. YOUR DESCENT ENGINE"
+  Origs: 320
+  Dests: 340
 (0 2) 340 PRINT "    WILL AUTOMATICALLY SHUT DOWN AND YOU WILL BE GIVEN A"
+  Origs: 330
+  Dests: 350
 (0 2) 350 PRINT "    REPORT OF YOUR LANDING SPEED AND REMAINING FUEL."
+  Origs: 340
+  Dests: 360
 (0 2) 360 PRINT "(5) IF YOU RUN OUT OF FUEL THE '?' WILL NO LONGER APPEAR"
+  Origs: 350
+  Dests: 370
 (0 2) 370 PRINT "    BUT YOUR SECOND BY SECOND REPORT WILL CONTINUE UNTIL"
+  Origs: 360
+  Dests: 380
 (0 2) 380 PRINT "    YOU CONTACT THE LUNAR SURFACE."
 (0 2)     PRINT
+  Origs: 370
+  Dests: 390
 (0 2) 390 PRINT "BEGINNING LANDING PROCEDURE.........."
 (0 2)     PRINT
+  Origs: 110, 380, 860
+  Dests: 400
 (0 2) 400 PRINT "G O O D  L U C K ! ! !"
+  Origs: 390
+  Dests: 420
 (0 2) 420 PRINT
 (0 2)     PRINT
+  Origs: 400
+  Dests: 430
 (0 2) 430 PRINT "SEC  FEET      SPEED     FUEL     PLOT OF DISTANCE"
+  Origs: 420
+  Dests: 450
 (0 2) 450 PRINT
+  Origs: 430
+  Dests: 455
 (0 3) 455 T = 0
 (0 3)     H = 1000
 (0 3)     V = 50
 (0 3)     F = 150
+  Origs: 450
+  Dests: 490
 (0 17) 490 PRINT T; TAB(6); H; TAB(16); V; TAB(26); F; TAB(35); "I"; TAB(H / 15); "*"
+  Origs: 455, 610
+  Dests: 500
 (1 2) 500 INPUT B
+  Origs: 490
+  Dests: 510
 (1 4) 510 IF B < 0 THEN 650
+  Origs: 500
+  Dests: 520, 650
 (1 6) 520 IF B > 30 THEN B = 30
+  Origs: 510
+  Dests: 530
 (1 6) 530 IF B > F THEN B = F
+  Origs: 520
+  Dests: 540
 (0 5) 540 V1 = V - B + 5
+  Origs: 530, 660
+  Dests: 560
 (0 4) 560 F = F - B
+  Origs: 540
+  Dests: 570
 (0 8) 570 H = H - .5 * (V + V1)
+  Origs: 560
+  Dests: 580
 (1 4) 580 IF H <= 0 THEN 670
+  Origs: 570
+  Dests: 590, 670
 (0 4) 590 T = T + 1
+  Origs: 580
+  Dests: 600
 (0 3) 600 V = V1
+  Origs: 590
+  Dests: 610
 (1 5) 610 IF F > 0 THEN 490
+  Origs: 600
+  Dests: 490, 615
 (1 4) 615 IF B = 0 THEN 640
+  Origs: 610
+  Dests: 620, 640
 (0 2) 620 PRINT "**** OUT OF FUEL ****"
+  Origs: 615
+  Dests: 640
 (0 17) 640 PRINT T; TAB(4); H; TAB(12); V; TAB(20); F; TAB(29); "I"; TAB(H / 12 + 29); "*"
+  Origs: 615, 620
+  Dests: 650
 (0 3) 650 B = 0
+  Origs: 510, 640
+  Dests: 660
 (0 3) 660 GOTO 540
+  Origs: 650
+  Dests: 540
 (0 2) 670 PRINT "***** CONTACT *****"
+  Origs: 580
+  Dests: 680
 (0 8) 680 H = H + .5 * (V1 + V)
+  Origs: 670
+  Dests: 690
 (1 4) 690 IF B = 5 THEN 720
+  Origs: 680
+  Dests: 700, 720
 (0 9) 700 D = (-V + SQR(V * V + H * (10 - 2 * B))) / (5 - B)
+  Origs: 690
+  Dests: 710
 (0 2) 710 GOTO 730
+  Origs: 700
+  Dests: 730
 (0 4) 720 D = H / V
+  Origs: 690
+  Dests: 730
 (0 7) 730 V1 = V + (5 - B) * D
+  Origs: 710, 720
+  Dests: 760
 (0 5) 760 PRINT "TOUCHDOWN AT"; T + D; "SECONDS."
+  Origs: 730
+  Dests: 770
 (0 4) 770 PRINT "LANDING VELOCITY="; V1; "FEET/SEC."
+  Origs: 760
+  Dests: 780
 (0 3) 780 PRINT F; "UNITS OF FUEL REMAINING."
+  Origs: 770
+  Dests: 790
 (1 4) 790 IF V1 <> 0 THEN 810
+  Origs: 780
+  Dests: 800, 810
 (0 2) 800 PRINT "CONGRATULATIONS! A PERFECT LANDING!!"
+  Origs: 790
+  Dests: 805
 (0 2) 805 PRINT "YOUR LICENSE WILL BE RENEWED.......LATER."
+  Origs: 800
+  Dests: 810
 (1 5) 810 IF ABS(V1) < 2 THEN 840
+  Origs: 790, 805
+  Dests: 820, 840
 (0 2) 820 PRINT "***** SORRY, BUT YOU BLEW IT!!!!"
+  Origs: 810
+  Dests: 830
 (0 2) 830 PRINT "APPROPRIATE CONDOLENCES WILL BE SENT TO YOUR NEXT OF KIN."
+  Origs: 820
+  Dests: 840
 (0 2) 840 PRINT
 (0 2)     PRINT
 (0 2)     PRINT
+  Origs: 810, 830
+  Dests: 850
 (1 2) 850 INPUT "ANOTHER MISSION"; A$
+  Origs: 840
+  Dests: 860
 (1 5) 860 IF A$ = "YES" THEN 390
+  Origs: 850
+  Dests: 390, 870
 (0 2) 870 PRINT
 (0 2)     PRINT "CONTROL OUT."
 (0 2)     PRINT
+  Origs: 860
+  Dests: 999
 (0 1) 999 END
+  Origs: 870
+  Dests: 
 
 Unreachable code:
 

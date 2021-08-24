@@ -20,54 +20,94 @@ Halstead complexity:
  time: 101.317
 
 (0 4) 10 PRINT TAB(32); "HANGMAN"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 25
 (0 2) 25 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 30
 (0 6) 30 DIM P$(12, 12), L$(20), D$(20), N$(26), U(50)
+  Origs: 25
+  Dests: 40
 (0 3) 40 C = 1
 (0 3)    N = 50
+  Origs: 30
+  Dests: 50
 (1 3) 50 FOR I = 1 TO 20
 (0 3)    D$(I) = "-"
 (0 1)    NEXT I
 (0 3)    M = 0
+  Origs: 40, 370, 620
+  Dests: 60
 (1 3) 60 FOR I = 1 TO 26
 (0 3)    N$(I) = ""
 (0 1)    NEXT I
+  Origs: 50
+  Dests: 70
 (1 3) 70 FOR I = 1 TO 12
 (1 3)    FOR J = 1 TO 12
 (0 3)    P$(I, J) = " "
 (0 1)    NEXT J
 (0 1)    NEXT I
+  Origs: 60
+  Dests: 80
 (1 3) 80 FOR I = 1 TO 12
 (0 3)    P$(I, 1) = "X"
 (0 1)    NEXT I
+  Origs: 70
+  Dests: 90
 (1 3) 90 FOR I = 1 TO 7
 (0 3)    P$(1, I) = "X"
 (0 1)    NEXT
 (0 3)    P$(2, 7) = "X"
+  Origs: 80
+  Dests: 95
 (1 4) 95 IF C < N THEN 100
+  Origs: 90
+  Dests: 97, 100
 (0 2) 97 PRINT "YOU DID ALL THE WORDS!!"
 (0 1)    STOP
+  Origs: 95
+  Dests: 
 (0 5) 100 Q = INT(N * RND(1)) + 1
+  Origs: 95, 110
+  Dests: 110
 (1 5) 110 IF U(Q) = 1 THEN 100
+  Origs: 100
+  Dests: 100, 115
 (0 3) 115 U(Q) = 1
 (0 4)     C = C + 1
 (0 1)     RESTORE
 (0 3)     T1 = 0
+  Origs: 110
+  Dests: 150
 (1 3) 150 FOR I = 1 TO Q
 (1 2)     READ A$
 (0 1)     NEXT I
+  Origs: 115
+  Dests: 160
 (0 4) 160 L = LEN(A$)
 (1 4)     FOR I = 1 TO LEN(A$)
 (0 4)     L$(I) = MID$(A$, I, 1)
 (0 1)     NEXT I
+  Origs: 150
+  Dests: 170
 (0 2) 170 PRINT "HERE ARE THE LETTERS YOU USED:"
+  Origs: 160, 230, 350, 590
+  Dests: 180
 (1 3) 180 FOR I = 1 TO 26
 (0 2)     PRINT N$(I);
 (1 4)     IF N$(I + 1) = "" THEN 200
+  Origs: 170
+  Dests: 190, 200
 (0 2) 190 PRINT ",";
 (0 1)     NEXT I
+  Origs: 180
+  Dests: 200
 (0 2) 200 PRINT
 (0 2)     PRINT
 (1 3)     FOR I = 1 TO L
@@ -75,138 +115,260 @@ Halstead complexity:
 (0 1)     NEXT I
 (0 2)     PRINT
 (0 2)     PRINT
+  Origs: 180, 190
+  Dests: 210
 (1 2) 210 INPUT "WHAT IS YOUR GUESS"; G$
 (0 3)     R = 0
+  Origs: 200
+  Dests: 220
 (1 3) 220 FOR I = 1 TO 26
 (1 4)     IF N$(I) = "" THEN 250
+  Origs: 210
+  Dests: 230, 250
 (1 5) 230 IF G$ = N$(I) THEN PRINT "YOU GUESSED THAT LETTER BEFORE!"
 (0 3)     GOTO 170
+  Origs: 220
+  Dests: 170, 240
 (0 1) 240 NEXT I
 (0 2)     PRINT "PROGRAM ERROR.  RUN AGAIN."
 (0 1)     STOP
+  Origs: 230
+  Dests: 
 (0 3) 250 N$(I) = G$
 (0 4)     T1 = T1 + 1
+  Origs: 220
+  Dests: 260
 (1 3) 260 FOR I = 1 TO L
 (1 4)     IF L$(I) = G$ THEN 280
+  Origs: 250
+  Dests: 270, 280
 (0 1) 270 NEXT I
 (1 4)     IF R = 0 THEN 290
+  Origs: 260, 280
+  Dests: 275, 290
 (0 2) 275 GOTO 300
+  Origs: 270
+  Dests: 300
 (0 3) 280 D$(I) = G$
 (0 4)     R = R + 1
 (0 3)     GOTO 270
+  Origs: 260
+  Dests: 270
 (0 4) 290 M = M + 1
 (0 2)     GOTO 400
+  Origs: 270
+  Dests: 400
 (1 3) 300 FOR I = 1 TO L
 (1 4)     IF D$(I) = "-" THEN 320
+  Origs: 275
+  Dests: 310, 320
 (0 1) 310 NEXT I
 (0 2)     GOTO 390
+  Origs: 300
+  Dests: 390
 (0 2) 320 PRINT
 (1 3)     FOR I = 1 TO L
 (0 2)     PRINT D$(I);
 (0 1)     NEXT I
 (0 2)     PRINT
 (0 2)     PRINT
+  Origs: 300
+  Dests: 330
 (1 2) 330 INPUT "WHAT IS YOUR GUESS FOR THE WORD"; B$
+  Origs: 320
+  Dests: 340
 (1 4) 340 IF A$ = B$ THEN 360
+  Origs: 330
+  Dests: 350, 360
 (0 2) 350 PRINT "WRONG.  TRY ANOTHER LETTER."
 (0 2)     PRINT
 (0 3)     GOTO 170
+  Origs: 340
+  Dests: 170
 (0 4) 360 PRINT "RIGHT!!  IT TOOK YOU"; T1; "GUESSES!"
+  Origs: 340
+  Dests: 370
 (1 2) 370 INPUT "WANT ANOTHER WORD"; W$
 (1 5)     IF W$ = "YES" THEN 50
+  Origs: 360, 390, 610
+  Dests: 50, 380
 (0 2) 380 PRINT
 (0 2)     PRINT "IT'S BEEN FUN!  BYE FOR NOW."
 (0 2)     GOTO 999
+  Origs: 370
+  Dests: 999
 (0 2) 390 PRINT "YOU FOUND THE WORD!"
 (0 3)     GOTO 370
+  Origs: 310
+  Dests: 370
 (0 2) 400 PRINT
 (0 2)     PRINT
 (0 2)     PRINT "SORRY, THAT LETTER ISN'T IN THE WORD."
+  Origs: 290
+  Dests: 410
 (10 12) 410 ON M GOTO 415, 420, 425, 430, 435, 440, 445, 450, 455, 460
+  Origs: 400
+  Dests: 415, 420, 425, 430, 435, 440, 445, 450, 455, 460
 (0 2) 415 PRINT "FIRST, WE DRAW A HEAD"
 (0 2)     GOTO 470
+  Origs: 410
+  Dests: 470
 (0 2) 420 PRINT "NOW WE DRAW A BODY."
 (0 2)     GOTO 470
+  Origs: 410
+  Dests: 470
 (0 2) 425 PRINT "NEXT WE DRAW AN ARM."
 (0 2)     GOTO 470
+  Origs: 410
+  Dests: 470
 (0 2) 430 PRINT "THIS TIME IT'S THE OTHER ARM."
 (0 2)     GOTO 470
+  Origs: 410
+  Dests: 470
 (0 2) 435 PRINT "NOW, LET'S DRAW THE RIGHT LEG."
 (0 2)     GOTO 470
+  Origs: 410
+  Dests: 470
 (0 2) 440 PRINT "THIS TIME WE DRAW THE LEFT LEG."
 (0 2)     GOTO 470
+  Origs: 410
+  Dests: 470
 (0 2) 445 PRINT "NOW WE PUT UP A HAND."
 (0 2)     GOTO 470
+  Origs: 410
+  Dests: 470
 (0 2) 450 PRINT "NEXT THE OTHER HAND."
 (0 2)     GOTO 470
+  Origs: 410
+  Dests: 470
 (0 2) 455 PRINT "NOW WE DRAW ONE FOOT"
 (0 2)     GOTO 470
+  Origs: 410
+  Dests: 470
 (0 2) 460 PRINT "HERE'S THE OTHER FOOT -- YOU'RE HUNG!!"
+  Origs: 410
+  Dests: 470
 (10 12) 470 ON M GOTO 480, 490, 500, 510, 520, 530, 540, 550, 560, 570
+  Origs: 415, 420, 425, 430, 435, 440, 445, 450, 455, 460
+  Dests: 480, 490, 500, 510, 520, 530, 540, 550, 560, 570
 (0 3) 480 P$(3, 6) = "-"
 (0 3)     P$(3, 7) = "-"
 (0 3)     P$(3, 8) = "-"
 (0 3)     P$(4, 5) = "("
 (0 3)     P$(4, 6) = "."
+  Origs: 470
+  Dests: 481
 (0 3) 481 P$(4, 8) = "."
 (0 3)     P$(4, 9) = ")"
 (0 3)     P$(5, 6) = "-"
 (0 3)     P$(5, 7) = "-"
 (0 3)     P$(5, 8) = "-"
 (0 2)     GOTO 580
+  Origs: 480
+  Dests: 580
 (1 3) 490 FOR I = 6 TO 9
 (0 3)     P$(I, 7) = "X"
 (0 1)     NEXT I
 (0 2)     GOTO 580
+  Origs: 470
+  Dests: 580
 (1 3) 500 FOR I = 4 TO 7
 (0 3)     P$(I, I - 1) = "\"
 (0 1)     NEXT I
 (0 2)     GOTO 580
+  Origs: 470
+  Dests: 580
 (0 3) 510 P$(4, 11) = "/"
 (0 3)     P$(5, 10) = "/"
 (0 3)     P$(6, 9) = "/"
 (0 3)     P$(7, 8) = "/"
 (0 2)     GOTO 580
+  Origs: 470
+  Dests: 580
 (0 3) 520 P$(10, 6) = "/"
 (0 3)     P$(11, 5) = "/"
 (0 2)     GOTO 580
+  Origs: 470
+  Dests: 580
 (0 3) 530 P$(10, 8) = "\"
 (0 3)     P$(11, 9) = "\"
 (0 2)     GOTO 580
+  Origs: 470
+  Dests: 580
 (0 3) 540 P$(3, 11) = "\"
 (0 2)     GOTO 580
+  Origs: 470
+  Dests: 580
 (0 3) 550 P$(3, 3) = "/"
 (0 2)     GOTO 580
+  Origs: 470
+  Dests: 580
 (0 3) 560 P$(12, 10) = "\"
 (0 3)     P$(12, 11) = "-"
 (0 2)     GOTO 580
+  Origs: 470
+  Dests: 580
 (0 3) 570 P$(12, 3) = "-"
 (0 3)     P$(12, 4) = "/"
+  Origs: 470
+  Dests: 580
 (1 3) 580 FOR I = 1 TO 12
 (1 3)     FOR J = 1 TO 12
 (0 2)     PRINT P$(I, J);
 (0 1)     NEXT J
+  Origs: 481, 490, 500, 510, 520, 530, 540, 550, 560, 570
+  Dests: 590
 (0 2) 590 PRINT
 (0 1)     NEXT I
 (0 2)     PRINT
 (0 2)     PRINT
 (1 5)     IF M <> 10 THEN 170
+  Origs: 580
+  Dests: 170, 600
 (0 3) 600 PRINT "SORRY, YOU LOSE.  THE WORD WAS "; A$
+  Origs: 590
+  Dests: 610
 (0 2) 610 PRINT "YOU MISSED THAT ONE.  DO YOU ";
 (0 3)     GOTO 370
+  Origs: 600
+  Dests: 370
 (1 2) 620 INPUT "TYPE YES OR NO"; Y$
 (1 6)     IF LEFT$(Y$, 1) = "Y" THEN 50
+  Origs: 
+  Dests: 50, 700
 (0 2) 700 DATA "GUM", "SIN", "FOR", "CRY", "LUG", "BYE", "FLY"
+  Origs: 620
+  Dests: 710
 (0 2) 710 DATA "UGLY", "EACH", "FROM", "WORK", "TALK", "WITH", "SELF"
+  Origs: 700
+  Dests: 720
 (0 2) 720 DATA "PIZZA", "THING", "FEIGN", "FIEND", "ELBOW", "FAULT", "DIRTY"
+  Origs: 710
+  Dests: 730
 (0 2) 730 DATA "BUDGET", "SPIRIT", "QUAINT", "MAIDEN", "ESCORT", "PICKAX"
+  Origs: 720
+  Dests: 740
 (0 2) 740 DATA "EXAMPLE", "TENSION", "QUININE", "KIDNEY", "REPLICA", "SLEEPER"
+  Origs: 730
+  Dests: 750
 (0 2) 750 DATA "TRIANGLE", "KANGAROO", "MAHOGANY", "SERGEANT", "SEQUENCE"
+  Origs: 740
+  Dests: 760
 (0 2) 760 DATA "MOUSTACHE", "DANGEROUS", "SCIENTIST", "DIFFERENT", "QUIESCENT"
+  Origs: 750
+  Dests: 770
 (0 2) 770 DATA "MAGISTRATE", "ERRONEOUSLY", "LOUDSPEAKER", "PHYTOTOXIC"
+  Origs: 760
+  Dests: 780
 (0 2) 780 DATA "MATRIMONIAL", "PARASYMPATHOMIMETIC", "THIGMOTROPISM"
+  Origs: 770
+  Dests: 990
 (0 2) 990 PRINT "BYE NOW"
+  Origs: 780
+  Dests: 999
 (0 1) 999 END
+  Origs: 380, 990
+  Dests: 
 
 Unreachable code:
 

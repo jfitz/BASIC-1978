@@ -20,97 +20,227 @@ Halstead complexity:
  time: 49.073
 
 (0 4) 2 PRINT TAB(33); "WORD"
+  Origs: 
+  Dests: 3
 (0 4) 3 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 2
+  Dests: 4
 (0 2) 4 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
+  Origs: 3
+  Dests: 5
 (0 6) 5 DIM S(7), A(7), L(7), D(7), P(7)
+  Origs: 4
+  Dests: 10
 (0 2) 10 PRINT "I AM THINKING OF A WORD -- YOU GUESS IT.  I WILL GIVE YOU"
+  Origs: 5
+  Dests: 15
 (0 2) 15 PRINT "CLUES TO HELP YOU GET IT.  GOOD LUCK!!"
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 10
+  Dests: 20
 (0 1) 20 REM
+  Origs: 15
+  Dests: 30
 (0 2) 30 PRINT
 (0 2)    PRINT
 (0 2)    PRINT "YOU ARE STARTING A NEW GAME..."
+  Origs: 20, 320, 520
+  Dests: 35
 (0 1) 35 RESTORE
+  Origs: 30
+  Dests: 40
 (1 2) 40 READ N
+  Origs: 35
+  Dests: 50
 (0 4) 50 C = INT(RND(1) * N + 1)
+  Origs: 40
+  Dests: 60
 (1 3) 60 FOR I = 1 TO C
+  Origs: 50
+  Dests: 70
 (1 2) 70 READ S$
+  Origs: 60
+  Dests: 80
 (0 1) 80 NEXT I
+  Origs: 70
+  Dests: 90
 (0 3) 90 G = 0
+  Origs: 80
+  Dests: 95
 (0 4) 95 S(0) = LEN(S$)
+  Origs: 90
+  Dests: 100
 (1 4) 100 FOR I = 1 TO LEN(S$)
 (0 4)     S(I) = ASC(MID$(S$, I, 1))
 (0 1)     NEXT I
+  Origs: 95
+  Dests: 110
 (1 3) 110 FOR I = 1 TO 5
+  Origs: 100
+  Dests: 120
 (0 3) 120 A(I) = 45
+  Origs: 110
+  Dests: 130
 (0 1) 130 NEXT I
+  Origs: 120
+  Dests: 140
 (1 3) 140 FOR J = 1 TO 5
+  Origs: 130
+  Dests: 144
 (0 3) 144 P(J) = 0
+  Origs: 140
+  Dests: 146
 (0 1) 146 NEXT J
+  Origs: 144
+  Dests: 150
 (0 2) 150 PRINT "GUESS A FIVE LETTER WORD";
+  Origs: 146, 290, 410
+  Dests: 160
 (1 2) 160 INPUT L$
+  Origs: 150
+  Dests: 170
 (0 4) 170 G = G + 1
+  Origs: 160
+  Dests: 172
 (1 4) 172 IF S$ = L$ THEN 500
+  Origs: 170
+  Dests: 173, 500
 (1 3) 173 FOR I = 1 TO 7
 (0 3)     P(I) = 0
 (0 1)     NEXT I
+  Origs: 172
+  Dests: 175
 (0 4) 175 L(0) = LEN(L$)
+  Origs: 173
+  Dests: 180
 (1 4) 180 FOR I = 1 TO LEN(L$)
 (0 4)     L(I) = ASC(MID$(L$, I, 1))
 (0 1)     NEXT I
+  Origs: 175
+  Dests: 190
 (1 4) 190 IF L(1) = 63 THEN 300
+  Origs: 180
+  Dests: 200, 300
 (1 4) 200 IF L(0) <> 5 THEN 400
+  Origs: 190
+  Dests: 205, 400
 (0 3) 205 M = 0
 (0 3)     Q = 1
+  Origs: 200
+  Dests: 210
 (1 3) 210 FOR I = 1 TO 5
+  Origs: 205
+  Dests: 220
 (1 3) 220 FOR J = 1 TO 5
+  Origs: 210
+  Dests: 230
 (1 4) 230 IF S(I) <> L(J) THEN 260
+  Origs: 220
+  Dests: 231, 260
 (0 3) 231 P(Q) = L(J)
+  Origs: 230
+  Dests: 232
 (0 4) 232 Q = Q + 1
+  Origs: 231
+  Dests: 233
 (1 4) 233 IF I <> J THEN 250
+  Origs: 232
+  Dests: 240, 250
 (0 3) 240 A(J) = L(J)
+  Origs: 233
+  Dests: 250
 (0 4) 250 M = M + 1
+  Origs: 233, 240
+  Dests: 260
 (0 1) 260 NEXT J
+  Origs: 230, 250
+  Dests: 265
 (0 1) 265 NEXT I
+  Origs: 260
+  Dests: 270
 (0 3) 270 A(0) = 5
+  Origs: 265
+  Dests: 272
 (0 3) 272 P(0) = M
+  Origs: 270
+  Dests: 275
 (0 3) 275 A$ = ""
 (1 3)     FOR I = 1 TO A(0)
 (0 5)     A$ = A$ + CHR$(A(I))
 (0 1)     NEXT I
+  Origs: 272
+  Dests: 277
 (0 3) 277 P$ = ""
 (1 3)     FOR I = 1 TO P(0)
 (0 5)     P$ = P$ + CHR$(P(I))
 (0 1)     NEXT I
+  Origs: 275
+  Dests: 280
 (0 5) 280 PRINT "THERE WERE"; M; "MATCHES AND THE COMMON LETTERS WERE..."; P$
+  Origs: 277
+  Dests: 285
 (0 3) 285 PRINT "FROM THE EXACT LETTER MATCHES, YOU KNOW................"; A$
+  Origs: 280
+  Dests: 286
 (1 4) 286 IF A$ = S$ THEN 500
+  Origs: 285
+  Dests: 287, 500
 (1 4) 287 IF M > 1 THEN 289
+  Origs: 286
+  Dests: 288, 289
 (0 2) 288 PRINT
 (0 2)     PRINT "IF YOU GIVE UP, TYPE '?' FOR YOUR NEXT GUESS."
+  Origs: 287
+  Dests: 289
 (0 2) 289 PRINT
+  Origs: 287, 288
+  Dests: 290
 (0 3) 290 GOTO 150
+  Origs: 289
+  Dests: 150
 (0 3) 300 S$ = ""
 (1 3)     FOR I = 1 TO 7
 (0 5)     S$ = S$ + CHR$(S(I))
 (0 1)     NEXT I
+  Origs: 190
+  Dests: 310
 (0 3) 310 PRINT "THE SECRET WORD IS "; S$
 (0 2)     PRINT
+  Origs: 300
+  Dests: 320
 (0 3) 320 GOTO 30
+  Origs: 310
+  Dests: 30
 (0 2) 400 PRINT "YOU MUST GUESS A 5 LETTER WORD.  START AGAIN."
+  Origs: 200
+  Dests: 410
 (0 2) 410 PRINT
 (0 4)     G = G - 1
 (0 3)     GOTO 150
+  Origs: 400
+  Dests: 150
 (0 4) 500 PRINT "YOU HAVE GUESSED THE WORD.  IT TOOK"; G; "GUESSES!"
 (0 2)     PRINT
+  Origs: 172, 286
+  Dests: 510
 (1 2) 510 INPUT "WANT TO PLAY AGAIN"; Q$
+  Origs: 500
+  Dests: 520
 (1 5) 520 IF Q$ = "YES" THEN 30
+  Origs: 510
+  Dests: 30, 530
 (0 2) 530 DATA 12, "DINKY", "SMOKE", "WATER", "GRASS", "TRAIN", "MIGHT", "FIRST"
+  Origs: 520
+  Dests: 540
 (0 2) 540 DATA "CANDY", "CHAMP", "WOULD", "CLUMP", "DOPEY"
+  Origs: 530
+  Dests: 999
 (0 1) 999 END
+  Origs: 540
+  Dests: 
 
 Unreachable code:
 

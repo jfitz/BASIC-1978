@@ -20,84 +20,224 @@ Halstead complexity:
  time: 34.295
 
 (0 4) 1 PRINT TAB(28); "GAME OF EVEN WINS"
+  Origs: 
+  Dests: 2
 (0 4) 2 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 1
+  Dests: 3
 (0 2) 3 PRINT
 (0 2)   PRINT
+  Origs: 2
+  Dests: 4
 (1 2) 4 INPUT "DO YOU WANT INSTRUCTIONS (YES OR NO)"; A$
 (0 2)   PRINT
+  Origs: 3
+  Dests: 5
 (1 4) 5 IF A$ = "NO" THEN 20
+  Origs: 4
+  Dests: 6, 20
 (0 2) 6 PRINT "THE GAME IS PLAYED AS FOLLOWS:"
 (0 2)   PRINT
+  Origs: 5
+  Dests: 7
 (0 2) 7 PRINT "AT THE BEGINNING OF THE GAME, A RANDOM NUMBER OF CHIPS ARE"
+  Origs: 6
+  Dests: 8
 (0 2) 8 PRINT "PLACED ON THE BOARD.  THE NUMBER OF CHIPS ALWAYS STARTS"
+  Origs: 7
+  Dests: 9
 (0 2) 9 PRINT "AS AN ODD NUMBER.  ON EACH TURN, A PLAYER MUST TAKE ONE,"
+  Origs: 8
+  Dests: 10
 (0 2) 10 PRINT "TWO, THREE, OR FOUR CHIPS.  THE WINNER IS THE PLAYER WHO"
+  Origs: 9
+  Dests: 11
 (0 2) 11 PRINT "FINISHES WITH A TOTAL NUMBER OF CHIPS THAT IS EVEN."
+  Origs: 10
+  Dests: 12
 (0 2) 12 PRINT "THE COMPUTER STARTS OUT KNOWING ONLY THE RULES OF THE"
+  Origs: 11
+  Dests: 13
 (0 2) 13 PRINT "GAME.  IT GRADUALLY LEARNS TO PLAY WELL.  IT SHOULD BE"
+  Origs: 12
+  Dests: 14
 (0 2) 14 PRINT "DIFFICULT TO BEAT THE COMPUTER AFTER TWENTY GAMES IN A ROW."
+  Origs: 13
+  Dests: 15
 (0 2) 15 PRINT "TRY IT!!!!"
 (0 2)    PRINT
+  Origs: 14
+  Dests: 16
 (0 2) 16 PRINT "TO QUIT AT ANY TIME, TYPE A '0' AS YOUR MOVE."
 (0 2)    PRINT
+  Origs: 15
+  Dests: 20
 (0 2) 20 DIM R(1, 5)
+  Origs: 5, 16
+  Dests: 25
 (0 3) 25 L = 0
 (0 3)    B = 0
+  Origs: 20
+  Dests: 30
 (1 3) 30 FOR I = 0 TO 5
+  Origs: 25
+  Dests: 40
 (0 3) 40 R(1, I) = 4
+  Origs: 30
+  Dests: 50
 (0 3) 50 R(0, I) = 4
+  Origs: 40
+  Dests: 60
 (0 1) 60 NEXT I
+  Origs: 50
+  Dests: 70
 (0 3) 70 A = 0
 (0 3)    B = 0
+  Origs: 60, 410, 430, 480, 500
+  Dests: 90
 (0 6) 90 P = INT((13 * RND(1) + 9) / 2) * 2 + 1
+  Origs: 70
+  Dests: 100
 (1 4) 100 IF P = 1 THEN 530
+  Origs: 90, 310
+  Dests: 110, 530
 (0 4) 110 PRINT "THERE ARE"; P; "CHIPS ON THE BOARD."
+  Origs: 100
+  Dests: 120
 (0 3) 120 E1 = E
+  Origs: 110, 540
+  Dests: 130
 (0 3) 130 L1 = L
+  Origs: 120
+  Dests: 140
 (0 7) 140 E = (A / 2 - INT(A / 2)) * 2
+  Origs: 130
+  Dests: 150
 (0 4) 150 L = INT((P / 6 - INT(P / 6)) * 6 + .5)
+  Origs: 140
+  Dests: 160
 (1 4) 160 IF R(E, L) >= P THEN 320
+  Origs: 150
+  Dests: 170, 320
 (0 3) 170 M = R(E, L)
+  Origs: 160
+  Dests: 180
 (1 4) 180 IF M <= 0 THEN 370
+  Origs: 170
+  Dests: 190, 370
 (0 4) 190 P = P - M
+  Origs: 180
+  Dests: 200
 (1 4) 200 IF M = 1 THEN 510
+  Origs: 190
+  Dests: 210, 510
 (0 6) 210 PRINT "COMPUTER TAKES"; M; "CHIPS LEAVING"; P; "... YOUR MOVE";
+  Origs: 200
+  Dests: 220
 (0 4) 220 B = B + M
+  Origs: 210, 520
+  Dests: 230
 (1 2) 230 INPUT M
+  Origs: 220, 470
+  Dests: 240
 (0 4) 240 M = INT(M)
+  Origs: 230
+  Dests: 250
 (1 4) 250 IF M < 1 THEN 450
+  Origs: 240
+  Dests: 260, 450
 (1 4) 260 IF M > 4 THEN 460
+  Origs: 250
+  Dests: 270, 460
 (1 4) 270 IF M > P THEN 460
+  Origs: 260
+  Dests: 280, 460
 (1 4) 280 IF M = P THEN 360
+  Origs: 270
+  Dests: 290, 360
 (0 4) 290 P = P - M
+  Origs: 280
+  Dests: 300
 (0 4) 300 A = A + M
+  Origs: 290
+  Dests: 310
 (0 3) 310 GOTO 100
+  Origs: 300
+  Dests: 100
 (1 4) 320 IF P = 1 THEN 550
+  Origs: 160
+  Dests: 330, 550
 (0 4) 330 PRINT "COMPUTER TAKES"; P; "CHIPS."
+  Origs: 320
+  Dests: 340
 (0 3) 340 R(E, L) = P
+  Origs: 330, 560
+  Dests: 350
 (0 4) 350 B = B + P
+  Origs: 340
+  Dests: 360
 (1 6) 360 IF B / 2 = INT(B / 2) THEN 420
+  Origs: 280, 350
+  Dests: 370, 420
 (0 2) 370 PRINT "GAME OVER ... YOU WIN!!!"
 (0 2)     PRINT
+  Origs: 180, 360
+  Dests: 390
 (1 4) 390 IF R(E, L) = 1 THEN 480
+  Origs: 370
+  Dests: 400, 480
 (0 4) 400 R(E, L) = R(E, L) - 1
+  Origs: 390
+  Dests: 410
 (0 3) 410 GOTO 70
+  Origs: 400
+  Dests: 70
 (0 2) 420 PRINT "GAME OVER ... I WIN!!!"
 (0 2)     PRINT
+  Origs: 360
+  Dests: 430
 (0 3) 430 GOTO 70
+  Origs: 420
+  Dests: 70
 (1 4) 450 IF M = 0 THEN 570
+  Origs: 250
+  Dests: 460, 570
 (0 3) 460 PRINT M; "IS AN ILLEGAL MOVE ... YOUR MOVE";
+  Origs: 260, 270, 450
+  Dests: 470
 (0 3) 470 GOTO 230
+  Origs: 460
+  Dests: 230
 (1 5) 480 IF R(E1, L1) = 1 THEN 70
+  Origs: 390
+  Dests: 70, 490
 (0 4) 490 R(E1, L1) = R(E1, L1) - 1
+  Origs: 480
+  Dests: 500
 (0 3) 500 GOTO 70
+  Origs: 490
+  Dests: 70
 (0 4) 510 PRINT "COMPUTER TAKES 1 CHIP LEAVING"; P; "... YOUR MOVE";
+  Origs: 200
+  Dests: 520
 (0 3) 520 GOTO 220
+  Origs: 510
+  Dests: 220
 (0 2) 530 PRINT "THERE IS 1 CHIP ON THE BOARD."
+  Origs: 100
+  Dests: 540
 (0 3) 540 GOTO 120
+  Origs: 530
+  Dests: 120
 (0 2) 550 PRINT "COMPUTER TAKES 1 CHIP."
+  Origs: 320
+  Dests: 560
 (0 3) 560 GOTO 340
+  Origs: 550
+  Dests: 340
 (0 1) 570 END
+  Origs: 450
+  Dests: 
 
 Unreachable code:
 

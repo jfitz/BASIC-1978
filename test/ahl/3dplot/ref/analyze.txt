@@ -20,24 +20,58 @@ Halstead complexity:
  time: 5.043
 
 (0 4) 1 PRINT TAB(32); "3D PLOT"
+  Origs: 
+  Dests: 2
 (0 4) 2 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 1
+  Dests: 3
 (0 2) 3 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
+  Origs: 2
+  Dests: 5
 (0 4) 5 DEF FNA(Z) = 30 * EXP(-Z * Z / 100)
+  Origs: 3
+  Dests: 100
 (0 2) 100 PRINT
+  Origs: 5
+  Dests: 110
 (1 5) 110 FOR X = -30 TO 30 STEP 1.5
+  Origs: 100
+  Dests: 120
 (0 3) 120 L = 0
+  Origs: 110
+  Dests: 130
 (0 5) 130 Y1 = 5 * INT(SQR(900 - X * X) / 5)
+  Origs: 120
+  Dests: 140
 (1 6) 140 FOR Y = Y1 TO -Y1 STEP -5
+  Origs: 130
+  Dests: 150
 (0 4) 150 Z = INT(25 + FNA(SQR(X * X + Y * Y)) - .7 * Y)
+  Origs: 140
+  Dests: 160
 (1 4) 160 IF Z <= L THEN 190
+  Origs: 150
+  Dests: 170, 190
 (0 3) 170 L = Z
+  Origs: 160
+  Dests: 180
 (0 4) 180 PRINT TAB(Z); "*";
+  Origs: 170
+  Dests: 190
 (0 1) 190 NEXT Y
+  Origs: 160, 180
+  Dests: 200
 (0 2) 200 PRINT
+  Origs: 190
+  Dests: 210
 (0 1) 210 NEXT X
+  Origs: 200
+  Dests: 300
 (0 1) 300 END
+  Origs: 210
+  Dests: 
 
 Unreachable code:
 

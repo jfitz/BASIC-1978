@@ -20,167 +20,437 @@ Halstead complexity:
  time: 127.595
 
 (0 4) 1 PRINT TAB(33); "H-I-Q"
+  Origs: 
+  Dests: 2
 (0 4) 2 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 1
+  Dests: 3
 (0 2) 3 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
+  Origs: 2
+  Dests: 4
 (0 3) 4 DIM B(70), T(9, 9)
+  Origs: 3
+  Dests: 5
 (0 2) 5 PRINT "HERE IS THE BOARD:"
 (0 2)   PRINT
+  Origs: 4
+  Dests: 6
 (0 2) 6 PRINT "          !    !    !"
+  Origs: 5
+  Dests: 7
 (0 2) 7 PRINT "         13   14   15"
 (0 2)   PRINT
+  Origs: 6
+  Dests: 8
 (0 2) 8 PRINT "          !    !    !"
+  Origs: 7
+  Dests: 9
 (0 2) 9 PRINT "         22   23   24"
 (0 2)   PRINT
+  Origs: 8
+  Dests: 10
 (0 2) 10 PRINT "!    !    !    !    !    !    !"
+  Origs: 9
+  Dests: 11
 (0 2) 11 PRINT "29   30   31   32   33   34   35"
 (0 2)    PRINT
+  Origs: 10
+  Dests: 12
 (0 2) 12 PRINT "!    !    !    !    !    !    !"
+  Origs: 11
+  Dests: 13
 (0 2) 13 PRINT "38   39   40   41   42   43   44"
 (0 2)    PRINT
+  Origs: 12
+  Dests: 14
 (0 2) 14 PRINT "!    !    !    !    !    !    !"
+  Origs: 13
+  Dests: 15
 (0 2) 15 PRINT "47   48   49   50   51   52   53"
 (0 2)    PRINT
+  Origs: 14
+  Dests: 16
 (0 2) 16 PRINT "          !    !    !"
+  Origs: 15
+  Dests: 17
 (0 2) 17 PRINT "         58   59   60"
 (0 2)    PRINT
+  Origs: 16
+  Dests: 18
 (0 2) 18 PRINT "          !    !    !"
+  Origs: 17
+  Dests: 19
 (0 2) 19 PRINT "         67   68   69"
 (0 2)    PRINT
+  Origs: 18
+  Dests: 20
 (0 2) 20 PRINT "TO SAVE TYPING TIME, A COMPRESSED VERSION OF THE GAME BOARD"
+  Origs: 19
+  Dests: 22
 (0 2) 22 PRINT "WILL BE USED DURING PLAY.  REFER TO THE ABOVE ONE FOR PEG"
+  Origs: 20
+  Dests: 24
 (0 2) 24 PRINT "NUMBERS.  OK, LET'S BEGIN."
+  Origs: 22
+  Dests: 28
 (0 1) 28 REM *** SET UP BOARD
+  Origs: 24, 1618
+  Dests: 29
 (1 3) 29 FOR R = 1 TO 9
+  Origs: 28
+  Dests: 30
 (1 3) 30 FOR C = 1 TO 9
+  Origs: 29
+  Dests: 31
 (1 11) 31 IF (R - 4) * (R - 5) * (R - 6) = 0 THEN 40
+  Origs: 30
+  Dests: 32, 40
 (1 11) 32 IF (C - 4) * (C - 5) * (C - 6) = 0 THEN 40
+  Origs: 31
+  Dests: 35, 40
 (0 4) 35 T(R, C) = -5
+  Origs: 32, 40
+  Dests: 36
 (0 2) 36 GOTO 50
+  Origs: 35
+  Dests: 50
 (1 15) 40 IF (R - 1) * (C - 1) * (R - 9) * (C - 9) = 0 THEN 35
+  Origs: 31, 32
+  Dests: 35, 42
 (0 3) 42 T(R, C) = 5
+  Origs: 40
+  Dests: 50
 (0 1) 50 NEXT C
+  Origs: 36, 42
+  Dests: 60
 (0 1) 60 NEXT R
+  Origs: 50
+  Dests: 65
 (0 3) 65 T(5, 5) = 0
 (0 2)    GOSUB 500
+  Origs: 60
+  Dests: 70, 500
 (0 1) 70 REM *** INPUT MOVE AND CHECK ON LEGALITY
+  Origs: 65
+  Dests: 75
 (1 3) 75 FOR W = 1 TO 33
+  Origs: 70
+  Dests: 77
 (1 2) 77 READ M
+  Origs: 75
+  Dests: 79
 (0 2) 79 DATA 13, 14, 15, 22, 23, 24, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 41
+  Origs: 77
+  Dests: 81
 (0 2) 81 DATA 42, 43, 44, 47, 48, 49, 50, 51, 52, 53, 58, 59, 60, 67, 68, 69
+  Origs: 79
+  Dests: 83
 (0 4) 83 B(M) = -7
 (0 1)    NEXT W
+  Origs: 81
+  Dests: 86
 (0 4) 86 B(41) = -3
+  Origs: 83
+  Dests: 100
 (1 2) 100 INPUT "MOVE WHICH PIECE"; Z
+  Origs: 86, 120, 156, 220
+  Dests: 110
 (1 6) 110 IF B(Z) = -7 THEN 140
+  Origs: 100
+  Dests: 120, 140
 (0 2) 120 PRINT "ILLEGAL MOVE, TRY AGAIN..."
 (0 3)     GOTO 100
+  Origs: 110, 150, 153, 170, 180, 1045, 1085, 1135, 1175
+  Dests: 100
 (1 2) 140 INPUT "TO WHERE"; P
+  Origs: 110
+  Dests: 150
 (1 5) 150 IF B(P) = 0 THEN 120
+  Origs: 140
+  Dests: 120, 153
 (1 7) 153 IF B(P) = -7 THEN 120
+  Origs: 150
+  Dests: 120, 156
 (1 5) 156 IF Z = P THEN 100
+  Origs: 153
+  Dests: 100, 160
 (1 7) 160 IF ((Z + P) / 2) = INT((Z + P) / 2) THEN 180
+  Origs: 156
+  Dests: 170, 180
 (0 3) 170 GOTO 120
+  Origs: 160
+  Dests: 120
 (1 11) 180 IF (ABS(Z - P) - 2) * (ABS(Z - P) - 18) <> 0 THEN 120
+  Origs: 160
+  Dests: 120, 190
 (0 2) 190 GOSUB 1000
+  Origs: 180
+  Dests: 200, 1000
 (0 2) 200 GOSUB 500
+  Origs: 190
+  Dests: 210, 500
 (0 2) 210 GOSUB 1500
+  Origs: 200
+  Dests: 220, 1500
 (0 3) 220 GOTO 100
+  Origs: 210
+  Dests: 100
 (0 1) 500 REM *** PRINT BOARD
+  Origs: 65, 200
+  Dests: 510
 (1 3) 510 FOR X = 1 TO 9
+  Origs: 500
+  Dests: 520
 (1 3) 520 FOR Y = 1 TO 9
+  Origs: 510
+  Dests: 525
 (1 14) 525 IF (X - 1) * (X - 9) * (Y - 1) * (Y - 9) = 0 THEN 550
+  Origs: 520
+  Dests: 530, 550
 (1 11) 530 IF (X - 4) * (X - 5) * (X - 6) = 0 THEN 570
+  Origs: 525
+  Dests: 540, 570
 (1 11) 540 IF (Y - 4) * (Y - 5) * (Y - 6) = 0 THEN 570
+  Origs: 530
+  Dests: 550, 570
 (0 1) 550 REM
+  Origs: 525, 540
+  Dests: 560
 (0 2) 560 GOTO 610
+  Origs: 550
+  Dests: 610
 (1 4) 570 IF T(X, Y) <> 5 THEN 600
+  Origs: 530, 540
+  Dests: 580, 600
 (0 4) 580 PRINT TAB(Y * 2); "!";
+  Origs: 570
+  Dests: 590
 (0 2) 590 GOTO 610
+  Origs: 580
+  Dests: 610
 (0 4) 600 PRINT TAB(Y * 2); "O";
+  Origs: 570
+  Dests: 610
 (0 1) 610 REM
+  Origs: 560, 590, 600
+  Dests: 615
 (0 1) 615 NEXT Y
+  Origs: 610
+  Dests: 620
 (0 2) 620 PRINT
+  Origs: 615
+  Dests: 630
 (0 1) 630 NEXT X
+  Origs: 620
+  Dests: 640
 (0 1) 640 RETURN
+  Origs: 630
+  Dests: 
 (0 1) 1000 REM *** UPDATE BOARD
+  Origs: 190
+  Dests: 1005
 (0 3) 1005 C = 1
 (1 3)      FOR X = 1 TO 9
+  Origs: 1000
+  Dests: 1020
 (1 3) 1020 FOR Y = 1 TO 9
+  Origs: 1005
+  Dests: 1030
 (1 4) 1030 IF C <> Z THEN 1220
+  Origs: 1020
+  Dests: 1040, 1220
 (1 5) 1040 IF C + 2 <> P THEN 1080
+  Origs: 1030
+  Dests: 1045, 1080
 (1 5) 1045 IF T(X, Y + 1) = 0 THEN 120
+  Origs: 1040
+  Dests: 120, 1050
 (0 3) 1050 T(X, Y + 2) = 5
+  Origs: 1045
+  Dests: 1060
 (0 3) 1060 T(X, Y + 1) = 0
 (0 4)      B(C + 1) = -3
+  Origs: 1050
+  Dests: 1070
 (0 2) 1070 GOTO 1200
+  Origs: 1060
+  Dests: 1200
 (1 5) 1080 IF C + 18 <> P THEN 1130
+  Origs: 1040
+  Dests: 1085, 1130
 (1 5) 1085 IF T(X + 1, Y) = 0 THEN 120
+  Origs: 1080
+  Dests: 120, 1090
 (0 3) 1090 T(X + 2, Y) = 5
 (0 3)      T(X + 1, Y) = 0
 (0 4)      B(C + 9) = -3
+  Origs: 1085
+  Dests: 1120
 (0 2) 1120 GOTO 1200
+  Origs: 1090
+  Dests: 1200
 (1 5) 1130 IF C - 2 <> P THEN 1170
+  Origs: 1080
+  Dests: 1135, 1170
 (1 5) 1135 IF T(X, Y - 1) = 0 THEN 120
+  Origs: 1130
+  Dests: 120, 1140
 (0 3) 1140 T(X, Y - 2) = 5
 (0 3)      T(X, Y - 1) = 0
 (0 4)      B(C - 1) = -3
+  Origs: 1135
+  Dests: 1160
 (0 2) 1160 GOTO 1200
+  Origs: 1140
+  Dests: 1200
 (1 5) 1170 IF C - 18 <> P THEN 1220
+  Origs: 1130
+  Dests: 1175, 1220
 (1 5) 1175 IF T(X - 1, Y) = 0 THEN 120
+  Origs: 1170
+  Dests: 120, 1180
 (0 3) 1180 T(X - 2, Y) = 5
 (0 3)      T(X - 1, Y) = 0
 (0 4)      B(C - 9) = -3
+  Origs: 1175
+  Dests: 1200
 (0 4) 1200 B(Z) = -3
 (0 4)      B(P) = -7
+  Origs: 1070, 1120, 1160, 1180
+  Dests: 1210
 (0 3) 1210 T(X, Y) = 0
 (0 2)      GOTO 1240
+  Origs: 1200
+  Dests: 1240
 (0 4) 1220 C = C + 1
+  Origs: 1030, 1170
+  Dests: 1225
 (0 1) 1225 NEXT Y
+  Origs: 1220
+  Dests: 1230
 (0 1) 1230 NEXT X
+  Origs: 1225
+  Dests: 1240
 (0 1) 1240 RETURN
+  Origs: 1210, 1230
+  Dests: 
 (0 1) 1500 REM *** CHECK IF GAME IS OVER
+  Origs: 210
+  Dests: 1505
 (0 3) 1505 F = 0
+  Origs: 1500
+  Dests: 1510
 (1 3) 1510 FOR R = 2 TO 8
+  Origs: 1505
+  Dests: 1520
 (1 3) 1520 FOR C = 2 TO 8
+  Origs: 1510
+  Dests: 1530
 (1 4) 1530 IF T(R, C) <> 5 THEN 1580
+  Origs: 1520
+  Dests: 1535, 1580
 (0 4) 1535 F = F + 1
+  Origs: 1530
+  Dests: 1540
 (1 5) 1540 FOR A = R - 1 TO R + 1
+  Origs: 1535
+  Dests: 1545
 (0 3) 1545 T = 0
+  Origs: 1540
+  Dests: 1550
 (1 5) 1550 FOR B = C - 1 TO C + 1
+  Origs: 1545
+  Dests: 1560
 (0 4) 1560 T = T + T(A, B)
+  Origs: 1550
+  Dests: 1561
 (0 1) 1561 NEXT B
+  Origs: 1560
+  Dests: 1564
 (1 4) 1564 IF T <> 10 THEN 1567
+  Origs: 1561
+  Dests: 1565, 1567
 (1 4) 1565 IF T(A, C) <> 0 THEN 1630
+  Origs: 1564
+  Dests: 1567, 1630
 (0 1) 1567 NEXT A
+  Origs: 1564, 1565
+  Dests: 1568
 (1 5) 1568 FOR X = C - 1 TO C + 1
+  Origs: 1567
+  Dests: 1569
 (0 3) 1569 T = 0
+  Origs: 1568
+  Dests: 1570
 (1 5) 1570 FOR Y = R - 1 TO R + 1
+  Origs: 1569
+  Dests: 1571
 (0 4) 1571 T = T + T(Y, X)
+  Origs: 1570
+  Dests: 1572
 (0 1) 1572 NEXT Y
+  Origs: 1571
+  Dests: 1573
 (1 4) 1573 IF T <> 10 THEN 1575
+  Origs: 1572
+  Dests: 1574, 1575
 (1 4) 1574 IF T(R, X) <> 0 THEN 1630
+  Origs: 1573
+  Dests: 1575, 1630
 (0 1) 1575 NEXT X
+  Origs: 1573, 1574
+  Dests: 1580
 (0 1) 1580 NEXT C
+  Origs: 1530, 1575
+  Dests: 1590
 (0 1) 1590 NEXT R
+  Origs: 1580
+  Dests: 1600
 (0 1) 1600 REM *** GAME IS OVER
+  Origs: 1590
+  Dests: 1605
 (0 2) 1605 PRINT "THE GAME IS OVER."
+  Origs: 1600
+  Dests: 1610
 (0 4) 1610 PRINT "YOU HAD"; F; "PIECES REMAINING."
+  Origs: 1605
+  Dests: 1611
 (1 4) 1611 IF F <> 1 THEN 1615
+  Origs: 1610
+  Dests: 1612, 1615
 (0 2) 1612 PRINT "BRAVO!  YOU MADE A PERFECT SCORE!"
+  Origs: 1611
+  Dests: 1613
 (0 2) 1613 PRINT "SAVE THIS PAPER AS A RECORD OF YOUR ACCOMPLISHMENT!"
+  Origs: 1612
+  Dests: 1615
 (0 2) 1615 PRINT
 (1 2)      INPUT "PLAY AGAIN (YES OR NO)"; A$
+  Origs: 1611, 1613
+  Dests: 1617
 (1 4) 1617 IF A$ = "NO" THEN 2000
+  Origs: 1615
+  Dests: 1618, 2000
 (0 1) 1618 RESTORE
 (0 3)      GOTO 28
+  Origs: 1617
+  Dests: 28
 (0 1) 1620 STOP
+  Origs: 
+  Dests: 
 (0 1) 1630 RETURN
+  Origs: 1565, 1574
+  Dests: 
 (0 2) 2000 PRINT
 (0 2)      PRINT "SO LONG FOR NOW."
 (0 2)      PRINT
+  Origs: 1617
+  Dests: 2010
 (0 1) 2010 END
+  Origs: 2000
+  Dests: 
 
 Unreachable code:
 

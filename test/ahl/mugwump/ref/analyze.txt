@@ -20,63 +20,175 @@ Halstead complexity:
  time: 25.476
 
 (0 4) 1 PRINT TAB(33); "MUGWUMP"
+  Origs: 
+  Dests: 2
 (0 4) 2 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 1
+  Dests: 3
 (0 2) 3 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
+  Origs: 2
+  Dests: 4
 (0 1) 4 REM     COURTESY PEOPLE'S COMPUTER COMPANY
+  Origs: 3
+  Dests: 10
 (0 2) 10 DIM P(4, 2)
+  Origs: 4
+  Dests: 20
 (0 2) 20 PRINT "THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
+  Origs: 10
+  Dests: 30
 (0 2) 30 PRINT "HIDDEN ON A 10 BY 10 GRID.  HOMEBASE IS POSITION 0,0."
+  Origs: 20
+  Dests: 40
 (0 2) 40 PRINT "ANY GUESS YOU MAKE MUST BE TWO NUMBERS WITH EACH"
+  Origs: 30
+  Dests: 50
 (0 2) 50 PRINT "NUMBER BETWEEN 0 AND 9, INCLUSIVE.  FIRST NUMBER"
+  Origs: 40
+  Dests: 60
 (0 2) 60 PRINT "IS DISTANCE TO RIGHT OF HOMEBASE AND SECOND NUMBER"
+  Origs: 50
+  Dests: 70
 (0 2) 70 PRINT "IS DISTANCE ABOVE HOMEBASE."
+  Origs: 60
+  Dests: 80
 (0 2) 80 PRINT
+  Origs: 70
+  Dests: 90
 (0 2) 90 PRINT "YOU GET 10 TRIES.  AFTER EACH TRY, I WILL TELL"
+  Origs: 80
+  Dests: 100
 (0 2) 100 PRINT "YOU HOW FAR YOU ARE FROM EACH MUGWUMP."
+  Origs: 90
+  Dests: 110
 (0 2) 110 PRINT
+  Origs: 100
+  Dests: 240
 (0 2) 240 GOSUB 1000
+  Origs: 110, 630
+  Dests: 250, 1000
 (0 3) 250 T = 0
+  Origs: 240
+  Dests: 260
 (0 4) 260 T = T + 1
+  Origs: 250, 470
+  Dests: 270
 (0 2) 270 PRINT
+  Origs: 260
+  Dests: 275
 (0 2) 275 PRINT
+  Origs: 270
+  Dests: 290
 (0 4) 290 PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+  Origs: 275
+  Dests: 300
 (2 3) 300 INPUT M, N
+  Origs: 290
+  Dests: 310
 (1 3) 310 FOR I = 1 TO 4
+  Origs: 300
+  Dests: 320
 (1 6) 320 IF P(I, 1) = -1 THEN 400
+  Origs: 310
+  Dests: 330, 400
 (1 4) 330 IF P(I, 1) <> M THEN 380
+  Origs: 320
+  Dests: 340, 380
 (1 4) 340 IF P(I, 2) <> N THEN 380
+  Origs: 330
+  Dests: 350, 380
 (0 4) 350 P(I, 1) = -1
+  Origs: 340
+  Dests: 360
 (0 3) 360 PRINT "YOU HAVE FOUND MUGWUMP"; I
+  Origs: 350
+  Dests: 370
 (0 2) 370 GOTO 400
+  Origs: 360
+  Dests: 400
 (0 4) 380 D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+  Origs: 330, 340
+  Dests: 390
 (0 7) 390 PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+  Origs: 380
+  Dests: 400
 (0 1) 400 NEXT I
+  Origs: 320, 370, 390
+  Dests: 410
 (1 3) 410 FOR J = 1 TO 4
+  Origs: 400
+  Dests: 420
 (1 6) 420 IF P(J, 1) <> -1 THEN 470
+  Origs: 410
+  Dests: 430, 470
 (0 1) 430 NEXT J
+  Origs: 420
+  Dests: 440
 (0 2) 440 PRINT
+  Origs: 430
+  Dests: 450
 (0 4) 450 PRINT "YOU GOT THEM ALL IN"; T; "TURNS!"
+  Origs: 440
+  Dests: 460
 (0 2) 460 GOTO 580
+  Origs: 450
+  Dests: 580
 (1 5) 470 IF T < 10 THEN 260
+  Origs: 420
+  Dests: 260, 480
 (0 2) 480 PRINT
+  Origs: 470
+  Dests: 490
 (0 2) 490 PRINT "SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
+  Origs: 480
+  Dests: 540
 (1 3) 540 FOR I = 1 TO 4
+  Origs: 490
+  Dests: 550
 (1 6) 550 IF P(I, 1) = -1 THEN 570
+  Origs: 540
+  Dests: 560, 570
 (0 8) 560 PRINT "MUGWUMP"; I; "IS AT ("; P(I, 1); ","; P(I, 2); ")"
+  Origs: 550
+  Dests: 570
 (0 1) 570 NEXT I
+  Origs: 550, 560
+  Dests: 580
 (0 2) 580 PRINT
+  Origs: 460, 570
+  Dests: 600
 (0 2) 600 PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
+  Origs: 580
+  Dests: 610
 (0 2) 610 PRINT "FOUR MORE MUGWUMPS ARE NOW IN HIDING."
+  Origs: 600
+  Dests: 630
 (0 3) 630 GOTO 240
+  Origs: 610
+  Dests: 240
 (1 3) 1000 FOR J = 1 TO 2
+  Origs: 240
+  Dests: 1010
 (1 3) 1010 FOR I = 1 TO 4
+  Origs: 1000
+  Dests: 1020
 (0 4) 1020 P(I, J) = INT(10 * RND(1))
+  Origs: 1010
+  Dests: 1030
 (0 1) 1030 NEXT I
+  Origs: 1020
+  Dests: 1040
 (0 1) 1040 NEXT J
+  Origs: 1030
+  Dests: 1050
 (0 1) 1050 RETURN
+  Origs: 1040
+  Dests: 
 (0 1) 1099 END
+  Origs: 
+  Dests: 
 
 Unreachable code:
 

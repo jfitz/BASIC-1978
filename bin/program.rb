@@ -680,12 +680,46 @@ class Program
 
     texts = []
 
+    goto_line_idxs = build_destinations
+    # convert line-number-indexes to line-numbers
+    gotos = {}
+    goto_line_idxs.each do |line_idx, dest_idxs|
+      line_number = line_idx.number
+      gotos[line_number] = [] unless gotos.key?(line_number)
+      dests = dest_idxs.map(&:number)
+      dests2 = []
+      dests.each { |dest| dests2 << dest if dest != line_number }
+      dests3 = dests2.uniq
+      gotos[line_number] += dests3
+    end
+
+    origins = {}
+
+    gotos.each do |orig, dests|
+      dests.each do |dest|
+        origins[dest] = [] unless origins.key?(dest)
+        origins[dest] << orig
+      end
+    end
+
     @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
 
+      # pretty-print the line with complexity statistics
       number = line_number.to_s
 
       texts += line.analyze_pretty(number)
+
+      # print origins to this line
+      statement_origins = origins[line_number]
+      statement_origins = [] if statement_origins.nil?
+      origs = statement_origins.sort.map(&:to_s).join(', ')
+      texts << '  Origs: ' + origs
+
+      # print destinations from this line
+      statement_gotos = gotos[line_number]
+      dests = statement_gotos.sort.map(&:to_s).join(', ')
+      texts << '  Dests: ' + dests
     end
 
     texts << ''
@@ -835,48 +869,72 @@ class Program
     ]
   end
 
-  def unreachable_code
-    # build list of "gotos"
-    gotos = {}
-    @lines.keys.each do |line_number|
-      statements = @lines[line_number].statements
-      statement_index = 0
+  def build_statement_destinations(line_number_idx, statement)
+    goto_line_idxs = []
+    statement_gotos = statement.gotos
 
-      statements.each do |statement|
-        line_number_idx = LineNumberIdx.new(line_number, statement_index)
+    statement_gotos.each do |goto|
+      goto_line_idxs << LineNumberIdx.new(goto, 0)
+    end
 
-        statement_gotos = statement.gotos
+    if statement.autonext
+      # find next statement (possibly in same line)
+      next_line_idx = find_next_line_idx(line_number_idx)
 
-        goto_line_idxs = []
-        statement_gotos.each do |goto|
-          goto_line_idxs << LineNumberIdx.new(goto, 0)
-        end
+      goto_line_idxs << next_line_idx unless next_line_idx.nil?
 
-        if statement.autonext
-          # find next statement (possibly in same line)
-          next_line_idx = find_next_line_idx(line_number_idx)
+      if statement.is_if_no_else && $options['extend_if'].value
+        # find next line (possibly does not exist)
+        line_numbers = @lines.keys.sort
+        line_number = line_number_idx.number
+        index = line_numbers.index(line_number)
+        next_line_number = line_numbers[index + 1]
 
+        unless next_line_number.nil?
+          next_line_idx = LineNumberIdx.new(next_line_number, 0)
           goto_line_idxs << next_line_idx unless next_line_idx.nil?
-
-          if statement.is_if_no_else && $options['extend_if'].value
-            # find next line (possibly does not exist)
-            line_numbers = @lines.keys.sort
-            index = line_numbers.index(line_number)
-            next_line_number = line_numbers[index + 1]
-
-            unless next_line_number.nil?
-              next_line_idx = LineNumberIdx.new(next_line_number, 0)
-              goto_line_idxs << next_line_idx unless next_line_idx.nil?
-            end
-          end
-
         end
-
-        gotos[line_number_idx] = goto_line_idxs
-
-        statement_index += 1
       end
     end
+
+    goto_line_idxs
+  end
+
+  def build_line_destinations(line, line_number)
+    statements = line.statements
+
+    gotos = {}
+
+    statements.each_with_index do |statement, index|
+      line_number_idx = LineNumberIdx.new(line_number, index)
+
+      goto_line_idxs =
+        build_statement_destinations(line_number_idx, statement)
+
+      gotos[line_number_idx] = goto_line_idxs
+    end
+
+    gotos
+  end
+
+  def build_destinations
+    # build list of "gotos"
+    gotos = {}
+
+    @lines.keys.each do |line_number|
+      line = @lines[line_number]
+      line_destinations = build_line_destinations(line, line_number)
+
+      line_destinations.each do |line_number_idx, dests|
+        gotos[line_number_idx] = dests
+      end
+    end
+
+    gotos
+  end
+
+  def unreachable_code
+    gotos = build_destinations
 
     # gotos.keys.each do |line_number_idx|
     #   puts("#{line_number_idx}:")

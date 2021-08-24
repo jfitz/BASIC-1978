@@ -20,252 +20,716 @@ Halstead complexity:
  time: 144.834
 
 (0 4) 2 PRINT TAB(30); "MASTERMIND"
+  Origs: 
+  Dests: 4
 (0 4) 4 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 2
+  Dests: 6
 (0 2) 6 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
+  Origs: 4
+  Dests: 10
 (0 1) 10 REM
+  Origs: 6
+  Dests: 20
 (0 1) 20 REM     MASTERMIND II
+  Origs: 10
+  Dests: 30
 (0 1) 30 REM     STEVE NORTH
+  Origs: 20
+  Dests: 40
 (0 1) 40 REM     CREATIVE COMPUTING
+  Origs: 30
+  Dests: 50
 (0 1) 50 REM     PO BOX 789-M MORRISTOWN NEW JERSEY 07960
+  Origs: 40
+  Dests: 60
 (0 1) 60 REM
+  Origs: 50
+  Dests: 70
 (0 1) 70 REM
+  Origs: 60
+  Dests: 80
 (1 2) 80 INPUT "NUMBER OF COLORS"; C9
+  Origs: 70, 90
+  Dests: 90
 (1 5) 90 IF C9 > 8 THEN PRINT "NO MORE THAN 8, PLEASE!"
 (0 3)    GOTO 80
+  Origs: 80
+  Dests: 80, 100
 (1 2) 100 INPUT "NUMBER OF POSITIONS"; P9
+  Origs: 90
+  Dests: 110
 (1 2) 110 INPUT "NUMBER OF ROUNDS"; R9
+  Origs: 100
+  Dests: 120
 (0 4) 120 P = C9 ^ P9
+  Origs: 110
+  Dests: 130
 (0 3) 130 PRINT "TOTAL POSSIBILITIES ="; P
+  Origs: 120
+  Dests: 140
 (0 3) 140 H = 0
 (0 3)     C = 0
+  Origs: 130
+  Dests: 150
 (0 8) 150 DIM Q(P9), S(10, 2), S$(10), A$(P9), G$(P9), I(P), H$(P9)
+  Origs: 140
+  Dests: 160
 (0 3) 160 L$ = "BWRGOYPT"
+  Origs: 150
+  Dests: 170
 (0 2) 170 PRINT
+  Origs: 160
+  Dests: 180
 (0 2) 180 PRINT
+  Origs: 170
+  Dests: 190
 (0 2) 190 PRINT "COLOR     LETTER"
+  Origs: 180
+  Dests: 200
 (0 2) 200 PRINT "=====     ======"
+  Origs: 190
+  Dests: 210
 (1 3) 210 FOR X = 1 TO C9
+  Origs: 200
+  Dests: 220
 (1 2) 220 READ X$
+  Origs: 210
+  Dests: 230
 (0 6) 230 PRINT X$; TAB(13); MID$(L$, X, 1)
+  Origs: 220
+  Dests: 240
 (0 1) 240 NEXT X
+  Origs: 230
+  Dests: 250
 (0 2) 250 PRINT
+  Origs: 240
+  Dests: 260
 (1 3) 260 FOR R = 1 TO R9
+  Origs: 250
+  Dests: 270
 (0 2) 270 PRINT
+  Origs: 260
+  Dests: 280
 (0 4) 280 PRINT "ROUND NUMBER"; R; "----"
+  Origs: 270
+  Dests: 290
 (0 2) 290 PRINT
+  Origs: 280
+  Dests: 300
 (0 2) 300 PRINT "GUESS MY COMBINATION."
 (0 2)     PRINT
+  Origs: 290
+  Dests: 310
 (0 1) 310 REM     GET A COMBINATION
+  Origs: 300
+  Dests: 320
 (0 4) 320 A = INT(P * RND(1) + 1)
+  Origs: 310
+  Dests: 330
 (0 2) 330 GOSUB 3000
+  Origs: 320
+  Dests: 340, 3000
 (1 3) 340 FOR X = 1 TO A
+  Origs: 330
+  Dests: 350
 (0 2) 350 GOSUB 3500
+  Origs: 340
+  Dests: 360, 3500
 (0 1) 360 NEXT X
+  Origs: 350
+  Dests: 370
 (1 3) 370 FOR M = 1 TO 10
+  Origs: 360
+  Dests: 380
 (0 4) 380 PRINT "MOVE # "; M; " GUESS ";
 (1 2)     INPUT X$
+  Origs: 370, 410, 470, 2080
+  Dests: 390
 (1 4) 390 IF X$ = "BOARD" THEN 2000
+  Origs: 380
+  Dests: 400, 2000
 (1 4) 400 IF X$ = "QUIT" THEN 2500
+  Origs: 390
+  Dests: 410, 2500
 (1 6) 410 IF LEN(X$) <> P9 THEN PRINT "BAD NUMBER OF POSITIONS."
 (0 3)     GOTO 380
+  Origs: 400
+  Dests: 380, 420
 (0 1) 420 REM     UNPACK X$ INTO G$(1-P9)
+  Origs: 410
+  Dests: 430
 (1 3) 430 FOR X = 1 TO P9
+  Origs: 420
+  Dests: 440
 (1 3) 440 FOR Y = 1 TO C9
+  Origs: 430
+  Dests: 450
 (1 6) 450 IF MID$(X$, X, 1) = MID$(L$, Y, 1) THEN 480
+  Origs: 440
+  Dests: 460, 480
 (0 1) 460 NEXT Y
+  Origs: 450
+  Dests: 470
 (0 5) 470 PRINT "'"; MID$(X$, X, 1); "' IS UNRECOGNIZED."
 (0 3)     GOTO 380
+  Origs: 460
+  Dests: 380
 (0 4) 480 G$(X) = MID$(X$, X, 1)
+  Origs: 450
+  Dests: 490
 (0 1) 490 NEXT X
+  Origs: 480
+  Dests: 500
 (0 1) 500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
+  Origs: 490
+  Dests: 510
 (0 2) 510 GOSUB 4000
+  Origs: 500
+  Dests: 520, 4000
 (0 1) 520 REM     AND GET NUMBER OF BLACKS AND WHITES
+  Origs: 510
+  Dests: 530
 (0 2) 530 GOSUB 4500
+  Origs: 520
+  Dests: 540, 4500
 (1 4) 540 IF B = P9 THEN 630
+  Origs: 530
+  Dests: 550, 630
 (0 1) 550 REM     TELL HUMAN RESULTS
+  Origs: 540
+  Dests: 560
 (0 6) 560 PRINT "YOU HAVE "; B; " BLACKS AND "; W; " WHITES."
+  Origs: 550
+  Dests: 570
 (0 1) 570 REM     SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
+  Origs: 560
+  Dests: 580
 (0 3) 580 S$(M) = X$
+  Origs: 570
+  Dests: 590
 (0 3) 590 S(M, 1) = B
+  Origs: 580
+  Dests: 600
 (0 3) 600 S(M, 2) = W
+  Origs: 590
+  Dests: 610
 (0 1) 610 NEXT M
+  Origs: 600
+  Dests: 620
 (0 2) 620 PRINT "YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!"
 (0 2)     GOTO 640
+  Origs: 610
+  Dests: 640
 (0 2) 622 GOSUB 4000
+  Origs: 
+  Dests: 623, 4000
 (0 2) 623 PRINT "THE ACTUAL COMBINATION WAS: ";
+  Origs: 622
+  Dests: 624
 (1 3) 624 FOR X = 1 TO P9
+  Origs: 623
+  Dests: 625
 (0 2) 625 PRINT A$(X);
+  Origs: 624
+  Dests: 626
 (0 1) 626 NEXT X
+  Origs: 625
+  Dests: 627
 (0 2) 627 PRINT
+  Origs: 626
+  Dests: 630
 (0 4) 630 PRINT "YOU GUESSED IT IN "; M; " MOVES!"
+  Origs: 540, 627
+  Dests: 640
 (0 4) 640 H = H + M
+  Origs: 620, 630
+  Dests: 650
 (0 2) 650 GOSUB 5000
+  Origs: 640
+  Dests: 660, 5000
 (0 1) 660 REM
+  Origs: 650, 870
+  Dests: 670
 (0 1) 670 REM     NOW COMPUTER GUESSES
+  Origs: 660
+  Dests: 680
 (0 1) 680 REM
+  Origs: 670
+  Dests: 690
 (1 3) 690 FOR X = 1 TO P
+  Origs: 680
+  Dests: 700
 (0 3) 700 I(X) = 1
+  Origs: 690
+  Dests: 710
 (0 1) 710 NEXT X
+  Origs: 700
+  Dests: 720
 (0 2) 720 PRINT "NOW I GUESS.  THINK OF A COMBINATION."
+  Origs: 710
+  Dests: 730
 (1 2) 730 INPUT "HIT RETURN WHEN READY:"; X$
+  Origs: 720
+  Dests: 740
 (1 3) 740 FOR M = 1 TO 10
+  Origs: 730
+  Dests: 750
 (0 2) 750 GOSUB 3000
+  Origs: 740
+  Dests: 760, 3000
 (0 1) 760 REM     FIND A GUESS
+  Origs: 750
+  Dests: 770
 (0 4) 770 G = INT(P * RND(1) + 1)
+  Origs: 760
+  Dests: 780
 (1 4) 780 IF I(G) = 1 THEN 890
+  Origs: 770
+  Dests: 790, 890
 (1 3) 790 FOR X = G TO P
+  Origs: 780
+  Dests: 800
 (1 4) 800 IF I(X) = 1 THEN 880
+  Origs: 790
+  Dests: 810, 880
 (0 1) 810 NEXT X
+  Origs: 800
+  Dests: 820
 (1 3) 820 FOR X = 1 TO G
+  Origs: 810
+  Dests: 830
 (1 4) 830 IF I(X) = 1 THEN 880
+  Origs: 820
+  Dests: 840, 880
 (0 1) 840 NEXT X
+  Origs: 830
+  Dests: 850
 (0 2) 850 PRINT "YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
+  Origs: 840
+  Dests: 860
 (0 2) 860 PRINT "TRY AGAIN, AND THIS TIME PLEASE BE MORE CAREFUL."
+  Origs: 850
+  Dests: 870
 (0 3) 870 GOTO 660
+  Origs: 860
+  Dests: 660
 (0 3) 880 G = X
+  Origs: 800, 830
+  Dests: 890
 (0 1) 890 REM     NOW WE CONVERT GUESS #G INTO G$
+  Origs: 780, 880
+  Dests: 900
 (1 3) 900 FOR X = 1 TO G
+  Origs: 890
+  Dests: 910
 (0 2) 910 GOSUB 3500
+  Origs: 900
+  Dests: 920, 3500
 (0 1) 920 NEXT X
+  Origs: 910
+  Dests: 930
 (0 2) 930 GOSUB 6000
+  Origs: 920
+  Dests: 940, 6000
 (0 2) 940 PRINT "MY GUESS IS: ";
+  Origs: 930
+  Dests: 950
 (1 3) 950 FOR X = 1 TO P9
+  Origs: 940
+  Dests: 960
 (0 2) 960 PRINT H$(X);
+  Origs: 950
+  Dests: 970
 (0 1) 970 NEXT X
+  Origs: 960
+  Dests: 980
 (2 3) 980 INPUT "  BLACKS, WHITES "; B1, W1
+  Origs: 970
+  Dests: 990
 (1 4) 990 IF B1 = P9 THEN 1120
+  Origs: 980
+  Dests: 1000, 1120
 (0 2) 1000 GOSUB 3000
+  Origs: 990
+  Dests: 1010, 3000
 (1 3) 1010 FOR X = 1 TO P
+  Origs: 1000
+  Dests: 1020
 (0 2) 1020 GOSUB 3500
+  Origs: 1010
+  Dests: 1030, 3500
 (1 4) 1030 IF I(X) = 0 THEN 1070
+  Origs: 1020
+  Dests: 1035, 1070
 (0 2) 1035 GOSUB 6500
+  Origs: 1030
+  Dests: 1040, 6500
 (0 2) 1040 GOSUB 4000
+  Origs: 1035
+  Dests: 1050, 4000
 (0 2) 1050 GOSUB 4500
+  Origs: 1040
+  Dests: 1060, 4500
 (1 9) 1060 IF B1 <> B OR W1 <> W THEN I(X) = 0
+  Origs: 1050
+  Dests: 1070
 (0 1) 1070 NEXT X
+  Origs: 1030, 1060
+  Dests: 1080
 (0 1) 1080 NEXT M
+  Origs: 1070
+  Dests: 1090
 (0 2) 1090 PRINT "I USED UP ALL MY MOVES!"
+  Origs: 1080
+  Dests: 1100
 (0 2) 1100 PRINT "I GUESS MY CPU IS JUST HAVING AN OFF DAY."
+  Origs: 1090
+  Dests: 1110
 (0 2) 1110 GOTO 1130
+  Origs: 1100
+  Dests: 1130
 (0 4) 1120 PRINT "I GOT IT IN "; M; " MOVES!"
+  Origs: 990
+  Dests: 1130
 (0 4) 1130 C = C + M
+  Origs: 1110, 1120
+  Dests: 1140
 (0 2) 1140 GOSUB 5000
+  Origs: 1130
+  Dests: 1150, 5000
 (0 1) 1150 NEXT R
+  Origs: 1140
+  Dests: 1160
 (0 2) 1160 PRINT "GAME OVER"
+  Origs: 1150
+  Dests: 1170
 (0 2) 1170 PRINT "FINAL SCORE:"
+  Origs: 1160
+  Dests: 1180
 (0 2) 1180 GOSUB 5040
+  Origs: 1170
+  Dests: 1190, 5040
 (0 1) 1190 STOP
+  Origs: 1180
+  Dests: 
 (0 1) 2000 REM
+  Origs: 390
+  Dests: 2010
 (0 1) 2010 REM     BOARD PRINTOUT ROUTINE
+  Origs: 2000
+  Dests: 2020
 (0 1) 2020 REM
+  Origs: 2010
+  Dests: 2025
 (0 2) 2025 PRINT
+  Origs: 2020
+  Dests: 2030
 (0 2) 2030 PRINT "BOARD"
+  Origs: 2025
+  Dests: 2040
 (0 2) 2040 PRINT "MOVE     GUESS          BLACK     WHITE"
+  Origs: 2030
+  Dests: 2050
 (1 4) 2050 FOR Z = 1 TO M - 1
+  Origs: 2040
+  Dests: 2060
 (0 11) 2060 PRINT Z; TAB(9); S$(Z); TAB(25); S(Z, 1); TAB(35); S(Z, 2)
+  Origs: 2050
+  Dests: 2070
 (0 1) 2070 NEXT Z
+  Origs: 2060
+  Dests: 2075
 (0 2) 2075 PRINT
+  Origs: 2070
+  Dests: 2080
 (0 3) 2080 GOTO 380
+  Origs: 2075
+  Dests: 380
 (0 1) 2500 REM
+  Origs: 400
+  Dests: 2510
 (0 1) 2510 REM     QUIT ROUTINE
+  Origs: 2500
+  Dests: 2520
 (0 1) 2520 REM
+  Origs: 2510
+  Dests: 2530
 (0 2) 2530 PRINT "QUITTER!  MY COMBINATION WAS: ";
+  Origs: 2520
+  Dests: 2535
 (0 2) 2535 GOSUB 4000
+  Origs: 2530
+  Dests: 2540, 4000
 (1 3) 2540 FOR X = 1 TO P9
+  Origs: 2535
+  Dests: 2550
 (0 2) 2550 PRINT A$(X);
+  Origs: 2540
+  Dests: 2560
 (0 1) 2560 NEXT X
+  Origs: 2550
+  Dests: 2565
 (0 2) 2565 PRINT
+  Origs: 2560
+  Dests: 2570
 (0 2) 2570 PRINT "GOOD BYE"
+  Origs: 2565
+  Dests: 2580
 (0 1) 2580 STOP
+  Origs: 2570
+  Dests: 
 (0 1) 3000 REM
+  Origs: 330, 750, 1000
+  Dests: 3010
 (0 1) 3010 REM     INITIALIZE Q(1-P9) TO ZEROS
+  Origs: 3000
+  Dests: 3020
 (0 1) 3020 REM
+  Origs: 3010
+  Dests: 3030
 (1 3) 3030 FOR S = 1 TO P9
+  Origs: 3020
+  Dests: 3040
 (0 3) 3040 Q(S) = 0
+  Origs: 3030
+  Dests: 3050
 (0 1) 3050 NEXT S
+  Origs: 3040
+  Dests: 3060
 (0 1) 3060 RETURN
+  Origs: 3050
+  Dests: 
 (0 1) 3500 REM
+  Origs: 350, 910, 1020
+  Dests: 3510
 (0 1) 3510 REM     INCREMENT Q(1-P9)
+  Origs: 3500
+  Dests: 3520
 (0 1) 3520 REM
+  Origs: 3510
+  Dests: 3522
 (1 4) 3522 IF Q(1) > 0 THEN 3530
+  Origs: 3520
+  Dests: 3524, 3530
 (0 1) 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
+  Origs: 3522
+  Dests: 3526
 (1 3) 3526 FOR S = 1 TO P9
+  Origs: 3524
+  Dests: 3527
 (0 3) 3527 Q(S) = 1
+  Origs: 3526
+  Dests: 3528
 (0 1) 3528 NEXT S
+  Origs: 3527
+  Dests: 3529
 (0 1) 3529 RETURN
+  Origs: 3528
+  Dests: 
 (0 3) 3530 Q = 1
+  Origs: 3522
+  Dests: 3540
 (0 4) 3540 Q(Q) = Q(Q) + 1
+  Origs: 3530, 3580
+  Dests: 3550
 (1 4) 3550 IF Q(Q) <= C9 THEN RETURN
+  Origs: 3540
+  Dests: 3560
 (0 3) 3560 Q(Q) = 1
+  Origs: 3550
+  Dests: 3570
 (0 4) 3570 Q = Q + 1
+  Origs: 3560
+  Dests: 3580
 (0 3) 3580 GOTO 3540
+  Origs: 3570
+  Dests: 3540
 (0 1) 4000 REM
+  Origs: 510, 622, 1040, 2535
+  Dests: 4010
 (0 1) 4010 REM     CONVERT Q(1-P9) TO A$(1-P9)
+  Origs: 4000
+  Dests: 4020
 (0 1) 4020 REM
+  Origs: 4010
+  Dests: 4030
 (1 3) 4030 FOR S = 1 TO P9
+  Origs: 4020
+  Dests: 4040
 (0 4) 4040 A$(S) = MID$(L$, Q(S), 1)
+  Origs: 4030
+  Dests: 4050
 (0 1) 4050 NEXT S
+  Origs: 4040
+  Dests: 4060
 (0 1) 4060 RETURN
+  Origs: 4050
+  Dests: 
 (0 1) 4500 REM
+  Origs: 530, 1050
+  Dests: 4510
 (0 1) 4510 REM     GET NUMBER OF BLACKS (B) AND WHITES (W)
+  Origs: 4500
+  Dests: 4520
 (0 1) 4520 REM     MASHES G$ AND A$ IN THE PROCESS
+  Origs: 4510
+  Dests: 4530
 (0 1) 4530 REM
+  Origs: 4520
+  Dests: 4540
 (0 3) 4540 B = 0
 (0 3)      W = 0
 (0 3)      F = 0
+  Origs: 4530
+  Dests: 4550
 (1 3) 4550 FOR S = 1 TO P9
+  Origs: 4540
+  Dests: 4560
 (1 4) 4560 IF G$(S) <> A$(S) THEN 4620
+  Origs: 4550
+  Dests: 4570, 4620
 (0 4) 4570 B = B + 1
+  Origs: 4560
+  Dests: 4580
 (0 4) 4580 G$(S) = CHR$(F)
+  Origs: 4570
+  Dests: 4590
 (0 4) 4590 A$(S) = CHR$(F + 1)
+  Origs: 4580
+  Dests: 4600
 (0 4) 4600 F = F + 2
+  Origs: 4590
+  Dests: 4610
 (0 2) 4610 GOTO 4660
+  Origs: 4600
+  Dests: 4660
 (1 3) 4620 FOR T = 1 TO P9
+  Origs: 4560
+  Dests: 4630
 (1 4) 4630 IF G$(S) <> A$(T) THEN 4650
+  Origs: 4620
+  Dests: 4640, 4650
 (1 4) 4640 IF G$(T) = A$(T) THEN 4650
+  Origs: 4630
+  Dests: 4645, 4650
 (0 4) 4645 W = W + 1
 (0 4)      A$(T) = CHR$(F)
 (0 4)      G$(S) = CHR$(F + 1)
 (0 4)      F = F + 2
 (0 2)      GOTO 4660
+  Origs: 4640
+  Dests: 4660
 (0 1) 4650 NEXT T
+  Origs: 4630, 4640
+  Dests: 4660
 (0 1) 4660 NEXT S
+  Origs: 4610, 4645, 4650
+  Dests: 4670
 (0 1) 4670 RETURN
+  Origs: 4660
+  Dests: 
 (0 1) 5000 REM
+  Origs: 650, 1140
+  Dests: 5010
 (0 1) 5010 REM     PRINT SCORE
+  Origs: 5000
+  Dests: 5020
 (0 1) 5020 REM
+  Origs: 5010
+  Dests: 5030
 (0 2) 5030 PRINT "SCORE:"
+  Origs: 5020
+  Dests: 5040
 (0 3) 5040 PRINT "     COMPUTER "; C
+  Origs: 1180, 5030
+  Dests: 5050
 (0 3) 5050 PRINT "     HUMAN    "; H
+  Origs: 5040
+  Dests: 5060
 (0 2) 5060 PRINT
+  Origs: 5050
+  Dests: 5070
 (0 1) 5070 RETURN
+  Origs: 5060
+  Dests: 
 (0 1) 5500 REM
+  Origs: 
+  Dests: 5510
 (0 1) 5510 REM     CONVERT Q(1-P9) INTO G$(1-P9)
+  Origs: 5500
+  Dests: 5520
 (0 1) 5520 REM
+  Origs: 5510
+  Dests: 5530
 (1 3) 5530 FOR S = 1 TO P9
+  Origs: 5520
+  Dests: 5540
 (0 4) 5540 G$(S) = MID$(L$, Q(S), 1)
+  Origs: 5530
+  Dests: 5550
 (0 1) 5550 NEXT S
+  Origs: 5540
+  Dests: 5560
 (0 1) 5560 RETURN
+  Origs: 5550
+  Dests: 
 (0 1) 6000 REM
+  Origs: 930
+  Dests: 6010
 (0 1) 6010 REM     CONVERT Q(1-P9) TO H$(1-P9)
+  Origs: 6000
+  Dests: 6020
 (0 1) 6020 REM
+  Origs: 6010
+  Dests: 6030
 (1 3) 6030 FOR S = 1 TO P9
+  Origs: 6020
+  Dests: 6040
 (0 4) 6040 H$(S) = MID$(L$, Q(S), 1)
+  Origs: 6030
+  Dests: 6050
 (0 1) 6050 NEXT S
+  Origs: 6040
+  Dests: 6060
 (0 1) 6060 RETURN
+  Origs: 6050
+  Dests: 
 (0 1) 6500 REM
+  Origs: 1035
+  Dests: 6510
 (0 1) 6510 REM     COPY H$ INTO G$
+  Origs: 6500
+  Dests: 6520
 (0 1) 6520 REM
+  Origs: 6510
+  Dests: 6530
 (1 3) 6530 FOR S = 1 TO P9
+  Origs: 6520
+  Dests: 6540
 (0 3) 6540 G$(S) = H$(S)
+  Origs: 6530
+  Dests: 6550
 (0 1) 6550 NEXT S
+  Origs: 6540
+  Dests: 6560
 (0 1) 6560 RETURN
+  Origs: 6550
+  Dests: 
 (0 1) 8000 REM     PROGRAM DATA FOR COLOR NAMES
+  Origs: 
+  Dests: 8010
 (0 2) 8010 DATA "BLACK", "WHITE", "RED", "GREEN", "ORANGE", "YELLOW", "PURPLE", "TAN"
+  Origs: 8000
+  Dests: 9998
 (0 1) 9998 REM   ...WE'RE SORRY BUT IT'S TIME TO GO...
+  Origs: 8010
+  Dests: 9999
 (0 1) 9999 END
+  Origs: 9998
+  Dests: 
 
 Unreachable code:
 

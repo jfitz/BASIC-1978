@@ -20,309 +20,905 @@ Halstead complexity:
  time: 391.332
 
 (0 4) 10 PRINT TAB(33); "FTBALL"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 30
 (0 2) 30 PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 220
 (0 2) 220 PRINT "THIS IS DARTMOUTH CHAMPIONSHIP FOOTBALL."
 (0 2)     PRINT
+  Origs: 30
+  Dests: 230
 (0 2) 230 PRINT "YOU WILL QUARTERBACK DARTMOUTH. CALL PLAYS AS FOLLOWS:"
+  Origs: 220
+  Dests: 240
 (0 2) 240 PRINT "1= SIMPLE RUN; 2= TRICKY RUN; 3= SHORT PASS;"
+  Origs: 230
+  Dests: 250
 (0 2) 250 PRINT "4= LONG PASS; 5= PUNT; 6= QUICK KICK; 7= PLACE KICK."
+  Origs: 240
+  Dests: 260
 (0 2) 260 PRINT
+  Origs: 250
+  Dests: 270
 (0 2) 270 PRINT "CHOOSE YOUR OPPONENT";
+  Origs: 260
+  Dests: 280
 (1 2) 280 INPUT O$(1)
+  Origs: 270
+  Dests: 290
 (0 3) 290 O$(0) = "DARTMOUTH"
+  Origs: 280
+  Dests: 300
 (0 2) 300 PRINT
+  Origs: 290
+  Dests: 310
 (0 3) 310 LET S(0) = 0
 (0 3)     LET S(1) = 0
+  Origs: 300
+  Dests: 320
 (0 1) 320 REM
+  Origs: 310
+  Dests: 330
 (0 2) 330 DIM L$(20)
+  Origs: 320
+  Dests: 340
 (1 3) 340 FOR I = 1 TO 20
 (1 2)     READ L$(I)
 (0 1)     NEXT I
+  Origs: 330
+  Dests: 350
 (0 2) 350 DATA "KICK", "RECEIVE", " YARD ", "RUN BACK FOR ", "BALL ON "
+  Origs: 340
+  Dests: 360
 (0 2) 360 DATA "YARD LINE", " SIMPLE RUN", " TRICKY RUN", " SHORT PASS"
+  Origs: 350
+  Dests: 370
 (0 2) 370 DATA " LONG PASS", "PUNT", " QUICK KICK ", " PLACE KICK", " LOSS "
+  Origs: 360
+  Dests: 380
 (0 2) 380 DATA " NO GAIN", "GAIN ", " TOUCHDOWN ", " TOUCHBACK ", "SAFETY***"
+  Origs: 370
+  Dests: 385
 (0 2) 385 DATA "JUNK"
+  Origs: 380
+  Dests: 390
 (0 4) 390 LET P = INT(RND(1) * 2)
+  Origs: 385
+  Dests: 400
 (0 3) 400 PRINT O$(P); " WON THE TOSS"
+  Origs: 390
+  Dests: 410
 (0 5) 410 DEF FNF(X) = 1 - 2 * P
+  Origs: 400
+  Dests: 420
 (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
+  Origs: 410
+  Dests: 430
 (1 4) 430 IF P = 0 THEN 470
+  Origs: 420
+  Dests: 440, 470
 (0 3) 440 PRINT O$(1); " ELECTS TO RECEIVE."
+  Origs: 430
+  Dests: 450
 (0 2) 450 PRINT
+  Origs: 440
+  Dests: 460
 (0 2) 460 GOTO 580
+  Origs: 450
+  Dests: 580
 (0 2) 470 PRINT "DO YOU ELECT TO KICK OR RECEIVE";
+  Origs: 430
+  Dests: 480
 (1 2) 480 INPUT A$
+  Origs: 470, 540
+  Dests: 490
 (0 2) 490 PRINT
+  Origs: 480
+  Dests: 500
 (1 3) 500 FOR E = 1 TO 2
+  Origs: 490
+  Dests: 510
 (1 4) 510 IF A$ = L$(E) THEN 550
+  Origs: 500
+  Dests: 520, 550
 (0 1) 520 NEXT E
+  Origs: 510
+  Dests: 530
 (0 2) 530 PRINT "INCORRECT ANSWER.  PLEASE TYPE 'KICK' OR 'RECIEVE'";
+  Origs: 520
+  Dests: 540
 (0 3) 540 GOTO 480
+  Origs: 530
+  Dests: 480
 (1 4) 550 IF E = 2 THEN 580
+  Origs: 510
+  Dests: 560, 580
 (0 3) 560 LET P = 1
+  Origs: 550
+  Dests: 580
 (0 7) 580 LET X = 40 + (1 - P) * 20
+  Origs: 460, 550, 560, 2670
+  Dests: 590
 (0 4) 590 LET Y = INT(200 * (RND(1) - .5) ^ 3 + 55)
+  Origs: 580, 2580
+  Dests: 600
 (0 4) 600 PRINT Y; L$(3); " KICKOFF"
+  Origs: 590
+  Dests: 610
 (0 8) 610 LET X = X - FNF(1) * Y
+  Origs: 600
+  Dests: 620
 (1 5) 620 IF ABS(X - 50) >= 50 THEN 700
+  Origs: 610
+  Dests: 630, 700
 (0 9) 630 LET Y = INT(50 * RND(1) ^ 2) + (1 - P) * INT(50 * RND(1) ^ 4)
+  Origs: 620, 1800
+  Dests: 640
 (0 8) 640 LET X = X + FNF(1) * Y
+  Origs: 630
+  Dests: 650
 (1 5) 650 IF ABS(X - 50) >= 50 THEN 655
+  Origs: 640
+  Dests: 651, 655
 (0 4) 651 PRINT Y; L$(3); " RUNBACK"
+  Origs: 650
+  Dests: 652
 (0 2) 652 GOTO 720
+  Origs: 651
+  Dests: 720
 (0 2) 655 PRINT L$(4);
+  Origs: 650
+  Dests: 660
 (0 2) 660 GOTO 2600
+  Origs: 655
+  Dests: 2600
 (0 4) 700 PRINT "TOUCHBACK FOR "; O$(P); "."
+  Origs: 620
+  Dests: 710
 (0 6) 710 LET X = 20 + P * 60
+  Origs: 700
+  Dests: 720
 (0 1) 720 REM FIRST DOWN
+  Origs: 652, 710, 1740, 2750
+  Dests: 730
 (0 2) 730 GOSUB 800
+  Origs: 720
+  Dests: 740, 800
 (0 3) 740 LET X1 = X
+  Origs: 730, 2330, 2340
+  Dests: 750
 (0 3) 750 LET D = 1
+  Origs: 740
+  Dests: 760
 (0 2) 760 PRINT
 (0 4)     PRINT "FIRST DOWN "; O$(P); "***"
+  Origs: 750
+  Dests: 770
 (0 2) 770 PRINT
+  Origs: 760
+  Dests: 780
 (0 2) 780 PRINT
+  Origs: 770
+  Dests: 790
 (0 2) 790 GOTO 860
+  Origs: 780
+  Dests: 860
 (0 1) 800 REM PRINT POSITION
+  Origs: 730, 2300
+  Dests: 810
 (1 4) 810 IF X > 50 THEN 840
+  Origs: 800
+  Dests: 820, 840
 (0 5) 820 PRINT L$(5); O$(0); X; L$(6)
+  Origs: 810
+  Dests: 830
 (0 2) 830 GOTO 850
+  Origs: 820
+  Dests: 850
 (0 6) 840 PRINT L$(5); O$(1); 100 - X; L$(6)
+  Origs: 810
+  Dests: 850
 (0 1) 850 RETURN
+  Origs: 830, 840
+  Dests: 
 (0 1) 860 REM NEW PLAY
+  Origs: 790, 2440
+  Dests: 870
 (0 4) 870 LET T = T + 1
+  Origs: 860
+  Dests: 880
 (1 4) 880 IF T = 30 THEN 1060
+  Origs: 870
+  Dests: 890, 1060
 (1 4) 890 IF T < 50 THEN 940
+  Origs: 880
+  Dests: 900, 940
 (1 5) 900 IF RND(1) > .2 THEN 940
+  Origs: 890
+  Dests: 910, 940
 (0 2) 910 PRINT "END OF GAME  ***"
+  Origs: 900
+  Dests: 920
 (0 9) 920 PRINT "FINAL SCORE:  "; O$(0); ": "; S(0); "  "; O$(1); ": "; S(1)
+  Origs: 910
+  Dests: 930
 (0 1) 930 STOP
+  Origs: 920
+  Dests: 
 (1 4) 940 IF P = 1 THEN 1870
+  Origs: 890, 900, 1070, 1100
+  Dests: 950, 1870
 (0 2) 950 PRINT "NEXT PLAY";
+  Origs: 940
+  Dests: 960
 (1 2) 960 INPUT Z
+  Origs: 950, 1000
+  Dests: 970
 (1 5) 970 IF Z <> INT(Z) THEN 990
+  Origs: 960
+  Dests: 980, 990
 (1 5) 980 IF ABS(Z - 4) <= 3 THEN 1010
+  Origs: 970
+  Dests: 990, 1010
 (0 2) 990 PRINT "ILLEGAL PLAY NUMBER, RETYPE";
+  Origs: 970, 980
+  Dests: 1000
 (0 3) 1000 GOTO 960
+  Origs: 990
+  Dests: 960
 (0 3) 1010 LET F = 0
+  Origs: 980, 1910, 1930, 2010, 2060, 2080, 2130, 2150, 2180
+  Dests: 1020
 (0 3) 1020 PRINT L$(Z + 6); ".  ";
+  Origs: 1010
+  Dests: 1030
 (0 11) 1030 LET R = RND(1) * (.98 + FNF(1) * .02)
+  Origs: 1020
+  Dests: 1040
 (0 4) 1040 LET R1 = RND(1)
+  Origs: 1030
+  Dests: 1050
 (7 9) 1050 ON Z GOTO 1110, 1150, 1260, 1480, 1570, 1570, 1680
+  Origs: 1040
+  Dests: 1060, 1110, 1150, 1260, 1480, 1570, 1680
 (0 1) 1060 REM  JEAN'S SPECIAL
+  Origs: 880, 1050
+  Dests: 1070
 (1 8) 1070 IF RND(1) > 1 / 3 THEN 940
+  Origs: 1060
+  Dests: 940, 1080
 (0 2) 1080 PRINT "GAME DELAYED.  DOG ON FIELD."
+  Origs: 1070
+  Dests: 1090
 (0 2) 1090 PRINT
+  Origs: 1080
+  Dests: 1100
 (0 3) 1100 GOTO 940
+  Origs: 1090
+  Dests: 940
 (0 1) 1110 REM  SIMPLE RUN
+  Origs: 1050
+  Dests: 1120
 (0 4) 1120 LET Y = INT(24 * (R - .5) ^ 3 + 3)
+  Origs: 1110
+  Dests: 1130
 (1 5) 1130 IF RND(1) < .05 THEN 1180
+  Origs: 1120
+  Dests: 1140, 1180
 (0 2) 1140 GOTO 2190
+  Origs: 1130
+  Dests: 2190
 (0 1) 1150 REM  TRICKY RUN
+  Origs: 1050
+  Dests: 1160
 (0 4) 1160 LET Y = INT(20 * R - 5)
+  Origs: 1150
+  Dests: 1170
 (1 5) 1170 IF RND(1) > .1 THEN 2190
+  Origs: 1160
+  Dests: 1180, 2190
 (0 4) 1180 LET F = -1
+  Origs: 1130, 1170
+  Dests: 1190
 (0 3) 1190 LET X3 = X
+  Origs: 1180
+  Dests: 1200
 (0 8) 1200 LET X = X + FNF(1) * Y
+  Origs: 1190
+  Dests: 1210
 (1 5) 1210 IF ABS(X - 50) >= 50 THEN 1240
+  Origs: 1200
+  Dests: 1220, 1240
 (0 2) 1220 PRINT "***  FUMBLE AFTER ";
+  Origs: 1210
+  Dests: 1230
 (0 2) 1230 GOTO 2230
+  Origs: 1220
+  Dests: 2230
 (0 2) 1240 PRINT "***  FUMBLE."
+  Origs: 1210
+  Dests: 1250
 (0 2) 1250 GOTO 2450
+  Origs: 1240
+  Dests: 2450
 (0 1) 1260 REM  SHORT PASS
+  Origs: 1050
+  Dests: 1270
 (0 4) 1270 LET Y = INT(60 * (R1 - .5) ^ 3 + 10)
+  Origs: 1260
+  Dests: 1280
 (1 4) 1280 IF R < .05 THEN 1330
+  Origs: 1270
+  Dests: 1290, 1330
 (1 4) 1290 IF R < .15 THEN 1390
+  Origs: 1280
+  Dests: 1300, 1390
 (1 4) 1300 IF R < .55 THEN 1420
+  Origs: 1290
+  Dests: 1310, 1420
 (0 2) 1310 PRINT "COMPLETE.  ";
+  Origs: 1300, 1530
+  Dests: 1320
 (0 2) 1320 GOTO 2190
+  Origs: 1310
+  Dests: 2190
 (1 4) 1330 IF D = 4 THEN 1420
+  Origs: 1280, 1500
+  Dests: 1340, 1420
 (0 2) 1340 PRINT "INTERCEPTED."
+  Origs: 1330
+  Dests: 1350
 (0 4) 1350 LET F = -1
+  Origs: 1340, 1670
+  Dests: 1360
 (0 8) 1360 LET X = X + FNF(1) * Y
+  Origs: 1350
+  Dests: 1370
 (1 5) 1370 IF ABS(X - 50) >= 50 THEN 2450
+  Origs: 1360
+  Dests: 1380, 2450
 (0 2) 1380 GOTO 2300
+  Origs: 1370
+  Dests: 2300
 (0 2) 1390 PRINT "PASSER TACKLED.  ";
+  Origs: 1290
+  Dests: 1400
 (0 5) 1400 LET Y = -INT(10 * R1)
+  Origs: 1390
+  Dests: 1410
 (0 2) 1410 GOTO 2190
+  Origs: 1400
+  Dests: 2190
 (0 3) 1420 LET Y = 0
+  Origs: 1300, 1330, 1520
+  Dests: 1430
 (1 5) 1430 IF RND(1) < .3 THEN 1460
+  Origs: 1420
+  Dests: 1440, 1460
 (0 2) 1440 PRINT "INCOMPLETE.  ";
+  Origs: 1430
+  Dests: 1450
 (0 2) 1450 GOTO 2190
+  Origs: 1440
+  Dests: 2190
 (0 2) 1460 PRINT "BATTED DOWN.  ";
+  Origs: 1430
+  Dests: 1470
 (0 2) 1470 GOTO 2190
+  Origs: 1460
+  Dests: 2190
 (0 1) 1480 REM  LONG PASS
+  Origs: 1050
+  Dests: 1490
 (0 4) 1490 LET Y = INT(160 * (R1 - .5) ^ 3 + 30)
+  Origs: 1480
+  Dests: 1500
 (1 5) 1500 IF R < .1 THEN 1330
+  Origs: 1490
+  Dests: 1330, 1510
 (1 4) 1510 IF R < .3 THEN 1540
+  Origs: 1500
+  Dests: 1520, 1540
 (1 5) 1520 IF R < .75 THEN 1420
+  Origs: 1510
+  Dests: 1420, 1530
 (0 3) 1530 GOTO 1310
+  Origs: 1520
+  Dests: 1310
 (0 2) 1540 PRINT "PASSER TACKLED.  ";
+  Origs: 1510
+  Dests: 1550
 (0 5) 1550 LET Y = -INT(15 * R1 + 3)
+  Origs: 1540
+  Dests: 1560
 (0 2) 1560 GOTO 2190
+  Origs: 1550
+  Dests: 2190
 (0 1) 1570 REM  PUNT OR KICK
+  Origs: 1050
+  Dests: 1580
 (0 4) 1580 LET Y = INT(100 * (R - .5) ^ 3 + 35)
+  Origs: 1570
+  Dests: 1590
 (1 4) 1590 IF D = 4 THEN 1610
+  Origs: 1580
+  Dests: 1600, 1610
 (0 4) 1600 LET Y = INT(Y * 1.3)
+  Origs: 1590
+  Dests: 1610
 (0 4) 1610 PRINT Y; L$(3); " PUNT"
+  Origs: 1590, 1600
+  Dests: 1620
 (1 5) 1620 IF ABS(X + Y * FNF(1) - 50) >= 50 THEN 1670
+  Origs: 1610
+  Dests: 1630, 1670
 (1 4) 1630 IF D < 4 THEN 1670
+  Origs: 1620
+  Dests: 1640, 1670
 (0 4) 1640 LET Y1 = INT(R1 ^ 2 * 20)
+  Origs: 1630
+  Dests: 1650
 (0 4) 1650 PRINT Y1; L$(3); " RUN BACK"
+  Origs: 1640
+  Dests: 1660
 (0 4) 1660 LET Y = Y - Y1
+  Origs: 1650
+  Dests: 1670
 (0 3) 1670 GOTO 1350
+  Origs: 1620, 1630, 1660
+  Dests: 1350
 (0 1) 1680 REM  PLACE KICK
+  Origs: 1050
+  Dests: 1690
 (0 4) 1690 LET Y = INT(100 * (R - .5) ^ 3 + 35)
+  Origs: 1680
+  Dests: 1700
 (1 4) 1700 IF R1 > .15 THEN 1740
+  Origs: 1690
+  Dests: 1710, 1740
 (0 2) 1710 PRINT "KICK IS BLOCKED  ***"
+  Origs: 1700
+  Dests: 1720
 (0 8) 1720 LET X = X - 5 * FNF(1)
+  Origs: 1710
+  Dests: 1730
 (0 4) 1730 LET P = 1 - P
+  Origs: 1720
+  Dests: 1740
 (0 3) 1740 GOTO 720
+  Origs: 1700, 1730
+  Dests: 720
 (0 8) 1750 LET X = X + FNF(1) * Y
+  Origs: 
+  Dests: 1760
 (1 5) 1760 IF ABS(X - 50) >= 60 THEN 1810
+  Origs: 1750
+  Dests: 1770, 1810
 (0 2) 1770 PRINT "KICK IS SHORT."
+  Origs: 1760
+  Dests: 1780
 (1 5) 1780 IF ABS(X - 50) >= 50 THEN 2710
+  Origs: 1770
+  Dests: 1790, 2710
 (0 4) 1790 P = 1 - P
+  Origs: 1780
+  Dests: 1800
 (0 3) 1800 GOTO 630
+  Origs: 1790
+  Dests: 630
 (1 4) 1810 IF R1 > .5 THEN 1840
+  Origs: 1760
+  Dests: 1820, 1840
 (0 2) 1820 PRINT "KICK IS OFF TO THE SIDE."
+  Origs: 1810
+  Dests: 1830
 (0 2) 1830 GOTO 2710
+  Origs: 1820
+  Dests: 2710
 (0 2) 1840 PRINT "FIELD GOAL ***"
+  Origs: 1810
+  Dests: 1850
 (0 4) 1850 LET S(P) = S(P) + 3
+  Origs: 1840
+  Dests: 1860
 (0 2) 1860 GOTO 2640
+  Origs: 1850
+  Dests: 2640
 (0 1) 1870 REM  OPPONENT'S PLAY
+  Origs: 940
+  Dests: 1880
 (1 4) 1880 IF D > 1 THEN 1940
+  Origs: 1870
+  Dests: 1890, 1940
 (1 7) 1890 IF RND(1) > 1 / 3 THEN 1920
+  Origs: 1880, 1950, 1960, 2100, 2110
+  Dests: 1900, 1920
 (0 3) 1900 LET Z = 3
+  Origs: 1890
+  Dests: 1910
 (0 3) 1910 GOTO 1010
+  Origs: 1900
+  Dests: 1010
 (0 3) 1920 LET Z = 1
+  Origs: 1890
+  Dests: 1930
 (0 3) 1930 GOTO 1010
+  Origs: 1920
+  Dests: 1010
 (1 4) 1940 IF D = 4 THEN 2090
+  Origs: 1880
+  Dests: 1950, 2090
 (1 7) 1950 IF 10 + X - X1 < 5 THEN 1890
+  Origs: 1940
+  Dests: 1890, 1960
 (1 5) 1960 IF X < 5 THEN 1890
+  Origs: 1950
+  Dests: 1890, 1970
 (1 4) 1970 IF X <= 10 THEN 2160
+  Origs: 1960
+  Dests: 1980, 2160
 (1 4) 1980 IF X > X1 THEN 2020
+  Origs: 1970
+  Dests: 1990, 2020
 (0 4) 1990 LET A = INT(2 * RND(1))
+  Origs: 1980, 2020, 2030
+  Dests: 2000
 (0 6) 2000 LET Z = 2 + A * 2
+  Origs: 1990
+  Dests: 2010
 (0 3) 2010 GOTO 1010
+  Origs: 2000
+  Dests: 1010
 (1 5) 2020 IF D < 3 THEN 1990
+  Origs: 1980
+  Dests: 1990, 2030
 (1 5) 2030 IF X < 45 THEN 1990
+  Origs: 2020
+  Dests: 1990, 2040
 (1 7) 2040 IF RND(1) > 1 / 4 THEN 2070
+  Origs: 2030
+  Dests: 2050, 2070
 (0 3) 2050 LET Z = 6
+  Origs: 2040
+  Dests: 2060
 (0 3) 2060 GOTO 1010
+  Origs: 2050
+  Dests: 1010
 (0 3) 2070 LET Z = 4
+  Origs: 2040
+  Dests: 2080
 (0 3) 2080 GOTO 1010
+  Origs: 2070
+  Dests: 1010
 (1 4) 2090 IF X > 30 THEN 2140
+  Origs: 1940
+  Dests: 2100, 2140
 (1 7) 2100 IF 10 + X - X1 < 3 THEN 1890
+  Origs: 2090
+  Dests: 1890, 2110
 (1 5) 2110 IF X < 3 THEN 1890
+  Origs: 2100
+  Dests: 1890, 2120
 (0 3) 2120 LET Z = 7
+  Origs: 2110
+  Dests: 2130
 (0 3) 2130 GOTO 1010
+  Origs: 2120
+  Dests: 1010
 (0 3) 2140 LET Z = 5
+  Origs: 2090
+  Dests: 2150
 (0 3) 2150 GOTO 1010
+  Origs: 2140
+  Dests: 1010
 (0 4) 2160 LET A = INT(2 * RND(1))
+  Origs: 1970
+  Dests: 2170
 (0 4) 2170 LET Z = 2 + A
+  Origs: 2160
+  Dests: 2180
 (0 3) 2180 GOTO 1010
+  Origs: 2170
+  Dests: 1010
 (0 1) 2190 REM GAIN OR LOSS
+  Origs: 1140, 1170, 1320, 1410, 1450, 1470, 1560
+  Dests: 2200
 (0 3) 2200 LET X3 = X
+  Origs: 2190
+  Dests: 2210
 (0 8) 2210 LET X = X + FNF(1) * Y
+  Origs: 2200
+  Dests: 2220
 (1 5) 2220 IF ABS(X - 50) >= 50 THEN 2450
+  Origs: 2210
+  Dests: 2230, 2450
 (1 4) 2230 IF Y = 0 THEN 2250
+  Origs: 1230, 2220
+  Dests: 2240, 2250
 (0 4) 2240 PRINT ABS(Y); L$(3);
+  Origs: 2230
+  Dests: 2250
 (0 2) 2250 PRINT L$(15 + SGN(Y))
+  Origs: 2230, 2240
+  Dests: 2280
 (1 5) 2280 IF ABS(X3 - 50) > 40 THEN 2300
+  Origs: 2250
+  Dests: 2290, 2300
 (1 5) 2290 IF RND(1) < .1 THEN 2860
+  Origs: 2280
+  Dests: 2300, 2860
 (0 3) 2300 GOSUB 800
+  Origs: 1380, 2280, 2290, 2940, 3090, 3150, 3170
+  Dests: 800, 2310
 (1 4) 2310 IF F = 0 THEN 2340
+  Origs: 2300
+  Dests: 2320, 2340
 (0 4) 2320 LET P = 1 - P
+  Origs: 2310, 2350
+  Dests: 2330
 (0 3) 2330 GOTO 740
+  Origs: 2320
+  Dests: 740
 (1 7) 2340 IF FNG(1) >= 10 THEN 740
+  Origs: 2310
+  Dests: 740, 2350
 (1 5) 2350 IF D = 4 THEN 2320
+  Origs: 2340
+  Dests: 2320, 2360
 (0 4) 2360 LET D = D + 1
+  Origs: 2350
+  Dests: 2370
 (0 4) 2370 PRINT "DOWN: "; D; "     ";
+  Origs: 2360
+  Dests: 2380
 (1 8) 2380 IF (X1 - 50) * FNF(1) < 40 THEN 2410
+  Origs: 2370
+  Dests: 2390, 2410
 (0 2) 2390 PRINT "GOAL TO GO"
+  Origs: 2380
+  Dests: 2400
 (0 2) 2400 GOTO 2420
+  Origs: 2390
+  Dests: 2420
 (0 6) 2410 PRINT "YARDS TO GO: "; 10 - FNG(1)
+  Origs: 2380
+  Dests: 2420
 (0 2) 2420 PRINT
+  Origs: 2400, 2410
+  Dests: 2430
 (0 2) 2430 PRINT
+  Origs: 2420
+  Dests: 2440
 (0 3) 2440 GOTO 860
+  Origs: 2430
+  Dests: 860
 (0 1) 2450 REM BALL IN END-ZONE
+  Origs: 1250, 1370, 2220
+  Dests: 2460
 (1 4) 2460 IF X >= 100 THEN 2490
+  Origs: 2450
+  Dests: 2470, 2490
 (0 3) 2470 LET E = 0
+  Origs: 2460
+  Dests: 2480
 (0 2) 2480 GOTO 2500
+  Origs: 2470
+  Dests: 2500
 (0 3) 2490 LET E = 1
+  Origs: 2460
+  Dests: 2500
 (8 17) 2500 ON 1 + E - F * 2 + P * 4 GOTO 2510, 2590, 2760, 2710, 2590, 2510, 2710, 2760
+  Origs: 2480, 2490
+  Dests: 2510, 2590, 2710, 2760
 (0 1) 2510 REM SAFETY
+  Origs: 2500
+  Dests: 2520
 (0 4) 2520 LET S(1 - P) = S(1 - P) + 2
+  Origs: 2510
+  Dests: 2530
 (0 2) 2530 PRINT L$(19)
+  Origs: 2520
+  Dests: 2540
 (0 2) 2540 GOSUB 2800
+  Origs: 2530
+  Dests: 2550, 2800
 (0 3) 2550 PRINT O$(P); " KICKS OFF FROM ITS 20 YARD LINE."
+  Origs: 2540
+  Dests: 2560
 (0 6) 2560 LET X = 20 + P * 60
+  Origs: 2550
+  Dests: 2570
 (0 4) 2570 LET P = 1 - P
+  Origs: 2560
+  Dests: 2580
 (0 3) 2580 GOTO 590
+  Origs: 2570
+  Dests: 590
 (0 1) 2590 REM OFFENSIVE TD
+  Origs: 2500
+  Dests: 2600
 (0 3) 2600 PRINT L$(17); "***"
+  Origs: 660, 2590, 2790
+  Dests: 2610
 (1 5) 2610 IF RND(1) > .8 THEN 2680
+  Origs: 2600
+  Dests: 2620, 2680
 (0 4) 2620 LET S(P) = S(P) + 7
+  Origs: 2610
+  Dests: 2630
 (0 2) 2630 PRINT "KICK IS GOOD."
+  Origs: 2620
+  Dests: 2640
 (0 2) 2640 GOSUB 2800
+  Origs: 1860, 2630, 2700
+  Dests: 2650, 2800
 (0 3) 2650 PRINT O$(P); " KICKS OFF"
+  Origs: 2640
+  Dests: 2660
 (0 4) 2660 LET P = 1 - P
+  Origs: 2650
+  Dests: 2670
 (0 3) 2670 GOTO 580
+  Origs: 2660
+  Dests: 580
 (0 2) 2680 PRINT "KICK IS OFF TO THE SIDE"
+  Origs: 2610
+  Dests: 2690
 (0 4) 2690 LET S(P) = S(P) + 6
+  Origs: 2680
+  Dests: 2700
 (0 3) 2700 GOTO 2640
+  Origs: 2690
+  Dests: 2640
 (0 1) 2710 REM TOUCHBACK
+  Origs: 1780, 1830, 2500
+  Dests: 2720
 (0 2) 2720 PRINT L$(18)
+  Origs: 2710
+  Dests: 2730
 (0 4) 2730 LET P = 1 - P
+  Origs: 2720
+  Dests: 2740
 (0 6) 2740 LET X = 20 + P * 60
+  Origs: 2730
+  Dests: 2750
 (0 3) 2750 GOTO 720
+  Origs: 2740
+  Dests: 720
 (0 1) 2760 REM DEFENSIVE TD
+  Origs: 2500
+  Dests: 2770
 (0 5) 2770 PRINT L$(17); "FOR "; O$(1 - P); "***"
+  Origs: 2760
+  Dests: 2780
 (0 4) 2780 LET P = 1 - P
+  Origs: 2770
+  Dests: 2790
 (0 3) 2790 GOTO 2600
+  Origs: 2780
+  Dests: 2600
 (0 1) 2800 REM SCORE
+  Origs: 2540, 2640
+  Dests: 2810
 (0 2) 2810 PRINT
+  Origs: 2800
+  Dests: 2820
 (0 5) 2820 PRINT "SCORE:  "; S(0); " TO "; S(1)
+  Origs: 2810
+  Dests: 2830
 (0 2) 2830 PRINT
+  Origs: 2820
+  Dests: 2840
 (0 2) 2840 PRINT
+  Origs: 2830
+  Dests: 2850
 (0 1) 2850 RETURN
+  Origs: 2840
+  Dests: 
 (0 1) 2860 REM PENALTY
+  Origs: 2290
+  Dests: 2870
 (0 4) 2870 LET P3 = INT(2 * RND(1))
+  Origs: 2860
+  Dests: 2880
 (0 3) 2880 PRINT O$(P3); " OFFSIDES -- PENALTY OF 5 YARDS."
+  Origs: 2870
+  Dests: 2890
 (0 2) 2890 PRINT
+  Origs: 2880
+  Dests: 2900
 (0 2) 2900 PRINT
+  Origs: 2890
+  Dests: 2910
 (1 4) 2910 IF P3 = 0 THEN 2980
+  Origs: 2900
+  Dests: 2920, 2980
 (0 2) 2920 PRINT "DO YOU ACCEPT THE PENALTY";
+  Origs: 2910
+  Dests: 2930
 (1 2) 2930 INPUT A$
+  Origs: 2920, 2970
+  Dests: 2940
 (1 5) 2940 IF A$ = "NO" THEN 2300
+  Origs: 2930
+  Dests: 2300, 2950
 (1 4) 2950 IF A$ = "YES" THEN 3110
+  Origs: 2940
+  Dests: 2960, 3110
 (0 2) 2960 PRINT "TYPE 'YES' OR 'NO'";
+  Origs: 2950
+  Dests: 2970
 (0 3) 2970 GOTO 2930
+  Origs: 2960
+  Dests: 2930
 (0 1) 2980 REM OPPONENT'S STRATEGY ON PENALTY
+  Origs: 2910
+  Dests: 2990
 (1 4) 2990 IF P = 1 THEN 3040
+  Origs: 2980
+  Dests: 3000, 3040
 (1 4) 3000 IF Y <= 0 THEN 3080
+  Origs: 2990
+  Dests: 3010, 3080
 (1 4) 3010 IF F < 0 THEN 3080
+  Origs: 3000
+  Dests: 3020, 3080
 (1 9) 3020 IF FNG(1) < 3 * D - 2 THEN 3080
+  Origs: 3010
+  Dests: 3030, 3080
 (0 2) 3030 GOTO 3100
+  Origs: 3020
+  Dests: 3100
 (1 4) 3040 IF Y <= 5 THEN 3100
+  Origs: 2990
+  Dests: 3050, 3100
 (1 4) 3050 IF F < 0 THEN 3100
+  Origs: 3040
+  Dests: 3060, 3100
 (1 4) 3060 IF D < 4 THEN 3080
+  Origs: 3050
+  Dests: 3070, 3080
 (1 6) 3070 IF FNG(1) < 10 THEN 3100
+  Origs: 3060
+  Dests: 3080, 3100
 (0 2) 3080 PRINT "PENALTY REFUSED."
+  Origs: 3000, 3010, 3020, 3060, 3070
+  Dests: 3090
 (0 3) 3090 GOTO 2300
+  Origs: 3080
+  Dests: 2300
 (0 2) 3100 PRINT "PENALTY ACCEPTED."
+  Origs: 3030, 3040, 3050, 3070
+  Dests: 3110
 (0 3) 3110 LET F = 0
+  Origs: 2950, 3100
+  Dests: 3120
 (0 4) 3120 LET D = D - 1
+  Origs: 3110
+  Dests: 3130
 (1 4) 3130 IF P <> P3 THEN 3160
+  Origs: 3120
+  Dests: 3140, 3160
 (0 8) 3140 LET X = X3 - FNF(1) * 5
+  Origs: 3130
+  Dests: 3150
 (0 3) 3150 GOTO 2300
+  Origs: 3140
+  Dests: 2300
 (0 8) 3160 LET X = X3 + FNF(1) * 5
+  Origs: 3130
+  Dests: 3170
 (0 3) 3170 GOTO 2300
+  Origs: 3160
+  Dests: 2300
 (0 1) 3180 END
+  Origs: 
+  Dests: 
 
 Unreachable code:
 

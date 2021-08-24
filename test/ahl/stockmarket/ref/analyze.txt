@@ -20,239 +20,703 @@ Halstead complexity:
  time: 170.869
 
 (0 4) 10 PRINT TAB(30); "STOCK MARKET"
+  Origs: 
+  Dests: 20
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+  Origs: 10
+  Dests: 30
 (0 2) 30 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
+  Origs: 20
+  Dests: 100
 (0 1) 100 REM STOCK MARKET SIMULATION     -STOCK-
+  Origs: 30
+  Dests: 101
 (0 1) 101 REM REVISED 8/18/70 (D. PESSEL, L. BRAUN, C. LOSIK)  
+  Origs: 100
+  Dests: 102
 (0 1) 102 REM IMP VRBLS: A-MRKT TRND SLP; B5-BRKRGE FEE; C-TTL CSH ASSTS;    
+  Origs: 101
+  Dests: 103
 (0 1) 103 REM C5-TTL CSH ASSTS (TEMP); C(I)-CHNG IN STK VAL; D-TTL ASSTS;
+  Origs: 102
+  Dests: 104
 (0 1) 104 REM E1,E2-LRG CHNG MISC; I-STCK #; I1,I2-STCKS W LRG CHNG; 
+  Origs: 103
+  Dests: 105
 (0 1) 105 REM N1,N2-LRG CHNG DAY CNTS; P5-TTL DAYS PRCHSS; P(I)-PRTFL CNTNTS;
+  Origs: 104
+  Dests: 106
 (0 1) 106 REM Q9-NEW CYCL?; S4-SGN OF A; S5-TTL DYS SLS; S(I)-VALUE/SHR; 
+  Origs: 105
+  Dests: 107
 (0 1) 107 REM T-TTL STCK ASSTS; T5-TTL VAL OF TRNSCTNS;
+  Origs: 106
+  Dests: 108
 (0 1) 108 REM W3-LRG CHNG; X1-SMLL CHNG(<$1); Z4,Z5,Z6-NYSE AVE.; Z(I)-TRNSCT
+  Origs: 107
+  Dests: 110
 (0 5) 110 DIM S(5), P(5), Z(5), C(5)
+  Origs: 108
+  Dests: 112
 (0 1) 112 REM SLOPE OF MARKET TREND:A  (SAME FOR ALL STOCKS) 
+  Origs: 110
+  Dests: 113
 (0 3) 113 LET X = 1
+  Origs: 112
+  Dests: 114
 (0 5) 114 LET A = INT((RND(X) / 10) * 100 + .5) / 100
+  Origs: 113
+  Dests: 115
 (0 3) 115 LET T5 = 0
+  Origs: 114
+  Dests: 116
 (0 3) 116 LET X9 = 0
+  Origs: 115
+  Dests: 117
 (0 3) 117 LET N1 = 0
+  Origs: 116
+  Dests: 118
 (0 3) 118 LET N2 = 0
+  Origs: 117
+  Dests: 119
 (0 3) 119 LET E1 = 0
+  Origs: 118
+  Dests: 120
 (0 3) 120 LET E2 = 0
+  Origs: 119
+  Dests: 121
 (0 1) 121 REM INTRODUCTION 
+  Origs: 120
+  Dests: 122
 (0 2) 122 PRINT "DO YOU WANT THE INSTRUCTIONS (YES-TYPE 1, NO-TYPE 0)";
+  Origs: 121
+  Dests: 123
 (1 2) 123 INPUT Z9
+  Origs: 122
+  Dests: 124
 (0 2) 124 PRINT
+  Origs: 123
+  Dests: 125
 (0 2) 125 PRINT
+  Origs: 124
+  Dests: 126
 (1 4) 126 IF Z9 < 1 THEN 200
+  Origs: 125
+  Dests: 130, 200
 (0 2) 130 PRINT "THIS PROGRAM PLAYS THE STOCK MARKET.  YOU WILL BE GIVEN"
+  Origs: 126
+  Dests: 132
 (0 2) 132 PRINT "$10,000 AND MAY BUY OR SELL STOCKS.  THE STOCK PRICES WILL"
+  Origs: 130
+  Dests: 134
 (0 2) 134 PRINT "BE GENERATED RANDOMLY AND THEREFORE THIS MODEL DOES NOT"
+  Origs: 132
+  Dests: 135
 (0 2) 135 PRINT "REPRESENT EXACTLY WHAT HAPPENS ON THE EXCHANGE.  A TABLE"
+  Origs: 134
+  Dests: 136
 (0 2) 136 PRINT "OF AVAILABLE STOCKS, THEIR PRICES, AND THE NUMBER OF SHARES"
+  Origs: 135
+  Dests: 137
 (0 2) 137 PRINT "IN YOUR PORTFOLIO WILL BE PRINTED.  FOLLOWING THIS, THE"
+  Origs: 136
+  Dests: 138
 (0 2) 138 PRINT "INITIALS OF EACH STOCK WILL BE PRINTED WITH A QUESTION"
+  Origs: 137
+  Dests: 139
 (0 2) 139 PRINT "MARK.  HERE YOU INDICATE A TRANSACTION.  TO BUY A STOCK"
+  Origs: 138
+  Dests: 140
 (0 2) 140 PRINT "TYPE +NNN, TO SELL A STOCK TYPE -NNN, WHERE NNN IS THE"
+  Origs: 139
+  Dests: 141
 (0 2) 141 PRINT "NUMBER OF SHARES.  A BROKERAGE FEE OF 1% WILL BE CHARGED"
+  Origs: 140
+  Dests: 142
 (0 2) 142 PRINT "ON ALL TRANSACTIONS.  NOTE THAT IF A STOCK'S VALUE DROPS"
+  Origs: 141
+  Dests: 143
 (0 2) 143 PRINT "TO ZERO IT MAY REBOUND TO A POSITIVE VALUE AGAIN.  YOU"
+  Origs: 142
+  Dests: 144
 (0 2) 144 PRINT "HAVE $10,000 TO INVEST.  USE INTEGERS FOR ALL YOUR INPUTS."
+  Origs: 143
+  Dests: 145
 (0 2) 145 PRINT "(NOTE:  TO GET A 'FEEL' FOR THE MARKET RUN FOR AT LEAST"
+  Origs: 144
+  Dests: 146
 (0 2) 146 PRINT "10 DAYS)"
+  Origs: 145
+  Dests: 147
 (0 2) 147 PRINT "-----GOOD LUCK!-----"
+  Origs: 146
+  Dests: 200
 (0 1) 200 REM GENERATION OF STOCK TABLE; INPUT REQUESTS  
+  Origs: 126, 147
+  Dests: 210
 (0 1) 210 REM INITIAL STOCK VALUES 
+  Origs: 200
+  Dests: 220
 (0 3) 220 LET S(1) = 100
+  Origs: 210
+  Dests: 230
 (0 3) 230 LET S(2) = 85
+  Origs: 220
+  Dests: 240
 (0 3) 240 LET S(3) = 150
+  Origs: 230
+  Dests: 250
 (0 3) 250 LET S(4) = 140
+  Origs: 240
+  Dests: 260
 (0 3) 260 LET S(5) = 110
+  Origs: 250
+  Dests: 265
 (0 1) 265 REM INITIAL T8 - # DAYS FOR FIRST TREND SLOPE (A)
+  Origs: 260
+  Dests: 266
 (0 4) 266 LET T8 = INT(4.99 * RND(X) + 1)
+  Origs: 265
+  Dests: 267
 (0 1) 267 REM RANDOMIZE SIGN OF FIRST TREND SLOPE (A)
+  Origs: 266
+  Dests: 268
 (1 5) 268 IF RND(X) > .5 THEN 270
+  Origs: 267
+  Dests: 269, 270
 (0 4) 269 LET A = -A
+  Origs: 268
+  Dests: 270
 (0 1) 270 REM RANDOMIZE INITIAL VALUES 
+  Origs: 268, 269
+  Dests: 280
 (0 2) 280 GOSUB 830
+  Origs: 270
+  Dests: 285, 830
 (0 1) 285 REM INITIAL PORTFOLIO CONTENTS 
+  Origs: 280
+  Dests: 290
 (1 3) 290 FOR I = 1 TO 5
+  Origs: 285
+  Dests: 300
 (0 3) 300 LET P(I) = 0
+  Origs: 290
+  Dests: 305
 (0 3) 305 LET Z(I) = 0
+  Origs: 300
+  Dests: 310
 (0 1) 310 NEXT I
+  Origs: 305
+  Dests: 320
 (0 2) 320 PRINT
+  Origs: 310
+  Dests: 330
 (0 2) 330 PRINT
+  Origs: 320
+  Dests: 333
 (0 1) 333 REM INITIALIZE CASH ASSETS:C 
+  Origs: 330
+  Dests: 335
 (0 3) 335 LET C = 10000
+  Origs: 333
+  Dests: 338
 (0 1) 338 REM PRINT INITIAL PORTFOLIO
+  Origs: 335
+  Dests: 340
 (0 5) 340 PRINT "STOCK", " ", "INITIALS", "PRICE/SHARE"
+  Origs: 338
+  Dests: 350
 (0 4) 350 PRINT "INT. BALLISTIC MISSILES", "  IBM", S(1)
+  Origs: 340
+  Dests: 352
 (0 4) 352 PRINT "RED CROSS OF AMERICA", "  RCA", S(2)
+  Origs: 350
+  Dests: 354
 (0 4) 354 PRINT "LICHTENSTEIN, BUMRAP & JOKE", "  LBJ", S(3)
+  Origs: 352
+  Dests: 356
 (0 4) 356 PRINT "AMERICAN BANKRUPT CO.", "  ABC", S(4)
+  Origs: 354
+  Dests: 358
 (0 4) 358 PRINT "CENSURED BOOKS STORE", "  CBS", S(5)
+  Origs: 356
+  Dests: 360
 (0 2) 360 PRINT
+  Origs: 358, 810
+  Dests: 361
 (0 1) 361 REM NYSE AVERAGE:Z5; TEMP. VALUE:Z4; NET CHANGE:Z6 
+  Origs: 360
+  Dests: 363
 (0 3) 363 LET Z4 = Z5
+  Origs: 361
+  Dests: 364
 (0 3) 364 LET Z5 = 0
+  Origs: 363
+  Dests: 365
 (0 3) 365 LET T = 0
+  Origs: 364
+  Dests: 370
 (1 3) 370 FOR I = 1 TO 5
+  Origs: 365
+  Dests: 375
 (0 4) 375 LET Z5 = Z5 + S(I)
+  Origs: 370
+  Dests: 380
 (0 6) 380 LET T = T + S(I) * P(I)
+  Origs: 375
+  Dests: 390
 (0 1) 390 NEXT I
+  Origs: 380
+  Dests: 391
 (0 5) 391 LET Z5 = INT(100 * (Z5 / 5) + .5) / 100
+  Origs: 390
+  Dests: 392
 (0 5) 392 LET Z6 = INT((Z5 - Z4) * 100 + .5) / 100
+  Origs: 391
+  Dests: 393
 (0 1) 393 REM TOTAL ASSETS:D 
+  Origs: 392
+  Dests: 394
 (0 4) 394 LET D = T + C
+  Origs: 393
+  Dests: 395
 (1 4) 395 IF X9 > 0 THEN 398
+  Origs: 394
+  Dests: 396, 398
 (0 3) 396 PRINT "NEW YORK STOCK EXCHANGE AVERAGE: "; Z5
+  Origs: 395
+  Dests: 397
 (0 2) 397 GOTO 399
+  Origs: 396
+  Dests: 399
 (0 5) 398 PRINT "NEW YORK STOCK EXCHANGE AVERAGE: "; Z5; " NET CHANGE"; Z6
+  Origs: 395
+  Dests: 399
 (0 2) 399 PRINT
+  Origs: 397, 398
+  Dests: 400
 (0 5) 400 LET T = INT(100 * T + .5) / 100
+  Origs: 399
+  Dests: 401
 (0 3) 401 PRINT "TOTAL STOCK ASSETS ARE   $"; T
+  Origs: 400
+  Dests: 403
 (0 5) 403 LET C = INT(100 * C + .5) / 100
+  Origs: 401
+  Dests: 405
 (0 3) 405 PRINT "TOTAL CASH ASSETS ARE    $"; C
+  Origs: 403
+  Dests: 407
 (0 5) 407 LET D = INT(100 * D + .5) / 100
+  Origs: 405
+  Dests: 408
 (0 3) 408 PRINT "TOTAL ASSETS ARE         $"; D
+  Origs: 407
+  Dests: 410
 (0 2) 410 PRINT
+  Origs: 408
+  Dests: 411
 (1 4) 411 IF X9 = 0 THEN 416
+  Origs: 410
+  Dests: 412, 416
 (0 2) 412 PRINT "DO YOU WISH TO CONTINUE (YES-TYPE 1, NO-TYPE 0)";
+  Origs: 411
+  Dests: 413
 (1 2) 413 INPUT Q9
+  Origs: 412
+  Dests: 414
 (1 4) 414 IF Q9 < 1 THEN 998
+  Origs: 413
+  Dests: 416, 998
 (0 1) 416 REM INPUT TRANSACTIONS 
+  Origs: 411, 414
+  Dests: 420
 (0 2) 420 PRINT "WHAT IS YOUR TRANSACTION IN"
+  Origs: 416, 616, 660
+  Dests: 430
 (0 2) 430 PRINT "IBM";
+  Origs: 420
+  Dests: 440
 (1 2) 440 INPUT Z(1)
+  Origs: 430
+  Dests: 450
 (0 2) 450 PRINT "RCA";
+  Origs: 440
+  Dests: 460
 (1 2) 460 INPUT Z(2)
+  Origs: 450
+  Dests: 470
 (0 2) 470 PRINT "LBJ";
+  Origs: 460
+  Dests: 480
 (1 2) 480 INPUT Z(3)
+  Origs: 470
+  Dests: 490
 (0 2) 490 PRINT "ABC";
+  Origs: 480
+  Dests: 500
 (1 2) 500 INPUT Z(4)
+  Origs: 490
+  Dests: 510
 (0 2) 510 PRINT "CBS";
+  Origs: 500
+  Dests: 520
 (1 2) 520 INPUT Z(5)
+  Origs: 510
+  Dests: 525
 (0 2) 525 PRINT
+  Origs: 520
+  Dests: 530
 (0 1) 530 REM TOTAL DAY'S PURCHASES IN $:P5
+  Origs: 525
+  Dests: 540
 (0 3) 540 LET P5 = 0
+  Origs: 530
+  Dests: 550
 (0 1) 550 REM TOTAL DAY'S SALES IN $:S5
+  Origs: 540
+  Dests: 560
 (0 3) 560 LET S5 = 0
+  Origs: 550
+  Dests: 570
 (1 3) 570 FOR I = 1 TO 5
+  Origs: 560
+  Dests: 575
 (0 4) 575 LET Z(I) = INT(Z(I) + .5)
+  Origs: 570
+  Dests: 580
 (1 4) 580 IF Z(I) <= 0 THEN 610
+  Origs: 575
+  Dests: 590, 610
 (0 6) 590 LET P5 = P5 + Z(I) * S(I)
+  Origs: 580
+  Dests: 600
 (0 2) 600 GOTO 620
+  Origs: 590
+  Dests: 620
 (0 6) 610 LET S5 = S5 - Z(I) * S(I)
+  Origs: 580
+  Dests: 612
 (1 5) 612 IF -Z(I) <= P(I) THEN 620
+  Origs: 610
+  Dests: 614, 620
 (0 2) 614 PRINT "YOU HAVE OVERSOLD A STOCK; TRY AGAIN."
+  Origs: 612
+  Dests: 616
 (0 3) 616 GOTO 420
+  Origs: 614
+  Dests: 420
 (0 1) 620 NEXT I
+  Origs: 600, 612
+  Dests: 622
 (0 1) 622 REM TOTAL VALUE OF TRANSACTIONS:T5 
+  Origs: 620
+  Dests: 625
 (0 4) 625 LET T5 = P5 + S5
+  Origs: 622
+  Dests: 630
 (0 1) 630 REM BROKERAGE FEE:B5 
+  Origs: 625
+  Dests: 640
 (0 5) 640 LET B5 = INT(.01 * T5 * 100 + .5) / 100
+  Origs: 630
+  Dests: 650
 (0 1) 650 REM CASH ASSETS=OLD CASH ASSETS-TOTAL PURCHASES
+  Origs: 640
+  Dests: 652
 (0 1) 652 REM -BROKERAGE FEES+TOTAL SALES:C5 
+  Origs: 650
+  Dests: 654
 (0 6) 654 LET C5 = C - P5 - B5 + S5
+  Origs: 652
+  Dests: 656
 (1 4) 656 IF C5 >= 0 THEN 674
+  Origs: 654
+  Dests: 658, 674
 (0 5) 658 PRINT "YOU HAVE USED $"; -C5; " MORE THAN YOU HAVE."
+  Origs: 656
+  Dests: 660
 (0 3) 660 GOTO 420
+  Origs: 658
+  Dests: 420
 (0 3) 674 LET C = C5
+  Origs: 656
+  Dests: 675
 (0 1) 675 REM CALCULATE NEW PORTFOLIO  
+  Origs: 674
+  Dests: 680
 (1 3) 680 FOR I = 1 TO 5
+  Origs: 675
+  Dests: 690
 (0 4) 690 LET P(I) = P(I) + Z(I)
+  Origs: 680
+  Dests: 700
 (0 1) 700 NEXT I
+  Origs: 690
+  Dests: 710
 (0 1) 710 REM CALCULATE NEW STOCK VALUES 
+  Origs: 700
+  Dests: 720
 (0 2) 720 GOSUB 830
+  Origs: 710
+  Dests: 750, 830
 (0 1) 750 REM PRINT PORTFOLIO
+  Origs: 720
+  Dests: 751
 (0 1) 751 REM BELL RINGING-DIFFERENT ON MANY COMPUTERS 
+  Origs: 750
+  Dests: 755
 (0 2) 755 PRINT
+  Origs: 751
+  Dests: 756
 (0 2) 756 PRINT "**********     END OF DAY'S TRADING     **********"
+  Origs: 755
+  Dests: 757
 (0 2) 757 PRINT
+  Origs: 756
+  Dests: 758
 (0 2) 758 PRINT
+  Origs: 757
+  Dests: 759
 (1 4) 759 IF X9 < 1 THEN 769
+  Origs: 758
+  Dests: 769
 (0 6) 769 PRINT "STOCK", "PRICE/SHARE", "HOLDINGS", "VALUE", "NET PRICE CHANGE"
+  Origs: 759
+  Dests: 770
 (0 7) 770 PRINT "IBM", S(1), P(1), S(1) * P(1), C(1)
+  Origs: 769
+  Dests: 771
 (0 7) 771 PRINT "RCA", S(2), P(2), S(2) * P(2), C(2)
+  Origs: 770
+  Dests: 772
 (0 7) 772 PRINT "LBJ", S(3), P(3), S(3) * P(3), C(3)
+  Origs: 771
+  Dests: 773
 (0 7) 773 PRINT "ABC", S(4), P(4), S(4) * P(4), C(4)
+  Origs: 772
+  Dests: 774
 (0 7) 774 PRINT "CBS", S(5), P(5), S(5) * P(5), C(5)
+  Origs: 773
+  Dests: 775
 (0 3) 775 LET X9 = 1
+  Origs: 774
+  Dests: 780
 (0 2) 780 PRINT
+  Origs: 775
+  Dests: 790
 (0 2) 790 PRINT
+  Origs: 780
+  Dests: 810
 (0 3) 810 GOTO 360
+  Origs: 790
+  Dests: 360
 (0 1) 829 REM NEW STOCK VALUES - SUBROUTINE
+  Origs: 
+  Dests: 830
 (0 1) 830 REM RANDOMLY PRODUCE NEW STOCK VALUES BASED ON PREVIOUS
+  Origs: 280, 720, 829
+  Dests: 831
 (0 1) 831 REM DAY'S VALUES 
+  Origs: 830
+  Dests: 832
 (0 1) 832 REM N1,N2 ARE RANDOM NUMBERS OF DAYS WHICH RESPECTIVELY
+  Origs: 831
+  Dests: 833
 (0 1) 833 REM DETERMINE WHEN STOCK I1 WILL INCREASE 10 PTS. AND STOCK
+  Origs: 832
+  Dests: 834
 (0 1) 834 REM I2 WILL DECREASE 10 PTS. 
+  Origs: 833
+  Dests: 840
 (0 1) 840 REM IF N1 DAYS HAVE PASSED, PICK AN I1, SET E1, DETERMINE NEW N1 
+  Origs: 834
+  Dests: 841
 (1 4) 841 IF N1 > 0 THEN 850
+  Origs: 840
+  Dests: 845, 850
 (0 4) 845 LET I1 = INT(4.99 * RND(X) + 1)
+  Origs: 841
+  Dests: 846
 (0 4) 846 LET N1 = INT(4.99 * RND(X) + 1)
+  Origs: 845
+  Dests: 847
 (0 3) 847 LET E1 = 1
+  Origs: 846
+  Dests: 850
 (0 1) 850 REM IF N2 DAYS HAVE PASSED, PICK AN I2, SET E2, DETERMINE NEW N2 
+  Origs: 841, 847
+  Dests: 851
 (1 4) 851 IF N2 > 0 THEN 860
+  Origs: 850
+  Dests: 855, 860
 (0 4) 855 LET I2 = INT(4.99 * RND(X) + 1)
+  Origs: 851
+  Dests: 856
 (0 4) 856 LET N2 = INT(4.99 * RND(X) + 1)
+  Origs: 855
+  Dests: 857
 (0 3) 857 LET E2 = 1
+  Origs: 856
+  Dests: 860
 (0 1) 860 REM DEDUCT ONE DAY FROM N1 AND N2
+  Origs: 851, 857
+  Dests: 861
 (0 4) 861 LET N1 = N1 - 1
+  Origs: 860
+  Dests: 862
 (0 4) 862 LET N2 = N2 - 1
+  Origs: 861
+  Dests: 890
 (0 1) 890 REM LOOP THROUGH ALL STOCKS
+  Origs: 862
+  Dests: 900
 (1 3) 900 FOR I = 1 TO 5
+  Origs: 890
+  Dests: 910
 (0 4) 910 LET X1 = RND(X)
+  Origs: 900
+  Dests: 915
 (1 4) 915 IF X1 > .25 THEN 920
+  Origs: 910
+  Dests: 916, 920
 (0 3) 916 LET X1 = .25
+  Origs: 915
+  Dests: 917
 (0 2) 917 GOTO 935
+  Origs: 916
+  Dests: 935
 (1 4) 920 IF X1 > .5 THEN 925
+  Origs: 915
+  Dests: 921, 925
 (0 3) 921 LET X1 = .5
+  Origs: 920
+  Dests: 922
 (0 2) 922 GOTO 935
+  Origs: 921
+  Dests: 935
 (1 4) 925 IF X1 > .75 THEN 930
+  Origs: 920
+  Dests: 926, 930
 (0 3) 926 LET X1 = .75
+  Origs: 925
+  Dests: 927
 (0 2) 927 GOTO 935
+  Origs: 926
+  Dests: 935
 (0 3) 930 LET X1 = 0.0
+  Origs: 925
+  Dests: 931
 (0 1) 931 REM BIG CHANGE CONSTANT:W3  (SET TO ZERO INITIALLY)
+  Origs: 930
+  Dests: 935
 (0 3) 935 LET W3 = 0
+  Origs: 917, 922, 927, 931
+  Dests: 936
 (1 4) 936 IF E1 < 1 THEN 945
+  Origs: 935
+  Dests: 937, 945
 (1 6) 937 IF INT(I1 + .5) <> INT(I + .5) THEN 945
+  Origs: 936
+  Dests: 938, 945
 (0 1) 938 REM ADD 10 PTS. TO THIS STOCK;  RESET E1 
+  Origs: 937
+  Dests: 939
 (0 3) 939 LET W3 = 10
+  Origs: 938
+  Dests: 943
 (0 3) 943 LET E1 = 0
+  Origs: 939
+  Dests: 945
 (1 4) 945 IF E2 < 1 THEN 955
+  Origs: 936, 937, 943
+  Dests: 947, 955
 (1 6) 947 IF INT(I2 + .5) <> INT(I + .5) THEN 955
+  Origs: 945
+  Dests: 948, 955
 (0 1) 948 REM SUBTRACT 10 PTS. FROM THIS STOCK;  RESET E2
+  Origs: 947
+  Dests: 949
 (0 4) 949 LET W3 = W3 - 10
+  Origs: 948
+  Dests: 953
 (0 3) 953 LET E2 = 0
+  Origs: 949
+  Dests: 954
 (0 1) 954 REM C(I) IS CHANGE IN STOCK VALUE
+  Origs: 953
+  Dests: 955
 (0 8) 955 LET C(I) = INT(A * S(I)) + X1 + INT(3 - 6 * RND(X) + .5) + W3
+  Origs: 945, 947, 954
+  Dests: 956
 (0 5) 956 LET C(I) = INT(100 * C(I) + .5) / 100
+  Origs: 955
+  Dests: 957
 (0 4) 957 LET S(I) = S(I) + C(I)
+  Origs: 956
+  Dests: 960
 (1 4) 960 IF S(I) > 0 THEN 967
+  Origs: 957
+  Dests: 964, 967
 (0 3) 964 LET C(I) = 0
+  Origs: 960
+  Dests: 965
 (0 3) 965 LET S(I) = 0
+  Origs: 964
+  Dests: 966
 (0 2) 966 GOTO 970
+  Origs: 965
+  Dests: 970
 (0 5) 967 LET S(I) = INT(100 * S(I) + .5) / 100
+  Origs: 960
+  Dests: 970
 (0 1) 970 NEXT I
+  Origs: 966, 967
+  Dests: 972
 (0 1) 972 REM AFTER T8 DAYS RANDOMLY CHANGE TREND SIGN AND SLOPE 
+  Origs: 970
+  Dests: 973
 (0 4) 973 LET T8 = T8 - 1
+  Origs: 972
+  Dests: 974
 (1 4) 974 IF T8 < 1 THEN 985
+  Origs: 973
+  Dests: 980, 985
 (0 1) 980 RETURN
+  Origs: 974
+  Dests: 
 (0 1) 985 REM RANDOMLY CHANGE TREND SIGN AND SLOPE (A), AND DURATION 
+  Origs: 974
+  Dests: 986
 (0 1) 986 REM OF TREND (T8)
+  Origs: 985
+  Dests: 990
 (0 4) 990 LET T8 = INT(4.99 * RND(X) + 1)
+  Origs: 986
+  Dests: 992
 (0 5) 992 LET A = INT((RND(X) / 10) * 100 + .5) / 100
+  Origs: 990
+  Dests: 993
 (0 4) 993 LET S4 = RND(X)
+  Origs: 992
+  Dests: 994
 (1 4) 994 IF S4 <= .5 THEN 997
+  Origs: 993
+  Dests: 995, 997
 (0 4) 995 LET A = -A
+  Origs: 994
+  Dests: 997
 (0 1) 997 RETURN
+  Origs: 994, 995
+  Dests: 
 (0 2) 998 PRINT "HOPE YOU HAD FUN!!"
+  Origs: 414
+  Dests: 999
 (0 1) 999 END
+  Origs: 998
+  Dests: 
 
 Unreachable code:
 
