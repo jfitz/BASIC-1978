@@ -188,8 +188,8 @@ class Line
     @statements.each(&:uncache)
   end
 
-  def list
-    @text
+  def reset_profile_metrics
+    @statements.each(&:reset_profile_metrics)
   end
 
   def number_valid_statements
@@ -222,6 +222,10 @@ class Line
     num
   end
 
+  def list
+    @text
+  end
+
   def pretty(multiline)
     if multiline
       pretty_lines = AbstractToken.pretty_multiline([], @tokens)
@@ -250,14 +254,6 @@ class Line
     pretty_lines
   end
 
-  def parse
-    texts = []
-
-    @statements.each { |statement| texts << statement.dump }
-
-    texts
-  end
-
   def analyze_pretty(number)
     texts = []
 
@@ -266,6 +262,14 @@ class Line
 
       number = ' ' * number.size
     end
+
+    texts
+  end
+
+  def parse
+    texts = []
+
+    @statements.each { |statement| texts << statement.dump }
 
     texts
   end
@@ -285,10 +289,6 @@ class Line
     end
 
     texts
-  end
-
-  def reset_profile_metrics
-    @statements.each(&:reset_profile_metrics)
   end
 
   def renumber(renumber_map)
@@ -681,8 +681,10 @@ class Program
     texts = []
 
     goto_line_idxs = build_destinations
+
     # convert line-number-indexes to line-numbers
     gotos = {}
+
     goto_line_idxs.each do |line_idx, dest_idxs|
       line_number = line_idx.number
       gotos[line_number] = [] unless gotos.key?(line_number)
@@ -1588,11 +1590,11 @@ class Program
     line_numbers.each do |line_number|
       line = @lines[line_number]
 
-      line.warnings.each { |warning| texts << ' WARNING: ' + warning }
-
       # print the line
       texts << line_number.to_s + line.list
       statements = line.statements
+
+      line.warnings.each { |warning| texts << ' WARNING: ' + warning }
 
       # print the errors
       statements.each do |statement|
@@ -1620,11 +1622,11 @@ class Program
     line_numbers.each do |line_number|
       line = @lines[line_number]
 
-      line.warnings.each { |warning| texts << ' WARNING: ' + warning }
-
       # print the line
       texts << line_number.to_s + line.list
       statements = line.statements
+
+      line.warnings.each { |warning| texts << ' WARNING: ' + warning }
 
       # print the errors
       statements.each do |statement|
@@ -1652,8 +1654,6 @@ class Program
     line_numbers.each do |line_number|
       line = @lines[line_number]
 
-      line.warnings.each { |warning| texts << ' WARNING: ' + warning }
-
       # print the line
       number = line_number.to_s
       pretty_lines = line.pretty(pretty_multiline)
@@ -1661,6 +1661,8 @@ class Program
         texts << number + pretty_line
         number = ' ' * number.size
       end
+
+      line.warnings.each { |warning| texts << ' WARNING: ' + warning }
 
       statements = line.statements
 
