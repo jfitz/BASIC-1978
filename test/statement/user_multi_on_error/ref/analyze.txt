@@ -21,45 +21,45 @@ Halstead complexity:
 
 (0 1) 10 REM TEST ERROR TRAP INSIDE FUNCTION
   Origs: 
-  Dests: 20
+  Dests: 20:auto
 (0 2) 20 PRINT "START"
-  Origs: 10
-  Dests: 30
+  Origs: 10:auto
+  Dests: 30:auto
 (0 5) 30 R = FNA(0)
-  Origs: 20
-  Dests: 40
+  Origs: 20:auto
+  Dests: 40:auto
 (0 3) 40 PRINT "R IS:"; R
-  Origs: 30
-  Dests: 99
+  Origs: 30:auto
+  Dests: 99:auto
 (0 1) 99 STOP
-  Origs: 40
+  Origs: 40:auto
   Dests: 
 (0 1) 400 DEF FNA(A)
   Origs: 
-  Dests: 410
+  Dests: 410:auto
 (1 2) 410 ON ERROR GOTO 480
-  Origs: 400
-  Dests: 420, 480
+  Origs: 400:auto
+  Dests: 420:auto, 480:onerror
 (0 6) 420 FNA = 1 / A
-  Origs: 410
-  Dests: 430
+  Origs: 410:auto
+  Dests: 430:auto
 (0 3) 430 PRINT "A IS: "; A
-  Origs: 420
-  Dests: 470
+  Origs: 420:auto
+  Dests: 470:auto
 (0 2) 470 GOTO 490
-  Origs: 430
-  Dests: 490
+  Origs: 430:auto
+  Dests: 490:goto
 (0 5) 480 FNA = 0
-  Origs: 410
-  Dests: 481
+  Origs: 410:onerror
+  Dests: 481:auto
 (0 1) 481 RESUME 430
-  Origs: 480
+  Origs: 480:auto
   Dests: 
 (0 1) 490 FNEND
-  Origs: 470
-  Dests: 999
+  Origs: 470:goto
+  Dests: 999:auto
 (0 1) 999 END
-  Origs: 490
+  Origs: 490:auto
   Dests: 
 
 Unreachable code:

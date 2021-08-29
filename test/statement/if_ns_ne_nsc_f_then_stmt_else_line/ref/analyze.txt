@@ -21,21 +21,21 @@ Halstead complexity:
 
 (0 1) 10 REM TEST IF THEN ELSE
   Origs: 
-  Dests: 20
+  Dests: 20:auto
 (0 3) 20 A = 10
-  Origs: 10
-  Dests: 30
+  Origs: 10:auto
+  Dests: 30:auto
 (1 6) 30 IF A <> 10 THEN PRINT "FAIL" ELSE 80
-  Origs: 20
-  Dests: 50, 80
+  Origs: 20:auto
+  Dests: 50:auto, 80:ifthen
 (0 2) 50 GOTO 99
-  Origs: 30
-  Dests: 99
+  Origs: 30:auto
+  Dests: 99:goto
 (0 2) 80 PRINT "SUCCESS"
-  Origs: 30
-  Dests: 99
+  Origs: 30:ifthen
+  Dests: 99:auto
 (0 1) 99 END
-  Origs: 50, 80
+  Origs: 50:goto, 80:auto
   Dests: 
 
 Unreachable code:

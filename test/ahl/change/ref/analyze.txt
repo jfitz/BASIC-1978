@@ -21,163 +21,163 @@ Halstead complexity:
 
 (0 4) 2 PRINT TAB(33); "CHANGE"
   Origs: 
-  Dests: 4
+  Dests: 4:auto
 (0 4) 4 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
-  Origs: 2
-  Dests: 5
+  Origs: 2:auto
+  Dests: 5:auto
 (0 2) 5 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
-  Origs: 4
-  Dests: 6
+  Origs: 4:auto
+  Dests: 6:auto
 (0 2) 6 PRINT "I, YOUR FRIENDLY MICROCOMPUTER, WILL DETERMINE"
-  Origs: 5
-  Dests: 8
+  Origs: 5:auto
+  Dests: 8:auto
 (0 2) 8 PRINT "THE CORRECT CHANGE FOR ITEMS COSTING UP TO $100."
-  Origs: 6
-  Dests: 9
+  Origs: 6:auto
+  Dests: 9:auto
 (0 2) 9 PRINT
 (0 2)   PRINT
-  Origs: 8
-  Dests: 10
+  Origs: 8:auto
+  Dests: 10:auto
 (0 2) 10 PRINT "COST OF ITEM";
 (1 2)    INPUT A
 (0 2)    PRINT "AMOUNT OF PAYMENT";
 (1 2)    INPUT P
-  Origs: 9, 100, 400
-  Dests: 20
+  Origs: 9:auto, 100:goto, 400:goto
+  Dests: 20:auto
 (0 4) 20 C = P - A
 (0 3)    M = C
 (1 4)    IF C <> 0 THEN 90
-  Origs: 10
-  Dests: 25, 90
+  Origs: 10:auto
+  Dests: 25:auto, 90:ifthen
 (0 2) 25 PRINT "CORRECT AMOUNT, THANK YOU."
-  Origs: 20
-  Dests: 30
+  Origs: 20:auto
+  Dests: 30:auto
 (0 2) 30 GOTO 400
-  Origs: 25
-  Dests: 400
+  Origs: 25:auto
+  Dests: 400:goto
 (1 4) 90 IF C > 0 THEN 120
-  Origs: 20
-  Dests: 95, 120
+  Origs: 20:ifthen
+  Dests: 95:auto, 120:ifthen
 (0 4) 95 PRINT "SORRY, YOU HAVE SHORT-CHANGED ME $"; A - P
-  Origs: 90
-  Dests: 100
+  Origs: 90:auto
+  Dests: 100:auto
 (0 3) 100 GOTO 10
-  Origs: 95
-  Dests: 10
+  Origs: 95:auto
+  Dests: 10:goto
 (0 3) 120 PRINT "YOUR CHANGE, $"; C
-  Origs: 90
-  Dests: 130
+  Origs: 90:ifthen
+  Dests: 130:auto
 (0 4) 130 D = INT(C / 10)
-  Origs: 120
-  Dests: 140
+  Origs: 120:auto
+  Dests: 140:auto
 (1 4) 140 IF D = 0 THEN 155
-  Origs: 130
-  Dests: 150, 155
+  Origs: 130:auto
+  Dests: 150:auto, 155:ifthen
 (0 3) 150 PRINT D; "TEN DOLLAR BILL(S)"
-  Origs: 140
-  Dests: 155
+  Origs: 140:auto
+  Dests: 155:auto
 (0 6) 155 C = M - (D * 10)
-  Origs: 140, 150
-  Dests: 160
+  Origs: 140:ifthen, 150:auto
+  Dests: 160:auto
 (0 4) 160 E = INT(C / 5)
-  Origs: 155
-  Dests: 170
+  Origs: 155:auto
+  Dests: 170:auto
 (1 4) 170 IF E = 0 THEN 185
-  Origs: 160
-  Dests: 180, 185
+  Origs: 160:auto
+  Dests: 180:auto, 185:ifthen
 (0 3) 180 PRINT E; "FIVE DOLLARS BILL(S)"
-  Origs: 170
-  Dests: 185
+  Origs: 170:auto
+  Dests: 185:auto
 (0 9) 185 C = M - (D * 10 + E * 5)
-  Origs: 170, 180
-  Dests: 190
+  Origs: 170:ifthen, 180:auto
+  Dests: 190:auto
 (0 4) 190 F = INT(C)
-  Origs: 185
-  Dests: 200
+  Origs: 185:auto
+  Dests: 200:auto
 (1 4) 200 IF F = 0 THEN 215
-  Origs: 190
-  Dests: 210, 215
+  Origs: 190:auto
+  Dests: 210:auto, 215:ifthen
 (0 3) 210 PRINT F; "ONE DOLLAR BILL(S)"
-  Origs: 200
-  Dests: 215
+  Origs: 200:auto
+  Dests: 215:auto
 (0 10) 215 C = M - (D * 10 + E * 5 + F)
-  Origs: 200, 210
-  Dests: 220
+  Origs: 200:ifthen, 210:auto
+  Dests: 220:auto
 (0 4) 220 C = C * 100
-  Origs: 215
-  Dests: 225
+  Origs: 215:auto
+  Dests: 225:auto
 (0 3) 225 N = C
-  Origs: 220
-  Dests: 230
+  Origs: 220:auto
+  Dests: 230:auto
 (0 4) 230 G = INT(C / 50)
-  Origs: 225
-  Dests: 240
+  Origs: 225:auto
+  Dests: 240:auto
 (1 4) 240 IF G = 0 THEN 255
-  Origs: 230
-  Dests: 250, 255
+  Origs: 230:auto
+  Dests: 250:auto, 255:ifthen
 (0 3) 250 PRINT G; "ONE HALF DOLLAR(S)"
-  Origs: 240
-  Dests: 255
+  Origs: 240:auto
+  Dests: 255:auto
 (0 6) 255 C = N - (G * 50)
-  Origs: 240, 250
-  Dests: 260
+  Origs: 240:ifthen, 250:auto
+  Dests: 260:auto
 (0 4) 260 H = INT(C / 25)
-  Origs: 255
-  Dests: 270
+  Origs: 255:auto
+  Dests: 270:auto
 (1 4) 270 IF H = 0 THEN 285
-  Origs: 260
-  Dests: 280, 285
+  Origs: 260:auto
+  Dests: 280:auto, 285:ifthen
 (0 3) 280 PRINT H; "QUARTER(S)"
-  Origs: 270
-  Dests: 285
+  Origs: 270:auto
+  Dests: 285:auto
 (0 9) 285 C = N - (G * 50 + H * 25)
-  Origs: 270, 280
-  Dests: 290
+  Origs: 270:ifthen, 280:auto
+  Dests: 290:auto
 (0 4) 290 I = INT(C / 10)
-  Origs: 285
-  Dests: 300
+  Origs: 285:auto
+  Dests: 300:auto
 (1 4) 300 IF I = 0 THEN 315
-  Origs: 290
-  Dests: 310, 315
+  Origs: 290:auto
+  Dests: 310:auto, 315:ifthen
 (0 3) 310 PRINT I; "DIME(S)"
-  Origs: 300
-  Dests: 315
+  Origs: 300:auto
+  Dests: 315:auto
 (0 12) 315 C = N - (G * 50 + H * 25 + I * 10)
-  Origs: 300, 310
-  Dests: 320
+  Origs: 300:ifthen, 310:auto
+  Dests: 320:auto
 (0 4) 320 J = INT(C / 5)
-  Origs: 315
-  Dests: 330
+  Origs: 315:auto
+  Dests: 330:auto
 (1 4) 330 IF J = 0 THEN 345
-  Origs: 320
-  Dests: 340, 345
+  Origs: 320:auto
+  Dests: 340:auto, 345:ifthen
 (0 3) 340 PRINT J; "NICKEL(S)"
-  Origs: 330
-  Dests: 345
+  Origs: 330:auto
+  Dests: 345:auto
 (0 15) 345 C = N - (G * 50 + H * 25 + I * 10 + J * 5)
-  Origs: 330, 340
-  Dests: 350
+  Origs: 330:ifthen, 340:auto
+  Dests: 350:auto
 (0 4) 350 K = INT(C + .5)
-  Origs: 345
-  Dests: 360
+  Origs: 345:auto
+  Dests: 360:auto
 (1 4) 360 IF K = 0 THEN 380
-  Origs: 350
-  Dests: 370, 380
+  Origs: 350:auto
+  Dests: 370:auto, 380:ifthen
 (0 3) 370 PRINT K; "PENNY(S)"
-  Origs: 360
-  Dests: 380
+  Origs: 360:auto
+  Dests: 380:auto
 (0 2) 380 PRINT "THANK YOU, COME AGAIN."
-  Origs: 360, 370
-  Dests: 390
+  Origs: 360:ifthen, 370:auto
+  Dests: 390:auto
 (0 2) 390 PRINT
 (0 2)     PRINT
-  Origs: 380
-  Dests: 400
+  Origs: 380:auto
+  Dests: 400:auto
 (0 3) 400 GOTO 10
-  Origs: 30, 390
-  Dests: 10
+  Origs: 30:goto, 390:auto
+  Dests: 10:goto
 (0 1) 410 END
   Origs: 
   Dests: 

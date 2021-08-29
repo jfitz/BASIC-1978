@@ -21,225 +21,225 @@ Halstead complexity:
 
 (0 4) 10 PRINT TAB(32); "ANIMAL"
   Origs: 
-  Dests: 20
+  Dests: 20:auto
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
-  Origs: 10
-  Dests: 30
+  Origs: 10:auto
+  Dests: 30:auto
 (0 2) 30 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
-  Origs: 20
-  Dests: 40
+  Origs: 20:auto
+  Dests: 40:auto
 (0 2) 40 PRINT "PLAY 'GUESS THE ANIMAL'"
-  Origs: 30
-  Dests: 45
+  Origs: 30:auto
+  Dests: 45:auto
 (0 2) 45 PRINT
-  Origs: 40
-  Dests: 50
+  Origs: 40:auto
+  Dests: 50:auto
 (0 2) 50 PRINT "THINK OF AN ANIMAL AND THE COMPUTER WILL TRY TO GUESS IT."
-  Origs: 45
-  Dests: 60
+  Origs: 45:auto
+  Dests: 60:auto
 (0 2) 60 PRINT
-  Origs: 50
-  Dests: 70
+  Origs: 50:auto
+  Dests: 70:auto
 (0 2) 70 DIM A$(200)
-  Origs: 60
-  Dests: 80
+  Origs: 60:auto
+  Dests: 80:auto
 (1 3) 80 FOR I = 0 TO 3
-  Origs: 70
-  Dests: 90
+  Origs: 70:auto
+  Dests: 90:auto
 (1 2) 90 READ A$(I)
-  Origs: 80
-  Dests: 100
+  Origs: 80:auto
+  Dests: 100:auto
 (0 1) 100 NEXT I
-  Origs: 90
-  Dests: 110
+  Origs: 90:auto
+  Dests: 110:auto
 (0 4) 110 N = VAL(A$(0))
-  Origs: 100
-  Dests: 120
+  Origs: 100:auto
+  Dests: 120:auto
 (0 1) 120 REM          MAIN CONTROL SECTION
-  Origs: 110, 150, 230, 380, 680
-  Dests: 130
+  Origs: 110:auto, 150:ifthen, 230:goto, 380:goto, 680:goto
+  Dests: 130:auto
 (1 2) 130 INPUT "ARE YOU THINKING OF AN ANIMAL"; A$
-  Origs: 120
-  Dests: 140
+  Origs: 120:auto
+  Dests: 140:auto
 (1 4) 140 IF A$ = "LIST" THEN 600
-  Origs: 130
-  Dests: 150, 600
+  Origs: 130:auto
+  Dests: 150:auto, 600:ifthen
 (1 6) 150 IF LEFT$(A$, 1) <> "Y" THEN 120
-  Origs: 140
-  Dests: 120, 160
+  Origs: 140:auto
+  Dests: 120:ifthen, 160:auto
 (0 3) 160 K = 1
-  Origs: 150
-  Dests: 170
+  Origs: 150:auto
+  Dests: 170:auto
 (0 2) 170 GOSUB 390
-  Origs: 160, 190
-  Dests: 180, 390
+  Origs: 160:auto, 190:ifthen
+  Dests: 180:auto, 390:gosub
 (1 5) 180 IF LEN(A$(K)) = 0 THEN 999
-  Origs: 170
-  Dests: 190, 999
+  Origs: 170:auto
+  Dests: 190:auto, 999:ifthen
 (1 6) 190 IF LEFT$(A$(K), 2) = "\Q" THEN 170
-  Origs: 180
-  Dests: 170, 200
+  Origs: 180:auto
+  Dests: 170:ifthen, 200:auto
 (0 4) 200 PRINT "IS IT A "; RIGHT$(A$(K), LEN(A$(K)) - 2);
-  Origs: 190
-  Dests: 210
+  Origs: 190:auto
+  Dests: 210:auto
 (1 2) 210 INPUT A$
-  Origs: 200
-  Dests: 220
+  Origs: 200:auto
+  Dests: 220:auto
 (0 4) 220 A$ = LEFT$(A$, 1)
-  Origs: 210
-  Dests: 230
+  Origs: 210:auto
+  Dests: 230:auto
 (1 6) 230 IF LEFT$(A$, 1) = "Y" THEN PRINT "WHY NOT TRY ANOTHER ANIMAL?"
 (0 3)     GOTO 120
-  Origs: 220
-  Dests: 120, 240
+  Origs: 220:auto
+  Dests: 120:goto
 (1 2) 240 INPUT "THE ANIMAL YOU WERE THINKING OF WAS A "; V$
-  Origs: 230
-  Dests: 250
+  Origs: 
+  Dests: 250:auto
 (0 2) 250 PRINT "PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
-  Origs: 240
-  Dests: 260
+  Origs: 240:auto
+  Dests: 260:auto
 (0 5) 260 PRINT V$; " FROM A "; RIGHT$(A$(K), LEN(A$(K)) - 2)
-  Origs: 250
-  Dests: 270
+  Origs: 250:auto
+  Dests: 270:auto
 (1 2) 270 INPUT X$
-  Origs: 260
-  Dests: 280
+  Origs: 260:auto
+  Dests: 280:auto
 (0 4) 280 PRINT "FOR A "; V$; " THE ANSWER WOULD BE ";
-  Origs: 270, 300
-  Dests: 290
+  Origs: 270:auto, 300:ifthen
+  Dests: 290:auto
 (1 2) 290 INPUT A$
-  Origs: 280
-  Dests: 300
+  Origs: 280:auto
+  Dests: 300:auto
 (0 4) 300 A$ = LEFT$(A$, 1)
 (1 8)     IF A$ <> "Y" AND A$ <> "N" THEN 280
-  Origs: 290
-  Dests: 280, 310
+  Origs: 290:auto
+  Dests: 280:ifthen, 310:auto
 (1 6) 310 IF A$ = "Y" THEN B$ = "N"
-  Origs: 300
-  Dests: 320
+  Origs: 300:auto
+  Dests: 320:auto
 (1 6) 320 IF A$ = "N" THEN B$ = "Y"
-  Origs: 310
-  Dests: 330
+  Origs: 310:auto
+  Dests: 330:auto
 (0 4) 330 Z1 = VAL(A$(0))
-  Origs: 320
-  Dests: 340
+  Origs: 320:auto
+  Dests: 340:auto
 (0 4) 340 A$(0) = STR$(Z1 + 2)
-  Origs: 330
-  Dests: 350
+  Origs: 330:auto
+  Dests: 350:auto
 (0 3) 350 A$(Z1) = A$(K)
-  Origs: 340
-  Dests: 360
+  Origs: 340:auto
+  Dests: 360:auto
 (0 4) 360 A$(Z1 + 1) = "\A" + V$
-  Origs: 350
-  Dests: 370
+  Origs: 350:auto
+  Dests: 370:auto
 (0 13) 370 A$(K) = "\Q" + X$ + "\" + A$ + STR$(Z1 + 1) + "\" + B$ + STR$(Z1) + "\"
-  Origs: 360
-  Dests: 380
+  Origs: 360:auto
+  Dests: 380:auto
 (0 3) 380 GOTO 120
-  Origs: 370
-  Dests: 120
+  Origs: 370:auto
+  Dests: 120:goto
 (0 1) 390 REM     SUBROUTINE TO PRINT QUESTIONS
-  Origs: 170
-  Dests: 400
+  Origs: 170:gosub
+  Dests: 400:auto
 (0 3) 400 Q$ = A$(K)
-  Origs: 390
-  Dests: 410
+  Origs: 390:auto
+  Dests: 410:auto
 (1 4) 410 FOR Z = 3 TO LEN(Q$)
-  Origs: 400, 440
-  Dests: 415
+  Origs: 400:auto, 440:ifthen
+  Dests: 415:auto
 (1 7) 415 IF MID$(Q$, Z, 1) <> "\" THEN PRINT MID$(Q$, Z, 1);
 (0 1)     NEXT Z
-  Origs: 410
-  Dests: 420, 420
+  Origs: 410:auto
+  Dests: 420:auto
 (1 2) 420 INPUT C$
-  Origs: 415, 415
-  Dests: 430
+  Origs: 415:auto
+  Dests: 430:auto
 (0 4) 430 C$ = LEFT$(C$, 1)
-  Origs: 420
-  Dests: 440
+  Origs: 420:auto
+  Dests: 440:auto
 (1 8) 440 IF C$ <> "Y" AND C$ <> "N" THEN 410
-  Origs: 430
-  Dests: 410, 450
+  Origs: 430:auto
+  Dests: 410:ifthen, 450:auto
 (0 4) 450 T$ = "\" + C$
-  Origs: 440
-  Dests: 455
+  Origs: 440:auto
+  Dests: 455:auto
 (1 5) 455 FOR X = 3 TO LEN(Q$) - 1
-  Origs: 450
-  Dests: 460
+  Origs: 450:auto
+  Dests: 460:auto
 (1 5) 460 IF MID$(Q$, X, 2) = T$ THEN 480
-  Origs: 455
-  Dests: 470, 480
+  Origs: 455:auto
+  Dests: 470:auto, 480:ifthen
 (0 1) 470 NEXT X
-  Origs: 460
-  Dests: 475
+  Origs: 460:auto
+  Dests: 475:auto
 (0 1) 475 STOP
-  Origs: 470
+  Origs: 470:auto
   Dests: 
 (1 5) 480 FOR Y = X + 1 TO LEN(Q$)
-  Origs: 460
-  Dests: 490
+  Origs: 460:ifthen
+  Dests: 490:auto
 (1 5) 490 IF MID$(Q$, Y, 1) = "\" THEN 510
-  Origs: 480
-  Dests: 500, 510
+  Origs: 480:auto
+  Dests: 500:auto, 510:ifthen
 (0 1) 500 NEXT Y
-  Origs: 490
-  Dests: 505
+  Origs: 490:auto
+  Dests: 505:auto
 (0 1) 505 STOP
-  Origs: 500
+  Origs: 500:auto
   Dests: 
 (0 4) 510 K = VAL(MID$(Q$, X + 2, Y - X - 2))
-  Origs: 490
-  Dests: 520
+  Origs: 490:ifthen
+  Dests: 520:auto
 (0 1) 520 RETURN
-  Origs: 510
+  Origs: 510:auto
   Dests: 
 (0 2) 530 DATA "4", "\QDOES IT SWIM\Y2\N3\", "\AFISH", "\ABIRD"
   Origs: 
-  Dests: 600
+  Dests: 600:auto
 (0 2) 600 PRINT
 (0 2)     PRINT "ANIMALS I ALREADY KNOW ARE:"
-  Origs: 140, 530
-  Dests: 605
+  Origs: 140:ifthen, 530:auto
+  Dests: 605:auto
 (0 3) 605 X = 0
-  Origs: 600
-  Dests: 610
+  Origs: 600:auto
+  Dests: 610:auto
 (1 3) 610 FOR I = 1 TO 200
-  Origs: 605
-  Dests: 620
+  Origs: 605:auto
+  Dests: 620:auto
 (1 5) 620 IF LEFT$(A$(I), 2) <> "\A" THEN 650
-  Origs: 610
-  Dests: 624, 650
+  Origs: 610:auto
+  Dests: 624:auto, 650:ifthen
 (0 3) 624 PRINT TAB(15 * X);
-  Origs: 620
-  Dests: 630
+  Origs: 620:auto
+  Dests: 630:auto
 (1 4) 630 FOR Z = 3 TO LEN(A$(I))
-  Origs: 624
-  Dests: 640
+  Origs: 624:auto
+  Dests: 640:auto
 (1 7) 640 IF MID$(A$(I), Z, 1) <> "\" THEN PRINT MID$(A$(I), Z, 1);
 (0 1)     NEXT Z
-  Origs: 630
-  Dests: 645, 645
+  Origs: 630:auto
+  Dests: 645:auto
 (0 4) 645 X = X + 1
 (1 6)     IF X = 4 THEN X = 0
 (0 2)     PRINT
-  Origs: 640, 640
-  Dests: 650, 650
+  Origs: 640:auto
+  Dests: 650:auto
 (0 1) 650 NEXT I
-  Origs: 620, 645, 645
-  Dests: 660
+  Origs: 620:ifthen, 645:auto
+  Dests: 660:auto
 (0 2) 660 PRINT
-  Origs: 650
-  Dests: 670
+  Origs: 650:auto
+  Dests: 670:auto
 (0 2) 670 PRINT
-  Origs: 660
-  Dests: 680
+  Origs: 660:auto
+  Dests: 680:auto
 (0 3) 680 GOTO 120
-  Origs: 670
-  Dests: 120
+  Origs: 670:auto
+  Dests: 120:goto
 (0 1) 999 END
-  Origs: 180
+  Origs: 180:ifthen
   Dests: 
 
 Unreachable code:

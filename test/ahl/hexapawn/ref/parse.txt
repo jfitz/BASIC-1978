@@ -156,10 +156,12 @@
  Variable:A$ -> $
  TextConstant:"Y"
  BinaryOperatorEqual:=($,$) -> _
+ LineNumber:2000
 90 IF A$<>"N" THEN 50
  Variable:A$ -> $
  TextConstant:"N"
  BinaryOperatorNotEqual:<>($,$) -> _
+ LineNumber:50
 100 X=0: Y=0
  Variable:X -> _
  NumericConstant:0
@@ -244,6 +246,7 @@
  NumericConstant:10
  BinaryOperatorLess:<(_,_) -> _
  BinaryOperatorAnd:AND(_,_) -> _
+ LineNumber:130
 123 PRINT "ILLEGAL CO-ORDINATES."
  TextConstant:"ILLEGAL CO-ORDINATES."
  CarriageControl:NL
@@ -254,6 +257,7 @@
  Variable:S(_) -> _
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:150
 140 PRINT "ILLEGAL MOVE.": GOTO 120
  TextConstant:"ILLEGAL MOVE."
  CarriageControl:NL
@@ -263,6 +267,7 @@
  Variable:S(_) -> _
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:140
 160 IF M2-M1<>-3 AND S(M2)<>-1 THEN 140
  Variable:M2 -> _
  Variable:M1 -> _
@@ -276,10 +281,12 @@
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorNotEqual:<>(_,_) -> _
  BinaryOperatorAnd:AND(_,_) -> _
+ LineNumber:140
 170 IF M2>M1 THEN 140
  Variable:M2 -> _
  Variable:M1 -> _
  BinaryOperatorGreater:>(_,_) -> _
+ LineNumber:140
 180 IF M2-M1=-3 AND (S(M2)<>0) THEN 140
  Variable:M2 -> _
  Variable:M1 -> _
@@ -292,6 +299,7 @@
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
  BinaryOperatorAnd:AND(_,_) -> _
+ LineNumber:140
 185 IF M2-M1<-4 THEN 140
  Variable:M2 -> _
  Variable:M1 -> _
@@ -299,6 +307,7 @@
  NumericConstant:4
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorLess:<(_,_) -> _
+ LineNumber:140
 186 IF M1=7 AND M2=3 THEN 140
  Variable:M1 -> _
  NumericConstant:7
@@ -307,6 +316,7 @@
  NumericConstant:3
  BinaryOperatorEqual:=(_,_) -> _
  BinaryOperatorAnd:AND(_,_) -> _
+ LineNumber:140
 190 S(M1)=0
  Variable:M1 -> _
  Variable:S(_) -> _
@@ -334,6 +344,7 @@
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) -> _
  BinaryOperatorOr:OR(_,_) -> _
+ LineNumber:820
 220 FOR I=1 TO 9
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
@@ -344,6 +355,7 @@
  NumericConstant:1
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:230
 222 NEXT I
  Variable:I -> _
 223 GOTO 820
@@ -358,6 +370,7 @@
  NumericConstant:1
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorNotEqual:<>(_,_) -> _
+ LineNumber:330
 250 IF S(I+3)=0 THEN 350
  Variable:I -> _
  NumericConstant:3
@@ -365,20 +378,24 @@
  Variable:S(_) -> _
  NumericConstant:0
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:350
 260 IF FNR(I)=I THEN 320
  Variable:I -> _
  UserFunction:FNR(_) -> _
  Variable:I -> _
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:320
 270 IF I>3 THEN 300
  Variable:I -> _
  NumericConstant:3
  BinaryOperatorGreater:>(_,_) -> _
+ LineNumber:300
 280 IF S(5)=1 THEN 350
  NumericConstant:5
  Variable:S(_) -> _
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:350
 290 GOTO 330
  LineNumber:330
 300 IF S(8)=1 THEN 350
@@ -386,6 +403,7 @@
  Variable:S(_) -> _
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:350
 310 GOTO 330
  LineNumber:330
 320 IF S(I+2)=1 OR S(I+4)=1 THEN 350
@@ -402,6 +420,7 @@
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) -> _
  BinaryOperatorOr:OR(_,_) -> _
+ LineNumber:350
 330 NEXT I
  Variable:I -> _
 340 GOTO 820
@@ -455,6 +474,7 @@
  Variable:J -> _
  Variable:B(_,_) -> _
  BinaryOperatorNotEqual:<>(_,_) -> _
+ LineNumber:460
 430 NEXT J
  Variable:J -> _
 440 R=0
@@ -473,6 +493,7 @@
  Variable:J -> _
  Variable:T(_) -> _
  BinaryOperatorNotEqual:<>(_,_) -> _
+ LineNumber:510
 480 NEXT J
  Variable:J -> _
 490 R=1
@@ -504,6 +525,7 @@
  Variable:M(_,_) -> _
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
+ LineNumber:600
 570 NEXT I
  Variable:I -> _
 580 PRINT "I RESIGN."
@@ -527,10 +549,12 @@
  Variable:M(_,_) -> _
  NumericConstant:0
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:600
 610 IF R<>0 THEN 630
  Variable:R -> _
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
+ LineNumber:630
 620 PRINT "I MOVE FROM ";STR$(INT(M(X,Y)/10));" TO ";STR$(FNM(M(X,Y)))
  TextConstant:"I MOVE FROM "
  CarriageControl:;
@@ -634,6 +658,7 @@
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorEqual:=(_,_) -> _
  BinaryOperatorOr:OR(_,_) -> _
+ LineNumber:870
 650 FOR I=1 TO 9
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
@@ -643,6 +668,7 @@
  Variable:S(_) -> _
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:690
 670 NEXT I
  Variable:I -> _
 680 GOTO 870
@@ -656,6 +682,7 @@
  Variable:S(_) -> _
  NumericConstant:1
  BinaryOperatorNotEqual:<>(_,_) -> _
+ LineNumber:790
 710 IF S(I-3)=0 THEN 120
  Variable:I -> _
  NumericConstant:3
@@ -663,21 +690,25 @@
  Variable:S(_) -> _
  NumericConstant:0
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:120
 720 IF FNR(I)=I THEN 780
  Variable:I -> _
  UserFunction:FNR(_) -> _
  Variable:I -> _
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:780
 730 IF I<7 THEN 760
  Variable:I -> _
  NumericConstant:7
  BinaryOperatorLess:<(_,_) -> _
+ LineNumber:760
 740 IF S(5)=-1 THEN 120
  NumericConstant:5
  Variable:S(_) -> _
  NumericConstant:1
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:120
 750 GOTO 790
  LineNumber:790
 760 IF S(2)=-1 THEN 120
@@ -686,6 +717,7 @@
  NumericConstant:1
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorEqual:=(_,_) -> _
+ LineNumber:120
 770 GOTO 790
  LineNumber:790
 780 IF S(I-2)=-1 OR S(I-4)=-1 THEN 120
@@ -704,6 +736,7 @@
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorEqual:=(_,_) -> _
  BinaryOperatorOr:OR(_,_) -> _
+ LineNumber:120
 790 NEXT I
  Variable:I -> _
 800 PRINT "YOU CAN'T MOVE, SO ";

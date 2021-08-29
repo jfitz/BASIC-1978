@@ -21,51 +21,51 @@ Halstead complexity:
 
 (0 2) 10 DATA "ALPHA", "BETA", "GAMMA"
   Origs: 
-  Dests: 20
+  Dests: 20:auto
 (3 4) 20 READ A$, B$, C$
-  Origs: 10
-  Dests: 30
+  Origs: 10:auto
+  Dests: 30:auto
 (0 4) 30 PRINT A$, B$, C$
-  Origs: 20
-  Dests: 40
+  Origs: 20:auto
+  Dests: 40:auto
 (1 4) 40 IF A$ > "BETA" THEN 46
-  Origs: 30
-  Dests: 42, 46
+  Origs: 30:auto
+  Dests: 42:auto, 46:ifthen
 (0 3) 42 PRINT A$; " NOT GREATER THAN 'BETA'"
-  Origs: 40
-  Dests: 44
+  Origs: 40:auto
+  Dests: 44:auto
 (0 2) 44 GOTO 50
-  Origs: 42
-  Dests: 50
+  Origs: 42:auto
+  Dests: 50:goto
 (0 3) 46 PRINT A$; " GREATER THAN 'BETA'"
-  Origs: 40
-  Dests: 50
+  Origs: 40:ifthen
+  Dests: 50:auto
 (1 4) 50 IF B$ > "BETA" THEN 56
-  Origs: 44, 46
-  Dests: 52, 56
+  Origs: 44:goto, 46:auto
+  Dests: 52:auto, 56:ifthen
 (0 3) 52 PRINT B$; " NOT GREATER THAN 'BETA'"
-  Origs: 50
-  Dests: 54
+  Origs: 50:auto
+  Dests: 54:auto
 (0 2) 54 GOTO 60
-  Origs: 52
-  Dests: 60
+  Origs: 52:auto
+  Dests: 60:goto
 (0 3) 56 PRINT B$; " GREATER THAN 'BETA'"
-  Origs: 50
-  Dests: 60
+  Origs: 50:ifthen
+  Dests: 60:auto
 (1 4) 60 IF C$ > "BETA" THEN 66
-  Origs: 54, 56
-  Dests: 62, 66
+  Origs: 54:goto, 56:auto
+  Dests: 62:auto, 66:ifthen
 (0 3) 62 PRINT C$; " NOT GREATER THAN 'BETA'"
-  Origs: 60
-  Dests: 64
+  Origs: 60:auto
+  Dests: 64:auto
 (0 2) 64 GOTO 90
-  Origs: 62
-  Dests: 90
+  Origs: 62:auto
+  Dests: 90:goto
 (0 3) 66 PRINT C$; " GREATER THAN 'BETA'"
-  Origs: 60
-  Dests: 90
+  Origs: 60:ifthen
+  Dests: 90:auto
 (0 1) 90 STOP
-  Origs: 64, 66
+  Origs: 64:goto, 66:auto
   Dests: 
 (0 1) 99 END
   Origs: 

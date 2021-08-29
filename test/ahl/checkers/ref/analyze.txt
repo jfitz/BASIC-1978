@@ -21,207 +21,207 @@ Halstead complexity:
 
 (0 4) 5 PRINT TAB(32); "CHECKERS"
   Origs: 
-  Dests: 10
+  Dests: 10:auto
 (0 4) 10 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
-  Origs: 5
-  Dests: 15
+  Origs: 5:auto
+  Dests: 15:auto
 (0 2) 15 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
-  Origs: 10
-  Dests: 20
+  Origs: 10:auto
+  Dests: 20:auto
 (0 2) 20 PRINT "THIS IS THE GAME OF CHECKERS.  THE COMPUTER IS X,"
-  Origs: 15
-  Dests: 25
+  Origs: 15:auto
+  Dests: 25:auto
 (0 2) 25 PRINT "AND YOU ARE O.  THE COMPUTER WILL MOVE FIRST."
-  Origs: 20
-  Dests: 30
+  Origs: 20:auto
+  Dests: 30:auto
 (0 2) 30 PRINT "SQUARES ARE REFERRED TO BY A COORDINATE SYSTEM."
-  Origs: 25
-  Dests: 35
+  Origs: 25:auto
+  Dests: 35:auto
 (0 2) 35 PRINT "(0,0) IS THE LOWER LEFT CORNER"
-  Origs: 30
-  Dests: 40
+  Origs: 30:auto
+  Dests: 40:auto
 (0 2) 40 PRINT "(0,7) IS THE UPPER LEFT CORNER"
-  Origs: 35
-  Dests: 45
+  Origs: 35:auto
+  Dests: 45:auto
 (0 2) 45 PRINT "(7,0) IS THE LOWER RIGHT CORNER"
-  Origs: 40
-  Dests: 50
+  Origs: 40:auto
+  Dests: 50:auto
 (0 2) 50 PRINT "(7,7) IS THE UPPER RIGHT CORNER"
-  Origs: 45
-  Dests: 55
+  Origs: 45:auto
+  Dests: 55:auto
 (0 2) 55 PRINT "THE COMPUTER WILL TYPE '+TO' WHEN YOU HAVE ANOTHER"
-  Origs: 50
-  Dests: 60
+  Origs: 50:auto
+  Dests: 60:auto
 (0 2) 60 PRINT "JUMP.  TYPE TWO NEGATIVE NUMBERS IF YOU CANNOT JUMP."
-  Origs: 55
-  Dests: 65
+  Origs: 55:auto
+  Dests: 65:auto
 (0 2) 65 PRINT
 (0 2)    PRINT
 (0 2)    PRINT
-  Origs: 60
-  Dests: 80
+  Origs: 60:auto
+  Dests: 80:auto
 (0 3) 80 DIM R(4), S(7, 7)
 (0 4)    G = -1
 (0 4)    R(0) = -99
-  Origs: 65
-  Dests: 90
+  Origs: 65:auto
+  Dests: 90:auto
 (0 5) 90 DATA 1, 0, 1, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, -1, 0, -1, 15
-  Origs: 80
-  Dests: 120
+  Origs: 80:auto
+  Dests: 120:auto
 (1 3) 120 FOR X = 0 TO 7
 (1 3)     FOR Y = 0 TO 7
 (1 2)     READ J
 (1 4)     IF J = 15 THEN 180
-  Origs: 90
-  Dests: 160, 180
+  Origs: 90:auto
+  Dests: 160:auto, 180:ifthen
 (0 3) 160 S(X, Y) = J
 (0 2)     GOTO 200
-  Origs: 120
-  Dests: 200
+  Origs: 120:auto
+  Dests: 200:goto
 (0 1) 180 RESTORE
 (1 2)     READ S(X, Y)
-  Origs: 120
-  Dests: 200
+  Origs: 120:ifthen
+  Dests: 200:auto
 (0 1) 200 NEXT Y, X
-  Origs: 160, 180
-  Dests: 230
+  Origs: 160:goto, 180:auto
+  Dests: 230:auto
 (1 3) 230 FOR X = 0 TO 7
 (1 3)     FOR Y = 0 TO 7
 (1 6)     IF S(X, Y) > -1 THEN 350
-  Origs: 200, 1830
-  Dests: 310, 350
+  Origs: 200:auto, 1830:goto
+  Dests: 310:auto, 350:ifthen
 (2 10) 310 IF S(X, Y) = -1 THEN FOR A = -1 TO 1 STEP 2
 (0 3)     B = G
 (0 2)     GOSUB 650
 (0 1)     NEXT A
-  Origs: 230
-  Dests: 330, 330, 650
+  Origs: 230:auto
+  Dests: 330:auto, 650:gosub
 (2 10) 330 IF S(X, Y) = -2 THEN FOR A = -1 TO 1 STEP 2
 (1 5)     FOR B = -1 TO 1 STEP 2
 (0 2)     GOSUB 650
 (0 1)     NEXT B, A
-  Origs: 310, 310
-  Dests: 350, 350, 650
+  Origs: 310:auto
+  Dests: 350:auto, 650:gosub
 (0 1) 350 NEXT Y, X
 (0 2)     GOTO 1140
-  Origs: 230, 330, 330
-  Dests: 1140
+  Origs: 230:ifthen, 330:auto
+  Dests: 1140:goto
 (0 4) 650 U = X + A
 (0 4)     V = Y + B
 (1 13)     IF U < 0 OR U > 7 OR V < 0 OR V > 7 THEN 870
-  Origs: 310, 330
-  Dests: 740, 870
+  Origs: 310:gosub, 330:gosub
+  Dests: 740:auto, 870:ifthen
 (1 5) 740 IF S(U, V) = 0 THEN GOSUB 910
 (0 2)     GOTO 870
-  Origs: 650
-  Dests: 770, 870, 910
+  Origs: 650:auto
+  Dests: 870:goto, 910:gosub
 (1 4) 770 IF S(U, V) < 0 THEN 870
-  Origs: 740
-  Dests: 790, 870
+  Origs: 
+  Dests: 790:auto, 870:ifthen
 (0 4) 790 U = U + A
 (0 4)     V = V + B
 (1 13)     IF U < 0 OR V < 0 OR U > 7 OR V > 7 THEN 870
-  Origs: 770
-  Dests: 850, 870
+  Origs: 770:auto
+  Dests: 850:auto, 870:ifthen
 (1 5) 850 IF S(U, V) = 0 THEN GOSUB 910
-  Origs: 790
-  Dests: 870, 910
+  Origs: 790:auto
+  Dests: 870:auto, 910:gosub
 (0 1) 870 RETURN
-  Origs: 650, 740, 770, 790, 850
+  Origs: 650:ifthen, 740:goto, 770:ifthen, 790:ifthen, 850:auto
   Dests: 
 (1 12) 910 IF V = 0 AND S(X, Y) = -1 THEN Q = Q + 2
-  Origs: 740, 850, 1380
-  Dests: 920
+  Origs: 740:gosub, 850:gosub, 1380:gosub
+  Dests: 920:auto
 (1 8) 920 IF ABS(Y - V) = 2 THEN Q = Q + 5
-  Origs: 910
-  Dests: 960
+  Origs: 910:auto
+  Dests: 960:auto
 (1 7) 960 IF Y = 7 THEN Q = Q - 2
-  Origs: 920
-  Dests: 980
+  Origs: 920:auto
+  Dests: 980:auto
 (1 10) 980 IF U = 0 OR U = 7 THEN Q = Q + 1
-  Origs: 960
-  Dests: 1030
+  Origs: 960:auto
+  Dests: 1030:auto
 (1 5) 1030 FOR C = -1 TO 1 STEP 2
 (1 13)      IF U + C < 0 OR U + C > 7 OR V + G < 0 THEN 1080
-  Origs: 980
-  Dests: 1035, 1080
+  Origs: 980:auto
+  Dests: 1035:auto, 1080:ifthen
 (1 7) 1035 IF S(U + C, V + G) < 0 THEN Q = Q + 1
 (0 2)      GOTO 1080
-  Origs: 1030
-  Dests: 1040, 1080
+  Origs: 1030:auto
+  Dests: 1080:goto
 (1 13) 1040 IF U - C < 0 OR U - C > 7 OR V - G > 7 THEN 1080
-  Origs: 1035
-  Dests: 1045, 1080
+  Origs: 
+  Dests: 1045:auto, 1080:ifthen
 (1 18) 1045 IF S(U + C, V + G) > 0 AND (S(U - C, V - G) = 0 OR (U - C = X AND V - G = Y)) THEN Q = Q - 2
-  Origs: 1040
-  Dests: 1080
+  Origs: 1040:auto
+  Dests: 1080:auto
 (0 1) 1080 NEXT C
 (1 6)      IF Q > R(0) THEN R(0) = Q
 (0 3)      R(1) = X
 (0 3)      R(2) = Y
 (0 3)      R(3) = U
 (0 3)      R(4) = V
-  Origs: 1030, 1035, 1040, 1045
-  Dests: 1100, 1100
+  Origs: 1030:ifthen, 1035:goto, 1040:ifthen, 1045:auto
+  Dests: 1100:auto
 (0 3) 1100 Q = 0
 (0 1)      RETURN
-  Origs: 1080, 1080
+  Origs: 1080:auto
   Dests: 
 (1 6) 1140 IF R(0) = -99 THEN 1880
-  Origs: 350
-  Dests: 1230, 1880
+  Origs: 350:goto
+  Dests: 1230:auto, 1880:ifthen
 (0 9) 1230 PRINT CHR$(30) "FROM" R(1); R(2) "TO" R(3); R(4);
 (0 4)      R(0) = -99
-  Origs: 1140
-  Dests: 1240
+  Origs: 1140:auto
+  Dests: 1240:auto
 (1 7) 1240 IF R(4) = 0 THEN S(R(3), R(4)) = -2
 (0 2)      GOTO 1420
-  Origs: 1230, 1360
-  Dests: 1250, 1420
+  Origs: 1230:auto, 1360:goto
+  Dests: 1420:goto
 (0 3) 1250 S(R(3), R(4)) = S(R(1), R(2))
-  Origs: 1240
-  Dests: 1310
+  Origs: 
+  Dests: 1310:auto
 (0 3) 1310 S(R(1), R(2)) = 0
 (1 5)      IF ABS(R(1) - R(3)) <> 2 THEN 1420
-  Origs: 1250
-  Dests: 1330, 1420
+  Origs: 1250:auto
+  Dests: 1330:auto, 1420:ifthen
 (0 3) 1330 S((R(1) + R(3)) / 2, (R(2) + R(4)) / 2) = 0
-  Origs: 1310
-  Dests: 1340
+  Origs: 1310:auto
+  Dests: 1340:auto
 (0 3) 1340 X = R(3)
 (0 3)      Y = R(4)
 (1 9)      IF S(X, Y) = -1 THEN B = -2
 (1 5)      FOR A = -2 TO 2 STEP 4
 (0 2)      GOSUB 1370
-  Origs: 1330
-  Dests: 1350, 1350, 1370
+  Origs: 1330:auto
+  Dests: 1350:auto, 1370:gosub
 (2 10) 1350 IF S(X, Y) = -2 THEN FOR A = -2 TO 2 STEP 4
 (1 5)      FOR B = -2 TO 2 STEP 4
 (0 2)      GOSUB 1370
 (0 1)      NEXT B
-  Origs: 1340, 1340
-  Dests: 1360, 1360, 1370
+  Origs: 1340:auto
+  Dests: 1360:auto, 1370:gosub
 (0 1) 1360 NEXT A
 (1 9)      IF R(0) <> -99 THEN PRINT "TO" R(3); R(4);
 (0 4)      R(0) = -99
 (0 3)      GOTO 1240
-  Origs: 1350, 1350
-  Dests: 1240, 1365
+  Origs: 1350:auto
+  Dests: 1240:goto
 (0 2) 1365 GOTO 1420
-  Origs: 1360
-  Dests: 1420
+  Origs: 
+  Dests: 1420:goto
 (0 4) 1370 U = X + A
 (0 4)      V = Y + B
 (1 13)      IF U < 0 OR U > 7 OR V < 0 OR V > 7 THEN 1400
-  Origs: 1340, 1350
-  Dests: 1380, 1400
+  Origs: 1340:gosub, 1350:gosub
+  Dests: 1380:auto, 1400:ifthen
 (1 9) 1380 IF S(U, V) = 0 AND S(X + A / 2, Y + B / 2) > 0 THEN GOSUB 910
-  Origs: 1370
-  Dests: 910, 1400
+  Origs: 1370:auto
+  Dests: 910:gosub, 1400:auto
 (0 1) 1400 RETURN
-  Origs: 1370, 1380
+  Origs: 1370:ifthen, 1380:auto
   Dests: 
 (0 2) 1420 PRINT
 (0 2)      PRINT
@@ -230,117 +230,117 @@ Halstead complexity:
 (1 3)      FOR X = 0 TO 7
 (0 4)      I = 5 * X
 (0 3)      PRINT TAB(I);
-  Origs: 1240, 1310, 1365
-  Dests: 1430
+  Origs: 1240:goto, 1310:ifthen, 1365:goto
+  Dests: 1430:auto
 (1 5) 1430 IF S(X, Y) = 0 THEN PRINT ".";
-  Origs: 1420
-  Dests: 1470
+  Origs: 1420:auto
+  Dests: 1470:auto
 (1 5) 1470 IF S(X, Y) = 1 THEN PRINT "O";
-  Origs: 1430
-  Dests: 1490
+  Origs: 1430:auto
+  Dests: 1490:auto
 (1 7) 1490 IF S(X, Y) = -1 THEN PRINT "X";
-  Origs: 1470
-  Dests: 1510
+  Origs: 1470:auto
+  Dests: 1510:auto
 (1 7) 1510 IF S(X, Y) = -2 THEN PRINT "X*";
-  Origs: 1490
-  Dests: 1530
+  Origs: 1490:auto
+  Dests: 1530:auto
 (1 5) 1530 IF S(X, Y) = 2 THEN PRINT "O*";
-  Origs: 1510
-  Dests: 1550
+  Origs: 1510:auto
+  Dests: 1550:auto
 (0 1) 1550 NEXT X
 (0 2)      PRINT " "
 (0 2)      PRINT
 (0 1)      NEXT Y
 (0 2)      PRINT
-  Origs: 1530
-  Dests: 1552
+  Origs: 1530:auto
+  Dests: 1552:auto
 (1 3) 1552 FOR L = 0 TO 7
-  Origs: 1550
-  Dests: 1554
+  Origs: 1550:auto
+  Dests: 1554:auto
 (1 3) 1554 FOR M = 0 TO 7
-  Origs: 1552
-  Dests: 1556
+  Origs: 1552:auto
+  Dests: 1556:auto
 (1 9) 1556 IF S(L, M) = 1 OR S(L, M) = 2 THEN Z = 1
-  Origs: 1554
-  Dests: 1558
+  Origs: 1554:auto
+  Dests: 1558:auto
 (1 13) 1558 IF S(L, M) = -1 OR S(L, M) = -2 THEN T = 1
-  Origs: 1556
-  Dests: 1560
+  Origs: 1556:auto
+  Dests: 1560:auto
 (0 1) 1560 NEXT M
-  Origs: 1558
-  Dests: 1562
+  Origs: 1558:auto
+  Dests: 1562:auto
 (0 1) 1562 NEXT L
-  Origs: 1560
-  Dests: 1564
+  Origs: 1560:auto
+  Dests: 1564:auto
 (1 4) 1564 IF Z <> 1 THEN 1885
-  Origs: 1562
-  Dests: 1566, 1885
+  Origs: 1562:auto
+  Dests: 1566:auto, 1885:ifthen
 (1 4) 1566 IF T <> 1 THEN 1880
-  Origs: 1564
-  Dests: 1570, 1880
+  Origs: 1564:auto
+  Dests: 1570:auto, 1880:ifthen
 (0 3) 1570 Z = 0
 (0 3)      T = 0
-  Origs: 1566
-  Dests: 1590
+  Origs: 1566:auto
+  Dests: 1590:auto
 (2 3) 1590 INPUT "FROM"; E, H
 (0 3)      X = E
 (0 3)      Y = H
 (1 5)      IF S(X, Y) <= 0 THEN 1590
-  Origs: 1570
-  Dests: 1670
+  Origs: 1570:auto, 1590:ifthen
+  Dests: 1590:ifthen, 1670:auto
 (2 3) 1670 INPUT "TO"; A, B
 (0 3)      X = A
 (0 3)      Y = B
-  Origs: 1590, 1690
-  Dests: 1680
+  Origs: 1590:auto, 1690:goto
+  Dests: 1680:auto
 (1 13) 1680 IF S(X, Y) = 0 AND ABS(A - E) <= 2 AND ABS(A - E) = ABS(B - H) THEN 1700
-  Origs: 1670
-  Dests: 1690, 1700
+  Origs: 1670:auto
+  Dests: 1690:auto, 1700:ifthen
 (0 5) 1690 PRINT CHR$(7) CHR$(11);
 (0 3)      GOTO 1670
-  Origs: 1680
-  Dests: 1670
+  Origs: 1680:auto
+  Dests: 1670:goto
 (0 3) 1700 I = 46
-  Origs: 1680
-  Dests: 1750
+  Origs: 1680:ifthen
+  Dests: 1750:auto
 (0 3) 1750 S(A, B) = S(E, H)
 (0 3)      S(E, H) = 0
 (1 5)      IF ABS(E - A) <> 2 THEN 1810
-  Origs: 1700, 1806
-  Dests: 1800, 1810
+  Origs: 1700:auto, 1806:goto
+  Dests: 1800:auto, 1810:ifthen
 (0 3) 1800 S((E + A) / 2, (H + B) / 2) = 0
-  Origs: 1750
-  Dests: 1802
+  Origs: 1750:auto
+  Dests: 1802:auto
 (2 3) 1802 INPUT "+TO"; A1, B1
 (1 4)      IF A1 < 0 THEN 1810
-  Origs: 1800, 1804
-  Dests: 1804, 1810
+  Origs: 1800:auto, 1804:ifthen
+  Dests: 1804:auto, 1810:ifthen
 (1 13) 1804 IF S(A1, B1) <> 0 OR ABS(A1 - A) <> 2 OR ABS(B1 - B) <> 2 THEN 1802
-  Origs: 1802
-  Dests: 1802, 1806
+  Origs: 1802:auto
+  Dests: 1802:ifthen, 1806:auto
 (0 3) 1806 E = A
 (0 3)      H = B
 (0 3)      A = A1
 (0 3)      B = B1
 (0 4)      I = I + 15
 (0 3)      GOTO 1750
-  Origs: 1804
-  Dests: 1750
+  Origs: 1804:auto
+  Dests: 1750:goto
 (1 6) 1810 IF B = 7 THEN S(A, B) = 2
-  Origs: 1750, 1802
-  Dests: 1830
+  Origs: 1750:ifthen, 1802:ifthen
+  Dests: 1830:auto
 (0 3) 1830 GOTO 230
-  Origs: 1810
-  Dests: 230
+  Origs: 1810:auto
+  Dests: 230:goto
 (0 2) 1880 PRINT
 (0 2)      PRINT "YOU WIN."
 (0 1)      STOP
-  Origs: 1140, 1566
+  Origs: 1140:ifthen, 1566:ifthen
   Dests: 
 (0 2) 1885 PRINT
 (0 2)      PRINT "I WIN."
 (0 1)      END
-  Origs: 1564
+  Origs: 1564:ifthen
   Dests: 
 
 Unreachable code:

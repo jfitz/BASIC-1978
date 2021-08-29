@@ -21,120 +21,120 @@ Halstead complexity:
 
 (0 4) 2 PRINT TAB(30); "DEPTH CHARGE"
   Origs: 
-  Dests: 4
+  Dests: 4:auto
 (0 4) 4 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
-  Origs: 2
-  Dests: 6
+  Origs: 2:auto
+  Dests: 6:auto
 (0 2) 6 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
-  Origs: 4
-  Dests: 20
+  Origs: 4:auto
+  Dests: 20:auto
 (1 2) 20 INPUT "DIMENSION OF SEARCH AREA"; G
 (0 2)    PRINT
-  Origs: 6
-  Dests: 30
+  Origs: 6:auto
+  Dests: 30:auto
 (0 5) 30 N = INT(LOG(G) / LOG(2)) + 1
-  Origs: 20
-  Dests: 40
+  Origs: 20:auto
+  Dests: 40:auto
 (0 2) 40 PRINT "YOU ARE THE CAPTAIN OF THE DESTROYER USS COMPUTER"
-  Origs: 30
-  Dests: 50
+  Origs: 30:auto
+  Dests: 50:auto
 (0 2) 50 PRINT "AN ENEMY SUB HAS BEEN CAUSING YOU TROUBLE.  YOUR"
-  Origs: 40
-  Dests: 60
+  Origs: 40:auto
+  Dests: 60:auto
 (0 4) 60 PRINT "MISSION IS TO DESTROY IT.  YOU HAVE"; N; "SHOTS."
-  Origs: 50
-  Dests: 70
+  Origs: 50:auto
+  Dests: 70:auto
 (0 2) 70 PRINT "SPECIFY DEPTH CHARGE EXPLOSION POINT WITH A"
-  Origs: 60
-  Dests: 80
+  Origs: 60:auto
+  Dests: 80:auto
 (0 2) 80 PRINT "TRIO OF NUMBERS -- THE FIRST TWO ARE THE"
-  Origs: 70
-  Dests: 90
+  Origs: 70:auto
+  Dests: 90:auto
 (0 2) 90 PRINT "SURFACE COORDINATES; THE THIRD IS THE DEPTH."
-  Origs: 80
-  Dests: 100
+  Origs: 80:auto
+  Dests: 100:auto
 (0 2) 100 PRINT
 (0 2)     PRINT "GOOD LUCK !"
 (0 2)     PRINT
-  Origs: 90, 410
-  Dests: 110
+  Origs: 90:auto, 410:ifthen
+  Dests: 110:auto
 (0 4) 110 A = INT(G * RND(1))
 (0 4)     B = INT(G * RND(1))
 (0 4)     C = INT(G * RND(1))
-  Origs: 100
-  Dests: 120
+  Origs: 100:auto
+  Dests: 120:auto
 (1 3) 120 FOR D = 1 TO N
 (0 2)     PRINT
 (0 3)     PRINT "TRIAL #"; D;
 (3 4)     INPUT X, Y, Z
-  Origs: 110
-  Dests: 130
+  Origs: 110:auto
+  Dests: 130:auto
 (1 9) 130 IF ABS(X - A) + ABS(Y - B) + ABS(Z - C) = 0 THEN 300
-  Origs: 120
-  Dests: 140, 300
+  Origs: 120:auto
+  Dests: 140:auto, 300:ifthen
 (0 2) 140 GOSUB 500
 (0 2)     PRINT
 (0 1)     NEXT D
-  Origs: 130
-  Dests: 200, 500
+  Origs: 130:auto
+  Dests: 200:auto, 500:gosub
 (0 2) 200 PRINT
 (0 2)     PRINT "YOU HAVE BEEN TORPEDOED!  ABANDON SHIP!"
-  Origs: 140
-  Dests: 210
+  Origs: 140:auto
+  Dests: 210:auto
 (0 7) 210 PRINT "THE SUBMARINE WAS AT"; A; ","; B; ","; C
 (0 2)     GOTO 400
-  Origs: 200
-  Dests: 400
+  Origs: 200:auto
+  Dests: 400:goto
 (0 2) 300 PRINT
 (0 4)     PRINT "B O O M ! ! YOU FOUND IT IN"; D; "TRIES!"
-  Origs: 130
-  Dests: 400
+  Origs: 130:ifthen
+  Dests: 400:auto
 (0 2) 400 PRINT
 (0 2)     PRINT
 (1 2)     INPUT "ANOTHER GAME (Y OR N)"; A$
-  Origs: 210, 300
-  Dests: 410
+  Origs: 210:goto, 300:auto
+  Dests: 410:auto
 (1 5) 410 IF A$ = "Y" THEN 100
-  Origs: 400
-  Dests: 100, 420
+  Origs: 400:auto
+  Dests: 100:ifthen, 420:auto
 (0 2) 420 PRINT "OK.  HOPE YOU ENJOYED YOURSELF."
 (0 2)     GOTO 600
-  Origs: 410
-  Dests: 600
+  Origs: 410:auto
+  Dests: 600:goto
 (0 2) 500 PRINT "SONAR REPORTS SHOT WAS ";
-  Origs: 140
-  Dests: 510
+  Origs: 140:gosub
+  Dests: 510:auto
 (1 5) 510 IF Y > B THEN PRINT "NORTH";
-  Origs: 500
-  Dests: 520
+  Origs: 500:auto
+  Dests: 520:auto
 (1 5) 520 IF Y < B THEN PRINT "SOUTH";
-  Origs: 510
-  Dests: 530
+  Origs: 510:auto
+  Dests: 530:auto
 (1 5) 530 IF X > A THEN PRINT "EAST";
-  Origs: 520
-  Dests: 540
+  Origs: 520:auto
+  Dests: 540:auto
 (1 5) 540 IF X < A THEN PRINT "WEST";
-  Origs: 530
-  Dests: 550
+  Origs: 530:auto
+  Dests: 550:auto
 (1 8) 550 IF Y <> B OR X <> A THEN PRINT " AND";
-  Origs: 540
-  Dests: 560
+  Origs: 540:auto
+  Dests: 560:auto
 (1 5) 560 IF Z > C THEN PRINT " TOO LOW."
-  Origs: 550
-  Dests: 570
+  Origs: 550:auto
+  Dests: 570:auto
 (1 5) 570 IF Z < C THEN PRINT " TOO HIGH."
-  Origs: 560
-  Dests: 580
+  Origs: 560:auto
+  Dests: 580:auto
 (1 5) 580 IF Z = C THEN PRINT " DEPTH OK."
-  Origs: 570
-  Dests: 590
+  Origs: 570:auto
+  Dests: 590:auto
 (0 1) 590 RETURN
-  Origs: 580
+  Origs: 580:auto
   Dests: 
 (0 1) 600 END
-  Origs: 420
+  Origs: 420:goto
   Dests: 
 
 Unreachable code:

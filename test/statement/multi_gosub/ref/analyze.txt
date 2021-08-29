@@ -21,36 +21,36 @@ Halstead complexity:
 
 (0 1) 10 REM TEST GOSUB AND RETURN ON MULTISTATEMENT LINE
   Origs: 
-  Dests: 20
+  Dests: 20:auto
 (0 2) 20 PRINT "START TEST"
-  Origs: 10
-  Dests: 30
+  Origs: 10:auto
+  Dests: 30:auto
 (0 2) 30 GOSUB 100
 (0 2)    GOSUB 200
 (0 2)    GOSUB 300
-  Origs: 20
-  Dests: 40, 100, 200, 300
+  Origs: 20:auto
+  Dests: 40:auto, 100:gosub, 200:gosub, 300:gosub
 (0 2) 40 PRINT "DONE"
-  Origs: 30
-  Dests: 90
+  Origs: 30:auto
+  Dests: 90:auto
 (0 1) 90 STOP
-  Origs: 40
+  Origs: 40:auto
   Dests: 
 (0 2) 100 PRINT "SUB 100"
-  Origs: 30
-  Dests: 110
+  Origs: 30:gosub
+  Dests: 110:auto
 (0 1) 110 RETURN
-  Origs: 100
+  Origs: 100:auto
   Dests: 
 (0 2) 200 PRINT "SUB 200"
 (0 1)     RETURN
-  Origs: 30
+  Origs: 30:gosub
   Dests: 
 (0 2) 300 PRINT "SUB 300"
-  Origs: 30
-  Dests: 310
+  Origs: 30:gosub
+  Dests: 310:auto
 (0 1) 310 RETURN
-  Origs: 300
+  Origs: 300:auto
   Dests: 
 (0 1) 900 END
   Origs: 

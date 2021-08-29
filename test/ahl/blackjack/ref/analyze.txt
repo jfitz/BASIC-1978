@@ -21,1006 +21,1006 @@ Halstead complexity:
 
 (0 4) 2 PRINT TAB(31); "BLACK JACK"
   Origs: 
-  Dests: 4
+  Dests: 4:auto
 (0 4) 4 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
-  Origs: 2
-  Dests: 6
+  Origs: 2:auto
+  Dests: 6:auto
 (0 2) 6 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
-  Origs: 4
-  Dests: 10
+  Origs: 4:auto
+  Dests: 10:auto
 (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
-  Origs: 6
-  Dests: 20
+  Origs: 6:auto
+  Dests: 20:auto
 (0 8) 20 DIM P(15, 12), Q(15), C(52), D(52), T(8), S(7), B(15)
-  Origs: 10
-  Dests: 30
+  Origs: 10:auto
+  Dests: 30:auto
 (0 2) 30 DIM R(15)
-  Origs: 20
-  Dests: 40
+  Origs: 20:auto
+  Dests: 40:auto
 (0 1) 40 REM --P(I,J) IS THE JTH CARD IN HAND I, Q(I) IS TOTAL OF HAND I
-  Origs: 30
-  Dests: 50
+  Origs: 30:auto
+  Dests: 50:auto
 (0 1) 50 REM --C IS THE DECK BEING DEALT FROM, D IS THE DISCARD PILE,
-  Origs: 40
-  Dests: 60
+  Origs: 40:auto
+  Dests: 60:auto
 (0 1) 60 REM --T(I) IS THE TOTAL FOR PLAYER I, S(I) IS THE TOTAL THIS HAND FOR
-  Origs: 50
-  Dests: 70
+  Origs: 50:auto
+  Dests: 70:auto
 (0 1) 70 REM --PLAYER I, B(I) IS TH BET FOR HAND I
-  Origs: 60
-  Dests: 80
+  Origs: 60:auto
+  Dests: 80:auto
 (0 1) 80 REM --R(I) IS THE LENGTH OF P(I,*)
-  Origs: 70
-  Dests: 90
+  Origs: 70:auto
+  Dests: 90:auto
 (0 2) 90 GOTO 1500
-  Origs: 80
-  Dests: 1500
+  Origs: 80:auto
+  Dests: 1500:goto
 (0 1) 100 REM --SUBROUTINE TO GET A CARD.  RESULT IS PUT IN X.
-  Origs: 860, 950, 2020, 2690, 2750, 3060
-  Dests: 110
+  Origs: 860:gosub, 950:gosub, 2020:gosub, 2690:gosub, 2750:gosub, 3060:gosub
+  Dests: 110:auto
 (1 4) 110 IF C < 51 THEN 230
-  Origs: 100
-  Dests: 120, 230
+  Origs: 100:auto
+  Dests: 120:auto, 230:ifthen
 (0 2) 120 PRINT "RESHUFFLING"
-  Origs: 110, 1810
-  Dests: 130
+  Origs: 110:auto, 1810:gosub
+  Dests: 130:auto
 (1 5) 130 FOR D = D TO 1 STEP -1
-  Origs: 120
-  Dests: 140
+  Origs: 120:auto
+  Dests: 140:auto
 (0 4) 140 C = C - 1
-  Origs: 130
-  Dests: 150
+  Origs: 130:auto
+  Dests: 150:auto
 (0 3) 150 C(C) = D(D)
-  Origs: 140
-  Dests: 160
+  Origs: 140:auto
+  Dests: 160:auto
 (0 1) 160 NEXT D
-  Origs: 150
-  Dests: 170
+  Origs: 150:auto
+  Dests: 170:auto
 (1 5) 170 FOR C1 = 52 TO C STEP -1
-  Origs: 160
-  Dests: 180
+  Origs: 160:auto
+  Dests: 180:auto
 (0 5) 180 C2 = INT(RND(1) * (C1 - C + 1)) + C
-  Origs: 170
-  Dests: 190
+  Origs: 170:auto
+  Dests: 190:auto
 (0 3) 190 C3 = C(C2)
-  Origs: 180
-  Dests: 200
+  Origs: 180:auto
+  Dests: 200:auto
 (0 3) 200 C(C2) = C(C1)
-  Origs: 190
-  Dests: 210
+  Origs: 190:auto
+  Dests: 210:auto
 (0 3) 210 C(C1) = C3
-  Origs: 200
-  Dests: 220
+  Origs: 200:auto
+  Dests: 220:auto
 (0 1) 220 NEXT C1
-  Origs: 210
-  Dests: 230
+  Origs: 210:auto
+  Dests: 230:auto
 (0 3) 230 X = C(C)
-  Origs: 110, 220
-  Dests: 240
+  Origs: 110:ifthen, 220:auto
+  Dests: 240:auto
 (0 4) 240 C = C + 1
-  Origs: 230
-  Dests: 250
+  Origs: 230:auto
+  Dests: 250:auto
 (0 1) 250 RETURN
-  Origs: 240
+  Origs: 240:auto
   Dests: 
 (0 1) 300 REM --SUBROUTINE TO EVALUATE HAND I.  TOTAL IS PUT INTO
-  Origs: 2290, 2420, 2520, 2560, 2730, 2800, 2910
-  Dests: 310
+  Origs: 2290:gosub, 2420:gosub, 2520:gosub, 2560:gosub, 2730:gosub, 2800:gosub, 2910:gosub
+  Dests: 310:auto
 (0 1) 310 REM --Q(I). TOTALS HAVE THE FOLLOWING MEANING:
-  Origs: 300
-  Dests: 320
+  Origs: 300:auto
+  Dests: 320:auto
 (0 1) 320 REM --  2-10...HARD 2-10
-  Origs: 310
-  Dests: 330
+  Origs: 310:auto
+  Dests: 330:auto
 (0 1) 330 REM -- 11-21...SOFT 11-21
-  Origs: 320
-  Dests: 340
+  Origs: 320:auto
+  Dests: 340:auto
 (0 1) 340 REM -- 22-32...HARD 11-21
-  Origs: 330
-  Dests: 350
+  Origs: 330:auto
+  Dests: 350:auto
 (0 1) 350 REM --  33+....BUSTED
-  Origs: 340
-  Dests: 360
+  Origs: 340:auto
+  Dests: 360:auto
 (0 3) 360 Q = 0
-  Origs: 350
-  Dests: 370
+  Origs: 350:auto
+  Dests: 370:auto
 (1 3) 370 FOR Q2 = 1 TO R(I)
-  Origs: 360
-  Dests: 380
+  Origs: 360:auto
+  Dests: 380:auto
 (0 3) 380 X = P(I, Q2)
-  Origs: 370
-  Dests: 390
+  Origs: 370:auto
+  Dests: 390:auto
 (0 2) 390 GOSUB 500
-  Origs: 380
-  Dests: 400, 500
+  Origs: 380:auto
+  Dests: 400:auto, 500:gosub
 (0 1) 400 NEXT Q2
-  Origs: 390
-  Dests: 410
+  Origs: 390:auto
+  Dests: 410:auto
 (0 3) 410 Q(I) = Q
-  Origs: 400
-  Dests: 420
+  Origs: 400:auto
+  Dests: 420:auto
 (0 1) 420 RETURN
-  Origs: 410
+  Origs: 410:auto
   Dests: 
 (0 1) 500 REM --SUBROUTINE TO ADD CARD X TO TOTAL Q.
-  Origs: 390, 1140
-  Dests: 510
+  Origs: 390:gosub, 1140:gosub
+  Dests: 510:auto
 (0 3) 510 X1 = X
 (1 6)     IF X1 > 10 THEN X1 = 10
 (0 1)     REM  SAME AS X1=10 MIN X
-  Origs: 500
-  Dests: 520, 520
+  Origs: 500:auto
+  Dests: 520:auto
 (0 4) 520 Q1 = Q + X1
-  Origs: 510, 510
-  Dests: 530
+  Origs: 510:auto
+  Dests: 530:auto
 (1 4) 530 IF Q >= 11 THEN 590
-  Origs: 520
-  Dests: 540, 590
+  Origs: 520:auto
+  Dests: 540:auto, 590:ifthen
 (1 4) 540 IF X > 1 THEN 570
-  Origs: 530
-  Dests: 550, 570
+  Origs: 530:auto
+  Dests: 550:auto, 570:ifthen
 (0 4) 550 Q = Q + 11
-  Origs: 540
-  Dests: 560
+  Origs: 540:auto
+  Dests: 560:auto
 (0 1) 560 RETURN
-  Origs: 550
+  Origs: 550:auto
   Dests: 
 (0 8) 570 Q = Q1 - 11 * (Q1 >= 11)
-  Origs: 540
-  Dests: 580
+  Origs: 540:ifthen
+  Dests: 580:auto
 (0 1) 580 RETURN
-  Origs: 570
+  Origs: 570:auto
   Dests: 
 (0 9) 590 Q = Q1 - (Q <= 21 AND Q1 > 21)
-  Origs: 530
-  Dests: 600
+  Origs: 530:ifthen
+  Dests: 600:auto
 (1 4) 600 IF Q < 33 THEN 620
-  Origs: 590
-  Dests: 610, 620
+  Origs: 590:auto
+  Dests: 610:auto, 620:ifthen
 (0 4) 610 Q = -1
-  Origs: 600
-  Dests: 620
+  Origs: 600:auto
+  Dests: 620:auto
 (0 1) 620 RETURN
-  Origs: 600, 610
+  Origs: 600:ifthen, 610:auto
   Dests: 
 (0 1) 700 REM --CARD PRINTING SUBROUTINE
-  Origs: 890, 970, 2710, 2780, 2980
-  Dests: 710
+  Origs: 890:gosub, 970:gosub, 2710:gosub, 2780:gosub, 2980:gosub
+  Dests: 710:auto
 (0 1) 710 REM  D$ DEFINED ELSEWHERE
-  Origs: 700
-  Dests: 720
+  Origs: 700:auto
+  Dests: 720:auto
 (0 3) 720 PRINT MID$(D$, 3 * X - 2, 3);
-  Origs: 710
-  Dests: 730
+  Origs: 710:auto
+  Dests: 730:auto
 (0 2) 730 PRINT "  ";
-  Origs: 720
-  Dests: 740
+  Origs: 720:auto
+  Dests: 740:auto
 (0 1) 740 RETURN
-  Origs: 730
+  Origs: 730:auto
   Dests: 
 (0 1) 750 REM --ALTERNATIVE PRINTING ROUTINE
-  Origs: 2040, 3070
-  Dests: 760
+  Origs: 2040:gosub, 3070:gosub
+  Dests: 760:auto
 (0 4) 760 PRINT " "; MID$(D$, 3 * X - 1, 2);
-  Origs: 750
-  Dests: 770
+  Origs: 750:auto
+  Dests: 770:auto
 (0 2) 770 PRINT "   ";
-  Origs: 760
-  Dests: 780
+  Origs: 760:auto
+  Dests: 780:auto
 (0 1) 780 RETURN
-  Origs: 770
+  Origs: 770:auto
   Dests: 
 (0 1) 800 REM --SUBROUTINE TO PLAY OUT A HAND.
-  Origs: 2860
-  Dests: 810
+  Origs: 2860:gosub
+  Dests: 810:auto
 (0 1) 810 REM --NO SPLITTING OR BLACKJACKS ALLOWED
-  Origs: 800
-  Dests: 820
+  Origs: 800:auto
+  Dests: 820:auto
 (0 3) 820 H1 = 5
-  Origs: 810
-  Dests: 830
+  Origs: 810:auto
+  Dests: 830:auto
 (0 2) 830 GOSUB 1410
-  Origs: 820, 1010
-  Dests: 840, 1410
+  Origs: 820:auto, 1010:goto
+  Dests: 840:auto, 1410:gosub
 (0 3) 840 H1 = 3
-  Origs: 830
-  Dests: 850
+  Origs: 830:auto
+  Dests: 850:auto
 (2 4) 850 ON H GOTO 950, 930
-  Origs: 840
-  Dests: 860, 930, 950
+  Origs: 840:auto
+  Dests: 860:auto, 930:goto, 950:goto
 (0 3) 860 GOSUB 100
-  Origs: 850, 2530
-  Dests: 100, 870
+  Origs: 850:auto, 2530:gosub
+  Dests: 100:gosub, 870:auto
 (0 4) 870 B(I) = B(I) * 2
-  Origs: 860
-  Dests: 880
+  Origs: 860:auto
+  Dests: 880:auto
 (0 2) 880 PRINT "RECEIVED A";
-  Origs: 870
-  Dests: 890
+  Origs: 870:auto
+  Dests: 890:auto
 (0 3) 890 GOSUB 700
-  Origs: 880
-  Dests: 700, 900
+  Origs: 880:auto
+  Dests: 700:gosub, 900:auto
 (0 2) 900 GOSUB 1100
-  Origs: 890
-  Dests: 910, 1100
+  Origs: 890:auto
+  Dests: 910:auto, 1100:gosub
 (1 5) 910 IF Q > 0 THEN GOSUB 1300
-  Origs: 900
-  Dests: 920, 1300
+  Origs: 900:auto
+  Dests: 920:auto, 1300:gosub
 (0 1) 920 RETURN
-  Origs: 910
+  Origs: 910:auto
   Dests: 
 (0 2) 930 GOSUB 1320
-  Origs: 850
-  Dests: 940, 1320
+  Origs: 850:goto
+  Dests: 940:auto, 1320:gosub
 (0 1) 940 RETURN
-  Origs: 930, 990
+  Origs: 930:auto, 990:ifthen
   Dests: 
 (0 3) 950 GOSUB 100
-  Origs: 850, 2580
-  Dests: 100, 960
+  Origs: 850:goto, 2580:gosub
+  Dests: 100:gosub, 960:auto
 (0 2) 960 PRINT "RECEIVED A";
-  Origs: 950
-  Dests: 970
+  Origs: 950:auto
+  Dests: 970:auto
 (0 3) 970 GOSUB 700
-  Origs: 960
-  Dests: 700, 980
+  Origs: 960:auto
+  Dests: 700:gosub, 980:auto
 (0 2) 980 GOSUB 1100
-  Origs: 970
-  Dests: 990, 1100
+  Origs: 970:auto
+  Dests: 990:auto, 1100:gosub
 (1 5) 990 IF Q < 0 THEN 940
-  Origs: 980
-  Dests: 940, 1000
+  Origs: 980:auto
+  Dests: 940:ifthen, 1000:auto
 (0 2) 1000 PRINT "HIT";
-  Origs: 990
-  Dests: 1010
+  Origs: 990:auto
+  Dests: 1010:auto
 (0 3) 1010 GOTO 830
-  Origs: 1000
-  Dests: 830
+  Origs: 1000:auto
+  Dests: 830:goto
 (0 1) 1100 REM --SUBROUTINE TO ADD A CARD TO ROW I
-  Origs: 900, 980, 3080
-  Dests: 1110
+  Origs: 900:gosub, 980:gosub, 3080:gosub
+  Dests: 1110:auto
 (0 4) 1110 R(I) = R(I) + 1
-  Origs: 1100
-  Dests: 1120
+  Origs: 1100:auto
+  Dests: 1120:auto
 (0 3) 1120 P(I, R(I)) = X
-  Origs: 1110
-  Dests: 1130
+  Origs: 1110:auto
+  Dests: 1130:auto
 (0 3) 1130 Q = Q(I)
-  Origs: 1120
-  Dests: 1140
+  Origs: 1120:auto
+  Dests: 1140:auto
 (0 3) 1140 GOSUB 500
-  Origs: 1130
-  Dests: 500, 1150
+  Origs: 1130:auto
+  Dests: 500:gosub, 1150:auto
 (0 3) 1150 Q(I) = Q
-  Origs: 1140
-  Dests: 1160
+  Origs: 1140:auto
+  Dests: 1160:auto
 (1 4) 1160 IF Q >= 0 THEN 1190
-  Origs: 1150
-  Dests: 1170, 1190
+  Origs: 1150:auto
+  Dests: 1170:auto, 1190:ifthen
 (0 2) 1170 PRINT "...BUSTED"
-  Origs: 1160
-  Dests: 1180
+  Origs: 1160:auto
+  Dests: 1180:auto
 (0 2) 1180 GOSUB 1200
-  Origs: 1170
-  Dests: 1190, 1200
+  Origs: 1170:auto
+  Dests: 1190:auto, 1200:gosub
 (0 1) 1190 RETURN
-  Origs: 1160, 1180
+  Origs: 1160:ifthen, 1180:auto
   Dests: 
 (0 1) 1200 REM --SUBROUTINE TO DISCARD ROW I
-  Origs: 1180, 2470, 3280, 3310, 3350
-  Dests: 1210
+  Origs: 1180:gosub, 2470:gosub, 3280:gosub, 3310:gosub, 3350:gosub
+  Dests: 1210:auto
 (1 4) 1210 IF R(I) <> 0 THEN 1230
-  Origs: 1200, 1260
-  Dests: 1220, 1230
+  Origs: 1200:auto, 1260:goto
+  Dests: 1220:auto, 1230:ifthen
 (0 1) 1220 RETURN
-  Origs: 1210
+  Origs: 1210:auto
   Dests: 
 (0 4) 1230 D = D + 1
-  Origs: 1210
-  Dests: 1240
+  Origs: 1210:ifthen
+  Dests: 1240:auto
 (0 3) 1240 D(D) = P(I, R(I))
-  Origs: 1230
-  Dests: 1250
+  Origs: 1230:auto
+  Dests: 1250:auto
 (0 4) 1250 R(I) = R(I) - 1
-  Origs: 1240
-  Dests: 1260
+  Origs: 1240:auto
+  Dests: 1260:auto
 (0 3) 1260 GOTO 1210
-  Origs: 1250
-  Dests: 1210
+  Origs: 1250:auto
+  Dests: 1210:goto
 (0 1) 1300 REM --PRINTS TOTAL OF HAND I
-  Origs: 910
-  Dests: 1310
+  Origs: 910:gosub
+  Dests: 1310:auto
 (0 2) 1310 PRINT
-  Origs: 1300
-  Dests: 1320
+  Origs: 1300:auto
+  Dests: 1320:auto
 (0 3) 1320 AA = Q(I)
 (0 2)      GOSUB 3400
-  Origs: 930, 1310, 2490
-  Dests: 1325, 3400
+  Origs: 930:gosub, 1310:auto, 2490:gosub
+  Dests: 1325:auto, 3400:gosub
 (0 3) 1325 PRINT "TOTAL IS"; AA
-  Origs: 1320
-  Dests: 1330
+  Origs: 1320:auto
+  Dests: 1330:auto
 (0 1) 1330 RETURN
-  Origs: 1325
+  Origs: 1325:auto
   Dests: 
 (0 1) 1400 REM --SUBROUTINE TO READ REPLY
   Origs: 
-  Dests: 1410
+  Dests: 1410:auto
 (0 1) 1410 REM  I$ DEFINED ELSEWHERE
-  Origs: 830, 1400, 2390
-  Dests: 1420
+  Origs: 830:gosub, 1400:auto, 2390:gosub
+  Dests: 1420:auto
 (1 2) 1420 INPUT H$
 (0 4)      H$ = LEFT$(H$, 1)
-  Origs: 1410, 1470
-  Dests: 1430
+  Origs: 1410:auto, 1470:goto
+  Dests: 1430:auto
 (1 4) 1430 FOR H = 1 TO H1 STEP 2
-  Origs: 1420
-  Dests: 1440
+  Origs: 1420:auto
+  Dests: 1440:auto
 (1 5) 1440 IF H$ = MID$(I$, H, 1) THEN 1480
-  Origs: 1430
-  Dests: 1450, 1480
+  Origs: 1430:auto
+  Dests: 1450:auto, 1480:ifthen
 (0 1) 1450 NEXT H
-  Origs: 1440
-  Dests: 1460
+  Origs: 1440:auto
+  Dests: 1460:auto
 (0 8) 1460 PRINT "TYPE "; MID$(I$, 1, H1 - 1); " OR "; MID$(I$, H1, 2); " PLEASE";
-  Origs: 1450
-  Dests: 1470
+  Origs: 1450:auto
+  Dests: 1470:auto
 (0 3) 1470 GOTO 1420
-  Origs: 1460
-  Dests: 1420
+  Origs: 1460:auto
+  Dests: 1420:goto
 (0 5) 1480 H = (H + 1) / 2
-  Origs: 1440
-  Dests: 1490
+  Origs: 1440:ifthen
+  Dests: 1490:auto
 (0 1) 1490 RETURN
-  Origs: 1480
+  Origs: 1480:auto
   Dests: 
 (0 1) 1500 REM --PROGRAM STARTS HERE
-  Origs: 90
-  Dests: 1510
+  Origs: 90:goto
+  Dests: 1510:auto
 (0 1) 1510 REM --INITIALIZE
-  Origs: 1500
-  Dests: 1520
+  Origs: 1500:auto
+  Dests: 1520:auto
 (0 3) 1520 D$ = "  A  2  3  4  5  6  7  8  9 10  J  Q  K"
-  Origs: 1510
-  Dests: 1530
+  Origs: 1510:auto
+  Dests: 1530:auto
 (0 3) 1530 I$ = "H,S,D,C"
-  Origs: 1520
-  Dests: 1540
+  Origs: 1520:auto
+  Dests: 1540:auto
 (1 3) 1540 FOR I = 1 TO 13
-  Origs: 1530
-  Dests: 1550
+  Origs: 1530:auto
+  Dests: 1550:auto
 (1 6) 1550 FOR J = 4 * I - 3 TO 4 * I
-  Origs: 1540
-  Dests: 1560
+  Origs: 1540:auto
+  Dests: 1560:auto
 (0 3) 1560 D(J) = I
-  Origs: 1550
-  Dests: 1570
+  Origs: 1550:auto
+  Dests: 1570:auto
 (0 1) 1570 NEXT J
-  Origs: 1560
-  Dests: 1580
+  Origs: 1560:auto
+  Dests: 1580:auto
 (0 1) 1580 NEXT I
-  Origs: 1570
-  Dests: 1590
+  Origs: 1570:auto
+  Dests: 1590:auto
 (0 3) 1590 D = 52
-  Origs: 1580
-  Dests: 1600
+  Origs: 1580:auto
+  Dests: 1600:auto
 (0 3) 1600 C = 53
-  Origs: 1590
-  Dests: 1610
+  Origs: 1590:auto
+  Dests: 1610:auto
 (0 2) 1610 PRINT "DO YOU WANT INSTRUCTIONS";
-  Origs: 1600
-  Dests: 1620
+  Origs: 1600:auto
+  Dests: 1620:auto
 (1 2) 1620 INPUT H$
-  Origs: 1610
-  Dests: 1630
+  Origs: 1610:auto
+  Dests: 1630:auto
 (1 9) 1630 IF LEFT$(H$, 1) = "N" OR LEFT$(H$, 1) = "n" THEN 1760
-  Origs: 1620
-  Dests: 1640, 1760
+  Origs: 1620:auto
+  Dests: 1640:auto, 1760:ifthen
 (0 2) 1640 PRINT "THIS IS THE GAME OF 21. AS MANY AS 7 PLAYERS MAY PLAY THE"
-  Origs: 1630
-  Dests: 1650
+  Origs: 1630:auto
+  Dests: 1650:auto
 (0 2) 1650 PRINT "GAME. ON EACH DEAL, BETS WILL BE ASKED FOR, AND THE"
-  Origs: 1640
-  Dests: 1660
+  Origs: 1640:auto
+  Dests: 1660:auto
 (0 2) 1660 PRINT "PLAYERS' BETS SHOULD BE TYPED IN. THE CARDS WILL THEN BE"
-  Origs: 1650
-  Dests: 1670
+  Origs: 1650:auto
+  Dests: 1670:auto
 (0 2) 1670 PRINT "DEALT, AND EACH PLAYER IN TURN PLAYS HIS HAND. THE"
-  Origs: 1660
-  Dests: 1680
+  Origs: 1660:auto
+  Dests: 1680:auto
 (0 2) 1680 PRINT "FIRST RESPONSE SHOULD BE EITHER 'D', INDICATING THAT THE"
-  Origs: 1670
-  Dests: 1690
+  Origs: 1670:auto
+  Dests: 1690:auto
 (0 2) 1690 PRINT "PLAYER IS DOUBLING DOWN, 'S', INDICATING THAT HE IS"
-  Origs: 1680
-  Dests: 1700
+  Origs: 1680:auto
+  Dests: 1700:auto
 (0 2) 1700 PRINT "STANDING, 'H', INDICATING HE WANTS ANOTHER CARD, OR '/',"
-  Origs: 1690
-  Dests: 1710
+  Origs: 1690:auto
+  Dests: 1710:auto
 (0 2) 1710 PRINT "INDICATING THAT HE WANTS TO SPLIT HIS CARDS. AFTER THE"
-  Origs: 1700
-  Dests: 1720
+  Origs: 1700:auto
+  Dests: 1720:auto
 (0 2) 1720 PRINT "INITIAL RESPONSE, ALL FURTHER RESPONSES SHOULD BE 'S' OR"
-  Origs: 1710
-  Dests: 1730
+  Origs: 1710:auto
+  Dests: 1730:auto
 (0 2) 1730 PRINT "'H', UNLESS THE CARDS WERE SPLIT, IN WHICH CASE DOUBLING"
-  Origs: 1720
-  Dests: 1740
+  Origs: 1720:auto
+  Dests: 1740:auto
 (0 2) 1740 PRINT "DOWN IS AGAIN PERMITTED. IN ORDER TO COLLECT FOR"
-  Origs: 1730
-  Dests: 1750
+  Origs: 1730:auto
+  Dests: 1750:auto
 (0 2) 1750 PRINT "BLACKJACK, THE INITIAL RESPONSE SHOULD BE 'S'."
-  Origs: 1740
-  Dests: 1760
+  Origs: 1740:auto
+  Dests: 1760:auto
 (0 2) 1760 PRINT "NUMBER OF PLAYERS";
-  Origs: 1630, 1750, 1780
-  Dests: 1770
+  Origs: 1630:ifthen, 1750:auto, 1780:ifthen
+  Dests: 1770:auto
 (1 2) 1770 INPUT N
-  Origs: 1760
-  Dests: 1775
+  Origs: 1760:auto
+  Dests: 1775:auto
 (0 2) 1775 PRINT
-  Origs: 1770
-  Dests: 1780
+  Origs: 1770:auto
+  Dests: 1780:auto
 (1 12) 1780 IF N < 1 OR N > 7 OR N > INT(N) THEN 1760
-  Origs: 1775
-  Dests: 1760, 1790
+  Origs: 1775:auto
+  Dests: 1760:ifthen, 1790:auto
 (1 3) 1790 FOR I = 1 TO 8
 (0 3)      T(I) = 0
 (0 1)      NEXT I
-  Origs: 1780
-  Dests: 1800
+  Origs: 1780:auto
+  Dests: 1800:auto
 (0 4) 1800 D1 = N + 1
-  Origs: 1790
-  Dests: 1810
+  Origs: 1790:auto
+  Dests: 1810:auto
 (1 8) 1810 IF 2 * D1 + C >= 52 THEN GOSUB 120
-  Origs: 1800, 3360
-  Dests: 120, 1820
+  Origs: 1800:auto, 3360:goto
+  Dests: 120:gosub, 1820:auto
 (1 7) 1820 IF C = 2 THEN C = C - 1
-  Origs: 1810
-  Dests: 1830
+  Origs: 1810:auto
+  Dests: 1830:auto
 (1 3) 1830 FOR I = 1 TO N
 (0 3)      Z(I) = 0
 (0 1)      NEXT I
-  Origs: 1820
-  Dests: 1840
+  Origs: 1820:auto
+  Dests: 1840:auto
 (1 3) 1840 FOR I = 1 TO 15
 (0 3)      B(I) = 0
 (0 1)      NEXT I
-  Origs: 1830
-  Dests: 1850
+  Origs: 1830:auto
+  Dests: 1850:auto
 (1 3) 1850 FOR I = 1 TO 15
 (0 3)      Q(I) = 0
 (0 1)      NEXT I
-  Origs: 1840
-  Dests: 1860
+  Origs: 1840:auto
+  Dests: 1860:auto
 (1 3) 1860 FOR I = 1 TO 7
 (0 3)      S(I) = 0
 (0 1)      NEXT I
-  Origs: 1850
-  Dests: 1870
+  Origs: 1850:auto
+  Dests: 1870:auto
 (1 3) 1870 FOR I = 1 TO 15
 (0 3)      R(I) = 0
 (0 1)      NEXT I
-  Origs: 1860
-  Dests: 1880
+  Origs: 1860:auto
+  Dests: 1880:auto
 (0 2) 1880 PRINT "BETS:"
-  Origs: 1870, 1910
-  Dests: 1890
+  Origs: 1870:auto, 1910:ifthen
+  Dests: 1890:auto
 (1 3) 1890 FOR I = 1 TO N
 (0 3)      PRINT "#"; I;
 (1 2)      INPUT Z(I)
 (0 1)      NEXT I
-  Origs: 1880
-  Dests: 1900
+  Origs: 1880:auto
+  Dests: 1900:auto
 (1 3) 1900 FOR I = 1 TO N
-  Origs: 1890
-  Dests: 1910
+  Origs: 1890:auto
+  Dests: 1910:auto
 (1 8) 1910 IF Z(I) <= 0 OR Z(I) > 500 THEN 1880
-  Origs: 1900
-  Dests: 1880, 1920
+  Origs: 1900:auto
+  Dests: 1880:ifthen, 1920:auto
 (0 3) 1920 B(I) = Z(I)
-  Origs: 1910
-  Dests: 1930
+  Origs: 1910:auto
+  Dests: 1930:auto
 (0 1) 1930 NEXT I
-  Origs: 1920
-  Dests: 1940
+  Origs: 1920:auto
+  Dests: 1940:auto
 (0 2) 1940 PRINT "PLAYER  ";
-  Origs: 1930
-  Dests: 1950
+  Origs: 1930:auto
+  Dests: 1950:auto
 (1 3) 1950 FOR I = 1 TO N
-  Origs: 1940
-  Dests: 1960
+  Origs: 1940:auto
+  Dests: 1960:auto
 (0 4) 1960 PRINT TAB(I * 7); I;
-  Origs: 1950
-  Dests: 1970
+  Origs: 1950:auto
+  Dests: 1970:auto
 (0 1) 1970 NEXT I
-  Origs: 1960
-  Dests: 1980
+  Origs: 1960:auto
+  Dests: 1980:auto
 (0 4) 1980 PRINT TAB((N + 1) * 7) "DEALER"
-  Origs: 1970
-  Dests: 1990
+  Origs: 1970:auto
+  Dests: 1990:auto
 (1 3) 1990 FOR J = 1 TO 2
-  Origs: 1980
-  Dests: 2000
+  Origs: 1980:auto
+  Dests: 2000:auto
 (0 3) 2000 PRINT TAB(7);
-  Origs: 1990
-  Dests: 2010
+  Origs: 1990:auto
+  Dests: 2010:auto
 (1 3) 2010 FOR I = 1 TO D1
-  Origs: 2000
-  Dests: 2020
+  Origs: 2000:auto
+  Dests: 2020:auto
 (0 3) 2020 GOSUB 100
-  Origs: 2010
-  Dests: 100, 2030
+  Origs: 2010:auto
+  Dests: 100:gosub, 2030:auto
 (0 3) 2030 P(I, J) = X
-  Origs: 2020
-  Dests: 2040
+  Origs: 2020:auto
+  Dests: 2040:auto
 (1 9) 2040 IF J = 1 OR I <= N THEN GOSUB 750
-  Origs: 2030
-  Dests: 750, 2050
+  Origs: 2030:auto
+  Dests: 750:gosub, 2050:auto
 (0 1) 2050 NEXT I
-  Origs: 2040
-  Dests: 2060
+  Origs: 2040:auto
+  Dests: 2060:auto
 (0 2) 2060 PRINT
-  Origs: 2050
-  Dests: 2070
+  Origs: 2050:auto
+  Dests: 2070:auto
 (0 1) 2070 NEXT J
-  Origs: 2060
-  Dests: 2080
+  Origs: 2060:auto
+  Dests: 2080:auto
 (1 3) 2080 FOR I = 1 TO D1
-  Origs: 2070
-  Dests: 2090
+  Origs: 2070:auto
+  Dests: 2090:auto
 (0 3) 2090 R(I) = 2
-  Origs: 2080
-  Dests: 2100
+  Origs: 2080:auto
+  Dests: 2100:auto
 (0 1) 2100 NEXT I
-  Origs: 2090
-  Dests: 2110
+  Origs: 2090:auto
+  Dests: 2110:auto
 (0 1) 2110 REM --TEST FOR INSURANCE
-  Origs: 2100
-  Dests: 2120
+  Origs: 2100:auto
+  Dests: 2120:auto
 (1 4) 2120 IF P(D1, 1) > 1 THEN 2240
-  Origs: 2110
-  Dests: 2130, 2240
+  Origs: 2110:auto
+  Dests: 2130:auto, 2240:ifthen
 (0 2) 2130 PRINT "ANY INSURANCE";
-  Origs: 2120
-  Dests: 2140
+  Origs: 2120:auto
+  Dests: 2140:auto
 (1 2) 2140 INPUT H$
-  Origs: 2130
-  Dests: 2150
+  Origs: 2130:auto
+  Dests: 2150:auto
 (1 5) 2150 IF LEFT$(H$, 1) <> "Y" THEN 2240
-  Origs: 2140
-  Dests: 2160, 2240
+  Origs: 2140:auto
+  Dests: 2160:auto, 2240:ifthen
 (0 2) 2160 PRINT "INSURANCE BETS"
-  Origs: 2150, 2190
-  Dests: 2170
+  Origs: 2150:auto, 2190:ifthen
+  Dests: 2170:auto
 (1 3) 2170 FOR I = 1 TO N
 (0 3)      PRINT "#"; I;
 (1 2)      INPUT Z(I)
 (0 1)      NEXT I
-  Origs: 2160
-  Dests: 2180
+  Origs: 2160:auto
+  Dests: 2180:auto
 (1 3) 2180 FOR I = 1 TO N
-  Origs: 2170
-  Dests: 2190
+  Origs: 2170:auto
+  Dests: 2190:auto
 (1 10) 2190 IF Z(I) < 0 OR Z(I) > B(I) / 2 THEN 2160
-  Origs: 2180
-  Dests: 2160, 2200
+  Origs: 2180:auto
+  Dests: 2160:ifthen, 2200:auto
 (0 1) 2200 NEXT I
-  Origs: 2190
-  Dests: 2210
+  Origs: 2190:auto
+  Dests: 2210:auto
 (1 3) 2210 FOR I = 1 TO N
-  Origs: 2200
-  Dests: 2220
+  Origs: 2200:auto
+  Dests: 2220:auto
 (0 11) 2220 S(I) = Z(I) * (3 * (-(P(D1, 2) >= 10)) - 1)
-  Origs: 2210
-  Dests: 2230
+  Origs: 2210:auto
+  Dests: 2230:auto
 (0 1) 2230 NEXT I
-  Origs: 2220
-  Dests: 2240
+  Origs: 2220:auto
+  Dests: 2240:auto
 (0 1) 2240 REM --TEST FOR DEALER BLACKJACK
-  Origs: 2120, 2150, 2230
-  Dests: 2250
+  Origs: 2120:ifthen, 2150:ifthen, 2230:auto
+  Dests: 2250:auto
 (0 3) 2250 L1 = 1
 (0 3)      L2 = 1
-  Origs: 2240
-  Dests: 2252
+  Origs: 2240:auto
+  Dests: 2252:auto
 (1 9) 2252 IF P(D1, 1) = 1 AND P(D1, 2) > 9 THEN L1 = 0
 (0 3)      L2 = 0
-  Origs: 2250
-  Dests: 2253, 2253
+  Origs: 2250:auto
+  Dests: 2253:auto
 (1 9) 2253 IF P(D1, 2) = 1 AND P(D1, 1) > 9 THEN L1 = 0
 (0 3)      L2 = 0
-  Origs: 2252, 2252
-  Dests: 2254, 2254
+  Origs: 2252:auto
+  Dests: 2254:auto
 (1 7) 2254 IF L1 <> 0 OR L2 <> 0 THEN 2320
-  Origs: 2253, 2253
-  Dests: 2260, 2320
+  Origs: 2253:auto
+  Dests: 2260:auto, 2320:ifthen
 (0 2) 2260 PRINT
 (0 5)      PRINT "DEALER HAS A"; MID$(D$, 3 * P(D1, 2) - 2, 3); " IN THE HOLE ";
-  Origs: 2254
-  Dests: 2270
+  Origs: 2254:auto
+  Dests: 2270:auto
 (0 2) 2270 PRINT "FOR BLACKJACK"
-  Origs: 2260
-  Dests: 2280
+  Origs: 2260:auto
+  Dests: 2280:auto
 (1 3) 2280 FOR I = 1 TO D1
-  Origs: 2270
-  Dests: 2290
+  Origs: 2270:auto
+  Dests: 2290:auto
 (0 3) 2290 GOSUB 300
-  Origs: 2280
-  Dests: 300, 2300
+  Origs: 2280:auto
+  Dests: 300:gosub, 2300:auto
 (0 1) 2300 NEXT I
-  Origs: 2290
-  Dests: 2310
+  Origs: 2290:auto
+  Dests: 2310:auto
 (0 2) 2310 GOTO 3140
-  Origs: 2300
-  Dests: 3140
+  Origs: 2300:auto
+  Dests: 3140:goto
 (0 1) 2320 REM --NO DEALER BLACKJACK
-  Origs: 2254
-  Dests: 2330
+  Origs: 2254:ifthen
+  Dests: 2330:auto
 (1 7) 2330 IF P(D1, 1) > 1 AND P(D1, 1) < 10 THEN 2350
-  Origs: 2320
-  Dests: 2340, 2350
+  Origs: 2320:auto
+  Dests: 2340:auto, 2350:ifthen
 (0 2) 2340 PRINT
 (0 2)      PRINT "NO DEALER BLACKJACK."
-  Origs: 2330
-  Dests: 2350
+  Origs: 2330:auto
+  Dests: 2350:auto
 (0 1) 2350 REM --NOW PLAY THE HANDS
-  Origs: 2330, 2340
-  Dests: 2360
+  Origs: 2330:ifthen, 2340:auto
+  Dests: 2360:auto
 (1 3) 2360 FOR I = 1 TO N
-  Origs: 2350
-  Dests: 2370
+  Origs: 2350:auto
+  Dests: 2370:auto
 (0 3) 2370 PRINT "PLAYER"; I;
-  Origs: 2360, 2630
-  Dests: 2380
+  Origs: 2360:auto, 2630:goto
+  Dests: 2380:auto
 (0 3) 2380 H1 = 7
-  Origs: 2370
-  Dests: 2390
+  Origs: 2370:auto
+  Dests: 2390:auto
 (0 3) 2390 GOSUB 1410
-  Origs: 2380
-  Dests: 1410, 2400
+  Origs: 2380:auto
+  Dests: 1410:gosub, 2400:auto
 (4 6) 2400 ON H GOTO 2550, 2410, 2510, 2600
-  Origs: 2390
-  Dests: 2410, 2510, 2550, 2600
+  Origs: 2390:auto
+  Dests: 2410:auto, 2410:goto, 2510:goto, 2550:goto, 2600:goto
 (0 1) 2410 REM --PLAYER WANTS TO STAND
-  Origs: 2400
-  Dests: 2420
+  Origs: 2400:auto, 2400:goto
+  Dests: 2420:auto
 (0 3) 2420 GOSUB 300
-  Origs: 2410
-  Dests: 300, 2430
+  Origs: 2410:auto
+  Dests: 300:gosub, 2430:auto
 (1 4) 2430 IF Q(I) <> 21 THEN 2490
-  Origs: 2420
-  Dests: 2440, 2490
+  Origs: 2420:auto
+  Dests: 2440:auto, 2490:ifthen
 (0 2) 2440 PRINT "BLACKJACK"
-  Origs: 2430
-  Dests: 2450
+  Origs: 2430:auto
+  Dests: 2450:auto
 (0 6) 2450 S(I) = S(I) + 1.5 * B(I)
-  Origs: 2440
-  Dests: 2460
+  Origs: 2440:auto
+  Dests: 2460:auto
 (0 3) 2460 B(I) = 0
-  Origs: 2450
-  Dests: 2470
+  Origs: 2450:auto
+  Dests: 2470:auto
 (0 3) 2470 GOSUB 1200
-  Origs: 2460
-  Dests: 1200, 2480
+  Origs: 2460:auto
+  Dests: 1200:gosub, 2480:auto
 (0 2) 2480 GOTO 2900
-  Origs: 2470
-  Dests: 2900
+  Origs: 2470:auto
+  Dests: 2900:goto
 (0 3) 2490 GOSUB 1320
-  Origs: 2430
-  Dests: 1320, 2500
+  Origs: 2430:ifthen
+  Dests: 1320:gosub, 2500:auto
 (0 2) 2500 GOTO 2900
-  Origs: 2490
-  Dests: 2900
+  Origs: 2490:auto
+  Dests: 2900:goto
 (0 1) 2510 REM --PLAYER WANTS TO DOUBLE DOWN
-  Origs: 2400
-  Dests: 2520
+  Origs: 2400:goto
+  Dests: 2520:auto
 (0 3) 2520 GOSUB 300
-  Origs: 2510
-  Dests: 300, 2530
+  Origs: 2510:auto
+  Dests: 300:gosub, 2530:auto
 (0 3) 2530 GOSUB 860
-  Origs: 2520
-  Dests: 860, 2540
+  Origs: 2520:auto
+  Dests: 860:gosub, 2540:auto
 (0 2) 2540 GOTO 2900
-  Origs: 2530
-  Dests: 2900
+  Origs: 2530:auto
+  Dests: 2900:goto
 (0 1) 2550 REM --PLAYER WANTS TO BE HIT
-  Origs: 2400
-  Dests: 2560
+  Origs: 2400:goto
+  Dests: 2560:auto
 (0 3) 2560 GOSUB 300
-  Origs: 2550
-  Dests: 300, 2570
+  Origs: 2550:auto
+  Dests: 300:gosub, 2570:auto
 (0 3) 2570 H1 = 3
-  Origs: 2560
-  Dests: 2580
+  Origs: 2560:auto
+  Dests: 2580:auto
 (0 3) 2580 GOSUB 950
-  Origs: 2570
-  Dests: 950, 2590
+  Origs: 2570:auto
+  Dests: 950:gosub, 2590:auto
 (0 2) 2590 GOTO 2900
-  Origs: 2580
-  Dests: 2900
+  Origs: 2580:auto
+  Dests: 2900:goto
 (0 1) 2600 REM --PLAYER WANTS TO SPLIT
-  Origs: 2400
-  Dests: 2610
+  Origs: 2400:goto
+  Dests: 2610:auto
 (0 3) 2610 L1 = P(I, 1)
 (1 6)      IF P(I, 1) > 10 THEN L1 = 10
-  Origs: 2600
-  Dests: 2612
+  Origs: 2600:auto
+  Dests: 2612:auto
 (0 3) 2612 L2 = P(I, 2)
 (1 6)      IF P(I, 2) > 10 THEN L2 = 10
-  Origs: 2610
-  Dests: 2614
+  Origs: 2610:auto
+  Dests: 2614:auto
 (1 4) 2614 IF L1 = L2 THEN 2640
-  Origs: 2612
-  Dests: 2620, 2640
+  Origs: 2612:auto
+  Dests: 2620:auto, 2640:ifthen
 (0 2) 2620 PRINT "SPLITTING NOT ALLOWED."
-  Origs: 2614
-  Dests: 2630
+  Origs: 2614:auto
+  Dests: 2630:auto
 (0 3) 2630 GOTO 2370
-  Origs: 2620
-  Dests: 2370
+  Origs: 2620:auto
+  Dests: 2370:goto
 (0 1) 2640 REM --PLAY OUT SPLIT
-  Origs: 2614
-  Dests: 2650
+  Origs: 2614:ifthen
+  Dests: 2650:auto
 (0 4) 2650 I1 = I + D1
-  Origs: 2640
-  Dests: 2660
+  Origs: 2640:auto
+  Dests: 2660:auto
 (0 3) 2660 R(I1) = 2
-  Origs: 2650
-  Dests: 2670
+  Origs: 2650:auto
+  Dests: 2670:auto
 (0 3) 2670 P(I1, 1) = P(I, 2)
-  Origs: 2660
-  Dests: 2680
+  Origs: 2660:auto
+  Dests: 2680:auto
 (0 3) 2680 B(I + D1) = B(I)
-  Origs: 2670
-  Dests: 2690
+  Origs: 2670:auto
+  Dests: 2690:auto
 (0 3) 2690 GOSUB 100
-  Origs: 2680
-  Dests: 100, 2700
+  Origs: 2680:auto
+  Dests: 100:gosub, 2700:auto
 (0 2) 2700 PRINT "FIRST HAND RECEIVES A";
-  Origs: 2690
-  Dests: 2710
+  Origs: 2690:auto
+  Dests: 2710:auto
 (0 3) 2710 GOSUB 700
-  Origs: 2700
-  Dests: 700, 2720
+  Origs: 2700:auto
+  Dests: 700:gosub, 2720:auto
 (0 3) 2720 P(I, 2) = X
-  Origs: 2710
-  Dests: 2730
+  Origs: 2710:auto
+  Dests: 2730:auto
 (0 3) 2730 GOSUB 300
-  Origs: 2720
-  Dests: 300, 2740
+  Origs: 2720:auto
+  Dests: 300:gosub, 2740:auto
 (0 2) 2740 PRINT
-  Origs: 2730
-  Dests: 2750
+  Origs: 2730:auto
+  Dests: 2750:auto
 (0 3) 2750 GOSUB 100
-  Origs: 2740
-  Dests: 100, 2760
+  Origs: 2740:auto
+  Dests: 100:gosub, 2760:auto
 (0 2) 2760 PRINT "SECOND HAND RECEIVES A";
-  Origs: 2750
-  Dests: 2770
+  Origs: 2750:auto
+  Dests: 2770:auto
 (0 3) 2770 I = I1
-  Origs: 2760
-  Dests: 2780
+  Origs: 2760:auto
+  Dests: 2780:auto
 (0 3) 2780 GOSUB 700
-  Origs: 2770
-  Dests: 700, 2790
+  Origs: 2770:auto
+  Dests: 700:gosub, 2790:auto
 (0 3) 2790 P(I, 2) = X
-  Origs: 2780
-  Dests: 2800
+  Origs: 2780:auto
+  Dests: 2800:auto
 (0 3) 2800 GOSUB 300
-  Origs: 2790
-  Dests: 300, 2810
+  Origs: 2790:auto
+  Dests: 300:gosub, 2810:auto
 (0 2) 2810 PRINT
-  Origs: 2800
-  Dests: 2820
+  Origs: 2800:auto
+  Dests: 2820:auto
 (0 4) 2820 I = I1 - D1
-  Origs: 2810
-  Dests: 2830
+  Origs: 2810:auto
+  Dests: 2830:auto
 (1 4) 2830 IF P(I, 1) = 1 THEN 2900
-  Origs: 2820
-  Dests: 2840, 2900
+  Origs: 2820:auto
+  Dests: 2840:auto, 2900:ifthen
 (0 1) 2840 REM --NOW PLAY THE TWO HANDS
-  Origs: 2830
-  Dests: 2850
+  Origs: 2830:auto
+  Dests: 2850:auto
 (0 6) 2850 PRINT "HAND"; 1 - (I > D1);
-  Origs: 2840, 2880
-  Dests: 2860
+  Origs: 2840:auto, 2880:ifthen
+  Dests: 2860:auto
 (0 3) 2860 GOSUB 800
-  Origs: 2850
-  Dests: 800, 2870
+  Origs: 2850:auto
+  Dests: 800:gosub, 2870:auto
 (0 4) 2870 I = I + D1
-  Origs: 2860
-  Dests: 2880
+  Origs: 2860:auto
+  Dests: 2880:auto
 (1 5) 2880 IF I = I1 THEN 2850
-  Origs: 2870
-  Dests: 2850, 2890
+  Origs: 2870:auto
+  Dests: 2850:ifthen, 2890:auto
 (0 4) 2890 I = I1 - D1
-  Origs: 2880
-  Dests: 2900
+  Origs: 2880:auto
+  Dests: 2900:auto
 (0 1) 2900 NEXT I
-  Origs: 2480, 2500, 2540, 2590, 2830, 2890
-  Dests: 2910
+  Origs: 2480:goto, 2500:goto, 2540:goto, 2590:goto, 2830:ifthen, 2890:auto
+  Dests: 2910:auto
 (0 3) 2910 GOSUB 300
-  Origs: 2900
-  Dests: 300, 2920
+  Origs: 2900:auto
+  Dests: 300:gosub, 2920:auto
 (0 1) 2920 REM --TEST FOR PLAYING DEALER'S HAND
-  Origs: 2910
-  Dests: 2930
+  Origs: 2910:auto
+  Dests: 2930:auto
 (1 3) 2930 FOR I = 1 TO N
-  Origs: 2920
-  Dests: 2940
+  Origs: 2920:auto
+  Dests: 2940:auto
 (1 7) 2940 IF R(I) > 0 OR R(I + D1) > 0 THEN 3010
-  Origs: 2930
-  Dests: 2950, 3010
+  Origs: 2930:auto
+  Dests: 2950:auto, 3010:ifthen
 (0 1) 2950 NEXT I
-  Origs: 2940
-  Dests: 2960
+  Origs: 2940:auto
+  Dests: 2960:auto
 (0 2) 2960 PRINT "DEALER HAD A";
-  Origs: 2950
-  Dests: 2970
+  Origs: 2950:auto
+  Dests: 2970:auto
 (0 3) 2970 X = P(D1, 2)
-  Origs: 2960
-  Dests: 2980
+  Origs: 2960:auto
+  Dests: 2980:auto
 (0 3) 2980 GOSUB 700
-  Origs: 2970
-  Dests: 700, 2990
+  Origs: 2970:auto
+  Dests: 700:gosub, 2990:auto
 (0 2) 2990 PRINT "CONCEALED."
-  Origs: 2980
-  Dests: 3000
+  Origs: 2980:auto
+  Dests: 3000:auto
 (0 2) 3000 GOTO 3140
-  Origs: 2990
-  Dests: 3140
+  Origs: 2990:auto
+  Dests: 3140:goto
 (0 5) 3010 PRINT "DEALER HAS A"; MID$(D$, 3 * P(D1, 2) - 2, 3); " CONCEALED ";
-  Origs: 2940
-  Dests: 3020
+  Origs: 2940:ifthen
+  Dests: 3020:auto
 (0 3) 3020 I = D1
-  Origs: 3010
-  Dests: 3030
+  Origs: 3010:auto
+  Dests: 3030:auto
 (0 3) 3030 AA = Q(I)
 (0 2)      GOSUB 3400
-  Origs: 3020
-  Dests: 3035, 3400
+  Origs: 3020:auto
+  Dests: 3035:auto, 3400:gosub
 (0 3) 3035 PRINT "FOR A TOTAL OF"; AA
-  Origs: 3030
-  Dests: 3040
+  Origs: 3030:auto
+  Dests: 3040:auto
 (1 4) 3040 IF AA > 16 THEN 3130
-  Origs: 3035
-  Dests: 3050, 3130
+  Origs: 3035:auto
+  Dests: 3050:auto, 3130:ifthen
 (0 2) 3050 PRINT "DRAWS";
-  Origs: 3040
-  Dests: 3060
+  Origs: 3040:auto
+  Dests: 3060:auto
 (0 3) 3060 GOSUB 100
-  Origs: 3050, 3095
-  Dests: 100, 3070
+  Origs: 3050:auto, 3095:ifthen
+  Dests: 100:gosub, 3070:auto
 (0 3) 3070 GOSUB 750
-  Origs: 3060
-  Dests: 750, 3080
+  Origs: 3060:auto
+  Dests: 750:gosub, 3080:auto
 (0 3) 3080 GOSUB 1100
-  Origs: 3070
-  Dests: 1100, 3090
+  Origs: 3070:auto
+  Dests: 1100:gosub, 3090:auto
 (0 3) 3090 AA = Q
 (0 2)      GOSUB 3400
-  Origs: 3080
-  Dests: 3095, 3400
+  Origs: 3080:auto
+  Dests: 3095:auto, 3400:gosub
 (1 8) 3095 IF Q > 0 AND AA < 17 THEN 3060
-  Origs: 3090
-  Dests: 3060, 3100
+  Origs: 3090:auto
+  Dests: 3060:ifthen, 3100:auto
 (0 7) 3100 Q(I) = Q - (Q < 0) / 2
-  Origs: 3095
-  Dests: 3110
+  Origs: 3095:auto
+  Dests: 3110:auto
 (1 4) 3110 IF Q < 0 THEN 3140
-  Origs: 3100
-  Dests: 3120, 3140
+  Origs: 3100:auto
+  Dests: 3120:auto, 3140:ifthen
 (0 3) 3120 AA = Q
 (0 2)      GOSUB 3400
-  Origs: 3110
-  Dests: 3125, 3400
+  Origs: 3110:auto
+  Dests: 3125:auto, 3400:gosub
 (0 3) 3125 PRINT "---TOTAL IS"; AA
-  Origs: 3120
-  Dests: 3130
+  Origs: 3120:auto
+  Dests: 3130:auto
 (0 2) 3130 PRINT
-  Origs: 3040, 3125
-  Dests: 3140
+  Origs: 3040:ifthen, 3125:auto
+  Dests: 3140:auto
 (0 1) 3140 REM --TALLY THE RESULT
-  Origs: 2310, 3000, 3110, 3130
-  Dests: 3150
+  Origs: 2310:goto, 3000:goto, 3110:ifthen, 3130:auto
+  Dests: 3150:auto
 (0 1) 3150 REM
-  Origs: 3140
-  Dests: 3160
+  Origs: 3140:auto
+  Dests: 3160:auto
 (0 3) 3160 Z$ = "LOSES PUSHES WINS "
-  Origs: 3150
-  Dests: 3165
+  Origs: 3150:auto
+  Dests: 3165:auto
 (0 2) 3165 PRINT
-  Origs: 3160
-  Dests: 3170
+  Origs: 3160:auto
+  Dests: 3170:auto
 (1 3) 3170 FOR I = 1 TO N
-  Origs: 3165
-  Dests: 3180
+  Origs: 3165:auto
+  Dests: 3180:auto
 (0 3) 3180 AA = Q(I)
 (0 2)      GOSUB 3400
-  Origs: 3170
-  Dests: 3182, 3400
+  Origs: 3170:auto
+  Dests: 3182:auto, 3400:gosub
 (0 3) 3182 AB = Q(I + D1)
 (0 2)      GOSUB 3410
-  Origs: 3180
-  Dests: 3184, 3410
+  Origs: 3180:auto
+  Dests: 3184:auto, 3410:gosub
 (0 3) 3184 AC = Q(D1)
 (0 2)      GOSUB 3420
-  Origs: 3182
-  Dests: 3186, 3420
+  Origs: 3182:auto
+  Dests: 3186:auto, 3420:gosub
 (0 11) 3186 S(I) = S(I) + B(I) * SGN(AA - AC) + B(I + D1) * SGN(AB - AC)
-  Origs: 3184
-  Dests: 3188
+  Origs: 3184:auto
+  Dests: 3188:auto
 (0 3) 3188 B(I + D1) = 0
-  Origs: 3186
-  Dests: 3200
+  Origs: 3186:auto
+  Dests: 3200:auto
 (0 3) 3200 PRINT "PLAYER"; I;
-  Origs: 3188
-  Dests: 3210
+  Origs: 3188:auto
+  Dests: 3210:auto
 (0 4) 3210 PRINT MID$(Z$, SGN(S(I)) * 6 + 7, 6); " ";
-  Origs: 3200
-  Dests: 3220
+  Origs: 3200:auto
+  Dests: 3220:auto
 (1 4) 3220 IF S(I) <> 0 THEN 3250
-  Origs: 3210
-  Dests: 3230, 3250
+  Origs: 3210:auto
+  Dests: 3230:auto, 3250:ifthen
 (0 2) 3230 PRINT "      ";
-  Origs: 3220
-  Dests: 3240
+  Origs: 3220:auto
+  Dests: 3240:auto
 (0 2) 3240 GOTO 3260
-  Origs: 3230
-  Dests: 3260
+  Origs: 3230:auto
+  Dests: 3260:goto
 (0 3) 3250 PRINT ABS(S(I));
-  Origs: 3220
-  Dests: 3260
+  Origs: 3220:ifthen
+  Dests: 3260:auto
 (0 4) 3260 T(I) = T(I) + S(I)
-  Origs: 3240, 3250
-  Dests: 3270
+  Origs: 3240:goto, 3250:auto
+  Dests: 3270:auto
 (0 3) 3270 PRINT "TOTAL="; T(I)
-  Origs: 3260
-  Dests: 3280
+  Origs: 3260:auto
+  Dests: 3280:auto
 (0 3) 3280 GOSUB 1200
-  Origs: 3270
-  Dests: 1200, 3290
+  Origs: 3270:auto
+  Dests: 1200:gosub, 3290:auto
 (0 4) 3290 T(D1) = T(D1) - S(I)
-  Origs: 3280
-  Dests: 3300
+  Origs: 3280:auto
+  Dests: 3300:auto
 (0 4) 3300 I = I + D1
-  Origs: 3290
-  Dests: 3310
+  Origs: 3290:auto
+  Dests: 3310:auto
 (0 3) 3310 GOSUB 1200
-  Origs: 3300
-  Dests: 1200, 3320
+  Origs: 3300:auto
+  Dests: 1200:gosub, 3320:auto
 (0 4) 3320 I = I - D1
-  Origs: 3310
-  Dests: 3330
+  Origs: 3310:auto
+  Dests: 3330:auto
 (0 1) 3330 NEXT I
-  Origs: 3320
-  Dests: 3340
+  Origs: 3320:auto
+  Dests: 3340:auto
 (0 3) 3340 PRINT "DEALER'S TOTAL="; T(D1)
-  Origs: 3330
-  Dests: 3345
+  Origs: 3330:auto
+  Dests: 3345:auto
 (0 2) 3345 PRINT
-  Origs: 3340
-  Dests: 3350
+  Origs: 3340:auto
+  Dests: 3350:auto
 (0 3) 3350 GOSUB 1200
-  Origs: 3345
-  Dests: 1200, 3360
+  Origs: 3345:auto
+  Dests: 1200:gosub, 3360:auto
 (0 3) 3360 GOTO 1810
-  Origs: 3350
-  Dests: 1810
+  Origs: 3350:auto
+  Dests: 1810:goto
 (0 8) 3400 AA = AA + 11 * (AA >= 22)
 (0 1)      RETURN
-  Origs: 1320, 3030, 3090, 3120, 3180
+  Origs: 1320:gosub, 3030:gosub, 3090:gosub, 3120:gosub, 3180:gosub
   Dests: 
 (0 8) 3410 AB = AB + 11 * (AB >= 22)
 (0 1)      RETURN
-  Origs: 3182
+  Origs: 3182:gosub
   Dests: 
 (0 8) 3420 AC = AC + 11 * (AC >= 22)
 (0 1)      RETURN
-  Origs: 3184
+  Origs: 3184:gosub
   Dests: 
 
 Unreachable code:

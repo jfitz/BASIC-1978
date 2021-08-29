@@ -21,104 +21,104 @@ Halstead complexity:
 
 (0 4) 1 PRINT TAB(34); "NAME"
   Origs: 
-  Dests: 2
+  Dests: 2:auto
 (0 4) 2 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
-  Origs: 1
-  Dests: 3
+  Origs: 1:auto
+  Dests: 3:auto
 (0 2) 3 PRINT
 (0 2)   PRINT
 (0 2)   PRINT
-  Origs: 2
-  Dests: 5
+  Origs: 2:auto
+  Dests: 5:auto
 (0 2) 5 DIM B$(40)
-  Origs: 3
-  Dests: 10
+  Origs: 3:auto
+  Dests: 10:auto
 (0 2) 10 PRINT "HELLO."
 (0 2)    PRINT "MY NAME IS CREATIVE COMPUTER."
-  Origs: 5
-  Dests: 20
+  Origs: 5:auto
+  Dests: 20:auto
 (0 2) 20 PRINT "WHAT'S YOUR NAME (FIRST AND LAST)";
 (1 2)    INPUT A$
 (0 4)    L = LEN(A$)
-  Origs: 10
-  Dests: 30
+  Origs: 10:auto
+  Dests: 30:auto
 (0 2) 30 PRINT
 (0 2)    PRINT "THANK YOU, ";
-  Origs: 20
-  Dests: 40
+  Origs: 20:auto
+  Dests: 40:auto
 (1 3) 40 FOR I = 1 TO L
 (0 4)    B$(I) = MID$(A$, I, 1)
 (0 1)    NEXT I
-  Origs: 30
-  Dests: 50
+  Origs: 30:auto
+  Dests: 50:auto
 (1 5) 50 FOR I = L TO 1 STEP -1
 (0 2)    PRINT B$(I);
 (0 1)    NEXT I
-  Origs: 40
-  Dests: 60
+  Origs: 40:auto
+  Dests: 60:auto
 (0 2) 60 PRINT "."
 (0 2)    PRINT "OOPS!  I GUESS I GOT IT BACKWARDS.  A SMART"
-  Origs: 50
-  Dests: 70
+  Origs: 50:auto
+  Dests: 70:auto
 (0 2) 70 PRINT "COMPUTER LIKE ME SHOULDN'T MAKE A MISTAKE LIKE THAT!"
 (0 2)    PRINT
-  Origs: 60
-  Dests: 80
+  Origs: 60:auto
+  Dests: 80:auto
 (0 2) 80 PRINT "BUT I JUST NOTICED YOUR LETTERS ARE OUT OF ORDER."
-  Origs: 70
-  Dests: 90
+  Origs: 70:auto
+  Dests: 90:auto
 (0 2) 90 PRINT "LET'S PUT THEM IN ORDER LIKE THIS: ";
-  Origs: 80
-  Dests: 100
+  Origs: 80:auto
+  Dests: 100:auto
 (1 3) 100 FOR J = 2 TO L
 (0 4)     I = J - 1
 (0 3)     T$ = B$(J)
-  Origs: 90
-  Dests: 110
+  Origs: 90:auto
+  Dests: 110:auto
 (1 4) 110 IF T$ > B$(I) THEN 130
-  Origs: 100, 120
-  Dests: 120, 130
+  Origs: 100:auto, 120:ifthen
+  Dests: 120:auto, 130:ifthen
 (0 3) 120 B$(I + 1) = B$(I)
 (0 4)     I = I - 1
 (1 5)     IF I > 0 THEN 110
-  Origs: 110
-  Dests: 110, 130
+  Origs: 110:auto
+  Dests: 110:ifthen, 130:auto
 (0 3) 130 B$(I + 1) = T$
 (0 1)     NEXT J
-  Origs: 110, 120
-  Dests: 140
+  Origs: 110:ifthen, 120:auto
+  Dests: 140:auto
 (1 3) 140 FOR I = 1 TO L
 (0 2)     PRINT B$(I);
 (0 1)     NEXT I
 (0 2)     PRINT
 (0 2)     PRINT
-  Origs: 130
-  Dests: 150
+  Origs: 130:auto
+  Dests: 150:auto
 (0 2) 150 PRINT "DON'T YOU LIKE THAT BETTER";
 (1 2)     INPUT D$
-  Origs: 140
-  Dests: 160
+  Origs: 140:auto
+  Dests: 160:auto
 (1 4) 160 IF D$ = "YES" THEN 180
-  Origs: 150
-  Dests: 170, 180
+  Origs: 150:auto
+  Dests: 170:auto, 180:ifthen
 (0 2) 170 PRINT
 (0 2)     PRINT "I'M SORRY YOU DON'T LIKE IT THAT WAY."
 (0 2)     GOTO 200
-  Origs: 160
-  Dests: 200
+  Origs: 160:auto
+  Dests: 200:goto
 (0 2) 180 PRINT
 (0 2)     PRINT "I KNEW YOU'D AGREE!!"
-  Origs: 160
-  Dests: 200
+  Origs: 160:ifthen
+  Dests: 200:auto
 (0 2) 200 PRINT
 (0 4)     PRINT "I REALLY ENJOYED MEETING YOU "; A$; "."
-  Origs: 170, 180
-  Dests: 210
+  Origs: 170:goto, 180:auto
+  Dests: 210:auto
 (0 2) 210 PRINT "HAVE A NICE DAY!"
-  Origs: 200
-  Dests: 999
+  Origs: 200:auto
+  Dests: 999:auto
 (0 1) 999 END
-  Origs: 210
+  Origs: 210:auto
   Dests: 
 
 Unreachable code:
