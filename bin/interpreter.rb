@@ -334,7 +334,11 @@ class Interpreter
   end
 
   def run_program
-    run_statements if @program.preexecute_loop(self)
+    if @program.check_for_errors(self) &&
+       @program.optimize(self)
+       @program.init_data(self)
+      run_statements
+    end
   end
 
   def chain_to(filename)

@@ -21,25 +21,25 @@ Halstead complexity:
 
 (0 1) 10 REM TEST MULTISTATEMENT UNREACHABLE CODE
   Origs: 
-  Dests: 20
+  Dests: 20:auto
 (0 3) 20 LET A = 10
 (0 2)    GOTO 40
 (0 2)    PRINT "NOT RIGHT"
-  Origs: 10
-  Dests: 30, 40
+  Origs: 10:auto
+  Dests: 30:auto, 40:goto
 (0 2) 30 PRINT "NOT PRINTED"
-  Origs: 20
-  Dests: 40
+  Origs: 20:auto
+  Dests: 40:auto
 (0 3) 40 LET B = 20
 (1 2)      IF A = 10
 (0 1)      ENDIF
-  Origs: 20, 30
-  Dests: 50
+  Origs: 20:goto, 30:auto
+  Dests: 50:auto
 (0 3) 50 PRINT A, B
-  Origs: 40
-  Dests: 99
+  Origs: 40:auto
+  Dests: 99:auto
 (0 1) 99 END
-  Origs: 50
+  Origs: 50:auto
   Dests: 
 
 Unreachable code:

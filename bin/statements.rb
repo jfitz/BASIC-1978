@@ -479,8 +479,11 @@ class AbstractStatement
     errors.empty?
   end
 
-  def preexecute(interpreter)
+  def optimize(interpreter)
     define_user_functions(interpreter)
+  end
+
+  def init_data(interpreter)
     load_data(interpreter)
   end
 
