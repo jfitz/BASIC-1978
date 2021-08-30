@@ -76,7 +76,7 @@ class AbstractModifier
   # get opposite modifier (pre- when in post; post- when in pre)
   def get_counterpart(interpreter)
     current_line_index = interpreter.current_line_index
-    number = current_line_index.number
+    number = current_line_index.line_number
     statement_index = current_line_index.statement
     index = current_line_index.index
     other_index = -index
