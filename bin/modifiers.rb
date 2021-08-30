@@ -80,7 +80,7 @@ class AbstractModifier
     statement_index = current_line_index.statement
     index = current_line_index.index
     other_index = -index
-    LineNumberIndex.new(number, statement_index, other_index)
+    LineNumberStmtNumberModNumber.new(number, statement_index, other_index)
   end
 
   def execute_pre_stmt(_); end

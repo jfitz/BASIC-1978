@@ -393,7 +393,7 @@ class Interpreter
       modifier = statement.start_index
     end
 
-    LineNumberIndex.new(line_number, 0, modifier)
+    LineNumberStmtNumberModNumber.new(line_number, 0, modifier)
   end
 
   public
@@ -436,7 +436,7 @@ class Interpreter
       # then we replace the top entry
       # if not, we are in main or an error handler and we add the entry
       @errorgoto_stack.pop if @errorgoto_stack.size > @resume_stack.size
-      @errorgoto_stack << LineNumberIndex.new(line_number, 0, 0)
+      @errorgoto_stack << LineNumberStmtNumberModNumber.new(line_number, 0, 0)
     end
   end
 
@@ -452,7 +452,7 @@ class Interpreter
       # set next line index from parameter
       @resume_stack.pop
       @error_stack.pop
-      @next_line_index = LineNumberIndex.new(line_number, 0, 0)
+      @next_line_index = LineNumberStmtNumberModNumber.new(line_number, 0, 0)
     end
   end
 

@@ -2286,7 +2286,7 @@ class GosubStatement < AbstractStatement
 
     raise(BASICSyntaxError, 'Line number not found') if index.nil?
 
-    destination = LineNumberIndex.new(line_number, 0, index)
+    destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
     interpreter.push_return(interpreter.next_line_index)
     interpreter.next_line_index = destination
   end
@@ -2365,7 +2365,7 @@ class GotoStatement < AbstractStatement
       line_number = @destination
       index = interpreter.statement_start_index(line_number, 0)
       raise(BASICSyntaxError, 'Line number not found') if index.nil?
-      destination = LineNumberIndex.new(line_number, 0, index)
+      destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
       interpreter.next_line_index = destination
     end
   end
@@ -2793,7 +2793,7 @@ class AbstractIfStatement < AbstractStatement
 
         raise(BASICSyntaxError, 'Line number not found') if index.nil?
 
-        destination = LineNumberIndex.new(line_number, 0, index)
+        destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
         interpreter.next_line_index = destination
       end
 
@@ -2811,7 +2811,7 @@ class AbstractIfStatement < AbstractStatement
 
         raise(BASICSyntaxError, 'Line number not found') if index.nil?
 
-        destination = LineNumberIndex.new(line_number, 0, index)
+        destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
         interpreter.next_line_index = destination
       end
 
@@ -3489,7 +3489,7 @@ class OnStatement < AbstractStatement
 
     interpreter.push_return(interpreter.next_line_index) if @gosub
 
-    destination = LineNumberIndex.new(line_number, 0, index)
+    destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
     interpreter.next_line_index = destination
   end
 
