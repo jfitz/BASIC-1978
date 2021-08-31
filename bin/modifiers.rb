@@ -80,7 +80,7 @@ class AbstractModifier
     statement_index = current_line_stmt_mod.statement
     index = current_line_stmt_mod.index
     other_index = -index
-    LineNumberStmtNumberModNumber.new(number, statement_index, other_index)
+    LineStmtMod.new(number, statement_index, other_index)
   end
 
   def execute_pre_stmt(_); end
@@ -544,16 +544,24 @@ class AbstractForModifier < AbstractModifier
     step = NumericConstant.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
+    start_line_stmt_mod = interpreter.next_line_stmt_mod
+
     unless @end.nil?
       to = @end.evaluate(interpreter)[0]
-      fornext_control = ForToControl.new(@control, from, step, to)
+
+      fornext_control =
+        ForToControl.new(@control, from, step, to, start_line_stmt_mod)
     end
 
-    fornext_control = ForUntilControl.new(@control, from, step, @until) unless
-      @until.nil?
+    unless @until.nil?
+      fornext_control =
+        ForUntilControl.new(@control, from, step, @until, start_line_stmt_mod)
+    end
 
-    fornext_control = ForWhileControl.new(@control, from, step, @while) unless
-      @while.nil?
+    unless @while.nil?
+      fornext_control =
+        ForWhileControl.new(@control, from, step, @while, start_line_stmt_mod)
+    end
 
     interpreter.assign_fornext(fornext_control)
 
@@ -590,7 +598,7 @@ class AbstractForModifier < AbstractModifier
       interpreter.exit_fornext(fornext_control.forget, fornext_control.control)
     else
       # set next line from top item
-      interpreter.next_line_stmt_mod = fornext_control.loop_start_index
+      interpreter.next_line_stmt_mod = fornext_control.start_line_stmt_mod
       # change control variable value
       fornext_control.bump_control(interpreter) unless bump_early
     end
