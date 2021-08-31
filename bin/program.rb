@@ -486,7 +486,7 @@ class Program
     result
   end
 
-  def find_next_line_idx(current_line_idx)
+  def find_next_line_stmt(current_line_idx)
     # find next index with current statement
     line_number = current_line_idx.line_number
     line = @lines[line_number]
@@ -512,16 +512,16 @@ class Program
     nil
   end
 
-  def find_next_line_index(current_line_index)
+  def find_next_line_stmt_mod(current_line_stmt_mod)
     # find next index with current statement
-    line_number = current_line_index.line_number
+    line_number = current_line_stmt_mod.line_number
     line = @lines[line_number]
 
     statements = line.statements
-    statement_index = current_line_index.statement
+    statement_index = current_line_stmt_mod.statement
     statement = statements[statement_index]
 
-    index = current_line_index.index
+    index = current_line_stmt_mod.index
 
     if index < statement.last_index
       index += 1
@@ -538,7 +538,7 @@ class Program
 
     # find the next line
     line_numbers = @lines.keys.sort
-    line_number = current_line_index.line_number
+    line_number = current_line_stmt_mod.line_number
     index = line_numbers.index(line_number)
     line_number = line_numbers[index + 1]
 
@@ -554,10 +554,10 @@ class Program
     nil
   end
 
-  def find_next_line(current_line_index)
+  def find_next_line(current_line_stmt_mod)
     # find next numbered statement
     line_numbers = @lines.keys.sort
-    line_number = current_line_index.line_number
+    line_number = current_line_stmt_mod.line_number
     index = line_numbers.index(line_number)
     line_number = line_numbers[index + 1]
 
@@ -566,8 +566,8 @@ class Program
       statements = line.statements
       statement = statements[0]
       index = statement.start_index
-      next_line_index = LineNumberStmtNumberModNumber.new(line_number, 0, index)
-      return next_line_index
+      next_line_stmt_mod = LineNumberStmtNumberModNumber.new(line_number, 0, index)
+      return next_line_stmt_mod
     end
 
     # nothing left to execute
@@ -906,10 +906,10 @@ class Program
 
     if statement.autonext
       # find next statement (possibly in same line)
-      next_line_idx = find_next_line_idx(line_number_idx)
+      next_line_stmt = find_next_line_stmt(line_number_idx)
 
-      unless next_line_idx.nil?
-        next_line_number = next_line_idx.line_number
+      unless next_line_stmt.nil?
+        next_line_number = next_line_stmt.line_number
         line_number = line_number_idx.line_number
 
         statement_gotos << TransferRef.new(next_line_number, :auto) unless
@@ -956,9 +956,9 @@ class Program
 
     if statement.autonext
       # find next statement (possibly in same line)
-      next_line_idx = find_next_line_idx(line_number_idx)
+      next_line_stmt = find_next_line_stmt(line_number_idx)
 
-      goto_line_idxs << next_line_idx unless next_line_idx.nil?
+      goto_line_idxs << next_line_stmt unless next_line_stmt.nil?
 
       if statement.is_if_no_else && $options['extend_if'].value
         # find next line (possibly does not exist)
@@ -968,8 +968,8 @@ class Program
         next_line_number = line_numbers[index + 1]
 
         unless next_line_number.nil?
-          next_line_idx = LineNumberStmtNumber.new(next_line_number, 0)
-          goto_line_idxs << next_line_idx unless next_line_idx.nil?
+          next_line_stmt = LineNumberStmtNumber.new(next_line_number, 0)
+          goto_line_idxs << next_line_stmt unless next_line_stmt.nil?
         end
       end
     end
@@ -1174,22 +1174,22 @@ class Program
     false
   end
 
-  def find_closing_next(control, current_line_index)
+  def find_closing_next(control, current_line_stmt_mod)
     # build a list of line numbers
 
     # move to the next statement
-    line_number = current_line_index.line_number
+    line_number = current_line_stmt_mod.line_number
     line = @lines[line_number]
     statements = line.statements
-    statement_index = current_line_index.statement + 1
+    statement_index = current_line_stmt_mod.statement + 1
     line_numbers = @lines.keys.sort
 
     if statement_index < statements.size
       forward_line_numbers =
-        line_numbers.select { |ln| ln >= current_line_index.line_number }
+        line_numbers.select { |ln| ln >= current_line_stmt_mod.line_number }
     else
       forward_line_numbers =
-        line_numbers.select { |ln| ln > current_line_index.line_number }
+        line_numbers.select { |ln| ln > current_line_stmt_mod.line_number }
     end
 
     # search list for a NEXT with the same control variable

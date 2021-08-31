@@ -75,10 +75,10 @@ class AbstractModifier
 
   # get opposite modifier (pre- when in post; post- when in pre)
   def get_counterpart(interpreter)
-    current_line_index = interpreter.current_line_index
-    number = current_line_index.line_number
-    statement_index = current_line_index.statement
-    index = current_line_index.index
+    current_line_stmt_mod = interpreter.current_line_stmt_mod
+    number = current_line_stmt_mod.line_number
+    statement_index = current_line_stmt_mod.statement
+    index = current_line_stmt_mod.index
     other_index = -index
     LineNumberStmtNumberModNumber.new(number, statement_index, other_index)
   end
@@ -170,7 +170,7 @@ class IfModifier < AbstractModifier
     return if result.value
 
     # if false then transfer to our post modifier
-    interpreter.next_line_index = get_counterpart(interpreter)
+    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
   end
 end
 
@@ -256,7 +256,7 @@ class UnlessModifier < AbstractModifier
     return unless result.value
 
     # if true then transfer to our post modifier
-    interpreter.next_line_index = get_counterpart(interpreter)
+    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
   end
 end
 
@@ -342,7 +342,7 @@ class WhileModifier < AbstractModifier
     return if result.value
 
     # if terminated then transfer to our post modifier
-    interpreter.next_line_index = get_counterpart(interpreter)
+    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
   end
 
   def execute_post_stmt(interpreter)
@@ -363,7 +363,7 @@ class WhileModifier < AbstractModifier
     return unless result.value
 
     # if not terminated then go to start of while
-    interpreter.next_line_index = get_counterpart(interpreter)
+    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
   end
 end
 
@@ -451,7 +451,7 @@ class UntilModifier < AbstractModifier
     return unless result.value
 
     # if not terminated then transfer to our post modifier
-    interpreter.next_line_index = get_counterpart(interpreter)
+    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
   end
 
   def execute_post_stmt(interpreter)
@@ -474,7 +474,7 @@ class UntilModifier < AbstractModifier
     return if result.value
 
     # if terminated then go to start of until
-    interpreter.next_line_index = get_counterpart(interpreter)
+    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
   end
 end
 
@@ -570,7 +570,7 @@ class AbstractForModifier < AbstractModifier
     # front-terminated; go to post-exec of this modifier
     interpreter.unlock_variable(@control) if $options['lock_fornext'].value
 
-    interpreter.next_line_index = get_counterpart(interpreter)
+    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
   end
 
   def execute_post_stmt(interpreter)
@@ -590,7 +590,7 @@ class AbstractForModifier < AbstractModifier
       interpreter.exit_fornext(fornext_control.forget, fornext_control.control)
     else
       # set next line from top item
-      interpreter.next_line_index = fornext_control.loop_start_index
+      interpreter.next_line_stmt_mod = fornext_control.loop_start_index
       # change control variable value
       fornext_control.bump_control(interpreter) unless bump_early
     end

@@ -566,8 +566,8 @@ class AbstractStatement
   private
 
   def execute(interpreter)
-    current_line_index = interpreter.current_line_index
-    index = current_line_index.index
+    current_line_stmt_mod = interpreter.current_line_stmt_mod
+    index = current_line_stmt_mod.index
     if index < 0
       execute_premodifier(interpreter)
     end
@@ -590,14 +590,14 @@ class AbstractStatement
 
   public
 
-  def print_trace_info(trace_out, current_line_index)
+  def print_trace_info(trace_out, current_line_stmt_mod)
     trace_out.newline_when_needed
 
     unless @part_of_user_function.nil?
       trace_out.print_out '(' + @part_of_user_function.to_s + ') '
     end
 
-    index = current_line_index.index
+    index = current_line_stmt_mod.index
 
     text = ''
 
@@ -606,15 +606,15 @@ class AbstractStatement
     text = post_trace(index) if index > 0
 
     text = ' ' + text unless text.empty?
-    text = current_line_index.to_s + ':' + text
+    text = current_line_stmt_mod.to_s + ':' + text
 
     trace_out.print_out(text)
     trace_out.newline
   end
 
-  def execute_a_statement(interpreter, trace_out, current_line_index,
+  def execute_a_statement(interpreter, trace_out, current_line_stmt_mod,
                           function_running)
-    print_trace_info(trace_out, current_line_index)
+    print_trace_info(trace_out, current_line_stmt_mod)
 
     if part_of_user_function.nil? || function_running
       if @part_of_user_function != interpreter.current_user_function
@@ -902,15 +902,15 @@ class AbstractStatement
   end
 
   def execute_premodifier(interpreter)
-    current_line_index = interpreter.current_line_index
-    index = 0 - (current_line_index.index + 1)
+    current_line_stmt_mod = interpreter.current_line_stmt_mod
+    index = 0 - (current_line_stmt_mod.index + 1)
     modifier = @modifiers[index]
     modifier.execute_pre(interpreter)
   end
 
   def execute_postmodifier(interpreter)
-    current_line_index = interpreter.current_line_index
-    index = current_line_index.index - 1
+    current_line_stmt_mod = interpreter.current_line_stmt_mod
+    index = current_line_stmt_mod.index - 1
     modifier = @modifiers[index]
     modifier.execute_post(interpreter)
   end
@@ -1829,7 +1829,7 @@ class EndStatement < AbstractStatement
   end
 
   def okay(program, console_io, line_number_index)
-    next_line = program.find_next_line_index(line_number_index)
+    next_line = program.find_next_line_stmt_mod(line_number_index)
 
     return true if next_line.nil?
 
@@ -2136,7 +2136,7 @@ class ForStatement < AbstractStatement
     terminated = fornext_control.front_terminated?(interpreter)
 
     if terminated
-      interpreter.next_line_index = interpreter.find_closing_next(@control)
+      interpreter.next_line_stmt_mod = interpreter.find_closing_next(@control)
     end
 
     untilv = nil
@@ -2289,8 +2289,8 @@ class GosubStatement < AbstractStatement
     raise(BASICSyntaxError, 'Line number not found') if index.nil?
 
     destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
-    interpreter.push_return(interpreter.next_line_index)
-    interpreter.next_line_index = destination
+    interpreter.push_return(interpreter.next_line_stmt_mod)
+    interpreter.next_line_stmt_mod = destination
   end
 
   def renumber(renumber_map)
@@ -2369,7 +2369,7 @@ class GotoStatement < AbstractStatement
       index = interpreter.statement_start_index(line_number, 0)
       raise(BASICSyntaxError, 'Line number not found') if index.nil?
       destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
-      interpreter.next_line_index = destination
+      interpreter.next_line_stmt_mod = destination
     end
   end
 
@@ -2797,13 +2797,13 @@ class AbstractIfStatement < AbstractStatement
         raise(BASICSyntaxError, 'Line number not found') if index.nil?
 
         destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
-        interpreter.next_line_index = destination
+        interpreter.next_line_stmt_mod = destination
       end
 
       if !@statement.nil? && !@else_stmt.nil? && $options['extend_if'].value
         # go to next numbered line, not next statement
-        next_line_index = interpreter.find_next_line
-        interpreter.next_line_index = next_line_index
+        next_line_stmt_mod = interpreter.find_next_line
+        interpreter.next_line_stmt_mod = next_line_stmt_mod
       end
 
       @statement.execute_core(interpreter) unless @statement.nil?
@@ -2815,13 +2815,13 @@ class AbstractIfStatement < AbstractStatement
         raise(BASICSyntaxError, 'Line number not found') if index.nil?
 
         destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
-        interpreter.next_line_index = destination
+        interpreter.next_line_stmt_mod = destination
       end
 
       if @else_dest.nil? && @else_stmt.nil? && $options['extend_if'].value
         # go to next numbered line, not next statement
-        next_line_index = interpreter.find_next_line
-        interpreter.next_line_index = next_line_index
+        next_line_stmt_mod = interpreter.find_next_line
+        interpreter.next_line_stmt_mod = next_line_stmt_mod
       end
 
       @else_stmt.execute_core(interpreter) unless @else_stmt.nil?
@@ -3247,7 +3247,7 @@ class NextStatement < AbstractStatement
         interpreter.exit_fornext(fornext_control.forget, fornext_control.control)
       else
         # set next line from top item
-        interpreter.next_line_index = fornext_control.loop_start_index
+        interpreter.next_line_stmt_mod = fornext_control.loop_start_index
         # change control variable value for FOR-TO
         fornext_control.bump_control(interpreter) unless bump_early
 
@@ -3493,10 +3493,10 @@ class OnStatement < AbstractStatement
 
     raise(BASICSyntaxError, 'Line number not found') if index.nil?
 
-    interpreter.push_return(interpreter.next_line_index) if @gosub
+    interpreter.push_return(interpreter.next_line_stmt_mod) if @gosub
 
     destination = LineNumberStmtNumberModNumber.new(line_number, 0, index)
-    interpreter.next_line_index = destination
+    interpreter.next_line_stmt_mod = destination
   end
 
   def renumber(renumber_map)
@@ -4074,7 +4074,7 @@ class ReturnStatement < AbstractStatement
   end
 
   def execute_core(interpreter)
-    interpreter.next_line_index = interpreter.pop_return
+    interpreter.next_line_stmt_mod = interpreter.pop_return
   end
 end
 
