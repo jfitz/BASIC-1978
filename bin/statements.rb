@@ -480,13 +480,29 @@ class AbstractStatement
     errors.empty?
   end
 
-  def optimize(interpreter)
+  def optimize(interpreter, line_stmt_mod, program)
+    set_for_lines(interpreter, line_stmt_mod, program)
     define_user_functions(interpreter)
+
+    line_number = line_stmt_mod.line_number
+    stmt = line_stmt_mod.statement
+
+    @modifiers.each_with_index do |modifier, index|
+      mod = index + 1
+      mod_line_stmt_mod = LineStmtMod.new(line_number, stmt, mod)
+      modifier.optimize(interpreter, mod_line_stmt_mod, program)
+    end
   end
 
   def init_data(interpreter)
     load_data(interpreter)
   end
+
+  def number_for_stmts
+    0
+  end
+
+  def set_for_lines (_, _, _) end
 
   private
 
@@ -1112,6 +1128,10 @@ class InvalidStatement < AbstractStatement
     @text
   end
 
+  def set_for_lines(_, _, _)
+    raise(BASICSyntaxError, @errors[0])
+  end
+
   def define_user_functions(_)
     raise(BASICSyntaxError, @errors[0])
   end
@@ -1729,11 +1749,15 @@ class DefineFunctionStatement < AbstractStatement
   end
 
   def define_user_functions(interpreter)
-    name = @definition.name
-    sigils = @definition.sigils
-    interpreter.set_user_function(name, sigils, @definition)
-  rescue BASICRuntimeError => e
-    raise BASICPreexecuteError.new(e.scode, e.extra)
+    unless @definition.nil?
+      begin
+        name = @definition.name
+        sigils = @definition.sigils
+        interpreter.set_user_function(name, sigils, @definition)
+      rescue BASICRuntimeError => e
+        raise BASICPreexecuteError.new(e.scode, e.extra)
+      end
+    end
   end
 
   def execute_core(_) end
@@ -2095,6 +2119,15 @@ class ForStatement < AbstractStatement
     @while.uncache unless @while.nil?
   end
 
+  def set_for_lines(interpreter, line_stmt_mod, program)
+    @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(line_stmt_mod)
+
+    unless @control.nil?
+      @nextstmt_line_stmt_mod =
+        program.find_closing_next_line_stmt_mod(@control, line_stmt_mod)
+    end
+  end
+
   def dump
     lines = []
 
@@ -2111,27 +2144,29 @@ class ForStatement < AbstractStatement
   end
 
   def execute_core(interpreter)
+    raise BASICSyntaxError.new("uninitialized FOR") if @loopstart_line_stmt_mod.nil?
+
+    raise BASICSyntaxError.new("uninitialized FOR") if @nextstmt_line_stmt_mod.nil?
+
     from = @start.evaluate(interpreter)[0]
     step = NumericConstant.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
-
-    start_line_stmt_mod = interpreter.next_line_stmt_mod
 
     unless @end.nil?
       to = @end.evaluate(interpreter)[0]
 
       fornext_control =
-        ForToControl.new(@control, from, step, to, start_line_stmt_mod)
+        ForToControl.new(@control, from, step, to, @loopstart_line_stmt_mod)
     end
 
     unless @until.nil?
       fornext_control =
-        ForUntilControl.new(@control, from, step, @until, start_line_stmt_mod)
+        ForUntilControl.new(@control, from, step, @until, @loopstart_line_stmt_mod)
     end
 
     unless @while.nil?
       fornext_control =
-        ForWhileControl.new(@control, from, step, @while, start_line_stmt_mod)
+        ForWhileControl.new(@control, from, step, @while, @loopstart_line_stmt_mod)
     end
 
     interpreter.assign_fornext(fornext_control)
@@ -2142,7 +2177,7 @@ class ForStatement < AbstractStatement
     terminated = fornext_control.front_terminated?(interpreter)
 
     if terminated
-      interpreter.next_line_stmt_mod = interpreter.find_closing_next(@control)
+      interpreter.next_line_stmt_mod = @nextstmt_line_stmt_mod
     end
 
     untilv = nil
@@ -2151,6 +2186,10 @@ class ForStatement < AbstractStatement
     whilev = @while.evaluate(interpreter)[0] unless @while.nil?
     io = interpreter.trace_out
     print_more_trace_info(io, from, to, step, untilv, whilev, terminated)
+  end
+
+  def number_for_stmts
+    1
   end
 
   private
@@ -2512,6 +2551,14 @@ class AbstractIfStatement < AbstractStatement
     @is_if_no_else = @else_dest.nil? && @else_stmt.nil?
   end
 
+  def set_for_lines(interpreter, line_stmt_mod, program)
+    @statement.set_for_lines(interpreter, line_stmt_mod, program) unless
+      @statement.nil?
+
+    @else_stmt.set_for_lines(interpreter, line_stmt_mod, program) unless
+      @else_stmt.nil?
+  end
+
   private
 
   def parse_if(tokens_lists)
@@ -2836,6 +2883,15 @@ class AbstractIfStatement < AbstractStatement
     s = ' ' + @expression.to_s + ': ' + result.to_s
     io = interpreter.trace_out
     io.trace_output(s)
+  end
+
+  def number_for_stmts
+    number = 0
+
+    number += @statement.number_for_stmts unless @statement.nil?
+    number += @else_stmt.number_for_stmts unless @else_stmt.nil?
+    
+    number
   end
 
   private

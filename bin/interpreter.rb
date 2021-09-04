@@ -269,6 +269,7 @@ class Interpreter
   end
 
   def program_analyze
+    @program.optimize(self)
     @program.analyze
   end
 
@@ -337,7 +338,18 @@ class Interpreter
     if @program.check_for_errors(self) &&
        @program.optimize(self)
        @program.init_data(self)
-      run_statements
+      begin
+        # run each statement
+        # start with the first line number
+        @current_line_stmt_mod = find_first_statement
+        @running = true
+
+        execute_step while @running
+      rescue Interrupt
+        stop_running
+      end
+
+      close_all_files
     end
   end
 
@@ -409,22 +421,6 @@ class Interpreter
     close_all_files
 
     @next_line_stmt_mod = find_first_statement
-  end
-
-  def run_statements
-    # run each statement
-    # start with the first line number
-    @current_line_stmt_mod = find_first_statement
-
-    @running = true
-
-    begin
-      program_loop while @running
-    rescue Interrupt
-      stop_running
-    end
-
-    close_all_files
   end
 
   def seterrorgoto(line_number)
@@ -500,7 +496,7 @@ class Interpreter
     @function_running = true
 
     begin
-      program_loop while @running && @function_running
+      execute_step while @running && @function_running
     rescue Interrupt
       stop_running
     end
@@ -606,11 +602,14 @@ class Interpreter
     end
   end
 
-  def program_loop
+  def execute_step
     # pick the next line number
-    @next_line_stmt_mod = @program.find_next_line_stmt_mod(@current_line_stmt_mod)
+    @next_line_stmt_mod =
+      @program.find_next_line_stmt_mod(@current_line_stmt_mod)
+
     next_line_stmt_mod = nil
-    next_line_stmt_mod = @next_line_stmt_mod.clone unless @next_line_stmt_mod.nil?
+    next_line_stmt_mod =
+      @next_line_stmt_mod.clone unless @next_line_stmt_mod.nil?
 
     line_number = @current_line_stmt_mod.line_number
     line_statement = @current_line_stmt_mod.statement
@@ -983,10 +982,6 @@ class Interpreter
   # set a new randomizer (unless option says to ignore)
   def new_random
     @randomizer = Random.new if $options['respect_randomize'].value
-  end
-
-  def find_closing_next(control)
-    @program.find_closing_next(control, @current_line_stmt_mod)
   end
 
   # get the current value for ERL()

@@ -34,6 +34,12 @@ class AbstractModifier
     @post_comp_effort = 0
   end
 
+  def optimize(interpreter, line_stmt_mod, program)
+    set_for_lines(interpreter, line_stmt_mod, program)
+  end
+
+  def set_for_lines(_, _, _) end
+
   def reset_profile_metrics
     @profile_pre_count = 0
     @profile_post_count = 0
@@ -76,11 +82,11 @@ class AbstractModifier
   # get opposite modifier (pre- when in post; post- when in pre)
   def get_counterpart(interpreter)
     current_line_stmt_mod = interpreter.current_line_stmt_mod
-    number = current_line_stmt_mod.line_number
-    statement_index = current_line_stmt_mod.statement
-    index = current_line_stmt_mod.index
-    other_index = -index
-    LineStmtMod.new(number, statement_index, other_index)
+    line_number = current_line_stmt_mod.line_number
+    stmt = current_line_stmt_mod.statement
+    mod = current_line_stmt_mod.index
+    other_mod = -mod
+    LineStmtMod.new(line_number, stmt, other_mod)
   end
 
   def execute_pre_stmt(_); end
@@ -525,6 +531,12 @@ class AbstractForModifier < AbstractModifier
     @post_comp_effort = 1
   end
 
+  def set_for_lines(interpreter, line_stmt_mod, program)
+    pre_line_stmt_mod = line_stmt_mod.get_counterpart
+    @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(pre_line_stmt_mod)
+    @nextstmt_line_stmt_mod = line_stmt_mod
+  end
+
   def post_pretty
     " NEXT #{@control}"
   end
@@ -544,23 +556,21 @@ class AbstractForModifier < AbstractModifier
     step = NumericConstant.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    start_line_stmt_mod = interpreter.next_line_stmt_mod
-
     unless @end.nil?
       to = @end.evaluate(interpreter)[0]
 
       fornext_control =
-        ForToControl.new(@control, from, step, to, start_line_stmt_mod)
+        ForToControl.new(@control, from, step, to, @loopstart_line_stmt_mod)
     end
 
     unless @until.nil?
       fornext_control =
-        ForUntilControl.new(@control, from, step, @until, start_line_stmt_mod)
+        ForUntilControl.new(@control, from, step, @until, @loopstart_line_stmt_mod)
     end
 
     unless @while.nil?
       fornext_control =
-        ForWhileControl.new(@control, from, step, @while, start_line_stmt_mod)
+        ForWhileControl.new(@control, from, step, @while, @loopstart_line_stmt_mod)
     end
 
     interpreter.assign_fornext(fornext_control)
@@ -578,7 +588,7 @@ class AbstractForModifier < AbstractModifier
     # front-terminated; go to post-exec of this modifier
     interpreter.unlock_variable(@control) if $options['lock_fornext'].value
 
-    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
+    interpreter.next_line_stmt_mod = @nextstmt_line_stmt_mod
   end
 
   def execute_post_stmt(interpreter)
@@ -598,7 +608,7 @@ class AbstractForModifier < AbstractModifier
       interpreter.exit_fornext(fornext_control.forget, fornext_control.control)
     else
       # set next line from top item
-      interpreter.next_line_stmt_mod = fornext_control.start_line_stmt_mod
+      interpreter.next_line_stmt_mod = @loopstart_line_stmt_mod
       # change control variable value
       fornext_control.bump_control(interpreter) unless bump_early
     end
