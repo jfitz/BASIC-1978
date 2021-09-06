@@ -1920,6 +1920,7 @@ class ForStatement < AbstractStatement
   def initialize(_, keywords, tokens_lists)
     super
 
+    @autonext = false
     @may_be_if_sub = $options['if_for_sub'].value
 
     template_to = [[1, '>='], 'TO', [1, '>=']]
@@ -2143,10 +2144,30 @@ class ForStatement < AbstractStatement
     lines
   end
 
-  def execute_core(interpreter)
-    raise BASICSyntaxError.new("uninitialized FOR") if @loopstart_line_stmt_mod.nil?
+  def gotos
+    goto_refs = []
 
-    raise BASICSyntaxError.new("uninitialized FOR") if @nextstmt_line_stmt_mod.nil?
+    unless @loopstart_line_stmt_mod.nil?
+      line_number = @loopstart_line_stmt_mod.line_number
+      statement = @loopstart_line_stmt_mod.statement
+      goto_refs << TransferRefLineStmt.new(line_number, statement, :fornext)
+    end
+    
+    unless @nextstmt_line_stmt_mod.nil?
+      line_number = @nextstmt_line_stmt_mod.line_number
+      statement = @nextstmt_line_stmt_mod.statement
+      goto_refs << TransferRefLineStmt.new(line_number, statement, :fornext)
+    end
+      
+    goto_refs
+  end
+
+  def execute_core(interpreter)
+    raise BASICSyntaxError.new("uninitialized FOR") if
+      @loopstart_line_stmt_mod.nil?
+
+    raise BASICSyntaxError.new("uninitialized FOR") if
+      @nextstmt_line_stmt_mod.nil?
 
     from = @start.evaluate(interpreter)[0]
     step = NumericConstant.new(1)
@@ -2314,7 +2335,7 @@ class GosubStatement < AbstractStatement
   end
 
   def gotos
-    [TransferRef.new(@destination, :gosub)]
+    [TransferRefLineStmt.new(@destination, 0, :gosub)]
   end
 
   def okay(program, console_io, line_number_index)
@@ -2392,7 +2413,7 @@ class GotoStatement < AbstractStatement
   end
 
   def gotos
-    [TransferRef.new(@destination, :goto)]
+    [TransferRefLineStmt.new(@destination, 0, :goto)]
   end
 
   def okay(program, console_io, line_number_index)
@@ -2775,9 +2796,14 @@ class AbstractIfStatement < AbstractStatement
   def gotos
     goto_refs = []
 
-    goto_refs << TransferRef.new(@destination, :ifthen) unless @destination.nil?
+    goto_refs << TransferRefLineStmt.new(@destination, 0, :ifthen) unless
+      @destination.nil?
+
     goto_refs += @statement.gotos unless @statement.nil?
-    goto_refs << TransferRef.new(@else_dest, :ifthen) unless @else_dest.nil?
+
+    goto_refs << TransferRefLineStmt.new(@else_dest, 0, :ifthen) unless
+      @else_dest.nil?
+
     goto_refs += @else_stmt.gotos unless @else_stmt.nil?
 
     goto_refs
@@ -3384,7 +3410,8 @@ class OnErrorStatement < AbstractStatement
   def gotos
     destinations = []
 
-    destinations << TransferRef.new(@destination, :onerror)  unless @destination.nil?
+    destinations << TransferRefLineStmt.new(@destination, 0, :onerror)  unless
+      @destination.nil?
 
     destinations
   end
@@ -3511,7 +3538,7 @@ class OnStatement < AbstractStatement
   def gotos
     goto_refs = []
 
-    @destinations.each { |goto| goto_refs << TransferRef.new(goto, :goto) }
+    @destinations.each { |goto| goto_refs << TransferRefLineStmt.new(goto, 0, :goto) }
 
     goto_refs
   end

@@ -39,30 +39,30 @@ Halstead complexity:
   Dests: 50:auto
 (1 3) 50 FOR X = 1 TO 6
   Origs: 40:auto, 1620:goto
-  Dests: 51:auto
+  Dests: 51:fornext, 54:fornext
 (1 3) 51 FOR Y = 1 TO 6
-  Origs: 50:auto
-  Dests: 52:auto
+  Origs: 50:fornext
+  Dests: 52:fornext, 53:fornext
 (0 3) 52 F(X, Y) = 0
-  Origs: 51:auto
+  Origs: 51:fornext
   Dests: 53:auto
 (0 1) 53 NEXT Y
-  Origs: 52:auto
+  Origs: 51:fornext, 52:auto
   Dests: 54:auto
 (0 1) 54 NEXT X
-  Origs: 53:auto
+  Origs: 50:fornext, 53:auto
   Dests: 60:auto
 (1 3) 60 FOR I = 1 TO 3
   Origs: 54:auto
-  Dests: 70:auto
+  Dests: 70:fornext, 1000:fornext
 (0 4) 70 N = 4 - I
-  Origs: 60:auto
+  Origs: 60:fornext
   Dests: 80:auto
 (1 3) 80 FOR J = 1 TO 2
   Origs: 70:auto
-  Dests: 90:auto
+  Dests: 90:fornext, 990:fornext
 (0 4) 90 A = INT(6 * RND(1) + 1)
-  Origs: 80:auto, 120:ifthen, 250:ifthen, 260:ifthen, 480:ifthen, 490:ifthen, 500:ifthen, 650:ifthen, 660:ifthen, 890:ifthen, 900:ifthen, 910:ifthen
+  Origs: 80:fornext, 120:ifthen, 250:ifthen, 260:ifthen, 480:ifthen, 490:ifthen, 500:ifthen, 650:ifthen, 660:ifthen, 890:ifthen, 900:ifthen, 910:ifthen
   Dests: 100:auto
 (0 4) 100 B = INT(6 * RND(1) + 1)
   Origs: 90:auto
@@ -88,9 +88,9 @@ Halstead complexity:
   Dests: 170:auto
 (1 3) 170 FOR K = 1 TO N
   Origs: 160:auto
-  Dests: 180:auto
+  Dests: 180:fornext, 280:fornext
 (1 4) 180 IF M > 1 THEN 240
-  Origs: 170:auto
+  Origs: 170:fornext
   Dests: 190:auto, 240:ifthen
 (1 4) 190 IF B(K) = 6 THEN 230
   Origs: 180:auto
@@ -126,19 +126,19 @@ Halstead complexity:
   Origs: 260:auto
   Dests: 280:auto
 (0 1) 280 NEXT K
-  Origs: 220:goto, 270:auto
+  Origs: 170:fornext, 220:goto, 270:auto
   Dests: 290:auto
 (0 7) 290 F(A, B) = 9 - 2 * I - J
   Origs: 280:auto
   Dests: 300:auto
 (1 3) 300 FOR K = 1 TO N
   Origs: 290:auto
-  Dests: 310:auto
+  Dests: 310:fornext, 320:fornext
 (0 3) 310 F(A, B(K + 1)) = F(A, B)
-  Origs: 300:auto
+  Origs: 300:fornext
   Dests: 320:auto
 (0 1) 320 NEXT K
-  Origs: 310:auto
+  Origs: 300:fornext, 310:auto
   Dests: 330:auto
 (0 2) 330 GOTO 990
   Origs: 320:auto
@@ -157,9 +157,9 @@ Halstead complexity:
   Dests: 370:auto
 (1 3) 370 FOR K = 1 TO N
   Origs: 360:auto
-  Dests: 380:auto
+  Dests: 380:fornext, 530:fornext
 (1 4) 380 IF M > 1 THEN 460
-  Origs: 370:auto
+  Origs: 370:fornext
   Dests: 390:auto, 460:ifthen
 (1 7) 390 IF A(K) = 1 OR B(K) = 1 THEN 450
   Origs: 380:auto
@@ -216,7 +216,7 @@ Halstead complexity:
   Origs: 510:auto
   Dests: 530:auto
 (0 1) 530 NEXT K
-  Origs: 440:goto, 520:auto
+  Origs: 370:fornext, 440:goto, 520:auto
   Dests: 540:auto
 (0 2) 540 GOTO 950
   Origs: 530:auto
@@ -230,9 +230,9 @@ Halstead complexity:
   Dests: 570:auto
 (1 3) 570 FOR K = 1 TO N
   Origs: 560:auto
-  Dests: 580:auto
+  Dests: 580:fornext, 680:fornext
 (1 4) 580 IF M > 1 THEN 640
-  Origs: 570:auto
+  Origs: 570:fornext
   Dests: 590:auto, 640:ifthen
 (1 4) 590 IF A(K) = 6 THEN 630
   Origs: 580:auto
@@ -268,19 +268,19 @@ Halstead complexity:
   Origs: 660:auto
   Dests: 680:auto
 (0 1) 680 NEXT K
-  Origs: 620:goto, 670:auto
+  Origs: 570:fornext, 620:goto, 670:auto
   Dests: 690:auto
 (0 7) 690 F(A, B) = 9 - 2 * I - J
   Origs: 680:auto
   Dests: 700:auto
 (1 3) 700 FOR K = 1 TO N
   Origs: 690:auto
-  Dests: 710:auto
+  Dests: 710:fornext, 720:fornext
 (0 3) 710 F(A(K + 1), B) = F(A, B)
-  Origs: 700:auto
+  Origs: 700:fornext
   Dests: 720:auto
 (0 1) 720 NEXT K
-  Origs: 710:auto
+  Origs: 700:fornext, 710:auto
   Dests: 730:auto
 (0 2) 730 GOTO 990
   Origs: 720:auto
@@ -301,9 +301,9 @@ Halstead complexity:
   Dests: 780:auto
 (1 3) 780 FOR K = 1 TO N
   Origs: 770:auto
-  Dests: 790:auto
+  Dests: 790:fornext, 940:fornext
 (1 4) 790 IF M > 1 THEN 870
-  Origs: 780:auto
+  Origs: 780:fornext
   Dests: 800:auto, 870:ifthen
 (1 7) 800 IF A(K) = 6 OR B(K) = 1 THEN 860
   Origs: 790:auto
@@ -360,25 +360,25 @@ Halstead complexity:
   Origs: 920:auto
   Dests: 940:auto
 (0 1) 940 NEXT K
-  Origs: 850:goto, 930:auto
+  Origs: 780:fornext, 850:goto, 930:auto
   Dests: 950:auto
 (0 7) 950 F(A, B) = 9 - 2 * I - J
   Origs: 540:goto, 940:auto
   Dests: 960:auto
 (1 3) 960 FOR K = 1 TO N
   Origs: 950:auto
-  Dests: 970:auto
+  Dests: 970:fornext, 980:fornext
 (0 3) 970 F(A(K + 1), B(K + 1)) = F(A, B)
-  Origs: 960:auto
+  Origs: 960:fornext
   Dests: 980:auto
 (0 1) 980 NEXT K
-  Origs: 970:auto
+  Origs: 960:fornext, 970:auto
   Dests: 990:auto
 (0 1) 990 NEXT J
-  Origs: 330:goto, 730:goto, 980:auto
+  Origs: 80:fornext, 330:goto, 730:goto, 980:auto
   Dests: 1000:auto
 (0 1) 1000 NEXT I
-  Origs: 990:auto
+  Origs: 60:fornext, 990:auto
   Dests: 1010:auto
 (0 2) 1010 PRINT
   Origs: 1000:auto
@@ -394,36 +394,36 @@ Halstead complexity:
   Dests: 1050:auto
 (1 3) 1050 FOR I = 1 TO 6
   Origs: 1040:auto
-  Dests: 1051:auto
+  Dests: 1051:fornext, 1054:fornext
 (1 3) 1051 FOR J = 1 TO 6
-  Origs: 1050:auto
-  Dests: 1052:auto
+  Origs: 1050:fornext
+  Dests: 1052:fornext, 1053:fornext
 (0 3) 1052 H(I, J) = F(J, I)
-  Origs: 1051:auto
+  Origs: 1051:fornext
   Dests: 1053:auto
 (0 1) 1053 NEXT J
-  Origs: 1052:auto
+  Origs: 1051:fornext, 1052:auto
   Dests: 1054:auto
 (0 1) 1054 NEXT I
-  Origs: 1053:auto
+  Origs: 1050:fornext, 1053:auto
   Dests: 1060:auto
 (1 3) 1060 FOR I = 1 TO 6
   Origs: 1054:auto
-  Dests: 1061:auto
+  Dests: 1061:fornext, 1065:fornext
 (1 3) 1061 FOR J = 1 TO 6
-  Origs: 1060:auto
-  Dests: 1062:auto
+  Origs: 1060:fornext
+  Dests: 1062:fornext, 1063:fornext
 (0 2) 1062 PRINT H(I, J);
-  Origs: 1061:auto
+  Origs: 1061:fornext
   Dests: 1063:auto
 (0 1) 1063 NEXT J
-  Origs: 1062:auto
+  Origs: 1061:fornext, 1062:auto
   Dests: 1064:auto
 (0 2) 1064 PRINT
   Origs: 1063:auto
   Dests: 1065:auto
 (0 1) 1065 NEXT I
-  Origs: 1064:auto
+  Origs: 1060:fornext, 1064:auto
   Dests: 1070:auto
 (0 2) 1070 PRINT
   Origs: 1065:auto
@@ -439,27 +439,27 @@ Halstead complexity:
   Dests: 1110:auto
 (1 3) 1110 FOR I = 1 TO 6
   Origs: 1100:auto
-  Dests: 1111:auto
+  Dests: 1111:fornext, 1114:fornext
 (1 3) 1111 FOR J = 1 TO 6
-  Origs: 1110:auto
-  Dests: 1112:auto
+  Origs: 1110:fornext
+  Dests: 1112:fornext, 1113:fornext
 (0 3) 1112 H(I, J) = 0
-  Origs: 1111:auto
+  Origs: 1111:fornext
   Dests: 1113:auto
 (0 1) 1113 NEXT J
-  Origs: 1112:auto
+  Origs: 1111:fornext, 1112:auto
   Dests: 1114:auto
 (0 1) 1114 NEXT I
-  Origs: 1113:auto
+  Origs: 1110:fornext, 1113:auto
   Dests: 1120:auto
 (1 3) 1120 FOR I = 1 TO 3
   Origs: 1114:auto
-  Dests: 1121:auto
+  Dests: 1121:fornext, 1122:fornext
 (0 3) 1121 L(I) = 0
-  Origs: 1120:auto
+  Origs: 1120:fornext
   Dests: 1122:auto
 (0 1) 1122 NEXT I
-  Origs: 1121:auto
+  Origs: 1120:fornext, 1121:auto
   Dests: 1130:auto
 (0 3) 1130 C(1) = 2
 (0 3)      C(2) = 2

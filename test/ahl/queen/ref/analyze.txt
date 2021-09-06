@@ -35,12 +35,12 @@ Halstead complexity:
   Dests: 11:auto
 (1 3) 11 FOR I = 1 TO 64
   Origs: 10:auto
-  Dests: 12:auto
+  Dests: 12:fornext, 13:fornext
 (1 2) 12 READ S(I)
-  Origs: 11:auto
+  Origs: 11:fornext
   Dests: 13:auto
 (0 1) 13 NEXT I
-  Origs: 12:auto
+  Origs: 11:fornext, 12:auto
   Dests: 14:auto
 (0 2) 14 DATA 81, 71, 61, 51, 41, 31, 21, 11
   Origs: 13:auto
@@ -221,9 +221,9 @@ Halstead complexity:
   Dests: 2070:auto
 (1 5) 2070 FOR K = 7 TO 1 STEP -1
   Origs: 2065:auto
-  Dests: 2080:auto
+  Dests: 2080:fornext, 2150:fornext
 (0 3) 2080 U = U1
-  Origs: 2070:auto
+  Origs: 2070:fornext
   Dests: 2090:auto
 (0 4) 2090 T = T1 + K
   Origs: 2080:auto
@@ -253,7 +253,7 @@ Halstead complexity:
   Origs: 2140:auto
   Dests: 2150:auto, 2160:ifthen
 (0 1) 2150 NEXT K
-  Origs: 2145:auto
+  Origs: 2070:fornext, 2145:auto
   Dests: 2155:auto
 (0 2) 2155 GOTO 2180
   Origs: 2150:auto
@@ -492,18 +492,18 @@ Halstead complexity:
   Dests: 5170:auto
 (1 3) 5170 FOR A = 0 TO 7
   Origs: 5160:auto
-  Dests: 5180:auto
+  Dests: 5180:fornext, 5240:fornext
 (1 3) 5180 FOR B = 1 TO 8
-  Origs: 5170:auto
-  Dests: 5185:auto
+  Origs: 5170:fornext
+  Dests: 5185:fornext, 5200:fornext
 (0 5) 5185 I = 8 * A + B
-  Origs: 5180:auto
+  Origs: 5180:fornext
   Dests: 5190:auto
 (0 2) 5190 PRINT S(I);
   Origs: 5185:auto
   Dests: 5200:auto
 (0 1) 5200 NEXT B
-  Origs: 5190:auto
+  Origs: 5180:fornext, 5190:auto
   Dests: 5210:auto
 (0 2) 5210 PRINT
   Origs: 5200:auto
@@ -515,7 +515,7 @@ Halstead complexity:
   Origs: 5220:auto
   Dests: 5240:auto
 (0 1) 5240 NEXT A
-  Origs: 5230:auto
+  Origs: 5170:fornext, 5230:auto
   Dests: 5250:auto
 (0 2) 5250 PRINT
   Origs: 5240:auto

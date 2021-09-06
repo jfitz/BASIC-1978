@@ -47,12 +47,12 @@ Halstead complexity:
   Dests: 80:auto
 (1 3) 80 FOR I = 0 TO 3
   Origs: 70:auto
-  Dests: 90:auto
+  Dests: 90:fornext, 100:fornext
 (1 2) 90 READ A$(I)
-  Origs: 80:auto
+  Origs: 80:fornext
   Dests: 100:auto
 (0 1) 100 NEXT I
-  Origs: 90:auto
+  Origs: 80:fornext, 90:auto
   Dests: 110:auto
 (0 4) 110 N = VAL(A$(0))
   Origs: 100:auto
@@ -148,10 +148,10 @@ Halstead complexity:
   Dests: 410:auto
 (1 4) 410 FOR Z = 3 TO LEN(Q$)
   Origs: 400:auto, 440:ifthen
-  Dests: 415:auto
+  Dests: 415:fornext, 415:fornext
 (1 7) 415 IF MID$(Q$, Z, 1) <> "\" THEN PRINT MID$(Q$, Z, 1);
 (0 1)     NEXT Z
-  Origs: 410:auto
+  Origs: 410:fornext, 410:fornext
   Dests: 420:auto
 (1 2) 420 INPUT C$
   Origs: 415:auto
@@ -167,24 +167,24 @@ Halstead complexity:
   Dests: 455:auto
 (1 5) 455 FOR X = 3 TO LEN(Q$) - 1
   Origs: 450:auto
-  Dests: 460:auto
+  Dests: 460:fornext, 470:fornext
 (1 5) 460 IF MID$(Q$, X, 2) = T$ THEN 480
-  Origs: 455:auto
+  Origs: 455:fornext
   Dests: 470:auto, 480:ifthen
 (0 1) 470 NEXT X
-  Origs: 460:auto
+  Origs: 455:fornext, 460:auto
   Dests: 475:auto
 (0 1) 475 STOP
   Origs: 470:auto
   Dests: 
 (1 5) 480 FOR Y = X + 1 TO LEN(Q$)
   Origs: 460:ifthen
-  Dests: 490:auto
+  Dests: 490:fornext, 500:fornext
 (1 5) 490 IF MID$(Q$, Y, 1) = "\" THEN 510
-  Origs: 480:auto
+  Origs: 480:fornext
   Dests: 500:auto, 510:ifthen
 (0 1) 500 NEXT Y
-  Origs: 490:auto
+  Origs: 480:fornext, 490:auto
   Dests: 505:auto
 (0 1) 505 STOP
   Origs: 500:auto
@@ -207,19 +207,19 @@ Halstead complexity:
   Dests: 610:auto
 (1 3) 610 FOR I = 1 TO 200
   Origs: 605:auto
-  Dests: 620:auto
+  Dests: 620:fornext, 650:fornext
 (1 5) 620 IF LEFT$(A$(I), 2) <> "\A" THEN 650
-  Origs: 610:auto
+  Origs: 610:fornext
   Dests: 624:auto, 650:ifthen
 (0 3) 624 PRINT TAB(15 * X);
   Origs: 620:auto
   Dests: 630:auto
 (1 4) 630 FOR Z = 3 TO LEN(A$(I))
   Origs: 624:auto
-  Dests: 640:auto
+  Dests: 640:fornext, 640:fornext
 (1 7) 640 IF MID$(A$(I), Z, 1) <> "\" THEN PRINT MID$(A$(I), Z, 1);
 (0 1)     NEXT Z
-  Origs: 630:auto
+  Origs: 630:fornext, 630:fornext
   Dests: 645:auto
 (0 4) 645 X = X + 1
 (1 6)     IF X = 4 THEN X = 0
@@ -227,7 +227,7 @@ Halstead complexity:
   Origs: 640:auto
   Dests: 650:auto
 (0 1) 650 NEXT I
-  Origs: 620:ifthen, 645:auto
+  Origs: 610:fornext, 620:ifthen, 645:auto
   Dests: 660:auto
 (0 2) 660 PRINT
   Origs: 650:auto

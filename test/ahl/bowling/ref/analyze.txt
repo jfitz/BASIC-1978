@@ -92,16 +92,16 @@ Halstead complexity:
 (0 3)      A(I, J) = 0
 (0 1)      NEXT J
 (0 1)      NEXT I
-  Origs: 1800:auto
-  Dests: 1980:auto
+  Origs: 1800:auto, 1890:fornext, 1890:fornext, 1890:fornext, 1890:fornext
+  Dests: 1890:fornext, 1890:fornext, 1890:fornext, 1890:fornext, 1980:auto
 (0 3) 1980 F = 1
   Origs: 1890:auto
   Dests: 2070:auto
 (1 3) 2070 FOR P = 1 TO R
   Origs: 1980:auto, 7290:ifthen
-  Dests: 2160:auto
+  Dests: 2160:fornext, 7110:fornext
 (0 3) 2160 M = 0
-  Origs: 2070:auto
+  Origs: 2070:fornext
   Dests: 2250:auto
 (0 3) 2250 B = 1
   Origs: 2160:auto
@@ -113,8 +113,8 @@ Halstead complexity:
 (1 3) 2430 FOR I = 1 TO 15
 (0 3)      C(I) = 0
 (0 1)      NEXT I
-  Origs: 2340:auto
-  Dests: 2520:auto
+  Origs: 2340:auto, 2430:fornext, 2430:fornext
+  Dests: 2430:fornext, 2430:fornext, 2520:auto
 (0 1) 2520 REM ARK BALL GENERATOR USING MOD '15' SYSTEM
   Origs: 2430:auto, 6930:ifthen
   Dests: 2610:auto
@@ -130,24 +130,24 @@ Halstead complexity:
   Dests: 2880:auto
 (1 3) 2880 FOR I = 1 TO 20
   Origs: 2790:auto
-  Dests: 2970:auto
+  Dests: 2970:fornext, 3420:fornext
 (0 4) 2970 X = INT(RND(1) * 100)
-  Origs: 2880:auto
+  Origs: 2880:fornext
   Dests: 3060:auto
 (1 3) 3060 FOR J = 1 TO 10
   Origs: 2970:auto
-  Dests: 3150:auto
+  Dests: 3150:fornext, 3240:fornext
 (1 6) 3150 IF X < 15 * J THEN 3330
-  Origs: 3060:auto
+  Origs: 3060:fornext
   Dests: 3240:auto, 3330:ifthen
 (0 1) 3240 NEXT J
-  Origs: 3150:auto
+  Origs: 3060:fornext, 3150:auto
   Dests: 3330:auto
 (0 3) 3330 C(15 * J - X) = 1
   Origs: 3150:ifthen, 3240:auto
   Dests: 3420:auto
 (0 1) 3420 NEXT I
-  Origs: 3330:auto
+  Origs: 2880:fornext, 3330:auto
   Dests: 3510:auto
 (0 1) 3510 REM ARK PIN DIAGRAM
   Origs: 3420:auto
@@ -157,15 +157,15 @@ Halstead complexity:
   Dests: 3690:auto
 (1 3) 3690 FOR I = 0 TO 3
   Origs: 3600:auto
-  Dests: 3780:auto
+  Dests: 3780:fornext, 4500:fornext
 (0 2) 3780 PRINT
-  Origs: 3690:auto
+  Origs: 3690:fornext
   Dests: 3870:auto
 (1 4) 3870 FOR J = 1 TO 4 - I
   Origs: 3780:auto
-  Dests: 3960:auto
+  Dests: 3960:fornext, 4410:fornext
 (0 4) 3960 K = K + 1
-  Origs: 3870:auto
+  Origs: 3870:fornext
   Dests: 4050:auto
 (1 4) 4050 IF C(K) = 1 THEN 4320
   Origs: 3960:auto
@@ -180,10 +180,10 @@ Halstead complexity:
   Origs: 4050:ifthen
   Dests: 4410:auto
 (0 1) 4410 NEXT J
-  Origs: 4230:goto, 4320:auto
+  Origs: 3870:fornext, 4230:goto, 4320:auto
   Dests: 4500:auto
 (0 1) 4500 NEXT I
-  Origs: 4410:auto
+  Origs: 3690:fornext, 4410:auto
   Dests: 4590:auto
 (0 2) 4590 PRINT ""
   Origs: 4500:auto
@@ -193,12 +193,12 @@ Halstead complexity:
   Dests: 4770:auto
 (1 3) 4770 FOR I = 1 TO 10
   Origs: 4680:auto
-  Dests: 4860:auto
+  Dests: 4860:fornext, 4950:fornext
 (0 4) 4860 D = D + C(I)
-  Origs: 4770:auto
+  Origs: 4770:fornext
   Dests: 4950:auto
 (0 1) 4950 NEXT I
-  Origs: 4860:auto
+  Origs: 4770:fornext, 4860:auto
   Dests: 5040:auto
 (1 5) 5040 IF D - M <> 0 THEN 5220
   Origs: 4950:auto
@@ -270,7 +270,7 @@ Halstead complexity:
   Origs: 6480:ifthen, 6930:auto
   Dests: 7110:auto
 (0 1) 7110 NEXT P
-  Origs: 7020:auto
+  Origs: 2070:fornext, 7020:auto
   Dests: 7200:auto
 (0 4) 7200 F = F + 1
   Origs: 7110:auto
@@ -286,42 +286,42 @@ Halstead complexity:
   Dests: 7380:auto
 (1 3) 7380 FOR I = 1 TO 10
   Origs: 7300:auto
-  Dests: 7470:auto
+  Dests: 7470:fornext, 7560:fornext
 (0 2) 7470 PRINT I;
-  Origs: 7380:auto
+  Origs: 7380:fornext
   Dests: 7560:auto
 (0 1) 7560 NEXT I
-  Origs: 7470:auto
+  Origs: 7380:fornext, 7470:auto
   Dests: 7650:auto
 (0 2) 7650 PRINT
   Origs: 7560:auto
   Dests: 7740:auto
 (1 3) 7740 FOR P = 1 TO R
   Origs: 7650:auto
-  Dests: 7830:auto
+  Dests: 7830:fornext, 8370:fornext
 (1 3) 7830 FOR I = 1 TO 3
-  Origs: 7740:auto
-  Dests: 7920:auto
+  Origs: 7740:fornext
+  Dests: 7920:fornext, 8190:fornext
 (1 3) 7920 FOR J = 1 TO 10
-  Origs: 7830:auto
-  Dests: 8010:auto
+  Origs: 7830:fornext
+  Dests: 8010:fornext, 8100:fornext
 (0 2) 8010 PRINT A(J * P, I);
-  Origs: 7920:auto
+  Origs: 7920:fornext
   Dests: 8100:auto
 (0 1) 8100 NEXT J
-  Origs: 8010:auto
+  Origs: 7920:fornext, 8010:auto
   Dests: 8105:auto
 (0 2) 8105 PRINT
   Origs: 8100:auto
   Dests: 8190:auto
 (0 1) 8190 NEXT I
-  Origs: 8105:auto
+  Origs: 7830:fornext, 8105:auto
   Dests: 8280:auto
 (0 2) 8280 PRINT
   Origs: 8190:auto
   Dests: 8370:auto
 (0 1) 8370 NEXT P
-  Origs: 8280:auto
+  Origs: 7740:fornext, 8280:auto
   Dests: 8380:auto
 (0 2) 8380 OPTION SEMICOLON_ZONE_WIDTH 0
   Origs: 8370:auto

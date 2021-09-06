@@ -170,8 +170,8 @@ Halstead complexity:
 (0 3)     C(I, 1) = 0
 (0 3)     C(I, 2) = 0
 (0 1)     NEXT I
-  Origs: 490:auto
-  Dests: 540:auto
+  Origs: 490:auto, 530:fornext, 530:fornext
+  Dests: 530:fornext, 530:fornext, 540:auto
 (0 4) 540 C(3, 1) = -1
 (0 4)     C(2, 1) = -1
 (0 4)     C(4, 1) = -1
@@ -192,8 +192,8 @@ Halstead complexity:
 (1 3) 670 FOR I = 1 TO 8
 (0 3)     D(I) = 0
 (0 1)     NEXT I
-  Origs: 600:auto
-  Dests: 710:auto
+  Origs: 600:auto, 670:fornext, 670:fornext
+  Dests: 670:fornext, 670:fornext, 710:auto
 (0 3) 710 A1$ = "NAVSRSLRSPHATORSHEDAMCOMXXX"
   Origs: 670:auto
   Dests: 810:auto
@@ -208,8 +208,8 @@ Halstead complexity:
 (0 3)     K3 = 0
 (0 3)     Z(I, J) = 0
 (0 4)     R1 = RND(1)
-  Origs: 815:auto
-  Dests: 850:auto
+  Origs: 815:auto, 820:fornext, 820:fornext
+  Dests: 820:fornext, 820:fornext, 850:auto, 1040:fornext, 1040:fornext
 (1 6) 850 IF R1 > .98 THEN K3 = 3
 (0 4)     K9 = K9 + 3
 (0 2)     GOTO 980
@@ -233,7 +233,7 @@ Halstead complexity:
 (0 1)      NEXT J
 (0 1)      NEXT I
 (1 7)      IF K9 > T9 THEN T9 = K9 + 1
-  Origs: 980:auto
+  Origs: 820:fornext, 820:fornext, 980:auto
   Dests: 1100:auto
 (1 4) 1100 IF B9 <> 0 THEN 1200
   Origs: 1040:auto
@@ -327,14 +327,14 @@ Halstead complexity:
 (0 3)      K(I, 1) = 0
 (0 3)      K(I, 2) = 0
 (0 1)      NEXT I
-  Origs: 1540:ifthen, 1560:ifthen, 1580:auto
-  Dests: 1600:auto
+  Origs: 1540:ifthen, 1560:ifthen, 1580:auto, 1590:fornext, 1590:fornext
+  Dests: 1590:fornext, 1590:fornext, 1600:auto
 (1 3) 1600 FOR I = 1 TO 3
 (0 3)      K(I, 3) = 0
 (0 1)      NEXT I
 (0 11)      Q$ = Z$ + Z$ + Z$ + Z$ + Z$ + Z$ + Z$ + LEFT$(Z$, 17)
-  Origs: 1390:ifthen, 1590:auto
-  Dests: 1660:auto
+  Origs: 1390:ifthen, 1590:auto, 1600:fornext, 1600:fornext
+  Dests: 1600:fornext, 1600:fornext, 1660:auto
 (0 1) 1660 REM POSITION ENTERPRISE IN QUADRANT, THEN PLACE "K3" KLINGONS, &
   Origs: 1600:auto
   Dests: 1670:auto
@@ -353,14 +353,14 @@ Halstead complexity:
 (0 3)      A$ = "+K+"
 (0 3)      Z1 = R1
 (0 3)      Z2 = R2
-  Origs: 1680:auto
-  Dests: 1780:auto, 8590:gosub
+  Origs: 1680:auto, 1720:fornext
+  Dests: 1720:fornext, 1780:auto, 1780:fornext, 8590:gosub
 (0 2) 1780 GOSUB 8670
 (0 3)      K(I, 1) = R1
 (0 3)      K(I, 2) = R2
 (0 7)      K(I, 3) = S9 * (0.5 + RND(1))
 (0 1)      NEXT I
-  Origs: 1720:auto
+  Origs: 1720:auto, 1720:fornext
   Dests: 1820:auto, 8670:gosub
 (1 4) 1820 IF B3 < 1 THEN 1910
   Origs: 1680:ifthen, 1780:auto
@@ -381,8 +381,8 @@ Halstead complexity:
 (0 3)      Z2 = R2
 (0 2)      GOSUB 8670
 (0 1)      NEXT I
-  Origs: 1820:ifthen, 1880:auto
-  Dests: 1980:auto, 8590:gosub, 8670:gosub
+  Origs: 1820:ifthen, 1880:auto, 1910:fornext, 1910:fornext
+  Dests: 1910:fornext, 1910:fornext, 1980:auto, 8590:gosub, 8670:gosub
 (0 2) 1980 GOSUB 6430
   Origs: 1910:auto, 2140:goto, 3480:goto
   Dests: 1990:auto, 6430:gosub
@@ -410,14 +410,14 @@ Halstead complexity:
   Dests: 2080:auto
 (1 3) 2080 FOR I = 1 TO 9
 (1 6)      IF LEFT$(A$, 3) <> MID$(A1$, 3 * I - 2, 3) THEN 2160
-  Origs: 2060:auto
-  Dests: 2140:auto, 2160:ifthen
+  Origs: 2060:auto, 2080:fornext
+  Dests: 2080:fornext, 2140:auto, 2160:fornext, 2160:ifthen
 (9 12) 2140 ON I GOTO 2300, 1980, 4000, 4260, 4700, 5530, 5690, 7290, 6270
   Origs: 2080:auto
   Dests: 1980:goto, 2160:auto, 2300:goto, 4000:goto, 4260:goto, 4700:goto, 5530:goto, 5690:goto, 6270:goto, 7290:goto
 (0 1) 2160 NEXT I
 (0 2)      PRINT "ENTER ONE OF THE FOLLOWING:"
-  Origs: 2080:ifthen, 2140:auto
+  Origs: 2080:fornext, 2080:ifthen, 2140:auto
   Dests: 2180:auto
 (0 2) 2180 PRINT "  NAV  (TO SET COURSE)"
   Origs: 2160:auto
@@ -515,8 +515,8 @@ Halstead complexity:
   Dests: 2590:auto
 (1 3) 2590 FOR I = 1 TO K3
 (1 4)      IF K(I, 3) = 0 THEN 2700
-  Origs: 2490:ifthen, 2580:auto
-  Dests: 2610:auto, 2700:ifthen
+  Origs: 2490:ifthen, 2580:auto, 2590:fornext
+  Dests: 2590:fornext, 2610:auto, 2700:fornext, 2700:ifthen
 (0 3) 2610 A$ = "   "
 (0 3)      Z1 = K(I, 1)
 (0 3)      Z2 = K(I, 2)
@@ -535,12 +535,12 @@ Halstead complexity:
 (0 3)      D1 = 0
 (0 3)      D6 = W1
 (1 6)      IF W1 >= 1 THEN D6 = 1
-  Origs: 2590:ifthen, 2660:auto
+  Origs: 2590:fornext, 2590:ifthen, 2660:auto
   Dests: 2770:auto, 6000:gosub
 (1 3) 2770 FOR I = 1 TO 8
 (1 4)      IF D(I) >= 0 THEN 2880
-  Origs: 2700:auto
-  Dests: 2790:auto, 2880:ifthen
+  Origs: 2700:auto, 2770:fornext
+  Dests: 2770:fornext, 2790:auto, 2880:fornext, 2880:ifthen
 (0 4) 2790 D(I) = D(I) + D6
 (1 12)      IF D(I) > -.1 AND D(I) < 0 THEN D(I) = -.1
 (0 2)      GOTO 2880
@@ -561,7 +561,7 @@ Halstead complexity:
   Dests: 2880:auto, 8790:gosub
 (0 1) 2880 NEXT I
 (1 5)      IF RND(1) > .2 THEN 3070
-  Origs: 2770:ifthen, 2790:goto, 2800:ifthen, 2840:auto
+  Origs: 2770:fornext, 2770:ifthen, 2790:goto, 2800:ifthen, 2840:auto
   Dests: 2910:auto, 3070:ifthen
 (0 5) 2910 R1 = FNR(1)
 (1 5)      IF RND(1) >= .6 THEN 3000
@@ -609,8 +609,8 @@ Halstead complexity:
 (0 4)      S1 = S1 + X1
 (0 4)      S2 = S2 + X2
 (1 13)      IF S1 < 1 OR S1 >= 9 OR S2 < 1 OR S2 >= 9 THEN 3500
-  Origs: 3140:auto
-  Dests: 3240:auto, 3500:ifthen
+  Origs: 3140:auto, 3170:fornext
+  Dests: 3170:fornext, 3240:auto, 3360:fornext, 3500:ifthen
 (0 10) 3240 S8 = INT(S1) * 24 + INT(S2) * 3 - 26
 (1 5)      IF MID$(Q$, S8, 2) = "  " THEN 3360
   Origs: 3170:auto
@@ -627,7 +627,7 @@ Halstead complexity:
 (0 1) 3360 NEXT I
 (0 4)      S1 = INT(S1)
 (0 4)      S2 = INT(S2)
-  Origs: 3240:ifthen
+  Origs: 3170:fornext, 3240:ifthen
   Dests: 3370:auto
 (0 3) 3370 A$ = "<*>"
 (0 4)      Z1 = INT(S1)
@@ -756,19 +756,19 @@ Halstead complexity:
 (0 4)      N(2) = -2
 (0 4)      N(3) = -3
 (1 5)      FOR J = Q2 - 1 TO Q2 + 1
-  Origs: 4040:auto
-  Dests: 4120:auto
+  Origs: 4040:auto, 4060:fornext
+  Dests: 4060:fornext, 4120:fornext, 4180:fornext, 4230:fornext
 (1 15) 4120 IF I > 0 AND I < 9 AND J > 0 AND J < 9 THEN N(J - Q2 + 2) = G(I, J)
 (0 3)      Z(I, J) = G(I, J)
-  Origs: 4060:auto
+  Origs: 4060:fornext
   Dests: 4180:auto
 (0 1) 4180 NEXT J
 (1 3)      FOR L = 1 TO 3
 (0 2)      PRINT ": ";
 (1 5)      IF N(L) < 0 THEN PRINT "*** ";
 (0 2)      GOTO 4230
-  Origs: 4120:auto
-  Dests: 4230:goto
+  Origs: 4060:fornext, 4120:auto, 4180:fornext
+  Dests: 4180:fornext, 4230:fornext, 4230:goto
 (0 4) 4210 PRINT RIGHT$(STR$(N(L) + 1000), 3); " ";
   Origs: 
   Dests: 4230:auto
@@ -777,7 +777,7 @@ Halstead complexity:
 (0 2)      PRINT O1$
 (0 1)      NEXT I
 (0 3)      GOTO 1990
-  Origs: 4180:goto, 4210:auto
+  Origs: 4060:fornext, 4180:fornext, 4180:goto, 4210:auto
   Dests: 1990:goto
 (0 1) 4250 REM PHASER CONTROL CODE BEGINS HERE
   Origs: 
@@ -819,8 +819,8 @@ Halstead complexity:
 (0 4) 4450 H1 = INT(X / K3)
 (1 3)      FOR I = 1 TO 3
 (1 4)      IF K(I, 3) <= 0 THEN 4670
-  Origs: 4410:auto
-  Dests: 4480:auto, 4670:ifthen
+  Origs: 4410:auto, 4450:fornext
+  Dests: 4450:fornext, 4480:auto, 4670:fornext, 4670:ifthen
 (0 4) 4480 H = INT((H1 / FND(0)) * (RND(1) + 2))
 (1 6)      IF H > .15 * K(I, 3) THEN 4530
   Origs: 4450:auto
@@ -859,7 +859,7 @@ Halstead complexity:
 (0 1) 4670 NEXT I
 (0 2)      GOSUB 6000
 (0 3)      GOTO 1990
-  Origs: 4450:ifthen, 4500:goto, 4560:goto, 4650:auto
+  Origs: 4450:fornext, 4450:ifthen, 4500:goto, 4560:goto, 4650:auto
   Dests: 1990:goto, 6000:gosub
 (0 1) 4690 REM PHOTON TORPEDO CODE BEGINS HERE
   Origs: 
@@ -932,11 +932,11 @@ Halstead complexity:
   Dests: 5150:auto, 6370:ifthen
 (1 3) 5150 FOR I = 1 TO 3
 (1 7)      IF X3 = K(I, 1) AND Y3 = K(I, 2) THEN 5190
-  Origs: 5110:auto
-  Dests: 5180:auto, 5190:ifthen
+  Origs: 5110:auto, 5150:fornext
+  Dests: 5150:fornext, 5180:auto, 5180:fornext, 5190:ifthen
 (0 1) 5180 NEXT I
 (0 3)      I = 3
-  Origs: 5150:auto
+  Origs: 5150:auto, 5150:fornext
   Dests: 5190:auto
 (0 3) 5190 K(I, 3) = 0
 (0 2)      GOTO 5430
@@ -1049,11 +1049,11 @@ Halstead complexity:
 (0 3) 5720 D3 = 0
 (1 3)      FOR I = 1 TO 8
 (1 7)      IF D(I) < 0 THEN D3 = D3 + .1
-  Origs: 5700:auto, 5950:ifthen
-  Dests: 5760:auto
+  Origs: 5700:auto, 5720:fornext, 5950:ifthen
+  Dests: 5720:fornext, 5760:auto, 5760:fornext
 (0 1) 5760 NEXT I
 (1 5)      IF D3 = 0 THEN 1990
-  Origs: 5720:auto
+  Origs: 5720:auto, 5720:fornext
   Dests: 1990:ifthen, 5780:auto
 (0 2) 5780 PRINT
 (0 4)      D3 = D3 + D4
@@ -1074,25 +1074,25 @@ Halstead complexity:
   Dests: 1990:ifthen, 5870:auto
 (1 3) 5870 FOR I = 1 TO 8
 (1 6)      IF D(I) < 0 THEN D(I) = 0
-  Origs: 5860:auto
-  Dests: 5890:auto
+  Origs: 5860:auto, 5870:fornext
+  Dests: 5870:fornext, 5890:auto, 5890:fornext
 (0 1) 5890 NEXT I
 (0 5)      T = T + D3 + .1
-  Origs: 5870:auto
+  Origs: 5870:auto, 5870:fornext
   Dests: 5910:auto
 (0 2) 5910 PRINT
 (0 2)      PRINT "DEVICE             STATE OF REPAIR"
 (1 3)      FOR R1 = 1 TO 8
   Origs: 5690:ifthen, 5890:auto
-  Dests: 5920:auto
+  Dests: 5920:fornext, 5950:fornext
 (0 2) 5920 GOSUB 8790
 (0 7)      PRINT G2$; LEFT$(Z$, 25 - LEN(G2$)); INT(D(R1) * 100) * .01
-  Origs: 5910:auto
+  Origs: 5910:fornext
   Dests: 5950:auto, 8790:gosub
 (0 1) 5950 NEXT R1
 (0 2)      PRINT
 (1 5)      IF D0 <> 0 THEN 5720
-  Origs: 5920:auto
+  Origs: 5910:fornext, 5920:auto
   Dests: 5720:ifthen, 5980:auto
 (0 3) 5980 GOTO 1990
   Origs: 5950:auto
@@ -1109,8 +1109,8 @@ Halstead complexity:
   Dests: 
 (1 3) 6040 FOR I = 1 TO 3
 (1 4)      IF K(I, 3) <= 0 THEN 6200
-  Origs: 
-  Dests: 6060:auto, 6200:ifthen
+  Origs: 6040:fornext
+  Dests: 6040:fornext, 6060:auto, 6200:fornext, 6200:ifthen
 (0 4) 6060 H = INT((K(I, 3) / FND(1)) * (2 + RND(1)))
 (0 4)      S = S - H
 (0 7)      K(I, 3) = K(I, 3) / (3 + RND(0))
@@ -1139,7 +1139,7 @@ Halstead complexity:
   Dests: 6200:auto
 (0 1) 6200 NEXT I
 (0 1)      RETURN
-  Origs: 6040:ifthen, 6100:ifthen, 6120:ifthen, 6170:auto
+  Origs: 6040:fornext, 6040:ifthen, 6100:ifthen, 6120:ifthen, 6170:auto
   Dests: 
 (0 1) 6210 REM END OF GAME
   Origs: 
@@ -1196,10 +1196,10 @@ Halstead complexity:
   Dests: 6430:auto
 (1 5) 6430 FOR I = S1 - 1 TO S1 + 1
 (1 5)      FOR J = S2 - 1 TO S2 + 1
-  Origs: 1980:gosub, 6420:auto
-  Dests: 6450:auto
+  Origs: 1980:gosub, 6420:auto, 6430:fornext
+  Dests: 6430:fornext, 6450:fornext, 6540:fornext, 6540:fornext
 (1 17) 6450 IF INT(I + .5) < 1 OR INT(I + .5) > 8 OR INT(J + .5) < 1 OR INT(J + .5) > 8 THEN 6540
-  Origs: 6430:auto
+  Origs: 6430:fornext
   Dests: 6490:auto, 6540:ifthen
 (0 3) 6490 A$ = ">!<"
 (0 3)      Z1 = I
@@ -1212,7 +1212,7 @@ Halstead complexity:
 (0 1)      NEXT I
 (0 3)      D0 = 0
 (0 2)      GOTO 6650
-  Origs: 6450:ifthen, 6490:auto
+  Origs: 6430:fornext, 6430:fornext, 6450:ifthen, 6490:auto
   Dests: 6650:goto
 (0 3) 6580 D0 = 1
 (0 3)      C$ = "DOCKED"
@@ -1246,12 +1246,12 @@ Halstead complexity:
 (0 2)      PRINT O1$
 (1 3)      FOR I = 1 TO 8
   Origs: 6720:ifthen
-  Dests: 6820:auto
+  Dests: 6820:fornext, 7260:fornext
 (1 10) 6820 FOR J = (I - 1) * 24 + 1 TO (I - 1) * 24 + 22 STEP 3
 (0 4)      PRINT " "; MID$(Q$, J, 3);
 (0 1)      NEXT J
-  Origs: 6770:auto
-  Dests: 6830:auto
+  Origs: 6770:fornext, 6820:fornext, 6820:fornext
+  Dests: 6820:fornext, 6820:fornext, 6830:auto
 (8 10) 6830 ON I GOTO 6850, 6900, 6960, 7020, 7070, 7120, 7180, 7240
   Origs: 6820:auto
   Dests: 6850:auto, 6850:goto, 6900:goto, 6960:goto, 7020:goto, 7070:goto, 7120:goto, 7180:goto, 7240:goto
@@ -1289,7 +1289,7 @@ Halstead complexity:
 (0 1) 7260 NEXT I
 (0 2)      PRINT O1$
 (0 1)      RETURN
-  Origs: 6850:goto, 6900:goto, 6960:goto, 7020:goto, 7070:goto, 7120:goto, 7180:goto, 7240:auto
+  Origs: 6770:fornext, 6850:goto, 6900:goto, 6960:goto, 7020:goto, 7070:goto, 7120:goto, 7180:goto, 7240:auto
   Dests: 
 (0 1) 7280 REM LIBRARY COMPUTER CODE
   Origs: 
@@ -1368,20 +1368,20 @@ Halstead complexity:
 (1 3)      FOR I = 1 TO 8
 (0 2)      PRINT I;
 (1 4)      IF H8 = 0 THEN 7740
-  Origs: 7560:auto
-  Dests: 7630:auto, 7740:ifthen
+  Origs: 7560:auto, 7570:fornext
+  Dests: 7570:fornext, 7630:auto, 7740:ifthen, 7850:fornext
 (1 3) 7630 FOR J = 1 TO 8
 (0 2)      PRINT "   ";
 (1 5)      IF Z(I, J) = 0 THEN PRINT "***";
 (0 2)      GOTO 7720
-  Origs: 7570:auto
-  Dests: 7720:goto
+  Origs: 7570:auto, 7630:fornext
+  Dests: 7630:fornext, 7720:fornext, 7720:goto
 (0 3) 7700 PRINT RIGHT$(STR$(Z(I, J) + 1000), 3);
   Origs: 
   Dests: 7720:auto
 (0 1) 7720 NEXT J
 (0 2)      GOTO 7850
-  Origs: 7630:goto, 7700:auto
+  Origs: 7630:fornext, 7630:goto, 7700:auto
   Dests: 7850:goto
 (0 3) 7740 Z4 = I
 (0 3)      Z5 = 1
@@ -1401,7 +1401,7 @@ Halstead complexity:
 (0 1)      NEXT I
 (0 2)      PRINT
 (0 3)      GOTO 1990
-  Origs: 7720:goto, 7800:auto
+  Origs: 7570:fornext, 7720:goto, 7800:auto
   Dests: 1990:goto
 (0 1) 7890 REM STATUS REPORT
   Origs: 
@@ -1451,8 +1451,8 @@ Halstead complexity:
 (0 3) 8100 H8 = 0
 (1 3)      FOR I = 1 TO 3
 (1 4)      IF K(I, 3) <= 0 THEN 8480
-  Origs: 8090:auto
-  Dests: 8110:auto, 8480:ifthen
+  Origs: 8090:auto, 8100:fornext
+  Dests: 8100:fornext, 8110:auto, 8480:fornext, 8480:ifthen
 (0 3) 8110 W1 = K(I, 1)
 (0 3)      X = K(I, 2)
   Origs: 8100:auto
@@ -1531,7 +1531,7 @@ Halstead complexity:
   Dests: 1990:ifthen, 8480:auto
 (0 1) 8480 NEXT I
 (0 3)      GOTO 1990
-  Origs: 8100:ifthen, 8460:auto
+  Origs: 8100:fornext, 8100:ifthen, 8460:auto
   Dests: 1990:goto
 (1 5) 8500 IF B3 <> 0 THEN PRINT "FROM ENTERPRISE TO STARBASE:"
 (0 3)      W1 = B4

@@ -59,21 +59,21 @@ Halstead complexity:
 (1 3)     FOR I = 1 TO 20
 (0 3)     S(I) = 0
 (0 1)     NEXT I
-  Origs: 90:auto
-  Dests: 110:auto
+  Origs: 90:auto, 100:fornext, 100:fornext
+  Dests: 100:fornext, 100:fornext, 110:auto
 (1 2) 110 INPUT "HOW MANY PLAYERS"; N
 (0 2)     PRINT
   Origs: 100:auto
   Dests: 120:auto
 (1 3) 120 FOR I = 1 TO N
   Origs: 110:auto
-  Dests: 130:auto
+  Dests: 130:fornext, 140:fornext
 (0 3) 130 PRINT "NAME OF PLAYER #"; I;
 (1 2)     INPUT A$(I)
-  Origs: 120:auto
+  Origs: 120:fornext
   Dests: 140:auto
 (0 1) 140 NEXT I
-  Origs: 130:auto
+  Origs: 120:fornext, 130:auto
   Dests: 150:auto
 (0 4) 150 R = R + 1
 (0 2)     PRINT
@@ -83,11 +83,11 @@ Halstead complexity:
   Dests: 160:auto
 (1 3) 160 FOR I = 1 TO N
   Origs: 150:auto
-  Dests: 170:auto
+  Dests: 170:fornext, 290:fornext
 (0 2) 170 PRINT
 (0 3)     PRINT A$(I) "'S THROW";
 (1 2)     INPUT T
-  Origs: 160:auto, 180:goto
+  Origs: 160:fornext, 180:goto
   Dests: 180:auto
 (1 8) 180 IF T < 0 OR T > 3 THEN PRINT "INPUT 1, 2, OR 3!"
 (0 3)     GOTO 170
@@ -146,17 +146,17 @@ Halstead complexity:
 (0 4) 290 S(I) = S(I) + B
 (0 3)     PRINT "TOTAL SCORE ="; S(I)
 (0 1)     NEXT I
-  Origs: 240:goto, 250:goto, 260:goto, 270:goto, 280:auto
+  Origs: 160:fornext, 240:goto, 250:goto, 260:goto, 270:goto, 280:auto
   Dests: 300:auto
 (1 3) 300 FOR I = 1 TO N
   Origs: 290:auto
-  Dests: 310:auto
+  Dests: 310:fornext, 320:fornext
 (1 7) 310 IF S(I) >= 200 THEN M = M + 1
 (0 3)     W(M) = I
-  Origs: 300:auto
+  Origs: 300:fornext
   Dests: 320:auto
 (0 1) 320 NEXT I
-  Origs: 310:auto
+  Origs: 300:fornext, 310:auto
   Dests: 330:auto
 (1 5) 330 IF M = 0 THEN 150
   Origs: 320:auto
@@ -169,8 +169,8 @@ Halstead complexity:
 (1 3) 350 FOR I = 1 TO M
 (0 5)     PRINT A$(W(I)); " SCORED"; S(W(I)); "POINTS."
 (0 1)     NEXT I
-  Origs: 340:auto
-  Dests: 360:auto
+  Origs: 340:auto, 350:fornext, 350:fornext
+  Dests: 350:fornext, 350:fornext, 360:auto
 (0 2) 360 PRINT
 (0 2)     PRINT "THANKS FOR THE GAME."
 (0 1)     END

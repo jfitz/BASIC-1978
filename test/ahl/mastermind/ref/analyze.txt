@@ -94,24 +94,24 @@ Halstead complexity:
   Dests: 210:auto
 (1 3) 210 FOR X = 1 TO C9
   Origs: 200:auto
-  Dests: 220:auto
+  Dests: 220:fornext, 240:fornext
 (1 2) 220 READ X$
-  Origs: 210:auto
+  Origs: 210:fornext
   Dests: 230:auto
 (0 6) 230 PRINT X$; TAB(13); MID$(L$, X, 1)
   Origs: 220:auto
   Dests: 240:auto
 (0 1) 240 NEXT X
-  Origs: 230:auto
+  Origs: 210:fornext, 230:auto
   Dests: 250:auto
 (0 2) 250 PRINT
   Origs: 240:auto
   Dests: 260:auto
 (1 3) 260 FOR R = 1 TO R9
   Origs: 250:auto
-  Dests: 270:auto
+  Dests: 270:fornext, 1150:fornext
 (0 2) 270 PRINT
-  Origs: 260:auto
+  Origs: 260:fornext
   Dests: 280:auto
 (0 4) 280 PRINT "ROUND NUMBER"; R; "----"
   Origs: 270:auto
@@ -134,19 +134,19 @@ Halstead complexity:
   Dests: 340:auto, 3000:gosub
 (1 3) 340 FOR X = 1 TO A
   Origs: 330:auto
-  Dests: 350:auto
+  Dests: 350:fornext, 360:fornext
 (0 2) 350 GOSUB 3500
-  Origs: 340:auto
+  Origs: 340:fornext
   Dests: 360:auto, 3500:gosub
 (0 1) 360 NEXT X
-  Origs: 350:auto
+  Origs: 340:fornext, 350:auto
   Dests: 370:auto
 (1 3) 370 FOR M = 1 TO 10
   Origs: 360:auto
-  Dests: 380:auto
+  Dests: 380:fornext, 610:fornext
 (0 4) 380 PRINT "MOVE # "; M; " GUESS ";
 (1 2)     INPUT X$
-  Origs: 370:auto, 410:goto, 470:goto, 2080:goto
+  Origs: 370:fornext, 410:goto, 470:goto, 2080:goto
   Dests: 390:auto
 (1 4) 390 IF X$ = "BOARD" THEN 2000
   Origs: 380:auto
@@ -163,15 +163,15 @@ Halstead complexity:
   Dests: 430:auto
 (1 3) 430 FOR X = 1 TO P9
   Origs: 420:auto
-  Dests: 440:auto
+  Dests: 440:fornext, 490:fornext
 (1 3) 440 FOR Y = 1 TO C9
-  Origs: 430:auto
-  Dests: 450:auto
+  Origs: 430:fornext
+  Dests: 450:fornext, 460:fornext
 (1 6) 450 IF MID$(X$, X, 1) = MID$(L$, Y, 1) THEN 480
-  Origs: 440:auto
+  Origs: 440:fornext
   Dests: 460:auto, 480:ifthen
 (0 1) 460 NEXT Y
-  Origs: 450:auto
+  Origs: 440:fornext, 450:auto
   Dests: 470:auto
 (0 5) 470 PRINT "'"; MID$(X$, X, 1); "' IS UNRECOGNIZED."
 (0 3)     GOTO 380
@@ -181,7 +181,7 @@ Halstead complexity:
   Origs: 450:ifthen
   Dests: 490:auto
 (0 1) 490 NEXT X
-  Origs: 480:auto
+  Origs: 430:fornext, 480:auto
   Dests: 500:auto
 (0 1) 500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
   Origs: 490:auto
@@ -217,7 +217,7 @@ Halstead complexity:
   Origs: 590:auto
   Dests: 610:auto
 (0 1) 610 NEXT M
-  Origs: 600:auto
+  Origs: 370:fornext, 600:auto
   Dests: 620:auto
 (0 2) 620 PRINT "YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!"
 (0 2)     GOTO 640
@@ -231,12 +231,12 @@ Halstead complexity:
   Dests: 624:auto
 (1 3) 624 FOR X = 1 TO P9
   Origs: 623:auto
-  Dests: 625:auto
+  Dests: 625:fornext, 626:fornext
 (0 2) 625 PRINT A$(X);
-  Origs: 624:auto
+  Origs: 624:fornext
   Dests: 626:auto
 (0 1) 626 NEXT X
-  Origs: 625:auto
+  Origs: 624:fornext, 625:auto
   Dests: 627:auto
 (0 2) 627 PRINT
   Origs: 626:auto
@@ -261,12 +261,12 @@ Halstead complexity:
   Dests: 690:auto
 (1 3) 690 FOR X = 1 TO P
   Origs: 680:auto
-  Dests: 700:auto
+  Dests: 700:fornext, 710:fornext
 (0 3) 700 I(X) = 1
-  Origs: 690:auto
+  Origs: 690:fornext
   Dests: 710:auto
 (0 1) 710 NEXT X
-  Origs: 700:auto
+  Origs: 690:fornext, 700:auto
   Dests: 720:auto
 (0 2) 720 PRINT "NOW I GUESS.  THINK OF A COMBINATION."
   Origs: 710:auto
@@ -276,9 +276,9 @@ Halstead complexity:
   Dests: 740:auto
 (1 3) 740 FOR M = 1 TO 10
   Origs: 730:auto
-  Dests: 750:auto
+  Dests: 750:fornext, 1080:fornext
 (0 2) 750 GOSUB 3000
-  Origs: 740:auto
+  Origs: 740:fornext
   Dests: 760:auto, 3000:gosub
 (0 1) 760 REM     FIND A GUESS
   Origs: 750:auto
@@ -291,21 +291,21 @@ Halstead complexity:
   Dests: 790:auto, 890:ifthen
 (1 3) 790 FOR X = G TO P
   Origs: 780:auto
-  Dests: 800:auto
+  Dests: 800:fornext, 810:fornext
 (1 4) 800 IF I(X) = 1 THEN 880
-  Origs: 790:auto
+  Origs: 790:fornext
   Dests: 810:auto, 880:ifthen
 (0 1) 810 NEXT X
-  Origs: 800:auto
+  Origs: 790:fornext, 800:auto
   Dests: 820:auto
 (1 3) 820 FOR X = 1 TO G
   Origs: 810:auto
-  Dests: 830:auto
+  Dests: 830:fornext, 840:fornext
 (1 4) 830 IF I(X) = 1 THEN 880
-  Origs: 820:auto
+  Origs: 820:fornext
   Dests: 840:auto, 880:ifthen
 (0 1) 840 NEXT X
-  Origs: 830:auto
+  Origs: 820:fornext, 830:auto
   Dests: 850:auto
 (0 2) 850 PRINT "YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
   Origs: 840:auto
@@ -324,12 +324,12 @@ Halstead complexity:
   Dests: 900:auto
 (1 3) 900 FOR X = 1 TO G
   Origs: 890:auto
-  Dests: 910:auto
+  Dests: 910:fornext, 920:fornext
 (0 2) 910 GOSUB 3500
-  Origs: 900:auto
+  Origs: 900:fornext
   Dests: 920:auto, 3500:gosub
 (0 1) 920 NEXT X
-  Origs: 910:auto
+  Origs: 900:fornext, 910:auto
   Dests: 930:auto
 (0 2) 930 GOSUB 6000
   Origs: 920:auto
@@ -339,12 +339,12 @@ Halstead complexity:
   Dests: 950:auto
 (1 3) 950 FOR X = 1 TO P9
   Origs: 940:auto
-  Dests: 960:auto
+  Dests: 960:fornext, 970:fornext
 (0 2) 960 PRINT H$(X);
-  Origs: 950:auto
+  Origs: 950:fornext
   Dests: 970:auto
 (0 1) 970 NEXT X
-  Origs: 960:auto
+  Origs: 950:fornext, 960:auto
   Dests: 980:auto
 (2 3) 980 INPUT "  BLACKS, WHITES "; B1, W1
   Origs: 970:auto
@@ -357,9 +357,9 @@ Halstead complexity:
   Dests: 1010:auto, 3000:gosub
 (1 3) 1010 FOR X = 1 TO P
   Origs: 1000:auto
-  Dests: 1020:auto
+  Dests: 1020:fornext, 1070:fornext
 (0 2) 1020 GOSUB 3500
-  Origs: 1010:auto
+  Origs: 1010:fornext
   Dests: 1030:auto, 3500:gosub
 (1 4) 1030 IF I(X) = 0 THEN 1070
   Origs: 1020:auto
@@ -377,10 +377,10 @@ Halstead complexity:
   Origs: 1050:auto
   Dests: 1070:auto
 (0 1) 1070 NEXT X
-  Origs: 1030:ifthen, 1060:auto
+  Origs: 1010:fornext, 1030:ifthen, 1060:auto
   Dests: 1080:auto
 (0 1) 1080 NEXT M
-  Origs: 1070:auto
+  Origs: 740:fornext, 1070:auto
   Dests: 1090:auto
 (0 2) 1090 PRINT "I USED UP ALL MY MOVES!"
   Origs: 1080:auto
@@ -401,7 +401,7 @@ Halstead complexity:
   Origs: 1130:auto
   Dests: 1150:auto, 5000:gosub
 (0 1) 1150 NEXT R
-  Origs: 1140:auto
+  Origs: 260:fornext, 1140:auto
   Dests: 1160:auto
 (0 2) 1160 PRINT "GAME OVER"
   Origs: 1150:auto
@@ -435,12 +435,12 @@ Halstead complexity:
   Dests: 2050:auto
 (1 4) 2050 FOR Z = 1 TO M - 1
   Origs: 2040:auto
-  Dests: 2060:auto
+  Dests: 2060:fornext, 2070:fornext
 (0 11) 2060 PRINT Z; TAB(9); S$(Z); TAB(25); S(Z, 1); TAB(35); S(Z, 2)
-  Origs: 2050:auto
+  Origs: 2050:fornext
   Dests: 2070:auto
 (0 1) 2070 NEXT Z
-  Origs: 2060:auto
+  Origs: 2050:fornext, 2060:auto
   Dests: 2075:auto
 (0 2) 2075 PRINT
   Origs: 2070:auto
@@ -465,12 +465,12 @@ Halstead complexity:
   Dests: 2540:auto, 4000:gosub
 (1 3) 2540 FOR X = 1 TO P9
   Origs: 2535:auto
-  Dests: 2550:auto
+  Dests: 2550:fornext, 2560:fornext
 (0 2) 2550 PRINT A$(X);
-  Origs: 2540:auto
+  Origs: 2540:fornext
   Dests: 2560:auto
 (0 1) 2560 NEXT X
-  Origs: 2550:auto
+  Origs: 2540:fornext, 2550:auto
   Dests: 2565:auto
 (0 2) 2565 PRINT
   Origs: 2560:auto
@@ -492,12 +492,12 @@ Halstead complexity:
   Dests: 3030:auto
 (1 3) 3030 FOR S = 1 TO P9
   Origs: 3020:auto
-  Dests: 3040:auto
+  Dests: 3040:fornext, 3050:fornext
 (0 3) 3040 Q(S) = 0
-  Origs: 3030:auto
+  Origs: 3030:fornext
   Dests: 3050:auto
 (0 1) 3050 NEXT S
-  Origs: 3040:auto
+  Origs: 3030:fornext, 3040:auto
   Dests: 3060:auto
 (0 1) 3060 RETURN
   Origs: 3050:auto
@@ -519,12 +519,12 @@ Halstead complexity:
   Dests: 3526:auto
 (1 3) 3526 FOR S = 1 TO P9
   Origs: 3524:auto
-  Dests: 3527:auto
+  Dests: 3527:fornext, 3528:fornext
 (0 3) 3527 Q(S) = 1
-  Origs: 3526:auto
+  Origs: 3526:fornext
   Dests: 3528:auto
 (0 1) 3528 NEXT S
-  Origs: 3527:auto
+  Origs: 3526:fornext, 3527:auto
   Dests: 3529:auto
 (0 1) 3529 RETURN
   Origs: 3528:auto
@@ -558,12 +558,12 @@ Halstead complexity:
   Dests: 4030:auto
 (1 3) 4030 FOR S = 1 TO P9
   Origs: 4020:auto
-  Dests: 4040:auto
+  Dests: 4040:fornext, 4050:fornext
 (0 4) 4040 A$(S) = MID$(L$, Q(S), 1)
-  Origs: 4030:auto
+  Origs: 4030:fornext
   Dests: 4050:auto
 (0 1) 4050 NEXT S
-  Origs: 4040:auto
+  Origs: 4030:fornext, 4040:auto
   Dests: 4060:auto
 (0 1) 4060 RETURN
   Origs: 4050:auto
@@ -587,9 +587,9 @@ Halstead complexity:
   Dests: 4550:auto
 (1 3) 4550 FOR S = 1 TO P9
   Origs: 4540:auto
-  Dests: 4560:auto
+  Dests: 4560:fornext, 4660:fornext
 (1 4) 4560 IF G$(S) <> A$(S) THEN 4620
-  Origs: 4550:auto
+  Origs: 4550:fornext
   Dests: 4570:auto, 4620:ifthen
 (0 4) 4570 B = B + 1
   Origs: 4560:auto
@@ -608,9 +608,9 @@ Halstead complexity:
   Dests: 4660:goto
 (1 3) 4620 FOR T = 1 TO P9
   Origs: 4560:ifthen
-  Dests: 4630:auto
+  Dests: 4630:fornext, 4650:fornext
 (1 4) 4630 IF G$(S) <> A$(T) THEN 4650
-  Origs: 4620:auto
+  Origs: 4620:fornext
   Dests: 4640:auto, 4650:ifthen
 (1 4) 4640 IF G$(T) = A$(T) THEN 4650
   Origs: 4630:auto
@@ -623,10 +623,10 @@ Halstead complexity:
   Origs: 4640:auto
   Dests: 4660:goto
 (0 1) 4650 NEXT T
-  Origs: 4630:ifthen, 4640:ifthen
+  Origs: 4620:fornext, 4630:ifthen, 4640:ifthen
   Dests: 4660:auto
 (0 1) 4660 NEXT S
-  Origs: 4610:goto, 4645:goto, 4650:auto
+  Origs: 4550:fornext, 4610:goto, 4645:goto, 4650:auto
   Dests: 4670:auto
 (0 1) 4670 RETURN
   Origs: 4660:auto
@@ -666,12 +666,12 @@ Halstead complexity:
   Dests: 5530:auto
 (1 3) 5530 FOR S = 1 TO P9
   Origs: 5520:auto
-  Dests: 5540:auto
+  Dests: 5540:fornext, 5550:fornext
 (0 4) 5540 G$(S) = MID$(L$, Q(S), 1)
-  Origs: 5530:auto
+  Origs: 5530:fornext
   Dests: 5550:auto
 (0 1) 5550 NEXT S
-  Origs: 5540:auto
+  Origs: 5530:fornext, 5540:auto
   Dests: 5560:auto
 (0 1) 5560 RETURN
   Origs: 5550:auto
@@ -687,12 +687,12 @@ Halstead complexity:
   Dests: 6030:auto
 (1 3) 6030 FOR S = 1 TO P9
   Origs: 6020:auto
-  Dests: 6040:auto
+  Dests: 6040:fornext, 6050:fornext
 (0 4) 6040 H$(S) = MID$(L$, Q(S), 1)
-  Origs: 6030:auto
+  Origs: 6030:fornext
   Dests: 6050:auto
 (0 1) 6050 NEXT S
-  Origs: 6040:auto
+  Origs: 6030:fornext, 6040:auto
   Dests: 6060:auto
 (0 1) 6060 RETURN
   Origs: 6050:auto
@@ -708,12 +708,12 @@ Halstead complexity:
   Dests: 6530:auto
 (1 3) 6530 FOR S = 1 TO P9
   Origs: 6520:auto
-  Dests: 6540:auto
+  Dests: 6540:fornext, 6550:fornext
 (0 3) 6540 G$(S) = H$(S)
-  Origs: 6530:auto
+  Origs: 6530:fornext
   Dests: 6550:auto
 (0 1) 6550 NEXT S
-  Origs: 6540:auto
+  Origs: 6530:fornext, 6540:auto
   Dests: 6560:auto
 (0 1) 6560 RETURN
   Origs: 6550:auto

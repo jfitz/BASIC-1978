@@ -114,10 +114,10 @@ Halstead complexity:
   Dests: 120:goto
 (1 4) 118 FOR J = 1 TO 7 STEP 3
 (1 3)     FOR K = 1 TO 3
-  Origs: 111:goto
-  Dests: 120:auto
+  Origs: 111:goto, 118:fornext
+  Dests: 118:fornext, 120:fornext, 460:fornext, 460:fornext
 (1 4) 120 IF S(J) <> G THEN 130
-  Origs: 116:goto, 118:auto
+  Origs: 116:goto, 118:fornext
   Dests: 122:auto, 130:ifthen
 (1 4) 122 IF S(J + 2) <> G THEN 135
   Origs: 120:auto
@@ -213,14 +213,14 @@ Halstead complexity:
   Dests: 177:auto, 182:ifthen
 (1 3) 177 FOR I = 2 TO 9
 (1 4)     IF S(I) <> 0 THEN 179
-  Origs: 176:auto, 182:ifthen
-  Dests: 178:auto, 179:ifthen
+  Origs: 176:auto, 177:fornext, 182:ifthen
+  Dests: 177:fornext, 178:auto, 179:fornext, 179:ifthen
 (0 4) 178 S(I) = -1
 (0 2)     GOTO 195
   Origs: 177:auto
   Dests: 195:goto
 (0 1) 179 NEXT I
-  Origs: 177:ifthen
+  Origs: 177:fornext, 177:ifthen
   Dests: 181:auto
 (0 4) 181 S(1) = -1
 (0 2)     GOTO 195
@@ -257,7 +257,7 @@ Halstead complexity:
   Origs: 450:auto
   Dests: 460:auto, 465:ifthen
 (0 1) 460 NEXT K, J
-  Origs: 455:auto
+  Origs: 118:fornext, 118:fornext, 455:auto
   Dests: 465:auto
 (1 5) 465 IF S(5) = G THEN 171
   Origs: 450:ifthen, 455:ifthen, 460:auto
@@ -303,8 +303,8 @@ Halstead complexity:
 (1 3)      FOR I = 1 TO 9
 (0 2)      PRINT " ";
 (1 6)      IF S(I) <> -1 THEN 1014
-  Origs: 202:gosub, 520:gosub
-  Dests: 1012:auto, 1014:ifthen
+  Origs: 202:gosub, 520:gosub, 1000:fornext
+  Dests: 1000:fornext, 1012:auto, 1014:ifthen, 1080:fornext
 (0 3) 1012 PRINT Q$ " ";
 (0 2)      GOTO 1020
   Origs: 1000:auto
@@ -339,13 +339,13 @@ Halstead complexity:
 (0 2)      PRINT
 (0 2)      PRINT
 (0 2)      PRINT
-  Origs: 1040:goto, 1050:ifthen, 1060:auto
+  Origs: 1000:fornext, 1040:goto, 1050:ifthen, 1060:auto
   Dests: 1095:auto
 (1 4) 1095 FOR I = 1 TO 7 STEP 3
   Origs: 1080:auto
-  Dests: 1100:auto
+  Dests: 1100:fornext, 1115:fornext
 (1 4) 1100 IF S(I) <> S(I + 1) THEN 1115
-  Origs: 1095:auto
+  Origs: 1095:fornext
   Dests: 1105:auto, 1115:ifthen
 (1 4) 1105 IF S(I) <> S(I + 2) THEN 1115
   Origs: 1100:auto
@@ -359,8 +359,8 @@ Halstead complexity:
 (0 1) 1115 NEXT I
 (1 3)      FOR I = 1 TO 3
 (1 4)      IF S(I) <> S(I + 3) THEN 1150
-  Origs: 1100:ifthen, 1105:ifthen, 1112:auto
-  Dests: 1130:auto, 1150:ifthen
+  Origs: 1095:fornext, 1100:ifthen, 1105:ifthen, 1112:auto, 1115:fornext
+  Dests: 1115:fornext, 1130:auto, 1150:fornext, 1150:ifthen
 (1 4) 1130 IF S(I) <> S(I + 6) THEN 1150
   Origs: 1115:auto
   Dests: 1135:auto, 1150:ifthen
@@ -373,11 +373,11 @@ Halstead complexity:
 (0 1) 1150 NEXT I
 (1 3)      FOR I = 1 TO 9
 (1 4)      IF S(I) = 0 THEN 1155
-  Origs: 1115:ifthen, 1130:ifthen, 1137:auto
-  Dests: 1152:auto, 1155:ifthen
+  Origs: 1115:fornext, 1115:ifthen, 1130:ifthen, 1137:auto, 1150:fornext
+  Dests: 1150:fornext, 1152:auto, 1152:fornext, 1155:ifthen
 (0 1) 1152 NEXT I
 (0 2)      GOTO 1400
-  Origs: 1150:auto
+  Origs: 1150:auto, 1150:fornext
   Dests: 1400:goto
 (1 4) 1155 IF S(5) <> G THEN 1170
   Origs: 1150:ifthen

@@ -87,22 +87,22 @@ Halstead complexity:
 (0 3)     M(I, J) = 1
 (0 1)     NEXT J
 (0 1)     NEXT I
-  Origs: 380:auto, 1070:ifthen
-  Dests: 410:auto
+  Origs: 380:auto, 400:fornext, 400:fornext, 400:fornext, 400:fornext, 1070:ifthen
+  Dests: 400:fornext, 400:fornext, 400:fornext, 400:fornext, 410:auto
 (1 3) 410 FOR I = 0 TO 2
 (1 3)     FOR J = 0 TO 2
 (0 3)     K(I, J) = 9
 (0 1)     NEXT J
 (0 1)     NEXT I
-  Origs: 400:auto
-  Dests: 420:auto
+  Origs: 400:auto, 410:fornext, 410:fornext, 410:fornext, 410:fornext
+  Dests: 410:fornext, 410:fornext, 410:fornext, 410:fornext, 420:auto
 (1 3) 420 FOR I = 0 TO 8
 (1 3)     FOR J = 0 TO 2
 (0 3)     L(I, J) = 3
 (0 1)     NEXT J
 (0 1)     NEXT I
-  Origs: 410:auto
-  Dests: 450:auto
+  Origs: 410:auto, 420:fornext, 420:fornext, 420:fornext, 420:fornext
+  Dests: 420:fornext, 420:fornext, 420:fornext, 420:fornext, 450:auto
 (0 3) 450 L(0, 0) = 2
 (0 3)     L(4, 1) = 2
 (0 3)     L(8, 2) = 2
@@ -118,9 +118,9 @@ Halstead complexity:
   Dests: 520:auto
 (1 3) 520 FOR T = 1 TO 3
   Origs: 510:auto
-  Dests: 530:auto
+  Dests: 530:fornext, 910:fornext
 (0 2) 530 PRINT
-  Origs: 520:auto, 600:goto
+  Origs: 520:fornext, 600:goto
   Dests: 540:auto
 (0 2) 540 PRINT "TEN NUMBERS, PLEASE";
   Origs: 530:auto
@@ -130,9 +130,9 @@ Halstead complexity:
   Dests: 560:auto
 (1 3) 560 FOR I = 1 TO 10
   Origs: 550:auto
-  Dests: 570:auto
+  Dests: 570:fornext, 620:fornext
 (0 4) 570 W = N(I) - 1
-  Origs: 560:auto
+  Origs: 560:fornext
   Dests: 580:auto
 (1 5) 580 IF W = SGN(W) THEN 620
   Origs: 570:auto
@@ -145,7 +145,7 @@ Halstead complexity:
   Origs: 590:auto
   Dests: 530:goto
 (0 1) 620 NEXT I
-  Origs: 580:ifthen
+  Origs: 560:fornext, 580:ifthen
   Dests: 630:auto
 (0 2) 630 PRINT
 (0 5)     PRINT "MY GUESS", "YOUR NO.", "RESULT", "NO. RIGHT"
@@ -154,16 +154,16 @@ Halstead complexity:
   Dests: 660:auto
 (1 3) 660 FOR U = 1 TO 10
   Origs: 630:auto
-  Dests: 670:auto
+  Dests: 670:fornext, 900:fornext
 (0 3) 670 N = N(U)
 (0 3)     S = 0
-  Origs: 660:auto
+  Origs: 660:fornext
   Dests: 690:auto
 (1 3) 690 FOR J = 0 TO 2
   Origs: 670:auto
-  Dests: 700:auto
+  Dests: 700:fornext, 760:fornext
 (0 10) 700 S1 = A * K(Z2, J) + B * L(Z1, J) + C * M(Z, J)
-  Origs: 690:auto
+  Origs: 690:fornext
   Dests: 710:auto
 (1 4) 710 IF S > S1 THEN 760
   Origs: 700:auto
@@ -179,7 +179,7 @@ Halstead complexity:
   Origs: 720:ifthen, 730:auto
   Dests: 760:auto
 (0 1) 760 NEXT J
-  Origs: 710:ifthen, 730:ifthen, 740:auto
+  Origs: 690:fornext, 710:ifthen, 730:ifthen, 740:auto
   Dests: 770:auto
 (0 5) 770 PRINT "  "; G, "   "; N(U),
   Origs: 760:auto
@@ -221,10 +221,10 @@ Halstead complexity:
   Origs: 880:auto
   Dests: 900:auto
 (0 1) 900 NEXT U
-  Origs: 890:auto
+  Origs: 660:fornext, 890:auto
   Dests: 910:auto
 (0 1) 910 NEXT T
-  Origs: 900:auto
+  Origs: 520:fornext, 900:auto
   Dests: 920:auto
 (0 2) 920 PRINT
   Origs: 910:auto
@@ -251,8 +251,8 @@ Halstead complexity:
 (1 3)     FOR Q = 1 TO 10
 (0 3)     PRINT CHR$(7);
 (0 1)     NEXT Q
-  Origs: 980:auto
-  Dests: 1000:auto
+  Origs: 980:auto, 990:fornext, 990:fornext
+  Dests: 990:fornext, 990:fornext, 1000:auto
 (0 2) 1000 GOTO 1030
   Origs: 990:auto
   Dests: 1030:goto

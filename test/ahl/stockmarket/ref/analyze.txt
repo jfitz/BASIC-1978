@@ -200,15 +200,15 @@ Halstead complexity:
   Dests: 290:auto
 (1 3) 290 FOR I = 1 TO 5
   Origs: 285:auto
-  Dests: 300:auto
+  Dests: 300:fornext, 310:fornext
 (0 3) 300 LET P(I) = 0
-  Origs: 290:auto
+  Origs: 290:fornext
   Dests: 305:auto
 (0 3) 305 LET Z(I) = 0
   Origs: 300:auto
   Dests: 310:auto
 (0 1) 310 NEXT I
-  Origs: 305:auto
+  Origs: 290:fornext, 305:auto
   Dests: 320:auto
 (0 2) 320 PRINT
   Origs: 310:auto
@@ -260,15 +260,15 @@ Halstead complexity:
   Dests: 370:auto
 (1 3) 370 FOR I = 1 TO 5
   Origs: 365:auto
-  Dests: 375:auto
+  Dests: 375:fornext, 390:fornext
 (0 4) 375 LET Z5 = Z5 + S(I)
-  Origs: 370:auto
+  Origs: 370:fornext
   Dests: 380:auto
 (0 6) 380 LET T = T + S(I) * P(I)
   Origs: 375:auto
   Dests: 390:auto
 (0 1) 390 NEXT I
-  Origs: 380:auto
+  Origs: 370:fornext, 380:auto
   Dests: 391:auto
 (0 5) 391 LET Z5 = INT(100 * (Z5 / 5) + .5) / 100
   Origs: 390:auto
@@ -383,9 +383,9 @@ Halstead complexity:
   Dests: 570:auto
 (1 3) 570 FOR I = 1 TO 5
   Origs: 560:auto
-  Dests: 575:auto
+  Dests: 575:fornext, 620:fornext
 (0 4) 575 LET Z(I) = INT(Z(I) + .5)
-  Origs: 570:auto
+  Origs: 570:fornext
   Dests: 580:auto
 (1 4) 580 IF Z(I) <= 0 THEN 610
   Origs: 575:auto
@@ -409,7 +409,7 @@ Halstead complexity:
   Origs: 614:auto
   Dests: 420:goto
 (0 1) 620 NEXT I
-  Origs: 600:goto, 612:ifthen
+  Origs: 570:fornext, 600:goto, 612:ifthen
   Dests: 622:auto
 (0 1) 622 REM TOTAL VALUE OF TRANSACTIONS:T5 
   Origs: 620:auto
@@ -449,12 +449,12 @@ Halstead complexity:
   Dests: 680:auto
 (1 3) 680 FOR I = 1 TO 5
   Origs: 675:auto
-  Dests: 690:auto
+  Dests: 690:fornext, 700:fornext
 (0 4) 690 LET P(I) = P(I) + Z(I)
-  Origs: 680:auto
+  Origs: 680:fornext
   Dests: 700:auto
 (0 1) 700 NEXT I
-  Origs: 690:auto
+  Origs: 680:fornext, 690:auto
   Dests: 710:auto
 (0 1) 710 REM CALCULATE NEW STOCK VALUES 
   Origs: 700:auto
@@ -575,9 +575,9 @@ Halstead complexity:
   Dests: 900:auto
 (1 3) 900 FOR I = 1 TO 5
   Origs: 890:auto
-  Dests: 910:auto
+  Dests: 910:fornext, 970:fornext
 (0 4) 910 LET X1 = RND(X)
-  Origs: 900:auto
+  Origs: 900:fornext
   Dests: 915:auto
 (1 4) 915 IF X1 > .25 THEN 920
   Origs: 910:auto
@@ -673,7 +673,7 @@ Halstead complexity:
   Origs: 960:ifthen
   Dests: 970:auto
 (0 1) 970 NEXT I
-  Origs: 966:goto, 967:auto
+  Origs: 900:fornext, 966:goto, 967:auto
   Dests: 972:auto
 (0 1) 972 REM AFTER T8 DAYS RANDOMLY CHANGE TREND SIGN AND SLOPE 
   Origs: 970:auto

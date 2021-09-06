@@ -220,8 +220,8 @@ Halstead complexity:
 (0 3)      X(I) = 0
 (0 1)      NEXT I
 (0 1)      REM  MAT X=ZER
-  Origs: 1590:auto
-  Dests: 1610:auto
+  Origs: 1590:auto, 1600:fornext, 1600:fornext
+  Dests: 1600:fornext, 1600:fornext, 1610:auto
 (0 3) 1610 P = 1000
   Origs: 1600:auto
   Dests: 1620:auto
@@ -241,13 +241,13 @@ Halstead complexity:
 (0 3)      A(I) = 0
 (0 1)      NEXT I
 (0 1)      REM  MAT A=ZER
-  Origs: 1650:auto
-  Dests: 1670:auto
+  Origs: 1650:auto, 1660:fornext, 1660:fornext
+  Dests: 1660:fornext, 1660:fornext, 1670:auto
 (1 3) 1670 FOR C = 1 TO Y
   Origs: 1660:auto
-  Dests: 1680:auto
+  Dests: 1680:fornext, 1790:fornext
 (0 3) 1680 PRINT "NUMBER"; C;
-  Origs: 1670:auto, 1720:ifthen, 1730:ifthen, 1740:ifthen, 1770:goto
+  Origs: 1670:fornext, 1720:ifthen, 1730:ifthen, 1740:ifthen, 1770:goto
   Dests: 1690:auto
 (2 3) 1690 INPUT X, Z
   Origs: 1680:auto
@@ -280,7 +280,7 @@ Halstead complexity:
   Origs: 1750:ifthen
   Dests: 1790:auto
 (0 1) 1790 NEXT C
-  Origs: 1780:auto
+  Origs: 1670:fornext, 1780:auto
   Dests: 1800:auto
 (0 2) 1800 PRINT "SPINNING"
   Origs: 1790:auto
@@ -323,15 +323,15 @@ Halstead complexity:
   Dests: 1930:auto
 (1 3) 1930 FOR I1 = 1 TO 18
   Origs: 1920:auto
-  Dests: 1940:auto
+  Dests: 1940:fornext, 1960:fornext
 (1 2) 1940 READ R
-  Origs: 1930:auto
+  Origs: 1930:fornext
   Dests: 1950:auto
 (1 4) 1950 IF R = S THEN 2000
   Origs: 1940:auto
   Dests: 1960:auto, 2000:ifthen
 (0 1) 1960 NEXT I1
-  Origs: 1950:auto
+  Origs: 1930:fornext, 1950:auto
   Dests: 1970:auto
 (0 3) 1970 A$ = "BLACK"
   Origs: 1960:auto
@@ -353,9 +353,9 @@ Halstead complexity:
   Dests: 2030:auto
 (1 3) 2030 FOR C = 1 TO Y
   Origs: 2020:auto
-  Dests: 2040:auto
+  Dests: 2040:fornext, 2810:fornext
 (1 4) 2040 IF T(C) < 37 THEN 2710
-  Origs: 2030:auto
+  Origs: 2030:fornext
   Dests: 2050:auto, 2710:ifthen
 (9 12) 2050 ON T(C) - 36 GOTO 2090, 2190, 2220, 2250, 2300, 2350, 2400, 2470, 2500
   Origs: 2040:auto
@@ -422,12 +422,12 @@ Halstead complexity:
   Dests: 2260:auto
 (1 4) 2260 FOR I = 1 TO 34 STEP 3
   Origs: 2250:auto
-  Dests: 2270:auto
+  Dests: 2270:fornext, 2280:fornext
 (1 5) 2270 IF S = I THEN 2150
-  Origs: 2260:auto
+  Origs: 2260:fornext
   Dests: 2150:ifthen, 2280:auto
 (0 1) 2280 NEXT I
-  Origs: 2270:auto
+  Origs: 2260:fornext, 2270:auto
   Dests: 2290:auto
 (0 3) 2290 GOTO 2110
   Origs: 2280:auto
@@ -437,12 +437,12 @@ Halstead complexity:
   Dests: 2310:auto
 (1 4) 2310 FOR I = 2 TO 35 STEP 3
   Origs: 2300:auto
-  Dests: 2320:auto
+  Dests: 2320:fornext, 2330:fornext
 (1 5) 2320 IF S = I THEN 2150
-  Origs: 2310:auto
+  Origs: 2310:fornext
   Dests: 2150:ifthen, 2330:auto
 (0 1) 2330 NEXT I
-  Origs: 2320:auto
+  Origs: 2310:fornext, 2320:auto
   Dests: 2340:auto
 (0 3) 2340 GOTO 2110
   Origs: 2330:auto
@@ -452,12 +452,12 @@ Halstead complexity:
   Dests: 2360:auto
 (1 4) 2360 FOR I = 3 TO 36 STEP 3
   Origs: 2350:auto
-  Dests: 2370:auto
+  Dests: 2370:fornext, 2380:fornext
 (1 5) 2370 IF S = I THEN 2150
-  Origs: 2360:auto
+  Origs: 2360:fornext
   Dests: 2150:ifthen, 2380:auto
 (0 1) 2380 NEXT I
-  Origs: 2370:auto
+  Origs: 2360:fornext, 2370:auto
   Dests: 2390:auto
 (0 3) 2390 GOTO 2110
   Origs: 2380:auto
@@ -518,15 +518,15 @@ Halstead complexity:
   Dests: 2580:auto
 (1 3) 2580 FOR I = 1 TO 18
   Origs: 2570:auto
-  Dests: 2590:auto
+  Dests: 2590:fornext, 2610:fornext
 (1 2) 2590 READ R
-  Origs: 2580:auto
+  Origs: 2580:fornext
   Dests: 2600:auto
 (1 5) 2600 IF S = R THEN 2430
   Origs: 2590:auto
   Dests: 2430:ifthen, 2610:auto
 (0 1) 2610 NEXT I
-  Origs: 2600:auto
+  Origs: 2580:fornext, 2600:auto
   Dests: 2620:auto
 (0 3) 2620 GOTO 2110
   Origs: 2610:auto
@@ -539,15 +539,15 @@ Halstead complexity:
   Dests: 2650:auto
 (1 3) 2650 FOR I = 1 TO 18
   Origs: 2640:auto
-  Dests: 2660:auto
+  Dests: 2660:fornext, 2680:fornext
 (1 2) 2660 READ R
-  Origs: 2650:auto
+  Origs: 2650:fornext
   Dests: 2670:auto
 (1 5) 2670 IF S = R THEN 2110
   Origs: 2660:auto
   Dests: 2110:ifthen, 2680:auto
 (0 1) 2680 NEXT I
-  Origs: 2670:auto
+  Origs: 2650:fornext, 2670:auto
   Dests: 2690:auto
 (1 5) 2690 IF S > 36 THEN 2110
   Origs: 2680:auto
@@ -586,7 +586,7 @@ Halstead complexity:
   Origs: 2790:auto
   Dests: 2810:auto
 (0 1) 2810 NEXT C
-  Origs: 2180:goto, 2460:goto, 2800:auto
+  Origs: 2030:fornext, 2180:goto, 2460:goto, 2800:auto
   Dests: 2820:auto
 (0 2) 2820 PRINT
   Origs: 2810:auto
@@ -646,8 +646,8 @@ Halstead complexity:
 (0 2)      PRINT "-";
 (0 1)      NEXT I
 (0 1)      REM PRINT 72 DASHES
-  Origs: 2990:auto
-  Dests: 3010:auto
+  Origs: 2990:auto, 3000:fornext, 3000:fornext
+  Dests: 3000:fornext, 3000:fornext, 3010:auto
 (0 6) 3010 PRINT TAB(50); "CHECK NO. "; INT(RND(1) * 100)
   Origs: 3000:auto
   Dests: 3020:auto
@@ -696,8 +696,8 @@ Halstead complexity:
 (1 3) 3160 FOR I = 1 TO 62
 (0 2)      PRINT "-";
 (0 1)      NEXT I
-  Origs: 3150:auto
-  Dests: 3170:auto
+  Origs: 3150:auto, 3160:fornext, 3160:fornext
+  Dests: 3160:fornext, 3160:fornext, 3170:auto
 (0 2) 3170 PRINT "COME BACK SOON!"
   Origs: 3160:auto
   Dests: 3180:auto

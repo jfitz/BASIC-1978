@@ -53,12 +53,12 @@ Halstead complexity:
   Dests: 84:auto
 (1 3) 84 FOR D = 1 TO 14
   Origs: 82:auto
-  Dests: 86:auto
+  Dests: 86:fornext, 88:fornext
 (6 7) 86 READ C$(D), M1(D), M2(D), C1(D), C2(D), M(D)
-  Origs: 84:auto
+  Origs: 84:fornext
   Dests: 88:auto
 (0 1) 88 NEXT D
-  Origs: 86:auto
+  Origs: 84:fornext, 86:auto
   Dests: 89:auto
 (0 4) 89 LET D = RND(-1)
   Origs: 88:auto
@@ -386,9 +386,9 @@ Halstead complexity:
   Dests: 1220:auto
 (1 3) 1220 FOR I = 1 TO D
   Origs: 1210:auto
-  Dests: 1230:auto
+  Dests: 1230:fornext, 1540:fornext
 (1 4) 1230 IF B$ <> "YES" THEN 1260
-  Origs: 1220:auto
+  Origs: 1220:fornext
   Dests: 1240:auto, 1260:ifthen
 (1 4) 1240 IF I = 2 THEN 1260
   Origs: 1230:auto
@@ -481,13 +481,13 @@ Halstead complexity:
   Origs: 1520:auto
   Dests: 1540:auto
 (0 1) 1540 NEXT I
-  Origs: 1530:auto
+  Origs: 1220:fornext, 1530:auto
   Dests: 1550:auto
 (1 3) 1550 FOR Z = 1 TO D
   Origs: 1510:ifthen, 1520:ifthen, 1540:auto
-  Dests: 1560:auto
+  Dests: 1560:fornext, 1720:fornext
 (1 4) 1560 IF B$ <> "YES" THEN 1620
-  Origs: 1550:auto
+  Origs: 1550:fornext
   Dests: 1570:auto, 1620:ifthen
 (2 4) 1570 ON Z GOTO 1580, 1600
   Origs: 1560:auto
@@ -535,7 +535,7 @@ Halstead complexity:
   Origs: 1700:auto
   Dests: 1720:auto
 (0 1) 1720 NEXT Z
-  Origs: 1710:auto
+  Origs: 1550:fornext, 1710:auto
   Dests: 1730:auto
 (0 3) 1730 LET O2 = O(2)
   Origs: 1720:auto
@@ -581,9 +581,9 @@ Halstead complexity:
   Dests: 1870:auto, 1910:ifthen
 (1 3) 1870 FOR I = 1 TO 2
   Origs: 1860:auto
-  Dests: 1880:auto
+  Dests: 1880:fornext, 2030:fornext
 (2 4) 1880 ON I GOTO 1890, 1920
-  Origs: 1870:auto
+  Origs: 1870:fornext
   Dests: 1890:auto, 1890:goto, 1920:goto
 (0 2) 1890 PRINT "CONFEDERATE STRATEGY ";
   Origs: 1880:auto, 1880:goto
@@ -628,7 +628,7 @@ Halstead complexity:
   Origs: 2010:auto, 2060:ifthen
   Dests: 2030:auto
 (0 1) 2030 NEXT I
-  Origs: 2020:auto
+  Origs: 1870:fornext, 2020:auto
   Dests: 2040:auto
 (0 3) 2040 LET Y2 = Y
   Origs: 2000:ifthen, 2030:auto
@@ -997,9 +997,9 @@ Halstead complexity:
   Dests: 3200:auto
 (1 3) 3200 FOR I = 1 TO 4
   Origs: 3190:auto
-  Dests: 3210:auto
+  Dests: 3210:fornext, 3250:fornext
 (0 4) 3210 LET S0 = S0 + S(I)
-  Origs: 3200:auto
+  Origs: 3200:fornext
   Dests: 3220:auto
 (0 1) 3220 REM - IF ACTUAL STRATEGY INFO IS IN PROGRAM DATA STATEMENTS
   Origs: 3210:auto
@@ -1011,7 +1011,7 @@ Halstead complexity:
   Origs: 3230:auto
   Dests: 3250:auto, 3270:ifthen
 (0 1) 3250 NEXT I
-  Origs: 3240:auto
+  Origs: 3200:fornext, 3240:auto
   Dests: 3260:auto
 (0 1) 3260 REM - IF ACTUAL STRAT. IN,THEN HERE IS Y2= HIST. STRAT.
   Origs: 3250:auto
@@ -1042,9 +1042,9 @@ Halstead complexity:
   Dests: 3350:auto
 (1 3) 3350 FOR I = 1 TO 4
   Origs: 3340:auto
-  Dests: 3360:auto
+  Dests: 3360:fornext, 3390:fornext
 (1 4) 3360 IF S(I) <= 5 THEN 3390
-  Origs: 3350:auto
+  Origs: 3350:fornext
   Dests: 3370:auto, 3390:ifthen
 (0 4) 3370 LET S(I) = S(I) - S
   Origs: 3360:auto
@@ -1053,7 +1053,7 @@ Halstead complexity:
   Origs: 3370:auto
   Dests: 3390:auto
 (0 1) 3390 NEXT I
-  Origs: 3360:ifthen, 3380:auto
+  Origs: 3350:fornext, 3360:ifthen, 3380:auto
   Dests: 3400:auto
 (0 4) 3400 LET S(Y) = S(Y) + S0
   Origs: 3390:auto

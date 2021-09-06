@@ -77,15 +77,15 @@ Halstead complexity:
   Dests: 70:auto
 (1 4) 70 FOR J = 1 TO 57 STEP 8
   Origs: 66:auto, 570:ifthen
-  Dests: 74:auto
+  Dests: 74:fornext, 76:fornext
 (0 22) 74 PRINT J; TAB(4); J + 1; TAB(8); J + 2; TAB(12); J + 3; TAB(16); J + 4; TAB(20); J + 5;
-  Origs: 70:auto
+  Origs: 70:fornext
   Dests: 75:auto
 (0 9) 75 PRINT TAB(24); J + 6; TAB(28); J + 7
   Origs: 74:auto
   Dests: 76:auto
 (0 1) 76 NEXT J
-  Origs: 75:auto
+  Origs: 70:fornext, 75:auto
   Dests: 77:auto
 (0 2) 77 PRINT
   Origs: 76:auto
@@ -98,27 +98,27 @@ Halstead complexity:
   Dests: 80:auto
 (1 3) 80 FOR J = 1 TO 64
   Origs: 79:auto
-  Dests: 82:auto
+  Dests: 82:fornext, 84:fornext
 (0 3) 82 A(J) = 1
-  Origs: 80:auto
+  Origs: 80:fornext
   Dests: 84:auto
 (0 1) 84 NEXT J
-  Origs: 82:auto
+  Origs: 80:fornext, 82:auto
   Dests: 86:auto
 (1 4) 86 FOR J = 19 TO 43 STEP 8
   Origs: 84:auto
-  Dests: 88:auto
+  Dests: 88:fornext, 94:fornext
 (1 4) 88 FOR I = J TO J + 3
-  Origs: 86:auto
-  Dests: 90:auto
+  Origs: 86:fornext
+  Dests: 90:fornext, 92:fornext
 (0 3) 90 A(I) = 0
-  Origs: 88:auto
+  Origs: 88:fornext
   Dests: 92:auto
 (0 1) 92 NEXT I
-  Origs: 90:auto
+  Origs: 88:fornext, 90:auto
   Dests: 94:auto
 (0 1) 94 NEXT J
-  Origs: 92:auto
+  Origs: 86:fornext, 92:auto
   Dests: 96:auto
 (0 3) 96 M = 0
   Origs: 94:auto
@@ -209,21 +209,21 @@ Halstead complexity:
   Dests: 340:auto
 (1 4) 340 FOR J = 1 TO 57 STEP 8
   Origs: 98:goto, 310:auto
-  Dests: 350:auto
+  Dests: 350:fornext, 390:fornext
 (1 4) 350 FOR I = J TO J + 7
-  Origs: 340:auto
-  Dests: 360:auto
+  Origs: 340:fornext
+  Dests: 360:fornext, 370:fornext
 (0 2) 360 PRINT A(I);
-  Origs: 350:auto
+  Origs: 350:fornext
   Dests: 370:auto
 (0 1) 370 NEXT I
-  Origs: 360:auto
+  Origs: 350:fornext, 360:auto
   Dests: 380:auto
 (0 2) 380 PRINT
   Origs: 370:auto
   Dests: 390:auto
 (0 1) 390 NEXT J
-  Origs: 380:auto
+  Origs: 340:fornext, 380:auto
   Dests: 400:auto
 (0 2) 400 PRINT
   Origs: 390:auto
@@ -239,12 +239,12 @@ Halstead complexity:
   Dests: 510:auto
 (1 3) 510 FOR I = 1 TO 64
   Origs: 500:auto
-  Dests: 520:auto
+  Dests: 520:fornext, 530:fornext
 (0 4) 520 S = S + A(I)
-  Origs: 510:auto
+  Origs: 510:fornext
   Dests: 530:auto
 (0 1) 530 NEXT I
-  Origs: 520:auto
+  Origs: 510:fornext, 520:auto
   Dests: 540:auto
 (0 2) 540 PRINT
 (0 6)     PRINT "YOU MADE"; M; "JUMPS AND HAD"; S; "PIECES"

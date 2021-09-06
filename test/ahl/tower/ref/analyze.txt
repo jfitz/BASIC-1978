@@ -44,18 +44,18 @@ Halstead complexity:
   Dests: 130:auto
 (1 3) 130 FOR D = 1 TO 7
   Origs: 120:auto
-  Dests: 140:auto
+  Dests: 140:fornext, 170:fornext
 (1 3) 140 FOR N = 1 TO 3
-  Origs: 130:auto
-  Dests: 150:auto
+  Origs: 130:fornext
+  Dests: 150:fornext, 160:fornext
 (0 3) 150 T(D, N) = 0
-  Origs: 140:auto
+  Origs: 140:fornext
   Dests: 160:auto
 (0 1) 160 NEXT N
-  Origs: 150:auto
+  Origs: 140:fornext, 150:auto
   Dests: 170:auto
 (0 1) 170 NEXT D
-  Origs: 160:auto
+  Origs: 130:fornext, 160:auto
   Dests: 180:auto
 (0 2) 180 PRINT "TOWERS OF HANOI PUZZLE."
 (0 2)     PRINT
@@ -82,12 +82,12 @@ Halstead complexity:
   Dests: 240:auto
 (1 3) 240 FOR Q = 1 TO 7
   Origs: 230:auto
-  Dests: 250:auto
+  Dests: 250:fornext, 260:fornext
 (1 4) 250 IF Q = S THEN 350
-  Origs: 240:auto
+  Origs: 240:fornext
   Dests: 260:auto, 350:ifthen
 (0 1) 260 NEXT Q
-  Origs: 250:auto
+  Origs: 240:fornext, 250:auto
   Dests: 270:auto
 (0 4) 270 E = E + 1
   Origs: 260:auto
@@ -144,14 +144,14 @@ Halstead complexity:
   Dests: 420:auto
 (1 5) 420 FOR X = S TO 1 STEP -1
   Origs: 400:auto
-  Dests: 430:auto
+  Dests: 430:fornext, 460:fornext
 (0 3) 430 T(Y, 1) = D
 (0 4)     D = D - 2
 (0 4)     Y = Y - 1
-  Origs: 420:auto
+  Origs: 420:fornext
   Dests: 460:auto
 (0 1) 460 NEXT X
-  Origs: 430:auto
+  Origs: 420:fornext, 430:auto
   Dests: 470:auto
 (0 2) 470 GOSUB 1230
   Origs: 460:auto
@@ -185,28 +185,28 @@ Halstead complexity:
   Dests: 590:auto
 (1 3) 590 FOR R = 1 TO 7
   Origs: 580:auto
-  Dests: 600:auto
+  Dests: 600:fornext, 620:fornext
 (1 3) 600 FOR C = 1 TO 3
-  Origs: 590:auto
-  Dests: 610:auto
+  Origs: 590:fornext
+  Dests: 610:fornext, 620:fornext
 (1 4) 610 IF T(R, C) = D THEN 640
-  Origs: 600:auto
+  Origs: 600:fornext
   Dests: 620:auto, 640:ifthen
 (0 1) 620 NEXT C
 (0 1)     NEXT R
-  Origs: 610:auto
+  Origs: 590:fornext, 600:fornext, 610:auto
   Dests: 640:auto
 (1 5) 640 FOR Q = R TO 1 STEP -1
   Origs: 610:ifthen, 620:auto
-  Dests: 645:auto
+  Dests: 645:fornext, 660:fornext
 (1 4) 645 IF T(Q, C) = 0 THEN 660
-  Origs: 640:auto
+  Origs: 640:fornext
   Dests: 650:auto, 660:ifthen
 (1 4) 650 IF T(Q, C) < D THEN 680
   Origs: 645:auto
   Dests: 660:auto, 680:ifthen
 (0 1) 660 NEXT Q
-  Origs: 645:ifthen, 650:auto
+  Origs: 640:fornext, 645:ifthen, 650:auto
   Dests: 670:auto
 (0 2) 670 GOTO 700
   Origs: 660:auto
@@ -248,12 +248,12 @@ Halstead complexity:
   Dests: 
 (1 3) 800 FOR R = 1 TO 7
   Origs: 730:ifthen
-  Dests: 810:auto
+  Dests: 810:fornext, 820:fornext
 (1 4) 810 IF T(R, N) <> 0 THEN 840
-  Origs: 800:auto
+  Origs: 800:fornext
   Dests: 820:auto, 840:ifthen
 (0 1) 820 NEXT R
-  Origs: 810:auto
+  Origs: 800:fornext, 810:auto
   Dests: 830:auto
 (0 2) 830 GOTO 880
   Origs: 820:auto
@@ -277,26 +277,26 @@ Halstead complexity:
   Dests: 880:auto
 (1 3) 880 FOR V = 1 TO 7
 (1 3)     FOR W = 1 TO 3
-  Origs: 830:goto, 840:ifthen, 875:auto
-  Dests: 900:auto
+  Origs: 830:goto, 840:ifthen, 875:auto, 880:fornext
+  Dests: 880:fornext, 900:fornext, 910:fornext, 910:fornext
 (1 4) 900 IF T(V, W) = D THEN 930
-  Origs: 880:auto
+  Origs: 880:fornext
   Dests: 910:auto, 930:ifthen
 (0 1) 910 NEXT W
 (0 1)     NEXT V
-  Origs: 900:auto
+  Origs: 880:fornext, 880:fornext, 900:auto
   Dests: 925:auto
 (0 1) 925 REM *** LOCATE EMPTY SPACE ON NEEDLE N
   Origs: 910:auto
   Dests: 930:auto
 (1 3) 930 FOR U = 1 TO 7
   Origs: 900:ifthen, 925:auto
-  Dests: 940:auto
+  Dests: 940:fornext, 950:fornext
 (1 4) 940 IF T(U, N) <> 0 THEN 970
-  Origs: 930:auto
+  Origs: 930:fornext
   Dests: 950:auto, 970:ifthen
 (0 1) 950 NEXT U
-  Origs: 940:auto
+  Origs: 930:fornext, 940:auto
   Dests: 960:auto
 (0 3) 960 U = 7
 (0 2)     GOTO 980
@@ -326,14 +326,14 @@ Halstead complexity:
   Dests: 1030:auto
 (1 3) 1030 FOR R = 1 TO 7
 (1 3)      FOR C = 1 TO 2
-  Origs: 1020:auto
-  Dests: 1050:auto
+  Origs: 1020:auto, 1030:fornext
+  Dests: 1030:fornext, 1050:fornext, 1060:fornext, 1060:fornext
 (1 4) 1050 IF T(R, C) <> 0 THEN 1090
-  Origs: 1030:auto
+  Origs: 1030:fornext
   Dests: 1060:auto, 1090:ifthen
 (0 1) 1060 NEXT C
 (0 1)      NEXT R
-  Origs: 1050:auto
+  Origs: 1030:fornext, 1030:fornext, 1050:auto
   Dests: 1080:auto
 (0 2) 1080 GOTO 1120
   Origs: 1060:auto
@@ -381,27 +381,27 @@ Halstead complexity:
   Dests: 1240:auto
 (1 3) 1240 FOR K = 1 TO 7
   Origs: 1230:auto
-  Dests: 1250:auto
+  Dests: 1250:fornext, 1370:fornext
 (0 3) 1250 Z = 10
-  Origs: 1240:auto
+  Origs: 1240:fornext
   Dests: 1260:auto
 (1 3) 1260 FOR J = 1 TO 3
   Origs: 1250:auto
-  Dests: 1270:auto
+  Dests: 1270:fornext, 1350:fornext
 (1 4) 1270 IF T(K, J) = 0 THEN 1330
-  Origs: 1260:auto
+  Origs: 1260:fornext
   Dests: 1280:auto, 1330:ifthen
 (0 3) 1280 PRINT TAB(Z - INT(T(K, J) / 2));
   Origs: 1270:auto
   Dests: 1290:auto
 (1 3) 1290 FOR V = 1 TO T(K, J)
   Origs: 1280:auto
-  Dests: 1300:auto
+  Dests: 1300:fornext, 1310:fornext
 (0 2) 1300 PRINT "*";
-  Origs: 1290:auto
+  Origs: 1290:fornext
   Dests: 1310:auto
 (0 1) 1310 NEXT V
-  Origs: 1300:auto
+  Origs: 1290:fornext, 1300:auto
   Dests: 1320:auto
 (0 2) 1320 GOTO 1340
   Origs: 1310:auto
@@ -413,13 +413,13 @@ Halstead complexity:
   Origs: 1320:goto, 1330:auto
   Dests: 1350:auto
 (0 1) 1350 NEXT J
-  Origs: 1340:auto
+  Origs: 1260:fornext, 1340:auto
   Dests: 1360:auto
 (0 2) 1360 PRINT
   Origs: 1350:auto
   Dests: 1370:auto
 (0 1) 1370 NEXT K
-  Origs: 1360:auto
+  Origs: 1240:fornext, 1360:auto
   Dests: 1380:auto
 (0 1) 1380 RETURN
   Origs: 1370:auto

@@ -116,18 +116,18 @@ Halstead complexity:
   Dests: 370:auto
 (1 3) 370 FOR I = 1 TO 10
   Origs: 360:auto
-  Dests: 372:auto
+  Dests: 372:fornext, 379:fornext
 (1 3) 372 FOR J = 1 TO 10
-  Origs: 370:auto
-  Dests: 375:auto
+  Origs: 370:fornext
+  Dests: 375:fornext, 377:fornext
 (0 3) 375 A(I, J) = 0
-  Origs: 372:auto
+  Origs: 372:fornext
   Dests: 377:auto
 (0 1) 377 NEXT J
-  Origs: 375:auto
+  Origs: 372:fornext, 375:auto
   Dests: 379:auto
 (0 1) 379 NEXT I
-  Origs: 377:auto
+  Origs: 370:fornext, 377:auto
   Dests: 380:auto
 (0 2) 380 PRINT
   Origs: 379:auto
@@ -176,18 +176,18 @@ Halstead complexity:
   Dests: 540:auto
 (1 3) 540 FOR I = 1 TO R
   Origs: 220:gosub, 530:auto
-  Dests: 550:auto
+  Dests: 550:fornext, 580:fornext
 (1 3) 550 FOR J = 1 TO C
-  Origs: 540:auto
-  Dests: 560:auto
+  Origs: 540:fornext
+  Dests: 560:fornext, 570:fornext
 (0 3) 560 A(I, J) = 1
-  Origs: 550:auto
+  Origs: 550:fornext
   Dests: 570:auto
 (0 1) 570 NEXT J
-  Origs: 560:auto
+  Origs: 550:fornext, 560:auto
   Dests: 580:auto
 (0 1) 580 NEXT I
-  Origs: 570:auto
+  Origs: 540:fornext, 570:auto
   Dests: 590:auto
 (0 4) 590 A(1, 1) = -1
   Origs: 580:auto
@@ -203,15 +203,15 @@ Halstead complexity:
   Dests: 630:auto
 (1 3) 630 FOR I = 1 TO R
   Origs: 620:auto
-  Dests: 640:auto
+  Dests: 640:fornext, 730:fornext
 (0 4) 640 PRINT I; TAB(7);
-  Origs: 630:auto
+  Origs: 630:fornext
   Dests: 650:auto
 (1 3) 650 FOR J = 1 TO C
   Origs: 640:auto
-  Dests: 660:auto
+  Dests: 660:fornext, 710:fornext
 (1 6) 660 IF A(I, J) = -1 THEN 700
-  Origs: 650:auto
+  Origs: 650:fornext
   Dests: 670:auto, 700:ifthen
 (1 4) 670 IF A(I, J) = 0 THEN 720
   Origs: 660:auto
@@ -226,13 +226,13 @@ Halstead complexity:
   Origs: 660:ifthen
   Dests: 710:auto
 (0 1) 710 NEXT J
-  Origs: 690:goto, 700:auto
+  Origs: 650:fornext, 690:goto, 700:auto
   Dests: 720:auto
 (0 2) 720 PRINT
   Origs: 670:ifthen, 710:auto
   Dests: 730:auto
 (0 1) 730 NEXT I
-  Origs: 720:auto
+  Origs: 630:fornext, 720:auto
   Dests: 740:auto
 (0 2) 740 PRINT
   Origs: 730:auto
@@ -296,18 +296,18 @@ Halstead complexity:
   Dests: 820:goto
 (1 3) 940 FOR I = R1 TO R
   Origs: 910:goto
-  Dests: 950:auto
+  Dests: 950:fornext, 980:fornext
 (1 3) 950 FOR J = C1 TO C
-  Origs: 940:auto
-  Dests: 960:auto
+  Origs: 940:fornext
+  Dests: 960:fornext, 970:fornext
 (0 3) 960 A(I, J) = 0
-  Origs: 950:auto
+  Origs: 950:fornext
   Dests: 970:auto
 (0 1) 970 NEXT J
-  Origs: 960:auto
+  Origs: 950:fornext, 960:auto
   Dests: 980:auto
 (0 1) 980 NEXT I
-  Origs: 970:auto
+  Origs: 940:fornext, 970:auto
   Dests: 990:auto
 (0 3) 990 GOTO 610
   Origs: 980:auto

@@ -72,28 +72,28 @@ Halstead complexity:
 (1 3) 220 FOR R = 1 TO 5
 (0 2)     PRINT
 (0 1)     NEXT R
-  Origs: 210:auto
-  Dests: 260:auto
+  Origs: 210:auto, 220:fornext, 220:fornext
+  Dests: 220:fornext, 220:fornext, 260:auto
 (0 2) 260 DIM M(100)
   Origs: 220:auto
   Dests: 270:auto
 (1 3) 270 FOR R = 1 TO 5
   Origs: 260:auto
-  Dests: 280:auto
+  Dests: 280:fornext, 300:fornext
 (0 6) 280 I = (R - 1) * 5 + 1
-  Origs: 270:auto
+  Origs: 270:fornext
   Dests: 290:auto
 (0 10) 290 PRINT I, I + 1, I + 2, I + 3, I + 4
   Origs: 280:auto
   Dests: 300:auto
 (0 1) 300 NEXT R
-  Origs: 290:auto
+  Origs: 270:fornext, 290:auto
   Dests: 350:auto
 (1 3) 350 FOR R = 1 TO 10
 (0 2)     PRINT
 (0 1)     NEXT R
-  Origs: 300:auto
-  Dests: 380:auto
+  Origs: 300:auto, 350:fornext, 350:fornext
+  Dests: 350:fornext, 350:fornext, 380:auto
 (0 5) 380 C = INT(RND(1) * 25) + 1
   Origs: 350:auto
   Dests: 390:auto
@@ -301,12 +301,12 @@ Halstead complexity:
   Dests: 1180:auto
 (1 3) 1180 FOR T = 1 TO N
   Origs: 1170:auto
-  Dests: 1190:auto
+  Dests: 1190:fornext, 1200:fornext
 (1 5) 1190 IF M = M(T) THEN 570
-  Origs: 1180:auto
+  Origs: 1180:fornext
   Dests: 570:ifthen, 1200:auto
 (0 1) 1200 NEXT T
-  Origs: 1190:auto
+  Origs: 1180:fornext, 1190:auto
   Dests: 1210:auto
 (0 3) 1210 X = M
   Origs: 1200:auto

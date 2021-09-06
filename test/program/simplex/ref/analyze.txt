@@ -98,30 +98,30 @@ Halstead complexity:
   Dests: 122:auto
 (1 3) 122 FOR I = 1 TO N1
   Origs: 121:auto
-  Dests: 123:auto
+  Dests: 123:fornext, 124:fornext
 (0 5) 123 C$(I) = "X" + STR$(I)
-  Origs: 122:auto
+  Origs: 122:fornext
   Dests: 124:auto
 (0 1) 124 NEXT I
-  Origs: 123:auto
+  Origs: 122:fornext, 123:auto
   Dests: 125:auto
 (1 3) 125 FOR I = 1 TO N2
   Origs: 124:auto
-  Dests: 126:auto
+  Dests: 126:fornext, 127:fornext
 (0 5) 126 C$(I + N1) = "S" + STR$(I)
-  Origs: 125:auto
+  Origs: 125:fornext
   Dests: 127:auto
 (0 1) 127 NEXT I
-  Origs: 126:auto
+  Origs: 125:fornext, 126:auto
   Dests: 128:auto
 (1 3) 128 FOR I = 1 TO N2
   Origs: 127:auto
-  Dests: 129:auto
+  Dests: 129:fornext, 130:fornext
 (0 3) 129 C1$(I) = C$(I + N1)
-  Origs: 128:auto
+  Origs: 128:fornext
   Dests: 130:auto
 (0 1) 130 NEXT I
-  Origs: 129:auto
+  Origs: 128:fornext, 129:auto
   Dests: 140:auto
 (0 1) 140 REM BUILD CENTRAL MATRIX (CONSTRAINTS)
   Origs: 130:auto
@@ -198,9 +198,9 @@ Halstead complexity:
   Dests: 220:auto
 (1 3) 220 FOR I = 1 TO N2
   Origs: 212:auto
-  Dests: 221:auto
+  Dests: 221:fornext, 239:fornext
 (0 3) 221 PRINT R(I), C1$(I),
-  Origs: 220:auto
+  Origs: 220:fornext
   Dests: 222:auto
 (0 2) 222 PRINT X(I, J),
 (1 2)       FOR J = 1 TO N1 + N2
@@ -211,7 +211,7 @@ Halstead complexity:
   Origs: 222:auto
   Dests: 239:auto
 (0 1) 239 NEXT I
-  Origs: 230:auto
+  Origs: 220:fornext, 230:auto
   Dests: 300:auto
 (0 1) 300 REM EVALUATE TABLEAU FOR OPTIMUM SOLUTION
   Origs: 239:auto
@@ -226,14 +226,14 @@ Halstead complexity:
   Dests: 305:auto
 (1 3) 305 FOR I = 1 TO N2
   Origs: 302:auto
-  Dests: 306:auto
+  Dests: 306:fornext, 307:fornext
 (0 6) 306 Z(J) = Z(J) + R(I) * X(I, J)
 (1 2)       FOR J = 1 TO N1 + N2
 (0 1)       NEXT J
-  Origs: 305:auto
+  Origs: 305:fornext
   Dests: 307:auto
 (0 1) 307 NEXT I
-  Origs: 306:auto
+  Origs: 305:fornext, 306:auto
   Dests: 310:auto
 (0 1) 310 REM COMPUTE Z - C
   Origs: 307:auto
@@ -252,9 +252,9 @@ Halstead complexity:
   Dests: 323:auto
 (1 4) 323 FOR J = 1 TO N1 + N2
   Origs: 322:auto
-  Dests: 324:auto
+  Dests: 324:fornext, 327:fornext
 (1 4) 324 IF Y(J) >= M THEN 327
-  Origs: 323:auto
+  Origs: 323:fornext
   Dests: 325:auto, 327:ifthen
 (0 3) 325 J0 = J
   Origs: 324:auto
@@ -263,7 +263,7 @@ Halstead complexity:
   Origs: 325:auto
   Dests: 327:auto
 (0 1) 327 NEXT J
-  Origs: 324:ifthen, 326:auto
+  Origs: 323:fornext, 324:ifthen, 326:auto
   Dests: 328:auto
 (1 4) 328 IF M >= 0 THEN 500
   Origs: 327:auto
@@ -320,9 +320,9 @@ Halstead complexity:
   Dests: 360:auto
 (1 3) 360 FOR I = 1 TO N2
   Origs: 352:auto
-  Dests: 361:auto
+  Dests: 361:fornext, 364:fornext
 (0 3) 361 PRINT R(I), C1$(I),
-  Origs: 360:auto
+  Origs: 360:fornext
   Dests: 362:auto
 (0 2) 362 PRINT X(I, J),
 (1 2)       FOR J = 1 TO N1 + N2
@@ -333,7 +333,7 @@ Halstead complexity:
   Origs: 362:auto
   Dests: 364:auto
 (0 1) 364 NEXT I
-  Origs: 363:auto
+  Origs: 360:fornext, 363:auto
   Dests: 370:auto
 (0 3) 370 PRINT " ", "Z",
   Origs: 364:auto
@@ -361,9 +361,9 @@ Halstead complexity:
   Dests: 383:auto
 (1 3) 383 FOR I = 1 TO N2
   Origs: 382:auto
-  Dests: 384:auto
+  Dests: 384:fornext, 387:fornext
 (1 7) 384 IF W(I) <= 0 OR W(I) >= M THEN 387
-  Origs: 383:auto
+  Origs: 383:fornext
   Dests: 385:auto, 387:ifthen
 (0 3) 385 I0 = I
   Origs: 384:auto
@@ -372,7 +372,7 @@ Halstead complexity:
   Origs: 385:auto
   Dests: 387:auto
 (0 1) 387 NEXT I
-  Origs: 384:ifthen, 386:auto
+  Origs: 383:fornext, 384:ifthen, 386:auto
   Dests: 389:auto
 (0 6) 389 PRINT "KEY ROW"; I0; "VARIABLE "; C1$(I0); " EXITS"
   Origs: 387:auto
@@ -403,33 +403,33 @@ Halstead complexity:
   Dests: 421:auto
 (1 4) 421 FOR J = 1 TO N1 + N2
   Origs: 420:auto
-  Dests: 422:auto
+  Dests: 422:fornext, 423:fornext
 (0 4) 422 X2(I0, J) = X(I0, J) / X(I0, J0)
-  Origs: 421:auto
+  Origs: 421:fornext
   Dests: 423:auto
 (0 1) 423 NEXT J
-  Origs: 422:auto
+  Origs: 421:fornext, 422:auto
   Dests: 430:auto
 (0 1) 430 REM ADJUST VALUES IN OTHER ROWS
   Origs: 423:auto
   Dests: 431:auto
 (1 3) 431 FOR I = 1 TO N2
   Origs: 430:auto
-  Dests: 432:auto
+  Dests: 432:fornext, 436:fornext
 (1 4) 432 IF I = I0 THEN 436
-  Origs: 431:auto
+  Origs: 431:fornext
   Dests: 433:auto, 436:ifthen
 (1 4) 433 FOR J = 1 TO N1 + N2
   Origs: 432:auto
-  Dests: 434:auto
+  Dests: 434:fornext, 435:fornext
 (0 7) 434 X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
-  Origs: 433:auto
+  Origs: 433:fornext
   Dests: 435:auto
 (0 1) 435 NEXT J
-  Origs: 434:auto
+  Origs: 433:fornext, 434:auto
   Dests: 436:auto
 (0 1) 436 NEXT I
-  Origs: 432:ifthen, 435:auto
+  Origs: 431:fornext, 432:ifthen, 435:auto
   Dests: 440:auto
 (0 1) 440 REM ADJUST VALUES IN RIGHT-HAND-SIDE
   Origs: 436:auto
@@ -439,15 +439,15 @@ Halstead complexity:
   Dests: 442:auto
 (1 3) 442 FOR I = 1 TO N2
   Origs: 441:auto
-  Dests: 443:auto
+  Dests: 443:fornext, 445:fornext
 (1 4) 443 IF I = I0 THEN 445
-  Origs: 442:auto
+  Origs: 442:fornext
   Dests: 444:auto, 445:ifthen
 (0 7) 444 B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
   Origs: 443:auto
   Dests: 445:auto
 (0 1) 445 NEXT I
-  Origs: 443:ifthen, 444:auto
+  Origs: 442:fornext, 443:ifthen, 444:auto
   Dests: 450:auto
 (0 1) 450 REM SWAP IN THE NEW MATRIX AND CONSTANTS
   Origs: 445:auto
@@ -487,15 +487,15 @@ Halstead complexity:
   Dests: 522:auto
 (1 3) 522 FOR I = 1 TO N2
   Origs: 521:auto
-  Dests: 523:auto
+  Dests: 523:fornext, 525:fornext
 (0 6) 523 PRINT C1$(I); " = "; B(I); " * "; R(I)
-  Origs: 522:auto
+  Origs: 522:fornext
   Dests: 524:auto
 (0 6) 524 Z = Z + B(I) * R(I)
   Origs: 523:auto
   Dests: 525:auto
 (0 1) 525 NEXT I
-  Origs: 524:auto
+  Origs: 522:fornext, 524:auto
   Dests: 527:auto
 (0 3) 527 PRINT "Z = "; Z
   Origs: 525:auto

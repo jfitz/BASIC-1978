@@ -105,12 +105,12 @@ Halstead complexity:
   Dests: 270:auto
 (1 3) 270 FOR X = 1 TO 10
   Origs: 260:auto
-  Dests: 280:auto
+  Dests: 280:fornext, 290:fornext
 (0 3) 280 A$(X) = "X"
-  Origs: 270:auto
+  Origs: 270:fornext
   Dests: 290:auto
 (0 1) 290 NEXT X
-  Origs: 280:auto
+  Origs: 270:fornext, 280:auto
   Dests: 300:auto
 (0 2) 300 GOTO 320
   Origs: 290:auto
@@ -211,8 +211,8 @@ Halstead complexity:
 (1 3) 620 FOR Z = 1 TO 10
 (0 3)     PRINT A$(Z); " ";
 (0 1)     NEXT Z
-  Origs: 610:auto
-  Dests: 630:auto
+  Origs: 610:auto, 620:fornext, 620:fornext
+  Dests: 620:fornext, 620:fornext, 630:auto
 (0 4) 630 C = C + 1
   Origs: 620:auto
   Dests: 640:auto
@@ -221,12 +221,12 @@ Halstead complexity:
   Dests: 650:auto
 (1 3) 650 FOR Z = 1 TO 10
   Origs: 640:auto
-  Dests: 660:auto
+  Dests: 660:fornext, 670:fornext
 (1 5) 660 IF A$(Z) <> "O" THEN 320
-  Origs: 650:auto
+  Origs: 650:fornext
   Dests: 320:ifthen, 670:auto
 (0 1) 670 NEXT Z
-  Origs: 660:auto
+  Origs: 650:fornext, 660:auto
   Dests: 680:auto
 (1 4) 680 IF C > 12 THEN 710
   Origs: 670:auto

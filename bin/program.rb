@@ -410,8 +410,52 @@ class LineListSpec
   end
 end
 
+class TransferRefLineStmt
+  attr_reader :line_number
+  attr_reader :statement
+  attr_reader :type
+
+  def initialize(line_number, statement, type)
+    @line_number = line_number
+    @statement = statement
+    @type = type
+  end
+
+  def eql?(other)
+    @line_number == other.line_number &&
+      @statement == other.statement &&
+      @type == other.type
+  end
+
+  def ==(other)
+    @line_number == other.line_number &&
+      @statement == other.statement &&
+      @type == other.type
+  end
+
+  def hash
+    @line_number.hash + @statement.hash + @type.hash
+  end
+
+  def <=>(other)
+    if @line_number == other.line_number
+      if @statement == other.statement
+        @type <=> other.type
+      else
+        @statement <=> other.statement
+      end
+    else
+      @line_number <=> other.line_number
+    end
+  end
+
+  def to_s
+    "#{@line_number}:#{@statement}:#{@type}"
+  end
+end
+
 # transfer of control
-class TransferRef
+class TransferRefLine
   attr_reader :line_number
   attr_reader :type
 
@@ -733,7 +777,7 @@ class Program
     destinations.each do |orig, dests|
       dests.each do |dest|
         origins[dest.line_number] = [] unless origins.key?(dest.line_number)
-        origins[dest.line_number] << TransferRef.new(orig.line_number, dest.type)
+        origins[dest.line_number] << TransferRefLine.new(orig.line_number, dest.type)
       end
     end
 
@@ -907,7 +951,11 @@ class Program
 
   def build_statement_destinations_line(line_number_idx, statement)
     goto_line_idxs = []
-    statement_gotos = statement.gotos
+    statement_gotos_line_stmt = statement.gotos
+    statement_gotos = []
+    statement_gotos_line_stmt.each do |goto|
+      statement_gotos << TransferRefLine.new(goto.line_number, goto.type)
+    end
 
     if statement.autonext
       # find next statement (possibly in same line)
@@ -917,7 +965,7 @@ class Program
         next_line_number = next_line_stmt.line_number
         line_number = line_number_idx.line_number
 
-        statement_gotos << TransferRef.new(next_line_number, :auto) unless
+        statement_gotos << TransferRefLine.new(next_line_number, :auto) unless
           next_line_number == line_number
       end
     end
@@ -956,7 +1004,8 @@ class Program
     statement_gotos = statement.gotos
 
     statement_gotos.each do |goto|
-      goto_line_idxs << LineStmt.new(goto.line_number, 0)
+      goto_line_stmt = LineStmt.new(goto.line_number, goto.statement)
+      goto_line_idxs << goto_line_stmt
     end
 
     if statement.autonext
@@ -1054,8 +1103,7 @@ class Program
 
       @lines.keys.each do |line_number|
         statements = @lines[line_number].statements
-        index = 0
-        statements.each do |_|
+        statements.each_with_index do |statement, index|
           line_number_idx = LineStmt.new(line_number, index)
 
           # only reachable lines can reach other lines
@@ -1069,8 +1117,6 @@ class Program
               end
             end
           end
-
-          index += 1
         end
       end
     end

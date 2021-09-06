@@ -68,21 +68,21 @@ Halstead complexity:
   Dests: 130:auto
 (1 5) 130 FOR D = D TO 1 STEP -1
   Origs: 120:auto
-  Dests: 140:auto
+  Dests: 140:fornext, 160:fornext
 (0 4) 140 C = C - 1
-  Origs: 130:auto
+  Origs: 130:fornext
   Dests: 150:auto
 (0 3) 150 C(C) = D(D)
   Origs: 140:auto
   Dests: 160:auto
 (0 1) 160 NEXT D
-  Origs: 150:auto
+  Origs: 130:fornext, 150:auto
   Dests: 170:auto
 (1 5) 170 FOR C1 = 52 TO C STEP -1
   Origs: 160:auto
-  Dests: 180:auto
+  Dests: 180:fornext, 220:fornext
 (0 5) 180 C2 = INT(RND(1) * (C1 - C + 1)) + C
-  Origs: 170:auto
+  Origs: 170:fornext
   Dests: 190:auto
 (0 3) 190 C3 = C(C2)
   Origs: 180:auto
@@ -94,7 +94,7 @@ Halstead complexity:
   Origs: 200:auto
   Dests: 220:auto
 (0 1) 220 NEXT C1
-  Origs: 210:auto
+  Origs: 170:fornext, 210:auto
   Dests: 230:auto
 (0 3) 230 X = C(C)
   Origs: 110:ifthen, 220:auto
@@ -128,15 +128,15 @@ Halstead complexity:
   Dests: 370:auto
 (1 3) 370 FOR Q2 = 1 TO R(I)
   Origs: 360:auto
-  Dests: 380:auto
+  Dests: 380:fornext, 400:fornext
 (0 3) 380 X = P(I, Q2)
-  Origs: 370:auto
+  Origs: 370:fornext
   Dests: 390:auto
 (0 2) 390 GOSUB 500
   Origs: 380:auto
   Dests: 400:auto, 500:gosub
 (0 1) 400 NEXT Q2
-  Origs: 390:auto
+  Origs: 370:fornext, 390:auto
   Dests: 410:auto
 (0 3) 410 Q(I) = Q
   Origs: 400:auto
@@ -357,12 +357,12 @@ Halstead complexity:
   Dests: 1430:auto
 (1 4) 1430 FOR H = 1 TO H1 STEP 2
   Origs: 1420:auto
-  Dests: 1440:auto
+  Dests: 1440:fornext, 1450:fornext
 (1 5) 1440 IF H$ = MID$(I$, H, 1) THEN 1480
-  Origs: 1430:auto
+  Origs: 1430:fornext
   Dests: 1450:auto, 1480:ifthen
 (0 1) 1450 NEXT H
-  Origs: 1440:auto
+  Origs: 1430:fornext, 1440:auto
   Dests: 1460:auto
 (0 8) 1460 PRINT "TYPE "; MID$(I$, 1, H1 - 1); " OR "; MID$(I$, H1, 2); " PLEASE";
   Origs: 1450:auto
@@ -390,18 +390,18 @@ Halstead complexity:
   Dests: 1540:auto
 (1 3) 1540 FOR I = 1 TO 13
   Origs: 1530:auto
-  Dests: 1550:auto
+  Dests: 1550:fornext, 1580:fornext
 (1 6) 1550 FOR J = 4 * I - 3 TO 4 * I
-  Origs: 1540:auto
-  Dests: 1560:auto
+  Origs: 1540:fornext
+  Dests: 1560:fornext, 1570:fornext
 (0 3) 1560 D(J) = I
-  Origs: 1550:auto
+  Origs: 1550:fornext
   Dests: 1570:auto
 (0 1) 1570 NEXT J
-  Origs: 1560:auto
+  Origs: 1550:fornext, 1560:auto
   Dests: 1580:auto
 (0 1) 1580 NEXT I
-  Origs: 1570:auto
+  Origs: 1540:fornext, 1570:auto
   Dests: 1590:auto
 (0 3) 1590 D = 52
   Origs: 1580:auto
@@ -469,8 +469,8 @@ Halstead complexity:
 (1 3) 1790 FOR I = 1 TO 8
 (0 3)      T(I) = 0
 (0 1)      NEXT I
-  Origs: 1780:auto
-  Dests: 1800:auto
+  Origs: 1780:auto, 1790:fornext, 1790:fornext
+  Dests: 1790:fornext, 1790:fornext, 1800:auto
 (0 4) 1800 D1 = N + 1
   Origs: 1790:auto
   Dests: 1810:auto
@@ -483,28 +483,28 @@ Halstead complexity:
 (1 3) 1830 FOR I = 1 TO N
 (0 3)      Z(I) = 0
 (0 1)      NEXT I
-  Origs: 1820:auto
-  Dests: 1840:auto
+  Origs: 1820:auto, 1830:fornext, 1830:fornext
+  Dests: 1830:fornext, 1830:fornext, 1840:auto
 (1 3) 1840 FOR I = 1 TO 15
 (0 3)      B(I) = 0
 (0 1)      NEXT I
-  Origs: 1830:auto
-  Dests: 1850:auto
+  Origs: 1830:auto, 1840:fornext, 1840:fornext
+  Dests: 1840:fornext, 1840:fornext, 1850:auto
 (1 3) 1850 FOR I = 1 TO 15
 (0 3)      Q(I) = 0
 (0 1)      NEXT I
-  Origs: 1840:auto
-  Dests: 1860:auto
+  Origs: 1840:auto, 1850:fornext, 1850:fornext
+  Dests: 1850:fornext, 1850:fornext, 1860:auto
 (1 3) 1860 FOR I = 1 TO 7
 (0 3)      S(I) = 0
 (0 1)      NEXT I
-  Origs: 1850:auto
-  Dests: 1870:auto
+  Origs: 1850:auto, 1860:fornext, 1860:fornext
+  Dests: 1860:fornext, 1860:fornext, 1870:auto
 (1 3) 1870 FOR I = 1 TO 15
 (0 3)      R(I) = 0
 (0 1)      NEXT I
-  Origs: 1860:auto
-  Dests: 1880:auto
+  Origs: 1860:auto, 1870:fornext, 1870:fornext
+  Dests: 1870:fornext, 1870:fornext, 1880:auto
 (0 2) 1880 PRINT "BETS:"
   Origs: 1870:auto, 1910:ifthen
   Dests: 1890:auto
@@ -512,46 +512,46 @@ Halstead complexity:
 (0 3)      PRINT "#"; I;
 (1 2)      INPUT Z(I)
 (0 1)      NEXT I
-  Origs: 1880:auto
-  Dests: 1900:auto
+  Origs: 1880:auto, 1890:fornext, 1890:fornext
+  Dests: 1890:fornext, 1890:fornext, 1900:auto
 (1 3) 1900 FOR I = 1 TO N
   Origs: 1890:auto
-  Dests: 1910:auto
+  Dests: 1910:fornext, 1930:fornext
 (1 8) 1910 IF Z(I) <= 0 OR Z(I) > 500 THEN 1880
-  Origs: 1900:auto
+  Origs: 1900:fornext
   Dests: 1880:ifthen, 1920:auto
 (0 3) 1920 B(I) = Z(I)
   Origs: 1910:auto
   Dests: 1930:auto
 (0 1) 1930 NEXT I
-  Origs: 1920:auto
+  Origs: 1900:fornext, 1920:auto
   Dests: 1940:auto
 (0 2) 1940 PRINT "PLAYER  ";
   Origs: 1930:auto
   Dests: 1950:auto
 (1 3) 1950 FOR I = 1 TO N
   Origs: 1940:auto
-  Dests: 1960:auto
+  Dests: 1960:fornext, 1970:fornext
 (0 4) 1960 PRINT TAB(I * 7); I;
-  Origs: 1950:auto
+  Origs: 1950:fornext
   Dests: 1970:auto
 (0 1) 1970 NEXT I
-  Origs: 1960:auto
+  Origs: 1950:fornext, 1960:auto
   Dests: 1980:auto
 (0 4) 1980 PRINT TAB((N + 1) * 7) "DEALER"
   Origs: 1970:auto
   Dests: 1990:auto
 (1 3) 1990 FOR J = 1 TO 2
   Origs: 1980:auto
-  Dests: 2000:auto
+  Dests: 2000:fornext, 2070:fornext
 (0 3) 2000 PRINT TAB(7);
-  Origs: 1990:auto
+  Origs: 1990:fornext
   Dests: 2010:auto
 (1 3) 2010 FOR I = 1 TO D1
   Origs: 2000:auto
-  Dests: 2020:auto
+  Dests: 2020:fornext, 2050:fornext
 (0 3) 2020 GOSUB 100
-  Origs: 2010:auto
+  Origs: 2010:fornext
   Dests: 100:gosub, 2030:auto
 (0 3) 2030 P(I, J) = X
   Origs: 2020:auto
@@ -560,22 +560,22 @@ Halstead complexity:
   Origs: 2030:auto
   Dests: 750:gosub, 2050:auto
 (0 1) 2050 NEXT I
-  Origs: 2040:auto
+  Origs: 2010:fornext, 2040:auto
   Dests: 2060:auto
 (0 2) 2060 PRINT
   Origs: 2050:auto
   Dests: 2070:auto
 (0 1) 2070 NEXT J
-  Origs: 2060:auto
+  Origs: 1990:fornext, 2060:auto
   Dests: 2080:auto
 (1 3) 2080 FOR I = 1 TO D1
   Origs: 2070:auto
-  Dests: 2090:auto
+  Dests: 2090:fornext, 2100:fornext
 (0 3) 2090 R(I) = 2
-  Origs: 2080:auto
+  Origs: 2080:fornext
   Dests: 2100:auto
 (0 1) 2100 NEXT I
-  Origs: 2090:auto
+  Origs: 2080:fornext, 2090:auto
   Dests: 2110:auto
 (0 1) 2110 REM --TEST FOR INSURANCE
   Origs: 2100:auto
@@ -599,25 +599,25 @@ Halstead complexity:
 (0 3)      PRINT "#"; I;
 (1 2)      INPUT Z(I)
 (0 1)      NEXT I
-  Origs: 2160:auto
-  Dests: 2180:auto
+  Origs: 2160:auto, 2170:fornext, 2170:fornext
+  Dests: 2170:fornext, 2170:fornext, 2180:auto
 (1 3) 2180 FOR I = 1 TO N
   Origs: 2170:auto
-  Dests: 2190:auto
+  Dests: 2190:fornext, 2200:fornext
 (1 10) 2190 IF Z(I) < 0 OR Z(I) > B(I) / 2 THEN 2160
-  Origs: 2180:auto
+  Origs: 2180:fornext
   Dests: 2160:ifthen, 2200:auto
 (0 1) 2200 NEXT I
-  Origs: 2190:auto
+  Origs: 2180:fornext, 2190:auto
   Dests: 2210:auto
 (1 3) 2210 FOR I = 1 TO N
   Origs: 2200:auto
-  Dests: 2220:auto
+  Dests: 2220:fornext, 2230:fornext
 (0 11) 2220 S(I) = Z(I) * (3 * (-(P(D1, 2) >= 10)) - 1)
-  Origs: 2210:auto
+  Origs: 2210:fornext
   Dests: 2230:auto
 (0 1) 2230 NEXT I
-  Origs: 2220:auto
+  Origs: 2210:fornext, 2220:auto
   Dests: 2240:auto
 (0 1) 2240 REM --TEST FOR DEALER BLACKJACK
   Origs: 2120:ifthen, 2150:ifthen, 2230:auto
@@ -646,12 +646,12 @@ Halstead complexity:
   Dests: 2280:auto
 (1 3) 2280 FOR I = 1 TO D1
   Origs: 2270:auto
-  Dests: 2290:auto
+  Dests: 2290:fornext, 2300:fornext
 (0 3) 2290 GOSUB 300
-  Origs: 2280:auto
+  Origs: 2280:fornext
   Dests: 300:gosub, 2300:auto
 (0 1) 2300 NEXT I
-  Origs: 2290:auto
+  Origs: 2280:fornext, 2290:auto
   Dests: 2310:auto
 (0 2) 2310 GOTO 3140
   Origs: 2300:auto
@@ -671,9 +671,9 @@ Halstead complexity:
   Dests: 2360:auto
 (1 3) 2360 FOR I = 1 TO N
   Origs: 2350:auto
-  Dests: 2370:auto
+  Dests: 2370:fornext, 2900:fornext
 (0 3) 2370 PRINT "PLAYER"; I;
-  Origs: 2360:auto, 2630:goto
+  Origs: 2360:fornext, 2630:goto
   Dests: 2380:auto
 (0 3) 2380 H1 = 7
   Origs: 2370:auto
@@ -840,7 +840,7 @@ Halstead complexity:
   Origs: 2880:auto
   Dests: 2900:auto
 (0 1) 2900 NEXT I
-  Origs: 2480:goto, 2500:goto, 2540:goto, 2590:goto, 2830:ifthen, 2890:auto
+  Origs: 2360:fornext, 2480:goto, 2500:goto, 2540:goto, 2590:goto, 2830:ifthen, 2890:auto
   Dests: 2910:auto
 (0 3) 2910 GOSUB 300
   Origs: 2900:auto
@@ -850,12 +850,12 @@ Halstead complexity:
   Dests: 2930:auto
 (1 3) 2930 FOR I = 1 TO N
   Origs: 2920:auto
-  Dests: 2940:auto
+  Dests: 2940:fornext, 2950:fornext
 (1 7) 2940 IF R(I) > 0 OR R(I + D1) > 0 THEN 3010
-  Origs: 2930:auto
+  Origs: 2930:fornext
   Dests: 2950:auto, 3010:ifthen
 (0 1) 2950 NEXT I
-  Origs: 2940:auto
+  Origs: 2930:fornext, 2940:auto
   Dests: 2960:auto
 (0 2) 2960 PRINT "DEALER HAD A";
   Origs: 2950:auto
@@ -937,10 +937,10 @@ Halstead complexity:
   Dests: 3170:auto
 (1 3) 3170 FOR I = 1 TO N
   Origs: 3165:auto
-  Dests: 3180:auto
+  Dests: 3180:fornext, 3330:fornext
 (0 3) 3180 AA = Q(I)
 (0 2)      GOSUB 3400
-  Origs: 3170:auto
+  Origs: 3170:fornext
   Dests: 3182:auto, 3400:gosub
 (0 3) 3182 AB = Q(I + D1)
 (0 2)      GOSUB 3410
@@ -996,7 +996,7 @@ Halstead complexity:
   Origs: 3310:auto
   Dests: 3330:auto
 (0 1) 3330 NEXT I
-  Origs: 3320:auto
+  Origs: 3170:fornext, 3320:auto
   Dests: 3340:auto
 (0 3) 3340 PRINT "DEALER'S TOTAL="; T(D1)
   Origs: 3330:auto

@@ -38,18 +38,18 @@ Halstead complexity:
   Dests: 110:auto
 (1 5) 110 FOR X = -30 TO 30 STEP 1.5
   Origs: 100:auto
-  Dests: 120:auto
+  Dests: 120:fornext, 210:fornext
 (0 3) 120 L = 0
-  Origs: 110:auto
+  Origs: 110:fornext
   Dests: 130:auto
 (0 5) 130 Y1 = 5 * INT(SQR(900 - X * X) / 5)
   Origs: 120:auto
   Dests: 140:auto
 (1 6) 140 FOR Y = Y1 TO -Y1 STEP -5
   Origs: 130:auto
-  Dests: 150:auto
+  Dests: 150:fornext, 190:fornext
 (0 4) 150 Z = INT(25 + FNA(SQR(X * X + Y * Y)) - .7 * Y)
-  Origs: 140:auto
+  Origs: 140:fornext
   Dests: 160:auto
 (1 4) 160 IF Z <= L THEN 190
   Origs: 150:auto
@@ -61,13 +61,13 @@ Halstead complexity:
   Origs: 170:auto
   Dests: 190:auto
 (0 1) 190 NEXT Y
-  Origs: 160:ifthen, 180:auto
+  Origs: 140:fornext, 160:ifthen, 180:auto
   Dests: 200:auto
 (0 2) 200 PRINT
   Origs: 190:auto
   Dests: 210:auto
 (0 1) 210 NEXT X
-  Origs: 200:auto
+  Origs: 110:fornext, 200:auto
   Dests: 300:auto
 (0 1) 300 END
   Origs: 210:auto

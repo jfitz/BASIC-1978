@@ -221,9 +221,9 @@ Halstead complexity:
   Dests: 300:auto
 (1 5) 300 FOR I = 0 TO T STEP (T / 8)
   Origs: 219:auto
-  Dests: 310:auto
+  Dests: 310:fornext, 350:fornext
 (1 6) 310 IF I > V / A THEN 400
-  Origs: 300:auto
+  Origs: 300:fornext
   Dests: 320:auto, 400:ifthen
 (0 9) 320 D = D1 - ((A / 2) * I ^ 2)
   Origs: 310:auto
@@ -235,7 +235,7 @@ Halstead complexity:
   Origs: 330:auto
   Dests: 350:auto
 (0 1) 350 NEXT I
-  Origs: 340:auto
+  Origs: 300:fornext, 340:auto
   Dests: 360:auto
 (0 2) 360 GOTO 500
   Origs: 350:auto
@@ -245,9 +245,9 @@ Halstead complexity:
   Dests: 405:auto
 (1 5) 405 FOR I = I TO T STEP (T / 8)
   Origs: 400:auto
-  Dests: 410:auto
+  Dests: 410:fornext, 440:fornext
 (0 16) 410 D = D1 - ((V ^ 2 / (2 * A)) + (V * (I - (V / A))))
-  Origs: 405:auto
+  Origs: 405:fornext
   Dests: 420:auto
 (1 4) 420 IF D <= 0 THEN 1010
   Origs: 410:auto
@@ -256,7 +256,7 @@ Halstead complexity:
   Origs: 420:auto
   Dests: 440:auto
 (0 1) 440 NEXT I
-  Origs: 430:auto
+  Origs: 405:fornext, 430:auto
   Dests: 500:auto
 (0 2) 500 PRINT "CHUTE OPEN"
   Origs: 360:goto, 440:auto
@@ -270,9 +270,9 @@ Halstead complexity:
   Dests: 550:auto
 (1 3) 550 FOR J = 0 TO 42
   Origs: 540:auto
-  Dests: 555:auto
+  Dests: 555:fornext, 600:fornext
 (1 4) 555 IF A(J) = 0 THEN 620
-  Origs: 550:auto
+  Origs: 550:fornext
   Dests: 560:auto, 620:ifthen
 (0 4) 560 K = K + 1
   Origs: 555:auto
@@ -284,7 +284,7 @@ Halstead complexity:
   Origs: 570:auto
   Dests: 600:auto
 (0 1) 600 NEXT J
-  Origs: 570:ifthen, 580:auto
+  Origs: 550:fornext, 570:ifthen, 580:auto
   Dests: 610:auto
 (0 3) 610 GOTO 540
   Origs: 600:auto

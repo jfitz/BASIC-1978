@@ -329,8 +329,8 @@ Halstead complexity:
   Dests: 975:auto
 (1 3) 975 FOR DELAY = 1 TO 2000
 (0 1)     NEXT DELAY
-  Origs: 971:auto
-  Dests: 980:auto
+  Origs: 971:auto, 975:fornext, 975:fornext
+  Dests: 975:fornext, 975:fornext, 980:auto
 (0 3) 980 PRINT "I ROLLED A"; X
   Origs: 975:auto
   Dests: 990:auto
@@ -576,24 +576,24 @@ Halstead complexity:
   Dests: 1790:auto, 1860:ifthen
 (1 3) 1790 FOR Z = 1 TO 4
   Origs: 1780:auto
-  Dests: 1800:auto
+  Dests: 1800:fornext, 1850:fornext
 (1 3) 1800 FOR X = 1 TO A
-  Origs: 1790:auto
-  Dests: 1810:auto
+  Origs: 1790:fornext
+  Dests: 1810:fornext, 1830:fornext
 (0 3) 1810 PRINT TAB(10);
-  Origs: 1800:auto
+  Origs: 1800:fornext
   Dests: 1820:auto
 (0 2) 1820 PRINT "A ";
   Origs: 1810:auto
   Dests: 1830:auto
 (0 1) 1830 NEXT X
-  Origs: 1820:auto
+  Origs: 1800:fornext, 1820:auto
   Dests: 1840:auto
 (0 2) 1840 PRINT
   Origs: 1830:auto
   Dests: 1850:auto
 (0 1) 1850 NEXT Z
-  Origs: 1840:auto
+  Origs: 1790:fornext, 1840:auto
   Dests: 1860:auto
 (1 4) 1860 IF H = 0 THEN 1880
   Origs: 1780:ifthen, 1850:auto
@@ -606,12 +606,12 @@ Halstead complexity:
   Dests: 1890:auto, 1920:ifthen
 (1 3) 1890 FOR Z = 1 TO 2
   Origs: 1880:auto
-  Dests: 1900:auto
+  Dests: 1900:fornext, 1910:fornext
 (0 2) 1900 PRINT "          N N"
-  Origs: 1890:auto
+  Origs: 1890:fornext
   Dests: 1910:auto
 (0 1) 1910 NEXT Z
-  Origs: 1900:auto
+  Origs: 1890:fornext, 1900:auto
   Dests: 1920:auto
 (1 4) 1920 IF B = 0 THEN 2000
   Origs: 1880:ifthen, 1910:auto
@@ -621,12 +621,12 @@ Halstead complexity:
   Dests: 1940:auto
 (1 3) 1940 FOR Z = 1 TO 2
   Origs: 1930:auto
-  Dests: 1950:auto
+  Dests: 1950:fornext, 1960:fornext
 (0 2) 1950 PRINT "     B          B"
-  Origs: 1940:auto
+  Origs: 1940:fornext
   Dests: 1960:auto
 (0 1) 1960 NEXT Z
-  Origs: 1950:auto
+  Origs: 1940:fornext, 1950:auto
   Dests: 1970:auto
 (1 4) 1970 IF T <> 1 THEN 1990
   Origs: 1960:auto
@@ -642,33 +642,33 @@ Halstead complexity:
   Dests: 2010:auto, 2080:ifthen
 (1 3) 2010 FOR Z = 1 TO 2
   Origs: 2000:auto
-  Dests: 2020:auto
+  Dests: 2020:fornext, 2070:fornext
 (0 3) 2020 PRINT TAB(5);
-  Origs: 2010:auto
+  Origs: 2010:fornext
   Dests: 2030:auto
 (1 3) 2030 FOR X = 1 TO L
   Origs: 2020:auto
-  Dests: 2040:auto
+  Dests: 2040:fornext, 2050:fornext
 (0 2) 2040 PRINT " L";
-  Origs: 2030:auto
+  Origs: 2030:fornext
   Dests: 2050:auto
 (0 1) 2050 NEXT X
-  Origs: 2040:auto
+  Origs: 2030:fornext, 2040:auto
   Dests: 2060:auto
 (0 2) 2060 PRINT
   Origs: 2050:auto
   Dests: 2070:auto
 (0 1) 2070 NEXT Z
-  Origs: 2060:auto
+  Origs: 2010:fornext, 2060:auto
   Dests: 2080:auto
 (1 3) 2080 FOR Z = 1 TO 4
   Origs: 2000:ifthen, 2070:auto
-  Dests: 2090:auto
+  Dests: 2090:fornext, 2100:fornext
 (0 2) 2090 PRINT
-  Origs: 2080:auto
+  Origs: 2080:fornext
   Dests: 2100:auto
 (0 1) 2100 NEXT Z
-  Origs: 2090:auto
+  Origs: 2080:fornext, 2090:auto
   Dests: 2110:auto
 (0 2) 2110 PRINT "*****MY BUG*****"
   Origs: 2100:auto
@@ -687,24 +687,24 @@ Halstead complexity:
   Dests: 2160:auto, 2230:ifthen
 (1 3) 2160 FOR Z = 1 TO 4
   Origs: 2150:auto
-  Dests: 2170:auto
+  Dests: 2170:fornext, 2220:fornext
 (0 3) 2170 PRINT TAB(10);
-  Origs: 2160:auto
+  Origs: 2160:fornext
   Dests: 2180:auto
 (1 3) 2180 FOR X = 1 TO S
   Origs: 2170:auto
-  Dests: 2190:auto
+  Dests: 2190:fornext, 2200:fornext
 (0 2) 2190 PRINT "F ";
-  Origs: 2180:auto
+  Origs: 2180:fornext
   Dests: 2200:auto
 (0 1) 2200 NEXT X
-  Origs: 2190:auto
+  Origs: 2180:fornext, 2190:auto
   Dests: 2210:auto
 (0 2) 2210 PRINT
   Origs: 2200:auto
   Dests: 2220:auto
 (0 1) 2220 NEXT Z
-  Origs: 2210:auto
+  Origs: 2160:fornext, 2210:auto
   Dests: 2230:auto
 (1 4) 2230 IF R <> 1 THEN 2250
   Origs: 2150:ifthen, 2220:auto
@@ -729,12 +729,12 @@ Halstead complexity:
   Dests: 2300:auto
 (1 3) 2300 FOR Z = 1 TO 2
   Origs: 2290:auto
-  Dests: 2310:auto
+  Dests: 2310:fornext, 2320:fornext
 (0 2) 2310 PRINT "     B          B"
-  Origs: 2300:auto
+  Origs: 2300:fornext
   Dests: 2320:auto
 (0 1) 2320 NEXT Z
-  Origs: 2310:auto
+  Origs: 2300:fornext, 2310:auto
   Dests: 2330:auto
 (1 4) 2330 IF U <> 1 THEN 2350
   Origs: 2320:auto
@@ -750,24 +750,24 @@ Halstead complexity:
   Dests: 2370:auto, 2450:ifthen
 (1 3) 2370 FOR Z = 1 TO 2
   Origs: 2360:auto
-  Dests: 2380:auto
+  Dests: 2380:fornext, 2430:fornext
 (0 3) 2380 PRINT TAB(5);
-  Origs: 2370:auto
+  Origs: 2370:fornext
   Dests: 2390:auto
 (1 3) 2390 FOR X = 1 TO V
   Origs: 2380:auto
-  Dests: 2400:auto
+  Dests: 2400:fornext, 2410:fornext
 (0 2) 2400 PRINT " L";
-  Origs: 2390:auto
+  Origs: 2390:fornext
   Dests: 2410:auto
 (0 1) 2410 NEXT X
-  Origs: 2400:auto
+  Origs: 2390:fornext, 2400:auto
   Dests: 2420:auto
 (0 2) 2420 PRINT
   Origs: 2410:auto
   Dests: 2430:auto
 (0 1) 2430 NEXT Z
-  Origs: 2420:auto
+  Origs: 2370:fornext, 2420:auto
   Dests: 2450:auto
 (1 4) 2450 IF Y <> 0 THEN 2540
   Origs: 2360:ifthen, 2430:auto
