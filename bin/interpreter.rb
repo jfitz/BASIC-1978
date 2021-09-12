@@ -167,7 +167,6 @@ class Interpreter
     @default_args = {}
     @variables = {}
     @user_function_defs = {}
-    @user_function_lines = {}
     @user_var_values = []
 
     @function_stack = []
@@ -326,7 +325,7 @@ class Interpreter
     @variables = {}
     @data_store.reset
     @user_function_defs = {}
-    @user_function_lines = @program.assign_function_markers
+    @program.assign_function_markers
 
     @previous_stack = []
     clear_previous_lines
@@ -361,7 +360,12 @@ class Interpreter
         program_store_line(line, false, false)
       end
     end
-    program_check
+
+    raise BASICRuntimeError.new(:te_chain_errors, filename) unless
+      @program.check_for_errors(self) &&
+      @program.optimize(self) &&
+      @program.init_data(self)
+
   rescue Errno::ENOENT, Errno::EISDIR
     raise BASICRuntimeError.new(:te_no_chain, filename)
   end
@@ -373,7 +377,6 @@ class Interpreter
     @fornexts = {}
     @return_stack = []
     @user_function_defs = {}
-    @user_function_lines = {}
     @user_var_values = []
 
     filename, _keywords = parse_args(tokens)
@@ -483,7 +486,7 @@ class Interpreter
   end
 
   def run_user_function(name)
-    line_index = @user_function_lines[name]
+    line_index = @program.user_function_line(name)
 
     raise(BASICSyntaxError, "Function #{name} not defined") if line_index.nil?
 
