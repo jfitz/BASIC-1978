@@ -538,12 +538,17 @@ class AbstractStatement
     text = AbstractToken.pretty_tokens(@keywords, @core_tokens)
     text = ' ' + text unless text.empty?
 
+    line = ''
+
+    line = " (#{@part_of_user_function})" unless @part_of_user_function.nil?
+
     if show_timing
-      timing = @profile_time.round(4).to_s
-      line = ' (' + timing + '/' + @profile_count.to_s + ')' + text
+      line += " (#{@profile_time.round(4)}/#{@profile_count})"
     else
-      line = ' (' + @profile_count.to_s + ')' + text
+      line += " (#{@profile_count})"
     end
+
+    line += text
 
     lines = [line]
 
@@ -609,9 +614,8 @@ class AbstractStatement
   def print_trace_info(trace_out, current_line_stmt_mod)
     trace_out.newline_when_needed
 
-    unless @part_of_user_function.nil?
-      trace_out.print_out '(' + @part_of_user_function.to_s + ') '
-    end
+    trace_out.print_out "(#{@part_of_user_function}) " unless
+      @part_of_user_function.nil?
 
     index = current_line_stmt_mod.index
 
