@@ -331,7 +331,13 @@ class AbstractStatement
   def analyze_pretty(number)
     texts = []
 
-    texts << "(#{@mccabe} #{@comprehension_effort}) #{number} #{core_pretty}"
+    text = ''
+
+    text += "(#{@part_of_user_function}) " unless @part_of_user_function.nil?
+
+    text += "(#{@mccabe} #{@comprehension_effort}) #{number} #{core_pretty}"
+
+    texts << text
 
     number = ' ' * number.size
 

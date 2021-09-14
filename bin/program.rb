@@ -631,33 +631,6 @@ class Program
     @lines.min[0]
   end
 
-  def assign_function_markers
-    @user_function_start_lines = {}
-    part_of_user_function = nil
-
-    line_numbers = @lines.keys.sort
-
-    line_numbers.each do |line_number|
-      line = @lines[line_number]
-      statements = line.statements
-      statement_index = 0
-      statements.each do |statement|
-        if statement.multidef?
-          function_name = statement.function_name
-          line_index = LineStmtMod.new(line_number, statement_index, 0)
-          @user_function_start_lines[function_name] = line_index
-          part_of_user_function = function_name
-        end
-
-        statement.part_of_user_function = part_of_user_function
-
-        part_of_user_function = nil if statement.multiend?
-
-        statement_index += 1
-      end
-    end
-  end
-
   def user_function_line(name)
     @user_function_start_lines[name]
   end
@@ -1203,6 +1176,35 @@ class Program
     end
 
     okay
+  end
+
+  def assign_function_markers
+    @user_function_start_lines = {}
+    part_of_user_function = nil
+
+    line_numbers = @lines.keys.sort
+
+    line_numbers.each do |line_number|
+      line = @lines[line_number]
+      statements = line.statements
+      statement_index = 0
+      statements.each do |statement|
+        if statement.multidef?
+          function_name = statement.function_name
+          line_index = LineStmtMod.new(line_number, statement_index, 0)
+          @user_function_start_lines[function_name] = line_index
+          part_of_user_function = function_name
+        end
+
+        statement.part_of_user_function = part_of_user_function
+
+        part_of_user_function = nil if statement.multiend?
+
+        statement_index += 1
+      end
+    end
+
+    true
   end
 
   def init_data(interpreter)
