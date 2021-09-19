@@ -183,6 +183,7 @@ class StatementFactory
 
     statement_classes.each do |class_name|
       keyword_sets = class_name.lead_keywords
+
       keyword_sets.each do |set|
         lead_keywords[set] = class_name
       end
@@ -194,6 +195,7 @@ class StatementFactory
   def split_on_statement_separators(tokens)
     tokens_lists = []
     statement_tokens = []
+
     tokens.each do |token|
       if token.statement_separator?
         tokens_lists << statement_tokens
@@ -202,6 +204,7 @@ class StatementFactory
         statement_tokens << token
       end
     end
+
     tokens_lists << statement_tokens unless statement_tokens.empty?
     tokens_lists
   end

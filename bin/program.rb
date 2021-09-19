@@ -318,12 +318,14 @@ class Line
   def okay(program, console_io, line_number)
     retval = true
     index = 0
+
     @statements.each do |statement|
       line_number_index = LineStmtMod.new(line_number, index, 0)
       r = statement.okay(program, console_io, line_number_index)
       retval &&= r
       index += 1
     end
+
     retval
   end
 end
@@ -384,8 +386,10 @@ class LineListSpec
   def make_single(token, program_line_numbers)
     number = IntegerConstant.new(token)
     line_number = LineNumber.new(number)
+
     @line_numbers << line_number if
       program_line_numbers.include?(line_number)
+
     @range_type = :single
   end
 
@@ -647,6 +651,7 @@ class Program
     line_numbers.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
+
       statements.each do |statement|
         if !part_of_user_function.nil? && statement.multidef?
           errors << "Missing FNEND before DEF in line #{line_number}"
@@ -1078,6 +1083,7 @@ class Program
 
       @lines.keys.each do |line_number|
         statements = @lines[line_number].statements
+
         statements.each_with_index do |statement, index|
           line_number_idx = LineStmt.new(line_number, index)
 
@@ -1147,6 +1153,7 @@ class Program
       line = @lines[line_number]
       @line_number = line_number
       statements = line.statements
+
       statements.each do |statement|
         okay &=
           statement.check_for_errors(line_number, interpreter, @console_io)
@@ -1163,6 +1170,7 @@ class Program
       @line_number = line_number
       line = @lines[line_number]
       statements = line.statements
+
       statements.each_with_index do |statement, index|
         mod = statement.start_index
         line_stmt_mod = LineStmtMod.new(line_number, index, mod)
@@ -1188,6 +1196,7 @@ class Program
       line = @lines[line_number]
       statements = line.statements
       statement_index = 0
+
       statements.each do |statement|
         if statement.multidef?
           function_name = statement.function_name
@@ -1214,6 +1223,7 @@ class Program
       @line_number = line_number
       line = @lines[line_number]
       statements = line.statements
+
       statements.each do |statement|
         begin
           statement.init_data(interpreter)
@@ -1366,6 +1376,7 @@ class Program
       statements = line.statements
 
       rs = []
+
       statements.each do |statement|
         rs += statement.numerics
         rs += statement.modifier_numerics
@@ -1385,6 +1396,7 @@ class Program
       statements = line.statements
 
       rs = []
+
       statements.each do |statement|
         rs += statement.strings
         rs += statement.modifier_strings
@@ -1404,6 +1416,7 @@ class Program
       statements = line.statements
 
       rs = []
+
       statements.each do |statement|
         rs += statement.booleans
         rs += statement.modifier_booleans
@@ -1423,6 +1436,7 @@ class Program
       statements = line.statements
 
       rs = []
+
       statements.each do |statement|
         rs = statement.functions
         rs += statement.modifier_functions
@@ -1442,6 +1456,7 @@ class Program
       statements = line.statements
 
       rs = []
+
       statements.each do |statement|
         rs += statement.userfuncs
         rs += statement.modifier_userfuncs
@@ -1461,6 +1476,7 @@ class Program
       statements = line.statements
 
       rs = []
+
       statements.each do |statement|
         rs.concat statement.variables
         rs += statement.modifier_variables
@@ -1480,6 +1496,7 @@ class Program
       statements = line.statements
 
       rs = []
+
       statements.each do |statement|
         rs += statement.operators
         rs += statement.modifier_operators
@@ -1499,6 +1516,7 @@ class Program
       statements = line.statements
 
       rs = []
+
       statements.each do |statement|
         rs += statement.linenums
       end
