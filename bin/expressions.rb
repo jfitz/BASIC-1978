@@ -2473,6 +2473,7 @@ class UserFunctionDefinition
   attr_reader :name
   attr_reader :arguments
   attr_reader :sigils
+  attr_reader :signature
   attr_reader :expression
   attr_reader :numerics
   attr_reader :strings
@@ -2495,8 +2496,10 @@ class UserFunctionDefinition
     @name = user_function_prototype.name
     @arguments = user_function_prototype.arguments
     @sigils = XrefEntry.make_sigils(@arguments)
+    @signature = UserFunctionSignature.new(@name, @sigils)
     @expression = nil
     @expression = ValueExpressionSet.new(parts[2], :scalar) if parts.size == 3
+
     if @expression.nil?
       @numerics = []
       @strings = []
