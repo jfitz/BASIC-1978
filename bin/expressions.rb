@@ -2530,6 +2530,10 @@ class UserFunctionDefinition
     end
   end
 
+  def singledef?
+    !@expression.nil?
+  end
+
   def multidef?
     @expression.nil?
   end

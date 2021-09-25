@@ -1185,8 +1185,39 @@ class Program
     okay
   end
 
-  def assign_function_markers
+  def assign_singleline_function_markers
     @user_function_start_lines = {}
+    part_of_user_function = nil
+
+    line_numbers = @lines.keys.sort
+
+    line_numbers.each do |line_number|
+      line = @lines[line_number]
+      statements = line.statements
+      statement_index = 0
+
+      statements.each do |statement|
+        if statement.singledef?
+          function_signature = statement.function_signature
+          line_index = LineStmtMod.new(line_number, statement_index, 0)
+          @user_function_start_lines[function_signature] = line_index
+          part_of_user_function = function_signature
+        end
+
+        statement.part_of_user_function = part_of_user_function
+
+        part_of_user_function = nil
+
+        statement_index += 1
+      end
+    end
+
+    true
+  end
+
+  def assign_multiline_function_markers
+    okay = true
+
     part_of_user_function = nil
 
     line_numbers = @lines.keys.sort
@@ -1204,7 +1235,14 @@ class Program
           part_of_user_function = function_signature
         end
 
-        statement.part_of_user_function = part_of_user_function
+        unless part_of_user_function.nil?
+          if statement.part_of_user_function.nil?
+            statement.part_of_user_function = part_of_user_function 
+          else
+            @console_io.print_line("Embedded function #{statement.part_of_user_function} in line #{line_number}")
+            okay = false
+          end
+        end
 
         part_of_user_function = nil if statement.multiend?
 
@@ -1212,7 +1250,7 @@ class Program
       end
     end
 
-    true
+    okay
   end
 
   def init_data(interpreter)
