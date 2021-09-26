@@ -103,7 +103,7 @@ Halstead complexity:
   Origs: 1250:auto, 1290:ifthen, 1300:ifthen, 1310:ifthen, 1320:ifthen, 1330:ifthen, 1430:ifthen
   Dests: 1270:auto, 2910:gosub
 FNA(_) (0 11) 1270 DEF FNA(K) = (5 - K) * 3 - 2 * INT(K / 4) + SGN(K - 1) - 1
-  Origs: 1260:auto
+  Origs: 1260:auto, 1400:function
   Dests: 1280:auto
 FNB(_) (0 6) 1280 DEF FNB(K) = K + INT(K / 4) - SGN(K - 1)
   Origs: 1270:auto
@@ -143,7 +143,7 @@ FNB(_) (0 6) 1280 DEF FNB(K) = K + INT(K / 4) - SGN(K - 1)
   Dests: 1400:auto
 (0 5) 1400 U8 = FNA(K)
   Origs: 1390:auto
-  Dests: 1405:auto
+  Dests: 1270:function, 1405:auto
 (1 8) 1405 IF U8 > U8 + FNB(K) THEN 1460
   Origs: 1400:auto
   Dests: 1410:auto, 1460:ifthen

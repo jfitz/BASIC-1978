@@ -155,7 +155,7 @@ FND(_) (0 3) 470 DEF FND(D) = SQR((K(I, 1) - S1) ^ 2 + (K(I, 2) - S2) ^ 2)
   Origs: 440:auto
   Dests: 475:auto
 FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
-  Origs: 470:auto
+  Origs: 470:auto, 490:function, 490:function, 490:function, 490:function, 1040:function, 1160:function, 1160:function, 2910:function, 6140:function, 8590:function, 8590:function
   Dests: 480:auto
 (0 1) 480 REM INITIALIZE ENTERPRIZE'S POSITION
   Origs: 475:auto
@@ -165,7 +165,7 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
 (0 5)     S1 = FNR(1)
 (0 5)     S2 = FNR(1)
   Origs: 480:auto
-  Dests: 530:auto
+  Dests: 475:function, 475:function, 475:function, 475:function, 530:auto
 (1 3) 530 FOR I = 1 TO 9
 (0 3)     C(I, 1) = 0
 (0 3)     C(I, 2) = 0
@@ -234,7 +234,7 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
 (0 1)      NEXT I
 (1 7)      IF K9 > T9 THEN T9 = K9 + 1
   Origs: 820:fornext, 820:fornext, 980:auto
-  Dests: 1100:auto
+  Dests: 475:function, 1100:auto
 (1 4) 1100 IF B9 <> 0 THEN 1200
   Origs: 1040:auto
   Dests: 1150:auto, 1200:ifthen
@@ -247,7 +247,7 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
 (0 5)      Q1 = FNR(1)
 (0 5)      Q2 = FNR(1)
   Origs: 1150:auto
-  Dests: 1200:auto
+  Dests: 475:function, 475:function, 1200:auto
 (0 3) 1200 K7 = K9
 (1 6)      IF B9 <> 1 THEN X$ = "S"
 (0 3)      X0$ = " ARE "
@@ -566,7 +566,7 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
 (0 5) 2910 R1 = FNR(1)
 (1 5)      IF RND(1) >= .6 THEN 3000
   Origs: 2880:auto
-  Dests: 2930:auto, 3000:ifthen
+  Dests: 475:function, 2930:auto, 3000:ifthen
 (0 8) 2930 D(R1) = D(R1) - (RND(1) * 5 + 1)
 (0 2)      PRINT "DAMAGE CONTROL REPORT:  ";
   Origs: 2910:auto
@@ -1133,7 +1133,7 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
 (0 10)      D(R1) = D(R1) - H / S - .5 * RND(1)
 (0 2)      GOSUB 8790
   Origs: 6120:auto
-  Dests: 6170:auto, 8790:gosub
+  Dests: 475:function, 6170:auto, 8790:gosub
 (0 4) 6170 PRINT "DAMAGE CONTROL REPORTS "; G2$; " DAMAGED BY THE HIT'"
   Origs: 6140:auto
   Dests: 6200:auto
@@ -1557,7 +1557,7 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
 (0 2)      GOSUB 8830
 (1 5)      IF Z3 = 0 THEN 8590
   Origs: 1720:gosub, 1880:gosub, 1910:gosub, 2610:gosub, 8580:auto, 8590:ifthen
-  Dests: 8590:ifthen, 8600:auto, 8830:gosub
+  Dests: 475:function, 475:function, 8590:ifthen, 8600:auto, 8830:gosub
 (0 1) 8600 RETURN
   Origs: 8590:auto
   Dests: 
