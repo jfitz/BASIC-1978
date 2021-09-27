@@ -493,9 +493,13 @@ class Interpreter
     statement_index = @current_line_stmt_mod.statement
     statement = statements[statement_index]
 
-    statement.execute_a_statement(
-      self, @trace_out, @current_line_stmt_mod, @function_running
-    )
+    statement.print_trace_info(@trace_out, @current_line_stmt_mod)
+
+    if !statement.part_of_user_function.nil? && !@function_running
+      @trace_out.print_line(' Statement ignored')
+    else
+      statement.execute_a_statement(self, @current_line_stmt_mod)
+    end
   end
 
   def current_user_function

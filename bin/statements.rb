@@ -599,6 +599,7 @@ class AbstractStatement
   def execute(interpreter)
     current_line_stmt_mod = interpreter.current_line_stmt_mod
     index = current_line_stmt_mod.index
+
     if index < 0
       execute_premodifier(interpreter)
     end
@@ -642,21 +643,14 @@ class AbstractStatement
     trace_out.newline
   end
 
-  def execute_a_statement(interpreter, trace_out, current_line_stmt_mod,
-                          function_running)
-    print_trace_info(trace_out, current_line_stmt_mod)
+  def execute_a_statement(interpreter, current_line_stmt_mod)
+    current_user_function = interpreter.current_user_function
 
-    if part_of_user_function.nil? || function_running
-      current_user_function = interpreter.current_user_function
-
-      if @part_of_user_function != current_user_function
-        raise(BASICSyntaxError, 'Invalid transfer in/out of function')
-      end
-
-      execute(interpreter)
-    else
-      trace_out.print_line(' Statement ignored')
+    if @part_of_user_function != current_user_function
+      raise(BASICSyntaxError, 'Invalid transfer in/out of function')
     end
+
+    execute(interpreter)
   end
 
   def start_index
