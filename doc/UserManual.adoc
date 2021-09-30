@@ -869,9 +869,28 @@ Examples:
 
 You can GOTO or GOSUB within a function.
 You cannot GOTO or GOSUB into the body of a user-defined function, or out of the body of a user-defined function, or from one user-defined function to another user-defined function.
+Such transfers will cause an error.
 
-The DEF statement is processed before the program runs, and processed only once.
-Thus, it does not have to appear before it is used in a LET statement.
+A DEF statement cannot be part of the flow of execution.
+The following code will create an error:
+
+        10 PRINT "HELLO"
+	20 DEF FNA(H) = H * 3
+	30 LET A = 6
+	40 LET B = FNA(A)
+	50 PRINT B
+	60 GOTO 20
+	99 END
+
+When processing line 60, BASIC attempts to change control to line 20.
+As line 20 is part of a function, this is an invalid change of control to a function.
+
+Line 20 by itself does not cause a problem.
+After processing line 10, the BASIC interpreter assigns control to the next non-function line, which is line 30.
+Control flows from line 10 to line 30, skipping line 20.
+
+DEF statements are processed before the program runs, and processed only once.
+Thus, they do not have to appear before the function is used.
 (Although tradition is that the DEF is specified before the function is used.)
 
 Multiple functions may be defined with the same name, provided they have different signatures.

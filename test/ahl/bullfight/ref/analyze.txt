@@ -24,14 +24,14 @@ Halstead complexity:
   Dests: 20:auto
 (0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
   Origs: 10:auto
-  Dests: 30:auto
-FNA(_) (0 3) 30 DEF FNA(K) = INT(RND(1) * 2 + 1)
-  Origs: 20:auto
   Dests: 200:auto
+FNA(_) (0 3) 30 DEF FNA(K) = INT(RND(1) * 2 + 1)
+  Origs: 
+  Dests: 
 (0 2) 200 PRINT
 (0 2)     PRINT
 (0 2)     PRINT
-  Origs: 30:auto
+  Origs: 20:auto
   Dests: 202:auto
 (0 3) 202 L = 1
   Origs: 200:auto
@@ -413,12 +413,12 @@ FNA(_) (0 3) 30 DEF FNA(K) = INT(RND(1) * 2 + 1)
   Dests: 1580:goto
 FNC(_) (0 6) 1390 DEF FNC(Q) = FND(Q) * RND(1)
   Origs: 1340:ifthen
-  Dests: 1395:auto
+  Dests: 
 FND(_) (0 20) 1395 DEF FND(Q) = (4.5 + L / 6 - (D(1) + D(2)) * 2.5 + 4 * D(4) + 2 * D(5) - D(3) ^ 2 / 120 - A)
-  Origs: 1390:auto
-  Dests: 1400:auto
+  Origs: 
+  Dests: 
 (1 4) 1400 IF D(4) <> 2 THEN 1430
-  Origs: 1395:auto
+  Origs: 
   Dests: 1410:auto, 1430:ifthen
 (0 2) 1410 PRINT "THE CROWD CHEERS WILDLY!"
   Origs: 1400:auto
@@ -610,5 +610,22 @@ FND(_) (0 20) 1395 DEF FND(Q) = (4.5 + L / 6 - (D(1) + D(2)) * 2.5 + 4 * D(4) + 
 
 Unreachable code:
 
-All executable lines are reachable.
+1400: IF D(4) <> 2 THEN 1430
+1410: PRINT "THE CROWD CHEERS WILDLY!"
+1420: GOTO 1450
+1430: IF D(5) <> 2 THEN 1450
+1440: PRINT "THE CROWD CHEERS!"
+1440.1: PRINT
+1450: PRINT "THE CROWD AWARDS YOU"
+1460: IF FNC(Q) < 2.4 THEN 1570
+1470: IF FNC(Q) < 4.9 THEN 1550
+1480: IF FNC(Q) < 7.4 THEN 1520
+1500: PRINT "OLE!  YOU ARE 'MUY HOMBRE'!! OLE!  OLE!"
+1510: GOTO 1580
+1520: PRINT "BOTH EARS OF THE BULL!"
+1530: PRINT "OLE!"
+1540: GOTO 1580
+1550: PRINT "ONE EAR OF THE BULL."
+1560: GOTO 1580
+1570: PRINT "NOTHING AT ALL."
 

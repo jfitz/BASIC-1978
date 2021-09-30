@@ -200,10 +200,14 @@ class UserFunctionSignature < AbstractElement
   end
 
   def ==(other)
+    return false if other.nil?
+
     @name == other.name && @sigils == other.sigils
   end
 
   def !=(other)
+    return true if other.nil?
+
     @name != other.name || @sigils != other.sigils
   end
 
