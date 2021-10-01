@@ -493,6 +493,7 @@ class AbstractStatement
   def optimize(interpreter, line_stmt_mod, program)
     set_for_lines(interpreter, line_stmt_mod, program)
     define_user_functions(interpreter)
+    set_endfunc_lines(line_stmt_mod, program)
 
     line_number = line_stmt_mod.line_number
     stmt = line_stmt_mod.statement
@@ -513,6 +514,8 @@ class AbstractStatement
   end
 
   def set_for_lines (_, _, _) end
+
+  def set_endfunc_lines(_, _) end
 
   private
 
@@ -1142,6 +1145,10 @@ class InvalidStatement < AbstractStatement
     @text
   end
 
+  def set_endfunc_lines(_, _)
+    raise(BASICSyntaxError, @errors[0])
+  end
+
   def set_for_lines(_, _, _)
     raise(BASICSyntaxError, @errors[0])
   end
@@ -1739,6 +1746,15 @@ class DefineFunctionStatement < AbstractStatement
     else
       @errors << 'Syntax error'
     end
+  end
+
+  def set_endfunc_lines(line_stmt_mod, program)
+    return unless multidef?
+
+    name = @definition.name
+
+    @endfunc_line_stmt_mod =
+      program.find_closing_endfunc_line_stmt_mod(name, line_stmt_mod)
   end
 
   def singledef?
