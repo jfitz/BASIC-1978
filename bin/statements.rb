@@ -369,19 +369,19 @@ class AbstractStatement
     result
   end
 
-  def pre_trace(index)
-    index = -index
-    index -= 1
-    @modifiers[index].pre_trace
+  def pre_trace(mod)
+    mod = -mod
+    mod -= 1
+    @modifiers[mod].pre_trace
   end
 
   def core_trace
     AbstractToken.pretty_tokens(@keywords, @core_tokens)
   end
 
-  def post_trace(index)
-    index -= 1
-    @modifiers[index].post_trace
+  def post_trace(mod)
+    mod -= 1
+    @modifiers[mod].post_trace
   end
 
   def dump
@@ -601,13 +601,13 @@ class AbstractStatement
 
   def execute(interpreter)
     current_line_stmt_mod = interpreter.current_line_stmt_mod
-    index = current_line_stmt_mod.index
+    mod = current_line_stmt_mod.index
 
-    if index < 0
+    if mod < 0
       execute_premodifier(interpreter)
     end
 
-    if index.zero?
+    if mod.zero?
       timing = Benchmark.measure { execute_core(interpreter) }
 
       user_time = timing.utime + timing.cutime
@@ -618,7 +618,7 @@ class AbstractStatement
       @profile_count += 1
     end
 
-    if index > 0
+    if mod > 0
       execute_postmodifier(interpreter)
     end
   end
@@ -631,13 +631,13 @@ class AbstractStatement
     trace_out.print_out "#{@part_of_user_function} " unless
       @part_of_user_function.nil?
 
-    index = current_line_stmt_mod.index
+    mod = current_line_stmt_mod.index
 
     text = ''
 
-    text = pre_trace(index) if index < 0
-    text = core_trace if index.zero?
-    text = post_trace(index) if index > 0
+    text = pre_trace(mod) if mod < 0
+    text = core_trace if mod.zero?
+    text = post_trace(mod) if mod > 0
 
     text = ' ' + text unless text.empty?
     text = current_line_stmt_mod.to_s + ':' + text
@@ -936,15 +936,15 @@ class AbstractStatement
 
   def execute_premodifier(interpreter)
     current_line_stmt_mod = interpreter.current_line_stmt_mod
-    index = 0 - (current_line_stmt_mod.index + 1)
-    modifier = @modifiers[index]
+    mod = 0 - (current_line_stmt_mod.index + 1)
+    modifier = @modifiers[mod]
     modifier.execute_pre(interpreter)
   end
 
   def execute_postmodifier(interpreter)
     current_line_stmt_mod = interpreter.current_line_stmt_mod
-    index = current_line_stmt_mod.index - 1
-    modifier = @modifiers[index]
+    mod = current_line_stmt_mod.index - 1
+    modifier = @modifiers[mod]
     modifier.execute_post(interpreter)
   end
 
@@ -1889,12 +1889,12 @@ class EndStatement < AbstractStatement
     lines
   end
 
-  def okay(program, console_io, line_number_index)
-    next_line = program.find_next_line_stmt_mod(line_number_index)
+  def okay(program, console_io, line_number_stmt)
+    next_line = program.find_next_line_stmt_mod(line_number_stmt)
 
     return true if next_line.nil?
 
-    console_io.print_line("Statements after END in line #{line_number_index}")
+    console_io.print_line("Statements after END in line #{line_number_stmt}")
 
     false
   end
@@ -2375,11 +2375,11 @@ class GosubStatement < AbstractStatement
     [TransferRefLineStmt.new(@destination, 0, :gosub)]
   end
 
-  def okay(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_stmt)
     return true if program.line_number?(@destination)
 
     console_io.print_line(
-      "Line number #{@destination} not found in line #{line_number_index}"
+      "Line number #{@destination} not found in line #{line_number_stmt}"
     )
 
     false
@@ -2387,11 +2387,11 @@ class GosubStatement < AbstractStatement
 
   def execute_core(interpreter)
     line_number = @destination
-    index = interpreter.statement_start_index(line_number, 0)
+    mod = interpreter.statement_start_index(line_number, 0)
 
-    raise(BASICSyntaxError, 'Line number not found') if index.nil?
+    raise(BASICSyntaxError, 'Line number not found') if mod.nil?
 
-    destination = LineStmtMod.new(line_number, 0, index)
+    destination = LineStmtMod.new(line_number, 0, mod)
     interpreter.push_return(interpreter.next_line_stmt_mod)
     interpreter.next_line_stmt_mod = destination
   end
@@ -2453,12 +2453,12 @@ class GotoStatement < AbstractStatement
     [TransferRefLineStmt.new(@destination, 0, :goto)]
   end
 
-  def okay(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_stmt)
     retval = true
 
     unless @destination.nil? || program.line_number?(@destination)
       console_io.print_line(
-        "Line number #{@destination} not found in line #{line_number_index}"
+        "Line number #{@destination} not found in line #{line_number_stmt}"
       )
       retval = false
     end
@@ -2469,9 +2469,9 @@ class GotoStatement < AbstractStatement
   def execute_core(interpreter)
     unless @destination.nil?
       line_number = @destination
-      index = interpreter.statement_start_index(line_number, 0)
-      raise(BASICSyntaxError, 'Line number not found') if index.nil?
-      destination = LineStmtMod.new(line_number, 0, index)
+      mod = interpreter.statement_start_index(line_number, 0)
+      raise(BASICSyntaxError, 'Line number not found') if mod.nil?
+      destination = LineStmtMod.new(line_number, 0, mod)
       interpreter.next_line_stmt_mod = destination
     end
   end
@@ -2848,25 +2848,25 @@ class AbstractIfStatement < AbstractStatement
     goto_refs
   end
 
-  def okay(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_stmt)
     retval = true
 
     if @destination.nil? && @statement.nil?
       console_io.print_line(
-        "Invalid or missing line number in line #{line_number_index}"
+        "Invalid or missing line number in line #{line_number_stmt}"
       )
     end
 
     unless @destination.nil? || program.line_number?(@destination)
       console_io.print_line(
-        "Line number #{@destination} not found in line #{line_number_index}"
+        "Line number #{@destination} not found in line #{line_number_stmt}"
       )
       retval = false
     end
 
     unless @else_dest.nil? || program.line_number?(@else_dest)
       console_io.print_line(
-        "Line number #{@else_dest} not found in line #{line_number_index}"
+        "Line number #{@else_dest} not found in line #{line_number_stmt}"
       )
       retval = false
     end
@@ -2878,11 +2878,9 @@ class AbstractIfStatement < AbstractStatement
     unless @destination.nil?
       @destination = renumber_map[@destination]
       index = 0
-      i = 0
 
-      @tokens.each do |token|
+      @tokens.each_with_index do |token, i|
         index = i if token.to_s == 'THEN'
-        i += 1
       end
 
       @tokens[index + 1] = NumericConstantToken.new(@destination.line_number)
@@ -2910,11 +2908,11 @@ class AbstractIfStatement < AbstractStatement
     if result.value
       unless @destination.nil?
         line_number = @destination
-        index = interpreter.statement_start_index(line_number, 0)
+        mod = interpreter.statement_start_index(line_number, 0)
 
-        raise(BASICSyntaxError, 'Line number not found') if index.nil?
+        raise(BASICSyntaxError, 'Line number not found') if mod.nil?
 
-        destination = LineStmtMod.new(line_number, 0, index)
+        destination = LineStmtMod.new(line_number, 0, mod)
         interpreter.next_line_stmt_mod = destination
       end
 
@@ -2928,11 +2926,11 @@ class AbstractIfStatement < AbstractStatement
     else
       unless @else_dest.nil?
         line_number = @else_dest
-        index = interpreter.statement_start_index(line_number, 0)
+        mod = interpreter.statement_start_index(line_number, 0)
 
-        raise(BASICSyntaxError, 'Line number not found') if index.nil?
+        raise(BASICSyntaxError, 'Line number not found') if mod.nil?
 
-        destination = LineStmtMod.new(line_number, 0, index)
+        destination = LineStmtMod.new(line_number, 0, mod)
         interpreter.next_line_stmt_mod = destination
       end
 
@@ -3468,13 +3466,13 @@ class OnErrorStatement < AbstractStatement
     destinations
   end
 
-  def okay(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_stmt)
     retval = true
 
     unless @destination.nil?
       unless program.line_number?(@destination)
         console_io.print_line(
-          "Line number #{@destination} not found in line #{line_number_index}"
+          "Line number #{@destination} not found in line #{line_number_stmt}"
         )
         retval = false
       end
@@ -3595,14 +3593,14 @@ class OnStatement < AbstractStatement
     goto_refs
   end
 
-  def okay(program, console_io, line_number_index)
+  def okay(program, console_io, line_number_stmt)
     retval = true
 
     unless @destinations.nil?
       @destinations.each do |destination|
         unless program.line_number?(destination)
           console_io.print_line(
-            "Line number #{destination} not found in line #{line_number_index}"
+            "Line number #{destination} not found in line #{line_number_stmt}"
           )
           retval = false
         end
@@ -3630,13 +3628,13 @@ class OnStatement < AbstractStatement
 
     # get destination in list
     line_number = @destinations[index - 1]
-    index = interpreter.statement_start_index(line_number, 0)
+    mod = interpreter.statement_start_index(line_number, 0)
 
-    raise(BASICSyntaxError, 'Line number not found') if index.nil?
+    raise(BASICSyntaxError, 'Line number not found') if mod.nil?
 
     interpreter.push_return(interpreter.next_line_stmt_mod) if @gosub
 
-    destination = LineStmtMod.new(line_number, 0, index)
+    destination = LineStmtMod.new(line_number, 0, mod)
     interpreter.next_line_stmt_mod = destination
   end
 
@@ -3647,13 +3645,11 @@ class OnStatement < AbstractStatement
       new_destinations << renumber_map[destination]
     end
 
-    i = 0
     index = 0
-    @tokens.each do |token|
+    @tokens.each_with_index do |token, i|
       index = i if token.to_s == 'THEN'
       index = i if token.to_s == 'GOTO'
       index = i if token.to_s == 'GOSUB'
-      i += 1
     end
 
     new_destinations.each do |destination|
