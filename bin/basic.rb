@@ -332,7 +332,8 @@ class Shell
 
       load_file_keyboard(filename)
 
-      @interpreter.print_program_errors
+      texts = @interpreter.program_errors
+      texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
     when 'SAVE'
       filename, keywords = parse_args(args)
@@ -361,13 +362,15 @@ class Shell
     when 'LIST'
       texts = @interpreter.program_list(args, false)
       texts.each { |text| @console_io.print_line(text) }
-      @interpreter.print_program_errors
+      texts = @interpreter.program_errors
+      texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
     when 'PRETTY'
       pretty_multiline = $options['pretty_multiline'].value
       texts = @interpreter.program_pretty(args, pretty_multiline)
       texts.each { |text| @console_io.print_line(text) }
-      @interpreter.print_program_errors
+      texts = @interpreter.program_errors
+      texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
     when 'DELETE'
       @interpreter.program_delete(args)
@@ -375,7 +378,8 @@ class Shell
       show_timing = $options['timing'].value
       texts = @interpreter.program_profile(args, show_timing)
       texts.each { |text| @console_io.print_line(text) }
-      @interpreter.print_program_errors
+      texts = @interpreter.program_errors
+      texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
     when 'RENUMBER'
       begin
@@ -383,28 +387,34 @@ class Shell
       rescue BASICCommandError, BASICSyntaxError => e
         @console_io.print_line("Cannot renumber the program: #{e}")
       end
-      @interpreter.print_program_errors
+      texts = @interpreter.program_errors
+      texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
     when 'CROSSREF'
       if @interpreter.program_okay?
         texts = @interpreter.program_crossref
         texts.each { |text| @console_io.print_line(text) }
       else
-        @interpreter.print_program_errors
+        texts = @interpreter.program_errors
+        texts.each { |text| @console_io.print_line(text) }
+        @console_io.newline
       end
     when 'DIMS'
       @interpreter.dump_dims
     when 'PARSE'
       texts = @interpreter.program_parse(args)
       texts.each { |text| @console_io.print_line(text) }
-      @interpreter.print_program_errors
+      texts = @interpreter.program_errors
+      texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
     when 'ANALYZE'
       if @interpreter.program_okay?
         texts = @interpreter.program_analyze
         texts.each { |text| @console_io.print_line(text) }
       else
-        @interpreter.print_program_errors
+        texts = @interpreter.program_errors
+        texts.each { |text| @console_io.print_line(text) }
+        @console_io.newline
       end
     when 'TOKENS'
       texts = @interpreter.program_list(args, true)
@@ -865,7 +875,8 @@ unless list_filename.nil?
     texts = interpreter.program_list('', list_tokens)
     texts.each { |text| console_io.print_line(text) }
   else
-    interpreter.print_program_errors
+    texts = interpreter.program_errors
+    texts.each { |text| console_io.print_line(text) }
   end
 
   console_io.newline
@@ -881,7 +892,8 @@ unless parse_filename.nil?
     texts = interpreter.program_parse('')
     texts.each { |text| console_io.print_line(text) }
   else
-    interpreter.print_program_errors
+    texts = interpreter.program_errors
+    texts.each { |text| console_io.print_line(text) }
   end
 
   console_io.newline
@@ -898,8 +910,11 @@ unless analyze_filename.nil?
     texts = interpreter.program_analyze
     texts.each { |text| console_io.print_line(text) }
   else
-    interpreter.print_program_errors
+    texts = interpreter.program_errors
+    texts.each { |text| console_io.print_line(text) }
   end
+
+  console_io.newline
 end
 
 # pretty-print the source
@@ -913,7 +928,8 @@ unless pretty_filename.nil?
     texts = interpreter.program_pretty('', pretty_multiline)
     texts.each { |text| console_io.print_line(text) }
   else
-    interpreter.print_program_errors
+    texts = interpreter.program_errors
+    texts.each { |text| console_io.print_line(text) }
   end
 
   console_io.newline
@@ -929,8 +945,11 @@ unless cref_filename.nil?
     texts = interpreter.program_crossref
     texts.each { |text| console_io.print_line(text) }
   else
-    interpreter.print_program_errors
+    texts = interpreter.program_errors
+    texts.each { |text| console_io.print_line(text) }
   end
+
+  console_io.newline
 end
 
 # run the source
@@ -962,8 +981,11 @@ unless run_filename.nil?
       console_io.print_line(e.to_s)
     end
   else
-    interpreter.print_program_errors
+    texts = interpreter.program_errors
+    texts.each { |text| console_io.print_line(text) }
   end
+
+  # console_io.newline
 end
 
 # no command-line directives, so run BASIC shell
