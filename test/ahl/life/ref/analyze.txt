@@ -51,9 +51,9 @@ Halstead complexity:
 (1 6) 40 IF B$(C) = "DONE" THEN B$(C) = ""
 (0 2)    GOTO 80
   Origs: 30:auto
-  Dests: 80:goto
+  Dests: 50:auto, 80:goto
 (1 9) 50 IF LEFT$(B$(C), 1) = "." THEN B$(C) = " " + RIGHT$(B$(C), LEN(B$(C)) - 1)
-  Origs: 
+  Origs: 40:auto
   Dests: 60:auto
 (0 4) 60 C = C + 1
   Origs: 50:auto
@@ -118,8 +118,8 @@ Halstead complexity:
 (1 4) 225 FOR X = 1 TO X1 - 1
 (0 2)     PRINT
 (0 1)     NEXT X
-  Origs: 220:auto, 225:fornext, 225:fornext
-  Dests: 225:fornext, 225:fornext, 230:auto
+  Origs: 220:auto
+  Dests: 230:auto
 (1 3) 230 FOR X = X1 TO X2
   Origs: 225:auto
   Dests: 240:fornext, 290:fornext
@@ -132,13 +132,13 @@ Halstead complexity:
 (1 6) 253 IF A(X, Y) = 2 THEN A(X, Y) = 0
 (0 2)     GOTO 270
   Origs: 250:fornext
-  Dests: 270:goto
+  Dests: 256:auto, 270:goto
 (1 6) 256 IF A(X, Y) = 3 THEN A(X, Y) = 1
 (0 2)     GOTO 261
-  Origs: 
-  Dests: 261:goto
+  Origs: 253:auto
+  Dests: 260:auto, 261:goto
 (1 4) 260 IF A(X, Y) <> 1 THEN 270
-  Origs: 
+  Origs: 256:auto
   Dests: 261:auto, 270:ifthen
 (0 4) 261 PRINT TAB(Y); "*";
   Origs: 256:goto, 260:auto
@@ -164,8 +164,8 @@ Halstead complexity:
 (1 4) 295 FOR X = X2 + 1 TO 24
 (0 2)     PRINT
 (0 1)     NEXT X
-  Origs: 290:auto, 295:fornext, 295:fornext
-  Dests: 295:fornext, 295:fornext, 299:auto
+  Origs: 290:auto
+  Dests: 299:auto
 (0 3) 299 X1 = X3
 (0 3)     X2 = X4
 (0 3)     Y1 = Y3
@@ -221,9 +221,9 @@ Halstead complexity:
 (1 9) 590 IF C < 3 OR C > 4 THEN A(X, Y) = 2
 (0 2)     GOTO 600
   Origs: 580:auto
-  Dests: 600:goto
+  Dests: 595:auto, 600:goto
 (0 4) 595 P = P + 1
-  Origs: 
+  Origs: 590:auto
   Dests: 600:auto
 (0 2) 600 GOTO 620
   Origs: 590:goto, 595:auto

@@ -74,8 +74,8 @@ Halstead complexity:
 (1 3)     FOR Y = 0 TO 7
 (1 2)     READ J
 (1 4)     IF J = 15 THEN 180
-  Origs: 90:auto, 120:fornext, 120:fornext
-  Dests: 120:fornext, 120:fornext, 160:auto, 180:ifthen, 200:fornext, 200:fornext
+  Origs: 90:auto
+  Dests: 160:auto, 180:ifthen, 200:fornext
 (0 3) 160 S(X, Y) = J
 (0 2)     GOTO 200
   Origs: 120:auto
@@ -85,28 +85,28 @@ Halstead complexity:
   Origs: 120:ifthen
   Dests: 200:auto
 (0 1) 200 NEXT Y, X
-  Origs: 120:fornext, 120:fornext, 160:goto, 180:auto
+  Origs: 120:fornext, 160:goto, 180:auto
   Dests: 230:auto
 (1 3) 230 FOR X = 0 TO 7
 (1 3)     FOR Y = 0 TO 7
 (1 6)     IF S(X, Y) > -1 THEN 350
-  Origs: 200:auto, 230:fornext, 230:fornext, 1830:goto
-  Dests: 230:fornext, 230:fornext, 310:auto, 350:fornext, 350:fornext, 350:ifthen
+  Origs: 200:auto, 1830:goto
+  Dests: 310:auto, 350:fornext, 350:ifthen
 (2 10) 310 IF S(X, Y) = -1 THEN FOR A = -1 TO 1 STEP 2
 (0 3)     B = G
 (0 2)     GOSUB 650
 (0 1)     NEXT A
-  Origs: 230:auto, 310:fornext, 310:fornext
-  Dests: 310:fornext, 310:fornext, 330:auto, 650:gosub
+  Origs: 230:auto
+  Dests: 330:auto, 650:gosub
 (2 10) 330 IF S(X, Y) = -2 THEN FOR A = -1 TO 1 STEP 2
 (1 5)     FOR B = -1 TO 1 STEP 2
 (0 2)     GOSUB 650
 (0 1)     NEXT B, A
-  Origs: 310:auto, 330:fornext, 330:fornext, 330:fornext, 330:fornext
-  Dests: 330:fornext, 330:fornext, 330:fornext, 330:fornext, 350:auto, 650:gosub
+  Origs: 310:auto
+  Dests: 350:auto, 650:gosub
 (0 1) 350 NEXT Y, X
 (0 2)     GOTO 1140
-  Origs: 230:fornext, 230:fornext, 230:ifthen, 330:auto
+  Origs: 230:fornext, 230:ifthen, 330:auto
   Dests: 1140:goto
 (0 4) 650 U = X + A
 (0 4)     V = Y + B
@@ -116,9 +116,9 @@ Halstead complexity:
 (1 5) 740 IF S(U, V) = 0 THEN GOSUB 910
 (0 2)     GOTO 870
   Origs: 650:auto
-  Dests: 870:goto, 910:gosub
+  Dests: 770:auto, 870:goto, 910:gosub
 (1 4) 770 IF S(U, V) < 0 THEN 870
-  Origs: 
+  Origs: 740:auto
   Dests: 790:auto, 870:ifthen
 (0 4) 790 U = U + A
 (0 4)     V = V + B
@@ -145,14 +145,14 @@ Halstead complexity:
   Dests: 1030:auto
 (1 5) 1030 FOR C = -1 TO 1 STEP 2
 (1 13)      IF U + C < 0 OR U + C > 7 OR V + G < 0 THEN 1080
-  Origs: 980:auto, 1030:fornext
-  Dests: 1030:fornext, 1035:auto, 1080:fornext, 1080:ifthen
+  Origs: 980:auto
+  Dests: 1035:auto, 1080:fornext, 1080:ifthen
 (1 7) 1035 IF S(U + C, V + G) < 0 THEN Q = Q + 1
 (0 2)      GOTO 1080
   Origs: 1030:auto
-  Dests: 1080:goto
+  Dests: 1040:auto, 1080:goto
 (1 13) 1040 IF U - C < 0 OR U - C > 7 OR V - G > 7 THEN 1080
-  Origs: 
+  Origs: 1035:auto
   Dests: 1045:auto, 1080:ifthen
 (1 18) 1045 IF S(U + C, V + G) > 0 AND (S(U - C, V - G) = 0 OR (U - C = X AND V - G = Y)) THEN Q = Q - 2
   Origs: 1040:auto
@@ -179,9 +179,9 @@ Halstead complexity:
 (1 7) 1240 IF R(4) = 0 THEN S(R(3), R(4)) = -2
 (0 2)      GOTO 1420
   Origs: 1230:auto, 1360:goto
-  Dests: 1420:goto
+  Dests: 1250:auto, 1420:goto
 (0 3) 1250 S(R(3), R(4)) = S(R(1), R(2))
-  Origs: 
+  Origs: 1240:auto
   Dests: 1310:auto
 (0 3) 1310 S(R(1), R(2)) = 0
 (1 5)      IF ABS(R(1) - R(3)) <> 2 THEN 1420
@@ -195,22 +195,22 @@ Halstead complexity:
 (1 9)      IF S(X, Y) = -1 THEN B = -2
 (1 5)      FOR A = -2 TO 2 STEP 4
 (0 2)      GOSUB 1370
-  Origs: 1330:auto, 1340:fornext
-  Dests: 1340:fornext, 1350:auto, 1360:fornext, 1370:gosub
+  Origs: 1330:auto
+  Dests: 1350:auto, 1360:fornext, 1370:gosub
 (2 10) 1350 IF S(X, Y) = -2 THEN FOR A = -2 TO 2 STEP 4
 (1 5)      FOR B = -2 TO 2 STEP 4
 (0 2)      GOSUB 1370
 (0 1)      NEXT B
-  Origs: 1340:auto, 1350:fornext, 1350:fornext, 1350:fornext
-  Dests: 1350:fornext, 1350:fornext, 1350:fornext, 1360:auto, 1360:fornext, 1370:gosub
+  Origs: 1340:auto
+  Dests: 1360:auto, 1360:fornext, 1370:gosub
 (0 1) 1360 NEXT A
 (1 9)      IF R(0) <> -99 THEN PRINT "TO" R(3); R(4);
 (0 4)      R(0) = -99
 (0 3)      GOTO 1240
   Origs: 1340:fornext, 1350:auto, 1350:fornext
-  Dests: 1240:goto
+  Dests: 1240:goto, 1365:auto
 (0 2) 1365 GOTO 1420
-  Origs: 
+  Origs: 1360:auto
   Dests: 1420:goto
 (0 4) 1370 U = X + A
 (0 4)      V = Y + B
@@ -230,8 +230,8 @@ Halstead complexity:
 (1 3)      FOR X = 0 TO 7
 (0 4)      I = 5 * X
 (0 3)      PRINT TAB(I);
-  Origs: 1240:goto, 1310:ifthen, 1365:goto, 1420:fornext, 1420:fornext
-  Dests: 1420:fornext, 1420:fornext, 1430:auto, 1550:fornext, 1550:fornext
+  Origs: 1240:goto, 1310:ifthen, 1365:goto
+  Dests: 1430:auto, 1550:fornext
 (1 5) 1430 IF S(X, Y) = 0 THEN PRINT ".";
   Origs: 1420:auto
   Dests: 1470:auto
@@ -252,7 +252,7 @@ Halstead complexity:
 (0 2)      PRINT
 (0 1)      NEXT Y
 (0 2)      PRINT
-  Origs: 1420:fornext, 1420:fornext, 1530:auto
+  Origs: 1420:fornext, 1530:auto
   Dests: 1552:auto
 (1 3) 1552 FOR L = 0 TO 7
   Origs: 1550:auto
@@ -286,8 +286,8 @@ Halstead complexity:
 (0 3)      X = E
 (0 3)      Y = H
 (1 5)      IF S(X, Y) <= 0 THEN 1590
-  Origs: 1570:auto, 1590:ifthen
-  Dests: 1590:ifthen, 1670:auto
+  Origs: 1570:auto
+  Dests: 1670:auto
 (2 3) 1670 INPUT "TO"; A, B
 (0 3)      X = A
 (0 3)      Y = B

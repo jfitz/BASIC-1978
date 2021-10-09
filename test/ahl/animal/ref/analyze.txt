@@ -93,9 +93,9 @@ Halstead complexity:
 (1 6) 230 IF LEFT$(A$, 1) = "Y" THEN PRINT "WHY NOT TRY ANOTHER ANIMAL?"
 (0 3)     GOTO 120
   Origs: 220:auto
-  Dests: 120:goto
+  Dests: 120:goto, 240:auto
 (1 2) 240 INPUT "THE ANIMAL YOU WERE THINKING OF WAS A "; V$
-  Origs: 
+  Origs: 230:auto
   Dests: 250:auto
 (0 2) 250 PRINT "PLEASE TYPE IN A QUESTION THAT WOULD DISTINGUISH A"
   Origs: 240:auto
@@ -148,10 +148,10 @@ Halstead complexity:
   Dests: 410:auto
 (1 4) 410 FOR Z = 3 TO LEN(Q$)
   Origs: 400:auto, 440:ifthen
-  Dests: 415:fornext, 415:fornext
+  Dests: 415:fornext
 (1 7) 415 IF MID$(Q$, Z, 1) <> "\" THEN PRINT MID$(Q$, Z, 1);
 (0 1)     NEXT Z
-  Origs: 410:fornext, 410:fornext
+  Origs: 410:fornext
   Dests: 420:auto
 (1 2) 420 INPUT C$
   Origs: 415:auto
@@ -216,10 +216,10 @@ Halstead complexity:
   Dests: 630:auto
 (1 4) 630 FOR Z = 3 TO LEN(A$(I))
   Origs: 624:auto
-  Dests: 640:fornext, 640:fornext
+  Dests: 640:fornext
 (1 7) 640 IF MID$(A$(I), Z, 1) <> "\" THEN PRINT MID$(A$(I), Z, 1);
 (0 1)     NEXT Z
-  Origs: 630:fornext, 630:fornext
+  Origs: 630:fornext
   Dests: 645:auto
 (0 4) 645 X = X + 1
 (1 6)     IF X = 4 THEN X = 0
