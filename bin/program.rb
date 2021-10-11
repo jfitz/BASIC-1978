@@ -284,6 +284,12 @@ class Line
       errors.each do |error|
         texts << "#{number} #{error}"
       end
+
+      errors = statement.program_errors
+
+      errors.each do |error|
+        texts << "#{number} #{error}"
+      end
     end
 
     texts
@@ -552,6 +558,12 @@ class Program
         errors = statement.errors
         errors.each do |error|
           texts << error + " in line #{line_number}"
+        end
+
+        errors = statement.program_errors
+
+        errors.each do |error|
+          texts << "#{number} #{error}"
         end
       end
     end
@@ -1238,19 +1250,19 @@ class Program
 
   public
 
-  def check_for_errors
-    okay = true
+  def errors?
+    any_errors = false
 
     @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
       statements.each do |statement|
-        okay &= statement.check_for_errors
+        any_errors |= statement.errors?
       end
     end
 
-    okay
+    any_errors
   end
 
   def optimize(interpreter)
@@ -1957,8 +1969,10 @@ class Program
       any_errors = false
 
       statements.each do |statement|
-        statement.errors.each { |error| @console_io.print_line(error) } if
-          print_errors
+        if print_errors
+          statement.errors.each { |error| @console_io.print_line(error) }
+          statement.program_errors.each { |error| @console_io.print_line(error) }
+        end
 
         any_errors |= !statement.errors.empty?
       end
@@ -1986,6 +2000,7 @@ class Program
       # print the errors
       statements.each do |statement|
         statement.errors.each { |error| texts << ' ' + error }
+        statement.program_errors.each { |error| texts << ' ' + error }
       end
 
       # print the warnings
@@ -2017,6 +2032,7 @@ class Program
       # print the errors
       statements.each do |statement|
         statement.errors.each { |error| texts << ' ' + error }
+        statement.program_errors.each { |error| texts << ' ' + error }
       end
 
       # print the warnings
@@ -2056,6 +2072,7 @@ class Program
       # print the errors
       statements.each do |statement|
         statement.errors.each { |error| texts << ' ' + error }
+        statement.program_errors.each { |error| texts << ' ' + error }
       end
 
       # print the warnings
