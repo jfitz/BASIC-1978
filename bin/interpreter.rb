@@ -263,6 +263,7 @@ class Interpreter
     @program.assign_singleline_function_markers
     @program.assign_multiline_function_markers
     @program.assign_autonext
+
     @program.analyze
   end
 
@@ -326,11 +327,12 @@ class Interpreter
   end
 
   def run_program
-    if @program.optimize(self) &&
-       @program.assign_singleline_function_markers &&
-       @program.assign_multiline_function_markers &&
-       @program.assign_autonext &&
-       !@program.errors? &&
+    @program.optimize(self)
+    @program.assign_singleline_function_markers
+    @program.assign_multiline_function_markers
+    @program.assign_autonext
+
+    if !@program.errors? &&
        @program.init_data(self)
       begin
         # run each statement
@@ -359,11 +361,12 @@ class Interpreter
       end
     end
 
+    @program.optimize(self)
+    @program.assign_singleline_function_markers
+    @program.assign_multiline_function_markers
+    @program.assign_autonext
+
     raise BASICRuntimeError.new(:te_chain_errors, filename) unless
-      @program.optimize(self) &&
-      @program.assign_singleline_function_markers &&
-      @program.assign_multiline_function_markers &&
-      @program.assign_autonext &&
       !@program.errors? &&
       @program.init_data(self)
 
