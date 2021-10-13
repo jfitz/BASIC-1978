@@ -509,10 +509,6 @@ class AbstractStatement
     set_for_lines(interpreter, line_stmt, program)
     define_user_functions(interpreter)
     set_endfunc_lines(line_stmt, program)
-    # check_any_after_end
-    # check_gosub_destinations
-    # check_goto_destinations
-    # check_if_destinations
 
     line_number = line_stmt.line_number
     stmt = line_stmt.statement
@@ -526,6 +522,13 @@ class AbstractStatement
 
   def init_data(interpreter)
     load_data(interpreter)
+  end
+
+  def check_program(program)
+    # check_any_after_end
+    # check_gosub_destinations
+    # check_goto_destinations
+    # check_if_destinations
   end
 
   def number_for_stmts
