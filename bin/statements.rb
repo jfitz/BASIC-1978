@@ -1733,7 +1733,7 @@ class DataStatement < AbstractStatement
     data_list = @expressions.evaluate(interpreter)
     ds.store(data_list)
   rescue BASICRuntimeError => e
-    raise BASICPreexecuteError.new(e.scode, e.extra)
+    @errors << e.message
   end
 
   def execute_core(_) end
