@@ -230,8 +230,16 @@ class Interpreter
     !@program.lines.empty?
   end
 
+  def program_optimize
+    @program.optimize(self)
+    @program.assign_singleline_function_markers
+    @program.assign_multiline_function_markers
+    @program.assign_autonext
+    @program.check_program
+  end
+
   def program_okay?
-    @program.okay?
+    !@program.errors?
   end
 
   def program_parse(args)
@@ -259,11 +267,6 @@ class Interpreter
   end
 
   def program_analyze
-    @program.optimize(self)
-    @program.assign_singleline_function_markers
-    @program.assign_multiline_function_markers
-    @program.assign_autonext
-
     @program.analyze
   end
 
@@ -331,8 +334,8 @@ class Interpreter
     @program.assign_singleline_function_markers
     @program.assign_multiline_function_markers
     @program.assign_autonext
-    @program.init_data(self)
     @program.check_program
+    @program.init_data(self)
 
     if !@program.errors?
       begin
@@ -1098,6 +1101,10 @@ class Interpreter
       @user_function_defs.key?(signature)
 
     @user_function_defs[signature]
+  end
+
+  def clear_user_functions
+    @user_function_defs = {}
   end
 
   def define_user_var_values(names_and_values)
