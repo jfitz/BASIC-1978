@@ -1623,6 +1623,22 @@ class ChainStatement < AbstractStatement
     lines
   end
 
+  def gotos(_)
+    transfer_refs = []
+
+    if @autonext_line_stmt
+      line_number = @autonext_line_stmt.line_number
+      stmt = @autonext_line_stmt.statement
+
+      transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
+    end
+
+    empty_line_number = LineNumber.new(nil)
+    transfer_refs << TransferRefLine.new(empty_line_number, :chain)
+
+    transfer_refs
+  end
+
   def execute_core(interpreter)
     target_values = @target.evaluate(interpreter)
     target_value = target_values[0]
@@ -1917,6 +1933,22 @@ class EndStatement < AbstractStatement
     next_line_stmt = program.find_next_line_stmt(line_number_stmt)
 
     @program_errors << 'Statements after END' unless next_line_stmt.nil?
+  end
+
+  def gotos(_)
+    transfer_refs = []
+
+    if @autonext_line_stmt
+      line_number = @autonext_line_stmt.line_number
+      stmt = @autonext_line_stmt.statement
+
+      transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
+    end
+
+    empty_line_number = LineNumber.new(nil)
+    transfer_refs << TransferRefLine.new(empty_line_number, :stop)
+
+    transfer_refs
   end
 
   def execute_core(interpreter)
@@ -2425,7 +2457,7 @@ class GosubStatement < AbstractStatement
 
   def execute_core(interpreter)
     line_number = @destination
-    mod = interpreter.statement_start_index(line_number, 0)
+    mod = interpreter.statement_start_index(line_number)
 
     raise(BASICSyntaxError, 'Line number not found') if mod.nil?
 
@@ -2511,7 +2543,7 @@ class GotoStatement < AbstractStatement
   def execute_core(interpreter)
     unless @destination.nil?
       line_number = @destination
-      mod = interpreter.statement_start_index(line_number, 0)
+      mod = interpreter.statement_start_index(line_number)
       raise(BASICSyntaxError, 'Line number not found') if mod.nil?
       destination = LineStmtMod.new(line_number, 0, mod)
       interpreter.next_line_stmt_mod = destination
@@ -2968,7 +3000,7 @@ class AbstractIfStatement < AbstractStatement
     if result.value
       unless @destination.nil?
         line_number = @destination
-        mod = interpreter.statement_start_index(line_number, 0)
+        mod = interpreter.statement_start_index(line_number)
 
         raise(BASICSyntaxError, 'Line number not found') if mod.nil?
 
@@ -2986,7 +3018,7 @@ class AbstractIfStatement < AbstractStatement
     else
       unless @else_dest.nil?
         line_number = @else_dest
-        mod = interpreter.statement_start_index(line_number, 0)
+        mod = interpreter.statement_start_index(line_number)
 
         raise(BASICSyntaxError, 'Line number not found') if mod.nil?
 
@@ -3700,7 +3732,7 @@ class OnStatement < AbstractStatement
 
     # get destination in list
     line_number = @destinations[index - 1]
-    mod = interpreter.statement_start_index(line_number, 0)
+    mod = interpreter.statement_start_index(line_number)
 
     raise(BASICSyntaxError, 'Line number not found') if mod.nil?
 
@@ -4382,6 +4414,22 @@ class StopStatement < AbstractStatement
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
     lines
+  end
+
+  def gotos(_)
+    transfer_refs = []
+
+    if @autonext_line_stmt
+      line_number = @autonext_line_stmt.line_number
+      stmt = @autonext_line_stmt.statement
+
+      transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
+    end
+
+    empty_line_number = LineNumber.new(nil)
+    transfer_refs << TransferRefLine.new(empty_line_number, :stop)
+
+    transfer_refs
   end
 
   def execute_core(interpreter)

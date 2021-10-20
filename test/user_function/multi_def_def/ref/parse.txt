@@ -1,2 +1,41 @@
-Missing FNEND before DEF in line 125
+10 REM TEST MULTILINE USER FUNCTION
+ Remark:TEST MULTILINE USER FUNCTION
+20 PRINT "START"
+ TextConstant:"START"
+ CarriageControl:NL
+30 A = FNA(100)
+ Variable:A -> _
+ NumericConstant:100
+ UserFunction:FNA(_) -> _
+ AssignmentOperator:= _ -> _
+40 PRINT "A IS:"; A
+ TextConstant:"A IS:"
+ CarriageControl:;
+ Variable:A -> _
+ CarriageControl:NL
+90 PRINT "END"
+ TextConstant:"END"
+ CarriageControl:NL
+100 DEF FNA(H)
+ UserFunctionName:FNA -> _
+ VariableName:H -> _
+110 PRINT "START FNA()"
+ TextConstant:"START FNA()"
+ CarriageControl:NL
+120 FNA = H - 9
+ UserFunction:FNA -> _
+ Variable:H -> _
+ NumericConstant:9
+ BinaryOperatorMinus:-(_,_) -> _
+ AssignmentOperator:= _ -> _
+125 DEF FNB(X)
+ UserFunctionName:FNB -> _
+ VariableName:X -> _
+130 PRINT "END FNA()"
+ TextConstant:"END FNA()"
+ CarriageControl:NL
+140 FNEND
+ 
+999 END
+ 
 
