@@ -564,10 +564,6 @@ class Program
     texts
   end
 
-  def check
-    @errors = check_program_old
-  end
-
   def find_next_line(current_line_stmt_mod)
     # find next numbered statement
     line_numbers = @lines.keys.sort
@@ -755,33 +751,6 @@ class Program
   end
 
   private
-
-  def check_program_old
-    errors = []
-
-    part_of_user_function = nil
-
-    line_numbers = lines.keys.sort
-
-    line_numbers.each do |line_number|
-      line = @lines[line_number]
-      statements = line.statements
-
-      statements.each do |statement|
-        if !part_of_user_function.nil? && statement.multidef?
-          errors << "Missing FNEND before DEF in line #{line_number}"
-        end
-
-        if statement.multidef?
-          part_of_user_function = statement.function_signature
-        end
-
-        part_of_user_function = nil if statement.multiend?
-      end
-    end
-
-    errors
-  end
 
   def line_list_spec(tokens)
     line_numbers = @lines.keys.sort
@@ -1243,7 +1212,7 @@ class Program
   public
 
   def errors?
-    any_errors = false
+    any_errors = !@errors.empty?
 
     @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
@@ -1258,7 +1227,7 @@ class Program
   end
 
   def optimize(interpreter)
-    interpreter.clear_user_functions
+    @errors = []
 
     @lines.keys.sort.each do |line_number|
       @line_number = line_number
@@ -1403,6 +1372,29 @@ class Program
     end
   end
 
+  def check_function_markers
+    part_of_user_function = nil
+
+    line_numbers = lines.keys.sort
+
+    line_numbers.each do |line_number|
+      line = @lines[line_number]
+      statements = line.statements
+
+      statements.each do |statement|
+        if !part_of_user_function.nil? && statement.multidef?
+          @errors << "Missing FNEND before DEF in line #{line_number}"
+        end
+
+        if statement.multidef?
+          part_of_user_function = statement.function_signature
+        end
+
+        part_of_user_function = nil if statement.multiend?
+      end
+    end
+  end
+
   def find_closing_next_line_stmt(control, current_line_stmt)
     # move to the next statement
     line_number = current_line_stmt.line_number
@@ -1513,7 +1505,6 @@ class Program
 
     line_numbers = line_number_range.line_numbers
     delete_specific_lines(line_numbers)
-    @errors = check_program_old
   end
 
   def enblank(args)
@@ -1555,7 +1546,6 @@ class Program
     end
 
     @lines = new_lines
-    @errors = check_program_old
     renumber_map
   end
 

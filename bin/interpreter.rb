@@ -231,11 +231,14 @@ class Interpreter
   end
 
   def program_optimize
+    clear_user_functions
+
     @program.optimize(self)
     @program.assign_singleline_function_markers
     @program.assign_multiline_function_markers
     @program.assign_autonext
     @program.check_program
+    @program.check_function_markers
   end
 
   def program_okay?
@@ -283,11 +286,6 @@ class Interpreter
     @program.clear
   end
 
-  def program_check
-    errors = @program.check
-    errors.empty?
-  end
-
   def program_errors
     @program.errors
   end
@@ -330,11 +328,15 @@ class Interpreter
   end
 
   def run_program
+    clear_user_functions
+
     @program.optimize(self)
     @program.assign_singleline_function_markers
     @program.assign_multiline_function_markers
     @program.assign_autonext
     @program.check_program
+    @program.check_function_markers
+
     @program.init_data(self)
 
     if !@program.errors?
@@ -365,12 +367,17 @@ class Interpreter
       end
     end
 
+    clear_user_functions
+
     @program.optimize(self)
     @program.assign_singleline_function_markers
     @program.assign_multiline_function_markers
     @program.assign_autonext
     @program.init_data(self)
     @program.check_program
+    @program.check_function_markers
+
+    @program.init_data(self)
 
     raise BASICRuntimeError.new(:te_chain_errors, filename) unless
       !@program.errors?
