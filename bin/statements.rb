@@ -301,19 +301,49 @@ class AbstractStatement
     @part_of_user_function = nil
   end
 
-  private
+  def set_autonext_line_stmt(line_stmt_mod)
+    @autonext_line_stmt = line_stmt_mod
+  end
 
-  def extract_modifiers(tokens_lists)
-    while make_modifier(tokens_lists); end
-    @core_tokens = tokens_lists.flatten
+  def set_autonext_line(line_stmt_mod)
+    @autonext_line = line_stmt_mod
+  end
 
-    @modifiers.each do |modifier|
-      @errors += modifier.errors
-      @warnings += modifier.warnings
+  def optimize(interpreter, line_stmt, program)
+    @program_errors = []
+
+    set_destinations(interpreter, line_stmt, program)
+    set_for_lines(interpreter, line_stmt, program)
+    define_user_functions(interpreter)
+    set_endfunc_lines(line_stmt, program)
+
+    line_number = line_stmt.line_number
+    stmt = line_stmt.statement
+
+    @modifiers.each_with_index do |modifier, index|
+      mod = index + 1
+      mod_line_stmt_mod = LineStmtMod.new(line_number, stmt, mod)
+      modifier.optimize(interpreter, mod_line_stmt_mod, program)
     end
   end
 
-  public
+  def init_data(interpreter)
+    load_data(interpreter)
+  end
+
+  def set_destinations (_, _, _) end
+
+  def set_for_lines (_, _, _) end
+
+  def set_endfunc_lines(_, _) end
+
+  def define_user_functions(_) end
+
+  def load_data(_) end
+
+  def load_file_names(_) end
+
+  def renumber(_) end
 
   def uncache
     uncache_core
@@ -323,12 +353,11 @@ class AbstractStatement
 
   def uncache_core; end
 
-  def set_autonext_line_stmt(line_stmt_mod)
-    @autonext_line_stmt = line_stmt_mod
-  end
+  def reset_profile_metrics
+    @profile_count = 0
+    @profile_time = 0
 
-  def set_autonext_line(line_stmt_mod)
-    @autonext_line = line_stmt_mod
+    @modifiers.each { |modifier| modifier.reset_profile_metrics }
   end
 
   def pretty
@@ -496,27 +525,6 @@ class AbstractStatement
     !@errors.empty? || !@program_errors.empty?
   end
 
-  def optimize(interpreter, line_stmt, program)
-    @program_errors = []
-
-    set_for_lines(interpreter, line_stmt, program)
-    define_user_functions(interpreter)
-    set_endfunc_lines(line_stmt, program)
-
-    line_number = line_stmt.line_number
-    stmt = line_stmt.statement
-
-    @modifiers.each_with_index do |modifier, index|
-      mod = index + 1
-      mod_line_stmt_mod = LineStmtMod.new(line_number, stmt, mod)
-      modifier.optimize(interpreter, mod_line_stmt_mod, program)
-    end
-  end
-
-  def init_data(interpreter)
-    load_data(interpreter)
-  end
-
   def check_program(_, _)
     # check_gosub_destinations
     # check_goto_destinations
@@ -525,39 +533,6 @@ class AbstractStatement
 
   def number_for_stmts
     0
-  end
-
-  def set_for_lines (_, _, _) end
-
-  def set_endfunc_lines(_, _) end
-
-  private
-
-  def get_separators(tokens)
-    wanted = ['(', ')', '[', ']', ',', ';']
-
-    separators = []
-
-    tokens.each do |token|
-      separators << token if wanted.include?(token.to_s)
-    end
-
-    separators
-  end
-
-  def define_user_functions(_) end
-
-  def load_data(_) end
-
-  def load_file_names(_) end
-
-  public
-
-  def reset_profile_metrics
-    @profile_count = 0
-    @profile_time = 0
-
-    @modifiers.each { |modifier| modifier.reset_profile_metrics }
   end
 
   def profile(show_timing)
@@ -609,36 +584,6 @@ class AbstractStatement
     lines
   end
 
-  def renumber(_) end
-
-  private
-
-  def execute(interpreter)
-    current_line_stmt_mod = interpreter.current_line_stmt_mod
-    mod = current_line_stmt_mod.index
-
-    if mod < 0
-      execute_premodifier(interpreter)
-    end
-
-    if mod.zero?
-      timing = Benchmark.measure { execute_core(interpreter) }
-
-      user_time = timing.utime + timing.cutime
-      sys_time = timing.stime + timing.cstime
-      time = user_time + sys_time
-
-      @profile_time += time
-      @profile_count += 1
-    end
-
-    if mod > 0
-      execute_postmodifier(interpreter)
-    end
-  end
-
-  public
-
   def print_trace_info(trace_out, current_line_stmt_mod)
     trace_out.newline_when_needed
 
@@ -688,6 +633,186 @@ class AbstractStatement
 
   def multiend?
     false
+  end
+
+  protected
+
+  def check_template(tokens_lists, template)
+    return false unless tokens_lists.size == template.size
+
+    result = true
+    pairs = template.zip(tokens_lists)
+
+    pairs.each do |pair|
+      control = pair[0]
+      value = pair[1]
+
+      if control.class.to_s == 'Array' &&
+         value.class.to_s == 'Array'
+
+        # control array and value array implies an expression
+        result &= value.size == control[0] if control.size == 1
+
+        result &= value.size >= control[0] if
+          control.size == 2 && control[1] == '>='
+
+      elsif control.class.to_s == 'Array' &&
+            value.class.to_s == 'KeywordToken'
+
+        # control array and single value (not array of one) implies
+        # multiple possible keywords
+        result &= control.include?(value.to_s)
+
+      elsif control.class.to_s == 'String' &&
+            value.class.to_s == 'KeywordToken'
+
+        # single control and single value is a specific keyword
+        result &= value.to_s == control
+
+      else
+        result = false
+      end
+    end
+
+    result
+  end
+
+  def split_tokens(tokens, want_separators)
+    lists = []
+    list = []
+    parens_level = 0
+
+    tokens.each do |token|
+      if token.operand? &&
+         (!list.empty? && (list[-1].operand? || list[-1].group_end?))
+        lists << list unless list.empty?
+        list = [token]
+      elsif token.separator? && parens_level.zero?
+        lists << list unless list.empty?
+        lists << token if want_separators
+        list = []
+      else
+        list << token
+      end
+
+      parens_level += 1 if token.group_start?
+      parens_level -= 1 if token.group_end? && !parens_level.zero?
+    end
+
+    lists << list unless list.empty?
+
+    lists
+  end
+
+  def split_on_token(tokens, token_to_split)
+    results = []
+    list = []
+
+    tokens.each do |token|
+      if token.to_s != token_to_split
+        list << token
+      else
+        results << list unless list.empty?
+        list = []
+        results << token
+      end
+    end
+
+    results << list unless list.empty?
+
+    results
+  end
+
+  def split_keywords(tokens)
+    results = []
+    nonkeywords = []
+
+    tokens.each do |token|
+      if token.keyword?
+        results << nonkeywords unless nonkeywords.empty?
+        nonkeywords = []
+        results << token
+      else
+        nonkeywords << token
+      end
+    end
+
+    results << nonkeywords unless nonkeywords.empty?
+
+    results
+  end
+
+  def split_on_group_separators(tokens)
+    tokens_lists = []
+    statement_tokens = []
+
+    # set to TRUE, so an empty list creates one empty token
+    last_was_separator = true
+
+    tokens.each do |token|
+      if token.separator?
+        tokens_lists << statement_tokens
+        statement_tokens = []
+        last_was_separator = true
+      else
+        statement_tokens << token
+        last_was_separator = false
+      end
+    end
+
+    tokens_lists << statement_tokens if
+      !statement_tokens.empty? || last_was_separator
+    tokens_lists
+  end
+
+  def make_references(items, exp1 = nil, exp2 = nil)
+    numerics = []
+    strings = []
+    booleans = []
+    variables = []
+    operators = []
+    functions = []
+    userfuncs = []
+
+    unless exp1.nil?
+      numerics += exp1.numerics
+      strings += exp1.strings
+      booleans += exp1.booleans
+      variables += exp1.variables
+      operators += exp1.operators
+      functions += exp1.functions
+      userfuncs += exp1.userfuncs
+    end
+
+    unless exp2.nil?
+      numerics += exp2.numerics
+      strings += exp2.strings
+      booleans += exp2.booleans
+      variables += exp2.variables
+      operators += exp2.operators
+      functions += exp2.functions
+      userfuncs += exp2.userfuncs
+    end
+
+    unless items.nil?
+      items.each { |item| numerics += item.numerics }
+      items.each { |item| strings += item.strings }
+      items.each { |item| booleans += item.booleans }
+      items.each { |item| variables += item.variables }
+      items.each { |item| operators += item.operators }
+      items.each { |item| functions += item.functions }
+      items.each { |item| userfuncs += item.userfuncs }
+    end
+
+    {
+      numerics: numerics,
+      strings: strings,
+      booleans: booleans,
+      variables: variables,
+      operators: operators,
+      functions: functions,
+      userfuncs: userfuncs
+    }
   end
 
   private
@@ -962,184 +1087,50 @@ class AbstractStatement
     modifier.execute_post(interpreter)
   end
 
-  protected
+  def extract_modifiers(tokens_lists)
+    while make_modifier(tokens_lists); end
+    @core_tokens = tokens_lists.flatten
 
-  def check_template(tokens_lists, template)
-    return false unless tokens_lists.size == template.size
-
-    result = true
-    pairs = template.zip(tokens_lists)
-
-    pairs.each do |pair|
-      control = pair[0]
-      value = pair[1]
-
-      if control.class.to_s == 'Array' &&
-         value.class.to_s == 'Array'
-
-        # control array and value array implies an expression
-        result &= value.size == control[0] if control.size == 1
-
-        result &= value.size >= control[0] if
-          control.size == 2 && control[1] == '>='
-
-      elsif control.class.to_s == 'Array' &&
-            value.class.to_s == 'KeywordToken'
-
-        # control array and single value (not array of one) implies
-        # multiple possible keywords
-        result &= control.include?(value.to_s)
-
-      elsif control.class.to_s == 'String' &&
-            value.class.to_s == 'KeywordToken'
-
-        # single control and single value is a specific keyword
-        result &= value.to_s == control
-
-      else
-        result = false
-      end
+    @modifiers.each do |modifier|
+      @errors += modifier.errors
+      @warnings += modifier.warnings
     end
-
-    result
   end
 
-  def split_tokens(tokens, want_separators)
-    lists = []
-    list = []
-    parens_level = 0
+  def execute(interpreter)
+    current_line_stmt_mod = interpreter.current_line_stmt_mod
+    mod = current_line_stmt_mod.index
+
+    if mod < 0
+      execute_premodifier(interpreter)
+    end
+
+    if mod.zero?
+      timing = Benchmark.measure { execute_core(interpreter) }
+
+      user_time = timing.utime + timing.cutime
+      sys_time = timing.stime + timing.cstime
+      time = user_time + sys_time
+
+      @profile_time += time
+      @profile_count += 1
+    end
+
+    if mod > 0
+      execute_postmodifier(interpreter)
+    end
+  end
+
+  def get_separators(tokens)
+    wanted = ['(', ')', '[', ']', ',', ';']
+
+    separators = []
 
     tokens.each do |token|
-      if token.operand? &&
-         (!list.empty? && (list[-1].operand? || list[-1].group_end?))
-        lists << list unless list.empty?
-        list = [token]
-      elsif token.separator? && parens_level.zero?
-        lists << list unless list.empty?
-        lists << token if want_separators
-        list = []
-      else
-        list << token
-      end
-
-      parens_level += 1 if token.group_start?
-      parens_level -= 1 if token.group_end? && !parens_level.zero?
+      separators << token if wanted.include?(token.to_s)
     end
 
-    lists << list unless list.empty?
-
-    lists
-  end
-
-  def split_on_token(tokens, token_to_split)
-    results = []
-    list = []
-
-    tokens.each do |token|
-      if token.to_s != token_to_split
-        list << token
-      else
-        results << list unless list.empty?
-        list = []
-        results << token
-      end
-    end
-
-    results << list unless list.empty?
-
-    results
-  end
-
-  def split_keywords(tokens)
-    results = []
-    nonkeywords = []
-
-    tokens.each do |token|
-      if token.keyword?
-        results << nonkeywords unless nonkeywords.empty?
-        nonkeywords = []
-        results << token
-      else
-        nonkeywords << token
-      end
-    end
-
-    results << nonkeywords unless nonkeywords.empty?
-
-    results
-  end
-
-  def split_on_group_separators(tokens)
-    tokens_lists = []
-    statement_tokens = []
-
-    # set to TRUE, so an empty list creates one empty token
-    last_was_separator = true
-
-    tokens.each do |token|
-      if token.separator?
-        tokens_lists << statement_tokens
-        statement_tokens = []
-        last_was_separator = true
-      else
-        statement_tokens << token
-        last_was_separator = false
-      end
-    end
-
-    tokens_lists << statement_tokens if
-      !statement_tokens.empty? || last_was_separator
-    tokens_lists
-  end
-
-  def make_references(items, exp1 = nil, exp2 = nil)
-    numerics = []
-    strings = []
-    booleans = []
-    variables = []
-    operators = []
-    functions = []
-    userfuncs = []
-
-    unless exp1.nil?
-      numerics += exp1.numerics
-      strings += exp1.strings
-      booleans += exp1.booleans
-      variables += exp1.variables
-      operators += exp1.operators
-      functions += exp1.functions
-      userfuncs += exp1.userfuncs
-    end
-
-    unless exp2.nil?
-      numerics += exp2.numerics
-      strings += exp2.strings
-      booleans += exp2.booleans
-      variables += exp2.variables
-      operators += exp2.operators
-      functions += exp2.functions
-      userfuncs += exp2.userfuncs
-    end
-
-    unless items.nil?
-      items.each { |item| numerics += item.numerics }
-      items.each { |item| strings += item.strings }
-      items.each { |item| booleans += item.booleans }
-      items.each { |item| variables += item.variables }
-      items.each { |item| operators += item.operators }
-      items.each { |item| functions += item.functions }
-      items.each { |item| userfuncs += item.userfuncs }
-    end
-
-    {
-      numerics: numerics,
-      strings: strings,
-      booleans: booleans,
-      variables: variables,
-      operators: operators,
-      functions: functions,
-      userfuncs: userfuncs
-    }
+    separators
   end
 end
 
@@ -1157,30 +1148,6 @@ class InvalidStatement < AbstractStatement
 
   def to_s
     @text
-  end
-
-  def set_for_lines(_, _, _)
-    raise(BASICSyntaxError, @errors[0])
-  end
-
-  def set_endfunc_lines(_, _)
-    raise(BASICSyntaxError, @errors[0])
-  end
-
-  def set_autonext(_, _)
-    raise(BASICSyntaxError, @errors[0])
-  end
-
-  def define_user_functions(_)
-    raise(BASICSyntaxError, @errors[0])
-  end
-
-  def load_data(_)
-    raise(BASICSyntaxError, @errors[0])
-  end
-
-  def load_file_names(_)
-    raise(BASICSyntaxError, @errors[0])
   end
 
   def execute_core(_)
@@ -1768,8 +1735,6 @@ class DefineFunctionStatement < AbstractStatement
     template = [[1, '>=']]
 
     if check_template(tokens_lists, template)
-      @definition = nil
-
       begin
         @definition = UserFunctionDefinition.new(tokens_lists[0])
         @autonext = @definition.multidef?
@@ -1794,6 +1759,16 @@ class DefineFunctionStatement < AbstractStatement
         program.find_closing_endfunc_line_stmt(name, line_stmt)
     rescue BASICPreexecuteError => e
       @program_errors << e.message
+    end
+  end
+
+  def define_user_functions(interpreter)
+    unless @definition.nil?
+      begin
+        interpreter.set_user_function(@definition)
+      rescue BASICRuntimeError => e
+        @program_errors << e.message
+      end
     end
   end
 
@@ -1825,16 +1800,6 @@ class DefineFunctionStatement < AbstractStatement
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
     lines
-  end
-
-  def define_user_functions(interpreter)
-    unless @definition.nil?
-      begin
-        interpreter.set_user_function(@definition)
-      rescue BASICRuntimeError => e
-        @program_errors << e.message
-      end
-    end
   end
 
   def execute_core(_) end
@@ -1921,18 +1886,18 @@ class EndStatement < AbstractStatement
       check_template(tokens_lists, template)
   end
 
+  def check_program(program, line_number_stmt)
+    next_line_stmt = program.find_next_line_stmt(line_number_stmt)
+
+    @program_errors << 'Statements after END' unless next_line_stmt.nil?
+  end
+
   def dump
     lines = ['']
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
     lines
-  end
-
-  def check_program(program, line_number_stmt)
-    next_line_stmt = program.find_next_line_stmt(line_number_stmt)
-
-    @program_errors << 'Statements after END' unless next_line_stmt.nil?
   end
 
   def gotos(_)
@@ -2202,14 +2167,6 @@ class ForStatement < AbstractStatement
     @comprehension_effort += @while.comprehension_effort unless @while.nil?
   end
 
-  def uncache_core
-    @start.uncache unless @start.nil?
-    @end.uncache unless @end.nil?
-    @step.uncache unless @step.nil?
-    @until.uncache unless @until.nil?
-    @while.uncache unless @while.nil?
-  end
-
   def set_for_lines(interpreter, line_stmt, program)
     @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(line_stmt)
 
@@ -2221,6 +2178,14 @@ class ForStatement < AbstractStatement
     rescue BASICPreexecuteError => e
       @program_errors << e.message
     end
+  end
+
+  def uncache_core
+    @start.uncache unless @start.nil?
+    @end.uncache unless @end.nil?
+    @step.uncache unless @step.nil?
+    @until.uncache unless @until.nil?
+    @while.uncache unless @while.nil?
   end
 
   def dump
@@ -2261,6 +2226,10 @@ class ForStatement < AbstractStatement
     end
 
     transfer_refs
+  end
+
+  def number_for_stmts
+    1
   end
 
   def execute_core(interpreter)
@@ -2308,10 +2277,6 @@ class ForStatement < AbstractStatement
     whilev = @while.evaluate(interpreter)[0] unless @while.nil?
     io = interpreter.trace_out
     print_more_trace_info(io, from, to, step, untilv, whilev, terminated)
-  end
-
-  def number_for_stmts
-    1
   end
 
   private
@@ -2411,10 +2376,10 @@ class GosubStatement < AbstractStatement
     if check_template(tokens_lists, template)
       if tokens_lists[0][0].numeric_constant?
         number = IntegerConstant.new(tokens_lists[0][0])
-        @destination = LineNumber.new(number)
-        @linenums = [@destination]
+        @dest_line = LineNumber.new(number)
+        @linenums = [@dest_line]
 
-        if @destination > line_number
+        if @dest_line > line_number
           @comprehension_effort += 1
         else
           @comprehension_effort += 2
@@ -2427,8 +2392,26 @@ class GosubStatement < AbstractStatement
     end
   end
 
+  def renumber(renumber_map)
+    @dest_line = renumber_map[@dest_line]
+    @linenums = [@dest_line]
+    @tokens[-1] = NumericConstantToken.new(@dest_line.line_number)
+  end
+
+  def set_destinations(interpreter, _, _)
+    mod = interpreter.statement_start_index(@dest_line)
+
+    @dest_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod) unless
+      mod.nil?
+  end
+
+  def check_program(program, line_number_stmt)
+    @program_errors << "Line number #{@dest_line} not found" unless
+      program.line_number?(@dest_line)
+  end
+
   def dump
-    lines = [@destination.dump]
+    lines = [@dest_line.dump]
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
@@ -2445,31 +2428,25 @@ class GosubStatement < AbstractStatement
       transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
     end
 
-    transfer_refs << TransferRefLineStmt.new(@destination, 0, :gosub)
+    transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :gosub)
 
     transfer_refs
   end
 
-  def check_program(program, line_number_stmt)
-    @program_errors << "Line number #{@destination} not found" unless
-      program.line_number?(@destination)
-  end
-
   def execute_core(interpreter)
-    line_number = @destination
-    mod = interpreter.statement_start_index(line_number)
-
-    raise(BASICSyntaxError, 'Line number not found') if mod.nil?
-
-    destination = LineStmtMod.new(line_number, 0, mod)
     interpreter.push_return(interpreter.next_line_stmt_mod)
-    interpreter.next_line_stmt_mod = destination
-  end
 
-  def renumber(renumber_map)
-    @destination = renumber_map[@destination]
-    @linenums = [@destination]
-    @tokens[-1] = NumericConstantToken.new(@destination.line_number)
+    unless @dest_line_stmt_mod.nil?
+      interpreter.next_line_stmt_mod = @dest_line_stmt_mod
+    end
+
+    if @dest_line_stmt_mod.nil? && !@dest_line.nil?
+      mod = interpreter.statement_start_index(@dest_line)
+
+      raise(BASICSyntaxError, 'Line number not found') if mod.nil?
+
+      interpreter.next_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod)
+    end
   end
 end
 
@@ -2488,15 +2465,15 @@ class GotoStatement < AbstractStatement
     @autonext = false unless @any_if_modifiers
 
     template = [[1]]
-    @destination = nil
+    @dest_line = nil
 
     if check_template(tokens_lists, template)
       if tokens_lists[0][0].numeric_constant?
         number = IntegerConstant.new(tokens_lists[0][0])
-        @destination = LineNumber.new(number)
-        @linenums = [@destination]
+        @dest_line = LineNumber.new(number)
+        @linenums = [@dest_line]
 
-        if @destination > line_number
+        if @dest_line > line_number
           @comprehension_effort += 1
         else
           @comprehension_effort += 2
@@ -2509,10 +2486,30 @@ class GotoStatement < AbstractStatement
     end
   end
 
+  def renumber(renumber_map)
+    unless @dest_line.nil?
+      @dest_line = renumber_map[@dest_line]
+      @linenums = [@dest_line]
+      @tokens[-1] = NumericConstantToken.new(@dest_line.line_number)
+    end
+  end
+
+  def check_program(program, line_number_stmt)
+    @program_errors << "Line number #{@dest_line} not found" unless
+      program.line_number?(@dest_line)
+  end
+
+  def set_destinations(interpreter, _, _)
+    mod = interpreter.statement_start_index(@dest_line)
+
+    @dest_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod) unless
+      mod.nil?
+  end
+
   def dump
     lines = []
 
-    lines << @destination.dump unless @destination.nil?
+    lines << @dest_line.dump unless @dest_line.nil?
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
@@ -2529,32 +2526,20 @@ class GotoStatement < AbstractStatement
       transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
     end
 
-    transfer_refs << TransferRefLineStmt.new(@destination, 0, :goto) unless
-      @destination.nil?
+    transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :goto) unless
+      @dest_line.nil?
 
     transfer_refs
   end
 
-  def check_program(program, line_number_stmt)
-    @program_errors << "Line number #{@destination} not found" unless
-      program.line_number?(@destination)
-  end
-
   def execute_core(interpreter)
-    unless @destination.nil?
-      line_number = @destination
-      mod = interpreter.statement_start_index(line_number)
-      raise(BASICSyntaxError, 'Line number not found') if mod.nil?
-      destination = LineStmtMod.new(line_number, 0, mod)
-      interpreter.next_line_stmt_mod = destination
-    end
-  end
+    unless @dest_line.nil?
+      mod = interpreter.statement_start_index(@dest_line)
 
-  def renumber(renumber_map)
-    unless @destination.nil?
-      @destination = renumber_map[@destination]
-      @linenums = [@destination]
-      @tokens[-1] = NumericConstantToken.new(@destination.line_number)
+      raise(BASICSyntaxError, 'Line number not found') if mod.nil?
+
+      destination = LineStmtMod.new(@dest_line, 0, mod)
+      interpreter.next_line_stmt_mod = destination
     end
   end
 end
@@ -2571,9 +2556,9 @@ class AbstractIfStatement < AbstractStatement
       @warnings << 'Constant expression' if
         !@expression.nil? && @expression.constant
 
-      @destination, @statement = parse_target(line_number, tokens_lists['then'])
-      @else_dest = nil
-      @else_dest, @else_stmt = parse_target(line_number, tokens_lists['else']) if
+      @dest_line, @statement = parse_target(line_number, tokens_lists['then'])
+      @else_dest_line = nil
+      @else_dest_line, @else_stmt = parse_target(line_number, tokens_lists['else']) if
         tokens_lists.key?('else')
 
       unless @statement.nil?
@@ -2586,16 +2571,16 @@ class AbstractIfStatement < AbstractStatement
         @warnings += @else_stmt.warnings
       end
 
-      unless @destination.nil?
-        if @destination > line_number
+      unless @dest_line.nil?
+        if @dest_line > line_number
           @comprehension_effort += 1
         else
           @comprehension_effort += 2
         end
       end
 
-      unless @else_dest.nil?
-        if @else_dest > line_number
+      unless @else_dest_line.nil?
+        if @else_dest_line > line_number
           @comprehension_effort += 1
         else
           @comprehension_effort += 2
@@ -2625,9 +2610,9 @@ class AbstractIfStatement < AbstractStatement
         @warnings << 'Constant expression' if
           !@expression.nil? && @expression.constant
 
-        @destination, @statement = parse_target(line_number, stack['then'])
-        @else_dest = nil
-        @else_dest, @else_stmt = parse_target(line_number, stack['else']) if
+        @dest_line, @statement = parse_target(line_number, stack['then'])
+        @else_dest_line = nil
+        @else_dest_line, @else_stmt = parse_target(line_number, stack['else']) if
           stack.key?('else')
 
         unless @statement.nil?
@@ -2640,16 +2625,16 @@ class AbstractIfStatement < AbstractStatement
           @warnings += @else_stmt.warnings
         end
 
-        unless @destination.nil?
-          if @destination > line_number
+        unless @dest_line.nil?
+          if @dest_line > line_number
             @comprehension_effort += 1
           else
             @comprehension_effort += 2
           end
         end
 
-        unless @else_dest.nil?
-          if @else_dest > line_number
+        unless @else_dest_line.nil?
+          if @else_dest_line > line_number
             @comprehension_effort += 1
           else
             @comprehension_effort += 2
@@ -2680,7 +2665,27 @@ class AbstractIfStatement < AbstractStatement
     @mccabe += @statement.mccabe unless @statement.nil?
     @mccabe += @else_stmt.mccabe unless @else_stmt.nil?
 
-    @is_if_no_else = @else_dest.nil? && @else_stmt.nil?
+    @is_if_no_else = @else_dest_line.nil? && @else_stmt.nil?
+  end
+
+  def renumber(renumber_map)
+    unless @dest_line.nil?
+      @dest_line = renumber_map[@dest_line]
+      index = 0
+
+      @tokens.each_with_index do |token, i|
+        index = i if token.to_s == 'THEN'
+      end
+
+      @tokens[index + 1] = NumericConstantToken.new(@dest_line.line_number)
+    end
+
+    unless @else_dest_line.nil?
+      @else_dest_line = renumber_map[@else_dest_line]
+      @tokens[-1] = NumericConstantToken.new(@else_dest_line.line_number)
+    end
+
+    @linenums = make_linenum_references
   end
 
   def set_for_lines(interpreter, line_stmt_mod, program)
@@ -2689,6 +2694,170 @@ class AbstractIfStatement < AbstractStatement
 
     @else_stmt.set_for_lines(interpreter, line_stmt_mod, program) unless
       @else_stmt.nil?
+  end
+
+  def set_destinations(interpreter, _, _)
+    unless @dest_line.nil?
+      mod = interpreter.statement_start_index(@dest_line)
+
+      @dest_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod) unless
+        mod.nil?
+    end
+
+    unless @else_dest_line.nil?
+      mod = interpreter.statement_start_index(@else_dest_line)
+
+      @else_dest_line_stmt_mod = LineStmtMod.new(@else_dest_line, 0, mod) unless
+        mod.nil?
+    end
+  end
+
+  def set_autonext_line_stmt(line_stmt_mod)
+    @autonext_line_stmt = line_stmt_mod
+
+    @statement.set_autonext_line_stmt(line_stmt_mod) unless @statement.nil?
+    @else_stmt.set_autonext_line_stmt(line_stmt_mod) unless @else_stmt.nil?
+  end
+
+  def set_autonext_line(line_stmt_mod)
+    @autonext_line = line_stmt_mod
+
+    @statement.set_autonext_line(line_stmt_mod) unless @statement.nil?
+    @else_stmt.set_autonext_line(line_stmt_mod) unless @else_stmt.nil?
+  end
+
+  def uncache_core
+    @expression.uncache unless @expression.nil?
+    @statement.uncache unless @statement.nil?
+    @else_stmt.uncache unless @else_stmt.nil?
+  end
+
+  def dump
+    lines = []
+
+    lines += @expression.dump unless @expression.nil?
+    lines << @dest_line.dump unless @dest_line.nil?
+    lines += @statement.dump unless @statement.nil?
+    lines << @else_dest_line.dump unless @else_dest_line.nil?
+    lines += @else_stmt.dump unless @else_stmt.nil?
+
+    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
+
+    lines
+  end
+
+  def check_program(program, line_number_stmt)
+    if @dest_line.nil? && @statement.nil?
+      @program_errors << "Invalid or missing line number"
+    end
+
+    unless @dest_line.nil? || program.line_number?(@dest_line)
+      @program_errors << "Line number #{@dest_line} not found"
+    end
+
+    unless @else_dest_line.nil? || program.line_number?(@else_dest_line)
+      @program_errors << "Line number #{@else_dest_line} not found"
+    end
+  end
+
+  def gotos(user_function_start_lines)
+    transfer_refs = []
+
+    # autonext to next statement unless both THEN and ELSE are numbers
+    if @autonext_line_stmt && (!@dest_line.nil? || !@else_dest_line.nil?)
+      line_number = @autonext_line_stmt.line_number
+      stmt = @autonext_line_stmt.statement
+
+      transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
+    end
+
+    transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :ifthen) unless
+      @dest_line.nil?
+
+    transfer_refs += @statement.gotos(user_function_start_lines) unless
+      @statement.nil?
+
+    transfer_refs << TransferRefLineStmt.new(@else_dest_line, 0, :ifthen) unless
+      @else_dest_line.nil?
+
+    transfer_refs += @else_stmt.gotos(user_function_start_lines) unless
+      @else_stmt.nil?
+
+    # autonext to next line if no ELSE
+    if @autonext_line && @else_dest_line.nil? && @else_stmt.nil?
+      line_number = @autonext_line.line_number
+      stmt = @autonext_line.statement
+
+      transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
+    end
+
+    transfer_refs
+  end
+
+  def number_for_stmts
+    number = 0
+
+    number += @statement.number_for_stmts unless @statement.nil?
+    number += @else_stmt.number_for_stmts unless @else_stmt.nil?
+    
+    number
+  end
+
+  def execute_core(interpreter)
+    values = @expression.evaluate(interpreter)
+
+    raise(BASICExpressionError, 'Too many or too few values') unless
+      values.size == 1
+
+    result = values[0]
+
+    result = BooleanConstant.new(result) unless
+      result.class.to_s == 'BooleanConstant'
+
+    if result.value
+      unless @dest_line_stmt_mod.nil?
+        interpreter.next_line_stmt_mod = @dest_line_stmt_mod
+      end
+
+      if @dest_line_stmt_mod.nil? && !@dest_line.nil?
+        mod = interpreter.statement_start_index(@dest_line)
+
+        raise(BASICSyntaxError, 'Line number not found') if mod.nil?
+
+        interpreter.next_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod)
+      end
+
+      if !@statement.nil? && !@else_stmt.nil? && $options['extend_if'].value
+        # go to next numbered line, not next statement
+        interpreter.next_line_stmt_mod = @autonext_line
+      end
+
+      @statement.execute_core(interpreter) unless @statement.nil?
+    else
+      unless @else_dest_line_stmt_mod.nil?
+        interpreter.next_line_stmt_mod = @else_dest_line_stmt_mod
+      end
+
+      if @else_dest_line_stmt_mod.nil? && !@else_dest_line.nil?
+        mod = interpreter.statement_start_index(@else_dest_line)
+
+        raise(BASICSyntaxError, 'Line number not found') if mod.nil?
+
+        interpreter.next_line_stmt_mod =
+          LineStmtMod.new(@else_dest_line, 0, mod)
+      end
+
+      if @else_dest_line.nil? && @else_stmt.nil? && $options['extend_if'].value
+        # go to next numbered line, not next statement
+        interpreter.next_line_stmt_mod = @autonext_line
+      end
+
+      @else_stmt.execute_core(interpreter) unless @else_stmt.nil?
+    end
+
+    s = ' ' + @expression.to_s + ': ' + result.to_s
+    io = interpreter.trace_out
+    io.trace_output(s)
   end
 
   private
@@ -2877,178 +3046,10 @@ class AbstractIfStatement < AbstractStatement
 
   def make_linenum_references
     nums = []
-    nums << @destination unless @destination.nil?
-    nums << @else_dest unless @else_dest.nil?
+    nums << @dest_line unless @dest_line.nil?
+    nums << @else_dest_line unless @else_dest_line.nil?
     nums
   end
-
-  public
-
-  def uncache_core
-    @expression.uncache unless @expression.nil?
-    @statement.uncache unless @statement.nil?
-    @else_stmt.uncache unless @else_stmt.nil?
-  end
-
-  def set_autonext_line_stmt(line_stmt_mod)
-    @autonext_line_stmt = line_stmt_mod
-
-    @statement.set_autonext_line_stmt(line_stmt_mod) unless @statement.nil?
-    @else_stmt.set_autonext_line_stmt(line_stmt_mod) unless @else_stmt.nil?
-  end
-
-  def set_autonext_line(line_stmt_mod)
-    @autonext_line = line_stmt_mod
-
-    @statement.set_autonext_line(line_stmt_mod) unless @statement.nil?
-    @else_stmt.set_autonext_line(line_stmt_mod) unless @else_stmt.nil?
-  end
-
-  def dump
-    lines = []
-
-    lines += @expression.dump unless @expression.nil?
-    lines << @destination.dump unless @destination.nil?
-    lines += @statement.dump unless @statement.nil?
-    lines << @else_dest.dump unless @else_dest.nil?
-    lines += @else_stmt.dump unless @else_stmt.nil?
-
-    @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
-
-    lines
-  end
-
-  def gotos(user_function_start_lines)
-    transfer_refs = []
-
-    # autonext to next statement unless both THEN and ELSE are numbers
-    if @autonext_line_stmt && (!@destination.nil? || !@else_dest.nil?)
-      line_number = @autonext_line_stmt.line_number
-      stmt = @autonext_line_stmt.statement
-
-      transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
-    end
-
-    transfer_refs << TransferRefLineStmt.new(@destination, 0, :ifthen) unless
-      @destination.nil?
-
-    transfer_refs += @statement.gotos(user_function_start_lines) unless
-      @statement.nil?
-
-    transfer_refs << TransferRefLineStmt.new(@else_dest, 0, :ifthen) unless
-      @else_dest.nil?
-
-    transfer_refs += @else_stmt.gotos(user_function_start_lines) unless
-      @else_stmt.nil?
-
-    # autonext to next line if no ELSE
-    if @autonext_line && @else_dest.nil? && @else_stmt.nil?
-      line_number = @autonext_line.line_number
-      stmt = @autonext_line.statement
-
-      transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
-    end
-
-    transfer_refs
-  end
-
-  def check_program(program, line_number_stmt)
-    if @destination.nil? && @statement.nil?
-      @program_errors << "Invalid or missing line number"
-    end
-
-    unless @destination.nil? || program.line_number?(@destination)
-      @program_errors << "Line number #{@destination} not found"
-    end
-
-    unless @else_dest.nil? || program.line_number?(@else_dest)
-      @program_errors << "Line number #{@else_dest} not found"
-    end
-  end
-
-  def renumber(renumber_map)
-    unless @destination.nil?
-      @destination = renumber_map[@destination]
-      index = 0
-
-      @tokens.each_with_index do |token, i|
-        index = i if token.to_s == 'THEN'
-      end
-
-      @tokens[index + 1] = NumericConstantToken.new(@destination.line_number)
-    end
-
-    unless @else_dest.nil?
-      @else_dest = renumber_map[@else_dest]
-      @tokens[-1] = NumericConstantToken.new(@else_dest.line_number)
-    end
-
-    @linenums = make_linenum_references
-  end
-
-  def execute_core(interpreter)
-    values = @expression.evaluate(interpreter)
-
-    raise(BASICExpressionError, 'Too many or too few values') unless
-      values.size == 1
-
-    result = values[0]
-
-    result = BooleanConstant.new(result) unless
-      result.class.to_s == 'BooleanConstant'
-
-    if result.value
-      unless @destination.nil?
-        line_number = @destination
-        mod = interpreter.statement_start_index(line_number)
-
-        raise(BASICSyntaxError, 'Line number not found') if mod.nil?
-
-        destination = LineStmtMod.new(line_number, 0, mod)
-        interpreter.next_line_stmt_mod = destination
-      end
-
-      if !@statement.nil? && !@else_stmt.nil? && $options['extend_if'].value
-        # go to next numbered line, not next statement
-        next_line_stmt_mod = interpreter.find_next_line
-        interpreter.next_line_stmt_mod = next_line_stmt_mod
-      end
-
-      @statement.execute_core(interpreter) unless @statement.nil?
-    else
-      unless @else_dest.nil?
-        line_number = @else_dest
-        mod = interpreter.statement_start_index(line_number)
-
-        raise(BASICSyntaxError, 'Line number not found') if mod.nil?
-
-        destination = LineStmtMod.new(line_number, 0, mod)
-        interpreter.next_line_stmt_mod = destination
-      end
-
-      if @else_dest.nil? && @else_stmt.nil? && $options['extend_if'].value
-        # go to next numbered line, not next statement
-        interpreter.next_line_stmt_mod = @autonext_line
-      end
-
-      @else_stmt.execute_core(interpreter) unless @else_stmt.nil?
-    end
-
-    s = ' ' + @expression.to_s + ': ' + result.to_s
-    io = interpreter.trace_out
-    io.trace_output(s)
-  end
-
-  def number_for_stmts
-    number = 0
-
-    number += @statement.number_for_stmts unless @statement.nil?
-    number += @else_stmt.number_for_stmts unless @else_stmt.nil?
-    
-    number
-  end
-
-  private
 
   def parse_target(line_number, tokens)
     destination = nil
@@ -3514,8 +3515,6 @@ class OnErrorStatement < AbstractStatement
   def initialize(line_number, keywords, tokens_lists)
     super
 
-    @destination = nil
-
     template = [[1]]
 
     if check_template(tokens_lists, template)
@@ -3526,14 +3525,14 @@ class OnErrorStatement < AbstractStatement
 
       if token.numeric_constant?
         if token.to_i == 0
-          @destination = nil
+          @dest_line = nil
           @linenums = []
         else
           number = IntegerConstant.new(token)
-          @destination = LineNumber.new(number)
-          @linenums = [@destination]
+          @dest_line = LineNumber.new(number)
+          @linenums = [@dest_line]
 
-          if @destination > line_number
+          if @dest_line > line_number
             @comprehension_effort += 1
           else
             @comprehension_effort += 2
@@ -3552,7 +3551,7 @@ class OnErrorStatement < AbstractStatement
   def dump
     lines = []
 
-    lines << @destination.dump unless @destination.nil?
+    lines << @dest_line.dump unless @dest_line.nil?
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
@@ -3569,29 +3568,29 @@ class OnErrorStatement < AbstractStatement
       transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
     end
 
-    transfer_refs << TransferRefLineStmt.new(@destination, 0, :onerror) unless
-      @destination.nil?
+    transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :onerror) unless
+      @dest_line.nil?
 
     transfer_refs
   end
 
   def check_program(program, line_number_stmt)
-    unless @destination.nil?
-      unless program.line_number?(@destination)
-        @program_errors << "Line number #{@destination} not found"
+    unless @dest_line.nil?
+      unless program.line_number?(@dest_line)
+        @program_errors << "Line number #{@dest_line} not found"
       end
     end
   end
 
   def execute_core(interpreter)
-    interpreter.seterrorgoto(@destination)
+    interpreter.seterrorgoto(@dest_line)
   end
 
   def renumber(renumber_map)
-    unless @destination.nil?
-      @destination = renumber_map[@destination]
-      @linenums = [@destination]
-      @tokens[-1] = NumericConstantToken.new(@destination.line_number)
+    unless @dest_line.nil?
+      @dest_line = renumber_map[@dest_line]
+      @linenums = [@dest_line]
+      @tokens[-1] = NumericConstantToken.new(@dest_line.line_number)
     end
   end
 end
@@ -3611,7 +3610,7 @@ class OnStatement < AbstractStatement
   def initialize(line_number, keywords, tokens_lists)
     super
 
-    @destinations = nil
+    @dest_lines = nil
     @expression = nil
 
     template1 = [[1, '>='], 'GOTO', [1, '>=']]
@@ -3637,14 +3636,14 @@ class OnStatement < AbstractStatement
 
       destinations = tokens_lists[2]
       line_nums = split_tokens(destinations, false)
-      @destinations = []
+      @dest_lines = []
 
       line_nums.each do |line_num|
         if line_num.size == 1
           token = line_num[0]
           if token.numeric_constant?
             number = IntegerConstant.new(token)
-            @destinations << LineNumber.new(number)
+            @dest_lines << LineNumber.new(number)
           else
             @errors << "Invalid line number #{destination}"
           end
@@ -3653,18 +3652,18 @@ class OnStatement < AbstractStatement
         end
       end
 
-      @linenums = @destinations
+      @linenums = @dest_lines
       @comprehension_effort += @expression.comprehension_effort
 
-      @destinations.each do |destination|
-        if destination > line_number
+      @dest_lines.each do |dest_line|
+        if dest_line > line_number
           @comprehension_effort += 1
         else
           @comprehension_effort += 2
         end
       end
 
-      @mccabe += @destinations.size
+      @mccabe += @dest_lines.size
     else
       @errors << 'Syntax error'
     end
@@ -3679,8 +3678,8 @@ class OnStatement < AbstractStatement
 
     lines += @expression.dump unless @expression.nil?
 
-    @destinations.each { |destination| lines << destination.dump } unless
-      @destinations.nil?
+    @dest_lines.each { |dest_line| lines << dest_line.dump } unless
+      @dest_lines.nil?
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
@@ -3697,7 +3696,7 @@ class OnStatement < AbstractStatement
       transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
     end
 
-    @destinations.each do |goto|
+    @dest_lines.each do |goto|
       transfer_refs << TransferRefLineStmt.new(goto, 0, :goto)
     end
 
@@ -3705,10 +3704,10 @@ class OnStatement < AbstractStatement
   end
 
   def check_program(program, line_number_stmt)
-    unless @destinations.nil?
-      @destinations.each do |destination|
+    unless @dest_lines.nil?
+      @dest_lines.each do |destination|
         unless program.line_number?(destination)
-          @program_errors <<  "Line number #{destination} not found"
+          @program_errors << "Line number #{destination} not found"
         end
       end
     end
@@ -3728,25 +3727,24 @@ class OnStatement < AbstractStatement
     index = value.to_i
 
     raise BASICRuntimeError.new(:te_val_out) if
-      index < 1 || index > @destinations.size
+      index < 1 || index > @dest_lines.size
 
     # get destination in list
-    line_number = @destinations[index - 1]
+    line_number = @dest_lines[index - 1]
     mod = interpreter.statement_start_index(line_number)
 
     raise(BASICSyntaxError, 'Line number not found') if mod.nil?
 
     interpreter.push_return(interpreter.next_line_stmt_mod) if @gosub
 
-    destination = LineStmtMod.new(line_number, 0, mod)
-    interpreter.next_line_stmt_mod = destination
+    interpreter.next_line_stmt_mod = LineStmtMod.new(line_number, 0, mod)
   end
 
   def renumber(renumber_map)
-    new_destinations = []
+    new_dest_lines = []
 
-    @destinations.each do |destination|
-      new_destinations << renumber_map[destination]
+    @dest_lines.each do |dest_line|
+      new_dest_lines << renumber_map[dest_line]
     end
 
     index = 0
@@ -3756,14 +3754,14 @@ class OnStatement < AbstractStatement
       index = i if token.to_s == 'GOSUB'
     end
 
-    new_destinations.each do |destination|
-      @tokens[index + 1] = NumericConstantToken.new(destination.line_number)
+    new_dest_lines.each do |dest_line|
+      @tokens[index + 1] = NumericConstantToken.new(dest_line.line_number)
 
       index += 2
     end
 
-    @destinations = new_destinations
-    @linenums = @destinations
+    @dest_lines = new_dest_lines
+    @linenums = @dest_lines
   end
 end
 
@@ -4261,12 +4259,13 @@ class ResumeStatement < AbstractStatement
       @errors << 'Syntax error'
     end
 
-    @destination = nil
+    @dest_line = nil
+
     unless target.nil?
       begin
         number = IntegerConstant.new(target)
-        @destination = LineNumber.new(number)
-        @linenums = [@destination]
+        @dest_line = LineNumber.new(number)
+        @linenums = [@dest_line]
       rescue BASICSyntaxError
         @errors << 'Invalid target'
       end
@@ -4291,14 +4290,14 @@ class ResumeStatement < AbstractStatement
       transfer_refs << TransferRefLineStmt.new(line_number, stmt, :auto)
     end
 
-    transfer_refs << TransferRefLineStmt.new(@destination, 0, :resume) unless
-      @destination.nil?
+    transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :resume) unless
+      @dest_line.nil?
 
     transfer_refs
   end
 
   def execute_core(interpreter)
-    interpreter.resume(@destination)
+    interpreter.resume(@dest_line)
   end
 end
 
