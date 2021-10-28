@@ -2435,18 +2435,11 @@ class GosubStatement < AbstractStatement
 
   def execute_core(interpreter)
     interpreter.push_return(interpreter.next_line_stmt_mod)
+   
+    raise(BASICSyntaxError, 'Line number not found') if
+      @dest_line_stmt_mod.nil?
 
-    unless @dest_line_stmt_mod.nil?
-      interpreter.next_line_stmt_mod = @dest_line_stmt_mod
-    end
-
-    if @dest_line_stmt_mod.nil? && !@dest_line.nil?
-      mod = interpreter.statement_start_index(@dest_line)
-
-      raise(BASICSyntaxError, 'Line number not found') if mod.nil?
-
-      interpreter.next_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod)
-    end
+    interpreter.next_line_stmt_mod = @dest_line_stmt_mod
   end
 end
 
@@ -2533,14 +2526,8 @@ class GotoStatement < AbstractStatement
   end
 
   def execute_core(interpreter)
-    unless @dest_line.nil?
-      mod = interpreter.statement_start_index(@dest_line)
-
-      raise(BASICSyntaxError, 'Line number not found') if mod.nil?
-
-      destination = LineStmtMod.new(@dest_line, 0, mod)
-      interpreter.next_line_stmt_mod = destination
-    end
+    interpreter.next_line_stmt_mod = @dest_line_stmt_mod unless
+      @dest_line_stmt_mod.nil?
   end
 end
 
@@ -2668,6 +2655,14 @@ class AbstractIfStatement < AbstractStatement
     @is_if_no_else = @else_dest_line.nil? && @else_stmt.nil?
   end
 
+  def set_for_lines(interpreter, line_stmt_mod, program)
+    @statement.set_for_lines(interpreter, line_stmt_mod, program) unless
+      @statement.nil?
+
+    @else_stmt.set_for_lines(interpreter, line_stmt_mod, program) unless
+      @else_stmt.nil?
+  end
+
   def renumber(renumber_map)
     unless @dest_line.nil?
       @dest_line = renumber_map[@dest_line]
@@ -2686,14 +2681,9 @@ class AbstractIfStatement < AbstractStatement
     end
 
     @linenums = make_linenum_references
-  end
 
-  def set_for_lines(interpreter, line_stmt_mod, program)
-    @statement.set_for_lines(interpreter, line_stmt_mod, program) unless
-      @statement.nil?
-
-    @else_stmt.set_for_lines(interpreter, line_stmt_mod, program) unless
-      @else_stmt.nil?
+    @statement.renumber(renumber_map) unless @statement.nil?
+    @else_stmt.renumber(renumber_map) unless @else_stmt.nil?
   end
 
   def set_destinations(interpreter, _, _)
@@ -2710,6 +2700,9 @@ class AbstractIfStatement < AbstractStatement
       @else_dest_line_stmt_mod = LineStmtMod.new(@else_dest_line, 0, mod) unless
         mod.nil?
     end
+
+    @statement.set_destinations(interpreter, _, _) unless @statement.nil?
+    @else_stmt.set_destinations(interpreter, _, _) unless @else_stmt.nil?
   end
 
   def set_autonext_line_stmt(line_stmt_mod)
@@ -2815,17 +2808,8 @@ class AbstractIfStatement < AbstractStatement
       result.class.to_s == 'BooleanConstant'
 
     if result.value
-      unless @dest_line_stmt_mod.nil?
-        interpreter.next_line_stmt_mod = @dest_line_stmt_mod
-      end
-
-      if @dest_line_stmt_mod.nil? && !@dest_line.nil?
-        mod = interpreter.statement_start_index(@dest_line)
-
-        raise(BASICSyntaxError, 'Line number not found') if mod.nil?
-
-        interpreter.next_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod)
-      end
+      interpreter.next_line_stmt_mod = @dest_line_stmt_mod unless
+        @dest_line_stmt_mod.nil?
 
       if !@statement.nil? && !@else_stmt.nil? && $options['extend_if'].value
         # go to next numbered line, not next statement
@@ -2834,18 +2818,8 @@ class AbstractIfStatement < AbstractStatement
 
       @statement.execute_core(interpreter) unless @statement.nil?
     else
-      unless @else_dest_line_stmt_mod.nil?
-        interpreter.next_line_stmt_mod = @else_dest_line_stmt_mod
-      end
-
-      if @else_dest_line_stmt_mod.nil? && !@else_dest_line.nil?
-        mod = interpreter.statement_start_index(@else_dest_line)
-
-        raise(BASICSyntaxError, 'Line number not found') if mod.nil?
-
-        interpreter.next_line_stmt_mod =
-          LineStmtMod.new(@else_dest_line, 0, mod)
-      end
+      interpreter.next_line_stmt_mod = @else_dest_line_stmt_mod unless
+        @else_dest_line_stmt_mod.nil?
 
       if @else_dest_line.nil? && @else_stmt.nil? && $options['extend_if'].value
         # go to next numbered line, not next statement
