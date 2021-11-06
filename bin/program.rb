@@ -546,7 +546,9 @@ class Program
   def errors
     texts = []
 
-    @errors.each { |error| texts << error }
+    @errors.each do |error|
+      texts << "#{error['message']} in line #{error['line']}"
+    end
 
     @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
@@ -811,7 +813,9 @@ class Program
     texts = []
 
     unless @errors.empty?
-      @errors.each { |error| texts << error }
+      @errors.each do |error|
+        texts << "#{error['message']} in line #{error['line']}"
+      end
 
       texts << ''
     end
@@ -1291,7 +1295,11 @@ class Program
           if statement.part_of_user_function.nil?
             statement.part_of_user_function = part_of_user_function 
           else
-            @errors << "Embedded function #{statement.part_of_user_function} in line #{line_number}"
+            @errors <<
+            {
+              'message' => "Embedded function #{statement.part_of_user_function}",
+              'line' => line_number
+            }
             okay = false
           end
         end
@@ -1383,7 +1391,11 @@ class Program
 
       statements.each do |statement|
         if !part_of_user_function.nil? && statement.multidef?
-          @errors << "Missing FNEND before DEF in line #{line_number}"
+          @errors <<
+          {
+            'message' => "Missing FNEND before DEF",
+            'line' => line_number
+          }
         end
 
         if statement.multidef?
