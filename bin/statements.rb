@@ -2671,6 +2671,9 @@ class AbstractIfStatement < AbstractStatement
       end
     end
 
+    # autonext to next statement unless both THEN and ELSE are numbers
+    @autonext = @dest_line.nil? || @else_dest_line.nil?
+
     @comprehension_effort += @statement.comprehension_effort unless @statement.nil?
     @comprehension_effort += @else_stmt.comprehension_effort unless @else_stmt.nil?
 
@@ -2782,8 +2785,7 @@ class AbstractIfStatement < AbstractStatement
   def gotos(user_function_start_lines)
     transfer_refs = []
 
-    # autonext to next statement unless both THEN and ELSE are numbers
-    if @autonext_line_stmt && (!@dest_line.nil? || !@else_dest_line.nil?)
+    if @autonext_line_stmt
       line_number = @autonext_line_stmt.line_number
       stmt = @autonext_line_stmt.statement
 
