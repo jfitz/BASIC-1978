@@ -504,15 +504,15 @@ class AbstractStatement
     vars
   end
 
-  def destinations(_)
+  def transfers(_)
     []
   end
 
-  def destinations_line_auto
+  def transfers_auto
     transfer_ref_lines = []
 
     # convert auto-next to TransferRefLineStmt
-    if @autonext_line_stmt
+    if @autonext && @autonext_line_stmt
       line_number = @autonext_line_stmt.line_number
       stmt = @autonext_line_stmt.statement
 
@@ -522,11 +522,11 @@ class AbstractStatement
     transfer_ref_lines
   end
 
-  def destinations_stmt(user_function_start_lines)
+  def line_stmts(user_function_start_lines)
     line_stmts = []
 
     # convert TransferRefLineStmt objects to LineStmt objects
-    transfer_ref_line_stmts = destinations(user_function_start_lines)
+    transfer_ref_line_stmts = transfers(user_function_start_lines)
 
     transfer_ref_line_stmts.each do |xfer|
       line_stmts << LineStmt.new(xfer.line_number, xfer.statement)
@@ -535,11 +535,11 @@ class AbstractStatement
     line_stmts
   end
 
-  def destinations_stmt_auto
+  def line_stmts_auto
     line_stmts = []
 
     # convert auto-next to LineStmt object
-    if @autonext_line_stmt
+    if @autonext && @autonext_line_stmt
       line_number = @autonext_line_stmt.line_number
       stmt = @autonext_line_stmt.statement
 
@@ -1622,7 +1622,7 @@ class ChainStatement < AbstractStatement
     lines
   end
 
-  def destinations(_)
+  def transfers(_)
     transfer_refs = []
 
     empty_line_number = LineNumber.new(nil)
@@ -1925,7 +1925,7 @@ class EndStatement < AbstractStatement
     lines
   end
 
-  def destinations(_)
+  def transfers(_)
     transfer_refs = []
 
     empty_line_number = LineNumber.new(nil)
@@ -2221,7 +2221,7 @@ class ForStatement < AbstractStatement
     lines
   end
 
-  def destinations(_)
+  def transfers(_)
     transfer_refs = []
 
     unless @loopstart_line_stmt_mod.nil?
@@ -2429,7 +2429,7 @@ class GosubStatement < AbstractStatement
     lines
   end
 
-  def destinations(_)
+  def transfers(_)
     transfer_refs = []
 
     transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :gosub)
@@ -2513,7 +2513,7 @@ class GotoStatement < AbstractStatement
     lines
   end
 
-  def destinations(_)
+  def transfers(_)
     transfer_refs = []
 
     transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :goto) unless
@@ -2753,19 +2753,19 @@ class AbstractIfStatement < AbstractStatement
     end
   end
 
-  def destinations(user_function_start_lines)
+  def transfers(user_function_start_lines)
     transfer_refs = []
 
     transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :ifthen) unless
       @dest_line.nil?
 
-    transfer_refs += @statement.destinations(user_function_start_lines) unless
+    transfer_refs += @statement.transfers(user_function_start_lines) unless
       @statement.nil?
 
     transfer_refs << TransferRefLineStmt.new(@else_dest_line, 0, :ifthen) unless
       @else_dest_line.nil?
 
-    transfer_refs += @else_stmt.destinations(user_function_start_lines) unless
+    transfer_refs += @else_stmt.transfers(user_function_start_lines) unless
       @else_stmt.nil?
 
     # autonext to next line if no ELSE
@@ -3174,7 +3174,7 @@ class AbstractLetStatement < AbstractStatement
     lines
   end
 
-  def destinations(user_function_start_lines)
+  def transfers(user_function_start_lines)
     transfer_refs = []
 
     unless @assignment.nil?
@@ -3517,7 +3517,7 @@ class OnErrorStatement < AbstractStatement
     lines
   end
 
-  def destinations(_)
+  def transfers(_)
     transfer_refs = []
 
     transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :onerror) unless
@@ -3685,7 +3685,7 @@ class OnStatement < AbstractStatement
     lines
   end
 
-  def destinations(_)
+  def transfers(_)
     transfer_refs = []
 
     @dest_lines.each do |goto|
@@ -4236,7 +4236,7 @@ class ResumeStatement < AbstractStatement
     lines
   end
 
-  def destinations(_)
+  def transfers(_)
     transfer_refs = []
 
     transfer_refs << TransferRefLineStmt.new(@dest_line, 0, :resume) unless
@@ -4364,7 +4364,7 @@ class StopStatement < AbstractStatement
     lines
   end
 
-  def destinations(_)
+  def transfers(_)
     transfer_refs = []
 
     empty_line_number = LineNumber.new(nil)
