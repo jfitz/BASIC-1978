@@ -345,10 +345,10 @@ class Line
     dests = []
 
     @statements.each do |statement|
-      # built-in destinations
-      xfers = statement.transfers(user_function_start_lines)
+      # built-in transfers
+      xfers = statement.transfers
 
-      # auto-line destination
+      # auto-line transfers
       xfers += statement.transfers_auto
 
       # convert TransferRefLineStmt objects to TransferRefLine objects
@@ -369,7 +369,7 @@ class Line
     @statements.each_with_index do |statement, stmt|
       line_number_stmt = LineStmt.new(line_number, stmt)
 
-      xfers = statement.transfers(user_function_start_lines)
+      xfers = statement.transfers
       xfers += statement.transfers_auto
 
       line_stmts = []
@@ -1249,6 +1249,17 @@ class Program
   end
 
   def optimize(interpreter)
+    optimize_statements(interpreter)
+    assign_singleline_function_markers
+    assign_multiline_function_markers
+    assign_autonext
+    set_transfers
+    set_transfers_auto
+    check_program
+    check_function_markers
+  end
+
+  def optimize_statements(interpreter)
     @errors = []
 
     @lines.keys.sort.each do |line_number|
@@ -1369,6 +1380,30 @@ class Program
             end
           end
         end
+      end
+    end
+  end
+
+  def set_transfers
+    @lines.keys.sort.each do |line_number|
+      @line_number = line_number
+      line = @lines[line_number]
+      statements = line.statements
+
+      statements.each do |statement|
+        statement.set_transfers(@user_function_start_lines)
+      end
+    end
+  end
+
+  def set_transfers_auto
+    @lines.keys.sort.each do |line_number|
+      @line_number = line_number
+      line = @lines[line_number]
+      statements = line.statements
+
+      statements.each do |statement|
+        statement.set_transfers_auto
       end
     end
   end
