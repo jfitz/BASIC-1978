@@ -265,6 +265,7 @@ class AbstractStatement
   attr_reader :transfers_auto
   attr_reader :is_if_no_else
   attr_reader :may_be_if_sub
+  attr_accessor :reachable
 
   def self.extra_keywords
     []
