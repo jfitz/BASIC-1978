@@ -263,6 +263,7 @@ class AbstractStatement
   attr_reader :autonext
   attr_reader :transfers
   attr_reader :transfers_auto
+  attr_accessor :origins
   attr_reader :is_if_no_else
   attr_reader :may_be_if_sub
   attr_accessor :reachable
@@ -520,6 +521,21 @@ class AbstractStatement
       stmt = @autonext_line_stmt.statement
 
       @transfers_auto << TransferRefLineStmt.new(line_number, stmt, :auto)
+    end
+  end
+
+  def transfers_to_origins(lines, line_number, stmt)
+    @transfers.each do |xfer|
+      dest_line_number = xfer.line_number
+      dest_line = lines[dest_line_number]
+      unless dest_line.nil?
+        dest_stmt = xfer.statement
+        statement = dest_line.statements[dest_stmt]
+        unless statement.nil?
+          dest_xfer = TransferRefLineStmt.new(line_number, stmt, xfer.type)
+          statement.origins << dest_xfer
+        end
+      end
     end
   end
 

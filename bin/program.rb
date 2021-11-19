@@ -217,6 +217,28 @@ class Line
     @statements.each(&:reset_profile_metrics)
   end
 
+  def set_transfers(user_function_start_lines)
+    @statements.each do |statement|
+      statement.set_transfers(user_function_start_lines)
+    end
+  end
+
+  def set_transfers_auto
+    @statements.each do |statement|
+      statement.set_transfers_auto
+    end
+  end
+
+  def clear_origins
+    @statements.each { |statement| statement.origins = [] }
+  end
+
+  def transfers_to_origins(lines, line_number)
+    @statements.each_with_index do |statement, stmt|
+      statement.transfers_to_origins(lines, line_number, stmt)
+    end
+  end
+
   def reset_reachable
     @statements.each { |statement| statement.reachable = false }
   end
@@ -1262,6 +1284,7 @@ class Program
     assign_multiline_function_markers
     assign_autonext
     set_transfers
+    transfers_to_origins
     set_transfers_auto
     check_program
     check_function_markers
@@ -1387,22 +1410,22 @@ class Program
   end
 
   def set_transfers
-    @lines.each do |line_number, line|
-      statements = line.statements
+    @lines.each do |_, line|
+      line.set_transfers(@user_function_start_lines)
+    end
+  end
 
-      statements.each do |statement|
-        statement.set_transfers(@user_function_start_lines)
-      end
+  def transfers_to_origins
+    @lines.each { |_, line| line.clear_origins }
+
+    @lines.each do |line_number, line|
+      line.transfers_to_origins(@lines, line_number)
     end
   end
 
   def set_transfers_auto
-    @lines.each do |line_number, line|
-      statements = line.statements
-
-      statements.each do |statement|
-        statement.set_transfers_auto
-      end
+    @lines.each do |_, line|
+      line.set_transfers_auto
     end
   end
 
