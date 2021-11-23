@@ -233,9 +233,17 @@ class Line
     @statements.each { |statement| statement.origins = [] }
   end
 
-  def transfers_to_origins(lines, line_number)
+  def add_statement_origin(stmt, xfer)
+    statement = @statements[stmt]
+
+    unless statement.nil?
+      statement.origins << xfer
+    end
+  end
+
+  def transfers_to_origins(program, line_number)
     @statements.each_with_index do |statement, stmt|
-      statement.transfers_to_origins(lines, line_number, stmt)
+      statement.transfers_to_origins(program, line_number, stmt)
     end
   end
 
@@ -1002,6 +1010,14 @@ class Program
     @lines.each { |line_number, line| line.reset_profile_metrics }
   end
 
+  def add_statement_origin(dest_line_number, dest_stmt, xfer)
+    dest_line = @lines[dest_line_number]
+
+    unless dest_line.nil?
+      dest_line.add_statement_origin(dest_stmt, xfer)
+    end
+  end
+
   private
 
   def code_statistics
@@ -1419,7 +1435,7 @@ class Program
     @lines.each { |_, line| line.clear_origins }
 
     @lines.each do |line_number, line|
-      line.transfers_to_origins(@lines, line_number)
+      line.transfers_to_origins(self, line_number)
     end
   end
 
