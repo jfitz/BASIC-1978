@@ -489,7 +489,7 @@ class NumericFormatToken < AbstractToken
     true
   end
 
-  def format(numeric_constant)
+  def pretty_format(numeric_constant)
     width = @text.size
 
     if @text.include?('.')
@@ -517,7 +517,7 @@ class CharFormatToken < AbstractToken
     true
   end
 
-  def format(text_constant)
+  def pretty_format(text_constant)
     text = text_constant.to_v
     text = text[0]
     TextConstant.new(text)
@@ -534,7 +534,7 @@ class PlainStringFormatToken < AbstractToken
     true
   end
 
-  def format(text_constant)
+  def pretty_format(text_constant)
     text = text_constant.to_v
     TextConstant.new(text)
   end
@@ -550,7 +550,7 @@ class PaddedStringFormatToken < AbstractToken
     true
   end
 
-  def format(text_constant)
+  def pretty_format(text_constant)
     text = text_constant.to_v
     text += ' ' while text.size < @text.size
     TextConstant.new(text)
@@ -567,7 +567,7 @@ class ConstantFormatToken < AbstractToken
     false
   end
 
-  def format(text_constant)
+  def pretty_format(text_constant)
     TextConstant.new(@text)
   end
 end

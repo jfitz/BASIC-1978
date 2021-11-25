@@ -4023,7 +4023,7 @@ class PrintStatement < AbstractStatement
             i += 1
           end
 
-          text = format.format(constant)
+          text = format.pretty_format(constant)
           text.print(fhr)
 
           last_was_carriage = false
