@@ -207,12 +207,14 @@ class AbstractCompound
   def get_value_1(col)
     coords = AbstractElement.make_coord(col)
     return @values[coords] if @values.key?(coords)
+
     NumericConstant.new(0)
   end
 
   def get_value_2(row, col)
     coords = AbstractElement.make_coords(row, col)
     return @values[coords] if @values.key?(coords)
+
     NumericConstant.new(0)
   end
 
@@ -464,7 +466,7 @@ class AbstractCompound
 
     n = values_sorted.size
     mid = (n / 2).to_i
-    
+
     if n.odd?
       # if odd number of values, take center value
       value = values_sorted[mid].to_v
@@ -566,11 +568,11 @@ class AbstractCompound
       upper_bound = y_delta * row
       lower_bound = upper_bound - y_delta
 
-      if factor > 1
-        text = lower_bound.to_s.rjust(stub_width) + '|'
-      else
-        text = lower_bound.round(4).to_s.rjust(stub_width) + '|'
-      end
+      text = if factor > 1
+               lower_bound.to_s.rjust(stub_width) + '|'
+             else
+               lower_bound.round(4).to_s.rjust(stub_width) + '|'
+             end
 
       plot_text = ' ' * plot_width
       plot_text = '-' * plot_width if lower_bound.zero?
@@ -671,11 +673,11 @@ class AbstractCompound
       upper_bound = y_delta * plot_row
       lower_bound = upper_bound - y_delta
 
-      if factor > 1
-        text = lower_bound.to_s.rjust(stub_width) + '|'
-      else
-        text = lower_bound.round(4).to_s.rjust(stub_width) + '|'
-      end
+      text = if factor > 1
+               lower_bound.to_s.rjust(stub_width) + '|'
+             else
+               lower_bound.round(4).to_s.rjust(stub_width) + '|'
+             end
 
       plot_text = ' ' * plot_width
       plot_text = '-' * plot_width if lower_bound.zero?
@@ -881,7 +883,7 @@ class BASICArray < AbstractCompound
 
   def unique_values
     new_values = {}
-   seen = []
+    seen = []
 
     base = $options['base'].value
 
@@ -890,11 +892,11 @@ class BASICArray < AbstractCompound
       value = get_value_1(col)
       coord = AbstractElement.make_coord(index)
 
-      unless seen.include?(value)
-        new_values[coord] = value
-        seen << value
-        index += 1
-      end
+      next if seen.include?(value)
+
+      new_values[coord] = value
+      seen << value
+      index += 1
     end
 
     new_values
@@ -1298,6 +1300,7 @@ class Matrix < AbstractCompound
 
       (base..@dimensions[1].to_i).each do |col|
         next if col == exclude_col
+
         coords = AbstractElement.make_coords(new_row, new_col)
         new_values[coords] = get_value_2(row, col)
         new_col += 1
@@ -1379,9 +1382,7 @@ end
 
 # Entry for cross-reference list
 class XrefEntry
-  attr_reader :variable
-  attr_reader :sigils
-  attr_reader :is_ref
+  attr_reader :variable, :sigils, :is_ref
 
   def self.make_sigils(arguments)
     return nil if arguments.nil?
@@ -1440,12 +1441,14 @@ class XrefEntry
 
   def asize(x)
     return -1 if x.nil?
+
     x.size
   end
 
   def <=>(other)
     return -1 if self < other
     return 1 if self > other
+
     0
   end
 
@@ -1694,11 +1697,11 @@ class Parser
     stack_to_precedence(@operator_stack, @current_elements, element)
 
     # push the variable onto the operator stack
-    if @shape_stack[-1] == :declaration
-      variable = Declaration.new(element)
-    else
-      variable = Variable.new(element, @shape_stack[-1], [], [])
-    end
+    variable = if @shape_stack[-1] == :declaration
+                 Declaration.new(element)
+               else
+                 Variable.new(element, @shape_stack[-1], [], [])
+               end
 
     @operator_stack.push(variable)
   end
@@ -1769,7 +1772,7 @@ class Expression
       element.set_content_type(stack)
     end
 
-    raise BASICExpressionError.new('Too many operands') if
+    raise BASICExpressionError, 'Too many operands' if
       stack.size > 1
   end
 
@@ -1910,14 +1913,14 @@ class Expression
         sublist = element.expressions
         vars += Expression.parsed_expressions_numerics(sublist)
       elsif element.numeric_constant?
-        if !previous.nil? &&
-           previous.operator? &&
-           previous.unary? &&
-           previous.to_s == '-'
-          vars << element.negate
-        else
-          vars << element
-        end
+        vars << if !previous.nil? &&
+                   previous.operator? &&
+                   previous.unary? &&
+                   previous.to_s == '-'
+                  element.negate
+                else
+                  element
+                end
       end
 
       previous = element
@@ -2062,9 +2065,7 @@ end
 
 # base class for expressions
 class AbstractExpressionSet
-  attr_reader :comprehension_effort
-  attr_reader :expressions
-  attr_reader :warnings
+  attr_reader :comprehension_effort, :expressions, :warnings
 
   def initialize(tokens, my_shape)
     @warnings = []
@@ -2478,11 +2479,11 @@ class TargetExpressionSet < AbstractExpressionSet
     @expressions.each do |expression|
       elements = expression.elements
 
-      if elements[-1].class.to_s != 'Variable' &&
-         elements[-1].class.to_s != 'UserFunction'
-        raise(BASICExpressionError,
-              "Value is not assignable (type #{elements[-1].class})")
-      end
+      next unless elements[-1].class.to_s != 'Variable' &&
+                  elements[-1].class.to_s != 'UserFunction'
+
+      raise(BASICExpressionError,
+            "Value is not assignable (type #{elements[-1].class})")
     end
   end
 end
@@ -2490,19 +2491,8 @@ end
 # User function definition
 # Define the user function name, arguments, and expression
 class UserFunctionDefinition
-  attr_reader :name
-  attr_reader :arguments
-  attr_reader :sigils
-  attr_reader :signature
-  attr_reader :expression
-  attr_reader :numerics
-  attr_reader :strings
-  attr_reader :booleans
-  attr_reader :variables
-  attr_reader :operators
-  attr_reader :functions
-  attr_reader :userfuncs
-  attr_reader :comprehension_effort
+  attr_reader :name, :arguments, :sigils, :signature, :expression, :numerics,
+              :strings, :booleans, :variables, :operators, :functions, :userfuncs, :comprehension_effort
 
   def initialize(tokens)
     # parse into name '=' expression
@@ -2600,8 +2590,7 @@ end
 # User function prototype
 # Define the user function name and arguments
 class UserFunctionPrototype
-  attr_reader :name
-  attr_reader :arguments
+  attr_reader :name, :arguments
 
   def initialize(tokens)
     check_tokens(tokens)
@@ -2649,15 +2638,8 @@ end
 
 # Assignment
 class Assignment
-  attr_reader :warnings
-  attr_reader :numerics
-  attr_reader :strings
-  attr_reader :booleans
-  attr_reader :variables
-  attr_reader :operators
-  attr_reader :functions
-  attr_reader :userfuncs
-  attr_reader :comprehension_effort
+  attr_reader :warnings, :numerics, :strings, :booleans, :variables,
+              :operators, :functions, :userfuncs, :comprehension_effort
 
   def initialize(tokens, my_shape)
     # parse into variables, '=', expressions
@@ -2768,14 +2750,14 @@ class Assignment
       t_type = target.content_type
       e_type = expression.content_type
       msg = "Target type (#{t_type}) does not match expression type (#{e_type})."
-      raise BASICExpressionError.new(msg) unless compatible(e_type, t_type)
+      raise BASICExpressionError, msg unless compatible(e_type, t_type)
 
       @warnings << msg unless e_type == t_type
 
       t_shape = target.shape
       e_shape = expression.shape
       msg = "Target shape (#{t_shape}) does not match expression shape (#{e_shape})."
-      raise BASICExpressionError.new(msg) unless e_shape == t_shape
+      raise BASICExpressionError, msg unless e_shape == t_shape
     end
   end
 

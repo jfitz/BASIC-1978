@@ -4,22 +4,8 @@ class AbstractModifier
     []
   end
 
-  attr_reader :errors
-  attr_reader :warnings
-  attr_reader :numerics
-  attr_reader :strings
-  attr_reader :booleans
-  attr_reader :variables
-  attr_reader :operators
-  attr_reader :functions
-  attr_reader :userfuncs
-  attr_reader :pre_comp_effort
-  attr_reader :post_comp_effort
-  attr_reader :mccabe
-  attr_reader :profile_pre_count
-  attr_reader :profile_post_count
-  attr_reader :profile_pre_time
-  attr_reader :profile_post_time
+  attr_reader :errors, :warnings, :numerics, :strings, :booleans, :variables,
+              :operators, :functions, :userfuncs, :pre_comp_effort, :post_comp_effort, :mccabe, :profile_pre_count, :profile_post_count, :profile_pre_time, :profile_post_time
 
   def initialize(tokens_lists)
     @tokens = tokens_lists.flatten
@@ -257,7 +243,7 @@ class UnlessModifier < AbstractModifier
 
     s = ' ' + result.to_s
     io.trace_output(s)
-    
+
     # if false then continue execution normally
     return unless result.value
 
@@ -329,7 +315,7 @@ class WhileModifier < AbstractModifier
   end
 
   private
-  
+
   def execute_pre_stmt(interpreter)
     io = interpreter.trace_out
 
@@ -452,7 +438,7 @@ class UntilModifier < AbstractModifier
     io.trace_output(s)
 
     @profile_pre_count += 1
-    
+
     # if terminated then continue execution normally
     return unless result.value
 
@@ -492,7 +478,7 @@ class AbstractForModifier < AbstractModifier
     ]
   end
 
-  def initialize(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
+  def initialize(tokens_lists, control_and_start_tokens, _step_tokens, _end_tokens, _until_tokens, _while_tokens)
     super(tokens_lists)
 
     parts = split_on_token(control_and_start_tokens, '=')
@@ -531,7 +517,7 @@ class AbstractForModifier < AbstractModifier
     @post_comp_effort = 1
   end
 
-  def set_for_lines(interpreter, line_stmt_mod, program)
+  def set_for_lines(_interpreter, line_stmt_mod, program)
     pre_line_stmt_mod = line_stmt_mod.get_counterpart
     @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(pre_line_stmt_mod)
     @nextstmt_line_stmt_mod = line_stmt_mod
@@ -565,12 +551,14 @@ class AbstractForModifier < AbstractModifier
 
     unless @until.nil?
       fornext_control =
-        ForUntilControl.new(@control, from, step, @until, @loopstart_line_stmt_mod)
+        ForUntilControl.new(@control, from, step, @until,
+                            @loopstart_line_stmt_mod)
     end
 
     unless @while.nil?
       fornext_control =
-        ForWhileControl.new(@control, from, step, @while, @loopstart_line_stmt_mod)
+        ForWhileControl.new(@control, from, step, @while,
+                            @loopstart_line_stmt_mod)
     end
 
     interpreter.assign_fornext(fornext_control)
@@ -619,12 +607,12 @@ class AbstractForModifier < AbstractModifier
     list = []
 
     tokens.each do |token|
-      if token.to_s != token_to_split
-        list << token
-      else
+      if token.to_s == token_to_split
         results << list unless list.empty?
         list = []
         results << token
+      else
+        list << token
       end
     end
 
@@ -672,9 +660,9 @@ class ForToModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump
-    lines << 'start:   ' + @start.dump.to_s
-    lines << 'end:     ' + @end.dump.to_s
+    lines << ('control: ' + @control.dump)
+    lines << ('start:   ' + @start.dump.to_s)
+    lines << ('end:     ' + @end.dump.to_s)
     lines
   end
 
@@ -734,10 +722,10 @@ class ForToStepModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump
-    lines << 'start:   ' + @start.dump.to_s
-    lines << 'end:     ' + @end.dump.to_s
-    lines << 'step:    ' + @step.dump.to_s
+    lines << ('control: ' + @control.dump)
+    lines << ('start:   ' + @start.dump.to_s)
+    lines << ('end:     ' + @end.dump.to_s)
+    lines << ('step:    ' + @step.dump.to_s)
     lines
   end
 
@@ -797,10 +785,10 @@ class ForStepToModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump
-    lines << 'start:   ' + @start.dump.to_s
-    lines << 'end:     ' + @end.dump.to_s
-    lines << 'step:    ' + @step.dump.to_s
+    lines << ('control: ' + @control.dump)
+    lines << ('start:   ' + @start.dump.to_s)
+    lines << ('end:     ' + @end.dump.to_s)
+    lines << ('step:    ' + @step.dump.to_s)
     lines
   end
 
@@ -849,9 +837,9 @@ class ForUntilModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump
-    lines << 'start:   ' + @start.dump.to_s
-    lines << 'until:   ' + @until.dump.to_s
+    lines << ('control: ' + @control.dump)
+    lines << ('start:   ' + @start.dump.to_s)
+    lines << ('until:   ' + @until.dump.to_s)
     lines
   end
 
@@ -912,10 +900,10 @@ class ForUntilStepModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump
-    lines << 'start:   ' + @start.dump.to_s
-    lines << 'step:    ' + @step.dump.to_s
-    lines << 'until:   ' + @until.dump.to_s
+    lines << ('control: ' + @control.dump)
+    lines << ('start:   ' + @start.dump.to_s)
+    lines << ('step:    ' + @step.dump.to_s)
+    lines << ('until:   ' + @until.dump.to_s)
     lines
   end
 
@@ -976,10 +964,10 @@ class ForStepUntilModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump
-    lines << 'start:   ' + @start.dump.to_s
-    lines << 'step:    ' + @step.dump.to_s
-    lines << 'until:   ' + @until.dump.to_s
+    lines << ('control: ' + @control.dump)
+    lines << ('start:   ' + @start.dump.to_s)
+    lines << ('step:    ' + @step.dump.to_s)
+    lines << ('until:   ' + @until.dump.to_s)
     lines
   end
 
@@ -1028,9 +1016,9 @@ class ForWhileModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump unless @control.nil?
-    lines << 'start:   ' + @start.dump.to_s unless @start.nil?
-    lines << 'while:   ' + @while.dump.to_s unless @while.nil?
+    lines << ('control: ' + @control.dump) unless @control.nil?
+    lines << ('start:   ' + @start.dump.to_s) unless @start.nil?
+    lines << ('while:   ' + @while.dump.to_s) unless @while.nil?
     lines
   end
 
@@ -1053,7 +1041,7 @@ class ForWhileStepModifier < AbstractForModifier
     until_tokens = nil
 
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
- 
+
     @step = ValueExpressionSet.new(step_tokens, :scalar)
     @while = ValueExpressionSet.new(while_tokens, :scalar)
     @warnings << 'Constant expression' if @while.constant
@@ -1091,10 +1079,10 @@ class ForWhileStepModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump
-    lines << 'start:   ' + @start.dump.to_s
-    lines << 'step:    ' + @step.dump.to_s
-    lines << 'while:   ' + @while.dump.to_s
+    lines << ('control: ' + @control.dump)
+    lines << ('start:   ' + @start.dump.to_s)
+    lines << ('step:    ' + @step.dump.to_s)
+    lines << ('while:   ' + @while.dump.to_s)
     lines
   end
 
@@ -1155,10 +1143,10 @@ class ForStepWhileModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << 'control: ' + @control.dump
-    lines << 'start:   ' + @start.dump.to_s
-    lines << 'step:    ' + @step.dump.to_s
-    lines << 'while:   ' + @while.dump.to_s
+    lines << ('control: ' + @control.dump)
+    lines << ('start:   ' + @start.dump.to_s)
+    lines << ('step:    ' + @step.dump.to_s)
+    lines << ('while:   ' + @while.dump.to_s)
     lines
   end
 

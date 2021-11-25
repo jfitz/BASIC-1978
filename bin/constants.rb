@@ -162,7 +162,7 @@ class AbstractElement
     return nil if types.nil? || shapes.nil?
 
     msg = "Different number of types (#{types.count}) and shapes (#{shapes.count})"
-    raise BASICExpressionError.new(msg) unless
+    raise BASICExpressionError, msg unless
       types.count == shapes.count
 
     sigil_chars = {
@@ -307,10 +307,7 @@ public
 
 # class that holds a value
 class AbstractValueElement < AbstractElement
-  attr_reader :content_type
-  attr_reader :shape
-  attr_reader :constant
-  attr_reader :warnings
+  attr_reader :content_type, :shape, :constant, :warnings
 
   def initialize
     super
@@ -324,7 +321,7 @@ class AbstractValueElement < AbstractElement
   end
 
   def dump
-    "#{self.class}:#{to_s}"
+    "#{self.class}:#{self}"
   end
 
   def eql?(other)
@@ -338,6 +335,7 @@ class AbstractValueElement < AbstractElement
   def <=>(other)
     return -1 if self < other
     return 1 if self > other
+
     0
   end
 
@@ -465,11 +463,11 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, 'Invalid operator NOT')
   end
 
-  def +(_)
+  def +(_other)
     raise(BASICExpressionError, 'Invalid operator +')
   end
 
-  def -(_)
+  def -(_other)
     raise(BASICExpressionError, 'Invalid operator -')
   end
 
@@ -573,7 +571,7 @@ class NumericConstant < AbstractValueElement
       @symbol = true
     end
 
-    raise BASICSyntaxError.new("'#{text}' is not a number") if f.nil?
+    raise BASICSyntaxError, "'#{text}' is not a number" if f.nil?
 
     precision = $options['precision'].value
     if precision != 'INFINITE' && f != 0 && f != Float::INFINITY
@@ -736,7 +734,7 @@ class NumericConstant < AbstractValueElement
       "Type mismatch (#{content_type}/#{other.content_type}) in divide()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
-    raise BASICRuntimeError.new(:te_div_zero) if other.zero?
+    raise BASICRuntimeError, :te_div_zero if other.zero?
 
     value = @value.to_f / other.to_numeric.to_f
     NumericConstant.new(value)
@@ -783,7 +781,7 @@ class NumericConstant < AbstractValueElement
   end
 
   def mod(other)
-    value = other.to_numeric.to_v != 0 ? @value % other.to_numeric.to_v : 0
+    value = other.to_numeric.to_v == 0 ? 0 : @value % other.to_numeric.to_v
     NumericConstant.new(value)
   end
 
@@ -808,6 +806,7 @@ class NumericConstant < AbstractValueElement
 
   def arcsin
     return 0 if @value < -1.0 || @value > 1.0
+
     NumericConstant.new(Math.asin(@value))
   end
 
@@ -818,6 +817,7 @@ class NumericConstant < AbstractValueElement
 
   def arccos
     return 0 if @value < -1.0 || @value > 1.0
+
     NumericConstant.new(Math.acos(@value))
   end
 
@@ -938,7 +938,7 @@ class IntegerConstant < AbstractValueElement
     f = text.to_i if numeric_classes.include?(text.class.to_s)
     f = text.to_f.to_i if text.class.to_s == 'IntegerConstantToken'
 
-    raise BASICSyntaxError.new("'#{text}' is not an integer") if f.nil?
+    raise BASICSyntaxError, "'#{text}' is not an integer" if f.nil?
 
     @symbol_text = text.to_s
     @content_type = :integer
@@ -1153,7 +1153,7 @@ class IntegerConstant < AbstractValueElement
       "Type mismatch (#{content_type}/#{other.content_type}) in divide()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
-    raise BASICRuntimeError.new(:te_div_zero) if other.zero?
+    raise BASICRuntimeError, :te_div_zero if other.zero?
 
     value = @value.to_f / other.to_numeric.to_f
     IntegerConstant.new(value)
@@ -1203,7 +1203,7 @@ class IntegerConstant < AbstractValueElement
   end
 
   def mod(other)
-    value = other.to_numeric != 0 ? @value % other.to_numeric.to_v : 0
+    value = other.to_numeric == 0 ? 0 : @value % other.to_numeric.to_v
     IntegerConstant.new(value)
   end
 
@@ -1311,7 +1311,8 @@ class TextConstant < AbstractValueElement
     (1..length).each do
       v1 = interpreter.rand(NumericConstant.new(set.size))
       v2 = v1.to_i
-      raise Exception.new('RND$ out of range') if v2 >= set.size
+      raise Exception, 'RND$ out of range' if v2 >= set.size
+
       c = set[v2]
       s += c
     end
@@ -1319,8 +1320,7 @@ class TextConstant < AbstractValueElement
     TextConstant.new(s)
   end
 
-  attr_reader :value
-  attr_reader :symbol_text
+  attr_reader :value, :symbol_text
 
   def initialize(text)
     super()
@@ -1329,7 +1329,7 @@ class TextConstant < AbstractValueElement
     @value = text if text.class.to_s == 'String'
     @value = text.value if text.class.to_s == 'TextConstantToken'
 
-    raise BASICSyntaxError.new("'#{text}' is not a text constant") if
+    raise BASICSyntaxError, "'#{text}' is not a text constant" if
       @value.nil?
 
     @content_type = :string
@@ -1493,8 +1493,7 @@ class BooleanConstant < AbstractValueElement
     classes.include?(token.class.to_s)
   end
 
-  attr_reader :value
-  attr_reader :symbol_text
+  attr_reader :value, :symbol_text
 
   def initialize(obj)
     super()
@@ -1573,6 +1572,7 @@ class BooleanConstant < AbstractValueElement
   def +(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
     raise(BASICExpressionError, message) unless other.numeric_constant?
+
     value = numeric_value + other.to_v
     NumericConstant.new(value)
   end
@@ -1629,7 +1629,7 @@ class BooleanConstant < AbstractValueElement
       "Type mismatch (#{content_type}/#{other.content_type}) in divide()"
 
     raise(BASICExpressionError, message) unless other.numeric_constant?
-    raise BASICRuntimeError.new(:te_div_zero) if other.zero?
+    raise BASICRuntimeError, :te_div_zero if other.zero?
 
     value = numeric_value.to_f / other.to_f
     NumericConstant.new(value)
@@ -1696,10 +1696,10 @@ class FileHandle < AbstractElement
 
     legals = %w[Fixnum Integer NumericConstant IntegerConstant FileHandle]
 
-    raise BASICRuntimeError.new(:te_fh_inv) unless
+    raise BASICRuntimeError, :te_fh_inv unless
       legals.include?(num.class.to_s)
 
-    raise BASICRuntimeError.new(:te_fnum_inv) if num.to_i < 0
+    raise BASICRuntimeError, :te_fnum_inv if num.to_i < 0
 
     @number = num.to_i
     @file_handle = true
@@ -1851,9 +1851,7 @@ class VariableName < AbstractElement
     classes.include?(token.class.to_s)
   end
 
-  attr_reader :name
-  attr_reader :content_type
-  attr_reader :constant
+  attr_reader :name, :content_type, :constant
 
   def initialize(token)
     super()
@@ -1930,11 +1928,7 @@ class UserFunctionName < AbstractElement
     classes.include?(token.class.to_s)
   end
 
-  attr_reader :name
-  attr_reader :content_type
-  attr_reader :shape
-  attr_reader :constant
-  attr_reader :warnings
+  attr_reader :name, :content_type, :shape, :constant, :warnings
 
   def initialize(token)
     super()
@@ -2031,13 +2025,8 @@ end
 
 # Hold a variable (name with possible subscripts and value)
 class Variable < AbstractElement
-  attr_writer :valref
-  attr_writer :set_dims
-  attr_reader :content_type
-  attr_reader :shape
-  attr_reader :constant
-  attr_reader :subscripts
-  attr_reader :warnings
+  attr_writer :valref, :set_dims
+  attr_reader :content_type, :shape, :constant, :subscripts, :warnings
 
   def initialize(variable_name, my_shape, subscripts, wrapped_subscripts)
     super()
@@ -2201,7 +2190,8 @@ class Variable < AbstractElement
       @wrapped_subscripts =
         interpreter.wrap_subscripts(@variable_name, @subscripts)
 
-      interpreter.check_subscripts(@variable_name, @subscripts, @wrapped_subscripts)
+      interpreter.check_subscripts(@variable_name, @subscripts,
+                                   @wrapped_subscripts)
     end
 
     interpreter.get_value(self)
@@ -2222,10 +2212,10 @@ class Variable < AbstractElement
     dims = interpreter.get_dimensions(@variable_name)
 
     msg = "Variable #{@variable_name} has no dimensions"
-    raise BASICExpressionError.new(msg) if dims.nil?
+    raise BASICExpressionError, msg if dims.nil?
 
     msg = "Array #{@variable_name} requires one dimension"
-    raise BASICExpressionError.new(msg) if dims.size != 1
+    raise BASICExpressionError, msg if dims.size != 1
 
     values = evaluate_value_array_1(interpreter, dims[0].to_i)
     BASICArray.new(dims, values)
@@ -2250,7 +2240,7 @@ class Variable < AbstractElement
     dims = interpreter.get_dimensions(@variable_name)
 
     msg = "Variable #{@variable_name} has no dimensions"
-    raise BASICExpressionError.new(msg) if dims.nil?
+    raise BASICExpressionError, msg if dims.nil?
 
     # msg = "Matrix #{@variable_name} requires two dimensions"
     # don't check this; it causes problems for special forms
@@ -2319,7 +2309,8 @@ class Variable < AbstractElement
               'Variable expects subscripts, found empty parentheses')
       end
 
-      interpreter.check_subscripts(@variable_name, @subscripts, @wrapped_subscripts)
+      interpreter.check_subscripts(@variable_name, @subscripts,
+                                   @wrapped_subscripts)
     end
 
     self
@@ -2340,8 +2331,10 @@ class Variable < AbstractElement
               'Variable expects subscripts, found empty parentheses')
       end
 
-      interpreter.check_subscripts(@variable_name, @subscripts, @wrapped_subscripts) unless
-        @set_dims
+      unless @set_dims
+        interpreter.check_subscripts(@variable_name, @subscripts,
+                                     @wrapped_subscripts)
+      end
     end
 
     self
@@ -2350,11 +2343,7 @@ end
 
 # Class for declaration (in a DIM statement)
 class Declaration < AbstractElement
-  attr_reader :subscripts
-  attr_reader :content_type
-  attr_reader :shape
-  attr_reader :constant
-  attr_reader :warnings
+  attr_reader :subscripts, :content_type, :shape, :constant, :warnings
 
   def initialize(variable_name)
     super()
@@ -2378,8 +2367,8 @@ class Declaration < AbstractElement
   end
 
   def set_content_type(type_stack)
-    unless type_stack.empty?
-      type_stack.pop if type_stack[-1].class.to_s == 'Array'
+    if !type_stack.empty? && (type_stack[-1].class.to_s == 'Array')
+      type_stack.pop
     end
 
     type_stack.push(@content_type)
@@ -2402,8 +2391,8 @@ class Declaration < AbstractElement
   end
 
   def set_constant(constant_stack)
-    unless constant_stack.empty?
-      constant_stack.pop if constant_stack[-1].class.to_s == 'Array'
+    if !constant_stack.empty? && (constant_stack[-1].class.to_s == 'Array')
+      constant_stack.pop
     end
 
     constant_stack.push(@constant)
@@ -2444,8 +2433,7 @@ end
 
 # A list (needed because it has precedence value)
 class ExpressionList < AbstractElement
-  attr_reader :expressions
-  attr_reader :warnings
+  attr_reader :expressions, :warnings
 
   def initialize(expressions)
     super()
