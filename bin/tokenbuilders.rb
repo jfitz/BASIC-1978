@@ -34,13 +34,13 @@ class ListTokenBuilder
       while i < text.size && accepted
         c = text[i]
         accepted = accept?(candidate, c)
-        if accepted
-          candidate += c
-          i += 1
-          if @legals.include?(candidate)
-            best_candidate = candidate
-            best_count = i
-          end
+        next unless accepted
+
+        candidate += c
+        i += 1
+        if @legals.include?(candidate)
+          best_candidate = candidate
+          best_count = i
         end
       end
     end
@@ -78,7 +78,7 @@ class RemarkTokenBuilder
   attr_reader :count
 
   def initialize
-    @legals = %w(REMARK REM)
+    @legals = %w[REMARK REM]
     @count = 0
   end
 
@@ -92,13 +92,13 @@ class RemarkTokenBuilder
       while i < text.size && accepted
         c = text[i]
         accepted = accept?(candidate, c)
-        if accepted
-          candidate += c
-          i += 1
-          if @legals.include?(candidate)
-            best_candidate = candidate
-            best_count = i
-          end
+        next unless accepted
+
+        candidate += c
+        i += 1
+        if @legals.include?(candidate)
+          best_candidate = candidate
+          best_count = i
         end
       end
     end
@@ -193,7 +193,7 @@ class TextTokenBuilder
       end
     end
 
-    if !candidate.empty?
+    unless candidate.empty?
       lead_quote = text[0]
       candidate += lead_quote if candidate.count(lead_quote) == 1
       @token = candidate if candidate.count(lead_quote) == 2
@@ -361,7 +361,7 @@ class NumericSymbolTokenBuilder
   attr_reader :count
 
   def try(text)
-    legals = %w(PI EUL AUR)
+    legals = %w[PI EUL AUR]
 
     candidate = ''
     i = 0
@@ -416,8 +416,8 @@ class VariableTokenBuilder
       /\A[A-Z]+\d+\z/,
       /\A[A-Z]+\$\z/,
       /\A[A-Z]+\d+\$\z/,
-      /\A[A-Z]+\%\z/,
-      /\A[A-Z]+\d+\%\z/
+      /\A[A-Z]+%\z/,
+      /\A[A-Z]+\d+%\z/
     ]
 
     @token = ''
@@ -457,7 +457,9 @@ class VariableTokenBuilder
   def accept_long?(candidate, c)
     result = false
     # can always start with an alpha
-    result = true if c =~ /[A-Z]/ && (candidate.empty? || candidate =~ /\A[A-Z]+\z/)
+    if c =~ /[A-Z]/ && (candidate.empty? || candidate =~ /\A[A-Z]+\z/)
+      result = true
+    end
     # can append a digit to alphas and digits
     result = true if c =~ /[0-9]/ && (candidate =~ /\A[A-Z]+[0-9]*\z/)
     # can append a dollar sign if one is not there
