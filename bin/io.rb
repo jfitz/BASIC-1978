@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Common routines for readers
 module Reader
   def ascii_printables(text)
@@ -59,7 +61,7 @@ module Inputter
   def line_input(interpreter)
     input_text = read_line
 
-    quoted = '"' + input_text + '"'
+    quoted = "\"#{input_text}\""
     token = TextConstantToken.new(quoted)
     tokens = [token]
     # convert from tokens to values
@@ -82,10 +84,10 @@ class ConsoleIo
   include Inputter
 
   def read_char
-    input_text = if STDIN.tty?
-                   STDIN.getch
+    input_text = if $stdin.tty?
+                   $stdin.getch
                  else
-                   STDIN.getc
+                   $stdin.getc
                  end
 
     raise BASICRuntimeError, :te_eof if input_text.nil?
@@ -137,9 +139,9 @@ class ConsoleIo
       print_out(c)
       incr = c == "\b" ? -1 : 1
       @column += incr
-      @column = 0 if @column < 0
+      @column = 0 if @column.negative?
 
-      newline if $options['print_width'].value > 0 &&
+      newline if $options['print_width'].value.positive? &&
                  @column >= $options['print_width'].value
     end
 
@@ -162,7 +164,7 @@ class ConsoleIo
 
     zone_width = $options['zone_width'].value
 
-    print_item(' ') while @column % zone_width != 0 if zone_width > 0
+    print_item(' ') while @column % zone_width != 0 if zone_width.positive?
 
     @last_was_numeric = false
     @last_was_tab = true
@@ -203,7 +205,7 @@ class ConsoleIo
   def space_after_numeric
     count = 1
 
-    while @column > 0 && count > 0
+    while @column.positive? && count.positive?
       print_item(' ')
       count -= 1
     end
@@ -220,7 +222,7 @@ class ConsoleIo
   end
 
   def newline_when_needed
-    newline if @column > 0
+    newline if @column.positive?
   end
 
   def implied_newline
@@ -238,16 +240,16 @@ class ConsoleIo
 
   def delay
     sleep(1.0 / $options['print_speed'].value) if
-      $options['print_speed'].value > 0
+      $options['print_speed'].value.positive?
   end
 
   def newline_delay
     sleep(1.0 / $options['print_speed'].value) if
-      $options['print_speed'].value > 0 &&
+      $options['print_speed'].value.positive? &&
       $options['newline_speed'].value.zero?
 
     sleep(1.0 / $options['newline_speed'].value) if
-      $options['newline_speed'].value > 0
+      $options['newline_speed'].value.positive?
   end
 end
 
@@ -367,7 +369,7 @@ class FileHandler
       @rec_number = -1
     end
 
-    @file.close unless @file.nil?
+    @file&.close
   end
 
   def to_s
@@ -378,7 +380,7 @@ class FileHandler
     raise BASICRuntimeError, :te_mode_inc unless @mode == :memory
 
     # error if format not specified by RECORD
-    raise BASICRuntimeError, :te_recno_inv if rec_number < 0
+    raise BASICRuntimeError, :te_recno_inv if rec_number.negative?
 
     raise BASICRuntimeError, :te_recno_inv if rec_number > 65_534
 
@@ -407,7 +409,7 @@ class FileHandler
     raise BASICRuntimeError, :te_mode_inc unless @mode == :memory
 
     # error if format not specified by RECORD
-    raise BASICRuntimeError, :te_recno_inv if rec_number < 0
+    raise BASICRuntimeError, :te_recno_inv if rec_number.negative?
 
     raise BASICRuntimeError, :te_recno_inv if rec_number > 65_534
 

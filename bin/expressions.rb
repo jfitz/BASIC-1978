@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # BASIC compound class
 class AbstractCompound
   def self.make_array(dims, init_value)
@@ -506,9 +508,9 @@ class AbstractCompound
 
     # height above x-axis
     max_value = max_1
-    max_value = 0 if max_value < 0
+    max_value = 0 if max_value.negative?
     min_value = min_1
-    min_value = 0 if min_value > 0
+    min_value = 0 if min_value.positive?
 
     value_span = max_value - min_value
 
@@ -569,9 +571,9 @@ class AbstractCompound
       lower_bound = upper_bound - y_delta
 
       text = if factor > 1
-               lower_bound.to_s.rjust(stub_width) + '|'
+               "#{lower_bound.to_s.rjust(stub_width)}|"
              else
-               lower_bound.round(4).to_s.rjust(stub_width) + '|'
+               "#{lower_bound.round(4).to_s.rjust(stub_width)}|"
              end
 
       plot_text = ' ' * plot_width
@@ -611,9 +613,9 @@ class AbstractCompound
 
     # height above x-axis
     max_value = max_2
-    max_value = 0 if max_value < 0
+    max_value = 0 if max_value.negative?
     min_value = min_2
-    min_value = 0 if min_value > 0
+    min_value = 0 if min_value.positive?
 
     value_span = max_value - min_value
 
@@ -674,9 +676,9 @@ class AbstractCompound
       lower_bound = upper_bound - y_delta
 
       text = if factor > 1
-               lower_bound.to_s.rjust(stub_width) + '|'
+               "#{lower_bound.to_s.rjust(stub_width)}|"
              else
-               lower_bound.round(4).to_s.rjust(stub_width) + '|'
+               "#{lower_bound.round(4).to_s.rjust(stub_width)}|"
              end
 
       plot_text = ' ' * plot_width
@@ -706,10 +708,6 @@ end
 
 # Array with values
 class BASICArray < AbstractCompound
-  def initialize(_, _)
-    super
-  end
-
   def clone
     Array.new(@dimensions.clone, @values.clone)
   end
@@ -719,7 +717,7 @@ class BASICArray < AbstractCompound
   end
 
   def size
-    return 0 if @dimensions.size < 1
+    return 0 if @dimensions.empty?
 
     base = $options['base'].value
 
@@ -786,7 +784,7 @@ class BASICArray < AbstractCompound
   end
 
   def to_s
-    'ARRAY: ' + @values.to_s
+    "ARRAY: #{@values}"
   end
 
   def plot(printer)
@@ -960,10 +958,6 @@ class Matrix < AbstractCompound
     new_values
   end
 
-  def initialize(_, _)
-    super
-  end
-
   def clone
     Matrix.new(@dimensions.clone, @values.clone)
   end
@@ -973,7 +967,7 @@ class Matrix < AbstractCompound
   end
 
   def nrow
-    return 0 if @dimensions.size < 1
+    return 0 if @dimensions.empty?
 
     base = $options['base'].value
 
@@ -989,7 +983,7 @@ class Matrix < AbstractCompound
   end
 
   def size
-    return 0 if @dimensions.size < 1
+    return 0 if @dimensions.empty?
 
     nrow * ncol
   end
@@ -1050,7 +1044,7 @@ class Matrix < AbstractCompound
   end
 
   def to_s
-    'MATRIX: ' + @values.to_s
+    "MATRIX: #{@values}"
   end
 
   def plot(printer)
@@ -1632,8 +1626,7 @@ class Parser
     # remove the '(' or '[' starter
     start_op = @operator_stack.pop
 
-    error = 'Bracket/parenthesis mismatch, found ' + group_end_element.to_s +
-            ' to match ' + start_op.to_s
+    error = "Bracket/parenthesis mismatch, found #{group_end_element} to match #{start_op}"
 
     raise(BASICExpressionError, error) unless group_end_element.match?(start_op)
 
@@ -1899,7 +1892,7 @@ class Expression
   end
 
   def to_s
-    '[' + @elements.map(&:to_s).join(', ') + ']'
+    "[#{@elements.map(&:to_s).join(', ')}]"
   end
 
   def numerics
@@ -2558,8 +2551,8 @@ class UserFunctionDefinition
 
   def to_s
     vnames = @arguments.map(&:to_s).join(',')
-    s = @name.to_s + '(' + vnames + ')'
-    s += '=' + @expression.to_s unless @expression.nil?
+    s = "#{@name}(#{vnames})"
+    s += "=#{@expression}" unless @expression.nil?
     s
   end
 
@@ -2790,6 +2783,6 @@ class Assignment
   end
 
   def to_s
-    @targetset.to_s + ' = ' + @expressionset.to_s
+    "#{@targetset} = #{@expressionset}"
   end
 end

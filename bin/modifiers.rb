@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Modifier
 class AbstractModifier
   def self.extra_keywords
@@ -113,7 +115,7 @@ class IfModifier < AbstractModifier
   end
 
   def pre_pretty
-    ' IF ' + @expression.to_s
+    " IF #{@expression}"
   end
 
   def post_pretty
@@ -135,7 +137,7 @@ class IfModifier < AbstractModifier
   end
 
   def pre_trace
-    'IF ' + @expression.to_s
+    "IF #{@expression}"
   end
 
   def post_trace
@@ -155,7 +157,7 @@ class IfModifier < AbstractModifier
     result = BooleanConstant.new(result) unless
       result.class.to_s == 'BooleanConstant'
 
-    s = ' ' + result.to_s
+    s = " #{result}"
     io.trace_output(s)
 
     # if true then continue execution normally
@@ -199,7 +201,7 @@ class UnlessModifier < AbstractModifier
   end
 
   def pre_pretty
-    ' UNLESS ' + @expression.to_s
+    " UNLESS #{@expression}"
   end
 
   def post_pretty
@@ -221,7 +223,7 @@ class UnlessModifier < AbstractModifier
   end
 
   def pre_trace
-    'UNLESS ' + @expression.to_s
+    "UNLESS #{@expression}"
   end
 
   def post_trace
@@ -241,7 +243,7 @@ class UnlessModifier < AbstractModifier
     result = BooleanConstant.new(result) unless
       result.class.to_s == 'BooleanConstant'
 
-    s = ' ' + result.to_s
+    s = " #{result}"
     io.trace_output(s)
 
     # if false then continue execution normally
@@ -285,7 +287,7 @@ class WhileModifier < AbstractModifier
   end
 
   def pre_pretty
-    ' WHILE ' + @expression.to_s
+    " WHILE #{@expression}"
   end
 
   def post_pretty
@@ -307,7 +309,7 @@ class WhileModifier < AbstractModifier
   end
 
   def pre_trace
-    'WHILE ' + @expression.to_s
+    "WHILE #{@expression}"
   end
 
   def post_trace
@@ -327,7 +329,7 @@ class WhileModifier < AbstractModifier
     result = BooleanConstant.new(result) unless
       result.class.to_s == 'BooleanConstant'
 
-    s = ' ' + result.to_s
+    s = " #{result}"
     io.trace_output(s)
 
     # if not terminated then continue execution normally
@@ -348,7 +350,7 @@ class WhileModifier < AbstractModifier
     result = BooleanConstant.new(result) unless
       result.class.to_s == 'BooleanConstant'
 
-    s = ' ' + result.to_s
+    s = " #{result}"
     io.trace_output(s)
 
     # if terminated then continue to next statement
@@ -392,7 +394,7 @@ class UntilModifier < AbstractModifier
   end
 
   def pre_pretty
-    ' UNTIL ' + @expression.to_s
+    " UNTIL #{@expression}"
   end
 
   def post_pretty
@@ -414,7 +416,7 @@ class UntilModifier < AbstractModifier
   end
 
   def pre_trace
-    'UNTIL ' + @expression.to_s
+    "UNTIL #{@expression}"
   end
 
   def post_trace
@@ -434,7 +436,7 @@ class UntilModifier < AbstractModifier
     result = BooleanConstant.new(result) unless
       result.class.to_s == 'BooleanConstant'
 
-    s = ' ' + result.to_s
+    s = " #{result}"
     io.trace_output(s)
 
     @profile_pre_count += 1
@@ -457,7 +459,7 @@ class UntilModifier < AbstractModifier
     result = BooleanConstant.new(result) unless
       result.class.to_s == 'BooleanConstant'
 
-    s = ' ' + result.to_s
+    s = " #{result}"
     io.trace_output(s)
 
     @profile_post_count += 1
@@ -660,9 +662,9 @@ class ForToModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ('control: ' + @control.dump)
-    lines << ('start:   ' + @start.dump.to_s)
-    lines << ('end:     ' + @end.dump.to_s)
+    lines << ("control: #{@control.dump}")
+    lines << ("start:   #{@start.dump}")
+    lines << ("end:     #{@end.dump}")
     lines
   end
 
@@ -722,10 +724,10 @@ class ForToStepModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ('control: ' + @control.dump)
-    lines << ('start:   ' + @start.dump.to_s)
-    lines << ('end:     ' + @end.dump.to_s)
-    lines << ('step:    ' + @step.dump.to_s)
+    lines << ("control: #{@control.dump}")
+    lines << ("start:   #{@start.dump}")
+    lines << ("end:     #{@end.dump}")
+    lines << ("step:    #{@step.dump}")
     lines
   end
 
@@ -785,10 +787,10 @@ class ForStepToModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ('control: ' + @control.dump)
-    lines << ('start:   ' + @start.dump.to_s)
-    lines << ('end:     ' + @end.dump.to_s)
-    lines << ('step:    ' + @step.dump.to_s)
+    lines << ("control: #{@control.dump}")
+    lines << ("start:   #{@start.dump}")
+    lines << ("end:     #{@end.dump}")
+    lines << ("step:    #{@step.dump}")
     lines
   end
 
@@ -837,9 +839,9 @@ class ForUntilModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ('control: ' + @control.dump)
-    lines << ('start:   ' + @start.dump.to_s)
-    lines << ('until:   ' + @until.dump.to_s)
+    lines << ("control: #{@control.dump}")
+    lines << ("start:   #{@start.dump}")
+    lines << ("until:   #{@until.dump}")
     lines
   end
 
@@ -900,10 +902,10 @@ class ForUntilStepModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ('control: ' + @control.dump)
-    lines << ('start:   ' + @start.dump.to_s)
-    lines << ('step:    ' + @step.dump.to_s)
-    lines << ('until:   ' + @until.dump.to_s)
+    lines << ("control: #{@control.dump}")
+    lines << ("start:   #{@start.dump}")
+    lines << ("step:    #{@step.dump}")
+    lines << ("until:   #{@until.dump}")
     lines
   end
 
@@ -964,10 +966,10 @@ class ForStepUntilModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ('control: ' + @control.dump)
-    lines << ('start:   ' + @start.dump.to_s)
-    lines << ('step:    ' + @step.dump.to_s)
-    lines << ('until:   ' + @until.dump.to_s)
+    lines << ("control: #{@control.dump}")
+    lines << ("start:   #{@start.dump}")
+    lines << ("step:    #{@step.dump}")
+    lines << ("until:   #{@until.dump}")
     lines
   end
 
@@ -1016,9 +1018,9 @@ class ForWhileModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ('control: ' + @control.dump) unless @control.nil?
-    lines << ('start:   ' + @start.dump.to_s) unless @start.nil?
-    lines << ('while:   ' + @while.dump.to_s) unless @while.nil?
+    lines << ("control: #{@control.dump}") unless @control.nil?
+    lines << ("start:   #{@start.dump}") unless @start.nil?
+    lines << ("while:   #{@while.dump}") unless @while.nil?
     lines
   end
 
@@ -1079,10 +1081,10 @@ class ForWhileStepModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ('control: ' + @control.dump)
-    lines << ('start:   ' + @start.dump.to_s)
-    lines << ('step:    ' + @step.dump.to_s)
-    lines << ('while:   ' + @while.dump.to_s)
+    lines << ("control: #{@control.dump}")
+    lines << ("start:   #{@start.dump}")
+    lines << ("step:    #{@step.dump}")
+    lines << ("while:   #{@while.dump}")
     lines
   end
 
@@ -1143,10 +1145,10 @@ class ForStepWhileModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ('control: ' + @control.dump)
-    lines << ('start:   ' + @start.dump.to_s)
-    lines << ('step:    ' + @step.dump.to_s)
-    lines << ('while:   ' + @while.dump.to_s)
+    lines << ("control: #{@control.dump}")
+    lines << ("start:   #{@start.dump}")
+    lines << ("step:    #{@step.dump}")
+    lines << ("while:   #{@while.dump}")
     lines
   end
 

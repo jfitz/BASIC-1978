@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # function (provides a result)
 class AbstractFunction < AbstractElement
   attr_reader :name, :default_shape, :content_type, :shape, :constant, :warnings
@@ -169,7 +171,7 @@ class AbstractFunction < AbstractElement
   end
 
   def check_square(dims)
-    raise(BASICSyntaxError, @name + ' requires matrix') unless dims.size == 2
+    raise(BASICSyntaxError, "#{@name} requires matrix") unless dims.size == 2
 
     raise BASICRuntimeError.new(:te_mat_no_sq, @name) unless
       dims[1] == dims[0]
@@ -1656,9 +1658,9 @@ class FunctionLeft < AbstractFunction
     value = args[0].to_v
     count = args[1].to_i
 
-    raise BASICRuntimeError.new(:te_count_inv, @name) if count < 0
+    raise BASICRuntimeError.new(:te_count_inv, @name) if count.negative?
 
-    if count > 0
+    if count.positive?
       count2 = count - 1
       text = value[0..count2]
     else
@@ -2022,9 +2024,9 @@ class FunctionMid < AbstractFunction
 
     raise BASICRuntimeError.new(:te_count_inv, @name) if start < 1
 
-    raise BASICRuntimeError.new(:te_len_inv, @name) if length < 0
+    raise BASICRuntimeError.new(:te_len_inv, @name) if length.negative?
 
-    if length > 0
+    if length.positive?
       start_index = start - 1
       end_index = start_index + length - 1
 
@@ -2443,7 +2445,7 @@ class FunctionPack < AbstractFunction
     array = args[0]
     dims = array.dimensions
 
-    raise(BASICSyntaxError, @name + ' requires array') unless dims.size == 1
+    raise(BASICSyntaxError, "#{@name} requires array") unless dims.size == 1
 
     res = array.pack
 
@@ -2532,10 +2534,10 @@ class FunctionRight < AbstractFunction
     value = args[0].to_v
     count = args[1].to_i
 
-    raise BASICRuntimeError.new(:te_count_inv, @name) if count < 0
+    raise BASICRuntimeError.new(:te_count_inv, @name) if count.negative?
 
     start = value.size - count
-    start = 0 if start < 0
+    start = 0 if start.negative?
     res = TextConstant.new(value[start..-1])
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -3552,7 +3554,7 @@ class FunctionSpace < AbstractFunction
 
     width = args[0].to_v
 
-    spaces = if width > 0
+    spaces = if width.positive?
                ' ' * width
              else
                # zero or negative value yields empty string
@@ -3722,7 +3724,7 @@ class FunctionString < AbstractFunction
 
     width = args[1].to_v
 
-    s = if width > 0
+    s = if width.positive?
           char * width
         else
           # zero or negative value yields empty string
@@ -3802,9 +3804,9 @@ class FunctionTab < AbstractFunction
     console_io = interpreter.console_io
     width = console_io.columns_to_advance(args[0].to_v)
 
-    spaces = if width > 0
+    spaces = if width.positive?
                ' ' * width
-             elsif width < 0
+             elsif width.negative?
                "\b" * -width
              else
                ''
