@@ -40,7 +40,7 @@ class StatementFactory
       statement = EmptyStatement.new(line_number)
       statements << statement
     else
-      statements_tokens.each_with_index do |statement_tokens, statement_index|
+      statements_tokens.each_with_index do |statement_tokens, _statement_index|
         statement = UnknownStatement.new(line_number, text)
 
         begin
@@ -72,13 +72,14 @@ class StatementFactory
 
           statement =
             statement_definition.new(line_number, keywords, tokens_lists)
-        else
-          if keywords.empty?
-            statement = UnknownStatement.new(line_number, text) if statement.nil?
-          else
-            keyword = keywords.pop
-            tokens.unshift(keyword)
+        elsif keywords.empty?
+          if statement.nil?
+            statement = UnknownStatement.new(line_number,
+                                             text)
           end
+        else
+          keyword = keywords.pop
+          tokens.unshift(keyword)
         end
       end
     end
@@ -249,24 +250,9 @@ end
 
 # parent of all statement classes
 class AbstractStatement
-  attr_reader :errors
-  attr_reader :warnings
-  attr_reader :program_errors
-  attr_reader :keywords
-  attr_reader :tokens
-  attr_reader :separators
-  attr_accessor :part_of_user_function
-  attr_reader :valid
-  attr_reader :executable
-  attr_reader :comment
-  attr_reader :linenums
-  attr_reader :autonext
-  attr_reader :transfers
-  attr_reader :transfers_auto
-  attr_accessor :origins
-  attr_reader :is_if_no_else
-  attr_reader :may_be_if_sub
-  attr_accessor :reachable
+  attr_reader :errors, :warnings, :program_errors, :keywords, :tokens,
+              :separators, :valid, :executable, :comment, :linenums, :autonext, :transfers, :transfers_auto, :is_if_no_else, :may_be_if_sub
+  attr_accessor :part_of_user_function, :origins, :reachable
 
   def self.extra_keywords
     []
@@ -566,11 +552,11 @@ class AbstractStatement
 
     line = " #{@part_of_user_function}" unless @part_of_user_function.nil?
 
-    if show_timing
-      line += " (#{@profile_time.round(4)}/#{@profile_count})"
-    else
-      line += " (#{@profile_count})"
-    end
+    line += if show_timing
+              " (#{@profile_time.round(4)}/#{@profile_count})"
+            else
+              " (#{@profile_count})"
+            end
 
     line += text
 
@@ -627,7 +613,7 @@ class AbstractStatement
     trace_out.newline
   end
 
-  def execute_a_statement(interpreter, current_line_stmt_mod)
+  def execute_a_statement(interpreter, _current_line_stmt_mod)
     current_user_function = interpreter.current_user_function
 
     if @part_of_user_function != current_user_function
@@ -731,12 +717,12 @@ class AbstractStatement
     list = []
 
     tokens.each do |token|
-      if token.to_s != token_to_split
-        list << token
-      else
+      if token.to_s == token_to_split
         results << list unless list.empty?
         list = []
         results << token
+      else
+        list << token
       end
     end
 
@@ -881,11 +867,15 @@ class AbstractStatement
     template_for_to_step = ['FOR', [1, '>='], 'TO', [1, '='], 'STEP', [1, '>=']]
     template_for_step_to = ['FOR', [1, '>='], 'STEP', [1, '>='], 'TO', [1, '=']]
     template_for_until = ['FOR', [1, '>='], 'UNTIL', [1, '>=']]
-    template_for_until_step = ['FOR', [1, '>='], 'UNTIL', [1, '>='], 'STEP', [1, '>=']]
-    template_for_step_until = ['FOR', [1, '>='], 'STEP', [1, '>='], 'UNTIL', [1, '>=']]
+    template_for_until_step = ['FOR', [1, '>='], 'UNTIL', [1, '>='], 'STEP',
+                               [1, '>=']]
+    template_for_step_until = ['FOR', [1, '>='], 'STEP', [1, '>='], 'UNTIL',
+                               [1, '>=']]
     template_for_while = ['FOR', [1, '>='], 'WHILE', [1, '>=']]
-    template_for_while_step = ['FOR', [1, '>='], 'WHILE', [1, '>='], 'STEP', [1, '>=']]
-    template_for_step_while = ['FOR', [1, '>='], 'STEP', [1, '>='], 'WHILE', [1, '>=']]
+    template_for_while_step = ['FOR', [1, '>='], 'WHILE', [1, '>='], 'STEP',
+                               [1, '>=']]
+    template_for_step_while = ['FOR', [1, '>='], 'STEP', [1, '>='], 'WHILE',
+                               [1, '>=']]
 
     if tokens_lists.size > 4 &&
        check_template(tokens_lists.last(4), template_for_to)
@@ -895,7 +885,8 @@ class AbstractStatement
       control_and_start_tokens = tokens_lists[-3]
       end_tokens = tokens_lists.last
 
-      modifier = ForToModifier.new(expression_tokens, control_and_start_tokens, end_tokens)
+      modifier = ForToModifier.new(expression_tokens, control_and_start_tokens,
+                                   end_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -914,7 +905,8 @@ class AbstractStatement
       step_tokens = tokens_lists.last
 
       modifier =
-        ForToStepModifier.new(expression_tokens, control_and_start_tokens, step_tokens, end_tokens)
+        ForToStepModifier.new(expression_tokens, control_and_start_tokens,
+                              step_tokens, end_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -933,7 +925,8 @@ class AbstractStatement
       step_tokens = tokens_lists[-3]
 
       modifier =
-        ForStepToModifier.new(expression_tokens, control_and_start_tokens, step_tokens, end_tokens)
+        ForStepToModifier.new(expression_tokens, control_and_start_tokens,
+                              step_tokens, end_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -950,7 +943,8 @@ class AbstractStatement
       control_and_start_tokens = tokens_lists[-3]
       until_tokens = tokens_lists.last
 
-      modifier = ForUntilModifier.new(expression_tokens, control_and_start_tokens, until_tokens)
+      modifier = ForUntilModifier.new(expression_tokens,
+                                      control_and_start_tokens, until_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -969,7 +963,8 @@ class AbstractStatement
       step_tokens = tokens_lists.last
 
       modifier =
-        ForUntilStepModifier.new(expression_tokens, control_and_start_tokens, step_tokens, until_tokens)
+        ForUntilStepModifier.new(expression_tokens, control_and_start_tokens,
+                                 step_tokens, until_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -988,7 +983,8 @@ class AbstractStatement
       step_tokens = tokens_lists[-3]
 
       modifier =
-        ForStepUntilModifier.new(expression_tokens, control_and_start_tokens, step_tokens, until_tokens)
+        ForStepUntilModifier.new(expression_tokens, control_and_start_tokens,
+                                 step_tokens, until_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -1005,7 +1001,8 @@ class AbstractStatement
       control_and_start_tokens = tokens_lists[-3]
       while_tokens = tokens_lists.last
 
-      modifier = ForWhileModifier.new(expression_tokens, control_and_start_tokens, while_tokens)
+      modifier = ForWhileModifier.new(expression_tokens,
+                                      control_and_start_tokens, while_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -1024,7 +1021,8 @@ class AbstractStatement
       step_tokens = tokens_lists.last
 
       modifier =
-        ForWhileStepModifier.new(expression_tokens, control_and_start_tokens, step_tokens, while_tokens)
+        ForWhileStepModifier.new(expression_tokens, control_and_start_tokens,
+                                 step_tokens, while_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -1043,7 +1041,8 @@ class AbstractStatement
       step_tokens = tokens_lists[-3]
 
       modifier =
-        ForStepWhileModifier.new(expression_tokens, control_and_start_tokens, step_tokens, while_tokens)
+        ForStepWhileModifier.new(expression_tokens, control_and_start_tokens,
+                                 step_tokens, while_tokens)
       @modifiers.unshift(modifier)
 
       # remove the tokens used for the modifier
@@ -1123,9 +1122,7 @@ class AbstractStatement
     current_line_stmt_mod = interpreter.current_line_stmt_mod
     mod = current_line_stmt_mod.index
 
-    if mod < 0
-      execute_premodifier(interpreter)
-    end
+    execute_premodifier(interpreter) if mod < 0
 
     if mod.zero?
       timing = Benchmark.measure { execute_core(interpreter) }
@@ -1138,9 +1135,7 @@ class AbstractStatement
       @profile_count += 1
     end
 
-    if mod > 0
-      execute_postmodifier(interpreter)
-    end
+    execute_postmodifier(interpreter) if mod > 0
   end
 
   def get_separators(tokens)
@@ -1165,7 +1160,7 @@ class InvalidStatement < AbstractStatement
     @executable = false
     @autonext = false
     @text = text
-    @errors << 'Invalid statement: ' + error.message
+    @errors << ('Invalid statement: ' + error.message)
   end
 
   def to_s
@@ -1344,20 +1339,20 @@ module InputFunctions
   end
 
   def add_expression(items, tokens, shape, set_dims)
-    if tokens[0].operator? && tokens[0].pound?
-      items << ValueExpressionSet.new(tokens, :scalar)
-    elsif tokens[0].text_constant?
-      items << ValueExpressionSet.new(tokens, :scalar)
-    else
-      items << TargetExpressionSet.new(tokens, shape, set_dims)
-    end
+    items << if tokens[0].operator? && tokens[0].pound?
+               ValueExpressionSet.new(tokens, :scalar)
+             elsif tokens[0].text_constant?
+               ValueExpressionSet.new(tokens, :scalar)
+             else
+               TargetExpressionSet.new(tokens, shape, set_dims)
+             end
   rescue BASICExpressionError => e
     line_text = tokens.map(&:to_s).join
-    @errors << 'Syntax error: "' + line_text + '" ' + e.to_s
+    @errors << ('Syntax error: "' + line_text + '" ' + e.to_s)
   end
 
   def zip(names, values)
-    raise BASICRuntimeError.new(:te_too_few) if values.size < names.size
+    raise BASICRuntimeError, :te_too_few if values.size < names.size
 
     results = []
     (0...names.size).each do |i|
@@ -1434,7 +1429,7 @@ module PrintFunctions
     end
   rescue BASICExpressionError => e
     line_text = tokens.map(&:to_s).join
-    @errors << 'Syntax error: "' + line_text + '" ' + e.to_s
+    @errors << ('Syntax error: "' + line_text + '" ' + e.to_s)
   end
 
   def uncache_core
@@ -1448,8 +1443,8 @@ module PrintFunctions
     format = nil
 
     unless items.empty? ||
-           items[0].class.to_s != 'ValueExpressionSet' &&
-           items[-1].scalar?
+           (items[0].class.to_s != 'ValueExpressionSet' &&
+           items[-1].scalar?)
 
       value = first_item(items, interpreter)
 
@@ -1495,7 +1490,7 @@ module PrintFunctions
       if item.class.to_s == 'Array'
         item.each { |it| lines += it.dump }
       elsif item.keyword?
-        lines << 'Keyword:' + item.to_s
+        lines << ('Keyword:' + item.to_s)
       end
     end
 
@@ -1520,14 +1515,14 @@ module ReadFunctions
   end
 
   def add_expression(items, tokens, shape, set_dims)
-    if tokens[0].operator? && tokens[0].pound?
-      items << ValueExpressionSet.new(tokens, :scalar)
-    else
-      items << TargetExpressionSet.new(tokens, shape, set_dims)
-    end
+    items << if tokens[0].operator? && tokens[0].pound?
+               ValueExpressionSet.new(tokens, :scalar)
+             else
+               TargetExpressionSet.new(tokens, shape, set_dims)
+             end
   rescue BASICExpressionError => e
     line_text = tokens.map(&:to_s).join
-    @errors << 'Syntax error: "' + line_text + '" ' + e.to_s
+    @errors << ('Syntax error: "' + line_text + '" ' + e.to_s)
   end
 
   def uncache_core
@@ -1563,7 +1558,7 @@ module WriteFunctions
     end
   rescue BASICExpressionError => e
     line_text = tokens.map(&:to_s).join
-    @errors << 'Syntax error: "' + line_text + '" ' + e.to_s
+    @errors << ('Syntax error: "' + line_text + '" ' + e.to_s)
   end
 
   def uncache_core
@@ -1836,11 +1831,9 @@ class DimStatement < AbstractStatement
       tokens_lists = split_tokens(tokens_lists[0], false)
 
       tokens_lists.each do |tokens_list|
-        begin
-          @declarations << DeclarationExpressionSet.new(tokens_list)
-        rescue BASICExpressionError => e
-          @errors << 'Invalid ' + tokens_list.map(&:to_s).join + ' ' + e.to_s
-        end
+        @declarations << DeclarationExpressionSet.new(tokens_list)
+      rescue BASICExpressionError => e
+        @errors << ('Invalid ' + tokens_list.map(&:to_s).join + ' ' + e.to_s)
       end
 
       @elements = make_references(@declarations)
@@ -2171,7 +2164,7 @@ class ForStatement < AbstractStatement
     @comprehension_effort += @while.comprehension_effort unless @while.nil?
   end
 
-  def set_for_lines(interpreter, line_stmt, program)
+  def set_for_lines(_interpreter, line_stmt, program)
     @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(line_stmt)
 
     begin
@@ -2195,12 +2188,12 @@ class ForStatement < AbstractStatement
   def dump
     lines = []
 
-    lines << 'control: ' + @control.dump unless @control.nil?
-    lines << 'start:   ' + @start.dump.to_s unless @start.nil?
-    lines << 'end:     ' + @end.dump.to_s unless @end.nil?
-    lines << 'step:    ' + @step.dump.to_s unless @step.nil?
-    lines << 'until:   ' + @until.dump.to_s unless @until.nil?
-    lines << 'while:   ' + @while.dump.to_s unless @while.nil?
+    lines << ('control: ' + @control.dump) unless @control.nil?
+    lines << ('start:   ' + @start.dump.to_s) unless @start.nil?
+    lines << ('end:     ' + @end.dump.to_s) unless @end.nil?
+    lines << ('step:    ' + @step.dump.to_s) unless @step.nil?
+    lines << ('until:   ' + @until.dump.to_s) unless @until.nil?
+    lines << ('while:   ' + @while.dump.to_s) unless @while.nil?
 
     @modifiers.each { |item| lines += item.dump } unless @modifiers.nil?
 
@@ -2228,10 +2221,10 @@ class ForStatement < AbstractStatement
   end
 
   def execute_core(interpreter)
-    raise BASICSyntaxError.new("uninitialized FOR") if
+    raise BASICSyntaxError, 'uninitialized FOR' if
       @loopstart_line_stmt_mod.nil?
 
-    raise BASICSyntaxError.new("uninitialized FOR") if
+    raise BASICSyntaxError, 'uninitialized FOR' if
       @nextstmt_line_stmt.nil?
 
     from = @start.evaluate(interpreter)[0]
@@ -2247,12 +2240,14 @@ class ForStatement < AbstractStatement
 
     unless @until.nil?
       fornext_control =
-        ForUntilControl.new(@control, from, step, @until, @loopstart_line_stmt_mod)
+        ForUntilControl.new(@control, from, step, @until,
+                            @loopstart_line_stmt_mod)
     end
 
     unless @while.nil?
       fornext_control =
-        ForWhileControl.new(@control, from, step, @while, @loopstart_line_stmt_mod)
+        ForWhileControl.new(@control, from, step, @while,
+                            @loopstart_line_stmt_mod)
     end
 
     interpreter.assign_fornext(fornext_control)
@@ -2262,9 +2257,7 @@ class ForStatement < AbstractStatement
 
     terminated = fornext_control.front_terminated?(interpreter)
 
-    if terminated
-      interpreter.next_line_stmt_mod = @nextstmt_line_stmt
-    end
+    interpreter.next_line_stmt_mod = @nextstmt_line_stmt if terminated
 
     untilv = nil
     untilv = @until.evaluate(interpreter)[0] unless @until.nil?
@@ -2374,11 +2367,11 @@ class GosubStatement < AbstractStatement
         @dest_line = LineNumber.new(number)
         @linenums = [@dest_line]
 
-        if @dest_line > line_number
-          @comprehension_effort += 1
-        else
-          @comprehension_effort += 2
-        end
+        @comprehension_effort += if @dest_line > line_number
+                                   1
+                                 else
+                                   2
+                                 end
       else
         @errors << "Invalid line number #{tokens_lists[0][0]}"
       end
@@ -2400,7 +2393,7 @@ class GosubStatement < AbstractStatement
       mod.nil?
   end
 
-  def check_program(program, line_number_stmt)
+  def check_program(program, _line_number_stmt)
     @program_errors << "Line number #{@dest_line} not found" unless
       program.line_number?(@dest_line)
   end
@@ -2421,7 +2414,7 @@ class GosubStatement < AbstractStatement
 
   def execute_core(interpreter)
     interpreter.push_return(interpreter.next_line_stmt_mod)
-   
+
     raise(BASICSyntaxError, 'Line number not found') if
       @dest_line_stmt_mod.nil?
 
@@ -2452,11 +2445,11 @@ class GotoStatement < AbstractStatement
         @dest_line = LineNumber.new(number)
         @linenums = [@dest_line]
 
-        if @dest_line > line_number
-          @comprehension_effort += 1
-        else
-          @comprehension_effort += 2
-        end
+        @comprehension_effort += if @dest_line > line_number
+                                   1
+                                 else
+                                   2
+                                 end
       else
         @errors << "Invalid line number #{tokens_lists[0][0]}"
       end
@@ -2473,7 +2466,7 @@ class GotoStatement < AbstractStatement
     end
   end
 
-  def check_program(program, line_number_stmt)
+  def check_program(program, _line_number_stmt)
     @program_errors << "Line number #{@dest_line} not found" unless
       program.line_number?(@dest_line)
   end
@@ -2522,8 +2515,10 @@ class AbstractIfStatement < AbstractStatement
 
       @dest_line, @statement = parse_target(line_number, tokens_lists['then'])
       @else_dest_line = nil
-      @else_dest_line, @else_stmt = parse_target(line_number, tokens_lists['else']) if
-        tokens_lists.key?('else')
+      if tokens_lists.key?('else')
+        @else_dest_line, @else_stmt = parse_target(line_number,
+                                                   tokens_lists['else'])
+      end
 
       unless @statement.nil?
         @errors << 'Invalid substatement' unless @statement.may_be_if_sub
@@ -2536,19 +2531,19 @@ class AbstractIfStatement < AbstractStatement
       end
 
       unless @dest_line.nil?
-        if @dest_line > line_number
-          @comprehension_effort += 1
-        else
-          @comprehension_effort += 2
-        end
+        @comprehension_effort += if @dest_line > line_number
+                                   1
+                                 else
+                                   2
+                                 end
       end
 
       unless @else_dest_line.nil?
-        if @else_dest_line > line_number
-          @comprehension_effort += 1
-        else
-          @comprehension_effort += 2
-        end
+        @comprehension_effort += if @else_dest_line > line_number
+                                   1
+                                 else
+                                   2
+                                 end
       end
 
       @elements[:numerics] = make_numeric_references
@@ -2576,8 +2571,10 @@ class AbstractIfStatement < AbstractStatement
 
         @dest_line, @statement = parse_target(line_number, stack['then'])
         @else_dest_line = nil
-        @else_dest_line, @else_stmt = parse_target(line_number, stack['else']) if
-          stack.key?('else')
+        if stack.key?('else')
+          @else_dest_line, @else_stmt = parse_target(line_number,
+                                                     stack['else'])
+        end
 
         unless @statement.nil?
           @errors << 'Invalid substatement' unless @statement.may_be_if_sub
@@ -2590,19 +2587,19 @@ class AbstractIfStatement < AbstractStatement
         end
 
         unless @dest_line.nil?
-          if @dest_line > line_number
-            @comprehension_effort += 1
-          else
-            @comprehension_effort += 2
-          end
+          @comprehension_effort += if @dest_line > line_number
+                                     1
+                                   else
+                                     2
+                                   end
         end
 
         unless @else_dest_line.nil?
-          if @else_dest_line > line_number
-            @comprehension_effort += 1
-          else
-            @comprehension_effort += 2
-          end
+          @comprehension_effort += if @else_dest_line > line_number
+                                     1
+                                   else
+                                     2
+                                   end
         end
 
         @elements[:numerics] = make_numeric_references
@@ -2618,15 +2615,19 @@ class AbstractIfStatement < AbstractStatement
 
         @linenums = make_linenum_references
       rescue BASICExpressionError => e
-        @errors << 'Syntax Error: ' + e.message
+        @errors << ('Syntax Error: ' + e.message)
       end
     end
 
     # autonext to next statement unless both THEN and ELSE are numbers
     @autonext = @dest_line.nil? || @else_dest_line.nil?
 
-    @comprehension_effort += @statement.comprehension_effort unless @statement.nil?
-    @comprehension_effort += @else_stmt.comprehension_effort unless @else_stmt.nil?
+    unless @statement.nil?
+      @comprehension_effort += @statement.comprehension_effort
+    end
+    unless @else_stmt.nil?
+      @comprehension_effort += @else_stmt.comprehension_effort
+    end
 
     @mccabe += 1
     @mccabe += @statement.mccabe unless @statement.nil?
@@ -2719,9 +2720,9 @@ class AbstractIfStatement < AbstractStatement
     lines
   end
 
-  def check_program(program, line_number_stmt)
+  def check_program(program, _line_number_stmt)
     if @dest_line.nil? && @statement.nil?
-      @program_errors << "Invalid or missing line number"
+      @program_errors << 'Invalid or missing line number'
     end
 
     unless @dest_line.nil? || program.line_number?(@dest_line)
@@ -2769,7 +2770,7 @@ class AbstractIfStatement < AbstractStatement
 
     number += @statement.number_for_stmts unless @statement.nil?
     number += @else_stmt.number_for_stmts unless @else_stmt.nil?
-    
+
     number
   end
 
@@ -2894,11 +2895,11 @@ class AbstractIfStatement < AbstractStatement
     x0 = dict['expr']
 
     x0.each do |x|
-      if x.class.to_s == 'Array'
-        expr_s += '[' + x.map(&:to_s).join(', ') + ']'
-      else
-        expr_s += x.to_s
-      end
+      expr_s += if x.class.to_s == 'Array'
+                  '[' + x.map(&:to_s).join(', ') + ']'
+                else
+                  x.to_s
+                end
       expr_s += ', '
     end
 
@@ -2908,11 +2909,11 @@ class AbstractIfStatement < AbstractStatement
     if x1.class.to_s == 'Array'
       ax1 = []
       x1.each do |x|
-        if x.class.to_s == 'Array'
-          ax1 << '[' + x.map(&:to_s).join(', ') + ']'
-        else
-          ax1 << x.to_s
-        end
+        ax1 << if x.class.to_s == 'Array'
+                 ('[' + x.map(&:to_s).join(', ') + ']')
+               else
+                 x.to_s
+               end
       end
       then_s = '[' + ax1.join(', ') + ']'
     else
@@ -2926,11 +2927,11 @@ class AbstractIfStatement < AbstractStatement
       if x2.class.to_s == 'Array'
         ax2 = []
         x2.each do |x|
-          if x.class.to_s == 'Array'
-            ax2 << '[' + x.map(&:to_s).join(', ') + ']'
-          else
-            ax2 << x.to_s
-          end
+          ax2 << if x.class.to_s == 'Array'
+                   ('[' + x.map(&:to_s).join(', ') + ']')
+                 else
+                   x.to_s
+                 end
         end
         else_s = '[' + ax2.join(', ') + ']'
       else
@@ -3124,7 +3125,7 @@ class InputStatement < AbstractStatement
       values = fhr.input(interpreter)
     end
 
-    raise BASICRuntimeError.new(:te_too_few) if values.size < item_names.size
+    raise BASICRuntimeError, :te_too_few if values.size < item_names.size
 
     name_value_pairs =
       zip(item_names, values[0..item_names.length])
@@ -3427,7 +3428,8 @@ class NextStatement < AbstractStatement
         interpreter.unlock_variable(@controls[index]) if
           $options['lock_fornext'].value
 
-        interpreter.exit_fornext(fornext_control.forget, fornext_control.control)
+        interpreter.exit_fornext(fornext_control.forget,
+                                 fornext_control.control)
       else
         # set next line from top item
         interpreter.next_line_stmt_mod = fornext_control.start_line_stmt_mod
@@ -3474,11 +3476,11 @@ class OnErrorStatement < AbstractStatement
           @dest_line = LineNumber.new(number)
           @linenums = [@dest_line]
 
-          if @dest_line > line_number
-            @comprehension_effort += 1
-          else
-            @comprehension_effort += 2
-          end
+          @comprehension_effort += if @dest_line > line_number
+                                     1
+                                   else
+                                     2
+                                   end
         end
       else
         @errors << "Invalid line number #{destination}"
@@ -3507,11 +3509,9 @@ class OnErrorStatement < AbstractStatement
       @dest_line.nil?
   end
 
-  def check_program(program, line_number_stmt)
-    unless @dest_line.nil?
-      unless program.line_number?(@dest_line)
-        @program_errors << "Line number #{@dest_line} not found"
-      end
+  def check_program(program, _line_number_stmt)
+    if !@dest_line.nil? && !program.line_number?(@dest_line)
+      @program_errors << "Line number #{@dest_line} not found"
     end
   end
 
@@ -3589,11 +3589,11 @@ class OnStatement < AbstractStatement
       @comprehension_effort += @expression.comprehension_effort
 
       @dest_lines.each do |dest_line|
-        if dest_line > line_number
-          @comprehension_effort += 1
-        else
-          @comprehension_effort += 2
-        end
+        @comprehension_effort += if dest_line > line_number
+                                   1
+                                 else
+                                   2
+                                 end
       end
 
       @mccabe += @dest_lines.size
@@ -3615,7 +3615,7 @@ class OnStatement < AbstractStatement
     end
   end
 
-  def check_program(program, line_number_stmt)
+  def check_program(program, _line_number_stmt)
     unless @dest_lines.nil?
       @dest_lines.each do |destination|
         unless program.line_number?(destination)
@@ -3675,7 +3675,7 @@ class OnStatement < AbstractStatement
   end
 
   def execute_core(interpreter)
-    raise(BASICSyntaxError, "Line number not found") if
+    raise(BASICSyntaxError, 'Line number not found') if
       @dest_line_stmt_mods.nil?
 
     values = @expression.evaluate(interpreter)
@@ -3690,7 +3690,7 @@ class OnStatement < AbstractStatement
     io.trace_output(' ' + @expression.to_s + ' = ' + value.to_s)
     index = value.to_i
 
-    raise BASICRuntimeError.new(:te_val_out) if
+    raise BASICRuntimeError, :te_val_out if
       index < 1 || index > @dest_line_stmt_mods.size
 
     interpreter.push_return(interpreter.next_line_stmt_mod) if @gosub
@@ -3836,14 +3836,14 @@ class OptionStatement < AbstractStatement
         @elements = make_references(nil, @expression)
         @comprehension_effort += @expression.comprehension_effort
       else
-        @errors << 'Cannot set option ' + kwd
+        @errors << ('Cannot set option ' + kwd)
       end
     elsif tokens_lists.size == 1 &&
           extras.include?(tokens_lists[0].to_s)
       kwd = tokens_lists[0].to_s.upcase
       @key = kwd.downcase
 
-      @errors << 'Cannot set option ' + kwd unless
+      @errors << ('Cannot set option ' + kwd) unless
         $options[@key].types.include?(:runtime)
     else
       @errors << 'Syntax error'
@@ -3920,11 +3920,8 @@ class PrintStatement < AbstractStatement
     # if list first item is expression
     #   extract possible file handle
     @file_tokens = nil
-    unless @items.empty?
-      if @items[0].class.to_s == 'Array'
-        @file_tokens = extract_file_handle(@items[0]) unless
-          @items[0].empty?
-      end
+    if !@items.empty? && (@items[0].class.to_s == 'Array') && !@items[0].empty?
+      @file_tokens = extract_file_handle(@items[0])
     end
 
     # end with
@@ -3933,9 +3930,8 @@ class PrintStatement < AbstractStatement
 
     # if item is keyword then it must be 'USING'
     @items.each do |item|
-      unless item.class.to_s == 'Array'
-        @errors << 'Syntax error' unless
-          item.keyword? && item.to_s == 'USING'
+      if !(item.class.to_s == 'Array') && !(item.keyword? && item.to_s == 'USING')
+        @errors << 'Syntax error'
       end
     end
 
@@ -3988,14 +3984,14 @@ class PrintStatement < AbstractStatement
         # item must be 'USING'
         j += 1
 
-        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items.size
+        raise BASICRuntimeError, :te_no_fmt if j >= @items.size
 
         # extract formats
         item = @items[j]
 
         format_spec, items = extract_format(item, interpreter)
 
-        raise BASICRuntimeError.new(:te_no_fmt) if format_spec.nil?
+        raise BASICRuntimeError, :te_no_fmt if format_spec.nil?
 
         # split format spec into formats
         formats = split_format(format_spec)
@@ -4014,7 +4010,7 @@ class PrintStatement < AbstractStatement
             # skip all of the separators
             i += 1 while i < items.size && items[i].carriage_control?
 
-            raise BASICRuntimeError.new(:te_few_fmt) if i == items.size
+            raise BASICRuntimeError, :te_few_fmt if i == items.size
 
             constants = items[i].evaluate(interpreter)
 
@@ -4522,7 +4518,7 @@ class ArrInputStatement < AbstractStatement
         interpreter.set_dimensions(target.name, target.dimensions) if
           target.dimensions?
 
-        raise BASICRuntimeError.new(:te_arr_no_dim) unless
+        raise BASICRuntimeError, :te_arr_no_dim unless
           interpreter.dimensions?(target.name)
 
         # make sure dimension is one
@@ -4550,7 +4546,7 @@ class ArrInputStatement < AbstractStatement
       values = file_values(fhr, interpreter)
     end
 
-    raise BASICRuntimeError.new(:te_too_few) if values.size < item_names.size
+    raise BASICRuntimeError, :te_too_few if values.size < item_names.size
 
     # use names based on variable dimensions
     name_value_pairs =
@@ -4592,9 +4588,9 @@ class ArrPlotStatement < AbstractStatement
       @file_tokens = extract_file_handle(@items)
 
       @items.each do |item|
-        if item.class.to_s == 'ValueExpressionSet'
-          @errors << 'Wrong type' unless
-            %i[numeric integer].include?(item.content_type)
+        if item.class.to_s == 'ValueExpressionSet' && !%i[numeric
+                                                          integer].include?(item.content_type)
+          @errors << 'Wrong type'
         end
       end
 
@@ -4674,11 +4670,8 @@ class ArrPrintStatement < AbstractStatement
     # if list first item is expression
     #   extract possible file handle
     @file_tokens = nil
-    unless @items.empty?
-      if @items[0].class.to_s == 'Array'
-        @file_tokens = extract_file_handle(@items[0]) unless
-          @items[0].empty?
-      end
+    if !@items.empty? && (@items[0].class.to_s == 'Array') && !@items[0].empty?
+      @file_tokens = extract_file_handle(@items[0])
     end
 
     # end with
@@ -4687,9 +4680,8 @@ class ArrPrintStatement < AbstractStatement
 
     # if item is keyword then it must be 'USING'
     @items.each do |item|
-      unless item.class.to_s == 'Array'
-        @errors << 'Syntax error' unless
-          item.keyword? && item.to_s == 'USING'
+      if !(item.class.to_s == 'Array') && !(item.keyword? && item.to_s == 'USING')
+        @errors << 'Syntax error'
       end
     end
 
@@ -4741,14 +4733,14 @@ class ArrPrintStatement < AbstractStatement
         # item must be 'USING'
         j += 1
 
-        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items.size
+        raise BASICRuntimeError, :te_no_fmt if j >= @items.size
 
         # extract formats
         item = @items[j]
 
         format_spec, items = extract_format(item, interpreter)
 
-        raise BASICRuntimeError.new(:te_no_fmt) if format_spec.nil?
+        raise BASICRuntimeError, :te_no_fmt if format_spec.nil?
 
         # split format
         formats = split_format(format_spec)
@@ -4759,7 +4751,7 @@ class ArrPrintStatement < AbstractStatement
 
         raise(BASICSyntaxError, 'Too many fields in USING') unless count <= 1
 
-        raise BASICRuntimeError.new(:te_few_fmt) if items.empty?
+        raise BASICRuntimeError, :te_few_fmt if items.empty?
 
         i = 0
 
@@ -4848,7 +4840,7 @@ class ArrReadStatement < AbstractStatement
         interpreter.set_dimensions(target.name, target.dimensions) if
           target.dimensions?
 
-        raise BASICRuntimeError.new(:te_arr_no_dim) unless
+        raise BASICRuntimeError, :te_arr_no_dim unless
           interpreter.dimensions?(target.name)
 
         read_values(target.name, interpreter, ds)
@@ -4992,7 +4984,7 @@ class ArrLetStatement < AbstractLetStatement
     l_values = @assignment.eval_target(interpreter)
     l_value0 = l_values[0]
     l_dims = interpreter.get_dimensions(l_value0.name)
-    
+
     interpreter.set_default_args('CON1', l_dims)
     interpreter.set_default_args('CON1%', l_dims)
     interpreter.set_default_args('CON1$', l_dims)
@@ -5151,7 +5143,7 @@ class MatInputStatement < AbstractStatement
         interpreter.set_dimensions(target.name, target.dimensions) if
           target.dimensions?
 
-        raise BASICRuntimeError.new(:te_mat_no_dim) unless
+        raise BASICRuntimeError, :te_mat_no_dim unless
           interpreter.dimensions?(target.name)
 
         # make sure dimension is one or two
@@ -5170,15 +5162,15 @@ class MatInputStatement < AbstractStatement
           end
         end
 
-        if dims.size == 2
-          base = $options['base'].value
-          (base..dims[0].to_i).each do |row|
-            (base..dims[1].to_i).each do |col|
-              coords = AbstractElement.make_coords(row, col)
-              wcoords = interpreter.wrap_subscripts(name, coords)
-              variable = Variable.new(name, :matrix, coords, wcoords)
-              item_names << variable
-            end
+        next unless dims.size == 2
+
+        base = $options['base'].value
+        (base..dims[0].to_i).each do |row|
+          (base..dims[1].to_i).each do |col|
+            coords = AbstractElement.make_coords(row, col)
+            wcoords = interpreter.wrap_subscripts(name, coords)
+            variable = Variable.new(name, :matrix, coords, wcoords)
+            item_names << variable
           end
         end
       end
@@ -5194,7 +5186,7 @@ class MatInputStatement < AbstractStatement
       values = file_values(fhr, interpreter)
     end
 
-    raise BASICRuntimeError.new(:te_too_few) if values.size < item_names.size
+    raise BASICRuntimeError, :te_too_few if values.size < item_names.size
 
     # use names based on variable dimensions
     name_value_pairs =
@@ -5234,9 +5226,9 @@ class MatPlotStatement < AbstractStatement
       @file_tokens = extract_file_handle(@items)
 
       @items.each do |item|
-        if item.class.to_s == 'ValueExpressionSet'
-          @errors << 'Wrong type' unless
-            %i[numeric integer].include?(item.content_type)
+        if item.class.to_s == 'ValueExpressionSet' && !%i[numeric
+                                                          integer].include?(item.content_type)
+          @errors << 'Wrong type'
         end
       end
 
@@ -5316,11 +5308,8 @@ class MatPrintStatement < AbstractStatement
     # if list first item is expression
     #   extract possible file handle
     @file_tokens = nil
-    unless @items.empty?
-      if @items[0].class.to_s == 'Array'
-        @file_tokens = extract_file_handle(@items[0]) unless
-          @items[0].empty?
-      end
+    if !@items.empty? && (@items[0].class.to_s == 'Array') && !@items[0].empty?
+      @file_tokens = extract_file_handle(@items[0])
     end
 
     # end with
@@ -5329,9 +5318,8 @@ class MatPrintStatement < AbstractStatement
 
     # if item is keyword then it must be 'USING'
     @items.each do |item|
-      unless item.class.to_s == 'Array'
-        @errors << 'Syntax error' unless
-          item.keyword? && item.to_s == 'USING'
+      if !(item.class.to_s == 'Array') && !(item.keyword? && item.to_s == 'USING')
+        @errors << 'Syntax error'
       end
     end
 
@@ -5385,14 +5373,14 @@ class MatPrintStatement < AbstractStatement
         # item must be 'USING'
         j += 1
 
-        raise BASICRuntimeError.new(:te_no_fmt) if j >= @items.size
+        raise BASICRuntimeError, :te_no_fmt if j >= @items.size
 
         # extract formats
         item = @items[j]
 
         format_spec, items = extract_format(item, interpreter)
 
-        raise BASICRuntimeError.new(:te_no_fmt) if format_spec.nil?
+        raise BASICRuntimeError, :te_no_fmt if format_spec.nil?
 
         # split format
         formats = split_format(format_spec)
@@ -5403,7 +5391,7 @@ class MatPrintStatement < AbstractStatement
 
         raise(BASICSyntaxError, 'Too many fields in USING') unless count <= 1
 
-        raise BASICRuntimeError.new(:te_few_fmt) if items.empty?
+        raise BASICRuntimeError, :te_few_fmt if items.empty?
 
         i = 0
 
@@ -5517,7 +5505,7 @@ class MatReadStatement < AbstractStatement
         interpreter.set_dimensions(target.name, target.dimensions) if
           target.dimensions?
 
-        raise BASICRuntimeError.new(:te_mat_no_dim) unless
+        raise BASICRuntimeError, :te_mat_no_dim unless
           interpreter.dimensions?(target.name)
 
         read_values(target.name, interpreter, ds)

@@ -324,7 +324,10 @@ class Interpreter
 
     @program.init_data(self)
 
-    if !@program.errors?
+    if @program.errors?
+      errors = @program.errors
+      errors.each { |error| @console_io.print_line(error) }
+    else
       begin
         # run each statement
         # start with the first line number
@@ -337,9 +340,6 @@ class Interpreter
       end
 
       close_all_files
-    else
-      errors = @program.errors
-      errors.each { |error| @console_io.print_line(error) }
     end
   end
 
@@ -811,12 +811,12 @@ class Interpreter
     errors = []
 
     @line_breakpoints.keys.each do |bp_line|
-      errors << 'Breakpoint for non-existent line ' + bp_line.to_s unless
+      errors << ('Breakpoint for non-existent line ' + bp_line.to_s) unless
         lines.key?(bp_line)
     end
 
     @line_cond_breakpoints.keys.each do |bp_line|
-      errors << 'Breakpoint for non-existent line ' + bp_line.to_s unless
+      errors << ('Breakpoint for non-existent line ' + bp_line.to_s) unless
         lines.key?(bp_line)
     end
 
