@@ -450,10 +450,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1990:goto
 (0 1) 2290 REM COURSE CONTROL BEGINS HERE
   Origs: 
-  Dests: 2300:auto
+  Dests: 
 (1 2) 2300 INPUT "COURSE (0-9)"; C1
 (1 6)      IF C1 = 9 THEN C1 = 1
-  Origs: 2140:goto, 2290:auto
+  Origs: 2140:goto
   Dests: 2310:auto
 (1 7) 2310 IF C1 >= 1 AND C1 < 9 THEN 2350
   Origs: 2300:auto
@@ -512,10 +512,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1990:goto
 (0 1) 2580 REM KLINGONS MOVE/FIRE ON MOVING STARSHIP . . .
   Origs: 
-  Dests: 2590:auto
+  Dests: 
 (1 3) 2590 FOR I = 1 TO K3
 (1 4)      IF K(I, 3) = 0 THEN 2700
-  Origs: 2490:ifthen, 2580:auto
+  Origs: 2490:ifthen
   Dests: 2610:auto, 2700:fornext, 2700:ifthen
 (0 3) 2610 A$ = "   "
 (0 3)      Z1 = K(I, 1)
@@ -652,13 +652,13 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1980:goto
 (0 1) 3490 REM EXCEEDED QUADRANT LIMITS
   Origs: 
-  Dests: 3500:auto
+  Dests: 
 (0 8) 3500 X = 8 * Q1 + X + N * X1
 (0 8)      Y = 8 * Q2 + Y + N * X2
 (0 4)      Q1 = INT(X / 8)
 (0 4)      Q2 = INT(Y / 8)
 (0 4)      S1 = INT(X - Q1 * 8)
-  Origs: 3170:ifthen, 3490:auto
+  Origs: 3170:ifthen
   Dests: 3550:auto
 (0 4) 3550 S2 = INT(Y - Q2 * 8)
 (1 7)      IF S1 = 0 THEN Q1 = Q1 - 1
@@ -721,11 +721,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1320:goto, 3910:gosub
 (0 1) 3900 REM MANEUVER ENERGY S/R **
   Origs: 
-  Dests: 3910:auto
+  Dests: 
 (0 5) 3910 E = E - N - 10
 (1 4)      IF E >= 0 THEN RETURN
-  Origs: 3370:gosub, 3870:gosub, 3900:auto
-  Inconsistent GOSUB origins
+  Origs: 3370:gosub, 3870:gosub
   Dests: 3930:auto
 (0 2) 3930 PRINT "SHIELD CONTROL SUPPLIES ENERGY TO COMPLETE THE MANEUVER."
   Origs: 3910:auto
@@ -740,10 +739,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 
 (0 1) 3990 REM LONG RANGE SENSOR SCAN CODE
   Origs: 
-  Dests: 4000:auto
+  Dests: 
 (1 5) 4000 IF D(3) < 0 THEN PRINT "LONG RANGE SENSORS ARE INOPERABLE"
 (0 3)      GOTO 1990
-  Origs: 2140:goto, 3990:auto
+  Origs: 2140:goto
   Dests: 1990:goto, 4030:auto
 (0 5) 4030 PRINT "LONG RANGE SCAN FOR QUADRANT"; Q1; ","; Q2
   Origs: 4000:auto
@@ -782,10 +781,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1990:goto
 (0 1) 4250 REM PHASER CONTROL CODE BEGINS HERE
   Origs: 
-  Dests: 4260:auto
+  Dests: 
 (1 5) 4260 IF D(4) < 0 THEN PRINT "PHASERS INOPERATIVE"
 (0 3)      GOTO 1990
-  Origs: 2140:goto, 4250:auto
+  Origs: 2140:goto
   Dests: 1990:goto, 4265:auto
 (1 4) 4265 IF K3 > 0 THEN 4330
   Origs: 4260:auto
@@ -864,10 +863,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1990:goto, 6000:gosub
 (0 1) 4690 REM PHOTON TORPEDO CODE BEGINS HERE
   Origs: 
-  Dests: 4700:auto
+  Dests: 
 (1 5) 4700 IF P <= 0 THEN PRINT "ALL PHOTON TORPEDOES EXPENDED"
 (0 3)      GOTO 1990
-  Origs: 2140:goto, 4690:auto
+  Origs: 2140:goto
   Dests: 1990:goto, 4730:auto
 (1 5) 4730 IF D(5) < 0 THEN PRINT "PHOTON TUBES ARE NOT OPERATIONAL"
 (0 3)      GOTO 1990
@@ -1005,10 +1004,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1990:goto, 6000:gosub
 (0 1) 5520 REM SHIELD CONTROL
   Origs: 
-  Dests: 5530:auto
+  Dests: 
 (1 5) 5530 IF D(7) < 0 THEN PRINT "SHIELD CONTROL INOPERABLE"
 (0 3)      GOTO 1990
-  Origs: 2140:goto, 5520:auto
+  Origs: 2140:goto
   Dests: 1990:goto, 5560:auto
 (0 4) 5560 PRINT "ENERGY AVAILABLE ="; E + S;
 (1 2)      INPUT "NUMBER OF UNITS TO SHIELDS"; X
@@ -1039,9 +1038,9 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1990:goto
 (0 1) 5680 REM DAMAGE CONTROL
   Origs: 
-  Dests: 5690:auto
+  Dests: 
 (1 4) 5690 IF D(6) >= 0 THEN 5910
-  Origs: 2140:goto, 5680:auto, 7990:goto, 8020:goto
+  Origs: 2140:goto, 7990:goto, 8020:goto
   Dests: 5700:auto, 5910:ifthen
 (0 2) 5700 PRINT "DAMAGE CONTROL REPORT NOT AVAILABLE"
 (1 5)      IF D0 = 0 THEN 1990
@@ -1100,10 +1099,9 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1990:goto
 (0 1) 5990 REM KLINGONS SHOOTING
   Origs: 
-  Dests: 6000:auto
+  Dests: 
 (1 4) 6000 IF K3 <= 0 THEN RETURN
-  Origs: 2700:gosub, 4670:gosub, 5260:gosub, 5470:gosub, 5490:gosub, 5990:auto
-  Inconsistent GOSUB origins
+  Origs: 2700:gosub, 4670:gosub, 5260:gosub, 5470:gosub, 5490:gosub
   Dests: 6010:auto
 (1 5) 6010 IF D0 <> 0 THEN PRINT "STARBASE SHIELDS PROTECT THE ENTERPRISE"
 (0 1)      RETURN
@@ -1145,10 +1143,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 
 (0 1) 6210 REM END OF GAME
   Origs: 
-  Dests: 6220:auto
+  Dests: 
 (0 3) 6220 PRINT "IT IS STARDATE"; T
 (0 2)      GOTO 6270
-  Origs: 2050:goto, 3450:ifthen, 3850:ifthen, 6210:auto, 6250:goto
+  Origs: 2050:goto, 3450:ifthen, 3850:ifthen, 6250:goto
   Dests: 6270:goto
 (0 2) 6240 PRINT
 (0 2)      PRINT "THE ENTERPRISE HAS BEEN DESTROYED.  THEN FEDERATION ";
@@ -1195,11 +1193,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 6290:goto
 (0 1) 6420 REM SHORT RANGE SENSOR SCAN & STARTUP SUBROUTINE
   Origs: 
-  Dests: 6430:auto
+  Dests: 
 (1 5) 6430 FOR I = S1 - 1 TO S1 + 1
 (1 5)      FOR J = S2 - 1 TO S2 + 1
-  Origs: 1980:gosub, 6420:auto
-  Inconsistent GOSUB origins
+  Origs: 1980:gosub
   Dests: 6450:fornext, 6540:fornext
 (1 17) 6450 IF INT(I + .5) < 1 OR INT(I + .5) > 8 OR INT(J + .5) < 1 OR INT(J + .5) > 8 THEN 6540
   Origs: 6430:fornext
@@ -1296,10 +1293,10 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 
 (0 1) 7280 REM LIBRARY COMPUTER CODE
   Origs: 
-  Dests: 7290:auto
+  Dests: 
 (1 5) 7290 IF D(8) < 0 THEN PRINT "COMPUTER DISABLED"
 (0 3)      GOTO 1990
-  Origs: 2140:goto, 7280:auto
+  Origs: 2140:goto
   Dests: 1990:goto, 7320:auto
 (1 2) 7320 INPUT "COMPUTER ACTIVE AND AWAITING COMMAND"; A
 (1 5)      IF A < 0 THEN 1990
@@ -1335,18 +1332,18 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 7320:goto
 (0 1) 7390 REM SETUP TO CHANGE CUM GAL RECORD TO GALAXY MAP
   Origs: 
-  Dests: 7400:auto
+  Dests: 
 (0 3) 7400 H8 = 0
 (0 3)      G5 = 1
 (0 2)      PRINT "                        THE GALAXY"
 (0 2)      GOTO 7550
-  Origs: 7350:goto, 7390:auto
+  Origs: 7350:goto
   Dests: 7550:goto
 (0 1) 7530 REM CUM GALACTIC RECORD
   Origs: 
-  Dests: 7540:auto
+  Dests: 
 (0 1) 7540 REM INPUT"DO YOU WANT A HARDCOPY? IS THE TTY ON (Y/N)";A$
-  Origs: 7350:goto, 7530:auto
+  Origs: 7350:goto
   Dests: 7542:auto
 (0 1) 7542 REM IFA$="Y"THENPOKE1229,2:POKE1237,3:NULL1
   Origs: 7540:auto
@@ -1408,11 +1405,11 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1990:goto
 (0 1) 7890 REM STATUS REPORT
   Origs: 
-  Dests: 7900:auto
+  Dests: 
 (0 2) 7900 PRINT "   STATUS REPORT:"
 (0 3)      X$ = ""
 (1 6)      IF K9 > 1 THEN X$ = "S"
-  Origs: 7350:goto, 7890:auto
+  Origs: 7350:goto
   Dests: 7940:auto
 (0 5) 7940 PRINT "KLINGON"; X$; " LEFT: "; K9
   Origs: 7900:auto
@@ -1440,9 +1437,9 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 5690:goto
 (0 1) 8060 REM TORPEDO, BASE NAV, D/D CALCULATOR
   Origs: 
-  Dests: 8070:auto
+  Dests: 
 (1 5) 8070 IF K3 <= 0 THEN 4270
-  Origs: 7350:goto, 8060:auto
+  Origs: 7350:goto
   Dests: 4270:ifthen, 8080:auto
 (0 3) 8080 X$ = ""
 (1 6)      IF K3 > 1 THEN X$ = "S"
@@ -1551,7 +1548,7 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 1990:goto
 (0 1) 8580 REM FIND EMPTY PLACE IN QUADRANT (FOR THINGS)
   Origs: 
-  Dests: 8590:auto
+  Dests: 
 (0 5) 8590 R1 = FNR(1)
 (0 5)      R2 = FNR(1)
 (0 3)      A$ = "   "
@@ -1559,18 +1556,16 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
 (0 3)      Z2 = R2
 (0 2)      GOSUB 8830
 (1 5)      IF Z3 = 0 THEN 8590
-  Origs: 1720:gosub, 1880:gosub, 1910:gosub, 2610:gosub, 8580:auto
-  Inconsistent GOSUB origins
+  Origs: 1720:gosub, 1880:gosub, 1910:gosub, 2610:gosub
   Dests: 475:function, 8600:auto, 8830:gosub
 (0 1) 8600 RETURN
   Origs: 8590:auto
   Dests: 
 (0 1) 8660 REM INSERT IN STRING ARRAY FOR QUADRANT
   Origs: 
-  Dests: 8670:auto
+  Dests: 
 (0 10) 8670 S8 = INT(Z2 - .5) * 3 + INT(Z1 - .5) * 24 + 1
-  Origs: 1680:gosub, 1780:gosub, 1880:gosub, 1910:gosub, 2610:gosub, 2660:gosub, 3070:gosub, 3370:gosub, 4580:gosub, 5430:gosub, 8660:auto
-  Inconsistent GOSUB origins
+  Origs: 1680:gosub, 1780:gosub, 1880:gosub, 1910:gosub, 2610:gosub, 2660:gosub, 3070:gosub, 3370:gosub, 4580:gosub, 5430:gosub
   Dests: 8675:auto
 (1 6) 8675 IF LEN(A$) <> 3 THEN PRINT "ERROR"
 (0 1)      STOP
@@ -1590,10 +1585,9 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 
 (0 1) 8780 REM PRINTS DEVICE NAME
   Origs: 
-  Dests: 8790:auto
+  Dests: 
 (8 10) 8790 ON R1 GOTO 8792, 8794, 8796, 8798, 8800, 8802, 8804, 8806
-  Origs: 2840:gosub, 2960:gosub, 3030:gosub, 5920:gosub, 6140:gosub, 8780:auto
-  Inconsistent GOSUB origins
+  Origs: 2840:gosub, 2960:gosub, 3030:gosub, 5920:gosub, 6140:gosub
   Dests: 8792:auto, 8792:goto, 8794:goto, 8796:goto, 8798:goto, 8800:goto, 8802:goto, 8804:goto, 8806:goto
 (0 3) 8792 G2$ = "WARP ENGINES"
 (0 1)      RETURN
@@ -1629,13 +1623,12 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 
 (0 1) 8820 REM STRING COMPARISON IN QUADRANT ARRAY
   Origs: 
-  Dests: 8830:auto
+  Dests: 
 (0 4) 8830 Z1 = INT(Z1 + .5)
 (0 4)      Z2 = INT(Z2 + .5)
 (0 10)      S8 = (Z2 - 1) * 3 + (Z1 - 1) * 24 + 1
 (0 3)      Z3 = 0
-  Origs: 5000:gosub, 5060:gosub, 5210:gosub, 5280:gosub, 6490:gosub, 8590:gosub, 8820:auto
-  Inconsistent GOSUB origins
+  Origs: 5000:gosub, 5060:gosub, 5210:gosub, 5280:gosub, 6490:gosub, 8590:gosub
   Dests: 8890:auto
 (1 5) 8890 IF MID$(Q$, S8, 3) <> A$ THEN RETURN
   Origs: 8830:auto
@@ -1646,13 +1639,12 @@ FNR(_) (0 3) 475 DEF FNR(R) = INT(RND(R) * 7.98 + 1.01)
   Dests: 
 (0 1) 9010 REM QUADRANT NAME IN G2$ FROM Z4,Z5 (=Q1,Q2)
   Origs: 
-  Dests: 9020:auto
+  Dests: 
 (0 1) 9020 REM CALL WITH G5=1 TO GET REGION NAME ONLY
-  Origs: 9010:auto
-  Dests: 9030:auto
+  Origs: 
+  Dests: 
 (9 13) 9030 IF Z5 <= 4 THEN ON Z4 GOTO 9040, 9050, 9060, 9070, 9080, 9090, 9100, 9110
-  Origs: 1430:gosub, 7740:gosub, 7800:gosub, 9020:auto
-  Inconsistent GOSUB origins
+  Origs: 1430:gosub, 7740:gosub, 7800:gosub
   Dests: 9035:auto, 9040:goto, 9050:goto, 9060:goto, 9070:goto, 9080:goto, 9090:goto, 9100:goto, 9110:goto
 (0 2) 9035 GOTO 9120
   Origs: 9030:auto
