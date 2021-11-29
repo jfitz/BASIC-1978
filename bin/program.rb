@@ -642,7 +642,7 @@ end
 
 # program container
 class Program
-  attr_reader :lines
+  attr_reader :lines, :first_line_number_stmt_mod
 
   def initialize(console_io, tokenbuilders)
     @console_io = console_io
@@ -1169,10 +1169,9 @@ class Program
     @lines.each { |_, line| line.reset_reachable }
 
     # first line is live
-    first_line_number_stmt_mod = find_first_statement
-    first_line_number = first_line_number_stmt_mod.line_number
+    first_line_number = @first_line_number_stmt_mod.line_number
     first_line = @lines[first_line_number]
-    first_stmt = first_line_number_stmt_mod.statement
+    first_stmt = @first_line_number_stmt_mod.statement
     first_line.set_reachable(first_stmt)
 
     # walk the entire program and mark lines as live
@@ -1268,6 +1267,7 @@ class Program
     optimize_statements(interpreter)
     assign_singleline_function_markers
     assign_multiline_function_markers
+    @first_line_number_stmt_mod = find_first_statement
     assign_autonext
     set_transfers
     transfers_to_origins
@@ -1400,8 +1400,7 @@ class Program
     @lines.each { |_, line| line.clear_origins }
 
     # add marker for entry point (first active line)
-    first_line_number_stmt_mod = find_first_statement
-    line_number = first_line_number_stmt_mod.line_number
+    line_number = @first_line_number_stmt_mod.line_number
     line = @lines[line_number]
     unless line.nil?
       empty_line_number = LineNumber.new(nil)
