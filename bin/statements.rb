@@ -1883,7 +1883,6 @@ class EndStatement < AbstractStatement
     super
 
     @autonext = false
-    @executable = false
     @may_be_if_sub = false
 
     template = []
