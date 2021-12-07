@@ -163,12 +163,12 @@ Halstead complexity:
   Dests: 412:auto
 (1 4) 412 IF Q < 0 THEN 850
   Origs: 411:auto
-  Dests: 418:auto, 850:ifthen
+  Dests: 418:auto, 420:auto, 850:ifthen
 (0 1) 418 REM *** TRYING TO USE MORE GRAIN THAN IS IN SILOS?
   Origs: 412:auto
   Dests: 420:auto
 (1 4) 420 IF Q <= S THEN 430
-  Origs: 418:auto
+  Origs: 412:auto, 418:auto
   Dests: 421:auto, 430:ifthen
 (0 2) 421 GOSUB 710
   Origs: 420:auto
@@ -190,12 +190,12 @@ Halstead complexity:
   Dests: 442:auto, 511:ifthen
 (1 4) 442 IF D < 0 THEN 850
   Origs: 441:auto
-  Dests: 444:auto, 850:ifthen
+  Dests: 444:auto, 445:auto, 850:ifthen
 (0 1) 444 REM *** TRYING TO PLANT MORE ACRES THAN YOU OWN?
   Origs: 442:auto
   Dests: 445:auto
 (1 4) 445 IF D <= A THEN 450
-  Origs: 444:auto
+  Origs: 442:auto, 444:auto
   Dests: 446:auto, 450:ifthen
 (0 2) 446 GOSUB 720
   Origs: 445:auto
@@ -232,60 +232,60 @@ Halstead complexity:
   Dests: 511:auto
 (0 2) 511 GOSUB 800
   Origs: 441:ifthen, 510:auto
-  Dests: 512:auto, 800:gosub
+  Dests: 515:auto, 800:gosub
 (0 1) 512 REM *** A BOUNTIFUL HARVEST!
-  Origs: 511:auto
-  Dests: 515:auto
+  Origs: 
+  Dests: 
 (0 3) 515 Y = C
 (0 4)     H = D * Y
 (0 3)     E = 0
-  Origs: 512:auto
+  Origs: 511:auto
   Dests: 521:auto
 (0 2) 521 GOSUB 800
   Origs: 515:auto
   Dests: 522:auto, 800:gosub
 (1 7) 522 IF INT(C / 2) <> C / 2 THEN 530
   Origs: 521:auto
-  Dests: 523:auto, 530:ifthen
+  Dests: 523:auto, 525:auto, 530:ifthen
 (0 1) 523 REM *** RATS ARE RUNNING WILD!!
   Origs: 522:auto
   Dests: 525:auto
 (0 4) 525 E = INT(S / C)
-  Origs: 523:auto
+  Origs: 522:auto, 523:auto
   Dests: 530:auto
 (0 5) 530 S = S - E + H
   Origs: 522:ifthen, 525:auto
   Dests: 531:auto
 (0 2) 531 GOSUB 800
   Origs: 530:auto
-  Dests: 532:auto, 800:gosub
+  Dests: 533:auto, 800:gosub
 (0 1) 532 REM *** LET'S HAVE SOME BABIES
-  Origs: 531:auto
-  Dests: 533:auto
+  Origs: 
+  Dests: 
 (0 4) 533 I = INT(C * (20 * A + S) / P / 100 + 1)
-  Origs: 532:auto
-  Dests: 539:auto
-(0 1) 539 REM *** HOW MANY PEOPLE HAD FULL TUMMIES?
-  Origs: 533:auto
+  Origs: 531:auto
   Dests: 540:auto
+(0 1) 539 REM *** HOW MANY PEOPLE HAD FULL TUMMIES?
+  Origs: 
+  Dests: 
 (0 4) 540 C = INT(Q / 20)
-  Origs: 539:auto
-  Dests: 541:auto
-(0 1) 541 REM *** HORROS, A 15% CHANCE OF PLAGUE
-  Origs: 540:auto
+  Origs: 533:auto
   Dests: 542:auto
+(0 1) 541 REM *** HORROS, A 15% CHANCE OF PLAGUE
+  Origs: 
+  Dests: 
 (0 4) 542 Q = INT(10 * (2 * RND(1) - .3))
-  Origs: 541:auto
+  Origs: 540:auto
   Dests: 550:auto
 (1 5) 550 IF P < C THEN 210
   Origs: 542:auto
-  Dests: 210:ifthen, 551:auto
+  Dests: 210:ifthen, 551:auto, 552:auto
 (0 1) 551 REM *** STARVE ENOUGH FOR IMPEACHMENT?
   Origs: 550:auto
   Dests: 552:auto
 (0 4) 552 D = P - C
 (1 6)     IF D > .45 * P THEN 560
-  Origs: 551:auto
+  Origs: 550:auto, 551:auto
   Dests: 553:auto, 560:ifthen
 (0 10) 553 P1 = ((Z - 1) * P1 + D * 100 / P) / Z
   Origs: 552:auto

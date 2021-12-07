@@ -29,30 +29,30 @@ Halstead complexity:
 (0 2)   PRINT
 (0 2)   PRINT
   Origs: 4:auto
-  Dests: 10:auto
-(0 1) 10 REM
-  Origs: 6:auto
-  Dests: 20:auto
-(0 1) 20 REM     MASTERMIND II
-  Origs: 10:auto
-  Dests: 30:auto
-(0 1) 30 REM     STEVE NORTH
-  Origs: 20:auto
-  Dests: 40:auto
-(0 1) 40 REM     CREATIVE COMPUTING
-  Origs: 30:auto
-  Dests: 50:auto
-(0 1) 50 REM     PO BOX 789-M MORRISTOWN NEW JERSEY 07960
-  Origs: 40:auto
-  Dests: 60:auto
-(0 1) 60 REM
-  Origs: 50:auto
-  Dests: 70:auto
-(0 1) 70 REM
-  Origs: 60:auto
   Dests: 80:auto
+(0 1) 10 REM
+  Origs: 
+  Dests: 
+(0 1) 20 REM     MASTERMIND II
+  Origs: 
+  Dests: 
+(0 1) 30 REM     STEVE NORTH
+  Origs: 
+  Dests: 
+(0 1) 40 REM     CREATIVE COMPUTING
+  Origs: 
+  Dests: 
+(0 1) 50 REM     PO BOX 789-M MORRISTOWN NEW JERSEY 07960
+  Origs: 
+  Dests: 
+(0 1) 60 REM
+  Origs: 
+  Dests: 
+(0 1) 70 REM
+  Origs: 
+  Dests: 
 (1 2) 80 INPUT "NUMBER OF COLORS"; C9
-  Origs: 70:auto, 90:goto
+  Origs: 6:auto, 90:goto
   Dests: 90:auto
 (1 5) 90 IF C9 > 8 THEN PRINT "NO MORE THAN 8, PLEASE!"
 (0 3)    GOTO 80
@@ -122,12 +122,12 @@ Halstead complexity:
 (0 2) 300 PRINT "GUESS MY COMBINATION."
 (0 2)     PRINT
   Origs: 290:auto
-  Dests: 310:auto
-(0 1) 310 REM     GET A COMBINATION
-  Origs: 300:auto
   Dests: 320:auto
+(0 1) 310 REM     GET A COMBINATION
+  Origs: 
+  Dests: 
 (0 4) 320 A = INT(P * RND(1) + 1)
-  Origs: 310:auto
+  Origs: 300:auto
   Dests: 330:auto
 (0 2) 330 GOSUB 3000
   Origs: 320:auto
@@ -182,33 +182,33 @@ Halstead complexity:
   Dests: 490:auto
 (0 1) 490 NEXT X
   Origs: 430:fornext, 480:auto
-  Dests: 500:auto
-(0 1) 500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
-  Origs: 490:auto
   Dests: 510:auto
+(0 1) 500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
+  Origs: 
+  Dests: 
 (0 2) 510 GOSUB 4000
-  Origs: 500:auto
-  Dests: 520:auto, 4000:gosub
+  Origs: 490:auto
+  Dests: 530:auto, 4000:gosub
 (0 1) 520 REM     AND GET NUMBER OF BLACKS AND WHITES
-  Origs: 510:auto
-  Dests: 530:auto
+  Origs: 
+  Dests: 
 (0 2) 530 GOSUB 4500
-  Origs: 520:auto
+  Origs: 510:auto
   Dests: 540:auto, 4500:gosub
 (1 4) 540 IF B = P9 THEN 630
   Origs: 530:auto
-  Dests: 550:auto, 630:ifthen
+  Dests: 550:auto, 560:auto, 630:ifthen
 (0 1) 550 REM     TELL HUMAN RESULTS
   Origs: 540:auto
   Dests: 560:auto
 (0 6) 560 PRINT "YOU HAVE "; B; " BLACKS AND "; W; " WHITES."
-  Origs: 550:auto
-  Dests: 570:auto
-(0 1) 570 REM     SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
-  Origs: 560:auto
+  Origs: 540:auto, 550:auto
   Dests: 580:auto
+(0 1) 570 REM     SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
+  Origs: 
+  Dests: 
 (0 3) 580 S$(M) = X$
-  Origs: 570:auto
+  Origs: 560:auto
   Dests: 590:auto
 (0 3) 590 S(M, 1) = B
   Origs: 580:auto
@@ -249,18 +249,18 @@ Halstead complexity:
   Dests: 650:auto
 (0 2) 650 GOSUB 5000
   Origs: 640:auto
-  Dests: 660:auto, 5000:gosub
+  Dests: 690:auto, 5000:gosub
 (0 1) 660 REM
-  Origs: 650:auto, 870:goto
-  Dests: 670:auto
-(0 1) 670 REM     NOW COMPUTER GUESSES
-  Origs: 660:auto
-  Dests: 680:auto
-(0 1) 680 REM
-  Origs: 670:auto
+  Origs: 870:goto
   Dests: 690:auto
+(0 1) 670 REM     NOW COMPUTER GUESSES
+  Origs: 
+  Dests: 
+(0 1) 680 REM
+  Origs: 
+  Dests: 
 (1 3) 690 FOR X = 1 TO P
-  Origs: 680:auto
+  Origs: 650:auto, 660:auto
   Dests: 700:fornext, 710:fornext
 (0 3) 700 I(X) = 1
   Origs: 690:fornext
@@ -279,12 +279,12 @@ Halstead complexity:
   Dests: 750:fornext, 1080:fornext
 (0 2) 750 GOSUB 3000
   Origs: 740:fornext
-  Dests: 760:auto, 3000:gosub
+  Dests: 770:auto, 3000:gosub
 (0 1) 760 REM     FIND A GUESS
-  Origs: 750:auto
-  Dests: 770:auto
+  Origs: 
+  Dests: 
 (0 4) 770 G = INT(P * RND(1) + 1)
-  Origs: 760:auto
+  Origs: 750:auto
   Dests: 780:auto
 (1 4) 780 IF I(G) = 1 THEN 890
   Origs: 770:auto
@@ -318,12 +318,12 @@ Halstead complexity:
   Dests: 660:goto
 (0 3) 880 G = X
   Origs: 800:ifthen, 830:ifthen
-  Dests: 890:auto
+  Dests: 900:auto
 (0 1) 890 REM     NOW WE CONVERT GUESS #G INTO G$
-  Origs: 780:ifthen, 880:auto
+  Origs: 780:ifthen
   Dests: 900:auto
 (1 3) 900 FOR X = 1 TO G
-  Origs: 890:auto
+  Origs: 880:auto, 890:auto
   Dests: 910:fornext, 920:fornext
 (0 2) 910 GOSUB 3500
   Origs: 900:fornext
@@ -417,15 +417,15 @@ Halstead complexity:
   Dests: :stop
 (0 1) 2000 REM
   Origs: 390:ifthen
-  Dests: 2010:auto
-(0 1) 2010 REM     BOARD PRINTOUT ROUTINE
-  Origs: 2000:auto
-  Dests: 2020:auto
-(0 1) 2020 REM
-  Origs: 2010:auto
   Dests: 2025:auto
+(0 1) 2010 REM     BOARD PRINTOUT ROUTINE
+  Origs: 
+  Dests: 
+(0 1) 2020 REM
+  Origs: 
+  Dests: 
 (0 2) 2025 PRINT
-  Origs: 2020:auto
+  Origs: 2000:auto
   Dests: 2030:auto
 (0 2) 2030 PRINT "BOARD"
   Origs: 2025:auto
@@ -450,15 +450,15 @@ Halstead complexity:
   Dests: 380:goto
 (0 1) 2500 REM
   Origs: 400:ifthen
-  Dests: 2510:auto
-(0 1) 2510 REM     QUIT ROUTINE
-  Origs: 2500:auto
-  Dests: 2520:auto
-(0 1) 2520 REM
-  Origs: 2510:auto
   Dests: 2530:auto
+(0 1) 2510 REM     QUIT ROUTINE
+  Origs: 
+  Dests: 
+(0 1) 2520 REM
+  Origs: 
+  Dests: 
 (0 2) 2530 PRINT "QUITTER!  MY COMBINATION WAS: ";
-  Origs: 2520:auto
+  Origs: 2500:auto
   Dests: 2535:auto
 (0 2) 2535 GOSUB 4000
   Origs: 2530:auto
@@ -483,15 +483,15 @@ Halstead complexity:
   Dests: :stop
 (0 1) 3000 REM
   Origs: 330:gosub, 750:gosub, 1000:gosub
-  Dests: 3010:auto
-(0 1) 3010 REM     INITIALIZE Q(1-P9) TO ZEROS
-  Origs: 3000:auto
-  Dests: 3020:auto
-(0 1) 3020 REM
-  Origs: 3010:auto
   Dests: 3030:auto
+(0 1) 3010 REM     INITIALIZE Q(1-P9) TO ZEROS
+  Origs: 
+  Dests: 
+(0 1) 3020 REM
+  Origs: 
+  Dests: 
 (1 3) 3030 FOR S = 1 TO P9
-  Origs: 3020:auto
+  Origs: 3000:auto
   Dests: 3040:fornext, 3050:fornext
 (0 3) 3040 Q(S) = 0
   Origs: 3030:fornext
@@ -504,21 +504,21 @@ Halstead complexity:
   Dests: 
 (0 1) 3500 REM
   Origs: 350:gosub, 910:gosub, 1020:gosub
-  Dests: 3510:auto
-(0 1) 3510 REM     INCREMENT Q(1-P9)
-  Origs: 3500:auto
-  Dests: 3520:auto
-(0 1) 3520 REM
-  Origs: 3510:auto
   Dests: 3522:auto
+(0 1) 3510 REM     INCREMENT Q(1-P9)
+  Origs: 
+  Dests: 
+(0 1) 3520 REM
+  Origs: 
+  Dests: 
 (1 4) 3522 IF Q(1) > 0 THEN 3530
-  Origs: 3520:auto
-  Dests: 3524:auto, 3530:ifthen
+  Origs: 3500:auto
+  Dests: 3524:auto, 3526:auto, 3530:ifthen
 (0 1) 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
   Origs: 3522:auto
   Dests: 3526:auto
 (1 3) 3526 FOR S = 1 TO P9
-  Origs: 3524:auto
+  Origs: 3522:auto, 3524:auto
   Dests: 3527:fornext, 3528:fornext
 (0 3) 3527 Q(S) = 1
   Origs: 3526:fornext
@@ -549,15 +549,15 @@ Halstead complexity:
   Dests: 3540:goto
 (0 1) 4000 REM
   Origs: 510:gosub, 622:gosub, 1040:gosub, 2535:gosub
-  Dests: 4010:auto
-(0 1) 4010 REM     CONVERT Q(1-P9) TO A$(1-P9)
-  Origs: 4000:auto
-  Dests: 4020:auto
-(0 1) 4020 REM
-  Origs: 4010:auto
   Dests: 4030:auto
+(0 1) 4010 REM     CONVERT Q(1-P9) TO A$(1-P9)
+  Origs: 
+  Dests: 
+(0 1) 4020 REM
+  Origs: 
+  Dests: 
 (1 3) 4030 FOR S = 1 TO P9
-  Origs: 4020:auto
+  Origs: 4000:auto
   Dests: 4040:fornext, 4050:fornext
 (0 4) 4040 A$(S) = MID$(L$, Q(S), 1)
   Origs: 4030:fornext
@@ -570,20 +570,20 @@ Halstead complexity:
   Dests: 
 (0 1) 4500 REM
   Origs: 530:gosub, 1050:gosub
-  Dests: 4510:auto
-(0 1) 4510 REM     GET NUMBER OF BLACKS (B) AND WHITES (W)
-  Origs: 4500:auto
-  Dests: 4520:auto
-(0 1) 4520 REM     MASHES G$ AND A$ IN THE PROCESS
-  Origs: 4510:auto
-  Dests: 4530:auto
-(0 1) 4530 REM
-  Origs: 4520:auto
   Dests: 4540:auto
+(0 1) 4510 REM     GET NUMBER OF BLACKS (B) AND WHITES (W)
+  Origs: 
+  Dests: 
+(0 1) 4520 REM     MASHES G$ AND A$ IN THE PROCESS
+  Origs: 
+  Dests: 
+(0 1) 4530 REM
+  Origs: 
+  Dests: 
 (0 3) 4540 B = 0
 (0 3)      W = 0
 (0 3)      F = 0
-  Origs: 4530:auto
+  Origs: 4500:auto
   Dests: 4550:auto
 (1 3) 4550 FOR S = 1 TO P9
   Origs: 4540:auto
@@ -633,15 +633,15 @@ Halstead complexity:
   Dests: 
 (0 1) 5000 REM
   Origs: 650:gosub, 1140:gosub
-  Dests: 5010:auto
-(0 1) 5010 REM     PRINT SCORE
-  Origs: 5000:auto
-  Dests: 5020:auto
-(0 1) 5020 REM
-  Origs: 5010:auto
   Dests: 5030:auto
+(0 1) 5010 REM     PRINT SCORE
+  Origs: 
+  Dests: 
+(0 1) 5020 REM
+  Origs: 
+  Dests: 
 (0 2) 5030 PRINT "SCORE:"
-  Origs: 5020:auto
+  Origs: 5000:auto
   Dests: 5040:auto
 (0 3) 5040 PRINT "     COMPUTER "; C
   Origs: 1180:gosub, 5030:auto
@@ -679,15 +679,15 @@ Halstead complexity:
   Dests: 
 (0 1) 6000 REM
   Origs: 930:gosub
-  Dests: 6010:auto
-(0 1) 6010 REM     CONVERT Q(1-P9) TO H$(1-P9)
-  Origs: 6000:auto
-  Dests: 6020:auto
-(0 1) 6020 REM
-  Origs: 6010:auto
   Dests: 6030:auto
+(0 1) 6010 REM     CONVERT Q(1-P9) TO H$(1-P9)
+  Origs: 
+  Dests: 
+(0 1) 6020 REM
+  Origs: 
+  Dests: 
 (1 3) 6030 FOR S = 1 TO P9
-  Origs: 6020:auto
+  Origs: 6000:auto
   Dests: 6040:fornext, 6050:fornext
 (0 4) 6040 H$(S) = MID$(L$, Q(S), 1)
   Origs: 6030:fornext
@@ -700,15 +700,15 @@ Halstead complexity:
   Dests: 
 (0 1) 6500 REM
   Origs: 1035:gosub
-  Dests: 6510:auto
-(0 1) 6510 REM     COPY H$ INTO G$
-  Origs: 6500:auto
-  Dests: 6520:auto
-(0 1) 6520 REM
-  Origs: 6510:auto
   Dests: 6530:auto
+(0 1) 6510 REM     COPY H$ INTO G$
+  Origs: 
+  Dests: 
+(0 1) 6520 REM
+  Origs: 
+  Dests: 
 (1 3) 6530 FOR S = 1 TO P9
-  Origs: 6520:auto
+  Origs: 6500:auto
   Dests: 6540:fornext, 6550:fornext
 (0 3) 6540 G$(S) = H$(S)
   Origs: 6530:fornext

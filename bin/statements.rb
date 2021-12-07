@@ -253,7 +253,9 @@ end
 # parent of all statement classes
 class AbstractStatement
   attr_reader :errors, :warnings, :program_errors, :keywords, :tokens,
-              :separators, :valid, :executable, :comment, :linenums, :autonext, :transfers, :transfers_auto, :is_if_no_else, :may_be_if_sub
+              :separators, :valid, :executable, :comment, :linenums,
+              :autonext, :autonext_line_stmt, :transfers, :transfers_auto,
+              :is_if_no_else, :may_be_if_sub
   attr_accessor :part_of_user_function, :origins, :reachable
 
   def self.extra_keywords
@@ -2256,6 +2258,7 @@ class ForStatement < AbstractStatement
 
     terminated = fornext_control.front_terminated?(interpreter)
 
+    interpreter.next_line_stmt_mod = @loopstart_line_stmt_mod
     interpreter.next_line_stmt_mod = @nextstmt_line_stmt if terminated
 
     untilv = nil

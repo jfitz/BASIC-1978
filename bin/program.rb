@@ -723,7 +723,8 @@ class Program
 
     stmt += 1 while
       stmt < statements.size &&
-      statements[stmt].part_of_user_function != part_of_user_function
+      (!statements[stmt].executable ||
+      statements[stmt].part_of_user_function != part_of_user_function)
 
     return LineStmt.new(line_number, stmt) if stmt < statements.size
 
@@ -741,7 +742,8 @@ class Program
 
       stmt += 1 while
         stmt < statements.size &&
-        statements[stmt].part_of_user_function != part_of_user_function
+        (!statements[stmt].executable ||
+        statements[stmt].part_of_user_function != part_of_user_function)
 
       return LineStmt.new(line_number, stmt) if stmt < statements.size
 
@@ -811,6 +813,26 @@ class Program
 
     # nothing left to execute
     nil
+  end
+
+  def find_next_exec_line_stmt_mod(current_line_stmt_mod)
+    # find next index with current statement
+    line_number = current_line_stmt_mod.line_number
+    line = @lines[line_number]
+
+    statements = line.statements
+    stmt = current_line_stmt_mod.statement
+    statement = statements[stmt]
+    part_of_user_function = statement.part_of_user_function
+
+    mod = current_line_stmt_mod.index
+
+    if mod < statement.last_index
+      mod += 1
+      return LineStmtMod.new(line_number, stmt, mod)
+    end
+
+    return statement.autonext_line_stmt
   end
 
   def line_number?(line_number)

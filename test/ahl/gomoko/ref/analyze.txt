@@ -121,14 +121,14 @@ Halstead complexity:
   Dests: 310:goto
 (0 3) 440 A(I, J) = 1
   Origs: 410:ifthen
-  Dests: 500:auto
-(0 1) 500 REM *** COMPUTER TRIES AN INTELLIGENT MOVE ***
-  Origs: 440:auto
   Dests: 510:auto
+(0 1) 500 REM *** COMPUTER TRIES AN INTELLIGENT MOVE ***
+  Origs: 
+  Dests: 
 (1 4) 510 FOR E = -1 TO 1
 (1 4)     FOR F = -1 TO 1
 (1 8)     IF E + F - E * F = 0 THEN 590
-  Origs: 500:auto
+  Origs: 440:auto
   Dests: 540:auto, 590:fornext, 590:ifthen
 (0 4) 540 X = I + F
 (0 4)     Y = J + F
@@ -144,15 +144,15 @@ Halstead complexity:
 (0 1) 590 NEXT F
 (0 1)     NEXT E
   Origs: 510:fornext, 510:ifthen, 570:ifthen, 580:auto
-  Dests: 600:auto
-(0 1) 600 REM *** COMPUTER TRIES A RANDOM MOVE ***
-  Origs: 590:auto
   Dests: 610:auto
+(0 1) 600 REM *** COMPUTER TRIES A RANDOM MOVE ***
+  Origs: 
+  Dests: 
 (0 4) 610 X = INT(N * RND(1) + 1)
 (0 4)     Y = INT(N * RND(1) + 1)
 (0 2)     GOSUB 910
 (1 5)     IF L = 0 THEN 610
-  Origs: 600:auto, 650:ifthen, 750:ifthen
+  Origs: 590:auto, 650:ifthen, 750:ifthen
   Dests: 650:auto, 910:gosub
 (1 5) 650 IF A(X, Y) <> 0 THEN 610
   Origs: 610:auto, 760:goto

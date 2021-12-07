@@ -29,30 +29,30 @@ Halstead complexity:
 (0 2)   PRINT
 (0 2)   PRINT
   Origs: 4:auto
-  Dests: 20:auto
-(0 1) 20 REM ORIGINAL GAME DESIGN: CRAM, GOODIE, HIBBARD LEXINGTON H.S.
-  Origs: 6:auto
-  Dests: 30:auto
-(0 1) 30 REM MODIFICATIONS: G. PAUL, R. HESS (TIES), 1973
-  Origs: 20:auto
   Dests: 50:auto
+(0 1) 20 REM ORIGINAL GAME DESIGN: CRAM, GOODIE, HIBBARD LEXINGTON H.S.
+  Origs: 
+  Dests: 
+(0 1) 30 REM MODIFICATIONS: G. PAUL, R. HESS (TIES), 1973
+  Origs: 
+  Dests: 
 (0 8) 50 DIM S(4), C$(14), M1(14), M2(14), C1(14), C2(14), M(14)
-  Origs: 30:auto
-  Dests: 60:auto
-(0 1) 60 REM UNION INFO ON LIKELY CONFEDERATE STRATEGY
-  Origs: 50:auto
+  Origs: 6:auto
   Dests: 70:auto
+(0 1) 60 REM UNION INFO ON LIKELY CONFEDERATE STRATEGY
+  Origs: 
+  Dests: 
 (0 3) 70 S(1) = 25
 (0 3)    S(2) = 25
 (0 3)    S(3) = 25
 (0 3)    S(4) = 25
-  Origs: 60:auto
-  Dests: 82:auto
-(0 1) 82 REM READ HISTORICAL DATA.
-  Origs: 70:auto
+  Origs: 50:auto
   Dests: 84:auto
+(0 1) 82 REM READ HISTORICAL DATA.
+  Origs: 
+  Dests: 
 (1 3) 84 FOR D = 1 TO 14
-  Origs: 82:auto
+  Origs: 70:auto
   Dests: 86:fornext, 88:fornext
 (6 7) 86 READ C$(D), M1(D), M2(D), C1(D), C2(D), M(D)
   Origs: 84:fornext
@@ -298,21 +298,21 @@ Halstead complexity:
   Dests: 960:auto
 (0 3) 960 LET U = 0
   Origs: 720:auto
-  Dests: 970:auto
-(0 1) 970 REM  INFLATION CALC
-  Origs: 960:auto
   Dests: 980:auto
+(0 1) 970 REM  INFLATION CALC
+  Origs: 
+  Dests: 
 (0 7) 980 LET I1 = 10 + (L - W) * 2
-  Origs: 970:auto
+  Origs: 960:auto
   Dests: 990:auto
 (0 7) 990 LET I2 = 10 + (W - L) * 2
   Origs: 980:auto
-  Dests: 1000:auto
-(0 1) 1000 REM - MONEY AVAILABLE
-  Origs: 990:auto
   Dests: 1010:auto
+(0 1) 1000 REM - MONEY AVAILABLE
+  Origs: 
+  Dests: 
 (0 5) 1010 LET D(1) = 100 * INT((M1 * (100 - I1) / 2000) * (1 + (R1 - Q1) / (R1 + 1)) + .5)
-  Origs: 1000:auto
+  Origs: 990:auto
   Dests: 1020:auto
 (0 5) 1020 LET D(2) = 100 * INT(M2 * (100 - I2) / 2000 + .5)
   Origs: 1010:auto
@@ -322,12 +322,12 @@ Halstead complexity:
   Dests: 1040:auto, 1050:ifthen
 (0 5) 1040 LET D(2) = 100 * INT((M2 * (100 - I2) / 2000) * (1 + (R2 - Q2) / (R2 + 1)) + .5)
   Origs: 1030:auto
-  Dests: 1050:auto
+  Dests: 1060:auto
 (0 1) 1050 REM - MEN   AVAILABLE
-  Origs: 1030:ifthen, 1040:auto
+  Origs: 1030:ifthen
   Dests: 1060:auto
 (0 4) 1060 LET M5 = INT(M1 * (1 + (P1 - T1) / (M3 + 1)))
-  Origs: 1050:auto
+  Origs: 1040:auto, 1050:auto
   Dests: 1070:auto
 (0 4) 1070 LET M6 = INT(M2 * (1 + (P2 - T2) / (M4 + 1)))
   Origs: 1060:auto
@@ -377,15 +377,15 @@ Halstead complexity:
   Dests: 1195:auto
 (0 2) 1195 PRINT
   Origs: 1190:auto
-  Dests: 1200:auto
-(0 1) 1200 REM - ONLY IN PRINTOUT IS CONFED INFLATION = I1+15%
-  Origs: 1195:auto
-  Dests: 1210:auto
-(0 1) 1210 REM - IF TWO GENERALS, INPUT CONFED. FIRST
-  Origs: 1200:auto
   Dests: 1220:auto
+(0 1) 1200 REM - ONLY IN PRINTOUT IS CONFED INFLATION = I1+15%
+  Origs: 
+  Dests: 
+(0 1) 1210 REM - IF TWO GENERALS, INPUT CONFED. FIRST
+  Origs: 
+  Dests: 
 (1 3) 1220 FOR I = 1 TO D
-  Origs: 1210:auto
+  Origs: 1195:auto
   Dests: 1230:fornext, 1540:fornext
 (1 4) 1230 IF B$ <> "YES" THEN 1260
   Origs: 1220:fornext
@@ -500,12 +500,12 @@ Halstead complexity:
   Dests: 1620:goto
 (0 2) 1600 PRINT "      UNION ";
   Origs: 1570:goto
-  Dests: 1610:auto
-(0 1) 1610 REM - FIND MORALE
-  Origs: 1600:auto
   Dests: 1620:auto
+(0 1) 1610 REM - FIND MORALE
+  Origs: 
+  Dests: 
 (0 13) 1620 LET O = ((2 * F(Z) ^ 2 + H(Z) ^ 2) / F1 ^ 2 + 1)
-  Origs: 1560:ifthen, 1590:goto, 1610:auto
+  Origs: 1560:ifthen, 1590:goto, 1600:auto
   Dests: 1630:auto
 (1 4) 1630 IF O < 10 THEN 1660
   Origs: 1620:auto
@@ -545,12 +545,12 @@ Halstead complexity:
   Dests: 1750:auto
 (0 2) 1750 PRINT "CONFEDERATE GENERAL---";
   Origs: 1740:auto
-  Dests: 1760:auto
+  Dests: 1770:auto
 (0 1) 1760 REM - ACTUAL OFF/DEF BATTLE SITUATION
-  Origs: 1700:ifthen, 1750:auto
+  Origs: 1700:ifthen
   Dests: 1770:auto
 (1 4) 1770 IF M <> 3 THEN 1800
-  Origs: 1760:auto
+  Origs: 1750:auto, 1760:auto
   Dests: 1780:auto, 1800:ifthen
 (0 2) 1780 PRINT "YOU ARE ON THE OFFENSIVE"
   Origs: 1770:auto
@@ -572,12 +572,12 @@ Halstead complexity:
   Dests: 1840:auto
 (0 2) 1840 PRINT
   Origs: 1790:goto, 1820:goto, 1830:auto
-  Dests: 1850:auto
-(0 1) 1850 REM - CHOOSE STRATEGIES
-  Origs: 1840:auto
   Dests: 1860:auto
+(0 1) 1850 REM - CHOOSE STRATEGIES
+  Origs: 
+  Dests: 
 (1 4) 1860 IF B$ <> "YES" THEN 1910
-  Origs: 1850:auto
+  Origs: 1840:auto
   Dests: 1870:auto, 1910:ifthen
 (1 3) 1870 FOR I = 1 TO 2
   Origs: 1860:auto
@@ -638,24 +638,24 @@ Halstead complexity:
   Dests: 2060:auto
 (1 5) 2060 IF Y2 = 5 THEN 2020
   Origs: 2050:auto
-  Dests: 2020:ifthen, 2070:auto
+  Dests: 2020:ifthen, 2070:auto, 2080:auto
 (0 1) 2070 REM : SIMULATED LOSSES-NORTH
   Origs: 2060:auto
   Dests: 2080:auto
 (0 15) 2080 LET C6 = (2 * C2 / 5) * (1 + 1 / (2 * (ABS(Y2 - Y) + 1)))
-  Origs: 2070:auto
+  Origs: 2060:auto, 2070:auto
   Dests: 2090:auto
 (0 12) 2090 LET C6 = C6 * (1.28 + (5 * M2 / 6) / (B(2) + 1))
   Origs: 2080:auto
   Dests: 2100:auto
 (0 4) 2100 LET C6 = INT(C6 * (1 + 1 / O2) + .5)
   Origs: 2090:auto
-  Dests: 2110:auto
-(0 1) 2110 REM - IF LOSS > MEN PRESENT, RESCALE LOSSES
-  Origs: 2100:auto
   Dests: 2120:auto
+(0 1) 2110 REM - IF LOSS > MEN PRESENT, RESCALE LOSSES
+  Origs: 
+  Dests: 
 (0 4) 2120 LET E2 = 100 / O2
-  Origs: 2110:auto
+  Origs: 2100:auto
   Dests: 2130:auto
 (1 5) 2130 IF INT(C6 + E2) < M6 THEN 2190
   Origs: 2120:auto
@@ -668,12 +668,12 @@ Halstead complexity:
   Dests: 2160:auto
 (0 3) 2160 LET U2 = 1
   Origs: 2150:auto
-  Dests: 2170:auto
+  Dests: 2180:auto
 (0 1) 2170 REM - CALCULATE SIMULATED LOSSES
-  Origs: 1990:goto, 2160:auto
+  Origs: 1990:goto
   Dests: 2180:auto
 (0 2) 2180 PRINT
-  Origs: 2170:auto
+  Origs: 2160:auto, 2170:auto
   Dests: 2190:auto
 (0 2) 2190 PRINT
 (0 2)      PRINT
@@ -727,12 +727,12 @@ Halstead complexity:
   Dests: 2350:auto
 (0 2) 2350 PRINT
   Origs: 2310:ifthen, 2340:auto
-  Dests: 2360:auto
-(0 1) 2360 REM - 1 WHO ONE
-  Origs: 2350:auto
   Dests: 2370:auto
+(0 1) 2360 REM - 1 WHO ONE
+  Origs: 
+  Dests: 
 (1 4) 2370 IF U <> 1 THEN 2380
-  Origs: 2360:auto
+  Origs: 2350:auto
   Dests: 2375:auto, 2380:ifthen
 (1 4) 2375 IF U2 = 1 THEN 2460
   Origs: 2370:auto
@@ -790,12 +790,12 @@ Halstead complexity:
   Dests: 2550:auto
 (0 2) 2550 PRINT
   Origs: 2540:auto
-  Dests: 2560:auto
-(0 1) 2560 REM - FIND WHO WON
-  Origs: 2550:auto
   Dests: 2570:auto
+(0 1) 2560 REM - FIND WHO WON
+  Origs: 
+  Dests: 
 (1 4) 2570 IF U = 1 THEN 2590
-  Origs: 2560:auto
+  Origs: 2550:auto
   Dests: 2580:auto, 2590:ifthen
 (1 14) 2580 IF C5 + E < 17 * C2 * C1 / (C5 * 20) + 5 * O THEN 2630
   Origs: 2570:auto
@@ -814,15 +814,15 @@ Halstead complexity:
   Dests: 2680:goto
 (0 3) 2630 PRINT "YOU WIN "; C$
   Origs: 2580:ifthen
-  Dests: 2640:auto
-(0 1) 2640 REM - CUMULATIVE BATTLE FACTORS WHICH ALTER HISTORICAL
-  Origs: 2630:auto
-  Dests: 2650:auto
-(0 1) 2650 REM  RESOURCES AVAILABLE.IF A REPLAY DON'T UPDATE.
-  Origs: 2640:auto
   Dests: 2660:auto
+(0 1) 2640 REM - CUMULATIVE BATTLE FACTORS WHICH ALTER HISTORICAL
+  Origs: 
+  Dests: 
+(0 1) 2650 REM  RESOURCES AVAILABLE.IF A REPLAY DON'T UPDATE.
+  Origs: 
+  Dests: 
 (1 4) 2660 IF A = 0 THEN 2790
-  Origs: 2450:goto, 2650:auto
+  Origs: 2450:goto, 2630:auto
   Dests: 2670:auto, 2790:ifthen
 (0 4) 2670 LET W = W + 1
   Origs: 2660:auto
@@ -958,12 +958,12 @@ Halstead complexity:
   Dests: 3080:auto
 (0 5) 3080 PRINT S(1); S(2); S(3); S(4)
   Origs: 3070:auto
-  Dests: 3090:auto
-(0 1) 3090 REM ---------------------------------
-  Origs: 3080:auto
   Dests: 3100:auto
+(0 1) 3090 REM ---------------------------------
+  Origs: 
+  Dests: 
 (0 1) 3100 STOP
-  Origs: 2960:ifthen, 3040:ifthen, 3090:auto
+  Origs: 2960:ifthen, 3040:ifthen, 3080:auto
   Dests: :stop
 (0 1) 3110 REM - UNION STRATEGY IS COMPUTER CHOSEN
   Origs: 1980:gosub
@@ -1000,24 +1000,24 @@ Halstead complexity:
   Dests: 3210:fornext, 3250:fornext
 (0 4) 3210 LET S0 = S0 + S(I)
   Origs: 3200:fornext
-  Dests: 3220:auto
-(0 1) 3220 REM - IF ACTUAL STRATEGY INFO IS IN PROGRAM DATA STATEMENTS
-  Origs: 3210:auto
-  Dests: 3230:auto
-(0 1) 3230 REM   THEN R-100 IS EXTRA WEIGHT GIVEN TO THAT STATEGY.
-  Origs: 3220:auto
   Dests: 3240:auto
+(0 1) 3220 REM - IF ACTUAL STRATEGY INFO IS IN PROGRAM DATA STATEMENTS
+  Origs: 
+  Dests: 
+(0 1) 3230 REM   THEN R-100 IS EXTRA WEIGHT GIVEN TO THAT STATEGY.
+  Origs: 
+  Dests: 
 (1 4) 3240 IF R < S0 THEN 3270
-  Origs: 3230:auto
+  Origs: 3210:auto
   Dests: 3250:auto, 3270:ifthen
 (0 1) 3250 NEXT I
   Origs: 3200:fornext, 3240:auto
-  Dests: 3260:auto
-(0 1) 3260 REM - IF ACTUAL STRAT. IN,THEN HERE IS Y2= HIST. STRAT.
-  Origs: 3250:auto
   Dests: 3270:auto
+(0 1) 3260 REM - IF ACTUAL STRAT. IN,THEN HERE IS Y2= HIST. STRAT.
+  Origs: 
+  Dests: 
 (0 3) 3270 LET Y2 = I
-  Origs: 3240:ifthen, 3260:auto
+  Origs: 3240:ifthen, 3250:auto
   Dests: 3280:auto
 (0 2) 3280 PRINT Y2
   Origs: 3270:auto
@@ -1027,15 +1027,15 @@ Halstead complexity:
   Dests: 
 (0 1) 3300 REM LEARN  PRESENT STRATEGY, START FORGETTING OLD ONES
   Origs: 2780:gosub
-  Dests: 3310:auto
-(0 1) 3310 REM - PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
-  Origs: 3300:auto
-  Dests: 3320:auto
-(0 1) 3320 REM   PROBABILITY POINTS, UNLESS A STRATEGY FALLS BELOW 5%.
-  Origs: 3310:auto
   Dests: 3330:auto
+(0 1) 3310 REM - PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
+  Origs: 
+  Dests: 
+(0 1) 3320 REM   PROBABILITY POINTS, UNLESS A STRATEGY FALLS BELOW 5%.
+  Origs: 
+  Dests: 
 (0 3) 3330 LET S = 3
-  Origs: 3320:auto
+  Origs: 3300:auto
   Dests: 3340:auto
 (0 3) 3340 LET S0 = 0
   Origs: 3330:auto
