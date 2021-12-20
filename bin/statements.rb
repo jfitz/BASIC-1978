@@ -319,15 +319,6 @@ class AbstractStatement
     end
   end
 
-  def init_user_functions(interpreter, line_stmt, program)
-    define_user_functions(interpreter)
-    set_endfunc_lines(line_stmt, program)
-  end
-
-  def init_data(interpreter)
-    load_data(interpreter)
-  end
-
   def set_destinations(_, _, _) end
 
   def set_for_lines(_, _, _) end
