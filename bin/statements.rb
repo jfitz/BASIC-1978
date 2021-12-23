@@ -2381,6 +2381,7 @@ class GosubStatement < AbstractStatement
     new_token = NumericConstantToken.new(@dest_line.line_number)
     @linenums = [@dest_line]
     @tokens[-1] = new_token
+    @core_tokens[-1] = new_token
   end
 
   def set_destinations(interpreter, _, _)
@@ -2461,6 +2462,7 @@ class GotoStatement < AbstractStatement
       new_token = NumericConstantToken.new(@dest_line.line_number)
       @linenums = [@dest_line]
       @tokens[-1] = new_token
+      @core_tokens[-1] = new_token
     end
   end
 
@@ -2646,18 +2648,25 @@ class AbstractIfStatement < AbstractStatement
       new_token = NumericConstantToken.new(@dest_line.line_number)
 
       index = 0
-
       @tokens.each_with_index do |token, i|
         index = i if token.to_s == 'THEN'
       end
 
       @tokens[index + 1] = new_token
+
+      index = 0
+      @core_tokens.each_with_index do |token, i|
+        index = i if token.to_s == 'THEN'
+      end
+
+      @core_tokens[index + 1] = new_token
     end
 
     unless @else_dest_line.nil?
       @else_dest_line = renumber_map[@else_dest_line]
       new_token = NumericConstantToken.new(@else_dest_line.line_number)
       @tokens[-1] = new_token
+      @core_tokens[-1] = new_token
     end
 
     @linenums = make_linenum_references
@@ -3506,6 +3515,7 @@ class OnErrorStatement < AbstractStatement
       new_token = NumericConstantToken.new(@dest_line.line_number)
       @linenums = [@dest_line]
       @tokens[-1] = new_token
+      @core_tokens[-1] = new_token
     end
   end
 end
