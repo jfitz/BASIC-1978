@@ -1870,6 +1870,16 @@ class Expression
     has
   end
 
+  def include?(wanted_element)
+    has = false
+
+    @elements.each do |element|
+      has ||= element == wanted_element
+    end
+
+    has
+  end
+
   def destinations(user_function_start_lines)
     dests = []
 
@@ -2161,6 +2171,16 @@ class AbstractExpressionSet
 
     @expressions.each do |expression|
       has ||= expression.has_tab
+    end
+
+    has
+  end
+
+  def include?(element)
+    has = false
+
+    @expressions.each do |expression|
+      has ||= expression.include?(element)
     end
 
     has

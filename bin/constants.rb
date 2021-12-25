@@ -2135,6 +2135,10 @@ class Variable < AbstractElement
     end
   end
 
+  def to_v
+    to_s
+  end
+
   def to_sw
     if subscripts.empty?
       @variable_name.to_s

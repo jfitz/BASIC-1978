@@ -2095,6 +2095,16 @@ class ForStatement < AbstractStatement
     @warnings << 'Constant expression' if !@until.nil? && @until.constant
     @warnings << 'Constant expression' if !@while.nil? && @while.constant
 
+    unless @until.nil?
+      @warnings << "No #{@control} in expression" unless
+        @until.include?(@control)
+    end
+
+    unless @while.nil?
+      @warnings << "No #{@control} in expression" unless
+        @while.include?(@control)
+    end
+
     @mccabe = 1
 
     control = XrefEntry.new(@control.to_s, nil, true)
