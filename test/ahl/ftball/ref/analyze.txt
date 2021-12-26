@@ -170,7 +170,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 652:auto
 (0 2) 652 GOTO 720
   Origs: 651:auto
-  Dests: 720:goto
+  Dests: 730:goto
 (0 2) 655 PRINT L$(4);
   Origs: 650:ifthen
   Dests: 660:auto
@@ -184,11 +184,11 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 700:auto
   Dests: 730:auto
 (0 1) 720 REM FIRST DOWN
-  Origs: 652:goto, 1740:goto, 2750:goto
-  Dests: 730:auto
+  Origs: 
+  Dests: 
 (0 2) 730 GOSUB 800
-  Origs: 710:auto, 720:auto
-  Dests: 740:auto, 800:gosub
+  Origs: 652:goto, 710:auto, 1740:goto, 2750:goto
+  Dests: 740:auto, 810:gosub
 (0 3) 740 LET X1 = X
   Origs: 730:auto, 2330:goto, 2340:ifthen
   Dests: 750:auto
@@ -207,12 +207,12 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 790:auto
 (0 2) 790 GOTO 860
   Origs: 780:auto
-  Dests: 860:goto
+  Dests: 870:goto
 (0 1) 800 REM PRINT POSITION
-  Origs: 730:gosub, 2300:gosub
-  Dests: 810:auto
+  Origs: 
+  Dests: 
 (1 4) 810 IF X > 50 THEN 840
-  Origs: 800:auto
+  Origs: 730:gosub, 2300:gosub
   Dests: 820:auto, 840:ifthen
 (0 5) 820 PRINT L$(5); O$(0); X; L$(6)
   Origs: 810:auto
@@ -227,14 +227,14 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 830:goto, 840:auto
   Dests: 
 (0 1) 860 REM NEW PLAY
-  Origs: 790:goto, 2440:goto
-  Dests: 870:auto
+  Origs: 
+  Dests: 
 (0 4) 870 LET T = T + 1
-  Origs: 860:auto
+  Origs: 790:goto, 2440:goto
   Dests: 880:auto
 (1 4) 880 IF T = 30 THEN 1060
   Origs: 870:auto
-  Dests: 890:auto, 1060:ifthen
+  Dests: 890:auto, 1070:ifthen
 (1 4) 890 IF T < 50 THEN 940
   Origs: 880:auto
   Dests: 900:auto, 940:ifthen
@@ -252,7 +252,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: :stop
 (1 4) 940 IF P = 1 THEN 1870
   Origs: 890:ifthen, 900:ifthen, 1070:ifthen, 1100:goto
-  Dests: 950:auto, 1870:ifthen
+  Dests: 950:auto, 1880:ifthen
 (0 2) 950 PRINT "NEXT PLAY";
   Origs: 940:auto
   Dests: 960:auto
@@ -285,12 +285,12 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 1050:auto
 (7 9) 1050 ON Z GOTO 1110, 1150, 1260, 1480, 1570, 1570, 1680
   Origs: 1040:auto
-  Dests: 1070:auto, 1110:goto, 1150:goto, 1260:goto, 1480:goto, 1570:goto, 1680:goto
+  Dests: 1070:auto, 1120:goto, 1160:goto, 1270:goto, 1490:goto, 1580:goto, 1690:goto
 (0 1) 1060 REM  JEAN'S SPECIAL
-  Origs: 880:ifthen
-  Dests: 1070:auto
+  Origs: 
+  Dests: 
 (1 8) 1070 IF RND(1) > 1 / 3 THEN 940
-  Origs: 1050:auto, 1060:auto
+  Origs: 880:ifthen, 1050:auto
   Dests: 940:ifthen, 1080:auto
 (0 2) 1080 PRINT "GAME DELAYED.  DOG ON FIELD."
   Origs: 1070:auto
@@ -302,26 +302,26 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 1090:auto
   Dests: 940:goto
 (0 1) 1110 REM  SIMPLE RUN
-  Origs: 1050:goto
-  Dests: 1120:auto
+  Origs: 
+  Dests: 
 (0 4) 1120 LET Y = INT(24 * (R - .5) ^ 3 + 3)
-  Origs: 1110:auto
+  Origs: 1050:goto
   Dests: 1130:auto
 (1 5) 1130 IF RND(1) < .05 THEN 1180
   Origs: 1120:auto
   Dests: 1140:auto, 1180:ifthen
 (0 2) 1140 GOTO 2190
   Origs: 1130:auto
-  Dests: 2190:goto
+  Dests: 2200:goto
 (0 1) 1150 REM  TRICKY RUN
-  Origs: 1050:goto
-  Dests: 1160:auto
+  Origs: 
+  Dests: 
 (0 4) 1160 LET Y = INT(20 * R - 5)
-  Origs: 1150:auto
+  Origs: 1050:goto
   Dests: 1170:auto
 (1 5) 1170 IF RND(1) > .1 THEN 2190
   Origs: 1160:auto
-  Dests: 1180:auto, 2190:ifthen
+  Dests: 1180:auto, 2200:ifthen
 (0 4) 1180 LET F = -1
   Origs: 1130:ifthen, 1170:auto
   Dests: 1190:auto
@@ -345,12 +345,12 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 1250:auto
 (0 2) 1250 GOTO 2450
   Origs: 1240:auto
-  Dests: 2450:goto
+  Dests: 2460:goto
 (0 1) 1260 REM  SHORT PASS
-  Origs: 1050:goto
-  Dests: 1270:auto
+  Origs: 
+  Dests: 
 (0 4) 1270 LET Y = INT(60 * (R1 - .5) ^ 3 + 10)
-  Origs: 1260:auto
+  Origs: 1050:goto
   Dests: 1280:auto
 (1 4) 1280 IF R < .05 THEN 1330
   Origs: 1270:auto
@@ -366,7 +366,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 1320:auto
 (0 2) 1320 GOTO 2190
   Origs: 1310:auto
-  Dests: 2190:goto
+  Dests: 2200:goto
 (1 4) 1330 IF D = 4 THEN 1420
   Origs: 1280:ifthen, 1500:ifthen
   Dests: 1340:auto, 1420:ifthen
@@ -381,7 +381,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 410:function, 1370:auto
 (1 5) 1370 IF ABS(X - 50) >= 50 THEN 2450
   Origs: 1360:auto
-  Dests: 1380:auto, 2450:ifthen
+  Dests: 1380:auto, 2460:ifthen
 (0 2) 1380 GOTO 2300
   Origs: 1370:auto
   Dests: 2300:goto
@@ -393,7 +393,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 1410:auto
 (0 2) 1410 GOTO 2190
   Origs: 1400:auto
-  Dests: 2190:goto
+  Dests: 2200:goto
 (0 3) 1420 LET Y = 0
   Origs: 1300:ifthen, 1330:ifthen, 1520:ifthen
   Dests: 1430:auto
@@ -405,18 +405,18 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 1450:auto
 (0 2) 1450 GOTO 2190
   Origs: 1440:auto
-  Dests: 2190:goto
+  Dests: 2200:goto
 (0 2) 1460 PRINT "BATTED DOWN.  ";
   Origs: 1430:ifthen
   Dests: 1470:auto
 (0 2) 1470 GOTO 2190
   Origs: 1460:auto
-  Dests: 2190:goto
+  Dests: 2200:goto
 (0 1) 1480 REM  LONG PASS
-  Origs: 1050:goto
-  Dests: 1490:auto
+  Origs: 
+  Dests: 
 (0 4) 1490 LET Y = INT(160 * (R1 - .5) ^ 3 + 30)
-  Origs: 1480:auto
+  Origs: 1050:goto
   Dests: 1500:auto
 (1 5) 1500 IF R < .1 THEN 1330
   Origs: 1490:auto
@@ -438,12 +438,12 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 1560:auto
 (0 2) 1560 GOTO 2190
   Origs: 1550:auto
-  Dests: 2190:goto
+  Dests: 2200:goto
 (0 1) 1570 REM  PUNT OR KICK
-  Origs: 1050:goto
-  Dests: 1580:auto
+  Origs: 
+  Dests: 
 (0 4) 1580 LET Y = INT(100 * (R - .5) ^ 3 + 35)
-  Origs: 1570:auto
+  Origs: 1050:goto
   Dests: 1590:auto
 (1 4) 1590 IF D = 4 THEN 1610
   Origs: 1580:auto
@@ -473,10 +473,10 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 1620:ifthen, 1630:ifthen, 1660:auto
   Dests: 1350:goto
 (0 1) 1680 REM  PLACE KICK
-  Origs: 1050:goto
-  Dests: 1690:auto
+  Origs: 
+  Dests: 
 (0 4) 1690 LET Y = INT(100 * (R - .5) ^ 3 + 35)
-  Origs: 1680:auto
+  Origs: 1050:goto
   Dests: 1700:auto
 (1 4) 1700 IF R1 > .15 THEN 1740
   Origs: 1690:auto
@@ -492,7 +492,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 1740:auto
 (0 3) 1740 GOTO 720
   Origs: 1700:ifthen, 1730:auto
-  Dests: 720:goto
+  Dests: 730:goto
 (0 8) 1750 LET X = X + FNF(1) * Y
   Origs: 
   Dests: 410:function, 1760:auto
@@ -504,7 +504,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 1780:auto
 (1 5) 1780 IF ABS(X - 50) >= 50 THEN 2710
   Origs: 1770:auto
-  Dests: 1790:auto, 2710:ifthen
+  Dests: 1790:auto, 2720:ifthen
 (0 4) 1790 P = 1 - P
   Origs: 1780:auto
   Dests: 1800:auto
@@ -519,7 +519,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 1830:auto
 (0 2) 1830 GOTO 2710
   Origs: 1820:auto
-  Dests: 2710:goto
+  Dests: 2720:goto
 (0 2) 1840 PRINT "FIELD GOAL ***"
   Origs: 1810:ifthen
   Dests: 1850:auto
@@ -530,10 +530,10 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 1850:auto
   Dests: 2640:goto
 (0 1) 1870 REM  OPPONENT'S PLAY
-  Origs: 940:ifthen
-  Dests: 1880:auto
+  Origs: 
+  Dests: 
 (1 4) 1880 IF D > 1 THEN 1940
-  Origs: 1870:auto
+  Origs: 940:ifthen
   Dests: 1890:auto, 1940:ifthen
 (1 7) 1890 IF RND(1) > 1 / 3 THEN 1920
   Origs: 1880:auto, 1950:ifthen, 1960:ifthen, 2100:ifthen, 2110:ifthen
@@ -626,17 +626,17 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 2170:auto
   Dests: 1010:goto
 (0 1) 2190 REM GAIN OR LOSS
-  Origs: 1140:goto, 1170:ifthen, 1320:goto, 1410:goto, 1450:goto, 1470:goto, 1560:goto
-  Dests: 2200:auto
+  Origs: 
+  Dests: 
 (0 3) 2200 LET X3 = X
-  Origs: 2190:auto
+  Origs: 1140:goto, 1170:ifthen, 1320:goto, 1410:goto, 1450:goto, 1470:goto, 1560:goto
   Dests: 2210:auto
 (0 8) 2210 LET X = X + FNF(1) * Y
   Origs: 2200:auto
   Dests: 410:function, 2220:auto
 (1 5) 2220 IF ABS(X - 50) >= 50 THEN 2450
   Origs: 2210:auto
-  Dests: 2230:auto, 2450:ifthen
+  Dests: 2230:auto, 2460:ifthen
 (1 4) 2230 IF Y = 0 THEN 2250
   Origs: 1230:goto, 2220:auto
   Dests: 2240:auto, 2250:ifthen
@@ -651,10 +651,10 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 2290:auto, 2300:ifthen
 (1 5) 2290 IF RND(1) < .1 THEN 2860
   Origs: 2280:auto
-  Dests: 2300:auto, 2860:ifthen
+  Dests: 2300:auto, 2870:ifthen
 (0 3) 2300 GOSUB 800
   Origs: 1380:goto, 2280:ifthen, 2290:auto, 2940:ifthen, 3090:goto, 3150:goto, 3170:goto
-  Dests: 800:gosub, 2310:auto
+  Dests: 810:gosub, 2310:auto
 (1 4) 2310 IF F = 0 THEN 2340
   Origs: 2300:auto
   Dests: 2320:auto, 2340:ifthen
@@ -696,12 +696,12 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 2440:auto
 (0 3) 2440 GOTO 860
   Origs: 2430:auto
-  Dests: 860:goto
+  Dests: 870:goto
 (0 1) 2450 REM BALL IN END-ZONE
-  Origs: 1250:goto, 1370:ifthen, 2220:ifthen
-  Dests: 2460:auto
+  Origs: 
+  Dests: 
 (1 4) 2460 IF X >= 100 THEN 2490
-  Origs: 2450:auto
+  Origs: 1250:goto, 1370:ifthen, 2220:ifthen
   Dests: 2470:auto, 2490:ifthen
 (0 3) 2470 LET E = 0
   Origs: 2460:auto
@@ -714,19 +714,19 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 2500:auto
 (8 17) 2500 ON 1 + E - F * 2 + P * 4 GOTO 2510, 2590, 2760, 2710, 2590, 2510, 2710, 2760
   Origs: 2480:goto, 2490:auto
-  Dests: 2510:goto, 2520:auto, 2590:goto, 2710:goto, 2760:goto
+  Dests: 2520:auto, 2520:goto, 2600:goto, 2720:goto, 2770:goto
 (0 1) 2510 REM SAFETY
-  Origs: 2500:goto
-  Dests: 2520:auto
+  Origs: 
+  Dests: 
 (0 4) 2520 LET S(1 - P) = S(1 - P) + 2
-  Origs: 2500:auto, 2510:auto
+  Origs: 2500:auto, 2500:goto
   Dests: 2530:auto
 (0 2) 2530 PRINT L$(19)
   Origs: 2520:auto
   Dests: 2540:auto
 (0 2) 2540 GOSUB 2800
   Origs: 2530:auto
-  Dests: 2550:auto, 2800:gosub
+  Dests: 2550:auto, 2810:gosub
 (0 3) 2550 PRINT O$(P); " KICKS OFF FROM ITS 20 YARD LINE."
   Origs: 2540:auto
   Dests: 2560:auto
@@ -740,10 +740,10 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 2570:auto
   Dests: 590:goto
 (0 1) 2590 REM OFFENSIVE TD
-  Origs: 2500:goto
-  Dests: 2600:auto
+  Origs: 
+  Dests: 
 (0 3) 2600 PRINT L$(17); "***"
-  Origs: 660:goto, 2590:auto, 2790:goto
+  Origs: 660:goto, 2500:goto, 2790:goto
   Dests: 2610:auto
 (1 5) 2610 IF RND(1) > .8 THEN 2680
   Origs: 2600:auto
@@ -756,7 +756,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 2640:auto
 (0 2) 2640 GOSUB 2800
   Origs: 1860:goto, 2630:auto, 2700:goto
-  Dests: 2650:auto, 2800:gosub
+  Dests: 2650:auto, 2810:gosub
 (0 3) 2650 PRINT O$(P); " KICKS OFF"
   Origs: 2640:auto
   Dests: 2660:auto
@@ -776,10 +776,10 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 2690:auto
   Dests: 2640:goto
 (0 1) 2710 REM TOUCHBACK
-  Origs: 1780:ifthen, 1830:goto, 2500:goto
-  Dests: 2720:auto
+  Origs: 
+  Dests: 
 (0 2) 2720 PRINT L$(18)
-  Origs: 2710:auto
+  Origs: 1780:ifthen, 1830:goto, 2500:goto
   Dests: 2730:auto
 (0 4) 2730 LET P = 1 - P
   Origs: 2720:auto
@@ -789,12 +789,12 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 2750:auto
 (0 3) 2750 GOTO 720
   Origs: 2740:auto
-  Dests: 720:goto
+  Dests: 730:goto
 (0 1) 2760 REM DEFENSIVE TD
-  Origs: 2500:goto
-  Dests: 2770:auto
+  Origs: 
+  Dests: 
 (0 5) 2770 PRINT L$(17); "FOR "; O$(1 - P); "***"
-  Origs: 2760:auto
+  Origs: 2500:goto
   Dests: 2780:auto
 (0 4) 2780 LET P = 1 - P
   Origs: 2770:auto
@@ -803,10 +803,10 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 2780:auto
   Dests: 2600:goto
 (0 1) 2800 REM SCORE
-  Origs: 2540:gosub, 2640:gosub
-  Dests: 2810:auto
+  Origs: 
+  Dests: 
 (0 2) 2810 PRINT
-  Origs: 2800:auto
+  Origs: 2540:gosub, 2640:gosub
   Dests: 2820:auto
 (0 5) 2820 PRINT "SCORE:  "; S(0); " TO "; S(1)
   Origs: 2810:auto
@@ -821,10 +821,10 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 2840:auto
   Dests: 
 (0 1) 2860 REM PENALTY
-  Origs: 2290:ifthen
-  Dests: 2870:auto
+  Origs: 
+  Dests: 
 (0 4) 2870 LET P3 = INT(2 * RND(1))
-  Origs: 2860:auto
+  Origs: 2290:ifthen
   Dests: 2880:auto
 (0 3) 2880 PRINT O$(P3); " OFFSIDES -- PENALTY OF 5 YARDS."
   Origs: 2870:auto
@@ -837,7 +837,7 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Dests: 2910:auto
 (1 4) 2910 IF P3 = 0 THEN 2980
   Origs: 2900:auto
-  Dests: 2920:auto, 2980:ifthen
+  Dests: 2920:auto, 2990:ifthen
 (0 2) 2920 PRINT "DO YOU ACCEPT THE PENALTY";
   Origs: 2910:auto
   Dests: 2930:auto
@@ -857,10 +857,10 @@ FNG(_) (0 11) 420 DEF FNG(Z) = P * (X1 - X) + (1 - P) * (X - X1)
   Origs: 2960:auto
   Dests: 2930:goto
 (0 1) 2980 REM OPPONENT'S STRATEGY ON PENALTY
-  Origs: 2910:ifthen
-  Dests: 2990:auto
+  Origs: 
+  Dests: 
 (1 4) 2990 IF P = 1 THEN 3040
-  Origs: 2980:auto
+  Origs: 2910:ifthen
   Dests: 3000:auto, 3040:ifthen
 (1 4) 3000 IF Y <= 0 THEN 3080
   Origs: 2990:auto

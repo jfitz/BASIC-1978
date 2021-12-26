@@ -319,15 +319,15 @@ Halstead complexity:
   Dests: 1030:auto
 (1 4) 1030 IF B$ <> "YES" THEN 1050
   Origs: 1020:auto
-  Dests: 1040:auto, 1050:ifthen
+  Dests: 1040:auto, 1060:ifthen
 (0 5) 1040 LET D(2) = 100 * INT((M2 * (100 - I2) / 2000) * (1 + (R2 - Q2) / (R2 + 1)) + .5)
   Origs: 1030:auto
   Dests: 1060:auto
 (0 1) 1050 REM - MEN   AVAILABLE
-  Origs: 1030:ifthen
-  Dests: 1060:auto
+  Origs: 
+  Dests: 
 (0 4) 1060 LET M5 = INT(M1 * (1 + (P1 - T1) / (M3 + 1)))
-  Origs: 1040:auto, 1050:auto
+  Origs: 1030:ifthen, 1040:auto
   Dests: 1070:auto
 (0 4) 1070 LET M6 = INT(M2 * (1 + (P2 - T2) / (M4 + 1)))
   Origs: 1060:auto
@@ -530,7 +530,7 @@ Halstead complexity:
   Dests: 1700:auto
 (1 4) 1700 IF B$ <> "YES" THEN 1760
   Origs: 1650:goto, 1680:goto, 1690:auto
-  Dests: 1710:auto, 1760:ifthen
+  Dests: 1710:auto, 1770:ifthen
 (0 3) 1710 LET O(Z) = O
   Origs: 1700:auto
   Dests: 1720:auto
@@ -547,10 +547,10 @@ Halstead complexity:
   Origs: 1740:auto
   Dests: 1770:auto
 (0 1) 1760 REM - ACTUAL OFF/DEF BATTLE SITUATION
-  Origs: 1700:ifthen
-  Dests: 1770:auto
+  Origs: 
+  Dests: 
 (1 4) 1770 IF M <> 3 THEN 1800
-  Origs: 1750:auto, 1760:auto
+  Origs: 1700:ifthen, 1750:auto
   Dests: 1780:auto, 1800:ifthen
 (0 2) 1780 PRINT "YOU ARE ON THE OFFENSIVE"
   Origs: 1770:auto
@@ -614,10 +614,10 @@ Halstead complexity:
   Dests: 1980:auto, 2830:ifthen
 (0 2) 1980 GOSUB 3110
   Origs: 1970:auto
-  Dests: 1990:auto, 3110:gosub
+  Dests: 1990:auto, 3120:gosub
 (0 2) 1990 GOTO 2170
   Origs: 1980:auto
-  Dests: 2170:goto
+  Dests: 2180:goto
 (1 4) 2000 IF I = 2 THEN 2040
   Origs: 1960:ifthen
   Dests: 2010:auto, 2040:ifthen
@@ -670,10 +670,10 @@ Halstead complexity:
   Origs: 2150:auto
   Dests: 2180:auto
 (0 1) 2170 REM - CALCULATE SIMULATED LOSSES
-  Origs: 1990:goto
-  Dests: 2180:auto
+  Origs: 
+  Dests: 
 (0 2) 2180 PRINT
-  Origs: 2160:auto, 2170:auto
+  Origs: 1990:goto, 2160:auto
   Dests: 2190:auto
 (0 2) 2190 PRINT
 (0 2)      PRINT
@@ -859,7 +859,7 @@ Halstead complexity:
   Dests: 2780:auto
 (0 2) 2780 GOSUB 3300
   Origs: 2770:auto
-  Dests: 2790:auto, 3300:gosub
+  Dests: 2790:auto, 3310:gosub
 (0 3) 2790 U = 0
 (0 3)      U2 = 0
   Origs: 2480:ifthen, 2600:ifthen, 2660:ifthen, 2780:auto
@@ -966,10 +966,10 @@ Halstead complexity:
   Origs: 2960:ifthen, 3040:ifthen, 3080:auto
   Dests: :stop
 (0 1) 3110 REM - UNION STRATEGY IS COMPUTER CHOSEN
-  Origs: 1980:gosub
-  Dests: 3120:auto
+  Origs: 
+  Dests: 
 (0 2) 3120 PRINT "UNION STRATEGY IS ";
-  Origs: 3110:auto
+  Origs: 1980:gosub
   Dests: 3130:auto
 (1 4) 3130 IF A <> 0 THEN 3180
   Origs: 3120:auto
@@ -1026,16 +1026,16 @@ Halstead complexity:
   Origs: 3155:ifthen, 3280:auto
   Dests: 
 (0 1) 3300 REM LEARN  PRESENT STRATEGY, START FORGETTING OLD ONES
-  Origs: 2780:gosub
-  Dests: 3330:auto
-(0 1) 3310 REM - PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
   Origs: 
   Dests: 
+(0 1) 3310 REM - PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
+  Origs: 2780:gosub
+  Dests: 3330:auto
 (0 1) 3320 REM   PROBABILITY POINTS, UNLESS A STRATEGY FALLS BELOW 5%.
   Origs: 
   Dests: 
 (0 3) 3330 LET S = 3
-  Origs: 3300:auto
+  Origs: 3310:auto
   Dests: 3340:auto
 (0 3) 3340 LET S0 = 0
   Origs: 3330:auto

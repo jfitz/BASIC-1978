@@ -56,12 +56,12 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 
 (0 2) 90 GOTO 1500
   Origs: 30:auto
-  Dests: 1500:goto
+  Dests: 1510:goto
 (0 1) 100 REM --SUBROUTINE TO GET A CARD.  RESULT IS PUT IN X.
-  Origs: 860:gosub, 950:gosub, 2020:gosub, 2690:gosub, 2750:gosub, 3060:gosub
-  Dests: 110:auto
+  Origs: 
+  Dests: 
 (1 4) 110 IF C < 51 THEN 230
-  Origs: 100:auto
+  Origs: 860:gosub, 950:gosub, 2020:gosub, 2690:gosub, 2750:gosub, 3060:gosub
   Dests: 120:auto, 230:ifthen
 (0 2) 120 PRINT "RESHUFFLING"
   Origs: 110:auto, 1810:gosub
@@ -107,11 +107,11 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 240:auto
   Dests: 
 (0 1) 300 REM --SUBROUTINE TO EVALUATE HAND I.  TOTAL IS PUT INTO
-  Origs: 2290:gosub, 2420:gosub, 2520:gosub, 2560:gosub, 2730:gosub, 2800:gosub, 2910:gosub
-  Dests: 360:auto
-(0 1) 310 REM --Q(I). TOTALS HAVE THE FOLLOWING MEANING:
   Origs: 
   Dests: 
+(0 1) 310 REM --Q(I). TOTALS HAVE THE FOLLOWING MEANING:
+  Origs: 2290:gosub, 2420:gosub, 2520:gosub, 2560:gosub, 2730:gosub, 2800:gosub, 2910:gosub
+  Dests: 360:auto
 (0 1) 320 REM --  2-10...HARD 2-10
   Origs: 
   Dests: 
@@ -125,7 +125,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 
   Dests: 
 (0 3) 360 Q = 0
-  Origs: 300:auto
+  Origs: 310:auto
   Dests: 370:auto
 (1 3) 370 FOR Q2 = 1 TO R(I)
   Origs: 360:auto
@@ -135,7 +135,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 390:auto
 (0 2) 390 GOSUB 500
   Origs: 380:auto
-  Dests: 400:auto, 500:gosub
+  Dests: 400:auto, 510:gosub
 (0 1) 400 NEXT Q2
   Origs: 370:fornext, 390:auto
   Dests: 410:auto
@@ -146,12 +146,12 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 410:auto
   Dests: 
 (0 1) 500 REM --SUBROUTINE TO ADD CARD X TO TOTAL Q.
-  Origs: 390:gosub, 1140:gosub
-  Dests: 510:auto
+  Origs: 
+  Dests: 
 (0 3) 510 X1 = X
 (1 6)     IF X1 > 10 THEN X1 = 10
 (0 1)     REM  SAME AS X1=10 MIN X
-  Origs: 500:auto
+  Origs: 390:gosub, 1140:gosub
   Dests: 520:auto
 (0 4) 520 Q1 = Q + X1
   Origs: 510:auto
@@ -187,13 +187,13 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 600:ifthen, 610:auto
   Dests: 
 (0 1) 700 REM --CARD PRINTING SUBROUTINE
-  Origs: 890:gosub, 970:gosub, 2710:gosub, 2780:gosub, 2980:gosub
-  Dests: 720:auto
-(0 1) 710 REM  D$ DEFINED ELSEWHERE
   Origs: 
   Dests: 
+(0 1) 710 REM  D$ DEFINED ELSEWHERE
+  Origs: 890:gosub, 970:gosub, 2710:gosub, 2780:gosub, 2980:gosub
+  Dests: 720:auto
 (0 3) 720 PRINT MID$(D$, 3 * X - 2, 3);
-  Origs: 700:auto
+  Origs: 710:auto
   Dests: 730:auto
 (0 2) 730 PRINT "  ";
   Origs: 720:auto
@@ -202,10 +202,10 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 730:auto
   Dests: 
 (0 1) 750 REM --ALTERNATIVE PRINTING ROUTINE
-  Origs: 2040:gosub, 3070:gosub
-  Dests: 760:auto
+  Origs: 
+  Dests: 
 (0 4) 760 PRINT " "; MID$(D$, 3 * X - 1, 2);
-  Origs: 750:auto
+  Origs: 2040:gosub, 3070:gosub
   Dests: 770:auto
 (0 2) 770 PRINT "   ";
   Origs: 760:auto
@@ -214,17 +214,17 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 770:auto
   Dests: 
 (0 1) 800 REM --SUBROUTINE TO PLAY OUT A HAND.
-  Origs: 2860:gosub
-  Dests: 820:auto
-(0 1) 810 REM --NO SPLITTING OR BLACKJACKS ALLOWED
   Origs: 
   Dests: 
+(0 1) 810 REM --NO SPLITTING OR BLACKJACKS ALLOWED
+  Origs: 2860:gosub
+  Dests: 820:auto
 (0 3) 820 H1 = 5
-  Origs: 800:auto
+  Origs: 810:auto
   Dests: 830:auto
 (0 2) 830 GOSUB 1410
   Origs: 820:auto, 1010:goto
-  Dests: 840:auto, 1410:gosub
+  Dests: 840:auto, 1420:gosub
 (0 3) 840 H1 = 3
   Origs: 830:auto
   Dests: 850:auto
@@ -234,7 +234,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
 (0 3) 860 GOSUB 100
   Origs: 850:auto, 2530:gosub
   Inconsistent GOSUB origins
-  Dests: 100:gosub, 870:auto
+  Dests: 110:gosub, 870:auto
 (0 4) 870 B(I) = B(I) * 2
   Origs: 860:auto
   Dests: 880:auto
@@ -243,13 +243,13 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 890:auto
 (0 3) 890 GOSUB 700
   Origs: 880:auto
-  Dests: 700:gosub, 900:auto
+  Dests: 710:gosub, 900:auto
 (0 2) 900 GOSUB 1100
   Origs: 890:auto
-  Dests: 910:auto, 1100:gosub
+  Dests: 910:auto, 1110:gosub
 (1 5) 910 IF Q > 0 THEN GOSUB 1300
   Origs: 900:auto
-  Dests: 920:auto, 1300:gosub
+  Dests: 920:auto, 1310:gosub
 (0 1) 920 RETURN
   Origs: 910:auto
   Dests: 
@@ -262,16 +262,16 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
 (0 3) 950 GOSUB 100
   Origs: 850:goto, 2580:gosub
   Inconsistent GOSUB origins
-  Dests: 100:gosub, 960:auto
+  Dests: 110:gosub, 960:auto
 (0 2) 960 PRINT "RECEIVED A";
   Origs: 950:auto
   Dests: 970:auto
 (0 3) 970 GOSUB 700
   Origs: 960:auto
-  Dests: 700:gosub, 980:auto
+  Dests: 710:gosub, 980:auto
 (0 2) 980 GOSUB 1100
   Origs: 970:auto
-  Dests: 990:auto, 1100:gosub
+  Dests: 990:auto, 1110:gosub
 (1 5) 990 IF Q < 0 THEN 940
   Origs: 980:auto
   Dests: 940:ifthen, 1000:auto
@@ -282,10 +282,10 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 1000:auto
   Dests: 830:goto
 (0 1) 1100 REM --SUBROUTINE TO ADD A CARD TO ROW I
-  Origs: 900:gosub, 980:gosub, 3080:gosub
-  Dests: 1110:auto
+  Origs: 
+  Dests: 
 (0 4) 1110 R(I) = R(I) + 1
-  Origs: 1100:auto
+  Origs: 900:gosub, 980:gosub, 3080:gosub
   Dests: 1120:auto
 (0 3) 1120 P(I, R(I)) = X
   Origs: 1110:auto
@@ -295,7 +295,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 1140:auto
 (0 3) 1140 GOSUB 500
   Origs: 1130:auto
-  Dests: 500:gosub, 1150:auto
+  Dests: 510:gosub, 1150:auto
 (0 3) 1150 Q(I) = Q
   Origs: 1140:auto
   Dests: 1160:auto
@@ -307,15 +307,16 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 1180:auto
 (0 2) 1180 GOSUB 1200
   Origs: 1170:auto
-  Dests: 1190:auto, 1200:gosub
+  Dests: 1190:auto, 1210:gosub
 (0 1) 1190 RETURN
   Origs: 1160:ifthen, 1180:auto
   Dests: 
 (0 1) 1200 REM --SUBROUTINE TO DISCARD ROW I
-  Origs: 1180:gosub, 2470:gosub, 3280:gosub, 3310:gosub, 3350:gosub
-  Dests: 1210:auto
+  Origs: 
+  Dests: 
 (1 4) 1210 IF R(I) <> 0 THEN 1230
-  Origs: 1200:auto, 1260:goto
+  Origs: 1180:gosub, 1260:goto, 2470:gosub, 3280:gosub, 3310:gosub, 3350:gosub
+  Inconsistent GOSUB origins
   Dests: 1220:auto, 1230:ifthen
 (0 1) 1220 RETURN
   Origs: 1210:auto
@@ -333,10 +334,10 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 1250:auto
   Dests: 1210:goto
 (0 1) 1300 REM --PRINTS TOTAL OF HAND I
-  Origs: 910:gosub
-  Dests: 1310:auto
+  Origs: 
+  Dests: 
 (0 2) 1310 PRINT
-  Origs: 1300:auto
+  Origs: 910:gosub
   Dests: 1320:auto
 (0 3) 1320 AA = Q(I)
 (0 2)      GOSUB 3400
@@ -353,11 +354,12 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 
   Dests: 
 (0 1) 1410 REM  I$ DEFINED ELSEWHERE
-  Origs: 830:gosub, 2390:gosub
-  Dests: 1420:auto
+  Origs: 
+  Dests: 
 (1 2) 1420 INPUT H$
 (0 4)      H$ = LEFT$(H$, 1)
-  Origs: 1410:auto, 1470:goto
+  Origs: 830:gosub, 1470:goto, 2390:gosub
+  Inconsistent GOSUB origins
   Dests: 1430:auto
 (1 4) 1430 FOR H = 1 TO H1 STEP 2
   Origs: 1420:auto
@@ -381,13 +383,13 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 1480:auto
   Dests: 
 (0 1) 1500 REM --PROGRAM STARTS HERE
-  Origs: 90:goto
-  Dests: 1520:auto
-(0 1) 1510 REM --INITIALIZE
   Origs: 
   Dests: 
+(0 1) 1510 REM --INITIALIZE
+  Origs: 90:goto
+  Dests: 1520:auto
 (0 3) 1520 D$ = "  A  2  3  4  5  6  7  8  9 10  J  Q  K"
-  Origs: 1500:auto
+  Origs: 1510:auto
   Dests: 1530:auto
 (0 3) 1530 I$ = "H,S,D,C"
   Origs: 1520:auto
@@ -556,13 +558,13 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2020:fornext, 2050:fornext
 (0 3) 2020 GOSUB 100
   Origs: 2010:fornext
-  Dests: 100:gosub, 2030:auto
+  Dests: 110:gosub, 2030:auto
 (0 3) 2030 P(I, J) = X
   Origs: 2020:auto
   Dests: 2040:auto
 (1 9) 2040 IF J = 1 OR I <= N THEN GOSUB 750
   Origs: 2030:auto
-  Dests: 750:gosub, 2050:auto
+  Dests: 760:gosub, 2050:auto
 (0 1) 2050 NEXT I
   Origs: 2010:fornext, 2040:auto
   Dests: 2060:auto
@@ -586,7 +588,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 
 (1 4) 2120 IF P(D1, 1) > 1 THEN 2240
   Origs: 2100:auto
-  Dests: 2130:auto, 2240:ifthen
+  Dests: 2130:auto, 2250:ifthen
 (0 2) 2130 PRINT "ANY INSURANCE";
   Origs: 2120:auto
   Dests: 2140:auto
@@ -595,7 +597,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2150:auto
 (1 5) 2150 IF LEFT$(H$, 1) <> "Y" THEN 2240
   Origs: 2140:auto
-  Dests: 2160:auto, 2240:ifthen
+  Dests: 2160:auto, 2250:ifthen
 (0 2) 2160 PRINT "INSURANCE BETS"
   Origs: 2150:auto, 2190:ifthen
   Dests: 2170:auto
@@ -624,11 +626,11 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 2210:fornext, 2220:auto
   Dests: 2250:auto
 (0 1) 2240 REM --TEST FOR DEALER BLACKJACK
-  Origs: 2120:ifthen, 2150:ifthen
-  Dests: 2250:auto
+  Origs: 
+  Dests: 
 (0 3) 2250 L1 = 1
 (0 3)      L2 = 1
-  Origs: 2230:auto, 2240:auto
+  Origs: 2120:ifthen, 2150:ifthen, 2230:auto
   Dests: 2252:auto
 (1 9) 2252 IF P(D1, 1) = 1 AND P(D1, 2) > 9 THEN L1 = 0
 (0 3)      L2 = 0
@@ -640,7 +642,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2254:auto
 (1 7) 2254 IF L1 <> 0 OR L2 <> 0 THEN 2320
   Origs: 2253:auto
-  Dests: 2260:auto, 2320:ifthen
+  Dests: 2260:auto, 2330:ifthen
 (0 2) 2260 PRINT
 (0 5)      PRINT "DEALER HAS A"; MID$(D$, 3 * P(D1, 2) - 2, 3); " IN THE HOLE ";
   Origs: 2254:auto
@@ -653,28 +655,28 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2290:fornext, 2300:fornext
 (0 3) 2290 GOSUB 300
   Origs: 2280:fornext
-  Dests: 300:gosub, 2300:auto
+  Dests: 310:gosub, 2300:auto
 (0 1) 2300 NEXT I
   Origs: 2280:fornext, 2290:auto
   Dests: 2310:auto
 (0 2) 2310 GOTO 3140
   Origs: 2300:auto
-  Dests: 3140:goto
+  Dests: 3150:goto
 (0 1) 2320 REM --NO DEALER BLACKJACK
-  Origs: 2254:ifthen
-  Dests: 2330:auto
+  Origs: 
+  Dests: 
 (1 7) 2330 IF P(D1, 1) > 1 AND P(D1, 1) < 10 THEN 2350
-  Origs: 2320:auto
-  Dests: 2340:auto, 2350:ifthen
+  Origs: 2254:ifthen
+  Dests: 2340:auto, 2360:ifthen
 (0 2) 2340 PRINT
 (0 2)      PRINT "NO DEALER BLACKJACK."
   Origs: 2330:auto
   Dests: 2360:auto
 (0 1) 2350 REM --NOW PLAY THE HANDS
-  Origs: 2330:ifthen
-  Dests: 2360:auto
+  Origs: 
+  Dests: 
 (1 3) 2360 FOR I = 1 TO N
-  Origs: 2340:auto, 2350:auto
+  Origs: 2330:ifthen, 2340:auto
   Dests: 2370:fornext, 2900:fornext
 (0 3) 2370 PRINT "PLAYER"; I;
   Origs: 2360:fornext, 2630:goto
@@ -684,16 +686,16 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2390:auto
 (0 3) 2390 GOSUB 1410
   Origs: 2380:auto
-  Dests: 1410:gosub, 2400:auto
+  Dests: 1420:gosub, 2400:auto
 (4 6) 2400 ON H GOTO 2550, 2410, 2510, 2600
   Origs: 2390:auto
-  Dests: 2410:goto, 2420:auto, 2510:goto, 2550:goto, 2600:goto
+  Dests: 2420:auto, 2420:goto, 2520:goto, 2560:goto, 2610:goto
 (0 1) 2410 REM --PLAYER WANTS TO STAND
-  Origs: 2400:goto
-  Dests: 2420:auto
+  Origs: 
+  Dests: 
 (0 3) 2420 GOSUB 300
-  Origs: 2400:auto, 2410:auto
-  Dests: 300:gosub, 2430:auto
+  Origs: 2400:auto, 2400:goto
+  Dests: 310:gosub, 2430:auto
 (1 4) 2430 IF Q(I) <> 21 THEN 2490
   Origs: 2420:auto
   Dests: 2440:auto, 2490:ifthen
@@ -708,7 +710,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2470:auto
 (0 3) 2470 GOSUB 1200
   Origs: 2460:auto
-  Dests: 1200:gosub, 2480:auto
+  Dests: 1210:gosub, 2480:auto
 (0 2) 2480 GOTO 2900
   Origs: 2470:auto
   Dests: 2900:goto
@@ -719,11 +721,11 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 2490:auto
   Dests: 2900:goto
 (0 1) 2510 REM --PLAYER WANTS TO DOUBLE DOWN
-  Origs: 2400:goto
-  Dests: 2520:auto
+  Origs: 
+  Dests: 
 (0 3) 2520 GOSUB 300
-  Origs: 2510:auto
-  Dests: 300:gosub, 2530:auto
+  Origs: 2400:goto
+  Dests: 310:gosub, 2530:auto
 (0 3) 2530 GOSUB 860
   Origs: 2520:auto
   Dests: 860:gosub, 2540:auto
@@ -731,11 +733,11 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 2530:auto
   Dests: 2900:goto
 (0 1) 2550 REM --PLAYER WANTS TO BE HIT
-  Origs: 2400:goto
-  Dests: 2560:auto
+  Origs: 
+  Dests: 
 (0 3) 2560 GOSUB 300
-  Origs: 2550:auto
-  Dests: 300:gosub, 2570:auto
+  Origs: 2400:goto
+  Dests: 310:gosub, 2570:auto
 (0 3) 2570 H1 = 3
   Origs: 2560:auto
   Dests: 2580:auto
@@ -746,11 +748,11 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 2580:auto
   Dests: 2900:goto
 (0 1) 2600 REM --PLAYER WANTS TO SPLIT
-  Origs: 2400:goto
-  Dests: 2610:auto
+  Origs: 
+  Dests: 
 (0 3) 2610 L1 = P(I, 1)
 (1 6)      IF P(I, 1) > 10 THEN L1 = 10
-  Origs: 2600:auto
+  Origs: 2400:goto
   Dests: 2612:auto
 (0 3) 2612 L2 = P(I, 2)
 (1 6)      IF P(I, 2) > 10 THEN L2 = 10
@@ -758,7 +760,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2614:auto
 (1 4) 2614 IF L1 = L2 THEN 2640
   Origs: 2612:auto
-  Dests: 2620:auto, 2640:ifthen
+  Dests: 2620:auto, 2650:ifthen
 (0 2) 2620 PRINT "SPLITTING NOT ALLOWED."
   Origs: 2614:auto
   Dests: 2630:auto
@@ -766,10 +768,10 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 2620:auto
   Dests: 2370:goto
 (0 1) 2640 REM --PLAY OUT SPLIT
-  Origs: 2614:ifthen
-  Dests: 2650:auto
+  Origs: 
+  Dests: 
 (0 4) 2650 I1 = I + D1
-  Origs: 2640:auto
+  Origs: 2614:ifthen
   Dests: 2660:auto
 (0 3) 2660 R(I1) = 2
   Origs: 2650:auto
@@ -782,25 +784,25 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2690:auto
 (0 3) 2690 GOSUB 100
   Origs: 2680:auto
-  Dests: 100:gosub, 2700:auto
+  Dests: 110:gosub, 2700:auto
 (0 2) 2700 PRINT "FIRST HAND RECEIVES A";
   Origs: 2690:auto
   Dests: 2710:auto
 (0 3) 2710 GOSUB 700
   Origs: 2700:auto
-  Dests: 700:gosub, 2720:auto
+  Dests: 710:gosub, 2720:auto
 (0 3) 2720 P(I, 2) = X
   Origs: 2710:auto
   Dests: 2730:auto
 (0 3) 2730 GOSUB 300
   Origs: 2720:auto
-  Dests: 300:gosub, 2740:auto
+  Dests: 310:gosub, 2740:auto
 (0 2) 2740 PRINT
   Origs: 2730:auto
   Dests: 2750:auto
 (0 3) 2750 GOSUB 100
   Origs: 2740:auto
-  Dests: 100:gosub, 2760:auto
+  Dests: 110:gosub, 2760:auto
 (0 2) 2760 PRINT "SECOND HAND RECEIVES A";
   Origs: 2750:auto
   Dests: 2770:auto
@@ -809,13 +811,13 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2780:auto
 (0 3) 2780 GOSUB 700
   Origs: 2770:auto
-  Dests: 700:gosub, 2790:auto
+  Dests: 710:gosub, 2790:auto
 (0 3) 2790 P(I, 2) = X
   Origs: 2780:auto
   Dests: 2800:auto
 (0 3) 2800 GOSUB 300
   Origs: 2790:auto
-  Dests: 300:gosub, 2810:auto
+  Dests: 310:gosub, 2810:auto
 (0 2) 2810 PRINT
   Origs: 2800:auto
   Dests: 2820:auto
@@ -833,7 +835,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2860:auto
 (0 3) 2860 GOSUB 800
   Origs: 2850:auto
-  Dests: 800:gosub, 2870:auto
+  Dests: 810:gosub, 2870:auto
 (0 4) 2870 I = I + D1
   Origs: 2860:auto
   Dests: 2880:auto
@@ -848,7 +850,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2910:auto
 (0 3) 2910 GOSUB 300
   Origs: 2900:auto
-  Dests: 300:gosub, 2930:auto
+  Dests: 310:gosub, 2930:auto
 (0 1) 2920 REM --TEST FOR PLAYING DEALER'S HAND
   Origs: 
   Dests: 
@@ -869,13 +871,13 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 2980:auto
 (0 3) 2980 GOSUB 700
   Origs: 2970:auto
-  Dests: 700:gosub, 2990:auto
+  Dests: 710:gosub, 2990:auto
 (0 2) 2990 PRINT "CONCEALED."
   Origs: 2980:auto
   Dests: 3000:auto
 (0 2) 3000 GOTO 3140
   Origs: 2990:auto
-  Dests: 3140:goto
+  Dests: 3150:goto
 (0 5) 3010 PRINT "DEALER HAS A"; MID$(D$, 3 * P(D1, 2) - 2, 3); " CONCEALED ";
   Origs: 2940:ifthen
   Dests: 3020:auto
@@ -897,13 +899,13 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 3060:auto
 (0 3) 3060 GOSUB 100
   Origs: 3050:auto, 3095:ifthen
-  Dests: 100:gosub, 3070:auto
+  Dests: 110:gosub, 3070:auto
 (0 3) 3070 GOSUB 750
   Origs: 3060:auto
-  Dests: 750:gosub, 3080:auto
+  Dests: 760:gosub, 3080:auto
 (0 3) 3080 GOSUB 1100
   Origs: 3070:auto
-  Dests: 1100:gosub, 3090:auto
+  Dests: 1110:gosub, 3090:auto
 (0 3) 3090 AA = Q
 (0 2)      GOSUB 3400
   Origs: 3080:auto
@@ -916,7 +918,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 3110:auto
 (1 4) 3110 IF Q < 0 THEN 3140
   Origs: 3100:auto
-  Dests: 3120:auto, 3140:ifthen
+  Dests: 3120:auto, 3150:ifthen
 (0 3) 3120 AA = Q
 (0 2)      GOSUB 3400
   Origs: 3110:auto
@@ -928,13 +930,13 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Origs: 3040:ifthen, 3125:auto
   Dests: 3160:auto
 (0 1) 3140 REM --TALLY THE RESULT
-  Origs: 2310:goto, 3000:goto, 3110:ifthen
-  Dests: 3160:auto
-(0 1) 3150 REM
   Origs: 
   Dests: 
+(0 1) 3150 REM
+  Origs: 2310:goto, 3000:goto, 3110:ifthen
+  Dests: 3160:auto
 (0 3) 3160 Z$ = "LOSES PUSHES WINS "
-  Origs: 3130:auto, 3140:auto
+  Origs: 3130:auto, 3150:auto
   Dests: 3165:auto
 (0 2) 3165 PRINT
   Origs: 3160:auto
@@ -986,7 +988,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 3280:auto
 (0 3) 3280 GOSUB 1200
   Origs: 3270:auto
-  Dests: 1200:gosub, 3290:auto
+  Dests: 1210:gosub, 3290:auto
 (0 4) 3290 T(D1) = T(D1) - S(I)
   Origs: 3280:auto
   Dests: 3300:auto
@@ -995,7 +997,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 3310:auto
 (0 3) 3310 GOSUB 1200
   Origs: 3300:auto
-  Dests: 1200:gosub, 3320:auto
+  Dests: 1210:gosub, 3320:auto
 (0 4) 3320 I = I - D1
   Origs: 3310:auto
   Dests: 3330:auto
@@ -1010,7 +1012,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 3350:auto
 (0 3) 3350 GOSUB 1200
   Origs: 3345:auto
-  Dests: 1200:gosub, 3360:auto
+  Dests: 1210:gosub, 3360:auto
 (0 3) 3360 GOTO 1810
   Origs: 3350:auto
   Dests: 1810:goto

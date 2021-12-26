@@ -56,7 +56,7 @@ Halstead complexity:
   Dests: 1060:auto
 (1 5) 1060 IF LEFT$(Y$, 1) = "N" THEN 1550
   Origs: 1050:auto
-  Dests: 1070:auto, 1550:ifthen
+  Dests: 1070:auto, 1560:ifthen
 (0 2) 1070 PRINT
   Origs: 1060:auto
   Dests: 1080:auto
@@ -202,16 +202,16 @@ Halstead complexity:
   Origs: 1530:auto
   Dests: 1580:auto
 (0 1) 1550 REM -PROGRAM BEGINS HERE
-  Origs: 1060:ifthen
-  Dests: 1580:auto
-(0 1) 1560 REM -TYPE OF BET(NUMBER) ODDS
   Origs: 
   Dests: 
+(0 1) 1560 REM -TYPE OF BET(NUMBER) ODDS
+  Origs: 1060:ifthen
+  Dests: 1580:auto
 (0 1) 1570 REM  DON'T NEED TO DIMENSION STRINGS
   Origs: 
   Dests: 
 (0 5) 1580 DIM B(100), C(100), T(100), X(38)
-  Origs: 1540:auto, 1550:auto
+  Origs: 1540:auto, 1560:auto
   Dests: 1590:auto
 (0 2) 1590 DIM A(50)
   Origs: 1580:auto
@@ -356,24 +356,24 @@ Halstead complexity:
   Dests: 2040:fornext, 2810:fornext
 (1 4) 2040 IF T(C) < 37 THEN 2710
   Origs: 2030:fornext
-  Dests: 2050:auto, 2710:ifthen
+  Dests: 2050:auto, 2720:ifthen
 (9 12) 2050 ON T(C) - 36 GOTO 2090, 2190, 2220, 2250, 2300, 2350, 2400, 2470, 2500
   Origs: 2040:auto
-  Dests: 2060:auto, 2090:goto, 2190:goto, 2220:goto, 2250:goto, 2300:goto, 2350:goto, 2400:goto, 2470:goto, 2500:goto
+  Dests: 2060:auto, 2100:goto, 2200:goto, 2230:goto, 2260:goto, 2310:goto, 2360:goto, 2410:goto, 2480:goto, 2510:goto
 (3 6) 2060 ON T(C) - 45 GOTO 2530, 2560, 2630
   Origs: 2050:auto
-  Dests: 2070:auto, 2530:goto, 2560:goto, 2630:goto
+  Dests: 2070:auto, 2540:goto, 2570:goto, 2640:goto
 (0 2) 2070 GOTO 2710
   Origs: 2060:auto
-  Dests: 2710:goto
+  Dests: 2720:goto
 (0 1) 2080 STOP
   Origs: 
   Dests: :stop
 (0 1) 2090 REM  1-12(37) 2:1
-  Origs: 2050:goto
-  Dests: 2100:auto
+  Origs: 
+  Dests: 
 (1 4) 2100 IF S <= 12 THEN 2150
-  Origs: 2090:auto
+  Origs: 2050:goto
   Dests: 2110:auto, 2150:ifthen
 (0 5) 2110 PRINT "YOU LOSE"; B(C); "DOLLARS ON BET"; C
   Origs: 2100:auto, 2210:goto, 2240:goto, 2290:goto, 2340:goto, 2390:goto, 2420:goto, 2490:goto, 2520:goto, 2550:goto, 2620:goto, 2670:ifthen, 2690:ifthen, 2750:goto, 2770:goto
@@ -400,28 +400,28 @@ Halstead complexity:
   Origs: 2140:goto, 2170:auto
   Dests: 2810:goto
 (0 1) 2190 REM  13-24(38) 2:1
-  Origs: 2050:goto
-  Dests: 2200:auto
+  Origs: 
+  Dests: 
 (1 8) 2200 IF S > 12 AND S < 25 THEN 2150
-  Origs: 2190:auto
+  Origs: 2050:goto
   Dests: 2150:ifthen, 2210:auto
 (0 3) 2210 GOTO 2110
   Origs: 2200:auto
   Dests: 2110:goto
 (0 1) 2220 REM  25-36(39) 2:1
-  Origs: 2050:goto
-  Dests: 2230:auto
+  Origs: 
+  Dests: 
 (1 8) 2230 IF S > 24 AND S < 37 THEN 2150
-  Origs: 2220:auto
+  Origs: 2050:goto
   Dests: 2150:ifthen, 2240:auto
 (0 3) 2240 GOTO 2110
   Origs: 2230:auto
   Dests: 2110:goto
 (0 1) 2250 REM  FIRST COLUMN(40) 2:1
-  Origs: 2050:goto
-  Dests: 2260:auto
+  Origs: 
+  Dests: 
 (1 4) 2260 FOR I = 1 TO 34 STEP 3
-  Origs: 2250:auto
+  Origs: 2050:goto
   Dests: 2270:fornext, 2280:fornext
 (1 5) 2270 IF S = I THEN 2150
   Origs: 2260:fornext
@@ -433,10 +433,10 @@ Halstead complexity:
   Origs: 2280:auto
   Dests: 2110:goto
 (0 1) 2300 REM  SECOND COLUMN(41) 2:1
-  Origs: 2050:goto
-  Dests: 2310:auto
+  Origs: 
+  Dests: 
 (1 4) 2310 FOR I = 2 TO 35 STEP 3
-  Origs: 2300:auto
+  Origs: 2050:goto
   Dests: 2320:fornext, 2330:fornext
 (1 5) 2320 IF S = I THEN 2150
   Origs: 2310:fornext
@@ -448,10 +448,10 @@ Halstead complexity:
   Origs: 2330:auto
   Dests: 2110:goto
 (0 1) 2350 REM  THIRD COLUMN(42) 2:1
-  Origs: 2050:goto
-  Dests: 2360:auto
+  Origs: 
+  Dests: 
 (1 4) 2360 FOR I = 3 TO 36 STEP 3
-  Origs: 2350:auto
+  Origs: 2050:goto
   Dests: 2370:fornext, 2380:fornext
 (1 5) 2370 IF S = I THEN 2150
   Origs: 2360:fornext
@@ -463,10 +463,10 @@ Halstead complexity:
   Origs: 2380:auto
   Dests: 2110:goto
 (0 1) 2400 REM  1-18(43) 1:1
-  Origs: 2050:goto
-  Dests: 2410:auto
+  Origs: 
+  Dests: 
 (1 4) 2410 IF S < 19 THEN 2430
-  Origs: 2400:auto
+  Origs: 2050:goto
   Dests: 2420:auto, 2430:ifthen
 (0 3) 2420 GOTO 2110
   Origs: 2410:auto
@@ -484,37 +484,37 @@ Halstead complexity:
   Origs: 2450:auto
   Dests: 2810:goto
 (0 1) 2470 REM  19-36(44) 1:1
-  Origs: 2050:goto
-  Dests: 2480:auto
+  Origs: 
+  Dests: 
 (1 8) 2480 IF S < 37 AND S > 18 THEN 2430
-  Origs: 2470:auto
+  Origs: 2050:goto
   Dests: 2430:ifthen, 2490:auto
 (0 3) 2490 GOTO 2110
   Origs: 2480:auto
   Dests: 2110:goto
 (0 1) 2500 REM  EVEN(45) 1:1
-  Origs: 2050:goto
-  Dests: 2510:auto
+  Origs: 
+  Dests: 
 (1 10) 2510 IF S / 2 = INT(S / 2) AND S < 37 THEN 2430
-  Origs: 2500:auto
+  Origs: 2050:goto
   Dests: 2430:ifthen, 2520:auto
 (0 3) 2520 GOTO 2110
   Origs: 2510:auto
   Dests: 2110:goto
 (0 1) 2530 REM  ODD(46) 1:1
-  Origs: 2060:goto
-  Dests: 2540:auto
+  Origs: 
+  Dests: 
 (1 10) 2540 IF S / 2 <> INT(S / 2) AND S < 37 THEN 2430
-  Origs: 2530:auto
+  Origs: 2060:goto
   Dests: 2430:ifthen, 2550:auto
 (0 3) 2550 GOTO 2110
   Origs: 2540:auto
   Dests: 2110:goto
 (0 1) 2560 REM  RED(47) 1:1
-  Origs: 2060:goto
-  Dests: 2570:auto
+  Origs: 
+  Dests: 
 (0 1) 2570 RESTORE
-  Origs: 2560:auto
+  Origs: 2060:goto
   Dests: 2580:auto
 (1 3) 2580 FOR I = 1 TO 18
   Origs: 2570:auto
@@ -532,10 +532,10 @@ Halstead complexity:
   Origs: 2610:auto
   Dests: 2110:goto
 (0 1) 2630 REM  BLACK(48) 1:1
-  Origs: 2060:goto
-  Dests: 2640:auto
+  Origs: 
+  Dests: 
 (0 1) 2640 RESTORE
-  Origs: 2630:auto
+  Origs: 2060:goto
   Dests: 2650:auto
 (1 3) 2650 FOR I = 1 TO 18
   Origs: 2640:auto
@@ -556,10 +556,10 @@ Halstead complexity:
   Origs: 2690:auto
   Dests: 2430:goto
 (0 1) 2710 REM --1TO36,0,00(1-36,49,50)35:1
-  Origs: 2040:ifthen, 2070:goto
-  Dests: 2720:auto
+  Origs: 
+  Dests: 
 (1 4) 2720 IF T(C) < 49 THEN 2760
-  Origs: 2710:auto
+  Origs: 2040:ifthen, 2070:goto
   Dests: 2730:auto, 2760:ifthen
 (1 7) 2730 IF T(C) = 49 AND S = 37 THEN 2780
   Origs: 2720:auto
@@ -656,7 +656,7 @@ Halstead complexity:
   Dests: 3030:auto
 (0 2) 3030 GOSUB 3230
   Origs: 3020:auto
-  Dests: 3040:auto, 3230:gosub
+  Dests: 3040:auto, 3240:gosub
 (0 4) 3040 PRINT TAB(40); M$
   Origs: 3030:auto
   Dests: 3050:auto
@@ -717,11 +717,11 @@ Halstead complexity:
   Origs: 3210:auto
   Dests: 3420:goto
 (0 1) 3230 REM
-  Origs: 3030:gosub
-  Dests: 3310:auto
-(0 1) 3240 REM     THIS ROUTINE RETURNS THE CURRENT DATE IN M$
   Origs: 
   Dests: 
+(0 1) 3240 REM     THIS ROUTINE RETURNS THE CURRENT DATE IN M$
+  Origs: 3030:gosub
+  Dests: 3310:auto
 (0 1) 3250 REM     IF YOU HAVE SYSTEM FUNCTIONS TO HANDLE THIS
   Origs: 
   Dests: 
@@ -741,7 +741,7 @@ Halstead complexity:
   Origs: 
   Dests: 
 (0 5) 3310 M$ = D$ + ", " + E$
-  Origs: 3230:auto
+  Origs: 3240:auto
   Dests: 3320:auto
 (0 1) 3320 RETURN
   Origs: 3310:auto

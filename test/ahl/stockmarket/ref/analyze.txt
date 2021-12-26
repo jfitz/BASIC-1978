@@ -104,7 +104,7 @@ Halstead complexity:
   Dests: 126:auto
 (1 4) 126 IF Z9 < 1 THEN 200
   Origs: 125:auto
-  Dests: 130:auto, 200:ifthen
+  Dests: 130:auto, 210:ifthen
 (0 2) 130 PRINT "THIS PROGRAM PLAYS THE STOCK MARKET.  YOU WILL BE GIVEN"
   Origs: 126:auto
   Dests: 132:auto
@@ -154,13 +154,13 @@ Halstead complexity:
   Origs: 146:auto
   Dests: 220:auto
 (0 1) 200 REM GENERATION OF STOCK TABLE; INPUT REQUESTS  
-  Origs: 126:ifthen
-  Dests: 220:auto
-(0 1) 210 REM INITIAL STOCK VALUES 
   Origs: 
   Dests: 
+(0 1) 210 REM INITIAL STOCK VALUES 
+  Origs: 126:ifthen
+  Dests: 220:auto
 (0 3) 220 LET S(1) = 100
-  Origs: 147:auto, 200:auto
+  Origs: 147:auto, 210:auto
   Dests: 230:auto
 (0 3) 230 LET S(2) = 85
   Origs: 220:auto
@@ -185,16 +185,16 @@ Halstead complexity:
   Dests: 
 (1 5) 268 IF RND(X) > .5 THEN 270
   Origs: 266:auto
-  Dests: 269:auto, 270:ifthen
+  Dests: 269:auto, 280:ifthen
 (0 4) 269 LET A = -A
   Origs: 268:auto
   Dests: 280:auto
 (0 1) 270 REM RANDOMIZE INITIAL VALUES 
-  Origs: 268:ifthen
-  Dests: 280:auto
+  Origs: 
+  Dests: 
 (0 2) 280 GOSUB 830
-  Origs: 269:auto, 270:auto
-  Dests: 290:auto, 830:gosub
+  Origs: 268:ifthen, 269:auto
+  Dests: 290:auto, 831:gosub
 (0 1) 285 REM INITIAL PORTFOLIO CONTENTS 
   Origs: 
   Dests: 
@@ -320,7 +320,7 @@ Halstead complexity:
   Dests: 411:auto
 (1 4) 411 IF X9 = 0 THEN 416
   Origs: 410:auto
-  Dests: 412:auto, 416:ifthen
+  Dests: 412:auto, 420:ifthen
 (0 2) 412 PRINT "DO YOU WISH TO CONTINUE (YES-TYPE 1, NO-TYPE 0)";
   Origs: 411:auto
   Dests: 413:auto
@@ -331,10 +331,10 @@ Halstead complexity:
   Origs: 413:auto
   Dests: 416:auto, 420:auto, 998:ifthen
 (0 1) 416 REM INPUT TRANSACTIONS 
-  Origs: 411:ifthen, 414:auto
+  Origs: 414:auto
   Dests: 420:auto
 (0 2) 420 PRINT "WHAT IS YOUR TRANSACTION IN"
-  Origs: 414:auto, 416:auto, 616:goto, 660:goto
+  Origs: 411:ifthen, 414:auto, 416:auto, 616:goto, 660:goto
   Dests: 430:auto
 (0 2) 430 PRINT "IBM";
   Origs: 420:auto
@@ -461,7 +461,7 @@ Halstead complexity:
   Dests: 
 (0 2) 720 GOSUB 830
   Origs: 700:auto
-  Dests: 755:auto, 830:gosub
+  Dests: 755:auto, 831:gosub
 (0 1) 750 REM PRINT PORTFOLIO
   Origs: 
   Dests: 
@@ -517,11 +517,11 @@ Halstead complexity:
   Origs: 
   Dests: 
 (0 1) 830 REM RANDOMLY PRODUCE NEW STOCK VALUES BASED ON PREVIOUS
-  Origs: 280:gosub, 720:gosub
-  Dests: 841:auto
-(0 1) 831 REM DAY'S VALUES 
   Origs: 
   Dests: 
+(0 1) 831 REM DAY'S VALUES 
+  Origs: 280:gosub, 720:gosub
+  Dests: 841:auto
 (0 1) 832 REM N1,N2 ARE RANDOM NUMBERS OF DAYS WHICH RESPECTIVELY
   Origs: 
   Dests: 
@@ -535,8 +535,8 @@ Halstead complexity:
   Origs: 
   Dests: 
 (1 4) 841 IF N1 > 0 THEN 850
-  Origs: 830:auto
-  Dests: 845:auto, 850:ifthen
+  Origs: 831:auto
+  Dests: 845:auto, 851:ifthen
 (0 4) 845 LET I1 = INT(4.99 * RND(X) + 1)
   Origs: 841:auto
   Dests: 846:auto
@@ -547,11 +547,11 @@ Halstead complexity:
   Origs: 846:auto
   Dests: 851:auto
 (0 1) 850 REM IF N2 DAYS HAVE PASSED, PICK AN I2, SET E2, DETERMINE NEW N2 
-  Origs: 841:ifthen
-  Dests: 851:auto
+  Origs: 
+  Dests: 
 (1 4) 851 IF N2 > 0 THEN 860
-  Origs: 847:auto, 850:auto
-  Dests: 855:auto, 860:ifthen
+  Origs: 841:ifthen, 847:auto
+  Dests: 855:auto, 861:ifthen
 (0 4) 855 LET I2 = INT(4.99 * RND(X) + 1)
   Origs: 851:auto
   Dests: 856:auto
@@ -562,10 +562,10 @@ Halstead complexity:
   Origs: 856:auto
   Dests: 861:auto
 (0 1) 860 REM DEDUCT ONE DAY FROM N1 AND N2
-  Origs: 851:ifthen
-  Dests: 861:auto
+  Origs: 
+  Dests: 
 (0 4) 861 LET N1 = N1 - 1
-  Origs: 857:auto, 860:auto
+  Origs: 851:ifthen, 857:auto
   Dests: 862:auto
 (0 4) 862 LET N2 = N2 - 1
   Origs: 861:auto
@@ -683,18 +683,18 @@ Halstead complexity:
   Dests: 974:auto
 (1 4) 974 IF T8 < 1 THEN 985
   Origs: 973:auto
-  Dests: 980:auto, 985:ifthen
+  Dests: 980:auto, 986:ifthen
 (0 1) 980 RETURN
   Origs: 974:auto
   Dests: 
 (0 1) 985 REM RANDOMLY CHANGE TREND SIGN AND SLOPE (A), AND DURATION 
-  Origs: 974:ifthen
-  Dests: 990:auto
-(0 1) 986 REM OF TREND (T8)
   Origs: 
   Dests: 
+(0 1) 986 REM OF TREND (T8)
+  Origs: 974:ifthen
+  Dests: 990:auto
 (0 4) 990 LET T8 = INT(4.99 * RND(X) + 1)
-  Origs: 985:auto
+  Origs: 986:auto
   Dests: 992:auto
 (0 5) 992 LET A = INT((RND(X) / 10) * 100 + .5) / 100
   Origs: 990:auto

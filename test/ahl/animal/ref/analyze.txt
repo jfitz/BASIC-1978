@@ -58,23 +58,23 @@ Halstead complexity:
   Origs: 100:auto
   Dests: 130:auto
 (0 1) 120 REM          MAIN CONTROL SECTION
-  Origs: 150:ifthen, 230:goto, 380:goto, 680:goto
-  Dests: 130:auto
+  Origs: 
+  Dests: 
 (1 2) 130 INPUT "ARE YOU THINKING OF AN ANIMAL"; A$
-  Origs: 110:auto, 120:auto
+  Origs: 110:auto, 150:ifthen, 230:goto, 380:goto, 680:goto
   Dests: 140:auto
 (1 4) 140 IF A$ = "LIST" THEN 600
   Origs: 130:auto
   Dests: 150:auto, 600:ifthen
 (1 6) 150 IF LEFT$(A$, 1) <> "Y" THEN 120
   Origs: 140:auto
-  Dests: 120:ifthen, 160:auto
+  Dests: 130:ifthen, 160:auto
 (0 3) 160 K = 1
   Origs: 150:auto
   Dests: 170:auto
 (0 2) 170 GOSUB 390
   Origs: 160:auto, 190:ifthen
-  Dests: 180:auto, 390:gosub
+  Dests: 180:auto, 400:gosub
 (1 5) 180 IF LEN(A$(K)) = 0 THEN 999
   Origs: 170:auto
   Dests: 190:auto, 999:ifthen
@@ -93,7 +93,7 @@ Halstead complexity:
 (1 6) 230 IF LEFT$(A$, 1) = "Y" THEN PRINT "WHY NOT TRY ANOTHER ANIMAL?"
 (0 3)     GOTO 120
   Origs: 220:auto
-  Dests: 120:goto, 240:auto
+  Dests: 130:goto, 240:auto
 (1 2) 240 INPUT "THE ANIMAL YOU WERE THINKING OF WAS A "; V$
   Origs: 230:auto
   Dests: 250:auto
@@ -139,12 +139,12 @@ Halstead complexity:
   Dests: 380:auto
 (0 3) 380 GOTO 120
   Origs: 370:auto
-  Dests: 120:goto
+  Dests: 130:goto
 (0 1) 390 REM     SUBROUTINE TO PRINT QUESTIONS
-  Origs: 170:gosub
-  Dests: 400:auto
+  Origs: 
+  Dests: 
 (0 3) 400 Q$ = A$(K)
-  Origs: 390:auto
+  Origs: 170:gosub
   Dests: 410:auto
 (1 4) 410 FOR Z = 3 TO LEN(Q$)
   Origs: 400:auto, 440:ifthen
@@ -237,7 +237,7 @@ Halstead complexity:
   Dests: 680:auto
 (0 3) 680 GOTO 120
   Origs: 670:auto
-  Dests: 120:goto
+  Dests: 130:goto
 (0 1) 999 END
   Origs: 180:ifthen
   Dests: :stop

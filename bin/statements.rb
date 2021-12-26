@@ -2396,11 +2396,13 @@ class GosubStatement < AbstractStatement
     @core_tokens[-1] = new_token
   end
 
-  def set_destinations(interpreter, _, _)
+  def set_destinations(interpreter, _, program)
     mod = interpreter.statement_start_index(@dest_line)
 
-    @dest_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod) unless
-      mod.nil?
+    unless mod.nil?
+      dest = LineStmtMod.new(@dest_line, 0, mod)
+      @dest_line_stmt_mod = program.find_exec_line_stmt_mod(dest)
+    end
   end
 
   def check_program(program, _line_number_stmt)
@@ -2419,7 +2421,14 @@ class GosubStatement < AbstractStatement
   def set_transfers(_)
     @transfers = []
 
-    @transfers << TransferRefLineStmt.new(@dest_line, 0, :gosub)
+    if @dest_line_stmt_mod.nil?
+      @transfers << TransferRefLineStmt.new(@dest_line, 0, :gosub) unless
+        @dest_line.nil?
+    else
+      line_number = @dest_line_stmt_mod.line_number
+      xref = TransferRefLineStmt.new(line_number, 0, :gosub)
+      @transfers << xref
+    end
   end
 
   def execute_core(interpreter)
@@ -2480,11 +2489,13 @@ class GotoStatement < AbstractStatement
       program.line_number?(@dest_line)
   end
 
-  def set_destinations(interpreter, _, _)
+  def set_destinations(interpreter, _, program)
     mod = interpreter.statement_start_index(@dest_line)
 
-    @dest_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod) unless
-      mod.nil?
+      unless mod.nil?
+        dest = LineStmtMod.new(@dest_line, 0, mod)
+        @dest_line_stmt_mod = program.find_exec_line_stmt_mod(dest)
+      end
   end
 
   def dump
@@ -2500,8 +2511,16 @@ class GotoStatement < AbstractStatement
   def set_transfers(_)
     @transfers = []
 
-    @transfers << TransferRefLineStmt.new(@dest_line, 0, :goto) unless
-      @dest_line.nil?
+    unless @dest_line.nil?
+      if @dest_line_stmt_mod.nil?
+        @transfers << TransferRefLineStmt.new(@dest_line, 0, :goto) unless
+          @dest_line.nil?
+      else
+        line_number = @dest_line_stmt_mod.line_number
+        xref = TransferRefLineStmt.new(line_number, 0, :goto)
+        @transfers << xref
+      end
+    end
   end
 
   def execute_core(interpreter)
@@ -2673,23 +2692,27 @@ class AbstractIfStatement < AbstractStatement
     @else_stmt&.renumber(renumber_map)
   end
 
-  def set_destinations(interpreter, _, _)
+  def set_destinations(interpreter, _, program)
     unless @dest_line.nil?
       mod = interpreter.statement_start_index(@dest_line)
 
-      @dest_line_stmt_mod = LineStmtMod.new(@dest_line, 0, mod) unless
-        mod.nil?
+      unless mod.nil?
+        dest = LineStmtMod.new(@dest_line, 0, mod)
+        @dest_line_stmt_mod = program.find_exec_line_stmt_mod(dest)
+      end
     end
 
     unless @else_dest_line.nil?
       mod = interpreter.statement_start_index(@else_dest_line)
 
-      @else_dest_line_stmt_mod = LineStmtMod.new(@else_dest_line, 0, mod) unless
-        mod.nil?
+      unless mod.nil?
+        dest = LineStmtMod.new(@else_dest_line, 0, mod)
+        @else_dest_line_stmt_mod = program.find_exec_line_stmt_mod(dest)
+      end
     end
 
-    @statement&.set_destinations(interpreter, _, _)
-    @else_stmt&.set_destinations(interpreter, _, _)
+    @statement&.set_destinations(interpreter, _, program)
+    @else_stmt&.set_destinations(interpreter, _, program)
   end
 
   def set_autonext_line_stmt(line_stmt_mod)
@@ -2743,13 +2766,27 @@ class AbstractIfStatement < AbstractStatement
   def set_transfers(user_function_start_lines)
     @transfers = []
 
-    @transfers << TransferRefLineStmt.new(@dest_line, 0, :ifthen) unless
-      @dest_line.nil?
+    unless @dest_line.nil?
+      if @dest_line_stmt_mod.nil?
+        @transfers << TransferRefLineStmt.new(@dest_line, 0, :ifthen)
+      else
+        line_number = @dest_line_stmt_mod.line_number
+        xref = TransferRefLineStmt.new(line_number, 0, :ifthen)
+        @transfers << xref
+      end
+    end
 
     @statement&.set_transfers(user_function_start_lines)
 
-    @transfers << TransferRefLineStmt.new(@else_dest_line, 0, :ifthen) unless
-      @else_dest_line.nil?
+    unless @else_dest_line.nil?
+      if @else_dest_line_stmt_mod.nil?
+        @transfers << TransferRefLineStmt.new(@else_dest_line, 0, :ifthen)
+      else
+        line_number = @else_dest_line_stmt_mod.line_number
+        xref = TransferRefLineStmt.new(line_number, 0, :ifthen)
+        @transfers << xref
+      end
+    end
 
     @else_stmt&.set_transfers(user_function_start_lines)
 
@@ -3492,11 +3529,22 @@ class OnErrorStatement < AbstractStatement
     lines
   end
 
+  def set_destinations(interpreter, _, program)
+    mod = interpreter.statement_start_index(@dest_line)
+ 
+    unless mod.nil?
+      dest = LineStmtMod.new(@dest_line, 0, mod)
+      @dest_line_stmt_mod = program.find_exec_line_stmt_mod(dest)
+    end
+  end
+
   def set_transfers(_)
     @transfers = []
 
-    @transfers << TransferRefLineStmt.new(@dest_line, 0, :onerror) unless
-      @dest_line.nil?
+    unless @dest_line_stmt_mod.nil?
+      line_number = @dest_line_stmt_mod.line_number
+      @transfers << TransferRefLineStmt.new(line_number, 0, :onerror)
+    end
   end
 
   def check_program(program, _line_number_stmt)
@@ -3591,15 +3639,17 @@ class OnStatement < AbstractStatement
     end
   end
 
-  def set_destinations(interpreter, _, _)
+  def set_destinations(interpreter, _, program)
     unless @dest_lines.nil?
       @dest_line_stmt_mods = []
 
       @dest_lines.each do |dest_line|
         mod = interpreter.statement_start_index(dest_line)
 
-        @dest_line_stmt_mods << LineStmtMod.new(dest_line, 0, mod) unless
-          mod.nil?
+        unless mod.nil?
+          dest = LineStmtMod.new(dest_line, 0, mod)
+          @dest_line_stmt_mods << program.find_exec_line_stmt_mod(dest)
+        end
       end
     end
   end
@@ -3656,8 +3706,9 @@ class OnStatement < AbstractStatement
   def set_transfers(_)
     @transfers = []
 
-    @dest_lines.each do |goto|
-      @transfers << TransferRefLineStmt.new(goto, 0, :goto)
+    @dest_line_stmt_mods.each do |dest_line_stmt_mod|
+      line_number = dest_line_stmt_mod.line_number
+      @transfers << TransferRefLineStmt.new(line_number, 0, :goto)
     end
   end
 
@@ -4204,11 +4255,22 @@ class ResumeStatement < AbstractStatement
     lines
   end
 
+  def set_destinations(interpreter, _, program)
+    mod = interpreter.statement_start_index(@dest_line)
+ 
+    unless mod.nil?
+      dest = LineStmtMod.new(@dest_line, 0, mod)
+      @dest_line_stmt_mod = program.find_exec_line_stmt_mod(dest)
+    end
+  end
+
   def set_transfers(_)
     @transfers = []
 
-    @transfers << TransferRefLineStmt.new(@dest_line, 0, :resume) unless
-      @dest_line.nil?
+    unless @dest_line_stmt_mod.nil?
+      line_number = @dest_line_stmt_mod.line_number
+      @transfers << TransferRefLineStmt.new(line_number, 0, :resume)
+    end
   end
 
   def execute_core(interpreter)
