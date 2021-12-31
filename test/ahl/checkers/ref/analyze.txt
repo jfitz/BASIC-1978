@@ -108,27 +108,27 @@ Halstead complexity:
 (0 2)     GOTO 1140
   Origs: 230:fornext, 230:ifthen, 330:auto
   Dests: 1140:goto
-(0 4) 650 U = X + A
-(0 4)     V = Y + B
-(1 13)     IF U < 0 OR U > 7 OR V < 0 OR V > 7 THEN 870
+(650) (0 4) 650 U = X + A
+(650) (0 4)     V = Y + B
+(650) (1 13)     IF U < 0 OR U > 7 OR V < 0 OR V > 7 THEN 870
   Origs: 310:gosub, 330:gosub
   Dests: 740:auto, 870:ifthen
-(1 5) 740 IF S(U, V) = 0 THEN GOSUB 910
-(0 2)     GOTO 870
+(650) (1 5) 740 IF S(U, V) = 0 THEN GOSUB 910
+(650) (0 2)     GOTO 870
   Origs: 650:auto
   Dests: 770:auto, 870:goto, 910:gosub
-(1 4) 770 IF S(U, V) < 0 THEN 870
+(650) (1 4) 770 IF S(U, V) < 0 THEN 870
   Origs: 740:auto
   Dests: 790:auto, 870:ifthen
-(0 4) 790 U = U + A
-(0 4)     V = V + B
-(1 13)     IF U < 0 OR V < 0 OR U > 7 OR V > 7 THEN 870
+(650) (0 4) 790 U = U + A
+(650) (0 4)     V = V + B
+(650) (1 13)     IF U < 0 OR V < 0 OR U > 7 OR V > 7 THEN 870
   Origs: 770:auto
   Dests: 850:auto, 870:ifthen
-(1 5) 850 IF S(U, V) = 0 THEN GOSUB 910
+(650) (1 5) 850 IF S(U, V) = 0 THEN GOSUB 910
   Origs: 790:auto
   Dests: 870:auto, 910:gosub
-(0 1) 870 RETURN
+(650) (0 1) 870 RETURN
   Origs: 650:ifthen, 740:goto, 770:ifthen, 790:ifthen, 850:auto
   Dests: 
 (1 12) 910 IF V = 0 AND S(X, Y) = -1 THEN Q = Q + 2
@@ -212,15 +212,15 @@ Halstead complexity:
 (0 2) 1365 GOTO 1420
   Origs: 1360:auto
   Dests: 1420:goto
-(0 4) 1370 U = X + A
-(0 4)      V = Y + B
-(1 13)      IF U < 0 OR U > 7 OR V < 0 OR V > 7 THEN 1400
+(1370) (0 4) 1370 U = X + A
+(1370) (0 4)      V = Y + B
+(1370) (1 13)      IF U < 0 OR U > 7 OR V < 0 OR V > 7 THEN 1400
   Origs: 1340:gosub, 1350:gosub
   Dests: 1380:auto, 1400:ifthen
-(1 9) 1380 IF S(U, V) = 0 AND S(X + A / 2, Y + B / 2) > 0 THEN GOSUB 910
+(1370) (1 9) 1380 IF S(U, V) = 0 AND S(X + A / 2, Y + B / 2) > 0 THEN GOSUB 910
   Origs: 1370:auto
   Dests: 910:gosub, 1400:auto
-(0 1) 1400 RETURN
+(1370) (0 1) 1400 RETURN
   Origs: 1370:ifthen, 1380:auto
   Dests: 
 (0 2) 1420 PRINT

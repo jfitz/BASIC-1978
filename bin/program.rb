@@ -216,6 +216,10 @@ class Line
     @statements.each(&:reset_profile_metrics)
   end
 
+  def reset_reachable
+    @statements.each { |statement| statement.reachable = false }
+  end
+
   def set_transfers(user_function_start_lines)
     @statements.each do |statement|
       statement.set_transfers(user_function_start_lines)
@@ -242,10 +246,6 @@ class Line
     @statements.each_with_index do |statement, stmt|
       statement.transfers_to_origins(program, line_number, stmt)
     end
-  end
-
-  def reset_reachable
-    @statements.each { |statement| statement.reachable = false }
   end
 
   def set_reachable(stmt)
@@ -389,11 +389,7 @@ class Line
     @destinations = []
 
     @statements.each do |statement|
-      # built-in transfers
-      xfers = statement.transfers
-
-      # auto-line transfers
-      xfers += statement.transfers_auto
+      xfers = statement.transfers + statement.transfers_auto
 
       # convert TransferRefLineStmt objects to TransferRefLine objects
       xfers.each do |xfer|
@@ -409,7 +405,6 @@ class Line
     @origins = []
 
     @statements.each do |statement|
-      # built-in transfers
       xfers = statement.origins
 
       # convert TransferRefLineStmt objects to TransferRefLine objects
@@ -428,8 +423,7 @@ class Line
     @statements.each_with_index do |statement, stmt|
       line_number_stmt = LineStmt.new(line_number, stmt)
 
-      xfers = statement.transfers
-      xfers += statement.transfers_auto
+      xfers = statement.transfers + statement.transfers_auto
 
       line_stmts = []
 
@@ -550,6 +544,7 @@ class LineListSpec
   end
 end
 
+# transfer of control
 class TransferRefLineStmt
   attr_reader :line_number, :statement, :type
 
@@ -742,7 +737,7 @@ class Program
 
       stmt += 1 while
         stmt < statements.size &&
-        (statements[stmt].executable != :run||
+        (statements[stmt].executable != :run ||
         statements[stmt].part_of_user_function != part_of_user_function)
 
       return LineStmt.new(line_number, stmt) if stmt < statements.size
@@ -895,7 +890,6 @@ class Program
     end
 
     # nothing left to execute
-    puts "RET nil"
     nil
   end
 
@@ -1298,10 +1292,9 @@ class Program
           next unless statement.reachable
 
           # a reachable line updates its targets to 'reachable'
-          statement_transfers =
-            statement.transfers + statement.transfers_auto
+          xfers = statement.transfers + statement.transfers_auto
 
-          statement_transfers.each do |xfer|
+          xfers.each do |xfer|
             dest_line_number = xfer.line_number
             dest_line = @lines[dest_line_number]
             unless dest_line.nil?
@@ -1384,6 +1377,7 @@ class Program
     set_transfers
     transfers_to_origins
     set_transfers_auto
+    assign_sub_markers
     check_program
     check_function_markers
   end
@@ -1414,10 +1408,38 @@ class Program
     end
   end
 
+  def assign_sub_markers
+    part_of_sub = nil
+
+    @lines.keys.sort.each do |line_number|
+      line = @lines[line_number]
+      statements = line.statements
+
+      statements.each_with_index do |statement, stmt|
+        statement.assign_sub_markers(self)
+      end
+    end
+  end
+
+  def get_statement(line_number, stmt)
+    statement = nil
+
+    line = @lines[line_number]
+
+    unless line.nil?
+      statements = line.statements
+      statement = statements[stmt]
+    end
+
+    statement
+  end
+
   def assign_singleline_function_markers
     part_of_user_function = nil
 
-    @lines.keys.sort.each do |line_number|
+    line_numbers = @lines.keys.sort
+
+    line_numbers.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
@@ -1434,16 +1456,14 @@ class Program
         part_of_user_function = nil
       end
     end
-
-    true
   end
 
   def assign_multiline_function_markers
-    okay = true
-
     part_of_user_function = nil
 
-    @lines.keys.sort.each do |line_number|
+    line_numbers = @lines.keys.sort
+
+    line_numbers.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
@@ -1464,15 +1484,12 @@ class Program
                 'message' => "Embedded function #{statement.part_of_user_function}",
                 'line' => line_number
               }
-            okay = false
           end
         end
 
         part_of_user_function = nil if statement.multiend?
       end
     end
-
-    okay
   end
 
   def assign_autonext
@@ -1578,7 +1595,7 @@ class Program
       end
     end
 
-    @lines.keys.sort.each_with_index do |line_number, stmt|
+    @lines.keys.sort.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
 
@@ -1654,9 +1671,9 @@ class Program
       # consider only core statements, not modifiers
 
       if statement.class.to_s == 'NextStatement'
-        controls = statement.controls
+        stmt_controls = statement.controls
 
-        controls.each do |stmt_control|
+        stmt_controls.each do |stmt_control|
           for_level -= 1
 
           raise BASICPreexecuteError.new(:te_for_no_next, control.to_s) if
@@ -2057,6 +2074,7 @@ class Program
     raise(BASICCommandError, 'No program loaded') if @lines.empty?
 
     texts = []
+
     texts << 'Cross reference'
 
     nums_list = numeric_refs
@@ -2191,9 +2209,9 @@ class Program
 
       # print the line
       texts << (line_number.to_s + line.list)
-      statements = line.statements
-
       line.warnings.each { |warning| texts << (" WARNING: #{warning}") }
+
+      statements = line.statements
 
       # print the errors
       statements.each do |statement|
@@ -2204,6 +2222,7 @@ class Program
       # print the warnings
       statements.each do |statement|
         statement.warnings.each { |warning| texts << (" WARNING: #{warning}") }
+        statement.program_warnings.each { |warning| texts << (" WARNING: #{warning}") }
       end
 
       next unless list_tokens
@@ -2222,10 +2241,12 @@ class Program
     line_numbers.each do |line_number|
       line = @lines[line_number]
 
+      line.warnings.each { |warning| texts << (" WARNING: #{warning}") }
+
       # print the line
       texts << (line_number.to_s + line.list)
+
       statements = line.statements
-      line.warnings.each { |warning| texts << (" WARNING: #{warning}") }
 
       # print the errors
       statements.each do |statement|
@@ -2236,6 +2257,7 @@ class Program
       # print the warnings
       statements.each do |statement|
         statement.warnings.each { |warning| texts << (" WARNING: #{warning}") }
+        statement.program_warnings.each { |warning| texts << (" WARNING: #{warning}") }
       end
 
       # print the line components
@@ -2276,6 +2298,7 @@ class Program
       # print the warnings
       statements.each do |statement|
         statement.warnings.each { |warning| texts << (" WARNING: #{warning}") }
+        statement.program_warnings.each { |warning| texts << (" WARNING: #{warning}") }
       end
     end
 
