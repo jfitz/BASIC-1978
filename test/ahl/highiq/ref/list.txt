@@ -22,10 +22,12 @@
 24 PRINT "NUMBERS.  OK, LET'S BEGIN."
 28 REM *** SET UP BOARD
 29 FOR R=1 TO 9
+ WARNING: Statement before GOSUB entry point
 30 FOR C=1 TO 9
 31 IF (R-4)*(R-5)*(R-6)=0 THEN 40
 32 IF (C-4)*(C-5)*(C-6)=0 THEN 40
 35 T(R,C)=-5
+ WARNING: Statement before GOSUB entry point
 36 GOTO 50
 40 IF (R-1)*(C-1)*(R-9)*(C-9)=0 THEN 35
 42 T(R,C)=5
@@ -40,9 +42,11 @@
 83 B(M)=-7: NEXT W
 86 B(41)=-3
 100 INPUT "MOVE WHICH PIECE";Z
+ WARNING: Statement before GOSUB entry point
  WARNING: Inconsistent GOSUB target (1005, 1505)
 110 IF B(Z)=-7 THEN 140
 120 PRINT "ILLEGAL MOVE, TRY AGAIN...": GOTO 100
+ WARNING: Statement before GOSUB entry point
 140 INPUT "TO WHERE";P
 150 IF B(P)=0 THEN 120
 153 IF B(P)=-7 THEN 120
