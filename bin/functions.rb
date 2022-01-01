@@ -3533,6 +3533,34 @@ class FunctionSort1 < AbstractFunction
   end
 end
 
+# function SORT2, SORT2%, SORT2$
+class FunctionSort2 < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :matrix
+
+    @default_shape = :matrix
+    @signature1 = [{ 'type' => @content_type, 'shape' => :matrix }]
+  end
+
+  def evaluate(_intepreter, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature1)
+
+    values = args[0].sort_values
+    dims = args[0].dimensions
+    res = Matrix.new(dims, values)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function SPACE$, SPC$
 class FunctionSpace < AbstractFunction
   def initialize(text)
@@ -4597,6 +4625,9 @@ class FunctionFactory
     'SORT1' => FunctionSort1,
     'SORT1%' => FunctionSort1,
     'SORT1$' => FunctionSort1,
+    'SORT2' => FunctionSort2,
+    'SORT2%' => FunctionSort2,
+    'SORT2$' => FunctionSort2,
     'SPACE$' => FunctionSpace,
     'SPC$' => FunctionSpace,
     'SPLIT1$' => FunctionSplit1T,
