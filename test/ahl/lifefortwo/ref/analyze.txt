@@ -55,67 +55,67 @@ Halstead complexity:
 (0 2) 20 GOTO 500
   Origs: 14:auto
   Dests: 500:goto
-(50) (1 3) 50 FOR J = 1 TO 5
+G(50) (1 3) 50 FOR J = 1 TO 5
   Origs: 560:gosub
   Dests: 51:fornext, 65:fornext
-(50) (1 3) 51 FOR K = 1 TO 5
+G(50) (1 3) 51 FOR K = 1 TO 5
   Origs: 50:fornext
   Dests: 55:fornext, 60:fornext
-(50) (1 5) 55 IF N(J, K) > 99 THEN GOSUB 200
+G(50) (1 5) 55 IF N(J, K) > 99 THEN GOSUB 200
   Origs: 51:fornext
   Dests: 60:auto, 200:gosub
-(50) (0 1) 60 NEXT K
+G(50) (0 1) 60 NEXT K
   Origs: 51:fornext, 55:auto
   Dests: 65:auto
-(50) (0 1) 65 NEXT J
+G(50) (0 1) 65 NEXT J
   Origs: 50:fornext, 60:auto
   Dests: 90:auto
-(90) (0 3) 90 K = 0
-(90) (0 3)    M2 = 0
-(90) (0 3)    M3 = 0
+G(90) (0 3) 90 K = 0
+G(90) (0 3)    M2 = 0
+G(90) (0 3)    M3 = 0
    WARNING: Inconsistent GOSUB target (90, 50)
   Origs: 65:auto, 559:gosub
   Inconsistent GOSUB origins
   Dests: 99:auto
-(90) (1 3) 99 FOR J = 0 TO 6
-(90) (0 2)    PRINT
+G(90) (1 3) 99 FOR J = 0 TO 6
+G(90) (0 2)    PRINT
   Origs: 90:auto
   Dests: 100:auto, 125:fornext
-(90) (1 3) 100 FOR K = 0 TO 6
+G(90) (1 3) 100 FOR K = 0 TO 6
   Origs: 99:auto
   Dests: 101:fornext, 120:fornext
-(90) (2 7) 101 IF J <> 0 THEN IF J <> 6 THEN 105
+G(90) (2 7) 101 IF J <> 0 THEN IF J <> 6 THEN 105
   Origs: 100:fornext
   Dests: 102:auto, 105:ifthen
-(90) (1 5) 102 IF K = 6 THEN PRINT 0;
-(90) (0 2)     GOTO 125
+G(90) (1 5) 102 IF K = 6 THEN PRINT 0;
+G(90) (0 2)     GOTO 125
   Origs: 101:auto
   Dests: 103:auto, 125:goto
-(90) (0 2) 103 PRINT K;
-(90) (0 2)     GOTO 120
+G(90) (0 2) 103 PRINT K;
+G(90) (0 2)     GOTO 120
   Origs: 102:auto
   Dests: 120:goto
-(90) (2 7) 105 IF K <> 0 THEN IF K <> 6 THEN 110
+G(90) (2 7) 105 IF K <> 0 THEN IF K <> 6 THEN 110
   Origs: 101:ifthen
   Dests: 106:auto, 110:ifthen
-(90) (1 5) 106 IF J = 6 THEN PRINT 0
-(90) (0 2)     GOTO 126
+G(90) (1 5) 106 IF J = 6 THEN PRINT 0
+G(90) (0 2)     GOTO 126
   Origs: 105:auto
   Dests: 107:auto, 126:goto
-(90) (0 2) 107 PRINT J;
-(90) (0 2)     GOTO 120
+G(90) (0 2) 107 PRINT J;
+G(90) (0 2)     GOTO 120
   Origs: 106:auto
   Dests: 120:goto
-(90) (0 2) 110 GOSUB 300
+G(90) (0 2) 110 GOSUB 300
   Origs: 105:ifthen
   Dests: 120:auto, 300:gosub
-(90) (0 1) 120 NEXT K
+G(90) (0 1) 120 NEXT K
   Origs: 100:fornext, 103:goto, 107:goto, 110:auto
   Dests: 125:auto
-(90) (0 1) 125 NEXT J
+G(90) (0 1) 125 NEXT J
   Origs: 99:fornext, 102:goto, 120:auto
   Dests: 126:auto
-(90) (0 1) 126 RETURN
+G(90) (0 1) 126 RETURN
   Origs: 106:goto, 125:auto
   Dests: 
 (0 3) 200 B = 1
@@ -134,43 +134,43 @@ Halstead complexity:
 (0 1) 239 RETURN
   Origs: 231:auto
   Dests: 
-(300) (1 4) 300 IF N(J, K) < 3 THEN 399
+G(300) (1 4) 300 IF N(J, K) < 3 THEN 399
   Origs: 110:gosub
   Dests: 305:auto, 399:ifthen
-(300) (1 3) 305 FOR O1 = 1 TO 18
+G(300) (1 3) 305 FOR O1 = 1 TO 18
   Origs: 300:auto
   Dests: 310:fornext, 315:fornext
-(300) (1 4) 310 IF N(J, K) = K(O1) THEN 350
+G(300) (1 4) 310 IF N(J, K) = K(O1) THEN 350
   Origs: 305:fornext
   Dests: 315:auto, 350:ifthen
-(300) (0 1) 315 NEXT O1
+G(300) (0 1) 315 NEXT O1
   Origs: 305:fornext, 310:auto
   Dests: 320:auto
-(300) (0 2) 320 GOTO 399
+G(300) (0 2) 320 GOTO 399
   Origs: 315:auto
   Dests: 399:goto
-(300) (1 4) 350 IF O1 > 9 THEN 360
+G(300) (1 4) 350 IF O1 > 9 THEN 360
   Origs: 310:ifthen
   Dests: 351:auto, 360:ifthen
-(300) (0 3) 351 N(J, K) = 100
-(300) (0 4)     M2 = M2 + 1
-(300) (0 2)     PRINT " * ";
+G(300) (0 3) 351 N(J, K) = 100
+G(300) (0 4)     M2 = M2 + 1
+G(300) (0 2)     PRINT " * ";
   Origs: 350:auto
   Dests: 355:auto
-(300) (0 1) 355 RETURN
+G(300) (0 1) 355 RETURN
   Origs: 351:auto
   Dests: 
-(300) (0 3) 360 N(J, K) = 1000
-(300) (0 4)     M3 = M3 + 1
-(300) (0 2)     PRINT " # ";
+G(300) (0 3) 360 N(J, K) = 1000
+G(300) (0 4)     M3 = M3 + 1
+G(300) (0 2)     PRINT " # ";
   Origs: 350:ifthen
   Dests: 365:auto
-(300) (0 1) 365 RETURN
+G(300) (0 1) 365 RETURN
   Origs: 360:auto
   Dests: 
-(300) (0 3) 399 N(J, K) = 0
-(300) (0 2)     PRINT "   ";
-(300) (0 1)     RETURN
+G(300) (0 3) 399 N(J, K) = 0
+G(300) (0 2)     PRINT "   ";
+G(300) (0 1)     RETURN
   Origs: 300:ifthen, 320:goto
   Dests: 
 (0 4) 500 PRINT TAB(10); "U.B. LIFE GAME"
@@ -266,49 +266,49 @@ Halstead complexity:
 (0 3) 596 GOTO 560
   Origs: 586:auto
   Dests: 560:goto
-(700) (0 2) 700 PRINT "X,Y"
-(700) (0 8)     PRINT "XXXXXX"; CHR$(13); "$$$$$$"; CHR$(13); "&&&&&&";
+G(700) (0 2) 700 PRINT "X,Y"
+G(700) (0 8)     PRINT "XXXXXX"; CHR$(13); "$$$$$$"; CHR$(13); "&&&&&&";
   Origs: 535:gosub, 580:gosub, 750:goto
   Inconsistent GOSUB origins
   Dests: 701:auto
-(700) (0 3) 701 PRINT CHR$(13);
-(700) (2 3)     INPUT Y(B), X(B)
+G(700) (0 3) 701 PRINT CHR$(13);
+G(700) (2 3)     INPUT Y(B), X(B)
   Origs: 700:auto
   Dests: 705:auto
-(700) (2 7) 705 IF X(B) <= 5 THEN IF X(B) > 0 THEN 708
+G(700) (2 7) 705 IF X(B) <= 5 THEN IF X(B) > 0 THEN 708
   Origs: 701:auto
   Dests: 706:auto, 708:ifthen
-(700) (0 2) 706 GOTO 750
+G(700) (0 2) 706 GOTO 750
   Origs: 705:auto
   Dests: 750:goto
-(700) (2 7) 708 IF Y(B) <= 5 THEN IF Y(B) > 0 THEN 715
+G(700) (2 7) 708 IF Y(B) <= 5 THEN IF Y(B) > 0 THEN 715
   Origs: 705:ifthen
   Dests: 710:auto, 715:ifthen
-(700) (0 2) 710 GOTO 750
+G(700) (0 2) 710 GOTO 750
   Origs: 708:auto
   Dests: 750:goto
-(700) (1 4) 715 IF N(X(B), Y(B)) <> 0 THEN 750
+G(700) (1 4) 715 IF N(X(B), Y(B)) <> 0 THEN 750
   Origs: 708:ifthen
   Dests: 720:auto, 750:ifthen
-(700) (1 4) 720 IF B = 1 THEN RETURN
+G(700) (1 4) 720 IF B = 1 THEN RETURN
   Origs: 715:auto
   Dests: 725:auto
-(700) (2 7) 725 IF X(1) = X(2) THEN IF Y(1) = Y(2) THEN 740
+G(700) (2 7) 725 IF X(1) = X(2) THEN IF Y(1) = Y(2) THEN 740
   Origs: 720:auto
   Dests: 730:auto, 740:ifthen
-(700) (0 1) 730 RETURN
+G(700) (0 1) 730 RETURN
   Origs: 725:auto
   Dests: 
-(700) (0 2) 740 PRINT "SAME COORD.  SET TO 0"
+G(700) (0 2) 740 PRINT "SAME COORD.  SET TO 0"
   Origs: 725:ifthen
   Dests: 741:auto
-(700) (0 3) 741 N(X(B) + 1, Y(B) + 1) = 0
-(700) (0 3)     B = 99
-(700) (0 1)     RETURN
+G(700) (0 3) 741 N(X(B) + 1, Y(B) + 1) = 0
+G(700) (0 3)     B = 99
+G(700) (0 1)     RETURN
   Origs: 740:auto
   Dests: 
-(700) (0 2) 750 PRINT "ILLEGAL COORDS. RETYPE"
-(700) (0 3)     GOTO 700
+G(700) (0 2) 750 PRINT "ILLEGAL COORDS. RETYPE"
+G(700) (0 3)     GOTO 700
   Origs: 706:goto, 710:goto, 715:ifthen
   Dests: 700:goto
 (0 1) 800 END

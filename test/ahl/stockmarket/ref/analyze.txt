@@ -519,7 +519,7 @@ Halstead complexity:
 (0 1) 830 REM RANDOMLY PRODUCE NEW STOCK VALUES BASED ON PREVIOUS
   Origs: 
   Dests: 
-(831) (0 1) 831 REM DAY'S VALUES 
+G(831) (0 1) 831 REM DAY'S VALUES 
   Origs: 280:gosub, 720:gosub
   Dests: 841:auto
 (0 1) 832 REM N1,N2 ARE RANDOM NUMBERS OF DAYS WHICH RESPECTIVELY
@@ -534,181 +534,181 @@ Halstead complexity:
 (0 1) 840 REM IF N1 DAYS HAVE PASSED, PICK AN I1, SET E1, DETERMINE NEW N1 
   Origs: 
   Dests: 
-(831) (1 4) 841 IF N1 > 0 THEN 850
+G(831) (1 4) 841 IF N1 > 0 THEN 850
   Origs: 831:auto
   Dests: 845:auto, 851:ifthen
-(831) (0 4) 845 LET I1 = INT(4.99 * RND(X) + 1)
+G(831) (0 4) 845 LET I1 = INT(4.99 * RND(X) + 1)
   Origs: 841:auto
   Dests: 846:auto
-(831) (0 4) 846 LET N1 = INT(4.99 * RND(X) + 1)
+G(831) (0 4) 846 LET N1 = INT(4.99 * RND(X) + 1)
   Origs: 845:auto
   Dests: 847:auto
-(831) (0 3) 847 LET E1 = 1
+G(831) (0 3) 847 LET E1 = 1
   Origs: 846:auto
   Dests: 851:auto
 (0 1) 850 REM IF N2 DAYS HAVE PASSED, PICK AN I2, SET E2, DETERMINE NEW N2 
   Origs: 
   Dests: 
-(831) (1 4) 851 IF N2 > 0 THEN 860
+G(831) (1 4) 851 IF N2 > 0 THEN 860
   Origs: 841:ifthen, 847:auto
   Dests: 855:auto, 861:ifthen
-(831) (0 4) 855 LET I2 = INT(4.99 * RND(X) + 1)
+G(831) (0 4) 855 LET I2 = INT(4.99 * RND(X) + 1)
   Origs: 851:auto
   Dests: 856:auto
-(831) (0 4) 856 LET N2 = INT(4.99 * RND(X) + 1)
+G(831) (0 4) 856 LET N2 = INT(4.99 * RND(X) + 1)
   Origs: 855:auto
   Dests: 857:auto
-(831) (0 3) 857 LET E2 = 1
+G(831) (0 3) 857 LET E2 = 1
   Origs: 856:auto
   Dests: 861:auto
 (0 1) 860 REM DEDUCT ONE DAY FROM N1 AND N2
   Origs: 
   Dests: 
-(831) (0 4) 861 LET N1 = N1 - 1
+G(831) (0 4) 861 LET N1 = N1 - 1
   Origs: 851:ifthen, 857:auto
   Dests: 862:auto
-(831) (0 4) 862 LET N2 = N2 - 1
+G(831) (0 4) 862 LET N2 = N2 - 1
   Origs: 861:auto
   Dests: 900:auto
 (0 1) 890 REM LOOP THROUGH ALL STOCKS
   Origs: 
   Dests: 
-(831) (1 3) 900 FOR I = 1 TO 5
+G(831) (1 3) 900 FOR I = 1 TO 5
   Origs: 862:auto
   Dests: 910:fornext, 970:fornext
-(831) (0 4) 910 LET X1 = RND(X)
+G(831) (0 4) 910 LET X1 = RND(X)
   Origs: 900:fornext
   Dests: 915:auto
-(831) (1 4) 915 IF X1 > .25 THEN 920
+G(831) (1 4) 915 IF X1 > .25 THEN 920
   Origs: 910:auto
   Dests: 916:auto, 920:ifthen
-(831) (0 3) 916 LET X1 = .25
+G(831) (0 3) 916 LET X1 = .25
   Origs: 915:auto
   Dests: 917:auto
-(831) (0 2) 917 GOTO 935
+G(831) (0 2) 917 GOTO 935
   Origs: 916:auto
   Dests: 935:goto
-(831) (1 4) 920 IF X1 > .5 THEN 925
+G(831) (1 4) 920 IF X1 > .5 THEN 925
   Origs: 915:ifthen
   Dests: 921:auto, 925:ifthen
-(831) (0 3) 921 LET X1 = .5
+G(831) (0 3) 921 LET X1 = .5
   Origs: 920:auto
   Dests: 922:auto
-(831) (0 2) 922 GOTO 935
+G(831) (0 2) 922 GOTO 935
   Origs: 921:auto
   Dests: 935:goto
-(831) (1 4) 925 IF X1 > .75 THEN 930
+G(831) (1 4) 925 IF X1 > .75 THEN 930
   Origs: 920:ifthen
   Dests: 926:auto, 930:ifthen
-(831) (0 3) 926 LET X1 = .75
+G(831) (0 3) 926 LET X1 = .75
   Origs: 925:auto
   Dests: 927:auto
-(831) (0 2) 927 GOTO 935
+G(831) (0 2) 927 GOTO 935
   Origs: 926:auto
   Dests: 935:goto
-(831) (0 3) 930 LET X1 = 0.0
+G(831) (0 3) 930 LET X1 = 0.0
   Origs: 925:ifthen
   Dests: 935:auto
 (0 1) 931 REM BIG CHANGE CONSTANT:W3  (SET TO ZERO INITIALLY)
   Origs: 
   Dests: 
-(831) (0 3) 935 LET W3 = 0
+G(831) (0 3) 935 LET W3 = 0
   Origs: 917:goto, 922:goto, 927:goto, 930:auto
   Dests: 936:auto
-(831) (1 4) 936 IF E1 < 1 THEN 945
+G(831) (1 4) 936 IF E1 < 1 THEN 945
   Origs: 935:auto
   Dests: 937:auto, 945:ifthen
-(831) (1 6) 937 IF INT(I1 + .5) <> INT(I + .5) THEN 945
+G(831) (1 6) 937 IF INT(I1 + .5) <> INT(I + .5) THEN 945
   Origs: 936:auto
   Dests: 938:auto, 939:auto, 945:ifthen
-(831) (0 1) 938 REM ADD 10 PTS. TO THIS STOCK;  RESET E1 
+G(831) (0 1) 938 REM ADD 10 PTS. TO THIS STOCK;  RESET E1 
   Origs: 937:auto
   Dests: 939:auto
-(831) (0 3) 939 LET W3 = 10
+G(831) (0 3) 939 LET W3 = 10
   Origs: 937:auto, 938:auto
   Dests: 943:auto
-(831) (0 3) 943 LET E1 = 0
+G(831) (0 3) 943 LET E1 = 0
   Origs: 939:auto
   Dests: 945:auto
-(831) (1 4) 945 IF E2 < 1 THEN 955
+G(831) (1 4) 945 IF E2 < 1 THEN 955
   Origs: 936:ifthen, 937:ifthen, 943:auto
   Dests: 947:auto, 955:ifthen
-(831) (1 6) 947 IF INT(I2 + .5) <> INT(I + .5) THEN 955
+G(831) (1 6) 947 IF INT(I2 + .5) <> INT(I + .5) THEN 955
   Origs: 945:auto
   Dests: 948:auto, 949:auto, 955:ifthen
-(831) (0 1) 948 REM SUBTRACT 10 PTS. FROM THIS STOCK;  RESET E2
+G(831) (0 1) 948 REM SUBTRACT 10 PTS. FROM THIS STOCK;  RESET E2
   Origs: 947:auto
   Dests: 949:auto
-(831) (0 4) 949 LET W3 = W3 - 10
+G(831) (0 4) 949 LET W3 = W3 - 10
   Origs: 947:auto, 948:auto
   Dests: 953:auto
-(831) (0 3) 953 LET E2 = 0
+G(831) (0 3) 953 LET E2 = 0
   Origs: 949:auto
   Dests: 955:auto
 (0 1) 954 REM C(I) IS CHANGE IN STOCK VALUE
   Origs: 
   Dests: 
-(831) (0 8) 955 LET C(I) = INT(A * S(I)) + X1 + INT(3 - 6 * RND(X) + .5) + W3
+G(831) (0 8) 955 LET C(I) = INT(A * S(I)) + X1 + INT(3 - 6 * RND(X) + .5) + W3
   Origs: 945:ifthen, 947:ifthen, 953:auto
   Dests: 956:auto
-(831) (0 5) 956 LET C(I) = INT(100 * C(I) + .5) / 100
+G(831) (0 5) 956 LET C(I) = INT(100 * C(I) + .5) / 100
   Origs: 955:auto
   Dests: 957:auto
-(831) (0 4) 957 LET S(I) = S(I) + C(I)
+G(831) (0 4) 957 LET S(I) = S(I) + C(I)
   Origs: 956:auto
   Dests: 960:auto
-(831) (1 4) 960 IF S(I) > 0 THEN 967
+G(831) (1 4) 960 IF S(I) > 0 THEN 967
   Origs: 957:auto
   Dests: 964:auto, 967:ifthen
-(831) (0 3) 964 LET C(I) = 0
+G(831) (0 3) 964 LET C(I) = 0
   Origs: 960:auto
   Dests: 965:auto
-(831) (0 3) 965 LET S(I) = 0
+G(831) (0 3) 965 LET S(I) = 0
   Origs: 964:auto
   Dests: 966:auto
-(831) (0 2) 966 GOTO 970
+G(831) (0 2) 966 GOTO 970
   Origs: 965:auto
   Dests: 970:goto
-(831) (0 5) 967 LET S(I) = INT(100 * S(I) + .5) / 100
+G(831) (0 5) 967 LET S(I) = INT(100 * S(I) + .5) / 100
   Origs: 960:ifthen
   Dests: 970:auto
-(831) (0 1) 970 NEXT I
+G(831) (0 1) 970 NEXT I
   Origs: 900:fornext, 966:goto, 967:auto
   Dests: 973:auto
 (0 1) 972 REM AFTER T8 DAYS RANDOMLY CHANGE TREND SIGN AND SLOPE 
   Origs: 
   Dests: 
-(831) (0 4) 973 LET T8 = T8 - 1
+G(831) (0 4) 973 LET T8 = T8 - 1
   Origs: 970:auto
   Dests: 974:auto
-(831) (1 4) 974 IF T8 < 1 THEN 985
+G(831) (1 4) 974 IF T8 < 1 THEN 985
   Origs: 973:auto
   Dests: 980:auto, 986:ifthen
-(831) (0 1) 980 RETURN
+G(831) (0 1) 980 RETURN
   Origs: 974:auto
   Dests: 
 (0 1) 985 REM RANDOMLY CHANGE TREND SIGN AND SLOPE (A), AND DURATION 
   Origs: 
   Dests: 
-(831) (0 1) 986 REM OF TREND (T8)
+G(831) (0 1) 986 REM OF TREND (T8)
   Origs: 974:ifthen
   Dests: 990:auto
-(831) (0 4) 990 LET T8 = INT(4.99 * RND(X) + 1)
+G(831) (0 4) 990 LET T8 = INT(4.99 * RND(X) + 1)
   Origs: 986:auto
   Dests: 992:auto
-(831) (0 5) 992 LET A = INT((RND(X) / 10) * 100 + .5) / 100
+G(831) (0 5) 992 LET A = INT((RND(X) / 10) * 100 + .5) / 100
   Origs: 990:auto
   Dests: 993:auto
-(831) (0 4) 993 LET S4 = RND(X)
+G(831) (0 4) 993 LET S4 = RND(X)
   Origs: 992:auto
   Dests: 994:auto
-(831) (1 4) 994 IF S4 <= .5 THEN 997
+G(831) (1 4) 994 IF S4 <= .5 THEN 997
   Origs: 993:auto
   Dests: 995:auto, 997:ifthen
-(831) (0 4) 995 LET A = -A
+G(831) (0 4) 995 LET A = -A
   Origs: 994:auto
   Dests: 997:auto
-(831) (0 1) 997 RETURN
+G(831) (0 1) 997 RETURN
   Origs: 994:ifthen, 995:auto
   Dests: 
 (0 2) 998 PRINT "HOPE YOU HAD FUN!!"

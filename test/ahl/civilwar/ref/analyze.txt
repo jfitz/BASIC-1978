@@ -968,37 +968,37 @@ Halstead complexity:
 (0 1) 3110 REM - UNION STRATEGY IS COMPUTER CHOSEN
   Origs: 
   Dests: 
-(3120) (0 2) 3120 PRINT "UNION STRATEGY IS ";
+G(3120) (0 2) 3120 PRINT "UNION STRATEGY IS ";
   Origs: 1980:gosub
   Dests: 3130:auto
-(3120) (1 4) 3130 IF A <> 0 THEN 3180
+G(3120) (1 4) 3130 IF A <> 0 THEN 3180
   Origs: 3120:auto
   Dests: 3140:auto, 3180:ifthen
-(3120) (1 2) 3140 INPUT Y2
+G(3120) (1 2) 3140 INPUT Y2
   Origs: 3130:auto, 3170:goto
   Dests: 3150:auto
-(3120) (1 4) 3150 IF Y2 <= 0 THEN 3160
+G(3120) (1 4) 3150 IF Y2 <= 0 THEN 3160
   Origs: 3140:auto
   Dests: 3155:auto, 3160:ifthen
-(3120) (1 4) 3155 IF Y2 < 5 THEN 3290
+G(3120) (1 4) 3155 IF Y2 < 5 THEN 3290
   Origs: 3150:auto
   Dests: 3160:auto, 3290:ifthen
-(3120) (0 2) 3160 PRINT "ENTER 1 , 2 ,3 , OR 4 (USUALLY PREVIOUS UNION STRATEGY)"
+G(3120) (0 2) 3160 PRINT "ENTER 1 , 2 ,3 , OR 4 (USUALLY PREVIOUS UNION STRATEGY)"
   Origs: 3150:ifthen, 3155:auto
   Dests: 3170:auto
-(3120) (0 3) 3170 GOTO 3140
+G(3120) (0 3) 3170 GOTO 3140
   Origs: 3160:auto
   Dests: 3140:goto
-(3120) (0 3) 3180 LET S0 = 0
+G(3120) (0 3) 3180 LET S0 = 0
   Origs: 3130:ifthen
   Dests: 3190:auto
-(3120) (0 5) 3190 LET R = 100 * RND(0)
+G(3120) (0 5) 3190 LET R = 100 * RND(0)
   Origs: 3180:auto
   Dests: 3200:auto
-(3120) (1 3) 3200 FOR I = 1 TO 4
+G(3120) (1 3) 3200 FOR I = 1 TO 4
   Origs: 3190:auto
   Dests: 3210:fornext, 3250:fornext
-(3120) (0 4) 3210 LET S0 = S0 + S(I)
+G(3120) (0 4) 3210 LET S0 = S0 + S(I)
   Origs: 3200:fornext
   Dests: 3240:auto
 (0 1) 3220 REM - IF ACTUAL STRATEGY INFO IS IN PROGRAM DATA STATEMENTS
@@ -1007,58 +1007,58 @@ Halstead complexity:
 (0 1) 3230 REM   THEN R-100 IS EXTRA WEIGHT GIVEN TO THAT STATEGY.
   Origs: 
   Dests: 
-(3120) (1 4) 3240 IF R < S0 THEN 3270
+G(3120) (1 4) 3240 IF R < S0 THEN 3270
   Origs: 3210:auto
   Dests: 3250:auto, 3270:ifthen
-(3120) (0 1) 3250 NEXT I
+G(3120) (0 1) 3250 NEXT I
   Origs: 3200:fornext, 3240:auto
   Dests: 3270:auto
 (0 1) 3260 REM - IF ACTUAL STRAT. IN,THEN HERE IS Y2= HIST. STRAT.
   Origs: 
   Dests: 
-(3120) (0 3) 3270 LET Y2 = I
+G(3120) (0 3) 3270 LET Y2 = I
   Origs: 3240:ifthen, 3250:auto
   Dests: 3280:auto
-(3120) (0 2) 3280 PRINT Y2
+G(3120) (0 2) 3280 PRINT Y2
   Origs: 3270:auto
   Dests: 3290:auto
-(3120) (0 1) 3290 RETURN
+G(3120) (0 1) 3290 RETURN
   Origs: 3155:ifthen, 3280:auto
   Dests: 
 (0 1) 3300 REM LEARN  PRESENT STRATEGY, START FORGETTING OLD ONES
   Origs: 
   Dests: 
-(3310) (0 1) 3310 REM - PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
+G(3310) (0 1) 3310 REM - PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
   Origs: 2780:gosub
   Dests: 3330:auto
 (0 1) 3320 REM   PROBABILITY POINTS, UNLESS A STRATEGY FALLS BELOW 5%.
   Origs: 
   Dests: 
-(3310) (0 3) 3330 LET S = 3
+G(3310) (0 3) 3330 LET S = 3
   Origs: 3310:auto
   Dests: 3340:auto
-(3310) (0 3) 3340 LET S0 = 0
+G(3310) (0 3) 3340 LET S0 = 0
   Origs: 3330:auto
   Dests: 3350:auto
-(3310) (1 3) 3350 FOR I = 1 TO 4
+G(3310) (1 3) 3350 FOR I = 1 TO 4
   Origs: 3340:auto
   Dests: 3360:fornext, 3390:fornext
-(3310) (1 4) 3360 IF S(I) <= 5 THEN 3390
+G(3310) (1 4) 3360 IF S(I) <= 5 THEN 3390
   Origs: 3350:fornext
   Dests: 3370:auto, 3390:ifthen
-(3310) (0 4) 3370 LET S(I) = S(I) - S
+G(3310) (0 4) 3370 LET S(I) = S(I) - S
   Origs: 3360:auto
   Dests: 3380:auto
-(3310) (0 4) 3380 LET S0 = S0 + S
+G(3310) (0 4) 3380 LET S0 = S0 + S
   Origs: 3370:auto
   Dests: 3390:auto
-(3310) (0 1) 3390 NEXT I
+G(3310) (0 1) 3390 NEXT I
   Origs: 3350:fornext, 3360:ifthen, 3380:auto
   Dests: 3400:auto
-(3310) (0 4) 3400 LET S(Y) = S(Y) + S0
+G(3310) (0 4) 3400 LET S(Y) = S(Y) + S0
   Origs: 3390:auto
   Dests: 3410:auto
-(3310) (0 1) 3410 RETURN
+G(3310) (0 1) 3410 RETURN
   Origs: 3400:auto
   Dests: 
 (0 1) 3420 REM - HISTORICAL DATA...CAN ADD MORE (STRAT.,ETC) BY INSERTING
