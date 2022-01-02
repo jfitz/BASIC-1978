@@ -99,6 +99,7 @@ Halstead complexity:
   Origs: 
   Dests: 
 (1505) (1 3) 29 FOR R = 1 TO 9
+   WARNING: Statement before GOSUB entry point
   Origs: 24:auto, 1618:goto
   Dests: 30:fornext, 60:fornext
 (1505) (1 3) 30 FOR C = 1 TO 9
@@ -111,6 +112,7 @@ Halstead complexity:
   Origs: 31:auto
   Dests: 35:auto, 40:ifthen
 (1505) (0 4) 35 T(R, C) = -5
+   WARNING: Statement before GOSUB entry point
   Origs: 32:auto, 40:ifthen
   Dests: 36:auto
 (1505) (0 2) 36 GOTO 50
@@ -155,6 +157,8 @@ Halstead complexity:
   Origs: 83:auto
   Dests: 100:auto
 (1005) (1 2) 100 INPUT "MOVE WHICH PIECE"; Z
+    WARNING: Statement before GOSUB entry point
+    WARNING: Inconsistent GOSUB target (1005, 1505)
   Origs: 86:auto, 120:goto, 156:ifthen, 220:goto
   Dests: 110:auto
 (1005) (1 6) 110 IF B(Z) = -7 THEN 140
@@ -162,6 +166,7 @@ Halstead complexity:
   Dests: 120:auto, 140:ifthen
 (1005) (0 2) 120 PRINT "ILLEGAL MOVE, TRY AGAIN..."
 (1005) (0 3)     GOTO 100
+    WARNING: Statement before GOSUB entry point
   Origs: 110:auto, 150:ifthen, 153:ifthen, 170:goto, 180:ifthen, 1045:ifthen, 1085:ifthen, 1135:ifthen, 1175:ifthen
   Dests: 100:goto
 (1005) (1 2) 140 INPUT "TO WHERE"; P
@@ -449,6 +454,7 @@ Halstead complexity:
   Origs: 1617:ifthen
   Dests: 2010:auto
 (1505) (0 1) 2010 END
+     WARNING: Terminating statement in GOSUB
   Origs: 2000:auto
   Dests: :stop
 

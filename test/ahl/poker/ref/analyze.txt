@@ -64,6 +64,7 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Origs: 100:auto
   Dests: 120:auto
 (650) (0 3) 120 LET P = 0
+    WARNING: Statement before GOSUB entry point
   Origs: 110:auto, 720:ifthen
   Dests: 140:auto
 (0 1) 130 REM
@@ -154,6 +155,7 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Origs: 400:auto
   Dests: 420:auto
 (650) (0 3) 420 I = 7
+    WARNING: Statement before GOSUB entry point
   Origs: 360:goto, 390:goto, 410:auto, 490:goto
   Dests: 430:auto
 (650) (0 3) 430 Z = 23
@@ -556,6 +558,7 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Origs: 930:gosub, 1010:gosub
   Dests: 1740:auto
 (1740) (0 7) 1740 A(Z) = 100 * INT(4 * RND(1)) + INT(100 * RND(1))
+     WARNING: Inconsistent GOSUB target (1740, 1730)
   Origs: 240:gosub, 1730:auto, 1750:ifthen, 1760:ifthen, 1780:ifthen
   Inconsistent GOSUB origins
   Dests: 1750:auto
@@ -626,6 +629,7 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Origs: 1870:gosub
   Dests: 30:function, 1960:auto
 (1950) (1 4) 1960 IF K <> 9 THEN 1980
+     WARNING: Inconsistent GOSUB target (1950, 1960)
   Origs: 1950:auto, 3760:gosub
   Inconsistent GOSUB origins
   Dests: 1970:auto, 1980:ifthen
@@ -663,6 +667,7 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Origs: 1890:gosub
   Dests: 2080:auto
 (2070) (1 4) 2080 IF K <> 0 THEN 2100
+     WARNING: Inconsistent GOSUB target (2070, 2080)
   Origs: 2070:auto, 3720:gosub
   Inconsistent GOSUB origins
   Dests: 2090:auto, 2100:ifthen
@@ -959,6 +964,7 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Dests: 3060:auto
 (3050) (0 2) 3060 PRINT
 (3050) (0 2)      PRINT "WHAT IS YOUR BET";
+     WARNING: Inconsistent GOSUB target (3050, 3060)
   Origs: 1440:gosub, 3050:auto, 3130:goto, 3160:goto, 3220:goto, 3470:goto
   Inconsistent GOSUB origins
   Dests: 3070:auto
@@ -1050,12 +1056,18 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Origs: 3270:ifthen, 3310:ifthen, 3420:ifthen
   Dests: 3360:auto, 3430:ifthen
 (3480) (0 2) 3360 PRINT "I'LL SEE YOU."
+     WARNING: Statement before GOSUB entry point
+     WARNING: Inconsistent GOSUB target (3480, 3050)
+     WARNING: Inconsistent GOSUB target (3480, 3050)
+     WARNING: Inconsistent GOSUB target (3480, 3050)
   Origs: 3350:auto, 3520:ifthen
   Dests: 3370:auto
 (3480) (0 3) 3370 K = G
   Origs: 3360:auto
   Dests: 3380:auto
 (3480) (0 4) 3380 S = S - G
+     WARNING: Inconsistent GOSUB target (3480, 3050)
+     WARNING: Inconsistent GOSUB target (3480, 3050)
   Origs: 3190:goto, 3240:ifthen, 3370:auto
   Dests: 3390:auto
 (3480) (0 4) 3390 C = C - K
@@ -1065,6 +1077,7 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Origs: 3390:auto
   Dests: 3410:auto
 (3480) (0 1) 3410 RETURN
+     WARNING: Inconsistent GOSUB target (3480, 3050)
   Origs: 3110:ifthen, 3400:auto
   Dests: 
 (3050) (1 7) 3420 IF G > 3 * Z THEN 3350
@@ -1143,9 +1156,11 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Origs: 3480:ifthen, 3650:auto
   Dests: 
 (3480) (0 2) 3670 PRINT "I'M BUSTED.  CONGRATULATIONS!"
+     WARNING: Inconsistent GOSUB target (3480, 650)
   Origs: 150:ifthen, 3600:ifthen, 3630:ifthen
   Dests: 3680:auto
 (3480) (0 1) 3680 STOP
+     WARNING: Terminating statement in GOSUB
   Origs: 3670:auto
   Dests: :stop
 (3690) (0 3) 3690 PRINT H$; I$;
@@ -1272,6 +1287,8 @@ FNB(_) (0 6) 30 DEF FNB(X) = X - 100 * INT(X / 100)
   Origs: 3970:ifthen
   Dests: 4100:auto
 (3830) (0 1) 4100 END
+     WARNING: Terminating statement in GOSUB
+     WARNING: Inconsistent GOSUB target (3830, 650)
   Origs: 730:ifthen, 4090:auto
   Dests: :stop
 
