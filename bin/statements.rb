@@ -255,7 +255,7 @@ class AbstractStatement
   attr_reader :errors, :warnings, :program_errors, :keywords, :tokens,
               :separators, :valid, :executable, :comment, :linenums,
               :autonext, :autonext_line_stmt, :transfers, :transfers_auto,
-              :is_if_no_else, :may_be_if_sub, :part_of_sub
+              :is_if_no_else, :may_be_if_sub, :part_of_sub, :part_of_on_error
   attr_accessor :part_of_user_function, :program_warnings, :origins, :reachable
 
   def self.extra_keywords
@@ -297,6 +297,7 @@ class AbstractStatement
     @transfers_auto = []
     @part_of_user_function = nil
     @part_of_sub = nil
+    @part_of_on_error = nil
   end
 
   def set_autonext_line_stmt(line_stmt_mod)
@@ -374,6 +375,54 @@ class AbstractStatement
     end
   end
 
+  def assign_on_error_markers(_) end
+
+  def assign_on_error_marker(marker, line_number, program)
+    # mark as part of this on-error
+    @part_of_on_error = marker
+
+    # do not change this call to transfers()
+    xfers = transfers + transfers_auto
+    
+    # for each destination
+    xfers.each do |xfer|
+      next if [:function, :onerror, :resume].include?(xfer.type)
+
+      dest_line = xfer.line_number
+      dest_stmt = xfer.statement
+      statement = program.get_statement(dest_line, dest_stmt)
+
+      next if statement.nil?
+
+      if statement.part_of_on_error.nil?
+        # recurse for that statement's destinations
+        statement.assign_on_error_marker(marker, dest_line, program)
+
+        # warn about branches to lines before first line of ON-ERROR block
+        if dest_line < marker && dest_line < line_number
+          statement.program_warnings << "Statement before ON-ERROR entry point"
+        end
+
+        stmt_xfers = statement.transfers
+
+        # warn about STOP, END, CHAIN in ON-ERROR block
+        stmt_xfers.each do |stmt_xfer|
+          if [:stop, :chain].include?(stmt_xfer.type)
+            statement.program_warnings << "Terminating statement in ON-ERROR"
+          end
+        end
+      else
+        mark0 = statement.part_of_on_error
+
+        if marker != mark0
+          # warn about overlapping ON-ERROR blocks
+          statement.program_warnings <<
+            "Inconsistent ON-ERROR target (#{mark0}, #{marker})"
+        end
+      end
+    end
+  end
+
   def set_for_lines(_, _, _) end
 
   def set_endfunc_lines(_, _) end
@@ -415,6 +464,7 @@ class AbstractStatement
     text = ''
 
     text += "#{@part_of_user_function} " unless @part_of_user_function.nil?
+    text += "E(#{@part_of_on_error}) " unless @part_of_on_error.nil?
     text += "G(#{@part_of_sub}) " unless @part_of_sub.nil?
     text += "(#{@mccabe} #{@comprehension_effort}) #{number} #{core_pretty}"
 
@@ -614,6 +664,7 @@ class AbstractStatement
     line = ''
 
     line = " #{@part_of_user_function}" unless @part_of_user_function.nil?
+    line = " E(#{@part_of_on_error})" unless @part_of_on_error.nil?
     line = " G(#{@part_of_sub})" unless @part_of_sub.nil?
 
     line += if show_timing
@@ -660,7 +711,8 @@ class AbstractStatement
     trace_out.print_out "#{@part_of_user_function} " unless
       @part_of_user_function.nil?
 
-    trace_out.print_out "(#{@part_of_sub}) " unless @part_of_sub.nil?
+    trace_out.print_out "E(#{@part_of_on_error}) " unless @part_of_on_error.nil?
+    trace_out.print_out "G(#{@part_of_sub}) " unless @part_of_sub.nil?
 
     mod = current_line_stmt_mod.index
 
@@ -3627,6 +3679,27 @@ class OnErrorStatement < AbstractStatement
     unless mod.nil?
       dest = LineStmtMod.new(@dest_line, 0, mod)
       @dest_line_stmt_mod = program.find_exec_line_stmt_mod(dest)
+    end
+  end
+
+  def assign_on_error_markers(program)
+    return if @dest_line_stmt_mod.nil?
+
+    dest_line = @dest_line_stmt_mod.line_number
+    dest_stmt = @dest_line_stmt_mod.statement
+    statement = program.get_statement(dest_line, dest_stmt)
+
+    unless statement.nil?
+      if statement.part_of_on_error.nil?
+        # mark statement's destinations
+        statement.assign_on_error_marker(dest_line, dest_line, program)
+      else
+        mark0 = statement.part_of_on_error
+        if dest_line != mark0
+          statement.program_warnings <<
+            "Inconsistent GOSUB target (#{mark0}, #{dest_line})"
+        end
+      end
     end
   end
 
