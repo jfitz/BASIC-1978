@@ -338,6 +338,7 @@ class AbstractStatement
     
     # for each destination
     xfers.each do |xfer|
+      # don't follow function call and GOSUB
       next if [:function, :gosub].include?(xfer.type)
 
       dest_line = xfer.line_number
@@ -386,6 +387,7 @@ class AbstractStatement
     
     # for each destination
     xfers.each do |xfer|
+      # don't follow function call, ON ERROR, and RESUME
       next if [:function, :onerror, :resume].include?(xfer.type)
 
       dest_line = xfer.line_number

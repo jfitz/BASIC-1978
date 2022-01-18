@@ -668,7 +668,7 @@ class Interpreter
 
         stop_running
       end
-    rescue BASICSyntaxError => e
+    rescue BASICSyntaxError, BASICError => e
       @console_io.newline_when_needed
 
       if @current_line_stmt_mod.nil?
@@ -966,7 +966,7 @@ class Interpreter
 
   # get the current value for ERL()
   def error_line(part)
-    raise BASICRuntimeError, :te_erl_no_err if @resume_stack.empty?
+    raise BASICError.new('ERL without ERROR') if @resume_stack.empty?
 
     line_index = @resume_stack[-1]
 
@@ -986,7 +986,7 @@ class Interpreter
 
   # get the current value for ERR()
   def error_code
-    raise BASICRuntimeError, :te_err_no_err if @error_stack.empty?
+    raise BASICError.new('ERR without ERROR') if @error_stack.empty?
 
     code = @error_stack[-1]
     NumericConstant.new(code)
