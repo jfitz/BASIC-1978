@@ -20,7 +20,9 @@
 95 PRINT "YOU WIN BY";D;"POINTS":GOTO 20
 100 PRINT "AGAIN";
  WARNING: Statement before GOSUB entry point
+ WARNING: Inconsistent GOSUB origins
 110 INPUT M:IF M<7 THEN IF M>0 THEN M=M-1:GOTO 130
+ WARNING: Inconsistent GOSUB origins
 120 PRINT "ILLEGAL MOVE":GOTO 100
 130 IF B(M)=0 THEN 120
 140 H=6:GOSUB 200
@@ -28,6 +30,7 @@
 200 K=M:GOSUB 600
  WARNING: Statement before GOSUB entry point
  WARNING: Inconsistent GOSUB target (800, 200)
+ WARNING: Inconsistent GOSUB origins
 205 E=0:IF K>6 THEN K=K-7
 210 C=C+1:IF C<9 THEN F(N)=F(N)*6+K
 215 FOR I=0 TO 5:IF B(I)<>0 THEN 230
@@ -38,6 +41,7 @@
 235 GOTO 220
 500 PRINT:PRINT"   ";
  WARNING: Inconsistent GOSUB target (500, 110)
+ WARNING: Inconsistent GOSUB origins
 505 FOR I=12 TO 7 STEP -1:GOSUB 580
 510 NEXT I
  WARNING: Inconsistent GOSUB target (500, 800)

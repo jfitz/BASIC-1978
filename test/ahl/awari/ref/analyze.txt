@@ -98,14 +98,14 @@ Halstead complexity:
   Dests: 20:goto
 G(110) (0 2) 100 PRINT "AGAIN";
     WARNING: Statement before GOSUB entry point
+    WARNING: Inconsistent GOSUB origins
   Origs: 50:gosub, 120:goto
-  Inconsistent GOSUB origins
   Dests: 110:auto
 G(110) (1 2) 110 INPUT M
 G(110) (2 10)     IF M < 7 THEN IF M > 0 THEN M = M - 1
 G(110) (0 2)     GOTO 130
+    WARNING: Inconsistent GOSUB origins
   Origs: 40:gosub, 100:auto
-  Inconsistent GOSUB origins
   Dests: 120:auto, 130:goto
 G(110) (0 2) 120 PRINT "ILLEGAL MOVE"
 G(110) (0 3)     GOTO 100
@@ -125,8 +125,8 @@ G(800) (0 3) 200 K = M
 G(800) (0 2)     GOSUB 600
     WARNING: Statement before GOSUB entry point
     WARNING: Inconsistent GOSUB target (800, 200)
+    WARNING: Inconsistent GOSUB origins
   Origs: 140:gosub, 890:goto
-  Inconsistent GOSUB origins
   Dests: 205:auto, 600:gosub
 G(800) (0 3) 205 E = 0
 G(800) (1 7)     IF K > 6 THEN K = K - 7
@@ -158,8 +158,8 @@ G(800) (0 3) 235 GOTO 220
 G(500) (0 2) 500 PRINT
 G(500) (0 2)     PRINT "   ";
     WARNING: Inconsistent GOSUB target (500, 110)
+    WARNING: Inconsistent GOSUB origins
   Origs: 35:gosub, 150:goto
-  Inconsistent GOSUB origins
   Dests: 505:auto
 G(500) (1 5) 505 FOR I = 12 TO 7 STEP -1
 G(500) (0 2)     GOSUB 580
