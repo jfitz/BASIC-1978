@@ -19,14 +19,14 @@ BASIC-1978 is really primitive!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BASIC-1978 is an interpreter.
-BASIC-1965 caches the results of constant operations (such as 3 / 5).
+BASIC-1978 caches the results of constant operations (such as 3 / 5).
 
-The BASIC-1973 language has limited exception handling.
+The BASIC-1978 language has limited exception handling.
 An exception handler can be specified with the ON ERROR statement.
 The exception handler can correct the problem and continue execution with the RESUME statement.
  
 Space characters are insignificant in most places.
-When loading a program (or accepting new statements from the user), BASIC-1973 removes all spaces and then parses the line.
+When loading a program (or accepting new statements from the user), BASIC-1978 removes all spaces and then parses the line.
 
 BASIC-1978 is really fussy!
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,8 +39,8 @@ Lower case causes an error.
 Cautions
 ~~~~~~~~
 
-BASIC-1978 will not run every program that can run in BASIC-1973.
-BASIC-1973 is an interpreter designed to run programs for a collection of interpreters from the early 1970s.
+BASIC-1978 will not run every program that can run in BASIC-1978.
+BASIC-1978 is an interpreter designed to run programs for a collection of interpreters from the early 1970s.
 BASIC-1978 is designed to run programs for an early version of Microsoft BASIC.
 (Something prior to Microsoft's BASIC-80.)
 
@@ -1035,6 +1035,15 @@ Examples:
 	20 PRINT I
 	30 NEXT I
 
+Traditionally, FOR/NEXT loops consist of a pair of FOR and NEXT statements, with the NEXT statement after the FOR statement.
+BASIC-1965 allows for multiple FOR statements to terminate with a common NEXT statement.
+(The control variable must be the same for all FOR statements.)
+Other BASIC interpreters may not allow such programming structures.
+BASIC-1965 also allows for a single FOR statement to terminate with multiple NEXT statements.
+(The NEXT statements must all use the same control variable.)
+Other BASIC interpreters may not allow such programming structures.
+BASIC-1965 requires that the NEXT statement occur after the FOR statement in the code.
+
 It is possible to change the value of the control value within the loop. You can write:
 
 	10 FOR I = 1 TO 10
@@ -1530,7 +1539,7 @@ A terminating comma or semicolon will write a SPACE and suppress the newline.
 results in the text "Processing... done" to the file.
 
 Numbers are printed with automatic formatting.
-BASIC-1965 will print a number with the necessary number of decimal places.
+BASIC-1978 will print a number with the necessary number of decimal places.
 It is not possible to force a number of decimal places.
 
 PRINT USING
@@ -1796,7 +1805,7 @@ A terminating comma will advance to the next tab position and suppress the newli
 results in the text "Processing...", "done" on the console.
 
 Numbers are printed with automatic formatting.
-BASIC-1965 will print a number with the necessary number of decimal places.
+BASIC-1978 will print a number with the necessary number of decimal places.
 It is not possible to force a number of decimal places.
 
 Writing to files
@@ -1826,7 +1835,7 @@ A terminating comma or semicolon will write a SPACE and suppress the newline.
 results in the text "Processing..."; "done" to the file.
 
 Numbers are printed with automatic formatting.
-BASIC-1965 will print a number with the necessary number of decimal places.
+BASIC-1978 will print a number with the necessary number of decimal places.
 It is not possible to force a number of decimal places.
 
 ARR statements
