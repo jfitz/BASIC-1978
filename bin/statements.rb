@@ -308,10 +308,12 @@ class AbstractStatement
     @autonext_line = line_stmt_mod
   end
 
-  def optimize(interpreter, line_stmt, program)
+  def pessimize
     @program_errors = []
     @program_warnings = []
+  end
 
+  def optimize(interpreter, line_stmt, program)
     set_destinations(interpreter, line_stmt, program)
     set_for_lines(interpreter, line_stmt, program)
 
