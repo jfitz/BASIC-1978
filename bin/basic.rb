@@ -883,16 +883,20 @@ unless list_filename.nil?
 
   filename, _keywords = parse_args(args)
 
-  if load_file_command_line(filename, interpreter, console_io)
-    interpreter.program_optimize
+  begin
+    if load_file_command_line(filename, interpreter, console_io)
+      interpreter.program_optimize
 
-    texts = interpreter.program_list('', list_tokens)
-  else
-    texts = interpreter.program_errors
+      texts = interpreter.program_list('', list_tokens)
+    else
+      texts = interpreter.program_errors
+    end
+    texts.each { |text| console_io.print_line(text) }
+
+    console_io.newline
+  rescue BASICSyntaxError => e
+    console_io.print_line(e.to_s)
   end
-  texts.each { |text| console_io.print_line(text) }
-
-  console_io.newline
 end
 
 # show parse dump
@@ -901,16 +905,20 @@ unless parse_filename.nil?
 
   filename, _keywords = parse_args(args)
 
-  if load_file_command_line(filename, interpreter, console_io)
-    interpreter.program_optimize
+  begin
+    if load_file_command_line(filename, interpreter, console_io)
+      interpreter.program_optimize
 
-    texts = interpreter.program_parse('')
-  else
-    texts = interpreter.program_errors
+      texts = interpreter.program_parse('')
+    else
+      texts = interpreter.program_errors
+    end
+    texts.each { |text| console_io.print_line(text) }
+
+    console_io.newline
+  rescue BASICSyntaxError => e
+    console_io.print_line(e.to_s)
   end
-  texts.each { |text| console_io.print_line(text) }
-
-  console_io.newline
 end
 
 # show analysis
@@ -919,13 +927,17 @@ unless analyze_filename.nil?
 
   filename, _keywords = parse_args(args)
 
-  if load_file_command_line(filename, interpreter, console_io)
-    interpreter.program_optimize
-    texts = interpreter.program_analyze
-    texts.each { |text| console_io.print_line(text) }
-  end
+  begin
+    if load_file_command_line(filename, interpreter, console_io)
+      interpreter.program_optimize
+      texts = interpreter.program_analyze
+      texts.each { |text| console_io.print_line(text) }
+    end
 
-  console_io.newline
+    console_io.newline
+  rescue BASICSyntaxError => e
+    console_io.print_line(e.to_s)
+  end
 end
 
 # pretty-print the source
@@ -934,15 +946,19 @@ unless pretty_filename.nil?
 
   filename, _keywords = parse_args(args)
 
-  if load_file_command_line(filename, interpreter, console_io)
-    interpreter.program_optimize
+  begin
+    if load_file_command_line(filename, interpreter, console_io)
+      interpreter.program_optimize
 
-    pretty_multiline = $options['pretty_multiline'].value
-    texts = interpreter.program_pretty('', pretty_multiline)
-    texts.each { |text| console_io.print_line(text) }
+      pretty_multiline = $options['pretty_multiline'].value
+      texts = interpreter.program_pretty('', pretty_multiline)
+      texts.each { |text| console_io.print_line(text) }
+    end
+
+    console_io.newline
+  rescue BASICSyntaxError => e
+    console_io.print_line(e.to_s)
   end
-
-  console_io.newline
 end
 
 # cross-reference the source
@@ -951,13 +967,17 @@ unless cref_filename.nil?
 
   filename, _keywords = parse_args(args)
 
-  if load_file_command_line(filename, interpreter, console_io)
-    interpreter.program_optimize
-    texts = interpreter.program_crossref
-    texts.each { |text| console_io.print_line(text) }
-  end
+  begin
+    if load_file_command_line(filename, interpreter, console_io)
+      interpreter.program_optimize
+      texts = interpreter.program_crossref
+      texts.each { |text| console_io.print_line(text) }
+    end
 
-  console_io.newline
+    console_io.newline
+  rescue BASICSyntaxError => e
+    console_io.print_line(e.to_s)
+  end
 end
 
 # run the source
@@ -966,37 +986,41 @@ unless run_filename.nil?
 
   filename, _keywords = parse_args(args)
 
-  if load_file_command_line(filename, interpreter, console_io)
-    interpreter.program_optimize
+  begin
+    if load_file_command_line(filename, interpreter, console_io)
+      interpreter.program_optimize
 
-    if interpreter.program_okay?
-      begin
-        timing = Benchmark.measure do
-          interpreter.run
-          console_io.newline
-        end
+      if interpreter.program_okay?
+        begin
+          timing = Benchmark.measure do
+            interpreter.run
+            console_io.newline
+          end
 
-        show_timing = $options['timing'].value
-        if show_timing
-          print_timing(timing, console_io)
-          console_io.newline
-        end
+          show_timing = $options['timing'].value
+          if show_timing
+            print_timing(timing, console_io)
+            console_io.newline
+          end
 
-        if show_profile
-          texts = interpreter.program_profile('', show_timing)
-          texts.each { |text| console_io.print_line(text) }
-          console_io.newline
+          if show_profile
+            texts = interpreter.program_profile('', show_timing)
+            texts.each { |text| console_io.print_line(text) }
+            console_io.newline
+          end
+        rescue BASICCommandError => e
+          console_io.print_line(e.to_s)
         end
-      rescue BASICCommandError => e
-        console_io.print_line(e.to_s)
+      else
+        errors = interpreter.program_errors
+        errors.each { |error| console_io.print_line(error) }
       end
-    else
-      errors = interpreter.program_errors
-      errors.each { |error| console_io.print_line(error) }
     end
-  end
 
-  # console_io.newline
+    # console_io.newline
+  rescue BASICSyntaxError => e
+    console_io.print_line(e.to_s)
+  end
 end
 
 # no command-line directives, so run BASIC shell

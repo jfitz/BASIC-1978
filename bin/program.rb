@@ -1756,7 +1756,7 @@ class Program
     end
 
     # if none found, error
-    raise BASICPreexecuteError.new(:te_deffun_no_endfun, name.to_s)
+    raise BASICError.new("Use function #{name} no ENDFUNCTION")
   end
 
   def profile(args, show_timing)
