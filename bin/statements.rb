@@ -336,8 +336,7 @@ class AbstractStatement
     # mark as part of this sub
     @part_of_sub = marker
 
-    # do not change this call to transfers()
-    xfers = transfers + transfers_auto
+    xfers = @transfers + @transfers_auto
     
     # for each destination
     xfers.each do |xfer|
@@ -385,8 +384,7 @@ class AbstractStatement
     # mark as part of this on-error
     @part_of_on_error = marker
 
-    # do not change this call to transfers()
-    xfers = transfers + transfers_auto
+    xfers = @transfers + @transfers_auto
     
     # for each destination
     xfers.each do |xfer|
@@ -623,8 +621,7 @@ class AbstractStatement
   end
 
   def transfers_to_origins(program, line_number, stmt)
-    # do not change this call to transfers()
-    xfers = transfers + transfers_auto
+    xfers = @transfers + @transfers_auto
 
     xfers.each do |xfer|
       dest_line_number = xfer.line_number
@@ -2969,17 +2966,12 @@ class AbstractIfStatement < AbstractStatement
       line_number = @autonext_line.line_number
       stmt = @autonext_line.statement
 
+      # do not change this to @transfers_auto
       @transfers << TransferRefLineStmt.new(line_number, stmt, :auto)
     end
-  end
 
-  def transfers
-    transfers = @transfers + @transfers_auto
-
-    transfers += @statement.transfers unless @statement.nil?
-    transfers += @else_stmt.transfers unless @else_stmt.nil?
-
-    transfers
+    @transfers += @statement.transfers unless @statement.nil?
+    @transfers += @else_stmt.transfers unless @else_stmt.nil?
   end
 
   def number_for_stmts
