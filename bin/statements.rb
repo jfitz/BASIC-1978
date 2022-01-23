@@ -315,7 +315,8 @@ class AbstractStatement
 
   def optimize(interpreter, line_stmt, program)
     set_destinations(interpreter, line_stmt, program)
-    set_for_lines(interpreter, line_stmt, program)
+    set_for_lines(line_stmt, program)
+    set_next_lines(line_stmt, program)
 
     line_number = line_stmt.line_number
     stmt = line_stmt.statement
@@ -427,7 +428,9 @@ class AbstractStatement
     end
   end
 
-  def set_for_lines(_, _, _) end
+  def set_for_lines(_, _) end
+
+  def set_next_lines(_, _) end
 
   def set_endfunc_lines(_, _) end
 
@@ -2317,9 +2320,11 @@ class ForStatement < AbstractStatement
     @comprehension_effort += @while.comprehension_effort unless @while.nil?
   end
 
-  def set_for_lines(_interpreter, line_stmt, program)
+  def set_for_lines(line_stmt, program)
     @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(line_stmt)
+  end
 
+  def set_next_lines(line_stmt, program)
     begin
       unless @control.nil?
         @nextstmt_line_stmt =
@@ -2818,10 +2823,14 @@ class AbstractIfStatement < AbstractStatement
     @is_if_no_else = @else_dest_line.nil? && @else_stmt.nil?
   end
 
-  def set_for_lines(interpreter, line_stmt_mod, program)
-    @statement&.set_for_lines(interpreter, line_stmt_mod, program)
+  def set_for_lines(line_stmt_mod, program)
+    @statement&.set_for_lines(line_stmt_mod, program)
+    @else_stmt&.set_for_lines(line_stmt_mod, program)
+  end
 
-    @else_stmt&.set_for_lines(interpreter, line_stmt_mod, program)
+  def set_next_lines(line_stmt_mod, program)
+    @statement&.set_next_lines(line_stmt_mod, program)
+    @else_stmt&.set_next_lines(line_stmt_mod, program)
   end
 
   def renumber(renumber_map)
