@@ -1713,7 +1713,7 @@ class Program
         stmt_controls.each do |stmt_control|
           for_level -= 1
 
-          raise BASICPreexecuteError.new(:te_for_no_next, control.to_s) if
+          raise(BASICSyntaxError, "Cannot find NEXT for #{control}") if
             for_level.negative?
 
           if stmt_control == control ||
@@ -1727,7 +1727,7 @@ class Program
     end
 
     # if none found, error
-    raise BASICPreexecuteError.new(:te_for_no_next, control.to_s)
+    raise(BASICSyntaxError, "Cannot find NEXT for #{control}")
   end
 
   def find_closing_endfunc_line_stmt(name, current_line_stmt)
@@ -1756,7 +1756,7 @@ class Program
     end
 
     # if none found, error
-    raise BASICError.new("Use function #{name} no ENDFUNCTION")
+    raise BASICSyntaxError.new("No ENDFUNCTION for function #{name}")
   end
 
   def profile(args, show_timing)

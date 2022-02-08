@@ -1909,7 +1909,7 @@ class DefineFunctionStatement < AbstractStatement
     begin
       @endfunc_line_stmt =
         program.find_closing_endfunc_line_stmt(name, line_stmt)
-    rescue BASICPreexecuteError => e
+    rescue BASICSyntaxError => e
       @program_errors << e.message
     end
   end
@@ -2327,7 +2327,7 @@ class ForStatement < AbstractStatement
         @nextstmt_line_stmt =
           program.find_closing_next_line_stmt(@control, line_stmt)
       end
-    rescue BASICPreexecuteError => e
+    rescue BASICSyntaxError => e
       @program_errors << e.message
     end
   end
