@@ -30,404 +30,433 @@ Halstead complexity:
 (0 2)    PRINT
   Origs: 20:auto
   Dests: 90:auto
-(0 2) 90 PRINT
+F(Q,R,C,V,W,U) (0 2) 90 PRINT
   Origs: 30:auto, 1170:ifthen
   Dests: 110:auto
 (0 1) 100 REM *** INITIALIZE
   Origs: 
   Dests: 
-(0 2) 110 DIM T(7, 3)
+F(Q,R,C,V,W,U) (0 2) 110 DIM T(7, 3)
   Origs: 90:auto
   Dests: 120:auto
-(0 3) 120 E = 0
+F(Q,R,C,V,W,U) (0 3) 120 E = 0
   Origs: 110:auto
   Dests: 130:auto
-(1 3) 130 FOR D = 1 TO 7
+F(D,Q,R,C,V,W,U) (1 3) 130 FOR D = 1 TO 7
   Origs: 120:auto
   Dests: 140:fornext, 170:fornext
-(1 3) 140 FOR N = 1 TO 3
+F(D,N,Q,R,C,V,W,U) (1 3) 140 FOR N = 1 TO 3
   Origs: 130:fornext
   Dests: 150:fornext, 160:fornext
-(0 3) 150 T(D, N) = 0
+F(D,N,Q,R,C,V,W,U) (0 3) 150 T(D, N) = 0
   Origs: 140:fornext
   Dests: 160:auto
-(0 1) 160 NEXT N
+F(D,N,Q,R,C,V,W,U) (0 1) 160 NEXT N
   Origs: 140:fornext, 150:auto
   Dests: 170:auto
-(0 1) 170 NEXT D
+F(D,Q,R,C,V,W,U) (0 1) 170 NEXT D
   Origs: 130:fornext, 160:auto
   Dests: 180:auto
-(0 2) 180 PRINT "TOWERS OF HANOI PUZZLE."
-(0 2)     PRINT
+F(Q,R,C,V,W,U) (0 2) 180 PRINT "TOWERS OF HANOI PUZZLE."
+F(Q,R,C,V,W,U) (0 2)     PRINT
   Origs: 170:auto
   Dests: 200:auto
-(0 2) 200 PRINT "YOU MUST TRANSFER THE DISKS FROM THE LEFT TO THE RIGHT"
+F(Q,R,C,V,W,U) (0 2) 200 PRINT "YOU MUST TRANSFER THE DISKS FROM THE LEFT TO THE RIGHT"
   Origs: 180:auto
   Dests: 205:auto
-(0 2) 205 PRINT "TOWER, ONE AT A TIME, NEVER PUTTING A LARGER DISK ON A"
+F(Q,R,C,V,W,U) (0 2) 205 PRINT "TOWER, ONE AT A TIME, NEVER PUTTING A LARGER DISK ON A"
   Origs: 200:auto
   Dests: 210:auto
-(0 2) 210 PRINT "SMALLER DISK."
-(0 2)     PRINT
+F(Q,R,C,V,W,U) (0 2) 210 PRINT "SMALLER DISK."
+F(Q,R,C,V,W,U) (0 2)     PRINT
   Origs: 205:auto
   Dests: 215:auto
-(1 2) 215 INPUT "HOW MANY DISKS DO YOU WANT TO MOVE (7 IS MAX)"; S
+F(Q,R,C,V,W,U) (1 2) 215 INPUT "HOW MANY DISKS DO YOU WANT TO MOVE (7 IS MAX)"; S
   Origs: 210:auto, 290:goto
   Dests: 220:auto
-(0 2) 220 PRINT
+F(Q,R,C,V,W,U) (0 2) 220 PRINT
   Origs: 215:auto
   Dests: 230:auto
-(0 3) 230 M = 0
+F(Q,R,C,V,W,U) (0 3) 230 M = 0
   Origs: 220:auto
   Dests: 240:auto
-(1 3) 240 FOR Q = 1 TO 7
+F(Q,R,C,V,W,U) (1 3) 240 FOR Q = 1 TO 7
   Origs: 230:auto
   Dests: 250:fornext, 260:fornext
-(1 4) 250 IF Q = S THEN 350
+F(Q,R,C,V,W,U) (1 4) 250 IF Q = S THEN 350
   Origs: 240:fornext
   Dests: 260:auto, 350:ifthen
-(0 1) 260 NEXT Q
+F(Q,R,C,V,W,U) (0 1) 260 NEXT Q
   Origs: 240:fornext, 250:auto
   Dests: 270:auto
-(0 4) 270 E = E + 1
+F(R,C,V,W,U) (0 4) 270 E = E + 1
   Origs: 260:auto
   Dests: 280:auto
-(1 4) 280 IF E > 2 THEN 310
+F(R,C,V,W,U) (1 4) 280 IF E > 2 THEN 310
   Origs: 270:auto
   Dests: 290:auto, 310:ifthen
-(0 2) 290 PRINT "SORRY, BUT I CAN'T DO THAT JOB FOR YOU."
-(0 3)     GOTO 215
+F(R,C,V,W,U) (0 2) 290 PRINT "SORRY, BUT I CAN'T DO THAT JOB FOR YOU."
+F(R,C,V,W,U) (0 3)     GOTO 215
   Origs: 280:auto
   Dests: 215:goto
-(0 2) 310 PRINT "ALL RIGHT, WISE GUY, IF YOU CAN'T PLAY THE GAME RIGHT, I'LL"
+F(R,C,V,W,U) (0 2) 310 PRINT "ALL RIGHT, WISE GUY, IF YOU CAN'T PLAY THE GAME RIGHT, I'LL"
   Origs: 280:ifthen
   Dests: 320:auto
-(0 2) 320 PRINT "JUST TAKE MY PUZZLE AND GO HOME.  SO LONG."
-(0 1)     STOP
+F(R,C,V,W,U) (0 2) 320 PRINT "JUST TAKE MY PUZZLE AND GO HOME.  SO LONG."
+F(R,C,V,W,U) (0 1)     STOP
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
   Origs: 310:auto
   Dests: :stop
 (0 1) 340 REM *** STORE DISKS FROM SMALLEST TO LARGEST
   Origs: 
   Dests: 
-(0 2) 350 PRINT "IN THIS PROGRAM, WE SHALL REFER TO DISKS BY NUMERICAL CODE."
+F(Q,R,C,V,W,U) (0 2) 350 PRINT "IN THIS PROGRAM, WE SHALL REFER TO DISKS BY NUMERICAL CODE."
   Origs: 250:ifthen
   Dests: 355:auto
-(0 2) 355 PRINT "3 WILL REPRESENT THE SMALLEST DISK, 5 THE NEXT SIZE,"
+F(Q,R,C,V,W,U) (0 2) 355 PRINT "3 WILL REPRESENT THE SMALLEST DISK, 5 THE NEXT SIZE,"
   Origs: 350:auto
   Dests: 360:auto
-(0 2) 360 PRINT "7 THE NEXT, AND SO ON, UP TO 15.  IF YOU DO THE PUZZLE WITH"
+F(Q,R,C,V,W,U) (0 2) 360 PRINT "7 THE NEXT, AND SO ON, UP TO 15.  IF YOU DO THE PUZZLE WITH"
   Origs: 355:auto
   Dests: 365:auto
-(0 2) 365 PRINT "2 DISKS, THEIR CODE NAMES WOULD BE 13 AND 15.  WITH 3 DISKS"
+F(Q,R,C,V,W,U) (0 2) 365 PRINT "2 DISKS, THEIR CODE NAMES WOULD BE 13 AND 15.  WITH 3 DISKS"
   Origs: 360:auto
   Dests: 370:auto
-(0 2) 370 PRINT "THE CODE NAMES WOULD BE 11, 13 AND 15, ETC.  THE NEEDLES"
+F(Q,R,C,V,W,U) (0 2) 370 PRINT "THE CODE NAMES WOULD BE 11, 13 AND 15, ETC.  THE NEEDLES"
   Origs: 365:auto
   Dests: 375:auto
-(0 2) 375 PRINT "ARE NUMBERED FROM LEFT TO RIGHT, 1 TO 3.  WE WILL"
+F(Q,R,C,V,W,U) (0 2) 375 PRINT "ARE NUMBERED FROM LEFT TO RIGHT, 1 TO 3.  WE WILL"
   Origs: 370:auto
   Dests: 380:auto
-(0 2) 380 PRINT "START WITH THE DISKS ON NEEDLE 1, AND ATTEMPT TO MOVE THEM"
+F(Q,R,C,V,W,U) (0 2) 380 PRINT "START WITH THE DISKS ON NEEDLE 1, AND ATTEMPT TO MOVE THEM"
   Origs: 375:auto
   Dests: 385:auto
-(0 2) 385 PRINT "TO NEEDLE 3."
+F(Q,R,C,V,W,U) (0 2) 385 PRINT "TO NEEDLE 3."
   Origs: 380:auto
   Dests: 390:auto
-(0 2) 390 PRINT
-(0 2)     PRINT "GOOD LUCK!"
-(0 2)     PRINT
+F(Q,R,C,V,W,U) (0 2) 390 PRINT
+F(Q,R,C,V,W,U) (0 2)     PRINT "GOOD LUCK!"
+F(Q,R,C,V,W,U) (0 2)     PRINT
   Origs: 385:auto
   Dests: 400:auto
-(0 3) 400 Y = 7
-(0 3)     D = 15
+F(Q,R,C,V,W,U) (0 3) 400 Y = 7
+F(Q,R,C,V,W,U) (0 3)     D = 15
   Origs: 390:auto
   Dests: 420:auto
-(1 5) 420 FOR X = S TO 1 STEP -1
+F(Q,X,R,C,V,W,U) (1 5) 420 FOR X = S TO 1 STEP -1
   Origs: 400:auto
   Dests: 430:fornext, 460:fornext
-(0 3) 430 T(Y, 1) = D
-(0 4)     D = D - 2
-(0 4)     Y = Y - 1
+F(Q,X,R,C,V,W,U) (0 3) 430 T(Y, 1) = D
+F(Q,X,R,C,V,W,U) (0 4)     D = D - 2
+F(Q,X,R,C,V,W,U) (0 4)     Y = Y - 1
   Origs: 420:fornext
   Dests: 460:auto
-(0 1) 460 NEXT X
+F(Q,X,R,C,V,W,U) (0 1) 460 NEXT X
   Origs: 420:fornext, 430:auto
   Dests: 470:auto
-(0 2) 470 GOSUB 1230
+F(Q,R,C,V,W,U) (0 2) 470 GOSUB 1230
   Origs: 460:auto
   Dests: 480:auto, 1240:gosub
-(0 2) 480 PRINT "WHICH DISK WOULD YOU LIKE TO MOVE";
-(0 3)     E = 0
+F(Q,R,C,V,W,U) (0 2) 480 PRINT "WHICH DISK WOULD YOU LIKE TO MOVE";
+F(Q,R,C,V,W,U) (0 3)     E = 0
   Origs: 470:auto, 690:goto, 860:goto, 1090:ifthen
   Dests: 500:auto
-(1 2) 500 INPUT D
+F(Q,R,C,V,W,U) (1 2) 500 INPUT D
   Origs: 480:auto, 550:goto
   Dests: 510:auto
-(1 23) 510 IF (D - 3) * (D - 5) * (D - 7) * (D - 9) * (D - 11) * (D - 13) * (D - 15) = 0 THEN 580
+F(Q,R,C,V,W,U) (1 23) 510 IF (D - 3) * (D - 5) * (D - 7) * (D - 9) * (D - 11) * (D - 13) * (D - 15) = 0 THEN 580
   Origs: 500:auto
   Dests: 520:auto, 590:ifthen
-(0 2) 520 PRINT "ILLEGAL ENTRY... YOU MAY ONLY TYPE 3,5,7,9,11,13, OR 15."
+F(Q,R,C,V,W,U) (0 2) 520 PRINT "ILLEGAL ENTRY... YOU MAY ONLY TYPE 3,5,7,9,11,13, OR 15."
   Origs: 510:auto
   Dests: 530:auto
-(0 4) 530 E = E + 1
-(1 4)     IF E > 1 THEN 560
+F(Q,R,C,V,W,U) (0 4) 530 E = E + 1
+F(Q,R,C,V,W,U) (1 4)     IF E > 1 THEN 560
   Origs: 520:auto
   Dests: 550:auto, 560:ifthen
-(0 3) 550 GOTO 500
+F(Q,R,C,V,W,U) (0 3) 550 GOTO 500
   Origs: 530:auto
   Dests: 500:goto
-(0 2) 560 PRINT "STOP WASTING MY TIME.  GO BOTHER SOMEONE ELSE."
-(0 1)     STOP
+F(Q,R,C,V,W,U) (0 2) 560 PRINT "STOP WASTING MY TIME.  GO BOTHER SOMEONE ELSE."
+F(Q,R,C,V,W,U) (0 1)     STOP
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
   Origs: 530:ifthen
   Dests: :stop
 (0 1) 580 REM *** CHECK IF REQUESTED DISK IS BELOW ANOTHER
   Origs: 
   Dests: 
-(1 3) 590 FOR R = 1 TO 7
+F(Q,R,C,V,W,U) (1 3) 590 FOR R = 1 TO 7
   Origs: 510:ifthen
   Dests: 600:fornext, 620:fornext
-(1 3) 600 FOR C = 1 TO 3
+F(Q,R,C,V,W,U) (1 3) 600 FOR C = 1 TO 3
   Origs: 590:fornext
   Dests: 610:fornext, 620:fornext
-(1 4) 610 IF T(R, C) = D THEN 640
+F(Q,R,C,V,W,U) (1 4) 610 IF T(R, C) = D THEN 640
   Origs: 600:fornext
   Dests: 620:auto, 640:ifthen
-(0 1) 620 NEXT C
-(0 1)     NEXT R
+F(Q,R,C,V,W,U) (0 1) 620 NEXT C
+F(Q,R,C,V,W,U) (0 1)     NEXT R
   Origs: 590:fornext, 600:fornext, 610:auto
   Dests: 640:auto
-(1 5) 640 FOR Q = R TO 1 STEP -1
+F(Q,R,C,Q,V,W,U) (1 5) 640 FOR Q = R TO 1 STEP -1
   Origs: 610:ifthen, 620:auto
   Dests: 645:fornext, 660:fornext
-(1 4) 645 IF T(Q, C) = 0 THEN 660
+F(Q,R,C,Q,V,W,U) (1 4) 645 IF T(Q, C) = 0 THEN 660
   Origs: 640:fornext
   Dests: 650:auto, 660:ifthen
-(1 4) 650 IF T(Q, C) < D THEN 680
+F(Q,R,C,V,W,U) (1 4) 650 IF T(Q, C) < D THEN 680
   Origs: 645:auto
   Dests: 660:auto, 680:ifthen
-(0 1) 660 NEXT Q
+F(Q,R,C,V,W,U) (0 1) 660 NEXT Q
   Origs: 640:fornext, 645:ifthen, 650:auto
   Dests: 670:auto
-(0 2) 670 GOTO 700
+F(Q,R,C,V,W,U) (0 2) 670 GOTO 700
   Origs: 660:auto
   Dests: 700:goto
-(0 2) 680 PRINT "THAT DISK IS BELOW ANOTHER ONE.  MAKE ANOTHER CHOICE."
+F(Q,R,C,V,W,U) (0 2) 680 PRINT "THAT DISK IS BELOW ANOTHER ONE.  MAKE ANOTHER CHOICE."
   Origs: 650:ifthen
   Dests: 690:auto
-(0 3) 690 GOTO 480
+F(Q,R,C,V,W,U) (0 3) 690 GOTO 480
   Origs: 680:auto
   Dests: 480:goto
-(0 3) 700 E = 0
+F(Q,R,C,V,W,U) (0 3) 700 E = 0
   Origs: 670:goto
   Dests: 705:auto
-(1 2) 705 INPUT "PLACE DISK ON WHICH NEEDLE"; N
+F(Q,R,C,V,W,U) (1 2) 705 INPUT "PLACE DISK ON WHICH NEEDLE"; N
   Origs: 700:auto, 760:goto
   Dests: 730:auto
-(1 11) 730 IF (N - 1) * (N - 2) * (N - 3) = 0 THEN 800
+F(Q,R,C,V,W,U) (1 11) 730 IF (N - 1) * (N - 2) * (N - 3) = 0 THEN 800
   Origs: 705:auto
   Dests: 735:auto, 800:ifthen
-(0 4) 735 E = E + 1
+F(Q,R,C,V,W,U) (0 4) 735 E = E + 1
   Origs: 730:auto
   Dests: 740:auto
-(1 4) 740 IF E > 1 THEN 780
+F(Q,R,C,V,W,U) (1 4) 740 IF E > 1 THEN 780
   Origs: 735:auto
   Dests: 750:auto, 780:ifthen
-(0 2) 750 PRINT "I'LL ASSUME YOU HIT THE WRONG KEY THIS TIME.  BUT WATCH IT,"
+F(Q,R,C,V,W,U) (0 2) 750 PRINT "I'LL ASSUME YOU HIT THE WRONG KEY THIS TIME.  BUT WATCH IT,"
   Origs: 740:auto
   Dests: 760:auto
-(0 2) 760 PRINT "I ONLY ALLOW ONE MISTAKE."
-(0 3)     GOTO 705
+F(Q,R,C,V,W,U) (0 2) 760 PRINT "I ONLY ALLOW ONE MISTAKE."
+F(Q,R,C,V,W,U) (0 3)     GOTO 705
   Origs: 750:auto
   Dests: 705:goto
-(0 2) 780 PRINT "I TRIED TO WARN YOU, BUT YOU WOULDN'T LISTEN."
+F(Q,R,C,V,W,U) (0 2) 780 PRINT "I TRIED TO WARN YOU, BUT YOU WOULDN'T LISTEN."
   Origs: 740:ifthen
   Dests: 790:auto
-(0 2) 790 PRINT "BYE BYE, BIG SHOT."
-(0 1)     STOP
+F(Q,R,C,V,W,U) (0 2) 790 PRINT "BYE BYE, BIG SHOT."
+F(Q,R,C,V,W,U) (0 1)     STOP
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
   Origs: 780:auto
   Dests: :stop
-(1 3) 800 FOR R = 1 TO 7
+F(Q,R,C,R,V,W,U) (1 3) 800 FOR R = 1 TO 7
   Origs: 730:ifthen
   Dests: 810:fornext, 820:fornext
-(1 4) 810 IF T(R, N) <> 0 THEN 840
+F(Q,R,C,R,V,W,U) (1 4) 810 IF T(R, N) <> 0 THEN 840
   Origs: 800:fornext
   Dests: 820:auto, 840:ifthen
-(0 1) 820 NEXT R
+F(Q,R,C,V,W,U) (0 1) 820 NEXT R
   Origs: 800:fornext, 810:auto
   Dests: 830:auto
-(0 2) 830 GOTO 880
+F(Q,R,C,V,W,U) (0 2) 830 GOTO 880
   Origs: 820:auto
   Dests: 880:goto
 (0 1) 835 REM *** CHECK IF DISK TO BE PLACED ON A LARGER ONE
   Origs: 
   Dests: 
-(1 4) 840 IF D < T(R, N) THEN 880
+F(Q,R,C,V,W,U) (1 4) 840 IF D < T(R, N) THEN 880
   Origs: 810:ifthen
   Dests: 850:auto, 880:ifthen
-(0 2) 850 PRINT "YOU CAN'T PLACE A LARGER DISK ON TOP OF A SMALLER ONE,"
+F(Q,R,C,V,W,U) (0 2) 850 PRINT "YOU CAN'T PLACE A LARGER DISK ON TOP OF A SMALLER ONE,"
   Origs: 840:auto
   Dests: 860:auto
-(0 2) 860 PRINT "IT MIGHT CRUSH IT!"
-(0 2)     PRINT "NOW THEN, ";
-(0 3)     GOTO 480
+F(Q,R,C,V,W,U) (0 2) 860 PRINT "IT MIGHT CRUSH IT!"
+F(Q,R,C,V,W,U) (0 2)     PRINT "NOW THEN, ";
+F(Q,R,C,V,W,U) (0 3)     GOTO 480
   Origs: 850:auto
   Dests: 480:goto
 (0 1) 875 REM *** MOVE RELOCATED DISK
   Origs: 
   Dests: 
-(1 3) 880 FOR V = 1 TO 7
-(1 3)     FOR W = 1 TO 3
+F(Q,R,C,V,W,U) (1 3) 880 FOR V = 1 TO 7
+F(Q,R,C,V,W,U) (1 3)     FOR W = 1 TO 3
   Origs: 830:goto, 840:ifthen
   Dests: 900:fornext, 910:fornext
-(1 4) 900 IF T(V, W) = D THEN 930
+F(Q,R,C,V,W,U) (1 4) 900 IF T(V, W) = D THEN 930
   Origs: 880:fornext
   Dests: 910:auto, 930:ifthen
-(0 1) 910 NEXT W
-(0 1)     NEXT V
+F(Q,R,C,V,W,U) (0 1) 910 NEXT W
+F(Q,R,C,V,W,U) (0 1)     NEXT V
   Origs: 880:fornext, 900:auto
   Dests: 930:auto
 (0 1) 925 REM *** LOCATE EMPTY SPACE ON NEEDLE N
   Origs: 
   Dests: 
-(1 3) 930 FOR U = 1 TO 7
+F(Q,R,C,V,W,U) (1 3) 930 FOR U = 1 TO 7
   Origs: 900:ifthen, 910:auto
   Dests: 940:fornext, 950:fornext
-(1 4) 940 IF T(U, N) <> 0 THEN 970
+F(Q,R,C,V,W,U) (1 4) 940 IF T(U, N) <> 0 THEN 970
   Origs: 930:fornext
   Dests: 950:auto, 970:ifthen
-(0 1) 950 NEXT U
+F(Q,R,C,V,W,U) (0 1) 950 NEXT U
   Origs: 930:fornext, 940:auto
   Dests: 960:auto
-(0 3) 960 U = 7
-(0 2)     GOTO 980
+F(Q,R,C,V,W) (0 3) 960 U = 7
+F(Q,R,C,V,W) (0 2)     GOTO 980
   Origs: 950:auto
   Dests: 980:goto
 (0 1) 965 REM *** MOVE DISK AND SET OLD LOCATION TO 0
   Origs: 
   Dests: 
-(0 4) 970 U = U - 1
+F(Q,R,C,V,W,U) (0 4) 970 U = U - 1
   Origs: 940:ifthen
   Dests: 980:auto
-(0 3) 980 T(U, N) = T(V, W)
-(0 3)     T(V, W) = 0
+F(Q,R,C,V,W,U) (0 3) 980 T(U, N) = T(V, W)
+F(Q,R,C,V,W,U) (0 3)     T(V, W) = 0
   Origs: 960:goto, 970:auto
   Dests: 1000:auto
 (0 1) 995 REM *** PRINT OUT CURRENT STATUS
   Origs: 
   Dests: 
-(0 2) 1000 GOSUB 1230
+F(Q,R,C,V,W,U) (0 2) 1000 GOSUB 1230
   Origs: 980:auto
   Dests: 1020:auto, 1240:gosub
 (0 1) 1018 REM *** CHECK IF DONE
   Origs: 
   Dests: 
-(0 4) 1020 M = M + 1
+F(Q,R,C,V,W,U) (0 4) 1020 M = M + 1
   Origs: 1000:auto
   Dests: 1030:auto
-(1 3) 1030 FOR R = 1 TO 7
-(1 3)      FOR C = 1 TO 2
+F(Q,R,C,V,W,U,R) (1 3) 1030 FOR R = 1 TO 7
+F(Q,R,C,V,W,U,R,C) (1 3)      FOR C = 1 TO 2
   Origs: 1020:auto
   Dests: 1050:fornext, 1060:fornext
-(1 4) 1050 IF T(R, C) <> 0 THEN 1090
+F(Q,R,C,V,W,U,C) (1 4) 1050 IF T(R, C) <> 0 THEN 1090
   Origs: 1030:fornext
   Dests: 1060:auto, 1090:ifthen
-(0 1) 1060 NEXT C
-(0 1)      NEXT R
+F(Q,R,C,V,W,U) (0 1) 1060 NEXT C
+F(Q,R,C,V,W,U) (0 1)      NEXT R
   Origs: 1030:fornext, 1050:auto
   Dests: 1080:auto
-(0 2) 1080 GOTO 1120
+F(Q,R,C,V,W,U) (0 2) 1080 GOTO 1120
   Origs: 1060:auto
   Dests: 1120:goto
-(1 5) 1090 IF M <= 128 THEN 480
+F(Q,R,C,V,W,U) (1 5) 1090 IF M <= 128 THEN 480
   Origs: 1050:ifthen
   Dests: 480:ifthen, 1100:auto
-(0 2) 1100 PRINT "SORRY, BUT I HAVE ORDERS TO STOP IF YOU MAKE MORE THAN"
+F(Q,R,C,V,W,U) (0 2) 1100 PRINT "SORRY, BUT I HAVE ORDERS TO STOP IF YOU MAKE MORE THAN"
   Origs: 1090:auto
   Dests: 1110:auto
-(0 2) 1110 PRINT "128 MOVES."
-(0 1)      STOP
+F(Q,R,C,V,W,U) (0 2) 1110 PRINT "128 MOVES."
+F(Q,R,C,V,W,U) (0 1)      STOP
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
   Origs: 1100:auto
   Dests: :stop
-(1 7) 1120 IF M <> 2 ^ S - 1 THEN 1140
+F(Q,R,C,V,W,U) (1 7) 1120 IF M <> 2 ^ S - 1 THEN 1140
   Origs: 1080:goto
   Dests: 1130:auto, 1140:ifthen
-(0 2) 1130 PRINT
-(0 2)      PRINT "CONGRATULATIONS!!"
-(0 2)      PRINT
+F(Q,R,C,V,W,U) (0 2) 1130 PRINT
+F(Q,R,C,V,W,U) (0 2)      PRINT "CONGRATULATIONS!!"
+F(Q,R,C,V,W,U) (0 2)      PRINT
   Origs: 1120:auto
   Dests: 1140:auto
-(0 4) 1140 PRINT "YOU HAVE PERFORMED THE TASK IN"; M; "MOVES."
+F(Q,R,C,V,W,U) (0 4) 1140 PRINT "YOU HAVE PERFORMED THE TASK IN"; M; "MOVES."
   Origs: 1120:ifthen, 1130:auto
   Dests: 1150:auto
-(0 2) 1150 PRINT
-(0 2)      PRINT "TRY AGAIN (YES OR NO)";
-(1 2)      INPUT A$
+F(Q,R,C,V,W,U) (0 2) 1150 PRINT
+F(Q,R,C,V,W,U) (0 2)      PRINT "TRY AGAIN (YES OR NO)";
+F(Q,R,C,V,W,U) (1 2)      INPUT A$
   Origs: 1140:auto
   Dests: 1160:auto
-(1 4) 1160 IF A$ = "NO" THEN 1390
+F(Q,R,C,V,W,U) (1 4) 1160 IF A$ = "NO" THEN 1390
   Origs: 1150:auto, 1180:goto
   Dests: 1170:auto, 1390:ifthen
-(1 5) 1170 IF A$ = "YES" THEN 90
+F(Q,R,C,V,W,U) (1 5) 1170 IF A$ = "YES" THEN 90
   Origs: 1160:auto
   Dests: 90:ifthen, 1180:auto
-(0 2) 1180 PRINT
-(0 2)      PRINT "'YES' OR 'NO' PLEASE";
-(1 2)      INPUT A$
-(0 3)      GOTO 1160
+F(Q,R,C,V,W,U) (0 2) 1180 PRINT
+F(Q,R,C,V,W,U) (0 2)      PRINT "'YES' OR 'NO' PLEASE";
+F(Q,R,C,V,W,U) (1 2)      INPUT A$
+F(Q,R,C,V,W,U) (0 3)      GOTO 1160
   Origs: 1170:auto
   Dests: 1160:goto
 (0 1) 1230 REM *** PRINT SUBROUTINE
   Origs: 
   Dests: 
-G(1240) (1 3) 1240 FOR K = 1 TO 7
+G(1240) F(K) (1 3) 1240 FOR K = 1 TO 7
   Origs: 470:gosub, 1000:gosub
   Dests: 1250:fornext, 1370:fornext
-G(1240) (0 3) 1250 Z = 10
+G(1240) F(K) (0 3) 1250 Z = 10
   Origs: 1240:fornext
   Dests: 1260:auto
-G(1240) (1 3) 1260 FOR J = 1 TO 3
+G(1240) F(K,J) (1 3) 1260 FOR J = 1 TO 3
   Origs: 1250:auto
   Dests: 1270:fornext, 1350:fornext
-G(1240) (1 4) 1270 IF T(K, J) = 0 THEN 1330
+G(1240) F(K,J) (1 4) 1270 IF T(K, J) = 0 THEN 1330
   Origs: 1260:fornext
   Dests: 1280:auto, 1330:ifthen
-G(1240) (0 3) 1280 PRINT TAB(Z - INT(T(K, J) / 2));
+G(1240) F(K,J) (0 3) 1280 PRINT TAB(Z - INT(T(K, J) / 2));
   Origs: 1270:auto
   Dests: 1290:auto
-G(1240) (1 3) 1290 FOR V = 1 TO T(K, J)
+G(1240) F(K,J,V) (1 3) 1290 FOR V = 1 TO T(K, J)
   Origs: 1280:auto
   Dests: 1300:fornext, 1310:fornext
-G(1240) (0 2) 1300 PRINT "*";
+G(1240) F(K,J,V) (0 2) 1300 PRINT "*";
   Origs: 1290:fornext
   Dests: 1310:auto
-G(1240) (0 1) 1310 NEXT V
+G(1240) F(K,J,V) (0 1) 1310 NEXT V
   Origs: 1290:fornext, 1300:auto
   Dests: 1320:auto
-G(1240) (0 2) 1320 GOTO 1340
+G(1240) F(K,J) (0 2) 1320 GOTO 1340
   Origs: 1310:auto
   Dests: 1340:goto
-G(1240) (0 4) 1330 PRINT TAB(Z); "*";
+G(1240) F(K,J) (0 4) 1330 PRINT TAB(Z); "*";
   Origs: 1270:ifthen
   Dests: 1340:auto
-G(1240) (0 4) 1340 Z = Z + 21
+G(1240) F(K,J) (0 4) 1340 Z = Z + 21
   Origs: 1320:goto, 1330:auto
   Dests: 1350:auto
-G(1240) (0 1) 1350 NEXT J
+G(1240) F(K,J) (0 1) 1350 NEXT J
   Origs: 1260:fornext, 1340:auto
   Dests: 1360:auto
-G(1240) (0 2) 1360 PRINT
+G(1240) F(K) (0 2) 1360 PRINT
   Origs: 1350:auto
   Dests: 1370:auto
-G(1240) (0 1) 1370 NEXT K
+G(1240) F(K) (0 1) 1370 NEXT K
   Origs: 1240:fornext, 1360:auto
   Dests: 1380:auto
 G(1240) (0 1) 1380 RETURN
   Origs: 1370:auto
   Dests: 
-(0 2) 1390 PRINT
-(0 2)      PRINT "THANKS FOR THE GAME!"
-(0 2)      PRINT
-(0 1)      END
+F(Q,R,C,V,W,U) (0 2) 1390 PRINT
+F(Q,R,C,V,W,U) (0 2)      PRINT "THANKS FOR THE GAME!"
+F(Q,R,C,V,W,U) (0 2)      PRINT
+F(Q,R,C,V,W,U) (0 1)      END
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
   Origs: 1160:ifthen
   Dests: :stop
 

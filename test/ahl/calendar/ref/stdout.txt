@@ -221,84 +221,84 @@ STOP in line 640
    (1) PRINT
 100 (0) REM     VALUES FOR 1979 - SEE NOTES
 110 (1) DIM M(12)
-120 (1) FOR I = 1 TO 6
-    (6) PRINT CHR$(10);
-    (6) NEXT I
+120 F(I) (1) FOR I = 1 TO 6
+    F(I) (6) PRINT CHR$(10);
+    F(I) (6) NEXT I
 130 (1) D = 1
     (0) REM 1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
 140 (1) S = 0
 150 (0) REM     READ DAYS OF EACH MONTH
-160 (1) FOR N = 0 TO 12
-    (13) READ M(N)
-    (13) NEXT N
+160 F(N) (1) FOR N = 0 TO 12
+    F(N) (13) READ M(N)
+    F(N) (13) NEXT N
 170 (0) REM
-180 (1) FOR N = 1 TO 12
-190 (12) PRINT
-    (12) PRINT
-    (12) S = S + M(N - 1)
-200 (12) PRINT "**"; S; TAB(7);
-210 (12) FOR I = 1 TO 18
-    (216) PRINT "*";
-    (216) NEXT I
-220 (12) ON N GOTO 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340
-230 (1) PRINT " JANUARY ";
-    (1) GOTO 350
-240 (1) PRINT " FEBRUARY";
-    (1) GOTO 350
-250 (1) PRINT "  MARCH  ";
-    (1) GOTO 350
-260 (1) PRINT "  APRIL  ";
-    (1) GOTO 350
-270 (1) PRINT "   MAY   ";
-    (1) GOTO 350
-280 (1) PRINT "   JUNE  ";
-    (1) GOTO 350
-290 (1) PRINT "   JULY  ";
-    (1) GOTO 350
-300 (1) PRINT "  AUGUST ";
-    (1) GOTO 350
-310 (1) PRINT "SEPTEMBER";
-    (1) GOTO 350
-320 (1) PRINT " OCTOBER ";
-    (1) GOTO 350
-330 (1) PRINT " NOVEMBER";
-    (1) GOTO 350
-340 (1) PRINT " DECEMBER";
-350 (12) FOR I = 1 TO 18
-    (216) PRINT "*";
-    (216) NEXT I
-360 (12) PRINT 365 - S; TAB(57); "**";
+180 F(N) (1) FOR N = 1 TO 12
+190 F(N) (12) PRINT
+    F(N) (12) PRINT
+    F(N) (12) S = S + M(N - 1)
+200 F(N) (12) PRINT "**"; S; TAB(7);
+210 F(N,I) (12) FOR I = 1 TO 18
+    F(N,I) (216) PRINT "*";
+    F(N,I) (216) NEXT I
+220 F(N) (12) ON N GOTO 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340
+230 F(N) (1) PRINT " JANUARY ";
+    F(N) (1) GOTO 350
+240 F(N) (1) PRINT " FEBRUARY";
+    F(N) (1) GOTO 350
+250 F(N) (1) PRINT "  MARCH  ";
+    F(N) (1) GOTO 350
+260 F(N) (1) PRINT "  APRIL  ";
+    F(N) (1) GOTO 350
+270 F(N) (1) PRINT "   MAY   ";
+    F(N) (1) GOTO 350
+280 F(N) (1) PRINT "   JUNE  ";
+    F(N) (1) GOTO 350
+290 F(N) (1) PRINT "   JULY  ";
+    F(N) (1) GOTO 350
+300 F(N) (1) PRINT "  AUGUST ";
+    F(N) (1) GOTO 350
+310 F(N) (1) PRINT "SEPTEMBER";
+    F(N) (1) GOTO 350
+320 F(N) (1) PRINT " OCTOBER ";
+    F(N) (1) GOTO 350
+330 F(N) (1) PRINT " NOVEMBER";
+    F(N) (1) GOTO 350
+340 F(N) (1) PRINT " DECEMBER";
+350 F(N,I) (12) FOR I = 1 TO 18
+    F(N,I) (216) PRINT "*";
+    F(N,I) (216) NEXT I
+360 F(N) (12) PRINT 365 - S; TAB(57); "**";
 370 (0) REM   366-S;     ON LEAP YEARS
-380 (12) PRINT CHR$(10)
-    (12) PRINT "     S       M       T       W";
-390 (12) PRINT "       T       F       S"
-400 (12) PRINT
-410 (12) FOR I = 1 TO 59
-    (708) PRINT "*";
-    (708) NEXT I
+380 F(N) (12) PRINT CHR$(10)
+    F(N) (12) PRINT "     S       M       T       W";
+390 F(N) (12) PRINT "       T       F       S"
+400 F(N) (12) PRINT
+410 F(N,I) (12) FOR I = 1 TO 59
+    F(N,I) (708) PRINT "*";
+    F(N,I) (708) NEXT I
 420 (0) REM
-430 (12) FOR W = 1 TO 6
-440 (62) PRINT CHR$(10)
-450 (62) PRINT TAB(4);
+430 F(N,W) (12) FOR W = 1 TO 6
+440 F(N,W) (62) PRINT CHR$(10)
+450 F(N,W) (62) PRINT TAB(4);
 460 (0) REM
-470 (62) FOR G = 1 TO 7
-480 (408) D = D + 1
-490 (408) D2 = D - S
-500 (408) IF D2 > M(N) THEN 580
-510 (398) IF D2 > 0 THEN PRINT D2;
-520 (398) PRINT TAB(4 + 8 * G);
-530 (398) NEXT G
+470 F(N,W,G) (62) FOR G = 1 TO 7
+480 F(N,W,G) (408) D = D + 1
+490 F(N,W,G) (408) D2 = D - S
+500 F(N,W,G) (408) IF D2 > M(N) THEN 580
+510 F(N,W,G) (398) IF D2 > 0 THEN PRINT D2;
+520 F(N,W,G) (398) PRINT TAB(4 + 8 * G);
+530 F(N,W,G) (398) NEXT G
 540 (0) REM
-550 (52) IF D2 = M(N) THEN 590
-560 (50) NEXT W
+550 F(N) (52) IF D2 = M(N) THEN 590
+560 F(N) (50) NEXT W
 570 (0) REM
-580 (10) D = D - G
-590 (12) NEXT N
+580 F(N,W,G) (10) D = D - G
+590 F(N,W,G) (12) NEXT N
 600 (0) REM
-610 (1) FOR I = 1 TO 6
-    (6) PRINT CHR$(10);
-    (6) NEXT I
+610 F(N,W,I) (1) FOR I = 1 TO 6
+    F(N,W,I) (6) PRINT CHR$(10);
+    F(N,W,I) (6) NEXT I
 620 (0) DATA 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 630 (0) REM  0,31,29,  ..., ON LEAP YEARS
-640 (1) END
+640 F(N,W) (1) END
 

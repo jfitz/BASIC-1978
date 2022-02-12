@@ -66,64 +66,64 @@ Halstead complexity:
 (0 2) 110 PRINT
   Origs: 100:auto
   Dests: 240:auto
-(0 2) 240 GOSUB 1000
+F(J) (0 2) 240 GOSUB 1000
   Origs: 110:auto, 630:goto
   Dests: 250:auto, 1000:gosub
-(0 3) 250 T = 0
+F(J) (0 3) 250 T = 0
   Origs: 240:auto
   Dests: 260:auto
-(0 4) 260 T = T + 1
+F(J) (0 4) 260 T = T + 1
   Origs: 250:auto, 470:ifthen
   Dests: 270:auto
-(0 2) 270 PRINT
+F(J) (0 2) 270 PRINT
   Origs: 260:auto
   Dests: 275:auto
-(0 2) 275 PRINT
+F(J) (0 2) 275 PRINT
   Origs: 270:auto
   Dests: 290:auto
-(0 4) 290 PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) (0 4) 290 PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
   Origs: 275:auto
   Dests: 300:auto
-(2 3) 300 INPUT M, N
+F(J) (2 3) 300 INPUT M, N
   Origs: 290:auto
   Dests: 310:auto
-(1 3) 310 FOR I = 1 TO 4
+F(I,J) (1 3) 310 FOR I = 1 TO 4
   Origs: 300:auto
   Dests: 320:fornext, 400:fornext
-(1 6) 320 IF P(I, 1) = -1 THEN 400
+F(I,J) (1 6) 320 IF P(I, 1) = -1 THEN 400
   Origs: 310:fornext
   Dests: 330:auto, 400:ifthen
-(1 4) 330 IF P(I, 1) <> M THEN 380
+F(I,J) (1 4) 330 IF P(I, 1) <> M THEN 380
   Origs: 320:auto
   Dests: 340:auto, 380:ifthen
-(1 4) 340 IF P(I, 2) <> N THEN 380
+F(I,J) (1 4) 340 IF P(I, 2) <> N THEN 380
   Origs: 330:auto
   Dests: 350:auto, 380:ifthen
-(0 4) 350 P(I, 1) = -1
+F(I,J) (0 4) 350 P(I, 1) = -1
   Origs: 340:auto
   Dests: 360:auto
-(0 3) 360 PRINT "YOU HAVE FOUND MUGWUMP"; I
+F(I,J) (0 3) 360 PRINT "YOU HAVE FOUND MUGWUMP"; I
   Origs: 350:auto
   Dests: 370:auto
-(0 2) 370 GOTO 400
+F(I,J) (0 2) 370 GOTO 400
   Origs: 360:auto
   Dests: 400:goto
-(0 4) 380 D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) (0 4) 380 D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
   Origs: 330:ifthen, 340:ifthen
   Dests: 390:auto
-(0 7) 390 PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) (0 7) 390 PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
   Origs: 380:auto
   Dests: 400:auto
-(0 1) 400 NEXT I
+F(I,J) (0 1) 400 NEXT I
   Origs: 310:fornext, 320:ifthen, 370:goto, 390:auto
   Dests: 410:auto
-(1 3) 410 FOR J = 1 TO 4
+F(J) (1 3) 410 FOR J = 1 TO 4
   Origs: 400:auto
   Dests: 420:fornext, 430:fornext
-(1 6) 420 IF P(J, 1) <> -1 THEN 470
+F(J) (1 6) 420 IF P(J, 1) <> -1 THEN 470
   Origs: 410:fornext
   Dests: 430:auto, 470:ifthen
-(0 1) 430 NEXT J
+F(J) (0 1) 430 NEXT J
   Origs: 410:fornext, 420:auto
   Dests: 440:auto
 (0 2) 440 PRINT
@@ -135,52 +135,52 @@ Halstead complexity:
 (0 2) 460 GOTO 580
   Origs: 450:auto
   Dests: 580:goto
-(1 5) 470 IF T < 10 THEN 260
+F(J) (1 5) 470 IF T < 10 THEN 260
   Origs: 420:ifthen
   Dests: 260:ifthen, 480:auto
-(0 2) 480 PRINT
+F(J) (0 2) 480 PRINT
   Origs: 470:auto
   Dests: 490:auto
-(0 2) 490 PRINT "SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
+F(J) (0 2) 490 PRINT "SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
   Origs: 480:auto
   Dests: 540:auto
-(1 3) 540 FOR I = 1 TO 4
+F(J,I) (1 3) 540 FOR I = 1 TO 4
   Origs: 490:auto
   Dests: 550:fornext, 570:fornext
-(1 6) 550 IF P(I, 1) = -1 THEN 570
+F(J,I) (1 6) 550 IF P(I, 1) = -1 THEN 570
   Origs: 540:fornext
   Dests: 560:auto, 570:ifthen
-(0 8) 560 PRINT "MUGWUMP"; I; "IS AT ("; P(I, 1); ","; P(I, 2); ")"
+F(J,I) (0 8) 560 PRINT "MUGWUMP"; I; "IS AT ("; P(I, 1); ","; P(I, 2); ")"
   Origs: 550:auto
   Dests: 570:auto
-(0 1) 570 NEXT I
+F(J,I) (0 1) 570 NEXT I
   Origs: 540:fornext, 550:ifthen, 560:auto
   Dests: 580:auto
-(0 2) 580 PRINT
+F(J) (0 2) 580 PRINT
   Origs: 460:goto, 570:auto
   Dests: 600:auto
-(0 2) 600 PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
+F(J) (0 2) 600 PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
   Origs: 580:auto
   Dests: 610:auto
-(0 2) 610 PRINT "FOUR MORE MUGWUMPS ARE NOW IN HIDING."
+F(J) (0 2) 610 PRINT "FOUR MORE MUGWUMPS ARE NOW IN HIDING."
   Origs: 600:auto
   Dests: 630:auto
-(0 3) 630 GOTO 240
+F(J) (0 3) 630 GOTO 240
   Origs: 610:auto
   Dests: 240:goto
-G(1000) (1 3) 1000 FOR J = 1 TO 2
+G(1000) F(J) (1 3) 1000 FOR J = 1 TO 2
   Origs: 240:gosub
   Dests: 1010:fornext, 1040:fornext
-G(1000) (1 3) 1010 FOR I = 1 TO 4
+G(1000) F(J,I) (1 3) 1010 FOR I = 1 TO 4
   Origs: 1000:fornext
   Dests: 1020:fornext, 1030:fornext
-G(1000) (0 4) 1020 P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) (0 4) 1020 P(I, J) = INT(10 * RND(1))
   Origs: 1010:fornext
   Dests: 1030:auto
-G(1000) (0 1) 1030 NEXT I
+G(1000) F(J,I) (0 1) 1030 NEXT I
   Origs: 1010:fornext, 1020:auto
   Dests: 1040:auto
-G(1000) (0 1) 1040 NEXT J
+G(1000) F(J) (0 1) 1040 NEXT J
   Origs: 1000:fornext, 1030:auto
   Dests: 1050:auto
 G(1000) (0 1) 1050 RETURN

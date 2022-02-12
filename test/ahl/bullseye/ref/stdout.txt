@@ -207,69 +207,69 @@ STOP in line 360
 100 (1) DIM A$(20), S(20), W(10)
     (1) M = 0
     (1) R = 0
-    (1) FOR I = 1 TO 20
-    (20) S(I) = 0
-    (20) NEXT I
+    F(I) (1) FOR I = 1 TO 20
+    F(I) (20) S(I) = 0
+    F(I) (20) NEXT I
 110 (1) INPUT "HOW MANY PLAYERS"; N
     (1) PRINT
-120 (1) FOR I = 1 TO N
-130 (3) PRINT "NAME OF PLAYER #"; I;
-    (3) INPUT A$(I)
-140 (3) NEXT I
+120 F(I) (1) FOR I = 1 TO N
+130 F(I) (3) PRINT "NAME OF PLAYER #"; I;
+    F(I) (3) INPUT A$(I)
+140 F(I) (3) NEXT I
 150 (11) R = R + 1
     (11) PRINT
     (11) PRINT "ROUND"; R
     (11) PRINT "---------"
-160 (11) FOR I = 1 TO N
-170 (33) PRINT
-    (33) PRINT A$(I) "'S THROW";
-    (33) INPUT T
-180 (33) IF T < 0 OR T > 3 THEN PRINT "INPUT 1, 2, OR 3!"
-    (0) GOTO 170
-190 (33) ON T GOTO 200, 210, 200
-200 (22) P1 = .65
-    (22) P2 = .55
-    (22) P3 = .5
-    (22) P4 = .5
-    (22) GOTO 230
-210 (11) P1 = .99
-    (11) P2 = .77
-    (11) P3 = .43
-    (11) P4 = .01
-    (11) GOTO 230
+160 F(I) (11) FOR I = 1 TO N
+170 F(I) (33) PRINT
+    F(I) (33) PRINT A$(I) "'S THROW";
+    F(I) (33) INPUT T
+180 F(I) (33) IF T < 0 OR T > 3 THEN PRINT "INPUT 1, 2, OR 3!"
+    F(I) (0) GOTO 170
+190 F(I) (33) ON T GOTO 200, 210, 200
+200 F(I) (22) P1 = .65
+    F(I) (22) P2 = .55
+    F(I) (22) P3 = .5
+    F(I) (22) P4 = .5
+    F(I) (22) GOTO 230
+210 F(I) (11) P1 = .99
+    F(I) (11) P2 = .77
+    F(I) (11) P3 = .43
+    F(I) (11) P4 = .01
+    F(I) (11) GOTO 230
 220 (0) P1 = .95
     (0) P2 = .75
     (0) P3 = .45
     (0) P4 = .05
-230 (33) U = RND(1)
-240 (33) IF U >= P1 THEN PRINT "BULLSEYE!!  40 POINTS!"
-    (8) B = 40
-    (8) GOTO 290
-250 (25) IF U >= P2 THEN PRINT "30-POINT ZONE!"
-    (3) B = 30
-    (3) GOTO 290
-260 (22) IF U >= P3 THEN PRINT "20-POINT ZONE"
-    (2) B = 20
-    (2) GOTO 290
-270 (20) IF U >= P4 THEN PRINT "WHEW!  10 POINTS."
-    (8) B = 10
-    (8) GOTO 290
-280 (12) PRINT "MISSED THE TARGET!  TOO BAD."
-    (12) B = 0
-290 (33) S(I) = S(I) + B
-    (33) PRINT "TOTAL SCORE ="; S(I)
-    (33) NEXT I
-300 (11) FOR I = 1 TO N
-310 (33) IF S(I) >= 200 THEN M = M + 1
-    (1) W(M) = I
-320 (33) NEXT I
+230 F(I) (33) U = RND(1)
+240 F(I) (33) IF U >= P1 THEN PRINT "BULLSEYE!!  40 POINTS!"
+    F(I) (8) B = 40
+    F(I) (8) GOTO 290
+250 F(I) (25) IF U >= P2 THEN PRINT "30-POINT ZONE!"
+    F(I) (3) B = 30
+    F(I) (3) GOTO 290
+260 F(I) (22) IF U >= P3 THEN PRINT "20-POINT ZONE"
+    F(I) (2) B = 20
+    F(I) (2) GOTO 290
+270 F(I) (20) IF U >= P4 THEN PRINT "WHEW!  10 POINTS."
+    F(I) (8) B = 10
+    F(I) (8) GOTO 290
+280 F(I) (12) PRINT "MISSED THE TARGET!  TOO BAD."
+    F(I) (12) B = 0
+290 F(I) (33) S(I) = S(I) + B
+    F(I) (33) PRINT "TOTAL SCORE ="; S(I)
+    F(I) (33) NEXT I
+300 F(I) (11) FOR I = 1 TO N
+310 F(I) (33) IF S(I) >= 200 THEN M = M + 1
+    F(I) (1) W(M) = I
+320 F(I) (33) NEXT I
 330 (11) IF M = 0 THEN 150
 340 (1) PRINT
     (1) PRINT "WE HAVE A WINNER!!"
     (1) PRINT
-350 (1) FOR I = 1 TO M
-    (1) PRINT A$(W(I)); " SCORED"; S(W(I)); "POINTS."
-    (1) NEXT I
+350 F(I) (1) FOR I = 1 TO M
+    F(I) (1) PRINT A$(W(I)); " SCORED"; S(W(I)); "POINTS."
+    F(I) (1) NEXT I
 360 (1) PRINT
     (1) PRINT "THANKS FOR THE GAME."
     (1) END

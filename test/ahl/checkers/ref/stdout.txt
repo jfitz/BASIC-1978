@@ -169,27 +169,27 @@ Error 102 End of file in line 1590
    (1) G = -1
    (1) R(0) = -99
 90 (0) DATA 1, 0, 1, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, -1, 0, -1, 15
-120 (1) FOR X = 0 TO 7
-    (8) FOR Y = 0 TO 7
-    (64) READ J
-    (64) IF J = 15 THEN 180
-160 (61) S(X, Y) = J
-    (61) GOTO 200
-180 (3) RESTORE
-    (3) READ S(X, Y)
-200 (64) NEXT Y, X
-230 (6) FOR X = 0 TO 7
-    (48) FOR Y = 0 TO 7
-    (384) IF S(X, Y) > -1 THEN 350
-310 (72) IF S(X, Y) = -1 THEN FOR A = -1 TO 1 STEP 2
-    (144) B = G
-    (144) GOSUB 650
-    (144) NEXT A
-330 (72) IF S(X, Y) = -2 THEN FOR A = -1 TO 1 STEP 2
-    (0) FOR B = -1 TO 1 STEP 2
-    (0) GOSUB 650
-    (0) NEXT B, A
-350 (384) NEXT Y, X
+120 F(X) (1) FOR X = 0 TO 7
+    F(X,Y) (8) FOR Y = 0 TO 7
+    F(X,Y) (64) READ J
+    F(X,Y) (64) IF J = 15 THEN 180
+160 F(X,Y) (61) S(X, Y) = J
+    F(X,Y) (61) GOTO 200
+180 F(X,Y) (3) RESTORE
+    F(X,Y) (3) READ S(X, Y)
+200 F(X,Y) (64) NEXT Y, X
+230 F(X) (6) FOR X = 0 TO 7
+    F(X,Y) (48) FOR Y = 0 TO 7
+    F(X,Y) (384) IF S(X, Y) > -1 THEN 350
+310 F(X,Y) (72) IF S(X, Y) = -1 THEN FOR A = -1 TO 1 STEP 2
+    F(X,Y) (144) B = G
+    F(X,Y) (144) GOSUB 650
+    F(X,Y) (144) NEXT A
+330 F(X,Y) (72) IF S(X, Y) = -2 THEN FOR A = -1 TO 1 STEP 2
+    F(X,Y,B) (0) FOR B = -1 TO 1 STEP 2
+    F(X,Y,B) (0) GOSUB 650
+    F(X,Y,B) (0) NEXT B, A
+350 F(X,Y) (384) NEXT Y, X
     (6) GOTO 1140
 650 G(650) (144) U = X + A
     G(650) (144) V = Y + B
@@ -206,13 +206,13 @@ Error 102 End of file in line 1590
 920 (45) IF ABS(Y - V) = 2 THEN Q = Q + 5
 960 (45) IF Y = 7 THEN Q = Q - 2
 980 (45) IF U = 0 OR U = 7 THEN Q = Q + 1
-1030 (45) FOR C = -1 TO 1 STEP 2
-     (90) IF U + C < 0 OR U + C > 7 OR V + G < 0 THEN 1080
-1035 (85) IF S(U + C, V + G) < 0 THEN Q = Q + 1
-     (13) GOTO 1080
-1040 (72) IF U - C < 0 OR U - C > 7 OR V - G > 7 THEN 1080
-1045 (70) IF S(U + C, V + G) > 0 AND (S(U - C, V - G) = 0 OR (U - C = X AND V - G = Y)) THEN Q = Q - 2
-1080 (90) NEXT C
+1030 F(C) (45) FOR C = -1 TO 1 STEP 2
+     F(C) (90) IF U + C < 0 OR U + C > 7 OR V + G < 0 THEN 1080
+1035 F(C) (85) IF S(U + C, V + G) < 0 THEN Q = Q + 1
+     F(C) (13) GOTO 1080
+1040 F(C) (72) IF U - C < 0 OR U - C > 7 OR V - G > 7 THEN 1080
+1045 F(C) (70) IF S(U + C, V + G) > 0 AND (S(U - C, V - G) = 0 OR (U - C = X AND V - G = Y)) THEN Q = Q - 2
+1080 F(C) (90) NEXT C
      (45) IF Q > R(0) THEN R(0) = Q
      (12) R(1) = X
      (12) R(2) = Y
@@ -232,13 +232,13 @@ Error 102 End of file in line 1590
 1340 (1) X = R(3)
      (1) Y = R(4)
      (1) IF S(X, Y) = -1 THEN B = -2
-     (1) FOR A = -2 TO 2 STEP 4
-     (2) GOSUB 1370
-1350 (2) IF S(X, Y) = -2 THEN FOR A = -2 TO 2 STEP 4
-     (0) FOR B = -2 TO 2 STEP 4
-     (0) GOSUB 1370
-     (0) NEXT B
-1360 (2) NEXT A
+     F(A) (1) FOR A = -2 TO 2 STEP 4
+     F(A) (2) GOSUB 1370
+1350 F(A) (2) IF S(X, Y) = -2 THEN FOR A = -2 TO 2 STEP 4
+     F(A,B) (0) FOR B = -2 TO 2 STEP 4
+     F(A,B) (0) GOSUB 1370
+     F(A,B) (0) NEXT B
+1360 F(A) (2) NEXT A
      (1) IF R(0) <> -99 THEN PRINT "TO" R(3); R(4);
      (0) R(0) = -99
      (0) GOTO 1240
@@ -251,26 +251,26 @@ Error 102 End of file in line 1590
 1420 (6) PRINT
      (6) PRINT
      (6) PRINT
-     (6) FOR Y = 7 TO 0 STEP -1
-     (48) FOR X = 0 TO 7
-     (384) I = 5 * X
-     (384) PRINT TAB(I);
-1430 (384) IF S(X, Y) = 0 THEN PRINT ".";
-1470 (384) IF S(X, Y) = 1 THEN PRINT "O";
-1490 (384) IF S(X, Y) = -1 THEN PRINT "X";
-1510 (384) IF S(X, Y) = -2 THEN PRINT "X*";
-1530 (384) IF S(X, Y) = 2 THEN PRINT "O*";
-1550 (384) NEXT X
-     (48) PRINT " "
-     (48) PRINT
-     (48) NEXT Y
+     F(Y) (6) FOR Y = 7 TO 0 STEP -1
+     F(Y,X) (48) FOR X = 0 TO 7
+     F(Y,X) (384) I = 5 * X
+     F(Y,X) (384) PRINT TAB(I);
+1430 F(Y,X) (384) IF S(X, Y) = 0 THEN PRINT ".";
+1470 F(Y,X) (384) IF S(X, Y) = 1 THEN PRINT "O";
+1490 F(Y,X) (384) IF S(X, Y) = -1 THEN PRINT "X";
+1510 F(Y,X) (384) IF S(X, Y) = -2 THEN PRINT "X*";
+1530 F(Y,X) (384) IF S(X, Y) = 2 THEN PRINT "O*";
+1550 F(Y,X) (384) NEXT X
+     F(Y) (48) PRINT " "
+     F(Y) (48) PRINT
+     F(Y) (48) NEXT Y
      (6) PRINT
-1552 (6) FOR L = 0 TO 7
-1554 (48) FOR M = 0 TO 7
-1556 (384) IF S(L, M) = 1 OR S(L, M) = 2 THEN Z = 1
-1558 (384) IF S(L, M) = -1 OR S(L, M) = -2 THEN T = 1
-1560 (384) NEXT M
-1562 (48) NEXT L
+1552 F(L) (6) FOR L = 0 TO 7
+1554 F(L,M) (48) FOR M = 0 TO 7
+1556 F(L,M) (384) IF S(L, M) = 1 OR S(L, M) = 2 THEN Z = 1
+1558 F(L,M) (384) IF S(L, M) = -1 OR S(L, M) = -2 THEN T = 1
+1560 F(L,M) (384) NEXT M
+1562 F(L) (48) NEXT L
 1564 (6) IF Z <> 1 THEN 1885
 1566 (6) IF T <> 1 THEN 1880
 1570 (6) Z = 0

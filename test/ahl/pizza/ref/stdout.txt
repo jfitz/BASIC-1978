@@ -94,29 +94,29 @@ STOP in line 999
 100 (1) PRINT "WHERE TO DELIVER THE ORDERED PIZZAS."
     (1) PRINT
     (1) PRINT
-140 (1) FOR I = 1 TO 16
-150 (16) READ S$(I)
-160 (16) NEXT I
-170 (1) FOR I = 1 TO 4
-180 (4) READ M$(I)
-190 (4) NEXT I
+140 F(I) (1) FOR I = 1 TO 16
+150 F(I) (16) READ S$(I)
+160 F(I) (16) NEXT I
+170 F(I) (1) FOR I = 1 TO 4
+180 F(I) (4) READ M$(I)
+190 F(I) (4) NEXT I
 200 (0) DATA "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"
 210 (0) DATA "P", "1", "2", "3", "4"
 230 (1) PRINT "MAP OF THE CITY OF HYATTSVILLE"
     (1) PRINT
 250 (1) PRINT " -----1-----2-----3-----4-----"
 260 (1) K = 4
-270 (1) FOR I = 1 TO 4
-280 (4) PRINT "-"
-    (4) PRINT "-"
-    (4) PRINT "-"
-    (4) PRINT "-"
-320 (4) PRINT M$(K);
-330 (4) S1 = 16 - 4 * I + 1
-340 (4) PRINT "     "; S$(S1); "     "; S$(S1 + 1); "     "; S$(S1 + 2); "     ";
-350 (4) PRINT S$(S1 + 3); "     "; M$(K)
-380 (4) K = K - 1
-390 (4) NEXT I
+270 F(I) (1) FOR I = 1 TO 4
+280 F(I) (4) PRINT "-"
+    F(I) (4) PRINT "-"
+    F(I) (4) PRINT "-"
+    F(I) (4) PRINT "-"
+320 F(I) (4) PRINT M$(K);
+330 F(I) (4) S1 = 16 - 4 * I + 1
+340 F(I) (4) PRINT "     "; S$(S1); "     "; S$(S1 + 1); "     "; S$(S1 + 2); "     ";
+350 F(I) (4) PRINT S$(S1 + 3); "     "; M$(K)
+380 F(I) (4) K = K - 1
+390 F(I) (4) NEXT I
 400 (1) PRINT "-"
     (1) PRINT "-"
     (1) PRINT "-"
@@ -152,20 +152,20 @@ STOP in line 999
     (0) PRINT
 700 (0) PRINT "GOOD LUCK!!"
     (0) PRINT
-750 (1) FOR I = 1 TO 5
-760 (5) S = INT(RND(1) * 16 + 1)
-    (5) PRINT
-770 (5) PRINT "HELLO "; N$; "'S PIZZA.  THIS IS "; S$(S); ".";
-775 (5) PRINT "  PLEASE SEND A PIZZA."
-780 (6) PRINT "  DRIVER TO "; N$; ":  WHERE DOES "; S$(S); " LIVE";
-790 (6) INPUT A(1), A(2)
-870 (6) T = A(1) + (A(2) - 1) * 4
-880 (6) IF T = S THEN 920
-890 (1) PRINT "THIS IS "; S$(T); ".  I DID NOT ORDER A PIZZA."
-900 (1) PRINT "I LIVE AT "; A(1); ","; A(2)
-910 (1) GOTO 780
-920 (5) PRINT "HELLO " N$; ".  THIS IS "; S$(S); ", THANKS FOR THE PIZZA."
-930 (5) NEXT I
+750 F(I) (1) FOR I = 1 TO 5
+760 F(I) (5) S = INT(RND(1) * 16 + 1)
+    F(I) (5) PRINT
+770 F(I) (5) PRINT "HELLO "; N$; "'S PIZZA.  THIS IS "; S$(S); ".";
+775 F(I) (5) PRINT "  PLEASE SEND A PIZZA."
+780 F(I) (6) PRINT "  DRIVER TO "; N$; ":  WHERE DOES "; S$(S); " LIVE";
+790 F(I) (6) INPUT A(1), A(2)
+870 F(I) (6) T = A(1) + (A(2) - 1) * 4
+880 F(I) (6) IF T = S THEN 920
+890 F(I) (1) PRINT "THIS IS "; S$(T); ".  I DID NOT ORDER A PIZZA."
+900 F(I) (1) PRINT "I LIVE AT "; A(1); ","; A(2)
+910 F(I) (1) GOTO 780
+920 F(I) (5) PRINT "HELLO " N$; ".  THIS IS "; S$(S); ", THANKS FOR THE PIZZA."
+930 F(I) (5) NEXT I
 940 (1) PRINT
     (1) INPUT "DO YOU WANT TO DELIVER MORE PIZZAS"; A$
 960 (1) IF A$ = "YES" THEN 750

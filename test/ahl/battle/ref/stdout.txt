@@ -48,152 +48,152 @@ Error 102 End of file in line 1180
 20 (0) REM COPYRIGHT 1971 BY THE REGENTS OF THE UNIV. OF CALIF.
 30 (0) REM PRODUCED AT THE LAWRENCE HALL OF SCIENCE, BERKELEY
 40 (1) DIM F(6, 6), H(6, 6), A(4), B(4), C(6), L(3)
-50 (1) FOR X = 1 TO 6
-51 (6) FOR Y = 1 TO 6
-52 (36) F(X, Y) = 0
-53 (36) NEXT Y
-54 (6) NEXT X
-60 (1) FOR I = 1 TO 3
-70 (3) N = 4 - I
-80 (3) FOR J = 1 TO 2
-90 (12) A = INT(6 * RND(1) + 1)
-100 (12) B = INT(6 * RND(1) + 1)
-110 (12) D = INT(4 * RND(1) + 1)
-120 (12) IF F(A, B) > 0 THEN 90
-130 (10) M = 0
-140 (10) ON D GOTO 150, 340, 550, 740
-150 (4) B(1) = B
-160 (4) B(2) = 7
-    (4) B(3) = 7
-170 (4) FOR K = 1 TO N
-180 (9) IF M > 1 THEN 240
-190 (7) IF B(K) = 6 THEN 230
-200 (4) IF F(A, B(K) + 1) > 0 THEN 230
-210 (4) B(K + 1) = B(K) + 1
-220 (4) GOTO 280
-230 (3) M = 2
-240 (5) IF B(1) < B(2) AND B(1) < B(3) THEN Z = B(1)
-242 (5) IF B(2) < B(1) AND B(2) < B(3) THEN Z = B(2)
-244 (5) IF B(3) < B(1) AND B(3) < B(2) THEN Z = B(3)
-250 (5) IF Z = 1 THEN 90
-260 (5) IF F(A, Z - 1) > 0 THEN 90
-270 (4) B(K + 1) = Z - 1
-280 (8) NEXT K
-290 (3) F(A, B) = 9 - 2 * I - J
-300 (3) FOR K = 1 TO N
-310 (7) F(A, B(K + 1)) = F(A, B)
-320 (7) NEXT K
-330 (3) GOTO 990
-340 (1) A(1) = A
-350 (1) B(1) = B
-360 (1) A(2) = 0
-    (1) A(3) = 0
-    (1) B(2) = 0
-    (1) B(3) = 0
-370 (1) FOR K = 1 TO N
-380 (1) IF M > 1 THEN 460
-390 (1) IF A(K) = 1 OR B(K) = 1 THEN 450
-400 (1) IF F(A(K) - 1, B(K) - 1) > 0 THEN 450
-410 (0) IF F(A(K) - 1, B(K)) > 0 AND F(A(K) - 1, B(K)) = F(A(K), B(K) - 1) THEN 450
-420 (0) A(K + 1) = A(K) - 1
-430 (0) B(K + 1) = B(K) - 1
-440 (0) GOTO 530
-450 (1) M = 2
-460 (1) IF A(1) > A(2) AND A(1) > A(3) THEN Z1 = A(1)
-462 (1) IF A(2) > A(1) AND A(2) > A(3) THEN Z1 = A(2)
-464 (1) IF A(3) > A(1) AND A(3) > A(2) THEN Z1 = A(3)
-470 (1) IF B(1) > B(2) AND B(1) > B(3) THEN Z2 = B(1)
-474 (1) IF B(2) > B(1) AND B(2) > B(3) THEN Z2 = B(2)
-476 (1) IF B(3) > B(1) AND B(3) > B(2) THEN Z2 = B(3)
-480 (1) IF Z1 = 6 OR Z2 = 6 THEN 90
-490 (1) IF F(Z1 + 1, Z2 + 1) > 0 THEN 90
-500 (1) IF F(Z1, Z2 + 1) > 0 AND F(Z1, Z2 + 1) = F(Z1 + 1, Z2) THEN 90
-510 (1) A(K + 1) = Z1 + 1
-520 (1) B(K + 1) = Z2 + 1
-530 (1) NEXT K
-540 (1) GOTO 950
-550 (2) A(1) = A
-560 (2) A(2) = 7
-    (2) A(3) = 7
-570 (2) FOR K = 1 TO N
-580 (4) IF M > 1 THEN 640
-590 (3) IF A(K) = 6 THEN 630
-600 (2) IF F(A(K) + 1, B) > 0 THEN 630
-610 (2) A(K + 1) = A(K) + 1
-620 (2) GOTO 680
-630 (1) M = 2
-640 (2) IF A(1) < A(2) AND A(1) < A(3) THEN Z = A(1)
-642 (2) IF A(2) < A(1) AND A(2) < A(3) THEN Z = A(2)
-644 (2) IF A(3) < A(1) AND A(3) < A(2) THEN Z = A(3)
-650 (2) IF Z = 1 THEN 90
-660 (2) IF F(Z - 1, B) > 0 THEN 90
-670 (2) A(K + 1) = Z - 1
-680 (4) NEXT K
-690 (2) F(A, B) = 9 - 2 * I - J
-700 (2) FOR K = 1 TO N
-710 (4) F(A(K + 1), B) = F(A, B)
-720 (4) NEXT K
-730 (2) GOTO 990
-740 (3) A(1) = A
-750 (3) B(1) = B
-760 (3) A(2) = 7
-    (3) A(3) = 7
-770 (3) B(2) = 0
-    (3) B(3) = 0
-780 (3) FOR K = 1 TO N
-790 (3) IF M > 1 THEN 870
-800 (3) IF A(K) = 6 OR B(K) = 1 THEN 860
-810 (3) IF F(A(K) + 1, B(K) - 1) > 0 THEN 860
-820 (0) IF F(A(K) + 1, B(K)) > 0 AND F(A(K) + 1, B(K)) = F(A(K), B(K) - 1) THEN 860
-830 (0) A(K + 1) = A(K) + 1
-840 (0) B(K + 1) = B(K) - 1
-850 (0) GOTO 940
-860 (3) M = 2
-870 (3) IF A(1) < A(2) AND A(1) < A(3) THEN Z1 = A(1)
-872 (3) IF A(2) < A(1) AND A(2) < A(3) THEN Z1 = A(2)
-874 (3) IF A(3) < A(1) AND A(3) < A(2) THEN Z1 = A(3)
-880 (3) IF B(1) > B(2) AND B(1) > B(3) THEN Z2 = B(1)
-882 (3) IF B(2) > B(1) AND B(2) > B(3) THEN Z2 = B(2)
-884 (3) IF B(3) > B(1) AND B(3) > B(2) THEN Z2 = B(3)
-890 (3) IF Z1 = 1 OR Z2 = 6 THEN 90
-900 (0) IF F(Z1 - 1, Z2 + 1) > 0 THEN 90
-910 (0) IF F(Z1, Z2 + 1) > 0 AND F(Z1, Z2 + 1) = F(Z1 - 1, Z2) THEN 90
-920 (0) A(K + 1) = Z1 - 1
-930 (0) B(K + 1) = Z2 + 1
-940 (0) NEXT K
-950 (1) F(A, B) = 9 - 2 * I - J
-960 (1) FOR K = 1 TO N
-970 (1) F(A(K + 1), B(K + 1)) = F(A, B)
-980 (1) NEXT K
-990 (6) NEXT J
-1000 (3) NEXT I
+50 F(X) (1) FOR X = 1 TO 6
+51 F(X,Y) (6) FOR Y = 1 TO 6
+52 F(X,Y) (36) F(X, Y) = 0
+53 F(X,Y) (36) NEXT Y
+54 F(X) (6) NEXT X
+60 F(I) (1) FOR I = 1 TO 3
+70 F(I) (3) N = 4 - I
+80 F(I,J) (3) FOR J = 1 TO 2
+90 F(I,J,K) (12) A = INT(6 * RND(1) + 1)
+100 F(I,J,K) (12) B = INT(6 * RND(1) + 1)
+110 F(I,J,K) (12) D = INT(4 * RND(1) + 1)
+120 F(I,J,K) (12) IF F(A, B) > 0 THEN 90
+130 F(I,J,K) (10) M = 0
+140 F(I,J,K) (10) ON D GOTO 150, 340, 550, 740
+150 F(I,J,K) (4) B(1) = B
+160 F(I,J,K) (4) B(2) = 7
+    F(I,J,K) (4) B(3) = 7
+170 F(I,J,K) (4) FOR K = 1 TO N
+180 F(I,J,K) (9) IF M > 1 THEN 240
+190 F(I,J,K) (7) IF B(K) = 6 THEN 230
+200 F(I,J,K) (4) IF F(A, B(K) + 1) > 0 THEN 230
+210 F(I,J,K) (4) B(K + 1) = B(K) + 1
+220 F(I,J,K) (4) GOTO 280
+230 F(I,J,K) (3) M = 2
+240 F(I,J,K) (5) IF B(1) < B(2) AND B(1) < B(3) THEN Z = B(1)
+242 F(I,J,K) (5) IF B(2) < B(1) AND B(2) < B(3) THEN Z = B(2)
+244 F(I,J,K) (5) IF B(3) < B(1) AND B(3) < B(2) THEN Z = B(3)
+250 F(I,J,K) (5) IF Z = 1 THEN 90
+260 F(I,J,K) (5) IF F(A, Z - 1) > 0 THEN 90
+270 F(I,J,K) (4) B(K + 1) = Z - 1
+280 F(I,J,K) (8) NEXT K
+290 F(I,J) (3) F(A, B) = 9 - 2 * I - J
+300 F(I,J,K) (3) FOR K = 1 TO N
+310 F(I,J,K) (7) F(A, B(K + 1)) = F(A, B)
+320 F(I,J,K) (7) NEXT K
+330 F(I,J) (3) GOTO 990
+340 F(I,J,K) (1) A(1) = A
+350 F(I,J,K) (1) B(1) = B
+360 F(I,J,K) (1) A(2) = 0
+    F(I,J,K) (1) A(3) = 0
+    F(I,J,K) (1) B(2) = 0
+    F(I,J,K) (1) B(3) = 0
+370 F(I,J,K,K) (1) FOR K = 1 TO N
+380 F(I,J,K,K) (1) IF M > 1 THEN 460
+390 F(I,J,K) (1) IF A(K) = 1 OR B(K) = 1 THEN 450
+400 F(I,J,K) (1) IF F(A(K) - 1, B(K) - 1) > 0 THEN 450
+410 F(I,J,K) (0) IF F(A(K) - 1, B(K)) > 0 AND F(A(K) - 1, B(K)) = F(A(K), B(K) - 1) THEN 450
+420 F(I,J,K) (0) A(K + 1) = A(K) - 1
+430 F(I,J,K) (0) B(K + 1) = B(K) - 1
+440 F(I,J,K) (0) GOTO 530
+450 F(I,J,K) (1) M = 2
+460 F(I,J,K) (1) IF A(1) > A(2) AND A(1) > A(3) THEN Z1 = A(1)
+462 F(I,J,K) (1) IF A(2) > A(1) AND A(2) > A(3) THEN Z1 = A(2)
+464 F(I,J,K) (1) IF A(3) > A(1) AND A(3) > A(2) THEN Z1 = A(3)
+470 F(I,J,K) (1) IF B(1) > B(2) AND B(1) > B(3) THEN Z2 = B(1)
+474 F(I,J,K) (1) IF B(2) > B(1) AND B(2) > B(3) THEN Z2 = B(2)
+476 F(I,J,K) (1) IF B(3) > B(1) AND B(3) > B(2) THEN Z2 = B(3)
+480 F(I,J,K) (1) IF Z1 = 6 OR Z2 = 6 THEN 90
+490 F(I,J,K) (1) IF F(Z1 + 1, Z2 + 1) > 0 THEN 90
+500 F(I,J,K) (1) IF F(Z1, Z2 + 1) > 0 AND F(Z1, Z2 + 1) = F(Z1 + 1, Z2) THEN 90
+510 F(I,J,K) (1) A(K + 1) = Z1 + 1
+520 F(I,J,K) (1) B(K + 1) = Z2 + 1
+530 F(I,J,K) (1) NEXT K
+540 F(I,J,K) (1) GOTO 950
+550 F(I,J,K) (2) A(1) = A
+560 F(I,J,K) (2) A(2) = 7
+    F(I,J,K) (2) A(3) = 7
+570 F(I,J,K,K) (2) FOR K = 1 TO N
+580 F(I,J,K,K) (4) IF M > 1 THEN 640
+590 F(I,J,K) (3) IF A(K) = 6 THEN 630
+600 F(I,J,K) (2) IF F(A(K) + 1, B) > 0 THEN 630
+610 F(I,J,K) (2) A(K + 1) = A(K) + 1
+620 F(I,J,K) (2) GOTO 680
+630 F(I,J,K) (1) M = 2
+640 F(I,J,K) (2) IF A(1) < A(2) AND A(1) < A(3) THEN Z = A(1)
+642 F(I,J,K) (2) IF A(2) < A(1) AND A(2) < A(3) THEN Z = A(2)
+644 F(I,J,K) (2) IF A(3) < A(1) AND A(3) < A(2) THEN Z = A(3)
+650 F(I,J,K) (2) IF Z = 1 THEN 90
+660 F(I,J,K) (2) IF F(Z - 1, B) > 0 THEN 90
+670 F(I,J,K) (2) A(K + 1) = Z - 1
+680 F(I,J,K) (4) NEXT K
+690 F(I,J,K) (2) F(A, B) = 9 - 2 * I - J
+700 F(I,J,K,K) (2) FOR K = 1 TO N
+710 F(I,J,K,K) (4) F(A(K + 1), B) = F(A, B)
+720 F(I,J,K) (4) NEXT K
+730 F(I,J,K) (2) GOTO 990
+740 F(I,J,K) (3) A(1) = A
+750 F(I,J,K) (3) B(1) = B
+760 F(I,J,K) (3) A(2) = 7
+    F(I,J,K) (3) A(3) = 7
+770 F(I,J,K) (3) B(2) = 0
+    F(I,J,K) (3) B(3) = 0
+780 F(I,J,K,K) (3) FOR K = 1 TO N
+790 F(I,J,K,K) (3) IF M > 1 THEN 870
+800 F(I,J,K) (3) IF A(K) = 6 OR B(K) = 1 THEN 860
+810 F(I,J,K) (3) IF F(A(K) + 1, B(K) - 1) > 0 THEN 860
+820 F(I,J,K) (0) IF F(A(K) + 1, B(K)) > 0 AND F(A(K) + 1, B(K)) = F(A(K), B(K) - 1) THEN 860
+830 F(I,J,K) (0) A(K + 1) = A(K) + 1
+840 F(I,J,K) (0) B(K + 1) = B(K) - 1
+850 F(I,J,K) (0) GOTO 940
+860 F(I,J,K) (3) M = 2
+870 F(I,J,K) (3) IF A(1) < A(2) AND A(1) < A(3) THEN Z1 = A(1)
+872 F(I,J,K) (3) IF A(2) < A(1) AND A(2) < A(3) THEN Z1 = A(2)
+874 F(I,J,K) (3) IF A(3) < A(1) AND A(3) < A(2) THEN Z1 = A(3)
+880 F(I,J,K) (3) IF B(1) > B(2) AND B(1) > B(3) THEN Z2 = B(1)
+882 F(I,J,K) (3) IF B(2) > B(1) AND B(2) > B(3) THEN Z2 = B(2)
+884 F(I,J,K) (3) IF B(3) > B(1) AND B(3) > B(2) THEN Z2 = B(3)
+890 F(I,J,K) (3) IF Z1 = 1 OR Z2 = 6 THEN 90
+900 F(I,J,K) (0) IF F(Z1 - 1, Z2 + 1) > 0 THEN 90
+910 F(I,J,K) (0) IF F(Z1, Z2 + 1) > 0 AND F(Z1, Z2 + 1) = F(Z1 - 1, Z2) THEN 90
+920 F(I,J,K) (0) A(K + 1) = Z1 - 1
+930 F(I,J,K) (0) B(K + 1) = Z2 + 1
+940 F(I,J,K) (0) NEXT K
+950 F(I,J,K) (1) F(A, B) = 9 - 2 * I - J
+960 F(I,J,K,K) (1) FOR K = 1 TO N
+970 F(I,J,K,K) (1) F(A(K + 1), B(K + 1)) = F(A, B)
+980 F(I,J,K) (1) NEXT K
+990 F(I,J,K) (6) NEXT J
+1000 F(I) (3) NEXT I
 1010 (1) PRINT
 1020 (1) PRINT "THE FOLLOWING CODE OF THE BAD GUYS' FLEET DISPOSITION"
 1030 (1) PRINT "HAS BEEN CAPTURED BUT NOT DECODED:"
 1040 (1) PRINT
-1050 (1) FOR I = 1 TO 6
-1051 (6) FOR J = 1 TO 6
-1052 (36) H(I, J) = F(J, I)
-1053 (36) NEXT J
-1054 (6) NEXT I
-1060 (1) FOR I = 1 TO 6
-1061 (6) FOR J = 1 TO 6
-1062 (36) PRINT H(I, J);
-1063 (36) NEXT J
-1064 (6) PRINT
-1065 (6) NEXT I
+1050 F(I) (1) FOR I = 1 TO 6
+1051 F(I,J) (6) FOR J = 1 TO 6
+1052 F(I,J) (36) H(I, J) = F(J, I)
+1053 F(I,J) (36) NEXT J
+1054 F(I) (6) NEXT I
+1060 F(I) (1) FOR I = 1 TO 6
+1061 F(I,J) (6) FOR J = 1 TO 6
+1062 F(I,J) (36) PRINT H(I, J);
+1063 F(I,J) (36) NEXT J
+1064 F(I) (6) PRINT
+1065 F(I) (6) NEXT I
 1070 (1) PRINT
 1080 (1) PRINT "DE-CODE IT AND USE IT IF YOU CAN"
 1090 (1) PRINT "BUT KEEP THE DE-CODING METHOD A SECRET."
 1100 (1) PRINT
-1110 (1) FOR I = 1 TO 6
-1111 (6) FOR J = 1 TO 6
-1112 (36) H(I, J) = 0
-1113 (36) NEXT J
-1114 (6) NEXT I
-1120 (1) FOR I = 1 TO 3
-1121 (3) L(I) = 0
-1122 (3) NEXT I
+1110 F(I) (1) FOR I = 1 TO 6
+1111 F(I,J) (6) FOR J = 1 TO 6
+1112 F(I,J) (36) H(I, J) = 0
+1113 F(I,J) (36) NEXT J
+1114 F(I) (6) NEXT I
+1120 F(I) (1) FOR I = 1 TO 3
+1121 F(I) (3) L(I) = 0
+1122 F(I) (3) NEXT I
 1130 (1) C(1) = 2
      (1) C(2) = 2
 1140 (1) C(3) = 1

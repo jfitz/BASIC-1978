@@ -58,13 +58,13 @@ Halstead complexity:
 (0 4) 50 C = INT(RND(1) * N + 1)
   Origs: 40:auto
   Dests: 60:auto
-(1 3) 60 FOR I = 1 TO C
+F(I) (1 3) 60 FOR I = 1 TO C
   Origs: 50:auto
   Dests: 70:fornext, 80:fornext
-(1 2) 70 READ S$
+F(I) (1 2) 70 READ S$
   Origs: 60:fornext
   Dests: 80:auto
-(0 1) 80 NEXT I
+F(I) (0 1) 80 NEXT I
   Origs: 60:fornext, 70:auto
   Dests: 90:auto
 (0 3) 90 G = 0
@@ -73,27 +73,27 @@ Halstead complexity:
 (0 4) 95 S(0) = LEN(S$)
   Origs: 90:auto
   Dests: 100:auto
-(1 4) 100 FOR I = 1 TO LEN(S$)
-(0 4)     S(I) = ASC(MID$(S$, I, 1))
-(0 1)     NEXT I
+F(I) (1 4) 100 FOR I = 1 TO LEN(S$)
+F(I) (0 4)     S(I) = ASC(MID$(S$, I, 1))
+F(I) (0 1)     NEXT I
   Origs: 95:auto
   Dests: 110:auto
-(1 3) 110 FOR I = 1 TO 5
+F(I) (1 3) 110 FOR I = 1 TO 5
   Origs: 100:auto
   Dests: 120:fornext, 130:fornext
-(0 3) 120 A(I) = 45
+F(I) (0 3) 120 A(I) = 45
   Origs: 110:fornext
   Dests: 130:auto
-(0 1) 130 NEXT I
+F(I) (0 1) 130 NEXT I
   Origs: 110:fornext, 120:auto
   Dests: 140:auto
-(1 3) 140 FOR J = 1 TO 5
+F(J) (1 3) 140 FOR J = 1 TO 5
   Origs: 130:auto
   Dests: 144:fornext, 146:fornext
-(0 3) 144 P(J) = 0
+F(J) (0 3) 144 P(J) = 0
   Origs: 140:fornext
   Dests: 146:auto
-(0 1) 146 NEXT J
+F(J) (0 1) 146 NEXT J
   Origs: 140:fornext, 144:auto
   Dests: 150:auto
 (0 2) 150 PRINT "GUESS A FIVE LETTER WORD";
@@ -108,17 +108,17 @@ Halstead complexity:
 (1 4) 172 IF S$ = L$ THEN 500
   Origs: 170:auto
   Dests: 173:auto, 500:ifthen
-(1 3) 173 FOR I = 1 TO 7
-(0 3)     P(I) = 0
-(0 1)     NEXT I
+F(I) (1 3) 173 FOR I = 1 TO 7
+F(I) (0 3)     P(I) = 0
+F(I) (0 1)     NEXT I
   Origs: 172:auto
   Dests: 175:auto
 (0 4) 175 L(0) = LEN(L$)
   Origs: 173:auto
   Dests: 180:auto
-(1 4) 180 FOR I = 1 TO LEN(L$)
-(0 4)     L(I) = ASC(MID$(L$, I, 1))
-(0 1)     NEXT I
+F(I) (1 4) 180 FOR I = 1 TO LEN(L$)
+F(I) (0 4)     L(I) = ASC(MID$(L$, I, 1))
+F(I) (0 1)     NEXT I
   Origs: 175:auto
   Dests: 190:auto
 (1 4) 190 IF L(1) = 63 THEN 300
@@ -131,34 +131,34 @@ Halstead complexity:
 (0 3)     Q = 1
   Origs: 200:auto
   Dests: 210:auto
-(1 3) 210 FOR I = 1 TO 5
+F(I) (1 3) 210 FOR I = 1 TO 5
   Origs: 205:auto
   Dests: 220:fornext, 265:fornext
-(1 3) 220 FOR J = 1 TO 5
+F(I,J) (1 3) 220 FOR J = 1 TO 5
   Origs: 210:fornext
   Dests: 230:fornext, 260:fornext
-(1 4) 230 IF S(I) <> L(J) THEN 260
+F(I,J) (1 4) 230 IF S(I) <> L(J) THEN 260
   Origs: 220:fornext
   Dests: 231:auto, 260:ifthen
-(0 3) 231 P(Q) = L(J)
+F(I,J) (0 3) 231 P(Q) = L(J)
   Origs: 230:auto
   Dests: 232:auto
-(0 4) 232 Q = Q + 1
+F(I,J) (0 4) 232 Q = Q + 1
   Origs: 231:auto
   Dests: 233:auto
-(1 4) 233 IF I <> J THEN 250
+F(I,J) (1 4) 233 IF I <> J THEN 250
   Origs: 232:auto
   Dests: 240:auto, 250:ifthen
-(0 3) 240 A(J) = L(J)
+F(I,J) (0 3) 240 A(J) = L(J)
   Origs: 233:auto
   Dests: 250:auto
-(0 4) 250 M = M + 1
+F(I,J) (0 4) 250 M = M + 1
   Origs: 233:ifthen, 240:auto
   Dests: 260:auto
-(0 1) 260 NEXT J
+F(I,J) (0 1) 260 NEXT J
   Origs: 220:fornext, 230:ifthen, 250:auto
   Dests: 265:auto
-(0 1) 265 NEXT I
+F(I) (0 1) 265 NEXT I
   Origs: 210:fornext, 260:auto
   Dests: 270:auto
 (0 3) 270 A(0) = 5
@@ -168,15 +168,15 @@ Halstead complexity:
   Origs: 270:auto
   Dests: 275:auto
 (0 3) 275 A$ = ""
-(1 3)     FOR I = 1 TO A(0)
-(0 5)     A$ = A$ + CHR$(A(I))
-(0 1)     NEXT I
+F(I) (1 3)     FOR I = 1 TO A(0)
+F(I) (0 5)     A$ = A$ + CHR$(A(I))
+F(I) (0 1)     NEXT I
   Origs: 272:auto
   Dests: 277:auto
 (0 3) 277 P$ = ""
-(1 3)     FOR I = 1 TO P(0)
-(0 5)     P$ = P$ + CHR$(P(I))
-(0 1)     NEXT I
+F(I) (1 3)     FOR I = 1 TO P(0)
+F(I) (0 5)     P$ = P$ + CHR$(P(I))
+F(I) (0 1)     NEXT I
   Origs: 275:auto
   Dests: 280:auto
 (0 5) 280 PRINT "THERE WERE"; M; "MATCHES AND THE COMMON LETTERS WERE..."; P$
@@ -202,9 +202,9 @@ Halstead complexity:
   Origs: 289:auto
   Dests: 150:goto
 (0 3) 300 S$ = ""
-(1 3)     FOR I = 1 TO 7
-(0 5)     S$ = S$ + CHR$(S(I))
-(0 1)     NEXT I
+F(I) (1 3)     FOR I = 1 TO 7
+F(I) (0 5)     S$ = S$ + CHR$(S(I))
+F(I) (0 1)     NEXT I
   Origs: 190:ifthen
   Dests: 310:auto
 (0 3) 310 PRINT "THE SECRET WORD IS "; S$

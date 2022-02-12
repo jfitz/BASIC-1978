@@ -87,255 +87,256 @@ Halstead complexity:
 (0 2) 1800 PRINT "VERY GOOD..."
   Origs: 1710:auto
   Dests: 1890:auto
-(1 3) 1890 FOR I = 1 TO 100
-(1 3)      FOR J = 1 TO 6
-(0 3)      A(I, J) = 0
-(0 1)      NEXT J
-(0 1)      NEXT I
+F(I) (1 3) 1890 FOR I = 1 TO 100
+F(I,J) (1 3)      FOR J = 1 TO 6
+F(I,J) (0 3)      A(I, J) = 0
+F(I,J) (0 1)      NEXT J
+F(I) (0 1)      NEXT I
   Origs: 1800:auto
   Dests: 1980:auto
 (0 3) 1980 F = 1
   Origs: 1890:auto
   Dests: 2070:auto
-(1 3) 2070 FOR P = 1 TO R
+F(P) (1 3) 2070 FOR P = 1 TO R
   Origs: 1980:auto, 7290:ifthen
   Dests: 2160:fornext, 7110:fornext
-(0 3) 2160 M = 0
+F(P) (0 3) 2160 M = 0
   Origs: 2070:fornext
   Dests: 2250:auto
-(0 3) 2250 B = 1
+F(P) (0 3) 2250 B = 1
   Origs: 2160:auto
   Dests: 2340:auto
-(0 3) 2340 M = 0
-(0 3)      Q = 0
+F(P) (0 3) 2340 M = 0
+F(P) (0 3)      Q = 0
   Origs: 2250:auto
   Dests: 2430:auto
-(1 3) 2430 FOR I = 1 TO 15
-(0 3)      C(I) = 0
-(0 1)      NEXT I
+F(P,I) (1 3) 2430 FOR I = 1 TO 15
+F(P,I) (0 3)      C(I) = 0
+F(P,I) (0 1)      NEXT I
   Origs: 2340:auto
   Dests: 2610:auto
 (0 1) 2520 REM ARK BALL GENERATOR USING MOD '15' SYSTEM
   Origs: 
   Dests: 
-(0 2) 2610 PRINT "TYPE ROLL TO GET THE BALL GOING."
+F(P,I) (0 2) 2610 PRINT "TYPE ROLL TO GET THE BALL GOING."
   Origs: 2430:auto, 6930:ifthen, 8640:ifthen
   Dests: 2700:auto
-(1 2) 2700 INPUT N$
+F(P,I) (1 2) 2700 INPUT N$
   Origs: 2610:auto
   Dests: 2790:auto
-(0 3) 2790 K = 0
-(0 3)      D = 0
+F(P,I) (0 3) 2790 K = 0
+F(P,I) (0 3)      D = 0
   Origs: 2700:auto
   Dests: 2880:auto
-(1 3) 2880 FOR I = 1 TO 20
+F(P,I) (1 3) 2880 FOR I = 1 TO 20
   Origs: 2790:auto
   Dests: 2970:fornext, 3420:fornext
-(0 4) 2970 X = INT(RND(1) * 100)
+F(P,I) (0 4) 2970 X = INT(RND(1) * 100)
   Origs: 2880:fornext
   Dests: 3060:auto
-(1 3) 3060 FOR J = 1 TO 10
+F(P,I,J) (1 3) 3060 FOR J = 1 TO 10
   Origs: 2970:auto
   Dests: 3150:fornext, 3240:fornext
-(1 6) 3150 IF X < 15 * J THEN 3330
+F(P,I,J) (1 6) 3150 IF X < 15 * J THEN 3330
   Origs: 3060:fornext
   Dests: 3240:auto, 3330:ifthen
-(0 1) 3240 NEXT J
+F(P,I,J) (0 1) 3240 NEXT J
   Origs: 3060:fornext, 3150:auto
   Dests: 3330:auto
-(0 3) 3330 C(15 * J - X) = 1
+F(P,I,J) (0 3) 3330 C(15 * J - X) = 1
   Origs: 3150:ifthen, 3240:auto
   Dests: 3420:auto
-(0 1) 3420 NEXT I
+F(P,I,J) (0 1) 3420 NEXT I
   Origs: 2880:fornext, 3330:auto
   Dests: 3600:auto
 (0 1) 3510 REM ARK PIN DIAGRAM
   Origs: 
   Dests: 
-(0 7) 3600 PRINT "PLAYER:" P; "FRAME:"; F "BALL:" B
+F(P,I) (0 7) 3600 PRINT "PLAYER:" P; "FRAME:"; F "BALL:" B
   Origs: 3420:auto
   Dests: 3690:auto
-(1 3) 3690 FOR I = 0 TO 3
+F(P,I,I) (1 3) 3690 FOR I = 0 TO 3
   Origs: 3600:auto
   Dests: 3780:fornext, 4500:fornext
-(0 2) 3780 PRINT
+F(P,I,I) (0 2) 3780 PRINT
   Origs: 3690:fornext
   Dests: 3870:auto
-(1 4) 3870 FOR J = 1 TO 4 - I
+F(P,I,J) (1 4) 3870 FOR J = 1 TO 4 - I
   Origs: 3780:auto
   Dests: 3960:fornext, 4410:fornext
-(0 4) 3960 K = K + 1
+F(P,I,J) (0 4) 3960 K = K + 1
   Origs: 3870:fornext
   Dests: 4050:auto
-(1 4) 4050 IF C(K) = 1 THEN 4320
+F(P,I,J) (1 4) 4050 IF C(K) = 1 THEN 4320
   Origs: 3960:auto
   Dests: 4140:auto, 4320:ifthen
-(0 4) 4140 PRINT TAB(I); "+ ";
+F(P,I,J) (0 4) 4140 PRINT TAB(I); "+ ";
   Origs: 4050:auto
   Dests: 4230:auto
-(0 2) 4230 GOTO 4410
+F(P,I,J) (0 2) 4230 GOTO 4410
   Origs: 4140:auto
   Dests: 4410:goto
-(0 4) 4320 PRINT TAB(I); "O ";
+F(P,I,J) (0 4) 4320 PRINT TAB(I); "O ";
   Origs: 4050:ifthen
   Dests: 4410:auto
-(0 1) 4410 NEXT J
+F(P,I,J) (0 1) 4410 NEXT J
   Origs: 3870:fornext, 4230:goto, 4320:auto
   Dests: 4500:auto
-(0 1) 4500 NEXT I
+F(P,I) (0 1) 4500 NEXT I
   Origs: 3690:fornext, 4410:auto
   Dests: 4590:auto
-(0 2) 4590 PRINT ""
+F(P,I) (0 2) 4590 PRINT ""
   Origs: 4500:auto
   Dests: 4770:auto
 (0 1) 4680 REM ARK ROLL ANALYSIS
   Origs: 
   Dests: 
-(1 3) 4770 FOR I = 1 TO 10
+F(P,I,I) (1 3) 4770 FOR I = 1 TO 10
   Origs: 4590:auto
   Dests: 4860:fornext, 4950:fornext
-(0 4) 4860 D = D + C(I)
+F(P,I,I) (0 4) 4860 D = D + C(I)
   Origs: 4770:fornext
   Dests: 4950:auto
-(0 1) 4950 NEXT I
+F(P,I) (0 1) 4950 NEXT I
   Origs: 4770:fornext, 4860:auto
   Dests: 5040:auto
-(1 5) 5040 IF D - M <> 0 THEN 5220
+F(P,I) (1 5) 5040 IF D - M <> 0 THEN 5220
   Origs: 4950:auto
   Dests: 5130:auto, 5220:ifthen
-(0 2) 5130 PRINT "GUTTER!!"
+F(P,I) (0 2) 5130 PRINT "GUTTER!!"
   Origs: 5040:auto
   Dests: 5220:auto
-(1 7) 5220 IF B <> 1 OR D <> 10 THEN 5490
+F(P,I) (1 7) 5220 IF B <> 1 OR D <> 10 THEN 5490
   Origs: 5040:ifthen, 5130:auto
   Dests: 5310:auto, 5490:ifthen
-(0 2) 5310 PRINT "STRIKE!!!!!"
+F(P,I) (0 2) 5310 PRINT "STRIKE!!!!!"
   Origs: 5220:auto
   Dests: 5400:auto
-(0 3) 5400 Q = 3
+F(P,I) (0 3) 5400 Q = 3
   Origs: 5310:auto
   Dests: 5490:auto
-(1 7) 5490 IF B <> 2 OR D <> 10 THEN 5760
+F(P,I) (1 7) 5490 IF B <> 2 OR D <> 10 THEN 5760
   Origs: 5220:ifthen, 5400:auto
   Dests: 5580:auto, 5760:ifthen
-(0 2) 5580 PRINT "SPARE!!!!"
+F(P,I) (0 2) 5580 PRINT "SPARE!!!!"
   Origs: 5490:auto
   Dests: 5670:auto
-(0 3) 5670 Q = 2
+F(P,I) (0 3) 5670 Q = 2
   Origs: 5580:auto
   Dests: 5760:auto
-(1 7) 5760 IF B <> 2 OR D >= 10 THEN 6030
+F(P,I) (1 7) 5760 IF B <> 2 OR D >= 10 THEN 6030
   Origs: 5490:ifthen, 5670:auto
   Dests: 5850:auto, 6030:ifthen
-(0 2) 5850 PRINT "ERROR!!!"
+F(P,I) (0 2) 5850 PRINT "ERROR!!!"
   Origs: 5760:auto
   Dests: 5940:auto
-(0 3) 5940 Q = 1
+F(P,I) (0 3) 5940 Q = 1
   Origs: 5850:auto
   Dests: 6030:auto
-(1 7) 6030 IF B <> 1 OR D >= 10 THEN 6210
+F(P,I) (1 7) 6030 IF B <> 1 OR D >= 10 THEN 6210
   Origs: 5760:ifthen, 5940:auto
   Dests: 6120:auto, 6300:ifthen
-(0 2) 6120 PRINT "ROLL YOUR 2ND BALL"
+F(P,I) (0 2) 6120 PRINT "ROLL YOUR 2ND BALL"
   Origs: 6030:auto
   Dests: 6300:auto
 (0 1) 6210 REM ARK STORAGE OF THE SCORES
   Origs: 
   Dests: 
-(0 2) 6300 PRINT
+F(P,I) (0 2) 6300 PRINT
   Origs: 6030:ifthen, 6120:auto, 6750:ifthen
   Dests: 6390:auto
-(0 3) 6390 A(F * P, B) = D
+F(P,I) (0 3) 6390 A(F * P, B) = D
   Origs: 6300:auto
   Dests: 6480:auto
-(1 4) 6480 IF B = 2 THEN 7020
+F(P,I) (1 4) 6480 IF B = 2 THEN 7020
   Origs: 6390:auto
   Dests: 6570:auto, 7020:ifthen
-(0 3) 6570 B = 2
+F(P,I) (0 3) 6570 B = 2
   Origs: 6480:auto
   Dests: 6660:auto
-(0 3) 6660 M = D
+F(P,I) (0 3) 6660 M = D
   Origs: 6570:auto
   Dests: 6750:auto
-(1 5) 6750 IF Q = 3 THEN 6210
+F(P,I) (1 5) 6750 IF Q = 3 THEN 6210
   Origs: 6660:auto
   Dests: 6300:ifthen, 6840:auto
-(0 4) 6840 A(F * P, B) = D - M
+F(P,I) (0 4) 6840 A(F * P, B) = D - M
   Origs: 6750:auto
   Dests: 6930:auto
-(1 5) 6930 IF Q = 0 THEN 2520
+F(P,I) (1 5) 6930 IF Q = 0 THEN 2520
   Origs: 6840:auto
   Dests: 2610:ifthen, 7020:auto
-(0 3) 7020 A(F * P, 3) = Q
+F(P,I) (0 3) 7020 A(F * P, 3) = Q
   Origs: 6480:ifthen, 6930:auto
   Dests: 7110:auto
-(0 1) 7110 NEXT P
+F(P,I) (0 1) 7110 NEXT P
   Origs: 2070:fornext, 7020:auto
   Dests: 7200:auto
-(0 4) 7200 F = F + 1
+F(P) (0 4) 7200 F = F + 1
   Origs: 7110:auto
   Dests: 7290:auto
-(1 5) 7290 IF F < 11 THEN 2070
+F(P) (1 5) 7290 IF F < 11 THEN 2070
   Origs: 7200:auto
   Dests: 2070:ifthen, 7295:auto
-(0 2) 7295 PRINT "FRAMES"
+F(P) (0 2) 7295 PRINT "FRAMES"
   Origs: 7290:auto
   Dests: 7300:auto
-(0 2) 7300 OPTION SEMICOLON_ZONE_WIDTH 6
+F(P) (0 2) 7300 OPTION SEMICOLON_ZONE_WIDTH 6
   Origs: 7295:auto
   Dests: 7380:auto
-(1 3) 7380 FOR I = 1 TO 10
+F(P,I) (1 3) 7380 FOR I = 1 TO 10
   Origs: 7300:auto
   Dests: 7470:fornext, 7560:fornext
-(0 2) 7470 PRINT I;
+F(P,I) (0 2) 7470 PRINT I;
   Origs: 7380:fornext
   Dests: 7560:auto
-(0 1) 7560 NEXT I
+F(P,I) (0 1) 7560 NEXT I
   Origs: 7380:fornext, 7470:auto
   Dests: 7650:auto
-(0 2) 7650 PRINT
+F(P) (0 2) 7650 PRINT
   Origs: 7560:auto
   Dests: 7740:auto
-(1 3) 7740 FOR P = 1 TO R
+F(P,P) (1 3) 7740 FOR P = 1 TO R
   Origs: 7650:auto
   Dests: 7830:fornext, 8370:fornext
-(1 3) 7830 FOR I = 1 TO 3
+F(P,P,I) (1 3) 7830 FOR I = 1 TO 3
   Origs: 7740:fornext
   Dests: 7920:fornext, 8190:fornext
-(1 3) 7920 FOR J = 1 TO 10
+F(P,I,J) (1 3) 7920 FOR J = 1 TO 10
   Origs: 7830:fornext
   Dests: 8010:fornext, 8100:fornext
-(0 2) 8010 PRINT A(J * P, I);
+F(P,I,J) (0 2) 8010 PRINT A(J * P, I);
   Origs: 7920:fornext
   Dests: 8100:auto
-(0 1) 8100 NEXT J
+F(P,I,J) (0 1) 8100 NEXT J
   Origs: 7920:fornext, 8010:auto
   Dests: 8105:auto
-(0 2) 8105 PRINT
+F(P,I) (0 2) 8105 PRINT
   Origs: 8100:auto
   Dests: 8190:auto
-(0 1) 8190 NEXT I
+F(P,I) (0 1) 8190 NEXT I
   Origs: 7830:fornext, 8105:auto
   Dests: 8280:auto
-(0 2) 8280 PRINT
+F(P) (0 2) 8280 PRINT
   Origs: 8190:auto
   Dests: 8370:auto
-(0 1) 8370 NEXT P
+F(P) (0 1) 8370 NEXT P
   Origs: 7740:fornext, 8280:auto
   Dests: 8380:auto
-(0 2) 8380 OPTION SEMICOLON_ZONE_WIDTH 0
+F(P) (0 2) 8380 OPTION SEMICOLON_ZONE_WIDTH 0
   Origs: 8370:auto
   Dests: 8460:auto
-(0 2) 8460 PRINT "DO YOU WANT ANOTHER GAME"
+F(P) (0 2) 8460 PRINT "DO YOU WANT ANOTHER GAME"
   Origs: 8380:auto
   Dests: 8550:auto
-(1 2) 8550 INPUT A$
+F(P) (1 2) 8550 INPUT A$
   Origs: 8460:auto
   Dests: 8640:auto
-(1 6) 8640 IF LEFT$(A$, 1) = "Y" THEN 2610
+F(P) (1 6) 8640 IF LEFT$(A$, 1) = "Y" THEN 2610
   Origs: 8550:auto
   Dests: 2610:ifthen, 8730:auto
-(0 1) 8730 END
+F(P) (0 1) 8730 END
+     WARNING: Terminating statement in FOR/NEXT
   Origs: 8640:auto
   Dests: :stop
 

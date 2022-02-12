@@ -255,7 +255,8 @@ class AbstractStatement
   attr_reader :errors, :warnings, :program_errors, :keywords, :tokens,
               :separators, :valid, :executable, :comment, :linenums,
               :autonext, :autonext_line_stmt, :transfers, :transfers_auto,
-              :is_if_no_else, :may_be_if_sub, :part_of_sub, :part_of_on_error
+              :is_if_no_else, :may_be_if_sub, :part_of_sub, :part_of_on_error,
+              :part_of_fornext
   attr_accessor :part_of_user_function, :program_warnings, :origins, :reachable
 
   def self.extra_keywords
@@ -298,6 +299,7 @@ class AbstractStatement
     @part_of_user_function = nil
     @part_of_sub = nil
     @part_of_on_error = nil
+    @part_of_fornext = []
   end
 
   def set_autonext_line_stmt(line_stmt_mod)
@@ -426,6 +428,57 @@ class AbstractStatement
     end
   end
 
+  def assign_fornext_markers(_) end
+
+  def assign_fornext_marker(marker, markers, line_number, program)
+    # mark as part of this fornext
+    @part_of_fornext << marker
+
+    if for?
+      markers << @control
+    end
+
+    # do not follow if statement is NEXT for this control
+    if next?
+      # no controls? that's a problem
+      return if @controls.empty?
+
+      @controls.each do |control|
+        return if markers.size == 1
+        
+        markers.slice!(-1)
+      end
+    end
+
+    xfers = @transfers + @transfers_auto
+    
+    # for each destination
+    xfers.each do |xfer|
+      # don't follow function call and GOSUB
+      next if [:function, :gosub].include?(xfer.type)
+
+      dest_line = xfer.line_number
+      dest_stmt = xfer.statement
+      statement = program.get_statement(dest_line, dest_stmt)
+
+      next if statement.nil?
+
+      if !statement.part_of_fornext.include?(marker)
+        # recurse for that statement's destinations
+        statement.assign_fornext_marker(marker, markers, dest_line, program)
+
+        stmt_xfers = statement.transfers
+
+        # warn about STOP, END, CHAIN in GOSUB block
+        stmt_xfers.each do |stmt_xfer|
+          if [:stop, :chain].include?(stmt_xfer.type)
+            statement.program_warnings << "Terminating statement in FOR/NEXT"
+          end
+        end
+      end
+    end
+  end
+
   def set_for_lines(_, _) end
 
   def set_next_lines(_, _) end
@@ -471,6 +524,7 @@ class AbstractStatement
     text += "#{@part_of_user_function} " unless @part_of_user_function.nil?
     text += "E(#{@part_of_on_error}) " unless @part_of_on_error.nil?
     text += "G(#{@part_of_sub}) " unless @part_of_sub.nil?
+    text += "F(#{@part_of_fornext.map(&:to_s).join(',')}) " unless @part_of_fornext.empty?
     text += "(#{@mccabe} #{@comprehension_effort}) #{number} #{core_pretty}"
 
     texts << text
@@ -631,6 +685,14 @@ class AbstractStatement
     end
   end
 
+  def for?
+    @keywords.size == 1 && @keywords[0].to_s == 'FOR'
+  end
+
+  def next?
+    @keywords.size == 1 && @keywords[0].to_s == 'NEXT'
+  end
+
   def procedure?
     is_proc = false
 
@@ -682,16 +744,17 @@ class AbstractStatement
     text = AbstractToken.pretty_tokens(@keywords, @core_tokens)
     text = " #{text}" unless text.empty?
 
-    line = ''
+    line = ' '
 
-    line = " #{@part_of_user_function}" unless @part_of_user_function.nil?
-    line = " E(#{@part_of_on_error})" unless @part_of_on_error.nil?
-    line = " G(#{@part_of_sub})" unless @part_of_sub.nil?
+    line += "#{@part_of_user_function} " unless @part_of_user_function.nil?
+    line += "E(#{@part_of_on_error}) " unless @part_of_on_error.nil?
+    line += "G(#{@part_of_sub}) " unless @part_of_sub.nil?
+    line += "F(#{@part_of_fornext.map(&:to_s).join(',')}) " unless @part_of_fornext.empty?
 
     line += if show_timing
-              " (#{@profile_time.round(4)}/#{@profile_count})"
+              "(#{@profile_time.round(4)}/#{@profile_count})"
             else
-              " (#{@profile_count})"
+              "(#{@profile_count})"
             end
 
     line += text
@@ -734,6 +797,7 @@ class AbstractStatement
 
     trace_out.print_out "E(#{@part_of_on_error}) " unless @part_of_on_error.nil?
     trace_out.print_out "G(#{@part_of_sub}) " unless @part_of_sub.nil?
+    trace_out.print_out "F(#{@part_of_fornext.map(&:to_s).join(',')}) " unless @part_of_fornext.empty?
 
     mod = current_line_stmt_mod.index
 
@@ -2368,6 +2432,24 @@ class ForStatement < AbstractStatement
       line_number = @nextstmt_line_stmt.line_number
       stmt = @nextstmt_line_stmt.statement
       @transfers << TransferRefLineStmt.new(line_number, stmt, :fornext)
+    end
+  end
+
+  def assign_fornext_markers(program)
+    return if @control.nil?
+    return if @loopstart_line_stmt_mod.nil?
+
+    # mark as part of this fornext
+    @part_of_fornext << @control
+
+    dest_line = @loopstart_line_stmt_mod.line_number
+    dest_stmt = @loopstart_line_stmt_mod.statement
+    statement = program.get_statement(dest_line, dest_stmt)
+
+    unless statement.nil?
+      # mark statement's destinations
+      markers = [@control]
+      statement.assign_fornext_marker(@control, markers, dest_line, program)
     end
   end
 

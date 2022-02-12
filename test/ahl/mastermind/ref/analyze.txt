@@ -92,135 +92,135 @@ Halstead complexity:
 (0 2) 200 PRINT "=====     ======"
   Origs: 190:auto
   Dests: 210:auto
-(1 3) 210 FOR X = 1 TO C9
+F(X) (1 3) 210 FOR X = 1 TO C9
   Origs: 200:auto
   Dests: 220:fornext, 240:fornext
-(1 2) 220 READ X$
+F(X) (1 2) 220 READ X$
   Origs: 210:fornext
   Dests: 230:auto
-(0 6) 230 PRINT X$; TAB(13); MID$(L$, X, 1)
+F(X) (0 6) 230 PRINT X$; TAB(13); MID$(L$, X, 1)
   Origs: 220:auto
   Dests: 240:auto
-(0 1) 240 NEXT X
+F(X) (0 1) 240 NEXT X
   Origs: 210:fornext, 230:auto
   Dests: 250:auto
 (0 2) 250 PRINT
   Origs: 240:auto
   Dests: 260:auto
-(1 3) 260 FOR R = 1 TO R9
+F(R) (1 3) 260 FOR R = 1 TO R9
   Origs: 250:auto
   Dests: 270:fornext, 1150:fornext
-(0 2) 270 PRINT
+F(R) (0 2) 270 PRINT
   Origs: 260:fornext
   Dests: 280:auto
-(0 4) 280 PRINT "ROUND NUMBER"; R; "----"
+F(R) (0 4) 280 PRINT "ROUND NUMBER"; R; "----"
   Origs: 270:auto
   Dests: 290:auto
-(0 2) 290 PRINT
+F(R) (0 2) 290 PRINT
   Origs: 280:auto
   Dests: 300:auto
-(0 2) 300 PRINT "GUESS MY COMBINATION."
-(0 2)     PRINT
+F(R) (0 2) 300 PRINT "GUESS MY COMBINATION."
+F(R) (0 2)     PRINT
   Origs: 290:auto
   Dests: 320:auto
 (0 1) 310 REM     GET A COMBINATION
   Origs: 
   Dests: 
-(0 4) 320 A = INT(P * RND(1) + 1)
+F(R) (0 4) 320 A = INT(P * RND(1) + 1)
   Origs: 300:auto
   Dests: 330:auto
-(0 2) 330 GOSUB 3000
+F(R) (0 2) 330 GOSUB 3000
   Origs: 320:auto
   Dests: 340:auto, 3010:gosub
-(1 3) 340 FOR X = 1 TO A
+F(R,X) (1 3) 340 FOR X = 1 TO A
   Origs: 330:auto
   Dests: 350:fornext, 360:fornext
-(0 2) 350 GOSUB 3500
+F(R,X) (0 2) 350 GOSUB 3500
   Origs: 340:fornext
   Dests: 360:auto, 3510:gosub
-(0 1) 360 NEXT X
+F(R,X) (0 1) 360 NEXT X
   Origs: 340:fornext, 350:auto
   Dests: 370:auto
-(1 3) 370 FOR M = 1 TO 10
+F(R,M) (1 3) 370 FOR M = 1 TO 10
   Origs: 360:auto
   Dests: 380:fornext, 610:fornext
-(0 4) 380 PRINT "MOVE # "; M; " GUESS ";
-(1 2)     INPUT X$
+F(R,M) (0 4) 380 PRINT "MOVE # "; M; " GUESS ";
+F(R,M) (1 2)     INPUT X$
   Origs: 370:fornext, 410:goto, 470:goto, 2080:goto
   Dests: 390:auto
-(1 4) 390 IF X$ = "BOARD" THEN 2000
+F(R,M) (1 4) 390 IF X$ = "BOARD" THEN 2000
   Origs: 380:auto
   Dests: 400:auto, 2010:ifthen
-(1 4) 400 IF X$ = "QUIT" THEN 2500
+F(R,M) (1 4) 400 IF X$ = "QUIT" THEN 2500
   Origs: 390:auto
   Dests: 410:auto, 2510:ifthen
-(1 6) 410 IF LEN(X$) <> P9 THEN PRINT "BAD NUMBER OF POSITIONS."
-(0 3)     GOTO 380
+F(R,M) (1 6) 410 IF LEN(X$) <> P9 THEN PRINT "BAD NUMBER OF POSITIONS."
+F(R,M) (0 3)     GOTO 380
   Origs: 400:auto
   Dests: 380:goto, 420:auto
-(0 1) 420 REM     UNPACK X$ INTO G$(1-P9)
+F(R,M) (0 1) 420 REM     UNPACK X$ INTO G$(1-P9)
   Origs: 410:auto
   Dests: 430:auto
-(1 3) 430 FOR X = 1 TO P9
+F(R,M,X) (1 3) 430 FOR X = 1 TO P9
   Origs: 420:auto
   Dests: 440:fornext, 490:fornext
-(1 3) 440 FOR Y = 1 TO C9
+F(R,M,X,Y) (1 3) 440 FOR Y = 1 TO C9
   Origs: 430:fornext
   Dests: 450:fornext, 460:fornext
-(1 6) 450 IF MID$(X$, X, 1) = MID$(L$, Y, 1) THEN 480
+F(R,M,X,Y) (1 6) 450 IF MID$(X$, X, 1) = MID$(L$, Y, 1) THEN 480
   Origs: 440:fornext
   Dests: 460:auto, 480:ifthen
-(0 1) 460 NEXT Y
+F(R,M,X,Y) (0 1) 460 NEXT Y
   Origs: 440:fornext, 450:auto
   Dests: 470:auto
 (0 5) 470 PRINT "'"; MID$(X$, X, 1); "' IS UNRECOGNIZED."
 (0 3)     GOTO 380
   Origs: 460:auto
   Dests: 380:goto
-(0 4) 480 G$(X) = MID$(X$, X, 1)
+F(R,M,X,Y) (0 4) 480 G$(X) = MID$(X$, X, 1)
   Origs: 450:ifthen
   Dests: 490:auto
-(0 1) 490 NEXT X
+F(R,M,X,Y) (0 1) 490 NEXT X
   Origs: 430:fornext, 480:auto
   Dests: 510:auto
 (0 1) 500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
   Origs: 
   Dests: 
-(0 2) 510 GOSUB 4000
+F(R,M,X) (0 2) 510 GOSUB 4000
   Origs: 490:auto
   Dests: 530:auto, 4010:gosub
 (0 1) 520 REM     AND GET NUMBER OF BLACKS AND WHITES
   Origs: 
   Dests: 
-(0 2) 530 GOSUB 4500
+F(R,M,X) (0 2) 530 GOSUB 4500
   Origs: 510:auto
   Dests: 540:auto, 4510:gosub
-(1 4) 540 IF B = P9 THEN 630
+F(R,M,X) (1 4) 540 IF B = P9 THEN 630
   Origs: 530:auto
   Dests: 550:auto, 560:auto, 630:ifthen
-(0 1) 550 REM     TELL HUMAN RESULTS
+F(R,M,X) (0 1) 550 REM     TELL HUMAN RESULTS
   Origs: 540:auto
   Dests: 560:auto
-(0 6) 560 PRINT "YOU HAVE "; B; " BLACKS AND "; W; " WHITES."
+F(R,M,X) (0 6) 560 PRINT "YOU HAVE "; B; " BLACKS AND "; W; " WHITES."
   Origs: 540:auto, 550:auto
   Dests: 580:auto
 (0 1) 570 REM     SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
   Origs: 
   Dests: 
-(0 3) 580 S$(M) = X$
+F(R,M,X) (0 3) 580 S$(M) = X$
   Origs: 560:auto
   Dests: 590:auto
-(0 3) 590 S(M, 1) = B
+F(R,M,X) (0 3) 590 S(M, 1) = B
   Origs: 580:auto
   Dests: 600:auto
-(0 3) 600 S(M, 2) = W
+F(R,M,X) (0 3) 600 S(M, 2) = W
   Origs: 590:auto
   Dests: 610:auto
-(0 1) 610 NEXT M
+F(R,M,X) (0 1) 610 NEXT M
   Origs: 370:fornext, 600:auto
   Dests: 620:auto
-(0 2) 620 PRINT "YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!"
-(0 2)     GOTO 640
+F(R) (0 2) 620 PRINT "YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!"
+F(R) (0 2)     GOTO 640
   Origs: 610:auto
   Dests: 640:goto
 (0 2) 622 GOSUB 4000
@@ -229,256 +229,261 @@ Halstead complexity:
 (0 2) 623 PRINT "THE ACTUAL COMBINATION WAS: ";
   Origs: 622:auto
   Dests: 624:auto
-(1 3) 624 FOR X = 1 TO P9
+F(X) (1 3) 624 FOR X = 1 TO P9
   Origs: 623:auto
   Dests: 625:fornext, 626:fornext
-(0 2) 625 PRINT A$(X);
+F(X) (0 2) 625 PRINT A$(X);
   Origs: 624:fornext
   Dests: 626:auto
-(0 1) 626 NEXT X
+F(X) (0 1) 626 NEXT X
   Origs: 624:fornext, 625:auto
   Dests: 627:auto
 (0 2) 627 PRINT
   Origs: 626:auto
   Dests: 630:auto
-(0 4) 630 PRINT "YOU GUESSED IT IN "; M; " MOVES!"
+F(R,M,X) (0 4) 630 PRINT "YOU GUESSED IT IN "; M; " MOVES!"
   Origs: 540:ifthen, 627:auto
   Dests: 640:auto
-(0 4) 640 H = H + M
+F(R,M,X) (0 4) 640 H = H + M
   Origs: 620:goto, 630:auto
   Dests: 650:auto
-(0 2) 650 GOSUB 5000
+F(R,M,X) (0 2) 650 GOSUB 5000
   Origs: 640:auto
   Dests: 690:auto, 5010:gosub
 (0 1) 660 REM
   Origs: 
   Dests: 
-(0 1) 670 REM     NOW COMPUTER GUESSES
+F(R,M,X) (0 1) 670 REM     NOW COMPUTER GUESSES
   Origs: 870:goto
   Dests: 690:auto
 (0 1) 680 REM
   Origs: 
   Dests: 
-(1 3) 690 FOR X = 1 TO P
+F(R,M,X,X) (1 3) 690 FOR X = 1 TO P
   Origs: 650:auto, 670:auto
   Dests: 700:fornext, 710:fornext
-(0 3) 700 I(X) = 1
+F(R,M,X,X) (0 3) 700 I(X) = 1
   Origs: 690:fornext
   Dests: 710:auto
-(0 1) 710 NEXT X
+F(R,M,X) (0 1) 710 NEXT X
   Origs: 690:fornext, 700:auto
   Dests: 720:auto
-(0 2) 720 PRINT "NOW I GUESS.  THINK OF A COMBINATION."
+F(R,M,X) (0 2) 720 PRINT "NOW I GUESS.  THINK OF A COMBINATION."
   Origs: 710:auto
   Dests: 730:auto
-(1 2) 730 INPUT "HIT RETURN WHEN READY:"; X$
+F(R,M,X) (1 2) 730 INPUT "HIT RETURN WHEN READY:"; X$
   Origs: 720:auto
   Dests: 740:auto
-(1 3) 740 FOR M = 1 TO 10
+F(R,M,X,M) (1 3) 740 FOR M = 1 TO 10
   Origs: 730:auto
   Dests: 750:fornext, 1080:fornext
-(0 2) 750 GOSUB 3000
+F(R,M,X,M) (0 2) 750 GOSUB 3000
   Origs: 740:fornext
   Dests: 770:auto, 3010:gosub
 (0 1) 760 REM     FIND A GUESS
   Origs: 
   Dests: 
-(0 4) 770 G = INT(P * RND(1) + 1)
+F(R,M,X) (0 4) 770 G = INT(P * RND(1) + 1)
   Origs: 750:auto
   Dests: 780:auto
-(1 4) 780 IF I(G) = 1 THEN 890
+F(R,M,X) (1 4) 780 IF I(G) = 1 THEN 890
   Origs: 770:auto
   Dests: 790:auto, 900:ifthen
-(1 3) 790 FOR X = G TO P
+F(R,M,X,X) (1 3) 790 FOR X = G TO P
   Origs: 780:auto
   Dests: 800:fornext, 810:fornext
-(1 4) 800 IF I(X) = 1 THEN 880
+F(R,M,X,X) (1 4) 800 IF I(X) = 1 THEN 880
   Origs: 790:fornext
   Dests: 810:auto, 880:ifthen
-(0 1) 810 NEXT X
+F(R,M,X) (0 1) 810 NEXT X
   Origs: 790:fornext, 800:auto
   Dests: 820:auto
-(1 3) 820 FOR X = 1 TO G
+F(R,M,X,X) (1 3) 820 FOR X = 1 TO G
   Origs: 810:auto
   Dests: 830:fornext, 840:fornext
-(1 4) 830 IF I(X) = 1 THEN 880
+F(R,M,X,X) (1 4) 830 IF I(X) = 1 THEN 880
   Origs: 820:fornext
   Dests: 840:auto, 880:ifthen
-(0 1) 840 NEXT X
+F(R,M,X) (0 1) 840 NEXT X
   Origs: 820:fornext, 830:auto
   Dests: 850:auto
-(0 2) 850 PRINT "YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
+F(R,M,X) (0 2) 850 PRINT "YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
   Origs: 840:auto
   Dests: 860:auto
-(0 2) 860 PRINT "TRY AGAIN, AND THIS TIME PLEASE BE MORE CAREFUL."
+F(R,M,X) (0 2) 860 PRINT "TRY AGAIN, AND THIS TIME PLEASE BE MORE CAREFUL."
   Origs: 850:auto
   Dests: 870:auto
-(0 3) 870 GOTO 660
+F(R,M,X) (0 3) 870 GOTO 660
   Origs: 860:auto
   Dests: 670:goto
-(0 3) 880 G = X
+F(R,M,X) (0 3) 880 G = X
   Origs: 800:ifthen, 830:ifthen
   Dests: 900:auto
 (0 1) 890 REM     NOW WE CONVERT GUESS #G INTO G$
   Origs: 
   Dests: 
-(1 3) 900 FOR X = 1 TO G
+F(R,M,X,X) (1 3) 900 FOR X = 1 TO G
   Origs: 780:ifthen, 880:auto
   Dests: 910:fornext, 920:fornext
-(0 2) 910 GOSUB 3500
+F(R,M,X,X) (0 2) 910 GOSUB 3500
   Origs: 900:fornext
   Dests: 920:auto, 3510:gosub
-(0 1) 920 NEXT X
+F(R,M,X) (0 1) 920 NEXT X
   Origs: 900:fornext, 910:auto
   Dests: 930:auto
-(0 2) 930 GOSUB 6000
+F(R,M,X) (0 2) 930 GOSUB 6000
   Origs: 920:auto
   Dests: 940:auto, 6010:gosub
-(0 2) 940 PRINT "MY GUESS IS: ";
+F(R,M,X) (0 2) 940 PRINT "MY GUESS IS: ";
   Origs: 930:auto
   Dests: 950:auto
-(1 3) 950 FOR X = 1 TO P9
+F(R,M,X,X) (1 3) 950 FOR X = 1 TO P9
   Origs: 940:auto
   Dests: 960:fornext, 970:fornext
-(0 2) 960 PRINT H$(X);
+F(R,M,X,X) (0 2) 960 PRINT H$(X);
   Origs: 950:fornext
   Dests: 970:auto
-(0 1) 970 NEXT X
+F(R,M,X) (0 1) 970 NEXT X
   Origs: 950:fornext, 960:auto
   Dests: 980:auto
-(2 3) 980 INPUT "  BLACKS, WHITES "; B1, W1
+F(R,M,X) (2 3) 980 INPUT "  BLACKS, WHITES "; B1, W1
   Origs: 970:auto
   Dests: 990:auto
-(1 4) 990 IF B1 = P9 THEN 1120
+F(R,M,X) (1 4) 990 IF B1 = P9 THEN 1120
   Origs: 980:auto
   Dests: 1000:auto, 1120:ifthen
-(0 2) 1000 GOSUB 3000
+F(R,M,X) (0 2) 1000 GOSUB 3000
   Origs: 990:auto
   Dests: 1010:auto, 3010:gosub
-(1 3) 1010 FOR X = 1 TO P
+F(R,M,X,X) (1 3) 1010 FOR X = 1 TO P
   Origs: 1000:auto
   Dests: 1020:fornext, 1070:fornext
-(0 2) 1020 GOSUB 3500
+F(R,M,X,X) (0 2) 1020 GOSUB 3500
   Origs: 1010:fornext
   Dests: 1030:auto, 3510:gosub
-(1 4) 1030 IF I(X) = 0 THEN 1070
+F(R,M,X) (1 4) 1030 IF I(X) = 0 THEN 1070
   Origs: 1020:auto
   Dests: 1035:auto, 1070:ifthen
-(0 2) 1035 GOSUB 6500
+F(R,M,X) (0 2) 1035 GOSUB 6500
   Origs: 1030:auto
   Dests: 1040:auto, 6510:gosub
-(0 2) 1040 GOSUB 4000
+F(R,M,X) (0 2) 1040 GOSUB 4000
   Origs: 1035:auto
   Dests: 1050:auto, 4010:gosub
-(0 2) 1050 GOSUB 4500
+F(R,M,X) (0 2) 1050 GOSUB 4500
   Origs: 1040:auto
   Dests: 1060:auto, 4510:gosub
-(1 9) 1060 IF B1 <> B OR W1 <> W THEN I(X) = 0
+F(R,M,X) (1 9) 1060 IF B1 <> B OR W1 <> W THEN I(X) = 0
   Origs: 1050:auto
   Dests: 1070:auto
-(0 1) 1070 NEXT X
+F(R,M,X) (0 1) 1070 NEXT X
   Origs: 1010:fornext, 1030:ifthen, 1060:auto
   Dests: 1080:auto
-(0 1) 1080 NEXT M
+F(R,M,X) (0 1) 1080 NEXT M
   Origs: 740:fornext, 1070:auto
   Dests: 1090:auto
-(0 2) 1090 PRINT "I USED UP ALL MY MOVES!"
+F(R,M) (0 2) 1090 PRINT "I USED UP ALL MY MOVES!"
   Origs: 1080:auto
   Dests: 1100:auto
-(0 2) 1100 PRINT "I GUESS MY CPU IS JUST HAVING AN OFF DAY."
+F(R,M) (0 2) 1100 PRINT "I GUESS MY CPU IS JUST HAVING AN OFF DAY."
   Origs: 1090:auto
   Dests: 1110:auto
-(0 2) 1110 GOTO 1130
+F(R,M) (0 2) 1110 GOTO 1130
   Origs: 1100:auto
   Dests: 1130:goto
-(0 4) 1120 PRINT "I GOT IT IN "; M; " MOVES!"
+F(R,M,X) (0 4) 1120 PRINT "I GOT IT IN "; M; " MOVES!"
   Origs: 990:ifthen
   Dests: 1130:auto
-(0 4) 1130 C = C + M
+F(R,M,X) (0 4) 1130 C = C + M
   Origs: 1110:goto, 1120:auto
   Dests: 1140:auto
-(0 2) 1140 GOSUB 5000
+F(R,M,X) (0 2) 1140 GOSUB 5000
   Origs: 1130:auto
   Dests: 1150:auto, 5010:gosub
-(0 1) 1150 NEXT R
+F(R,M,X) (0 1) 1150 NEXT R
   Origs: 260:fornext, 1140:auto
   Dests: 1160:auto
-(0 2) 1160 PRINT "GAME OVER"
+F(R,M,X) (0 2) 1160 PRINT "GAME OVER"
   Origs: 1150:auto
   Dests: 1170:auto
-(0 2) 1170 PRINT "FINAL SCORE:"
+F(R,M,X) (0 2) 1170 PRINT "FINAL SCORE:"
   Origs: 1160:auto
   Dests: 1180:auto
-(0 2) 1180 GOSUB 5040
+F(R,M,X) (0 2) 1180 GOSUB 5040
   Origs: 1170:auto
   Dests: 1190:auto, 5040:gosub
-(0 1) 1190 STOP
+F(R,M,X) (0 1) 1190 STOP
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
   Origs: 1180:auto
   Dests: :stop
 (0 1) 2000 REM
   Origs: 
   Dests: 
-(0 1) 2010 REM     BOARD PRINTOUT ROUTINE
+F(R,M) (0 1) 2010 REM     BOARD PRINTOUT ROUTINE
   Origs: 390:ifthen
   Dests: 2025:auto
 (0 1) 2020 REM
   Origs: 
   Dests: 
-(0 2) 2025 PRINT
+F(R,M) (0 2) 2025 PRINT
   Origs: 2010:auto
   Dests: 2030:auto
-(0 2) 2030 PRINT "BOARD"
+F(R,M) (0 2) 2030 PRINT "BOARD"
   Origs: 2025:auto
   Dests: 2040:auto
-(0 2) 2040 PRINT "MOVE     GUESS          BLACK     WHITE"
+F(R,M) (0 2) 2040 PRINT "MOVE     GUESS          BLACK     WHITE"
   Origs: 2030:auto
   Dests: 2050:auto
-(1 4) 2050 FOR Z = 1 TO M - 1
+F(R,M,Z) (1 4) 2050 FOR Z = 1 TO M - 1
   Origs: 2040:auto
   Dests: 2060:fornext, 2070:fornext
-(0 11) 2060 PRINT Z; TAB(9); S$(Z); TAB(25); S(Z, 1); TAB(35); S(Z, 2)
+F(R,M,Z) (0 11) 2060 PRINT Z; TAB(9); S$(Z); TAB(25); S(Z, 1); TAB(35); S(Z, 2)
   Origs: 2050:fornext
   Dests: 2070:auto
-(0 1) 2070 NEXT Z
+F(R,M,Z) (0 1) 2070 NEXT Z
   Origs: 2050:fornext, 2060:auto
   Dests: 2075:auto
-(0 2) 2075 PRINT
+F(R,M) (0 2) 2075 PRINT
   Origs: 2070:auto
   Dests: 2080:auto
-(0 3) 2080 GOTO 380
+F(R,M) (0 3) 2080 GOTO 380
   Origs: 2075:auto
   Dests: 380:goto
 (0 1) 2500 REM
   Origs: 
   Dests: 
-(0 1) 2510 REM     QUIT ROUTINE
+F(R,M) (0 1) 2510 REM     QUIT ROUTINE
   Origs: 400:ifthen
   Dests: 2530:auto
 (0 1) 2520 REM
   Origs: 
   Dests: 
-(0 2) 2530 PRINT "QUITTER!  MY COMBINATION WAS: ";
+F(R,M) (0 2) 2530 PRINT "QUITTER!  MY COMBINATION WAS: ";
   Origs: 2510:auto
   Dests: 2535:auto
-(0 2) 2535 GOSUB 4000
+F(R,M) (0 2) 2535 GOSUB 4000
   Origs: 2530:auto
   Dests: 2540:auto, 4010:gosub
-(1 3) 2540 FOR X = 1 TO P9
+F(R,M,X) (1 3) 2540 FOR X = 1 TO P9
   Origs: 2535:auto
   Dests: 2550:fornext, 2560:fornext
-(0 2) 2550 PRINT A$(X);
+F(R,M,X) (0 2) 2550 PRINT A$(X);
   Origs: 2540:fornext
   Dests: 2560:auto
-(0 1) 2560 NEXT X
+F(R,M,X) (0 1) 2560 NEXT X
   Origs: 2540:fornext, 2550:auto
   Dests: 2565:auto
-(0 2) 2565 PRINT
+F(R,M) (0 2) 2565 PRINT
   Origs: 2560:auto
   Dests: 2570:auto
-(0 2) 2570 PRINT "GOOD BYE"
+F(R,M) (0 2) 2570 PRINT "GOOD BYE"
   Origs: 2565:auto
   Dests: 2580:auto
-(0 1) 2580 STOP
+F(R,M) (0 1) 2580 STOP
+     WARNING: Terminating statement in FOR/NEXT
+     WARNING: Terminating statement in FOR/NEXT
   Origs: 2570:auto
   Dests: :stop
 (0 1) 3000 REM
@@ -490,13 +495,13 @@ G(3010) (0 1) 3010 REM     INITIALIZE Q(1-P9) TO ZEROS
 (0 1) 3020 REM
   Origs: 
   Dests: 
-G(3010) (1 3) 3030 FOR S = 1 TO P9
+G(3010) F(S) (1 3) 3030 FOR S = 1 TO P9
   Origs: 3010:auto
   Dests: 3040:fornext, 3050:fornext
-G(3010) (0 3) 3040 Q(S) = 0
+G(3010) F(S) (0 3) 3040 Q(S) = 0
   Origs: 3030:fornext
   Dests: 3050:auto
-G(3010) (0 1) 3050 NEXT S
+G(3010) F(S) (0 1) 3050 NEXT S
   Origs: 3030:fornext, 3040:auto
   Dests: 3060:auto
 G(3010) (0 1) 3060 RETURN
@@ -517,13 +522,13 @@ G(3510) (1 4) 3522 IF Q(1) > 0 THEN 3530
 G(3510) (0 1) 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
   Origs: 3522:auto
   Dests: 3526:auto
-G(3510) (1 3) 3526 FOR S = 1 TO P9
+G(3510) F(S) (1 3) 3526 FOR S = 1 TO P9
   Origs: 3522:auto, 3524:auto
   Dests: 3527:fornext, 3528:fornext
-G(3510) (0 3) 3527 Q(S) = 1
+G(3510) F(S) (0 3) 3527 Q(S) = 1
   Origs: 3526:fornext
   Dests: 3528:auto
-G(3510) (0 1) 3528 NEXT S
+G(3510) F(S) (0 1) 3528 NEXT S
   Origs: 3526:fornext, 3527:auto
   Dests: 3529:auto
 G(3510) (0 1) 3529 RETURN
@@ -556,13 +561,13 @@ G(4010) (0 1) 4010 REM     CONVERT Q(1-P9) TO A$(1-P9)
 (0 1) 4020 REM
   Origs: 
   Dests: 
-G(4010) (1 3) 4030 FOR S = 1 TO P9
+G(4010) F(S) (1 3) 4030 FOR S = 1 TO P9
   Origs: 4010:auto
   Dests: 4040:fornext, 4050:fornext
-G(4010) (0 4) 4040 A$(S) = MID$(L$, Q(S), 1)
+G(4010) F(S) (0 4) 4040 A$(S) = MID$(L$, Q(S), 1)
   Origs: 4030:fornext
   Dests: 4050:auto
-G(4010) (0 1) 4050 NEXT S
+G(4010) F(S) (0 1) 4050 NEXT S
   Origs: 4030:fornext, 4040:auto
   Dests: 4060:auto
 G(4010) (0 1) 4060 RETURN
@@ -585,47 +590,47 @@ G(4510) (0 3)      W = 0
 G(4510) (0 3)      F = 0
   Origs: 4510:auto
   Dests: 4550:auto
-G(4510) (1 3) 4550 FOR S = 1 TO P9
+G(4510) F(S) (1 3) 4550 FOR S = 1 TO P9
   Origs: 4540:auto
   Dests: 4560:fornext, 4660:fornext
-G(4510) (1 4) 4560 IF G$(S) <> A$(S) THEN 4620
+G(4510) F(S) (1 4) 4560 IF G$(S) <> A$(S) THEN 4620
   Origs: 4550:fornext
   Dests: 4570:auto, 4620:ifthen
-G(4510) (0 4) 4570 B = B + 1
+G(4510) F(S) (0 4) 4570 B = B + 1
   Origs: 4560:auto
   Dests: 4580:auto
-G(4510) (0 4) 4580 G$(S) = CHR$(F)
+G(4510) F(S) (0 4) 4580 G$(S) = CHR$(F)
   Origs: 4570:auto
   Dests: 4590:auto
-G(4510) (0 4) 4590 A$(S) = CHR$(F + 1)
+G(4510) F(S) (0 4) 4590 A$(S) = CHR$(F + 1)
   Origs: 4580:auto
   Dests: 4600:auto
-G(4510) (0 4) 4600 F = F + 2
+G(4510) F(S) (0 4) 4600 F = F + 2
   Origs: 4590:auto
   Dests: 4610:auto
-G(4510) (0 2) 4610 GOTO 4660
+G(4510) F(S) (0 2) 4610 GOTO 4660
   Origs: 4600:auto
   Dests: 4660:goto
-G(4510) (1 3) 4620 FOR T = 1 TO P9
+G(4510) F(S,T) (1 3) 4620 FOR T = 1 TO P9
   Origs: 4560:ifthen
   Dests: 4630:fornext, 4650:fornext
-G(4510) (1 4) 4630 IF G$(S) <> A$(T) THEN 4650
+G(4510) F(S,T) (1 4) 4630 IF G$(S) <> A$(T) THEN 4650
   Origs: 4620:fornext
   Dests: 4640:auto, 4650:ifthen
-G(4510) (1 4) 4640 IF G$(T) = A$(T) THEN 4650
+G(4510) F(S,T) (1 4) 4640 IF G$(T) = A$(T) THEN 4650
   Origs: 4630:auto
   Dests: 4645:auto, 4650:ifthen
-G(4510) (0 4) 4645 W = W + 1
-G(4510) (0 4)      A$(T) = CHR$(F)
-G(4510) (0 4)      G$(S) = CHR$(F + 1)
-G(4510) (0 4)      F = F + 2
-G(4510) (0 2)      GOTO 4660
+G(4510) F(S,T) (0 4) 4645 W = W + 1
+G(4510) F(S,T) (0 4)      A$(T) = CHR$(F)
+G(4510) F(S,T) (0 4)      G$(S) = CHR$(F + 1)
+G(4510) F(S,T) (0 4)      F = F + 2
+G(4510) F(S,T) (0 2)      GOTO 4660
   Origs: 4640:auto
   Dests: 4660:goto
-G(4510) (0 1) 4650 NEXT T
+G(4510) F(S,T) (0 1) 4650 NEXT T
   Origs: 4620:fornext, 4630:ifthen, 4640:ifthen
   Dests: 4660:auto
-G(4510) (0 1) 4660 NEXT S
+G(4510) F(S,T) (0 1) 4660 NEXT S
   Origs: 4550:fornext, 4610:goto, 4645:goto, 4650:auto
   Dests: 4670:auto
 G(4510) (0 1) 4670 RETURN
@@ -666,13 +671,13 @@ G(5010) (0 1) 5070 RETURN
 (0 1) 5520 REM
   Origs: 
   Dests: 
-(1 3) 5530 FOR S = 1 TO P9
+F(S) (1 3) 5530 FOR S = 1 TO P9
   Origs: 
   Dests: 5540:fornext, 5550:fornext
-(0 4) 5540 G$(S) = MID$(L$, Q(S), 1)
+F(S) (0 4) 5540 G$(S) = MID$(L$, Q(S), 1)
   Origs: 5530:fornext
   Dests: 5550:auto
-(0 1) 5550 NEXT S
+F(S) (0 1) 5550 NEXT S
   Origs: 5530:fornext, 5540:auto
   Dests: 5560:auto
 (0 1) 5560 RETURN
@@ -687,13 +692,13 @@ G(6010) (0 1) 6010 REM     CONVERT Q(1-P9) TO H$(1-P9)
 (0 1) 6020 REM
   Origs: 
   Dests: 
-G(6010) (1 3) 6030 FOR S = 1 TO P9
+G(6010) F(S) (1 3) 6030 FOR S = 1 TO P9
   Origs: 6010:auto
   Dests: 6040:fornext, 6050:fornext
-G(6010) (0 4) 6040 H$(S) = MID$(L$, Q(S), 1)
+G(6010) F(S) (0 4) 6040 H$(S) = MID$(L$, Q(S), 1)
   Origs: 6030:fornext
   Dests: 6050:auto
-G(6010) (0 1) 6050 NEXT S
+G(6010) F(S) (0 1) 6050 NEXT S
   Origs: 6030:fornext, 6040:auto
   Dests: 6060:auto
 G(6010) (0 1) 6060 RETURN
@@ -708,13 +713,13 @@ G(6510) (0 1) 6510 REM     COPY H$ INTO G$
 (0 1) 6520 REM
   Origs: 
   Dests: 
-G(6510) (1 3) 6530 FOR S = 1 TO P9
+G(6510) F(S) (1 3) 6530 FOR S = 1 TO P9
   Origs: 6510:auto
   Dests: 6540:fornext, 6550:fornext
-G(6510) (0 3) 6540 G$(S) = H$(S)
+G(6510) F(S) (0 3) 6540 G$(S) = H$(S)
   Origs: 6530:fornext
   Dests: 6550:auto
-G(6510) (0 1) 6550 NEXT S
+G(6510) F(S) (0 1) 6550 NEXT S
   Origs: 6530:fornext, 6540:auto
   Dests: 6560:auto
 G(6510) (0 1) 6560 RETURN

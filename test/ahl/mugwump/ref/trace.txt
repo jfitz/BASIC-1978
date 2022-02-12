@@ -29,1204 +29,1204 @@ YOU GET 10 TRIES.  AFTER EACH TRY, I WILL TELL
 YOU HOW FAR YOU ARE FROM EACH MUGWUMP.
 110: PRINT
 
-240: GOSUB 1000
-G(1000) 1000: FOR J = 1 TO 2
+F(J) 240: GOSUB 1000
+G(1000) F(J) 1000: FOR J = 1 TO 2
  J = 1
  terminated:false
-G(1000) 1010: FOR I = 1 TO 4
+G(1000) F(J,I) 1010: FOR I = 1 TO 4
  I = 1
  terminated:false
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 1
  J: 1
  P(1,1) = 4
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 1
  terminated:false
  I = 2
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 2
  J: 1
  P(2,1) = 7
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 2
  terminated:false
  I = 3
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 3
  J: 1
  P(3,1) = 0
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 3
  terminated:false
  I = 4
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 4
  J: 1
  P(4,1) = 3
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 4
  terminated:true
-G(1000) 1040: NEXT J
+G(1000) F(J) 1040: NEXT J
  J: 1
  terminated:false
  J = 2
-G(1000) 1010: FOR I = 1 TO 4
+G(1000) F(J,I) 1010: FOR I = 1 TO 4
  I = 1
  terminated:false
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 1
  J: 2
  P(1,2) = 1
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 1
  terminated:false
  I = 2
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 2
  J: 2
  P(2,2) = 0
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 2
  terminated:false
  I = 3
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 3
  J: 2
  P(3,2) = 1
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 3
  terminated:false
  I = 4
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 4
  J: 2
  P(4,2) = 3
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 4
  terminated:true
-G(1000) 1040: NEXT J
+G(1000) F(J) 1040: NEXT J
  J: 2
  terminated:true
 G(1000) 1050: RETURN
-250: T = 0
+F(J) 250: T = 0
  T = 0
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 0
  T = 1
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 1
  1 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 0,0
  M = 0
  N = 0
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 0
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 0
  P(1,2): 1
  N: 0
  D = 4.12310563
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 4.12310563
  4.1 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 0
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 0
  P(2,2): 0
  N: 0
  D = 7
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 7
  7 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): 0
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 3
  P(3,1): 0
  M: 0
  P(I, 1) <> M: false
-340: IF P(I, 2) <> N THEN 380
+F(I,J) 340: IF P(I, 2) <> N THEN 380
  I: 3
  P(3,2): 1
  N: 0
  P(I, 2) <> N: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 3
  P(3,1): 0
  M: 0
  P(3,2): 1
  N: 0
  D = 1
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 1
  1 UNITS FROM MUGWUMP
  I: 3
  3
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): 3
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 4
  P(4,1): 3
  M: 0
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 4
  P(4,1): 3
  M: 0
  P(4,2): 3
  N: 0
  D = 4.24264069
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 4.24264069
  4.2 UNITS FROM MUGWUMP
  I: 4
  4
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 1
  T < 10: true
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 1
  T = 2
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 2
  2 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 1,0
  M = 1
  N = 0
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 1
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 1
  P(1,2): 1
  N: 0
  D = 3.16227766
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 3.16227766
  3.1 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 1
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 1
  P(2,2): 0
  N: 0
  D = 6
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 6
  6 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): 0
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 3
  P(3,1): 0
  M: 1
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 3
  P(3,1): 0
  M: 1
  P(3,2): 1
  N: 0
  D = 1.41421356
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 1.41421356
  1.4 UNITS FROM MUGWUMP
  I: 3
  3
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): 3
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 4
  P(4,1): 3
  M: 1
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 4
  P(4,1): 3
  M: 1
  P(4,2): 3
  N: 0
  D = 3.60555128
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 3.60555128
  3.6 UNITS FROM MUGWUMP
  I: 4
  4
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 2
  T < 10: true
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 2
  T = 3
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 3
  3 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 0,1
  M = 0
  N = 1
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 0
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 0
  P(1,2): 1
  N: 1
  D = 4
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 4
  4 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 0
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 0
  P(2,2): 0
  N: 1
  D = 7.07106781
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 7.07106781
  7 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): 0
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 3
  P(3,1): 0
  M: 0
  P(I, 1) <> M: false
-340: IF P(I, 2) <> N THEN 380
+F(I,J) 340: IF P(I, 2) <> N THEN 380
  I: 3
  P(3,2): 1
  N: 1
  P(I, 2) <> N: false
-350: P(I, 1) = -1
+F(I,J) 350: P(I, 1) = -1
  I: 3
  P(3,1) = -1
-360: PRINT "YOU HAVE FOUND MUGWUMP"; I
+F(I,J) 360: PRINT "YOU HAVE FOUND MUGWUMP"; I
 YOU HAVE FOUND MUGWUMP
  I: 3
  3
-370: GOTO 400
-400: NEXT I
+F(I,J) 370: GOTO 400
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): 3
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 4
  P(4,1): 3
  M: 0
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 4
  P(4,1): 3
  M: 0
  P(4,2): 3
  N: 1
  D = 3.60555128
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 3.60555128
  3.6 UNITS FROM MUGWUMP
  I: 4
  4
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 3
  T < 10: true
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 3
  T = 4
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 4
  4 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 1,1
  M = 1
  N = 1
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 1
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 1
  P(1,2): 1
  N: 1
  D = 3
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 3
  3 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 1
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 1
  P(2,2): 0
  N: 1
  D = 6.08276253
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 6.08276253
  6 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): 3
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 4
  P(4,1): 3
  M: 1
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 4
  P(4,1): 3
  M: 1
  P(4,2): 3
  N: 1
  D = 2.82842712
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 2.82842712
  2.8 UNITS FROM MUGWUMP
  I: 4
  4
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 4
  T < 10: true
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 4
  T = 5
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 5
  5 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 3,3
  M = 3
  N = 3
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 3
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 3
  P(1,2): 1
  N: 3
  D = 2.23606798
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 2.23606798
  2.2 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 3
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 3
  P(2,2): 0
  N: 3
  D = 5
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 5
  5 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): 3
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 4
  P(4,1): 3
  M: 3
  P(I, 1) <> M: false
-340: IF P(I, 2) <> N THEN 380
+F(I,J) 340: IF P(I, 2) <> N THEN 380
  I: 4
  P(4,2): 3
  N: 3
  P(I, 2) <> N: false
-350: P(I, 1) = -1
+F(I,J) 350: P(I, 1) = -1
  I: 4
  P(4,1) = -1
-360: PRINT "YOU HAVE FOUND MUGWUMP"; I
+F(I,J) 360: PRINT "YOU HAVE FOUND MUGWUMP"; I
 YOU HAVE FOUND MUGWUMP
  I: 4
  4
-370: GOTO 400
-400: NEXT I
+F(I,J) 370: GOTO 400
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 5
  T < 10: true
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 5
  T = 6
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 6
  6 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 4,4
  M = 4
  N = 4
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 4
  P(I, 1) <> M: false
-340: IF P(I, 2) <> N THEN 380
+F(I,J) 340: IF P(I, 2) <> N THEN 380
  I: 1
  P(1,2): 1
  N: 4
  P(I, 2) <> N: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 4
  P(1,2): 1
  N: 4
  D = 3
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 3
  3 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 4
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 4
  P(2,2): 0
  N: 4
  D = 5
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 5
  5 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 6
  T < 10: true
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 6
  T = 7
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 7
  7 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 2,3
  M = 2
  N = 3
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 2
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 2
  P(1,2): 1
  N: 3
  D = 2.82842712
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 2.82842712
  2.8 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 2
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 2
  P(2,2): 0
  N: 3
  D = 5.83095189
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 5.83095189
  5.8 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 7
  T < 10: true
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 7
  T = 8
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 8
  8 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 3,2
  M = 3
  N = 2
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 3
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 3
  P(1,2): 1
  N: 2
  D = 1.41421356
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 1.41421356
  1.4 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 3
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 3
  P(2,2): 0
  N: 2
  D = 4.47213595
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 4.47213595
  4.4 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 8
  T < 10: true
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 8
  T = 9
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 9
  9 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 3,0
  M = 3
  N = 0
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 3
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 3
  P(1,2): 1
  N: 0
  D = 1.41421356
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 1.41421356
  1.4 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 3
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 3
  P(2,2): 0
  N: 0
  D = 4
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 4
  4 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 9
  T < 10: true
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 9
  T = 10
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 10
  10 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 0,3
  M = 0
  N = 3
-310: FOR I = 1 TO 4
+F(I,J) 310: FOR I = 1 TO 4
  I = 1
  terminated:false
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 1
  P(1,1): 4
  M: 0
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 1
  P(1,1): 4
  M: 0
  P(1,2): 1
  N: 3
  D = 4.47213595
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 4.47213595
  4.4 UNITS FROM MUGWUMP
  I: 1
  1
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 1
  terminated:false
  I = 2
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-330: IF P(I, 1) <> M THEN 380
+F(I,J) 330: IF P(I, 1) <> M THEN 380
  I: 2
  P(2,1): 7
  M: 0
  P(I, 1) <> M: true
-380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+F(I,J) 380: D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
  I: 2
  P(2,1): 7
  M: 0
  P(2,2): 0
  N: 3
  D = 7.61577311
-390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+F(I,J) 390: PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
 YOU ARE
  D: 7.61577311
  7.6 UNITS FROM MUGWUMP
  I: 2
  2
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 2
  terminated:false
  I = 3
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 3
  P(3,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 3
  terminated:false
  I = 4
-320: IF P(I, 1) = -1 THEN 400
+F(I,J) 320: IF P(I, 1) = -1 THEN 400
  I: 4
  P(4,1): -1
  P(I, 1) = -1: true
-400: NEXT I
+F(I,J) 400: NEXT I
  I: 4
  terminated:true
-410: FOR J = 1 TO 4
+F(J) 410: FOR J = 1 TO 4
  J = 1
  terminated:false
-420: IF P(J, 1) <> -1 THEN 470
+F(J) 420: IF P(J, 1) <> -1 THEN 470
  J: 1
  P(1,1): 4
  P(J, 1) <> -1: true
-470: IF T < 10 THEN 260
+F(J) 470: IF T < 10 THEN 260
  T: 10
  T < 10: false
-480: PRINT
+F(J) 480: PRINT
 
-490: PRINT "SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
+F(J) 490: PRINT "SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
 SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:
-540: FOR I = 1 TO 4
+F(J,I) 540: FOR I = 1 TO 4
  I = 1
  terminated:false
-550: IF P(I, 1) = -1 THEN 570
+F(J,I) 550: IF P(I, 1) = -1 THEN 570
  I: 1
  P(1,1): 4
  P(I, 1) = -1: false
-560: PRINT "MUGWUMP"; I; "IS AT ("; P(I, 1); ","; P(I, 2); ")"
+F(J,I) 560: PRINT "MUGWUMP"; I; "IS AT ("; P(I, 1); ","; P(I, 2); ")"
 MUGWUMP
  I: 1
  1 IS AT (
@@ -1234,15 +1234,15 @@ MUGWUMP
  4 ,
  P(1,2): 1
  1 )
-570: NEXT I
+F(J,I) 570: NEXT I
  I: 1
  terminated:false
  I = 2
-550: IF P(I, 1) = -1 THEN 570
+F(J,I) 550: IF P(I, 1) = -1 THEN 570
  I: 2
  P(2,1): 7
  P(I, 1) = -1: false
-560: PRINT "MUGWUMP"; I; "IS AT ("; P(I, 1); ","; P(I, 2); ")"
+F(J,I) 560: PRINT "MUGWUMP"; I; "IS AT ("; P(I, 1); ","; P(I, 2); ")"
 MUGWUMP
  I: 2
  2 IS AT (
@@ -1250,126 +1250,126 @@ MUGWUMP
  7 ,
  P(2,2): 0
  0 )
-570: NEXT I
+F(J,I) 570: NEXT I
  I: 2
  terminated:false
  I = 3
-550: IF P(I, 1) = -1 THEN 570
+F(J,I) 550: IF P(I, 1) = -1 THEN 570
  I: 3
  P(3,1): -1
  P(I, 1) = -1: true
-570: NEXT I
+F(J,I) 570: NEXT I
  I: 3
  terminated:false
  I = 4
-550: IF P(I, 1) = -1 THEN 570
+F(J,I) 550: IF P(I, 1) = -1 THEN 570
  I: 4
  P(4,1): -1
  P(I, 1) = -1: true
-570: NEXT I
+F(J,I) 570: NEXT I
  I: 4
  terminated:true
-580: PRINT
+F(J) 580: PRINT
 
-600: PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
+F(J) 600: PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
 THAT WAS FUN! LET'S PLAY AGAIN.......
-610: PRINT "FOUR MORE MUGWUMPS ARE NOW IN HIDING."
+F(J) 610: PRINT "FOUR MORE MUGWUMPS ARE NOW IN HIDING."
 FOUR MORE MUGWUMPS ARE NOW IN HIDING.
-630: GOTO 240
-240: GOSUB 1000
-G(1000) 1000: FOR J = 1 TO 2
+F(J) 630: GOTO 240
+F(J) 240: GOSUB 1000
+G(1000) F(J) 1000: FOR J = 1 TO 2
  J = 1
  terminated:false
-G(1000) 1010: FOR I = 1 TO 4
+G(1000) F(J,I) 1010: FOR I = 1 TO 4
  I = 1
  terminated:false
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 1
  J: 1
  P(1,1) = 3
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 1
  terminated:false
  I = 2
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 2
  J: 1
  P(2,1) = 5
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 2
  terminated:false
  I = 3
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 3
  J: 1
  P(3,1) = 4
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 3
  terminated:false
  I = 4
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 4
  J: 1
  P(4,1) = 6
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 4
  terminated:true
-G(1000) 1040: NEXT J
+G(1000) F(J) 1040: NEXT J
  J: 1
  terminated:false
  J = 2
-G(1000) 1010: FOR I = 1 TO 4
+G(1000) F(J,I) 1010: FOR I = 1 TO 4
  I = 1
  terminated:false
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 1
  J: 2
  P(1,2) = 2
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 1
  terminated:false
  I = 2
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 2
  J: 2
  P(2,2) = 8
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 2
  terminated:false
  I = 3
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 3
  J: 2
  P(3,2) = 0
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 3
  terminated:false
  I = 4
-G(1000) 1020: P(I, J) = INT(10 * RND(1))
+G(1000) F(J,I) 1020: P(I, J) = INT(10 * RND(1))
  I: 4
  J: 2
  P(4,2) = 6
-G(1000) 1030: NEXT I
+G(1000) F(J,I) 1030: NEXT I
  I: 4
  terminated:true
-G(1000) 1040: NEXT J
+G(1000) F(J) 1040: NEXT J
  J: 2
  terminated:true
 G(1000) 1050: RETURN
-250: T = 0
+F(J) 250: T = 0
  T = 0
-260: T = T + 1
+F(J) 260: T = T + 1
  T: 0
  T = 1
-270: PRINT
+F(J) 270: PRINT
 
-275: PRINT
+F(J) 275: PRINT
 
-290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+F(J) 290: PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
 TURN NO.
  T: 1
  1 -- WHAT IS YOUR GUESS
-300: INPUT M, N
+F(J) 300: INPUT M, N
 ? 
 Error 102 End of file in line 300
 

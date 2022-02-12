@@ -34,19 +34,19 @@ Halstead complexity:
 (0 4) 110 PRINT "INITIALIZING"; N; " LOCKERS..."
   Origs: 30:auto
   Dests: 130:auto
-(1 3) 130 FOR I = 1 TO N
+F(I) (1 3) 130 FOR I = 1 TO N
   Origs: 110:auto
   Dests: 140:fornext, 180:fornext
-(1 4) 140 FOR J = I TO N STEP I
+F(I,J) (1 4) 140 FOR J = I TO N STEP I
   Origs: 130:fornext
   Dests: 150:fornext, 160:fornext
-(0 4) 150 LET L(J) = 1 - L(J)
+F(I,J) (0 4) 150 LET L(J) = 1 - L(J)
   Origs: 140:fornext
   Dests: 160:auto
-(0 1) 160 NEXT J
+F(I,J) (0 1) 160 NEXT J
   Origs: 140:fornext, 150:auto
   Dests: 180:auto
-(0 1) 180 NEXT I
+F(I) (0 1) 180 NEXT I
   Origs: 130:fornext, 160:auto
   Dests: 310:auto
 (0 1) 200 REM PRINT LOCKER STATES

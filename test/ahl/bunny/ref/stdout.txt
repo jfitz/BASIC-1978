@@ -75,9 +75,9 @@ STOP in line 450
    (1) PRINT
 100 (0) REM  "BUNNY" FROM AHL'S 'BASIC COMPUTER GAMES'
 110 (0) REM
-120 (1) FOR I = 0 TO 4
-    (5) READ B(I)
-    (5) NEXT I
+120 F(I) (1) FOR I = 0 TO 4
+    F(I) (5) READ B(I)
+    F(I) (5) NEXT I
 130 (1) GOSUB 260
 140 (1) L = 64
     (0) REM  ASCII LETTER CODE...
@@ -88,18 +88,18 @@ STOP in line 450
 175 (90) IF X > 128 THEN 240
 180 (89) PRINT TAB(X);
     (89) READ Y
-190 (89) FOR I = X TO Y
-    (1030) J = I - 5 * INT(I / 5)
-200 (1030) PRINT CHR$(L + B(J));
-210 (1030) NEXT I
+190 F(I) (89) FOR I = X TO Y
+    F(I) (1030) J = I - 5 * INT(I / 5)
+200 F(I) (1030) PRINT CHR$(L + B(J));
+210 F(I) (1030) NEXT I
 220 (89) GOTO 170
 230 (0) REM
 240 (1) GOSUB 260
     (1) GOTO 450
 250 (0) REM
-260 G(260) (2) FOR I = 1 TO 6
-    G(260) (12) PRINT CHR$(10);
-    G(260) (12) NEXT I
+260 G(260) F(I) (2) FOR I = 1 TO 6
+    G(260) F(I) (12) PRINT CHR$(10);
+    G(260) F(I) (12) NEXT I
 270 G(260) (2) RETURN
 280 (0) REM
 290 (0) DATA 2, 21, 14, 14, 25

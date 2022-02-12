@@ -97,13 +97,13 @@ G(650) (0 4) 210 LET S = S - 5
 G(650) (0 4) 220 LET C = C - 5
   Origs: 210:auto
   Dests: 230:auto
-G(650) (1 3) 230 FOR Z = 1 TO 10
+G(650) F(Z) (1 3) 230 FOR Z = 1 TO 10
   Origs: 220:auto
   Dests: 240:fornext, 250:fornext
-G(650) (0 2) 240 GOSUB 1740
+G(650) F(Z) (0 2) 240 GOSUB 1740
   Origs: 230:fornext
   Dests: 250:auto, 1740:gosub
-G(650) (0 1) 250 NEXT Z
+G(650) F(Z) (0 1) 250 NEXT Z
   Origs: 230:fornext, 240:auto
   Dests: 260:auto
 G(650) (0 2) 260 PRINT "YOUR HAND:"
@@ -302,16 +302,16 @@ G(650) (0 3) 890 GOTO 840
 G(650) (0 2) 900 PRINT "WHAT ARE THEIR NUMBERS:"
   Origs: 870:ifthen
   Dests: 910:auto
-G(650) (1 3) 910 FOR Q = 1 TO T
+G(650) F(Q) (1 3) 910 FOR Q = 1 TO T
   Origs: 900:auto
   Dests: 920:fornext, 940:fornext
-G(650) (1 2) 920 INPUT U
+G(650) F(Q) (1 2) 920 INPUT U
   Origs: 910:fornext
   Dests: 930:auto
-G(650) (0 2) 930 GOSUB 1730
+G(650) F(Q) (0 2) 930 GOSUB 1730
   Origs: 920:auto
   Dests: 940:auto, 1730:gosub
-G(650) (0 1) 940 NEXT Q
+G(650) F(Q) (0 1) 940 NEXT Q
   Origs: 910:fornext, 930:auto
   Dests: 950:auto
 G(650) (0 2) 950 PRINT "YOUR NEW HAND:"
@@ -326,16 +326,16 @@ G(650) (0 2) 970 GOSUB 1850
 G(650) (0 4) 980 Z = 10 + T
   Origs: 850:ifthen, 970:auto
   Dests: 990:auto
-G(650) (1 3) 990 FOR U = 6 TO 10
+G(650) F(U) (1 3) 990 FOR U = 6 TO 10
   Origs: 980:auto
   Dests: 1000:fornext, 1020:fornext
-G(650) (1 8) 1000 IF INT(X / 10 ^ (U - 6)) <> 10 * INT(X / 10 ^ (U - 5)) THEN 1020
+G(650) F(U) (1 8) 1000 IF INT(X / 10 ^ (U - 6)) <> 10 * INT(X / 10 ^ (U - 5)) THEN 1020
   Origs: 990:fornext
   Dests: 1010:auto, 1020:ifthen
-G(650) (0 2) 1010 GOSUB 1730
+G(650) F(U) (0 2) 1010 GOSUB 1730
   Origs: 1000:auto
   Dests: 1020:auto, 1730:gosub
-G(650) (0 1) 1020 NEXT U
+G(650) F(U) (0 1) 1020 NEXT U
   Origs: 990:fornext, 1000:ifthen, 1010:auto
   Dests: 1030:auto
 G(650) (0 2) 1030 PRINT
@@ -557,27 +557,27 @@ G(650) (0 3) 1720 GOTO 1670
 G(1730) (0 4) 1730 Z = Z + 1
   Origs: 930:gosub, 1010:gosub
   Dests: 1740:auto
-G(1740) (0 7) 1740 A(Z) = 100 * INT(4 * RND(1)) + INT(100 * RND(1))
+G(1740) F(K) (0 7) 1740 A(Z) = 100 * INT(4 * RND(1)) + INT(100 * RND(1))
      WARNING: Inconsistent GOSUB target (1740, 1730)
      WARNING: Inconsistent GOSUB origins
   Origs: 240:gosub, 1730:auto, 1750:ifthen, 1760:ifthen, 1780:ifthen
   Dests: 1750:auto
-G(1740) (1 6) 1750 IF INT(A(Z) / 100) > 3 THEN 1740
+G(1740) F(K) (1 6) 1750 IF INT(A(Z) / 100) > 3 THEN 1740
   Origs: 1740:auto
   Dests: 1740:ifthen, 1760:auto
-G(1740) (1 9) 1760 IF A(Z) - 100 * INT(A(Z) / 100) > 12 THEN 1740
+G(1740) F(K) (1 9) 1760 IF A(Z) - 100 * INT(A(Z) / 100) > 12 THEN 1740
   Origs: 1750:auto
   Dests: 1740:ifthen, 1765:auto
-G(1740) (1 4) 1765 IF Z = 1 THEN 1840
+G(1740) F(K) (1 4) 1765 IF Z = 1 THEN 1840
   Origs: 1760:auto
   Dests: 1770:auto, 1840:ifthen
-G(1740) (1 4) 1770 FOR K = 1 TO Z - 1
+G(1740) F(K) (1 4) 1770 FOR K = 1 TO Z - 1
   Origs: 1765:auto
   Dests: 1780:fornext, 1790:fornext
-G(1740) (1 5) 1780 IF A(Z) = A(K) THEN 1740
+G(1740) F(K) (1 5) 1780 IF A(Z) = A(K) THEN 1740
   Origs: 1770:fornext
   Dests: 1740:ifthen, 1790:auto
-G(1740) (0 1) 1790 NEXT K
+G(1740) F(K) (0 1) 1790 NEXT K
   Origs: 1770:fornext, 1780:auto
   Dests: 1800:auto
 G(1740) (1 4) 1800 IF Z <= 10 THEN 1840
@@ -592,31 +592,31 @@ G(1740) (0 3) 1820 A(U) = A(Z)
 G(1740) (0 3) 1830 A(Z) = N
   Origs: 1820:auto
   Dests: 1840:auto
-G(1740) (0 1) 1840 RETURN
+G(1740) F(K) (0 1) 1840 RETURN
   Origs: 1765:ifthen, 1800:ifthen, 1830:auto
   Dests: 
-G(1850) (1 4) 1850 FOR Z = N TO N + 4
+G(1850) F(Z) (1 4) 1850 FOR Z = N TO N + 4
   Origs: 280:gosub, 970:gosub, 1520:gosub
   Dests: 1860:fornext, 1920:fornext
-G(1850) (0 3) 1860 PRINT Z "--  ";
+G(1850) F(Z) (0 3) 1860 PRINT Z "--  ";
   Origs: 1850:fornext
   Dests: 1870:auto
-G(1850) (0 2) 1870 GOSUB 1950
+G(1850) F(Z) (0 2) 1870 GOSUB 1950
   Origs: 1860:auto
   Dests: 1880:auto, 1950:gosub
-G(1850) (0 2) 1880 PRINT " OF";
+G(1850) F(Z) (0 2) 1880 PRINT " OF";
   Origs: 1870:auto
   Dests: 1890:auto
-G(1850) (0 2) 1890 GOSUB 2070
+G(1850) F(Z) (0 2) 1890 GOSUB 2070
   Origs: 1880:auto
   Dests: 1900:auto, 2070:gosub
-G(1850) (1 6) 1900 IF Z / 2 <> INT(Z / 2) THEN 1920
+G(1850) F(Z) (1 6) 1900 IF Z / 2 <> INT(Z / 2) THEN 1920
   Origs: 1890:auto
   Dests: 1910:auto, 1920:ifthen
-G(1850) (0 2) 1910 PRINT
+G(1850) F(Z) (0 2) 1910 PRINT
   Origs: 1900:auto
   Dests: 1920:auto
-G(1850) (0 1) 1920 NEXT Z
+G(1850) F(Z) (0 1) 1920 NEXT Z
   Origs: 1850:fornext, 1900:ifthen, 1910:auto
   Dests: 1930:auto
 G(1850) (0 2) 1930 PRINT
@@ -698,22 +698,22 @@ G(2070) (0 1) 2160 RETURN
 G(2170) (0 3) 2170 U = 0
   Origs: 310:gosub, 1130:gosub, 1540:gosub
   Dests: 2180:auto
-G(2170) (1 4) 2180 FOR Z = N TO N + 4
+G(2170) F(Z) (1 4) 2180 FOR Z = N TO N + 4
   Origs: 2170:auto
   Dests: 2190:fornext, 2230:fornext
-G(2170) (0 5) 2190 B(Z) = FNB(A(Z))
+G(2170) F(Z) (0 5) 2190 B(Z) = FNB(A(Z))
   Origs: 2180:fornext
   Dests: 30:function, 2200:auto
-G(2170) (1 6) 2200 IF Z = N + 4 THEN 2230
+G(2170) F(Z) (1 6) 2200 IF Z = N + 4 THEN 2230
   Origs: 2190:auto
   Dests: 2210:auto, 2230:ifthen
-G(2170) (1 6) 2210 IF INT(A(Z) / 100) <> INT(A(Z + 1) / 100) THEN 2230
+G(2170) F(Z) (1 6) 2210 IF INT(A(Z) / 100) <> INT(A(Z + 1) / 100) THEN 2230
   Origs: 2200:auto
   Dests: 2220:auto, 2230:ifthen
-G(2170) (0 4) 2220 U = U + 1
+G(2170) F(Z) (0 4) 2220 U = U + 1
   Origs: 2210:auto
   Dests: 2230:auto
-G(2170) (0 1) 2230 NEXT Z
+G(2170) F(Z) (0 1) 2230 NEXT Z
   Origs: 2180:fornext, 2200:ifthen, 2210:ifthen, 2220:auto
   Dests: 2240:auto
 G(2170) (1 4) 2240 IF U <> 4 THEN 2310
@@ -737,55 +737,55 @@ G(2170) (0 3) 2290 U = 15
 G(2170) (0 1) 2300 RETURN
   Origs: 2290:auto
   Dests: 
-G(2170) (1 4) 2310 FOR Z = N TO N + 3
+G(2170) F(Z) (1 4) 2310 FOR Z = N TO N + 3
   Origs: 2240:ifthen
   Dests: 2320:fornext, 2400:fornext
-G(2170) (1 5) 2320 FOR K = Z + 1 TO N + 4
+G(2170) F(Z,K) (1 5) 2320 FOR K = Z + 1 TO N + 4
   Origs: 2310:fornext
   Dests: 2330:fornext, 2390:fornext
-G(2170) (1 4) 2330 IF B(Z) <= B(K) THEN 2390
+G(2170) F(Z,K) (1 4) 2330 IF B(Z) <= B(K) THEN 2390
   Origs: 2320:fornext
   Dests: 2340:auto, 2390:ifthen
-G(2170) (0 3) 2340 X = A(Z)
+G(2170) F(Z,K) (0 3) 2340 X = A(Z)
   Origs: 2330:auto
   Dests: 2350:auto
-G(2170) (0 3) 2350 A(Z) = A(K)
+G(2170) F(Z,K) (0 3) 2350 A(Z) = A(K)
   Origs: 2340:auto
   Dests: 2360:auto
-G(2170) (0 3) 2360 B(Z) = B(K)
+G(2170) F(Z,K) (0 3) 2360 B(Z) = B(K)
   Origs: 2350:auto
   Dests: 2370:auto
-G(2170) (0 3) 2370 A(K) = X
+G(2170) F(Z,K) (0 3) 2370 A(K) = X
   Origs: 2360:auto
   Dests: 2380:auto
-G(2170) (0 7) 2380 B(K) = A(K) - 100 * INT(A(K) / 100)
+G(2170) F(Z,K) (0 7) 2380 B(K) = A(K) - 100 * INT(A(K) / 100)
   Origs: 2370:auto
   Dests: 2390:auto
-G(2170) (0 1) 2390 NEXT K
+G(2170) F(Z,K) (0 1) 2390 NEXT K
   Origs: 2320:fornext, 2330:ifthen, 2380:auto
   Dests: 2400:auto
-G(2170) (0 1) 2400 NEXT Z
+G(2170) F(Z) (0 1) 2400 NEXT Z
   Origs: 2310:fornext, 2390:auto
   Dests: 2410:auto
 G(2170) (0 3) 2410 X = 0
   Origs: 2400:auto
   Dests: 2420:auto
-G(2170) (1 4) 2420 FOR Z = N TO N + 3
+G(2170) F(Z) (1 4) 2420 FOR Z = N TO N + 3
   Origs: 2410:auto
   Dests: 2430:fornext, 2470:fornext
-G(2170) (1 4) 2430 IF B(Z) <> B(Z + 1) THEN 2470
+G(2170) F(Z) (1 4) 2430 IF B(Z) <> B(Z + 1) THEN 2470
   Origs: 2420:fornext
   Dests: 2440:auto, 2470:ifthen
-G(2170) (0 10) 2440 X = X + 11 * 10 ^ (Z - N)
+G(2170) F(Z) (0 10) 2440 X = X + 11 * 10 ^ (Z - N)
   Origs: 2430:auto
   Dests: 2450:auto
-G(2170) (0 3) 2450 D = A(Z)
+G(2170) F(Z) (0 3) 2450 D = A(Z)
   Origs: 2440:auto
   Dests: 2460:auto
-G(2170) (0 2) 2460 GOSUB 2760
+G(2170) F(Z) (0 2) 2460 GOSUB 2760
   Origs: 2450:auto
   Dests: 2470:auto, 2760:gosub
-G(2170) (0 1) 2470 NEXT Z
+G(2170) F(Z) (0 1) 2470 NEXT Z
   Origs: 2420:fornext, 2430:ifthen, 2460:auto
   Dests: 2480:auto
 G(2170) (1 4) 2480 IF X <> 0 THEN 2620

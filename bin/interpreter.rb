@@ -323,8 +323,6 @@ class Interpreter
   def run_program
     clear_user_functions
 
-    @program.optimize(self)
-
     @program.init_data(self)
 
     if @program.errors?

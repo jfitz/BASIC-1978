@@ -73,30 +73,30 @@ STOP in line 99
   (1) PRINT
 6 (1) Q = INT(60 / R)
   (1) A$ = "CC"
-8 (1) FOR L = 1 TO Q
-10 (5) X = 1
-   (5) Y = R
-   (5) Z = 2
-20 (10) FOR N = X TO Y STEP Z
-25 (55) PRINT TAB((R - N) / 2);
-28 (55) FOR M = 1 TO Q
-29 (275) C = 1
-30 (275) FOR A = 1 TO N
-32 (1525) IF C > LEN(A$) THEN PRINT "!";
-   (1025) GOTO 50
-34 (500) PRINT MID$(A$, C, 1);
-36 (500) C = C + 1
-50 (1525) NEXT A
-53 (275) IF M = Q THEN 60
-55 (220) PRINT TAB(R * M + (R - N) / 2);
-56 (220) NEXT M
-60 (55) PRINT
-70 (55) NEXT N
-83 (10) IF X <> 1 THEN 95
-85 (5) X = R - 2
-   (5) Y = 1
-   (5) Z = -2
-90 (5) GOTO 20
-95 (5) NEXT L
-99 (1) END
+8 F(L) (1) FOR L = 1 TO Q
+10 F(L) (5) X = 1
+   F(L) (5) Y = R
+   F(L) (5) Z = 2
+20 F(L,N) (10) FOR N = X TO Y STEP Z
+25 F(L,N) (55) PRINT TAB((R - N) / 2);
+28 F(L,N,M) (55) FOR M = 1 TO Q
+29 F(L,N,M) (275) C = 1
+30 F(L,N,M,A) (275) FOR A = 1 TO N
+32 F(L,N,M,A) (1525) IF C > LEN(A$) THEN PRINT "!";
+   F(L,N,M,A) (1025) GOTO 50
+34 F(L,N,M,A) (500) PRINT MID$(A$, C, 1);
+36 F(L,N,M,A) (500) C = C + 1
+50 F(L,N,M,A) (1525) NEXT A
+53 F(L,N,M) (275) IF M = Q THEN 60
+55 F(L,N,M) (220) PRINT TAB(R * M + (R - N) / 2);
+56 F(L,N,M) (220) NEXT M
+60 F(L,N,M) (55) PRINT
+70 F(L,N,M) (55) NEXT N
+83 F(L,N) (10) IF X <> 1 THEN 95
+85 F(L,N) (5) X = R - 2
+   F(L,N) (5) Y = 1
+   F(L,N) (5) Z = -2
+90 F(L,N) (5) GOTO 20
+95 F(L,N) (5) NEXT L
+99 F(L) (1) END
 

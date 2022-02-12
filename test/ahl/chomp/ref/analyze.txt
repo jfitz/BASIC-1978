@@ -115,19 +115,19 @@ G(540) (0 2) 340 PRINT "HERE WE GO..."
 G(540) (0 3) 360 F = 0
   Origs: 340:auto
   Dests: 370:auto
-G(540) (1 3) 370 FOR I = 1 TO 10
+G(540) F(I) (1 3) 370 FOR I = 1 TO 10
   Origs: 360:auto
   Dests: 372:fornext, 379:fornext
-G(540) (1 3) 372 FOR J = 1 TO 10
+G(540) F(I,J) (1 3) 372 FOR J = 1 TO 10
   Origs: 370:fornext
   Dests: 375:fornext, 377:fornext
-G(540) (0 3) 375 A(I, J) = 0
+G(540) F(I,J) (0 3) 375 A(I, J) = 0
   Origs: 372:fornext
   Dests: 377:auto
-G(540) (0 1) 377 NEXT J
+G(540) F(I,J) (0 1) 377 NEXT J
   Origs: 372:fornext, 375:auto
   Dests: 379:auto
-G(540) (0 1) 379 NEXT I
+G(540) F(I) (0 1) 379 NEXT I
   Origs: 370:fornext, 377:auto
   Dests: 380:auto
 G(540) (0 2) 380 PRINT
@@ -175,20 +175,20 @@ G(540) (0 3) 510 GOTO 470
 G(540) (0 2) 530 PRINT
   Origs: 490:ifthen
   Dests: 540:auto
-G(540) (1 3) 540 FOR I = 1 TO R
+G(540) F(I) (1 3) 540 FOR I = 1 TO R
     WARNING: Inconsistent GOSUB origins
   Origs: 220:gosub, 530:auto
   Dests: 550:fornext, 580:fornext
-G(540) (1 3) 550 FOR J = 1 TO C
+G(540) F(I,J) (1 3) 550 FOR J = 1 TO C
   Origs: 540:fornext
   Dests: 560:fornext, 570:fornext
-G(540) (0 3) 560 A(I, J) = 1
+G(540) F(I,J) (0 3) 560 A(I, J) = 1
   Origs: 550:fornext
   Dests: 570:auto
-G(540) (0 1) 570 NEXT J
+G(540) F(I,J) (0 1) 570 NEXT J
   Origs: 550:fornext, 560:auto
   Dests: 580:auto
-G(540) (0 1) 580 NEXT I
+G(540) F(I) (0 1) 580 NEXT I
   Origs: 540:fornext, 570:auto
   Dests: 590:auto
 G(540) (0 4) 590 A(1, 1) = -1
@@ -203,37 +203,37 @@ G(540) (0 2) 610 PRINT
 G(540) (0 4) 620 PRINT TAB(7); "1 2 3 4 5 6 7 8 9"
   Origs: 610:auto
   Dests: 630:auto
-G(540) (1 3) 630 FOR I = 1 TO R
+G(540) F(I) (1 3) 630 FOR I = 1 TO R
   Origs: 620:auto
   Dests: 640:fornext, 730:fornext
-G(540) (0 4) 640 PRINT I; TAB(7);
+G(540) F(I) (0 4) 640 PRINT I; TAB(7);
   Origs: 630:fornext
   Dests: 650:auto
-G(540) (1 3) 650 FOR J = 1 TO C
+G(540) F(I,J) (1 3) 650 FOR J = 1 TO C
   Origs: 640:auto
   Dests: 660:fornext, 710:fornext
-G(540) (1 6) 660 IF A(I, J) = -1 THEN 700
+G(540) F(I,J) (1 6) 660 IF A(I, J) = -1 THEN 700
   Origs: 650:fornext
   Dests: 670:auto, 700:ifthen
-G(540) (1 4) 670 IF A(I, J) = 0 THEN 720
+G(540) F(I,J) (1 4) 670 IF A(I, J) = 0 THEN 720
   Origs: 660:auto
   Dests: 680:auto, 720:ifthen
-G(540) (0 2) 680 PRINT "* ";
+G(540) F(I,J) (0 2) 680 PRINT "* ";
   Origs: 670:auto
   Dests: 690:auto
-G(540) (0 2) 690 GOTO 710
+G(540) F(I,J) (0 2) 690 GOTO 710
   Origs: 680:auto
   Dests: 710:goto
-G(540) (0 2) 700 PRINT "P ";
+G(540) F(I,J) (0 2) 700 PRINT "P ";
   Origs: 660:ifthen
   Dests: 710:auto
-G(540) (0 1) 710 NEXT J
+G(540) F(I,J) (0 1) 710 NEXT J
   Origs: 650:fornext, 690:goto, 700:auto
   Dests: 720:auto
-G(540) (0 2) 720 PRINT
+G(540) F(I,J) (0 2) 720 PRINT
   Origs: 670:ifthen, 710:auto
   Dests: 730:auto
-G(540) (0 1) 730 NEXT I
+G(540) F(I,J) (0 1) 730 NEXT I
   Origs: 630:fornext, 720:auto
   Dests: 740:auto
 G(540) (0 2) 740 PRINT
@@ -296,19 +296,19 @@ G(540) (0 2) 920 PRINT "NO FAIR. YOU'RE TRYING TO CHOMP ON EMPTY SPACE!"
 G(540) (0 3) 930 GOTO 820
   Origs: 920:auto
   Dests: 820:goto
-G(540) (1 3) 940 FOR I = R1 TO R
+G(540) F(I) (1 3) 940 FOR I = R1 TO R
   Origs: 910:goto
   Dests: 950:fornext, 980:fornext
-G(540) (1 3) 950 FOR J = C1 TO C
+G(540) F(I,J) (1 3) 950 FOR J = C1 TO C
   Origs: 940:fornext
   Dests: 960:fornext, 970:fornext
-G(540) (0 3) 960 A(I, J) = 0
+G(540) F(I,J) (0 3) 960 A(I, J) = 0
   Origs: 950:fornext
   Dests: 970:auto
-G(540) (0 1) 970 NEXT J
+G(540) F(I,J) (0 1) 970 NEXT J
   Origs: 950:fornext, 960:auto
   Dests: 980:auto
-G(540) (0 1) 980 NEXT I
+G(540) F(I) (0 1) 980 NEXT I
   Origs: 940:fornext, 970:auto
   Dests: 990:auto
 G(540) (0 3) 990 GOTO 610

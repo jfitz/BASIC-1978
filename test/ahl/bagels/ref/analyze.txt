@@ -70,164 +70,164 @@ Halstead complexity:
 (0 2) 140 PRINT "   BAGELS - NO DIGITS CORRECT"
   Origs: 130:auto
   Dests: 150:auto
-(1 3) 150 FOR I = 1 TO 3
+F(I) (1 3) 150 FOR I = 1 TO 3
   Origs: 90:ifthen, 140:auto, 720:ifthen
   Dests: 160:fornext, 200:fornext
-(0 4) 160 A(I) = INT(10 * RND(1))
+F(I,J) (0 4) 160 A(I) = INT(10 * RND(1))
   Origs: 150:fornext, 180:ifthen
   Dests: 165:auto
-(1 5) 165 IF I - 1 = 0 THEN 200
+F(I,J) (1 5) 165 IF I - 1 = 0 THEN 200
   Origs: 160:auto
   Dests: 170:auto, 200:ifthen
-(1 4) 170 FOR J = 1 TO I - 1
+F(I,J) (1 4) 170 FOR J = 1 TO I - 1
   Origs: 165:auto
   Dests: 180:fornext, 190:fornext
-(1 5) 180 IF A(I) = A(J) THEN 160
+F(I,J) (1 5) 180 IF A(I) = A(J) THEN 160
   Origs: 170:fornext
   Dests: 160:ifthen, 190:auto
-(0 1) 190 NEXT J
+F(I,J) (0 1) 190 NEXT J
   Origs: 170:fornext, 180:auto
   Dests: 200:auto
-(0 1) 200 NEXT I
+F(I,J) (0 1) 200 NEXT I
   Origs: 150:fornext, 165:ifthen, 190:auto
   Dests: 210:auto
 (0 2) 210 PRINT
 (0 2)     PRINT "O.K.  I HAVE A NUMBER IN MIND."
   Origs: 200:auto
   Dests: 220:auto
-(1 3) 220 FOR I = 1 TO 20
+F(I) (1 3) 220 FOR I = 1 TO 20
   Origs: 210:auto
   Dests: 230:fornext, 605:fornext
-(0 3) 230 PRINT "GUESS #"; I,
+F(I,J) (0 3) 230 PRINT "GUESS #"; I,
   Origs: 220:fornext, 310:goto, 630:goto, 660:goto
   Dests: 240:auto
-(1 2) 240 INPUT A$
+F(I,J) (1 2) 240 INPUT A$
   Origs: 230:auto
   Dests: 245:auto
-(1 5) 245 IF LEN(A$) <> 3 THEN 630
+F(I,J) (1 5) 245 IF LEN(A$) <> 3 THEN 630
   Origs: 240:auto
   Dests: 250:auto, 630:ifthen
-(1 3) 250 FOR Z = 1 TO 3
-(0 4)     A1(Z) = ASC(MID$(A$, Z, 1))
-(0 1)     NEXT Z
+F(I,Z,J) (1 3) 250 FOR Z = 1 TO 3
+F(I,Z,J) (0 4)     A1(Z) = ASC(MID$(A$, Z, 1))
+F(I,Z,J) (0 1)     NEXT Z
   Origs: 245:auto
   Dests: 260:auto
-(1 3) 260 FOR J = 1 TO 3
+F(I,J) (1 3) 260 FOR J = 1 TO 3
   Origs: 250:auto
   Dests: 270:fornext, 290:fornext
-(1 4) 270 IF A1(J) < 48 THEN 300
+F(I,J) (1 4) 270 IF A1(J) < 48 THEN 300
   Origs: 260:fornext
   Dests: 280:auto, 300:ifthen
-(1 4) 280 IF A1(J) > 57 THEN 300
+F(I,J) (1 4) 280 IF A1(J) > 57 THEN 300
   Origs: 270:auto
   Dests: 285:auto, 300:ifthen
-(0 4) 285 B(J) = A1(J) - 48
+F(I,J) (0 4) 285 B(J) = A1(J) - 48
   Origs: 280:auto
   Dests: 290:auto
-(0 1) 290 NEXT J
+F(I,J) (0 1) 290 NEXT J
   Origs: 260:fornext, 285:auto
   Dests: 295:auto
-(0 2) 295 GOTO 320
+F(I) (0 2) 295 GOTO 320
   Origs: 290:auto
   Dests: 320:goto
-(0 2) 300 PRINT "WHAT?"
+F(I,J) (0 2) 300 PRINT "WHAT?"
   Origs: 270:ifthen, 280:ifthen
   Dests: 310:auto
-(0 3) 310 GOTO 230
+F(I,J) (0 3) 310 GOTO 230
   Origs: 300:auto
   Dests: 230:goto
-(1 4) 320 IF B(1) = B(2) THEN 650
+F(I) (1 4) 320 IF B(1) = B(2) THEN 650
   Origs: 295:goto
   Dests: 330:auto, 650:ifthen
-(1 4) 330 IF B(2) = B(3) THEN 650
+F(I) (1 4) 330 IF B(2) = B(3) THEN 650
   Origs: 320:auto
   Dests: 340:auto, 650:ifthen
-(1 4) 340 IF B(3) = B(1) THEN 650
+F(I) (1 4) 340 IF B(3) = B(1) THEN 650
   Origs: 330:auto
   Dests: 350:auto, 650:ifthen
-(0 3) 350 C = 0
-(0 3)     D = 0
+F(I) (0 3) 350 C = 0
+F(I) (0 3)     D = 0
   Origs: 340:auto
   Dests: 360:auto
-(1 3) 360 FOR J = 1 TO 2
+F(I,J) (1 3) 360 FOR J = 1 TO 2
   Origs: 350:auto
   Dests: 370:fornext, 410:fornext
-(1 4) 370 IF A(J) <> B(J + 1) THEN 390
+F(I,J) (1 4) 370 IF A(J) <> B(J + 1) THEN 390
   Origs: 360:fornext
   Dests: 380:auto, 390:ifthen
-(0 4) 380 C = C + 1
+F(I,J) (0 4) 380 C = C + 1
   Origs: 370:auto
   Dests: 390:auto
-(1 4) 390 IF A(J + 1) <> B(J) THEN 410
+F(I,J) (1 4) 390 IF A(J + 1) <> B(J) THEN 410
   Origs: 370:ifthen, 380:auto
   Dests: 400:auto, 410:ifthen
-(0 4) 400 C = C + 1
+F(I,J) (0 4) 400 C = C + 1
   Origs: 390:auto
   Dests: 410:auto
-(0 1) 410 NEXT J
+F(I,J) (0 1) 410 NEXT J
   Origs: 360:fornext, 390:ifthen, 400:auto
   Dests: 420:auto
-(1 4) 420 IF A(1) <> B(3) THEN 440
+F(I) (1 4) 420 IF A(1) <> B(3) THEN 440
   Origs: 410:auto
   Dests: 430:auto, 440:ifthen
-(0 4) 430 C = C + 1
+F(I) (0 4) 430 C = C + 1
   Origs: 420:auto
   Dests: 440:auto
-(1 4) 440 IF A(3) <> B(1) THEN 460
+F(I) (1 4) 440 IF A(3) <> B(1) THEN 460
   Origs: 420:ifthen, 430:auto
   Dests: 450:auto, 460:ifthen
-(0 4) 450 C = C + 1
+F(I) (0 4) 450 C = C + 1
   Origs: 440:auto
   Dests: 460:auto
-(1 3) 460 FOR J = 1 TO 3
+F(I,J) (1 3) 460 FOR J = 1 TO 3
   Origs: 440:ifthen, 450:auto
   Dests: 470:fornext, 490:fornext
-(1 4) 470 IF A(J) <> B(J) THEN 490
+F(I,J) (1 4) 470 IF A(J) <> B(J) THEN 490
   Origs: 460:fornext
   Dests: 480:auto, 490:ifthen
-(0 4) 480 D = D + 1
+F(I,J) (0 4) 480 D = D + 1
   Origs: 470:auto
   Dests: 490:auto
-(0 1) 490 NEXT J
+F(I,J) (0 1) 490 NEXT J
   Origs: 460:fornext, 470:ifthen, 480:auto
   Dests: 500:auto
-(1 4) 500 IF D = 3 THEN 680
+F(I) (1 4) 500 IF D = 3 THEN 680
   Origs: 490:auto
   Dests: 505:auto, 680:ifthen
-(1 4) 505 IF C = 0 THEN 545
+F(I) (1 4) 505 IF C = 0 THEN 545
   Origs: 500:auto
   Dests: 520:auto, 545:ifthen
-(1 3) 520 FOR J = 1 TO C
+F(I,J) (1 3) 520 FOR J = 1 TO C
   Origs: 505:auto
   Dests: 530:fornext, 540:fornext
-(0 2) 530 PRINT "PICO ";
+F(I,J) (0 2) 530 PRINT "PICO ";
   Origs: 520:fornext
   Dests: 540:auto
-(0 1) 540 NEXT J
+F(I,J) (0 1) 540 NEXT J
   Origs: 520:fornext, 530:auto
   Dests: 545:auto
-(1 4) 545 IF D = 0 THEN 580
+F(I) (1 4) 545 IF D = 0 THEN 580
   Origs: 505:ifthen, 540:auto
   Dests: 550:auto, 580:ifthen
-(1 3) 550 FOR J = 1 TO D
+F(I,J) (1 3) 550 FOR J = 1 TO D
   Origs: 545:auto
   Dests: 560:fornext, 570:fornext
-(0 2) 560 PRINT "FERMI ";
+F(I,J) (0 2) 560 PRINT "FERMI ";
   Origs: 550:fornext
   Dests: 570:auto
-(0 1) 570 NEXT J
+F(I,J) (0 1) 570 NEXT J
   Origs: 550:fornext, 560:auto
   Dests: 580:auto
-(1 5) 580 IF C + D <> 0 THEN 600
+F(I) (1 5) 580 IF C + D <> 0 THEN 600
   Origs: 545:ifthen, 570:auto
   Dests: 590:auto, 600:ifthen
-(0 2) 590 PRINT "BAGELS";
+F(I) (0 2) 590 PRINT "BAGELS";
   Origs: 580:auto
   Dests: 600:auto
-(0 2) 600 PRINT
+F(I) (0 2) 600 PRINT
   Origs: 580:ifthen, 590:auto
   Dests: 605:auto
-(0 1) 605 NEXT I
+F(I) (0 1) 605 NEXT I
   Origs: 220:fornext, 600:auto
   Dests: 610:auto
 (0 2) 610 PRINT "OH WELL."
@@ -239,41 +239,42 @@ Halstead complexity:
 (0 2) 620 GOTO 700
   Origs: 615:auto
   Dests: 700:goto
-(0 2) 630 PRINT "TRY GUESSING A THREE-DIGIT NUMBER."
-(0 3)     GOTO 230
+F(I,J) (0 2) 630 PRINT "TRY GUESSING A THREE-DIGIT NUMBER."
+F(I,J) (0 3)     GOTO 230
   Origs: 245:ifthen
   Dests: 230:goto
-(0 2) 650 PRINT "OH, I FORGOT TO TELL YOU THAT THE NUMBER I HAVE IN MIND"
+F(I) (0 2) 650 PRINT "OH, I FORGOT TO TELL YOU THAT THE NUMBER I HAVE IN MIND"
   Origs: 320:ifthen, 330:ifthen, 340:ifthen
   Dests: 660:auto
-(0 2) 660 PRINT "HAS NO TWO DIGITS THE SAME."
-(0 3)     GOTO 230
+F(I) (0 2) 660 PRINT "HAS NO TWO DIGITS THE SAME."
+F(I) (0 3)     GOTO 230
   Origs: 650:auto
   Dests: 230:goto
-(0 2) 680 PRINT "YOU GOT IT!!!"
-(0 2)     PRINT
+F(I) (0 2) 680 PRINT "YOU GOT IT!!!"
+F(I) (0 2)     PRINT
   Origs: 500:ifthen
   Dests: 690:auto
-(0 4) 690 Y = Y + 1
+F(I) (0 4) 690 Y = Y + 1
   Origs: 680:auto
   Dests: 700:auto
-(1 2) 700 INPUT "PLAY AGAIN (YES OR NO)"; A$
+F(I) (1 2) 700 INPUT "PLAY AGAIN (YES OR NO)"; A$
   Origs: 620:goto, 690:auto
   Dests: 720:auto
-(1 6) 720 IF LEFT$(A$, 1) = "YES" THEN 150
+F(I) (1 6) 720 IF LEFT$(A$, 1) = "YES" THEN 150
   Origs: 700:auto
   Dests: 150:ifthen, 730:auto
-(1 4) 730 IF Y = 0 THEN 750
+F(I) (1 4) 730 IF Y = 0 THEN 750
   Origs: 720:auto
   Dests: 740:auto, 750:ifthen
-(0 2) 740 PRINT
-(0 4)     PRINT "A"; Y; "POINT BAGELS BUFF!!"
+F(I) (0 2) 740 PRINT
+F(I) (0 4)     PRINT "A"; Y; "POINT BAGELS BUFF!!"
   Origs: 730:auto
   Dests: 750:auto
-(0 2) 750 PRINT "HOPE YOU HAD FUN.  BYE."
+F(I) (0 2) 750 PRINT "HOPE YOU HAD FUN.  BYE."
   Origs: 730:ifthen, 740:auto
   Dests: 999:auto
-(0 1) 999 END
+F(I) (0 1) 999 END
+    WARNING: Terminating statement in FOR/NEXT
   Origs: 750:auto
   Dests: :stop
 

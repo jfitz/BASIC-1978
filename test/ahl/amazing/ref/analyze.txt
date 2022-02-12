@@ -61,20 +61,20 @@ Halstead complexity:
 (0 4)     X = INT(RND(1) * H + 1)
   Origs: 150:auto
   Dests: 165:auto
-(1 3) 165 FOR I = 1 TO H
+F(I) (1 3) 165 FOR I = 1 TO H
   Origs: 160:auto
   Dests: 170:fornext, 180:fornext
-(1 4) 170 IF I = X THEN 173
+F(I) (1 4) 170 IF I = X THEN 173
   Origs: 165:fornext
   Dests: 171:auto, 173:ifthen
-(0 2) 171 PRINT ".--";
-(0 2)     GOTO 180
+F(I) (0 2) 171 PRINT ".--";
+F(I) (0 2)     GOTO 180
   Origs: 170:auto
   Dests: 180:goto
-(0 2) 173 PRINT ".  ";
+F(I) (0 2) 173 PRINT ".  ";
   Origs: 170:ifthen
   Dests: 180:auto
-(0 1) 180 NEXT I
+F(I) (0 1) 180 NEXT I
   Origs: 165:fornext, 171:goto, 173:auto
   Dests: 190:auto
 (0 2) 190 PRINT "."
@@ -416,58 +416,58 @@ Halstead complexity:
 (0 3) 1000 GOTO 210
   Origs: 780:goto, 975:goto
   Dests: 210:goto
-(1 3) 1010 FOR J = 1 TO V
+F(J) (1 3) 1010 FOR J = 1 TO V
   Origs: 810:ifthen, 840:ifthen, 900:ifthen, 950:ifthen
   Dests: 1011:fornext, 1072:fornext
-(0 2) 1011 PRINT "I";
+F(J) (0 2) 1011 PRINT "I";
   Origs: 1010:fornext
   Dests: 1012:auto
-(1 3) 1012 FOR I = 1 TO H
+F(J,I) (1 3) 1012 FOR I = 1 TO H
   Origs: 1011:auto
   Dests: 1013:fornext, 1040:fornext
-(1 4) 1013 IF V(I, J) < 2 THEN 1030
+F(J,I) (1 4) 1013 IF V(I, J) < 2 THEN 1030
   Origs: 1012:fornext
   Dests: 1020:auto, 1030:ifthen
-(0 2) 1020 PRINT "   ";
+F(J,I) (0 2) 1020 PRINT "   ";
   Origs: 1013:auto
   Dests: 1021:auto
-(0 2) 1021 GOTO 1040
+F(J,I) (0 2) 1021 GOTO 1040
   Origs: 1020:auto
   Dests: 1040:goto
-(0 2) 1030 PRINT "  I";
+F(J,I) (0 2) 1030 PRINT "  I";
   Origs: 1013:ifthen
   Dests: 1040:auto
-(0 1) 1040 NEXT I
+F(J,I) (0 1) 1040 NEXT I
   Origs: 1012:fornext, 1021:goto, 1030:auto
   Dests: 1041:auto
-(0 2) 1041 PRINT
+F(J) (0 2) 1041 PRINT
   Origs: 1040:auto
   Dests: 1043:auto
-(1 3) 1043 FOR I = 1 TO H
+F(J,I) (1 3) 1043 FOR I = 1 TO H
   Origs: 1041:auto
   Dests: 1045:fornext, 1070:fornext
-(1 4) 1045 IF V(I, J) = 0 THEN 1060
+F(J,I) (1 4) 1045 IF V(I, J) = 0 THEN 1060
   Origs: 1043:fornext
   Dests: 1050:auto, 1060:ifthen
-(1 4) 1050 IF V(I, J) = 2 THEN 1060
+F(J,I) (1 4) 1050 IF V(I, J) = 2 THEN 1060
   Origs: 1045:auto
   Dests: 1051:auto, 1060:ifthen
-(0 2) 1051 PRINT ":  ";
+F(J,I) (0 2) 1051 PRINT ":  ";
   Origs: 1050:auto
   Dests: 1052:auto
-(0 2) 1052 GOTO 1070
+F(J,I) (0 2) 1052 GOTO 1070
   Origs: 1051:auto
   Dests: 1070:goto
-(0 2) 1060 PRINT ":--";
+F(J,I) (0 2) 1060 PRINT ":--";
   Origs: 1045:ifthen, 1050:ifthen
   Dests: 1070:auto
-(0 1) 1070 NEXT I
+F(J,I) (0 1) 1070 NEXT I
   Origs: 1043:fornext, 1052:goto, 1060:auto
   Dests: 1071:auto
-(0 2) 1071 PRINT "."
+F(J) (0 2) 1071 PRINT "."
   Origs: 1070:auto
   Dests: 1072:auto
-(0 1) 1072 NEXT J
+F(J) (0 1) 1072 NEXT J
   Origs: 1010:fornext, 1071:auto
   Dests: 1073:auto
 (0 1) 1073 END

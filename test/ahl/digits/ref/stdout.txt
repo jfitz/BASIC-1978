@@ -93,21 +93,21 @@ STOP in line 1090
 360 (1) READ A, B, C
 370 (0) DATA 0, 1, 3
 380 (1) DIM M(26, 2), K(2, 2), L(8, 2)
-400 (1) FOR I = 0 TO 26
-    (27) FOR J = 0 TO 2
-    (81) M(I, J) = 1
-    (81) NEXT J
-    (27) NEXT I
-410 (1) FOR I = 0 TO 2
-    (3) FOR J = 0 TO 2
-    (9) K(I, J) = 9
-    (9) NEXT J
-    (3) NEXT I
-420 (1) FOR I = 0 TO 8
-    (9) FOR J = 0 TO 2
-    (27) L(I, J) = 3
-    (27) NEXT J
-    (9) NEXT I
+400 F(I) (1) FOR I = 0 TO 26
+    F(I,J) (27) FOR J = 0 TO 2
+    F(I,J) (81) M(I, J) = 1
+    F(I,J) (81) NEXT J
+    F(I) (27) NEXT I
+410 F(I) (1) FOR I = 0 TO 2
+    F(I,J) (3) FOR J = 0 TO 2
+    F(I,J) (9) K(I, J) = 9
+    F(I,J) (9) NEXT J
+    F(I) (3) NEXT I
+420 F(I) (1) FOR I = 0 TO 8
+    F(I,J) (9) FOR J = 0 TO 2
+    F(I,J) (27) L(I, J) = 3
+    F(I,J) (27) NEXT J
+    F(I) (9) NEXT I
 450 (1) L(0, 0) = 2
     (1) L(4, 1) = 2
     (1) L(8, 2) = 2
@@ -115,46 +115,46 @@ STOP in line 1090
     (1) Z1 = 8
     (1) Z2 = 2
 510 (1) X = 0
-520 (1) FOR T = 1 TO 3
-530 (3) PRINT
-540 (3) PRINT "TEN NUMBERS, PLEASE";
-550 (3) INPUT N(1), N(2), N(3), N(4), N(5), N(6), N(7), N(8), N(9), N(10)
-560 (3) FOR I = 1 TO 10
-570 (30) W = N(I) - 1
-580 (30) IF W = SGN(W) THEN 620
-590 (0) PRINT "ONLY USE THE DIGITS '0', '1', OR '2'."
-600 (0) PRINT "LET'S TRY AGAIN."
-    (0) GOTO 530
-620 (30) NEXT I
-630 (3) PRINT
-    (3) PRINT "MY GUESS", "YOUR NO.", "RESULT", "NO. RIGHT"
-    (3) PRINT
-660 (3) FOR U = 1 TO 10
-670 (30) N = N(U)
-    (30) S = 0
-690 (30) FOR J = 0 TO 2
-700 (90) S1 = A * K(Z2, J) + B * L(Z1, J) + C * M(Z, J)
-710 (90) IF S > S1 THEN 760
-720 (73) IF S < S1 THEN 740
-730 (37) IF RND(1) < .5 THEN 760
-740 (52) S = S1
-    (52) G = J
-760 (90) NEXT J
-770 (30) PRINT "  "; G, "   "; N(U),
-780 (30) IF G = N(U) THEN 810
-790 (22) PRINT " WRONG", X
-800 (22) GOTO 880
-810 (8) X = X + 1
-820 (8) PRINT " RIGHT", X
-830 (8) M(Z, N) = M(Z, N) + 1
-840 (8) L(Z1, N) = L(Z1, N) + 1
-850 (8) K(Z2, N) = K(Z2, N) + 1
-860 (8) Z = Z - INT(Z / 9) * 9
-870 (8) Z = 3 * Z + N(U)
-880 (30) Z1 = Z - INT(Z / 9) * 9
-890 (30) Z2 = N(U)
-900 (30) NEXT U
-910 (3) NEXT T
+520 F(T) (1) FOR T = 1 TO 3
+530 F(T,I) (3) PRINT
+540 F(T,I) (3) PRINT "TEN NUMBERS, PLEASE";
+550 F(T,I) (3) INPUT N(1), N(2), N(3), N(4), N(5), N(6), N(7), N(8), N(9), N(10)
+560 F(T,I) (3) FOR I = 1 TO 10
+570 F(T,I) (30) W = N(I) - 1
+580 F(T,I) (30) IF W = SGN(W) THEN 620
+590 F(T,I) (0) PRINT "ONLY USE THE DIGITS '0', '1', OR '2'."
+600 F(T,I) (0) PRINT "LET'S TRY AGAIN."
+    F(T,I) (0) GOTO 530
+620 F(T,I) (30) NEXT I
+630 F(T) (3) PRINT
+    F(T) (3) PRINT "MY GUESS", "YOUR NO.", "RESULT", "NO. RIGHT"
+    F(T) (3) PRINT
+660 F(T,U) (3) FOR U = 1 TO 10
+670 F(T,U) (30) N = N(U)
+    F(T,U) (30) S = 0
+690 F(T,U,J) (30) FOR J = 0 TO 2
+700 F(T,U,J) (90) S1 = A * K(Z2, J) + B * L(Z1, J) + C * M(Z, J)
+710 F(T,U,J) (90) IF S > S1 THEN 760
+720 F(T,U,J) (73) IF S < S1 THEN 740
+730 F(T,U,J) (37) IF RND(1) < .5 THEN 760
+740 F(T,U,J) (52) S = S1
+    F(T,U,J) (52) G = J
+760 F(T,U,J) (90) NEXT J
+770 F(T,U) (30) PRINT "  "; G, "   "; N(U),
+780 F(T,U) (30) IF G = N(U) THEN 810
+790 F(T,U) (22) PRINT " WRONG", X
+800 F(T,U) (22) GOTO 880
+810 F(T,U) (8) X = X + 1
+820 F(T,U) (8) PRINT " RIGHT", X
+830 F(T,U) (8) M(Z, N) = M(Z, N) + 1
+840 F(T,U) (8) L(Z1, N) = L(Z1, N) + 1
+850 F(T,U) (8) K(Z2, N) = K(Z2, N) + 1
+860 F(T,U) (8) Z = Z - INT(Z / 9) * 9
+870 F(T,U) (8) Z = 3 * Z + N(U)
+880 F(T,U) (30) Z1 = Z - INT(Z / 9) * 9
+890 F(T,U) (30) Z2 = N(U)
+900 F(T,U) (30) NEXT U
+910 F(T) (3) NEXT T
 920 (1) PRINT
 930 (1) IF X > 10 THEN 980
 940 (1) IF X < 10 THEN 1010
@@ -163,9 +163,9 @@ STOP in line 1090
 970 (0) GOTO 1030
 980 (0) PRINT "I GUESSED MORE THAN 1/3 OF YOUR NUMBERS."
 990 (0) PRINT "I WIN."
-    (0) FOR Q = 1 TO 10
-    (0) PRINT CHR$(7);
-    (0) NEXT Q
+    F(Q) (0) FOR Q = 1 TO 10
+    F(Q) (0) PRINT CHR$(7);
+    F(Q) (0) NEXT Q
 1000 (0) GOTO 1030
 1010 (1) PRINT "I GUESSED LESS THAN 1/3 OF YOUR NUMBERS."
 1020 (1) PRINT "YOU BEAT ME.  CONGRATULATIONS *****"

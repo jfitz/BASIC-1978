@@ -81,52 +81,52 @@ Halstead complexity:
 (0 4) 170 PRINT "YOU GET"; G; "GUESSES TO GET MY NUMBER."
   Origs: 160:auto
   Dests: 180:auto
-(0 5) 180 X = INT(N * RND(1)) + 1
+F(Q) (0 5) 180 X = INT(N * RND(1)) + 1
   Origs: 70:ifthen, 170:auto, 440:goto
   Dests: 190:auto
-(1 3) 190 FOR Q = 1 TO G
+F(Q) (1 3) 190 FOR Q = 1 TO G
   Origs: 180:auto
   Dests: 200:fornext, 330:fornext
-(0 2) 200 PRINT
+F(Q) (0 2) 200 PRINT
   Origs: 190:fornext
   Dests: 210:auto
-(0 3) 210 PRINT "GUESS #"; Q;
+F(Q) (0 3) 210 PRINT "GUESS #"; Q;
   Origs: 200:auto
   Dests: 220:auto
-(2 3) 220 INPUT A, B
+F(Q) (2 3) 220 INPUT A, B
   Origs: 210:auto
   Dests: 230:auto
-(1 7) 230 IF A = B AND X = A THEN 400
+F(Q) (1 7) 230 IF A = B AND X = A THEN 400
   Origs: 220:auto
   Dests: 240:auto, 400:ifthen
-(1 4) 240 IF A <= B THEN 260
+F(Q) (1 4) 240 IF A <= B THEN 260
   Origs: 230:auto
   Dests: 250:auto, 260:ifthen
-(0 2) 250 GOSUB 360
+F(Q) (0 2) 250 GOSUB 360
   Origs: 240:auto
   Dests: 260:auto, 360:gosub
-(1 7) 260 IF A <= X AND X <= B THEN 320
+F(Q) (1 7) 260 IF A <= X AND X <= B THEN 320
   Origs: 240:ifthen, 250:auto
   Dests: 270:auto, 320:ifthen
-(1 4) 270 IF X < A THEN 300
+F(Q) (1 4) 270 IF X < A THEN 300
   Origs: 260:auto
   Dests: 280:auto, 300:ifthen
-(0 2) 280 PRINT "MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
+F(Q) (0 2) 280 PRINT "MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
   Origs: 270:auto
   Dests: 290:auto
-(0 2) 290 GOTO 330
+F(Q) (0 2) 290 GOTO 330
   Origs: 280:auto
   Dests: 330:goto
-(0 2) 300 PRINT "MY NUMBER IS SMALLER THAN YOUR TRAP NUMBERS."
+F(Q) (0 2) 300 PRINT "MY NUMBER IS SMALLER THAN YOUR TRAP NUMBERS."
   Origs: 270:ifthen
   Dests: 310:auto
-(0 2) 310 GOTO 330
+F(Q) (0 2) 310 GOTO 330
   Origs: 300:auto
   Dests: 330:goto
-(0 2) 320 PRINT "YOU HAVE TRAPPED MY NUMBER."
+F(Q) (0 2) 320 PRINT "YOU HAVE TRAPPED MY NUMBER."
   Origs: 260:ifthen
   Dests: 330:auto
-(0 1) 330 NEXT Q
+F(Q) (0 1) 330 NEXT Q
   Origs: 190:fornext, 290:goto, 310:goto, 320:auto
   Dests: 340:auto
 (0 5) 340 PRINT "SORRY, THAT'S"; G; "GUESSES. THE NUMBER WAS"; X
@@ -150,19 +150,19 @@ G(360) (0 3) 380 B = R
 G(360) (0 1) 390 RETURN
   Origs: 380:auto
   Dests: 
-(0 2) 400 PRINT "YOU GOT IT!!!"
+F(Q) (0 2) 400 PRINT "YOU GOT IT!!!"
   Origs: 230:ifthen
   Dests: 410:auto
-(0 2) 410 PRINT
+F(Q) (0 2) 410 PRINT
   Origs: 350:goto, 400:auto
   Dests: 420:auto
-(0 2) 420 PRINT "TRY AGAIN."
+F(Q) (0 2) 420 PRINT "TRY AGAIN."
   Origs: 410:auto
   Dests: 430:auto
-(0 2) 430 PRINT
+F(Q) (0 2) 430 PRINT
   Origs: 420:auto
   Dests: 440:auto
-(0 3) 440 GOTO 180
+F(Q) (0 3) 440 GOTO 180
   Origs: 430:auto
   Dests: 180:goto
 (0 1) 450 END

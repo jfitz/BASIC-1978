@@ -55,28 +55,28 @@ Halstead complexity:
 (0 2) 90 PRINT "SURFACE COORDINATES; THE THIRD IS THE DEPTH."
   Origs: 80:auto
   Dests: 100:auto
-(0 2) 100 PRINT
-(0 2)     PRINT "GOOD LUCK !"
-(0 2)     PRINT
+F(D) (0 2) 100 PRINT
+F(D) (0 2)     PRINT "GOOD LUCK !"
+F(D) (0 2)     PRINT
   Origs: 90:auto, 410:ifthen
   Dests: 110:auto
-(0 4) 110 A = INT(G * RND(1))
-(0 4)     B = INT(G * RND(1))
-(0 4)     C = INT(G * RND(1))
+F(D) (0 4) 110 A = INT(G * RND(1))
+F(D) (0 4)     B = INT(G * RND(1))
+F(D) (0 4)     C = INT(G * RND(1))
   Origs: 100:auto
   Dests: 120:auto
-(1 3) 120 FOR D = 1 TO N
-(0 2)     PRINT
-(0 3)     PRINT "TRIAL #"; D;
-(3 4)     INPUT X, Y, Z
+F(D) (1 3) 120 FOR D = 1 TO N
+F(D) (0 2)     PRINT
+F(D) (0 3)     PRINT "TRIAL #"; D;
+F(D) (3 4)     INPUT X, Y, Z
   Origs: 110:auto
   Dests: 130:auto, 140:fornext
-(1 9) 130 IF ABS(X - A) + ABS(Y - B) + ABS(Z - C) = 0 THEN 300
+F(D) (1 9) 130 IF ABS(X - A) + ABS(Y - B) + ABS(Z - C) = 0 THEN 300
   Origs: 120:auto
   Dests: 140:auto, 300:ifthen
-(0 2) 140 GOSUB 500
-(0 2)     PRINT
-(0 1)     NEXT D
+F(D) (0 2) 140 GOSUB 500
+F(D) (0 2)     PRINT
+F(D) (0 1)     NEXT D
   Origs: 120:fornext, 130:auto
   Dests: 200:auto, 500:gosub
 (0 2) 200 PRINT
@@ -87,20 +87,20 @@ Halstead complexity:
 (0 2)     GOTO 400
   Origs: 200:auto
   Dests: 400:goto
-(0 2) 300 PRINT
-(0 4)     PRINT "B O O M ! ! YOU FOUND IT IN"; D; "TRIES!"
+F(D) (0 2) 300 PRINT
+F(D) (0 4)     PRINT "B O O M ! ! YOU FOUND IT IN"; D; "TRIES!"
   Origs: 130:ifthen
   Dests: 400:auto
-(0 2) 400 PRINT
-(0 2)     PRINT
-(1 2)     INPUT "ANOTHER GAME (Y OR N)"; A$
+F(D) (0 2) 400 PRINT
+F(D) (0 2)     PRINT
+F(D) (1 2)     INPUT "ANOTHER GAME (Y OR N)"; A$
   Origs: 210:goto, 300:auto
   Dests: 410:auto
-(1 5) 410 IF A$ = "Y" THEN 100
+F(D) (1 5) 410 IF A$ = "Y" THEN 100
   Origs: 400:auto
   Dests: 100:ifthen, 420:auto
-(0 2) 420 PRINT "OK.  HOPE YOU ENJOYED YOURSELF."
-(0 2)     GOTO 600
+F(D) (0 2) 420 PRINT "OK.  HOPE YOU ENJOYED YOURSELF."
+F(D) (0 2)     GOTO 600
   Origs: 410:auto
   Dests: 600:goto
 G(500) (0 2) 500 PRINT "SONAR REPORTS SHOT WAS ";
@@ -133,7 +133,8 @@ G(500) (1 5) 580 IF Z = C THEN PRINT " DEPTH OK."
 G(500) (0 1) 590 RETURN
   Origs: 580:auto
   Dests: 
-(0 1) 600 END
+F(D) (0 1) 600 END
+    WARNING: Terminating statement in FOR/NEXT
   Origs: 420:goto
   Dests: :stop
 

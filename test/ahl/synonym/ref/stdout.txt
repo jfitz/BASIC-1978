@@ -81,48 +81,48 @@ STOP in line 999
 140 (1) PRINT "IF YOU CAN'T THINK OF A SYNONYM, TYPE THE WORD 'HELP'"
 145 (1) PRINT "AND I WILL TELL YOU A SYNONYM."
     (1) PRINT
-150 (11) RESTORE
-    (11) C = C + 1
-    (11) READ N
-160 (11) IF C > N THEN 420
-170 (33) N1 = INT(RND(1) * N + 1)
-174 (33) IF R(N1) = 1 THEN 170
-176 (10) R(N1) = 1
-180 (10) FOR I = 1 TO N1
-190 (55) READ N2
-200 (55) FOR J = 1 TO N2
-210 (304) READ W$(J)
-220 (304) NEXT J
-230 (55) NEXT I
-232 (10) FOR J = 1 TO N2
-    (59) L(J) = J
-    (59) NEXT J
-235 (10) L(0) = N2
-    (10) G = 1
-    (10) PRINT
-237 (10) L(G) = L(L(0))
-    (10) L(0) = N2 - 1
-    (10) PRINT
-240 (14) PRINT "     WHAT IS A SYNONYM OF "; W$(G);
-    (14) INPUT A$
-250 (14) IF A$ = "HELP" THEN 340
-260 (13) FOR K = 1 TO N2
-270 (47) IF G = K THEN 290
-280 (34) IF A$ = W$(K) THEN 320
-290 (37) NEXT K
+150 F(K) (11) RESTORE
+    F(K) (11) C = C + 1
+    F(K) (11) READ N
+160 F(K) (11) IF C > N THEN 420
+170 F(K) (33) N1 = INT(RND(1) * N + 1)
+174 F(K) (33) IF R(N1) = 1 THEN 170
+176 F(K) (10) R(N1) = 1
+180 F(I,K) (10) FOR I = 1 TO N1
+190 F(I,K) (55) READ N2
+200 F(I,J,K) (55) FOR J = 1 TO N2
+210 F(I,J,K) (304) READ W$(J)
+220 F(I,J,K) (304) NEXT J
+230 F(I,K) (55) NEXT I
+232 F(J,K) (10) FOR J = 1 TO N2
+    F(J,K) (59) L(J) = J
+    F(J,K) (59) NEXT J
+235 F(K) (10) L(0) = N2
+    F(K) (10) G = 1
+    F(K) (10) PRINT
+237 F(K) (10) L(G) = L(L(0))
+    F(K) (10) L(0) = N2 - 1
+    F(K) (10) PRINT
+240 F(K) (14) PRINT "     WHAT IS A SYNONYM OF "; W$(G);
+    F(K) (14) INPUT A$
+250 F(K) (14) IF A$ = "HELP" THEN 340
+260 F(K) (13) FOR K = 1 TO N2
+270 F(K) (47) IF G = K THEN 290
+280 F(K) (34) IF A$ = W$(K) THEN 320
+290 F(K) (37) NEXT K
 300 (3) PRINT "     TRY AGAIN."
     (3) GOTO 240
-320 (10) PRINT R$(INT(RND(1) * 5 + 1))
-    (10) GOTO 150
-340 (1) G1 = INT(RND(1) * L(0) + 1)
-360 (1) PRINT "**** A SYNONYM OF "; W$(G); " IS "; W$(L(G1)); "."
-    (1) PRINT
-370 (1) L(G1) = L(L(0))
-    (1) L(0) = L(0) - 1
-    (1) GOTO 240
-420 (1) PRINT
-    (1) PRINT "SYNONYM DRILL COMPLETED."
-    (1) GOTO 999
+320 F(K) (10) PRINT R$(INT(RND(1) * 5 + 1))
+    F(K) (10) GOTO 150
+340 F(K) (1) G1 = INT(RND(1) * L(0) + 1)
+360 F(K) (1) PRINT "**** A SYNONYM OF "; W$(G); " IS "; W$(L(G1)); "."
+    F(K) (1) PRINT
+370 F(K) (1) L(G1) = L(L(0))
+    F(K) (1) L(0) = L(0) - 1
+    F(K) (1) GOTO 240
+420 F(K) (1) PRINT
+    F(K) (1) PRINT "SYNONYM DRILL COMPLETED."
+    F(K) (1) GOTO 999
 500 (0) DATA 10
 510 (0) DATA 5, "FIRST", "START", "BEGINNING", "ONSET", "INITIAL"
 520 (0) DATA 5, "SIMILAR", "ALIKE", "SAME", "LIKE", "RESEMBLING"
@@ -136,5 +136,5 @@ STOP in line 999
 590 (0) DATA 6, "RED", "ROUGE", "SCARLET", "CRIMSON", "FLAME", "RUBY"
 600 (0) DATA 7, "PAIN", "SUFFERING", "HURT", "MISERY", "DISTRESS", "ACHE"
 605 (0) DATA "DISCOMFORT"
-999 (1) END
+999 F(K) (1) END
 

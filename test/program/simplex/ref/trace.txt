@@ -53,100 +53,100 @@
 121: DIM C$(N1 + N2)
  N1: (101) 2
  N2: (101) 4
-122: FOR I = 1 TO N1
+F(I) 122: FOR I = 1 TO N1
  N1: (101) 2
  I = 1
  N1 = 2
  terminated:false
-123: C$(I) = "X" + STR$(I)
+F(I) 123: C$(I) = "X" + STR$(I)
  I: (122) 1
  C$(1) = "X1"
-124: NEXT I
+F(I) 124: NEXT I
  I: (122) 1
  terminated:false
  I = 2
-123: C$(I) = "X" + STR$(I)
+F(I) 123: C$(I) = "X" + STR$(I)
  I: (124) 2
  C$(2) = "X2"
-124: NEXT I
+F(I) 124: NEXT I
  I: (124) 2
  terminated:true
  I
-125: FOR I = 1 TO N2
+F(I) 125: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-126: C$(I + N1) = "S" + STR$(I)
+F(I) 126: C$(I + N1) = "S" + STR$(I)
  I: (125) 1
  N1: (101) 2
  C$(3) = "S1"
-127: NEXT I
+F(I) 127: NEXT I
  I: (125) 1
  terminated:false
  I = 2
-126: C$(I + N1) = "S" + STR$(I)
+F(I) 126: C$(I + N1) = "S" + STR$(I)
  I: (127) 2
  N1: (101) 2
  C$(4) = "S2"
-127: NEXT I
+F(I) 127: NEXT I
  I: (127) 2
  terminated:false
  I = 3
-126: C$(I + N1) = "S" + STR$(I)
+F(I) 126: C$(I + N1) = "S" + STR$(I)
  I: (127) 3
  N1: (101) 2
  C$(5) = "S3"
-127: NEXT I
+F(I) 127: NEXT I
  I: (127) 3
  terminated:false
  I = 4
-126: C$(I + N1) = "S" + STR$(I)
+F(I) 126: C$(I + N1) = "S" + STR$(I)
  I: (127) 4
  N1: (101) 2
  C$(6) = "S4"
-127: NEXT I
+F(I) 127: NEXT I
  I: (127) 4
  terminated:true
  I
-128: FOR I = 1 TO N2
+F(I) 128: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-129: C1$(I) = C$(I + N1)
+F(I) 129: C1$(I) = C$(I + N1)
  I: (128) 1
  N1: (101) 2
  C$(3): (126) "S1"
  C1$(1) = "S1"
-130: NEXT I
+F(I) 130: NEXT I
  I: (128) 1
  terminated:false
  I = 2
-129: C1$(I) = C$(I + N1)
+F(I) 129: C1$(I) = C$(I + N1)
  I: (130) 2
  N1: (101) 2
  C$(4): (126) "S2"
  C1$(2) = "S2"
-130: NEXT I
+F(I) 130: NEXT I
  I: (130) 2
  terminated:false
  I = 3
-129: C1$(I) = C$(I + N1)
+F(I) 129: C1$(I) = C$(I + N1)
  I: (130) 3
  N1: (101) 2
  C$(5): (126) "S3"
  C1$(3) = "S3"
-130: NEXT I
+F(I) 130: NEXT I
  I: (130) 3
  terminated:false
  I = 4
-129: C1$(I) = C$(I + N1)
+F(I) 129: C1$(I) = C$(I + N1)
  I: (130) 4
  N1: (101) 2
  C$(6): (126) "S4"
  C1$(4) = "S4"
-130: NEXT I
+F(I) 130: NEXT I
  I: (130) 4
  terminated:true
  I
@@ -483,300 +483,300 @@ S4
  I
 212: PRINT "B"
 B
-220: FOR I = 1 TO N2
+F(I) 220: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (220) 1
  R(1): (172) 0
  0              
  C1$(1): (129) "S1"
 S1              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.-1) 1
  X(1,1): (142) 6
  6              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 2
  X(1,2): (142) 2
  2              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 3
  X(1,3): (145) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 4
  X(1,4): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 5
  X(1,5): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 6
  X(1,6): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (220) 1
  B(1): (162) 2000
  2000
-239: NEXT I
+F(I) 239: NEXT I
  I: (220) 1
  terminated:false
  I = 2
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (239) 2
  R(2): (172) 0
  0              
  C1$(2): (129) "S2"
 S2              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.-1) 1
  X(2,1): (142) 8
  8              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 2
  X(2,2): (142) 6
  6              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 3
  X(2,3): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 4
  X(2,4): (145) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 5
  X(2,5): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 6
  X(2,6): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (239) 2
  B(2): (162) 2000
  2000
-239: NEXT I
+F(I) 239: NEXT I
  I: (239) 2
  terminated:false
  I = 3
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (239) 3
  R(3): (172) 0
  0              
  C1$(3): (129) "S3"
 S3              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.-1) 1
  X(3,1): (142) 6
  6              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 2
  X(3,2): (142) 4
  4              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 3
  X(3,3): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 4
  X(3,4): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 5
  X(3,5): (145) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 6
  X(3,6): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (239) 3
  B(3): (162) 1440
  1440
-239: NEXT I
+F(I) 239: NEXT I
  I: (239) 3
  terminated:false
  I = 4
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (239) 4
  R(4): (172) 0
  0              
  C1$(4): (129) "S4"
 S4              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.-1) 1
  X(4,1): (142) 40
  40             
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 2
  X(4,2): (142) 25
  25             
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 3
  X(4,3): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 4
  X(4,4): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 5
  X(4,5): (144) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 6
  X(4,6): (145) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (239) 4
  B(4): (162) 9600
  9600
-239: NEXT I
+F(I) 239: NEXT I
  I: (239) 4
  terminated:true
  I
@@ -830,308 +830,308 @@ S4
  J: (302.0.1) 6
  terminated:true
  J
-305: FOR I = 1 TO N2
+F(I) 305: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,1): (142) 6
  Z(1) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,2): (142) 2
  Z(2) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,3): (145) 1
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,4): (144) 0
  Z(4) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,5): (144) 0
  Z(5) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,6): (144) 0
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (305) 1
  terminated:false
  I = 2
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,1): (142) 8
  Z(1) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,2): (142) 6
  Z(2) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,3): (144) 0
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,4): (145) 1
  Z(4) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,5): (144) 0
  Z(5) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,6): (144) 0
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (307) 2
  terminated:false
  I = 3
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (306) 0
  I: (307) 3
  R(3): (172) 0
  X(3,1): (142) 6
  Z(1) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (306) 0
  I: (307) 3
  R(3): (172) 0
  X(3,2): (142) 4
  Z(2) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (306) 0
  I: (307) 3
  R(3): (172) 0
  X(3,3): (144) 0
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (306) 0
  I: (307) 3
  R(3): (172) 0
  X(3,4): (144) 0
  Z(4) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (306) 0
  I: (307) 3
  R(3): (172) 0
  X(3,5): (145) 1
  Z(5) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (306) 0
  I: (307) 3
  R(3): (172) 0
  X(3,6): (144) 0
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (307) 3
  terminated:false
  I = 4
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,1): (142) 40
  Z(1) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,2): (142) 25
  Z(2) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,3): (144) 0
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,4): (144) 0
  Z(4) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,5): (144) 0
  Z(5) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,6): (145) 1
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (307) 4
  terminated:true
  I
@@ -1158,70 +1158,70 @@ S4
  J0 = 0
 322: M = 0
  M = 0
-323: FOR J = 1 TO N1 + N2
+F(J) 323: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (323) 1
  Y(1): (311) -20
  M: (322) 0
  Y(J) >= M: false
-325: J0 = J
+F(J) 325: J0 = J
  J: (323) 1
  J0 = 1
-326: M = Y(J)
+F(J) 326: M = Y(J)
  J: (323) 1
  Y(1): (311) -20
  M = -20
-327: NEXT J
+F(J) 327: NEXT J
  J: (323) 1
  terminated:false
  J = 2
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 2
  Y(2): (311) -14
  M: (326) -20
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 2
  terminated:false
  J = 3
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 3
  Y(3): (311) 0
  M: (326) -20
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 3
  terminated:false
  J = 4
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 4
  Y(4): (311) 0
  M: (326) -20
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 4
  terminated:false
  J = 5
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 5
  Y(5): (311) 0
  M: (326) -20
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 5
  terminated:false
  J = 6
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 6
  Y(6): (311) 0
  M: (326) -20
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 6
  terminated:true
  J
@@ -1408,308 +1408,308 @@ B               B /
  J0: (325) 1
  C$(1): (123) "X1"
 X1
-360: FOR I = 1 TO N2
+F(I) 360: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-361: PRINT R(I), C1$(I),
+F(I) 361: PRINT R(I), C1$(I),
  I: (360) 1
  R(1): (172) 0
  0              
  C1$(1): (129) "S1"
 S1              
-362.0.-1: FOR J = 1 TO N1 + N2
+F(I) 362.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.-1) 1
  X(1,1): (142) 6
  6              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.-1) 1
  terminated:false
  J = 2
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 2
  X(1,2): (142) 2
  2              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 2
  terminated:false
  J = 3
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 3
  X(1,3): (145) 1
  1              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 3
  terminated:false
  J = 4
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 4
  X(1,4): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 4
  terminated:false
  J = 5
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 5
  X(1,5): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 5
  terminated:false
  J = 6
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 6
  X(1,6): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 6
  terminated:true
  J
-363: PRINT B(I), W(I)
+F(I) 363: PRINT B(I), W(I)
  I: (360) 1
  B(1): (162) 2000
  2000           
  W(1): (333) 333.333333
  333.333333
-364: NEXT I
+F(I) 364: NEXT I
  I: (360) 1
  terminated:false
  I = 2
-361: PRINT R(I), C1$(I),
+F(I) 361: PRINT R(I), C1$(I),
  I: (364) 2
  R(2): (172) 0
  0              
  C1$(2): (129) "S2"
 S2              
-362.0.-1: FOR J = 1 TO N1 + N2
+F(I) 362.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.-1) 1
  X(2,1): (142) 8
  8              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.-1) 1
  terminated:false
  J = 2
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 2
  X(2,2): (142) 6
  6              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 2
  terminated:false
  J = 3
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 3
  X(2,3): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 3
  terminated:false
  J = 4
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 4
  X(2,4): (145) 1
  1              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 4
  terminated:false
  J = 5
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 5
  X(2,5): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 5
  terminated:false
  J = 6
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 6
  X(2,6): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 6
  terminated:true
  J
-363: PRINT B(I), W(I)
+F(I) 363: PRINT B(I), W(I)
  I: (364) 2
  B(2): (162) 2000
  2000           
  W(2): (333) 250
  250
-364: NEXT I
+F(I) 364: NEXT I
  I: (364) 2
  terminated:false
  I = 3
-361: PRINT R(I), C1$(I),
+F(I) 361: PRINT R(I), C1$(I),
  I: (364) 3
  R(3): (172) 0
  0              
  C1$(3): (129) "S3"
 S3              
-362.0.-1: FOR J = 1 TO N1 + N2
+F(I) 362.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.-1) 1
  X(3,1): (142) 6
  6              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.-1) 1
  terminated:false
  J = 2
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 2
  X(3,2): (142) 4
  4              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 2
  terminated:false
  J = 3
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 3
  X(3,3): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 3
  terminated:false
  J = 4
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 4
  X(3,4): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 4
  terminated:false
  J = 5
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 5
  X(3,5): (145) 1
  1              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 5
  terminated:false
  J = 6
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 6
  X(3,6): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 6
  terminated:true
  J
-363: PRINT B(I), W(I)
+F(I) 363: PRINT B(I), W(I)
  I: (364) 3
  B(3): (162) 1440
  1440           
  W(3): (333) 240
  240
-364: NEXT I
+F(I) 364: NEXT I
  I: (364) 3
  terminated:false
  I = 4
-361: PRINT R(I), C1$(I),
+F(I) 361: PRINT R(I), C1$(I),
  I: (364) 4
  R(4): (172) 0
  0              
  C1$(4): (129) "S4"
 S4              
-362.0.-1: FOR J = 1 TO N1 + N2
+F(I) 362.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.-1) 1
  X(4,1): (142) 40
  40             
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.-1) 1
  terminated:false
  J = 2
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 2
  X(4,2): (142) 25
  25             
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 2
  terminated:false
  J = 3
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 3
  X(4,3): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 3
  terminated:false
  J = 4
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 4
  X(4,4): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 4
  terminated:false
  J = 5
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 5
  X(4,5): (144) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 5
  terminated:false
  J = 6
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 6
  X(4,6): (145) 1
  1              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 6
  terminated:true
  J
-363: PRINT B(I), W(I)
+F(I) 363: PRINT B(I), W(I)
  I: (364) 4
  B(4): (162) 9600
  9600           
  W(4): (333) 240
  240
-364: NEXT I
+F(I) 364: NEXT I
  I: (364) 4
  terminated:true
  I
@@ -1743,65 +1743,65 @@ X1 ENTERS
  I0 = 0
 382: M = 1E6
  M = 1000000
-383: FOR I = 1 TO N2
+F(I) 383: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-384: IF W(I) <= 0 OR W(I) >= M THEN 387
+F(I) 384: IF W(I) <= 0 OR W(I) >= M THEN 387
  I: (383) 1
  W(1): (333) 333.333333
  M: (382) 1000000
  W(I) <= 0 OR W(I) >= M: false
-385: I0 = I
+F(I) 385: I0 = I
  I: (383) 1
  I0 = 1
-386: M = W(I)
+F(I) 386: M = W(I)
  I: (383) 1
  W(1): (333) 333.333333
  M = 333.333333
-387: NEXT I
+F(I) 387: NEXT I
  I: (383) 1
  terminated:false
  I = 2
-384: IF W(I) <= 0 OR W(I) >= M THEN 387
+F(I) 384: IF W(I) <= 0 OR W(I) >= M THEN 387
  I: (387) 2
  W(2): (333) 250
  M: (386) 333.333333
  W(I) <= 0 OR W(I) >= M: false
-385: I0 = I
+F(I) 385: I0 = I
  I: (387) 2
  I0 = 2
-386: M = W(I)
+F(I) 386: M = W(I)
  I: (387) 2
  W(2): (333) 250
  M = 250
-387: NEXT I
+F(I) 387: NEXT I
  I: (387) 2
  terminated:false
  I = 3
-384: IF W(I) <= 0 OR W(I) >= M THEN 387
+F(I) 384: IF W(I) <= 0 OR W(I) >= M THEN 387
  I: (387) 3
  W(3): (333) 240
  M: (386) 250
  W(I) <= 0 OR W(I) >= M: false
-385: I0 = I
+F(I) 385: I0 = I
  I: (387) 3
  I0 = 3
-386: M = W(I)
+F(I) 386: M = W(I)
  I: (387) 3
  W(3): (333) 240
  M = 240
-387: NEXT I
+F(I) 387: NEXT I
  I: (387) 3
  terminated:false
  I = 4
-384: IF W(I) <= 0 OR W(I) >= M THEN 387
+F(I) 384: IF W(I) <= 0 OR W(I) >= M THEN 387
  I: (387) 4
  W(4): (333) 240
  M: (386) 240
  W(I) <= 0 OR W(I) >= M: true
-387: NEXT I
+F(I) 387: NEXT I
  I: (387) 4
  terminated:true
  I
@@ -1879,93 +1879,93 @@ S3 EXITS
  B2(2) = 2000
  B2(3) = 1440
  B2(4) = 9600
-421: FOR J = 1 TO N1 + N2
+F(J) 421: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 3
  J: (421) 1
  X(3,1): (142) 6
  J0: (325) 1
  X2(3,1) = 1
-423: NEXT J
+F(J) 423: NEXT J
  J: (421) 1
  terminated:false
  J = 2
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 3
  J: (423) 2
  X(3,2): (142) 4
  J0: (325) 1
  X(3,1): (142) 6
  X2(3,2) = 0.666666667
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 2
  terminated:false
  J = 3
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 3
  J: (423) 3
  X(3,3): (144) 0
  J0: (325) 1
  X(3,1): (142) 6
  X2(3,3) = 0
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 3
  terminated:false
  J = 4
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 3
  J: (423) 4
  X(3,4): (144) 0
  J0: (325) 1
  X(3,1): (142) 6
  X2(3,4) = 0
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 4
  terminated:false
  J = 5
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 3
  J: (423) 5
  X(3,5): (145) 1
  J0: (325) 1
  X(3,1): (142) 6
  X2(3,5) = 0.166666667
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 5
  terminated:false
  J = 6
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 3
  J: (423) 6
  X(3,6): (144) 0
  J0: (325) 1
  X(3,1): (142) 6
  X2(3,6) = 0
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 6
  terminated:true
  J
-431: FOR I = 1 TO N2
+F(I) 431: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-432: IF I = I0 THEN 436
+F(I) 432: IF I = I0 THEN 436
  I: (431) 1
  I0: (385) 3
  I = I0: false
-433: FOR J = 1 TO N1 + N2
+F(I,J) 433: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (433) 1
  X(1,1): (142) 6
@@ -1973,11 +1973,11 @@ S3 EXITS
  I0: (385) 3
  X(3,1): (142) 6
  X2(1,1) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (433) 1
  terminated:false
  J = 2
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 2
  X(1,2): (142) 2
@@ -1987,11 +1987,11 @@ S3 EXITS
  X(3,2): (142) 4
  X(3,1): (142) 6
  X2(1,2) = -2
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 2
  terminated:false
  J = 3
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 3
  X(1,3): (145) 1
@@ -2001,11 +2001,11 @@ S3 EXITS
  X(3,3): (144) 0
  X(3,1): (142) 6
  X2(1,3) = 1
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 3
  terminated:false
  J = 4
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 4
  X(1,4): (144) 0
@@ -2015,11 +2015,11 @@ S3 EXITS
  X(3,4): (144) 0
  X(3,1): (142) 6
  X2(1,4) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 4
  terminated:false
  J = 5
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 5
  X(1,5): (144) 0
@@ -2029,11 +2029,11 @@ S3 EXITS
  X(3,5): (145) 1
  X(3,1): (142) 6
  X2(1,5) = -1
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 5
  terminated:false
  J = 6
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 6
  X(1,6): (144) 0
@@ -2043,25 +2043,25 @@ S3 EXITS
  X(3,6): (144) 0
  X(3,1): (142) 6
  X2(1,6) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 6
  terminated:true
  J
-436: NEXT I
+F(I) 436: NEXT I
  I: (431) 1
  terminated:false
  I = 2
-432: IF I = I0 THEN 436
+F(I) 432: IF I = I0 THEN 436
  I: (436) 2
  I0: (385) 3
  I = I0: false
-433: FOR J = 1 TO N1 + N2
+F(I,J) 433: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 2
  J: (433) 1
  X(2,1): (142) 8
@@ -2069,11 +2069,11 @@ S3 EXITS
  I0: (385) 3
  X(3,1): (142) 6
  X2(2,1) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (433) 1
  terminated:false
  J = 2
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 2
  J: (435) 2
  X(2,2): (142) 6
@@ -2083,11 +2083,11 @@ S3 EXITS
  X(3,2): (142) 4
  X(3,1): (142) 6
  X2(2,2) = 0.66666667
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 2
  terminated:false
  J = 3
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 2
  J: (435) 3
  X(2,3): (144) 0
@@ -2097,11 +2097,11 @@ S3 EXITS
  X(3,3): (144) 0
  X(3,1): (142) 6
  X2(2,3) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 3
  terminated:false
  J = 4
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 2
  J: (435) 4
  X(2,4): (145) 1
@@ -2111,11 +2111,11 @@ S3 EXITS
  X(3,4): (144) 0
  X(3,1): (142) 6
  X2(2,4) = 1
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 4
  terminated:false
  J = 5
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 2
  J: (435) 5
  X(2,5): (144) 0
@@ -2125,11 +2125,11 @@ S3 EXITS
  X(3,5): (145) 1
  X(3,1): (142) 6
  X2(2,5) = -1.33333333
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 5
  terminated:false
  J = 6
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 2
  J: (435) 6
  X(2,6): (144) 0
@@ -2139,33 +2139,33 @@ S3 EXITS
  X(3,6): (144) 0
  X(3,1): (142) 6
  X2(2,6) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 6
  terminated:true
  J
-436: NEXT I
+F(I) 436: NEXT I
  I: (436) 2
  terminated:false
  I = 3
-432: IF I = I0 THEN 436
+F(I) 432: IF I = I0 THEN 436
  I: (436) 3
  I0: (385) 3
  I = I0: true
-436: NEXT I
+F(I) 436: NEXT I
  I: (436) 3
  terminated:false
  I = 4
-432: IF I = I0 THEN 436
+F(I) 432: IF I = I0 THEN 436
  I: (436) 4
  I0: (385) 3
  I = I0: false
-433: FOR J = 1 TO N1 + N2
+F(I,J) 433: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (433) 1
  X(4,1): (142) 40
@@ -2173,11 +2173,11 @@ S3 EXITS
  I0: (385) 3
  X(3,1): (142) 6
  X2(4,1) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (433) 1
  terminated:false
  J = 2
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 2
  X(4,2): (142) 25
@@ -2187,11 +2187,11 @@ S3 EXITS
  X(3,2): (142) 4
  X(3,1): (142) 6
  X2(4,2) = -1.6666667
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 2
  terminated:false
  J = 3
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 3
  X(4,3): (144) 0
@@ -2201,11 +2201,11 @@ S3 EXITS
  X(3,3): (144) 0
  X(3,1): (142) 6
  X2(4,3) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 3
  terminated:false
  J = 4
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 4
  X(4,4): (144) 0
@@ -2215,11 +2215,11 @@ S3 EXITS
  X(3,4): (144) 0
  X(3,1): (142) 6
  X2(4,4) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 4
  terminated:false
  J = 5
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 5
  X(4,5): (144) 0
@@ -2229,11 +2229,11 @@ S3 EXITS
  X(3,5): (145) 1
  X(3,1): (142) 6
  X2(4,5) = -6.66666667
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 5
  terminated:false
  J = 6
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 6
  X(4,6): (145) 1
@@ -2243,11 +2243,11 @@ S3 EXITS
  X(3,6): (144) 0
  X(3,1): (142) 6
  X2(4,6) = 1
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 6
  terminated:true
  J
-436: NEXT I
+F(I) 436: NEXT I
  I: (436) 4
  terminated:true
  I
@@ -2257,16 +2257,16 @@ S3 EXITS
  J0: (325) 1
  X(3,1): (142) 6
  B2(3) = 240
-442: FOR I = 1 TO N2
+F(I) 442: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-443: IF I = I0 THEN 445
+F(I) 443: IF I = I0 THEN 445
  I: (442) 1
  I0: (385) 3
  I = I0: false
-444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+F(I) 444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
  I: (442) 1
  B(1): (162) 2000
  J0: (325) 1
@@ -2275,15 +2275,15 @@ S3 EXITS
  B(3): (162) 1440
  X(3,1): (142) 6
  B2(1) = 560
-445: NEXT I
+F(I) 445: NEXT I
  I: (442) 1
  terminated:false
  I = 2
-443: IF I = I0 THEN 445
+F(I) 443: IF I = I0 THEN 445
  I: (445) 2
  I0: (385) 3
  I = I0: false
-444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+F(I) 444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
  I: (445) 2
  B(2): (162) 2000
  J0: (325) 1
@@ -2292,23 +2292,23 @@ S3 EXITS
  B(3): (162) 1440
  X(3,1): (142) 6
  B2(2) = 80
-445: NEXT I
+F(I) 445: NEXT I
  I: (445) 2
  terminated:false
  I = 3
-443: IF I = I0 THEN 445
+F(I) 443: IF I = I0 THEN 445
  I: (445) 3
  I0: (385) 3
  I = I0: true
-445: NEXT I
+F(I) 445: NEXT I
  I: (445) 3
  terminated:false
  I = 4
-443: IF I = I0 THEN 445
+F(I) 443: IF I = I0 THEN 445
  I: (445) 4
  I0: (385) 3
  I = I0: false
-444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+F(I) 444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
  I: (445) 4
  B(4): (162) 9600
  J0: (325) 1
@@ -2317,7 +2317,7 @@ S3 EXITS
  B(3): (162) 1440
  X(3,1): (142) 6
  B2(4) = 0
-445: NEXT I
+F(I) 445: NEXT I
  I: (445) 4
  terminated:true
  I
@@ -2453,300 +2453,300 @@ S4
  I
 212: PRINT "B"
 B
-220: FOR I = 1 TO N2
+F(I) 220: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (220) 1
  R(1): (172) 0
  0              
  C1$(1): (129) "S1"
 S1              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.-1) 1
  X(1,1): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 2
  X(1,2): (451) -2
 -2              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 3
  X(1,3): (451) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 4
  X(1,4): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 5
  X(1,5): (451) -1
 -1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 6
  X(1,6): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (220) 1
  B(1): (452) 560
  560
-239: NEXT I
+F(I) 239: NEXT I
  I: (220) 1
  terminated:false
  I = 2
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (239) 2
  R(2): (172) 0
  0              
  C1$(2): (129) "S2"
 S2              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.-1) 1
  X(2,1): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 2
  X(2,2): (451) 0.66666667
  0.66666667     
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 3
  X(2,3): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 4
  X(2,4): (451) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 5
  X(2,5): (451) -1.33333333
 -1.33333333     
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 6
  X(2,6): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (239) 2
  B(2): (452) 80
  80
-239: NEXT I
+F(I) 239: NEXT I
  I: (239) 2
  terminated:false
  I = 3
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (239) 3
  R(3): (403) 20
  20             
  C1$(3): (402) "X1"
 X1              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.-1) 1
  X(3,1): (451) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 2
  X(3,2): (451) 0.666666667
  0.666666667    
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 3
  X(3,3): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 4
  X(3,4): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 5
  X(3,5): (451) 0.166666667
  0.166666667    
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 6
  X(3,6): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (239) 3
  B(3): (452) 240
  240
-239: NEXT I
+F(I) 239: NEXT I
  I: (239) 3
  terminated:false
  I = 4
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (239) 4
  R(4): (172) 0
  0              
  C1$(4): (129) "S4"
 S4              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.-1) 1
  X(4,1): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 2
  X(4,2): (451) -1.6666667
 -1.6666667      
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 3
  X(4,3): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 4
  X(4,4): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 5
  X(4,5): (451) -6.66666667
 -6.66666667     
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 6
  X(4,6): (451) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (239) 4
  B(4): (452) 0
  0
-239: NEXT I
+F(I) 239: NEXT I
  I: (239) 4
  terminated:true
  I
@@ -2800,308 +2800,308 @@ S4
  J: (302.0.1) 6
  terminated:true
  J
-305: FOR I = 1 TO N2
+F(I) 305: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,1): (451) 0
  Z(1) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,2): (451) -2
  Z(2) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,3): (451) 1
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,4): (451) 0
  Z(4) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,5): (451) -1
  Z(5) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,6): (451) 0
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (305) 1
  terminated:false
  I = 2
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,1): (451) 0
  Z(1) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,2): (451) 0.66666667
  Z(2) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,3): (451) 0
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,4): (451) 1
  Z(4) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,5): (451) -1.33333333
  Z(5) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (306) 0
  I: (307) 2
  R(2): (172) 0
  X(2,6): (451) 0
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (307) 2
  terminated:false
  I = 3
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (306) 0
  I: (307) 3
  R(3): (403) 20
  X(3,1): (451) 1
  Z(1) = 20
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (306) 0
  I: (307) 3
  R(3): (403) 20
  X(3,2): (451) 0.666666667
  Z(2) = 13.3333333
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (306) 0
  I: (307) 3
  R(3): (403) 20
  X(3,3): (451) 0
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (306) 0
  I: (307) 3
  R(3): (403) 20
  X(3,4): (451) 0
  Z(4) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (306) 0
  I: (307) 3
  R(3): (403) 20
  X(3,5): (451) 0.166666667
  Z(5) = 3.33333334
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (306) 0
  I: (307) 3
  R(3): (403) 20
  X(3,6): (451) 0
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (307) 3
  terminated:false
  I = 4
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (306) 20
  I: (307) 4
  R(4): (172) 0
  X(4,1): (451) 0
  Z(1) = 20
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (306) 13.3333333
  I: (307) 4
  R(4): (172) 0
  X(4,2): (451) -1.6666667
  Z(2) = 13.3333333
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,3): (451) 0
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,4): (451) 0
  Z(4) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (306) 3.33333334
  I: (307) 4
  R(4): (172) 0
  X(4,5): (451) -6.66666667
  Z(5) = 3.33333334
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,6): (451) 1
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (307) 4
  terminated:true
  I
@@ -3128,70 +3128,70 @@ S4
  J0 = 0
 322: M = 0
  M = 0
-323: FOR J = 1 TO N1 + N2
+F(J) 323: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (323) 1
  Y(1): (311) 0
  M: (322) 0
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (323) 1
  terminated:false
  J = 2
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 2
  Y(2): (311) -0.6666667
  M: (322) 0
  Y(J) >= M: false
-325: J0 = J
+F(J) 325: J0 = J
  J: (327) 2
  J0 = 2
-326: M = Y(J)
+F(J) 326: M = Y(J)
  J: (327) 2
  Y(2): (311) -0.6666667
  M = -0.6666667
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 2
  terminated:false
  J = 3
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 3
  Y(3): (311) 0
  M: (326) -0.6666667
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 3
  terminated:false
  J = 4
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 4
  Y(4): (311) 0
  M: (326) -0.6666667
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 4
  terminated:false
  J = 5
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 5
  Y(5): (311) 3.33333334
  M: (326) -0.6666667
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 5
  terminated:false
  J = 6
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 6
  Y(6): (311) 0
  M: (326) -0.6666667
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 6
  terminated:true
  J
@@ -3378,308 +3378,308 @@ B               B /
  J0: (325) 2
  C$(2): (123) "X2"
 X2
-360: FOR I = 1 TO N2
+F(I) 360: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-361: PRINT R(I), C1$(I),
+F(I) 361: PRINT R(I), C1$(I),
  I: (360) 1
  R(1): (172) 0
  0              
  C1$(1): (129) "S1"
 S1              
-362.0.-1: FOR J = 1 TO N1 + N2
+F(I) 362.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.-1) 1
  X(1,1): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.-1) 1
  terminated:false
  J = 2
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 2
  X(1,2): (451) -2
 -2              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 2
  terminated:false
  J = 3
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 3
  X(1,3): (451) 1
  1              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 3
  terminated:false
  J = 4
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 4
  X(1,4): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 4
  terminated:false
  J = 5
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 5
  X(1,5): (451) -1
 -1              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 5
  terminated:false
  J = 6
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (360) 1
  J: (362.0.1) 6
  X(1,6): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 6
  terminated:true
  J
-363: PRINT B(I), W(I)
+F(I) 363: PRINT B(I), W(I)
  I: (360) 1
  B(1): (452) 560
  560            
  W(1): (333) -280
 -280
-364: NEXT I
+F(I) 364: NEXT I
  I: (360) 1
  terminated:false
  I = 2
-361: PRINT R(I), C1$(I),
+F(I) 361: PRINT R(I), C1$(I),
  I: (364) 2
  R(2): (172) 0
  0              
  C1$(2): (129) "S2"
 S2              
-362.0.-1: FOR J = 1 TO N1 + N2
+F(I) 362.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.-1) 1
  X(2,1): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.-1) 1
  terminated:false
  J = 2
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 2
  X(2,2): (451) 0.66666667
  0.66666667     
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 2
  terminated:false
  J = 3
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 3
  X(2,3): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 3
  terminated:false
  J = 4
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 4
  X(2,4): (451) 1
  1              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 4
  terminated:false
  J = 5
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 5
  X(2,5): (451) -1.33333333
 -1.33333333     
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 5
  terminated:false
  J = 6
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 2
  J: (362.0.1) 6
  X(2,6): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 6
  terminated:true
  J
-363: PRINT B(I), W(I)
+F(I) 363: PRINT B(I), W(I)
  I: (364) 2
  B(2): (452) 80
  80             
  W(2): (333) 119.999999
  119.999999
-364: NEXT I
+F(I) 364: NEXT I
  I: (364) 2
  terminated:false
  I = 3
-361: PRINT R(I), C1$(I),
+F(I) 361: PRINT R(I), C1$(I),
  I: (364) 3
  R(3): (403) 20
  20             
  C1$(3): (402) "X1"
 X1              
-362.0.-1: FOR J = 1 TO N1 + N2
+F(I) 362.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.-1) 1
  X(3,1): (451) 1
  1              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.-1) 1
  terminated:false
  J = 2
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 2
  X(3,2): (451) 0.666666667
  0.666666667    
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 2
  terminated:false
  J = 3
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 3
  X(3,3): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 3
  terminated:false
  J = 4
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 4
  X(3,4): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 4
  terminated:false
  J = 5
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 5
  X(3,5): (451) 0.166666667
  0.166666667    
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 5
  terminated:false
  J = 6
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 3
  J: (362.0.1) 6
  X(3,6): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 6
  terminated:true
  J
-363: PRINT B(I), W(I)
+F(I) 363: PRINT B(I), W(I)
  I: (364) 3
  B(3): (452) 240
  240            
  W(3): (333) 360
  360
-364: NEXT I
+F(I) 364: NEXT I
  I: (364) 3
  terminated:false
  I = 4
-361: PRINT R(I), C1$(I),
+F(I) 361: PRINT R(I), C1$(I),
  I: (364) 4
  R(4): (172) 0
  0              
  C1$(4): (129) "S4"
 S4              
-362.0.-1: FOR J = 1 TO N1 + N2
+F(I) 362.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.-1) 1
  X(4,1): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.-1) 1
  terminated:false
  J = 2
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 2
  X(4,2): (451) -1.6666667
 -1.6666667      
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 2
  terminated:false
  J = 3
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 3
  X(4,3): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 3
  terminated:false
  J = 4
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 4
  X(4,4): (451) 0
  0              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 4
  terminated:false
  J = 5
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 5
  X(4,5): (451) -6.66666667
 -6.66666667     
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 5
  terminated:false
  J = 6
-362: PRINT X(I, J),
+F(I) 362: PRINT X(I, J),
  I: (364) 4
  J: (362.0.1) 6
  X(4,6): (451) 1
  1              
-362.0.1: NEXT J
+F(I) 362.0.1: NEXT J
  J: (362.0.1) 6
  terminated:true
  J
-363: PRINT B(I), W(I)
+F(I) 363: PRINT B(I), W(I)
  I: (364) 4
  B(4): (452) 0
  0              
  W(4): (333) 0
  0
-364: NEXT I
+F(I) 364: NEXT I
  I: (364) 4
  terminated:true
  I
@@ -3713,51 +3713,51 @@ X2 ENTERS
  I0 = 0
 382: M = 1E6
  M = 1000000
-383: FOR I = 1 TO N2
+F(I) 383: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-384: IF W(I) <= 0 OR W(I) >= M THEN 387
+F(I) 384: IF W(I) <= 0 OR W(I) >= M THEN 387
  I: (383) 1
  W(1): (333) -280
  M: (382) 1000000
  W(I) <= 0 OR W(I) >= M: true
-387: NEXT I
+F(I) 387: NEXT I
  I: (383) 1
  terminated:false
  I = 2
-384: IF W(I) <= 0 OR W(I) >= M THEN 387
+F(I) 384: IF W(I) <= 0 OR W(I) >= M THEN 387
  I: (387) 2
  W(2): (333) 119.999999
  M: (382) 1000000
  W(I) <= 0 OR W(I) >= M: false
-385: I0 = I
+F(I) 385: I0 = I
  I: (387) 2
  I0 = 2
-386: M = W(I)
+F(I) 386: M = W(I)
  I: (387) 2
  W(2): (333) 119.999999
  M = 119.999999
-387: NEXT I
+F(I) 387: NEXT I
  I: (387) 2
  terminated:false
  I = 3
-384: IF W(I) <= 0 OR W(I) >= M THEN 387
+F(I) 384: IF W(I) <= 0 OR W(I) >= M THEN 387
  I: (387) 3
  W(3): (333) 360
  M: (386) 119.999999
  W(I) <= 0 OR W(I) >= M: true
-387: NEXT I
+F(I) 387: NEXT I
  I: (387) 3
  terminated:false
  I = 4
-384: IF W(I) <= 0 OR W(I) >= M THEN 387
+F(I) 384: IF W(I) <= 0 OR W(I) >= M THEN 387
  I: (387) 4
  W(4): (333) 0
  M: (386) 119.999999
  W(I) <= 0 OR W(I) >= M: true
-387: NEXT I
+F(I) 387: NEXT I
  I: (387) 4
  terminated:true
  I
@@ -3835,93 +3835,93 @@ S2 EXITS
  B2(2) = 80
  B2(3) = 240
  B2(4) = 0
-421: FOR J = 1 TO N1 + N2
+F(J) 421: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 2
  J: (421) 1
  X(2,1): (451) 0
  J0: (325) 2
  X(2,2): (451) 0.66666667
  X2(2,1) = 0
-423: NEXT J
+F(J) 423: NEXT J
  J: (421) 1
  terminated:false
  J = 2
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 2
  J: (423) 2
  X(2,2): (451) 0.66666667
  J0: (325) 2
  X2(2,2) = 1
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 2
  terminated:false
  J = 3
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 2
  J: (423) 3
  X(2,3): (451) 0
  J0: (325) 2
  X(2,2): (451) 0.66666667
  X2(2,3) = 0
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 3
  terminated:false
  J = 4
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 2
  J: (423) 4
  X(2,4): (451) 1
  J0: (325) 2
  X(2,2): (451) 0.66666667
  X2(2,4) = 1.49999999
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 4
  terminated:false
  J = 5
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 2
  J: (423) 5
  X(2,5): (451) -1.33333333
  J0: (325) 2
  X(2,2): (451) 0.66666667
  X2(2,5) = -1.99999999
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 5
  terminated:false
  J = 6
-422: X2(I0, J) = X(I0, J) / X(I0, J0)
+F(J) 422: X2(I0, J) = X(I0, J) / X(I0, J0)
  I0: (385) 2
  J: (423) 6
  X(2,6): (451) 0
  J0: (325) 2
  X(2,2): (451) 0.66666667
  X2(2,6) = 0
-423: NEXT J
+F(J) 423: NEXT J
  J: (423) 6
  terminated:true
  J
-431: FOR I = 1 TO N2
+F(I) 431: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-432: IF I = I0 THEN 436
+F(I) 432: IF I = I0 THEN 436
  I: (431) 1
  I0: (385) 2
  I = I0: false
-433: FOR J = 1 TO N1 + N2
+F(I,J) 433: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (433) 1
  X(1,1): (451) 0
@@ -3931,11 +3931,11 @@ S2 EXITS
  X(2,1): (451) 0
  X(2,2): (451) 0.66666667
  X2(1,1) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (433) 1
  terminated:false
  J = 2
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 2
  X(1,2): (451) -2
@@ -3943,11 +3943,11 @@ S2 EXITS
  I0: (385) 2
  X(2,2): (451) 0.66666667
  X2(1,2) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 2
  terminated:false
  J = 3
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 3
  X(1,3): (451) 1
@@ -3957,11 +3957,11 @@ S2 EXITS
  X(2,3): (451) 0
  X(2,2): (451) 0.66666667
  X2(1,3) = 1
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 3
  terminated:false
  J = 4
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 4
  X(1,4): (451) 0
@@ -3971,11 +3971,11 @@ S2 EXITS
  X(2,4): (451) 1
  X(2,2): (451) 0.66666667
  X2(1,4) = 2.99999999
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 4
  terminated:false
  J = 5
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 5
  X(1,5): (451) -1
@@ -3985,11 +3985,11 @@ S2 EXITS
  X(2,5): (451) -1.33333333
  X(2,2): (451) 0.66666667
  X2(1,5) = -4.99999997
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 5
  terminated:false
  J = 6
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (431) 1
  J: (435) 6
  X(1,6): (451) 0
@@ -3999,33 +3999,33 @@ S2 EXITS
  X(2,6): (451) 0
  X(2,2): (451) 0.66666667
  X2(1,6) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 6
  terminated:true
  J
-436: NEXT I
+F(I) 436: NEXT I
  I: (431) 1
  terminated:false
  I = 2
-432: IF I = I0 THEN 436
+F(I) 432: IF I = I0 THEN 436
  I: (436) 2
  I0: (385) 2
  I = I0: true
-436: NEXT I
+F(I) 436: NEXT I
  I: (436) 2
  terminated:false
  I = 3
-432: IF I = I0 THEN 436
+F(I) 432: IF I = I0 THEN 436
  I: (436) 3
  I0: (385) 2
  I = I0: false
-433: FOR J = 1 TO N1 + N2
+F(I,J) 433: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 3
  J: (433) 1
  X(3,1): (451) 1
@@ -4035,11 +4035,11 @@ S2 EXITS
  X(2,1): (451) 0
  X(2,2): (451) 0.66666667
  X2(3,1) = 1
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (433) 1
  terminated:false
  J = 2
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 3
  J: (435) 2
  X(3,2): (451) 0.666666667
@@ -4047,11 +4047,11 @@ S2 EXITS
  I0: (385) 2
  X(2,2): (451) 0.66666667
  X2(3,2) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 2
  terminated:false
  J = 3
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 3
  J: (435) 3
  X(3,3): (451) 0
@@ -4061,11 +4061,11 @@ S2 EXITS
  X(2,3): (451) 0
  X(2,2): (451) 0.66666667
  X2(3,3) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 3
  terminated:false
  J = 4
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 3
  J: (435) 4
  X(3,4): (451) 0
@@ -4075,11 +4075,11 @@ S2 EXITS
  X(2,4): (451) 1
  X(2,2): (451) 0.66666667
  X2(3,4) = -0.999999996
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 4
  terminated:false
  J = 5
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 3
  J: (435) 5
  X(3,5): (451) 0.166666667
@@ -4089,11 +4089,11 @@ S2 EXITS
  X(2,5): (451) -1.33333333
  X(2,2): (451) 0.66666667
  X2(3,5) = 1.49999999
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 5
  terminated:false
  J = 6
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 3
  J: (435) 6
  X(3,6): (451) 0
@@ -4103,25 +4103,25 @@ S2 EXITS
  X(2,6): (451) 0
  X(2,2): (451) 0.66666667
  X2(3,6) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 6
  terminated:true
  J
-436: NEXT I
+F(I) 436: NEXT I
  I: (436) 3
  terminated:false
  I = 4
-432: IF I = I0 THEN 436
+F(I) 432: IF I = I0 THEN 436
  I: (436) 4
  I0: (385) 2
  I = I0: false
-433: FOR J = 1 TO N1 + N2
+F(I,J) 433: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (433) 1
  X(4,1): (451) 0
@@ -4131,11 +4131,11 @@ S2 EXITS
  X(2,1): (451) 0
  X(2,2): (451) 0.66666667
  X2(4,1) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (433) 1
  terminated:false
  J = 2
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 2
  X(4,2): (451) -1.6666667
@@ -4143,11 +4143,11 @@ S2 EXITS
  I0: (385) 2
  X(2,2): (451) 0.66666667
  X2(4,2) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 2
  terminated:false
  J = 3
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 3
  X(4,3): (451) 0
@@ -4157,11 +4157,11 @@ S2 EXITS
  X(2,3): (451) 0
  X(2,2): (451) 0.66666667
  X2(4,3) = 0
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 3
  terminated:false
  J = 4
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 4
  X(4,4): (451) 0
@@ -4171,11 +4171,11 @@ S2 EXITS
  X(2,4): (451) 1
  X(2,2): (451) 0.66666667
  X2(4,4) = 2.50000004
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 4
  terminated:false
  J = 5
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 5
  X(4,5): (451) -6.66666667
@@ -4185,11 +4185,11 @@ S2 EXITS
  X(2,5): (451) -1.33333333
  X(2,2): (451) 0.66666667
  X2(4,5) = -10
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 5
  terminated:false
  J = 6
-434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+F(I,J) 434: X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
  I: (436) 4
  J: (435) 6
  X(4,6): (451) 1
@@ -4199,11 +4199,11 @@ S2 EXITS
  X(2,6): (451) 0
  X(2,2): (451) 0.66666667
  X2(4,6) = 1
-435: NEXT J
+F(I,J) 435: NEXT J
  J: (435) 6
  terminated:true
  J
-436: NEXT I
+F(I) 436: NEXT I
  I: (436) 4
  terminated:true
  I
@@ -4213,16 +4213,16 @@ S2 EXITS
  J0: (325) 2
  X(2,2): (451) 0.66666667
  B2(2) = 119.999999
-442: FOR I = 1 TO N2
+F(I) 442: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-443: IF I = I0 THEN 445
+F(I) 443: IF I = I0 THEN 445
  I: (442) 1
  I0: (385) 2
  I = I0: false
-444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+F(I) 444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
  I: (442) 1
  B(1): (452) 560
  J0: (325) 2
@@ -4231,23 +4231,23 @@ S2 EXITS
  B(2): (452) 80
  X(2,2): (451) 0.66666667
  B2(1) = 799.999999
-445: NEXT I
+F(I) 445: NEXT I
  I: (442) 1
  terminated:false
  I = 2
-443: IF I = I0 THEN 445
+F(I) 443: IF I = I0 THEN 445
  I: (445) 2
  I0: (385) 2
  I = I0: true
-445: NEXT I
+F(I) 445: NEXT I
  I: (445) 2
  terminated:false
  I = 3
-443: IF I = I0 THEN 445
+F(I) 443: IF I = I0 THEN 445
  I: (445) 3
  I0: (385) 2
  I = I0: false
-444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+F(I) 444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
  I: (445) 3
  B(3): (452) 240
  J0: (325) 2
@@ -4256,15 +4256,15 @@ S2 EXITS
  B(2): (452) 80
  X(2,2): (451) 0.66666667
  B2(3) = 160
-445: NEXT I
+F(I) 445: NEXT I
  I: (445) 3
  terminated:false
  I = 4
-443: IF I = I0 THEN 445
+F(I) 443: IF I = I0 THEN 445
  I: (445) 4
  I0: (385) 2
  I = I0: false
-444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+F(I) 444: B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
  I: (445) 4
  B(4): (452) 0
  J0: (325) 2
@@ -4273,7 +4273,7 @@ S2 EXITS
  B(2): (452) 80
  X(2,2): (451) 0.66666667
  B2(4) = 200.000003
-445: NEXT I
+F(I) 445: NEXT I
  I: (445) 4
  terminated:true
  I
@@ -4409,300 +4409,300 @@ S4
  I
 212: PRINT "B"
 B
-220: FOR I = 1 TO N2
+F(I) 220: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (220) 1
  R(1): (172) 0
  0              
  C1$(1): (129) "S1"
 S1              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.-1) 1
  X(1,1): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 2
  X(1,2): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 3
  X(1,3): (451) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 4
  X(1,4): (451) 2.99999999
  2.99999999     
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 5
  X(1,5): (451) -4.99999997
 -4.99999997     
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (220) 1
  J: (222.0.1) 6
  X(1,6): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (220) 1
  B(1): (452) 799.999999
  799.999999
-239: NEXT I
+F(I) 239: NEXT I
  I: (220) 1
  terminated:false
  I = 2
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (239) 2
  R(2): (403) 14
  14             
  C1$(2): (402) "X2"
 X2              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.-1) 1
  X(2,1): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 2
  X(2,2): (451) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 3
  X(2,3): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 4
  X(2,4): (451) 1.49999999
  1.49999999     
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 5
  X(2,5): (451) -1.99999999
 -1.99999999     
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 2
  J: (222.0.1) 6
  X(2,6): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (239) 2
  B(2): (452) 119.999999
  119.999999
-239: NEXT I
+F(I) 239: NEXT I
  I: (239) 2
  terminated:false
  I = 3
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (239) 3
  R(3): (403) 20
  20             
  C1$(3): (402) "X1"
 X1              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.-1) 1
  X(3,1): (451) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 2
  X(3,2): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 3
  X(3,3): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 4
  X(3,4): (451) -0.999999996
 -0.999999996    
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 5
  X(3,5): (451) 1.49999999
  1.49999999     
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 3
  J: (222.0.1) 6
  X(3,6): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (239) 3
  B(3): (452) 160
  160
-239: NEXT I
+F(I) 239: NEXT I
  I: (239) 3
  terminated:false
  I = 4
-221: PRINT R(I), C1$(I),
+F(I) 221: PRINT R(I), C1$(I),
  I: (239) 4
  R(4): (172) 0
  0              
  C1$(4): (129) "S4"
 S4              
-222.0.-1: FOR J = 1 TO N1 + N2
+F(I) 222.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.-1) 1
  X(4,1): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.-1) 1
  terminated:false
  J = 2
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 2
  X(4,2): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 2
  terminated:false
  J = 3
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 3
  X(4,3): (451) 0
  0              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 3
  terminated:false
  J = 4
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 4
  X(4,4): (451) 2.50000004
  2.50000004     
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 4
  terminated:false
  J = 5
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 5
  X(4,5): (451) -10
 -10             
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 5
  terminated:false
  J = 6
-222: PRINT X(I, J),
+F(I) 222: PRINT X(I, J),
  I: (239) 4
  J: (222.0.1) 6
  X(4,6): (451) 1
  1              
-222.0.1: NEXT J
+F(I) 222.0.1: NEXT J
  J: (222.0.1) 6
  terminated:true
  J
-230: PRINT B(I)
+F(I) 230: PRINT B(I)
  I: (239) 4
  B(4): (452) 200.000003
  200.000003
-239: NEXT I
+F(I) 239: NEXT I
  I: (239) 4
  terminated:true
  I
@@ -4756,308 +4756,308 @@ S4
  J: (302.0.1) 6
  terminated:true
  J
-305: FOR I = 1 TO N2
+F(I) 305: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,1): (451) 0
  Z(1) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,2): (451) 0
  Z(2) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,3): (451) 1
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,4): (451) 2.99999999
  Z(4) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,5): (451) -4.99999997
  Z(5) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (302) 0
  I: (305) 1
  R(1): (172) 0
  X(1,6): (451) 0
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (305) 1
  terminated:false
  I = 2
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (306) 0
  I: (307) 2
  R(2): (403) 14
  X(2,1): (451) 0
  Z(1) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (306) 0
  I: (307) 2
  R(2): (403) 14
  X(2,2): (451) 1
  Z(2) = 14
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (306) 0
  I: (307) 2
  R(2): (403) 14
  X(2,3): (451) 0
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (306) 0
  I: (307) 2
  R(2): (403) 14
  X(2,4): (451) 1.49999999
  Z(4) = 20.9999999
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (306) 0
  I: (307) 2
  R(2): (403) 14
  X(2,5): (451) -1.99999999
  Z(5) = -27.9999999
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (306) 0
  I: (307) 2
  R(2): (403) 14
  X(2,6): (451) 0
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (307) 2
  terminated:false
  I = 3
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (306) 0
  I: (307) 3
  R(3): (403) 20
  X(3,1): (451) 1
  Z(1) = 20
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (306) 14
  I: (307) 3
  R(3): (403) 20
  X(3,2): (451) 0
  Z(2) = 14
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (306) 0
  I: (307) 3
  R(3): (403) 20
  X(3,3): (451) 0
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (306) 20.9999999
  I: (307) 3
  R(3): (403) 20
  X(3,4): (451) -0.999999996
  Z(4) = 1
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (306) -27.9999999
  I: (307) 3
  R(3): (403) 20
  X(3,5): (451) 1.49999999
  Z(5) = 1.9999999
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (306) 0
  I: (307) 3
  R(3): (403) 20
  X(3,6): (451) 0
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (307) 3
  terminated:false
  I = 4
-306.0.-1: FOR J = 1 TO N1 + N2
+F(I) 306.0.-1: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  terminated:false
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.-1) 1
  Z(1): (306) 20
  I: (307) 4
  R(4): (172) 0
  X(4,1): (451) 0
  Z(1) = 20
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.-1) 1
  terminated:false
  J = 2
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 2
  Z(2): (306) 14
  I: (307) 4
  R(4): (172) 0
  X(4,2): (451) 0
  Z(2) = 14
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 2
  terminated:false
  J = 3
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 3
  Z(3): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,3): (451) 0
  Z(3) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 3
  terminated:false
  J = 4
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 4
  Z(4): (306) 1
  I: (307) 4
  R(4): (172) 0
  X(4,4): (451) 2.50000004
  Z(4) = 1
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 4
  terminated:false
  J = 5
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 5
  Z(5): (306) 1.9999999
  I: (307) 4
  R(4): (172) 0
  X(4,5): (451) -10
  Z(5) = 1.9999999
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 5
  terminated:false
  J = 6
-306: Z(J) = Z(J) + R(I) * X(I, J)
+F(I) 306: Z(J) = Z(J) + R(I) * X(I, J)
  J: (306.0.1) 6
  Z(6): (306) 0
  I: (307) 4
  R(4): (172) 0
  X(4,6): (451) 1
  Z(6) = 0
-306.0.1: NEXT J
+F(I) 306.0.1: NEXT J
  J: (306.0.1) 6
  terminated:true
  J
-307: NEXT I
+F(I) 307: NEXT I
  I: (307) 4
  terminated:true
  I
@@ -5084,63 +5084,63 @@ S4
  J0 = 0
 322: M = 0
  M = 0
-323: FOR J = 1 TO N1 + N2
+F(J) 323: FOR J = 1 TO N1 + N2
  N1: (101) 2
  N2: (101) 4
  J = 1
  N1 + N2 = 6
  terminated:false
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (323) 1
  Y(1): (311) 0
  M: (322) 0
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (323) 1
  terminated:false
  J = 2
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 2
  Y(2): (311) 0
  M: (322) 0
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 2
  terminated:false
  J = 3
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 3
  Y(3): (311) 0
  M: (322) 0
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 3
  terminated:false
  J = 4
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 4
  Y(4): (311) 1
  M: (322) 0
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 4
  terminated:false
  J = 5
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 5
  Y(5): (311) 1.9999999
  M: (322) 0
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 5
  terminated:false
  J = 6
-324: IF Y(J) >= M THEN 327
+F(J) 324: IF Y(J) >= M THEN 327
  J: (327) 6
  Y(6): (311) 0
  M: (322) 0
  Y(J) >= M: true
-327: NEXT J
+F(J) 327: NEXT J
  J: (327) 6
  terminated:true
  J
@@ -5173,12 +5173,12 @@ SOLUTION FOUND
 OBJECTIVE VALUE
 521: Z = 0
  Z = 0
-522: FOR I = 1 TO N2
+F(I) 522: FOR I = 1 TO N2
  N2: (101) 4
  I = 1
  N2 = 4
  terminated:false
-523: PRINT C1$(I); " = "; B(I); " * "; R(I)
+F(I) 523: PRINT C1$(I); " = "; B(I); " * "; R(I)
  I: (522) 1
  C1$(1): (129) "S1"
 S1 = 
@@ -5186,17 +5186,17 @@ S1 =
  799.999999  * 
  R(1): (172) 0
  0
-524: Z = Z + B(I) * R(I)
+F(I) 524: Z = Z + B(I) * R(I)
  Z: (521) 0
  I: (522) 1
  B(1): (452) 799.999999
  R(1): (172) 0
  Z = 0
-525: NEXT I
+F(I) 525: NEXT I
  I: (522) 1
  terminated:false
  I = 2
-523: PRINT C1$(I); " = "; B(I); " * "; R(I)
+F(I) 523: PRINT C1$(I); " = "; B(I); " * "; R(I)
  I: (525) 2
  C1$(2): (402) "X2"
 X2 = 
@@ -5204,17 +5204,17 @@ X2 =
  119.999999  * 
  R(2): (403) 14
  14
-524: Z = Z + B(I) * R(I)
+F(I) 524: Z = Z + B(I) * R(I)
  Z: (524) 0
  I: (525) 2
  B(2): (452) 119.999999
  R(2): (403) 14
  Z = 1679.99999
-525: NEXT I
+F(I) 525: NEXT I
  I: (525) 2
  terminated:false
  I = 3
-523: PRINT C1$(I); " = "; B(I); " * "; R(I)
+F(I) 523: PRINT C1$(I); " = "; B(I); " * "; R(I)
  I: (525) 3
  C1$(3): (402) "X1"
 X1 = 
@@ -5222,17 +5222,17 @@ X1 =
  160  * 
  R(3): (403) 20
  20
-524: Z = Z + B(I) * R(I)
+F(I) 524: Z = Z + B(I) * R(I)
  Z: (524) 1679.99999
  I: (525) 3
  B(3): (452) 160
  R(3): (403) 20
  Z = 4879.99999
-525: NEXT I
+F(I) 525: NEXT I
  I: (525) 3
  terminated:false
  I = 4
-523: PRINT C1$(I); " = "; B(I); " * "; R(I)
+F(I) 523: PRINT C1$(I); " = "; B(I); " * "; R(I)
  I: (525) 4
  C1$(4): (129) "S4"
 S4 = 
@@ -5240,13 +5240,13 @@ S4 =
  200.000003  * 
  R(4): (172) 0
  0
-524: Z = Z + B(I) * R(I)
+F(I) 524: Z = Z + B(I) * R(I)
  Z: (524) 4879.99999
  I: (525) 4
  B(4): (452) 200.000003
  R(4): (172) 0
  Z = 4879.99999
-525: NEXT I
+F(I) 525: NEXT I
  I: (525) 4
  terminated:true
  I

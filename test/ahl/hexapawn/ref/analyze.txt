@@ -67,18 +67,18 @@ FNM(_) (0 6) 30 DEF FNM(Y) = Y - INT(Y / 10) * 10
 (0 3) 35 P$ = "X.O"
   Origs: 15:auto
   Dests: 40:auto
-(1 3) 40 FOR I = 1 TO 19
-(1 3)    FOR J = 1 TO 9
-(1 2)    READ B(I, J)
-(0 1)    NEXT J
-(0 1)    NEXT I
+F(I) (1 3) 40 FOR I = 1 TO 19
+F(I,J) (1 3)    FOR J = 1 TO 9
+F(I,J) (1 2)    READ B(I, J)
+F(I,J) (0 1)    NEXT J
+F(I) (0 1)    NEXT I
   Origs: 35:auto
   Dests: 45:auto
-(1 3) 45 FOR I = 1 TO 19
-(1 3)    FOR J = 1 TO 4
-(1 2)    READ M(I, J)
-(0 1)    NEXT J
-(0 1)    NEXT I
+F(I) (1 3) 45 FOR I = 1 TO 19
+F(I,J) (1 3)    FOR J = 1 TO 4
+F(I,J) (1 2)    READ M(I, J)
+F(I,J) (0 1)    NEXT J
+F(I) (0 1)    NEXT I
   Origs: 40:auto
   Dests: 50:auto
 (0 2) 50 PRINT "INSTRUCTIONS (Y-N)";
@@ -96,321 +96,323 @@ FNM(_) (0 6) 30 DEF FNM(Y) = Y - INT(Y / 10) * 10
 (1 5) 90 IF A$ <> "N" THEN 50
   Origs: 80:auto
   Dests: 50:ifthen, 100:auto
-(0 3) 100 X = 0
-(0 3)     Y = 0
+F(I) (0 3) 100 X = 0
+F(I) (0 3)     Y = 0
   Origs: 90:auto, 860:goto, 2220:goto
   Dests: 111:auto
-(0 3) 111 S(4) = 0
-(0 3)     S(5) = 0
-(0 3)     S(6) = 0
+F(I) (0 3) 111 S(4) = 0
+F(I) (0 3)     S(5) = 0
+F(I) (0 3)     S(6) = 0
   Origs: 100:auto
   Dests: 112:auto
-(0 4) 112 S(1) = -1
-(0 4)     S(2) = -1
-(0 4)     S(3) = -1
+F(I) (0 4) 112 S(1) = -1
+F(I) (0 4)     S(2) = -1
+F(I) (0 4)     S(3) = -1
   Origs: 111:auto
   Dests: 113:auto
-(0 3) 113 S(7) = 1
-(0 3)     S(8) = 1
-(0 3)     S(9) = 1
+F(I) (0 3) 113 S(7) = 1
+F(I) (0 3)     S(8) = 1
+F(I) (0 3)     S(9) = 1
   Origs: 112:auto
   Dests: 115:auto
-(0 2) 115 GOSUB 1000
+F(I) (0 2) 115 GOSUB 1000
   Origs: 113:auto
   Dests: 120:auto, 1000:gosub
-(0 2) 120 PRINT "YOUR MOVE";
+F(I) (0 2) 120 PRINT "YOUR MOVE";
   Origs: 115:auto, 124:goto, 140:goto, 710:ifthen, 740:ifthen, 760:ifthen, 780:ifthen
   Dests: 121:auto
-(2 3) 121 INPUT M1, M2
+F(I) (2 3) 121 INPUT M1, M2
   Origs: 120:auto
   Dests: 122:auto
-(1 21) 122 IF M1 = INT(M1) AND M2 = INT(M2) AND M1 > 0 AND M1 < 10 AND M2 > 0 AND M2 < 10 THEN 130
+F(I) (1 21) 122 IF M1 = INT(M1) AND M2 = INT(M2) AND M1 > 0 AND M1 < 10 AND M2 > 0 AND M2 < 10 THEN 130
   Origs: 121:auto
   Dests: 123:auto, 130:ifthen
-(0 2) 123 PRINT "ILLEGAL CO-ORDINATES."
+F(I) (0 2) 123 PRINT "ILLEGAL CO-ORDINATES."
   Origs: 122:auto
   Dests: 124:auto
-(0 3) 124 GOTO 120
+F(I) (0 3) 124 GOTO 120
   Origs: 123:auto
   Dests: 120:goto
-(1 4) 130 IF S(M1) = 1 THEN 150
+F(I) (1 4) 130 IF S(M1) = 1 THEN 150
   Origs: 122:ifthen
   Dests: 140:auto, 150:ifthen
-(0 2) 140 PRINT "ILLEGAL MOVE."
-(0 3)     GOTO 120
+F(I) (0 2) 140 PRINT "ILLEGAL MOVE."
+F(I) (0 3)     GOTO 120
   Origs: 130:auto, 150:ifthen, 160:ifthen, 170:ifthen, 180:ifthen, 185:ifthen, 186:ifthen
   Dests: 120:goto
-(1 5) 150 IF S(M2) = 1 THEN 140
+F(I) (1 5) 150 IF S(M2) = 1 THEN 140
   Origs: 130:ifthen
   Dests: 140:ifthen, 160:auto
-(1 13) 160 IF M2 - M1 <> -3 AND S(M2) <> -1 THEN 140
+F(I) (1 13) 160 IF M2 - M1 <> -3 AND S(M2) <> -1 THEN 140
   Origs: 150:auto
   Dests: 140:ifthen, 170:auto
-(1 5) 170 IF M2 > M1 THEN 140
+F(I) (1 5) 170 IF M2 > M1 THEN 140
   Origs: 160:auto
   Dests: 140:ifthen, 180:auto
-(1 11) 180 IF M2 - M1 = -3 AND (S(M2) <> 0) THEN 140
+F(I) (1 11) 180 IF M2 - M1 = -3 AND (S(M2) <> 0) THEN 140
   Origs: 170:auto
   Dests: 140:ifthen, 185:auto
-(1 8) 185 IF M2 - M1 < -4 THEN 140
+F(I) (1 8) 185 IF M2 - M1 < -4 THEN 140
   Origs: 180:auto
   Dests: 140:ifthen, 186:auto
-(1 8) 186 IF M1 = 7 AND M2 = 3 THEN 140
+F(I) (1 8) 186 IF M1 = 7 AND M2 = 3 THEN 140
   Origs: 185:auto
   Dests: 140:ifthen, 190:auto
-(0 3) 190 S(M1) = 0
+F(I) (0 3) 190 S(M1) = 0
   Origs: 186:auto
   Dests: 200:auto
-(0 3) 200 S(M2) = 1
+F(I) (0 3) 200 S(M2) = 1
   Origs: 190:auto
   Dests: 205:auto
-(0 2) 205 GOSUB 1000
+F(I) (0 2) 205 GOSUB 1000
   Origs: 200:auto
   Dests: 210:auto, 1000:gosub
-(1 10) 210 IF S(1) = 1 OR S(2) = 1 OR S(3) = 1 THEN 820
+F(I) (1 10) 210 IF S(1) = 1 OR S(2) = 1 OR S(3) = 1 THEN 820
   Origs: 205:auto
   Dests: 220:auto, 820:ifthen
-(1 3) 220 FOR I = 1 TO 9
+F(I) (1 3) 220 FOR I = 1 TO 9
   Origs: 210:auto
   Dests: 221:fornext, 222:fornext
-(1 6) 221 IF S(I) = -1 THEN 230
+F(I) (1 6) 221 IF S(I) = -1 THEN 230
   Origs: 220:fornext
   Dests: 222:auto, 230:ifthen
-(0 1) 222 NEXT I
+F(I) (0 1) 222 NEXT I
   Origs: 220:fornext, 221:auto
   Dests: 223:auto
 (0 2) 223 GOTO 820
   Origs: 222:auto
   Dests: 820:goto
-(1 3) 230 FOR I = 1 TO 9
+F(I,I) (1 3) 230 FOR I = 1 TO 9
   Origs: 221:ifthen
   Dests: 240:fornext, 330:fornext
-(1 6) 240 IF S(I) <> -1 THEN 330
+F(I,I) (1 6) 240 IF S(I) <> -1 THEN 330
   Origs: 230:fornext
   Dests: 250:auto, 330:ifthen
-(1 4) 250 IF S(I + 3) = 0 THEN 350
+F(I) (1 4) 250 IF S(I + 3) = 0 THEN 350
   Origs: 240:auto
   Dests: 260:auto, 350:ifthen
-(1 6) 260 IF FNR(I) = I THEN 320
+F(I) (1 6) 260 IF FNR(I) = I THEN 320
   Origs: 250:auto
   Dests: 270:auto, 320:ifthen
-(1 4) 270 IF I > 3 THEN 300
+F(I) (1 4) 270 IF I > 3 THEN 300
   Origs: 260:auto
   Dests: 280:auto, 300:ifthen
-(1 4) 280 IF S(5) = 1 THEN 350
+F(I) (1 4) 280 IF S(5) = 1 THEN 350
   Origs: 270:auto
   Dests: 290:auto, 350:ifthen
-(0 2) 290 GOTO 330
+F(I) (0 2) 290 GOTO 330
   Origs: 280:auto
   Dests: 330:goto
-(1 4) 300 IF S(8) = 1 THEN 350
+F(I) (1 4) 300 IF S(8) = 1 THEN 350
   Origs: 270:ifthen
   Dests: 310:auto, 350:ifthen
-(0 2) 310 GOTO 330
+F(I) (0 2) 310 GOTO 330
   Origs: 300:auto
   Dests: 330:goto
-(1 7) 320 IF S(I + 2) = 1 OR S(I + 4) = 1 THEN 350
+F(I) (1 7) 320 IF S(I + 2) = 1 OR S(I + 4) = 1 THEN 350
   Origs: 260:ifthen
   Dests: 330:auto, 350:ifthen
-(0 1) 330 NEXT I
+F(I) (0 1) 330 NEXT I
   Origs: 230:fornext, 240:ifthen, 290:goto, 310:goto, 320:auto
   Dests: 340:auto
-(0 2) 340 GOTO 820
+F(I) (0 2) 340 GOTO 820
   Origs: 330:auto
   Dests: 820:goto
-(1 3) 350 FOR I = 1 TO 19
+F(I,I) (1 3) 350 FOR I = 1 TO 19
   Origs: 250:ifthen, 280:ifthen, 300:ifthen, 320:ifthen
   Dests: 360:fornext, 510:fornext
-(1 3) 360 FOR J = 1 TO 3
+F(I,I,J) (1 3) 360 FOR J = 1 TO 3
   Origs: 350:fornext
   Dests: 370:fornext, 400:fornext
-(1 5) 370 FOR K = 3 TO 1 STEP -1
+F(I,J,K) (1 5) 370 FOR K = 3 TO 1 STEP -1
   Origs: 360:fornext
   Dests: 380:fornext, 390:fornext
-(0 3) 380 T((J - 1) * 3 + K) = B(I, (J - 1) * 3 + 4 - K)
+F(I,J,K) (0 3) 380 T((J - 1) * 3 + K) = B(I, (J - 1) * 3 + 4 - K)
   Origs: 370:fornext
   Dests: 390:auto
-(0 1) 390 NEXT K
+F(I,J,K) (0 1) 390 NEXT K
   Origs: 370:fornext, 380:auto
   Dests: 400:auto
-(0 1) 400 NEXT J
+F(I,J) (0 1) 400 NEXT J
   Origs: 360:fornext, 390:auto
   Dests: 410:auto
-(1 3) 410 FOR J = 1 TO 9
+F(I,J) (1 3) 410 FOR J = 1 TO 9
   Origs: 400:auto
   Dests: 420:fornext, 430:fornext
-(1 4) 420 IF S(J) <> B(I, J) THEN 460
+F(I,J) (1 4) 420 IF S(J) <> B(I, J) THEN 460
   Origs: 410:fornext
   Dests: 430:auto, 460:ifthen
-(0 1) 430 NEXT J
+F(I,J) (0 1) 430 NEXT J
   Origs: 410:fornext, 420:auto
   Dests: 440:auto
-(0 3) 440 R = 0
+F(I) (0 3) 440 R = 0
   Origs: 430:auto
   Dests: 450:auto
-(0 2) 450 GOTO 540
+F(I) (0 2) 450 GOTO 540
   Origs: 440:auto
   Dests: 540:goto
-(1 3) 460 FOR J = 1 TO 9
+F(I,J,J) (1 3) 460 FOR J = 1 TO 9
   Origs: 420:ifthen
   Dests: 470:fornext, 480:fornext
-(1 4) 470 IF S(J) <> T(J) THEN 510
+F(I,J,J) (1 4) 470 IF S(J) <> T(J) THEN 510
   Origs: 460:fornext
   Dests: 480:auto, 510:ifthen
-(0 1) 480 NEXT J
+F(I,J) (0 1) 480 NEXT J
   Origs: 460:fornext, 470:auto
   Dests: 490:auto
-(0 3) 490 R = 1
+F(I) (0 3) 490 R = 1
   Origs: 480:auto
   Dests: 500:auto
-(0 2) 500 GOTO 540
+F(I) (0 2) 500 GOTO 540
   Origs: 490:auto
   Dests: 540:goto
-(0 1) 510 NEXT I
+F(I,J) (0 1) 510 NEXT I
   Origs: 350:fornext, 470:ifthen
   Dests: 512:auto
 (0 1) 511 REM EMBER THE TERMINATION OF THIS LOOP IS IMPOSSIBLE
   Origs: 
   Dests: 
-(0 2) 512 PRINT "ILLEGAL BOARD PATTERN."
+F(I,J) (0 2) 512 PRINT "ILLEGAL BOARD PATTERN."
   Origs: 510:auto
   Dests: 530:auto
-(0 1) 530 STOP
+F(I,J) (0 1) 530 STOP
+    WARNING: Terminating statement in FOR/NEXT
+    WARNING: Terminating statement in FOR/NEXT
   Origs: 512:auto
   Dests: :stop
-(0 3) 540 X = I
+F(I) (0 3) 540 X = I
   Origs: 450:goto, 500:goto
   Dests: 550:auto
-(1 3) 550 FOR I = 1 TO 4
+F(I,I) (1 3) 550 FOR I = 1 TO 4
   Origs: 540:auto
   Dests: 560:fornext, 570:fornext
-(1 4) 560 IF M(X, I) <> 0 THEN 600
+F(I,I) (1 4) 560 IF M(X, I) <> 0 THEN 600
   Origs: 550:fornext
   Dests: 570:auto, 600:ifthen
-(0 1) 570 NEXT I
+F(I) (0 1) 570 NEXT I
   Origs: 550:fornext, 560:auto
   Dests: 580:auto
-(0 2) 580 PRINT "I RESIGN."
+F(I) (0 2) 580 PRINT "I RESIGN."
   Origs: 570:auto
   Dests: 590:auto
-(0 2) 590 GOTO 820
+F(I) (0 2) 590 GOTO 820
   Origs: 580:auto
   Dests: 820:goto
-(0 4) 600 Y = INT(RND(1) * 4 + 1)
+F(I) (0 4) 600 Y = INT(RND(1) * 4 + 1)
   Origs: 560:ifthen, 601:ifthen
   Dests: 601:auto
-(1 5) 601 IF M(X, Y) = 0 THEN 600
+F(I) (1 5) 601 IF M(X, Y) = 0 THEN 600
   Origs: 600:auto
   Dests: 600:ifthen, 610:auto
-(1 4) 610 IF R <> 0 THEN 630
+F(I) (1 4) 610 IF R <> 0 THEN 630
   Origs: 601:auto
   Dests: 620:auto, 630:ifthen
-(0 7) 620 PRINT "I MOVE FROM "; STR$(INT(M(X, Y) / 10)); " TO "; STR$(FNM(M(X, Y)))
+F(I) (0 7) 620 PRINT "I MOVE FROM "; STR$(INT(M(X, Y) / 10)); " TO "; STR$(FNM(M(X, Y)))
   Origs: 610:auto
   Dests: 622:auto
-(0 3) 622 S(INT(M(X, Y) / 10)) = 0
+F(I) (0 3) 622 S(INT(M(X, Y) / 10)) = 0
   Origs: 620:auto
   Dests: 623:auto
-(0 4) 623 S(FNM(M(X, Y))) = -1
+F(I) (0 4) 623 S(FNM(M(X, Y))) = -1
   Origs: 622:auto
   Dests: 624:auto
-(0 2) 624 GOTO 640
+F(I) (0 2) 624 GOTO 640
   Origs: 623:auto
   Dests: 640:goto
-(0 5) 630 PRINT "I MOVE FROM "; STR$(FNR(INT(M(X, Y) / 10))); " TO ";
+F(I) (0 5) 630 PRINT "I MOVE FROM "; STR$(FNR(INT(M(X, Y) / 10))); " TO ";
   Origs: 610:ifthen
   Dests: 631:auto
-(0 3) 631 PRINT STR$(FNR(FNM(M(X, Y))))
+F(I) (0 3) 631 PRINT STR$(FNR(FNM(M(X, Y))))
   Origs: 630:auto
   Dests: 632:auto
-(0 3) 632 S(FNR(INT(M(X, Y) / 10))) = 0
+F(I) (0 3) 632 S(FNR(INT(M(X, Y) / 10))) = 0
   Origs: 631:auto
   Dests: 633:auto
-(0 4) 633 S(FNR(FNM(M(X, Y)))) = -1
+F(I) (0 4) 633 S(FNR(FNM(M(X, Y)))) = -1
   Origs: 632:auto
   Dests: 640:auto
-(0 2) 640 GOSUB 1000
+F(I) (0 2) 640 GOSUB 1000
   Origs: 624:goto, 633:auto
   Dests: 641:auto, 1000:gosub
-(1 16) 641 IF S(7) = -1 OR S(8) = -1 OR S(9) = -1 THEN 870
+F(I) (1 16) 641 IF S(7) = -1 OR S(8) = -1 OR S(9) = -1 THEN 870
   Origs: 640:auto
   Dests: 650:auto, 870:ifthen
-(1 3) 650 FOR I = 1 TO 9
+F(I,I) (1 3) 650 FOR I = 1 TO 9
   Origs: 641:auto
   Dests: 660:fornext, 670:fornext
-(1 4) 660 IF S(I) = 1 THEN 690
+F(I,I) (1 4) 660 IF S(I) = 1 THEN 690
   Origs: 650:fornext
   Dests: 670:auto, 690:ifthen
-(0 1) 670 NEXT I
+F(I) (0 1) 670 NEXT I
   Origs: 650:fornext, 660:auto
   Dests: 680:auto
-(0 2) 680 GOTO 870
+F(I) (0 2) 680 GOTO 870
   Origs: 670:auto
   Dests: 870:goto
-(1 3) 690 FOR I = 1 TO 9
+F(I,I) (1 3) 690 FOR I = 1 TO 9
   Origs: 660:ifthen
   Dests: 700:fornext, 790:fornext
-(1 4) 700 IF S(I) <> 1 THEN 790
+F(I,I) (1 4) 700 IF S(I) <> 1 THEN 790
   Origs: 690:fornext
   Dests: 710:auto, 790:ifthen
-(1 5) 710 IF S(I - 3) = 0 THEN 120
+F(I) (1 5) 710 IF S(I - 3) = 0 THEN 120
   Origs: 700:auto
   Dests: 120:ifthen, 720:auto
-(1 6) 720 IF FNR(I) = I THEN 780
+F(I) (1 6) 720 IF FNR(I) = I THEN 780
   Origs: 710:auto
   Dests: 730:auto, 780:ifthen
-(1 4) 730 IF I < 7 THEN 760
+F(I) (1 4) 730 IF I < 7 THEN 760
   Origs: 720:auto
   Dests: 740:auto, 760:ifthen
-(1 7) 740 IF S(5) = -1 THEN 120
+F(I) (1 7) 740 IF S(5) = -1 THEN 120
   Origs: 730:auto
   Dests: 120:ifthen, 750:auto
-(0 2) 750 GOTO 790
+F(I) (0 2) 750 GOTO 790
   Origs: 740:auto
   Dests: 790:goto
-(1 7) 760 IF S(2) = -1 THEN 120
+F(I) (1 7) 760 IF S(2) = -1 THEN 120
   Origs: 730:ifthen
   Dests: 120:ifthen, 770:auto
-(0 2) 770 GOTO 790
+F(I) (0 2) 770 GOTO 790
   Origs: 760:auto
   Dests: 790:goto
-(1 12) 780 IF S(I - 2) = -1 OR S(I - 4) = -1 THEN 120
+F(I) (1 12) 780 IF S(I - 2) = -1 OR S(I - 4) = -1 THEN 120
   Origs: 720:ifthen
   Dests: 120:ifthen, 790:auto
-(0 1) 790 NEXT I
+F(I) (0 1) 790 NEXT I
   Origs: 690:fornext, 700:ifthen, 750:goto, 770:goto, 780:auto
   Dests: 800:auto
-(0 2) 800 PRINT "YOU CAN'T MOVE, SO ";
+F(I) (0 2) 800 PRINT "YOU CAN'T MOVE, SO ";
   Origs: 790:auto
   Dests: 810:auto
-(0 2) 810 GOTO 870
+F(I) (0 2) 810 GOTO 870
   Origs: 800:auto
   Dests: 870:goto
-(0 2) 820 PRINT "YOU WIN."
+F(I) (0 2) 820 PRINT "YOU WIN."
   Origs: 210:ifthen, 223:goto, 340:goto, 590:goto
   Dests: 830:auto
-(0 3) 830 M(X, Y) = 0
+F(I) (0 3) 830 M(X, Y) = 0
   Origs: 820:auto
   Dests: 840:auto
-(0 4) 840 L = L + 1
+F(I) (0 4) 840 L = L + 1
   Origs: 830:auto
   Dests: 850:auto
-(0 9) 850 PRINT "I HAVE WON"; W; "AND YOU"; L; "OUT OF"; L + W; "GAMES."
+F(I) (0 9) 850 PRINT "I HAVE WON"; W; "AND YOU"; L; "OUT OF"; L + W; "GAMES."
   Origs: 840:auto, 890:goto
   Dests: 851:auto
-(0 2) 851 PRINT
+F(I) (0 2) 851 PRINT
   Origs: 850:auto
   Dests: 860:auto
-(0 3) 860 GOTO 100
+F(I) (0 3) 860 GOTO 100
   Origs: 851:auto
   Dests: 100:goto
-(0 2) 870 PRINT "I WIN."
+F(I) (0 2) 870 PRINT "I WIN."
   Origs: 641:ifthen, 680:goto, 810:goto
   Dests: 880:auto
-(0 4) 880 W = W + 1
+F(I) (0 4) 880 W = W + 1
   Origs: 870:auto
   Dests: 890:auto
-(0 3) 890 GOTO 850
+F(I) (0 3) 890 GOTO 850
   Origs: 880:auto
   Dests: 850:goto
 (0 8) 900 DATA -1, -1, -1, 1, 0, 0, 0, 1, 1, -1, -1, -1, 0, 1, 0, 1, 0, 1
@@ -461,22 +463,22 @@ FNM(_) (0 6) 30 DEF FNM(Y) = Y - INT(Y / 10) * 10
 G(1000) (0 2) 1000 PRINT
   Origs: 115:gosub, 205:gosub, 640:gosub
   Dests: 1010:auto
-G(1000) (1 3) 1010 FOR I = 1 TO 3
+G(1000) F(I) (1 3) 1010 FOR I = 1 TO 3
   Origs: 1000:auto
   Dests: 1020:fornext, 1060:fornext
-G(1000) (1 3) 1020 FOR J = 1 TO 3
+G(1000) F(I,J) (1 3) 1020 FOR J = 1 TO 3
   Origs: 1010:fornext
   Dests: 1030:fornext, 1040:fornext
-G(1000) (0 5) 1030 PRINT TAB(10); MID$(P$, S((I - 1) * 3 + J) + 2, 1);
+G(1000) F(I,J) (0 5) 1030 PRINT TAB(10); MID$(P$, S((I - 1) * 3 + J) + 2, 1);
   Origs: 1020:fornext
   Dests: 1040:auto
-G(1000) (0 1) 1040 NEXT J
+G(1000) F(I,J) (0 1) 1040 NEXT J
   Origs: 1020:fornext, 1030:auto
   Dests: 1050:auto
-G(1000) (0 2) 1050 PRINT
+G(1000) F(I) (0 2) 1050 PRINT
   Origs: 1040:auto
   Dests: 1060:auto
-G(1000) (0 1) 1060 NEXT I
+G(1000) F(I) (0 1) 1060 NEXT I
   Origs: 1010:fornext, 1050:auto
   Dests: 1070:auto
 G(1000) (0 2) 1070 PRINT

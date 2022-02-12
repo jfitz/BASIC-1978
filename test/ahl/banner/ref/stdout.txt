@@ -363,56 +363,56 @@ STOP in line 810
 40 (1) A = ASC(LEFT$(A$, 1))
 50 (0) REM
 60 (0) REM
-70 (1) FOR T = 1 TO LEN(A$)
-80 (5) P$ = MID$(A$, T, 1)
-90 (5) FOR O = 1 TO 50
-95 (42) READ S$, S(1), S(2), S(3), S(4), S(5), S(6), S(7)
-96 (42) IF P$ = " " THEN 812
-100 (42) IF P$ = S$ THEN 200
-120 (37) NEXT O
-200 (5) RESTORE
-201 (5) X$ = M$
-202 (5) IF M$ = "ALL" THEN X$ = S$
-205 (5) FOR U = 1 TO 7
-210 (35) FOR K = 8 TO 0 STEP -1
-230 (193) IF 2 ^ K < S(U) THEN 270
-240 (95) J(9 - K) = 0
-250 (95) GOTO 280
-270 (98) J(9 - K) = 1
-    (98) S(U) = S(U) - 2 ^ K
-272 (98) IF S(U) = 1 THEN 815
-280 (158) NEXT K
-445 (35) FOR T1 = 1 TO X
-447 (210) PRINT TAB((63 - 4.5 * Y) * G1 / (LEN(X$)) + 1);
-450 (210) FOR B = 1 TO F(U)
-460 (1158) IF J(B) = 0 THEN 500
-465 (588) FOR I = 1 TO Y
-    (4704) PRINT X$;
-    (4704) NEXT I
-470 (588) GOTO 600
-500 (570) FOR I = 1 TO Y
-510 (4560) FOR I1 = 1 TO LEN(X$)
-520 (4560) PRINT " ";
-    (4560) NEXT I1
-530 (4560) NEXT I
-600 (1158) NEXT B
-620 (210) PRINT
-630 (210) NEXT T1
-700 (35) NEXT U
-750 (5) FOR H = 1 TO 2 * X
-    (60) PRINT
-    (60) NEXT H
-800 (5) NEXT T
-806 (1) FOR H = 1 TO 75
-    (75) PRINT
-    (75) NEXT H
-810 (1) STOP
-812 (0) FOR H = 1 TO 7 * X
-    (0) PRINT
-    (0) NEXT H
-813 (0) GOTO 800
-815 (35) F(U) = 9 - K
-    (35) GOTO 445
+70 F(T) (1) FOR T = 1 TO LEN(A$)
+80 F(T) (5) P$ = MID$(A$, T, 1)
+90 F(T,O) (5) FOR O = 1 TO 50
+95 F(T,O) (42) READ S$, S(1), S(2), S(3), S(4), S(5), S(6), S(7)
+96 F(T,O) (42) IF P$ = " " THEN 812
+100 F(T,O) (42) IF P$ = S$ THEN 200
+120 F(T,O) (37) NEXT O
+200 F(T,O) (5) RESTORE
+201 F(T,O) (5) X$ = M$
+202 F(T,O) (5) IF M$ = "ALL" THEN X$ = S$
+205 F(T,O,U) (5) FOR U = 1 TO 7
+210 F(T,O,U,K) (35) FOR K = 8 TO 0 STEP -1
+230 F(T,O,U,K) (193) IF 2 ^ K < S(U) THEN 270
+240 F(T,O,U,K) (95) J(9 - K) = 0
+250 F(T,O,U,K) (95) GOTO 280
+270 F(T,O,U,K) (98) J(9 - K) = 1
+    F(T,O,U,K) (98) S(U) = S(U) - 2 ^ K
+272 F(T,O,U,K) (98) IF S(U) = 1 THEN 815
+280 F(T,O,U,K) (158) NEXT K
+445 F(T,O,U,K,T1) (35) FOR T1 = 1 TO X
+447 F(T,O,U,K,T1) (210) PRINT TAB((63 - 4.5 * Y) * G1 / (LEN(X$)) + 1);
+450 F(T,O,U,K,T1,B) (210) FOR B = 1 TO F(U)
+460 F(T,O,U,K,T1,B) (1158) IF J(B) = 0 THEN 500
+465 F(T,O,U,K,T1,B,I) (588) FOR I = 1 TO Y
+    F(T,O,U,K,T1,B,I) (4704) PRINT X$;
+    F(T,O,U,K,T1,B,I) (4704) NEXT I
+470 F(T,O,U,K,T1,B) (588) GOTO 600
+500 F(T,O,U,K,T1,B,I) (570) FOR I = 1 TO Y
+510 F(T,O,U,K,T1,B,I,I1) (4560) FOR I1 = 1 TO LEN(X$)
+520 F(T,O,U,K,T1,B,I,I1) (4560) PRINT " ";
+    F(T,O,U,K,T1,B,I,I1) (4560) NEXT I1
+530 F(T,O,U,K,T1,B,I) (4560) NEXT I
+600 F(T,O,U,K,T1,B) (1158) NEXT B
+620 F(T,O,U,K,T1) (210) PRINT
+630 F(T,O,U,K,T1) (210) NEXT T1
+700 F(T,O,U,K) (35) NEXT U
+750 F(T,O,U,H) (5) FOR H = 1 TO 2 * X
+    F(T,O,U,H) (60) PRINT
+    F(T,O,U,H) (60) NEXT H
+800 F(T,O,U) (5) NEXT T
+806 F(T,H) (1) FOR H = 1 TO 75
+    F(T,H) (75) PRINT
+    F(T,H) (75) NEXT H
+810 F(T) (1) STOP
+812 F(T,O,H) (0) FOR H = 1 TO 7 * X
+    F(T,O,H) (0) PRINT
+    F(T,O,H) (0) NEXT H
+813 F(T,O) (0) GOTO 800
+815 F(T,O,U,K) (35) F(U) = 9 - K
+    F(T,O,U,K) (35) GOTO 445
 899 (0) DATA " ", 0, 0, 0, 0, 0, 0, 0
 900 (0) DATA "A", 505, 37, 35, 34, 35, 37, 505
 901 (0) DATA "G", 125, 131, 258, 258, 290, 163, 101
