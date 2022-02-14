@@ -223,7 +223,6 @@ G(810) (0 3) 820 H1 = 5
   Origs: 810:auto
   Dests: 830:auto
 G(950) (0 2) 830 GOSUB 1410
-    WARNING: Statement before GOSUB entry point
     WARNING: Inconsistent GOSUB target (950, 810)
   Origs: 820:auto, 1010:goto
   Dests: 840:auto, 1420:gosub
@@ -260,7 +259,6 @@ G(950) (0 2) 930 GOSUB 1320
   Origs: 850:goto
   Dests: 940:auto, 1320:gosub
 G(950) (0 1) 940 RETURN
-    WARNING: Statement before GOSUB entry point
   Origs: 930:auto, 990:ifthen
   Dests: 
 G(950) (0 3) 950 GOSUB 100
@@ -277,12 +275,14 @@ G(950) (0 2) 980 GOSUB 1100
   Origs: 970:auto
   Dests: 990:auto, 1110:gosub
 G(950) (1 5) 990 IF Q < 0 THEN 940
+    WARNING: Branch to line before GOSUB start
   Origs: 980:auto
   Dests: 940:ifthen, 1000:auto
 G(950) (0 2) 1000 PRINT "HIT";
   Origs: 990:auto
   Dests: 1010:auto
 G(950) (0 3) 1010 GOTO 830
+     WARNING: Branch to line before GOSUB start
   Origs: 1000:auto
   Dests: 830:goto
 (0 1) 1100 REM --SUBROUTINE TO ADD A CARD TO ROW I

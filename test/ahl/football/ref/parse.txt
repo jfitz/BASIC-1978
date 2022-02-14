@@ -306,7 +306,6 @@
  TextConstant:"THE COIN IS FLIPPED"
  CarriageControl:NL
 765 P=X(T)-Y(T)*40
- WARNING: Statement before GOSUB entry point
  Variable:P -> _
  Variable:T -> _
  Variable:X(_) -> _
@@ -372,7 +371,6 @@
  CarriageControl:NL
  LineNumber:1900
 830 PRINT "TEAM";T;"DO YOU WANT TO RUNBACK";:INPUT A$
- WARNING: Statement before GOSUB entry point
  TextConstant:"TEAM"
  CarriageControl:;
  Variable:T -> _
@@ -386,6 +384,7 @@
  BinaryOperatorEqual:=($,$) -> _
  LineNumber:1430
 845 IF A$<>"NO" THEN 830
+ WARNING: Branch to line before GOSUB start
  Variable:A$ -> $
  TextConstant:"NO"
  BinaryOperatorNotEqual:<>($,$) -> _
@@ -524,11 +523,9 @@
  AssignmentOperator:= _ -> _
  LineNumber:940
 936 PRINT "ILLEGAL PLAY NUMBER, CHECK AND"
- WARNING: Statement before GOSUB entry point
  TextConstant:"ILLEGAL PLAY NUMBER, CHECK AND"
  CarriageControl:NL
 940 PRINT "INPUT OFFENSIVE PLAY, DEFENSIVE PLAY";
- WARNING: Statement before GOSUB entry point
  TextConstant:"INPUT OFFENSIVE PLAY, DEFENSIVE PLAY"
  CarriageControl:;
 950 IF T=2 THEN 970
@@ -693,7 +690,6 @@
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:1110
 1080 PRINT: PRINT "** LOSS OF POSSESSION FROM TEAM";T;"TO TEAM";T(T)
- WARNING: Statement before GOSUB entry point
  CarriageControl:NL
  TextConstant:"** LOSS OF POSSESSION FROM TEAM"
  CarriageControl:;
@@ -705,6 +701,7 @@
  Variable:T(_) -> _
  CarriageControl:NL
 1100 GOSUB 1850: PRINT: T=T(T): GOTO 830
+ WARNING: Branch to line before GOSUB start
  LineNumber:1850
  CarriageControl:NL
  Variable:T -> _
@@ -731,6 +728,7 @@
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:1230
 1130 IF Y(T)*P-Y(T)*S>=10 THEN 880
+ WARNING: Branch to line before GOSUB start
  Variable:T -> _
  Variable:Y(_) -> _
  Variable:P -> _
@@ -744,6 +742,7 @@
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:880
 1140 D=D+1: IF D<>5 THEN 885
+ WARNING: Branch to line before GOSUB start
  Variable:D -> _
  Variable:D -> _
  NumericConstant:1
@@ -764,6 +763,7 @@
  Variable:T(_) -> _
  AssignmentOperator:= _ -> _
 1170 GOSUB 1850: GOTO 880
+ WARNING: Branch to line before GOSUB start
  LineNumber:1850
  LineNumber:880
 1180 PRINT "DOES TEAM";T;"WANT TO PUNT";: INPUT A$
@@ -780,12 +780,13 @@
  BinaryOperatorEqual:=($,$) -> _
  LineNumber:1200
 1187 IF A$<>"YES" THEN 1180
+ WARNING: Branch to line before GOSUB start
  Variable:A$ -> $
  TextConstant:"YES"
  BinaryOperatorNotEqual:<>($,$) -> _
  LineNumber:1180
 1190 PRINT:PRINT "TEAM";T;"WILL PUNT": G=RND(1): IF G<.025 THEN 1080
- WARNING: Statement before GOSUB entry point
+ WARNING: Branch to line before GOSUB start
  CarriageControl:NL
  TextConstant:"TEAM"
  CarriageControl:;
@@ -802,6 +803,7 @@
  BinaryOperatorLess:<(_,_) -> _
  LineNumber:1080
 1195 GOSUB 1850: K=INT(25*RND(1)+35): T=T(T): GOTO 790
+ WARNING: Branch to line before GOSUB start
  LineNumber:1850
  Variable:K -> _
  NumericConstant:25
@@ -831,14 +833,15 @@
  BinaryOperatorEqual:=($,$) -> _
  LineNumber:1640
 1215 IF A$<>"NO" THEN 1200
+ WARNING: Branch to line before GOSUB start
  Variable:A$ -> $
  TextConstant:"NO"
  BinaryOperatorNotEqual:<>($,$) -> _
  LineNumber:1200
 1217 GOTO 920
+ WARNING: Branch to line before GOSUB start
  LineNumber:920
 1230 PRINT: PRINT "SAFETY AGAINST TEAM";T;"**********************OH-OH"
- WARNING: Statement before GOSUB entry point
  CarriageControl:NL
  TextConstant:"SAFETY AGAINST TEAM"
  CarriageControl:;
@@ -866,6 +869,7 @@
  CarriageControl:;
  Variable:A$ -> $
 1290 P=Z(T)-W(T)*20: IF A$="YES" THEN 1190
+ WARNING: Branch to line before GOSUB start
  Variable:P -> _
  Variable:T -> _
  Variable:Z(_) -> _
@@ -880,7 +884,6 @@
  BinaryOperatorEqual:=($,$) -> _
  LineNumber:1190
 1320 PRINT: PRINT "TOUCHDOWN BY TEAM";T;"*********************YEA TEAM"
- WARNING: Statement before GOSUB entry point
  CarriageControl:NL
  TextConstant:"TOUCHDOWN BY TEAM"
  CarriageControl:;
@@ -920,6 +923,7 @@
  AssignmentOperator:= _ -> _
  LineNumber:1810
 1420 T=T(T): GOTO 765
+ WARNING: Branch to line before GOSUB start
  Variable:T -> _
  Variable:T -> _
  Variable:T(_) -> _
@@ -975,6 +979,7 @@
  TextConstant:"YARDS"
  CarriageControl:NL
 1485 G=RND(1): IF G<.025 THEN 1080
+ WARNING: Branch to line before GOSUB start
  Variable:G -> _
  NumericConstant:1
  FunctionRnd:RND(_) -> _
@@ -984,6 +989,7 @@
  BinaryOperatorLess:<(_,_) -> _
  LineNumber:1080
 1490 IF Y(T)*P>=X(T) THEN 1320
+ WARNING: Branch to line before GOSUB start
  Variable:T -> _
  Variable:Y(_) -> _
  Variable:P -> _
@@ -993,6 +999,7 @@
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:1320
 1500 IF W(T)*P>=Z(T) THEN 1230
+ WARNING: Branch to line before GOSUB start
  Variable:T -> _
  Variable:W(_) -> _
  Variable:P -> _
@@ -1002,6 +1009,7 @@
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:1230
 1510 GOTO 880
+ WARNING: Branch to line before GOSUB start
  LineNumber:880
 1640 PRINT: PRINT "TEAM";T;"WILL ATTEMPT A FIELD GOAL"
  CarriageControl:NL
@@ -1012,6 +1020,7 @@
  TextConstant:"WILL ATTEMPT A FIELD GOAL"
  CarriageControl:NL
 1645 G=RND(1): IF G<.025 THEN 1080
+ WARNING: Branch to line before GOSUB start
  Variable:G -> _
  NumericConstant:1
  FunctionRnd:RND(_) -> _
@@ -1073,6 +1082,7 @@
  TextConstant:"*********************YEA"
  CarriageControl:NL
 1720 Q=3: GOTO 1390
+ WARNING: Branch to line before GOSUB start
  Variable:Q -> _
  NumericConstant:3
  AssignmentOperator:= =_ -> _
@@ -1100,6 +1110,7 @@
  BinaryOperatorLess:<(_,_) -> _
  LineNumber:1745
 1744 T=T(T): GOTO 794
+ WARNING: Branch to line before GOSUB start
  Variable:T -> _
  Variable:T -> _
  Variable:T(_) -> _
@@ -1112,6 +1123,7 @@
  Variable:P -> _
  CarriageControl:NL
 1750 T=T(T): GOSUB 1900: GOTO 830
+ WARNING: Branch to line before GOSUB start
  Variable:T -> _
  Variable:T -> _
  Variable:T(_) -> _
@@ -1186,6 +1198,7 @@
  TextConstant:"RAZZLE-DAZZLE"
  TextConstant:"BOMB!!!!"
 1800 IF P1<>99 THEN 936
+ WARNING: Branch to line before GOSUB start
  Variable:P1 -> _
  NumericConstant:99
  BinaryOperatorNotEqual:<>(_,_) -> _
@@ -1220,6 +1233,7 @@
  CarriageControl:NL
  LineNumber:2000
 1830 IF P1=99 THEN 940
+ WARNING: Branch to line before GOSUB start
  Variable:P1 -> _
  NumericConstant:99
  BinaryOperatorEqual:=(_,_) -> _

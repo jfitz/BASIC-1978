@@ -1,7 +1,6 @@
 10 REM SUPER STARTREK - MAY 16,1978 - REQUIRES 24K MEMORY
  Remark:SUPER STARTREK - MAY 16,1978 - REQUIRES 24K MEMORY
 30 REM
- WARNING: Statement before GOSUB entry point
  Remark:
 40 REM ****        **** STAR TREK ****        ****
  Remark:****        **** STAR TREK ****        ****
@@ -848,6 +847,7 @@
  BinaryOperatorNotEqual:<>($,$) -> _
  LineNumber:2160
 2140 ONIGOTO2300,1980,4000,4260,4700,5530,5690,7290,6270
+ WARNING: Branch to line before GOSUB start
  Variable:I -> _
  LineNumber:2300
  LineNumber:1980
@@ -887,6 +887,7 @@
  TextConstant:"  COM  (TO CALL ON LIBRARY-COMPUTER)"
  CarriageControl:NL
 2260 PRINT"  XXX  (TO RESIGN YOUR COMMAND)":PRINT:GOTO 1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"  XXX  (TO RESIGN YOUR COMMAND)"
  CarriageControl:NL
  CarriageControl:NL
@@ -911,6 +912,7 @@
  BinaryOperatorAnd:AND(_,_) -> _
  LineNumber:2350
 2330 PRINT"   LT. SULU REPORTS, 'INCORRECT COURSE DATA, SIR!'":GOTO1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"   LT. SULU REPORTS, 'INCORRECT COURSE DATA, SIR!'"
  CarriageControl:NL
  LineNumber:1990
@@ -953,6 +955,7 @@
  BinaryOperatorAnd:AND(_,_) -> _
  LineNumber:2490
 2390 IFW1=0THEN1990
+ WARNING: Branch to line before GOSUB start
  Variable:W1 -> _
  NumericConstant:0
  BinaryOperatorEqual:=(_,_) -> _
@@ -961,6 +964,7 @@
  TextConstant:"   CHIEF ENGINEER SCOTT REPORTS 'THE ENGINES WON'T TAKE"
  CarriageControl:;
 2430 PRINT" WARP ";W1;"!'":GOTO1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:" WARP "
  CarriageControl:;
  Variable:W1 -> _
@@ -969,6 +973,7 @@
  CarriageControl:NL
  LineNumber:1990
 2470 PRINT"WARP ENGINES ARE DAMAGED.  MAXIUM SPEED = WARP 0.2":GOTO1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"WARP ENGINES ARE DAMAGED.  MAXIUM SPEED = WARP 0.2"
  CarriageControl:NL
  LineNumber:1990
@@ -998,6 +1003,7 @@
  TextConstant:"!'"
  CarriageControl:NL
 2530 IFS<N-EORD(7)<0THEN1990
+ WARNING: Branch to line before GOSUB start
  Variable:S -> _
  Variable:N -> _
  Variable:E -> _
@@ -1020,6 +1026,7 @@
  TextConstant:"                         PRESENTLY DEPLOYED TO SHIELDS."
  CarriageControl:NL
 2570 GOTO1990
+ WARNING: Branch to line before GOSUB start
  LineNumber:1990
 2580 REM KLINGONS MOVE/FIRE ON MOVING STARSHIP . . .
  Remark:KLINGONS MOVE/FIRE ON MOVING STARSHIP . . .
@@ -1360,7 +1367,6 @@
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
 3370 A$="<*>":Z1=INT(S1):Z2=INT(S2):GOSUB8670:GOSUB3910:T8=1
- WARNING: Statement before GOSUB entry point
  Variable:A$ -> $
  TextConstant:"<*>"
  AssignmentOperator:= =$ -> $
@@ -1404,6 +1410,7 @@
 3470 REM SEE IF DOCKED, THEN GET COMMAND
  Remark:SEE IF DOCKED, THEN GET COMMAND
 3480 GOTO1980
+ WARNING: Branch to line before GOSUB start
  LineNumber:1980
 3490 REM EXCEEDED QUADRANT LIMITS
  Remark:EXCEEDED QUADRANT LIMITS
@@ -1582,6 +1589,7 @@
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:6220
 3860 IF8*Q1+Q2=8*Q4+Q5THEN3370
+ WARNING: Branch to line before GOSUB start
  NumericConstant:8
  Variable:Q1 -> _
  BinaryOperatorMultiply:*(_,_) -> _
@@ -1595,6 +1603,7 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:3370
 3870 T=T+1:GOSUB3910:GOTO1320
+ WARNING: Branch to line before GOSUB start
  Variable:T -> _
  Variable:T -> _
  NumericConstant:1
@@ -1639,6 +1648,7 @@
 3990 REM LONG RANGE SENSOR SCAN CODE
  Remark:LONG RANGE SENSOR SCAN CODE
 4000 IFD(3)<0THENPRINT"LONG RANGE SENSORS ARE INOPERABLE":GOTO1990
+ WARNING: Branch to line before GOSUB start
  NumericConstant:3
  Variable:D(_) -> _
  NumericConstant:0
@@ -1745,6 +1755,7 @@
  TextConstant:" "
  CarriageControl:;
 4230 NEXTL:PRINT":":PRINTO1$:NEXTI:GOTO1990
+ WARNING: Branch to line before GOSUB start
  Variable:L -> _
  TextConstant:":"
  CarriageControl:NL
@@ -1755,6 +1766,7 @@
 4250 REM PHASER CONTROL CODE BEGINS HERE
  Remark:PHASER CONTROL CODE BEGINS HERE
 4260 IFD(4)<0THENPRINT"PHASERS INOPERATIVE":GOTO1990
+ WARNING: Branch to line before GOSUB start
  NumericConstant:4
  Variable:D(_) -> _
  NumericConstant:0
@@ -1771,6 +1783,7 @@
  TextConstant:"SCIENCE OFFICER SPOCK REPORTS  'SENSORS SHOW NO ENEMY SHIPS"
  CarriageControl:NL
 4280 PRINT"                                IN THIS QUADRANT'":GOTO1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"                                IN THIS QUADRANT'"
  CarriageControl:NL
  LineNumber:1990
@@ -1792,12 +1805,14 @@
  TextConstant:"UNITS"
  CarriageControl:NL
 4370 INPUT"NUMBER OF UNITS TO FIRE";X:IFX<=0THEN1990
+ WARNING: Branch to line before GOSUB start
  Variable:X -> _
  Variable:X -> _
  NumericConstant:0
  BinaryOperatorLessEqual:<=(_,_) -> _
  LineNumber:1990
 4400 IFE-X<0THEN4360
+ WARNING: Branch to line before GOSUB start
  Variable:E -> _
  Variable:X -> _
  BinaryOperatorMinus:-(_,_) -> _
@@ -1969,12 +1984,14 @@
  BinaryOperatorLessEqual:<=(_,_) -> _
  LineNumber:6370
 4670 NEXTI:GOSUB6000:GOTO1990
+ WARNING: Branch to line before GOSUB start
  Variable:I -> _
  LineNumber:6000
  LineNumber:1990
 4690 REM PHOTON TORPEDO CODE BEGINS HERE
  Remark:PHOTON TORPEDO CODE BEGINS HERE
 4700 IFP<=0THENPRINT"ALL PHOTON TORPEDOES EXPENDED":GOTO 1990
+ WARNING: Branch to line before GOSUB start
  Variable:P -> _
  NumericConstant:0
  BinaryOperatorLessEqual:<=(_,_) -> _
@@ -1982,6 +1999,7 @@
  CarriageControl:NL
  LineNumber:1990
 4730 IFD(5)<0THENPRINT"PHOTON TUBES ARE NOT OPERATIONAL":GOTO1990
+ WARNING: Branch to line before GOSUB start
  NumericConstant:5
  Variable:D(_) -> _
  NumericConstant:0
@@ -2010,6 +2028,7 @@
  TextConstant:"ENSIGN CHEKOV REPORTS,  'INCORRECT COURSE DATA, SIR!'"
  CarriageControl:NL
 4800 GOTO1990
+ WARNING: Branch to line before GOSUB start
  LineNumber:1990
  WARNING: Line exceeds PRETTY width limit 80
 4850 X1=C(C1,1)+(C(C1+1,1)-C(C1,1))*(C1-INT(C1)):E=E-2:P=P-1
@@ -2134,6 +2153,7 @@
  AssignmentOperator:= _ -> _
  LineNumber:8830
 5050 IFZ3<>0THEN4920
+ WARNING: Branch to line before GOSUB start
  Variable:Z3 -> _
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
@@ -2216,6 +2236,7 @@
  LineNumber:5280
  WARNING: Line exceeds PRETTY width limit 80
 5260 PRINT"STAR AT";X3;",";Y3;"ABSORBED TORPEDO ENERGY.":GOSUB6000:GOTO1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"STAR AT"
  CarriageControl:;
  Variable:X3 -> _
@@ -2229,6 +2250,7 @@
  LineNumber:6000
  LineNumber:1990
 5280 A$=">!<":Z1=X:Z2=Y:GOSUB8830:IFZ3=0THEN4760
+ WARNING: Branch to line before GOSUB start
  Variable:A$ -> $
  TextConstant:">!<"
  AssignmentOperator:= =$ -> $
@@ -2299,6 +2321,7 @@
  LineNumber:8670
  WARNING: Line exceeds PRETTY width limit 80
 5470 G(Q1,Q2)=K3*100+B3*10+S3:Z(Q1,Q2)=G(Q1,Q2):GOSUB6000:GOTO1990
+ WARNING: Branch to line before GOSUB start
  Variable:Q1 -> _
  Variable:Q2 -> _
  Variable:G(_,_) -> _
@@ -2322,6 +2345,7 @@
  LineNumber:6000
  LineNumber:1990
 5490 PRINT"TORPEDO MISSED":GOSUB6000:GOTO1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"TORPEDO MISSED"
  CarriageControl:NL
  LineNumber:6000
@@ -2329,6 +2353,7 @@
 5520 REM SHIELD CONTROL
  Remark:SHIELD CONTROL
 5530 IFD(7)<0THENPRINT"SHIELD CONTROL INOPERABLE":GOTO1990
+ WARNING: Branch to line before GOSUB start
  NumericConstant:7
  Variable:D(_) -> _
  NumericConstant:0
@@ -2345,6 +2370,7 @@
  CarriageControl:;
  Variable:X -> _
 5580 IFX<0ORS=XTHENPRINT"<SHIELDS UNCHANGED>":GOTO1990
+ WARNING: Branch to line before GOSUB start
  Variable:X -> _
  NumericConstant:0
  BinaryOperatorLess:<(_,_) -> _
@@ -2366,6 +2392,7 @@
  TextConstant:"SHIELD CONTROL REPORTS  'THIS IS NOT THE FEDERATION TREASURY.'"
  CarriageControl:NL
 5610 PRINT"<SHIELDS UNCHANGED>":GOTO1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"<SHIELDS UNCHANGED>"
  CarriageControl:NL
  LineNumber:1990
@@ -2383,6 +2410,7 @@
  TextConstant:"DEFLECTOR CONTROL ROOM REPORT:"
  CarriageControl:NL
 5660 PRINT"  'SHIELDS NOW AT";INT(S);"UNITS PER YOUR COMMAND.'":GOTO1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"  'SHIELDS NOW AT"
  CarriageControl:;
  Variable:S -> _
@@ -2400,6 +2428,7 @@
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:5910
 5700 PRINT"DAMAGE CONTROL REPORT NOT AVAILABLE":IFD0=0THEN1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"DAMAGE CONTROL REPORT NOT AVAILABLE"
  CarriageControl:NL
  Variable:D0 -> _
@@ -2407,7 +2436,6 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:1990
 5720 D3=0:FORI=1TO8:IFD(I)<0THEND3=D3+.1
- WARNING: Statement before GOSUB entry point
  Variable:D3 -> _
  NumericConstant:0
  AssignmentOperator:= =_ -> _
@@ -2424,6 +2452,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 5760 NEXTI:IFD3=0THEN1990
+ WARNING: Branch to line before GOSUB start
  Variable:I -> _
  Variable:D3 -> _
  NumericConstant:0
@@ -2460,6 +2489,7 @@
 5840 INPUT "WILL YOU AUTHORIZE THE REPAIR ORDER (Y/N)";A$
  Variable:A$ -> $
 5860 IFA$<>"Y"THEN 1990
+ WARNING: Branch to line before GOSUB start
  Variable:A$ -> $
  TextConstant:"Y"
  BinaryOperatorNotEqual:<>($,$) -> _
@@ -2512,6 +2542,7 @@
  BinaryOperatorMultiply:*(_,_) -> _
  CarriageControl:NL
 5950 NEXTR1:PRINT:IFD0<>0THEN5720
+ WARNING: Branch to line before GOSUB start
  Variable:R1 -> _
  CarriageControl:NL
  Variable:D0 -> _
@@ -2519,6 +2550,7 @@
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:5720
 5980 GOTO 1990
+ WARNING: Branch to line before GOSUB start
  LineNumber:1990
 5990 REM KLINGONS SHOOTING
  Remark:KLINGONS SHOOTING
@@ -2690,6 +2722,7 @@
  TextConstant:"FOR A SIMILAR MISSION -- IF THERE IS A VOLUNTEER,"
  CarriageControl:NL
 6330 INPUT"LET HIM STEP FORWARD AND ENTER 'AYE'";A$:IFA$="AYE"THEN10
+ WARNING: Branch to line before GOSUB start
  Variable:A$ -> $
  Variable:A$ -> $
  TextConstant:"AYE"
@@ -2940,6 +2973,7 @@
 7280 REM LIBRARY COMPUTER CODE
  Remark:LIBRARY COMPUTER CODE
 7290 IFD(8)<0THENPRINT"COMPUTER DISABLED":GOTO1990
+ WARNING: Branch to line before GOSUB start
  NumericConstant:8
  Variable:D(_) -> _
  NumericConstant:0
@@ -2948,6 +2982,7 @@
  CarriageControl:NL
  LineNumber:1990
 7320 INPUT"COMPUTER ACTIVE AND AWAITING COMMAND";A:IFA<0THEN1990
+ WARNING: Branch to line before GOSUB start
  Variable:A -> _
  Variable:A -> _
  NumericConstant:0
@@ -3112,6 +3147,7 @@
  Variable:G2$ -> $
  CarriageControl:;
 7850 PRINT:PRINTO1$:NEXTI:PRINT:GOTO1990
+ WARNING: Branch to line before GOSUB start
  CarriageControl:NL
  Variable:O1$ -> $
  CarriageControl:NL
@@ -3183,17 +3219,20 @@
  TextConstant:" IN THE GALAXY"
  CarriageControl:NL
 7990 GOTO5690
+ WARNING: Branch to line before GOSUB start
  LineNumber:5690
 8010 PRINT"YOUR STUPIDITY HAS LEFT YOU ON YOUR ON IN"
  TextConstant:"YOUR STUPIDITY HAS LEFT YOU ON YOUR ON IN"
  CarriageControl:NL
 8020 PRINT"  THE GALAXY -- YOU HAVE NO STARBASES LEFT!":GOTO5690
+ WARNING: Branch to line before GOSUB start
  TextConstant:"  THE GALAXY -- YOU HAVE NO STARBASES LEFT!"
  CarriageControl:NL
  LineNumber:5690
 8060 REM TORPEDO, BASE NAV, D/D CALCULATOR
  Remark:TORPEDO, BASE NAV, D/D CALCULATOR
 8070 IFK3<=0THEN4270
+ WARNING: Branch to line before GOSUB start
  Variable:K3 -> _
  NumericConstant:0
  BinaryOperatorLessEqual:<=(_,_) -> _
@@ -3404,6 +3443,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  CarriageControl:NL
 8460 PRINT"DISTANCE =";SQR(X^2+A^2):IFH8=1THEN1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:"DISTANCE ="
  CarriageControl:;
  Variable:X -> _
@@ -3420,6 +3460,7 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:1990
 8480 NEXTI:GOTO1990
+ WARNING: Branch to line before GOSUB start
  Variable:I -> _
  LineNumber:1990
  WARNING: Line exceeds PRETTY width limit 80
@@ -3440,6 +3481,7 @@
  TextConstant:"MR. SPOCK REPORTS,  'SENSORS SHOW NO STARBASES IN THIS"
  CarriageControl:;
 8520 PRINT" QUADRANT.'":GOTO1990
+ WARNING: Branch to line before GOSUB start
  TextConstant:" QUADRANT.'"
  CarriageControl:NL
  LineNumber:1990

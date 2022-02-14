@@ -19,26 +19,25 @@
 90 N = N + 1 : IF D = 0 THEN PRINT "DRAWN GAME" : GOTO 20
 95 PRINT "YOU WIN BY"; D; "POINTS" : GOTO 20
 100 PRINT "AGAIN";
- WARNING: Statement before GOSUB entry point
  WARNING: Inconsistent GOSUB origins
 110 INPUT M : IF M < 7 THEN IF M > 0 THEN M = M - 1 : GOTO 130
  WARNING: Inconsistent GOSUB origins
 120 PRINT "ILLEGAL MOVE" : GOTO 100
+ WARNING: Branch to line before GOSUB start
 130 IF B(M) = 0 THEN 120
 140 H = 6 : GOSUB 200
 150 GOTO 500
 200 K = M : GOSUB 600
- WARNING: Statement before GOSUB entry point
  WARNING: Inconsistent GOSUB target (800, 200)
  WARNING: Inconsistent GOSUB origins
 205 E = 0 : IF K > 6 THEN K = K - 7
 210 C = C + 1 : IF C < 9 THEN F(N) = F(N) * 6 + K
 215 FOR I = 0 TO 5 : IF B(I) <> 0 THEN 230
 220 NEXT I
- WARNING: Statement before GOSUB entry point
 225 RETURN
 230 FOR I = 7 TO 12 : IF B(I) <> 0 THEN E = 1 : RETURN
 235 GOTO 220
+ WARNING: Branch to line before GOSUB start
 500 PRINT : PRINT "   ";
  WARNING: Inconsistent GOSUB target (500, 110)
  WARNING: Inconsistent GOSUB origins
@@ -77,6 +76,7 @@
 880 IF Q >= D THEN A = J : D = Q
 885 NEXT J
 890 M = A : PRINT CHR$(42 + M); : GOTO 200
+ WARNING: Branch to line before GOSUB start
 900 FOR I = 0 TO N - 1 : PRINT B(I) : NEXT I
 999 END
 

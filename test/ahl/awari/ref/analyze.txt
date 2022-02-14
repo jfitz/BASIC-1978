@@ -97,7 +97,6 @@ F(I) (0 1)    NEXT I
   Origs: 90:auto
   Dests: 20:goto
 G(110) (0 2) 100 PRINT "AGAIN";
-    WARNING: Statement before GOSUB entry point
     WARNING: Inconsistent GOSUB origins
   Origs: 50:gosub, 120:goto
   Dests: 110:auto
@@ -109,6 +108,7 @@ G(110) (0 2)     GOTO 130
   Dests: 120:auto, 130:goto
 G(110) (0 2) 120 PRINT "ILLEGAL MOVE"
 G(110) (0 3)     GOTO 100
+    WARNING: Branch to line before GOSUB start
   Origs: 110:auto, 130:ifthen
   Dests: 100:goto
 G(110) (1 5) 130 IF B(M) = 0 THEN 120
@@ -123,7 +123,6 @@ G(110) (0 2) 150 GOTO 500
   Dests: 500:goto
 G(800) (0 3) 200 K = M
 G(800) (0 2)     GOSUB 600
-    WARNING: Statement before GOSUB entry point
     WARNING: Inconsistent GOSUB target (800, 200)
     WARNING: Inconsistent GOSUB origins
   Origs: 140:gosub, 890:goto
@@ -141,7 +140,6 @@ G(800) F(I) (1 4)     IF B(I) <> 0 THEN 230
   Origs: 210:auto
   Dests: 220:auto, 220:fornext, 230:ifthen
 G(800) F(I) (0 1) 220 NEXT I
-    WARNING: Statement before GOSUB entry point
   Origs: 215:auto, 215:fornext, 235:goto
   Dests: 225:auto
 G(800) F(I) (0 1) 225 RETURN
@@ -153,6 +151,7 @@ G(800) F(I) (0 1)     RETURN
   Origs: 215:ifthen
   Dests: 235:auto, 510:fornext
 G(800) F(I) (0 3) 235 GOTO 220
+    WARNING: Branch to line before GOSUB start
   Origs: 230:auto
   Dests: 220:goto
 G(500) (0 2) 500 PRINT
@@ -293,6 +292,7 @@ G(800) F(J) (0 1) 885 NEXT J
 G(800) (0 3) 890 M = A
 G(800) (0 3)     PRINT CHR$(42 + M);
 G(800) (0 3)     GOTO 200
+    WARNING: Branch to line before GOSUB start
   Origs: 885:auto
   Dests: 200:goto
 F(I) (1 4) 900 FOR I = 0 TO N - 1

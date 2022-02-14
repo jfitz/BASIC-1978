@@ -85,7 +85,6 @@
 28 REM *** SET UP BOARD
  Remark:*** SET UP BOARD
 29 FOR R=1 TO 9
- WARNING: Statement before GOSUB entry point
  control: Variable:R -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:9"]
@@ -124,7 +123,6 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:40
 35 T(R,C)=-5
- WARNING: Statement before GOSUB entry point
  Variable:R -> _
  Variable:C -> _
  Variable:T(_,_) -> _
@@ -134,6 +132,7 @@
 36 GOTO 50
  LineNumber:50
 40 IF (R-1)*(C-1)*(R-9)*(C-9)=0 THEN 35
+ WARNING: Branch to line before GOSUB start
  Variable:R -> _
  NumericConstant:1
  BinaryOperatorMinus:-(_,_) -> _
@@ -226,7 +225,6 @@
  UnaryOperatorMinus:-(_) -> =_
  AssignmentOperator:= =_ -> _
 100 INPUT "MOVE WHICH PIECE";Z
- WARNING: Statement before GOSUB entry point
  WARNING: Inconsistent GOSUB target (1005, 1505)
  Variable:Z -> _
 110 IF B(Z)=-7 THEN 140
@@ -237,19 +235,21 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:140
 120 PRINT "ILLEGAL MOVE, TRY AGAIN...": GOTO 100
- WARNING: Statement before GOSUB entry point
+ WARNING: Branch to line before GOSUB start
  TextConstant:"ILLEGAL MOVE, TRY AGAIN..."
  CarriageControl:NL
  LineNumber:100
 140 INPUT "TO WHERE";P
  Variable:P -> _
 150 IF B(P)=0 THEN 120
+ WARNING: Branch to line before GOSUB start
  Variable:P -> _
  Variable:B(_) -> _
  NumericConstant:0
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:120
 153 IF B(P)=-7 THEN 120
+ WARNING: Branch to line before GOSUB start
  Variable:P -> _
  Variable:B(_) -> _
  NumericConstant:7
@@ -257,6 +257,7 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:120
 156 IF Z=P THEN 100
+ WARNING: Branch to line before GOSUB start
  Variable:Z -> _
  Variable:P -> _
  BinaryOperatorEqual:=(_,_) -> _
@@ -276,8 +277,10 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:180
 170 GOTO 120
+ WARNING: Branch to line before GOSUB start
  LineNumber:120
 180 IF (ABS(Z-P)-2)*(ABS(Z-P)-18)<>0 THEN 120
+ WARNING: Branch to line before GOSUB start
  Variable:Z -> _
  Variable:P -> _
  BinaryOperatorMinus:-(_,_) -> _
@@ -301,6 +304,7 @@
 210 GOSUB 1500
  LineNumber:1500
 220 GOTO 100
+ WARNING: Branch to line before GOSUB start
  LineNumber:100
 500 REM *** PRINT BOARD
  Remark:*** PRINT BOARD
@@ -426,6 +430,7 @@
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:1080
 1045 IF T(X,Y+1)=0 THEN 120
+ WARNING: Branch to line before GOSUB start
  Variable:X -> _
  Variable:Y -> _
  NumericConstant:1
@@ -467,6 +472,7 @@
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:1130
 1085 IF T(X+1,Y)=0 THEN 120
+ WARNING: Branch to line before GOSUB start
  Variable:X -> _
  NumericConstant:1
  BinaryOperatorPlus:+(_,_) -> _
@@ -507,6 +513,7 @@
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:1170
 1135 IF T(X,Y-1)=0 THEN 120
+ WARNING: Branch to line before GOSUB start
  Variable:X -> _
  Variable:Y -> _
  NumericConstant:1
@@ -547,6 +554,7 @@
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:1220
 1175 IF T(X-1,Y)=0 THEN 120
+ WARNING: Branch to line before GOSUB start
  Variable:X -> _
  NumericConstant:1
  BinaryOperatorMinus:-(_,_) -> _
@@ -742,6 +750,7 @@
  BinaryOperatorEqual:=($,$) -> _
  LineNumber:2000
 1618 RESTORE: GOTO 28
+ WARNING: Branch to line before GOSUB start
  
  LineNumber:28
 1620 STOP
