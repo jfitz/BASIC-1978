@@ -222,67 +222,82 @@ G(810) (0 1) 810 REM --NO SPLITTING OR BLACKJACKS ALLOWED
 G(810) (0 3) 820 H1 = 5
   Origs: 810:auto
   Dests: 830:auto
-G(950) (0 2) 830 GOSUB 1410
-    WARNING: Inconsistent GOSUB target (950, 810)
+G(950,810) (0 2) 830 GOSUB 1410
+    WARNING: Multiple GOSUB entry points
   Origs: 820:auto, 1010:goto
   Dests: 840:auto, 1420:gosub
-G(950) (0 3) 840 H1 = 3
+G(950,810) (0 3) 840 H1 = 3
+    WARNING: Multiple GOSUB entry points
   Origs: 830:auto
   Dests: 850:auto
-G(950) (2 4) 850 ON H GOTO 950, 930
+G(950,810) (2 4) 850 ON H GOTO 950, 930
+    WARNING: Multiple GOSUB entry points
   Origs: 840:auto
   Dests: 860:auto, 930:goto, 950:goto
-G(860) (0 3) 860 GOSUB 100
-    WARNING: Inconsistent GOSUB target (860, 950)
+G(860,950,810) (0 3) 860 GOSUB 100
     WARNING: Inconsistent GOSUB origins
+    WARNING: Multiple GOSUB entry points
   Origs: 850:auto, 2530:gosub
   Dests: 110:gosub, 870:auto
-G(860) (0 4) 870 B(I) = B(I) * 2
+G(860,950,810) (0 4) 870 B(I) = B(I) * 2
+    WARNING: Multiple GOSUB entry points
   Origs: 860:auto
   Dests: 880:auto
-G(860) (0 2) 880 PRINT "RECEIVED A";
+G(860,950,810) (0 2) 880 PRINT "RECEIVED A";
+    WARNING: Multiple GOSUB entry points
   Origs: 870:auto
   Dests: 890:auto
-G(860) (0 3) 890 GOSUB 700
+G(860,950,810) (0 3) 890 GOSUB 700
+    WARNING: Multiple GOSUB entry points
   Origs: 880:auto
   Dests: 710:gosub, 900:auto
-G(860) (0 2) 900 GOSUB 1100
+G(860,950,810) (0 2) 900 GOSUB 1100
+    WARNING: Multiple GOSUB entry points
   Origs: 890:auto
   Dests: 910:auto, 1110:gosub
-G(860) (1 5) 910 IF Q > 0 THEN GOSUB 1300
+G(860,950,810) (1 5) 910 IF Q > 0 THEN GOSUB 1300
+    WARNING: Multiple GOSUB entry points
   Origs: 900:auto
   Dests: 920:auto, 1310:gosub
-G(860) (0 1) 920 RETURN
+G(860,950,810) (0 1) 920 RETURN
+    WARNING: Multiple GOSUB entry points
   Origs: 910:auto
   Dests: 
-G(950) (0 2) 930 GOSUB 1320
+G(950,810) (0 2) 930 GOSUB 1320
+    WARNING: Multiple GOSUB entry points
   Origs: 850:goto
   Dests: 940:auto, 1320:gosub
-G(950) (0 1) 940 RETURN
+G(950,810) (0 1) 940 RETURN
+    WARNING: Multiple GOSUB entry points
   Origs: 930:auto, 990:ifthen
   Dests: 
-G(950) (0 3) 950 GOSUB 100
+G(950,810) (0 3) 950 GOSUB 100
     WARNING: Inconsistent GOSUB origins
+    WARNING: Multiple GOSUB entry points
   Origs: 850:goto, 2580:gosub
   Dests: 110:gosub, 960:auto
-G(950) (0 2) 960 PRINT "RECEIVED A";
+G(950,810) (0 2) 960 PRINT "RECEIVED A";
+    WARNING: Multiple GOSUB entry points
   Origs: 950:auto
   Dests: 970:auto
-G(950) (0 3) 970 GOSUB 700
+G(950,810) (0 3) 970 GOSUB 700
+    WARNING: Multiple GOSUB entry points
   Origs: 960:auto
   Dests: 710:gosub, 980:auto
-G(950) (0 2) 980 GOSUB 1100
+G(950,810) (0 2) 980 GOSUB 1100
+    WARNING: Multiple GOSUB entry points
   Origs: 970:auto
   Dests: 990:auto, 1110:gosub
-G(950) (1 5) 990 IF Q < 0 THEN 940
-    WARNING: Branch to line before GOSUB start
+G(950,810) (1 5) 990 IF Q < 0 THEN 940
+    WARNING: Multiple GOSUB entry points
   Origs: 980:auto
   Dests: 940:ifthen, 1000:auto
-G(950) (0 2) 1000 PRINT "HIT";
+G(950,810) (0 2) 1000 PRINT "HIT";
+     WARNING: Multiple GOSUB entry points
   Origs: 990:auto
   Dests: 1010:auto
-G(950) (0 3) 1010 GOTO 830
-     WARNING: Branch to line before GOSUB start
+G(950,810) (0 3) 1010 GOTO 830
+     WARNING: Multiple GOSUB entry points
   Origs: 1000:auto
   Dests: 830:goto
 (0 1) 1100 REM --SUBROUTINE TO ADD A CARD TO ROW I

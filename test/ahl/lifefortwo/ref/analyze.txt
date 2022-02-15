@@ -70,52 +70,64 @@ G(50) F(J,K) (0 1) 60 NEXT K
 G(50) F(J) (0 1) 65 NEXT J
   Origs: 50:fornext, 60:auto
   Dests: 90:auto
-G(90) (0 3) 90 K = 0
-G(90) (0 3)    M2 = 0
-G(90) (0 3)    M3 = 0
-   WARNING: Inconsistent GOSUB target (90, 50)
+G(90,50) (0 3) 90 K = 0
+G(90,50) (0 3)    M2 = 0
+G(90,50) (0 3)    M3 = 0
    WARNING: Inconsistent GOSUB origins
+   WARNING: Multiple GOSUB entry points
   Origs: 65:auto, 559:gosub
   Dests: 99:auto
-G(90) F(J) (1 3) 99 FOR J = 0 TO 6
-G(90) F(J) (0 2)    PRINT
+G(90,50) F(J) (1 3) 99 FOR J = 0 TO 6
+G(90,50) F(J) (0 2)    PRINT
+   WARNING: Multiple GOSUB entry points
   Origs: 90:auto
   Dests: 100:auto, 125:fornext
-G(90) F(J,K) (1 3) 100 FOR K = 0 TO 6
+G(90,50) F(J,K) (1 3) 100 FOR K = 0 TO 6
+    WARNING: Multiple GOSUB entry points
   Origs: 99:auto
   Dests: 101:fornext, 120:fornext
-G(90) F(J,K) (2 7) 101 IF J <> 0 THEN IF J <> 6 THEN 105
+G(90,50) F(J,K) (2 7) 101 IF J <> 0 THEN IF J <> 6 THEN 105
+    WARNING: Multiple GOSUB entry points
   Origs: 100:fornext
   Dests: 102:auto, 105:ifthen
-G(90) F(J,K) (1 5) 102 IF K = 6 THEN PRINT 0;
-G(90) F(J,K) (0 2)     GOTO 125
+G(90,50) F(J,K) (1 5) 102 IF K = 6 THEN PRINT 0;
+G(90,50) F(J,K) (0 2)     GOTO 125
+    WARNING: Multiple GOSUB entry points
   Origs: 101:auto
   Dests: 103:auto, 125:goto
-G(90) F(J,K) (0 2) 103 PRINT K;
-G(90) F(J,K) (0 2)     GOTO 120
+G(90,50) F(J,K) (0 2) 103 PRINT K;
+G(90,50) F(J,K) (0 2)     GOTO 120
+    WARNING: Multiple GOSUB entry points
   Origs: 102:auto
   Dests: 120:goto
-G(90) F(J,K) (2 7) 105 IF K <> 0 THEN IF K <> 6 THEN 110
+G(90,50) F(J,K) (2 7) 105 IF K <> 0 THEN IF K <> 6 THEN 110
+    WARNING: Multiple GOSUB entry points
   Origs: 101:ifthen
   Dests: 106:auto, 110:ifthen
-G(90) F(J,K) (1 5) 106 IF J = 6 THEN PRINT 0
-G(90) F(J,K) (0 2)     GOTO 126
+G(90,50) F(J,K) (1 5) 106 IF J = 6 THEN PRINT 0
+G(90,50) F(J,K) (0 2)     GOTO 126
+    WARNING: Multiple GOSUB entry points
   Origs: 105:auto
   Dests: 107:auto, 126:goto
-G(90) F(J,K) (0 2) 107 PRINT J;
-G(90) F(J,K) (0 2)     GOTO 120
+G(90,50) F(J,K) (0 2) 107 PRINT J;
+G(90,50) F(J,K) (0 2)     GOTO 120
+    WARNING: Multiple GOSUB entry points
   Origs: 106:auto
   Dests: 120:goto
-G(90) F(J,K) (0 2) 110 GOSUB 300
+G(90,50) F(J,K) (0 2) 110 GOSUB 300
+    WARNING: Multiple GOSUB entry points
   Origs: 105:ifthen
   Dests: 120:auto, 300:gosub
-G(90) F(J,K) (0 1) 120 NEXT K
+G(90,50) F(J,K) (0 1) 120 NEXT K
+    WARNING: Multiple GOSUB entry points
   Origs: 100:fornext, 103:goto, 107:goto, 110:auto
   Dests: 125:auto
-G(90) F(J,K) (0 1) 125 NEXT J
+G(90,50) F(J,K) (0 1) 125 NEXT J
+    WARNING: Multiple GOSUB entry points
   Origs: 99:fornext, 102:goto, 120:auto
   Dests: 126:auto
-G(90) F(J,K) (0 1) 126 RETURN
+G(90,50) F(J,K) (0 1) 126 RETURN
+    WARNING: Multiple GOSUB entry points
   Origs: 106:goto, 125:auto
   Dests: 
 (0 3) 200 B = 1

@@ -654,32 +654,36 @@ G(1810) (0 1) 1835 RETURN
 G(1850) (0 2) 1850 PRINT
   Origs: 1100:gosub, 1170:gosub, 1195:gosub, 1742:gosub
   Dests: 1860:auto
-G(1860) F(X) (1 3) 1860 FOR X = 1 TO 72
-G(1860) F(X) (0 2)      PRINT "+";
-G(1860) F(X) (0 1)      NEXT X
-G(1860) (0 2)      PRINT
-     WARNING: Inconsistent GOSUB target (1860, 1850)
+G(1860,1850) F(X) (1 3) 1860 FOR X = 1 TO 72
+G(1860,1850) F(X) (0 2)      PRINT "+";
+G(1860,1850) F(X) (0 1)      NEXT X
+G(1860,1850) (0 2)      PRINT
      WARNING: Inconsistent GOSUB origins
+     WARNING: Multiple GOSUB entry points
   Origs: 770:gosub, 1850:auto
   Dests: 1870:auto
-G(1860) (0 1) 1870 RETURN
+G(1860,1850) (0 1) 1870 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 1860:auto
   Dests: 
 G(1900) (0 4) 1900 PRINT TAB(D(T) + 5 + P / 2); M$(T)
   Origs: 810:gosub, 910:gosub, 1750:gosub
   Dests: 1910:auto
-G(1910) (0 2) 1910 PRINT "TEAM 1 [0   10   20   30   40   50   60   70   80   90";
-     WARNING: Inconsistent GOSUB target (1910, 1900)
+G(1910,1900) (0 2) 1910 PRINT "TEAM 1 [0   10   20   30   40   50   60   70   80   90";
      WARNING: Inconsistent GOSUB origins
+     WARNING: Multiple GOSUB entry points
   Origs: 725:gosub, 1900:auto
   Dests: 1915:auto
-G(1910) (0 2) 1915 PRINT "   100] TEAM 2"
+G(1910,1900) (0 2) 1915 PRINT "   100] TEAM 2"
+     WARNING: Multiple GOSUB entry points
   Origs: 1910:auto
   Dests: 1920:auto
-G(1910) (0 2) 1920 PRINT
+G(1910,1900) (0 2) 1920 PRINT
+     WARNING: Multiple GOSUB entry points
   Origs: 1915:auto
   Dests: 1930:auto
-G(1910) (0 1) 1930 RETURN
+G(1910,1900) (0 1) 1930 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 1920:auto
   Dests: 
 G(1810) (0 1) 2000 END

@@ -580,13 +580,13 @@ G(4010) (0 3) 4110 GOTO 4040
 G(6000) (0 4) 6000 S(0) = S(0) + 2
   Origs: 3080:gosub, 3540:gosub, 5130:gosub
   Dests: 6010:auto
-G(6000) (0 5) 6010 PRINT "SCORE: "; S(1); "TO"; S(0)
-     WARNING: Inconsistent GOSUB target (6000, 6010)
-     WARNING: Inconsistent GOSUB target (6000, 6010)
+G(6000,6010) (0 5) 6010 PRINT "SCORE: "; S(1); "TO"; S(0)
      WARNING: Inconsistent GOSUB origins
+     WARNING: Multiple GOSUB entry points
   Origs: 4040:gosub, 6000:auto, 7010:gosub
   Dests: 6020:auto
-G(6000) (0 1) 6020 RETURN
+G(6000,6010) (0 1) 6020 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 6010:auto
   Dests: 
 G(7000) (0 4) 7000 S(1) = S(1) + 2

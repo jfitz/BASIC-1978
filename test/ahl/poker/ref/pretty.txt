@@ -180,19 +180,30 @@
 1720 GOTO 1670
 1730 Z = Z + 1
 1740 A(Z) = 100 * INT(4 * RND(1)) + INT(100 * RND(1))
- WARNING: Inconsistent GOSUB target (1740, 1730)
  WARNING: Inconsistent GOSUB origins
+ WARNING: Multiple GOSUB entry points
 1750 IF INT(A(Z) / 100) > 3 THEN 1740
+ WARNING: Multiple GOSUB entry points
 1760 IF A(Z) - 100 * INT(A(Z) / 100) > 12 THEN 1740
+ WARNING: Multiple GOSUB entry points
 1765 IF Z = 1 THEN 1840
+ WARNING: Multiple GOSUB entry points
 1770 FOR K = 1 TO Z - 1
+ WARNING: Multiple GOSUB entry points
 1780 IF A(Z) = A(K) THEN 1740
+ WARNING: Multiple GOSUB entry points
 1790 NEXT K
+ WARNING: Multiple GOSUB entry points
 1800 IF Z <= 10 THEN 1840
+ WARNING: Multiple GOSUB entry points
 1810 N = A(U)
+ WARNING: Multiple GOSUB entry points
 1820 A(U) = A(Z)
+ WARNING: Multiple GOSUB entry points
 1830 A(Z) = N
+ WARNING: Multiple GOSUB entry points
 1840 RETURN
+ WARNING: Multiple GOSUB entry points
 1850 FOR Z = N TO N + 4
 1860 PRINT Z "--  ";
 1870 GOSUB 1950
@@ -205,30 +216,48 @@
 1940 RETURN
 1950 K = FNB(A(Z))
 1960 IF K <> 9 THEN 1980
- WARNING: Inconsistent GOSUB target (1950, 1960)
  WARNING: Inconsistent GOSUB origins
+ WARNING: Multiple GOSUB entry points
 1970 PRINT "JACK";
+ WARNING: Multiple GOSUB entry points
 1980 IF K <> 10 THEN 2000
+ WARNING: Multiple GOSUB entry points
 1990 PRINT "QUEEN";
+ WARNING: Multiple GOSUB entry points
 2000 IF K <> 11 THEN 2020
+ WARNING: Multiple GOSUB entry points
 2010 PRINT "KING";
+ WARNING: Multiple GOSUB entry points
 2020 IF K <> 12 THEN 2040
+ WARNING: Multiple GOSUB entry points
 2030 PRINT "ACE";
+ WARNING: Multiple GOSUB entry points
 2040 IF K >= 9 THEN 2060
+ WARNING: Multiple GOSUB entry points
 2050 PRINT K + 2;
+ WARNING: Multiple GOSUB entry points
 2060 RETURN
+ WARNING: Multiple GOSUB entry points
 2070 K = INT(A(Z) / 100)
 2080 IF K <> 0 THEN 2100
- WARNING: Inconsistent GOSUB target (2070, 2080)
  WARNING: Inconsistent GOSUB origins
+ WARNING: Multiple GOSUB entry points
 2090 PRINT " CLUBS",
+ WARNING: Multiple GOSUB entry points
 2100 IF K <> 1 THEN 2120
+ WARNING: Multiple GOSUB entry points
 2110 PRINT " DIAMONDS",
+ WARNING: Multiple GOSUB entry points
 2120 IF K <> 2 THEN 2140
+ WARNING: Multiple GOSUB entry points
 2130 PRINT " HEARTS",
+ WARNING: Multiple GOSUB entry points
 2140 IF K <> 3 THEN 2160
+ WARNING: Multiple GOSUB entry points
 2150 PRINT " SPADES",
+ WARNING: Multiple GOSUB entry points
 2160 RETURN
+ WARNING: Multiple GOSUB entry points
 2170 U = 0
 2180 FOR Z = N TO N + 4
 2190 B(Z) = FNB(A(Z))
@@ -319,54 +348,90 @@
 3040 RETURN
 3050 G = 0
 3060 PRINT : PRINT "WHAT IS YOUR BET";
- WARNING: Inconsistent GOSUB target (3050, 3060)
  WARNING: Inconsistent GOSUB origins
+ WARNING: Multiple GOSUB entry points
 3070 INPUT T
+ WARNING: Multiple GOSUB entry points
 3080 IF T - INT(T) = 0 THEN 3140
+ WARNING: Multiple GOSUB entry points
 3090 IF K <> 0 THEN 3120
+ WARNING: Multiple GOSUB entry points
 3100 IF G <> 0 THEN 3120
+ WARNING: Multiple GOSUB entry points
 3110 IF T = .5 THEN 3410
+ WARNING: Multiple GOSUB entry points
 3120 PRINT "NO SMALL CHANGE, PLEASE."
+ WARNING: Multiple GOSUB entry points
 3130 GOTO 3060
+ WARNING: Multiple GOSUB entry points
 3140 IF S - G - T >= 0 THEN 3170
+ WARNING: Multiple GOSUB entry points
 3150 GOSUB 3830
+ WARNING: Multiple GOSUB entry points
 3160 GOTO 3060
+ WARNING: Multiple GOSUB entry points
 3170 IF T <> 0 THEN 3200
+ WARNING: Multiple GOSUB entry points
 3180 I = 3
+ WARNING: Multiple GOSUB entry points
 3190 GOTO 3380
+ WARNING: Multiple GOSUB entry points
 3200 IF G + T >= K THEN 3230
+ WARNING: Multiple GOSUB entry points
 3210 PRINT "IF YOU CAN'T SEE MY BET, THEN FOLD."
+ WARNING: Multiple GOSUB entry points
 3220 GOTO 3060
+ WARNING: Multiple GOSUB entry points
 3230 G = G + T
+ WARNING: Multiple GOSUB entry points
 3240 IF G = K THEN 3380
+ WARNING: Multiple GOSUB entry points
 3250 IF Z <> 1 THEN 3420
+ WARNING: Multiple GOSUB entry points
 3260 IF G > 5 THEN 3300
+ WARNING: Multiple GOSUB entry points
 3270 IF Z >= 2 THEN 3350
+ WARNING: Multiple GOSUB entry points
 3280 V = 5
+ WARNING: Multiple GOSUB entry points
 3290 GOTO 3420
+ WARNING: Multiple GOSUB entry points
 3300 IF Z = 1 THEN 3320
+ WARNING: Multiple GOSUB entry points
 3310 IF T <= 25 THEN 3350
+ WARNING: Multiple GOSUB entry points
 3320 I = 4
+ WARNING: Multiple GOSUB entry points
 3330 PRINT "I FOLD."
+ WARNING: Multiple GOSUB entry points
 3340 RETURN
+ WARNING: Multiple GOSUB entry points
 3350 IF Z = 2 THEN 3430
+ WARNING: Multiple GOSUB entry points
 3360 PRINT "I'LL SEE YOU."
- WARNING: Inconsistent GOSUB target (3480, 3050)
- WARNING: Inconsistent GOSUB target (3480, 3050)
+ WARNING: Multiple GOSUB entry points
 3370 K = G
+ WARNING: Multiple GOSUB entry points
 3380 S = S - G
- WARNING: Inconsistent GOSUB target (3480, 3050)
- WARNING: Inconsistent GOSUB target (3480, 3050)
+ WARNING: Multiple GOSUB entry points
 3390 C = C - K
+ WARNING: Multiple GOSUB entry points
 3400 P = P + G + K
+ WARNING: Multiple GOSUB entry points
 3410 RETURN
- WARNING: Inconsistent GOSUB target (3480, 3050)
+ WARNING: Multiple GOSUB entry points
 3420 IF G > 3 * Z THEN 3350
+ WARNING: Multiple GOSUB entry points
 3430 V = G - K + FNA(0)
+ WARNING: Multiple GOSUB entry points
 3440 GOSUB 3480
+ WARNING: Multiple GOSUB entry points
 3450 PRINT "I'LL SEE YOU, AND RAISE YOU" V
+ WARNING: Multiple GOSUB entry points
 3460 K = G + V
+ WARNING: Multiple GOSUB entry points
 3470 GOTO 3060
+ WARNING: Multiple GOSUB entry points
 3480 IF C - G - V >= 0 THEN 3660
 3490 IF G <> 0 THEN 3520
 3500 V = C
@@ -388,8 +453,9 @@
 3650 O = O / 3
 3660 RETURN
 3670 PRINT "I'M BUSTED.  CONGRATULATIONS!"
- WARNING: Inconsistent GOSUB target (3480, 650)
+ WARNING: Multiple GOSUB entry points
 3680 STOP
+ WARNING: Multiple GOSUB entry points
  WARNING: Terminating statement in GOSUB
 3690 PRINT H$; I$;
 3700 IF H$ <> "A FLUS" THEN 3750
@@ -433,6 +499,6 @@
 4080 RETURN
 4090 PRINT "YOUR WAD IS SHOT.  SO LONG, SUCKER!"
 4100 END
- WARNING: Inconsistent GOSUB target (3830, 650)
+ WARNING: Multiple GOSUB entry points
  WARNING: Terminating statement in GOSUB
 

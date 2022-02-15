@@ -645,18 +645,21 @@ G(5010) (0 1) 5010 REM     PRINT SCORE
 G(5010) (0 2) 5030 PRINT "SCORE:"
   Origs: 5010:auto
   Dests: 5040:auto
-G(5010) (0 3) 5040 PRINT "     COMPUTER "; C
-     WARNING: Inconsistent GOSUB target (5010, 5040)
+G(5010,5040) (0 3) 5040 PRINT "     COMPUTER "; C
      WARNING: Inconsistent GOSUB origins
+     WARNING: Multiple GOSUB entry points
   Origs: 1180:gosub, 5030:auto
   Dests: 5050:auto
-G(5010) (0 3) 5050 PRINT "     HUMAN    "; H
+G(5010,5040) (0 3) 5050 PRINT "     HUMAN    "; H
+     WARNING: Multiple GOSUB entry points
   Origs: 5040:auto
   Dests: 5060:auto
-G(5010) (0 2) 5060 PRINT
+G(5010,5040) (0 2) 5060 PRINT
+     WARNING: Multiple GOSUB entry points
   Origs: 5050:auto
   Dests: 5070:auto
-G(5010) (0 1) 5070 RETURN
+G(5010,5040) (0 1) 5070 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 5060:auto
   Dests: 
 (0 1) 5500 REM

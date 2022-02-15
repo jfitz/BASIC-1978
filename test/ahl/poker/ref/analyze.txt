@@ -558,42 +558,53 @@ G(650) (0 3) 1720 GOTO 1670
 G(1730) (0 4) 1730 Z = Z + 1
   Origs: 930:gosub, 1010:gosub
   Dests: 1740:auto
-G(1740) F(K) (0 7) 1740 A(Z) = 100 * INT(4 * RND(1)) + INT(100 * RND(1))
-     WARNING: Inconsistent GOSUB target (1740, 1730)
+G(1740,1730) F(K) (0 7) 1740 A(Z) = 100 * INT(4 * RND(1)) + INT(100 * RND(1))
      WARNING: Inconsistent GOSUB origins
+     WARNING: Multiple GOSUB entry points
   Origs: 240:gosub, 1730:auto, 1750:ifthen, 1760:ifthen, 1780:ifthen
   Dests: 1750:auto
-G(1740) F(K) (1 6) 1750 IF INT(A(Z) / 100) > 3 THEN 1740
+G(1740,1730) F(K) (1 6) 1750 IF INT(A(Z) / 100) > 3 THEN 1740
+     WARNING: Multiple GOSUB entry points
   Origs: 1740:auto
   Dests: 1740:ifthen, 1760:auto
-G(1740) F(K) (1 9) 1760 IF A(Z) - 100 * INT(A(Z) / 100) > 12 THEN 1740
+G(1740,1730) F(K) (1 9) 1760 IF A(Z) - 100 * INT(A(Z) / 100) > 12 THEN 1740
+     WARNING: Multiple GOSUB entry points
   Origs: 1750:auto
   Dests: 1740:ifthen, 1765:auto
-G(1740) F(K) (1 4) 1765 IF Z = 1 THEN 1840
+G(1740,1730) F(K) (1 4) 1765 IF Z = 1 THEN 1840
+     WARNING: Multiple GOSUB entry points
   Origs: 1760:auto
   Dests: 1770:auto, 1840:ifthen
-G(1740) F(K) (1 4) 1770 FOR K = 1 TO Z - 1
+G(1740,1730) F(K) (1 4) 1770 FOR K = 1 TO Z - 1
+     WARNING: Multiple GOSUB entry points
   Origs: 1765:auto
   Dests: 1780:fornext, 1790:fornext
-G(1740) F(K) (1 5) 1780 IF A(Z) = A(K) THEN 1740
+G(1740,1730) F(K) (1 5) 1780 IF A(Z) = A(K) THEN 1740
+     WARNING: Multiple GOSUB entry points
   Origs: 1770:fornext
   Dests: 1740:ifthen, 1790:auto
-G(1740) F(K) (0 1) 1790 NEXT K
+G(1740,1730) F(K) (0 1) 1790 NEXT K
+     WARNING: Multiple GOSUB entry points
   Origs: 1770:fornext, 1780:auto
   Dests: 1800:auto
-G(1740) (1 4) 1800 IF Z <= 10 THEN 1840
+G(1740,1730) (1 4) 1800 IF Z <= 10 THEN 1840
+     WARNING: Multiple GOSUB entry points
   Origs: 1790:auto
   Dests: 1810:auto, 1840:ifthen
-G(1740) (0 3) 1810 N = A(U)
+G(1740,1730) (0 3) 1810 N = A(U)
+     WARNING: Multiple GOSUB entry points
   Origs: 1800:auto
   Dests: 1820:auto
-G(1740) (0 3) 1820 A(U) = A(Z)
+G(1740,1730) (0 3) 1820 A(U) = A(Z)
+     WARNING: Multiple GOSUB entry points
   Origs: 1810:auto
   Dests: 1830:auto
-G(1740) (0 3) 1830 A(Z) = N
+G(1740,1730) (0 3) 1830 A(Z) = N
+     WARNING: Multiple GOSUB entry points
   Origs: 1820:auto
   Dests: 1840:auto
-G(1740) F(K) (0 1) 1840 RETURN
+G(1740,1730) F(K) (0 1) 1840 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 1765:ifthen, 1800:ifthen, 1830:auto
   Dests: 
 G(1850) F(Z) (1 4) 1850 FOR Z = N TO N + 4
@@ -629,71 +640,89 @@ G(1850) (0 1) 1940 RETURN
 G(1950) (0 5) 1950 K = FNB(A(Z))
   Origs: 1870:gosub
   Dests: 30:function, 1960:auto
-G(1950) (1 4) 1960 IF K <> 9 THEN 1980
-     WARNING: Inconsistent GOSUB target (1950, 1960)
+G(1950,1960) (1 4) 1960 IF K <> 9 THEN 1980
      WARNING: Inconsistent GOSUB origins
+     WARNING: Multiple GOSUB entry points
   Origs: 1950:auto, 3760:gosub
   Dests: 1970:auto, 1980:ifthen
-G(1950) (0 2) 1970 PRINT "JACK";
+G(1950,1960) (0 2) 1970 PRINT "JACK";
+     WARNING: Multiple GOSUB entry points
   Origs: 1960:auto
   Dests: 1980:auto
-G(1950) (1 4) 1980 IF K <> 10 THEN 2000
+G(1950,1960) (1 4) 1980 IF K <> 10 THEN 2000
+     WARNING: Multiple GOSUB entry points
   Origs: 1960:ifthen, 1970:auto
   Dests: 1990:auto, 2000:ifthen
-G(1950) (0 2) 1990 PRINT "QUEEN";
+G(1950,1960) (0 2) 1990 PRINT "QUEEN";
+     WARNING: Multiple GOSUB entry points
   Origs: 1980:auto
   Dests: 2000:auto
-G(1950) (1 4) 2000 IF K <> 11 THEN 2020
+G(1950,1960) (1 4) 2000 IF K <> 11 THEN 2020
+     WARNING: Multiple GOSUB entry points
   Origs: 1980:ifthen, 1990:auto
   Dests: 2010:auto, 2020:ifthen
-G(1950) (0 2) 2010 PRINT "KING";
+G(1950,1960) (0 2) 2010 PRINT "KING";
+     WARNING: Multiple GOSUB entry points
   Origs: 2000:auto
   Dests: 2020:auto
-G(1950) (1 4) 2020 IF K <> 12 THEN 2040
+G(1950,1960) (1 4) 2020 IF K <> 12 THEN 2040
+     WARNING: Multiple GOSUB entry points
   Origs: 2000:ifthen, 2010:auto
   Dests: 2030:auto, 2040:ifthen
-G(1950) (0 2) 2030 PRINT "ACE";
+G(1950,1960) (0 2) 2030 PRINT "ACE";
+     WARNING: Multiple GOSUB entry points
   Origs: 2020:auto
   Dests: 2040:auto
-G(1950) (1 4) 2040 IF K >= 9 THEN 2060
+G(1950,1960) (1 4) 2040 IF K >= 9 THEN 2060
+     WARNING: Multiple GOSUB entry points
   Origs: 2020:ifthen, 2030:auto
   Dests: 2050:auto, 2060:ifthen
-G(1950) (0 3) 2050 PRINT K + 2;
+G(1950,1960) (0 3) 2050 PRINT K + 2;
+     WARNING: Multiple GOSUB entry points
   Origs: 2040:auto
   Dests: 2060:auto
-G(1950) (0 1) 2060 RETURN
+G(1950,1960) (0 1) 2060 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 2040:ifthen, 2050:auto
   Dests: 
 G(2070) (0 4) 2070 K = INT(A(Z) / 100)
   Origs: 1890:gosub
   Dests: 2080:auto
-G(2070) (1 4) 2080 IF K <> 0 THEN 2100
-     WARNING: Inconsistent GOSUB target (2070, 2080)
+G(2070,2080) (1 4) 2080 IF K <> 0 THEN 2100
      WARNING: Inconsistent GOSUB origins
+     WARNING: Multiple GOSUB entry points
   Origs: 2070:auto, 3720:gosub
   Dests: 2090:auto, 2100:ifthen
-G(2070) (0 2) 2090 PRINT " CLUBS",
+G(2070,2080) (0 2) 2090 PRINT " CLUBS",
+     WARNING: Multiple GOSUB entry points
   Origs: 2080:auto
   Dests: 2100:auto
-G(2070) (1 4) 2100 IF K <> 1 THEN 2120
+G(2070,2080) (1 4) 2100 IF K <> 1 THEN 2120
+     WARNING: Multiple GOSUB entry points
   Origs: 2080:ifthen, 2090:auto
   Dests: 2110:auto, 2120:ifthen
-G(2070) (0 2) 2110 PRINT " DIAMONDS",
+G(2070,2080) (0 2) 2110 PRINT " DIAMONDS",
+     WARNING: Multiple GOSUB entry points
   Origs: 2100:auto
   Dests: 2120:auto
-G(2070) (1 4) 2120 IF K <> 2 THEN 2140
+G(2070,2080) (1 4) 2120 IF K <> 2 THEN 2140
+     WARNING: Multiple GOSUB entry points
   Origs: 2100:ifthen, 2110:auto
   Dests: 2130:auto, 2140:ifthen
-G(2070) (0 2) 2130 PRINT " HEARTS",
+G(2070,2080) (0 2) 2130 PRINT " HEARTS",
+     WARNING: Multiple GOSUB entry points
   Origs: 2120:auto
   Dests: 2140:auto
-G(2070) (1 4) 2140 IF K <> 3 THEN 2160
+G(2070,2080) (1 4) 2140 IF K <> 3 THEN 2160
+     WARNING: Multiple GOSUB entry points
   Origs: 2120:ifthen, 2130:auto
   Dests: 2150:auto, 2160:ifthen
-G(2070) (0 2) 2150 PRINT " SPADES",
+G(2070,2080) (0 2) 2150 PRINT " SPADES",
+     WARNING: Multiple GOSUB entry points
   Origs: 2140:auto
   Dests: 2160:auto
-G(2070) (0 1) 2160 RETURN
+G(2070,2080) (0 1) 2160 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 2140:ifthen, 2150:auto
   Dests: 
 G(2170) (0 3) 2170 U = 0
@@ -963,138 +992,174 @@ G(2760) (0 1) 3040 RETURN
 G(3050) (0 3) 3050 G = 0
   Origs: 620:gosub, 1340:gosub
   Dests: 3060:auto
-G(3050) (0 2) 3060 PRINT
-G(3050) (0 2)      PRINT "WHAT IS YOUR BET";
-     WARNING: Inconsistent GOSUB target (3050, 3060)
+G(3050,3060) (0 2) 3060 PRINT
+G(3050,3060) (0 2)      PRINT "WHAT IS YOUR BET";
      WARNING: Inconsistent GOSUB origins
+     WARNING: Multiple GOSUB entry points
   Origs: 1440:gosub, 3050:auto, 3130:goto, 3160:goto, 3220:goto, 3470:goto
   Dests: 3070:auto
-G(3050) (1 2) 3070 INPUT T
+G(3050,3060) (1 2) 3070 INPUT T
+     WARNING: Multiple GOSUB entry points
   Origs: 3060:auto
   Dests: 3080:auto
-G(3050) (1 6) 3080 IF T - INT(T) = 0 THEN 3140
+G(3050,3060) (1 6) 3080 IF T - INT(T) = 0 THEN 3140
+     WARNING: Multiple GOSUB entry points
   Origs: 3070:auto
   Dests: 3090:auto, 3140:ifthen
-G(3050) (1 4) 3090 IF K <> 0 THEN 3120
+G(3050,3060) (1 4) 3090 IF K <> 0 THEN 3120
+     WARNING: Multiple GOSUB entry points
   Origs: 3080:auto
   Dests: 3100:auto, 3120:ifthen
-G(3050) (1 4) 3100 IF G <> 0 THEN 3120
+G(3050,3060) (1 4) 3100 IF G <> 0 THEN 3120
+     WARNING: Multiple GOSUB entry points
   Origs: 3090:auto
   Dests: 3110:auto, 3120:ifthen
-G(3050) (1 4) 3110 IF T = .5 THEN 3410
+G(3050,3060) (1 4) 3110 IF T = .5 THEN 3410
+     WARNING: Multiple GOSUB entry points
   Origs: 3100:auto
   Dests: 3120:auto, 3410:ifthen
-G(3050) (0 2) 3120 PRINT "NO SMALL CHANGE, PLEASE."
+G(3050,3060) (0 2) 3120 PRINT "NO SMALL CHANGE, PLEASE."
+     WARNING: Multiple GOSUB entry points
   Origs: 3090:ifthen, 3100:ifthen, 3110:auto
   Dests: 3130:auto
-G(3050) (0 3) 3130 GOTO 3060
+G(3050,3060) (0 3) 3130 GOTO 3060
+     WARNING: Multiple GOSUB entry points
   Origs: 3120:auto
   Dests: 3060:goto
-G(3050) (1 6) 3140 IF S - G - T >= 0 THEN 3170
+G(3050,3060) (1 6) 3140 IF S - G - T >= 0 THEN 3170
+     WARNING: Multiple GOSUB entry points
   Origs: 3080:ifthen
   Dests: 3150:auto, 3170:ifthen
-G(3050) (0 2) 3150 GOSUB 3830
+G(3050,3060) (0 2) 3150 GOSUB 3830
+     WARNING: Multiple GOSUB entry points
   Origs: 3140:auto
   Dests: 3160:auto, 3830:gosub
-G(3050) (0 3) 3160 GOTO 3060
+G(3050,3060) (0 3) 3160 GOTO 3060
+     WARNING: Multiple GOSUB entry points
   Origs: 3150:auto
   Dests: 3060:goto
-G(3050) (1 4) 3170 IF T <> 0 THEN 3200
+G(3050,3060) (1 4) 3170 IF T <> 0 THEN 3200
+     WARNING: Multiple GOSUB entry points
   Origs: 3140:ifthen
   Dests: 3180:auto, 3200:ifthen
-G(3050) (0 3) 3180 I = 3
+G(3050,3060) (0 3) 3180 I = 3
+     WARNING: Multiple GOSUB entry points
   Origs: 3170:auto
   Dests: 3190:auto
-G(3050) (0 2) 3190 GOTO 3380
+G(3050,3060) (0 2) 3190 GOTO 3380
+     WARNING: Multiple GOSUB entry points
   Origs: 3180:auto
   Dests: 3380:goto
-G(3050) (1 5) 3200 IF G + T >= K THEN 3230
+G(3050,3060) (1 5) 3200 IF G + T >= K THEN 3230
+     WARNING: Multiple GOSUB entry points
   Origs: 3170:ifthen
   Dests: 3210:auto, 3230:ifthen
-G(3050) (0 2) 3210 PRINT "IF YOU CAN'T SEE MY BET, THEN FOLD."
+G(3050,3060) (0 2) 3210 PRINT "IF YOU CAN'T SEE MY BET, THEN FOLD."
+     WARNING: Multiple GOSUB entry points
   Origs: 3200:auto
   Dests: 3220:auto
-G(3050) (0 3) 3220 GOTO 3060
+G(3050,3060) (0 3) 3220 GOTO 3060
+     WARNING: Multiple GOSUB entry points
   Origs: 3210:auto
   Dests: 3060:goto
-G(3050) (0 4) 3230 G = G + T
+G(3050,3060) (0 4) 3230 G = G + T
+     WARNING: Multiple GOSUB entry points
   Origs: 3200:ifthen
   Dests: 3240:auto
-G(3050) (1 4) 3240 IF G = K THEN 3380
+G(3050,3060) (1 4) 3240 IF G = K THEN 3380
+     WARNING: Multiple GOSUB entry points
   Origs: 3230:auto
   Dests: 3250:auto, 3380:ifthen
-G(3050) (1 4) 3250 IF Z <> 1 THEN 3420
+G(3050,3060) (1 4) 3250 IF Z <> 1 THEN 3420
+     WARNING: Multiple GOSUB entry points
   Origs: 3240:auto
   Dests: 3260:auto, 3420:ifthen
-G(3050) (1 4) 3260 IF G > 5 THEN 3300
+G(3050,3060) (1 4) 3260 IF G > 5 THEN 3300
+     WARNING: Multiple GOSUB entry points
   Origs: 3250:auto
   Dests: 3270:auto, 3300:ifthen
-G(3050) (1 4) 3270 IF Z >= 2 THEN 3350
+G(3050,3060) (1 4) 3270 IF Z >= 2 THEN 3350
+     WARNING: Multiple GOSUB entry points
   Origs: 3260:auto
   Dests: 3280:auto, 3350:ifthen
-G(3050) (0 3) 3280 V = 5
+G(3050,3060) (0 3) 3280 V = 5
+     WARNING: Multiple GOSUB entry points
   Origs: 3270:auto
   Dests: 3290:auto
-G(3050) (0 2) 3290 GOTO 3420
+G(3050,3060) (0 2) 3290 GOTO 3420
+     WARNING: Multiple GOSUB entry points
   Origs: 3280:auto
   Dests: 3420:goto
-G(3050) (1 4) 3300 IF Z = 1 THEN 3320
+G(3050,3060) (1 4) 3300 IF Z = 1 THEN 3320
+     WARNING: Multiple GOSUB entry points
   Origs: 3260:ifthen
   Dests: 3310:auto, 3320:ifthen
-G(3050) (1 4) 3310 IF T <= 25 THEN 3350
+G(3050,3060) (1 4) 3310 IF T <= 25 THEN 3350
+     WARNING: Multiple GOSUB entry points
   Origs: 3300:auto
   Dests: 3320:auto, 3350:ifthen
-G(3050) (0 3) 3320 I = 4
+G(3050,3060) (0 3) 3320 I = 4
+     WARNING: Multiple GOSUB entry points
   Origs: 3300:ifthen, 3310:auto
   Dests: 3330:auto
-G(3050) (0 2) 3330 PRINT "I FOLD."
+G(3050,3060) (0 2) 3330 PRINT "I FOLD."
+     WARNING: Multiple GOSUB entry points
   Origs: 3320:auto
   Dests: 3340:auto
-G(3050) (0 1) 3340 RETURN
+G(3050,3060) (0 1) 3340 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 3330:auto
   Dests: 
-G(3050) (1 4) 3350 IF Z = 2 THEN 3430
+G(3050,3060) (1 4) 3350 IF Z = 2 THEN 3430
+     WARNING: Multiple GOSUB entry points
   Origs: 3270:ifthen, 3310:ifthen, 3420:ifthen
   Dests: 3360:auto, 3430:ifthen
-G(3480) (0 2) 3360 PRINT "I'LL SEE YOU."
-     WARNING: Inconsistent GOSUB target (3480, 3050)
-     WARNING: Inconsistent GOSUB target (3480, 3050)
+G(3480,3050,3060) (0 2) 3360 PRINT "I'LL SEE YOU."
+     WARNING: Multiple GOSUB entry points
   Origs: 3350:auto, 3520:ifthen
   Dests: 3370:auto
-G(3480) (0 3) 3370 K = G
+G(3480,3050,3060) (0 3) 3370 K = G
+     WARNING: Multiple GOSUB entry points
   Origs: 3360:auto
   Dests: 3380:auto
-G(3480) (0 4) 3380 S = S - G
-     WARNING: Inconsistent GOSUB target (3480, 3050)
-     WARNING: Inconsistent GOSUB target (3480, 3050)
+G(3480,3050,3060) (0 4) 3380 S = S - G
+     WARNING: Multiple GOSUB entry points
   Origs: 3190:goto, 3240:ifthen, 3370:auto
   Dests: 3390:auto
-G(3480) (0 4) 3390 C = C - K
+G(3480,3050,3060) (0 4) 3390 C = C - K
+     WARNING: Multiple GOSUB entry points
   Origs: 3380:auto
   Dests: 3400:auto
-G(3480) (0 5) 3400 P = P + G + K
+G(3480,3050,3060) (0 5) 3400 P = P + G + K
+     WARNING: Multiple GOSUB entry points
   Origs: 3390:auto
   Dests: 3410:auto
-G(3480) (0 1) 3410 RETURN
-     WARNING: Inconsistent GOSUB target (3480, 3050)
+G(3480,3050,3060) (0 1) 3410 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 3110:ifthen, 3400:auto
   Dests: 
-G(3050) (1 7) 3420 IF G > 3 * Z THEN 3350
+G(3050,3060) (1 7) 3420 IF G > 3 * Z THEN 3350
+     WARNING: Multiple GOSUB entry points
   Origs: 3250:ifthen, 3290:goto
   Dests: 3350:ifthen, 3430:auto
-G(3050) (0 7) 3430 V = G - K + FNA(0)
+G(3050,3060) (0 7) 3430 V = G - K + FNA(0)
+     WARNING: Multiple GOSUB entry points
   Origs: 3350:ifthen, 3420:auto
   Dests: 20:function, 3440:auto
-G(3050) (0 2) 3440 GOSUB 3480
+G(3050,3060) (0 2) 3440 GOSUB 3480
+     WARNING: Multiple GOSUB entry points
   Origs: 3430:auto
   Dests: 3450:auto, 3480:gosub
-G(3050) (0 3) 3450 PRINT "I'LL SEE YOU, AND RAISE YOU" V
+G(3050,3060) (0 3) 3450 PRINT "I'LL SEE YOU, AND RAISE YOU" V
+     WARNING: Multiple GOSUB entry points
   Origs: 3440:auto
   Dests: 3460:auto
-G(3050) (0 4) 3460 K = G + V
+G(3050,3060) (0 4) 3460 K = G + V
+     WARNING: Multiple GOSUB entry points
   Origs: 3450:auto
   Dests: 3470:auto
-G(3050) (0 3) 3470 GOTO 3060
+G(3050,3060) (0 3) 3470 GOTO 3060
+     WARNING: Multiple GOSUB entry points
   Origs: 3460:auto
   Dests: 3060:goto
 G(3480) (1 6) 3480 IF C - G - V >= 0 THEN 3660
@@ -1155,11 +1220,12 @@ G(3480) (0 4) 3650 O = O / 3
 G(3480) (0 1) 3660 RETURN
   Origs: 3480:ifthen, 3650:auto
   Dests: 
-G(3480) (0 2) 3670 PRINT "I'M BUSTED.  CONGRATULATIONS!"
-     WARNING: Inconsistent GOSUB target (3480, 650)
+G(3480,650) (0 2) 3670 PRINT "I'M BUSTED.  CONGRATULATIONS!"
+     WARNING: Multiple GOSUB entry points
   Origs: 150:ifthen, 3600:ifthen, 3630:ifthen
   Dests: 3680:auto
-G(3480) (0 1) 3680 STOP
+G(3480,650) (0 1) 3680 STOP
+     WARNING: Multiple GOSUB entry points
      WARNING: Terminating statement in GOSUB
   Origs: 3670:auto
   Dests: :stop
@@ -1286,8 +1352,8 @@ G(3830) (0 1) 4080 RETURN
 G(3830) (0 2) 4090 PRINT "YOUR WAD IS SHOT.  SO LONG, SUCKER!"
   Origs: 3970:ifthen
   Dests: 4100:auto
-G(3830) (0 1) 4100 END
-     WARNING: Inconsistent GOSUB target (3830, 650)
+G(3830,650) (0 1) 4100 END
+     WARNING: Multiple GOSUB entry points
      WARNING: Terminating statement in GOSUB
   Origs: 730:ifthen, 4090:auto
   Dests: :stop

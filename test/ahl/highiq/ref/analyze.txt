@@ -155,54 +155,67 @@ G(1505) F(W) (0 1)    NEXT W
 G(1505) (0 4) 86 B(41) = -3
   Origs: 83:auto
   Dests: 100:auto
-G(1005) F(X,Y) (1 2) 100 INPUT "MOVE WHICH PIECE"; Z
-    WARNING: Inconsistent GOSUB target (1005, 1505)
+G(1005,1505) F(X,Y) (1 2) 100 INPUT "MOVE WHICH PIECE"; Z
+    WARNING: Multiple GOSUB entry points
   Origs: 86:auto, 120:goto, 156:ifthen, 220:goto
   Dests: 110:auto
-G(1005) F(X,Y) (1 6) 110 IF B(Z) = -7 THEN 140
+G(1005,1505) F(X,Y) (1 6) 110 IF B(Z) = -7 THEN 140
+    WARNING: Multiple GOSUB entry points
   Origs: 100:auto
   Dests: 120:auto, 140:ifthen
-G(1005) F(X,Y) (0 2) 120 PRINT "ILLEGAL MOVE, TRY AGAIN..."
-G(1005) F(X,Y) (0 3)     GOTO 100
+G(1005,1505) F(X,Y) (0 2) 120 PRINT "ILLEGAL MOVE, TRY AGAIN..."
+G(1005,1505) F(X,Y) (0 3)     GOTO 100
+    WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 110:auto, 150:ifthen, 153:ifthen, 170:goto, 180:ifthen, 1045:ifthen, 1085:ifthen, 1135:ifthen, 1175:ifthen
   Dests: 100:goto
-G(1005) F(X,Y) (1 2) 140 INPUT "TO WHERE"; P
+G(1005,1505) F(X,Y) (1 2) 140 INPUT "TO WHERE"; P
+    WARNING: Multiple GOSUB entry points
   Origs: 110:ifthen
   Dests: 150:auto
-G(1005) F(X,Y) (1 5) 150 IF B(P) = 0 THEN 120
+G(1005,1505) F(X,Y) (1 5) 150 IF B(P) = 0 THEN 120
+    WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 140:auto
   Dests: 120:ifthen, 153:auto
-G(1005) F(X,Y) (1 7) 153 IF B(P) = -7 THEN 120
+G(1005,1505) F(X,Y) (1 7) 153 IF B(P) = -7 THEN 120
+    WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 150:auto
   Dests: 120:ifthen, 156:auto
-G(1005) F(X,Y) (1 5) 156 IF Z = P THEN 100
+G(1005,1505) F(X,Y) (1 5) 156 IF Z = P THEN 100
+    WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 153:auto
   Dests: 100:ifthen, 160:auto
-G(1005) F(X,Y) (1 7) 160 IF ((Z + P) / 2) = INT((Z + P) / 2) THEN 180
+G(1005,1505) F(X,Y) (1 7) 160 IF ((Z + P) / 2) = INT((Z + P) / 2) THEN 180
+    WARNING: Multiple GOSUB entry points
   Origs: 156:auto
   Dests: 170:auto, 180:ifthen
-G(1005) F(X,Y) (0 3) 170 GOTO 120
+G(1005,1505) F(X,Y) (0 3) 170 GOTO 120
+    WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 160:auto
   Dests: 120:goto
-G(1005) F(X,Y) (1 11) 180 IF (ABS(Z - P) - 2) * (ABS(Z - P) - 18) <> 0 THEN 120
+G(1005,1505) F(X,Y) (1 11) 180 IF (ABS(Z - P) - 2) * (ABS(Z - P) - 18) <> 0 THEN 120
+    WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 160:ifthen
   Dests: 120:ifthen, 190:auto
-G(1005) F(X,Y) (0 2) 190 GOSUB 1000
+G(1005,1505) F(X,Y) (0 2) 190 GOSUB 1000
+    WARNING: Multiple GOSUB entry points
   Origs: 180:auto
   Dests: 200:auto, 1005:gosub
-G(1005) F(X,Y) (0 2) 200 GOSUB 500
+G(1005,1505) F(X,Y) (0 2) 200 GOSUB 500
+    WARNING: Multiple GOSUB entry points
   Origs: 190:auto
   Dests: 210:auto, 510:gosub
-G(1005) F(X,Y) (0 2) 210 GOSUB 1500
+G(1005,1505) F(X,Y) (0 2) 210 GOSUB 1500
+    WARNING: Multiple GOSUB entry points
   Origs: 200:auto
   Dests: 220:auto, 1505:gosub
-G(1005) F(X,Y) (0 3) 220 GOTO 100
+G(1005,1505) F(X,Y) (0 3) 220 GOTO 100
+    WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 210:auto
   Dests: 100:goto

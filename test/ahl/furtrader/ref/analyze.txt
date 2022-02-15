@@ -479,15 +479,17 @@ G(1320) (0 1) 1322 RETURN
 G(1400) (0 2) 1400 PRINT "DO YOU WANT TO TRADE AT ANOTHER FORT?"
   Origs: 1125:gosub, 1141:gosub, 1152:gosub
   Dests: 1402:auto
-G(1402) (0 2) 1402 PRINT "ANSWER YES OR NO",
-     WARNING: Inconsistent GOSUB target (1402, 1400)
+G(1402,1400) (0 2) 1402 PRINT "ANSWER YES OR NO",
      WARNING: Inconsistent GOSUB origins
+     WARNING: Multiple GOSUB entry points
   Origs: 18:gosub, 1400:auto
   Dests: 1403:auto
-G(1402) (1 2) 1403 INPUT B$
+G(1402,1400) (1 2) 1403 INPUT B$
+     WARNING: Multiple GOSUB entry points
   Origs: 1402:auto
   Dests: 1404:auto
-G(1402) (0 1) 1404 RETURN
+G(1402,1400) (0 1) 1404 RETURN
+     WARNING: Multiple GOSUB entry points
   Origs: 1403:auto
   Dests: 
 F(J) (0 2) 1410 PRINT

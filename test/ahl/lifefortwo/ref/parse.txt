@@ -105,8 +105,8 @@
 65 NEXT J
  Variable:J -> _
 90 K=0: M2=0: M3=0
- WARNING: Inconsistent GOSUB target (90, 50)
  WARNING: Inconsistent GOSUB origins
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:0
  AssignmentOperator:= =_ -> _
@@ -117,15 +117,18 @@
  NumericConstant:0
  AssignmentOperator:= =_ -> _
 99 FOR J=0 TO 6: PRINT
+ WARNING: Multiple GOSUB entry points
  control: Variable:J -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:6"]
  CarriageControl:NL
 100 FOR K=0 TO 6
+ WARNING: Multiple GOSUB entry points
  control: Variable:K -> _
  start:   ["NumericConstant:0"]
  end:     ["NumericConstant:6"]
 101 IF J<>0 THEN IF J<>6 THEN 105
+ WARNING: Multiple GOSUB entry points
  Variable:J -> _
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
@@ -134,6 +137,7 @@
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:105
 102 IF K=6 THEN PRINT 0;: GOTO 125
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:6
  BinaryOperatorEqual:=(_,_) -> _
@@ -141,10 +145,12 @@
  CarriageControl:;
  LineNumber:125
 103 PRINT K;: GOTO 120
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  CarriageControl:;
  LineNumber:120
 105 IF K<>0 THEN IF K<>6 THEN 110
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
@@ -153,6 +159,7 @@
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:110
 106 IF J=6 THEN PRINT 0: GOTO 126
+ WARNING: Multiple GOSUB entry points
  Variable:J -> _
  NumericConstant:6
  BinaryOperatorEqual:=(_,_) -> _
@@ -160,16 +167,21 @@
  CarriageControl:NL
  LineNumber:126
 107 PRINT J;: GOTO 120
+ WARNING: Multiple GOSUB entry points
  Variable:J -> _
  CarriageControl:;
  LineNumber:120
 110 GOSUB 300
+ WARNING: Multiple GOSUB entry points
  LineNumber:300
 120 NEXT K
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
 125 NEXT J
+ WARNING: Multiple GOSUB entry points
  Variable:J -> _
 126 RETURN
+ WARNING: Multiple GOSUB entry points
  
 200 B=1: IF N(J,K)>999 THEN B=10
  Variable:B -> _

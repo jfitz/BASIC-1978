@@ -698,8 +698,8 @@
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 1740 A(Z)=100*INT(4*RND(1))+INT(100*RND(1))
- WARNING: Inconsistent GOSUB target (1740, 1730)
  WARNING: Inconsistent GOSUB origins
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  Variable:A(_) -> _
  NumericConstant:100
@@ -717,6 +717,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 1750 IF INT(A(Z)/100)>3 THEN 1740
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  Variable:A(_) -> _
  NumericConstant:100
@@ -726,6 +727,7 @@
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:1740
 1760 IF A(Z)-100*INT(A(Z)/100)>12 THEN 1740
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  Variable:A(_) -> _
  NumericConstant:100
@@ -740,15 +742,18 @@
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:1740
 1765 IF Z=1 THEN 1840
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:1840
 1770 FOR K=1 TO Z-1
+ WARNING: Multiple GOSUB entry points
  control: Variable:K -> _
  start:   ["NumericConstant:1"]
  end:     ["Variable:Z -> _", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) -> _"]
 1780 IF A(Z)=A(K) THEN 1740
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  Variable:A(_) -> _
  Variable:K -> _
@@ -756,29 +761,35 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:1740
 1790 NEXT K
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
 1800 IF Z<=10 THEN 1840
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  NumericConstant:10
  BinaryOperatorLessEqual:<=(_,_) -> _
  LineNumber:1840
 1810 N=A(U)
+ WARNING: Multiple GOSUB entry points
  Variable:N -> _
  Variable:U -> _
  Variable:A(_) -> _
  AssignmentOperator:= _ -> _
 1820 A(U)=A(Z)
+ WARNING: Multiple GOSUB entry points
  Variable:U -> _
  Variable:A(_) -> _
  Variable:Z -> _
  Variable:A(_) -> _
  AssignmentOperator:= _ -> _
 1830 A(Z)=N
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  Variable:A(_) -> _
  Variable:N -> _
  AssignmentOperator:= _ -> _
 1840 RETURN
+ WARNING: Multiple GOSUB entry points
  
 1850 FOR Z=N TO N+4
  control: Variable:Z -> _
@@ -821,50 +832,60 @@
  UserFunction:FNB(_) -> _
  AssignmentOperator:= _ -> _
 1960 IF K<>9 THEN 1980
- WARNING: Inconsistent GOSUB target (1950, 1960)
  WARNING: Inconsistent GOSUB origins
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:9
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:1980
 1970 PRINT "JACK";
+ WARNING: Multiple GOSUB entry points
  TextConstant:"JACK"
  CarriageControl:;
 1980 IF K<>10 THEN 2000
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:10
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:2000
 1990 PRINT "QUEEN";
+ WARNING: Multiple GOSUB entry points
  TextConstant:"QUEEN"
  CarriageControl:;
 2000 IF K<>11 THEN 2020
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:11
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:2020
 2010 PRINT "KING";
+ WARNING: Multiple GOSUB entry points
  TextConstant:"KING"
  CarriageControl:;
 2020 IF K<>12 THEN 2040
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:12
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:2040
 2030 PRINT "ACE";
+ WARNING: Multiple GOSUB entry points
  TextConstant:"ACE"
  CarriageControl:;
 2040 IF K>=9 THEN 2060
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:9
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:2060
 2050 PRINT K+2;
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:2
  BinaryOperatorPlus:+(_,_) -> _
  CarriageControl:;
 2060 RETURN
+ WARNING: Multiple GOSUB entry points
  
 2070 K=INT(A(Z)/100)
  Variable:K -> _
@@ -875,40 +896,48 @@
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
 2080 IF K<>0 THEN 2100
- WARNING: Inconsistent GOSUB target (2070, 2080)
  WARNING: Inconsistent GOSUB origins
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:2100
 2090 PRINT " CLUBS",
+ WARNING: Multiple GOSUB entry points
  TextConstant:" CLUBS"
  CarriageControl:,
 2100 IF K<>1 THEN 2120
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:1
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:2120
 2110 PRINT " DIAMONDS",
+ WARNING: Multiple GOSUB entry points
  TextConstant:" DIAMONDS"
  CarriageControl:,
 2120 IF K<>2 THEN 2140
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:2
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:2140
 2130 PRINT " HEARTS",
+ WARNING: Multiple GOSUB entry points
  TextConstant:" HEARTS"
  CarriageControl:,
 2140 IF K<>3 THEN 2160
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:3
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:2160
 2150 PRINT " SPADES",
+ WARNING: Multiple GOSUB entry points
  TextConstant:" SPADES"
  CarriageControl:,
 2160 RETURN
+ WARNING: Multiple GOSUB entry points
  
 2170 U=0
  Variable:U -> _
@@ -1332,14 +1361,16 @@
  NumericConstant:0
  AssignmentOperator:= =_ -> _
 3060 PRINT:PRINT "WHAT IS YOUR BET";
- WARNING: Inconsistent GOSUB target (3050, 3060)
  WARNING: Inconsistent GOSUB origins
+ WARNING: Multiple GOSUB entry points
  CarriageControl:NL
  TextConstant:"WHAT IS YOUR BET"
  CarriageControl:;
 3070 INPUT T
+ WARNING: Multiple GOSUB entry points
  Variable:T -> _
 3080 IF T-INT(T)=0 THEN 3140
+ WARNING: Multiple GOSUB entry points
  Variable:T -> _
  Variable:T -> _
  FunctionInt:INT(_) -> _
@@ -1348,26 +1379,32 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:3140
 3090 IF K<>0 THEN 3120
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:3120
 3100 IF G<>0 THEN 3120
+ WARNING: Multiple GOSUB entry points
  Variable:G -> _
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:3120
 3110 IF T=.5 THEN 3410
+ WARNING: Multiple GOSUB entry points
  Variable:T -> _
  NumericConstant:.5
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:3410
 3120 PRINT "NO SMALL CHANGE, PLEASE."
+ WARNING: Multiple GOSUB entry points
  TextConstant:"NO SMALL CHANGE, PLEASE."
  CarriageControl:NL
 3130 GOTO 3060
+ WARNING: Multiple GOSUB entry points
  LineNumber:3060
 3140 IF S-G-T>=0 THEN 3170
+ WARNING: Multiple GOSUB entry points
  Variable:S -> _
  Variable:G -> _
  BinaryOperatorMinus:-(_,_) -> _
@@ -1377,21 +1414,27 @@
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:3170
 3150 GOSUB 3830
+ WARNING: Multiple GOSUB entry points
  LineNumber:3830
 3160 GOTO 3060
+ WARNING: Multiple GOSUB entry points
  LineNumber:3060
 3170 IF T<>0 THEN 3200
+ WARNING: Multiple GOSUB entry points
  Variable:T -> _
  NumericConstant:0
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:3200
 3180 I=3
+ WARNING: Multiple GOSUB entry points
  Variable:I -> _
  NumericConstant:3
  AssignmentOperator:= =_ -> _
 3190 GOTO 3380
+ WARNING: Multiple GOSUB entry points
  LineNumber:3380
 3200 IF G+T>=K THEN 3230
+ WARNING: Multiple GOSUB entry points
  Variable:G -> _
  Variable:T -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -1399,90 +1442,106 @@
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:3230
 3210 PRINT "IF YOU CAN'T SEE MY BET, THEN FOLD."
+ WARNING: Multiple GOSUB entry points
  TextConstant:"IF YOU CAN'T SEE MY BET, THEN FOLD."
  CarriageControl:NL
 3220 GOTO 3060
+ WARNING: Multiple GOSUB entry points
  LineNumber:3060
 3230 G=G+T
+ WARNING: Multiple GOSUB entry points
  Variable:G -> _
  Variable:G -> _
  Variable:T -> _
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 3240 IF G=K THEN 3380
+ WARNING: Multiple GOSUB entry points
  Variable:G -> _
  Variable:K -> _
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:3380
 3250 IF Z<>1 THEN 3420
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  NumericConstant:1
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:3420
 3260 IF G>5 THEN 3300
+ WARNING: Multiple GOSUB entry points
  Variable:G -> _
  NumericConstant:5
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:3300
 3270 IF Z>=2 THEN 3350
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  NumericConstant:2
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:3350
 3280 V=5
+ WARNING: Multiple GOSUB entry points
  Variable:V -> _
  NumericConstant:5
  AssignmentOperator:= =_ -> _
 3290 GOTO 3420
+ WARNING: Multiple GOSUB entry points
  LineNumber:3420
 3300 IF Z=1 THEN 3320
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  NumericConstant:1
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:3320
 3310 IF T<=25 THEN 3350
+ WARNING: Multiple GOSUB entry points
  Variable:T -> _
  NumericConstant:25
  BinaryOperatorLessEqual:<=(_,_) -> _
  LineNumber:3350
 3320 I=4
+ WARNING: Multiple GOSUB entry points
  Variable:I -> _
  NumericConstant:4
  AssignmentOperator:= =_ -> _
 3330 PRINT "I FOLD."
+ WARNING: Multiple GOSUB entry points
  TextConstant:"I FOLD."
  CarriageControl:NL
 3340 RETURN
+ WARNING: Multiple GOSUB entry points
  
 3350 IF Z=2 THEN 3430
+ WARNING: Multiple GOSUB entry points
  Variable:Z -> _
  NumericConstant:2
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:3430
 3360 PRINT "I'LL SEE YOU."
- WARNING: Inconsistent GOSUB target (3480, 3050)
- WARNING: Inconsistent GOSUB target (3480, 3050)
+ WARNING: Multiple GOSUB entry points
  TextConstant:"I'LL SEE YOU."
  CarriageControl:NL
 3370 K=G
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  Variable:G -> _
  AssignmentOperator:= _ -> _
 3380 S=S-G
- WARNING: Inconsistent GOSUB target (3480, 3050)
- WARNING: Inconsistent GOSUB target (3480, 3050)
+ WARNING: Multiple GOSUB entry points
  Variable:S -> _
  Variable:S -> _
  Variable:G -> _
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 3390 C=C-K
+ WARNING: Multiple GOSUB entry points
  Variable:C -> _
  Variable:C -> _
  Variable:K -> _
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 3400 P=P+G+K
+ WARNING: Multiple GOSUB entry points
  Variable:P -> _
  Variable:P -> _
  Variable:G -> _
@@ -1491,9 +1550,10 @@
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 3410 RETURN
- WARNING: Inconsistent GOSUB target (3480, 3050)
+ WARNING: Multiple GOSUB entry points
  
 3420 IF G>3*Z THEN 3350
+ WARNING: Multiple GOSUB entry points
  Variable:G -> _
  NumericConstant:3
  Variable:Z -> _
@@ -1501,6 +1561,7 @@
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:3350
 3430 V=G-K+FNA(0)
+ WARNING: Multiple GOSUB entry points
  Variable:V -> _
  Variable:G -> _
  Variable:K -> _
@@ -1510,19 +1571,23 @@
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 3440 GOSUB 3480
+ WARNING: Multiple GOSUB entry points
  LineNumber:3480
 3450 PRINT "I'LL SEE YOU, AND RAISE YOU"V
+ WARNING: Multiple GOSUB entry points
  TextConstant:"I'LL SEE YOU, AND RAISE YOU"
  CarriageControl:
  Variable:V -> _
  CarriageControl:NL
 3460 K=G+V
+ WARNING: Multiple GOSUB entry points
  Variable:K -> _
  Variable:G -> _
  Variable:V -> _
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 3470 GOTO 3060
+ WARNING: Multiple GOSUB entry points
  LineNumber:3060
 3480 IF C-G-V>=0 THEN 3660
  Variable:C -> _
@@ -1625,10 +1690,11 @@
 3660 RETURN
  
 3670 PRINT "I'M BUSTED.  CONGRATULATIONS!"
- WARNING: Inconsistent GOSUB target (3480, 650)
+ WARNING: Multiple GOSUB entry points
  TextConstant:"I'M BUSTED.  CONGRATULATIONS!"
  CarriageControl:NL
 3680 STOP
+ WARNING: Multiple GOSUB entry points
  WARNING: Terminating statement in GOSUB
  
 3690 PRINT H$;I$;
@@ -1802,7 +1868,7 @@
  TextConstant:"YOUR WAD IS SHOT.  SO LONG, SUCKER!"
  CarriageControl:NL
 4100 END
- WARNING: Inconsistent GOSUB target (3830, 650)
+ WARNING: Multiple GOSUB entry points
  WARNING: Terminating statement in GOSUB
  
 
