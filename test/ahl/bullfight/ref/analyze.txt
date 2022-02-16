@@ -398,7 +398,7 @@ F(I) (0 1) 467 NEXT I
   Dests: 1340:auto
 (1 4) 1340 IF D(4) <> 0 THEN 1390
   Origs: 1330:auto
-  Dests: 1350:auto, 1395:ifthen
+  Dests: 1350:auto, 1400:ifthen
 (0 2) 1350 PRINT "THE CROWD BOOS FOR TEN MINUTES.  IF YOU EVER DARE TO SHOW"
   Origs: 1340:auto
   Dests: 1360:auto
@@ -415,10 +415,10 @@ FNC(_) (0 6) 1390 DEF FNC(Q) = FND(Q) * RND(1)
   Origs: 
   Dests: 
 FND(_) (0 20) 1395 DEF FND(Q) = (4.5 + L / 6 - (D(1) + D(2)) * 2.5 + 4 * D(4) + 2 * D(5) - D(3) ^ 2 / 120 - A)
-  Origs: 1340:ifthen
+  Origs: 
   Dests: 
 (1 4) 1400 IF D(4) <> 2 THEN 1430
-  Origs: 
+  Origs: 1340:ifthen
   Dests: 1410:auto, 1430:ifthen
 (0 2) 1410 PRINT "THE CROWD CHEERS WILDLY!"
   Origs: 1400:auto
@@ -611,22 +611,5 @@ G(1930) (0 1) 2020 RETURN
 
 Unreachable code:
 
-1400: IF D(4) <> 2 THEN 1430
-1410: PRINT "THE CROWD CHEERS WILDLY!"
-1420: GOTO 1450
-1430: IF D(5) <> 2 THEN 1450
-1440: PRINT "THE CROWD CHEERS!"
-1440.1: PRINT
-1450: PRINT "THE CROWD AWARDS YOU"
-1460: IF FNC(Q) < 2.4 THEN 1570
-1470: IF FNC(Q) < 4.9 THEN 1550
-1480: IF FNC(Q) < 7.4 THEN 1520
-1500: PRINT "OLE!  YOU ARE 'MUY HOMBRE'!! OLE!  OLE!"
-1510: GOTO 1580
-1520: PRINT "BOTH EARS OF THE BULL!"
-1530: PRINT "OLE!"
-1540: GOTO 1580
-1550: PRINT "ONE EAR OF THE BULL."
-1560: GOTO 1580
-1570: PRINT "NOTHING AT ALL."
+All executable lines are reachable.
 

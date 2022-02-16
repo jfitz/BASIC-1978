@@ -56,7 +56,7 @@ Halstead complexity:
   Dests: 1060:auto
 (1 5) 1060 IF LEFT$(Y$, 1) = "N" THEN 1550
   Origs: 1050:auto
-  Dests: 1070:auto, 1560:ifthen
+  Dests: 1070:auto, 1580:ifthen
 (0 2) 1070 PRINT
   Origs: 1060:auto
   Dests: 1080:auto
@@ -205,13 +205,13 @@ Halstead complexity:
   Origs: 
   Dests: 
 (0 1) 1560 REM -TYPE OF BET(NUMBER) ODDS
-  Origs: 1060:ifthen
-  Dests: 1580:auto
+  Origs: 
+  Dests: 
 (0 1) 1570 REM  DON'T NEED TO DIMENSION STRINGS
   Origs: 
   Dests: 
 (0 5) 1580 DIM B(100), C(100), T(100), X(38)
-  Origs: 1540:auto, 1560:auto
+  Origs: 1060:ifthen, 1540:auto
   Dests: 1590:auto
 (0 2) 1590 DIM A(50)
   Origs: 1580:auto
@@ -656,7 +656,7 @@ F(I1) (0 2) 3020 PRINT
   Dests: 3030:auto
 F(I1) (0 2) 3030 GOSUB 3230
   Origs: 3020:auto
-  Dests: 3040:auto, 3240:gosub
+  Dests: 3040:auto, 3310:gosub
 F(I1) (0 4) 3040 PRINT TAB(40); M$
   Origs: 3030:auto
   Dests: 3050:auto
@@ -719,9 +719,9 @@ F(I1) (0 2) 3220 GOTO 3420
 (0 1) 3230 REM
   Origs: 
   Dests: 
-G(3240) (0 1) 3240 REM     THIS ROUTINE RETURNS THE CURRENT DATE IN M$
-  Origs: 3030:gosub
-  Dests: 3310:auto
+(0 1) 3240 REM     THIS ROUTINE RETURNS THE CURRENT DATE IN M$
+  Origs: 
+  Dests: 
 (0 1) 3250 REM     IF YOU HAVE SYSTEM FUNCTIONS TO HANDLE THIS
   Origs: 
   Dests: 
@@ -740,10 +740,10 @@ G(3240) (0 1) 3240 REM     THIS ROUTINE RETURNS THE CURRENT DATE IN M$
 (0 1) 3300 REM     THE DATE IS RETURNED IN VARIABLE M$
   Origs: 
   Dests: 
-G(3240) (0 5) 3310 M$ = D$ + ", " + E$
-  Origs: 3240:auto
+G(3310) (0 5) 3310 M$ = D$ + ", " + E$
+  Origs: 3030:gosub
   Dests: 3320:auto
-G(3240) (0 1) 3320 RETURN
+G(3310) (0 1) 3320 RETURN
   Origs: 3310:auto
   Dests: 
 F(I1) (0 1) 3420 END

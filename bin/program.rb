@@ -739,7 +739,8 @@ class Program
 
     statements = line.statements
     stmt = current_line_stmt.statement
-    part_of_user_function = statements[stmt].part_of_user_function
+    statement = statements[stmt]
+    part_of_user_function = statement.part_of_user_function
 
     # find next statement within the current line
     stmt += 1
@@ -792,6 +793,7 @@ class Program
 
     if mod < statement.last_index
       mod += 1
+
       return LineStmtMod.new(line_number, stmt, mod)
     end
 
@@ -800,7 +802,8 @@ class Program
 
     stmt += 1 while
       stmt < statements.size &&
-      statements[stmt].part_of_user_function != part_of_user_function
+      (statements[stmt].executable != :run ||
+      statements[stmt].part_of_user_function != part_of_user_function)
 
     if stmt < statements.size
       start_mod = statements[stmt].start_index
@@ -822,7 +825,8 @@ class Program
 
       stmt += 1 while
         stmt < statements.size &&
-        statements[stmt].part_of_user_function != part_of_user_function
+        (statements[stmt].executable != :run ||
+        statements[stmt].part_of_user_function != part_of_user_function)
 
       if stmt < statements.size
         start_mod = statements[stmt].start_index
@@ -851,6 +855,7 @@ class Program
 
     if mod < statement.last_index
       mod += 1
+
       return LineStmtMod.new(line_number, stmt, mod)
     end
 
@@ -880,8 +885,8 @@ class Program
 
     stmt += 1 while
       stmt < statements.size &&
-      statements[stmt].part_of_user_function != part_of_user_function &&
-      statements[stmt].executable != :run
+      statements[stmt].executable != :run &&
+      statements[stmt].part_of_user_function != part_of_user_function
 
     if stmt < statements.size
       start_mod = statements[stmt].start_index
@@ -904,7 +909,8 @@ class Program
 
       stmt += 1 while
         stmt < statements.size &&
-        statements[stmt].part_of_user_function != part_of_user_function
+        (statements[stmt].executable != :run ||
+        statements[stmt].part_of_user_function != part_of_user_function)
 
       if stmt < statements.size
         start_mod = statements[stmt].start_index

@@ -859,7 +859,7 @@ F(I,Z) (0 4) 2770 LET M4 = M4 + M2
   Dests: 2780:auto
 F(I,Z) (0 2) 2780 GOSUB 3300
   Origs: 2770:auto
-  Dests: 2790:auto, 3310:gosub
+  Dests: 2790:auto, 3330:gosub
 F(I,Z) (0 3) 2790 U = 0
 F(I,Z) (0 3)      U2 = 0
   Origs: 2480:ifthen, 2600:ifthen, 2660:ifthen, 2780:auto
@@ -1029,37 +1029,37 @@ G(3120) F(I) (0 1) 3290 RETURN
 (0 1) 3300 REM LEARN  PRESENT STRATEGY, START FORGETTING OLD ONES
   Origs: 
   Dests: 
-G(3310) (0 1) 3310 REM - PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
-  Origs: 2780:gosub
-  Dests: 3330:auto
+(0 1) 3310 REM - PRESENT STRATEGY OF SOUTH GAINS 3*S, OTHERS LOSE S
+  Origs: 
+  Dests: 
 (0 1) 3320 REM   PROBABILITY POINTS, UNLESS A STRATEGY FALLS BELOW 5%.
   Origs: 
   Dests: 
-G(3310) (0 3) 3330 LET S = 3
-  Origs: 3310:auto
+G(3330) (0 3) 3330 LET S = 3
+  Origs: 2780:gosub
   Dests: 3340:auto
-G(3310) (0 3) 3340 LET S0 = 0
+G(3330) (0 3) 3340 LET S0 = 0
   Origs: 3330:auto
   Dests: 3350:auto
-G(3310) F(I) (1 3) 3350 FOR I = 1 TO 4
+G(3330) F(I) (1 3) 3350 FOR I = 1 TO 4
   Origs: 3340:auto
   Dests: 3360:fornext, 3390:fornext
-G(3310) F(I) (1 4) 3360 IF S(I) <= 5 THEN 3390
+G(3330) F(I) (1 4) 3360 IF S(I) <= 5 THEN 3390
   Origs: 3350:fornext
   Dests: 3370:auto, 3390:ifthen
-G(3310) F(I) (0 4) 3370 LET S(I) = S(I) - S
+G(3330) F(I) (0 4) 3370 LET S(I) = S(I) - S
   Origs: 3360:auto
   Dests: 3380:auto
-G(3310) F(I) (0 4) 3380 LET S0 = S0 + S
+G(3330) F(I) (0 4) 3380 LET S0 = S0 + S
   Origs: 3370:auto
   Dests: 3390:auto
-G(3310) F(I) (0 1) 3390 NEXT I
+G(3330) F(I) (0 1) 3390 NEXT I
   Origs: 3350:fornext, 3360:ifthen, 3380:auto
   Dests: 3400:auto
-G(3310) (0 4) 3400 LET S(Y) = S(Y) + S0
+G(3330) (0 4) 3400 LET S(Y) = S(Y) + S0
   Origs: 3390:auto
   Dests: 3410:auto
-G(3310) (0 1) 3410 RETURN
+G(3330) (0 1) 3410 RETURN
   Origs: 3400:auto
   Dests: 
 (0 1) 3420 REM - HISTORICAL DATA...CAN ADD MORE (STRAT.,ETC) BY INSERTING

@@ -56,7 +56,7 @@ FNA(_) (0 7) 10 DEF FNA(Q) = Q + 11 * (Q >= 22)
   Dests: 
 (0 2) 90 GOTO 1500
   Origs: 30:auto
-  Dests: 1510:goto
+  Dests: 1520:goto
 (0 1) 100 REM --SUBROUTINE TO GET A CARD.  RESULT IS PUT IN X.
   Origs: 
   Dests: 
@@ -109,9 +109,9 @@ G(110) (0 1) 250 RETURN
 (0 1) 300 REM --SUBROUTINE TO EVALUATE HAND I.  TOTAL IS PUT INTO
   Origs: 
   Dests: 
-G(310) (0 1) 310 REM --Q(I). TOTALS HAVE THE FOLLOWING MEANING:
-  Origs: 2290:gosub, 2420:gosub, 2520:gosub, 2560:gosub, 2730:gosub, 2800:gosub, 2910:gosub
-  Dests: 360:auto
+(0 1) 310 REM --Q(I). TOTALS HAVE THE FOLLOWING MEANING:
+  Origs: 
+  Dests: 
 (0 1) 320 REM --  2-10...HARD 2-10
   Origs: 
   Dests: 
@@ -124,25 +124,25 @@ G(310) (0 1) 310 REM --Q(I). TOTALS HAVE THE FOLLOWING MEANING:
 (0 1) 350 REM --  33+....BUSTED
   Origs: 
   Dests: 
-G(310) (0 3) 360 Q = 0
-  Origs: 310:auto
+G(360) (0 3) 360 Q = 0
+  Origs: 2290:gosub, 2420:gosub, 2520:gosub, 2560:gosub, 2730:gosub, 2800:gosub, 2910:gosub
   Dests: 370:auto
-G(310) F(Q2) (1 3) 370 FOR Q2 = 1 TO R(I)
+G(360) F(Q2) (1 3) 370 FOR Q2 = 1 TO R(I)
   Origs: 360:auto
   Dests: 380:fornext, 400:fornext
-G(310) F(Q2) (0 3) 380 X = P(I, Q2)
+G(360) F(Q2) (0 3) 380 X = P(I, Q2)
   Origs: 370:fornext
   Dests: 390:auto
-G(310) F(Q2) (0 2) 390 GOSUB 500
+G(360) F(Q2) (0 2) 390 GOSUB 500
   Origs: 380:auto
   Dests: 400:auto, 510:gosub
-G(310) F(Q2) (0 1) 400 NEXT Q2
+G(360) F(Q2) (0 1) 400 NEXT Q2
   Origs: 370:fornext, 390:auto
   Dests: 410:auto
-G(310) (0 3) 410 Q(I) = Q
+G(360) (0 3) 410 Q(I) = Q
   Origs: 400:auto
   Dests: 420:auto
-G(310) (0 1) 420 RETURN
+G(360) (0 1) 420 RETURN
   Origs: 410:auto
   Dests: 
 (0 1) 500 REM --SUBROUTINE TO ADD CARD X TO TOTAL Q.
@@ -189,16 +189,16 @@ G(510) (0 1) 620 RETURN
 (0 1) 700 REM --CARD PRINTING SUBROUTINE
   Origs: 
   Dests: 
-G(710) (0 1) 710 REM  D$ DEFINED ELSEWHERE
+(0 1) 710 REM  D$ DEFINED ELSEWHERE
+  Origs: 
+  Dests: 
+G(720) (0 3) 720 PRINT MID$(D$, 3 * X - 2, 3);
   Origs: 890:gosub, 970:gosub, 2710:gosub, 2780:gosub, 2980:gosub
-  Dests: 720:auto
-G(710) (0 3) 720 PRINT MID$(D$, 3 * X - 2, 3);
-  Origs: 710:auto
   Dests: 730:auto
-G(710) (0 2) 730 PRINT "  ";
+G(720) (0 2) 730 PRINT "  ";
   Origs: 720:auto
   Dests: 740:auto
-G(710) (0 1) 740 RETURN
+G(720) (0 1) 740 RETURN
   Origs: 730:auto
   Dests: 
 (0 1) 750 REM --ALTERNATIVE PRINTING ROUTINE
@@ -216,87 +216,87 @@ G(760) (0 1) 780 RETURN
 (0 1) 800 REM --SUBROUTINE TO PLAY OUT A HAND.
   Origs: 
   Dests: 
-G(810) (0 1) 810 REM --NO SPLITTING OR BLACKJACKS ALLOWED
+(0 1) 810 REM --NO SPLITTING OR BLACKJACKS ALLOWED
+  Origs: 
+  Dests: 
+G(820) (0 3) 820 H1 = 5
   Origs: 2860:gosub
-  Dests: 820:auto
-G(810) (0 3) 820 H1 = 5
-  Origs: 810:auto
   Dests: 830:auto
-G(950,810) (0 2) 830 GOSUB 1410
+G(950,820) (0 2) 830 GOSUB 1410
     WARNING: Multiple GOSUB entry points
   Origs: 820:auto, 1010:goto
   Dests: 840:auto, 1420:gosub
-G(950,810) (0 3) 840 H1 = 3
+G(950,820) (0 3) 840 H1 = 3
     WARNING: Multiple GOSUB entry points
   Origs: 830:auto
   Dests: 850:auto
-G(950,810) (2 4) 850 ON H GOTO 950, 930
+G(950,820) (2 4) 850 ON H GOTO 950, 930
     WARNING: Multiple GOSUB entry points
   Origs: 840:auto
   Dests: 860:auto, 930:goto, 950:goto
-G(860,950,810) (0 3) 860 GOSUB 100
+G(860,950,820) (0 3) 860 GOSUB 100
     WARNING: Inconsistent GOSUB origins
     WARNING: Multiple GOSUB entry points
   Origs: 850:auto, 2530:gosub
   Dests: 110:gosub, 870:auto
-G(860,950,810) (0 4) 870 B(I) = B(I) * 2
+G(860,950,820) (0 4) 870 B(I) = B(I) * 2
     WARNING: Multiple GOSUB entry points
   Origs: 860:auto
   Dests: 880:auto
-G(860,950,810) (0 2) 880 PRINT "RECEIVED A";
+G(860,950,820) (0 2) 880 PRINT "RECEIVED A";
     WARNING: Multiple GOSUB entry points
   Origs: 870:auto
   Dests: 890:auto
-G(860,950,810) (0 3) 890 GOSUB 700
+G(860,950,820) (0 3) 890 GOSUB 700
     WARNING: Multiple GOSUB entry points
   Origs: 880:auto
-  Dests: 710:gosub, 900:auto
-G(860,950,810) (0 2) 900 GOSUB 1100
+  Dests: 720:gosub, 900:auto
+G(860,950,820) (0 2) 900 GOSUB 1100
     WARNING: Multiple GOSUB entry points
   Origs: 890:auto
   Dests: 910:auto, 1110:gosub
-G(860,950,810) (1 5) 910 IF Q > 0 THEN GOSUB 1300
+G(860,950,820) (1 5) 910 IF Q > 0 THEN GOSUB 1300
     WARNING: Multiple GOSUB entry points
   Origs: 900:auto
   Dests: 920:auto, 1310:gosub
-G(860,950,810) (0 1) 920 RETURN
+G(860,950,820) (0 1) 920 RETURN
     WARNING: Multiple GOSUB entry points
   Origs: 910:auto
   Dests: 
-G(950,810) (0 2) 930 GOSUB 1320
+G(950,820) (0 2) 930 GOSUB 1320
     WARNING: Multiple GOSUB entry points
   Origs: 850:goto
   Dests: 940:auto, 1320:gosub
-G(950,810) (0 1) 940 RETURN
+G(950,820) (0 1) 940 RETURN
     WARNING: Multiple GOSUB entry points
   Origs: 930:auto, 990:ifthen
   Dests: 
-G(950,810) (0 3) 950 GOSUB 100
+G(950,820) (0 3) 950 GOSUB 100
     WARNING: Inconsistent GOSUB origins
     WARNING: Multiple GOSUB entry points
   Origs: 850:goto, 2580:gosub
   Dests: 110:gosub, 960:auto
-G(950,810) (0 2) 960 PRINT "RECEIVED A";
+G(950,820) (0 2) 960 PRINT "RECEIVED A";
     WARNING: Multiple GOSUB entry points
   Origs: 950:auto
   Dests: 970:auto
-G(950,810) (0 3) 970 GOSUB 700
+G(950,820) (0 3) 970 GOSUB 700
     WARNING: Multiple GOSUB entry points
   Origs: 960:auto
-  Dests: 710:gosub, 980:auto
-G(950,810) (0 2) 980 GOSUB 1100
+  Dests: 720:gosub, 980:auto
+G(950,820) (0 2) 980 GOSUB 1100
     WARNING: Multiple GOSUB entry points
   Origs: 970:auto
   Dests: 990:auto, 1110:gosub
-G(950,810) (1 5) 990 IF Q < 0 THEN 940
+G(950,820) (1 5) 990 IF Q < 0 THEN 940
     WARNING: Multiple GOSUB entry points
   Origs: 980:auto
   Dests: 940:ifthen, 1000:auto
-G(950,810) (0 2) 1000 PRINT "HIT";
+G(950,820) (0 2) 1000 PRINT "HIT";
      WARNING: Multiple GOSUB entry points
   Origs: 990:auto
   Dests: 1010:auto
-G(950,810) (0 3) 1010 GOTO 830
+G(950,820) (0 3) 1010 GOTO 830
      WARNING: Multiple GOSUB entry points
   Origs: 1000:auto
   Dests: 830:goto
@@ -405,10 +405,10 @@ G(1420) F(H) (0 1) 1490 RETURN
   Origs: 
   Dests: 
 (0 1) 1510 REM --INITIALIZE
-  Origs: 90:goto
-  Dests: 1520:auto
+  Origs: 
+  Dests: 
 (0 3) 1520 D$ = "  A  2  3  4  5  6  7  8  9 10  J  Q  K"
-  Origs: 1510:auto
+  Origs: 90:goto
   Dests: 1530:auto
 (0 3) 1530 I$ = "H,S,D,C"
   Origs: 1520:auto
@@ -674,13 +674,13 @@ F(I) (1 3) 2280 FOR I = 1 TO D1
   Dests: 2290:fornext, 2300:fornext
 F(I) (0 3) 2290 GOSUB 300
   Origs: 2280:fornext
-  Dests: 310:gosub, 2300:auto
+  Dests: 360:gosub, 2300:auto
 F(I) (0 1) 2300 NEXT I
   Origs: 2280:fornext, 2290:auto
   Dests: 2310:auto
 (0 2) 2310 GOTO 3140
   Origs: 2300:auto
-  Dests: 3150:goto
+  Dests: 3160:goto
 (0 1) 2320 REM --NO DEALER BLACKJACK
   Origs: 
   Dests: 
@@ -714,7 +714,7 @@ F(I) (4 6) 2400 ON H GOTO 2550, 2410, 2510, 2600
   Dests: 
 F(I) (0 3) 2420 GOSUB 300
   Origs: 2400:auto, 2400:goto
-  Dests: 310:gosub, 2430:auto
+  Dests: 360:gosub, 2430:auto
 F(I) (1 4) 2430 IF Q(I) <> 21 THEN 2490
   Origs: 2420:auto
   Dests: 2440:auto, 2490:ifthen
@@ -744,7 +744,7 @@ F(I) (0 2) 2500 GOTO 2900
   Dests: 
 F(I) (0 3) 2520 GOSUB 300
   Origs: 2400:goto
-  Dests: 310:gosub, 2530:auto
+  Dests: 360:gosub, 2530:auto
 F(I) (0 3) 2530 GOSUB 860
   Origs: 2520:auto
   Dests: 860:gosub, 2540:auto
@@ -756,7 +756,7 @@ F(I) (0 2) 2540 GOTO 2900
   Dests: 
 F(I) (0 3) 2560 GOSUB 300
   Origs: 2400:goto
-  Dests: 310:gosub, 2570:auto
+  Dests: 360:gosub, 2570:auto
 F(I) (0 3) 2570 H1 = 3
   Origs: 2560:auto
   Dests: 2580:auto
@@ -809,13 +809,13 @@ F(I) (0 2) 2700 PRINT "FIRST HAND RECEIVES A";
   Dests: 2710:auto
 F(I) (0 3) 2710 GOSUB 700
   Origs: 2700:auto
-  Dests: 710:gosub, 2720:auto
+  Dests: 720:gosub, 2720:auto
 F(I) (0 3) 2720 P(I, 2) = X
   Origs: 2710:auto
   Dests: 2730:auto
 F(I) (0 3) 2730 GOSUB 300
   Origs: 2720:auto
-  Dests: 310:gosub, 2740:auto
+  Dests: 360:gosub, 2740:auto
 F(I) (0 2) 2740 PRINT
   Origs: 2730:auto
   Dests: 2750:auto
@@ -830,13 +830,13 @@ F(I) (0 3) 2770 I = I1
   Dests: 2780:auto
 F(I) (0 3) 2780 GOSUB 700
   Origs: 2770:auto
-  Dests: 710:gosub, 2790:auto
+  Dests: 720:gosub, 2790:auto
 F(I) (0 3) 2790 P(I, 2) = X
   Origs: 2780:auto
   Dests: 2800:auto
 F(I) (0 3) 2800 GOSUB 300
   Origs: 2790:auto
-  Dests: 310:gosub, 2810:auto
+  Dests: 360:gosub, 2810:auto
 F(I) (0 2) 2810 PRINT
   Origs: 2800:auto
   Dests: 2820:auto
@@ -854,7 +854,7 @@ F(I) (0 6) 2850 PRINT "HAND"; 1 - (I > D1);
   Dests: 2860:auto
 F(I) (0 3) 2860 GOSUB 800
   Origs: 2850:auto
-  Dests: 810:gosub, 2870:auto
+  Dests: 820:gosub, 2870:auto
 F(I) (0 4) 2870 I = I + D1
   Origs: 2860:auto
   Dests: 2880:auto
@@ -869,7 +869,7 @@ F(I) (0 1) 2900 NEXT I
   Dests: 2910:auto
 (0 3) 2910 GOSUB 300
   Origs: 2900:auto
-  Dests: 310:gosub, 2930:auto
+  Dests: 360:gosub, 2930:auto
 (0 1) 2920 REM --TEST FOR PLAYING DEALER'S HAND
   Origs: 
   Dests: 
@@ -890,13 +890,13 @@ F(I) (0 1) 2950 NEXT I
   Dests: 2980:auto
 (0 3) 2980 GOSUB 700
   Origs: 2970:auto
-  Dests: 710:gosub, 2990:auto
+  Dests: 720:gosub, 2990:auto
 (0 2) 2990 PRINT "CONCEALED."
   Origs: 2980:auto
   Dests: 3000:auto
 (0 2) 3000 GOTO 3140
   Origs: 2990:auto
-  Dests: 3150:goto
+  Dests: 3160:goto
 F(I) (0 5) 3010 PRINT "DEALER HAS A"; MID$(D$, 3 * P(D1, 2) - 2, 3); " CONCEALED ";
   Origs: 2940:ifthen
   Dests: 3020:auto
@@ -937,7 +937,7 @@ F(I) (0 7) 3100 Q(I) = Q - (Q < 0) / 2
   Dests: 3110:auto
 F(I) (1 4) 3110 IF Q < 0 THEN 3140
   Origs: 3100:auto
-  Dests: 3120:auto, 3150:ifthen
+  Dests: 3120:auto, 3160:ifthen
 F(I) (0 3) 3120 AA = Q
 F(I) (0 2)      GOSUB 3400
   Origs: 3110:auto
@@ -951,11 +951,11 @@ F(I) (0 2) 3130 PRINT
 (0 1) 3140 REM --TALLY THE RESULT
   Origs: 
   Dests: 
-F(I) (0 1) 3150 REM
-  Origs: 2310:goto, 3000:goto, 3110:ifthen
-  Dests: 3160:auto
+(0 1) 3150 REM
+  Origs: 
+  Dests: 
 F(I) (0 3) 3160 Z$ = "LOSES PUSHES WINS "
-  Origs: 3130:auto, 3150:auto
+  Origs: 2310:goto, 3000:goto, 3110:ifthen, 3130:auto
   Dests: 3165:auto
 F(I) (0 2) 3165 PRINT
   Origs: 3160:auto
