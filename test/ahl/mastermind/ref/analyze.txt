@@ -157,12 +157,12 @@ F(R,M) (1 4) 400 IF X$ = "QUIT" THEN 2500
 F(R,M) (1 6) 410 IF LEN(X$) <> P9 THEN PRINT "BAD NUMBER OF POSITIONS."
 F(R,M) (0 3)     GOTO 380
   Origs: 400:auto
-  Dests: 380:goto, 420:auto
-F(R,M) (0 1) 420 REM     UNPACK X$ INTO G$(1-P9)
-  Origs: 410:auto
-  Dests: 430:auto
+  Dests: 380:goto, 430:auto
+(0 1) 420 REM     UNPACK X$ INTO G$(1-P9)
+  Origs: 
+  Dests: 
 F(R,M,X) (1 3) 430 FOR X = 1 TO P9
-  Origs: 420:auto
+  Origs: 410:auto
   Dests: 440:fornext, 490:fornext
 F(R,M,X,Y) (1 3) 440 FOR Y = 1 TO C9
   Origs: 430:fornext
@@ -197,12 +197,12 @@ F(R,M,X) (0 2) 530 GOSUB 4500
   Dests: 540:auto, 4540:gosub
 F(R,M,X) (1 4) 540 IF B = P9 THEN 630
   Origs: 530:auto
-  Dests: 550:auto, 560:auto, 630:ifthen
-F(R,M,X) (0 1) 550 REM     TELL HUMAN RESULTS
-  Origs: 540:auto
-  Dests: 560:auto
+  Dests: 560:auto, 630:ifthen
+(0 1) 550 REM     TELL HUMAN RESULTS
+  Origs: 
+  Dests: 
 F(R,M,X) (0 6) 560 PRINT "YOU HAVE "; B; " BLACKS AND "; W; " WHITES."
-  Origs: 540:auto, 550:auto
+  Origs: 540:auto
   Dests: 580:auto
 (0 1) 570 REM     SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
   Origs: 
@@ -515,12 +515,12 @@ G(3030) (0 1) 3060 RETURN
   Dests: 
 G(3522) (1 4) 3522 IF Q(1) > 0 THEN 3530
   Origs: 350:gosub, 910:gosub, 1020:gosub
-  Dests: 3524:auto, 3526:auto, 3530:ifthen
-G(3522) (0 1) 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
-  Origs: 3522:auto
-  Dests: 3526:auto
+  Dests: 3526:auto, 3530:ifthen
+(0 1) 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
+  Origs: 
+  Dests: 
 G(3522) F(S) (1 3) 3526 FOR S = 1 TO P9
-  Origs: 3522:auto, 3524:auto
+  Origs: 3522:auto
   Dests: 3527:fornext, 3528:fornext
 G(3522) F(S) (0 3) 3527 Q(S) = 1
   Origs: 3526:fornext

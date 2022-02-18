@@ -82,12 +82,12 @@ F(I) (0 1)     NEXT I
   Dests: 360:auto
 (1 4) 360 IF A$ <> "Y" THEN STOP
   Origs: 350:auto
-  Dests: :stop, 400:auto, 410:auto
+  Dests: :stop, 410:auto
 (0 1) 400 REM *** CALCULATE NEIGHBORS
-  Origs: 360:auto
-  Dests: 410:auto
+  Origs: 
+  Dests: 
 (0 4) 410 MAT N = ZER(10, 10)
-  Origs: 360:auto, 400:auto
+  Origs: 360:auto
   Dests: 415:auto
 (0 2) 415 OPTION BASE 0
   Origs: 410:auto
@@ -157,12 +157,12 @@ F(I,J) (1 4) 640 IF N(I, J) = 2 THEN 720
   Dests: 650:auto, 730:ifthen
 F(I,J) (1 4) 650 IF N(I, J) = 3 THEN 690
   Origs: 640:auto
-  Dests: 660:auto, 670:auto, 700:ifthen
-F(I,J) (0 1) 660 REM * CELL DIES
-  Origs: 650:auto
-  Dests: 670:auto
+  Dests: 670:auto, 700:ifthen
+(0 1) 660 REM * CELL DIES
+  Origs: 
+  Dests: 
 F(I,J) (0 3) 670 B$(I, J) = D$
-  Origs: 630:ifthen, 650:auto, 660:auto
+  Origs: 630:ifthen, 650:auto
   Dests: 680:auto
 F(I,J) (0 2) 680 GOTO 730
   Origs: 670:auto
