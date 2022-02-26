@@ -661,7 +661,7 @@ OptionParser.new do |opt|
   opt.on('--provenance') { |o| options[:provenance] = o }
   opt.on('--qmark-after-prompt') { |o| options[:qmark_after_prompt] = o }
   opt.on('--randomize') { |o| options[:randomize] = o }
-  opt.on('--relational-result') { |o| options[:relational_result] = o }
+  opt.on('--relational-result RESULTTYPE') { |o| options[:relational_result] = o }
   opt.on('--require-initialized') { |o| options[:require_initialized] = o }
 
   opt.on('--semicolon-zone-width WIDTH') do |o|
@@ -817,7 +817,7 @@ $options['randomize'] =
 
 $options['relational_result'] = Option.new(only_new, relational, 'BOOLEAN')
 if options.key?(:relational_result)
-  relational_result = options['relational_result']
+  relational_result = options[:relational_result]
   $options['relational_result'] = Option.new(only_new, relational, relational_result)
 end
 

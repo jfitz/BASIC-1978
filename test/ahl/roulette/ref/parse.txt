@@ -39,7 +39,7 @@
  NumericConstant:1
  FunctionLeft:LEFT$($,_) -> $
  TextConstant:"N"
- BinaryOperatorEqual:=($,$) -> _
+ BinaryOperatorEqual:=($,$) -> ?
  LineNumber:1550
 1070 PRINT
  CarriageControl:NL
@@ -219,12 +219,12 @@
 1650 IF Y<1 OR Y<>INT(Y) THEN 1630
  Variable:Y -> _
  NumericConstant:1
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:Y -> _
  Variable:Y -> _
  FunctionInt:INT(_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  LineNumber:1630
 1660 FOR I=1 TO 50: A(I)=0: NEXT I: REM  MAT A=ZER
  control: Variable:I -> _
@@ -261,41 +261,41 @@
 1720 IF X<1 OR X>50 OR X<>INT(X) THEN 1680
  Variable:X -> _
  NumericConstant:1
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:X -> _
  NumericConstant:50
- BinaryOperatorGreater:>(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  Variable:X -> _
  Variable:X -> _
  FunctionInt:INT(_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  LineNumber:1680
 1730 IF Z<1 OR Z<>INT(Z) THEN 1680
  Variable:Z -> _
  NumericConstant:1
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:Z -> _
  Variable:Z -> _
  FunctionInt:INT(_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  LineNumber:1680
 1740 IF Z<5 OR Z>500 THEN 1680
  Variable:Z -> _
  NumericConstant:5
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:Z -> _
  NumericConstant:500
- BinaryOperatorGreater:>(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  LineNumber:1680
 1750 IF A(X)=0 THEN 1780
  Variable:X -> _
  Variable:A(_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:1780
 1760 PRINT "YOU MADE THAT BET ONCE ALREADY,DUM-DUM"
  TextConstant:"YOU MADE THAT BET ONCE ALREADY,DUM-DUM"
@@ -327,11 +327,11 @@
 1840 IF S=0 OR S>38 THEN 1830
  Variable:S -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  Variable:S -> _
  NumericConstant:38
- BinaryOperatorGreater:>(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  LineNumber:1830
 1850 X(S)=X(S)+1
  Variable:S -> _
@@ -344,12 +344,12 @@
 1860 IF S<37 THEN 1920
  Variable:S -> _
  NumericConstant:37
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  LineNumber:1920
 1870 IF S=37 THEN 1900
  Variable:S -> _
  NumericConstant:37
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:1900
 1880 PRINT "00"
  TextConstant:"00"
@@ -372,7 +372,7 @@
 1950 IF R=S THEN 2000
  Variable:R -> _
  Variable:S -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:2000
 1960 NEXT I1
  Variable:I1 -> _
@@ -403,7 +403,7 @@
  Variable:C -> _
  Variable:T(_) -> _
  NumericConstant:37
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  LineNumber:2710
 2050 ON T(C)-36 GOTO 2090,2190,2220,2250,2300,2350,2400,2470,2500
  Variable:C -> _
@@ -436,7 +436,7 @@
 2100 IF S <= 12 THEN 2150
  Variable:S -> _
  NumericConstant:12
- BinaryOperatorLessEqual:<=(_,_) -> _
+ BinaryOperatorLessEqual:<=(_,_) -> ?
  LineNumber:2150
 2110 PRINT "YOU LOSE";B(C);"DOLLARS ON BET";C
  TextConstant:"YOU LOSE"
@@ -501,11 +501,11 @@
 2200 IF S>12 AND S<25 THEN 2150
  Variable:S -> _
  NumericConstant:12
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  Variable:S -> _
  NumericConstant:25
- BinaryOperatorLess:<(_,_) -> _
- BinaryOperatorAnd:AND(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:2150
 2210 GOTO 2110
  LineNumber:2110
@@ -514,11 +514,11 @@
 2230 IF S>24 AND S<37 THEN 2150
  Variable:S -> _
  NumericConstant:24
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  Variable:S -> _
  NumericConstant:37
- BinaryOperatorLess:<(_,_) -> _
- BinaryOperatorAnd:AND(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:2150
 2240 GOTO 2110
  LineNumber:2110
@@ -532,7 +532,7 @@
 2270 IF S=I THEN 2150
  Variable:S -> _
  Variable:I -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:2150
 2280 NEXT I
  Variable:I -> _
@@ -548,7 +548,7 @@
 2320 IF S=I THEN 2150
  Variable:S -> _
  Variable:I -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:2150
 2330 NEXT I
  Variable:I -> _
@@ -564,7 +564,7 @@
 2370 IF S=I THEN 2150
  Variable:S -> _
  Variable:I -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:2150
 2380 NEXT I
  Variable:I -> _
@@ -575,7 +575,7 @@
 2410 IF S<19 THEN 2430
  Variable:S -> _
  NumericConstant:19
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  LineNumber:2430
 2420 GOTO 2110
  LineNumber:2110
@@ -610,11 +610,11 @@
 2480 IF S<37 AND S>18 THEN 2430
  Variable:S -> _
  NumericConstant:37
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:S -> _
  NumericConstant:18
- BinaryOperatorGreater:>(_,_) -> _
- BinaryOperatorAnd:AND(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:2430
 2490 GOTO 2110
  LineNumber:2110
@@ -628,11 +628,11 @@
  NumericConstant:2
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  Variable:S -> _
  NumericConstant:37
- BinaryOperatorLess:<(_,_) -> _
- BinaryOperatorAnd:AND(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:2430
 2520 GOTO 2110
  LineNumber:2110
@@ -646,11 +646,11 @@
  NumericConstant:2
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
  Variable:S -> _
  NumericConstant:37
- BinaryOperatorLess:<(_,_) -> _
- BinaryOperatorAnd:AND(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:2430
 2550 GOTO 2110
  LineNumber:2110
@@ -667,7 +667,7 @@
 2600 IF S=R THEN 2430
  Variable:S -> _
  Variable:R -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:2430
 2610 NEXT I
  Variable:I -> _
@@ -686,14 +686,14 @@
 2670 IF S=R THEN 2110
  Variable:S -> _
  Variable:R -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:2110
 2680 NEXT I
  Variable:I -> _
 2690 IF S>36 THEN 2110
  Variable:S -> _
  NumericConstant:36
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:2110
 2700 GOTO 2430
  LineNumber:2430
@@ -703,27 +703,27 @@
  Variable:C -> _
  Variable:T(_) -> _
  NumericConstant:49
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  LineNumber:2760
 2730 IF T(C)=49 AND S=37 THEN 2780
  Variable:C -> _
  Variable:T(_) -> _
  NumericConstant:49
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  Variable:S -> _
  NumericConstant:37
- BinaryOperatorEqual:=(_,_) -> _
- BinaryOperatorAnd:AND(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:2780
 2740 IF T(C)=50 AND S=38 THEN 2780
  Variable:C -> _
  Variable:T(_) -> _
  NumericConstant:50
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  Variable:S -> _
  NumericConstant:38
- BinaryOperatorEqual:=(_,_) -> _
- BinaryOperatorAnd:AND(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:2780
 2750 GOTO 2110
  LineNumber:2110
@@ -731,7 +731,7 @@
  Variable:C -> _
  Variable:T(_) -> _
  Variable:S -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:2780
 2770 GOTO 2110
  LineNumber:2110
@@ -786,7 +786,7 @@
 2850 IF P>0 THEN 2880
  Variable:P -> _
  NumericConstant:0
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:2880
 2860 PRINT "OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
  TextConstant:"OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
@@ -796,7 +796,7 @@
 2880 IF D>0 THEN 2920
  Variable:D -> _
  NumericConstant:0
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:2920
 2890 PRINT "YOU BROKE THE HOUSE!"
  TextConstant:"YOU BROKE THE HOUSE!"
@@ -817,7 +817,7 @@
  NumericConstant:1
  FunctionLeft:LEFT$($,_) -> $
  TextConstant:"Y"
- BinaryOperatorEqual:=($,$) -> _
+ BinaryOperatorEqual:=($,$) -> ?
  LineNumber:1630
 2950 DATA 1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36
  NumericConstant:1
@@ -841,7 +841,7 @@
 2960 IF P<1 THEN 3190
  Variable:P -> _
  NumericConstant:1
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  LineNumber:3190
 2970 PRINT "TO WHOM SHALL I MAKE THE CHECK";
  TextConstant:"TO WHOM SHALL I MAKE THE CHECK"

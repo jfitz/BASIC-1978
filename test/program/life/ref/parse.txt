@@ -72,7 +72,7 @@
 360 IF A$ <> "Y" THEN STOP
  Variable:A$ -> $
  TextConstant:"Y"
- BinaryOperatorNotEqual:<>($,$) -> _
+ BinaryOperatorNotEqual:<>($,$) -> ?
  
 400 REM *** CALCULATE NEIGHBORS
  Remark:*** CALCULATE NEIGHBORS
@@ -111,11 +111,11 @@
 470 IF I0 = 0 AND J0 = 0 THEN 500
  Variable:I0 -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  Variable:J0 -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) -> _
- BinaryOperatorAnd:AND(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:500
 480 IF B$(I+I0,J+J0) <> L$ THEN 500
  Variable:I -> _
@@ -126,7 +126,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  Variable:B$(_,_) -> $
  Variable:L$ -> $
- BinaryOperatorNotEqual:<>($,$) -> _
+ BinaryOperatorNotEqual:<>($,$) -> ?
  LineNumber:500
 490 C = C + 1
  Variable:C -> _
@@ -169,21 +169,21 @@
  Variable:J -> _
  Variable:N(_,_) -> _
  NumericConstant:2
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  LineNumber:660
 640 IF N(I,J)=2 THEN 720
  Variable:I -> _
  Variable:J -> _
  Variable:N(_,_) -> _
  NumericConstant:2
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:720
 650 IF N(I,J)=3 THEN 690
  Variable:I -> _
  Variable:J -> _
  Variable:N(_,_) -> _
  NumericConstant:3
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:690
 660 REM * CELL DIES
  Remark:* CELL DIES

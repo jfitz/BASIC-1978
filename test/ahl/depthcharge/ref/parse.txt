@@ -105,7 +105,7 @@
  FunctionAbs:ABS(_) -> _
  BinaryOperatorPlus:+(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:300
 140 GOSUB 500 : PRINT : NEXT D
  LineNumber:500
@@ -144,7 +144,7 @@
 410 IF A$="Y" THEN 100
  Variable:A$ -> $
  TextConstant:"Y"
- BinaryOperatorEqual:=($,$) -> _
+ BinaryOperatorEqual:=($,$) -> ?
  LineNumber:100
 420 PRINT "OK.  HOPE YOU ENJOYED YOURSELF." : GOTO 600
  TextConstant:"OK.  HOPE YOU ENJOYED YOURSELF."
@@ -156,53 +156,53 @@
 510 IF Y>B THEN PRINT "NORTH";
  Variable:Y -> _
  Variable:B -> _
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  TextConstant:"NORTH"
  CarriageControl:;
 520 IF Y<B THEN PRINT "SOUTH";
  Variable:Y -> _
  Variable:B -> _
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  TextConstant:"SOUTH"
  CarriageControl:;
 530 IF X>A THEN PRINT "EAST";
  Variable:X -> _
  Variable:A -> _
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  TextConstant:"EAST"
  CarriageControl:;
 540 IF X<A THEN PRINT "WEST";
  Variable:X -> _
  Variable:A -> _
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  TextConstant:"WEST"
  CarriageControl:;
 550 IF Y<>B OR X<>A THEN PRINT " AND";
  Variable:Y -> _
  Variable:B -> _
- BinaryOperatorNotEqual:<>(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
  Variable:X -> _
  Variable:A -> _
- BinaryOperatorNotEqual:<>(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  TextConstant:" AND"
  CarriageControl:;
 560 IF Z>C THEN PRINT " TOO LOW."
  Variable:Z -> _
  Variable:C -> _
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  TextConstant:" TOO LOW."
  CarriageControl:NL
 570 IF Z<C THEN PRINT " TOO HIGH."
  Variable:Z -> _
  Variable:C -> _
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  TextConstant:" TOO HIGH."
  CarriageControl:NL
 580 IF Z=C THEN PRINT " DEPTH OK."
  Variable:Z -> _
  Variable:C -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  TextConstant:" DEPTH OK."
  CarriageControl:NL
 590 RETURN

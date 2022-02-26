@@ -1626,6 +1626,10 @@ class BooleanConstant < AbstractValueElement
     @value <= other.to_v
   end
 
+  def not
+    BooleanConstant.new(!@value)
+  end
+
   def b_and(other)
     b = BooleanConstant.new(@value && other.to_b)
     b = IntegerConstant.new(b.to_ms_i) if

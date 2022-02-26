@@ -47,7 +47,7 @@
  Variable:C -> _
  Variable:B$(_) -> $
  TextConstant:"DONE"
- BinaryOperatorEqual:=($,$) -> _
+ BinaryOperatorEqual:=($,$) -> ?
  Variable:C -> _
  Variable:B$(_) -> $
  TextConstant:""
@@ -59,7 +59,7 @@
  NumericConstant:1
  FunctionLeft:LEFT$($,_) -> $
  TextConstant:"."
- BinaryOperatorEqual:=($,$) -> _
+ BinaryOperatorEqual:=($,$) -> ?
  Variable:C -> _
  Variable:B$(_) -> $
  TextConstant:" "
@@ -99,7 +99,7 @@
  Variable:B$(_) -> $
  FunctionLen:LEN($) -> _
  Variable:L -> _
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  Variable:L -> _
  Variable:X -> _
  Variable:B$(_) -> $
@@ -138,7 +138,7 @@
  NumericConstant:1
  FunctionMid:MID$($,_,_) -> $
  TextConstant:" "
- BinaryOperatorNotEqual:<>($,$) -> _
+ BinaryOperatorNotEqual:<>($,$) -> ?
  Variable:X1 -> _
  Variable:X -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -216,7 +216,7 @@
  Variable:Y -> _
  Variable:A(_,_) -> _
  NumericConstant:2
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  Variable:X -> _
  Variable:Y -> _
  Variable:A(_,_) -> _
@@ -228,7 +228,7 @@
  Variable:Y -> _
  Variable:A(_,_) -> _
  NumericConstant:3
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  Variable:X -> _
  Variable:Y -> _
  Variable:A(_,_) -> _
@@ -240,7 +240,7 @@
  Variable:Y -> _
  Variable:A(_,_) -> _
  NumericConstant:1
- BinaryOperatorNotEqual:<>(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:270
 261 PRINT TAB(Y);"*";
  Variable:Y -> _
@@ -251,28 +251,28 @@
 262 IF X<X3 THEN X3=X
  Variable:X -> _
  Variable:X3 -> _
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:X3 -> _
  Variable:X -> _
  AssignmentOperator:= _ -> _
 264 IF X>X4 THEN X4=X
  Variable:X -> _
  Variable:X4 -> _
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  Variable:X4 -> _
  Variable:X -> _
  AssignmentOperator:= _ -> _
 266 IF Y<Y3 THEN Y3=Y
  Variable:Y -> _
  Variable:Y3 -> _
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:Y3 -> _
  Variable:Y -> _
  AssignmentOperator:= _ -> _
 268 IF Y>Y4 THEN Y4=Y
  Variable:Y -> _
  Variable:Y4 -> _
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  Variable:Y4 -> _
  Variable:Y -> _
  AssignmentOperator:= _ -> _
@@ -302,7 +302,7 @@
 301 IF X1<3 THEN X1=3:I9=-1
  Variable:X1 -> _
  NumericConstant:3
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:X1 -> _
  NumericConstant:3
  AssignmentOperator:= =_ -> _
@@ -313,7 +313,7 @@
 303 IF X2>22 THEN X2=22:I9=-1
  Variable:X2 -> _
  NumericConstant:22
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  Variable:X2 -> _
  NumericConstant:22
  AssignmentOperator:= =_ -> _
@@ -324,7 +324,7 @@
 305 IF Y1<3 THEN Y1=3:I9=-1
  Variable:Y1 -> _
  NumericConstant:3
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:Y1 -> _
  NumericConstant:3
  AssignmentOperator:= =_ -> _
@@ -335,7 +335,7 @@
 307 IF Y2>68 THEN Y2=68:I9=-1
  Variable:Y2 -> _
  NumericConstant:68
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  Variable:Y2 -> _
  NumericConstant:68
  AssignmentOperator:= =_ -> _
@@ -372,13 +372,13 @@
  Variable:J -> _
  Variable:A(_,_) -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  Variable:I -> _
  Variable:J -> _
  Variable:A(_,_) -> _
  NumericConstant:2
- BinaryOperatorEqual:=(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  Variable:C -> _
  Variable:C -> _
  NumericConstant:1
@@ -393,16 +393,16 @@
  Variable:Y -> _
  Variable:A(_,_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:610
 590 IF C<3 OR C>4 THEN A(X,Y)=2: GOTO 600
  Variable:C -> _
  NumericConstant:3
- BinaryOperatorLess:<(_,_) -> _
+ BinaryOperatorLess:<(_,_) -> ?
  Variable:C -> _
  NumericConstant:4
- BinaryOperatorGreater:>(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  Variable:X -> _
  Variable:Y -> _
  Variable:A(_,_) -> _
@@ -420,7 +420,7 @@
 610 IF C=3 THEN A(X,Y)=3:P=P+1
  Variable:C -> _
  NumericConstant:3
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  Variable:X -> _
  Variable:Y -> _
  Variable:A(_,_) -> _

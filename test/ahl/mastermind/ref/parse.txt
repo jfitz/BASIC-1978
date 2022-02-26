@@ -33,7 +33,7 @@
 90 IF C9>8 THEN PRINT "NO MORE THAN 8, PLEASE!":GOTO 80
  Variable:C9 -> _
  NumericConstant:8
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  TextConstant:"NO MORE THAN 8, PLEASE!"
  CarriageControl:NL
  LineNumber:80
@@ -166,18 +166,18 @@
 390 IF X$="BOARD" THEN 2000
  Variable:X$ -> $
  TextConstant:"BOARD"
- BinaryOperatorEqual:=($,$) -> _
+ BinaryOperatorEqual:=($,$) -> ?
  LineNumber:2000
 400 IF X$="QUIT" THEN 2500
  Variable:X$ -> $
  TextConstant:"QUIT"
- BinaryOperatorEqual:=($,$) -> _
+ BinaryOperatorEqual:=($,$) -> ?
  LineNumber:2500
 410 IF LEN(X$)<>P9 THEN PRINT "BAD NUMBER OF POSITIONS.":GOTO 380
  Variable:X$ -> $
  FunctionLen:LEN($) -> _
  Variable:P9 -> _
- BinaryOperatorNotEqual:<>(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
  TextConstant:"BAD NUMBER OF POSITIONS."
  CarriageControl:NL
  LineNumber:380
@@ -200,7 +200,7 @@
  Variable:Y -> _
  NumericConstant:1
  FunctionMid:MID$($,_,_) -> $
- BinaryOperatorEqual:=($,$) -> _
+ BinaryOperatorEqual:=($,$) -> ?
  LineNumber:480
 460 NEXT Y
  Variable:Y -> _
@@ -236,7 +236,7 @@
 540 IF B=P9 THEN 630
  Variable:B -> _
  Variable:P9 -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:630
 550 REM     TELL HUMAN RESULTS
  Remark:    TELL HUMAN RESULTS
@@ -352,7 +352,7 @@
  Variable:G -> _
  Variable:I(_) -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:890
 790 FOR X=G TO P
  control: Variable:X -> _
@@ -362,7 +362,7 @@
  Variable:X -> _
  Variable:I(_) -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:880
 810 NEXT X
  Variable:X -> _
@@ -374,7 +374,7 @@
  Variable:X -> _
  Variable:I(_) -> _
  NumericConstant:1
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:880
 840 NEXT X
  Variable:X -> _
@@ -421,7 +421,7 @@
 990 IF B1=P9 THEN 1120
  Variable:B1 -> _
  Variable:P9 -> _
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:1120
 1000 GOSUB 3000
  LineNumber:3000
@@ -435,7 +435,7 @@
  Variable:X -> _
  Variable:I(_) -> _
  NumericConstant:0
- BinaryOperatorEqual:=(_,_) -> _
+ BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:1070
 1035 GOSUB 6500
  LineNumber:6500
@@ -446,11 +446,11 @@
 1060 IF B1<>B OR W1<>W THEN I(X)=0
  Variable:B1 -> _
  Variable:B -> _
- BinaryOperatorNotEqual:<>(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
  Variable:W1 -> _
  Variable:W -> _
- BinaryOperatorNotEqual:<>(_,_) -> _
- BinaryOperatorOr:OR(_,_) -> _
+ BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorOr:OR(?,?) -> ?
  Variable:X -> _
  Variable:I(_) -> _
  NumericConstant:0
@@ -600,7 +600,7 @@
  NumericConstant:1
  Variable:Q(_) -> _
  NumericConstant:0
- BinaryOperatorGreater:>(_,_) -> _
+ BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:3530
 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
  Remark: IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
@@ -633,7 +633,7 @@
  Variable:Q -> _
  Variable:Q(_) -> _
  Variable:C9 -> _
- BinaryOperatorLessEqual:<=(_,_) -> _
+ BinaryOperatorLessEqual:<=(_,_) -> ?
  
 3560 Q(Q)=1
  Variable:Q -> _
@@ -698,7 +698,7 @@
  Variable:G$(_) -> $
  Variable:S -> _
  Variable:A$(_) -> $
- BinaryOperatorNotEqual:<>($,$) -> _
+ BinaryOperatorNotEqual:<>($,$) -> ?
  LineNumber:4620
 4570 B=B+1
  Variable:B -> _
@@ -737,14 +737,14 @@
  Variable:G$(_) -> $
  Variable:T -> _
  Variable:A$(_) -> $
- BinaryOperatorNotEqual:<>($,$) -> _
+ BinaryOperatorNotEqual:<>($,$) -> ?
  LineNumber:4650
 4640 IF G$(T)=A$(T) THEN 4650
  Variable:T -> _
  Variable:G$(_) -> $
  Variable:T -> _
  Variable:A$(_) -> $
- BinaryOperatorEqual:=($,$) -> _
+ BinaryOperatorEqual:=($,$) -> ?
  LineNumber:4650
 4645 W=W+1:A$(T)=CHR$(F):G$(S)=CHR$(F+1):F=F+2:GOTO 4660
  Variable:W -> _
