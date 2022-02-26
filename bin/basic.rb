@@ -554,7 +554,7 @@ def make_command_tokenbuilders(quotes, long_names)
     PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH
     PROMPT PROMPTD PROMPT_COUNT PROVENANCE
     QMARK_AFTER_PROMPT
-    RANDOMIZE RELATIONAL_BOOLEAN REQUIRE_INITIALIZED RESPECT_RANDOMIZE
+    RANDOMIZE RELATIONAL_RESULT REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH
     TIMING TRACE
     WARN_LIST_WIDTH WARN_PRETTY_WIDTH WRAP
@@ -661,7 +661,7 @@ OptionParser.new do |opt|
   opt.on('--provenance') { |o| options[:provenance] = o }
   opt.on('--qmark-after-prompt') { |o| options[:qmark_after_prompt] = o }
   opt.on('--randomize') { |o| options[:randomize] = o }
-  opt.on('--relational-boolean') { |o| options[:relational_boolean] = o }
+  opt.on('--relational-result') { |o| options[:relational_result] = o }
   opt.on('--require-initialized') { |o| options[:require_initialized] = o }
 
   opt.on('--semicolon-zone-width WIDTH') do |o|
@@ -696,6 +696,7 @@ int40 = { type: :int, max: 40, min: 0 }
 int1 = { type: :int, max: 1, min: 0 }
 int32767 = { type: :int, max: 32_767, min: 999 }
 separator = { type: :list, values: %w[COMMA SEMI NL NONE] }
+relational = { type: :list, values: %w[BOOLEAN INTEGER NUMERIC] }
 
 all_types = %i[new loaded runtime]
 loaded = %i[new loaded]
@@ -814,8 +815,11 @@ $options['qmark_after_prompt'] =
 $options['randomize'] =
   Option.new(all_types, boolean, options.key?(:randomize))
 
-$options['relational_boolean'] =
-  Option.new(only_new, boolean, options.key?(:relational_boolean))
+$options['relational_result'] = Option.new(only_new, relational, 'BOOLEAN')
+if options.key?(:relational_result)
+  relational_result = options['relational_result']
+  $options['relational_result'] = Option.new(only_new, relational, relational_result)
+end
 
 $options['require_initialized'] =
   Option.new(all_types, boolean, options.key?(:require_initialized))

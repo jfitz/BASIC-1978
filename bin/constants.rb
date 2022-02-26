@@ -387,8 +387,11 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value == other.to_v)
-    b = NumericConstant.new(b.to_ms_i) unless
-      $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_ne(other)
@@ -397,8 +400,11 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value != other.to_v)
-    b = NumericConstant.new(b.to_ms_i) unless
-      $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_gt(other)
@@ -407,8 +413,11 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value > other.to_v)
-    b = NumericConstant.new(b.to_ms_i) unless
-      $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_ge(other)
@@ -417,8 +426,11 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value >= other.to_v)
-    b = NumericConstant.new(b.to_ms_i) unless
-      $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_lt(other)
@@ -427,8 +439,11 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value < other.to_v)
-    b = NumericConstant.new(b.to_ms_i) unless
-      $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_le(other)
@@ -437,8 +452,11 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value <= other.to_v)
-    b = NumericConstant.new(b.to_ms_i) unless
-      $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_and(_)
@@ -647,12 +665,20 @@ class NumericConstant < AbstractValueElement
 
   def b_and(other)
     b = BooleanConstant.new(to_b && other.to_b)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_or(other)
     b = BooleanConstant.new(to_b || other.to_b)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def posate
@@ -1007,7 +1033,11 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value == other.to_v)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_ne(other)
@@ -1016,7 +1046,11 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value != other.to_v)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_gt(other)
@@ -1025,7 +1059,11 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value > other.to_v)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_ge(other)
@@ -1034,7 +1072,11 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value >= other.to_v)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_lt(other)
@@ -1043,7 +1085,11 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value < other.to_v)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_le(other)
@@ -1052,7 +1098,11 @@ class IntegerConstant < AbstractValueElement
     raise(BASICExpressionError, message) unless compatible?(other)
 
     b = BooleanConstant.new(@value <= other.to_v)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_and(other)
@@ -1060,8 +1110,11 @@ class IntegerConstant < AbstractValueElement
       IntegerConstant.new(to_i & other.to_i)
     else
       b = BooleanConstant.new(to_b && other.to_b)
-      NumericConstant.new(b.to_ms_i) unless
-        $options['relational_boolean'].value
+      b = IntegerConstant.new(b.to_ms_i) if
+        $options['relational_result'].value == 'INTEGER'
+      b = NumericConstant.new(b.to_ms_i) if
+        $options['relational_result'].value == 'NUMERIC'
+      b
     end
   end
 
@@ -1070,8 +1123,11 @@ class IntegerConstant < AbstractValueElement
       IntegerConstant.new(to_i | other.to_i)
     else
       b = BooleanConstant.new(to_b || other.to_b)
-      NumericConstant.new(b.to_ms_i) unless
-        $options['relational_boolean'].value
+      b = IntegerConstant.new(b.to_ms_i) if
+        $options['relational_result'].value == 'INTEGER'
+      b = NumericConstant.new(b.to_ms_i) if
+        $options['relational_result'].value == 'NUMERIC'
+      b
     end
   end
 
@@ -1388,12 +1444,20 @@ class TextConstant < AbstractValueElement
 
   def b_and(other)
     b = BooleanConstant.new(to_b && other.to_b)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_or(other)
     b = BooleanConstant.new(to_b || other.to_b)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def not
@@ -1564,12 +1628,20 @@ class BooleanConstant < AbstractValueElement
 
   def b_and(other)
     b = BooleanConstant.new(@value && other.to_b)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def b_or(other)
     b = BooleanConstant.new(@value || other.to_b)
-    NumericConstant.new(b.to_ms_i) unless $options['relational_boolean'].value
+    b = IntegerConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'INTEGER'
+    b = NumericConstant.new(b.to_ms_i) if
+      $options['relational_result'].value == 'NUMERIC'
+    b
   end
 
   def +(other)

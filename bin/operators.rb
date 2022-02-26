@@ -878,7 +878,8 @@ class UnaryOperatorNot < UnaryOperator
     super
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     @precedence = 9
   end
 
@@ -898,10 +899,8 @@ class UnaryOperatorNot < UnaryOperator
       arg_types.include?(type)
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
-    @content_type = :integer if
-      type == :integer && $options['int_bitwise'].value
-
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     type_stack.push(@content_type)
   end
 
@@ -1103,7 +1102,8 @@ class BinaryOperatorEqual < BinaryOperator
 
     @operation = :b_eq
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     @precedence = 4
   end
 
@@ -1124,7 +1124,8 @@ class BinaryOperatorEqual < BinaryOperator
       !compatible(a_type, b_type)
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     type_stack.push(@content_type)
   end
 end
@@ -1141,7 +1142,8 @@ class BinaryOperatorNotEqual < BinaryOperator
 
     @operation = :b_ne
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     @precedence = 4
   end
 
@@ -1162,7 +1164,8 @@ class BinaryOperatorNotEqual < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     type_stack.push(@content_type)
   end
 end
@@ -1178,7 +1181,8 @@ class BinaryOperatorLess < BinaryOperator
 
     @operation = :b_lt
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     @precedence = 4
   end
 
@@ -1199,7 +1203,8 @@ class BinaryOperatorLess < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     type_stack.push(@content_type)
   end
 end
@@ -1216,7 +1221,8 @@ class BinaryOperatorLessEqual < BinaryOperator
 
     @operation = :b_le
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     @precedence = 4
   end
 
@@ -1237,7 +1243,8 @@ class BinaryOperatorLessEqual < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     type_stack.push(@content_type)
   end
 end
@@ -1253,7 +1260,8 @@ class BinaryOperatorGreater < BinaryOperator
 
     @operation = :b_gt
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     @precedence = 4
   end
 
@@ -1274,7 +1282,8 @@ class BinaryOperatorGreater < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     type_stack.push(@content_type)
   end
 end
@@ -1291,7 +1300,8 @@ class BinaryOperatorGreaterEqual < BinaryOperator
 
     @operation = :b_ge
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     @precedence = 4
   end
 
@@ -1312,7 +1322,8 @@ class BinaryOperatorGreaterEqual < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     type_stack.push(@content_type)
   end
 end
@@ -1328,7 +1339,8 @@ class BinaryOperatorAnd < BinaryOperator
 
     @operation = :b_and
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     @precedence = 3
   end
 
@@ -1348,9 +1360,8 @@ class BinaryOperatorAnd < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
-    @content_type = :integer if
-      a_type == :integer && b_type == :integer && $options['int_bitwise'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     type_stack.push(@content_type)
   end
 end
@@ -1366,7 +1377,8 @@ class BinaryOperatorOr < BinaryOperator
 
     @operation = :b_or
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     @precedence = 2
   end
 
@@ -1386,9 +1398,8 @@ class BinaryOperatorOr < BinaryOperator
       a_type != b_type
 
     @content_type = :boolean
-    @content_type = :numeric unless $options['relational_boolean'].value
-    @content_type = :integer if
-      a_type == :integer && b_type == :integer && $options['int_bitwise'].value
+    @content_type = :integer if $options['relational_result'].value == 'INTEGER'
+    @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
     type_stack.push(@content_type)
   end
 end
