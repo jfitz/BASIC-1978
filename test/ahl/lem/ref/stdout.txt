@@ -97,7 +97,7 @@ STOP in line 1145
 55 F(I) (1) R = R0 + H0
 60 F(I) (1) A = -3.425
 65 F(I) (1) R1 = 0
-70 F(I) (1) A1 = 8.84361E-04
+70 F(I) (1) A1 = 0.000884361
 75 F(I) (1) R3 = 0
 80 F(I) (1) A3 = 0
 85 F(I) (1) M1 = 7.45
@@ -141,7 +141,7 @@ STOP in line 1145
 275 F(I) (0) GOTO 305
 280 F(I) (1) Z = 6080
 285 F(I) (1) M$ = "FEET"
-290 F(I) (1) G3 = .592
+290 F(I) (1) G3 = 0.592
 295 F(I) (1) N$ = "N.MILES"
 300 F(I) (1) G5 = Z
 305 F(I) (1) IF B1 = 3 THEN 670
@@ -204,8 +204,8 @@ STOP in line 1145
 590 F(I) (4) F = F / 100
 595 F(I) (4) IF T1 < 0 THEN 905
 600 F(I) (4) IF T1 = 0 THEN 1090
-605 F(I) (4) IF ABS(F - .05) > 1 THEN 945
-610 F(I) (4) IF ABS(F - .05) < .05 THEN 945
+605 F(I) (4) IF ABS(F - 0.05) > 1 THEN 945
+610 F(I) (4) IF ABS(F - 0.05) < 0.05 THEN 945
 615 F(I) (4) IF ABS(P) > 180 THEN 925
 620 F(I) (4) N = 20
 625 F(I) (4) IF T1 < 400 THEN 635
@@ -215,7 +215,7 @@ STOP in line 1145
 645 F(I) (4) S = SIN(P)
 650 F(I) (4) C = COS(P)
 655 F(I) (4) M2 = M0 * T1 * F / B
-660 F(I) (4) R3 = -.5 * R0 * ((V0 / R) ^ 2) + R * A1 * A1
+660 F(I) (4) R3 = -0.5 * R0 * ((V0 / R) ^ 2) + R * A1 * A1
 665 F(I) (4) A3 = -2 * R1 * A1 / R
 670 F(I) (5) FOR I = 1 TO N
 675 F(I) (81) IF M1 = 0 THEN 715
@@ -228,22 +228,22 @@ STOP in line 1145
 710 F(I) (0) GOTO 725
 715 F(I) (0) F = 0
 720 F(I) (0) M2 = 0
-725 F(I) (81) M = M - .5 * M2
+725 F(I) (81) M = M - 0.5 * M2
 730 F(I) (81) R4 = R3
-735 F(I) (81) R3 = -.5 * R0 * ((V0 / R) ^ 2) + R * A1 * A1
-740 F(I) (81) R2 = (3 * R3 - R4) / 2 + .00526 * F1 * F * C / M
+735 F(I) (81) R3 = -0.5 * R0 * ((V0 / R) ^ 2) + R * A1 * A1
+740 F(I) (81) R2 = (3 * R3 - R4) / 2 + 0.00526 * F1 * F * C / M
 745 F(I) (81) A4 = A3
 750 F(I) (81) A3 = -2 * R1 * A1 / R
-755 F(I) (81) A2 = (3 * A3 - A4) / 2 + .0056 * F1 * F * S / (M * R)
-760 F(I) (81) X = R1 * T1 + .5 * R2 * T1 * T1
+755 F(I) (81) A2 = (3 * A3 - A4) / 2 + 0.0056 * F1 * F * S / (M * R)
+760 F(I) (81) X = R1 * T1 + 0.5 * R2 * T1 * T1
 765 F(I) (81) R = R + X
 770 F(I) (81) H0 = H0 + X
 775 F(I) (81) R1 = R1 + R2 * T1
-780 F(I) (81) A = A + A1 * T1 + .5 * A2 * T1 * T1
+780 F(I) (81) A = A + A1 * T1 + 0.5 * A2 * T1 * T1
 785 F(I) (81) A1 = A1 + A2 * T1
-790 F(I) (81) M = M - .5 * M2
+790 F(I) (81) M = M - 0.5 * M2
 795 F(I) (81) T = T + T1
-800 F(I) (81) IF H0 < 3.287828E-04 THEN 810
+800 F(I) (81) IF H0 < 0.000328783 THEN 810
 805 F(I) (80) NEXT I
 810 F(I) (5) H = H0 * Z
 815 F(I) (5) H1 = R1 * Z
@@ -252,16 +252,16 @@ STOP in line 1145
 830 F(I) (5) T2 = M1 * B / M0
 835 F(I) (5) PRINT " "; T; TAB(10); H; TAB(23); D;
 840 F(I) (5) PRINT TAB(37); H1; TAB(49); D1; TAB(60); T2
-845 F(I) (5) IF H0 < 3.287828E-04 THEN 880
+845 F(I) (5) IF H0 < 0.000328783 THEN 880
 850 F(I) (4) IF R0 * A > 164.474 THEN 1050
 855 F(I) (4) IF M1 > 0 THEN 580
 860 F(I) (0) T1 = 20
 865 F(I) (0) F = 0
 870 F(I) (0) P = 0
 875 F(I) (0) GOTO 620
-880 F(I) (1) IF R1 < -8.21957E-04 THEN 1020
-885 F(I) (0) IF ABS(R * A1) > 4.93174E-04 THEN 1020
-890 F(I) (0) IF H0 < -3.287828E-04 THEN 1020
+880 F(I) (1) IF R1 < -0.000821957 THEN 1020
+885 F(I) (0) IF ABS(R * A1) > 0.000493174 THEN 1020
+890 F(I) (0) IF H0 < -0.000328783 THEN 1020
 895 F(I) (0) IF ABS(D) > 10 * Z THEN 1065
 900 F(I) (0) GOTO 995
 905 F(I) (0) PRINT
@@ -275,7 +275,7 @@ STOP in line 1145
 945 F(I) (0) PRINT
 950 F(I) (0) PRINT "IMPOSSIBLE THRUST VALUE ";
 955 F(I) (0) IF F < 0 THEN 985
-960 F(I) (0) IF F - .05 < .05 THEN 975
+960 F(I) (0) IF F - 0.05 < 0.05 THEN 975
 965 F(I) (0) PRINT "TOO LARGE"
 970 F(I) (0) GOTO 575
 975 F(I) (0) PRINT "TOO SMALL"

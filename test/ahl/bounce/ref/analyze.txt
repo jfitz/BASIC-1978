@@ -93,7 +93,7 @@ F(I,H) (0 9) 200 T(I) = V * C ^ (I - 1) / 16
 F(I,H) (0 1) 210 NEXT I
   Origs: 190:fornext, 200:auto
   Dests: 220:auto
-F(H) (1 6) 220 FOR H = INT(-16 * (V / 32) ^ 2 + V ^ 2 / 32 + .5) TO 0 STEP -.5
+F(H) (1 6) 220 FOR H = INT(-16 * (V / 32) ^ 2 + V ^ 2 / 32 + 0.5) TO 0 STEP -0.5
   Origs: 210:auto
   Dests: 221:fornext, 300:fornext
 F(H) (1 5) 221 IF INT(H) <> H THEN 225
@@ -114,7 +114,7 @@ F(H,I,T) (1 4) 240 FOR T = 0 TO T(I) STEP S2
 F(H,I,T) (0 4) 245 L = L + S2
   Origs: 240:fornext
   Dests: 250:auto
-F(H,I,T) (1 5) 250 IF ABS(H - (.5 * (-32) * T ^ 2 + V * C ^ (I - 1) * T)) > .25 THEN 270
+F(H,I,T) (1 5) 250 IF ABS(H - (0.5 * (-32) * T ^ 2 + V * C ^ (I - 1) * T)) > 0.25 THEN 270
   Origs: 245:auto
   Dests: 260:auto, 270:ifthen
 F(H,I,T) (0 4) 260 PRINT TAB(L / S2); "0";
@@ -156,7 +156,7 @@ F(H) (0 2) 350 PRINT
 F(H) (0 2) 355 PRINT " 0";
   Origs: 350:auto
   Dests: 360:auto
-F(H,I) (1 4) 360 FOR I = 1 TO INT(L + .9995)
+F(H,I) (1 4) 360 FOR I = 1 TO INT(L + 0.9995)
   Origs: 355:auto
   Dests: 380:fornext, 390:fornext
 F(H,I) (0 4) 380 PRINT TAB(INT(I / S2)); I;

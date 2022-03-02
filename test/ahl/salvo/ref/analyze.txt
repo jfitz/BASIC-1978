@@ -168,7 +168,7 @@ F(K,Z2,Z3) (0 1) 1450 NEXT Z2
 F(K,Z2,Z3,Z) (1 5) 1460 FOR Z = 0 TO FNB(K)
   Origs: 1405:ifthen, 1450:auto
   Dests: 1470:fornext, 1480:fornext
-F(K,Z2,Z3,Z) (0 9) 1470 A(F(Z + U8), G(Z + U8)) = .5 + SGN(K - 1) * (K - 1.5)
+F(K,Z2,Z3,Z) (0 9) 1470 A(F(Z + U8), G(Z + U8)) = 0.5 + SGN(K - 1) * (K - 1.5)
   Origs: 1460:fornext
   Dests: 1480:auto
 F(K,Z2,Z3,Z) (0 1) 1480 NEXT Z
@@ -234,7 +234,7 @@ F(Z2,Z3,X) (1 3) 1670 FOR X = 1 TO 2
 F(Z2,Z3,X) (2 3) 1680 INPUT Y, Z
   Origs: 1670:fornext
   Dests: 1690:auto
-F(Z2,Z3,X) (0 3) 1690 B(Y, Z) = .5
+F(Z2,Z3,X) (0 3) 1690 B(Y, Z) = 0.5
   Origs: 1680:auto
   Dests: 1700:auto
 F(Z2,Z3,X) (0 1) 1700 NEXT X
@@ -327,7 +327,7 @@ F(Z2,Z3,W,X) (0 3) 1980 PRINT "TURN"; C
 F(Z2,Z3,W,X) (0 3) 1990 A = 0
   Origs: 1950:ifthen, 1980:auto
   Dests: 2000:auto
-F(Z2,Z3,W,X) (1 4) 2000 FOR W = .5 TO 3 STEP .5
+F(Z2,Z3,W,X) (1 4) 2000 FOR W = 0.5 TO 3 STEP 0.5
   Origs: 1990:auto
   Dests: 2010:fornext, 2080:fornext
 F(Z2,Z3,W,X) (1 3) 2010 FOR X = 1 TO 10
@@ -348,7 +348,7 @@ F(Z2,Z3,W,X) (0 1) 2050 NEXT X
 F(Z2,Z3) (0 2) 2060 GOTO 2080
   Origs: 2050:auto
   Dests: 2080:goto
-F(Z2,Z3,W,X,Y) (0 5) 2070 A = A + INT(W + .5)
+F(Z2,Z3,W,X,Y) (0 5) 2070 A = A + INT(W + 0.5)
   Origs: 2030:ifthen
   Dests: 2080:auto
 F(Z2,Z3,W,X,Y) (0 1) 2080 NEXT W
@@ -478,7 +478,7 @@ F(Z2,Z3,W,X) (1 4) 2480 IF A(C(W), D(W)) = 2 THEN 2560
 F(Z2,Z3,W,X) (1 4) 2490 IF A(C(W), D(W)) = 1 THEN 2580
   Origs: 2480:auto
   Dests: 2500:auto, 2580:ifthen
-F(Z2,Z3,W,X) (1 4) 2500 IF A(C(W), D(W)) = .5 THEN 2600
+F(Z2,Z3,W,X) (1 4) 2500 IF A(C(W), D(W)) = 0.5 THEN 2600
   Origs: 2490:auto
   Dests: 2510:auto, 2600:ifthen
 F(Z2,Z3,W,X) (0 4) 2510 A(C(W), D(W)) = 10 + C
@@ -532,7 +532,7 @@ F(Z2,Z3,W,X) (0 3) 2660 PRINT "TURN"; C
 F(Z2,Z3,W,X) (0 3) 2670 A = 0
   Origs: 2630:ifthen, 2660:auto
   Dests: 2680:auto
-F(Z2,Z3,W,X,W) (1 4) 2680 FOR W = .5 TO 3 STEP .5
+F(Z2,Z3,W,X,W) (1 4) 2680 FOR W = 0.5 TO 3 STEP 0.5
   Origs: 2670:auto
   Dests: 2690:fornext, 2760:fornext
 F(Z2,Z3,W,X,W,X) (1 3) 2690 FOR X = 1 TO 10
@@ -553,7 +553,7 @@ F(Z2,Z3,W,X) (0 1) 2730 NEXT X
 F(Z2,Z3,W,X) (0 2) 2740 GOTO 2760
   Origs: 2730:auto
   Dests: 2760:goto
-F(Z2,Z3,W,X,Y) (0 5) 2750 A = A + INT(W + .5)
+F(Z2,Z3,W,X,Y) (0 5) 2750 A = A + INT(W + 0.5)
   Origs: 2710:ifthen
   Dests: 2760:auto
 F(Z2,Z3,W,X,Y) (0 1) 2760 NEXT W
@@ -767,7 +767,7 @@ F(Z2,Z3,W,X) (1 4) 3440 IF B(F(W), G(W)) = 2 THEN 3520
 F(Z2,Z3,W,X) (1 4) 3450 IF B(F(W), G(W)) = 1 THEN 3560
   Origs: 3440:auto
   Dests: 3460:auto, 3560:ifthen
-F(Z2,Z3,W,X) (1 4) 3460 IF B(F(W), G(W)) = .5 THEN 3540
+F(Z2,Z3,W,X) (1 4) 3460 IF B(F(W), G(W)) = 0.5 THEN 3540
   Origs: 3450:auto
   Dests: 3470:auto, 3540:ifthen
 F(Z2,Z3,W,X,Q) (0 4) 3470 B(F(W), G(W)) = 10 + C
@@ -827,7 +827,7 @@ F(Z2,Z3,W,X,Q,M2) (0 4) 3640 M3 = M3 + 1
 F(Z2,Z3,W,X,Q,M2) (0 1) 3650 NEXT M2
   Origs: 3620:fornext, 3630:ifthen, 3640:auto
   Dests: 3660:auto
-F(Z2,Z3,W,X,Q) (1 10) 3660 IF M3 <> INT(H(Q) + .5) + 1 + INT(INT(H(Q) + .5) / 3) THEN 3470
+F(Z2,Z3,W,X,Q) (1 10) 3660 IF M3 <> INT(H(Q) + 0.5) + 1 + INT(INT(H(Q) + 0.5) / 3) THEN 3470
   Origs: 3650:auto
   Dests: 3470:ifthen, 3670:auto
 F(Z2,Z3,W,X,Q,M2) (1 3) 3670 FOR M2 = 1 TO 12
@@ -903,7 +903,7 @@ F(Z2,Z3,W,X,U,R,S) (1 3) 3890 FOR S = 1 TO 10
 F(Z2,Z3,W,X,U,R,S) (1 4) 3900 IF B(R, S) < 10 THEN 3930
   Origs: 3890:fornext
   Dests: 3910:auto, 3930:ifthen
-F(Z2,Z3,W,X,U,R,S) (0 4) 3910 K(R, S) = -10000000
+F(Z2,Z3,W,X,U,R,S) (0 4) 3910 K(R, S) = -1E+07
   Origs: 3900:auto
   Dests: 3920:auto
 F(Z2,Z3,W,X,U,R,S) (0 2) 3920 GOTO 4000
@@ -921,7 +921,7 @@ F(Z2,Z3,W,X,U,R,S,M,N) (1 8) 3950 IF N + M + N * M = 0 THEN 3980
 F(Z2,Z3,W,X,U,R,S,M,N) (1 4) 3960 IF B(R + M, S + N) <> E(U) THEN 3980
   Origs: 3950:auto
   Dests: 3970:auto, 3980:ifthen
-F(Z2,Z3,W,X,U,R,S,M,N) (0 8) 3970 K(R, S) = K(R, S) + E(U) - S * INT(H(U) + .5)
+F(Z2,Z3,W,X,U,R,S,M,N) (0 8) 3970 K(R, S) = K(R, S) + E(U) - S * INT(H(U) + 0.5)
   Origs: 3960:auto
   Dests: 3980:auto
 F(Z2,Z3,W,X,U,R,S,M,N) (0 1) 3980 NEXT N

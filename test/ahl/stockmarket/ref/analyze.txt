@@ -66,7 +66,7 @@ Halstead complexity:
 (0 3) 113 LET X = 1
   Origs: 110:auto
   Dests: 114:auto
-(0 5) 114 LET A = INT((RND(X) / 10) * 100 + .5) / 100
+(0 5) 114 LET A = INT((RND(X) / 10) * 100 + 0.5) / 100
   Origs: 113:auto
   Dests: 115:auto
 (0 3) 115 LET T5 = 0
@@ -183,7 +183,7 @@ Halstead complexity:
 (0 1) 267 REM RANDOMIZE SIGN OF FIRST TREND SLOPE (A)
   Origs: 
   Dests: 
-(1 5) 268 IF RND(X) > .5 THEN 270
+(1 5) 268 IF RND(X) > 0.5 THEN 270
   Origs: 266:auto
   Dests: 269:auto, 280:ifthen
 (0 4) 269 LET A = -A
@@ -270,10 +270,10 @@ F(I) (0 6) 380 LET T = T + S(I) * P(I)
 F(I) (0 1) 390 NEXT I
   Origs: 370:fornext, 380:auto
   Dests: 391:auto
-(0 5) 391 LET Z5 = INT(100 * (Z5 / 5) + .5) / 100
+(0 5) 391 LET Z5 = INT(100 * (Z5 / 5) + 0.5) / 100
   Origs: 390:auto
   Dests: 392:auto
-(0 5) 392 LET Z6 = INT((Z5 - Z4) * 100 + .5) / 100
+(0 5) 392 LET Z6 = INT((Z5 - Z4) * 100 + 0.5) / 100
   Origs: 391:auto
   Dests: 394:auto
 (0 1) 393 REM TOTAL ASSETS:D 
@@ -297,19 +297,19 @@ F(I) (0 1) 390 NEXT I
 (0 2) 399 PRINT
   Origs: 397:goto, 398:auto
   Dests: 400:auto
-(0 5) 400 LET T = INT(100 * T + .5) / 100
+(0 5) 400 LET T = INT(100 * T + 0.5) / 100
   Origs: 399:auto
   Dests: 401:auto
 (0 3) 401 PRINT "TOTAL STOCK ASSETS ARE   $"; T
   Origs: 400:auto
   Dests: 403:auto
-(0 5) 403 LET C = INT(100 * C + .5) / 100
+(0 5) 403 LET C = INT(100 * C + 0.5) / 100
   Origs: 401:auto
   Dests: 405:auto
 (0 3) 405 PRINT "TOTAL CASH ASSETS ARE    $"; C
   Origs: 403:auto
   Dests: 407:auto
-(0 5) 407 LET D = INT(100 * D + .5) / 100
+(0 5) 407 LET D = INT(100 * D + 0.5) / 100
   Origs: 405:auto
   Dests: 408:auto
 (0 3) 408 PRINT "TOTAL ASSETS ARE         $"; D
@@ -384,7 +384,7 @@ F(I) (0 3) 560 LET S5 = 0
 F(I) (1 3) 570 FOR I = 1 TO 5
   Origs: 560:auto
   Dests: 575:fornext, 620:fornext
-F(I) (0 4) 575 LET Z(I) = INT(Z(I) + .5)
+F(I) (0 4) 575 LET Z(I) = INT(Z(I) + 0.5)
   Origs: 570:fornext
   Dests: 580:auto
 F(I) (1 4) 580 IF Z(I) <= 0 THEN 610
@@ -420,7 +420,7 @@ F(I) (0 1) 620 NEXT I
 (0 1) 630 REM BROKERAGE FEE:B5 
   Origs: 
   Dests: 
-(0 5) 640 LET B5 = INT(.01 * T5 * 100 + .5) / 100
+(0 5) 640 LET B5 = INT(0.01 * T5 * 100 + 0.5) / 100
   Origs: 625:auto
   Dests: 654:auto
 (0 1) 650 REM CASH ASSETS=OLD CASH ASSETS-TOTAL PURCHASES
@@ -579,34 +579,34 @@ G(841) F(I) (1 3) 900 FOR I = 1 TO 5
 G(841) F(I) (0 4) 910 LET X1 = RND(X)
   Origs: 900:fornext
   Dests: 915:auto
-G(841) F(I) (1 4) 915 IF X1 > .25 THEN 920
+G(841) F(I) (1 4) 915 IF X1 > 0.25 THEN 920
   Origs: 910:auto
   Dests: 916:auto, 920:ifthen
-G(841) F(I) (0 3) 916 LET X1 = .25
+G(841) F(I) (0 3) 916 LET X1 = 0.25
   Origs: 915:auto
   Dests: 917:auto
 G(841) F(I) (0 2) 917 GOTO 935
   Origs: 916:auto
   Dests: 935:goto
-G(841) F(I) (1 4) 920 IF X1 > .5 THEN 925
+G(841) F(I) (1 4) 920 IF X1 > 0.5 THEN 925
   Origs: 915:ifthen
   Dests: 921:auto, 925:ifthen
-G(841) F(I) (0 3) 921 LET X1 = .5
+G(841) F(I) (0 3) 921 LET X1 = 0.5
   Origs: 920:auto
   Dests: 922:auto
 G(841) F(I) (0 2) 922 GOTO 935
   Origs: 921:auto
   Dests: 935:goto
-G(841) F(I) (1 4) 925 IF X1 > .75 THEN 930
+G(841) F(I) (1 4) 925 IF X1 > 0.75 THEN 930
   Origs: 920:ifthen
   Dests: 926:auto, 930:ifthen
-G(841) F(I) (0 3) 926 LET X1 = .75
+G(841) F(I) (0 3) 926 LET X1 = 0.75
   Origs: 925:auto
   Dests: 927:auto
 G(841) F(I) (0 2) 927 GOTO 935
   Origs: 926:auto
   Dests: 935:goto
-G(841) F(I) (0 3) 930 LET X1 = 0.0
+G(841) F(I) (0 3) 930 LET X1 = 0
   Origs: 925:ifthen
   Dests: 935:auto
 (0 1) 931 REM BIG CHANGE CONSTANT:W3  (SET TO ZERO INITIALLY)
@@ -618,7 +618,7 @@ G(841) F(I) (0 3) 935 LET W3 = 0
 G(841) F(I) (1 4) 936 IF E1 < 1 THEN 945
   Origs: 935:auto
   Dests: 937:auto, 945:ifthen
-G(841) F(I) (1 6) 937 IF INT(I1 + .5) <> INT(I + .5) THEN 945
+G(841) F(I) (1 6) 937 IF INT(I1 + 0.5) <> INT(I + 0.5) THEN 945
   Origs: 936:auto
   Dests: 939:auto, 945:ifthen
 (0 1) 938 REM ADD 10 PTS. TO THIS STOCK;  RESET E1 
@@ -633,7 +633,7 @@ G(841) F(I) (0 3) 943 LET E1 = 0
 G(841) F(I) (1 4) 945 IF E2 < 1 THEN 955
   Origs: 936:ifthen, 937:ifthen, 943:auto
   Dests: 947:auto, 955:ifthen
-G(841) F(I) (1 6) 947 IF INT(I2 + .5) <> INT(I + .5) THEN 955
+G(841) F(I) (1 6) 947 IF INT(I2 + 0.5) <> INT(I + 0.5) THEN 955
   Origs: 945:auto
   Dests: 949:auto, 955:ifthen
 (0 1) 948 REM SUBTRACT 10 PTS. FROM THIS STOCK;  RESET E2
@@ -648,10 +648,10 @@ G(841) F(I) (0 3) 953 LET E2 = 0
 (0 1) 954 REM C(I) IS CHANGE IN STOCK VALUE
   Origs: 
   Dests: 
-G(841) F(I) (0 8) 955 LET C(I) = INT(A * S(I)) + X1 + INT(3 - 6 * RND(X) + .5) + W3
+G(841) F(I) (0 8) 955 LET C(I) = INT(A * S(I)) + X1 + INT(3 - 6 * RND(X) + 0.5) + W3
   Origs: 945:ifthen, 947:ifthen, 953:auto
   Dests: 956:auto
-G(841) F(I) (0 5) 956 LET C(I) = INT(100 * C(I) + .5) / 100
+G(841) F(I) (0 5) 956 LET C(I) = INT(100 * C(I) + 0.5) / 100
   Origs: 955:auto
   Dests: 957:auto
 G(841) F(I) (0 4) 957 LET S(I) = S(I) + C(I)
@@ -669,7 +669,7 @@ G(841) F(I) (0 3) 965 LET S(I) = 0
 G(841) F(I) (0 2) 966 GOTO 970
   Origs: 965:auto
   Dests: 970:goto
-G(841) F(I) (0 5) 967 LET S(I) = INT(100 * S(I) + .5) / 100
+G(841) F(I) (0 5) 967 LET S(I) = INT(100 * S(I) + 0.5) / 100
   Origs: 960:ifthen
   Dests: 970:auto
 G(841) F(I) (0 1) 970 NEXT I
@@ -696,13 +696,13 @@ G(841) (0 1) 980 RETURN
 G(841) (0 4) 990 LET T8 = INT(4.99 * RND(X) + 1)
   Origs: 974:ifthen
   Dests: 992:auto
-G(841) (0 5) 992 LET A = INT((RND(X) / 10) * 100 + .5) / 100
+G(841) (0 5) 992 LET A = INT((RND(X) / 10) * 100 + 0.5) / 100
   Origs: 990:auto
   Dests: 993:auto
 G(841) (0 4) 993 LET S4 = RND(X)
   Origs: 992:auto
   Dests: 994:auto
-G(841) (1 4) 994 IF S4 <= .5 THEN 997
+G(841) (1 4) 994 IF S4 <= 0.5 THEN 997
   Origs: 993:auto
   Dests: 995:auto, 997:ifthen
 G(841) (0 4) 995 LET A = -A

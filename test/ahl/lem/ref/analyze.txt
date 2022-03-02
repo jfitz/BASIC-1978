@@ -70,7 +70,7 @@ F(I) (0 4) 60 A = -3.425
 F(I) (0 3) 65 R1 = 0
   Origs: 60:auto
   Dests: 70:auto
-F(I) (0 3) 70 A1 = 8.84361E-04
+F(I) (0 3) 70 A1 = 0.000884361
   Origs: 65:auto
   Dests: 75:auto
 F(I) (0 3) 75 R3 = 0
@@ -202,7 +202,7 @@ F(I) (0 3) 280 Z = 6080
 F(I) (0 3) 285 M$ = "FEET"
   Origs: 280:auto
   Dests: 290:auto
-F(I) (0 3) 290 G3 = .592
+F(I) (0 3) 290 G3 = 0.592
   Origs: 285:auto
   Dests: 295:auto
 F(I) (0 3) 295 N$ = "N.MILES"
@@ -391,10 +391,10 @@ F(I) (1 4) 595 IF T1 < 0 THEN 905
 F(I) (1 4) 600 IF T1 = 0 THEN 1090
   Origs: 595:auto
   Dests: 605:auto, 1090:ifthen
-F(I) (1 5) 605 IF ABS(F - .05) > 1 THEN 945
+F(I) (1 5) 605 IF ABS(F - 0.05) > 1 THEN 945
   Origs: 600:auto
   Dests: 610:auto, 945:ifthen
-F(I) (1 5) 610 IF ABS(F - .05) < .05 THEN 945
+F(I) (1 5) 610 IF ABS(F - 0.05) < 0.05 THEN 945
   Origs: 605:auto
   Dests: 615:auto, 945:ifthen
 F(I) (1 5) 615 IF ABS(P) > 180 THEN 925
@@ -424,7 +424,7 @@ F(I) (0 4) 650 C = COS(P)
 F(I) (0 6) 655 M2 = M0 * T1 * F / B
   Origs: 650:auto
   Dests: 660:auto
-F(I) (0 13) 660 R3 = -.5 * R0 * ((V0 / R) ^ 2) + R * A1 * A1
+F(I) (0 13) 660 R3 = -0.5 * R0 * ((V0 / R) ^ 2) + R * A1 * A1
   Origs: 655:auto
   Dests: 665:auto
 F(I) (0 7) 665 A3 = -2 * R1 * A1 / R
@@ -463,16 +463,16 @@ F(I) (0 3) 715 F = 0
 F(I) (0 3) 720 M2 = 0
   Origs: 715:auto
   Dests: 725:auto
-F(I) (0 6) 725 M = M - .5 * M2
+F(I) (0 6) 725 M = M - 0.5 * M2
   Origs: 685:ifthen, 710:goto, 720:auto
   Dests: 730:auto
 F(I) (0 3) 730 R4 = R3
   Origs: 725:auto
   Dests: 735:auto
-F(I) (0 13) 735 R3 = -.5 * R0 * ((V0 / R) ^ 2) + R * A1 * A1
+F(I) (0 13) 735 R3 = -0.5 * R0 * ((V0 / R) ^ 2) + R * A1 * A1
   Origs: 730:auto
   Dests: 740:auto
-F(I) (0 12) 740 R2 = (3 * R3 - R4) / 2 + .00526 * F1 * F * C / M
+F(I) (0 12) 740 R2 = (3 * R3 - R4) / 2 + 0.00526 * F1 * F * C / M
   Origs: 735:auto
   Dests: 745:auto
 F(I) (0 3) 745 A4 = A3
@@ -481,10 +481,10 @@ F(I) (0 3) 745 A4 = A3
 F(I) (0 7) 750 A3 = -2 * R1 * A1 / R
   Origs: 745:auto
   Dests: 755:auto
-F(I) (0 14) 755 A2 = (3 * A3 - A4) / 2 + .0056 * F1 * F * S / (M * R)
+F(I) (0 14) 755 A2 = (3 * A3 - A4) / 2 + 0.0056 * F1 * F * S / (M * R)
   Origs: 750:auto
   Dests: 760:auto
-F(I) (0 9) 760 X = R1 * T1 + .5 * R2 * T1 * T1
+F(I) (0 9) 760 X = R1 * T1 + 0.5 * R2 * T1 * T1
   Origs: 755:auto
   Dests: 765:auto
 F(I) (0 4) 765 R = R + X
@@ -496,19 +496,19 @@ F(I) (0 4) 770 H0 = H0 + X
 F(I) (0 6) 775 R1 = R1 + R2 * T1
   Origs: 770:auto
   Dests: 780:auto
-F(I) (0 11) 780 A = A + A1 * T1 + .5 * A2 * T1 * T1
+F(I) (0 11) 780 A = A + A1 * T1 + 0.5 * A2 * T1 * T1
   Origs: 775:auto
   Dests: 785:auto
 F(I) (0 6) 785 A1 = A1 + A2 * T1
   Origs: 780:auto
   Dests: 790:auto
-F(I) (0 6) 790 M = M - .5 * M2
+F(I) (0 6) 790 M = M - 0.5 * M2
   Origs: 785:auto
   Dests: 795:auto
 F(I) (0 4) 795 T = T + T1
   Origs: 790:auto
   Dests: 800:auto
-F(I) (1 4) 800 IF H0 < 3.287828E-04 THEN 810
+F(I) (1 4) 800 IF H0 < 0.000328783 THEN 810
   Origs: 795:auto
   Dests: 805:auto, 810:ifthen
 F(I) (0 1) 805 NEXT I
@@ -535,7 +535,7 @@ F(I) (0 9) 835 PRINT " "; T; TAB(10); H; TAB(23); D;
 F(I) (0 10) 840 PRINT TAB(37); H1; TAB(49); D1; TAB(60); T2
   Origs: 835:auto
   Dests: 845:auto
-F(I) (1 4) 845 IF H0 < 3.287828E-04 THEN 880
+F(I) (1 4) 845 IF H0 < 0.000328783 THEN 880
   Origs: 840:auto
   Dests: 850:auto, 880:ifthen
 F(I) (1 5) 850 IF R0 * A > 164.474 THEN 1050
@@ -556,13 +556,13 @@ F(I) (0 3) 870 P = 0
 F(I) (0 3) 875 GOTO 620
   Origs: 870:auto
   Dests: 620:goto
-F(I) (1 6) 880 IF R1 < -8.21957E-04 THEN 1020
+F(I) (1 6) 880 IF R1 < -0.000821957 THEN 1020
   Origs: 845:ifthen
   Dests: 885:auto, 1020:ifthen
-F(I) (1 5) 885 IF ABS(R * A1) > 4.93174E-04 THEN 1020
+F(I) (1 5) 885 IF ABS(R * A1) > 0.000493174 THEN 1020
   Origs: 880:auto
   Dests: 890:auto, 1020:ifthen
-F(I) (1 6) 890 IF H0 < -3.287828E-04 THEN 1020
+F(I) (1 6) 890 IF H0 < -0.000328783 THEN 1020
   Origs: 885:auto
   Dests: 895:auto, 1020:ifthen
 F(I) (1 7) 895 IF ABS(D) > 10 * Z THEN 1065
@@ -604,7 +604,7 @@ F(I) (0 2) 950 PRINT "IMPOSSIBLE THRUST VALUE ";
 F(I) (1 4) 955 IF F < 0 THEN 985
   Origs: 950:auto
   Dests: 960:auto, 985:ifthen
-F(I) (1 5) 960 IF F - .05 < .05 THEN 975
+F(I) (1 5) 960 IF F - 0.05 < 0.05 THEN 975
   Origs: 955:auto
   Dests: 965:auto, 975:ifthen
 F(I) (0 2) 965 PRINT "TOO LARGE"

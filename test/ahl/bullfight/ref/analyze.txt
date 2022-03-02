@@ -255,7 +255,7 @@ F(I) (0 1) 467 NEXT I
 (1 4) 870 IF E = 1 THEN 900
   Origs: 860:auto
   Dests: 880:auto, 900:ifthen
-(0 3) 880 M = .5
+(0 3) 880 M = 0.5
   Origs: 870:auto
   Dests: 890:auto
 (0 2) 890 GOTO 930
@@ -276,7 +276,7 @@ F(I) (0 1) 467 NEXT I
 (0 16) 940 F = (6 - A + M / 10) * RND(1) / ((D(1) + D(2) + D(3) / 10) * 5)
   Origs: 930:auto
   Dests: 950:auto
-(1 5) 950 IF F < .51 THEN 660
+(1 5) 950 IF F < 0.51 THEN 660
   Origs: 940:auto
   Dests: 660:ifthen, 960:auto
 (0 2) 960 PRINT "THE BULL HAS GORED YOU!"
@@ -369,7 +369,7 @@ F(I) (0 1) 467 NEXT I
 (1 4) 1240 IF J = 4 THEN 1290
   Origs: 1230:auto
   Dests: 1250:auto, 1290:ifthen
-(1 5) 1250 IF K > .2 THEN 960
+(1 5) 1250 IF K > 0.2 THEN 960
   Origs: 1240:auto
   Dests: 960:ifthen, 1260:auto
 (0 2) 1260 PRINT "YOU KILLED THE BULL!"
@@ -381,7 +381,7 @@ F(I) (0 1) 467 NEXT I
 (0 2) 1280 GOTO 1320
   Origs: 1270:auto
   Dests: 1320:goto
-(1 5) 1290 IF K > .8 THEN 960
+(1 5) 1290 IF K > 0.8 THEN 960
   Origs: 1240:ifthen
   Dests: 960:ifthen, 1300:auto
 (0 3) 1300 GOTO 1260
@@ -484,46 +484,46 @@ FND(_) (0 20) 1395 DEF FND(Q) = (4.5 + L / 6 - (D(1) + D(2)) * 2.5 + 4 * D(4) + 
 G(1610) (0 6) 1610 B = 3 / A * RND(1)
   Origs: 600:gosub, 640:gosub
   Dests: 1620:auto
-G(1610) (1 4) 1620 IF B < .37 THEN 1740
+G(1610) (1 4) 1620 IF B < 0.37 THEN 1740
   Origs: 1610:auto
   Dests: 1630:auto, 1740:ifthen
-G(1610) (1 4) 1630 IF B < .5 THEN 1720
+G(1610) (1 4) 1630 IF B < 0.5 THEN 1720
   Origs: 1620:auto
   Dests: 1640:auto, 1720:ifthen
-G(1610) (1 4) 1640 IF B < .63 THEN 1700
+G(1610) (1 4) 1640 IF B < 0.63 THEN 1700
   Origs: 1630:auto
   Dests: 1650:auto, 1700:ifthen
-G(1610) (1 4) 1650 IF B < .87 THEN 1680
+G(1610) (1 4) 1650 IF B < 0.87 THEN 1680
   Origs: 1640:auto
   Dests: 1660:auto, 1680:ifthen
-G(1610) (0 3) 1660 C = .1
+G(1610) (0 3) 1660 C = 0.1
   Origs: 1650:auto
   Dests: 1670:auto
 G(1610) (0 2) 1670 GOTO 1750
   Origs: 1660:auto
   Dests: 1750:goto
-G(1610) (0 3) 1680 C = .2
+G(1610) (0 3) 1680 C = 0.2
   Origs: 1650:ifthen
   Dests: 1690:auto
 G(1610) (0 2) 1690 GOTO 1750
   Origs: 1680:auto
   Dests: 1750:goto
-G(1610) (0 3) 1700 C = .3
+G(1610) (0 3) 1700 C = 0.3
   Origs: 1640:ifthen
   Dests: 1710:auto
 G(1610) (0 2) 1710 GOTO 1750
   Origs: 1700:auto
   Dests: 1750:goto
-G(1610) (0 3) 1720 C = .4
+G(1610) (0 3) 1720 C = 0.4
   Origs: 1630:ifthen
   Dests: 1730:auto
 G(1610) (0 2) 1730 GOTO 1750
   Origs: 1720:auto
   Dests: 1750:goto
-G(1610) (0 3) 1740 C = .5
+G(1610) (0 3) 1740 C = 0.5
   Origs: 1620:ifthen
   Dests: 1750:auto
-G(1610) (0 4) 1750 T = INT(10 * C + .2)
+G(1610) (0 4) 1750 T = INT(10 * C + 0.2)
   Origs: 1670:goto, 1690:goto, 1710:goto, 1730:goto, 1740:auto
   Dests: 1760:auto
 G(1610) (0 7) 1760 PRINT "THE "; A$; B$; " DID A "; L$(T); " JOB."

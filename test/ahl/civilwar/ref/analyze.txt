@@ -311,16 +311,16 @@ F(I,Z) (0 7) 990 LET I2 = 10 + (W - L) * 2
 (0 1) 1000 REM - MONEY AVAILABLE
   Origs: 
   Dests: 
-F(I,Z) (0 5) 1010 LET D(1) = 100 * INT((M1 * (100 - I1) / 2000) * (1 + (R1 - Q1) / (R1 + 1)) + .5)
+F(I,Z) (0 5) 1010 LET D(1) = 100 * INT((M1 * (100 - I1) / 2000) * (1 + (R1 - Q1) / (R1 + 1)) + 0.5)
   Origs: 990:auto
   Dests: 1020:auto
-F(I,Z) (0 5) 1020 LET D(2) = 100 * INT(M2 * (100 - I2) / 2000 + .5)
+F(I,Z) (0 5) 1020 LET D(2) = 100 * INT(M2 * (100 - I2) / 2000 + 0.5)
   Origs: 1010:auto
   Dests: 1030:auto
 F(I,Z) (1 4) 1030 IF B$ <> "YES" THEN 1050
   Origs: 1020:auto
   Dests: 1040:auto, 1060:ifthen
-F(I,Z) (0 5) 1040 LET D(2) = 100 * INT((M2 * (100 - I2) / 2000) * (1 + (R2 - Q2) / (R2 + 1)) + .5)
+F(I,Z) (0 5) 1040 LET D(2) = 100 * INT((M2 * (100 - I2) / 2000) * (1 + (R2 - Q2) / (R2 + 1)) + 0.5)
   Origs: 1030:auto
   Dests: 1060:auto
 (0 1) 1050 REM - MEN   AVAILABLE
@@ -648,7 +648,7 @@ F(I,Z) (0 15) 2080 LET C6 = (2 * C2 / 5) * (1 + 1 / (2 * (ABS(Y2 - Y) + 1)))
 F(I,Z) (0 12) 2090 LET C6 = C6 * (1.28 + (5 * M2 / 6) / (B(2) + 1))
   Origs: 2080:auto
   Dests: 2100:auto
-F(I,Z) (0 4) 2100 LET C6 = INT(C6 * (1 + 1 / O2) + .5)
+F(I,Z) (0 4) 2100 LET C6 = INT(C6 * (1 + 1 / O2) + 0.5)
   Origs: 2090:auto
   Dests: 2120:auto
 (0 1) 2110 REM - IF LOSS > MEN PRESENT, RESCALE LOSSES
@@ -683,7 +683,7 @@ F(I,Z) (0 4)      PRINT, "CONFEDERACY", "UNION"
 F(I,Z) (0 15) 2200 LET C5 = (2 * C1 / 5) * (1 + 1 / (2 * (ABS(Y2 - Y) + 1)))
   Origs: 2190:auto
   Dests: 2210:auto
-F(I,Z) (0 4) 2210 LET C5 = INT(C5 * (1 + 1 / O) * (1.28 + F1 / (B(1) + 1)) + .5)
+F(I,Z) (0 4) 2210 LET C5 = INT(C5 * (1 + 1 / O) * (1.28 + F1 / (B(1) + 1)) + 0.5)
   Origs: 2200:auto
   Dests: 2220:auto
 F(I,Z) (0 4) 2220 LET E = 100 / O
@@ -719,10 +719,10 @@ F(I,Z) (1 4) 2310 IF B$ <> "YES" THEN 2350
 F(I,Z) (0 3) 2320 PRINT "COMPARED TO THE ACTUAL CASUALTIES AT " C$
   Origs: 2310:auto
   Dests: 2330:auto
-F(I,Z) (0 5) 2330 PRINT "CONFEDERATE:" INT(100 * (C5 / C1) + .5) "% OF THE ORIGINAL"
+F(I,Z) (0 5) 2330 PRINT "CONFEDERATE:" INT(100 * (C5 / C1) + 0.5) "% OF THE ORIGINAL"
   Origs: 2320:auto
   Dests: 2340:auto
-F(I,Z) (0 5) 2340 PRINT "UNION:      " INT(100 * (C6 / C2) + .5) "% OF THE ORIGINAL"
+F(I,Z) (0 5) 2340 PRINT "UNION:      " INT(100 * (C6 / C2) + 0.5) "% OF THE ORIGINAL"
   Origs: 2330:auto
   Dests: 2350:auto
 F(I,Z) (0 2) 2350 PRINT
@@ -782,7 +782,7 @@ F(I,Z) (0 4) 2510 LET E2 = 5 * O
 F(I,Z) (0 3) 2520 GOTO 2280
   Origs: 2510:auto
   Dests: 2280:goto
-(0 5) 2530 PRINT "YOUR CASUALTIES WERE " INT(100 * (C5 / C1) + .5) "% OF "
+(0 5) 2530 PRINT "YOUR CASUALTIES WERE " INT(100 * (C5 / C1) + 0.5) "% OF "
   Origs: 
   Dests: 2540:auto
 (0 3) 2540 PRINT "THE ACTUAL CASUALTIES AT "; C$
@@ -932,16 +932,16 @@ F(I,Z) (0 4) 2980 PRINT " ", " ", " ";
 F(I,Z) (0 3) 2990 PRINT "CONFEDERACY", " UNION"
   Origs: 2980:auto
   Dests: 3000:auto
-F(I,Z) (0 6) 3000 PRINT "HISTORICAL LOSSES", INT(P1 + .5), INT(P2 + .5)
+F(I,Z) (0 6) 3000 PRINT "HISTORICAL LOSSES", INT(P1 + 0.5), INT(P2 + 0.5)
   Origs: 2990:auto
   Dests: 3010:auto
-F(I,Z) (0 6) 3010 PRINT "SIMULATED LOSSES", INT(T1 + .5), INT(T2 + .5)
+F(I,Z) (0 6) 3010 PRINT "SIMULATED LOSSES", INT(T1 + 0.5), INT(T2 + 0.5)
   Origs: 3000:auto
   Dests: 3020:auto
 F(I,Z) (0 2) 3020 PRINT
   Origs: 3010:auto
   Dests: 3030:auto
-F(I,Z) (0 6) 3030 PRINT "    % OF ORIGINAL", INT(100 * (T1 / P1) + .5), INT(100 * (T2 / P2) + .5)
+F(I,Z) (0 6) 3030 PRINT "    % OF ORIGINAL", INT(100 * (T1 / P1) + 0.5), INT(100 * (T2 / P2) + 0.5)
   Origs: 3020:auto
   Dests: 3040:auto
 F(I,Z) (1 4) 3040 IF B$ = "YES" THEN 3100
@@ -1071,43 +1071,43 @@ G(3330) (0 1) 3410 RETURN
 (0 2) 3440 DATA "BULL RUN", 18000, 18500, 1967, 2708, 1
   Origs: 
   Dests: 
-(0 2) 3450 DATA "SHILOH", 40000., 44894., 10699, 13047, 3
+(0 2) 3450 DATA "SHILOH", 40000, 44894, 10699, 13047, 3
   Origs: 
   Dests: 
-(0 2) 3460 DATA "SEVEN DAYS", 95000., 115000., 20614, 15849, 3
+(0 2) 3460 DATA "SEVEN DAYS", 95000, 115000, 20614, 15849, 3
   Origs: 
   Dests: 
-(0 2) 3470 DATA "SECOND BULL RUN", 54000., 63000., 10000, 14000, 2
+(0 2) 3470 DATA "SECOND BULL RUN", 54000, 63000, 10000, 14000, 2
   Origs: 
   Dests: 
-(0 2) 3480 DATA "ANTIETAM", 40000., 50000., 10000, 12000, 3
+(0 2) 3480 DATA "ANTIETAM", 40000, 50000, 10000, 12000, 3
   Origs: 
   Dests: 
-(0 2) 3490 DATA "FREDERICKSBURG", 75000., 120000., 5377, 12653, 1
+(0 2) 3490 DATA "FREDERICKSBURG", 75000, 120000, 5377, 12653, 1
   Origs: 
   Dests: 
-(0 2) 3500 DATA "MURFREESBORO", 38000., 45000., 11000, 12000, 1
+(0 2) 3500 DATA "MURFREESBORO", 38000, 45000, 11000, 12000, 1
   Origs: 
   Dests: 
-(0 2) 3510 DATA "CHANCELLORSVILLE", 32000, 90000., 13000, 17197, 2
+(0 2) 3510 DATA "CHANCELLORSVILLE", 32000, 90000, 13000, 17197, 2
   Origs: 
   Dests: 
-(0 2) 3520 DATA "VICKSBURG", 50000., 70000., 12000, 19000, 1
+(0 2) 3520 DATA "VICKSBURG", 50000, 70000, 12000, 19000, 1
   Origs: 
   Dests: 
-(0 2) 3530 DATA "GETTYSBURG", 72500., 85000., 20000, 23000, 3
+(0 2) 3530 DATA "GETTYSBURG", 72500, 85000, 20000, 23000, 3
   Origs: 
   Dests: 
-(0 2) 3540 DATA "CHICKAMAUGA", 66000., 60000., 18000, 16000, 2
+(0 2) 3540 DATA "CHICKAMAUGA", 66000, 60000, 18000, 16000, 2
   Origs: 
   Dests: 
-(0 2) 3550 DATA "CHATTANOOGA", 37000., 60000., 36700., 5800, 2
+(0 2) 3550 DATA "CHATTANOOGA", 37000, 60000, 36700, 5800, 2
   Origs: 
   Dests: 
-(0 2) 3560 DATA "SPOTSYLVANIA", 62000., 110000., 17723, 18000, 2
+(0 2) 3560 DATA "SPOTSYLVANIA", 62000, 110000, 17723, 18000, 2
   Origs: 
   Dests: 
-(0 2) 3570 DATA "ATLANTA", 65000., 100000., 8500, 3700, 1
+(0 2) 3570 DATA "ATLANTA", 65000, 100000, 8500, 3700, 1
   Origs: 
   Dests: 
 F(I,Z) (0 2) 3580 PRINT "JULY 21, 1861.  GEN. BEAUREGARD, COMMANDING THE SOUTH, MET"
@@ -1254,7 +1254,7 @@ F(I,Z) (0 3) 4000 GOTO 1150
 
 Unreachable code:
 
-2530: PRINT "YOUR CASUALTIES WERE " INT(100 * (C5 / C1) + .5) "% OF "
+2530: PRINT "YOUR CASUALTIES WERE " INT(100 * (C5 / C1) + 0.5) "% OF "
 2540: PRINT "THE ACTUAL CASUALTIES AT "; C$
 2550: PRINT
 2570: IF U = 1 THEN 2590

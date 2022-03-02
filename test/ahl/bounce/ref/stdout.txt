@@ -81,14 +81,14 @@ Type mismatch '"QUIT"' is not numeric in line 135
 190 F(I,H) (1) FOR I = 1 TO S1
 200 F(I,H) (3) T(I) = V * C ^ (I - 1) / 16
 210 F(I,H) (3) NEXT I
-220 F(H) (1) FOR H = INT(-16 * (V / 32) ^ 2 + V ^ 2 / 32 + .5) TO 0 STEP -.5
+220 F(H) (1) FOR H = INT(-16 * (V / 32) ^ 2 + V ^ 2 / 32 + 0.5) TO 0 STEP -0.5
 221 F(H) (29) IF INT(H) <> H THEN 225
 222 F(H) (15) PRINT H;
 225 F(H) (29) L = 0
 230 F(H,I) (29) FOR I = 1 TO S1
 240 F(H,I,T) (80) FOR T = 0 TO T(I) STEP S2
 245 F(H,I,T) (1395) L = L + S2
-250 F(H,I,T) (1395) IF ABS(H - (.5 * (-32) * T ^ 2 + V * C ^ (I - 1) * T)) > .25 THEN 270
+250 F(H,I,T) (1395) IF ABS(H - (0.5 * (-32) * T ^ 2 + V * C ^ (I - 1) * T)) > 0.25 THEN 270
 260 F(H,I,T) (52) PRINT TAB(L / S2); "0";
 270 F(H,I,T) (1395) NEXT T
 275 F(H,I) (80) T = T(I + 1) / 2
@@ -102,7 +102,7 @@ Type mismatch '"QUIT"' is not numeric in line 135
 340 F(H,I) (61) NEXT I
 350 F(H) (1) PRINT
 355 F(H) (1) PRINT " 0";
-360 F(H,I) (1) FOR I = 1 TO INT(L + .9995)
+360 F(H,I) (1) FOR I = 1 TO INT(L + 0.9995)
 380 F(H,I) (6) PRINT TAB(INT(I / S2)); I;
 390 F(H,I) (6) NEXT I
 400 F(H) (1) PRINT

@@ -210,22 +210,22 @@ G(6000) F(I,J) (0 3)     Z(I, J) = 0
 G(6000) F(I,J) (0 4)     R1 = RND(1)
   Origs: 710:auto
   Dests: 850:auto, 1040:fornext
-G(6000) F(I,J) (1 6) 850 IF R1 > .98 THEN K3 = 3
+G(6000) F(I,J) (1 6) 850 IF R1 > 0.98 THEN K3 = 3
 G(6000) F(I,J) (0 4)     K9 = K9 + 3
 G(6000) F(I,J) (0 2)     GOTO 980
   Origs: 820:auto
   Dests: 860:auto, 980:goto
-G(6000) F(I,J) (1 6) 860 IF R1 > .95 THEN K3 = 2
+G(6000) F(I,J) (1 6) 860 IF R1 > 0.95 THEN K3 = 2
 G(6000) F(I,J) (0 4)     K9 = K9 + 2
 G(6000) F(I,J) (0 2)     GOTO 980
   Origs: 850:auto
   Dests: 870:auto, 980:goto
-G(6000) F(I,J) (1 6) 870 IF R1 > .80 THEN K3 = 1
+G(6000) F(I,J) (1 6) 870 IF R1 > 0.8 THEN K3 = 1
 G(6000) F(I,J) (0 4)     K9 = K9 + 1
   Origs: 860:auto
   Dests: 980:auto
 G(6000) F(I,J) (0 3) 980 B3 = 0
-G(6000) F(I,J) (1 7)     IF RND(1) > .96 THEN B3 = 1
+G(6000) F(I,J) (1 7)     IF RND(1) > 0.96 THEN B3 = 1
 G(6000) F(I,J) (0 4)     B9 = B9 + 1
   Origs: 850:goto, 860:goto, 870:auto
   Dests: 1040:auto
@@ -285,7 +285,7 @@ G(6000) F(I) (0 3)      K3 = 0
 G(6000) F(I) (0 3)      B3 = 0
 G(6000) F(I) (0 3)      S3 = 0
 G(6000) F(I) (0 3)      G5 = 0
-G(6000) F(I) (0 5)      D4 = .5 * RND(1)
+G(6000) F(I) (0 5)      D4 = 0.5 * RND(1)
 G(6000) F(I) (0 3)      Z(Q1, Q2) = G(Q1, Q2)
   Origs: 1300:auto, 3870:goto
   Dests: 1390:auto
@@ -308,8 +308,8 @@ G(6000) F(I) (0 4) 1490 PRINT "NOW ENTERING "; G2$; " QUADRANT . . ."
   Origs: 1430:ifthen
   Dests: 1500:auto
 G(6000) F(I) (0 2) 1500 PRINT
-G(6000) F(I) (0 4)      K3 = INT(G(Q1, Q2) * .01)
-G(6000) F(I) (0 7)      B3 = INT(G(Q1, Q2) * .1) - 10 * K3
+G(6000) F(I) (0 4)      K3 = INT(G(Q1, Q2) * 0.01)
+G(6000) F(I) (0 7)      B3 = INT(G(Q1, Q2) * 0.1) - 10 * K3
   Origs: 1470:goto, 1490:auto
   Dests: 1540:auto
 G(6000) F(I) (0 9) 1540 S3 = G(Q1, Q2) - 100 * K3 - 10 * B3
@@ -471,7 +471,7 @@ G(6000) F(I) (1 6)      IF D(1) < 0 THEN X$ = "0.2"
   Dests: 2360:auto
 G(6000) F(I) (0 4) 2360 PRINT "WARP FACTOR (0-"; X$; ")";
 G(6000) F(I) (1 2)      INPUT W1
-G(6000) F(I) (1 7)      IF D(1) < 0 AND W1 > .2 THEN 2470
+G(6000) F(I) (1 7)      IF D(1) < 0 AND W1 > 0.2 THEN 2470
   Origs: 2350:auto
   Dests: 2380:auto, 2470:ifthen
 G(6000) F(I) (1 7) 2380 IF W1 > 0 AND W1 <= 8 THEN 2490
@@ -494,7 +494,7 @@ G(6000) F(I) (0 3)      GOTO 1990
      WARNING: Branch to line before GOSUB start
   Origs: 2360:ifthen
   Dests: 1990:goto
-G(6000) F(I) (0 4) 2490 N = INT(W1 * 8 + .5)
+G(6000) F(I) (0 4) 2490 N = INT(W1 * 8 + 0.5)
 G(6000) F(I) (1 5)      IF E - N >= 0 THEN 2590
   Origs: 2380:ifthen
   Dests: 2500:auto, 2590:ifthen
@@ -550,7 +550,7 @@ G(6000) F(I,I) (1 4)      IF D(I) >= 0 THEN 2880
   Origs: 2700:auto
   Dests: 2790:auto, 2880:fornext, 2880:ifthen
 G(6000) F(I) (0 4) 2790 D(I) = D(I) + D6
-G(6000) F(I) (1 12)      IF D(I) > -.1 AND D(I) < 0 THEN D(I) = -.1
+G(6000) F(I) (1 12)      IF D(I) > -0.1 AND D(I) < 0 THEN D(I) = -0.1
 G(6000) F(I) (0 2)      GOTO 2880
   Origs: 2770:auto
   Dests: 2800:auto, 2880:goto
@@ -568,11 +568,11 @@ G(6000) F(I) (0 3)      PRINT G2$; " REPAIR COMPLETED."
   Origs: 2810:auto
   Dests: 2880:auto, 8790:gosub
 G(6000) F(I) (0 1) 2880 NEXT I
-G(6000) F(I) (1 5)      IF RND(1) > .2 THEN 3070
+G(6000) F(I) (1 5)      IF RND(1) > 0.2 THEN 3070
   Origs: 2770:fornext, 2770:ifthen, 2790:goto, 2800:ifthen, 2840:auto
   Dests: 2910:auto, 3070:ifthen
 G(6000) F(I) (0 5) 2910 R1 = FNR(1)
-G(6000) F(I) (1 5)      IF RND(1) >= .6 THEN 3000
+G(6000) F(I) (1 5)      IF RND(1) >= 0.6 THEN 3000
   Origs: 2880:auto
   Dests: 475:function, 2930:auto, 3000:ifthen
 G(6000) F(I) (0 8) 2930 D(R1) = D(R1) - (RND(1) * 5 + 1)
@@ -645,7 +645,7 @@ G(6000) F(I) (0 2)      GOSUB 3910
 G(6000) F(I) (0 3)      T8 = 1
   Origs: 3350:goto, 3360:auto, 3860:ifthen
   Dests: 3430:auto, 3910:gosub, 8670:gosub
-G(6000) F(I) (1 8) 3430 IF W1 < 1 THEN T8 = .1 * INT(10 * W1)
+G(6000) F(I) (1 8) 3430 IF W1 < 1 THEN T8 = 0.1 * INT(10 * W1)
   Origs: 3370:auto
   Dests: 3450:auto
 G(6000) F(I) (0 4) 3450 T = T + T8
@@ -839,7 +839,7 @@ G(6000) F(I,I) (1 4)      IF K(I, 3) <= 0 THEN 4670
   Origs: 4410:auto
   Dests: 4480:auto, 4670:fornext, 4670:ifthen
 G(6000) F(I) (0 4) 4480 H = INT((H1 / FND(0)) * (RND(1) + 2))
-G(6000) F(I) (1 6)      IF H > .15 * K(I, 3) THEN 4530
+G(6000) F(I) (1 6)      IF H > 0.15 * K(I, 3) THEN 4530
   Origs: 4450:auto
   Dests: 4500:auto, 4530:ifthen
 G(6000) F(I) (0 5) 4500 PRINT "SENSORS SHOW NO DAMAGE TO ENEMY AT "; K(I, 1); ","; K(I, 2)
@@ -921,8 +921,8 @@ G(6000) F(I) (0 2) 4910 PRINT "TORPEDO TRACK:"
   Dests: 4920:auto
 G(6000) F(I) (0 4) 4920 X = X + X1
 G(6000) F(I) (0 4)      Y = Y + X2
-G(6000) F(I) (0 4)      X3 = INT(X + .5)
-G(6000) F(I) (0 4)      Y3 = INT(Y + .5)
+G(6000) F(I) (0 4)      X3 = INT(X + 0.5)
+G(6000) F(I) (0 4)      Y3 = INT(Y + 0.5)
   Origs: 4910:auto, 5050:ifthen
   Dests: 4960:auto
 G(6000) F(I) (1 13) 4960 IF X3 < 1 OR X3 > 8 OR Y3 < 1 OR Y3 > 8 THEN 5490
@@ -1079,7 +1079,7 @@ G(6000) F(I) (1 5)      IF D0 = 0 THEN 1990
   Dests: 1990:ifthen, 5720:auto
 G(6000) F(I) (0 3) 5720 D3 = 0
 G(6000) F(I,I) (1 3)      FOR I = 1 TO 8
-G(6000) F(I,I) (1 7)      IF D(I) < 0 THEN D3 = D3 + .1
+G(6000) F(I,I) (1 7)      IF D(I) < 0 THEN D3 = D3 + 0.1
   Origs: 5700:auto, 5950:ifthen
   Dests: 5760:auto, 5760:fornext
 G(6000) F(I) (0 1) 5760 NEXT I
@@ -1089,13 +1089,13 @@ G(6000) F(I) (1 5)      IF D3 = 0 THEN 1990
   Dests: 1990:ifthen, 5780:auto
 G(6000) F(I) (0 2) 5780 PRINT
 G(6000) F(I) (0 4)      D3 = D3 + D4
-G(6000) F(I) (1 6)      IF D3 >= 1 THEN D3 = .9
+G(6000) F(I) (1 6)      IF D3 >= 1 THEN D3 = 0.9
   Origs: 5760:auto
   Dests: 5810:auto
 G(6000) F(I) (0 2) 5810 PRINT "TECHNICIANS STANDING BY TO EFFECT REPAIRS TO YOUR SHIP;"
   Origs: 5780:auto
   Dests: 5820:auto
-G(6000) F(I) (0 6) 5820 PRINT "ESTIMATED TIME TO REPAIR:"; .01 * INT(100 * D3); "STARDATES"
+G(6000) F(I) (0 6) 5820 PRINT "ESTIMATED TIME TO REPAIR:"; 0.01 * INT(100 * D3); "STARDATES"
   Origs: 5810:auto
   Dests: 5840:auto
 G(6000) F(I) (1 2) 5840 INPUT "WILL YOU AUTHORIZE THE REPAIR ORDER (Y/N)"; A$
@@ -1110,7 +1110,7 @@ G(6000) F(I,I) (1 6)      IF D(I) < 0 THEN D(I) = 0
   Origs: 5860:auto
   Dests: 5890:auto, 5890:fornext
 G(6000) F(I) (0 1) 5890 NEXT I
-G(6000) F(I) (0 5)      T = T + D3 + .1
+G(6000) F(I) (0 5)      T = T + D3 + 0.1
   Origs: 5870:auto, 5870:fornext
   Dests: 5910:auto
 G(6000) F(I) (0 2) 5910 PRINT
@@ -1119,7 +1119,7 @@ G(6000) F(I,R1) (1 3)      FOR R1 = 1 TO 8
   Origs: 5690:ifthen, 5890:auto
   Dests: 5920:fornext, 5950:fornext
 G(6000) F(I,R1) (0 2) 5920 GOSUB 8790
-G(6000) F(I,R1) (0 7)      PRINT G2$; LEFT$(Z$, 25 - LEN(G2$)); INT(D(R1) * 100) * .01
+G(6000) F(I,R1) (0 7)      PRINT G2$; LEFT$(Z$, 25 - LEN(G2$)); INT(D(R1) * 100) * 0.01
   Origs: 5910:fornext
   Dests: 5950:auto, 8790:gosub
 G(6000) F(I,R1) (0 1) 5950 NEXT R1
@@ -1161,11 +1161,11 @@ G(6000) F(I) (0 4) 6100 PRINT "      <SHIELDS DOWN TO"; S; "UNITS>"
 G(6000) F(I) (1 4)      IF H < 20 THEN 6200
   Origs: 6090:auto
   Dests: 6120:auto, 6200:ifthen
-G(6000) F(I) (1 9) 6120 IF RND(1) > .6 OR H / S <= .02 THEN 6200
+G(6000) F(I) (1 9) 6120 IF RND(1) > 0.6 OR H / S <= 0.02 THEN 6200
   Origs: 6100:auto
   Dests: 6140:auto, 6200:ifthen
 G(6000) F(I) (0 5) 6140 R1 = FNR(1)
-G(6000) F(I) (0 10)      D(R1) = D(R1) - H / S - .5 * RND(1)
+G(6000) F(I) (0 10)      D(R1) = D(R1) - H / S - 0.5 * RND(1)
 G(6000) F(I) (0 2)      GOSUB 8790
   Origs: 6120:auto
   Dests: 475:function, 6170:auto, 8790:gosub
@@ -1236,7 +1236,7 @@ G(6430) F(I) (1 5) 6430 FOR I = S1 - 1 TO S1 + 1
 G(6430) F(I,J) (1 5)      FOR J = S2 - 1 TO S2 + 1
   Origs: 1980:gosub
   Dests: 6450:fornext, 6540:fornext
-G(6430) F(I,J) (1 17) 6450 IF INT(I + .5) < 1 OR INT(I + .5) > 8 OR INT(J + .5) < 1 OR INT(J + .5) > 8 THEN 6540
+G(6430) F(I,J) (1 17) 6450 IF INT(I + 0.5) < 1 OR INT(I + 0.5) > 8 OR INT(J + 0.5) < 1 OR INT(J + 0.5) > 8 THEN 6540
   Origs: 6430:fornext
   Dests: 6490:auto, 6540:ifthen
 G(6430) F(I,J) (0 3) 6490 A$ = ">!<"
@@ -1268,7 +1268,7 @@ G(6430) (0 2)      GOTO 6720
   Origs: 6540:goto
   Dests: 6660:auto, 6720:goto
 G(6430) (0 3) 6660 C$ = "GREEN"
-G(6430) (1 8)      IF E < E0 * .1 THEN C$ = "YELLOW"
+G(6430) (1 8)      IF E < E0 * 0.1 THEN C$ = "YELLOW"
   Origs: 6650:auto
   Dests: 6720:auto
 G(6430) F(I,J) (1 4) 6720 IF D(2) >= 0 THEN 6770
@@ -1293,7 +1293,7 @@ G(6430) F(I,J) (0 1)      NEXT J
 G(6430) F(I,J) (8 10) 6830 ON I GOTO 6850, 6900, 6960, 7020, 7070, 7120, 7180, 7240
   Origs: 6820:auto
   Dests: 6850:auto, 6850:goto, 6900:goto, 6960:goto, 7020:goto, 7070:goto, 7120:goto, 7180:goto, 7240:goto
-G(6430) F(I,J) (0 5) 6850 PRINT "        STARDATE          "; INT(T * 10) * .1
+G(6430) F(I,J) (0 5) 6850 PRINT "        STARDATE          "; INT(T * 10) * 0.1
 G(6430) F(I,J) (0 2)      GOTO 7260
   Origs: 6830:auto, 6830:goto
   Dests: 7260:goto
@@ -1426,13 +1426,13 @@ G(6000) F(I) (0 2)      GOTO 7850
 G(6000) F(I) (0 3) 7740 Z4 = I
 G(6000) F(I) (0 3)      Z5 = 1
 G(6000) F(I) (0 2)      GOSUB 9030
-G(6000) F(I) (0 4)      J0 = INT(15 - .5 * LEN(G2$))
+G(6000) F(I) (0 4)      J0 = INT(15 - 0.5 * LEN(G2$))
 G(6000) F(I) (0 4)      PRINT TAB(J0); G2$;
   Origs: 7570:ifthen
   Dests: 7800:auto, 9030:gosub
 G(6000) F(I) (0 3) 7800 Z5 = 5
 G(6000) F(I) (0 2)      GOSUB 9030
-G(6000) F(I) (0 4)      J0 = INT(39 - .5 * LEN(G2$))
+G(6000) F(I) (0 4)      J0 = INT(39 - 0.5 * LEN(G2$))
 G(6000) F(I) (0 4)      PRINT TAB(J0); G2$;
   Origs: 7740:auto
   Dests: 7850:auto, 9030:gosub
@@ -1455,7 +1455,7 @@ G(6000) F(I) (1 6)      IF K9 > 1 THEN X$ = "S"
 G(6000) F(I) (0 5) 7940 PRINT "KLINGON"; X$; " LEFT: "; K9
   Origs: 7900:auto
   Dests: 7960:auto
-G(6000) F(I) (0 6) 7960 PRINT "MISSION MUST BE COMPLETED IN"; .1 * INT((T0 + T9 - T) * 10); "STARDATES"
+G(6000) F(I) (0 6) 7960 PRINT "MISSION MUST BE COMPLETED IN"; 0.1 * INT((T0 + T9 - T) * 10); "STARDATES"
   Origs: 7940:auto
   Dests: 7970:auto
 G(6000) F(I) (0 3) 7970 X$ = "S"
@@ -1612,7 +1612,7 @@ G(8590) (0 1) 8600 RETURN
 (0 1) 8660 REM INSERT IN STRING ARRAY FOR QUADRANT
   Origs: 
   Dests: 
-G(8670) (0 10) 8670 S8 = INT(Z2 - .5) * 3 + INT(Z1 - .5) * 24 + 1
+G(8670) (0 10) 8670 S8 = INT(Z2 - 0.5) * 3 + INT(Z1 - 0.5) * 24 + 1
   Origs: 1680:gosub, 1780:gosub, 1880:gosub, 1910:gosub, 2610:gosub, 2660:gosub, 3070:gosub, 3370:gosub, 4580:gosub, 5430:gosub
   Dests: 8675:auto
 G(8670) (1 6) 8675 IF LEN(A$) <> 3 THEN PRINT "ERROR"
@@ -1673,8 +1673,8 @@ G(8790) (0 1)      RETURN
 (0 1) 8820 REM STRING COMPARISON IN QUADRANT ARRAY
   Origs: 
   Dests: 
-G(8830) (0 4) 8830 Z1 = INT(Z1 + .5)
-G(8830) (0 4)      Z2 = INT(Z2 + .5)
+G(8830) (0 4) 8830 Z1 = INT(Z1 + 0.5)
+G(8830) (0 4)      Z2 = INT(Z2 + 0.5)
 G(8830) (0 10)      S8 = (Z2 - 1) * 3 + (Z1 - 1) * 24 + 1
 G(8830) (0 3)      Z3 = 0
   Origs: 5000:gosub, 5060:gosub, 5210:gosub, 5280:gosub, 6490:gosub, 8590:gosub

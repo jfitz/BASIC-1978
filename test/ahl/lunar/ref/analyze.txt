@@ -76,7 +76,7 @@ Halstead complexity:
 (0 3)     V = 1
 (0 3)     M = 33000
 (0 3)     N = 16500
-(0 3)     G = 1E-03
+(0 3)     G = 0.001
 (0 3)     Z = 1.8
   Origs: 130:auto
   Dests: 150:auto
@@ -85,10 +85,10 @@ Halstead complexity:
 (0 3)     T = 10
   Origs: 140:auto, 170:ifthen
   Dests: 160:auto
-(1 5) 160 IF M - N < 1E-03 THEN 240
+(1 5) 160 IF M - N < 0.001 THEN 240
   Origs: 150:auto, 230:goto, 390:ifthen, 410:goto
   Dests: 170:auto, 240:ifthen
-(1 5) 170 IF T < 1E-03 THEN 150
+(1 5) 170 IF T < 0.001 THEN 150
   Origs: 160:auto
   Dests: 150:ifthen, 180:auto
 (0 3) 180 S = T
@@ -147,7 +147,7 @@ Halstead complexity:
 (0 2) 300 PRINT "SORRY THERE NERE NO SURVIVORS. YOU BLOW IT!"
   Origs: 282:ifthen
   Dests: 310:auto
-(0 5) 310 PRINT "IN FACT, YOU BLASTED A NEW LUNAR CRATER"; W * .227; "FEET DEEP!"
+(0 5) 310 PRINT "IN FACT, YOU BLASTED A NEW LUNAR CRATER"; W * 0.227; "FEET DEEP!"
   Origs: 300:auto
   Dests: 320:auto
 (0 2) 320 GOTO 440
@@ -161,7 +161,7 @@ G(330) (0 3)     V = J
 G(330) (0 1)     RETURN
   Origs: 230:gosub, 360:gosub, 390:gosub
   Dests: 
-(1 5) 340 IF S < 5E-03 THEN 260
+(1 5) 340 IF S < 0.005 THEN 260
   Origs: 200:ifthen, 360:goto, 380:ifthen
   Dests: 260:ifthen, 350:auto
 (0 5) 350 D = V + SQR(V * V + 2 * A * (G - Z * K / M))
@@ -174,7 +174,7 @@ G(330) (0 1)     RETURN
   Origs: 350:auto
   Dests: 330:gosub, 340:goto, 420:gosub
 (0 10) 370 W = (1 - M * G / (Z * K)) / 2
-(0 12)     S = M * V / (Z * K * (W + SQR(W * W + V / Z))) + .05
+(0 12)     S = M * V / (Z * K * (W + SQR(W * W + V / Z))) + 0.05
 (0 2)     GOSUB 420
   Origs: 220:ifthen, 400:ifthen
   Dests: 380:auto, 420:gosub
