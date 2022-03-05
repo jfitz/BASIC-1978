@@ -40,7 +40,7 @@ class AbstractModifier
   end
 
   def pre_analyze(number)
-    "(#{@mccabe} #{@pre_comp_effort}) #{number}   #{pretty}"
+    "#{number}   (#{@mccabe} #{@pre_comp_effort}) #{pretty}"
   end
 
   def execute_pre(interpreter)
@@ -123,7 +123,7 @@ class IfModifier < AbstractModifier
   end
 
   def post_analyze(number)
-    "(0 1) #{number}   ENDIF"
+    "#{number}   (0 1) ENDIF"
   end
 
   def dump
@@ -209,7 +209,7 @@ class UnlessModifier < AbstractModifier
   end
 
   def post_analyze(number)
-    "(0 1) #{number}   ENDUNLESS"
+    "#{number}   (0 1) ENDUNLESS"
   end
 
   def dump
@@ -295,7 +295,7 @@ class WhileModifier < AbstractModifier
   end
 
   def post_analyze(number)
-    "(0 1) #{number}   ENDWHILE"
+    "#{number}   (0 1) ENDWHILE"
   end
 
   def dump
@@ -402,7 +402,7 @@ class UntilModifier < AbstractModifier
   end
 
   def post_analyze(number)
-    "(0 1) #{number}   ENDUNTIL"
+    "#{number}   (0 1) ENDUNTIL"
   end
 
   def dump
@@ -530,7 +530,7 @@ class AbstractForModifier < AbstractModifier
   end
 
   def post_analyze(number)
-    "(0 1) #{number}   NEXT #{@control}"
+    "#{number}   (0 1) NEXT #{@control}"
   end
 
   def post_trace

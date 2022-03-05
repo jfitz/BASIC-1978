@@ -19,235 +19,235 @@ Halstead complexity:
  intelligence: 45.300
  time: 102.658
 
-(0 4) 2 PRINT TAB(34); "LIFE"
+2 (0 4) PRINT TAB(34); "LIFE"
   Origs: :start
   Dests: 4:auto
-(0 4) 4 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+4 (0 4) PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
   Origs: 2:auto
   Dests: 6:auto
-(0 2) 6 PRINT
-(0 2)   PRINT
-(0 2)   PRINT
+6 (0 2) PRINT
+  (0 2) PRINT
+  (0 2) PRINT
   Origs: 4:auto
   Dests: 8:auto
-(0 2) 8 PRINT "ENTER YOUR PATTERN:"
+8 (0 2) PRINT "ENTER YOUR PATTERN:"
   Origs: 6:auto
   Dests: 9:auto
-(0 3) 9 X1 = 1
-(0 3)   Y1 = 1
-(0 3)   X2 = 24
-(0 3)   Y2 = 70
+9 (0 3) X1 = 1
+  (0 3) Y1 = 1
+  (0 3) X2 = 24
+  (0 3) Y2 = 70
   Origs: 8:auto
   Dests: 10:auto
-(0 3) 10 DIM A(24, 70), B$(24)
+10 (0 3) DIM A(24, 70), B$(24)
   Origs: 9:auto
   Dests: 20:auto
-(0 3) 20 C = 1
+20 (0 3) C = 1
   Origs: 10:auto
   Dests: 30:auto
-(1 2) 30 INPUT B$(C)
+30 (1 2) INPUT B$(C)
   Origs: 20:auto, 70:goto
   Dests: 40:auto
-(1 6) 40 IF B$(C) = "DONE" THEN B$(C) = ""
-(0 2)    GOTO 80
+40 (1 6) IF B$(C) = "DONE" THEN B$(C) = ""
+   (0 2) GOTO 80
   Origs: 30:auto
   Dests: 50:auto, 80:goto
-(1 9) 50 IF LEFT$(B$(C), 1) = "." THEN B$(C) = " " + RIGHT$(B$(C), LEN(B$(C)) - 1)
+50 (1 9) IF LEFT$(B$(C), 1) = "." THEN B$(C) = " " + RIGHT$(B$(C), LEN(B$(C)) - 1)
   Origs: 40:auto
   Dests: 60:auto
-(0 4) 60 C = C + 1
+60 (0 4) C = C + 1
   Origs: 50:auto
   Dests: 70:auto
-(0 3) 70 GOTO 30
+70 (0 3) GOTO 30
   Origs: 60:auto
   Dests: 30:goto
-(0 4) 80 C = C - 1
-(0 3)    L = 0
+80 (0 4) C = C - 1
+   (0 3) L = 0
   Origs: 40:goto
   Dests: 90:auto
-F(X) (1 4) 90 FOR X = 1 TO C - 1
+90 F(X) (1 4) FOR X = 1 TO C - 1
   Origs: 80:auto
   Dests: 100:fornext, 110:fornext
-F(X) (1 8) 100 IF LEN(B$(X)) > L THEN L = LEN(B$(X))
+100 F(X) (1 8) IF LEN(B$(X)) > L THEN L = LEN(B$(X))
   Origs: 90:fornext
   Dests: 110:auto
-F(X) (0 1) 110 NEXT X
+110 F(X) (0 1) NEXT X
   Origs: 90:fornext, 100:auto
   Dests: 120:auto
-(0 6) 120 X1 = 11 - C / 2
+120 (0 6) X1 = 11 - C / 2
   Origs: 110:auto
   Dests: 130:auto
-(0 6) 130 Y1 = 33 - L / 2
+130 (0 6) Y1 = 33 - L / 2
   Origs: 120:auto
   Dests: 140:auto
-F(X) (1 3) 140 FOR X = 1 TO C
+140 F(X) (1 3) FOR X = 1 TO C
   Origs: 130:auto
   Dests: 150:fornext, 180:fornext
-F(X,Y) (1 4) 150 FOR Y = 1 TO LEN(B$(X))
+150 F(X,Y) (1 4) FOR Y = 1 TO LEN(B$(X))
   Origs: 140:fornext
   Dests: 160:fornext, 170:fornext
-F(X,Y) (1 7) 160 IF MID$(B$(X), Y, 1) <> " " THEN A(X1 + X, Y1 + Y) = 1
-F(X,Y) (0 4)     P = P + 1
+160 F(X,Y) (1 7) IF MID$(B$(X), Y, 1) <> " " THEN A(X1 + X, Y1 + Y) = 1
+    F(X,Y) (0 4) P = P + 1
   Origs: 150:fornext
   Dests: 170:auto
-F(X,Y) (0 1) 170 NEXT Y
+170 F(X,Y) (0 1) NEXT Y
   Origs: 150:fornext, 160:auto
   Dests: 180:auto
-F(X) (0 1) 180 NEXT X
+180 F(X) (0 1) NEXT X
   Origs: 140:fornext, 170:auto
   Dests: 200:auto
-(0 2) 200 PRINT
-(0 2)     PRINT
-(0 2)     PRINT
+200 (0 2) PRINT
+    (0 2) PRINT
+    (0 2) PRINT
   Origs: 180:auto
   Dests: 210:auto
-(0 5) 210 PRINT "GENERATION:"; G, "POPULATION:"; P;
-(1 4)     IF I9 THEN PRINT "INVALID!";
+210 (0 5) PRINT "GENERATION:"; G, "POPULATION:"; P;
+    (1 4) IF I9 THEN PRINT "INVALID!";
   Origs: 200:auto, 640:goto
   Dests: 215:auto
-(0 3) 215 X3 = 24
-(0 3)     Y3 = 70
-(0 3)     X4 = 1
-(0 3)     Y4 = 1
-(0 3)     P = 0
+215 (0 3) X3 = 24
+    (0 3) Y3 = 70
+    (0 3) X4 = 1
+    (0 3) Y4 = 1
+    (0 3) P = 0
   Origs: 210:auto
   Dests: 220:auto
-(0 4) 220 G = G + 1
+220 (0 4) G = G + 1
   Origs: 215:auto
   Dests: 225:auto
-F(X) (1 4) 225 FOR X = 1 TO X1 - 1
-F(X) (0 2)     PRINT
-F(X) (0 1)     NEXT X
+225 F(X) (1 4) FOR X = 1 TO X1 - 1
+    F(X) (0 2) PRINT
+    F(X) (0 1) NEXT X
   Origs: 220:auto
   Dests: 230:auto
-F(X) (1 3) 230 FOR X = X1 TO X2
+230 F(X) (1 3) FOR X = X1 TO X2
   Origs: 225:auto
   Dests: 240:fornext, 290:fornext
-F(X) (0 2) 240 PRINT
+240 F(X) (0 2) PRINT
   Origs: 230:fornext
   Dests: 250:auto
-F(X,Y) (1 3) 250 FOR Y = Y1 TO Y2
+250 F(X,Y) (1 3) FOR Y = Y1 TO Y2
   Origs: 240:auto
   Dests: 253:fornext, 270:fornext
-F(X,Y) (1 6) 253 IF A(X, Y) = 2 THEN A(X, Y) = 0
-F(X,Y) (0 2)     GOTO 270
+253 F(X,Y) (1 6) IF A(X, Y) = 2 THEN A(X, Y) = 0
+    F(X,Y) (0 2) GOTO 270
   Origs: 250:fornext
   Dests: 256:auto, 270:goto
-F(X,Y) (1 6) 256 IF A(X, Y) = 3 THEN A(X, Y) = 1
-F(X,Y) (0 2)     GOTO 261
+256 F(X,Y) (1 6) IF A(X, Y) = 3 THEN A(X, Y) = 1
+    F(X,Y) (0 2) GOTO 261
   Origs: 253:auto
   Dests: 260:auto, 261:goto
-F(X,Y) (1 4) 260 IF A(X, Y) <> 1 THEN 270
+260 F(X,Y) (1 4) IF A(X, Y) <> 1 THEN 270
   Origs: 256:auto
   Dests: 261:auto, 270:ifthen
-F(X,Y) (0 4) 261 PRINT TAB(Y); "*";
+261 F(X,Y) (0 4) PRINT TAB(Y); "*";
   Origs: 256:goto, 260:auto
   Dests: 262:auto
-F(X,Y) (1 6) 262 IF X < X3 THEN X3 = X
+262 F(X,Y) (1 6) IF X < X3 THEN X3 = X
   Origs: 261:auto
   Dests: 264:auto
-F(X,Y) (1 6) 264 IF X > X4 THEN X4 = X
+264 F(X,Y) (1 6) IF X > X4 THEN X4 = X
   Origs: 262:auto
   Dests: 266:auto
-F(X,Y) (1 6) 266 IF Y < Y3 THEN Y3 = Y
+266 F(X,Y) (1 6) IF Y < Y3 THEN Y3 = Y
   Origs: 264:auto
   Dests: 268:auto
-F(X,Y) (1 6) 268 IF Y > Y4 THEN Y4 = Y
+268 F(X,Y) (1 6) IF Y > Y4 THEN Y4 = Y
   Origs: 266:auto
   Dests: 270:auto
-F(X,Y) (0 1) 270 NEXT Y
+270 F(X,Y) (0 1) NEXT Y
   Origs: 250:fornext, 253:goto, 260:ifthen, 268:auto
   Dests: 290:auto
-F(X) (0 1) 290 NEXT X
+290 F(X) (0 1) NEXT X
   Origs: 230:fornext, 270:auto
   Dests: 295:auto
-F(X) (1 4) 295 FOR X = X2 + 1 TO 24
-F(X) (0 2)     PRINT
-F(X) (0 1)     NEXT X
+295 F(X) (1 4) FOR X = X2 + 1 TO 24
+    F(X) (0 2) PRINT
+    F(X) (0 1) NEXT X
   Origs: 290:auto
   Dests: 299:auto
-(0 3) 299 X1 = X3
-(0 3)     X2 = X4
-(0 3)     Y1 = Y3
-(0 3)     Y2 = Y4
+299 (0 3) X1 = X3
+    (0 3) X2 = X4
+    (0 3) Y1 = Y3
+    (0 3) Y2 = Y4
   Origs: 295:auto
   Dests: 301:auto
-(1 6) 301 IF X1 < 3 THEN X1 = 3
-(0 4)     I9 = -1
+301 (1 6) IF X1 < 3 THEN X1 = 3
+    (0 4) I9 = -1
   Origs: 299:auto
   Dests: 303:auto
-(1 6) 303 IF X2 > 22 THEN X2 = 22
-(0 4)     I9 = -1
+303 (1 6) IF X2 > 22 THEN X2 = 22
+    (0 4) I9 = -1
   Origs: 301:auto
   Dests: 305:auto
-(1 6) 305 IF Y1 < 3 THEN Y1 = 3
-(0 4)     I9 = -1
+305 (1 6) IF Y1 < 3 THEN Y1 = 3
+    (0 4) I9 = -1
   Origs: 303:auto
   Dests: 307:auto
-(1 6) 307 IF Y2 > 68 THEN Y2 = 68
-(0 4)     I9 = -1
+307 (1 6) IF Y2 > 68 THEN Y2 = 68
+    (0 4) I9 = -1
   Origs: 305:auto
   Dests: 309:auto
-(0 3) 309 P = 0
+309 (0 3) P = 0
   Origs: 307:auto
   Dests: 500:auto
-F(X) (1 5) 500 FOR X = X1 - 1 TO X2 + 1
+500 F(X) (1 5) FOR X = X1 - 1 TO X2 + 1
   Origs: 309:auto
   Dests: 510:fornext, 630:fornext
-F(X,Y) (1 5) 510 FOR Y = Y1 - 1 TO Y2 + 1
+510 F(X,Y) (1 5) FOR Y = Y1 - 1 TO Y2 + 1
   Origs: 500:fornext
   Dests: 520:fornext, 620:fornext
-F(X,Y) (0 3) 520 C = 0
+520 F(X,Y) (0 3) C = 0
   Origs: 510:fornext
   Dests: 530:auto
-F(X,Y,I) (1 5) 530 FOR I = X - 1 TO X + 1
+530 F(X,Y,I) (1 5) FOR I = X - 1 TO X + 1
   Origs: 520:auto
   Dests: 540:fornext, 570:fornext
-F(X,Y,I,J) (1 5) 540 FOR J = Y - 1 TO Y + 1
+540 F(X,Y,I,J) (1 5) FOR J = Y - 1 TO Y + 1
   Origs: 530:fornext
   Dests: 550:fornext, 560:fornext
-F(X,Y,I,J) (1 10) 550 IF A(I, J) = 1 OR A(I, J) = 2 THEN C = C + 1
+550 F(X,Y,I,J) (1 10) IF A(I, J) = 1 OR A(I, J) = 2 THEN C = C + 1
   Origs: 540:fornext
   Dests: 560:auto
-F(X,Y,I,J) (0 1) 560 NEXT J
+560 F(X,Y,I,J) (0 1) NEXT J
   Origs: 540:fornext, 550:auto
   Dests: 570:auto
-F(X,Y,I) (0 1) 570 NEXT I
+570 F(X,Y,I) (0 1) NEXT I
   Origs: 530:fornext, 560:auto
   Dests: 580:auto
-F(X,Y) (1 4) 580 IF A(X, Y) = 0 THEN 610
+580 F(X,Y) (1 4) IF A(X, Y) = 0 THEN 610
   Origs: 570:auto
   Dests: 590:auto, 610:ifthen
-F(X,Y) (1 9) 590 IF C < 3 OR C > 4 THEN A(X, Y) = 2
-F(X,Y) (0 2)     GOTO 600
+590 F(X,Y) (1 9) IF C < 3 OR C > 4 THEN A(X, Y) = 2
+    F(X,Y) (0 2) GOTO 600
   Origs: 580:auto
   Dests: 595:auto, 600:goto
-F(X,Y) (0 4) 595 P = P + 1
+595 F(X,Y) (0 4) P = P + 1
   Origs: 590:auto
   Dests: 600:auto
-F(X,Y) (0 2) 600 GOTO 620
+600 F(X,Y) (0 2) GOTO 620
   Origs: 590:goto, 595:auto
   Dests: 620:goto
-F(X,Y) (1 6) 610 IF C = 3 THEN A(X, Y) = 3
-F(X,Y) (0 4)     P = P + 1
+610 F(X,Y) (1 6) IF C = 3 THEN A(X, Y) = 3
+    F(X,Y) (0 4) P = P + 1
   Origs: 580:ifthen
   Dests: 620:auto
-F(X,Y) (0 1) 620 NEXT Y
+620 F(X,Y) (0 1) NEXT Y
   Origs: 510:fornext, 600:goto, 610:auto
   Dests: 630:auto
-F(X) (0 1) 630 NEXT X
+630 F(X) (0 1) NEXT X
   Origs: 500:fornext, 620:auto
   Dests: 635:auto
-(0 4) 635 X1 = X1 - 1
-(0 4)     Y1 = Y1 - 1
-(0 4)     X2 = X2 + 1
-(0 4)     Y2 = Y2 + 1
+635 (0 4) X1 = X1 - 1
+    (0 4) Y1 = Y1 - 1
+    (0 4) X2 = X2 + 1
+    (0 4) Y2 = Y2 + 1
   Origs: 630:auto
   Dests: 640:auto
-(0 3) 640 GOTO 210
+640 (0 3) GOTO 210
   Origs: 635:auto
   Dests: 210:goto
-(0 1) 650 END
+650 (0 1) END
   Origs: 
   Dests: :stop
 

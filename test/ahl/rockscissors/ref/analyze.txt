@@ -19,116 +19,116 @@ Halstead complexity:
  intelligence: 42.656
  time: 9.786
 
-(0 4) 10 PRINT TAB(21); "GAME OF ROCK, SCISSORS, PAPER"
+10 (0 4) PRINT TAB(21); "GAME OF ROCK, SCISSORS, PAPER"
   Origs: :start
   Dests: 20:auto
-(0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+20 (0 4) PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
   Origs: 10:auto
   Dests: 25:auto
-(0 2) 25 PRINT
-(0 2)    PRINT
-(0 2)    PRINT
+25 (0 2) PRINT
+   (0 2) PRINT
+   (0 2) PRINT
   Origs: 20:auto
   Dests: 30:auto
-(1 2) 30 INPUT "HOW MANY GAMES"; Q
+30 (1 2) INPUT "HOW MANY GAMES"; Q
   Origs: 25:auto, 50:goto
   Dests: 40:auto
-(1 4) 40 IF Q < 11 THEN 60
+40 (1 4) IF Q < 11 THEN 60
   Origs: 30:auto
   Dests: 50:auto, 60:ifthen
-(0 2) 50 PRINT "SORRY, BUT WE AREN'T ALLOWED TO PLAY THAT MANY."
-(0 3)    GOTO 30
+50 (0 2) PRINT "SORRY, BUT WE AREN'T ALLOWED TO PLAY THAT MANY."
+   (0 3) GOTO 30
   Origs: 40:auto
   Dests: 30:goto
-F(G) (1 3) 60 FOR G = 1 TO Q
+60 F(G) (1 3) FOR G = 1 TO Q
   Origs: 40:ifthen
   Dests: 70:fornext, 260:fornext
-F(G) (0 2) 70 PRINT
-F(G) (0 3)    PRINT "GAME NUMBER"; G
+70 F(G) (0 2) PRINT
+   F(G) (0 3) PRINT "GAME NUMBER"; G
   Origs: 60:fornext
   Dests: 80:auto
-F(G) (0 4) 80 X = INT(RND(1) * 3 + 1)
+80 F(G) (0 4) X = INT(RND(1) * 3 + 1)
   Origs: 70:auto
   Dests: 90:auto
-F(G) (0 2) 90 PRINT "3=ROCK...2=SCISSORS...1=PAPER"
+90 F(G) (0 2) PRINT "3=ROCK...2=SCISSORS...1=PAPER"
   Origs: 80:auto, 110:goto
   Dests: 100:auto
-F(G) (1 2) 100 INPUT "1...2...3...WHAT'S YOUR CHOICE"; K
+100 F(G) (1 2) INPUT "1...2...3...WHAT'S YOUR CHOICE"; K
   Origs: 90:auto
   Dests: 110:auto
-F(G) (1 12) 110 IF (K - 1) * (K - 2) * (K - 3) <> 0 THEN PRINT "INVALID."
-F(G) (0 3)     GOTO 90
+110 F(G) (1 12) IF (K - 1) * (K - 2) * (K - 3) <> 0 THEN PRINT "INVALID."
+    F(G) (0 3) GOTO 90
   Origs: 100:auto
   Dests: 90:goto, 120:auto
-F(G) (0 2) 120 PRINT "THIS IS MY CHOICE..."
+120 F(G) (0 2) PRINT "THIS IS MY CHOICE..."
   Origs: 110:auto
   Dests: 130:auto
-F(G) (3 5) 130 ON X GOTO 140, 150, 160
+130 F(G) (3 5) ON X GOTO 140, 150, 160
   Origs: 120:auto
   Dests: 140:auto, 140:goto, 150:goto, 160:goto
-F(G) (0 2) 140 PRINT "...PAPER"
-F(G) (0 2)     GOTO 170
+140 F(G) (0 2) PRINT "...PAPER"
+    F(G) (0 2) GOTO 170
   Origs: 130:auto, 130:goto
   Dests: 170:goto
-F(G) (0 2) 150 PRINT "...SCISSORS"
-F(G) (0 2)     GOTO 170
+150 F(G) (0 2) PRINT "...SCISSORS"
+    F(G) (0 2) GOTO 170
   Origs: 130:goto
   Dests: 170:goto
-F(G) (0 2) 160 PRINT "...ROCK"
+160 F(G) (0 2) PRINT "...ROCK"
   Origs: 130:goto
   Dests: 170:auto
-F(G) (1 4) 170 IF X = K THEN 250
+170 F(G) (1 4) IF X = K THEN 250
   Origs: 140:goto, 150:goto, 160:auto
   Dests: 180:auto, 250:ifthen
-F(G) (1 4) 180 IF X > K THEN 230
+180 F(G) (1 4) IF X > K THEN 230
   Origs: 170:auto
   Dests: 190:auto, 230:ifthen
-F(G) (1 4) 190 IF X = 1 THEN 210
+190 F(G) (1 4) IF X = 1 THEN 210
   Origs: 180:auto
   Dests: 200:auto, 210:ifthen
-F(G) (0 2) 200 PRINT "YOU WIN!!!"
-F(G) (0 4)     H = H + 1
-F(G) (0 2)     GOTO 260
+200 F(G) (0 2) PRINT "YOU WIN!!!"
+    F(G) (0 4) H = H + 1
+    F(G) (0 2) GOTO 260
   Origs: 190:auto, 210:ifthen, 240:goto
   Dests: 260:goto
-F(G) (1 5) 210 IF K <> 3 THEN 200
+210 F(G) (1 5) IF K <> 3 THEN 200
   Origs: 190:ifthen
   Dests: 200:ifthen, 220:auto
-F(G) (0 2) 220 PRINT "WOW!  I WIN!!!"
-F(G) (0 4)     C = C + 1
-F(G) (0 2)     GOTO 260
+220 F(G) (0 2) PRINT "WOW!  I WIN!!!"
+    F(G) (0 4) C = C + 1
+    F(G) (0 2) GOTO 260
   Origs: 210:auto, 230:ifthen
   Dests: 260:goto
-F(G) (1 8) 230 IF K <> 1 OR X <> 3 THEN 220
+230 F(G) (1 8) IF K <> 1 OR X <> 3 THEN 220
   Origs: 180:ifthen
   Dests: 220:ifthen, 240:auto
-F(G) (0 3) 240 GOTO 200
+240 F(G) (0 3) GOTO 200
   Origs: 230:auto
   Dests: 200:goto
-F(G) (0 2) 250 PRINT "TIE GAME.  NO WINNER."
+250 F(G) (0 2) PRINT "TIE GAME.  NO WINNER."
   Origs: 170:ifthen
   Dests: 260:auto
-F(G) (0 1) 260 NEXT G
+260 F(G) (0 1) NEXT G
   Origs: 60:fornext, 200:goto, 220:goto, 250:auto
   Dests: 270:auto
-(0 2) 270 PRINT
-(0 2)     PRINT "HERE IS THE FINAL GAME SCORE:"
+270 (0 2) PRINT
+    (0 2) PRINT "HERE IS THE FINAL GAME SCORE:"
   Origs: 260:auto
   Dests: 280:auto
-(0 4) 280 PRINT "I HAVE WON"; C; "GAME(S)."
+280 (0 4) PRINT "I HAVE WON"; C; "GAME(S)."
   Origs: 270:auto
   Dests: 290:auto
-(0 4) 290 PRINT "YOU HAVE WON"; H; "GAME(S)."
+290 (0 4) PRINT "YOU HAVE WON"; H; "GAME(S)."
   Origs: 280:auto
   Dests: 300:auto
-(0 7) 300 PRINT "AND"; Q - (C + H); "GAME(S) ENDED IN A TIE."
+300 (0 7) PRINT "AND"; Q - (C + H); "GAME(S) ENDED IN A TIE."
   Origs: 290:auto
   Dests: 310:auto
-(0 2) 310 PRINT
-(0 2)     PRINT "THANKS FOR PLAYING!!"
+310 (0 2) PRINT
+    (0 2) PRINT "THANKS FOR PLAYING!!"
   Origs: 300:auto
   Dests: 320:auto
-(0 1) 320 END
+320 (0 1) END
   Origs: 310:auto
   Dests: :stop
 

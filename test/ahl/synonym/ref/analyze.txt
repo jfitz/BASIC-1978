@@ -19,185 +19,185 @@ Halstead complexity:
  intelligence: 139.277
  time: 24.905
 
-(0 4) 2 PRINT TAB(33); "SYNONYM"
+2 (0 4) PRINT TAB(33); "SYNONYM"
   Origs: :start
   Dests: 4:auto
-(0 4) 4 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+4 (0 4) PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
   Origs: 2:auto
   Dests: 6:auto
-(0 2) 6 PRINT
-(0 2)   PRINT
-(0 2)   PRINT
+6 (0 2) PRINT
+  (0 2) PRINT
+  (0 2) PRINT
   Origs: 4:auto
   Dests: 10:auto
-(0 5) 10 DIM R$(5), W$(10), L(30), R(30)
+10 (0 5) DIM R$(5), W$(10), L(30), R(30)
   Origs: 6:auto
   Dests: 20:auto
-(0 3) 20 R$(1) = "RIGHT"
-(0 3)    R$(2) = "CORRECT"
-(0 3)    R$(3) = "FINE"
-(0 3)    R$(4) = "GOOD!"
+20 (0 3) R$(1) = "RIGHT"
+   (0 3) R$(2) = "CORRECT"
+   (0 3) R$(3) = "FINE"
+   (0 3) R$(4) = "GOOD!"
   Origs: 10:auto
   Dests: 30:auto
-(0 3) 30 R$(5) = "CHECK"
+30 (0 3) R$(5) = "CHECK"
   Origs: 20:auto
   Dests: 70:auto
-(0 3) 70 C = 0
+70 (0 3) C = 0
   Origs: 30:auto
   Dests: 90:auto
-(0 2) 90 PRINT "A SYNONYM OF A WORD MEANS ANOTHER WORD IN THE ENGLISH"
+90 (0 2) PRINT "A SYNONYM OF A WORD MEANS ANOTHER WORD IN THE ENGLISH"
   Origs: 70:auto
   Dests: 100:auto
-(0 2) 100 PRINT "LANGUAGE WHICH HAS THE SAME OR VERY NEARLY THE SAME";
+100 (0 2) PRINT "LANGUAGE WHICH HAS THE SAME OR VERY NEARLY THE SAME";
   Origs: 90:auto
   Dests: 110:auto
-(0 2) 110 PRINT " MEANING."
+110 (0 2) PRINT " MEANING."
   Origs: 100:auto
   Dests: 130:auto
-(0 2) 130 PRINT "I CHOOSE A WORD -- YOU TYPE A SYNONYM."
+130 (0 2) PRINT "I CHOOSE A WORD -- YOU TYPE A SYNONYM."
   Origs: 110:auto
   Dests: 140:auto
-(0 2) 140 PRINT "IF YOU CAN'T THINK OF A SYNONYM, TYPE THE WORD 'HELP'"
+140 (0 2) PRINT "IF YOU CAN'T THINK OF A SYNONYM, TYPE THE WORD 'HELP'"
   Origs: 130:auto
   Dests: 145:auto
-(0 2) 145 PRINT "AND I WILL TELL YOU A SYNONYM."
-(0 2)     PRINT
+145 (0 2) PRINT "AND I WILL TELL YOU A SYNONYM."
+    (0 2) PRINT
   Origs: 140:auto
   Dests: 150:auto
-F(K) (0 1) 150 RESTORE
-F(K) (0 4)     C = C + 1
-F(K) (1 2)     READ N
+150 F(K) (0 1) RESTORE
+    F(K) (0 4) C = C + 1
+    F(K) (1 2) READ N
   Origs: 145:auto, 320:goto
   Dests: 160:auto
-F(K) (1 4) 160 IF C > N THEN 420
+160 F(K) (1 4) IF C > N THEN 420
   Origs: 150:auto
   Dests: 170:auto, 420:ifthen
-F(K) (0 4) 170 N1 = INT(RND(1) * N + 1)
+170 F(K) (0 4) N1 = INT(RND(1) * N + 1)
   Origs: 160:auto, 174:ifthen
   Dests: 174:auto
-F(K) (1 5) 174 IF R(N1) = 1 THEN 170
+174 F(K) (1 5) IF R(N1) = 1 THEN 170
   Origs: 170:auto
   Dests: 170:ifthen, 176:auto
-F(K) (0 3) 176 R(N1) = 1
+176 F(K) (0 3) R(N1) = 1
   Origs: 174:auto
   Dests: 180:auto
-F(I,K) (1 3) 180 FOR I = 1 TO N1
+180 F(I,K) (1 3) FOR I = 1 TO N1
   Origs: 176:auto
   Dests: 190:fornext, 230:fornext
-F(I,K) (1 2) 190 READ N2
+190 F(I,K) (1 2) READ N2
   Origs: 180:fornext
   Dests: 200:auto
-F(I,J,K) (1 3) 200 FOR J = 1 TO N2
+200 F(I,J,K) (1 3) FOR J = 1 TO N2
   Origs: 190:auto
   Dests: 210:fornext, 220:fornext
-F(I,J,K) (1 2) 210 READ W$(J)
+210 F(I,J,K) (1 2) READ W$(J)
   Origs: 200:fornext
   Dests: 220:auto
-F(I,J,K) (0 1) 220 NEXT J
+220 F(I,J,K) (0 1) NEXT J
   Origs: 200:fornext, 210:auto
   Dests: 230:auto
-F(I,K) (0 1) 230 NEXT I
+230 F(I,K) (0 1) NEXT I
   Origs: 180:fornext, 220:auto
   Dests: 232:auto
-F(J,K) (1 3) 232 FOR J = 1 TO N2
-F(J,K) (0 3)     L(J) = J
-F(J,K) (0 1)     NEXT J
+232 F(J,K) (1 3) FOR J = 1 TO N2
+    F(J,K) (0 3) L(J) = J
+    F(J,K) (0 1) NEXT J
   Origs: 230:auto
   Dests: 235:auto
-F(K) (0 3) 235 L(0) = N2
-F(K) (0 3)     G = 1
-F(K) (0 2)     PRINT
+235 F(K) (0 3) L(0) = N2
+    F(K) (0 3) G = 1
+    F(K) (0 2) PRINT
   Origs: 232:auto
   Dests: 237:auto
-F(K) (0 3) 237 L(G) = L(L(0))
-F(K) (0 4)     L(0) = N2 - 1
-F(K) (0 2)     PRINT
+237 F(K) (0 3) L(G) = L(L(0))
+    F(K) (0 4) L(0) = N2 - 1
+    F(K) (0 2) PRINT
   Origs: 235:auto
   Dests: 240:auto
-F(K) (0 3) 240 PRINT "     WHAT IS A SYNONYM OF "; W$(G);
-F(K) (1 2)     INPUT A$
+240 F(K) (0 3) PRINT "     WHAT IS A SYNONYM OF "; W$(G);
+    F(K) (1 2) INPUT A$
   Origs: 237:auto, 300:goto, 370:goto
   Dests: 250:auto
-F(K) (1 4) 250 IF A$ = "HELP" THEN 340
+250 F(K) (1 4) IF A$ = "HELP" THEN 340
   Origs: 240:auto
   Dests: 260:auto, 340:ifthen
-F(K) (1 3) 260 FOR K = 1 TO N2
+260 F(K) (1 3) FOR K = 1 TO N2
   Origs: 250:auto
   Dests: 270:fornext, 290:fornext
-F(K) (1 4) 270 IF G = K THEN 290
+270 F(K) (1 4) IF G = K THEN 290
   Origs: 260:fornext
   Dests: 280:auto, 290:ifthen
-F(K) (1 4) 280 IF A$ = W$(K) THEN 320
+280 F(K) (1 4) IF A$ = W$(K) THEN 320
   Origs: 270:auto
   Dests: 290:auto, 320:ifthen
-F(K) (0 1) 290 NEXT K
+290 F(K) (0 1) NEXT K
   Origs: 260:fornext, 270:ifthen, 280:auto
   Dests: 300:auto
-(0 2) 300 PRINT "     TRY AGAIN."
-(0 3)     GOTO 240
+300 (0 2) PRINT "     TRY AGAIN."
+    (0 3) GOTO 240
   Origs: 290:auto
   Dests: 240:goto
-F(K) (0 2) 320 PRINT R$(INT(RND(1) * 5 + 1))
-F(K) (0 3)     GOTO 150
+320 F(K) (0 2) PRINT R$(INT(RND(1) * 5 + 1))
+    F(K) (0 3) GOTO 150
   Origs: 280:ifthen
   Dests: 150:goto
-F(K) (0 4) 340 G1 = INT(RND(1) * L(0) + 1)
+340 F(K) (0 4) G1 = INT(RND(1) * L(0) + 1)
   Origs: 250:ifthen
   Dests: 360:auto
-F(K) (0 6) 360 PRINT "**** A SYNONYM OF "; W$(G); " IS "; W$(L(G1)); "."
-F(K) (0 2)     PRINT
+360 F(K) (0 6) PRINT "**** A SYNONYM OF "; W$(G); " IS "; W$(L(G1)); "."
+    F(K) (0 2) PRINT
   Origs: 340:auto
   Dests: 370:auto
-F(K) (0 3) 370 L(G1) = L(L(0))
-F(K) (0 4)     L(0) = L(0) - 1
-F(K) (0 3)     GOTO 240
+370 F(K) (0 3) L(G1) = L(L(0))
+    F(K) (0 4) L(0) = L(0) - 1
+    F(K) (0 3) GOTO 240
   Origs: 360:auto
   Dests: 240:goto
-F(K) (0 2) 420 PRINT
-F(K) (0 2)     PRINT "SYNONYM DRILL COMPLETED."
-F(K) (0 2)     GOTO 999
+420 F(K) (0 2) PRINT
+    F(K) (0 2) PRINT "SYNONYM DRILL COMPLETED."
+    F(K) (0 2) GOTO 999
   Origs: 160:ifthen
   Dests: 999:goto
-(0 2) 500 DATA 10
+500 (0 2) DATA 10
   Origs: 
   Dests: 
-(0 2) 510 DATA 5, "FIRST", "START", "BEGINNING", "ONSET", "INITIAL"
+510 (0 2) DATA 5, "FIRST", "START", "BEGINNING", "ONSET", "INITIAL"
   Origs: 
   Dests: 
-(0 2) 520 DATA 5, "SIMILAR", "ALIKE", "SAME", "LIKE", "RESEMBLING"
+520 (0 2) DATA 5, "SIMILAR", "ALIKE", "SAME", "LIKE", "RESEMBLING"
   Origs: 
   Dests: 
-(0 2) 530 DATA 5, "MODEL", "PATTERN", "PROTOTYPE", "STANDARD", "CRITERION"
+530 (0 2) DATA 5, "MODEL", "PATTERN", "PROTOTYPE", "STANDARD", "CRITERION"
   Origs: 
   Dests: 
-(0 2) 540 DATA 5, "SMALL", "INSIGNIFICANT", "LITTLE", "TINY", "MINUTE"
+540 (0 2) DATA 5, "SMALL", "INSIGNIFICANT", "LITTLE", "TINY", "MINUTE"
   Origs: 
   Dests: 
-(0 2) 550 DATA 6, "STOP", "HALT", "STAY", "ARREST", "CHECK", "STANDSTILL"
+550 (0 2) DATA 6, "STOP", "HALT", "STAY", "ARREST", "CHECK", "STANDSTILL"
   Origs: 
   Dests: 
-(0 2) 560 DATA 6, "HOUSE", "DWELLING", "RESIDENCE", "DOMICILE", "LODGING"
+560 (0 2) DATA 6, "HOUSE", "DWELLING", "RESIDENCE", "DOMICILE", "LODGING"
   Origs: 
   Dests: 
-(0 2) 565 DATA "HABITATION"
+565 (0 2) DATA "HABITATION"
   Origs: 
   Dests: 
-(0 2) 570 DATA 7, "PIT", "HOLE", "HOLLOW", "WELL", "GULF", "CHASM", "ABYSS"
+570 (0 2) DATA 7, "PIT", "HOLE", "HOLLOW", "WELL", "GULF", "CHASM", "ABYSS"
   Origs: 
   Dests: 
-(0 2) 580 DATA 7, "PUSH", "SHOVE", "THRUST", "PROD", "POKE", "BUTT", "PRESS"
+580 (0 2) DATA 7, "PUSH", "SHOVE", "THRUST", "PROD", "POKE", "BUTT", "PRESS"
   Origs: 
   Dests: 
-(0 2) 590 DATA 6, "RED", "ROUGE", "SCARLET", "CRIMSON", "FLAME", "RUBY"
+590 (0 2) DATA 6, "RED", "ROUGE", "SCARLET", "CRIMSON", "FLAME", "RUBY"
   Origs: 
   Dests: 
-(0 2) 600 DATA 7, "PAIN", "SUFFERING", "HURT", "MISERY", "DISTRESS", "ACHE"
+600 (0 2) DATA 7, "PAIN", "SUFFERING", "HURT", "MISERY", "DISTRESS", "ACHE"
   Origs: 
   Dests: 
-(0 2) 605 DATA "DISCOMFORT"
+605 (0 2) DATA "DISCOMFORT"
   Origs: 
   Dests: 
-F(K) (0 1) 999 END
+999 F(K) (0 1) END
     WARNING: Terminating statement in FOR/NEXT
   Origs: 420:goto
   Dests: :stop

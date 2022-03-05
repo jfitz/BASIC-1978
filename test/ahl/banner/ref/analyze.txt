@@ -19,299 +19,299 @@ Halstead complexity:
  intelligence: 162.616
  time: 134.277
 
-(1 2) 10 INPUT "HORIZONTAL"; X
+10 (1 2) INPUT "HORIZONTAL"; X
   Origs: :start
   Dests: 20:auto
-(1 2) 20 INPUT "VERTICAL"; Y
+20 (1 2) INPUT "VERTICAL"; Y
   Origs: 10:auto
   Dests: 21:auto
-(1 2) 21 INPUT "CENTERED"; L$
+21 (1 2) INPUT "CENTERED"; L$
   Origs: 20:auto
   Dests: 22:auto
-(0 3) 22 G1 = 0
-(1 6)    IF L$ > "P" THEN G1 = 1
+22 (0 3) G1 = 0
+   (1 6) IF L$ > "P" THEN G1 = 1
   Origs: 21:auto
   Dests: 23:auto
-(1 2) 23 INPUT "CHARACTER (TYPE 'ALL' IF YOU WANT CHARACTER BEING PRINTED)"; M$
+23 (1 2) INPUT "CHARACTER (TYPE 'ALL' IF YOU WANT CHARACTER BEING PRINTED)"; M$
   Origs: 22:auto
   Dests: 29:auto
-(0 2) 29 PRINT "STATEMENT";
+29 (0 2) PRINT "STATEMENT";
   Origs: 23:auto
   Dests: 30:auto
-(1 2) 30 INPUT A$
+30 (1 2) INPUT A$
   Origs: 29:auto
   Dests: 35:auto
-(1 2) 35 INPUT "SET PAGE"; O$
+35 (1 2) INPUT "SET PAGE"; O$
   Origs: 30:auto
   Dests: 40:auto
-(0 4) 40 A = ASC(LEFT$(A$, 1))
+40 (0 4) A = ASC(LEFT$(A$, 1))
   Origs: 35:auto
   Dests: 70:auto
-(0 1) 50 REM
+50 (0 1) REM
   Origs: 
   Dests: 
-(0 1) 60 REM
+60 (0 1) REM
   Origs: 
   Dests: 
-F(T) (1 4) 70 FOR T = 1 TO LEN(A$)
+70 F(T) (1 4) FOR T = 1 TO LEN(A$)
   Origs: 40:auto
   Dests: 80:fornext, 800:fornext
-F(T) (0 4) 80 P$ = MID$(A$, T, 1)
+80 F(T) (0 4) P$ = MID$(A$, T, 1)
   Origs: 70:fornext
   Dests: 90:auto
-F(T,O) (1 3) 90 FOR O = 1 TO 50
+90 F(T,O) (1 3) FOR O = 1 TO 50
   Origs: 80:auto
   Dests: 95:fornext, 120:fornext
-F(T,O) (8 9) 95 READ S$, S(1), S(2), S(3), S(4), S(5), S(6), S(7)
+95 F(T,O) (8 9) READ S$, S(1), S(2), S(3), S(4), S(5), S(6), S(7)
   Origs: 90:fornext
   Dests: 96:auto
-F(T,O) (1 4) 96 IF P$ = " " THEN 812
+96 F(T,O) (1 4) IF P$ = " " THEN 812
   Origs: 95:auto
   Dests: 100:auto, 812:ifthen
-F(T,O) (1 4) 100 IF P$ = S$ THEN 200
+100 F(T,O) (1 4) IF P$ = S$ THEN 200
   Origs: 96:auto
   Dests: 120:auto, 200:ifthen
-F(T,O) (0 1) 120 NEXT O
+120 F(T,O) (0 1) NEXT O
   Origs: 90:fornext, 100:auto
   Dests: 200:auto
-F(T,O) (0 1) 200 RESTORE
+200 F(T,O) (0 1) RESTORE
   Origs: 100:ifthen, 120:auto
   Dests: 201:auto
-F(T,O) (0 3) 201 X$ = M$
+201 F(T,O) (0 3) X$ = M$
   Origs: 200:auto
   Dests: 202:auto
-F(T,O) (1 6) 202 IF M$ = "ALL" THEN X$ = S$
+202 F(T,O) (1 6) IF M$ = "ALL" THEN X$ = S$
   Origs: 201:auto
   Dests: 205:auto
-F(T,O,U) (1 3) 205 FOR U = 1 TO 7
+205 F(T,O,U) (1 3) FOR U = 1 TO 7
   Origs: 202:auto
   Dests: 210:fornext, 700:fornext
-F(T,O,U,K) (1 5) 210 FOR K = 8 TO 0 STEP -1
+210 F(T,O,U,K) (1 5) FOR K = 8 TO 0 STEP -1
   Origs: 205:fornext
   Dests: 230:fornext, 280:fornext
-F(T,O,U,K) (1 5) 230 IF 2 ^ K < S(U) THEN 270
+230 F(T,O,U,K) (1 5) IF 2 ^ K < S(U) THEN 270
   Origs: 210:fornext
   Dests: 240:auto, 270:ifthen
-F(T,O,U,K) (0 3) 240 J(9 - K) = 0
+240 F(T,O,U,K) (0 3) J(9 - K) = 0
   Origs: 230:auto
   Dests: 250:auto
-F(T,O,U,K) (0 2) 250 GOTO 280
+250 F(T,O,U,K) (0 2) GOTO 280
   Origs: 240:auto
   Dests: 280:goto
-F(T,O,U,K) (0 3) 270 J(9 - K) = 1
-F(T,O,U,K) (0 6)     S(U) = S(U) - 2 ^ K
+270 F(T,O,U,K) (0 3) J(9 - K) = 1
+    F(T,O,U,K) (0 6) S(U) = S(U) - 2 ^ K
   Origs: 230:ifthen
   Dests: 272:auto
-F(T,O,U,K) (1 4) 272 IF S(U) = 1 THEN 815
+272 F(T,O,U,K) (1 4) IF S(U) = 1 THEN 815
   Origs: 270:auto
   Dests: 280:auto, 815:ifthen
-F(T,O,U,K) (0 1) 280 NEXT K
+280 F(T,O,U,K) (0 1) NEXT K
   Origs: 210:fornext, 250:goto, 272:auto
   Dests: 445:auto
-F(T,O,U,K,T1) (1 3) 445 FOR T1 = 1 TO X
+445 F(T,O,U,K,T1) (1 3) FOR T1 = 1 TO X
   Origs: 280:auto, 815:goto
   Dests: 447:fornext, 630:fornext
-F(T,O,U,K,T1) (0 3) 447 PRINT TAB((63 - 4.5 * Y) * G1 / (LEN(X$)) + 1);
+447 F(T,O,U,K,T1) (0 3) PRINT TAB((63 - 4.5 * Y) * G1 / (LEN(X$)) + 1);
   Origs: 445:fornext
   Dests: 450:auto
-F(T,O,U,K,T1,B) (1 3) 450 FOR B = 1 TO F(U)
+450 F(T,O,U,K,T1,B) (1 3) FOR B = 1 TO F(U)
   Origs: 447:auto
   Dests: 460:fornext, 600:fornext
-F(T,O,U,K,T1,B) (1 4) 460 IF J(B) = 0 THEN 500
+460 F(T,O,U,K,T1,B) (1 4) IF J(B) = 0 THEN 500
   Origs: 450:fornext
   Dests: 465:auto, 500:ifthen
-F(T,O,U,K,T1,B,I) (1 3) 465 FOR I = 1 TO Y
-F(T,O,U,K,T1,B,I) (0 2)     PRINT X$;
-F(T,O,U,K,T1,B,I) (0 1)     NEXT I
+465 F(T,O,U,K,T1,B,I) (1 3) FOR I = 1 TO Y
+    F(T,O,U,K,T1,B,I) (0 2) PRINT X$;
+    F(T,O,U,K,T1,B,I) (0 1) NEXT I
   Origs: 460:auto
   Dests: 470:auto
-F(T,O,U,K,T1,B) (0 2) 470 GOTO 600
+470 F(T,O,U,K,T1,B) (0 2) GOTO 600
   Origs: 465:auto
   Dests: 600:goto
-F(T,O,U,K,T1,B,I) (1 3) 500 FOR I = 1 TO Y
+500 F(T,O,U,K,T1,B,I) (1 3) FOR I = 1 TO Y
   Origs: 460:ifthen
   Dests: 510:fornext, 530:fornext
-F(T,O,U,K,T1,B,I,I1) (1 4) 510 FOR I1 = 1 TO LEN(X$)
+510 F(T,O,U,K,T1,B,I,I1) (1 4) FOR I1 = 1 TO LEN(X$)
   Origs: 500:fornext
   Dests: 520:fornext
-F(T,O,U,K,T1,B,I,I1) (0 2) 520 PRINT " ";
-F(T,O,U,K,T1,B,I,I1) (0 1)     NEXT I1
+520 F(T,O,U,K,T1,B,I,I1) (0 2) PRINT " ";
+    F(T,O,U,K,T1,B,I,I1) (0 1) NEXT I1
   Origs: 510:fornext
   Dests: 530:auto
-F(T,O,U,K,T1,B,I) (0 1) 530 NEXT I
+530 F(T,O,U,K,T1,B,I) (0 1) NEXT I
   Origs: 500:fornext, 520:auto
   Dests: 600:auto
-F(T,O,U,K,T1,B) (0 1) 600 NEXT B
+600 F(T,O,U,K,T1,B) (0 1) NEXT B
   Origs: 450:fornext, 470:goto, 530:auto
   Dests: 620:auto
-F(T,O,U,K,T1) (0 2) 620 PRINT
+620 F(T,O,U,K,T1) (0 2) PRINT
   Origs: 600:auto
   Dests: 630:auto
-F(T,O,U,K,T1) (0 1) 630 NEXT T1
+630 F(T,O,U,K,T1) (0 1) NEXT T1
   Origs: 445:fornext, 620:auto
   Dests: 700:auto
-F(T,O,U,K) (0 1) 700 NEXT U
+700 F(T,O,U,K) (0 1) NEXT U
   Origs: 205:fornext, 630:auto
   Dests: 750:auto
-F(T,O,U,H) (1 4) 750 FOR H = 1 TO 2 * X
-F(T,O,U,H) (0 2)     PRINT
-F(T,O,U,H) (0 1)     NEXT H
+750 F(T,O,U,H) (1 4) FOR H = 1 TO 2 * X
+    F(T,O,U,H) (0 2) PRINT
+    F(T,O,U,H) (0 1) NEXT H
   Origs: 700:auto
   Dests: 800:auto
-F(T,O,U) (0 1) 800 NEXT T
+800 F(T,O,U) (0 1) NEXT T
   Origs: 70:fornext, 750:auto, 813:goto
   Dests: 806:auto
-F(T,H) (1 3) 806 FOR H = 1 TO 75
-F(T,H) (0 2)     PRINT
-F(T,H) (0 1)     NEXT H
+806 F(T,H) (1 3) FOR H = 1 TO 75
+    F(T,H) (0 2) PRINT
+    F(T,H) (0 1) NEXT H
   Origs: 800:auto
   Dests: 810:auto
-F(T) (0 1) 810 STOP
+810 F(T) (0 1) STOP
     WARNING: Terminating statement in FOR/NEXT
   Origs: 806:auto
   Dests: :stop
-F(T,O,H) (1 4) 812 FOR H = 1 TO 7 * X
-F(T,O,H) (0 2)     PRINT
-F(T,O,H) (0 1)     NEXT H
+812 F(T,O,H) (1 4) FOR H = 1 TO 7 * X
+    F(T,O,H) (0 2) PRINT
+    F(T,O,H) (0 1) NEXT H
   Origs: 96:ifthen
   Dests: 813:auto
-F(T,O) (0 3) 813 GOTO 800
+813 F(T,O) (0 3) GOTO 800
   Origs: 812:auto
   Dests: 800:goto
-F(T,O,U,K) (0 4) 815 F(U) = 9 - K
-F(T,O,U,K) (0 3)     GOTO 445
+815 F(T,O,U,K) (0 4) F(U) = 9 - K
+    F(T,O,U,K) (0 3) GOTO 445
   Origs: 272:ifthen
   Dests: 445:goto
-(0 2) 899 DATA " ", 0, 0, 0, 0, 0, 0, 0
+899 (0 2) DATA " ", 0, 0, 0, 0, 0, 0, 0
   Origs: 
   Dests: 
-(0 2) 900 DATA "A", 505, 37, 35, 34, 35, 37, 505
+900 (0 2) DATA "A", 505, 37, 35, 34, 35, 37, 505
   Origs: 
   Dests: 
-(0 2) 901 DATA "G", 125, 131, 258, 258, 290, 163, 101
+901 (0 2) DATA "G", 125, 131, 258, 258, 290, 163, 101
   Origs: 
   Dests: 
-(0 2) 902 DATA "E", 512, 274, 274, 274, 274, 258, 258
+902 (0 2) DATA "E", 512, 274, 274, 274, 274, 258, 258
   Origs: 
   Dests: 
-(0 2) 903 DATA "T", 2, 2, 2, 512, 2, 2, 2
+903 (0 2) DATA "T", 2, 2, 2, 512, 2, 2, 2
   Origs: 
   Dests: 
-(0 2) 904 DATA "W", 256, 257, 129, 65, 129, 257, 256
+904 (0 2) DATA "W", 256, 257, 129, 65, 129, 257, 256
   Origs: 
   Dests: 
-(0 2) 905 DATA "L", 512, 257, 257, 257, 257, 257, 257
+905 (0 2) DATA "L", 512, 257, 257, 257, 257, 257, 257
   Origs: 
   Dests: 
-(0 2) 906 DATA "S", 69, 139, 274, 274, 274, 163, 69
+906 (0 2) DATA "S", 69, 139, 274, 274, 274, 163, 69
   Origs: 
   Dests: 
-(0 2) 907 DATA "O", 125, 131, 258, 258, 258, 131, 125
+907 (0 2) DATA "O", 125, 131, 258, 258, 258, 131, 125
   Origs: 
   Dests: 
-(0 2) 908 DATA "N", 512, 7, 9, 17, 33, 193, 512
+908 (0 2) DATA "N", 512, 7, 9, 17, 33, 193, 512
   Origs: 
   Dests: 
-(0 2) 909 DATA "F", 512, 18, 18, 18, 18, 2, 2
+909 (0 2) DATA "F", 512, 18, 18, 18, 18, 2, 2
   Origs: 
   Dests: 
-(0 2) 910 DATA "K", 512, 17, 17, 41, 69, 131, 258
+910 (0 2) DATA "K", 512, 17, 17, 41, 69, 131, 258
   Origs: 
   Dests: 
-(0 2) 911 DATA "B", 512, 274, 274, 274, 274, 274, 239
+911 (0 2) DATA "B", 512, 274, 274, 274, 274, 274, 239
   Origs: 
   Dests: 
-(0 2) 912 DATA "D", 512, 258, 258, 258, 258, 131, 125
+912 (0 2) DATA "D", 512, 258, 258, 258, 258, 131, 125
   Origs: 
   Dests: 
-(0 2) 913 DATA "H", 512, 17, 17, 17, 17, 17, 512
+913 (0 2) DATA "H", 512, 17, 17, 17, 17, 17, 512
   Origs: 
   Dests: 
-(0 2) 914 DATA "M", 512, 7, 13, 25, 13, 7, 512
+914 (0 2) DATA "M", 512, 7, 13, 25, 13, 7, 512
   Origs: 
   Dests: 
-(0 2) 915 DATA "?", 5, 3, 2, 354, 18, 11, 5
+915 (0 2) DATA "?", 5, 3, 2, 354, 18, 11, 5
   Origs: 
   Dests: 
-(0 2) 916 DATA "U", 128, 129, 257, 257, 257, 129, 128
+916 (0 2) DATA "U", 128, 129, 257, 257, 257, 129, 128
   Origs: 
   Dests: 
-(0 2) 917 DATA "R", 512, 18, 18, 50, 82, 146, 271
+917 (0 2) DATA "R", 512, 18, 18, 50, 82, 146, 271
   Origs: 
   Dests: 
-(0 2) 918 DATA "P", 512, 18, 18, 18, 18, 18, 15
+918 (0 2) DATA "P", 512, 18, 18, 18, 18, 18, 15
   Origs: 
   Dests: 
-(0 2) 919 DATA "Q", 125, 131, 258, 258, 322, 131, 381
+919 (0 2) DATA "Q", 125, 131, 258, 258, 322, 131, 381
   Origs: 
   Dests: 
-(0 2) 920 DATA "Y", 8, 9, 17, 481, 17, 9, 8
+920 (0 2) DATA "Y", 8, 9, 17, 481, 17, 9, 8
   Origs: 
   Dests: 
-(0 2) 921 DATA "V", 64, 65, 129, 257, 129, 65, 64
+921 (0 2) DATA "V", 64, 65, 129, 257, 129, 65, 64
   Origs: 
   Dests: 
-(0 2) 922 DATA "X", 388, 69, 41, 17, 41, 69, 388
+922 (0 2) DATA "X", 388, 69, 41, 17, 41, 69, 388
   Origs: 
   Dests: 
-(0 2) 923 DATA "Z", 386, 322, 290, 274, 266, 262, 260
+923 (0 2) DATA "Z", 386, 322, 290, 274, 266, 262, 260
   Origs: 
   Dests: 
-(0 2) 924 DATA "I", 258, 258, 258, 512, 258, 258, 258
+924 (0 2) DATA "I", 258, 258, 258, 512, 258, 258, 258
   Origs: 
   Dests: 
-(0 2) 925 DATA "C", 125, 131, 258, 258, 258, 131, 69
+925 (0 2) DATA "C", 125, 131, 258, 258, 258, 131, 69
   Origs: 
   Dests: 
-(0 2) 926 DATA "J", 65, 129, 257, 257, 257, 129, 128
+926 (0 2) DATA "J", 65, 129, 257, 257, 257, 129, 128
   Origs: 
   Dests: 
-(0 2) 927 DATA "1", 0, 0, 261, 259, 512, 257, 257
+927 (0 2) DATA "1", 0, 0, 261, 259, 512, 257, 257
   Origs: 
   Dests: 
-(0 2) 928 DATA "2", 261, 387, 322, 290, 274, 267, 261
+928 (0 2) DATA "2", 261, 387, 322, 290, 274, 267, 261
   Origs: 
   Dests: 
-(0 2) 929 DATA "*", 69, 41, 17, 512, 17, 41, 69
+929 (0 2) DATA "*", 69, 41, 17, 512, 17, 41, 69
   Origs: 
   Dests: 
-(0 2) 930 DATA "3", 66, 130, 258, 274, 266, 150, 100
+930 (0 2) DATA "3", 66, 130, 258, 274, 266, 150, 100
   Origs: 
   Dests: 
-(0 2) 931 DATA "4", 33, 49, 41, 37, 35, 512, 33
+931 (0 2) DATA "4", 33, 49, 41, 37, 35, 512, 33
   Origs: 
   Dests: 
-(0 2) 932 DATA "5", 160, 274, 274, 274, 274, 274, 226
+932 (0 2) DATA "5", 160, 274, 274, 274, 274, 274, 226
   Origs: 
   Dests: 
-(0 2) 933 DATA "6", 194, 291, 293, 297, 305, 289, 193
+933 (0 2) DATA "6", 194, 291, 293, 297, 305, 289, 193
   Origs: 
   Dests: 
-(0 2) 934 DATA "7", 258, 130, 66, 34, 18, 10, 8
+934 (0 2) DATA "7", 258, 130, 66, 34, 18, 10, 8
   Origs: 
   Dests: 
-(0 2) 935 DATA "8", 69, 171, 274, 274, 274, 171, 69
+935 (0 2) DATA "8", 69, 171, 274, 274, 274, 171, 69
   Origs: 
   Dests: 
-(0 2) 936 DATA "9", 263, 138, 74, 42, 26, 10, 7
+936 (0 2) DATA "9", 263, 138, 74, 42, 26, 10, 7
   Origs: 
   Dests: 
-(0 2) 937 DATA "=", 41, 41, 41, 41, 41, 41, 41
+937 (0 2) DATA "=", 41, 41, 41, 41, 41, 41, 41
   Origs: 
   Dests: 
-(0 2) 938 DATA "!", 1, 1, 1, 384, 1, 1, 1
+938 (0 2) DATA "!", 1, 1, 1, 384, 1, 1, 1
   Origs: 
   Dests: 
-(0 2) 939 DATA "0", 57, 69, 131, 258, 131, 69, 57
+939 (0 2) DATA "0", 57, 69, 131, 258, 131, 69, 57
   Origs: 
   Dests: 
-(0 2) 940 DATA ".", 1, 1, 129, 449, 129, 1, 1
+940 (0 2) DATA ".", 1, 1, 129, 449, 129, 1, 1
   Origs: 
   Dests: 
-(0 1) 1000 STOP
+1000 (0 1) STOP
   Origs: 
   Dests: :stop
-(0 1) 1002 END
+1002 (0 1) END
   Origs: 
   Dests: :stop
 

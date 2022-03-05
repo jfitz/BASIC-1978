@@ -19,46 +19,46 @@ Halstead complexity:
  intelligence: 16.237
  time: 0.414
 
-(0 1) 10 REM TEST ERROR TRAP INSIDE FUNCTION
+10 (0 1) REM TEST ERROR TRAP INSIDE FUNCTION
   Origs: 
   Dests: 
-(0 2) 20 PRINT "START"
+20 (0 2) PRINT "START"
   Origs: :start
   Dests: 30:auto
-(0 5) 30 R = FNA(0)
+30 (0 5) R = FNA(0)
   Origs: 20:auto
   Dests: 40:auto, 400:function
-(0 3) 40 PRINT "R IS:"; R
+40 (0 3) PRINT "R IS:"; R
   Origs: 30:auto
   Dests: 99:auto
-(0 1) 99 STOP
+99 (0 1) STOP
   Origs: 40:auto
   Dests: :stop
-FNA(_) (0 1) 400 DEF FNA(A)
+400 FNA(_) (0 1) DEF FNA(A)
   Origs: 30:function
   Dests: 410:auto
-FNA(_) (1 2) 410 ON ERROR GOTO 480
+410 FNA(_) (1 2) ON ERROR GOTO 480
   Origs: 400:auto
   Dests: 420:auto, 480:onerror
-FNA(_) (0 6) 420 FNA = 1 / A
+420 FNA(_) (0 6) FNA = 1 / A
   Origs: 410:auto
   Dests: 430:auto
-FNA(_) (0 3) 430 PRINT "A IS: "; A
+430 FNA(_) (0 3) PRINT "A IS: "; A
   Origs: 420:auto, 481:resume
   Dests: 470:auto
-FNA(_) (0 2) 470 GOTO 490
+470 FNA(_) (0 2) GOTO 490
   Origs: 430:auto
   Dests: 490:goto
-FNA(_) E(480) (0 5) 480 FNA = 0
+480 FNA(_) E(480) (0 5) FNA = 0
   Origs: 410:onerror
   Dests: 481:auto
-FNA(_) E(480) (0 1) 481 RESUME 430
+481 FNA(_) E(480) (0 1) RESUME 430
   Origs: 480:auto
   Dests: 430:resume
-FNA(_) (0 1) 490 FNEND
+490 FNA(_) (0 1) FNEND
   Origs: 470:goto
   Dests: 
-(0 1) 999 END
+999 (0 1) END
   Origs: 
   Dests: :stop
 

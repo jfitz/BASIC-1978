@@ -19,57 +19,57 @@ Halstead complexity:
  intelligence: 25.769
  time: 5.043
 
-(0 4) 1 PRINT TAB(32); "3D PLOT"
+1 (0 4) PRINT TAB(32); "3D PLOT"
   Origs: :start
   Dests: 2:auto
-(0 4) 2 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+2 (0 4) PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
   Origs: 1:auto
   Dests: 3:auto
-(0 2) 3 PRINT
-(0 2)   PRINT
-(0 2)   PRINT
+3 (0 2) PRINT
+  (0 2) PRINT
+  (0 2) PRINT
   Origs: 2:auto
   Dests: 100:auto
-FNA(_) (0 4) 5 DEF FNA(Z) = 30 * EXP(-Z * Z / 100)
+5 FNA(_) (0 4) DEF FNA(Z) = 30 * EXP(-Z * Z / 100)
   Origs: 
   Dests: 
-(0 2) 100 PRINT
+100 (0 2) PRINT
   Origs: 3:auto
   Dests: 110:auto
-F(X) (1 5) 110 FOR X = -30 TO 30 STEP 1.5
+110 F(X) (1 5) FOR X = -30 TO 30 STEP 1.5
   Origs: 100:auto
   Dests: 120:fornext, 210:fornext
-F(X) (0 3) 120 L = 0
+120 F(X) (0 3) L = 0
   Origs: 110:fornext
   Dests: 130:auto
-F(X) (0 5) 130 Y1 = 5 * INT(SQR(900 - X * X) / 5)
+130 F(X) (0 5) Y1 = 5 * INT(SQR(900 - X * X) / 5)
   Origs: 120:auto
   Dests: 140:auto
-F(X,Y) (1 6) 140 FOR Y = Y1 TO -Y1 STEP -5
+140 F(X,Y) (1 6) FOR Y = Y1 TO -Y1 STEP -5
   Origs: 130:auto
   Dests: 150:fornext, 190:fornext
-F(X,Y) (0 4) 150 Z = INT(25 + FNA(SQR(X * X + Y * Y)) - 0.7 * Y)
+150 F(X,Y) (0 4) Z = INT(25 + FNA(SQR(X * X + Y * Y)) - 0.7 * Y)
   Origs: 140:fornext
   Dests: 160:auto
-F(X,Y) (1 4) 160 IF Z <= L THEN 190
+160 F(X,Y) (1 4) IF Z <= L THEN 190
   Origs: 150:auto
   Dests: 170:auto, 190:ifthen
-F(X,Y) (0 3) 170 L = Z
+170 F(X,Y) (0 3) L = Z
   Origs: 160:auto
   Dests: 180:auto
-F(X,Y) (0 4) 180 PRINT TAB(Z); "*";
+180 F(X,Y) (0 4) PRINT TAB(Z); "*";
   Origs: 170:auto
   Dests: 190:auto
-F(X,Y) (0 1) 190 NEXT Y
+190 F(X,Y) (0 1) NEXT Y
   Origs: 140:fornext, 160:ifthen, 180:auto
   Dests: 200:auto
-F(X) (0 2) 200 PRINT
+200 F(X) (0 2) PRINT
   Origs: 190:auto
   Dests: 210:auto
-F(X) (0 1) 210 NEXT X
+210 F(X) (0 1) NEXT X
   Origs: 110:fornext, 200:auto
   Dests: 300:auto
-(0 1) 300 END
+300 (0 1) END
   Origs: 210:auto
   Dests: :stop
 

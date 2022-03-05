@@ -19,515 +19,515 @@ Halstead complexity:
  intelligence: 74.013
  time: 108.333
 
-(0 1) 10 REM SOLVE LINEAR PROGRAM VIA SIMPLEX ALGORITHM
+10 (0 1) REM SOLVE LINEAR PROGRAM VIA SIMPLEX ALGORITHM
   Origs: 
   Dests: 
-(0 2) 11 OPTION BASE 1
+11 (0 2) OPTION BASE 1
   Origs: :start
   Dests: 12:auto
-(0 2) 12 OPTION REQUIRE_INITIALIZED TRUE
+12 (0 2) OPTION REQUIRE_INITIALIZED TRUE
   Origs: 11:auto
   Dests: 13:auto
-(0 2) 13 OPTION FORGET_FORNEXT TRUE
+13 (0 2) OPTION FORGET_FORNEXT TRUE
   Origs: 12:auto
   Dests: 14:auto
-(0 2) 14 OPTION LOCK_FORNEXT TRUE
+14 (0 2) OPTION LOCK_FORNEXT TRUE
   Origs: 13:auto
   Dests: 101:auto
-(0 1) 20 REM N1 = 0 ' NUMBER OF DECISION VARIABLES
+20 (0 1) REM N1 = 0 ' NUMBER OF DECISION VARIABLES
   Origs: 
   Dests: 
-(0 1) 21 REM N2 = 0 ' NUMBER OF CONSTRAINTS (AND SLACK VARIABLES)
+21 (0 1) REM N2 = 0 ' NUMBER OF CONSTRAINTS (AND SLACK VARIABLES)
   Origs: 
   Dests: 
-(0 1) 30 REM X(N2, N1+N2) ' CENTRAL MATRIX
+30 (0 1) REM X(N2, N1+N2) ' CENTRAL MATRIX
   Origs: 
   Dests: 
-(0 1) 31 REM B(N2)        ' RIGHT-HAND SIDE VALUES
+31 (0 1) REM B(N2)        ' RIGHT-HAND SIDE VALUES
   Origs: 
   Dests: 
-(0 1) 32 REM C1$(N2)      ' NAMES OF BASIC VARIABLES
+32 (0 1) REM C1$(N2)      ' NAMES OF BASIC VARIABLES
   Origs: 
   Dests: 
-(0 1) 33 REM C$(N1+N2)    ' NAMES OF DECISION AND SLACK VARIABLES
+33 (0 1) REM C$(N1+N2)    ' NAMES OF DECISION AND SLACK VARIABLES
   Origs: 
   Dests: 
-(0 1) 34 REM C(N1+N2)     ' COEFFICIENTS FOR OBJECTIVE FUNCTION
+34 (0 1) REM C(N1+N2)     ' COEFFICIENTS FOR OBJECTIVE FUNCTION
   Origs: 
   Dests: 
-(0 1) 35 REM Z(N1+N2)     ' EVAL STEP FOR PIVOT COLUMN SELECTION
+35 (0 1) REM Z(N1+N2)     ' EVAL STEP FOR PIVOT COLUMN SELECTION
   Origs: 
   Dests: 
-(0 1) 36 REM B1(N2)       ' EVAL STEP FOR PIVOT ROW SELECTION
+36 (0 1) REM B1(N2)       ' EVAL STEP FOR PIVOT ROW SELECTION
   Origs: 
   Dests: 
-(0 1) 37 REM R()          ' OBJECTIVE COEFFICIENT FOR BASIC VARIABLE
+37 (0 1) REM R()          ' OBJECTIVE COEFFICIENT FOR BASIC VARIABLE
   Origs: 
   Dests: 
-(0 1) 38 REM I0, J0       ' ROW AND COLUMN OF PIVOT CELL
+38 (0 1) REM I0, J0       ' ROW AND COLUMN OF PIVOT CELL
   Origs: 
   Dests: 
-(0 1) 100 REM READ DIMENSIONS
+100 (0 1) REM READ DIMENSIONS
   Origs: 
   Dests: 
-(2 3) 101 READ N1, N2
+101 (2 3) READ N1, N2
   Origs: 14:auto
   Dests: 111:auto
-(0 1) 110 REM BUILD COEFFICIENTS FOR EXPANDED OBJECTIVE FUNCTION
+110 (0 1) REM BUILD COEFFICIENTS FOR EXPANDED OBJECTIVE FUNCTION
   Origs: 
   Dests: 
-(0 2) 111 DIM C(N1)
+111 (0 2) DIM C(N1)
   Origs: 101:auto
   Dests: 112:auto
-(1 2) 112 ARR READ C
+112 (1 2) ARR READ C
   Origs: 111:auto
   Dests: 113:auto
-(0 2) 113 DIM C(N1 + N2)
+113 (0 2) DIM C(N1 + N2)
   Origs: 112:auto
   Dests: 114:auto
-(0 3) 114 C(J) = 0
-(1 2)       FOR J = N1 + 1 TO N1 + N2
-(0 1)       NEXT J
+114 (0 3) C(J) = 0
+      (1 2) FOR J = N1 + 1 TO N1 + N2
+      (0 1) NEXT J
   Origs: 113:auto
   Dests: 121:auto
-(0 1) 120 REM BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
+120 (0 1) REM BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
   Origs: 
   Dests: 
-(0 2) 121 DIM C$(N1 + N2)
+121 (0 2) DIM C$(N1 + N2)
   Origs: 114:auto
   Dests: 122:auto
-F(I) (1 3) 122 FOR I = 1 TO N1
+122 F(I) (1 3) FOR I = 1 TO N1
   Origs: 121:auto
   Dests: 123:fornext, 124:fornext
-F(I) (0 5) 123 C$(I) = "X" + STR$(I)
+123 F(I) (0 5) C$(I) = "X" + STR$(I)
   Origs: 122:fornext
   Dests: 124:auto
-F(I) (0 1) 124 NEXT I
+124 F(I) (0 1) NEXT I
   Origs: 122:fornext, 123:auto
   Dests: 125:auto
-F(I) (1 3) 125 FOR I = 1 TO N2
+125 F(I) (1 3) FOR I = 1 TO N2
   Origs: 124:auto
   Dests: 126:fornext, 127:fornext
-F(I) (0 5) 126 C$(I + N1) = "S" + STR$(I)
+126 F(I) (0 5) C$(I + N1) = "S" + STR$(I)
   Origs: 125:fornext
   Dests: 127:auto
-F(I) (0 1) 127 NEXT I
+127 F(I) (0 1) NEXT I
   Origs: 125:fornext, 126:auto
   Dests: 128:auto
-F(I) (1 3) 128 FOR I = 1 TO N2
+128 F(I) (1 3) FOR I = 1 TO N2
   Origs: 127:auto
   Dests: 129:fornext, 130:fornext
-F(I) (0 3) 129 C1$(I) = C$(I + N1)
+129 F(I) (0 3) C1$(I) = C$(I + N1)
   Origs: 128:fornext
   Dests: 130:auto
-F(I) (0 1) 130 NEXT I
+130 F(I) (0 1) NEXT I
   Origs: 128:fornext, 129:auto
   Dests: 141:auto
-(0 1) 140 REM BUILD CENTRAL MATRIX (CONSTRAINTS)
+140 (0 1) REM BUILD CENTRAL MATRIX (CONSTRAINTS)
   Origs: 
   Dests: 
-(0 2) 141 DIM X(N2, N1)
+141 (0 2) DIM X(N2, N1)
   Origs: 130:auto
   Dests: 142:auto
-(1 2) 142 MAT READ X
+142 (1 2) MAT READ X
   Origs: 141:auto
   Dests: 143:auto
-(0 2) 143 DIM X(N2, N1 + N2)
+143 (0 2) DIM X(N2, N1 + N2)
   Origs: 142:auto
   Dests: 144:auto
-(0 3) 144 X(I, J) = 0
-(1 2)       FOR J = N1 + 1 TO N1 + N2
-(0 1)       NEXT J
-(1 1)       FOR I = 1 TO N2
-(0 1)       NEXT I
+144 (0 3) X(I, J) = 0
+      (1 2) FOR J = N1 + 1 TO N1 + N2
+      (0 1) NEXT J
+      (1 1) FOR I = 1 TO N2
+      (0 1) NEXT I
   Origs: 143:auto
   Dests: 145:auto
-(0 3) 145 X(I, I + N1) = 1
-(1 1)       FOR I = 1 TO N2
-(0 1)       NEXT I
+145 (0 3) X(I, I + N1) = 1
+      (1 1) FOR I = 1 TO N2
+      (0 1) NEXT I
   Origs: 144:auto
   Dests: 161:auto
-(0 1) 160 REM BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
+160 (0 1) REM BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
   Origs: 
   Dests: 
-(0 2) 161 DIM B(N2)
+161 (0 2) DIM B(N2)
   Origs: 145:auto
   Dests: 162:auto
-(1 2) 162 ARR READ B
+162 (1 2) ARR READ B
   Origs: 161:auto
   Dests: 171:auto
-(0 1) 170 REM COPY COEFFICIENTS FOR BASIC VARIABLES
+170 (0 1) REM COPY COEFFICIENTS FOR BASIC VARIABLES
   Origs: 
   Dests: 
-(0 2) 171 DIM R(N2)
+171 (0 2) DIM R(N2)
   Origs: 162:auto
   Dests: 172:auto
-(0 3) 172 R(I) = 0
-(1 1)       FOR I = 1 TO N2
-(0 1)       NEXT I
+172 (0 3) R(I) = 0
+      (1 1) FOR I = 1 TO N2
+      (0 1) NEXT I
   Origs: 171:auto
   Dests: 201:auto
-(0 1) 200 REM PRINT THE TABLEAU
+200 (0 1) REM PRINT THE TABLEAU
   Origs: 
   Dests: 
-(0 2) 201 PRINT
+201 (0 2) PRINT
   Origs: 172:auto, 453:goto
   Dests: 202:auto
-(0 2) 202 PRINT "TABLEAU"
+202 (0 2) PRINT "TABLEAU"
   Origs: 201:auto
   Dests: 203:auto
-(0 2) 203 PRINT
+203 (0 2) PRINT
   Origs: 202:auto
   Dests: 204:auto
-(0 3) 204 PRINT " ", "C->",
+204 (0 3) PRINT " ", "C->",
   Origs: 203:auto
   Dests: 205:auto
-(0 2) 205 ARR PRINT C
+205 (0 2) ARR PRINT C
   Origs: 204:auto
   Dests: 210:auto
-(0 3) 210 PRINT "CB", "BV",
+210 (0 3) PRINT "CB", "BV",
   Origs: 205:auto
   Dests: 211:auto
-(0 2) 211 PRINT C$(I),
-(1 2)       FOR I = 1 TO N1 + N2
-(0 1)       NEXT I
+211 (0 2) PRINT C$(I),
+      (1 2) FOR I = 1 TO N1 + N2
+      (0 1) NEXT I
   Origs: 210:auto
   Dests: 212:auto
-(0 2) 212 PRINT "B"
+212 (0 2) PRINT "B"
   Origs: 211:auto
   Dests: 220:auto
-F(I) (1 3) 220 FOR I = 1 TO N2
+220 F(I) (1 3) FOR I = 1 TO N2
   Origs: 212:auto
   Dests: 221:fornext, 239:fornext
-F(I) (0 3) 221 PRINT R(I), C1$(I),
+221 F(I) (0 3) PRINT R(I), C1$(I),
   Origs: 220:fornext
   Dests: 222:auto
-F(I) (0 2) 222 PRINT X(I, J),
-(1 2)       FOR J = 1 TO N1 + N2
-(0 1)       NEXT J
+222 F(I) (0 2) PRINT X(I, J),
+      (1 2) FOR J = 1 TO N1 + N2
+      (0 1) NEXT J
   Origs: 221:auto
   Dests: 230:auto
-F(I) (0 2) 230 PRINT B(I)
+230 F(I) (0 2) PRINT B(I)
   Origs: 222:auto
   Dests: 239:auto
-F(I) (0 1) 239 NEXT I
+239 F(I) (0 1) NEXT I
   Origs: 220:fornext, 230:auto
   Dests: 301:auto
-(0 1) 300 REM EVALUATE TABLEAU FOR OPTIMUM SOLUTION
+300 (0 1) REM EVALUATE TABLEAU FOR OPTIMUM SOLUTION
   Origs: 
   Dests: 
-(0 2) 301 DIM Z(N1 + N2)
+301 (0 2) DIM Z(N1 + N2)
   Origs: 239:auto
   Dests: 302:auto
-(0 3) 302 Z(J) = 0
-(1 2)       FOR J = 1 TO N1 + N2
-(0 1)       NEXT J
+302 (0 3) Z(J) = 0
+      (1 2) FOR J = 1 TO N1 + N2
+      (0 1) NEXT J
   Origs: 301:auto
   Dests: 305:auto
-F(I) (1 3) 305 FOR I = 1 TO N2
+305 F(I) (1 3) FOR I = 1 TO N2
   Origs: 302:auto
   Dests: 306:fornext, 307:fornext
-F(I) (0 6) 306 Z(J) = Z(J) + R(I) * X(I, J)
-(1 2)       FOR J = 1 TO N1 + N2
-(0 1)       NEXT J
+306 F(I) (0 6) Z(J) = Z(J) + R(I) * X(I, J)
+      (1 2) FOR J = 1 TO N1 + N2
+      (0 1) NEXT J
   Origs: 305:fornext
   Dests: 307:auto
-F(I) (0 1) 307 NEXT I
+307 F(I) (0 1) NEXT I
   Origs: 305:fornext, 306:auto
   Dests: 311:auto
-(0 1) 310 REM COMPUTE Z - C
+310 (0 1) REM COMPUTE Z - C
   Origs: 
   Dests: 
-(0 4) 311 ARR Y = Z - C
+311 (0 4) ARR Y = Z - C
   Origs: 307:auto
   Dests: 321:auto
-(0 1) 320 REM CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
+320 (0 1) REM CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
   Origs: 
   Dests: 
-(0 3) 321 J0 = 0
+321 (0 3) J0 = 0
   Origs: 311:auto
   Dests: 322:auto
-(0 3) 322 M = 0
+322 (0 3) M = 0
   Origs: 321:auto
   Dests: 323:auto
-F(J) (1 4) 323 FOR J = 1 TO N1 + N2
+323 F(J) (1 4) FOR J = 1 TO N1 + N2
   Origs: 322:auto
   Dests: 324:fornext, 327:fornext
-F(J) (1 4) 324 IF Y(J) >= M THEN 327
+324 F(J) (1 4) IF Y(J) >= M THEN 327
   Origs: 323:fornext
   Dests: 325:auto, 327:ifthen
-F(J) (0 3) 325 J0 = J
+325 F(J) (0 3) J0 = J
   Origs: 324:auto
   Dests: 326:auto
-F(J) (0 3) 326 M = Y(J)
+326 F(J) (0 3) M = Y(J)
   Origs: 325:auto
   Dests: 327:auto
-F(J) (0 1) 327 NEXT J
+327 F(J) (0 1) NEXT J
   Origs: 323:fornext, 324:ifthen, 326:auto
   Dests: 328:auto
-(1 4) 328 IF M >= 0 THEN 500
+328 (1 4) IF M >= 0 THEN 500
   Origs: 327:auto
   Dests: 329:auto, 501:ifthen
-(0 2) 329 PRINT "NON-OPTIMUM."
+329 (0 2) PRINT "NON-OPTIMUM."
   Origs: 328:auto
   Dests: 331:auto
-(0 1) 330 REM EVALUATE BASIC VARIABLES
+330 (0 1) REM EVALUATE BASIC VARIABLES
   Origs: 
   Dests: 
-(0 2) 331 DIM W(N2)
+331 (0 2) DIM W(N2)
   Origs: 329:auto
   Dests: 332:auto
-(0 3) 332 W(I) = 0
-(1 1)       FOR I = 1 TO N2
-(0 1)       NEXT I
+332 (0 3) W(I) = 0
+      (1 1) FOR I = 1 TO N2
+      (0 1) NEXT I
   Origs: 331:auto
   Dests: 333:auto
-(0 4) 333 W(I) = B(I) / X(I, J0)
-(1 2)       IF X(I, J0) <> 0
-(0 1)       ENDIF
-(1 1)       FOR I = 1 TO N2
-(0 1)       NEXT I
+333 (0 4) W(I) = B(I) / X(I, J0)
+      (1 2) IF X(I, J0) <> 0
+      (0 1) ENDIF
+      (1 1) FOR I = 1 TO N2
+      (0 1) NEXT I
   Origs: 332:auto
   Dests: 341:auto
-(0 1) 340 REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
+340 (0 1) REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
   Origs: 
   Dests: 
-(0 2) 341 PRINT
+341 (0 2) PRINT
   Origs: 333:auto
   Dests: 342:auto
-(0 2) 342 PRINT "EXPANDED TABLEAU"
+342 (0 2) PRINT "EXPANDED TABLEAU"
   Origs: 341:auto
   Dests: 343:auto
-(0 2) 343 PRINT
+343 (0 2) PRINT
   Origs: 342:auto
   Dests: 344:auto
-(0 3) 344 PRINT " ", "C->",
+344 (0 3) PRINT " ", "C->",
   Origs: 343:auto
   Dests: 345:auto
-(0 2) 345 ARR PRINT C
+345 (0 2) ARR PRINT C
   Origs: 344:auto
   Dests: 350:auto
-(0 3) 350 PRINT "CB", "BV",
+350 (0 3) PRINT "CB", "BV",
   Origs: 345:auto
   Dests: 351:auto
-(0 2) 351 PRINT C$(I),
-(1 2)       FOR I = 1 TO N1 + N2
-(0 1)       NEXT I
+351 (0 2) PRINT C$(I),
+      (1 2) FOR I = 1 TO N1 + N2
+      (0 1) NEXT I
   Origs: 350:auto
   Dests: 352:auto
-(0 4) 352 PRINT "B", "B / "; C$(J0)
+352 (0 4) PRINT "B", "B / "; C$(J0)
   Origs: 351:auto
   Dests: 360:auto
-F(I) (1 3) 360 FOR I = 1 TO N2
+360 F(I) (1 3) FOR I = 1 TO N2
   Origs: 352:auto
   Dests: 361:fornext, 364:fornext
-F(I) (0 3) 361 PRINT R(I), C1$(I),
+361 F(I) (0 3) PRINT R(I), C1$(I),
   Origs: 360:fornext
   Dests: 362:auto
-F(I) (0 2) 362 PRINT X(I, J),
-(1 2)       FOR J = 1 TO N1 + N2
-(0 1)       NEXT J
+362 F(I) (0 2) PRINT X(I, J),
+      (1 2) FOR J = 1 TO N1 + N2
+      (0 1) NEXT J
   Origs: 361:auto
   Dests: 363:auto
-F(I) (0 3) 363 PRINT B(I), W(I)
+363 F(I) (0 3) PRINT B(I), W(I)
   Origs: 362:auto
   Dests: 364:auto
-F(I) (0 1) 364 NEXT I
+364 F(I) (0 1) NEXT I
   Origs: 360:fornext, 363:auto
   Dests: 370:auto
-(0 3) 370 PRINT " ", "Z",
+370 (0 3) PRINT " ", "Z",
   Origs: 364:auto
   Dests: 371:auto
-(0 2) 371 ARR PRINT Z
+371 (0 2) ARR PRINT Z
   Origs: 370:auto
   Dests: 372:auto
-(0 3) 372 PRINT " ", "Z-C",
+372 (0 3) PRINT " ", "Z-C",
   Origs: 371:auto
   Dests: 373:auto
-(0 2) 373 ARR PRINT Y
+373 (0 2) ARR PRINT Y
   Origs: 372:auto
   Dests: 374:auto
-(0 6) 374 PRINT "KEY COLUMN"; J0; "VARIABLE "; C$(J0); " ENTERS"
+374 (0 6) PRINT "KEY COLUMN"; J0; "VARIABLE "; C$(J0); " ENTERS"
   Origs: 373:auto
   Dests: 381:auto
-(0 1) 380 REM IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
+380 (0 1) REM IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
   Origs: 
   Dests: 
-(0 3) 381 I0 = 0
+381 (0 3) I0 = 0
   Origs: 374:auto
   Dests: 382:auto
-(0 3) 382 M = 1E6
+382 (0 3) M = 1E+06
   Origs: 381:auto
   Dests: 383:auto
-F(I) (1 3) 383 FOR I = 1 TO N2
+383 F(I) (1 3) FOR I = 1 TO N2
   Origs: 382:auto
   Dests: 384:fornext, 387:fornext
-F(I) (1 7) 384 IF W(I) <= 0 OR W(I) >= M THEN 387
+384 F(I) (1 7) IF W(I) <= 0 OR W(I) >= M THEN 387
   Origs: 383:fornext
   Dests: 385:auto, 387:ifthen
-F(I) (0 3) 385 I0 = I
+385 F(I) (0 3) I0 = I
   Origs: 384:auto
   Dests: 386:auto
-F(I) (0 3) 386 M = W(I)
+386 F(I) (0 3) M = W(I)
   Origs: 385:auto
   Dests: 387:auto
-F(I) (0 1) 387 NEXT I
+387 F(I) (0 1) NEXT I
   Origs: 383:fornext, 384:ifthen, 386:auto
   Dests: 389:auto
-(0 6) 389 PRINT "KEY ROW"; I0; "VARIABLE "; C1$(I0); " EXITS"
+389 (0 6) PRINT "KEY ROW"; I0; "VARIABLE "; C1$(I0); " EXITS"
   Origs: 387:auto
   Dests: 402:auto
-(0 1) 400 REM PIVOT ON KEY CELL
+400 (0 1) REM PIVOT ON KEY CELL
   Origs: 
   Dests: 
-(0 1) 401 REM CHANGE BASIC VARIABLE NAME AND COEFFICIENT
+401 (0 1) REM CHANGE BASIC VARIABLE NAME AND COEFFICIENT
   Origs: 
   Dests: 
-(0 3) 402 C1$(I0) = C$(J0)
+402 (0 3) C1$(I0) = C$(J0)
   Origs: 389:auto
   Dests: 403:auto
-(0 3) 403 R(I0) = C(J0)
+403 (0 3) R(I0) = C(J0)
   Origs: 402:auto
   Dests: 411:auto
-(0 1) 410 REM BUILD NEW MATRIX X2 AND ARRAY B2
+410 (0 1) REM BUILD NEW MATRIX X2 AND ARRAY B2
   Origs: 
   Dests: 
-(0 3) 411 MAT X2 = X
+411 (0 3) MAT X2 = X
   Origs: 403:auto
   Dests: 412:auto
-(0 3) 412 ARR B2 = B
+412 (0 3) ARR B2 = B
   Origs: 411:auto
   Dests: 421:auto
-(0 1) 420 REM ADJUST VALUES IN KEY ROW
+420 (0 1) REM ADJUST VALUES IN KEY ROW
   Origs: 
   Dests: 
-F(J) (1 4) 421 FOR J = 1 TO N1 + N2
+421 F(J) (1 4) FOR J = 1 TO N1 + N2
   Origs: 412:auto
   Dests: 422:fornext, 423:fornext
-F(J) (0 4) 422 X2(I0, J) = X(I0, J) / X(I0, J0)
+422 F(J) (0 4) X2(I0, J) = X(I0, J) / X(I0, J0)
   Origs: 421:fornext
   Dests: 423:auto
-F(J) (0 1) 423 NEXT J
+423 F(J) (0 1) NEXT J
   Origs: 421:fornext, 422:auto
   Dests: 431:auto
-(0 1) 430 REM ADJUST VALUES IN OTHER ROWS
+430 (0 1) REM ADJUST VALUES IN OTHER ROWS
   Origs: 
   Dests: 
-F(I) (1 3) 431 FOR I = 1 TO N2
+431 F(I) (1 3) FOR I = 1 TO N2
   Origs: 423:auto
   Dests: 432:fornext, 436:fornext
-F(I) (1 4) 432 IF I = I0 THEN 436
+432 F(I) (1 4) IF I = I0 THEN 436
   Origs: 431:fornext
   Dests: 433:auto, 436:ifthen
-F(I,J) (1 4) 433 FOR J = 1 TO N1 + N2
+433 F(I,J) (1 4) FOR J = 1 TO N1 + N2
   Origs: 432:auto
   Dests: 434:fornext, 435:fornext
-F(I,J) (0 7) 434 X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
+434 F(I,J) (0 7) X2(I, J) = X(I, J) - X(I, J0) * X(I0, J) / X(I0, J0)
   Origs: 433:fornext
   Dests: 435:auto
-F(I,J) (0 1) 435 NEXT J
+435 F(I,J) (0 1) NEXT J
   Origs: 433:fornext, 434:auto
   Dests: 436:auto
-F(I) (0 1) 436 NEXT I
+436 F(I) (0 1) NEXT I
   Origs: 431:fornext, 432:ifthen, 435:auto
   Dests: 441:auto
-(0 1) 440 REM ADJUST VALUES IN RIGHT-HAND-SIDE
+440 (0 1) REM ADJUST VALUES IN RIGHT-HAND-SIDE
   Origs: 
   Dests: 
-(0 4) 441 B2(I0) = B(I0) / X(I0, J0)
+441 (0 4) B2(I0) = B(I0) / X(I0, J0)
   Origs: 436:auto
   Dests: 442:auto
-F(I) (1 3) 442 FOR I = 1 TO N2
+442 F(I) (1 3) FOR I = 1 TO N2
   Origs: 441:auto
   Dests: 443:fornext, 445:fornext
-F(I) (1 4) 443 IF I = I0 THEN 445
+443 F(I) (1 4) IF I = I0 THEN 445
   Origs: 442:fornext
   Dests: 444:auto, 445:ifthen
-F(I) (0 7) 444 B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
+444 F(I) (0 7) B2(I) = B(I) - X(I, J0) * B(I0) / X(I0, J0)
   Origs: 443:auto
   Dests: 445:auto
-F(I) (0 1) 445 NEXT I
+445 F(I) (0 1) NEXT I
   Origs: 442:fornext, 443:ifthen, 444:auto
   Dests: 451:auto
-(0 1) 450 REM SWAP IN THE NEW MATRIX AND CONSTANTS
+450 (0 1) REM SWAP IN THE NEW MATRIX AND CONSTANTS
   Origs: 
   Dests: 
-(0 3) 451 MAT X = X2
+451 (0 3) MAT X = X2
   Origs: 445:auto
   Dests: 452:auto
-(0 3) 452 ARR B = B2
+452 (0 3) ARR B = B2
   Origs: 451:auto
   Dests: 453:auto
-(0 3) 453 GOTO 200
+453 (0 3) GOTO 200
   Origs: 452:auto
   Dests: 201:goto
-(0 1) 500 REM NO MORE CHANGES
+500 (0 1) REM NO MORE CHANGES
   Origs: 
   Dests: 
-(0 2) 501 PRINT "SOLUTION FOUND"
+501 (0 2) PRINT "SOLUTION FOUND"
   Origs: 328:ifthen
   Dests: 511:auto
-(0 3) 511 PRINT " ", "Z",
+511 (0 3) PRINT " ", "Z",
   Origs: 501:auto
   Dests: 512:auto
-(0 2) 512 ARR PRINT Z
+512 (0 2) ARR PRINT Z
   Origs: 511:auto
   Dests: 513:auto
-(0 3) 513 PRINT " ", "Z-C",
+513 (0 3) PRINT " ", "Z-C",
   Origs: 512:auto
   Dests: 514:auto
-(0 2) 514 ARR PRINT Y
+514 (0 2) ARR PRINT Y
   Origs: 513:auto
   Dests: 520:auto
-(0 2) 520 PRINT "OBJECTIVE VALUE"
+520 (0 2) PRINT "OBJECTIVE VALUE"
   Origs: 514:auto
   Dests: 521:auto
-(0 3) 521 Z = 0
+521 (0 3) Z = 0
   Origs: 520:auto
   Dests: 522:auto
-F(I) (1 3) 522 FOR I = 1 TO N2
+522 F(I) (1 3) FOR I = 1 TO N2
   Origs: 521:auto
   Dests: 523:fornext, 525:fornext
-F(I) (0 6) 523 PRINT C1$(I); " = "; B(I); " * "; R(I)
+523 F(I) (0 6) PRINT C1$(I); " = "; B(I); " * "; R(I)
   Origs: 522:fornext
   Dests: 524:auto
-F(I) (0 6) 524 Z = Z + B(I) * R(I)
+524 F(I) (0 6) Z = Z + B(I) * R(I)
   Origs: 523:auto
   Dests: 525:auto
-F(I) (0 1) 525 NEXT I
+525 F(I) (0 1) NEXT I
   Origs: 522:fornext, 524:auto
   Dests: 527:auto
-(0 3) 527 PRINT "Z = "; Z
+527 (0 3) PRINT "Z = "; Z
   Origs: 525:auto
   Dests: 999:auto
-(0 1) 999 STOP
+999 (0 1) STOP
   Origs: 527:auto
   Dests: :stop
-(0 1) 4000 REM NUMBER DECISION VARS, NUMBER CONSTRAINTS
+4000 (0 1) REM NUMBER DECISION VARS, NUMBER CONSTRAINTS
   Origs: 
   Dests: 
-(0 2) 4001 DATA 2, 4
+4001 (0 2) DATA 2, 4
   Origs: 
   Dests: 
-(0 1) 4010 REM COEFFICIENTS FOR OBJECTIVE FUNCTION (WITHOUT SLACK)
+4010 (0 1) REM COEFFICIENTS FOR OBJECTIVE FUNCTION (WITHOUT SLACK)
   Origs: 
   Dests: 
-(0 2) 4011 DATA 20, 14
+4011 (0 2) DATA 20, 14
   Origs: 
   Dests: 
-(0 1) 4020 REM CONSTRAINT COEFFICIENTS (WITHOUT SLACK)
+4020 (0 1) REM CONSTRAINT COEFFICIENTS (WITHOUT SLACK)
   Origs: 
   Dests: 
-(0 2) 4021 DATA 6, 2, 8, 6, 6, 4, 40, 25
+4021 (0 2) DATA 6, 2, 8, 6, 6, 4, 40, 25
   Origs: 
   Dests: 
-(0 1) 4030 REM RIGHT-HAND SIDE CONSTANTS
+4030 (0 1) REM RIGHT-HAND SIDE CONSTANTS
   Origs: 
   Dests: 
-(0 2) 4031 DATA 2000, 2000, 1440, 9600
+4031 (0 2) DATA 2000, 2000, 1440, 9600
   Origs: 
   Dests: 
-(0 1) 4999 END
+4999 (0 1) END
   Origs: 
   Dests: :stop
 

@@ -19,458 +19,458 @@ Halstead complexity:
  intelligence: 87.931
  time: 205.176
 
-(0 4) 10 PRINT TAB(28); "AMAZING PROGRAM"
+10 (0 4) PRINT TAB(28); "AMAZING PROGRAM"
   Origs: :start
   Dests: 20:auto
-(0 4) 20 PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+20 (0 4) PRINT TAB(15); "CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
   Origs: 10:auto
   Dests: 30:auto
-(0 2) 30 PRINT
-(0 2)    PRINT
-(0 2)    PRINT
-(0 2)    PRINT
+30 (0 2) PRINT
+   (0 2) PRINT
+   (0 2) PRINT
+   (0 2) PRINT
   Origs: 20:auto
   Dests: 100:auto
-(2 3) 100 INPUT "WHAT ARE YOUR WIDTH AND LENGTH"; H, V
+100 (2 3) INPUT "WHAT ARE YOUR WIDTH AND LENGTH"; H, V
   Origs: 30:auto, 104:goto
   Dests: 102:auto
-(1 7) 102 IF H <> 1 AND V <> 1 THEN 110
+102 (1 7) IF H <> 1 AND V <> 1 THEN 110
   Origs: 100:auto
   Dests: 104:auto, 110:ifthen
-(0 2) 104 PRINT "MEANINGLESS DIMENSIONS.  TRY AGAIN."
-(0 3)     GOTO 100
+104 (0 2) PRINT "MEANINGLESS DIMENSIONS.  TRY AGAIN."
+    (0 3) GOTO 100
   Origs: 102:auto
   Dests: 100:goto
-(0 3) 110 DIM W(H, V), V(H, V)
+110 (0 3) DIM W(H, V), V(H, V)
   Origs: 102:ifthen
   Dests: 120:auto
-(0 2) 120 PRINT
+120 (0 2) PRINT
   Origs: 110:auto
   Dests: 130:auto
-(0 2) 130 PRINT
+130 (0 2) PRINT
   Origs: 120:auto
   Dests: 140:auto
-(0 2) 140 PRINT
+140 (0 2) PRINT
   Origs: 130:auto
   Dests: 150:auto
-(0 2) 150 PRINT
+150 (0 2) PRINT
   Origs: 140:auto
   Dests: 160:auto
-(0 3) 160 Q = 0
-(0 3)     Z = 0
-(0 4)     X = INT(RND(1) * H + 1)
+160 (0 3) Q = 0
+    (0 3) Z = 0
+    (0 4) X = INT(RND(1) * H + 1)
   Origs: 150:auto
   Dests: 165:auto
-F(I) (1 3) 165 FOR I = 1 TO H
+165 F(I) (1 3) FOR I = 1 TO H
   Origs: 160:auto
   Dests: 170:fornext, 180:fornext
-F(I) (1 4) 170 IF I = X THEN 173
+170 F(I) (1 4) IF I = X THEN 173
   Origs: 165:fornext
   Dests: 171:auto, 173:ifthen
-F(I) (0 2) 171 PRINT ".--";
-F(I) (0 2)     GOTO 180
+171 F(I) (0 2) PRINT ".--";
+    F(I) (0 2) GOTO 180
   Origs: 170:auto
   Dests: 180:goto
-F(I) (0 2) 173 PRINT ".  ";
+173 F(I) (0 2) PRINT ".  ";
   Origs: 170:ifthen
   Dests: 180:auto
-F(I) (0 1) 180 NEXT I
+180 F(I) (0 1) NEXT I
   Origs: 165:fornext, 171:goto, 173:auto
   Dests: 190:auto
-(0 2) 190 PRINT "."
+190 (0 2) PRINT "."
   Origs: 180:auto
   Dests: 195:auto
-(0 3) 195 C = 1
-(0 3)     W(X, 1) = C
-(0 4)     C = C + 1
+195 (0 3) C = 1
+    (0 3) W(X, 1) = C
+    (0 4) C = C + 1
   Origs: 190:auto
   Dests: 200:auto
-(0 3) 200 R = X
-(0 3)     S = 1
-(0 2)     GOTO 260
+200 (0 3) R = X
+    (0 3) S = 1
+    (0 2) GOTO 260
   Origs: 195:auto
   Dests: 260:goto
-(1 4) 210 IF R <> H THEN 240
+210 (1 4) IF R <> H THEN 240
   Origs: 250:ifthen, 1000:goto
   Dests: 215:auto, 240:ifthen
-(1 4) 215 IF S <> V THEN 230
+215 (1 4) IF S <> V THEN 230
   Origs: 210:auto
   Dests: 220:auto, 230:ifthen
-(0 3) 220 R = 1
-(0 3)     S = 1
-(0 2)     GOTO 250
+220 (0 3) R = 1
+    (0 3) S = 1
+    (0 2) GOTO 250
   Origs: 215:auto
   Dests: 250:goto
-(0 3) 230 R = 1
-(0 4)     S = S + 1
-(0 2)     GOTO 250
+230 (0 3) R = 1
+    (0 4) S = S + 1
+    (0 2) GOTO 250
   Origs: 215:ifthen
   Dests: 250:goto
-(0 4) 240 R = R + 1
+240 (0 4) R = R + 1
   Origs: 210:ifthen
   Dests: 250:auto
-(1 5) 250 IF W(R, S) = 0 THEN 210
+250 (1 5) IF W(R, S) = 0 THEN 210
   Origs: 220:goto, 230:goto, 240:auto, 980:goto
   Dests: 210:ifthen, 260:auto
-(1 5) 260 IF R - 1 = 0 THEN 530
+260 (1 5) IF R - 1 = 0 THEN 530
   Origs: 200:goto, 250:auto, 815:goto, 850:goto, 955:goto
   Dests: 265:auto, 530:ifthen
-(1 4) 265 IF W(R - 1, S) <> 0 THEN 530
+265 (1 4) IF W(R - 1, S) <> 0 THEN 530
   Origs: 260:auto
   Dests: 270:auto, 530:ifthen
-(1 5) 270 IF S - 1 = 0 THEN 390
+270 (1 5) IF S - 1 = 0 THEN 390
   Origs: 265:auto
   Dests: 280:auto, 390:ifthen
-(1 4) 280 IF W(R, S - 1) <> 0 THEN 390
+280 (1 4) IF W(R, S - 1) <> 0 THEN 390
   Origs: 270:auto
   Dests: 290:auto, 390:ifthen
-(1 4) 290 IF R = H THEN 330
+290 (1 4) IF R = H THEN 330
   Origs: 280:auto
   Dests: 300:auto, 330:ifthen
-(1 4) 300 IF W(R + 1, S) <> 0 THEN 330
+300 (1 4) IF W(R + 1, S) <> 0 THEN 330
   Origs: 290:auto
   Dests: 310:auto, 330:ifthen
-(0 4) 310 X = INT(RND(1) * 3 + 1)
+310 (0 4) X = INT(RND(1) * 3 + 1)
   Origs: 300:auto
   Dests: 320:auto
-(3 5) 320 ON X GOTO 790, 820, 860
+320 (3 5) ON X GOTO 790, 820, 860
   Origs: 310:auto
   Dests: 330:auto, 790:goto, 820:goto, 860:goto
-(1 4) 330 IF S <> V THEN 340
+330 (1 4) IF S <> V THEN 340
   Origs: 290:ifthen, 300:ifthen, 320:auto
   Dests: 334:auto, 340:ifthen
-(1 4) 334 IF Z = 1 THEN 370
+334 (1 4) IF Z = 1 THEN 370
   Origs: 330:auto
   Dests: 338:auto, 370:ifthen
-(0 3) 338 Q = 1
-(0 2)     GOTO 350
+338 (0 3) Q = 1
+    (0 2) GOTO 350
   Origs: 334:auto
   Dests: 350:goto
-(1 4) 340 IF W(R, S + 1) <> 0 THEN 370
+340 (1 4) IF W(R, S + 1) <> 0 THEN 370
   Origs: 330:ifthen
   Dests: 350:auto, 370:ifthen
-(0 4) 350 X = INT(RND(1) * 3 + 1)
+350 (0 4) X = INT(RND(1) * 3 + 1)
   Origs: 338:goto, 340:auto
   Dests: 360:auto
-(3 5) 360 ON X GOTO 790, 820, 910
+360 (3 5) ON X GOTO 790, 820, 910
   Origs: 350:auto
   Dests: 370:auto, 790:goto, 820:goto, 910:goto
-(0 4) 370 X = INT(RND(1) * 2 + 1)
+370 (0 4) X = INT(RND(1) * 2 + 1)
   Origs: 334:ifthen, 340:ifthen, 360:auto
   Dests: 380:auto
-(2 4) 380 ON X GOTO 790, 820
+380 (2 4) ON X GOTO 790, 820
   Origs: 370:auto
   Dests: 390:auto, 790:goto, 820:goto
-(1 4) 390 IF R = H THEN 470
+390 (1 4) IF R = H THEN 470
   Origs: 270:ifthen, 280:ifthen, 380:auto
   Dests: 400:auto, 470:ifthen
-(1 4) 400 IF W(R + 1, S) <> 0 THEN 470
+400 (1 4) IF W(R + 1, S) <> 0 THEN 470
   Origs: 390:auto
   Dests: 405:auto, 470:ifthen
-(1 4) 405 IF S <> V THEN 420
+405 (1 4) IF S <> V THEN 420
   Origs: 400:auto
   Dests: 410:auto, 420:ifthen
-(1 4) 410 IF Z = 1 THEN 450
+410 (1 4) IF Z = 1 THEN 450
   Origs: 405:auto
   Dests: 415:auto, 450:ifthen
-(0 3) 415 Q = 1
-(0 2)     GOTO 430
+415 (0 3) Q = 1
+    (0 2) GOTO 430
   Origs: 410:auto
   Dests: 430:goto
-(1 4) 420 IF W(R, S + 1) <> 0 THEN 450
+420 (1 4) IF W(R, S + 1) <> 0 THEN 450
   Origs: 405:ifthen
   Dests: 430:auto, 450:ifthen
-(0 4) 430 X = INT(RND(1) * 3 + 1)
+430 (0 4) X = INT(RND(1) * 3 + 1)
   Origs: 415:goto, 420:auto
   Dests: 440:auto
-(3 5) 440 ON X GOTO 790, 860, 910
+440 (3 5) ON X GOTO 790, 860, 910
   Origs: 430:auto
   Dests: 450:auto, 790:goto, 860:goto, 910:goto
-(0 4) 450 X = INT(RND(1) * 2 + 1)
+450 (0 4) X = INT(RND(1) * 2 + 1)
   Origs: 410:ifthen, 420:ifthen, 440:auto
   Dests: 460:auto
-(2 4) 460 ON X GOTO 790, 860
+460 (2 4) ON X GOTO 790, 860
   Origs: 450:auto
   Dests: 470:auto, 790:goto, 860:goto
-(1 4) 470 IF S <> V THEN 490
+470 (1 4) IF S <> V THEN 490
   Origs: 390:ifthen, 400:ifthen, 460:auto
   Dests: 480:auto, 490:ifthen
-(1 4) 480 IF Z = 1 THEN 520
+480 (1 4) IF Z = 1 THEN 520
   Origs: 470:auto
   Dests: 485:auto, 520:ifthen
-(0 3) 485 Q = 1
-(0 2)     GOTO 500
+485 (0 3) Q = 1
+    (0 2) GOTO 500
   Origs: 480:auto
   Dests: 500:goto
-(1 4) 490 IF W(R, S + 1) <> 0 THEN 520
+490 (1 4) IF W(R, S + 1) <> 0 THEN 520
   Origs: 470:ifthen
   Dests: 500:auto, 520:ifthen
-(0 4) 500 X = INT(RND(1) * 2 + 1)
+500 (0 4) X = INT(RND(1) * 2 + 1)
   Origs: 485:goto, 490:auto
   Dests: 510:auto
-(2 4) 510 ON X GOTO 790, 910
+510 (2 4) ON X GOTO 790, 910
   Origs: 500:auto
   Dests: 520:auto, 790:goto, 910:goto
-(0 2) 520 GOTO 790
+520 (0 2) GOTO 790
   Origs: 480:ifthen, 490:ifthen, 510:auto
   Dests: 790:goto
-(1 5) 530 IF S - 1 = 0 THEN 670
+530 (1 5) IF S - 1 = 0 THEN 670
   Origs: 260:ifthen, 265:ifthen, 905:goto
   Dests: 540:auto, 670:ifthen
-(1 4) 540 IF W(R, S - 1) <> 0 THEN 670
+540 (1 4) IF W(R, S - 1) <> 0 THEN 670
   Origs: 530:auto
   Dests: 545:auto, 670:ifthen
-(1 4) 545 IF R = H THEN 610
+545 (1 4) IF R = H THEN 610
   Origs: 540:auto
   Dests: 547:auto, 610:ifthen
-(1 4) 547 IF W(R + 1, S) <> 0 THEN 610
+547 (1 4) IF W(R + 1, S) <> 0 THEN 610
   Origs: 545:auto
   Dests: 550:auto, 610:ifthen
-(1 4) 550 IF S <> V THEN 560
+550 (1 4) IF S <> V THEN 560
   Origs: 547:auto
   Dests: 552:auto, 560:ifthen
-(1 4) 552 IF Z = 1 THEN 590
+552 (1 4) IF Z = 1 THEN 590
   Origs: 550:auto
   Dests: 554:auto, 590:ifthen
-(0 3) 554 Q = 1
-(0 2)     GOTO 570
+554 (0 3) Q = 1
+    (0 2) GOTO 570
   Origs: 552:auto
   Dests: 570:goto
-(1 4) 560 IF W(R, S + 1) <> 0 THEN 590
+560 (1 4) IF W(R, S + 1) <> 0 THEN 590
   Origs: 550:ifthen
   Dests: 570:auto, 590:ifthen
-(0 4) 570 X = INT(RND(1) * 3 + 1)
+570 (0 4) X = INT(RND(1) * 3 + 1)
   Origs: 554:goto, 560:auto
   Dests: 580:auto
-(3 5) 580 ON X GOTO 820, 860, 910
+580 (3 5) ON X GOTO 820, 860, 910
   Origs: 570:auto
   Dests: 590:auto, 820:goto, 860:goto, 910:goto
-(0 4) 590 X = INT(RND(1) * 2 + 1)
+590 (0 4) X = INT(RND(1) * 2 + 1)
   Origs: 552:ifthen, 560:ifthen, 580:auto
   Dests: 600:auto
-(2 4) 600 ON X GOTO 820, 860
+600 (2 4) ON X GOTO 820, 860
   Origs: 590:auto
   Dests: 610:auto, 820:goto, 860:goto
-(1 4) 610 IF S <> V THEN 630
+610 (1 4) IF S <> V THEN 630
   Origs: 545:ifthen, 547:ifthen, 600:auto
   Dests: 620:auto, 630:ifthen
-(1 4) 620 IF Z = 1 THEN 660
+620 (1 4) IF Z = 1 THEN 660
   Origs: 610:auto
   Dests: 625:auto, 660:ifthen
-(0 3) 625 Q = 1
-(0 2)     GOTO 640
+625 (0 3) Q = 1
+    (0 2) GOTO 640
   Origs: 620:auto
   Dests: 640:goto
-(1 4) 630 IF W(R, S + 1) <> 0 THEN 660
+630 (1 4) IF W(R, S + 1) <> 0 THEN 660
   Origs: 610:ifthen
   Dests: 640:auto, 660:ifthen
-(0 4) 640 X = INT(RND(1) * 2 + 1)
+640 (0 4) X = INT(RND(1) * 2 + 1)
   Origs: 625:goto, 630:auto
   Dests: 650:auto
-(2 4) 650 ON X GOTO 820, 910
+650 (2 4) ON X GOTO 820, 910
   Origs: 640:auto
   Dests: 660:auto, 820:goto, 910:goto
-(0 2) 660 GOTO 820
+660 (0 2) GOTO 820
   Origs: 620:ifthen, 630:ifthen, 650:auto
   Dests: 820:goto
-(1 4) 670 IF R = H THEN 740
+670 (1 4) IF R = H THEN 740
   Origs: 530:ifthen, 540:ifthen
   Dests: 680:auto, 740:ifthen
-(1 4) 680 IF W(R + 1, S) <> 0 THEN 740
+680 (1 4) IF W(R + 1, S) <> 0 THEN 740
   Origs: 670:auto
   Dests: 685:auto, 740:ifthen
-(1 4) 685 IF S <> V THEN 700
+685 (1 4) IF S <> V THEN 700
   Origs: 680:auto
   Dests: 690:auto, 700:ifthen
-(1 4) 690 IF Z = 1 THEN 730
+690 (1 4) IF Z = 1 THEN 730
   Origs: 685:auto
   Dests: 695:auto, 730:ifthen
-(0 3) 695 Q = 1
-(0 2)     GOTO 830
+695 (0 3) Q = 1
+    (0 2) GOTO 830
   Origs: 690:auto
   Dests: 830:goto
-(1 4) 700 IF W(R, S + 1) <> 0 THEN 730
+700 (1 4) IF W(R, S + 1) <> 0 THEN 730
   Origs: 685:ifthen
   Dests: 710:auto, 730:ifthen
-(0 4) 710 X = INT(RND(1) * 2 + 1)
+710 (0 4) X = INT(RND(1) * 2 + 1)
   Origs: 700:auto
   Dests: 720:auto
-(2 4) 720 ON X GOTO 860, 910
+720 (2 4) ON X GOTO 860, 910
   Origs: 710:auto
   Dests: 730:auto, 860:goto, 910:goto
-(0 2) 730 GOTO 860
+730 (0 2) GOTO 860
   Origs: 690:ifthen, 700:ifthen, 720:auto
   Dests: 860:goto
-(1 4) 740 IF S <> V THEN 760
+740 (1 4) IF S <> V THEN 760
   Origs: 670:ifthen, 680:ifthen
   Dests: 750:auto, 760:ifthen
-(1 4) 750 IF Z = 1 THEN 780
+750 (1 4) IF Z = 1 THEN 780
   Origs: 740:auto
   Dests: 755:auto, 780:ifthen
-(0 3) 755 Q = 1
-(0 2)     GOTO 770
+755 (0 3) Q = 1
+    (0 2) GOTO 770
   Origs: 750:auto
   Dests: 770:goto
-(1 4) 760 IF W(R, S + 1) <> 0 THEN 780
+760 (1 4) IF W(R, S + 1) <> 0 THEN 780
   Origs: 740:ifthen
   Dests: 770:auto, 780:ifthen
-(0 2) 770 GOTO 910
+770 (0 2) GOTO 910
   Origs: 755:goto, 760:auto
   Dests: 910:goto
-(0 2) 780 GOTO 1000
+780 (0 2) GOTO 1000
   Origs: 750:ifthen, 760:ifthen
   Dests: 1000:goto
-(0 3) 790 W(R - 1, S) = C
+790 (0 3) W(R - 1, S) = C
   Origs: 320:goto, 360:goto, 380:goto, 440:goto, 460:goto, 510:goto, 520:goto
   Dests: 800:auto
-(0 4) 800 C = C + 1
-(0 3)     V(R - 1, S) = 2
-(0 4)     R = R - 1
+800 (0 4) C = C + 1
+    (0 3) V(R - 1, S) = 2
+    (0 4) R = R - 1
   Origs: 790:auto
   Dests: 810:auto
-(1 7) 810 IF C = H * V + 1 THEN 1010
+810 (1 7) IF C = H * V + 1 THEN 1010
   Origs: 800:auto
   Dests: 815:auto, 1010:ifthen
-(0 3) 815 Q = 0
-(0 3)     GOTO 260
+815 (0 3) Q = 0
+    (0 3) GOTO 260
   Origs: 810:auto
   Dests: 260:goto
-(0 3) 820 W(R, S - 1) = C
+820 (0 3) W(R, S - 1) = C
   Origs: 320:goto, 360:goto, 380:goto, 580:goto, 600:goto, 650:goto, 660:goto
   Dests: 830:auto
-(0 4) 830 C = C + 1
+830 (0 4) C = C + 1
   Origs: 695:goto, 820:auto
   Dests: 840:auto
-(0 3) 840 V(R, S - 1) = 1
-(0 4)     S = S - 1
-(1 7)     IF C = H * V + 1 THEN 1010
+840 (0 3) V(R, S - 1) = 1
+    (0 4) S = S - 1
+    (1 7) IF C = H * V + 1 THEN 1010
   Origs: 830:auto
   Dests: 850:auto, 1010:ifthen
-(0 3) 850 Q = 0
-(0 3)     GOTO 260
+850 (0 3) Q = 0
+    (0 3) GOTO 260
   Origs: 840:auto
   Dests: 260:goto
-(0 3) 860 W(R + 1, S) = C
+860 (0 3) W(R + 1, S) = C
   Origs: 320:goto, 440:goto, 460:goto, 580:goto, 600:goto, 720:goto, 730:goto
   Dests: 870:auto
-(0 4) 870 C = C + 1
-(1 4)     IF V(R, S) = 0 THEN 880
+870 (0 4) C = C + 1
+    (1 4) IF V(R, S) = 0 THEN 880
   Origs: 860:auto
   Dests: 875:auto, 880:ifthen
-(0 3) 875 V(R, S) = 3
-(0 2)     GOTO 890
+875 (0 3) V(R, S) = 3
+    (0 2) GOTO 890
   Origs: 870:auto
   Dests: 890:goto
-(0 3) 880 V(R, S) = 2
+880 (0 3) V(R, S) = 2
   Origs: 870:ifthen
   Dests: 890:auto
-(0 4) 890 R = R + 1
+890 (0 4) R = R + 1
   Origs: 875:goto, 880:auto
   Dests: 900:auto
-(1 7) 900 IF C = H * V + 1 THEN 1010
+900 (1 7) IF C = H * V + 1 THEN 1010
   Origs: 890:auto
   Dests: 905:auto, 1010:ifthen
-(0 3) 905 GOTO 530
+905 (0 3) GOTO 530
   Origs: 900:auto
   Dests: 530:goto
-(1 4) 910 IF Q = 1 THEN 960
+910 (1 4) IF Q = 1 THEN 960
   Origs: 360:goto, 440:goto, 510:goto, 580:goto, 650:goto, 720:goto, 770:goto
   Dests: 920:auto, 960:ifthen
-(0 3) 920 W(R, S + 1) = C
-(0 4)     C = C + 1
-(1 4)     IF V(R, S) = 0 THEN 940
+920 (0 3) W(R, S + 1) = C
+    (0 4) C = C + 1
+    (1 4) IF V(R, S) = 0 THEN 940
   Origs: 910:auto
   Dests: 930:auto, 940:ifthen
-(0 3) 930 V(R, S) = 3
-(0 2)     GOTO 950
+930 (0 3) V(R, S) = 3
+    (0 2) GOTO 950
   Origs: 920:auto
   Dests: 950:goto
-(0 3) 940 V(R, S) = 1
+940 (0 3) V(R, S) = 1
   Origs: 920:ifthen
   Dests: 950:auto
-(0 4) 950 S = S + 1
-(1 7)     IF C = H * V + 1 THEN 1010
+950 (0 4) S = S + 1
+    (1 7) IF C = H * V + 1 THEN 1010
   Origs: 930:goto, 940:auto
   Dests: 955:auto, 1010:ifthen
-(0 3) 955 GOTO 260
+955 (0 3) GOTO 260
   Origs: 950:auto
   Dests: 260:goto
-(0 3) 960 Z = 1
+960 (0 3) Z = 1
   Origs: 910:ifthen
   Dests: 970:auto
-(1 4) 970 IF V(R, S) = 0 THEN 980
+970 (1 4) IF V(R, S) = 0 THEN 980
   Origs: 960:auto
   Dests: 975:auto, 980:ifthen
-(0 3) 975 V(R, S) = 3
-(0 3)     Q = 0
-(0 2)     GOTO 1000
+975 (0 3) V(R, S) = 3
+    (0 3) Q = 0
+    (0 2) GOTO 1000
   Origs: 970:auto
   Dests: 1000:goto
-(0 3) 980 V(R, S) = 1
-(0 3)     Q = 0
-(0 3)     R = 1
-(0 3)     S = 1
-(0 3)     GOTO 250
+980 (0 3) V(R, S) = 1
+    (0 3) Q = 0
+    (0 3) R = 1
+    (0 3) S = 1
+    (0 3) GOTO 250
   Origs: 970:ifthen
   Dests: 250:goto
-(0 3) 1000 GOTO 210
+1000 (0 3) GOTO 210
   Origs: 780:goto, 975:goto
   Dests: 210:goto
-F(J) (1 3) 1010 FOR J = 1 TO V
+1010 F(J) (1 3) FOR J = 1 TO V
   Origs: 810:ifthen, 840:ifthen, 900:ifthen, 950:ifthen
   Dests: 1011:fornext, 1072:fornext
-F(J) (0 2) 1011 PRINT "I";
+1011 F(J) (0 2) PRINT "I";
   Origs: 1010:fornext
   Dests: 1012:auto
-F(J,I) (1 3) 1012 FOR I = 1 TO H
+1012 F(J,I) (1 3) FOR I = 1 TO H
   Origs: 1011:auto
   Dests: 1013:fornext, 1040:fornext
-F(J,I) (1 4) 1013 IF V(I, J) < 2 THEN 1030
+1013 F(J,I) (1 4) IF V(I, J) < 2 THEN 1030
   Origs: 1012:fornext
   Dests: 1020:auto, 1030:ifthen
-F(J,I) (0 2) 1020 PRINT "   ";
+1020 F(J,I) (0 2) PRINT "   ";
   Origs: 1013:auto
   Dests: 1021:auto
-F(J,I) (0 2) 1021 GOTO 1040
+1021 F(J,I) (0 2) GOTO 1040
   Origs: 1020:auto
   Dests: 1040:goto
-F(J,I) (0 2) 1030 PRINT "  I";
+1030 F(J,I) (0 2) PRINT "  I";
   Origs: 1013:ifthen
   Dests: 1040:auto
-F(J,I) (0 1) 1040 NEXT I
+1040 F(J,I) (0 1) NEXT I
   Origs: 1012:fornext, 1021:goto, 1030:auto
   Dests: 1041:auto
-F(J) (0 2) 1041 PRINT
+1041 F(J) (0 2) PRINT
   Origs: 1040:auto
   Dests: 1043:auto
-F(J,I) (1 3) 1043 FOR I = 1 TO H
+1043 F(J,I) (1 3) FOR I = 1 TO H
   Origs: 1041:auto
   Dests: 1045:fornext, 1070:fornext
-F(J,I) (1 4) 1045 IF V(I, J) = 0 THEN 1060
+1045 F(J,I) (1 4) IF V(I, J) = 0 THEN 1060
   Origs: 1043:fornext
   Dests: 1050:auto, 1060:ifthen
-F(J,I) (1 4) 1050 IF V(I, J) = 2 THEN 1060
+1050 F(J,I) (1 4) IF V(I, J) = 2 THEN 1060
   Origs: 1045:auto
   Dests: 1051:auto, 1060:ifthen
-F(J,I) (0 2) 1051 PRINT ":  ";
+1051 F(J,I) (0 2) PRINT ":  ";
   Origs: 1050:auto
   Dests: 1052:auto
-F(J,I) (0 2) 1052 GOTO 1070
+1052 F(J,I) (0 2) GOTO 1070
   Origs: 1051:auto
   Dests: 1070:goto
-F(J,I) (0 2) 1060 PRINT ":--";
+1060 F(J,I) (0 2) PRINT ":--";
   Origs: 1045:ifthen, 1050:ifthen
   Dests: 1070:auto
-F(J,I) (0 1) 1070 NEXT I
+1070 F(J,I) (0 1) NEXT I
   Origs: 1043:fornext, 1052:goto, 1060:auto
   Dests: 1071:auto
-F(J) (0 2) 1071 PRINT "."
+1071 F(J) (0 2) PRINT "."
   Origs: 1070:auto
   Dests: 1072:auto
-F(J) (0 1) 1072 NEXT J
+1072 F(J) (0 1) NEXT J
   Origs: 1010:fornext, 1071:auto
   Dests: 1073:auto
-(0 1) 1073 END
+1073 (0 1) END
   Origs: 1072:auto
   Dests: :stop
 

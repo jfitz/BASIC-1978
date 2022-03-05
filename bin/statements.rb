@@ -499,20 +499,20 @@ class AbstractStatement
   def analyze_pretty(number)
     texts = []
 
-    text = ''
+    text = "#{number}"
 
-    text += "#{@part_of_user_function} " unless @part_of_user_function.nil?
+    text += " #{@part_of_user_function}" unless @part_of_user_function.nil?
 
-    text += "E(#{@part_of_onerror.map(&:to_s).join(',')}) " unless
+    text += " E(#{@part_of_onerror.map(&:to_s).join(',')})" unless
       @part_of_onerror.empty?
 
-    text += "G(#{@part_of_sub.map(&:to_s).join(',')}) " unless
+    text += " G(#{@part_of_sub.map(&:to_s).join(',')})" unless
       @part_of_sub.empty?
 
-    text += "F(#{@part_of_fornext.map(&:to_s).join(',')}) " unless
+    text += " F(#{@part_of_fornext.map(&:to_s).join(',')})" unless
       @part_of_fornext.empty?
 
-    text += "(#{@mccabe} #{@comprehension_effort}) #{number} #{core_pretty}"
+    text += " (#{@mccabe} #{@comprehension_effort}) #{core_pretty}"
 
     texts << text
 
@@ -795,28 +795,27 @@ class AbstractStatement
   def profile(show_timing)
     # core statement
     text = AbstractToken.pretty_tokens(@keywords, @core_tokens)
-    text = " #{text}" unless text.empty?
 
-    line = ' '
+    line = ''
 
-    line += "#{@part_of_user_function} " unless @part_of_user_function.nil?
+    line += " #{@part_of_user_function}" unless @part_of_user_function.nil?
 
-    line += "E(#{@part_of_onerror.map(&:to_s).join(',')}) " unless
+    line += " E(#{@part_of_onerror.map(&:to_s).join(',')})" unless
       @part_of_onerror.empty?
 
-    line += "G(#{@part_of_sub.map(&:to_s).join(',')}) " unless
+    line += " G(#{@part_of_sub.map(&:to_s).join(',')})" unless
       @part_of_sub.empty?
 
-    line += "F(#{@part_of_fornext.map(&:to_s).join(',')}) " unless
+    line += " F(#{@part_of_fornext.map(&:to_s).join(',')})" unless
       @part_of_fornext.empty?
 
     line += if show_timing
-              "(#{@profile_time.round(4)}/#{@profile_count})"
+              " (#{@profile_time.round(4)}/#{@profile_count})"
             else
-              "(#{@profile_count})"
+              " (#{@profile_count})"
             end
 
-    line += text
+    line += " #{text}"
 
     lines = [line]
 
@@ -827,22 +826,20 @@ class AbstractStatement
 
       if show_timing
         timing = modifier.profile_pre_time.round(3).to_s
-        line = " (#{timing}/#{modifier.profile_pre_count})#{text}"
+        lines << " (#{timing}/#{modifier.profile_pre_count})#{text}"
       else
-        line = " (#{modifier.profile_pre_count})#{text}"
+        lines << " (#{modifier.profile_pre_count})#{text}"
       end
-      lines << line
 
       # then the post line
       text = modifier.post_pretty
 
       if show_timing
         timing = modifier.profile_post_time.round(3).to_s
-        line = " (#{timing}/#{modifier.profile_post_count})#{text}"
+        lines << " (#{timing}/#{modifier.profile_post_count})#{text}"
       else
-        line = " (#{modifier.profile_post_count})#{text}"
+        lines << " (#{modifier.profile_post_count})#{text}"
       end
-      lines << line
     end
 
     lines
@@ -851,28 +848,27 @@ class AbstractStatement
   def print_trace_info(trace_out, current_line_stmt_mod)
     trace_out.newline_when_needed
 
-    trace_out.print_out "#{@part_of_user_function} " unless
+    trace_out.print_out "#{current_line_stmt_mod}"
+
+    trace_out.print_out " #{@part_of_user_function}" unless
       @part_of_user_function.nil?
 
-    trace_out.print_out "E(#{@part_of_onerror.map(&:to_s).join(',')}) " unless
+    trace_out.print_out " E(#{@part_of_onerror.map(&:to_s).join(',')})" unless
       @part_of_onerror.empty?
 
-    trace_out.print_out "G(#{@part_of_sub.map(&:to_s).join(',')}) " unless
+    trace_out.print_out " G(#{@part_of_sub.map(&:to_s).join(',')})" unless
       @part_of_sub.empty?
 
-    trace_out.print_out "F(#{@part_of_fornext.map(&:to_s).join(',')}) " unless
+    trace_out.print_out " F(#{@part_of_fornext.map(&:to_s).join(',')})" unless
       @part_of_fornext.empty?
 
     mod = current_line_stmt_mod.index
 
     text = ''
 
-    text = pre_trace(mod) if mod.negative?
-    text = core_trace if mod.zero?
-    text = post_trace(mod) if mod.positive?
-
-    text = " #{text}" unless text.empty?
-    text = "#{current_line_stmt_mod}:#{text}"
+    text = " #{pre_trace(mod)}" if mod.negative?
+    text = " #{core_trace}" if mod.zero?
+    text = " #{post_trace(mod)}" if mod.positive?
 
     trace_out.print_out(text)
     trace_out.newline
