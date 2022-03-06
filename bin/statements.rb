@@ -512,15 +512,15 @@ class AbstractStatement
     text += " F(#{@part_of_fornext.map(&:to_s).join(',')})" unless
       @part_of_fornext.empty?
 
+    spaces = ' ' * text.size
+
     text += " (#{@mccabe} #{@comprehension_effort}) #{core_pretty}"
 
     texts << text
 
-    number = ' ' * number.size
-
     @modifiers.each do |modifier|
-      texts << modifier.pre_analyze(number)
-      texts << modifier.post_analyze(number)
+      texts << spaces + ' ' + modifier.pre_analyze
+      texts << spaces + ' ' + modifier.post_analyze
     end
 
     texts

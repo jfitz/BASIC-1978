@@ -39,8 +39,8 @@ class AbstractModifier
     AbstractToken.pretty_tokens([], @tokens)
   end
 
-  def pre_analyze(number)
-    "#{number}   (#{@mccabe} #{@pre_comp_effort}) #{pretty}"
+  def pre_analyze
+    "(#{@mccabe} #{@pre_comp_effort})   #{pretty}"
   end
 
   def execute_pre(interpreter)
@@ -122,8 +122,8 @@ class IfModifier < AbstractModifier
     ' ENDIF'
   end
 
-  def post_analyze(number)
-    "#{number}   (0 1) ENDIF"
+  def post_analyze
+    "(0 1)   ENDIF"
   end
 
   def dump
@@ -208,8 +208,8 @@ class UnlessModifier < AbstractModifier
     ' ENDUNLESS'
   end
 
-  def post_analyze(number)
-    "#{number}   (0 1) ENDUNLESS"
+  def post_analyze
+    "(0 1)   ENDUNLESS"
   end
 
   def dump
@@ -294,8 +294,8 @@ class WhileModifier < AbstractModifier
     ' ENDWHILE'
   end
 
-  def post_analyze(number)
-    "#{number}   (0 1) ENDWHILE"
+  def post_analyze
+    "(0 1)   ENDWHILE"
   end
 
   def dump
@@ -401,8 +401,8 @@ class UntilModifier < AbstractModifier
     ' ENDUNTIL'
   end
 
-  def post_analyze(number)
-    "#{number}   (0 1) ENDUNTIL"
+  def post_analyze
+    "(0 1)   ENDUNTIL"
   end
 
   def dump
@@ -529,8 +529,8 @@ class AbstractForModifier < AbstractModifier
     " NEXT #{@control}"
   end
 
-  def post_analyze(number)
-    "#{number}   (0 1) NEXT #{@control}"
+  def post_analyze
+    "(0 1)   NEXT #{@control}"
   end
 
   def post_trace
