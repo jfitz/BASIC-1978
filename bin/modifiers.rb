@@ -115,11 +115,11 @@ class IfModifier < AbstractModifier
   end
 
   def pre_pretty
-    " IF #{@expression}"
+    "IF #{@expression}"
   end
 
   def post_pretty
-    ' ENDIF'
+    'ENDIF'
   end
 
   def post_analyze
@@ -134,14 +134,6 @@ class IfModifier < AbstractModifier
     lines += @else_stmt.dump unless @else_stmt.nil?
 
     lines
-  end
-
-  def pre_trace
-    "IF #{@expression}"
-  end
-
-  def post_trace
-    'ENDIF'
   end
 
   private
@@ -201,11 +193,11 @@ class UnlessModifier < AbstractModifier
   end
 
   def pre_pretty
-    " UNLESS #{@expression}"
+    "UNLESS #{@expression}"
   end
 
   def post_pretty
-    ' ENDUNLESS'
+    'ENDUNLESS'
   end
 
   def post_analyze
@@ -220,14 +212,6 @@ class UnlessModifier < AbstractModifier
     lines += @else_stmt.dump unless @else_stmt.nil?
 
     lines
-  end
-
-  def pre_trace
-    "UNLESS #{@expression}"
-  end
-
-  def post_trace
-    'ENDUNLESS'
   end
 
   private
@@ -287,11 +271,11 @@ class WhileModifier < AbstractModifier
   end
 
   def pre_pretty
-    " WHILE #{@expression}"
+    "WHILE #{@expression}"
   end
 
   def post_pretty
-    ' ENDWHILE'
+    'ENDWHILE'
   end
 
   def post_analyze
@@ -306,14 +290,6 @@ class WhileModifier < AbstractModifier
     lines += @else_stmt.dump unless @else_stmt.nil?
 
     lines
-  end
-
-  def pre_trace
-    "WHILE #{@expression}"
-  end
-
-  def post_trace
-    'ENDWHILE'
   end
 
   private
@@ -394,11 +370,11 @@ class UntilModifier < AbstractModifier
   end
 
   def pre_pretty
-    " UNTIL #{@expression}"
+    "UNTIL #{@expression}"
   end
 
   def post_pretty
-    ' ENDUNTIL'
+    'ENDUNTIL'
   end
 
   def post_analyze
@@ -413,14 +389,6 @@ class UntilModifier < AbstractModifier
     lines += @else_stmt.dump unless @else_stmt.nil?
 
     lines
-  end
-
-  def pre_trace
-    "UNTIL #{@expression}"
-  end
-
-  def post_trace
-    'ENDUNTIL'
   end
 
   private
@@ -526,7 +494,7 @@ class AbstractForModifier < AbstractModifier
   end
 
   def post_pretty
-    " NEXT #{@control}"
+    "NEXT #{@control}"
   end
 
   def post_analyze
@@ -669,10 +637,6 @@ class ForToModifier < AbstractForModifier
   end
 
   def pre_pretty
-    " FOR #{@control} = #{@start} TO #{@end}"
-  end
-
-  def pre_trace
     "FOR #{@control} = #{@start} TO #{@end}"
   end
 end
@@ -732,10 +696,6 @@ class ForToStepModifier < AbstractForModifier
   end
 
   def pre_pretty
-    " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
-  end
-
-  def pre_trace
     "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
   end
 end
@@ -795,10 +755,6 @@ class ForStepToModifier < AbstractForModifier
   end
 
   def pre_pretty
-    " FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
-  end
-
-  def pre_trace
     "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
   end
 end
@@ -846,10 +802,6 @@ class ForUntilModifier < AbstractForModifier
   end
 
   def pre_pretty
-    " FOR #{@control} = #{@start} UNTIL #{@until}"
-  end
-
-  def pre_trace
     "FOR #{@control} = #{@start} UNTIL #{@until}"
   end
 end
@@ -910,10 +862,6 @@ class ForUntilStepModifier < AbstractForModifier
   end
 
   def pre_pretty
-    " FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
-  end
-
-  def pre_trace
     "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
   end
 end
@@ -974,10 +922,6 @@ class ForStepUntilModifier < AbstractForModifier
   end
 
   def pre_pretty
-    " FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
-  end
-
-  def pre_trace
     "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
   end
 end
@@ -1025,10 +969,6 @@ class ForWhileModifier < AbstractForModifier
   end
 
   def pre_pretty
-    " FOR #{@control} = #{@start} WHILE #{@while}"
-  end
-
-  def pre_trace
     "FOR #{@control} = #{@start} WHILE #{@while}"
   end
 end
@@ -1089,10 +1029,6 @@ class ForWhileStepModifier < AbstractForModifier
   end
 
   def pre_pretty
-    " FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
-  end
-
-  def pre_trace
     "FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
   end
 end
@@ -1153,10 +1089,6 @@ class ForStepWhileModifier < AbstractForModifier
   end
 
   def pre_pretty
-    " FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
-  end
-
-  def pre_trace
     "FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
   end
 end

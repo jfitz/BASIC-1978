@@ -492,10 +492,6 @@ class AbstractStatement
     AbstractToken.pretty_tokens(@keywords, @tokens)
   end
 
-  def core_pretty
-    AbstractToken.pretty_tokens(@keywords, @core_tokens)
-  end
-
   def markers
     text = ''
 
@@ -548,19 +544,19 @@ class AbstractStatement
     result
   end
 
-  def pre_trace(mod)
+  def pre_pretty(mod)
     mod = -mod
     mod -= 1
-    @modifiers[mod].pre_trace
+    @modifiers[mod].pre_pretty
   end
 
-  def core_trace
+  def core_pretty
     AbstractToken.pretty_tokens(@keywords, @core_tokens)
   end
 
-  def post_trace(mod)
+  def post_pretty(mod)
     mod -= 1
-    @modifiers[mod].post_trace
+    @modifiers[mod].post_pretty
   end
 
   def dump
@@ -817,7 +813,7 @@ class AbstractStatement
     # modifiers
     @modifiers.each do |modifier|
       # first the pre line
-      text = modifier.pre_pretty
+      text = " #{modifier.pre_pretty}"
 
       if show_timing
         timing = modifier.profile_pre_time.round(3).to_s
@@ -827,7 +823,7 @@ class AbstractStatement
       end
 
       # then the post line
-      text = modifier.post_pretty
+      text = " #{modifier.post_pretty}"
 
       if show_timing
         timing = modifier.profile_post_time.round(3).to_s
@@ -847,9 +843,9 @@ class AbstractStatement
 
     mod = current_line_stmt_mod.index
 
-    text += " #{pre_trace(mod)}" if mod.negative?
-    text += " #{core_trace}" if mod.zero?
-    text += " #{post_trace(mod)}" if mod.positive?
+    text += " #{pre_pretty(mod)}" if mod.negative?
+    text += " #{core_pretty}" if mod.zero?
+    text += " #{post_pretty(mod)}" if mod.positive?
 
     texts << text
 
