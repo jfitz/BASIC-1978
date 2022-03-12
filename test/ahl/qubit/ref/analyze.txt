@@ -353,7 +353,7 @@ Halstead complexity:
 1090 F(J,J,I,K) (1 3) FOR J = 1 TO 4
   Origs: 1080:auto
   Dests: 1100:fornext, 1120:fornext
-1100 F(J,J,I,K) (1 4) IF X(M(I, J)) <> 0 THEN 1120
+1100 F(J,I,K) (1 4) IF X(M(I, J)) <> 0 THEN 1120
   Origs: 1090:fornext
   Dests: 1110:auto, 1120:ifthen
 1110 F(J,I,K) (0 4) LET X(M(I, J)) = 1 / 8
@@ -439,7 +439,7 @@ Halstead complexity:
 1370 F(J,J,I,K) (1 3) FOR J = 1 TO 4
   Origs: 1360:auto
   Dests: 1380:fornext, 1400:fornext
-1380 F(J,J,I,K) (1 4) IF X(M(I, J)) <> 0 THEN 1400
+1380 F(J,I,K) (1 4) IF X(M(I, J)) <> 0 THEN 1400
   Origs: 1370:fornext
   Dests: 1390:auto, 1400:ifthen
 1390 F(J,I,K) (0 4) LET X(M(I, J)) = 1 / 8
@@ -586,10 +586,10 @@ Halstead complexity:
 1850 F(J,I,K,I) (1 6) FOR I = 4 * K - 3 TO 4 * K
   Origs: 1840:auto
   Dests: 1860:fornext, 1890:fornext
-1860 F(J,I,K,I,J) (1 3) FOR J = 1 TO 4
+1860 F(J,K,I,J) (1 3) FOR J = 1 TO 4
   Origs: 1850:fornext
   Dests: 1870:fornext, 1880:fornext
-1870 F(J,I,K,J) (0 4) LET P = P + X(M(I, J))
+1870 F(I,K,J) (0 4) LET P = P + X(M(I, J))
   Origs: 1860:fornext
   Dests: 1880:auto
 1880 F(J,I,K) (0 1) NEXT J
@@ -625,7 +625,7 @@ Halstead complexity:
 1980 F(J,I,K,I) (1 6) FOR I = 4 * K - 3 TO 4 * K
   Origs: 1970:auto, 2020:goto
   Dests: 1990:fornext, 2000:fornext
-1990 F(J,I,K,I) (0 2) GOTO 2370
+1990 F(J,K,I) (0 2) GOTO 2370
   Origs: 1980:fornext
   Dests: 2370:goto
 2000 F(J,I,K) (0 1) NEXT I
@@ -700,7 +700,7 @@ Halstead complexity:
 2230 F(J,I,K,J) (1 3) FOR J = 1 TO 4
   Origs: 1080:ifthen, 1360:ifthen
   Dests: 2240:fornext, 2330:fornext
-2240 F(J,I,K,J) (1 6) IF X(M(I, J)) <> 1 / 8 THEN 2330
+2240 F(I,K,J) (1 6) IF X(M(I, J)) <> 1 / 8 THEN 2330
   Origs: 2230:fornext
   Dests: 2250:auto, 2330:ifthen
 2250 F(J,I,K) (0 3) LET X(M(I, J)) = 5
@@ -754,7 +754,7 @@ Halstead complexity:
 2410 F(J,I,K,J) (1 8) FOR J = A TO 5 - A STEP 5 - 2 * A
   Origs: 2390:goto, 2400:auto
   Dests: 2420:fornext, 2430:fornext
-2420 F(J,I,K,J) (1 4) IF X(M(I, J)) = S THEN 2450
+2420 F(I,K,J) (1 4) IF X(M(I, J)) = S THEN 2450
   Origs: 2410:fornext
   Dests: 2430:auto, 2450:ifthen
 2430 F(J,I,K) (0 1) NEXT J

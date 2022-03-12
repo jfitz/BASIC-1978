@@ -208,6 +208,10 @@ class Line
       pretty_width_max.positive? && pretty_line.size > pretty_width_max
   end
 
+  def reset_visited
+    @statements.each { |statement| statement.visited = false }
+  end
+
   def uncache
     @statements.each(&:uncache)
   end
@@ -1484,6 +1488,12 @@ class Program
   def assign_sub_markers(line_numbers)
     line_numbers.each do |line_number|
       line = @lines[line_number]
+
+      line.reset_visited
+    end
+
+    line_numbers.each do |line_number|
+      line = @lines[line_number]
       statements = line.statements
 
       statements.each do |statement|
@@ -1495,6 +1505,12 @@ class Program
   def assign_on_error_markers(line_numbers)
     line_numbers.each do |line_number|
       line = @lines[line_number]
+
+      line.reset_visited
+    end
+
+    line_numbers.each do |line_number|
+      line = @lines[line_number]
       statements = line.statements
 
       statements.each do |statement|
@@ -1504,6 +1520,12 @@ class Program
   end
 
   def assign_fornext_markers(line_numbers)
+    line_numbers.each do |line_number|
+      line = @lines[line_number]
+
+      line.reset_visited
+    end
+
     line_numbers.each do |line_number|
       line = @lines[line_number]
       statements = line.statements
@@ -1706,7 +1728,7 @@ class Program
           # add trace output
           interpreter.trace_out.newline_when_needed
 
-          statement.trace_info(line_number_stmt)
+          lines = statement.trace_info(line_number_stmt)
           lines.each { |line| interpreter.trace_out.print_out(line) }
           interpreter.trace_out.newline
 

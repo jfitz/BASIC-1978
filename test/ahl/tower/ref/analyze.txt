@@ -201,7 +201,7 @@ Halstead complexity:
 640 F(Q,R,C,Q,V,W,U) (1 5) FOR Q = R TO 1 STEP -1
   Origs: 610:ifthen, 620:auto
   Dests: 645:fornext, 660:fornext
-645 F(Q,R,C,Q,V,W,U) (1 4) IF T(Q, C) = 0 THEN 660
+645 F(R,C,Q,V,W,U) (1 4) IF T(Q, C) = 0 THEN 660
   Origs: 640:fornext
   Dests: 650:auto, 660:ifthen
 650 F(Q,R,C,V,W,U) (1 4) IF T(Q, C) < D THEN 680
@@ -252,7 +252,7 @@ Halstead complexity:
 800 F(Q,R,C,R,V,W,U) (1 3) FOR R = 1 TO 7
   Origs: 730:ifthen
   Dests: 810:fornext, 820:fornext
-810 F(Q,R,C,R,V,W,U) (1 4) IF T(R, N) <> 0 THEN 840
+810 F(Q,C,R,V,W,U) (1 4) IF T(R, N) <> 0 THEN 840
   Origs: 800:fornext
   Dests: 820:auto, 840:ifthen
 820 F(Q,R,C,V,W,U) (0 1) NEXT R
@@ -328,10 +328,10 @@ Halstead complexity:
   Origs: 1000:auto
   Dests: 1030:auto
 1030 F(Q,R,C,V,W,U,R) (1 3) FOR R = 1 TO 7
-     F(Q,R,C,V,W,U,R,C) (1 3) FOR C = 1 TO 2
+     F(Q,C,V,W,U,R,C) (1 3) FOR C = 1 TO 2
   Origs: 1020:auto
   Dests: 1050:fornext, 1060:fornext
-1050 F(Q,R,C,V,W,U,C) (1 4) IF T(R, C) <> 0 THEN 1090
+1050 F(Q,R,V,W,U,C) (1 4) IF T(R, C) <> 0 THEN 1090
   Origs: 1030:fornext
   Dests: 1060:auto, 1090:ifthen
 1060 F(Q,R,C,V,W,U) (0 1) NEXT C

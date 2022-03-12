@@ -114,14 +114,14 @@ STOP in line 999
 200 F(I) (4) PRINT
     F(I) (4) PRINT
     F(I,I) (4) FOR I = 1 TO L
-    F(I,I) (20) PRINT D$(I);
+    F(I) (20) PRINT D$(I);
     F(I) (20) NEXT I
     F(I) (4) PRINT
     F(I) (4) PRINT
 210 F(I) (4) INPUT "WHAT IS YOUR GUESS"; G$
     F(I) (4) R = 0
 220 F(I,I) (4) FOR I = 1 TO 26
-    F(I,I) (7) IF N$(I) = "" THEN 250
+    F(I) (7) IF N$(I) = "" THEN 250
 230 F(I) (4) IF G$ = N$(I) THEN PRINT "YOU GUESSED THAT LETTER BEFORE!"
     F(I) (1) GOTO 170
 240 F(I) (3) NEXT I
@@ -130,7 +130,7 @@ STOP in line 999
 250 F(I) (3) N$(I) = G$
     F(I) (3) T1 = T1 + 1
 260 F(I,I) (3) FOR I = 1 TO L
-    F(I,I) (15) IF L$(I) = G$ THEN 280
+    F(I) (15) IF L$(I) = G$ THEN 280
 270 F(I) (15) NEXT I
     F(I) (3) IF R = 0 THEN 290
 275 F(I) (2) GOTO 300
@@ -140,12 +140,12 @@ STOP in line 999
 290 F(I) (1) M = M + 1
     F(I) (1) GOTO 400
 300 F(I,I) (2) FOR I = 1 TO L
-    F(I,I) (3) IF D$(I) = "-" THEN 320
+    F(I) (3) IF D$(I) = "-" THEN 320
 310 F(I) (1) NEXT I
     F(I) (0) GOTO 390
 320 F(I) (2) PRINT
     F(I,I) (2) FOR I = 1 TO L
-    F(I,I) (10) PRINT D$(I);
+    F(I) (10) PRINT D$(I);
     F(I) (10) NEXT I
     F(I) (2) PRINT
     F(I) (2) PRINT
@@ -198,11 +198,11 @@ STOP in line 999
     F(I) (1) P$(5, 8) = "-"
     F(I) (1) GOTO 580
 490 F(I,I) (0) FOR I = 6 TO 9
-    F(I,I) (0) P$(I, 7) = "X"
+    F(I) (0) P$(I, 7) = "X"
     F(I) (0) NEXT I
     F(I) (0) GOTO 580
 500 F(I,I) (0) FOR I = 4 TO 7
-    F(I,I) (0) P$(I, I - 1) = "\"
+    F(I) (0) P$(I, I - 1) = "\"
     F(I) (0) NEXT I
     F(I) (0) GOTO 580
 510 F(I) (0) P$(4, 11) = "/"
@@ -226,7 +226,7 @@ STOP in line 999
 570 F(I) (0) P$(12, 3) = "-"
     F(I) (0) P$(12, 4) = "/"
 580 F(I,I) (1) FOR I = 1 TO 12
-    F(I,I,J) (12) FOR J = 1 TO 12
+    F(I,J) (12) FOR J = 1 TO 12
     F(I,J) (144) PRINT P$(I, J);
     F(I,J) (144) NEXT J
 590 F(I) (12) PRINT

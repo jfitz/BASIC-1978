@@ -257,7 +257,8 @@ class AbstractStatement
               :autonext, :autonext_line_stmt, :transfers, :transfers_auto,
               :is_if_no_else, :may_be_if_sub, :part_of_sub, :part_of_onerror,
               :part_of_fornext
-  attr_accessor :part_of_user_function, :program_warnings, :origins, :reachable
+  attr_accessor :part_of_user_function, :program_warnings, :origins,
+                :reachable, :visited
 
   def self.extra_keywords
     []
@@ -335,6 +336,9 @@ class AbstractStatement
   def assign_sub_markers(_) end
 
   def assign_sub_marker(marker, line_number, program)
+    return if @visited == marker
+    @visited = marker
+
     # mark as part of this sub
     @part_of_sub << marker
 
@@ -361,6 +365,9 @@ class AbstractStatement
   def assign_on_error_markers(_) end
 
   def assign_on_error_marker(marker, line_number, program)
+    return if @visited == marker
+    @visited = marker
+
     # mark as part of this on-error
     @part_of_onerror << marker
 
@@ -387,7 +394,15 @@ class AbstractStatement
   def assign_fornext_markers(_) end
 
   def assign_fornext_marker(marker, markers, line_number, program)
-    # mark as part of this fornext
+    return if @visited == marker
+    @visited = marker
+
+    # if already in the list, remove it
+    if @part_of_fornext.include?(marker)
+      @part_of_fornext -= [marker]
+    end
+
+    # mark as part of this fornext, put it at the end
     @part_of_fornext << marker
 
     if for?
