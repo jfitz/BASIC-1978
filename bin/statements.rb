@@ -314,6 +314,8 @@ class AbstractStatement
   def pessimize
     @program_errors = []
     @program_warnings = []
+    @transfers = []
+    @transfers_auto = []
   end
 
   def optimize(interpreter, line_stmt, program)
@@ -455,13 +457,9 @@ class AbstractStatement
 
   def renumber(_) end
 
-  def set_transfers(_)
-    @transfers = []
-  end
+  def set_transfers(_) end
 
   def set_transfers_auto(program, line_number, stmt)
-    @transfers_auto = []
-
     # convert auto-next to TransferRefLineStmt
     if @autonext &&
        @autonext_line_stmt &&
@@ -1852,8 +1850,6 @@ class ChainStatement < AbstractStatement
   end
 
   def set_transfers(_)
-    @transfers = []
-
     empty_line_number = LineNumber.new(nil)
     @transfers << TransferRefLineStmt.new(empty_line_number, 0, :chain)
   end
@@ -2153,8 +2149,6 @@ class EndStatement < AbstractStatement
   end
 
   def set_transfers(_)
-    @transfers = []
-
     empty_line_number = LineNumber.new(nil)
     @transfers << TransferRefLineStmt.new(empty_line_number, 0, :stop)
   end
@@ -2450,8 +2444,6 @@ class ForStatement < AbstractStatement
   end
 
   def set_transfers(_)
-    @transfers = []
-
     unless @loopstart_line_stmt_mod.nil?
       line_number = @loopstart_line_stmt_mod.line_number
       stmt = @loopstart_line_stmt_mod.statement
@@ -2686,8 +2678,6 @@ class GosubStatement < AbstractStatement
   end
 
   def set_transfers(_)
-    @transfers = []
-
     if @dest_line_stmt_mod.nil?
       @transfers << TransferRefLineStmt.new(@dest_line, 0, :gosub) unless
         @dest_line.nil?
@@ -2780,8 +2770,6 @@ class GotoStatement < AbstractStatement
   end
 
   def set_transfers(_)
-    @transfers = []
-
     unless @dest_line.nil?
       if @dest_line_stmt_mod.nil?
         @transfers << TransferRefLineStmt.new(@dest_line, 0, :goto) unless
@@ -3029,8 +3017,6 @@ class AbstractIfStatement < AbstractStatement
   end
 
   def set_transfers(user_function_start_lines)
-    @transfers = []
-
     unless @dest_line.nil?
       if @dest_line_stmt_mod.nil?
         @transfers << TransferRefLineStmt.new(@dest_line, 0, :ifthen)
@@ -3478,8 +3464,6 @@ end
 # common functions for LET and LET-less statements
 class AbstractLetStatement < AbstractStatement
   def set_transfers(user_function_start_lines)
-    @transfers = []
-
     unless @assignment.nil?
       @transfers += @assignment.destinations(user_function_start_lines)
     end
@@ -3848,8 +3832,6 @@ class OnErrorStatement < AbstractStatement
   end
 
   def set_transfers(_)
-    @transfers = []
-
     unless @dest_line_stmt_mod.nil?
       line_number = @dest_line_stmt_mod.line_number
       @transfers << TransferRefLineStmt.new(line_number, 0, :onerror)
@@ -3997,8 +3979,6 @@ class OnStatement < AbstractStatement
   end
 
   def set_transfers(_)
-    @transfers = []
-
     @dest_line_stmt_mods.each do |dest_line_stmt_mod|
       line_number = dest_line_stmt_mod.line_number
       @transfers << TransferRefLineStmt.new(line_number, 0, :goto)
@@ -4574,8 +4554,6 @@ class ResumeStatement < AbstractStatement
   end
 
   def set_transfers(_)
-    @transfers = []
-
     unless @dest_line_stmt_mod.nil?
       line_number = @dest_line_stmt_mod.line_number
       @transfers << TransferRefLineStmt.new(line_number, 0, :resume)
@@ -4694,8 +4672,6 @@ class StopStatement < AbstractStatement
   end
 
   def set_transfers(_)
-    @transfers = []
-
     empty_line_number = LineNumber.new(nil)
     @transfers << TransferRefLine.new(empty_line_number, :stop)
   end
