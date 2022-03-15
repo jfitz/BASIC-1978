@@ -254,7 +254,7 @@ end
 class AbstractStatement
   attr_reader :errors, :warnings, :program_errors, :keywords, :tokens,
               :separators, :valid, :executable, :comment, :linenums,
-              :autonext, :autonext_line_stmt, :transfers, :transfers_auto,
+              :autonext, :autonext_line_stmt, :transfers,
               :is_if_no_else, :may_be_if_sub, :part_of_sub, :part_of_onerror,
               :part_of_fornext
   attr_accessor :part_of_user_function, :program_warnings, :origins,
@@ -296,7 +296,6 @@ class AbstractStatement
     @profile_count = 0
     @profile_time = 0
     @transfers = []
-    @transfers_auto = []
     @part_of_user_function = nil
     @part_of_sub = []
     @part_of_onerror = []
@@ -315,7 +314,6 @@ class AbstractStatement
     @program_errors = []
     @program_warnings = []
     @transfers = []
-    @transfers_auto = []
   end
 
   def optimize(interpreter, line_stmt, program)
@@ -344,10 +342,8 @@ class AbstractStatement
     # mark as part of this sub
     @part_of_sub << marker
 
-    xfers = @transfers + @transfers_auto
-    
     # for each destination
-    xfers.each do |xfer|
+    @transfers.each do |xfer|
       # don't follow function call and GOSUB
       next if [:function, :gosub].include?(xfer.type)
 
@@ -373,10 +369,8 @@ class AbstractStatement
     # mark as part of this on-error
     @part_of_onerror << marker
 
-    xfers = @transfers + @transfers_auto
-    
     # for each destination
-    xfers.each do |xfer|
+    @transfers.each do |xfer|
       # don't follow function call, ON ERROR, and RESUME
       next if [:function, :onerror, :resume].include?(xfer.type)
 
@@ -423,10 +417,8 @@ class AbstractStatement
       end
     end
 
-    xfers = @transfers + @transfers_auto
-    
     # for each destination
-    xfers.each do |xfer|
+    @transfers.each do |xfer|
       # don't follow function call and GOSUB
       next if [:function, :gosub].include?(xfer.type)
 
@@ -467,7 +459,7 @@ class AbstractStatement
       dest_line_number = @autonext_line_stmt.line_number
       dest_stmt = @autonext_line_stmt.statement
 
-      @transfers_auto <<
+      @transfers <<
         TransferRefLineStmt.new(dest_line_number, dest_stmt, :auto)
 
       dest_xfer = TransferRefLineStmt.new(line_number, stmt, :auto)
@@ -476,9 +468,7 @@ class AbstractStatement
   end
 
   def transfers_to_origins(program, line_number, stmt)
-    xfers = @transfers + @transfers_auto
-
-    xfers.each do |xfer|
+    @transfers.each do |xfer|
       dest_line_number = xfer.line_number
       dest_stmt = xfer.statement
       dest_xfer = TransferRefLineStmt.new(line_number, stmt, xfer.type)
@@ -708,10 +698,8 @@ class AbstractStatement
   def check_gosub_early(line_number)
     return if @part_of_sub.empty?
 
-    xfers = @transfers + @transfers_auto
-
     # warn about lines before first line of GOSUB block
-    xfers.each do |xfer|
+    @transfers.each do |xfer|
       if [:goto, :ifthen].include?(xfer.type)
         dest_line_number = xfer.line_number
       
@@ -747,10 +735,8 @@ class AbstractStatement
   def check_onerror_early(line_number)
     return if @part_of_onerror.empty?
 
-    xfers = @transfers + @transfers_auto
-
     # warn about branches to lines before first line of ON-ERROR block
-    xfers.each do |xfer|
+    @transfers.each do |xfer|
       if [:goto, :ifthen].include?(xfer.type)
         dest_line_number = xfer.line_number
       
@@ -764,10 +750,8 @@ class AbstractStatement
   def check_terminating_in_gosub
     return if @part_of_sub.empty?
 
-    xfers = @transfers + @transfers_auto
-
     # warn about STOP, END, CHAIN in GOSUB block
-    xfers.each do |xfer|
+    @transfers.each do |xfer|
       if [:stop, :chain].include?(xfer.type)
         @program_warnings << "Terminating statement in GOSUB"
       end
@@ -777,10 +761,8 @@ class AbstractStatement
   def check_terminating_in_onerror
     return if @part_of_onerror.empty?
 
-    xfers = @transfers + @transfers_auto
-
     # warn about STOP, END, CHAIN in GOSUB block
-    xfers.each do |xfer|
+    @transfers.each do |xfer|
       if [:stop, :chain].include?(xfer.type)
         @program_warnings << "Terminating statement in ON-ERROR"
       end
@@ -790,10 +772,8 @@ class AbstractStatement
   def check_terminating_in_fornext
     return if @part_of_fornext.empty?
 
-    xfers = @transfers + @transfers_auto
-
     # warn about STOP, END, CHAIN in GOSUB block
-    xfers.each do |xfer|
+    @transfers.each do |xfer|
       if [:stop, :chain].include?(xfer.type)
         @program_warnings << "Terminating statement in FOR/NEXT"
       end
@@ -3046,7 +3026,6 @@ class AbstractIfStatement < AbstractStatement
       line_number = @autonext_line.line_number
       stmt = @autonext_line.statement
 
-      # do not change this to @transfers_auto
       @transfers << TransferRefLineStmt.new(line_number, stmt, :auto)
     end
 
