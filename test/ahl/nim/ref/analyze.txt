@@ -99,160 +99,160 @@ Halstead complexity:
 430 (0 2) PRINT "MOVES."
   Origs: 420:auto
   Dests: 440:auto
-440 F(I,J) (0 2) PRINT
+440 (0 2) PRINT
   Origs: 250:ifthen, 260:ifthen, 430:auto, 1720:goto
   Dests: 450:auto
-450 F(I,J) (0 2) PRINT "ENTER WIN OPTION - 1 TO TAKE LAST, 2 TO AVOID LAST";
+450 (0 2) PRINT "ENTER WIN OPTION - 1 TO TAKE LAST, 2 TO AVOID LAST";
   Origs: 440:auto, 480:ifthen
   Dests: 460:auto
-460 F(I,J) (1 2) INPUT W
+460 (1 2) INPUT W
   Origs: 450:auto
   Dests: 470:auto
-470 F(I,J) (1 4) IF W = 1 THEN 490
+470 (1 4) IF W = 1 THEN 490
   Origs: 460:auto
   Dests: 480:auto, 490:ifthen
-480 F(I,J) (1 5) IF W <> 2 THEN 450
+480 (1 5) IF W <> 2 THEN 450
   Origs: 470:auto
   Dests: 450:ifthen, 490:auto
-490 F(I,J) (0 2) PRINT "ENTER NUMBER OF PILES";
+490 (0 2) PRINT "ENTER NUMBER OF PILES";
   Origs: 470:ifthen, 480:auto, 510:ifthen, 520:ifthen, 530:ifthen
   Dests: 500:auto
-500 F(I,J) (1 2) INPUT N
+500 (1 2) INPUT N
   Origs: 490:auto
   Dests: 510:auto
-510 F(I,J) (1 5) IF N > 100 THEN 490
+510 (1 5) IF N > 100 THEN 490
   Origs: 500:auto
   Dests: 490:ifthen, 520:auto
-520 F(I,J) (1 5) IF N < 1 THEN 490
+520 (1 5) IF N < 1 THEN 490
   Origs: 510:auto
   Dests: 490:ifthen, 530:auto
-530 F(I,J) (1 6) IF N <> INT(N) THEN 490
+530 (1 6) IF N <> INT(N) THEN 490
   Origs: 520:auto
   Dests: 490:ifthen, 540:auto
-540 F(I,J) (0 2) PRINT "ENTER PILE SIZES"
+540 (0 2) PRINT "ENTER PILE SIZES"
   Origs: 530:auto
   Dests: 550:auto
-550 F(I,J) (1 3) FOR I = 1 TO N
+550 F(I) (1 3) FOR I = 1 TO N
   Origs: 540:auto
   Dests: 560:fornext, 610:fornext
-560 F(I,J) (0 2) PRINT I;
+560 F(I) (0 2) PRINT I;
   Origs: 550:fornext, 580:ifthen, 590:ifthen, 600:ifthen
   Dests: 570:auto
-570 F(I,J) (1 2) INPUT A(I)
+570 F(I) (1 2) INPUT A(I)
   Origs: 560:auto
   Dests: 580:auto
-580 F(I,J) (1 5) IF A(I) > 2000 THEN 560
+580 F(I) (1 5) IF A(I) > 2000 THEN 560
   Origs: 570:auto
   Dests: 560:ifthen, 590:auto
-590 F(I,J) (1 5) IF A(I) < 1 THEN 560
+590 F(I) (1 5) IF A(I) < 1 THEN 560
   Origs: 580:auto
   Dests: 560:ifthen, 600:auto
-600 F(I,J) (1 6) IF A(I) <> INT(A(I)) THEN 560
+600 F(I) (1 6) IF A(I) <> INT(A(I)) THEN 560
   Origs: 590:auto
   Dests: 560:ifthen, 610:auto
-610 F(I,J) (0 1) NEXT I
+610 F(I) (0 1) NEXT I
   Origs: 550:fornext, 600:auto
   Dests: 620:auto
-620 F(J) (0 2) PRINT "DO YOU WANT TO MOVE FIRST";
+620 (0 2) PRINT "DO YOU WANT TO MOVE FIRST";
   Origs: 610:auto
   Dests: 630:auto
-630 F(J) (1 2) INPUT Q9$
+630 (1 2) INPUT Q9$
   Origs: 620:auto, 690:goto
   Dests: 640:auto
-640 F(J) (1 4) IF Q9$ = "YES" THEN 1450
+640 (1 4) IF Q9$ = "YES" THEN 1450
   Origs: 630:auto
   Dests: 650:auto, 1450:ifthen
-650 F(J) (1 4) IF Q9$ = "yes" THEN 1450
+650 (1 4) IF Q9$ = "yes" THEN 1450
   Origs: 640:auto
   Dests: 660:auto, 1450:ifthen
-660 F(J) (1 4) IF Q9$ = "NO" THEN 700
+660 (1 4) IF Q9$ = "NO" THEN 700
   Origs: 650:auto
   Dests: 670:auto, 700:ifthen
-670 F(J) (1 4) IF Q9$ = "no" THEN 700
+670 (1 4) IF Q9$ = "no" THEN 700
   Origs: 660:auto
   Dests: 680:auto, 700:ifthen
-680 F(J) (0 2) PRINT "PLEASE ANSWER YES OR NO."
+680 (0 2) PRINT "PLEASE ANSWER YES OR NO."
   Origs: 670:auto
   Dests: 690:auto
-690 F(J) (0 3) GOTO 630
+690 (0 3) GOTO 630
   Origs: 680:auto
   Dests: 630:goto
-700 F(I,J) (1 4) IF W = 1 THEN 940
+700 (1 4) IF W = 1 THEN 940
   Origs: 660:ifthen, 670:ifthen, 1560:goto
   Dests: 710:auto, 940:ifthen
-710 F(I,J) (0 3) LET C = 0
+710 (0 3) LET C = 0
   Origs: 700:auto
   Dests: 720:auto
-720 F(I,J) (1 3) FOR I = 1 TO N
+720 F(I) (1 3) FOR I = 1 TO N
   Origs: 710:auto
   Dests: 730:fornext, 770:fornext
-730 F(I,J) (1 4) IF A(I) = 0 THEN 770
+730 F(I) (1 4) IF A(I) = 0 THEN 770
   Origs: 720:fornext
   Dests: 740:auto, 770:ifthen
-740 F(I,J) (0 4) LET C = C + 1
+740 F(I) (0 4) LET C = C + 1
   Origs: 730:auto
   Dests: 750:auto
-750 F(I,J) (1 4) IF C = 3 THEN 840
+750 F(I) (1 4) IF C = 3 THEN 840
   Origs: 740:auto
   Dests: 760:auto, 840:ifthen
-760 F(I,J) (0 3) LET D(C) = I
+760 F(I) (0 3) LET D(C) = I
   Origs: 750:auto
   Dests: 770:auto
-770 F(I,J) (0 1) NEXT I
+770 F(I) (0 1) NEXT I
   Origs: 720:fornext, 730:ifthen, 760:auto
   Dests: 780:auto
-780 F(J) (1 4) IF C = 2 THEN 920
+780 (1 4) IF C = 2 THEN 920
   Origs: 770:auto
   Dests: 790:auto, 920:ifthen
-790 F(J) (1 4) IF A(D(1)) > 1 THEN 820
+790 (1 4) IF A(D(1)) > 1 THEN 820
   Origs: 780:auto
   Dests: 800:auto, 820:ifthen
-800 F(I,J) (0 2) PRINT "MACHINE LOSES"
+800 (0 2) PRINT "MACHINE LOSES"
   Origs: 790:auto, 900:ifthen, 1550:ifthen
   Dests: 810:auto
-810 F(I,J) (0 2) GOTO 1640
+810 (0 2) GOTO 1640
   Origs: 800:auto
   Dests: 1640:goto
-820 F(I,J) (0 2) PRINT "MACHINE WINS"
+820 (0 2) PRINT "MACHINE WINS"
   Origs: 790:ifthen, 920:ifthen, 930:ifthen, 1440:ifthen
   Dests: 830:auto
-830 F(I,J) (0 2) GOTO 1640
+830 (0 2) GOTO 1640
   Origs: 820:auto
   Dests: 1640:goto
-840 F(I,J) (0 3) LET C = 0
+840 F(I) (0 3) LET C = 0
   Origs: 750:ifthen
   Dests: 850:auto
-850 F(I,I,J) (1 3) FOR I = 1 TO N
+850 F(I) (1 3) FOR I = 1 TO N
   Origs: 840:auto
   Dests: 860:fornext, 890:fornext
-860 F(I,J) (1 4) IF A(I) > 1 THEN 940
+860 F(I) (1 4) IF A(I) > 1 THEN 940
   Origs: 850:fornext
   Dests: 870:auto, 940:ifthen
-870 F(I,J) (1 4) IF A(I) = 0 THEN 890
+870 F(I) (1 4) IF A(I) = 0 THEN 890
   Origs: 860:auto
   Dests: 880:auto, 890:ifthen
-880 F(I,J) (0 4) LET C = C + 1
+880 F(I) (0 4) LET C = C + 1
   Origs: 870:auto
   Dests: 890:auto
-890 F(I,J) (0 1) NEXT I
+890 F(I) (0 1) NEXT I
   Origs: 850:fornext, 870:ifthen, 880:auto
   Dests: 900:auto
-900 F(I,J) (1 7) IF C / 2 <> INT(C / 2) THEN 800
+900 (1 7) IF C / 2 <> INT(C / 2) THEN 800
   Origs: 890:auto
   Dests: 800:ifthen, 910:auto
-910 F(I,J) (0 2) GOTO 940
+910 (0 2) GOTO 940
   Origs: 900:auto
   Dests: 940:goto
-920 F(J) (1 5) IF A(D(1)) = 1 THEN 820
+920 (1 5) IF A(D(1)) = 1 THEN 820
   Origs: 780:ifthen
   Dests: 820:ifthen, 930:auto
-930 F(J) (1 5) IF A(D(2)) = 1 THEN 820
+930 (1 5) IF A(D(2)) = 1 THEN 820
   Origs: 920:auto
   Dests: 820:ifthen, 940:auto
-940 F(I,I,J) (1 3) FOR I = 1 TO N
+940 F(I) (1 3) FOR I = 1 TO N
   Origs: 700:ifthen, 860:ifthen, 910:goto, 930:auto
   Dests: 950:fornext, 1010:fornext
-950 F(I,J) (0 3) LET E = A(I)
+950 F(I) (0 3) LET E = A(I)
   Origs: 940:fornext
   Dests: 960:auto
 960 F(I,J) (1 3) FOR J = 0 TO 10
@@ -270,172 +270,172 @@ Halstead complexity:
 1000 F(I,J) (0 1) NEXT J
   Origs: 960:fornext, 990:auto
   Dests: 1010:auto
-1010 F(I,J) (0 1) NEXT I
+1010 F(I) (0 1) NEXT I
   Origs: 940:fornext, 1000:auto
   Dests: 1020:auto
-1020 F(I,J) (1 5) FOR J = 10 TO 0 STEP -1
+1020 F(J) (1 5) FOR J = 10 TO 0 STEP -1
   Origs: 1010:auto
   Dests: 1030:fornext, 1130:fornext
-1030 F(I,J) (0 3) LET C = 0
+1030 F(J) (0 3) LET C = 0
   Origs: 1020:fornext
   Dests: 1040:auto
-1040 F(I,J) (0 3) LET H = 0
+1040 F(J) (0 3) LET H = 0
   Origs: 1030:auto
   Dests: 1050:auto
-1050 F(I,J,I) (1 3) FOR I = 1 TO N
+1050 F(J,I) (1 3) FOR I = 1 TO N
   Origs: 1040:auto
   Dests: 1060:fornext, 1110:fornext
 1060 F(J,I) (1 4) IF B(I, J) = 0 THEN 1110
   Origs: 1050:fornext
   Dests: 1070:auto, 1110:ifthen
-1070 F(I,J) (0 4) LET C = C + 1
+1070 F(J,I) (0 4) LET C = C + 1
   Origs: 1060:auto
   Dests: 1080:auto
-1080 F(I,J) (1 4) IF A(I) <= H THEN 1110
+1080 F(J,I) (1 4) IF A(I) <= H THEN 1110
   Origs: 1070:auto
   Dests: 1090:auto, 1110:ifthen
-1090 F(I,J) (0 3) LET H = A(I)
+1090 F(J,I) (0 3) LET H = A(I)
   Origs: 1080:auto
   Dests: 1100:auto
-1100 F(I,J) (0 3) LET G = I
+1100 F(J,I) (0 3) LET G = I
   Origs: 1090:auto
   Dests: 1110:auto
-1110 F(I,J) (0 1) NEXT I
+1110 F(J,I) (0 1) NEXT I
   Origs: 1050:fornext, 1060:ifthen, 1080:ifthen, 1100:auto
   Dests: 1120:auto
-1120 F(I,J) (1 6) IF C / 2 <> INT(C / 2) THEN 1190
+1120 F(J) (1 6) IF C / 2 <> INT(C / 2) THEN 1190
   Origs: 1110:auto
   Dests: 1130:auto, 1190:ifthen
-1130 F(I,J) (0 1) NEXT J
+1130 F(J) (0 1) NEXT J
   Origs: 1020:fornext, 1120:auto
   Dests: 1140:auto
-1140 F(I) (0 4) LET E = INT(N * RND(1) + 1)
+1140 (0 4) LET E = INT(N * RND(1) + 1)
   Origs: 1130:auto, 1150:ifthen
   Dests: 1150:auto
-1150 F(I) (1 5) IF A(E) = 0 THEN 1140
+1150 (1 5) IF A(E) = 0 THEN 1140
   Origs: 1140:auto
   Dests: 1140:ifthen, 1160:auto
-1160 F(I) (0 4) LET F = INT(A(E) * RND(1) + 1)
+1160 (0 4) LET F = INT(A(E) * RND(1) + 1)
   Origs: 1150:auto
   Dests: 1170:auto
-1170 F(I) (0 4) LET A(E) = A(E) - F
+1170 (0 4) LET A(E) = A(E) - F
   Origs: 1160:auto
   Dests: 1180:auto
-1180 F(I) (0 2) GOTO 1380
+1180 (0 2) GOTO 1380
   Origs: 1170:auto
   Dests: 1380:goto
-1190 F(I,J) (0 3) LET A(G) = 0
+1190 F(J) (0 3) LET A(G) = 0
   Origs: 1120:ifthen
   Dests: 1200:auto
-1200 F(I,J,J) (1 3) FOR J = 0 TO 10
+1200 F(J) (1 3) FOR J = 0 TO 10
   Origs: 1190:auto
   Dests: 1210:fornext, 1280:fornext
-1210 F(I,J) (0 3) LET B(G, J) = 0
+1210 F(J) (0 3) LET B(G, J) = 0
   Origs: 1200:fornext
   Dests: 1220:auto
-1220 F(I,J) (0 3) LET C = 0
+1220 F(J) (0 3) LET C = 0
   Origs: 1210:auto
   Dests: 1230:auto
-1230 F(I,J,I) (1 3) FOR I = 1 TO N
+1230 F(J,I) (1 3) FOR I = 1 TO N
   Origs: 1220:auto
   Dests: 1240:fornext, 1260:fornext
 1240 F(J,I) (1 4) IF B(I, J) = 0 THEN 1260
   Origs: 1230:fornext
   Dests: 1250:auto, 1260:ifthen
-1250 F(I,J) (0 4) LET C = C + 1
+1250 F(J,I) (0 4) LET C = C + 1
   Origs: 1240:auto
   Dests: 1260:auto
-1260 F(I,J) (0 1) NEXT I
+1260 F(J,I) (0 1) NEXT I
   Origs: 1230:fornext, 1240:ifthen, 1250:auto
   Dests: 1270:auto
-1270 F(I,J) (0 13) LET A(G) = A(G) + 2 * (C / 2 - INT(C / 2)) * 2 ^ J
+1270 F(J) (0 13) LET A(G) = A(G) + 2 * (C / 2 - INT(C / 2)) * 2 ^ J
   Origs: 1260:auto
   Dests: 1280:auto
-1280 F(I,J) (0 1) NEXT J
+1280 F(J) (0 1) NEXT J
   Origs: 1200:fornext, 1270:auto
   Dests: 1290:auto
-1290 F(I,J) (1 4) IF W = 1 THEN 1380
+1290 (1 4) IF W = 1 THEN 1380
   Origs: 1280:auto
   Dests: 1300:auto, 1380:ifthen
-1300 F(I,J) (0 3) LET C = 0
+1300 (0 3) LET C = 0
   Origs: 1290:auto
   Dests: 1310:auto
-1310 F(I,J,I) (1 3) FOR I = 1 TO N
+1310 F(I) (1 3) FOR I = 1 TO N
   Origs: 1300:auto
   Dests: 1320:fornext, 1350:fornext
-1320 F(J,I) (1 4) IF A(I) > 1 THEN 1380
+1320 F(I) (1 4) IF A(I) > 1 THEN 1380
   Origs: 1310:fornext
   Dests: 1330:auto, 1380:ifthen
-1330 F(I,J) (1 4) IF A(I) = 0 THEN 1350
+1330 F(I) (1 4) IF A(I) = 0 THEN 1350
   Origs: 1320:auto
   Dests: 1340:auto, 1350:ifthen
-1340 F(I,J) (0 4) LET C = C + 1
+1340 F(I) (0 4) LET C = C + 1
   Origs: 1330:auto
   Dests: 1350:auto
-1350 F(I,J) (0 1) NEXT I
+1350 F(I) (0 1) NEXT I
   Origs: 1310:fornext, 1330:ifthen, 1340:auto
   Dests: 1360:auto
-1360 F(I,J) (1 6) IF C / 2 <> INT(C / 2) THEN 1380
+1360 (1 6) IF C / 2 <> INT(C / 2) THEN 1380
   Origs: 1350:auto
   Dests: 1370:auto, 1380:ifthen
-1370 F(I,J) (0 4) LET A(G) = 1 - A(G)
+1370 (0 4) LET A(G) = 1 - A(G)
   Origs: 1360:auto
   Dests: 1380:auto
-1380 F(I,J) (0 2) PRINT "PILE  SIZE"
+1380 F(I) (0 2) PRINT "PILE  SIZE"
   Origs: 1180:goto, 1290:ifthen, 1320:ifthen, 1360:ifthen, 1370:auto
   Dests: 1390:auto
-1390 F(I,J,I) (1 3) FOR I = 1 TO N
+1390 F(I) (1 3) FOR I = 1 TO N
   Origs: 1380:auto
   Dests: 1400:fornext, 1410:fornext
-1400 F(J,I) (0 3) PRINT I; A(I)
+1400 F(I) (0 3) PRINT I; A(I)
   Origs: 1390:fornext
   Dests: 1410:auto
-1410 F(I,J) (0 1) NEXT I
+1410 F(I) (0 1) NEXT I
   Origs: 1390:fornext, 1400:auto
   Dests: 1420:auto
-1420 F(I,J) (1 4) IF W = 2 THEN 1450
+1420 (1 4) IF W = 2 THEN 1450
   Origs: 1410:auto
   Dests: 1430:auto, 1450:ifthen
-1430 F(I,J) (0 2) GOSUB 1570
+1430 (0 2) GOSUB 1570
   Origs: 1420:auto
   Dests: 1440:auto, 1570:gosub
-1440 F(I,J) (1 5) IF Z = 1 THEN 820
+1440 (1 5) IF Z = 1 THEN 820
   Origs: 1430:auto
   Dests: 820:ifthen, 1450:auto
-1450 F(I,J) (0 2) PRINT "YOUR MOVE - PILE, NUMBER TO BE REMOVED";
+1450 (0 2) PRINT "YOUR MOVE - PILE, NUMBER TO BE REMOVED";
   Origs: 640:ifthen, 650:ifthen, 1420:ifthen, 1440:auto, 1470:ifthen, 1480:ifthen, 1490:ifthen, 1500:ifthen, 1510:ifthen, 1520:ifthen
   Dests: 1460:auto
-1460 F(I,J) (2 3) INPUT X, Y
+1460 (2 3) INPUT X, Y
   Origs: 1450:auto
   Dests: 1470:auto
-1470 F(I,J) (1 5) IF X > N THEN 1450
+1470 (1 5) IF X > N THEN 1450
   Origs: 1460:auto
   Dests: 1450:ifthen, 1480:auto
-1480 F(I,J) (1 5) IF X < 1 THEN 1450
+1480 (1 5) IF X < 1 THEN 1450
   Origs: 1470:auto
   Dests: 1450:ifthen, 1490:auto
-1490 F(I,J) (1 6) IF X <> INT(X) THEN 1450
+1490 (1 6) IF X <> INT(X) THEN 1450
   Origs: 1480:auto
   Dests: 1450:ifthen, 1500:auto
-1500 F(I,J) (1 5) IF Y > A(X) THEN 1450
+1500 (1 5) IF Y > A(X) THEN 1450
   Origs: 1490:auto
   Dests: 1450:ifthen, 1510:auto
-1510 F(I,J) (1 5) IF Y < 1 THEN 1450
+1510 (1 5) IF Y < 1 THEN 1450
   Origs: 1500:auto
   Dests: 1450:ifthen, 1520:auto
-1520 F(I,J) (1 6) IF Y <> INT(Y) THEN 1450
+1520 (1 6) IF Y <> INT(Y) THEN 1450
   Origs: 1510:auto
   Dests: 1450:ifthen, 1530:auto
-1530 F(I,J) (0 4) LET A(X) = A(X) - Y
+1530 (0 4) LET A(X) = A(X) - Y
   Origs: 1520:auto
   Dests: 1540:auto
-1540 F(I,J) (0 2) GOSUB 1570
+1540 (0 2) GOSUB 1570
   Origs: 1530:auto
   Dests: 1550:auto, 1570:gosub
-1550 F(I,J) (1 5) IF Z = 1 THEN 800
+1550 (1 5) IF Z = 1 THEN 800
   Origs: 1540:auto
   Dests: 800:ifthen, 1560:auto
-1560 F(I,J) (0 3) GOTO 700
+1560 (0 3) GOTO 700
   Origs: 1550:auto
   Dests: 700:goto
 1570 G(1570) (0 3) LET Z = 0
@@ -459,35 +459,34 @@ Halstead complexity:
 1630 G(1570) (0 1) RETURN
   Origs: 1620:auto
   Dests: 
-1640 F(I,J) (0 2) PRINT "do you want to play another game";
+1640 (0 2) PRINT "do you want to play another game";
   Origs: 810:goto, 830:goto
   Dests: 1650:auto
-1650 F(I,J) (1 2) INPUT Q9$
+1650 (1 2) INPUT Q9$
   Origs: 1640:auto, 1710:goto
   Dests: 1660:auto
-1660 F(I,J) (1 4) IF Q9$ = "YES" THEN 1720
+1660 (1 4) IF Q9$ = "YES" THEN 1720
   Origs: 1650:auto
   Dests: 1670:auto, 1720:ifthen
-1670 F(I,J) (1 4) IF Q9$ = "yes" THEN 1720
+1670 (1 4) IF Q9$ = "yes" THEN 1720
   Origs: 1660:auto
   Dests: 1680:auto, 1720:ifthen
-1680 F(I,J) (1 4) IF Q9$ = "NO" THEN 1730
+1680 (1 4) IF Q9$ = "NO" THEN 1730
   Origs: 1670:auto
   Dests: 1690:auto, 1730:ifthen
-1690 F(I,J) (1 4) IF Q9$ = "no" THEN 1730
+1690 (1 4) IF Q9$ = "no" THEN 1730
   Origs: 1680:auto
   Dests: 1700:auto, 1730:ifthen
-1700 F(I,J) (0 2) PRINT "PLEASE.  YES OR NO."
+1700 (0 2) PRINT "PLEASE.  YES OR NO."
   Origs: 1690:auto
   Dests: 1710:auto
-1710 F(I,J) (0 3) GOTO 1650
+1710 (0 3) GOTO 1650
   Origs: 1700:auto
   Dests: 1650:goto
-1720 F(I,J) (0 3) GOTO 440
+1720 (0 3) GOTO 440
   Origs: 1660:ifthen, 1670:ifthen
   Dests: 440:goto
-1730 F(I,J) (0 1) END
-     WARNING: Terminating statement in FOR/NEXT
+1730 (0 1) END
   Origs: 1680:ifthen, 1690:ifthen
   Dests: :stop
 

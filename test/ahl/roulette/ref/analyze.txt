@@ -228,13 +228,13 @@ Halstead complexity:
 1620 (0 3) D = 100000
   Origs: 1610:auto
   Dests: 1630:auto
-1630 F(I1) (0 2) PRINT "HOW MANY BETS";
+1630 F(I1,I) (0 2) PRINT "HOW MANY BETS";
   Origs: 1620:auto, 1650:ifthen, 2940:ifthen
   Dests: 1640:auto
-1640 F(I1) (1 2) INPUT Y
+1640 F(I1,I) (1 2) INPUT Y
   Origs: 1630:auto
   Dests: 1650:auto
-1650 F(I1) (1 9) IF Y < 1 OR Y <> INT(Y) THEN 1630
+1650 F(I1,I) (1 9) IF Y < 1 OR Y <> INT(Y) THEN 1630
   Origs: 1640:auto
   Dests: 1630:ifthen, 1660:auto
 1660 F(I,I1) (1 3) FOR I = 1 TO 50
@@ -588,58 +588,58 @@ Halstead complexity:
 2810 F(I1,C,I) (0 1) NEXT C
   Origs: 2030:fornext, 2180:goto, 2460:goto, 2800:auto
   Dests: 2820:auto
-2820 F(I1) (0 2) PRINT
+2820 F(I1,I) (0 2) PRINT
   Origs: 2810:auto
   Dests: 2830:auto
-2830 F(I1) (0 4) PRINT "TOTALS:", "ME", "YOU"
+2830 F(I1,I) (0 4) PRINT "TOTALS:", "ME", "YOU"
   Origs: 2820:auto
   Dests: 2840:auto
-2840 F(I1) (0 4) PRINT " ", D, P
+2840 F(I1,I) (0 4) PRINT " ", D, P
   Origs: 2830:auto
   Dests: 2850:auto
-2850 F(I1) (1 4) IF P > 0 THEN 2880
+2850 F(I1,I) (1 4) IF P > 0 THEN 2880
   Origs: 2840:auto
   Dests: 2860:auto, 2880:ifthen
-2860 F(I1) (0 2) PRINT "OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
+2860 F(I1,I) (0 2) PRINT "OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
   Origs: 2850:auto
   Dests: 2870:auto
-2870 F(I1) (0 2) GOTO 3190
+2870 F(I1,I) (0 2) GOTO 3190
   Origs: 2860:auto
   Dests: 3190:goto
-2880 F(I1) (1 4) IF D > 0 THEN 2920
+2880 F(I1,I) (1 4) IF D > 0 THEN 2920
   Origs: 2850:ifthen
   Dests: 2890:auto, 2920:ifthen
-2890 F(I1) (0 2) PRINT "YOU BROKE THE HOUSE!"
+2890 F(I1,I) (0 2) PRINT "YOU BROKE THE HOUSE!"
   Origs: 2880:auto
   Dests: 2900:auto
-2900 F(I1) (0 3) P = 101000
+2900 F(I1,I) (0 3) P = 101000
   Origs: 2890:auto
   Dests: 2910:auto
-2910 F(I1) (0 2) GOTO 2960
+2910 F(I1,I) (0 2) GOTO 2960
   Origs: 2900:auto
   Dests: 2960:goto
-2920 F(I1) (0 2) PRINT "AGAIN";
+2920 F(I1,I) (0 2) PRINT "AGAIN";
   Origs: 2880:ifthen
   Dests: 2930:auto
-2930 F(I1) (1 2) INPUT Y$
+2930 F(I1,I) (1 2) INPUT Y$
   Origs: 2920:auto
   Dests: 2940:auto
-2940 F(I1) (1 6) IF LEFT$(Y$, 1) = "Y" THEN 1630
+2940 F(I1,I) (1 6) IF LEFT$(Y$, 1) = "Y" THEN 1630
   Origs: 2930:auto
   Dests: 1630:ifthen, 2960:auto
 2950 (0 2) DATA 1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36
   Origs: 
   Dests: 
-2960 F(I1) (1 4) IF P < 1 THEN 3190
+2960 F(I1,I) (1 4) IF P < 1 THEN 3190
   Origs: 2910:goto, 2940:auto
   Dests: 2970:auto, 3190:ifthen
-2970 F(I1) (0 2) PRINT "TO WHOM SHALL I MAKE THE CHECK";
+2970 F(I1,I) (0 2) PRINT "TO WHOM SHALL I MAKE THE CHECK";
   Origs: 2960:auto
   Dests: 2980:auto
-2980 F(I1) (1 2) INPUT B$
+2980 F(I1,I) (1 2) INPUT B$
   Origs: 2970:auto
   Dests: 2990:auto
-2990 F(I1) (0 2) PRINT
+2990 F(I1,I) (0 2) PRINT
   Origs: 2980:auto
   Dests: 3000:auto
 3000 F(I1,I) (1 3) FOR I = 1 TO 72
@@ -704,16 +704,16 @@ Halstead complexity:
 3180 F(I1) (0 2) GOTO 3210
   Origs: 3170:auto
   Dests: 3210:goto
-3190 F(I1) (0 2) PRINT "THANKS FOR YOUR MONEY."
+3190 F(I1,I) (0 2) PRINT "THANKS FOR YOUR MONEY."
   Origs: 2870:goto, 2960:ifthen
   Dests: 3200:auto
-3200 F(I1) (0 2) PRINT "I'LL USE IT TO BUY A SOLID GOLD ROULETTE WHEEL"
+3200 F(I1,I) (0 2) PRINT "I'LL USE IT TO BUY A SOLID GOLD ROULETTE WHEEL"
   Origs: 3190:auto
   Dests: 3210:auto
-3210 F(I1) (0 2) PRINT
+3210 F(I1,I) (0 2) PRINT
   Origs: 3180:goto, 3200:auto
   Dests: 3220:auto
-3220 F(I1) (0 2) GOTO 3420
+3220 F(I1,I) (0 2) GOTO 3420
   Origs: 3210:auto
   Dests: 3420:goto
 3230 (0 1) REM
@@ -746,7 +746,7 @@ Halstead complexity:
 3320 G(3310) (0 1) RETURN
   Origs: 3310:auto
   Dests: 
-3420 F(I1) (0 1) END
+3420 F(I1,I) (0 1) END
      WARNING: Terminating statement in FOR/NEXT
   Origs: 3220:goto
   Dests: :stop

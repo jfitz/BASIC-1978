@@ -521,7 +521,7 @@ Halstead complexity:
 2580 (0 1) REM KLINGONS MOVE/FIRE ON MOVING STARSHIP . . .
   Origs: 
   Dests: 
-2590 G(6000) F(I,I) (1 3) FOR I = 1 TO K3
+2590 G(6000) F(I) (1 3) FOR I = 1 TO K3
      G(6000) F(I) (1 4) IF K(I, 3) = 0 THEN 2700
   Origs: 2490:ifthen
   Dests: 2610:auto, 2700:fornext, 2700:ifthen
@@ -539,13 +539,13 @@ Halstead complexity:
   Origs: 2610:auto
   Dests: 2700:auto, 8670:gosub
 2700 G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (0 2) GOSUB 6000
-     G(6000) F(I) (0 3) D1 = 0
-     G(6000) F(I) (0 3) D6 = W1
-     G(6000) F(I) (1 6) IF W1 >= 1 THEN D6 = 1
+     G(6000) (0 2) GOSUB 6000
+     G(6000) (0 3) D1 = 0
+     G(6000) (0 3) D6 = W1
+     G(6000) (1 6) IF W1 >= 1 THEN D6 = 1
   Origs: 2590:fornext, 2590:ifthen, 2660:auto
   Dests: 2770:auto, 6000:gosub
-2770 G(6000) F(I,I) (1 3) FOR I = 1 TO 8
+2770 G(6000) F(I) (1 3) FOR I = 1 TO 8
      G(6000) F(I) (1 4) IF D(I) >= 0 THEN 2880
   Origs: 2700:auto
   Dests: 2790:auto, 2880:fornext, 2880:ifthen
@@ -568,52 +568,52 @@ Halstead complexity:
   Origs: 2810:auto
   Dests: 2880:auto, 8790:gosub
 2880 G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (1 5) IF RND(1) > 0.2 THEN 3070
+     G(6000) (1 5) IF RND(1) > 0.2 THEN 3070
   Origs: 2770:fornext, 2770:ifthen, 2790:goto, 2800:ifthen, 2840:auto
   Dests: 2910:auto, 3070:ifthen
-2910 G(6000) F(I) (0 5) R1 = FNR(1)
-     G(6000) F(I) (1 5) IF RND(1) >= 0.6 THEN 3000
+2910 G(6000) (0 5) R1 = FNR(1)
+     G(6000) (1 5) IF RND(1) >= 0.6 THEN 3000
   Origs: 2880:auto
   Dests: 475:function, 2930:auto, 3000:ifthen
-2930 G(6000) F(I) (0 8) D(R1) = D(R1) - (RND(1) * 5 + 1)
-     G(6000) F(I) (0 2) PRINT "DAMAGE CONTROL REPORT:  ";
+2930 G(6000) (0 8) D(R1) = D(R1) - (RND(1) * 5 + 1)
+     G(6000) (0 2) PRINT "DAMAGE CONTROL REPORT:  ";
   Origs: 2910:auto
   Dests: 2960:auto
-2960 G(6000) F(I) (0 2) GOSUB 8790
-     G(6000) F(I) (0 3) PRINT G2$; " DAMAGED"
-     G(6000) F(I) (0 2) PRINT
-     G(6000) F(I) (0 2) GOTO 3070
+2960 G(6000) (0 2) GOSUB 8790
+     G(6000) (0 3) PRINT G2$; " DAMAGED"
+     G(6000) (0 2) PRINT
+     G(6000) (0 2) GOTO 3070
   Origs: 2930:auto
   Dests: 3070:goto, 8790:gosub
-3000 G(6000) F(I) (0 8) D(R1) = D(R1) + RND(1) * 3 + 1
-     G(6000) F(I) (0 2) PRINT "DAMAGE CONTROL REPORT:  ";
+3000 G(6000) (0 8) D(R1) = D(R1) + RND(1) * 3 + 1
+     G(6000) (0 2) PRINT "DAMAGE CONTROL REPORT:  ";
   Origs: 2910:ifthen
   Dests: 3030:auto
-3030 G(6000) F(I) (0 2) GOSUB 8790
-     G(6000) F(I) (0 3) PRINT G2$; " STATE OF REPAIR IMPROVED"
-     G(6000) F(I) (0 2) PRINT
+3030 G(6000) (0 2) GOSUB 8790
+     G(6000) (0 3) PRINT G2$; " STATE OF REPAIR IMPROVED"
+     G(6000) (0 2) PRINT
   Origs: 3000:auto
   Dests: 3070:auto, 8790:gosub
 3060 (0 1) REM BEGIN MOVING STARSHIP
   Origs: 
   Dests: 
-3070 G(6000) F(I) (0 3) A$ = "   "
-     G(6000) F(I) (0 4) Z1 = INT(S1)
-     G(6000) F(I) (0 4) Z2 = INT(S2)
-     G(6000) F(I) (0 2) GOSUB 8670
+3070 G(6000) (0 3) A$ = "   "
+     G(6000) (0 4) Z1 = INT(S1)
+     G(6000) (0 4) Z2 = INT(S2)
+     G(6000) (0 2) GOSUB 8670
   Origs: 2880:ifthen, 2960:goto, 3030:auto
   Dests: 3110:auto, 8670:gosub
-3110 G(6000) F(I) (0 10) X1 = C(C1, 1) + (C(C1 + 1, 1) - C(C1, 1)) * (C1 - INT(C1))
-     G(6000) F(I) (0 3) X = S1
-     G(6000) F(I) (0 3) Y = S2
+3110 G(6000) (0 10) X1 = C(C1, 1) + (C(C1 + 1, 1) - C(C1, 1)) * (C1 - INT(C1))
+     G(6000) (0 3) X = S1
+     G(6000) (0 3) Y = S2
   Origs: 3070:auto
   Dests: 3140:auto
-3140 G(6000) F(I) (0 10) X2 = C(C1, 2) + (C(C1 + 1, 2) - C(C1, 2)) * (C1 - INT(C1))
-     G(6000) F(I) (0 3) Q4 = Q1
-     G(6000) F(I) (0 3) Q5 = Q2
+3140 G(6000) (0 10) X2 = C(C1, 2) + (C(C1 + 1, 2) - C(C1, 2)) * (C1 - INT(C1))
+     G(6000) (0 3) Q4 = Q1
+     G(6000) (0 3) Q5 = Q2
   Origs: 3110:auto
   Dests: 3170:auto
-3170 G(6000) F(I,I) (1 3) FOR I = 1 TO N
+3170 G(6000) F(I) (1 3) FOR I = 1 TO N
      G(6000) F(I) (0 4) S1 = S1 + X1
      G(6000) F(I) (0 4) S2 = S2 + X2
      G(6000) F(I) (1 13) IF S1 < 1 OR S1 >= 9 OR S2 < 1 OR S2 >= 9 THEN 3500
@@ -633,8 +633,8 @@ Halstead complexity:
   Origs: 3320:auto
   Dests: 3370:goto
 3360 G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (0 4) S1 = INT(S1)
-     G(6000) F(I) (0 4) S2 = INT(S2)
+     G(6000) (0 4) S1 = INT(S1)
+     G(6000) (0 4) S2 = INT(S2)
   Origs: 3170:fornext, 3240:ifthen
   Dests: 3370:auto
 3370 G(6000) F(I) (0 3) A$ = "<*>"
@@ -763,7 +763,7 @@ Halstead complexity:
      G(6000) F(I) (0 2) PRINT O1$
   Origs: 4030:auto
   Dests: 4060:auto
-4060 G(6000) F(I,I) (1 5) FOR I = Q1 - 1 TO Q1 + 1
+4060 G(6000) F(I) (1 5) FOR I = Q1 - 1 TO Q1 + 1
      G(6000) F(I) (0 4) N(1) = -1
      G(6000) F(I) (0 4) N(2) = -2
      G(6000) F(I) (0 4) N(3) = -3
@@ -788,7 +788,7 @@ Halstead complexity:
      G(6000) F(I) (0 2) PRINT ":"
      G(6000) F(I) (0 2) PRINT O1$
      G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (0 3) GOTO 1990
+     G(6000) (0 3) GOTO 1990
      WARNING: Branch to line before GOSUB start
   Origs: 4060:fornext, 4180:fornext, 4180:goto, 4210:auto
   Dests: 1990:goto
@@ -834,7 +834,7 @@ Halstead complexity:
   Origs: 4400:auto
   Dests: 4450:auto
 4450 G(6000) F(I) (0 4) H1 = INT(X / K3)
-     G(6000) F(I,I) (1 3) FOR I = 1 TO 3
+     G(6000) F(I) (1 3) FOR I = 1 TO 3
      G(6000) F(I) (1 4) IF K(I, 3) <= 0 THEN 4670
   Origs: 4410:auto
   Dests: 4480:auto, 4670:fornext, 4670:ifthen
@@ -874,8 +874,8 @@ Halstead complexity:
   Origs: 4580:auto
   Dests: 4670:auto, 6370:ifthen
 4670 G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (0 2) GOSUB 6000
-     G(6000) F(I) (0 3) GOTO 1990
+     G(6000) (0 2) GOSUB 6000
+     G(6000) (0 3) GOTO 1990
      WARNING: Branch to line before GOSUB start
   Origs: 4450:fornext, 4450:ifthen, 4500:goto, 4560:goto, 4650:auto
   Dests: 1990:goto, 6000:gosub
@@ -952,12 +952,12 @@ Halstead complexity:
      G(6000) F(I) (1 4) IF K9 <= 0 THEN 6370
   Origs: 5060:auto
   Dests: 5150:auto, 6370:ifthen
-5150 G(6000) F(I,I) (1 3) FOR I = 1 TO 3
+5150 G(6000) F(I) (1 3) FOR I = 1 TO 3
      G(6000) F(I) (1 7) IF X3 = K(I, 1) AND Y3 = K(I, 2) THEN 5190
   Origs: 5110:auto
   Dests: 5180:auto, 5180:fornext, 5190:ifthen
 5180 G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (0 3) I = 3
+     G(6000) (0 3) I = 3
   Origs: 5150:auto, 5150:fornext
   Dests: 5190:auto
 5190 G(6000) F(I) (0 3) K(I, 3) = 0
@@ -1078,39 +1078,39 @@ Halstead complexity:
   Origs: 5690:auto
   Dests: 1990:ifthen, 5720:auto
 5720 G(6000) F(I) (0 3) D3 = 0
-     G(6000) F(I,I) (1 3) FOR I = 1 TO 8
+     G(6000) F(I) (1 3) FOR I = 1 TO 8
      G(6000) F(I) (1 7) IF D(I) < 0 THEN D3 = D3 + 0.1
   Origs: 5700:auto, 5950:ifthen
   Dests: 5760:auto, 5760:fornext
 5760 G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (1 5) IF D3 = 0 THEN 1990
+     G(6000) (1 5) IF D3 = 0 THEN 1990
      WARNING: Branch to line before GOSUB start
   Origs: 5720:auto, 5720:fornext
   Dests: 1990:ifthen, 5780:auto
-5780 G(6000) F(I) (0 2) PRINT
-     G(6000) F(I) (0 4) D3 = D3 + D4
-     G(6000) F(I) (1 6) IF D3 >= 1 THEN D3 = 0.9
+5780 G(6000) (0 2) PRINT
+     G(6000) (0 4) D3 = D3 + D4
+     G(6000) (1 6) IF D3 >= 1 THEN D3 = 0.9
   Origs: 5760:auto
   Dests: 5810:auto
-5810 G(6000) F(I) (0 2) PRINT "TECHNICIANS STANDING BY TO EFFECT REPAIRS TO YOUR SHIP;"
+5810 G(6000) (0 2) PRINT "TECHNICIANS STANDING BY TO EFFECT REPAIRS TO YOUR SHIP;"
   Origs: 5780:auto
   Dests: 5820:auto
-5820 G(6000) F(I) (0 6) PRINT "ESTIMATED TIME TO REPAIR:"; 0.01 * INT(100 * D3); "STARDATES"
+5820 G(6000) (0 6) PRINT "ESTIMATED TIME TO REPAIR:"; 0.01 * INT(100 * D3); "STARDATES"
   Origs: 5810:auto
   Dests: 5840:auto
-5840 G(6000) F(I) (1 2) INPUT "WILL YOU AUTHORIZE THE REPAIR ORDER (Y/N)"; A$
+5840 G(6000) (1 2) INPUT "WILL YOU AUTHORIZE THE REPAIR ORDER (Y/N)"; A$
   Origs: 5820:auto
   Dests: 5860:auto
-5860 G(6000) F(I) (1 5) IF A$ <> "Y" THEN 1990
+5860 G(6000) (1 5) IF A$ <> "Y" THEN 1990
      WARNING: Branch to line before GOSUB start
   Origs: 5840:auto
   Dests: 1990:ifthen, 5870:auto
-5870 G(6000) F(I,I) (1 3) FOR I = 1 TO 8
+5870 G(6000) F(I) (1 3) FOR I = 1 TO 8
      G(6000) F(I) (1 6) IF D(I) < 0 THEN D(I) = 0
   Origs: 5860:auto
   Dests: 5890:auto, 5890:fornext
 5890 G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (0 5) T = T + D3 + 0.1
+     G(6000) (0 5) T = T + D3 + 0.1
   Origs: 5870:auto, 5870:fornext
   Dests: 5910:auto
 5910 G(6000) F(I) (0 2) PRINT
@@ -1282,10 +1282,10 @@ Halstead complexity:
   Dests: 
 6770 G(6430) F(I,J) (0 3) O1$ = "---------------------------------"
      G(6430) F(I,J) (0 2) PRINT O1$
-     G(6430) F(I,J,I) (1 3) FOR I = 1 TO 8
+     G(6430) F(J,I) (1 3) FOR I = 1 TO 8
   Origs: 6720:ifthen
   Dests: 6820:fornext, 7260:fornext
-6820 G(6430) F(J,I,J) (1 10) FOR J = (I - 1) * 24 + 1 TO (I - 1) * 24 + 22 STEP 3
+6820 G(6430) F(I,J) (1 10) FOR J = (I - 1) * 24 + 1 TO (I - 1) * 24 + 22 STEP 3
      G(6430) F(I,J) (0 4) PRINT " "; MID$(Q$, J, 3);
      G(6430) F(I,J) (0 1) NEXT J
   Origs: 6770:fornext
@@ -1325,8 +1325,8 @@ Halstead complexity:
   Origs: 6830:goto
   Dests: 7260:auto
 7260 G(6430) F(I,J) (0 1) NEXT I
-     G(6430) F(I,J) (0 2) PRINT O1$
-     G(6430) F(I,J) (0 1) RETURN
+     G(6430) (0 2) PRINT O1$
+     G(6430) (0 1) RETURN
   Origs: 6770:fornext, 6850:goto, 6900:goto, 6960:goto, 7020:goto, 7070:goto, 7120:goto, 7180:goto, 7240:auto
   Dests: 
 7280 (0 1) REM LIBRARY COMPUTER CODE
@@ -1405,7 +1405,7 @@ Halstead complexity:
   Origs: 7550:auto
   Dests: 7570:auto
 7570 G(6000) F(I) (0 2) PRINT O1$
-     G(6000) F(I,I) (1 3) FOR I = 1 TO 8
+     G(6000) F(I) (1 3) FOR I = 1 TO 8
      G(6000) F(I) (0 2) PRINT I;
      G(6000) F(I) (1 4) IF H8 = 0 THEN 7740
   Origs: 7560:auto
@@ -1439,8 +1439,8 @@ Halstead complexity:
 7850 G(6000) F(I) (0 2) PRINT
      G(6000) F(I) (0 2) PRINT O1$
      G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (0 2) PRINT
-     G(6000) F(I) (0 3) GOTO 1990
+     G(6000) (0 2) PRINT
+     G(6000) (0 3) GOTO 1990
      WARNING: Branch to line before GOSUB start
   Origs: 7570:fornext, 7720:goto, 7800:auto
   Dests: 1990:goto
@@ -1493,7 +1493,7 @@ Halstead complexity:
   Origs: 8080:auto
   Dests: 8100:auto
 8100 G(6000) F(I) (0 3) H8 = 0
-     G(6000) F(I,I) (1 3) FOR I = 1 TO 3
+     G(6000) F(I) (1 3) FOR I = 1 TO 3
      G(6000) F(I) (1 4) IF K(I, 3) <= 0 THEN 8480
   Origs: 8090:auto
   Dests: 8110:auto, 8480:fornext, 8480:ifthen
@@ -1575,7 +1575,7 @@ Halstead complexity:
   Origs: 8310:goto, 8330:goto, 8430:goto, 8450:auto
   Dests: 1990:ifthen, 8480:auto
 8480 G(6000) F(I) (0 1) NEXT I
-     G(6000) F(I) (0 3) GOTO 1990
+     G(6000) (0 3) GOTO 1990
      WARNING: Branch to line before GOSUB start
   Origs: 8100:fornext, 8100:ifthen, 8460:auto
   Dests: 1990:goto

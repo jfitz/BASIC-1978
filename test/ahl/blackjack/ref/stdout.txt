@@ -207,8 +207,8 @@ Error 102 End of file in line 1890
      F(I) (8) T(I) = 0
      F(I) (8) NEXT I
 1800 (1) D1 = N + 1
-1810 F(I) (3) IF 2 * D1 + C >= 52 THEN GOSUB 120
-1820 F(I) (3) IF C = 2 THEN C = C - 1
+1810 (3) IF 2 * D1 + C >= 52 THEN GOSUB 120
+1820 (3) IF C = 2 THEN C = C - 1
 1830 F(I) (3) FOR I = 1 TO N
      F(I) (6) Z(I) = 0
      F(I) (6) NEXT I
@@ -378,7 +378,7 @@ Error 102 End of file in line 1890
 3150 (0) REM
 3160 F(I) (2) Z$ = "LOSES PUSHES WINS "
 3165 F(I) (2) PRINT
-3170 F(I,I) (2) FOR I = 1 TO N
+3170 F(I) (2) FOR I = 1 TO N
 3180 F(I) (4) AA = Q(I)
      F(I) (4) GOSUB 3400
 3182 F(I) (4) AB = Q(I + D1)
@@ -401,10 +401,10 @@ Error 102 End of file in line 1890
 3310 F(I) (4) GOSUB 1200
 3320 F(I) (4) I = I - D1
 3330 F(I) (4) NEXT I
-3340 F(I) (2) PRINT "DEALER'S TOTAL="; T(D1)
-3345 F(I) (2) PRINT
-3350 F(I) (2) GOSUB 1200
-3360 F(I) (2) GOTO 1810
+3340 (2) PRINT "DEALER'S TOTAL="; T(D1)
+3345 (2) PRINT
+3350 (2) GOSUB 1200
+3360 (2) GOTO 1810
 3400 G(3400) (15) AA = AA + 11 * (AA >= 22)
      G(3400) (15) RETURN
 3410 G(3410) (4) AB = AB + 11 * (AB >= 22)

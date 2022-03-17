@@ -111,95 +111,95 @@ Halstead complexity:
 350 F(J,K) (0 1) NEXT J
   Origs: 280:fornext, 295:ifthen, 340:auto
   Dests: 360:auto
-360 (0 4) P = P + 1
+360 F(K) (0 4) P = P + 1
   Origs: 350:auto, 570:ifthen
   Dests: 370:auto
-370 (0 3) M1 = L(P)
+370 F(K) (0 3) M1 = L(P)
   Origs: 360:auto
   Dests: 380:auto
-380 (0 4) P = P + 1
+380 F(K) (0 4) P = P + 1
   Origs: 370:auto
   Dests: 390:auto
-390 (0 3) M2 = L(P)
+390 F(K) (0 3) M2 = L(P)
   Origs: 380:auto
   Dests: 400:auto
-400 (0 2) PRINT
+400 F(K) (0 2) PRINT
   Origs: 390:auto
   Dests: 420:auto
-420 (0 5) PRINT "YOU: "; A$(M1), "COMPUTER: "; A$(M2)
+420 F(K) (0 5) PRINT "YOU: "; A$(M1), "COMPUTER: "; A$(M2)
   Origs: 400:auto
   Dests: 430:auto
-430 (0 4) N1 = INT((M1 - 0.5) / 4)
+430 F(K) (0 4) N1 = INT((M1 - 0.5) / 4)
   Origs: 420:auto
   Dests: 440:auto
-440 (0 4) N2 = INT((M2 - 0.5) / 4)
+440 F(K) (0 4) N2 = INT((M2 - 0.5) / 4)
   Origs: 430:auto
   Dests: 450:auto
-450 (1 4) IF N1 >= N2 THEN 490
+450 F(K) (1 4) IF N1 >= N2 THEN 490
   Origs: 440:auto
   Dests: 460:auto, 490:ifthen
-460 (0 4) A1 = A1 + 1
+460 F(K) (0 4) A1 = A1 + 1
   Origs: 450:auto
   Dests: 470:auto
-470 (0 5) PRINT "THE COMPUTER WINS!!! YOU HAVE"; B1; "AND THE COMPUTER HAS"; A1
+470 F(K) (0 5) PRINT "THE COMPUTER WINS!!! YOU HAVE"; B1; "AND THE COMPUTER HAS"; A1
   Origs: 460:auto
   Dests: 480:auto
-480 (0 2) GOTO 540
+480 F(K) (0 2) GOTO 540
   Origs: 470:auto
   Dests: 540:goto
-490 (1 4) IF N1 = N2 THEN 530
+490 F(K) (1 4) IF N1 = N2 THEN 530
   Origs: 450:ifthen
   Dests: 500:auto, 530:ifthen
-500 (0 4) B1 = B1 + 1
+500 F(K) (0 4) B1 = B1 + 1
   Origs: 490:auto
   Dests: 510:auto
-510 (0 5) PRINT "YOU WIN. YOU HAVE"; B1; "AND THE COMPUTER HAS"; A1
+510 F(K) (0 5) PRINT "YOU WIN. YOU HAVE"; B1; "AND THE COMPUTER HAS"; A1
   Origs: 500:auto
   Dests: 520:auto
-520 (0 2) GOTO 540
+520 F(K) (0 2) GOTO 540
   Origs: 510:auto
   Dests: 540:goto
-530 (0 2) PRINT "TIE.  NO SCORE CHANGE."
+530 F(K) (0 2) PRINT "TIE.  NO SCORE CHANGE."
   Origs: 490:ifthen
   Dests: 540:auto
-540 (1 4) IF L(P + 1) = 0 THEN 610
+540 F(K) (1 4) IF L(P + 1) = 0 THEN 610
   Origs: 480:goto, 520:goto, 530:auto, 600:goto
   Dests: 550:auto, 610:ifthen
-550 (0 2) PRINT "DO YOU WANT TO CONTINUE";
+550 F(K) (0 2) PRINT "DO YOU WANT TO CONTINUE";
   Origs: 540:auto
   Dests: 560:auto
-560 (1 2) INPUT V$
+560 F(K) (1 2) INPUT V$
   Origs: 550:auto
   Dests: 570:auto
-570 (1 5) IF V$ = "YES" THEN 360
+570 F(K) (1 5) IF V$ = "YES" THEN 360
   Origs: 560:auto
   Dests: 360:ifthen, 580:auto
-580 (1 4) IF V$ = "NO" THEN 650
+580 F(K) (1 4) IF V$ = "NO" THEN 650
   Origs: 570:auto
   Dests: 590:auto, 650:ifthen
-590 (0 2) PRINT "YES OR NO, PLEASE.  ";
+590 F(K) (0 2) PRINT "YES OR NO, PLEASE.  ";
   Origs: 580:auto
   Dests: 600:auto
-600 (0 3) GOTO 540
+600 F(K) (0 3) GOTO 540
   Origs: 590:auto
   Dests: 540:goto
-610 (0 2) PRINT
+610 F(K) (0 2) PRINT
   Origs: 540:ifthen
   Dests: 620:auto
-620 (0 2) PRINT
+620 F(K) (0 2) PRINT
   Origs: 610:auto
   Dests: 630:auto
-630 (0 3) PRINT "WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: "; B1;
+630 F(K) (0 3) PRINT "WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: "; B1;
   Origs: 620:auto
   Dests: 640:auto
-640 (0 3) PRINT "  THE COMPUTER: "; A1
-    (0 2) PRINT
+640 F(K) (0 3) PRINT "  THE COMPUTER: "; A1
+    F(K) (0 2) PRINT
   Origs: 630:auto
   Dests: 650:auto
-650 (0 2) PRINT "THANKS FOR PLAYING.  IT WAS FUN."
+650 F(K) (0 2) PRINT "THANKS FOR PLAYING.  IT WAS FUN."
   Origs: 580:ifthen, 640:auto
   Dests: 655:auto
-655 (0 2) PRINT
+655 F(K) (0 2) PRINT
   Origs: 650:auto
   Dests: 999:auto
 660 (0 2) DATA "S-2", "H-2", "C-2", "D-2", "S-3", "H-3", "C-3", "D-3"
@@ -223,7 +223,8 @@ Halstead complexity:
 720 (0 2) DATA "S-A", "H-A", "C-A", "D-A"
   Origs: 
   Dests: 
-999 (0 1) END
+999 F(K) (0 1) END
+    WARNING: Terminating statement in FOR/NEXT
   Origs: 655:auto
   Dests: :stop
 

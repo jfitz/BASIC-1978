@@ -23,7 +23,7 @@ WOULD YOU LIKE THE RULES (YES OR NO)NO
 90 IF LEFT$(A$, 1) = "N" THEN 150
  A$: "NO"
  LEFT$(A$, 1) = "N": true
-150 F(I) FOR I = 1 TO 3
+150 F(I,J) FOR I = 1 TO 3
  I = 1
  terminated:false
 160 F(I,J) A(I) = INT(10 * RND(1))
@@ -93,47 +93,47 @@ WOULD YOU LIKE THE RULES (YES OR NO)NO
 200 F(I,J) NEXT I
  I: 3
  terminated:true
-210 PRINT
+210 F(J) PRINT
 
-210.1 PRINT "O.K.  I HAVE A NUMBER IN MIND."
+210.1 F(J) PRINT "O.K.  I HAVE A NUMBER IN MIND."
 O.K.  I HAVE A NUMBER IN MIND.
-220 F(I) FOR I = 1 TO 20
+220 F(J,I) FOR I = 1 TO 20
  I = 1
  terminated:false
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 1
  1              
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 123
  A$ = "123"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "123"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "123"
  A1(1) = 49
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "123"
  A1(2) = 50
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "123"
  A1(3) = 51
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -143,15 +143,15 @@ GUESS #
  J: 1
  A1(1): 49
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 49
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 49
  B(1) = 1
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -159,15 +159,15 @@ GUESS #
  J: 2
  A1(2): 50
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 50
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 50
  B(2) = 2
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -175,33 +175,33 @@ GUESS #
  J: 3
  A1(3): 51
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 51
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 51
  B(3) = 3
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 1
  B(2): 2
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 2
  B(3): 3
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 3
  B(1): 1
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -211,12 +211,12 @@ GUESS #
  A(1): 4
  B(2): 2
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 1
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -225,19 +225,19 @@ GUESS #
  A(2): 7
  B(3): 3
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 2
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 3
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 1
  A(3) <> B(1): true
@@ -249,7 +249,7 @@ GUESS #
  A(1): 4
  B(1): 1
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -258,7 +258,7 @@ GUESS #
  A(2): 7
  B(2): 2
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -267,64 +267,64 @@ GUESS #
  A(3): 0
  B(3): 3
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 0
  C = 0: true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 0
  D: 0
  C + D <> 0: false
-590 F(I) PRINT "BAGELS";
+590 F(J,I) PRINT "BAGELS";
 BAGELS
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 1
  terminated:false
  I = 2
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 2
  2              
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 456
  A$ = "456"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "456"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "456"
  A1(1) = 52
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "456"
  A1(2) = 53
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "456"
  A1(3) = 54
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -334,15 +334,15 @@ GUESS #
  J: 1
  A1(1): 52
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 52
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 52
  B(1) = 4
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -350,15 +350,15 @@ GUESS #
  J: 2
  A1(2): 53
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 53
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 53
  B(2) = 5
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -366,33 +366,33 @@ GUESS #
  J: 3
  A1(3): 54
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 54
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 54
  B(3) = 6
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 4
  B(2): 5
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 5
  B(3): 6
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 6
  B(1): 4
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -402,12 +402,12 @@ GUESS #
  A(1): 4
  B(2): 5
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 4
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -416,19 +416,19 @@ GUESS #
  A(2): 7
  B(3): 6
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 5
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 6
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 4
  A(3) <> B(1): true
@@ -440,10 +440,10 @@ GUESS #
  A(1): 4
  B(1): 4
  A(J) <> B(J): false
-480 F(I,J) D = D + 1
+480 F(J,I) D = D + 1
  D: 0
  D = 1
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -452,7 +452,7 @@ GUESS #
  A(2): 7
  B(2): 5
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -461,16 +461,16 @@ GUESS #
  A(3): 0
  B(3): 6
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 1
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 0
  C = 0: true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 1
  D = 0: false
 550 F(I,J) FOR J = 1 TO D
@@ -480,53 +480,53 @@ GUESS #
  terminated:false
 560 F(I,J) PRINT "FERMI ";
 FERMI 
-570 F(I,J) NEXT J
+570 F(J,I) NEXT J
  J: 1
  terminated:true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 0
  D: 1
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 2
  terminated:false
  I = 3
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 3
  3              
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 789
  A$ = "789"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "789"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "789"
  A1(1) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "789"
  A1(2) = 56
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "789"
  A1(3) = 57
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -536,15 +536,15 @@ GUESS #
  J: 1
  A1(1): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 55
  B(1) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -552,15 +552,15 @@ GUESS #
  J: 2
  A1(2): 56
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 56
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 56
  B(2) = 8
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -568,33 +568,33 @@ GUESS #
  J: 3
  A1(3): 57
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 57
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 57
  B(3) = 9
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 7
  B(2): 8
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 8
  B(3): 9
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 9
  B(1): 7
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -604,15 +604,15 @@ GUESS #
  A(1): 4
  B(2): 8
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 7
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 0
  C = 1
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -621,19 +621,19 @@ GUESS #
  A(2): 7
  B(3): 9
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 8
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 9
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 7
  A(3) <> B(1): true
@@ -645,7 +645,7 @@ GUESS #
  A(1): 4
  B(1): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -654,7 +654,7 @@ GUESS #
  A(2): 7
  B(2): 8
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -663,13 +663,13 @@ GUESS #
  A(3): 0
  B(3): 9
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 1
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -679,56 +679,56 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 1
  D: 0
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 3
  terminated:false
  I = 4
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 4
  4              
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 567
  A$ = "567"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "567"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "567"
  A1(1) = 53
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "567"
  A1(2) = 54
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "567"
  A1(3) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -738,15 +738,15 @@ GUESS #
  J: 1
  A1(1): 53
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 53
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 53
  B(1) = 5
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -754,15 +754,15 @@ GUESS #
  J: 2
  A1(2): 54
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 54
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 54
  B(2) = 6
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -770,33 +770,33 @@ GUESS #
  J: 3
  A1(3): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 55
  B(3) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 5
  B(2): 6
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 6
  B(3): 7
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 7
  B(1): 5
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -806,12 +806,12 @@ GUESS #
  A(1): 4
  B(2): 6
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 5
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -820,22 +820,22 @@ GUESS #
  A(2): 7
  B(3): 7
  A(J) <> B(J + 1): false
-380 F(I,J) C = C + 1
+380 F(J,I) C = C + 1
  C: 0
  C = 1
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 6
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 7
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 5
  A(3) <> B(1): true
@@ -847,7 +847,7 @@ GUESS #
  A(1): 4
  B(1): 5
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -856,7 +856,7 @@ GUESS #
  A(2): 7
  B(2): 6
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -865,13 +865,13 @@ GUESS #
  A(3): 0
  B(3): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 1
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -881,56 +881,56 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 1
  D: 0
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 4
  terminated:false
  I = 5
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 5
  5              
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 589
  A$ = "589"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "589"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "589"
  A1(1) = 53
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "589"
  A1(2) = 56
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "589"
  A1(3) = 57
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -940,15 +940,15 @@ GUESS #
  J: 1
  A1(1): 53
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 53
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 53
  B(1) = 5
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -956,15 +956,15 @@ GUESS #
  J: 2
  A1(2): 56
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 56
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 56
  B(2) = 8
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -972,33 +972,33 @@ GUESS #
  J: 3
  A1(3): 57
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 57
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 57
  B(3) = 9
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 5
  B(2): 8
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 8
  B(3): 9
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 9
  B(1): 5
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -1008,12 +1008,12 @@ GUESS #
  A(1): 4
  B(2): 8
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 5
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1022,19 +1022,19 @@ GUESS #
  A(2): 7
  B(3): 9
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 8
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 9
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 5
  A(3) <> B(1): true
@@ -1046,7 +1046,7 @@ GUESS #
  A(1): 4
  B(1): 5
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1055,7 +1055,7 @@ GUESS #
  A(2): 7
  B(2): 8
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1064,64 +1064,64 @@ GUESS #
  A(3): 0
  B(3): 9
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 0
  C = 0: true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 0
  D: 0
  C + D <> 0: false
-590 F(I) PRINT "BAGELS";
+590 F(J,I) PRINT "BAGELS";
 BAGELS
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 5
  terminated:false
  I = 6
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 6
  6              
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 467
  A$ = "467"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "467"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "467"
  A1(1) = 52
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "467"
  A1(2) = 54
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "467"
  A1(3) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -1131,15 +1131,15 @@ GUESS #
  J: 1
  A1(1): 52
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 52
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 52
  B(1) = 4
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1147,15 +1147,15 @@ GUESS #
  J: 2
  A1(2): 54
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 54
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 54
  B(2) = 6
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1163,33 +1163,33 @@ GUESS #
  J: 3
  A1(3): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 55
  B(3) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 4
  B(2): 6
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 6
  B(3): 7
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 7
  B(1): 4
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -1199,12 +1199,12 @@ GUESS #
  A(1): 4
  B(2): 6
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 4
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1213,22 +1213,22 @@ GUESS #
  A(2): 7
  B(3): 7
  A(J) <> B(J + 1): false
-380 F(I,J) C = C + 1
+380 F(J,I) C = C + 1
  C: 0
  C = 1
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 6
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 7
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 4
  A(3) <> B(1): true
@@ -1240,10 +1240,10 @@ GUESS #
  A(1): 4
  B(1): 4
  A(J) <> B(J): false
-480 F(I,J) D = D + 1
+480 F(J,I) D = D + 1
  D: 0
  D = 1
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1252,7 +1252,7 @@ GUESS #
  A(2): 7
  B(2): 6
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1261,13 +1261,13 @@ GUESS #
  A(3): 0
  B(3): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 1
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 1
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -1277,10 +1277,10 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 1
  D = 0: false
 550 F(I,J) FOR J = 1 TO D
@@ -1290,53 +1290,53 @@ PICO
  terminated:false
 560 F(I,J) PRINT "FERMI ";
 FERMI 
-570 F(I,J) NEXT J
+570 F(J,I) NEXT J
  J: 1
  terminated:true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 1
  D: 1
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 6
  terminated:false
  I = 7
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 7
  7              
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 764
  A$ = "764"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "764"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "764"
  A1(1) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "764"
  A1(2) = 54
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "764"
  A1(3) = 52
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -1346,15 +1346,15 @@ GUESS #
  J: 1
  A1(1): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 55
  B(1) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1362,15 +1362,15 @@ GUESS #
  J: 2
  A1(2): 54
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 54
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 54
  B(2) = 6
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1378,33 +1378,33 @@ GUESS #
  J: 3
  A1(3): 52
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 52
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 52
  B(3) = 4
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 7
  B(2): 6
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 6
  B(3): 4
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 4
  B(1): 7
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -1414,15 +1414,15 @@ GUESS #
  A(1): 4
  B(2): 6
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 7
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 0
  C = 1
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1431,22 +1431,22 @@ GUESS #
  A(2): 7
  B(3): 4
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 6
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 4
  A(1) <> B(3): false
-430 F(I) C = C + 1
+430 F(J,I) C = C + 1
  C: 1
  C = 2
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 7
  A(3) <> B(1): true
@@ -1458,7 +1458,7 @@ GUESS #
  A(1): 4
  B(1): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1467,7 +1467,7 @@ GUESS #
  A(2): 7
  B(2): 6
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1476,13 +1476,13 @@ GUESS #
  A(3): 0
  B(3): 4
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 2
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -1492,62 +1492,62 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 2
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 2
  D: 0
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 7
  terminated:false
  I = 8
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 8
  8              
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 763
  A$ = "763"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "763"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "763"
  A1(1) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "763"
  A1(2) = 54
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "763"
  A1(3) = 51
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -1557,15 +1557,15 @@ GUESS #
  J: 1
  A1(1): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 55
  B(1) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1573,15 +1573,15 @@ GUESS #
  J: 2
  A1(2): 54
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 54
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 54
  B(2) = 6
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1589,33 +1589,33 @@ GUESS #
  J: 3
  A1(3): 51
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 51
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 51
  B(3) = 3
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 7
  B(2): 6
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 6
  B(3): 3
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 3
  B(1): 7
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -1625,15 +1625,15 @@ GUESS #
  A(1): 4
  B(2): 6
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 7
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 0
  C = 1
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1642,19 +1642,19 @@ GUESS #
  A(2): 7
  B(3): 3
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 6
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 3
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 7
  A(3) <> B(1): true
@@ -1666,7 +1666,7 @@ GUESS #
  A(1): 4
  B(1): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1675,7 +1675,7 @@ GUESS #
  A(2): 7
  B(2): 6
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1684,13 +1684,13 @@ GUESS #
  A(3): 0
  B(3): 3
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 1
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -1700,56 +1700,56 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 1
  D: 0
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 8
  terminated:false
  I = 9
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 9
  9              
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 768
  A$ = "768"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "768"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "768"
  A1(1) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "768"
  A1(2) = 54
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "768"
  A1(3) = 56
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -1759,15 +1759,15 @@ GUESS #
  J: 1
  A1(1): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 55
  B(1) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1775,15 +1775,15 @@ GUESS #
  J: 2
  A1(2): 54
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 54
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 54
  B(2) = 6
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1791,33 +1791,33 @@ GUESS #
  J: 3
  A1(3): 56
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 56
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 56
  B(3) = 8
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 7
  B(2): 6
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 6
  B(3): 8
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 8
  B(1): 7
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -1827,15 +1827,15 @@ GUESS #
  A(1): 4
  B(2): 6
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 7
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 0
  C = 1
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1844,19 +1844,19 @@ GUESS #
  A(2): 7
  B(3): 8
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 6
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 8
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 7
  A(3) <> B(1): true
@@ -1868,7 +1868,7 @@ GUESS #
  A(1): 4
  B(1): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1877,7 +1877,7 @@ GUESS #
  A(2): 7
  B(2): 6
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1886,13 +1886,13 @@ GUESS #
  A(3): 0
  B(3): 8
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 1
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -1902,56 +1902,56 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 1
  D: 0
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 9
  terminated:false
  I = 10
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 10
  10             
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 702
  A$ = "702"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "702"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "702"
  A1(1) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "702"
  A1(2) = 48
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "702"
  A1(3) = 50
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -1961,15 +1961,15 @@ GUESS #
  J: 1
  A1(1): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 55
  B(1) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -1977,15 +1977,15 @@ GUESS #
  J: 2
  A1(2): 48
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 48
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 48
  B(2) = 0
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -1993,33 +1993,33 @@ GUESS #
  J: 3
  A1(3): 50
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 50
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 50
  B(3) = 2
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 7
  B(2): 0
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 0
  B(3): 2
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 2
  B(1): 7
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -2029,15 +2029,15 @@ GUESS #
  A(1): 4
  B(2): 0
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 7
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 0
  C = 1
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2046,22 +2046,22 @@ GUESS #
  A(2): 7
  B(3): 2
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 0
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 1
  C = 2
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 2
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 7
  A(3) <> B(1): true
@@ -2073,7 +2073,7 @@ GUESS #
  A(1): 4
  B(1): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2082,7 +2082,7 @@ GUESS #
  A(2): 7
  B(2): 0
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -2091,13 +2091,13 @@ GUESS #
  A(3): 0
  B(3): 2
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 2
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -2107,62 +2107,62 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 2
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 2
  D: 0
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 10
  terminated:false
  I = 11
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 11
  11             
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 703
  A$ = "703"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "703"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "703"
  A1(1) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "703"
  A1(2) = 48
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "703"
  A1(3) = 51
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -2172,15 +2172,15 @@ GUESS #
  J: 1
  A1(1): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 55
  B(1) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2188,15 +2188,15 @@ GUESS #
  J: 2
  A1(2): 48
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 48
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 48
  B(2) = 0
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -2204,33 +2204,33 @@ GUESS #
  J: 3
  A1(3): 51
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 51
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 51
  B(3) = 3
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 7
  B(2): 0
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 0
  B(3): 3
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 3
  B(1): 7
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -2240,15 +2240,15 @@ GUESS #
  A(1): 4
  B(2): 0
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 7
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 0
  C = 1
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2257,22 +2257,22 @@ GUESS #
  A(2): 7
  B(3): 3
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 0
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 1
  C = 2
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 3
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 7
  A(3) <> B(1): true
@@ -2284,7 +2284,7 @@ GUESS #
  A(1): 4
  B(1): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2293,7 +2293,7 @@ GUESS #
  A(2): 7
  B(2): 0
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -2302,13 +2302,13 @@ GUESS #
  A(3): 0
  B(3): 3
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 2
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -2318,62 +2318,62 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 2
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 2
  D: 0
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 11
  terminated:false
  I = 12
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 12
  12             
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 704
  A$ = "704"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "704"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "704"
  A1(1) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "704"
  A1(2) = 48
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "704"
  A1(3) = 52
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -2383,15 +2383,15 @@ GUESS #
  J: 1
  A1(1): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 55
  B(1) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2399,15 +2399,15 @@ GUESS #
  J: 2
  A1(2): 48
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 48
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 48
  B(2) = 0
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -2415,33 +2415,33 @@ GUESS #
  J: 3
  A1(3): 52
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 52
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 52
  B(3) = 4
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 7
  B(2): 0
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 0
  B(3): 4
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 4
  B(1): 7
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -2451,15 +2451,15 @@ GUESS #
  A(1): 4
  B(2): 0
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 7
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 0
  C = 1
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2468,25 +2468,25 @@ GUESS #
  A(2): 7
  B(3): 4
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 0
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 1
  C = 2
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 4
  A(1) <> B(3): false
-430 F(I) C = C + 1
+430 F(J,I) C = C + 1
  C: 2
  C = 3
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 7
  A(3) <> B(1): true
@@ -2498,7 +2498,7 @@ GUESS #
  A(1): 4
  B(1): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2507,7 +2507,7 @@ GUESS #
  A(2): 7
  B(2): 0
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -2516,13 +2516,13 @@ GUESS #
  A(3): 0
  B(3): 4
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 0
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 3
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -2532,68 +2532,68 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 3
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 0
  D = 0: true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 3
  D: 0
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 12
  terminated:false
  I = 13
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 13
  13             
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 407
  A$ = "407"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "407"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "407"
  A1(1) = 52
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "407"
  A1(2) = 48
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "407"
  A1(3) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -2603,15 +2603,15 @@ GUESS #
  J: 1
  A1(1): 52
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 52
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 52
  B(1) = 4
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2619,15 +2619,15 @@ GUESS #
  J: 2
  A1(2): 48
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 48
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 48
  B(2) = 0
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -2635,33 +2635,33 @@ GUESS #
  J: 3
  A1(3): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 55
  B(3) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 4
  B(2): 0
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 0
  B(3): 7
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 7
  B(1): 4
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -2671,12 +2671,12 @@ GUESS #
  A(1): 4
  B(2): 0
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 4
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2685,25 +2685,25 @@ GUESS #
  A(2): 7
  B(3): 7
  A(J) <> B(J + 1): false
-380 F(I,J) C = C + 1
+380 F(J,I) C = C + 1
  C: 0
  C = 1
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 0
  A(J + 1) <> B(J): false
-400 F(I,J) C = C + 1
+400 F(J,I) C = C + 1
  C: 1
  C = 2
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 7
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 4
  A(3) <> B(1): true
@@ -2715,10 +2715,10 @@ GUESS #
  A(1): 4
  B(1): 4
  A(J) <> B(J): false
-480 F(I,J) D = D + 1
+480 F(J,I) D = D + 1
  D: 0
  D = 1
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2727,7 +2727,7 @@ GUESS #
  A(2): 7
  B(2): 0
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -2736,13 +2736,13 @@ GUESS #
  A(3): 0
  B(3): 7
  A(J) <> B(J): true
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 1
  D = 3: false
-505 F(I) IF C = 0 THEN 545
+505 F(J,I) IF C = 0 THEN 545
  C: 2
  C = 0: false
 520 F(I,J) FOR J = 1 TO C
@@ -2752,16 +2752,16 @@ GUESS #
  terminated:false
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
 530 F(I,J) PRINT "PICO ";
 PICO 
-540 F(I,J) NEXT J
+540 F(J,I) NEXT J
  J: 2
  terminated:true
-545 F(I) IF D = 0 THEN 580
+545 F(J,I) IF D = 0 THEN 580
  D: 1
  D = 0: false
 550 F(I,J) FOR J = 1 TO D
@@ -2771,53 +2771,53 @@ PICO
  terminated:false
 560 F(I,J) PRINT "FERMI ";
 FERMI 
-570 F(I,J) NEXT J
+570 F(J,I) NEXT J
  J: 1
  terminated:true
-580 F(I) IF C + D <> 0 THEN 600
+580 F(J,I) IF C + D <> 0 THEN 600
  C: 2
  D: 1
  C + D <> 0: true
-600 F(I) PRINT
+600 F(J,I) PRINT
 
-605 F(I) NEXT I
+605 F(J,I) NEXT I
  I: 13
  terminated:false
  I = 14
-230 F(I,J) PRINT "GUESS #"; I,
+230 F(J,I) PRINT "GUESS #"; I,
 GUESS #
  I: 14
  14             
-240 F(I,J) INPUT A$
+240 F(J,I) INPUT A$
 ? 470
  A$ = "470"
-245 F(I,J) IF LEN(A$) <> 3 THEN 630
+245 F(J,I) IF LEN(A$) <> 3 THEN 630
  A$: "470"
  LEN(A$) <> 3: false
-250 F(I,Z,J) FOR Z = 1 TO 3
+250 F(J,I,Z) FOR Z = 1 TO 3
  Z = 1
  terminated:false
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 1
  A$: "470"
  A1(1) = 52
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 1
  terminated:false
  Z = 2
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 2
  A$: "470"
  A1(2) = 55
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 2
  terminated:false
  Z = 3
-250.1 F(I,Z,J) A1(Z) = ASC(MID$(A$, Z, 1))
+250.1 F(J,I,Z) A1(Z) = ASC(MID$(A$, Z, 1))
  Z: 3
  A$: "470"
  A1(3) = 48
-250.2 F(I,Z,J) NEXT Z
+250.2 F(J,I,Z) NEXT Z
  Z: 3
  terminated:true
 260 F(I,J) FOR J = 1 TO 3
@@ -2827,15 +2827,15 @@ GUESS #
  J: 1
  A1(1): 52
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 1
  A1(1): 52
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 1
  A1(1): 52
  B(1) = 4
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2843,15 +2843,15 @@ GUESS #
  J: 2
  A1(2): 55
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 2
  A1(2): 55
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 2
  A1(2): 55
  B(2) = 7
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -2859,33 +2859,33 @@ GUESS #
  J: 3
  A1(3): 48
  A1(J) < 48: false
-280 F(I,J) IF A1(J) > 57 THEN 300
+280 F(J,I) IF A1(J) > 57 THEN 300
  J: 3
  A1(3): 48
  A1(J) > 57: false
-285 F(I,J) B(J) = A1(J) - 48
+285 F(J,I) B(J) = A1(J) - 48
  J: 3
  A1(3): 48
  B(3) = 0
-290 F(I,J) NEXT J
+290 F(J,I) NEXT J
  J: 3
  terminated:true
-295 F(I) GOTO 320
-320 F(I) IF B(1) = B(2) THEN 650
+295 F(J,I) GOTO 320
+320 F(J,I) IF B(1) = B(2) THEN 650
  B(1): 4
  B(2): 7
  B(1) = B(2): false
-330 F(I) IF B(2) = B(3) THEN 650
+330 F(J,I) IF B(2) = B(3) THEN 650
  B(2): 7
  B(3): 0
  B(2) = B(3): false
-340 F(I) IF B(3) = B(1) THEN 650
+340 F(J,I) IF B(3) = B(1) THEN 650
  B(3): 0
  B(1): 4
  B(3) = B(1): false
-350 F(I) C = 0
+350 F(J,I) C = 0
  C = 0
-350.1 F(I) D = 0
+350.1 F(J,I) D = 0
  D = 0
 360 F(I,J) FOR J = 1 TO 2
  J = 1
@@ -2895,12 +2895,12 @@ GUESS #
  A(1): 4
  B(2): 7
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 1
  A(2): 7
  B(1): 4
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2909,19 +2909,19 @@ GUESS #
  A(2): 7
  B(3): 0
  A(J) <> B(J + 1): true
-390 F(I,J) IF A(J + 1) <> B(J) THEN 410
+390 F(J,I) IF A(J + 1) <> B(J) THEN 410
  J: 2
  A(3): 0
  B(2): 7
  A(J + 1) <> B(J): true
-410 F(I,J) NEXT J
+410 F(J,I) NEXT J
  J: 2
  terminated:true
-420 F(I) IF A(1) <> B(3) THEN 440
+420 F(J,I) IF A(1) <> B(3) THEN 440
  A(1): 4
  B(3): 0
  A(1) <> B(3): true
-440 F(I) IF A(3) <> B(1) THEN 460
+440 F(J,I) IF A(3) <> B(1) THEN 460
  A(3): 0
  B(1): 4
  A(3) <> B(1): true
@@ -2933,10 +2933,10 @@ GUESS #
  A(1): 4
  B(1): 4
  A(J) <> B(J): false
-480 F(I,J) D = D + 1
+480 F(J,I) D = D + 1
  D: 0
  D = 1
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 1
  terminated:false
  J = 2
@@ -2945,10 +2945,10 @@ GUESS #
  A(2): 7
  B(2): 7
  A(J) <> B(J): false
-480 F(I,J) D = D + 1
+480 F(J,I) D = D + 1
  D: 1
  D = 2
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 2
  terminated:false
  J = 3
@@ -2957,39 +2957,39 @@ GUESS #
  A(3): 0
  B(3): 0
  A(J) <> B(J): false
-480 F(I,J) D = D + 1
+480 F(J,I) D = D + 1
  D: 2
  D = 3
-490 F(I,J) NEXT J
+490 F(J,I) NEXT J
  J: 3
  terminated:true
-500 F(I) IF D = 3 THEN 680
+500 F(J,I) IF D = 3 THEN 680
  D: 3
  D = 3: true
-680 F(I) PRINT "YOU GOT IT!!!"
+680 F(J,I) PRINT "YOU GOT IT!!!"
 YOU GOT IT!!!
-680.1 F(I) PRINT
+680.1 F(J,I) PRINT
 
-690 F(I) Y = Y + 1
+690 F(J,I) Y = Y + 1
  Y: 0
  Y = 1
-700 F(I) INPUT "PLAY AGAIN (YES OR NO)"; A$
+700 F(J,I) INPUT "PLAY AGAIN (YES OR NO)"; A$
 PLAY AGAIN (YES OR NO)NO
  A$ = "NO"
-720 F(I) IF LEFT$(A$, 1) = "YES" THEN 150
+720 F(J,I) IF LEFT$(A$, 1) = "YES" THEN 150
  A$: "NO"
  LEFT$(A$, 1) = "YES": false
-730 F(I) IF Y = 0 THEN 750
+730 F(J,I) IF Y = 0 THEN 750
  Y: 1
  Y = 0: false
-740 F(I) PRINT
+740 F(J,I) PRINT
 
-740.1 F(I) PRINT "A"; Y; "POINT BAGELS BUFF!!"
+740.1 F(J,I) PRINT "A"; Y; "POINT BAGELS BUFF!!"
 A
  Y: 1
  1 POINT BAGELS BUFF!!
-750 F(I) PRINT "HOPE YOU HAD FUN.  BYE."
+750 F(J,I) PRINT "HOPE YOU HAD FUN.  BYE."
 HOPE YOU HAD FUN.  BYE.
-999 F(I) END
+999 F(J,I) END
 STOP in line 999
 

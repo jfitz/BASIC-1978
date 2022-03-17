@@ -123,34 +123,34 @@ Halstead complexity:
 390 F(I) (0 1) NEXT I
   Origs: 350:fornext, 380:auto
   Dests: 400:auto
-400 F(I,J,K) (1 3) FOR I = 1 TO 64
+400 F(I,K) (1 3) FOR I = 1 TO 64
   Origs: 390:auto, 1520:ifthen
   Dests: 410:fornext, 420:fornext
-410 F(I,J,K) (0 3) LET X(I) = 0
+410 F(I,K) (0 3) LET X(I) = 0
   Origs: 400:fornext
   Dests: 420:auto
-420 F(I,J,K) (0 1) NEXT I
+420 F(I,K) (0 1) NEXT I
   Origs: 400:fornext, 410:auto
   Dests: 430:auto
-430 F(J,K) (0 3) LET Z = 1
+430 F(K) (0 3) LET Z = 1
   Origs: 420:auto
   Dests: 440:auto
-440 F(J,K) (0 2) PRINT "DO YOU WANT TO MOVE FIRST";
+440 F(K) (0 2) PRINT "DO YOU WANT TO MOVE FIRST";
   Origs: 430:auto
   Dests: 450:auto
-450 F(J,K) (1 2) INPUT S$
+450 F(K) (1 2) INPUT S$
   Origs: 440:auto, 490:goto
   Dests: 460:auto
-460 F(J,K) (1 5) IF LEFT$(S$, 1) = "N" THEN 630
+460 F(K) (1 5) IF LEFT$(S$, 1) = "N" THEN 630
   Origs: 450:auto
   Dests: 470:auto, 630:ifthen
-470 F(J,K) (1 5) IF LEFT$(S$, 1) = "Y" THEN 500
+470 F(K) (1 5) IF LEFT$(S$, 1) = "Y" THEN 500
   Origs: 460:auto
   Dests: 480:auto, 500:ifthen
-480 F(J,K) (0 2) PRINT "INCORRECT ANSWER.  PLEASE TYPE 'YES' OR 'NO'.";
+480 F(K) (0 2) PRINT "INCORRECT ANSWER.  PLEASE TYPE 'YES' OR 'NO'.";
   Origs: 470:auto
   Dests: 490:auto
-490 F(J,K) (0 3) GOTO 450
+490 F(K) (0 3) GOTO 450
   Origs: 480:auto
   Dests: 450:goto
 500 F(J,I,K) (0 2) PRINT " "
@@ -350,7 +350,7 @@ Halstead complexity:
 1080 F(J,I,K) (1 4) IF L > 2 THEN 2230
   Origs: 1070:auto
   Dests: 1090:auto, 2230:ifthen
-1090 F(J,J,I,K) (1 3) FOR J = 1 TO 4
+1090 F(J,I,K) (1 3) FOR J = 1 TO 4
   Origs: 1080:auto
   Dests: 1100:fornext, 1120:fornext
 1100 F(J,I,K) (1 4) IF X(M(I, J)) <> 0 THEN 1120
@@ -385,34 +385,34 @@ Halstead complexity:
 1190 F(J,I,K) (0 2) GOTO 1830
   Origs: 1180:auto
   Dests: 1830:goto
-1200 F(J,I) (0 3) LET Z = 1
+1200 (0 3) LET Z = 1
   Origs: 1960:goto
   Dests: 1210:auto
-1210 F(J,I) (1 4) IF X(Y(Z)) = 0 THEN 1250
+1210 (1 4) IF X(Y(Z)) = 0 THEN 1250
   Origs: 1200:auto, 1230:ifthen
   Dests: 1220:auto, 1250:ifthen
-1220 F(J,I) (0 4) LET Z = Z + 1
+1220 (0 4) LET Z = Z + 1
   Origs: 1210:auto
   Dests: 1230:auto
-1230 F(J,I) (1 5) IF Z <> 17 THEN 1210
+1230 (1 5) IF Z <> 17 THEN 1210
   Origs: 1220:auto
   Dests: 1210:ifthen, 1240:auto
-1240 F(J,I) (0 2) GOTO 1720
+1240 (0 2) GOTO 1720
   Origs: 1230:auto
   Dests: 1720:goto
-1250 F(J,I) (0 3) LET M = Y(Z)
+1250 (0 3) LET M = Y(Z)
   Origs: 1210:ifthen
   Dests: 1260:auto
-1260 F(J,I) (0 3) LET X(M) = 5
+1260 (0 3) LET X(M) = 5
   Origs: 1250:auto
   Dests: 1270:auto
-1270 F(J,I) (0 2) PRINT "MACHINE MOVES TO";
+1270 (0 2) PRINT "MACHINE MOVES TO";
   Origs: 1260:auto
   Dests: 1280:auto
-1280 F(J,I) (0 2) GOSUB 1570
+1280 (0 2) GOSUB 1570
   Origs: 1270:auto
   Dests: 1290:auto, 1570:gosub
-1290 F(J,I) (0 3) GOTO 500
+1290 (0 3) GOTO 500
   Origs: 1280:auto
   Dests: 500:goto
 1300 F(J,I,K) (0 3) LET X = X
@@ -436,7 +436,7 @@ Halstead complexity:
 1360 F(J,I,K) (1 4) IF L > 10 THEN 2230
   Origs: 1350:auto
   Dests: 1370:auto, 2230:ifthen
-1370 F(J,J,I,K) (1 3) FOR J = 1 TO 4
+1370 F(J,I,K) (1 3) FOR J = 1 TO 4
   Origs: 1360:auto
   Dests: 1380:fornext, 1400:fornext
 1380 F(J,I,K) (1 4) IF X(M(I, J)) <> 0 THEN 1400
@@ -474,28 +474,28 @@ Halstead complexity:
 1480 F(J,I,K) (0 3) GOTO 1030
   Origs: 1470:auto
   Dests: 1030:goto
-1490 F(J,I,K) (0 2) PRINT " "
+1490 F(I,K) (0 2) PRINT " "
   Origs: 780:goto, 920:goto, 1820:goto, 2350:goto
   Dests: 1500:auto
-1500 F(J,I,K) (0 2) PRINT "DO YOU WANT TO TRY ANOTHER GAME";
+1500 F(I,K) (0 2) PRINT "DO YOU WANT TO TRY ANOTHER GAME";
   Origs: 1490:auto
   Dests: 1510:auto
-1510 F(J,I,K) (1 2) INPUT X$
+1510 F(I,K) (1 2) INPUT X$
   Origs: 1500:auto, 1550:goto
   Dests: 1520:auto
-1520 F(J,I,K) (1 6) IF LEFT$(X$, 1) = "Y" THEN 400
+1520 F(I,K) (1 6) IF LEFT$(X$, 1) = "Y" THEN 400
   Origs: 1510:auto
   Dests: 400:ifthen, 1530:auto
-1530 F(J,I,K) (1 5) IF LEFT$(X$, 1) = "N" THEN 1560
+1530 F(I,K) (1 5) IF LEFT$(X$, 1) = "N" THEN 1560
   Origs: 1520:auto
   Dests: 1540:auto, 1560:ifthen
-1540 F(J,I,K) (0 2) PRINT "INCORRECT ANSWER. PLEASE TYPE 'YES' OR 'NO'";
+1540 F(I,K) (0 2) PRINT "INCORRECT ANSWER. PLEASE TYPE 'YES' OR 'NO'";
   Origs: 1530:auto
   Dests: 1550:auto
-1550 F(J,I,K) (0 3) GOTO 1510
+1550 F(I,K) (0 3) GOTO 1510
   Origs: 1540:auto
   Dests: 1510:goto
-1560 F(J,I,K) (0 1) STOP
+1560 F(I,K) (0 1) STOP
      WARNING: Terminating statement in FOR/NEXT
   Origs: 1530:ifthen
   Dests: :stop
@@ -544,37 +544,37 @@ Halstead complexity:
 1710 G(1640) (0 1) RETURN
   Origs: 1700:auto
   Dests: 
-1720 F(J,I) (1 3) FOR I = 1 TO 64
+1720 F(I) (1 3) FOR I = 1 TO 64
   Origs: 1240:goto
   Dests: 1730:fornext, 1800:fornext
-1730 F(J,I) (1 4) IF X(I) <> 0 THEN 1800
+1730 F(I) (1 4) IF X(I) <> 0 THEN 1800
   Origs: 1720:fornext
   Dests: 1740:auto, 1800:ifthen
-1740 F(J,I) (0 3) LET X(I) = 5
+1740 F(I) (0 3) LET X(I) = 5
   Origs: 1730:auto
   Dests: 1750:auto
-1750 F(J,I) (0 3) LET M = I
+1750 F(I) (0 3) LET M = I
   Origs: 1740:auto
   Dests: 1760:auto
-1760 F(J,I) (0 2) PRINT "MACHINE LIKES";
+1760 F(I) (0 2) PRINT "MACHINE LIKES";
   Origs: 1750:auto
   Dests: 1770:auto
-1770 F(J,I) (0 3) GOSUB 1570
+1770 F(I) (0 3) GOSUB 1570
   Origs: 1760:auto
   Dests: 1570:gosub, 1780:auto
-1780 F(J,I) (0 2) PRINT " "
+1780 F(I) (0 2) PRINT " "
   Origs: 1770:auto
   Dests: 1790:auto
-1790 F(J,I) (0 3) GOTO 500
+1790 F(I) (0 3) GOTO 500
   Origs: 1780:auto
   Dests: 500:goto
-1800 F(J,I) (0 1) NEXT I
+1800 F(I) (0 1) NEXT I
   Origs: 1720:fornext, 1730:ifthen
   Dests: 1810:auto
-1810 F(J) (0 2) PRINT "THE GAME IS A DRAW."
+1810 (0 2) PRINT "THE GAME IS A DRAW."
   Origs: 1800:auto
   Dests: 1820:auto
-1820 F(J) (0 3) GOTO 1490
+1820 (0 3) GOTO 1490
   Origs: 1810:auto
   Dests: 1490:goto
 1830 F(J,I,K) (1 3) FOR K = 1 TO 18
@@ -583,10 +583,10 @@ Halstead complexity:
 1840 F(J,I,K) (0 3) LET P = 0
   Origs: 1830:fornext
   Dests: 1850:auto
-1850 F(J,I,K,I) (1 6) FOR I = 4 * K - 3 TO 4 * K
+1850 F(J,K,I) (1 6) FOR I = 4 * K - 3 TO 4 * K
   Origs: 1840:auto
   Dests: 1860:fornext, 1890:fornext
-1860 F(J,K,I,J) (1 3) FOR J = 1 TO 4
+1860 F(K,I,J) (1 3) FOR J = 1 TO 4
   Origs: 1850:fornext
   Dests: 1870:fornext, 1880:fornext
 1870 F(I,K,J) (0 4) LET P = P + X(M(I, J))
@@ -613,16 +613,16 @@ Halstead complexity:
 1940 F(J,I,K) (0 1) NEXT K
   Origs: 1830:fornext, 1900:ifthen, 1920:ifthen, 1930:auto
   Dests: 1950:auto
-1950 F(J,I) (0 2) GOSUB 2500
+1950 (0 2) GOSUB 2500
   Origs: 1940:auto
   Dests: 1960:auto, 2500:gosub
-1960 F(J,I) (0 3) GOTO 1200
+1960 (0 3) GOTO 1200
   Origs: 1950:auto
   Dests: 1200:goto
 1970 F(J,I,K) (0 4) LET S = 1 / 8
   Origs: 1910:ifthen, 1930:ifthen
   Dests: 1980:auto
-1980 F(J,I,K,I) (1 6) FOR I = 4 * K - 3 TO 4 * K
+1980 F(J,K,I) (1 6) FOR I = 4 * K - 3 TO 4 * K
   Origs: 1970:auto, 2020:goto
   Dests: 1990:fornext, 2000:fornext
 1990 F(J,K,I) (0 2) GOTO 2370
@@ -631,10 +631,10 @@ Halstead complexity:
 2000 F(J,I,K) (0 1) NEXT I
   Origs: 1980:fornext, 2440:goto
   Dests: 2010:auto
-2010 F(K) (0 3) LET S = 0
+2010 F(J,I,K) (0 3) LET S = 0
   Origs: 2000:auto
   Dests: 2020:auto
-2020 F(K) (0 3) GOTO 1980
+2020 F(J,I,K) (0 3) GOTO 1980
   Origs: 2010:auto
   Dests: 1980:goto
 2030 (0 2) DATA 1, 49, 52, 4, 13, 61, 64, 16, 22, 39, 23, 38, 26, 42, 27, 43
@@ -697,7 +697,7 @@ Halstead complexity:
 2220 (0 2) DATA 1, 22, 43, 64, 16, 27, 38, 49, 4, 23, 42, 61, 13, 26, 39, 52
   Origs: 
   Dests: 
-2230 F(J,I,K,J) (1 3) FOR J = 1 TO 4
+2230 F(I,K,J) (1 3) FOR J = 1 TO 4
   Origs: 1080:ifthen, 1360:ifthen
   Dests: 2240:fornext, 2330:fornext
 2240 F(I,K,J) (1 6) IF X(M(I, J)) <> 1 / 8 THEN 2330
@@ -730,10 +730,10 @@ Halstead complexity:
 2330 F(J,I,K) (0 1) NEXT J
   Origs: 2230:fornext, 2240:ifthen
   Dests: 2340:auto
-2340 F(J,I,K) (0 2) PRINT "MACHINE CONCEDES THIS GAME."
+2340 F(I,K) (0 2) PRINT "MACHINE CONCEDES THIS GAME."
   Origs: 2330:auto
   Dests: 2350:auto
-2350 F(J,I,K) (0 3) GOTO 1490
+2350 F(I,K) (0 3) GOTO 1490
   Origs: 2340:auto
   Dests: 1490:goto
 2360 F(J,I,K) (0 4) LET S = 1 / 8
@@ -751,7 +751,7 @@ Halstead complexity:
 2400 F(J,I,K) (0 3) LET A = 2
   Origs: 2370:ifthen
   Dests: 2410:auto
-2410 F(J,I,K,J) (1 8) FOR J = A TO 5 - A STEP 5 - 2 * A
+2410 F(I,K,J) (1 8) FOR J = A TO 5 - A STEP 5 - 2 * A
   Origs: 2390:goto, 2400:auto
   Dests: 2420:fornext, 2430:fornext
 2420 F(I,K,J) (1 4) IF X(M(I, J)) = S THEN 2450
