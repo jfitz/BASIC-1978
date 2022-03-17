@@ -816,6 +816,7 @@ class Program
     statement = statements[stmt]
     part_of_user_function = statement.part_of_user_function
 
+    # find next modifier in current statement
     mod = current_line_stmt_mod.index
 
     if mod < statement.last_index
@@ -1339,7 +1340,7 @@ class Program
       @lines.each do |line_number, _line|
         statements = @lines[line_number].statements
 
-        statements.each_with_index do |statement, _stmt|
+        statements.each do |statement|
           # only reachable lines can reach other lines
           next unless statement.reachable
 
@@ -1410,9 +1411,7 @@ class Program
     @lines.each do |_line_number, line|
       statements = line.statements
 
-      statements.each do |statement|
-        any_errors |= statement.errors?
-      end
+      statements.each { |statement| any_errors |= statement.errors? }
     end
 
     any_errors
@@ -1467,8 +1466,8 @@ class Program
       statements = line.statements
 
       statements.each_with_index do |statement, stmt|
-        line_number_stmt = LineStmt.new(line_number, stmt)
-        statement.optimize(interpreter, line_number_stmt, self)
+        line_stmt = LineStmt.new(line_number, stmt)
+        statement.optimize(interpreter, line_stmt, self)
       end
     end
   end
@@ -1522,15 +1521,15 @@ class Program
   def assign_fornext_markers(line_numbers)
     line_numbers.each do |line_number|
       line = @lines[line_number]
-
-      line.reset_visited
-    end
-
-    line_numbers.each do |line_number|
-      line = @lines[line_number]
       statements = line.statements
 
       statements.each do |statement|
+        line_numbers.each do |x_line_number|
+          x_line = @lines[x_line_number]
+
+          x_line.reset_visited
+        end
+
         statement.assign_fornext_markers(self)
       end
     end
@@ -1948,25 +1947,6 @@ class Program
     refs
   end
 
-  def strings_refs
-    refs = {}
-
-    @lines.each do |line_number, line|
-      statements = line.statements
-
-      rs = []
-
-      statements.each do |statement|
-        rs += statement.strings
-        rs += statement.modifier_strings
-      end
-
-      refs[line_number] = rs
-    end
-
-    refs
-  end
-
   def boolean_refs
     refs = {}
 
@@ -1978,6 +1958,25 @@ class Program
       statements.each do |statement|
         rs += statement.booleans
         rs += statement.modifier_booleans
+      end
+
+      refs[line_number] = rs
+    end
+
+    refs
+  end
+
+  def strings_refs
+    refs = {}
+
+    @lines.each do |line_number, line|
+      statements = line.statements
+
+      rs = []
+
+      statements.each do |statement|
+        rs += statement.strings
+        rs += statement.modifier_strings
       end
 
       refs[line_number] = rs
@@ -2033,7 +2032,7 @@ class Program
       rs = []
 
       statements.each do |statement|
-        rs.concat statement.variables
+        rs += statement.variables
         rs += statement.modifier_variables
       end
 
@@ -2070,9 +2069,7 @@ class Program
 
       rs = []
 
-      statements.each do |statement|
-        rs += statement.linenums
-      end
+      statements.each { |statement| rs += statement.linenums }
 
       refs[line_number] = rs
     end
@@ -2144,6 +2141,7 @@ class Program
 
   def print_unused(variables)
     texts = []
+
     # split variable references into 'reference' and 'value' lists
     vars_refs = []
     vars_vals = []
@@ -2341,6 +2339,7 @@ class Program
 
       # print the line
       texts << (line_number.to_s + line.list)
+
       line.warnings.each { |warning| texts << (" WARNING: #{warning}") }
 
       statements = line.statements
@@ -2361,6 +2360,7 @@ class Program
 
       tokens = line.tokens
       text_tokens = tokens.map(&:to_s)
+
       texts << ("TOKENS: #{text_tokens}")
     end
 
@@ -2373,10 +2373,10 @@ class Program
     line_numbers.each do |line_number|
       line = @lines[line_number]
 
-      line.warnings.each { |warning| texts << (" WARNING: #{warning}") }
-
       # print the line
       texts << (line_number.to_s + line.list)
+
+      line.warnings.each { |warning| texts << (" WARNING: #{warning}") }
 
       statements = line.statements
 
