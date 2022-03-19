@@ -22,11 +22,7 @@ class AbstractModifier
     @post_comp_effort = 0
   end
 
-  def optimize(interpreter, line_stmt_mod, program)
-    set_for_lines(interpreter, line_stmt_mod, program)
-  end
-
-  def set_for_lines(_, _, _) end
+  def set_destinations(_, _) end
 
   def reset_profile_metrics
     @profile_pre_count = 0
@@ -487,7 +483,7 @@ class AbstractForModifier < AbstractModifier
     @post_comp_effort = 1
   end
 
-  def set_for_lines(_interpreter, line_stmt_mod, program)
+  def set_destinations(line_stmt_mod, program)
     pre_line_stmt_mod = line_stmt_mod.get_counterpart
     @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(pre_line_stmt_mod)
     @nextstmt_line_stmt_mod = line_stmt_mod

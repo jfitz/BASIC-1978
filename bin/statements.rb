@@ -317,22 +317,18 @@ class AbstractStatement
     @origins = []
   end
 
-  def optimize(interpreter, line_stmt, program)
-    set_destinations(interpreter, line_stmt, program)
-    set_for_lines(line_stmt, program)
-    set_next_lines(line_stmt, program)
+  def set_destinations(_, _, _) end
 
+  def set_modifier_destinations(line_stmt, program)
     line_number = line_stmt.line_number
     stmt = line_stmt.statement
 
     @modifiers.each_with_index do |modifier, index|
       mod = index + 1
       mod_line_stmt_mod = LineStmtMod.new(line_number, stmt, mod)
-      modifier.optimize(interpreter, mod_line_stmt_mod, program)
+      modifier.set_destinations(mod_line_stmt_mod, program)
     end
   end
-
-  def set_destinations(_, _, _) end
 
   def assign_sub_markers(_) end
 
@@ -439,10 +435,6 @@ class AbstractStatement
       end
     end
   end
-
-  def set_for_lines(_, _) end
-
-  def set_next_lines(_, _) end
 
   def set_endfunc_lines(_, _) end
 
@@ -2413,11 +2405,9 @@ class ForStatement < AbstractStatement
     @comprehension_effort += @while.comprehension_effort unless @while.nil?
   end
 
-  def set_for_lines(line_stmt, program)
+  def set_destinations(_, line_stmt, program)
     @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(line_stmt)
-  end
 
-  def set_next_lines(line_stmt, program)
     begin
       unless @control.nil?
         @nextstmt_line_stmt =
@@ -2923,16 +2913,6 @@ class AbstractIfStatement < AbstractStatement
     @mccabe += @else_stmt.mccabe unless @else_stmt.nil?
 
     @is_if_no_else = @else_dest_line.nil? && @else_stmt.nil?
-  end
-
-  def set_for_lines(line_stmt_mod, program)
-    @statement&.set_for_lines(line_stmt_mod, program)
-    @else_stmt&.set_for_lines(line_stmt_mod, program)
-  end
-
-  def set_next_lines(line_stmt_mod, program)
-    @statement&.set_next_lines(line_stmt_mod, program)
-    @else_stmt&.set_next_lines(line_stmt_mod, program)
   end
 
   def renumber(renumber_map)
