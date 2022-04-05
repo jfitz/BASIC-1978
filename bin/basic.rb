@@ -557,7 +557,7 @@ def make_command_tokenbuilders(quotes, long_names)
     RANDOMIZE RELATIONAL_RESULT REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH
     TIMING TRACE
-    WARN_LIST_WIDTH WARN_PRETTY_WIDTH WRAP
+    WARN_GOSUB_LENGTH WARN_LIST_WIDTH WARN_PRETTY_WIDTH WRAP
     ZONE_WIDTH
   ]
   tokenbuilders << ListTokenBuilder.new(keywords, KeywordToken)
@@ -672,6 +672,7 @@ OptionParser.new do |opt|
   opt.on('--timing') { |o| options[:timing] = o }
   opt.on('--tty') { |o| options[:tty] = o }
   opt.on('--tty-lf') { |o| options[:tty_lf] = o }
+  opt.on('--warn-gosub-length LENGTH') { |o| options[:warn_gosub_length] = o }
   opt.on('--warn-list-width WIDTH') { |o| options[:warn_list_width] = o }
   opt.on('--warn-pretty-width WIDTH') { |o| options[:warn_pretty_width] = o }
   opt.on('--wrap') { |o| options[:wrap] = o }
@@ -838,17 +839,23 @@ $options['semicolon_zone_width'] =
 $options['timing'] = Option.new(all_types, boolean, options.key?(:timing))
 $options['trace'] = Option.new(all_types, boolean, options.key?(:trace))
 
+warn_gosub_length = 40
+if options.key?(:warn_gosub_length)
+  warn_gosub_length = options[:warn_gosub_length].to_i
+end
+$options['warn_gosub_length'] = Option.new(loaded, int, warn_gosub_length)
+
 warn_list_width = 80
 if options.key?(:warn_list_width)
   warn_list_width = options[:warn_list_width].to_i
 end
-$options['warn_list_width'] = Option.new(only_new, int132, warn_list_width)
+$options['warn_list_width'] = Option.new(loaded, int132, warn_list_width)
 
 warn_pretty_width = 80
 if options.key?(:warn_pretty_width)
   warn_pretty_width = options[:warn_pretty_width].to_i
 end
-$options['warn_pretty_width'] = Option.new(only_new, int132, warn_pretty_width)
+$options['warn_pretty_width'] = Option.new(loaded, int132, warn_pretty_width)
 
 $options['wrap'] = Option.new(all_types, boolean, options.key?(:wrap))
 
