@@ -87,6 +87,7 @@ Halstead complexity:
   Origs: 202:auto
   Dests: 210:fornext, 700:fornext
 210 F(T,O,U,K) (1 5) FOR K = 8 TO 0 STEP -1
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 205:fornext
   Dests: 230:fornext, 280:fornext
 230 F(T,O,U,K) (1 5) IF 2 ^ K < S(U) THEN 270
@@ -109,12 +110,14 @@ Halstead complexity:
   Origs: 210:fornext, 250:goto, 272:auto
   Dests: 445:auto
 445 F(T,O,U,K,T1) (1 3) FOR T1 = 1 TO X
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 280:auto, 815:goto
   Dests: 447:fornext, 630:fornext
 447 F(T,O,U,K,T1) (0 3) PRINT TAB((63 - 4.5 * Y) * G1 / (LEN(X$)) + 1);
   Origs: 445:fornext
   Dests: 450:auto
 450 F(T,O,U,K,T1,B) (1 3) FOR B = 1 TO F(U)
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 447:auto
   Dests: 460:fornext, 600:fornext
 460 F(T,O,U,K,T1,B) (1 4) IF J(B) = 0 THEN 500
@@ -123,15 +126,18 @@ Halstead complexity:
 465 F(T,O,U,K,T1,B,I) (1 3) FOR I = 1 TO Y
     F(T,O,U,K,T1,B,I) (0 2) PRINT X$;
     F(T,O,U,K,T1,B,I) (0 1) NEXT I
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 460:auto
   Dests: 470:auto
 470 F(T,O,U,K,T1,B) (0 2) GOTO 600
   Origs: 465:auto
   Dests: 600:goto
 500 F(T,O,U,K,T1,B,I) (1 3) FOR I = 1 TO Y
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 460:ifthen
   Dests: 510:fornext, 530:fornext
 510 F(T,O,U,K,T1,B,I,I1) (1 4) FOR I1 = 1 TO LEN(X$)
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 500:fornext
   Dests: 520:fornext
 520 F(T,O,U,K,T1,B,I,I1) (0 2) PRINT " ";
@@ -156,6 +162,7 @@ Halstead complexity:
 750 F(T,O,K,H) (1 4) FOR H = 1 TO 2 * X
     F(T,O,K,H) (0 2) PRINT
     F(T,O,K,H) (0 1) NEXT H
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 700:auto
   Dests: 800:auto
 800 F(T,O,K) (0 1) NEXT T

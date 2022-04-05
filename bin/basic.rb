@@ -557,6 +557,7 @@ def make_command_tokenbuilders(quotes, long_names)
     RANDOMIZE RELATIONAL_RESULT REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH
     TIMING TRACE
+    WARN_FORNEXT_LEVEL
     WARN_GOSUB_LENGTH WARN_LIST_WIDTH WARN_PRETTY_WIDTH WRAP
     ZONE_WIDTH
   ]
@@ -672,6 +673,7 @@ OptionParser.new do |opt|
   opt.on('--timing') { |o| options[:timing] = o }
   opt.on('--tty') { |o| options[:tty] = o }
   opt.on('--tty-lf') { |o| options[:tty_lf] = o }
+  opt.on('--warn-fornext-level LEVEL') { |o| options[:warn_fornext_level] = o }
   opt.on('--warn-gosub-length LENGTH') { |o| options[:warn_gosub_length] = o }
   opt.on('--warn-list-width WIDTH') { |o| options[:warn_list_width] = o }
   opt.on('--warn-pretty-width WIDTH') { |o| options[:warn_pretty_width] = o }
@@ -838,6 +840,12 @@ $options['semicolon_zone_width'] =
 
 $options['timing'] = Option.new(all_types, boolean, options.key?(:timing))
 $options['trace'] = Option.new(all_types, boolean, options.key?(:trace))
+
+warn_fornext_level = 3
+if options.key?(:warn_fornext_level)
+  warn_fornext_level = options[:warn_fornext_level].to_i
+end
+$options['warn_fornext_level'] = Option.new(loaded, int, warn_fornext_level)
 
 warn_gosub_length = 40
 if options.key?(:warn_gosub_length)
