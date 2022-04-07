@@ -1162,31 +1162,31 @@ class Program
 
   def number_valid_statements
     num = 0
-    @lines.each { |_, line| num += line.number_valid_statements }
+    @lines.each { |_line_number, line| num += line.number_valid_statements }
     num
   end
 
   def number_exec_statements
     num = 0
-    @lines.each { |_, line| num += line.number_exec_statements }
+    @lines.each { |_line_number, line| num += line.number_exec_statements }
     num
   end
 
   def number_comments
     num = 0
-    @lines.each { |_, line| num += line.number_comments }
+    @lines.each { |_line_number, line| num += line.number_comments }
     num
   end
 
   def comprehension_effort
     num = 0
-    @lines.each { |_, line| num += line.comprehension_effort }
+    @lines.each { |_line_number, line| num += line.comprehension_effort }
     num
   end
 
   def mccabe_complexity
     num = 1
-    @lines.each { |_, line| num += line.mccabe_complexity }
+    @lines.each { |_line_number, line| num += line.mccabe_complexity }
     num
   end
 
@@ -1200,7 +1200,7 @@ class Program
 
     operator_keywords = %w[FOR GOTO GOSUB IF NEXT ON RETURN]
 
-    @lines.each do |_, line|
+    @lines.each do |_line_number, line|
       statements = line.statements
 
       statements.each do |statement|
@@ -1311,7 +1311,7 @@ class Program
 
   def set_unreachable_code
     # assume statements are dead until connected to a live statement
-    @lines.each { |_, line| line.reset_reachable }
+    @lines.each { |_line_number, line| line.reset_reachable }
 
     # first line is live
     first_line_number = @first_line_number_stmt_mod.line_number
@@ -1490,12 +1490,12 @@ class Program
     end
   end
 
-  def assign_sub_markers(line_numbers)
-    line_numbers.each do |line_number|
-      line = @lines[line_number]
+  def reset_visited
+    @lines.each { |_line_number, line| line.reset_visited }
+  end
 
-      line.reset_visited
-    end
+  def assign_sub_markers(line_numbers)
+    reset_visited
 
     line_numbers.each do |line_number|
       line = @lines[line_number]
@@ -1508,11 +1508,7 @@ class Program
   end
 
   def assign_on_error_markers(line_numbers)
-    line_numbers.each do |line_number|
-      line = @lines[line_number]
-
-      line.reset_visited
-    end
+    reset_visited
 
     line_numbers.each do |line_number|
       line = @lines[line_number]
@@ -1530,11 +1526,7 @@ class Program
       statements = line.statements
 
       statements.each do |statement|
-        line_numbers.each do |x_line_number|
-          x_line = @lines[x_line_number]
-
-          x_line.reset_visited
-        end
+        reset_visited
 
         statement.assign_fornext_markers(self)
       end
@@ -1675,7 +1667,7 @@ class Program
   end
 
   def set_transfers
-    @lines.each do |_, line|
+    @lines.each do |_line_number, line|
       line.set_transfers(@user_function_start_lines)
     end
   end
