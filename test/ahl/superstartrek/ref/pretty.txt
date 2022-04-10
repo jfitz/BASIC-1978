@@ -100,6 +100,7 @@
 2050 PRINT "-CIRCUITING TO ENGINE ROOM!!" : GOTO 6220
 2060 INPUT "COMMAND"; A$
 2080 FOR I = 1 TO 9 : IF LEFT$(A$, 3) <> MID$(A1$, 3 * I - 2, 3) THEN 2160
+ WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
 2140 ON I GOTO 2300, 1980, 4000, 4260, 4700, 5530, 5690, 7290, 6270
  WARNING: Branch to line before GOSUB start
@@ -162,6 +163,7 @@
 3140 X2 = C(C1, 2) + (C(C1 + 1, 2) - C(C1, 2)) * (C1 - INT(C1)) : Q4 = Q1 : Q5 = Q2
 3170 FOR I = 1 TO N : S1 = S1 + X1 : S2 = S2 + X2 : IF S1 < 1 OR S1 >= 9 OR S2 < 1 OR S2 >= 9 THEN 3500
  WARNING: Line exceeds PRETTY width limit 80
+ WARNING: FORNEXT length exceeds limit 40
 3240 S8 = INT(S1) * 24 + INT(S2) * 3 - 26 : IF MID$(Q$, S8, 2) = "  " THEN 3360
 3320 S1 = INT(S1 - X1) : S2 = INT(S2 - X2) : PRINT "WARP ENGINES SHUT DOWN AT ";
 3350 PRINT "SECTOR"; S1; ","; S2; "DUE TO BAD NAVAGATION" : GOTO 3370
@@ -230,6 +232,7 @@
  WARNING: Branch to line before GOSUB start
 4410 E = E - X : IF D(7) < 0 THEN X = X * RND(1)
 4450 H1 = INT(X / K3) : FOR I = 1 TO 3 : IF K(I, 3) <= 0 THEN 4670
+ WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
 4480 H = INT((H1 / FND(0)) * (RND(1) + 2)) : IF H > 0.15 * K(I, 3) THEN 4530
 4500 PRINT "SENSORS SHOW NO DAMAGE TO ENEMY AT "; K(I, 1); ","; K(I, 2) : GOTO 4670
@@ -267,6 +270,7 @@
 5110 PRINT "*** KLINGON DESTROYED ***" : K3 = K3 - 1 : K9 = K9 - 1 : IF K9 <= 0 THEN 6370
  WARNING: Line exceeds PRETTY width limit 80
 5150 FOR I = 1 TO 3 : IF X3 = K(I, 1) AND Y3 = K(I, 2) THEN 5190
+ WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
 5180 NEXT I : I = 3
 5190 K(I, 3) = 0 : GOTO 5430
@@ -330,6 +334,7 @@
  WARNING: GOSUB length exceeds limit 40
 6010 IF D0 <> 0 THEN PRINT "STARBASE SHIELDS PROTECT THE ENTERPRISE" : RETURN
 6040 FOR I = 1 TO 3 : IF K(I, 3) <= 0 THEN 6200
+ WARNING: FORNEXT length exceeds limit 40
 6060 H = INT((K(I, 3) / FND(1)) * (2 + RND(1))) : S = S - H : K(I, 3) = K(I, 3) / (3 + RND(0))
  WARNING: Line exceeds PRETTY width limit 80
 6080 PRINT H; "UNIT HIT ON ENTERPRISE FROM SECTOR"; K(I, 1); ","; K(I, 2)
@@ -359,6 +364,8 @@
 6420 REM SHORT RANGE SENSOR SCAN & STARTUP SUBROUTINE
 6430 FOR I = S1 - 1 TO S1 + 1 : FOR J = S2 - 1 TO S2 + 1
  WARNING: GOSUB length exceeds limit 40
+ WARNING: FORNEXT length exceeds limit 40
+ WARNING: FORNEXT length exceeds limit 40
 6450 IF INT(I + 0.5) < 1 OR INT(I + 0.5) > 8 OR INT(J + 0.5) < 1 OR INT(J + 0.5) > 8 THEN 6540
  WARNING: Line exceeds PRETTY width limit 80
 6490 A$ = ">!<" : Z1 = I : Z2 = J : GOSUB 8830 : IF Z3 = 1 THEN 6580
@@ -435,6 +442,7 @@
 8080 X$ = "" : IF K3 > 1 THEN X$ = "S"
 8090 PRINT "FROM ENTERPRISE TO KLINGON BATTLE CRUSER"; X$
 8100 H8 = 0 : FOR I = 1 TO 3 : IF K(I, 3) <= 0 THEN 8480
+ WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
 8110 W1 = K(I, 1) : X = K(I, 2)
 8120 C1 = S1 : A = S2 : GOTO 8220

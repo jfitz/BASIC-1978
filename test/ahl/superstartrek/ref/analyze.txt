@@ -411,6 +411,7 @@ Halstead complexity:
   Dests: 2080:auto
 2080 G(6000) F(I:2080,I:3170,I:5150,I:8100.1) (1 3) FOR I = 1 TO 9
      G(6000) F(I:2080,I:3170,I:5150,I:8100.1) (1 6) IF LEFT$(A$, 3) <> MID$(A1$, 3 * I - 2, 3) THEN 2160
+     WARNING: FORNEXT length exceeds limit 40
      WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 2060:auto
   Dests: 2140:auto, 2160:fornext, 2160:ifthen
@@ -620,6 +621,7 @@ Halstead complexity:
      G(6000) F(I:3170) (0 4) S1 = S1 + X1
      G(6000) F(I:3170) (0 4) S2 = S2 + X2
      G(6000) F(I:3170) (1 13) IF S1 < 1 OR S1 >= 9 OR S2 < 1 OR S2 >= 9 THEN 3500
+     WARNING: FORNEXT length exceeds limit 40
   Origs: 3140:auto
   Dests: 3240:auto, 3360:fornext, 3500:ifthen
 3240 G(6000) F(I:3170) (0 10) S8 = INT(S1) * 24 + INT(S2) * 3 - 26
@@ -842,6 +844,7 @@ Halstead complexity:
 4450 G(6000) F(I:2080,I:3170,I:5150,I:8100.1) (0 4) H1 = INT(X / K3)
      G(6000) F(I:2080,I:3170,I:4450.1,I:5150,I:8100.1) (1 3) FOR I = 1 TO 3
      G(6000) F(I:2080,I:3170,I:4450.1,I:5150,I:8100.1) (1 4) IF K(I, 3) <= 0 THEN 4670
+     WARNING: FORNEXT length exceeds limit 40
      WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 4410:auto
   Dests: 4480:auto, 4670:fornext, 4670:ifthen
@@ -961,6 +964,7 @@ Halstead complexity:
   Dests: 5150:auto, 6370:ifthen
 5150 G(6000) F(I:2080,I:3170,I:5150,I:8100.1) (1 3) FOR I = 1 TO 3
      G(6000) F(I:2080,I:3170,I:5150,I:8100.1) (1 7) IF X3 = K(I, 1) AND Y3 = K(I, 2) THEN 5190
+     WARNING: FORNEXT length exceeds limit 40
      WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 5110:auto
   Dests: 5180:auto, 5180:fornext, 5190:ifthen
@@ -1155,6 +1159,7 @@ Halstead complexity:
   Dests: 6040:auto
 6040 G(6000) F(I:6040) (1 3) FOR I = 1 TO 3
      G(6000) F(I:6040) (1 4) IF K(I, 3) <= 0 THEN 6200
+     WARNING: FORNEXT length exceeds limit 40
   Origs: 6010:auto
   Dests: 6060:auto, 6200:fornext, 6200:ifthen
 6060 G(6000) F(I:6040) (0 4) H = INT((K(I, 3) / FND(1)) * (2 + RND(1)))
@@ -1246,6 +1251,8 @@ Halstead complexity:
 6430 G(6430) F(I:6430) (1 5) FOR I = S1 - 1 TO S1 + 1
      G(6430) F(I:6430,J:6430.1) (1 5) FOR J = S2 - 1 TO S2 + 1
      WARNING: GOSUB length exceeds limit 40
+     WARNING: FORNEXT length exceeds limit 40
+     WARNING: FORNEXT length exceeds limit 40
   Origs: 1980:gosub
   Dests: 6450:fornext, 6540:fornext
 6450 G(6430) F(I:6430,J:6430.1) (1 17) IF INT(I + 0.5) < 1 OR INT(I + 0.5) > 8 OR INT(J + 0.5) < 1 OR INT(J + 0.5) > 8 THEN 6540
@@ -1510,6 +1517,7 @@ Halstead complexity:
 8100 G(6000) F(I:2080,I:3170,I:5150,I:8100.1) (0 3) H8 = 0
      G(6000) F(I:2080,I:3170,I:5150,I:8100.1) (1 3) FOR I = 1 TO 3
      G(6000) F(I:2080,I:3170,I:5150,I:8100.1) (1 4) IF K(I, 3) <= 0 THEN 8480
+     WARNING: FORNEXT length exceeds limit 40
      WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 8090:auto
   Dests: 8110:auto, 8480:fornext, 8480:ifthen
