@@ -37,32 +37,32 @@ Halstead complexity:
    (0 3) N = 50
   Origs: 30:auto
   Dests: 50:auto
-50 F(I) (1 3) FOR I = 1 TO 20
-   F(I) (0 3) D$(I) = "-"
-   F(I) (0 1) NEXT I
+50 F(I:50) (1 3) FOR I = 1 TO 20
+   F(I:50) (0 3) D$(I) = "-"
+   F(I:50) (0 1) NEXT I
    (0 3) M = 0
   Origs: 40:auto, 370:ifthen, 620:ifthen
   Dests: 60:auto
-60 F(I) (1 3) FOR I = 1 TO 26
-   F(I) (0 3) N$(I) = ""
-   F(I) (0 1) NEXT I
+60 F(I:60) (1 3) FOR I = 1 TO 26
+   F(I:60) (0 3) N$(I) = ""
+   F(I:60) (0 1) NEXT I
   Origs: 50:auto
   Dests: 70:auto
-70 F(I) (1 3) FOR I = 1 TO 12
-   F(I,J) (1 3) FOR J = 1 TO 12
-   F(I,J) (0 3) P$(I, J) = " "
-   F(I,J) (0 1) NEXT J
-   F(I) (0 1) NEXT I
+70 F(I:70) (1 3) FOR I = 1 TO 12
+   F(I:70,J:70.1) (1 3) FOR J = 1 TO 12
+   F(I:70,J:70.1) (0 3) P$(I, J) = " "
+   F(I:70,J:70.1) (0 1) NEXT J
+   F(I:70) (0 1) NEXT I
   Origs: 60:auto
   Dests: 80:auto
-80 F(I) (1 3) FOR I = 1 TO 12
-   F(I) (0 3) P$(I, 1) = "X"
-   F(I) (0 1) NEXT I
+80 F(I:80) (1 3) FOR I = 1 TO 12
+   F(I:80) (0 3) P$(I, 1) = "X"
+   F(I:80) (0 1) NEXT I
   Origs: 70:auto
   Dests: 90:auto
-90 F(I) (1 3) FOR I = 1 TO 7
-   F(I) (0 3) P$(1, I) = "X"
-   F(I) (0 1) NEXT
+90 F(I:90) (1 3) FOR I = 1 TO 7
+   F(I:90) (0 3) P$(1, I) = "X"
+   F(I:90) (0 1) NEXT
    (0 3) P$(2, 7) = "X"
   Origs: 80:auto
   Dests: 95:auto
@@ -85,34 +85,34 @@ Halstead complexity:
     (0 3) T1 = 0
   Origs: 110:auto
   Dests: 150:auto
-150 F(I) (1 3) FOR I = 1 TO Q
-    F(I) (1 2) READ A$
-    F(I) (0 1) NEXT I
+150 F(I:150) (1 3) FOR I = 1 TO Q
+    F(I:150) (1 2) READ A$
+    F(I:150) (0 1) NEXT I
   Origs: 115:auto
   Dests: 160:auto
 160 (0 4) L = LEN(A$)
-    F(I) (1 4) FOR I = 1 TO LEN(A$)
-    F(I) (0 4) L$(I) = MID$(A$, I, 1)
-    F(I) (0 1) NEXT I
+    F(I:160.1) (1 4) FOR I = 1 TO LEN(A$)
+    F(I:160.1) (0 4) L$(I) = MID$(A$, I, 1)
+    F(I:160.1) (0 1) NEXT I
   Origs: 150:auto
   Dests: 170:auto
-170 F(I) (0 2) PRINT "HERE ARE THE LETTERS YOU USED:"
+170 F(I:220) (0 2) PRINT "HERE ARE THE LETTERS YOU USED:"
   Origs: 160:auto, 230:goto, 350:goto, 590:ifthen
   Dests: 180:auto
-180 F(I) (1 3) FOR I = 1 TO 26
-    F(I) (0 2) PRINT N$(I);
-    F(I) (1 4) IF N$(I + 1) = "" THEN 200
+180 F(I:180,I:220) (1 3) FOR I = 1 TO 26
+    F(I:180,I:220) (0 2) PRINT N$(I);
+    F(I:180,I:220) (1 4) IF N$(I + 1) = "" THEN 200
   Origs: 170:auto
   Dests: 190:auto, 190:fornext, 200:ifthen
-190 F(I) (0 2) PRINT ",";
-    F(I) (0 1) NEXT I
+190 F(I:180,I:220) (0 2) PRINT ",";
+    F(I:180,I:220) (0 1) NEXT I
   Origs: 180:auto, 180:fornext
   Dests: 200:auto
-200 F(I) (0 2) PRINT
-    F(I) (0 2) PRINT
-    F(I) (1 3) FOR I = 1 TO L
-    F(I) (0 2) PRINT D$(I);
-    F(I) (0 1) NEXT I
+200 F(I:180,I:220) (0 2) PRINT
+    F(I:180,I:220) (0 2) PRINT
+    F(I:180,I:200.2,I:220) (1 3) FOR I = 1 TO L
+    F(I:180,I:200.2,I:220) (0 2) PRINT D$(I);
+    F(I:180,I:200.2,I:220) (0 1) NEXT I
     (0 2) PRINT
     (0 2) PRINT
   Origs: 180:ifthen, 190:auto
@@ -121,55 +121,55 @@ Halstead complexity:
     (0 3) R = 0
   Origs: 200:auto
   Dests: 220:auto
-220 F(I) (1 3) FOR I = 1 TO 26
-    F(I) (1 4) IF N$(I) = "" THEN 250
+220 F(I:220) (1 3) FOR I = 1 TO 26
+    F(I:220) (1 4) IF N$(I) = "" THEN 250
   Origs: 210:auto
   Dests: 230:auto, 240:fornext, 250:ifthen
-230 F(I) (1 5) IF G$ = N$(I) THEN PRINT "YOU GUESSED THAT LETTER BEFORE!"
-    F(I) (0 3) GOTO 170
+230 F(I:220) (1 5) IF G$ = N$(I) THEN PRINT "YOU GUESSED THAT LETTER BEFORE!"
+    F(I:220) (0 3) GOTO 170
   Origs: 220:auto
   Dests: 170:goto, 240:auto
-240 F(I) (0 1) NEXT I
+240 F(I:220) (0 1) NEXT I
     (0 2) PRINT "PROGRAM ERROR.  RUN AGAIN."
     (0 1) STOP
   Origs: 220:fornext, 230:auto
   Dests: :stop
-250 F(I) (0 3) N$(I) = G$
-    F(I) (0 4) T1 = T1 + 1
+250 F(I:220) (0 3) N$(I) = G$
+    F(I:220) (0 4) T1 = T1 + 1
   Origs: 220:ifthen
   Dests: 260:auto
-260 F(I) (1 3) FOR I = 1 TO L
-    F(I) (1 4) IF L$(I) = G$ THEN 280
+260 F(I:220,I:260) (1 3) FOR I = 1 TO L
+    F(I:220,I:260) (1 4) IF L$(I) = G$ THEN 280
   Origs: 250:auto
   Dests: 270:auto, 270:fornext, 280:ifthen
-270 F(I) (0 1) NEXT I
+270 F(I:220,I:260) (0 1) NEXT I
     (1 4) IF R = 0 THEN 290
   Origs: 260:auto, 260:fornext, 280:goto
   Dests: 275:auto, 290:ifthen
 275 (0 2) GOTO 300
   Origs: 270:auto
   Dests: 300:goto
-280 F(I) (0 3) D$(I) = G$
-    F(I) (0 4) R = R + 1
-    F(I) (0 3) GOTO 270
+280 F(I:220,I:260) (0 3) D$(I) = G$
+    F(I:220,I:260) (0 4) R = R + 1
+    F(I:220,I:260) (0 3) GOTO 270
   Origs: 260:ifthen
   Dests: 270:goto
 290 (0 4) M = M + 1
     (0 2) GOTO 400
   Origs: 270:ifthen
   Dests: 400:goto
-300 F(I) (1 3) FOR I = 1 TO L
-    F(I) (1 4) IF D$(I) = "-" THEN 320
+300 F(I:300) (1 3) FOR I = 1 TO L
+    F(I:300) (1 4) IF D$(I) = "-" THEN 320
   Origs: 275:goto
   Dests: 310:auto, 310:fornext, 320:ifthen
-310 F(I) (0 1) NEXT I
+310 F(I:300) (0 1) NEXT I
     (0 2) GOTO 390
   Origs: 300:auto, 300:fornext
   Dests: 390:goto
-320 F(I) (0 2) PRINT
-    F(I) (1 3) FOR I = 1 TO L
-    F(I) (0 2) PRINT D$(I);
-    F(I) (0 1) NEXT I
+320 F(I:300) (0 2) PRINT
+    F(I:300,I:320.1) (1 3) FOR I = 1 TO L
+    F(I:300,I:320.1) (0 2) PRINT D$(I);
+    F(I:300,I:320.1) (0 1) NEXT I
     (0 2) PRINT
     (0 2) PRINT
   Origs: 300:ifthen
@@ -266,15 +266,15 @@ Halstead complexity:
     (0 2) GOTO 580
   Origs: 480:auto
   Dests: 580:goto
-490 F(I) (1 3) FOR I = 6 TO 9
-    F(I) (0 3) P$(I, 7) = "X"
-    F(I) (0 1) NEXT I
+490 F(I:490) (1 3) FOR I = 6 TO 9
+    F(I:490) (0 3) P$(I, 7) = "X"
+    F(I:490) (0 1) NEXT I
     (0 2) GOTO 580
   Origs: 470:goto
   Dests: 580:goto
-500 F(I) (1 3) FOR I = 4 TO 7
-    F(I) (0 3) P$(I, I - 1) = "\"
-    F(I) (0 1) NEXT I
+500 F(I:500) (1 3) FOR I = 4 TO 7
+    F(I:500) (0 3) P$(I, I - 1) = "\"
+    F(I:500) (0 1) NEXT I
     (0 2) GOTO 580
   Origs: 470:goto
   Dests: 580:goto
@@ -312,14 +312,14 @@ Halstead complexity:
     (0 3) P$(12, 4) = "/"
   Origs: 470:goto
   Dests: 580:auto
-580 F(I) (1 3) FOR I = 1 TO 12
-    F(I,J) (1 3) FOR J = 1 TO 12
-    F(I,J) (0 2) PRINT P$(I, J);
-    F(I,J) (0 1) NEXT J
+580 F(I:580) (1 3) FOR I = 1 TO 12
+    F(I:580,J:580.1) (1 3) FOR J = 1 TO 12
+    F(I:580,J:580.1) (0 2) PRINT P$(I, J);
+    F(I:580,J:580.1) (0 1) NEXT J
   Origs: 481:goto, 490:goto, 500:goto, 510:goto, 520:goto, 530:goto, 540:goto, 550:goto, 560:goto, 570:auto
   Dests: 590:auto, 590:fornext
-590 F(I) (0 2) PRINT
-    F(I) (0 1) NEXT I
+590 F(I:580) (0 2) PRINT
+    F(I:580) (0 1) NEXT I
     (0 2) PRINT
     (0 2) PRINT
     (1 5) IF M <> 10 THEN 170

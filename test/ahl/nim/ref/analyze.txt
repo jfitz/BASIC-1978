@@ -132,25 +132,25 @@ Halstead complexity:
 540 (0 2) PRINT "ENTER PILE SIZES"
   Origs: 530:auto
   Dests: 550:auto
-550 F(I) (1 3) FOR I = 1 TO N
+550 F(I:550) (1 3) FOR I = 1 TO N
   Origs: 540:auto
   Dests: 560:fornext, 610:fornext
-560 F(I) (0 2) PRINT I;
+560 F(I:550) (0 2) PRINT I;
   Origs: 550:fornext, 580:ifthen, 590:ifthen, 600:ifthen
   Dests: 570:auto
-570 F(I) (1 2) INPUT A(I)
+570 F(I:550) (1 2) INPUT A(I)
   Origs: 560:auto
   Dests: 580:auto
-580 F(I) (1 5) IF A(I) > 2000 THEN 560
+580 F(I:550) (1 5) IF A(I) > 2000 THEN 560
   Origs: 570:auto
   Dests: 560:ifthen, 590:auto
-590 F(I) (1 5) IF A(I) < 1 THEN 560
+590 F(I:550) (1 5) IF A(I) < 1 THEN 560
   Origs: 580:auto
   Dests: 560:ifthen, 600:auto
-600 F(I) (1 6) IF A(I) <> INT(A(I)) THEN 560
+600 F(I:550) (1 6) IF A(I) <> INT(A(I)) THEN 560
   Origs: 590:auto
   Dests: 560:ifthen, 610:auto
-610 F(I) (0 1) NEXT I
+610 F(I:550) (0 1) NEXT I
   Origs: 550:fornext, 600:auto
   Dests: 620:auto
 620 (0 2) PRINT "DO YOU WANT TO MOVE FIRST";
@@ -183,22 +183,22 @@ Halstead complexity:
 710 (0 3) LET C = 0
   Origs: 700:auto
   Dests: 720:auto
-720 F(I) (1 3) FOR I = 1 TO N
+720 F(I:720) (1 3) FOR I = 1 TO N
   Origs: 710:auto
   Dests: 730:fornext, 770:fornext
-730 F(I) (1 4) IF A(I) = 0 THEN 770
+730 F(I:720) (1 4) IF A(I) = 0 THEN 770
   Origs: 720:fornext
   Dests: 740:auto, 770:ifthen
-740 F(I) (0 4) LET C = C + 1
+740 F(I:720) (0 4) LET C = C + 1
   Origs: 730:auto
   Dests: 750:auto
-750 F(I) (1 4) IF C = 3 THEN 840
+750 F(I:720) (1 4) IF C = 3 THEN 840
   Origs: 740:auto
   Dests: 760:auto, 840:ifthen
-760 F(I) (0 3) LET D(C) = I
+760 F(I:720) (0 3) LET D(C) = I
   Origs: 750:auto
   Dests: 770:auto
-770 F(I) (0 1) NEXT I
+770 F(I:720) (0 1) NEXT I
   Origs: 720:fornext, 730:ifthen, 760:auto
   Dests: 780:auto
 780 (1 4) IF C = 2 THEN 920
@@ -219,22 +219,22 @@ Halstead complexity:
 830 (0 2) GOTO 1640
   Origs: 820:auto
   Dests: 1640:goto
-840 F(I) (0 3) LET C = 0
+840 F(I:720) (0 3) LET C = 0
   Origs: 750:ifthen
   Dests: 850:auto
-850 F(I) (1 3) FOR I = 1 TO N
+850 F(I:720,I:850) (1 3) FOR I = 1 TO N
   Origs: 840:auto
   Dests: 860:fornext, 890:fornext
-860 F(I) (1 4) IF A(I) > 1 THEN 940
+860 F(I:720,I:850) (1 4) IF A(I) > 1 THEN 940
   Origs: 850:fornext
   Dests: 870:auto, 940:ifthen
-870 F(I) (1 4) IF A(I) = 0 THEN 890
+870 F(I:720,I:850) (1 4) IF A(I) = 0 THEN 890
   Origs: 860:auto
   Dests: 880:auto, 890:ifthen
-880 F(I) (0 4) LET C = C + 1
+880 F(I:720,I:850) (0 4) LET C = C + 1
   Origs: 870:auto
   Dests: 890:auto
-890 F(I) (0 1) NEXT I
+890 F(I:720,I:850) (0 1) NEXT I
   Origs: 850:fornext, 870:ifthen, 880:auto
   Dests: 900:auto
 900 (1 7) IF C / 2 <> INT(C / 2) THEN 800
@@ -249,64 +249,65 @@ Halstead complexity:
 930 (1 5) IF A(D(2)) = 1 THEN 820
   Origs: 920:auto
   Dests: 820:ifthen, 940:auto
-940 F(I) (1 3) FOR I = 1 TO N
+940 F(I:720,I:850,I:940) (1 3) FOR I = 1 TO N
   Origs: 700:ifthen, 860:ifthen, 910:goto, 930:auto
   Dests: 950:fornext, 1010:fornext
-950 F(I) (0 3) LET E = A(I)
+950 F(I:720,I:850,I:940) (0 3) LET E = A(I)
   Origs: 940:fornext
   Dests: 960:auto
-960 F(I,J) (1 3) FOR J = 0 TO 10
+960 F(I:720,I:850,I:940,J:960) (1 3) FOR J = 0 TO 10
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 950:auto
   Dests: 970:fornext, 1000:fornext
-970 F(I,J) (0 4) LET F = E / 2
+970 F(I:720,I:850,I:940,J:960) (0 4) LET F = E / 2
   Origs: 960:fornext
   Dests: 980:auto
-980 F(I,J) (0 7) LET B(I, J) = 2 * (F - INT(F))
+980 F(I:720,I:850,I:940,J:960) (0 7) LET B(I, J) = 2 * (F - INT(F))
   Origs: 970:auto
   Dests: 990:auto
-990 F(I,J) (0 4) LET E = INT(F)
+990 F(I:720,I:850,I:940,J:960) (0 4) LET E = INT(F)
   Origs: 980:auto
   Dests: 1000:auto
-1000 F(I,J) (0 1) NEXT J
+1000 F(I:720,I:850,I:940,J:960) (0 1) NEXT J
   Origs: 960:fornext, 990:auto
   Dests: 1010:auto
-1010 F(I) (0 1) NEXT I
+1010 F(I:720,I:850,I:940) (0 1) NEXT I
   Origs: 940:fornext, 1000:auto
   Dests: 1020:auto
-1020 F(J) (1 5) FOR J = 10 TO 0 STEP -1
+1020 F(J:1020) (1 5) FOR J = 10 TO 0 STEP -1
   Origs: 1010:auto
   Dests: 1030:fornext, 1130:fornext
-1030 F(J) (0 3) LET C = 0
+1030 F(J:1020) (0 3) LET C = 0
   Origs: 1020:fornext
   Dests: 1040:auto
-1040 F(J) (0 3) LET H = 0
+1040 F(J:1020) (0 3) LET H = 0
   Origs: 1030:auto
   Dests: 1050:auto
-1050 F(J,I) (1 3) FOR I = 1 TO N
+1050 F(J:1020,I:1050) (1 3) FOR I = 1 TO N
   Origs: 1040:auto
   Dests: 1060:fornext, 1110:fornext
-1060 F(J,I) (1 4) IF B(I, J) = 0 THEN 1110
+1060 F(J:1020,I:1050) (1 4) IF B(I, J) = 0 THEN 1110
   Origs: 1050:fornext
   Dests: 1070:auto, 1110:ifthen
-1070 F(J,I) (0 4) LET C = C + 1
+1070 F(J:1020,I:1050) (0 4) LET C = C + 1
   Origs: 1060:auto
   Dests: 1080:auto
-1080 F(J,I) (1 4) IF A(I) <= H THEN 1110
+1080 F(J:1020,I:1050) (1 4) IF A(I) <= H THEN 1110
   Origs: 1070:auto
   Dests: 1090:auto, 1110:ifthen
-1090 F(J,I) (0 3) LET H = A(I)
+1090 F(J:1020,I:1050) (0 3) LET H = A(I)
   Origs: 1080:auto
   Dests: 1100:auto
-1100 F(J,I) (0 3) LET G = I
+1100 F(J:1020,I:1050) (0 3) LET G = I
   Origs: 1090:auto
   Dests: 1110:auto
-1110 F(J,I) (0 1) NEXT I
+1110 F(J:1020,I:1050) (0 1) NEXT I
   Origs: 1050:fornext, 1060:ifthen, 1080:ifthen, 1100:auto
   Dests: 1120:auto
-1120 F(J) (1 6) IF C / 2 <> INT(C / 2) THEN 1190
+1120 F(J:1020) (1 6) IF C / 2 <> INT(C / 2) THEN 1190
   Origs: 1110:auto
   Dests: 1130:auto, 1190:ifthen
-1130 F(J) (0 1) NEXT J
+1130 F(J:1020) (0 1) NEXT J
   Origs: 1020:fornext, 1120:auto
   Dests: 1140:auto
 1140 (0 4) LET E = INT(N * RND(1) + 1)
@@ -324,34 +325,34 @@ Halstead complexity:
 1180 (0 2) GOTO 1380
   Origs: 1170:auto
   Dests: 1380:goto
-1190 F(J) (0 3) LET A(G) = 0
+1190 F(J:1020) (0 3) LET A(G) = 0
   Origs: 1120:ifthen
   Dests: 1200:auto
-1200 F(J) (1 3) FOR J = 0 TO 10
+1200 F(J:1020,J:1200) (1 3) FOR J = 0 TO 10
   Origs: 1190:auto
   Dests: 1210:fornext, 1280:fornext
-1210 F(J) (0 3) LET B(G, J) = 0
+1210 F(J:1020,J:1200) (0 3) LET B(G, J) = 0
   Origs: 1200:fornext
   Dests: 1220:auto
-1220 F(J) (0 3) LET C = 0
+1220 F(J:1020,J:1200) (0 3) LET C = 0
   Origs: 1210:auto
   Dests: 1230:auto
-1230 F(J,I) (1 3) FOR I = 1 TO N
+1230 F(J:1020,J:1200,I:1230) (1 3) FOR I = 1 TO N
   Origs: 1220:auto
   Dests: 1240:fornext, 1260:fornext
-1240 F(J,I) (1 4) IF B(I, J) = 0 THEN 1260
+1240 F(J:1020,J:1200,I:1230) (1 4) IF B(I, J) = 0 THEN 1260
   Origs: 1230:fornext
   Dests: 1250:auto, 1260:ifthen
-1250 F(J,I) (0 4) LET C = C + 1
+1250 F(J:1020,J:1200,I:1230) (0 4) LET C = C + 1
   Origs: 1240:auto
   Dests: 1260:auto
-1260 F(J,I) (0 1) NEXT I
+1260 F(J:1020,J:1200,I:1230) (0 1) NEXT I
   Origs: 1230:fornext, 1240:ifthen, 1250:auto
   Dests: 1270:auto
-1270 F(J) (0 13) LET A(G) = A(G) + 2 * (C / 2 - INT(C / 2)) * 2 ^ J
+1270 F(J:1020,J:1200) (0 13) LET A(G) = A(G) + 2 * (C / 2 - INT(C / 2)) * 2 ^ J
   Origs: 1260:auto
   Dests: 1280:auto
-1280 F(J) (0 1) NEXT J
+1280 F(J:1020,J:1200) (0 1) NEXT J
   Origs: 1200:fornext, 1270:auto
   Dests: 1290:auto
 1290 (1 4) IF W = 1 THEN 1380
@@ -360,19 +361,19 @@ Halstead complexity:
 1300 (0 3) LET C = 0
   Origs: 1290:auto
   Dests: 1310:auto
-1310 F(I) (1 3) FOR I = 1 TO N
+1310 F(I:1310) (1 3) FOR I = 1 TO N
   Origs: 1300:auto
   Dests: 1320:fornext, 1350:fornext
-1320 F(I) (1 4) IF A(I) > 1 THEN 1380
+1320 F(I:1310) (1 4) IF A(I) > 1 THEN 1380
   Origs: 1310:fornext
   Dests: 1330:auto, 1380:ifthen
-1330 F(I) (1 4) IF A(I) = 0 THEN 1350
+1330 F(I:1310) (1 4) IF A(I) = 0 THEN 1350
   Origs: 1320:auto
   Dests: 1340:auto, 1350:ifthen
-1340 F(I) (0 4) LET C = C + 1
+1340 F(I:1310) (0 4) LET C = C + 1
   Origs: 1330:auto
   Dests: 1350:auto
-1350 F(I) (0 1) NEXT I
+1350 F(I:1310) (0 1) NEXT I
   Origs: 1310:fornext, 1330:ifthen, 1340:auto
   Dests: 1360:auto
 1360 (1 6) IF C / 2 <> INT(C / 2) THEN 1380
@@ -381,16 +382,16 @@ Halstead complexity:
 1370 (0 4) LET A(G) = 1 - A(G)
   Origs: 1360:auto
   Dests: 1380:auto
-1380 F(I) (0 2) PRINT "PILE  SIZE"
+1380 F(I:1310) (0 2) PRINT "PILE  SIZE"
   Origs: 1180:goto, 1290:ifthen, 1320:ifthen, 1360:ifthen, 1370:auto
   Dests: 1390:auto
-1390 F(I) (1 3) FOR I = 1 TO N
+1390 F(I:1310,I:1390) (1 3) FOR I = 1 TO N
   Origs: 1380:auto
   Dests: 1400:fornext, 1410:fornext
-1400 F(I) (0 3) PRINT I; A(I)
+1400 F(I:1310,I:1390) (0 3) PRINT I; A(I)
   Origs: 1390:fornext
   Dests: 1410:auto
-1410 F(I) (0 1) NEXT I
+1410 F(I:1310,I:1390) (0 1) NEXT I
   Origs: 1390:fornext, 1400:auto
   Dests: 1420:auto
 1420 (1 4) IF W = 2 THEN 1450
@@ -441,16 +442,16 @@ Halstead complexity:
 1570 G(1570) (0 3) LET Z = 0
   Origs: 1430:gosub, 1540:gosub
   Dests: 1580:auto
-1580 G(1570) F(I) (1 3) FOR I = 1 TO N
+1580 G(1570) F(I:1580) (1 3) FOR I = 1 TO N
   Origs: 1570:auto
   Dests: 1590:fornext, 1610:fornext
-1590 G(1570) F(I) (1 4) IF A(I) = 0 THEN 1610
+1590 G(1570) F(I:1580) (1 4) IF A(I) = 0 THEN 1610
   Origs: 1580:fornext
   Dests: 1600:auto, 1610:ifthen
-1600 G(1570) F(I) (0 1) RETURN
+1600 G(1570) F(I:1580) (0 1) RETURN
   Origs: 1590:auto
   Dests: 
-1610 G(1570) F(I) (0 1) NEXT I
+1610 G(1570) F(I:1580) (0 1) NEXT I
   Origs: 1580:fornext, 1590:ifthen
   Dests: 1620:auto
 1620 G(1570) (0 3) LET Z = 1

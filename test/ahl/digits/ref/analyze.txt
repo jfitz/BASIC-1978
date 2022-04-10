@@ -82,25 +82,25 @@ Halstead complexity:
 380 (0 4) DIM M(26, 2), K(2, 2), L(8, 2)
   Origs: 360:auto
   Dests: 400:auto
-400 F(I) (1 3) FOR I = 0 TO 26
-    F(I,J) (1 3) FOR J = 0 TO 2
-    F(I,J) (0 3) M(I, J) = 1
-    F(I,J) (0 1) NEXT J
-    F(I) (0 1) NEXT I
+400 F(I:400) (1 3) FOR I = 0 TO 26
+    F(I:400,J:400.1) (1 3) FOR J = 0 TO 2
+    F(I:400,J:400.1) (0 3) M(I, J) = 1
+    F(I:400,J:400.1) (0 1) NEXT J
+    F(I:400) (0 1) NEXT I
   Origs: 380:auto, 1070:ifthen
   Dests: 410:auto
-410 F(I) (1 3) FOR I = 0 TO 2
-    F(I,J) (1 3) FOR J = 0 TO 2
-    F(I,J) (0 3) K(I, J) = 9
-    F(I,J) (0 1) NEXT J
-    F(I) (0 1) NEXT I
+410 F(I:410) (1 3) FOR I = 0 TO 2
+    F(I:410,J:410.1) (1 3) FOR J = 0 TO 2
+    F(I:410,J:410.1) (0 3) K(I, J) = 9
+    F(I:410,J:410.1) (0 1) NEXT J
+    F(I:410) (0 1) NEXT I
   Origs: 400:auto
   Dests: 420:auto
-420 F(I) (1 3) FOR I = 0 TO 8
-    F(I,J) (1 3) FOR J = 0 TO 2
-    F(I,J) (0 3) L(I, J) = 3
-    F(I,J) (0 1) NEXT J
-    F(I) (0 1) NEXT I
+420 F(I:420) (1 3) FOR I = 0 TO 8
+    F(I:420,J:420.1) (1 3) FOR J = 0 TO 2
+    F(I:420,J:420.1) (0 3) L(I, J) = 3
+    F(I:420,J:420.1) (0 1) NEXT J
+    F(I:420) (0 1) NEXT I
   Origs: 410:auto
   Dests: 450:auto
 450 (0 3) L(0, 0) = 2
@@ -116,114 +116,114 @@ Halstead complexity:
 510 (0 3) X = 0
   Origs: 480:auto
   Dests: 520:auto
-520 F(T) (1 3) FOR T = 1 TO 3
+520 F(T:520) (1 3) FOR T = 1 TO 3
   Origs: 510:auto
   Dests: 530:fornext, 910:fornext
-530 F(T,I) (0 2) PRINT
+530 F(T:520,I:560) (0 2) PRINT
   Origs: 520:fornext, 600:goto
   Dests: 540:auto
-540 F(T,I) (0 2) PRINT "TEN NUMBERS, PLEASE";
+540 F(T:520,I:560) (0 2) PRINT "TEN NUMBERS, PLEASE";
   Origs: 530:auto
   Dests: 550:auto
-550 F(T,I) (10 11) INPUT N(1), N(2), N(3), N(4), N(5), N(6), N(7), N(8), N(9), N(10)
+550 F(T:520,I:560) (10 11) INPUT N(1), N(2), N(3), N(4), N(5), N(6), N(7), N(8), N(9), N(10)
   Origs: 540:auto
   Dests: 560:auto
-560 F(T,I) (1 3) FOR I = 1 TO 10
+560 F(T:520,I:560) (1 3) FOR I = 1 TO 10
   Origs: 550:auto
   Dests: 570:fornext, 620:fornext
-570 F(T,I) (0 4) W = N(I) - 1
+570 F(T:520,I:560) (0 4) W = N(I) - 1
   Origs: 560:fornext
   Dests: 580:auto
-580 F(T,I) (1 5) IF W = SGN(W) THEN 620
+580 F(T:520,I:560) (1 5) IF W = SGN(W) THEN 620
   Origs: 570:auto
   Dests: 590:auto, 620:ifthen
-590 F(T,I) (0 2) PRINT "ONLY USE THE DIGITS '0', '1', OR '2'."
+590 F(T:520,I:560) (0 2) PRINT "ONLY USE THE DIGITS '0', '1', OR '2'."
   Origs: 580:auto
   Dests: 600:auto
-600 F(T,I) (0 2) PRINT "LET'S TRY AGAIN."
-    F(T,I) (0 3) GOTO 530
+600 F(T:520,I:560) (0 2) PRINT "LET'S TRY AGAIN."
+    F(T:520,I:560) (0 3) GOTO 530
   Origs: 590:auto
   Dests: 530:goto
-620 F(T,I) (0 1) NEXT I
+620 F(T:520,I:560) (0 1) NEXT I
   Origs: 560:fornext, 580:ifthen
   Dests: 630:auto
-630 F(T) (0 2) PRINT
-    F(T) (0 5) PRINT "MY GUESS", "YOUR NO.", "RESULT", "NO. RIGHT"
-    F(T) (0 2) PRINT
+630 F(T:520) (0 2) PRINT
+    F(T:520) (0 5) PRINT "MY GUESS", "YOUR NO.", "RESULT", "NO. RIGHT"
+    F(T:520) (0 2) PRINT
   Origs: 620:auto
   Dests: 660:auto
-660 F(T,U) (1 3) FOR U = 1 TO 10
+660 F(T:520,U:660) (1 3) FOR U = 1 TO 10
   Origs: 630:auto
   Dests: 670:fornext, 900:fornext
-670 F(T,U) (0 3) N = N(U)
-    F(T,U) (0 3) S = 0
+670 F(T:520,U:660) (0 3) N = N(U)
+    F(T:520,U:660) (0 3) S = 0
   Origs: 660:fornext
   Dests: 690:auto
-690 F(T,U,J) (1 3) FOR J = 0 TO 2
+690 F(T:520,U:660,J:690) (1 3) FOR J = 0 TO 2
   Origs: 670:auto
   Dests: 700:fornext, 760:fornext
-700 F(T,U,J) (0 10) S1 = A * K(Z2, J) + B * L(Z1, J) + C * M(Z, J)
+700 F(T:520,U:660,J:690) (0 10) S1 = A * K(Z2, J) + B * L(Z1, J) + C * M(Z, J)
   Origs: 690:fornext
   Dests: 710:auto
-710 F(T,U,J) (1 4) IF S > S1 THEN 760
+710 F(T:520,U:660,J:690) (1 4) IF S > S1 THEN 760
   Origs: 700:auto
   Dests: 720:auto, 760:ifthen
-720 F(T,U,J) (1 4) IF S < S1 THEN 740
+720 F(T:520,U:660,J:690) (1 4) IF S < S1 THEN 740
   Origs: 710:auto
   Dests: 730:auto, 740:ifthen
-730 F(T,U,J) (1 5) IF RND(1) < 0.5 THEN 760
+730 F(T:520,U:660,J:690) (1 5) IF RND(1) < 0.5 THEN 760
   Origs: 720:auto
   Dests: 740:auto, 760:ifthen
-740 F(T,U,J) (0 3) S = S1
-    F(T,U,J) (0 3) G = J
+740 F(T:520,U:660,J:690) (0 3) S = S1
+    F(T:520,U:660,J:690) (0 3) G = J
   Origs: 720:ifthen, 730:auto
   Dests: 760:auto
-760 F(T,U,J) (0 1) NEXT J
+760 F(T:520,U:660,J:690) (0 1) NEXT J
   Origs: 690:fornext, 710:ifthen, 730:ifthen, 740:auto
   Dests: 770:auto
-770 F(T,U) (0 5) PRINT "  "; G, "   "; N(U),
+770 F(T:520,U:660) (0 5) PRINT "  "; G, "   "; N(U),
   Origs: 760:auto
   Dests: 780:auto
-780 F(T,U) (1 4) IF G = N(U) THEN 810
+780 F(T:520,U:660) (1 4) IF G = N(U) THEN 810
   Origs: 770:auto
   Dests: 790:auto, 810:ifthen
-790 F(T,U) (0 3) PRINT " WRONG", X
+790 F(T:520,U:660) (0 3) PRINT " WRONG", X
   Origs: 780:auto
   Dests: 800:auto
-800 F(T,U) (0 2) GOTO 880
+800 F(T:520,U:660) (0 2) GOTO 880
   Origs: 790:auto
   Dests: 880:goto
-810 F(T,U) (0 4) X = X + 1
+810 F(T:520,U:660) (0 4) X = X + 1
   Origs: 780:ifthen
   Dests: 820:auto
-820 F(T,U) (0 3) PRINT " RIGHT", X
+820 F(T:520,U:660) (0 3) PRINT " RIGHT", X
   Origs: 810:auto
   Dests: 830:auto
-830 F(T,U) (0 4) M(Z, N) = M(Z, N) + 1
+830 F(T:520,U:660) (0 4) M(Z, N) = M(Z, N) + 1
   Origs: 820:auto
   Dests: 840:auto
-840 F(T,U) (0 4) L(Z1, N) = L(Z1, N) + 1
+840 F(T:520,U:660) (0 4) L(Z1, N) = L(Z1, N) + 1
   Origs: 830:auto
   Dests: 850:auto
-850 F(T,U) (0 4) K(Z2, N) = K(Z2, N) + 1
+850 F(T:520,U:660) (0 4) K(Z2, N) = K(Z2, N) + 1
   Origs: 840:auto
   Dests: 860:auto
-860 F(T,U) (0 7) Z = Z - INT(Z / 9) * 9
+860 F(T:520,U:660) (0 7) Z = Z - INT(Z / 9) * 9
   Origs: 850:auto
   Dests: 870:auto
-870 F(T,U) (0 5) Z = 3 * Z + N(U)
+870 F(T:520,U:660) (0 5) Z = 3 * Z + N(U)
   Origs: 860:auto
   Dests: 880:auto
-880 F(T,U) (0 7) Z1 = Z - INT(Z / 9) * 9
+880 F(T:520,U:660) (0 7) Z1 = Z - INT(Z / 9) * 9
   Origs: 800:goto, 870:auto
   Dests: 890:auto
-890 F(T,U) (0 3) Z2 = N(U)
+890 F(T:520,U:660) (0 3) Z2 = N(U)
   Origs: 880:auto
   Dests: 900:auto
-900 F(T,U) (0 1) NEXT U
+900 F(T:520,U:660) (0 1) NEXT U
   Origs: 660:fornext, 890:auto
   Dests: 910:auto
-910 F(T) (0 1) NEXT T
+910 F(T:520) (0 1) NEXT T
   Origs: 520:fornext, 900:auto
   Dests: 920:auto
 920 (0 2) PRINT
@@ -248,9 +248,9 @@ Halstead complexity:
   Origs: 930:ifthen
   Dests: 990:auto
 990 (0 2) PRINT "I WIN."
-    F(Q) (1 3) FOR Q = 1 TO 10
-    F(Q) (0 3) PRINT CHR$(7);
-    F(Q) (0 1) NEXT Q
+    F(Q:990.1) (1 3) FOR Q = 1 TO 10
+    F(Q:990.1) (0 3) PRINT CHR$(7);
+    F(Q:990.1) (0 1) NEXT Q
   Origs: 980:auto
   Dests: 1000:auto
 1000 (0 2) GOTO 1030

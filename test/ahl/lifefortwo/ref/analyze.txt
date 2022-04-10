@@ -39,35 +39,35 @@ Halstead complexity:
 9 (0 2) DATA 21, 30, 1020, 1030, 1011, 1021, 1003, 1002, 1012
   Origs: 
   Dests: 
-10 F(M) (1 3) FOR M = 1 TO 18
-   F(M) (1 2) READ K(M)
-   F(M) (0 1) NEXT M
+10 F(M:10) (1 3) FOR M = 1 TO 18
+   F(M:10) (1 2) READ K(M)
+   F(M:10) (0 1) NEXT M
   Origs: 7:auto
   Dests: 14:auto
 13 (0 8) DATA -1, 0, 1, 0, 0, -1, 0, 1, -1, -1, 1, -1, -1, 1, 1, 1
   Origs: 
   Dests: 
-14 F(O1) (1 3) FOR O1 = 1 TO 16
-   F(O1) (1 2) READ A(O1)
-   F(O1) (0 1) NEXT O1
+14 F(O1:14) (1 3) FOR O1 = 1 TO 16
+   F(O1:14) (1 2) READ A(O1)
+   F(O1:14) (0 1) NEXT O1
   Origs: 10:auto
   Dests: 20:auto
 20 (0 2) GOTO 500
   Origs: 14:auto
   Dests: 500:goto
-50 G(50) F(J) (1 3) FOR J = 1 TO 5
+50 G(50) F(J:50) (1 3) FOR J = 1 TO 5
   Origs: 560:gosub
   Dests: 51:fornext, 65:fornext
-51 G(50) F(J,K) (1 3) FOR K = 1 TO 5
+51 G(50) F(J:50,K:51) (1 3) FOR K = 1 TO 5
   Origs: 50:fornext
   Dests: 55:fornext, 60:fornext
-55 G(50) F(J,K) (1 5) IF N(J, K) > 99 THEN GOSUB 200
+55 G(50) F(J:50,K:51) (1 5) IF N(J, K) > 99 THEN GOSUB 200
   Origs: 51:fornext
   Dests: 60:auto, 200:gosub
-60 G(50) F(J,K) (0 1) NEXT K
+60 G(50) F(J:50,K:51) (0 1) NEXT K
   Origs: 51:fornext, 55:auto
   Dests: 65:auto
-65 G(50) F(J) (0 1) NEXT J
+65 G(50) F(J:50) (0 1) NEXT J
   Origs: 50:fornext, 60:auto
   Dests: 90:auto
 90 G(90,50) (0 3) K = 0
@@ -77,56 +77,56 @@ Halstead complexity:
    WARNING: Multiple GOSUB entry points
   Origs: 65:auto, 559:gosub
   Dests: 99:auto
-99 G(90,50) F(J) (1 3) FOR J = 0 TO 6
-   G(90,50) F(J) (0 2) PRINT
+99 G(90,50) F(J:99) (1 3) FOR J = 0 TO 6
+   G(90,50) F(J:99) (0 2) PRINT
    WARNING: Multiple GOSUB entry points
   Origs: 90:auto
   Dests: 100:auto, 125:fornext
-100 G(90,50) F(J,K) (1 3) FOR K = 0 TO 6
+100 G(90,50) F(J:99,K:100) (1 3) FOR K = 0 TO 6
     WARNING: Multiple GOSUB entry points
   Origs: 99:auto
   Dests: 101:fornext, 120:fornext
-101 G(90,50) F(J,K) (2 7) IF J <> 0 THEN IF J <> 6 THEN 105
+101 G(90,50) F(J:99,K:100) (2 7) IF J <> 0 THEN IF J <> 6 THEN 105
     WARNING: Multiple GOSUB entry points
   Origs: 100:fornext
   Dests: 102:auto, 105:ifthen
-102 G(90,50) F(J,K) (1 5) IF K = 6 THEN PRINT 0;
-    G(90,50) F(J,K) (0 2) GOTO 125
+102 G(90,50) F(J:99,K:100) (1 5) IF K = 6 THEN PRINT 0;
+    G(90,50) F(J:99,K:100) (0 2) GOTO 125
     WARNING: Multiple GOSUB entry points
   Origs: 101:auto
   Dests: 103:auto, 125:goto
-103 G(90,50) F(J,K) (0 2) PRINT K;
-    G(90,50) F(J,K) (0 2) GOTO 120
+103 G(90,50) F(J:99,K:100) (0 2) PRINT K;
+    G(90,50) F(J:99,K:100) (0 2) GOTO 120
     WARNING: Multiple GOSUB entry points
   Origs: 102:auto
   Dests: 120:goto
-105 G(90,50) F(J,K) (2 7) IF K <> 0 THEN IF K <> 6 THEN 110
+105 G(90,50) F(J:99,K:100) (2 7) IF K <> 0 THEN IF K <> 6 THEN 110
     WARNING: Multiple GOSUB entry points
   Origs: 101:ifthen
   Dests: 106:auto, 110:ifthen
-106 G(90,50) F(J,K) (1 5) IF J = 6 THEN PRINT 0
-    G(90,50) F(J,K) (0 2) GOTO 126
+106 G(90,50) F(J:99,K:100) (1 5) IF J = 6 THEN PRINT 0
+    G(90,50) F(J:99,K:100) (0 2) GOTO 126
     WARNING: Multiple GOSUB entry points
   Origs: 105:auto
   Dests: 107:auto, 126:goto
-107 G(90,50) F(J,K) (0 2) PRINT J;
-    G(90,50) F(J,K) (0 2) GOTO 120
+107 G(90,50) F(J:99,K:100) (0 2) PRINT J;
+    G(90,50) F(J:99,K:100) (0 2) GOTO 120
     WARNING: Multiple GOSUB entry points
   Origs: 106:auto
   Dests: 120:goto
-110 G(90,50) F(J,K) (0 2) GOSUB 300
+110 G(90,50) F(J:99,K:100) (0 2) GOSUB 300
     WARNING: Multiple GOSUB entry points
   Origs: 105:ifthen
   Dests: 120:auto, 300:gosub
-120 G(90,50) F(J,K) (0 1) NEXT K
+120 G(90,50) F(J:99,K:100) (0 1) NEXT K
     WARNING: Multiple GOSUB entry points
   Origs: 100:fornext, 103:goto, 107:goto, 110:auto
   Dests: 125:auto
-125 G(90,50) F(J,K) (0 1) NEXT J
+125 G(90,50) F(J:99,K:100) (0 1) NEXT J
     WARNING: Multiple GOSUB entry points
   Origs: 99:fornext, 102:goto, 120:auto
   Dests: 126:auto
-126 G(90,50) F(J,K) (0 1) RETURN
+126 G(90,50) F(J:99,K:100) (0 1) RETURN
     WARNING: Multiple GOSUB entry points
   Origs: 106:goto, 125:auto
   Dests: 
@@ -134,13 +134,13 @@ Halstead complexity:
     (1 6) IF N(J, K) > 999 THEN B = 10
   Origs: 55:gosub
   Dests: 220:auto
-220 F(O1) (1 4) FOR O1 = 1 TO 15 STEP 2
+220 F(O1:220) (1 4) FOR O1 = 1 TO 15 STEP 2
   Origs: 200:auto
   Dests: 230:fornext, 231:fornext
-230 F(O1) (0 4) N(J + A(O1), K + A(O1 + 1)) = N(J + A(O1), K + A(O1 + 1)) + B
+230 F(O1:220) (0 4) N(J + A(O1), K + A(O1 + 1)) = N(J + A(O1), K + A(O1 + 1)) + B
   Origs: 220:fornext
   Dests: 231:auto
-231 F(O1) (0 1) NEXT O1
+231 F(O1:220) (0 1) NEXT O1
   Origs: 220:fornext, 230:auto
   Dests: 239:auto
 239 (0 1) RETURN
@@ -149,35 +149,35 @@ Halstead complexity:
 300 G(300) (1 4) IF N(J, K) < 3 THEN 399
   Origs: 110:gosub
   Dests: 305:auto, 399:ifthen
-305 G(300) F(O1) (1 3) FOR O1 = 1 TO 18
+305 G(300) F(O1:305) (1 3) FOR O1 = 1 TO 18
   Origs: 300:auto
   Dests: 310:fornext, 315:fornext
-310 G(300) F(O1) (1 4) IF N(J, K) = K(O1) THEN 350
+310 G(300) F(O1:305) (1 4) IF N(J, K) = K(O1) THEN 350
   Origs: 305:fornext
   Dests: 315:auto, 350:ifthen
-315 G(300) F(O1) (0 1) NEXT O1
+315 G(300) F(O1:305) (0 1) NEXT O1
   Origs: 305:fornext, 310:auto
   Dests: 320:auto
 320 G(300) (0 2) GOTO 399
   Origs: 315:auto
   Dests: 399:goto
-350 G(300) F(O1) (1 4) IF O1 > 9 THEN 360
+350 G(300) F(O1:305) (1 4) IF O1 > 9 THEN 360
   Origs: 310:ifthen
   Dests: 351:auto, 360:ifthen
-351 G(300) F(O1) (0 3) N(J, K) = 100
-    G(300) F(O1) (0 4) M2 = M2 + 1
-    G(300) F(O1) (0 2) PRINT " * ";
+351 G(300) F(O1:305) (0 3) N(J, K) = 100
+    G(300) F(O1:305) (0 4) M2 = M2 + 1
+    G(300) F(O1:305) (0 2) PRINT " * ";
   Origs: 350:auto
   Dests: 355:auto
-355 G(300) F(O1) (0 1) RETURN
+355 G(300) F(O1:305) (0 1) RETURN
   Origs: 351:auto
   Dests: 
-360 G(300) F(O1) (0 3) N(J, K) = 1000
-    G(300) F(O1) (0 4) M3 = M3 + 1
-    G(300) F(O1) (0 2) PRINT " # ";
+360 G(300) F(O1:305) (0 3) N(J, K) = 1000
+    G(300) F(O1:305) (0 4) M3 = M3 + 1
+    G(300) F(O1:305) (0 2) PRINT " # ";
   Origs: 350:ifthen
   Dests: 365:auto
-365 G(300) F(O1) (0 1) RETURN
+365 G(300) F(O1:305) (0 1) RETURN
   Origs: 360:auto
   Dests: 
 399 G(300) (0 3) N(J, K) = 0
@@ -192,83 +192,83 @@ Halstead complexity:
     (0 3) M3 = 0
   Origs: 500:auto
   Dests: 510:auto
-510 F(J) (1 3) FOR J = 1 TO 5
+510 F(J:510) (1 3) FOR J = 1 TO 5
   Origs: 505:auto
   Dests: 511:fornext, 517:fornext
-511 F(J,K) (1 3) FOR K = 1 TO 5
+511 F(J:510,K:511) (1 3) FOR K = 1 TO 5
   Origs: 510:fornext
   Dests: 515:fornext, 516:fornext
-515 F(J,K) (0 3) N(J, K) = 0
+515 F(J:510,K:511) (0 3) N(J, K) = 0
   Origs: 511:fornext
   Dests: 516:auto
-516 F(J,K) (0 1) NEXT K
+516 F(J:510,K:511) (0 1) NEXT K
   Origs: 511:fornext, 515:auto
   Dests: 517:auto
-517 F(J) (0 1) NEXT J
+517 F(J:510) (0 1) NEXT J
   Origs: 510:fornext, 516:auto
   Dests: 519:auto
-519 F(B) (1 3) FOR B = 1 TO 2
-    F(B) (0 3) P1 = 3
-    F(B) (1 6) IF B = 2 THEN P1 = 30
+519 F(B:519) (1 3) FOR B = 1 TO 2
+    F(B:519) (0 3) P1 = 3
+    F(B:519) (1 6) IF B = 2 THEN P1 = 30
   Origs: 517:auto
   Dests: 520:auto, 542:fornext
-520 F(B) (0 2) PRINT
-    F(B) (0 4) PRINT "PLAYER"; B; " - 3 LIVE PIECES."
+520 F(B:519) (0 2) PRINT
+    F(B:519) (0 4) PRINT "PLAYER"; B; " - 3 LIVE PIECES."
   Origs: 519:auto
   Dests: 535:auto
-535 F(B,K1) (1 3) FOR K1 = 1 TO 3
-    F(B,K1) (0 2) GOSUB 700
+535 F(B:519,K1:535) (1 3) FOR K1 = 1 TO 3
+    F(B:519,K1:535) (0 2) GOSUB 700
   Origs: 520:auto
   Dests: 540:auto, 540:fornext, 700:gosub
-540 F(B,K1) (0 3) N(X(B), Y(B)) = P1
-    F(B,K1) (0 1) NEXT K1
+540 F(B:519,K1:535) (0 3) N(X(B), Y(B)) = P1
+    F(B:519,K1:535) (0 1) NEXT K1
   Origs: 535:auto, 535:fornext
   Dests: 542:auto
-542 F(B) (0 1) NEXT B
+542 F(B:519) (0 1) NEXT B
   Origs: 519:fornext, 540:auto
   Dests: 559:auto
 559 (0 3) GOSUB 90
   Origs: 542:auto
   Dests: 90:gosub, 560:auto
-560 F(B) (0 2) PRINT
-    F(B) (0 3) GOSUB 50
+560 F(B:580) (0 2) PRINT
+    F(B:580) (0 3) GOSUB 50
   Origs: 559:auto, 581:ifthen, 596:goto
   Dests: 50:gosub, 570:auto
-570 F(B) (2 7) IF M2 = 0 THEN IF M3 = 0 THEN 574
+570 F(B:580) (2 7) IF M2 = 0 THEN IF M3 = 0 THEN 574
   Origs: 560:auto
   Dests: 571:auto, 574:ifthen
-571 F(B) (1 6) IF M3 = 0 THEN B = 1
-    F(B) (0 2) GOTO 575
+571 F(B:580) (1 6) IF M3 = 0 THEN B = 1
+    F(B:580) (0 2) GOTO 575
   Origs: 570:auto
   Dests: 572:auto, 575:goto
-572 F(B) (1 6) IF M2 = 0 THEN B = 2
-    F(B) (0 2) GOTO 575
+572 F(B:580) (1 6) IF M2 = 0 THEN B = 2
+    F(B:580) (0 2) GOTO 575
   Origs: 571:auto
   Dests: 573:auto, 575:goto
-573 F(B) (0 2) GOTO 580
+573 F(B:580) (0 2) GOTO 580
   Origs: 572:auto
   Dests: 580:goto
-574 F(B) (0 2) PRINT
-    F(B) (0 2) PRINT "A DRAW"
-    F(B) (0 2) GOTO 800
+574 F(B:580) (0 2) PRINT
+    F(B:580) (0 2) PRINT "A DRAW"
+    F(B:580) (0 2) GOTO 800
   Origs: 570:ifthen
   Dests: 800:goto
-575 F(B) (0 2) PRINT
-    F(B) (0 4) PRINT "PLAYER"; B; "IS THE WINNER"
-    F(B) (0 2) GOTO 800
+575 F(B:580) (0 2) PRINT
+    F(B:580) (0 4) PRINT "PLAYER"; B; "IS THE WINNER"
+    F(B:580) (0 2) GOTO 800
   Origs: 571:goto, 572:goto
   Dests: 800:goto
-580 F(B) (1 3) FOR B = 1 TO 2
-    F(B) (0 2) PRINT
-    F(B) (0 2) PRINT
-    F(B) (0 3) PRINT "PLAYER"; B;
-    F(B) (0 2) GOSUB 700
+580 F(B:580) (1 3) FOR B = 1 TO 2
+    F(B:580) (0 2) PRINT
+    F(B:580) (0 2) PRINT
+    F(B:580) (0 3) PRINT "PLAYER"; B;
+    F(B:580) (0 2) GOSUB 700
   Origs: 573:goto
   Dests: 581:auto, 582:fornext, 700:gosub
-581 F(B) (1 5) IF B = 99 THEN 560
+581 F(B:580) (1 5) IF B = 99 THEN 560
   Origs: 580:auto
   Dests: 560:ifthen, 582:auto
-582 F(B) (0 1) NEXT B
+582 F(B:580) (0 1) NEXT B
   Origs: 580:fornext, 581:auto
   Dests: 586:auto
 586 (0 3) N(X(1), Y(1)) = 100
@@ -323,7 +323,7 @@ Halstead complexity:
     G(700) (0 3) GOTO 700
   Origs: 706:goto, 710:goto, 715:ifthen
   Dests: 700:goto
-800 F(B) (0 1) END
+800 F(B:580) (0 1) END
     WARNING: Terminating statement in FOR/NEXT
   Origs: 574:goto, 575:goto
   Dests: :stop

@@ -37,347 +37,351 @@ Halstead complexity:
 40 (0 7) DIM F(6, 6), H(6, 6), A(4), B(4), C(6), L(3)
   Origs: 7:auto
   Dests: 50:auto
-50 F(X) (1 3) FOR X = 1 TO 6
+50 F(X:50) (1 3) FOR X = 1 TO 6
   Origs: 40:auto, 1620:goto
   Dests: 51:fornext, 54:fornext
-51 F(X,Y) (1 3) FOR Y = 1 TO 6
+51 F(X:50,Y:51) (1 3) FOR Y = 1 TO 6
   Origs: 50:fornext
   Dests: 52:fornext, 53:fornext
-52 F(X,Y) (0 3) F(X, Y) = 0
+52 F(X:50,Y:51) (0 3) F(X, Y) = 0
   Origs: 51:fornext
   Dests: 53:auto
-53 F(X,Y) (0 1) NEXT Y
+53 F(X:50,Y:51) (0 1) NEXT Y
   Origs: 51:fornext, 52:auto
   Dests: 54:auto
-54 F(X) (0 1) NEXT X
+54 F(X:50) (0 1) NEXT X
   Origs: 50:fornext, 53:auto
   Dests: 60:auto
-60 F(I) (1 3) FOR I = 1 TO 3
+60 F(I:60) (1 3) FOR I = 1 TO 3
   Origs: 54:auto
   Dests: 70:fornext, 1000:fornext
-70 F(I) (0 4) N = 4 - I
+70 F(I:60) (0 4) N = 4 - I
   Origs: 60:fornext
   Dests: 80:auto
-80 F(I,J) (1 3) FOR J = 1 TO 2
+80 F(I:60,J:80) (1 3) FOR J = 1 TO 2
   Origs: 70:auto
   Dests: 90:fornext, 990:fornext
-90 F(I,J,K) (0 4) A = INT(6 * RND(1) + 1)
+90 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) A = INT(6 * RND(1) + 1)
   Origs: 80:fornext, 120:ifthen, 250:ifthen, 260:ifthen, 480:ifthen, 490:ifthen, 500:ifthen, 650:ifthen, 660:ifthen, 890:ifthen, 900:ifthen, 910:ifthen
   Dests: 100:auto
-100 F(I,J,K) (0 4) B = INT(6 * RND(1) + 1)
+100 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) B = INT(6 * RND(1) + 1)
   Origs: 90:auto
   Dests: 110:auto
-110 F(I,J,K) (0 4) D = INT(4 * RND(1) + 1)
+110 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) D = INT(4 * RND(1) + 1)
   Origs: 100:auto
   Dests: 120:auto
-120 F(I,J,K) (1 5) IF F(A, B) > 0 THEN 90
+120 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 5) IF F(A, B) > 0 THEN 90
   Origs: 110:auto
   Dests: 90:ifthen, 130:auto
-130 F(I,J,K) (0 3) M = 0
+130 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) M = 0
   Origs: 120:auto
   Dests: 140:auto
-140 F(I,J,K) (4 6) ON D GOTO 150, 340, 550, 740
+140 F(I:60,J:80,K:170,K:370,K:570,K:780) (4 6) ON D GOTO 150, 340, 550, 740
   Origs: 130:auto
   Dests: 150:auto, 150:goto, 340:goto, 550:goto, 740:goto
-150 F(I,J,K) (0 3) B(1) = B
+150 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) B(1) = B
   Origs: 140:auto, 140:goto
   Dests: 160:auto
-160 F(I,J,K) (0 3) B(2) = 7
-    F(I,J,K) (0 3) B(3) = 7
+160 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) B(2) = 7
+    F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) B(3) = 7
   Origs: 150:auto
   Dests: 170:auto
-170 F(I,J,K) (1 3) FOR K = 1 TO N
+170 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 3) FOR K = 1 TO N
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 160:auto
   Dests: 180:fornext, 280:fornext
-180 F(I,J,K) (1 4) IF M > 1 THEN 240
+180 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF M > 1 THEN 240
   Origs: 170:fornext
   Dests: 190:auto, 240:ifthen
-190 F(I,J,K) (1 4) IF B(K) = 6 THEN 230
+190 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF B(K) = 6 THEN 230
   Origs: 180:auto
   Dests: 200:auto, 230:ifthen
-200 F(I,J,K) (1 4) IF F(A, B(K) + 1) > 0 THEN 230
+200 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF F(A, B(K) + 1) > 0 THEN 230
   Origs: 190:auto
   Dests: 210:auto, 230:ifthen
-210 F(I,J,K) (0 4) B(K + 1) = B(K) + 1
+210 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) B(K + 1) = B(K) + 1
   Origs: 200:auto
   Dests: 220:auto
-220 F(I,J,K) (0 2) GOTO 280
+220 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 2) GOTO 280
   Origs: 210:auto
   Dests: 280:goto
-230 F(I,J,K) (0 3) M = 2
+230 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) M = 2
   Origs: 190:ifthen, 200:ifthen
   Dests: 240:auto
-240 F(I,J,K) (1 9) IF B(1) < B(2) AND B(1) < B(3) THEN Z = B(1)
+240 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF B(1) < B(2) AND B(1) < B(3) THEN Z = B(1)
   Origs: 180:ifthen, 230:auto
   Dests: 242:auto
-242 F(I,J,K) (1 9) IF B(2) < B(1) AND B(2) < B(3) THEN Z = B(2)
+242 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF B(2) < B(1) AND B(2) < B(3) THEN Z = B(2)
   Origs: 240:auto
   Dests: 244:auto
-244 F(I,J,K) (1 9) IF B(3) < B(1) AND B(3) < B(2) THEN Z = B(3)
+244 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF B(3) < B(1) AND B(3) < B(2) THEN Z = B(3)
   Origs: 242:auto
   Dests: 250:auto
-250 F(I,J,K) (1 5) IF Z = 1 THEN 90
+250 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 5) IF Z = 1 THEN 90
   Origs: 244:auto
   Dests: 90:ifthen, 260:auto
-260 F(I,J,K) (1 5) IF F(A, Z - 1) > 0 THEN 90
+260 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 5) IF F(A, Z - 1) > 0 THEN 90
   Origs: 250:auto
   Dests: 90:ifthen, 270:auto
-270 F(I,J,K) (0 4) B(K + 1) = Z - 1
+270 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) B(K + 1) = Z - 1
   Origs: 260:auto
   Dests: 280:auto
-280 F(I,J,K) (0 1) NEXT K
+280 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 1) NEXT K
   Origs: 170:fornext, 220:goto, 270:auto
   Dests: 290:auto
-290 F(I,J) (0 7) F(A, B) = 9 - 2 * I - J
+290 F(I:60,J:80) (0 7) F(A, B) = 9 - 2 * I - J
   Origs: 280:auto
   Dests: 300:auto
-300 F(I,J,K) (1 3) FOR K = 1 TO N
+300 F(I:60,J:80,K:300) (1 3) FOR K = 1 TO N
   Origs: 290:auto
   Dests: 310:fornext, 320:fornext
-310 F(I,J,K) (0 3) F(A, B(K + 1)) = F(A, B)
+310 F(I:60,J:80,K:300) (0 3) F(A, B(K + 1)) = F(A, B)
   Origs: 300:fornext
   Dests: 320:auto
-320 F(I,J,K) (0 1) NEXT K
+320 F(I:60,J:80,K:300) (0 1) NEXT K
   Origs: 300:fornext, 310:auto
   Dests: 330:auto
-330 F(I,J) (0 2) GOTO 990
+330 F(I:60,J:80) (0 2) GOTO 990
   Origs: 320:auto
   Dests: 990:goto
-340 F(I,J,K) (0 3) A(1) = A
+340 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) A(1) = A
   Origs: 140:goto
   Dests: 350:auto
-350 F(I,J,K) (0 3) B(1) = B
+350 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) B(1) = B
   Origs: 340:auto
   Dests: 360:auto
-360 F(I,J,K) (0 3) A(2) = 0
-    F(I,J,K) (0 3) A(3) = 0
-    F(I,J,K) (0 3) B(2) = 0
-    F(I,J,K) (0 3) B(3) = 0
+360 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) A(2) = 0
+    F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) A(3) = 0
+    F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) B(2) = 0
+    F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) B(3) = 0
   Origs: 350:auto
   Dests: 370:auto
-370 F(I,J,K) (1 3) FOR K = 1 TO N
+370 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 3) FOR K = 1 TO N
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 360:auto
   Dests: 380:fornext, 530:fornext
-380 F(I,J,K) (1 4) IF M > 1 THEN 460
+380 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF M > 1 THEN 460
   Origs: 370:fornext
   Dests: 390:auto, 460:ifthen
-390 F(I,J,K) (1 7) IF A(K) = 1 OR B(K) = 1 THEN 450
+390 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 7) IF A(K) = 1 OR B(K) = 1 THEN 450
   Origs: 380:auto
   Dests: 400:auto, 450:ifthen
-400 F(I,J,K) (1 4) IF F(A(K) - 1, B(K) - 1) > 0 THEN 450
+400 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF F(A(K) - 1, B(K) - 1) > 0 THEN 450
   Origs: 390:auto
   Dests: 410:auto, 450:ifthen
-410 F(I,J,K) (1 7) IF F(A(K) - 1, B(K)) > 0 AND F(A(K) - 1, B(K)) = F(A(K), B(K) - 1) THEN 450
+410 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 7) IF F(A(K) - 1, B(K)) > 0 AND F(A(K) - 1, B(K)) = F(A(K), B(K) - 1) THEN 450
   Origs: 400:auto
   Dests: 420:auto, 450:ifthen
-420 F(I,J,K) (0 4) A(K + 1) = A(K) - 1
+420 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) A(K + 1) = A(K) - 1
   Origs: 410:auto
   Dests: 430:auto
-430 F(I,J,K) (0 4) B(K + 1) = B(K) - 1
+430 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) B(K + 1) = B(K) - 1
   Origs: 420:auto
   Dests: 440:auto
-440 F(I,J,K) (0 2) GOTO 530
+440 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 2) GOTO 530
   Origs: 430:auto
   Dests: 530:goto
-450 F(I,J,K) (0 3) M = 2
+450 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) M = 2
   Origs: 390:ifthen, 400:ifthen, 410:ifthen
   Dests: 460:auto
-460 F(I,J,K) (1 9) IF A(1) > A(2) AND A(1) > A(3) THEN Z1 = A(1)
+460 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF A(1) > A(2) AND A(1) > A(3) THEN Z1 = A(1)
   Origs: 380:ifthen, 450:auto
   Dests: 462:auto
-462 F(I,J,K) (1 9) IF A(2) > A(1) AND A(2) > A(3) THEN Z1 = A(2)
+462 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF A(2) > A(1) AND A(2) > A(3) THEN Z1 = A(2)
   Origs: 460:auto
   Dests: 464:auto
-464 F(I,J,K) (1 9) IF A(3) > A(1) AND A(3) > A(2) THEN Z1 = A(3)
+464 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF A(3) > A(1) AND A(3) > A(2) THEN Z1 = A(3)
   Origs: 462:auto
   Dests: 470:auto
-470 F(I,J,K) (1 9) IF B(1) > B(2) AND B(1) > B(3) THEN Z2 = B(1)
+470 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF B(1) > B(2) AND B(1) > B(3) THEN Z2 = B(1)
   Origs: 464:auto
   Dests: 474:auto
-474 F(I,J,K) (1 9) IF B(2) > B(1) AND B(2) > B(3) THEN Z2 = B(2)
+474 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF B(2) > B(1) AND B(2) > B(3) THEN Z2 = B(2)
   Origs: 470:auto
   Dests: 476:auto
-476 F(I,J,K) (1 9) IF B(3) > B(1) AND B(3) > B(2) THEN Z2 = B(3)
+476 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF B(3) > B(1) AND B(3) > B(2) THEN Z2 = B(3)
   Origs: 474:auto
   Dests: 480:auto
-480 F(I,J,K) (1 8) IF Z1 = 6 OR Z2 = 6 THEN 90
+480 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 8) IF Z1 = 6 OR Z2 = 6 THEN 90
   Origs: 476:auto
   Dests: 90:ifthen, 490:auto
-490 F(I,J,K) (1 5) IF F(Z1 + 1, Z2 + 1) > 0 THEN 90
+490 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 5) IF F(Z1 + 1, Z2 + 1) > 0 THEN 90
   Origs: 480:auto
   Dests: 90:ifthen, 500:auto
-500 F(I,J,K) (1 8) IF F(Z1, Z2 + 1) > 0 AND F(Z1, Z2 + 1) = F(Z1 + 1, Z2) THEN 90
+500 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 8) IF F(Z1, Z2 + 1) > 0 AND F(Z1, Z2 + 1) = F(Z1 + 1, Z2) THEN 90
   Origs: 490:auto
   Dests: 90:ifthen, 510:auto
-510 F(I,J,K) (0 4) A(K + 1) = Z1 + 1
+510 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) A(K + 1) = Z1 + 1
   Origs: 500:auto
   Dests: 520:auto
-520 F(I,J,K) (0 4) B(K + 1) = Z2 + 1
+520 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) B(K + 1) = Z2 + 1
   Origs: 510:auto
   Dests: 530:auto
-530 F(I,J,K) (0 1) NEXT K
+530 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 1) NEXT K
   Origs: 370:fornext, 440:goto, 520:auto
   Dests: 540:auto
-540 F(I,J) (0 2) GOTO 950
+540 F(I:60,J:80) (0 2) GOTO 950
   Origs: 530:auto
   Dests: 950:goto
-550 F(I,J,K) (0 3) A(1) = A
+550 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) A(1) = A
   Origs: 140:goto
   Dests: 560:auto
-560 F(I,J,K) (0 3) A(2) = 7
-    F(I,J,K) (0 3) A(3) = 7
+560 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) A(2) = 7
+    F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) A(3) = 7
   Origs: 550:auto
   Dests: 570:auto
-570 F(I,J,K) (1 3) FOR K = 1 TO N
+570 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 3) FOR K = 1 TO N
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 560:auto
   Dests: 580:fornext, 680:fornext
-580 F(I,J,K) (1 4) IF M > 1 THEN 640
+580 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF M > 1 THEN 640
   Origs: 570:fornext
   Dests: 590:auto, 640:ifthen
-590 F(I,J,K) (1 4) IF A(K) = 6 THEN 630
+590 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF A(K) = 6 THEN 630
   Origs: 580:auto
   Dests: 600:auto, 630:ifthen
-600 F(I,J,K) (1 4) IF F(A(K) + 1, B) > 0 THEN 630
+600 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF F(A(K) + 1, B) > 0 THEN 630
   Origs: 590:auto
   Dests: 610:auto, 630:ifthen
-610 F(I,J,K) (0 4) A(K + 1) = A(K) + 1
+610 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) A(K + 1) = A(K) + 1
   Origs: 600:auto
   Dests: 620:auto
-620 F(I,J,K) (0 2) GOTO 680
+620 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 2) GOTO 680
   Origs: 610:auto
   Dests: 680:goto
-630 F(I,J,K) (0 3) M = 2
+630 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) M = 2
   Origs: 590:ifthen, 600:ifthen
   Dests: 640:auto
-640 F(I,J,K) (1 9) IF A(1) < A(2) AND A(1) < A(3) THEN Z = A(1)
+640 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF A(1) < A(2) AND A(1) < A(3) THEN Z = A(1)
   Origs: 580:ifthen, 630:auto
   Dests: 642:auto
-642 F(I,J,K) (1 9) IF A(2) < A(1) AND A(2) < A(3) THEN Z = A(2)
+642 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF A(2) < A(1) AND A(2) < A(3) THEN Z = A(2)
   Origs: 640:auto
   Dests: 644:auto
-644 F(I,J,K) (1 9) IF A(3) < A(1) AND A(3) < A(2) THEN Z = A(3)
+644 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF A(3) < A(1) AND A(3) < A(2) THEN Z = A(3)
   Origs: 642:auto
   Dests: 650:auto
-650 F(I,J,K) (1 5) IF Z = 1 THEN 90
+650 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 5) IF Z = 1 THEN 90
   Origs: 644:auto
   Dests: 90:ifthen, 660:auto
-660 F(I,J,K) (1 5) IF F(Z - 1, B) > 0 THEN 90
+660 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 5) IF F(Z - 1, B) > 0 THEN 90
   Origs: 650:auto
   Dests: 90:ifthen, 670:auto
-670 F(I,J,K) (0 4) A(K + 1) = Z - 1
+670 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) A(K + 1) = Z - 1
   Origs: 660:auto
   Dests: 680:auto
-680 F(I,J,K) (0 1) NEXT K
+680 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 1) NEXT K
   Origs: 570:fornext, 620:goto, 670:auto
   Dests: 690:auto
-690 F(I,J) (0 7) F(A, B) = 9 - 2 * I - J
+690 F(I:60,J:80) (0 7) F(A, B) = 9 - 2 * I - J
   Origs: 680:auto
   Dests: 700:auto
-700 F(I,J,K) (1 3) FOR K = 1 TO N
+700 F(I:60,J:80,K:700) (1 3) FOR K = 1 TO N
   Origs: 690:auto
   Dests: 710:fornext, 720:fornext
-710 F(I,J,K) (0 3) F(A(K + 1), B) = F(A, B)
+710 F(I:60,J:80,K:700) (0 3) F(A(K + 1), B) = F(A, B)
   Origs: 700:fornext
   Dests: 720:auto
-720 F(I,J,K) (0 1) NEXT K
+720 F(I:60,J:80,K:700) (0 1) NEXT K
   Origs: 700:fornext, 710:auto
   Dests: 730:auto
-730 F(I,J) (0 2) GOTO 990
+730 F(I:60,J:80) (0 2) GOTO 990
   Origs: 720:auto
   Dests: 990:goto
-740 F(I,J,K) (0 3) A(1) = A
+740 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) A(1) = A
   Origs: 140:goto
   Dests: 750:auto
-750 F(I,J,K) (0 3) B(1) = B
+750 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) B(1) = B
   Origs: 740:auto
   Dests: 760:auto
-760 F(I,J,K) (0 3) A(2) = 7
-    F(I,J,K) (0 3) A(3) = 7
+760 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) A(2) = 7
+    F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) A(3) = 7
   Origs: 750:auto
   Dests: 770:auto
-770 F(I,J,K) (0 3) B(2) = 0
-    F(I,J,K) (0 3) B(3) = 0
+770 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) B(2) = 0
+    F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) B(3) = 0
   Origs: 760:auto
   Dests: 780:auto
-780 F(I,J,K) (1 3) FOR K = 1 TO N
+780 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 3) FOR K = 1 TO N
+    WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 770:auto
   Dests: 790:fornext, 940:fornext
-790 F(I,J,K) (1 4) IF M > 1 THEN 870
+790 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF M > 1 THEN 870
   Origs: 780:fornext
   Dests: 800:auto, 870:ifthen
-800 F(I,J,K) (1 7) IF A(K) = 6 OR B(K) = 1 THEN 860
+800 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 7) IF A(K) = 6 OR B(K) = 1 THEN 860
   Origs: 790:auto
   Dests: 810:auto, 860:ifthen
-810 F(I,J,K) (1 4) IF F(A(K) + 1, B(K) - 1) > 0 THEN 860
+810 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 4) IF F(A(K) + 1, B(K) - 1) > 0 THEN 860
   Origs: 800:auto
   Dests: 820:auto, 860:ifthen
-820 F(I,J,K) (1 7) IF F(A(K) + 1, B(K)) > 0 AND F(A(K) + 1, B(K)) = F(A(K), B(K) - 1) THEN 860
+820 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 7) IF F(A(K) + 1, B(K)) > 0 AND F(A(K) + 1, B(K)) = F(A(K), B(K) - 1) THEN 860
   Origs: 810:auto
   Dests: 830:auto, 860:ifthen
-830 F(I,J,K) (0 4) A(K + 1) = A(K) + 1
+830 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) A(K + 1) = A(K) + 1
   Origs: 820:auto
   Dests: 840:auto
-840 F(I,J,K) (0 4) B(K + 1) = B(K) - 1
+840 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) B(K + 1) = B(K) - 1
   Origs: 830:auto
   Dests: 850:auto
-850 F(I,J,K) (0 2) GOTO 940
+850 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 2) GOTO 940
   Origs: 840:auto
   Dests: 940:goto
-860 F(I,J,K) (0 3) M = 2
+860 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 3) M = 2
   Origs: 800:ifthen, 810:ifthen, 820:ifthen
   Dests: 870:auto
-870 F(I,J,K) (1 9) IF A(1) < A(2) AND A(1) < A(3) THEN Z1 = A(1)
+870 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF A(1) < A(2) AND A(1) < A(3) THEN Z1 = A(1)
   Origs: 790:ifthen, 860:auto
   Dests: 872:auto
-872 F(I,J,K) (1 9) IF A(2) < A(1) AND A(2) < A(3) THEN Z1 = A(2)
+872 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF A(2) < A(1) AND A(2) < A(3) THEN Z1 = A(2)
   Origs: 870:auto
   Dests: 874:auto
-874 F(I,J,K) (1 9) IF A(3) < A(1) AND A(3) < A(2) THEN Z1 = A(3)
+874 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF A(3) < A(1) AND A(3) < A(2) THEN Z1 = A(3)
   Origs: 872:auto
   Dests: 880:auto
-880 F(I,J,K) (1 9) IF B(1) > B(2) AND B(1) > B(3) THEN Z2 = B(1)
+880 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF B(1) > B(2) AND B(1) > B(3) THEN Z2 = B(1)
   Origs: 874:auto
   Dests: 882:auto
-882 F(I,J,K) (1 9) IF B(2) > B(1) AND B(2) > B(3) THEN Z2 = B(2)
+882 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF B(2) > B(1) AND B(2) > B(3) THEN Z2 = B(2)
   Origs: 880:auto
   Dests: 884:auto
-884 F(I,J,K) (1 9) IF B(3) > B(1) AND B(3) > B(2) THEN Z2 = B(3)
+884 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 9) IF B(3) > B(1) AND B(3) > B(2) THEN Z2 = B(3)
   Origs: 882:auto
   Dests: 890:auto
-890 F(I,J,K) (1 8) IF Z1 = 1 OR Z2 = 6 THEN 90
+890 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 8) IF Z1 = 1 OR Z2 = 6 THEN 90
   Origs: 884:auto
   Dests: 90:ifthen, 900:auto
-900 F(I,J,K) (1 5) IF F(Z1 - 1, Z2 + 1) > 0 THEN 90
+900 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 5) IF F(Z1 - 1, Z2 + 1) > 0 THEN 90
   Origs: 890:auto
   Dests: 90:ifthen, 910:auto
-910 F(I,J,K) (1 8) IF F(Z1, Z2 + 1) > 0 AND F(Z1, Z2 + 1) = F(Z1 - 1, Z2) THEN 90
+910 F(I:60,J:80,K:170,K:370,K:570,K:780) (1 8) IF F(Z1, Z2 + 1) > 0 AND F(Z1, Z2 + 1) = F(Z1 - 1, Z2) THEN 90
   Origs: 900:auto
   Dests: 90:ifthen, 920:auto
-920 F(I,J,K) (0 4) A(K + 1) = Z1 - 1
+920 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) A(K + 1) = Z1 - 1
   Origs: 910:auto
   Dests: 930:auto
-930 F(I,J,K) (0 4) B(K + 1) = Z2 + 1
+930 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 4) B(K + 1) = Z2 + 1
   Origs: 920:auto
   Dests: 940:auto
-940 F(I,J,K) (0 1) NEXT K
+940 F(I:60,J:80,K:170,K:370,K:570,K:780) (0 1) NEXT K
   Origs: 780:fornext, 850:goto, 930:auto
   Dests: 950:auto
-950 F(I,J) (0 7) F(A, B) = 9 - 2 * I - J
+950 F(I:60,J:80) (0 7) F(A, B) = 9 - 2 * I - J
   Origs: 540:goto, 940:auto
   Dests: 960:auto
-960 F(I,J,K) (1 3) FOR K = 1 TO N
+960 F(I:60,J:80,K:960) (1 3) FOR K = 1 TO N
   Origs: 950:auto
   Dests: 970:fornext, 980:fornext
-970 F(I,J,K) (0 3) F(A(K + 1), B(K + 1)) = F(A, B)
+970 F(I:60,J:80,K:960) (0 3) F(A(K + 1), B(K + 1)) = F(A, B)
   Origs: 960:fornext
   Dests: 980:auto
-980 F(I,J,K) (0 1) NEXT K
+980 F(I:60,J:80,K:960) (0 1) NEXT K
   Origs: 960:fornext, 970:auto
   Dests: 990:auto
-990 F(I,J) (0 1) NEXT J
+990 F(I:60,J:80) (0 1) NEXT J
   Origs: 80:fornext, 330:goto, 730:goto, 980:auto
   Dests: 1000:auto
-1000 F(I) (0 1) NEXT I
+1000 F(I:60) (0 1) NEXT I
   Origs: 60:fornext, 990:auto
   Dests: 1010:auto
 1010 (0 2) PRINT
@@ -392,37 +396,37 @@ Halstead complexity:
 1040 (0 2) PRINT
   Origs: 1030:auto
   Dests: 1050:auto
-1050 F(I) (1 3) FOR I = 1 TO 6
+1050 F(I:1050) (1 3) FOR I = 1 TO 6
   Origs: 1040:auto
   Dests: 1051:fornext, 1054:fornext
-1051 F(I,J) (1 3) FOR J = 1 TO 6
+1051 F(I:1050,J:1051) (1 3) FOR J = 1 TO 6
   Origs: 1050:fornext
   Dests: 1052:fornext, 1053:fornext
-1052 F(I,J) (0 3) H(I, J) = F(J, I)
+1052 F(I:1050,J:1051) (0 3) H(I, J) = F(J, I)
   Origs: 1051:fornext
   Dests: 1053:auto
-1053 F(I,J) (0 1) NEXT J
+1053 F(I:1050,J:1051) (0 1) NEXT J
   Origs: 1051:fornext, 1052:auto
   Dests: 1054:auto
-1054 F(I) (0 1) NEXT I
+1054 F(I:1050) (0 1) NEXT I
   Origs: 1050:fornext, 1053:auto
   Dests: 1060:auto
-1060 F(I) (1 3) FOR I = 1 TO 6
+1060 F(I:1060) (1 3) FOR I = 1 TO 6
   Origs: 1054:auto
   Dests: 1061:fornext, 1065:fornext
-1061 F(I,J) (1 3) FOR J = 1 TO 6
+1061 F(I:1060,J:1061) (1 3) FOR J = 1 TO 6
   Origs: 1060:fornext
   Dests: 1062:fornext, 1063:fornext
-1062 F(I,J) (0 2) PRINT H(I, J);
+1062 F(I:1060,J:1061) (0 2) PRINT H(I, J);
   Origs: 1061:fornext
   Dests: 1063:auto
-1063 F(I,J) (0 1) NEXT J
+1063 F(I:1060,J:1061) (0 1) NEXT J
   Origs: 1061:fornext, 1062:auto
   Dests: 1064:auto
-1064 F(I) (0 2) PRINT
+1064 F(I:1060) (0 2) PRINT
   Origs: 1063:auto
   Dests: 1065:auto
-1065 F(I) (0 1) NEXT I
+1065 F(I:1060) (0 1) NEXT I
   Origs: 1060:fornext, 1064:auto
   Dests: 1070:auto
 1070 (0 2) PRINT
@@ -437,28 +441,28 @@ Halstead complexity:
 1100 (0 2) PRINT
   Origs: 1090:auto
   Dests: 1110:auto
-1110 F(I) (1 3) FOR I = 1 TO 6
+1110 F(I:1110) (1 3) FOR I = 1 TO 6
   Origs: 1100:auto
   Dests: 1111:fornext, 1114:fornext
-1111 F(I,J) (1 3) FOR J = 1 TO 6
+1111 F(I:1110,J:1111) (1 3) FOR J = 1 TO 6
   Origs: 1110:fornext
   Dests: 1112:fornext, 1113:fornext
-1112 F(I,J) (0 3) H(I, J) = 0
+1112 F(I:1110,J:1111) (0 3) H(I, J) = 0
   Origs: 1111:fornext
   Dests: 1113:auto
-1113 F(I,J) (0 1) NEXT J
+1113 F(I:1110,J:1111) (0 1) NEXT J
   Origs: 1111:fornext, 1112:auto
   Dests: 1114:auto
-1114 F(I) (0 1) NEXT I
+1114 F(I:1110) (0 1) NEXT I
   Origs: 1110:fornext, 1113:auto
   Dests: 1120:auto
-1120 F(I) (1 3) FOR I = 1 TO 3
+1120 F(I:1120) (1 3) FOR I = 1 TO 3
   Origs: 1114:auto
   Dests: 1121:fornext, 1122:fornext
-1121 F(I) (0 3) L(I) = 0
+1121 F(I:1120) (0 3) L(I) = 0
   Origs: 1120:fornext
   Dests: 1122:auto
-1122 F(I) (0 1) NEXT I
+1122 F(I:1120) (0 1) NEXT I
   Origs: 1120:fornext, 1121:auto
   Dests: 1130:auto
 1130 (0 3) C(1) = 2

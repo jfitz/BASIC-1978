@@ -98,35 +98,35 @@ Halstead complexity:
 28 (0 1) REM *** SET UP BOARD
   Origs: 
   Dests: 
-29 G(1505) F(R) (1 3) FOR R = 1 TO 9
+29 G(1505) F(R:29) (1 3) FOR R = 1 TO 9
   Origs: 24:auto, 1618:goto
   Dests: 30:fornext, 60:fornext
-30 G(1505) F(R,C) (1 3) FOR C = 1 TO 9
+30 G(1505) F(R:29,C:30) (1 3) FOR C = 1 TO 9
   Origs: 29:fornext
   Dests: 31:fornext, 50:fornext
-31 G(1505) F(R,C) (1 11) IF (R - 4) * (R - 5) * (R - 6) = 0 THEN 40
+31 G(1505) F(R:29,C:30) (1 11) IF (R - 4) * (R - 5) * (R - 6) = 0 THEN 40
   Origs: 30:fornext
   Dests: 32:auto, 40:ifthen
-32 G(1505) F(R,C) (1 11) IF (C - 4) * (C - 5) * (C - 6) = 0 THEN 40
+32 G(1505) F(R:29,C:30) (1 11) IF (C - 4) * (C - 5) * (C - 6) = 0 THEN 40
   Origs: 31:auto
   Dests: 35:auto, 40:ifthen
-35 G(1505) F(R,C) (0 4) T(R, C) = -5
+35 G(1505) F(R:29,C:30) (0 4) T(R, C) = -5
   Origs: 32:auto, 40:ifthen
   Dests: 36:auto
-36 G(1505) F(R,C) (0 2) GOTO 50
+36 G(1505) F(R:29,C:30) (0 2) GOTO 50
   Origs: 35:auto
   Dests: 50:goto
-40 G(1505) F(R,C) (1 15) IF (R - 1) * (C - 1) * (R - 9) * (C - 9) = 0 THEN 35
+40 G(1505) F(R:29,C:30) (1 15) IF (R - 1) * (C - 1) * (R - 9) * (C - 9) = 0 THEN 35
    WARNING: Branch to line before GOSUB start
   Origs: 31:ifthen, 32:ifthen
   Dests: 35:ifthen, 42:auto
-42 G(1505) F(R,C) (0 3) T(R, C) = 5
+42 G(1505) F(R:29,C:30) (0 3) T(R, C) = 5
   Origs: 40:auto
   Dests: 50:auto
-50 G(1505) F(R,C) (0 1) NEXT C
+50 G(1505) F(R:29,C:30) (0 1) NEXT C
   Origs: 30:fornext, 36:goto, 42:auto
   Dests: 60:auto
-60 G(1505) F(R) (0 1) NEXT R
+60 G(1505) F(R:29) (0 1) NEXT R
   Origs: 29:fornext, 50:auto
   Dests: 65:auto
 65 G(1505) (0 3) T(5, 5) = 0
@@ -136,10 +136,10 @@ Halstead complexity:
 70 (0 1) REM *** INPUT MOVE AND CHECK ON LEGALITY
   Origs: 
   Dests: 
-75 G(1505) F(W) (1 3) FOR W = 1 TO 33
+75 G(1505) F(W:75) (1 3) FOR W = 1 TO 33
   Origs: 65:auto
   Dests: 77:fornext, 83:fornext
-77 G(1505) F(W) (1 2) READ M
+77 G(1505) F(W:75) (1 2) READ M
   Origs: 75:fornext
   Dests: 83:auto
 79 (0 2) DATA 13, 14, 15, 22, 23, 24, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 41
@@ -148,73 +148,73 @@ Halstead complexity:
 81 (0 2) DATA 42, 43, 44, 47, 48, 49, 50, 51, 52, 53, 58, 59, 60, 67, 68, 69
   Origs: 
   Dests: 
-83 G(1505) F(W) (0 4) B(M) = -7
-   G(1505) F(W) (0 1) NEXT W
+83 G(1505) F(W:75) (0 4) B(M) = -7
+   G(1505) F(W:75) (0 1) NEXT W
   Origs: 75:fornext, 77:auto
   Dests: 86:auto
 86 G(1505) (0 4) B(41) = -3
   Origs: 83:auto
   Dests: 100:auto
-100 G(1005,1505) F(X,Y) (1 2) INPUT "MOVE WHICH PIECE"; Z
+100 G(1005,1505) F(X:1005.1,Y:1020) (1 2) INPUT "MOVE WHICH PIECE"; Z
     WARNING: Multiple GOSUB entry points
   Origs: 86:auto, 120:goto, 156:ifthen, 220:goto
   Dests: 110:auto
-110 G(1005,1505) F(X,Y) (1 6) IF B(Z) = -7 THEN 140
+110 G(1005,1505) F(X:1005.1,Y:1020) (1 6) IF B(Z) = -7 THEN 140
     WARNING: Multiple GOSUB entry points
   Origs: 100:auto
   Dests: 120:auto, 140:ifthen
-120 G(1005,1505) F(X,Y) (0 2) PRINT "ILLEGAL MOVE, TRY AGAIN..."
-    G(1005,1505) F(X,Y) (0 3) GOTO 100
+120 G(1005,1505) F(X:1005.1,Y:1020) (0 2) PRINT "ILLEGAL MOVE, TRY AGAIN..."
+    G(1005,1505) F(X:1005.1,Y:1020) (0 3) GOTO 100
     WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 110:auto, 150:ifthen, 153:ifthen, 170:goto, 180:ifthen, 1045:ifthen, 1085:ifthen, 1135:ifthen, 1175:ifthen
   Dests: 100:goto
-140 G(1005,1505) F(X,Y) (1 2) INPUT "TO WHERE"; P
+140 G(1005,1505) F(X:1005.1,Y:1020) (1 2) INPUT "TO WHERE"; P
     WARNING: Multiple GOSUB entry points
   Origs: 110:ifthen
   Dests: 150:auto
-150 G(1005,1505) F(X,Y) (1 5) IF B(P) = 0 THEN 120
+150 G(1005,1505) F(X:1005.1,Y:1020) (1 5) IF B(P) = 0 THEN 120
     WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 140:auto
   Dests: 120:ifthen, 153:auto
-153 G(1005,1505) F(X,Y) (1 7) IF B(P) = -7 THEN 120
+153 G(1005,1505) F(X:1005.1,Y:1020) (1 7) IF B(P) = -7 THEN 120
     WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 150:auto
   Dests: 120:ifthen, 156:auto
-156 G(1005,1505) F(X,Y) (1 5) IF Z = P THEN 100
+156 G(1005,1505) F(X:1005.1,Y:1020) (1 5) IF Z = P THEN 100
     WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 153:auto
   Dests: 100:ifthen, 160:auto
-160 G(1005,1505) F(X,Y) (1 7) IF ((Z + P) / 2) = INT((Z + P) / 2) THEN 180
+160 G(1005,1505) F(X:1005.1,Y:1020) (1 7) IF ((Z + P) / 2) = INT((Z + P) / 2) THEN 180
     WARNING: Multiple GOSUB entry points
   Origs: 156:auto
   Dests: 170:auto, 180:ifthen
-170 G(1005,1505) F(X,Y) (0 3) GOTO 120
+170 G(1005,1505) F(X:1005.1,Y:1020) (0 3) GOTO 120
     WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 160:auto
   Dests: 120:goto
-180 G(1005,1505) F(X,Y) (1 11) IF (ABS(Z - P) - 2) * (ABS(Z - P) - 18) <> 0 THEN 120
+180 G(1005,1505) F(X:1005.1,Y:1020) (1 11) IF (ABS(Z - P) - 2) * (ABS(Z - P) - 18) <> 0 THEN 120
     WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 160:ifthen
   Dests: 120:ifthen, 190:auto
-190 G(1005,1505) F(X,Y) (0 2) GOSUB 1000
+190 G(1005,1505) F(X:1005.1,Y:1020) (0 2) GOSUB 1000
     WARNING: Multiple GOSUB entry points
   Origs: 180:auto
   Dests: 200:auto, 1005:gosub
-200 G(1005,1505) F(X,Y) (0 2) GOSUB 500
+200 G(1005,1505) F(X:1005.1,Y:1020) (0 2) GOSUB 500
     WARNING: Multiple GOSUB entry points
   Origs: 190:auto
   Dests: 210:auto, 510:gosub
-210 G(1005,1505) F(X,Y) (0 2) GOSUB 1500
+210 G(1005,1505) F(X:1005.1,Y:1020) (0 2) GOSUB 1500
     WARNING: Multiple GOSUB entry points
   Origs: 200:auto
   Dests: 220:auto, 1505:gosub
-220 G(1005,1505) F(X,Y) (0 3) GOTO 100
+220 G(1005,1505) F(X:1005.1,Y:1020) (0 3) GOTO 100
     WARNING: Multiple GOSUB entry points
     WARNING: Branch to line before GOSUB start
   Origs: 210:auto
@@ -222,49 +222,49 @@ Halstead complexity:
 500 (0 1) REM *** PRINT BOARD
   Origs: 
   Dests: 
-510 G(510) F(X) (1 3) FOR X = 1 TO 9
+510 G(510) F(X:510) (1 3) FOR X = 1 TO 9
   Origs: 65:gosub, 200:gosub
   Dests: 520:fornext, 630:fornext
-520 G(510) F(X,Y) (1 3) FOR Y = 1 TO 9
+520 G(510) F(X:510,Y:520) (1 3) FOR Y = 1 TO 9
   Origs: 510:fornext
   Dests: 525:fornext, 615:fornext
-525 G(510) F(X,Y) (1 14) IF (X - 1) * (X - 9) * (Y - 1) * (Y - 9) = 0 THEN 550
+525 G(510) F(X:510,Y:520) (1 14) IF (X - 1) * (X - 9) * (Y - 1) * (Y - 9) = 0 THEN 550
   Origs: 520:fornext
   Dests: 530:auto, 560:ifthen
-530 G(510) F(X,Y) (1 11) IF (X - 4) * (X - 5) * (X - 6) = 0 THEN 570
+530 G(510) F(X:510,Y:520) (1 11) IF (X - 4) * (X - 5) * (X - 6) = 0 THEN 570
   Origs: 525:auto
   Dests: 540:auto, 570:ifthen
-540 G(510) F(X,Y) (1 11) IF (Y - 4) * (Y - 5) * (Y - 6) = 0 THEN 570
+540 G(510) F(X:510,Y:520) (1 11) IF (Y - 4) * (Y - 5) * (Y - 6) = 0 THEN 570
   Origs: 530:auto
   Dests: 560:auto, 570:ifthen
 550 (0 1) REM
   Origs: 
   Dests: 
-560 G(510) F(X,Y) (0 2) GOTO 610
+560 G(510) F(X:510,Y:520) (0 2) GOTO 610
   Origs: 525:ifthen, 540:auto
   Dests: 615:goto
-570 G(510) F(X,Y) (1 4) IF T(X, Y) <> 5 THEN 600
+570 G(510) F(X:510,Y:520) (1 4) IF T(X, Y) <> 5 THEN 600
   Origs: 530:ifthen, 540:ifthen
   Dests: 580:auto, 600:ifthen
-580 G(510) F(X,Y) (0 4) PRINT TAB(Y * 2); "!";
+580 G(510) F(X:510,Y:520) (0 4) PRINT TAB(Y * 2); "!";
   Origs: 570:auto
   Dests: 590:auto
-590 G(510) F(X,Y) (0 2) GOTO 610
+590 G(510) F(X:510,Y:520) (0 2) GOTO 610
   Origs: 580:auto
   Dests: 615:goto
-600 G(510) F(X,Y) (0 4) PRINT TAB(Y * 2); "O";
+600 G(510) F(X:510,Y:520) (0 4) PRINT TAB(Y * 2); "O";
   Origs: 570:ifthen
   Dests: 615:auto
 610 (0 1) REM
   Origs: 
   Dests: 
-615 G(510) F(X,Y) (0 1) NEXT Y
+615 G(510) F(X:510,Y:520) (0 1) NEXT Y
   Origs: 520:fornext, 560:goto, 590:goto, 600:auto
   Dests: 620:auto
-620 G(510) F(X) (0 2) PRINT
+620 G(510) F(X:510) (0 2) PRINT
   Origs: 615:auto
   Dests: 630:auto
-630 G(510) F(X) (0 1) NEXT X
+630 G(510) F(X:510) (0 1) NEXT X
   Origs: 510:fornext, 620:auto
   Dests: 640:auto
 640 G(510) (0 1) RETURN
@@ -274,93 +274,93 @@ Halstead complexity:
   Origs: 
   Dests: 
 1005 G(1005) (0 3) C = 1
-     G(1005) F(X) (1 3) FOR X = 1 TO 9
+     G(1005) F(X:1005.1) (1 3) FOR X = 1 TO 9
      WARNING: GOSUB length exceeds limit 40
   Origs: 190:gosub
   Dests: 1020:fornext, 1230:fornext
-1020 G(1005) F(X,Y) (1 3) FOR Y = 1 TO 9
+1020 G(1005) F(X:1005.1,Y:1020) (1 3) FOR Y = 1 TO 9
   Origs: 1005:fornext
   Dests: 1030:fornext, 1225:fornext
-1030 G(1005) F(X,Y) (1 4) IF C <> Z THEN 1220
+1030 G(1005) F(X:1005.1,Y:1020) (1 4) IF C <> Z THEN 1220
   Origs: 1020:fornext
   Dests: 1040:auto, 1220:ifthen
-1040 G(1005) F(X,Y) (1 5) IF C + 2 <> P THEN 1080
+1040 G(1005) F(X:1005.1,Y:1020) (1 5) IF C + 2 <> P THEN 1080
   Origs: 1030:auto
   Dests: 1045:auto, 1080:ifthen
-1045 G(1005) F(X,Y) (1 5) IF T(X, Y + 1) = 0 THEN 120
+1045 G(1005) F(X:1005.1,Y:1020) (1 5) IF T(X, Y + 1) = 0 THEN 120
      WARNING: Branch to line before GOSUB start
   Origs: 1040:auto
   Dests: 120:ifthen, 1050:auto
-1050 G(1005) F(X,Y) (0 3) T(X, Y + 2) = 5
+1050 G(1005) F(X:1005.1,Y:1020) (0 3) T(X, Y + 2) = 5
   Origs: 1045:auto
   Dests: 1060:auto
-1060 G(1005) F(X,Y) (0 3) T(X, Y + 1) = 0
-     G(1005) F(X,Y) (0 4) B(C + 1) = -3
+1060 G(1005) F(X:1005.1,Y:1020) (0 3) T(X, Y + 1) = 0
+     G(1005) F(X:1005.1,Y:1020) (0 4) B(C + 1) = -3
   Origs: 1050:auto
   Dests: 1070:auto
-1070 G(1005) F(X,Y) (0 2) GOTO 1200
+1070 G(1005) F(X:1005.1,Y:1020) (0 2) GOTO 1200
   Origs: 1060:auto
   Dests: 1200:goto
-1080 G(1005) F(X,Y) (1 5) IF C + 18 <> P THEN 1130
+1080 G(1005) F(X:1005.1,Y:1020) (1 5) IF C + 18 <> P THEN 1130
   Origs: 1040:ifthen
   Dests: 1085:auto, 1130:ifthen
-1085 G(1005) F(X,Y) (1 5) IF T(X + 1, Y) = 0 THEN 120
+1085 G(1005) F(X:1005.1,Y:1020) (1 5) IF T(X + 1, Y) = 0 THEN 120
      WARNING: Branch to line before GOSUB start
   Origs: 1080:auto
   Dests: 120:ifthen, 1090:auto
-1090 G(1005) F(X,Y) (0 3) T(X + 2, Y) = 5
-     G(1005) F(X,Y) (0 3) T(X + 1, Y) = 0
-     G(1005) F(X,Y) (0 4) B(C + 9) = -3
+1090 G(1005) F(X:1005.1,Y:1020) (0 3) T(X + 2, Y) = 5
+     G(1005) F(X:1005.1,Y:1020) (0 3) T(X + 1, Y) = 0
+     G(1005) F(X:1005.1,Y:1020) (0 4) B(C + 9) = -3
   Origs: 1085:auto
   Dests: 1120:auto
-1120 G(1005) F(X,Y) (0 2) GOTO 1200
+1120 G(1005) F(X:1005.1,Y:1020) (0 2) GOTO 1200
   Origs: 1090:auto
   Dests: 1200:goto
-1130 G(1005) F(X,Y) (1 5) IF C - 2 <> P THEN 1170
+1130 G(1005) F(X:1005.1,Y:1020) (1 5) IF C - 2 <> P THEN 1170
   Origs: 1080:ifthen
   Dests: 1135:auto, 1170:ifthen
-1135 G(1005) F(X,Y) (1 5) IF T(X, Y - 1) = 0 THEN 120
+1135 G(1005) F(X:1005.1,Y:1020) (1 5) IF T(X, Y - 1) = 0 THEN 120
      WARNING: Branch to line before GOSUB start
   Origs: 1130:auto
   Dests: 120:ifthen, 1140:auto
-1140 G(1005) F(X,Y) (0 3) T(X, Y - 2) = 5
-     G(1005) F(X,Y) (0 3) T(X, Y - 1) = 0
-     G(1005) F(X,Y) (0 4) B(C - 1) = -3
+1140 G(1005) F(X:1005.1,Y:1020) (0 3) T(X, Y - 2) = 5
+     G(1005) F(X:1005.1,Y:1020) (0 3) T(X, Y - 1) = 0
+     G(1005) F(X:1005.1,Y:1020) (0 4) B(C - 1) = -3
   Origs: 1135:auto
   Dests: 1160:auto
-1160 G(1005) F(X,Y) (0 2) GOTO 1200
+1160 G(1005) F(X:1005.1,Y:1020) (0 2) GOTO 1200
   Origs: 1140:auto
   Dests: 1200:goto
-1170 G(1005) F(X,Y) (1 5) IF C - 18 <> P THEN 1220
+1170 G(1005) F(X:1005.1,Y:1020) (1 5) IF C - 18 <> P THEN 1220
   Origs: 1130:ifthen
   Dests: 1175:auto, 1220:ifthen
-1175 G(1005) F(X,Y) (1 5) IF T(X - 1, Y) = 0 THEN 120
+1175 G(1005) F(X:1005.1,Y:1020) (1 5) IF T(X - 1, Y) = 0 THEN 120
      WARNING: Branch to line before GOSUB start
   Origs: 1170:auto
   Dests: 120:ifthen, 1180:auto
-1180 G(1005) F(X,Y) (0 3) T(X - 2, Y) = 5
-     G(1005) F(X,Y) (0 3) T(X - 1, Y) = 0
-     G(1005) F(X,Y) (0 4) B(C - 9) = -3
+1180 G(1005) F(X:1005.1,Y:1020) (0 3) T(X - 2, Y) = 5
+     G(1005) F(X:1005.1,Y:1020) (0 3) T(X - 1, Y) = 0
+     G(1005) F(X:1005.1,Y:1020) (0 4) B(C - 9) = -3
   Origs: 1175:auto
   Dests: 1200:auto
-1200 G(1005) F(X,Y) (0 4) B(Z) = -3
-     G(1005) F(X,Y) (0 4) B(P) = -7
+1200 G(1005) F(X:1005.1,Y:1020) (0 4) B(Z) = -3
+     G(1005) F(X:1005.1,Y:1020) (0 4) B(P) = -7
   Origs: 1070:goto, 1120:goto, 1160:goto, 1180:auto
   Dests: 1210:auto
-1210 G(1005) F(X,Y) (0 3) T(X, Y) = 0
-     G(1005) F(X,Y) (0 2) GOTO 1240
+1210 G(1005) F(X:1005.1,Y:1020) (0 3) T(X, Y) = 0
+     G(1005) F(X:1005.1,Y:1020) (0 2) GOTO 1240
   Origs: 1200:auto
   Dests: 1240:goto
-1220 G(1005) F(X,Y) (0 4) C = C + 1
+1220 G(1005) F(X:1005.1,Y:1020) (0 4) C = C + 1
   Origs: 1030:ifthen, 1170:ifthen
   Dests: 1225:auto
-1225 G(1005) F(X,Y) (0 1) NEXT Y
+1225 G(1005) F(X:1005.1,Y:1020) (0 1) NEXT Y
   Origs: 1020:fornext, 1220:auto
   Dests: 1230:auto
-1230 G(1005) F(X) (0 1) NEXT X
+1230 G(1005) F(X:1005.1) (0 1) NEXT X
   Origs: 1005:fornext, 1225:auto
   Dests: 1240:auto
-1240 G(1005) F(X,Y) (0 1) RETURN
+1240 G(1005) F(X:1005.1,Y:1020) (0 1) RETURN
   Origs: 1210:goto, 1230:auto
   Dests: 
 1500 (0 1) REM *** CHECK IF GAME IS OVER
@@ -370,72 +370,72 @@ Halstead complexity:
      WARNING: GOSUB length exceeds limit 40
   Origs: 210:gosub
   Dests: 1510:auto
-1510 G(1505) F(R) (1 3) FOR R = 2 TO 8
+1510 G(1505) F(R:1510) (1 3) FOR R = 2 TO 8
   Origs: 1505:auto
   Dests: 1520:fornext, 1590:fornext
-1520 G(1505) F(R,C) (1 3) FOR C = 2 TO 8
+1520 G(1505) F(R:1510,C:1520) (1 3) FOR C = 2 TO 8
   Origs: 1510:fornext
   Dests: 1530:fornext, 1580:fornext
-1530 G(1505) F(R,C) (1 4) IF T(R, C) <> 5 THEN 1580
+1530 G(1505) F(R:1510,C:1520) (1 4) IF T(R, C) <> 5 THEN 1580
   Origs: 1520:fornext
   Dests: 1535:auto, 1580:ifthen
-1535 G(1505) F(R,C) (0 4) F = F + 1
+1535 G(1505) F(R:1510,C:1520) (0 4) F = F + 1
   Origs: 1530:auto
   Dests: 1540:auto
-1540 G(1505) F(R,C,A) (1 5) FOR A = R - 1 TO R + 1
+1540 G(1505) F(R:1510,C:1520,A:1540) (1 5) FOR A = R - 1 TO R + 1
   Origs: 1535:auto
   Dests: 1545:fornext, 1567:fornext
-1545 G(1505) F(R,C,A) (0 3) T = 0
+1545 G(1505) F(R:1510,C:1520,A:1540) (0 3) T = 0
   Origs: 1540:fornext
   Dests: 1550:auto
-1550 G(1505) F(R,C,A,B) (1 5) FOR B = C - 1 TO C + 1
+1550 G(1505) F(R:1510,C:1520,A:1540,B:1550) (1 5) FOR B = C - 1 TO C + 1
      WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 1545:auto
   Dests: 1560:fornext, 1561:fornext
-1560 G(1505) F(R,C,A,B) (0 4) T = T + T(A, B)
+1560 G(1505) F(R:1510,C:1520,A:1540,B:1550) (0 4) T = T + T(A, B)
   Origs: 1550:fornext
   Dests: 1561:auto
-1561 G(1505) F(R,C,A,B) (0 1) NEXT B
+1561 G(1505) F(R:1510,C:1520,A:1540,B:1550) (0 1) NEXT B
   Origs: 1550:fornext, 1560:auto
   Dests: 1564:auto
-1564 G(1505) F(R,C,A) (1 4) IF T <> 10 THEN 1567
+1564 G(1505) F(R:1510,C:1520,A:1540) (1 4) IF T <> 10 THEN 1567
   Origs: 1561:auto
   Dests: 1565:auto, 1567:ifthen
-1565 G(1505) F(R,C,A) (1 4) IF T(A, C) <> 0 THEN 1630
+1565 G(1505) F(R:1510,C:1520,A:1540) (1 4) IF T(A, C) <> 0 THEN 1630
   Origs: 1564:auto
   Dests: 1567:auto, 1630:ifthen
-1567 G(1505) F(R,C,A) (0 1) NEXT A
+1567 G(1505) F(R:1510,C:1520,A:1540) (0 1) NEXT A
   Origs: 1540:fornext, 1564:ifthen, 1565:auto
   Dests: 1568:auto
-1568 G(1505) F(R,C,X) (1 5) FOR X = C - 1 TO C + 1
+1568 G(1505) F(R:1510,C:1520,X:1568) (1 5) FOR X = C - 1 TO C + 1
   Origs: 1567:auto
   Dests: 1569:fornext, 1575:fornext
-1569 G(1505) F(R,C,X) (0 3) T = 0
+1569 G(1505) F(R:1510,C:1520,X:1568) (0 3) T = 0
   Origs: 1568:fornext
   Dests: 1570:auto
-1570 G(1505) F(R,C,X,Y) (1 5) FOR Y = R - 1 TO R + 1
+1570 G(1505) F(R:1510,C:1520,X:1568,Y:1570) (1 5) FOR Y = R - 1 TO R + 1
      WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 1569:auto
   Dests: 1571:fornext, 1572:fornext
-1571 G(1505) F(R,C,X,Y) (0 4) T = T + T(Y, X)
+1571 G(1505) F(R:1510,C:1520,X:1568,Y:1570) (0 4) T = T + T(Y, X)
   Origs: 1570:fornext
   Dests: 1572:auto
-1572 G(1505) F(R,C,X,Y) (0 1) NEXT Y
+1572 G(1505) F(R:1510,C:1520,X:1568,Y:1570) (0 1) NEXT Y
   Origs: 1570:fornext, 1571:auto
   Dests: 1573:auto
-1573 G(1505) F(R,C,X) (1 4) IF T <> 10 THEN 1575
+1573 G(1505) F(R:1510,C:1520,X:1568) (1 4) IF T <> 10 THEN 1575
   Origs: 1572:auto
   Dests: 1574:auto, 1575:ifthen
-1574 G(1505) F(R,C,X) (1 4) IF T(R, X) <> 0 THEN 1630
+1574 G(1505) F(R:1510,C:1520,X:1568) (1 4) IF T(R, X) <> 0 THEN 1630
   Origs: 1573:auto
   Dests: 1575:auto, 1630:ifthen
-1575 G(1505) F(R,C,X) (0 1) NEXT X
+1575 G(1505) F(R:1510,C:1520,X:1568) (0 1) NEXT X
   Origs: 1568:fornext, 1573:ifthen, 1574:auto
   Dests: 1580:auto
-1580 G(1505) F(R,C) (0 1) NEXT C
+1580 G(1505) F(R:1510,C:1520) (0 1) NEXT C
   Origs: 1520:fornext, 1530:ifthen, 1575:auto
   Dests: 1590:auto
-1590 G(1505) F(R) (0 1) NEXT R
+1590 G(1505) F(R:1510) (0 1) NEXT R
   Origs: 1510:fornext, 1580:auto
   Dests: 1605:auto
 1600 (0 1) REM *** GAME IS OVER
@@ -471,7 +471,7 @@ Halstead complexity:
 1620 (0 1) STOP
   Origs: 
   Dests: :stop
-1630 G(1505) F(R,C,A,X) (0 1) RETURN
+1630 G(1505) F(R:1510,C:1520,A:1540,X:1568) (0 1) RETURN
   Origs: 1565:ifthen, 1574:ifthen
   Dests: 
 2000 G(1505) (0 2) PRINT

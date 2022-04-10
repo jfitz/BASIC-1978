@@ -49,55 +49,55 @@ STOP in line 999
 35 (1) RESTORE
 40 (1) READ N
 50 (1) C = INT(RND(1) * N + 1)
-60 F(I) (1) FOR I = 1 TO C
-70 F(I) (6) READ S$
-80 F(I) (6) NEXT I
+60 F(I:60) (1) FOR I = 1 TO C
+70 F(I:60) (6) READ S$
+80 F(I:60) (6) NEXT I
 90 (1) G = 0
 95 (1) S(0) = LEN(S$)
-100 F(I) (1) FOR I = 1 TO LEN(S$)
-    F(I) (5) S(I) = ASC(MID$(S$, I, 1))
-    F(I) (5) NEXT I
-110 F(I) (1) FOR I = 1 TO 5
-120 F(I) (5) A(I) = 45
-130 F(I) (5) NEXT I
-140 F(J) (1) FOR J = 1 TO 5
-144 F(J) (5) P(J) = 0
-146 F(J) (5) NEXT J
+100 F(I:100) (1) FOR I = 1 TO LEN(S$)
+    F(I:100) (5) S(I) = ASC(MID$(S$, I, 1))
+    F(I:100) (5) NEXT I
+110 F(I:110) (1) FOR I = 1 TO 5
+120 F(I:110) (5) A(I) = 45
+130 F(I:110) (5) NEXT I
+140 F(J:140) (1) FOR J = 1 TO 5
+144 F(J:140) (5) P(J) = 0
+146 F(J:140) (5) NEXT J
 150 (5) PRINT "GUESS A FIVE LETTER WORD";
 160 (5) INPUT L$
 170 (5) G = G + 1
 172 (5) IF S$ = L$ THEN 500
-173 F(I) (4) FOR I = 1 TO 7
-    F(I) (28) P(I) = 0
-    F(I) (28) NEXT I
+173 F(I:173) (4) FOR I = 1 TO 7
+    F(I:173) (28) P(I) = 0
+    F(I:173) (28) NEXT I
 175 (4) L(0) = LEN(L$)
-180 F(I) (4) FOR I = 1 TO LEN(L$)
-    F(I) (20) L(I) = ASC(MID$(L$, I, 1))
-    F(I) (20) NEXT I
+180 F(I:180) (4) FOR I = 1 TO LEN(L$)
+    F(I:180) (20) L(I) = ASC(MID$(L$, I, 1))
+    F(I:180) (20) NEXT I
 190 (4) IF L(1) = 63 THEN 300
 200 (4) IF L(0) <> 5 THEN 400
 205 (4) M = 0
     (4) Q = 1
-210 F(I) (4) FOR I = 1 TO 5
-220 F(I,J) (20) FOR J = 1 TO 5
-230 F(I,J) (100) IF S(I) <> L(J) THEN 260
-231 F(I,J) (10) P(Q) = L(J)
-232 F(I,J) (10) Q = Q + 1
-233 F(I,J) (10) IF I <> J THEN 250
-240 F(I,J) (7) A(J) = L(J)
-250 F(I,J) (10) M = M + 1
-260 F(I,J) (100) NEXT J
-265 F(I) (20) NEXT I
+210 F(I:210) (4) FOR I = 1 TO 5
+220 F(I:210,J:220) (20) FOR J = 1 TO 5
+230 F(I:210,J:220) (100) IF S(I) <> L(J) THEN 260
+231 F(I:210,J:220) (10) P(Q) = L(J)
+232 F(I:210,J:220) (10) Q = Q + 1
+233 F(I:210,J:220) (10) IF I <> J THEN 250
+240 F(I:210,J:220) (7) A(J) = L(J)
+250 F(I:210,J:220) (10) M = M + 1
+260 F(I:210,J:220) (100) NEXT J
+265 F(I:210) (20) NEXT I
 270 (4) A(0) = 5
 272 (4) P(0) = M
 275 (4) A$ = ""
-    F(I) (4) FOR I = 1 TO A(0)
-    F(I) (20) A$ = A$ + CHR$(A(I))
-    F(I) (20) NEXT I
+    F(I:275.1) (4) FOR I = 1 TO A(0)
+    F(I:275.1) (20) A$ = A$ + CHR$(A(I))
+    F(I:275.1) (20) NEXT I
 277 (4) P$ = ""
-    F(I) (4) FOR I = 1 TO P(0)
-    F(I) (10) P$ = P$ + CHR$(P(I))
-    F(I) (10) NEXT I
+    F(I:277.1) (4) FOR I = 1 TO P(0)
+    F(I:277.1) (10) P$ = P$ + CHR$(P(I))
+    F(I:277.1) (10) NEXT I
 280 (4) PRINT "THERE WERE"; M; "MATCHES AND THE COMMON LETTERS WERE..."; P$
 285 (4) PRINT "FROM THE EXACT LETTER MATCHES, YOU KNOW................"; A$
 286 (4) IF A$ = S$ THEN 500
@@ -107,9 +107,9 @@ STOP in line 999
 289 (4) PRINT
 290 (4) GOTO 150
 300 (0) S$ = ""
-    F(I) (0) FOR I = 1 TO 7
-    F(I) (0) S$ = S$ + CHR$(S(I))
-    F(I) (0) NEXT I
+    F(I:300.1) (0) FOR I = 1 TO 7
+    F(I:300.1) (0) S$ = S$ + CHR$(S(I))
+    F(I:300.1) (0) NEXT I
 310 (0) PRINT "THE SECRET WORD IS "; S$
     (0) PRINT
 320 (0) GOTO 30

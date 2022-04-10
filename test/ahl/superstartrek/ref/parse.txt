@@ -211,6 +211,7 @@
  UserFunction:FNR(_) -> _
  AssignmentOperator:= _ -> _
 530 FORI=1TO9:C(I,1)=0:C(I,2)=0:NEXTI
+ WARNING: FOR/NEXT nesting exceeds limit 3
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:9"]
@@ -830,6 +831,7 @@
 2060 INPUT"COMMAND";A$
  Variable:A$ -> $
 2080 FORI=1TO9:IFLEFT$(A$,3)<>MID$(A1$,3*I-2,3)THEN2160
+ WARNING: FOR/NEXT nesting exceeds limit 3
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:9"]
@@ -1031,6 +1033,7 @@
 2580 REM KLINGONS MOVE/FIRE ON MOVING STARSHIP . . .
  Remark:KLINGONS MOVE/FIRE ON MOVING STARSHIP . . .
 2590 FORI=1TOK3:IFK(I,3)=0THEN2700
+ WARNING: FOR/NEXT nesting exceeds limit 3
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["Variable:K3 -> _"]
@@ -1673,6 +1676,8 @@
  CarriageControl:NL
 4060 FORI=Q1-1TOQ1+1:N(1)=-1:N(2)=-2:N(3)=-3:FORJ=Q2-1TOQ2+1
  WARNING: Line exceeds PRETTY width limit 80
+ WARNING: FOR/NEXT nesting exceeds limit 3
+ WARNING: FOR/NEXT nesting exceeds limit 3
  control: Variable:I -> _
  start:   ["Variable:Q1 -> _", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) -> _"]
  end:     ["Variable:Q1 -> _", "NumericConstant:1", "BinaryOperatorPlus:+(_,_) -> _"]
@@ -1730,6 +1735,7 @@
  AssignmentOperator:= _ -> _
 4180 NEXTJ:FORL=1TO3:PRINT": ";:IFN(L)<0THENPRINT"*** ";:GOTO4230
  WARNING: Line exceeds PRETTY width limit 80
+ WARNING: FOR/NEXT nesting exceeds limit 3
  Variable:J -> _
  control: Variable:L -> _
  start:   ["NumericConstant:1"]
@@ -1836,6 +1842,7 @@
  BinaryOperatorMultiply:*(_,_) -> _
  AssignmentOperator:= _ -> _
 4450 H1=INT(X/K3):FORI=1TO3:IFK(I,3)<=0THEN4670
+ WARNING: FOR/NEXT nesting exceeds limit 3
  Variable:H1 -> _
  Variable:X -> _
  Variable:K3 -> _
@@ -2192,6 +2199,7 @@
  BinaryOperatorLessEqual:<=(_,_) -> ?
  LineNumber:6370
 5150 FORI=1TO3:IFX3=K(I,1)ANDY3=K(I,2)THEN5190
+ WARNING: FOR/NEXT nesting exceeds limit 3
  control: Variable:I -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:3"]
@@ -2436,6 +2444,7 @@
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:1990
 5720 D3=0:FORI=1TO8:IFD(I)<0THEND3=D3+.1
+ WARNING: FOR/NEXT nesting exceeds limit 3
  Variable:D3 -> _
  NumericConstant:0
  AssignmentOperator:= =_ -> _
@@ -2516,6 +2525,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 5910 PRINT:PRINT"DEVICE             STATE OF REPAIR":FORR1=1TO8
+ WARNING: FOR/NEXT nesting exceeds limit 3
  CarriageControl:NL
  TextConstant:"DEVICE             STATE OF REPAIR"
  CarriageControl:NL
@@ -2879,6 +2889,7 @@
  end:     ["NumericConstant:8"]
 6820 FORJ=(I-1)*24+1TO(I-1)*24+22STEP3:PRINT" ";MID$(Q$,J,3);:NEXTJ
  WARNING: Line exceeds PRETTY width limit 80
+ WARNING: FOR/NEXT nesting exceeds limit 3
  control: Variable:J -> _
  start:   ["Variable:I -> _", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) -> _", "NumericConstant:24", "BinaryOperatorMultiply:*(_,_) -> _", "NumericConstant:1", "BinaryOperatorPlus:+(_,_) -> _"]
  end:     ["Variable:I -> _", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) -> _", "NumericConstant:24", "BinaryOperatorMultiply:*(_,_) -> _", "NumericConstant:22", "BinaryOperatorPlus:+(_,_) -> _"]
@@ -3068,6 +3079,7 @@
  TextConstant:"     ----- ----- ----- ----- ----- ----- ----- -----"
  AssignmentOperator:= =$ -> $
 7570 PRINTO1$:FORI=1TO8:PRINTI;:IFH8=0THEN7740
+ WARNING: FOR/NEXT nesting exceeds limit 3
  Variable:O1$ -> $
  CarriageControl:NL
  control: Variable:I -> _
@@ -3080,6 +3092,7 @@
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:7740
 7630 FORJ=1TO8:PRINT"   ";:IFZ(I,J)=0THENPRINT"***";:GOTO7720
+ WARNING: FOR/NEXT nesting exceeds limit 3
  control: Variable:J -> _
  start:   ["NumericConstant:1"]
  end:     ["NumericConstant:8"]
@@ -3256,6 +3269,7 @@
  Variable:X$ -> $
  CarriageControl:NL
 8100 H8=0:FORI=1TO3:IFK(I,3)<=0THEN8480
+ WARNING: FOR/NEXT nesting exceeds limit 3
  Variable:H8 -> _
  NumericConstant:0
  AssignmentOperator:= =_ -> _

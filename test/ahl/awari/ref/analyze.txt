@@ -37,9 +37,9 @@ Halstead complexity:
    (0 3) E = 0
   Origs: 15:auto, 85:goto, 90:goto, 95:goto
   Dests: 25:auto
-25 F(I) (1 3) FOR I = 0 TO 12
-   F(I) (0 3) B(I) = 3
-   F(I) (0 1) NEXT I
+25 F(I:25) (1 3) FOR I = 0 TO 12
+   F(I:25) (0 3) B(I) = 3
+   F(I:25) (0 1) NEXT I
   Origs: 20:auto
   Dests: 30:auto
 30 (0 3) C = 0
@@ -137,12 +137,12 @@ Halstead complexity:
     WARNING: Multiple GOSUB entry points
   Origs: 205:auto
   Dests: 215:auto
-215 G(800,200) F(I) (1 3) FOR I = 0 TO 5
-    G(800,200) F(I) (1 4) IF B(I) <> 0 THEN 230
+215 G(800,200) F(I:215) (1 3) FOR I = 0 TO 5
+    G(800,200) F(I:215) (1 4) IF B(I) <> 0 THEN 230
     WARNING: Multiple GOSUB entry points
   Origs: 210:auto
   Dests: 220:auto, 220:fornext, 230:ifthen
-220 G(800,200) F(I) (0 1) NEXT I
+220 G(800,200) F(I:215,I:230) (0 1) NEXT I
     WARNING: Multiple GOSUB entry points
   Origs: 215:auto, 215:fornext, 235:goto
   Dests: 225:auto
@@ -150,13 +150,13 @@ Halstead complexity:
     WARNING: Multiple GOSUB entry points
   Origs: 220:auto
   Dests: 
-230 G(800,200) F(I) (1 3) FOR I = 7 TO 12
-    G(800,200) F(I) (1 6) IF B(I) <> 0 THEN E = 1
-    G(800,200) F(I) (0 1) RETURN
+230 G(800,200) F(I:215,I:230) (1 3) FOR I = 7 TO 12
+    G(800,200) F(I:215,I:230) (1 6) IF B(I) <> 0 THEN E = 1
+    G(800,200) F(I:215,I:230) (0 1) RETURN
     WARNING: Multiple GOSUB entry points
   Origs: 215:ifthen
   Dests: 235:auto, 510:fornext
-235 G(800,200) F(I) (0 3) GOTO 220
+235 G(800,200) F(I:215,I:230) (0 3) GOTO 220
     WARNING: Multiple GOSUB entry points
   Origs: 230:auto
   Dests: 220:goto
@@ -166,12 +166,12 @@ Halstead complexity:
     WARNING: Multiple GOSUB entry points
   Origs: 35:gosub, 150:goto
   Dests: 505:auto
-505 G(500,110) F(I) (1 5) FOR I = 12 TO 7 STEP -1
-    G(500,110) F(I) (0 2) GOSUB 580
+505 G(500,110) F(I:505) (1 5) FOR I = 12 TO 7 STEP -1
+    G(500,110) F(I:505) (0 2) GOSUB 580
     WARNING: Multiple GOSUB entry points
   Origs: 500:auto
   Dests: 510:auto, 510:fornext, 580:gosub
-510 G(500,110,800,200) F(I) (0 1) NEXT I
+510 G(500,110,800,200) F(I:215,I:505) (0 1) NEXT I
     WARNING: Multiple GOSUB entry points
   Origs: 230:fornext, 505:auto, 505:fornext
   Dests: 515:auto
@@ -187,12 +187,12 @@ Halstead complexity:
     WARNING: Multiple GOSUB entry points
   Origs: 515:auto
   Dests: 525:auto
-525 G(500,110,800,200) F(I) (1 3) FOR I = 0 TO 5
-    G(500,110,800,200) F(I) (0 2) GOSUB 580
+525 G(500,110,800,200) F(I:525) (1 3) FOR I = 0 TO 5
+    G(500,110,800,200) F(I:525) (0 2) GOSUB 580
     WARNING: Multiple GOSUB entry points
   Origs: 520:auto
   Dests: 530:auto, 530:fornext, 580:gosub
-530 G(500,110,800,200) F(I) (0 1) NEXT I
+530 G(500,110,800,200) F(I:525) (0 1) NEXT I
     WARNING: Multiple GOSUB entry points
   Origs: 525:auto, 525:fornext
   Dests: 535:auto
@@ -213,13 +213,13 @@ Halstead complexity:
     G(600) (0 3) B(M) = 0
   Origs: 200:gosub, 815:gosub
   Dests: 605:auto
-605 G(600) F(P) (1 5) FOR P = P TO 1 STEP -1
-    G(600) F(P) (0 4) M = M + 1
-    G(600) F(P) (1 7) IF M > 13 THEN M = M - 14
+605 G(600) F(P:605) (1 5) FOR P = P TO 1 STEP -1
+    G(600) F(P:605) (0 4) M = M + 1
+    G(600) F(P:605) (1 7) IF M > 13 THEN M = M - 14
   Origs: 600:auto
   Dests: 610:auto, 610:fornext
-610 G(600) F(P) (0 4) B(M) = B(M) + 1
-    G(600) F(P) (0 1) NEXT P
+610 G(600) F(P:605) (0 4) B(M) = B(M) + 1
+    G(600) F(P:605) (0 1) NEXT P
   Origs: 605:auto, 605:fornext
   Dests: 615:auto
 615 G(600) (4 13) IF B(M) = 1 THEN IF M <> 6 THEN IF M <> 13 THEN IF B(12 - M) <> 0 THEN 625
@@ -239,67 +239,67 @@ Halstead complexity:
     WARNING: GOSUB length exceeds limit 40
   Origs: 60:gosub, 70:gosub
   Dests: 805:auto
-805 G(800) F(I) (1 3) FOR I = 0 TO 13
-    G(800) F(I) (0 3) G(I) = B(I)
-    G(800) F(I) (0 1) NEXT I
+805 G(800) F(I:805) (1 3) FOR I = 0 TO 13
+    G(800) F(I:805) (0 3) G(I) = B(I)
+    G(800) F(I:805) (0 1) NEXT I
   Origs: 800:auto
   Dests: 810:auto
-810 G(800) F(J) (1 3) FOR J = 7 TO 12
-    G(800) F(J) (1 4) IF B(J) = 0 THEN 885
+810 G(800) F(J:810) (1 3) FOR J = 7 TO 12
+    G(800) F(J:810) (1 4) IF B(J) = 0 THEN 885
   Origs: 805:auto
   Dests: 815:auto, 885:fornext, 885:ifthen
-815 G(800) F(J) (0 3) G = 0
-    G(800) F(J) (0 3) M = J
-    G(800) F(J) (0 3) GOSUB 600
+815 G(800) F(J:810) (0 3) G = 0
+    G(800) F(J:810) (0 3) M = J
+    G(800) F(J:810) (0 3) GOSUB 600
   Origs: 810:auto
   Dests: 600:gosub, 820:auto
-820 G(800) F(J,I) (1 3) FOR I = 0 TO 5
-    G(800) F(J,I) (1 4) IF B(I) = 0 THEN 845
+820 G(800) F(J:810,I:820) (1 3) FOR I = 0 TO 5
+    G(800) F(J:810,I:820) (1 4) IF B(I) = 0 THEN 845
   Origs: 815:auto
   Dests: 825:auto, 845:fornext, 845:ifthen
-825 G(800) F(J,I) (0 4) L = B(I) + I
-    G(800) F(J,I) (0 3) R = 0
+825 G(800) F(J:810,I:820) (0 4) L = B(I) + I
+    G(800) F(J:810,I:820) (0 3) R = 0
   Origs: 820:auto
   Dests: 830:auto
-830 G(800) F(J,I) (1 7) IF L > 13 THEN L = L - 14
-    G(800) F(J,I) (0 3) R = 1
-    G(800) F(J,I) (0 3) GOTO 830
+830 G(800) F(J:810,I:820) (1 7) IF L > 13 THEN L = L - 14
+    G(800) F(J:810,I:820) (0 3) R = 1
+    G(800) F(J:810,I:820) (0 3) GOTO 830
   Origs: 825:auto
   Dests: 835:auto
-835 G(800) F(J,I) (3 13) IF B(L) = 0 THEN IF L <> 6 THEN IF L <> 13 THEN R = B(12 - L) + R
+835 G(800) F(J:810,I:820) (3 13) IF B(L) = 0 THEN IF L <> 6 THEN IF L <> 13 THEN R = B(12 - L) + R
   Origs: 830:auto
   Dests: 840:auto
-840 G(800) F(J,I) (1 6) IF R > Q THEN Q = R
+840 G(800) F(J:810,I:820) (1 6) IF R > Q THEN Q = R
   Origs: 835:auto
   Dests: 845:auto
-845 G(800) F(J,I) (0 1) NEXT I
+845 G(800) F(J:810,I:820) (0 1) NEXT I
   Origs: 820:fornext, 820:ifthen, 840:auto
   Dests: 850:auto
-850 G(800) F(J) (0 5) Q = B(13) - B(6) - Q
-    G(800) F(J) (1 4) IF C > 8 THEN 875
+850 G(800) F(J:810) (0 5) Q = B(13) - B(6) - Q
+    G(800) F(J:810) (1 4) IF C > 8 THEN 875
   Origs: 845:auto
   Dests: 855:auto, 875:ifthen
-855 G(800) F(J) (0 3) K = J
-    G(800) F(J) (1 7) IF K > 6 THEN K = K - 7
+855 G(800) F(J:810) (0 3) K = J
+    G(800) F(J:810) (1 7) IF K > 6 THEN K = K - 7
   Origs: 850:auto
   Dests: 860:auto
-860 G(800) F(J,I) (1 4) FOR I = 0 TO N - 1
-    G(800) F(J,I) (1 10) IF F(N) * 6 + K = INT(F(I) / 6 ^ (7 - C) + 0.1) THEN Q = Q - 2
+860 G(800) F(J:810,I:860) (1 4) FOR I = 0 TO N - 1
+    G(800) F(J:810,I:860) (1 10) IF F(N) * 6 + K = INT(F(I) / 6 ^ (7 - C) + 0.1) THEN Q = Q - 2
   Origs: 855:auto
   Dests: 870:auto, 870:fornext
-870 G(800) F(J,I) (0 1) NEXT I
+870 G(800) F(J:810,I:860) (0 1) NEXT I
   Origs: 860:auto, 860:fornext
   Dests: 875:auto
-875 G(800) F(J,I) (1 3) FOR I = 0 TO 13
-    G(800) F(J,I) (0 3) B(I) = G(I)
-    G(800) F(J,I) (0 1) NEXT I
+875 G(800) F(J:810,I:875) (1 3) FOR I = 0 TO 13
+    G(800) F(J:810,I:875) (0 3) B(I) = G(I)
+    G(800) F(J:810,I:875) (0 1) NEXT I
   Origs: 850:ifthen, 870:auto
   Dests: 880:auto
-880 G(800) F(J) (1 6) IF Q >= D THEN A = J
-    G(800) F(J) (0 3) D = Q
+880 G(800) F(J:810) (1 6) IF Q >= D THEN A = J
+    G(800) F(J:810) (0 3) D = Q
   Origs: 875:auto
   Dests: 885:auto
-885 G(800) F(J) (0 1) NEXT J
+885 G(800) F(J:810) (0 1) NEXT J
   Origs: 810:fornext, 810:ifthen, 880:auto
   Dests: 890:auto
 890 G(800) (0 3) M = A
@@ -308,9 +308,9 @@ Halstead complexity:
     WARNING: Branch to line before GOSUB start
   Origs: 885:auto
   Dests: 200:goto
-900 F(I) (1 4) FOR I = 0 TO N - 1
-    F(I) (0 2) PRINT B(I)
-    F(I) (0 1) NEXT I
+900 F(I:900) (1 4) FOR I = 0 TO N - 1
+    F(I:900) (0 2) PRINT B(I)
+    F(I:900) (0 1) NEXT I
   Origs: 
   Dests: 999:auto
 999 (0 1) END

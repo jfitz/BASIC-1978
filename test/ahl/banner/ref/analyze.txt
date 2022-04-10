@@ -53,140 +53,140 @@ Halstead complexity:
 60 (0 1) REM
   Origs: 
   Dests: 
-70 F(T) (1 4) FOR T = 1 TO LEN(A$)
+70 F(T:70) (1 4) FOR T = 1 TO LEN(A$)
   Origs: 40:auto
   Dests: 80:fornext, 800:fornext
-80 F(T) (0 4) P$ = MID$(A$, T, 1)
+80 F(T:70) (0 4) P$ = MID$(A$, T, 1)
   Origs: 70:fornext
   Dests: 90:auto
-90 F(T,O) (1 3) FOR O = 1 TO 50
+90 F(T:70,O:90) (1 3) FOR O = 1 TO 50
   Origs: 80:auto
   Dests: 95:fornext, 120:fornext
-95 F(T,O) (8 9) READ S$, S(1), S(2), S(3), S(4), S(5), S(6), S(7)
+95 F(T:70,O:90) (8 9) READ S$, S(1), S(2), S(3), S(4), S(5), S(6), S(7)
   Origs: 90:fornext
   Dests: 96:auto
-96 F(T,O) (1 4) IF P$ = " " THEN 812
+96 F(T:70,O:90) (1 4) IF P$ = " " THEN 812
   Origs: 95:auto
   Dests: 100:auto, 812:ifthen
-100 F(T,O) (1 4) IF P$ = S$ THEN 200
+100 F(T:70,O:90) (1 4) IF P$ = S$ THEN 200
   Origs: 96:auto
   Dests: 120:auto, 200:ifthen
-120 F(T,O) (0 1) NEXT O
+120 F(T:70,O:90) (0 1) NEXT O
   Origs: 90:fornext, 100:auto
   Dests: 200:auto
-200 F(T,O) (0 1) RESTORE
+200 F(T:70,O:90) (0 1) RESTORE
   Origs: 100:ifthen, 120:auto
   Dests: 201:auto
-201 F(T,O) (0 3) X$ = M$
+201 F(T:70,O:90) (0 3) X$ = M$
   Origs: 200:auto
   Dests: 202:auto
-202 F(T,O) (1 6) IF M$ = "ALL" THEN X$ = S$
+202 F(T:70,O:90) (1 6) IF M$ = "ALL" THEN X$ = S$
   Origs: 201:auto
   Dests: 205:auto
-205 F(T,O,U) (1 3) FOR U = 1 TO 7
+205 F(T:70,O:90,U:205) (1 3) FOR U = 1 TO 7
   Origs: 202:auto
   Dests: 210:fornext, 700:fornext
-210 F(T,O,U,K) (1 5) FOR K = 8 TO 0 STEP -1
+210 F(T:70,O:90,U:205,K:210) (1 5) FOR K = 8 TO 0 STEP -1
     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 205:fornext
   Dests: 230:fornext, 280:fornext
-230 F(T,O,U,K) (1 5) IF 2 ^ K < S(U) THEN 270
+230 F(T:70,O:90,U:205,K:210) (1 5) IF 2 ^ K < S(U) THEN 270
   Origs: 210:fornext
   Dests: 240:auto, 270:ifthen
-240 F(T,O,U,K) (0 3) J(9 - K) = 0
+240 F(T:70,O:90,U:205,K:210) (0 3) J(9 - K) = 0
   Origs: 230:auto
   Dests: 250:auto
-250 F(T,O,U,K) (0 2) GOTO 280
+250 F(T:70,O:90,U:205,K:210) (0 2) GOTO 280
   Origs: 240:auto
   Dests: 280:goto
-270 F(T,O,U,K) (0 3) J(9 - K) = 1
-    F(T,O,U,K) (0 6) S(U) = S(U) - 2 ^ K
+270 F(T:70,O:90,U:205,K:210) (0 3) J(9 - K) = 1
+    F(T:70,O:90,U:205,K:210) (0 6) S(U) = S(U) - 2 ^ K
   Origs: 230:ifthen
   Dests: 272:auto
-272 F(T,O,U,K) (1 4) IF S(U) = 1 THEN 815
+272 F(T:70,O:90,U:205,K:210) (1 4) IF S(U) = 1 THEN 815
   Origs: 270:auto
   Dests: 280:auto, 815:ifthen
-280 F(T,O,U,K) (0 1) NEXT K
+280 F(T:70,O:90,U:205,K:210) (0 1) NEXT K
   Origs: 210:fornext, 250:goto, 272:auto
   Dests: 445:auto
-445 F(T,O,U,K,T1) (1 3) FOR T1 = 1 TO X
+445 F(T:70,O:90,U:205,K:210,T1:445) (1 3) FOR T1 = 1 TO X
     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 280:auto, 815:goto
   Dests: 447:fornext, 630:fornext
-447 F(T,O,U,K,T1) (0 3) PRINT TAB((63 - 4.5 * Y) * G1 / (LEN(X$)) + 1);
+447 F(T:70,O:90,U:205,K:210,T1:445) (0 3) PRINT TAB((63 - 4.5 * Y) * G1 / (LEN(X$)) + 1);
   Origs: 445:fornext
   Dests: 450:auto
-450 F(T,O,U,K,T1,B) (1 3) FOR B = 1 TO F(U)
+450 F(T:70,O:90,U:205,K:210,T1:445,B:450) (1 3) FOR B = 1 TO F(U)
     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 447:auto
   Dests: 460:fornext, 600:fornext
-460 F(T,O,U,K,T1,B) (1 4) IF J(B) = 0 THEN 500
+460 F(T:70,O:90,U:205,K:210,T1:445,B:450) (1 4) IF J(B) = 0 THEN 500
   Origs: 450:fornext
   Dests: 465:auto, 500:ifthen
-465 F(T,O,U,K,T1,B,I) (1 3) FOR I = 1 TO Y
-    F(T,O,U,K,T1,B,I) (0 2) PRINT X$;
-    F(T,O,U,K,T1,B,I) (0 1) NEXT I
+465 F(T:70,O:90,U:205,K:210,T1:445,B:450,I:465) (1 3) FOR I = 1 TO Y
+    F(T:70,O:90,U:205,K:210,T1:445,B:450,I:465) (0 2) PRINT X$;
+    F(T:70,O:90,U:205,K:210,T1:445,B:450,I:465) (0 1) NEXT I
     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 460:auto
   Dests: 470:auto
-470 F(T,O,U,K,T1,B) (0 2) GOTO 600
+470 F(T:70,O:90,U:205,K:210,T1:445,B:450) (0 2) GOTO 600
   Origs: 465:auto
   Dests: 600:goto
-500 F(T,O,U,K,T1,B,I) (1 3) FOR I = 1 TO Y
+500 F(T:70,O:90,U:205,K:210,T1:445,B:450,I:500) (1 3) FOR I = 1 TO Y
     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 460:ifthen
   Dests: 510:fornext, 530:fornext
-510 F(T,O,U,K,T1,B,I,I1) (1 4) FOR I1 = 1 TO LEN(X$)
+510 F(T:70,O:90,U:205,K:210,T1:445,B:450,I:500,I1:510) (1 4) FOR I1 = 1 TO LEN(X$)
     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 500:fornext
   Dests: 520:fornext
-520 F(T,O,U,K,T1,B,I,I1) (0 2) PRINT " ";
-    F(T,O,U,K,T1,B,I,I1) (0 1) NEXT I1
+520 F(T:70,O:90,U:205,K:210,T1:445,B:450,I:500,I1:510) (0 2) PRINT " ";
+    F(T:70,O:90,U:205,K:210,T1:445,B:450,I:500,I1:510) (0 1) NEXT I1
   Origs: 510:fornext
   Dests: 530:auto
-530 F(T,O,U,K,T1,B,I) (0 1) NEXT I
+530 F(T:70,O:90,U:205,K:210,T1:445,B:450,I:500) (0 1) NEXT I
   Origs: 500:fornext, 520:auto
   Dests: 600:auto
-600 F(T,O,U,K,T1,B) (0 1) NEXT B
+600 F(T:70,O:90,U:205,K:210,T1:445,B:450) (0 1) NEXT B
   Origs: 450:fornext, 470:goto, 530:auto
   Dests: 620:auto
-620 F(T,O,U,K,T1) (0 2) PRINT
+620 F(T:70,O:90,U:205,K:210,T1:445) (0 2) PRINT
   Origs: 600:auto
   Dests: 630:auto
-630 F(T,O,U,K,T1) (0 1) NEXT T1
+630 F(T:70,O:90,U:205,K:210,T1:445) (0 1) NEXT T1
   Origs: 445:fornext, 620:auto
   Dests: 700:auto
-700 F(T,O,U,K) (0 1) NEXT U
+700 F(T:70,O:90,U:205,K:210) (0 1) NEXT U
   Origs: 205:fornext, 630:auto
   Dests: 750:auto
-750 F(T,O,K,H) (1 4) FOR H = 1 TO 2 * X
-    F(T,O,K,H) (0 2) PRINT
-    F(T,O,K,H) (0 1) NEXT H
+750 F(T:70,O:90,K:210,H:750) (1 4) FOR H = 1 TO 2 * X
+    F(T:70,O:90,K:210,H:750) (0 2) PRINT
+    F(T:70,O:90,K:210,H:750) (0 1) NEXT H
     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 700:auto
   Dests: 800:auto
-800 F(T,O,K) (0 1) NEXT T
+800 F(T:70,O:90,K:210) (0 1) NEXT T
   Origs: 70:fornext, 750:auto, 813:goto
   Dests: 806:auto
-806 F(O,K,H) (1 3) FOR H = 1 TO 75
-    F(O,K,H) (0 2) PRINT
-    F(O,K,H) (0 1) NEXT H
+806 F(O:90,K:210,H:806) (1 3) FOR H = 1 TO 75
+    F(O:90,K:210,H:806) (0 2) PRINT
+    F(O:90,K:210,H:806) (0 1) NEXT H
   Origs: 800:auto
   Dests: 810:auto
-810 F(O,K) (0 1) STOP
+810 F(O:90,K:210) (0 1) STOP
     WARNING: Terminating statement in FOR/NEXT
   Origs: 806:auto
   Dests: :stop
-812 F(T,O,H) (1 4) FOR H = 1 TO 7 * X
-    F(T,O,H) (0 2) PRINT
-    F(T,O,H) (0 1) NEXT H
+812 F(T:70,O:90,H:812) (1 4) FOR H = 1 TO 7 * X
+    F(T:70,O:90,H:812) (0 2) PRINT
+    F(T:70,O:90,H:812) (0 1) NEXT H
   Origs: 96:ifthen
   Dests: 813:auto
-813 F(T,O) (0 3) GOTO 800
+813 F(T:70,O:90) (0 3) GOTO 800
   Origs: 812:auto
   Dests: 800:goto
-815 F(T,O,U,K) (0 4) F(U) = 9 - K
-    F(T,O,U,K) (0 3) GOTO 445
+815 F(T:70,O:90,U:205,K:210) (0 4) F(U) = 9 - K
+    F(T:70,O:90,U:205,K:210) (0 3) GOTO 445
   Origs: 272:ifthen
   Dests: 445:goto
 899 (0 2) DATA " ", 0, 0, 0, 0, 0, 0, 0

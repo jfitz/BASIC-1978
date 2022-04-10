@@ -250,6 +250,20 @@ class StatementFactory
   end
 end
 
+# class for for-next marker
+class ForNextMarker
+  attr_reader :control, :line_stmt
+
+  def initialize(control, line_stmt)
+    @control = control
+    @line_stmt = line_stmt
+  end
+
+  def to_s
+    "#{@control}:#{@line_stmt}"
+  end
+end
+
 # parent of all statement classes
 class AbstractStatement
   attr_reader :errors, :warnings, :program_errors, :keywords, :tokens,
@@ -296,6 +310,7 @@ class AbstractStatement
     @profile_count = 0
     @profile_time = 0
     @transfers = []
+    @origins = []
     @part_of_user_function = nil
     @part_of_sub = []
     @part_of_onerror = []
@@ -382,13 +397,14 @@ class AbstractStatement
     end
   end
 
-  def assign_fornext_markers(_) end
+  def assign_fornext_markers(_, _) end
 
-  def assign_fornext_marker(marker, markers, line_number, program)
+  def assign_fornext_marker(marker, markers, line_stmt, program)
     return if @visited == marker
     @visited = marker
 
     # if already in the list, remove it
+    # the current marker holds control variable and line-statement
     if @part_of_fornext.include?(marker)
       @part_of_fornext -= [marker]
     end
@@ -397,6 +413,7 @@ class AbstractStatement
     @part_of_fornext << marker
 
     if for?
+      # the list is just control variables; do not include line-stmt
       markers << @control
     end
 
@@ -406,7 +423,7 @@ class AbstractStatement
       return if @controls.empty?
 
       if @controls.size >= markers.size && @controls[markers.size - 1].empty?
-        markers -= [marker]
+        markers -= [marker.control]
       else
         @controls.each do |control|
           if markers.include?(control)
@@ -430,8 +447,11 @@ class AbstractStatement
       if !statement.part_of_fornext.include?(marker)
         # recurse for that statement's destinations
         dest_line = xfer.line_number
+        dest_stmt = xfer.statement
+        dest_line_stmt = LineStmt.new(dest_line, dest_stmt)
         markers2 = markers.clone
-        statement.assign_fornext_marker(marker, markers2, dest_line, program)
+        # recurse with copy of markers; restore original on return
+        statement.assign_fornext_marker(marker, markers2, dest_line_stmt, program)
       end
     end
   end
@@ -2432,25 +2452,33 @@ class ForStatement < AbstractStatement
     end
   end
 
-  def assign_fornext_markers(program)
+  def assign_fornext_markers(program, line_stmt)
     return if @control.nil?
     return if @loopstart_line_stmt_mod.nil?
 
+    # the current marker holds control variable and line-statement
+    marker = ForNextMarker.new(@control, line_stmt)
+    
     # if already in the list, remove it
-    if @part_of_fornext.include?(@control)
-      @part_of_fornext -= [@control]
+    if @part_of_fornext.include?(marker)
+      @part_of_fornext -= [marker]
     end
 
     # mark as part of this fornext
-    @part_of_fornext << @control
+    @part_of_fornext << marker
 
     statement = program.get_statement(@loopstart_line_stmt_mod)
 
     unless statement.nil?
       # mark statement's destinations
+      # the list is just control variables; do not include line-stmt
       markers = [@control]
+
       dest_line = @loopstart_line_stmt_mod.line_number
-      statement.assign_fornext_marker(@control, markers, dest_line, program)
+      dest_stmt = @loopstart_line_stmt_mod.statement
+      dest_line_stmt = LineStmt.new(dest_line, dest_stmt)
+
+      statement.assign_fornext_marker(marker, markers, dest_line_stmt, program)
     end
   end
 

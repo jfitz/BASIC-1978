@@ -67,34 +67,34 @@ Halstead complexity:
     WARNING: Inconsistent GOSUB origins
   Origs: 110:auto, 1810:gosub
   Dests: 130:auto
-130 G(110) F(D) (1 5) FOR D = D TO 1 STEP -1
+130 G(110) F(D:130) (1 5) FOR D = D TO 1 STEP -1
   Origs: 120:auto
   Dests: 140:fornext, 160:fornext
-140 G(110) F(D) (0 4) C = C - 1
+140 G(110) F(D:130) (0 4) C = C - 1
   Origs: 130:fornext
   Dests: 150:auto
-150 G(110) F(D) (0 3) C(C) = D(D)
+150 G(110) F(D:130) (0 3) C(C) = D(D)
   Origs: 140:auto
   Dests: 160:auto
-160 G(110) F(D) (0 1) NEXT D
+160 G(110) F(D:130) (0 1) NEXT D
   Origs: 130:fornext, 150:auto
   Dests: 170:auto
-170 G(110) F(C1) (1 5) FOR C1 = 52 TO C STEP -1
+170 G(110) F(C1:170) (1 5) FOR C1 = 52 TO C STEP -1
   Origs: 160:auto
   Dests: 180:fornext, 220:fornext
-180 G(110) F(C1) (0 5) C2 = INT(RND(1) * (C1 - C + 1)) + C
+180 G(110) F(C1:170) (0 5) C2 = INT(RND(1) * (C1 - C + 1)) + C
   Origs: 170:fornext
   Dests: 190:auto
-190 G(110) F(C1) (0 3) C3 = C(C2)
+190 G(110) F(C1:170) (0 3) C3 = C(C2)
   Origs: 180:auto
   Dests: 200:auto
-200 G(110) F(C1) (0 3) C(C2) = C(C1)
+200 G(110) F(C1:170) (0 3) C(C2) = C(C1)
   Origs: 190:auto
   Dests: 210:auto
-210 G(110) F(C1) (0 3) C(C1) = C3
+210 G(110) F(C1:170) (0 3) C(C1) = C3
   Origs: 200:auto
   Dests: 220:auto
-220 G(110) F(C1) (0 1) NEXT C1
+220 G(110) F(C1:170) (0 1) NEXT C1
   Origs: 170:fornext, 210:auto
   Dests: 230:auto
 230 G(110) (0 3) X = C(C)
@@ -127,16 +127,16 @@ Halstead complexity:
 360 G(360) (0 3) Q = 0
   Origs: 2290:gosub, 2420:gosub, 2520:gosub, 2560:gosub, 2730:gosub, 2800:gosub, 2910:gosub
   Dests: 370:auto
-370 G(360) F(Q2) (1 3) FOR Q2 = 1 TO R(I)
+370 G(360) F(Q2:370) (1 3) FOR Q2 = 1 TO R(I)
   Origs: 360:auto
   Dests: 380:fornext, 400:fornext
-380 G(360) F(Q2) (0 3) X = P(I, Q2)
+380 G(360) F(Q2:370) (0 3) X = P(I, Q2)
   Origs: 370:fornext
   Dests: 390:auto
-390 G(360) F(Q2) (0 2) GOSUB 500
+390 G(360) F(Q2:370) (0 2) GOSUB 500
   Origs: 380:auto
   Dests: 400:auto, 510:gosub
-400 G(360) F(Q2) (0 1) NEXT Q2
+400 G(360) F(Q2:370) (0 1) NEXT Q2
   Origs: 370:fornext, 390:auto
   Dests: 410:auto
 410 G(360) (0 3) Q(I) = Q
@@ -380,13 +380,13 @@ Halstead complexity:
      WARNING: Inconsistent GOSUB origins
   Origs: 830:gosub, 1470:goto, 2390:gosub
   Dests: 1430:auto
-1430 G(1420) F(H) (1 4) FOR H = 1 TO H1 STEP 2
+1430 G(1420) F(H:1430) (1 4) FOR H = 1 TO H1 STEP 2
   Origs: 1420:auto
   Dests: 1440:fornext, 1450:fornext
-1440 G(1420) F(H) (1 5) IF H$ = MID$(I$, H, 1) THEN 1480
+1440 G(1420) F(H:1430) (1 5) IF H$ = MID$(I$, H, 1) THEN 1480
   Origs: 1430:fornext
   Dests: 1450:auto, 1480:ifthen
-1450 G(1420) F(H) (0 1) NEXT H
+1450 G(1420) F(H:1430) (0 1) NEXT H
   Origs: 1430:fornext, 1440:auto
   Dests: 1460:auto
 1460 G(1420) (0 8) PRINT "TYPE "; MID$(I$, 1, H1 - 1); " OR "; MID$(I$, H1, 2); " PLEASE";
@@ -395,10 +395,10 @@ Halstead complexity:
 1470 G(1420) (0 3) GOTO 1420
   Origs: 1460:auto
   Dests: 1420:goto
-1480 G(1420) F(H) (0 5) H = (H + 1) / 2
+1480 G(1420) F(H:1430) (0 5) H = (H + 1) / 2
   Origs: 1440:ifthen
   Dests: 1490:auto
-1490 G(1420) F(H) (0 1) RETURN
+1490 G(1420) F(H:1430) (0 1) RETURN
   Origs: 1480:auto
   Dests: 
 1500 (0 1) REM --PROGRAM STARTS HERE
@@ -413,19 +413,19 @@ Halstead complexity:
 1530 (0 3) I$ = "H,S,D,C"
   Origs: 1520:auto
   Dests: 1540:auto
-1540 F(I) (1 3) FOR I = 1 TO 13
+1540 F(I:1540) (1 3) FOR I = 1 TO 13
   Origs: 1530:auto
   Dests: 1550:fornext, 1580:fornext
-1550 F(I,J) (1 6) FOR J = 4 * I - 3 TO 4 * I
+1550 F(I:1540,J:1550) (1 6) FOR J = 4 * I - 3 TO 4 * I
   Origs: 1540:fornext
   Dests: 1560:fornext, 1570:fornext
-1560 F(I,J) (0 3) D(J) = I
+1560 F(I:1540,J:1550) (0 3) D(J) = I
   Origs: 1550:fornext
   Dests: 1570:auto
-1570 F(I,J) (0 1) NEXT J
+1570 F(I:1540,J:1550) (0 1) NEXT J
   Origs: 1550:fornext, 1560:auto
   Dests: 1580:auto
-1580 F(I) (0 1) NEXT I
+1580 F(I:1540) (0 1) NEXT I
   Origs: 1540:fornext, 1570:auto
   Dests: 1590:auto
 1590 (0 3) D = 52
@@ -491,9 +491,9 @@ Halstead complexity:
 1780 (1 12) IF N < 1 OR N > 7 OR N > INT(N) THEN 1760
   Origs: 1775:auto
   Dests: 1760:ifthen, 1790:auto
-1790 F(I) (1 3) FOR I = 1 TO 8
-     F(I) (0 3) T(I) = 0
-     F(I) (0 1) NEXT I
+1790 F(I:1790) (1 3) FOR I = 1 TO 8
+     F(I:1790) (0 3) T(I) = 0
+     F(I:1790) (0 1) NEXT I
   Origs: 1780:auto
   Dests: 1800:auto
 1800 (0 4) D1 = N + 1
@@ -505,101 +505,101 @@ Halstead complexity:
 1820 (1 7) IF C = 2 THEN C = C - 1
   Origs: 1810:auto
   Dests: 1830:auto
-1830 F(I) (1 3) FOR I = 1 TO N
-     F(I) (0 3) Z(I) = 0
-     F(I) (0 1) NEXT I
+1830 F(I:1830) (1 3) FOR I = 1 TO N
+     F(I:1830) (0 3) Z(I) = 0
+     F(I:1830) (0 1) NEXT I
   Origs: 1820:auto
   Dests: 1840:auto
-1840 F(I) (1 3) FOR I = 1 TO 15
-     F(I) (0 3) B(I) = 0
-     F(I) (0 1) NEXT I
+1840 F(I:1840) (1 3) FOR I = 1 TO 15
+     F(I:1840) (0 3) B(I) = 0
+     F(I:1840) (0 1) NEXT I
   Origs: 1830:auto
   Dests: 1850:auto
-1850 F(I) (1 3) FOR I = 1 TO 15
-     F(I) (0 3) Q(I) = 0
-     F(I) (0 1) NEXT I
+1850 F(I:1850) (1 3) FOR I = 1 TO 15
+     F(I:1850) (0 3) Q(I) = 0
+     F(I:1850) (0 1) NEXT I
   Origs: 1840:auto
   Dests: 1860:auto
-1860 F(I) (1 3) FOR I = 1 TO 7
-     F(I) (0 3) S(I) = 0
-     F(I) (0 1) NEXT I
+1860 F(I:1860) (1 3) FOR I = 1 TO 7
+     F(I:1860) (0 3) S(I) = 0
+     F(I:1860) (0 1) NEXT I
   Origs: 1850:auto
   Dests: 1870:auto
-1870 F(I) (1 3) FOR I = 1 TO 15
-     F(I) (0 3) R(I) = 0
-     F(I) (0 1) NEXT I
+1870 F(I:1870) (1 3) FOR I = 1 TO 15
+     F(I:1870) (0 3) R(I) = 0
+     F(I:1870) (0 1) NEXT I
   Origs: 1860:auto
   Dests: 1880:auto
-1880 F(I) (0 2) PRINT "BETS:"
+1880 F(I:1900) (0 2) PRINT "BETS:"
   Origs: 1870:auto, 1910:ifthen
   Dests: 1890:auto
-1890 F(I) (1 3) FOR I = 1 TO N
-     F(I) (0 3) PRINT "#"; I;
-     F(I) (1 2) INPUT Z(I)
-     F(I) (0 1) NEXT I
+1890 F(I:1890,I:1900) (1 3) FOR I = 1 TO N
+     F(I:1890,I:1900) (0 3) PRINT "#"; I;
+     F(I:1890,I:1900) (1 2) INPUT Z(I)
+     F(I:1890,I:1900) (0 1) NEXT I
   Origs: 1880:auto
   Dests: 1900:auto
-1900 F(I) (1 3) FOR I = 1 TO N
+1900 F(I:1900) (1 3) FOR I = 1 TO N
   Origs: 1890:auto
   Dests: 1910:fornext, 1930:fornext
-1910 F(I) (1 8) IF Z(I) <= 0 OR Z(I) > 500 THEN 1880
+1910 F(I:1900) (1 8) IF Z(I) <= 0 OR Z(I) > 500 THEN 1880
   Origs: 1900:fornext
   Dests: 1880:ifthen, 1920:auto
-1920 F(I) (0 3) B(I) = Z(I)
+1920 F(I:1900) (0 3) B(I) = Z(I)
   Origs: 1910:auto
   Dests: 1930:auto
-1930 F(I) (0 1) NEXT I
+1930 F(I:1900) (0 1) NEXT I
   Origs: 1900:fornext, 1920:auto
   Dests: 1940:auto
 1940 (0 2) PRINT "PLAYER  ";
   Origs: 1930:auto
   Dests: 1950:auto
-1950 F(I) (1 3) FOR I = 1 TO N
+1950 F(I:1950) (1 3) FOR I = 1 TO N
   Origs: 1940:auto
   Dests: 1960:fornext, 1970:fornext
-1960 F(I) (0 4) PRINT TAB(I * 7); I;
+1960 F(I:1950) (0 4) PRINT TAB(I * 7); I;
   Origs: 1950:fornext
   Dests: 1970:auto
-1970 F(I) (0 1) NEXT I
+1970 F(I:1950) (0 1) NEXT I
   Origs: 1950:fornext, 1960:auto
   Dests: 1980:auto
 1980 (0 4) PRINT TAB((N + 1) * 7) "DEALER"
   Origs: 1970:auto
   Dests: 1990:auto
-1990 F(J) (1 3) FOR J = 1 TO 2
+1990 F(J:1990) (1 3) FOR J = 1 TO 2
   Origs: 1980:auto
   Dests: 2000:fornext, 2070:fornext
-2000 F(J) (0 3) PRINT TAB(7);
+2000 F(J:1990) (0 3) PRINT TAB(7);
   Origs: 1990:fornext
   Dests: 2010:auto
-2010 F(J,I) (1 3) FOR I = 1 TO D1
+2010 F(J:1990,I:2010) (1 3) FOR I = 1 TO D1
   Origs: 2000:auto
   Dests: 2020:fornext, 2050:fornext
-2020 F(J,I) (0 3) GOSUB 100
+2020 F(J:1990,I:2010) (0 3) GOSUB 100
   Origs: 2010:fornext
   Dests: 110:gosub, 2030:auto
-2030 F(J,I) (0 3) P(I, J) = X
+2030 F(J:1990,I:2010) (0 3) P(I, J) = X
   Origs: 2020:auto
   Dests: 2040:auto
-2040 F(J,I) (1 9) IF J = 1 OR I <= N THEN GOSUB 750
+2040 F(J:1990,I:2010) (1 9) IF J = 1 OR I <= N THEN GOSUB 750
   Origs: 2030:auto
   Dests: 760:gosub, 2050:auto
-2050 F(J,I) (0 1) NEXT I
+2050 F(J:1990,I:2010) (0 1) NEXT I
   Origs: 2010:fornext, 2040:auto
   Dests: 2060:auto
-2060 F(J) (0 2) PRINT
+2060 F(J:1990) (0 2) PRINT
   Origs: 2050:auto
   Dests: 2070:auto
-2070 F(J) (0 1) NEXT J
+2070 F(J:1990) (0 1) NEXT J
   Origs: 1990:fornext, 2060:auto
   Dests: 2080:auto
-2080 F(I) (1 3) FOR I = 1 TO D1
+2080 F(I:2080) (1 3) FOR I = 1 TO D1
   Origs: 2070:auto
   Dests: 2090:fornext, 2100:fornext
-2090 F(I) (0 3) R(I) = 2
+2090 F(I:2080) (0 3) R(I) = 2
   Origs: 2080:fornext
   Dests: 2100:auto
-2100 F(I) (0 1) NEXT I
+2100 F(I:2080) (0 1) NEXT I
   Origs: 2080:fornext, 2090:auto
   Dests: 2120:auto
 2110 (0 1) REM --TEST FOR INSURANCE
@@ -617,31 +617,31 @@ Halstead complexity:
 2150 (1 5) IF LEFT$(H$, 1) <> "Y" THEN 2240
   Origs: 2140:auto
   Dests: 2160:auto, 2250:ifthen
-2160 F(I) (0 2) PRINT "INSURANCE BETS"
+2160 F(I:2180) (0 2) PRINT "INSURANCE BETS"
   Origs: 2150:auto, 2190:ifthen
   Dests: 2170:auto
-2170 F(I) (1 3) FOR I = 1 TO N
-     F(I) (0 3) PRINT "#"; I;
-     F(I) (1 2) INPUT Z(I)
-     F(I) (0 1) NEXT I
+2170 F(I:2170,I:2180) (1 3) FOR I = 1 TO N
+     F(I:2170,I:2180) (0 3) PRINT "#"; I;
+     F(I:2170,I:2180) (1 2) INPUT Z(I)
+     F(I:2170,I:2180) (0 1) NEXT I
   Origs: 2160:auto
   Dests: 2180:auto
-2180 F(I) (1 3) FOR I = 1 TO N
+2180 F(I:2180) (1 3) FOR I = 1 TO N
   Origs: 2170:auto
   Dests: 2190:fornext, 2200:fornext
-2190 F(I) (1 10) IF Z(I) < 0 OR Z(I) > B(I) / 2 THEN 2160
+2190 F(I:2180) (1 10) IF Z(I) < 0 OR Z(I) > B(I) / 2 THEN 2160
   Origs: 2180:fornext
   Dests: 2160:ifthen, 2200:auto
-2200 F(I) (0 1) NEXT I
+2200 F(I:2180) (0 1) NEXT I
   Origs: 2180:fornext, 2190:auto
   Dests: 2210:auto
-2210 F(I) (1 3) FOR I = 1 TO N
+2210 F(I:2210) (1 3) FOR I = 1 TO N
   Origs: 2200:auto
   Dests: 2220:fornext, 2230:fornext
-2220 F(I) (0 11) S(I) = Z(I) * (3 * (-(P(D1, 2) >= 10)) - 1)
+2220 F(I:2210) (0 11) S(I) = Z(I) * (3 * (-(P(D1, 2) >= 10)) - 1)
   Origs: 2210:fornext
   Dests: 2230:auto
-2230 F(I) (0 1) NEXT I
+2230 F(I:2210) (0 1) NEXT I
   Origs: 2210:fornext, 2220:auto
   Dests: 2250:auto
 2240 (0 1) REM --TEST FOR DEALER BLACKJACK
@@ -669,13 +669,13 @@ Halstead complexity:
 2270 (0 2) PRINT "FOR BLACKJACK"
   Origs: 2260:auto
   Dests: 2280:auto
-2280 F(I) (1 3) FOR I = 1 TO D1
+2280 F(I:2280) (1 3) FOR I = 1 TO D1
   Origs: 2270:auto
   Dests: 2290:fornext, 2300:fornext
-2290 F(I) (0 3) GOSUB 300
+2290 F(I:2280) (0 3) GOSUB 300
   Origs: 2280:fornext
   Dests: 360:gosub, 2300:auto
-2300 F(I) (0 1) NEXT I
+2300 F(I:2280) (0 1) NEXT I
   Origs: 2280:fornext, 2290:auto
   Dests: 2310:auto
 2310 (0 2) GOTO 3140
@@ -694,177 +694,177 @@ Halstead complexity:
 2350 (0 1) REM --NOW PLAY THE HANDS
   Origs: 
   Dests: 
-2360 F(I) (1 3) FOR I = 1 TO N
+2360 F(I:2360) (1 3) FOR I = 1 TO N
   Origs: 2330:ifthen, 2340:auto
   Dests: 2370:fornext, 2900:fornext
-2370 F(I) (0 3) PRINT "PLAYER"; I;
+2370 F(I:2360) (0 3) PRINT "PLAYER"; I;
   Origs: 2360:fornext, 2630:goto
   Dests: 2380:auto
-2380 F(I) (0 3) H1 = 7
+2380 F(I:2360) (0 3) H1 = 7
   Origs: 2370:auto
   Dests: 2390:auto
-2390 F(I) (0 3) GOSUB 1410
+2390 F(I:2360) (0 3) GOSUB 1410
   Origs: 2380:auto
   Dests: 1420:gosub, 2400:auto
-2400 F(I) (4 6) ON H GOTO 2550, 2410, 2510, 2600
+2400 F(I:2360) (4 6) ON H GOTO 2550, 2410, 2510, 2600
   Origs: 2390:auto
   Dests: 2420:auto, 2420:goto, 2520:goto, 2560:goto, 2610:goto
 2410 (0 1) REM --PLAYER WANTS TO STAND
   Origs: 
   Dests: 
-2420 F(I) (0 3) GOSUB 300
+2420 F(I:2360) (0 3) GOSUB 300
   Origs: 2400:auto, 2400:goto
   Dests: 360:gosub, 2430:auto
-2430 F(I) (1 4) IF Q(I) <> 21 THEN 2490
+2430 F(I:2360) (1 4) IF Q(I) <> 21 THEN 2490
   Origs: 2420:auto
   Dests: 2440:auto, 2490:ifthen
-2440 F(I) (0 2) PRINT "BLACKJACK"
+2440 F(I:2360) (0 2) PRINT "BLACKJACK"
   Origs: 2430:auto
   Dests: 2450:auto
-2450 F(I) (0 6) S(I) = S(I) + 1.5 * B(I)
+2450 F(I:2360) (0 6) S(I) = S(I) + 1.5 * B(I)
   Origs: 2440:auto
   Dests: 2460:auto
-2460 F(I) (0 3) B(I) = 0
+2460 F(I:2360) (0 3) B(I) = 0
   Origs: 2450:auto
   Dests: 2470:auto
-2470 F(I) (0 3) GOSUB 1200
+2470 F(I:2360) (0 3) GOSUB 1200
   Origs: 2460:auto
   Dests: 1210:gosub, 2480:auto
-2480 F(I) (0 2) GOTO 2900
+2480 F(I:2360) (0 2) GOTO 2900
   Origs: 2470:auto
   Dests: 2900:goto
-2490 F(I) (0 3) GOSUB 1320
+2490 F(I:2360) (0 3) GOSUB 1320
   Origs: 2430:ifthen
   Dests: 1320:gosub, 2500:auto
-2500 F(I) (0 2) GOTO 2900
+2500 F(I:2360) (0 2) GOTO 2900
   Origs: 2490:auto
   Dests: 2900:goto
 2510 (0 1) REM --PLAYER WANTS TO DOUBLE DOWN
   Origs: 
   Dests: 
-2520 F(I) (0 3) GOSUB 300
+2520 F(I:2360) (0 3) GOSUB 300
   Origs: 2400:goto
   Dests: 360:gosub, 2530:auto
-2530 F(I) (0 3) GOSUB 860
+2530 F(I:2360) (0 3) GOSUB 860
   Origs: 2520:auto
   Dests: 860:gosub, 2540:auto
-2540 F(I) (0 2) GOTO 2900
+2540 F(I:2360) (0 2) GOTO 2900
   Origs: 2530:auto
   Dests: 2900:goto
 2550 (0 1) REM --PLAYER WANTS TO BE HIT
   Origs: 
   Dests: 
-2560 F(I) (0 3) GOSUB 300
+2560 F(I:2360) (0 3) GOSUB 300
   Origs: 2400:goto
   Dests: 360:gosub, 2570:auto
-2570 F(I) (0 3) H1 = 3
+2570 F(I:2360) (0 3) H1 = 3
   Origs: 2560:auto
   Dests: 2580:auto
-2580 F(I) (0 3) GOSUB 950
+2580 F(I:2360) (0 3) GOSUB 950
   Origs: 2570:auto
   Dests: 950:gosub, 2590:auto
-2590 F(I) (0 2) GOTO 2900
+2590 F(I:2360) (0 2) GOTO 2900
   Origs: 2580:auto
   Dests: 2900:goto
 2600 (0 1) REM --PLAYER WANTS TO SPLIT
   Origs: 
   Dests: 
-2610 F(I) (0 3) L1 = P(I, 1)
-     F(I) (1 6) IF P(I, 1) > 10 THEN L1 = 10
+2610 F(I:2360) (0 3) L1 = P(I, 1)
+     F(I:2360) (1 6) IF P(I, 1) > 10 THEN L1 = 10
   Origs: 2400:goto
   Dests: 2612:auto
-2612 F(I) (0 3) L2 = P(I, 2)
-     F(I) (1 6) IF P(I, 2) > 10 THEN L2 = 10
+2612 F(I:2360) (0 3) L2 = P(I, 2)
+     F(I:2360) (1 6) IF P(I, 2) > 10 THEN L2 = 10
   Origs: 2610:auto
   Dests: 2614:auto
-2614 F(I) (1 4) IF L1 = L2 THEN 2640
+2614 F(I:2360) (1 4) IF L1 = L2 THEN 2640
   Origs: 2612:auto
   Dests: 2620:auto, 2650:ifthen
-2620 F(I) (0 2) PRINT "SPLITTING NOT ALLOWED."
+2620 F(I:2360) (0 2) PRINT "SPLITTING NOT ALLOWED."
   Origs: 2614:auto
   Dests: 2630:auto
-2630 F(I) (0 3) GOTO 2370
+2630 F(I:2360) (0 3) GOTO 2370
   Origs: 2620:auto
   Dests: 2370:goto
 2640 (0 1) REM --PLAY OUT SPLIT
   Origs: 
   Dests: 
-2650 F(I) (0 4) I1 = I + D1
+2650 F(I:2360) (0 4) I1 = I + D1
   Origs: 2614:ifthen
   Dests: 2660:auto
-2660 F(I) (0 3) R(I1) = 2
+2660 F(I:2360) (0 3) R(I1) = 2
   Origs: 2650:auto
   Dests: 2670:auto
-2670 F(I) (0 3) P(I1, 1) = P(I, 2)
+2670 F(I:2360) (0 3) P(I1, 1) = P(I, 2)
   Origs: 2660:auto
   Dests: 2680:auto
-2680 F(I) (0 3) B(I + D1) = B(I)
+2680 F(I:2360) (0 3) B(I + D1) = B(I)
   Origs: 2670:auto
   Dests: 2690:auto
-2690 F(I) (0 3) GOSUB 100
+2690 F(I:2360) (0 3) GOSUB 100
   Origs: 2680:auto
   Dests: 110:gosub, 2700:auto
-2700 F(I) (0 2) PRINT "FIRST HAND RECEIVES A";
+2700 F(I:2360) (0 2) PRINT "FIRST HAND RECEIVES A";
   Origs: 2690:auto
   Dests: 2710:auto
-2710 F(I) (0 3) GOSUB 700
+2710 F(I:2360) (0 3) GOSUB 700
   Origs: 2700:auto
   Dests: 720:gosub, 2720:auto
-2720 F(I) (0 3) P(I, 2) = X
+2720 F(I:2360) (0 3) P(I, 2) = X
   Origs: 2710:auto
   Dests: 2730:auto
-2730 F(I) (0 3) GOSUB 300
+2730 F(I:2360) (0 3) GOSUB 300
   Origs: 2720:auto
   Dests: 360:gosub, 2740:auto
-2740 F(I) (0 2) PRINT
+2740 F(I:2360) (0 2) PRINT
   Origs: 2730:auto
   Dests: 2750:auto
-2750 F(I) (0 3) GOSUB 100
+2750 F(I:2360) (0 3) GOSUB 100
   Origs: 2740:auto
   Dests: 110:gosub, 2760:auto
-2760 F(I) (0 2) PRINT "SECOND HAND RECEIVES A";
+2760 F(I:2360) (0 2) PRINT "SECOND HAND RECEIVES A";
   Origs: 2750:auto
   Dests: 2770:auto
-2770 F(I) (0 3) I = I1
+2770 F(I:2360) (0 3) I = I1
   Origs: 2760:auto
   Dests: 2780:auto
-2780 F(I) (0 3) GOSUB 700
+2780 F(I:2360) (0 3) GOSUB 700
   Origs: 2770:auto
   Dests: 720:gosub, 2790:auto
-2790 F(I) (0 3) P(I, 2) = X
+2790 F(I:2360) (0 3) P(I, 2) = X
   Origs: 2780:auto
   Dests: 2800:auto
-2800 F(I) (0 3) GOSUB 300
+2800 F(I:2360) (0 3) GOSUB 300
   Origs: 2790:auto
   Dests: 360:gosub, 2810:auto
-2810 F(I) (0 2) PRINT
+2810 F(I:2360) (0 2) PRINT
   Origs: 2800:auto
   Dests: 2820:auto
-2820 F(I) (0 4) I = I1 - D1
+2820 F(I:2360) (0 4) I = I1 - D1
   Origs: 2810:auto
   Dests: 2830:auto
-2830 F(I) (1 4) IF P(I, 1) = 1 THEN 2900
+2830 F(I:2360) (1 4) IF P(I, 1) = 1 THEN 2900
   Origs: 2820:auto
   Dests: 2850:auto, 2900:ifthen
 2840 (0 1) REM --NOW PLAY THE TWO HANDS
   Origs: 
   Dests: 
-2850 F(I) (0 6) PRINT "HAND"; 1 - (I > D1);
+2850 F(I:2360) (0 6) PRINT "HAND"; 1 - (I > D1);
   Origs: 2830:auto, 2880:ifthen
   Dests: 2860:auto
-2860 F(I) (0 3) GOSUB 800
+2860 F(I:2360) (0 3) GOSUB 800
   Origs: 2850:auto
   Dests: 820:gosub, 2870:auto
-2870 F(I) (0 4) I = I + D1
+2870 F(I:2360) (0 4) I = I + D1
   Origs: 2860:auto
   Dests: 2880:auto
-2880 F(I) (1 5) IF I = I1 THEN 2850
+2880 F(I:2360) (1 5) IF I = I1 THEN 2850
   Origs: 2870:auto
   Dests: 2850:ifthen, 2890:auto
-2890 F(I) (0 4) I = I1 - D1
+2890 F(I:2360) (0 4) I = I1 - D1
   Origs: 2880:auto
   Dests: 2900:auto
-2900 F(I) (0 1) NEXT I
+2900 F(I:2360) (0 1) NEXT I
   Origs: 2360:fornext, 2480:goto, 2500:goto, 2540:goto, 2590:goto, 2830:ifthen, 2890:auto
   Dests: 2910:auto
 2910 (0 3) GOSUB 300
@@ -873,13 +873,13 @@ Halstead complexity:
 2920 (0 1) REM --TEST FOR PLAYING DEALER'S HAND
   Origs: 
   Dests: 
-2930 F(I) (1 3) FOR I = 1 TO N
+2930 F(I:2930) (1 3) FOR I = 1 TO N
   Origs: 2910:auto
   Dests: 2940:fornext, 2950:fornext
-2940 F(I) (1 7) IF R(I) > 0 OR R(I + D1) > 0 THEN 3010
+2940 F(I:2930) (1 7) IF R(I) > 0 OR R(I + D1) > 0 THEN 3010
   Origs: 2930:fornext
   Dests: 2950:auto, 3010:ifthen
-2950 F(I) (0 1) NEXT I
+2950 F(I:2930) (0 1) NEXT I
   Origs: 2930:fornext, 2940:auto
   Dests: 2960:auto
 2960 (0 2) PRINT "DEALER HAD A";
@@ -897,55 +897,55 @@ Halstead complexity:
 3000 (0 2) GOTO 3140
   Origs: 2990:auto
   Dests: 3160:goto
-3010 F(I) (0 5) PRINT "DEALER HAS A"; MID$(D$, 3 * P(D1, 2) - 2, 3); " CONCEALED ";
+3010 F(I:2930) (0 5) PRINT "DEALER HAS A"; MID$(D$, 3 * P(D1, 2) - 2, 3); " CONCEALED ";
   Origs: 2940:ifthen
   Dests: 3020:auto
-3020 F(I) (0 3) I = D1
+3020 F(I:2930) (0 3) I = D1
   Origs: 3010:auto
   Dests: 3030:auto
-3030 F(I) (0 3) AA = Q(I)
-     F(I) (0 2) GOSUB 3400
+3030 F(I:2930) (0 3) AA = Q(I)
+     F(I:2930) (0 2) GOSUB 3400
   Origs: 3020:auto
   Dests: 3035:auto, 3400:gosub
-3035 F(I) (0 3) PRINT "FOR A TOTAL OF"; AA
+3035 F(I:2930) (0 3) PRINT "FOR A TOTAL OF"; AA
   Origs: 3030:auto
   Dests: 3040:auto
-3040 F(I) (1 4) IF AA > 16 THEN 3130
+3040 F(I:2930) (1 4) IF AA > 16 THEN 3130
   Origs: 3035:auto
   Dests: 3050:auto, 3130:ifthen
-3050 F(I) (0 2) PRINT "DRAWS";
+3050 F(I:2930) (0 2) PRINT "DRAWS";
   Origs: 3040:auto
   Dests: 3060:auto
-3060 F(I) (0 3) GOSUB 100
+3060 F(I:2930) (0 3) GOSUB 100
   Origs: 3050:auto, 3095:ifthen
   Dests: 110:gosub, 3070:auto
-3070 F(I) (0 3) GOSUB 750
+3070 F(I:2930) (0 3) GOSUB 750
   Origs: 3060:auto
   Dests: 760:gosub, 3080:auto
-3080 F(I) (0 3) GOSUB 1100
+3080 F(I:2930) (0 3) GOSUB 1100
   Origs: 3070:auto
   Dests: 1110:gosub, 3090:auto
-3090 F(I) (0 3) AA = Q
-     F(I) (0 2) GOSUB 3400
+3090 F(I:2930) (0 3) AA = Q
+     F(I:2930) (0 2) GOSUB 3400
   Origs: 3080:auto
   Dests: 3095:auto, 3400:gosub
-3095 F(I) (1 8) IF Q > 0 AND AA < 17 THEN 3060
+3095 F(I:2930) (1 8) IF Q > 0 AND AA < 17 THEN 3060
   Origs: 3090:auto
   Dests: 3060:ifthen, 3100:auto
-3100 F(I) (0 7) Q(I) = Q - (Q < 0) / 2
+3100 F(I:2930) (0 7) Q(I) = Q - (Q < 0) / 2
   Origs: 3095:auto
   Dests: 3110:auto
-3110 F(I) (1 4) IF Q < 0 THEN 3140
+3110 F(I:2930) (1 4) IF Q < 0 THEN 3140
   Origs: 3100:auto
   Dests: 3120:auto, 3160:ifthen
-3120 F(I) (0 3) AA = Q
-     F(I) (0 2) GOSUB 3400
+3120 F(I:2930) (0 3) AA = Q
+     F(I:2930) (0 2) GOSUB 3400
   Origs: 3110:auto
   Dests: 3125:auto, 3400:gosub
-3125 F(I) (0 3) PRINT "---TOTAL IS"; AA
+3125 F(I:2930) (0 3) PRINT "---TOTAL IS"; AA
   Origs: 3120:auto
   Dests: 3130:auto
-3130 F(I) (0 2) PRINT
+3130 F(I:2930) (0 2) PRINT
   Origs: 3040:ifthen, 3125:auto
   Dests: 3160:auto
 3140 (0 1) REM --TALLY THE RESULT
@@ -954,73 +954,73 @@ Halstead complexity:
 3150 (0 1) REM
   Origs: 
   Dests: 
-3160 F(I) (0 3) Z$ = "LOSES PUSHES WINS "
+3160 F(I:2930) (0 3) Z$ = "LOSES PUSHES WINS "
   Origs: 2310:goto, 3000:goto, 3110:ifthen, 3130:auto
   Dests: 3165:auto
-3165 F(I) (0 2) PRINT
+3165 F(I:2930) (0 2) PRINT
   Origs: 3160:auto
   Dests: 3170:auto
-3170 F(I) (1 3) FOR I = 1 TO N
+3170 F(I:2930,I:3170) (1 3) FOR I = 1 TO N
   Origs: 3165:auto
   Dests: 3180:fornext, 3330:fornext
-3180 F(I) (0 3) AA = Q(I)
-     F(I) (0 2) GOSUB 3400
+3180 F(I:2930,I:3170) (0 3) AA = Q(I)
+     F(I:2930,I:3170) (0 2) GOSUB 3400
   Origs: 3170:fornext
   Dests: 3182:auto, 3400:gosub
-3182 F(I) (0 3) AB = Q(I + D1)
-     F(I) (0 2) GOSUB 3410
+3182 F(I:2930,I:3170) (0 3) AB = Q(I + D1)
+     F(I:2930,I:3170) (0 2) GOSUB 3410
   Origs: 3180:auto
   Dests: 3184:auto, 3410:gosub
-3184 F(I) (0 3) AC = Q(D1)
-     F(I) (0 2) GOSUB 3420
+3184 F(I:2930,I:3170) (0 3) AC = Q(D1)
+     F(I:2930,I:3170) (0 2) GOSUB 3420
   Origs: 3182:auto
   Dests: 3186:auto, 3420:gosub
-3186 F(I) (0 11) S(I) = S(I) + B(I) * SGN(AA - AC) + B(I + D1) * SGN(AB - AC)
+3186 F(I:2930,I:3170) (0 11) S(I) = S(I) + B(I) * SGN(AA - AC) + B(I + D1) * SGN(AB - AC)
   Origs: 3184:auto
   Dests: 3188:auto
-3188 F(I) (0 3) B(I + D1) = 0
+3188 F(I:2930,I:3170) (0 3) B(I + D1) = 0
   Origs: 3186:auto
   Dests: 3200:auto
-3200 F(I) (0 3) PRINT "PLAYER"; I;
+3200 F(I:2930,I:3170) (0 3) PRINT "PLAYER"; I;
   Origs: 3188:auto
   Dests: 3210:auto
-3210 F(I) (0 4) PRINT MID$(Z$, SGN(S(I)) * 6 + 7, 6); " ";
+3210 F(I:2930,I:3170) (0 4) PRINT MID$(Z$, SGN(S(I)) * 6 + 7, 6); " ";
   Origs: 3200:auto
   Dests: 3220:auto
-3220 F(I) (1 4) IF S(I) <> 0 THEN 3250
+3220 F(I:2930,I:3170) (1 4) IF S(I) <> 0 THEN 3250
   Origs: 3210:auto
   Dests: 3230:auto, 3250:ifthen
-3230 F(I) (0 2) PRINT "      ";
+3230 F(I:2930,I:3170) (0 2) PRINT "      ";
   Origs: 3220:auto
   Dests: 3240:auto
-3240 F(I) (0 2) GOTO 3260
+3240 F(I:2930,I:3170) (0 2) GOTO 3260
   Origs: 3230:auto
   Dests: 3260:goto
-3250 F(I) (0 3) PRINT ABS(S(I));
+3250 F(I:2930,I:3170) (0 3) PRINT ABS(S(I));
   Origs: 3220:ifthen
   Dests: 3260:auto
-3260 F(I) (0 4) T(I) = T(I) + S(I)
+3260 F(I:2930,I:3170) (0 4) T(I) = T(I) + S(I)
   Origs: 3240:goto, 3250:auto
   Dests: 3270:auto
-3270 F(I) (0 3) PRINT "TOTAL="; T(I)
+3270 F(I:2930,I:3170) (0 3) PRINT "TOTAL="; T(I)
   Origs: 3260:auto
   Dests: 3280:auto
-3280 F(I) (0 3) GOSUB 1200
+3280 F(I:2930,I:3170) (0 3) GOSUB 1200
   Origs: 3270:auto
   Dests: 1210:gosub, 3290:auto
-3290 F(I) (0 4) T(D1) = T(D1) - S(I)
+3290 F(I:2930,I:3170) (0 4) T(D1) = T(D1) - S(I)
   Origs: 3280:auto
   Dests: 3300:auto
-3300 F(I) (0 4) I = I + D1
+3300 F(I:2930,I:3170) (0 4) I = I + D1
   Origs: 3290:auto
   Dests: 3310:auto
-3310 F(I) (0 3) GOSUB 1200
+3310 F(I:2930,I:3170) (0 3) GOSUB 1200
   Origs: 3300:auto
   Dests: 1210:gosub, 3320:auto
-3320 F(I) (0 4) I = I - D1
+3320 F(I:2930,I:3170) (0 4) I = I - D1
   Origs: 3310:auto
   Dests: 3330:auto
-3330 F(I) (0 1) NEXT I
+3330 F(I:2930,I:3170) (0 1) NEXT I
   Origs: 3170:fornext, 3320:auto
   Dests: 3340:auto
 3340 (0 3) PRINT "DEALER'S TOTAL="; T(D1)

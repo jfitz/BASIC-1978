@@ -41,34 +41,34 @@ Halstead complexity:
 100 (0 1) REM  START LONG LOOP
   Origs: 
   Dests: 
-110 F(T) (1 4) FOR T = 0 TO 40 STEP 0.25
+110 F(T:110) (1 4) FOR T = 0 TO 40 STEP 0.25
   Origs: 50:auto
   Dests: 120:fornext, 200:fornext
-120 F(T) (0 4) A = INT(26 + 25 * SIN(T))
+120 F(T:110) (0 4) A = INT(26 + 25 * SIN(T))
   Origs: 110:fornext
   Dests: 130:auto
-130 F(T) (0 3) PRINT TAB(A);
+130 F(T:110) (0 3) PRINT TAB(A);
   Origs: 120:auto
   Dests: 140:auto
-140 F(T) (1 4) IF B = 1 THEN 180
+140 F(T:110) (1 4) IF B = 1 THEN 180
   Origs: 130:auto
   Dests: 150:auto, 180:ifthen
-150 F(T) (0 2) PRINT "CREATIVE"
+150 F(T:110) (0 2) PRINT "CREATIVE"
   Origs: 140:auto
   Dests: 160:auto
-160 F(T) (0 3) B = 1
+160 F(T:110) (0 3) B = 1
   Origs: 150:auto
   Dests: 170:auto
-170 F(T) (0 2) GOTO 200
+170 F(T:110) (0 2) GOTO 200
   Origs: 160:auto
   Dests: 200:goto
-180 F(T) (0 2) PRINT "COMPUTING"
+180 F(T:110) (0 2) PRINT "COMPUTING"
   Origs: 140:ifthen
   Dests: 190:auto
-190 F(T) (0 3) B = 0
+190 F(T:110) (0 3) B = 0
   Origs: 180:auto
   Dests: 200:auto
-200 F(T) (0 1) NEXT T
+200 F(T:110) (0 1) NEXT T
   Origs: 110:fornext, 170:goto, 190:auto
   Dests: 999:auto
 999 (0 1) END

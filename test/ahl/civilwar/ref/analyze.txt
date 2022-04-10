@@ -51,13 +51,13 @@ Halstead complexity:
 82 (0 1) REM READ HISTORICAL DATA.
   Origs: 
   Dests: 
-84 F(D) (1 3) FOR D = 1 TO 14
+84 F(D:84) (1 3) FOR D = 1 TO 14
   Origs: 70:auto
   Dests: 86:fornext, 88:fornext
-86 F(D) (6 7) READ C$(D), M1(D), M2(D), C1(D), C2(D), M(D)
+86 F(D:84) (6 7) READ C$(D), M1(D), M2(D), C1(D), C2(D), M(D)
   Origs: 84:fornext
   Dests: 88:auto
-88 F(D) (0 1) NEXT D
+88 F(D:84) (0 1) NEXT D
   Origs: 84:fornext, 86:auto
   Dests: 89:auto
 89 (0 4) LET D = RND(-1)
@@ -255,127 +255,127 @@ Halstead complexity:
     (0 3) U2 = 0
   Origs: 600:auto
   Dests: 620:auto
-620 F(I,Z) (0 2) PRINT
-    F(I,Z) (0 2) PRINT
-    F(I,Z) (0 2) PRINT
+620 F(I:1220,Z:1550,I:1870) (0 2) PRINT
+    F(I:1220,Z:1550,I:1870) (0 2) PRINT
+    F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 610:auto, 2810:goto
   Dests: 630:auto
-630 F(I,Z) (0 2) PRINT "WHICH BATTLE DO YOU WISH TO SIMULATE";
+630 F(I:1220,Z:1550,I:1870) (0 2) PRINT "WHICH BATTLE DO YOU WISH TO SIMULATE";
   Origs: 620:auto
   Dests: 640:auto
-640 F(I,Z) (1 2) INPUT A
+640 F(I:1220,Z:1550,I:1870) (1 2) INPUT A
   Origs: 630:auto
   Dests: 650:auto
-650 F(I,Z) (1 4) IF A <> 0 THEN 660
+650 F(I:1220,Z:1550,I:1870) (1 4) IF A <> 0 THEN 660
   Origs: 640:auto
   Dests: 655:auto, 660:ifthen
-655 F(I,Z) (1 4) IF R <> 0 THEN 1140
+655 F(I:1220,Z:1550,I:1870) (1 4) IF R <> 0 THEN 1140
   Origs: 650:auto
   Dests: 660:auto, 1140:ifthen
-660 F(I,Z) (1 4) IF A <= 0 THEN 2860
+660 F(I:1220,Z:1550,I:1870) (1 4) IF A <= 0 THEN 2860
   Origs: 650:ifthen, 655:auto
   Dests: 665:auto, 2860:ifthen
-665 F(I,Z) (1 4) IF A >= 15 THEN 2860
+665 F(I:1220,Z:1550,I:1870) (1 4) IF A >= 15 THEN 2860
   Origs: 660:auto
   Dests: 670:auto, 2860:ifthen
-670 F(I,Z) (0 3) LET C$ = C$(A)
+670 F(I:1220,Z:1550,I:1870) (0 3) LET C$ = C$(A)
   Origs: 665:auto
   Dests: 680:auto
-680 F(I,Z) (0 3) LET M1 = M1(A)
+680 F(I:1220,Z:1550,I:1870) (0 3) LET M1 = M1(A)
   Origs: 670:auto
   Dests: 690:auto
-690 F(I,Z) (0 3) LET M2 = M2(A)
+690 F(I:1220,Z:1550,I:1870) (0 3) LET M2 = M2(A)
   Origs: 680:auto
   Dests: 700:auto
-700 F(I,Z) (0 3) LET C1 = C1(A)
+700 F(I:1220,Z:1550,I:1870) (0 3) LET C1 = C1(A)
   Origs: 690:auto
   Dests: 710:auto
-710 F(I,Z) (0 3) LET C2 = C2(A)
+710 F(I:1220,Z:1550,I:1870) (0 3) LET C2 = C2(A)
   Origs: 700:auto
   Dests: 720:auto
-720 F(I,Z) (0 3) LET M = M(A)
+720 F(I:1220,Z:1550,I:1870) (0 3) LET M = M(A)
   Origs: 710:auto
   Dests: 960:auto
-960 F(I,Z) (0 3) LET U = 0
+960 F(I:1220,Z:1550,I:1870) (0 3) LET U = 0
   Origs: 720:auto
   Dests: 980:auto
 970 (0 1) REM  INFLATION CALC
   Origs: 
   Dests: 
-980 F(I,Z) (0 7) LET I1 = 10 + (L - W) * 2
+980 F(I:1220,Z:1550,I:1870) (0 7) LET I1 = 10 + (L - W) * 2
   Origs: 960:auto
   Dests: 990:auto
-990 F(I,Z) (0 7) LET I2 = 10 + (W - L) * 2
+990 F(I:1220,Z:1550,I:1870) (0 7) LET I2 = 10 + (W - L) * 2
   Origs: 980:auto
   Dests: 1010:auto
 1000 (0 1) REM - MONEY AVAILABLE
   Origs: 
   Dests: 
-1010 F(I,Z) (0 5) LET D(1) = 100 * INT((M1 * (100 - I1) / 2000) * (1 + (R1 - Q1) / (R1 + 1)) + 0.5)
+1010 F(I:1220,Z:1550,I:1870) (0 5) LET D(1) = 100 * INT((M1 * (100 - I1) / 2000) * (1 + (R1 - Q1) / (R1 + 1)) + 0.5)
   Origs: 990:auto
   Dests: 1020:auto
-1020 F(I,Z) (0 5) LET D(2) = 100 * INT(M2 * (100 - I2) / 2000 + 0.5)
+1020 F(I:1220,Z:1550,I:1870) (0 5) LET D(2) = 100 * INT(M2 * (100 - I2) / 2000 + 0.5)
   Origs: 1010:auto
   Dests: 1030:auto
-1030 F(I,Z) (1 4) IF B$ <> "YES" THEN 1050
+1030 F(I:1220,Z:1550,I:1870) (1 4) IF B$ <> "YES" THEN 1050
   Origs: 1020:auto
   Dests: 1040:auto, 1060:ifthen
-1040 F(I,Z) (0 5) LET D(2) = 100 * INT((M2 * (100 - I2) / 2000) * (1 + (R2 - Q2) / (R2 + 1)) + 0.5)
+1040 F(I:1220,Z:1550,I:1870) (0 5) LET D(2) = 100 * INT((M2 * (100 - I2) / 2000) * (1 + (R2 - Q2) / (R2 + 1)) + 0.5)
   Origs: 1030:auto
   Dests: 1060:auto
 1050 (0 1) REM - MEN   AVAILABLE
   Origs: 
   Dests: 
-1060 F(I,Z) (0 4) LET M5 = INT(M1 * (1 + (P1 - T1) / (M3 + 1)))
+1060 F(I:1220,Z:1550,I:1870) (0 4) LET M5 = INT(M1 * (1 + (P1 - T1) / (M3 + 1)))
   Origs: 1030:ifthen, 1040:auto
   Dests: 1070:auto
-1070 F(I,Z) (0 4) LET M6 = INT(M2 * (1 + (P2 - T2) / (M4 + 1)))
+1070 F(I:1220,Z:1550,I:1870) (0 4) LET M6 = INT(M2 * (1 + (P2 - T2) / (M4 + 1)))
   Origs: 1060:auto
   Dests: 1080:auto
-1080 F(I,Z) (0 5) LET F1 = 5 * M1 / 6
+1080 F(I:1220,Z:1550,I:1870) (0 5) LET F1 = 5 * M1 / 6
   Origs: 1070:auto
   Dests: 1090:auto
-1090 F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
+1090 F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 1080:auto
   Dests: 1100:auto
-1100 F(I,Z) (0 3) PRINT "THIS IS THE BATTLE OF "; C$
+1100 F(I:1220,Z:1550,I:1870) (0 3) PRINT "THIS IS THE BATTLE OF "; C$
   Origs: 1090:auto
   Dests: 1110:auto
-1110 F(I,Z) (1 4) IF X$ = "NO" THEN 1150
+1110 F(I:1220,Z:1550,I:1870) (1 4) IF X$ = "NO" THEN 1150
   Origs: 1100:auto
   Dests: 1120:auto, 1150:ifthen
-1120 F(I,Z) (1 4) IF A > 11 THEN 1130
+1120 F(I:1220,Z:1550,I:1870) (1 4) IF A > 11 THEN 1130
   Origs: 1110:auto
   Dests: 1125:auto, 1130:ifthen
-1125 F(I,Z) (11 13) ON A GOTO 3580, 3620, 3650, 3690, 3720, 3750, 3780, 3800, 3830, 3860, 3890
+1125 F(I:1220,Z:1550,I:1870) (11 13) ON A GOTO 3580, 3620, 3650, 3690, 3720, 3750, 3780, 3800, 3830, 3860, 3890
   Origs: 1120:auto
   Dests: 1130:auto, 3580:goto, 3620:goto, 3650:goto, 3690:goto, 3720:goto, 3750:goto, 3780:goto, 3800:goto, 3830:goto, 3860:goto, 3890:goto
-1130 F(I,Z) (3 6) ON A - 11 GOTO 3920, 3950, 3980
+1130 F(I:1220,Z:1550,I:1870) (3 6) ON A - 11 GOTO 3920, 3950, 3980
   Origs: 1120:ifthen, 1125:auto
   Dests: 1140:auto, 3920:goto, 3950:goto, 3980:goto
-1140 F(I,Z) (0 3) PRINT C$ " INSTANT REPLAY"
+1140 F(I:1220,Z:1550,I:1870) (0 3) PRINT C$ " INSTANT REPLAY"
   Origs: 655:ifthen, 1130:auto
   Dests: 1150:auto
-1150 F(I,Z) (0 2) PRINT
+1150 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 1110:ifthen, 1140:auto, 3610:goto, 3640:goto, 3680:goto, 3710:goto, 3740:goto, 3770:goto, 3790:goto, 3820:goto, 3850:goto, 3880:goto, 3910:goto, 3940:goto, 3970:goto, 4000:goto
   Dests: 1160:auto
-1160 F(I,Z) (0 4) PRINT " ", "CONFEDERACY", " UNION"
+1160 F(I:1220,Z:1550,I:1870) (0 4) PRINT " ", "CONFEDERACY", " UNION"
   Origs: 1150:auto
   Dests: 1170:auto
-1170 F(I,Z) (0 6) PRINT "MEN", " " M5, " " M6
+1170 F(I:1220,Z:1550,I:1870) (0 6) PRINT "MEN", " " M5, " " M6
   Origs: 1160:auto
   Dests: 1180:auto
-1180 F(I,Z) (0 6) PRINT "MONEY", "$"; D(1), "$"; D(2)
+1180 F(I:1220,Z:1550,I:1870) (0 6) PRINT "MONEY", "$"; D(1), "$"; D(2)
   Origs: 1170:auto
   Dests: 1190:auto
-1190 F(I,Z) (0 9) PRINT "INFLATION", " "; I1 + 15; "%", " "; I2; "%"
+1190 F(I:1220,Z:1550,I:1870) (0 9) PRINT "INFLATION", " "; I1 + 15; "%", " "; I2; "%"
   Origs: 1180:auto
   Dests: 1195:auto
-1195 F(I,Z) (0 2) PRINT
+1195 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 1190:auto
   Dests: 1220:auto
 1200 (0 1) REM - ONLY IN PRINTOUT IS CONFED INFLATION = I1+15%
@@ -384,402 +384,402 @@ Halstead complexity:
 1210 (0 1) REM - IF TWO GENERALS, INPUT CONFED. FIRST
   Origs: 
   Dests: 
-1220 F(I,Z) (1 3) FOR I = 1 TO D
+1220 F(I:1220,Z:1550,I:1870) (1 3) FOR I = 1 TO D
   Origs: 1195:auto
   Dests: 1230:fornext, 1540:fornext
-1230 F(I,Z) (1 4) IF B$ <> "YES" THEN 1260
+1230 F(I:1220,Z:1550,I:1870) (1 4) IF B$ <> "YES" THEN 1260
   Origs: 1220:fornext
   Dests: 1240:auto, 1260:ifthen
-1240 F(I,Z) (1 4) IF I = 2 THEN 1260
+1240 F(I:1220,Z:1550,I:1870) (1 4) IF I = 2 THEN 1260
   Origs: 1230:auto
   Dests: 1250:auto, 1260:ifthen
-1250 F(I,Z) (0 2) PRINT "CONFEDERATE GENERAL---";
+1250 F(I:1220,Z:1550,I:1870) (0 2) PRINT "CONFEDERATE GENERAL---";
   Origs: 1240:auto
   Dests: 1260:auto
-1260 F(I,Z) (0 2) PRINT "HOW MUCH DO YOU WISH TO SPEND FOR"
+1260 F(I:1220,Z:1550,I:1870) (0 2) PRINT "HOW MUCH DO YOU WISH TO SPEND FOR"
   Origs: 1230:ifthen, 1240:ifthen, 1250:auto
   Dests: 1270:auto
-1270 F(I,Z) (0 2) PRINT " - FOOD......";
+1270 F(I:1220,Z:1550,I:1870) (0 2) PRINT " - FOOD......";
   Origs: 1260:auto, 1320:goto, 1480:goto
   Dests: 1280:auto
-1280 F(I,Z) (1 2) INPUT F
+1280 F(I:1220,Z:1550,I:1870) (1 2) INPUT F
   Origs: 1270:auto
   Dests: 1290:auto
-1290 F(I,Z) (1 4) IF F >= 0 THEN 1360
+1290 F(I:1220,Z:1550,I:1870) (1 4) IF F >= 0 THEN 1360
   Origs: 1280:auto
   Dests: 1300:auto, 1360:ifthen
-1300 F(I,Z) (1 4) IF R1 <> 0 THEN 1330
+1300 F(I:1220,Z:1550,I:1870) (1 4) IF R1 <> 0 THEN 1330
   Origs: 1290:auto
   Dests: 1310:auto, 1330:ifthen
-1310 F(I,Z) (0 2) PRINT "NO PREVIOUS ENTRIES"
+1310 F(I:1220,Z:1550,I:1870) (0 2) PRINT "NO PREVIOUS ENTRIES"
   Origs: 1300:auto
   Dests: 1320:auto
-1320 F(I,Z) (0 3) GOTO 1270
+1320 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1270
   Origs: 1310:auto
   Dests: 1270:goto
-1330 F(I,Z) (0 2) PRINT "ASSUME YOU WANT TO KEEP SAME ALLOCATIONS"
+1330 F(I:1220,Z:1550,I:1870) (0 2) PRINT "ASSUME YOU WANT TO KEEP SAME ALLOCATIONS"
   Origs: 1300:ifthen
   Dests: 1340:auto
-1340 F(I,Z) (0 2) PRINT
+1340 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 1330:auto
   Dests: 1350:auto
-1350 F(I,Z) (0 2) GOTO 1510
+1350 F(I:1220,Z:1550,I:1870) (0 2) GOTO 1510
   Origs: 1340:auto
   Dests: 1510:goto
-1360 F(I,Z) (0 3) LET F(I) = F
+1360 F(I:1220,Z:1550,I:1870) (0 3) LET F(I) = F
   Origs: 1290:ifthen
   Dests: 1370:auto
-1370 F(I,Z) (0 2) PRINT " - SALARIES..";
+1370 F(I:1220,Z:1550,I:1870) (0 2) PRINT " - SALARIES..";
   Origs: 1360:auto, 1500:goto
   Dests: 1380:auto
-1380 F(I,Z) (1 2) INPUT H(I)
+1380 F(I:1220,Z:1550,I:1870) (1 2) INPUT H(I)
   Origs: 1370:auto
   Dests: 1390:auto
-1390 F(I,Z) (0 3) LET N = 1
+1390 F(I:1220,Z:1550,I:1870) (0 3) LET N = 1
   Origs: 1380:auto
   Dests: 1400:auto
-1400 F(I,Z) (1 4) IF H(I) < 0 THEN 1490
+1400 F(I:1220,Z:1550,I:1870) (1 4) IF H(I) < 0 THEN 1490
   Origs: 1390:auto
   Dests: 1410:auto, 1490:ifthen
-1410 F(I,Z) (0 2) PRINT " - AMMUNITION";
+1410 F(I:1220,Z:1550,I:1870) (0 2) PRINT " - AMMUNITION";
   Origs: 1400:auto, 1500:goto
   Dests: 1420:auto
-1420 F(I,Z) (1 2) INPUT B(I)
+1420 F(I:1220,Z:1550,I:1870) (1 2) INPUT B(I)
   Origs: 1410:auto
   Dests: 1430:auto
-1430 F(I,Z) (0 3) LET N = 2
+1430 F(I:1220,Z:1550,I:1870) (0 3) LET N = 2
   Origs: 1420:auto
   Dests: 1440:auto
-1440 F(I,Z) (1 4) IF B(I) < 0 THEN 1490
+1440 F(I:1220,Z:1550,I:1870) (1 4) IF B(I) < 0 THEN 1490
   Origs: 1430:auto
   Dests: 1450:auto, 1490:ifthen
-1450 F(I,Z) (0 2) PRINT
+1450 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 1440:auto
   Dests: 1460:auto
-1460 F(I,Z) (1 6) IF F(I) + H(I) + B(I) <= D(I) THEN 1510
+1460 F(I:1220,Z:1550,I:1870) (1 6) IF F(I) + H(I) + B(I) <= D(I) THEN 1510
   Origs: 1450:auto
   Dests: 1470:auto, 1510:ifthen
-1470 F(I,Z) (0 3) PRINT "THINK AGAIN! YOU HAVE ONLY $" D(I)
+1470 F(I:1220,Z:1550,I:1870) (0 3) PRINT "THINK AGAIN! YOU HAVE ONLY $" D(I)
   Origs: 1460:auto
   Dests: 1480:auto
-1480 F(I,Z) (0 3) GOTO 1270
+1480 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1270
   Origs: 1470:auto
   Dests: 1270:goto
-1490 F(I,Z) (0 2) PRINT "NEGATIVE VALUES NOT ALLOWED."
+1490 F(I:1220,Z:1550,I:1870) (0 2) PRINT "NEGATIVE VALUES NOT ALLOWED."
   Origs: 1400:ifthen, 1440:ifthen
   Dests: 1500:auto
-1500 F(I,Z) (2 6) ON N GOTO 1370, 1410
+1500 F(I:1220,Z:1550,I:1870) (2 6) ON N GOTO 1370, 1410
   Origs: 1490:auto
   Dests: 1370:goto, 1410:goto, 1510:auto
-1510 F(I,Z) (1 4) IF B$ <> "YES" THEN 1550
+1510 F(I:1220,Z:1550,I:1870) (1 4) IF B$ <> "YES" THEN 1550
   Origs: 1350:goto, 1460:ifthen, 1500:auto
   Dests: 1520:auto, 1550:ifthen
-1520 F(I,Z) (1 4) IF I = 2 THEN 1550
+1520 F(I:1220,Z:1550,I:1870) (1 4) IF I = 2 THEN 1550
   Origs: 1510:auto
   Dests: 1530:auto, 1550:ifthen
-1530 F(I,Z) (0 2) PRINT "UNION GENERAL---";
+1530 F(I:1220,Z:1550,I:1870) (0 2) PRINT "UNION GENERAL---";
   Origs: 1520:auto
   Dests: 1540:auto
-1540 F(I,Z) (0 1) NEXT I
+1540 F(I:1220,Z:1550,I:1870) (0 1) NEXT I
   Origs: 1220:fornext, 1530:auto
   Dests: 1550:auto
-1550 F(I,Z) (1 3) FOR Z = 1 TO D
+1550 F(I:1220,Z:1550,I:1870) (1 3) FOR Z = 1 TO D
   Origs: 1510:ifthen, 1520:ifthen, 1540:auto
   Dests: 1560:fornext, 1720:fornext
-1560 F(I,Z) (1 4) IF B$ <> "YES" THEN 1620
+1560 F(I:1220,Z:1550,I:1870) (1 4) IF B$ <> "YES" THEN 1620
   Origs: 1550:fornext
   Dests: 1570:auto, 1620:ifthen
-1570 F(I,Z) (2 4) ON Z GOTO 1580, 1600
+1570 F(I:1220,Z:1550,I:1870) (2 4) ON Z GOTO 1580, 1600
   Origs: 1560:auto
   Dests: 1580:auto, 1580:goto, 1600:goto
-1580 F(I,Z) (0 2) PRINT "CONFEDERATE ";
+1580 F(I:1220,Z:1550,I:1870) (0 2) PRINT "CONFEDERATE ";
   Origs: 1570:auto, 1570:goto
   Dests: 1590:auto
-1590 F(I,Z) (0 2) GOTO 1620
+1590 F(I:1220,Z:1550,I:1870) (0 2) GOTO 1620
   Origs: 1580:auto
   Dests: 1620:goto
-1600 F(I,Z) (0 2) PRINT "      UNION ";
+1600 F(I:1220,Z:1550,I:1870) (0 2) PRINT "      UNION ";
   Origs: 1570:goto
   Dests: 1620:auto
 1610 (0 1) REM - FIND MORALE
   Origs: 
   Dests: 
-1620 F(I,Z) (0 13) LET O = ((2 * F(Z) ^ 2 + H(Z) ^ 2) / F1 ^ 2 + 1)
+1620 F(I:1220,Z:1550,I:1870) (0 13) LET O = ((2 * F(Z) ^ 2 + H(Z) ^ 2) / F1 ^ 2 + 1)
   Origs: 1560:ifthen, 1590:goto, 1600:auto
   Dests: 1630:auto
-1630 F(I,Z) (1 4) IF O < 10 THEN 1660
+1630 F(I:1220,Z:1550,I:1870) (1 4) IF O < 10 THEN 1660
   Origs: 1620:auto
   Dests: 1640:auto, 1660:ifthen
-1640 F(I,Z) (0 2) PRINT "MORALE IS HIGH"
+1640 F(I:1220,Z:1550,I:1870) (0 2) PRINT "MORALE IS HIGH"
   Origs: 1630:auto
   Dests: 1650:auto
-1650 F(I,Z) (0 2) GOTO 1700
+1650 F(I:1220,Z:1550,I:1870) (0 2) GOTO 1700
   Origs: 1640:auto
   Dests: 1700:goto
-1660 F(I,Z) (1 4) IF O < 5 THEN 1690
+1660 F(I:1220,Z:1550,I:1870) (1 4) IF O < 5 THEN 1690
   Origs: 1630:ifthen
   Dests: 1670:auto, 1690:ifthen
-1670 F(I,Z) (0 2) PRINT "MORALE IS FAIR"
+1670 F(I:1220,Z:1550,I:1870) (0 2) PRINT "MORALE IS FAIR"
   Origs: 1660:auto
   Dests: 1680:auto
-1680 F(I,Z) (0 2) GOTO 1700
+1680 F(I:1220,Z:1550,I:1870) (0 2) GOTO 1700
   Origs: 1670:auto
   Dests: 1700:goto
-1690 F(I,Z) (0 2) PRINT "MORALE IS POOR"
+1690 F(I:1220,Z:1550,I:1870) (0 2) PRINT "MORALE IS POOR"
   Origs: 1660:ifthen
   Dests: 1700:auto
-1700 F(I,Z) (1 4) IF B$ <> "YES" THEN 1760
+1700 F(I:1220,Z:1550,I:1870) (1 4) IF B$ <> "YES" THEN 1760
   Origs: 1650:goto, 1680:goto, 1690:auto
   Dests: 1710:auto, 1770:ifthen
-1710 F(I,Z) (0 3) LET O(Z) = O
+1710 F(I:1220,Z:1550,I:1870) (0 3) LET O(Z) = O
   Origs: 1700:auto
   Dests: 1720:auto
-1720 F(I,Z) (0 1) NEXT Z
+1720 F(I:1220,Z:1550,I:1870) (0 1) NEXT Z
   Origs: 1550:fornext, 1710:auto
   Dests: 1730:auto
-1730 F(I) (0 3) LET O2 = O(2)
+1730 F(I:1220,I:1870) (0 3) LET O2 = O(2)
   Origs: 1720:auto
   Dests: 1740:auto
-1740 F(I) (0 3) LET O = O(1)
+1740 F(I:1220,I:1870) (0 3) LET O = O(1)
   Origs: 1730:auto
   Dests: 1750:auto
-1750 F(I) (0 2) PRINT "CONFEDERATE GENERAL---";
+1750 F(I:1220,I:1870) (0 2) PRINT "CONFEDERATE GENERAL---";
   Origs: 1740:auto
   Dests: 1770:auto
 1760 (0 1) REM - ACTUAL OFF/DEF BATTLE SITUATION
   Origs: 
   Dests: 
-1770 F(I,Z) (1 4) IF M <> 3 THEN 1800
+1770 F(I:1220,Z:1550,I:1870) (1 4) IF M <> 3 THEN 1800
   Origs: 1700:ifthen, 1750:auto
   Dests: 1780:auto, 1800:ifthen
-1780 F(I,Z) (0 2) PRINT "YOU ARE ON THE OFFENSIVE"
+1780 F(I:1220,Z:1550,I:1870) (0 2) PRINT "YOU ARE ON THE OFFENSIVE"
   Origs: 1770:auto
   Dests: 1790:auto
-1790 F(I,Z) (0 2) GOTO 1840
+1790 F(I:1220,Z:1550,I:1870) (0 2) GOTO 1840
   Origs: 1780:auto
   Dests: 1840:goto
-1800 F(I,Z) (1 4) IF M <> 1 THEN 1830
+1800 F(I:1220,Z:1550,I:1870) (1 4) IF M <> 1 THEN 1830
   Origs: 1770:ifthen
   Dests: 1810:auto, 1830:ifthen
-1810 F(I,Z) (0 2) PRINT "YOU ARE ON THE DEFENSIVE"
+1810 F(I:1220,Z:1550,I:1870) (0 2) PRINT "YOU ARE ON THE DEFENSIVE"
   Origs: 1800:auto
   Dests: 1820:auto
-1820 F(I,Z) (0 2) GOTO 1840
+1820 F(I:1220,Z:1550,I:1870) (0 2) GOTO 1840
   Origs: 1810:auto
   Dests: 1840:goto
-1830 F(I,Z) (0 2) PRINT "BOTH SIDES ARE ON THE OFFENSIVE "
+1830 F(I:1220,Z:1550,I:1870) (0 2) PRINT "BOTH SIDES ARE ON THE OFFENSIVE "
   Origs: 1800:ifthen
   Dests: 1840:auto
-1840 F(I,Z) (0 2) PRINT
+1840 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 1790:goto, 1820:goto, 1830:auto
   Dests: 1860:auto
 1850 (0 1) REM - CHOOSE STRATEGIES
   Origs: 
   Dests: 
-1860 F(I,Z) (1 4) IF B$ <> "YES" THEN 1910
+1860 F(I:1220,Z:1550,I:1870) (1 4) IF B$ <> "YES" THEN 1910
   Origs: 1840:auto
   Dests: 1870:auto, 1910:ifthen
-1870 F(Z,I) (1 3) FOR I = 1 TO 2
+1870 F(I:1220,Z:1550,I:1870) (1 3) FOR I = 1 TO 2
   Origs: 1860:auto
   Dests: 1880:fornext, 2030:fornext
-1880 F(Z,I) (2 4) ON I GOTO 1890, 1920
+1880 F(I:1220,Z:1550,I:1870) (2 4) ON I GOTO 1890, 1920
   Origs: 1870:fornext
   Dests: 1890:auto, 1890:goto, 1920:goto
-1890 F(I,Z) (0 2) PRINT "CONFEDERATE STRATEGY ";
+1890 F(I:1220,Z:1550,I:1870) (0 2) PRINT "CONFEDERATE STRATEGY ";
   Origs: 1880:auto, 1880:goto
   Dests: 1900:auto
-1900 F(I,Z) (0 2) GOTO 1920
+1900 F(I:1220,Z:1550,I:1870) (0 2) GOTO 1920
   Origs: 1890:auto
   Dests: 1920:goto
-1910 F(I,Z) (0 2) PRINT "YOUR STRATEGY ";
+1910 F(I:1220,Z:1550,I:1870) (0 2) PRINT "YOUR STRATEGY ";
   Origs: 1860:ifthen, 1950:goto
   Dests: 1920:auto
-1920 F(I,Z) (1 2) INPUT Y
+1920 F(I:1220,Z:1550,I:1870) (1 2) INPUT Y
   Origs: 1880:goto, 1900:goto, 1910:auto
   Dests: 1930:auto
-1930 F(I,Z) (1 5) IF ABS(Y - 3) < 3 THEN 1960
+1930 F(I:1220,Z:1550,I:1870) (1 5) IF ABS(Y - 3) < 3 THEN 1960
   Origs: 1920:auto
   Dests: 1940:auto, 1960:ifthen
-1940 F(I,Z) (0 4) PRINT "STRATEGY"; Y; "NOT ALLOWED."
+1940 F(I:1220,Z:1550,I:1870) (0 4) PRINT "STRATEGY"; Y; "NOT ALLOWED."
   Origs: 1930:auto
   Dests: 1950:auto
-1950 F(I,Z) (0 3) GOTO 1910
+1950 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1910
   Origs: 1940:auto
   Dests: 1910:goto
-1960 F(I,Z) (1 4) IF B$ = "YES" THEN 2000
+1960 F(I:1220,Z:1550,I:1870) (1 4) IF B$ = "YES" THEN 2000
   Origs: 1930:ifthen
   Dests: 1970:auto, 2000:ifthen
-1970 F(I,Z) (1 4) IF Y = 5 THEN 2830
+1970 F(I:1220,Z:1550,I:1870) (1 4) IF Y = 5 THEN 2830
   Origs: 1960:auto
   Dests: 1980:auto, 2830:ifthen
-1980 F(I,Z) (0 2) GOSUB 3110
+1980 F(I:1220,Z:1550,I:1870) (0 2) GOSUB 3110
   Origs: 1970:auto
   Dests: 1990:auto, 3120:gosub
-1990 F(I,Z) (0 2) GOTO 2170
+1990 F(I:1220,Z:1550,I:1870) (0 2) GOTO 2170
   Origs: 1980:auto
   Dests: 2180:goto
-2000 F(I,Z) (1 4) IF I = 2 THEN 2040
+2000 F(I:1220,Z:1550,I:1870) (1 4) IF I = 2 THEN 2040
   Origs: 1960:ifthen
   Dests: 2010:auto, 2040:ifthen
-2010 F(I,Z) (0 3) LET Y1 = Y
+2010 F(I:1220,Z:1550,I:1870) (0 3) LET Y1 = Y
   Origs: 2000:auto
   Dests: 2020:auto
-2020 F(I,Z) (0 2) PRINT "UNION STRATEGY ";
+2020 F(I:1220,Z:1550,I:1870) (0 2) PRINT "UNION STRATEGY ";
   Origs: 2010:auto, 2060:ifthen
   Dests: 2030:auto
-2030 F(I,Z) (0 1) NEXT I
+2030 F(I:1220,Z:1550,I:1870) (0 1) NEXT I
   Origs: 1870:fornext, 2020:auto
   Dests: 2040:auto
-2040 F(I,Z) (0 3) LET Y2 = Y
+2040 F(I:1220,Z:1550,I:1870) (0 3) LET Y2 = Y
   Origs: 2000:ifthen, 2030:auto
   Dests: 2050:auto
-2050 F(I,Z) (0 3) LET Y = Y1
+2050 F(I:1220,Z:1550,I:1870) (0 3) LET Y = Y1
   Origs: 2040:auto
   Dests: 2060:auto
-2060 F(I,Z) (1 5) IF Y2 = 5 THEN 2020
+2060 F(I:1220,Z:1550,I:1870) (1 5) IF Y2 = 5 THEN 2020
   Origs: 2050:auto
   Dests: 2020:ifthen, 2080:auto
 2070 (0 1) REM : SIMULATED LOSSES-NORTH
   Origs: 
   Dests: 
-2080 F(I,Z) (0 15) LET C6 = (2 * C2 / 5) * (1 + 1 / (2 * (ABS(Y2 - Y) + 1)))
+2080 F(I:1220,Z:1550,I:1870) (0 15) LET C6 = (2 * C2 / 5) * (1 + 1 / (2 * (ABS(Y2 - Y) + 1)))
   Origs: 2060:auto
   Dests: 2090:auto
-2090 F(I,Z) (0 12) LET C6 = C6 * (1.28 + (5 * M2 / 6) / (B(2) + 1))
+2090 F(I:1220,Z:1550,I:1870) (0 12) LET C6 = C6 * (1.28 + (5 * M2 / 6) / (B(2) + 1))
   Origs: 2080:auto
   Dests: 2100:auto
-2100 F(I,Z) (0 4) LET C6 = INT(C6 * (1 + 1 / O2) + 0.5)
+2100 F(I:1220,Z:1550,I:1870) (0 4) LET C6 = INT(C6 * (1 + 1 / O2) + 0.5)
   Origs: 2090:auto
   Dests: 2120:auto
 2110 (0 1) REM - IF LOSS > MEN PRESENT, RESCALE LOSSES
   Origs: 
   Dests: 
-2120 F(I,Z) (0 4) LET E2 = 100 / O2
+2120 F(I:1220,Z:1550,I:1870) (0 4) LET E2 = 100 / O2
   Origs: 2100:auto
   Dests: 2130:auto
-2130 F(I,Z) (1 5) IF INT(C6 + E2) < M6 THEN 2190
+2130 F(I:1220,Z:1550,I:1870) (1 5) IF INT(C6 + E2) < M6 THEN 2190
   Origs: 2120:auto
   Dests: 2140:auto, 2190:ifthen
-2140 F(I,Z) (0 4) LET C6 = INT(13 * M6 / 20)
+2140 F(I:1220,Z:1550,I:1870) (0 4) LET C6 = INT(13 * M6 / 20)
   Origs: 2130:auto
   Dests: 2150:auto
-2150 F(I,Z) (0 5) LET E2 = 7 * C6 / 13
+2150 F(I:1220,Z:1550,I:1870) (0 5) LET E2 = 7 * C6 / 13
   Origs: 2140:auto
   Dests: 2160:auto
-2160 F(I,Z) (0 3) LET U2 = 1
+2160 F(I:1220,Z:1550,I:1870) (0 3) LET U2 = 1
   Origs: 2150:auto
   Dests: 2180:auto
 2170 (0 1) REM - CALCULATE SIMULATED LOSSES
   Origs: 
   Dests: 
-2180 F(I,Z) (0 2) PRINT
+2180 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 1990:goto, 2160:auto
   Dests: 2190:auto
-2190 F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
-     F(I,Z) (0 4) PRINT, "CONFEDERACY", "UNION"
+2190 F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 4) PRINT, "CONFEDERACY", "UNION"
   Origs: 2130:ifthen, 2180:auto
   Dests: 2200:auto
-2200 F(I,Z) (0 15) LET C5 = (2 * C1 / 5) * (1 + 1 / (2 * (ABS(Y2 - Y) + 1)))
+2200 F(I:1220,Z:1550,I:1870) (0 15) LET C5 = (2 * C1 / 5) * (1 + 1 / (2 * (ABS(Y2 - Y) + 1)))
   Origs: 2190:auto
   Dests: 2210:auto
-2210 F(I,Z) (0 4) LET C5 = INT(C5 * (1 + 1 / O) * (1.28 + F1 / (B(1) + 1)) + 0.5)
+2210 F(I:1220,Z:1550,I:1870) (0 4) LET C5 = INT(C5 * (1 + 1 / O) * (1.28 + F1 / (B(1) + 1)) + 0.5)
   Origs: 2200:auto
   Dests: 2220:auto
-2220 F(I,Z) (0 4) LET E = 100 / O
+2220 F(I:1220,Z:1550,I:1870) (0 4) LET E = 100 / O
   Origs: 2210:auto
   Dests: 2230:auto
-2230 F(I,Z) (1 16) IF C5 + 100 / O < M1 * (1 + (P1 - T1) / (M3 + 1)) THEN 2270
+2230 F(I:1220,Z:1550,I:1870) (1 16) IF C5 + 100 / O < M1 * (1 + (P1 - T1) / (M3 + 1)) THEN 2270
   Origs: 2220:auto
   Dests: 2240:auto, 2270:ifthen
-2240 F(I,Z) (0 4) LET C5 = INT(13 * M1 / 20 * (1 + (P1 - T1) / (M3 + 1)))
+2240 F(I:1220,Z:1550,I:1870) (0 4) LET C5 = INT(13 * M1 / 20 * (1 + (P1 - T1) / (M3 + 1)))
   Origs: 2230:auto
   Dests: 2250:auto
-2250 F(I,Z) (0 5) LET E = 7 * C5 / 13
+2250 F(I:1220,Z:1550,I:1870) (0 5) LET E = 7 * C5 / 13
   Origs: 2240:auto
   Dests: 2260:auto
-2260 F(I,Z) (0 3) LET U = 1
+2260 F(I:1220,Z:1550,I:1870) (0 3) LET U = 1
   Origs: 2250:auto
   Dests: 2270:auto
-2270 F(I,Z) (1 4) IF D = 1 THEN 2500
+2270 F(I:1220,Z:1550,I:1870) (1 4) IF D = 1 THEN 2500
   Origs: 2230:ifthen, 2260:auto
   Dests: 2280:auto, 2500:ifthen
-2280 F(I,Z) (0 4) PRINT "CASUALTIES", C5, C6
+2280 F(I:1220,Z:1550,I:1870) (0 4) PRINT "CASUALTIES", C5, C6
   Origs: 2270:auto, 2520:goto
   Dests: 2290:auto
-2290 F(I,Z) (0 6) PRINT "DESERTIONS", INT(E), INT(E2)
+2290 F(I:1220,Z:1550,I:1870) (0 6) PRINT "DESERTIONS", INT(E), INT(E2)
   Origs: 2280:auto
   Dests: 2300:auto
-2300 F(I,Z) (0 2) PRINT
+2300 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 2290:auto
   Dests: 2310:auto
-2310 F(I,Z) (1 4) IF B$ <> "YES" THEN 2350
+2310 F(I:1220,Z:1550,I:1870) (1 4) IF B$ <> "YES" THEN 2350
   Origs: 2300:auto
   Dests: 2320:auto, 2350:ifthen
-2320 F(I,Z) (0 3) PRINT "COMPARED TO THE ACTUAL CASUALTIES AT " C$
+2320 F(I:1220,Z:1550,I:1870) (0 3) PRINT "COMPARED TO THE ACTUAL CASUALTIES AT " C$
   Origs: 2310:auto
   Dests: 2330:auto
-2330 F(I,Z) (0 5) PRINT "CONFEDERATE:" INT(100 * (C5 / C1) + 0.5) "% OF THE ORIGINAL"
+2330 F(I:1220,Z:1550,I:1870) (0 5) PRINT "CONFEDERATE:" INT(100 * (C5 / C1) + 0.5) "% OF THE ORIGINAL"
   Origs: 2320:auto
   Dests: 2340:auto
-2340 F(I,Z) (0 5) PRINT "UNION:      " INT(100 * (C6 / C2) + 0.5) "% OF THE ORIGINAL"
+2340 F(I:1220,Z:1550,I:1870) (0 5) PRINT "UNION:      " INT(100 * (C6 / C2) + 0.5) "% OF THE ORIGINAL"
   Origs: 2330:auto
   Dests: 2350:auto
-2350 F(I,Z) (0 2) PRINT
+2350 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 2310:ifthen, 2340:auto
   Dests: 2370:auto
 2360 (0 1) REM - 1 WHO ONE
   Origs: 
   Dests: 
-2370 F(I,Z) (1 4) IF U <> 1 THEN 2380
+2370 F(I:1220,Z:1550,I:1870) (1 4) IF U <> 1 THEN 2380
   Origs: 2350:auto
   Dests: 2375:auto, 2380:ifthen
-2375 F(I,Z) (1 4) IF U2 = 1 THEN 2460
+2375 F(I:1220,Z:1550,I:1870) (1 4) IF U2 = 1 THEN 2460
   Origs: 2370:auto
   Dests: 2380:auto, 2460:ifthen
-2380 F(I,Z) (1 4) IF U = 1 THEN 2420
+2380 F(I:1220,Z:1550,I:1870) (1 4) IF U = 1 THEN 2420
   Origs: 2370:ifthen, 2375:auto
   Dests: 2390:auto, 2420:ifthen
-2390 F(I,Z) (1 4) IF U2 = 1 THEN 2440
+2390 F(I:1220,Z:1550,I:1870) (1 4) IF U2 = 1 THEN 2440
   Origs: 2380:auto
   Dests: 2400:auto, 2440:ifthen
-2400 F(I,Z) (1 7) IF C5 + E = C6 + E2 THEN 2460
+2400 F(I:1220,Z:1550,I:1870) (1 7) IF C5 + E = C6 + E2 THEN 2460
   Origs: 2390:auto
   Dests: 2410:auto, 2460:ifthen
-2410 F(I,Z) (1 7) IF C5 + E < C6 + E2 THEN 2440
+2410 F(I:1220,Z:1550,I:1870) (1 7) IF C5 + E < C6 + E2 THEN 2440
   Origs: 2400:auto
   Dests: 2420:auto, 2440:ifthen
-2420 F(I,Z) (0 3) PRINT "THE UNION WINS " C$
+2420 F(I:1220,Z:1550,I:1870) (0 3) PRINT "THE UNION WINS " C$
   Origs: 2380:ifthen, 2410:auto
   Dests: 2430:auto
-2430 F(I,Z) (0 2) GOTO 2600
+2430 F(I:1220,Z:1550,I:1870) (0 2) GOTO 2600
   Origs: 2420:auto
   Dests: 2600:goto
-2440 F(I,Z) (0 3) PRINT "THE CONFEDERACY WINS " C$
+2440 F(I:1220,Z:1550,I:1870) (0 3) PRINT "THE CONFEDERACY WINS " C$
   Origs: 2390:ifthen, 2410:ifthen
   Dests: 2450:auto
-2450 F(I,Z) (0 2) GOTO 2660
+2450 F(I:1220,Z:1550,I:1870) (0 2) GOTO 2660
   Origs: 2440:auto
   Dests: 2660:goto
-2460 F(I,Z) (0 2) PRINT "BATTLE OUTCOME UNRESOLVED"
+2460 F(I:1220,Z:1550,I:1870) (0 2) PRINT "BATTLE OUTCOME UNRESOLVED"
   Origs: 2375:ifthen, 2400:ifthen
   Dests: 2470:auto
-2470 F(I,Z) (0 4) LET W0 = W0 + 1
+2470 F(I:1220,Z:1550,I:1870) (0 4) LET W0 = W0 + 1
   Origs: 2460:auto
   Dests: 2480:auto
-2480 F(I,Z) (1 4) IF A = 0 THEN 2790
+2480 F(I:1220,Z:1550,I:1870) (1 4) IF A = 0 THEN 2790
   Origs: 2470:auto
   Dests: 2490:auto, 2790:ifthen
-2490 F(I,Z) (0 2) GOTO 2680
+2490 F(I:1220,Z:1550,I:1870) (0 2) GOTO 2680
   Origs: 2480:auto
   Dests: 2680:goto
-2500 F(I,Z) (0 4) LET C6 = INT(17 * C2 * C1 / (C5 * 20))
+2500 F(I:1220,Z:1550,I:1870) (0 4) LET C6 = INT(17 * C2 * C1 / (C5 * 20))
   Origs: 2270:ifthen
   Dests: 2510:auto
-2510 F(I,Z) (0 4) LET E2 = 5 * O
+2510 F(I:1220,Z:1550,I:1870) (0 4) LET E2 = 5 * O
   Origs: 2500:auto
   Dests: 2520:auto
-2520 F(I,Z) (0 3) GOTO 2280
+2520 F(I:1220,Z:1550,I:1870) (0 3) GOTO 2280
   Origs: 2510:auto
   Dests: 2280:goto
 2530 (0 5) PRINT "YOUR CASUALTIES WERE " INT(100 * (C5 / C1) + 0.5) "% OF "
@@ -803,13 +803,13 @@ Halstead complexity:
 2590 (0 3) PRINT "YOU LOSE "; C$
   Origs: 2570:ifthen, 2580:auto
   Dests: 2600:auto
-2600 F(I,Z) (1 4) IF A = 0 THEN 2790
+2600 F(I:1220,Z:1550,I:1870) (1 4) IF A = 0 THEN 2790
   Origs: 2430:goto, 2590:auto
   Dests: 2610:auto, 2790:ifthen
-2610 F(I,Z) (0 4) LET L = L + 1
+2610 F(I:1220,Z:1550,I:1870) (0 4) LET L = L + 1
   Origs: 2600:auto
   Dests: 2620:auto
-2620 F(I,Z) (0 2) GOTO 2680
+2620 F(I:1220,Z:1550,I:1870) (0 2) GOTO 2680
   Origs: 2610:auto
   Dests: 2680:goto
 2630 (0 3) PRINT "YOU WIN "; C$
@@ -821,148 +821,148 @@ Halstead complexity:
 2650 (0 1) REM  RESOURCES AVAILABLE.IF A REPLAY DON'T UPDATE.
   Origs: 
   Dests: 
-2660 F(I,Z) (1 4) IF A = 0 THEN 2790
+2660 F(I:1220,Z:1550,I:1870) (1 4) IF A = 0 THEN 2790
   Origs: 2450:goto, 2630:auto
   Dests: 2670:auto, 2790:ifthen
-2670 F(I,Z) (0 4) LET W = W + 1
+2670 F(I:1220,Z:1550,I:1870) (0 4) LET W = W + 1
   Origs: 2660:auto
   Dests: 2680:auto
-2680 F(I,Z) (0 5) LET T1 = T1 + C5 + E
+2680 F(I:1220,Z:1550,I:1870) (0 5) LET T1 = T1 + C5 + E
   Origs: 2490:goto, 2620:goto, 2670:auto
   Dests: 2690:auto
-2690 F(I,Z) (0 5) LET T2 = T2 + C6 + E2
+2690 F(I:1220,Z:1550,I:1870) (0 5) LET T2 = T2 + C6 + E2
   Origs: 2680:auto
   Dests: 2700:auto
-2700 F(I,Z) (0 4) LET P1 = P1 + C1
+2700 F(I:1220,Z:1550,I:1870) (0 4) LET P1 = P1 + C1
   Origs: 2690:auto
   Dests: 2710:auto
-2710 F(I,Z) (0 4) LET P2 = P2 + C2
+2710 F(I:1220,Z:1550,I:1870) (0 4) LET P2 = P2 + C2
   Origs: 2700:auto
   Dests: 2720:auto
-2720 F(I,Z) (0 7) LET Q1 = Q1 + (F(1) + H(1) + B(1))
+2720 F(I:1220,Z:1550,I:1870) (0 7) LET Q1 = Q1 + (F(1) + H(1) + B(1))
   Origs: 2710:auto
   Dests: 2730:auto
-2730 F(I,Z) (0 7) LET Q2 = Q2 + (F(2) + H(2) + B(2))
+2730 F(I:1220,Z:1550,I:1870) (0 7) LET Q2 = Q2 + (F(2) + H(2) + B(2))
   Origs: 2720:auto
   Dests: 2740:auto
-2740 F(I,Z) (0 9) LET R1 = R1 + M1 * (100 - I1) / 20
+2740 F(I:1220,Z:1550,I:1870) (0 9) LET R1 = R1 + M1 * (100 - I1) / 20
   Origs: 2730:auto
   Dests: 2750:auto
-2750 F(I,Z) (0 9) LET R2 = R2 + M2 * (100 - I2) / 20
+2750 F(I:1220,Z:1550,I:1870) (0 9) LET R2 = R2 + M2 * (100 - I2) / 20
   Origs: 2740:auto
   Dests: 2760:auto
-2760 F(I,Z) (0 4) LET M3 = M3 + M1
+2760 F(I:1220,Z:1550,I:1870) (0 4) LET M3 = M3 + M1
   Origs: 2750:auto
   Dests: 2770:auto
-2770 F(I,Z) (0 4) LET M4 = M4 + M2
+2770 F(I:1220,Z:1550,I:1870) (0 4) LET M4 = M4 + M2
   Origs: 2760:auto
   Dests: 2780:auto
-2780 F(I,Z) (0 2) GOSUB 3300
+2780 F(I:1220,Z:1550,I:1870) (0 2) GOSUB 3300
   Origs: 2770:auto
   Dests: 2790:auto, 3330:gosub
-2790 F(I,Z) (0 3) U = 0
-     F(I,Z) (0 3) U2 = 0
+2790 F(I:1220,Z:1550,I:1870) (0 3) U = 0
+     F(I:1220,Z:1550,I:1870) (0 3) U2 = 0
   Origs: 2480:ifthen, 2600:ifthen, 2660:ifthen, 2780:auto
   Dests: 2800:auto
-2800 F(I,Z) (0 2) PRINT "---------------"
+2800 F(I:1220,Z:1550,I:1870) (0 2) PRINT "---------------"
   Origs: 2790:auto
   Dests: 2810:auto
-2810 F(I,Z) (0 3) GOTO 620
+2810 F(I:1220,Z:1550,I:1870) (0 3) GOTO 620
   Origs: 2800:auto
   Dests: 620:goto
 2820 (0 1) REM ------FINISH OFF
   Origs: 
   Dests: 
-2830 F(I,Z) (0 2) PRINT "THE CONFEDERACY HAS SURRENDERED"
+2830 F(I:1220,Z:1550,I:1870) (0 2) PRINT "THE CONFEDERACY HAS SURRENDERED"
   Origs: 1970:ifthen
   Dests: 2840:auto
-2840 F(I,Z) (0 2) GOTO 2860
+2840 F(I:1220,Z:1550,I:1870) (0 2) GOTO 2860
   Origs: 2830:auto
   Dests: 2860:goto
 2850 (0 2) PRINT "THE UNION HAS SURRENDERED."
   Origs: 
   Dests: 2860:auto
-2860 F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
-     F(I,Z) (0 2) PRINT
+2860 F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
+     F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 660:ifthen, 665:ifthen, 2840:goto, 2850:auto
   Dests: 2870:auto
-2870 F(I,Z) (0 2) PRINT "THE CONFEDERACY ";
+2870 F(I:1220,Z:1550,I:1870) (0 2) PRINT "THE CONFEDERACY ";
   Origs: 2860:auto
   Dests: 2880:auto
-2880 F(I,Z) (0 5) PRINT "HAS WON " W " BATTLES AND LOST " L
+2880 F(I:1220,Z:1550,I:1870) (0 5) PRINT "HAS WON " W " BATTLES AND LOST " L
   Origs: 2870:auto
   Dests: 2890:auto
-2890 F(I,Z) (1 4) IF Y = 5 THEN 2940
+2890 F(I:1220,Z:1550,I:1870) (1 4) IF Y = 5 THEN 2940
   Origs: 2880:auto
   Dests: 2900:auto, 2940:ifthen
-2900 F(I,Z) (1 4) IF Y2 = 5 THEN 2920
+2900 F(I:1220,Z:1550,I:1870) (1 4) IF Y2 = 5 THEN 2920
   Origs: 2890:auto
   Dests: 2910:auto, 2920:ifthen
-2910 F(I,Z) (1 4) IF W <= L THEN 2940
+2910 F(I:1220,Z:1550,I:1870) (1 4) IF W <= L THEN 2940
   Origs: 2900:auto
   Dests: 2915:auto, 2940:ifthen
-2915 F(I,Z) (1 4) IF Y = 5 THEN 2940
+2915 F(I:1220,Z:1550,I:1870) (1 4) IF Y = 5 THEN 2940
   Origs: 2910:auto
   Dests: 2920:auto, 2940:ifthen
-2920 F(I,Z) (0 2) PRINT "THE CONFEDERACY HAS WON THE WAR"
+2920 F(I:1220,Z:1550,I:1870) (0 2) PRINT "THE CONFEDERACY HAS WON THE WAR"
   Origs: 2900:ifthen, 2915:auto
   Dests: 2930:auto
-2930 F(I,Z) (0 2) GOTO 2950
+2930 F(I:1220,Z:1550,I:1870) (0 2) GOTO 2950
   Origs: 2920:auto
   Dests: 2950:goto
-2940 F(I,Z) (0 2) PRINT "THE UNION HAS WON THE WAR"
+2940 F(I:1220,Z:1550,I:1870) (0 2) PRINT "THE UNION HAS WON THE WAR"
   Origs: 2890:ifthen, 2910:ifthen, 2915:ifthen
   Dests: 2950:auto
-2950 F(I,Z) (0 2) PRINT
+2950 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 2930:goto, 2940:auto
   Dests: 2960:auto
-2960 F(I,Z) (1 4) IF R1 = 0 THEN 3100
+2960 F(I:1220,Z:1550,I:1870) (1 4) IF R1 = 0 THEN 3100
   Origs: 2950:auto
   Dests: 2970:auto, 3100:ifthen
-2970 F(I,Z) (0 6) PRINT "FOR THE " W + L + W0 " BATTLES FOUGHT (EXCUDING RERUNS)"
+2970 F(I:1220,Z:1550,I:1870) (0 6) PRINT "FOR THE " W + L + W0 " BATTLES FOUGHT (EXCUDING RERUNS)"
   Origs: 2960:auto
   Dests: 2980:auto
-2980 F(I,Z) (0 4) PRINT " ", " ", " ";
+2980 F(I:1220,Z:1550,I:1870) (0 4) PRINT " ", " ", " ";
   Origs: 2970:auto
   Dests: 2990:auto
-2990 F(I,Z) (0 3) PRINT "CONFEDERACY", " UNION"
+2990 F(I:1220,Z:1550,I:1870) (0 3) PRINT "CONFEDERACY", " UNION"
   Origs: 2980:auto
   Dests: 3000:auto
-3000 F(I,Z) (0 6) PRINT "HISTORICAL LOSSES", INT(P1 + 0.5), INT(P2 + 0.5)
+3000 F(I:1220,Z:1550,I:1870) (0 6) PRINT "HISTORICAL LOSSES", INT(P1 + 0.5), INT(P2 + 0.5)
   Origs: 2990:auto
   Dests: 3010:auto
-3010 F(I,Z) (0 6) PRINT "SIMULATED LOSSES", INT(T1 + 0.5), INT(T2 + 0.5)
+3010 F(I:1220,Z:1550,I:1870) (0 6) PRINT "SIMULATED LOSSES", INT(T1 + 0.5), INT(T2 + 0.5)
   Origs: 3000:auto
   Dests: 3020:auto
-3020 F(I,Z) (0 2) PRINT
+3020 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 3010:auto
   Dests: 3030:auto
-3030 F(I,Z) (0 6) PRINT "    % OF ORIGINAL", INT(100 * (T1 / P1) + 0.5), INT(100 * (T2 / P2) + 0.5)
+3030 F(I:1220,Z:1550,I:1870) (0 6) PRINT "    % OF ORIGINAL", INT(100 * (T1 / P1) + 0.5), INT(100 * (T2 / P2) + 0.5)
   Origs: 3020:auto
   Dests: 3040:auto
-3040 F(I,Z) (1 4) IF B$ = "YES" THEN 3100
+3040 F(I:1220,Z:1550,I:1870) (1 4) IF B$ = "YES" THEN 3100
   Origs: 3030:auto
   Dests: 3050:auto, 3100:ifthen
-3050 F(I,Z) (0 2) PRINT
+3050 F(I:1220,Z:1550,I:1870) (0 2) PRINT
   Origs: 3040:auto
   Dests: 3060:auto
-3060 F(I,Z) (0 2) PRINT "UNION INTELLIGENCE SUGGESTS THAT THE SOUTH USED "
+3060 F(I:1220,Z:1550,I:1870) (0 2) PRINT "UNION INTELLIGENCE SUGGESTS THAT THE SOUTH USED "
   Origs: 3050:auto
   Dests: 3070:auto
-3070 F(I,Z) (0 2) PRINT "STRATEGIES 1, 2, 3, 4 IN THE FOLLOWING PERCENTAGES"
+3070 F(I:1220,Z:1550,I:1870) (0 2) PRINT "STRATEGIES 1, 2, 3, 4 IN THE FOLLOWING PERCENTAGES"
   Origs: 3060:auto
   Dests: 3080:auto
-3080 F(I,Z) (0 5) PRINT S(1); S(2); S(3); S(4)
+3080 F(I:1220,Z:1550,I:1870) (0 5) PRINT S(1); S(2); S(3); S(4)
   Origs: 3070:auto
   Dests: 3100:auto
 3090 (0 1) REM ---------------------------------
   Origs: 
   Dests: 
-3100 F(I,Z) (0 1) STOP
+3100 F(I:1220,Z:1550,I:1870) (0 1) STOP
      WARNING: Terminating statement in FOR/NEXT
   Origs: 2960:ifthen, 3040:ifthen, 3080:auto
   Dests: :stop
@@ -996,10 +996,10 @@ Halstead complexity:
 3190 G(3120) (0 5) LET R = 100 * RND(0)
   Origs: 3180:auto
   Dests: 3200:auto
-3200 G(3120) F(I) (1 3) FOR I = 1 TO 4
+3200 G(3120) F(I:3200) (1 3) FOR I = 1 TO 4
   Origs: 3190:auto
   Dests: 3210:fornext, 3250:fornext
-3210 G(3120) F(I) (0 4) LET S0 = S0 + S(I)
+3210 G(3120) F(I:3200) (0 4) LET S0 = S0 + S(I)
   Origs: 3200:fornext
   Dests: 3240:auto
 3220 (0 1) REM - IF ACTUAL STRATEGY INFO IS IN PROGRAM DATA STATEMENTS
@@ -1008,22 +1008,22 @@ Halstead complexity:
 3230 (0 1) REM   THEN R-100 IS EXTRA WEIGHT GIVEN TO THAT STATEGY.
   Origs: 
   Dests: 
-3240 G(3120) F(I) (1 4) IF R < S0 THEN 3270
+3240 G(3120) F(I:3200) (1 4) IF R < S0 THEN 3270
   Origs: 3210:auto
   Dests: 3250:auto, 3270:ifthen
-3250 G(3120) F(I) (0 1) NEXT I
+3250 G(3120) F(I:3200) (0 1) NEXT I
   Origs: 3200:fornext, 3240:auto
   Dests: 3270:auto
 3260 (0 1) REM - IF ACTUAL STRAT. IN,THEN HERE IS Y2= HIST. STRAT.
   Origs: 
   Dests: 
-3270 G(3120) F(I) (0 3) LET Y2 = I
+3270 G(3120) F(I:3200) (0 3) LET Y2 = I
   Origs: 3240:ifthen, 3250:auto
   Dests: 3280:auto
-3280 G(3120) F(I) (0 2) PRINT Y2
+3280 G(3120) F(I:3200) (0 2) PRINT Y2
   Origs: 3270:auto
   Dests: 3290:auto
-3290 G(3120) F(I) (0 1) RETURN
+3290 G(3120) F(I:3200) (0 1) RETURN
   Origs: 3155:ifthen, 3280:auto
   Dests: 
 3300 (0 1) REM LEARN  PRESENT STRATEGY, START FORGETTING OLD ONES
@@ -1041,19 +1041,19 @@ Halstead complexity:
 3340 G(3330) (0 3) LET S0 = 0
   Origs: 3330:auto
   Dests: 3350:auto
-3350 G(3330) F(I) (1 3) FOR I = 1 TO 4
+3350 G(3330) F(I:3350) (1 3) FOR I = 1 TO 4
   Origs: 3340:auto
   Dests: 3360:fornext, 3390:fornext
-3360 G(3330) F(I) (1 4) IF S(I) <= 5 THEN 3390
+3360 G(3330) F(I:3350) (1 4) IF S(I) <= 5 THEN 3390
   Origs: 3350:fornext
   Dests: 3370:auto, 3390:ifthen
-3370 G(3330) F(I) (0 4) LET S(I) = S(I) - S
+3370 G(3330) F(I:3350) (0 4) LET S(I) = S(I) - S
   Origs: 3360:auto
   Dests: 3380:auto
-3380 G(3330) F(I) (0 4) LET S0 = S0 + S
+3380 G(3330) F(I:3350) (0 4) LET S0 = S0 + S
   Origs: 3370:auto
   Dests: 3390:auto
-3390 G(3330) F(I) (0 1) NEXT I
+3390 G(3330) F(I:3350) (0 1) NEXT I
   Origs: 3350:fornext, 3360:ifthen, 3380:auto
   Dests: 3400:auto
 3400 G(3330) (0 4) LET S(Y) = S(Y) + S0
@@ -1110,142 +1110,142 @@ Halstead complexity:
 3570 (0 2) DATA "ATLANTA", 65000, 100000, 8500, 3700, 1
   Origs: 
   Dests: 
-3580 F(I,Z) (0 2) PRINT "JULY 21, 1861.  GEN. BEAUREGARD, COMMANDING THE SOUTH, MET"
+3580 F(I:1220,Z:1550,I:1870) (0 2) PRINT "JULY 21, 1861.  GEN. BEAUREGARD, COMMANDING THE SOUTH, MET"
   Origs: 1125:goto
   Dests: 3590:auto
-3590 F(I,Z) (0 2) PRINT "UNION FORCES WITH GEN. MCDOWELL IN A PREMATURE BATTLE AT"
+3590 F(I:1220,Z:1550,I:1870) (0 2) PRINT "UNION FORCES WITH GEN. MCDOWELL IN A PREMATURE BATTLE AT"
   Origs: 3580:auto
   Dests: 3600:auto
-3600 F(I,Z) (0 2) PRINT "BULL RUN. GEN. JACKSON HELPED PUSH BACK THE UNION ATTACK."
+3600 F(I:1220,Z:1550,I:1870) (0 2) PRINT "BULL RUN. GEN. JACKSON HELPED PUSH BACK THE UNION ATTACK."
   Origs: 3590:auto
   Dests: 3610:auto
-3610 F(I,Z) (0 3) GOTO 1150
+3610 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3600:auto
   Dests: 1150:goto
-3620 F(I,Z) (0 2) PRINT "APRIL 6-7, 1862.  THE CONFEDERATE SURPRISE ATTACK AT"
+3620 F(I:1220,Z:1550,I:1870) (0 2) PRINT "APRIL 6-7, 1862.  THE CONFEDERATE SURPRISE ATTACK AT"
   Origs: 1125:goto
   Dests: 3630:auto
-3630 F(I,Z) (0 2) PRINT "SHILOH FAILED DUE TO POOR ORGANIZATION."
+3630 F(I:1220,Z:1550,I:1870) (0 2) PRINT "SHILOH FAILED DUE TO POOR ORGANIZATION."
   Origs: 3620:auto
   Dests: 3640:auto
-3640 F(I,Z) (0 3) GOTO 1150
+3640 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3630:auto
   Dests: 1150:goto
-3650 F(I,Z) (0 2) PRINT "JUNE 25-JULY 1, 1862.  GENERAL LEE (CSA) UPHELD THE"
+3650 F(I:1220,Z:1550,I:1870) (0 2) PRINT "JUNE 25-JULY 1, 1862.  GENERAL LEE (CSA) UPHELD THE"
   Origs: 1125:goto
   Dests: 3660:auto
-3660 F(I,Z) (0 2) PRINT "OFFENSIVE THROUGHOUT THE BATTLE AND FORCED GEN. MCCLELLAN"
+3660 F(I:1220,Z:1550,I:1870) (0 2) PRINT "OFFENSIVE THROUGHOUT THE BATTLE AND FORCED GEN. MCCLELLAN"
   Origs: 3650:auto
   Dests: 3670:auto
-3670 F(I,Z) (0 2) PRINT "AND THE UNION FORCES AWAY FROM RICHMOND."
+3670 F(I:1220,Z:1550,I:1870) (0 2) PRINT "AND THE UNION FORCES AWAY FROM RICHMOND."
   Origs: 3660:auto
   Dests: 3680:auto
-3680 F(I,Z) (0 3) GOTO 1150
+3680 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3670:auto
   Dests: 1150:goto
-3690 F(I,Z) (0 2) PRINT "AUG 29-30, 1862.  THE COMBINED CONFEDERATE FORCES UNDER";
+3690 F(I:1220,Z:1550,I:1870) (0 2) PRINT "AUG 29-30, 1862.  THE COMBINED CONFEDERATE FORCES UNDER";
   Origs: 1125:goto
   Dests: 3695:auto
-3695 F(I,Z) (0 2) PRINT " LEE"
+3695 F(I:1220,Z:1550,I:1870) (0 2) PRINT " LEE"
   Origs: 3690:auto
   Dests: 3700:auto
-3700 F(I,Z) (0 2) PRINT "AND JACKSON DROVE THE UNION FORCES BACK INTO WASHINGTON."
+3700 F(I:1220,Z:1550,I:1870) (0 2) PRINT "AND JACKSON DROVE THE UNION FORCES BACK INTO WASHINGTON."
   Origs: 3695:auto
   Dests: 3710:auto
-3710 F(I,Z) (0 3) GOTO 1150
+3710 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3700:auto
   Dests: 1150:goto
-3720 F(I,Z) (0 2) PRINT "SEPT 17, 1862.  THE SOUTH FAILED TO INCORPORATE MARYLAND"
+3720 F(I:1220,Z:1550,I:1870) (0 2) PRINT "SEPT 17, 1862.  THE SOUTH FAILED TO INCORPORATE MARYLAND"
   Origs: 1125:goto
   Dests: 3730:auto
-3730 F(I,Z) (0 2) PRINT "INTO THE CONFEDERACY."
+3730 F(I:1220,Z:1550,I:1870) (0 2) PRINT "INTO THE CONFEDERACY."
   Origs: 3720:auto
   Dests: 3740:auto
-3740 F(I,Z) (0 3) GOTO 1150
+3740 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3730:auto
   Dests: 1150:goto
-3750 F(I,Z) (0 2) PRINT "DEC 13, 1862.  THE CONFEDERACY UNDER LEE SUCCESSFULLY"
+3750 F(I:1220,Z:1550,I:1870) (0 2) PRINT "DEC 13, 1862.  THE CONFEDERACY UNDER LEE SUCCESSFULLY"
   Origs: 1125:goto
   Dests: 3760:auto
-3760 F(I,Z) (0 2) PRINT "REPULSED AN ATTACK BY THE UNION UNDER GEN. BURNSIDE."
+3760 F(I:1220,Z:1550,I:1870) (0 2) PRINT "REPULSED AN ATTACK BY THE UNION UNDER GEN. BURNSIDE."
   Origs: 3750:auto
   Dests: 3770:auto
-3770 F(I,Z) (0 3) GOTO 1150
+3770 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3760:auto
   Dests: 1150:goto
-3780 F(I,Z) (0 2) PRINT "DEC 31, 1862.  THE SOUTH UNDER GEN. BRAGG WON A CLOSE ";
+3780 F(I:1220,Z:1550,I:1870) (0 2) PRINT "DEC 31, 1862.  THE SOUTH UNDER GEN. BRAGG WON A CLOSE ";
   Origs: 1125:goto
   Dests: 3785:auto
-3785 F(I,Z) (0 2) PRINT "BATTLE."
+3785 F(I:1220,Z:1550,I:1870) (0 2) PRINT "BATTLE."
   Origs: 3780:auto
   Dests: 3790:auto
-3790 F(I,Z) (0 3) GOTO 1150
+3790 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3785:auto
   Dests: 1150:goto
-3800 F(I,Z) (0 2) PRINT "MAY 1-6, 1863.  THE SOUTH HAD A COSTLY VICTORY AND LOST"
+3800 F(I:1220,Z:1550,I:1870) (0 2) PRINT "MAY 1-6, 1863.  THE SOUTH HAD A COSTLY VICTORY AND LOST"
   Origs: 1125:goto
   Dests: 3810:auto
-3810 F(I,Z) (0 2) PRINT "ONE OF THEIR OUTSTANDING GENERALS, 'STONEWALL' JACKSON."
+3810 F(I:1220,Z:1550,I:1870) (0 2) PRINT "ONE OF THEIR OUTSTANDING GENERALS, 'STONEWALL' JACKSON."
   Origs: 3800:auto
   Dests: 3820:auto
-3820 F(I,Z) (0 3) GOTO 1150
+3820 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3810:auto
   Dests: 1150:goto
-3830 F(I,Z) (0 2) PRINT "JULY 4, 1863.  VICKSBURG WAS A COSTLY DEFEAT FOR THE SOUTH"
+3830 F(I:1220,Z:1550,I:1870) (0 2) PRINT "JULY 4, 1863.  VICKSBURG WAS A COSTLY DEFEAT FOR THE SOUTH"
   Origs: 1125:goto
   Dests: 3840:auto
-3840 F(I,Z) (0 2) PRINT "BECAUSE IT GAVE THE UNION ACCESS TO THE MISSISSIPPI."
+3840 F(I:1220,Z:1550,I:1870) (0 2) PRINT "BECAUSE IT GAVE THE UNION ACCESS TO THE MISSISSIPPI."
   Origs: 3830:auto
   Dests: 3850:auto
-3850 F(I,Z) (0 3) GOTO 1150
+3850 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3840:auto
   Dests: 1150:goto
-3860 F(I,Z) (0 2) PRINT "JULY 1-3, 1863.  A SOUTHERN MISTAKE BY GEN. LEE AT ";
+3860 F(I:1220,Z:1550,I:1870) (0 2) PRINT "JULY 1-3, 1863.  A SOUTHERN MISTAKE BY GEN. LEE AT ";
   Origs: 1125:goto
   Dests: 3865:auto
-3865 F(I,Z) (0 2) PRINT "GETTYSBURG"
+3865 F(I:1220,Z:1550,I:1870) (0 2) PRINT "GETTYSBURG"
   Origs: 3860:auto
   Dests: 3870:auto
-3870 F(I,Z) (0 2) PRINT "COST THEM ONE OF THE MOST CRUCIAL BATTLES OF THE WAR."
+3870 F(I:1220,Z:1550,I:1870) (0 2) PRINT "COST THEM ONE OF THE MOST CRUCIAL BATTLES OF THE WAR."
   Origs: 3865:auto
   Dests: 3880:auto
-3880 F(I,Z) (0 3) GOTO 1150
+3880 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3870:auto
   Dests: 1150:goto
-3890 F(I,Z) (0 2) PRINT "SEPT. 15, 1863. CONFUSION IN A FOREST NEAR CHICKAMAUGA LED"
+3890 F(I:1220,Z:1550,I:1870) (0 2) PRINT "SEPT. 15, 1863. CONFUSION IN A FOREST NEAR CHICKAMAUGA LED"
   Origs: 1125:goto
   Dests: 3900:auto
-3900 F(I,Z) (0 2) PRINT "TO A COSTLY SOUTHERN VICTORY."
+3900 F(I:1220,Z:1550,I:1870) (0 2) PRINT "TO A COSTLY SOUTHERN VICTORY."
   Origs: 3890:auto
   Dests: 3910:auto
-3910 F(I,Z) (0 3) GOTO 1150
+3910 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3900:auto
   Dests: 1150:goto
-3920 F(I,Z) (0 2) PRINT "NOV. 25, 1863. AFTER THE SOUTH HAD SIEGED GEN. ROSENCRANS'"
+3920 F(I:1220,Z:1550,I:1870) (0 2) PRINT "NOV. 25, 1863. AFTER THE SOUTH HAD SIEGED GEN. ROSENCRANS'"
   Origs: 1130:goto
   Dests: 3930:auto
-3930 F(I,Z) (0 2) PRINT "ARMY FOR THREE MONTHS, GEN. GRANT BROKE THE SIEGE."
+3930 F(I:1220,Z:1550,I:1870) (0 2) PRINT "ARMY FOR THREE MONTHS, GEN. GRANT BROKE THE SIEGE."
   Origs: 3920:auto
   Dests: 3940:auto
-3940 F(I,Z) (0 3) GOTO 1150
+3940 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3930:auto
   Dests: 1150:goto
-3950 F(I,Z) (0 2) PRINT "MAY 5, 1864.  GRANT'S PLAN TO KEEP LEE ISOLATED BEGAN TO"
+3950 F(I:1220,Z:1550,I:1870) (0 2) PRINT "MAY 5, 1864.  GRANT'S PLAN TO KEEP LEE ISOLATED BEGAN TO"
   Origs: 1130:goto
   Dests: 3960:auto
-3960 F(I,Z) (0 2) PRINT "FAIL HERE, AND CONTINUED AT COLD HARBOR AND PETERSBURG."
+3960 F(I:1220,Z:1550,I:1870) (0 2) PRINT "FAIL HERE, AND CONTINUED AT COLD HARBOR AND PETERSBURG."
   Origs: 3950:auto
   Dests: 3970:auto
-3970 F(I,Z) (0 3) GOTO 1150
+3970 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3960:auto
   Dests: 1150:goto
-3980 F(I,Z) (0 2) PRINT "AUGUST, 1864.  SHERMAN AND THREE VETERAN ARMIES CONVERGED"
+3980 F(I:1220,Z:1550,I:1870) (0 2) PRINT "AUGUST, 1864.  SHERMAN AND THREE VETERAN ARMIES CONVERGED"
   Origs: 1130:goto
   Dests: 3990:auto
-3990 F(I,Z) (0 2) PRINT "ON ATLANTA AND DEALT THE DEATH BLOW TO THE CONFEDERACY."
+3990 F(I:1220,Z:1550,I:1870) (0 2) PRINT "ON ATLANTA AND DEALT THE DEATH BLOW TO THE CONFEDERACY."
   Origs: 3980:auto
   Dests: 4000:auto
-4000 F(I,Z) (0 3) GOTO 1150
+4000 F(I:1220,Z:1550,I:1870) (0 3) GOTO 1150
   Origs: 3990:auto
   Dests: 1150:goto
 4010 (0 1) END

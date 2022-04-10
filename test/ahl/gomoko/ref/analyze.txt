@@ -63,128 +63,128 @@ Halstead complexity:
    (0 2) PRINT
   Origs: 80:auto
   Dests: 110:auto
-110 F(E,F) (0 2) PRINT "WHAT IS YOUR BOARD SIZE (MIN 7/ MAX 19)";
-    F(E,F) (1 2) INPUT N
+110 F(E:510,F:510.1) (0 2) PRINT "WHAT IS YOUR BOARD SIZE (MIN 7/ MAX 19)";
+    F(E:510,F:510.1) (1 2) INPUT N
   Origs: 90:auto, 120:goto, 990:ifthen
   Dests: 115:auto
-115 F(E,F) (1 4) IF N > 6 THEN 117
+115 F(E:510,F:510.1) (1 4) IF N > 6 THEN 117
   Origs: 110:auto
   Dests: 116:auto, 117:ifthen
-116 F(E,F) (0 2) GOTO 120
+116 F(E:510,F:510.1) (0 2) GOTO 120
   Origs: 115:auto
   Dests: 120:goto
-117 F(E,F) (1 4) IF N < 20 THEN 210
+117 F(E:510,F:510.1) (1 4) IF N < 20 THEN 210
   Origs: 115:ifthen
   Dests: 120:auto, 210:ifthen
-120 F(E,F) (0 2) PRINT "I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19."
-    F(E,F) (0 3) GOTO 110
+120 F(E:510,F:510.1) (0 2) PRINT "I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19."
+    F(E:510,F:510.1) (0 3) GOTO 110
   Origs: 116:goto, 117:auto
   Dests: 110:goto
-210 F(I,E,F) (1 3) FOR I = 1 TO N
-    F(I,J,E,F) (1 3) FOR J = 1 TO N
-    F(I,J,E,F) (0 3) A(I, J) = 0
-    F(I,J,E,F) (0 1) NEXT J
-    F(I,E,F) (0 1) NEXT I
+210 F(I:210,E:510,F:510.1) (1 3) FOR I = 1 TO N
+    F(I:210,J:210.1,E:510,F:510.1) (1 3) FOR J = 1 TO N
+    F(I:210,J:210.1,E:510,F:510.1) (0 3) A(I, J) = 0
+    F(I:210,J:210.1,E:510,F:510.1) (0 1) NEXT J
+    F(I:210,E:510,F:510.1) (0 1) NEXT I
     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 117:ifthen
   Dests: 300:auto
-300 F(E,F) (0 2) PRINT
-    F(E,F) (0 2) PRINT "WE ALTERNATE MOVES.  YOU GO FIRST..."
-    F(E,F) (0 2) PRINT
+300 F(E:510,F:510.1) (0 2) PRINT
+    F(E:510,F:510.1) (0 2) PRINT "WE ALTERNATE MOVES.  YOU GO FIRST..."
+    F(E:510,F:510.1) (0 2) PRINT
   Origs: 210:auto
   Dests: 310:auto
-310 F(E,F) (0 2) PRINT "YOUR PLAY (I,J)";
-    F(E,F) (2 3) INPUT I, J
+310 F(E:510,F:510.1) (0 2) PRINT "YOUR PLAY (I,J)";
+    F(E:510,F:510.1) (2 3) INPUT I, J
   Origs: 300:auto, 340:goto, 420:goto, 660:goto
   Dests: 315:auto
-315 F(E,F) (0 2) PRINT
+315 F(E:510,F:510.1) (0 2) PRINT
   Origs: 310:auto
   Dests: 320:auto
-320 F(E,F) (1 6) IF I = -1 THEN 980
+320 F(E:510,F:510.1) (1 6) IF I = -1 THEN 980
   Origs: 315:auto
   Dests: 330:auto, 980:ifthen
-330 F(E,F) (0 3) X = I
-    F(E,F) (0 3) Y = J
-    F(E,F) (0 2) GOSUB 910
-    F(E,F) (1 4) IF L = 1 THEN 410
+330 F(E:510,F:510.1) (0 3) X = I
+    F(E:510,F:510.1) (0 3) Y = J
+    F(E:510,F:510.1) (0 2) GOSUB 910
+    F(E:510,F:510.1) (1 4) IF L = 1 THEN 410
   Origs: 320:auto
   Dests: 340:auto, 410:ifthen, 910:gosub
-340 F(E,F) (0 2) PRINT "ILLEGAL MOVE.  TRY AGAIN..."
-    F(E,F) (0 3) GOTO 310
+340 F(E:510,F:510.1) (0 2) PRINT "ILLEGAL MOVE.  TRY AGAIN..."
+    F(E:510,F:510.1) (0 3) GOTO 310
   Origs: 330:auto
   Dests: 310:goto
-410 F(E,F) (1 4) IF A(I, J) = 0 THEN 440
+410 F(E:510,F:510.1) (1 4) IF A(I, J) = 0 THEN 440
   Origs: 330:ifthen
   Dests: 420:auto, 440:ifthen
-420 F(E,F) (0 2) PRINT "SQUARE OCCUPIED.  TRY AGAIN..."
-    F(E,F) (0 3) GOTO 310
+420 F(E:510,F:510.1) (0 2) PRINT "SQUARE OCCUPIED.  TRY AGAIN..."
+    F(E:510,F:510.1) (0 3) GOTO 310
   Origs: 410:auto
   Dests: 310:goto
-440 F(E,F) (0 3) A(I, J) = 1
+440 F(E:510,F:510.1) (0 3) A(I, J) = 1
   Origs: 410:ifthen
   Dests: 510:auto
 500 (0 1) REM *** COMPUTER TRIES AN INTELLIGENT MOVE ***
   Origs: 
   Dests: 
-510 F(E,F) (1 4) FOR E = -1 TO 1
-    F(E,F) (1 4) FOR F = -1 TO 1
-    F(E,F) (1 8) IF E + F - E * F = 0 THEN 590
+510 F(E:510,F:510.1) (1 4) FOR E = -1 TO 1
+    F(E:510,F:510.1) (1 4) FOR F = -1 TO 1
+    F(E:510,F:510.1) (1 8) IF E + F - E * F = 0 THEN 590
   Origs: 440:auto
   Dests: 540:auto, 590:fornext, 590:ifthen
-540 F(E,F) (0 4) X = I + F
-    F(E,F) (0 4) Y = J + F
-    F(E,F) (0 2) GOSUB 910
+540 F(E:510,F:510.1) (0 4) X = I + F
+    F(E:510,F:510.1) (0 4) Y = J + F
+    F(E:510,F:510.1) (0 2) GOSUB 910
   Origs: 510:auto
   Dests: 570:auto, 910:gosub
-570 F(E,F) (1 4) IF L = 0 THEN 590
+570 F(E:510,F:510.1) (1 4) IF L = 0 THEN 590
   Origs: 540:auto
   Dests: 580:auto, 590:ifthen
-580 F(E,F) (1 4) IF A(X, Y) = 1 THEN 710
+580 F(E:510,F:510.1) (1 4) IF A(X, Y) = 1 THEN 710
   Origs: 570:auto
   Dests: 590:auto, 710:ifthen
-590 F(E,F) (0 1) NEXT F
-    F(E,F) (0 1) NEXT E
+590 F(E:510,F:510.1) (0 1) NEXT F
+    F(E:510,F:510.1) (0 1) NEXT E
   Origs: 510:fornext, 510:ifthen, 570:ifthen, 580:auto
   Dests: 610:auto
 600 (0 1) REM *** COMPUTER TRIES A RANDOM MOVE ***
   Origs: 
   Dests: 
-610 F(E,F) (0 4) X = INT(N * RND(1) + 1)
-    F(E,F) (0 4) Y = INT(N * RND(1) + 1)
-    F(E,F) (0 2) GOSUB 910
-    F(E,F) (1 5) IF L = 0 THEN 610
+610 F(E:510,F:510.1) (0 4) X = INT(N * RND(1) + 1)
+    F(E:510,F:510.1) (0 4) Y = INT(N * RND(1) + 1)
+    F(E:510,F:510.1) (0 2) GOSUB 910
+    F(E:510,F:510.1) (1 5) IF L = 0 THEN 610
   Origs: 590:auto, 650:ifthen, 750:ifthen
   Dests: 650:auto, 910:gosub
-650 F(E,F) (1 5) IF A(X, Y) <> 0 THEN 610
+650 F(E:510,F:510.1) (1 5) IF A(X, Y) <> 0 THEN 610
   Origs: 610:auto, 760:goto
   Dests: 610:ifthen, 660:auto
-660 F(E,F) (0 3) A(X, Y) = 2
-    F(E,F) (0 2) GOSUB 810
-    F(E,F) (0 3) GOTO 310
+660 F(E:510,F:510.1) (0 3) A(X, Y) = 2
+    F(E:510,F:510.1) (0 2) GOSUB 810
+    F(E:510,F:510.1) (0 3) GOTO 310
   Origs: 650:auto
   Dests: 310:goto, 810:gosub
-710 F(E,F) (0 4) X = I - E
-    F(E,F) (0 4) Y = J - F
-    F(E,F) (0 2) GOSUB 910
+710 F(E:510,F:510.1) (0 4) X = I - E
+    F(E:510,F:510.1) (0 4) Y = J - F
+    F(E:510,F:510.1) (0 2) GOSUB 910
   Origs: 580:ifthen
   Dests: 750:auto, 910:gosub
-750 F(E,F) (1 5) IF L = 0 THEN 610
+750 F(E:510,F:510.1) (1 5) IF L = 0 THEN 610
   Origs: 710:auto
   Dests: 610:ifthen, 760:auto
-760 F(E,F) (0 3) GOTO 650
+760 F(E:510,F:510.1) (0 3) GOTO 650
   Origs: 750:auto
   Dests: 650:goto
 800 (0 1) REM *** PRINT THE BOARD ***
   Origs: 
   Dests: 
-810 G(810) F(I) (1 3) FOR I = 1 TO N
-    G(810) F(I,J) (1 3) FOR J = 1 TO N
-    G(810) F(I,J) (0 2) PRINT A(I, J);
+810 G(810) F(I:810) (1 3) FOR I = 1 TO N
+    G(810) F(I:810,J:810.1) (1 3) FOR J = 1 TO N
+    G(810) F(I:810,J:810.1) (0 2) PRINT A(I, J);
   Origs: 660:gosub
   Dests: 840:auto, 840:fornext
-840 G(810) F(I,J) (0 1) NEXT J
-    G(810) F(I) (0 2) PRINT
-    G(810) F(I) (0 1) NEXT I
+840 G(810) F(I:810,J:810.1) (0 1) NEXT J
+    G(810) F(I:810) (0 2) PRINT
+    G(810) F(I:810) (0 1) NEXT I
     G(810) (0 2) PRINT
     G(810) (0 1) RETURN
   Origs: 810:auto, 810:fornext
@@ -209,18 +209,18 @@ Halstead complexity:
     G(910) (0 1) RETURN
   Origs: 910:ifthen, 920:ifthen, 930:ifthen, 940:ifthen
   Dests: 
-980 F(E,F) (0 2) PRINT
-    F(E,F) (0 2) PRINT "THANKS FOR THE GAME!!"
+980 F(E:510,F:510.1) (0 2) PRINT
+    F(E:510,F:510.1) (0 2) PRINT "THANKS FOR THE GAME!!"
   Origs: 320:ifthen
   Dests: 985:auto
-985 F(E,F) (0 2) PRINT "PLAY AGAIN (1 FOR YES, 0 FOR NO)";
-    F(E,F) (1 2) INPUT Q
+985 F(E:510,F:510.1) (0 2) PRINT "PLAY AGAIN (1 FOR YES, 0 FOR NO)";
+    F(E:510,F:510.1) (1 2) INPUT Q
   Origs: 980:auto
   Dests: 990:auto
-990 F(E,F) (1 5) IF Q = 1 THEN 110
+990 F(E:510,F:510.1) (1 5) IF Q = 1 THEN 110
   Origs: 985:auto
   Dests: 110:ifthen, 999:auto
-999 F(E,F) (0 1) END
+999 F(E:510,F:510.1) (0 1) END
     WARNING: Terminating statement in FOR/NEXT
   Origs: 990:auto
   Dests: :stop

@@ -70,41 +70,41 @@ Halstead complexity:
 90 (0 5) DATA 1, 0, 1, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, -1, 0, -1, 15
   Origs: 
   Dests: 
-120 F(X) (1 3) FOR X = 0 TO 7
-    F(X,Y) (1 3) FOR Y = 0 TO 7
-    F(X,Y) (1 2) READ J
-    F(X,Y) (1 4) IF J = 15 THEN 180
+120 F(X:120) (1 3) FOR X = 0 TO 7
+    F(X:120,Y:120.1) (1 3) FOR Y = 0 TO 7
+    F(X:120,Y:120.1) (1 2) READ J
+    F(X:120,Y:120.1) (1 4) IF J = 15 THEN 180
   Origs: 80:auto
   Dests: 160:auto, 180:ifthen, 200:fornext
-160 F(X,Y) (0 3) S(X, Y) = J
-    F(X,Y) (0 2) GOTO 200
+160 F(X:120,Y:120.1) (0 3) S(X, Y) = J
+    F(X:120,Y:120.1) (0 2) GOTO 200
   Origs: 120:auto
   Dests: 200:goto
-180 F(X,Y) (0 1) RESTORE
-    F(X,Y) (1 2) READ S(X, Y)
+180 F(X:120,Y:120.1) (0 1) RESTORE
+    F(X:120,Y:120.1) (1 2) READ S(X, Y)
   Origs: 120:ifthen
   Dests: 200:auto
-200 F(X,Y) (0 1) NEXT Y, X
+200 F(X:120,Y:120.1) (0 1) NEXT Y, X
   Origs: 120:fornext, 160:goto, 180:auto
   Dests: 230:auto
-230 F(X) (1 3) FOR X = 0 TO 7
-    F(X,Y) (1 3) FOR Y = 0 TO 7
-    F(X,Y) (1 6) IF S(X, Y) > -1 THEN 350
+230 F(X:230) (1 3) FOR X = 0 TO 7
+    F(X:230,Y:230.1) (1 3) FOR Y = 0 TO 7
+    F(X:230,Y:230.1) (1 6) IF S(X, Y) > -1 THEN 350
   Origs: 200:auto, 1830:goto
   Dests: 310:auto, 350:fornext, 350:ifthen
-310 F(X,Y) (2 10) IF S(X, Y) = -1 THEN FOR A = -1 TO 1 STEP 2
-    F(X,Y) (0 3) B = G
-    F(X,Y) (0 2) GOSUB 650
-    F(X,Y) (0 1) NEXT A
+310 F(X:230,Y:230.1) (2 10) IF S(X, Y) = -1 THEN FOR A = -1 TO 1 STEP 2
+    F(X:230,Y:230.1) (0 3) B = G
+    F(X:230,Y:230.1) (0 2) GOSUB 650
+    F(X:230,Y:230.1) (0 1) NEXT A
   Origs: 230:auto
   Dests: 330:auto, 650:gosub
-330 F(X,Y) (2 10) IF S(X, Y) = -2 THEN FOR A = -1 TO 1 STEP 2
-    F(X,Y,B) (1 5) FOR B = -1 TO 1 STEP 2
-    F(X,Y,B) (0 2) GOSUB 650
-    F(X,Y,B) (0 1) NEXT B, A
+330 F(X:230,Y:230.1) (2 10) IF S(X, Y) = -2 THEN FOR A = -1 TO 1 STEP 2
+    F(X:230,Y:230.1,B:330.1) (1 5) FOR B = -1 TO 1 STEP 2
+    F(X:230,Y:230.1,B:330.1) (0 2) GOSUB 650
+    F(X:230,Y:230.1,B:330.1) (0 1) NEXT B, A
   Origs: 310:auto
   Dests: 350:auto, 650:gosub
-350 F(X,Y) (0 1) NEXT Y, X
+350 F(X:230,Y:230.1) (0 1) NEXT Y, X
     (0 2) GOTO 1140
   Origs: 230:fornext, 230:ifthen, 330:auto
   Dests: 1140:goto
@@ -143,21 +143,21 @@ Halstead complexity:
 980 (1 10) IF U = 0 OR U = 7 THEN Q = Q + 1
   Origs: 960:auto
   Dests: 1030:auto
-1030 F(C) (1 5) FOR C = -1 TO 1 STEP 2
-     F(C) (1 13) IF U + C < 0 OR U + C > 7 OR V + G < 0 THEN 1080
+1030 F(C:1030) (1 5) FOR C = -1 TO 1 STEP 2
+     F(C:1030) (1 13) IF U + C < 0 OR U + C > 7 OR V + G < 0 THEN 1080
   Origs: 980:auto
   Dests: 1035:auto, 1080:fornext, 1080:ifthen
-1035 F(C) (1 7) IF S(U + C, V + G) < 0 THEN Q = Q + 1
-     F(C) (0 2) GOTO 1080
+1035 F(C:1030) (1 7) IF S(U + C, V + G) < 0 THEN Q = Q + 1
+     F(C:1030) (0 2) GOTO 1080
   Origs: 1030:auto
   Dests: 1040:auto, 1080:goto
-1040 F(C) (1 13) IF U - C < 0 OR U - C > 7 OR V - G > 7 THEN 1080
+1040 F(C:1030) (1 13) IF U - C < 0 OR U - C > 7 OR V - G > 7 THEN 1080
   Origs: 1035:auto
   Dests: 1045:auto, 1080:ifthen
-1045 F(C) (1 18) IF S(U + C, V + G) > 0 AND (S(U - C, V - G) = 0 OR (U - C = X AND V - G = Y)) THEN Q = Q - 2
+1045 F(C:1030) (1 18) IF S(U + C, V + G) > 0 AND (S(U - C, V - G) = 0 OR (U - C = X AND V - G = Y)) THEN Q = Q - 2
   Origs: 1040:auto
   Dests: 1080:auto
-1080 F(C) (0 1) NEXT C
+1080 F(C:1030) (0 1) NEXT C
      (1 6) IF Q > R(0) THEN R(0) = Q
      (0 3) R(1) = X
      (0 3) R(2) = Y
@@ -193,17 +193,17 @@ Halstead complexity:
 1340 (0 3) X = R(3)
      (0 3) Y = R(4)
      (1 9) IF S(X, Y) = -1 THEN B = -2
-     F(A) (1 5) FOR A = -2 TO 2 STEP 4
-     F(A) (0 2) GOSUB 1370
+     F(A:1340.3) (1 5) FOR A = -2 TO 2 STEP 4
+     F(A:1340.3) (0 2) GOSUB 1370
   Origs: 1330:auto
   Dests: 1350:auto, 1360:fornext, 1370:gosub
-1350 F(A) (2 10) IF S(X, Y) = -2 THEN FOR A = -2 TO 2 STEP 4
-     F(A,B) (1 5) FOR B = -2 TO 2 STEP 4
-     F(A,B) (0 2) GOSUB 1370
-     F(A,B) (0 1) NEXT B
+1350 F(A:1340.3) (2 10) IF S(X, Y) = -2 THEN FOR A = -2 TO 2 STEP 4
+     F(A:1340.3,B:1350.1) (1 5) FOR B = -2 TO 2 STEP 4
+     F(A:1340.3,B:1350.1) (0 2) GOSUB 1370
+     F(A:1340.3,B:1350.1) (0 1) NEXT B
   Origs: 1340:auto
   Dests: 1360:auto, 1360:fornext, 1370:gosub
-1360 F(A) (0 1) NEXT A
+1360 F(A:1340.3) (0 1) NEXT A
      (1 9) IF R(0) <> -99 THEN PRINT "TO" R(3); R(4);
      (0 4) R(0) = -99
      (0 3) GOTO 1240
@@ -226,50 +226,50 @@ Halstead complexity:
 1420 (0 2) PRINT
      (0 2) PRINT
      (0 2) PRINT
-     F(Y) (1 5) FOR Y = 7 TO 0 STEP -1
-     F(Y,X) (1 3) FOR X = 0 TO 7
-     F(Y,X) (0 4) I = 5 * X
-     F(Y,X) (0 3) PRINT TAB(I);
+     F(Y:1420.3) (1 5) FOR Y = 7 TO 0 STEP -1
+     F(Y:1420.3,X:1420.4) (1 3) FOR X = 0 TO 7
+     F(Y:1420.3,X:1420.4) (0 4) I = 5 * X
+     F(Y:1420.3,X:1420.4) (0 3) PRINT TAB(I);
   Origs: 1240:goto, 1310:ifthen, 1365:goto
   Dests: 1430:auto, 1550:fornext
-1430 F(Y,X) (1 5) IF S(X, Y) = 0 THEN PRINT ".";
+1430 F(Y:1420.3,X:1420.4) (1 5) IF S(X, Y) = 0 THEN PRINT ".";
   Origs: 1420:auto
   Dests: 1470:auto
-1470 F(Y,X) (1 5) IF S(X, Y) = 1 THEN PRINT "O";
+1470 F(Y:1420.3,X:1420.4) (1 5) IF S(X, Y) = 1 THEN PRINT "O";
   Origs: 1430:auto
   Dests: 1490:auto
-1490 F(Y,X) (1 7) IF S(X, Y) = -1 THEN PRINT "X";
+1490 F(Y:1420.3,X:1420.4) (1 7) IF S(X, Y) = -1 THEN PRINT "X";
   Origs: 1470:auto
   Dests: 1510:auto
-1510 F(Y,X) (1 7) IF S(X, Y) = -2 THEN PRINT "X*";
+1510 F(Y:1420.3,X:1420.4) (1 7) IF S(X, Y) = -2 THEN PRINT "X*";
   Origs: 1490:auto
   Dests: 1530:auto
-1530 F(Y,X) (1 5) IF S(X, Y) = 2 THEN PRINT "O*";
+1530 F(Y:1420.3,X:1420.4) (1 5) IF S(X, Y) = 2 THEN PRINT "O*";
   Origs: 1510:auto
   Dests: 1550:auto
-1550 F(Y,X) (0 1) NEXT X
-     F(Y) (0 2) PRINT " "
-     F(Y) (0 2) PRINT
-     F(Y) (0 1) NEXT Y
+1550 F(Y:1420.3,X:1420.4) (0 1) NEXT X
+     F(Y:1420.3) (0 2) PRINT " "
+     F(Y:1420.3) (0 2) PRINT
+     F(Y:1420.3) (0 1) NEXT Y
      (0 2) PRINT
   Origs: 1420:fornext, 1530:auto
   Dests: 1552:auto
-1552 F(L) (1 3) FOR L = 0 TO 7
+1552 F(L:1552) (1 3) FOR L = 0 TO 7
   Origs: 1550:auto
   Dests: 1554:fornext, 1562:fornext
-1554 F(L,M) (1 3) FOR M = 0 TO 7
+1554 F(L:1552,M:1554) (1 3) FOR M = 0 TO 7
   Origs: 1552:fornext
   Dests: 1556:fornext, 1560:fornext
-1556 F(L,M) (1 9) IF S(L, M) = 1 OR S(L, M) = 2 THEN Z = 1
+1556 F(L:1552,M:1554) (1 9) IF S(L, M) = 1 OR S(L, M) = 2 THEN Z = 1
   Origs: 1554:fornext
   Dests: 1558:auto
-1558 F(L,M) (1 13) IF S(L, M) = -1 OR S(L, M) = -2 THEN T = 1
+1558 F(L:1552,M:1554) (1 13) IF S(L, M) = -1 OR S(L, M) = -2 THEN T = 1
   Origs: 1556:auto
   Dests: 1560:auto
-1560 F(L,M) (0 1) NEXT M
+1560 F(L:1552,M:1554) (0 1) NEXT M
   Origs: 1554:fornext, 1558:auto
   Dests: 1562:auto
-1562 F(L) (0 1) NEXT L
+1562 F(L:1552) (0 1) NEXT L
   Origs: 1552:fornext, 1560:auto
   Dests: 1564:auto
 1564 (1 4) IF Z <> 1 THEN 1885

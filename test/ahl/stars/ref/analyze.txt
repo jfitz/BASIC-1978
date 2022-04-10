@@ -70,82 +70,82 @@ Halstead complexity:
 270 (0 1) REM *** COMPUTER THINKS OF A NUMBER
   Origs: 
   Dests: 
-280 F(K) (0 2) PRINT
+280 F(K:330) (0 2) PRINT
   Origs: 190:ifthen, 260:auto, 650:goto
   Dests: 290:auto
-290 F(K) (0 2) PRINT
+290 F(K:330) (0 2) PRINT
   Origs: 280:auto
   Dests: 300:auto
-300 F(K) (0 4) X = INT(A * RND(1) + 1)
+300 F(K:330) (0 4) X = INT(A * RND(1) + 1)
   Origs: 290:auto
   Dests: 310:auto
-310 F(K) (0 2) PRINT "OK, I AM THINKING OF A NUMBER, START GUESSING."
+310 F(K:330) (0 2) PRINT "OK, I AM THINKING OF A NUMBER, START GUESSING."
   Origs: 300:auto
   Dests: 330:auto
 320 (0 1) REM *** GUESSING BEGINS, HUMAN GETS M GUESSES
   Origs: 
   Dests: 
-330 F(K) (1 3) FOR K = 1 TO M
+330 F(K:330) (1 3) FOR K = 1 TO M
   Origs: 310:auto
   Dests: 340:fornext, 530:fornext
-340 F(K) (0 2) PRINT
+340 F(K:330) (0 2) PRINT
   Origs: 330:fornext
   Dests: 350:auto
-350 F(K) (0 2) PRINT "YOUR GUESS";
+350 F(K:330) (0 2) PRINT "YOUR GUESS";
   Origs: 340:auto
   Dests: 360:auto
-360 F(K) (1 2) INPUT G
+360 F(K:330) (1 2) INPUT G
   Origs: 350:auto
   Dests: 370:auto
-370 F(K) (1 4) IF G = X THEN 600
+370 F(K:330) (1 4) IF G = X THEN 600
   Origs: 360:auto
   Dests: 380:auto, 600:ifthen
-380 F(K) (0 4) D = ABS(G - X)
+380 F(K:330) (0 4) D = ABS(G - X)
   Origs: 370:auto
   Dests: 390:auto
-390 F(K) (1 4) IF D >= 64 THEN 510
+390 F(K:330) (1 4) IF D >= 64 THEN 510
   Origs: 380:auto
   Dests: 400:auto, 510:ifthen
-400 F(K) (1 4) IF D >= 32 THEN 500
+400 F(K:330) (1 4) IF D >= 32 THEN 500
   Origs: 390:auto
   Dests: 410:auto, 500:ifthen
-410 F(K) (1 4) IF D >= 16 THEN 490
+410 F(K:330) (1 4) IF D >= 16 THEN 490
   Origs: 400:auto
   Dests: 420:auto, 490:ifthen
-420 F(K) (1 4) IF D >= 8 THEN 480
+420 F(K:330) (1 4) IF D >= 8 THEN 480
   Origs: 410:auto
   Dests: 430:auto, 480:ifthen
-430 F(K) (1 4) IF D >= 4 THEN 470
+430 F(K:330) (1 4) IF D >= 4 THEN 470
   Origs: 420:auto
   Dests: 440:auto, 470:ifthen
-440 F(K) (1 4) IF D >= 2 THEN 460
+440 F(K:330) (1 4) IF D >= 2 THEN 460
   Origs: 430:auto
   Dests: 450:auto, 460:ifthen
-450 F(K) (0 2) PRINT "*";
+450 F(K:330) (0 2) PRINT "*";
   Origs: 440:auto
   Dests: 460:auto
-460 F(K) (0 2) PRINT "*";
+460 F(K:330) (0 2) PRINT "*";
   Origs: 440:ifthen, 450:auto
   Dests: 470:auto
-470 F(K) (0 2) PRINT "*";
+470 F(K:330) (0 2) PRINT "*";
   Origs: 430:ifthen, 460:auto
   Dests: 480:auto
-480 F(K) (0 2) PRINT "*";
+480 F(K:330) (0 2) PRINT "*";
   Origs: 420:ifthen, 470:auto
   Dests: 490:auto
-490 F(K) (0 2) PRINT "*";
+490 F(K:330) (0 2) PRINT "*";
   Origs: 410:ifthen, 480:auto
   Dests: 500:auto
-500 F(K) (0 2) PRINT "*";
+500 F(K:330) (0 2) PRINT "*";
   Origs: 400:ifthen, 490:auto
   Dests: 510:auto
-510 F(K) (0 2) PRINT "*";
+510 F(K:330) (0 2) PRINT "*";
   Origs: 390:ifthen, 500:auto
   Dests: 520:auto
-520 F(K) (0 2) PRINT
+520 F(K:330) (0 2) PRINT
   Origs: 510:auto
   Dests: 530:auto
-530 F(K) (0 1) NEXT K
+530 F(K:330) (0 1) NEXT K
   Origs: 330:fornext, 520:auto
   Dests: 550:auto
 540 (0 1) REM *** DID NOT GUESS IN M GUESSES
@@ -163,24 +163,24 @@ Halstead complexity:
 590 (0 1) REM *** WE HAVE A WINNER
   Origs: 
   Dests: 
-600 F(K) (0 2) PRINT
-    F(K,N) (1 3) FOR N = 1 TO 79
+600 F(K:330) (0 2) PRINT
+    F(K:330,N:600.1) (1 3) FOR N = 1 TO 79
   Origs: 370:ifthen
   Dests: 610:fornext, 620:fornext
-610 F(K,N) (0 2) PRINT "*";
+610 F(K:330,N:600.1) (0 2) PRINT "*";
   Origs: 600:fornext
   Dests: 620:auto
-620 F(K,N) (0 1) NEXT N
+620 F(K:330,N:600.1) (0 1) NEXT N
   Origs: 600:fornext, 610:auto
   Dests: 630:auto
-630 F(K) (0 2) PRINT
-    F(K) (0 2) PRINT
+630 F(K:330) (0 2) PRINT
+    F(K:330) (0 2) PRINT
   Origs: 620:auto
   Dests: 640:auto
-640 F(K) (0 4) PRINT "YOU GOT IT IN"; K; "GUESSES!!!  LET'S PLAY AGAIN..."
+640 F(K:330) (0 4) PRINT "YOU GOT IT IN"; K; "GUESSES!!!  LET'S PLAY AGAIN..."
   Origs: 630:auto
   Dests: 650:auto
-650 F(K) (0 3) GOTO 280
+650 F(K:330) (0 3) GOTO 280
   Origs: 580:goto, 640:auto
   Dests: 280:goto
 660 (0 1) END
