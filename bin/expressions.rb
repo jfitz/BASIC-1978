@@ -2120,6 +2120,7 @@ class AbstractExpressionSet
 
     # build elements and parse into expression
     elements = tokens_to_elements(tokens)
+    elements = units_into_numerics(elements)
     parser = Parser.new(my_shape)
     elements.each { |element| parser.parse(element) }
     @expressions = parser.expressions
@@ -2300,6 +2301,24 @@ class AbstractExpressionSet
     element
   end
 
+  def units_into_numerics(elements)
+    new_elements = []
+
+    prev_element = nil
+    
+    elements.each do |element|
+      if element.units_constant? && !prev_element.nil? && prev_element.numeric_constant?
+        prev_element.units = element.value
+      else
+        new_elements << element
+      end
+
+      prev_element = element
+    end
+
+    new_elements
+  end
+
   def binary_classes
     # first match is used; select order with care
     # UserFunction before VariableName
@@ -2325,7 +2344,8 @@ class AbstractExpressionSet
       NumericConstant,
       UserFunctionName,
       VariableName,
-      TextConstant
+      TextConstant,
+      UnitsConstant
     ]
   end
 
@@ -2345,7 +2365,8 @@ class AbstractExpressionSet
       NumericConstant,
       UserFunctionName,
       VariableName,
-      TextConstant
+      TextConstant,
+      UnitsConstant
     ]
   end
 end
