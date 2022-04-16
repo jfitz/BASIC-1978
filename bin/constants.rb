@@ -615,6 +615,7 @@ class NumericConstant < AbstractValueElement
     @symbol_text = text.to_s
     @value = float_to_possible_int(f)
     @numeric_constant = true
+    @units = {}
   end
 
   def dump
@@ -933,6 +934,10 @@ class NumericConstant < AbstractValueElement
     printer.print_item s
   end
 
+  def to_dict
+    @value
+  end
+
   def compatible?(other)
     other.numeric_constant? || other.boolean_constant?
   end
@@ -944,8 +949,14 @@ class NumericConstant < AbstractValueElement
     digits = @value.to_s
     units = ''
 
-    unless @units.nil?
-      units = "{#{@units.map(&:to_s).join(' ')}}"
+    unless @units.empty?
+      units_s = []
+
+      @units.each do |name, power|
+        units_s << "#{name}#{power.to_s}"
+      end
+
+      units = "{#{units_s.join(' ')}}"
     end
 
     lead_space + digits + units
@@ -1348,6 +1359,10 @@ class IntegerConstant < AbstractValueElement
     printer.print_item s
   end
 
+  def to_dict
+    @value
+  end
+
   def compatible?(other)
     other.numeric_constant? || other.boolean_constant?
   end
@@ -1360,8 +1375,14 @@ class IntegerConstant < AbstractValueElement
 
     units = ''
 
-    unless @units.nil?
-      units = "{#{@units.map(&:to_s).join(' ')}}"
+    unless @units.empty?
+      units_s = []
+
+      @units.each do |name, power|
+        units_s << "#{name}#{power.to_s}"
+      end
+
+      units = "{#{units_s.join(' ')}}"
     end
 
     lead_space + digits + units
