@@ -547,8 +547,8 @@ class NumericConstant < AbstractValueElement
   end
 
   def self.numeric(text)
-    # nnn(E+nn)
     case text
+    # nnn(E+nn)
     when /\A\s*[+-]?\d+(E+?\d+)?\z/
       text.to_f.to_i
     # nnn(E-nn)
@@ -598,7 +598,7 @@ class NumericConstant < AbstractValueElement
       @symbol = true
     end
 
-    raise BASICSyntaxError, "'#{text}' is not a number" if f.nil?
+    raise(BASICSyntaxError, "'#{text}' is not a number") if f.nil?
 
     precision = $options['precision'].value
     if precision != 'INFINITE' && f != 0 && f != Float::INFINITY
@@ -689,13 +689,11 @@ class NumericConstant < AbstractValueElement
   end
 
   def posate
-    f = @value
-    NumericConstant.new(f)
+    NumericConstant.new(@value)
   end
 
   def negate
-    f = -@value
-    NumericConstant.new(f)
+    NumericConstant.new(-@value)
   end
 
   def filehandle
@@ -995,6 +993,7 @@ class IntegerConstant < AbstractValueElement
     @operand = true
     @precedence = 0
     @numeric_constant = true
+    @units = {}
   end
 
   def zero?

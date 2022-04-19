@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# BASIC compound class
+# Compound for arrays and matrices
 class AbstractCompound
   def self.make_array(dims, init_value)
     values = {}
@@ -421,36 +421,6 @@ class AbstractCompound
     end
 
     min_value
-  end
-
-  def sum_1
-    n_cols = @dimensions[0].to_i
-
-    base = $options['base'].value
-
-    sum = 0
-
-    (base..n_cols).each do |col|
-      value = get_value_1(col)
-      sum += value.to_f
-    end
-
-    sum
-  end
-
-  def prod_1
-    n_cols = @dimensions[0].to_i
-
-    base = $options['base'].value
-
-    prod = 1
-
-    (base..n_cols).each do |col|
-      value = get_value_1(col)
-      prod *= value.to_f
-    end
-
-    prod
   end
 
   def median_1_avg
@@ -901,6 +871,36 @@ class BASICArray < AbstractCompound
   end
 
   private
+
+  def sum_1
+    n_cols = @dimensions[0].to_i
+
+    base = $options['base'].value
+
+    sum = 0
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      sum += value.to_f
+    end
+
+    sum
+  end
+
+  def prod_1
+    n_cols = @dimensions[0].to_i
+
+    base = $options['base'].value
+
+    prod = 1
+
+    (base..n_cols).each do |col|
+      value = get_value_1(col)
+      prod *= value.to_f
+    end
+
+    prod
+  end
 
   def print_1(printer, formats)
     n_cols = @dimensions[0].to_i
@@ -1794,10 +1794,6 @@ class Expression
     @elements.each(&:uncache)
   end
 
-  def empty?
-    @elements.empty?
-  end
-
   def set_content_type
     stack = []
 
@@ -1817,6 +1813,18 @@ class Expression
     end
   end
 
+  def set_constant
+    stack = []
+
+    @elements.each do |element|
+      element.set_constant(stack)
+    end
+  end
+
+  def empty?
+    @elements.empty?
+  end
+
   def content_type
     content_type = :empty
 
@@ -1826,14 +1834,6 @@ class Expression
     end
 
     content_type
-  end
-
-  def set_constant
-    stack = []
-
-    @elements.each do |element|
-      element.set_constant(stack)
-    end
   end
 
   def shape
@@ -2053,7 +2053,8 @@ class Expression
       elsif element.operator?
         is_ref = false
 
-        opers << XrefEntry.new(element.to_s, element.sigils, is_ref)
+        sigils = element.sigils
+        opers << XrefEntry.new(element.to_s, sigils, is_ref)
       end
     end
 
@@ -2308,7 +2309,7 @@ class AbstractExpressionSet
     
     elements.each do |element|
       if element.units_constant? && !prev_element.nil? && prev_element.numeric_constant?
-        prev_element.units = element.value
+        prev_element.units = element.to_dict
       else
         new_elements << element
       end
