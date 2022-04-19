@@ -736,8 +736,7 @@ class NumericConstant < AbstractValueElement
   end
 
   def add(other)
-    message =
-      "Type mismatch (#{content_type}/#{other.content_type}) in add()"
+    message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -932,10 +931,6 @@ class NumericConstant < AbstractValueElement
     s = to_formatted_s
     s = s.upcase
     printer.print_item s
-  end
-
-  def to_dict
-    @value
   end
 
   def compatible?(other)
@@ -1357,10 +1352,6 @@ class IntegerConstant < AbstractValueElement
     s = to_formatted_s
     s = s.upcase
     printer.print_item s
-  end
-
-  def to_dict
-    @value
   end
 
   def compatible?(other)
@@ -1878,6 +1869,10 @@ class UnitsConstant < AbstractValueElement
 
   def to_formatted_s
     "{#{@value.map(&:to_s).join(' ')}}"
+  end
+
+  def to_dict
+    @value
   end
 
   def compatible?(other)
