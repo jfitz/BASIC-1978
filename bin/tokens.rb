@@ -26,7 +26,6 @@ class AbstractToken
       pretty_tokens << WhitespaceToken.new(' ') unless
         token.separator? ||
         (token.group_start? && prev_is_variable) ||
-        (token.units? && prev.numeric_constant?) ||
         token.group_end? ||
         prev.group_start? ||
         (prev.operator? && prev.to_s != 'NOT' && !prev2_is_operand) ||
@@ -84,6 +83,28 @@ class AbstractToken
     pretty_lines << pretty_line
   end
 
+  def self.units_to_s(units)
+    units_t = ''
+
+    unless units.empty?
+      units_s = []
+
+      units.each do |name, power|
+        if power == 1
+          # don't print power when it is 1
+          units_s << "#{name}"
+        else
+          # print all other powers
+          units_s << "#{name}#{power.to_s}"
+        end
+      end
+
+      units_t = "{#{units_s.join(' ')}}"
+    end
+
+    units_t
+  end
+
   attr_reader :text
 
   def initialize(text)
@@ -98,7 +119,6 @@ class AbstractToken
     @is_text_constant = false
     @is_numeric_constant = false
     @is_boolean_constant = false
-    @is_units_constant = false
     @is_user_function = false
     @is_variable = false
     @is_statement_separator = false
@@ -171,10 +191,6 @@ class AbstractToken
     @is_boolean_constant
   end
 
-  def units?
-    @is_units_constant
-  end
-
   def user_function?
     @is_user_function
   end
@@ -202,6 +218,67 @@ class AbstractToken
 
   def invalid?
     @is_invalid
+  end
+
+  private
+ 
+  def make_units(text)
+    my_units = {}
+
+    return my_units unless text.include?('{') && text[-1] == '}'
+
+    i = text.index('{')
+    units_s = text[i..-2]
+    
+    name = ''
+    power_s = ''
+    last_c = ''
+
+    units_s.each_char do |c|
+      if is_alpha(c)
+        if !name.empty? && (is_digit(last_c) || '+-'.include?(last_c))
+          power_s = '1' if '+-'.include?(power_s)
+          my_units[name] = power_s.to_i
+          name = ''
+          power_s = ''
+        end
+
+        name += c
+
+        last_c = c
+      end
+
+      if is_digit(c)
+        power_s += c
+
+        last_c = c
+      end
+
+      if '+-'.include?(c) && power_s.empty?
+        power_s += c
+
+        last_c = c
+      end
+    end
+
+    unless name.empty?
+      power_s = '1' if '+-'.include?(power_s)
+      my_units[name] = power_s.to_i
+    end
+
+    my_units
+  end
+
+  def is_digit(c)
+    '0' <= c && c <= '9'
+  end
+
+  def is_alpha(c)
+    'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z'
+  end
+
+  def is_alnum(c)
+    'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z' || '0' <= c && c <= '9'
   end
 end
 
@@ -351,10 +428,13 @@ end
 
 # numeric constant token
 class NumericConstantToken < AbstractToken
+  attr_reader :units
+
   def initialize(text)
     super
 
     @is_numeric_constant = true
+    @units = make_units(@text)
   end
 
   def <=>(other)
@@ -374,7 +454,7 @@ class NumericConstantToken < AbstractToken
   end
 
   def pretty
-    float_to_possible_int(@text)
+    float_to_possible_int(@text) + AbstractToken.units_to_s(@units)
   end
 
   private
@@ -383,6 +463,7 @@ class NumericConstantToken < AbstractToken
     f = s.to_f
     i = f.to_i
     frac = f - i
+
     if frac.zero? || (!i.zero? && frac.abs < 1e-7)
       s1 = '%G' % i.to_f
       s2 = i.to_s
@@ -397,10 +478,13 @@ end
 
 # integer constant token
 class IntegerConstantToken < AbstractToken
+  attr_reader :units
+
   def initialize(text)
     super
 
     @is_numeric_constant = true
+    @units = make_units(@text)
   end
 
   def <=>(other)
@@ -458,66 +542,6 @@ class BooleanConstantToken < AbstractToken
 
   def to_i
     @text.to_f.to_i
-  end
-end
-
-# units constant token
-class UnitsConstantToken < AbstractToken
-  attr_reader :values
-
-  def initialize(text)
-    super
-
-    @is_units_constant = true
-
-    @values = {}
-
-    name = ''
-    power_s = ''
-    last_c = ''
-
-    text.each_char do |c|
-      if is_alpha(c)
-        if !name.empty? && (is_digit(last_c) || '+-'.include?(last_c))
-          power_s = '1' if '+-'.include?(power_s)
-          @values[name] = power_s.to_i
-          name = ''
-          power_s = ''
-        end
-        name += c
-
-        last_c = c
-      end
-
-      if is_digit(c)
-        power_s += c
-
-        last_c = c
-      end
-
-      if '+-'.include?(c) && power_s.empty?
-        power_s += c
-
-        last_c = c
-      end
-    end
-
-    unless name.empty?
-      power_s = '1' if '+-'.include?(power_s)
-      @values[name] = power_s.to_i
-    end
-  end
-
-  def is_digit(c)
-    '0' <= c && c <= '9'
-  end
-
-  def is_alpha(c)
-    'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z'
-  end
-
-  def is_alnum(c)
-    'A' <= c && c <= 'Z' || 'a' <= c && c <= 'z' || '0' <= c && c <= '9'
   end
 end
 

@@ -213,14 +213,14 @@ end
 class InputNumberTokenBuilder
   def try(text)
     regexes = [
-      /\A[+-]?\d+/,
-      /\A[+-]?\d+\./,
-      /\A[+-]?\d+E[+-]?\d+/,
-      /\A[+-]?\d+\.E[+-]?\d+/,
-      /\A[+-]?\d+\.\d+/,
-      /\A[+-]?\d+\.\d+E[+-]?\d+/,
-      /\A[+-]?\.\d+/,
-      /\A[+-]?\.\d+E[+-]?\d+/
+      /\A[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?/,
+      /\A[+-]?\d+\.(\{[A-Za-z0-9\+\- _]*\})?/,
+      /\A[+-]?\d+E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?/,
+      /\A[+-]?\d+\.E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?/,
+      /\A[+-]?\d+\.\d+(\{[A-Za-z0-9\+\- _]*\})?/,
+      /\A[+-]?\d+\.\d+E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?/,
+      /\A[+-]?\.\d+(\{[A-Za-z0-9\+\- _]*\})?/,
+      /\A[+-]?\.\d+E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?/
     ]
 
     @token = ''
@@ -243,12 +243,15 @@ class NumberTokenBuilder
 
   def try(text)
     candidate = ''
+
     if !text.empty? && text[0] != ' '
       i = 0
       accepted = true
+
       while i < text.size && accepted
         c = text[i]
         accepted = accept?(candidate, c)
+
         if accepted
           candidate += c
           i += 1
@@ -270,16 +273,18 @@ class NumberTokenBuilder
     # check that string conforms to one of these
     regexes = [
       /#./,
-      /\A\d+\z/,
-      /\A\d+\.\z/,
-      /\A\d+E[+-]?\d+\z/,
-      /\A\d+\.E[+-]?\d+\z/,
-      /\A\d+\.\d+(E[+-]?\d+)?\z/,
-      /\A\.\d+(E[+-]?\d+)?\z/
+      /\A\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A\d+\.(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A\d+E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A\d+\.E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A\d+\.\d+(E[+-]?\d+)?(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A\.\d+(E[+-]?\d+)?(\{[A-Za-z0-9\+\- _]*\})?\z/
     ]
 
     @token = ''
+
     regexes.each { |regex| regex.match(candidate) { |m| @token = m[0] } }
+
     @count = 0
     @count = i unless @token.empty?
     !@count.zero?
@@ -294,17 +299,29 @@ class NumberTokenBuilder
   def accept?(candidate, c)
     result = false
 
-    # can always append a digit
-    result = true if c =~ /[0-9]/
-    # can append a decimal point if no decimal point and no E
-    result = true if c == '.' && candidate.count('.', 'E').zero?
-    # can append E if no E and at least one digit (not just decimal point)
-    result = true if c == 'E' &&
-                     candidate.count('E').zero? &&
-                     !candidate.count('0-9').zero?
-    # can append sign if no chars or last char was E
-    result = true if c == '+' && (candidate.empty? || candidate[-1] == 'E')
-    result = true if c == '-' && (candidate.empty? || candidate[-1] == 'E')
+    return false if candidate.size.positive? && candidate[-1] == '}'
+
+    if candidate.include?('{')
+      result = true if c =~ /[\w _\+\-\}]/
+    else
+      # can always append a digit
+      result = true if c =~ /[0-9]/
+
+      # can append a decimal point if no decimal point and no E
+      result = true if c == '.' && candidate.count('.', 'E').zero?
+
+      # can append E if no E and at least one digit (not just decimal point)
+      result = true if c == 'E' &&
+                       candidate.count('E').zero? &&
+                       !candidate.count('0-9').zero?
+
+      # can append sign if no chars or last char was E
+      result = true if c == '+' && (candidate.empty? || candidate[-1] == 'E')
+      result = true if c == '-' && (candidate.empty? || candidate[-1] == 'E')
+
+      # can append a units sigil
+      result = true if c == '{'
+    end
 
     result
   end
@@ -316,12 +333,15 @@ class IntegerTokenBuilder
 
   def try(text)
     candidate = ''
+
     if !text.empty? && text[0] != ' '
       i = 0
       accepted = true
+
       while i < text.size && accepted
         c = text[i]
         accepted = accept?(candidate, c)
+
         if accepted
           candidate += c
           i += 1
@@ -331,11 +351,13 @@ class IntegerTokenBuilder
 
     # check that string conforms to one of these
     regexes = [
-      /\A\d+%/
+      /\A\d+%(\{[A-Za-z0-9\+\- _]*\})?/
     ]
 
     @token = ''
+
     regexes.each { |regex| regex.match(candidate) { |m| @token = m[0] } }
+
     @count = 0
     @count = i unless @token.empty?
     !@count.zero?
@@ -349,10 +371,21 @@ class IntegerTokenBuilder
 
   def accept?(candidate, c)
     result = false
-    # can always append one percent char
-    result = true if c == '%' && candidate.count('%').zero?
-    # can append a digit if no percent char
-    result = true if c =~ /[0-9]/ && candidate.count('%').zero?
+
+    return false if candidate.size.positive? && candidate[-1] == '}'
+
+    if candidate.include?('{')
+      result = true if c =~ /[\w _\+\-\}]/
+    else
+      # can always append one percent char
+      result = true if c == '%' && candidate.count('%').zero?
+
+      # can append a digit if no percent char
+      result = true if c =~ /[0-9]/ && candidate.count('%').zero?
+
+      # can append a units sigil
+      result = true if c == '{'
+    end
 
     result
   end
@@ -397,6 +430,7 @@ class UnitsTokenBuilder
 
     candidate = ''
     i = 0
+
     if !text.empty? && text[0] == '{'
       until i == text.size || candidate[-1] == '}'
         candidate += text[i]
@@ -423,12 +457,15 @@ class VariableTokenBuilder
 
   def try(text)
     candidate = ''
+
     if !text.empty? && text[0] != ' '
       i = 0
       accepted = true
+
       while i < text.size && accepted
         c = text[i]
         accepted = accept?(candidate, c)
+
         if accepted
           candidate += c
           i += 1
@@ -467,13 +504,17 @@ class VariableTokenBuilder
 
   def accept_short?(candidate, c)
     result = false
+
     # can always start with an alpha
     result = true if c =~ /[A-Z]/ && candidate.empty?
+
     # can append a digit to a single character
     result = true if c =~ /[0-9]/ && (candidate =~ /\A[A-Z]\z/)
+
     # can append a dollar sign if one is not there
     result = true if
       c == '$' && !candidate.empty? && !['$', '%'].include?(candidate[-1])
+
     # can append a percent sign if one is not there
     result = true if
       c == '%' && !candidate.empty? && !['$', '%'].include?(candidate[-1])
@@ -483,15 +524,19 @@ class VariableTokenBuilder
 
   def accept_long?(candidate, c)
     result = false
+
     # can always start with an alpha
     if c =~ /[A-Z]/ && (candidate.empty? || candidate =~ /\A[A-Z]+\z/)
       result = true
     end
+
     # can append a digit to alphas and digits
     result = true if c =~ /[0-9]/ && (candidate =~ /\A[A-Z]+[0-9]*\z/)
+
     # can append a dollar sign if one is not there
     result = true if
       c == '$' && !candidate.empty? && !['$', '%'].include?(candidate[-1])
+
     # can append a percent sign if one is not there
     result = true if
       c == '%' && !candidate.empty? && !['$', '%'].include?(candidate[-1])
@@ -632,6 +677,7 @@ end
 class ConstantFormatTokenBuilder
   def try(text)
     @token = ''
+
     while !text.empty? && !'#!&\\*'.include?(text[0])
       @token += text[0]
       text = text[1..-1]

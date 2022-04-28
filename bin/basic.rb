@@ -527,7 +527,6 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
   tokenbuilders << NumberTokenBuilder.new
   tokenbuilders << NumericSymbolTokenBuilder.new
   tokenbuilders << IntegerTokenBuilder.new
-  tokenbuilders << UnitsTokenBuilder.new
 
   long_names = options['long_names'].value
   tokenbuilders << VariableTokenBuilder.new(long_names)

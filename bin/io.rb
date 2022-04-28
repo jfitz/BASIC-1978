@@ -22,17 +22,20 @@ module Reader
   end
 
   def verify_tokens(tokens)
-    evens = tokens.values_at(* tokens.each_index.select(&:even?))
+    state = :want_value
+    tokens.each do |token|
+      case state
+      when :want_value
+        raise BASICRuntimeError, :te_inp_no_num_text unless
+          token.numeric_constant? || token.text_constant?
 
-    evens.each do |token|
-      raise BASICRuntimeError, :te_exp_num unless
-        token.numeric_constant? || token.text_constant?
-    end
+        state = :want_sep
+      when :want_sep
+        raise BASICRuntimeError, :te_exp_sep unless
+          token.separator?
 
-    odds = tokens.values_at(* tokens.each_index.select(&:odd?))
-
-    odds.each do |token|
-      raise BASICRuntimeError, :te_exp_sep unless token.separator?
+        state = :want_value
+      end
     end
   end
 end
@@ -49,8 +52,7 @@ module Inputter
     # drop whitespace
     tokens.delete_if(&:whitespace?)
 
-    # verify all even-index tokens are numeric or text
-    # verify all odd-index tokens are separators
+    # verify values between separators
     verify_tokens(tokens)
 
     # convert from tokens to values
@@ -496,23 +498,22 @@ class FileHandler
       tokens = tokenizer.tokenize(line)
       tokens.delete_if { |token| token.separator? || token.whitespace? }
 
-      converted = read_convert(tokens)
-      data_store += converted
+      elements = read_convert(tokens)
+      data_store += elements
     end
 
     data_store
   end
 
   def read_convert(tokens)
-    converted = []
+    elements = []
 
     tokens.each do |token|
-      t = NumericConstant.new(token) if token.numeric_constant?
-      t = TextConstant.new(token) if token.text_constant?
-      converted << t
+      elements << NumericConstant.new(token) if token.numeric_constant?
+      elements << TextConstant.new(token) if token.text_constant?
     end
 
-    converted
+    elements
   end
 
   def read_file(file_name)
