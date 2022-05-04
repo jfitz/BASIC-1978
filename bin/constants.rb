@@ -483,14 +483,6 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, 'Invalid operator NOT')
   end
 
-  def +(_other)
-    raise(BASICExpressionError, 'Invalid operator +')
-  end
-
-  def -(_other)
-    raise(BASICExpressionError, 'Invalid operator -')
-  end
-
   def add(_)
     raise(BASICExpressionError, 'Invalid operator add')
   end
@@ -700,33 +692,6 @@ class NumericConstant < AbstractValueElement
   def not
     b = to_b
     BooleanConstant.new(!b)
-  end
-
-  def +(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    value = @value + other.to_numeric.to_v
-    NumericConstant.new(value)
-  end
-
-  def -(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in -()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    value = @value - other.to_numeric.to_v
-    NumericConstant.new(value)
-  end
-
-  def *(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in *()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    value = @value * other.to_numeric.to_v
-    NumericConstant.new(value)
   end
 
   def add(other)
@@ -1159,33 +1124,6 @@ class IntegerConstant < AbstractValueElement
     IntegerConstant.new(b)
   end
 
-  def +(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    value = @value + other.to_numeric.to_v
-    IntegerConstant.new(value)
-  end
-
-  def -(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in -()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    value = @value - other.to_numeric.to_v
-    IntegerConstant.new(value)
-  end
-
-  def *(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in *()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    value = @value * other.to_numeric.to_v
-    IntegerConstant.new(value)
-  end
-
   def add(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
 
@@ -1478,14 +1416,6 @@ class TextConstant < AbstractValueElement
     BooleanConstant.new(!b)
   end
 
-  def +(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    TextConstant.new(@value + other.to_v)
-  end
-
   def add(other)
     message = "Type mismatch (#{content_type}/#{other.content_type}) in add()"
 
@@ -1659,32 +1589,6 @@ class BooleanConstant < AbstractValueElement
     b = NumericConstant.new(b.to_ms_i) if
       $options['relational_result'].value == 'NUMERIC'
     b
-  end
-
-  def +(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in +()"
-    raise(BASICExpressionError, message) unless other.numeric_constant?
-
-    value = numeric_value + other.to_v
-    NumericConstant.new(value)
-  end
-
-  def -(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in -()"
-
-    raise(BASICExpressionError, message) unless other.numeric_constant?
-
-    value = numeric_value - otherto_v
-    NumericConstant.new(value)
-  end
-
-  def *(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in *()"
-
-    raise(BASICExpressionError, message) unless other.numeric_constant?
-
-    value = numeric_value * other.to_v
-    NumericConstant.new(value)
   end
 
   def add(other)
