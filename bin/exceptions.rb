@@ -86,7 +86,8 @@ $error_codes = {
   te_func_alr: 211,
   te_no_chain: 220,
   te_chain_errors: 221,
-  te_option_no_run: 230
+  te_option_no_run: 230,
+  te_units_no_match: 240
 }
 
 $error_messages = {
@@ -141,5 +142,6 @@ $error_messages = {
   te_func_alr: 'Function already defined',
   te_no_chain: 'Cannot CHAIN to file',
   te_chain_errors: 'CHAIN program has errors',
-  te_option_no_run: 'Cannot set option'
+  te_option_no_run: 'Cannot set option',
+  te_units_no_match: 'Units do not match'
 }
