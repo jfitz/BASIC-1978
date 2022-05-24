@@ -2668,11 +2668,17 @@ class GosubStatement < AbstractStatement
   end
 
   def renumber(renumber_map)
+    # change destination
     @dest_line = renumber_map[@dest_line]
-    new_token = NumericConstantToken.new(@dest_line.line_number)
+
+    # change token
+    @tokens[-1] = @dest_line.to_token
+
+    # change core token
+    @core_tokens[-1] = @dest_line.to_token
+
+    # change linenums
     @linenums = [@dest_line]
-    @tokens[-1] = new_token
-    @core_tokens[-1] = new_token
   end
 
   def set_destinations(interpreter, _, program)
@@ -2768,11 +2774,17 @@ class GotoStatement < AbstractStatement
 
   def renumber(renumber_map)
     unless @dest_line.nil?
+      # change destination
       @dest_line = renumber_map[@dest_line]
-      new_token = NumericConstantToken.new(@dest_line.line_number)
+
+      # change token
+      @tokens[-1] = @dest_line.to_token
+
+      # change core token
+      @core_tokens[-1] = @dest_line.to_token
+
+      # change linenums
       @linenums = [@dest_line]
-      @tokens[-1] = new_token
-      @core_tokens[-1] = new_token
     end
   end
 
@@ -2945,28 +2957,37 @@ class AbstractIfStatement < AbstractStatement
 
   def renumber(renumber_map)
     unless @dest_line.nil?
+      # change destination
       @dest_line = renumber_map[@dest_line]
-      new_token = NumericConstantToken.new(@dest_line.line_number)
 
+      # change token
       index = 0
       @tokens.each_with_index do |token, i|
         index = i if token.to_s == 'THEN'
       end
 
-      @tokens[index + 1] = new_token
+      @tokens[index + 1] = @dest_line.to_token
 
+      # change core token
       index = 0
       @core_tokens.each_with_index do |token, i|
         index = i if token.to_s == 'THEN'
       end
 
-      @core_tokens[index + 1] = new_token
+      @core_tokens[index + 1] = @dest_line.to_token
+
+      # change linenums
     end
 
     unless @else_dest_line.nil?
+      # change destination
       @else_dest_line = renumber_map[@else_dest_line]
+    
+      # change token
       new_token = NumericConstantToken.new(@else_dest_line.line_number)
       @tokens[-1] = new_token
+
+      # change core token
       @core_tokens[-1] = new_token
     end
 
@@ -3846,11 +3867,17 @@ class OnErrorStatement < AbstractStatement
 
   def renumber(renumber_map)
     unless @dest_line.nil?
+      # change destination
       @dest_line = renumber_map[@dest_line]
-      new_token = NumericConstantToken.new(@dest_line.line_number)
+
+      # change token
+      @tokens[-1] = @dest_line.to_token
+
+      # change core token
+      @core_tokens[-1] = @dest_line.to_token
+
+      # change linenums
       @linenums = [@dest_line]
-      @tokens[-1] = new_token
-      @core_tokens[-1] = new_token
     end
   end
 end
@@ -3950,12 +3977,16 @@ class OnStatement < AbstractStatement
   end
 
   def renumber(renumber_map)
+    # change destination
     new_dest_lines = []
 
     @dest_lines.each do |dest_line|
       new_dest_lines << renumber_map[dest_line]
     end
 
+    @dest_lines = new_dest_lines
+
+    # change token
     index = 0
     @tokens.each_with_index do |token, i|
       index = i if token.to_s == 'THEN'
@@ -3964,13 +3995,12 @@ class OnStatement < AbstractStatement
     end
 
     new_dest_lines.each do |dest_line|
-      new_token = NumericConstantToken.new(dest_line.line_number)
-      @tokens[index + 1] = new_token
+      @tokens[index + 1] = dest_line.to_token
 
       index += 2
     end
 
-    @dest_lines = new_dest_lines
+    # change linenums
     @linenums = @dest_lines
   end
 
