@@ -369,6 +369,29 @@ class Units
     @values == other.values
   end
 
+  def <=>(other)
+    # smaller set is always less
+    return @values.size <=> other.values.size if
+      @values.size != other.values.size
+
+    # sizes are the same
+    # smaller key always less
+    a_key_sort = @values.keys.sort
+    b_key_sort = other.values.keys.sort
+    return a_key_sort <=> b_key_sort if
+      a_key_sort != b_key_sort
+
+    # keys are the same
+    # smaller value always less
+    a_key_sort.each do |key|
+      return @values[key] <=> other.values[key] if
+        @values[key] != other.values[key]
+    end
+
+    # units are the same
+    0
+  end
+
   def to_s
     units_t = ''
 
@@ -471,18 +494,6 @@ class AbstractValueElement < AbstractElement
     @constant = false
     @value = nil
     @warnings = []
-  end
-
-  def dump
-    "#{self.class}:#{self}"
-  end
-
-  def eql?(other)
-    @value == other.to_v
-  end
-
-  def hash
-    @value.hash
   end
 
   def <=>(other)
@@ -618,6 +629,18 @@ class AbstractValueElement < AbstractElement
     raise(BASICExpressionError, 'Invalid operator OR')
   end
 
+  def dump
+    "#{self.class}:#{self}"
+  end
+
+  def eql?(other)
+    @value == other.to_v
+  end
+
+  def hash
+    @value.hash
+  end
+
   def posate
     raise(BASICExpressionError, 'Invalid operator +')
   end
@@ -725,6 +748,7 @@ class NumericConstant < AbstractValueElement
 
   public
 
+  attr_reader :value
   attr_reader :symbol_text
   attr_reader :units
 
@@ -785,24 +809,14 @@ class NumericConstant < AbstractValueElement
     "#{self.class}:#{@symbol_text}"
   end
 
-  def zero?
-    @value.zero?
-  end
-
-  def eql?(other)
-    @value == other.to_v
-  end
-
   def ==(other)
     @value == other.to_v
   end
 
-  def hash
-    @value.hash + @symbol_text.hash
-  end
-
   def <=>(other)
-    @value <=> other.to_v
+    return @value <=> other.value if @value != other.value
+
+    @units <=> other.units
   end
 
   def >(other)
@@ -837,6 +851,18 @@ class NumericConstant < AbstractValueElement
     b = NumericConstant.new(b.to_ms_i) if
       $options['relational_result'].value == 'NUMERIC'
     b
+  end
+
+  def zero?
+    @value.zero?
+  end
+
+  def eql?(other)
+    @value == other.to_v
+  end
+
+  def hash
+    @value.hash + @symbol_text.hash
   end
 
   def posate
@@ -1101,6 +1127,7 @@ class IntegerConstant < AbstractValueElement
     IntegerConstant.new(v.to_i)
   end
 
+  attr_reader :value
   attr_reader :symbol_text
   attr_reader :units
 
@@ -1143,24 +1170,14 @@ class IntegerConstant < AbstractValueElement
     @units = units
   end
 
-  def zero?
-    @value.zero?
-  end
-
-  def eql?(other)
-    @value == other.to_v
-  end
-
   def ==(other)
     @value == other.to_v
   end
 
-  def hash
-    @value.hash + @symbol_text.hash
-  end
-
   def <=>(other)
-    @value <=> other.to_v
+    return @value <=> other.value if @value != other.value
+
+    @units <=> other.units
   end
 
   def >(other)
@@ -1281,6 +1298,18 @@ class IntegerConstant < AbstractValueElement
         $options['relational_result'].value == 'NUMERIC'
       b
     end
+  end
+
+  def zero?
+    @value.zero?
+  end
+
+  def eql?(other)
+    @value == other.to_v
+  end
+
+  def hash
+    @value.hash + @symbol_text.hash
   end
 
   def posate
