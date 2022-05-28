@@ -87,7 +87,9 @@ $error_codes = {
   te_no_chain: 220,
   te_chain_errors: 221,
   te_option_no_run: 230,
-  te_units_no_match: 240
+  te_units_no_match: 240,
+  te_power_not_int: 241,
+  te_power_not_pure: 242
 }
 
 $error_messages = {
@@ -143,5 +145,7 @@ $error_messages = {
   te_no_chain: 'Cannot CHAIN to file',
   te_chain_errors: 'CHAIN program has errors',
   te_option_no_run: 'Cannot set option',
-  te_units_no_match: 'Units do not match'
+  te_units_no_match: 'Units do not match',
+  te_power_not_int: 'Unit power must be integer',
+  te_power_not_pure: 'Power must be pure number'
 }
