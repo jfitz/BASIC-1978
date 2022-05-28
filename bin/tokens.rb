@@ -327,7 +327,7 @@ class FunctionToken < AbstractToken
 end
 
 # text constant token
-class TextConstantToken < AbstractToken
+class TextLiteralToken < AbstractToken
   def initialize(text)
     super
 
@@ -344,7 +344,7 @@ class TextConstantToken < AbstractToken
 end
 
 # numeric constant token
-class NumericConstantToken < AbstractToken
+class NumericLiteralToken < AbstractToken
   attr_reader :units
 
   def initialize(text)
@@ -401,7 +401,7 @@ class NumericConstantToken < AbstractToken
 end
 
 # integer constant token
-class IntegerConstantToken < AbstractToken
+class IntegerLiteralToken < AbstractToken
   attr_reader :units
 
   def initialize(text)
@@ -456,7 +456,7 @@ class NumericSymbolToken < AbstractToken
 end
 
 # boolean constant token
-class BooleanConstantToken < AbstractToken
+class BooleanLiteralToken < AbstractToken
   def initialize(text)
     super
 

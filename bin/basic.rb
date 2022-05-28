@@ -530,7 +530,7 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
 
   long_names = options['long_names'].value
   tokenbuilders << VariableTokenBuilder.new(long_names)
-  tokenbuilders << ListTokenBuilder.new(%w[TRUE FALSE], BooleanConstantToken)
+  tokenbuilders << ListTokenBuilder.new(%w[TRUE FALSE], BooleanLiteralToken)
   tokenbuilders << WhitespaceTokenBuilder.new
 end
 
@@ -582,7 +582,7 @@ def make_command_tokenbuilders(quotes, long_names)
 
   tokenbuilders << NumberTokenBuilder.new
   tokenbuilders << VariableTokenBuilder.new(long_names)
-  tokenbuilders << ListTokenBuilder.new(%w[TRUE FALSE], BooleanConstantToken)
+  tokenbuilders << ListTokenBuilder.new(%w[TRUE FALSE], BooleanLiteralToken)
   tokenbuilders << WhitespaceTokenBuilder.new
 end
 
