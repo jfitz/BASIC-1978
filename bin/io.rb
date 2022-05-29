@@ -509,8 +509,8 @@ class FileHandler
     elements = []
 
     tokens.each do |token|
-      elements << NumericConstant.new(token) if token.numeric_constant?
-      elements << TextConstant.new(token) if token.text_constant?
+      elements << NumericValue.new(token) if token.numeric_constant?
+      elements << TextValue.new(token) if token.text_constant?
     end
 
     elements

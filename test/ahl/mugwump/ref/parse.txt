@@ -1,14 +1,14 @@
 1 PRINT TAB(33);"MUGWUMP"
- NumericConstant:33
+ NumericValue:33
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"MUGWUMP"
+ TextValue:"MUGWUMP"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
- NumericConstant:15
+ NumericValue:15
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
 3 PRINT:PRINT:PRINT
  CarriageControl:NL
@@ -17,34 +17,34 @@
 4 REM     COURTESY PEOPLE'S COMPUTER COMPANY
  Remark:    COURTESY PEOPLE'S COMPUTER COMPANY
 10 DIM P(4,2)
- NumericConstant:4
- NumericConstant:2
+ NumericValue:4
+ NumericValue:2
  Declaration:P(,) -> _(,)
 20 PRINT "THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
- TextConstant:"THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
+ TextValue:"THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
  CarriageControl:NL
 30 PRINT "HIDDEN ON A 10 BY 10 GRID.  HOMEBASE IS POSITION 0,0."
- TextConstant:"HIDDEN ON A 10 BY 10 GRID.  HOMEBASE IS POSITION 0,0."
+ TextValue:"HIDDEN ON A 10 BY 10 GRID.  HOMEBASE IS POSITION 0,0."
  CarriageControl:NL
 40 PRINT "ANY GUESS YOU MAKE MUST BE TWO NUMBERS WITH EACH"
- TextConstant:"ANY GUESS YOU MAKE MUST BE TWO NUMBERS WITH EACH"
+ TextValue:"ANY GUESS YOU MAKE MUST BE TWO NUMBERS WITH EACH"
  CarriageControl:NL
 50 PRINT "NUMBER BETWEEN 0 AND 9, INCLUSIVE.  FIRST NUMBER"
- TextConstant:"NUMBER BETWEEN 0 AND 9, INCLUSIVE.  FIRST NUMBER"
+ TextValue:"NUMBER BETWEEN 0 AND 9, INCLUSIVE.  FIRST NUMBER"
  CarriageControl:NL
 60 PRINT "IS DISTANCE TO RIGHT OF HOMEBASE AND SECOND NUMBER"
- TextConstant:"IS DISTANCE TO RIGHT OF HOMEBASE AND SECOND NUMBER"
+ TextValue:"IS DISTANCE TO RIGHT OF HOMEBASE AND SECOND NUMBER"
  CarriageControl:NL
 70 PRINT "IS DISTANCE ABOVE HOMEBASE."
- TextConstant:"IS DISTANCE ABOVE HOMEBASE."
+ TextValue:"IS DISTANCE ABOVE HOMEBASE."
  CarriageControl:NL
 80 PRINT
  CarriageControl:NL
 90 PRINT "YOU GET 10 TRIES.  AFTER EACH TRY, I WILL TELL"
- TextConstant:"YOU GET 10 TRIES.  AFTER EACH TRY, I WILL TELL"
+ TextValue:"YOU GET 10 TRIES.  AFTER EACH TRY, I WILL TELL"
  CarriageControl:NL
 100 PRINT "YOU HOW FAR YOU ARE FROM EACH MUGWUMP."
- TextConstant:"YOU HOW FAR YOU ARE FROM EACH MUGWUMP."
+ TextValue:"YOU HOW FAR YOU ARE FROM EACH MUGWUMP."
  CarriageControl:NL
 110 PRINT
  CarriageControl:NL
@@ -52,12 +52,12 @@
  LineNumber:1000
 250 T=0
  Variable:T -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 260 T=T+1
  Variable:T -> _
  Variable:T -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 270 PRINT
@@ -65,50 +65,50 @@
 275 PRINT
  CarriageControl:NL
 290 PRINT "TURN NO.";T;"-- WHAT IS YOUR GUESS";
- TextConstant:"TURN NO."
+ TextValue:"TURN NO."
  CarriageControl:;
  Variable:T -> _
  CarriageControl:;
- TextConstant:"-- WHAT IS YOUR GUESS"
+ TextValue:"-- WHAT IS YOUR GUESS"
  CarriageControl:;
 300 INPUT M,N
  Variable:M -> _
  Variable:N -> _
 310 FOR I=1 TO 4
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:4"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:4"]
 320 IF P(I,1)=-1 THEN 400
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:400
 330 IF P(I,1)<>M THEN 380
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
  Variable:M -> _
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:380
 340 IF P(I,2)<>N THEN 380
  Variable:I -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  Variable:N -> _
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:380
 350 P(I,1)=-1
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  UnaryOperatorMinus:-(_) -> =_
  AssignmentOperator:= =_ -> _
 360 PRINT "YOU HAVE FOUND MUGWUMP";I
- TextConstant:"YOU HAVE FOUND MUGWUMP"
+ TextValue:"YOU HAVE FOUND MUGWUMP"
  CarriageControl:;
  Variable:I -> _
  CarriageControl:NL
@@ -117,33 +117,33 @@
 380 D=SQR((P(I,1)-M)^2+(P(I,2)-N)^2)
  Variable:D -> _
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
  Variable:M -> _
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorPower:^(_,_) -> _
  Variable:I -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  Variable:N -> _
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorPower:^(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
  FunctionSqr:SQR(_) -> _
  AssignmentOperator:= _ -> _
 390 PRINT "YOU ARE";(INT(D*10))/10;"UNITS FROM MUGWUMP";I
- TextConstant:"YOU ARE"
+ TextValue:"YOU ARE"
  CarriageControl:;
  Variable:D -> _
- NumericConstant:10
+ NumericValue:10
  BinaryOperatorMultiply:*(_,_) -> _
  FunctionInt:INT(_) -> _
- NumericConstant:10
+ NumericValue:10
  BinaryOperatorDivide:/(_,_) -> _
  CarriageControl:;
- TextConstant:"UNITS FROM MUGWUMP"
+ TextValue:"UNITS FROM MUGWUMP"
  CarriageControl:;
  Variable:I -> _
  CarriageControl:NL
@@ -151,13 +151,13 @@
  Variable:I -> _
 410 FOR J=1 TO 4
  control: Variable:J -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:4"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:4"]
 420 IF P(J,1)<>-1 THEN 470
  Variable:J -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:470
@@ -166,81 +166,81 @@
 440 PRINT
  CarriageControl:NL
 450 PRINT "YOU GOT THEM ALL IN";T;"TURNS!"
- TextConstant:"YOU GOT THEM ALL IN"
+ TextValue:"YOU GOT THEM ALL IN"
  CarriageControl:;
  Variable:T -> _
  CarriageControl:;
- TextConstant:"TURNS!"
+ TextValue:"TURNS!"
  CarriageControl:NL
 460 GOTO 580
  LineNumber:580
 470 IF T<10 THEN 260
  Variable:T -> _
- NumericConstant:10
+ NumericValue:10
  BinaryOperatorLess:<(_,_) -> ?
  LineNumber:260
 480 PRINT
  CarriageControl:NL
 490 PRINT "SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
- TextConstant:"SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
+ TextValue:"SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
  CarriageControl:NL
 540 FOR I=1 TO 4
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:4"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:4"]
 550 IF P(I,1)=-1 THEN 570
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:570
 560 PRINT "MUGWUMP";I;"IS AT (";P(I,1);",";P(I,2);")"
- TextConstant:"MUGWUMP"
+ TextValue:"MUGWUMP"
  CarriageControl:;
  Variable:I -> _
  CarriageControl:;
- TextConstant:"IS AT ("
+ TextValue:"IS AT ("
  CarriageControl:;
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
  CarriageControl:;
- TextConstant:","
+ TextValue:","
  CarriageControl:;
  Variable:I -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  CarriageControl:;
- TextConstant:")"
+ TextValue:")"
  CarriageControl:NL
 570 NEXT I
  Variable:I -> _
 580 PRINT
  CarriageControl:NL
 600 PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
- TextConstant:"THAT WAS FUN! LET'S PLAY AGAIN......."
+ TextValue:"THAT WAS FUN! LET'S PLAY AGAIN......."
  CarriageControl:NL
 610 PRINT "FOUR MORE MUGWUMPS ARE NOW IN HIDING."
- TextConstant:"FOUR MORE MUGWUMPS ARE NOW IN HIDING."
+ TextValue:"FOUR MORE MUGWUMPS ARE NOW IN HIDING."
  CarriageControl:NL
 630 GOTO 240
  LineNumber:240
 1000 FOR J=1 TO 2
  control: Variable:J -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:2"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:2"]
 1010 FOR I=1 TO 4
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:4"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:4"]
 1020 P(I,J)=INT(10*RND(1))
  Variable:I -> _
  Variable:J -> _
  Variable:P(_,_) -> _
- NumericConstant:10
- NumericConstant:1
+ NumericValue:10
+ NumericValue:1
  FunctionRnd:RND(_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  FunctionInt:INT(_) -> _

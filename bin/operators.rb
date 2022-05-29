@@ -476,7 +476,7 @@ class BinaryOperator < AbstractElement
   def array_to_horizontal(a)
     base = $options['base'].value
     a_dims = a.dimensions
-    new_dims = [NumericConstant.new(base), a_dims[0]]
+    new_dims = [NumericValue.new(base), a_dims[0]]
     n_cols = a_dims[0].to_i
     new_values = {}
 
@@ -509,7 +509,7 @@ class BinaryOperator < AbstractElement
   def array_to_vertical(a)
     base = $options['base'].value
     a_dims = a.dimensions
-    new_dims = [a_dims[0], NumericConstant.new(base)]
+    new_dims = [a_dims[0], NumericValue.new(base)]
     n_cols = a_dims[0].to_i
     new_values = {}
 
@@ -551,7 +551,7 @@ class BinaryOperator < AbstractElement
       f += a_value.to_f * b_value.to_f
     end
 
-    NumericConstant.new(f)
+    NumericValue.new(f)
   end
 
   def multiply_matrix_matrix_work(a, b)

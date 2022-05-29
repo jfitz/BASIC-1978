@@ -1,14 +1,14 @@
 2 PRINT TAB(31);"BLACK JACK"
- NumericConstant:31
+ NumericValue:31
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"BLACK JACK"
+ TextValue:"BLACK JACK"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
- NumericConstant:15
+ NumericValue:15
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
 6 PRINT:PRINT:PRINT
  CarriageControl:NL
@@ -18,30 +18,30 @@
  UserFunctionName:FNA -> _
  VariableName:Q -> _
  Variable:Q -> _
- NumericConstant:11
+ NumericValue:11
  Variable:Q -> _
- NumericConstant:22
+ NumericValue:22
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
 20 DIM P(15,12),Q(15),C(52),D(52),T(8),S(7),B(15)
- NumericConstant:15
- NumericConstant:12
+ NumericValue:15
+ NumericValue:12
  Declaration:P(,) -> _(,)
- NumericConstant:15
+ NumericValue:15
  Declaration:Q() -> _()
- NumericConstant:52
+ NumericValue:52
  Declaration:C() -> _()
- NumericConstant:52
+ NumericValue:52
  Declaration:D() -> _()
- NumericConstant:8
+ NumericValue:8
  Declaration:T() -> _()
- NumericConstant:7
+ NumericValue:7
  Declaration:S() -> _()
- NumericConstant:15
+ NumericValue:15
  Declaration:B() -> _()
 30 DIM R(15)
- NumericConstant:15
+ NumericValue:15
  Declaration:R() -> _()
 40 REM--P(I,J) IS THE JTH CARD IN HAND I, Q(I) IS TOTAL OF HAND I
  Remark:--P(I,J) IS THE JTH CARD IN HAND I, Q(I) IS TOTAL OF HAND I
@@ -59,22 +59,22 @@
  Remark:--SUBROUTINE TO GET A CARD.  RESULT IS PUT IN X.
 110 IF C<51 THEN 230
  Variable:C -> _
- NumericConstant:51
+ NumericValue:51
  BinaryOperatorLess:<(_,_) -> _
  LineNumber:230
 120 PRINT "RESHUFFLING"
  WARNING: Inconsistent GOSUB origins
- TextConstant:"RESHUFFLING"
+ TextValue:"RESHUFFLING"
  CarriageControl:NL
 130 FOR D=D TO 1 STEP -1
  control: Variable:D -> _
  start:   ["Variable:D -> _"]
- end:     ["NumericConstant:1"]
- step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> =_"]
+ end:     ["NumericValue:1"]
+ step:    ["NumericValue:1", "UnaryOperatorMinus:-(_) -> =_"]
 140 C=C-1
  Variable:C -> _
  Variable:C -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 150 C(C)=D(D)
@@ -87,17 +87,17 @@
  Variable:D -> _
 170 FOR C1=52 TO C STEP -1
  control: Variable:C1 -> _
- start:   ["NumericConstant:52"]
+ start:   ["NumericValue:52"]
  end:     ["Variable:C -> _"]
- step:    ["NumericConstant:1", "UnaryOperatorMinus:-(_) -> =_"]
+ step:    ["NumericValue:1", "UnaryOperatorMinus:-(_) -> =_"]
 180 C2=INT(RND(1)*(C1-C+1))+C
  Variable:C2 -> _
- NumericConstant:1
+ NumericValue:1
  FunctionRnd:RND(_) -> _
  Variable:C1 -> _
  Variable:C -> _
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  FunctionInt:INT(_) -> _
@@ -130,7 +130,7 @@
 240 C=C+1
  Variable:C -> _
  Variable:C -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 250 RETURN
@@ -149,11 +149,11 @@
  Remark:--  33+....BUSTED
 360 Q=0
  Variable:Q -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 370 FOR Q2=1 TO R(I)
  control: Variable:Q2 -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:I -> _", "Variable:R(_) -> _"]
 380 X=P(I,Q2)
  Variable:X -> _
@@ -179,10 +179,10 @@
  Variable:X -> _
  AssignmentOperator:= _ -> _
  Variable:X1 -> _
- NumericConstant:10
+ NumericValue:10
  BinaryOperatorGreater:>(_,_) -> _
  Variable:X1 -> _
- NumericConstant:10
+ NumericValue:10
  AssignmentOperator:= =_ -> _
  Remark: SAME AS X1=10 MIN X
 520 Q1=Q+X1
@@ -193,18 +193,18 @@
  AssignmentOperator:= _ -> _
 530 IF Q>=11 THEN 590
  Variable:Q -> _
- NumericConstant:11
+ NumericValue:11
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:590
 540 IF X>1 THEN 570
  Variable:X -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:570
 550 Q=Q+11
  Variable:Q -> _
  Variable:Q -> _
- NumericConstant:11
+ NumericValue:11
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 560 RETURN
@@ -212,9 +212,9 @@
 570 Q=Q1-11*(Q1>=11)
  Variable:Q -> _
  Variable:Q1 -> _
- NumericConstant:11
+ NumericValue:11
  Variable:Q1 -> _
- NumericConstant:11
+ NumericValue:11
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
@@ -225,22 +225,22 @@
  Variable:Q -> _
  Variable:Q1 -> _
  Variable:Q -> _
- NumericConstant:21
+ NumericValue:21
  BinaryOperatorLessEqual:<=(_,_) -> _
  Variable:Q1 -> _
- NumericConstant:21
+ NumericValue:21
  BinaryOperatorGreater:>(_,_) -> _
  BinaryOperatorAnd:AND(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 600 IF Q<33 THEN 620
  Variable:Q -> _
- NumericConstant:33
+ NumericValue:33
  BinaryOperatorLess:<(_,_) -> _
  LineNumber:620
 610 Q=-1
  Variable:Q -> _
- NumericConstant:1
+ NumericValue:1
  UnaryOperatorMinus:-(_) -> =_
  AssignmentOperator:= =_ -> _
 620 RETURN
@@ -251,35 +251,35 @@
  Remark: D$ DEFINED ELSEWHERE
 720 PRINT MID$(D$,3*X-2,3);
  Variable:D$ -> $
- NumericConstant:3
+ NumericValue:3
  Variable:X -> _
  BinaryOperatorMultiply:*(_,_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:3
+ NumericValue:3
  FunctionMid:MID$($,_,_) -> $
  CarriageControl:;
 730 PRINT "  ";
- TextConstant:"  "
+ TextValue:"  "
  CarriageControl:;
 740 RETURN
  
 750 REM--ALTERNATIVE PRINTING ROUTINE
  Remark:--ALTERNATIVE PRINTING ROUTINE
 760 PRINT " ";MID$(D$,3*X-1,2);
- TextConstant:" "
+ TextValue:" "
  CarriageControl:;
  Variable:D$ -> $
- NumericConstant:3
+ NumericValue:3
  Variable:X -> _
  BinaryOperatorMultiply:*(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:2
+ NumericValue:2
  FunctionMid:MID$($,_,_) -> $
  CarriageControl:;
 770 PRINT "   ";
- TextConstant:"   "
+ TextValue:"   "
  CarriageControl:;
 780 RETURN
  
@@ -289,7 +289,7 @@
  Remark:--NO SPLITTING OR BLACKJACKS ALLOWED
 820 H1=5
  Variable:H1 -> _
- NumericConstant:5
+ NumericValue:5
  AssignmentOperator:= =_ -> _
 830 GOSUB 1410
  WARNING: Multiple GOSUB entry points
@@ -297,7 +297,7 @@
 840 H1=3
  WARNING: Multiple GOSUB entry points
  Variable:H1 -> _
- NumericConstant:3
+ NumericValue:3
  AssignmentOperator:= =_ -> _
 850 ON H GOTO 950,930
  WARNING: Multiple GOSUB entry points
@@ -314,12 +314,12 @@
  Variable:B(_) -> _
  Variable:I -> _
  Variable:B(_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorMultiply:*(_,_) -> _
  AssignmentOperator:= _ -> _
 880 PRINT "RECEIVED A";
  WARNING: Multiple GOSUB entry points
- TextConstant:"RECEIVED A"
+ TextValue:"RECEIVED A"
  CarriageControl:;
 890 GOSUB 700
  WARNING: Multiple GOSUB entry points
@@ -330,7 +330,7 @@
 910 IF Q>0 THEN GOSUB 1300
  WARNING: Multiple GOSUB entry points
  Variable:Q -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:1300
 920 RETURN
@@ -348,7 +348,7 @@
  LineNumber:100
 960 PRINT "RECEIVED A";
  WARNING: Multiple GOSUB entry points
- TextConstant:"RECEIVED A"
+ TextValue:"RECEIVED A"
  CarriageControl:;
 970 GOSUB 700
  WARNING: Multiple GOSUB entry points
@@ -359,12 +359,12 @@
 990 IF Q<0 THEN 940
  WARNING: Multiple GOSUB entry points
  Variable:Q -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorLess:<(_,_) -> _
  LineNumber:940
 1000 PRINT "HIT";
  WARNING: Multiple GOSUB entry points
- TextConstant:"HIT"
+ TextValue:"HIT"
  CarriageControl:;
 1010 GOTO 830
  WARNING: Multiple GOSUB entry points
@@ -376,7 +376,7 @@
  Variable:R(_) -> _
  Variable:I -> _
  Variable:R(_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 1120 P(I,R(I))=X
@@ -400,11 +400,11 @@
  AssignmentOperator:= _ -> _
 1160 IF Q>=0 THEN 1190
  Variable:Q -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:1190
 1170 PRINT "...BUSTED"
- TextConstant:"...BUSTED"
+ TextValue:"...BUSTED"
  CarriageControl:NL
 1180 GOSUB 1200
  LineNumber:1200
@@ -416,7 +416,7 @@
  WARNING: Inconsistent GOSUB origins
  Variable:I -> _
  Variable:R(_) -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:1230
 1220 RETURN
@@ -424,7 +424,7 @@
 1230 D=D+1
  Variable:D -> _
  Variable:D -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 1240 D(D)=P(I,R(I))
@@ -440,7 +440,7 @@
  Variable:R(_) -> _
  Variable:I -> _
  Variable:R(_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 1260 GOTO 1210
@@ -457,7 +457,7 @@
  AssignmentOperator:= _ -> _
  LineNumber:3400
 1325 PRINT "TOTAL IS";AA
- TextConstant:"TOTAL IS"
+ TextValue:"TOTAL IS"
  CarriageControl:;
  Variable:AA -> _
  CarriageControl:NL
@@ -472,51 +472,51 @@
  Variable:H$ -> $
  Variable:H$ -> $
  Variable:H$ -> $
- NumericConstant:1
+ NumericValue:1
  FunctionLeft:LEFT$($,_) -> $
  AssignmentOperator:= $ -> $
 1430 FOR H=1 TO H1 STEP 2
  control: Variable:H -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:H1 -> _"]
- step:    ["NumericConstant:2"]
+ step:    ["NumericValue:2"]
 1440 IF H$=MID$(I$,H,1) THEN 1480
  Variable:H$ -> $
  Variable:I$ -> $
  Variable:H -> _
- NumericConstant:1
+ NumericValue:1
  FunctionMid:MID$($,_,_) -> $
  BinaryOperatorEqual:=($,$) -> _
  LineNumber:1480
 1450 NEXT H
  Variable:H -> _
 1460 PRINT "TYPE ";MID$(I$,1,H1-1);" OR ";MID$(I$,H1,2);" PLEASE";
- TextConstant:"TYPE "
+ TextValue:"TYPE "
  CarriageControl:;
  Variable:I$ -> $
- NumericConstant:1
+ NumericValue:1
  Variable:H1 -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  FunctionMid:MID$($,_,_) -> $
  CarriageControl:;
- TextConstant:" OR "
+ TextValue:" OR "
  CarriageControl:;
  Variable:I$ -> $
  Variable:H1 -> _
- NumericConstant:2
+ NumericValue:2
  FunctionMid:MID$($,_,_) -> $
  CarriageControl:;
- TextConstant:" PLEASE"
+ TextValue:" PLEASE"
  CarriageControl:;
 1470 GOTO 1420
  LineNumber:1420
 1480 H=(H+1)/2
  Variable:H -> _
  Variable:H -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:= _ -> _
 1490 RETURN
@@ -527,20 +527,20 @@
  Remark:--INITIALIZE
 1520 D$="  A  2  3  4  5  6  7  8  9 10  J  Q  K"
  Variable:D$ -> $
- TextConstant:"  A  2  3  4  5  6  7  8  9 10  J  Q  K"
+ TextValue:"  A  2  3  4  5  6  7  8  9 10  J  Q  K"
  AssignmentOperator:= =$ -> $
 1530 I$="H,S,D,C"
  Variable:I$ -> $
- TextConstant:"H,S,D,C"
+ TextValue:"H,S,D,C"
  AssignmentOperator:= =$ -> $
 1540 FOR I=1 TO 13
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:13"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:13"]
 1550 FOR J=4*I-3 TO 4*I
  control: Variable:J -> _
- start:   ["NumericConstant:4", "Variable:I -> _", "BinaryOperatorMultiply:*(_,_) -> _", "NumericConstant:3", "BinaryOperatorMinus:-(_,_) -> _"]
- end:     ["NumericConstant:4", "Variable:I -> _", "BinaryOperatorMultiply:*(_,_) -> _"]
+ start:   ["NumericValue:4", "Variable:I -> _", "BinaryOperatorMultiply:*(_,_) -> _", "NumericValue:3", "BinaryOperatorMinus:-(_,_) -> _"]
+ end:     ["NumericValue:4", "Variable:I -> _", "BinaryOperatorMultiply:*(_,_) -> _"]
 1560 D(J)=I
  Variable:J -> _
  Variable:D(_) -> _
@@ -552,68 +552,68 @@
  Variable:I -> _
 1590 D=52
  Variable:D -> _
- NumericConstant:52
+ NumericValue:52
  AssignmentOperator:= =_ -> _
 1600 C=53
  Variable:C -> _
- NumericConstant:53
+ NumericValue:53
  AssignmentOperator:= =_ -> _
 1610 PRINT "DO YOU WANT INSTRUCTIONS";
- TextConstant:"DO YOU WANT INSTRUCTIONS"
+ TextValue:"DO YOU WANT INSTRUCTIONS"
  CarriageControl:;
 1620 INPUT H$
  Variable:H$ -> $
 1630 IF LEFT$(H$,1)="N" OR LEFT$(H$,1)="n" THEN 1760
  Variable:H$ -> $
- NumericConstant:1
+ NumericValue:1
  FunctionLeft:LEFT$($,_) -> $
- TextConstant:"N"
+ TextValue:"N"
  BinaryOperatorEqual:=($,$) -> _
  Variable:H$ -> $
- NumericConstant:1
+ NumericValue:1
  FunctionLeft:LEFT$($,_) -> $
- TextConstant:"n"
+ TextValue:"n"
  BinaryOperatorEqual:=($,$) -> _
  BinaryOperatorOr:OR(_,_) -> _
  LineNumber:1760
 1640 PRINT "THIS IS THE GAME OF 21. AS MANY AS 7 PLAYERS MAY PLAY THE"
- TextConstant:"THIS IS THE GAME OF 21. AS MANY AS 7 PLAYERS MAY PLAY THE"
+ TextValue:"THIS IS THE GAME OF 21. AS MANY AS 7 PLAYERS MAY PLAY THE"
  CarriageControl:NL
 1650 PRINT "GAME. ON EACH DEAL, BETS WILL BE ASKED FOR, AND THE"
- TextConstant:"GAME. ON EACH DEAL, BETS WILL BE ASKED FOR, AND THE"
+ TextValue:"GAME. ON EACH DEAL, BETS WILL BE ASKED FOR, AND THE"
  CarriageControl:NL
 1660 PRINT "PLAYERS' BETS SHOULD BE TYPED IN. THE CARDS WILL THEN BE"
- TextConstant:"PLAYERS' BETS SHOULD BE TYPED IN. THE CARDS WILL THEN BE"
+ TextValue:"PLAYERS' BETS SHOULD BE TYPED IN. THE CARDS WILL THEN BE"
  CarriageControl:NL
 1670 PRINT "DEALT, AND EACH PLAYER IN TURN PLAYS HIS HAND. THE"
- TextConstant:"DEALT, AND EACH PLAYER IN TURN PLAYS HIS HAND. THE"
+ TextValue:"DEALT, AND EACH PLAYER IN TURN PLAYS HIS HAND. THE"
  CarriageControl:NL
 1680 PRINT "FIRST RESPONSE SHOULD BE EITHER 'D', INDICATING THAT THE"
- TextConstant:"FIRST RESPONSE SHOULD BE EITHER 'D', INDICATING THAT THE"
+ TextValue:"FIRST RESPONSE SHOULD BE EITHER 'D', INDICATING THAT THE"
  CarriageControl:NL
 1690 PRINT "PLAYER IS DOUBLING DOWN, 'S', INDICATING THAT HE IS"
- TextConstant:"PLAYER IS DOUBLING DOWN, 'S', INDICATING THAT HE IS"
+ TextValue:"PLAYER IS DOUBLING DOWN, 'S', INDICATING THAT HE IS"
  CarriageControl:NL
 1700 PRINT "STANDING, 'H', INDICATING HE WANTS ANOTHER CARD, OR '/',"
- TextConstant:"STANDING, 'H', INDICATING HE WANTS ANOTHER CARD, OR '/',"
+ TextValue:"STANDING, 'H', INDICATING HE WANTS ANOTHER CARD, OR '/',"
  CarriageControl:NL
 1710 PRINT "INDICATING THAT HE WANTS TO SPLIT HIS CARDS. AFTER THE"
- TextConstant:"INDICATING THAT HE WANTS TO SPLIT HIS CARDS. AFTER THE"
+ TextValue:"INDICATING THAT HE WANTS TO SPLIT HIS CARDS. AFTER THE"
  CarriageControl:NL
 1720 PRINT "INITIAL RESPONSE, ALL FURTHER RESPONSES SHOULD BE 'S' OR"
- TextConstant:"INITIAL RESPONSE, ALL FURTHER RESPONSES SHOULD BE 'S' OR"
+ TextValue:"INITIAL RESPONSE, ALL FURTHER RESPONSES SHOULD BE 'S' OR"
  CarriageControl:NL
 1730 PRINT "'H', UNLESS THE CARDS WERE SPLIT, IN WHICH CASE DOUBLING"
- TextConstant:"'H', UNLESS THE CARDS WERE SPLIT, IN WHICH CASE DOUBLING"
+ TextValue:"'H', UNLESS THE CARDS WERE SPLIT, IN WHICH CASE DOUBLING"
  CarriageControl:NL
 1740 PRINT "DOWN IS AGAIN PERMITTED. IN ORDER TO COLLECT FOR"
- TextConstant:"DOWN IS AGAIN PERMITTED. IN ORDER TO COLLECT FOR"
+ TextValue:"DOWN IS AGAIN PERMITTED. IN ORDER TO COLLECT FOR"
  CarriageControl:NL
 1750 PRINT "BLACKJACK, THE INITIAL RESPONSE SHOULD BE 'S'."
- TextConstant:"BLACKJACK, THE INITIAL RESPONSE SHOULD BE 'S'."
+ TextValue:"BLACKJACK, THE INITIAL RESPONSE SHOULD BE 'S'."
  CarriageControl:NL
 1760 PRINT "NUMBER OF PLAYERS";
- TextConstant:"NUMBER OF PLAYERS"
+ TextValue:"NUMBER OF PLAYERS"
  CarriageControl:;
 1770 INPUT N
  Variable:N -> _
@@ -621,10 +621,10 @@
  CarriageControl:NL
 1780 IF N<1 OR N>7 OR N>INT(N) THEN 1760
  Variable:N -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorLess:<(_,_) -> _
  Variable:N -> _
- NumericConstant:7
+ NumericValue:7
  BinaryOperatorGreater:>(_,_) -> _
  BinaryOperatorOr:OR(_,_) -> _
  Variable:N -> _
@@ -635,90 +635,90 @@
  LineNumber:1760
 1790 FOR I=1 TO 8: T(I)=0: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:8"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:8"]
  Variable:I -> _
  Variable:T(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:I -> _
 1800 D1=N+1
  Variable:D1 -> _
  Variable:N -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 1810 IF 2*D1+C>=52 THEN GOSUB 120
- NumericConstant:2
+ NumericValue:2
  Variable:D1 -> _
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:C -> _
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:52
+ NumericValue:52
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  LineNumber:120
 1820 IF C=2 THEN C=C-1
  Variable:C -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorEqual:=(_,_) -> _
  Variable:C -> _
  Variable:C -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 1830 FOR I=1 TO N: Z(I)=0: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
  Variable:I -> _
  Variable:Z(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:I -> _
 1840 FOR I=1 TO 15: B(I)=0: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:15"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:15"]
  Variable:I -> _
  Variable:B(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:I -> _
 1850 FOR I=1 TO 15: Q(I)=0: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:15"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:15"]
  Variable:I -> _
  Variable:Q(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:I -> _
 1860 FOR I=1 TO 7: S(I)=0: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:7"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:7"]
  Variable:I -> _
  Variable:S(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:I -> _
 1870 FOR I=1 TO 15: R(I)=0: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:15"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:15"]
  Variable:I -> _
  Variable:R(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:I -> _
 1880 PRINT "BETS:"
- TextConstant:"BETS:"
+ TextValue:"BETS:"
  CarriageControl:NL
 1890 FOR I=1 TO N: PRINT "#";I;: INPUT Z(I): NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
- TextConstant:"#"
+ TextValue:"#"
  CarriageControl:;
  Variable:I -> _
  CarriageControl:;
@@ -727,16 +727,16 @@
  Variable:I -> _
 1900 FOR I=1 TO N
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
 1910 IF Z(I)<=0 OR Z(I)>500 THEN 1880
  Variable:I -> _
  Variable:Z(_) -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorLessEqual:<=(_,_) -> _
  Variable:I -> _
  Variable:Z(_) -> _
- NumericConstant:500
+ NumericValue:500
  BinaryOperatorGreater:>(_,_) -> _
  BinaryOperatorOr:OR(_,_) -> _
  LineNumber:1880
@@ -749,15 +749,15 @@
 1930 NEXT I
  Variable:I -> _
 1940 PRINT "PLAYER  ";
- TextConstant:"PLAYER  "
+ TextValue:"PLAYER  "
  CarriageControl:;
 1950 FOR I=1 TO N
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
 1960 PRINT TAB(I*7);I;
  Variable:I -> _
- NumericConstant:7
+ NumericValue:7
  BinaryOperatorMultiply:*(_,_) -> _
  FunctionTab:TAB(_) -> $
  CarriageControl:;
@@ -767,25 +767,25 @@
  Variable:I -> _
 1980 PRINT TAB((N+1)*7)"DEALER"
  Variable:N -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:7
+ NumericValue:7
  BinaryOperatorMultiply:*(_,_) -> _
  FunctionTab:TAB(_) -> $
  CarriageControl:
- TextConstant:"DEALER"
+ TextValue:"DEALER"
  CarriageControl:NL
 1990 FOR J=1 TO 2
  control: Variable:J -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:2"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:2"]
 2000 PRINT TAB(7);
- NumericConstant:7
+ NumericValue:7
  FunctionTab:TAB(_) -> $
  CarriageControl:;
 2010 FOR I=1 TO D1
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:D1 -> _"]
 2020 GOSUB 100
  LineNumber:100
@@ -797,7 +797,7 @@
  AssignmentOperator:= _ -> _
 2040 IF J=1 OR I<=N THEN GOSUB 750
  Variable:J -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorEqual:=(_,_) -> _
  Variable:I -> _
  Variable:N -> _
@@ -812,12 +812,12 @@
  Variable:J -> _
 2080 FOR I=1 TO D1
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:D1 -> _"]
 2090 R(I)=2
  Variable:I -> _
  Variable:R(_) -> _
- NumericConstant:2
+ NumericValue:2
  AssignmentOperator:= =_ -> _
 2100 NEXT I
  Variable:I -> _
@@ -825,31 +825,31 @@
  Remark:--TEST FOR INSURANCE
 2120 IF P(D1,1)>1 THEN 2240
  Variable:D1 -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:2240
 2130 PRINT "ANY INSURANCE";
- TextConstant:"ANY INSURANCE"
+ TextValue:"ANY INSURANCE"
  CarriageControl:;
 2140 INPUT H$
  Variable:H$ -> $
 2150 IF LEFT$(H$,1)<>"Y" THEN 2240
  Variable:H$ -> $
- NumericConstant:1
+ NumericValue:1
  FunctionLeft:LEFT$($,_) -> $
- TextConstant:"Y"
+ TextValue:"Y"
  BinaryOperatorNotEqual:<>($,$) -> _
  LineNumber:2240
 2160 PRINT "INSURANCE BETS"
- TextConstant:"INSURANCE BETS"
+ TextValue:"INSURANCE BETS"
  CarriageControl:NL
 2170 FOR I=1 TO N: PRINT "#";I;: INPUT Z(I): NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
- TextConstant:"#"
+ TextValue:"#"
  CarriageControl:;
  Variable:I -> _
  CarriageControl:;
@@ -858,18 +858,18 @@
  Variable:I -> _
 2180 FOR I=1 TO N
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
 2190 IF Z(I)<0 OR Z(I)>B(I)/2 THEN 2160
  Variable:I -> _
  Variable:Z(_) -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorLess:<(_,_) -> _
  Variable:I -> _
  Variable:Z(_) -> _
  Variable:I -> _
  Variable:B(_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorDivide:/(_,_) -> _
  BinaryOperatorGreater:>(_,_) -> _
  BinaryOperatorOr:OR(_,_) -> _
@@ -878,22 +878,22 @@
  Variable:I -> _
 2210 FOR I=1 TO N
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
 2220 S(I)=Z(I)*(3*(-(P(D1,2)>=10))-1)
  Variable:I -> _
  Variable:S(_) -> _
  Variable:I -> _
  Variable:Z(_) -> _
- NumericConstant:3
+ NumericValue:3
  Variable:D1 -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
- NumericConstant:10
+ NumericValue:10
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  UnaryOperatorMinus:-(_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  AssignmentOperator:= _ -> _
@@ -903,79 +903,79 @@
  Remark:--TEST FOR DEALER BLACKJACK
 2250 L1=1: L2=1
  Variable:L1 -> _
- NumericConstant:1
+ NumericValue:1
  AssignmentOperator:= =_ -> _
  Variable:L2 -> _
- NumericConstant:1
+ NumericValue:1
  AssignmentOperator:= =_ -> _
 2252 IF P(D1,1)=1 AND P(D1,2)>9 THEN L1=0: L2=0
  Variable:D1 -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorEqual:=(_,_) -> _
  Variable:D1 -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
- NumericConstant:9
+ NumericValue:9
  BinaryOperatorGreater:>(_,_) -> _
  BinaryOperatorAnd:AND(_,_) -> _
  Variable:L1 -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:L2 -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 2253 IF P(D1,2)=1 AND P(D1,1)>9 THEN L1=0: L2=0
  Variable:D1 -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorEqual:=(_,_) -> _
  Variable:D1 -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:9
+ NumericValue:9
  BinaryOperatorGreater:>(_,_) -> _
  BinaryOperatorAnd:AND(_,_) -> _
  Variable:L1 -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:L2 -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 2254 IF L1<>0 OR L2<>0 THEN 2320
  Variable:L1 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorNotEqual:<>(_,_) -> _
  Variable:L2 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorNotEqual:<>(_,_) -> _
  BinaryOperatorOr:OR(_,_) -> _
  LineNumber:2320
 2260 PRINT:PRINT "DEALER HAS A";MID$(D$,3*P(D1,2)-2,3);" IN THE HOLE ";
  CarriageControl:NL
- TextConstant:"DEALER HAS A"
+ TextValue:"DEALER HAS A"
  CarriageControl:;
  Variable:D$ -> $
- NumericConstant:3
+ NumericValue:3
  Variable:D1 -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:3
+ NumericValue:3
  FunctionMid:MID$($,_,_) -> $
  CarriageControl:;
- TextConstant:" IN THE HOLE "
+ TextValue:" IN THE HOLE "
  CarriageControl:;
 2270 PRINT "FOR BLACKJACK"
- TextConstant:"FOR BLACKJACK"
+ TextValue:"FOR BLACKJACK"
  CarriageControl:NL
 2280 FOR I=1 TO D1
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:D1 -> _"]
 2290 GOSUB 300
  LineNumber:300
@@ -987,36 +987,36 @@
  Remark:--NO DEALER BLACKJACK
 2330 IF P(D1,1)>1 AND P(D1,1)<10 THEN 2350
  Variable:D1 -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorGreater:>(_,_) -> _
  Variable:D1 -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:10
+ NumericValue:10
  BinaryOperatorLess:<(_,_) -> _
  BinaryOperatorAnd:AND(_,_) -> _
  LineNumber:2350
 2340 PRINT:PRINT "NO DEALER BLACKJACK."
  CarriageControl:NL
- TextConstant:"NO DEALER BLACKJACK."
+ TextValue:"NO DEALER BLACKJACK."
  CarriageControl:NL
 2350 REM--NOW PLAY THE HANDS
  Remark:--NOW PLAY THE HANDS
 2360 FOR I=1 TO N
  WARNING: FORNEXT length exceeds limit 40
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
 2370 PRINT "PLAYER";I;
- TextConstant:"PLAYER"
+ TextValue:"PLAYER"
  CarriageControl:;
  Variable:I -> _
  CarriageControl:;
 2380 H1=7
  Variable:H1 -> _
- NumericConstant:7
+ NumericValue:7
  AssignmentOperator:= =_ -> _
 2390 GOSUB 1410
  LineNumber:1410
@@ -1033,18 +1033,18 @@
 2430 IF Q(I)<>21 THEN 2490
  Variable:I -> _
  Variable:Q(_) -> _
- NumericConstant:21
+ NumericValue:21
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:2490
 2440 PRINT "BLACKJACK"
- TextConstant:"BLACKJACK"
+ TextValue:"BLACKJACK"
  CarriageControl:NL
 2450 S(I)=S(I)+1.5*B(I)
  Variable:I -> _
  Variable:S(_) -> _
  Variable:I -> _
  Variable:S(_) -> _
- NumericConstant:1.5
+ NumericValue:1.5
  Variable:I -> _
  Variable:B(_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
@@ -1053,7 +1053,7 @@
 2460 B(I)=0
  Variable:I -> _
  Variable:B(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 2470 GOSUB 1200
  LineNumber:1200
@@ -1077,7 +1077,7 @@
  LineNumber:300
 2570 H1=3
  Variable:H1 -> _
- NumericConstant:3
+ NumericValue:3
  AssignmentOperator:= =_ -> _
 2580 GOSUB 950
  LineNumber:950
@@ -1088,30 +1088,30 @@
 2610 L1=P(I,1): IF P(I,1)>10 THEN L1=10
  Variable:L1 -> _
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
  AssignmentOperator:= _ -> _
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:10
+ NumericValue:10
  BinaryOperatorGreater:>(_,_) -> _
  Variable:L1 -> _
- NumericConstant:10
+ NumericValue:10
  AssignmentOperator:= =_ -> _
 2612 L2=P(I,2): IF P(I,2)>10 THEN L2=10
  Variable:L2 -> _
  Variable:I -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  AssignmentOperator:= _ -> _
  Variable:I -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
- NumericConstant:10
+ NumericValue:10
  BinaryOperatorGreater:>(_,_) -> _
  Variable:L2 -> _
- NumericConstant:10
+ NumericValue:10
  AssignmentOperator:= =_ -> _
 2614 IF L1=L2 THEN 2640
  Variable:L1 -> _
@@ -1119,7 +1119,7 @@
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:2640
 2620 PRINT "SPLITTING NOT ALLOWED."
- TextConstant:"SPLITTING NOT ALLOWED."
+ TextValue:"SPLITTING NOT ALLOWED."
  CarriageControl:NL
 2630 GOTO 2370
  LineNumber:2370
@@ -1134,14 +1134,14 @@
 2660 R(I1)=2
  Variable:I1 -> _
  Variable:R(_) -> _
- NumericConstant:2
+ NumericValue:2
  AssignmentOperator:= =_ -> _
 2670 P(I1,1)=P(I,2)
  Variable:I1 -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
  Variable:I -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  AssignmentOperator:= _ -> _
 2680 B(I+D1)=B(I)
@@ -1155,13 +1155,13 @@
 2690 GOSUB 100
  LineNumber:100
 2700 PRINT "FIRST HAND RECEIVES A";
- TextConstant:"FIRST HAND RECEIVES A"
+ TextValue:"FIRST HAND RECEIVES A"
  CarriageControl:;
 2710 GOSUB 700
  LineNumber:700
 2720 P(I,2)=X
  Variable:I -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  Variable:X -> _
  AssignmentOperator:= _ -> _
@@ -1172,7 +1172,7 @@
 2750 GOSUB 100
  LineNumber:100
 2760 PRINT "SECOND HAND RECEIVES A";
- TextConstant:"SECOND HAND RECEIVES A"
+ TextValue:"SECOND HAND RECEIVES A"
  CarriageControl:;
 2770 I=I1
  Variable:I -> _
@@ -1182,7 +1182,7 @@
  LineNumber:700
 2790 P(I,2)=X
  Variable:I -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  Variable:X -> _
  AssignmentOperator:= _ -> _
@@ -1198,17 +1198,17 @@
  AssignmentOperator:= _ -> _
 2830 IF P(I,1)=1 THEN 2900
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  Variable:P(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorEqual:=(_,_) -> _
  LineNumber:2900
 2840 REM--NOW PLAY THE TWO HANDS
  Remark:--NOW PLAY THE TWO HANDS
 2850 PRINT "HAND";1-(I>D1);
- TextConstant:"HAND"
+ TextValue:"HAND"
  CarriageControl:;
- NumericConstant:1
+ NumericValue:1
  Variable:I -> _
  Variable:D1 -> _
  BinaryOperatorGreater:>(_,_) -> _
@@ -1242,54 +1242,54 @@
 2930 FOR I=1 TO N
  WARNING: FORNEXT length exceeds limit 40
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
 2940 IF R(I)>0 OR R(I+D1)>0 THEN 3010
  Variable:I -> _
  Variable:R(_) -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreater:>(_,_) -> _
  Variable:I -> _
  Variable:D1 -> _
  BinaryOperatorPlus:+(_,_) -> _
  Variable:R(_) -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreater:>(_,_) -> _
  BinaryOperatorOr:OR(_,_) -> _
  LineNumber:3010
 2950 NEXT I
  Variable:I -> _
 2960 PRINT "DEALER HAD A";
- TextConstant:"DEALER HAD A"
+ TextValue:"DEALER HAD A"
  CarriageControl:;
 2970 X=P(D1,2)
  Variable:X -> _
  Variable:D1 -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  AssignmentOperator:= _ -> _
 2980 GOSUB 700
  LineNumber:700
 2990 PRINT "CONCEALED."
- TextConstant:"CONCEALED."
+ TextValue:"CONCEALED."
  CarriageControl:NL
 3000 GOTO 3140
  LineNumber:3140
 3010 PRINT "DEALER HAS A";MID$(D$,3*P(D1,2)-2,3);" CONCEALED ";
- TextConstant:"DEALER HAS A"
+ TextValue:"DEALER HAS A"
  CarriageControl:;
  Variable:D$ -> $
- NumericConstant:3
+ NumericValue:3
  Variable:D1 -> _
- NumericConstant:2
+ NumericValue:2
  Variable:P(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:3
+ NumericValue:3
  FunctionMid:MID$($,_,_) -> $
  CarriageControl:;
- TextConstant:" CONCEALED "
+ TextValue:" CONCEALED "
  CarriageControl:;
 3020 I=D1
  Variable:I -> _
@@ -1302,17 +1302,17 @@
  AssignmentOperator:= _ -> _
  LineNumber:3400
 3035 PRINT "FOR A TOTAL OF";AA
- TextConstant:"FOR A TOTAL OF"
+ TextValue:"FOR A TOTAL OF"
  CarriageControl:;
  Variable:AA -> _
  CarriageControl:NL
 3040 IF AA>16 THEN 3130
  Variable:AA -> _
- NumericConstant:16
+ NumericValue:16
  BinaryOperatorGreater:>(_,_) -> _
  LineNumber:3130
 3050 PRINT "DRAWS";
- TextConstant:"DRAWS"
+ TextValue:"DRAWS"
  CarriageControl:;
 3060 GOSUB 100
  LineNumber:100
@@ -1327,10 +1327,10 @@
  LineNumber:3400
 3095 IF Q>0 AND AA<17 THEN 3060
  Variable:Q -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreater:>(_,_) -> _
  Variable:AA -> _
- NumericConstant:17
+ NumericValue:17
  BinaryOperatorLess:<(_,_) -> _
  BinaryOperatorAnd:AND(_,_) -> _
  LineNumber:3060
@@ -1339,15 +1339,15 @@
  Variable:Q(_) -> _
  Variable:Q -> _
  Variable:Q -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorLess:<(_,_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorDivide:/(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 3110 IF Q<0 THEN 3140
  Variable:Q -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorLess:<(_,_) -> _
  LineNumber:3140
 3120 AA=Q: GOSUB 3400
@@ -1356,7 +1356,7 @@
  AssignmentOperator:= _ -> _
  LineNumber:3400
 3125 PRINT "---TOTAL IS";AA
- TextConstant:"---TOTAL IS"
+ TextValue:"---TOTAL IS"
  CarriageControl:;
  Variable:AA -> _
  CarriageControl:NL
@@ -1368,13 +1368,13 @@
  Remark:
 3160 Z$="LOSES PUSHES WINS "
  Variable:Z$ -> $
- TextConstant:"LOSES PUSHES WINS "
+ TextValue:"LOSES PUSHES WINS "
  AssignmentOperator:= =$ -> $
 3165 PRINT
  CarriageControl:NL
 3170 FOR I=1 TO N
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:N -> _"]
 3180 AA=Q(I): GOSUB 3400
  Variable:AA -> _
@@ -1425,10 +1425,10 @@
  Variable:D1 -> _
  BinaryOperatorPlus:+(_,_) -> _
  Variable:B(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 3200 PRINT "PLAYER";I;
- TextConstant:"PLAYER"
+ TextValue:"PLAYER"
  CarriageControl:;
  Variable:I -> _
  CarriageControl:;
@@ -1437,23 +1437,23 @@
  Variable:I -> _
  Variable:S(_) -> _
  FunctionSgn:SGN(_) -> _
- NumericConstant:6
+ NumericValue:6
  BinaryOperatorMultiply:*(_,_) -> _
- NumericConstant:7
+ NumericValue:7
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:6
+ NumericValue:6
  FunctionMid:MID$($,_,_) -> $
  CarriageControl:;
- TextConstant:" "
+ TextValue:" "
  CarriageControl:;
 3220 IF S(I)<>0 THEN 3250
  Variable:I -> _
  Variable:S(_) -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorNotEqual:<>(_,_) -> _
  LineNumber:3250
 3230 PRINT "      ";
- TextConstant:"      "
+ TextValue:"      "
  CarriageControl:;
 3240 GOTO 3260
  LineNumber:3260
@@ -1472,7 +1472,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 3270 PRINT "TOTAL=";T(I)
- TextConstant:"TOTAL="
+ TextValue:"TOTAL="
  CarriageControl:;
  Variable:I -> _
  Variable:T(_) -> _
@@ -1505,7 +1505,7 @@
 3330 NEXT I
  Variable:I -> _
 3340 PRINT "DEALER'S TOTAL=";T(D1)
- TextConstant:"DEALER'S TOTAL="
+ TextValue:"DEALER'S TOTAL="
  CarriageControl:;
  Variable:D1 -> _
  Variable:T(_) -> _
@@ -1519,9 +1519,9 @@
 3400 AA=AA+11*(AA>=22): RETURN
  Variable:AA -> _
  Variable:AA -> _
- NumericConstant:11
+ NumericValue:11
  Variable:AA -> _
- NumericConstant:22
+ NumericValue:22
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -1530,9 +1530,9 @@
 3410 AB=AB+11*(AB>=22): RETURN
  Variable:AB -> _
  Variable:AB -> _
- NumericConstant:11
+ NumericValue:11
  Variable:AB -> _
- NumericConstant:22
+ NumericValue:22
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -1541,9 +1541,9 @@
 3420 AC=AC+11*(AC>=22): RETURN
  Variable:AC -> _
  Variable:AC -> _
- NumericConstant:11
+ NumericValue:11
  Variable:AC -> _
- NumericConstant:22
+ NumericValue:22
  BinaryOperatorGreaterEqual:>=(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _

@@ -1,29 +1,29 @@
 10 PRINT TAB(32);"WEEKDAY"
- NumericConstant:32
+ NumericValue:32
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"WEEKDAY"
+ TextValue:"WEEKDAY"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
- NumericConstant:15
+ NumericValue:15
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
 30 PRINT:PRINT:PRINT
  CarriageControl:NL
  CarriageControl:NL
  CarriageControl:NL
 100 PRINT "WEEKDAY IS A COMPUTER DEMONSTRATION THAT"
- TextConstant:"WEEKDAY IS A COMPUTER DEMONSTRATION THAT"
+ TextValue:"WEEKDAY IS A COMPUTER DEMONSTRATION THAT"
  CarriageControl:NL
 110 PRINT"GIVES FACTS ABOUT A DATE OF INTEREST TO YOU."
- TextConstant:"GIVES FACTS ABOUT A DATE OF INTEREST TO YOU."
+ TextValue:"GIVES FACTS ABOUT A DATE OF INTEREST TO YOU."
  CarriageControl:NL
 120 PRINT
  CarriageControl:NL
 130 PRINT "ENTER TODAY'S DATE IN THE FORM: 3,24,1979  ";
- TextConstant:"ENTER TODAY'S DATE IN THE FORM: 3,24,1979  "
+ TextValue:"ENTER TODAY'S DATE IN THE FORM: 3,24,1979  "
  CarriageControl:;
 140 INPUT M1,D1,Y1
  Variable:M1 -> _
@@ -37,32 +37,32 @@
  UserFunctionName:FNA -> _
  VariableName:A -> _
  Variable:A -> _
- NumericConstant:4
+ NumericValue:4
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
 180 DIM T(12)
- NumericConstant:12
+ NumericValue:12
  Declaration:T() -> _()
 190 DEF FNB(A)=INT(A/7)
  UserFunctionName:FNB -> _
  VariableName:A -> _
  Variable:A -> _
- NumericConstant:7
+ NumericValue:7
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
 200 REM SPACE OUTPUT AND READ IN INITIAL VALUES FOR MONTHS.
  Remark:SPACE OUTPUT AND READ IN INITIAL VALUES FOR MONTHS.
 210 FOR I= 1 TO 12
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:12"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:12"]
 220 READ T(I)
  Variable:I -> _
  Variable:T(_) -> _
 230 NEXT I
  Variable:I -> _
 240 PRINT"ENTER DAY OF BIRTH (OR OTHER DAY OF INTEREST)";
- TextConstant:"ENTER DAY OF BIRTH (OR OTHER DAY OF INTEREST)"
+ TextValue:"ENTER DAY OF BIRTH (OR OTHER DAY OF INTEREST)"
  CarriageControl:;
 250 INPUT M,D,Y
  Variable:M -> _
@@ -73,9 +73,9 @@
 270 LET I1 = INT((Y-1500)/100)
  Variable:I1 -> _
  Variable:Y -> _
- NumericConstant:1500
+ NumericValue:1500
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:100
+ NumericValue:100
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
@@ -83,20 +83,20 @@
  Remark:TEST FOR DATE BEFORE CURRENT CALENDAR.
 290 IF Y-1582 <0 THEN 1300
  Variable:Y -> _
- NumericConstant:1582
+ NumericValue:1582
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorLess:<(_,_) -> ?
  LineNumber:1300
 300 LET A = I1*5+(I1+3)/4
  Variable:A -> _
  Variable:I1 -> _
- NumericConstant:5
+ NumericValue:5
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:I1 -> _
- NumericConstant:3
+ NumericValue:3
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:4
+ NumericValue:4
  BinaryOperatorDivide:/(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
@@ -105,7 +105,7 @@
  Variable:A -> _
  Variable:A -> _
  UserFunction:FNB(_) -> _
- NumericConstant:7
+ NumericValue:7
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  FunctionInt:INT(_) -> _
@@ -113,7 +113,7 @@
 320 LET Y2=INT(Y/100)
  Variable:Y2 -> _
  Variable:Y -> _
- NumericConstant:100
+ NumericValue:100
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
@@ -121,7 +121,7 @@
  Variable:Y3 -> _
  Variable:Y -> _
  Variable:Y2 -> _
- NumericConstant:100
+ NumericValue:100
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  FunctionInt:INT(_) -> _
@@ -129,7 +129,7 @@
 340 LET A =Y3/4+Y3+D+T(M)+I2
  Variable:A -> _
  Variable:Y3 -> _
- NumericConstant:4
+ NumericValue:4
  BinaryOperatorDivide:/(_,_) -> _
  Variable:Y3 -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -146,21 +146,21 @@
  Variable:A -> _
  Variable:A -> _
  UserFunction:FNB(_) -> _
- NumericConstant:7
+ NumericValue:7
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  FunctionInt:INT(_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 360 IF M > 2 THEN 470
  Variable:M -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:470
 370 IF Y3 = 0 THEN 440
  Variable:Y3 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:440
 380 LET T1=INT(Y-FNA(Y)*4)
@@ -168,29 +168,29 @@
  Variable:Y -> _
  Variable:Y -> _
  UserFunction:FNA(_) -> _
- NumericConstant:4
+ NumericValue:4
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
 390 IF T1 <> 0 THEN 470
  Variable:T1 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:470
 400 IF B<>0 THEN 420
  Variable:B -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:420
 410 LET B=6
  Variable:B -> _
- NumericConstant:6
+ NumericValue:6
  AssignmentOperator:= =_ -> _
 420 LET B = B-1
  Variable:B -> _
  Variable:B -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 430 GOTO 470
@@ -198,7 +198,7 @@
 440 LET A = I1-1
  Variable:A -> _
  Variable:I1 -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 450 LET T1=INT(A-FNA(A)*4)
@@ -206,41 +206,41 @@
  Variable:A -> _
  Variable:A -> _
  UserFunction:FNA(_) -> _
- NumericConstant:4
+ NumericValue:4
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
 460 IF T1 = 0 THEN 400
  Variable:T1 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:400
 470 IF B <>0 THEN 490
  Variable:B -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:490
 480 LET B = 7
  Variable:B -> _
- NumericConstant:7
+ NumericValue:7
  AssignmentOperator:= =_ -> _
 490 IF (Y1*12+M1)*31+D1<(Y*12+M)*31+D THEN 550
  Variable:Y1 -> _
- NumericConstant:12
+ NumericValue:12
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:M1 -> _
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:31
+ NumericValue:31
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:D1 -> _
  BinaryOperatorPlus:+(_,_) -> _
  Variable:Y -> _
- NumericConstant:12
+ NumericValue:12
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:M -> _
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:31
+ NumericValue:31
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:D -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -248,20 +248,20 @@
  LineNumber:550
 500 IF (Y1*12+M1)*31+D1=(Y*12+M)*31+D THEN 530
  Variable:Y1 -> _
- NumericConstant:12
+ NumericValue:12
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:M1 -> _
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:31
+ NumericValue:31
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:D1 -> _
  BinaryOperatorPlus:+(_,_) -> _
  Variable:Y -> _
- NumericConstant:12
+ NumericValue:12
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:M -> _
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:31
+ NumericValue:31
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:D -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -270,119 +270,119 @@
 510 PRINT M;"/";D;"/";Y;" WAS A ";
  Variable:M -> _
  CarriageControl:;
- TextConstant:"/"
+ TextValue:"/"
  CarriageControl:;
  Variable:D -> _
  CarriageControl:;
- TextConstant:"/"
+ TextValue:"/"
  CarriageControl:;
  Variable:Y -> _
  CarriageControl:;
- TextConstant:" WAS A "
+ TextValue:" WAS A "
  CarriageControl:;
 520 GOTO 570
  LineNumber:570
 530 PRINT M;"/";D;"/";Y;" IS A ";
  Variable:M -> _
  CarriageControl:;
- TextConstant:"/"
+ TextValue:"/"
  CarriageControl:;
  Variable:D -> _
  CarriageControl:;
- TextConstant:"/"
+ TextValue:"/"
  CarriageControl:;
  Variable:Y -> _
  CarriageControl:;
- TextConstant:" IS A "
+ TextValue:" IS A "
  CarriageControl:;
 540 GOTO 570
  LineNumber:570
 550 PRINT M;"/";D;"/";Y;" WILL BE A ";
  Variable:M -> _
  CarriageControl:;
- TextConstant:"/"
+ TextValue:"/"
  CarriageControl:;
  Variable:D -> _
  CarriageControl:;
- TextConstant:"/"
+ TextValue:"/"
  CarriageControl:;
  Variable:Y -> _
  CarriageControl:;
- TextConstant:" WILL BE A "
+ TextValue:" WILL BE A "
  CarriageControl:;
 560 REM PRINT THE DAY OF THE WEEK THE DATE FALLS ON.
  Remark:PRINT THE DAY OF THE WEEK THE DATE FALLS ON.
 570 IF B <>1 THEN 590
  Variable:B -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:590
 580 PRINT "SUNDAY."
- TextConstant:"SUNDAY."
+ TextValue:"SUNDAY."
  CarriageControl:NL
 590 IF B<>2 THEN 610
  Variable:B -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:610
 600 PRINT "MONDAY."
- TextConstant:"MONDAY."
+ TextValue:"MONDAY."
  CarriageControl:NL
 610 IF B<>3 THEN 630
  Variable:B -> _
- NumericConstant:3
+ NumericValue:3
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:630
 620 PRINT "TUESDAY."
- TextConstant:"TUESDAY."
+ TextValue:"TUESDAY."
  CarriageControl:NL
 630 IF B<>4 THEN 650
  Variable:B -> _
- NumericConstant:4
+ NumericValue:4
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:650
 640 PRINT "WEDNESDAY."
- TextConstant:"WEDNESDAY."
+ TextValue:"WEDNESDAY."
  CarriageControl:NL
 650 IF B<>5 THEN 670
  Variable:B -> _
- NumericConstant:5
+ NumericValue:5
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:670
 660 PRINT "THURSDAY."
- TextConstant:"THURSDAY."
+ TextValue:"THURSDAY."
  CarriageControl:NL
 670 IF B<>6 THEN 690
  Variable:B -> _
- NumericConstant:6
+ NumericValue:6
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:690
 680 GOTO 1250
  LineNumber:1250
 690 IF B<>7 THEN 710
  Variable:B -> _
- NumericConstant:7
+ NumericValue:7
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:710
 700 PRINT "SATURDAY."
- TextConstant:"SATURDAY."
+ TextValue:"SATURDAY."
  CarriageControl:NL
 710 IF (Y1*12+M1)*31+D1=(Y*12+M)*31+D THEN 1120
  Variable:Y1 -> _
- NumericConstant:12
+ NumericValue:12
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:M1 -> _
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:31
+ NumericValue:31
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:D1 -> _
  BinaryOperatorPlus:+(_,_) -> _
  Variable:Y -> _
- NumericConstant:12
+ NumericValue:12
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:M -> _
  BinaryOperatorPlus:+(_,_) -> _
- NumericConstant:31
+ NumericValue:31
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:D -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -410,80 +410,80 @@
  AssignmentOperator:= _ -> _
 760 IF I7>=0 THEN 790
  Variable:I7 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreaterEqual:>=(_,_) -> ?
  LineNumber:790
 770 LET I6= I6-1
  Variable:I6 -> _
  Variable:I6 -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 780 LET I7=I7+30
  Variable:I7 -> _
  Variable:I7 -> _
- NumericConstant:30
+ NumericValue:30
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 790 IF I6>=0 THEN 820
  Variable:I6 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreaterEqual:>=(_,_) -> ?
  LineNumber:820
 800 LET I5=I5-1
  Variable:I5 -> _
  Variable:I5 -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 810 LET I6=I6+12
  Variable:I6 -> _
  Variable:I6 -> _
- NumericConstant:12
+ NumericValue:12
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 820 IF I5<0 THEN 1310
  Variable:I5 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorLess:<(_,_) -> ?
  LineNumber:1310
 830 IF I7 <> 0 THEN 850
  Variable:I7 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:850
 835 IF I6 <> 0 THEN 850
  Variable:I6 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:850
 840 PRINT"***HAPPY BIRTHDAY***"
- TextConstant:"***HAPPY BIRTHDAY***"
+ TextValue:"***HAPPY BIRTHDAY***"
  CarriageControl:NL
 850 PRINT " "," ","YEARS","MONTHS","DAYS"
- TextConstant:" "
+ TextValue:" "
  CarriageControl:,
- TextConstant:" "
+ TextValue:" "
  CarriageControl:,
- TextConstant:"YEARS"
+ TextValue:"YEARS"
  CarriageControl:,
- TextConstant:"MONTHS"
+ TextValue:"MONTHS"
  CarriageControl:,
- TextConstant:"DAYS"
+ TextValue:"DAYS"
  CarriageControl:NL
 855 PRINT " "," ","-----","------","----"
- TextConstant:" "
+ TextValue:" "
  CarriageControl:,
- TextConstant:" "
+ TextValue:" "
  CarriageControl:,
- TextConstant:"-----"
+ TextValue:"-----"
  CarriageControl:,
- TextConstant:"------"
+ TextValue:"------"
  CarriageControl:,
- TextConstant:"----"
+ TextValue:"----"
  CarriageControl:NL
 860 PRINT "YOUR AGE (IF BIRTHDATE) ",I5,I6,I7
- TextConstant:"YOUR AGE (IF BIRTHDATE) "
+ TextValue:"YOUR AGE (IF BIRTHDATE) "
  CarriageControl:,
  Variable:I5 -> _
  CarriageControl:,
@@ -494,16 +494,16 @@
 870 LET A8 = (I5*365)+(I6*30)+I7+INT(I6/2)
  Variable:A8 -> _
  Variable:I5 -> _
- NumericConstant:365
+ NumericValue:365
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:I6 -> _
- NumericConstant:30
+ NumericValue:30
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
  Variable:I7 -> _
  BinaryOperatorPlus:+(_,_) -> _
  Variable:I6 -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -525,62 +525,62 @@
 920 LET E = Y+65
  Variable:E -> _
  Variable:Y -> _
- NumericConstant:65
+ NumericValue:65
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 930 REM CALCULATE TIME SPENT IN THE FOLLOWING FUNCTIONS.
  Remark:CALCULATE TIME SPENT IN THE FOLLOWING FUNCTIONS.
 940 LET F = .35
  Variable:F -> _
- NumericConstant:.35
+ NumericValue:.35
  AssignmentOperator:= =_ -> _
 950 PRINT "YOU HAVE SLEPT ",
- TextConstant:"YOU HAVE SLEPT "
+ TextValue:"YOU HAVE SLEPT "
  CarriageControl:,
 960 GOSUB 1370
  LineNumber:1370
 970 LET F = .17
  Variable:F -> _
- NumericConstant:.17
+ NumericValue:.17
  AssignmentOperator:= =_ -> _
 980 PRINT "YOU HAVE EATEN ",
- TextConstant:"YOU HAVE EATEN "
+ TextValue:"YOU HAVE EATEN "
  CarriageControl:,
 990 GOSUB 1370
  LineNumber:1370
 1000 LET F = .23
  Variable:F -> _
- NumericConstant:.23
+ NumericValue:.23
  AssignmentOperator:= =_ -> _
 1010 IF K5 > 3 THEN 1040
  Variable:K5 -> _
- NumericConstant:3
+ NumericValue:3
  BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:1040
 1020 PRINT "YOU HAVE PLAYED",
- TextConstant:"YOU HAVE PLAYED"
+ TextValue:"YOU HAVE PLAYED"
  CarriageControl:,
 1030 GOTO 1080
  LineNumber:1080
 1040 IF K5 > 9 THEN 1070
  Variable:K5 -> _
- NumericConstant:9
+ NumericValue:9
  BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:1070
 1050 PRINT "YOU HAVE PLAYED/STUDIED",
- TextConstant:"YOU HAVE PLAYED/STUDIED"
+ TextValue:"YOU HAVE PLAYED/STUDIED"
  CarriageControl:,
 1060 GOTO  1080
  LineNumber:1080
 1070 PRINT "YOU HAVE WORKED/PLAYED",
- TextConstant:"YOU HAVE WORKED/PLAYED"
+ TextValue:"YOU HAVE WORKED/PLAYED"
  CarriageControl:,
 1080 GOSUB 1370
  LineNumber:1370
 1085 GOTO 1530
  LineNumber:1530
 1090 PRINT "YOU HAVE RELAXED ",K5,K6,K7
- TextConstant:"YOU HAVE RELAXED "
+ TextValue:"YOU HAVE RELAXED "
  CarriageControl:,
  Variable:K5 -> _
  CarriageControl:,
@@ -591,14 +591,14 @@
 1100 PRINT 
  CarriageControl:NL
 1110 PRINT TAB(16);"***  YOU MAY RETIRE IN";E;" ***"
- NumericConstant:16
+ NumericValue:16
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"***  YOU MAY RETIRE IN"
+ TextValue:"***  YOU MAY RETIRE IN"
  CarriageControl:;
  Variable:E -> _
  CarriageControl:;
- TextConstant:" ***"
+ TextValue:" ***"
  CarriageControl:NL
 1120 PRINT
  CarriageControl:NL
@@ -616,39 +616,39 @@
  
 1250 IF D=13 THEN 1280
  Variable:D -> _
- NumericConstant:13
+ NumericValue:13
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:1280
 1260 PRINT "FRIDAY."
- TextConstant:"FRIDAY."
+ TextValue:"FRIDAY."
  CarriageControl:NL
 1270 GOTO 710
  LineNumber:710
 1280 PRINT "FRIDAY THE THIRTEENTH---BEWARE!"
- TextConstant:"FRIDAY THE THIRTEENTH---BEWARE!"
+ TextValue:"FRIDAY THE THIRTEENTH---BEWARE!"
  CarriageControl:NL
 1290 GOTO 710
  LineNumber:710
 1300 PRINT "NOT PREPARED TO GIVE DAY OF WEEK PRIOR TO MDLXXXII. "
- TextConstant:"NOT PREPARED TO GIVE DAY OF WEEK PRIOR TO MDLXXXII. "
+ TextValue:"NOT PREPARED TO GIVE DAY OF WEEK PRIOR TO MDLXXXII. "
  CarriageControl:NL
 1310 GOTO 1140
  LineNumber:1140
 1320 REM TABLE OF VALUES FOR THE MONTHS TO BE USED IN CALCULATIONS.
  Remark:TABLE OF VALUES FOR THE MONTHS TO BE USED IN CALCULATIONS.
 1330 DATA 0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5
- NumericConstant:0
- NumericConstant:3
- NumericConstant:3
- NumericConstant:6
- NumericConstant:1
- NumericConstant:4
- NumericConstant:6
- NumericConstant:2
- NumericConstant:5
- NumericConstant:0
- NumericConstant:3
- NumericConstant:5
+ NumericValue:0
+ NumericValue:3
+ NumericValue:3
+ NumericValue:6
+ NumericValue:1
+ NumericValue:4
+ NumericValue:6
+ NumericValue:2
+ NumericValue:5
+ NumericValue:0
+ NumericValue:3
+ NumericValue:5
 1340 REM THIS IS THE CURRENT DATE USED IN THE CALCULATIONS.
  Remark:THIS IS THE CURRENT DATE USED IN THE CALCULATIONS.
 1350 REM THIS IS THE DATE TO BE CALCULATED ON.
@@ -665,7 +665,7 @@
 1380 LET I5 = INT(K1/365)
  Variable:I5 -> _
  Variable:K1 -> _
- NumericConstant:365
+ NumericValue:365
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
@@ -673,14 +673,14 @@
  Variable:K1 -> _
  Variable:K1 -> _
  Variable:I5 -> _
- NumericConstant:365
+ NumericValue:365
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 1400 LET I6 = INT(K1/30)
  Variable:I6 -> _
  Variable:K1 -> _
- NumericConstant:30
+ NumericValue:30
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
@@ -688,7 +688,7 @@
  Variable:I7 -> _
  Variable:K1 -> _
  Variable:I6 -> _
- NumericConstant:30
+ NumericValue:30
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
@@ -712,36 +712,36 @@
  AssignmentOperator:= _ -> _
 1450 IF K7>=0 THEN 1480
  Variable:K7 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreaterEqual:>=(_,_) -> ?
  LineNumber:1480
 1460 LET K7=K7+30
  Variable:K7 -> _
  Variable:K7 -> _
- NumericConstant:30
+ NumericValue:30
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 1470 LET K6=K6-1
  Variable:K6 -> _
  Variable:K6 -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 1480 IF K6>0 THEN 1510
  Variable:K6 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:1510
 1490 LET K6=K6+12
  Variable:K6 -> _
  Variable:K6 -> _
- NumericConstant:12
+ NumericValue:12
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 1500 LET K5=K5-1
  Variable:K5 -> _
  Variable:K5 -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
 1510 PRINT I5,I6,I7
@@ -755,7 +755,7 @@
  
 1530 IF K6=12 THEN 1550
  Variable:K6 -> _
- NumericConstant:12
+ NumericValue:12
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:1550
 1540 GOTO 1090
@@ -763,12 +763,12 @@
 1550 LET K5=K5+1
  Variable:K5 -> _
  Variable:K5 -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 1560 LET K6=0
  Variable:K6 -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 1570 GOTO 1090
  LineNumber:1090

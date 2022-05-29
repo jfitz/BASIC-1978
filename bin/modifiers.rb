@@ -142,8 +142,8 @@ class IfModifier < AbstractModifier
       values.size == 1
 
     result = values[0]
-    result = BooleanConstant.new(result) unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanValue.new(result) unless
+      result.class.to_s == 'BooleanValue'
 
     s = " #{result}"
     io.trace_output(s)
@@ -220,8 +220,8 @@ class UnlessModifier < AbstractModifier
       values.size == 1
 
     result = values[0]
-    result = BooleanConstant.new(result) unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanValue.new(result) unless
+      result.class.to_s == 'BooleanValue'
 
     s = " #{result}"
     io.trace_output(s)
@@ -298,8 +298,8 @@ class WhileModifier < AbstractModifier
       values.size == 1
 
     result = values[0]
-    result = BooleanConstant.new(result) unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanValue.new(result) unless
+      result.class.to_s == 'BooleanValue'
 
     s = " #{result}"
     io.trace_output(s)
@@ -319,8 +319,8 @@ class WhileModifier < AbstractModifier
       values.size == 1
 
     result = values[0]
-    result = BooleanConstant.new(result) unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanValue.new(result) unless
+      result.class.to_s == 'BooleanValue'
 
     s = " #{result}"
     io.trace_output(s)
@@ -397,8 +397,8 @@ class UntilModifier < AbstractModifier
       values.size == 1
 
     result = values[0]
-    result = BooleanConstant.new(result) unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanValue.new(result) unless
+      result.class.to_s == 'BooleanValue'
 
     s = " #{result}"
     io.trace_output(s)
@@ -420,8 +420,8 @@ class UntilModifier < AbstractModifier
       values.size == 1
 
     result = values[0]
-    result = BooleanConstant.new(result) unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanValue.new(result) unless
+      result.class.to_s == 'BooleanValue'
 
     s = " #{result}"
     io.trace_output(s)
@@ -505,7 +505,7 @@ class AbstractForModifier < AbstractModifier
 
   def execute_pre_stmt(interpreter)
     from = @start.evaluate(interpreter)[0]
-    step = NumericConstant.new(1)
+    step = NumericValue.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
     unless @end.nil?

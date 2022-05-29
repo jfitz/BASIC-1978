@@ -1,14 +1,14 @@
 10 PRINT TAB(32);"CALENDAR"
- NumericConstant:32
+ NumericValue:32
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"CALENDAR"
+ TextValue:"CALENDAR"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
- NumericConstant:15
+ NumericValue:15
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
 30 PRINT:PRINT:PRINT
  CarriageControl:NL
@@ -17,31 +17,31 @@
 100 REM     VALUES FOR 1979 - SEE NOTES
  Remark:    VALUES FOR 1979 - SEE NOTES
 110 DIM M(12)
- NumericConstant:12
+ NumericValue:12
  Declaration:M() -> _()
 120 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:6"]
- NumericConstant:10
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:6"]
+ NumericValue:10
  FunctionChr:CHR$(_) -> =$
  CarriageControl:;
  Variable:I -> _
 130 D=1: REM 1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
  Variable:D -> _
- NumericConstant:1
+ NumericValue:1
  AssignmentOperator:= =_ -> _
  Remark:1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
 140 S=0
  Variable:S -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 150 REM     READ DAYS OF EACH MONTH
  Remark:    READ DAYS OF EACH MONTH
 160 FOR N=0 TO 12: READ M(N): NEXT N
  control: Variable:N -> _
- start:   ["NumericConstant:0"]
- end:     ["NumericConstant:12"]
+ start:   ["NumericValue:0"]
+ end:     ["NumericValue:12"]
  Variable:N -> _
  Variable:M(_) -> _
  Variable:N -> _
@@ -50,32 +50,32 @@
 180 FOR N=1 TO 12
  WARNING: FORNEXT length exceeds limit 40
  control: Variable:N -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:12"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:12"]
 190 PRINT: PRINT: S=S+M(N-1)
  CarriageControl:NL
  CarriageControl:NL
  Variable:S -> _
  Variable:S -> _
  Variable:N -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  Variable:M(_) -> _
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 200 PRINT "**";S;TAB(7);
- TextConstant:"**"
+ TextValue:"**"
  CarriageControl:;
  Variable:S -> _
  CarriageControl:;
- NumericConstant:7
+ NumericValue:7
  FunctionTab:TAB(_) -> $
  CarriageControl:;
 210 FOR I=1 TO 18: PRINT "*";: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:18"]
- TextConstant:"*"
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:18"]
+ TextValue:"*"
  CarriageControl:;
  Variable:I -> _
 220 ON N GOTO 230,240,250,260,270,280,290,300,310,320,330,340
@@ -93,113 +93,113 @@
  LineNumber:330
  LineNumber:340
 230 PRINT " JANUARY ";: GOTO 350
- TextConstant:" JANUARY "
+ TextValue:" JANUARY "
  CarriageControl:;
  LineNumber:350
 240 PRINT " FEBRUARY";: GOTO 350
- TextConstant:" FEBRUARY"
+ TextValue:" FEBRUARY"
  CarriageControl:;
  LineNumber:350
 250 PRINT "  MARCH  ";: GOTO 350
- TextConstant:"  MARCH  "
+ TextValue:"  MARCH  "
  CarriageControl:;
  LineNumber:350
 260 PRINT "  APRIL  ";: GOTO 350
- TextConstant:"  APRIL  "
+ TextValue:"  APRIL  "
  CarriageControl:;
  LineNumber:350
 270 PRINT "   MAY   ";: GOTO 350
- TextConstant:"   MAY   "
+ TextValue:"   MAY   "
  CarriageControl:;
  LineNumber:350
 280 PRINT "   JUNE  ";: GOTO 350
- TextConstant:"   JUNE  "
+ TextValue:"   JUNE  "
  CarriageControl:;
  LineNumber:350
 290 PRINT "   JULY  ";: GOTO 350
- TextConstant:"   JULY  "
+ TextValue:"   JULY  "
  CarriageControl:;
  LineNumber:350
 300 PRINT "  AUGUST ";: GOTO 350
- TextConstant:"  AUGUST "
+ TextValue:"  AUGUST "
  CarriageControl:;
  LineNumber:350
 310 PRINT "SEPTEMBER";: GOTO 350
- TextConstant:"SEPTEMBER"
+ TextValue:"SEPTEMBER"
  CarriageControl:;
  LineNumber:350
 320 PRINT " OCTOBER ";: GOTO 350
- TextConstant:" OCTOBER "
+ TextValue:" OCTOBER "
  CarriageControl:;
  LineNumber:350
 330 PRINT " NOVEMBER";: GOTO 350
- TextConstant:" NOVEMBER"
+ TextValue:" NOVEMBER"
  CarriageControl:;
  LineNumber:350
 340 PRINT " DECEMBER";
- TextConstant:" DECEMBER"
+ TextValue:" DECEMBER"
  CarriageControl:;
 350 FOR I=1 TO 18: PRINT "*";: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:18"]
- TextConstant:"*"
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:18"]
+ TextValue:"*"
  CarriageControl:;
  Variable:I -> _
 360 PRINT 365-S;TAB(57);"**";
- NumericConstant:365
+ NumericValue:365
  Variable:S -> _
  BinaryOperatorMinus:-(_,_) -> _
  CarriageControl:;
- NumericConstant:57
+ NumericValue:57
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"**"
+ TextValue:"**"
  CarriageControl:;
 370 REM   366-S;     ON LEAP YEARS
  Remark:  366-S;     ON LEAP YEARS
 380 PRINT CHR$(10): PRINT "     S       M       T       W";
- NumericConstant:10
+ NumericValue:10
  FunctionChr:CHR$(_) -> =$
  CarriageControl:NL
- TextConstant:"     S       M       T       W"
+ TextValue:"     S       M       T       W"
  CarriageControl:;
 390 PRINT "       T       F       S"
- TextConstant:"       T       F       S"
+ TextValue:"       T       F       S"
  CarriageControl:NL
 400 PRINT
  CarriageControl:NL
 410 FOR I=1 TO 59: PRINT "*";: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:59"]
- TextConstant:"*"
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:59"]
+ TextValue:"*"
  CarriageControl:;
  Variable:I -> _
 420 REM
  Remark:
 430 FOR W=1 TO 6
  control: Variable:W -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:6"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:6"]
 440 PRINT CHR$(10)
- NumericConstant:10
+ NumericValue:10
  FunctionChr:CHR$(_) -> =$
  CarriageControl:NL
 450 PRINT TAB(4);
- NumericConstant:4
+ NumericValue:4
  FunctionTab:TAB(_) -> $
  CarriageControl:;
 460 REM
  Remark:
 470 FOR G=1 TO 7
  control: Variable:G -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:7"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:7"]
 480 D=D+1
  Variable:D -> _
  Variable:D -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 490 D2=D-S
@@ -216,13 +216,13 @@
  LineNumber:580
 510 IF D2>0 THEN PRINT D2;
  Variable:D2 -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorGreater:>(_,_) -> ?
  Variable:D2 -> _
  CarriageControl:;
 520 PRINT TAB(4+8*G);
- NumericConstant:4
- NumericConstant:8
+ NumericValue:4
+ NumericValue:8
  Variable:G -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorPlus:+(_,_) -> _
@@ -254,26 +254,26 @@
  Remark:
 610 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:6"]
- NumericConstant:10
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:6"]
+ NumericValue:10
  FunctionChr:CHR$(_) -> =$
  CarriageControl:;
  Variable:I -> _
 620 DATA 0,31,28,31,30,31,30,31,31,30,31,30,31
- NumericConstant:0
- NumericConstant:31
- NumericConstant:28
- NumericConstant:31
- NumericConstant:30
- NumericConstant:31
- NumericConstant:30
- NumericConstant:31
- NumericConstant:31
- NumericConstant:30
- NumericConstant:31
- NumericConstant:30
- NumericConstant:31
+ NumericValue:0
+ NumericValue:31
+ NumericValue:28
+ NumericValue:31
+ NumericValue:30
+ NumericValue:31
+ NumericValue:30
+ NumericValue:31
+ NumericValue:31
+ NumericValue:30
+ NumericValue:31
+ NumericValue:30
+ NumericValue:31
 630 REM  0,31,29,  ..., ON LEAP YEARS
  Remark: 0,31,29,  ..., ON LEAP YEARS
 640 END

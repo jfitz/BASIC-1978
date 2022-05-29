@@ -1,41 +1,41 @@
 10 PRINT TAB(33);"BOUNCE"
- NumericConstant:33
+ NumericValue:33
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"BOUNCE"
+ TextValue:"BOUNCE"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
- NumericConstant:15
+ NumericValue:15
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
 30 PRINT:PRINT:PRINT
  CarriageControl:NL
  CarriageControl:NL
  CarriageControl:NL
 90 DIM T(20)
- NumericConstant:20
+ NumericValue:20
  Declaration:T() -> _()
 100 PRINT "THIS SIMULATION LETS YOU SPECIFY THE INITIAL VELOCITY"
- TextConstant:"THIS SIMULATION LETS YOU SPECIFY THE INITIAL VELOCITY"
+ TextValue:"THIS SIMULATION LETS YOU SPECIFY THE INITIAL VELOCITY"
  CarriageControl:NL
 110 PRINT "OF A BALL THROWN STRAIGHT UP, AND THE COEFFICIENT OF"
- TextConstant:"OF A BALL THROWN STRAIGHT UP, AND THE COEFFICIENT OF"
+ TextValue:"OF A BALL THROWN STRAIGHT UP, AND THE COEFFICIENT OF"
  CarriageControl:NL
 120 PRINT "ELASTICITY OF THE BALL.  PLEASE USE A DECIMAL FRACTION"
- TextConstant:"ELASTICITY OF THE BALL.  PLEASE USE A DECIMAL FRACTION"
+ TextValue:"ELASTICITY OF THE BALL.  PLEASE USE A DECIMAL FRACTION"
  CarriageControl:NL
 130 PRINT "COEFFICIENCY (LESS THAN 1)."
- TextConstant:"COEFFICIENCY (LESS THAN 1)."
+ TextValue:"COEFFICIENCY (LESS THAN 1)."
  CarriageControl:NL
 131 PRINT
  CarriageControl:NL
 132 PRINT "YOU ALSO SPECIFY THE TIME INCREMENT TO BE USED IN"
- TextConstant:"YOU ALSO SPECIFY THE TIME INCREMENT TO BE USED IN"
+ TextValue:"YOU ALSO SPECIFY THE TIME INCREMENT TO BE USED IN"
  CarriageControl:NL
 133 PRINT "'STROBING' THE BALL'S FLIGHT (TRY .1 INITIALLY)."
- TextConstant:"'STROBING' THE BALL'S FLIGHT (TRY .1 INITIALLY)."
+ TextValue:"'STROBING' THE BALL'S FLIGHT (TRY .1 INITIALLY)."
  CarriageControl:NL
 134 PRINT
  CarriageControl:NL
@@ -52,15 +52,15 @@
 180 PRINT
  CarriageControl:NL
 182 PRINT "FEET"
- TextConstant:"FEET"
+ TextValue:"FEET"
  CarriageControl:NL
 184 PRINT
  CarriageControl:NL
 186 S1=INT(70/(V/(16*S2)))
  Variable:S1 -> _
- NumericConstant:70
+ NumericValue:70
  Variable:V -> _
- NumericConstant:16
+ NumericValue:16
  Variable:S2 -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorDivide:/(_,_) -> _
@@ -69,7 +69,7 @@
  AssignmentOperator:= _ -> _
 190 FOR I=1 TO S1
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:S1 -> _"]
 200 T(I)=V*C^(I-1)/16
  Variable:I -> _
@@ -77,20 +77,20 @@
  Variable:V -> _
  Variable:C -> _
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  BinaryOperatorPower:^(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
- NumericConstant:16
+ NumericValue:16
  BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:= _ -> _
 210 NEXT I
  Variable:I -> _
 220 FOR H=INT(-16*(V/32)^2+V^2/32+.5) TO 0 STEP -.5
  control: Variable:H -> _
- start:   ["NumericConstant:16", "UnaryOperatorMinus:-(_) -> =_", "Variable:V -> _", "NumericConstant:32", "BinaryOperatorDivide:/(_,_) -> _", "NumericConstant:2", "BinaryOperatorPower:^(_,_) -> _", "BinaryOperatorMultiply:*(_,_) -> _", "Variable:V -> _", "NumericConstant:2", "BinaryOperatorPower:^(_,_) -> _", "NumericConstant:32", "BinaryOperatorDivide:/(_,_) -> _", "BinaryOperatorPlus:+(_,_) -> _", "NumericConstant:.5", "BinaryOperatorPlus:+(_,_) -> _", "FunctionInt:INT(_) -> _"]
- end:     ["NumericConstant:0"]
- step:    ["NumericConstant:.5", "UnaryOperatorMinus:-(_) -> =_"]
+ start:   ["NumericValue:16", "UnaryOperatorMinus:-(_) -> =_", "Variable:V -> _", "NumericValue:32", "BinaryOperatorDivide:/(_,_) -> _", "NumericValue:2", "BinaryOperatorPower:^(_,_) -> _", "BinaryOperatorMultiply:*(_,_) -> _", "Variable:V -> _", "NumericValue:2", "BinaryOperatorPower:^(_,_) -> _", "NumericValue:32", "BinaryOperatorDivide:/(_,_) -> _", "BinaryOperatorPlus:+(_,_) -> _", "NumericValue:.5", "BinaryOperatorPlus:+(_,_) -> _", "FunctionInt:INT(_) -> _"]
+ end:     ["NumericValue:0"]
+ step:    ["NumericValue:.5", "UnaryOperatorMinus:-(_) -> =_"]
 221 IF INT(H)<>H THEN 225
  Variable:H -> _
  FunctionInt:INT(_) -> _
@@ -102,15 +102,15 @@
  CarriageControl:;
 225 L=0
  Variable:L -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 230 FOR I=1 TO S1
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:S1 -> _"]
 240 FOR T=0 TO T(I) STEP S2
  control: Variable:T -> _
- start:   ["NumericConstant:0"]
+ start:   ["NumericValue:0"]
  end:     ["Variable:I -> _", "Variable:T(_) -> _"]
  step:    ["Variable:S2 -> _"]
 245 L=L+S2
@@ -121,18 +121,18 @@
  AssignmentOperator:= _ -> _
 250 IF ABS(H-(.5*(-32)*T^2+V*C^(I-1)*T))>.25 THEN 270
  Variable:H -> _
- NumericConstant:.5
- NumericConstant:32
+ NumericValue:.5
+ NumericValue:32
  UnaryOperatorMinus:-(_) -> =_
  BinaryOperatorMultiply:*(_,_) -> =_
  Variable:T -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorPower:^(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:V -> _
  Variable:C -> _
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  BinaryOperatorPower:^(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
@@ -141,7 +141,7 @@
  BinaryOperatorPlus:+(_,_) -> _
  BinaryOperatorMinus:-(_,_) -> _
  FunctionAbs:ABS(_) -> _
- NumericConstant:.25
+ NumericValue:.25
  BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:270
 260 PRINT TAB(L/S2);"0";
@@ -150,30 +150,30 @@
  BinaryOperatorDivide:/(_,_) -> _
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"0"
+ TextValue:"0"
  CarriageControl:;
 270 NEXT T
  Variable:T -> _
 275 T=T(I+1)/2
  Variable:T -> _
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  Variable:T(_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorDivide:/(_,_) -> _
  AssignmentOperator:= _ -> _
 276 IF -16*T^2+V*C^(I-1)*T<H THEN 290
- NumericConstant:16
+ NumericValue:16
  UnaryOperatorMinus:-(_) -> =_
  Variable:T -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorPower:^(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  Variable:V -> _
  Variable:C -> _
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  BinaryOperatorPower:^(_,_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
@@ -190,27 +190,27 @@
 300 NEXT H
  Variable:H -> _
 310 PRINT TAB(1);
- NumericConstant:1
+ NumericValue:1
  FunctionTab:TAB(_) -> $
  CarriageControl:;
 320 FOR I=1 TO INT(L+1)/S2+1
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["Variable:L -> _", "NumericConstant:1", "BinaryOperatorPlus:+(_,_) -> _", "FunctionInt:INT(_) -> _", "Variable:S2 -> _", "BinaryOperatorDivide:/(_,_) -> _", "NumericConstant:1", "BinaryOperatorPlus:+(_,_) -> _"]
+ start:   ["NumericValue:1"]
+ end:     ["Variable:L -> _", "NumericValue:1", "BinaryOperatorPlus:+(_,_) -> _", "FunctionInt:INT(_) -> _", "Variable:S2 -> _", "BinaryOperatorDivide:/(_,_) -> _", "NumericValue:1", "BinaryOperatorPlus:+(_,_) -> _"]
 330 PRINT ".";
- TextConstant:"."
+ TextValue:"."
  CarriageControl:;
 340 NEXT I
  Variable:I -> _
 350 PRINT
  CarriageControl:NL
 355 PRINT " 0";
- TextConstant:" 0"
+ TextValue:" 0"
  CarriageControl:;
 360 FOR I=1 TO INT(L+.9995)
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["Variable:L -> _", "NumericConstant:.9995", "BinaryOperatorPlus:+(_,_) -> _", "FunctionInt:INT(_) -> _"]
+ start:   ["NumericValue:1"]
+ end:     ["Variable:L -> _", "NumericValue:.9995", "BinaryOperatorPlus:+(_,_) -> _", "FunctionInt:INT(_) -> _"]
 380 PRINT TAB(INT(I/S2));I;
  Variable:I -> _
  Variable:S2 -> _
@@ -226,18 +226,18 @@
  CarriageControl:NL
 410 PRINT TAB(INT(L+1)/(2*S2)-2);"SECONDS"
  Variable:L -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  FunctionInt:INT(_) -> _
- NumericConstant:2
+ NumericValue:2
  Variable:S2 -> _
  BinaryOperatorMultiply:*(_,_) -> _
  BinaryOperatorDivide:/(_,_) -> _
- NumericConstant:2
+ NumericValue:2
  BinaryOperatorMinus:-(_,_) -> _
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"SECONDS"
+ TextValue:"SECONDS"
  CarriageControl:NL
 420 PRINT
  CarriageControl:NL

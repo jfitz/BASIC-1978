@@ -1,35 +1,35 @@
 2 PRINT TAB(33);"WORD"
- NumericConstant:33
+ NumericValue:33
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"WORD"
+ TextValue:"WORD"
  CarriageControl:NL
 3 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
- NumericConstant:15
+ NumericValue:15
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
 4 PRINT: PRINT: PRINT
  CarriageControl:NL
  CarriageControl:NL
  CarriageControl:NL
 5 DIM S(7),A(7),L(7),D(7),P(7)
- NumericConstant:7
+ NumericValue:7
  Declaration:S() -> _()
- NumericConstant:7
+ NumericValue:7
  Declaration:A() -> _()
- NumericConstant:7
+ NumericValue:7
  Declaration:L() -> _()
- NumericConstant:7
+ NumericValue:7
  Declaration:D() -> _()
- NumericConstant:7
+ NumericValue:7
  Declaration:P() -> _()
 10 PRINT "I AM THINKING OF A WORD -- YOU GUESS IT.  I WILL GIVE YOU"
- TextConstant:"I AM THINKING OF A WORD -- YOU GUESS IT.  I WILL GIVE YOU"
+ TextValue:"I AM THINKING OF A WORD -- YOU GUESS IT.  I WILL GIVE YOU"
  CarriageControl:NL
 15 PRINT "CLUES TO HELP YOU GET IT.  GOOD LUCK!!": PRINT: PRINT
- TextConstant:"CLUES TO HELP YOU GET IT.  GOOD LUCK!!"
+ TextValue:"CLUES TO HELP YOU GET IT.  GOOD LUCK!!"
  CarriageControl:NL
  CarriageControl:NL
  CarriageControl:NL
@@ -38,7 +38,7 @@
 30 PRINT: PRINT: PRINT "YOU ARE STARTING A NEW GAME..."
  CarriageControl:NL
  CarriageControl:NL
- TextConstant:"YOU ARE STARTING A NEW GAME..."
+ TextValue:"YOU ARE STARTING A NEW GAME..."
  CarriageControl:NL
 35 RESTORE
  
@@ -46,17 +46,17 @@
  Variable:N -> _
 50 C=INT(RND(1)*N+1)
  Variable:C -> _
- NumericConstant:1
+ NumericValue:1
  FunctionRnd:RND(_) -> _
  Variable:N -> _
  BinaryOperatorMultiply:*(_,_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
 60 FOR I=1 TO C
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:C -> _"]
 70 READ S$
  Variable:S$ -> $
@@ -64,58 +64,58 @@
  Variable:I -> _
 90 G=0
  Variable:G -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 95 S(0)=LEN(S$)
- NumericConstant:0
+ NumericValue:0
  Variable:S(_) -> _
  Variable:S$ -> $
  FunctionLen:LEN($) -> _
  AssignmentOperator:= _ -> _
 100 FOR I=1 TO LEN(S$): S(I)=ASC(MID$(S$,I,1)): NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:S$ -> $", "FunctionLen:LEN($) -> _"]
  Variable:I -> _
  Variable:S(_) -> _
  Variable:S$ -> $
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  FunctionMid:MID$($,_,_) -> $
  FunctionAscii:ASC($) -> _
  AssignmentOperator:= _ -> _
  Variable:I -> _
 110 FOR I=1 TO 5
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:5"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:5"]
 120 A(I)=45
  Variable:I -> _
  Variable:A(_) -> _
- NumericConstant:45
+ NumericValue:45
  AssignmentOperator:= =_ -> _
 130 NEXT I
  Variable:I -> _
 140 FOR J=1 TO 5
  control: Variable:J -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:5"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:5"]
 144 P(J)=0
  Variable:J -> _
  Variable:P(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
 146 NEXT J
  Variable:J -> _
 150 PRINT "GUESS A FIVE LETTER WORD";
- TextConstant:"GUESS A FIVE LETTER WORD"
+ TextValue:"GUESS A FIVE LETTER WORD"
  CarriageControl:;
 160 INPUT L$
  Variable:L$ -> $
 170 G=G+1
  Variable:G -> _
  Variable:G -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 172 IF S$=L$ THEN 500
@@ -125,59 +125,59 @@
  LineNumber:500
 173 FOR I=1 TO 7: P(I)=0: NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:7"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:7"]
  Variable:I -> _
  Variable:P(_) -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:I -> _
 175 L(0)=LEN(L$)
- NumericConstant:0
+ NumericValue:0
  Variable:L(_) -> _
  Variable:L$ -> $
  FunctionLen:LEN($) -> _
  AssignmentOperator:= _ -> _
 180 FOR I=1 TO LEN(L$): L(I)=ASC(MID$(L$,I,1)): NEXT I
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
+ start:   ["NumericValue:1"]
  end:     ["Variable:L$ -> $", "FunctionLen:LEN($) -> _"]
  Variable:I -> _
  Variable:L(_) -> _
  Variable:L$ -> $
  Variable:I -> _
- NumericConstant:1
+ NumericValue:1
  FunctionMid:MID$($,_,_) -> $
  FunctionAscii:ASC($) -> _
  AssignmentOperator:= _ -> _
  Variable:I -> _
 190 IF L(1)=63 THEN 300
- NumericConstant:1
+ NumericValue:1
  Variable:L(_) -> _
- NumericConstant:63
+ NumericValue:63
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:300
 200 IF L(0)<>5 THEN 400
- NumericConstant:0
+ NumericValue:0
  Variable:L(_) -> _
- NumericConstant:5
+ NumericValue:5
  BinaryOperatorNotEqual:<>(_,_) -> ?
  LineNumber:400
 205 M=0: Q=1
  Variable:M -> _
- NumericConstant:0
+ NumericValue:0
  AssignmentOperator:= =_ -> _
  Variable:Q -> _
- NumericConstant:1
+ NumericValue:1
  AssignmentOperator:= =_ -> _
 210 FOR I=1 TO 5
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:5"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:5"]
 220 FOR J=1 TO 5
  control: Variable:J -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:5"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:5"]
 230 IF S(I)<>L(J) THEN 260
  Variable:I -> _
  Variable:S(_) -> _
@@ -194,7 +194,7 @@
 232 Q=Q+1
  Variable:Q -> _
  Variable:Q -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 233 IF I<>J THEN 250
@@ -211,7 +211,7 @@
 250 M=M+1
  Variable:M -> _
  Variable:M -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 260 NEXT J
@@ -219,22 +219,22 @@
 265 NEXT I
  Variable:I -> _
 270 A(0)=5
- NumericConstant:0
+ NumericValue:0
  Variable:A(_) -> _
- NumericConstant:5
+ NumericValue:5
  AssignmentOperator:= =_ -> _
 272 P(0)=M
- NumericConstant:0
+ NumericValue:0
  Variable:P(_) -> _
  Variable:M -> _
  AssignmentOperator:= _ -> _
 275 A$="": FOR I=1 TO A(0): A$=A$+CHR$(A(I)): NEXT I
  Variable:A$ -> $
- TextConstant:""
+ TextValue:""
  AssignmentOperator:= =$ -> $
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:0", "Variable:A(_) -> _"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:0", "Variable:A(_) -> _"]
  Variable:A$ -> $
  Variable:A$ -> $
  Variable:I -> _
@@ -245,11 +245,11 @@
  Variable:I -> _
 277 P$="": FOR I=1 TO P(0): P$=P$+CHR$(P(I)): NEXT I
  Variable:P$ -> $
- TextConstant:""
+ TextValue:""
  AssignmentOperator:= =$ -> $
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:0", "Variable:P(_) -> _"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:0", "Variable:P(_) -> _"]
  Variable:P$ -> $
  Variable:P$ -> $
  Variable:I -> _
@@ -259,16 +259,16 @@
  AssignmentOperator:= $ -> $
  Variable:I -> _
 280 PRINT "THERE WERE";M;"MATCHES AND THE COMMON LETTERS WERE...";P$
- TextConstant:"THERE WERE"
+ TextValue:"THERE WERE"
  CarriageControl:;
  Variable:M -> _
  CarriageControl:;
- TextConstant:"MATCHES AND THE COMMON LETTERS WERE..."
+ TextValue:"MATCHES AND THE COMMON LETTERS WERE..."
  CarriageControl:;
  Variable:P$ -> $
  CarriageControl:NL
 285 PRINT "FROM THE EXACT LETTER MATCHES, YOU KNOW................";A$
- TextConstant:"FROM THE EXACT LETTER MATCHES, YOU KNOW................"
+ TextValue:"FROM THE EXACT LETTER MATCHES, YOU KNOW................"
  CarriageControl:;
  Variable:A$ -> $
  CarriageControl:NL
@@ -279,12 +279,12 @@
  LineNumber:500
 287 IF M>1 THEN 289
  Variable:M -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorGreater:>(_,_) -> ?
  LineNumber:289
 288 PRINT: PRINT "IF YOU GIVE UP, TYPE '?' FOR YOUR NEXT GUESS."
  CarriageControl:NL
- TextConstant:"IF YOU GIVE UP, TYPE '?' FOR YOUR NEXT GUESS."
+ TextValue:"IF YOU GIVE UP, TYPE '?' FOR YOUR NEXT GUESS."
  CarriageControl:NL
 289 PRINT
  CarriageControl:NL
@@ -292,11 +292,11 @@
  LineNumber:150
 300 S$="": FOR I=1 TO 7: S$=S$+CHR$(S(I)): NEXT I
  Variable:S$ -> $
- TextConstant:""
+ TextValue:""
  AssignmentOperator:= =$ -> $
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:7"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:7"]
  Variable:S$ -> $
  Variable:S$ -> $
  Variable:I -> _
@@ -306,7 +306,7 @@
  AssignmentOperator:= $ -> $
  Variable:I -> _
 310 PRINT "THE SECRET WORD IS ";S$: PRINT
- TextConstant:"THE SECRET WORD IS "
+ TextValue:"THE SECRET WORD IS "
  CarriageControl:;
  Variable:S$ -> $
  CarriageControl:NL
@@ -314,46 +314,46 @@
 320 GOTO 30
  LineNumber:30
 400 PRINT "YOU MUST GUESS A 5 LETTER WORD.  START AGAIN."
- TextConstant:"YOU MUST GUESS A 5 LETTER WORD.  START AGAIN."
+ TextValue:"YOU MUST GUESS A 5 LETTER WORD.  START AGAIN."
  CarriageControl:NL
 410 PRINT: G=G-1: GOTO 150
  CarriageControl:NL
  Variable:G -> _
  Variable:G -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorMinus:-(_,_) -> _
  AssignmentOperator:= _ -> _
  LineNumber:150
 500 PRINT "YOU HAVE GUESSED THE WORD.  IT TOOK";G;"GUESSES!": PRINT
- TextConstant:"YOU HAVE GUESSED THE WORD.  IT TOOK"
+ TextValue:"YOU HAVE GUESSED THE WORD.  IT TOOK"
  CarriageControl:;
  Variable:G -> _
  CarriageControl:;
- TextConstant:"GUESSES!"
+ TextValue:"GUESSES!"
  CarriageControl:NL
  CarriageControl:NL
 510 INPUT "WANT TO PLAY AGAIN";Q$
  Variable:Q$ -> $
 520 IF Q$="YES" THEN 30
  Variable:Q$ -> $
- TextConstant:"YES"
+ TextValue:"YES"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:30
 530 DATA 12,"DINKY","SMOKE","WATER","GRASS","TRAIN","MIGHT","FIRST"
- NumericConstant:12
- TextConstant:"DINKY"
- TextConstant:"SMOKE"
- TextConstant:"WATER"
- TextConstant:"GRASS"
- TextConstant:"TRAIN"
- TextConstant:"MIGHT"
- TextConstant:"FIRST"
+ NumericValue:12
+ TextValue:"DINKY"
+ TextValue:"SMOKE"
+ TextValue:"WATER"
+ TextValue:"GRASS"
+ TextValue:"TRAIN"
+ TextValue:"MIGHT"
+ TextValue:"FIRST"
 540 DATA "CANDY","CHAMP","WOULD","CLUMP","DOPEY"
- TextConstant:"CANDY"
- TextConstant:"CHAMP"
- TextConstant:"WOULD"
- TextConstant:"CLUMP"
- TextConstant:"DOPEY"
+ TextValue:"CANDY"
+ TextValue:"CHAMP"
+ TextValue:"WOULD"
+ TextValue:"CLUMP"
+ TextValue:"DOPEY"
 999 END
  
 

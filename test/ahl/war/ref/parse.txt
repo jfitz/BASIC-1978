@@ -1,67 +1,67 @@
 10 PRINT TAB(33);"WAR"
- NumericConstant:33
+ NumericValue:33
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"WAR"
+ TextValue:"WAR"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
- NumericConstant:15
+ NumericValue:15
  FunctionTab:TAB(_) -> $
  CarriageControl:;
- TextConstant:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
+ TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
 30 PRINT: PRINT: PRINT
  CarriageControl:NL
  CarriageControl:NL
  CarriageControl:NL
 100 PRINT "THIS IS THE CARD GAME OF WAR.  EACH CARD IS GIVEN BY SUIT-#"
- TextConstant:"THIS IS THE CARD GAME OF WAR.  EACH CARD IS GIVEN BY SUIT-#"
+ TextValue:"THIS IS THE CARD GAME OF WAR.  EACH CARD IS GIVEN BY SUIT-#"
  CarriageControl:NL
 110 PRINT "AS S-7 FOR SPADE 7.  ";
- TextConstant:"AS S-7 FOR SPADE 7.  "
+ TextValue:"AS S-7 FOR SPADE 7.  "
  CarriageControl:;
 120 PRINT "DO YOU WANT DIRECTIONS";
- TextConstant:"DO YOU WANT DIRECTIONS"
+ TextValue:"DO YOU WANT DIRECTIONS"
  CarriageControl:;
 130 INPUT B$
  Variable:B$ -> $
 140 IF B$="NO" THEN 210
  Variable:B$ -> $
- TextConstant:"NO"
+ TextValue:"NO"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:210
 150 IF B$="YES" THEN 180
  Variable:B$ -> $
- TextConstant:"YES"
+ TextValue:"YES"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:180
 160 PRINT "YES OR NO, PLEASE.  ";
- TextConstant:"YES OR NO, PLEASE.  "
+ TextValue:"YES OR NO, PLEASE.  "
  CarriageControl:;
 170 GOTO 120
  LineNumber:120
 180 PRINT "THE COMPUTER GIVES YOU AND IT A 'CARD'.  THE HIGHER CARD"
- TextConstant:"THE COMPUTER GIVES YOU AND IT A 'CARD'.  THE HIGHER CARD"
+ TextValue:"THE COMPUTER GIVES YOU AND IT A 'CARD'.  THE HIGHER CARD"
  CarriageControl:NL
 190 PRINT "(NUMERICALLY) WINS.  THE GAME ENDS WHEN YOU CHOOSE NOT TO"
- TextConstant:"(NUMERICALLY) WINS.  THE GAME ENDS WHEN YOU CHOOSE NOT TO"
+ TextValue:"(NUMERICALLY) WINS.  THE GAME ENDS WHEN YOU CHOOSE NOT TO"
  CarriageControl:NL
 200 PRINT "CONTINUE OR WHEN YOU HAVE FINISHED THE PACK."
- TextConstant:"CONTINUE OR WHEN YOU HAVE FINISHED THE PACK."
+ TextValue:"CONTINUE OR WHEN YOU HAVE FINISHED THE PACK."
  CarriageControl:NL
 210 PRINT
  CarriageControl:NL
 220 PRINT
  CarriageControl:NL
 230 DIM A$(52),L(54)
- NumericConstant:52
+ NumericValue:52
  Declaration:A$() -> $()
- NumericConstant:54
+ NumericValue:54
  Declaration:L() -> _()
 240 FOR I=1 TO 52
  control: Variable:I -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:52"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:52"]
 250 READ A$(I)
  Variable:I -> _
  Variable:A$(_) -> $
@@ -71,28 +71,28 @@
  Remark:
 280 FOR J=1 TO 52
  control: Variable:J -> _
- start:   ["NumericConstant:1"]
- end:     ["NumericConstant:52"]
+ start:   ["NumericValue:1"]
+ end:     ["NumericValue:52"]
 290 LET L(J)=INT(52*RND(1))+1
  Variable:J -> _
  Variable:L(_) -> _
- NumericConstant:52
- NumericConstant:1
+ NumericValue:52
+ NumericValue:1
  FunctionRnd:RND(_) -> _
  BinaryOperatorMultiply:*(_,_) -> _
  FunctionInt:INT(_) -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 295 IF J=1 THEN 350
  Variable:J -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:350
 300 FOR K=1 TO J-1
  control: Variable:K -> _
- start:   ["NumericConstant:1"]
- end:     ["Variable:J -> _", "NumericConstant:1", "BinaryOperatorMinus:-(_,_) -> _"]
+ start:   ["NumericValue:1"]
+ end:     ["Variable:J -> _", "NumericValue:1", "BinaryOperatorMinus:-(_,_) -> _"]
 310 IF L(K)<>L(J) THEN 340
  Variable:K -> _
  Variable:L(_) -> _
@@ -111,7 +111,7 @@
 360 P=P+1
  Variable:P -> _
  Variable:P -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 370 M1=L(P)
@@ -122,7 +122,7 @@
 380 P=P+1
  Variable:P -> _
  Variable:P -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 390 M2=L(P)
@@ -133,12 +133,12 @@
 400 PRINT
  CarriageControl:NL
 420 PRINT "YOU: ";A$(M1),"COMPUTER: ";A$(M2)
- TextConstant:"YOU: "
+ TextValue:"YOU: "
  CarriageControl:;
  Variable:M1 -> _
  Variable:A$(_) -> $
  CarriageControl:,
- TextConstant:"COMPUTER: "
+ TextValue:"COMPUTER: "
  CarriageControl:;
  Variable:M2 -> _
  Variable:A$(_) -> $
@@ -146,18 +146,18 @@
 430 N1=INT((M1-.5)/4)
  Variable:N1 -> _
  Variable:M1 -> _
- NumericConstant:.5
+ NumericValue:.5
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:4
+ NumericValue:4
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
 440 N2=INT((M2-.5)/4)
  Variable:N2 -> _
  Variable:M2 -> _
- NumericConstant:.5
+ NumericValue:.5
  BinaryOperatorMinus:-(_,_) -> _
- NumericConstant:4
+ NumericValue:4
  BinaryOperatorDivide:/(_,_) -> _
  FunctionInt:INT(_) -> _
  AssignmentOperator:= _ -> _
@@ -169,15 +169,15 @@
 460 A1=A1+1
  Variable:A1 -> _
  Variable:A1 -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 470 PRINT "THE COMPUTER WINS!!! YOU HAVE";B1;"AND THE COMPUTER HAS";A1
- TextConstant:"THE COMPUTER WINS!!! YOU HAVE"
+ TextValue:"THE COMPUTER WINS!!! YOU HAVE"
  CarriageControl:;
  Variable:B1 -> _
  CarriageControl:;
- TextConstant:"AND THE COMPUTER HAS"
+ TextValue:"AND THE COMPUTER HAS"
  CarriageControl:;
  Variable:A1 -> _
  CarriageControl:NL
@@ -191,48 +191,48 @@
 500 B1=B1+1
  Variable:B1 -> _
  Variable:B1 -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  AssignmentOperator:= _ -> _
 510 PRINT "YOU WIN. YOU HAVE";B1;"AND THE COMPUTER HAS";A1
- TextConstant:"YOU WIN. YOU HAVE"
+ TextValue:"YOU WIN. YOU HAVE"
  CarriageControl:;
  Variable:B1 -> _
  CarriageControl:;
- TextConstant:"AND THE COMPUTER HAS"
+ TextValue:"AND THE COMPUTER HAS"
  CarriageControl:;
  Variable:A1 -> _
  CarriageControl:NL
 520 GOTO 540
  LineNumber:540
 530 PRINT "TIE.  NO SCORE CHANGE."
- TextConstant:"TIE.  NO SCORE CHANGE."
+ TextValue:"TIE.  NO SCORE CHANGE."
  CarriageControl:NL
 540 IF L(P+1)=0 THEN 610
  Variable:P -> _
- NumericConstant:1
+ NumericValue:1
  BinaryOperatorPlus:+(_,_) -> _
  Variable:L(_) -> _
- NumericConstant:0
+ NumericValue:0
  BinaryOperatorEqual:=(_,_) -> ?
  LineNumber:610
 550 PRINT "DO YOU WANT TO CONTINUE";
- TextConstant:"DO YOU WANT TO CONTINUE"
+ TextValue:"DO YOU WANT TO CONTINUE"
  CarriageControl:;
 560 INPUT V$
  Variable:V$ -> $
 570 IF V$="YES" THEN 360
  Variable:V$ -> $
- TextConstant:"YES"
+ TextValue:"YES"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:360
 580 IF V$="NO" THEN 650
  Variable:V$ -> $
- TextConstant:"NO"
+ TextValue:"NO"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:650
 590 PRINT "YES OR NO, PLEASE.  ";
- TextConstant:"YES OR NO, PLEASE.  "
+ TextValue:"YES OR NO, PLEASE.  "
  CarriageControl:;
 600 GOTO 540
  LineNumber:540
@@ -241,80 +241,80 @@
 620 PRINT
  CarriageControl:NL
 630 PRINT "WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: ";B1;
- TextConstant:"WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: "
+ TextValue:"WE HAVE RUN OUT OF CARDS.  FINAL SCORE:  YOU: "
  CarriageControl:;
  Variable:B1 -> _
  CarriageControl:;
 640 PRINT "  THE COMPUTER: ";A1:PRINT
- TextConstant:"  THE COMPUTER: "
+ TextValue:"  THE COMPUTER: "
  CarriageControl:;
  Variable:A1 -> _
  CarriageControl:NL
  CarriageControl:NL
 650 PRINT "THANKS FOR PLAYING.  IT WAS FUN."
- TextConstant:"THANKS FOR PLAYING.  IT WAS FUN."
+ TextValue:"THANKS FOR PLAYING.  IT WAS FUN."
  CarriageControl:NL
 655 PRINT
  CarriageControl:NL
 660 DATA "S-2","H-2","C-2","D-2","S-3","H-3","C-3","D-3"
- TextConstant:"S-2"
- TextConstant:"H-2"
- TextConstant:"C-2"
- TextConstant:"D-2"
- TextConstant:"S-3"
- TextConstant:"H-3"
- TextConstant:"C-3"
- TextConstant:"D-3"
+ TextValue:"S-2"
+ TextValue:"H-2"
+ TextValue:"C-2"
+ TextValue:"D-2"
+ TextValue:"S-3"
+ TextValue:"H-3"
+ TextValue:"C-3"
+ TextValue:"D-3"
 670 DATA "S-4","H-4","C-4","D-4","S-5","H-5","C-5","D-5"
- TextConstant:"S-4"
- TextConstant:"H-4"
- TextConstant:"C-4"
- TextConstant:"D-4"
- TextConstant:"S-5"
- TextConstant:"H-5"
- TextConstant:"C-5"
- TextConstant:"D-5"
+ TextValue:"S-4"
+ TextValue:"H-4"
+ TextValue:"C-4"
+ TextValue:"D-4"
+ TextValue:"S-5"
+ TextValue:"H-5"
+ TextValue:"C-5"
+ TextValue:"D-5"
 680 DATA "S-6","H-6","C-6","D-6","S-7","H-7","C-7","D-7"
- TextConstant:"S-6"
- TextConstant:"H-6"
- TextConstant:"C-6"
- TextConstant:"D-6"
- TextConstant:"S-7"
- TextConstant:"H-7"
- TextConstant:"C-7"
- TextConstant:"D-7"
+ TextValue:"S-6"
+ TextValue:"H-6"
+ TextValue:"C-6"
+ TextValue:"D-6"
+ TextValue:"S-7"
+ TextValue:"H-7"
+ TextValue:"C-7"
+ TextValue:"D-7"
 690 DATA "S-8","H-8","C-8","D-8","S-9","H-9","C-9","D-9"
- TextConstant:"S-8"
- TextConstant:"H-8"
- TextConstant:"C-8"
- TextConstant:"D-8"
- TextConstant:"S-9"
- TextConstant:"H-9"
- TextConstant:"C-9"
- TextConstant:"D-9"
+ TextValue:"S-8"
+ TextValue:"H-8"
+ TextValue:"C-8"
+ TextValue:"D-8"
+ TextValue:"S-9"
+ TextValue:"H-9"
+ TextValue:"C-9"
+ TextValue:"D-9"
 700 DATA "S-10","H-10","C-10","D-10","S-J","H-J","C-J","D-J"
- TextConstant:"S-10"
- TextConstant:"H-10"
- TextConstant:"C-10"
- TextConstant:"D-10"
- TextConstant:"S-J"
- TextConstant:"H-J"
- TextConstant:"C-J"
- TextConstant:"D-J"
+ TextValue:"S-10"
+ TextValue:"H-10"
+ TextValue:"C-10"
+ TextValue:"D-10"
+ TextValue:"S-J"
+ TextValue:"H-J"
+ TextValue:"C-J"
+ TextValue:"D-J"
 710 DATA "S-Q","H-Q","C-Q","D-Q","S-K","H-K","C-K","D-K"
- TextConstant:"S-Q"
- TextConstant:"H-Q"
- TextConstant:"C-Q"
- TextConstant:"D-Q"
- TextConstant:"S-K"
- TextConstant:"H-K"
- TextConstant:"C-K"
- TextConstant:"D-K"
+ TextValue:"S-Q"
+ TextValue:"H-Q"
+ TextValue:"C-Q"
+ TextValue:"D-Q"
+ TextValue:"S-K"
+ TextValue:"H-K"
+ TextValue:"C-K"
+ TextValue:"D-K"
 720 DATA "S-A","H-A","C-A","D-A"
- TextConstant:"S-A"
- TextConstant:"H-A"
- TextConstant:"C-A"
- TextConstant:"D-A"
+ TextValue:"S-A"
+ TextValue:"H-A"
+ TextValue:"C-A"
+ TextValue:"D-A"
 999 END
  WARNING: Terminating statement in FOR/NEXT
  

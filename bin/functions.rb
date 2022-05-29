@@ -446,9 +446,9 @@ class FunctionAscii < AbstractFunction
       value.between?(32, 126) || $options['asc_allow_all'].value
 
     res = if content_type == :integer
-            IntegerConstant.new(value)
+            IntegerValue.new(value)
           else
-            NumericConstant.new(value)
+            NumericValue.new(value)
           end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -564,7 +564,7 @@ class FunctionAvg < AbstractFunction
       args[0].empty?
 
     sum = args[0].sum / args[0].size
-    res = NumericConstant.new(sum)
+    res = NumericValue.new(sum)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -595,7 +595,7 @@ class FunctionChr < AbstractFunction
     raise BASICRuntimeError.new(:te_val_out, @name) unless
       value.between?(32, 126) || $options['chr_allow_all'].value
 
-    res = TextConstant.new(value.chr)
+    res = TextValue.new(value.chr)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -646,7 +646,7 @@ class FunctionCon1 < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = NumericConstant.new(1)
+    new_value = NumericValue.new(1)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -721,7 +721,7 @@ class FunctionCon1I < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = IntegerConstant.new(1)
+    new_value = IntegerValue.new(1)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -874,7 +874,7 @@ class FunctionCon2 < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = NumericConstant.new(1)
+    new_value = NumericValue.new(1)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -962,7 +962,7 @@ class FunctionCon2I < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = IntegerConstant.new(1)
+    new_value = IntegerValue.new(1)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -1186,7 +1186,7 @@ class FunctionDeg < AbstractFunction
 
     v = args[0].to_v
     v1 = v * 180 / 3.14156926
-    res = NumericConstant.new(v1)
+    res = NumericValue.new(v1)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1266,7 +1266,7 @@ class FunctionErl < AbstractFunction
       return @cached unless @cached.nil?
 
       if match_args_to_signature(args, @signature0)
-        arg = NumericConstant.new(0)
+        arg = NumericValue.new(0)
         res = interpreter.error_line(arg)
       elsif match_args_to_signature(args, @signature1)
         res = interpreter.error_line(args[0])
@@ -1274,7 +1274,7 @@ class FunctionErl < AbstractFunction
         raise BASICRuntimeError.new(:te_args_no_match, @name)
       end
     else
-      arg = NumericConstant.new(0)
+      arg = NumericValue.new(0)
       res = interpreter.error_line(arg)
     end
 
@@ -1564,9 +1564,9 @@ class FunctionInstr < AbstractFunction
     end
 
     res = if content_type == :integer
-            IntegerConstant.new(index)
+            IntegerValue.new(index)
           else
-            NumericConstant.new(index)
+            NumericValue.new(index)
           end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -1668,7 +1668,7 @@ class FunctionLeft < AbstractFunction
       text = ''
     end
 
-    res = TextConstant.new(text)
+    res = TextValue.new(text)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1695,7 +1695,7 @@ class FunctionLen < AbstractFunction
       match_args_to_signature(args, @signature1)
 
     text = args[0].to_v
-    res = NumericConstant.new(text.size)
+    res = NumericValue.new(text.size)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1958,7 +1958,7 @@ class FunctionMedian < AbstractFunction
       args[0].empty?
 
     med = args[0].median_average
-    res = NumericConstant.new(med)
+    res = NumericValue.new(med)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -1988,8 +1988,8 @@ class FunctionMedianIT < AbstractFunction
       args[0].empty?
 
     med = args[0].median_lesser
-    res = IntegerConstant.new(med) if @content_type == :integer
-    res = TextConstant.new(med) if @content_type == :string
+    res = IntegerValue.new(med) if @content_type == :integer
+    res = TextValue.new(med) if @content_type == :string
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2037,7 +2037,7 @@ class FunctionMid < AbstractFunction
       text = ''
     end
 
-    res = TextConstant.new(text)
+    res = TextValue.new(text)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2285,9 +2285,9 @@ class FunctionNcol < AbstractFunction
       match_args_to_signature(args, @signature3)
 
     res = if content_type == :integer
-            IntegerConstant.new(args[0].ncol)
+            IntegerValue.new(args[0].ncol)
           else
-            NumericConstant.new(args[0].ncol)
+            NumericValue.new(args[0].ncol)
           end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -2332,9 +2332,9 @@ class FunctionNelem < AbstractFunction
       match_args_to_signature(args, @signature3)
 
     res = if content_type == :integer
-            IntegerConstant.new(args[0].size)
+            IntegerValue.new(args[0].size)
           else
-            NumericConstant.new(args[0].size)
+            NumericValue.new(args[0].size)
           end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -2379,9 +2379,9 @@ class FunctionNrow < AbstractFunction
       match_args_to_signature(args, @signature3)
 
     res = if content_type == :integer
-            IntegerConstant.new(args[0].nrow)
+            IntegerValue.new(args[0].nrow)
           else
-            NumericConstant.new(args[0].nrow)
+            NumericValue.new(args[0].nrow)
           end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -2417,7 +2417,7 @@ class FunctionNum < AbstractFunction
       raise BASICRuntimeError.new(:te_args_no_match, @name)
     end
 
-    res = NumericConstant.new(f)
+    res = NumericValue.new(f)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2475,7 +2475,7 @@ class FunctionProd < AbstractFunction
       match_args_to_signature(args, @signature1)
 
     sum = args[0].prod
-    res = NumericConstant.new(sum)
+    res = NumericValue.new(sum)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2503,7 +2503,7 @@ class FunctionRad < AbstractFunction
 
     v = args[0].to_v
     v1 = v * 3.14156926 / 180
-    res = NumericConstant.new(v1)
+    res = NumericValue.new(v1)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2539,7 +2539,7 @@ class FunctionRight < AbstractFunction
 
     start = value.size - count
     start = 0 if start.negative?
-    res = TextConstant.new(value[start..-1])
+    res = TextValue.new(value[start..-1])
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2623,15 +2623,15 @@ class FunctionRnd < AbstractFunction
 
       if match_args_to_signature(args, @signature0)
         arg = default_args(interpreter)
-        res = NumericConstant.new_rand(interpreter, arg)
+        res = NumericValue.new_rand(interpreter, arg)
       elsif match_args_to_signature(args, @signature1)
-        res = NumericConstant.new_rand(interpreter, args[0])
+        res = NumericValue.new_rand(interpreter, args[0])
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
       end
     else
       arg = default_args(interpreter)
-      res = NumericConstant.new_rand(interpreter, arg)
+      res = NumericValue.new_rand(interpreter, arg)
     end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -2687,15 +2687,15 @@ class FunctionRndI < AbstractFunction
 
       if match_args_to_signature(args, @signature0)
         arg = default_args(interpreter)
-        res = IntegerConstant.new_rand(interpreter, arg)
+        res = IntegerValue.new_rand(interpreter, arg)
       elsif match_args_to_signature(args, @signature1)
-        res = IntegerConstant.new_rand(interpreter, args[0])
+        res = IntegerValue.new_rand(interpreter, args[0])
       else
         raise BASICRuntimeError.new(:te_args_no_match, @name)
       end
     else
       arg = default_args(interpreter)
-      res = IntegerConstant.new_rand(interpreter, arg)
+      res = IntegerValue.new_rand(interpreter, arg)
     end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -2798,7 +2798,7 @@ class FunctionRndT < AbstractFunction
 
     length = count.to_i
 
-    res = TextConstant.new_rand(interpreter, length, set)
+    res = TextValue.new_rand(interpreter, length, set)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -2849,7 +2849,7 @@ class FunctionRnd1 < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    upper_bound = NumericConstant.new(1)
+    upper_bound = NumericValue.new(1)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -2929,7 +2929,7 @@ class FunctionRnd1I < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    upper_bound = IntegerConstant.new(100)
+    upper_bound = IntegerValue.new(100)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -3138,7 +3138,7 @@ class FunctionRnd2 < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    upper_bound = NumericConstant.new(1)
+    upper_bound = NumericValue.new(1)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -3229,7 +3229,7 @@ class FunctionRnd2I < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    upper_bound = IntegerConstant.new(100)
+    upper_bound = IntegerValue.new(100)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -3590,7 +3590,7 @@ class FunctionSpace < AbstractFunction
                ''
              end
 
-    res = TextConstant.new(spaces)
+    res = TextValue.new(spaces)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -3641,7 +3641,7 @@ class FunctionSplit1T < AbstractFunction
     base = $options['base'].value
 
     upper = ts.size - (1 - base)
-    u_dim = NumericConstant.new(upper)
+    u_dim = NumericValue.new(upper)
 
     dims = [u_dim]
 
@@ -3649,7 +3649,7 @@ class FunctionSplit1T < AbstractFunction
 
     (base..dims[0].to_i).each_with_index do |col, index|
       coords = AbstractElement.make_coord(col)
-      values[coords] = TextConstant.new(ts[index])
+      values[coords] = TextValue.new(ts[index])
     end
 
     res = BASICArray.new(dims, values)
@@ -3707,12 +3707,12 @@ class FunctionStr < AbstractFunction
     return @cached unless @cached.nil?
 
     if match_args_to_signature(args, @signature1)
-      res = TextConstant.new(args[0].to_s)
+      res = TextValue.new(args[0].to_s)
     elsif match_args_to_signature(args, @signature2)
       places = args[1].to_i
       value = args[0].to_f
       text = format('%.*f', places, value)
-      res = TextConstant.new(text)
+      res = TextValue.new(text)
     else
       raise BASICRuntimeError.new(:te_args_no_match, @name)
     end
@@ -3760,7 +3760,7 @@ class FunctionString < AbstractFunction
           ''
         end
 
-    res = TextConstant.new(s)
+    res = TextValue.new(s)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -3789,9 +3789,9 @@ class FunctionSum < AbstractFunction
     sum = args[0].sum
 
     res = if content_type == :integer
-            IntegerConstant.new(sum)
+            IntegerValue.new(sum)
           else
-            NumericConstant.new(sum)
+            NumericValue.new(sum)
           end
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -3841,7 +3841,7 @@ class FunctionTab < AbstractFunction
                ''
              end
 
-    res = TextConstant.new(spaces)
+    res = TextValue.new(spaces)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -3898,7 +3898,7 @@ class FunctionTime < AbstractFunction
     now = Time.now
     start = interpreter.start_time
     result = now - start
-    res = NumericConstant.new(result)
+    res = NumericValue.new(result)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -3953,7 +3953,7 @@ class FunctionUniq1 < AbstractFunction
       match_args_to_signature(args, @signature1)
 
     values = args[0].unique_values
-    dims = [NumericConstant.new(values.size)]
+    dims = [NumericValue.new(values.size)]
     res = BASICArray.new(dims, values)
 
     @cached = res if @constant && $options['cache_const_expr']
@@ -4038,7 +4038,7 @@ class FunctionVal < AbstractFunction
     raise BASICRuntimeError.new(:te_args_no_match, @name) unless
       match_args_to_signature(args, @signature1)
 
-    res = NumericConstant.new(args[0].to_v.to_f)
+    res = NumericValue.new(args[0].to_v.to_f)
 
     @cached = res if @constant && $options['cache_const_expr']
     res
@@ -4089,7 +4089,7 @@ class FunctionZer1 < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = NumericConstant.new(0)
+    new_value = NumericValue.new(0)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -4164,7 +4164,7 @@ class FunctionZer1I < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = IntegerConstant.new(0)
+    new_value = IntegerValue.new(0)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -4239,7 +4239,7 @@ class FunctionZer1T < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = TextConstant.new('')
+    new_value = TextValue.new('')
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -4319,7 +4319,7 @@ class FunctionZer2 < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = NumericConstant.new(0)
+    new_value = NumericValue.new(0)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -4407,7 +4407,7 @@ class FunctionZer2I < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = IntegerConstant.new(0)
+    new_value = IntegerValue.new(0)
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop
@@ -4495,7 +4495,7 @@ class FunctionZer2T < AbstractFunction
   end
 
   def evaluate(interpreter, arg_stack)
-    new_value = TextConstant.new('')
+    new_value = TextValue.new('')
 
     if previous_is_array(arg_stack)
       args = arg_stack.pop

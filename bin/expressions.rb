@@ -22,7 +22,7 @@ class AbstractCompound
 
     (base..dims[0].to_i).each do |col|
       coords = AbstractElement.make_coord(col)
-      values[coords] = NumericConstant.new_rand(interpreter, upper_bound)
+      values[coords] = NumericValue.new_rand(interpreter, upper_bound)
     end
 
     values
@@ -35,7 +35,7 @@ class AbstractCompound
 
     (base..dims[0].to_i).each do |col|
       coords = AbstractElement.make_coord(col)
-      values[coords] = IntegerConstant.new_rand(interpreter, upper_bound)
+      values[coords] = IntegerValue.new_rand(interpreter, upper_bound)
     end
 
     values
@@ -48,7 +48,7 @@ class AbstractCompound
 
     (base..dims[0].to_i).each do |col|
       coords = AbstractElement.make_coord(col)
-      values[coords] = TextConstant.new_rand(interpreter, length, set)
+      values[coords] = TextValue.new_rand(interpreter, length, set)
     end
 
     values
@@ -77,7 +77,7 @@ class AbstractCompound
     (base..dims[0].to_i).each do |row|
       (base..dims[1].to_i).each do |col|
         coords = AbstractElement.make_coords(row, col)
-        values[coords] = NumericConstant.new_rand(interpreter, upper_bound)
+        values[coords] = NumericValue.new_rand(interpreter, upper_bound)
       end
     end
 
@@ -92,7 +92,7 @@ class AbstractCompound
     (base..dims[0].to_i).each do |row|
       (base..dims[1].to_i).each do |col|
         coords = AbstractElement.make_coords(row, col)
-        values[coords] = IntegerConstant.new_rand(interpreter, upper_bound)
+        values[coords] = IntegerValue.new_rand(interpreter, upper_bound)
       end
     end
 
@@ -107,7 +107,7 @@ class AbstractCompound
     (base..dims[0].to_i).each do |row|
       (base..dims[1].to_i).each do |col|
         coords = AbstractElement.make_coords(row, col)
-        values[coords] = TextConstant.new_rand(interpreter, length, set)
+        values[coords] = TextValue.new_rand(interpreter, length, set)
       end
     end
 
@@ -210,14 +210,14 @@ class AbstractCompound
     coords = AbstractElement.make_coord(col)
     return @values[coords] if @values.key?(coords)
 
-    NumericConstant.new(0)
+    NumericValue.new(0)
   end
 
   def get_value_2(row, col)
     coords = AbstractElement.make_coords(row, col)
     return @values[coords] if @values.key?(coords)
 
-    NumericConstant.new(0)
+    NumericValue.new(0)
   end
 
   def values_1
@@ -560,7 +560,7 @@ class AbstractCompound
 
       text += plot_text
 
-      tc = TextConstant.new(text.rstrip)
+      tc = TextValue.new(text.rstrip)
       tc.print(printer)
       printer.newline
     end
@@ -669,7 +669,7 @@ class AbstractCompound
 
       text += plot_text
 
-      tc = TextConstant.new(text.rstrip)
+      tc = TextValue.new(text.rstrip)
       tc.print(printer)
       printer.newline
     end
@@ -722,27 +722,27 @@ class BASICArray < AbstractCompound
   end
 
   def max
-    NumericConstant.new(max_1)
+    NumericValue.new(max_1)
   end
 
   def min
-    NumericConstant.new(min_1)
+    NumericValue.new(min_1)
   end
 
   def max_i
-    IntegerConstant.new(max_1)
+    IntegerValue.new(max_1)
   end
 
   def min_i
-    IntegerConstant.new(min_1)
+    IntegerValue.new(min_1)
   end
 
   def max_t
-    TextConstant.new(max_1)
+    TextValue.new(max_1)
   end
 
   def min_t
-    TextConstant.new(min_1)
+    TextValue.new(min_1)
   end
 
   def median_average
@@ -803,7 +803,7 @@ class BASICArray < AbstractCompound
       result += value.to_i.chr unless value.nil?
     end
 
-    TextConstant.new(result)
+    TextValue.new(result)
   end
 
   def reverse_values
@@ -945,8 +945,8 @@ end
 # Matrix with values
 class Matrix < AbstractCompound
   def self.identity_values(dimensions)
-    new_values = make_matrix(dimensions, NumericConstant.new(0))
-    one = NumericConstant.new(1)
+    new_values = make_matrix(dimensions, NumericValue.new(0))
+    one = NumericValue.new(1)
 
     base = $options['base'].value
 
@@ -1014,33 +1014,33 @@ class Matrix < AbstractCompound
   end
 
   def max
-    NumericConstant.new(max_1) if @dimensions.size == 1
-    NumericConstant.new(max_2) if @dimensions.size == 2
+    NumericValue.new(max_1) if @dimensions.size == 1
+    NumericValue.new(max_2) if @dimensions.size == 2
   end
 
   def max_i
-    NumericConstant.new(max_1) if @dimensions.size == 1
-    NumericConstant.new(max_2) if @dimensions.size == 2
+    NumericValue.new(max_1) if @dimensions.size == 1
+    NumericValue.new(max_2) if @dimensions.size == 2
   end
 
   def max_t
-    TextConstant.new(max_1) if @dimensions.size == 1
-    TextConstant.new(max_2) if @dimensions.size == 2
+    TextValue.new(max_1) if @dimensions.size == 1
+    TextValue.new(max_2) if @dimensions.size == 2
   end
 
   def min
-    NumericConstant.new(min_1) if @dimensions.size == 1
-    NumericConstant.new(min_2) if @dimensions.size == 2
+    NumericValue.new(min_1) if @dimensions.size == 1
+    NumericValue.new(min_2) if @dimensions.size == 2
   end
 
   def min_i
-    IntegerConstant.new(min_1) if @dimensions.size == 1
-    IntegerConstant.new(min_2) if @dimensions.size == 2
+    IntegerValue.new(min_1) if @dimensions.size == 1
+    IntegerValue.new(min_2) if @dimensions.size == 2
   end
 
   def min_t
-    TextConstant.new(min_1) if @dimensions.size == 1
-    TextConstant.new(min_2) if @dimensions.size == 2
+    TextValue.new(min_1) if @dimensions.size == 1
+    TextValue.new(min_2) if @dimensions.size == 2
   end
 
   def to_s
@@ -1298,9 +1298,9 @@ class Matrix < AbstractCompound
   end
 
   def determinant_n
-    minus_one = NumericConstant.new(-1)
-    sign = NumericConstant.new(1)
-    det = NumericConstant.new(0)
+    minus_one = NumericValue.new(-1)
+    sign = NumericValue.new(1)
+    det = NumericValue.new(0)
 
     base = $options['base'].value
 
@@ -1319,7 +1319,7 @@ class Matrix < AbstractCompound
   end
 
   def submatrix(exclude_row, exclude_col)
-    one = NumericConstant.new(1)
+    one = NumericValue.new(1)
     r = @dimensions[0].subtract(one)
     c = @dimensions[1].subtract(one)
     new_dims = [r, c]
@@ -2023,13 +2023,13 @@ class Expression
 
         if element.array?
           token = NumericLiteralToken.new('0')
-          constant = NumericConstant.new(token)
+          constant = NumericValue.new(token)
           arguments = [constant]
         end
 
         if element.matrix?
           token = NumericLiteralToken.new('0')
-          constant = NumericConstant.new(token)
+          constant = NumericValue.new(token)
           arguments = [constant, constant]
         end
 
@@ -2326,12 +2326,12 @@ class AbstractExpressionSet
       BinaryOperatorGreaterEqual,
       BinaryOperatorAnd,
       BinaryOperatorOr,
-      BooleanConstant,
-      IntegerConstant,
-      NumericConstant,
+      BooleanValue,
+      IntegerValue,
+      NumericValue,
       UserFunctionName,
       VariableName,
-      TextConstant
+      TextValue
     ]
   end
 
@@ -2346,12 +2346,12 @@ class AbstractExpressionSet
       UnaryOperatorMinus,
       UnaryOperatorHash,
       UnaryOperatorNot,
-      BooleanConstant,
-      IntegerConstant,
-      NumericConstant,
+      BooleanValue,
+      IntegerValue,
+      NumericValue,
       UserFunctionName,
       VariableName,
-      TextConstant
+      TextValue
     ]
   end
 end

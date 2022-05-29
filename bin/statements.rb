@@ -18,7 +18,7 @@ class StatementFactory
 
     unless m.nil?
       token = NumericLiteralToken.new(m[0])
-      number = IntegerConstant.new(token)
+      number = IntegerValue.new(token)
       line_number = LineNumber.new(number)
       line_text = m.post_match
       all_tokens = tokenize(line_text)
@@ -2517,7 +2517,7 @@ class ForStatement < AbstractStatement
       @nextstmt_line_stmt.nil?
 
     from = @start.evaluate(interpreter)[0]
-    step = NumericConstant.new(1)
+    step = NumericValue.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
     unless @end.nil?
@@ -2653,7 +2653,7 @@ class GosubStatement < AbstractStatement
 
     if check_template(tokens_lists, template)
       if tokens_lists[0][0].numeric_constant?
-        number = IntegerConstant.new(tokens_lists[0][0])
+        number = IntegerValue.new(tokens_lists[0][0])
         @dest_line = LineNumber.new(number)
         @linenums = [@dest_line]
 
@@ -2758,7 +2758,7 @@ class GotoStatement < AbstractStatement
 
     if check_template(tokens_lists, template)
       if tokens_lists[0][0].numeric_constant?
-        number = IntegerConstant.new(tokens_lists[0][0])
+        number = IntegerValue.new(tokens_lists[0][0])
         @dest_line = LineNumber.new(number)
         @linenums = [@dest_line]
 
@@ -3122,8 +3122,8 @@ class AbstractIfStatement < AbstractStatement
 
     result = values[0]
 
-    result = BooleanConstant.new(result) unless
-      result.class.to_s == 'BooleanConstant'
+    result = BooleanValue.new(result) unless
+      result.class.to_s == 'BooleanValue'
 
     if result.value
       interpreter.next_line_stmt_mod = @dest_line_stmt_mod unless
@@ -3350,7 +3350,7 @@ class AbstractIfStatement < AbstractStatement
     if tokens.class.to_s == 'Hash'
       statement = IfStatement.new(line_number, nil, tokens)
     elsif tokens.size == 1 && tokens[0].numeric_constant?
-      number = IntegerConstant.new(tokens[0])
+      number = IntegerValue.new(tokens[0])
       destination = LineNumber.new(number)
     else
       statement_factory = StatementFactory.instance
@@ -3797,7 +3797,7 @@ class OnErrorStatement < AbstractStatement
           @dest_line = nil
           @linenums = []
         else
-          number = IntegerConstant.new(token)
+          number = IntegerValue.new(token)
           @dest_line = LineNumber.new(number)
           @linenums = [@dest_line]
 
@@ -3929,7 +3929,7 @@ class OnStatement < AbstractStatement
         if line_num.size == 1
           token = line_num[0]
           if token.numeric_constant?
-            number = IntegerConstant.new(token)
+            number = IntegerValue.new(token)
             @dest_lines << LineNumber.new(number)
           else
             @errors << "Invalid line number #{destination}"
@@ -4553,7 +4553,7 @@ class ResumeStatement < AbstractStatement
 
     unless target.nil?
       begin
-        number = IntegerConstant.new(target)
+        number = IntegerValue.new(target)
         @dest_line = LineNumber.new(number)
         @linenums = [@dest_line]
       rescue BASICSyntaxError
