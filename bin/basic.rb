@@ -556,7 +556,7 @@ def make_command_tokenbuilders(quotes, long_names)
     QMARK_AFTER_PROMPT
     RANDOMIZE RELATIONAL_RESULT REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH
-    TIMING TRACE
+    TIMING TRACE TRIG_REQUIRE_UNITS
     WARN_FORNEXT_LENGTH WARN_FORNEXT_LEVEL
     WARN_GOSUB_LENGTH WARN_LIST_WIDTH WARN_PRETTY_WIDTH WRAP
     ZONE_WIDTH
@@ -669,8 +669,9 @@ OptionParser.new do |opt|
     options[:semicolon_zone_width] = o
   end
 
-  opt.on('--trace') { |o| options[:trace] = o }
   opt.on('--timing') { |o| options[:timing] = o }
+  opt.on('--trace') { |o| options[:trace] = o }
+  opt.on('--trig-require-units') { |o| options[:trig_require_units] = o }
   opt.on('--tty') { |o| options[:tty] = o }
   opt.on('--tty-lf') { |o| options[:tty_lf] = o }
   opt.on('--warn-fornext-length LENGTH') { |o| options[:warn_fornext_length] = o }
@@ -841,6 +842,9 @@ $options['semicolon_zone_width'] =
 
 $options['timing'] = Option.new(all_types, boolean, options.key?(:timing))
 $options['trace'] = Option.new(all_types, boolean, options.key?(:trace))
+
+$options['trig_require_units'] =
+  Option.new(all_types, boolean, options.key?(:trig_require_units))
 
 warn_fornext_length = 40
 if options.key?(:warn_fornext_length)
