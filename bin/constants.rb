@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# token class
+# class for all element classes
 class AbstractElement
   def self.make_coord(c)
     [NumericValue.new(c)]
@@ -361,11 +361,7 @@ class Units
     @values.hash
   end
 
-  def ==(other)
-    @values == other.values
-  end
-
-  def eq(other)
+  def eql?(other)
     @values == other.values
   end
 
@@ -390,6 +386,10 @@ class Units
 
     # units are the same
     0
+  end
+
+  def ==(other)
+    @values == other.values
   end
 
   def empty?
@@ -513,6 +513,8 @@ class Units
   end
 
   def sqrt
+    raise BASICRuntimeError, :te_power_not_even unless even?
+
     new_values = {}
 
     @values.each do |name, pow|
@@ -584,6 +586,14 @@ class AbstractValue < AbstractElement
     @warnings = []
   end
 
+  def hash
+    @value.hash
+  end
+
+  def eql?(other)
+    @value == other.to_v
+  end
+
   def <=>(other)
     return -1 if self < other
     return 1 if self > other
@@ -632,7 +642,8 @@ class AbstractValue < AbstractElement
   end
 
   def b_eq(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_eq()"
+    message =
+      "Type mismatch (#{content_type}/#{other.content_type}) in b_eq()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -645,7 +656,8 @@ class AbstractValue < AbstractElement
   end
 
   def b_ne(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ne()"
+    message =
+      "Type mismatch (#{content_type}/#{other.content_type}) in b_ne()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -658,7 +670,8 @@ class AbstractValue < AbstractElement
   end
 
   def b_gt(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_gt()"
+    message =
+      "Type mismatch (#{content_type}/#{other.content_type}) in b_gt()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -671,7 +684,8 @@ class AbstractValue < AbstractElement
   end
 
   def b_ge(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ge()"
+    message =
+      "Type mismatch (#{content_type}/#{other.content_type}) in b_ge()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -684,7 +698,8 @@ class AbstractValue < AbstractElement
   end
 
   def b_lt(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_lt()"
+    message =
+      "Type mismatch (#{content_type}/#{other.content_type}) in b_lt()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -697,7 +712,8 @@ class AbstractValue < AbstractElement
   end
 
   def b_le(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_le()"
+    message =
+      "Type mismatch (#{content_type}/#{other.content_type}) in b_le()"
 
     raise(BASICExpressionError, message) unless compatible?(other)
 
@@ -717,24 +733,16 @@ class AbstractValue < AbstractElement
     raise(BASICExpressionError, 'Invalid operator OR')
   end
 
-  def dump
-    "#{self.class}:#{self}"
-  end
-
-  def eql?(other)
-    @value == other.to_v
-  end
-
-  def hash
-    @value.hash
-  end
-
   def posate
     raise(BASICExpressionError, 'Invalid operator +')
   end
 
   def negate
     raise(BASICExpressionError, 'Invalid operator -')
+  end
+
+  def dump
+    "#{self.class}:#{self}"
   end
 
   def filehandle
@@ -893,11 +901,11 @@ class NumericValue < AbstractValue
     @units = units
   end
 
-  def dump
-    "#{self.class}:#{@symbol_text}"
+  def hash
+    @value.hash + @symbol_text.hash
   end
 
-  def ==(other)
+  def eql?(other)
     @value == other.to_v
   end
 
@@ -905,6 +913,10 @@ class NumericValue < AbstractValue
     return @value <=> other.value if @value != other.value
 
     @units <=> other.units
+  end
+
+  def ==(other)
+    @value == other.to_v
   end
 
   def >(other)
@@ -925,32 +937,26 @@ class NumericValue < AbstractValue
 
   def b_and(other)
     b = BooleanValue.new(to_b && other.to_b)
+
     b = IntegerValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'INTEGER'
+
     b = NumericValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'NUMERIC'
+
     b
   end
 
   def b_or(other)
     b = BooleanValue.new(to_b || other.to_b)
+
     b = IntegerValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'INTEGER'
+
     b = NumericValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'NUMERIC'
+
     b
-  end
-
-  def zero?
-    @value.zero?
-  end
-
-  def eql?(other)
-    @value == other.to_v
-  end
-
-  def hash
-    @value.hash + @symbol_text.hash
   end
 
   def posate
@@ -1345,6 +1351,14 @@ class NumericValue < AbstractValue
     NumericValue.new(result)
   end
 
+  def dump
+    "#{self.class}:#{@symbol_text}"
+  end
+
+  def zero?
+    @value.zero?
+  end
+
   def to_i
     @value.to_i
   end
@@ -1423,6 +1437,7 @@ class IntegerValue < AbstractValue
     super()
 
     numeric_classes = %w[Fixnum Integer Bignum Float IntegerLiteralToken]
+
     f = nil
     f = obj.to_i if numeric_classes.include?(obj.class.to_s)
     f = obj.to_f.to_i if obj.class.to_s == 'NumericLiteralToken'
@@ -1458,7 +1473,11 @@ class IntegerValue < AbstractValue
     @units = units
   end
 
-  def ==(other)
+  def hash
+    @value.hash + @symbol_text.hash
+  end
+
+  def eql?(other)
     @value == other.to_v
   end
 
@@ -1466,6 +1485,10 @@ class IntegerValue < AbstractValue
     return @value <=> other.value if @value != other.value
 
     @units <=> other.units
+  end
+
+  def ==(other)
+    @value == other.to_v
   end
 
   def >(other)
@@ -1484,93 +1507,18 @@ class IntegerValue < AbstractValue
     @value <= other.to_v
   end
 
-  def b_eq(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_eq()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    b = BooleanValue.new(@value == other.to_v)
-    b = IntegerValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'INTEGER'
-    b = NumericValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'NUMERIC'
-    b
-  end
-
-  def b_ne(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ne()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    b = BooleanValue.new(@value != other.to_v)
-    b = IntegerValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'INTEGER'
-    b = NumericValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'NUMERIC'
-    b
-  end
-
-  def b_gt(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_gt()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    b = BooleanValue.new(@value > other.to_v)
-    b = IntegerValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'INTEGER'
-    b = NumericValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'NUMERIC'
-    b
-  end
-
-  def b_ge(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_ge()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    b = BooleanValue.new(@value >= other.to_v)
-    b = IntegerValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'INTEGER'
-    b = NumericValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'NUMERIC'
-    b
-  end
-
-  def b_lt(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_lt()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    b = BooleanValue.new(@value < other.to_v)
-    b = IntegerValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'INTEGER'
-    b = NumericValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'NUMERIC'
-    b
-  end
-
-  def b_le(other)
-    message = "Type mismatch (#{content_type}/#{other.content_type}) in b_le()"
-
-    raise(BASICExpressionError, message) unless compatible?(other)
-
-    b = BooleanValue.new(@value <= other.to_v)
-    b = IntegerValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'INTEGER'
-    b = NumericValue.new(b.to_ms_i) if
-      $options['relational_result'].value == 'NUMERIC'
-    b
-  end
-
   def b_and(other)
     if other.content_type == :integer && $options['int_bitwise'].value
       IntegerValue.new(to_i & other.to_i)
     else
       b = BooleanValue.new(to_b && other.to_b)
+
       b = IntegerValue.new(b.to_ms_i) if
         $options['relational_result'].value == 'INTEGER'
+
       b = NumericValue.new(b.to_ms_i) if
         $options['relational_result'].value == 'NUMERIC'
+
       b
     end
   end
@@ -1588,26 +1536,12 @@ class IntegerValue < AbstractValue
     end
   end
 
-  def zero?
-    @value.zero?
-  end
-
-  def eql?(other)
-    @value == other.to_v
-  end
-
-  def hash
-    @value.hash + @symbol_text.hash
-  end
-
   def posate
-    f = to_f
-    NumericValue.new(f)
+    NumericValue.new_2(@value, @units)
   end
 
   def negate
-    f = -to_f
-    NumericValue.new(f)
+    IntegerValue.new_2(-@value, @units)
   end
 
   def filehandle
@@ -1638,7 +1572,7 @@ class IntegerValue < AbstractValue
     raise(BASICExpressionError, message) unless compatible?(other)
 
     value = @value - other.to_numeric.to_v
-    units = @units.add(other.units)
+    units = @units.subtract(other.units)
     
     IntegerValue.new_2(value, units)
   end
@@ -1680,17 +1614,14 @@ class IntegerValue < AbstractValue
     IntegerValue.new_2(value, units)
   end
 
-  def negate
-    IntegerValue.new(-@value)
-  end
-
   def truncate
     value = @value.to_i
-    IntegerValue.new(value)
+
+    IntegerValue.new_2(value, @units)
   end
 
   def floor
-    IntegerValue.new(@value)
+    IntegerValue.new_2(@value, @units)
   end
 
   def exp
@@ -1766,6 +1697,10 @@ class IntegerValue < AbstractValue
     result = 1 if @value.positive?
     result = -1 if @value.negative?
     IntegerValue.new(result)
+  end
+
+  def zero?
+    @value.zero?
   end
 
   def to_i
@@ -1844,7 +1779,8 @@ class TextValue < AbstractValue
     TextValue.new(s)
   end
 
-  attr_reader :value, :symbol_text
+  attr_reader :value
+  attr_reader :symbol_text
 
   def initialize(text)
     super()
@@ -1853,8 +1789,7 @@ class TextValue < AbstractValue
     @value = text if text.class.to_s == 'String'
     @value = text.value if text.class.to_s == 'TextLiteralToken'
 
-    raise BASICSyntaxError, "'#{text}' is not a text constant" if
-      @value.nil?
+    raise BASICSyntaxError, "'#{text}' is not a text constant" if @value.nil?
 
     @content_type = :string
     @shape = :scalar
@@ -1875,20 +1810,20 @@ class TextValue < AbstractValue
     constant_stack.push(@constant)
   end
 
-  def eql?(other)
-    @value == other.to_v
-  end
-
-  def ==(other)
-    @value == other.to_v
-  end
-
   def hash
     @value.hash
   end
 
+  def eql?(other)
+    @value == other.to_v
+  end
+
   def <=>(other)
     @value <=> other.to_v
+  end
+
+  def ==(other)
+    @value == other.to_v
   end
 
   def >(other)
@@ -1909,19 +1844,25 @@ class TextValue < AbstractValue
 
   def b_and(other)
     b = BooleanValue.new(to_b && other.to_b)
+
     b = IntegerValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'INTEGER'
+
     b = NumericValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'NUMERIC'
+
     b
   end
 
   def b_or(other)
     b = BooleanValue.new(to_b || other.to_b)
+
     b = IntegerValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'INTEGER'
+
     b = NumericValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'NUMERIC'
+
     b
   end
 
@@ -2019,7 +1960,8 @@ class BooleanValue < AbstractValue
     classes.include?(token.class.to_s)
   end
 
-  attr_reader :value, :symbol_text
+  attr_reader :value
+  attr_reader :symbol_text
 
   def initialize(obj)
     super()
@@ -2053,36 +1995,36 @@ class BooleanValue < AbstractValue
     constant_stack.push(@constant)
   end
 
-  def eql?(other)
-    @value == other.to_v
-  end
-
-  def ==(other)
-    @value == other.to_v
-  end
-
   def hash
     @value.hash
+  end
+
+  def eql?(other)
+    @value == other.to_v
   end
 
   def <=>(other)
     to_i <=> other.to_i
   end
 
+  def ==(other)
+    to_i == other.to_i
+  end
+
   def >(other)
-    @value > other.to_v
+    to_i > other.to_i
   end
 
   def >=(other)
-    @value >= other.to_v
+    to_i >= other.to_i
   end
 
   def <(other)
-    @value < other.to_v
+    to_i < other.to_i
   end
 
   def <=(other)
-    @value <= other.to_v
+    to_i <= other.to_i
   end
 
   def not
@@ -2091,19 +2033,25 @@ class BooleanValue < AbstractValue
 
   def b_and(other)
     b = BooleanValue.new(@value && other.to_b)
+
     b = IntegerValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'INTEGER'
+
     b = NumericValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'NUMERIC'
+
     b
   end
 
   def b_or(other)
     b = BooleanValue.new(@value || other.to_b)
+
     b = IntegerValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'INTEGER'
+
     b = NumericValue.new(b.to_ms_i) if
       $options['relational_result'].value == 'NUMERIC'
+
     b
   end
 
@@ -2388,16 +2336,16 @@ class VariableName < AbstractElement
     constant_stack.push(@constant)
   end
 
+  def hash
+    @name.hash
+  end
+
   def eql?(other)
     to_s == other.to_s
   end
 
   def ==(other)
     to_s == other.to_s
-  end
-
-  def hash
-    @name.hash
   end
 
   def scalar?
@@ -2471,16 +2419,16 @@ class UserFunctionName < AbstractElement
     constant_stack.push(@constant)
   end
 
+  def hash
+    @name.hash
+  end
+
   def eql?(other)
     to_s == other.to_s
   end
 
   def ==(other)
     to_s == other.to_s
-  end
-
-  def hash
-    @name.hash
   end
 
   def scalar?
@@ -2586,16 +2534,16 @@ class Variable < AbstractElement
     constant_stack.push(@constant)
   end
 
+  def hash
+    @variable_name.hash && @subscripts.hash
+  end
+
   def eql?(other)
     @variable_name == other.name && @subscripts == other.subscripts
   end
 
   def ==(other)
     @variable_name == other.name && @subscripts == other.subscripts
-  end
-
-  def hash
-    @variable_name.hash && @subscripts.hash
   end
 
   def signature
