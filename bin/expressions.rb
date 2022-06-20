@@ -2292,7 +2292,7 @@ class AbstractExpressionSet
     element = nil
 
     if FunctionFactory.valid?(token.to_s)
-      element = FunctionFactory.make(token.to_s)
+      element = FunctionFactory.make(token)
       return element unless element.nil?
     end
 
