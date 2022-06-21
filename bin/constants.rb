@@ -872,14 +872,15 @@ class NumericValue < AbstractValue
       f = f.round(num_digits)
     end
 
+    @value = float_to_possible_int(f)
+
+    @symbol_text = obj.to_s
     @content_type = :numeric
     @shape = :scalar
     @constant = true
-    @symbol_text = obj.to_s
-    @value = float_to_possible_int(f)
+
     @numeric_constant = true
     @units = Units.new({}, '{}')
-
     @units = obj.units if obj.class.to_s == 'NumericLiteralToken'
   end
 
@@ -1424,16 +1425,15 @@ class IntegerValue < AbstractValue
 
     raise BASICSyntaxError, "'#{obj}' is not an integer" if f.nil?
 
+    @value = f
+
     @symbol_text = obj.to_s
     @content_type = :integer
     @shape = :scalar
     @constant = true
-    @value = f
-    @operand = true
-    @precedence = 0
+
     @numeric_constant = true
     @units = Units.new({}, '{}')
-
     @units = obj.units if obj.class.to_s == 'IntegerLiteralToken'
   end
 
