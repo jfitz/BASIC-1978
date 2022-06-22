@@ -4663,8 +4663,13 @@ class FunctionFactory
   def self.make(token)
     text = token.to_s
     cls = nil
-    cls = @functions[text] if FunctionFactory.valid?(text)
-    cls.new(text) unless cls.nil?
+    if @functions.key?(text)
+      cls = @functions[text]
+      element = FunctionName.new(token)
+      cls.new(element) unless cls.nil?
+    else
+      nil
+    end
   end
 
   def self.function_names
