@@ -2290,7 +2290,7 @@ class VariableName < AbstractElement
     classes.include?(token.class.to_s)
   end
 
-  attr_reader :name, :content_type, :constant
+  attr_reader :name, :content_type
 
   def initialize(token)
     super()
@@ -2303,15 +2303,6 @@ class VariableName < AbstractElement
     @operand = true
     @precedence = 10
     @content_type = @name.content_type
-    @constant = false
-  end
-
-  def set_content_type(type_stack)
-    type_stack.push(@content_type)
-  end
-
-  def set_constant(constant_stack)
-    constant_stack.push(@constant)
   end
 
   def hash
@@ -2322,8 +2313,28 @@ class VariableName < AbstractElement
     to_s == other.to_s
   end
 
+  def <=>(other)
+    to_s <=> other.to_s
+  end
+
   def ==(other)
     to_s == other.to_s
+  end
+
+  def <(other)
+    to_s < other.to_s
+  end
+
+  def <=(other)
+    to_s <= other.to_s
+  end
+
+  def >(other)
+    to_s > other.to_s
+  end
+
+  def >=(other)
+    to_s >= other.to_s
   end
 
   def scalar?
@@ -2360,7 +2371,7 @@ end
 
 # Hold a function name
 class AbstractFunctionName < AbstractElement
-  attr_reader :name, :content_type, :shape, :constant, :warnings
+  attr_reader :name, :content_type
 
   def initialize(token)
     super()
@@ -2370,20 +2381,6 @@ class AbstractFunctionName < AbstractElement
     @operand = true
     @precedence = 10
     @content_type = @name.content_type
-    @shape = :scalar
-    @warnings = []
-  end
-
-  def set_content_type(type_stack)
-    type_stack.push(@content_type)
-  end
-
-  def set_shape(shape_stack)
-    shape_stack.push(@shape)
-  end
-
-  def set_constant(constant_stack)
-    constant_stack.push(@constant)
   end
 
   def hash
@@ -2427,7 +2424,7 @@ class AbstractFunctionName < AbstractElement
   end
 
   def dump
-    result = make_type_sigil(@content_type) + make_shape_sigil(@shape)
+    result = make_type_sigil(@content_type)
     "#{self.class}:#{@name} -> #{result}"
   end
 
