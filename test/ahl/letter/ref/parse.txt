@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"LETTER"
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"LETTER"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -28,19 +28,19 @@
  TextValue:"AS TO HOW CLOSE YOU'RE GETTING TO MY LETTER."
  CarriageControl:NL
 310 L=65+INT(RND(1)*26)
- Variable:L -> _
+ Variable:L -> .
  NumericValue:65
  NumericValue:1
- FunctionRnd:RND(_) -> _
+ FunctionRnd:RND(.) -> .
  NumericValue:26
- BinaryOperatorMultiply:*(_,_) -> _
- FunctionInt:INT(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ FunctionInt:INT(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 320 G=0
- Variable:G -> _
+ Variable:G -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 340 PRINT: PRINT "O.K., I HAVE A LETTER.  START GUESSING."
  CarriageControl:NL
  TextValue:"O.K., I HAVE A LETTER.  START GUESSING."
@@ -50,27 +50,27 @@
  TextValue:"WHAT IS YOUR GUESS"
  CarriageControl:;
 420 G=G+1
- Variable:G -> _
- Variable:G -> _
+ Variable:G -> .
+ Variable:G -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 430 INPUT A$: A=ASC(A$): PRINT
  Variable:A$ -> $
- Variable:A -> _
+ Variable:A -> .
  Variable:A$ -> $
- FunctionAscii:ASC($) -> _
- AssignmentOperator:= _ -> _
+ FunctionAscii:ASC($) -> .
+ AssignmentOperator:= . -> .
  CarriageControl:NL
 440 IF A=L THEN 500
- Variable:A -> _
- Variable:L -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:A -> .
+ Variable:L -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:500
 450 IF A>L THEN 480
- Variable:A -> _
- Variable:L -> _
- BinaryOperatorGreater:>(_,_) -> ?
+ Variable:A -> .
+ Variable:L -> .
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:480
 460 PRINT "TOO LOW.  TRY A HIGHER LETTER.": GOTO 410
  TextValue:"TOO LOW.  TRY A HIGHER LETTER."
@@ -84,14 +84,14 @@
  CarriageControl:NL
  TextValue:"YOU GOT IT IN"
  CarriageControl:;
- Variable:G -> _
+ Variable:G -> .
  CarriageControl:;
  TextValue:"GUESSES!!"
  CarriageControl:NL
 504 IF G<=5 THEN 508
- Variable:G -> _
+ Variable:G -> .
  NumericValue:5
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:508
 506 PRINT "BUT IT SHOULDN'T TAKE MORE THAN 5 GUESSES!": GOTO 515
  TextValue:"BUT IT SHOULDN'T TAKE MORE THAN 5 GUESSES!"
@@ -101,13 +101,13 @@
  TextValue:"GOOD JOB !!!!!"
  CarriageControl:NL
 510 FOR N=1 TO 15: PRINT CHR$(7);: NEXT N
- control: Variable:N -> _
+ control: Variable:N -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:15"]
  NumericValue:7
- FunctionChr:CHR$(_) -> =$
+ FunctionChr:CHR$(.) -> =$
  CarriageControl:;
- Variable:N -> _
+ Variable:N -> .
 515 PRINT
  CarriageControl:NL
 520 PRINT "LET'S PLAN AGAIN....."

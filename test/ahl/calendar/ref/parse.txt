@@ -1,12 +1,12 @@
 10 PRINT TAB(32);"CALENDAR"
  NumericValue:32
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CALENDAR"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -18,68 +18,68 @@
  Remark:    VALUES FOR 1979 - SEE NOTES
 110 DIM M(12)
  NumericValue:12
- Declaration:M() -> _()
+ Declaration:M() -> .()
 120 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:6"]
  NumericValue:10
- FunctionChr:CHR$(_) -> =$
+ FunctionChr:CHR$(.) -> =$
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
 130 D=1: REM 1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
- Variable:D -> _
+ Variable:D -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
  Remark:1979 STARTS ON MONDAY (0=SUN, -1=MON, -2=TUES...)
 140 S=0
- Variable:S -> _
+ Variable:S -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 150 REM     READ DAYS OF EACH MONTH
  Remark:    READ DAYS OF EACH MONTH
 160 FOR N=0 TO 12: READ M(N): NEXT N
- control: Variable:N -> _
+ control: Variable:N -> .
  start:   ["NumericValue:0"]
  end:     ["NumericValue:12"]
- Variable:N -> _
- Variable:M(_) -> _
- Variable:N -> _
+ Variable:N -> .
+ Variable:M(.) -> .
+ Variable:N -> .
 170 REM
  Remark:
 180 FOR N=1 TO 12
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:N -> _
+ control: Variable:N -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:12"]
 190 PRINT: PRINT: S=S+M(N-1)
  CarriageControl:NL
  CarriageControl:NL
- Variable:S -> _
- Variable:S -> _
- Variable:N -> _
+ Variable:S -> .
+ Variable:S -> .
+ Variable:N -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
- Variable:M(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ Variable:M(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 200 PRINT "**";S;TAB(7);
  TextValue:"**"
  CarriageControl:;
- Variable:S -> _
+ Variable:S -> .
  CarriageControl:;
  NumericValue:7
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
 210 FOR I=1 TO 18: PRINT "*";: NEXT I
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:18"]
  TextValue:"*"
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
 220 ON N GOTO 230,240,250,260,270,280,290,300,310,320,330,340
- Variable:N -> _
+ Variable:N -> .
  LineNumber:230
  LineNumber:240
  LineNumber:250
@@ -140,19 +140,19 @@
  TextValue:" DECEMBER"
  CarriageControl:;
 350 FOR I=1 TO 18: PRINT "*";: NEXT I
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:18"]
  TextValue:"*"
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
 360 PRINT 365-S;TAB(57);"**";
  NumericValue:365
- Variable:S -> _
- BinaryOperatorMinus:-(_,_) -> _
+ Variable:S -> .
+ BinaryOperatorMinus:-(.,.) -> .
  CarriageControl:;
  NumericValue:57
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"**"
  CarriageControl:;
@@ -160,7 +160,7 @@
  Remark:  366-S;     ON LEAP YEARS
 380 PRINT CHR$(10): PRINT "     S       M       T       W";
  NumericValue:10
- FunctionChr:CHR$(_) -> =$
+ FunctionChr:CHR$(.) -> =$
  CarriageControl:NL
  TextValue:"     S       M       T       W"
  CarriageControl:;
@@ -170,96 +170,96 @@
 400 PRINT
  CarriageControl:NL
 410 FOR I=1 TO 59: PRINT "*";: NEXT I
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:59"]
  TextValue:"*"
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
 420 REM
  Remark:
 430 FOR W=1 TO 6
- control: Variable:W -> _
+ control: Variable:W -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:6"]
 440 PRINT CHR$(10)
  NumericValue:10
- FunctionChr:CHR$(_) -> =$
+ FunctionChr:CHR$(.) -> =$
  CarriageControl:NL
 450 PRINT TAB(4);
  NumericValue:4
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
 460 REM
  Remark:
 470 FOR G=1 TO 7
- control: Variable:G -> _
+ control: Variable:G -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
 480 D=D+1
- Variable:D -> _
- Variable:D -> _
+ Variable:D -> .
+ Variable:D -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 490 D2=D-S
- Variable:D2 -> _
- Variable:D -> _
- Variable:S -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:D2 -> .
+ Variable:D -> .
+ Variable:S -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 500 IF D2>M(N) THEN 580
- Variable:D2 -> _
- Variable:N -> _
- Variable:M(_) -> _
- BinaryOperatorGreater:>(_,_) -> ?
+ Variable:D2 -> .
+ Variable:N -> .
+ Variable:M(.) -> .
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:580
 510 IF D2>0 THEN PRINT D2;
- Variable:D2 -> _
+ Variable:D2 -> .
  NumericValue:0
- BinaryOperatorGreater:>(_,_) -> ?
- Variable:D2 -> _
+ BinaryOperatorGreater:>(.,.) -> ?
+ Variable:D2 -> .
  CarriageControl:;
 520 PRINT TAB(4+8*G);
  NumericValue:4
  NumericValue:8
- Variable:G -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- FunctionTab:TAB(_) -> $
+ Variable:G -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
 530 NEXT G
- Variable:G -> _
+ Variable:G -> .
 540 REM
  Remark:
 550 IF D2=M(N) THEN 590
- Variable:D2 -> _
- Variable:N -> _
- Variable:M(_) -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:D2 -> .
+ Variable:N -> .
+ Variable:M(.) -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:590
 560 NEXT W
- Variable:W -> _
+ Variable:W -> .
 570 REM
  Remark:
 580 D=D-G
- Variable:D -> _
- Variable:D -> _
- Variable:G -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:D -> .
+ Variable:D -> .
+ Variable:G -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 590 NEXT N
- Variable:N -> _
+ Variable:N -> .
 600 REM
  Remark:
 610 FOR I=1 TO 6: PRINT CHR$(10);: NEXT I
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:6"]
  NumericValue:10
- FunctionChr:CHR$(_) -> =$
+ FunctionChr:CHR$(.) -> =$
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
 620 DATA 0,31,28,31,30,31,30,31,31,30,31,30,31
  NumericValue:0
  NumericValue:31

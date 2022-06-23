@@ -1,12 +1,12 @@
 1 PRINT TAB(33);"DIAMOND"
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"DIAMOND"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -18,125 +18,125 @@
  TextValue:"FOR A PRETTY DIAMOND PATTERN,"
  CarriageControl:NL
 5 INPUT "TYPE IN AN ODD NUMBER BETWEEN 5 AND 21";R:PRINT
- Variable:R -> _
+ Variable:R -> .
  CarriageControl:NL
 6 Q=INT(60/R):A$="CC"
- Variable:Q -> _
+ Variable:Q -> .
  NumericValue:60
- Variable:R -> _
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ Variable:R -> .
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
  Variable:A$ -> $
  TextValue:"CC"
  AssignmentOperator:= =$ -> $
 8 FOR L=1 TO Q
- control: Variable:L -> _
+ control: Variable:L -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:Q -> _"]
+ end:     ["Variable:Q -> ."]
 10 X=1:Y=R:Z=2
- Variable:X -> _
+ Variable:X -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
- Variable:Y -> _
- Variable:R -> _
- AssignmentOperator:= _ -> _
- Variable:Z -> _
+ AssignmentOperator:= =. -> .
+ Variable:Y -> .
+ Variable:R -> .
+ AssignmentOperator:= . -> .
+ Variable:Z -> .
  NumericValue:2
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 20 FOR N=X TO Y STEP Z
- control: Variable:N -> _
- start:   ["Variable:X -> _"]
- end:     ["Variable:Y -> _"]
- step:    ["Variable:Z -> _"]
+ control: Variable:N -> .
+ start:   ["Variable:X -> ."]
+ end:     ["Variable:Y -> ."]
+ step:    ["Variable:Z -> ."]
 25 PRINT TAB((R-N)/2);
- Variable:R -> _
- Variable:N -> _
- BinaryOperatorMinus:-(_,_) -> _
+ Variable:R -> .
+ Variable:N -> .
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:2
- BinaryOperatorDivide:/(_,_) -> _
- FunctionTab:TAB(_) -> $
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
 28 FOR M=1 TO Q
- control: Variable:M -> _
+ control: Variable:M -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:Q -> _"]
+ end:     ["Variable:Q -> ."]
 29 C=1
- Variable:C -> _
+ Variable:C -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 30 FOR A=1 TO N
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:A -> _
+ control: Variable:A -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N -> _"]
+ end:     ["Variable:N -> ."]
 32 IF C>LEN(A$) THEN PRINT "!";:GOTO 50
- Variable:C -> _
+ Variable:C -> .
  Variable:A$ -> $
- FunctionLen:LEN($) -> _
- BinaryOperatorGreater:>(_,_) -> ?
+ FunctionLen:LEN($) -> .
+ BinaryOperatorGreater:>(.,.) -> ?
  TextValue:"!"
  CarriageControl:;
  LineNumber:50
 34 PRINT MID$(A$,C,1);
  Variable:A$ -> $
- Variable:C -> _
+ Variable:C -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  CarriageControl:;
 36 C=C+1
- Variable:C -> _
- Variable:C -> _
+ Variable:C -> .
+ Variable:C -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 50 NEXT A
- Variable:A -> _
+ Variable:A -> .
 53 IF M=Q THEN 60
- Variable:M -> _
- Variable:Q -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:M -> .
+ Variable:Q -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:60
 55 PRINT TAB(R*M+(R-N)/2);
- Variable:R -> _
- Variable:M -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:R -> _
- Variable:N -> _
- BinaryOperatorMinus:-(_,_) -> _
+ Variable:R -> .
+ Variable:M -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:R -> .
+ Variable:N -> .
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:2
- BinaryOperatorDivide:/(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- FunctionTab:TAB(_) -> $
+ BinaryOperatorDivide:/(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
 56 NEXT M
- Variable:M -> _
+ Variable:M -> .
 60 PRINT
  CarriageControl:NL
 70 NEXT N
- Variable:N -> _
+ Variable:N -> .
 83 IF X<>1 THEN 95
- Variable:X -> _
+ Variable:X -> .
  NumericValue:1
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:95
 85 X=R-2:Y=1:Z=-2
- Variable:X -> _
- Variable:R -> _
+ Variable:X -> .
+ Variable:R -> .
  NumericValue:2
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:Y -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:Y -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
- Variable:Z -> _
+ AssignmentOperator:= =. -> .
+ Variable:Z -> .
  NumericValue:2
- UnaryOperatorMinus:-(_) -> =_
- AssignmentOperator:= =_ -> _
+ UnaryOperatorMinus:-(.) -> =.
+ AssignmentOperator:= =. -> .
 90 GOTO 20
  LineNumber:20
 95 NEXT L
- Variable:L -> _
+ Variable:L -> .
 99 END
  WARNING: Terminating statement in FOR/NEXT
  

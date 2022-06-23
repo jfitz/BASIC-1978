@@ -1,12 +1,12 @@
 2 PRINT TAB(30);"MASTERMIND"
  NumericValue:30
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"MASTERMIND"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -29,51 +29,51 @@
 70 REM
  Remark:
 80 INPUT "NUMBER OF COLORS";C9
- Variable:C9 -> _
+ Variable:C9 -> .
 90 IF C9>8 THEN PRINT "NO MORE THAN 8, PLEASE!":GOTO 80
- Variable:C9 -> _
+ Variable:C9 -> .
  NumericValue:8
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  TextValue:"NO MORE THAN 8, PLEASE!"
  CarriageControl:NL
  LineNumber:80
 100 INPUT "NUMBER OF POSITIONS";P9
- Variable:P9 -> _
+ Variable:P9 -> .
 110 INPUT "NUMBER OF ROUNDS";R9
- Variable:R9 -> _
+ Variable:R9 -> .
 120 P=C9^P9
- Variable:P -> _
- Variable:C9 -> _
- Variable:P9 -> _
- BinaryOperatorPower:^(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:P -> .
+ Variable:C9 -> .
+ Variable:P9 -> .
+ BinaryOperatorPower:^(.,.) -> .
+ AssignmentOperator:= . -> .
 130 PRINT "TOTAL POSSIBILITIES =";P
  TextValue:"TOTAL POSSIBILITIES ="
  CarriageControl:;
- Variable:P -> _
+ Variable:P -> .
  CarriageControl:NL
 140 H=0:C=0
- Variable:H -> _
+ Variable:H -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- Variable:C -> _
+ AssignmentOperator:= =. -> .
+ Variable:C -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 150 DIM Q(P9),S(10,2),S$(10),A$(P9),G$(P9),I(P),H$(P9)
- Variable:P9 -> _
- Declaration:Q() -> _()
+ Variable:P9 -> .
+ Declaration:Q() -> .()
  NumericValue:10
  NumericValue:2
- Declaration:S(,) -> _(,)
+ Declaration:S(,) -> .(,)
  NumericValue:10
  Declaration:S$() -> $()
- Variable:P9 -> _
+ Variable:P9 -> .
  Declaration:A$() -> $()
- Variable:P9 -> _
+ Variable:P9 -> .
  Declaration:G$() -> $()
- Variable:P -> _
- Declaration:I() -> _()
- Variable:P9 -> _
+ Variable:P -> .
+ Declaration:I() -> .()
+ Variable:P9 -> .
  Declaration:H$() -> $()
 160 L$="BWRGOYPT"
  Variable:L$ -> $
@@ -90,37 +90,37 @@
  TextValue:"=====     ======"
  CarriageControl:NL
 210 FOR X=1 TO C9
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:C9 -> _"]
+ end:     ["Variable:C9 -> ."]
 220 READ X$
  Variable:X$ -> $
 230 PRINT X$;TAB(13);MID$(L$,X,1)
  Variable:X$ -> $
  CarriageControl:;
  NumericValue:13
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  Variable:L$ -> $
- Variable:X -> _
+ Variable:X -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  CarriageControl:NL
 240 NEXT X
- Variable:X -> _
+ Variable:X -> .
 250 PRINT
  CarriageControl:NL
 260 FOR R=1 TO R9
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:R -> _
+ control: Variable:R -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:R9 -> _"]
+ end:     ["Variable:R9 -> ."]
 270 PRINT 
  CarriageControl:NL
 280 PRINT "ROUND NUMBER";R;"----"
  TextValue:"ROUND NUMBER"
  CarriageControl:;
- Variable:R -> _
+ Variable:R -> .
  CarriageControl:;
  TextValue:"----"
  CarriageControl:NL
@@ -133,34 +133,34 @@
 310 REM     GET A COMBINATION
  Remark:    GET A COMBINATION
 320 A=INT(P*RND(1)+1)
- Variable:A -> _
- Variable:P -> _
+ Variable:A -> .
+ Variable:P -> .
  NumericValue:1
- FunctionRnd:RND(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ FunctionRnd:RND(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 330 GOSUB 3000
  LineNumber:3000
 340 FOR X=1 TO A
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:A -> _"]
+ end:     ["Variable:A -> ."]
 350 GOSUB 3500
  LineNumber:3500
 360 NEXT X
- Variable:X -> _
+ Variable:X -> .
 370 FOR M=1 TO 10
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:M -> _
+ control: Variable:M -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:10"]
 380 PRINT "MOVE # ";M;" GUESS ";:INPUT X$
  TextValue:"MOVE # "
  CarriageControl:;
- Variable:M -> _
+ Variable:M -> .
  CarriageControl:;
  TextValue:" GUESS "
  CarriageControl:;
@@ -177,9 +177,9 @@
  LineNumber:2500
 410 IF LEN(X$)<>P9 THEN PRINT "BAD NUMBER OF POSITIONS.":GOTO 380
  Variable:X$ -> $
- FunctionLen:LEN($) -> _
- Variable:P9 -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ FunctionLen:LEN($) -> .
+ Variable:P9 -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  TextValue:"BAD NUMBER OF POSITIONS."
  CarriageControl:NL
  LineNumber:380
@@ -187,49 +187,49 @@
  Remark:    UNPACK X$ INTO G$(1-P9)
 430 FOR X=1 TO P9
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 440 FOR Y=1 TO C9
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:Y -> _
+ control: Variable:Y -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:C9 -> _"]
+ end:     ["Variable:C9 -> ."]
 450 IF MID$(X$,X,1)=MID$(L$,Y,1) THEN 480
  Variable:X$ -> $
- Variable:X -> _
+ Variable:X -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  Variable:L$ -> $
- Variable:Y -> _
+ Variable:Y -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:480
 460 NEXT Y
- Variable:Y -> _
+ Variable:Y -> .
 470 PRINT "'"; MID$(X$,X,1); "' IS UNRECOGNIZED.":GOTO 380
  TextValue:"'"
  CarriageControl:;
  Variable:X$ -> $
- Variable:X -> _
+ Variable:X -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  CarriageControl:;
  TextValue:"' IS UNRECOGNIZED."
  CarriageControl:NL
  LineNumber:380
 480 G$(X)=MID$(X$,X,1)
- Variable:X -> _
- Variable:G$(_) -> $
+ Variable:X -> .
+ Variable:G$(.) -> $
  Variable:X$ -> $
- Variable:X -> _
+ Variable:X -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  AssignmentOperator:= $ -> $
 490 NEXT X
- Variable:X -> _
+ Variable:X -> .
 500 REM     NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
  Remark:    NOW WE CONVERT Q(1-P9) INTO A$(1-P9) [ACTUAL GUESS]
 510 GOSUB 4000
@@ -239,44 +239,44 @@
 530 GOSUB 4500
  LineNumber:4500
 540 IF B=P9 THEN 630
- Variable:B -> _
- Variable:P9 -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:B -> .
+ Variable:P9 -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:630
 550 REM     TELL HUMAN RESULTS
  Remark:    TELL HUMAN RESULTS
 560 PRINT "YOU HAVE ";B;" BLACKS AND ";W;" WHITES."
  TextValue:"YOU HAVE "
  CarriageControl:;
- Variable:B -> _
+ Variable:B -> .
  CarriageControl:;
  TextValue:" BLACKS AND "
  CarriageControl:;
- Variable:W -> _
+ Variable:W -> .
  CarriageControl:;
  TextValue:" WHITES."
  CarriageControl:NL
 570 REM     SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
  Remark:    SAVE ALL THIS STUFF FOR BOARD PRINTOUT LATER
 580 S$(M)=X$
- Variable:M -> _
- Variable:S$(_) -> $
+ Variable:M -> .
+ Variable:S$(.) -> $
  Variable:X$ -> $
  AssignmentOperator:= $ -> $
 590 S(M,1)=B
- Variable:M -> _
+ Variable:M -> .
  NumericValue:1
- Variable:S(_,_) -> _
- Variable:B -> _
- AssignmentOperator:= _ -> _
+ Variable:S(.,.) -> .
+ Variable:B -> .
+ AssignmentOperator:= . -> .
 600 S(M,2)=W
- Variable:M -> _
+ Variable:M -> .
  NumericValue:2
- Variable:S(_,_) -> _
- Variable:W -> _
- AssignmentOperator:= _ -> _
+ Variable:S(.,.) -> .
+ Variable:W -> .
+ AssignmentOperator:= . -> .
 610 NEXT M
- Variable:M -> _
+ Variable:M -> .
 620 PRINT "YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!":GOTO 640
  TextValue:"YOU RAN OUT OF MOVES!  THAT'S ALL YOU GET!"
  CarriageControl:NL
@@ -287,30 +287,30 @@
  TextValue:"THE ACTUAL COMBINATION WAS: "
  CarriageControl:;
 624 FOR X=1 TO P9
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 625 PRINT A$(X);
- Variable:X -> _
- Variable:A$(_) -> $
+ Variable:X -> .
+ Variable:A$(.) -> $
  CarriageControl:;
 626 NEXT X
- Variable:X -> _
+ Variable:X -> .
 627 PRINT
  CarriageControl:NL
 630 PRINT "YOU GUESSED IT IN ";M;" MOVES!"
  TextValue:"YOU GUESSED IT IN "
  CarriageControl:;
- Variable:M -> _
+ Variable:M -> .
  CarriageControl:;
  TextValue:" MOVES!"
  CarriageControl:NL
 640 H=H+M
- Variable:H -> _
- Variable:H -> _
- Variable:M -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:H -> .
+ Variable:H -> .
+ Variable:M -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 650 GOSUB 5000
  LineNumber:5000
 660 REM
@@ -321,16 +321,16 @@
  Remark:
 690 FOR X=1 TO P
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P -> _"]
+ end:     ["Variable:P -> ."]
 700 I(X)=1
- Variable:X -> _
- Variable:I(_) -> _
+ Variable:X -> .
+ Variable:I(.) -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 710 NEXT X
- Variable:X -> _
+ Variable:X -> .
 720 PRINT "NOW I GUESS.  THINK OF A COMBINATION."
  TextValue:"NOW I GUESS.  THINK OF A COMBINATION."
  CarriageControl:NL
@@ -339,7 +339,7 @@
 740 FOR M=1 TO 10
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:M -> _
+ control: Variable:M -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:10"]
 750 GOSUB 3000
@@ -347,47 +347,47 @@
 760 REM     FIND A GUESS
  Remark:    FIND A GUESS
 770 G=INT(P*RND(1)+1)
- Variable:G -> _
- Variable:P -> _
+ Variable:G -> .
+ Variable:P -> .
  NumericValue:1
- FunctionRnd:RND(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ FunctionRnd:RND(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 780 IF I(G)=1 THEN 890
- Variable:G -> _
- Variable:I(_) -> _
+ Variable:G -> .
+ Variable:I(.) -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:890
 790 FOR X=G TO P
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:X -> _
- start:   ["Variable:G -> _"]
- end:     ["Variable:P -> _"]
+ control: Variable:X -> .
+ start:   ["Variable:G -> ."]
+ end:     ["Variable:P -> ."]
 800 IF I(X)=1 THEN 880
- Variable:X -> _
- Variable:I(_) -> _
+ Variable:X -> .
+ Variable:I(.) -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:880
 810 NEXT X
- Variable:X -> _
+ Variable:X -> .
 820 FOR X=1 TO G
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:G -> _"]
+ end:     ["Variable:G -> ."]
 830 IF I(X)=1 THEN 880
- Variable:X -> _
- Variable:I(_) -> _
+ Variable:X -> .
+ Variable:I(.) -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:880
 840 NEXT X
- Variable:X -> _
+ Variable:X -> .
 850 PRINT "YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
  TextValue:"YOU HAVE GIVEN ME INCONSISTENT INFORMATION."
  CarriageControl:NL
@@ -397,20 +397,20 @@
 870 GOTO 660
  LineNumber:660
 880 G=X
- Variable:G -> _
- Variable:X -> _
- AssignmentOperator:= _ -> _
+ Variable:G -> .
+ Variable:X -> .
+ AssignmentOperator:= . -> .
 890 REM     NOW WE CONVERT GUESS #G INTO G$
  Remark:    NOW WE CONVERT GUESS #G INTO G$
 900 FOR X=1 TO G
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:G -> _"]
+ end:     ["Variable:G -> ."]
 910 GOSUB 3500
  LineNumber:3500
 920 NEXT X
- Variable:X -> _
+ Variable:X -> .
 930 GOSUB 6000
  LineNumber:6000
 940 PRINT "MY GUESS IS: ";
@@ -418,37 +418,37 @@
  CarriageControl:;
 950 FOR X=1 TO P9
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 960 PRINT H$(X);
- Variable:X -> _
- Variable:H$(_) -> $
+ Variable:X -> .
+ Variable:H$(.) -> $
  CarriageControl:;
 970 NEXT X
- Variable:X -> _
+ Variable:X -> .
 980 INPUT "  BLACKS, WHITES ";B1,W1
- Variable:B1 -> _
- Variable:W1 -> _
+ Variable:B1 -> .
+ Variable:W1 -> .
 990 IF B1=P9 THEN 1120
- Variable:B1 -> _
- Variable:P9 -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:B1 -> .
+ Variable:P9 -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:1120
 1000 GOSUB 3000
  LineNumber:3000
 1010 FOR X=1 TO P
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P -> _"]
+ end:     ["Variable:P -> ."]
 1020 GOSUB 3500
  LineNumber:3500
 1030 IF I(X)=0 THEN 1070
- Variable:X -> _
- Variable:I(_) -> _
+ Variable:X -> .
+ Variable:I(.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:1070
 1035 GOSUB 6500
  LineNumber:6500
@@ -457,21 +457,21 @@
 1050 GOSUB 4500
  LineNumber:4500
 1060 IF B1<>B OR W1<>W THEN I(X)=0
- Variable:B1 -> _
- Variable:B -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
- Variable:W1 -> _
- Variable:W -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ Variable:B1 -> .
+ Variable:B -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
+ Variable:W1 -> .
+ Variable:W -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  BinaryOperatorOr:OR(?,?) -> ?
- Variable:X -> _
- Variable:I(_) -> _
+ Variable:X -> .
+ Variable:I(.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1070 NEXT X
- Variable:X -> _
+ Variable:X -> .
 1080 NEXT M
- Variable:M -> _
+ Variable:M -> .
 1090 PRINT "I USED UP ALL MY MOVES!"
  TextValue:"I USED UP ALL MY MOVES!"
  CarriageControl:NL
@@ -483,20 +483,20 @@
 1120 PRINT "I GOT IT IN ";M;" MOVES!"
  TextValue:"I GOT IT IN "
  CarriageControl:;
- Variable:M -> _
+ Variable:M -> .
  CarriageControl:;
  TextValue:" MOVES!"
  CarriageControl:NL
 1130 C=C+M
- Variable:C -> _
- Variable:C -> _
- Variable:M -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:C -> .
+ Variable:C -> .
+ Variable:M -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1140 GOSUB 5000
  LineNumber:5000
 1150 NEXT R
- Variable:R -> _
+ Variable:R -> .
 1160 PRINT "GAME OVER"
  TextValue:"GAME OVER"
  CarriageControl:NL
@@ -524,34 +524,34 @@
  CarriageControl:NL
 2050 FOR Z=1 TO M-1
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:Z -> _
+ control: Variable:Z -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:M -> _", "NumericValue:1", "BinaryOperatorMinus:-(_,_) -> _"]
+ end:     ["Variable:M -> .", "NumericValue:1", "BinaryOperatorMinus:-(.,.) -> ."]
 2060 PRINT Z;TAB(9);S$(Z);TAB(25);S(Z,1);TAB(35);S(Z,2)
- Variable:Z -> _
+ Variable:Z -> .
  CarriageControl:;
  NumericValue:9
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
- Variable:Z -> _
- Variable:S$(_) -> $
+ Variable:Z -> .
+ Variable:S$(.) -> $
  CarriageControl:;
  NumericValue:25
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:1
- Variable:S(_,_) -> _
+ Variable:S(.,.) -> .
  CarriageControl:;
  NumericValue:35
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:2
- Variable:S(_,_) -> _
+ Variable:S(.,.) -> .
  CarriageControl:NL
 2070 NEXT Z
- Variable:Z -> _
+ Variable:Z -> .
 2075 PRINT
  CarriageControl:NL
 2080 GOTO 380
@@ -569,15 +569,15 @@
  LineNumber:4000
 2540 FOR X=1 TO P9
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 2550 PRINT A$(X);
- Variable:X -> _
- Variable:A$(_) -> $
+ Variable:X -> .
+ Variable:A$(.) -> $
  CarriageControl:;
 2560 NEXT X
- Variable:X -> _
+ Variable:X -> .
 2565 PRINT
  CarriageControl:NL
 2570 PRINT "GOOD BYE"
@@ -593,16 +593,16 @@
 3020 REM
  Remark:
 3030 FOR S=1 TO P9
- control: Variable:S -> _
+ control: Variable:S -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 3040 Q(S)=0
- Variable:S -> _
- Variable:Q(_) -> _
+ Variable:S -> .
+ Variable:Q(.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 3050 NEXT S
- Variable:S -> _
+ Variable:S -> .
 3060 RETURN
  
 3500 REM
@@ -613,54 +613,54 @@
  Remark:
 3522 IF Q(1)>0 THEN 3530
  NumericValue:1
- Variable:Q(_) -> _
+ Variable:Q(.) -> .
  NumericValue:0
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:3530
 3524 REM  IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
  Remark: IF ZERO, THIS IS OUR FIRST INCREMENT: MAKE ALL ONES
 3526 FOR S=1 TO P9
- control: Variable:S -> _
+ control: Variable:S -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 3527 Q(S)=1
- Variable:S -> _
- Variable:Q(_) -> _
+ Variable:S -> .
+ Variable:Q(.) -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 3528 NEXT S
- Variable:S -> _
+ Variable:S -> .
 3529 RETURN
  
 3530 Q=1
- Variable:Q -> _
+ Variable:Q -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 3540 Q(Q)=Q(Q)+1
- Variable:Q -> _
- Variable:Q(_) -> _
- Variable:Q -> _
- Variable:Q(_) -> _
+ Variable:Q -> .
+ Variable:Q(.) -> .
+ Variable:Q -> .
+ Variable:Q(.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 3550 IF Q(Q)<=C9 THEN RETURN
- Variable:Q -> _
- Variable:Q(_) -> _
- Variable:C9 -> _
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ Variable:Q -> .
+ Variable:Q(.) -> .
+ Variable:C9 -> .
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  
 3560 Q(Q)=1
- Variable:Q -> _
- Variable:Q(_) -> _
+ Variable:Q -> .
+ Variable:Q(.) -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 3570 Q=Q+1
- Variable:Q -> _
- Variable:Q -> _
+ Variable:Q -> .
+ Variable:Q -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 3580 GOTO 3540
  LineNumber:3540
 4000 REM
@@ -670,20 +670,20 @@
 4020 REM
  Remark:
 4030 FOR S=1 TO P9
- control: Variable:S -> _
+ control: Variable:S -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 4040 A$(S)=MID$(L$,Q(S),1)
- Variable:S -> _
- Variable:A$(_) -> $
+ Variable:S -> .
+ Variable:A$(.) -> $
  Variable:L$ -> $
- Variable:S -> _
- Variable:Q(_) -> _
+ Variable:S -> .
+ Variable:Q(.) -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  AssignmentOperator:= $ -> $
 4050 NEXT S
- Variable:S -> _
+ Variable:S -> .
 4060 RETURN
  
 4500 REM
@@ -695,100 +695,100 @@
 4530 REM
  Remark:
 4540 B=0:W=0:F=0
- Variable:B -> _
+ Variable:B -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- Variable:W -> _
+ AssignmentOperator:= =. -> .
+ Variable:W -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- Variable:F -> _
+ AssignmentOperator:= =. -> .
+ Variable:F -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 4550 FOR S=1 TO P9
- control: Variable:S -> _
+ control: Variable:S -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 4560 IF G$(S)<>A$(S) THEN 4620
- Variable:S -> _
- Variable:G$(_) -> $
- Variable:S -> _
- Variable:A$(_) -> $
+ Variable:S -> .
+ Variable:G$(.) -> $
+ Variable:S -> .
+ Variable:A$(.) -> $
  BinaryOperatorNotEqual:<>($,$) -> ?
  LineNumber:4620
 4570 B=B+1
- Variable:B -> _
- Variable:B -> _
+ Variable:B -> .
+ Variable:B -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 4580 G$(S)=CHR$(F)
- Variable:S -> _
- Variable:G$(_) -> $
- Variable:F -> _
- FunctionChr:CHR$(_) -> $
+ Variable:S -> .
+ Variable:G$(.) -> $
+ Variable:F -> .
+ FunctionChr:CHR$(.) -> $
  AssignmentOperator:= $ -> $
 4590 A$(S)=CHR$(F+1)
- Variable:S -> _
- Variable:A$(_) -> $
- Variable:F -> _
+ Variable:S -> .
+ Variable:A$(.) -> $
+ Variable:F -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- FunctionChr:CHR$(_) -> $
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionChr:CHR$(.) -> $
  AssignmentOperator:= $ -> $
 4600 F=F+2
- Variable:F -> _
- Variable:F -> _
+ Variable:F -> .
+ Variable:F -> .
  NumericValue:2
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 4610 GOTO 4660
  LineNumber:4660
 4620 FOR T=1 TO P9
- control: Variable:T -> _
+ control: Variable:T -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 4630 IF G$(S)<>A$(T) THEN 4650
- Variable:S -> _
- Variable:G$(_) -> $
- Variable:T -> _
- Variable:A$(_) -> $
+ Variable:S -> .
+ Variable:G$(.) -> $
+ Variable:T -> .
+ Variable:A$(.) -> $
  BinaryOperatorNotEqual:<>($,$) -> ?
  LineNumber:4650
 4640 IF G$(T)=A$(T) THEN 4650
- Variable:T -> _
- Variable:G$(_) -> $
- Variable:T -> _
- Variable:A$(_) -> $
+ Variable:T -> .
+ Variable:G$(.) -> $
+ Variable:T -> .
+ Variable:A$(.) -> $
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:4650
 4645 W=W+1:A$(T)=CHR$(F):G$(S)=CHR$(F+1):F=F+2:GOTO 4660
- Variable:W -> _
- Variable:W -> _
+ Variable:W -> .
+ Variable:W -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:T -> _
- Variable:A$(_) -> $
- Variable:F -> _
- FunctionChr:CHR$(_) -> $
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:T -> .
+ Variable:A$(.) -> $
+ Variable:F -> .
+ FunctionChr:CHR$(.) -> $
  AssignmentOperator:= $ -> $
- Variable:S -> _
- Variable:G$(_) -> $
- Variable:F -> _
+ Variable:S -> .
+ Variable:G$(.) -> $
+ Variable:F -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- FunctionChr:CHR$(_) -> $
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionChr:CHR$(.) -> $
  AssignmentOperator:= $ -> $
- Variable:F -> _
- Variable:F -> _
+ Variable:F -> .
+ Variable:F -> .
  NumericValue:2
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
  LineNumber:4660
 4650 NEXT T
- Variable:T -> _
+ Variable:T -> .
 4660 NEXT S
- Variable:S -> _
+ Variable:S -> .
 4670 RETURN
  
 5000 REM
@@ -805,13 +805,13 @@
  WARNING: Multiple GOSUB entry points
  TextValue:"     COMPUTER "
  CarriageControl:;
- Variable:C -> _
+ Variable:C -> .
  CarriageControl:NL
 5050 PRINT "     HUMAN    ";H
  WARNING: Multiple GOSUB entry points
  TextValue:"     HUMAN    "
  CarriageControl:;
- Variable:H -> _
+ Variable:H -> .
  CarriageControl:NL
 5060 PRINT
  WARNING: Multiple GOSUB entry points
@@ -826,20 +826,20 @@
 5520 REM
  Remark:
 5530 FOR S=1 TO P9
- control: Variable:S -> _
+ control: Variable:S -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 5540 G$(S)=MID$(L$,Q(S),1)
- Variable:S -> _
- Variable:G$(_) -> $
+ Variable:S -> .
+ Variable:G$(.) -> $
  Variable:L$ -> $
- Variable:S -> _
- Variable:Q(_) -> _
+ Variable:S -> .
+ Variable:Q(.) -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  AssignmentOperator:= $ -> $
 5550 NEXT S
- Variable:S -> _
+ Variable:S -> .
 5560 RETURN
  
 6000 REM
@@ -849,20 +849,20 @@
 6020 REM
  Remark:
 6030 FOR S=1 TO P9
- control: Variable:S -> _
+ control: Variable:S -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 6040 H$(S)=MID$(L$,Q(S),1)
- Variable:S -> _
- Variable:H$(_) -> $
+ Variable:S -> .
+ Variable:H$(.) -> $
  Variable:L$ -> $
- Variable:S -> _
- Variable:Q(_) -> _
+ Variable:S -> .
+ Variable:Q(.) -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  AssignmentOperator:= $ -> $
 6050 NEXT S
- Variable:S -> _
+ Variable:S -> .
 6060 RETURN
  
 6500 REM
@@ -872,17 +872,17 @@
 6520 REM
  Remark:
 6530 FOR S=1 TO P9
- control: Variable:S -> _
+ control: Variable:S -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:P9 -> _"]
+ end:     ["Variable:P9 -> ."]
 6540 G$(S)=H$(S)
- Variable:S -> _
- Variable:G$(_) -> $
- Variable:S -> _
- Variable:H$(_) -> $
+ Variable:S -> .
+ Variable:G$(.) -> $
+ Variable:S -> .
+ Variable:H$(.) -> $
  AssignmentOperator:= $ -> $
 6550 NEXT S
- Variable:S -> _
+ Variable:S -> .
 6560 RETURN
  
 8000 REM     PROGRAM DATA FOR COLOR NAMES

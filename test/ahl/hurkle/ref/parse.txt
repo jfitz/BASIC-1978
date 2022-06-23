@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"HURKLE"
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"HURKLE"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,23 +15,23 @@
  CarriageControl:NL
  CarriageControl:NL
 110 N=5
- Variable:N -> _
+ Variable:N -> .
  NumericValue:5
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 120 G=10
- Variable:G -> _
+ Variable:G -> .
  NumericValue:10
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 210 PRINT
  CarriageControl:NL
 220 PRINT "A HURKLE IS HIDING ON A";G;"BY";G;"GRID. HOMEBASE"
  TextValue:"A HURKLE IS HIDING ON A"
  CarriageControl:;
- Variable:G -> _
+ Variable:G -> .
  CarriageControl:;
  TextValue:"BY"
  CarriageControl:;
- Variable:G -> _
+ Variable:G -> .
  CarriageControl:;
  TextValue:"GRID. HOMEBASE"
  CarriageControl:NL
@@ -53,7 +53,7 @@
 250 PRINT "GUESS THE HURKLE'S GRIDPOINT. YOU GET";N;"TRIES."
  TextValue:"GUESS THE HURKLE'S GRIDPOINT. YOU GET"
  CarriageControl:;
- Variable:N -> _
+ Variable:N -> .
  CarriageControl:;
  TextValue:"TRIES."
  CarriageControl:NL
@@ -66,45 +66,45 @@
 280 PRINT
  CarriageControl:NL
 285 A=INT(G*RND(1))
- Variable:A -> _
- Variable:G -> _
+ Variable:A -> .
+ Variable:G -> .
  NumericValue:1
- FunctionRnd:RND(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ FunctionRnd:RND(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 286 B=INT(G*RND(1))
- Variable:B -> _
- Variable:G -> _
+ Variable:B -> .
+ Variable:G -> .
  NumericValue:1
- FunctionRnd:RND(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ FunctionRnd:RND(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 310 FOR K=1 TO N
- control: Variable:K -> _
+ control: Variable:K -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N -> _"]
+ end:     ["Variable:N -> ."]
 320 PRINT "GUESS #";K;
  TextValue:"GUESS #"
  CarriageControl:;
- Variable:K -> _
+ Variable:K -> .
  CarriageControl:;
 330 INPUT X,Y
- Variable:X -> _
- Variable:Y -> _
+ Variable:X -> .
+ Variable:Y -> .
 340 IF ABS(X-A)+ABS(Y-B)=0 THEN 500
- Variable:X -> _
- Variable:A -> _
- BinaryOperatorMinus:-(_,_) -> _
- FunctionAbs:ABS(_) -> _
- Variable:Y -> _
- Variable:B -> _
- BinaryOperatorMinus:-(_,_) -> _
- FunctionAbs:ABS(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
+ Variable:X -> .
+ Variable:A -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ FunctionAbs:ABS(.) -> .
+ Variable:Y -> .
+ Variable:B -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ FunctionAbs:ABS(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:500
 350 REM PRINT INFO
  Remark:PRINT INFO
@@ -113,24 +113,24 @@
 370 PRINT
  CarriageControl:NL
 380 NEXT K
- Variable:K -> _
+ Variable:K -> .
 410 PRINT
  CarriageControl:NL
 420 PRINT "SORRY, THAT'S";N;"GUESSES."
  TextValue:"SORRY, THAT'S"
  CarriageControl:;
- Variable:N -> _
+ Variable:N -> .
  CarriageControl:;
  TextValue:"GUESSES."
  CarriageControl:NL
 430 PRINT "THE HURKLE IS AT ";A;",";B
  TextValue:"THE HURKLE IS AT "
  CarriageControl:;
- Variable:A -> _
+ Variable:A -> .
  CarriageControl:;
  TextValue:","
  CarriageControl:;
- Variable:B -> _
+ Variable:B -> .
  CarriageControl:NL
 440 PRINT
  CarriageControl:NL
@@ -148,7 +148,7 @@
 520 PRINT "YOU FOUND HIM IN";K;"GUESSES!"
  TextValue:"YOU FOUND HIM IN"
  CarriageControl:;
- Variable:K -> _
+ Variable:K -> .
  CarriageControl:;
  TextValue:"GUESSES!"
  CarriageControl:NL
@@ -158,14 +158,14 @@
  TextValue:"GO "
  CarriageControl:;
 620 IF Y=B THEN 670
- Variable:Y -> _
- Variable:B -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:Y -> .
+ Variable:B -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:670
 630 IF Y<B THEN 660
- Variable:Y -> _
- Variable:B -> _
- BinaryOperatorLess:<(_,_) -> ?
+ Variable:Y -> .
+ Variable:B -> .
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:660
 640 PRINT "SOUTH";
  TextValue:"SOUTH"
@@ -176,14 +176,14 @@
  TextValue:"NORTH"
  CarriageControl:;
 670 IF X=A THEN 720
- Variable:X -> _
- Variable:A -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:X -> .
+ Variable:A -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:720
 680 IF X<A THEN 710
- Variable:X -> _
- Variable:A -> _
- BinaryOperatorLess:<(_,_) -> ?
+ Variable:X -> .
+ Variable:A -> .
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:710
 690 PRINT "WEST";
  TextValue:"WEST"

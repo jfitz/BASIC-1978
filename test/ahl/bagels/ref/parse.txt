@@ -1,12 +1,12 @@
 5 PRINT TAB(33);"BAGELS"
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"BAGELS"
  CarriageControl:NL
 10 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY":PRINT:PRINT
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -20,18 +20,18 @@
  Remark:*** LAWRENCE HALL OF SCIENCE, U.C. BERKELY
 30 DIM A1(6),A(3),B(3)
  NumericValue:6
- Declaration:A1() -> _()
+ Declaration:A1() -> .()
  NumericValue:3
- Declaration:A() -> _()
+ Declaration:A() -> .()
  NumericValue:3
- Declaration:B() -> _()
+ Declaration:B() -> .()
 40 Y=0:T=255
- Variable:Y -> _
+ Variable:Y -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- Variable:T -> _
+ AssignmentOperator:= =. -> .
+ Variable:T -> .
  NumericValue:255
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 50 PRINT:PRINT:PRINT
  CarriageControl:NL
  CarriageControl:NL
@@ -41,7 +41,7 @@
 90 IF LEFT$(A$,1)="N" THEN 150
  Variable:A$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"N"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:150
@@ -62,103 +62,103 @@
  TextValue:"   BAGELS - NO DIGITS CORRECT"
  CarriageControl:NL
 150 FOR I=1 TO 3
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
 160 A(I)=INT(10*RND(1))
- Variable:I -> _
- Variable:A(_) -> _
+ Variable:I -> .
+ Variable:A(.) -> .
  NumericValue:10
  NumericValue:1
- FunctionRnd:RND(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ FunctionRnd:RND(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 165 IF I-1=0 THEN 200
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:200
 170 FOR J=1 TO I-1
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:I -> _", "NumericValue:1", "BinaryOperatorMinus:-(_,_) -> _"]
+ end:     ["Variable:I -> .", "NumericValue:1", "BinaryOperatorMinus:-(.,.) -> ."]
 180 IF A(I)=A(J) THEN 160
- Variable:I -> _
- Variable:A(_) -> _
- Variable:J -> _
- Variable:A(_) -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:I -> .
+ Variable:A(.) -> .
+ Variable:J -> .
+ Variable:A(.) -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:160
 190 NEXT J
- Variable:J -> _
+ Variable:J -> .
 200 NEXT I
- Variable:I -> _
+ Variable:I -> .
 210 PRINT:PRINT "O.K.  I HAVE A NUMBER IN MIND."
  CarriageControl:NL
  TextValue:"O.K.  I HAVE A NUMBER IN MIND."
  CarriageControl:NL
 220 FOR I=1 TO 20
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:20"]
 230 PRINT "GUESS #";I,
  TextValue:"GUESS #"
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
  CarriageControl:,
 240 INPUT A$
  Variable:A$ -> $
 245 IF LEN(A$)<>3 THEN 630
  Variable:A$ -> $
- FunctionLen:LEN($) -> _
+ FunctionLen:LEN($) -> .
  NumericValue:3
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:630
 250 FOR Z=1 TO 3:A1(Z)=ASC(MID$(A$,Z,1)):NEXT Z
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:Z -> _
+ control: Variable:Z -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
- Variable:Z -> _
- Variable:A1(_) -> _
+ Variable:Z -> .
+ Variable:A1(.) -> .
  Variable:A$ -> $
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
- FunctionAscii:ASC($) -> _
- AssignmentOperator:= _ -> _
- Variable:Z -> _
+ FunctionMid:MID$($,.,.) -> $
+ FunctionAscii:ASC($) -> .
+ AssignmentOperator:= . -> .
+ Variable:Z -> .
 260 FOR J=1 TO 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
 270 IF A1(J)<48 THEN 300
- Variable:J -> _
- Variable:A1(_) -> _
+ Variable:J -> .
+ Variable:A1(.) -> .
  NumericValue:48
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:300
 280 IF A1(J)>57 THEN 300
- Variable:J -> _
- Variable:A1(_) -> _
+ Variable:J -> .
+ Variable:A1(.) -> .
  NumericValue:57
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:300
 285 B(J)=A1(J)-48
- Variable:J -> _
- Variable:B(_) -> _
- Variable:J -> _
- Variable:A1(_) -> _
+ Variable:J -> .
+ Variable:B(.) -> .
+ Variable:J -> .
+ Variable:A1(.) -> .
  NumericValue:48
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 290 NEXT J
- Variable:J -> _
+ Variable:J -> .
 295 GOTO 320
  LineNumber:320
 300 PRINT "WHAT?"
@@ -168,152 +168,152 @@
  LineNumber:230
 320 IF B(1)=B(2) THEN 650
  NumericValue:1
- Variable:B(_) -> _
+ Variable:B(.) -> .
  NumericValue:2
- Variable:B(_) -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:B(.) -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:650
 330 IF B(2)=B(3) THEN 650
  NumericValue:2
- Variable:B(_) -> _
+ Variable:B(.) -> .
  NumericValue:3
- Variable:B(_) -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:B(.) -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:650
 340 IF B(3)=B(1) THEN 650
  NumericValue:3
- Variable:B(_) -> _
+ Variable:B(.) -> .
  NumericValue:1
- Variable:B(_) -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:B(.) -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:650
 350 C=0:D=0
- Variable:C -> _
+ Variable:C -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- Variable:D -> _
+ AssignmentOperator:= =. -> .
+ Variable:D -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 360 FOR J=1 TO 2
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:2"]
 370 IF A(J)<>B(J+1) THEN 390
- Variable:J -> _
- Variable:A(_) -> _
- Variable:J -> _
+ Variable:J -> .
+ Variable:A(.) -> .
+ Variable:J -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- Variable:B(_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:B(.) -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:390
 380 C=C+1
- Variable:C -> _
- Variable:C -> _
+ Variable:C -> .
+ Variable:C -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 390 IF A(J+1)<>B(J) THEN 410
- Variable:J -> _
+ Variable:J -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- Variable:A(_) -> _
- Variable:J -> _
- Variable:B(_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:A(.) -> .
+ Variable:J -> .
+ Variable:B(.) -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:410
 400 C=C+1
- Variable:C -> _
- Variable:C -> _
+ Variable:C -> .
+ Variable:C -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 410 NEXT J
- Variable:J -> _
+ Variable:J -> .
 420 IF A(1)<>B(3) THEN 440
  NumericValue:1
- Variable:A(_) -> _
+ Variable:A(.) -> .
  NumericValue:3
- Variable:B(_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ Variable:B(.) -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:440
 430 C=C+1
- Variable:C -> _
- Variable:C -> _
+ Variable:C -> .
+ Variable:C -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 440 IF A(3)<>B(1) THEN 460
  NumericValue:3
- Variable:A(_) -> _
+ Variable:A(.) -> .
  NumericValue:1
- Variable:B(_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ Variable:B(.) -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:460
 450 C=C+1
- Variable:C -> _
- Variable:C -> _
+ Variable:C -> .
+ Variable:C -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 460 FOR J=1 TO 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
 470 IF A(J)<>B(J) THEN 490
- Variable:J -> _
- Variable:A(_) -> _
- Variable:J -> _
- Variable:B(_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ Variable:J -> .
+ Variable:A(.) -> .
+ Variable:J -> .
+ Variable:B(.) -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:490
 480 D=D+1
- Variable:D -> _
- Variable:D -> _
+ Variable:D -> .
+ Variable:D -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 490 NEXT J
- Variable:J -> _
+ Variable:J -> .
 500 IF D=3 THEN 680
- Variable:D -> _
+ Variable:D -> .
  NumericValue:3
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:680
 505 IF C=0 THEN 545
- Variable:C -> _
+ Variable:C -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:545
 520 FOR J=1 TO C
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:C -> _"]
+ end:     ["Variable:C -> ."]
 530 PRINT "PICO ";
  TextValue:"PICO "
  CarriageControl:;
 540 NEXT J
- Variable:J -> _
+ Variable:J -> .
 545 IF D=0 THEN 580
- Variable:D -> _
+ Variable:D -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:580
 550 FOR J=1 TO D
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:D -> _"]
+ end:     ["Variable:D -> ."]
 560 PRINT "FERMI ";
  TextValue:"FERMI "
  CarriageControl:;
 570 NEXT J
- Variable:J -> _
+ Variable:J -> .
 580 IF C+D<>0 THEN 600
- Variable:C -> _
- Variable:D -> _
- BinaryOperatorPlus:+(_,_) -> _
+ Variable:C -> .
+ Variable:D -> .
+ BinaryOperatorPlus:+(.,.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:600
 590 PRINT "BAGELS";
  TextValue:"BAGELS"
@@ -321,7 +321,7 @@
 600 PRINT
  CarriageControl:NL
 605 NEXT I
- Variable:I -> _
+ Variable:I -> .
 610 PRINT "OH WELL."
  TextValue:"OH WELL."
  CarriageControl:NL
@@ -330,16 +330,16 @@
  CarriageControl:;
  NumericValue:100
  NumericValue:1
- Variable:A(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ Variable:A(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:10
  NumericValue:2
- Variable:A(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
+ Variable:A(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
  NumericValue:3
- Variable:A(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
+ Variable:A(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
  CarriageControl:NL
 620 GOTO 700
  LineNumber:700
@@ -359,30 +359,30 @@
  CarriageControl:NL
  CarriageControl:NL
 690 Y=Y+1
- Variable:Y -> _
- Variable:Y -> _
+ Variable:Y -> .
+ Variable:Y -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 700 INPUT "PLAY AGAIN (YES OR NO)";A$
  Variable:A$ -> $
 720 IF LEFT$(A$,1)="YES" THEN 150
  Variable:A$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"YES"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:150
 730 IF Y=0 THEN 750
- Variable:Y -> _
+ Variable:Y -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:750
 740 PRINT:PRINT "A";Y;"POINT BAGELS BUFF!!"
  CarriageControl:NL
  TextValue:"A"
  CarriageControl:;
- Variable:Y -> _
+ Variable:Y -> .
  CarriageControl:;
  TextValue:"POINT BAGELS BUFF!!"
  CarriageControl:NL

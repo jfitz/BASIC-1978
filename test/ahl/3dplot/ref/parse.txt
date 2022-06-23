@@ -1,12 +1,12 @@
 1 PRINT TAB(32);"3D PLOT"
  NumericValue:32
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"3D PLOT"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,87 +15,87 @@
  CarriageControl:NL
  CarriageControl:NL
 5 DEF FNA(Z)=30*EXP(-Z*Z/100)
- UserFunctionName:FNA -> _
- VariableName:Z -> _
+ UserFunctionName:FNA -> .
+ VariableName:Z -> .
  NumericValue:30
- Variable:Z -> _
- UnaryOperatorMinus:-(_) -> _
- Variable:Z -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ Variable:Z -> .
+ UnaryOperatorMinus:-(.) -> .
+ Variable:Z -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:100
- BinaryOperatorDivide:/(_,_) -> _
- FunctionExp:EXP(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionExp:EXP(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
 100 PRINT
  CarriageControl:NL
 110 FOR X=-30 TO 30 STEP 1.5
- control: Variable:X -> _
- start:   ["NumericValue:30", "UnaryOperatorMinus:-(_) -> =_"]
+ control: Variable:X -> .
+ start:   ["NumericValue:30", "UnaryOperatorMinus:-(.) -> =."]
  end:     ["NumericValue:30"]
  step:    ["NumericValue:1.5"]
 120 L=0
- Variable:L -> _
+ Variable:L -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 130 Y1=5*INT(SQR(900-X*X)/5)
- Variable:Y1 -> _
+ Variable:Y1 -> .
  NumericValue:5
  NumericValue:900
- Variable:X -> _
- Variable:X -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- FunctionSqr:SQR(_) -> _
+ Variable:X -> .
+ Variable:X -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ FunctionSqr:SQR(.) -> .
  NumericValue:5
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ AssignmentOperator:= . -> .
 140 FOR Y=Y1 TO -Y1 STEP -5
- control: Variable:Y -> _
- start:   ["Variable:Y1 -> _"]
- end:     ["Variable:Y1 -> _", "UnaryOperatorMinus:-(_) -> _"]
- step:    ["NumericValue:5", "UnaryOperatorMinus:-(_) -> =_"]
+ control: Variable:Y -> .
+ start:   ["Variable:Y1 -> ."]
+ end:     ["Variable:Y1 -> .", "UnaryOperatorMinus:-(.) -> ."]
+ step:    ["NumericValue:5", "UnaryOperatorMinus:-(.) -> =."]
 150 Z=INT(25+FNA(SQR(X*X+Y*Y))-.7*Y)
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:25
- Variable:X -> _
- Variable:X -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:Y -> _
- Variable:Y -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- FunctionSqr:SQR(_) -> _
- UserFunction:FNA(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
+ Variable:X -> .
+ Variable:X -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:Y -> .
+ Variable:Y -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionSqr:SQR(.) -> .
+ UserFunction:FNA(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
  NumericValue:.7
- Variable:Y -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ Variable:Y -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 160 IF Z<=L THEN 190
- Variable:Z -> _
- Variable:L -> _
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ Variable:Z -> .
+ Variable:L -> .
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:190
 170 L=Z
- Variable:L -> _
- Variable:Z -> _
- AssignmentOperator:= _ -> _
+ Variable:L -> .
+ Variable:Z -> .
+ AssignmentOperator:= . -> .
 180 PRINT TAB(Z);"*";
- Variable:Z -> _
- FunctionTab:TAB(_) -> $
+ Variable:Z -> .
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"*"
  CarriageControl:;
 190 NEXT Y
- Variable:Y -> _
+ Variable:Y -> .
 200 PRINT
  CarriageControl:NL
 210 NEXT X
- Variable:X -> _
+ Variable:X -> .
 300 END
  
 

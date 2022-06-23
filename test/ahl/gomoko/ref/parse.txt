@@ -1,12 +1,12 @@
 2 PRINT TAB(33);"GOMOKO"
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"GOMOKO"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -17,7 +17,7 @@
 8 DIM A(19,19)
  NumericValue:19
  NumericValue:19
- Declaration:A(,) -> _(,)
+ Declaration:A(,) -> .(,)
 10 PRINT "WELCOME TO THE ORIENTAL GAME OF GOMOKO."
  TextValue:"WELCOME TO THE ORIENTAL GAME OF GOMOKO."
  CarriageControl:NL
@@ -51,18 +51,18 @@
 110 PRINT "WHAT IS YOUR BOARD SIZE (MIN 7/ MAX 19)";: INPUT N
  TextValue:"WHAT IS YOUR BOARD SIZE (MIN 7/ MAX 19)"
  CarriageControl:;
- Variable:N -> _
+ Variable:N -> .
 115 IF N>6 THEN 117
- Variable:N -> _
+ Variable:N -> .
  NumericValue:6
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:117
 116 GOTO 120
  LineNumber:120
 117 IF N<20 THEN 210
- Variable:N -> _
+ Variable:N -> .
  NumericValue:20
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:210
 120 PRINT "I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19.": GOTO 110
  TextValue:"I SAID, THE MINIMUM IS 7, THE MAXIMUM IS 19."
@@ -70,19 +70,19 @@
  LineNumber:110
 210 FOR I=1 TO N:FOR J=1 TO N: A(I,J)=0: NEXT J: NEXT I
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N -> _"]
- control: Variable:J -> _
+ end:     ["Variable:N -> ."]
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N -> _"]
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
+ end:     ["Variable:N -> ."]
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- Variable:J -> _
- Variable:I -> _
+ AssignmentOperator:= =. -> .
+ Variable:J -> .
+ Variable:I -> .
 300 PRINT: PRINT "WE ALTERNATE MOVES.  YOU GO FIRST...": PRINT
  CarriageControl:NL
  TextValue:"WE ALTERNATE MOVES.  YOU GO FIRST..."
@@ -91,206 +91,206 @@
 310 PRINT "YOUR PLAY (I,J)";: INPUT I,J
  TextValue:"YOUR PLAY (I,J)"
  CarriageControl:;
- Variable:I -> _
- Variable:J -> _
+ Variable:I -> .
+ Variable:J -> .
 315 PRINT
  CarriageControl:NL
 320 IF I=-1 THEN 980
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- UnaryOperatorMinus:-(_) -> =_
- BinaryOperatorEqual:=(_,_) -> ?
+ UnaryOperatorMinus:-(.) -> =.
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:980
 330 X=I: Y=J: GOSUB 910: IF L=1 THEN 410
- Variable:X -> _
- Variable:I -> _
- AssignmentOperator:= _ -> _
- Variable:Y -> _
- Variable:J -> _
- AssignmentOperator:= _ -> _
+ Variable:X -> .
+ Variable:I -> .
+ AssignmentOperator:= . -> .
+ Variable:Y -> .
+ Variable:J -> .
+ AssignmentOperator:= . -> .
  LineNumber:910
- Variable:L -> _
+ Variable:L -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:410
 340 PRINT "ILLEGAL MOVE.  TRY AGAIN...": GOTO 310
  TextValue:"ILLEGAL MOVE.  TRY AGAIN..."
  CarriageControl:NL
  LineNumber:310
 410 IF A(I,J)=0 THEN 440
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:440
 420 PRINT "SQUARE OCCUPIED.  TRY AGAIN...": GOTO 310
  TextValue:"SQUARE OCCUPIED.  TRY AGAIN..."
  CarriageControl:NL
  LineNumber:310
 440 A(I,J)=1
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 500 REM *** COMPUTER TRIES AN INTELLIGENT MOVE ***
  Remark:*** COMPUTER TRIES AN INTELLIGENT MOVE ***
 510 FOR E=-1 TO 1: FOR F=-1 TO 1: IF E+F-E*F=0 THEN 590
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:E -> _
- start:   ["NumericValue:1", "UnaryOperatorMinus:-(_) -> =_"]
+ control: Variable:E -> .
+ start:   ["NumericValue:1", "UnaryOperatorMinus:-(.) -> =."]
  end:     ["NumericValue:1"]
- control: Variable:F -> _
- start:   ["NumericValue:1", "UnaryOperatorMinus:-(_) -> =_"]
+ control: Variable:F -> .
+ start:   ["NumericValue:1", "UnaryOperatorMinus:-(.) -> =."]
  end:     ["NumericValue:1"]
- Variable:E -> _
- Variable:F -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:E -> _
- Variable:F -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
+ Variable:E -> .
+ Variable:F -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:E -> .
+ Variable:F -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:590
 540 X=I+F: Y=J+F: GOSUB 910
- Variable:X -> _
- Variable:I -> _
- Variable:F -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:Y -> _
- Variable:J -> _
- Variable:F -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:X -> .
+ Variable:I -> .
+ Variable:F -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:Y -> .
+ Variable:J -> .
+ Variable:F -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
  LineNumber:910
 570 IF L=0 THEN 590
- Variable:L -> _
+ Variable:L -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:590
 580 IF A(X,Y)=1 THEN 710
- Variable:X -> _
- Variable:Y -> _
- Variable:A(_,_) -> _
+ Variable:X -> .
+ Variable:Y -> .
+ Variable:A(.,.) -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:710
 590 NEXT F: NEXT E
- Variable:F -> _
- Variable:E -> _
+ Variable:F -> .
+ Variable:E -> .
 600 REM *** COMPUTER TRIES A RANDOM MOVE ***
  Remark:*** COMPUTER TRIES A RANDOM MOVE ***
 610 X=INT(N*RND(1)+1): Y=INT(N*RND(1)+1): GOSUB 910: IF L=0 THEN 610
  WARNING: Line exceeds PRETTY width limit 80
- Variable:X -> _
- Variable:N -> _
+ Variable:X -> .
+ Variable:N -> .
  NumericValue:1
- FunctionRnd:RND(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ FunctionRnd:RND(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
- Variable:Y -> _
- Variable:N -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
+ Variable:Y -> .
+ Variable:N -> .
  NumericValue:1
- FunctionRnd:RND(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ FunctionRnd:RND(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
  LineNumber:910
- Variable:L -> _
+ Variable:L -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:610
 650 IF A(X,Y)<>0 THEN 610
- Variable:X -> _
- Variable:Y -> _
- Variable:A(_,_) -> _
+ Variable:X -> .
+ Variable:Y -> .
+ Variable:A(.,.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:610
 660 A(X,Y)=2: GOSUB 810: GOTO 310
- Variable:X -> _
- Variable:Y -> _
- Variable:A(_,_) -> _
+ Variable:X -> .
+ Variable:Y -> .
+ Variable:A(.,.) -> .
  NumericValue:2
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
  LineNumber:810
  LineNumber:310
 710 X=I-E: Y=J-F: GOSUB 910
- Variable:X -> _
- Variable:I -> _
- Variable:E -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:Y -> _
- Variable:J -> _
- Variable:F -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:X -> .
+ Variable:I -> .
+ Variable:E -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:Y -> .
+ Variable:J -> .
+ Variable:F -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
  LineNumber:910
 750 IF L=0 THEN 610
- Variable:L -> _
+ Variable:L -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:610
 760 GOTO 650
  LineNumber:650
 800 REM *** PRINT THE BOARD ***
  Remark:*** PRINT THE BOARD ***
 810 FOR I=1 TO N: FOR J=1 TO N: PRINT A(I,J);
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N -> _"]
- control: Variable:J -> _
+ end:     ["Variable:N -> ."]
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N -> _"]
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
+ end:     ["Variable:N -> ."]
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
  CarriageControl:;
 840 NEXT J: PRINT: NEXT I: PRINT: RETURN
- Variable:J -> _
+ Variable:J -> .
  CarriageControl:NL
- Variable:I -> _
+ Variable:I -> .
  CarriageControl:NL
  
 910 L=1: IF X<1 THEN 970
- Variable:L -> _
+ Variable:L -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
- Variable:X -> _
+ AssignmentOperator:= =. -> .
+ Variable:X -> .
  NumericValue:1
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:970
 920 IF X>N THEN 970
- Variable:X -> _
- Variable:N -> _
- BinaryOperatorGreater:>(_,_) -> ?
+ Variable:X -> .
+ Variable:N -> .
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:970
 930 IF Y<1 THEN 970
- Variable:Y -> _
+ Variable:Y -> .
  NumericValue:1
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:970
 940 IF Y>N THEN 970
- Variable:Y -> _
- Variable:N -> _
- BinaryOperatorGreater:>(_,_) -> ?
+ Variable:Y -> .
+ Variable:N -> .
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:970
 950 RETURN
  
 970 L=0: RETURN
- Variable:L -> _
+ Variable:L -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
  
 980 PRINT: PRINT "THANKS FOR THE GAME!!"
  CarriageControl:NL
@@ -299,11 +299,11 @@
 985 PRINT "PLAY AGAIN (1 FOR YES, 0 FOR NO)";: INPUT Q
  TextValue:"PLAY AGAIN (1 FOR YES, 0 FOR NO)"
  CarriageControl:;
- Variable:Q -> _
+ Variable:Q -> .
 990 IF Q=1 THEN 110
- Variable:Q -> _
+ Variable:Q -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:110
 999 END
  WARNING: Terminating statement in FOR/NEXT

@@ -1,12 +1,12 @@
 1 PRINT TAB(34);"TRAP"
  NumericValue:34
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"TRAP"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,13 +15,13 @@
  CarriageControl:NL
  CarriageControl:NL
 10 G=6
- Variable:G -> _
+ Variable:G -> .
  NumericValue:6
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 20 N=100
- Variable:N -> _
+ Variable:N -> .
  NumericValue:100
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 30 REM-TRAP
  Remark:-TRAP
 40 REM-STEVE ULLMAN, 8-1-72
@@ -34,14 +34,14 @@
 70 IF LEFT$(Z$,1)<>"Y" THEN 180
  Variable:Z$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"Y"
  BinaryOperatorNotEqual:<>($,$) -> ?
  LineNumber:180
 80 PRINT "I AM THINKING OF A NUMBER BETWEEN 1 AND";N
  TextValue:"I AM THINKING OF A NUMBER BETWEEN 1 AND"
  CarriageControl:;
- Variable:N -> _
+ Variable:N -> .
  CarriageControl:NL
 90 PRINT "TRY TO GUESS MY NUMBER. ON EACH GUESS,"
  TextValue:"TRY TO GUESS MY NUMBER. ON EACH GUESS,"
@@ -70,63 +70,63 @@
 170 PRINT "YOU GET";G;"GUESSES TO GET MY NUMBER."
  TextValue:"YOU GET"
  CarriageControl:;
- Variable:G -> _
+ Variable:G -> .
  CarriageControl:;
  TextValue:"GUESSES TO GET MY NUMBER."
  CarriageControl:NL
 180 X=INT(N*RND(1))+1
- Variable:X -> _
- Variable:N -> _
+ Variable:X -> .
+ Variable:N -> .
  NumericValue:1
- FunctionRnd:RND(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- FunctionInt:INT(_) -> _
+ FunctionRnd:RND(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ FunctionInt:INT(.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 190 FOR Q=1 TO G
- control: Variable:Q -> _
+ control: Variable:Q -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:G -> _"]
+ end:     ["Variable:G -> ."]
 200 PRINT 
  CarriageControl:NL
 210 PRINT "GUESS #";Q;
  TextValue:"GUESS #"
  CarriageControl:;
- Variable:Q -> _
+ Variable:Q -> .
  CarriageControl:;
 220 INPUT A,B
- Variable:A -> _
- Variable:B -> _
+ Variable:A -> .
+ Variable:B -> .
 230 IF A=B AND X=A THEN 400
- Variable:A -> _
- Variable:B -> _
- BinaryOperatorEqual:=(_,_) -> ?
- Variable:X -> _
- Variable:A -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:A -> .
+ Variable:B -> .
+ BinaryOperatorEqual:=(.,.) -> ?
+ Variable:X -> .
+ Variable:A -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:400
 240 IF A <= B THEN 260
- Variable:A -> _
- Variable:B -> _
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ Variable:A -> .
+ Variable:B -> .
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:260
 250 GOSUB 360
  LineNumber:360
 260 IF A <= X AND X <= B THEN 320
- Variable:A -> _
- Variable:X -> _
- BinaryOperatorLessEqual:<=(_,_) -> ?
- Variable:X -> _
- Variable:B -> _
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ Variable:A -> .
+ Variable:X -> .
+ BinaryOperatorLessEqual:<=(.,.) -> ?
+ Variable:X -> .
+ Variable:B -> .
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  BinaryOperatorAnd:AND(?,?) -> ?
  LineNumber:320
 270 IF X<A THEN 300
- Variable:X -> _
- Variable:A -> _
- BinaryOperatorLess:<(_,_) -> ?
+ Variable:X -> .
+ Variable:A -> .
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:300
 280 PRINT "MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
  TextValue:"MY NUMBER IS LARGER THAN YOUR TRAP NUMBERS."
@@ -142,32 +142,32 @@
  TextValue:"YOU HAVE TRAPPED MY NUMBER."
  CarriageControl:NL
 330 NEXT Q
- Variable:Q -> _
+ Variable:Q -> .
 340 PRINT "SORRY, THAT'S";G;"GUESSES. THE NUMBER WAS";X
  TextValue:"SORRY, THAT'S"
  CarriageControl:;
- Variable:G -> _
+ Variable:G -> .
  CarriageControl:;
  TextValue:"GUESSES. THE NUMBER WAS"
  CarriageControl:;
- Variable:X -> _
+ Variable:X -> .
  CarriageControl:NL
 345 PRINT
  CarriageControl:NL
 350 GOTO 410
  LineNumber:410
 360 R=A
- Variable:R -> _
- Variable:A -> _
- AssignmentOperator:= _ -> _
+ Variable:R -> .
+ Variable:A -> .
+ AssignmentOperator:= . -> .
 370 A=B
- Variable:A -> _
- Variable:B -> _
- AssignmentOperator:= _ -> _
+ Variable:A -> .
+ Variable:B -> .
+ AssignmentOperator:= . -> .
 380 B=R
- Variable:B -> _
- Variable:R -> _
- AssignmentOperator:= _ -> _
+ Variable:B -> .
+ Variable:R -> .
+ AssignmentOperator:= . -> .
 390 RETURN 
  
 400 PRINT "YOU GOT IT!!!"

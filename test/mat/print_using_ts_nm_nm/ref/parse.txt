@@ -5,52 +5,52 @@
 20 DIM A(3,4), B(4,3)
  NumericValue:3
  NumericValue:4
- Declaration:A(,) -> _(,)
+ Declaration:A(,) -> .(,)
  NumericValue:4
  NumericValue:3
- Declaration:B(,) -> _(,)
+ Declaration:B(,) -> .(,)
 30 FOR I = 1 TO 3
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
 31 FOR J = 1 TO 4
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 32 LET A(I,J) = I / J
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
- Variable:I -> _
- Variable:J -> _
- BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
+ Variable:I -> .
+ Variable:J -> .
+ BinaryOperatorDivide:/(.,.) -> .
+ AssignmentOperator:= . -> .
 33 NEXT J
- Variable:J -> _
+ Variable:J -> .
 34 NEXT I
- Variable:I -> _
+ Variable:I -> .
 40 FOR I = 1 TO 4
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 41 FOR J = 1 TO 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
 42 LET B(I,J) = 3.14159 * I / J
- Variable:I -> _
- Variable:J -> _
- Variable:B(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:B(.,.) -> .
  NumericValue:3.14159
- Variable:I -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:J -> _
- BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:I -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:J -> .
+ BinaryOperatorDivide:/(.,.) -> .
+ AssignmentOperator:= . -> .
 43 NEXT J
- Variable:J -> _
+ Variable:J -> .
 44 NEXT I
- Variable:I -> _
+ Variable:I -> .
 50 PRINT "MAT PRINT WITH COMMA"
  TextValue:"MAT PRINT WITH COMMA"
  CarriageControl:NL
@@ -58,9 +58,9 @@
  Keyword:USING
  TextValue:"###.##"
  CarriageControl:,
- Variable:A(,) -> _(,)
+ Variable:A(,) -> .(,)
  CarriageControl:,
- Variable:B(,) -> _(,)
+ Variable:B(,) -> .(,)
  CarriageControl:NL
 60 PRINT "MAT PRINT WITH SEMICOLON"
  TextValue:"MAT PRINT WITH SEMICOLON"
@@ -69,9 +69,9 @@
  Keyword:USING
  TextValue:"###.##"
  CarriageControl:;
- Variable:A(,) -> _(,)
+ Variable:A(,) -> .(,)
  CarriageControl:;
- Variable:B(,) -> _(,)
+ Variable:B(,) -> .(,)
  CarriageControl:NL
 99 END
  

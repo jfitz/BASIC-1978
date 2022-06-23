@@ -1,12 +1,12 @@
 1 PRINT TAB(34);"NAME"
  NumericValue:34
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"NAME"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -26,35 +26,35 @@
  TextValue:"WHAT'S YOUR NAME (FIRST AND LAST)"
  CarriageControl:;
  Variable:A$ -> $
- Variable:L -> _
+ Variable:L -> .
  Variable:A$ -> $
- FunctionLen:LEN($) -> _
- AssignmentOperator:= _ -> _
+ FunctionLen:LEN($) -> .
+ AssignmentOperator:= . -> .
 30 PRINT: PRINT "THANK YOU, ";
  CarriageControl:NL
  TextValue:"THANK YOU, "
  CarriageControl:;
 40 FOR I=1 TO L: B$(I)=MID$(A$,I,1): NEXT I
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:L -> _"]
- Variable:I -> _
- Variable:B$(_) -> $
+ end:     ["Variable:L -> ."]
+ Variable:I -> .
+ Variable:B$(.) -> $
  Variable:A$ -> $
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  AssignmentOperator:= $ -> $
- Variable:I -> _
+ Variable:I -> .
 50 FOR I=L TO 1 STEP -1: PRINT B$(I);: NEXT I
- control: Variable:I -> _
- start:   ["Variable:L -> _"]
+ control: Variable:I -> .
+ start:   ["Variable:L -> ."]
  end:     ["NumericValue:1"]
- step:    ["NumericValue:1", "UnaryOperatorMinus:-(_) -> =_"]
- Variable:I -> _
- Variable:B$(_) -> $
+ step:    ["NumericValue:1", "UnaryOperatorMinus:-(.) -> =."]
+ Variable:I -> .
+ Variable:B$(.) -> $
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
 60 PRINT ".": PRINT "OOPS!  I GUESS I GOT IT BACKWARDS.  A SMART"
  TextValue:"."
  CarriageControl:NL
@@ -71,57 +71,57 @@
  TextValue:"LET'S PUT THEM IN ORDER LIKE THIS: "
  CarriageControl:;
 100 FOR J=2 TO L: I=J-1: T$=B$(J)
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:2"]
- end:     ["Variable:L -> _"]
- Variable:I -> _
- Variable:J -> _
+ end:     ["Variable:L -> ."]
+ Variable:I -> .
+ Variable:J -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
  Variable:T$ -> $
- Variable:J -> _
- Variable:B$(_) -> $
+ Variable:J -> .
+ Variable:B$(.) -> $
  AssignmentOperator:= $ -> $
 110 IF T$>B$(I) THEN 130
  Variable:T$ -> $
- Variable:I -> _
- Variable:B$(_) -> $
+ Variable:I -> .
+ Variable:B$(.) -> $
  BinaryOperatorGreater:>($,$) -> ?
  LineNumber:130
 120 B$(I+1)=B$(I): I=I-1: IF I>0 THEN 110
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- Variable:B$(_) -> $
- Variable:I -> _
- Variable:B$(_) -> $
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:B$(.) -> $
+ Variable:I -> .
+ Variable:B$(.) -> $
  AssignmentOperator:= $ -> $
- Variable:I -> _
- Variable:I -> _
+ Variable:I -> .
+ Variable:I -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:I -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:I -> .
  NumericValue:0
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:110
 130 B$(I+1)=T$: NEXT J
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- Variable:B$(_) -> $
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:B$(.) -> $
  Variable:T$ -> $
  AssignmentOperator:= $ -> $
- Variable:J -> _
+ Variable:J -> .
 140 FOR I=1 TO L: PRINT B$(I);: NEXT I: PRINT: PRINT
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:L -> _"]
- Variable:I -> _
- Variable:B$(_) -> $
+ end:     ["Variable:L -> ."]
+ Variable:I -> .
+ Variable:B$(.) -> $
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
  CarriageControl:NL
  CarriageControl:NL
 150 PRINT "DON'T YOU LIKE THAT BETTER";: INPUT D$

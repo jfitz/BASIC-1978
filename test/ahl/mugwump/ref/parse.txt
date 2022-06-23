@@ -1,12 +1,12 @@
 1 PRINT TAB(33);"MUGWUMP"
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"MUGWUMP"
  CarriageControl:NL
 2 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -19,7 +19,7 @@
 10 DIM P(4,2)
  NumericValue:4
  NumericValue:2
- Declaration:P(,) -> _(,)
+ Declaration:P(,) -> .(,)
 20 PRINT "THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
  TextValue:"THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS"
  CarriageControl:NL
@@ -51,15 +51,15 @@
 240 GOSUB 1000
  LineNumber:1000
 250 T=0
- Variable:T -> _
+ Variable:T -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 260 T=T+1
- Variable:T -> _
- Variable:T -> _
+ Variable:T -> .
+ Variable:T -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 270 PRINT
  CarriageControl:NL
 275 PRINT
@@ -67,117 +67,117 @@
 290 PRINT "TURN NO.";T;"-- WHAT IS YOUR GUESS";
  TextValue:"TURN NO."
  CarriageControl:;
- Variable:T -> _
+ Variable:T -> .
  CarriageControl:;
  TextValue:"-- WHAT IS YOUR GUESS"
  CarriageControl:;
 300 INPUT M,N
- Variable:M -> _
- Variable:N -> _
+ Variable:M -> .
+ Variable:N -> .
 310 FOR I=1 TO 4
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 320 IF P(I,1)=-1 THEN 400
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- Variable:P(_,_) -> _
+ Variable:P(.,.) -> .
  NumericValue:1
- UnaryOperatorMinus:-(_) -> =_
- BinaryOperatorEqual:=(_,_) -> ?
+ UnaryOperatorMinus:-(.) -> =.
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:400
 330 IF P(I,1)<>M THEN 380
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- Variable:P(_,_) -> _
- Variable:M -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ Variable:P(.,.) -> .
+ Variable:M -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:380
 340 IF P(I,2)<>N THEN 380
- Variable:I -> _
+ Variable:I -> .
  NumericValue:2
- Variable:P(_,_) -> _
- Variable:N -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ Variable:P(.,.) -> .
+ Variable:N -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:380
 350 P(I,1)=-1
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- Variable:P(_,_) -> _
+ Variable:P(.,.) -> .
  NumericValue:1
- UnaryOperatorMinus:-(_) -> =_
- AssignmentOperator:= =_ -> _
+ UnaryOperatorMinus:-(.) -> =.
+ AssignmentOperator:= =. -> .
 360 PRINT "YOU HAVE FOUND MUGWUMP";I
  TextValue:"YOU HAVE FOUND MUGWUMP"
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
  CarriageControl:NL
 370 GOTO 400
  LineNumber:400
 380 D=SQR((P(I,1)-M)^2+(P(I,2)-N)^2)
- Variable:D -> _
- Variable:I -> _
+ Variable:D -> .
+ Variable:I -> .
  NumericValue:1
- Variable:P(_,_) -> _
- Variable:M -> _
- BinaryOperatorMinus:-(_,_) -> _
+ Variable:P(.,.) -> .
+ Variable:M -> .
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:2
- BinaryOperatorPower:^(_,_) -> _
- Variable:I -> _
+ BinaryOperatorPower:^(.,.) -> .
+ Variable:I -> .
  NumericValue:2
- Variable:P(_,_) -> _
- Variable:N -> _
- BinaryOperatorMinus:-(_,_) -> _
+ Variable:P(.,.) -> .
+ Variable:N -> .
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:2
- BinaryOperatorPower:^(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- FunctionSqr:SQR(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPower:^(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionSqr:SQR(.) -> .
+ AssignmentOperator:= . -> .
 390 PRINT "YOU ARE";(INT(D*10))/10;"UNITS FROM MUGWUMP";I
  TextValue:"YOU ARE"
  CarriageControl:;
- Variable:D -> _
+ Variable:D -> .
  NumericValue:10
- BinaryOperatorMultiply:*(_,_) -> _
- FunctionInt:INT(_) -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ FunctionInt:INT(.) -> .
  NumericValue:10
- BinaryOperatorDivide:/(_,_) -> _
+ BinaryOperatorDivide:/(.,.) -> .
  CarriageControl:;
  TextValue:"UNITS FROM MUGWUMP"
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
  CarriageControl:NL
 400 NEXT I
- Variable:I -> _
+ Variable:I -> .
 410 FOR J=1 TO 4
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 420 IF P(J,1)<>-1 THEN 470
- Variable:J -> _
+ Variable:J -> .
  NumericValue:1
- Variable:P(_,_) -> _
+ Variable:P(.,.) -> .
  NumericValue:1
- UnaryOperatorMinus:-(_) -> =_
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ UnaryOperatorMinus:-(.) -> =.
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:470
 430 NEXT J
- Variable:J -> _
+ Variable:J -> .
 440 PRINT
  CarriageControl:NL
 450 PRINT "YOU GOT THEM ALL IN";T;"TURNS!"
  TextValue:"YOU GOT THEM ALL IN"
  CarriageControl:;
- Variable:T -> _
+ Variable:T -> .
  CarriageControl:;
  TextValue:"TURNS!"
  CarriageControl:NL
 460 GOTO 580
  LineNumber:580
 470 IF T<10 THEN 260
- Variable:T -> _
+ Variable:T -> .
  NumericValue:10
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:260
 480 PRINT
  CarriageControl:NL
@@ -185,38 +185,38 @@
  TextValue:"SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
  CarriageControl:NL
 540 FOR I=1 TO 4
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 550 IF P(I,1)=-1 THEN 570
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- Variable:P(_,_) -> _
+ Variable:P(.,.) -> .
  NumericValue:1
- UnaryOperatorMinus:-(_) -> =_
- BinaryOperatorEqual:=(_,_) -> ?
+ UnaryOperatorMinus:-(.) -> =.
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:570
 560 PRINT "MUGWUMP";I;"IS AT (";P(I,1);",";P(I,2);")"
  TextValue:"MUGWUMP"
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
  CarriageControl:;
  TextValue:"IS AT ("
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- Variable:P(_,_) -> _
+ Variable:P(.,.) -> .
  CarriageControl:;
  TextValue:","
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
  NumericValue:2
- Variable:P(_,_) -> _
+ Variable:P(.,.) -> .
  CarriageControl:;
  TextValue:")"
  CarriageControl:NL
 570 NEXT I
- Variable:I -> _
+ Variable:I -> .
 580 PRINT
  CarriageControl:NL
 600 PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
@@ -228,27 +228,27 @@
 630 GOTO 240
  LineNumber:240
 1000 FOR J=1 TO 2
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:2"]
 1010 FOR I=1 TO 4
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 1020 P(I,J)=INT(10*RND(1))
- Variable:I -> _
- Variable:J -> _
- Variable:P(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:P(.,.) -> .
  NumericValue:10
  NumericValue:1
- FunctionRnd:RND(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ FunctionRnd:RND(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 1030 NEXT I
- Variable:I -> _
+ Variable:I -> .
 1040 NEXT J
- Variable:J -> _
+ Variable:J -> .
 1050 RETURN
  
 1099 END

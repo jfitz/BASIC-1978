@@ -1,19 +1,19 @@
 10 INPUT "HORIZONTAL";X
- Variable:X -> _
+ Variable:X -> .
 20 INPUT "VERTICAL";Y
- Variable:Y -> _
+ Variable:Y -> .
 21 INPUT "CENTERED";L$
  Variable:L$ -> $
 22 G1=0:IF L$>"P" THEN G1=1
- Variable:G1 -> _
+ Variable:G1 -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
  Variable:L$ -> $
  TextValue:"P"
  BinaryOperatorGreater:>($,$) -> ?
- Variable:G1 -> _
+ Variable:G1 -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 23 INPUT "CHARACTER (TYPE 'ALL' IF YOU WANT CHARACTER BEING PRINTED)";M$
  Variable:M$ -> $
 29 PRINT "STATEMENT";
@@ -24,49 +24,49 @@
 35 INPUT "SET PAGE";O$
  Variable:O$ -> $
 40 A=ASC(LEFT$(A$,1))
- Variable:A -> _
+ Variable:A -> .
  Variable:A$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
- FunctionAscii:ASC($) -> _
- AssignmentOperator:= _ -> _
+ FunctionLeft:LEFT$($,.) -> $
+ FunctionAscii:ASC($) -> .
+ AssignmentOperator:= . -> .
 50 REM
  Remark:
 60 REM
  Remark:
 70 FOR T=1 TO LEN(A$)
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:T -> _
+ control: Variable:T -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:A$ -> $", "FunctionLen:LEN($) -> _"]
+ end:     ["Variable:A$ -> $", "FunctionLen:LEN($) -> ."]
 80 P$=MID$(A$,T,1)
  Variable:P$ -> $
  Variable:A$ -> $
- Variable:T -> _
+ Variable:T -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  AssignmentOperator:= $ -> $
 90 FOR O=1 TO 50
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:O -> _
+ control: Variable:O -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:50"]
 95 READ S$,S(1),S(2),S(3),S(4),S(5),S(6),S(7)
  Variable:S$ -> $
  NumericValue:1
- Variable:S(_) -> _
+ Variable:S(.) -> .
  NumericValue:2
- Variable:S(_) -> _
+ Variable:S(.) -> .
  NumericValue:3
- Variable:S(_) -> _
+ Variable:S(.) -> .
  NumericValue:4
- Variable:S(_) -> _
+ Variable:S(.) -> .
  NumericValue:5
- Variable:S(_) -> _
+ Variable:S(.) -> .
  NumericValue:6
- Variable:S(_) -> _
+ Variable:S(.) -> .
  NumericValue:7
- Variable:S(_) -> _
+ Variable:S(.) -> .
 96 IF P$=" " THEN 812
  Variable:P$ -> $
  TextValue:" "
@@ -78,7 +78,7 @@
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:200
 120 NEXT O
- Variable:O -> _
+ Variable:O -> .
 200 RESTORE
  
 201 X$=M$
@@ -93,154 +93,154 @@
  Variable:S$ -> $
  AssignmentOperator:= $ -> $
 205 FOR U=1 TO 7
- control: Variable:U -> _
+ control: Variable:U -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
 210 FOR K=8 TO 0 STEP -1
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:K -> _
+ control: Variable:K -> .
  start:   ["NumericValue:8"]
  end:     ["NumericValue:0"]
- step:    ["NumericValue:1", "UnaryOperatorMinus:-(_) -> =_"]
+ step:    ["NumericValue:1", "UnaryOperatorMinus:-(.) -> =."]
 230 IF 2^K<S(U) THEN 270
  NumericValue:2
- Variable:K -> _
- BinaryOperatorPower:^(_,_) -> _
- Variable:U -> _
- Variable:S(_) -> _
- BinaryOperatorLess:<(_,_) -> ?
+ Variable:K -> .
+ BinaryOperatorPower:^(.,.) -> .
+ Variable:U -> .
+ Variable:S(.) -> .
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:270
 240 J(9-K)=0
  NumericValue:9
- Variable:K -> _
- BinaryOperatorMinus:-(_,_) -> _
- Variable:J(_) -> _
+ Variable:K -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ Variable:J(.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 250 GOTO 280
  LineNumber:280
 270 J(9-K)=1: S(U)=S(U)-2^K
  NumericValue:9
- Variable:K -> _
- BinaryOperatorMinus:-(_,_) -> _
- Variable:J(_) -> _
+ Variable:K -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ Variable:J(.) -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
- Variable:U -> _
- Variable:S(_) -> _
- Variable:U -> _
- Variable:S(_) -> _
+ AssignmentOperator:= =. -> .
+ Variable:U -> .
+ Variable:S(.) -> .
+ Variable:U -> .
+ Variable:S(.) -> .
  NumericValue:2
- Variable:K -> _
- BinaryOperatorPower:^(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:K -> .
+ BinaryOperatorPower:^(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 272 IF S(U)=1 THEN 815
- Variable:U -> _
- Variable:S(_) -> _
+ Variable:U -> .
+ Variable:S(.) -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:815
 280 NEXT K
- Variable:K -> _
+ Variable:K -> .
 445 FOR T1=1 TO X
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:T1 -> _
+ control: Variable:T1 -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:X -> _"]
+ end:     ["Variable:X -> ."]
 447 PRINT TAB((63-4.5*Y)*G1/(LEN(X$))+1);
  NumericValue:63
  NumericValue:4.5
- Variable:Y -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- Variable:G1 -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ Variable:Y -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ Variable:G1 -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  Variable:X$ -> $
- FunctionLen:LEN($) -> _
- BinaryOperatorDivide:/(_,_) -> _
+ FunctionLen:LEN($) -> .
+ BinaryOperatorDivide:/(.,.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- FunctionTab:TAB(_) -> $
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
 450 FOR B=1 TO F(U)
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:B -> _
+ control: Variable:B -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:U -> _", "Variable:F(_) -> _"]
+ end:     ["Variable:U -> .", "Variable:F(.) -> ."]
 460 IF J(B)=0 THEN 500
- Variable:B -> _
- Variable:J(_) -> _
+ Variable:B -> .
+ Variable:J(.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:500
 465 FOR I=1 TO Y: PRINT X$;: NEXT I
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:Y -> _"]
+ end:     ["Variable:Y -> ."]
  Variable:X$ -> $
  CarriageControl:;
- Variable:I -> _
+ Variable:I -> .
 470 GOTO 600
  LineNumber:600
 500 FOR I=1 TO Y
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:Y -> _"]
+ end:     ["Variable:Y -> ."]
 510 FOR I1=1 TO LEN(X$)
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:I1 -> _
+ control: Variable:I1 -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:X$ -> $", "FunctionLen:LEN($) -> _"]
+ end:     ["Variable:X$ -> $", "FunctionLen:LEN($) -> ."]
 520 PRINT " ";: NEXT I1
  TextValue:" "
  CarriageControl:;
- Variable:I1 -> _
+ Variable:I1 -> .
 530 NEXT I
- Variable:I -> _
+ Variable:I -> .
 600 NEXT B
- Variable:B -> _
+ Variable:B -> .
 620 PRINT
  CarriageControl:NL
 630 NEXT T1
- Variable:T1 -> _
+ Variable:T1 -> .
 700 NEXT U
- Variable:U -> _
+ Variable:U -> .
 750 FOR H=1 TO 2*X: PRINT: NEXT H
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:H -> _
+ control: Variable:H -> .
  start:   ["NumericValue:1"]
- end:     ["NumericValue:2", "Variable:X -> _", "BinaryOperatorMultiply:*(_,_) -> _"]
+ end:     ["NumericValue:2", "Variable:X -> .", "BinaryOperatorMultiply:*(.,.) -> ."]
  CarriageControl:NL
- Variable:H -> _
+ Variable:H -> .
 800 NEXT T
- Variable:T -> _
+ Variable:T -> .
 806 FOR H=1 TO 75: PRINT: NEXT H
- control: Variable:H -> _
+ control: Variable:H -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:75"]
  CarriageControl:NL
- Variable:H -> _
+ Variable:H -> .
 810 STOP
  WARNING: Terminating statement in FOR/NEXT
  
 812 FOR H=1 TO 7*X: PRINT: NEXT H
- control: Variable:H -> _
+ control: Variable:H -> .
  start:   ["NumericValue:1"]
- end:     ["NumericValue:7", "Variable:X -> _", "BinaryOperatorMultiply:*(_,_) -> _"]
+ end:     ["NumericValue:7", "Variable:X -> .", "BinaryOperatorMultiply:*(.,.) -> ."]
  CarriageControl:NL
- Variable:H -> _
+ Variable:H -> .
 813 GOTO 800
  LineNumber:800
 815 F(U)=9-K: GOTO 445
- Variable:U -> _
- Variable:F(_) -> _
+ Variable:U -> .
+ Variable:F(.) -> .
  NumericValue:9
- Variable:K -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:K -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
  LineNumber:445
 899 DATA " ",0,0,0,0,0,0,0
  TextValue:" "

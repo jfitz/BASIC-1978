@@ -33,136 +33,136 @@
 100 REM READ DIMENSIONS
  Remark:READ DIMENSIONS
 101 READ N1, N2
- Variable:N1 -> _
- Variable:N2 -> _
+ Variable:N1 -> .
+ Variable:N2 -> .
 110 REM BUILD COEFFICIENTS FOR EXPANDED OBJECTIVE FUNCTION
  Remark:BUILD COEFFICIENTS FOR EXPANDED OBJECTIVE FUNCTION
 111 DIM C(N1)
- Variable:N1 -> _
- Declaration:C() -> _()
+ Variable:N1 -> .
+ Declaration:C() -> .()
 112 ARR READ C
- Variable:C() -> _()
+ Variable:C() -> .()
 113 DIM C(N1+N2)' EXPAND TO INCLUDE SLACK VARIABLES
- Variable:N1 -> _
- Variable:N2 -> _
- BinaryOperatorPlus:+(_,_) -> _
- Declaration:C() -> _()
+ Variable:N1 -> .
+ Variable:N2 -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Declaration:C() -> .()
 114 C(J) = 0 FOR J = N1 + 1 TO N1+N2
- Variable:J -> _
- Variable:C(_) -> _
+ Variable:J -> .
+ Variable:C(.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- control: Variable:J -> _
- start:   ["Variable:N1 -> _", "NumericValue:1", "BinaryOperatorPlus:+(_,_) -> _"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ AssignmentOperator:= =. -> .
+ control: Variable:J -> .
+ start:   ["Variable:N1 -> .", "NumericValue:1", "BinaryOperatorPlus:+(.,.) -> ."]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 120 REM BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
  Remark:BUILD NAMES OF DECISION VARIABLES AND SLACK VARIABLES
 121 DIM C$(N1+N2)
- Variable:N1 -> _
- Variable:N2 -> _
- BinaryOperatorPlus:+(_,_) -> _
+ Variable:N1 -> .
+ Variable:N2 -> .
+ BinaryOperatorPlus:+(.,.) -> .
  Declaration:C$() -> $()
 122 FOR I = 1 TO N1
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _"]
+ end:     ["Variable:N1 -> ."]
 123   C$(I) = "X" + STR$(I)
- Variable:I -> _
- Variable:C$(_) -> $
+ Variable:I -> .
+ Variable:C$(.) -> $
  TextValue:"X"
- Variable:I -> _
- FunctionStr:STR$(_) -> $
+ Variable:I -> .
+ FunctionStr:STR$(.) -> $
  BinaryOperatorPlus:+($,$) -> $
  AssignmentOperator:= $ -> $
 124 NEXT I
- Variable:I -> _
+ Variable:I -> .
 125 FOR I = 1 TO N2
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 126   C$(I+N1) = "S" + STR$(I)
- Variable:I -> _
- Variable:N1 -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:C$(_) -> $
+ Variable:I -> .
+ Variable:N1 -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:C$(.) -> $
  TextValue:"S"
- Variable:I -> _
- FunctionStr:STR$(_) -> $
+ Variable:I -> .
+ FunctionStr:STR$(.) -> $
  BinaryOperatorPlus:+($,$) -> $
  AssignmentOperator:= $ -> $
 127 NEXT I
- Variable:I -> _
+ Variable:I -> .
 128 FOR I = 1 TO N2
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 129   C1$(I) = C$(I+N1)
- Variable:I -> _
- Variable:C1$(_) -> $
- Variable:I -> _
- Variable:N1 -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:C$(_) -> $
+ Variable:I -> .
+ Variable:C1$(.) -> $
+ Variable:I -> .
+ Variable:N1 -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:C$(.) -> $
  AssignmentOperator:= $ -> $
 130 NEXT I
- Variable:I -> _
+ Variable:I -> .
 140 REM BUILD CENTRAL MATRIX (CONSTRAINTS)
  Remark:BUILD CENTRAL MATRIX (CONSTRAINTS)
 141 DIM X(N2, N1)
- Variable:N2 -> _
- Variable:N1 -> _
- Declaration:X(,) -> _(,)
+ Variable:N2 -> .
+ Variable:N1 -> .
+ Declaration:X(,) -> .(,)
 142 MAT READ X
- Variable:X(,) -> _(,)
+ Variable:X(,) -> .(,)
 143 DIM X(N2, N1+N2)' EXPAND TO INCLUDE SLACK VARIABLES
- Variable:N2 -> _
- Variable:N1 -> _
- Variable:N2 -> _
- BinaryOperatorPlus:+(_,_) -> _
- Declaration:X(,) -> _(,)
+ Variable:N2 -> .
+ Variable:N1 -> .
+ Variable:N2 -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Declaration:X(,) -> .(,)
 144 X(I,J) = 0 FOR J = N1+1 TO N1+N2 FOR I = 1 TO N2
- Variable:I -> _
- Variable:J -> _
- Variable:X(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:X(.,.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- control: Variable:J -> _
- start:   ["Variable:N1 -> _", "NumericValue:1", "BinaryOperatorPlus:+(_,_) -> _"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
- control: Variable:I -> _
+ AssignmentOperator:= =. -> .
+ control: Variable:J -> .
+ start:   ["Variable:N1 -> .", "NumericValue:1", "BinaryOperatorPlus:+(.,.) -> ."]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 145 X(I,I+N1) = 1 FOR I = 1 TO N2 ' SET EXPANSION TO IDEN MATRIX
- Variable:I -> _
- Variable:I -> _
- Variable:N1 -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:X(_,_) -> _
+ Variable:I -> .
+ Variable:I -> .
+ Variable:N1 -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:X(.,.) -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
- control: Variable:I -> _
+ AssignmentOperator:= =. -> .
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 160 REM BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
  Remark:BUILD RIGHT-HAND SIDE VALUES (CONSTANTS)
 161 DIM B(N2)
- Variable:N2 -> _
- Declaration:B() -> _()
+ Variable:N2 -> .
+ Declaration:B() -> .()
 162 ARR READ B
- Variable:B() -> _()
+ Variable:B() -> .()
 170 REM COPY COEFFICIENTS FOR BASIC VARIABLES
  Remark:COPY COEFFICIENTS FOR BASIC VARIABLES
 171 DIM R(N2)
- Variable:N2 -> _
- Declaration:R() -> _()
+ Variable:N2 -> .
+ Declaration:R() -> .()
 172 R(I) = 0 FOR I = 1 TO N2
- Variable:I -> _
- Variable:R(_) -> _
+ Variable:I -> .
+ Variable:R(.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- control: Variable:I -> _
+ AssignmentOperator:= =. -> .
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 200 REM PRINT THE TABLEAU
  Remark:PRINT THE TABLEAU
 201 PRINT
@@ -178,7 +178,7 @@
  TextValue:"C->"
  CarriageControl:,
 205 ARR PRINT C
- Variable:C() -> _()
+ Variable:C() -> .()
  CarriageControl:NL
 210 PRINT "CB","BV",
  TextValue:"CB"
@@ -186,120 +186,120 @@
  TextValue:"BV"
  CarriageControl:,
 211 PRINT C$(I), FOR I = 1 TO N1+N2 
- Variable:I -> _
- Variable:C$(_) -> $
+ Variable:I -> .
+ Variable:C$(.) -> $
  CarriageControl:,
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 212 PRINT "B"
  TextValue:"B"
  CarriageControl:NL
 220 FOR I = 1 TO N2
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 221   PRINT R(I),C1$(I),
- Variable:I -> _
- Variable:R(_) -> _
+ Variable:I -> .
+ Variable:R(.) -> .
  CarriageControl:,
- Variable:I -> _
- Variable:C1$(_) -> $
+ Variable:I -> .
+ Variable:C1$(.) -> $
  CarriageControl:,
 222   PRINT X(I,J), FOR J = 1 TO N1+N2
- Variable:I -> _
- Variable:J -> _
- Variable:X(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:X(.,.) -> .
  CarriageControl:,
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 230   PRINT B(I)
- Variable:I -> _
- Variable:B(_) -> _
+ Variable:I -> .
+ Variable:B(.) -> .
  CarriageControl:NL
 239 NEXT I
- Variable:I -> _
+ Variable:I -> .
 300 REM EVALUATE TABLEAU FOR OPTIMUM SOLUTION
  Remark:EVALUATE TABLEAU FOR OPTIMUM SOLUTION
 301 DIM Z(N1+N2)
- Variable:N1 -> _
- Variable:N2 -> _
- BinaryOperatorPlus:+(_,_) -> _
- Declaration:Z() -> _()
+ Variable:N1 -> .
+ Variable:N2 -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Declaration:Z() -> .()
 302 Z(J) = 0 FOR J = 1 TO N1+N2
- Variable:J -> _
- Variable:Z(_) -> _
+ Variable:J -> .
+ Variable:Z(.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- control: Variable:J -> _
+ AssignmentOperator:= =. -> .
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 305 FOR I = 1 TO N2
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 306   Z(J) = Z(J) + R(I)*X(I,J) FOR J = 1 TO N1+N2
- Variable:J -> _
- Variable:Z(_) -> _
- Variable:J -> _
- Variable:Z(_) -> _
- Variable:I -> _
- Variable:R(_) -> _
- Variable:I -> _
- Variable:J -> _
- Variable:X(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- control: Variable:J -> _
+ Variable:J -> .
+ Variable:Z(.) -> .
+ Variable:J -> .
+ Variable:Z(.) -> .
+ Variable:I -> .
+ Variable:R(.) -> .
+ Variable:I -> .
+ Variable:J -> .
+ Variable:X(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 307 NEXT I
- Variable:I -> _
+ Variable:I -> .
 310 REM COMPUTE Z - C
  Remark:COMPUTE Z - C
 311 ARR Y = Z - C
- Variable:Y() -> _()
- Variable:Z() -> _()
- Variable:C() -> _()
- BinaryOperatorMinus:-(_(),_()) -> _()
- AssignmentOperator:= _() -> _()
+ Variable:Y() -> .()
+ Variable:Z() -> .()
+ Variable:C() -> .()
+ BinaryOperatorMinus:-(.(),.()) -> .()
+ AssignmentOperator:= .() -> .()
 320 REM CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
  Remark:CHECK FOR OPTIMUM, IDENTIFY KEY COLUMN
 321 J0 = 0
- Variable:J0 -> _
+ Variable:J0 -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 322 M = 0
- Variable:M -> _
+ Variable:M -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 323 FOR J = 1 TO N1+N2
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 324   IF Y(J) >= M THEN 327
- Variable:J -> _
- Variable:Y(_) -> _
- Variable:M -> _
- BinaryOperatorGreaterEqual:>=(_,_) -> ?
+ Variable:J -> .
+ Variable:Y(.) -> .
+ Variable:M -> .
+ BinaryOperatorGreaterEqual:>=(.,.) -> ?
  LineNumber:327
 325   J0 = J
- Variable:J0 -> _
- Variable:J -> _
- AssignmentOperator:= _ -> _
+ Variable:J0 -> .
+ Variable:J -> .
+ AssignmentOperator:= . -> .
 326   M = Y(J)
- Variable:M -> _
- Variable:J -> _
- Variable:Y(_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:J -> .
+ Variable:Y(.) -> .
+ AssignmentOperator:= . -> .
 327 NEXT J
- Variable:J -> _
+ Variable:J -> .
 328 IF M >= 0 THEN 500
- Variable:M -> _
+ Variable:M -> .
  NumericValue:0
- BinaryOperatorGreaterEqual:>=(_,_) -> ?
+ BinaryOperatorGreaterEqual:>=(.,.) -> ?
  LineNumber:500
 329 PRINT "NON-OPTIMUM."
  TextValue:"NON-OPTIMUM."
@@ -307,34 +307,34 @@
 330 REM EVALUATE BASIC VARIABLES
  Remark:EVALUATE BASIC VARIABLES
 331 DIM W(N2)
- Variable:N2 -> _
- Declaration:W() -> _()
+ Variable:N2 -> .
+ Declaration:W() -> .()
 332 W(I) = 0 FOR I = 1 TO N2
- Variable:I -> _
- Variable:W(_) -> _
+ Variable:I -> .
+ Variable:W(.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
- control: Variable:I -> _
+ AssignmentOperator:= =. -> .
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 333 W(I) = B(I) / X(I,J0) IF X(I,J0) <> 0 FOR I = 1 TO N2
- Variable:I -> _
- Variable:W(_) -> _
- Variable:I -> _
- Variable:B(_) -> _
- Variable:I -> _
- Variable:J0 -> _
- Variable:X(_,_) -> _
- BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:I -> _
- Variable:J0 -> _
- Variable:X(_,_) -> _
+ Variable:I -> .
+ Variable:W(.) -> .
+ Variable:I -> .
+ Variable:B(.) -> .
+ Variable:I -> .
+ Variable:J0 -> .
+ Variable:X(.,.) -> .
+ BinaryOperatorDivide:/(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:I -> .
+ Variable:J0 -> .
+ Variable:X(.,.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
- control: Variable:I -> _
+ BinaryOperatorNotEqual:<>(.,.) -> ?
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 340 REM PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
  Remark:PRINT TABLEAU WITH EVALUATION ROWS AND COLUMNS
 341 PRINT
@@ -350,7 +350,7 @@
  TextValue:"C->"
  CarriageControl:,
 345 ARR PRINT C
- Variable:C() -> _()
+ Variable:C() -> .()
  CarriageControl:NL
 350 PRINT "CB","BV",
  TextValue:"CB"
@@ -358,55 +358,55 @@
  TextValue:"BV"
  CarriageControl:,
 351 PRINT C$(I), FOR I = 1 TO N1+N2 
- Variable:I -> _
- Variable:C$(_) -> $
+ Variable:I -> .
+ Variable:C$(.) -> $
  CarriageControl:,
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 352 PRINT "B","B / ";C$(J0)
  TextValue:"B"
  CarriageControl:,
  TextValue:"B / "
  CarriageControl:;
- Variable:J0 -> _
- Variable:C$(_) -> $
+ Variable:J0 -> .
+ Variable:C$(.) -> $
  CarriageControl:NL
 360 FOR I = 1 TO N2
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 361   PRINT R(I),C1$(I),
- Variable:I -> _
- Variable:R(_) -> _
+ Variable:I -> .
+ Variable:R(.) -> .
  CarriageControl:,
- Variable:I -> _
- Variable:C1$(_) -> $
+ Variable:I -> .
+ Variable:C1$(.) -> $
  CarriageControl:,
 362   PRINT X(I,J), FOR J = 1 TO N1+N2
- Variable:I -> _
- Variable:J -> _
- Variable:X(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:X(.,.) -> .
  CarriageControl:,
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 363   PRINT B(I),W(I)
- Variable:I -> _
- Variable:B(_) -> _
+ Variable:I -> .
+ Variable:B(.) -> .
  CarriageControl:,
- Variable:I -> _
- Variable:W(_) -> _
+ Variable:I -> .
+ Variable:W(.) -> .
  CarriageControl:NL
 364 NEXT I
- Variable:I -> _
+ Variable:I -> .
 370 PRINT " ", "Z",
  TextValue:" "
  CarriageControl:,
  TextValue:"Z"
  CarriageControl:,
 371 ARR PRINT Z
- Variable:Z() -> _()
+ Variable:Z() -> .()
  CarriageControl:NL
 372 PRINT " ", "Z-C",
  TextValue:" "
@@ -414,65 +414,65 @@
  TextValue:"Z-C"
  CarriageControl:,
 373 ARR PRINT Y
- Variable:Y() -> _()
+ Variable:Y() -> .()
  CarriageControl:NL
 374 PRINT "KEY COLUMN";J0;"VARIABLE ";C$(J0);" ENTERS"
  TextValue:"KEY COLUMN"
  CarriageControl:;
- Variable:J0 -> _
+ Variable:J0 -> .
  CarriageControl:;
  TextValue:"VARIABLE "
  CarriageControl:;
- Variable:J0 -> _
- Variable:C$(_) -> $
+ Variable:J0 -> .
+ Variable:C$(.) -> $
  CarriageControl:;
  TextValue:" ENTERS"
  CarriageControl:NL
 380 REM IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
  Remark:IDENTIFY KEY ROW (SMALLEST POSITIVE VALUE OF W)
 381 I0 = 0
- Variable:I0 -> _
+ Variable:I0 -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 382 M = 1E6
- Variable:M -> _
+ Variable:M -> .
  NumericValue:1E6
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 383 FOR I = 1 TO N2
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 384   IF W(I) <= 0 OR W(I) >= M THEN 387
- Variable:I -> _
- Variable:W(_) -> _
+ Variable:I -> .
+ Variable:W(.) -> .
  NumericValue:0
- BinaryOperatorLessEqual:<=(_,_) -> ?
- Variable:I -> _
- Variable:W(_) -> _
- Variable:M -> _
- BinaryOperatorGreaterEqual:>=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
+ Variable:I -> .
+ Variable:W(.) -> .
+ Variable:M -> .
+ BinaryOperatorGreaterEqual:>=(.,.) -> ?
  BinaryOperatorOr:OR(?,?) -> ?
  LineNumber:387
 385   I0 = I
- Variable:I0 -> _
- Variable:I -> _
- AssignmentOperator:= _ -> _
+ Variable:I0 -> .
+ Variable:I -> .
+ AssignmentOperator:= . -> .
 386   M = W(I)
- Variable:M -> _
- Variable:I -> _
- Variable:W(_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:I -> .
+ Variable:W(.) -> .
+ AssignmentOperator:= . -> .
 387 NEXT I
- Variable:I -> _
+ Variable:I -> .
 389 PRINT "KEY ROW";I0;"VARIABLE ";C1$(I0);" EXITS"
  TextValue:"KEY ROW"
  CarriageControl:;
- Variable:I0 -> _
+ Variable:I0 -> .
  CarriageControl:;
  TextValue:"VARIABLE "
  CarriageControl:;
- Variable:I0 -> _
- Variable:C1$(_) -> $
+ Variable:I0 -> .
+ Variable:C1$(.) -> $
  CarriageControl:;
  TextValue:" EXITS"
  CarriageControl:NL
@@ -481,136 +481,136 @@
 401 REM CHANGE BASIC VARIABLE NAME AND COEFFICIENT
  Remark:CHANGE BASIC VARIABLE NAME AND COEFFICIENT
 402 C1$(I0) = C$(J0)
- Variable:I0 -> _
- Variable:C1$(_) -> $
- Variable:J0 -> _
- Variable:C$(_) -> $
+ Variable:I0 -> .
+ Variable:C1$(.) -> $
+ Variable:J0 -> .
+ Variable:C$(.) -> $
  AssignmentOperator:= $ -> $
 403 R(I0) = C(J0)
- Variable:I0 -> _
- Variable:R(_) -> _
- Variable:J0 -> _
- Variable:C(_) -> _
- AssignmentOperator:= _ -> _
+ Variable:I0 -> .
+ Variable:R(.) -> .
+ Variable:J0 -> .
+ Variable:C(.) -> .
+ AssignmentOperator:= . -> .
 410 REM BUILD NEW MATRIX X2 AND ARRAY B2
  Remark:BUILD NEW MATRIX X2 AND ARRAY B2
 411 MAT X2 = X
- Variable:X2(,) -> _(,)
- Variable:X(,) -> _(,)
- AssignmentOperator:= _(,) -> _(,)
+ Variable:X2(,) -> .(,)
+ Variable:X(,) -> .(,)
+ AssignmentOperator:= .(,) -> .(,)
 412 ARR B2 = B
- Variable:B2() -> _()
- Variable:B() -> _()
- AssignmentOperator:= _() -> _()
+ Variable:B2() -> .()
+ Variable:B() -> .()
+ AssignmentOperator:= .() -> .()
 420 REM ADJUST VALUES IN KEY ROW
  Remark:ADJUST VALUES IN KEY ROW
 421 FOR J = 1 TO N1+N2
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 422   X2(I0,J) = X(I0,J) / X(I0,J0)
- Variable:I0 -> _
- Variable:J -> _
- Variable:X2(_,_) -> _
- Variable:I0 -> _
- Variable:J -> _
- Variable:X(_,_) -> _
- Variable:I0 -> _
- Variable:J0 -> _
- Variable:X(_,_) -> _
- BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:I0 -> .
+ Variable:J -> .
+ Variable:X2(.,.) -> .
+ Variable:I0 -> .
+ Variable:J -> .
+ Variable:X(.,.) -> .
+ Variable:I0 -> .
+ Variable:J0 -> .
+ Variable:X(.,.) -> .
+ BinaryOperatorDivide:/(.,.) -> .
+ AssignmentOperator:= . -> .
 423 NEXT J
- Variable:J -> _
+ Variable:J -> .
 430 REM ADJUST VALUES IN OTHER ROWS
  Remark:ADJUST VALUES IN OTHER ROWS
 431 FOR I = 1 TO N2
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 432   IF I = I0 THEN 436
- Variable:I -> _
- Variable:I0 -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:I -> .
+ Variable:I0 -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:436
 433   FOR J = 1 TO N1+N2
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N1 -> _", "Variable:N2 -> _", "BinaryOperatorPlus:+(_,_) -> _"]
+ end:     ["Variable:N1 -> .", "Variable:N2 -> .", "BinaryOperatorPlus:+(.,.) -> ."]
 434     X2(I,J) = X(I,J) - X(I,J0)*X(I0,J)/X(I0,J0)
- Variable:I -> _
- Variable:J -> _
- Variable:X2(_,_) -> _
- Variable:I -> _
- Variable:J -> _
- Variable:X(_,_) -> _
- Variable:I -> _
- Variable:J0 -> _
- Variable:X(_,_) -> _
- Variable:I0 -> _
- Variable:J -> _
- Variable:X(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:I0 -> _
- Variable:J0 -> _
- Variable:X(_,_) -> _
- BinaryOperatorDivide:/(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:X2(.,.) -> .
+ Variable:I -> .
+ Variable:J -> .
+ Variable:X(.,.) -> .
+ Variable:I -> .
+ Variable:J0 -> .
+ Variable:X(.,.) -> .
+ Variable:I0 -> .
+ Variable:J -> .
+ Variable:X(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:I0 -> .
+ Variable:J0 -> .
+ Variable:X(.,.) -> .
+ BinaryOperatorDivide:/(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 435   NEXT J
- Variable:J -> _
+ Variable:J -> .
 436 NEXT I
- Variable:I -> _
+ Variable:I -> .
 440 REM ADJUST VALUES IN RIGHT-HAND-SIDE
  Remark:ADJUST VALUES IN RIGHT-HAND-SIDE
 441 B2(I0) = B(I0) / X(I0,J0)
- Variable:I0 -> _
- Variable:B2(_) -> _
- Variable:I0 -> _
- Variable:B(_) -> _
- Variable:I0 -> _
- Variable:J0 -> _
- Variable:X(_,_) -> _
- BinaryOperatorDivide:/(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:I0 -> .
+ Variable:B2(.) -> .
+ Variable:I0 -> .
+ Variable:B(.) -> .
+ Variable:I0 -> .
+ Variable:J0 -> .
+ Variable:X(.,.) -> .
+ BinaryOperatorDivide:/(.,.) -> .
+ AssignmentOperator:= . -> .
 442 FOR I = 1 TO N2
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 443   IF I = I0 THEN 445
- Variable:I -> _
- Variable:I0 -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:I -> .
+ Variable:I0 -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:445
 444   B2(I) = B(I) - X(I,J0)*B(I0)/X(I0,J0)
- Variable:I -> _
- Variable:B2(_) -> _
- Variable:I -> _
- Variable:B(_) -> _
- Variable:I -> _
- Variable:J0 -> _
- Variable:X(_,_) -> _
- Variable:I0 -> _
- Variable:B(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:I0 -> _
- Variable:J0 -> _
- Variable:X(_,_) -> _
- BinaryOperatorDivide:/(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:I -> .
+ Variable:B2(.) -> .
+ Variable:I -> .
+ Variable:B(.) -> .
+ Variable:I -> .
+ Variable:J0 -> .
+ Variable:X(.,.) -> .
+ Variable:I0 -> .
+ Variable:B(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:I0 -> .
+ Variable:J0 -> .
+ Variable:X(.,.) -> .
+ BinaryOperatorDivide:/(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 445 NEXT I
- Variable:I -> _
+ Variable:I -> .
 450 REM SWAP IN THE NEW MATRIX AND CONSTANTS
  Remark:SWAP IN THE NEW MATRIX AND CONSTANTS
 451 MAT X = X2
- Variable:X(,) -> _(,)
- Variable:X2(,) -> _(,)
- AssignmentOperator:= _(,) -> _(,)
+ Variable:X(,) -> .(,)
+ Variable:X2(,) -> .(,)
+ AssignmentOperator:= .(,) -> .(,)
 452 ARR B = B2
- Variable:B() -> _()
- Variable:B2() -> _()
- AssignmentOperator:= _() -> _()
+ Variable:B() -> .()
+ Variable:B2() -> .()
+ AssignmentOperator:= .() -> .()
 453 GOTO 200
  LineNumber:200
 500 REM NO MORE CHANGES
@@ -624,7 +624,7 @@
  TextValue:"Z"
  CarriageControl:,
 512 ARR PRINT Z
- Variable:Z() -> _()
+ Variable:Z() -> .()
  CarriageControl:NL
 513 PRINT " ", "Z-C",
  TextValue:" "
@@ -632,49 +632,49 @@
  TextValue:"Z-C"
  CarriageControl:,
 514 ARR PRINT Y
- Variable:Y() -> _()
+ Variable:Y() -> .()
  CarriageControl:NL
 520 PRINT "OBJECTIVE VALUE"
  TextValue:"OBJECTIVE VALUE"
  CarriageControl:NL
 521 Z = 0
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 522 FOR I = 1 TO N2
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:N2 -> _"]
+ end:     ["Variable:N2 -> ."]
 523 PRINT C1$(I);" = ";B(I);" * ";R(I)
- Variable:I -> _
- Variable:C1$(_) -> $
+ Variable:I -> .
+ Variable:C1$(.) -> $
  CarriageControl:;
  TextValue:" = "
  CarriageControl:;
- Variable:I -> _
- Variable:B(_) -> _
+ Variable:I -> .
+ Variable:B(.) -> .
  CarriageControl:;
  TextValue:" * "
  CarriageControl:;
- Variable:I -> _
- Variable:R(_) -> _
+ Variable:I -> .
+ Variable:R(.) -> .
  CarriageControl:NL
 524 Z = Z + B(I)*R(I)
- Variable:Z -> _
- Variable:Z -> _
- Variable:I -> _
- Variable:B(_) -> _
- Variable:I -> _
- Variable:R(_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:Z -> .
+ Variable:Z -> .
+ Variable:I -> .
+ Variable:B(.) -> .
+ Variable:I -> .
+ Variable:R(.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 525 NEXT I
- Variable:I -> _
+ Variable:I -> .
 527 PRINT "Z = ";Z
  TextValue:"Z = "
  CarriageControl:;
- Variable:Z -> _
+ Variable:Z -> .
  CarriageControl:NL
 999 STOP
  

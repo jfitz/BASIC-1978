@@ -1,12 +1,12 @@
 10 PRINT TAB(32);"ANIMAL"
  NumericValue:32
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"ANIMAL"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -28,20 +28,20 @@
  NumericValue:200
  Declaration:A$() -> $()
 80 FOR I=0 TO 3
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:0"]
  end:     ["NumericValue:3"]
 90 READ A$(I)
- Variable:I -> _
- Variable:A$(_) -> $
+ Variable:I -> .
+ Variable:A$(.) -> $
 100 NEXT I
- Variable:I -> _
+ Variable:I -> .
 110 N=VAL(A$(0))
- Variable:N -> _
+ Variable:N -> .
  NumericValue:0
- Variable:A$(_) -> $
- FunctionVal:VAL($) -> _
- AssignmentOperator:= _ -> _
+ Variable:A$(.) -> $
+ FunctionVal:VAL($) -> .
+ AssignmentOperator:= . -> .
 120 REM          MAIN CONTROL SECTION
  Remark:         MAIN CONTROL SECTION
 130 INPUT "ARE YOU THINKING OF AN ANIMAL";A$
@@ -54,42 +54,42 @@
 150 IF LEFT$(A$,1)<>"Y" THEN 120
  Variable:A$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"Y"
  BinaryOperatorNotEqual:<>($,$) -> ?
  LineNumber:120
 160 K=1
- Variable:K -> _
+ Variable:K -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 170 GOSUB 390
  LineNumber:390
 180 IF LEN(A$(K))=0 THEN 999
- Variable:K -> _
- Variable:A$(_) -> $
- FunctionLen:LEN($) -> _
+ Variable:K -> .
+ Variable:A$(.) -> $
+ FunctionLen:LEN($) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:999
 190 IF LEFT$(A$(K),2)="\Q" THEN 170
- Variable:K -> _
- Variable:A$(_) -> $
+ Variable:K -> .
+ Variable:A$(.) -> $
  NumericValue:2
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"\Q"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:170
 200 PRINT "IS IT A ";RIGHT$(A$(K),LEN(A$(K))-2);
  TextValue:"IS IT A "
  CarriageControl:;
- Variable:K -> _
- Variable:A$(_) -> $
- Variable:K -> _
- Variable:A$(_) -> $
- FunctionLen:LEN($) -> _
+ Variable:K -> .
+ Variable:A$(.) -> $
+ Variable:K -> .
+ Variable:A$(.) -> $
+ FunctionLen:LEN($) -> .
  NumericValue:2
- BinaryOperatorMinus:-(_,_) -> _
- FunctionRight:RIGHT$($,_) -> $
+ BinaryOperatorMinus:-(.,.) -> .
+ FunctionRight:RIGHT$($,.) -> $
  CarriageControl:;
 210 INPUT A$
  Variable:A$ -> $
@@ -97,12 +97,12 @@
  Variable:A$ -> $
  Variable:A$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  AssignmentOperator:= $ -> $
 230 IF LEFT$(A$,1)="Y" THEN PRINT "WHY NOT TRY ANOTHER ANIMAL?": GOTO 120
  Variable:A$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"Y"
  BinaryOperatorEqual:=($,$) -> ?
  TextValue:"WHY NOT TRY ANOTHER ANIMAL?"
@@ -118,14 +118,14 @@
  CarriageControl:;
  TextValue:" FROM A "
  CarriageControl:;
- Variable:K -> _
- Variable:A$(_) -> $
- Variable:K -> _
- Variable:A$(_) -> $
- FunctionLen:LEN($) -> _
+ Variable:K -> .
+ Variable:A$(.) -> $
+ Variable:K -> .
+ Variable:A$(.) -> $
+ FunctionLen:LEN($) -> .
  NumericValue:2
- BinaryOperatorMinus:-(_,_) -> _
- FunctionRight:RIGHT$($,_) -> $
+ BinaryOperatorMinus:-(.,.) -> .
+ FunctionRight:RIGHT$($,.) -> $
  CarriageControl:NL
 270 INPUT X$
  Variable:X$ -> $
@@ -142,7 +142,7 @@
  Variable:A$ -> $
  Variable:A$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  AssignmentOperator:= $ -> $
  Variable:A$ -> $
  TextValue:"Y"
@@ -167,37 +167,37 @@
  TextValue:"Y"
  AssignmentOperator:= =$ -> $
 330 Z1=VAL(A$(0))
- Variable:Z1 -> _
+ Variable:Z1 -> .
  NumericValue:0
- Variable:A$(_) -> $
- FunctionVal:VAL($) -> _
- AssignmentOperator:= _ -> _
+ Variable:A$(.) -> $
+ FunctionVal:VAL($) -> .
+ AssignmentOperator:= . -> .
 340 A$(0)=STR$(Z1+2)
  NumericValue:0
- Variable:A$(_) -> $
- Variable:Z1 -> _
+ Variable:A$(.) -> $
+ Variable:Z1 -> .
  NumericValue:2
- BinaryOperatorPlus:+(_,_) -> _
- FunctionStr:STR$(_) -> $
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionStr:STR$(.) -> $
  AssignmentOperator:= $ -> $
 350 A$(Z1)=A$(K)
- Variable:Z1 -> _
- Variable:A$(_) -> $
- Variable:K -> _
- Variable:A$(_) -> $
+ Variable:Z1 -> .
+ Variable:A$(.) -> $
+ Variable:K -> .
+ Variable:A$(.) -> $
  AssignmentOperator:= $ -> $
 360 A$(Z1+1)="\A"+V$
- Variable:Z1 -> _
+ Variable:Z1 -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- Variable:A$(_) -> $
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:A$(.) -> $
  TextValue:"\A"
  Variable:V$ -> $
  BinaryOperatorPlus:+($,$) -> $
  AssignmentOperator:= $ -> $
 370 A$(K)="\Q"+X$+"\"+A$+STR$(Z1+1)+"\"+B$+STR$(Z1)+"\"
- Variable:K -> _
- Variable:A$(_) -> $
+ Variable:K -> .
+ Variable:A$(.) -> $
  TextValue:"\Q"
  Variable:X$ -> $
  BinaryOperatorPlus:+($,$) -> $
@@ -205,17 +205,17 @@
  BinaryOperatorPlus:+($,$) -> $
  Variable:A$ -> $
  BinaryOperatorPlus:+($,$) -> $
- Variable:Z1 -> _
+ Variable:Z1 -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- FunctionStr:STR$(_) -> $
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionStr:STR$(.) -> $
  BinaryOperatorPlus:+($,$) -> $
  TextValue:"\"
  BinaryOperatorPlus:+($,$) -> $
  Variable:B$ -> $
  BinaryOperatorPlus:+($,$) -> $
- Variable:Z1 -> _
- FunctionStr:STR$(_) -> $
+ Variable:Z1 -> .
+ FunctionStr:STR$(.) -> $
  BinaryOperatorPlus:+($,$) -> $
  TextValue:"\"
  BinaryOperatorPlus:+($,$) -> $
@@ -226,33 +226,33 @@
  Remark:    SUBROUTINE TO PRINT QUESTIONS
 400 Q$=A$(K)
  Variable:Q$ -> $
- Variable:K -> _
- Variable:A$(_) -> $
+ Variable:K -> .
+ Variable:A$(.) -> $
  AssignmentOperator:= $ -> $
 410 FOR Z=3 TO LEN(Q$)
- control: Variable:Z -> _
+ control: Variable:Z -> .
  start:   ["NumericValue:3"]
- end:     ["Variable:Q$ -> $", "FunctionLen:LEN($) -> _"]
+ end:     ["Variable:Q$ -> $", "FunctionLen:LEN($) -> ."]
 415 IF MID$(Q$,Z,1)<>"\" THEN PRINT MID$(Q$,Z,1);: NEXT Z
  Variable:Q$ -> $
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  TextValue:"\"
  BinaryOperatorNotEqual:<>($,$) -> ?
  Variable:Q$ -> $
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  CarriageControl:;
- Variable:Z -> _
+ Variable:Z -> .
 420 INPUT C$
  Variable:C$ -> $
 430 C$=LEFT$(C$,1)
  Variable:C$ -> $
  Variable:C$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  AssignmentOperator:= $ -> $
 440 IF C$<>"Y" AND C$<>"N" THEN 410
  Variable:C$ -> $
@@ -270,55 +270,55 @@
  BinaryOperatorPlus:+($,$) -> $
  AssignmentOperator:= $ -> $
 455 FOR X=3 TO LEN(Q$)-1
- control: Variable:X -> _
+ control: Variable:X -> .
  start:   ["NumericValue:3"]
- end:     ["Variable:Q$ -> $", "FunctionLen:LEN($) -> _", "NumericValue:1", "BinaryOperatorMinus:-(_,_) -> _"]
+ end:     ["Variable:Q$ -> $", "FunctionLen:LEN($) -> .", "NumericValue:1", "BinaryOperatorMinus:-(.,.) -> ."]
 460 IF MID$(Q$,X,2)=T$ THEN 480
  Variable:Q$ -> $
- Variable:X -> _
+ Variable:X -> .
  NumericValue:2
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  Variable:T$ -> $
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:480
 470 NEXT X
- Variable:X -> _
+ Variable:X -> .
 475 STOP
  WARNING: Terminating statement in GOSUB
  WARNING: Terminating statement in FOR/NEXT
  
 480 FOR Y=X+1 TO LEN(Q$)
- control: Variable:Y -> _
- start:   ["Variable:X -> _", "NumericValue:1", "BinaryOperatorPlus:+(_,_) -> _"]
- end:     ["Variable:Q$ -> $", "FunctionLen:LEN($) -> _"]
+ control: Variable:Y -> .
+ start:   ["Variable:X -> .", "NumericValue:1", "BinaryOperatorPlus:+(.,.) -> ."]
+ end:     ["Variable:Q$ -> $", "FunctionLen:LEN($) -> ."]
 490 IF MID$(Q$,Y,1)="\" THEN 510
  Variable:Q$ -> $
- Variable:Y -> _
+ Variable:Y -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  TextValue:"\"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:510
 500 NEXT Y
- Variable:Y -> _
+ Variable:Y -> .
 505 STOP
  WARNING: Terminating statement in GOSUB
  WARNING: Terminating statement in FOR/NEXT
  
 510 K=VAL(MID$(Q$,X+2,Y-X-2))
- Variable:K -> _
+ Variable:K -> .
  Variable:Q$ -> $
- Variable:X -> _
+ Variable:X -> .
  NumericValue:2
- BinaryOperatorPlus:+(_,_) -> _
- Variable:Y -> _
- Variable:X -> _
- BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:Y -> .
+ Variable:X -> .
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:2
- BinaryOperatorMinus:-(_,_) -> _
- FunctionMid:MID$($,_,_) -> $
- FunctionVal:VAL($) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ FunctionMid:MID$($,.,.) -> $
+ FunctionVal:VAL($) -> .
+ AssignmentOperator:= . -> .
 520 RETURN
  
 530 DATA "4","\QDOES IT SWIM\Y2\N3\","\AFISH","\ABIRD"
@@ -331,62 +331,62 @@
  TextValue:"ANIMALS I ALREADY KNOW ARE:"
  CarriageControl:NL
 605 X=0
- Variable:X -> _
+ Variable:X -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 610 FOR I=1 TO 200
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:200"]
 620 IF LEFT$(A$(I),2)<>"\A" THEN 650
- Variable:I -> _
- Variable:A$(_) -> $
+ Variable:I -> .
+ Variable:A$(.) -> $
  NumericValue:2
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"\A"
  BinaryOperatorNotEqual:<>($,$) -> ?
  LineNumber:650
 624 PRINT TAB(15*X);
  NumericValue:15
- Variable:X -> _
- BinaryOperatorMultiply:*(_,_) -> _
- FunctionTab:TAB(_) -> $
+ Variable:X -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
 630 FOR Z=3 TO LEN(A$(I))
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:Z -> _
+ control: Variable:Z -> .
  start:   ["NumericValue:3"]
- end:     ["Variable:I -> _", "Variable:A$(_) -> $", "FunctionLen:LEN($) -> _"]
+ end:     ["Variable:I -> .", "Variable:A$(.) -> $", "FunctionLen:LEN($) -> ."]
 640 IF MID$(A$(I),Z,1)<>"\" THEN PRINT MID$(A$(I),Z,1);: NEXT Z
- Variable:I -> _
- Variable:A$(_) -> $
- Variable:Z -> _
+ Variable:I -> .
+ Variable:A$(.) -> $
+ Variable:Z -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  TextValue:"\"
  BinaryOperatorNotEqual:<>($,$) -> ?
- Variable:I -> _
- Variable:A$(_) -> $
- Variable:Z -> _
+ Variable:I -> .
+ Variable:A$(.) -> $
+ Variable:Z -> .
  NumericValue:1
- FunctionMid:MID$($,_,_) -> $
+ FunctionMid:MID$($,.,.) -> $
  CarriageControl:;
- Variable:Z -> _
+ Variable:Z -> .
 645 X=X+1: IF X=4 THEN X=0: PRINT
- Variable:X -> _
- Variable:X -> _
+ Variable:X -> .
+ Variable:X -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:X -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:X -> .
  NumericValue:4
- BinaryOperatorEqual:=(_,_) -> ?
- Variable:X -> _
+ BinaryOperatorEqual:=(.,.) -> ?
+ Variable:X -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
  CarriageControl:NL
 650 NEXT I
- Variable:I -> _
+ Variable:I -> .
 660 PRINT
  CarriageControl:NL
 670 PRINT

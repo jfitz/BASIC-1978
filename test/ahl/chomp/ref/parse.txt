@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"CHOMP"
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CHOMP"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -17,7 +17,7 @@
 40 DIM A(10,10)
  NumericValue:10
  NumericValue:10
- Declaration:A(,) -> _(,)
+ Declaration:A(,) -> .(,)
 100 REM *** THE GAME OF CHOMP *** COPYRIGHT PCC 1973 ***
  Remark:*** THE GAME OF CHOMP *** COPYRIGHT PCC 1973 ***
 110 PRINT 
@@ -29,24 +29,24 @@
  TextValue:"DO YOU WANT THE RULES (1=YES, 0=NO!)"
  CarriageControl:;
 140 INPUT R
- Variable:R -> _
+ Variable:R -> .
 150 IF R=0 THEN 340
- Variable:R -> _
+ Variable:R -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:340
 160 F=1
- Variable:F -> _
+ Variable:F -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 170 R=5
- Variable:R -> _
+ Variable:R -> .
  NumericValue:5
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 180 C=7
- Variable:C -> _
+ Variable:C -> .
  NumericValue:7
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 190 PRINT "CHOMP IS FOR 1 OR MORE PLAYERS (HUMANS ONLY)."
  TextValue:"CHOMP IS FOR 1 OR MORE PLAYERS (HUMANS ONLY)."
  CarriageControl:NL
@@ -94,47 +94,47 @@
 350 REM 
  Remark:
 360 F=0
- Variable:F -> _
+ Variable:F -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 370 FOR I=1 TO 10
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:10"]
 372 FOR J=1 TO 10
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:10"]
 375 A(I,J)=0
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 377 NEXT J
- Variable:J -> _
+ Variable:J -> .
 379 NEXT I
- Variable:I -> _
+ Variable:I -> .
 380 PRINT 
  CarriageControl:NL
 390 PRINT "HOW MANY PLAYERS";
  TextValue:"HOW MANY PLAYERS"
  CarriageControl:;
 400 INPUT P
- Variable:P -> _
+ Variable:P -> .
 410 I1=0
- Variable:I1 -> _
+ Variable:I1 -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 420 PRINT "HOW MANY ROWS";
  TextValue:"HOW MANY ROWS"
  CarriageControl:;
 430 INPUT R
- Variable:R -> _
+ Variable:R -> .
 440 IF R <= 9 THEN 470
- Variable:R -> _
+ Variable:R -> .
  NumericValue:9
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:470
 450 PRINT "TOO MANY ROWS (9 IS MAXIMUM). NOW, ";
  TextValue:"TOO MANY ROWS (9 IS MAXIMUM). NOW, "
@@ -146,11 +146,11 @@
  TextValue:"HOW MANY COLUMNS"
  CarriageControl:;
 480 INPUT C
- Variable:C -> _
+ Variable:C -> .
 490 IF C <= 9 THEN 530
- Variable:C -> _
+ Variable:C -> .
  NumericValue:9
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:530
 500 PRINT "TOO MANY COLUMNS (9 IS MAXIMUM). NOW, ";
  TextValue:"TOO MANY COLUMNS (9 IS MAXIMUM). NOW, "
@@ -163,69 +163,69 @@
 540 FOR I=1 TO R
  WARNING: Inconsistent GOSUB origins
  WARNING: GOSUB length exceeds limit 40
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:R -> _"]
+ end:     ["Variable:R -> ."]
 550 FOR J=1 TO C
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:C -> _"]
+ end:     ["Variable:C -> ."]
 560 A(I,J)=1
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 570 NEXT J
- Variable:J -> _
+ Variable:J -> .
 580 NEXT I
- Variable:I -> _
+ Variable:I -> .
 590 A(1,1)=-1
  NumericValue:1
  NumericValue:1
- Variable:A(_,_) -> _
+ Variable:A(.,.) -> .
  NumericValue:1
- UnaryOperatorMinus:-(_) -> =_
- AssignmentOperator:= =_ -> _
+ UnaryOperatorMinus:-(.) -> =.
+ AssignmentOperator:= =. -> .
 600 REM PRINT THE BOARD
  Remark:PRINT THE BOARD
 610 PRINT 
  CarriageControl:NL
 620 PRINT TAB(7);"1 2 3 4 5 6 7 8 9"
  NumericValue:7
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"1 2 3 4 5 6 7 8 9"
  CarriageControl:NL
 630 FOR I=1 TO R
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:R -> _"]
+ end:     ["Variable:R -> ."]
 640 PRINT I;TAB(7);
- Variable:I -> _
+ Variable:I -> .
  CarriageControl:;
  NumericValue:7
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
 650 FOR J=1 TO C
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:C -> _"]
+ end:     ["Variable:C -> ."]
 660 IF A(I,J)=-1 THEN 700
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
  NumericValue:1
- UnaryOperatorMinus:-(_) -> =_
- BinaryOperatorEqual:=(_,_) -> ?
+ UnaryOperatorMinus:-(.) -> =.
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:700
 670 IF A(I,J)=0 THEN 720
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:720
 680 PRINT "* ";
  TextValue:"* "
@@ -236,93 +236,93 @@
  TextValue:"P "
  CarriageControl:;
 710 NEXT J
- Variable:J -> _
+ Variable:J -> .
 720 PRINT 
  CarriageControl:NL
 730 NEXT I
- Variable:I -> _
+ Variable:I -> .
 740 PRINT 
  CarriageControl:NL
 750 IF F=0 THEN 770
- Variable:F -> _
+ Variable:F -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:770
 760 RETURN 
  
 770 REM GET CHOMPS FOR EACH PLAYER IN TURN
  Remark:GET CHOMPS FOR EACH PLAYER IN TURN
 780 LET I1=I1+1
- Variable:I1 -> _
- Variable:I1 -> _
+ Variable:I1 -> .
+ Variable:I1 -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 790 LET P1=I1-INT(I1/P)*P
- Variable:P1 -> _
- Variable:I1 -> _
- Variable:I1 -> _
- Variable:P -> _
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- Variable:P -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:P1 -> .
+ Variable:I1 -> .
+ Variable:I1 -> .
+ Variable:P -> .
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ Variable:P -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 800 IF P1 <> 0 THEN 820
- Variable:P1 -> _
+ Variable:P1 -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:820
 810 P1=P
- Variable:P1 -> _
- Variable:P -> _
- AssignmentOperator:= _ -> _
+ Variable:P1 -> .
+ Variable:P -> .
+ AssignmentOperator:= . -> .
 820 PRINT "PLAYER";P1
  TextValue:"PLAYER"
  CarriageControl:;
- Variable:P1 -> _
+ Variable:P1 -> .
  CarriageControl:NL
 830 PRINT "COORDINATES OF CHOMP (ROW,COLUMN)";
  TextValue:"COORDINATES OF CHOMP (ROW,COLUMN)"
  CarriageControl:;
 840 INPUT R1,C1
- Variable:R1 -> _
- Variable:C1 -> _
+ Variable:R1 -> .
+ Variable:C1 -> .
 850 IF R1<1 THEN 920
- Variable:R1 -> _
+ Variable:R1 -> .
  NumericValue:1
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:920
 860 IF R1>R THEN 920
- Variable:R1 -> _
- Variable:R -> _
- BinaryOperatorGreater:>(_,_) -> ?
+ Variable:R1 -> .
+ Variable:R -> .
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:920
 870 IF C1<1 THEN 920
- Variable:C1 -> _
+ Variable:C1 -> .
  NumericValue:1
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:920
 880 IF C1>C THEN 920
- Variable:C1 -> _
- Variable:C -> _
- BinaryOperatorGreater:>(_,_) -> ?
+ Variable:C1 -> .
+ Variable:C -> .
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:920
 890 IF A(R1,C1)=0 THEN 920
- Variable:R1 -> _
- Variable:C1 -> _
- Variable:A(_,_) -> _
+ Variable:R1 -> .
+ Variable:C1 -> .
+ Variable:A(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:920
 900 IF A(R1,C1)=-1 THEN 1010
- Variable:R1 -> _
- Variable:C1 -> _
- Variable:A(_,_) -> _
+ Variable:R1 -> .
+ Variable:C1 -> .
+ Variable:A(.,.) -> .
  NumericValue:1
- UnaryOperatorMinus:-(_) -> =_
- BinaryOperatorEqual:=(_,_) -> ?
+ UnaryOperatorMinus:-(.) -> =.
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:1010
 910 GOTO 940
  LineNumber:940
@@ -332,23 +332,23 @@
 930 GOTO 820
  LineNumber:820
 940 FOR I=R1 TO R
- control: Variable:I -> _
- start:   ["Variable:R1 -> _"]
- end:     ["Variable:R -> _"]
+ control: Variable:I -> .
+ start:   ["Variable:R1 -> ."]
+ end:     ["Variable:R -> ."]
 950 FOR J=C1 TO C
- control: Variable:J -> _
- start:   ["Variable:C1 -> _"]
- end:     ["Variable:C -> _"]
+ control: Variable:J -> .
+ start:   ["Variable:C1 -> ."]
+ end:     ["Variable:C -> ."]
 960 A(I,J)=0
- Variable:I -> _
- Variable:J -> _
- Variable:A(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:A(.,.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 970 NEXT J
- Variable:J -> _
+ Variable:J -> .
 980 NEXT I
- Variable:I -> _
+ Variable:I -> .
 990 GOTO 610
  LineNumber:610
 1000 REM END OF GAME DETECTED IN LINE 900
@@ -356,7 +356,7 @@
 1010 PRINT "YOU LOSE, PLAYER";P1
  TextValue:"YOU LOSE, PLAYER"
  CarriageControl:;
- Variable:P1 -> _
+ Variable:P1 -> .
  CarriageControl:NL
 1020 PRINT 
  CarriageControl:NL
@@ -364,12 +364,12 @@
  TextValue:"AGAIN (1=YES, 0=NO!)"
  CarriageControl:;
 1040 INPUT R
- Variable:R -> _
+ Variable:R -> .
 1050 IF R=1 THEN 340
  WARNING: Branch to line before GOSUB start
- Variable:R -> _
+ Variable:R -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:340
 1060 END
  WARNING: Terminating statement in GOSUB

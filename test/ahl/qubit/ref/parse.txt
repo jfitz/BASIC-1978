@@ -1,18 +1,18 @@
 50 PRINT CHR$(26):REM WIDTH 80
  NumericValue:26
- FunctionChr:CHR$(_) -> =$
+ FunctionChr:CHR$(.) -> =$
  CarriageControl:NL
  Remark:WIDTH 80
 100 PRINT TAB(33);"QUBIC":PRINT
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"QUBIC"
  CarriageControl:NL
  CarriageControl:NL
 110 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -28,14 +28,14 @@
 230 IF LEFT$(C$,1)="N" THEN 315
  Variable:C$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"N"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:315
 240 IF LEFT$(C$,1)="Y" THEN 265
  Variable:C$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"Y"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:265
@@ -85,55 +85,55 @@
  CarriageControl:NL
 315 DIM X(64),L(76),M(76,4),Y(16)
  NumericValue:64
- Declaration:X() -> _()
+ Declaration:X() -> .()
  NumericValue:76
- Declaration:L() -> _()
+ Declaration:L() -> .()
  NumericValue:76
  NumericValue:4
- Declaration:M(,) -> _(,)
+ Declaration:M(,) -> .(,)
  NumericValue:16
- Declaration:Y() -> _()
+ Declaration:Y() -> .()
 320 FOR I = 1 TO 16
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:16"]
 330 READ Y(I)
- Variable:I -> _
- Variable:Y(_) -> _
+ Variable:I -> .
+ Variable:Y(.) -> .
 340 NEXT I
- Variable:I -> _
+ Variable:I -> .
 350 FOR I=1 TO 76
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:76"]
 360 FOR J = 1 TO 4
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 370 READ M(I,J)
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
 380 NEXT J
- Variable:J -> _
+ Variable:J -> .
 390 NEXT I
- Variable:I -> _
+ Variable:I -> .
 400 FOR I = 1 TO 64
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:64"]
 410 LET X (I) =0
- Variable:I -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:X(.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 420 NEXT I
- Variable:I -> _
+ Variable:I -> .
 430 LET Z=1
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 440 PRINT "DO YOU WANT TO MOVE FIRST";
  TextValue:"DO YOU WANT TO MOVE FIRST"
  CarriageControl:;
@@ -142,14 +142,14 @@
 460 IF LEFT$(S$,1)="N" THEN 630
  Variable:S$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"N"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:630
 470 IF LEFT$(S$,1)="Y" THEN 500
  Variable:S$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"Y"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:500
@@ -165,86 +165,86 @@
  TextValue:"YOUR MOVE"
  CarriageControl:;
 520 INPUT J1
- Variable:J1 -> _
+ Variable:J1 -> .
 521 IF J1=1 THEN 2770
- Variable:J1 -> _
+ Variable:J1 -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:2770
 522 IF J1<>0 THEN 525
- Variable:J1 -> _
+ Variable:J1 -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:525
 523 GOSUB 2550
  LineNumber:2550
 524 GOTO 500
  LineNumber:500
 525 IF J1<111 THEN 2750
- Variable:J1 -> _
+ Variable:J1 -> .
  NumericValue:111
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:2750
 526 IF J1>444 THEN 2750
- Variable:J1 -> _
+ Variable:J1 -> .
  NumericValue:444
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:2750
 530 GOSUB 2500
  LineNumber:2500
 540 LET K1=INT(J1/100)
- Variable:K1 -> _
- Variable:J1 -> _
+ Variable:K1 -> .
+ Variable:J1 -> .
  NumericValue:100
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 550 LET J2=(J1-K1*100)
- Variable:J2 -> _
- Variable:J1 -> _
- Variable:K1 -> _
+ Variable:J2 -> .
+ Variable:J1 -> .
+ Variable:K1 -> .
  NumericValue:100
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 560 LET K2=INT(J2/10)
- Variable:K2 -> _
- Variable:J2 -> _
+ Variable:K2 -> .
+ Variable:J2 -> .
  NumericValue:10
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 570 LET K3= J1 - K1*100 -K2*10
- Variable:K3 -> _
- Variable:J1 -> _
- Variable:K1 -> _
+ Variable:K3 -> .
+ Variable:J1 -> .
+ Variable:K1 -> .
  NumericValue:100
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- Variable:K2 -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ Variable:K2 -> .
  NumericValue:10
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 580 LET M=16*K1+4*K2+K3-20
- Variable:M -> _
+ Variable:M -> .
  NumericValue:16
- Variable:K1 -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ Variable:K1 -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:4
- Variable:K2 -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:K3 -> _
- BinaryOperatorPlus:+(_,_) -> _
+ Variable:K2 -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:K3 -> .
+ BinaryOperatorPlus:+(.,.) -> .
  NumericValue:20
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 590 IF X(M)=0 THEN 620
- Variable:M -> _
- Variable:X(_) -> _
+ Variable:M -> .
+ Variable:X(.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:620
 600 PRINT "THAT SQUARE IS USED, TRY AGAIN."
  TextValue:"THAT SQUARE IS USED, TRY AGAIN."
@@ -252,143 +252,143 @@
 610 GOTO 500
  LineNumber:500
 620 LET X(M)=1
- Variable:M -> _
- Variable:X(_) -> _
+ Variable:M -> .
+ Variable:X(.) -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 630 GOSUB 1640
  LineNumber:1640
 640 J=1
- Variable:J -> _
+ Variable:J -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 650 I=1
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 660 IF J=1 THEN 720
- Variable:J -> _
+ Variable:J -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:720
 670 IF J=2 THEN 790
- Variable:J -> _
+ Variable:J -> .
  NumericValue:2
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:790
 680 IF J=3 THEN 930
- Variable:J -> _
+ Variable:J -> .
  NumericValue:3
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:930
 690 I=I+1: IF I<=76 THEN 660
- Variable:I -> _
- Variable:I -> _
+ Variable:I -> .
+ Variable:I -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:I -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:I -> .
  NumericValue:76
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:660
 700 J=J+1: IF J<=3 THEN 650
- Variable:J -> _
- Variable:J -> _
+ Variable:J -> .
+ Variable:J -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:J -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:J -> .
  NumericValue:3
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:650
 710 GOTO 1300
  LineNumber:1300
 720 IF L(I)<>4 THEN 690
- Variable:I -> _
- Variable:L(_) -> _
+ Variable:I -> .
+ Variable:L(.) -> .
  NumericValue:4
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:690
 730 PRINT "YOU WIN AS FOLLOWS";
  TextValue:"YOU WIN AS FOLLOWS"
  CarriageControl:;
 740 FOR J=1 TO 4
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 750 LET M=M(I,J)
- Variable:M -> _
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 760 GOSUB 1570
  LineNumber:1570
 770 NEXT J
- Variable:J -> _
+ Variable:J -> .
 780 GOTO 1490
  LineNumber:1490
 790 IF L(I)<>15 THEN 690
- Variable:I -> _
- Variable:L(_) -> _
+ Variable:I -> .
+ Variable:L(.) -> .
  NumericValue:15
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:690
 800 FOR J=1 TO 4
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 810 LET M=M(I,J)
- Variable:M -> _
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 820 IF X(M)<>0 THEN 860
- Variable:M -> _
- Variable:X(_) -> _
+ Variable:M -> .
+ Variable:X(.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:860
 830 LET X(M)=5
- Variable:M -> _
- Variable:X(_) -> _
+ Variable:M -> .
+ Variable:X(.) -> .
  NumericValue:5
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 840 PRINT "MACHINE MOVES TO";
  TextValue:"MACHINE MOVES TO"
  CarriageControl:;
 850 GOSUB 1570
  LineNumber:1570
 860 NEXT J
- Variable:J -> _
+ Variable:J -> .
 870 PRINT ", AND WINS AS FOLLOWS"
  TextValue:", AND WINS AS FOLLOWS"
  CarriageControl:NL
 880 FOR J=1 TO 4
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 890 LET M=M(I,J)
- Variable:M -> _
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 900 GOSUB 1570
  LineNumber:1570
 910 NEXT J
- Variable:J -> _
+ Variable:J -> .
 920 GOTO 1490
  LineNumber:1490
 930 IF L(I)<>3 THEN 690
- Variable:I -> _
- Variable:L(_) -> _
+ Variable:I -> .
+ Variable:L(.) -> .
  NumericValue:3
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:690
 940 PRINT "NICE TRY. MACHINE MOVES TO";
  TextValue:"NICE TRY. MACHINE MOVES TO"
@@ -396,185 +396,185 @@
 950 FOR J=1 TO 4 
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 960 LET M=M(I,J)
- Variable:M -> _
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 970 IF X(M)<>0 THEN 1010
- Variable:M -> _
- Variable:X(_) -> _
+ Variable:M -> .
+ Variable:X(.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:1010
 980 LET X(M)=5
- Variable:M -> _
- Variable:X(_) -> _
+ Variable:M -> .
+ Variable:X(.) -> .
  NumericValue:5
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 990 GOSUB 1570
  LineNumber:1570
 1000 GOTO 500
  LineNumber:500
 1010 NEXT J
- Variable:J -> _
+ Variable:J -> .
 1020 GOTO 1300
  LineNumber:1300
 1030 I=1
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1040 LET L(I)=X(M(I,1))+X(M(I,2))+X(M(I,3))+X(M(I,4))
- Variable:I -> _
- Variable:L(_) -> _
- Variable:I -> _
+ Variable:I -> .
+ Variable:L(.) -> .
+ Variable:I -> .
  NumericValue:1
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- Variable:I -> _
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ Variable:I -> .
  NumericValue:2
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:I -> _
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:I -> .
  NumericValue:3
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:I -> _
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:I -> .
  NumericValue:4
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1050 LET L = L(I)
- Variable:L -> _
- Variable:I -> _
- Variable:L(_) -> _
- AssignmentOperator:= _ -> _
+ Variable:L -> .
+ Variable:I -> .
+ Variable:L(.) -> .
+ AssignmentOperator:= . -> .
 1060 IF L <2 THEN 1130
- Variable:L -> _
+ Variable:L -> .
  NumericValue:2
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:1130
 1070 IF L>=3 THEN 1130
- Variable:L -> _
+ Variable:L -> .
  NumericValue:3
- BinaryOperatorGreaterEqual:>=(_,_) -> ?
+ BinaryOperatorGreaterEqual:>=(.,.) -> ?
  LineNumber:1130
 1080 IF L>2 THEN 2230
- Variable:L -> _
+ Variable:L -> .
  NumericValue:2
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:2230
 1090 FOR J = 1 TO 4
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 1100 IF X(M(I,J))<>0 THEN 1120
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:1120
 1110 LET X(M(I,J))=1/8
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
  NumericValue:1
  NumericValue:8
- BinaryOperatorDivide:/(_,_) -> =_
- AssignmentOperator:= =_ -> _
+ BinaryOperatorDivide:/(.,.) -> =.
+ AssignmentOperator:= =. -> .
 1120 NEXT J
- Variable:J -> _
+ Variable:J -> .
 1130 I=I+1: IF I<=76 THEN 1040
- Variable:I -> _
- Variable:I -> _
+ Variable:I -> .
+ Variable:I -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:I -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:I -> .
  NumericValue:76
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:1040
 1140 GOSUB 1640
  LineNumber:1640
 1150 I=1
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1160 IF L(I)=1/2 THEN 2360
- Variable:I -> _
- Variable:L(_) -> _
+ Variable:I -> .
+ Variable:L(.) -> .
  NumericValue:1
  NumericValue:2
- BinaryOperatorDivide:/(_,_) -> =_
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorDivide:/(.,.) -> =.
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:2360
 1170 IF L(I)=1+3/8 THEN 2360
- Variable:I -> _
- Variable:L(_) -> _
+ Variable:I -> .
+ Variable:L(.) -> .
  NumericValue:1
  NumericValue:3
  NumericValue:8
- BinaryOperatorDivide:/(_,_) -> =_
- BinaryOperatorPlus:+(_,_) -> =_
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorDivide:/(.,.) -> =.
+ BinaryOperatorPlus:+(.,.) -> =.
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:2360
 1180 I=I+1: IF I<=76 THEN 1160
- Variable:I -> _
- Variable:I -> _
+ Variable:I -> .
+ Variable:I -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:I -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:I -> .
  NumericValue:76
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:1160
 1190 GOTO 1830
  LineNumber:1830
 1200 LET Z = 1
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1210 IF X(Y(Z))=0 THEN 1250
- Variable:Z -> _
- Variable:Y(_) -> _
- Variable:X(_) -> _
+ Variable:Z -> .
+ Variable:Y(.) -> .
+ Variable:X(.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:1250
 1220 LET Z=Z+1
- Variable:Z -> _
- Variable:Z -> _
+ Variable:Z -> .
+ Variable:Z -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1230 IF Z<>17 THEN 1210
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:17
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:1210
 1240 GOTO 1720
  LineNumber:1720
 1250 LET M=Y(Z)
- Variable:M -> _
- Variable:Z -> _
- Variable:Y(_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:Z -> .
+ Variable:Y(.) -> .
+ AssignmentOperator:= . -> .
 1260 LET X(M)=5
- Variable:M -> _
- Variable:X(_) -> _
+ Variable:M -> .
+ Variable:X(.) -> .
  NumericValue:5
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1270 PRINT "MACHINE MOVES TO";
  TextValue:"MACHINE MOVES TO"
  CarriageControl:;
@@ -583,121 +583,121 @@
 1290 GOTO 500
  LineNumber:500
 1300 LET X=X
- Variable:X -> _
- Variable:X -> _
- AssignmentOperator:= _ -> _
+ Variable:X -> .
+ Variable:X -> .
+ AssignmentOperator:= . -> .
 1310 I=1
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1320 LET L(I)=X(M(I,1))+X(M(I,2))+X(M(I,3))+X(M(I,4))
- Variable:I -> _
- Variable:L(_) -> _
- Variable:I -> _
+ Variable:I -> .
+ Variable:L(.) -> .
+ Variable:I -> .
  NumericValue:1
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- Variable:I -> _
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ Variable:I -> .
  NumericValue:2
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:I -> _
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:I -> .
  NumericValue:3
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:I -> _
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:I -> .
  NumericValue:4
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1330 LET L=L(I)
- Variable:L -> _
- Variable:I -> _
- Variable:L(_) -> _
- AssignmentOperator:= _ -> _
+ Variable:L -> .
+ Variable:I -> .
+ Variable:L(.) -> .
+ AssignmentOperator:= . -> .
 1340 IF L<10 THEN 1410
- Variable:L -> _
+ Variable:L -> .
  NumericValue:10
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:1410
 1350 IF L>=11 THEN 1410
- Variable:L -> _
+ Variable:L -> .
  NumericValue:11
- BinaryOperatorGreaterEqual:>=(_,_) -> ?
+ BinaryOperatorGreaterEqual:>=(.,.) -> ?
  LineNumber:1410
 1360 IF L>10 THEN 2230
- Variable:L -> _
+ Variable:L -> .
  NumericValue:10
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:2230
 1370 FOR J=1 TO 4
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 1380 IF X(M(I,J))<>0 THEN 1400
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:1400
 1390 LET X(M(I,J))=1/8
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
  NumericValue:1
  NumericValue:8
- BinaryOperatorDivide:/(_,_) -> =_
- AssignmentOperator:= =_ -> _
+ BinaryOperatorDivide:/(.,.) -> =.
+ AssignmentOperator:= =. -> .
 1400 NEXT J
- Variable:J -> _
+ Variable:J -> .
 1410 I=I+1: IF I<=76 THEN 1320
- Variable:I -> _
- Variable:I -> _
+ Variable:I -> .
+ Variable:I -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:I -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:I -> .
  NumericValue:76
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:1320
 1420 GOSUB 1640
  LineNumber:1640
 1430 I=1
- Variable:I -> _
+ Variable:I -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1440 IF L(I)=.5 THEN 2360
- Variable:I -> _
- Variable:L(_) -> _
+ Variable:I -> .
+ Variable:L(.) -> .
  NumericValue:.5
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:2360
 1450 IF L(I)=5+3/8 THEN 2360
- Variable:I -> _
- Variable:L(_) -> _
+ Variable:I -> .
+ Variable:L(.) -> .
  NumericValue:5
  NumericValue:3
  NumericValue:8
- BinaryOperatorDivide:/(_,_) -> =_
- BinaryOperatorPlus:+(_,_) -> =_
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorDivide:/(.,.) -> =.
+ BinaryOperatorPlus:+(.,.) -> =.
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:2360
 1460 I=I+1: IF I<=76 THEN 1440
- Variable:I -> _
- Variable:I -> _
+ Variable:I -> .
+ Variable:I -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:I -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:I -> .
  NumericValue:76
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:1440
 1470 GOSUB 2500
  LineNumber:2500
@@ -714,14 +714,14 @@
 1520 IF LEFT$(X$,1)="Y" THEN 400
  Variable:X$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"Y"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:400
 1530 IF LEFT$(X$,1)="N" THEN 1560
  Variable:X$ -> $
  NumericValue:1
- FunctionLeft:LEFT$($,_) -> $
+ FunctionLeft:LEFT$($,.) -> $
  TextValue:"N"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:1560
@@ -734,137 +734,137 @@
  WARNING: Terminating statement in FOR/NEXT
  
 1570 LET K1=INT((M-1)/16)+1
- Variable:K1 -> _
- Variable:M -> _
+ Variable:K1 -> .
+ Variable:M -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:16
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1580 LET J2=M-16*(K1-1)
- Variable:J2 -> _
- Variable:M -> _
+ Variable:J2 -> .
+ Variable:M -> .
  NumericValue:16
- Variable:K1 -> _
+ Variable:K1 -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 1590 LET K2=INT((J2-1)/4)+1
- Variable:K2 -> _
- Variable:J2 -> _
+ Variable:K2 -> .
+ Variable:J2 -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:4
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1600 LET K3=M-(K1-1)*16-(K2-1)*4
- Variable:K3 -> _
- Variable:M -> _
- Variable:K1 -> _
+ Variable:K3 -> .
+ Variable:M -> .
+ Variable:K1 -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:16
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- Variable:K2 -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ Variable:K2 -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:4
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 1610 LET M=K1*100+K2*10+K3
- Variable:M -> _
- Variable:K1 -> _
+ Variable:M -> .
+ Variable:K1 -> .
  NumericValue:100
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:K2 -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:K2 -> .
  NumericValue:10
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:K3 -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:K3 -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1620 PRINT M;
- Variable:M -> _
+ Variable:M -> .
  CarriageControl:;
 1630 RETURN
  
 1640 FOR S=1 TO 76
- control: Variable:S -> _
+ control: Variable:S -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:76"]
 1650 LET J1 = M(S,1)
- Variable:J1 -> _
- Variable:S -> _
+ Variable:J1 -> .
+ Variable:S -> .
  NumericValue:1
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 1660 LET J2=M(S,2)
- Variable:J2 -> _
- Variable:S -> _
+ Variable:J2 -> .
+ Variable:S -> .
  NumericValue:2
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 1670 LET J3=M(S,3)
- Variable:J3 -> _
- Variable:S -> _
+ Variable:J3 -> .
+ Variable:S -> .
  NumericValue:3
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 1680 LET J4=M(S,4)
- Variable:J4 -> _
- Variable:S -> _
+ Variable:J4 -> .
+ Variable:S -> .
  NumericValue:4
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 1690 LET L(S)=X(J1)+X(J2)+X(J3)+X(J4)
- Variable:S -> _
- Variable:L(_) -> _
- Variable:J1 -> _
- Variable:X(_) -> _
- Variable:J2 -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:J3 -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:J4 -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:S -> .
+ Variable:L(.) -> .
+ Variable:J1 -> .
+ Variable:X(.) -> .
+ Variable:J2 -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:J3 -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:J4 -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1700 NEXT S
- Variable:S -> _
+ Variable:S -> .
 1710 RETURN
  
 1720 FOR I=1 TO 64
  WARNING: FORNEXT length exceeds limit 40
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:64"]
 1730 IF X(I)<>0 THEN 1800
- Variable:I -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:X(.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:1800
 1740 LET X(I)=5
- Variable:I -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:X(.) -> .
  NumericValue:5
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1750 LET M=I
- Variable:M -> _
- Variable:I -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:I -> .
+ AssignmentOperator:= . -> .
 1760 PRINT "MACHINE LIKES";
  TextValue:"MACHINE LIKES"
  CarriageControl:;
@@ -876,7 +876,7 @@
 1790 GOTO 500
  LineNumber:500
 1800 NEXT I
- Variable:I -> _
+ Variable:I -> .
 1810 PRINT "THE GAME IS A DRAW."
  TextValue:"THE GAME IS A DRAW."
  CarriageControl:NL
@@ -885,82 +885,82 @@
 1830 FOR K=1 TO 18
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:K -> _
+ control: Variable:K -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:18"]
 1840 LET P=0
- Variable:P -> _
+ Variable:P -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1850 FOR I=4*K-3 TO 4*K
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:I -> _
- start:   ["NumericValue:4", "Variable:K -> _", "BinaryOperatorMultiply:*(_,_) -> _", "NumericValue:3", "BinaryOperatorMinus:-(_,_) -> _"]
- end:     ["NumericValue:4", "Variable:K -> _", "BinaryOperatorMultiply:*(_,_) -> _"]
+ control: Variable:I -> .
+ start:   ["NumericValue:4", "Variable:K -> .", "BinaryOperatorMultiply:*(.,.) -> .", "NumericValue:3", "BinaryOperatorMinus:-(.,.) -> ."]
+ end:     ["NumericValue:4", "Variable:K -> .", "BinaryOperatorMultiply:*(.,.) -> ."]
 1860 FOR J=1 TO 4
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 1870 LET P=P+X(M(I,J))
- Variable:P -> _
- Variable:P -> _
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:P -> .
+ Variable:P -> .
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1880 NEXT J
- Variable:J -> _
+ Variable:J -> .
 1890 NEXT I
- Variable:I -> _
+ Variable:I -> .
 1900 IF P<4 THEN 1940
- Variable:P -> _
+ Variable:P -> .
  NumericValue:4
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:1940
 1910 IF P<5 THEN 1970
- Variable:P -> _
+ Variable:P -> .
  NumericValue:5
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:1970
 1920 IF P<9 THEN 1940
- Variable:P -> _
+ Variable:P -> .
  NumericValue:9
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:1940
 1930 IF P<10 THEN 1970
- Variable:P -> _
+ Variable:P -> .
  NumericValue:10
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:1970
 1940 NEXT K
- Variable:K -> _
+ Variable:K -> .
 1950 GOSUB 2500
  LineNumber:2500
 1960 GOTO 1200
  LineNumber:1200
 1970 LET S=1/8
- Variable:S -> _
+ Variable:S -> .
  NumericValue:1
  NumericValue:8
- BinaryOperatorDivide:/(_,_) -> =_
- AssignmentOperator:= =_ -> _
+ BinaryOperatorDivide:/(.,.) -> =.
+ AssignmentOperator:= =. -> .
 1980 FOR I=4*K-3 TO 4*K
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:I -> _
- start:   ["NumericValue:4", "Variable:K -> _", "BinaryOperatorMultiply:*(_,_) -> _", "NumericValue:3", "BinaryOperatorMinus:-(_,_) -> _"]
- end:     ["NumericValue:4", "Variable:K -> _", "BinaryOperatorMultiply:*(_,_) -> _"]
+ control: Variable:I -> .
+ start:   ["NumericValue:4", "Variable:K -> .", "BinaryOperatorMultiply:*(.,.) -> .", "NumericValue:3", "BinaryOperatorMinus:-(.,.) -> ."]
+ end:     ["NumericValue:4", "Variable:K -> .", "BinaryOperatorMultiply:*(.,.) -> ."]
 1990 GOTO 2370
  LineNumber:2370
 2000 NEXT I
- Variable:I -> _
+ Variable:I -> .
 2010 LET S=0
- Variable:S -> _
+ Variable:S -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 2020 GOTO 1980
  LineNumber:1980
 2030 DATA 1,49,52,4,13,61,64,16,22,39,23,38,26,42,27,43
@@ -1306,31 +1306,31 @@
 2230 FOR J=1 TO 4
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 2240 IF X(M(I,J))<>1/8 THEN 2330
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
  NumericValue:1
  NumericValue:8
- BinaryOperatorDivide:/(_,_) -> =_
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorDivide:/(.,.) -> =.
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:2330
 2250 LET X(M(I,J))=5
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
  NumericValue:5
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 2260 IF L(I)<5 THEN 2290
- Variable:I -> _
- Variable:L(_) -> _
+ Variable:I -> .
+ Variable:L(.) -> .
  NumericValue:5
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:2290
 2270 PRINT "LET'S SEE YOU GET OUT OF THIS:  MACHINE MOVES TO";
  TextValue:"LET'S SEE YOU GET OUT OF THIS:  MACHINE MOVES TO"
@@ -1341,82 +1341,82 @@
  TextValue:"YOU FOX.  JUST IN THE NICK OF TIME, MACHINE MOVES TO"
  CarriageControl:;
 2300 LET M=M(I,J)
- Variable:M -> _
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 2310 GOSUB 1570
  LineNumber:1570
 2320 GOTO 500
  LineNumber:500
 2330 NEXT J
- Variable:J -> _
+ Variable:J -> .
 2340 PRINT "MACHINE CONCEDES THIS GAME."
  TextValue:"MACHINE CONCEDES THIS GAME."
  CarriageControl:NL
 2350 GOTO 1490
  LineNumber:1490
 2360 LET S=1/8
- Variable:S -> _
+ Variable:S -> .
  NumericValue:1
  NumericValue:8
- BinaryOperatorDivide:/(_,_) -> =_
- AssignmentOperator:= =_ -> _
+ BinaryOperatorDivide:/(.,.) -> =.
+ AssignmentOperator:= =. -> .
 2370 IF I-INT(I/4)*4>1 THEN 2400
- Variable:I -> _
- Variable:I -> _
+ Variable:I -> .
+ Variable:I -> .
  NumericValue:4
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
  NumericValue:4
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
  NumericValue:1
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:2400
 2380 LET A=1
- Variable:A -> _
+ Variable:A -> .
  NumericValue:1
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 2390 GOTO 2410
  LineNumber:2410
 2400 LET A=2
- Variable:A -> _
+ Variable:A -> .
  NumericValue:2
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 2410 FOR J=A TO 5-A STEP 5-2*A
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:J -> _
- start:   ["Variable:A -> _"]
- end:     ["NumericValue:5", "Variable:A -> _", "BinaryOperatorMinus:-(_,_) -> _"]
- step:    ["NumericValue:5", "NumericValue:2", "Variable:A -> _", "BinaryOperatorMultiply:*(_,_) -> _", "BinaryOperatorMinus:-(_,_) -> _"]
+ control: Variable:J -> .
+ start:   ["Variable:A -> ."]
+ end:     ["NumericValue:5", "Variable:A -> .", "BinaryOperatorMinus:-(.,.) -> ."]
+ step:    ["NumericValue:5", "NumericValue:2", "Variable:A -> .", "BinaryOperatorMultiply:*(.,.) -> .", "BinaryOperatorMinus:-(.,.) -> ."]
 2420 IF X(M(I,J))=S THEN 2450
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- Variable:X(_) -> _
- Variable:S -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
+ Variable:S -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:2450
 2430 NEXT J
- Variable:J -> _
+ Variable:J -> .
 2440 GOTO 2000
  LineNumber:2000
 2450 LET X(M(I,J))=5
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ Variable:X(.) -> .
  NumericValue:5
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 2460 LET M=M(I,J)
- Variable:M -> _
- Variable:I -> _
- Variable:J -> _
- Variable:M(_,_) -> _
- AssignmentOperator:= _ -> _
+ Variable:M -> .
+ Variable:I -> .
+ Variable:J -> .
+ Variable:M(.,.) -> .
+ AssignmentOperator:= . -> .
 2470 PRINT "MACHINE TAKES";
  TextValue:"MACHINE TAKES"
  CarriageControl:;
@@ -1425,117 +1425,117 @@
 2490 GOTO 500
  LineNumber:500
 2500 FOR I=1 TO 64
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:64"]
 2510 IF X(I)<>1/8 THEN 2530
- Variable:I -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:X(.) -> .
  NumericValue:1
  NumericValue:8
- BinaryOperatorDivide:/(_,_) -> =_
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorDivide:/(.,.) -> =.
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:2530
 2520 LET X(I)=0
- Variable:I -> _
- Variable:X(_) -> _
+ Variable:I -> .
+ Variable:X(.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 2530 NEXT I
- Variable:I -> _
+ Variable:I -> .
 2540 RETURN
  
 2550 FOR XX=1 TO 9:PRINT:NEXT:FOR I=1 TO 4
- control: Variable:XX -> _
+ control: Variable:XX -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:9"]
  CarriageControl:NL
- control: Variable:I -> _
+ control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 2560 FOR J=1 TO 4
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 2562 FOR I1=1 TO J
- control: Variable:I1 -> _
+ control: Variable:I1 -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:J -> _"]
+ end:     ["Variable:J -> ."]
 2564 PRINT"   ";
  TextValue:"   "
  CarriageControl:;
 2566 NEXT I1
- Variable:I1 -> _
+ Variable:I1 -> .
 2570 FOR K=1 TO 4
- control: Variable:K -> _
+ control: Variable:K -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:4"]
 2600 LET Q=16*I+4*J+K-20
- Variable:Q -> _
+ Variable:Q -> .
  NumericValue:16
- Variable:I -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ Variable:I -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:4
- Variable:J -> _
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:K -> _
- BinaryOperatorPlus:+(_,_) -> _
+ Variable:J -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:K -> .
+ BinaryOperatorPlus:+(.,.) -> .
  NumericValue:20
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 2610 IF X(Q)<>0 THEN 2630
- Variable:Q -> _
- Variable:X(_) -> _
+ Variable:Q -> .
+ Variable:X(.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:2630
 2620 PRINT"( )      ";
  TextValue:"( )      "
  CarriageControl:;
 2630 IF X(Q)<>5 THEN 2650
- Variable:Q -> _
- Variable:X(_) -> _
+ Variable:Q -> .
+ Variable:X(.) -> .
  NumericValue:5
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:2650
 2640 PRINT"(M)      ";
  TextValue:"(M)      "
  CarriageControl:;
 2650 IF X(Q)<>1 THEN 2660
- Variable:Q -> _
- Variable:X(_) -> _
+ Variable:Q -> .
+ Variable:X(.) -> .
  NumericValue:1
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:2660
 2655 PRINT"(Y)      ";
  TextValue:"(Y)      "
  CarriageControl:;
 2660 IF X(Q)<>1/8 THEN 2670
- Variable:Q -> _
- Variable:X(_) -> _
+ Variable:Q -> .
+ Variable:X(.) -> .
  NumericValue:1
  NumericValue:8
- BinaryOperatorDivide:/(_,_) -> =_
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorDivide:/(.,.) -> =.
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:2670
 2665 PRINT"( )      ";
  TextValue:"( )      "
  CarriageControl:;
 2670 NEXT K
- Variable:K -> _
+ Variable:K -> .
 2680 PRINT
  CarriageControl:NL
 2690 PRINT
  CarriageControl:NL
 2700 NEXT J
- Variable:J -> _
+ Variable:J -> .
 2710 PRINT
  CarriageControl:NL
 2720 PRINT
  CarriageControl:NL
 2730 NEXT I
- Variable:I -> _
+ Variable:I -> .
 2735 REM PRINT CHR$(12)
  Remark:PRINT CHR$(12)
 2740 RETURN

@@ -1427,7 +1427,7 @@ class XrefEntry
     return nil if arguments.nil?
 
     sigil_chars = {
-      numeric: '_',
+      numeric: '.',
       integer: '%',
       string: '$',
       boolean: '?'
@@ -1875,7 +1875,7 @@ class Expression
 
   def make_type_sigil(type)
     sigil_chars = {
-      numeric: '_',
+      numeric: '.',
       integer: '%',
       string: '$',
       boolean: '?',

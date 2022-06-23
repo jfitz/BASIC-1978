@@ -1,12 +1,12 @@
 2 PRINT TAB(33);"CHANGE"
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CHANGE"
  CarriageControl:NL
 4 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -26,22 +26,22 @@
 10 PRINT "COST OF ITEM";:INPUT A:PRINT "AMOUNT OF PAYMENT";:INPUT P
  TextValue:"COST OF ITEM"
  CarriageControl:;
- Variable:A -> _
+ Variable:A -> .
  TextValue:"AMOUNT OF PAYMENT"
  CarriageControl:;
- Variable:P -> _
+ Variable:P -> .
 20 C=P-A:M=C:IF C<>0 THEN 90
- Variable:C -> _
- Variable:P -> _
- Variable:A -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:M -> _
- Variable:C -> _
- AssignmentOperator:= _ -> _
- Variable:C -> _
+ Variable:C -> .
+ Variable:P -> .
+ Variable:A -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:M -> .
+ Variable:C -> .
+ AssignmentOperator:= . -> .
+ Variable:C -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:90
 25 PRINT "CORRECT AMOUNT, THANK YOU."
  TextValue:"CORRECT AMOUNT, THANK YOU."
@@ -49,255 +49,255 @@
 30 GOTO 400
  LineNumber:400
 90 IF C>0 THEN 120
- Variable:C -> _
+ Variable:C -> .
  NumericValue:0
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:120
 95 PRINT "SORRY, YOU HAVE SHORT-CHANGED ME $";A-P
  TextValue:"SORRY, YOU HAVE SHORT-CHANGED ME $"
  CarriageControl:;
- Variable:A -> _
- Variable:P -> _
- BinaryOperatorMinus:-(_,_) -> _
+ Variable:A -> .
+ Variable:P -> .
+ BinaryOperatorMinus:-(.,.) -> .
  CarriageControl:NL
 100 GOTO 10
  LineNumber:10
 120 PRINT "YOUR CHANGE, $";C
  TextValue:"YOUR CHANGE, $"
  CarriageControl:;
- Variable:C -> _
+ Variable:C -> .
  CarriageControl:NL
 130 D=INT(C/10)
- Variable:D -> _
- Variable:C -> _
+ Variable:D -> .
+ Variable:C -> .
  NumericValue:10
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 140 IF D=0 THEN 155
- Variable:D -> _
+ Variable:D -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:155
 150 PRINT D;"TEN DOLLAR BILL(S)"
- Variable:D -> _
+ Variable:D -> .
  CarriageControl:;
  TextValue:"TEN DOLLAR BILL(S)"
  CarriageControl:NL
 155 C=M-(D*10)
- Variable:C -> _
- Variable:M -> _
- Variable:D -> _
+ Variable:C -> .
+ Variable:M -> .
+ Variable:D -> .
  NumericValue:10
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 160 E=INT(C/5)
- Variable:E -> _
- Variable:C -> _
+ Variable:E -> .
+ Variable:C -> .
  NumericValue:5
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 170 IF E=0 THEN 185
- Variable:E -> _
+ Variable:E -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:185
 180 PRINT E;"FIVE DOLLARS BILL(S)"
- Variable:E -> _
+ Variable:E -> .
  CarriageControl:;
  TextValue:"FIVE DOLLARS BILL(S)"
  CarriageControl:NL
 185 C=M-(D*10+E*5)
- Variable:C -> _
- Variable:M -> _
- Variable:D -> _
+ Variable:C -> .
+ Variable:M -> .
+ Variable:D -> .
  NumericValue:10
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:E -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:E -> .
  NumericValue:5
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 190 F=INT(C)
- Variable:F -> _
- Variable:C -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ Variable:F -> .
+ Variable:C -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 200 IF F=0 THEN 215
- Variable:F -> _
+ Variable:F -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:215
 210 PRINT F;"ONE DOLLAR BILL(S)"
- Variable:F -> _
+ Variable:F -> .
  CarriageControl:;
  TextValue:"ONE DOLLAR BILL(S)"
  CarriageControl:NL
 215 C=M-(D*10+E*5+F)
- Variable:C -> _
- Variable:M -> _
- Variable:D -> _
+ Variable:C -> .
+ Variable:M -> .
+ Variable:D -> .
  NumericValue:10
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:E -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:E -> .
  NumericValue:5
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:F -> _
- BinaryOperatorPlus:+(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:F -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 220 C=C*100
- Variable:C -> _
- Variable:C -> _
+ Variable:C -> .
+ Variable:C -> .
  NumericValue:100
- BinaryOperatorMultiply:*(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ AssignmentOperator:= . -> .
 225 N=C
- Variable:N -> _
- Variable:C -> _
- AssignmentOperator:= _ -> _
+ Variable:N -> .
+ Variable:C -> .
+ AssignmentOperator:= . -> .
 230 G=INT(C/50)
- Variable:G -> _
- Variable:C -> _
+ Variable:G -> .
+ Variable:C -> .
  NumericValue:50
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 240 IF G=0 THEN 255
- Variable:G -> _
+ Variable:G -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:255
 250 PRINT G;"ONE HALF DOLLAR(S)"
- Variable:G -> _
+ Variable:G -> .
  CarriageControl:;
  TextValue:"ONE HALF DOLLAR(S)"
  CarriageControl:NL
 255 C=N-(G*50)
- Variable:C -> _
- Variable:N -> _
- Variable:G -> _
+ Variable:C -> .
+ Variable:N -> .
+ Variable:G -> .
  NumericValue:50
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 260 H=INT(C/25)
- Variable:H -> _
- Variable:C -> _
+ Variable:H -> .
+ Variable:C -> .
  NumericValue:25
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 270 IF H=0 THEN 285
- Variable:H -> _
+ Variable:H -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:285
 280 PRINT H;"QUARTER(S)"
- Variable:H -> _
+ Variable:H -> .
  CarriageControl:;
  TextValue:"QUARTER(S)"
  CarriageControl:NL
 285 C=N-(G*50+H*25)
- Variable:C -> _
- Variable:N -> _
- Variable:G -> _
+ Variable:C -> .
+ Variable:N -> .
+ Variable:G -> .
  NumericValue:50
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:H -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:H -> .
  NumericValue:25
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 290 I=INT(C/10)
- Variable:I -> _
- Variable:C -> _
+ Variable:I -> .
+ Variable:C -> .
  NumericValue:10
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 300 IF I=0 THEN 315
- Variable:I -> _
+ Variable:I -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:315
 310 PRINT I;"DIME(S)"
- Variable:I -> _
+ Variable:I -> .
  CarriageControl:;
  TextValue:"DIME(S)"
  CarriageControl:NL
 315 C=N-(G*50+H*25+I*10)
- Variable:C -> _
- Variable:N -> _
- Variable:G -> _
+ Variable:C -> .
+ Variable:N -> .
+ Variable:G -> .
  NumericValue:50
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:H -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:H -> .
  NumericValue:25
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:I -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:I -> .
  NumericValue:10
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 320 J=INT(C/5)
- Variable:J -> _
- Variable:C -> _
+ Variable:J -> .
+ Variable:C -> .
  NumericValue:5
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 330 IF J=0 THEN 345
- Variable:J -> _
+ Variable:J -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:345
 340 PRINT J;"NICKEL(S)"
- Variable:J -> _
+ Variable:J -> .
  CarriageControl:;
  TextValue:"NICKEL(S)"
  CarriageControl:NL
 345 C=N-(G*50+H*25+I*10+J*5)
- Variable:C -> _
- Variable:N -> _
- Variable:G -> _
+ Variable:C -> .
+ Variable:N -> .
+ Variable:G -> .
  NumericValue:50
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:H -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:H -> .
  NumericValue:25
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:I -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:I -> .
  NumericValue:10
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- Variable:J -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ Variable:J -> .
  NumericValue:5
- BinaryOperatorMultiply:*(_,_) -> _
- BinaryOperatorPlus:+(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMultiply:*(.,.) -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 350 K=INT(C+.5)
- Variable:K -> _
- Variable:C -> _
+ Variable:K -> .
+ Variable:C -> .
  NumericValue:.5
- BinaryOperatorPlus:+(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 360 IF K=0 THEN 380
- Variable:K -> _
+ Variable:K -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:380
 370 PRINT K;"PENNY(S)"
- Variable:K -> _
+ Variable:K -> .
  CarriageControl:;
  TextValue:"PENNY(S)"
  CarriageControl:NL

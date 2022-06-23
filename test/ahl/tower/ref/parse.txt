@@ -1,12 +1,12 @@
 10 PRINT TAB(33);"TOWERS"
  NumericValue:33
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"TOWERS"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -21,31 +21,31 @@
 110 DIM T(7,3)
  NumericValue:7
  NumericValue:3
- Declaration:T(,) -> _(,)
+ Declaration:T(,) -> .(,)
 120 E=0
- Variable:E -> _
+ Variable:E -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 130 FOR D=1 TO 7
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:D -> _
+ control: Variable:D -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
 140 FOR N=1 TO 3
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:N -> _
+ control: Variable:N -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
 150 T(D,N)=0
- Variable:D -> _
- Variable:N -> _
- Variable:T(_,_) -> _
+ Variable:D -> .
+ Variable:N -> .
+ Variable:T(.,.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 160 NEXT N
- Variable:N -> _
+ Variable:N -> .
 170 NEXT D
- Variable:D -> _
+ Variable:D -> .
 180 PRINT "TOWERS OF HANOI PUZZLE.": PRINT
  TextValue:"TOWERS OF HANOI PUZZLE."
  CarriageControl:NL
@@ -61,36 +61,36 @@
  CarriageControl:NL
  CarriageControl:NL
 215 INPUT "HOW MANY DISKS DO YOU WANT TO MOVE (7 IS MAX)";S
- Variable:S -> _
+ Variable:S -> .
 220 PRINT
  CarriageControl:NL
 230 M=0
- Variable:M -> _
+ Variable:M -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 240 FOR Q=1 TO 7
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:Q -> _
+ control: Variable:Q -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
 250 IF Q=S THEN 350
- Variable:Q -> _
- Variable:S -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:Q -> .
+ Variable:S -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:350
 260 NEXT Q
- Variable:Q -> _
+ Variable:Q -> .
 270 E=E+1
- Variable:E -> _
- Variable:E -> _
+ Variable:E -> .
+ Variable:E -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 280 IF E>2 THEN 310
- Variable:E -> _
+ Variable:E -> .
  NumericValue:2
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:310
 290 PRINT "SORRY, BUT I CAN'T DO THAT JOB FOR YOU.": GOTO 215
  TextValue:"SORRY, BUT I CAN'T DO THAT JOB FOR YOU."
@@ -136,90 +136,90 @@
  CarriageControl:NL
  CarriageControl:NL
 400 Y=7: D=15
- Variable:Y -> _
+ Variable:Y -> .
  NumericValue:7
- AssignmentOperator:= =_ -> _
- Variable:D -> _
+ AssignmentOperator:= =. -> .
+ Variable:D -> .
  NumericValue:15
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 420 FOR X=S TO 1 STEP -1
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:X -> _
- start:   ["Variable:S -> _"]
+ control: Variable:X -> .
+ start:   ["Variable:S -> ."]
  end:     ["NumericValue:1"]
- step:    ["NumericValue:1", "UnaryOperatorMinus:-(_) -> =_"]
+ step:    ["NumericValue:1", "UnaryOperatorMinus:-(.) -> =."]
 430 T(Y,1)=D: D=D-2: Y=Y-1
- Variable:Y -> _
+ Variable:Y -> .
  NumericValue:1
- Variable:T(_,_) -> _
- Variable:D -> _
- AssignmentOperator:= _ -> _
- Variable:D -> _
- Variable:D -> _
+ Variable:T(.,.) -> .
+ Variable:D -> .
+ AssignmentOperator:= . -> .
+ Variable:D -> .
+ Variable:D -> .
  NumericValue:2
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:Y -> _
- Variable:Y -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:Y -> .
+ Variable:Y -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 460 NEXT X
- Variable:X -> _
+ Variable:X -> .
 470 GOSUB 1230
  LineNumber:1230
 480 PRINT "WHICH DISK WOULD YOU LIKE TO MOVE";:E=0
  TextValue:"WHICH DISK WOULD YOU LIKE TO MOVE"
  CarriageControl:;
- Variable:E -> _
+ Variable:E -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 500 INPUT D
- Variable:D -> _
+ Variable:D -> .
 510 IF (D-3)*(D-5)*(D-7)*(D-9)*(D-11)*(D-13)*(D-15)=0 THEN 580
  WARNING: Line exceeds PRETTY width limit 80
- Variable:D -> _
+ Variable:D -> .
  NumericValue:3
- BinaryOperatorMinus:-(_,_) -> _
- Variable:D -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ Variable:D -> .
  NumericValue:5
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:D -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:D -> .
  NumericValue:7
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:D -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:D -> .
  NumericValue:9
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:D -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:D -> .
  NumericValue:11
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:D -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:D -> .
  NumericValue:13
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:D -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:D -> .
  NumericValue:15
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:580
 520 PRINT "ILLEGAL ENTRY... YOU MAY ONLY TYPE 3,5,7,9,11,13, OR 15."
  TextValue:"ILLEGAL ENTRY... YOU MAY ONLY TYPE 3,5,7,9,11,13, OR 15."
  CarriageControl:NL
 530 E=E+1: IF E>1 THEN 560
- Variable:E -> _
- Variable:E -> _
+ Variable:E -> .
+ Variable:E -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:E -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:E -> .
  NumericValue:1
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:560
 550 GOTO 500
  LineNumber:500
@@ -233,47 +233,47 @@
 590 FOR R=1 TO 7
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:R -> _
+ control: Variable:R -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
 600 FOR C=1 TO 3
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:C -> _
+ control: Variable:C -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
 610 IF T(R,C)=D THEN 640
- Variable:R -> _
- Variable:C -> _
- Variable:T(_,_) -> _
- Variable:D -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:R -> .
+ Variable:C -> .
+ Variable:T(.,.) -> .
+ Variable:D -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:640
 620 NEXT C: NEXT R
- Variable:C -> _
- Variable:R -> _
+ Variable:C -> .
+ Variable:R -> .
 640 FOR Q=R TO 1 STEP -1
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:Q -> _
- start:   ["Variable:R -> _"]
+ control: Variable:Q -> .
+ start:   ["Variable:R -> ."]
  end:     ["NumericValue:1"]
- step:    ["NumericValue:1", "UnaryOperatorMinus:-(_) -> =_"]
+ step:    ["NumericValue:1", "UnaryOperatorMinus:-(.) -> =."]
 645 IF T(Q,C)=0 THEN 660
- Variable:Q -> _
- Variable:C -> _
- Variable:T(_,_) -> _
+ Variable:Q -> .
+ Variable:C -> .
+ Variable:T(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:660
 650 IF T(Q,C)<D THEN 680
- Variable:Q -> _
- Variable:C -> _
- Variable:T(_,_) -> _
- Variable:D -> _
- BinaryOperatorLess:<(_,_) -> ?
+ Variable:Q -> .
+ Variable:C -> .
+ Variable:T(.,.) -> .
+ Variable:D -> .
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:680
 660 NEXT Q
- Variable:Q -> _
+ Variable:Q -> .
 670 GOTO 700
  LineNumber:700
 680 PRINT "THAT DISK IS BELOW ANOTHER ONE.  MAKE ANOTHER CHOICE."
@@ -282,36 +282,36 @@
 690 GOTO 480
  LineNumber:480
 700 E=0
- Variable:E -> _
+ Variable:E -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 705 INPUT "PLACE DISK ON WHICH NEEDLE";N
- Variable:N -> _
+ Variable:N -> .
 730 IF (N-1)*(N-2)*(N-3)=0 THEN 800
- Variable:N -> _
+ Variable:N -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
- Variable:N -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ Variable:N -> .
  NumericValue:2
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:N -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:N -> .
  NumericValue:3
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:800
 735 E=E+1
- Variable:E -> _
- Variable:E -> _
+ Variable:E -> .
+ Variable:E -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 740 IF E>1 THEN 780
- Variable:E -> _
+ Variable:E -> .
  NumericValue:1
- BinaryOperatorGreater:>(_,_) -> ?
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:780
 750 PRINT "I'LL ASSUME YOU HIT THE WRONG KEY THIS TIME.  BUT WATCH IT,"
  TextValue:"I'LL ASSUME YOU HIT THE WRONG KEY THIS TIME.  BUT WATCH IT,"
@@ -331,28 +331,28 @@
 800 FOR R=1 TO 7
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:R -> _
+ control: Variable:R -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
 810 IF T(R,N)<>0 THEN 840
- Variable:R -> _
- Variable:N -> _
- Variable:T(_,_) -> _
+ Variable:R -> .
+ Variable:N -> .
+ Variable:T(.,.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:840
 820 NEXT R
- Variable:R -> _
+ Variable:R -> .
 830 GOTO 880
  LineNumber:880
 835 REM *** CHECK IF DISK TO BE PLACED ON A LARGER ONE
  Remark:*** CHECK IF DISK TO BE PLACED ON A LARGER ONE
 840 IF D<T(R,N) THEN 880
- Variable:D -> _
- Variable:R -> _
- Variable:N -> _
- Variable:T(_,_) -> _
- BinaryOperatorLess:<(_,_) -> ?
+ Variable:D -> .
+ Variable:R -> .
+ Variable:N -> .
+ Variable:T(.,.) -> .
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:880
 850 PRINT "YOU CAN'T PLACE A LARGER DISK ON TOP OF A SMALLER ONE,"
  TextValue:"YOU CAN'T PLACE A LARGER DISK ON TOP OF A SMALLER ONE,"
@@ -370,65 +370,65 @@
  WARNING: FOR/NEXT nesting exceeds limit 3
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:V -> _
+ control: Variable:V -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
- control: Variable:W -> _
+ control: Variable:W -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
 900 IF T(V,W)=D THEN 930
- Variable:V -> _
- Variable:W -> _
- Variable:T(_,_) -> _
- Variable:D -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:V -> .
+ Variable:W -> .
+ Variable:T(.,.) -> .
+ Variable:D -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:930
 910 NEXT W: NEXT V
- Variable:W -> _
- Variable:V -> _
+ Variable:W -> .
+ Variable:V -> .
 925 REM *** LOCATE EMPTY SPACE ON NEEDLE N
  Remark:*** LOCATE EMPTY SPACE ON NEEDLE N
 930 FOR U=1 TO 7
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:U -> _
+ control: Variable:U -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
 940 IF T(U,N)<>0 THEN 970
- Variable:U -> _
- Variable:N -> _
- Variable:T(_,_) -> _
+ Variable:U -> .
+ Variable:N -> .
+ Variable:T(.,.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:970
 950 NEXT U
- Variable:U -> _
+ Variable:U -> .
 960 U=7: GOTO 980
- Variable:U -> _
+ Variable:U -> .
  NumericValue:7
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
  LineNumber:980
 965 REM *** MOVE DISK AND SET OLD LOCATION TO 0
  Remark:*** MOVE DISK AND SET OLD LOCATION TO 0
 970 U=U-1
- Variable:U -> _
- Variable:U -> _
+ Variable:U -> .
+ Variable:U -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ AssignmentOperator:= . -> .
 980 T(U,N)=T(V,W): T(V,W)=0
- Variable:U -> _
- Variable:N -> _
- Variable:T(_,_) -> _
- Variable:V -> _
- Variable:W -> _
- Variable:T(_,_) -> _
- AssignmentOperator:= _ -> _
- Variable:V -> _
- Variable:W -> _
- Variable:T(_,_) -> _
+ Variable:U -> .
+ Variable:N -> .
+ Variable:T(.,.) -> .
+ Variable:V -> .
+ Variable:W -> .
+ Variable:T(.,.) -> .
+ AssignmentOperator:= . -> .
+ Variable:V -> .
+ Variable:W -> .
+ Variable:T(.,.) -> .
  NumericValue:0
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 995 REM *** PRINT OUT CURRENT STATUS
  Remark:*** PRINT OUT CURRENT STATUS
 1000 GOSUB 1230
@@ -436,38 +436,38 @@
 1018 REM *** CHECK IF DONE
  Remark:*** CHECK IF DONE
 1020 M=M+1
- Variable:M -> _
- Variable:M -> _
+ Variable:M -> .
+ Variable:M -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1030 FOR R=1 TO 7: FOR C=1 TO 2
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
  WARNING: FORNEXT length exceeds limit 40
  WARNING: FOR/NEXT nesting exceeds limit 3
- control: Variable:R -> _
+ control: Variable:R -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
- control: Variable:C -> _
+ control: Variable:C -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:2"]
 1050 IF T(R,C)<>0 THEN 1090
- Variable:R -> _
- Variable:C -> _
- Variable:T(_,_) -> _
+ Variable:R -> .
+ Variable:C -> .
+ Variable:T(.,.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:1090
 1060 NEXT C: NEXT R
- Variable:C -> _
- Variable:R -> _
+ Variable:C -> .
+ Variable:R -> .
 1080 GOTO 1120
  LineNumber:1120
 1090 IF M<=128 THEN 480
- Variable:M -> _
+ Variable:M -> .
  NumericValue:128
- BinaryOperatorLessEqual:<=(_,_) -> ?
+ BinaryOperatorLessEqual:<=(.,.) -> ?
  LineNumber:480
 1100 PRINT "SORRY, BUT I HAVE ORDERS TO STOP IF YOU MAKE MORE THAN"
  TextValue:"SORRY, BUT I HAVE ORDERS TO STOP IF YOU MAKE MORE THAN"
@@ -478,13 +478,13 @@
  CarriageControl:NL
  
 1120 IF M<>2^S-1 THEN 1140
- Variable:M -> _
+ Variable:M -> .
  NumericValue:2
- Variable:S -> _
- BinaryOperatorPower:^(_,_) -> _
+ Variable:S -> .
+ BinaryOperatorPower:^(.,.) -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:1140
 1130 PRINT:PRINT "CONGRATULATIONS!!":PRINT
  CarriageControl:NL
@@ -494,7 +494,7 @@
 1140 PRINT "YOU HAVE PERFORMED THE TASK IN";M;"MOVES."
  TextValue:"YOU HAVE PERFORMED THE TASK IN"
  CarriageControl:;
- Variable:M -> _
+ Variable:M -> .
  CarriageControl:;
  TextValue:"MOVES."
  CarriageControl:NL
@@ -522,64 +522,64 @@
 1230 REM *** PRINT SUBROUTINE
  Remark:*** PRINT SUBROUTINE
 1240 FOR K=1 TO 7
- control: Variable:K -> _
+ control: Variable:K -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:7"]
 1250 Z=10
- Variable:Z -> _
+ Variable:Z -> .
  NumericValue:10
- AssignmentOperator:= =_ -> _
+ AssignmentOperator:= =. -> .
 1260 FOR J=1 TO 3
- control: Variable:J -> _
+ control: Variable:J -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:3"]
 1270 IF T(K,J)=0 THEN 1330
- Variable:K -> _
- Variable:J -> _
- Variable:T(_,_) -> _
+ Variable:K -> .
+ Variable:J -> .
+ Variable:T(.,.) -> .
  NumericValue:0
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:1330
 1280 PRINT TAB(Z-INT(T(K,J)/2));
- Variable:Z -> _
- Variable:K -> _
- Variable:J -> _
- Variable:T(_,_) -> _
+ Variable:Z -> .
+ Variable:K -> .
+ Variable:J -> .
+ Variable:T(.,.) -> .
  NumericValue:2
- BinaryOperatorDivide:/(_,_) -> _
- FunctionInt:INT(_) -> _
- BinaryOperatorMinus:-(_,_) -> _
- FunctionTab:TAB(_) -> $
+ BinaryOperatorDivide:/(.,.) -> .
+ FunctionInt:INT(.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
 1290 FOR V=1 TO T(K,J)
- control: Variable:V -> _
+ control: Variable:V -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:K -> _", "Variable:J -> _", "Variable:T(_,_) -> _"]
+ end:     ["Variable:K -> .", "Variable:J -> .", "Variable:T(.,.) -> ."]
 1300 PRINT "*";
  TextValue:"*"
  CarriageControl:;
 1310 NEXT V
- Variable:V -> _
+ Variable:V -> .
 1320 GOTO 1340
  LineNumber:1340
 1330 PRINT TAB(Z);"*";
- Variable:Z -> _
- FunctionTab:TAB(_) -> $
+ Variable:Z -> .
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"*"
  CarriageControl:;
 1340 Z=Z+21
- Variable:Z -> _
- Variable:Z -> _
+ Variable:Z -> .
+ Variable:Z -> .
  NumericValue:21
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
 1350 NEXT J
- Variable:J -> _
+ Variable:J -> .
 1360 PRINT
  CarriageControl:NL
 1370 NEXT K
- Variable:K -> _
+ Variable:K -> .
 1380 RETURN
  
 1390 PRINT: PRINT "THANKS FOR THE GAME!": PRINT: END

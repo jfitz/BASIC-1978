@@ -1,12 +1,12 @@
 10 PRINT TAB(21);"GAME OF ROCK, SCISSORS, PAPER"
  NumericValue:21
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"GAME OF ROCK, SCISSORS, PAPER"
  CarriageControl:NL
 20 PRINT TAB(15);"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  NumericValue:15
- FunctionTab:TAB(_) -> $
+ FunctionTab:TAB(.) -> $
  CarriageControl:;
  TextValue:"CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY"
  CarriageControl:NL
@@ -15,55 +15,55 @@
  CarriageControl:NL
  CarriageControl:NL
 30 INPUT "HOW MANY GAMES";Q
- Variable:Q -> _
+ Variable:Q -> .
 40 IF Q<11 THEN 60
- Variable:Q -> _
+ Variable:Q -> .
  NumericValue:11
- BinaryOperatorLess:<(_,_) -> ?
+ BinaryOperatorLess:<(.,.) -> ?
  LineNumber:60
 50 PRINT "SORRY, BUT WE AREN'T ALLOWED TO PLAY THAT MANY.": GOTO 30
  TextValue:"SORRY, BUT WE AREN'T ALLOWED TO PLAY THAT MANY."
  CarriageControl:NL
  LineNumber:30
 60 FOR G=1 TO Q
- control: Variable:G -> _
+ control: Variable:G -> .
  start:   ["NumericValue:1"]
- end:     ["Variable:Q -> _"]
+ end:     ["Variable:Q -> ."]
 70 PRINT: PRINT "GAME NUMBER";G
  CarriageControl:NL
  TextValue:"GAME NUMBER"
  CarriageControl:;
- Variable:G -> _
+ Variable:G -> .
  CarriageControl:NL
 80 X=INT(RND(1)*3+1)
- Variable:X -> _
+ Variable:X -> .
  NumericValue:1
- FunctionRnd:RND(_) -> _
+ FunctionRnd:RND(.) -> .
  NumericValue:3
- BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- FunctionInt:INT(_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ FunctionInt:INT(.) -> .
+ AssignmentOperator:= . -> .
 90 PRINT "3=ROCK...2=SCISSORS...1=PAPER"
  TextValue:"3=ROCK...2=SCISSORS...1=PAPER"
  CarriageControl:NL
 100 INPUT "1...2...3...WHAT'S YOUR CHOICE";K
- Variable:K -> _
+ Variable:K -> .
 110 IF (K-1)*(K-2)*(K-3)<>0 THEN PRINT "INVALID.": GOTO 90
- Variable:K -> _
+ Variable:K -> .
  NumericValue:1
- BinaryOperatorMinus:-(_,_) -> _
- Variable:K -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ Variable:K -> .
  NumericValue:2
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
- Variable:K -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
+ Variable:K -> .
  NumericValue:3
- BinaryOperatorMinus:-(_,_) -> _
- BinaryOperatorMultiply:*(_,_) -> _
+ BinaryOperatorMinus:-(.,.) -> .
+ BinaryOperatorMultiply:*(.,.) -> .
  NumericValue:0
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  TextValue:"INVALID."
  CarriageControl:NL
  LineNumber:90
@@ -71,7 +71,7 @@
  TextValue:"THIS IS MY CHOICE..."
  CarriageControl:NL
 130 ON X GOTO 140,150,160
- Variable:X -> _
+ Variable:X -> .
  LineNumber:140
  LineNumber:150
  LineNumber:160
@@ -87,50 +87,50 @@
  TextValue:"...ROCK"
  CarriageControl:NL
 170 IF X=K THEN 250
- Variable:X -> _
- Variable:K -> _
- BinaryOperatorEqual:=(_,_) -> ?
+ Variable:X -> .
+ Variable:K -> .
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:250
 180 IF X>K THEN 230
- Variable:X -> _
- Variable:K -> _
- BinaryOperatorGreater:>(_,_) -> ?
+ Variable:X -> .
+ Variable:K -> .
+ BinaryOperatorGreater:>(.,.) -> ?
  LineNumber:230
 190 IF X=1 THEN 210
- Variable:X -> _
+ Variable:X -> .
  NumericValue:1
- BinaryOperatorEqual:=(_,_) -> ?
+ BinaryOperatorEqual:=(.,.) -> ?
  LineNumber:210
 200 PRINT "YOU WIN!!!":H=H+1: GOTO 260
  TextValue:"YOU WIN!!!"
  CarriageControl:NL
- Variable:H -> _
- Variable:H -> _
+ Variable:H -> .
+ Variable:H -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
  LineNumber:260
 210 IF K<>3 THEN 200
- Variable:K -> _
+ Variable:K -> .
  NumericValue:3
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  LineNumber:200
 220 PRINT "WOW!  I WIN!!!":C=C+1:GOTO 260
  TextValue:"WOW!  I WIN!!!"
  CarriageControl:NL
- Variable:C -> _
- Variable:C -> _
+ Variable:C -> .
+ Variable:C -> .
  NumericValue:1
- BinaryOperatorPlus:+(_,_) -> _
- AssignmentOperator:= _ -> _
+ BinaryOperatorPlus:+(.,.) -> .
+ AssignmentOperator:= . -> .
  LineNumber:260
 230 IF K<>1 OR X<>3 THEN 220
- Variable:K -> _
+ Variable:K -> .
  NumericValue:1
- BinaryOperatorNotEqual:<>(_,_) -> ?
- Variable:X -> _
+ BinaryOperatorNotEqual:<>(.,.) -> ?
+ Variable:X -> .
  NumericValue:3
- BinaryOperatorNotEqual:<>(_,_) -> ?
+ BinaryOperatorNotEqual:<>(.,.) -> ?
  BinaryOperatorOr:OR(?,?) -> ?
  LineNumber:220
 240 GOTO 200
@@ -139,7 +139,7 @@
  TextValue:"TIE GAME.  NO WINNER."
  CarriageControl:NL
 260 NEXT G
- Variable:G -> _
+ Variable:G -> .
 270 PRINT: PRINT "HERE IS THE FINAL GAME SCORE:"
  CarriageControl:NL
  TextValue:"HERE IS THE FINAL GAME SCORE:"
@@ -147,25 +147,25 @@
 280 PRINT "I HAVE WON";C;"GAME(S)."
  TextValue:"I HAVE WON"
  CarriageControl:;
- Variable:C -> _
+ Variable:C -> .
  CarriageControl:;
  TextValue:"GAME(S)."
  CarriageControl:NL
 290 PRINT "YOU HAVE WON";H;"GAME(S)."
  TextValue:"YOU HAVE WON"
  CarriageControl:;
- Variable:H -> _
+ Variable:H -> .
  CarriageControl:;
  TextValue:"GAME(S)."
  CarriageControl:NL
 300 PRINT "AND";Q-(C+H);"GAME(S) ENDED IN A TIE."
  TextValue:"AND"
  CarriageControl:;
- Variable:Q -> _
- Variable:C -> _
- Variable:H -> _
- BinaryOperatorPlus:+(_,_) -> _
- BinaryOperatorMinus:-(_,_) -> _
+ Variable:Q -> .
+ Variable:C -> .
+ Variable:H -> .
+ BinaryOperatorPlus:+(.,.) -> .
+ BinaryOperatorMinus:-(.,.) -> .
  CarriageControl:;
  TextValue:"GAME(S) ENDED IN A TIE."
  CarriageControl:NL
