@@ -160,7 +160,7 @@ then
     if [ -e "$TESTBED/$TESTNAME/stdin.txt" ]
     then
 	cd "$TESTBED/$TESTNAME"
-	ruby basic.rb --profile $OPTIONS --run $TESTNAME.bas --print-width 0 --echo-input <stdin.txt >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
+	ruby basic.rb --profile $OPTIONS --run $TESTNAME.bas --print-width 0 <stdin.txt >stdout.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
 	cd ../..
     else
 	cd "$TESTBED/$TESTNAME"
@@ -211,7 +211,7 @@ then
     if [ -e "$TESTBED/$TESTNAME/stdin.txt" ]
     then
 	cd "$TESTBED/$TESTNAME"
-	ruby basic.rb $OPTIONS --run $TESTNAME.bas --print-width 0 --trace --echo-input <stdin.txt >trace.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
+	ruby basic.rb $OPTIONS --run $TESTNAME.bas --print-width 0 --trace <stdin.txt >trace.txt $GROUP_OPTIONS $TEST_OPTIONS $GROUP_RUN_OPTIONS $RUN_OPTIONS
 	cd ../..
     else
 	cd "$TESTBED/$TESTNAME"
