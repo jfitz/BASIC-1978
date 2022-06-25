@@ -1423,49 +1423,12 @@ end
 class XrefEntry
   attr_reader :variable, :sigils, :is_ref
 
-  def self.make_sigils(arguments)
-    return nil if arguments.nil?
-
-    sigil_chars = {
-      numeric: '.',
-      integer: '%',
-      string: '$',
-      boolean: '?'
-    }
-
-    sigils = []
-
-    arguments.each do |arg|
-      content_type = :empty
-      # TODO: I think we can remove check for Array
-      if arg.class.to_s == 'Array'
-        # an array is a parsed expression
-        unless arg.empty?
-          a0 = arg[-1]
-          content_type = a0.content_type
-        end
-      else
-        content_type = arg.content_type
-      end
-
-      sigils << sigil_chars[content_type]
-    end
-
-    sigils
-  end
-
-  def self.format_sigils(sigils)
-    return '' if sigils.nil?
-
-    "(#{sigils.join(',')})"
-  end
-
   def initialize(variable, sigils, is_ref)
     @variable = variable
     @sigils = sigils
     @is_ref = is_ref
 
-    @signature = XrefEntry.format_sigils(@sigils)
+    @signature = Sigils.format_sigils(@sigils)
   end
 
   def eql?(other)
@@ -2037,7 +2000,7 @@ class Expression
 
         is_ref = element.reference?
 
-        sigils = XrefEntry.make_sigils(arguments)
+        sigils = Sigils.make_sigils_1(arguments)
         vars << XrefEntry.new(element.to_s, sigils, is_ref)
       end
 
@@ -2561,7 +2524,7 @@ class UserFunctionDefinition
     user_function_prototype = UserFunctionPrototype.new(parts[0])
     @name = user_function_prototype.name
     @arguments = user_function_prototype.arguments
-    @sigils = XrefEntry.make_sigils(@arguments)
+    @sigils = Sigils.make_sigils_1(@arguments)
     @signature = UserFunctionSignature.new(@name, @sigils)
     @expression = nil
     @expression = ValueExpressionSet.new(parts[2], :scalar) if parts.size == 3
