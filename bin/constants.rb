@@ -1755,7 +1755,7 @@ end
 # Text constants
 class TextValue < AbstractValue
   def self.accept?(token)
-    classes = %w[TextLiteralToken String]
+    classes = %w[QuotedTextLiteralToken BareTextLiteralToken TextSymbolToken String]
     classes.include?(token.class.to_s)
   end
 
@@ -1789,7 +1789,8 @@ class TextValue < AbstractValue
 
     @value = nil
     @value = text if text.class.to_s == 'String'
-    @value = text.value if text.class.to_s == 'TextLiteralToken'
+    @value = text.value if text.class.to_s == 'QuotedTextLiteralToken'
+    @value = text.value if text.class.to_s == 'BareTextLiteralToken'
 
     raise BASICSyntaxError, "'#{text}' is not a text constant" if @value.nil?
 
