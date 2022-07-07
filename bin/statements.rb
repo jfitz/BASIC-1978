@@ -246,7 +246,7 @@ class StatementFactory
   def tokenize(text)
     invalid_tokenbuilder = InvalidTokenBuilder.new
     tokenizer = Tokenizer.new(@tokenbuilders, invalid_tokenbuilder)
-    tokenizer.tokenize(text)
+    tokenizer.tokenize_line(text)
   end
 end
 
@@ -1724,7 +1724,7 @@ module PrintFunctions
       NumericFormatTokenBuilder.new
     ]
     tokenizer = Tokenizer.new(tokenbuilders, nil)
-    tokenizer.tokenize(format_text)
+    tokenizer.tokenize_line(format_text)
   end
 
   def dump
