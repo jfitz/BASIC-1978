@@ -1155,8 +1155,7 @@ class Interpreter
       default_type = variable.content_type
       default_value = NumericValue.new(0)
 
-      default_value = TextValue.new('') if
-        default_type == :string
+      default_value = TextValue.new('') if default_type == :string
 
       unless @variables.key?(var)
         if $options['require_initialized'].value

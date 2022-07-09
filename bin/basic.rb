@@ -23,35 +23,31 @@ require_relative 'program'
 class Option
   attr_reader :types
 
-  def initialize(types, defs, value)
+  def initialize(types, defs, v)
     @types = types
     @defs = defs
-    check_value(value)
-    @values = [value]
+    check_value(v)
+    @values = [v]
   end
 
-  def set(value)
+  def set(v)
     num_types = %w[Fixnum Integer]
-    if @defs[:type] == :bool && num_types.include?(value.class.to_s)
-      value = value != 0
-    end
+    v = v != 0 if @defs[:type] == :bool && num_types.include?(v.class.to_s)
 
-    check_value(value)
-    @values = [value]
+    check_value(v)
+    @values = [v]
   end
 
   def value
     @values[-1]
   end
 
-  def push(value)
+  def push(v)
     num_types = %w[Fixnum Integer]
-    if @defs[:type] == :bool && num_types.include?(value.class.to_s)
-      value = value != 0
-    end
+    v = v != 0 if @defs[:type] == :bool && num_types.include?(v.class.to_s)
 
-    check_value(value)
-    @values.push(value)
+    check_value(v)
+    @values.push(v)
   end
 
   def pop
@@ -76,66 +72,65 @@ class Option
 
   private
 
-  def check_value(value)
-    check_value_and_type(value)
+  def check_value(v)
+    check_value_and_type(v)
   rescue BASICSyntaxError => e
-    raise e unless @defs.key?(:off) && value == @defs[:off]
+    raise e unless @defs.key?(:off) && v == @defs[:off]
   end
 
-  def check_value_and_type(value)
-    type = @defs[:type]
-    case type
+  def check_value_and_type(v)
+    case @defs[:type]
     when :bool
       legals = %w[TrueClass FalseClass]
 
-      raise(BASICSyntaxError, "Invalid type #{value.class} for boolean") unless
-        legals.include?(value.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{v.class} for boolean") unless
+        legals.include?(v.class.to_s)
     when :int
       legals = %w[Fixnum Integer]
 
-      raise(BASICSyntaxError, "Invalid type #{value.class} for integer") unless
-        legals.include?(value.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{v.class} for integer") unless
+        legals.include?(v.class.to_s)
 
       min = @defs[:min]
-      if !min.nil? && value < min
-        raise(BASICSyntaxError, "Value #{value} below minimum #{min}")
+      if !min.nil? && v < min
+        raise(BASICSyntaxError, "Value #{v} below minimum #{min}")
       end
 
       max = @defs[:max]
-      if !max.nil? && value > max
-        raise(BASICSyntaxError, "Value #{value} above maximum #{max}")
+      if !max.nil? && v > max
+        raise(BASICSyntaxError, "Value #{v} above maximum #{max}")
       end
     when :float
       legals = %w[Fixnum Integer Float Rational]
 
-      raise(BASICSyntaxError, "Invalid type #{value.class} for float") unless
-        legals.include?(value.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{v.class} for float") unless
+        legals.include?(v.class.to_s)
 
       min = @defs[:min]
-      if !min.nil? && value < min
-        raise(BASICSyntaxError, "Value #{value} below minimum #{min}")
+      if !min.nil? && v < min
+        raise(BASICSyntaxError, "Value #{v} below minimum #{min}")
       end
 
       max = @defs[:max]
-      if !max.nil? && value > max
-        raise(BASICSyntaxError, "Value #{value} above maximum #{max}")
+      if !max.nil? && v > max
+        raise(BASICSyntaxError, "Value #{v} above maximum #{max}")
       end
     when :string
       legals = %(String)
 
-      raise(BASICSyntaxError, "Invalid type #{value.class} for string") unless
-        legals.include?(value.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{v.class} for string") unless
+        legals.include?(v.class.to_s)
     when :list
       legal_types = %(String)
 
-      raise(BASICSyntaxError, "Invalid type #{value.class} for list") unless
-        legal_types.include?(value.class.to_s)
+      raise(BASICSyntaxError, "Invalid type #{v.class} for list") unless
+        legal_types.include?(v.class.to_s)
 
       legal_values = @defs[:values]
 
-      unless legal_values.include?(value.to_s)
+      unless legal_values.include?(v.to_s)
         raise(BASICSyntaxError,
-              "Invalid value #{value} for list #{legal_values}")
+              "Invalid value #{v} for list #{legal_values}")
       end
     else
       raise(BASICSyntaxError, 'Unknown value type')
@@ -249,12 +244,11 @@ class Shell
       kwd = args[0].to_s
       kwd_d = kwd.downcase
 
-      if $options.key?(kwd_d)
-        value = $options[kwd_d].to_s.upcase
-        lines << ("OPTION #{kwd} #{value}") if echo_set
-      else
-        raise BASICCommandError, "Unknown option #{kwd}"
-      end
+      raise BASICCommandError, "Unknown option #{kwd}" unless
+        $options.key?(kwd_d)
+
+      value = $options[kwd_d].to_s.upcase
+      lines << ("OPTION #{kwd} #{value}")
     elsif args.size == 2 && args[0].keyword?
       kwd = args[0].to_s
       kwd_d = kwd.downcase
@@ -371,12 +365,14 @@ class Shell
       save_file(filename, lines)
     when 'LIST'
       texts = @interpreter.program_list(args, false)
+
       texts.each { |text| @console_io.print_line(text) }
       texts = @interpreter.program_errors
       texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
     when 'PRETTY'
       pretty_multiline = $options['pretty_multiline'].value
+
       texts = @interpreter.program_pretty(args, pretty_multiline)
       texts.each { |text| @console_io.print_line(text) }
       texts = @interpreter.program_errors
@@ -407,6 +403,7 @@ class Shell
       end
     when 'CROSSREF'
       @interpreter.program_optimize
+
       texts = @interpreter.program_crossref
       texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
@@ -414,12 +411,14 @@ class Shell
       @interpreter.dump_dims
     when 'PARSE'
       texts = @interpreter.program_parse(args)
+
       texts.each { |text| @console_io.print_line(text) }
       texts = @interpreter.program_errors
       texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
     when 'ANALYZE'
       @interpreter.program_optimize
+
       texts = @interpreter.program_analyze
       texts.each { |text| @console_io.print_line(text) }
       @console_io.newline
@@ -572,7 +571,7 @@ def make_command_tokenbuilders(quotes, long_names)
     BACK_TAB BASE
     CACHE_CONST_EXPR CHR_ALLOW_ALL
     DEFAULT_PROMPT DETECT_INFINITE_LOOP
-    ECHO EXTEND_IF
+    EXTEND_IF
     FIELD_SEP FORGET_FORNEXT
     HEADING
     IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON INT_BITWISE INT_FLOOR

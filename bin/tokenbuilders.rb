@@ -29,10 +29,12 @@ class ListTokenBuilder
   def try(text)
     best_candidate = ''
     best_count = 0
+
     if !text.empty? && text[0] != ' '
       candidate = ''
       i = 0
       accepted = true
+
       while i < text.size && accepted
         c = text[i]
         accepted = accept?(candidate, c)
@@ -40,6 +42,7 @@ class ListTokenBuilder
 
         candidate += c
         i += 1
+
         if @legals.include?(candidate)
           best_candidate = candidate
           best_count = i
@@ -48,12 +51,13 @@ class ListTokenBuilder
     end
 
     @count = 0
+
     unless best_candidate.empty?
       @token = best_candidate
       @count = best_count
     end
 
-    !@count.zero?
+    @count.positive?
   end
 
   def tokens
@@ -87,10 +91,12 @@ class RemarkTokenBuilder
   def try(text)
     best_candidate = ''
     best_count = 0
+
     if !text.empty? && text[0] != ' '
       candidate = ''
       i = 0
       accepted = true
+
       while i < text.size && accepted
         c = text[i]
         accepted = accept?(candidate, c)
@@ -98,6 +104,7 @@ class RemarkTokenBuilder
 
         candidate += c
         i += 1
+
         if @legals.include?(candidate)
           best_candidate = candidate
           best_count = i
@@ -106,6 +113,7 @@ class RemarkTokenBuilder
     end
 
     @count = 0
+
     unless best_candidate.empty?
       @keyword_token = best_candidate
       remark = text[best_count..-1]
@@ -113,7 +121,7 @@ class RemarkTokenBuilder
       @count = text.size
     end
 
-    !@count.zero?
+    @count.positive?
   end
 
   def tokens
@@ -142,6 +150,7 @@ end
 class WhitespaceTokenBuilder
   def try(text)
     @token = ''
+
     /\A\s+/.match(text) { |m| @token = m[0] }
   end
 
@@ -184,8 +193,10 @@ class TextTokenBuilder
 
   def try(text)
     @token = ''
+
     candidate = ''
     i = 0
+
     if !text.empty? && @quotes.include?(text[0])
       until i == text.size ||
             (candidate.size >= 2 && candidate[-1] == candidate[0])
@@ -272,7 +283,6 @@ class NumberTokenBuilder
 
     # check that string conforms to one of these
     regexes = [
-      /#./,
       /\A\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
       /\A\d+\.(\{[A-Za-z0-9\+\- _]*\})?\z/,
       /\A\d+E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
@@ -287,7 +297,8 @@ class NumberTokenBuilder
 
     @count = 0
     @count = i unless @token.empty?
-    !@count.zero?
+
+    @count.positive?
   end
 
   def tokens
@@ -360,7 +371,8 @@ class IntegerTokenBuilder
 
     @count = 0
     @count = i unless @token.empty?
-    !@count.zero?
+
+    @count.positive?
   end
 
   def tokens
@@ -413,7 +425,8 @@ class NumericSymbolTokenBuilder
 
     @count = 0
     @count = i unless @token.empty?
-    !@count.zero?
+
+    @count.positive?
   end
 
   def tokens
@@ -463,7 +476,8 @@ class VariableTokenBuilder
 
     @count = 0
     @count = i unless @token.empty?
-    !@count.zero?
+
+    @count.positive?
   end
 
   def tokens
@@ -564,9 +578,11 @@ class NumericFormatTokenBuilder
     candidate = ''
     i = 0
     accepted = true
+
     while i < text.size && accepted
       c = text[i]
       accepted = accept?(candidate, c)
+
       if accepted
         candidate += c
         i += 1
