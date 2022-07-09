@@ -158,10 +158,12 @@ class Shell
 
     until @done
       prompt = $options['prompt'].value
+
       if need_prompt
         @console_io.print_item(prompt)
         @console_io.newline if prompt.size > 1
       end
+
       cmd = @console_io.read_line
       need_prompt = process_line_keyboard(cmd)
       need_prompt = true if prompt.size == 1
@@ -534,6 +536,32 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
   tokenbuilders << WhitespaceTokenBuilder.new
 end
 
+def make_interpreter_data_tokenbuilders(quotes, statement_separators,
+                                        comment_leads)
+  tokenbuilders = []
+
+  tokenbuilders << CommentTokenBuilder.new(comment_leads)
+
+  unless statement_separators.empty?
+    tokenbuilders <<
+      ListTokenBuilder.new(statement_separators, StatementSeparatorToken)
+  end
+
+  # operators for negative numeric values
+  un_ops = UnaryOperator.operators
+  tokenbuilders << ListTokenBuilder.new(un_ops, OperatorToken)
+
+  tokenbuilders << ListTokenBuilder.new([',', ';'], ParamSeparatorToken)
+
+  tokenbuilders << TextTokenBuilder.new(quotes)
+  tokenbuilders << NumberTokenBuilder.new
+  tokenbuilders << NumericSymbolTokenBuilder.new
+  tokenbuilders << IntegerTokenBuilder.new
+
+  tokenbuilders << ListTokenBuilder.new(%w[TRUE FALSE], BooleanLiteralToken)
+  tokenbuilders << WhitespaceTokenBuilder.new
+end
+
 def make_command_tokenbuilders(quotes, long_names)
   tokenbuilders = []
 
@@ -892,11 +920,15 @@ tokenbuilders =
   make_interpreter_tokenbuilders($options, quotes, statement_seps,
                                  comment_leads)
 
+data_tokenbuilders =
+  make_interpreter_data_tokenbuilders(quotes, statement_seps,
+                                      comment_leads)
+
 interpreter = Interpreter.new(console_io)
 interpreter.set_default_args('RND', NumericValue.new(1))
 interpreter.set_default_args('RND%', IntegerValue.new(100))
 interpreter.set_default_args('RND$', NumericValue.new(6))
-program = Program.new(console_io, tokenbuilders)
+program = Program.new(console_io, tokenbuilders, data_tokenbuilders)
 interpreter.program = program
 
 if $options['heading'].value
