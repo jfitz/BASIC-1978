@@ -14,9 +14,9 @@ module Reader
 
   def make_tokenbuilders(quotes)
     tokenbuilders = []
-    tokenbuilders << InputTextTokenBuilder.new(quotes)
+    tokenbuilders << QuotedTextTokenBuilder.new(quotes)
     tokenbuilders << InputNumberTokenBuilder.new
-    tokenbuilders << InputBareTextTokenBuilder.new
+    tokenbuilders << BareTextTokenBuilder.new
     tokenbuilders << ListTokenBuilder.new([',', ';'], ParamSeparatorToken)
     tokenbuilders << WhitespaceTokenBuilder.new
   end

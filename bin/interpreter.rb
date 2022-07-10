@@ -206,7 +206,7 @@ class Interpreter
     tokenbuilders <<
       ListTokenBuilder.new(user_function_names, UserFunctionToken)
 
-    tokenbuilders << TextTokenBuilder.new(@quotes)
+    tokenbuilders << QuotedTextTokenBuilder.new(@quotes)
     tokenbuilders << NumberTokenBuilder.new
     tokenbuilders << IntegerTokenBuilder.new
 

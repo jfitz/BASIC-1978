@@ -524,7 +524,7 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
   tokenbuilders <<
     ListTokenBuilder.new(FunctionFactory.user_function_names, UserFunctionToken)
 
-  tokenbuilders << TextTokenBuilder.new(quotes)
+  tokenbuilders << QuotedTextTokenBuilder.new(quotes)
   tokenbuilders << NumberTokenBuilder.new
   tokenbuilders << NumericSymbolTokenBuilder.new
   tokenbuilders << IntegerTokenBuilder.new
@@ -552,7 +552,7 @@ def make_interpreter_data_tokenbuilders(quotes, statement_separators,
 
   tokenbuilders << ListTokenBuilder.new([',', ';'], ParamSeparatorToken)
 
-  tokenbuilders << TextTokenBuilder.new(quotes)
+  tokenbuilders << QuotedTextTokenBuilder.new(quotes)
   tokenbuilders << NumberTokenBuilder.new
   tokenbuilders << NumericSymbolTokenBuilder.new
   tokenbuilders << IntegerTokenBuilder.new
@@ -605,8 +605,7 @@ def make_command_tokenbuilders(quotes, long_names)
   tokenbuilders <<
     ListTokenBuilder.new(FunctionFactory.user_function_names, UserFunctionToken)
 
-  tokenbuilders << TextTokenBuilder.new(quotes)
-
+  tokenbuilders << QuotedTextTokenBuilder.new(quotes)
   tokenbuilders << NumberTokenBuilder.new
   tokenbuilders << VariableTokenBuilder.new(long_names)
   tokenbuilders << ListTokenBuilder.new(%w[TRUE FALSE], BooleanLiteralToken)

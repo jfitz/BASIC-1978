@@ -184,9 +184,7 @@ class CommentTokenBuilder
 end
 
 # token reader for text constants
-class TextTokenBuilder
-  attr_reader :count
-
+class QuotedTextTokenBuilder
   def initialize(quotes)
     @quotes = quotes
   end
@@ -194,25 +192,25 @@ class TextTokenBuilder
   def try(text)
     @token = ''
 
-    candidate = ''
-    i = 0
+    /\A"[^"]*"/.match(text) { |m| @token = m[0] } if @quotes.include?('"')
 
-    if !text.empty? && @quotes.include?(text[0])
-      until i == text.size ||
-            (candidate.size >= 2 && candidate[-1] == candidate[0])
-        c = text[i]
-        candidate += c
-        i += 1
+    /\A'[^']*'/.match(text) { |m| @token = m[0] } if @quotes.include?("'")
+
+    # allow for text literal without closing quote
+    # add the proper closing quote
+    if @token.empty?
+      if @quotes.include?('"')
+        /\A"[^"]*/.match(text) { |m| @token = m[0] + '"' }
+      end
+
+      if @quotes.include?("'")
+        /\A'[^']*/.match(text) { |m| @token = m[0] + "'" }
       end
     end
+  end
 
-    unless candidate.empty?
-      lead_quote = text[0]
-      candidate += lead_quote if candidate.count(lead_quote) == 1
-      @token = candidate if candidate.count(lead_quote) == 2
-    end
-
-    @count = @token.size
+  def count
+    @token.size
   end
 
   def tokens
@@ -533,31 +531,8 @@ class VariableTokenBuilder
   end
 end
 
-# token reader for text constants in input channels (READ, INPUT)
-class InputTextTokenBuilder
-  def initialize(quotes)
-    @quotes = quotes
-  end
-
-  def try(text)
-    @token = ''
-
-    /\A"[^"]*"/.match(text) { |m| @token = m[0] } if @quotes.include?('"')
-
-    /\A'[^']*'/.match(text) { |m| @token = m[0] } if @quotes.include?("'")
-  end
-
-  def count
-    @token.size
-  end
-
-  def tokens
-    [QuotedTextLiteralToken.new(@token)]
-  end
-end
-
 # token reader for text constants
-class InputBareTextTokenBuilder
+class BareTextTokenBuilder
   def try(text)
     @token = ''
     /\A[^,; ]*/.match(text) { |m| @token = m[0] }
