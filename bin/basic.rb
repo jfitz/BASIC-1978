@@ -558,6 +558,7 @@ def make_interpreter_data_tokenbuilders(quotes, statement_separators,
   tokenbuilders << IntegerTokenBuilder.new
 
   tokenbuilders << ListTokenBuilder.new(%w[TRUE FALSE], BooleanLiteralToken)
+  tokenbuilders << BareTextTokenBuilder.new
   tokenbuilders << WhitespaceTokenBuilder.new
 end
 

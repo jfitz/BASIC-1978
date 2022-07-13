@@ -534,8 +534,23 @@ end
 # token reader for text constants
 class BareTextTokenBuilder
   def try(text)
-    @token = ''
-    /\A[^,; ]*/.match(text) { |m| @token = m[0] }
+    token = ''
+
+    # don't use \w because we don't want underscores
+    /\A[A-Za-z0-9][A-Za-z0-9\s]*/.match(text) { |m| token = m[0] }
+
+    @token = token.rstrip
+
+    # if it could be a numeric value, don't take it
+    regexes = [
+      /\A\d+\z/,
+      /\A\d+E\d+\z/
+    ]
+
+    number_token = false
+    regexes.each { |regex| regex.match(@token) { |_| number_token = true } }
+
+    @token = '' if number_token
   end
 
   def count

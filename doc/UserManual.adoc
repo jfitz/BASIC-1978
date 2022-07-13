@@ -874,13 +874,17 @@ Syntax:	DATA value list
 
 Values must be numeric separated by commas.
 Expressions may be numeric or string, but must match the variable that will be used in the READ statement.
-Text literals must be enclosed in quotes.
+Text literals may be enclosed in quotes or 'bare' (without quotes).
+Bare text literals may contain alphabetic characters, numeric characters, and spaces.
+Leading and trailing spaces are not included in the text literal.
+Text literals that contain punctuation must be enclosed in quotes.
 
 Examples:
 
 	390 DATA 3, 150, 175, 180
 	400 DATA 2
 	410 DATA "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"
+	420 DATA JANUARY, FEBRUARY, MARCH
 
 The DATA statement is processed before the program runs, and processed only once.
 Thus, it may appear at the end of the program, and does not have to appear before a READ statement.
@@ -893,7 +897,7 @@ BASIC-1978 parses the values as numeric expressions, due to its parsing of unary
 The value '-1' is parsed as a unary minus and the value 1, which must be evaluated as an expression.
 This behavior of BASIC-1978 allows for any expression in DATA statements, including the use of variables and functions, but since DATA statements are interpreted before the program is run (and interpreted only once even if contained by a loop) variables will evaluate to zero.
 
-You can use expressions with only numeric literals, such as 3/4 or SIN(0.25).
+You can use expressions with only numeric literals, such as 3/4.
 
 DEF
 ~~~
@@ -908,7 +912,7 @@ User-defined functions have names in the form 'FNxn' where 'x' is a single lette
 
 The parameters in the definition must be single letters.
 They are not variable names.
-The invokation of the function may provide a variable name or value as arguments.
+The invocation of the function may provide a variable name or value as arguments.
 (See examples below.)
 
 The parameters specified in the definition are substituted into the expression at run-time; other variables specified in the expression are evaluated as usual, using the existing values at the time of execution.
