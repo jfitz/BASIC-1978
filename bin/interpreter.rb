@@ -228,7 +228,7 @@ class Interpreter
   end
 
   def program_optimize
-    clear_user_functions
+    @user_function_defs = {}
 
     @program.pessimize
     @program.optimize(self)
@@ -321,7 +321,7 @@ class Interpreter
   end
 
   def run_program
-    clear_user_functions
+    @user_function_defs = {}
 
     @program.init_data(self)
 
@@ -353,7 +353,7 @@ class Interpreter
       end
     end
 
-    clear_user_functions
+    @user_function_defs = {}
 
     @program.optimize(self)
 
@@ -1077,10 +1077,6 @@ class Interpreter
       @user_function_defs.key?(signature)
 
     @user_function_defs[signature]
-  end
-
-  def clear_user_functions
-    @user_function_defs = {}
   end
 
   def define_user_var_values(names_and_values)
