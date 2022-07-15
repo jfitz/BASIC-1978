@@ -3726,6 +3726,17 @@ class NextStatement < AbstractStatement
     else
       @errors << 'Syntax error'
     end
+
+    # check control variables for duplicates
+    check_list = []
+
+    @controls.each do |control|
+      unless control.empty?
+        @errors <<  "Duplicate control variable #{control}" if
+          check_list.include?(control)
+        check_list << control
+      end
+    end
   end
 
   def has_control(control)
