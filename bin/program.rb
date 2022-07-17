@@ -7,7 +7,8 @@ class LineNumber
   def initialize(line_number)
     legals = %(IntegerValue NilClass)
 
-    unless legals.include?(line_number.class.to_s)
+    unless
+      legals.include?(line_number.class.to_s)
       raise BASICSyntaxError,
             "Invalid line number object '#{line_number.class}'"
     end
@@ -1340,6 +1341,7 @@ class Program
     # walk the entire program and mark lines as live
     # repeat until no changes
     any_changes = true
+
     while any_changes
       any_changes = false
 
@@ -2321,6 +2323,7 @@ class Program
 
     nums_list = numeric_refs
     numerics = make_summary(nums_list)
+
     unless numerics.empty?
       texts << ''
       texts << 'Numeric constants:'
@@ -2329,6 +2332,7 @@ class Program
 
     strs_list = strings_refs
     strings = make_summary(strs_list)
+
     unless strings.empty?
       texts << ''
       texts << 'String constants:'
@@ -2337,6 +2341,7 @@ class Program
 
     bool_list = boolean_refs
     booleans = make_summary(bool_list)
+
     unless booleans.empty?
       texts << ''
       texts << 'Boolean constants:'
@@ -2345,6 +2350,7 @@ class Program
 
     funcs_list = function_refs
     functions = make_summary(funcs_list)
+
     unless functions.empty?
       texts << ''
       texts << 'Functions:'
@@ -2353,6 +2359,7 @@ class Program
 
     udfs_list = user_function_refs
     userfuncs = make_summary(udfs_list)
+
     unless userfuncs.empty?
       texts << ''
       texts << 'User-defined functions:'
@@ -2362,6 +2369,7 @@ class Program
 
     vars_list = variables_refs
     variables = make_summary(vars_list)
+
     unless variables.empty?
       texts << ''
       texts << 'Variables:'
@@ -2371,6 +2379,7 @@ class Program
 
     opers_list = operators_refs
     operators = make_summary(opers_list)
+
     unless operators.empty?
       texts << ''
       texts << 'Operators:'
@@ -2379,6 +2388,7 @@ class Program
 
     lines_list = linenums_refs
     linenums = make_summary(lines_list)
+
     unless linenums.empty?
       texts << ''
       texts << 'Line numbers:'

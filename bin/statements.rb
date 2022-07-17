@@ -500,9 +500,6 @@ class AbstractStatement
 
       @transfers <<
         TransferRefLineStmt.new(dest_line_number, dest_stmt, :auto)
-
-      dest_xfer = TransferRefLineStmt.new(line_number, stmt, :auto)
-      program.add_statement_origin(dest_line_number, dest_stmt, dest_xfer)
     end
   end
 
