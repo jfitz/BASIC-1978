@@ -78,8 +78,7 @@ class StatementFactory
             statement_definition.new(line_number, keywords, tokens_lists)
         elsif keywords.empty?
           if statement.nil?
-            statement = UnknownStatement.new(line_number,
-                                             text)
+            statement = UnknownStatement.new(line_number, text)
           end
         else
           keyword = keywords.pop
@@ -688,6 +687,28 @@ class AbstractStatement
 
   def next?
     @keywords.size == 1 && @keywords[0].to_s == 'NEXT'
+  end
+
+  def user_def?
+    @keywords.size == 1 && @keywords[0].to_s == 'DEF'
+  end
+
+  def end_user_def?
+    result = false
+
+    if @keywords.size == 1
+      result = true if @keywords[0].to_s == 'FNEND'
+      result = true if @keywords[0].to_s == 'ENDFN'
+      result = true if @keywords[0].to_s == 'ENDFUNCTION'
+    end
+
+    if @keywords.size == 2
+      result == true if
+        @keywords[0].to_s == 'END' &&
+        @keywords[1].to_s == 'FUNCTION'
+    end
+
+    result
   end
 
   def procedure?
@@ -1467,7 +1488,6 @@ class EmptyStatement < AbstractStatement
 
     @valid = false
     @executable = :none
-
     @comprehension_effort = 0
   end
 
@@ -1861,7 +1881,6 @@ class ChainStatement < AbstractStatement
     @errors << 'TAB() not allowed' if @target.has_tab
 
     @elements = make_references(nil, @target)
-
     @comprehension_effort += @target.comprehension_effort
   end
 
@@ -2194,7 +2213,9 @@ end
 class FnendStatement < AbstractStatement
   def self.lead_keywords
     [
-      [KeywordToken.new('FNEND')]
+      [KeywordToken.new('FNEND')],
+      [KeywordToken.new('ENDFN')],
+      [KeywordToken.new('ENDFUNCTION')]
     ]
   end
 
