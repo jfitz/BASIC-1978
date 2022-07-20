@@ -1894,10 +1894,6 @@ class Program
 
   def find_closing_next_line_stmt(control, current_line_stmt)
     # move to the next statement
-    line_number = current_line_stmt.line_number
-    line = @lines[line_number]
-    statements = line.statements
-
     walk_line_stmt = current_line_stmt
 
     # search list for a NEXT with the same control variable
@@ -1908,8 +1904,7 @@ class Program
       line_number = walk_line_stmt.line_number
       stmt = walk_line_stmt.statement
       line = @lines[line_number]
-
-      statement = @lines[line_number].statements[stmt]
+      statement = line.statements[stmt]
 
       for_level += statement.number_for_stmts
 
@@ -1921,8 +1916,7 @@ class Program
         stmt_controls.each do |stmt_control|
           for_level -= 1
 
-          raise(BASICSyntaxError, "Cannot find NEXT for #{control}") if
-            for_level.negative?
+          break if for_level.negative?
 
           if stmt_control == control ||
              (stmt_control.empty? && for_level.zero?)
@@ -1940,10 +1934,6 @@ class Program
 
   def find_closing_endfunc_line_stmt(name, current_line_stmt)
     # move to the next statement
-    line_number = current_line_stmt.line_number
-    line = @lines[line_number]
-    statements = line.statements
-
     walk_line_stmt = find_next_line_stmt(current_line_stmt)
 
     # search for a ENDFUNCTION or FNEND
@@ -1951,12 +1941,11 @@ class Program
       line_number = walk_line_stmt.line_number
       stmt = walk_line_stmt.statement
       line = @lines[line_number]
-
-      statement = @lines[line_number].statements[stmt]
+      statement = line.statements[stmt]
 
       # consider only core statements, not modifiers
 
-      return nil if statement.user_def?
+      break if statement.user_def?
 
       return LineStmt.new(line_number, stmt) if statement.end_user_def?
 
