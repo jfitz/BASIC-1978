@@ -16,7 +16,7 @@ module Reader
     tokenbuilders = []
     tokenbuilders << QuotedTextTokenBuilder.new(quotes)
     tokenbuilders << InputNumberTokenBuilder.new
-    tokenbuilders << BareTextTokenBuilder.new
+    tokenbuilders << InputTextTokenBuilder.new
     tokenbuilders << ListTokenBuilder.new([',', ';'], ParamSeparatorToken)
     tokenbuilders << WhitespaceTokenBuilder.new
   end

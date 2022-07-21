@@ -183,7 +183,7 @@ class CommentTokenBuilder
   end
 end
 
-# token reader for text constants
+# token reader for quoted text constants
 class QuotedTextTokenBuilder
   def initialize(quotes)
     @quotes = quotes
@@ -531,20 +531,60 @@ class VariableTokenBuilder
   end
 end
 
-# token reader for text constants
+# token reader for unquoted text constants in DATA statements
 class BareTextTokenBuilder
   def try(text)
     token = ''
 
     # don't use \w because we don't want underscores
-    /\A[A-Za-z0-9][A-Za-z0-9\s]*/.match(text) { |m| token = m[0] }
+    /\A[A-Za-z0-9][A-Za-z0-9\s]+/.match(text) { |m| token = m[0] }
 
+    # discard trailing spaces
     @token = token.rstrip
 
     # if it could be a numeric value, don't take it
     regexes = [
       /\A\d+\z/,
       /\A\d+E\d+\z/
+    ]
+
+    number_token = false
+    regexes.each { |regex| regex.match(@token) { |_| number_token = true } }
+
+    @token = '' if number_token
+  end
+
+  def count
+    @token.size
+  end
+
+  def tokens
+    [BareTextLiteralToken.new(@token)]
+  end
+end
+
+# token reader for unquoted text constants in INPUT statements
+class InputTextTokenBuilder
+  def try(text)
+    token = ''
+
+    # accept anything up to separators, cannot start with space
+    /\A[^ ,;][^,;]*/.match(text) { |m| token = m[0] }
+
+    # discard trailing spaces
+    @token = token.rstrip
+
+    # if it could be a numeric value, don't take it
+    # (these match regexes from InputNumberTokenBuilder but with \z)
+    regexes = [
+      /\A[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A[+-]?\d+\.(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A[+-]?\d+E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A[+-]?\d+\.E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A[+-]?\d+\.\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A[+-]?\d+\.\d+E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A[+-]?\.\d+(\{[A-Za-z0-9\+\- _]*\})?\z/,
+      /\A[+-]?\.\d+E[+-]?\d+(\{[A-Za-z0-9\+\- _]*\})?\z/
     ]
 
     number_token = false
