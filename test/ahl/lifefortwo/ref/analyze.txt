@@ -122,11 +122,11 @@ Halstead complexity:
     WARNING: Multiple GOSUB entry points
   Origs: 100:fornext, 103:goto, 107:goto, 110:auto
   Dests: 125:auto
-125 G(90,50) F(J:99,K:100) (0 1) NEXT J
+125 G(90,50) F(J:99) (0 1) NEXT J
     WARNING: Multiple GOSUB entry points
   Origs: 99:fornext, 102:goto, 120:auto
   Dests: 126:auto
-126 G(90,50) F(J:99,K:100) (0 1) RETURN
+126 G(90,50) (0 1) RETURN
     WARNING: Multiple GOSUB entry points
   Origs: 106:goto, 125:auto
   Dests: 
@@ -161,23 +161,23 @@ Halstead complexity:
 320 G(300) (0 2) GOTO 399
   Origs: 315:auto
   Dests: 399:goto
-350 G(300) F(O1:305) (1 4) IF O1 > 9 THEN 360
+350 G(300) (1 4) IF O1 > 9 THEN 360
   Origs: 310:ifthen
   Dests: 351:auto, 360:ifthen
-351 G(300) F(O1:305) (0 3) N(J, K) = 100
-    G(300) F(O1:305) (0 4) M2 = M2 + 1
-    G(300) F(O1:305) (0 2) PRINT " * ";
+351 G(300) (0 3) N(J, K) = 100
+    G(300) (0 4) M2 = M2 + 1
+    G(300) (0 2) PRINT " * ";
   Origs: 350:auto
   Dests: 355:auto
-355 G(300) F(O1:305) (0 1) RETURN
+355 G(300) (0 1) RETURN
   Origs: 351:auto
   Dests: 
-360 G(300) F(O1:305) (0 3) N(J, K) = 1000
-    G(300) F(O1:305) (0 4) M3 = M3 + 1
-    G(300) F(O1:305) (0 2) PRINT " # ";
+360 G(300) (0 3) N(J, K) = 1000
+    G(300) (0 4) M3 = M3 + 1
+    G(300) (0 2) PRINT " # ";
   Origs: 350:ifthen
   Dests: 365:auto
-365 G(300) F(O1:305) (0 1) RETURN
+365 G(300) (0 1) RETURN
   Origs: 360:auto
   Dests: 
 399 G(300) (0 3) N(J, K) = 0
@@ -230,32 +230,32 @@ Halstead complexity:
 559 (0 3) GOSUB 90
   Origs: 542:auto
   Dests: 90:gosub, 560:auto
-560 F(B:580) (0 2) PRINT
-    F(B:580) (0 3) GOSUB 50
+560 (0 2) PRINT
+    (0 3) GOSUB 50
   Origs: 559:auto, 581:ifthen, 596:goto
   Dests: 50:gosub, 570:auto
-570 F(B:580) (2 7) IF M2 = 0 THEN IF M3 = 0 THEN 574
+570 (2 7) IF M2 = 0 THEN IF M3 = 0 THEN 574
   Origs: 560:auto
   Dests: 571:auto, 574:ifthen
-571 F(B:580) (1 6) IF M3 = 0 THEN B = 1
-    F(B:580) (0 2) GOTO 575
+571 (1 6) IF M3 = 0 THEN B = 1
+    (0 2) GOTO 575
   Origs: 570:auto
   Dests: 572:auto, 575:goto
-572 F(B:580) (1 6) IF M2 = 0 THEN B = 2
-    F(B:580) (0 2) GOTO 575
+572 (1 6) IF M2 = 0 THEN B = 2
+    (0 2) GOTO 575
   Origs: 571:auto
   Dests: 573:auto, 575:goto
-573 F(B:580) (0 2) GOTO 580
+573 (0 2) GOTO 580
   Origs: 572:auto
   Dests: 580:goto
-574 F(B:580) (0 2) PRINT
-    F(B:580) (0 2) PRINT "A DRAW"
-    F(B:580) (0 2) GOTO 800
+574 (0 2) PRINT
+    (0 2) PRINT "A DRAW"
+    (0 2) GOTO 800
   Origs: 570:ifthen
   Dests: 800:goto
-575 F(B:580) (0 2) PRINT
-    F(B:580) (0 4) PRINT "PLAYER"; B; "IS THE WINNER"
-    F(B:580) (0 2) GOTO 800
+575 (0 2) PRINT
+    (0 4) PRINT "PLAYER"; B; "IS THE WINNER"
+    (0 2) GOTO 800
   Origs: 571:goto, 572:goto
   Dests: 800:goto
 580 F(B:580) (1 3) FOR B = 1 TO 2
@@ -323,8 +323,7 @@ Halstead complexity:
     G(700) (0 3) GOTO 700
   Origs: 706:goto, 710:goto, 715:ifthen
   Dests: 700:goto
-800 F(B:580) (0 1) END
-    WARNING: Terminating statement in FOR/NEXT
+800 (0 1) END
   Origs: 574:goto, 575:goto
   Dests: :stop
 

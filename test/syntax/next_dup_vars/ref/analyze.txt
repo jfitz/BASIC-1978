@@ -25,22 +25,21 @@ Halstead complexity:
 20 (0 2) PRINT "FOR I / FOR J / NEXT J,J"
   Origs: :start
   Dests: 21:auto
-21 F(I:21) (1 3) FOR I = 1 TO 4
+21 (1 3) FOR I = 1 TO 4
    ERROR: Cannot find NEXT for I
   Origs: 20:auto
   Dests: 22:fornext
-22 F(I:21,J:22) (1 3) FOR J = 1 TO 3
+22 F(J:22) (1 3) FOR J = 1 TO 3
   Origs: 21:fornext
   Dests: 23:fornext, 24:fornext
-23 F(I:21,J:22) (0 3) PRINT I, J
+23 F(J:22) (0 3) PRINT I, J
   Origs: 22:fornext
   Dests: 24:auto
-24 F(I:21,J:22) (0 1) NEXT J, J
+24 F(J:22) (0 1) NEXT J, J
    ERROR: Duplicate control variable J
   Origs: 22:fornext, 23:auto
   Dests: 90:auto
-90 F(I:21) (0 1) END
-   WARNING: Terminating statement in FOR/NEXT
+90 (0 1) END
   Origs: 24:auto
   Dests: :stop
 

@@ -105,17 +105,17 @@ STOP in line 999
     F(I:160.1) (1) FOR I = 1 TO LEN(A$)
     F(I:160.1) (5) L$(I) = MID$(A$, I, 1)
     F(I:160.1) (5) NEXT I
-170 F(I:220) (4) PRINT "HERE ARE THE LETTERS YOU USED:"
-180 F(I:180,I:220) (4) FOR I = 1 TO 26
-    F(I:180,I:220) (6) PRINT N$(I);
-    F(I:180,I:220) (6) IF N$(I + 1) = "" THEN 200
-190 F(I:180,I:220) (2) PRINT ",";
-    F(I:180,I:220) (2) NEXT I
-200 F(I:180,I:220) (4) PRINT
-    F(I:180,I:220) (4) PRINT
-    F(I:180,I:200.2,I:220) (4) FOR I = 1 TO L
-    F(I:180,I:200.2,I:220) (20) PRINT D$(I);
-    F(I:180,I:200.2,I:220) (20) NEXT I
+170 (4) PRINT "HERE ARE THE LETTERS YOU USED:"
+180 F(I:180) (4) FOR I = 1 TO 26
+    F(I:180) (6) PRINT N$(I);
+    F(I:180) (6) IF N$(I + 1) = "" THEN 200
+190 F(I:180) (2) PRINT ",";
+    F(I:180) (2) NEXT I
+200 (4) PRINT
+    (4) PRINT
+    F(I:200.2) (4) FOR I = 1 TO L
+    F(I:200.2) (20) PRINT D$(I);
+    F(I:200.2) (20) NEXT I
     (4) PRINT
     (4) PRINT
 210 (4) INPUT "WHAT IS YOUR GUESS"; G$
@@ -127,26 +127,26 @@ STOP in line 999
 240 F(I:220) (3) NEXT I
     (0) PRINT "PROGRAM ERROR.  RUN AGAIN."
     (0) STOP
-250 F(I:220) (3) N$(I) = G$
-    F(I:220) (3) T1 = T1 + 1
-260 F(I:220,I:260) (3) FOR I = 1 TO L
-    F(I:220,I:260) (15) IF L$(I) = G$ THEN 280
-270 F(I:220,I:260) (15) NEXT I
+250 (3) N$(I) = G$
+    (3) T1 = T1 + 1
+260 F(I:260) (3) FOR I = 1 TO L
+    F(I:260) (15) IF L$(I) = G$ THEN 280
+270 F(I:260) (15) NEXT I
     (3) IF R = 0 THEN 290
 275 (2) GOTO 300
-280 F(I:220,I:260) (2) D$(I) = G$
-    F(I:220,I:260) (2) R = R + 1
-    F(I:220,I:260) (2) GOTO 270
+280 (2) D$(I) = G$
+    (2) R = R + 1
+    (2) GOTO 270
 290 (1) M = M + 1
     (1) GOTO 400
 300 F(I:300) (2) FOR I = 1 TO L
     F(I:300) (3) IF D$(I) = "-" THEN 320
 310 F(I:300) (1) NEXT I
     (0) GOTO 390
-320 F(I:300) (2) PRINT
-    F(I:300,I:320.1) (2) FOR I = 1 TO L
-    F(I:300,I:320.1) (10) PRINT D$(I);
-    F(I:300,I:320.1) (10) NEXT I
+320 (2) PRINT
+    F(I:320.1) (2) FOR I = 1 TO L
+    F(I:320.1) (10) PRINT D$(I);
+    F(I:320.1) (10) NEXT I
     (2) PRINT
     (2) PRINT
 330 (2) INPUT "WHAT IS YOUR GUESS FOR THE WORD"; B$

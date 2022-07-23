@@ -228,102 +228,100 @@ Halstead complexity:
 1620 (0 3) D = 100000
   Origs: 1610:auto
   Dests: 1630:auto
-1630 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT "HOW MANY BETS";
+1630 (0 2) PRINT "HOW MANY BETS";
   Origs: 1620:auto, 1650:ifthen, 2940:ifthen
   Dests: 1640:auto
-1640 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (1 2) INPUT Y
+1640 (1 2) INPUT Y
   Origs: 1630:auto
   Dests: 1650:auto
-1650 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (1 9) IF Y < 1 OR Y <> INT(Y) THEN 1630
+1650 (1 9) IF Y < 1 OR Y <> INT(Y) THEN 1630
   Origs: 1640:auto
   Dests: 1630:ifthen, 1660:auto
-1660 F(I:1660,I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (1 3) FOR I = 1 TO 50
-     F(I:1660,I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 3) A(I) = 0
-     F(I:1660,I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 1) NEXT I
+1660 F(I:1660) (1 3) FOR I = 1 TO 50
+     F(I:1660) (0 3) A(I) = 0
+     F(I:1660) (0 1) NEXT I
      (0 1) REM  MAT A=ZER
-     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 1650:auto
   Dests: 1670:auto
-1670 F(C:1670,I1:1930) (1 3) FOR C = 1 TO Y
+1670 F(C:1670) (1 3) FOR C = 1 TO Y
   Origs: 1660:auto
   Dests: 1680:fornext, 1790:fornext
-1680 F(C:1670,I1:1930) (0 3) PRINT "NUMBER"; C;
+1680 F(C:1670) (0 3) PRINT "NUMBER"; C;
   Origs: 1670:fornext, 1720:ifthen, 1730:ifthen, 1740:ifthen, 1770:goto
   Dests: 1690:auto
-1690 F(C:1670,I1:1930) (2 3) INPUT X, Z
+1690 F(C:1670) (2 3) INPUT X, Z
   Origs: 1680:auto
   Dests: 1700:auto
-1700 F(C:1670,I1:1930) (0 3) B(C) = Z
+1700 F(C:1670) (0 3) B(C) = Z
   Origs: 1690:auto
   Dests: 1710:auto
-1710 F(C:1670,I1:1930) (0 3) T(C) = X
+1710 F(C:1670) (0 3) T(C) = X
   Origs: 1700:auto
   Dests: 1720:auto
-1720 F(C:1670,I1:1930) (1 12) IF X < 1 OR X > 50 OR X <> INT(X) THEN 1680
+1720 F(C:1670) (1 12) IF X < 1 OR X > 50 OR X <> INT(X) THEN 1680
   Origs: 1710:auto
   Dests: 1680:ifthen, 1730:auto
-1730 F(C:1670,I1:1930) (1 9) IF Z < 1 OR Z <> INT(Z) THEN 1680
+1730 F(C:1670) (1 9) IF Z < 1 OR Z <> INT(Z) THEN 1680
   Origs: 1720:auto
   Dests: 1680:ifthen, 1740:auto
-1740 F(C:1670,I1:1930) (1 8) IF Z < 5 OR Z > 500 THEN 1680
+1740 F(C:1670) (1 8) IF Z < 5 OR Z > 500 THEN 1680
   Origs: 1730:auto
   Dests: 1680:ifthen, 1750:auto
-1750 F(C:1670,I1:1930) (1 4) IF A(X) = 0 THEN 1780
+1750 F(C:1670) (1 4) IF A(X) = 0 THEN 1780
   Origs: 1740:auto
   Dests: 1760:auto, 1780:ifthen
-1760 F(C:1670,I1:1930) (0 2) PRINT "YOU MADE THAT BET ONCE ALREADY,DUM-DUM"
+1760 F(C:1670) (0 2) PRINT "YOU MADE THAT BET ONCE ALREADY,DUM-DUM"
   Origs: 1750:auto
   Dests: 1770:auto
-1770 F(C:1670,I1:1930) (0 3) GOTO 1680
+1770 F(C:1670) (0 3) GOTO 1680
   Origs: 1760:auto
   Dests: 1680:goto
-1780 F(C:1670,I1:1930) (0 3) A(X) = 1
+1780 F(C:1670) (0 3) A(X) = 1
   Origs: 1750:ifthen
   Dests: 1790:auto
-1790 F(C:1670,I1:1930) (0 1) NEXT C
+1790 F(C:1670) (0 1) NEXT C
   Origs: 1670:fornext, 1780:auto
   Dests: 1800:auto
-1800 F(I1:1930) (0 2) PRINT "SPINNING"
+1800 (0 2) PRINT "SPINNING"
   Origs: 1790:auto
   Dests: 1810:auto
-1810 F(I1:1930) (0 2) PRINT
+1810 (0 2) PRINT
   Origs: 1800:auto
   Dests: 1820:auto
-1820 F(I1:1930) (0 2) PRINT
+1820 (0 2) PRINT
   Origs: 1810:auto
   Dests: 1830:auto
-1830 F(I1:1930) (0 4) S = INT(RND(1) * 100)
+1830 (0 4) S = INT(RND(1) * 100)
   Origs: 1820:auto, 1840:ifthen
   Dests: 1840:auto
-1840 F(I1:1930) (1 8) IF S = 0 OR S > 38 THEN 1830
+1840 (1 8) IF S = 0 OR S > 38 THEN 1830
   Origs: 1830:auto
   Dests: 1830:ifthen, 1850:auto
-1850 F(I1:1930) (0 4) X(S) = X(S) + 1
+1850 (0 4) X(S) = X(S) + 1
   Origs: 1840:auto
   Dests: 1860:auto
-1860 F(I1:1930) (1 4) IF S < 37 THEN 1920
+1860 (1 4) IF S < 37 THEN 1920
   Origs: 1850:auto
   Dests: 1870:auto, 1920:ifthen
-1870 F(I1:1930) (1 4) IF S = 37 THEN 1900
+1870 (1 4) IF S = 37 THEN 1900
   Origs: 1860:auto
   Dests: 1880:auto, 1900:ifthen
-1880 F(I1:1930) (0 2) PRINT "00"
+1880 (0 2) PRINT "00"
   Origs: 1870:auto
   Dests: 1890:auto
-1890 F(I1:1930) (0 2) GOTO 2020
+1890 (0 2) GOTO 2020
   Origs: 1880:auto
   Dests: 2020:goto
-1900 F(I1:1930) (0 2) PRINT "0"
+1900 (0 2) PRINT "0"
   Origs: 1870:ifthen
   Dests: 1910:auto
-1910 F(I1:1930) (0 2) GOTO 2020
+1910 (0 2) GOTO 2020
   Origs: 1900:auto
   Dests: 2020:goto
-1920 F(I1:1930) (0 1) RESTORE
+1920 (0 1) RESTORE
   Origs: 1860:ifthen
   Dests: 1930:auto
 1930 F(I1:1930) (1 3) FOR I1 = 1 TO 18
-     WARNING: FORNEXT length exceeds limit 40
   Origs: 1920:auto
   Dests: 1940:fornext, 1960:fornext
 1940 F(I1:1930) (1 2) READ R
@@ -338,387 +336,386 @@ Halstead complexity:
 1970 (0 3) A$ = "BLACK"
   Origs: 1960:auto
   Dests: 1980:auto
-1980 F(I1:1930) (0 3) PRINT S; A$
+1980 (0 3) PRINT S; A$
   Origs: 1970:auto, 2010:goto
   Dests: 1990:auto
-1990 F(I1:1930) (0 2) GOTO 2020
+1990 (0 2) GOTO 2020
   Origs: 1980:auto
   Dests: 2020:goto
-2000 F(I1:1930) (0 3) A$ = "RED"
+2000 (0 3) A$ = "RED"
   Origs: 1950:ifthen
   Dests: 2010:auto
-2010 F(I1:1930) (0 3) GOTO 1980
+2010 (0 3) GOTO 1980
   Origs: 2000:auto
   Dests: 1980:goto
-2020 F(I1:1930) (0 2) PRINT
+2020 (0 2) PRINT
   Origs: 1890:goto, 1910:goto, 1990:goto
   Dests: 2030:auto
-2030 F(I1:1930,C:2030) (1 3) FOR C = 1 TO Y
+2030 F(C:2030) (1 3) FOR C = 1 TO Y
      WARNING: FORNEXT length exceeds limit 40
   Origs: 2020:auto
   Dests: 2040:fornext, 2810:fornext
-2040 F(I1:1930,C:2030) (1 4) IF T(C) < 37 THEN 2710
+2040 F(C:2030) (1 4) IF T(C) < 37 THEN 2710
   Origs: 2030:fornext
   Dests: 2050:auto, 2720:ifthen
-2050 F(I1:1930,C:2030) (9 12) ON T(C) - 36 GOTO 2090, 2190, 2220, 2250, 2300, 2350, 2400, 2470, 2500
+2050 F(C:2030) (9 12) ON T(C) - 36 GOTO 2090, 2190, 2220, 2250, 2300, 2350, 2400, 2470, 2500
   Origs: 2040:auto
   Dests: 2060:auto, 2100:goto, 2200:goto, 2230:goto, 2260:goto, 2310:goto, 2360:goto, 2410:goto, 2480:goto, 2510:goto
-2060 F(I1:1930,C:2030) (3 6) ON T(C) - 45 GOTO 2530, 2560, 2630
+2060 F(C:2030) (3 6) ON T(C) - 45 GOTO 2530, 2560, 2630
   Origs: 2050:auto
   Dests: 2070:auto, 2540:goto, 2570:goto, 2640:goto
-2070 F(I1:1930,C:2030) (0 2) GOTO 2710
+2070 F(C:2030) (0 2) GOTO 2710
   Origs: 2060:auto
   Dests: 2720:goto
-2080 (0 1) STOP
+2080 F(C:2030) (0 1) STOP
+     WARNING: Terminating statement in FOR/NEXT
   Origs: 
   Dests: :stop
 2090 (0 1) REM  1-12(37) 2:1
   Origs: 
   Dests: 
-2100 F(I1:1930,C:2030) (1 4) IF S <= 12 THEN 2150
+2100 F(C:2030) (1 4) IF S <= 12 THEN 2150
   Origs: 2050:goto
   Dests: 2110:auto, 2150:ifthen
-2110 F(I1:1930,C:2030,I:2650) (0 5) PRINT "YOU LOSE"; B(C); "DOLLARS ON BET"; C
+2110 F(C:2030) (0 5) PRINT "YOU LOSE"; B(C); "DOLLARS ON BET"; C
   Origs: 2100:auto, 2210:goto, 2240:goto, 2290:goto, 2340:goto, 2390:goto, 2420:goto, 2490:goto, 2520:goto, 2550:goto, 2620:goto, 2670:ifthen, 2690:ifthen, 2750:goto, 2770:goto
   Dests: 2120:auto
-2120 F(I1:1930,C:2030,I:2650) (0 4) D = D + B(C)
+2120 F(C:2030) (0 4) D = D + B(C)
   Origs: 2110:auto
   Dests: 2130:auto
-2130 F(I1:1930,C:2030,I:2650) (0 4) P = P - B(C)
+2130 F(C:2030) (0 4) P = P - B(C)
   Origs: 2120:auto
   Dests: 2140:auto
-2140 F(I1:1930,C:2030,I:2650) (0 2) GOTO 2180
+2140 F(C:2030) (0 2) GOTO 2180
   Origs: 2130:auto
   Dests: 2180:goto
-2150 F(I1:1930,C:2030,I:2260,I:2310,I:2360) (0 6) PRINT "YOU WIN"; B(C) * 2; "DOLLARS ON BET" C
+2150 F(C:2030) (0 6) PRINT "YOU WIN"; B(C) * 2; "DOLLARS ON BET" C
   Origs: 2100:ifthen, 2200:ifthen, 2230:ifthen, 2270:ifthen, 2320:ifthen, 2370:ifthen
   Dests: 2160:auto
-2160 F(I1:1930,C:2030,I:2260,I:2310,I:2360) (0 6) D = D - B(C) * 2
+2160 F(C:2030) (0 6) D = D - B(C) * 2
   Origs: 2150:auto
   Dests: 2170:auto
-2170 F(I1:1930,C:2030,I:2260,I:2310,I:2360) (0 6) P = P + B(C) * 2
+2170 F(C:2030) (0 6) P = P + B(C) * 2
   Origs: 2160:auto
   Dests: 2180:auto
-2180 F(I1:1930,C:2030,I:2260,I:2310,I:2360,I:2650) (0 2) GOTO 2810
+2180 F(C:2030) (0 2) GOTO 2810
   Origs: 2140:goto, 2170:auto
   Dests: 2810:goto
 2190 (0 1) REM  13-24(38) 2:1
   Origs: 
   Dests: 
-2200 F(I1:1930,C:2030) (1 8) IF S > 12 AND S < 25 THEN 2150
+2200 F(C:2030) (1 8) IF S > 12 AND S < 25 THEN 2150
   Origs: 2050:goto
   Dests: 2150:ifthen, 2210:auto
-2210 F(I1:1930,C:2030) (0 3) GOTO 2110
+2210 F(C:2030) (0 3) GOTO 2110
   Origs: 2200:auto
   Dests: 2110:goto
 2220 (0 1) REM  25-36(39) 2:1
   Origs: 
   Dests: 
-2230 F(I1:1930,C:2030) (1 8) IF S > 24 AND S < 37 THEN 2150
+2230 F(C:2030) (1 8) IF S > 24 AND S < 37 THEN 2150
   Origs: 2050:goto
   Dests: 2150:ifthen, 2240:auto
-2240 F(I1:1930,C:2030) (0 3) GOTO 2110
+2240 F(C:2030) (0 3) GOTO 2110
   Origs: 2230:auto
   Dests: 2110:goto
 2250 (0 1) REM  FIRST COLUMN(40) 2:1
   Origs: 
   Dests: 
-2260 F(I1:1930,C:2030,I:2260) (1 4) FOR I = 1 TO 34 STEP 3
+2260 F(C:2030,I:2260) (1 4) FOR I = 1 TO 34 STEP 3
   Origs: 2050:goto
   Dests: 2270:fornext, 2280:fornext
-2270 F(I1:1930,C:2030,I:2260) (1 5) IF S = I THEN 2150
+2270 F(C:2030,I:2260) (1 5) IF S = I THEN 2150
   Origs: 2260:fornext
   Dests: 2150:ifthen, 2280:auto
-2280 F(I1:1930,C:2030,I:2260) (0 1) NEXT I
+2280 F(C:2030,I:2260) (0 1) NEXT I
   Origs: 2260:fornext, 2270:auto
   Dests: 2290:auto
-2290 F(I1:1930,C:2030) (0 3) GOTO 2110
+2290 F(C:2030) (0 3) GOTO 2110
   Origs: 2280:auto
   Dests: 2110:goto
 2300 (0 1) REM  SECOND COLUMN(41) 2:1
   Origs: 
   Dests: 
-2310 F(I1:1930,C:2030,I:2310) (1 4) FOR I = 2 TO 35 STEP 3
+2310 F(C:2030,I:2310) (1 4) FOR I = 2 TO 35 STEP 3
   Origs: 2050:goto
   Dests: 2320:fornext, 2330:fornext
-2320 F(I1:1930,C:2030,I:2310) (1 5) IF S = I THEN 2150
+2320 F(C:2030,I:2310) (1 5) IF S = I THEN 2150
   Origs: 2310:fornext
   Dests: 2150:ifthen, 2330:auto
-2330 F(I1:1930,C:2030,I:2310) (0 1) NEXT I
+2330 F(C:2030,I:2310) (0 1) NEXT I
   Origs: 2310:fornext, 2320:auto
   Dests: 2340:auto
-2340 F(I1:1930,C:2030) (0 3) GOTO 2110
+2340 F(C:2030) (0 3) GOTO 2110
   Origs: 2330:auto
   Dests: 2110:goto
 2350 (0 1) REM  THIRD COLUMN(42) 2:1
   Origs: 
   Dests: 
-2360 F(I1:1930,C:2030,I:2360) (1 4) FOR I = 3 TO 36 STEP 3
+2360 F(C:2030,I:2360) (1 4) FOR I = 3 TO 36 STEP 3
   Origs: 2050:goto
   Dests: 2370:fornext, 2380:fornext
-2370 F(I1:1930,C:2030,I:2360) (1 5) IF S = I THEN 2150
+2370 F(C:2030,I:2360) (1 5) IF S = I THEN 2150
   Origs: 2360:fornext
   Dests: 2150:ifthen, 2380:auto
-2380 F(I1:1930,C:2030,I:2360) (0 1) NEXT I
+2380 F(C:2030,I:2360) (0 1) NEXT I
   Origs: 2360:fornext, 2370:auto
   Dests: 2390:auto
-2390 F(I1:1930,C:2030) (0 3) GOTO 2110
+2390 F(C:2030) (0 3) GOTO 2110
   Origs: 2380:auto
   Dests: 2110:goto
 2400 (0 1) REM  1-18(43) 1:1
   Origs: 
   Dests: 
-2410 F(I1:1930,C:2030) (1 4) IF S < 19 THEN 2430
+2410 F(C:2030) (1 4) IF S < 19 THEN 2430
   Origs: 2050:goto
   Dests: 2420:auto, 2430:ifthen
-2420 F(I1:1930,C:2030) (0 3) GOTO 2110
+2420 F(C:2030) (0 3) GOTO 2110
   Origs: 2410:auto
   Dests: 2110:goto
-2430 F(I1:1930,C:2030,I:2580) (0 5) PRINT "YOU WIN"; B(C); "DOLLARS ON BET"; C
+2430 F(C:2030) (0 5) PRINT "YOU WIN"; B(C); "DOLLARS ON BET"; C
   Origs: 2410:ifthen, 2480:ifthen, 2510:ifthen, 2540:ifthen, 2600:ifthen, 2700:goto
   Dests: 2440:auto
-2440 F(I1:1930,C:2030,I:2580) (0 4) D = D - B(C)
+2440 F(C:2030) (0 4) D = D - B(C)
   Origs: 2430:auto
   Dests: 2450:auto
-2450 F(I1:1930,C:2030,I:2580) (0 4) P = P + B(C)
+2450 F(C:2030) (0 4) P = P + B(C)
   Origs: 2440:auto
   Dests: 2460:auto
-2460 F(I1:1930,C:2030,I:2580) (0 2) GOTO 2810
+2460 F(C:2030) (0 2) GOTO 2810
   Origs: 2450:auto
   Dests: 2810:goto
 2470 (0 1) REM  19-36(44) 1:1
   Origs: 
   Dests: 
-2480 F(I1:1930,C:2030) (1 8) IF S < 37 AND S > 18 THEN 2430
+2480 F(C:2030) (1 8) IF S < 37 AND S > 18 THEN 2430
   Origs: 2050:goto
   Dests: 2430:ifthen, 2490:auto
-2490 F(I1:1930,C:2030) (0 3) GOTO 2110
+2490 F(C:2030) (0 3) GOTO 2110
   Origs: 2480:auto
   Dests: 2110:goto
 2500 (0 1) REM  EVEN(45) 1:1
   Origs: 
   Dests: 
-2510 F(I1:1930,C:2030) (1 10) IF S / 2 = INT(S / 2) AND S < 37 THEN 2430
+2510 F(C:2030) (1 10) IF S / 2 = INT(S / 2) AND S < 37 THEN 2430
   Origs: 2050:goto
   Dests: 2430:ifthen, 2520:auto
-2520 F(I1:1930,C:2030) (0 3) GOTO 2110
+2520 F(C:2030) (0 3) GOTO 2110
   Origs: 2510:auto
   Dests: 2110:goto
 2530 (0 1) REM  ODD(46) 1:1
   Origs: 
   Dests: 
-2540 F(I1:1930,C:2030) (1 10) IF S / 2 <> INT(S / 2) AND S < 37 THEN 2430
+2540 F(C:2030) (1 10) IF S / 2 <> INT(S / 2) AND S < 37 THEN 2430
   Origs: 2060:goto
   Dests: 2430:ifthen, 2550:auto
-2550 F(I1:1930,C:2030) (0 3) GOTO 2110
+2550 F(C:2030) (0 3) GOTO 2110
   Origs: 2540:auto
   Dests: 2110:goto
 2560 (0 1) REM  RED(47) 1:1
   Origs: 
   Dests: 
-2570 F(I1:1930,C:2030) (0 1) RESTORE
+2570 F(C:2030) (0 1) RESTORE
   Origs: 2060:goto
   Dests: 2580:auto
-2580 F(I1:1930,C:2030,I:2580) (1 3) FOR I = 1 TO 18
+2580 F(C:2030,I:2580) (1 3) FOR I = 1 TO 18
   Origs: 2570:auto
   Dests: 2590:fornext, 2610:fornext
-2590 F(I1:1930,C:2030,I:2580) (1 2) READ R
+2590 F(C:2030,I:2580) (1 2) READ R
   Origs: 2580:fornext
   Dests: 2600:auto
-2600 F(I1:1930,C:2030,I:2580) (1 5) IF S = R THEN 2430
+2600 F(C:2030,I:2580) (1 5) IF S = R THEN 2430
   Origs: 2590:auto
   Dests: 2430:ifthen, 2610:auto
-2610 F(I1:1930,C:2030,I:2580) (0 1) NEXT I
+2610 F(C:2030,I:2580) (0 1) NEXT I
   Origs: 2580:fornext, 2600:auto
   Dests: 2620:auto
-2620 F(I1:1930,C:2030) (0 3) GOTO 2110
+2620 F(C:2030) (0 3) GOTO 2110
   Origs: 2610:auto
   Dests: 2110:goto
 2630 (0 1) REM  BLACK(48) 1:1
   Origs: 
   Dests: 
-2640 F(I1:1930,C:2030) (0 1) RESTORE
+2640 F(C:2030) (0 1) RESTORE
   Origs: 2060:goto
   Dests: 2650:auto
-2650 F(I1:1930,C:2030,I:2650) (1 3) FOR I = 1 TO 18
-     WARNING: FORNEXT length exceeds limit 40
+2650 F(C:2030,I:2650) (1 3) FOR I = 1 TO 18
   Origs: 2640:auto
   Dests: 2660:fornext, 2680:fornext
-2660 F(I1:1930,C:2030,I:2650) (1 2) READ R
+2660 F(C:2030,I:2650) (1 2) READ R
   Origs: 2650:fornext
   Dests: 2670:auto
-2670 F(I1:1930,C:2030,I:2650) (1 5) IF S = R THEN 2110
+2670 F(C:2030,I:2650) (1 5) IF S = R THEN 2110
   Origs: 2660:auto
   Dests: 2110:ifthen, 2680:auto
-2680 F(I1:1930,C:2030,I:2650) (0 1) NEXT I
+2680 F(C:2030,I:2650) (0 1) NEXT I
   Origs: 2650:fornext, 2670:auto
   Dests: 2690:auto
-2690 F(I1:1930,C:2030) (1 5) IF S > 36 THEN 2110
+2690 F(C:2030) (1 5) IF S > 36 THEN 2110
   Origs: 2680:auto
   Dests: 2110:ifthen, 2700:auto
-2700 F(I1:1930,C:2030) (0 3) GOTO 2430
+2700 F(C:2030) (0 3) GOTO 2430
   Origs: 2690:auto
   Dests: 2430:goto
 2710 (0 1) REM --1TO36,0,00(1-36,49,50)35:1
   Origs: 
   Dests: 
-2720 F(I1:1930,C:2030) (1 4) IF T(C) < 49 THEN 2760
+2720 F(C:2030) (1 4) IF T(C) < 49 THEN 2760
   Origs: 2040:ifthen, 2070:goto
   Dests: 2730:auto, 2760:ifthen
-2730 F(I1:1930,C:2030) (1 7) IF T(C) = 49 AND S = 37 THEN 2780
+2730 F(C:2030) (1 7) IF T(C) = 49 AND S = 37 THEN 2780
   Origs: 2720:auto
   Dests: 2740:auto, 2780:ifthen
-2740 F(I1:1930,C:2030) (1 7) IF T(C) = 50 AND S = 38 THEN 2780
+2740 F(C:2030) (1 7) IF T(C) = 50 AND S = 38 THEN 2780
   Origs: 2730:auto
   Dests: 2750:auto, 2780:ifthen
-2750 F(I1:1930,C:2030) (0 3) GOTO 2110
+2750 F(C:2030) (0 3) GOTO 2110
   Origs: 2740:auto
   Dests: 2110:goto
-2760 F(I1:1930,C:2030) (1 4) IF T(C) = S THEN 2780
+2760 F(C:2030) (1 4) IF T(C) = S THEN 2780
   Origs: 2720:ifthen
   Dests: 2770:auto, 2780:ifthen
-2770 F(I1:1930,C:2030) (0 3) GOTO 2110
+2770 F(C:2030) (0 3) GOTO 2110
   Origs: 2760:auto
   Dests: 2110:goto
-2780 F(I1:1930,C:2030) (0 6) PRINT "YOU WIN"; B(C) * 35; "DOLLARS ON BET"; C
+2780 F(C:2030) (0 6) PRINT "YOU WIN"; B(C) * 35; "DOLLARS ON BET"; C
   Origs: 2730:ifthen, 2740:ifthen, 2760:ifthen
   Dests: 2790:auto
-2790 F(I1:1930,C:2030) (0 6) D = D - B(C) * 35
+2790 F(C:2030) (0 6) D = D - B(C) * 35
   Origs: 2780:auto
   Dests: 2800:auto
-2800 F(I1:1930,C:2030) (0 6) P = P + B(C) * 35
+2800 F(C:2030) (0 6) P = P + B(C) * 35
   Origs: 2790:auto
   Dests: 2810:auto
-2810 F(I1:1930,C:2030,I:2260,I:2310,I:2360,I:2580,I:2650) (0 1) NEXT C
+2810 F(C:2030) (0 1) NEXT C
   Origs: 2030:fornext, 2180:goto, 2460:goto, 2800:auto
   Dests: 2820:auto
-2820 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT
+2820 (0 2) PRINT
   Origs: 2810:auto
   Dests: 2830:auto
-2830 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 4) PRINT "TOTALS:", "ME", "YOU"
+2830 (0 4) PRINT "TOTALS:", "ME", "YOU"
   Origs: 2820:auto
   Dests: 2840:auto
-2840 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 4) PRINT " ", D, P
+2840 (0 4) PRINT " ", D, P
   Origs: 2830:auto
   Dests: 2850:auto
-2850 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (1 4) IF P > 0 THEN 2880
+2850 (1 4) IF P > 0 THEN 2880
   Origs: 2840:auto
   Dests: 2860:auto, 2880:ifthen
-2860 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT "OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
+2860 (0 2) PRINT "OOPS! YOU JUST SPENT YOUR LAST DOLLAR!"
   Origs: 2850:auto
   Dests: 2870:auto
-2870 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) GOTO 3190
+2870 (0 2) GOTO 3190
   Origs: 2860:auto
   Dests: 3190:goto
-2880 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (1 4) IF D > 0 THEN 2920
+2880 (1 4) IF D > 0 THEN 2920
   Origs: 2850:ifthen
   Dests: 2890:auto, 2920:ifthen
-2890 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT "YOU BROKE THE HOUSE!"
+2890 (0 2) PRINT "YOU BROKE THE HOUSE!"
   Origs: 2880:auto
   Dests: 2900:auto
-2900 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 3) P = 101000
+2900 (0 3) P = 101000
   Origs: 2890:auto
   Dests: 2910:auto
-2910 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) GOTO 2960
+2910 (0 2) GOTO 2960
   Origs: 2900:auto
   Dests: 2960:goto
-2920 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT "AGAIN";
+2920 (0 2) PRINT "AGAIN";
   Origs: 2880:ifthen
   Dests: 2930:auto
-2930 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (1 2) INPUT Y$
+2930 (1 2) INPUT Y$
   Origs: 2920:auto
   Dests: 2940:auto
-2940 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (1 6) IF LEFT$(Y$, 1) = "Y" THEN 1630
+2940 (1 6) IF LEFT$(Y$, 1) = "Y" THEN 1630
   Origs: 2930:auto
   Dests: 1630:ifthen, 2960:auto
 2950 (0 2) DATA 1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36
   Origs: 
   Dests: 
-2960 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (1 4) IF P < 1 THEN 3190
+2960 (1 4) IF P < 1 THEN 3190
   Origs: 2910:goto, 2940:auto
   Dests: 2970:auto, 3190:ifthen
-2970 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT "TO WHOM SHALL I MAKE THE CHECK";
+2970 (0 2) PRINT "TO WHOM SHALL I MAKE THE CHECK";
   Origs: 2960:auto
   Dests: 2980:auto
-2980 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (1 2) INPUT B$
+2980 (1 2) INPUT B$
   Origs: 2970:auto
   Dests: 2990:auto
-2990 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT
+2990 (0 2) PRINT
   Origs: 2980:auto
   Dests: 3000:auto
-3000 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650,I:3000) (1 3) FOR I = 1 TO 72
-     F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650,I:3000) (0 2) PRINT "-";
-     F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650,I:3000) (0 1) NEXT I
+3000 F(I:3000) (1 3) FOR I = 1 TO 72
+     F(I:3000) (0 2) PRINT "-";
+     F(I:3000) (0 1) NEXT I
      (0 1) REM PRINT 72 DASHES
-     WARNING: FOR/NEXT nesting exceeds limit 3
   Origs: 2990:auto
   Dests: 3010:auto
-3010 F(I1:1930) (0 6) PRINT TAB(50); "CHECK NO. "; INT(RND(1) * 100)
+3010 (0 6) PRINT TAB(50); "CHECK NO. "; INT(RND(1) * 100)
   Origs: 3000:auto
   Dests: 3020:auto
-3020 F(I1:1930) (0 2) PRINT
+3020 (0 2) PRINT
   Origs: 3010:auto
   Dests: 3030:auto
-3030 F(I1:1930) (0 2) GOSUB 3230
+3030 (0 2) GOSUB 3230
   Origs: 3020:auto
   Dests: 3040:auto, 3310:gosub
-3040 F(I1:1930) (0 4) PRINT TAB(40); M$
+3040 (0 4) PRINT TAB(40); M$
   Origs: 3030:auto
   Dests: 3050:auto
-3050 F(I1:1930) (0 2) PRINT
+3050 (0 2) PRINT
   Origs: 3040:auto
   Dests: 3060:auto
-3060 F(I1:1930) (0 2) PRINT
+3060 (0 2) PRINT
   Origs: 3050:auto
   Dests: 3070:auto
-3070 F(I1:1930) (0 4) PRINT "PAY TO THE ORDER OF-----"; B$; "-----$ ";
+3070 (0 4) PRINT "PAY TO THE ORDER OF-----"; B$; "-----$ ";
   Origs: 3060:auto
   Dests: 3080:auto
-3080 F(I1:1930) (0 2) PRINT P
+3080 (0 2) PRINT P
   Origs: 3070:auto
   Dests: 3090:auto
-3090 F(I1:1930) (0 2) PRINT
+3090 (0 2) PRINT
   Origs: 3080:auto
   Dests: 3100:auto
-3100 F(I1:1930) (0 2) PRINT
+3100 (0 2) PRINT
   Origs: 3090:auto
   Dests: 3110:auto
-3110 F(I1:1930) (0 4) PRINT TAB(10), "THE MEMORY BANK OF NEW YORK"
+3110 (0 4) PRINT TAB(10), "THE MEMORY BANK OF NEW YORK"
   Origs: 3100:auto
   Dests: 3120:auto
-3120 F(I1:1930) (0 2) PRINT
+3120 (0 2) PRINT
   Origs: 3110:auto
   Dests: 3130:auto
-3130 F(I1:1930) (0 4) PRINT TAB(40), "THE COMPUTER"
+3130 (0 4) PRINT TAB(40), "THE COMPUTER"
   Origs: 3120:auto
   Dests: 3140:auto
-3140 F(I1:1930) (0 4) PRINT TAB(40) "----------X-----"
+3140 (0 4) PRINT TAB(40) "----------X-----"
   Origs: 3130:auto
   Dests: 3150:auto
-3150 F(I1:1930) (0 2) PRINT
+3150 (0 2) PRINT
   Origs: 3140:auto
   Dests: 3160:auto
-3160 F(I1:1930,I:3160) (1 3) FOR I = 1 TO 62
-     F(I1:1930,I:3160) (0 2) PRINT "-";
-     F(I1:1930,I:3160) (0 1) NEXT I
+3160 F(I:3160) (1 3) FOR I = 1 TO 62
+     F(I:3160) (0 2) PRINT "-";
+     F(I:3160) (0 1) NEXT I
   Origs: 3150:auto
   Dests: 3170:auto
-3170 F(I1:1930) (0 2) PRINT "COME BACK SOON!"
+3170 (0 2) PRINT "COME BACK SOON!"
   Origs: 3160:auto
   Dests: 3180:auto
-3180 F(I1:1930) (0 2) GOTO 3210
+3180 (0 2) GOTO 3210
   Origs: 3170:auto
   Dests: 3210:goto
-3190 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT "THANKS FOR YOUR MONEY."
+3190 (0 2) PRINT "THANKS FOR YOUR MONEY."
   Origs: 2870:goto, 2960:ifthen
   Dests: 3200:auto
-3200 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT "I'LL USE IT TO BUY A SOLID GOLD ROULETTE WHEEL"
+3200 (0 2) PRINT "I'LL USE IT TO BUY A SOLID GOLD ROULETTE WHEEL"
   Origs: 3190:auto
   Dests: 3210:auto
-3210 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) PRINT
+3210 (0 2) PRINT
   Origs: 3180:goto, 3200:auto
   Dests: 3220:auto
-3220 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 2) GOTO 3420
+3220 (0 2) GOTO 3420
   Origs: 3210:auto
   Dests: 3420:goto
 3230 (0 1) REM
@@ -751,8 +748,7 @@ Halstead complexity:
 3320 G(3310) (0 1) RETURN
   Origs: 3310:auto
   Dests: 
-3420 F(I1:1930,I:2260,I:2310,I:2360,I:2580,I:2650) (0 1) END
-     WARNING: Terminating statement in FOR/NEXT
+3420 (0 1) END
   Origs: 3220:goto
   Dests: :stop
 

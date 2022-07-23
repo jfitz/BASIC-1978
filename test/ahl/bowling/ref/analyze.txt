@@ -144,47 +144,46 @@ Halstead complexity:
 3240 F(P:2070,I:2880,J:3060) (0 1) NEXT J
   Origs: 3060:fornext, 3150:auto
   Dests: 3330:auto
-3330 F(P:2070,I:2880,J:3060) (0 3) C(15 * J - X) = 1
+3330 F(P:2070,I:2880) (0 3) C(15 * J - X) = 1
   Origs: 3150:ifthen, 3240:auto
   Dests: 3420:auto
-3420 F(P:2070,I:2880,J:3060) (0 1) NEXT I
+3420 F(P:2070,I:2880) (0 1) NEXT I
   Origs: 2880:fornext, 3330:auto
   Dests: 3600:auto
 3510 (0 1) REM ARK PIN DIAGRAM
   Origs: 
   Dests: 
-3600 F(P:2070,J:3060) (0 7) PRINT "PLAYER:" P; "FRAME:"; F "BALL:" B
+3600 F(P:2070) (0 7) PRINT "PLAYER:" P; "FRAME:"; F "BALL:" B
   Origs: 3420:auto
   Dests: 3690:auto
-3690 F(P:2070,J:3060,I:3690) (1 3) FOR I = 0 TO 3
+3690 F(P:2070,I:3690) (1 3) FOR I = 0 TO 3
   Origs: 3600:auto
   Dests: 3780:fornext, 4500:fornext
-3780 F(P:2070,J:3060,I:3690) (0 2) PRINT
+3780 F(P:2070,I:3690) (0 2) PRINT
   Origs: 3690:fornext
   Dests: 3870:auto
-3870 F(P:2070,J:3060,I:3690,J:3870) (1 4) FOR J = 1 TO 4 - I
-     WARNING: FOR/NEXT nesting exceeds limit 3
+3870 F(P:2070,I:3690,J:3870) (1 4) FOR J = 1 TO 4 - I
   Origs: 3780:auto
   Dests: 3960:fornext, 4410:fornext
-3960 F(P:2070,J:3060,I:3690,J:3870) (0 4) K = K + 1
+3960 F(P:2070,I:3690,J:3870) (0 4) K = K + 1
   Origs: 3870:fornext
   Dests: 4050:auto
-4050 F(P:2070,J:3060,I:3690,J:3870) (1 4) IF C(K) = 1 THEN 4320
+4050 F(P:2070,I:3690,J:3870) (1 4) IF C(K) = 1 THEN 4320
   Origs: 3960:auto
   Dests: 4140:auto, 4320:ifthen
-4140 F(P:2070,J:3060,I:3690,J:3870) (0 4) PRINT TAB(I); "+ ";
+4140 F(P:2070,I:3690,J:3870) (0 4) PRINT TAB(I); "+ ";
   Origs: 4050:auto
   Dests: 4230:auto
-4230 F(P:2070,J:3060,I:3690,J:3870) (0 2) GOTO 4410
+4230 F(P:2070,I:3690,J:3870) (0 2) GOTO 4410
   Origs: 4140:auto
   Dests: 4410:goto
-4320 F(P:2070,J:3060,I:3690,J:3870) (0 4) PRINT TAB(I); "O ";
+4320 F(P:2070,I:3690,J:3870) (0 4) PRINT TAB(I); "O ";
   Origs: 4050:ifthen
   Dests: 4410:auto
-4410 F(P:2070,J:3060,I:3690,J:3870) (0 1) NEXT J
+4410 F(P:2070,I:3690,J:3870) (0 1) NEXT J
   Origs: 3870:fornext, 4230:goto, 4320:auto
   Dests: 4500:auto
-4500 F(P:2070,J:3060,I:3690) (0 1) NEXT I
+4500 F(P:2070,I:3690) (0 1) NEXT I
   Origs: 3690:fornext, 4410:auto
   Dests: 4590:auto
 4590 F(P:2070) (0 2) PRINT ""

@@ -32,7 +32,6 @@
 380 NEXT J
 390 NEXT I
 400 FOR I = 1 TO 64
- WARNING: FOR/NEXT nesting exceeds limit 3
 410 LET X(I) = 0
 420 NEXT I
 430 LET Z = 1
@@ -73,14 +72,12 @@
 720 IF L(I) <> 4 THEN 690
 730 PRINT "YOU WIN AS FOLLOWS";
 740 FOR J = 1 TO 4
- WARNING: FOR/NEXT nesting exceeds limit 3
 750 LET M = M(I, J)
 760 GOSUB 1570
 770 NEXT J
 780 GOTO 1490
 790 IF L(I) <> 15 THEN 690
 800 FOR J = 1 TO 4
- WARNING: FOR/NEXT nesting exceeds limit 3
 810 LET M = M(I, J)
 820 IF X(M) <> 0 THEN 860
 830 LET X(M) = 5
@@ -89,7 +86,6 @@
 860 NEXT J
 870 PRINT ", AND WINS AS FOLLOWS"
 880 FOR J = 1 TO 4
- WARNING: FOR/NEXT nesting exceeds limit 3
 890 LET M = M(I, J)
 900 GOSUB 1570
 910 NEXT J
@@ -97,8 +93,6 @@
 930 IF L(I) <> 3 THEN 690
 940 PRINT "NICE TRY. MACHINE MOVES TO";
 950 FOR J = 1 TO 4
- WARNING: FORNEXT length exceeds limit 40
- WARNING: FOR/NEXT nesting exceeds limit 3
 960 LET M = M(I, J)
 970 IF X(M) <> 0 THEN 1010
 980 LET X(M) = 5
@@ -113,7 +107,6 @@
 1070 IF L >= 3 THEN 1130
 1080 IF L > 2 THEN 2230
 1090 FOR J = 1 TO 4
- WARNING: FOR/NEXT nesting exceeds limit 3
 1100 IF X(M(I, J)) <> 0 THEN 1120
 1110 LET X(M(I, J)) = 1 / 8
 1120 NEXT J
@@ -142,7 +135,6 @@
 1350 IF L >= 11 THEN 1410
 1360 IF L > 10 THEN 2230
 1370 FOR J = 1 TO 4
- WARNING: FOR/NEXT nesting exceeds limit 3
 1380 IF X(M(I, J)) <> 0 THEN 1400
 1390 LET X(M(I, J)) = 1 / 8
 1400 NEXT J
@@ -162,7 +154,6 @@
 1540 PRINT "INCORRECT ANSWER. PLEASE TYPE 'YES' OR 'NO'";
 1550 GOTO 1510
 1560 STOP
- WARNING: Terminating statement in FOR/NEXT
 1570 LET K1 = INT((M - 1) / 16) + 1
 1580 LET J2 = M - 16 * (K1 - 1)
 1590 LET K2 = INT((J2 - 1) / 4) + 1
@@ -179,7 +170,6 @@
 1700 NEXT S
 1710 RETURN
 1720 FOR I = 1 TO 64
- WARNING: FORNEXT length exceeds limit 40
 1730 IF X(I) <> 0 THEN 1800
 1740 LET X(I) = 5
 1750 LET M = I
@@ -191,13 +181,9 @@
 1810 PRINT "THE GAME IS A DRAW."
 1820 GOTO 1490
 1830 FOR K = 1 TO 18
- WARNING: FORNEXT length exceeds limit 40
- WARNING: FOR/NEXT nesting exceeds limit 3
 1840 LET P = 0
 1850 FOR I = 4 * K - 3 TO 4 * K
- WARNING: FOR/NEXT nesting exceeds limit 3
 1860 FOR J = 1 TO 4
- WARNING: FOR/NEXT nesting exceeds limit 3
 1870 LET P = P + X(M(I, J))
 1880 NEXT J
 1890 NEXT I
@@ -210,8 +196,6 @@
 1960 GOTO 1200
 1970 LET S = 1 / 8
 1980 FOR I = 4 * K - 3 TO 4 * K
- WARNING: FORNEXT length exceeds limit 40
- WARNING: FOR/NEXT nesting exceeds limit 3
 1990 GOTO 2370
 2000 NEXT I
 2010 LET S = 0
@@ -237,8 +221,6 @@
 2210 DATA 49, 34, 19, 4, 53, 38, 23, 8, 57, 42, 27, 12, 61, 46, 31, 16
 2220 DATA 1, 22, 43, 64, 16, 27, 38, 49, 4, 23, 42, 61, 13, 26, 39, 52
 2230 FOR J = 1 TO 4
- WARNING: FORNEXT length exceeds limit 40
- WARNING: FOR/NEXT nesting exceeds limit 3
 2240 IF X(M(I, J)) <> 1 / 8 THEN 2330
 2250 LET X(M(I, J)) = 5
 2260 IF L(I) < 5 THEN 2290
@@ -257,8 +239,6 @@
 2390 GOTO 2410
 2400 LET A = 2
 2410 FOR J = A TO 5 - A STEP 5 - 2 * A
- WARNING: FORNEXT length exceeds limit 40
- WARNING: FOR/NEXT nesting exceeds limit 3
 2420 IF X(M(I, J)) = S THEN 2450
 2430 NEXT J
 2440 GOTO 2000
@@ -299,5 +279,4 @@
 2750 PRINT "INCORRECT MOVE, RETYPE IT--";
 2760 GOTO 520
 2770 END
- WARNING: Terminating statement in FOR/NEXT
 

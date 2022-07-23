@@ -123,273 +123,266 @@ Halstead complexity:
 390 F(I:350) (0 1) NEXT I
   Origs: 350:fornext, 380:auto
   Dests: 400:auto
-400 F(I:400,I:1720,K:1830,I:1980) (1 3) FOR I = 1 TO 64
-    WARNING: FOR/NEXT nesting exceeds limit 3
+400 F(I:400) (1 3) FOR I = 1 TO 64
   Origs: 390:auto, 1520:ifthen
   Dests: 410:fornext, 420:fornext
-410 F(I:400,I:1720,K:1830,I:1980) (0 3) LET X(I) = 0
+410 F(I:400) (0 3) LET X(I) = 0
   Origs: 400:fornext
   Dests: 420:auto
-420 F(I:400,I:1720,K:1830,I:1980) (0 1) NEXT I
+420 F(I:400) (0 1) NEXT I
   Origs: 400:fornext, 410:auto
   Dests: 430:auto
-430 F(K:1830) (0 3) LET Z = 1
+430 (0 3) LET Z = 1
   Origs: 420:auto
   Dests: 440:auto
-440 F(K:1830) (0 2) PRINT "DO YOU WANT TO MOVE FIRST";
+440 (0 2) PRINT "DO YOU WANT TO MOVE FIRST";
   Origs: 430:auto
   Dests: 450:auto
-450 F(K:1830) (1 2) INPUT S$
+450 (1 2) INPUT S$
   Origs: 440:auto, 490:goto
   Dests: 460:auto
-460 F(K:1830) (1 5) IF LEFT$(S$, 1) = "N" THEN 630
+460 (1 5) IF LEFT$(S$, 1) = "N" THEN 630
   Origs: 450:auto
   Dests: 470:auto, 630:ifthen
-470 F(K:1830) (1 5) IF LEFT$(S$, 1) = "Y" THEN 500
+470 (1 5) IF LEFT$(S$, 1) = "Y" THEN 500
   Origs: 460:auto
   Dests: 480:auto, 500:ifthen
-480 F(K:1830) (0 2) PRINT "INCORRECT ANSWER.  PLEASE TYPE 'YES' OR 'NO'.";
+480 (0 2) PRINT "INCORRECT ANSWER.  PLEASE TYPE 'YES' OR 'NO'.";
   Origs: 470:auto
   Dests: 490:auto
-490 F(K:1830) (0 3) GOTO 450
+490 (0 3) GOTO 450
   Origs: 480:auto
   Dests: 450:goto
-500 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT " "
+500 (0 2) PRINT " "
   Origs: 470:ifthen, 524:goto, 610:goto, 1000:goto, 1290:goto, 1790:goto, 2320:goto, 2490:goto
   Dests: 510:auto
-510 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT "YOUR MOVE";
+510 (0 2) PRINT "YOUR MOVE";
   Origs: 500:auto
   Dests: 520:auto
-520 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 2) INPUT J1
+520 (1 2) INPUT J1
   Origs: 510:auto, 2760:goto
   Dests: 521:auto
-521 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF J1 = 1 THEN 2770
+521 (1 4) IF J1 = 1 THEN 2770
   Origs: 520:auto
   Dests: 522:auto, 2770:ifthen
-522 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF J1 <> 0 THEN 525
+522 (1 4) IF J1 <> 0 THEN 525
   Origs: 521:auto
   Dests: 523:auto, 525:ifthen
-523 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOSUB 2550
+523 (0 2) GOSUB 2550
   Origs: 522:auto
   Dests: 524:auto, 2550:gosub
-524 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) GOTO 500
+524 (0 3) GOTO 500
   Origs: 523:auto
   Dests: 500:goto
-525 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF J1 < 111 THEN 2750
+525 (1 4) IF J1 < 111 THEN 2750
   Origs: 522:ifthen
   Dests: 526:auto, 2750:ifthen
-526 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF J1 > 444 THEN 2750
+526 (1 4) IF J1 > 444 THEN 2750
   Origs: 525:auto
   Dests: 530:auto, 2750:ifthen
-530 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOSUB 2500
+530 (0 2) GOSUB 2500
   Origs: 526:auto
   Dests: 540:auto, 2500:gosub
-540 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) LET K1 = INT(J1 / 100)
+540 (0 4) LET K1 = INT(J1 / 100)
   Origs: 530:auto
   Dests: 550:auto
-550 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 6) LET J2 = (J1 - K1 * 100)
+550 (0 6) LET J2 = (J1 - K1 * 100)
   Origs: 540:auto
   Dests: 560:auto
-560 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) LET K2 = INT(J2 / 10)
+560 (0 4) LET K2 = INT(J2 / 10)
   Origs: 550:auto
   Dests: 570:auto
-570 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 9) LET K3 = J1 - K1 * 100 - K2 * 10
+570 (0 9) LET K3 = J1 - K1 * 100 - K2 * 10
   Origs: 560:auto
   Dests: 580:auto
-580 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 9) LET M = 16 * K1 + 4 * K2 + K3 - 20
+580 (0 9) LET M = 16 * K1 + 4 * K2 + K3 - 20
   Origs: 570:auto
   Dests: 590:auto
-590 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF X(M) = 0 THEN 620
+590 (1 4) IF X(M) = 0 THEN 620
   Origs: 580:auto
   Dests: 600:auto, 620:ifthen
-600 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT "THAT SQUARE IS USED, TRY AGAIN."
+600 (0 2) PRINT "THAT SQUARE IS USED, TRY AGAIN."
   Origs: 590:auto
   Dests: 610:auto
-610 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) GOTO 500
+610 (0 3) GOTO 500
   Origs: 600:auto
   Dests: 500:goto
-620 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET X(M) = 1
+620 (0 3) LET X(M) = 1
   Origs: 590:ifthen
   Dests: 630:auto
-630 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOSUB 1640
+630 (0 2) GOSUB 1640
   Origs: 460:ifthen, 620:auto
   Dests: 640:auto, 1640:gosub
-640 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) J = 1
+640 (0 3) J = 1
   Origs: 630:auto
   Dests: 650:auto
-650 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) I = 1
+650 (0 3) I = 1
   Origs: 640:auto, 700:ifthen
   Dests: 660:auto
-660 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF J = 1 THEN 720
+660 (1 4) IF J = 1 THEN 720
   Origs: 650:auto, 690:ifthen
   Dests: 670:auto, 720:ifthen
-670 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF J = 2 THEN 790
+670 (1 4) IF J = 2 THEN 790
   Origs: 660:auto
   Dests: 680:auto, 790:ifthen
-680 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF J = 3 THEN 930
+680 (1 4) IF J = 3 THEN 930
   Origs: 670:auto
   Dests: 690:auto, 930:ifthen
-690 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) I = I + 1
-    F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 5) IF I <= 76 THEN 660
+690 (0 4) I = I + 1
+    (1 5) IF I <= 76 THEN 660
   Origs: 680:auto, 720:ifthen, 790:ifthen, 930:ifthen
   Dests: 660:ifthen, 700:auto
-700 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) J = J + 1
-    F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 5) IF J <= 3 THEN 650
+700 (0 4) J = J + 1
+    (1 5) IF J <= 3 THEN 650
   Origs: 690:auto
   Dests: 650:ifthen, 710:auto
-710 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOTO 1300
+710 (0 2) GOTO 1300
   Origs: 700:auto
   Dests: 1300:goto
-720 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 5) IF L(I) <> 4 THEN 690
+720 (1 5) IF L(I) <> 4 THEN 690
   Origs: 660:ifthen
   Dests: 690:ifthen, 730:auto
-730 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT "YOU WIN AS FOLLOWS";
+730 (0 2) PRINT "YOU WIN AS FOLLOWS";
   Origs: 720:auto
   Dests: 740:auto
-740 F(J:740,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 3) FOR J = 1 TO 4
-    WARNING: FOR/NEXT nesting exceeds limit 3
+740 F(J:740) (1 3) FOR J = 1 TO 4
   Origs: 730:auto
   Dests: 750:fornext, 770:fornext
-750 F(J:740,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET M = M(I, J)
+750 F(J:740) (0 3) LET M = M(I, J)
   Origs: 740:fornext
   Dests: 760:auto
-760 F(J:740,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOSUB 1570
+760 F(J:740) (0 2) GOSUB 1570
   Origs: 750:auto
   Dests: 770:auto, 1570:gosub
-770 F(J:740,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) NEXT J
+770 F(J:740) (0 1) NEXT J
   Origs: 740:fornext, 760:auto
   Dests: 780:auto
-780 F(I:1720,K:1830,I:1980) (0 2) GOTO 1490
+780 (0 2) GOTO 1490
   Origs: 770:auto
   Dests: 1490:goto
-790 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 5) IF L(I) <> 15 THEN 690
+790 (1 5) IF L(I) <> 15 THEN 690
   Origs: 670:ifthen
   Dests: 690:ifthen, 800:auto
-800 F(J:800,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 3) FOR J = 1 TO 4
-    WARNING: FOR/NEXT nesting exceeds limit 3
+800 F(J:800) (1 3) FOR J = 1 TO 4
   Origs: 790:auto
   Dests: 810:fornext, 860:fornext
-810 F(J:800,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET M = M(I, J)
+810 F(J:800) (0 3) LET M = M(I, J)
   Origs: 800:fornext
   Dests: 820:auto
-820 F(J:800,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF X(M) <> 0 THEN 860
+820 F(J:800) (1 4) IF X(M) <> 0 THEN 860
   Origs: 810:auto
   Dests: 830:auto, 860:ifthen
-830 F(J:800,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET X(M) = 5
+830 F(J:800) (0 3) LET X(M) = 5
   Origs: 820:auto
   Dests: 840:auto
-840 F(J:800,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT "MACHINE MOVES TO";
+840 F(J:800) (0 2) PRINT "MACHINE MOVES TO";
   Origs: 830:auto
   Dests: 850:auto
-850 F(J:800,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOSUB 1570
+850 F(J:800) (0 2) GOSUB 1570
   Origs: 840:auto
   Dests: 860:auto, 1570:gosub
-860 F(J:800,J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) NEXT J
+860 F(J:800) (0 1) NEXT J
   Origs: 800:fornext, 820:ifthen, 850:auto
   Dests: 870:auto
-870 F(I:1720,K:1830,I:1980) (0 2) PRINT ", AND WINS AS FOLLOWS"
+870 (0 2) PRINT ", AND WINS AS FOLLOWS"
   Origs: 860:auto
   Dests: 880:auto
-880 F(J:880,I:1720,K:1830,I:1980) (1 3) FOR J = 1 TO 4
-    WARNING: FOR/NEXT nesting exceeds limit 3
+880 F(J:880) (1 3) FOR J = 1 TO 4
   Origs: 870:auto
   Dests: 890:fornext, 910:fornext
-890 F(J:880,I:1720,K:1830,I:1980) (0 3) LET M = M(I, J)
+890 F(J:880) (0 3) LET M = M(I, J)
   Origs: 880:fornext
   Dests: 900:auto
-900 F(J:880,I:1720,K:1830,I:1980) (0 2) GOSUB 1570
+900 F(J:880) (0 2) GOSUB 1570
   Origs: 890:auto
   Dests: 910:auto, 1570:gosub
-910 F(J:880,I:1720,K:1830,I:1980) (0 1) NEXT J
+910 F(J:880) (0 1) NEXT J
   Origs: 880:fornext, 900:auto
   Dests: 920:auto
-920 F(I:1720,K:1830,I:1980) (0 2) GOTO 1490
+920 (0 2) GOTO 1490
   Origs: 910:auto
   Dests: 1490:goto
-930 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 5) IF L(I) <> 3 THEN 690
+930 (1 5) IF L(I) <> 3 THEN 690
   Origs: 680:ifthen
   Dests: 690:ifthen, 940:auto
-940 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT "NICE TRY. MACHINE MOVES TO";
+940 (0 2) PRINT "NICE TRY. MACHINE MOVES TO";
   Origs: 930:auto
   Dests: 950:auto
-950 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 3) FOR J = 1 TO 4
-    WARNING: FORNEXT length exceeds limit 40
-    WARNING: FOR/NEXT nesting exceeds limit 3
+950 F(J:950) (1 3) FOR J = 1 TO 4
   Origs: 940:auto
   Dests: 960:fornext, 1010:fornext
-960 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET M = M(I, J)
+960 F(J:950) (0 3) LET M = M(I, J)
   Origs: 950:fornext
   Dests: 970:auto
-970 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF X(M) <> 0 THEN 1010
+970 F(J:950) (1 4) IF X(M) <> 0 THEN 1010
   Origs: 960:auto
   Dests: 980:auto, 1010:ifthen
-980 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET X(M) = 5
+980 F(J:950) (0 3) LET X(M) = 5
   Origs: 970:auto
   Dests: 990:auto
-990 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOSUB 1570
+990 F(J:950) (0 2) GOSUB 1570
   Origs: 980:auto
   Dests: 1000:auto, 1570:gosub
-1000 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) GOTO 500
+1000 F(J:950) (0 3) GOTO 500
   Origs: 990:auto
   Dests: 500:goto
-1010 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) NEXT J
+1010 F(J:950) (0 1) NEXT J
   Origs: 950:fornext, 970:ifthen
   Dests: 1020:auto
-1020 F(I:1720,K:1830,I:1980) (0 2) GOTO 1300
+1020 (0 2) GOTO 1300
   Origs: 1010:auto
   Dests: 1300:goto
-1030 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) I = 1
+1030 (0 3) I = 1
   Origs: 1480:goto
   Dests: 1040:auto
-1040 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 6) LET L(I) = X(M(I, 1)) + X(M(I, 2)) + X(M(I, 3)) + X(M(I, 4))
+1040 (0 6) LET L(I) = X(M(I, 1)) + X(M(I, 2)) + X(M(I, 3)) + X(M(I, 4))
   Origs: 1030:auto, 1130:ifthen
   Dests: 1050:auto
-1050 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET L = L(I)
+1050 (0 3) LET L = L(I)
   Origs: 1040:auto
   Dests: 1060:auto
-1060 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF L < 2 THEN 1130
+1060 (1 4) IF L < 2 THEN 1130
   Origs: 1050:auto
   Dests: 1070:auto, 1130:ifthen
-1070 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF L >= 3 THEN 1130
+1070 (1 4) IF L >= 3 THEN 1130
   Origs: 1060:auto
   Dests: 1080:auto, 1130:ifthen
-1080 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF L > 2 THEN 2230
+1080 (1 4) IF L > 2 THEN 2230
   Origs: 1070:auto
   Dests: 1090:auto, 2230:ifthen
-1090 F(J:950,J:1090,I:1720,K:1830,I:1980,J:2230,J:2410) (1 3) FOR J = 1 TO 4
-     WARNING: FOR/NEXT nesting exceeds limit 3
+1090 F(J:1090) (1 3) FOR J = 1 TO 4
   Origs: 1080:auto
   Dests: 1100:fornext, 1120:fornext
-1100 F(J:950,J:1090,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF X(M(I, J)) <> 0 THEN 1120
+1100 F(J:1090) (1 4) IF X(M(I, J)) <> 0 THEN 1120
   Origs: 1090:fornext
   Dests: 1110:auto, 1120:ifthen
-1110 F(J:950,J:1090,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) LET X(M(I, J)) = 1 / 8
+1110 F(J:1090) (0 4) LET X(M(I, J)) = 1 / 8
   Origs: 1100:auto
   Dests: 1120:auto
-1120 F(J:950,J:1090,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) NEXT J
+1120 F(J:1090) (0 1) NEXT J
   Origs: 1090:fornext, 1100:ifthen, 1110:auto
   Dests: 1130:auto
-1130 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) I = I + 1
-     F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 5) IF I <= 76 THEN 1040
+1130 (0 4) I = I + 1
+     (1 5) IF I <= 76 THEN 1040
   Origs: 1060:ifthen, 1070:ifthen, 1120:auto
   Dests: 1040:ifthen, 1140:auto
-1140 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOSUB 1640
+1140 (0 2) GOSUB 1640
   Origs: 1130:auto
   Dests: 1150:auto, 1640:gosub
-1150 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) I = 1
+1150 (0 3) I = 1
   Origs: 1140:auto
   Dests: 1160:auto
-1160 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 6) IF L(I) = 1 / 2 THEN 2360
+1160 (1 6) IF L(I) = 1 / 2 THEN 2360
   Origs: 1150:auto, 1180:ifthen
   Dests: 1170:auto, 2360:ifthen
-1170 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 8) IF L(I) = 1 + 3 / 8 THEN 2360
+1170 (1 8) IF L(I) = 1 + 3 / 8 THEN 2360
   Origs: 1160:auto
   Dests: 1180:auto, 2360:ifthen
-1180 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) I = I + 1
-     F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 5) IF I <= 76 THEN 1160
+1180 (0 4) I = I + 1
+     (1 5) IF I <= 76 THEN 1160
   Origs: 1170:auto
   Dests: 1160:ifthen, 1190:auto
-1190 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOTO 1830
+1190 (0 2) GOTO 1830
   Origs: 1180:auto
   Dests: 1830:goto
 1200 (0 3) LET Z = 1
@@ -422,89 +415,87 @@ Halstead complexity:
 1290 (0 3) GOTO 500
   Origs: 1280:auto
   Dests: 500:goto
-1300 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET X = X
+1300 (0 3) LET X = X
   Origs: 710:goto, 1020:goto
   Dests: 1310:auto
-1310 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) I = 1
+1310 (0 3) I = 1
   Origs: 1300:auto
   Dests: 1320:auto
-1320 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 6) LET L(I) = X(M(I, 1)) + X(M(I, 2)) + X(M(I, 3)) + X(M(I, 4))
+1320 (0 6) LET L(I) = X(M(I, 1)) + X(M(I, 2)) + X(M(I, 3)) + X(M(I, 4))
   Origs: 1310:auto, 1410:ifthen
   Dests: 1330:auto
-1330 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET L = L(I)
+1330 (0 3) LET L = L(I)
   Origs: 1320:auto
   Dests: 1340:auto
-1340 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF L < 10 THEN 1410
+1340 (1 4) IF L < 10 THEN 1410
   Origs: 1330:auto
   Dests: 1350:auto, 1410:ifthen
-1350 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF L >= 11 THEN 1410
+1350 (1 4) IF L >= 11 THEN 1410
   Origs: 1340:auto
   Dests: 1360:auto, 1410:ifthen
-1360 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF L > 10 THEN 2230
+1360 (1 4) IF L > 10 THEN 2230
   Origs: 1350:auto
   Dests: 1370:auto, 2230:ifthen
-1370 F(J:950,J:1370,I:1720,K:1830,I:1980,J:2230,J:2410) (1 3) FOR J = 1 TO 4
-     WARNING: FOR/NEXT nesting exceeds limit 3
+1370 F(J:1370) (1 3) FOR J = 1 TO 4
   Origs: 1360:auto
   Dests: 1380:fornext, 1400:fornext
-1380 F(J:950,J:1370,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF X(M(I, J)) <> 0 THEN 1400
+1380 F(J:1370) (1 4) IF X(M(I, J)) <> 0 THEN 1400
   Origs: 1370:fornext
   Dests: 1390:auto, 1400:ifthen
-1390 F(J:950,J:1370,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) LET X(M(I, J)) = 1 / 8
+1390 F(J:1370) (0 4) LET X(M(I, J)) = 1 / 8
   Origs: 1380:auto
   Dests: 1400:auto
-1400 F(J:950,J:1370,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) NEXT J
+1400 F(J:1370) (0 1) NEXT J
   Origs: 1370:fornext, 1380:ifthen, 1390:auto
   Dests: 1410:auto
-1410 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) I = I + 1
-     F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 5) IF I <= 76 THEN 1320
+1410 (0 4) I = I + 1
+     (1 5) IF I <= 76 THEN 1320
   Origs: 1340:ifthen, 1350:ifthen, 1400:auto
   Dests: 1320:ifthen, 1420:auto
-1420 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOSUB 1640
+1420 (0 2) GOSUB 1640
   Origs: 1410:auto
   Dests: 1430:auto, 1640:gosub
-1430 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) I = 1
+1430 (0 3) I = 1
   Origs: 1420:auto
   Dests: 1440:auto
-1440 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF L(I) = 0.5 THEN 2360
+1440 (1 4) IF L(I) = 0.5 THEN 2360
   Origs: 1430:auto, 1460:ifthen
   Dests: 1450:auto, 2360:ifthen
-1450 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 8) IF L(I) = 5 + 3 / 8 THEN 2360
+1450 (1 8) IF L(I) = 5 + 3 / 8 THEN 2360
   Origs: 1440:auto
   Dests: 1460:auto, 2360:ifthen
-1460 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) I = I + 1
-     F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 5) IF I <= 76 THEN 1440
+1460 (0 4) I = I + 1
+     (1 5) IF I <= 76 THEN 1440
   Origs: 1450:auto
   Dests: 1440:ifthen, 1470:auto
-1470 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOSUB 2500
+1470 (0 2) GOSUB 2500
   Origs: 1460:auto
   Dests: 1480:auto, 2500:gosub
-1480 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) GOTO 1030
+1480 (0 3) GOTO 1030
   Origs: 1470:auto
   Dests: 1030:goto
-1490 F(I:1720,K:1830,I:1980) (0 2) PRINT " "
+1490 (0 2) PRINT " "
   Origs: 780:goto, 920:goto, 1820:goto, 2350:goto
   Dests: 1500:auto
-1500 F(I:1720,K:1830,I:1980) (0 2) PRINT "DO YOU WANT TO TRY ANOTHER GAME";
+1500 (0 2) PRINT "DO YOU WANT TO TRY ANOTHER GAME";
   Origs: 1490:auto
   Dests: 1510:auto
-1510 F(I:1720,K:1830,I:1980) (1 2) INPUT X$
+1510 (1 2) INPUT X$
   Origs: 1500:auto, 1550:goto
   Dests: 1520:auto
-1520 F(I:1720,K:1830,I:1980) (1 6) IF LEFT$(X$, 1) = "Y" THEN 400
+1520 (1 6) IF LEFT$(X$, 1) = "Y" THEN 400
   Origs: 1510:auto
   Dests: 400:ifthen, 1530:auto
-1530 F(I:1720,K:1830,I:1980) (1 5) IF LEFT$(X$, 1) = "N" THEN 1560
+1530 (1 5) IF LEFT$(X$, 1) = "N" THEN 1560
   Origs: 1520:auto
   Dests: 1540:auto, 1560:ifthen
-1540 F(I:1720,K:1830,I:1980) (0 2) PRINT "INCORRECT ANSWER. PLEASE TYPE 'YES' OR 'NO'";
+1540 (0 2) PRINT "INCORRECT ANSWER. PLEASE TYPE 'YES' OR 'NO'";
   Origs: 1530:auto
   Dests: 1550:auto
-1550 F(I:1720,K:1830,I:1980) (0 3) GOTO 1510
+1550 (0 3) GOTO 1510
   Origs: 1540:auto
   Dests: 1510:goto
-1560 F(I:1720,K:1830,I:1980) (0 1) STOP
-     WARNING: Terminating statement in FOR/NEXT
+1560 (0 1) STOP
   Origs: 1530:ifthen
   Dests: :stop
 1570 G(1570) (0 5) LET K1 = INT((M - 1) / 16) + 1
@@ -553,7 +544,6 @@ Halstead complexity:
   Origs: 1700:auto
   Dests: 
 1720 F(I:1720) (1 3) FOR I = 1 TO 64
-     WARNING: FORNEXT length exceeds limit 40
   Origs: 1240:goto
   Dests: 1730:fornext, 1800:fornext
 1730 F(I:1720) (1 4) IF X(I) <> 0 THEN 1800
@@ -586,44 +576,40 @@ Halstead complexity:
 1820 (0 3) GOTO 1490
   Origs: 1810:auto
   Dests: 1490:goto
-1830 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 3) FOR K = 1 TO 18
-     WARNING: FORNEXT length exceeds limit 40
-     WARNING: FOR/NEXT nesting exceeds limit 3
+1830 F(K:1830) (1 3) FOR K = 1 TO 18
   Origs: 1190:goto
   Dests: 1840:fornext, 1940:fornext
-1840 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET P = 0
+1840 F(K:1830) (0 3) LET P = 0
   Origs: 1830:fornext
   Dests: 1850:auto
-1850 F(J:950,I:1720,K:1830,I:1850,I:1980,J:2230,J:2410) (1 6) FOR I = 4 * K - 3 TO 4 * K
-     WARNING: FOR/NEXT nesting exceeds limit 3
+1850 F(K:1830,I:1850) (1 6) FOR I = 4 * K - 3 TO 4 * K
   Origs: 1840:auto
   Dests: 1860:fornext, 1890:fornext
-1860 F(J:950,I:1720,K:1830,I:1850,J:1860,I:1980,J:2230,J:2410) (1 3) FOR J = 1 TO 4
-     WARNING: FOR/NEXT nesting exceeds limit 3
+1860 F(K:1830,I:1850,J:1860) (1 3) FOR J = 1 TO 4
   Origs: 1850:fornext
   Dests: 1870:fornext, 1880:fornext
-1870 F(J:950,I:1720,K:1830,I:1850,J:1860,I:1980,J:2230,J:2410) (0 4) LET P = P + X(M(I, J))
+1870 F(K:1830,I:1850,J:1860) (0 4) LET P = P + X(M(I, J))
   Origs: 1860:fornext
   Dests: 1880:auto
-1880 F(J:950,I:1720,K:1830,I:1850,J:1860,I:1980,J:2230,J:2410) (0 1) NEXT J
+1880 F(K:1830,I:1850,J:1860) (0 1) NEXT J
   Origs: 1860:fornext, 1870:auto
   Dests: 1890:auto
-1890 F(J:950,I:1720,K:1830,I:1850,I:1980,J:2230,J:2410) (0 1) NEXT I
+1890 F(K:1830,I:1850) (0 1) NEXT I
   Origs: 1850:fornext, 1880:auto
   Dests: 1900:auto
-1900 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF P < 4 THEN 1940
+1900 F(K:1830) (1 4) IF P < 4 THEN 1940
   Origs: 1890:auto
   Dests: 1910:auto, 1940:ifthen
-1910 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF P < 5 THEN 1970
+1910 F(K:1830) (1 4) IF P < 5 THEN 1970
   Origs: 1900:auto
   Dests: 1920:auto, 1970:ifthen
-1920 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF P < 9 THEN 1940
+1920 F(K:1830) (1 4) IF P < 9 THEN 1940
   Origs: 1910:auto
   Dests: 1930:auto, 1940:ifthen
-1930 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF P < 10 THEN 1970
+1930 F(K:1830) (1 4) IF P < 10 THEN 1970
   Origs: 1920:auto
   Dests: 1940:auto, 1970:ifthen
-1940 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) NEXT K
+1940 F(K:1830) (0 1) NEXT K
   Origs: 1830:fornext, 1900:ifthen, 1920:ifthen, 1930:auto
   Dests: 1950:auto
 1950 (0 2) GOSUB 2500
@@ -632,24 +618,22 @@ Halstead complexity:
 1960 (0 3) GOTO 1200
   Origs: 1950:auto
   Dests: 1200:goto
-1970 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) LET S = 1 / 8
+1970 (0 4) LET S = 1 / 8
   Origs: 1910:ifthen, 1930:ifthen
   Dests: 1980:auto
-1980 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 6) FOR I = 4 * K - 3 TO 4 * K
-     WARNING: FORNEXT length exceeds limit 40
-     WARNING: FOR/NEXT nesting exceeds limit 3
+1980 F(I:1980) (1 6) FOR I = 4 * K - 3 TO 4 * K
   Origs: 1970:auto, 2020:goto
   Dests: 1990:fornext, 2000:fornext
-1990 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOTO 2370
+1990 F(I:1980) (0 2) GOTO 2370
   Origs: 1980:fornext
   Dests: 2370:goto
-2000 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) NEXT I
+2000 F(I:1980) (0 1) NEXT I
   Origs: 1980:fornext, 2440:goto
   Dests: 2010:auto
-2010 F(J:950,I:1720,K:1830,J:2230,J:2410) (0 3) LET S = 0
+2010 (0 3) LET S = 0
   Origs: 2000:auto
   Dests: 2020:auto
-2020 F(J:950,I:1720,K:1830,J:2230,J:2410) (0 3) GOTO 1980
+2020 (0 3) GOTO 1980
   Origs: 2010:auto
   Dests: 1980:goto
 2030 (0 2) DATA 1, 49, 52, 4, 13, 61, 64, 16, 22, 39, 23, 38, 26, 42, 27, 43
@@ -712,89 +696,85 @@ Halstead complexity:
 2220 (0 2) DATA 1, 22, 43, 64, 16, 27, 38, 49, 4, 23, 42, 61, 13, 26, 39, 52
   Origs: 
   Dests: 
-2230 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 3) FOR J = 1 TO 4
-     WARNING: FORNEXT length exceeds limit 40
-     WARNING: FOR/NEXT nesting exceeds limit 3
+2230 F(J:2230) (1 3) FOR J = 1 TO 4
   Origs: 1080:ifthen, 1360:ifthen
   Dests: 2240:fornext, 2330:fornext
-2240 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 6) IF X(M(I, J)) <> 1 / 8 THEN 2330
+2240 F(J:2230) (1 6) IF X(M(I, J)) <> 1 / 8 THEN 2330
   Origs: 2230:fornext
   Dests: 2250:auto, 2330:ifthen
-2250 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET X(M(I, J)) = 5
+2250 F(J:2230) (0 3) LET X(M(I, J)) = 5
   Origs: 2240:auto
   Dests: 2260:auto
-2260 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF L(I) < 5 THEN 2290
+2260 F(J:2230) (1 4) IF L(I) < 5 THEN 2290
   Origs: 2250:auto
   Dests: 2270:auto, 2290:ifthen
-2270 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT "LET'S SEE YOU GET OUT OF THIS:  MACHINE MOVES TO";
+2270 F(J:2230) (0 2) PRINT "LET'S SEE YOU GET OUT OF THIS:  MACHINE MOVES TO";
   Origs: 2260:auto
   Dests: 2280:auto
-2280 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOTO 2300
+2280 F(J:2230) (0 2) GOTO 2300
   Origs: 2270:auto
   Dests: 2300:goto
-2290 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT "YOU FOX.  JUST IN THE NICK OF TIME, MACHINE MOVES TO";
+2290 F(J:2230) (0 2) PRINT "YOU FOX.  JUST IN THE NICK OF TIME, MACHINE MOVES TO";
   Origs: 2260:ifthen
   Dests: 2300:auto
-2300 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET M = M(I, J)
+2300 F(J:2230) (0 3) LET M = M(I, J)
   Origs: 2280:goto, 2290:auto
   Dests: 2310:auto
-2310 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) GOSUB 1570
+2310 F(J:2230) (0 3) GOSUB 1570
   Origs: 2300:auto
   Dests: 1570:gosub, 2320:auto
-2320 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) GOTO 500
+2320 F(J:2230) (0 3) GOTO 500
   Origs: 2310:auto
   Dests: 500:goto
-2330 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) NEXT J
+2330 F(J:2230) (0 1) NEXT J
   Origs: 2230:fornext, 2240:ifthen
   Dests: 2340:auto
-2340 F(I:1720,K:1830,I:1980) (0 2) PRINT "MACHINE CONCEDES THIS GAME."
+2340 (0 2) PRINT "MACHINE CONCEDES THIS GAME."
   Origs: 2330:auto
   Dests: 2350:auto
-2350 F(I:1720,K:1830,I:1980) (0 3) GOTO 1490
+2350 (0 3) GOTO 1490
   Origs: 2340:auto
   Dests: 1490:goto
-2360 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 4) LET S = 1 / 8
+2360 (0 4) LET S = 1 / 8
   Origs: 1160:ifthen, 1170:ifthen, 1440:ifthen, 1450:ifthen
   Dests: 2370:auto
-2370 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 8) IF I - INT(I / 4) * 4 > 1 THEN 2400
+2370 (1 8) IF I - INT(I / 4) * 4 > 1 THEN 2400
   Origs: 1990:goto, 2360:auto
   Dests: 2380:auto, 2400:ifthen
-2380 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET A = 1
+2380 (0 3) LET A = 1
   Origs: 2370:auto
   Dests: 2390:auto
-2390 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) GOTO 2410
+2390 (0 2) GOTO 2410
   Origs: 2380:auto
   Dests: 2410:goto
-2400 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET A = 2
+2400 (0 3) LET A = 2
   Origs: 2370:ifthen
   Dests: 2410:auto
-2410 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 8) FOR J = A TO 5 - A STEP 5 - 2 * A
-     WARNING: FORNEXT length exceeds limit 40
-     WARNING: FOR/NEXT nesting exceeds limit 3
+2410 F(J:2410) (1 8) FOR J = A TO 5 - A STEP 5 - 2 * A
   Origs: 2390:goto, 2400:auto
   Dests: 2420:fornext, 2430:fornext
-2420 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (1 4) IF X(M(I, J)) = S THEN 2450
+2420 F(J:2410) (1 4) IF X(M(I, J)) = S THEN 2450
   Origs: 2410:fornext
   Dests: 2430:auto, 2450:ifthen
-2430 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) NEXT J
+2430 F(J:2410) (0 1) NEXT J
   Origs: 2410:fornext, 2420:auto
   Dests: 2440:auto
-2440 F(J:950,I:1720,K:1830,I:1980,J:2230) (0 3) GOTO 2000
+2440 (0 3) GOTO 2000
   Origs: 2430:auto
   Dests: 2000:goto
-2450 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET X(M(I, J)) = 5
+2450 (0 3) LET X(M(I, J)) = 5
   Origs: 2420:ifthen
   Dests: 2460:auto
-2460 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) LET M = M(I, J)
+2460 (0 3) LET M = M(I, J)
   Origs: 2450:auto
   Dests: 2470:auto
-2470 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT "MACHINE TAKES";
+2470 (0 2) PRINT "MACHINE TAKES";
   Origs: 2460:auto
   Dests: 2480:auto
-2480 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) GOSUB 1570
+2480 (0 3) GOSUB 1570
   Origs: 2470:auto
   Dests: 1570:gosub, 2490:auto
-2490 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) GOTO 500
+2490 (0 3) GOTO 500
   Origs: 2480:auto
   Dests: 500:goto
 2500 G(2500) F(I:2500) (1 3) FOR I = 1 TO 64
@@ -887,14 +867,13 @@ Halstead complexity:
 2740 G(2550) (0 1) RETURN
   Origs: 2730:auto
   Dests: 
-2750 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 2) PRINT "INCORRECT MOVE, RETYPE IT--";
+2750 (0 2) PRINT "INCORRECT MOVE, RETYPE IT--";
   Origs: 525:ifthen, 526:ifthen
   Dests: 2760:auto
-2760 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 3) GOTO 520
+2760 (0 3) GOTO 520
   Origs: 2750:auto
   Dests: 520:goto
-2770 F(J:950,I:1720,K:1830,I:1980,J:2230,J:2410) (0 1) END
-     WARNING: Terminating statement in FOR/NEXT
+2770 (0 1) END
   Origs: 521:ifthen
   Dests: :stop
 

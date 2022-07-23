@@ -105,28 +105,28 @@ Halstead complexity:
 330 (0 2) PRINT
   Origs: 320:auto
   Dests: 340:auto
-340 G(540) F(J:650) (0 2) PRINT "HERE WE GO..."
+340 G(540) (0 2) PRINT "HERE WE GO..."
   Origs: 150:ifthen, 330:auto, 1050:ifthen
   Dests: 360:auto
 350 (0 1) REM
   Origs: 
   Dests: 
-360 G(540) F(J:650) (0 3) F = 0
+360 G(540) (0 3) F = 0
   Origs: 340:auto
   Dests: 370:auto
-370 G(540) F(I:370,J:650) (1 3) FOR I = 1 TO 10
+370 G(540) F(I:370) (1 3) FOR I = 1 TO 10
   Origs: 360:auto
   Dests: 372:fornext, 379:fornext
-372 G(540) F(I:370,J:372,J:650) (1 3) FOR J = 1 TO 10
+372 G(540) F(I:370,J:372) (1 3) FOR J = 1 TO 10
   Origs: 370:fornext
   Dests: 375:fornext, 377:fornext
-375 G(540) F(I:370,J:372,J:650) (0 3) A(I, J) = 0
+375 G(540) F(I:370,J:372) (0 3) A(I, J) = 0
   Origs: 372:fornext
   Dests: 377:auto
-377 G(540) F(I:370,J:372,J:650) (0 1) NEXT J
+377 G(540) F(I:370,J:372) (0 1) NEXT J
   Origs: 372:fornext, 375:auto
   Dests: 379:auto
-379 G(540) F(I:370,J:650) (0 1) NEXT I
+379 G(540) F(I:370) (0 1) NEXT I
   Origs: 370:fornext, 377:auto
   Dests: 380:auto
 380 G(540) (0 2) PRINT
@@ -212,7 +212,6 @@ Halstead complexity:
   Origs: 630:fornext
   Dests: 650:auto
 650 G(540) F(I:630,J:650) (1 3) FOR J = 1 TO C
-    WARNING: FORNEXT length exceeds limit 40
   Origs: 640:auto
   Dests: 660:fornext, 710:fornext
 660 G(540) F(I:630,J:650) (1 6) IF A(I, J) = -1 THEN 700
@@ -233,85 +232,85 @@ Halstead complexity:
 710 G(540) F(I:630,J:650) (0 1) NEXT J
   Origs: 650:fornext, 690:goto, 700:auto
   Dests: 720:auto
-720 G(540) F(I:630,J:650) (0 2) PRINT
+720 G(540) F(I:630) (0 2) PRINT
   Origs: 670:ifthen, 710:auto
   Dests: 730:auto
-730 G(540) F(I:630,J:650) (0 1) NEXT I
+730 G(540) F(I:630) (0 1) NEXT I
   Origs: 630:fornext, 720:auto
   Dests: 740:auto
-740 G(540) F(J:650) (0 2) PRINT
+740 G(540) (0 2) PRINT
   Origs: 730:auto
   Dests: 750:auto
-750 G(540) F(J:650) (1 4) IF F = 0 THEN 770
+750 G(540) (1 4) IF F = 0 THEN 770
   Origs: 740:auto
   Dests: 760:auto, 780:ifthen
-760 G(540) F(J:650) (0 1) RETURN
+760 G(540) (0 1) RETURN
   Origs: 750:auto
   Dests: 
 770 (0 1) REM GET CHOMPS FOR EACH PLAYER IN TURN
   Origs: 
   Dests: 
-780 G(540) F(J:650) (0 4) LET I1 = I1 + 1
+780 G(540) (0 4) LET I1 = I1 + 1
   Origs: 750:ifthen
   Dests: 790:auto
-790 G(540) F(J:650) (0 7) LET P1 = I1 - INT(I1 / P) * P
+790 G(540) (0 7) LET P1 = I1 - INT(I1 / P) * P
   Origs: 780:auto
   Dests: 800:auto
-800 G(540) F(J:650) (1 4) IF P1 <> 0 THEN 820
+800 G(540) (1 4) IF P1 <> 0 THEN 820
   Origs: 790:auto
   Dests: 810:auto, 820:ifthen
-810 G(540) F(J:650) (0 3) P1 = P
+810 G(540) (0 3) P1 = P
   Origs: 800:auto
   Dests: 820:auto
-820 G(540) F(J:650) (0 3) PRINT "PLAYER"; P1
+820 G(540) (0 3) PRINT "PLAYER"; P1
   Origs: 800:ifthen, 810:auto, 930:goto
   Dests: 830:auto
-830 G(540) F(J:650) (0 2) PRINT "COORDINATES OF CHOMP (ROW,COLUMN)";
+830 G(540) (0 2) PRINT "COORDINATES OF CHOMP (ROW,COLUMN)";
   Origs: 820:auto
   Dests: 840:auto
-840 G(540) F(J:650) (2 3) INPUT R1, C1
+840 G(540) (2 3) INPUT R1, C1
   Origs: 830:auto
   Dests: 850:auto
-850 G(540) F(J:650) (1 4) IF R1 < 1 THEN 920
+850 G(540) (1 4) IF R1 < 1 THEN 920
   Origs: 840:auto
   Dests: 860:auto, 920:ifthen
-860 G(540) F(J:650) (1 4) IF R1 > R THEN 920
+860 G(540) (1 4) IF R1 > R THEN 920
   Origs: 850:auto
   Dests: 870:auto, 920:ifthen
-870 G(540) F(J:650) (1 4) IF C1 < 1 THEN 920
+870 G(540) (1 4) IF C1 < 1 THEN 920
   Origs: 860:auto
   Dests: 880:auto, 920:ifthen
-880 G(540) F(J:650) (1 4) IF C1 > C THEN 920
+880 G(540) (1 4) IF C1 > C THEN 920
   Origs: 870:auto
   Dests: 890:auto, 920:ifthen
-890 G(540) F(J:650) (1 4) IF A(R1, C1) = 0 THEN 920
+890 G(540) (1 4) IF A(R1, C1) = 0 THEN 920
   Origs: 880:auto
   Dests: 900:auto, 920:ifthen
-900 G(540) F(J:650) (1 6) IF A(R1, C1) = -1 THEN 1010
+900 G(540) (1 6) IF A(R1, C1) = -1 THEN 1010
   Origs: 890:auto
   Dests: 910:auto, 1010:ifthen
-910 G(540) F(J:650) (0 2) GOTO 940
+910 G(540) (0 2) GOTO 940
   Origs: 900:auto
   Dests: 940:goto
-920 G(540) F(J:650) (0 2) PRINT "NO FAIR. YOU'RE TRYING TO CHOMP ON EMPTY SPACE!"
+920 G(540) (0 2) PRINT "NO FAIR. YOU'RE TRYING TO CHOMP ON EMPTY SPACE!"
   Origs: 850:ifthen, 860:ifthen, 870:ifthen, 880:ifthen, 890:ifthen
   Dests: 930:auto
-930 G(540) F(J:650) (0 3) GOTO 820
+930 G(540) (0 3) GOTO 820
   Origs: 920:auto
   Dests: 820:goto
-940 G(540) F(J:650,I:940) (1 3) FOR I = R1 TO R
+940 G(540) F(I:940) (1 3) FOR I = R1 TO R
   Origs: 910:goto
   Dests: 950:fornext, 980:fornext
-950 G(540) F(J:650,I:940,J:950) (1 3) FOR J = C1 TO C
+950 G(540) F(I:940,J:950) (1 3) FOR J = C1 TO C
   Origs: 940:fornext
   Dests: 960:fornext, 970:fornext
-960 G(540) F(J:650,I:940,J:950) (0 3) A(I, J) = 0
+960 G(540) F(I:940,J:950) (0 3) A(I, J) = 0
   Origs: 950:fornext
   Dests: 970:auto
-970 G(540) F(J:650,I:940,J:950) (0 1) NEXT J
+970 G(540) F(I:940,J:950) (0 1) NEXT J
   Origs: 950:fornext, 960:auto
   Dests: 980:auto
-980 G(540) F(J:650,I:940) (0 1) NEXT I
+980 G(540) F(I:940) (0 1) NEXT I
   Origs: 940:fornext, 970:auto
   Dests: 990:auto
 990 G(540) (0 3) GOTO 610
@@ -320,25 +319,24 @@ Halstead complexity:
 1000 (0 1) REM END OF GAME DETECTED IN LINE 900
   Origs: 
   Dests: 
-1010 G(540) F(J:650) (0 3) PRINT "YOU LOSE, PLAYER"; P1
+1010 G(540) (0 3) PRINT "YOU LOSE, PLAYER"; P1
   Origs: 900:ifthen
   Dests: 1020:auto
-1020 G(540) F(J:650) (0 2) PRINT
+1020 G(540) (0 2) PRINT
   Origs: 1010:auto
   Dests: 1030:auto
-1030 G(540) F(J:650) (0 2) PRINT "AGAIN (1=YES, 0=NO!)";
+1030 G(540) (0 2) PRINT "AGAIN (1=YES, 0=NO!)";
   Origs: 1020:auto
   Dests: 1040:auto
-1040 G(540) F(J:650) (1 2) INPUT R
+1040 G(540) (1 2) INPUT R
   Origs: 1030:auto
   Dests: 1050:auto
-1050 G(540) F(J:650) (1 5) IF R = 1 THEN 340
+1050 G(540) (1 5) IF R = 1 THEN 340
      WARNING: Branch to line before GOSUB start
   Origs: 1040:auto
   Dests: 340:ifthen, 1060:auto
-1060 G(540) F(J:650) (0 1) END
+1060 G(540) (0 1) END
      WARNING: Terminating statement in GOSUB
-     WARNING: Terminating statement in FOR/NEXT
   Origs: 1050:auto
   Dests: :stop
 

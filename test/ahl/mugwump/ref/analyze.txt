@@ -66,55 +66,55 @@ Halstead complexity:
 110 (0 2) PRINT
   Origs: 100:auto
   Dests: 240:auto
-240 F(J:410) (0 2) GOSUB 1000
+240 (0 2) GOSUB 1000
   Origs: 110:auto, 630:goto
   Dests: 250:auto, 1000:gosub
-250 F(J:410) (0 3) T = 0
+250 (0 3) T = 0
   Origs: 240:auto
   Dests: 260:auto
-260 F(J:410) (0 4) T = T + 1
+260 (0 4) T = T + 1
   Origs: 250:auto, 470:ifthen
   Dests: 270:auto
-270 F(J:410) (0 2) PRINT
+270 (0 2) PRINT
   Origs: 260:auto
   Dests: 275:auto
-275 F(J:410) (0 2) PRINT
+275 (0 2) PRINT
   Origs: 270:auto
   Dests: 290:auto
-290 F(J:410) (0 4) PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
+290 (0 4) PRINT "TURN NO."; T; "-- WHAT IS YOUR GUESS";
   Origs: 275:auto
   Dests: 300:auto
-300 F(J:410) (2 3) INPUT M, N
+300 (2 3) INPUT M, N
   Origs: 290:auto
   Dests: 310:auto
-310 F(I:310,J:410) (1 3) FOR I = 1 TO 4
+310 F(I:310) (1 3) FOR I = 1 TO 4
   Origs: 300:auto
   Dests: 320:fornext, 400:fornext
-320 F(I:310,J:410) (1 6) IF P(I, 1) = -1 THEN 400
+320 F(I:310) (1 6) IF P(I, 1) = -1 THEN 400
   Origs: 310:fornext
   Dests: 330:auto, 400:ifthen
-330 F(I:310,J:410) (1 4) IF P(I, 1) <> M THEN 380
+330 F(I:310) (1 4) IF P(I, 1) <> M THEN 380
   Origs: 320:auto
   Dests: 340:auto, 380:ifthen
-340 F(I:310,J:410) (1 4) IF P(I, 2) <> N THEN 380
+340 F(I:310) (1 4) IF P(I, 2) <> N THEN 380
   Origs: 330:auto
   Dests: 350:auto, 380:ifthen
-350 F(I:310,J:410) (0 4) P(I, 1) = -1
+350 F(I:310) (0 4) P(I, 1) = -1
   Origs: 340:auto
   Dests: 360:auto
-360 F(I:310,J:410) (0 3) PRINT "YOU HAVE FOUND MUGWUMP"; I
+360 F(I:310) (0 3) PRINT "YOU HAVE FOUND MUGWUMP"; I
   Origs: 350:auto
   Dests: 370:auto
-370 F(I:310,J:410) (0 2) GOTO 400
+370 F(I:310) (0 2) GOTO 400
   Origs: 360:auto
   Dests: 400:goto
-380 F(I:310,J:410) (0 4) D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
+380 F(I:310) (0 4) D = SQR((P(I, 1) - M) ^ 2 + (P(I, 2) - N) ^ 2)
   Origs: 330:ifthen, 340:ifthen
   Dests: 390:auto
-390 F(I:310,J:410) (0 7) PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
+390 F(I:310) (0 7) PRINT "YOU ARE"; (INT(D * 10)) / 10; "UNITS FROM MUGWUMP"; I
   Origs: 380:auto
   Dests: 400:auto
-400 F(I:310,J:410) (0 1) NEXT I
+400 F(I:310) (0 1) NEXT I
   Origs: 310:fornext, 320:ifthen, 370:goto, 390:auto
   Dests: 410:auto
 410 F(J:410) (1 3) FOR J = 1 TO 4
@@ -135,37 +135,37 @@ Halstead complexity:
 460 (0 2) GOTO 580
   Origs: 450:auto
   Dests: 580:goto
-470 F(J:410) (1 5) IF T < 10 THEN 260
+470 (1 5) IF T < 10 THEN 260
   Origs: 420:ifthen
   Dests: 260:ifthen, 480:auto
-480 F(J:410) (0 2) PRINT
+480 (0 2) PRINT
   Origs: 470:auto
   Dests: 490:auto
-490 F(J:410) (0 2) PRINT "SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
+490 (0 2) PRINT "SORRY, THAT'S 10 TRIES.  HERE IS WHERE THEY'RE HIDING:"
   Origs: 480:auto
   Dests: 540:auto
-540 F(J:410,I:540) (1 3) FOR I = 1 TO 4
+540 F(I:540) (1 3) FOR I = 1 TO 4
   Origs: 490:auto
   Dests: 550:fornext, 570:fornext
-550 F(J:410,I:540) (1 6) IF P(I, 1) = -1 THEN 570
+550 F(I:540) (1 6) IF P(I, 1) = -1 THEN 570
   Origs: 540:fornext
   Dests: 560:auto, 570:ifthen
-560 F(J:410,I:540) (0 8) PRINT "MUGWUMP"; I; "IS AT ("; P(I, 1); ","; P(I, 2); ")"
+560 F(I:540) (0 8) PRINT "MUGWUMP"; I; "IS AT ("; P(I, 1); ","; P(I, 2); ")"
   Origs: 550:auto
   Dests: 570:auto
-570 F(J:410,I:540) (0 1) NEXT I
+570 F(I:540) (0 1) NEXT I
   Origs: 540:fornext, 550:ifthen, 560:auto
   Dests: 580:auto
-580 F(J:410) (0 2) PRINT
+580 (0 2) PRINT
   Origs: 460:goto, 570:auto
   Dests: 600:auto
-600 F(J:410) (0 2) PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
+600 (0 2) PRINT "THAT WAS FUN! LET'S PLAY AGAIN......."
   Origs: 580:auto
   Dests: 610:auto
-610 F(J:410) (0 2) PRINT "FOUR MORE MUGWUMPS ARE NOW IN HIDING."
+610 (0 2) PRINT "FOUR MORE MUGWUMPS ARE NOW IN HIDING."
   Origs: 600:auto
   Dests: 630:auto
-630 F(J:410) (0 3) GOTO 240
+630 (0 3) GOTO 240
   Origs: 610:auto
   Dests: 240:goto
 1000 G(1000) F(J:1000) (1 3) FOR J = 1 TO 2

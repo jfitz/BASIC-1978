@@ -70,16 +70,16 @@ Halstead complexity:
 270 (0 1) REM *** COMPUTER THINKS OF A NUMBER
   Origs: 
   Dests: 
-280 F(K:330) (0 2) PRINT
+280 (0 2) PRINT
   Origs: 190:ifthen, 260:auto, 650:goto
   Dests: 290:auto
-290 F(K:330) (0 2) PRINT
+290 (0 2) PRINT
   Origs: 280:auto
   Dests: 300:auto
-300 F(K:330) (0 4) X = INT(A * RND(1) + 1)
+300 (0 4) X = INT(A * RND(1) + 1)
   Origs: 290:auto
   Dests: 310:auto
-310 F(K:330) (0 2) PRINT "OK, I AM THINKING OF A NUMBER, START GUESSING."
+310 (0 2) PRINT "OK, I AM THINKING OF A NUMBER, START GUESSING."
   Origs: 300:auto
   Dests: 330:auto
 320 (0 1) REM *** GUESSING BEGINS, HUMAN GETS M GUESSES
@@ -163,24 +163,24 @@ Halstead complexity:
 590 (0 1) REM *** WE HAVE A WINNER
   Origs: 
   Dests: 
-600 F(K:330) (0 2) PRINT
-    F(K:330,N:600.1) (1 3) FOR N = 1 TO 79
+600 (0 2) PRINT
+    F(N:600.1) (1 3) FOR N = 1 TO 79
   Origs: 370:ifthen
   Dests: 610:fornext, 620:fornext
-610 F(K:330,N:600.1) (0 2) PRINT "*";
+610 F(N:600.1) (0 2) PRINT "*";
   Origs: 600:fornext
   Dests: 620:auto
-620 F(K:330,N:600.1) (0 1) NEXT N
+620 F(N:600.1) (0 1) NEXT N
   Origs: 600:fornext, 610:auto
   Dests: 630:auto
-630 F(K:330) (0 2) PRINT
-    F(K:330) (0 2) PRINT
+630 (0 2) PRINT
+    (0 2) PRINT
   Origs: 620:auto
   Dests: 640:auto
-640 F(K:330) (0 4) PRINT "YOU GOT IT IN"; K; "GUESSES!!!  LET'S PLAY AGAIN..."
+640 (0 4) PRINT "YOU GOT IT IN"; K; "GUESSES!!!  LET'S PLAY AGAIN..."
   Origs: 630:auto
   Dests: 650:auto
-650 F(K:330) (0 3) GOTO 280
+650 (0 3) GOTO 280
   Origs: 580:goto, 640:auto
   Dests: 280:goto
 660 (0 1) END

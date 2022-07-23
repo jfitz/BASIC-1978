@@ -55,14 +55,14 @@ Halstead complexity:
 90 (0 2) PRINT "SURFACE COORDINATES; THE THIRD IS THE DEPTH."
   Origs: 80:auto
   Dests: 100:auto
-100 F(D:120) (0 2) PRINT
-    F(D:120) (0 2) PRINT "GOOD LUCK !"
-    F(D:120) (0 2) PRINT
+100 (0 2) PRINT
+    (0 2) PRINT "GOOD LUCK !"
+    (0 2) PRINT
   Origs: 90:auto, 410:ifthen
   Dests: 110:auto
-110 F(D:120) (0 4) A = INT(G * RND(1))
-    F(D:120) (0 4) B = INT(G * RND(1))
-    F(D:120) (0 4) C = INT(G * RND(1))
+110 (0 4) A = INT(G * RND(1))
+    (0 4) B = INT(G * RND(1))
+    (0 4) C = INT(G * RND(1))
   Origs: 100:auto
   Dests: 120:auto
 120 F(D:120) (1 3) FOR D = 1 TO N
@@ -87,20 +87,20 @@ Halstead complexity:
     (0 2) GOTO 400
   Origs: 200:auto
   Dests: 400:goto
-300 F(D:120) (0 2) PRINT
-    F(D:120) (0 4) PRINT "B O O M ! ! YOU FOUND IT IN"; D; "TRIES!"
+300 (0 2) PRINT
+    (0 4) PRINT "B O O M ! ! YOU FOUND IT IN"; D; "TRIES!"
   Origs: 130:ifthen
   Dests: 400:auto
-400 F(D:120) (0 2) PRINT
-    F(D:120) (0 2) PRINT
-    F(D:120) (1 2) INPUT "ANOTHER GAME (Y OR N)"; A$
+400 (0 2) PRINT
+    (0 2) PRINT
+    (1 2) INPUT "ANOTHER GAME (Y OR N)"; A$
   Origs: 210:goto, 300:auto
   Dests: 410:auto
-410 F(D:120) (1 5) IF A$ = "Y" THEN 100
+410 (1 5) IF A$ = "Y" THEN 100
   Origs: 400:auto
   Dests: 100:ifthen, 420:auto
-420 F(D:120) (0 2) PRINT "OK.  HOPE YOU ENJOYED YOURSELF."
-    F(D:120) (0 2) GOTO 600
+420 (0 2) PRINT "OK.  HOPE YOU ENJOYED YOURSELF."
+    (0 2) GOTO 600
   Origs: 410:auto
   Dests: 600:goto
 500 G(500) (0 2) PRINT "SONAR REPORTS SHOT WAS ";
@@ -133,8 +133,7 @@ Halstead complexity:
 590 G(500) (0 1) RETURN
   Origs: 580:auto
   Dests: 
-600 F(D:120) (0 1) END
-    WARNING: Terminating statement in FOR/NEXT
+600 (0 1) END
   Origs: 420:goto
   Dests: :stop
 
