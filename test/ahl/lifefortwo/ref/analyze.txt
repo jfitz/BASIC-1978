@@ -93,6 +93,7 @@ Halstead complexity:
 102 G(90,50) F(J:99,K:100) (1 5) IF K = 6 THEN PRINT 0;
     G(90,50) F(J:99,K:100) (0 2) GOTO 125
     WARNING: Multiple GOSUB entry points
+    WARNING: Transfer in/out of FOR/NEXT 125
   Origs: 101:auto
   Dests: 103:auto, 125:goto
 103 G(90,50) F(J:99,K:100) (0 2) PRINT K;
@@ -107,6 +108,7 @@ Halstead complexity:
 106 G(90,50) F(J:99,K:100) (1 5) IF J = 6 THEN PRINT 0
     G(90,50) F(J:99,K:100) (0 2) GOTO 126
     WARNING: Multiple GOSUB entry points
+    WARNING: Transfer in/out of FOR/NEXT 126
   Origs: 105:auto
   Dests: 107:auto, 126:goto
 107 G(90,50) F(J:99,K:100) (0 2) PRINT J;
@@ -153,6 +155,7 @@ Halstead complexity:
   Origs: 300:auto
   Dests: 310:fornext, 315:fornext
 310 G(300) F(O1:305) (1 4) IF N(J, K) = K(O1) THEN 350
+    WARNING: Transfer in/out of FOR/NEXT 350
   Origs: 305:fornext
   Dests: 315:auto, 350:ifthen
 315 G(300) F(O1:305) (0 1) NEXT O1
@@ -266,6 +269,7 @@ Halstead complexity:
   Origs: 573:goto
   Dests: 581:auto, 582:fornext, 700:gosub
 581 F(B:580) (1 5) IF B = 99 THEN 560
+    WARNING: Transfer in/out of FOR/NEXT 560
   Origs: 580:auto
   Dests: 560:ifthen, 582:auto
 582 F(B:580) (0 1) NEXT B

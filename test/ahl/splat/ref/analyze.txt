@@ -223,12 +223,14 @@ Halstead complexity:
   Origs: 219:auto
   Dests: 310:fornext, 350:fornext
 310 F(I:300) (1 6) IF I > V / A THEN 400
+    WARNING: Transfer in/out of FOR/NEXT 400
   Origs: 300:fornext
   Dests: 320:auto, 400:ifthen
 320 F(I:300) (0 9) D = D1 - ((A / 2) * I ^ 2)
   Origs: 310:auto
   Dests: 330:auto
 330 F(I:300) (1 4) IF D <= 0 THEN 1000
+    WARNING: Transfer in/out of FOR/NEXT 1000
   Origs: 320:auto
   Dests: 340:auto, 1000:ifthen
 340 F(I:300) (0 3) PRINT I, D
@@ -250,6 +252,7 @@ Halstead complexity:
   Origs: 405:fornext
   Dests: 420:auto
 420 F(I:405) (1 4) IF D <= 0 THEN 1010
+    WARNING: Transfer in/out of FOR/NEXT 1010
   Origs: 410:auto
   Dests: 430:auto, 1010:ifthen
 430 F(I:405) (0 3) PRINT I, D
@@ -272,6 +275,7 @@ Halstead complexity:
   Origs: 510:auto, 610:goto
   Dests: 555:fornext, 600:fornext
 555 F(J:550) (1 4) IF A(J) = 0 THEN 620
+    WARNING: Transfer in/out of FOR/NEXT 620
   Origs: 550:fornext
   Dests: 560:auto, 620:ifthen
 560 F(J:550) (0 4) K = K + 1

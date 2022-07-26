@@ -66,9 +66,11 @@ Halstead complexity:
   Origs: 90:fornext
   Dests: 96:auto
 96 F(T:70,O:90) (1 4) IF P$ = " " THEN 812
+   WARNING: Transfer in/out of FOR/NEXT 812
   Origs: 95:auto
   Dests: 100:auto, 812:ifthen
 100 F(T:70,O:90) (1 4) IF P$ = S$ THEN 200
+    WARNING: Transfer in/out of FOR/NEXT 200
   Origs: 96:auto
   Dests: 120:auto, 200:ifthen
 120 F(T:70,O:90) (0 1) NEXT O
@@ -103,6 +105,7 @@ Halstead complexity:
   Origs: 230:ifthen
   Dests: 272:auto
 272 F(T:70,U:205,K:210) (1 4) IF S(U) = 1 THEN 815
+    WARNING: Transfer in/out of FOR/NEXT 815
   Origs: 270:auto
   Dests: 280:auto, 815:ifthen
 280 F(T:70,U:205,K:210) (0 1) NEXT K
@@ -179,10 +182,12 @@ Halstead complexity:
   Origs: 96:ifthen
   Dests: 813:auto
 813 (0 3) GOTO 800
+    WARNING: Transfer in/out of FOR/NEXT 800
   Origs: 812:auto
   Dests: 800:goto
 815 (0 4) F(U) = 9 - K
     (0 3) GOTO 445
+    WARNING: Transfer in/out of FOR/NEXT 445
   Origs: 272:ifthen
   Dests: 445:goto
 899 (0 2) DATA " ", 0, 0, 0, 0, 0, 0, 0

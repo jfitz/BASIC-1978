@@ -157,6 +157,7 @@
  TextValue:"HERE ARE THE LETTERS YOU USED:"
  CarriageControl:NL
 180 FOR I=1 TO 26: PRINT N$(I);: IF N$(I+1)="" THEN 200
+ WARNING: Transfer in/out of FOR/NEXT 200
  control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:26"]
@@ -192,6 +193,7 @@
  NumericValue:0
  AssignmentOperator:= =. -> .
 220 FOR I=1 TO 26: IF N$(I)="" THEN 250
+ WARNING: Transfer in/out of FOR/NEXT 250
  control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["NumericValue:26"]
@@ -201,6 +203,7 @@
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:250
 230 IF G$=N$(I) THEN PRINT "YOU GUESSED THAT LETTER BEFORE!": GOTO 170
+ WARNING: Transfer in/out of FOR/NEXT 170
  Variable:G$ -> $
  Variable:I -> .
  Variable:N$(.) -> $
@@ -224,6 +227,7 @@
  BinaryOperatorPlus:+(.,.) -> .
  AssignmentOperator:= . -> .
 260 FOR I=1 TO L: IF L$(I)=G$ THEN 280
+ WARNING: Transfer in/out of FOR/NEXT 280
  control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["Variable:L -> ."]
@@ -241,6 +245,7 @@
 275 GOTO 300
  LineNumber:300
 280 D$(I)=G$: R=R+1: GOTO 270
+ WARNING: Transfer in/out of FOR/NEXT 270
  Variable:I -> .
  Variable:D$(.) -> $
  Variable:G$ -> $
@@ -259,6 +264,7 @@
  AssignmentOperator:= . -> .
  LineNumber:400
 300 FOR I=1 TO L: IF D$(I)="-" THEN 320
+ WARNING: Transfer in/out of FOR/NEXT 320
  control: Variable:I -> .
  start:   ["NumericValue:1"]
  end:     ["Variable:L -> ."]

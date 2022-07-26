@@ -67,6 +67,7 @@ Halstead complexity:
   Dests: 102:auto, 103:ifthen
 102 (0 4) S(5) = -1
     (0 2) GOTO 195
+    WARNING: Transfer in/out of FOR/NEXT 195
   Origs: 100:auto
   Dests: 195:goto
 103 (1 4) IF S(5) <> 1 THEN 106
@@ -77,18 +78,23 @@ Halstead complexity:
   Dests: 105:auto, 110:ifthen
 105 (0 4) S(1) = -1
     (0 2) GOTO 195
+    WARNING: Transfer in/out of FOR/NEXT 195
   Origs: 104:auto
   Dests: 195:goto
 106 (1 7) IF S(2) = 1 AND S(1) = 0 THEN 181
+    WARNING: Transfer in/out of FOR/NEXT 181
   Origs: 103:ifthen
   Dests: 107:auto, 181:ifthen
 107 (1 7) IF S(4) = 1 AND S(1) = 0 THEN 181
+    WARNING: Transfer in/out of FOR/NEXT 181
   Origs: 106:auto
   Dests: 108:auto, 181:ifthen
 108 (1 7) IF S(6) = 1 AND S(9) = 0 THEN 189
+    WARNING: Transfer in/out of FOR/NEXT 189
   Origs: 107:auto
   Dests: 109:auto, 189:ifthen
 109 (1 7) IF S(8) = 1 AND S(9) = 0 THEN 189
+    WARNING: Transfer in/out of FOR/NEXT 189
   Origs: 108:auto
   Dests: 110:auto, 189:ifthen
 110 (1 4) IF G = 1 THEN 112
@@ -110,6 +116,7 @@ Halstead complexity:
   Origs: 114:auto
   Dests: 116:auto
 116 (0 2) GOTO 120
+    WARNING: Transfer in/out of FOR/NEXT 120
   Origs: 115:auto
   Dests: 120:goto
 118 F(J:118) (1 4) FOR J = 1 TO 7 STEP 3
@@ -208,6 +215,7 @@ Halstead complexity:
 175 F(J:118,K:118.1) (1 8) IF G = -1 THEN G = 1
     F(J:118,K:118.1) (0 4) H = -1
     F(J:118,K:118.1) (0 3) GOTO 110
+    WARNING: Transfer in/out of FOR/NEXT 110
   Origs: 174:auto, 467:goto
   Dests: 110:goto, 176:auto
 176 F(J:118,K:118.1) (1 7) IF S(9) = 1 AND S(3) = 0 THEN 182
@@ -219,6 +227,7 @@ Halstead complexity:
   Dests: 178:auto, 179:fornext, 179:ifthen
 178 F(J:118,K:118.1,I:177) (0 4) S(I) = -1
     F(J:118,K:118.1,I:177) (0 2) GOTO 195
+    WARNING: Transfer in/out of FOR/NEXT 195
   Origs: 177:auto
   Dests: 195:goto
 179 F(J:118,K:118.1,I:177) (0 1) NEXT I
@@ -250,21 +259,26 @@ Halstead complexity:
   Origs: 195:auto
   Dests: 205:auto, 1000:gosub
 205 F(J:118,K:118.1) (0 2) GOTO 500
+    WARNING: Transfer in/out of FOR/NEXT 500
   Origs: 202:auto
   Dests: 500:goto
 450 F(J:118,K:118.1) (1 4) IF G = 1 THEN 465
+    WARNING: Transfer in/out of FOR/NEXT 465
   Origs: 170:goto
   Dests: 455:auto, 465:ifthen
 455 F(J:118,K:118.1) (1 7) IF J = 7 AND K = 3 THEN 465
+    WARNING: Transfer in/out of FOR/NEXT 465
   Origs: 450:auto
   Dests: 460:auto, 465:ifthen
 460 F(J:118,K:118.1) (0 1) NEXT K, J
   Origs: 118:fornext, 455:auto
   Dests: 465:auto
 465 (1 5) IF S(5) = G THEN 171
+    WARNING: Transfer in/out of FOR/NEXT 171
   Origs: 450:ifthen, 455:ifthen, 460:auto
   Dests: 171:ifthen, 467:auto
 467 (0 3) GOTO 175
+    WARNING: Transfer in/out of FOR/NEXT 175
   Origs: 465:auto
   Dests: 175:goto
 475 (0 3) P$ = "X"
@@ -354,9 +368,11 @@ Halstead complexity:
   Origs: 1100:auto
   Dests: 1110:auto, 1115:ifthen
 1110 G(1000) F(I:1095) (1 6) IF S(I) = -1 THEN 1350
+     WARNING: Transfer in/out of FOR/NEXT 1350
   Origs: 1105:auto
   Dests: 1112:auto, 1350:ifthen
 1112 G(1000) F(I:1095) (1 4) IF S(I) = 1 THEN 1200
+     WARNING: Transfer in/out of FOR/NEXT 1200
   Origs: 1110:auto
   Dests: 1115:auto, 1200:ifthen
 1115 G(1000) F(I:1095) (0 1) NEXT I
@@ -368,14 +384,17 @@ Halstead complexity:
   Origs: 1115:auto
   Dests: 1135:auto, 1150:ifthen
 1135 G(1000) F(I:1115.1) (1 6) IF S(I) = -1 THEN 1350
+     WARNING: Transfer in/out of FOR/NEXT 1350
   Origs: 1130:auto
   Dests: 1137:auto, 1350:ifthen
 1137 G(1000) F(I:1115.1) (1 4) IF S(I) = 1 THEN 1200
+     WARNING: Transfer in/out of FOR/NEXT 1200
   Origs: 1135:auto
   Dests: 1150:auto, 1200:ifthen
 1150 G(1000) F(I:1115.1) (0 1) NEXT I
      G(1000) F(I:1150.1) (1 3) FOR I = 1 TO 9
      G(1000) F(I:1150.1) (1 4) IF S(I) = 0 THEN 1155
+     WARNING: Transfer in/out of FOR/NEXT 1155
   Origs: 1115:fornext, 1115:ifthen, 1130:ifthen, 1137:auto
   Dests: 1152:auto, 1152:fornext, 1155:ifthen
 1152 G(1000) F(I:1150.1) (0 1) NEXT I

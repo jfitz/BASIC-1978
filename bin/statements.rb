@@ -280,6 +280,24 @@ class ForNextMarker
     @line_stmt = line_stmt
   end
 
+  def hash
+    @control.hash ^ @line_stmt.hash
+  end
+
+  def eql?(other)
+    @control == other.control && @line_stmt == other.line_stmt
+  end
+
+  def ==(other)
+    @control == other.control && @line_stmt == other.line_stmt
+  end
+
+  def <=>(other)
+    return @line_stmt <=> other.line_stmt if @control == other.control
+
+    @control <=> other.control
+  end
+
   def to_s
     "#{@control}:#{@line_stmt}"
   end
@@ -784,6 +802,23 @@ class AbstractStatement
     end
   end
 
+  def check_destinations_fornext(_, _)
+  end
+
+  def check_destination_fornext(program, line_stmt, dest_line_stmt)
+    return if dest_line_stmt.nil?
+
+    dest_statement = program.get_statement(dest_line_stmt)
+
+    return if dest_statement.nil?
+
+    dest_part_of_fornext = dest_statement.part_of_fornext_short(dest_line_stmt)
+    dest_line_number = dest_line_stmt.line_number
+
+    @program_warnings << "Transfer in/out of FOR/NEXT #{dest_line_number}" if
+      dest_part_of_fornext != @part_of_fornext
+  end
+
   def check_program(_, _)
   end
 
@@ -879,6 +914,10 @@ class AbstractStatement
 
   def multiend?
     false
+  end
+
+  def part_of_fornext_short(_)
+    @part_of_fornext
   end
 
   protected
@@ -2537,6 +2576,12 @@ class ForStatement < AbstractStatement
     print_more_trace_info(io, from, to, step, untilv, whilev, terminated)
   end
 
+  def part_of_fornext_short(this_line_stmt)
+    marker = ForNextMarker.new(@control, this_line_stmt)
+
+    @part_of_fornext - [marker]
+  end
+
   private
 
   def control_and_start(tokens)
@@ -2781,6 +2826,16 @@ class GotoStatement < AbstractStatement
     end
   end
 
+  def check_destinations_fornext(program, line_stmt)
+    check_destination_fornext(program, line_stmt, @dest_line_stmt_mod)
+
+    unless @dest_line_stmt_mods.nil?
+      @dest_line_stmt_mods.each do |dest_line_stmt_mod|
+        check_destination_fornext(program, line_stmt, dest_line_stmt_mod)
+      end
+    end
+  end
+
   def check_program(program, _line_number_stmt)
     @program_errors << "Line number #{@dest_line} not found" unless
       program.line_number?(@dest_line)
@@ -2825,6 +2880,7 @@ class AbstractIfStatement < AbstractStatement
 
       @dest_line, @statement = parse_target(line_number, tokens_lists['then'])
       @else_dest_line = nil
+
       if tokens_lists.key?('else')
         @else_dest_line, @else_stmt = parse_target(line_number,
                                                    tokens_lists['else'])
@@ -3069,6 +3125,14 @@ class AbstractIfStatement < AbstractStatement
     @modifiers&.each { |item| lines += item.dump }
 
     lines
+  end
+
+  def check_destinations_fornext(program, line_stmt)
+    check_destination_fornext(program, line_stmt, @dest_line_stmt_mod)
+    check_destination_fornext(program, line_stmt, @else_dest_line_stmt_mod)
+
+    @statement.check_destinations_fornext(program, line_stmt) unless @statement.nil?
+    @else_stmt.check_destinations_fornext(program, line_stmt) unless @else_stmt.nil?
   end
 
   def check_program(program, _line_number_stmt)
@@ -3956,6 +4020,12 @@ class OnStatement < AbstractStatement
           @dest_line_stmt_mods << program.find_exec_line_stmt_mod(dest)
         end
       end
+    end
+  end
+
+  def check_destinations_fornext(program, line_stmt)
+    @dest_line_stmt_mods.each do |dest_line_stmt_mod|
+      check_destination_fornext(program, line_stmt, dest_line_stmt_mod)
     end
   end
 

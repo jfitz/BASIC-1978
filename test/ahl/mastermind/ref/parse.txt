@@ -165,11 +165,13 @@
  CarriageControl:;
  Variable:X$ -> $
 390 IF X$="BOARD" THEN 2000
+ WARNING: Transfer in/out of FOR/NEXT 2025
  Variable:X$ -> $
  TextValue:"BOARD"
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:2000
 400 IF X$="QUIT" THEN 2500
+ WARNING: Transfer in/out of FOR/NEXT 2530
  Variable:X$ -> $
  TextValue:"QUIT"
  BinaryOperatorEqual:=($,$) -> ?
@@ -194,6 +196,7 @@
  start:   ["NumericValue:1"]
  end:     ["Variable:C9 -> ."]
 450 IF MID$(X$,X,1)=MID$(L$,Y,1) THEN 480
+ WARNING: Transfer in/out of FOR/NEXT 480
  Variable:X$ -> $
  Variable:X -> .
  NumericValue:1
@@ -207,6 +210,7 @@
 460 NEXT Y
  Variable:Y -> .
 470 PRINT "'"; MID$(X$,X,1); "' IS UNRECOGNIZED.":GOTO 380
+ WARNING: Transfer in/out of FOR/NEXT 380
  TextValue:"'"
  CarriageControl:;
  Variable:X$ -> $
@@ -236,6 +240,7 @@
 530 GOSUB 4500
  LineNumber:4500
 540 IF B=P9 THEN 630
+ WARNING: Transfer in/out of FOR/NEXT 630
  Variable:B -> .
  Variable:P9 -> .
  BinaryOperatorEqual:=(.,.) -> ?
@@ -361,6 +366,7 @@
  start:   ["Variable:G -> ."]
  end:     ["Variable:P -> ."]
 800 IF I(X)=1 THEN 880
+ WARNING: Transfer in/out of FOR/NEXT 880
  Variable:X -> .
  Variable:I(.) -> .
  NumericValue:1
@@ -373,6 +379,7 @@
  start:   ["NumericValue:1"]
  end:     ["Variable:G -> ."]
 830 IF I(X)=1 THEN 880
+ WARNING: Transfer in/out of FOR/NEXT 880
  Variable:X -> .
  Variable:I(.) -> .
  NumericValue:1
@@ -387,6 +394,7 @@
  TextValue:"TRY AGAIN, AND THIS TIME PLEASE BE MORE CAREFUL."
  CarriageControl:NL
 870 GOTO 660
+ WARNING: Transfer in/out of FOR/NEXT 690
  LineNumber:660
 880 G=X
  Variable:G -> .
@@ -421,6 +429,7 @@
  Variable:B1 -> .
  Variable:W1 -> .
 990 IF B1=P9 THEN 1120
+ WARNING: Transfer in/out of FOR/NEXT 1120
  Variable:B1 -> .
  Variable:P9 -> .
  BinaryOperatorEqual:=(.,.) -> ?
@@ -542,6 +551,7 @@
 2075 PRINT
  CarriageControl:NL
 2080 GOTO 380
+ WARNING: Transfer in/out of FOR/NEXT 380
  LineNumber:380
 2500 REM
  Remark:
@@ -747,6 +757,7 @@
  BinaryOperatorEqual:=($,$) -> ?
  LineNumber:4650
 4645 W=W+1:A$(T)=CHR$(F):G$(S)=CHR$(F+1):F=F+2:GOTO 4660
+ WARNING: Transfer in/out of FOR/NEXT 4660
  Variable:W -> .
  Variable:W -> .
  NumericValue:1

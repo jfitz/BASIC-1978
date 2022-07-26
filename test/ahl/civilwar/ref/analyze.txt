@@ -472,9 +472,11 @@ Halstead complexity:
   Origs: 1490:auto
   Dests: 1370:goto, 1410:goto, 1510:auto
 1510 F(I:1220) (1 4) IF B$ <> "YES" THEN 1550
+     WARNING: Transfer in/out of FOR/NEXT 1550
   Origs: 1350:goto, 1460:ifthen, 1500:auto
   Dests: 1520:auto, 1550:ifthen
 1520 F(I:1220) (1 4) IF I = 2 THEN 1550
+     WARNING: Transfer in/out of FOR/NEXT 1550
   Origs: 1510:auto
   Dests: 1530:auto, 1550:ifthen
 1530 F(I:1220) (0 2) PRINT "UNION GENERAL---";
@@ -529,6 +531,7 @@ Halstead complexity:
   Origs: 1660:ifthen
   Dests: 1700:auto
 1700 F(Z:1550) (1 4) IF B$ <> "YES" THEN 1760
+     WARNING: Transfer in/out of FOR/NEXT 1770
   Origs: 1650:goto, 1680:goto, 1690:auto
   Dests: 1710:auto, 1770:ifthen
 1710 F(Z:1550) (0 3) LET O(Z) = O
@@ -577,6 +580,7 @@ Halstead complexity:
   Origs: 
   Dests: 
 1860 (1 4) IF B$ <> "YES" THEN 1910
+     WARNING: Transfer in/out of FOR/NEXT 1910
   Origs: 1840:auto
   Dests: 1870:auto, 1910:ifthen
 1870 F(I:1870) (1 3) FOR I = 1 TO 2
@@ -610,15 +614,18 @@ Halstead complexity:
   Origs: 1930:ifthen
   Dests: 1970:auto, 2000:ifthen
 1970 F(I:1870) (1 4) IF Y = 5 THEN 2830
+     WARNING: Transfer in/out of FOR/NEXT 2830
   Origs: 1960:auto
   Dests: 1980:auto, 2830:ifthen
 1980 F(I:1870) (0 2) GOSUB 3110
   Origs: 1970:auto
   Dests: 1990:auto, 3120:gosub
 1990 F(I:1870) (0 2) GOTO 2170
+     WARNING: Transfer in/out of FOR/NEXT 2180
   Origs: 1980:auto
   Dests: 2180:goto
 2000 F(I:1870) (1 4) IF I = 2 THEN 2040
+     WARNING: Transfer in/out of FOR/NEXT 2040
   Origs: 1960:ifthen
   Dests: 2010:auto, 2040:ifthen
 2010 F(I:1870) (0 3) LET Y1 = Y
@@ -637,6 +644,7 @@ Halstead complexity:
   Origs: 2040:auto
   Dests: 2060:auto
 2060 (1 5) IF Y2 = 5 THEN 2020
+     WARNING: Transfer in/out of FOR/NEXT 2020
   Origs: 2050:auto
   Dests: 2020:ifthen, 2080:auto
 2070 (0 1) REM : SIMULATED LOSSES-NORTH
@@ -1008,6 +1016,7 @@ Halstead complexity:
   Origs: 
   Dests: 
 3240 G(3120) F(I:3200) (1 4) IF R < S0 THEN 3270
+     WARNING: Transfer in/out of FOR/NEXT 3270
   Origs: 3210:auto
   Dests: 3250:auto, 3270:ifthen
 3250 G(3120) F(I:3200) (0 1) NEXT I

@@ -124,24 +124,29 @@ Halstead complexity:
   Origs: 580:auto
   Dests: 600:auto
 600 G(990) F(O:530) (1 4) IF O1 = 0 THEN 970
+    WARNING: Transfer in/out of FOR/NEXT 970
   Origs: 590:auto
   Dests: 610:auto, 970:ifthen
 610 G(990) F(O:530) (1 4) IF O1 > 8 THEN 1420
+    WARNING: Transfer in/out of FOR/NEXT 1420
   Origs: 600:auto
   Dests: 620:auto, 1420:ifthen
 620 G(990) F(O:530) (1 4) IF O1 < 1 THEN 1420
+    WARNING: Transfer in/out of FOR/NEXT 1420
   Origs: 610:auto
   Dests: 630:auto, 1420:ifthen
 630 G(990) F(O:530) (0 2) GOSUB 990
   Origs: 620:auto
   Dests: 640:auto, 990:gosub
 640 G(990) F(O:530) (1 4) IF S < 7 THEN 1390
+    WARNING: Transfer in/out of FOR/NEXT 1390
   Origs: 630:auto
   Dests: 650:auto, 1390:ifthen
 650 G(990) F(O:530) (0 7) LET T = T + (Q - S + 1)
   Origs: 640:auto
   Dests: 660:auto
 660 G(990) F(O:530) (1 4) IF S > Q THEN 1630
+    WARNING: Transfer in/out of FOR/NEXT 1630
   Origs: 650:auto
   Dests: 670:auto, 1630:ifthen
 670 G(990) F(O:530) (0 1) NEXT O
@@ -261,6 +266,7 @@ Halstead complexity:
   Dests: 980:auto
 980 G(990) (0 3) GOTO 580
     WARNING: Branch to line before GOSUB start
+    WARNING: Transfer in/out of FOR/NEXT 580
   Origs: 970:auto
   Dests: 580:goto
 990 G(990) (8 10) ON O1 GOTO 1130, 1010, 1170, 1080, 1190, 1100, 1150, 1210
@@ -395,6 +401,7 @@ Halstead complexity:
   Dests: 1410:auto
 1410 G(990) (0 3) GOTO 550
      WARNING: Branch to line before GOSUB start
+     WARNING: Transfer in/out of FOR/NEXT 550
   Origs: 1400:auto
   Dests: 550:goto
 1420 G(990) (0 2) PRINT "WHAT?"
@@ -402,6 +409,7 @@ Halstead complexity:
   Dests: 1430:auto
 1430 G(990) (0 3) GOTO 580
      WARNING: Branch to line before GOSUB start
+     WARNING: Transfer in/out of FOR/NEXT 580
   Origs: 1420:auto
   Dests: 580:goto
 1440 (0 2) PRINT
@@ -469,6 +477,7 @@ Halstead complexity:
   Dests: 1640:auto
 1640 G(990) (0 3) GOTO 670
      WARNING: Branch to line before GOSUB start
+     WARNING: Transfer in/out of FOR/NEXT 670
   Origs: 1630:auto
   Dests: 670:goto
 1650 G(990) (0 2) PRINT "YOU WON A GOLD MEDAL!"

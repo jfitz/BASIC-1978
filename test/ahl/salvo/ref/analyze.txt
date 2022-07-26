@@ -127,6 +127,7 @@ Halstead complexity:
   Origs: 1330:auto
   Dests: 1350:auto
 1350 F(K:1240) (1 5) IF U6 > 25 THEN 1190
+     WARNING: Transfer in/out of FOR/NEXT 1190
   Origs: 1340:auto
   Dests: 1190:ifthen, 1360:auto
 1360 F(K:1240,Z:1360) (1 5) FOR Z = 0 TO FNB(K)
@@ -157,6 +158,7 @@ Halstead complexity:
   Origs: 1415:auto
   Dests: 1430:fornext, 1440:fornext
 1430 F(K:1240,Z2:1410,Z3:1420) (1 6) IF SQR((F(Z3) - F(Z2)) ^ 2 + (G(Z3) - G(Z2)) ^ 2) < 3.59 THEN 1260
+     WARNING: Transfer in/out of FOR/NEXT 1260
   Origs: 1420:fornext
   Dests: 1260:ifthen, 1440:auto
 1440 F(K:1240,Z2:1410,Z3:1420) (0 1) NEXT Z3
@@ -337,6 +339,7 @@ Halstead complexity:
   Origs: 2010:fornext
   Dests: 2030:fornext, 2040:fornext
 2030 F(W:2000,X:2010,Y:2020) (1 4) IF B(X, Y) = W THEN 2070
+     WARNING: Transfer in/out of FOR/NEXT 2070
   Origs: 2020:fornext
   Dests: 2040:auto, 2070:ifthen
 2040 F(W:2000,X:2010,Y:2020) (0 1) NEXT Y
@@ -445,6 +448,7 @@ Halstead complexity:
   Origs: 2370:auto
   Dests: 2300:goto
 2390 F(W:2290) (1 4) IF A(X, Y) > 10 THEN 2440
+     WARNING: Transfer in/out of FOR/NEXT 2440
   Origs: 2360:ifthen
   Dests: 2400:auto, 2440:ifthen
 2400 F(W:2290) (0 3) C(W) = X
@@ -463,21 +467,26 @@ Halstead complexity:
   Origs: 2390:ifthen
   Dests: 2450:auto
 2450 (0 3) GOTO 2300
+     WARNING: Transfer in/out of FOR/NEXT 2300
   Origs: 2440:auto
   Dests: 2300:goto
 2460 F(W:2460) (1 3) FOR W = 1 TO A
   Origs: 2430:goto
   Dests: 2470:fornext, 2520:fornext
 2470 F(W:2460) (1 4) IF A(C(W), D(W)) = 3 THEN 2540
+     WARNING: Transfer in/out of FOR/NEXT 2540
   Origs: 2460:fornext
   Dests: 2480:auto, 2540:ifthen
 2480 F(W:2460) (1 4) IF A(C(W), D(W)) = 2 THEN 2560
+     WARNING: Transfer in/out of FOR/NEXT 2560
   Origs: 2470:auto
   Dests: 2490:auto, 2560:ifthen
 2490 F(W:2460) (1 4) IF A(C(W), D(W)) = 1 THEN 2580
+     WARNING: Transfer in/out of FOR/NEXT 2580
   Origs: 2480:auto
   Dests: 2500:auto, 2580:ifthen
 2500 F(W:2460) (1 4) IF A(C(W), D(W)) = 0.5 THEN 2600
+     WARNING: Transfer in/out of FOR/NEXT 2600
   Origs: 2490:auto
   Dests: 2510:auto, 2600:ifthen
 2510 F(W:2460) (0 4) A(C(W), D(W)) = 10 + C
@@ -493,24 +502,28 @@ Halstead complexity:
   Origs: 2470:ifthen
   Dests: 2550:auto
 2550 (0 3) GOTO 2510
+     WARNING: Transfer in/out of FOR/NEXT 2510
   Origs: 2540:auto
   Dests: 2510:goto
 2560 (0 2) PRINT "YOU HIT MY CRUISER."
   Origs: 2480:ifthen
   Dests: 2570:auto
 2570 (0 3) GOTO 2510
+     WARNING: Transfer in/out of FOR/NEXT 2510
   Origs: 2560:auto
   Dests: 2510:goto
 2580 (0 2) PRINT "YOU HIT MY DESTROYER<A>."
   Origs: 2490:ifthen
   Dests: 2590:auto
 2590 (0 3) GOTO 2510
+     WARNING: Transfer in/out of FOR/NEXT 2510
   Origs: 2580:auto
   Dests: 2510:goto
 2600 (0 2) PRINT "YOU HIT MY DESTROYER<B>."
   Origs: 2500:ifthen
   Dests: 2610:auto
 2610 (0 3) GOTO 2510
+     WARNING: Transfer in/out of FOR/NEXT 2510
   Origs: 2600:auto
   Dests: 2510:goto
 2620 (0 3) A = 0
@@ -541,6 +554,7 @@ Halstead complexity:
   Origs: 2690:fornext
   Dests: 2710:fornext, 2720:fornext
 2710 F(W:2680,X:2690,Y:2700) (1 4) IF A(X, Y) = W THEN 2750
+     WARNING: Transfer in/out of FOR/NEXT 2750
   Origs: 2700:fornext
   Dests: 2720:auto, 2750:ifthen
 2720 F(W:2680,X:2690,Y:2700) (0 1) NEXT Y
@@ -619,6 +633,7 @@ Halstead complexity:
   Origs: 2880:ifthen
   Dests: 2970:fornext, 2980:fornext
 2970 F(W:2960) (1 4) IF H(W) > 0 THEN 3800
+     WARNING: Transfer in/out of FOR/NEXT 3810
   Origs: 2960:fornext
   Dests: 2980:auto, 3810:ifthen
 2980 F(W:2960) (0 1) NEXT W
@@ -730,6 +745,7 @@ Halstead complexity:
   Origs: 3320:fornext
   Dests: 3340:auto, 3350:ifthen
 3340 F(Q9:3320) (1 5) IF G(Q9) = Y THEN 3210
+     WARNING: Transfer in/out of FOR/NEXT 3210
   Origs: 3330:auto
   Dests: 3210:ifthen, 3350:auto
 3350 F(Q9:3320) (0 1) NEXT Q9
@@ -757,15 +773,19 @@ Halstead complexity:
   Origs: 3380:ifthen, 3410:auto
   Dests: 3430:fornext, 3480:fornext
 3430 F(W:3420) (1 4) IF B(F(W), G(W)) = 3 THEN 3500
+     WARNING: Transfer in/out of FOR/NEXT 3500
   Origs: 3420:fornext
   Dests: 3440:auto, 3500:ifthen
 3440 F(W:3420) (1 4) IF B(F(W), G(W)) = 2 THEN 3520
+     WARNING: Transfer in/out of FOR/NEXT 3520
   Origs: 3430:auto
   Dests: 3450:auto, 3520:ifthen
 3450 F(W:3420) (1 4) IF B(F(W), G(W)) = 1 THEN 3560
+     WARNING: Transfer in/out of FOR/NEXT 3560
   Origs: 3440:auto
   Dests: 3460:auto, 3560:ifthen
 3460 F(W:3420) (1 4) IF B(F(W), G(W)) = 0.5 THEN 3540
+     WARNING: Transfer in/out of FOR/NEXT 3540
   Origs: 3450:auto
   Dests: 3470:auto, 3540:ifthen
 3470 F(W:3420) (0 4) B(F(W), G(W)) = 10 + C
@@ -826,6 +846,7 @@ Halstead complexity:
   Origs: 3620:fornext, 3630:ifthen, 3640:auto
   Dests: 3660:auto
 3660 F(Q:3570) (1 10) IF M3 <> INT(H(Q) + 0.5) + 1 + INT(INT(H(Q) + 0.5) / 3) THEN 3470
+     WARNING: Transfer in/out of FOR/NEXT 3470
   Origs: 3650:auto
   Dests: 3470:ifthen, 3670:auto
 3670 F(Q:3570,M2:3670) (1 3) FOR M2 = 1 TO 12
@@ -844,6 +865,7 @@ Halstead complexity:
   Origs: 3670:fornext, 3680:ifthen, 3700:auto
   Dests: 3720:auto
 3720 F(Q:3570) (0 3) GOTO 3470
+     WARNING: Transfer in/out of FOR/NEXT 3470
   Origs: 3710:auto
   Dests: 3470:goto
 3730 F(Q:3570) (0 1) NEXT Q
@@ -984,9 +1006,11 @@ Halstead complexity:
   Origs: 4140:auto
   Dests: 4160:fornext, 4180:fornext
 4160 F(R:4070,S:4080,M:4150) (1 4) IF F(M) <> R THEN 4190
+     WARNING: Transfer in/out of FOR/NEXT 4190
   Origs: 4150:fornext
   Dests: 4170:auto, 4190:ifthen
 4170 F(R:4070,S:4080,M:4150) (1 4) IF G(M) = S THEN 4210
+     WARNING: Transfer in/out of FOR/NEXT 4210
   Origs: 4160:auto
   Dests: 4180:auto, 4210:ifthen
 4180 F(R:4070,S:4080,M:4150) (0 1) NEXT M
