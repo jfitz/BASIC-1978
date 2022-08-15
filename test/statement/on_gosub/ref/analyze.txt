@@ -23,6 +23,10 @@ Halstead complexity:
   Origs: :start
   Dests: 20:fornext, 30:fornext
 20 F(I:10) (4 6) ON I GOSUB 100, 120, 140, 160
+   WARNING: Transfer in/out of FOR/NEXT 100
+   WARNING: Transfer in/out of FOR/NEXT 120
+   WARNING: Transfer in/out of FOR/NEXT 140
+   WARNING: Transfer in/out of FOR/NEXT 160
   Origs: 10:fornext
   Dests: 30:auto, 100:goto, 120:goto, 140:goto, 160:goto
 30 F(I:10) (0 1) NEXT I
@@ -31,28 +35,28 @@ Halstead complexity:
 90 (0 1) STOP
   Origs: 30:auto
   Dests: :stop
-100 F(I:10) (0 2) PRINT "STEP 1"
+100 (0 2) PRINT "STEP 1"
   Origs: 20:goto
   Dests: 110:auto
-110 F(I:10) (0 1) RETURN
+110 (0 1) RETURN
   Origs: 100:auto
   Dests: 
-120 F(I:10) (0 2) PRINT "STEP 2"
+120 (0 2) PRINT "STEP 2"
   Origs: 20:goto
   Dests: 130:auto
-130 F(I:10) (0 1) RETURN
+130 (0 1) RETURN
   Origs: 120:auto
   Dests: 
-140 F(I:10) (0 2) PRINT "STEP 3"
+140 (0 2) PRINT "STEP 3"
   Origs: 20:goto
   Dests: 150:auto
-150 F(I:10) (0 1) RETURN
+150 (0 1) RETURN
   Origs: 140:auto
   Dests: 
-160 F(I:10) (0 2) PRINT "STEP 4"
+160 (0 2) PRINT "STEP 4"
   Origs: 20:goto
   Dests: 170:auto
-170 F(I:10) (0 1) RETURN
+170 (0 1) RETURN
   Origs: 160:auto
   Dests: 
 999 (0 1) END

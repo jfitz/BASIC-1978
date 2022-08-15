@@ -3910,6 +3910,9 @@ class NextStatement < AbstractStatement
 
         interpreter.exit_fornext(fornext_control.forget,
                                  fornext_control.control)
+
+        interpreter.loop_broken = fornext_control.broken
+        fornext_control.broken = false
       else
         # set next line from top item
         interpreter.next_line_stmt_mod = fornext_control.start_line_stmt_mod
@@ -3918,8 +3921,6 @@ class NextStatement < AbstractStatement
 
         found_unterminated = true
       end
-
-      fornext_control.broken = false
 
       index += 1
     end
