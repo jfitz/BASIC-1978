@@ -3905,13 +3905,7 @@ class NextStatement < AbstractStatement
       io.trace_output(s)
 
       if terminated
-        interpreter.unlock_variable(@controls[index]) if
-          $options['lock_fornext'].value
-
-        interpreter.exit_fornext(fornext_control.forget,
-                                 fornext_control.control)
-
-        interpreter.loop_broken = fornext_control.broken
+        interpreter.exit_fornext(fornext_control)
         fornext_control.broken = false
       else
         # set next line from top item

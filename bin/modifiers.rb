@@ -558,8 +558,7 @@ class AbstractForModifier < AbstractModifier
     print_trace_info(io, terminated)
 
     if terminated
-      interpreter.unlock_variable(@control) if $options['lock_fornext'].value
-      interpreter.exit_fornext(fornext_control.forget, fornext_control.control)
+      interpreter.exit_fornext(fornext_control)
     else
       # set next line from top item
       interpreter.next_line_stmt_mod = @loopstart_line_stmt_mod
