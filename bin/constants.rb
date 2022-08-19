@@ -1155,9 +1155,10 @@ class NumericValue < AbstractValue
   end
 
   def to_radians
-    new_units = Units.new_empty
+    rad_name = $options['radians'].value
 
-    new_units = Units.new_values({ 'RAD' => 1 }) if
+    new_units = Units.new_empty
+    new_units = Units.new_values({ rad_name => 1 }) if
       $options['trig_require_units'].value
 
     new_value = to_rad(@value)
@@ -1169,9 +1170,10 @@ class NumericValue < AbstractValue
   end
 
   def to_degrees
-    new_units = Units.new_empty
+    deg_name = $options['degrees'].value
 
-    new_units = Units.new_values({ 'DEG' => 1 }) if
+    new_units = Units.new_empty
+    new_units = Units.new_values({ deg_name => 1 }) if
       $options['trig_require_units'].value
 
     new_value = to_deg(@value)
@@ -1182,14 +1184,18 @@ class NumericValue < AbstractValue
     if $options['trig_require_units'].value
       raise BASICRuntimeError.new(:te_require_units, @name) if
         @units.empty?
+    end
+ 
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
+    unless @units.empty?
       raise BASICRuntimeError.new(:te_wrong_units, @name) unless
-        @units.size == 1 && (@units.key?('RAD') || @units.key?('DEG'))
+        @units.size == 1 && (@units.key?(rad_name) || @units.key?(deg_name))
     end
 
     angle_in_radians = @value
-
-    angle_in_radians = to_rad(@value) if @units.key?('DEG')
+    angle_in_radians = to_rad(@value) if @units.key?(deg_name)
 
     new_value = Math.sin(angle_in_radians)
 
@@ -1199,9 +1205,11 @@ class NumericValue < AbstractValue
   def arcsin
     raise BASICRuntimeError.new(:te_not_pure, @name) unless @units.empty?
 
-    new_units = Units.new_empty
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
-    new_units = Units.new_values({ 'RAD' => 1 }) if
+    new_units = Units.new_empty
+    new_units = Units.new_values({ rad_name => 1 }) if
       $options['trig_require_units'].value
 
     new_value = 0
@@ -1214,14 +1222,18 @@ class NumericValue < AbstractValue
     if $options['trig_require_units'].value
       raise BASICRuntimeError.new(:te_require_units, @name) if
         @units.empty?
+    end
+ 
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
+    unless @units.empty?
       raise BASICRuntimeError.new(:te_wrong_units, @name) unless
-        @units.size == 1 && (@units.key?('RAD') || @units.key?('DEG'))
+        @units.size == 1 && (@units.key?(rad_name) || @units.key?(deg_name))
     end
 
     angle_in_radians = @value
-
-    angle_in_radians = to_rad(@value) if @units.key?('DEG')
+    angle_in_radians = to_rad(@value) if @units.key?(deg_name)
 
     new_value = Math.cos(angle_in_radians)
 
@@ -1231,9 +1243,11 @@ class NumericValue < AbstractValue
   def arccos
     raise BASICRuntimeError.new(:te_not_pure, @name) unless @units.empty?
 
-    new_units = Units.new_empty
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
-    new_units = Units.new_values({ 'RAD' => 1 }) if
+    new_units = Units.new_empty
+    new_units = Units.new_values({ rad_name => 1 }) if
       $options['trig_require_units'].value
 
     new_value = 0
@@ -1246,14 +1260,18 @@ class NumericValue < AbstractValue
     if $options['trig_require_units'].value
       raise BASICRuntimeError.new(:te_require_units, @name) if
         @units.empty?
+    end
+ 
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
+    unless @units.empty?
       raise BASICRuntimeError.new(:te_wrong_units, @name) unless
-        @units.size == 1 && (@units.key?('RAD') || @units.key?('DEG'))
+        @units.size == 1 && (@units.key?(rad_name) || @units.key?(deg_name))
     end
 
     angle_in_radians = @value
-
-    angle_in_radians = to_rad(@value) if @units.key?('DEG')
+    angle_in_radians = to_rad(@value) if @units.key?(deg_name)
 
     new_value = angle_in_radians >= 0 ? Math.tan(angle_in_radians) : 0
 
@@ -1263,9 +1281,11 @@ class NumericValue < AbstractValue
   def atn
     raise BASICRuntimeError.new(:te_not_pure, @name) unless @units.empty?
 
-    new_units = Units.new_empty
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
-    new_units = Units.new_values({ 'RAD' => 1 }) if
+    new_units = Units.new_empty
+    new_units = Units.new_values({ rad_name => 1 }) if
       $options['trig_require_units'].value
 
     new_value = Math.atan(@value)
@@ -1278,9 +1298,11 @@ class NumericValue < AbstractValue
 
     raise BASICRuntimeError.new(:te_not_pure, @name) unless a2.units.empty?
 
-    new_units = Units.new_empty
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
-    new_units = Units.new_values({ 'RAD' => 1 }) if
+    new_units = Units.new_empty
+    new_units = Units.new_values({ rad_name => 1 }) if
       $options['trig_require_units'].value
 
     new_value = Math.atan2(@value, a2.to_f)
@@ -1292,14 +1314,18 @@ class NumericValue < AbstractValue
     if $options['trig_require_units'].value
       raise BASICRuntimeError.new(:te_require_units, @name) if
         @units.empty?
+    end
+ 
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
+    unless @units.empty?
       raise BASICRuntimeError.new(:te_wrong_units, @name) unless
-        @units.size == 1 && (@units.key?('RAD') || @units.key?('DEG'))
+        @units.size == 1 && (@units.key?(rad_name) || @units.key?(deg_name))
     end
 
     angle_in_radians = @value
-
-    angle_in_radians = to_rad(@value) if @units.key?('DEG')
+    angle_in_radians = to_rad(@value) if @units.key?(deg_name)
 
     cos = Math.cos(angle_in_radians)
     sin = Math.sin(angle_in_radians)
@@ -1313,14 +1339,18 @@ class NumericValue < AbstractValue
     if $options['trig_require_units'].value
       raise BASICRuntimeError.new(:te_require_units, @name) if
         @units.empty?
+    end
+ 
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
+    unless @units.empty?
       raise BASICRuntimeError.new(:te_wrong_units, @name) unless
-        @units.size == 1 && (@units.key?('RAD') || @units.key?('DEG'))
+        @units.size == 1 && (@units.key?(rad_name) || @units.key?(deg_name))
     end
 
     angle_in_radians = @value
-
-    angle_in_radians = to_rad(@value) if @units.key?('DEG')
+    angle_in_radians = to_rad(@value) if @units.key?(deg_name)
 
     cos = Math.cos(angle_in_radians)
     sec = Float::INFINITY
@@ -1332,14 +1362,18 @@ class NumericValue < AbstractValue
     if $options['trig_require_units'].value
       raise BASICRuntimeError.new(:te_require_units, @name) if
         @units.empty?
+    end
+ 
+    deg_name = $options['degrees'].value
+    rad_name = $options['radians'].value
 
+    unless @units.empty?
       raise BASICRuntimeError.new(:te_wrong_units, @name) unless
-        @units.size == 1 && (@units.key?('RAD') || @units.key?('DEG'))
+        @units.size == 1 && (@units.key?(rad_name) || @units.key?(deg_name))
     end
 
     angle_in_radians = @value
-
-    angle_in_radians = to_rad(@value) if @units.key?('DEG')
+    angle_in_radians = to_rad(@value) if @units.key?(deg_name)
 
     sin = Math.sin(angle_in_radians)
     csc = Float::INFINITY
