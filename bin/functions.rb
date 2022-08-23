@@ -511,7 +511,7 @@ class FunctionArcSin < AbstractFunction
   end
 end
 
-# function ARCTAN
+# function ARCTAN, ATN
 class FunctionArcTan < AbstractFunction
   def initialize(text)
     super

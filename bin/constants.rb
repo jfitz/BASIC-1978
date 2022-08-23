@@ -456,7 +456,7 @@ class Units
       @values.each do |name, power|
         units_s << if power == 1
                      # don't print power when it is 1
-                     name.to_s
+                     name
                    else
                      # print all other powers
                      "#{name}#{power}"
@@ -1419,14 +1419,12 @@ class NumericValue < AbstractValue
 
   def print(printer)
     s = to_formatted_s
-    s = s.upcase
     printer.print_item s
     printer.last_was_numeric
   end
 
   def write(printer)
     s = to_formatted_s
-    s = s.upcase
     printer.print_item s
   end
 
@@ -1439,7 +1437,7 @@ class NumericValue < AbstractValue
   def to_formatted_s
     lead_space = @value >= 0 ? ' ' : ''
 
-    lead_space + @value.to_s + @units.to_s
+    lead_space + @value.to_s.upcase + @units.to_s
   end
 end
 
@@ -1762,14 +1760,12 @@ class IntegerValue < AbstractValue
 
   def print(printer)
     s = to_formatted_s
-    s = s.upcase
     printer.print_item s
     printer.last_was_numeric
   end
 
   def write(printer)
     s = to_formatted_s
-    s = s.upcase
     printer.print_item s
   end
 
@@ -1782,7 +1778,7 @@ class IntegerValue < AbstractValue
   def to_formatted_s
     lead_space = @value >= 0 ? ' ' : ''
 
-    lead_space + @value.to_s + @units.to_s
+    lead_space + @value.to_s.upcase + @units.to_s
   end
 end
 
@@ -2162,14 +2158,12 @@ class BooleanValue < AbstractValue
 
   def print(printer)
     s = to_formatted_s
-    s = s.upcase
     printer.print_item s
     printer.last_was_numeric
   end
 
   def write(printer)
     s = to_formatted_s
-    s = s.upcase
     printer.print_item s
   end
 
