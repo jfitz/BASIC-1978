@@ -2,6 +2,8 @@
 
 # operators
 class Operator < AbstractElement
+  attr_reader :content_type, :shape, :warnings, :arguments, :precedence
+
   def initialize(text)
     super()
 
@@ -33,6 +35,10 @@ class Operator < AbstractElement
     "#{self.class}:#{@op}#{signature} -> #{const}#{result}"
   end
 
+  def constant?
+    @constant
+  end
+
   def pound?
     false
   end
@@ -51,9 +57,6 @@ class UnaryOperator < Operator
   class << self
     attr_reader :operators
   end
-
-  attr_reader :content_type, :shape, :constant, :warnings, :arguments,
-              :precedence
 
   def initialize(text)
     super
@@ -111,9 +114,6 @@ class BinaryOperator < Operator
   class << self
     attr_reader :operators
   end
-
-  attr_reader :content_type, :shape, :constant, :warnings, :arguments,
-              :precedence
 
   def initialize(text)
     super

@@ -2469,8 +2469,8 @@ class ForStatement < AbstractStatement
     @errors << 'TAB() not allowed' if !@while.nil? && @while.has_tab
     @errors << 'TAB() not allowed' if !@until.nil? && @until.has_tab
 
-    @warnings << 'Constant expression' if !@until.nil? && @until.constant
-    @warnings << 'Constant expression' if !@while.nil? && @while.constant
+    @warnings << 'Constant expression' if !@until.nil? && @until.constant?
+    @warnings << 'Constant expression' if !@while.nil? && @while.constant?
 
     unless @until.nil?
       @warnings << "No #{@control} in expression" unless
@@ -2976,7 +2976,7 @@ class AbstractIfStatement < AbstractStatement
       @errors << 'TAB() not allowed' if @expression.has_tab
 
       @warnings << 'Constant expression' if
-        !@expression.nil? && @expression.constant
+        !@expression.nil? && @expression.constant?
 
       @dest_line, @statement = parse_target(line_number, tokens_lists['then'])
       @else_dest_line = nil
@@ -3027,7 +3027,7 @@ class AbstractIfStatement < AbstractStatement
           !@expression.nil? && @expression.has_tab
 
         @warnings << 'Constant expression' if
-          !@expression.nil? && @expression.constant
+          !@expression.nil? && @expression.constant?
 
         @dest_line, @statement = parse_target(line_number, stack['then'])
         @else_dest_line = nil
@@ -4068,7 +4068,7 @@ class OnStatement < AbstractStatement
       end
 
       @errors << 'TAB() not allowed' if @expression.has_tab
-      @warnings << 'Constant expression' if @expression.constant
+      @warnings << 'Constant expression' if @expression.constant?
       @elements = make_references(nil, @expression)
 
       @gosub = tokens_lists[1] == 'GOSUB'

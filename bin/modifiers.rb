@@ -92,7 +92,7 @@ class IfModifier < AbstractModifier
     expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
-    @warnings << 'Constant expression' if @expression.constant
+    @warnings << 'Constant expression' if @expression.constant?
 
     @numerics = @expression.numerics
     @strings = @expression.strings
@@ -170,7 +170,7 @@ class UnlessModifier < AbstractModifier
     expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
-    @warnings << 'Constant expression' if @expression.constant
+    @warnings << 'Constant expression' if @expression.constant?
 
     @numerics = @expression.numerics
     @strings = @expression.strings
@@ -248,7 +248,7 @@ class WhileModifier < AbstractModifier
     expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
-    @warnings << 'Constant expression' if @expression.constant
+    @warnings << 'Constant expression' if @expression.constant?
 
     @numerics = @expression.numerics
     @strings = @expression.strings
@@ -347,7 +347,7 @@ class UntilModifier < AbstractModifier
     expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
-    @warnings << 'Constant expression' if @expression.constant
+    @warnings << 'Constant expression' if @expression.constant?
 
     @numerics = @expression.numerics
     @strings = @expression.strings
@@ -767,7 +767,7 @@ class ForUntilModifier < AbstractForModifier
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
     @until = ValueExpressionSet.new(until_tokens, :scalar)
-    @warnings << 'Constant expression' if @until.constant
+    @warnings << 'Constant expression' if @until.constant?
 
     @errors << 'TAB() not allowed' if @until.has_tab
 
@@ -814,7 +814,7 @@ class ForUntilStepModifier < AbstractForModifier
 
     @step = ValueExpressionSet.new(step_tokens, :scalar)
     @until = ValueExpressionSet.new(until_tokens, :scalar)
-    @warnings << 'Constant expression' if @until.constant
+    @warnings << 'Constant expression' if @until.constant?
 
     @errors << 'TAB() not allowed' if @step.has_tab
     @errors << 'TAB() not allowed' if @until.has_tab
@@ -874,7 +874,7 @@ class ForStepUntilModifier < AbstractForModifier
 
     @step = ValueExpressionSet.new(step_tokens, :scalar)
     @until = ValueExpressionSet.new(until_tokens, :scalar)
-    @warnings << 'Constant expression' if @until.constant
+    @warnings << 'Constant expression' if @until.constant?
 
     @errors << 'TAB() not allowed' if @step.has_tab
     @errors << 'TAB() not allowed' if @until.has_tab
@@ -934,7 +934,7 @@ class ForWhileModifier < AbstractForModifier
     super(tokens_lists, control_and_start_tokens, step_tokens, end_tokens, until_tokens, while_tokens)
 
     @while = ValueExpressionSet.new(while_tokens, :scalar)
-    @warnings << 'Constant expression' if @while.constant
+    @warnings << 'Constant expression' if @while.constant?
 
     @errors << 'TAB() not allowed' if @while.has_tab
 
@@ -981,7 +981,7 @@ class ForWhileStepModifier < AbstractForModifier
 
     @step = ValueExpressionSet.new(step_tokens, :scalar)
     @while = ValueExpressionSet.new(while_tokens, :scalar)
-    @warnings << 'Constant expression' if @while.constant
+    @warnings << 'Constant expression' if @while.constant?
 
     @errors << 'TAB() not allowed' if @step.has_tab
     @errors << 'TAB() not allowed' if @while.has_tab
@@ -1041,7 +1041,7 @@ class ForStepWhileModifier < AbstractForModifier
 
     @step = ValueExpressionSet.new(step_tokens, :scalar)
     @while = ValueExpressionSet.new(while_tokens, :scalar)
-    @warnings << 'Constant expression' if @while.constant
+    @warnings << 'Constant expression' if @while.constant?
 
     @errors << 'TAB() not allowed' if @step.has_tab
     @errors << 'TAB() not allowed' if @while.has_tab
