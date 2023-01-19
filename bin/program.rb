@@ -1046,6 +1046,8 @@ class Program
     texts << 'Unreachable code:'
     texts << ''
     texts += unreachable_code
+
+    texts += check_for_reachable_stop
   end
 
   def analyze_pretty
@@ -1402,6 +1404,29 @@ class Program
     end
 
     lines << 'All executable lines are reachable.' if lines.empty?
+
+    lines
+  end
+
+  def check_for_reachable_stop
+    # look for STOP, END, or CHAIN in reachable statements
+    found_stop = false
+
+    @lines.each do |line_number, line|
+      statements = line.statements
+      statements.each_with_index do |statement, stmt|
+        found_stop = true if
+          statement.reachable &&
+          (statement.stop? || statement.end? || statement.chain?)
+      end
+    end
+
+    lines = []
+    unless found_stop
+      lines << ''
+      lines << 'No path from start to STOP, END, or CHAIN.'
+    end
+
     lines
   end
 
