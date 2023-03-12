@@ -608,7 +608,7 @@ end
 
 # class that holds a value
 class AbstractValue < AbstractElement
-  attr_reader :content_type, :shape, :constant, :warnings
+  attr_reader :content_type, :shape, :warnings
 
   def initialize
     super
@@ -806,6 +806,10 @@ class AbstractValue < AbstractElement
 
   def dump
     "#{self.class}:#{self}"
+  end
+
+  def constant?
+    @constant
   end
 
   def keyword?
@@ -2558,7 +2562,7 @@ end
 # Hold a variable (name with possible subscripts and value)
 class Variable < AbstractElement
   attr_writer :valref, :set_dims
-  attr_reader :content_type, :shape, :constant, :subscripts, :warnings
+  attr_reader :content_type, :shape, :subscripts, :warnings
 
   def initialize(variable_name, my_shape, subscripts, wrapped_subscripts)
     super()
@@ -2630,6 +2634,10 @@ class Variable < AbstractElement
 
   def name
     @variable_name
+  end
+
+  def constant?
+    @constant
   end
 
   def dimensions?
@@ -2877,7 +2885,7 @@ end
 
 # Class for declaration (in a DIM statement)
 class Declaration < AbstractElement
-  attr_reader :subscripts, :content_type, :shape, :constant, :warnings
+  attr_reader :subscripts, :content_type, :shape, :warnings
 
   def initialize(variable_name)
     super()
@@ -2939,6 +2947,10 @@ class Declaration < AbstractElement
   def dump
     result = Sigils.make_type_sigil(@content_type) + Sigils.make_shape_sigil(@shape)
     "#{self.class}:#{@variable_name}#{signature} -> #{result}"
+  end
+
+  def constant?
+    @constant
   end
 
   def to_s
@@ -3015,10 +3027,10 @@ class ExpressionList < AbstractElement
     shape_stack.push(shape)
   end
 
-  def constant
+  def constant?
     constants = []
 
-    @expressions.each { |expression| constants << expression.constant }
+    @expressions.each { |expression| constants << expression.constant? }
 
     constants
   end
@@ -3026,7 +3038,7 @@ class ExpressionList < AbstractElement
   def set_constant(constant_stack)
     @expressions.each(&:set_constant)
 
-    constant_stack.push(constant)
+    constant_stack.push(constant?)
   end
 
   def evaluate(interpreter, _)
