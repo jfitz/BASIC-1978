@@ -1,25 +1,49 @@
 10 REM READ CSV AND PLOT DATA
  Remark:READ CSV AND PLOT DATA
-12 DIM D$(12)
- NumericValue:12
+12 DIM D$(15)
+ NumericValue:15
  Declaration:D$() -> $()
 20 OPEN "TRANS.DAT" FOR INPUT AS #1
  TextValue:"TRANS.DAT"
  NumericValue:1
  UnaryOperatorHash:#(.) -> =FH
-30 ARR INPUT #1, D$
+30 REM READ HEADER
+ Remark:READ HEADER
+32 ARR INPUT #1, D$
  NumericValue:1
  UnaryOperatorHash:#(.) -> =FH
  Variable:D$() -> $()
-40 ARR WRITE D$
- Variable:D$() -> $()
- CarriageControl:NL
+34 REM ARR WRITE D$
+ Remark:ARR WRITE D$
+40 REM READ RECORDS
+ Remark:READ RECORDS
 50 ARR INPUT #1, D$
  NumericValue:1
  UnaryOperatorHash:#(.) -> =FH
  Variable:D$() -> $()
-60 ARR WRITE D$
- Variable:D$() -> $()
+52 REM ARR WRITE D$
+ Remark:ARR WRITE D$
+60 IF LEN(D$(0)) = 0 THEN 70
+ NumericValue:0
+ Variable:D$(.) -> $
+ FunctionLen:LEN($) -> .
+ NumericValue:0
+ BinaryOperatorEqual:=(.,.) -> ?
+ LineNumber:70
+62 A = VAL(D$(12))
+ Variable:A -> .
+ NumericValue:12
+ Variable:D$(.) -> $
+ FunctionVal:VAL($) -> .
+ AssignmentOperator:= . -> .
+68 PRINT D$(0),D$(3),A
+ NumericValue:0
+ Variable:D$(.) -> $
+ CarriageControl:,
+ NumericValue:3
+ Variable:D$(.) -> $
+ CarriageControl:,
+ Variable:A -> .
  CarriageControl:NL
 70 GOTO 50
  LineNumber:50
