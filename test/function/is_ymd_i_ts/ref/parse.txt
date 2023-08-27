@@ -1,0 +1,58 @@
+10 FOR Y% = 1970% TO 1980%
+ control: Variable:Y% -> %
+ start:   ["IntegerValue:1970"]
+ end:     ["IntegerValue:1980"]
+20 FOR M% = 1% TO 12%
+ control: Variable:M% -> %
+ start:   ["IntegerValue:1"]
+ end:     ["IntegerValue:12"]
+22 D$ = STR$(Y%) + "-" + STR$(M%) + "-10"
+ Variable:D$ -> $
+ Variable:Y% -> %
+ FunctionStr:STR$(%) -> $
+ TextValue:"-"
+ BinaryOperatorPlus:+($,$) -> $
+ Variable:M% -> %
+ FunctionStr:STR$(%) -> $
+ BinaryOperatorPlus:+($,$) -> $
+ TextValue:"-10"
+ BinaryOperatorPlus:+($,$) -> $
+ AssignmentOperator:= $ -> $
+30 LET A% = YMD%(D$)
+ Variable:A% -> %
+ Variable:D$ -> $
+ FunctionYmdI:YMD%($) -> %
+ AssignmentOperator:= % -> %
+32 LET B% = YMDY%(A%)
+ Variable:B% -> %
+ Variable:A% -> %
+ FunctionYmdyI:YMDY%(%) -> %
+ AssignmentOperator:= % -> %
+34 LET C% = YMDM%(A%)
+ Variable:C% -> %
+ Variable:A% -> %
+ FunctionYmdmI:YMDM%(%) -> %
+ AssignmentOperator:= % -> %
+36 LET D% = YMDD%(A%)
+ Variable:D% -> %
+ Variable:A% -> %
+ FunctionYmddI:YMDD%(%) -> %
+ AssignmentOperator:= % -> %
+40 PRINT D$, A%, B%, C%, D%
+ Variable:D$ -> $
+ CarriageControl:,
+ Variable:A% -> %
+ CarriageControl:,
+ Variable:B% -> %
+ CarriageControl:,
+ Variable:C% -> %
+ CarriageControl:,
+ Variable:D% -> %
+ CarriageControl:NL
+50 NEXT M%
+ Variable:M% -> %
+60 NEXT Y%
+ Variable:Y% -> %
+99 END
+ 
+

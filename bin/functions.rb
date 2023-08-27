@@ -4192,6 +4192,138 @@ class FunctionVal < AbstractFunction
   end
 end
 
+# function YMD%
+class FunctionYmdI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :scalar
+    @signature1 = [{ 'type' => :string, 'shape' => :scalar }]
+    @signature3 =
+      [
+        { 'type' => :numeric, 'shape' => :scalar },
+        { 'type' => :numeric, 'shape' => :scalar },
+        { 'type' => :numeric, 'shape' => :scalar }
+      ]
+  end
+
+  def evaluate(_intepreter, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    if match_args_to_signature(args, @signature1)
+      date = Date.parse(args[0].to_s)
+      mjd = date.mjd
+      res = IntegerValue.new(mjd)
+    elsif match_args_to_signature(args, @signature3)
+      year = args[0].to_i
+      month = args[1].to_i
+      day = args[2].to_i
+      date = Date.new(year, month, day)
+      mjd = date.mjd
+      res = IntegerValue.new(mjd)
+    else
+      raise BASICRuntimeError.new(:te_args_no_match, @name)
+    end
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function YMDD%
+class FunctionYmddI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :scalar
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+  end
+
+  def evaluate(_intepreter, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature1)
+
+    mjd = args[0].to_i
+    date0 = Date.new(1858, 11, 17)
+    date = date0 + mjd
+    day = date.day
+    res = IntegerValue.new(day)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function YMDM%
+class FunctionYmdmI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :scalar
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+  end
+
+  def evaluate(_intepreter, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature1)
+
+    mjd = args[0].to_i
+    date0 = Date.new(1858, 11, 17)
+    date = date0 + mjd
+    month = date.month
+    res = IntegerValue.new(month)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
+# function YMDY%
+class FunctionYmdyI < AbstractFunction
+  def initialize(text)
+    super
+
+    @shape = :scalar
+
+    @default_shape = :scalar
+    @signature1 = [{ 'type' => :numeric, 'shape' => :scalar }]
+  end
+
+  def evaluate(_intepreter, arg_stack)
+    args = arg_stack.pop
+
+    return @cached unless @cached.nil?
+
+    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
+      match_args_to_signature(args, @signature1)
+
+    mjd = args[0].to_i
+    date0 = Date.new(1858, 11, 17)
+    date = date0 + mjd
+    year = date.year
+    res = IntegerValue.new(year)
+
+    @cached = res if @constant && $options['cache_const_expr']
+    res
+  end
+end
+
 # function ZER1
 class FunctionZer1 < AbstractFunction
   def initialize(text)
@@ -4799,6 +4931,10 @@ class FunctionFactory
     'UNPACK%' => FunctionUnpack,
     'UPPER$' => FunctionUpperT,
     'VAL' => FunctionVal,
+    'YMD%' => FunctionYmdI,
+    'YMDD%' => FunctionYmddI,
+    'YMDM%' => FunctionYmdmI,
+    'YMDY%' => FunctionYmdyI,
     'ZER' => FunctionZer2,
     'ZER1' => FunctionZer1,
     'ZER1%' => FunctionZer1I,

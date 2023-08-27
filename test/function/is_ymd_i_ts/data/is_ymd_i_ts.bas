@@ -1,0 +1,11 @@
+10 FOR Y% = 1970% TO 1980%
+20 FOR M% = 1% TO 12%
+22 D$ = STR$(Y%) + "-" + STR$(M%) + "-10"
+30 LET A% = YMD%(D$)
+32 LET B% = YMDY%(A%)
+34 LET C% = YMDM%(A%)
+36 LET D% = YMDD%(A%)
+40 PRINT D$, A%, B%, C%, D%
+50 NEXT M%
+60 NEXT Y%
+99 END
