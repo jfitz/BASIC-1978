@@ -136,6 +136,23 @@ class ForWhileControl < AbstractForControl
   end
 end
 
+# Helper class for WHILE/WEND
+class WhileControl
+  attr_accessor :start_line_stmt_mod, :broken
+  attr_reader :expression
+
+  def initialize(expression, start_line_stmt_mod)
+    @expression = expression
+    @start_line_stmt_mod = start_line_stmt_mod
+  end
+
+  def terminated?(interpreter)
+    return true if @broken
+
+    @expression.evaluate(interpreter)
+  end
+end
+
 # the interpreter
 class Interpreter
   attr_writer :program
@@ -160,6 +177,7 @@ class Interpreter
     @line_cond_breakpoints = {}
     @locked_variables = []
     @fornext_stack = []
+    @while_stack = []
     @data_store = DataStore.new
     @file_handlers = {}
     @return_stack = []
@@ -1487,6 +1505,22 @@ class Interpreter
     raise BASICSyntaxError.new('BREAK without FOR') if fornext.nil?
 
     fornext.broken = true
+  end
+
+  def enter_while(while_control)
+    @while_stack.push(while_control)
+  end
+
+  def top_while
+    raise BASICError.new('Implied WEND without WHILE') if @while_stack.empty?
+
+    @while_stack[-1]
+  end
+
+  def exit_while
+    raise BASICError.new('WEND without WHILE') if @while_stack.empty?
+
+    @while_stack.pop
   end
 
   def add_file_names(file_names)

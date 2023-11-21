@@ -1506,6 +1506,7 @@ class Program
     assign_sub_markers(line_numbers)
     assign_on_error_markers(line_numbers)
     assign_fornext_markers(line_numbers)
+    assign_while_markers(line_numbers)
 
     # all statement markers now available
 
@@ -1592,6 +1593,18 @@ class Program
       statements.each_with_index do |statement, stmt|
         current_line_stmt = LineStmt.new(line_number, stmt)
         statement.assign_fornext_markers(self, current_line_stmt)
+      end
+    end
+  end
+
+  def assign_while_markers(line_numbers)
+    line_numbers.each do |line_number|
+      line = @lines[line_number]
+      statements = line.statements
+
+      statements.each_with_index do |statement, stmt|
+        current_line_stmt = LineStmt.new(line_number, stmt)
+        statement.assign_while_markers(self, current_line_stmt)
       end
     end
   end
@@ -2028,6 +2041,40 @@ class Program
 
     # if none found, error
     raise BASICSyntaxError.new("No ENDFUNCTION for function #{name}")
+  end
+
+  def find_closing_wend_line_stmt(current_line_stmt)
+    walk_line_stmt = current_line_stmt
+
+    # search for a WEND
+    while_level = 0
+
+    until walk_line_stmt.nil?
+      line_number = walk_line_stmt.line_number
+      stmt = walk_line_stmt.statement
+      line = @lines[line_number]
+      statement = line.statements[stmt]
+
+      while_level += statement.number_while_stmts
+
+      # consider only core statements, not modifiers
+
+      if statement.wend?
+        while_level -= 1
+
+        break if while_level.negative?
+
+        if while_level.zero?
+          return LineStmt.new(line_number, stmt)
+        end
+      end
+
+      # move to the next statement
+      walk_line_stmt = find_next_line_stmt(walk_line_stmt)
+    end
+
+    # if none found, error
+    raise(BASICSyntaxError, "Cannot find WEND")
   end
 
   def profile(args, show_timing)

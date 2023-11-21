@@ -160,6 +160,8 @@ class StatementFactory
       ReturnStatement,
       SleepStatement,
       StopStatement,
+      WendStatement,
+      WhileStatement,
       WriteStatement
     ]
   end
@@ -305,13 +307,42 @@ class ForNextMarker
   end
 end
 
+# class for while-wend marker
+class WhileMarker
+  attr_reader :line_stmt
+
+  def initialize(line_stmt)
+    @line_stmt = line_stmt
+  end
+
+  def hash
+    @line_stmt.hash
+  end
+
+  def eql?(other)
+    @line_stmt == other.line_stmt
+  end
+
+  def ==(other)
+    @line_stmt == other.line_stmt
+  end
+
+  def <=>(other)
+    return @line_stmt <=> other.line_stmt
+  end
+
+  def to_s
+    "#{@line_stmt}"
+  end
+end
+
 # parent of all statement classes
 class AbstractStatement
   attr_reader :errors, :warnings, :program_errors, :keywords, :tokens,
               :separators, :valid, :executable, :comment, :linenums,
               :autonext, :autonext_line_stmt, :transfers,
               :is_if_no_else, :may_be_if_sub, :part_of_sub, :part_of_onerror,
-              :part_of_fornext
+              :part_of_fornext, :part_of_while
   attr_accessor :part_of_user_function, :program_warnings, :origins,
                 :reachable, :visited
 
@@ -356,6 +387,7 @@ class AbstractStatement
     @part_of_sub = []
     @part_of_onerror = []
     @part_of_fornext = []
+    @part_of_while = []
   end
 
   def set_autonext_line_stmt(line_stmt_mod)
@@ -444,6 +476,12 @@ class AbstractStatement
     @part_of_fornext << marker
   end
 
+  def assign_while_markers(_, _) end
+
+  def assign_while_marker(marker)
+    @part_of_while << marker
+  end
+
   def set_endfunc_lines(_, _) end
 
   def define_user_functions(_) end
@@ -510,6 +548,9 @@ class AbstractStatement
 
     text += " F(#{@part_of_fornext.map(&:to_s).join(',')})" unless
       @part_of_fornext.empty?
+
+    text += " W(#{@part_of_while.map(&:to_s).join(',')})" unless
+      @part_of_while.empty?
 
     text
   end
@@ -668,6 +709,10 @@ class AbstractStatement
     false
   end
 
+  def wend?
+    false
+  end
+
   def user_def?
     false
   end
@@ -783,7 +828,7 @@ class AbstractStatement
   def check_terminating_in_onerror
     return if @part_of_onerror.empty?
 
-    # warn about STOP, END, CHAIN in GOSUB block
+    # warn about STOP, END, CHAIN in ERROR block
     @transfers.each do |xfer|
       if [:stop, :chain].include?(xfer.type)
         @program_warnings << "Terminating statement in ON-ERROR"
@@ -794,10 +839,21 @@ class AbstractStatement
   def check_terminating_in_fornext
     return if @part_of_fornext.empty?
 
-    # warn about STOP, END, CHAIN in GOSUB block
+    # warn about STOP, END, CHAIN in FORNEXT block
     @transfers.each do |xfer|
       if [:stop, :chain].include?(xfer.type)
         @program_warnings << "Terminating statement in FOR/NEXT"
+      end
+    end
+  end
+
+  def check_terminating_in_while
+    return if @part_of_while.empty?
+
+    # warn about STOP, END, CHAIN in WHILE block
+    @transfers.each do |xfer|
+      if [:stop, :chain].include?(xfer.type)
+        @program_warnings << "Terminating statement in WHILE"
       end
     end
   end
@@ -819,10 +875,28 @@ class AbstractStatement
       dest_part_of_fornext != @part_of_fornext
   end
 
+  def check_destination_while(program, line_stmt, dest_line_stmt)
+    return if dest_line_stmt.nil?
+
+    dest_statement = program.get_statement(dest_line_stmt)
+
+    return if dest_statement.nil?
+
+    dest_part_of_while = dest_statement.part_of_while_short(dest_line_stmt)
+    dest_line_number = dest_line_stmt.line_number
+
+    @program_warnings << "Transfer in/out of WHILE #{dest_line_number}" if
+      dest_part_of_while != @part_of_while
+  end
+
   def check_program(_, _)
   end
 
   def number_for_stmts
+    0
+  end
+
+  def number_while_stmts
     0
   end
 
@@ -918,6 +992,10 @@ class AbstractStatement
 
   def part_of_fornext_short(_)
     @part_of_fornext
+  end
+
+  def part_of_while_short(_)
+    @part_of_while
   end
 
   protected
@@ -2160,6 +2238,10 @@ class DefineFunctionStatement < AbstractStatement
     end
   end
 
+  def wend?
+    false
+  end
+
   def user_def?
     true
   end
@@ -3272,6 +3354,15 @@ class AbstractIfStatement < AbstractStatement
 
     number += @statement.number_for_stmts unless @statement.nil?
     number += @else_stmt.number_for_stmts unless @else_stmt.nil?
+
+    number
+  end
+
+  def number_while_stmts
+    number = 0
+
+    number += @statement.number_while_stmts unless @statement.nil?
+    number += @else_stmt.number_while_stmts unless @else_stmt.nil?
 
     number
   end
@@ -4898,6 +4989,166 @@ class StopStatement < AbstractStatement
     io = interpreter.console_io
     io.newline_when_needed
     interpreter.stop
+  end
+end
+
+# WEND, END WHILE
+class WendStatement < AbstractStatement
+  def self.lead_keywords
+    [
+      [KeywordToken.new('WEND')],
+      [KeywordToken.new('END'), KeywordToken.new('WHILE')]
+    ]
+  end
+
+  def initialize(_, keywords, tokens_lists)
+    super
+
+    @may_be_if_sub = false
+
+    template = []
+
+    @errors << 'Syntax error' unless
+      check_template(tokens_lists, template)
+  end
+
+  def wend?
+    true
+  end
+
+  def dump
+    lines = []
+
+    @modifiers&.each { |item| lines += item.dump }
+
+    lines
+  end
+
+  def execute_core(interpreter)
+    while_control = interpreter.top_while
+    expression = while_control.expression
+    results = expression.evaluate(interpreter)
+    result = results[0].value
+
+    if result
+      interpreter.next_line_stmt_mod = while_control.start_line_stmt_mod
+    else
+      interpreter.exit_while
+    end
+
+    io = interpreter.trace_out
+    io.trace_output(" #{expression}: #{result}")
+  end
+end
+
+# WHILE
+class WhileStatement < AbstractStatement
+  def self.lead_keywords
+    [
+      [KeywordToken.new('WHILE')]
+    ]
+  end
+
+  def initialize(_, keywords, tokens_lists)
+    super
+
+    @autonext = false
+    @may_be_if_sub = false
+
+    template_1 = [[1, '>=']]
+
+    if check_template(tokens_lists, template_1)
+      token_lists = split_tokens(tokens_lists[0], false)
+      @expression = ValueExpressionSet.new(token_lists[0], :scalar)
+      @errors << 'TAB() not allowed' if @expression.has_tab
+      @elements = make_references(nil, @expression)
+    else
+      @errors << 'Syntax error'
+    end
+
+    @errors << 'Too many values' if token_lists.size > 1
+
+    @comprehension_effort += @expression.comprehension_effort
+
+    @warnings << 'Constant expression' if @expression.constant?
+  end
+
+  def number_while_stmts
+    1
+  end
+
+  def while?
+    true
+  end
+
+  def dump
+    lines = []
+
+    lines << @expression.dump
+
+    lines
+  end
+
+  def execute_core(interpreter)
+    raise BASICSyntaxError, 'uninitialized WHILE' if
+      @loopstart_line_stmt_mod.nil?
+
+    raise BASICSyntaxError, 'uninitialized WHILE' if
+      @wendstmt_line_stmt.nil?
+
+    while_control = WhileControl.new(@expression, @loopstart_line_stmt_mod)
+
+    interpreter.enter_while(while_control)
+
+    # WHILE always jumps to WEND which makes the decision to loop
+    interpreter.next_line_stmt_mod = @wendstmt_line_stmt
+  end
+
+  def set_destinations(_, line_stmt, program)
+    @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(line_stmt)
+
+    begin
+      @wendstmt_line_stmt = program.find_closing_wend_line_stmt(line_stmt)
+    rescue BASICSyntaxError => e
+      @program_errors << e.message
+    end
+  end
+
+  def set_transfers(_)
+    unless @loopstart_line_stmt_mod.nil?
+      line_number = @loopstart_line_stmt_mod.line_number
+      stmt = @loopstart_line_stmt_mod.statement
+      @transfers << TransferRefLineStmt.new(line_number, stmt, :while)
+    end
+
+    unless @wendstmt_line_stmt.nil?
+      line_number = @wendstmt_line_stmt.line_number
+      stmt = @wendstmt_line_stmt.statement
+      @transfers << TransferRefLineStmt.new(line_number, stmt, :while)
+    end
+  end
+
+  def assign_while_markers(program, current_line_stmt)
+    return if @wendstmt_line_stmt.nil?
+
+    marker = WhileMarker.new(current_line_stmt)
+    
+    walk_line_stmt = current_line_stmt
+
+    until walk_line_stmt == @wendstmt_line_stmt
+      statement = program.get_statement(walk_line_stmt)
+      
+      # mark statement's destinations
+      statement.assign_while_marker(marker)
+
+      walk_line_stmt = program.find_next_line_stmt(walk_line_stmt)
+    end
+
+    # assign marker to closing WEND
+    statement = program.get_statement(walk_line_stmt)
+      
+    # mark statement's destinations
+    statement.assign_while_marker(marker)
   end
 end
 
