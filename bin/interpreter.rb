@@ -1,11 +1,24 @@
 # frozen_string_literal: true
 
+# Helper class for loops
+class AbstractLoopControl
+  attr_reader :is_for, :is_while
+
+  def initialize
+    @is_for = false
+    @is_while = false
+  end
+end
+
 # Helper class for FOR/NEXT
-class AbstractForControl
+class AbstractForControl < AbstractLoopControl
   attr_reader :control, :start
   attr_accessor :start_line_stmt_mod, :forget, :broken
 
   def initialize(control, start, step, start_line_stmt_mod)
+    super()
+
+    @is_for = true
     @control = control
     @start = start
     @step = step
@@ -137,11 +150,14 @@ class ForWhileControl < AbstractForControl
 end
 
 # Helper class for WHILE/WEND
-class WhileControl
+class WhileControl < AbstractLoopControl
   attr_accessor :start_line_stmt_mod, :broken
   attr_reader :expression
 
   def initialize(expression, start_line_stmt_mod)
+    super()
+
+    @is_while = true
     @expression = expression
     @start_line_stmt_mod = start_line_stmt_mod
   end
@@ -176,7 +192,7 @@ class Interpreter
     @line_breakpoints = {}
     @line_cond_breakpoints = {}
     @locked_variables = []
-    @fornext_stack = []
+    @loop_stack = []
     @while_stack = []
     @data_store = DataStore.new
     @file_handlers = {}
@@ -1474,13 +1490,13 @@ class Interpreter
   end
 
   def enter_fornext(fornext_control)
-    @fornext_stack.push(fornext_control)
+    @loop_stack.push(fornext_control)
   end
 
   def exit_fornext(fornext_control)
-    raise BASICError.new('NEXT without FOR') if @fornext_stack.empty?
+    raise BASICError.new('NEXT without FOR') if @loop_stack.empty?
 
-    @fornext_stack.pop
+    @loop_stack.pop
 
     forget = fornext_control.forget
     control = fornext_control.control
@@ -1491,15 +1507,15 @@ class Interpreter
   end
 
   def top_fornext
-    raise BASICError.new('Implied NEXT without FOR') if @fornext_stack.empty?
+    raise BASICError.new('Implied NEXT without FOR') if @loop_stack.empty?
 
-    @fornext_stack[-1]
+    @loop_stack[-1]
   end
 
   def break_fornext
-    raise BASICSyntaxError.new('BREAK without FOR') if @fornext_stack.empty?
+    raise BASICSyntaxError.new('BREAK without FOR') if @loop_stack.empty?
 
-    @fornext_stack[-1].broken = true
+    @loop_stack[-1].broken = true
   end
 
   def enter_while(while_control)

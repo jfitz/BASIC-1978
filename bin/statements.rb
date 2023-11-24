@@ -4004,7 +4004,7 @@ class NextStatement < AbstractStatement
 
     while !found_unterminated && index < max
       if @controls[index].empty?
-        control_name = interpreter.top_fornext
+        control_name = interpreter.top_fornext.control
         fornext_control = interpreter.retrieve_fornext(control_name)
       else
         fornext_control = interpreter.retrieve_fornext(@controls[index])
