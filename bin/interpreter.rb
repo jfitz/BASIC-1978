@@ -1489,8 +1489,8 @@ class Interpreter
     fornext
   end
 
-  def enter_fornext(fornext_control)
-    @loop_stack.push(fornext_control)
+  def enter_loop(loop_control)
+    @loop_stack.push(loop_control)
   end
 
   def exit_fornext(fornext_control)
@@ -1507,13 +1507,17 @@ class Interpreter
   end
 
   def top_fornext
-    raise BASICError.new('Implied NEXT without FOR') if @loop_stack.empty?
+    raise BASICError.new('Implied NEXT without FOR') if
+      @loop_stack.empty?
+
+    raise BASICSyntaxError.new('Implied NEXT without FOR') if
+      !@loop_stack[0].is_for
 
     @loop_stack[-1]
   end
 
-  def break_fornext
-    raise BASICSyntaxError.new('BREAK without FOR') if @loop_stack.empty?
+  def break_loop
+    raise BASICSyntaxError.new('BREAK without loop') if @loop_stack.empty?
 
     @loop_stack[-1].broken = true
   end

@@ -530,7 +530,7 @@ class AbstractForModifier < AbstractModifier
     interpreter.assign_fornext(fornext_control)
 
     interpreter.lock_variable(@control) if $options['lock_fornext'].value
-    interpreter.enter_fornext(fornext_control)
+    interpreter.enter_loop(fornext_control)
 
     terminated = fornext_control.front_terminated?(interpreter)
 
