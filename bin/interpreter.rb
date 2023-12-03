@@ -1504,6 +1504,11 @@ class Interpreter
   end
 
   def enter_loop(loop_control)
+    if loop_control.is_for
+      control_variable = loop_control.control
+      lock_variable(control_variable) if $options['lock_fornext'].value
+    end
+
     @loop_stack.push(loop_control)
   end
 

@@ -528,8 +528,6 @@ class AbstractForModifier < AbstractModifier
     end
 
     interpreter.assign_fornext(fornext_control)
-
-    interpreter.lock_variable(@control) if $options['lock_fornext'].value
     interpreter.enter_loop(fornext_control)
 
     terminated = fornext_control.front_terminated?(interpreter)
@@ -537,12 +535,8 @@ class AbstractForModifier < AbstractModifier
     io = interpreter.trace_out
     print_trace_info(io, terminated)
 
-    return unless terminated
-
     # front-terminated; go to post-exec of this modifier
-    interpreter.unlock_variable(@control) if $options['lock_fornext'].value
-
-    interpreter.next_line_stmt_mod = @nextstmt_line_stmt_mod
+    interpreter.next_line_stmt_mod = @nextstmt_line_stmt_mod if terminated
   end
 
   def execute_post_stmt(interpreter)
