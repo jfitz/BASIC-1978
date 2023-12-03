@@ -1988,8 +1988,9 @@ class Program
   def find_continue_next_line_stmt(current_line_stmt)
     walk_line_stmt = current_line_stmt
 
-    # search for NEXT at same nesting level
+    # search for NEXT or WEND at same nesting level
     for_level = 0
+    while_level = 0
 
     until walk_line_stmt.nil?
       line_number = walk_line_stmt.line_number
@@ -2011,12 +2012,22 @@ class Program
         break if for_level.negative?
       end
 
+      if statement.wend?
+        if while_level.zero?
+          return LineStmt.new(line_number, stmt)
+        end
+
+        while_level -= 1 if statement.wend?
+
+        break if while_level.negative?
+      end
+
       # move to the next statement
       walk_line_stmt = find_next_line_stmt(walk_line_stmt)
     end
 
     # if none found, error
-    raise(BASICSyntaxError, "Cannot find NEXT")
+    raise(BASICSyntaxError, "Cannot find NEXT or WEND")
   end
 
   def find_closing_endfunc_line_stmt(name, current_line_stmt)

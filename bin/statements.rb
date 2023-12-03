@@ -4018,6 +4018,7 @@ class NextStatement < AbstractStatement
       # check control variable value
       # if matches end value, stop here
       terminated = fornext_control.terminated?(interpreter)
+
       io = interpreter.trace_out
       s = " terminated:#{terminated}"
       io.trace_output(s)
@@ -5031,18 +5032,12 @@ class WendStatement < AbstractStatement
 
   def execute_core(interpreter)
     while_control = interpreter.top_while
-    expression = while_control.expression
-    results = expression.evaluate(interpreter)
-    result = results[0].value
 
-    if result
-      interpreter.next_line_stmt_mod = while_control.start_line_stmt_mod
-    else
+    if while_control.terminated?(interpreter)
       interpreter.exit_while
+    else
+      interpreter.next_line_stmt_mod = while_control.start_line_stmt_mod
     end
-
-    io = interpreter.trace_out
-    io.trace_output(" #{expression}: #{result}")
   end
 end
 
@@ -5103,7 +5098,7 @@ class WhileStatement < AbstractStatement
 
     while_control = WhileControl.new(@expression, @loopstart_line_stmt_mod)
 
-    interpreter.enter_while(while_control)
+    interpreter.enter_loop(while_control)
 
     # WHILE always jumps to WEND which makes the decision to loop
     interpreter.next_line_stmt_mod = @wendstmt_line_stmt

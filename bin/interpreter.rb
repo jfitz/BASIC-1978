@@ -3,17 +3,19 @@
 # Helper class for loops
 class AbstractLoopControl
   attr_reader :is_for, :is_while
+  attr_accessor :broken
 
   def initialize
     @is_for = false
     @is_while = false
+    @broken = false
   end
 end
 
 # Helper class for FOR/NEXT
 class AbstractForControl < AbstractLoopControl
   attr_reader :control, :start
-  attr_accessor :start_line_stmt_mod, :forget, :broken
+  attr_accessor :start_line_stmt_mod, :forget
 
   def initialize(control, start, step, start_line_stmt_mod)
     super()
@@ -24,7 +26,6 @@ class AbstractForControl < AbstractLoopControl
     @step = step
     @start_line_stmt_mod = start_line_stmt_mod
     @forget = false
-    @broken = false
   end
 
   def bump_early?
@@ -105,6 +106,8 @@ class ForUntilControl < AbstractForControl
   end
 
   def terminated?(interpreter)
+    return true if @broken
+
     values = @expression.evaluate(interpreter)
 
     raise(BASICExpressionError, 'Expression error') unless values.size == 1
@@ -138,6 +141,8 @@ class ForWhileControl < AbstractForControl
   end
 
   def terminated?(interpreter)
+    return true if @broken
+
     values = @expression.evaluate(interpreter)
 
     raise(BASICExpressionError, 'Expression error') unless values.size == 1
@@ -151,7 +156,7 @@ end
 
 # Helper class for WHILE/WEND
 class WhileControl < AbstractLoopControl
-  attr_accessor :start_line_stmt_mod, :broken
+  attr_accessor :start_line_stmt_mod
   attr_reader :expression
 
   def initialize(expression, start_line_stmt_mod)
@@ -165,7 +170,16 @@ class WhileControl < AbstractLoopControl
   def terminated?(interpreter)
     return true if @broken
 
-    @expression.evaluate(interpreter)
+    values = @expression.evaluate(interpreter)
+
+    raise(BASICExpressionError, 'Expression error') unless values.size == 1
+
+    result = values[0]
+
+    raise(BASICExpressionError, 'Expression error') unless
+      result.class.to_s == 'BooleanValue'
+
+    !result.value
   end
 end
 
@@ -193,7 +207,6 @@ class Interpreter
     @line_cond_breakpoints = {}
     @locked_variables = []
     @loop_stack = []
-    @while_stack = []
     @data_store = DataStore.new
     @file_handlers = {}
     @return_stack = []
@@ -1290,6 +1303,7 @@ class Interpreter
       dict = @variables[var]
       old_value = dict['value']
       old_provenance = dict['provenance']
+
       # a different value resets 'infinite loop' check
       if value != old_value || @current_line_stmt_mod != old_provenance
         clear_previous_lines
@@ -1496,6 +1510,9 @@ class Interpreter
   def exit_fornext(fornext_control)
     raise BASICError.new('NEXT without FOR') if @loop_stack.empty?
 
+    raise BASICError.new('NEXT without FOR') if !@loop_stack[0].is_for
+
+    @loop_broken = fornext_control.broken
     @loop_stack.pop
 
     forget = fornext_control.forget
@@ -1503,7 +1520,6 @@ class Interpreter
 
     unlock_variable(control) if $options['lock_fornext'].value
     forget_value(control) if $options['forget_fornext'].value && forget
-    @loop_broken = fornext_control.broken
   end
 
   def top_fornext
@@ -1522,20 +1538,23 @@ class Interpreter
     @loop_stack[-1].broken = true
   end
 
-  def enter_while(while_control)
-    @while_stack.push(while_control)
-  end
-
   def top_while
-    raise BASICError.new('Implied WEND without WHILE') if @while_stack.empty?
+    raise BASICError.new('Implied WEND without WHILE') if
+      @loop_stack.empty?
 
-    @while_stack[-1]
+    raise BASICError.new('Implied WEND without WHILE') if
+      !@loop_stack[0].is_while
+
+    @loop_stack[-1]
   end
 
   def exit_while
-    raise BASICError.new('WEND without WHILE') if @while_stack.empty?
+    raise BASICError.new('WEND without WHILE') if @loop_stack.empty?
 
-    @while_stack.pop
+    raise BASICError.new('WEND without WHILE') if !@loop_stack[0].is_while
+
+    @loop_broken = @loop_stack[0].broken
+    @loop_stack.pop
   end
 
   def add_file_names(file_names)
