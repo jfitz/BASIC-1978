@@ -464,17 +464,17 @@ class AbstractForModifier < AbstractModifier
       control_tokens[0].variable?
 
     control_name = VariableName.new(control_tokens[0])
-    @control = Variable.new(control_name, :scalar, [], [])
+    @variable_name = Variable.new(control_name, :scalar, [], [])
     @start = ValueExpressionSet.new(start_tokens, :scalar)
 
     @errors << 'TAB() not allowed' if @start.has_tab
 
-    control = XrefEntry.new(@control.to_s, nil, true)
+    xref = XrefEntry.new(@variable_name.to_s, nil, true)
 
     @numerics = @start.numerics
     @strings = @start.strings
     @booleans = @start.booleans
-    @variables = [control] + @start.variables
+    @variables = [xref] + @start.variables
     @operators = @start.operators
     @functions = @start.functions
     @userfuncs = @start.userfuncs
@@ -490,15 +490,15 @@ class AbstractForModifier < AbstractModifier
   end
 
   def post_pretty
-    "NEXT #{@control}"
+    "NEXT #{@variable_name}"
   end
 
   def post_analyze
-    "(0 1)   NEXT #{@control}"
+    "(0 1)   NEXT #{@variable_name}"
   end
 
   def post_trace
-    "NEXT #{@control}"
+    "NEXT #{@variable_name}"
   end
 
   private
@@ -512,18 +512,18 @@ class AbstractForModifier < AbstractModifier
       to = @end.evaluate(interpreter)[0]
 
       fornext_control =
-        ForToControl.new(@control, from, step, to, @loopstart_line_stmt_mod)
+        ForToControl.new(@variable_name, from, step, to, @loopstart_line_stmt_mod)
     end
 
     unless @until.nil?
       fornext_control =
-        ForUntilControl.new(@control, from, step, @until,
+        ForUntilControl.new(@variable_name, from, step, @until,
                             @loopstart_line_stmt_mod)
     end
 
     unless @while.nil?
       fornext_control =
-        ForWhileControl.new(@control, from, step, @while,
+        ForWhileControl.new(@variable_name, from, step, @while,
                             @loopstart_line_stmt_mod)
     end
 
@@ -540,7 +540,7 @@ class AbstractForModifier < AbstractModifier
   end
 
   def execute_post_stmt(interpreter)
-    fornext_control = interpreter.retrieve_fornext(@control)
+    fornext_control = interpreter.retrieve_fornext(@variable_name)
 
     bump_early = fornext_control.bump_early?
 
@@ -619,14 +619,14 @@ class ForToModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ("control: #{@control.dump}")
+    lines << ("control: #{@variable_name.dump}")
     lines << ("start:   #{@start.dump}")
     lines << ("end:     #{@end.dump}")
     lines
   end
 
   def pre_pretty
-    "FOR #{@control} = #{@start} TO #{@end}"
+    "FOR #{@variable_name} = #{@start} TO #{@end}"
   end
 end
 
@@ -677,7 +677,7 @@ class ForToStepModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ("control: #{@control.dump}")
+    lines << ("control: #{@variable_name.dump}")
     lines << ("start:   #{@start.dump}")
     lines << ("end:     #{@end.dump}")
     lines << ("step:    #{@step.dump}")
@@ -685,7 +685,7 @@ class ForToStepModifier < AbstractForModifier
   end
 
   def pre_pretty
-    "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+    "FOR #{@variable_name} = #{@start} TO #{@end} STEP #{@step}"
   end
 end
 
@@ -736,7 +736,7 @@ class ForStepToModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ("control: #{@control.dump}")
+    lines << ("control: #{@variable_name.dump}")
     lines << ("start:   #{@start.dump}")
     lines << ("end:     #{@end.dump}")
     lines << ("step:    #{@step.dump}")
@@ -744,7 +744,7 @@ class ForStepToModifier < AbstractForModifier
   end
 
   def pre_pretty
-    "FOR #{@control} = #{@start} TO #{@end} STEP #{@step}"
+    "FOR #{@variable_name} = #{@start} TO #{@end} STEP #{@step}"
   end
 end
 
@@ -784,14 +784,14 @@ class ForUntilModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ("control: #{@control.dump}")
+    lines << ("control: #{@variable_name.dump}")
     lines << ("start:   #{@start.dump}")
     lines << ("until:   #{@until.dump}")
     lines
   end
 
   def pre_pretty
-    "FOR #{@control} = #{@start} UNTIL #{@until}"
+    "FOR #{@variable_name} = #{@start} UNTIL #{@until}"
   end
 end
 
@@ -843,7 +843,7 @@ class ForUntilStepModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ("control: #{@control.dump}")
+    lines << ("control: #{@variable_name.dump}")
     lines << ("start:   #{@start.dump}")
     lines << ("step:    #{@step.dump}")
     lines << ("until:   #{@until.dump}")
@@ -851,7 +851,7 @@ class ForUntilStepModifier < AbstractForModifier
   end
 
   def pre_pretty
-    "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
+    "FOR #{@variable_name} = #{@start} UNTIL #{@until} STEP #{@step}"
   end
 end
 
@@ -903,7 +903,7 @@ class ForStepUntilModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ("control: #{@control.dump}")
+    lines << ("control: #{@variable_name.dump}")
     lines << ("start:   #{@start.dump}")
     lines << ("step:    #{@step.dump}")
     lines << ("until:   #{@until.dump}")
@@ -911,7 +911,7 @@ class ForStepUntilModifier < AbstractForModifier
   end
 
   def pre_pretty
-    "FOR #{@control} = #{@start} UNTIL #{@until} STEP #{@step}"
+    "FOR #{@variable_name} = #{@start} UNTIL #{@until} STEP #{@step}"
   end
 end
 
@@ -951,14 +951,14 @@ class ForWhileModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ("control: #{@control.dump}") unless @control.nil?
+    lines << ("control: #{@variable_name.dump}") unless @variable_name.nil?
     lines << ("start:   #{@start.dump}") unless @start.nil?
     lines << ("while:   #{@while.dump}") unless @while.nil?
     lines
   end
 
   def pre_pretty
-    "FOR #{@control} = #{@start} WHILE #{@while}"
+    "FOR #{@variable_name} = #{@start} WHILE #{@while}"
   end
 end
 
@@ -1010,7 +1010,7 @@ class ForWhileStepModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ("control: #{@control.dump}")
+    lines << ("control: #{@variable_name.dump}")
     lines << ("start:   #{@start.dump}")
     lines << ("step:    #{@step.dump}")
     lines << ("while:   #{@while.dump}")
@@ -1018,7 +1018,7 @@ class ForWhileStepModifier < AbstractForModifier
   end
 
   def pre_pretty
-    "FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
+    "FOR #{@variable_name} = #{@start} WHILE #{@while} STEP #{@step}"
   end
 end
 
@@ -1070,7 +1070,7 @@ class ForStepWhileModifier < AbstractForModifier
 
   def dump
     lines = []
-    lines << ("control: #{@control.dump}")
+    lines << ("control: #{@variable_name.dump}")
     lines << ("start:   #{@start.dump}")
     lines << ("step:    #{@step.dump}")
     lines << ("while:   #{@while.dump}")
@@ -1078,6 +1078,6 @@ class ForStepWhileModifier < AbstractForModifier
   end
 
   def pre_pretty
-    "FOR #{@control} = #{@start} WHILE #{@while} STEP #{@step}"
+    "FOR #{@variable_name} = #{@start} WHILE #{@while} STEP #{@step}"
   end
 end
