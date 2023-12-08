@@ -553,9 +553,10 @@ class AbstractForModifier < AbstractModifier
 
     if terminated
       interpreter.exit_fornext(fornext_control)
+      fornext_control.broken = false
     else
       # set next line from top item
-      interpreter.next_line_stmt_mod = @loopstart_line_stmt_mod
+      interpreter.next_line_stmt_mod = fornext_control.start_line_stmt_mod
       # change control variable value
       fornext_control.bump_control(interpreter) unless bump_early
     end
