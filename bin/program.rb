@@ -1945,7 +1945,7 @@ class Program
     end
   end
 
-  def find_closing_next_line_stmt(variable_name, current_line_stmt)
+  def find_closing_next_line_stmt(variable, current_line_stmt)
     walk_line_stmt = current_line_stmt
 
     # search list for a NEXT with the same control variable
@@ -1963,14 +1963,14 @@ class Program
       # consider only core statements, not modifiers
 
       if statement.next?
-        stmt_controls = statement.variable_names
+        stmt_controls = statement.control_variables
 
         stmt_controls.each do |stmt_control|
           for_level -= 1
 
           break if for_level.negative?
 
-          if stmt_control == variable_name ||
+          if stmt_control == variable ||
              (stmt_control.empty? && for_level.zero?)
             return LineStmt.new(line_number, stmt)
           end
@@ -1982,7 +1982,7 @@ class Program
     end
 
     # if none found, error
-    raise(BASICSyntaxError, "Cannot find NEXT for #{variable_name}")
+    raise(BASICSyntaxError, "Cannot find NEXT for #{variable}")
   end
 
   def find_continue_next_line_stmt(current_line_stmt)
