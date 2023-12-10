@@ -22,6 +22,7 @@ class AbstractModifier
     @post_comp_effort = 0
   end
 
+  # called for the post-modifiers
   def set_destinations(_, _) end
 
   def reset_profile_metrics
@@ -266,6 +267,16 @@ class WhileModifier < AbstractModifier
     @expression.uncache
   end
 
+  # called for the post-modifiers
+  def set_destinations(line_stmt_mod, program)
+    # address of the END WHILE
+    @wendstmt_line_stmt_mod = line_stmt_mod
+
+    # address of the WHILE + 1
+    pre_line_stmt_mod = line_stmt_mod.get_counterpart
+    @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(pre_line_stmt_mod)
+  end
+
   def pre_pretty
     "WHILE #{@expression}"
   end
@@ -291,45 +302,25 @@ class WhileModifier < AbstractModifier
   private
 
   def execute_pre_stmt(interpreter)
-    io = interpreter.trace_out
+    while_control = WhileControl.new(@expression, @loopstart_line_stmt_mod)
 
-    values = @expression.evaluate(interpreter)
-    raise(BASICExpressionError, 'Too many values') unless
-      values.size == 1
+    interpreter.enter_loop(while_control)
 
-    result = values[0]
-    result = BooleanValue.new(result) unless
-      result.class.to_s == 'BooleanValue'
-
-    s = " #{result}"
-    io.trace_output(s)
-
-    # if not terminated then continue execution normally
-    return if result.value
+    terminated = while_control.terminated?(interpreter)
 
     # if terminated then transfer to our post modifier
-    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
+    interpreter.next_line_stmt_mod = @wendstmt_line_stmt_mod if terminated
   end
 
   def execute_post_stmt(interpreter)
-    io = interpreter.trace_out
-
-    values = @expression.evaluate(interpreter)
-    raise(BASICExpressionError, 'Too many values') unless
-      values.size == 1
-
-    result = values[0]
-    result = BooleanValue.new(result) unless
-      result.class.to_s == 'BooleanValue'
-
-    s = " #{result}"
-    io.trace_output(s)
-
-    # if terminated then continue to next statement
-    return unless result.value
-
-    # if not terminated then go to start of while
-    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
+    while_control = interpreter.top_while
+    
+    if while_control.terminated?(interpreter)
+      interpreter.exit_while
+    else
+      # if not terminated then go to start of while
+      interpreter.next_line_stmt_mod = while_control.start_line_stmt_mod
+    end
   end
 end
 
@@ -363,6 +354,16 @@ class UntilModifier < AbstractModifier
 
   def uncache
     @expression.uncache
+  end
+
+  # called for the post-modifiers
+  def set_destinations(line_stmt_mod, program)
+    # address of the END UNTIL
+    @wendstmt_line_stmt_mod = line_stmt_mod
+
+    # address of the UNTIL + 1
+    pre_line_stmt_mod = line_stmt_mod.get_counterpart
+    @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(pre_line_stmt_mod)
   end
 
   def pre_pretty
@@ -483,10 +484,14 @@ class AbstractForModifier < AbstractModifier
     @post_comp_effort = 1
   end
 
+  # called for the post-modifiers
   def set_destinations(line_stmt_mod, program)
+    # address of NEXT
+    @nextstmt_line_stmt_mod = line_stmt_mod
+
+    # address of FOR + 1
     pre_line_stmt_mod = line_stmt_mod.get_counterpart
     @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(pre_line_stmt_mod)
-    @nextstmt_line_stmt_mod = line_stmt_mod
   end
 
   def post_pretty
