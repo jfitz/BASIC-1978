@@ -8,6 +8,7 @@ class AbstractLoopControl
   def initialize
     @is_for = false
     @is_while = false
+    @is_until = false
     @broken = false
   end
 end
@@ -159,10 +160,11 @@ class WhileControl < AbstractLoopControl
   attr_accessor :start_line_stmt_mod
   attr_reader :expression
 
-  def initialize(expression, start_line_stmt_mod)
+  def initialize(while_until, expression, start_line_stmt_mod)
     super()
 
-    @is_while = true
+    @is_while = while_until == :while
+    @is_until = while_until == :until
     @expression = expression
     @start_line_stmt_mod = start_line_stmt_mod
   end
@@ -179,7 +181,10 @@ class WhileControl < AbstractLoopControl
     raise(BASICExpressionError, 'Expression error') unless
       result.class.to_s == 'BooleanValue'
 
-    !result.value
+    return !result.value if @is_while
+    return result.value if @is_until
+
+    true
   end
 end
 
