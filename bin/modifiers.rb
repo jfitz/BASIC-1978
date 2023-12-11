@@ -302,21 +302,28 @@ class WhileModifier < AbstractModifier
   private
 
   def execute_pre_stmt(interpreter)
+    io = interpreter.trace_out
+
     while_control = WhileControl.new(:while, @expression,
                                      @loopstart_line_stmt_mod)
 
     interpreter.enter_loop(while_control)
 
     terminated = while_control.terminated?(interpreter)
+    io.trace_output(" terminated: #{terminated}")
 
     # if terminated then transfer to our post modifier
     interpreter.next_line_stmt_mod = @wendstmt_line_stmt_mod if terminated
   end
 
   def execute_post_stmt(interpreter)
+    io = interpreter.trace_out
+
     while_control = interpreter.top_while
     
-    if while_control.terminated?(interpreter)
+    terminated = while_control.terminated?(interpreter)
+
+    if terminated
       interpreter.exit_while
     else
       # if not terminated then go to start of while
@@ -394,47 +401,32 @@ class UntilModifier < AbstractModifier
   def execute_pre_stmt(interpreter)
     io = interpreter.trace_out
 
-    values = @expression.evaluate(interpreter)
-    raise(BASICExpressionError, 'Too many values') unless
-      values.size == 1
+    until_control = WhileControl.new(:until, @expression,
+                                     @loopstart_line_stmt_mod)
 
-    result = values[0]
-    result = BooleanValue.new(result) unless
-      result.class.to_s == 'BooleanValue'
+    interpreter.enter_loop(until_control)
 
-    s = " #{result}"
-    io.trace_output(s)
+    terminated = until_control.terminated?(interpreter)
+    io.trace_output(" terminated: #{terminated}")
 
-    @profile_pre_count += 1
-
-    # if terminated then continue execution normally
-    return unless result.value
-
-    # if not terminated then transfer to our post modifier
-    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
+    # if terminated then transfer to our post modifier
+    interpreter.next_line_stmt_mod = @wendstmt_line_stmt_mod if terminated
   end
 
   def execute_post_stmt(interpreter)
     io = interpreter.trace_out
 
-    values = @expression.evaluate(interpreter)
-    raise(BASICExpressionError, 'Too many values') unless
-      values.size == 1
+    until_control = interpreter.top_until
 
-    result = values[0]
-    result = BooleanValue.new(result) unless
-      result.class.to_s == 'BooleanValue'
+    terminated = until_control.terminated?(interpreter)
+    io.trace_output(" terminated: #{terminated}")
 
-    s = " #{result}"
-    io.trace_output(s)
-
-    @profile_post_count += 1
-
-    # if not terminated then continue to next statement
-    return if result.value
-
-    # if terminated then go to start of until
-    interpreter.next_line_stmt_mod = get_counterpart(interpreter)
+    if terminated
+      interpreter.exit_until
+    else
+      # if not terminated then go to start of while
+      interpreter.next_line_stmt_mod = until_control.start_line_stmt_mod
+    end
   end
 end
 

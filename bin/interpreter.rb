@@ -2,7 +2,7 @@
 
 # Helper class for loops
 class AbstractLoopControl
-  attr_reader :is_for, :is_while
+  attr_reader :is_for, :is_while, :is_until
   attr_accessor :broken
 
   def initialize
@@ -1562,6 +1562,26 @@ class Interpreter
     raise BASICError.new('WEND without WHILE') if @loop_stack.empty?
 
     raise BASICError.new('WEND without WHILE') if !@loop_stack[0].is_while
+
+    @loop_broken = @loop_stack[0].broken
+    @loop_stack.pop
+  end
+
+  def top_until
+    raise BASICError.new('Implied END UNTIL without UNTIL') if
+      @loop_stack.empty?
+
+    raise BASICError.new('Implied END UNTIL without UNTIL') if
+      !@loop_stack[0].is_until
+
+    @loop_stack[-1]
+  end
+
+  def exit_until
+    raise BASICError.new('END UNTIL without UNTIL') if @loop_stack.empty?
+
+
+    raise BASICError.new('END UNTIL without UNTIL') if !@loop_stack[0].is_until
 
     @loop_broken = @loop_stack[0].broken
     @loop_stack.pop
