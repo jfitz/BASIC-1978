@@ -507,8 +507,14 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
   end
 
   statement_factory = StatementFactory.instance
-  keywords = statement_factory.keywords_definitions
-  tokenbuilders << ListTokenBuilder.new(keywords, KeywordToken)
+
+  # lead keywords let us identify the statement
+  lead_keywords = statement_factory.lead_keywords
+  tokenbuilders << ListTokenBuilder.new(lead_keywords, KeywordToken)
+
+  # statement keywords occur later in the text
+  stmt_keywords = statement_factory.stmt_keywords
+  tokenbuilders << ListTokenBuilder.new(stmt_keywords, KeywordToken)
 
   un_ops = UnaryOperator.operators
   bi_ops = BinaryOperator.operators
