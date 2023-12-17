@@ -259,7 +259,7 @@ class StatementFactory
   end
 
   def tokenize(text)
-    invalid_tokenbuilder = InvalidTokenBuilder.new
+    invalid_tokenbuilder = InvalidTokenBuilder.new(true)
     general_tokenizer = Tokenizer.new(@tokenbuilders, invalid_tokenbuilder)
     data_tokenizer = Tokenizer.new(@data_tokenbuilders, invalid_tokenbuilder)
 
@@ -1835,11 +1835,11 @@ module PrintFunctions
   def split_format(format)
     format_text = format.to_v
     tokenbuilders = [
-      ConstantFormatTokenBuilder.new,
-      PaddedStringFormatTokenBuilder.new,
-      PlainStringFormatTokenBuilder.new,
-      CharFormatTokenBuilder.new,
-      NumericFormatTokenBuilder.new
+      ConstantFormatTokenBuilder.new(true),
+      PaddedStringFormatTokenBuilder.new(true),
+      PlainStringFormatTokenBuilder.new(true),
+      CharFormatTokenBuilder.new(true),
+      NumericFormatTokenBuilder.new(true)
     ]
     tokenizer = Tokenizer.new(tokenbuilders, nil)
     tokenizer.tokenize_line(format_text)
