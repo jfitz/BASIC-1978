@@ -495,7 +495,7 @@ class Shell
 end
 
 def make_interpreter_tokenbuilders(options, quotes, statement_separators,
-                                   comment_leads)
+                                   comment_leads, lead_keywords, stmt_keywords)
   normal_tb = true
   data_tb = false
   tokenbuilders = []
@@ -508,14 +508,10 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
       ListTokenBuilder.new(normal_tb, [], statement_separators, StatementSeparatorToken)
   end
 
-  statement_factory = StatementFactory.instance
-
   # lead keywords let us identify the statement
-  lead_keywords = statement_factory.lead_keywords
   tokenbuilders << ListTokenBuilder.new(normal_tb, ['DATA'], lead_keywords, KeywordToken)
 
   # statement keywords occur later in the text
-  stmt_keywords = statement_factory.stmt_keywords
   tokenbuilders << ListTokenBuilder.new(normal_tb, ['DATA'], stmt_keywords, KeywordToken)
 
   un_ops = UnaryOperator.operators
@@ -909,15 +905,19 @@ comment_leads << "'" if $options['apostrophe_comment'].value
 
 console_io = ConsoleIo.new
 
+statement_factory = StatementFactory.instance
+lead_keywords = statement_factory.lead_keywords
+stmt_keywords = statement_factory.stmt_keywords
 tokenbuilders =
   make_interpreter_tokenbuilders($options, quotes, statement_seps,
-                                 comment_leads)
+                                 comment_leads, lead_keywords, stmt_keywords)
+statement_factory.tokenbuilders = tokenbuilders
 
 interpreter = Interpreter.new(console_io)
 interpreter.set_default_args('RND', NumericValue.new(1))
 interpreter.set_default_args('RND%', IntegerValue.new(100))
 interpreter.set_default_args('RND$', NumericValue.new(6))
-program = Program.new(console_io, tokenbuilders)
+program = Program.new(console_io, statement_factory)
 interpreter.program = program
 
 if $options['heading'].value
