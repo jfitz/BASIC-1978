@@ -5,12 +5,10 @@ class StatementFactory
   include Singleton
 
   attr_writer :tokenbuilders
-  attr_writer :data_tokenbuilders
 
   def initialize
     @statement_definitions = statement_definitions
     @tokenbuilders = []
-    @data_tokenbuilders = []
   end
 
   def parse(text)
@@ -259,9 +257,8 @@ class StatementFactory
   end
 
   def tokenize(text)
-    invalid_tokenbuilder = InvalidTokenBuilder.new(true)
+    invalid_tokenbuilder = InvalidTokenBuilder.new(true, [])
     general_tokenizer = Tokenizer.new(@tokenbuilders, invalid_tokenbuilder)
-    data_tokenizer = Tokenizer.new(@data_tokenbuilders, invalid_tokenbuilder)
 
     tokens = []
 
@@ -272,14 +269,13 @@ class StatementFactory
 
       tokens += new_tokens
 
-      tokenizer = data_tokenizer if
-        new_tokens[0].keyword? && new_tokens[0].to_s == 'DATA'
+      general_tokenizer.handle_token(new_tokens[0])
+      general_tokenizer.reset_enabled if new_tokens[0].statement_separator?
 
-      tokenizer = general_tokenizer if
-        new_tokens[0].statement_separator?
-      
       text = text[count..-1]
     end
+
+    general_tokenizer.reset_enabled
 
     tokens
   end
@@ -1834,13 +1830,15 @@ module PrintFunctions
 
   def split_format(format)
     format_text = format.to_v
+
     tokenbuilders = [
-      ConstantFormatTokenBuilder.new(true),
-      PaddedStringFormatTokenBuilder.new(true),
-      PlainStringFormatTokenBuilder.new(true),
-      CharFormatTokenBuilder.new(true),
-      NumericFormatTokenBuilder.new(true)
+      ConstantFormatTokenBuilder.new(true, []),
+      PaddedStringFormatTokenBuilder.new(true, []),
+      PlainStringFormatTokenBuilder.new(true, []),
+      CharFormatTokenBuilder.new(true, []),
+      NumericFormatTokenBuilder.new(true, [])
     ]
+
     tokenizer = Tokenizer.new(tokenbuilders, nil)
     tokenizer.tokenize_line(format_text)
   end
