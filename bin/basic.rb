@@ -498,6 +498,7 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
                                    comment_leads, lead_keywords, stmt_keywords)
   normal_tb = true
   data_tb = false
+  extra_tb = false
   tokenbuilders = []
 
   tokenbuilders << CommentTokenBuilder.new(normal_tb, [], comment_leads)
@@ -514,6 +515,9 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
   # statement keywords occur later in the text
   tokenbuilders << ListTokenBuilder.new(normal_tb, ['DATA'], stmt_keywords, KeywordToken)
 
+  option_keywords = $options.keys.map(&:upcase)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['OPTION'], option_keywords, KeywordToken)
+  
   un_ops = UnaryOperator.operators
   tokenbuilders << ListTokenBuilder.new(normal_tb, [], un_ops, OperatorToken)
 
@@ -546,11 +550,16 @@ end
 
 def make_command_tokenbuilders(quotes, long_names)
   command_tb = true
+  extra_tb = false
   tokenbuilders = []
 
   keywords = %w[
     ANALYZE BKPT NOBKPT BYE CROSSREF DELETE DIMS IF LIST LOAD
     NEW OPTION PARSE PRETTY PROFILE RENUMBER RUN SAVE TOKENS UDFS VARS
+  ]
+  tokenbuilders << ListTokenBuilder.new(command_tb, [], keywords, KeywordToken)
+
+  option_keywords = %w[
     APOSTROPHE_COMMENT ASC_ALLOW_ALL
     BACK_TAB BASE
     CACHE_CONST_EXPR CHR_ALLOW_ALL
@@ -558,21 +567,25 @@ def make_command_tokenbuilders(quotes, long_names)
     EXTEND_IF
     FIELD_SEP FORGET_FORNEXT
     HEADING
-    IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON INT_BITWISE INT_FLOOR
+    IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON
+    INT_BITWISE INT_FLOOR
     LOCK_FORNEXT LONG_NAMES
     MAX_DIM MAX_LINE_NUM MIN_LINE_NUM
     NEWLINE_SPEED
     PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH
-    PROMPT PROMPTD PROMPT_COUNT PROVENANCE
+    PROMPT PROMPTD PROMPT_COUNT
+    PROVENANCE
     QMARK_AFTER_PROMPT
-    RADIANS RANDOMIZE RELATIONAL_RESULT REQUIRE_INITIALIZED RESPECT_RANDOMIZE
+    RADIANS RELATIONAL_RESULT
+    REQUIRE_INITIALIZED RESPECT_RANDOMIZE
     SEMICOLON_ZONE_WIDTH
     TIMING TRACE TRIG_REQUIRE_UNITS
     WARN_FORNEXT_LENGTH WARN_FORNEXT_LEVEL
-    WARN_GOSUB_LENGTH WARN_LIST_WIDTH WARN_PRETTY_WIDTH WRAP
+    WARN_GOSUB_LENGTH WARN_LIST_WIDTH WARN_PRETTY_WIDTH
+    WRAP
     ZONE_WIDTH
   ]
-  tokenbuilders << ListTokenBuilder.new(command_tb, [], keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['OPTION'], option_keywords, KeywordToken)
 
   un_ops = UnaryOperator.operators
   tokenbuilders << ListTokenBuilder.new(command_tb, [], un_ops, OperatorToken)
