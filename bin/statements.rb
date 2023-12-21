@@ -1,268 +1,5 @@
 # frozen_string_literal: true
 
-# Statement factory class
-class StatementFactory
-  include Singleton
-
-  attr_writer :tokenbuilders
-
-  def initialize
-    @statement_definitions = statement_definitions
-    @tokenbuilders = []
-  end
-
-  def parse(text)
-    line_number = nil
-    line = nil
-    m = /\A\d+/.match(text)
-
-    unless m.nil?
-      token = NumericLiteralToken.new(m[0])
-      number = IntegerValue.new(token)
-      line_number = LineNumber.new(number)
-      line_text = m.post_match
-      all_tokens = tokenize_line(line_text)
-      all_tokens.delete_if(&:whitespace?)
-      comment = nil
-
-      comment = all_tokens.pop if
-        !all_tokens.empty? && all_tokens[-1].comment?
-
-      line = create(line_number, line_text, all_tokens, comment)
-    end
-
-    [line_number, line]
-  end
-
-  def create(line_number, text, all_tokens, comment)
-    statements = []
-    statements_tokens = split_on_statement_separators(all_tokens)
-
-    if statements_tokens.empty?
-      statement = EmptyStatement.new(line_number)
-      statements << statement
-    else
-      statements_tokens.each do |statement_tokens|
-        statement = UnknownStatement.new(line_number, text)
-
-        begin
-          statement = create_statement(line_number, text, statement_tokens)
-        rescue BASICExpressionError, BASICRuntimeError => e
-          statement = InvalidStatement.new(line_number, text, all_tokens, e)
-        end
-
-        statements << statement
-      end
-    end
-
-    Line.new(text, statements, all_tokens, comment)
-  end
-
-  def create_statement(line_number, text, statement_tokens)
-    statement = EmptyStatement.new(line_number)
-
-    unless statement_tokens.empty?
-      statement = nil
-
-      keywords, tokens = extract_keywords(statement_tokens)
-
-      while statement.nil?
-        if @statement_definitions.key?(keywords)
-          tokens_lists = split_keywords(tokens)
-
-          statement_definition = @statement_definitions[keywords]
-
-          statement =
-            statement_definition.new(line_number, keywords, tokens_lists)
-        elsif keywords.empty?
-          if statement.nil?
-            statement = UnknownStatement.new(line_number, text)
-          end
-        else
-          keyword = keywords.pop
-          tokens.unshift(keyword)
-        end
-      end
-    end
-
-    statement
-  end
-
-  # lead keywords let us identify the statement
-  def lead_keywords
-    keywords = []
-
-    statement_classes.each do |cl|
-      kwds = cl.lead_keywords.flatten
-      keywords += kwds.map(&:to_s)
-    end
-
-    keywords.uniq
-  end
-
-  # statement keywords occur later in the text
-  def stmt_keywords
-    keywords = []
-
-    statement_classes.each do |cl|
-      keywords += cl.extra_keywords
-    end
-
-    modifier_classes.each do |cl|
-      kwds = cl.lead_keywords.flatten
-      keywords += kwds.map(&:to_s)
-
-      keywords += cl.extra_keywords
-    end
-
-    keywords.uniq
-  end
-
-  private
-
-  def statement_classes
-    [
-      ArrForgetStatement,
-      ArrInputStatement,
-      ArrPlotStatement,
-      ArrPrintStatement,
-      ArrReadStatement,
-      ArrWriteStatement,
-      ArrLetStatement,
-      BreakStatement,
-      ChainStatement,
-      CloseStatement,
-      ContinueStatement,
-      DataStatement,
-      DefineFunctionStatement,
-      DimStatement,
-      EndStatement,
-      FnendStatement,
-      ForgetStatement,
-      ForStatement,
-      GosubStatement,
-      GotoStatement,
-      IfStatement,
-      InputStatement,
-      LetStatement,
-      LetLessStatement,
-      LineInputStatement,
-      MatForgetStatement,
-      MatInputStatement,
-      MatPlotStatement,
-      MatPrintStatement,
-      MatReadStatement,
-      MatWriteStatement,
-      MatLetStatement,
-      NextStatement,
-      OnStatement,
-      OnErrorStatement,
-      OpenStatement,
-      OptionStatement,
-      PrintStatement,
-      RandomizeStatement,
-      ReadStatement,
-      RemarkStatement,
-      RestoreStatement,
-      ResumeStatement,
-      ReturnStatement,
-      SleepStatement,
-      StopStatement,
-      WendStatement,
-      WhileStatement,
-      WriteStatement
-    ]
-  end
-
-  def modifier_classes
-    [
-      IfModifier,
-      UnlessModifier,
-      WhileModifier,
-      UntilModifier,
-      ForToModifier,
-      ForToStepModifier,
-      ForStepToModifier,
-      ForUntilModifier,
-      ForUntilStepModifier,
-      ForStepUntilModifier,
-      ForWhileModifier,
-      ForWhileStepModifier,
-      ForStepWhileModifier
-    ]
-  end
-
-  def statement_definitions
-    lead_keywords = {}
-
-    statement_classes.each do |class_name|
-      keyword_sets = class_name.lead_keywords
-
-      keyword_sets.each do |set|
-        lead_keywords[set] = class_name
-      end
-    end
-
-    lead_keywords
-  end
-
-  def split_on_statement_separators(tokens)
-    tokens_lists = []
-    statement_tokens = []
-
-    tokens.each do |token|
-      if token.statement_separator?
-        tokens_lists << statement_tokens
-        statement_tokens = []
-      else
-        statement_tokens << token
-      end
-    end
-
-    tokens_lists << statement_tokens unless statement_tokens.empty?
-    tokens_lists
-  end
-
-  def extract_keywords(all_tokens)
-    keywords = []
-    tokens = []
-    saw_non_keyword = false
-
-    all_tokens.each do |token|
-      saw_non_keyword = true unless token.keyword?
-      keywords << token unless saw_non_keyword
-      tokens << token if saw_non_keyword
-    end
-
-    [keywords, tokens]
-  end
-
-  def split_keywords(tokens)
-    results = []
-    nonkeywords = []
-
-    tokens.each do |token|
-      if token.keyword?
-        results << nonkeywords unless nonkeywords.empty?
-        nonkeywords = []
-        results << token
-      else
-        nonkeywords << token
-      end
-    end
-
-    results << nonkeywords unless nonkeywords.empty?
-
-    results
-  end
-
-  def tokenize_line(text)
-    invalid_tokenbuilder = InvalidTokenBuilder.new(true, [])
-    tokenizer = Tokenizer.new(@tokenbuilders, invalid_tokenbuilder)
-    tokenizer.tokenize_line(text)
-  end
-end
-
 # class for for-next marker
 class ForNextMarker
   attr_reader :variable, :line_stmt
@@ -6519,5 +6256,268 @@ class MatLetStatement < AbstractLetStatement
       r_value.class.to_s != 'Matrix'
 
     r_value
+  end
+end
+
+# Statement factory class
+class StatementFactory
+  include Singleton
+
+  attr_writer :tokenbuilders
+
+  def initialize
+    @statement_definitions = statement_definitions
+    @tokenbuilders = []
+  end
+
+  def parse(text)
+    line_number = nil
+    line = nil
+    m = /\A\d+/.match(text)
+
+    unless m.nil?
+      token = NumericLiteralToken.new(m[0])
+      number = IntegerValue.new(token)
+      line_number = LineNumber.new(number)
+      line_text = m.post_match
+      all_tokens = tokenize_line(line_text)
+      all_tokens.delete_if(&:whitespace?)
+      comment = nil
+
+      comment = all_tokens.pop if
+        !all_tokens.empty? && all_tokens[-1].comment?
+
+      line = create(line_number, line_text, all_tokens, comment)
+    end
+
+    [line_number, line]
+  end
+
+  def create(line_number, text, all_tokens, comment)
+    statements = []
+    statements_tokens = split_on_statement_separators(all_tokens)
+
+    if statements_tokens.empty?
+      statement = EmptyStatement.new(line_number)
+      statements << statement
+    else
+      statements_tokens.each do |statement_tokens|
+        statement = UnknownStatement.new(line_number, text)
+
+        begin
+          statement = create_statement(line_number, text, statement_tokens)
+        rescue BASICExpressionError, BASICRuntimeError => e
+          statement = InvalidStatement.new(line_number, text, all_tokens, e)
+        end
+
+        statements << statement
+      end
+    end
+
+    Line.new(text, statements, all_tokens, comment)
+  end
+
+  def create_statement(line_number, text, statement_tokens)
+    statement = EmptyStatement.new(line_number)
+
+    unless statement_tokens.empty?
+      statement = nil
+
+      keywords, tokens = extract_keywords(statement_tokens)
+
+      while statement.nil?
+        if @statement_definitions.key?(keywords)
+          tokens_lists = split_keywords(tokens)
+
+          statement_definition = @statement_definitions[keywords]
+
+          statement =
+            statement_definition.new(line_number, keywords, tokens_lists)
+        elsif keywords.empty?
+          if statement.nil?
+            statement = UnknownStatement.new(line_number, text)
+          end
+        else
+          keyword = keywords.pop
+          tokens.unshift(keyword)
+        end
+      end
+    end
+
+    statement
+  end
+
+  # lead keywords let us identify the statement
+  def lead_keywords
+    keywords = []
+
+    statement_classes.each do |cl|
+      kwds = cl.lead_keywords.flatten
+      keywords += kwds.map(&:to_s)
+    end
+
+    keywords.uniq
+  end
+
+  # statement keywords occur later in the text
+  def stmt_keywords
+    keywords = []
+
+    statement_classes.each do |cl|
+      keywords += cl.extra_keywords
+    end
+
+    modifier_classes.each do |cl|
+      kwds = cl.lead_keywords.flatten
+      keywords += kwds.map(&:to_s)
+
+      keywords += cl.extra_keywords
+    end
+
+    keywords.uniq
+  end
+
+  private
+
+  def statement_classes
+    [
+      ArrForgetStatement,
+      ArrInputStatement,
+      ArrPlotStatement,
+      ArrPrintStatement,
+      ArrReadStatement,
+      ArrWriteStatement,
+      ArrLetStatement,
+      BreakStatement,
+      ChainStatement,
+      CloseStatement,
+      ContinueStatement,
+      DataStatement,
+      DefineFunctionStatement,
+      DimStatement,
+      EndStatement,
+      FnendStatement,
+      ForgetStatement,
+      ForStatement,
+      GosubStatement,
+      GotoStatement,
+      IfStatement,
+      InputStatement,
+      LetStatement,
+      LetLessStatement,
+      LineInputStatement,
+      MatForgetStatement,
+      MatInputStatement,
+      MatPlotStatement,
+      MatPrintStatement,
+      MatReadStatement,
+      MatWriteStatement,
+      MatLetStatement,
+      NextStatement,
+      OnStatement,
+      OnErrorStatement,
+      OpenStatement,
+      OptionStatement,
+      PrintStatement,
+      RandomizeStatement,
+      ReadStatement,
+      RemarkStatement,
+      RestoreStatement,
+      ResumeStatement,
+      ReturnStatement,
+      SleepStatement,
+      StopStatement,
+      WendStatement,
+      WhileStatement,
+      WriteStatement
+    ]
+  end
+
+  def modifier_classes
+    [
+      IfModifier,
+      UnlessModifier,
+      WhileModifier,
+      UntilModifier,
+      ForToModifier,
+      ForToStepModifier,
+      ForStepToModifier,
+      ForUntilModifier,
+      ForUntilStepModifier,
+      ForStepUntilModifier,
+      ForWhileModifier,
+      ForWhileStepModifier,
+      ForStepWhileModifier
+    ]
+  end
+
+  def statement_definitions
+    lead_keywords = {}
+
+    statement_classes.each do |class_name|
+      keyword_sets = class_name.lead_keywords
+
+      keyword_sets.each do |set|
+        lead_keywords[set] = class_name
+      end
+    end
+
+    lead_keywords
+  end
+
+  def split_on_statement_separators(tokens)
+    tokens_lists = []
+    statement_tokens = []
+
+    tokens.each do |token|
+      if token.statement_separator?
+        tokens_lists << statement_tokens
+        statement_tokens = []
+      else
+        statement_tokens << token
+      end
+    end
+
+    tokens_lists << statement_tokens unless statement_tokens.empty?
+    tokens_lists
+  end
+
+  def extract_keywords(all_tokens)
+    keywords = []
+    tokens = []
+    saw_non_keyword = false
+
+    all_tokens.each do |token|
+      saw_non_keyword = true unless token.keyword?
+      keywords << token unless saw_non_keyword
+      tokens << token if saw_non_keyword
+    end
+
+    [keywords, tokens]
+  end
+
+  def split_keywords(tokens)
+    results = []
+    nonkeywords = []
+
+    tokens.each do |token|
+      if token.keyword?
+        results << nonkeywords unless nonkeywords.empty?
+        nonkeywords = []
+        results << token
+      else
+        nonkeywords << token
+      end
+    end
+
+    results << nonkeywords unless nonkeywords.empty?
+
+    results
+  end
+
+  def tokenize_line(text)
+    invalid_tokenbuilder = InvalidTokenBuilder.new(true, [])
+    tokenizer = Tokenizer.new(@tokenbuilders, invalid_tokenbuilder)
+    tokenizer.tokenize_line(text)
   end
 end
