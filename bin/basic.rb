@@ -495,13 +495,13 @@ class Shell
 end
 
 def make_interpreter_tokenbuilders(options, quotes, statement_separators,
-                                   comment_leads, lead_keywords, stmt_keywords)
+                                   lead_keywords, stmt_keywords)
   normal_tb = true
   data_tb = false
   extra_tb = false
   tokenbuilders = []
 
-  tokenbuilders << CommentTokenBuilder.new(normal_tb, [], comment_leads)
+  tokenbuilders << CommentTokenBuilder.new(normal_tb, [])
   tokenbuilders << RemarkTokenBuilder.new(normal_tb, ['DATA'])
 
   unless statement_separators.empty?
@@ -913,9 +913,6 @@ statement_seps = [':', '\\']
 
 quotes = ['"']
 
-comment_leads = []
-comment_leads << "'" if $options['apostrophe_comment'].value
-
 console_io = ConsoleIo.new
 
 statement_factory = StatementFactory.instance
@@ -923,7 +920,7 @@ lead_keywords = statement_factory.lead_keywords
 stmt_keywords = statement_factory.stmt_keywords
 tokenbuilders =
   make_interpreter_tokenbuilders($options, quotes, statement_seps,
-                                 comment_leads, lead_keywords, stmt_keywords)
+                                 lead_keywords, stmt_keywords)
 statement_factory.tokenbuilders = tokenbuilders
 
 interpreter = Interpreter.new(console_io)
