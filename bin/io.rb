@@ -12,9 +12,9 @@ module Reader
     ascii_text
   end
 
-  def make_tokenbuilders(quotes)
+  def make_tokenbuilders()
     tokenbuilders = []
-    tokenbuilders << QuotedTextTokenBuilder.new(true, [], quotes)
+    tokenbuilders << QuotedTextTokenBuilder.new(true, [])
     tokenbuilders << InputNumberTokenBuilder.new(true, [])
     tokenbuilders << InputTextTokenBuilder.new(true, [])
     tokenbuilders << ListTokenBuilder.new(true, [], [',', ';'], ParamSeparatorToken)
@@ -69,7 +69,7 @@ module Inputter
   def input(interpreter)
     line = read_line
 
-    tokenbuilders = make_tokenbuilders(@quotes)
+    tokenbuilders = make_tokenbuilders
     invalid_tokenbuilder = InvalidTokenBuilder.new(true, [])
     tokenizer = Tokenizer.new(tokenbuilders, invalid_tokenbuilder)
     tokens = tokenizer.tokenize_line(line)
@@ -101,8 +101,6 @@ end
 # Handle tab stops and carriage control
 class ConsoleIo
   def initialize
-    @quotes = ['"']
-
     @column = 0
     @last_was_numeric = false
     @last_was_tab = false
@@ -341,7 +339,6 @@ class FileHandler
   def initialize(file_name)
     raise BASICRuntimeError, :te_fname_no if file_name.nil?
 
-    @quotes = ['"']
     @file_name = file_name
     @mode = nil
     @file = nil
@@ -417,7 +414,7 @@ class FileHandler
 
     line = @records[rec_number]
 
-    tokenbuilders = make_tokenbuilders(@quotes)
+    tokenbuilders = make_tokenbuilders
     tokenizer = Tokenizer.new(tokenbuilders, nil)
     tokens = tokenizer.tokenize_line(line)
 
@@ -504,7 +501,7 @@ class FileHandler
   def read
     set_mode(:read)
 
-    tokenbuilders = make_tokenbuilders(@quotes)
+    tokenbuilders = make_tokenbuilders
     invalid_tokenbuilder = InvalidTokenBuilder.new(true, [])
     tokenizer = Tokenizer.new(tokenbuilders, invalid_tokenbuilder)
     @data_store = refill(@data_store, tokenizer)

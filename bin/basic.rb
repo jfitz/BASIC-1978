@@ -494,7 +494,7 @@ class Shell
   end
 end
 
-def make_interpreter_tokenbuilders(options, quotes, statement_separators,
+def make_interpreter_tokenbuilders(statement_separators,
                                    lead_keywords, stmt_keywords)
   normal_tb = true
   data_tb = false
@@ -536,19 +536,19 @@ def make_interpreter_tokenbuilders(options, quotes, statement_separators,
   tokenbuilders <<
     ListTokenBuilder.new(normal_tb, ['DATA'], user_function_names, UserFunctionToken)
 
-  tokenbuilders << QuotedTextTokenBuilder.new(normal_tb, [], quotes)
+  tokenbuilders << QuotedTextTokenBuilder.new(normal_tb, [])
   tokenbuilders << NumberTokenBuilder.new(normal_tb, [])
   tokenbuilders << NumericSymbolTokenBuilder.new(normal_tb, [])
   tokenbuilders << IntegerTokenBuilder.new(normal_tb, [])
 
-  long_names = options['long_names'].value
+  long_names = $options['long_names'].value
   tokenbuilders << VariableTokenBuilder.new(normal_tb, ['DATA'], long_names)
   tokenbuilders << ListTokenBuilder.new(normal_tb, [], %w[TRUE FALSE], BooleanLiteralToken)
   tokenbuilders << BareTextTokenBuilder.new(data_tb, ['DATA'])
   tokenbuilders << WhitespaceTokenBuilder.new(normal_tb, [])
 end
 
-def make_command_tokenbuilders(quotes, long_names)
+def make_command_tokenbuilders(long_names)
   command_tb = true
   extra_tb = false
   tokenbuilders = []
@@ -605,7 +605,7 @@ def make_command_tokenbuilders(quotes, long_names)
   tokenbuilders <<
     ListTokenBuilder.new(command_tb, [], user_function_names, UserFunctionToken)
 
-  tokenbuilders << QuotedTextTokenBuilder.new(command_tb, [], quotes)
+  tokenbuilders << QuotedTextTokenBuilder.new(command_tb, [])
   tokenbuilders << NumberTokenBuilder.new(command_tb, [])
   tokenbuilders << VariableTokenBuilder.new(command_tb, [], long_names)
   tokenbuilders << ListTokenBuilder.new(command_tb, [], %w[TRUE FALSE], BooleanLiteralToken)
@@ -911,16 +911,13 @@ $options['zone_width'] = Option.new(all_types, int40, zone_width)
 
 statement_seps = [':', '\\']
 
-quotes = ['"']
-
 console_io = ConsoleIo.new
 
 statement_factory = StatementFactory.instance
 lead_keywords = statement_factory.lead_keywords
 stmt_keywords = statement_factory.stmt_keywords
 tokenbuilders =
-  make_interpreter_tokenbuilders($options, quotes, statement_seps,
-                                 lead_keywords, stmt_keywords)
+  make_interpreter_tokenbuilders(statement_seps, lead_keywords, stmt_keywords)
 statement_factory.tokenbuilders = tokenbuilders
 
 interpreter = Interpreter.new(console_io)
@@ -1085,7 +1082,7 @@ end
 if list_filename.nil? && parse_filename.nil? && analyze_filename.nil? &&
    pretty_filename.nil? && cref_filename.nil? && run_filename.nil?
 
-  tokenbuilders = make_command_tokenbuilders(quotes, long_names)
+  tokenbuilders = make_command_tokenbuilders(long_names)
 
   shell = Shell.new(console_io, interpreter, tokenbuilders)
   shell.run

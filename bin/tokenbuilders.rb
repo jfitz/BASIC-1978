@@ -240,10 +240,8 @@ end
 
 # token reader for quoted text constants
 class QuotedTextTokenBuilder < AbstractTokenBuilder
-  def initialize(default_enabled, trigger_tokens, quotes)
+  def initialize(default_enabled, trigger_tokens)
     super(default_enabled, trigger_tokens)
-
-    @quotes = quotes
   end
 
   def try(text)
@@ -251,19 +249,21 @@ class QuotedTextTokenBuilder < AbstractTokenBuilder
     @count = 0
 
     return unless @enabled
-    
-    /\A"[^"]*"/.match(text) { |m| @token = m[0] } if @quotes.include?('"')
 
-    /\A'[^']*'/.match(text) { |m| @token = m[0] } if @quotes.include?("'")
+    quotes = ['"']
+
+    /\A"[^"]*"/.match(text) { |m| @token = m[0] } if quotes.include?('"')
+
+    /\A'[^']*'/.match(text) { |m| @token = m[0] } if quotes.include?("'")
 
     # allow for text literal without closing quote
     # add the proper closing quote
     if @token.empty?
-      if @quotes.include?('"')
+      if quotes.include?('"')
         /\A"[^"]*/.match(text) { |m| @token = m[0] + '"' }
       end
 
-      if @quotes.include?("'")
+      if quotes.include?("'")
         /\A'[^']*/.match(text) { |m| @token = m[0] + "'" }
       end
     end
