@@ -55,6 +55,30 @@ class InvalidTokenBuilder < AbstractTokenBuilder
   end
 end
 
+# statement separator characters
+class StatementSeparatorTokenBuilder < AbstractTokenBuilder
+  def initialize(default_enabled, trigger_tokens)
+    super(default_enabled, trigger_tokens)
+  end
+
+  def try(text)
+    @token = ''
+    @count = 0
+
+    return unless @enabled
+
+    return if text.empty?
+
+    statement_seps = [':', '\\']
+
+    @token = text[0] if statement_seps.include?(text[0])
+  end
+
+  def tokens
+    [StatementSeparatorToken.new(@token)]
+  end
+end
+
 # accept characters to match item in list
 class ListTokenBuilder < AbstractTokenBuilder
   def initialize(default_enabled, trigger_tokens, legals, class_name)
