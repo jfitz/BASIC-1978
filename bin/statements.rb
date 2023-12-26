@@ -4171,6 +4171,41 @@ class OptionStatement < AbstractStatement
     ]
   end
 
+  def self.stmt_keywords
+    # build list from all defined options
+    $options.keys.map(&:upcase)
+  end
+
+  def self.cmd_keywords
+    # build list from subset of options
+    %w[
+      APOSTROPHE_COMMENT ASC_ALLOW_ALL
+      BACK_TAB BASE
+      CACHE_CONST_EXPR CHR_ALLOW_ALL
+      DEFAULT_PROMPT DEGREES DETECT_INFINITE_LOOP
+      EXTEND_IF
+      FIELD_SEP FORGET_FORNEXT
+      HEADING
+      IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON
+      INT_BITWISE INT_FLOOR
+      LOCK_FORNEXT LONG_NAMES
+      MAX_DIM MAX_LINE_NUM MIN_LINE_NUM
+      NEWLINE_SPEED
+      PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH
+      PROMPT PROMPTD PROMPT_COUNT
+      PROVENANCE
+      QMARK_AFTER_PROMPT
+      RADIANS RELATIONAL_RESULT
+      REQUIRE_INITIALIZED RESPECT_RANDOMIZE
+      SEMICOLON_ZONE_WIDTH
+      TIMING TRACE TRIG_REQUIRE_UNITS
+      WARN_FORNEXT_LENGTH WARN_FORNEXT_LEVEL
+      WARN_GOSUB_LENGTH WARN_LIST_WIDTH WARN_PRETTY_WIDTH
+      WRAP
+      ZONE_WIDTH
+    ]
+  end
+
   def initialize(_, keywords, tokens_lists)
     super
 
@@ -4241,7 +4276,7 @@ class PrintStatement < AbstractStatement
   include FileFunctions
   include PrintFunctions
 
-  def self.extra_keywords
+  def self.stmt_keywords
     ['USING']
   end
 

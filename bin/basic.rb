@@ -511,8 +511,13 @@ def make_interpreter_tokenbuilders(lead_keywords, stmt_keywords)
   # statement keywords occur later in the text
   tokenbuilders << ListTokenBuilder.new(normal_tb, ['DATA'], stmt_keywords, KeywordToken)
 
-  option_keywords = $options.keys.map(&:upcase)
+  option_keywords = OptionStatement.stmt_keywords
   tokenbuilders << ListTokenBuilder.new(extra_tb, ['OPTION'], option_keywords, KeywordToken)
+  
+  print_keywords = PrintStatement.stmt_keywords
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['PRINT'], print_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['ARR', 'PRINT'], print_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['MAT', 'PRINT'], print_keywords, KeywordToken)
   
   un_ops = UnaryOperator.operators
   tokenbuilders << ListTokenBuilder.new(normal_tb, [], un_ops, OperatorToken)
@@ -555,34 +560,16 @@ def make_command_tokenbuilders(long_names)
   ]
   tokenbuilders << ListTokenBuilder.new(command_tb, [], keywords, KeywordToken)
 
-  option_keywords = %w[
-    APOSTROPHE_COMMENT ASC_ALLOW_ALL
-    BACK_TAB BASE
-    CACHE_CONST_EXPR CHR_ALLOW_ALL
-    DEFAULT_PROMPT DEGREES DETECT_INFINITE_LOOP
-    EXTEND_IF
-    FIELD_SEP FORGET_FORNEXT
-    HEADING
-    IF_FOR_SUB IGNORE_RND_ARG IMPLIED_SEMICOLON
-    INT_BITWISE INT_FLOOR
-    LOCK_FORNEXT LONG_NAMES
-    MAX_DIM MAX_LINE_NUM MIN_LINE_NUM
-    NEWLINE_SPEED
-    PRECISION PRETTY_MULTILINE PRINT_SPEED PRINT_WIDTH
-    PROMPT PROMPTD PROMPT_COUNT
-    PROVENANCE
-    QMARK_AFTER_PROMPT
-    RADIANS RELATIONAL_RESULT
-    REQUIRE_INITIALIZED RESPECT_RANDOMIZE
-    SEMICOLON_ZONE_WIDTH
-    TIMING TRACE TRIG_REQUIRE_UNITS
-    WARN_FORNEXT_LENGTH WARN_FORNEXT_LEVEL
-    WARN_GOSUB_LENGTH WARN_LIST_WIDTH WARN_PRETTY_WIDTH
-    WRAP
-    ZONE_WIDTH
-  ]
+  option_keywords = OptionStatement.cmd_keywords
   tokenbuilders << ListTokenBuilder.new(extra_tb, ['OPTION'], option_keywords, KeywordToken)
 
+  print_keywords = PrintStatement.stmt_keywords
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['PRINT'], print_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['PRI'], print_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['&'], print_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['ARR', 'PRINT'], print_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, ['MAT', 'PRINT'], print_keywords, KeywordToken)
+  
   un_ops = UnaryOperator.operators
   tokenbuilders << ListTokenBuilder.new(command_tb, [], un_ops, OperatorToken)
 
