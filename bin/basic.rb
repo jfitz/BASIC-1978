@@ -500,53 +500,57 @@ def make_interpreter_tokenbuilders(lead_keywords, stmt_keywords)
   extra_tb = false
   tokenbuilders = []
 
-  tokenbuilders << CommentTokenBuilder.new(normal_tb, [])
-  tokenbuilders << RemarkTokenBuilder.new(normal_tb, ['DATA'])
+  tokenbuilders << CommentTokenBuilder.new(normal_tb, '')
+  tokenbuilders << RemarkTokenBuilder.new(normal_tb, 'DATA')
 
-  tokenbuilders << StatementSeparatorTokenBuilder.new(normal_tb, [])
+  tokenbuilders << StatementSeparatorTokenBuilder.new(normal_tb, '')
 
   # lead keywords let us identify the statement
-  tokenbuilders << ListTokenBuilder.new(normal_tb, ['DATA'], lead_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(normal_tb, 'DATA', lead_keywords, KeywordToken)
 
   # statement keywords occur later in the text
-  tokenbuilders << ListTokenBuilder.new(normal_tb, ['DATA'], stmt_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(normal_tb, 'DATA', stmt_keywords, KeywordToken)
 
+  close_keywords = OpenStatement.stmt_keywords
+  tokenbuilders << ListTokenBuilder.new(extra_tb, 'CLOSE', close_keywords, KeywordToken)
+  
+  open_keywords = OpenStatement.stmt_keywords
+  tokenbuilders << ListTokenBuilder.new(extra_tb, 'OPEN', open_keywords, KeywordToken)
+  
   option_keywords = OptionStatement.stmt_keywords
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['OPTION'], option_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, 'OPTION', option_keywords, KeywordToken)
   
   print_keywords = PrintStatement.stmt_keywords
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['PRINT'], print_keywords, KeywordToken)
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['ARR', 'PRINT'], print_keywords, KeywordToken)
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['MAT', 'PRINT'], print_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, 'PRINT', print_keywords, KeywordToken)
   
   un_ops = UnaryOperator.operators
-  tokenbuilders << ListTokenBuilder.new(normal_tb, [], un_ops, OperatorToken)
+  tokenbuilders << ListTokenBuilder.new(normal_tb, '', un_ops, OperatorToken)
 
   bi_ops = BinaryOperator.operators
-  tokenbuilders << ListTokenBuilder.new(normal_tb, ['DATA'], bi_ops, OperatorToken)
+  tokenbuilders << ListTokenBuilder.new(normal_tb, 'DATA', bi_ops, OperatorToken)
 
-  tokenbuilders << ListTokenBuilder.new(normal_tb, ['DATA'], ['('], GroupStartToken)
-  tokenbuilders << ListTokenBuilder.new(normal_tb, ['DATA'], [')'], GroupEndToken)
-  tokenbuilders << ListTokenBuilder.new(normal_tb, [], [',', ';'], ParamSeparatorToken)
+  tokenbuilders << ListTokenBuilder.new(normal_tb, 'DATA', ['('], GroupStartToken)
+  tokenbuilders << ListTokenBuilder.new(normal_tb, 'DATA', [')'], GroupEndToken)
+  tokenbuilders << ListTokenBuilder.new(normal_tb, '', [',', ';'], ParamSeparatorToken)
 
   function_names = FunctionFactory.function_names
   tokenbuilders <<
-    ListTokenBuilder.new(normal_tb, ['DATA'], function_names, FunctionToken)
+    ListTokenBuilder.new(normal_tb, 'DATA', function_names, FunctionToken)
 
   user_function_names = FunctionFactory.user_function_names
   tokenbuilders <<
-    ListTokenBuilder.new(normal_tb, ['DATA'], user_function_names, UserFunctionToken)
+    ListTokenBuilder.new(normal_tb, 'DATA', user_function_names, UserFunctionToken)
 
-  tokenbuilders << QuotedTextTokenBuilder.new(normal_tb, [])
-  tokenbuilders << NumberTokenBuilder.new(normal_tb, [])
-  tokenbuilders << NumericSymbolTokenBuilder.new(normal_tb, [])
-  tokenbuilders << IntegerTokenBuilder.new(normal_tb, [])
+  tokenbuilders << QuotedTextTokenBuilder.new(normal_tb, '')
+  tokenbuilders << NumberTokenBuilder.new(normal_tb, '')
+  tokenbuilders << NumericSymbolTokenBuilder.new(normal_tb, '')
+  tokenbuilders << IntegerTokenBuilder.new(normal_tb, '')
 
   long_names = $options['long_names'].value
-  tokenbuilders << VariableTokenBuilder.new(normal_tb, ['DATA'], long_names)
-  tokenbuilders << ListTokenBuilder.new(normal_tb, [], %w[TRUE FALSE], BooleanLiteralToken)
-  tokenbuilders << BareTextTokenBuilder.new(data_tb, ['DATA'])
-  tokenbuilders << WhitespaceTokenBuilder.new(normal_tb, [])
+  tokenbuilders << VariableTokenBuilder.new(normal_tb, 'DATA', long_names)
+  tokenbuilders << ListTokenBuilder.new(normal_tb, '', %w[TRUE FALSE], BooleanLiteralToken)
+  tokenbuilders << BareTextTokenBuilder.new(data_tb, 'DATA')
+  tokenbuilders << WhitespaceTokenBuilder.new(normal_tb, '')
 end
 
 def make_command_tokenbuilders(long_names)
@@ -558,41 +562,37 @@ def make_command_tokenbuilders(long_names)
     ANALYZE BKPT NOBKPT BYE CROSSREF DELETE DIMS IF LIST LOAD
     NEW OPTION PARSE PRETTY PROFILE RENUMBER RUN SAVE TOKENS UDFS VARS
   ]
-  tokenbuilders << ListTokenBuilder.new(command_tb, [], keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(command_tb, '', keywords, KeywordToken)
 
   option_keywords = OptionStatement.cmd_keywords
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['OPTION'], option_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, 'OPTION', option_keywords, KeywordToken)
 
   print_keywords = PrintStatement.stmt_keywords
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['PRINT'], print_keywords, KeywordToken)
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['PRI'], print_keywords, KeywordToken)
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['&'], print_keywords, KeywordToken)
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['ARR', 'PRINT'], print_keywords, KeywordToken)
-  tokenbuilders << ListTokenBuilder.new(extra_tb, ['MAT', 'PRINT'], print_keywords, KeywordToken)
+  tokenbuilders << ListTokenBuilder.new(extra_tb, 'PRINT', print_keywords, KeywordToken)
   
   un_ops = UnaryOperator.operators
-  tokenbuilders << ListTokenBuilder.new(command_tb, [], un_ops, OperatorToken)
+  tokenbuilders << ListTokenBuilder.new(command_tb, '', un_ops, OperatorToken)
 
   bi_ops = BinaryOperator.operators
-  tokenbuilders << ListTokenBuilder.new(command_tb, [], bi_ops, OperatorToken)
+  tokenbuilders << ListTokenBuilder.new(command_tb, '', bi_ops, OperatorToken)
 
-  tokenbuilders << ListTokenBuilder.new(command_tb, [], ['('], GroupStartToken)
-  tokenbuilders << ListTokenBuilder.new(command_tb, [], [')'], GroupEndToken)
-  tokenbuilders << ListTokenBuilder.new(command_tb, [], [',', ';'], ParamSeparatorToken)
+  tokenbuilders << ListTokenBuilder.new(command_tb, '', ['('], GroupStartToken)
+  tokenbuilders << ListTokenBuilder.new(command_tb, '', [')'], GroupEndToken)
+  tokenbuilders << ListTokenBuilder.new(command_tb, '', [',', ';'], ParamSeparatorToken)
 
   function_names = FunctionFactory.function_names
   tokenbuilders <<
-    ListTokenBuilder.new(command_tb, [], function_names, FunctionToken)
+    ListTokenBuilder.new(command_tb, '', function_names, FunctionToken)
 
   user_function_names = FunctionFactory.user_function_names
   tokenbuilders <<
-    ListTokenBuilder.new(command_tb, [], user_function_names, UserFunctionToken)
+    ListTokenBuilder.new(command_tb, '', user_function_names, UserFunctionToken)
 
-  tokenbuilders << QuotedTextTokenBuilder.new(command_tb, [])
-  tokenbuilders << NumberTokenBuilder.new(command_tb, [])
-  tokenbuilders << VariableTokenBuilder.new(command_tb, [], long_names)
-  tokenbuilders << ListTokenBuilder.new(command_tb, [], %w[TRUE FALSE], BooleanLiteralToken)
-  tokenbuilders << WhitespaceTokenBuilder.new(command_tb, [])
+  tokenbuilders << QuotedTextTokenBuilder.new(command_tb, '')
+  tokenbuilders << NumberTokenBuilder.new(command_tb, '')
+  tokenbuilders << VariableTokenBuilder.new(command_tb, '', long_names)
+  tokenbuilders << ListTokenBuilder.new(command_tb, '', %w[TRUE FALSE], BooleanLiteralToken)
+  tokenbuilders << WhitespaceTokenBuilder.new(command_tb, '')
 end
 
 def print_timing(timing, console_io)
