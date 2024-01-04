@@ -2,33 +2,34 @@
 
 # class for for-next marker
 class ForNextMarker
-  attr_reader :variable, :line_stmt
+  attr_reader :control_variable, :line_stmt
 
-  def initialize(variable, line_stmt)
-    @variable = variable
+  def initialize(control_variable, line_stmt)
+    @control_variable = control_variable
     @line_stmt = line_stmt
   end
 
   def hash
-    @variable.hash ^ @line_stmt.hash
+    @control_variable.hash ^ @line_stmt.hash
   end
 
   def eql?(other)
-    @variable == other.variable && @line_stmt == other.line_stmt
+    @control_variable == other.control_variable && @line_stmt == other.line_stmt
   end
 
   def ==(other)
-    @variable == other.variable && @line_stmt == other.line_stmt
+    @control_variable == other.control_variable && @line_stmt == other.line_stmt
   end
 
   def <=>(other)
-    return @line_stmt <=> other.line_stmt if @variable == other.variable
+    return @line_stmt <=> other.line_stmt if
+      @control_variable == other.control_variable
 
-    @variable <=> other.variable
+    @control_variable <=> other.control_variable
   end
 
   def to_s
-    "#{@variable}:#{@line_stmt}"
+    "#{@control_variable}:#{@line_stmt}"
   end
 end
 
@@ -500,7 +501,8 @@ class AbstractStatement
       if [:goto, :ifthen].include?(xfer.type)
         dest_line_number = xfer.line_number
       
-        if dest_line_number < @part_of_sub.min && dest_line_number < line_number
+        if dest_line_number < @part_of_sub.min &&
+           dest_line_number < line_number
           @program_warnings << "Branch to line before GOSUB start"
         end
       end
@@ -537,7 +539,8 @@ class AbstractStatement
       if [:goto, :ifthen].include?(xfer.type)
         dest_line_number = xfer.line_number
       
-        if dest_line_number < @part_of_onerror.min && dest_line_number < line_number
+        if dest_line_number < @part_of_onerror.min &&
+           dest_line_number < line_number
           @program_warnings << "Branch to line before ON-ERROR start"
         end
       end
@@ -558,7 +561,7 @@ class AbstractStatement
   def check_terminating_in_onerror
     return if @part_of_onerror.empty?
 
-    # warn about STOP, END, CHAIN in ERROR block
+    # warn about STOP, END, CHAIN in ON-ERROR block
     @transfers.each do |xfer|
       if [:stop, :chain].include?(xfer.type)
         @program_warnings << "Terminating statement in ON-ERROR"
@@ -2090,8 +2093,7 @@ class EndStatement < AbstractStatement
 
     template = []
 
-    @errors << 'Syntax error' unless
-      check_template(tokens_lists, template)
+    @errors << 'Syntax error' unless check_template(tokens_lists, template)
   end
 
   def set_transfers(_)
@@ -2632,14 +2634,14 @@ class GosubStatement < AbstractStatement
     # change destination
     @dest_line = renumber_map[@dest_line]
 
+    # change linenums
+    @linenums = [@dest_line]
+
     # change token
     @tokens[-1] = @dest_line.to_token
 
     # change core token
     @core_tokens[-1] = @dest_line.to_token
-
-    # change linenums
-    @linenums = [@dest_line]
   end
 
   def set_destinations(interpreter, _, program)
@@ -2738,14 +2740,14 @@ class GotoStatement < AbstractStatement
       # change destination
       @dest_line = renumber_map[@dest_line]
 
+      # change linenums
+      @linenums = [@dest_line]
+
       # change token
       @tokens[-1] = @dest_line.to_token
 
       # change core token
       @core_tokens[-1] = @dest_line.to_token
-
-      # change linenums
-      @linenums = [@dest_line]
     end
   end
 
@@ -2947,8 +2949,6 @@ class AbstractIfStatement < AbstractStatement
       end
 
       @core_tokens[index + 1] = @dest_line.to_token
-
-      # change linenums
     end
 
     unless @else_dest_line.nil?
@@ -3847,6 +3847,22 @@ class OnErrorStatement < AbstractStatement
     end
   end
 
+  def renumber(renumber_map)
+    unless @dest_line.nil?
+      # change destination
+      @dest_line = renumber_map[@dest_line]
+
+      # change token
+      @tokens[-1] = @dest_line.to_token
+
+      # change core token
+      @core_tokens[-1] = @dest_line.to_token
+
+      # change linenums
+      @linenums = [@dest_line]
+    end
+  end
+
   def set_transfers(_)
     unless @dest_line_stmt_mod.nil?
       line_number = @dest_line_stmt_mod.line_number
@@ -3862,22 +3878,6 @@ class OnErrorStatement < AbstractStatement
 
   def execute_core(interpreter)
     interpreter.seterrorgoto(@dest_line)
-  end
-
-  def renumber(renumber_map)
-    unless @dest_line.nil?
-      # change destination
-      @dest_line = renumber_map[@dest_line]
-
-      # change token
-      @tokens[-1] = @dest_line.to_token
-
-      # change core token
-      @core_tokens[-1] = @dest_line.to_token
-
-      # change linenums
-      @linenums = [@dest_line]
-    end
   end
 end
 
@@ -4998,8 +4998,8 @@ class ArrForgetStatement < AbstractStatement
           variable_name = VariableName.new(tokens[0])
           variable = Variable.new(variable_name, :array, [], [])
           @variables << variable
-          variablex = XrefEntry.new(variable.to_s, nil, false)
-          @elements[:variables] += [variablex]
+          xref = XrefEntry.new(variable.to_s, nil, false)
+          @elements[:variables] += [xref]
         else
           @errors << "Invalid variable #{tokens[0]}"
         end
@@ -6243,7 +6243,16 @@ class MatLetStatement < AbstractLetStatement
     l_values = @assignment.eval_target(interpreter)
     l_value0 = l_values[0]
     l_dims = interpreter.get_dimensions(l_value0.name)
+    set_default_args(interpreter, l_dims)
 
+    r_value = first_value(interpreter)
+
+    clear_default_args(interpreter)
+
+    set_dimensions(interpreter, r_value, l_values)
+  end
+
+  def set_default_args(interpreter, l_dims)
     interpreter.set_default_args('CON', l_dims)
     interpreter.set_default_args('CON2', l_dims)
     interpreter.set_default_args('CON2%', l_dims)
@@ -6256,9 +6265,19 @@ class MatLetStatement < AbstractLetStatement
     interpreter.set_default_args('ZER2', l_dims)
     interpreter.set_default_args('ZER2%', l_dims)
     interpreter.set_default_args('ZER2$', l_dims)
+  end
 
-    r_value = first_value(interpreter)
+  def first_value(interpreter)
+    r_values = @assignment.eval_value(interpreter)
+    r_value = r_values[0]
 
+    raise(BASICSyntaxError, 'Expected Matrix') if
+      r_value.class.to_s != 'Matrix'
+
+    r_value
+  end
+
+  def clear_default_args(interpreter)
     interpreter.set_default_args('CON', nil)
     interpreter.set_default_args('CON2', nil)
     interpreter.set_default_args('CON2%', nil)
@@ -6271,7 +6290,9 @@ class MatLetStatement < AbstractLetStatement
     interpreter.set_default_args('ZER2', nil)
     interpreter.set_default_args('ZER2%', nil)
     interpreter.set_default_args('ZER2$', nil)
+  end
 
+  def set_dimensions(interpreter, r_value, l_values)
     r_dims = r_value.dimensions
 
     values = r_value.values_1 if r_dims.size == 1
@@ -6281,16 +6302,6 @@ class MatLetStatement < AbstractLetStatement
       interpreter.set_dimensions(l_value, r_dims)
       interpreter.set_values(l_value.name, values)
     end
-  end
-
-  def first_value(interpreter)
-    r_values = @assignment.eval_value(interpreter)
-    r_value = r_values[0]
-
-    raise(BASICSyntaxError, 'Expected Matrix') if
-      r_value.class.to_s != 'Matrix'
-
-    r_value
   end
 end
 
