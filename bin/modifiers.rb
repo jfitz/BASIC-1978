@@ -2,12 +2,10 @@
 
 # Modifier
 class AbstractModifier
-  def self.extra_keywords
-    []
-  end
-
   attr_reader :errors, :warnings, :numerics, :strings, :booleans, :variables,
-              :operators, :functions, :userfuncs, :pre_comp_effort, :post_comp_effort, :mccabe, :profile_pre_count, :profile_post_count, :profile_pre_time, :profile_post_time
+              :operators, :functions, :userfuncs, :pre_comp_effort,
+              :post_comp_effort, :mccabe, :profile_pre_count,
+              :profile_post_count, :profile_pre_time, :profile_post_time
 
   def initialize(tokens_lists)
     @tokens = tokens_lists.flatten
@@ -584,10 +582,6 @@ class AbstractForModifier < AbstractModifier
 end
 
 class ForToModifier < AbstractForModifier
-  def self.extra_keywords
-    %w[TO]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, end_tokens)
     step_tokens = nil
     until_tokens = nil
@@ -630,10 +624,6 @@ class ForToModifier < AbstractForModifier
 end
 
 class ForToStepModifier < AbstractForModifier
-  def self.extra_keywords
-    %w[STEP TO]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, end_tokens)
     until_tokens = nil
     while_tokens = nil
@@ -689,10 +679,6 @@ class ForToStepModifier < AbstractForModifier
 end
 
 class ForStepToModifier < AbstractForModifier
-  def self.extra_keywords
-    %w[STEP TO]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, end_tokens)
     until_tokens = nil
     while_tokens = nil
@@ -748,10 +734,6 @@ class ForStepToModifier < AbstractForModifier
 end
 
 class ForUntilModifier < AbstractForModifier
-  def self.extra_keywords
-    %w[UNTIL]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, until_tokens)
     step_tokens = nil
     end_tokens = nil
@@ -795,10 +777,6 @@ class ForUntilModifier < AbstractForModifier
 end
 
 class ForUntilStepModifier < AbstractForModifier
-  def self.extra_keywords
-    %w[STEP UNTIL]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, until_tokens)
     end_tokens = nil
     while_tokens = nil
@@ -855,10 +833,6 @@ class ForUntilStepModifier < AbstractForModifier
 end
 
 class ForStepUntilModifier < AbstractForModifier
-  def self.extra_keywords
-    %w[STEP UNTIL]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, until_tokens)
     end_tokens = nil
     while_tokens = nil
@@ -915,10 +889,6 @@ class ForStepUntilModifier < AbstractForModifier
 end
 
 class ForWhileModifier < AbstractForModifier
-  def self.extra_keywords
-    %w[WHILE]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, while_tokens)
     step_tokens = nil
     end_tokens = nil
@@ -962,10 +932,6 @@ class ForWhileModifier < AbstractForModifier
 end
 
 class ForWhileStepModifier < AbstractForModifier
-  def self.extra_keywords
-    %w[STEP WHILE]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, while_tokens)
     end_tokens = nil
     until_tokens = nil
@@ -1022,10 +988,6 @@ class ForWhileStepModifier < AbstractForModifier
 end
 
 class ForStepWhileModifier < AbstractForModifier
-  def self.extra_keywords
-    %w[STEP WHILE]
-  end
-
   def initialize(tokens_lists, control_and_start_tokens, step_tokens, while_tokens)
     end_tokens = nil
     until_tokens = nil
