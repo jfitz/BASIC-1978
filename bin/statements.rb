@@ -3889,7 +3889,7 @@ class OnStatement < AbstractStatement
     ]
   end
 
-  def self.extra_keywords
+  def self.stmt_keywords
     %w[GOTO THEN GOSUB]
   end
 

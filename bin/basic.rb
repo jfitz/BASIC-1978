@@ -527,6 +527,9 @@ def make_interpreter_tokenbuilders(lead_keywords, stmt_keywords)
   for_keywords = ForStatement.stmt_keywords
   tokenbuilders << ListTokenBuilder.new(extra_tb, 'FOR', for_keywords, KeywordToken)
   
+  on_keywords = OnStatement.stmt_keywords
+  tokenbuilders << ListTokenBuilder.new(extra_tb, 'ON', on_keywords, KeywordToken)
+  
   open_keywords = OpenStatement.stmt_keywords
   tokenbuilders << ListTokenBuilder.new(extra_tb, 'OPEN', open_keywords, KeywordToken)
   
