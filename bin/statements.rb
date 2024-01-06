@@ -72,10 +72,6 @@ class AbstractStatement
   attr_accessor :part_of_user_function, :program_warnings, :origins,
                 :reachable, :visited
 
-  def self.extra_keywords
-    []
-  end
-
   def initialize(_, keywords, tokens_lists)
     @keywords = keywords
     @executable = :run
@@ -3364,10 +3360,6 @@ class IfStatement < AbstractIfStatement
     ]
   end
 
-  def self.extra_keywords
-    %w[THEN ELSE]
-  end
-
   private
 
   def parse_expression(tokens)
@@ -6400,17 +6392,6 @@ class StatementFactory
     statement_classes.each do |cl|
       kwds = cl.lead_keywords.flatten
       keywords += kwds.map(&:to_s)
-    end
-
-    keywords.uniq
-  end
-
-  # statement keywords occur later in the text
-  def stmt_keywords
-    keywords = []
-
-    statement_classes.each do |cl|
-      keywords += cl.extra_keywords
     end
 
     modifier_classes.each do |cl|

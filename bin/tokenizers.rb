@@ -12,11 +12,14 @@ class Tokenizer
     @invalid_tokenbuilder.reset
   end
 
+  def reset_enabled_except_else
+    # @tokenbuilders.map(&:reset)
+    @invalid_tokenbuilder.reset
+  end
+
   def tokenize_line(text)
     tokens = []
 
-    reset_tokens = ['THEN', 'ELSE']
-    
     until text.nil? || text.empty?
       new_tokens, count = tokenize(text)
 
@@ -29,7 +32,8 @@ class Tokenizer
           @tokenbuilders.each { |tb| tb.see_keyword(new_token, seen_keyword) }
           @invalid_tokenbuilder.see_keyword(new_token, seen_keyword)
 
-          reset_enabled if reset_tokens.include?(seen_keyword)
+          reset_enabled_except_else if seen_keyword == 'THEN'
+          reset_enabled if seen_keyword == 'ELSE'
         end
       end
 
