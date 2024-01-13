@@ -5,10 +5,13 @@ class AbstractModifier
   attr_reader :errors, :warnings, :numerics, :strings, :booleans, :variables,
               :operators, :functions, :userfuncs, :pre_comp_effort,
               :post_comp_effort, :mccabe, :profile_pre_count,
-              :profile_post_count, :profile_pre_time, :profile_post_time
+              :profile_post_count, :profile_pre_time, :profile_post_time,
+              :cond, :loop
 
   def initialize(tokens_lists)
     @tokens = tokens_lists.flatten
+    @cond = false
+    @loop = false
     @errors = []
     @warnings = []
     @profile_pre_count = 0
@@ -88,6 +91,8 @@ class IfModifier < AbstractModifier
   def initialize(tokens_lists)
     super(tokens_lists)
 
+    @cond = true
+
     expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
@@ -166,6 +171,8 @@ class UnlessModifier < AbstractModifier
   def initialize(tokens_lists)
     super
 
+    @cond = true
+
     expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
@@ -243,6 +250,8 @@ class WhileModifier < AbstractModifier
 
   def initialize(tokens_lists)
     super
+
+    @loop = true
 
     expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
@@ -341,6 +350,8 @@ class UntilModifier < AbstractModifier
   def initialize(tokens_lists)
     super
 
+    @loop = true
+
     expression_tokens = tokens_lists.last
     @expression = ValueExpressionSet.new(expression_tokens, :scalar)
     @errors << 'TAB() not allowed' if @expression.has_tab
@@ -438,6 +449,8 @@ class AbstractForModifier < AbstractModifier
 
   def initialize(tokens_lists, control_and_start_tokens, _step_tokens, _end_tokens, _until_tokens, _while_tokens)
     super(tokens_lists)
+
+    @loop = true
 
     parts = split_on_token(control_and_start_tokens, '=')
 
