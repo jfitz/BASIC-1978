@@ -71,6 +71,8 @@ I have changed a few things:
 - The MAT assignment statement dimensions the target variable, so an earlier DIM is not needed
 - User-defined functions may have multiple parameters
 - You may have multiple user-defined functions with the same names and different signatures
+- FOR WHILE and FOR UNTIL statements
+- ARR FOR and ARR NEXT statements
 - The ARR statements are single-dimension variants of MAT statements
 - The DIM statement is executed in-line, and may contain expressions
 - Numeric values may have units specified
@@ -1972,6 +1974,19 @@ ARR statements
 The ARR statements operate on one-dimensional arrays.
 Operations begin with the index specified in OPTION BASE.
 
+ARR FOR
+~~~~~~~
+
+A loop that iterates over an array.
+
+Syntax: ARR FOR variable IN array
+
+Examples:
+	100 FOR I IN A
+
+The variable and array are names, and cannot be expressions.
+They cannot contain subscripts.
+
 ARR FORGET
 ~~~~~~~~~~
 
@@ -2031,6 +2046,18 @@ Examples:
 An INPUT statement reads all values from a line of the input file.
 Extra values are discarded.
 If the line contains an insufficient number of values to fill all variables, BASIC reports an error.
+
+ARR NEXT
+~~~~~~~~
+
+Marks the end of an ARR FOR loop.
+
+Syntax: ARR NEXT
+Syntax: ARR NEX
+
+The ARR NEXT statement takes no arguments, unlike the regular NEXT statement.
+
+Like the regular NEXT statement, a program can use GOTO statements to send control outside of an ARR FOR loop and later return control into the loop.
 
 ARR PLOT
 ~~~~~~~~

@@ -453,6 +453,10 @@ class AbstractStatement
     false
   end
 
+  def arr_next?
+    false
+  end
+
   def wend?
     false
   end
@@ -639,6 +643,10 @@ class AbstractStatement
   end
 
   def number_for_stmts
+    0
+  end
+
+  def number_arr_for_stmts
     0
   end
 
@@ -2192,7 +2200,44 @@ class FnendStatement < AbstractStatement
 end
 
 # FOR statement
-class ForStatement < AbstractStatement
+class AbstractForStatement < AbstractStatement
+  def initialize(_, _, _)
+    super
+  end
+
+  def assign_fornext_markers(program, current_line_stmt)
+    return if @nextstmt_line_stmt.nil?
+
+    marker = ForNextMarker.new(@variable, current_line_stmt)
+    
+    walk_line_stmt = current_line_stmt
+
+    until walk_line_stmt == @nextstmt_line_stmt
+      statement = program.get_statement(walk_line_stmt)
+      
+      # mark statement's destinations
+      statement.assign_fornext_marker(marker)
+
+      walk_line_stmt = program.find_next_line_stmt(walk_line_stmt)
+    end
+
+    # assign marker to closing NEXT
+    statement = program.get_statement(walk_line_stmt)
+      
+    # mark statement's destinations
+    statement.assign_fornext_marker(marker)
+  end
+
+  def part_of_fornext_short(this_line_stmt)
+    marker = ForNextMarker.new(@variable, this_line_stmt)
+
+    @part_of_fornext - [marker]
+  end
+
+end
+
+# FOR statement
+class ForStatement < AbstractForStatement
   def self.lead_keywords
     [
       [KeywordToken.new('FOR')]
@@ -2200,7 +2245,7 @@ class ForStatement < AbstractStatement
   end
 
   def self.stmt_keywords
-    %w[TO STEP UNTIL WHILE]
+    %w[TO STEP UNTIL WHILE IN]
   end
 
   def initialize(_, keywords, tokens_lists)
@@ -2435,29 +2480,6 @@ class ForStatement < AbstractStatement
     end
   end
 
-  def assign_fornext_markers(program, current_line_stmt)
-    return if @nextstmt_line_stmt.nil?
-
-    marker = ForNextMarker.new(@variable, current_line_stmt)
-    
-    walk_line_stmt = current_line_stmt
-
-    until walk_line_stmt == @nextstmt_line_stmt
-      statement = program.get_statement(walk_line_stmt)
-      
-      # mark statement's destinations
-      statement.assign_fornext_marker(marker)
-
-      walk_line_stmt = program.find_next_line_stmt(walk_line_stmt)
-    end
-
-    # assign marker to closing NEXT
-    statement = program.get_statement(walk_line_stmt)
-      
-    # mark statement's destinations
-    statement.assign_fornext_marker(marker)
-  end
-
   def uncache_core
     @start&.uncache
     @end&.uncache
@@ -2497,6 +2519,7 @@ class ForStatement < AbstractStatement
       @nextstmt_line_stmt.nil?
 
     from = @start.evaluate(interpreter)[0]
+
     step = NumericValue.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
@@ -2536,12 +2559,6 @@ class ForStatement < AbstractStatement
     print_more_trace_info(io, from, to, step, untilv, whilev, terminated)
   end
 
-  def part_of_fornext_short(this_line_stmt)
-    marker = ForNextMarker.new(@variable, this_line_stmt)
-
-    @part_of_fornext - [marker]
-  end
-
   private
 
   def control_and_start(tokens)
@@ -2559,10 +2576,13 @@ class ForStatement < AbstractStatement
 
   def print_more_trace_info(io, from, to, step, untilv, whilev, terminated)
     io.trace_output(" #{@start} = #{from}") unless @start.numeric_constant?
+
     io.trace_output(" #{@end} = #{to}") unless
       @end.nil? || @end.numeric_constant?
+
     io.trace_output(" #{@step} = #{step}") unless
       @step.nil? || @step.numeric_constant?
+
     io.trace_output(" #{@until} = #{untilv}") unless @until.nil?
     io.trace_output(" #{@while} = #{whilev}") unless @while.nil?
     io.trace_output(" terminated:#{terminated}")
@@ -4625,7 +4645,7 @@ class ResumeStatement < AbstractStatement
     @allow_cond_modifiers = true
 
     extract_modifiers(tokens_lists)
-    @autonext = false unless @any_if_modifiers
+    @autonext = false unless any_cond_modifiers
 
     template_0 = []
     template_1 = [[1, '>=']]
@@ -5090,6 +5110,164 @@ class ArrForgetStatement < AbstractStatement
   end
 end
 
+# ARR FOR IN
+class ArrForInStatement < AbstractForStatement
+  def self.lead_keywords
+    [
+      [KeywordToken.new('ARR'), KeywordToken.new('FOR')]
+    ]
+  end
+
+  def self.stmt_keywords
+    %w[IN]
+  end
+
+  def initialize(_, keywords, tokens_lists)
+    super
+
+    @autonext = false
+    @may_be_if_sub = false
+
+    template_in = [[1, '>='], 'IN', [1, '>=']]
+
+    if check_template(tokens_lists, template_in)
+      begin
+        tokens1, tokens2 = control_and_array(tokens[0], tokens[2])
+        @variable_name = VariableName.new(tokens1)
+        @variable = Variable.new(@variable_name, :scalar, [], [])
+        @array_name = VariableName.new(tokens2)
+        @array = Variable.new(@array_name, :array, [], [])
+      rescue BASICExpressionError => e
+        @errors << e.message
+      end
+    else
+      @errors << 'Syntax error 1'
+    end
+
+    @mccabe = 1
+
+    xref_v = XrefEntry.new(@variable.to_s, nil, true)
+    xref_a = XrefEntry.new(@array.to_s, nil, true)
+
+    @elements[:numerics] = []
+    @elements[:strings] = []
+    @elements[:booleans] = []
+    @elements[:variables] = []
+    @elements[:operators] = []
+    @elements[:functions] = []
+    @elements[:userfuncs] = []
+
+    @elements[:variables] << xref_v
+    @elements[:variables] << xref_a
+    
+    @comprehension_effort += 1
+  end
+
+  def set_destinations(_, line_stmt, program)
+    @loopstart_line_stmt_mod = program.find_next_line_stmt_mod(line_stmt)
+
+    begin
+      unless @variable.nil?
+        @nextstmt_line_stmt =
+          program.find_closing_arr_next_line_stmt(line_stmt)
+      end
+    rescue BASICSyntaxError => e
+      @program_errors << e.message
+    end
+  end
+
+  def set_transfers(_)
+    unless @loopstart_line_stmt_mod.nil?
+      line_number = @loopstart_line_stmt_mod.line_number
+      stmt = @loopstart_line_stmt_mod.statement
+      @transfers << TransferRefLineStmt.new(line_number, stmt, :fornext)
+    end
+
+    unless @nextstmt_line_stmt.nil?
+      line_number = @nextstmt_line_stmt.line_number
+      stmt = @nextstmt_line_stmt.statement
+      @transfers << TransferRefLineStmt.new(line_number, stmt, :fornext)
+    end
+  end
+
+  # uncache_core
+
+  def for?
+    true
+  end
+
+  def dump
+    lines = []
+
+    lines << ("control: #{@variable.dump}") unless @variable.nil?
+    lines << ("array:   #{@array.dump}") unless @array.nil?
+
+    @modifiers&.each { |item| lines += item.dump }
+
+    lines
+  end
+
+  def number_arr_for_stmts
+    1
+  end
+
+  def execute_core(interpreter)
+    raise BASICSyntaxError, 'uninitialized ARR FOR' if
+      @loopstart_line_stmt_mod.nil?
+
+    raise BASICSyntaxError, 'uninitialized ARR FOR' if
+      @nextstmt_line_stmt.nil?
+
+    # 'from' is base
+    from = NumericValue.new($options['base'].value)
+
+    # 'to' is dimension
+    dims = interpreter.get_dimensions(@array_name)
+
+    raise BASICSyntaxError, 'not an array' if dims.count != 1
+    to = dims[0]
+
+    step = NumericValue.new(1)
+    step = @step.evaluate(interpreter)[0] unless @step.nil?
+
+    fornext_control = ArrForInControl.new(@variable, from, step, to,
+                                          @loopstart_line_stmt_mod)
+
+    interpreter.assign_fornext(fornext_control)
+    interpreter.enter_loop(fornext_control)
+
+    terminated = fornext_control.front_terminated?(interpreter)
+
+    interpreter.next_line_stmt_mod = @loopstart_line_stmt_mod
+    interpreter.next_line_stmt_mod = @nextstmt_line_stmt if terminated
+
+    io = interpreter.trace_out
+    print_more_trace_info(io, from, to, step, terminated)
+  end
+
+  private
+
+  def control_and_array(control_tokens, array_tokens)
+    @errors << 'Control variable must be a variable' unless
+      control_tokens.variable?
+
+    @errors << 'Array variable must be a variable' unless
+      array_tokens.variable?
+
+    [control_tokens, array_tokens]
+  end
+
+  def print_more_trace_info(io, from, to, step, terminated)
+    io.trace_output(" start = #{from}")
+    io.trace_output(" end = #{to}")
+
+    io.trace_output(" #{@step} = #{step}") unless
+      @step.nil? || @step.numeric_constant?
+
+    io.trace_output(" terminated:#{terminated}")
+  end
+end
+
 # ARR INPUT
 class ArrInputStatement < AbstractStatement
   def self.lead_keywords
@@ -5192,6 +5370,61 @@ class ArrInputStatement < AbstractStatement
     end
 
     interpreter.clear_previous_lines
+  end
+end
+
+# ARR NEXT
+class ArrNextStatement < AbstractStatement
+  def self.lead_keywords
+    [
+      [KeywordToken.new('ARR'), KeywordToken.new('NEXT')],
+      [KeywordToken.new('ARR'), KeywordToken.new('NEX')]
+    ]
+  end
+
+  def initialize(_, keywords, tokens_lists)
+    super
+
+    template = []
+
+    if check_template(tokens_lists, template)
+      # nothing to do
+    else
+      @errors << 'Syntax error'
+    end
+  end
+
+  def arr_next?
+    true
+  end
+
+  def dump
+    []
+  end
+
+  def execute_core(interpreter)
+    fornext_control = interpreter.top_fornext
+
+    bump_early = fornext_control.bump_early?
+
+    # change control variable value for FOR-WHILE and FOR-UNTIL
+    fornext_control.bump_control(interpreter) if bump_early
+
+    terminated = fornext_control.terminated?(interpreter)
+
+    io = interpreter.trace_out
+    s = " terminated:#{terminated}"
+    io.trace_output(s)
+
+    if terminated
+      interpreter.exit_fornext(fornext_control)
+      fornext_control.broken = false
+    else
+      # set next line from top item
+      interpreter.next_line_stmt_mod = fornext_control.start_line_stmt_mod
+      # change control variable value for FOR-TO
+      fornext_control.bump_control(interpreter) unless bump_early
+    end
   end
 end
 
@@ -6512,8 +6745,10 @@ class StatementFactory
 
   def statement_classes
     [
+      ArrForInStatement,
       ArrForgetStatement,
       ArrInputStatement,
+      ArrNextStatement,
       ArrPlotStatement,
       ArrPrintStatement,
       ArrReadStatement,

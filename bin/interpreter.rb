@@ -188,6 +188,48 @@ class WhileControl < AbstractLoopControl
   end
 end
 
+# Helper class for ARR FOR IN/NEXT
+class ArrForInControl < AbstractForControl
+  attr_reader :end
+
+  def initialize(control_variable, start, step, endv, start_line_stmt_mod)
+    super(control_variable, start, step, start_line_stmt_mod)
+
+    @end = endv
+  end
+
+  def bump_early?
+    false
+  end
+
+  def front_terminated?(_)
+    zero = NumericValue.new(0)
+
+    if @step > zero
+      @start > @end
+    elsif @step < zero
+      @start < @end
+    else
+      false
+    end
+  end
+
+  def terminated?(interpreter)
+    return true if @broken
+
+    zero = NumericValue.new(0)
+    current_value = interpreter.get_value(@variable)
+
+    if @step > zero
+      current_value.add(@step) > @end
+    elsif @step < zero
+      current_value.add(@step) < @end
+    else
+      false
+    end
+  end
+end
+
 # the interpreter
 class Interpreter
   attr_writer :program
