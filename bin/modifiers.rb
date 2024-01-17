@@ -331,7 +331,7 @@ class WhileModifier < AbstractModifier
     terminated = while_control.terminated?(interpreter)
 
     if terminated
-      interpreter.exit_while
+      interpreter.exit_loop(while_control)
     else
       # if not terminated then go to start of while
       interpreter.next_line_stmt_mod = while_control.start_line_stmt_mod
@@ -431,7 +431,7 @@ class UntilModifier < AbstractModifier
     io.trace_output(" terminated: #{terminated}")
 
     if terminated
-      interpreter.exit_until
+      interpreter.exit_loop(until_control)
     else
       # if not terminated then go to start of while
       interpreter.next_line_stmt_mod = until_control.start_line_stmt_mod
@@ -561,7 +561,7 @@ class AbstractForModifier < AbstractModifier
     print_trace_info(io, terminated)
 
     if terminated
-      interpreter.exit_fornext(fornext_control)
+      interpreter.exit_loop(fornext_control)
       fornext_control.broken = false
     else
       # set next line from top item

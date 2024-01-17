@@ -3807,7 +3807,7 @@ class NextStatement < AbstractStatement
       io.trace_output(s)
 
       if terminated
-        interpreter.exit_fornext(fornext_control)
+        interpreter.exit_loop(fornext_control)
         fornext_control.broken = false
       else
         # set next line from top item
@@ -4874,7 +4874,7 @@ class WendStatement < AbstractStatement
     while_control = interpreter.top_while
 
     if while_control.terminated?(interpreter)
-      interpreter.exit_while
+      interpreter.exit_loop(while_control)
     else
       interpreter.next_line_stmt_mod = while_control.start_line_stmt_mod
     end
@@ -5417,7 +5417,7 @@ class ArrNextStatement < AbstractStatement
     io.trace_output(s)
 
     if terminated
-      interpreter.exit_fornext(fornext_control)
+      interpreter.exit_loop(fornext_control)
       fornext_control.broken = false
     else
       # set next line from top item

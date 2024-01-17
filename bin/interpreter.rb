@@ -2,15 +2,20 @@
 
 # Helper class for loops
 class AbstractLoopControl
-  attr_reader :is_for, :is_while, :is_until
+  attr_reader :type, :is_for, :is_while, :is_until
   attr_accessor :broken
 
-  def initialize
+  def initialize(type)
+    @type = type
     @is_for = false
     @is_while = false
     @is_until = false
     @broken = false
   end
+
+  def enter(_); end
+
+  def exit(_); end
 end
 
 # Helper class for FOR/NEXT
@@ -19,7 +24,7 @@ class AbstractForControl < AbstractLoopControl
   attr_accessor :start_line_stmt_mod, :forget
 
   def initialize(variable, start, step, start_line_stmt_mod)
-    super()
+    super(:for)
 
     @is_for = true
     @variable = variable
@@ -27,6 +32,20 @@ class AbstractForControl < AbstractLoopControl
     @step = step
     @start_line_stmt_mod = start_line_stmt_mod
     @forget = false
+  end
+
+  def enter(interpreter)
+    # control variables never have subscripts
+    interpreter.lock_variable(@variable) if
+      $options['lock_fornext'].value
+  end
+
+  def exit(interpreter)
+    interpreter.unlock_variable(@variable) if
+      $options['lock_fornext'].value
+
+    interpreter.forget_value(@variable) if
+      $options['forget_fornext'].value && @forget
   end
 
   def bump_early?
@@ -161,7 +180,7 @@ class WhileControl < AbstractLoopControl
   attr_reader :expression
 
   def initialize(while_until, expression, start_line_stmt_mod)
-    super()
+    super(while_until)
 
     @is_while = while_until == :while
     @is_until = while_until == :until
@@ -1612,27 +1631,21 @@ class Interpreter
   end
 
   def enter_loop(loop_control)
-    if loop_control.is_for
-      variable = loop_control.variable
-      lock_variable(variable) if $options['lock_fornext'].value
-    end
+    loop_control.enter(self)
 
     @loop_stack.push(loop_control)
   end
 
-  def exit_fornext(fornext_control)
-    raise BASICError.new('NEXT without FOR') if @loop_stack.empty?
+  def exit_loop(loop_control)
+    raise BASICError.new('Loop end without start') if @loop_stack.empty?
 
-    raise BASICError.new('NEXT without FOR') if !@loop_stack[0].is_for
+    raise BASICError.new('Loop end mismatch') if
+      @loop_stack[0].type != loop_control.type
 
-    @loop_broken = fornext_control.broken
+    @loop_broken = loop_control.broken
     @loop_stack.pop
 
-    forget = fornext_control.forget
-    variable = fornext_control.variable
-
-    unlock_variable(variable) if $options['lock_fornext'].value
-    forget_value(variable) if $options['forget_fornext'].value && forget
+    loop_control.exit(self)
   end
 
   def top_fornext
@@ -1661,15 +1674,6 @@ class Interpreter
     @loop_stack[-1]
   end
 
-  def exit_while
-    raise BASICError.new('WEND without WHILE') if @loop_stack.empty?
-
-    raise BASICError.new('WEND without WHILE') if !@loop_stack[0].is_while
-
-    @loop_broken = @loop_stack[0].broken
-    @loop_stack.pop
-  end
-
   def top_until
     raise BASICError.new('Implied END UNTIL without UNTIL') if
       @loop_stack.empty?
@@ -1678,16 +1682,6 @@ class Interpreter
       !@loop_stack[0].is_until
 
     @loop_stack[-1]
-  end
-
-  def exit_until
-    raise BASICError.new('END UNTIL without UNTIL') if @loop_stack.empty?
-
-
-    raise BASICError.new('END UNTIL without UNTIL') if !@loop_stack[0].is_until
-
-    @loop_broken = @loop_stack[0].broken
-    @loop_stack.pop
   end
 
   def add_file_names(file_names)
