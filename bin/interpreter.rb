@@ -17,13 +17,13 @@ end
 
 # Helper class for FOR/NEXT
 class AbstractForControl < AbstractLoopControl
-  attr_reader :variable, :start
+  attr_reader :control_variable, :start
   attr_accessor :start_line_stmt_mod, :forget
 
-  def initialize(variable, start, step, start_line_stmt_mod)
+  def initialize(control_variable, start, step, start_line_stmt_mod)
     super(:for)
 
-    @variable = variable
+    @control_variable = control_variable
     @start = start
     @step = step
     @start_line_stmt_mod = start_line_stmt_mod
@@ -32,15 +32,15 @@ class AbstractForControl < AbstractLoopControl
 
   def enter(interpreter)
     # control variables never have subscripts
-    interpreter.lock_variable(@variable) if
+    interpreter.lock_variable(@control_variable) if
       $options['lock_fornext'].value
   end
 
   def exit(interpreter)
-    interpreter.unlock_variable(@variable) if
+    interpreter.unlock_variable(@control_variable) if
       $options['lock_fornext'].value
 
-    interpreter.forget_value(@variable) if
+    interpreter.forget_value(@control_variable) if
       $options['forget_fornext'].value && @forget
   end
 
@@ -49,12 +49,16 @@ class AbstractForControl < AbstractLoopControl
   end
 
   def bump_control(interpreter)
-    current_value = interpreter.get_value(@variable)
+    current_value = interpreter.get_value(@control_variable)
     current_value = current_value.add(@step)
 
-    interpreter.unlock_variable(@variable) if $options['lock_fornext'].value
-    interpreter.set_value(@variable, current_value)
-    interpreter.lock_variable(@variable) if $options['lock_fornext'].value
+    interpreter.unlock_variable(@control_variable) if
+      $options['lock_fornext'].value
+
+    interpreter.set_value(@control_variable, current_value)
+
+    interpreter.lock_variable(@control_variable) if
+      $options['lock_fornext'].value
   end
 end
 
@@ -62,8 +66,8 @@ end
 class ForToControl < AbstractForControl
   attr_reader :end
 
-  def initialize(variable, start, step, endv, start_line_stmt_mod)
-    super(variable, start, step, start_line_stmt_mod)
+  def initialize(control_variable, start, step, endv, start_line_stmt_mod)
+    super(control_variable, start, step, start_line_stmt_mod)
 
     @end = endv
   end
@@ -88,7 +92,7 @@ class ForToControl < AbstractForControl
     return true if @broken
 
     zero = NumericValue.new(0)
-    current_value = interpreter.get_value(@variable)
+    current_value = interpreter.get_value(@control_variable)
 
     if @step > zero
       current_value.add(@step) > @end
@@ -104,8 +108,8 @@ end
 class ForUntilControl < AbstractForControl
   attr_reader :end
 
-  def initialize(variable, start, step, expression, start_line_stmt_mod)
-    super(variable, start, step, start_line_stmt_mod)
+  def initialize(control_variable, start, step, expression, start_line_stmt_mod)
+    super(control_variable, start, step, start_line_stmt_mod)
 
     @expression = expression
   end
@@ -139,8 +143,8 @@ end
 class ForWhileControl < AbstractForControl
   attr_reader :end
 
-  def initialize(variable, start, step, expression, start_line_stmt_mod)
-    super(variable, start, step, start_line_stmt_mod)
+  def initialize(control_variable, start, step, expression, start_line_stmt_mod)
+    super(control_variable, start, step, start_line_stmt_mod)
 
     @expression = expression
   end
@@ -231,7 +235,7 @@ class ArrForInControl < AbstractForControl
     return true if @broken
 
     zero = NumericValue.new(0)
-    current_value = interpreter.get_value(@variable)
+    current_value = interpreter.get_value(@control_variable)
 
     if @step > zero
       current_value.add(@step) > @end
@@ -1089,7 +1093,7 @@ class Interpreter
 
   # get the current value for ERL()
   def error_line(part)
-    raise BASICError.new('ERL without ERROR') if @resume_stack.empty?
+    raise BASICSyntaxError.new('ERL without ERROR') if @resume_stack.empty?
 
     line_index = @resume_stack[-1]
 
@@ -1109,7 +1113,7 @@ class Interpreter
 
   # get the current value for ERR()
   def error_code
-    raise BASICError.new('ERR without ERROR') if @error_stack.empty?
+    raise BASICSyntaxError.new('ERR without ERROR') if @error_stack.empty?
 
     code = @error_stack[-1]
     NumericValue.new(code)
@@ -1190,7 +1194,7 @@ class Interpreter
   def set_user_function(definition)
     signature = definition.signature
 
-    raise BASICError, "invalid signature #{signature.class}" unless
+    raise BASICSyntaxError, "invalid signature #{signature.class}" unless
       signature.class.to_s == 'UserFunctionSignature'
 
     raise BASICRuntimeError.new(:te_func_alr, signature) if
@@ -1608,18 +1612,18 @@ class Interpreter
   end
 
   def assign_fornext(fornext_control)
-    variable = fornext_control.variable
-    v = variable.to_s
+    control_variable = fornext_control.control_variable
+    v = control_variable.to_s
     fornext_control.forget = !@variables.key?(v)
-    @fornexts[variable] = fornext_control
+    @fornexts[control_variable] = fornext_control
     from = fornext_control.start
-    set_value(variable, from)
+    set_value(control_variable, from)
   end
 
-  def retrieve_fornext(variable)
-    fornext = @fornexts[variable]
+  def retrieve_fornext(control_variable)
+    fornext = @fornexts[control_variable]
 
-    raise BASICError.new('NEXT without FOR') if fornext.nil?
+    raise BASICSyntaxError.new('NEXT without FOR') if fornext.nil?
 
     fornext
   end
@@ -1631,9 +1635,9 @@ class Interpreter
   end
 
   def exit_loop(loop_control)
-    raise BASICError.new('Loop end without start') if @loop_stack.empty?
+    raise BASICSyntaxError.new('Loop end without start') if @loop_stack.empty?
 
-    raise BASICError.new('Loop end mismatch') if
+    raise BASICSyntaxError.new('Loop end mismatch') if
       @loop_stack[0].type != loop_control.type
 
     @loop_broken = loop_control.broken
@@ -1643,7 +1647,7 @@ class Interpreter
   end
 
   def top_fornext
-    raise BASICError.new('Implied NEXT without FOR') if
+    raise BASICSyntaxError.new('Implied NEXT without FOR') if
       @loop_stack.empty?
 
     raise BASICSyntaxError.new('Implied NEXT without FOR') if
@@ -1659,20 +1663,20 @@ class Interpreter
   end
 
   def top_while
-    raise BASICError.new('Implied WEND without WHILE') if
+    raise BASICSyntaxError.new('Implied WEND without WHILE') if
       @loop_stack.empty?
 
-    raise BASICError.new('Implied WEND without WHILE') if
+    raise BASICSyntaxError.new('Implied WEND without WHILE') if
       @loop_stack[0].type != :while
 
     @loop_stack[-1]
   end
 
   def top_until
-    raise BASICError.new('Implied END UNTIL without UNTIL') if
+    raise BASICSyntaxError.new('Implied END UNTIL without UNTIL') if
       @loop_stack.empty?
 
-    raise BASICError.new('Implied END UNTIL without UNTIL') if
+    raise BASICSyntaxError.new('Implied END UNTIL without UNTIL') if
       @loop_stack[0].type != :until
 
     @loop_stack[-1]
