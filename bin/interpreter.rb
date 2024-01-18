@@ -2,14 +2,11 @@
 
 # Helper class for loops
 class AbstractLoopControl
-  attr_reader :type, :is_for, :is_while, :is_until
+  attr_reader :type
   attr_accessor :broken
 
   def initialize(type)
     @type = type
-    @is_for = false
-    @is_while = false
-    @is_until = false
     @broken = false
   end
 
@@ -26,7 +23,6 @@ class AbstractForControl < AbstractLoopControl
   def initialize(variable, start, step, start_line_stmt_mod)
     super(:for)
 
-    @is_for = true
     @variable = variable
     @start = start
     @step = step
@@ -182,8 +178,6 @@ class WhileControl < AbstractLoopControl
   def initialize(while_until, expression, start_line_stmt_mod)
     super(while_until)
 
-    @is_while = while_until == :while
-    @is_until = while_until == :until
     @expression = expression
     @start_line_stmt_mod = start_line_stmt_mod
   end
@@ -200,8 +194,8 @@ class WhileControl < AbstractLoopControl
     raise(BASICExpressionError, 'Expression error') unless
       result.class.to_s == 'BooleanValue'
 
-    return !result.value if @is_while
-    return result.value if @is_until
+    return !result.value if @type == :while
+    return result.value if @type == :until
 
     true
   end
@@ -1653,7 +1647,7 @@ class Interpreter
       @loop_stack.empty?
 
     raise BASICSyntaxError.new('Implied NEXT without FOR') if
-      !@loop_stack[0].is_for
+      @loop_stack[0].type != :for
 
     @loop_stack[-1]
   end
@@ -1669,7 +1663,7 @@ class Interpreter
       @loop_stack.empty?
 
     raise BASICError.new('Implied WEND without WHILE') if
-      !@loop_stack[0].is_while
+      @loop_stack[0].type != :while
 
     @loop_stack[-1]
   end
@@ -1679,7 +1673,7 @@ class Interpreter
       @loop_stack.empty?
 
     raise BASICError.new('Implied END UNTIL without UNTIL') if
-      !@loop_stack[0].is_until
+      @loop_stack[0].type != :until
 
     @loop_stack[-1]
   end

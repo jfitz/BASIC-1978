@@ -3790,10 +3790,21 @@ class NextStatement < AbstractStatement
 
     while !found_unterminated && index < max
       if @control_variables[index].empty?
-        control_name = interpreter.top_fornext.variable
+        # if its empty, match whatever is the top FORNEXT control
+        top_fornext_control = interpreter.top_fornext
+        control_name = top_fornext_control.variable
         fornext_control = interpreter.retrieve_fornext(control_name)
       else
+        top_fornext_control = interpreter.top_fornext
+        expected = top_fornext_control.variable
         fornext_control = interpreter.retrieve_fornext(@control_variables[index])
+        actual = fornext_control.variable
+ 
+        if actual != expected
+          # don't raise exception; loop through all variables
+          # raise(BASICSyntaxError,
+          #       "Found NEXT #{actual} when expecting #{expected}")
+        end
       end
 
       bump_early = fornext_control.bump_early?
