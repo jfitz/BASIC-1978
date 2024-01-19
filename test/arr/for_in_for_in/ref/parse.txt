@@ -1,0 +1,41 @@
+10 DIM A(10)
+ NumericValue:10
+ Declaration:A() -> .()
+20 ARR FOR I IN A
+ control: Variable:I -> .
+ array:   Variable:A() -> .()
+30 LET A(I) = RND(100)
+ Variable:I -> .
+ Variable:A(.) -> .
+ NumericValue:100
+ FunctionRnd:RND(.) -> .
+ AssignmentOperator:= . -> .
+40 ARR NEXT
+50 ARR PRINT A
+ Variable:A() -> .()
+ CarriageControl:NL
+100 ARR FOR I IN A
+ control: Variable:I -> .
+ array:   Variable:A() -> .()
+110 PRINT "OUTER:"; I
+ TextValue:"OUTER:"
+ CarriageControl:;
+ Variable:I -> .
+ CarriageControl:NL
+120 ARR FOR J IN A
+ control: Variable:J -> .
+ array:   Variable:A() -> .()
+130 PRINT A(I), A(J)
+ Variable:I -> .
+ Variable:A(.) -> .
+ CarriageControl:,
+ Variable:J -> .
+ Variable:A(.) -> .
+ CarriageControl:NL
+140 ARR NEXT
+150 ARR NEXT
+290 STOP
+ 
+299 END
+ 
+
