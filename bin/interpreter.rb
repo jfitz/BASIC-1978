@@ -209,9 +209,10 @@ end
 class ArrForInControl < AbstractForControl
   attr_reader :end
 
-  def initialize(control_variable, start, step, endv, start_line_stmt_mod)
+  def initialize(control_variable, array_variable, start, step, endv, start_line_stmt_mod)
     super(control_variable, start, step, start_line_stmt_mod)
 
+    @array_name = array_variable.name
     @end = endv
   end
 
@@ -220,6 +221,7 @@ class ArrForInControl < AbstractForControl
     interpreter.lock_option('base')
 
     # lock dimensions
+    interpreter.lock_arr_dims(@array_name)
     super
   end
 
@@ -227,6 +229,7 @@ class ArrForInControl < AbstractForControl
     super
 
     # unlock dimensions
+    interpreter.unlock_arr_dims(@array_name)
 
     # unlock BASE option
     interpreter.unlock_option('base')
@@ -1016,6 +1019,9 @@ class Interpreter
 
     uncachers = %w[base cache_const_expr degrees precision radians wrap]
     @program.uncache if uncachers.include?(name)
+
+    @trace_out.newline_when_needed
+    @trace_out.print_line(" #{name.upcase} = #{v}")
   end
 
   def pop_option(name)
@@ -1031,6 +1037,9 @@ class Interpreter
 
     uncachers = %w[base cache_const_expr degrees precision radians wrap]
     @program.uncache if uncachers.include?(name)
+
+    @trace_out.newline_when_needed
+    @trace_out.print_line(" #{name.upcase} = #{v}")
   end
 
   def clear_variables
@@ -1146,11 +1155,22 @@ class Interpreter
 
   def set_dimensions(variable, subscripts)
     variable_name = variable.name
+    v = variable_name.to_s
     int_subscripts = normalize_subscripts(subscripts)
 
     int_subscripts.each do |subscript|
-      raise BASICRuntimeError.new(:te_subscript_out, variable_name.to_s) if
+      raise BASICRuntimeError.new(:te_subscript_out, v) if
         subscript.to_i > $options['max_dim'].value
+    end
+
+    if int_subscripts.size == 1
+      raise(BASICSyntaxError, 'Array size is locked') if
+        @locked_arr_dims.include?(variable_name)
+    end
+
+    if int_subscripts.size == 2
+      raise(BASICSyntaxError, 'Matrix size is locked') if
+        @locked_mat_dims.include?(variable_name)
     end
 
     @dimensions[variable_name] = int_subscripts
@@ -1463,7 +1483,7 @@ class Interpreter
     @variables.delete(v)
 
     @trace_out.newline_when_needed
-    @trace_out.print_line(" #{v}")
+    @trace_out.print_line(" forget #{v}")
   end
 
   def forget_compound_values(variable)
@@ -1572,36 +1592,40 @@ class Interpreter
     @locked_variables.delete(variable)
   end
 
-  def lock_arr_dims(variable)
-    if @locked_arr_dims.include?(variable)
-      raise BASICRuntimeError.new(:te_arr_dim_lock, variable.to_s)
-    end
+  def lock_arr_dims(name)
+    # allow multiple locks; first one makes an entry of '1'
+    @locked_arr_dims[name] = 0 unless @locked_arr_dims.include?(name)
 
-    @locked_arr_dims << variable
+    @locked_arr_dims[name] += 1
   end
 
-  def unlock_arr_dims(variable)
-    unless @locked_arr_dims.include?(variable)
-      raise BASICRuntimeError.new(:te_arr_dim_no_lock, variable.to_s)
+  def unlock_arr_dims(name)
+    # there should be at least one lock
+    unless @locked_arr_dims.include?(name)
+      raise BASICRuntimeError.new(:te_arr_dim_no_lock, name)
     end
 
-    @locked_arr_dims.delete(variable)
+    # allow multiple locks; removal of last deletes the entry
+    @locked_arr_dims[name] -= 1
+    @locked_arr_dims.delete(name) if @locked_arr_dims[name] < 1
   end
 
-  def lock_mat_dims(variable)
-    if @locked_mat_dims.include?(variable)
-      raise BASICRuntimeError.new(:te_mat_dim_lock, variable.to_s)
-    end
+  def lock_mat_dims(name)
+    # allow multiple locks; first one makes an entry of '1'
+    @locked_mat_dims[name] = 0 unless @locked_mat_dims.include?(name)
 
-    @locked_mat_dims << variable
+    @locked_mat_dims[name] += 1
   end
 
-  def unlock_mat_dims(variable)
-    unless @locked_mat_dims.include?(variable)
-      raise BASICRuntimeError.new(:te_mat_dim_no_lock, variable.to_s)
+  def unlock_mat_dims(name)
+    # there should be at least one lock
+    unless @locked_mat_dims.include?(name)
+      raise BASICRuntimeError.new(:te_mat_dim_no_lock, name)
     end
 
-    @locked_arr_dims.delete(variable)
+    # allow multiple locks; removal of last deletes the entry
+    @locked_mat_dims[name] -= 1
+    @locked_mat_dims.delete(name) if @locked_mat_dims[name] < 1
   end
 
   def lock_option(name)

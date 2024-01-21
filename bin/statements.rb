@@ -3814,8 +3814,7 @@ class NextStatement < AbstractStatement
 
       terminated = fornext_control.terminated?(interpreter)
       io = interpreter.trace_out
-      s = " terminated:#{terminated}"
-      io.trace_output(s)
+      io.trace_output(" terminated:#{terminated}")
 
       if terminated
         interpreter.exit_loop(fornext_control)
@@ -5245,7 +5244,8 @@ class ArrForInStatement < AbstractForStatement
     step = NumericValue.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    fornext_control = ArrForInControl.new(@control_variable, from, step, to,
+    fornext_control = ArrForInControl.new(@control_variable, @array,
+                                          from, step, to,
                                           @loopstart_line_stmt_mod)
 
     interpreter.assign_fornext(fornext_control)
@@ -5428,8 +5428,7 @@ class ArrNextStatement < AbstractStatement
     terminated = fornext_control.terminated?(interpreter)
 
     io = interpreter.trace_out
-    s = " terminated:#{terminated}"
-    io.trace_output(s)
+    io.trace_output(" terminated:#{terminated}")
 
     if terminated
       interpreter.exit_loop(fornext_control)
@@ -6641,9 +6640,12 @@ class MatLetStatement < AbstractLetStatement
   def set_dimensions(interpreter, r_value, l_values)
     r_dims = r_value.dimensions
 
+    values = nil
     values = r_value.values_1 if r_dims.size == 1
     values = r_value.values_2 if r_dims.size == 2
 
+    raise(BASICSyntaxError, 'Invalid number of dimensions') if values.nil?
+    
     l_values.each do |l_value|
       interpreter.set_dimensions(l_value, r_dims)
       interpreter.set_values(l_value.name, values)

@@ -3,9 +3,13 @@
 4021 DATA 6, 2, 8, 6, 6, 4, 40, 25
 4031 DATA 2000, 2000, 1440, 9600
 11 OPTION BASE 1
+ BASE = 1
 12 OPTION REQUIRE_INITIALIZED TRUE
+ REQUIRE_INITIALIZED = true
 13 OPTION FORGET_FORNEXT TRUE
+ FORGET_FORNEXT = true
 14 OPTION LOCK_FORNEXT TRUE
+ LOCK_FORNEXT = true
 101 READ N1, N2
  N1 = 2
  N2 = 4
@@ -49,7 +53,7 @@
 114.0.1 NEXT J
  J: (114.0.1) 6
  terminated:true
- J
+ forget J
 121 DIM C$(N1 + N2)
  N1: (101) 2
  N2: (101) 4
@@ -71,7 +75,7 @@
 124 F(I:122) NEXT I
  I: (124) 2
  terminated:true
- I
+ forget I
 125 F(I:125) FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -108,7 +112,7 @@
 127 F(I:125) NEXT I
  I: (127) 4
  terminated:true
- I
+ forget I
 128 F(I:128) FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -149,7 +153,7 @@
 130 F(I:128) NEXT I
  I: (130) 4
  terminated:true
- I
+ forget I
 141 DIM X(N2, N1)
  N2: (101) 4
  N1: (101) 2
@@ -205,7 +209,7 @@
 144.0.1 NEXT J
  J: (144.0.1) 6
  terminated:true
- J
+ forget J
 144.0.2 NEXT I
  I: (144.0.-2) 1
  terminated:false
@@ -246,7 +250,7 @@
 144.0.1 NEXT J
  J: (144.0.1) 6
  terminated:true
- J
+ forget J
 144.0.2 NEXT I
  I: (144.0.2) 2
  terminated:false
@@ -287,7 +291,7 @@
 144.0.1 NEXT J
  J: (144.0.1) 6
  terminated:true
- J
+ forget J
 144.0.2 NEXT I
  I: (144.0.2) 3
  terminated:false
@@ -328,11 +332,11 @@
 144.0.1 NEXT J
  J: (144.0.1) 6
  terminated:true
- J
+ forget J
 144.0.2 NEXT I
  I: (144.0.2) 4
  terminated:true
- I
+ forget I
 145.0.-1 FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -368,7 +372,7 @@
 145.0.1 NEXT I
  I: (145.0.1) 4
  terminated:true
- I
+ forget I
 161 DIM B(N2)
  N2: (101) 4
 162 ARR READ B
@@ -409,7 +413,7 @@
 172.0.1 NEXT I
  I: (172.0.1) 4
  terminated:true
- I
+ forget I
 201 PRINT
 
 202 PRINT "TABLEAU"
@@ -480,7 +484,7 @@ S4
 211.0.1 NEXT I
  I: (211.0.1) 6
  terminated:true
- I
+ forget I
 212 PRINT "B"
 B
 220 F(I:220) FOR I = 1 TO N2
@@ -552,7 +556,7 @@ S1
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (220) 1
  B(1): (162) 2000
@@ -625,7 +629,7 @@ S2
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (239) 2
  B(2): (162) 2000
@@ -698,7 +702,7 @@ S3
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (239) 3
  B(3): (162) 1440
@@ -771,7 +775,7 @@ S4
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (239) 4
  B(4): (162) 9600
@@ -779,7 +783,7 @@ S4
 239 F(I:220) NEXT I
  I: (239) 4
  terminated:true
- I
+ forget I
 301 DIM Z(N1 + N2)
  N1: (101) 2
  N2: (101) 4
@@ -829,7 +833,7 @@ S4
 302.0.1 NEXT J
  J: (302.0.1) 6
  terminated:true
- J
+ forget J
 305 F(I:305) FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -905,7 +909,7 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (305) 1
  terminated:false
@@ -980,7 +984,7 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (307) 2
  terminated:false
@@ -1055,7 +1059,7 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (307) 3
  terminated:false
@@ -1130,11 +1134,11 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (307) 4
  terminated:true
- I
+ forget I
 311 ARR Y = Z - C
  Z(1): (306) 0
  Z(2): (306) 0
@@ -1224,7 +1228,7 @@ S4
 327 F(J:323) NEXT J
  J: (327) 6
  terminated:true
- J
+ forget J
 328 IF M >= 0 THEN 500
  M: (326) -20
  M >= 0: false
@@ -1263,7 +1267,7 @@ NON-OPTIMUM.
 332.0.1 NEXT I
  I: (332.0.1) 4
  terminated:true
- I
+ forget I
 333.0.-2 FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -1331,7 +1335,7 @@ NON-OPTIMUM.
 333.0.2 NEXT I
  I: (333.0.2) 4
  terminated:true
- I
+ forget I
 341 PRINT
 
 342 PRINT "EXPANDED TABLEAU"
@@ -1402,7 +1406,7 @@ S4
 351.0.1 NEXT I
  I: (351.0.1) 6
  terminated:true
- I
+ forget I
 352 PRINT "B", "B / "; C$(J0)
 B               B / 
  J0: (325) 1
@@ -1477,7 +1481,7 @@ S1
 362.0.1 F(I:360) NEXT J
  J: (362.0.1) 6
  terminated:true
- J
+ forget J
 363 F(I:360) PRINT B(I), W(I)
  I: (360) 1
  B(1): (162) 2000
@@ -1552,7 +1556,7 @@ S2
 362.0.1 F(I:360) NEXT J
  J: (362.0.1) 6
  terminated:true
- J
+ forget J
 363 F(I:360) PRINT B(I), W(I)
  I: (364) 2
  B(2): (162) 2000
@@ -1627,7 +1631,7 @@ S3
 362.0.1 F(I:360) NEXT J
  J: (362.0.1) 6
  terminated:true
- J
+ forget J
 363 F(I:360) PRINT B(I), W(I)
  I: (364) 3
  B(3): (162) 1440
@@ -1702,7 +1706,7 @@ S4
 362.0.1 F(I:360) NEXT J
  J: (362.0.1) 6
  terminated:true
- J
+ forget J
 363 F(I:360) PRINT B(I), W(I)
  I: (364) 4
  B(4): (162) 9600
@@ -1712,7 +1716,7 @@ S4
 364 F(I:360) NEXT I
  I: (364) 4
  terminated:true
- I
+ forget I
 370 PRINT " ", "Z",
                 Z               
 371 ARR PRINT Z
@@ -1804,7 +1808,7 @@ X1 ENTERS
 387 F(I:383) NEXT I
  I: (387) 4
  terminated:true
- I
+ forget I
 389 PRINT "KEY ROW"; I0; "VARIABLE "; C1$(I0); " EXITS"
 KEY ROW
  I0: (385) 3
@@ -1949,7 +1953,7 @@ S3 EXITS
 423 F(J:421) NEXT J
  J: (423) 6
  terminated:true
- J
+ forget J
 431 F(I:431) FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -2046,7 +2050,7 @@ S3 EXITS
 435 F(I:431,J:433) NEXT J
  J: (435) 6
  terminated:true
- J
+ forget J
 436 F(I:431) NEXT I
  I: (431) 1
  terminated:false
@@ -2142,7 +2146,7 @@ S3 EXITS
 435 F(I:431,J:433) NEXT J
  J: (435) 6
  terminated:true
- J
+ forget J
 436 F(I:431) NEXT I
  I: (436) 2
  terminated:false
@@ -2246,11 +2250,11 @@ S3 EXITS
 435 F(I:431,J:433) NEXT J
  J: (435) 6
  terminated:true
- J
+ forget J
 436 F(I:431) NEXT I
  I: (436) 4
  terminated:true
- I
+ forget I
 441 B2(I0) = B(I0) / X(I0, J0)
  I0: (385) 3
  B(3): (162) 1440
@@ -2320,7 +2324,7 @@ S3 EXITS
 445 F(I:442) NEXT I
  I: (445) 4
  terminated:true
- I
+ forget I
 451 MAT X = X2
  X2(1,1): (434) 0
  X2(1,2): (434) -2
@@ -2450,7 +2454,7 @@ S4
 211.0.1 NEXT I
  I: (211.0.1) 6
  terminated:true
- I
+ forget I
 212 PRINT "B"
 B
 220 F(I:220) FOR I = 1 TO N2
@@ -2522,7 +2526,7 @@ S1
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (220) 1
  B(1): (452) 560
@@ -2595,7 +2599,7 @@ S2
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (239) 2
  B(2): (452) 80
@@ -2668,7 +2672,7 @@ X1
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (239) 3
  B(3): (452) 240
@@ -2741,7 +2745,7 @@ S4
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (239) 4
  B(4): (452) 0
@@ -2749,7 +2753,7 @@ S4
 239 F(I:220) NEXT I
  I: (239) 4
  terminated:true
- I
+ forget I
 301 DIM Z(N1 + N2)
  N1: (101) 2
  N2: (101) 4
@@ -2799,7 +2803,7 @@ S4
 302.0.1 NEXT J
  J: (302.0.1) 6
  terminated:true
- J
+ forget J
 305 F(I:305) FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -2875,7 +2879,7 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (305) 1
  terminated:false
@@ -2950,7 +2954,7 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (307) 2
  terminated:false
@@ -3025,7 +3029,7 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (307) 3
  terminated:false
@@ -3100,11 +3104,11 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (307) 4
  terminated:true
- I
+ forget I
 311 ARR Y = Z - C
  Z(1): (306) 20
  Z(2): (306) 13.3333333
@@ -3194,7 +3198,7 @@ S4
 327 F(J:323) NEXT J
  J: (327) 6
  terminated:true
- J
+ forget J
 328 IF M >= 0 THEN 500
  M: (326) -0.6666667
  M >= 0: false
@@ -3233,7 +3237,7 @@ NON-OPTIMUM.
 332.0.1 NEXT I
  I: (332.0.1) 4
  terminated:true
- I
+ forget I
 333.0.-2 FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -3301,7 +3305,7 @@ NON-OPTIMUM.
 333.0.2 NEXT I
  I: (333.0.2) 4
  terminated:true
- I
+ forget I
 341 PRINT
 
 342 PRINT "EXPANDED TABLEAU"
@@ -3372,7 +3376,7 @@ S4
 351.0.1 NEXT I
  I: (351.0.1) 6
  terminated:true
- I
+ forget I
 352 PRINT "B", "B / "; C$(J0)
 B               B / 
  J0: (325) 2
@@ -3447,7 +3451,7 @@ S1
 362.0.1 F(I:360) NEXT J
  J: (362.0.1) 6
  terminated:true
- J
+ forget J
 363 F(I:360) PRINT B(I), W(I)
  I: (360) 1
  B(1): (452) 560
@@ -3522,7 +3526,7 @@ S2
 362.0.1 F(I:360) NEXT J
  J: (362.0.1) 6
  terminated:true
- J
+ forget J
 363 F(I:360) PRINT B(I), W(I)
  I: (364) 2
  B(2): (452) 80
@@ -3597,7 +3601,7 @@ X1
 362.0.1 F(I:360) NEXT J
  J: (362.0.1) 6
  terminated:true
- J
+ forget J
 363 F(I:360) PRINT B(I), W(I)
  I: (364) 3
  B(3): (452) 240
@@ -3672,7 +3676,7 @@ S4
 362.0.1 F(I:360) NEXT J
  J: (362.0.1) 6
  terminated:true
- J
+ forget J
 363 F(I:360) PRINT B(I), W(I)
  I: (364) 4
  B(4): (452) 0
@@ -3682,7 +3686,7 @@ S4
 364 F(I:360) NEXT I
  I: (364) 4
  terminated:true
- I
+ forget I
 370 PRINT " ", "Z",
                 Z               
 371 ARR PRINT Z
@@ -3760,7 +3764,7 @@ X2 ENTERS
 387 F(I:383) NEXT I
  I: (387) 4
  terminated:true
- I
+ forget I
 389 PRINT "KEY ROW"; I0; "VARIABLE "; C1$(I0); " EXITS"
 KEY ROW
  I0: (385) 2
@@ -3905,7 +3909,7 @@ S2 EXITS
 423 F(J:421) NEXT J
  J: (423) 6
  terminated:true
- J
+ forget J
 431 F(I:431) FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -4002,7 +4006,7 @@ S2 EXITS
 435 F(I:431,J:433) NEXT J
  J: (435) 6
  terminated:true
- J
+ forget J
 436 F(I:431) NEXT I
  I: (431) 1
  terminated:false
@@ -4106,7 +4110,7 @@ S2 EXITS
 435 F(I:431,J:433) NEXT J
  J: (435) 6
  terminated:true
- J
+ forget J
 436 F(I:431) NEXT I
  I: (436) 3
  terminated:false
@@ -4202,11 +4206,11 @@ S2 EXITS
 435 F(I:431,J:433) NEXT J
  J: (435) 6
  terminated:true
- J
+ forget J
 436 F(I:431) NEXT I
  I: (436) 4
  terminated:true
- I
+ forget I
 441 B2(I0) = B(I0) / X(I0, J0)
  I0: (385) 2
  B(2): (452) 80
@@ -4276,7 +4280,7 @@ S2 EXITS
 445 F(I:442) NEXT I
  I: (445) 4
  terminated:true
- I
+ forget I
 451 MAT X = X2
  X2(1,1): (434) 0
  X2(1,2): (434) 0
@@ -4406,7 +4410,7 @@ S4
 211.0.1 NEXT I
  I: (211.0.1) 6
  terminated:true
- I
+ forget I
 212 PRINT "B"
 B
 220 F(I:220) FOR I = 1 TO N2
@@ -4478,7 +4482,7 @@ S1
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (220) 1
  B(1): (452) 799.999999
@@ -4551,7 +4555,7 @@ X2
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (239) 2
  B(2): (452) 119.999999
@@ -4624,7 +4628,7 @@ X1
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (239) 3
  B(3): (452) 160
@@ -4697,7 +4701,7 @@ S4
 222.0.1 F(I:220) NEXT J
  J: (222.0.1) 6
  terminated:true
- J
+ forget J
 230 F(I:220) PRINT B(I)
  I: (239) 4
  B(4): (452) 200.000003
@@ -4705,7 +4709,7 @@ S4
 239 F(I:220) NEXT I
  I: (239) 4
  terminated:true
- I
+ forget I
 301 DIM Z(N1 + N2)
  N1: (101) 2
  N2: (101) 4
@@ -4755,7 +4759,7 @@ S4
 302.0.1 NEXT J
  J: (302.0.1) 6
  terminated:true
- J
+ forget J
 305 F(I:305) FOR I = 1 TO N2
  N2: (101) 4
  I = 1
@@ -4831,7 +4835,7 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (305) 1
  terminated:false
@@ -4906,7 +4910,7 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (307) 2
  terminated:false
@@ -4981,7 +4985,7 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (307) 3
  terminated:false
@@ -5056,11 +5060,11 @@ S4
 306.0.1 F(I:305) NEXT J
  J: (306.0.1) 6
  terminated:true
- J
+ forget J
 307 F(I:305) NEXT I
  I: (307) 4
  terminated:true
- I
+ forget I
 311 ARR Y = Z - C
  Z(1): (306) 20
  Z(2): (306) 14
@@ -5143,7 +5147,7 @@ S4
 327 F(J:323) NEXT J
  J: (327) 6
  terminated:true
- J
+ forget J
 328 IF M >= 0 THEN 500
  M: (322) 0
  M >= 0: true
@@ -5249,7 +5253,7 @@ S4 =
 525 F(I:522) NEXT I
  I: (525) 4
  terminated:true
- I
+ forget I
 527 PRINT "Z = "; Z
 Z = 
  Z: (524) 4879.99999
