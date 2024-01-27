@@ -2071,6 +2071,12 @@ class FunctionMid < AbstractFunction
     @shape = :scalar
 
     @default_shape = :scalar
+
+    @signature2 = [
+      { 'type' => :string, 'shape' => :scalar },
+      { 'type' => :numeric, 'shape' => :scalar }
+    ]
+
     @signature3 = [
       { 'type' => :string, 'shape' => :scalar },
       { 'type' => :numeric, 'shape' => :scalar },
@@ -2083,12 +2089,18 @@ class FunctionMid < AbstractFunction
 
     return @cached unless @cached.nil?
 
-    raise BASICRuntimeError.new(:te_args_no_match, @name) unless
-      match_args_to_signature(args, @signature3)
-
-    value = args[0].to_v
-    start = args[1].to_i
-    length = args[2].to_i
+    if match_args_to_signature(args, @signature3)
+      value = args[0].to_v
+      start = args[1].to_i
+      length = args[2].to_i
+    elsif match_args_to_signature(args, @signature2)
+      value = args[0].to_v
+      start = args[1].to_i
+      length = value.size - start + 1
+      length = 0 if length.negative?
+    else
+      raise BASICRuntimeError.new(:te_args_no_match, @name)
+    end
 
     raise BASICRuntimeError.new(:te_count_inv, @name) if start < 1
 
