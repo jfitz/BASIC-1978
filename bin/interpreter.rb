@@ -209,10 +209,11 @@ end
 class ArrForInControl < AbstractForControl
   attr_reader :end
 
-  def initialize(control_variable, array_variable, start, step, endv, start_line_stmt_mod)
+  def initialize(control_variable, array_variable, start, step, endv,
+                 start_line_stmt_mod)
     super(control_variable, start, step, start_line_stmt_mod)
 
-    @array_name = array_variable.name
+    @array_name = array_variable
     @end = endv
   end
 
@@ -222,6 +223,7 @@ class ArrForInControl < AbstractForControl
 
     # lock dimensions
     interpreter.lock_arr_dims(@array_name)
+
     super
   end
 
@@ -1155,22 +1157,16 @@ class Interpreter
 
   def set_dimensions(variable, subscripts)
     variable_name = variable.name
-    v = variable_name.to_s
     int_subscripts = normalize_subscripts(subscripts)
 
-    int_subscripts.each do |subscript|
-      raise BASICRuntimeError.new(:te_subscript_out, v) if
-        subscript.to_i > $options['max_dim'].value
-    end
-
     if int_subscripts.size == 1
-      raise(BASICSyntaxError, 'Array size is locked') if
+      raise BASICRuntimeError.new(:te_arr_dim_lock, variable_name.to_s) if
         @locked_arr_dims.include?(variable_name)
     end
 
-    if int_subscripts.size == 2
-      raise(BASICSyntaxError, 'Matrix size is locked') if
-        @locked_mat_dims.include?(variable_name)
+    int_subscripts.each do |subscript|
+      raise BASICRuntimeError.new(:te_subscript_out, variable_name.to_s) if
+        subscript.to_i > $options['max_dim'].value
     end
 
     @dimensions[variable_name] = int_subscripts

@@ -14,10 +14,10 @@
 50 ARR PRINT A
  Variable:A() -> .()
  CarriageControl:NL
-100 ARR FOR I IN A
+110 ARR FOR I IN A
  control: Variable:I -> .
  array:   Variable:A() -> .()
-110 PRINT "A(I):"; I; A(I)
+120 PRINT "A(I):"; I; A(I)
  TextValue:"A(I):"
  CarriageControl:;
  Variable:I -> .
@@ -25,10 +25,22 @@
  Variable:I -> .
  Variable:A(.) -> .
  CarriageControl:NL
-120 DIM A(7)
+130 ARR NEXT
+200 DIM A(7)
  NumericValue:7
  Declaration:A() -> .()
-130 ARR NEXT
+210 ARR FOR I IN A
+ control: Variable:I -> .
+ array:   Variable:A() -> .()
+220 PRINT "A(I):"; I; A(I)
+ TextValue:"A(I):"
+ CarriageControl:;
+ Variable:I -> .
+ CarriageControl:;
+ Variable:I -> .
+ Variable:A(.) -> .
+ CarriageControl:NL
+230 ARR NEXT
 290 STOP
  
 299 END

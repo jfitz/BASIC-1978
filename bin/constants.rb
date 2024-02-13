@@ -2359,11 +2359,11 @@ class VariableName < AbstractElement
     raise(BASICSyntaxError, "'#{token}' is not a variable token") unless
       token.class.to_s == 'VariableToken'
 
-    @name = token
+    @name = token.text
     @variable = true
     @operand = true
     @precedence = 10
-    @content_type = @name.content_type
+    @content_type = token.content_type
   end
 
   def hash

@@ -5244,9 +5244,9 @@ class ArrForInStatement < AbstractForStatement
     step = NumericValue.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
 
-    fornext_control = ArrForInControl.new(@control_variable, @array,
-                                          from, step, to,
-                                          @loopstart_line_stmt_mod)
+    fornext_control =
+      ArrForInControl.new(@control_variable, @array_name, from, step, to,
+                          @loopstart_line_stmt_mod)
 
     interpreter.assign_fornext(fornext_control)
     interpreter.enter_loop(fornext_control)
