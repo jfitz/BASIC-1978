@@ -5147,6 +5147,7 @@ class ArrForInStatement < AbstractForStatement
     if check_template(tokens_lists, template_in)
       begin
         tokens1, tokens2 = control_and_array(tokens[0], tokens[2])
+
         @variable_name = VariableName.new(tokens1)
         @control_variable = Variable.new(@variable_name, :scalar, [], [])
         @array_name = VariableName.new(tokens2)
@@ -5155,7 +5156,7 @@ class ArrForInStatement < AbstractForStatement
         @errors << e.message
       end
     else
-      @errors << 'Syntax error 1'
+      @errors << 'Syntax error'
     end
 
     @mccabe = 1
