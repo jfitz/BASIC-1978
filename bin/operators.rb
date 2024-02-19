@@ -13,8 +13,8 @@ class Operator < AbstractElement
     @shape = :unknown
     @constant = false
     @warnings = []
-    @arguments = nil
     @precedence = 0
+    @arguments = nil
     @operator = true
     @arg_types = nil
     @arg_shapes = []
@@ -440,6 +440,55 @@ class BinaryOperator < Operator
     Matrix.new(a_dims, values)
   end
 
+  def maximum_matrix_matrix_1(a, b)
+    a_dims = a.dimensions
+    n_cols = a_dims[0].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_cols).each do |col|
+      a_value = a.get_value_1(col)
+      b_value = b.get_value_1(col)
+      coords = AbstractElement.make_coord(col)
+      values[coords] = a_value.send(:maximum, b_value)
+    end
+
+    values
+  end
+
+  def maximum_matrix_matrix_2(a, b)
+    a_dims = a.dimensions
+    n_rows = a_dims[0].to_i
+    n_cols = a_dims[1].to_i
+    values = {}
+    base = $options['base'].value
+
+    (base..n_rows).each do |row|
+      (base..n_cols).each do |col|
+        a_value = a.get_value_2(row, col)
+        b_value = b.get_value_2(row, col)
+        coords = AbstractElement.make_coords(row, col)
+        values[coords] = a_value.send(:maximum, b_value)
+      end
+    end
+
+    values
+  end
+
+  def maximum_matrix_matrix(a, b)
+    # verify dimensions match
+    a_dims = a.dimensions
+    b_dims = b.dimensions
+
+    raise(BASICExpressionError, 'Matrix dimensions do not match') if
+      a_dims != b_dims
+
+    values = maximum_matrix_matrix_1(a, b) if a_dims.size == 1
+    values = maximum_matrix_matrix_2(a, b) if a_dims.size == 2
+
+    Matrix.new(a_dims, values)
+  end
+
   def array_to_horizontal(a)
     base = $options['base'].value
     a_dims = a.dimensions
@@ -671,6 +720,10 @@ class BinaryOperator < Operator
       divide_matrix_matrix(a, b)
     when :power
       power_matrix_matrix(a, b)
+    when :maximum
+      maximum_matrix_matrix(a, b)
+    when :minimum
+      minimum_matrix_matrix(a, b)
     end
   end
 end
@@ -972,9 +1025,6 @@ class BinaryOperatorMultiply < BinaryOperator
     b_type = type_stack.pop
     a_type = type_stack.pop
     @arg_types = [a_type, b_type]
-
-    arg_1_types = %i[numeric integer string]
-    arg_2_types = %i[numeric integer]
 
     arg_1_types = %i[numeric integer string]
     arg_2_types = %i[numeric integer]
@@ -1367,6 +1417,74 @@ class BinaryOperatorOr < BinaryOperator
     @content_type = :boolean
     @content_type = :integer if $options['relational_result'].value == 'INTEGER'
     @content_type = :numeric if $options['relational_result'].value == 'NUMERIC'
+    type_stack.push(@content_type)
+  end
+end
+
+class BinaryOperatorMax < BinaryOperator
+  def self.accept?(token)
+    classes = %w[OperatorToken]
+    classes.include?(token.class.to_s) && token.to_s == 'MAX'
+  end
+
+  def initialize(text)
+    super
+
+    @operation = :maximum
+    @precedence = 5
+  end
+
+  def set_content_type(type_stack)
+    raise(BASICExpressionError, 'Not enough operands') if type_stack.size < 2
+
+    b_type = type_stack.pop
+    a_type = type_stack.pop
+    @arg_types = [a_type, b_type]
+
+    arg_types = %i[numeric integer string]
+
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      b_type != a_type
+
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
+
+    @content_type = a_type
+    type_stack.push(@content_type)
+  end
+end
+
+class BinaryOperatorMin < BinaryOperator
+  def self.accept?(token)
+    classes = %w[OperatorToken]
+    classes.include?(token.class.to_s) && token.to_s == 'MIN'
+  end
+
+  def initialize(text)
+    super
+
+    @operation = :minimum
+    @precedence = 5
+  end
+
+  def set_content_type(type_stack)
+    raise(BASICExpressionError, 'Not enough operands') if type_stack.size < 2
+
+    b_type = type_stack.pop
+    a_type = type_stack.pop
+    @arg_types = [a_type, b_type]
+
+    arg_types = %i[numeric integer string]
+
+    raise(BASICExpressionError, "Type mismatch #{a_type} #{@op} #{b_type}") if
+      !arg_types.include?(a_type) || !arg_types.include?(b_type) ||
+      b_type != a_type
+
+    @warnings << "Type mismatch #{a_type} #{@op} #{b_type}" if
+      a_type != b_type
+
+    @content_type = a_type
     type_stack.push(@content_type)
   end
 end

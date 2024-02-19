@@ -12,7 +12,7 @@ module Reader
     ascii_text
   end
 
-  def make_tokenbuilders()
+  def make_tokenbuilders
     tokenbuilders = []
     tokenbuilders << QuotedTextTokenBuilder.new(true, [])
     tokenbuilders << InputNumberTokenBuilder.new(true, [])
@@ -201,7 +201,7 @@ class ConsoleIo
 
     zone_width = $options['semicolon_zone_width'].value
 
-    print_item(' ') while @column % zone_width != 0 unless zone_width.zero?
+    print_item(' ') while @column % zone_width != 0 if zone_width.positive?
 
     @last_was_numeric = false
     @last_was_tab = false
@@ -415,7 +415,8 @@ class FileHandler
     line = @records[rec_number]
 
     tokenbuilders = make_tokenbuilders
-    tokenizer = Tokenizer.new(tokenbuilders, nil)
+    invalid_tokenbuilder = InvalidTokenBuilder.new(true, [])
+    tokenizer = Tokenizer.new(tokenbuilders, invalid_tokenbuilder)
     tokens = tokenizer.tokenize_line(line)
 
     # drop whitespace

@@ -1897,28 +1897,9 @@ class Expression
     warnings
   end
 
-  def make_type_sigil(type)
-    sigil_chars = {
-      numeric: '.',
-      integer: '%',
-      string: '$',
-      boolean: '?',
-      filehandle: 'FH'
-    }
-
-    sigil_chars[type]
-  end
-
-  def make_shape_sigil(shape)
-    sigil = ''
-    sigil = '()' if shape == :array
-    sigil = '(,)' if shape == :matrix
-    sigil
-  end
-
   def signature
     c = constant? ? '=' : ''
-    c + make_type_sigil(content_type) + make_shape_sigil(shape)
+    c + Sigils.make_type_sigil(content_type) + Sigils.make_shape_sigil(shape)
   end
 
   def dump
@@ -2138,7 +2119,7 @@ end
 
 # base class for expressions
 class AbstractExpressionSet
-  attr_reader :comprehension_effort, :expressions, :warnings
+  attr_reader :warnings, :comprehension_effort, :expressions
 
   def initialize(tokens, my_shape)
     @warnings = []
