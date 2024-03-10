@@ -1983,10 +1983,17 @@ Syntax: ARR FOR variable IN array
 
 Examples:
 	100 FOR I IN A
+	100 FOR I IN A STEP 4
+	100 FOR I STEP 2 IN A
+	100 FOR I IN A STEP -1
 
 The variable and array are names.
 They cannot be expressions.
 They cannot contain subscripts.
+
+The control variable is assigned a value in each iteration of the loop.
+Loops without STEP clauses iterate from the OPTION BASE to the upper bound of the array.
+Loops with negative step clauses iterate from the upper bound down to the OPTION BASE.
 
 During execution of a FOR/IN loop, the dimensions of the array variable are locked and cannot be chaged.
 During the execution of a FOR/IN loop, the setting for OPTION BASE is locked and cannot be changed.
