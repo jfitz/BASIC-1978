@@ -5143,6 +5143,8 @@ class ArrForInStatement < AbstractForStatement
     @may_be_if_sub = false
 
     template_in = [[1, '>='], 'IN', [1, '>=']]
+    template_in_step = [[1, '>='], 'IN', [1, '>='], 'STEP', [1, '>=']]
+    template_step_in = [[1, '>='], 'STEP', [1, '>='], 'IN', [1, '>=']]
 
     if check_template(tokens_lists, template_in)
       begin
@@ -5152,6 +5154,31 @@ class ArrForInStatement < AbstractForStatement
         @control_variable = Variable.new(@variable_name, :scalar, [], [])
         @array_name = VariableName.new(tokens2)
         @array = Variable.new(@array_name, :array, [], [])
+        @step = nil
+      rescue BASICExpressionError => e
+        @errors << e.message
+      end
+    elsif check_template(tokens_lists, template_in_step)
+      begin
+        tokens1, tokens2 = control_and_array(tokens[0], tokens[2])
+
+        @variable_name = VariableName.new(tokens1)
+        @control_variable = Variable.new(@variable_name, :scalar, [], [])
+        @array_name = VariableName.new(tokens2)
+        @array = Variable.new(@array_name, :array, [], [])
+        @step = ValueExpressionSet.new(tokens_lists[4], :scalar)
+      rescue BASICExpressionError => e
+        @errors << e.message
+      end
+    elsif check_template(tokens_lists, template_step_in)
+      begin
+        tokens1, tokens2 = control_and_array(tokens[0], tokens[2])
+
+        @variable_name = VariableName.new(tokens1)
+        @control_variable = Variable.new(@variable_name, :scalar, [], [])
+        @array_name = VariableName.new(tokens2)
+        @array = Variable.new(@array_name, :array, [], [])
+        @step = ValueExpressionSet.new(tokens_lists[2], :scalar)
       rescue BASICExpressionError => e
         @errors << e.message
       end
@@ -5244,6 +5271,8 @@ class ArrForInStatement < AbstractForStatement
 
     step = NumericValue.new(1)
     step = @step.evaluate(interpreter)[0] unless @step.nil?
+
+    from, to = to, from if step.value < 0
 
     fornext_control =
       ArrForInControl.new(@control_variable, @array_name, from, step, to,
