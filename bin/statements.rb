@@ -283,7 +283,7 @@ class AbstractStatement
     text
   end
 
-  def analyze_pretty(number)
+  def analyze(number)
     texts = []
 
     text = "#{number}#{markers}"

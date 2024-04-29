@@ -431,6 +431,13 @@ class Shell
       texts.each { |text| @console_io.print_line(text) }
 
       @console_io.newline
+    when 'METRICS'
+      @interpreter.program_optimize
+
+      texts = @interpreter.program_metrics
+      texts.each { |text| @console_io.print_line(text) }
+
+      @console_io.newline
     when 'TOKENS'
       texts = @interpreter.program_list(args, true)
       texts.each { |text| @console_io.print_line(text) }
@@ -578,7 +585,7 @@ def make_command_tokenbuilders(long_names)
   tokenbuilders = []
 
   keywords = %w[
-    ANALYZE BKPT NOBKPT BYE CROSSREF DELETE DIMS IF LIST LOAD
+    ANALYZE BKPT NOBKPT BYE CROSSREF DELETE DIMS IF LIST LOAD METRICS
     NEW OPTION PARSE PRETTY PROFILE RENUMBER RUN SAVE TOKENS UDFS VARS
   ]
   tokenbuilders << ListTokenBuilder.new(command_tb, '', keywords, KeywordToken)
@@ -658,6 +665,8 @@ OptionParser.new do |opt|
   opt.on('-c', '--crossref SOURCE') { |o| options[:cref_name] = o }
   opt.on('--parse SOURCE') { |o| options[:parse_name] = o }
   opt.on('--analyze SOURCE') { |o| options[:analyze_name] = o }
+  opt.on('--metrics SOURCE') { |o| options[:metrics_name] = o }
+
   opt.on('--asc-allow-all') { |o| options[:asc_allow_all] = o }
   opt.on('--back-tab') { |o| options[:back_tab] = o }
   opt.on('--base BASE') { |o| options[:base] = o }
@@ -715,6 +724,7 @@ list_tokens = options.key?(:tokens)
 pretty_filename = options[:pretty_name]
 parse_filename = options[:parse_name]
 analyze_filename = options[:analyze_name]
+metrics_filename = options[:metrics_name]
 run_filename = options[:run_name]
 cref_filename = options[:cref_name]
 show_profile = options.key?(:profile)
@@ -994,6 +1004,27 @@ unless analyze_filename.nil?
   end
 end
 
+# show metrics
+unless metrics_filename.nil?
+  token = BareTextLiteralToken.new(metrics_filename)
+  args = [TextValue.new(token)]
+
+  filename, _keywords = parse_args(args)
+
+  begin
+    if load_file_command_line(filename, interpreter, console_io)
+      interpreter.program_optimize
+
+      texts = interpreter.program_metrics
+      texts.each { |text| console_io.print_line(text) }
+    end
+
+    console_io.newline
+  rescue BASICSyntaxError => e
+    console_io.print_line(e.to_s)
+  end
+end
+
 # pretty-print the source
 unless pretty_filename.nil?
   args = [TextValue.new(pretty_filename)]
@@ -1077,7 +1108,8 @@ end
 
 # no command-line directives, so run BASIC shell
 if list_filename.nil? && parse_filename.nil? && analyze_filename.nil? &&
-   pretty_filename.nil? && cref_filename.nil? && run_filename.nil?
+   metrics_filename.nil? && pretty_filename.nil? && cref_filename.nil? &&
+   run_filename.nil?
 
   tokenbuilders = make_command_tokenbuilders(long_names)
 
