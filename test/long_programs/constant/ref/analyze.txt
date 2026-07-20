@@ -1,60 +1,107 @@
-Statistics:
-
-Number of lines: 34
-Number of valid statements: 30
-Number of comments: 4
-Number of executable statements: 29
-
-Complexity:
-
-Comment density: 0.133
-Comprehension effort: 80
-McCabe complexity: 3
-Halstead complexity:
- length: 80
- volume: 263.667
- difficulty: 5.455
- effort: 1438.183
- language: 8.862
- intelligence: 48.339
- time: 1.332
-
-(0 1) 10 REM TEST CALCULATIONS WITH CONSTANT VALUES
-(0 2) 11 OPTION CACHE_CONST_EXPR FALSE
-(0 2) 12 PRINT "NO CACHING"
-(0 2) 20 GOSUB 100
-(0 2) 21 PRINT "END 1"
-(0 2) 22 GOSUB 100
-(0 2) 23 PRINT "END 2"
-(0 2) 24 GOSUB 100
-(0 2) 25 PRINT "END 3"
-(0 2) 26 GOSUB 100
-(0 2) 29 PRINT "FINISHED"
-(0 1) 50 REM NOW TEST WITH CACHING
-(0 2) 51 OPTION CACHE_CONST_EXPR TRUE
-(0 2) 52 PRINT "CACHING ENABLED"
-(0 2) 60 GOSUB 200
-(0 2) 61 PRINT "END 1"
-(0 2) 62 GOSUB 200
-(0 2) 63 PRINT "END 2"
-(0 2) 64 GOSUB 200
-(0 2) 65 PRINT "END 3"
-(0 2) 66 GOSUB 200
-(0 2) 69 PRINT "FINISHED"
-(0 1) 99 STOP
-(0 1) 100 REM PROC A
-(1 3) 110 FOR I = 1 TO 1000
-(0 12) 120 LET A = 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10
-(0 1) 130 NEXT I
-(0 1) 190 RETURN
-(0 1) 200 REM PROC A
-(1 3) 210 FOR I = 1 TO 1000
-(0 12) 220 LET A = 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10
-(0 1) 230 NEXT I
-(0 1) 290 RETURN
-(0 1) 399 END
+10 (0 1) REM TEST CALCULATIONS WITH CONSTANT VALUES
+  Origs: 
+  Dests: 
+11 (0 2) OPTION CACHE_CONST_EXPR FALSE
+  Origs: :start
+  Dests: 12:auto
+12 (0 2) PRINT "NO CACHING"
+  Origs: 11:auto
+  Dests: 20:auto
+20 (0 2) GOSUB 100
+  Origs: 12:auto
+  Dests: 21:auto, 110:gosub
+21 (0 2) PRINT "END 1"
+  Origs: 20:auto
+  Dests: 22:auto
+22 (0 2) GOSUB 100
+  Origs: 21:auto
+  Dests: 23:auto, 110:gosub
+23 (0 2) PRINT "END 2"
+  Origs: 22:auto
+  Dests: 24:auto
+24 (0 2) GOSUB 100
+  Origs: 23:auto
+  Dests: 25:auto, 110:gosub
+25 (0 2) PRINT "END 3"
+  Origs: 24:auto
+  Dests: 26:auto
+26 (0 2) GOSUB 100
+  Origs: 25:auto
+  Dests: 29:auto, 110:gosub
+29 (0 2) PRINT "FINISHED"
+  Origs: 26:auto
+  Dests: 51:auto
+50 (0 1) REM NOW TEST WITH CACHING
+  Origs: 
+  Dests: 
+51 (0 2) OPTION CACHE_CONST_EXPR TRUE
+  Origs: 29:auto
+  Dests: 52:auto
+52 (0 2) PRINT "CACHING ENABLED"
+  Origs: 51:auto
+  Dests: 60:auto
+60 (0 2) GOSUB 200
+  Origs: 52:auto
+  Dests: 61:auto, 210:gosub
+61 (0 2) PRINT "END 1"
+  Origs: 60:auto
+  Dests: 62:auto
+62 (0 2) GOSUB 200
+  Origs: 61:auto
+  Dests: 63:auto, 210:gosub
+63 (0 2) PRINT "END 2"
+  Origs: 62:auto
+  Dests: 64:auto
+64 (0 2) GOSUB 200
+  Origs: 63:auto
+  Dests: 65:auto, 210:gosub
+65 (0 2) PRINT "END 3"
+  Origs: 64:auto
+  Dests: 66:auto
+66 (0 2) GOSUB 200
+  Origs: 65:auto
+  Dests: 69:auto, 210:gosub
+69 (0 2) PRINT "FINISHED"
+  Origs: 66:auto
+  Dests: 99:auto
+99 (0 1) STOP
+  Origs: 69:auto
+  Dests: :stop
+100 (0 1) REM PROC A
+  Origs: 
+  Dests: 
+110 G(110) F(I:110) (1 3) FOR I = 1 TO 1000
+  Origs: 20:gosub, 22:gosub, 24:gosub, 26:gosub
+  Dests: 120:fornext, 130:fornext
+120 G(110) F(I:110) (0 12) LET A = 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10
+  Origs: 110:fornext
+  Dests: 130:auto
+130 G(110) F(I:110) (0 1) NEXT I
+  Origs: 110:fornext, 120:auto
+  Dests: 190:auto
+190 G(110) (0 1) RETURN
+  Origs: 130:auto
+  Dests: 
+200 (0 1) REM PROC A
+  Origs: 
+  Dests: 
+210 G(210) F(I:210) (1 3) FOR I = 1 TO 1000
+  Origs: 60:gosub, 62:gosub, 64:gosub, 66:gosub
+  Dests: 220:fornext, 230:fornext
+220 G(210) F(I:210) (0 12) LET A = 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9 * 10
+  Origs: 210:fornext
+  Dests: 230:auto
+230 G(210) F(I:210) (0 1) NEXT I
+  Origs: 210:fornext, 220:auto
+  Dests: 290:auto
+290 G(210) (0 1) RETURN
+  Origs: 230:auto
+  Dests: 
+399 (0 1) END
+  Origs: 
+  Dests: :stop
 
 Unreachable code:
 
-All executable lines are reachable.
+399: END
 

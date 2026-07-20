@@ -1,139 +1,344 @@
-Statistics:
-
-Number of lines: 113
-Number of valid statements: 75
-Number of comments: 38
-Number of executable statements: 65
-
-Complexity:
-
-Comment density: 0.507
-Comprehension effort: 326
-McCabe complexity: 20
-Halstead complexity:
- length: 506
- volume: 2568.038
- difficulty: 31.961
- effort: 82077.678
- language: 2.514
- intelligence: 80.349
- time: 75.998
-
-(0 1) 2 REM RAIL SIMULATION
-(0 1) 10 REM ********** INITIALIZATION
-(0 1) 11 REM ***** OPTIONS
-(0 2) 12 OPTION REQUIRE_INITIALIZED TRUE
-(0 2) 13 OPTION BASE 1
-(0 2) 14 OPTION PRINT_WIDTH 132
-(0 2) 15 OPTION FORGET_FORNEXT TRUE
-(0 1) 20 REM ***** FUNCTIONS
-(0 1) 21 REM FORMAT TIME INTO STRING
-(0 9) 22 DEF FNH$(T) = RIGHT$("0" + STR$(INT(T / 3600)), 2) + ":" + RIGHT$("0" + STR$(INT(MOD(T, 3600) / 60)), 2) + ":" + RIGHT$("0" + STR$(MOD(T, 60)), 2)
-(0 1) 23 REM CALCULATE STOPPING TIME
-(0 7) 24 DEF FNS(V, A) = 2.0 * (ABS(V) / ABS(A))
-(0 1) 25 REM CALCULATE STOPPING DISTANCE
-(0 9) 26 DEF FND(V, A, T) = V * T + 0.5 * (A) * T ^ 2
-(0 1) 70 REM ***** DATA
-(0 1) 71 REM NUMBER OF STATIONS, POSITIONS (in meters), NAMES
-(0 2) 72 DATA 17
-(0 2) 73 DATA 0, 5.6E3, 13.53E3, 16.7E3, 18.2E3, 20.4E3, 24.6E3, 26.6E3, 29.3E3, 33.6E3, 35.6E3, 37.3E3, 39.6E3, 42.6E3, 44.9E3, 46.8E3, 49.1E3
-(0 2) 74 DATA "HOBOKEN", "SEACAUCUS", "RUTHERFORD", "WESMONT", "GARFIELD", "PLAUDERVILLE", "BROADWAY", "RADBURN", "GLEN ROCK", "RIDGEWOOD", "HO_HO_KUS"
-(0 2) 75 DATA "WALDWICK", "ALLENDALE", "RAMSEY", "RAMSEY RT17", "MAHWAH", "SUFFERN"
-(0 1) 76 REM NUMBER OF TRACK SPEED SIGNS, POSITIONS (in meters) AND VALUES
-(0 2) 77 DATA 7
-(0 2) 78 DATA 0, 5, 1.0E3, 30, 1.5E3, 50, 2.0E3, 30, 2.5E3, 80, 5.7E3, 40, 6.0E3, 80
-(0 1) 100 REM ***** STATIONS
-(1 2) 101 READ K0
-(0 3) 110 DIM K(K0), K$(K0)
-(2 3) 111 ARR READ K, K$
-(0 1) 120 REM ***** TRAINSET
-(0 1) 121 REM ACCELERATION (meters/second^2)
-(0 3) 122 LET A0 = 1.0
-(0 1) 123 REM MAX VELOCITY (meters/second)
-(0 3) 124 LET V9 = 80
-(0 1) 150 REM ***** SPEED SIGNALS
-(1 2) 151 READ P0
-(0 2) 152 DIM P(P0, 2)
-(1 2) 153 MAT READ P
-(0 1) 200 REM ********** ONE TRIP
-(0 3) 201 LET K5 = 1
-(0 3) 202 LET X = K(K5)
-(0 4) 203 LET X0 = X - 1
-(0 3) 210 LET V = 0
-(0 10) 290 PRINT "T      "; "TIME     "; "X  "; "V  "; "A  "; "T5 "; "X5 "; "K(2) "; "STATUS"
-(0 8) 299 LET T = 17 * 60 * 60 + 2 * 60
-(0 1) 1000 REM ********* LOOP
-(0 3) 1001 LET S$ = ""
-(0 1) 1010 REM COMPUTE STOPPING TIME
-(0 5) 1011 LET T5 = FNS(V, A0)
-(0 1) 1020 REM COMPUTE STOPPING DISTANCE
-(0 5) 1021 LET X5 = FND(V, A0, T5)
-(0 1) 1100 REM *** FIND MOST RECENT STATION
-(0 3) 1101 K5 = 1
-(1 3) 1102 FOR I = 1 TO K0
-(1 6) 1103 IF X > K(I) THEN K5 = I
-(0 1) 1104 NEXT I
-(0 1) 1110 REM *** FIND MOST RECENT TRACK SIGN
-(0 4) 1111 P5 = -1
-(1 3) 1112 FOR I = 1 TO P0
-(1 6) 1113 IF X > P(I, 1) THEN P5 = I
-(0 1) 1114 NEXT I
-(0 1) 1200 REM *** SET MAX SPEED FOR STATION APPROACH
-(0 3) 1201 LET V8 = V9
-(0 4) 1202 LET K6 = K5 + 1
-(1 4) 1203 IF K6 > K0 THEN 1210
-(1 8) 1204 IF X < K(K6) AND X + X5 >= K(K6) THEN 1206
-(0 2) 1205 GOTO 1209
-(0 3) 1206 LET V8 = 0
-(0 4) 1207 LET S$ = "APPROACHING " + K$(K6)
-(0 2) 1209 GOTO 1220
-(0 1) 1210 REM *** NO MORE STATIONS, STOP
-(0 3) 1211 LET V8 = 0
-(0 1) 1220 REM *** SET MAX SPEED FROM TRACK SIGN
-(0 3) 1221 LET V7 = V9
-(1 6) 1222 IF P5 = -1 THEN 1229
-(0 3) 1223 LET V7 = P(P5, 2)
-(0 1) 1229 REM CONTINUE
-(0 1) 1290 REM ***** SET MAX SPEED
-(0 3) 1291 LET V5 = V9
-(1 6) 1292 IF V5 > V8 THEN LET V5 = V8
-(1 6) 1293 IF V5 > V7 THEN LET V5 = V7
-(0 1) 1700 REM ***** ADJUST SPEED
-(1 4) 1711 IF V > V5 THEN 1740
-(1 4) 1712 IF V < V5 THEN 1730
-(0 1) 1720 REM CONTINUE AT CURRENT SPEED
-(0 3) 1721 LET A = 0
-(0 2) 1729 GOTO 1799
-(0 1) 1730 REM INCREASE SPEED
-(0 3) 1731 LET A = A0
-(0 2) 1739 GOTO 1790
-(0 1) 1740 REM BRAKE
-(0 4) 1741 LET A = -A0
-(0 4) 1742 LET S$ = S$ + " BRAKING"
-(0 4) 1790 LET V = V + A
-(0 1) 1799 REM CONTINUE
-(0 1) 1900 REM ***** CHECK SPEED
-(1 4) 1901 IF V >= 0 THEN 1910
-(0 3) 1902 LET V = 0
-(0 1) 1910 REM ***** MOVE THE TRAIN
-(0 3) 1911 LET X0 = X
-(0 4) 1912 LET X = X + V
-(0 6) 1919 LET S$ = S$ + " TRACK SPEED " + STR$(V7)
-(0 1) 1920 REM SLOW APPROACH TO STATION MEANS STOP AT THE STATION
-(1 14) 1921 IF V < 3 AND X > K(K6) AND X < K(K6) + 1 THEN X = K(K6)
-(0 1) 1970 REM ***** REPORT TIME, POSITION, AND SPEED
-(0 5) 1971 LET T$ = FNH$(T)
-(0 10) 1972 PRINT T; T$; X; V; A; T5; X5; K(2); S$
-(0 1) 1980 REM ***** END OF LOOP
-(1 4) 1981 IF X >= K(2) THEN 9997
-(0 1) 1990 REM STEP INTO FUTURE
-(0 4) 1991 LET T = T + 1
-(0 3) 1999 GOTO 1000
-(0 1) 9997 REM ********** END OF SIMULATION
-(0 1) 9998 STOP
-(0 1) 9999 END
+2 (0 1) REM RAIL SIMULATION
+  Origs: 
+  Dests: 
+10 (0 1) REM ********** INITIALIZATION
+  Origs: 
+  Dests: 
+11 (0 1) REM ***** OPTIONS
+  Origs: 
+  Dests: 
+12 (0 2) OPTION REQUIRE_INITIALIZED TRUE
+  Origs: :start
+  Dests: 13:auto
+13 (0 2) OPTION BASE 1
+  Origs: 12:auto
+  Dests: 14:auto
+14 (0 2) OPTION PRINT_WIDTH 132
+  Origs: 13:auto
+  Dests: 15:auto
+15 (0 2) OPTION FORGET_FORNEXT TRUE
+  Origs: 14:auto
+  Dests: 101:auto
+20 (0 1) REM ***** FUNCTIONS
+  Origs: 
+  Dests: 
+21 (0 1) REM FORMAT TIME INTO STRING
+  Origs: 
+  Dests: 
+22 FNH$(.) (0 9) DEF FNH$(T) = RIGHT$("0" + STR$(INT(T / 3600)), 2) + ":" + RIGHT$("0" + STR$(INT(MOD(T, 3600) / 60)), 2) + ":" + RIGHT$("0" + STR$(MOD(T, 60)), 2)
+  Origs: 1971:function
+  Dests: 
+23 (0 1) REM CALCULATE STOPPING TIME
+  Origs: 
+  Dests: 
+24 FNS(.,.) (0 7) DEF FNS(V, A) = 2 * (ABS(V) / ABS(A))
+  Origs: 1011:function
+  Dests: 
+25 (0 1) REM CALCULATE STOPPING DISTANCE
+  Origs: 
+  Dests: 
+26 FND(.,.,.) (0 9) DEF FND(V, A, T) = V * T + 0.5 * (A) * T ^ 2
+  Origs: 1021:function
+  Dests: 
+70 (0 1) REM ***** DATA
+  Origs: 
+  Dests: 
+71 (0 1) REM NUMBER OF STATIONS, POSITIONS (in meters), NAMES
+  Origs: 
+  Dests: 
+72 (0 2) DATA 17
+  Origs: 
+  Dests: 
+73 (0 2) DATA 0, 5600, 13530, 16700, 18200, 20400, 24600, 26600, 29300, 33600, 35600, 37300, 39600, 42600, 44900, 46800, 49100
+  Origs: 
+  Dests: 
+74 (0 2) DATA "HOBOKEN", "SEACAUCUS", "RUTHERFORD", "WESMONT", "GARFIELD", "PLAUDERVILLE", "BROADWAY", "RADBURN", "GLEN ROCK", "RIDGEWOOD", "HO_HO_KUS"
+  Origs: 
+  Dests: 
+75 (0 2) DATA "WALDWICK", "ALLENDALE", "RAMSEY", "RAMSEY RT17", "MAHWAH", "SUFFERN"
+  Origs: 
+  Dests: 
+76 (0 1) REM NUMBER OF TRACK SPEED SIGNS, POSITIONS (in meters) AND VALUES
+  Origs: 
+  Dests: 
+77 (0 2) DATA 7
+  Origs: 
+  Dests: 
+78 (0 2) DATA 0, 5, 1000, 30, 1500, 50, 2000, 30, 2500, 80, 5700, 40, 6000, 80
+  Origs: 
+  Dests: 
+100 (0 1) REM ***** STATIONS
+  Origs: 
+  Dests: 
+101 (1 2) READ K0
+  Origs: 15:auto
+  Dests: 110:auto
+110 (0 3) DIM K(K0), K$(K0)
+  Origs: 101:auto
+  Dests: 111:auto
+111 (2 3) ARR READ K, K$
+  Origs: 110:auto
+  Dests: 122:auto
+120 (0 1) REM ***** TRAINSET
+  Origs: 
+  Dests: 
+121 (0 1) REM ACCELERATION (meters/second^2)
+  Origs: 
+  Dests: 
+122 (0 3) LET A0 = 1
+  Origs: 111:auto
+  Dests: 124:auto
+123 (0 1) REM MAX VELOCITY (meters/second)
+  Origs: 
+  Dests: 
+124 (0 3) LET V9 = 80
+  Origs: 122:auto
+  Dests: 151:auto
+150 (0 1) REM ***** SPEED SIGNALS
+  Origs: 
+  Dests: 
+151 (1 2) READ P0
+  Origs: 124:auto
+  Dests: 152:auto
+152 (0 2) DIM P(P0, 2)
+  Origs: 151:auto
+  Dests: 153:auto
+153 (1 2) MAT READ P
+  Origs: 152:auto
+  Dests: 201:auto
+200 (0 1) REM ********** ONE TRIP
+  Origs: 
+  Dests: 
+201 (0 3) LET K5 = 1
+  Origs: 153:auto
+  Dests: 202:auto
+202 (0 3) LET X = K(K5)
+  Origs: 201:auto
+  Dests: 203:auto
+203 (0 4) LET X0 = X - 1
+  Origs: 202:auto
+  Dests: 210:auto
+210 (0 3) LET V = 0
+  Origs: 203:auto
+  Dests: 290:auto
+290 (0 10) PRINT "T      "; "TIME     "; "X  "; "V  "; "A  "; "T5 "; "X5 "; "K(2) "; "STATUS"
+  Origs: 210:auto
+  Dests: 299:auto
+299 (0 8) LET T = 17 * 60 * 60 + 2 * 60
+  Origs: 290:auto
+  Dests: 1001:auto
+1000 (0 1) REM ********* LOOP
+  Origs: 
+  Dests: 
+1001 (0 3) LET S$ = ""
+  Origs: 299:auto, 1999:goto
+  Dests: 1011:auto
+1010 (0 1) REM COMPUTE STOPPING TIME
+  Origs: 
+  Dests: 
+1011 (0 5) LET T5 = FNS(V, A0)
+  Origs: 1001:auto
+  Dests: 24:function, 1021:auto
+1020 (0 1) REM COMPUTE STOPPING DISTANCE
+  Origs: 
+  Dests: 
+1021 (0 5) LET X5 = FND(V, A0, T5)
+  Origs: 1011:auto
+  Dests: 26:function, 1101:auto
+1100 (0 1) REM *** FIND MOST RECENT STATION
+  Origs: 
+  Dests: 
+1101 (0 3) K5 = 1
+  Origs: 1021:auto
+  Dests: 1102:auto
+1102 F(I:1102) (1 3) FOR I = 1 TO K0
+  Origs: 1101:auto
+  Dests: 1103:fornext, 1104:fornext
+1103 F(I:1102) (1 6) IF X > K(I) THEN K5 = I
+  Origs: 1102:fornext
+  Dests: 1104:auto
+1104 F(I:1102) (0 1) NEXT I
+  Origs: 1102:fornext, 1103:auto
+  Dests: 1111:auto
+1110 (0 1) REM *** FIND MOST RECENT TRACK SIGN
+  Origs: 
+  Dests: 
+1111 (0 4) P5 = -1
+  Origs: 1104:auto
+  Dests: 1112:auto
+1112 F(I:1112) (1 3) FOR I = 1 TO P0
+  Origs: 1111:auto
+  Dests: 1113:fornext, 1114:fornext
+1113 F(I:1112) (1 6) IF X > P(I, 1) THEN P5 = I
+  Origs: 1112:fornext
+  Dests: 1114:auto
+1114 F(I:1112) (0 1) NEXT I
+  Origs: 1112:fornext, 1113:auto
+  Dests: 1201:auto
+1200 (0 1) REM *** SET MAX SPEED FOR STATION APPROACH
+  Origs: 
+  Dests: 
+1201 (0 3) LET V8 = V9
+  Origs: 1114:auto
+  Dests: 1202:auto
+1202 (0 4) LET K6 = K5 + 1
+  Origs: 1201:auto
+  Dests: 1203:auto
+1203 (1 4) IF K6 > K0 THEN 1210
+  Origs: 1202:auto
+  Dests: 1204:auto, 1211:ifthen
+1204 (1 8) IF X < K(K6) AND X + X5 >= K(K6) THEN 1206
+  Origs: 1203:auto
+  Dests: 1205:auto, 1206:ifthen
+1205 (0 2) GOTO 1209
+  Origs: 1204:auto
+  Dests: 1209:goto
+1206 (0 3) LET V8 = 0
+  Origs: 1204:ifthen
+  Dests: 1207:auto
+1207 (0 4) LET S$ = "APPROACHING " + K$(K6)
+  Origs: 1206:auto
+  Dests: 1209:auto
+1209 (0 2) GOTO 1220
+  Origs: 1205:goto, 1207:auto
+  Dests: 1221:goto
+1210 (0 1) REM *** NO MORE STATIONS, STOP
+  Origs: 
+  Dests: 
+1211 (0 3) LET V8 = 0
+  Origs: 1203:ifthen
+  Dests: 1221:auto
+1220 (0 1) REM *** SET MAX SPEED FROM TRACK SIGN
+  Origs: 
+  Dests: 
+1221 (0 3) LET V7 = V9
+  Origs: 1209:goto, 1211:auto
+  Dests: 1222:auto
+1222 (1 6) IF P5 = -1 THEN 1229
+  Origs: 1221:auto
+  Dests: 1223:auto, 1291:ifthen
+1223 (0 3) LET V7 = P(P5, 2)
+  Origs: 1222:auto
+  Dests: 1291:auto
+1229 (0 1) REM CONTINUE
+  Origs: 
+  Dests: 
+1290 (0 1) REM ***** SET MAX SPEED
+  Origs: 
+  Dests: 
+1291 (0 3) LET V5 = V9
+  Origs: 1222:ifthen, 1223:auto
+  Dests: 1292:auto
+1292 (1 6) IF V5 > V8 THEN LET V5 = V8
+  Origs: 1291:auto
+  Dests: 1293:auto
+1293 (1 6) IF V5 > V7 THEN LET V5 = V7
+  Origs: 1292:auto
+  Dests: 1711:auto
+1700 (0 1) REM ***** ADJUST SPEED
+  Origs: 
+  Dests: 
+1711 (1 4) IF V > V5 THEN 1740
+  Origs: 1293:auto
+  Dests: 1712:auto, 1741:ifthen
+1712 (1 4) IF V < V5 THEN 1730
+  Origs: 1711:auto
+  Dests: 1721:auto, 1731:ifthen
+1720 (0 1) REM CONTINUE AT CURRENT SPEED
+  Origs: 
+  Dests: 
+1721 (0 3) LET A = 0
+  Origs: 1712:auto
+  Dests: 1729:auto
+1729 (0 2) GOTO 1799
+  Origs: 1721:auto
+  Dests: 1901:goto
+1730 (0 1) REM INCREASE SPEED
+  Origs: 
+  Dests: 
+1731 (0 3) LET A = A0
+  Origs: 1712:ifthen
+  Dests: 1739:auto
+1739 (0 2) GOTO 1790
+  Origs: 1731:auto
+  Dests: 1790:goto
+1740 (0 1) REM BRAKE
+  Origs: 
+  Dests: 
+1741 (0 4) LET A = -A0
+  Origs: 1711:ifthen
+  Dests: 1742:auto
+1742 (0 4) LET S$ = S$ + " BRAKING"
+  Origs: 1741:auto
+  Dests: 1790:auto
+1790 (0 4) LET V = V + A
+  Origs: 1739:goto, 1742:auto
+  Dests: 1901:auto
+1799 (0 1) REM CONTINUE
+  Origs: 
+  Dests: 
+1900 (0 1) REM ***** CHECK SPEED
+  Origs: 
+  Dests: 
+1901 (1 4) IF V >= 0 THEN 1910
+  Origs: 1729:goto, 1790:auto
+  Dests: 1902:auto, 1911:ifthen
+1902 (0 3) LET V = 0
+  Origs: 1901:auto
+  Dests: 1911:auto
+1910 (0 1) REM ***** MOVE THE TRAIN
+  Origs: 
+  Dests: 
+1911 (0 3) LET X0 = X
+  Origs: 1901:ifthen, 1902:auto
+  Dests: 1912:auto
+1912 (0 4) LET X = X + V
+  Origs: 1911:auto
+  Dests: 1919:auto
+1919 (0 6) LET S$ = S$ + " TRACK SPEED " + STR$(V7)
+  Origs: 1912:auto
+  Dests: 1921:auto
+1920 (0 1) REM SLOW APPROACH TO STATION MEANS STOP AT THE STATION
+  Origs: 
+  Dests: 
+1921 (1 14) IF V < 3 AND X > K(K6) AND X < K(K6) + 1 THEN X = K(K6)
+  Origs: 1919:auto
+  Dests: 1971:auto
+1970 (0 1) REM ***** REPORT TIME, POSITION, AND SPEED
+  Origs: 
+  Dests: 
+1971 (0 5) LET T$ = FNH$(T)
+  Origs: 1921:auto
+  Dests: 22:function, 1972:auto
+1972 (0 10) PRINT T; T$; X; V; A; T5; X5; K(2); S$
+  Origs: 1971:auto
+  Dests: 1981:auto
+1980 (0 1) REM ***** END OF LOOP
+  Origs: 
+  Dests: 
+1981 (1 4) IF X >= K(2) THEN 9997
+  Origs: 1972:auto
+  Dests: 1991:auto, 9998:ifthen
+1990 (0 1) REM STEP INTO FUTURE
+  Origs: 
+  Dests: 
+1991 (0 4) LET T = T + 1
+  Origs: 1981:auto
+  Dests: 1999:auto
+1999 (0 3) GOTO 1000
+  Origs: 1991:auto
+  Dests: 1001:goto
+9997 (0 1) REM ********** END OF SIMULATION
+  Origs: 
+  Dests: 
+9998 (0 1) STOP
+  Origs: 1981:ifthen
+  Dests: :stop
+9999 (0 1) END
+  Origs: 
+  Dests: :stop
 
 Unreachable code:
 
-All executable lines are reachable.
+9999: END
 
