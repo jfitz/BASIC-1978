@@ -469,7 +469,7 @@ class AbstractForModifier < AbstractModifier
       control_tokens[0].variable?
 
     control_name = VariableName.new(control_tokens[0])
-    @variable = Variable.new(control_name, :scalar, [], [])
+    @variable = Variable.new(control_name, :scalar, [], [], false)
     @start = ValueExpressionSet.new(start_tokens, :scalar)
 
     @errors << 'TAB() not allowed' if @start.has_tab
